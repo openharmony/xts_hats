@@ -13,9 +13,7 @@
 
 import("//test/xts/tools/build/suite.gni")
 
-_all_test_packages = [
-  "${HATS_ROOT}/hdf:hatshdftest",
-]
+_all_test_packages = [ "${HATS_ROOT}/hdf:hatshdftest" ]
 
 _all_test_packages_ivi = [
   # add hats for ivi here

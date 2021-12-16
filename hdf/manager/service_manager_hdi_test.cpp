@@ -1,0 +1,197 @@
+/*
+ * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#include <devmgr_hdi.h>
+#include <hdf_log.h>
+#include <iservmgr_hdi.h>
+#include <ipc_object_stub.h>
+#include <gtest/gtest.h>
+#include "sample_hdi.h"
+
+#define HDF_LOG_TAG   service_manager_test_cpp
+
+using namespace testing::ext;
+using OHOS::sptr;
+using OHOS::IRemoteObject;
+using OHOS::HDI::ServiceManager::V1_0::IServiceManager;
+
+constexpr const char *TEST_SERVICE_NAME = "sample_driver_service";
+constexpr int PAYLOAD_NUM = 1234;
+
+class HdfServiceMangerHdiTest : public testing::Test {
+public:
+    static void SetUpTestCase()
+        {
+        struct HDIDeviceManager *devmgr = HDIDeviceManagerGet();
+        if (devmgr != nullptr) {
+            devmgr->LoadDevice(devmgr, TEST_SERVICE_NAME);
+        }
+    }
+    static void TearDownTestCase()
+    {
+        struct HDIDeviceManager *devmgr = HDIDeviceManagerGet();
+        if (devmgr != nullptr) {
+            devmgr->UnloadDevice(devmgr, TEST_SERVICE_NAME);
+        }
+    }
+    void SetUp() {};
+    void TearDown() {};
+};
+
+class IPCObjectStubTest : public OHOS::IPCObjectStub {
+public:
+    explicit IPCObjectStubTest() : OHOS::IPCObjectStub(u"") {};
+    virtual ~IPCObjectStubTest() = default;
+    int OnRemoteRequest(uint32_t code, OHOS::MessageParcel &data,
+        OHOS::MessageParcel &reply, OHOS::MessageOption &option) override
+    {
+        HDF_LOGI("IPCObjectStubTest::OnRemoteRequest called, code = %{public}d", code);
+        payload = data.ReadInt32();
+
+        return HDF_SUCCESS;
+    }
+
+    static int32_t payload;
+};
+
+int32_t IPCObjectStubTest::payload = 0;
+
+/**
+  * @tc.number: SUB_DriverSystem_ManagerService_0010
+  * @tc.name: open input device test
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */
+HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest001, Function | MediumTest | Level1)
+{
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_ManagerService_0020
+  * @tc.name: open input device test
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */
+HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest002, Function | MediumTest | Level1)
+{
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+
+    ASSERT_TRUE(sampleService != nullptr);
+
+    OHOS::MessageParcel data;
+    OHOS::MessageParcel reply;
+    data.WriteCString("sample_service test call");
+
+    OHOS::MessageOption option;
+    int status = sampleService->SendRequest(SAMPLE_SERVICE_PING, data, reply, option);
+    ASSERT_EQ(status, 0);
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_ManagerService_0030
+  * @tc.name: open input device test
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */
+HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest003, Function | MediumTest | Level1)
+{
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService != nullptr);
+
+    sptr<IRemoteObject> callback = new IPCObjectStubTest();
+    OHOS::MessageParcel data;
+    OHOS::MessageParcel reply;
+    int32_t payload = PAYLOAD_NUM;
+    data.WriteInt32(payload);
+    data.WriteRemoteObject(callback);
+
+    OHOS::MessageOption option;
+    int status = sampleService->SendRequest(SAMPLE_SERVICE_CALLBACK, data, reply, option);
+    ASSERT_EQ(status, 0);
+    ASSERT_EQ(IPCObjectStubTest::payload, payload);
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_ManagerService_0040
+  * @tc.name: open input device test
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */
+HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest004, Function | MediumTest | Level1)
+{
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService != nullptr);
+
+    OHOS::MessageParcel data;
+    OHOS::MessageParcel reply;
+    data.WriteInt32(PAYLOAD_NUM);
+    data.WriteInt32(PAYLOAD_NUM);
+
+    OHOS::MessageOption option;
+    int status = sampleService->SendRequest(SAMPLE_SERVICE_SUM, data, reply, option);
+    ASSERT_EQ(status, 0);
+    int32_t result = reply.ReadInt32();
+    int32_t expRes = PAYLOAD_NUM + PAYLOAD_NUM;
+    ASSERT_EQ(result, expRes);
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_ManagerService_0050
+  * @tc.name: open input device test
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */
+HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest006, Function | MediumTest | Level1)
+{
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService != nullptr);
+
+    OHOS::MessageParcel data;
+    OHOS::MessageParcel reply;
+
+    constexpr int buffersize = 10;
+    uint8_t dataBuffer[buffersize];
+    for (int i = 0; i < buffersize; i++) {
+        dataBuffer[i] = i;
+    }
+
+    bool ret = data.WriteUnpadBuffer(dataBuffer, sizeof(dataBuffer));
+    ASSERT_TRUE(ret);
+
+    OHOS::MessageOption option;
+    int status = sampleService->SendRequest(SAMPLE_BUFFER_TRANS, data, reply, option);
+    ASSERT_EQ(status, 0);
+
+    const uint8_t *retBuffer = reply.ReadUnpadBuffer(buffersize);
+    ASSERT_TRUE(retBuffer != nullptr);
+
+    for (int i = 0; i < buffersize; i++) {
+        ASSERT_EQ(retBuffer[i], i);
+    }
+}

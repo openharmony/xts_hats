@@ -20,6 +20,7 @@ group("hatshdftest") {
       "manager:HatsHdfManagerTest",
       "sensor:HatsHdfSensorTest",
       "vibrator:HatsHdfVibratorTest",
+      "wlan/wifi:HatsHdfWifiTest",
     ]
   }
 }

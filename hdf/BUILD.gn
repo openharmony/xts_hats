@@ -19,6 +19,7 @@ group("hatshdftest") {
       "manager:HatsHdfManagerServiceTest",
       "manager:HatsHdfManagerTest",
       "sensor:HatsHdfSensorTest",
+      "vibrator:HatsHdfVibratorTest",
     ]
   }
 }

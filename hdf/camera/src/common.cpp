@@ -182,9 +182,9 @@ void Test::Init()
     if (service == nullptr) {
         service = CameraHost::CreateCameraHost();
         if (service == nullptr) {
-            std::cout << "==========[test log]ICameraHost get failed."<< std::endl;
+            std::cout << "==========[test log]ICameraHost get failed." << std::endl;
         } else {
-            std::cout << "==========[test log]ICameraHost get success."<< std::endl;
+            std::cout << "==========[test log]ICameraHost get success." << std::endl;
         }
     }
     hostCallback = std::make_shared<HdiHostCallback>(this);
@@ -192,9 +192,9 @@ void Test::Init()
     if (service == nullptr) {
         service = ICameraHost::Get("camera_service");
         if (service == nullptr) {
-            std::cout << "==========[test log]ICameraHost get failed."<< std::endl;
+            std::cout << "==========[test log]ICameraHost get failed." << std::endl;
         } else {
-            std::cout << "==========[test log]ICameraHost get success."<< std::endl;
+            std::cout << "==========[test log]ICameraHost get success." << std::endl;
         }
         ASSERT_TRUE(service != nullptr);
     }

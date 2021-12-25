@@ -268,7 +268,7 @@ HWTEST_F(VideoTest, Camera_Video_0022, TestSize.Level2)
     // Configure two stream information
     Test_->intents = {Camera::PREVIEW, Camera::VIDEO};
     Test_->StartStream(Test_->intents);
-    Test_->StopConsumer({Camera::VIDEO});
+    Test_->StopConsumer({ Camera::VIDEO });
     // Capture preview stream
     Test_->StartCapture(Test_->streamId_preview, Test_->captureId_preview, false, true);
     // Issue 3A parameters to increase exposure

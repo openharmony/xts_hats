@@ -207,7 +207,7 @@ HWTEST_F(PreviewTest, Camera_Preview_0062, TestSize.Level2)
     Test_->rc = Test_->cameraDevice->GetStreamOperator(Test_->streamOperatorCallback, Test_->streamOperator);
     EXPECT_EQ(false, Test_->rc != Camera::NO_ERROR || Test_->streamOperator == nullptr);
     Test_->streamInfo = std::make_shared<StreamInfo>();
-    Test_->rc = Test_->streamOperator->ReleaseStreams({9999});
+    Test_->rc = Test_->streamOperator->ReleaseStreams({ 9999 });
     std::cout << "streamOperator->ReleaseStreams's rc " << Test_->rc << std::endl;
     EXPECT_EQ(true, Test_->rc == Camera::NO_ERROR);
 }
@@ -234,7 +234,7 @@ HWTEST_F(PreviewTest, Camera_Preview_0090, TestSize.Level2)
         std::cout << "==========[test log]CancelCapture fail, rc = " << Test_->rc << std::endl;
     }
     // Release stream
-    Test_->rc = Test_->streamOperator->ReleaseStreams({Test_->streamId_preview});
+    Test_->rc = Test_->streamOperator->ReleaseStreams({ Test_->streamId_preview });
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     if (Test_->rc == Camera::NO_ERROR) {
         std::cout << "==========[test log]ReleaseStreams success." << std::endl;
@@ -256,7 +256,7 @@ HWTEST_F(PreviewTest, Camera_Preview_0091, TestSize.Level2)
     Test_->intents = {Camera::PREVIEW};
     Test_->StartStream(Test_->intents);
     // Release stream
-    Test_->rc = Test_->streamOperator->ReleaseStreams({Test_->streamId_preview});
+    Test_->rc = Test_->streamOperator->ReleaseStreams({ Test_->streamId_preview });
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     if (Test_->rc == Camera::NO_ERROR) {
         std::cout << "==========[test log]ReleaseStreams success." << std::endl;

@@ -358,7 +358,7 @@ HWTEST_F(HdiStreamTest, Camera_Hdi_0132, Function | MediumTest | Level2)
     std::cout << "streamOperator->CreateStreams's rc " << Test_->rc << std::endl;
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     // release stream
-    Test_->rc = Test_->streamOperator->ReleaseStreams({Test_->streamInfo->streamId_});
+    Test_->rc = Test_->streamOperator->ReleaseStreams({ Test_->streamInfo->streamId_ });
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     consumer->StopConsumer();
 }
@@ -444,7 +444,7 @@ HWTEST_F(HdiStreamTest, Camera_Hdi_0134, Function | MediumTest | Level2)
     std::cout << "streamOperator->CreateStreams's rc " << Test_->rc << std::endl;
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     // release stream
-    Test_->rc = Test_->streamOperator->ReleaseStreams({Test_->streamInfo->streamId_});
+    Test_->rc = Test_->streamOperator->ReleaseStreams({ Test_->streamInfo->streamId_ });
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     consumer->StopConsumer();
 }
@@ -531,7 +531,7 @@ HWTEST_F(HdiStreamTest, Camera_Hdi_0136, Function | MediumTest | Level2)
     std::cout << "streamOperator->CreateStreams's rc " << Test_->rc << std::endl;
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     // release stream
-    Test_->rc = Test_->streamOperator->ReleaseStreams({Test_->streamInfo->streamId_});
+    Test_->rc = Test_->streamOperator->ReleaseStreams({ Test_->streamInfo->streamId_ });
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     consumer->StopConsumer();
 }
@@ -633,7 +633,7 @@ HWTEST_F(HdiStreamTest, Camera_Hdi_0138, Function | MediumTest | Level2)
     std::cout << "streamOperator->CreateStreams's rc " << Test_->rc << std::endl;
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     // release stream
-    Test_->rc = Test_->streamOperator->ReleaseStreams({Test_->streamInfo->streamId_});
+    Test_->rc = Test_->streamOperator->ReleaseStreams({ Test_->streamInfo->streamId_ });
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     consumer->StopConsumer();
 }
@@ -729,7 +729,7 @@ HWTEST_F(HdiStreamTest, Camera_Hdi_0140, Function | MediumTest | Level2)
     std::cout << "streamOperator->CreateStreams's rc " << Test_->rc << std::endl;
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     // release stream
-    Test_->rc = Test_->streamOperator->ReleaseStreams({Test_->streamInfo->streamId_});
+    Test_->rc = Test_->streamOperator->ReleaseStreams({ Test_->streamInfo->streamId_ });
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     consumer->StopConsumer();
 }
@@ -773,7 +773,7 @@ HWTEST_F(HdiStreamTest, Camera_Hdi_0141, Function | MediumTest | Level2)
     std::cout << "streamOperator->CreateStreams's rc " << Test_->rc << std::endl;
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     // release stream
-    Test_->rc = Test_->streamOperator->ReleaseStreams({Test_->streamInfo->streamId_});
+    Test_->rc = Test_->streamOperator->ReleaseStreams({ Test_->streamInfo->streamId_ });
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     consumer->StopConsumer();
 }
@@ -818,7 +818,7 @@ HWTEST_F(HdiStreamTest, Camera_Hdi_0142, Function | MediumTest | Level2)
     std::cout << "streamOperator->CreateStreams's rc " << Test_->rc << std::endl;
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     // release stream
-    Test_->rc = Test_->streamOperator->ReleaseStreams({Test_->streamInfo->streamId_});
+    Test_->rc = Test_->streamOperator->ReleaseStreams({ Test_->streamInfo->streamId_ });
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     consumer->StopConsumer();
 }
@@ -863,7 +863,7 @@ HWTEST_F(HdiStreamTest, Camera_Hdi_0143, Function | MediumTest | Level2)
     std::cout << "streamOperator->CreateStreams's rc " << Test_->rc << std::endl;
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     // release stream
-    Test_->rc = Test_->streamOperator->ReleaseStreams({Test_->streamInfo->streamId_});
+    Test_->rc = Test_->streamOperator->ReleaseStreams({ Test_->streamInfo->streamId_ });
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     consumer->StopConsumer();
 }
@@ -908,7 +908,7 @@ HWTEST_F(HdiStreamTest, Camera_Hdi_0144, Function | MediumTest | Level2)
     std::cout << "streamOperator->CreateStreams's rc " << Test_->rc << std::endl;
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     // release stream
-    Test_->rc = Test_->streamOperator->ReleaseStreams({Test_->streamInfo->streamId_});
+    Test_->rc = Test_->streamOperator->ReleaseStreams({ Test_->streamInfo->streamId_ });
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     consumer->StopConsumer();
 }
@@ -953,7 +953,7 @@ HWTEST_F(HdiStreamTest, Camera_Hdi_0145, Function | MediumTest | Level2)
     std::cout << "streamOperator->CreateStreams's rc " << Test_->rc << std::endl;
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     // release stream
-    Test_->rc = Test_->streamOperator->ReleaseStreams({Test_->streamInfo->streamId_});
+    Test_->rc = Test_->streamOperator->ReleaseStreams({ Test_->streamInfo->streamId_ });
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     consumer->StopConsumer();
 }
@@ -1116,7 +1116,7 @@ HWTEST_F(HdiStreamTest, Camera_Hdi_0160, TestSize.Level0)
     Test_->rc = Test_->streamOperator->CreateStreams(Test_->streamInfos);
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     // release stream
-    Test_->rc = Test_->streamOperator->ReleaseStreams({Test_->streamInfo->streamId_});
+    Test_->rc = Test_->streamOperator->ReleaseStreams({ Test_->streamInfo->streamId_ });
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     consumer->StopConsumer();
 }
@@ -1142,7 +1142,7 @@ HWTEST_F(HdiStreamTest, Camera_Hdi_0161, TestSize.Level2)
     Test_->rc = Test_->streamOperator->ReleaseStreams({-1});
     EXPECT_EQ(true, Test_->rc != Camera::NO_ERROR);
     std::cout << "streamOperator->ReleaseStreams's rc " << Test_->rc << std::endl;
-    Test_->rc = Test_->streamOperator->ReleaseStreams({Test_->streamId_preview});
+    Test_->rc = Test_->streamOperator->ReleaseStreams({ Test_->streamId_preview });
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     std::cout << "streamOperator->ReleaseStreams's rc " << Test_->rc << std::endl;
     Test_->StopConsumer(Test_->intents);
@@ -1246,7 +1246,7 @@ HWTEST_F(HdiStreamTest, Camera_Hdi_0180, TestSize.Level0)
         std::cout << "==========[test log]Check hdi: GetStreamAttributes fail, rc = " << Test_->rc << std::endl;
     }
     // release stream
-    Test_->rc = Test_->streamOperator->ReleaseStreams({Test_->streamId_preview});
+    Test_->rc = Test_->streamOperator->ReleaseStreams({ Test_->streamId_preview });
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     std::cout << "streamOperator->ReleaseStreams's rc " << Test_->rc << std::endl;
     Test_->StopConsumer(Test_->intents);
@@ -1443,7 +1443,7 @@ HWTEST_F(HdiStreamTest, Camera_Hdi_0195, TestSize.Level2)
     EXPECT_EQ(INVALID_ARGUMENT, Test_->rc);
     sleep(1);
     // release stream
-    Test_->rc = Test_->streamOperator->ReleaseStreams({Test_->streamId_preview});
+    Test_->rc = Test_->streamOperator->ReleaseStreams({ Test_->streamId_preview });
     EXPECT_EQ(Test_->rc, Camera::NO_ERROR);
     Test_->StopConsumer(Test_->intents);
 }

@@ -195,9 +195,9 @@ HWTEST_F(HdfSensorTest, RemoveSensorInstance001, Function | MediumTest | Level1)
   */
 HWTEST_F(HdfSensorTest, RegisterSensorDataCb001, Function | MediumTest | Level1)
 {
-    int32_t ret = g_sensorDev->Register(SensorTestDataCallback);
+    int32_t ret = g_sensorDev->Register(0, SensorTestDataCallback);
     EXPECT_EQ(0, ret);
-    ret = g_sensorDev->Unregister();
+    ret = g_sensorDev->Unregister(0);
     EXPECT_EQ(0, ret);
 }
 
@@ -208,9 +208,9 @@ HWTEST_F(HdfSensorTest, RegisterSensorDataCb001, Function | MediumTest | Level1)
   */
 HWTEST_F(HdfSensorTest, RegisterSensorDataCb002, Function | MediumTest | Level1)
 {
-    int32_t ret = g_sensorDev->Register(nullptr);
+    int32_t ret = g_sensorDev->Register(0, nullptr);
     EXPECT_EQ(SENSOR_NULL_PTR, ret);
-    ret = g_sensorDev->Unregister();
+    ret = g_sensorDev->Unregister(0);
     EXPECT_EQ(0, ret);
 }
 
@@ -272,7 +272,7 @@ HWTEST_F(HdfSensorTest, GetSensorList002, Function | MediumTest | Level1)
   */
 HWTEST_F(HdfSensorTest, EnableSensor001, Function | MediumTest | Level1)
 {
-    int32_t ret = g_sensorDev->Register(SensorTestDataCallback);
+    int32_t ret = g_sensorDev->Register(0, SensorTestDataCallback);
     EXPECT_EQ(0, ret);
 
     struct SensorInformation *info = nullptr;
@@ -295,7 +295,7 @@ HWTEST_F(HdfSensorTest, EnableSensor001, Function | MediumTest | Level1)
         info++;
     }
 
-    ret = g_sensorDev->Unregister();
+    ret = g_sensorDev->Unregister(0);
     EXPECT_EQ(0, ret);
 }
 
@@ -326,7 +326,7 @@ HWTEST_F(HdfSensorTest, SetSensorBatch001, Function | MediumTest | Level1)
 {
     struct SensorInformation *info = nullptr;
 
-    int32_t ret = g_sensorDev->Register(SensorTestDataCallback);
+    int32_t ret = g_sensorDev->Register(0, SensorTestDataCallback);
     EXPECT_EQ(0, ret);
 
     if (g_sensorInfo == nullptr) {
@@ -347,7 +347,7 @@ HWTEST_F(HdfSensorTest, SetSensorBatch001, Function | MediumTest | Level1)
         info++;
     }
 
-    ret = g_sensorDev->Unregister();
+    ret = g_sensorDev->Unregister(0);
     EXPECT_EQ(0, ret);
 }
 
@@ -370,7 +370,7 @@ HWTEST_F(HdfSensorTest, SetSensorMode001, Function | MediumTest | Level1)
 {
     struct SensorInformation *info = nullptr;
 
-    int32_t ret = g_sensorDev->Register(SensorTestDataCallback);
+    int32_t ret = g_sensorDev->Register(0, SensorTestDataCallback);
     EXPECT_EQ(0, ret);
 
     if (g_sensorInfo == nullptr) {
@@ -399,7 +399,7 @@ HWTEST_F(HdfSensorTest, SetSensorMode001, Function | MediumTest | Level1)
         info++;
     }
 
-    ret = g_sensorDev->Unregister();
+    ret = g_sensorDev->Unregister(0);
     EXPECT_EQ(0, ret);
 }
 
@@ -413,7 +413,7 @@ HWTEST_F(HdfSensorTest, SetSensorMode002, Function | MediumTest | Level1)
 {
     struct SensorInformation *info = nullptr;
 
-    int32_t ret = g_sensorDev->Register(SensorTestDataCallback);
+    int32_t ret = g_sensorDev->Register(0, SensorTestDataCallback);
     EXPECT_EQ(0, ret);
 
     if (g_sensorInfo == nullptr) {
@@ -436,7 +436,7 @@ HWTEST_F(HdfSensorTest, SetSensorMode002, Function | MediumTest | Level1)
         info++;
     }
 
-    ret = g_sensorDev->Unregister();
+    ret = g_sensorDev->Unregister(0);
     EXPECT_EQ(0, ret);
 }
 
@@ -449,7 +449,7 @@ HWTEST_F(HdfSensorTest, SetSensorOption001, Function | MediumTest | Level1)
 {
     struct SensorInformation *g_sensorInfo = nullptr;
 
-    int32_t ret = g_sensorDev->Register(SensorTestDataCallback);
+    int32_t ret = g_sensorDev->Register(0, SensorTestDataCallback);
     EXPECT_EQ(0, ret);
     ret = g_sensorDev->GetAllSensors(&g_sensorInfo, &g_count);
     EXPECT_EQ(0, ret);
@@ -463,6 +463,6 @@ HWTEST_F(HdfSensorTest, SetSensorOption001, Function | MediumTest | Level1)
     EXPECT_EQ(1, g_sensorDataFlag);
     ret = g_sensorDev->Disable(SENSOR_ID);
     EXPECT_EQ(0, ret);
-    ret = g_sensorDev->Unregister();
+    ret = g_sensorDev->Unregister(0);
     EXPECT_EQ(0, ret);
 }

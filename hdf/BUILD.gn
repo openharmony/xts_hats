@@ -15,12 +15,14 @@ group("hatshdftest") {
   testonly = true
   if (is_standard_system) {
     deps = [
-      "input:HatsHdfInputTest",
       "manager:HatsHdfManagerServiceTest",
       "manager:HatsHdfManagerTest",
       "sensor:HatsHdfSensorTest",
       "vibrator:HatsHdfVibratorTest",
       "wlan/wifi:HatsHdfWifiTest",
+      "input:HatsHdfInputTest",
+#      "audio:HatsHdfAudioTest",
+#      "camera:HatsHdfCameraTest",
     ]
   }
 }

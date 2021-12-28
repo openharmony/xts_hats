@@ -34,7 +34,7 @@ ohos_moduletest_suite("HatsHdfInputTest") {
   ]
   deps = [
     "$hdf_uhdf_path/test/unittest/common:libhdf_test_common",
-    "$hdf_uhdf_path/utils:libhdf_utils",
+    "$hdf_uhdf_path/osal:libhdf_utils",
     "//drivers/peripheral/input/hal:hdi_input",
     "//utils/native/base:utils",
   ]

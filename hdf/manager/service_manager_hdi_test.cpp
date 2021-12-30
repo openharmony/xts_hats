@@ -13,7 +13,6 @@
  * limitations under the License.
  */
 
-#include <devmgr_hdi.h>
 #include <hdf_log.h>
 #include <iservmgr_hdi.h>
 #include <ipc_object_stub.h>
@@ -32,23 +31,35 @@ constexpr int PAYLOAD_NUM = 1234;
 
 class HdfServiceMangerHdiTest : public testing::Test {
 public:
-    static void SetUpTestCase()
-        {
-        struct HDIDeviceManager *devmgr = HDIDeviceManagerGet();
-        if (devmgr != nullptr) {
-            devmgr->LoadDevice(devmgr, TEST_SERVICE_NAME);
-        }
-    }
-    static void TearDownTestCase()
-    {
-        struct HDIDeviceManager *devmgr = HDIDeviceManagerGet();
-        if (devmgr != nullptr) {
-            devmgr->UnloadDevice(devmgr, TEST_SERVICE_NAME);
-        }
-    }
+    static void SetUpTestCase() {};
+    static void TearDownTestCase() {};
     void SetUp() {};
     void TearDown() {};
 };
+
+HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest001, TestSize.Level1)
+{
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+}
+
+HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest002, TestSize.Level1)
+{
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+
+    ASSERT_TRUE(sampleService != nullptr);
+
+    OHOS::MessageParcel data;
+    OHOS::MessageParcel reply;
+    data.WriteCString("sample_service test call");
+
+    OHOS::MessageOption option;
+    int status = sampleService->SendRequest(SAMPLE_SERVICE_PING, data, reply, option);
+    ASSERT_EQ(status, 0);
+}
 
 class IPCObjectStubTest : public OHOS::IPCObjectStub {
 public:
@@ -68,49 +79,7 @@ public:
 
 int32_t IPCObjectStubTest::payload = 0;
 
-/**
-  * @tc.number: SUB_DriverSystem_ManagerService_0010
-  * @tc.name: open input device test
-  * @tc.size: Medium
-  * @tc.level: level 1
-  */
-HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest001, Function | MediumTest | Level1)
-{
-    auto servmgr = IServiceManager::Get();
-    ASSERT_TRUE(servmgr != nullptr);
-}
-
-/**
-  * @tc.number: SUB_DriverSystem_ManagerService_0020
-  * @tc.name: open input device test
-  * @tc.size: Medium
-  * @tc.level: level 1
-  */
-HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest002, Function | MediumTest | Level1)
-{
-    auto servmgr = IServiceManager::Get();
-    ASSERT_TRUE(servmgr != nullptr);
-
-    auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
-
-    ASSERT_TRUE(sampleService != nullptr);
-
-    OHOS::MessageParcel data;
-    OHOS::MessageParcel reply;
-    data.WriteCString("sample_service test call");
-
-    OHOS::MessageOption option;
-    int status = sampleService->SendRequest(SAMPLE_SERVICE_PING, data, reply, option);
-    ASSERT_EQ(status, 0);
-}
-
-/**
-  * @tc.number: SUB_DriverSystem_ManagerService_0030
-  * @tc.name: open input device test
-  * @tc.size: Medium
-  * @tc.level: level 1
-  */
-HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest003, Function | MediumTest | Level1)
+HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest003, TestSize.Level1)
 {
     auto servmgr = IServiceManager::Get();
     ASSERT_TRUE(servmgr != nullptr);
@@ -131,13 +100,7 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest003, Function | MediumTest | Level1
     ASSERT_EQ(IPCObjectStubTest::payload, payload);
 }
 
-/**
-  * @tc.number: SUB_DriverSystem_ManagerService_0040
-  * @tc.name: open input device test
-  * @tc.size: Medium
-  * @tc.level: level 1
-  */
-HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest004, Function | MediumTest | Level1)
+HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest004, TestSize.Level1)
 {
     auto servmgr = IServiceManager::Get();
     ASSERT_TRUE(servmgr != nullptr);
@@ -158,13 +121,7 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest004, Function | MediumTest | Level1
     ASSERT_EQ(result, expRes);
 }
 
-/**
-  * @tc.number: SUB_DriverSystem_ManagerService_0050
-  * @tc.name: open input device test
-  * @tc.size: Medium
-  * @tc.level: level 1
-  */
-HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest006, Function | MediumTest | Level1)
+HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest006, TestSize.Level1)
 {
     auto servmgr = IServiceManager::Get();
     ASSERT_TRUE(servmgr != nullptr);

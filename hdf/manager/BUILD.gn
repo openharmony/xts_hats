@@ -24,7 +24,7 @@ ohos_moduletest_suite("HatsHdfManagerTest") {
   deps = [
     "$hdf_uhdf_path/hdi:libhdi",
     "$hdf_uhdf_path/ipc:libhdf_ipc_adapter",
-    "$hdf_uhdf_path/utils:libhdf_utils",
+    "$hdf_uhdf_path/osal:libhdf_utils",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
     "//utils/native/base:utils",
@@ -45,7 +45,7 @@ ohos_moduletest_suite("HatsHdfManagerServiceTest") {
 
   deps = [
     "$hdf_uhdf_path/hdi:libhdi",
-    "$hdf_uhdf_path/utils:libhdf_utils",
+    "$hdf_uhdf_path/osal:libhdf_utils",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
     "//utils/native/base:utils",
@@ -56,7 +56,7 @@ ohos_moduletest_suite("HatsHdfManagerServiceTest") {
     external_deps = [
       "hiviewdfx_hilog_native:libhilog",
       "ipc:ipc_core",
-      "samgr_standard:samgr_proxy",
+      "samgr_L2:samgr_proxy",
     ]
   } else {
     external_deps = [

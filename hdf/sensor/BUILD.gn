@@ -30,7 +30,7 @@ ohos_moduletest_suite("HatsHdfSensorTest") {
     "-fno-strict-aliasing",
   ]
   deps = [
-    "$hdf_uhdf_path/utils:libhdf_utils",
+    "$hdf_uhdf_path/osal:libhdf_utils",
     "//drivers/peripheral/sensor/hal:hdi_sensor",
     "//utils/native/base:utils",
   ]

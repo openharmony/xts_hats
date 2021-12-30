@@ -30,7 +30,7 @@ ohos_moduletest_suite("HatsHdfVibratorTest") {
     "-fno-strict-aliasing",
   ]
   deps = [
-    "$hdf_uhdf_path/utils:libhdf_utils",
+    "$hdf_uhdf_path/osal:libhdf_utils",
     "//drivers/peripheral/misc/vibrator/hal:hdi_vibrator",
     "//utils/native/base:utils",
   ]

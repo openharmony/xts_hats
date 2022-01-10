@@ -508,6 +508,38 @@ OpenHarmony支持如下几种系统类型：
 
 测试套件执行 HatsDemoTest.bin 触发用例执行，基于串口打印日志进行分析。
 
+### 全量编译指导（适用于标准系统）<a name="section128222336544"></a>
+
+全量编译test/xts/hats目录下执行编译命令: ./build.sh suites=hats system_size=standard
+
+测试用例输出目录：out/release/suites/hats/testcases
+
+测试框架&用例整体输出目录：out/release/suites/hats(编译用例时会同步编译测试套执行框架)
+
+### 全量用例执行指导（适用于小型系统、标准系统）<a name="section128222336544"></a>
+
+搭建测试环境 Windows工作台下安装python3.7及以上版本，确保工作台和测试设备正常连接。
+
+测试执行目录（对应编译生成的out/release/suites/hats目录）
+
+├── testcase                       # 测试套文件存放目录 
+│ └──xxx.hap                       # 测试套可执行hap文件
+│ └──xxx.json                      # 测试套对应执行配置文件
+├── tools                          # 测试框架工具目录
+├── run.bat                        # window平台测试套启动执行文件
+├── report                         # 测试报告生成目录
+用例执行
+
+在Windows工作台上，找到从Linux服务器上拷贝下来的测试套件用例目录，在Windows命令窗口进入对应目录，直接执行hats\run.bat。
+
+界面启动后，输入用例执行指令。
+
+全量执行：run hats
+
+模块执行(具体模块可以查看\hats\testcases)：run –l ActsSamgrTest
+
+查看测试报告。 进入hats\reports\，获取当前的执行记录，打开“summary_report.html”可以获取到测试报告。
+
 
 ## 相关仓<a name="section1371113476307"></a>
 

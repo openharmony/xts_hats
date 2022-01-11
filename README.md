@@ -522,12 +522,15 @@ OpenHarmony支持如下几种系统类型：
 
 测试执行目录（对应编译生成的out/release/suites/hats目录）
 
+  ```
 ├── testcase                       # 测试套文件存放目录 
 │ └──xxx.hap                       # 测试套可执行hap文件
 │ └──xxx.json                      # 测试套对应执行配置文件
 ├── tools                          # 测试框架工具目录
 ├── run.bat                        # window平台测试套启动执行文件
 ├── report                         # 测试报告生成目录
+
+```
 用例执行
 
 在Windows工作台上，找到从Linux服务器上拷贝下来的测试套件用例目录，在Windows命令窗口进入对应目录，直接执行hats\run.bat。

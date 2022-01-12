@@ -510,7 +510,7 @@ OpenHarmony支持如下几种系统类型：
 
 ### 全量编译指导（适用于标准系统）<a name="section128222336544"></a>
 
-全量编译test/xts/hats目录下执行编译命令: ./build.sh suites=hats system_size=standard
+全量编译test/xts/hats目录下执行编译命令: ./build.sh suite=hats system_size=standard
 
 测试用例输出目录：out/release/suites/hats/testcases
 
@@ -530,7 +530,7 @@ OpenHarmony支持如下几种系统类型：
 ├── run.bat                        # window平台测试套启动执行文件
 ├── report                         # 测试报告生成目录
 
-```
+  ```
 用例执行
 
 在Windows工作台上，找到从Linux服务器上拷贝下来的测试套件用例目录，在Windows命令窗口进入对应目录，直接执行hats\run.bat。

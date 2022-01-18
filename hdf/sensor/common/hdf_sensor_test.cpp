@@ -197,7 +197,7 @@ HWTEST_F(HdfSensorTest, RegisterSensorDataCb001, Function | MediumTest | Level1)
 {
     int32_t ret = g_sensorDev->Register(0, SensorTestDataCallback);
     EXPECT_EQ(0, ret);
-    ret = g_sensorDev->Unregister(0);
+    ret = g_sensorDev->Unregister(0, SensorTestDataCallback);
     EXPECT_EQ(0, ret);
 }
 

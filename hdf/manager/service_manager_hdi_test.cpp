@@ -13,37 +13,53 @@
  * limitations under the License.
  */
 
-#include <devmgr_hdi.h>
-#include <hdf_log.h>
-#include <iservmgr_hdi.h>
-#include <ipc_object_stub.h>
+#include <functional>
 #include <gtest/gtest.h>
+#include <hdf_io_service_if.h>
+#include <hdf_log.h>
+#include <hdi_smq.h>
+#include <idevmgr_hdi.h>
+#include <iostream>
+#include <ipc_object_stub.h>
+#include <iservmgr_hdi.h>
+#include <string>
+#include "osal_time.h"
 #include "sample_hdi.h"
 
-#define HDF_LOG_TAG   service_manager_test_cpp
+#define HDF_LOG_TAG service_manager_test_cpp
 
 using namespace testing::ext;
-using OHOS::sptr;
 using OHOS::IRemoteObject;
+using OHOS::sptr;
+using OHOS::HDI::Base::SharedMemQueue;
+using OHOS::HDI::Base::SharedMemQueueMeta;
+using OHOS::HDI::Base::SmqType;
+using OHOS::HDI::DeviceManager::V1_0::IDeviceManager;
 using OHOS::HDI::ServiceManager::V1_0::IServiceManager;
-
+using OHOS::HDI::ServiceManager::V1_0::IServStatListener;
+using OHOS::HDI::ServiceManager::V1_0::ServiceStatus;
+using OHOS::HDI::ServiceManager::V1_0::ServStatListenerStub;
 constexpr const char *TEST_SERVICE_NAME = "sample_driver_service";
 constexpr int PAYLOAD_NUM = 1234;
+constexpr int SMQ_TEST_QUEUE_SIZE = 10;
+constexpr int SMQ_TEST_WAIT_TIME = 100;
 
 class HdfServiceMangerHdiTest : public testing::Test {
 public:
     static void SetUpTestCase()
-        {
-        struct HDIDeviceManager *devmgr = HDIDeviceManagerGet();
+    {
+        auto devmgr = IDeviceManager::Get();
         if (devmgr != nullptr) {
-            devmgr->LoadDevice(devmgr, TEST_SERVICE_NAME);
+            HDF_LOGI("%{public}s:%{public}d", __func__, __LINE__);
+            devmgr->LoadDevice(TEST_SERVICE_NAME);
         }
     }
     static void TearDownTestCase()
     {
-        struct HDIDeviceManager *devmgr = HDIDeviceManagerGet();
+        auto devmgr = IDeviceManager::Get();
         if (devmgr != nullptr) {
-            devmgr->UnloadDevice(devmgr, TEST_SERVICE_NAME);
+            HDF_LOGI("%{public}s:%{public}d", __func__, __LINE__);
+            devmgr->UnloadDevice(TEST_SERVICE_NAME);
         }
     }
     void SetUp() {};
@@ -164,7 +180,7 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest004, Function | MediumTest | Level1
   * @tc.size: Medium
   * @tc.level: level 1
   */
-HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest006, Function | MediumTest | Level1)
+HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest005, Function | MediumTest | Level1)
 {
     auto servmgr = IServiceManager::Get();
     ASSERT_TRUE(servmgr != nullptr);
@@ -194,4 +210,464 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest006, Function | MediumTest | Level1
     for (int i = 0; i < buffersize; i++) {
         ASSERT_EQ(retBuffer[i], i);
     }
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_ManagerService_0060
+  * @tc.name: Test device manager Load/UnLoad deivce and driver dynamic register device
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */
+HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest006, Function | MediumTest | Level1)
+{
+    auto devmgr = IDeviceManager::Get();
+    ASSERT_TRUE(devmgr != nullptr);
+    devmgr->UnloadDevice(TEST_SERVICE_NAME);
+
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService == nullptr);
+
+    int ret = devmgr->LoadDevice(TEST_SERVICE_NAME);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+
+    sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService != nullptr);
+
+    OHOS::MessageParcel data;
+    OHOS::MessageParcel reply;
+    OHOS::MessageOption option;
+
+    const char *newServName = "sample_driver_service2";
+    ret = data.WriteCString(newServName);
+    ASSERT_TRUE(ret);
+
+    int status = sampleService->SendRequest(SAMPLE_REGISTER_DEVICE, data, reply, option);
+    ASSERT_EQ(status, HDF_SUCCESS);
+
+    auto sampleService2 = servmgr->GetService(newServName);
+    ASSERT_TRUE(sampleService != nullptr);
+
+    data.FlushBuffer();
+    reply.FlushBuffer();
+    data.WriteInt32(PAYLOAD_NUM);
+    data.WriteInt32(PAYLOAD_NUM);
+
+    status = sampleService2->SendRequest(SAMPLE_SERVICE_SUM, data, reply, option);
+    ASSERT_EQ(status, 0);
+    int32_t result = reply.ReadInt32();
+
+    int32_t expRes = PAYLOAD_NUM + PAYLOAD_NUM;
+    ASSERT_EQ(result, expRes);
+    sampleService2 = nullptr;
+
+    data.FlushBuffer();
+    reply.FlushBuffer();
+    data.WriteCString(newServName);
+
+    status = sampleService->SendRequest(SAMPLE_UNREGISTER_DEVICE, data, reply, option);
+    ASSERT_EQ(status, HDF_SUCCESS);
+
+    sampleService2 = servmgr->GetService(newServName);
+    ASSERT_TRUE(sampleService2 == nullptr);
+
+    ret = devmgr->UnloadDevice(TEST_SERVICE_NAME);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+
+    sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService == nullptr);
+}
+
+class ServStatListener : public OHOS::HDI::ServiceManager::V1_0::ServStatListenerStub {
+public:
+    using StatusCallback = std::function<void(const ServiceStatus &)>;
+    explicit ServStatListener(StatusCallback callback) : callback_(std::move(callback))
+    {
+    }
+    ~ServStatListener() = default;
+    void OnReceive(const ServiceStatus &status) override
+    {
+        callback_(status);
+    }
+
+private:
+    StatusCallback callback_;
+};
+
+/**
+  * @tc.number: SUB_DriverSystem_ManagerService_0070
+  * @tc.name: Test service start status listener
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */
+HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest007, Function | MediumTest | Level1)
+{
+    auto devmgr = IDeviceManager::Get();
+    ASSERT_TRUE(devmgr != nullptr);
+    devmgr->UnloadDevice(TEST_SERVICE_NAME);
+
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService == nullptr);
+
+    std::string servInfo;
+    uint16_t devClass;
+    uint16_t servStatus;
+    bool callbacked = false;
+    ::OHOS::sptr<IServStatListener> listener
+        = new ServStatListener(
+            ServStatListener::StatusCallback([&](const ServiceStatus &status) {
+                HDF_LOGI("service status callback");
+                if (status.serviceName == std::string(TEST_SERVICE_NAME)) {
+                    servInfo = status.info;
+                    devClass = status.deviceClass;
+                    servStatus = status.status;
+                    callbacked = true;
+                }
+            }));
+
+    int status = servmgr->RegisterServiceStatusListener(listener, DEVICE_CLASS_DEFAULT);
+    ASSERT_EQ(status, HDF_SUCCESS);
+
+    int ret = devmgr->LoadDevice(TEST_SERVICE_NAME);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    int count = 10;
+    while (!callbacked && count > 0) {
+        OsalMSleep(1);
+        count--;
+    }
+    ASSERT_TRUE(callbacked);
+    ASSERT_EQ(devClass, DEVICE_CLASS_DEFAULT);
+    ASSERT_EQ(servInfo, std::string(TEST_SERVICE_NAME));
+    ASSERT_EQ(servStatus, OHOS::HDI::ServiceManager::V1_0::SERVIE_STATUS_START);
+
+    callbacked = false;
+    ret = devmgr->UnloadDevice(TEST_SERVICE_NAME);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+
+    count = 10;
+    while (!callbacked && count > 0) {
+        OsalMSleep(1);
+        count--;
+    }
+    ASSERT_TRUE(callbacked);
+    ASSERT_EQ(devClass, DEVICE_CLASS_DEFAULT);
+    ASSERT_EQ(servInfo, std::string(TEST_SERVICE_NAME));
+    ASSERT_EQ(servStatus, OHOS::HDI::ServiceManager::V1_0::SERVIE_STATUS_STOP);
+
+    status = servmgr->UnregisterServiceStatusListener(listener);
+    ASSERT_EQ(status, HDF_SUCCESS);
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_ManagerService_0080
+  * @tc.name: Test service status listener update service info
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */
+HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest008, Function | MediumTest | Level1)
+{
+    auto devmgr = IDeviceManager::Get();
+    ASSERT_TRUE(devmgr != nullptr);
+    devmgr->UnloadDevice(TEST_SERVICE_NAME);
+
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService == nullptr);
+
+    int ret = devmgr->LoadDevice(TEST_SERVICE_NAME);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+
+    sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService != nullptr);
+
+    std::string servInfo;
+    uint16_t devClass;
+    uint16_t servStatus;
+    bool callbacked = false;
+    ::OHOS::sptr<IServStatListener> listener
+        = new ServStatListener(
+            ServStatListener::StatusCallback([&](const ServiceStatus &status) {
+                if (status.serviceName == std::string(TEST_SERVICE_NAME)) {
+                    servInfo = status.info;
+                    devClass = status.deviceClass;
+                    servStatus = status.status;
+                    callbacked = true;
+                }
+            }));
+    constexpr int FIRST_WAIT = 20;
+    OsalMSleep(FIRST_WAIT); // skip callback on register
+
+    int status = servmgr->RegisterServiceStatusListener(listener, DEVICE_CLASS_DEFAULT);
+    ASSERT_EQ(status, HDF_SUCCESS);
+
+    OHOS::MessageParcel data;
+    OHOS::MessageParcel reply;
+    OHOS::MessageOption option;
+    std::string info = "foo";
+    data.WriteCString(info.data());
+    callbacked = false;
+    status = sampleService->SendRequest(SAMPLE_UPDATE_SERVIE, data, reply, option);
+    ASSERT_EQ(status, HDF_SUCCESS);
+
+    int count = 10;
+    while (!callbacked && count > 0) {
+        OsalMSleep(1);
+        count--;
+    }
+    ASSERT_TRUE(callbacked);
+    ASSERT_EQ(devClass, DEVICE_CLASS_DEFAULT);
+    ASSERT_EQ(servInfo, info);
+    ASSERT_EQ(servStatus, OHOS::HDI::ServiceManager::V1_0::SERVIE_STATUS_CHANGE);
+
+    ret = devmgr->UnloadDevice(TEST_SERVICE_NAME);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+
+    status = servmgr->UnregisterServiceStatusListener(listener);
+    ASSERT_EQ(status, HDF_SUCCESS);
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_ManagerService_0090
+  * @tc.name: Test service status listener unregister
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */
+HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest009, Function | MediumTest | Level1)
+{
+    auto devmgr = IDeviceManager::Get();
+    ASSERT_TRUE(devmgr != nullptr);
+    devmgr->UnloadDevice(TEST_SERVICE_NAME);
+
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService == nullptr);
+
+    std::string servInfo;
+    uint16_t devClass;
+    uint16_t servStatus;
+    bool callbacked = false;
+    ::OHOS::sptr<IServStatListener> listener
+        = new ServStatListener(
+            ServStatListener::StatusCallback([&](const ServiceStatus &status) {
+                HDF_LOGI("service status callback");
+                if (status.serviceName == std::string(TEST_SERVICE_NAME)) {
+                    servInfo = status.info;
+                    devClass = status.deviceClass;
+                    servStatus = status.status;
+                    callbacked = true;
+                }
+            }));
+
+    int status = servmgr->RegisterServiceStatusListener(listener, DEVICE_CLASS_DEFAULT);
+    ASSERT_EQ(status, HDF_SUCCESS);
+
+    int ret = devmgr->LoadDevice(TEST_SERVICE_NAME);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+
+    int count = 10;
+    while (!callbacked && count > 0) {
+        OsalMSleep(1);
+        count--;
+    }
+    ASSERT_TRUE(callbacked);
+    ASSERT_EQ(devClass, DEVICE_CLASS_DEFAULT);
+    ASSERT_EQ(servInfo, std::string(TEST_SERVICE_NAME));
+    ASSERT_EQ(servStatus, OHOS::HDI::ServiceManager::V1_0::SERVIE_STATUS_START);
+
+    sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService != nullptr);
+
+    status = servmgr->UnregisterServiceStatusListener(listener);
+    ASSERT_EQ(status, HDF_SUCCESS);
+
+    callbacked = false;
+    ret = devmgr->UnloadDevice(TEST_SERVICE_NAME);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+
+    OsalMSleep(10);
+    ASSERT_FALSE(callbacked);
+
+    ret = devmgr->LoadDevice(TEST_SERVICE_NAME);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_ManagerService_0100
+  * @tc.name: smq test normal read/write
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */
+HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest010, Function | MediumTest | Level1)
+{
+    HDF_LOGI("%{public}s:%{public}d", __func__, __LINE__);
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService != nullptr);
+
+    OHOS::MessageParcel data;
+    OHOS::MessageParcel reply;
+    OHOS::MessageOption option;
+    std::unique_ptr<SharedMemQueue<SampleSmqElement>> smq
+        = std::make_unique<SharedMemQueue<SampleSmqElement>>(SMQ_TEST_QUEUE_SIZE, SmqType::SYNCED_SMQ);
+    ASSERT_TRUE(smq->IsGood());
+
+    auto ret = smq->GetMeta()->Marshalling(data);
+    ASSERT_TRUE(ret);
+    data.WriteUint32(1);
+
+    int status = sampleService->SendRequest(SAMPLE_TRANS_SMQ, data, reply, option);
+    ASSERT_EQ(status, 0);
+
+    constexpr int SEND_TIMES = 20;
+    for (size_t i = 0; i < SEND_TIMES; i++) {
+        SampleSmqElement t = { 0 };
+        t.data32 = i;
+        t.data64 = i + 1;
+
+        HDF_LOGI("%{public}s:write smq message %{public}zu", __func__, i);
+        auto status = smq->Write(&t, 1, OHOS::MillisecToNanosec(SMQ_TEST_WAIT_TIME));
+        ASSERT_EQ(status, 0);
+    }
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_ManagerService_0110
+  * @tc.name: smq test with overflow wait
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */
+HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest011, Function | MediumTest | Level1)
+{
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService != nullptr);
+
+    OHOS::MessageParcel data;
+    OHOS::MessageParcel reply;
+    OHOS::MessageOption option;
+    std::unique_ptr<SharedMemQueue<SampleSmqElement>> smq
+        = std::make_unique<SharedMemQueue<SampleSmqElement>>(SMQ_TEST_QUEUE_SIZE, SmqType::SYNCED_SMQ);
+    ASSERT_TRUE(smq->IsGood());
+
+    constexpr uint32_t ELEMENT_SIZE = 2;
+
+    auto ret = smq->GetMeta()->Marshalling(data);
+    ASSERT_TRUE(ret);
+
+    data.WriteUint32(ELEMENT_SIZE);
+    int status = sampleService->SendRequest(SAMPLE_TRANS_SMQ, data, reply, option);
+    ASSERT_EQ(status, 0);
+
+    constexpr int SEND_TIMES = 20;
+    for (int i = 0; i < SEND_TIMES; i++) {
+        SampleSmqElement t[ELEMENT_SIZE] = {};
+        t[0].data32 = i;
+        t[0].data64 = i + 1;
+        t[1].data32 = i + 1;
+        t[1].data64 = i + 1;
+        HDF_LOGI("%{public}s:write smq message %{public}zu", __func__, i);
+        auto status = smq->Write(&t[0], ELEMENT_SIZE, OHOS::MillisecToNanosec(SMQ_TEST_WAIT_TIME));
+        ASSERT_EQ(status, 0);
+    }
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_ManagerService_0120
+  * @tc.name: smq test UNSYNC_SMQ
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */
+HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest012, Function | MediumTest | Level1)
+{
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService != nullptr);
+
+    OHOS::MessageParcel data;
+    OHOS::MessageParcel reply;
+    OHOS::MessageOption option;
+
+    std::unique_ptr<SharedMemQueue<SampleSmqElement>> smq
+        = std::make_unique<SharedMemQueue<SampleSmqElement>>(SMQ_TEST_QUEUE_SIZE, SmqType::UNSYNC_SMQ);
+    ASSERT_TRUE(smq->IsGood());
+
+    constexpr uint32_t ELEMENT_SIZE = 2;
+
+    auto ret = smq->GetMeta()->Marshalling(data);
+    ASSERT_TRUE(ret);
+    data.WriteUint32(ELEMENT_SIZE);
+    auto status = sampleService->SendRequest(SAMPLE_TRANS_SMQ, data, reply, option);
+    ASSERT_EQ(status, 0);
+
+    SampleSmqElement t[ELEMENT_SIZE] = {};
+    status = smq->Write(&t[0], ELEMENT_SIZE);
+    EXPECT_NE(status, 0);
+    constexpr int SEND_TIMES = 20;
+    for (int i = 0; i < SEND_TIMES; i++) {
+        t[0].data32 = i;
+        t[0].data64 = i + 1;
+        t[1].data32 = i + 1;
+        t[1].data64 = i + 1;
+        HDF_LOGI("%{public}s:write smq message %{public}zu", __func__, i);
+        status = smq->WriteNonBlocking(&t[0], ELEMENT_SIZE);
+        ASSERT_EQ(status, 0);
+    }
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_ManagerService_0130
+  * @tc.name: Test service status listener get serviec callback on register
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */
+HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest013, Function | MediumTest | Level1)
+{
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+    ASSERT_NE(sampleService, nullptr);
+
+    bool callbacked = false;
+    bool sampleServiceStarted = false;
+    uint16_t servStatus = 0;
+    ::OHOS::sptr<IServStatListener> listener
+        = new ServStatListener(
+            ServStatListener::StatusCallback([&](const ServiceStatus &status) {
+                HDF_LOGI("service status callback, service is %{public}s", status.serviceName.data());
+                callbacked = true;
+                if (status.serviceName == std::string(TEST_SERVICE_NAME)) {
+                    sampleServiceStarted = true;
+                    servStatus = status.status;
+                }
+            }));
+
+    int status = servmgr->RegisterServiceStatusListener(listener, DEVICE_CLASS_DEFAULT);
+    ASSERT_EQ(status, HDF_SUCCESS);
+    constexpr int WAIT_COUNT = 10;
+    int count = WAIT_COUNT;
+    while (!sampleServiceStarted && count > 0) {
+        OsalMSleep(1);
+        count--;
+    }
+    ASSERT_TRUE(callbacked);
+    ASSERT_TRUE(sampleServiceStarted);
+    ASSERT_EQ(servStatus, OHOS::HDI::ServiceManager::V1_0::SERVIE_STATUS_START);
+    status = servmgr->UnregisterServiceStatusListener(listener);
+    ASSERT_EQ(status, HDF_SUCCESS);
 }

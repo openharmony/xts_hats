@@ -27,16 +27,15 @@ ohos_moduletest_suite("HatsHdfManagerTest") {
     "$hdf_uhdf_path/utils:libhdf_utils",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
-    "//utils/native/base:utils",
   ]
 
   include_dirs = [ "$hdf_uhdf_path/host/test/unittest/sample_driver" ]
 
-  if (is_standard_system) {
-    external_deps = [ "hiviewdfx_hilog_native:libhilog" ]
-  } else {
-    external_deps = [ "hilog:libhilog" ]
-  }
+  external_deps = [
+    "hiviewdfx_hilog_native:libhilog",
+    "ipc:ipc_core",
+    "utils_base:utils",
+  ]
 }
 
 ohos_moduletest_suite("HatsHdfManagerServiceTest") {
@@ -48,21 +47,13 @@ ohos_moduletest_suite("HatsHdfManagerServiceTest") {
     "$hdf_uhdf_path/utils:libhdf_utils",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
-    "//utils/native/base:utils",
   ]
 
   include_dirs = [ "$hdf_uhdf_path/host/test/unittest/sample_driver" ]
-  if (is_standard_system) {
-    external_deps = [
-      "hiviewdfx_hilog_native:libhilog",
-      "ipc:ipc_core",
-      "samgr_standard:samgr_proxy",
-    ]
-  } else {
-    external_deps = [
-      "hilog:libhilog",
-      "ipc:ipc_core",
-      "samgr:samgr_proxy",
-    ]
-  }
+  external_deps = [
+    "hiviewdfx_hilog_native:libhilog",
+    "ipc:ipc_core",
+    "samgr_standard:samgr_proxy",
+    "utils_base:utils",
+  ]
 }

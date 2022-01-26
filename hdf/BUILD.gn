@@ -16,6 +16,7 @@ group("hatshdftest") {
   if (is_standard_system) {
     deps = [
       "input:HatsHdfInputTest",
+      "light:HatsHdfLightTest",
       "manager:HatsHdfManagerServiceTest",
       "manager:HatsHdfManagerTest",
       "sensor:HatsHdfSensorTest",

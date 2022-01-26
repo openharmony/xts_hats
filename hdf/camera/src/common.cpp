@@ -182,9 +182,9 @@ void Test::Init()
     if (service == nullptr) {
         service = CameraHost::CreateCameraHost();
         if (service == nullptr) {
-            std::cout << "==========[test log]ICameraHost get failed." << std::endl;
+            std::cout << "==========[test log]ICameraHost get failed."<< std::endl;
         } else {
-            std::cout << "==========[test log]ICameraHost get success." << std::endl;
+            std::cout << "==========[test log]ICameraHost get success."<< std::endl;
         }
     }
     hostCallback = std::make_shared<HdiHostCallback>(this);
@@ -192,9 +192,9 @@ void Test::Init()
     if (service == nullptr) {
         service = ICameraHost::Get("camera_service");
         if (service == nullptr) {
-            std::cout << "==========[test log]ICameraHost get failed." << std::endl;
+            std::cout << "==========[test log]ICameraHost get failed."<< std::endl;
         } else {
-            std::cout << "==========[test log]ICameraHost get success." << std::endl;
+            std::cout << "==========[test log]ICameraHost get success."<< std::endl;
         }
         ASSERT_TRUE(service != nullptr);
     }
@@ -226,7 +226,7 @@ void Test::GetCameraMetadata()
     common_metadata_header_t* data = ability->get();
     int32_t expo = 0;
     camera_metadata_item_t entry;
-    int ret = find_camera_metadata_item(data, OHOS_CONTROL_AE_AVAILABLE_MODES, &entry);
+    int ret = CameraStandard::FindCameraMetadataItem(data, OHOS_CONTROL_AE_AVAILABLE_MODES, &entry);
     if (ret == 0) {
         std::cout << "==========[test log] get OHOS_CONTROL_AE_AVAILABLE_MODES success" << std::endl;
     }

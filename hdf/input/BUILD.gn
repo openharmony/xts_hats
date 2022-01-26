@@ -19,7 +19,6 @@ module_output_path = "hdf/input"
 ohos_moduletest_suite("HatsHdfInputTest") {
   module_out_path = module_output_path
   include_dirs = [
-    "//drivers/framework/test/unittest/include",
     "//drivers/peripheral/input/hal/include",
     "//drivers/peripheral/input/interfaces/include",
   ]
@@ -32,14 +31,14 @@ ohos_moduletest_suite("HatsHdfInputTest") {
     "-fno-common",
     "-fno-strict-aliasing",
   ]
-  deps = [
-    "$hdf_uhdf_path/test/unittest/common:libhdf_test_common",
-    "$hdf_uhdf_path/utils:libhdf_utils",
-    "//drivers/peripheral/input/hal:hdi_input",
-    "//utils/native/base:utils",
-  ]
+  deps = [ "//drivers/peripheral/input/hal:hdi_input" ]
   if (is_standard_system) {
-    external_deps = [ "hiviewdfx_hilog_native:libhilog" ]
+    external_deps = [
+      "device_driver_framework:libhdf_test_common",
+      "device_driver_framework:libhdf_utils",
+      "hiviewdfx_hilog_native:libhilog",
+      "utils_base:utils",
+    ]
   } else {
     external_deps = [ "hilog:libhilog" ]
   }

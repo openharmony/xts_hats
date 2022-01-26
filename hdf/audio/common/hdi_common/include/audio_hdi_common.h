@@ -48,25 +48,25 @@ namespace HMOS {
 namespace Audio {
 #ifdef AUDIO_ADM_SO
     const std::string FUNCTION_NAME = "GetAudioManagerFuncs";
-    const std::string RESOLVED_PATH = "//system/lib/libhdi_audio.z.so";
+    const std::string RESOLVED_PATH = HDF_LIBRARY_FULL_PATH("libhdi_audio");
     using TestAudioManager = struct AudioManager;
     const int IS_ADM = true;
 #endif
 #ifdef AUDIO_MPI_SO
     const std::string FUNCTION_NAME = "GetAudioManagerFuncs";
-    const std::string RESOLVED_PATH = "//system/lib/libhdi_audio.z.so";
+    const std::string RESOLVED_PATH = HDF_LIBRARY_FULL_PATH("libhdi_audio");
     using TestAudioManager = struct AudioManager;
     const int IS_ADM = false;
 #endif
 #ifdef AUDIO_ADM_SERVICE
     const std::string FUNCTION_NAME = "GetAudioProxyManagerFuncs";
-    const std::string RESOLVED_PATH = "//system/lib/libaudio_hdi_proxy_server.z.so";
+    const std::string RESOLVED_PATH = HDF_LIBRARY_FULL_PATH("libhdi_audio_client");
     using TestAudioManager = struct AudioProxyManager;
     const int IS_ADM = true;
 #endif
 #ifdef AUDIO_MPI_SERVICE
     const std::string FUNCTION_NAME = "GetAudioProxyManagerFuncs";
-    const std::string RESOLVED_PATH = "//system/lib/libaudio_hdi_proxy_server.z.so";
+    const std::string RESOLVED_PATH = HDF_LIBRARY_FULL_PATH("libhdi_audio_client");
     using TestAudioManager = struct AudioProxyManager;
     const int IS_ADM = false;
 #endif
@@ -292,6 +292,10 @@ int32_t InitMmapDesc(FILE *fp, struct AudioMmapBufferDescripter &desc, int32_t &
 int32_t PlayMapAudioFile(struct PrepareAudioPara &audiopara);
 
 int32_t RecordMapAudio(struct PrepareAudioPara &audiopara);
+int32_t AudioRenderCallback(enum AudioCallbackType type, void *reserved, void *cookie);
+int32_t CheckFlushValue();
+int32_t CheckRenderFullValue();
+int32_t CheckWriteCompleteValue();
 }
 }
 #endif // AUDIO_HDI_COMMON_H

@@ -19,16 +19,12 @@ import("//test/xts/tools/build/suite.gni")
 ###########################systemtest##############################
 module_output_path = "hdf/audio"
 
-###########################hdf_audio_hdi_render_test######################
-ohos_moduletest_suite("hdf_audio_hdi_render_test") {
+###########################HatsHdfAudioRenderAttrTest######################
+ohos_moduletest_suite("HatsHdfAudioRenderAttrTest") {
   module_out_path = module_output_path
   sources = [
-    "../../common/hdi_common/src/audio_hdi_common.cpp",
+    "../../../common/hdi_common/src/audio_hdi_common.cpp",
     "src/audio_hdirender_attr_test.cpp",
-    "src/audio_hdirender_control_test.cpp",
-    "src/audio_hdirender_scene_test.cpp",
-    "src/audio_hdirender_test.cpp",
-    "src/audio_hdirender_volume_test.cpp",
   ]
 
   include_dirs = [

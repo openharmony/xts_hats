@@ -13,13 +13,17 @@
 
 import("//build/ohos_var.gni")
 import("//drivers/adapter/uhdf2/uhdf.gni")
+import("//drivers/peripheral/audio/audio.gni")
 import("//test/xts/tools/build/suite.gni")
 
-#################################group#########################################
-group("HatsHdfCameraTest") {
+###########################end###########################
+group("hdi") {
   if (!defined(ohos_lite)) {
     testonly = true
   }
-  deps = [ "hdi:hdi" ]
+  deps = [
+    "cameraAttr:HatsHdfCameraAttrTest",
+    "cameraExt:HatsHdfCameraExtTest",
+    "cameraFunction:HatsHdfCameraFunctionTest",
+  ]
 }
-###############################################################################

@@ -15,6 +15,7 @@ group("hatshdftest") {
   testonly = true
   if (is_standard_system) {
     deps = [
+      "audio:HatsHdfAudioTest",
       "input:HatsHdfInputTest",
       "light:HatsHdfLightTest",
       "manager:HatsHdfManagerServiceTest",

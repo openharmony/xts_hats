@@ -22,8 +22,17 @@ group("hdi") {
     testonly = true
   }
   deps = [
-    "adapter:hdf_audio_hdi_adapter_test",
-    "capture:hdf_audio_hdi_capture_test",
-    "render:hdf_audio_hdi_render_test",
+    "adapter:HatsHdfAudioAdapterTest",
+    "capture/captureAttr:HatsHdfAudioCaptureAttrTest",
+    "capture/captureControl:HatsHdfAudioCaptureControlTest",
+    "capture/captureScene:HatsHdfAudioCaptureSceneTest",
+    "capture/captureTest:HatsHdfAudioCaptureTest",
+    "capture/captureVolume:HatsHdfAudioCaptureVolumeTest",
+
+    #    "render/renderAttr:HatsHdfAudioRenderAttrTest",
+    #    "render/renderControl:HatsHdfAudioRenderControlTest",
+    #    "render/renderScene:HatsHdfAudioRenderSceneTest",
+    #    "render/renderTest:HatsHdfAudioRenderTest",
+    #    "render/renderVolume:HatsHdfAudioRenderVolumeTest",
   ]
 }

@@ -16,15 +16,15 @@ import("//drivers/adapter/uhdf2/uhdf.gni")
 import("//drivers/peripheral/audio/audio.gni")
 import("//test/xts/tools/build/suite.gni")
 
-###########################NOT LITEOS##############################
+###########################systemtest##############################
 module_output_path = "hdf/audio"
 
-###########################HatsHdfAudioAdapterTest#####################
-ohos_moduletest_suite("HatsHdfAudioAdapterTest") {
+###########################HatsHdfAudioRenderControlTest######################
+ohos_moduletest_suite("HatsHdfAudioRenderControlTest") {
   module_out_path = module_output_path
   sources = [
-    "../../common/hdi_common/src/audio_hdi_common.cpp",
-    "src/audio_hdiadapter_test.cpp",
+    "../../../common/hdi_common/src/audio_hdi_common.cpp",
+    "src/audio_hdirender_control_test.cpp",
   ]
 
   include_dirs = [
@@ -33,16 +33,16 @@ ohos_moduletest_suite("HatsHdfAudioAdapterTest") {
     "//drivers/peripheral/audio/hal/hdi_binder/proxy/include",
     "//drivers/adapter/uhdf2/include/hdi",
     "//drivers/adapter/uhdf2/shared/include",
-    "//drivers/adapter/uhdf2/osal/include",
     "//drivers/framework/include/core",
     "//drivers/framework/include/utils",
     "//drivers/framework/include/osal",
     "//drivers/framework/include",
-    "//drivers/framework/utils/include",
     "//third_party/bounds_checking_function/include",
+    "//drivers/framework/utils/include",
+    "//drivers/adapter/uhdf2/osal/include",
     "//drivers/peripheral/audio/test/systemtest/common/hdi_common/include",
     "//third_party/googletest/googletest/include/gtest",
-    "//drivers/peripheral/audio/test/systemtest/hdi/adapter/include",
+    "//drivers/peripheral/audio/test/systemtest/hdi/render/include",
   ]
   cflags = [
     "-Wall",
@@ -70,4 +70,3 @@ ohos_moduletest_suite("HatsHdfAudioAdapterTest") {
     defines += [ "AUDIO_MPI_SERVICE" ]
   }
 }
-###########################end###########################

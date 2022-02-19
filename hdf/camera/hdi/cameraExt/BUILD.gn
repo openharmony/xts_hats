@@ -54,7 +54,7 @@ ohos_moduletest_suite("HatsHdfCameraExtTest") {
     "$camera_path/device_manager/include/mpi",
     "//base/startup/syspara_lite/adapter/native/syspara/include",
     "$camera_path/utils/event",
-    "//foundation/multimedia/camera_standard/frameworks/innerkitsimpl/metadata/include",
+    "//foundation/multimedia/camera_standard/frameworks/native/metadata/include",
 
     #producer
     "//utils/native/base/include",
@@ -84,7 +84,7 @@ ohos_moduletest_suite("HatsHdfCameraExtTest") {
     "$camera_path/device_manager:camera_device_manager",
     "$camera_path/hdi_impl:camera_hdi_impl",
     "$camera_path/pipeline_core:camera_pipeline_core",
-    "//foundation/multimedia/camera_standard/frameworks/innerkitsimpl/metadata:metadata",
+    "//foundation/multimedia/camera_standard/frameworks/native/metadata:metadata",
     "//third_party/googletest:gmock",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest",
@@ -97,7 +97,7 @@ ohos_moduletest_suite("HatsHdfCameraExtTest") {
       "device_driver_framework:libhdi",
       "graphic_standard:surface",
       "hiviewdfx_hilog_native:libhilog",
-      "ipc:ipc_core",
+      "ipc:ipc_single",
       "utils_base:utils",
     ]
   } else {
@@ -105,7 +105,7 @@ ohos_moduletest_suite("HatsHdfCameraExtTest") {
   }
 
   external_deps += [
-    "ipc:ipc_core",
+    "ipc:ipc_single",
     "samgr_standard:samgr_proxy",
     "startup_l2:syspara",
   ]

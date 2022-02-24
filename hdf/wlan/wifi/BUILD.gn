@@ -16,7 +16,7 @@ import("//drivers/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hdf/wlan"
-ohos_moduletest_suite("HatsHdfWifiTest") {
+ohos_moduletest_suite("HatsHdfWifiHdiTest") {
   module_out_path = module_output_path
   include_dirs = [
     "//drivers/peripheral/wlan/client/include",

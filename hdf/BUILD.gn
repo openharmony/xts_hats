@@ -19,7 +19,6 @@ group("hatshdftest") {
       "camera:HatsHdfCameraTest",
       "input:HatsHdfInputTest",
       "light:HatsHdfLightTest",
-      "manager:HatsHdfManagerServiceTest",
       "manager:HatsHdfManagerTest",
       "sensor:HatsHdfSensorTest",
       "vibrator:HatsHdfVibratorTest",

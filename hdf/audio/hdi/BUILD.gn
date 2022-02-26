@@ -26,13 +26,14 @@ group("hdi") {
     "capture/captureAttr:HatsHdfAudioCaptureAttrTest",
     "capture/captureControl:HatsHdfAudioCaptureControlTest",
     "capture/captureScene:HatsHdfAudioCaptureSceneTest",
-    "capture/captureTest:HatsHdfAudioCaptureTest",
-    "capture/captureVolume:HatsHdfAudioCaptureVolumeTest",
 
-    #    "render/renderAttr:HatsHdfAudioRenderAttrTest",
-    #    "render/renderControl:HatsHdfAudioRenderControlTest",
-    #    "render/renderScene:HatsHdfAudioRenderSceneTest",
-    #    "render/renderTest:HatsHdfAudioRenderTest",
-    #    "render/renderVolume:HatsHdfAudioRenderVolumeTest",
+    #"capture/captureTest:HatsHdfAudioCaptureTest",
+    "capture/captureVolume:HatsHdfAudioCaptureVolumeTest",
+    "render/renderAttr:HatsHdfAudioRenderAttrTest",
+    "render/renderControl:HatsHdfAudioRenderControlTest",
+    "render/renderScene:HatsHdfAudioRenderSceneTest",
+
+    #"render/renderTest:HatsHdfAudioRenderTest",
+    "render/renderVolume:HatsHdfAudioRenderVolumeTest",
   ]
 }

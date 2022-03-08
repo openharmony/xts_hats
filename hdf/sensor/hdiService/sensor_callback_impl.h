@@ -17,7 +17,7 @@
 #define OHOS_HDI_SENSOR_V1_0_SENSORCALLBACKIMPL_H
 
 #include <hdf_base.h>
-#include "sensor_callback_stub.h"
+#include "v1_0/sensor_callback_stub.h"
 
 namespace OHOS {
 namespace HDI {
@@ -28,6 +28,7 @@ public:
     virtual ~SensorCallbackImpl() {}
 
     int32_t OnDataEvent(const HdfSensorEvents& event) override;
+    static uint32_t sensorDataFlag;
 };
 } // V1_0
 } // Sensor

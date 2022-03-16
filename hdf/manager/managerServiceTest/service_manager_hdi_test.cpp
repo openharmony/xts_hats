@@ -22,8 +22,9 @@
 #include <iostream>
 #include <ipc_object_stub.h>
 #include <iservmgr_hdi.h>
+#include <osal_time.h>
 #include <string>
-#include "osal_time.h"
+
 #include "sample_hdi.h"
 
 #define HDF_LOG_TAG service_manager_test_cpp
@@ -39,10 +40,12 @@ using OHOS::HDI::ServiceManager::V1_0::IServiceManager;
 using OHOS::HDI::ServiceManager::V1_0::IServStatListener;
 using OHOS::HDI::ServiceManager::V1_0::ServiceStatus;
 using OHOS::HDI::ServiceManager::V1_0::ServStatListenerStub;
-constexpr const char *TEST_SERVICE_NAME = "sample_driver_service";
-constexpr int PAYLOAD_NUM = 1234;
-constexpr int SMQ_TEST_QUEUE_SIZE = 10;
-constexpr int SMQ_TEST_WAIT_TIME = 100;
+static constexpr const char *TEST_SERVICE_NAME = "sample_driver_service";
+static constexpr const char16_t *TEST_SERVICE_INTERFACE_DESC = u"hdf.test.sampele_service";
+static constexpr int PAYLOAD_NUM = 1234;
+static constexpr int SMQ_TEST_QUEUE_SIZE = 10;
+static constexpr int SMQ_TEST_WAIT_TIME = 100;
+static constexpr int WAIT_LOAD_UNLOAD_TIME = 300;
 
 class HdfServiceMangerHdiTest : public testing::Test {
 public:
@@ -62,6 +65,9 @@ public:
             devmgr->UnloadDevice(TEST_SERVICE_NAME);
         }
     }
+    void TestServiceListenerStop(const sptr<IDeviceManager>& devmgr, const sptr<IServiceManager>& servmgr);
+    void TestSampleService(sptr<IRemoteObject>& sampleService, const sptr<IDeviceManager>& devmgr,
+        const sptr<IServiceManager>& servmgr);
     void SetUp() {};
     void TearDown() {};
 };
@@ -70,8 +76,8 @@ class IPCObjectStubTest : public OHOS::IPCObjectStub {
 public:
     explicit IPCObjectStubTest() : OHOS::IPCObjectStub(u"") {};
     virtual ~IPCObjectStubTest() = default;
-    int OnRemoteRequest(uint32_t code, OHOS::MessageParcel &data,
-        OHOS::MessageParcel &reply, OHOS::MessageOption &option) override
+    int OnRemoteRequest(
+        uint32_t code, OHOS::MessageParcel &data, OHOS::MessageParcel &reply, OHOS::MessageOption &option) override
     {
         HDF_LOGI("IPCObjectStubTest::OnRemoteRequest called, code = %{public}d", code);
         payload = data.ReadInt32();
@@ -113,6 +119,8 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest002, Function | MediumTest | Level1
 
     OHOS::MessageParcel data;
     OHOS::MessageParcel reply;
+    bool ret = data.WriteInterfaceToken(TEST_SERVICE_INTERFACE_DESC);
+    ASSERT_EQ(ret, true);
     data.WriteCString("sample_service test call");
 
     OHOS::MessageOption option;
@@ -138,6 +146,8 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest003, Function | MediumTest | Level1
     OHOS::MessageParcel data;
     OHOS::MessageParcel reply;
     int32_t payload = PAYLOAD_NUM;
+    bool ret = data.WriteInterfaceToken(TEST_SERVICE_INTERFACE_DESC);
+    ASSERT_EQ(ret, true);
     data.WriteInt32(payload);
     data.WriteRemoteObject(callback);
 
@@ -163,6 +173,8 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest004, Function | MediumTest | Level1
 
     OHOS::MessageParcel data;
     OHOS::MessageParcel reply;
+    bool ret = data.WriteInterfaceToken(TEST_SERVICE_INTERFACE_DESC);
+    ASSERT_EQ(ret, true);
     data.WriteInt32(PAYLOAD_NUM);
     data.WriteInt32(PAYLOAD_NUM);
 
@@ -196,8 +208,9 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest005, Function | MediumTest | Level1
     for (int i = 0; i < buffersize; i++) {
         dataBuffer[i] = i;
     }
-
-    bool ret = data.WriteUnpadBuffer(dataBuffer, sizeof(dataBuffer));
+    bool ret = data.WriteInterfaceToken(TEST_SERVICE_INTERFACE_DESC);
+    ASSERT_EQ(ret, true);
+    ret = data.WriteUnpadBuffer(dataBuffer, sizeof(dataBuffer));
     ASSERT_TRUE(ret);
 
     OHOS::MessageOption option;
@@ -226,20 +239,21 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest006, Function | MediumTest | Level1
 
     auto servmgr = IServiceManager::Get();
     ASSERT_TRUE(servmgr != nullptr);
-
+    OsalMSleep(WAIT_LOAD_UNLOAD_TIME);
     auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
     ASSERT_TRUE(sampleService == nullptr);
 
     int ret = devmgr->LoadDevice(TEST_SERVICE_NAME);
     ASSERT_EQ(ret, HDF_SUCCESS);
-
+    OsalMSleep(WAIT_LOAD_UNLOAD_TIME);
     sampleService = servmgr->GetService(TEST_SERVICE_NAME);
     ASSERT_TRUE(sampleService != nullptr);
 
     OHOS::MessageParcel data;
     OHOS::MessageParcel reply;
     OHOS::MessageOption option;
-
+    ret = data.WriteInterfaceToken(TEST_SERVICE_INTERFACE_DESC);
+    ASSERT_EQ(ret, true);
     const char *newServName = "sample_driver_service2";
     ret = data.WriteCString(newServName);
     ASSERT_TRUE(ret);
@@ -252,6 +266,8 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest006, Function | MediumTest | Level1
 
     data.FlushBuffer();
     reply.FlushBuffer();
+    ret = data.WriteInterfaceToken(TEST_SERVICE_INTERFACE_DESC);
+    ASSERT_EQ(ret, true);
     data.WriteInt32(PAYLOAD_NUM);
     data.WriteInt32(PAYLOAD_NUM);
 
@@ -265,6 +281,8 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest006, Function | MediumTest | Level1
 
     data.FlushBuffer();
     reply.FlushBuffer();
+    ret = data.WriteInterfaceToken(TEST_SERVICE_INTERFACE_DESC);
+    ASSERT_EQ(ret, true);
     data.WriteCString(newServName);
 
     status = sampleService->SendRequest(SAMPLE_UNREGISTER_DEVICE, data, reply, option);
@@ -275,7 +293,7 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest006, Function | MediumTest | Level1
 
     ret = devmgr->UnloadDevice(TEST_SERVICE_NAME);
     ASSERT_EQ(ret, HDF_SUCCESS);
-
+    OsalMSleep(WAIT_LOAD_UNLOAD_TIME);
     sampleService = servmgr->GetService(TEST_SERVICE_NAME);
     ASSERT_TRUE(sampleService == nullptr);
 }
@@ -283,9 +301,7 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest006, Function | MediumTest | Level1
 class ServStatListener : public OHOS::HDI::ServiceManager::V1_0::ServStatListenerStub {
 public:
     using StatusCallback = std::function<void(const ServiceStatus &)>;
-    explicit ServStatListener(StatusCallback callback) : callback_(std::move(callback))
-    {
-    }
+    explicit ServStatListener(StatusCallback callback) : callback_(std::move(callback)) {}
     ~ServStatListener() = default;
     void OnReceive(const ServiceStatus &status) override
     {
@@ -296,31 +312,18 @@ private:
     StatusCallback callback_;
 };
 
-/**
-  * @tc.number: SUB_DriverSystem_ManagerService_0070
-  * @tc.name: Test service start status listener
-  * @tc.size: Medium
-  * @tc.level: level 1
-  */
-HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest007, Function | MediumTest | Level1)
+/*
+ * Test service start status listener
+ */
+void HdfServiceMangerHdiTest::TestServiceListenerStop(const sptr<IDeviceManager>& devmgr,
+    const sptr<IServiceManager>& servmgr)
 {
-    auto devmgr = IDeviceManager::Get();
-    ASSERT_TRUE(devmgr != nullptr);
-    devmgr->UnloadDevice(TEST_SERVICE_NAME);
-
-    auto servmgr = IServiceManager::Get();
-    ASSERT_TRUE(servmgr != nullptr);
-
-    auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
-    ASSERT_TRUE(sampleService == nullptr);
-
     std::string servInfo;
     uint16_t devClass;
     uint16_t servStatus;
     bool callbacked = false;
     ::OHOS::sptr<IServStatListener> listener
-        = new ServStatListener(
-            ServStatListener::StatusCallback([&](const ServiceStatus &status) {
+        = new ServStatListener(ServStatListener::StatusCallback([&](const ServiceStatus &status) {
                 HDF_LOGI("service status callback");
                 if (status.serviceName == std::string(TEST_SERVICE_NAME)) {
                     servInfo = status.info;
@@ -335,7 +338,8 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest007, Function | MediumTest | Level1
 
     int ret = devmgr->LoadDevice(TEST_SERVICE_NAME);
     ASSERT_EQ(ret, HDF_SUCCESS);
-    int count = 10;
+    constexpr int WAIT_COUNT = 300;
+    int count = WAIT_COUNT;
     while (!callbacked && count > 0) {
         OsalMSleep(1);
         count--;
@@ -349,7 +353,7 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest007, Function | MediumTest | Level1
     ret = devmgr->UnloadDevice(TEST_SERVICE_NAME);
     ASSERT_EQ(ret, HDF_SUCCESS);
 
-    count = 10;
+    count = WAIT_COUNT;
     while (!callbacked && count > 0) {
         OsalMSleep(1);
         count--;
@@ -377,16 +381,19 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest008, Function | MediumTest | Level1
 
     auto servmgr = IServiceManager::Get();
     ASSERT_TRUE(servmgr != nullptr);
-
+    OsalMSleep(WAIT_LOAD_UNLOAD_TIME);
     auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
     ASSERT_TRUE(sampleService == nullptr);
 
-    int ret = devmgr->LoadDevice(TEST_SERVICE_NAME);
-    ASSERT_EQ(ret, HDF_SUCCESS);
+    TestServiceListenerStop(devmgr, servmgr);
+}
 
-    sampleService = servmgr->GetService(TEST_SERVICE_NAME);
-    ASSERT_TRUE(sampleService != nullptr);
-
+/*
+ * Test service status listener update service info
+ */
+void HdfServiceMangerHdiTest::TestSampleService(sptr<IRemoteObject>& sampleService,
+    const sptr<IDeviceManager>& devmgr, const sptr<IServiceManager>& servmgr)
+{
     std::string servInfo;
     uint16_t devClass;
     uint16_t servStatus;
@@ -394,29 +401,32 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest008, Function | MediumTest | Level1
     ::OHOS::sptr<IServStatListener> listener
         = new ServStatListener(
             ServStatListener::StatusCallback([&](const ServiceStatus &status) {
-                if (status.serviceName == std::string(TEST_SERVICE_NAME)) {
+                if (status.serviceName == std::string(TEST_SERVICE_NAME) &&
+                    status.status == OHOS::HDI::ServiceManager::V1_0::SERVIE_STATUS_CHANGE) {
+                    HDF_LOGI("sample service status callback");
                     servInfo = status.info;
                     devClass = status.deviceClass;
                     servStatus = status.status;
                     callbacked = true;
                 }
             }));
-    constexpr int FIRST_WAIT = 20;
-    OsalMSleep(FIRST_WAIT); // skip callback on register
 
     int status = servmgr->RegisterServiceStatusListener(listener, DEVICE_CLASS_DEFAULT);
     ASSERT_EQ(status, HDF_SUCCESS);
-
+    constexpr int FIRST_WAIT = 20;
+    OsalMSleep(FIRST_WAIT); // skip callback on register
     OHOS::MessageParcel data;
     OHOS::MessageParcel reply;
     OHOS::MessageOption option;
+    bool res = data.WriteInterfaceToken(TEST_SERVICE_INTERFACE_DESC);
+    ASSERT_EQ(res, true);
     std::string info = "foo";
     data.WriteCString(info.data());
     callbacked = false;
     status = sampleService->SendRequest(SAMPLE_UPDATE_SERVIE, data, reply, option);
     ASSERT_EQ(status, HDF_SUCCESS);
-
-    int count = 10;
+    constexpr int WAIT_COUNT = 300;
+    int count = WAIT_COUNT;
     while (!callbacked && count > 0) {
         OsalMSleep(1);
         count--;
@@ -424,15 +434,39 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest008, Function | MediumTest | Level1
     ASSERT_TRUE(callbacked);
     ASSERT_EQ(devClass, DEVICE_CLASS_DEFAULT);
     ASSERT_EQ(servInfo, info);
-    ASSERT_EQ(servStatus, OHOS::HDI::ServiceManager::V1_0::SERVIE_STATUS_CHANGE);
-
-    ret = devmgr->UnloadDevice(TEST_SERVICE_NAME);
+    int ret = devmgr->UnloadDevice(TEST_SERVICE_NAME);
     ASSERT_EQ(ret, HDF_SUCCESS);
 
     status = servmgr->UnregisterServiceStatusListener(listener);
     ASSERT_EQ(status, HDF_SUCCESS);
 }
 
+/**
+  * @tc.number: SUB_DriverSystem_ManagerService_00900
+  * @tc.name: Test service loadDevice
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */
+HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest0090, Function | MediumTest | Level1)
+{
+    auto devmgr = IDeviceManager::Get();
+    ASSERT_TRUE(devmgr != nullptr);
+    devmgr->UnloadDevice(TEST_SERVICE_NAME);
+
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+    OsalMSleep(WAIT_LOAD_UNLOAD_TIME);
+    auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService == nullptr);
+
+    int ret = devmgr->LoadDevice(TEST_SERVICE_NAME);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    OsalMSleep(WAIT_LOAD_UNLOAD_TIME);
+    sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService != nullptr);
+
+    TestSampleService(sampleService, devmgr, servmgr);
+}
 /**
   * @tc.number: SUB_DriverSystem_ManagerService_0090
   * @tc.name: Test service status listener unregister
@@ -447,7 +481,7 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest009, Function | MediumTest | Level1
 
     auto servmgr = IServiceManager::Get();
     ASSERT_TRUE(servmgr != nullptr);
-
+    OsalMSleep(WAIT_LOAD_UNLOAD_TIME);
     auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
     ASSERT_TRUE(sampleService == nullptr);
 
@@ -459,7 +493,8 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest009, Function | MediumTest | Level1
         = new ServStatListener(
             ServStatListener::StatusCallback([&](const ServiceStatus &status) {
                 HDF_LOGI("service status callback");
-                if (status.serviceName == std::string(TEST_SERVICE_NAME)) {
+                if (status.serviceName == std::string(TEST_SERVICE_NAME) &&
+                    status.status == OHOS::HDI::ServiceManager::V1_0::SERVIE_STATUS_START) {
                     servInfo = status.info;
                     devClass = status.deviceClass;
                     servStatus = status.status;
@@ -473,7 +508,8 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest009, Function | MediumTest | Level1
     int ret = devmgr->LoadDevice(TEST_SERVICE_NAME);
     ASSERT_EQ(ret, HDF_SUCCESS);
 
-    int count = 10;
+    constexpr int WAIT_COUNT = 300;
+    int count = WAIT_COUNT;
     while (!callbacked && count > 0) {
         OsalMSleep(1);
         count--;
@@ -518,11 +554,12 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest010, Function | MediumTest | Level1
     OHOS::MessageParcel data;
     OHOS::MessageParcel reply;
     OHOS::MessageOption option;
-    std::unique_ptr<SharedMemQueue<SampleSmqElement>> smq
-        = std::make_unique<SharedMemQueue<SampleSmqElement>>(SMQ_TEST_QUEUE_SIZE, SmqType::SYNCED_SMQ);
+    std::unique_ptr<SharedMemQueue<SampleSmqElement>> smq =
+        std::make_unique<SharedMemQueue<SampleSmqElement>>(SMQ_TEST_QUEUE_SIZE, SmqType::SYNCED_SMQ);
     ASSERT_TRUE(smq->IsGood());
-
-    auto ret = smq->GetMeta()->Marshalling(data);
+    bool ret = data.WriteInterfaceToken(TEST_SERVICE_INTERFACE_DESC);
+    ASSERT_EQ(ret, true);
+    ret = smq->GetMeta()->Marshalling(data);
     ASSERT_TRUE(ret);
     data.WriteUint32(1);
 
@@ -558,13 +595,13 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest011, Function | MediumTest | Level1
     OHOS::MessageParcel data;
     OHOS::MessageParcel reply;
     OHOS::MessageOption option;
-    std::unique_ptr<SharedMemQueue<SampleSmqElement>> smq
-        = std::make_unique<SharedMemQueue<SampleSmqElement>>(SMQ_TEST_QUEUE_SIZE, SmqType::SYNCED_SMQ);
+    std::unique_ptr<SharedMemQueue<SampleSmqElement>> smq =
+        std::make_unique<SharedMemQueue<SampleSmqElement>>(SMQ_TEST_QUEUE_SIZE, SmqType::SYNCED_SMQ);
     ASSERT_TRUE(smq->IsGood());
-
+    bool ret = data.WriteInterfaceToken(TEST_SERVICE_INTERFACE_DESC);
+    ASSERT_EQ(ret, true);
     constexpr uint32_t ELEMENT_SIZE = 2;
-
-    auto ret = smq->GetMeta()->Marshalling(data);
+    ret = smq->GetMeta()->Marshalling(data);
     ASSERT_TRUE(ret);
 
     data.WriteUint32(ELEMENT_SIZE);
@@ -602,13 +639,13 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest012, Function | MediumTest | Level1
     OHOS::MessageParcel reply;
     OHOS::MessageOption option;
 
-    std::unique_ptr<SharedMemQueue<SampleSmqElement>> smq
-        = std::make_unique<SharedMemQueue<SampleSmqElement>>(SMQ_TEST_QUEUE_SIZE, SmqType::UNSYNC_SMQ);
+    std::unique_ptr<SharedMemQueue<SampleSmqElement>> smq =
+        std::make_unique<SharedMemQueue<SampleSmqElement>>(SMQ_TEST_QUEUE_SIZE, SmqType::UNSYNC_SMQ);
     ASSERT_TRUE(smq->IsGood());
-
+    bool ret = data.WriteInterfaceToken(TEST_SERVICE_INTERFACE_DESC);
+    ASSERT_EQ(ret, true);
     constexpr uint32_t ELEMENT_SIZE = 2;
-
-    auto ret = smq->GetMeta()->Marshalling(data);
+    ret = smq->GetMeta()->Marshalling(data);
     ASSERT_TRUE(ret);
     data.WriteUint32(ELEMENT_SIZE);
     auto status = sampleService->SendRequest(SAMPLE_TRANS_SMQ, data, reply, option);
@@ -659,7 +696,7 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest013, Function | MediumTest | Level1
 
     int status = servmgr->RegisterServiceStatusListener(listener, DEVICE_CLASS_DEFAULT);
     ASSERT_EQ(status, HDF_SUCCESS);
-    constexpr int WAIT_COUNT = 10;
+    constexpr int WAIT_COUNT = 100;
     int count = WAIT_COUNT;
     while (!sampleServiceStarted && count > 0) {
         OsalMSleep(1);

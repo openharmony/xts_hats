@@ -21,7 +21,7 @@ group("HatsHdfWifiTest") {
   } else {
     if (is_standard_system) {
       deps = [
-        "hdiService:HatsHdfWifiHdiServiceTest",
+        #"hdiService:HatsHdfWifiHdiServiceTest",
         "wifi:HatsHdfWifiHdiTest",
       ]
     }

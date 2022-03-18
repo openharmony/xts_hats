@@ -18,6 +18,9 @@ import(
 group("kernel") {
   testonly = true
   if (is_standard_system) {
-    deps = [ "open_posix_testsuite/conformance/interfaces_gn:${posix_interface_module}" ]
+    deps = [
+      "accesstokenid:HatsAccesstokenidTest",
+      "open_posix_testsuite/conformance/interfaces_gn:${posix_interface_module}",
+    ]
   }
 }

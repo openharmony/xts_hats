@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -408,7 +408,7 @@ HWTEST_F(AudioHdiRenderControlTest, SUB_Audio_HDI_RenderPause_0004, Function | M
 /**
 * @tc.name Test AudioRenderPause API via the render is paused after stoped.
 * @tc.number  SUB_Audio_HDI_RenderPause_0005
-* @tc.desc  Test AudioRenderPause interface, return -1 the render is paused after stoped.
+* @tc.desc  Test AudioRenderPause interface, return -1 the render is paused after stopped.
 */
 HWTEST_F(AudioHdiRenderControlTest, SUB_Audio_HDI_RenderPause_0005, Function | MediumTest | Level1)
 {

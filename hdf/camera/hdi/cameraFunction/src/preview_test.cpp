@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -155,7 +155,7 @@ HWTEST_F(PreviewTest, Camera_Preview_0040, TestSize.Level2)
 
 /**
   * @tc.name: Preview
-  * @tc.desc: Preview, CommitStreams without CreateStreams, expected fail.
+  * @tc.desc: Preview, CommitStreams without CreateStreams, expected failed.
   * @tc.size: MediumTest
   * @tc.type: Function
   */
@@ -214,7 +214,7 @@ HWTEST_F(PreviewTest, Camera_Preview_0062, TestSize.Level2)
 
 /**
   * @tc.name: Preview
-  * @tc.desc: CancelCapture without Create capture.
+  * @tc.desc: CancelCapture without Createcapture.
   * @tc.size: MediumTest
   * @tc.type: Function
   */
@@ -245,7 +245,7 @@ HWTEST_F(PreviewTest, Camera_Preview_0090, TestSize.Level2)
 
 /**
   * @tc.name: Preview
-  * @tc.desc: Release streams, then creatCapture.
+  * @tc.desc: Release streams, then createCapture.
   * @tc.size: MediumTest
   * @tc.type: Function
   */

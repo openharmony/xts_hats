@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -1233,7 +1233,7 @@ HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_RenderReqMmapBuffer_0002, Function | 
 * @tc.name  Test ReqMmapBuffer API via setting the incoming parameter reqSize is smaller than
             the size of actual audio file
 * @tc.number  SUB_Audio_HDI_RenderReqMmapBuffer_0003
-* @tc.desc  Test ReqMmapBuffer interface,return 0 if call ReqMmapBuffer interface sucessfully when setting the
+* @tc.desc  Test ReqMmapBuffer interface,return 0 if call ReqMmapBuffer interface successfully when setting the
             incoming parameter reqSize is smaller than the size of actual audio file
 */
 HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_RenderReqMmapBuffer_0003, Function | MediumTest | Level1)

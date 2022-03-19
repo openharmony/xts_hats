@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -269,7 +269,7 @@ void Test::StartStream(std::vector<Camera::StreamIntent> intents)
     if (rc == Camera::NO_ERROR) {
         std::cout << "==========[test log]GetStreamOperator success." << std::endl;
     } else {
-        std::cout << "==========[test log]GetStreamOperator fail, rc = " << rc << std::endl;
+        std::cout << "==========[test log]GetStreamOperator failed, rc = " << rc << std::endl;
     }
     streamInfo = std::make_shared<Camera::StreamInfo>();
     streamInfo_video = std::make_shared<Camera::StreamInfo>();
@@ -388,7 +388,7 @@ void Test::StartCapture(int streamId, int captureId, bool shutterCallback, bool 
     } else {
         std::cout << "==========[test log]check Capture: Capture fail, rc = " << rc << std::endl;
     }
-    sleep(1); // 1:Wait 1 seconds for the program to run
+    sleep(1); // 1:Wait 1 second for the program to run
 }
 
 void Test::StopStream(std::vector<int>& captureIds, std::vector<int>& streamIds)

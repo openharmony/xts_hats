@@ -1,7 +1,7 @@
 /*
- * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file expected in compliance with the License.
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -78,7 +78,7 @@ HWTEST_F(FlashlightTest, Camera_Flashlight_0003, Function | MediumTest | Level3)
     std::cout << "==========[test log]Turn on/off the flashlight for 10 times,";
     std::cout <<" not the camera, success." << std::endl;
     for (int i = 0; i < 10; i++) {
-        if (i%2 == 0) {
+        if (i % 2 == 0) {
             Test_->status = true;
         } else {
             Test_->status = false;

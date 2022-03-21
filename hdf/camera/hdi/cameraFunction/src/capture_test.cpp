@@ -1,7 +1,7 @@
 /*
- * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file expected in compliance with the License.
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -58,7 +58,7 @@ HWTEST_F(CaptureTest, Camera_Capture_0001, Function | MediumTest | Level1)
 
 /**
   * @tc.name: preview and capture
-  * @tc.desc: Preview + capture, then cloase camera, and preview + capture again.
+  * @tc.desc: Preview + capture, then close camera, and preview + capture again.
   * @tc.size: MediumTest
   * @tc.type: Function
   */
@@ -166,7 +166,7 @@ HWTEST_F(CaptureTest, Camera_Capture_0004, Function | MediumTest | Level1)
 
 /**
   * @tc.name: video cannot capture
-  * @tc.desc: Preview + video, then capture a photo, expected not support.
+  * @tc.desc: Preview + video, then capture a photo, expected not supported.
   * @tc.size: MediumTest
   * @tc.type: Function
   */
@@ -208,7 +208,7 @@ HWTEST_F(CaptureTest, Camera_Capture_0005, Function | MediumTest | Level2)
 #endif
     streamInfo_capture->bufferQueue_->SetQueueSize(8);
     Test_->consumerMap_[Camera::STILL_CAPTURE] = capture_consumer;
-    // Query whether the IsStreamsSupported interface supports
+    // Query whether the IsStreamsSupported interface is supported
     Camera::StreamSupportType pType;
     std::shared_ptr<CameraStandard::CameraMetadata> modeSetting =
         std::make_shared<CameraStandard::CameraMetadata>(2, 128);
@@ -255,8 +255,7 @@ HWTEST_F(CaptureTest, Camera_Capture_0006, Function | MediumTest | Level1)
 
 /**
   * @tc.name: preview and capture
-  * @tc.desc: Commit 2 streams together, Preview and still_capture streams, isStreaming is false,
-  * Do not stop the stream, multiple single capture
+  * @tc.desc: Commit 2 streams together, Preview and still_capture streams, isStreaming is false.
   * @tc.size: MediumTest
   * @tc.type: Function
   */

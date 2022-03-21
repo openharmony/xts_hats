@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,7 +17,7 @@
  * @addtogroup Audio
  * @{
  *
- * @brief Defines audio-related APIs, including custom data types and functions for capture drivers function.
+ * @brief Defines audio-related APIs, including custom data types and functions for capture drivers 
  * accessing a driver adapter, and capturing audios.
  *
  * @since 1.0
@@ -153,7 +153,7 @@ int32_t AudioHdiCaptureAttrTest::AudioCaptureStart(const string path, struct Aud
 /**
 * @tc.name  Test AudioCaptureSetSampleAttributes API via legal input.
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0001
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
+* @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
 *    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
 *    attrs.sampleRate = 8000;
@@ -187,7 +187,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 /**
 * @tc.name  Test AudioCaptureSetSampleAttributes API via legal input.
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0002
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
+* @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
 *    attrs.format = AUDIO_FORMAT_PCM_24_BIT;
 *    attrs.sampleRate = 11025;
@@ -221,7 +221,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 /**
 * @tc.name  Test AudioCaptureSetSampleAttributes API via legal input.
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0003
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
+* @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
 *    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
 *    attrs.sampleRate = 22050;
@@ -255,7 +255,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 /**
 * @tc.name  Test AudioCaptureSetSampleAttributes API via legal input.
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0004
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
+* @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
 *    attrs.format = AUDIO_FORMAT_PCM_24_BIT;
 *    attrs.sampleRate = 32000;
@@ -289,7 +289,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 /**
 * @tc.name  Test AudioCaptureSetSampleAttributes API via legal input.
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0005
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
+* @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
 *    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
 *    attrs.sampleRate = 44100;
@@ -323,7 +323,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 /**
 * @tc.name  Test AudioCaptureSetSampleAttributes API via legal input.
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0006
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
+* @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_COMMUNICATION;
 *    attrs.format = AUDIO_FORMAT_PCM_24_BIT;
 *    attrs.sampleRate = 48000;
@@ -357,7 +357,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 /**
 * @tc.name  Test AudioCaptureSetSampleAttributes API via setting the capture is empty .
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0007
-* @tc.desc   Test AudioCaptureSetSampleAttributes interface, return -1 if the capture is empty.
+* @tc.desc   Test AudioCaptureSetSampleAttributes , and check if -1 is returned when the parameter capture is empty
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0007, Function | MediumTest | Level1)
 {
@@ -383,7 +383,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 /**
 * @tc.name  Test AudioCaptureSetSampleAttributes API via legal input.
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0008
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
+* @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
 *    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
 *    attrs.sampleRate = 12000;
@@ -418,7 +418,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 /**
 * @tc.name  Test AudioCaptureSetSampleAttributes API via legal input.
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0009
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
+* @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
 *    attrs.format = AUDIO_FORMAT_PCM_24_BIT;
 *    attrs.sampleRate = 16000;
@@ -453,7 +453,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 /**
 * @tc.name  Test AudioCaptureSetSampleAttributes API via legal input.
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0010
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
+* @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
 *    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
 *    attrs.sampleRate = 24000;
@@ -488,7 +488,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 /**
 * @tc.name  Test AudioCaptureSetSampleAttributes API via legal input.
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0011
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
+* @tc.desc Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
 *    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
 *    attrs.sampleRate = 64000;
@@ -523,7 +523,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 /**
 * @tc.name  Test AudioCaptureSetSampleAttributes API via legal input.
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0012
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
+* @tc.desc Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
 *    attrs.format = AUDIO_FORMAT_PCM_24_BIT;
 *    attrs.sampleRate = 96000;
@@ -558,7 +558,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 /**
 * @tc.name  Test AudioCaptureSetSampleAttributes API via illegal input.
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0013
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
+* @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
 *    attrs.format = AUDIO_FORMAT_PCM_16;
 *    attrs.sampleRate = 0xFFFFFFFFu;
@@ -585,7 +585,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 /**
 * @tc.name  Test AudioCaptureSetSampleAttributes API via illegal input.
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0014
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
+* @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
 *    attrs.format = AUDIO_FORMAT_PCM_8/32_BIT/AAC_MAIN;
 *    attrs.sampleRate = 8000/11025/22050;
@@ -622,7 +622,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 /**
 * @tc.name  Test AudioCaptureSetSampleAttributes API via illegal input.
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0015
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
+* @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
 *    attrs.format = AUDIO_FORMAT_AAC_LC/LD/ELD;
 *    attrs.sampleRate = 32000/44100/48000;
@@ -659,7 +659,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 /**
 * @tc.name  Test AudioCaptureSetSampleAttributes API via illegal input.
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0016
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
+* @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
 *    attrs.format = AUDIO_FORMAT_AAC_HE_V1/V2
 *    attrs.sampleRate = 8000/44100;
@@ -691,7 +691,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 /**
 * @tc.name  Test AudioCaptureSetSampleAttributes API via illegal input.
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0017
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
+* @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
 *    attrs.format = AUDIO_FORMAT_PCM_16_BIT
 *    attrs.sampleRate = 8000;
@@ -718,7 +718,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 /**
 * @tc.name  Test AudioCaptureGetSampleAttributes API via legal input.
 * @tc.number  SUB_Audio_HDI_AudioCaptureGetSampleAttributes_0001
-* @tc.desc  Test AudioCaptureGetSampleAttributes ,the setting parameters are as follows.
+* @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
 *    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
 *    attrs.sampleRate = 8000;
@@ -754,7 +754,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureGetSampleAttributes_
 /**
 * @tc.name  Test AudioCaptureGetSampleAttributes API via setting the capture is empty .
 * @tc.number  SUB_Audio_HDI_AudioCaptureGetSampleAttributes_0002
-* @tc.desc   Test AudioCaptureGetSampleAttributes interface, return -1 if the capture is empty.
+* @tc.desc   Test AudioCaptureGetSampleAttributes , and check if -1 is returned when the parameter capture is empty.
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureGetSampleAttributes_0002, Function | MediumTest | Level1)
 {
@@ -780,7 +780,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureGetSampleAttributes_
 /**
 * @tc.name  Test AudioCaptureGetFrameSize API via legal input
 * @tc.number  SUB_Audio_hdi_CaptureGetFrameSize_0001
-* @tc.desc  test AudioCaptureGetFrameSize interface, return 0 is call successfully.
+* @tc.desc  Test AudioCaptureGetFrameSize , and check if 0 is returned when the API is called successfully.
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0001, Function | MediumTest | Level1)
 {
@@ -802,7 +802,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0001, Functi
 /**
 * @tc.name  Test AudioCaptureGetFrameSize API via setting the parameter handle is nullptr
 * @tc.number  SUB_Audio_hdi_CaptureGetFrameSize_0002
-* @tc.desc  test AudioCaptureGetFrameSize interface, return -1 if the parameter handle is nullptr.
+* @tc.desc Test AudioCaptureGetFrameSize API , and check if -1 is returned when the parameter handle is nullptr.
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0002, Function | MediumTest | Level1)
 {
@@ -825,7 +825,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0002, Functi
 /**
 * @tc.name  Test AudioCaptureGetFrameSize API via setting the parameter size is nullptr
 * @tc.number  SUB_Audio_hdi_CaptureGetFrameSize_0003
-* @tc.desc  test AudioCaptureGetFrameSize interface, return -1 if the parameter size is nullptr.
+* @tc.desc Test AudioCaptureGetFrameSize API, and check if -1 is returned when the parameter size is nullptr.
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0003, Function | MediumTest | Level1)
 {
@@ -847,7 +847,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0003, Functi
 /**
     * @tc.name  Test CaptureGetFrameSize API via define format to different values
     * @tc.number  SUB_Audio_hdi_CaptureGetFrameSize_0004
-    * @tc.desc  Test CaptureGetFrameSize interface,return 0 if get framesize define format as different values
+    * @tc.desc  Test AudioCaptureGetFrameSize API, and check if 0 is returned when the parameter format is set to  different values
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0004, Function | MediumTest | Level1)
 {
@@ -881,7 +881,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0004, Functi
 /**
     * @tc.name  Test CaptureGetFrameSize API via define sampleRate to different values
     * @tc.number  SUB_Audio_hdi_CaptureGetFrameSize_0005
-    * @tc.desc  Test CaptureGetFrameSize interface,return 0 if get framesize define sampleRate as different values
+    * @tc.desc  Test AudioCaptureGetFrameSize API, and check if 0 is returned when sampleRate is set to different values
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0005, Function | MediumTest | Level1)
 {
@@ -915,7 +915,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0005, Functi
 /**
     * @tc.name  Test CaptureGetFrameSize API via define channelCount to different values
     * @tc.number  SUB_Audio_hdi_CaptureGetFrameSize_0006
-    * @tc.desc  Test CaptureGetFrameSize interface,return 0 if get framesize define channelCount as different values
+    * @tc.desc  Test AudioCaptureGetFrameSize API, and check if 0 is returned when channelCount is set to different values
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0006, Function | MediumTest | Level1)
 {
@@ -949,7 +949,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0006, Functi
 /**
     * @tc.name  Test CaptureGetFrameSize API via define sampleRate to different value
     * @tc.number  SUB_Audio_hdi_CaptureGetFrameSize_0007
-    * @tc.desc  Test CaptureGetFrameSize interface,return 0 if get framesize define sampleRate as different values
+    * @tc.desc  Test AudioCaptureGetFrameSize API, and check if 0 is returned when sampleRate is set to different values
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0007, Function | MediumTest | Level1)
 {
@@ -983,7 +983,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0007, Functi
 /**
 * @tc.name  Test AudioCaptureGetFrameCount API via legal input
 * @tc.number  SUB_Audio_hdi_CaptureGetFrameCount_0001
-* @tc.desc  test AudioCaptureGetFrameCount interface, return 0 if the FrameCount is called after creating the object.
+* @tc.desc  Test the AudioCaptureGetFrameCount API, and check if 0 is returned when the API  is called after creating the object.
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0001, Function | MediumTest | Level1)
 {
@@ -1006,7 +1006,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0001, Funct
 /**
 * @tc.name  Test AudioCaptureGetFrameCount API via legal input in the difference scene
 * @tc.number  SUB_Audio_hdi_CaptureGetFrameCount_0001
-* @tc.desc  test AudioCaptureGetFrameCount interface, return 0 if the GetFrameCount is called after started.
+* @tc.desc  Test the AudioCaptureGetFrameCount API, and check if 0 is returned when the API is called after being started.
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0002, Function | MediumTest | Level1)
 {
@@ -1033,7 +1033,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0002, Funct
 /**
 * @tc.name  Test AudioCaptureGetFrameCount API via setting the parameter handle is nullptr
 * @tc.number  SUB_Audio_hdi_CaptureGetFrameCount_0003
-* @tc.desc  test AudioCaptureGetFrameCount interface, return -1 if the parameter handle is nullptr.
+* @tc.desc   Test the AudioCaptureGetFrameCount API, and check if -1 is returned when the parameter handle is nullptr.
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0003, Function | MediumTest | Level1)
 {
@@ -1057,7 +1057,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0003, Funct
 /**
 * @tc.name  Test AudioCaptureGetFrameCount API via setting the parameter handle is nullptr
 * @tc.number  SUB_Audio_hdi_CaptureGetFrameCount_0004
-* @tc.desc  test AudioCaptureGetFrameCount interface, return -1 if the parameter handle is nullptr.
+* @tc.desc   Test the AudioCaptureGetFrameCount API, and check if -1 is returned when the parameter handle is nullptr.
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0004, Function | MediumTest | Level1)
 {
@@ -1079,7 +1079,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0004, Funct
 /**
     * @tc.name  Test CaptureGetFrameCount API via define channelCount to different value
     * @tc.number  SUB_Audio_hdi_CaptureGetFrameCount_0005
-    * @tc.desc  Test CaptureGetFrameCount interface,return 0 if get framesize define channelCount as different values
+    * @tc.desc  Test the AudioCaptureGetFrameCount API, and check if 0 is returned when channelCount is set to different values
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0005, Function | MediumTest | Level1)
 {
@@ -1117,7 +1117,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0005, Funct
 /**
     * @tc.name  Test CaptureGetFrameCount API via define format to different value
     * @tc.number  SUB_Audio_hdi_CaptureGetFrameCount_0006
-    * @tc.desc  Test CaptureGetFrameCount interface,return 0 if get framesize define format as different values
+    * @tc.desc Test the AudioCaptureGetFrameCount API, and check if 0 is returned when format is set to different values
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0006, Function | MediumTest | Level1)
 {
@@ -1155,7 +1155,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0006, Funct
 /**
     * @tc.name  Test CaptureGetFrameCount API via define channelCount to different value
     * @tc.number  SUB_Audio_hdi_CaptureGetFrameCount_0007
-    * @tc.desc  Test CaptureGetFrameCount interface,return 0 if get framesize define channelCount to different values
+    * @tc.desc  Test the AudioCaptureGetFrameCount API, and check if 0 is returned when channelCount is set to different values
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0007, Function | MediumTest | Level1)
 {
@@ -1193,7 +1193,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0007, Funct
 /**
     * @tc.name  Test CaptureGetFrameCount API via define format to different value
     * @tc.number  SUB_Audio_hdi_CaptureGetFrameCount_0008
-    * @tc.desc  Test CaptureGetFrameCount interface,return 0 if get framesize define format as different values
+    * @tc.desc  Test the AudioCaptureGetFrameCount API, and check if 0 is returned when format is set to different values
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0008, Function | MediumTest | Level1)
 {
@@ -1231,7 +1231,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0008, Funct
 /**
     * @tc.name  Test CaptureGetCurrentChannelId API via legal input
     * @tc.number  SUB_Audio_HDI_RenderGetCurrentChannelId_0001
-    * @tc.desc  Test GetCurrentChannelId, return 0 if the default CurrentChannelId is obtained successfully
+    * @tc.desc Test the GetCurrentChannelId API, and check if 0 is returned when the default CurrentChannelId is obtained successfully
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureGetCurrentChannelId_0001, Function | MediumTest | Level1)
 {
@@ -1255,7 +1255,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureGetCurrentChannelId_0001,
 /**
     * @tc.name  Test GetCurrentChannelId API via getting channelId to 1 and set channelCount to 1
     * @tc.number  SUB_Audio_HDI_CaptureGetCurrentChannelId_0002
-    * @tc.desc  Test GetCurrentChannelId interface,return 0 if get channelId to 1 and set channelCount to 1
+    * @tc.desc  Test the GetCurrentChannelId API, and check if 0 is returned when channelId is set to 1 and channelCount is set to 1
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureGetCurrentChannelId_0002, Function | MediumTest | Level1)
 {
@@ -1288,7 +1288,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureGetCurrentChannelId_0002,
 /**
     * @tc.name  Test GetCurrentChannelId API via CurrentChannelId is obtained after started
     * @tc.number  SUB_Audio_HDI_CaptureGetCurrentChannelId_0003
-    * @tc.desc  Test GetCurrentChannelId interface, return 0 if CurrentChannelId is obtained after started
+    * @tc.desc  Test the GetCurrentChannelId API, and check if 0 is returned when CurrentChannelId is obtained 
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureGetCurrentChannelId_0003, Function | MediumTest | Level1)
 {
@@ -1315,7 +1315,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureGetCurrentChannelId_0003,
 /**
     * @tc.name  Test GetCurrentChannelId API via setting the parameter capture is nullptr
     * @tc.number  SUB_Audio_HDI_RenderGetCurrentChannelId_0004
-    * @tc.desc  Test GetCurrentChannelId interface,return -1 if set the parameter capture is nullptr
+    * @tc.desc   Test the GetCurrentChannelId API, and check if -1 is returned when the parameter capture is nullptr
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureGetCurrentChannelId_0004, Function | MediumTest | Level1)
 {
@@ -1338,7 +1338,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureGetCurrentChannelId_0004,
 /**
     * @tc.name  Test CaptureGetCurrentChannelId API via setting the parameter channelId is nullptr
     * @tc.number  SUB_Audio_HDI_RenderGetCurrentChannelId_0005
-    * @tc.desc  Test CaptureGetCurrentChannelId interface, return -1 if setting the parameter channelId is nullptr
+    * @tc.desc  Test the GetCurrentChannelId API, and check if -1 is returned when the parameter channelId is nullptr
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureGetCurrentChannelId_0005, Function | MediumTest | Level1)
 {
@@ -1361,7 +1361,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureGetCurrentChannelId_0005,
 /**
     * @tc.name  Test CaptureSetExtraParams API via setting ExtraParams during playback
     * @tc.number  SUB_Audio_HDI_CaptureSetExtraParams_0001
-    * @tc.desc  Test CaptureSetExtraParams interface,return 0 if the ExtraParams is set during playback
+    * @tc.desc Test the CaptureSetExtraParams API,and check if -1 is returned when  ExtraParams is set during playback
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureSetExtraParams_0001, Function | MediumTest | Level1)
 {
@@ -1403,7 +1403,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureSetExtraParams_0001, Func
 /**
     * @tc.name  Test CaptureSetExtraParams API via setting some parameters after playing
     * @tc.number  SUB_Audio_HDI_CaptureSetExtraParams_0002
-    * @tc.desc  Test CaptureSetExtraParams interface,return 0 if some parameters is set after playing
+    * @tc.desc  Test the CaptureSetExtraParams API,and check if 0 is returned when some parameters are set  after media playback
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureSetExtraParams_0002, Function | MediumTest | Level1)
 {
@@ -1461,7 +1461,7 @@ attr-sampling-rate=48000";
 /**
     * @tc.name  Test CaptureSetExtraParams API via setting keyvaluelist to a value outside the range
     * @tc.number  SUB_Audio_HDI_CaptureSetExtraParams_0003
-    * @tc.desc  Test CaptureSetExtraParams interface,return -1 if the Keyvaluelist is a value out of range
+    * @tc.desc  Test the CaptureSetExtraParams API,and check if -1 is returned when Keyvaluelist is set to a value out of the value range
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureSetExtraParams_0003, Function | MediumTest | Level1)
 {
@@ -1483,7 +1483,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureSetExtraParams_0003, Func
 /**
     * @tc.name  Test CaptureSetExtraParams API via adding parameters to keyvaluelist
     * @tc.number  SUB_Audio_HDI_CaptureSetExtraParams_0004
-    * @tc.desc  Test CaptureSetExtraParams interface,return -1 if adding parameters to keyvaluelist
+    * @tc.desc  Test the CaptureSetExtraParams API,and check if -1 is returned when parameters are added to keyvaluelist.
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureSetExtraParams_0004, Function | MediumTest | Level1)
 {
@@ -1507,7 +1507,7 @@ attr-para=abc";
     * @tc.name  Test CaptureSetExtraParams API via setting ExtraParams When the key is the same and the value is
     different
     * @tc.number  SUB_Audio_HDI_CaptureSetExtraParams_0005
-    * @tc.desc  Test CaptureSetExtraParams interface,return 0 if set ExtraParams When the key is the same and the value
+    * @tc.desc   Test the CaptureSetExtraParams API,and check if 0 is returned when two keys with the same name but different values are set.
     is different
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureSetExtraParams_0005, Function | MediumTest | Level1)
@@ -1539,7 +1539,7 @@ attr-sampling-rate=48000";
 /**
     * @tc.name  Test CaptureSetExtraParams API via setting the parameter in keyvaluelist as an abnormal value
     * @tc.number  SUB_Audio_HDI_CaptureSetExtraParams_0006
-    * @tc.desc  Test CaptureSetExtraParams interface,return -1 if set the parameter in keyvaluelist as an abnormal value
+    * @tc.desc   Test the CaptureSetExtraParams API,and check if -1 is returned when the parameter in keyvaluelist is set to an invalid value
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureSetExtraParams_0006, Function | MediumTest | Level1)
 {
@@ -1573,7 +1573,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureSetExtraParams_0006, Func
 /**
     * @tc.name  Test CaptureSetExtraParams API via setting the parameter render is nullptr
     * @tc.number  SUB_Audio_HDI_CaptureSetExtraParams_0007
-    * @tc.desc  Test CaptureSetExtraParams interface,return -1 if set the parameter render is nullptr
+    * @tc.desc   Test the CaptureSetExtraParams API,and check if -1 is returned when  the parameter render is nullptr
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureSetExtraParams_0007, Function | MediumTest | Level1)
 {
@@ -1596,7 +1596,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureSetExtraParams_0007, Func
 /**
     * @tc.name  Test CaptureSetExtraParams API via setting the format of ExtraParams is nullptr
     * @tc.number  SUB_Audio_HDI_CaptureSetExtraParams_0008
-    * @tc.desc  Test CaptureSetExtraParams interface,return -1 if set the format of ExtraParams is nullptr
+    * @tc.desc  Test the CaptureSetExtraParams API,and check if -1 is returned when the parameter format  is nullptr
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureSetExtraParams_0008, Function | MediumTest | Level1)
 {
@@ -1618,7 +1618,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureSetExtraParams_0008, Func
 /**
     * @tc.name  Test CaptureGetExtraParams API via legal input
     * @tc.number  SUB_Audio_HDI_CaptureGetExtraParams_0001
-    * @tc.desc  Test CaptureGetExtraParams interface,return 0 if the RenderGetExtraParams was obtained successfully
+    * @tc.desc  Test the CaptureGetExtraParams  API,and check if 0 is returned when  RenderGetExtraParams is  obtained successfully
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureGetExtraParams_0001, Function | MediumTest | Level1)
 {
@@ -1664,7 +1664,7 @@ attr-sampling-rate=48000";
 /**
     * @tc.name  Test CaptureGetExtraParams API via setting the parameter render is nullptr
     * @tc.number  SUB_Audio_HDI_CaptureGetExtraParams_0002
-    * @tc.desc  Test CaptureGetExtraParams interface,return 0 if set the parameter render is nullptr
+    * @tc.desc   Test the CaptureGetExtraParams  API,and check if 0 is returned when the parameter render is nullptr
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureGetExtraParams_0002, Function | MediumTest | Level1)
 {
@@ -1691,7 +1691,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureGetExtraParams_0002, Func
 /**
     * @tc.name  Test CaptureGetExtraParams API via setting listlength to be less than the actual length
     * @tc.number  SUB_Audio_HDI_CaptureGetExtraParams_0003
-    * @tc.desc  Test CaptureGetExtraParams interface,return 0 if set listlength to be less than the actual length
+    * @tc.desc  Test the CaptureGetExtraParams API,and check if 0 is returned when listlength is set to a value less than the actual length
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureGetExtraParams_0003, Function | MediumTest | Level1)
 {
@@ -1717,7 +1717,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureGetExtraParams_0003, Func
 /**
     * @tc.name  Test CaptureGetExtraParams API via setting listlenth equal to the actual length
     * @tc.number  SUB_Audio_HDI_CaptureGetExtraParams_0004
-    * @tc.desc  Test CaptureGetExtraParams interface,return 0 if set listlenth equal to the actual length
+    * @tc.desc  Test the CaptureGetExtraParams API,and check if 0 is returned when listlenth is set to a value equal to the actual length
 */
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureGetExtraParams_0004, Function | MediumTest | Level1)
 {

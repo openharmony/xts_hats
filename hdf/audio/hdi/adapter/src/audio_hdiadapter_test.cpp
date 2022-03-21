@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -131,7 +131,7 @@ void AudioHdiAdapterTest::TearDown(void) {}
 /**
 * @tc.name  Test GetAllAdapters API via legal input
 * @tc.number  SUB_Audio_HDI_GetAllAdapters_0001
-* @tc.desc  test GetAllAdapters interface，Returns 0 if the list is obtained successfully
+* @tc.desc   Test the GetAllAdapters API, and check if 0 is returned when the list of adapters is obtained successfully
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_GetAllAdapters_0001, Function | MediumTest | Level1)
 {
@@ -150,7 +150,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_GetAllAdapters_0001, Function | Medi
 /**
 * @tc.name  Test GetAllAdapters API via setting the incoming parameter manager is nullptr
 * @tc.number  SUB_Audio_HDI_GetAllAdapters_0002
-* @tc.desc  test GetAllAdapters interface，Returns -1 if the incoming parameter manager is nullptr
+* @tc.desc  Test the GetAllAdapters API, and check if -1 is returned when the input parameter manager is nullptr
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_GetAllAdapters_0002, Function | MediumTest | Level1)
 {
@@ -169,7 +169,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_GetAllAdapters_0002, Function | Medi
 /**
 * @tc.name  Test GetAllAdapters API via setting the incoming parameter descs is nullptr
 * @tc.number  SUB_Audio_HDI_GetAllAdapters_0003
-* @tc.desc  test GetAllAdapters interface，Returns -1 if the incoming parameter descs is nullptr
+* @tc.desc  Test the GetAllAdapters API, and check if -1 is returned when the input parameter descs is nullptr
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_GetAllAdapters_0003, Function | MediumTest | Level1)
 {
@@ -187,7 +187,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_GetAllAdapters_0003, Function | Medi
 /**
 * @tc.name  Test GetAllAdapters API via setting the incoming parameter size is nullptr
 * @tc.number  SUB_Audio_HDI_GetAllAdapters_0004
-* @tc.desc  test GetAllAdapters interface，Returns -1 if the incoming parameter size is nullptr
+* @tc.desc  Test the GetAllAdapters API, and check if -1 is returned when the input parameter size is nullptr
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_GetAllAdapters_0004, Function | MediumTest | Level1)
 {
@@ -205,7 +205,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_GetAllAdapters_0004, Function | Medi
 /**
 * @tc.name  Test LoadAdapter API via legal input
 * @tc.number  SUB_Audio_HDI_LoadAdapter_0001
-* @tc.desc  test LoadAdapter interface，Returns 0 if the driver is loaded successfully
+* @tc.desc  Test the LoadAdapter API, and check if -1 is returned when driver is loaded successfully
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_LoadAdapter_0001, Function | MediumTest | Level1)
 {
@@ -238,7 +238,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_LoadAdapter_0001, Function | MediumT
 /**
 * @tc.name  Test LoadAdapter API via changing the adapterName of incoming parameter desc
 * @tc.number  SUB_Audio_HDI_LoadAdapter_0002
-* @tc.desc  test LoadAdapter interface，Returns -1 if the adapterName of incoming parameter desc is not support
+* @tc.desc Test the LoadAdapter API, and check if -1 is returned when adapterName of the input parameter desc is not supported
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_LoadAdapter_0002, Function | MediumTest | Level1)
 {
@@ -265,7 +265,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_LoadAdapter_0002, Function | MediumT
 /**
 * @tc.name  Test LoadAdapter API via setting the adapterName of incoming parameter desc  is illegal
 * @tc.number  SUB_Audio_HDI_LoadAdapter_0003
-* @tc.desc  test LoadAdapter interface，Returns -1 if the adapterName of incoming parameter desc is illegal
+* @tc.desc   Test the LoadAdapter API, and check if -1 is returned when adapterName of the input parameter desc is illegal
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_LoadAdapter_0003, Function | MediumTest | Level1)
 {
@@ -288,7 +288,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_LoadAdapter_0003, Function | MediumT
 /**
 * @tc.name  Test LoadAdapter API via setting the adapterName of incoming parameter manager is nullptr
 * @tc.number  SUB_Audio_HDI_LoadAdapter_0004
-* @tc.desc  test LoadAdapter interface，Returns -1 if the incoming parameter manager is nullptr
+* @tc.desc  Test the LoadAdapter API, and check if -1 is returned when the input parameter manager is nullptr
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_LoadAdapter_0004, Function | MediumTest | Level1)
 {
@@ -313,7 +313,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_LoadAdapter_0004, Function | MediumT
 /**
 * @tc.name  Test LoadAdapter API via setting the adapterName of incoming parameter desc is nullptr
 * @tc.number  SUB_Audio_HDI_LoadAdapter_0005
-* @tc.desc  test LoadAdapter interface，Returns -1 if the incoming parameter desc is nullptr
+* @tc.desc   Test the LoadAdapter API, and check if -1 is returned when the input parameter desc is nullptr 
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_LoadAdapter_0005, Function | MediumTest | Level1)
 {
@@ -332,7 +332,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_LoadAdapter_0005, Function | MediumT
 /**
 * @tc.name  Test LoadAdapter API via setting the adapterName of incoming parameter adapter is nullptr
 * @tc.number  SUB_Audio_HDI_LoadAdapter_0006
-* @tc.desc  test LoadAdapter interface，Returns -1 if the incoming parameter adapter is nullptr
+* @tc.desc  Test the LoadAdapter API, and check if -1 is returned when the input parameter adapter is nullptr            i
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_LoadAdapter_0006, Function | MediumTest | Level1)
 {
@@ -355,7 +355,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_LoadAdapter_0006, Function | MediumT
 /**
 * @tc.name  Test AudioAdapterInitAllPorts API via legal input.
 * @tc.number  SUB_Audio_HDI_AdapterInitAllPorts_0001
-* @tc.desc  Test AudioAdapterInitAllPorts interface, return 0 if the ports is initialize successfully.
+* @tc.desc  Test the AudioAdapterInitAllPorts API, and check if 0 is returned when then ports are initialized successfully.                   
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterInitAllPorts_0001, Function | MediumTest | Level1)
 {
@@ -376,7 +376,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterInitAllPorts_0001, Function |
 /**
 * @tc.name  Test AudioAdapterInitAllPorts API when loads two adapters.
 * @tc.number  SUB_Audio_HDI_AdapterInitAllPorts_0002
-* @tc.desc  Test AudioAdapterInitAllPorts interface, return 0 if loads two adapters successfully.
+* @tc.desc  Test the AudioAdapterInitAllPorts API, and check if 0 is returned when two adapters are loaded successfully.
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterInitAllPorts_0002, Function | MediumTest | Level1)
 {
@@ -410,7 +410,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterInitAllPorts_0002, Function |
 /**
 * @tc.name  Test AudioAdapterInitAllPorts API when the parameter adapter is empty.
 * @tc.number  SUB_Audio_HDI_AdapterInitAllPorts_0003
-* @tc.desc  Test AudioAdapterInitAllPorts API, return -1 if the parameter adapter is empty.
+* @tc.desc  Test the AudioAdapterInitAllPorts API, and check if -1 is returned when the parameter adapter is empty.
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterInitAllPorts_0003, Function | MediumTest | Level1)
 {
@@ -432,7 +432,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterInitAllPorts_0003, Function |
 /**
 * @tc.name  Test AudioAdapterGetPortCapability API when the PortType is PORT_OUT.
 * @tc.number  SUB_Audio_HDI_AdapterGetPortCapability_0001
-* @tc.desc  Test AudioAdapterGetPortCapability,return 0 if PortType is PORT_OUT.
+* @tc.desc  Test the AudioAdapterGetPortCapability API,and check if 0 is returned when PortType is PORT_OUT.
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPortCapability_0001, Function | MediumTest | Level1)
 {
@@ -466,7 +466,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPortCapability_0001, Funct
 /**
 * @tc.name  Test AudioAdapterGetPortCapability API when the PortType is PORT_IN.
 * @tc.number  SUB_Audio_HDI_AdapterGetPortCapability_0002
-* @tc.desc  Test AudioAdapterGetPortCapability,return 0 if PortType is PORT_IN.
+* @tc.desc  Test the AudioAdapterGetPortCapability API,and check if 0 is returned when  PortType is PORT_IN.
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPortCapability_0002, Function | MediumTest | Level1)
 {
@@ -491,7 +491,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPortCapability_0002, Funct
 /**
 * @tc.name  Test AudioAdapterGetPortCapability API when the PortType is PORT_OUT_IN.
 * @tc.number  SUB_Audio_HDI_AdapterGetPortCapability_0003
-* @tc.desc  Test AudioAdapterGetPortCapability,return 0 if PortType is PORT_OUT_IN.
+* @tc.desc   Test the AudioAdapterGetPortCapability API,and check if 0 is returned when PortType is PORT_OUT_IN.
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPortCapability_0003, Function | MediumTest | Level1)
 {
@@ -515,7 +515,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPortCapability_0003, Funct
 /**
 * @tc.name  Test AudioAdapterGetPortCapability API, when the parameter adapter is empty.
 * @tc.number  SUB_Audio_HDI_AdapterGetPortCapability_0004
-* @tc.desc  Test AudioAdapterGetPortCapability, return -1 if the parameter adapter is empty.
+* @tc.desc   Test the AudioAdapterGetPortCapability API,and check if -1 is returned when  the parameter adapter is empty.
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPortCapability_0004, Function | MediumTest | Level1)
 {
@@ -540,7 +540,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPortCapability_0004, Funct
 /**
 * @tc.name  Test AudioAdapterGetPortCapability API when the audioPort is nullptr or not supported.
 * @tc.number  SUB_Audio_HDI_AdapterGetPortCapability_0005
-* @tc.desc  Test AudioAdapterGetPortCapability, return -1 if the audioPort is nullptr or not supported.
+* @tc.desc  Test the AudioAdapterGetPortCapability API,and check if -1 is returned when the audioPort is nullptr or not supported.
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPortCapability_0005, Function | MediumTest | Level1)
 {
@@ -569,7 +569,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPortCapability_0005, Funct
 /**
 * @tc.name  Test AudioAdapterGetPortCapability API when the capability is nullptr.
 * @tc.number  SUB_Audio_HDI_AdapterGetPortCapability_0006
-* @tc.desc  Test AudioAdapterGetPortCapability, return -1 if capability is nullptr.
+* @tc.desc Test the AudioAdapterGetPortCapability API,and check if -1 is returned when capability is nullptr.
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPortCapability_0006, Function | MediumTest | Level1)
 {
@@ -594,7 +594,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPortCapability_0006, Funct
 /**
 * @tc.name  Test AdapterSetPassthroughMode API when the PortType is PORT_OUT.
 * @tc.number  SUB_Audio_HDI_AdapterSetPassthroughMode_0001
-* @tc.desc  test AdapterSetPassthroughMode interface, return 0 if PortType is PORT_OUT.
+* @tc.desc  Test the AdapterSetPassthroughMode API, and check if 0 is returned when PortType is PORT_OUT.
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterSetPassthroughMode_0001, Function | MediumTest | Level1)
 {
@@ -622,7 +622,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterSetPassthroughMode_0001, Func
 /**
 * @tc.name Test AdapterSetPassthroughMode API when the PortType is PORT_IN.
 * @tc.number  SUB_Audio_HDI_AdapterSetPassthroughMode_0002
-* @tc.desc  test AdapterSetPassthroughMode interface, return -1 if PortType is PORT_IN.
+* @tc.desc Test the AdapterSetPassthroughMode API, and check if -1 is returned when PortType is PORT_IN.
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterSetPassthroughMode_0002, Function | MediumTest | Level1)
 {
@@ -646,7 +646,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterSetPassthroughMode_0002, Func
 /**
 * @tc.name  Test AdapterSetPassthroughMode API when the parameter adapter is nullptr.
 * @tc.number  SUB_Audio_HDI_AdapterSetPassthroughMode_0003
-* @tc.desc  test AdapterSetPassthroughMode interface, return -1 the parameter adapter is empty.
+* @tc.desc  Test the AdapterSetPassthroughMode API, and check if -1 is returned when the parameter adapter is empty.
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterSetPassthroughMode_0003, Function | MediumTest | Level1)
 {
@@ -668,7 +668,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterSetPassthroughMode_0003, Func
 /**
 * @tc.name  Test AdapterSetPassthroughMode API when the parameter audioPort is nullptr or not supported.
 * @tc.number  SUB_Audio_HDI_AdapterSetPassthroughMode_0004
-* @tc.desc  test AdapterSetPassthroughMode interface, return -1 if the audioPort is nullptr or not supported.
+* @tc.desc  Test the AdapterSetPassthroughMode API, and check if -1 is returned when the audioPort is nullptr or not supported.
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterSetPassthroughMode_0004, Function | MediumTest | Level1)
 {
@@ -696,7 +696,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterSetPassthroughMode_0004, Func
 /**
 * @tc.name  Test AdapterSetPassthroughMode API when the not supported mode.
 * @tc.number  SUB_Audio_HDI_AdapterSetPassthroughMode_0005
-* @tc.desc  test AdapterSetPassthroughMode interface, return -1 if the not supported mode.
+* @tc.desc  Test the AdapterSetPassthroughMode API, and check if -1 is returned when  the mode is not supported 
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterSetPassthroughMode_0005, Function | MediumTest | Level1)
 {
@@ -720,7 +720,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterSetPassthroughMode_0005, Func
 /**
 * @tc.name  Test AdapterGetPassthroughMode API via legal input
 * @tc.number  SUB_Audio_HDI_AdapterGetPassthroughMode_0001
-* @tc.desc  test AdapterGetPassthroughMode interface, return 0 if is get successfully.
+* @tc.desc  Test the AdapterGetPassthroughMode API, and check if 0 is returned when then mode is obtained successfully.
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPassthroughMode_0001, Function | MediumTest | Level1)
 {
@@ -750,7 +750,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPassthroughMode_0001, Func
 /**
 * @tc.name  Test AdapterGetPassthroughMode API  when the parameter adapter is nullptr.
 * @tc.number  SUB_Audio_HDI_AdapterGetPassthroughMode_0002
-* @tc.desc  test AdapterGetPassthroughMode interface, return -1 if the parameter adapter is empty..
+* @tc.desc  Test the AdapterGetPassthroughMode API, and check if 0 is returned when the parameter adapter is empty.
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPassthroughMode_0002, Function | MediumTest | Level1)
 {
@@ -776,7 +776,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPassthroughMode_0002, Func
 /**
 * @tc.name   Test AdapterGetPassthroughMode API when the parameter audioPort is nullptr or not supported.
 * @tc.number  SUB_Audio_HDI_AdapterGetPassthroughMode_0003
-* @tc.desc  test AdapterGetPassthroughMode interface, return -1 if the audioPort is nullptr or not supported.
+* @tc.desc  Test the AdapterGetPassthroughMode API, and check if 0 is returned when the audioPort is nullptr or not supported.
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPassthroughMode_0003, Function | MediumTest | Level1)
 {
@@ -804,7 +804,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPassthroughMode_0003, Func
 /**
 * @tc.name  Test AdapterGetPassthroughMode API  when the parameter mode is nullptr.
 * @tc.number  SUB_Audio_HDI_AdapterGetPassthroughMode_0004
-* @tc.desc  test AdapterGetPassthroughMode interface, return -1 if the parameter mode is empty.
+* @tc.desc  Test the AdapterGetPassthroughMode API, and check if 0 is returned when the parameter mode is empty.
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPassthroughMode_0004, Function | MediumTest | Level1)
 {

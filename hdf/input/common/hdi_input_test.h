@@ -23,7 +23,7 @@ const int MAX_DEVICES = 32;
 const int INVALID_INDEX = 5;
 
 #define INPUT_CHECK_NULL_POINTER(pointer, ret) do { \
-    if ((pointer) == NULL) { \
+    if ((pointer) == nullptr) { \
         printf("%s: null pointer", __func__); \
         ASSERT_EQ ((ret), INPUT_SUCCESS); \
     } \

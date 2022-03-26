@@ -90,7 +90,7 @@ void HdiInputTest::TearDown()
 
 static void ReportEventPkgCallback(const EventPackage **pkgs, uint32_t count, uint32_t devIndex)
 {
-    if (pkgs == NULL) {
+    if (pkgs == nullptr) {
         return;
     }
     for (int32_t i = 0; i < count; i++) {
@@ -104,7 +104,7 @@ static void ReportEventPkgCallback(const EventPackage **pkgs, uint32_t count, ui
 static void ReportHotPlugEventPkgCallback(const HotPlugEvent *msg)
 {
     int32_t ret;
-    if (msg == NULL) {
+    if (msg == nullptr) {
         return;
     }
     HDF_LOGI("%s: status =%d devId=%d type =%d \n", __func__, msg->status, msg->devIndex, msg->devType);
@@ -336,7 +336,7 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0070, Function | MediumTest | L
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret = 0;
-    DeviceInfo *dev = NULL;
+    DeviceInfo *dev = nullptr;
     INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
     INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputManager, INPUT_NULL_PTR);
 
@@ -363,7 +363,7 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0080, Function | MediumTest | L
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret = 0;
-    DeviceInfo *dev = NULL;
+    DeviceInfo *dev = nullptr;
 
     ret = g_inputInterface->iInputManager->GetInputDevice(TOUCH_INDEX, nullptr);
     EXPECT_NE(ret, INPUT_SUCCESS);

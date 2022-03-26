@@ -59,6 +59,7 @@ int32_t InitAttrs(struct AudioSampleAttributes &attrs)
     attrs.silenceThreshold = BUFFER_LENTH;
     return HDF_SUCCESS;
 }
+
 int32_t InitAttrsUpdate(struct AudioSampleAttributes &attrs, enum AudioFormat format, uint32_t channelCount,
     uint32_t sampleRate)
 {
@@ -68,6 +69,7 @@ int32_t InitAttrsUpdate(struct AudioSampleAttributes &attrs, enum AudioFormat fo
     attrs.channelCount = channelCount;
     return HDF_SUCCESS;
 }
+
 int32_t AudioRenderSetGetSampleAttributes(struct AudioSampleAttributes attrs, struct AudioSampleAttributes &attrsValue,
     struct AudioRender *render)
 {
@@ -85,6 +87,7 @@ int32_t AudioRenderSetGetSampleAttributes(struct AudioSampleAttributes attrs, st
     }
     return AUDIO_HAL_SUCCESS;
 }
+
 int32_t AudioCaptureSetGetSampleAttributes(struct AudioSampleAttributes attrs, struct AudioSampleAttributes &attrsValue,
     struct AudioCapture *capture)
 {
@@ -102,6 +105,7 @@ int32_t AudioCaptureSetGetSampleAttributes(struct AudioSampleAttributes attrs, s
     }
     return AUDIO_HAL_SUCCESS;
 }
+
 uint32_t StringToInt(std::string flag)
 {
     uint32_t temp = flag[0];
@@ -215,6 +219,7 @@ int32_t WavHeadAnalysis(struct AudioHeadInfo &wavHeadInfo, FILE *file, struct Au
     }
     return HDF_SUCCESS;
 }
+
 int32_t GetAdapters(TestAudioManager *manager, struct AudioAdapterDescriptor **descs, int &size)
 {
     int32_t ret = -1;
@@ -828,6 +833,7 @@ int32_t ThreadRelease(struct PrepareAudioPara &audiopara)
     }
     return AUDIO_HAL_SUCCESS;
 }
+
 int32_t PlayAudioFile(struct PrepareAudioPara &audiopara)
 {
     int32_t ret = -1;
@@ -911,9 +917,10 @@ int32_t RecordAudio(struct PrepareAudioPara &audiopara)
     (void)fclose(file);
     return AUDIO_HAL_SUCCESS;
 }
+
 int32_t InitMmapDesc(FILE *fp, struct AudioMmapBufferDescripter &desc, int32_t &reqSize, bool flag)
 {
-    if (fp == NULL) {
+    if (!fp) {
         return HDF_FAILURE;
     }
     int fd = fileno(fp);
@@ -951,7 +958,7 @@ int32_t PlayMapAudioFile(struct PrepareAudioPara &audiopara)
         return HDF_FAILURE;
     }
     FILE *fp = fopen(absPath, "rb+");
-    if (fp == nullptr) {
+    if (!fp) {
         return HDF_FAILURE;
     }
     ret = InitMmapDesc(fp, desc, reqSize, isRender);
@@ -971,6 +978,7 @@ int32_t PlayMapAudioFile(struct PrepareAudioPara &audiopara)
     (void)fclose(fp);
     return ret;
 }
+
 int32_t RecordMapAudio(struct PrepareAudioPara &audiopara)
 {
     int32_t ret = -1;
@@ -981,7 +989,7 @@ int32_t RecordMapAudio(struct PrepareAudioPara &audiopara)
         return HDF_FAILURE;
     }
     FILE *fp = fopen(audiopara.path, "wb+");
-    if (fp == NULL) {
+    if (!fp) {
         return HDF_FAILURE;
     }
     ret = InitMmapDesc(fp, desc, reqSize, isRender);
@@ -1001,6 +1009,7 @@ int32_t RecordMapAudio(struct PrepareAudioPara &audiopara)
     }
     return ret;
 }
+
 int32_t AudioRenderCallback(enum AudioCallbackType type, void *reserved, void *cookie)
 {
     switch (type) {
@@ -1021,6 +1030,7 @@ int32_t AudioRenderCallback(enum AudioCallbackType type, void *reserved, void *c
             return HDF_FAILURE;
     }
 }
+
 int32_t CheckWriteCompleteValue()
 {
     if (g_writeCompleted == AUDIO_WRITE_COMPELETED_VALUE)
@@ -1028,6 +1038,7 @@ int32_t CheckWriteCompleteValue()
     else
         return HDF_FAILURE;
 }
+
 int32_t CheckRenderFullValue()
 {
     if (g_renderFull == AUDIO_RENDER_FULL_VALUE)
@@ -1035,6 +1046,7 @@ int32_t CheckRenderFullValue()
     else
         return HDF_FAILURE;
 }
+
 int32_t CheckFlushValue()
 {
     if (g_flushCompleted == AUDIO_FLUSH_COMPLETED_VALUE)

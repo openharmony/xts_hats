@@ -85,7 +85,7 @@ HWTEST_F(HdfVibratorTest, PerformOneShotVibratorDuration001, Function | MediumTe
 
     int32_t startRet = g_vibratorDev->StartOnce(g_duration);
     EXPECT_EQ(startRet, HDF_SUCCESS);
-    printf("pls wait 2 for vibrator testing now\n");
+    printf("pls wait 2 ms for vibrator testing now\n");
     OsalMSleep(g_sleepTime);
 
     int32_t endRet = g_vibratorDev->Stop(VIBRATOR_MODE_ONCE);
@@ -121,7 +121,7 @@ HWTEST_F(HdfVibratorTest, ExecuteVibratorEffect001, Function | MediumTest | Leve
 
     int32_t startRet = g_vibratorDev->Start(g_timeSequence);
     EXPECT_EQ(startRet, HDF_SUCCESS);
-    printf("pls wait 2 for vibrator testing now\n");
+    printf("pls wait 2 ms for vibrator testing now\n");
     OsalMSleep(g_sleepTime);
 
     int32_t endRet = g_vibratorDev->Stop(VIBRATOR_MODE_PRESET);
@@ -140,7 +140,7 @@ HWTEST_F(HdfVibratorTest, ExecuteVibratorEffect002, Function | MediumTest | Leve
 
     int32_t startRet = g_vibratorDev->Start(g_builtIn);
     EXPECT_EQ(startRet, HDF_SUCCESS);
-    printf("pls wait 2 for vibrator testing now\n");
+    printf("pls wait 2 ms for vibrator testing now\n");
     OsalMSleep(g_sleepTime);
 
     int32_t endRet = g_vibratorDev->Stop(VIBRATOR_MODE_PRESET);
@@ -176,7 +176,7 @@ HWTEST_F(HdfVibratorTest, ExecuteVibratorEffect004, Function | MediumTest | Leve
 
     int32_t startRet = g_vibratorDev->Start(g_timeSequence);
     EXPECT_EQ(startRet, HDF_SUCCESS);
-    printf("pls wait 2 for vibrator testing now\n");
+    printf("pls wait 2 ms for vibrator testing now\n");
     OsalMSleep(g_sleepTime);
 
     int32_t endRet = g_vibratorDev->Stop(VIBRATOR_MODE_BUTT);
@@ -199,7 +199,7 @@ HWTEST_F(HdfVibratorTest, ExecuteVibratorEffect005, Function | MediumTest | Leve
 
     int32_t startRet = g_vibratorDev->Start(g_timeSequence);
     EXPECT_EQ(startRet, HDF_SUCCESS);
-    printf("pls wait 2 for vibrator testing now\n");
+    printf("pls wait 2 ms for vibrator testing now\n");
     OsalMSleep(g_sleepTime);
 
     int32_t endRet = g_vibratorDev->Stop(VIBRATOR_MODE_PRESET);
@@ -219,7 +219,7 @@ HWTEST_F(HdfVibratorTest, ExecuteVibratorEffect006, Function | MediumTest | Leve
 
     int32_t startRet = g_vibratorDev->Start(g_builtIn);
     EXPECT_EQ(startRet, HDF_SUCCESS);
-    printf("pls wait 2 for vibrator testing now\n");
+    printf("pls wait 2 ms for vibrator testing now\n");
     OsalMSleep(g_sleepTime);
 
     int32_t endRet = g_vibratorDev->Stop(VIBRATOR_MODE_PRESET);

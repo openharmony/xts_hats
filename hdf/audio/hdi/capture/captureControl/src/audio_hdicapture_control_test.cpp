@@ -41,10 +41,6 @@ using namespace testing::ext;
 using namespace HMOS::Audio;
 
 namespace {
-const string ADAPTER_NAME_HDMI = "hdmi";
-const string ADAPTER_NAME_USB = "usb";
-const string ADAPTER_NAME_INTERNAL = "internal";
-
 class AudioHdiCaptureControlTest : public testing::Test {
 public:
     static void SetUpTestCase(void);
@@ -136,13 +132,12 @@ void AudioHdiCaptureControlTest::TearDown(void) {}
 HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioCreateCapture_0001, Function | MediumTest | Level1)
 {
     int32_t ret = -1;
-    enum AudioPortPin pins = PIN_IN_MIC;
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture *capture = nullptr;
 
     TestAudioManager* manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateCapture(manager, pins, ADAPTER_NAME_USB, &adapter, &capture);
+    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
@@ -157,7 +152,6 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioCreateCapture_0001, Func
 HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioCreateCapture_0002, Function | MediumTest | Level1)
 {
     int32_t ret = -1;
-    enum AudioPortDirection portType = PORT_OUT_IN;
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture *firstCapture = nullptr;
     struct AudioCapture *secondCapture = nullptr;
@@ -167,7 +161,7 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioCreateCapture_0002, Func
 
     ASSERT_NE(nullptr, GetAudioManager);
     TestAudioManager* manager = GetAudioManager();
-    ret = GetLoadAdapter(manager, portType, ADAPTER_NAME_USB, &adapter, audioPort);
+    ret = GetLoadAdapter(manager, PORT_IN, ADAPTER_NAME, &adapter, audioPort);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     InitAttrs(attrs);
     InitDevDesc(DevDesc, audioPort->portId, PIN_IN_MIC);
@@ -196,7 +190,6 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioCreateCapture_0002, Func
 HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioCreateCapture_0003, Function | MediumTest | Level1)
 {
     int32_t ret = -1;
-    enum AudioPortDirection portType = PORT_OUT_IN;
     struct AudioAdapter *adapter = nullptr;
     struct AudioRender *render = nullptr;
     struct AudioCapture *capture = nullptr;
@@ -207,7 +200,7 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioCreateCapture_0003, Func
 
     ASSERT_NE(nullptr, GetAudioManager);
     TestAudioManager* manager = GetAudioManager();
-    ret = GetLoadAdapter(manager, portType, ADAPTER_NAME_USB, &adapter, audioPort);
+    ret = GetLoadAdapter(manager, PORT_IN, ADAPTER_NAME, &adapter, audioPort);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     InitAttrs(attrs);
     InitDevDesc(renderDevDesc, audioPort->portId, PIN_OUT_SPEAKER);
@@ -228,35 +221,6 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioCreateCapture_0003, Func
     manager->UnloadAdapter(manager, adapter);
 }
 /**
-* @tc.name  Test AudioCreateCapture API via creating two capture objects
-* @tc.number  SUB_Audio_HDI_AudioCreateCapture_0004
-* @tc.desc  After calling the AudioCreateCapture API,check whether 0 is returned if the two audiocapture objects are created successfully
-*/
-HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioCreateCapture_0004, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    enum AudioPortPin pins = PIN_IN_MIC;
-    struct AudioAdapter *adapterFirst = nullptr;
-    struct AudioAdapter *adapterSecond = nullptr;
-    struct AudioCapture *captureFirst = nullptr;
-    struct AudioCapture *captureSecond = nullptr;
-
-    ASSERT_NE(nullptr, GetAudioManager);
-    TestAudioManager* manager = GetAudioManager();
-    ret = AudioCreateCapture(manager, pins, ADAPTER_NAME_USB, &adapterFirst, &captureFirst);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = AudioCreateCapture(manager, pins, ADAPTER_NAME_INTERNAL, &adapterSecond, &captureSecond);
-    if (ret < 0) {
-        adapterFirst->DestroyCapture(adapterFirst, captureFirst);
-        manager->UnloadAdapter(manager, adapterFirst);
-        ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    }
-    adapterFirst->DestroyCapture(adapterFirst, captureFirst);
-    adapterSecond->DestroyCapture(adapterSecond, captureSecond);
-    manager->UnloadAdapter(manager, adapterFirst);
-    manager->UnloadAdapter(manager, adapterSecond);
-}
-/**
 * @tc.name  Test AudioCreateCapture API via setting the incoming parameter adapter is nullptr
 * @tc.number  SUB_Audio_HDI_AudioCreateCapture_0005
 * @tc.desc  After calling the AudioCreateCapture API,check whether -1 is returned if the input parameter adapter is nullptr
@@ -267,19 +231,17 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioCreateCapture_0005, Func
     struct AudioPort* capturePort = nullptr;
     struct AudioDeviceDescriptor devDesc = {};
     struct AudioSampleAttributes attrs = {};
-    enum AudioPortDirection portType = PORT_IN;
-    enum AudioPortPin pins = PIN_IN_MIC;
     struct AudioAdapter *adapter = nullptr;
     struct AudioAdapter *adapterNull = nullptr;
     struct AudioCapture *capture = nullptr;
 
     ASSERT_NE(nullptr, GetAudioManager);
     TestAudioManager* manager = GetAudioManager();
-    ret = GetLoadAdapter(manager, portType, ADAPTER_NAME_USB, &adapter, capturePort);
+    ret = GetLoadAdapter(manager, PORT_IN, ADAPTER_NAME, &adapter, capturePort);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = InitAttrs(attrs);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = InitDevDesc(devDesc, capturePort->portId, pins);
+    ret = InitDevDesc(devDesc, capturePort->portId, PIN_IN_MIC);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = adapter->CreateCapture(adapterNull, &devDesc, &attrs, &capture);
     EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
@@ -296,14 +258,13 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioCreateCapture_0006, Func
     int32_t ret = -1;
     struct AudioPort* capturePort = nullptr;
     struct AudioSampleAttributes attrs = {};
-    enum AudioPortDirection portType = PORT_IN;
     struct AudioDeviceDescriptor *devDesc = nullptr;
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture *capture = nullptr;
 
     ASSERT_NE(nullptr, GetAudioManager);
     TestAudioManager* manager = GetAudioManager();
-    ret = GetLoadAdapter(manager, portType, ADAPTER_NAME_USB, &adapter, capturePort);
+    ret = GetLoadAdapter(manager, PORT_IN, ADAPTER_NAME, &adapter, capturePort);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = InitAttrs(attrs);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -322,17 +283,15 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioCreateCapture_0007, Func
     int32_t ret = -1;
     struct AudioPort* capturePort = nullptr;
     struct AudioDeviceDescriptor devDesc = {};
-    enum AudioPortDirection portType = PORT_IN;
-    enum AudioPortPin pins = PIN_IN_MIC;
     struct AudioSampleAttributes *attrs = nullptr;
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture *capture = nullptr;
 
     ASSERT_NE(nullptr, GetAudioManager);
     TestAudioManager* manager = GetAudioManager();
-    ret = GetLoadAdapter(manager, portType, ADAPTER_NAME_USB, &adapter, capturePort);
+    ret = GetLoadAdapter(manager, PORT_IN, ADAPTER_NAME, &adapter, capturePort);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = InitDevDesc(devDesc, capturePort->portId, pins);
+    ret = InitDevDesc(devDesc, capturePort->portId, PIN_IN_MIC);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = adapter->CreateCapture(adapter, &devDesc, attrs, &capture);
     EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
@@ -350,18 +309,16 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioCreateCapture_0008, Func
     struct AudioPort* capturePort = nullptr;
     struct AudioDeviceDescriptor devDesc = {};
     struct AudioSampleAttributes attrs = {};
-    enum AudioPortDirection portType = PORT_IN;
-    enum AudioPortPin pins = PIN_IN_MIC;
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture **capture = nullptr;
 
     ASSERT_NE(nullptr, GetAudioManager);
     TestAudioManager* manager = GetAudioManager();
-    ret = GetLoadAdapter(manager, portType, ADAPTER_NAME_USB, &adapter, capturePort);
+    ret = GetLoadAdapter(manager, PORT_IN, ADAPTER_NAME, &adapter, capturePort);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = InitAttrs(attrs);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = InitDevDesc(devDesc, capturePort->portId, pins);
+    ret = InitDevDesc(devDesc, capturePort->portId, PIN_IN_MIC);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = adapter->CreateCapture(adapter, &devDesc, &attrs, capture);
     EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
@@ -378,18 +335,45 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioCreateCapture_0009, Func
     struct AudioPort* capturePort = nullptr;
     struct AudioDeviceDescriptor devDesc = {};
     struct AudioSampleAttributes attrs = {};
-    enum AudioPortDirection portType = PORT_OUT;
-    enum AudioPortPin pins = PIN_OUT_SPEAKER;
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture *capture = nullptr;
 
     ASSERT_NE(nullptr, GetAudioManager);
     TestAudioManager* manager = GetAudioManager();
-    ret = GetLoadAdapter(manager, portType, ADAPTER_NAME_HDMI, &adapter, capturePort);
+    ret = GetLoadAdapter(manager, PORT_OUT, ADAPTER_NAME_OUT, &adapter, capturePort);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = InitAttrs(attrs);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = InitDevDesc(devDesc, capturePort->portId, pins);
+    ret = InitDevDesc(devDesc, capturePort->portId, PIN_OUT_SPEAKER);
+    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
+    ret = adapter->CreateCapture(adapter, &devDesc, &attrs, &capture);
+    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
+    adapter->DestroyCapture(adapter, capture);
+    manager->UnloadAdapter(manager, adapter);
+}
+/**
+* @tc.name  Test AudioCreateCapture API via setting the incoming parameter desc which portID is not configed
+* @tc.number  SUB_Audio_HDI_AudioCreateCapture_0010
+* @tc.desc  Test AudioCreateCapture interface,Returns -1 if the incoming parameter desc which portID is not configed
+* @tc.author: liweiming
+*/
+HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioCreateCapture_0010, TestSize.Level1)
+{
+    int32_t ret = -1;
+    struct AudioPort* capturePort = nullptr;
+    struct AudioDeviceDescriptor devDesc = {};
+    struct AudioSampleAttributes attrs = {};
+    uint32_t portID = 12;
+    struct AudioAdapter *adapter = nullptr;
+    struct AudioCapture *capture = nullptr;
+
+    ASSERT_NE(nullptr, GetAudioManager);
+    TestAudioManager* manager = GetAudioManager();
+    ret = GetLoadAdapter(manager, PORT_IN, ADAPTER_NAME, &adapter, capturePort);
+    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
+    ret = InitAttrs(attrs);
+    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
+    ret = InitDevDesc(devDesc, portID, PIN_IN_MIC);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = adapter->CreateCapture(adapter, &devDesc, &attrs, &capture);
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
@@ -404,13 +388,12 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioCreateCapture_0009, Func
 HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioDestroyCapture_0001, Function | MediumTest | Level1)
 {
     int32_t ret = -1;
-    enum AudioPortPin pins = PIN_IN_MIC;
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture *capture = nullptr;
 
     TestAudioManager* manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateCapture(manager, pins, ADAPTER_NAME_USB, &adapter, &capture);
+    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = adapter->DestroyCapture(adapter, capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -424,14 +407,13 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioDestroyCapture_0001, Fun
 HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioDestroyCapture_0002, Function | MediumTest | Level1)
 {
     int32_t ret = -1;
-    enum AudioPortPin pins = PIN_IN_MIC;
     struct AudioAdapter *adapter = nullptr;
     struct AudioAdapter *adapterNull = nullptr;
     struct AudioCapture *capture = nullptr;
 
     TestAudioManager* manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateCapture(manager, pins, ADAPTER_NAME_USB, &adapter, &capture);
+    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = adapter->DestroyCapture(adapterNull, capture);
     EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
@@ -448,13 +430,12 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioDestroyCapture_0003, Fun
 {
     int32_t ret = -1;
     struct AudioPort* capturePort = nullptr;
-    enum AudioPortDirection portType = PORT_IN;
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture *capture = nullptr;
 
     ASSERT_NE(nullptr, GetAudioManager);
     TestAudioManager* manager = GetAudioManager();
-    ret = GetLoadAdapter(manager, portType, ADAPTER_NAME_USB, &adapter, capturePort);
+    ret = GetLoadAdapter(manager, PORT_IN, ADAPTER_NAME, &adapter, capturePort);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = adapter->DestroyCapture(adapter, capture);
     EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
@@ -468,14 +449,13 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioDestroyCapture_0003, Fun
 HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CaptureStart_0001, Function | MediumTest | Level1)
 {
     int32_t ret = -1;
-    TestAudioManager* manager = {};
-    enum AudioPortPin pins = PIN_IN_MIC;
+    TestAudioManager* manager = nullptr;
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture *capture = nullptr;
 
     manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateCapture(manager, pins, ADAPTER_NAME_USB, &adapter, &capture);
+    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Start((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -492,15 +472,14 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CaptureStart_0001, Function |
 HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CaptureStart_0002, Function | MediumTest | Level1)
 {
     int32_t ret = -1;
-    TestAudioManager* manager = {};
-    enum AudioPortPin pins = PIN_IN_MIC;
+    TestAudioManager* manager = nullptr;
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture *capture = nullptr;
     struct AudioCapture *captureNull = nullptr;
 
     manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateCapture(manager, pins, ADAPTER_NAME_USB, &adapter, &capture);
+    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Start((AudioHandle)captureNull);
     EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
@@ -518,13 +497,12 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CaptureStart_0003, Function |
 {
     int32_t ret = -1;
     TestAudioManager* manager = {};
-    enum AudioPortPin pins = PIN_IN_MIC;
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture *capture = nullptr;
 
     manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateCapture(manager, pins, ADAPTER_NAME_USB, &adapter, &capture);
+    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Start((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -549,7 +527,7 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CaptureStop_0001, Function | 
 
     manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME_USB);
+    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Stop((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -571,7 +549,7 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CaptureStop_0002, Function | 
 
     manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME_USB);
+    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Stop((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -595,7 +573,7 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CaptureStop_0003, Function | 
 
     manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME_USB);
+    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Stop((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -615,13 +593,12 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CaptureStop_0004, Function | 
 {
     int32_t ret = -1;
     TestAudioManager* manager = {};
-    enum AudioPortPin pins = PIN_IN_MIC;
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture *capture = nullptr;
 
     manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateCapture(manager, pins, ADAPTER_NAME_USB, &adapter, &capture);
+    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Stop((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_ERR_NOT_SUPPORT, ret);
@@ -644,7 +621,7 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CaptureStop_0005, Function | 
 
     manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME_USB);
+    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Stop((AudioHandle)captureNull);
     EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
@@ -666,7 +643,7 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CapturePause_0001, Function |
 
     manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME_USB);
+    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Pause((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -690,7 +667,7 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CapturePause_0002, Function |
 
     manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME_USB);
+    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Pause((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -717,7 +694,7 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CapturePause_0003, Function |
 
     manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME_USB);
+    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Pause((AudioHandle)captureNull);
     EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
@@ -736,13 +713,12 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CapturePause_0004, Function |
 {
     int32_t ret = -1;
     TestAudioManager* manager = {};
-    enum AudioPortPin pins = PIN_IN_MIC;
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture *capture = nullptr;
 
     manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateCapture(manager, pins, ADAPTER_NAME_USB, &adapter, &capture);
+    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Pause((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
@@ -764,7 +740,7 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CapturePause_0005, Function |
     manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
 
-    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME_USB);
+    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Stop((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -788,7 +764,7 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CaptureResume_0001, Function 
 
     manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME_USB);
+    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Pause((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -813,7 +789,7 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CaptureResume_0002, Function 
 
     manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME_USB);
+    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Pause((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -842,7 +818,7 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CaptureResume_0003, Function 
 
     manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME_USB);
+    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Resume((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_ERR_NOT_SUPPORT, ret);
@@ -867,7 +843,7 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CaptureResume_0004, Function 
 
     manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME_USB);
+    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Pause((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -893,7 +869,7 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CaptureResume_0005, Function 
 
     manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME_USB);
+    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Stop((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -917,7 +893,7 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CaptureResume_0006, Function 
 
     manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME_USB);
+    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Pause((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -946,7 +922,7 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CaptureResume_0007, Function 
     struct AudioCapture *captureSec = nullptr;
     manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret1 = AudioCreateStartCapture(manager, &captureOne, &adapterOne, ADAPTER_NAME_USB);
+    ret1 = AudioCreateStartCapture(manager, &captureOne, &adapterOne, ADAPTER_NAME);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret1);
     ret1 = captureOne->control.Pause((AudioHandle)captureOne);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret1);
@@ -956,7 +932,7 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CaptureResume_0007, Function 
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret1);
     adapterOne->DestroyCapture(adapterOne, captureOne);
     manager->UnloadAdapter(manager, adapterOne);
-    ret2 = AudioCreateStartCapture(manager, &captureSec, &adapterSec, ADAPTER_NAME_USB);
+    ret2 = AudioCreateStartCapture(manager, &captureSec, &adapterSec, ADAPTER_NAME);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret2);
     ret2 = captureSec->control.Pause((AudioHandle)captureSec);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret2);
@@ -981,7 +957,7 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CaptureFlush_0001, Function |
 
     manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME_USB);
+    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Stop((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -1006,7 +982,7 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_CaptureFlush_0002, Function |
 
     manager = GetAudioManager();
     ASSERT_NE(nullptr, GetAudioManager);
-    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME_USB);
+    ret = AudioCreateStartCapture(manager, &capture, &adapter, ADAPTER_NAME);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Stop((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);

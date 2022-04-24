@@ -11,17 +11,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//build/ohos_var.gni")
-import(
-    "open_posix_testsuite/conformance/interfaces_gn/posix_interface_config.gni")
+import("//test/xts/tools/build/suite.gni")
+module_output_path = "hats/prctl"
 
-group("kernel") {
-  testonly = true
-  if (is_standard_system) {
-    deps = [
-      "accesstokenid:HatsAccesstokenidTest",
-      "open_posix_testsuite/conformance/interfaces_gn:${posix_interface_module}",
-      "prctl:HatsPrctlTest",
-    ]
-  }
+###############################################################################
+
+ohos_moduletest_suite("HatsPrctlTest") {
+  module_out_path = module_output_path
+  sources = [ "PrctlApiTest.cpp" ]
+  deps = [
+    "//third_party/googletest:gtest_main",
+    "//utils/native/base:utils",
+  ]
+  cflags = [ "-Wno-error" ]
 }

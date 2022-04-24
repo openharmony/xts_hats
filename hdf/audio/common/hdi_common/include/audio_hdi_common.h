@@ -42,50 +42,48 @@
 #include "audio_types.h"
 #include "hdf_io_service_if.h"
 #include "hdf_sbuf.h"
-#include "audio_proxy_manager.h"
 
 namespace HMOS {
 namespace Audio {
 #ifdef AUDIO_ADM_SO
     const std::string FUNCTION_NAME = "GetAudioManagerFuncs";
     const std::string RESOLVED_PATH = HDF_LIBRARY_FULL_PATH("libhdi_audio");
-    using TestAudioManager = struct AudioManager;
     const int IS_ADM = true;
 #endif
 #ifdef AUDIO_MPI_SO
     const std::string FUNCTION_NAME = "GetAudioManagerFuncs";
     const std::string RESOLVED_PATH = HDF_LIBRARY_FULL_PATH("libhdi_audio");
-    using TestAudioManager = struct AudioManager;
     const int IS_ADM = false;
 #endif
 #ifdef AUDIO_ADM_SERVICE
     const std::string FUNCTION_NAME = "GetAudioProxyManagerFuncs";
     const std::string RESOLVED_PATH = HDF_LIBRARY_FULL_PATH("libhdi_audio_client");
-    using TestAudioManager = struct AudioProxyManager;
+    using TestAudioManager = struct AudioManager;
     const int IS_ADM = true;
 #endif
 #ifdef AUDIO_MPI_SERVICE
     const std::string FUNCTION_NAME = "GetAudioProxyManagerFuncs";
     const std::string RESOLVED_PATH = HDF_LIBRARY_FULL_PATH("libhdi_audio_client");
-    using TestAudioManager = struct AudioProxyManager;
     const int IS_ADM = false;
 #endif
 #ifdef __LITEOS__
     const std::string FUNCTION_NAME = "GetAudioManagerFuncs";
     const std::string RESOLVED_PATH = "/usr/lib/libhdi_audio.so";
-    using TestAudioManager = struct AudioManager;
     const int IS_ADM = true;
     const std::string AUDIO_FILE = "/userdata/audiorendertest.wav";
     const std::string LOW_LATENCY_AUDIO_FILE = "/userdata/lowlatencyrendertest.wav";
     const std::string AUDIO_CAPTURE_FILE = "/userdata/audiocapture.wav";
     const std::string AUDIO_LOW_LATENCY_CAPTURE_FILE = "/userdata/lowlatencycapturetest.wav";
 #else
-    const std::string AUDIO_FILE = "//bin/audiorendertest.wav";
-    const std::string LOW_LATENCY_AUDIO_FILE = "//bin/lowlatencyrendertest.wav";
-    const std::string AUDIO_CAPTURE_FILE = "//bin/audiocapture.wav";
-    const std::string AUDIO_LOW_LATENCY_CAPTURE_FILE = "//bin/lowlatencycapturetest.wav";
+    const std::string AUDIO_FILE = "//data/audiorendertest.wav";
+    const std::string LOW_LATENCY_AUDIO_FILE = "//data/lowlatencyrendertest.wav";
+    const std::string AUDIO_CAPTURE_FILE = "//data/audiocapture.wav";
+    const std::string AUDIO_LOW_LATENCY_CAPTURE_FILE = "//data/lowlatencycapturetest.wav";
 #endif
 
+const std::string ADAPTER_NAME = "primary";
+const std::string ADAPTER_NAME_OUT = "primary_ext";
+using TestAudioManager = struct AudioManager;
 const std::string AUDIO_RIFF = "RIFF";
 const std::string AUDIO_WAVE = "WAVE";
 const std::string AUDIO_DATA = "data";
@@ -106,7 +104,7 @@ const int FRAME_SIZE = 1024;
 const int FRAME_COUNT = 4;
 const int ADAPTER_COUNT = 32;
 const int TRY_NUM_FRAME = 20;
-const int AUDIO_ADAPTER_MAX_NUM = 4;
+const int AUDIO_ADAPTER_MAX_NUM = 5;
 const int AUDIO_WRITE_COMPELETED_VALUE = 1;
 const int AUDIO_RENDER_FULL_VALUE = 2;
 const int AUDIO_FLUSH_COMPLETED_VALUE = 3;
@@ -214,8 +212,8 @@ struct PrepareAudioPara {
     struct AudioTimeStamp time;
     struct timeval start;
     struct timeval end;
-    long delayTime;
-    long totalTime;
+    int64_t delayTime;
+    int64_t totalTime;
     float averageDelayTime;
     struct AudioDeviceDescriptor devDesc;
 };

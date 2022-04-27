@@ -130,7 +130,7 @@ int CamfreeTest(void)
         ret = return_value;
     }
 
-    if (camfree_beforemalloc == -1 || camfree_beforemalloc == 0  {
+    if (camfree_beforemalloc == -1 || camfree_beforemalloc == 0) {
         ret = 1;
     }
 

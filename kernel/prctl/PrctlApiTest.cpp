@@ -109,14 +109,16 @@ int SetVmaAnonName(void)
 {
     size_t page_size = static_cast<size_t>(sysconf(_SC_PAGESIZE));
     const int NUMBER_PAGE = 3;
-
-    if(mmap(NULL, page_size * NUMBER_PAGE, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0) == (void *)-1) {
+    void *ret_pm = nullptr;
+  
+    ret_pm = mmap(NULL, page_size * NUMBER_PAGE, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+    if (static_cast< int >(*(int *)ret_pm) == static_cast<int>(-1)) {
         handle_error("mmap fail\n");
     }
-    if (mprotect(pm, page_size, PROT_NONE)) {
+    if (mprotect(ret_pm, page_size, PROT_NONE)) {
         handle_error("mprotect fail\n");
     }
-    if (prctl(PR_SET_VMA, PR_SET_VMA_ANON_NAME, pm, page_size * NUMBER_PAGE, "anonymous map space")) {
+    if (prctl(PR_SET_VMA, PR_SET_VMA_ANON_NAME, ret_pm, page_size * NUMBER_PAGE, "anonymous map space")) {
         handle_error("prctl fail \n");
     }
     // Now read the maps and verify that there are no overlapped maps.
@@ -139,11 +141,11 @@ int SetVmaAnonName(void)
             std::cout << "Overlapping map detected:\n"
                       << lines[i - 1] << '\n'
                       << lines[i] << '\n';
-
+ 
         last_end = end;
     }
 
-    if (munmap(pm, page_size * NUMBER_PAGE)) {
+    if (munmap(ret_pm, page_size * NUMBER_PAGE)) {
         handle_error("munmap fail\n");
     }
     return 0;

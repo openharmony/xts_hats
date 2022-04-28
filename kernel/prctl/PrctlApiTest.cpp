@@ -160,5 +160,5 @@ HWTEST_F(PrctlApiTest, SetVmaAnonName0100, Function | MediumTest | Level1)
 {
     int ret = false;
     ret = SetVmaAnonName();
-    ASSERT_TRUE(ret);
+    ASSERT_TRUE(false == ret);
 }

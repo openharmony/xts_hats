@@ -14,14 +14,16 @@
 import("//test/xts/tools/build/suite.gni")
 module_output_path = "hats/prctl"
 
-###############################################################################
-
 ohos_moduletest_suite("HatsPrctlTest") {
   module_out_path = module_output_path
-  sources = [ "PrctlApiTest.cpp" ]
+  sources = [ "./PrctlApiTest.cpp" ]
   deps = [
     "//third_party/googletest:gtest_main",
     "//utils/native/base:utils",
+  ]
+  include_dirs = [
+    "//test/xts/tools/hctest/include",
+    "//utils/",
   ]
   cflags = [ "-Wno-error" ]
 }

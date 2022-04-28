@@ -1,9 +1,9 @@
 {
-    
+    "description": "Configuration for HatsPrctlTest Tests",
     "kits": [
         {
             "push": [
-                "HatsPrctlTest->/data/local/tmp/prctltest"
+                "HatsPrctlTest->/data/local/tmp/HatsPrctlTest"
             ],
             "type": "PushKit"
         }
@@ -14,6 +14,6 @@
         "module-name": "HatsPrctlTest",
         "runtime-hint": "1s",
         "native-test-device-path": "/data/local/tmp"
-    },
-    "description": "Configuration for HatsPrctlTest Tests"
+    }
+   
 }

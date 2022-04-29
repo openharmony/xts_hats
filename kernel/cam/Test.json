@@ -1,8 +1,9 @@
 {
+    "description": "Configuration for HatsCamTest Tests",
     "kits": [
         {
             "push": [
-                "HatsCamTest->/data/local/tmp/camtest"
+                "HatsCamTest->/data/local/tmp/HatsCamTest"
             ],
             "type": "PushKit"
         }
@@ -13,6 +14,5 @@
         "module-name": "HatsCamTest",
         "runtime-hint": "1s",
         "native-test-device-path": "/data/local/tmp"
-    },
-    "description": "Configuration for HatsCamTest Tests"
+    }
 }

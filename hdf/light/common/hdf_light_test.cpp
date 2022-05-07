@@ -73,21 +73,21 @@ void HdfLightTest::TearDown()
 }
 
 /**
-  * @tc.name: SUB_DriverSystem_LightHdi_0010
+  * @tc.name: CheckLightInstanceIsEmpty
   * @tc.desc: Creat a light instance. The instance is not empty.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfLightTest, CheckLightInstanceIsEmpty, Function | MediumTest | Level1)
+HWTEST_F(HdfLightTest, SUB_DriverSystem_LightHdi_0010, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_lightDev);
 }
 
 /**
-  * @tc.name: SUB_DriverSystem_LightHdi_0020
+  * @tc.name: GetLightList001
   * @tc.desc: Obtains information about all lights in the system. Validity check of input parameters.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfLightTest, GetLightList001, Function | MediumTest | Level1)
+HWTEST_F(HdfLightTest, SUB_DriverSystem_LightHdi_0100, Function | MediumTest | Level1)
 {
     struct LightInfo *info = nullptr;
 
@@ -108,11 +108,11 @@ HWTEST_F(HdfLightTest, GetLightList001, Function | MediumTest | Level1)
 }
 
 /**
-  * @tc.name: SUB_DriverSystem_LightHdi_0030
+  * @tc.name: GetLightList002
   * @tc.desc: Obtains information about all lights in the system. Validity check of input parameters.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfLightTest, GetLightList002, Function | MediumTest | Level1)
+HWTEST_F(HdfLightTest, SUB_DriverSystem_LightHdi_0110 , Function | MediumTest | Level1)
 {
     int32_t ret = g_lightDev->GetLightInfo(nullptr, &g_count);
     EXPECT_EQ(HDF_FAILURE, ret);
@@ -123,11 +123,11 @@ HWTEST_F(HdfLightTest, GetLightList002, Function | MediumTest | Level1)
 }
 
 /**
-  * @tc.name: SUB_DriverSystem_LightHdi_0040
+  * @tc.name: EnableLight001
   * @tc.desc: Enables the light available in the light list based on the specified light id.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfLightTest, EnableLight001, Function | MediumTest | Level1)
+HWTEST_F(HdfLightTest, SUB_DriverSystem_LightHdi_0120, Function | MediumTest | Level1)
 {
     int32_t i;
     int32_t ret;
@@ -150,11 +150,11 @@ HWTEST_F(HdfLightTest, EnableLight001, Function | MediumTest | Level1)
 }
 
 /**
-  * @tc.name: SUB_DriverSystem_LightHdi_0050
+  * @tc.name: EnableLight002 
   * @tc.desc: Enables the light available in the light list based on the specified light id.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfLightTest, EnableLight002, Function | MediumTest | Level1)
+HWTEST_F(HdfLightTest, SUB_DriverSystem_LightHdi_0130, Function | MediumTest | Level1)
 {
     int32_t i;
     int32_t ret;
@@ -176,11 +176,11 @@ HWTEST_F(HdfLightTest, EnableLight002, Function | MediumTest | Level1)
 }
 
 /**
-  * @tc.name: SUB_DriverSystem_LightHdi_0060
+  * @tc.name: EnableLight003
   * @tc.desc: Enables the light available in the light list based on the specified light id.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfLightTest, EnableLight003, Function | MediumTest | Level1)
+HWTEST_F(HdfLightTest, SUB_DriverSystem_LightHdi_0140, Function | MediumTest | Level1)
 {
     int32_t i;
     int32_t ret;
@@ -212,11 +212,11 @@ HWTEST_F(HdfLightTest, EnableLight003, Function | MediumTest | Level1)
 }
 
 /**
-  * @tc.name: SUB_DriverSystem_LightHdi_0070
+  * @tc.name: DisableLight001
   * @tc.desc: Disable the light available in the light list based on the specified light id.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfLightTest, DisableLight001, Function | MediumTest | Level1)
+HWTEST_F(HdfLightTest, SUB_DriverSystem_LightHdi_0150, Function | MediumTest | Level1)
 {
     uint32_t lightId = LIGHT_ID_BUTT;
 

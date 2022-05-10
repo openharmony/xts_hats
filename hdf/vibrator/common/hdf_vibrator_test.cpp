@@ -68,7 +68,7 @@ void HdfVibratorTest::TearDown()
   * @tc.desc: Creat a vibrator instance. The instance is not empty.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfVibratorTest, CheckVibratorInstanceIsEmpty, Function | MediumTest | Level1)
+HWTEST_F(HdfVibratorTest, SUB_DriverSystem_VibratorHdi_0010, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorDev);
 }
@@ -79,7 +79,7 @@ HWTEST_F(HdfVibratorTest, CheckVibratorInstanceIsEmpty, Function | MediumTest | 
     Controls this vibrator to stop the vibrator
   * @tc.type: FUNC
   */
-HWTEST_F(HdfVibratorTest, PerformOneShotVibratorDuration001, Function | MediumTest | Level1)
+HWTEST_F(HdfVibratorTest, SUB_DriverSystem_VibratorHdi_0020, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorDev);
 
@@ -98,7 +98,7 @@ HWTEST_F(HdfVibratorTest, PerformOneShotVibratorDuration001, Function | MediumTe
       Controls this vibrator to stop the vibrator
   * @tc.type: FUNC
   */
-HWTEST_F(HdfVibratorTest, PerformOneShotVibratorDuration002, Function | MediumTest | Level1)
+HWTEST_F(HdfVibratorTest, SUB_DriverSystem_VibratorHdi_0030, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorDev);
 
@@ -115,7 +115,7 @@ HWTEST_F(HdfVibratorTest, PerformOneShotVibratorDuration002, Function | MediumTe
       Controls this vibrator to stop the vibrator
   * @tc.type: FUNC
   */
-HWTEST_F(HdfVibratorTest, ExecuteVibratorEffect001, Function | MediumTest | Level1)
+HWTEST_F(HdfVibratorTest, SUB_DriverSystem_VibratorHdi_0040, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorDev);
 
@@ -134,7 +134,7 @@ HWTEST_F(HdfVibratorTest, ExecuteVibratorEffect001, Function | MediumTest | Leve
     Controls this vibrator to stop the vibrator.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfVibratorTest, ExecuteVibratorEffect002, Function | MediumTest | Level1)
+HWTEST_F(HdfVibratorTest, SUB_DriverSystem_VibratorHdi_0050, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorDev);
 
@@ -153,7 +153,7 @@ HWTEST_F(HdfVibratorTest, ExecuteVibratorEffect002, Function | MediumTest | Leve
       Controls this vibrator to stop the vibrator.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfVibratorTest, ExecuteVibratorEffect003, Function | MediumTest | Level1)
+HWTEST_F(HdfVibratorTest, SUB_DriverSystem_VibratorHdi_0060, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorDev);
 
@@ -170,7 +170,7 @@ HWTEST_F(HdfVibratorTest, ExecuteVibratorEffect003, Function | MediumTest | Leve
       Controls this vibrator to stop the vibrator.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfVibratorTest, ExecuteVibratorEffect004, Function | MediumTest | Level1)
+HWTEST_F(HdfVibratorTest, SUB_DriverSystem_VibratorHdi_0090, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorDev);
 
@@ -193,7 +193,7 @@ HWTEST_F(HdfVibratorTest, ExecuteVibratorEffect004, Function | MediumTest | Leve
       Controls this vibrator to stop the vibrator.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfVibratorTest, ExecuteVibratorEffect005, Function | MediumTest | Level1)
+HWTEST_F(HdfVibratorTest, SUB_DriverSystem_VibratorHdi_0070, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorDev);
 
@@ -213,7 +213,7 @@ HWTEST_F(HdfVibratorTest, ExecuteVibratorEffect005, Function | MediumTest | Leve
       Controls this vibrator to stop the vibrator.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfVibratorTest, ExecuteVibratorEffect006, Function | MediumTest | Level1)
+HWTEST_F(HdfVibratorTest, SUB_DriverSystem_VibratorHdi_0080, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorDev);
 
@@ -232,7 +232,7 @@ HWTEST_F(HdfVibratorTest, ExecuteVibratorEffect006, Function | MediumTest | Leve
     Controls this vibrator to stop the vibrator.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfVibratorTest, ExecuteVibratorEffect007, Function | MediumTest | Level1)
+HWTEST_F(HdfVibratorTest, SUB_DriverSystem_VibratorHdi_0100, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorDev);
 

@@ -56,8 +56,8 @@ ohos_moduletest_suite("HatsHdfCameraAttrTest") {
     "$camera_path/hdi_impl/include/offline_stream_operator",
     "$camera_path/device_manager/include/",
     "$camera_path/device_manager/include/mpi",
-    "//base/startup/syspara_lite/adapter/native/syspara/include",
     "$camera_path/utils/event",
+    "//base/startup/init_lite/interfaces/innerkits/include/syspara",
     "//drivers/peripheral/camera/interfaces/metadata/include",
 
     #producer
@@ -111,7 +111,7 @@ ohos_moduletest_suite("HatsHdfCameraAttrTest") {
   external_deps += [
     "ipc:ipc_single",
     "samgr_standard:samgr_proxy",
-    "startup_l2:syspara",
+    "init:libbegetutil",
   ]
 
   public_configs = [ ":cameraTest_config" ]

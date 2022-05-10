@@ -74,7 +74,7 @@ HWTEST_F(HdfLightHdiServiceTest, CheckLightInstanceIsEmpty, Function | MediumTes
   * @tc.desc: Get light info.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfLightHdiServiceTest, GetLightInfo001, Function | MediumTest | Level1)
+HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_LightHdi_0020, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_lightInterface);
 
@@ -95,7 +95,7 @@ HWTEST_F(HdfLightHdiServiceTest, GetLightInfo001, Function | MediumTest | Level1
   * @tc.desc: TurnOnLight.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfLightHdiServiceTest, TurnOnLight001, Function | MediumTest | Level1)
+HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_LightHdi_0030, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_lightInterface);
 
@@ -125,7 +125,7 @@ HWTEST_F(HdfLightHdiServiceTest, TurnOnLight001, Function | MediumTest | Level1)
   * @tc.desc: TurnOnLight.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfLightHdiServiceTest, TurnOnLight002, Function | MediumTest | Level1)
+HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_LightHdi_0040, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_lightInterface);
 
@@ -152,7 +152,7 @@ HWTEST_F(HdfLightHdiServiceTest, TurnOnLight002, Function | MediumTest | Level1)
   * @tc.desc: TurnOnLight.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfLightHdiServiceTest, TurnOnLight003, Function | MediumTest | Level1)
+HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_LightHdi_0050, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_lightInterface);
 
@@ -184,7 +184,7 @@ HWTEST_F(HdfLightHdiServiceTest, TurnOnLight003, Function | MediumTest | Level1)
   * @tc.desc: DisableLight.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfLightHdiServiceTest, DisableLight001, Function | MediumTest | Level1)
+HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_LightHdi_0160, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_lightInterface);
 

@@ -107,7 +107,7 @@ void HdfSensorHdiTest::TearDown()
   * @tc.desc: Get a client and check whether the client is empty.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, GetSensorClient0001, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0210, TestSize.Level1)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
 }
@@ -117,7 +117,7 @@ HWTEST_F(HdfSensorHdiTest, GetSensorClient0001, TestSize.Level1)
   * @tc.desc: Obtains information about all sensors in the system.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, GetSensorList0001, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0230, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -144,7 +144,7 @@ HWTEST_F(HdfSensorHdiTest, GetSensorList0001, TestSize.Level1)
   * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, RegisterSensorDataCb0001, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0240, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -161,7 +161,7 @@ HWTEST_F(HdfSensorHdiTest, RegisterSensorDataCb0001, TestSize.Level1)
   * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, RegisterSensorDataCb0002, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0250, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -178,7 +178,7 @@ HWTEST_F(HdfSensorHdiTest, RegisterSensorDataCb0002, TestSize.Level1)
   * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, RegisterSensorDataCb0003, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0260, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -195,7 +195,7 @@ HWTEST_F(HdfSensorHdiTest, RegisterSensorDataCb0003, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, EnableSensor0001, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0270, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -226,7 +226,7 @@ HWTEST_F(HdfSensorHdiTest, EnableSensor0001, TestSize.Level1)
   * @tc.desc: Enables the sensor available in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, EnableSensor0002, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0280, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -243,7 +243,7 @@ HWTEST_F(HdfSensorHdiTest, EnableSensor0002, TestSize.Level1)
   * @tc.desc: Sets the sampling time and data report interval for sensors in batches.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SetSensorBatch0001, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0290, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -272,7 +272,7 @@ HWTEST_F(HdfSensorHdiTest, SetSensorBatch0001, TestSize.Level1)
     @tc.desc: Sets the sampling time and data report interval for sensors in batches.
     @tc.type: FUNC
     */
-HWTEST_F(HdfSensorHdiTest, SetSensorBatch0002, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0300, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -287,7 +287,7 @@ HWTEST_F(HdfSensorHdiTest, SetSensorBatch0002, TestSize.Level1)
   * @tc.desc: Sets the sampling time and data report interval for sensors in batches.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SetSensorBatch0003, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0310, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -304,7 +304,7 @@ HWTEST_F(HdfSensorHdiTest, SetSensorBatch0003, TestSize.Level1)
   * @tc.desc: Sets the data reporting mode for the specified sensor.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SetSensorMode0001, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0320, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -335,7 +335,7 @@ HWTEST_F(HdfSensorHdiTest, SetSensorMode0001, TestSize.Level1)
   * Other values are invalid.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SetSensorMode0002, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0330, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -351,7 +351,7 @@ HWTEST_F(HdfSensorHdiTest, SetSensorMode0002, TestSize.Level1)
   * Other values are invalid.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SetSensorMode0003, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0340, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -376,7 +376,7 @@ HWTEST_F(HdfSensorHdiTest, SetSensorMode0003, TestSize.Level1)
   * @tc.desc: Sets options for the specified sensor, including its measurement range and accuracy.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SetSensorOption0001, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0350, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -394,7 +394,7 @@ HWTEST_F(HdfSensorHdiTest, SetSensorOption0001, TestSize.Level1)
   * @tc.desc: Sets options for the specified sensor, including its measurement range and accuracy.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SetSensorOption0002, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0360, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);

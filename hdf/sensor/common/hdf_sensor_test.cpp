@@ -165,7 +165,7 @@ void HdfSensorTest::TearDown()
   * @tc.desc: Create a sensor instance and check whether the instance is empty.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorTest, GetSensorInstance001, TestSize.Level1)
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0010, TestSize.Level1)
 {
     if (g_sensorDev == nullptr) {
         printf("test sensorHdi get Module instance failed\n\r");
@@ -181,7 +181,7 @@ HWTEST_F(HdfSensorTest, GetSensorInstance001, TestSize.Level1)
   * @tc.desc: The sensor instance is successfully removed.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorTest, RemoveSensorInstance001, TestSize.Level1)
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0020, TestSize.Level1)
 {
     int32_t ret = FreeSensorInterfaceInstance();
     ASSERT_EQ(SENSOR_SUCCESS, ret);
@@ -201,7 +201,7 @@ HWTEST_F(HdfSensorTest, RemoveSensorInstance001, TestSize.Level1)
   * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorTest, RegisterSensorDataCb001, TestSize.Level1)
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0500, TestSize.Level1)
 {
     if (g_sensorDev == nullptr) {
         EXPECT_NE(nullptr, g_sensorDev);
@@ -218,7 +218,7 @@ HWTEST_F(HdfSensorTest, RegisterSensorDataCb001, TestSize.Level1)
   * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorTest, RegisterSensorDataCb002, TestSize.Level1)
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0510, TestSize.Level1)
 {
     if (g_sensorDev == nullptr) {
         EXPECT_NE(nullptr, g_sensorDev);
@@ -235,7 +235,7 @@ HWTEST_F(HdfSensorTest, RegisterSensorDataCb002, TestSize.Level1)
   * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorTest, RegisterSensorDataCb003, TestSize.Level1)
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0520, TestSize.Level1)
 {
     if (g_sensorDev == nullptr) {
         EXPECT_NE(nullptr, g_sensorDev);
@@ -253,7 +253,7 @@ HWTEST_F(HdfSensorTest, RegisterSensorDataCb003, TestSize.Level1)
   * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorTest, RegisterSensorDataCb004, TestSize.Level1)
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0530, TestSize.Level1)
 {
     if (g_sensorDev == nullptr) {
         EXPECT_NE(nullptr, g_sensorDev);
@@ -270,7 +270,7 @@ HWTEST_F(HdfSensorTest, RegisterSensorDataCb004, TestSize.Level1)
   * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorTest, RegisterSensorDataCb005, TestSize.Level1)
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0540, TestSize.Level1)
 {
     if (g_sensorDev == nullptr) {
         EXPECT_NE(nullptr, g_sensorDev);
@@ -288,7 +288,7 @@ HWTEST_F(HdfSensorTest, RegisterSensorDataCb005, TestSize.Level1)
   * @tc.desc: Obtains information about all sensors in the system. Validity check of input parameters.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorTest, GetSensorList001, TestSize.Level1)
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0580, TestSize.Level1)
 {
     if (g_sensorInfo == nullptr) {
         EXPECT_NE(nullptr, g_sensorInfo);
@@ -302,7 +302,7 @@ HWTEST_F(HdfSensorTest, GetSensorList001, TestSize.Level1)
   * @tc.desc: Obtains information about all sensors in the system. Validity check of input parameters.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorTest, GetSensorList002, TestSize.Level1)
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0590, TestSize.Level1)
 {
     struct SensorInformation *info = nullptr;
     int j;
@@ -336,7 +336,7 @@ HWTEST_F(HdfSensorTest, GetSensorList002, TestSize.Level1)
   * setting the sensor data reporting mode, and setting sensor options such as the accuracy and measurement range.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorTest, GetSensorList003, TestSize.Level1)
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0570, TestSize.Level1)
 {
     if (g_sensorDev == nullptr) {
         EXPECT_NE(nullptr, g_sensorDev);
@@ -355,7 +355,7 @@ HWTEST_F(HdfSensorTest, GetSensorList003, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorTest, EnableSensor001, TestSize.Level1)
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0380, TestSize.Level1)
 {
     if (g_sensorDev == nullptr) {
         EXPECT_NE(nullptr, g_sensorDev);
@@ -395,7 +395,7 @@ HWTEST_F(HdfSensorTest, EnableSensor001, TestSize.Level1)
   * @tc.desc: Enables the sensor available in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorTest, EnableSensor002, TestSize.Level1)
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0370, TestSize.Level1)
 {
     if (g_sensorDev == nullptr) {
         EXPECT_NE(nullptr, g_sensorDev);
@@ -418,7 +418,7 @@ HWTEST_F(HdfSensorTest, EnableSensor002, TestSize.Level1)
   * @tc.desc: Sets the sampling time and data report interval for sensors in batches.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorTest, SetSensorBatch001, TestSize.Level1)
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0200, TestSize.Level1)
 {
     if (g_sensorDev == nullptr) {
         EXPECT_NE(nullptr, g_sensorDev);
@@ -457,7 +457,7 @@ HWTEST_F(HdfSensorTest, SetSensorBatch001, TestSize.Level1)
     @tc.desc: Sets the sampling time and data report interval for sensors in batches.
     @tc.type: FUNC
     */
-HWTEST_F(HdfSensorTest, SetSensorBatch002, TestSize.Level1)
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0140, TestSize.Level1)
 {
     if (g_sensorDev == nullptr) {
         EXPECT_NE(nullptr, g_sensorDev);
@@ -471,7 +471,7 @@ HWTEST_F(HdfSensorTest, SetSensorBatch002, TestSize.Level1)
     @tc.desc: Sets the sampling time and data report interval for sensors in batches.
     @tc.type: FUNC
     */
-HWTEST_F(HdfSensorTest, SetSensorBatch003, TestSize.Level1)
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0150, TestSize.Level1)
 {
     if (g_sensorDev == nullptr) {
         EXPECT_NE(nullptr, g_sensorDev);
@@ -497,7 +497,7 @@ HWTEST_F(HdfSensorTest, SetSensorBatch003, TestSize.Level1)
   * @tc.desc: Sets the data reporting mode for the specified sensor.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorTest, SetSensorMode001, TestSize.Level1)
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0160, TestSize.Level1)
 {
     if (g_sensorDev == nullptr) {
         EXPECT_NE(nullptr, g_sensorDev);
@@ -546,7 +546,7 @@ HWTEST_F(HdfSensorTest, SetSensorMode001, TestSize.Level1)
   * Other values are invalid.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorTest, SetSensorMode002, TestSize.Level1)
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0170, TestSize.Level1)
 {
     if (g_sensorDev == nullptr) {
         EXPECT_NE(nullptr, g_sensorDev);
@@ -563,7 +563,7 @@ HWTEST_F(HdfSensorTest, SetSensorMode002, TestSize.Level1)
   * Other values are invalid.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorTest, SetSensorMode003, TestSize.Level1)
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0180, TestSize.Level1)
 {
     if (g_sensorDev == nullptr) {
         EXPECT_NE(nullptr, g_sensorDev);
@@ -597,7 +597,7 @@ HWTEST_F(HdfSensorTest, SetSensorMode003, TestSize.Level1)
   * @tc.desc: Sets options for the specified sensor, including its measurement range and accuracy.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorTest, SetSensorOption001, TestSize.Level1)
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0550, TestSize.Level1)
 {
     if (g_sensorDev == nullptr) {
         EXPECT_NE(nullptr, g_sensorDev);
@@ -624,7 +624,7 @@ HWTEST_F(HdfSensorTest, SetSensorOption001, TestSize.Level1)
   * @tc.desc: Sets options for the specified sensor, including its measurement range and accuracy.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorTest, SetSensorOption002, TestSize.Level1)
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0560, TestSize.Level1)
 {
     if (g_sensorDev == nullptr) {
         EXPECT_NE(nullptr, g_sensorDev);

@@ -106,9 +106,9 @@ ohos_moduletest_suite("HatsHdfCameraFunctionTest") {
   }
 
   external_deps += [
+    "init:libbegetutil",
     "ipc:ipc_single",
     "samgr_standard:samgr_proxy",
-    "init:libbegetutil",
   ]
 
   public_configs = [ ":cameraTest_config" ]

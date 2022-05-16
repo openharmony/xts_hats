@@ -132,7 +132,7 @@ HWTEST_F(HdfLightTest, SUB_DriverSystem_LightHdi_0120, Function | MediumTest | L
     int32_t i;
     int32_t ret;
     struct LightEffect effect;
-    effect.lightBrightness = 0x80000000;
+    effect.lightBrightness = 0x00800000;
     effect.flashEffect.flashMode = LIGHT_FLASH_NONE;
     effect.flashEffect.onTime = 0;
     effect.flashEffect.offTime = 0;
@@ -159,7 +159,7 @@ HWTEST_F(HdfLightTest, SUB_DriverSystem_LightHdi_0130, Function | MediumTest | L
     int32_t i;
     int32_t ret;
     struct LightEffect effect;
-    effect.lightBrightness = 0x80000000;
+    effect.lightBrightness = 0x00800000;
     effect.flashEffect.flashMode = LIGHT_FLASH_TIMED;
     effect.flashEffect.onTime = g_onTime;
     effect.flashEffect.offTime = g_offTime;
@@ -191,7 +191,7 @@ HWTEST_F(HdfLightTest, SUB_DriverSystem_LightHdi_0140, Function | MediumTest | L
     EXPECT_EQ(LIGHT_NOT_SUPPORT, ret);
 
     for (i = 0; i < g_count; ++i) {
-        effect.lightBrightness = 0x80000000;
+        effect.lightBrightness = 0x00800000;
         effect.flashEffect.flashMode = LIGHT_FLASH_BUTT;
         effect.flashEffect.onTime = g_onTime;
         effect.flashEffect.offTime = g_offTime;

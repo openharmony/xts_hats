@@ -98,7 +98,7 @@ do_make()
     rm -rf "$BASE_HOME/test/xts/autogen_apiobjs"
     export XTS_SUITENAME=hats
     if [ "$SYSTEM_SIZE" = "standard" ]; then
-       ./build.sh --product-name $PRODUCT_NAME --gn-args build_xts=true --build-target $BUILD_TARGET --build-target "deploy_testtools" --gn-args is_standard_system=true --target_cpu $TARGET_ARCH
+       ./build.sh --product-name $PRODUCT_NAME --gn-args build_xts=true --build-target $BUILD_TARGET --build-target "deploy_testtools" --gn-args is_standard_system=true --target-cpu $TARGET_ARCH
     else
        if [ "$BUILD_TARGET" = "hats hats_ivi hats_intellitv hats_wearable" ]; then
          ./build.sh --product-name $PRODUCT_NAME --gn-args build_xts=true --build-target "hats" --build-target "hats_ivi" --build-target "hats_intellitv" --build-target "hats_wearable" --build-target "deploy_testtools"

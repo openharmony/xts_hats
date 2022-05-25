@@ -28,7 +28,9 @@
 #include <sys/prctl.h>
 #include <sys/utsname.h>
 #include <string>
-
+#include <stdio.h>
+#include <stdlib.h>
+#include "securec.h"
 #ifndef PR_SET_VMA
 const PR_SET_VMA 0x53564d41
 #endif
@@ -133,7 +135,7 @@ int SetVmaAnonName(void)
             continue;
 
         uintptr_t start, end;
-        if (sscanf(lines[i].c_str(), "%" SCNxPTR "-%" SCNxPTR " ", &start, &end) != 2)
+        if (sscanf_s(lines[i].c_str(), "%" SCNxPTR "-%" SCNxPTR " ", &start, sizeof(start), &end, sizeof(end) != 2))
             std::cout << "FAILED to parse line :" << lines[i];
 
         // This will never fail on the first line , so no need to do any special checking.

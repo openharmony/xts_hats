@@ -300,6 +300,40 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0310, TestSize.Level1)
 }
 
 /**
+  * @tc.name: SetSensorBatch0004
+  * @tc.desc: Sets the sampling time and data report interval for sensors in batches.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0311, TestSize.Level1)
+{
+    if (g_sensorInterface == nullptr) {
+        ASSERT_NE(nullptr, g_sensorInterface);
+        return;
+    }
+    for (auto iter : g_info) {
+        int32_t ret = g_sensorInterface->SetBatch(iter.sensorId, -1, -1);
+        EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
+    }
+}
+
+/**
+  * @tc.name: SetSensorBatch0005
+  * @tc.desc: Sets the sampling time and data report interval for sensors in batches.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0312, TestSize.Level1)
+{
+    if (g_sensorInterface == nullptr) {
+        ASSERT_NE(nullptr, g_sensorInterface);
+        return;
+    }
+    for (auto iter : g_info) {
+        int32_t ret = g_sensorInterface->SetBatch(iter.sensorId, SENSOR_INTERVAL2, -1);
+        EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
+    }
+}
+
+/**
   * @tc.name: SetSensorMode0001
   * @tc.desc: Sets the data reporting mode for the specified sensor.
   * @tc.type: FUNC

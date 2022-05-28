@@ -133,7 +133,7 @@ int SetVmaAnonName(void)
             continue;
 
         uintptr_t start, end;
-        if (sscanf(lines[i].c_str(), "%" SCNxPTR "-%" SCNxPTR " ", &start, &end) != 2)
+        if (sscanf_s(lines[i].c_str(), "%" SCNxPTR "-%" SCNxPTR " ", &start, &end) != 2)
             std::cout << "FAILED to parse line :" << lines[i];
 
         // This will never fail on the first line , so no need to do any special checking.

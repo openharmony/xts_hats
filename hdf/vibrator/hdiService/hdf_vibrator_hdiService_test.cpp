@@ -12,16 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 #include <cmath>
 #include <cstdio>
 #include <gtest/gtest.h>
 #include <securec.h>
 #include "hdf_base.h"
 #include "osal_time.h"
-#include "v1_0/ivibrator_interface.h"
+#include "v1_1/ivibrator_interface.h"
 
-using namespace OHOS::HDI::Vibrator::V1_0;
+using namespace OHOS::HDI::Vibrator::V1_1;
 using namespace testing::ext;
 
 namespace {

@@ -36,7 +36,7 @@ ohos_moduletest_suite("HatsHdfVibratorServiceTest") {
       "hiviewdfx_hilog_native:libhilog",
       "ipc:ipc_single",
       "utils_base:utils",
-      "vibrator_device_driver_interface:libvibrator_proxy_1.0",
+      "vibrator_device_driver_interface:libvibrator_proxy_1.1",
     ]
   } else {
     external_deps = [ "hilog:libhilog" ]

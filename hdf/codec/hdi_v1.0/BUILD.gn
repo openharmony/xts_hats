@@ -53,6 +53,3 @@ ohos_moduletest_suite("HatsHdfV1CodecTest") {
     external_deps = [ "hilog:libhilog" ]
   }
 }
-
-
-

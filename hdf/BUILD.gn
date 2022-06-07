@@ -17,13 +17,13 @@ group("hatshdftest") {
     deps = [
       "audio:HatsHdfAudioTest",
       "camera:HatsHdfCameraTest",
+      "codec:HatsHdfCodecTest",
       "input:HatsHdfInputTest",
       "light:HatsHdfLightTest",
       "manager:HatsHdfManagerTest",
       "sensor:HatsHdfSensorTest",
       "vibrator:HatsHdfVibratorTest",
       "wlan:HatsHdfWifiTest",
-      "codec:HatsHdfCodecTest",
     ]
   }
 }

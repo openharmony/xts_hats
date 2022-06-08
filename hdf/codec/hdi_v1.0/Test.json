@@ -1,0 +1,18 @@
+{
+    "kits": [
+        {
+            "push": [
+                "HatsHdfV1CodecTest->/data/local/tmp/HatsHdfV1CodecTest"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsHdfV1CodecTest",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    },
+    "description": "Configuration for HatsHdfV1CodecTest Tests"
+}

@@ -12,7 +12,7 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
-import("//drivers/adapter/uhdf2/uhdf.gni")
+import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
 
 group("HatsHdfLightTest") {
@@ -40,7 +40,7 @@ ohos_moduletest_suite("HatsHdfLightHdiTest") {
   deps = [ "//drivers/peripheral/misc/light/hal:hdi_light" ]
   if (is_standard_system) {
     external_deps = [
-      "device_driver_framework:libhdf_utils",
+      "hdf_core:libhdf_utils",
       "hiviewdfx_hilog_native:libhilog",
       "utils_base:utils",
     ]

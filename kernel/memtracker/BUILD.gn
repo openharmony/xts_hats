@@ -11,19 +11,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//build/ohos_var.gni")
-import(
-    "open_posix_testsuite/conformance/interfaces_gn/posix_interface_config.gni")
+import("//test/xts/tools/build/suite.gni")
+module_output_path = "hats/memtracker"
 
-group("kernel") {
-  testonly = true
+memorytracker_external_deps = [
+  "device_driver_framework:libhdf_utils",
+  "ipc:ipc_core",
+  "memorytracker_device_driver_interface:libmemorytracker_proxy_1.0",
+]
+
+ohos_moduletest_suite("HatsMemoryTrackerTest") {
+  module_out_path = module_output_path
+  sources = [ "./MemTrackerTest.cpp" ]
+
   if (is_standard_system) {
-    deps = [
-      "accesstokenid:HatsAccesstokenidTest",
-      "cam:HatsCamTest",
-      "memtracker:HatsMemoryTrackerTest",
-      "open_posix_testsuite/conformance/interfaces_gn:${posix_interface_module}",
-      "prctl:HatsPrctlTest",
-    ]
+    external_deps = memorytracker_external_deps
   }
+
+  deps = [
+    "//third_party/googletest:gtest_main",
+    "//utils/native/base:utils",
+  ]
+  include_dirs = [
+    "//test/xts/tools/hctest/include",
+    "//utils/",
+  ]
+  cflags = [ "-Wno-error" ]
 }

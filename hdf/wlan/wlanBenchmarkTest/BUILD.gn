@@ -12,7 +12,7 @@
 # limitations under the License.
 import("//build/ohos_var.gni")
 import("//build/test.gni")
-import("//drivers/adapter/uhdf2/uhdf.gni")
+import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hdf/wlan"
@@ -25,7 +25,7 @@ ohos_moduletest_suite("HatsHdfWlanbenchmarkTest") {
   ]
   sources = [ "hdf__wifi_benchmark_test.cpp" ]
   resource_config_file =
-      "//drivers/adapter/uhdf2/test/resource/wlan/ohos_test.xml"
+      "//drivers/hdf_core/adapter/uhdf2/test/resource/wlan/ohos_test.xml"
   cflags = [
     "-Wall",
     "-Wextra",
@@ -44,8 +44,8 @@ ohos_moduletest_suite("HatsHdfWlanbenchmarkTest") {
   ]
   if (is_standard_system) {
     external_deps = [
-      "device_driver_framework:libhdf_test_common",
-      "device_driver_framework:libhdf_utils",
+      "hdf_core:libhdf_test_common",
+      "hdf_core:libhdf_utils",
       "hiviewdfx_hilog_native:libhilog",
       "utils_base:utils",
     ]

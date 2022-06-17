@@ -108,13 +108,13 @@ static void PrintCapability(const char *where, CodecCapbility *cap)
     HDF_LOGI("%{public}s, ------------------------------ end print cap ---", where);
 }
 
-HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_GetCodecObj_0010, Function | MediumTest | Level1)
+HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0010, Function | MediumTest | Level1)
 {
     codecObj = HdiCodecGet(TEST_SERVICE_NAME);
     ASSERT_TRUE(codecObj != nullptr);
 }
 
-HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_EnumerateCapbility_0010, Function | MediumTest | Level1)
+HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0020, Function | MediumTest | Level1)
 {
     int32_t ret = HDF_SUCCESS;
     for (int index = 0; index < CAPABILITY_COUNT; index++) {
@@ -125,7 +125,7 @@ HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_EnumerateCapbility_0010, Function | Me
     }
 }
 
-HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_GetCapbility_0010, Function | MediumTest | Level1)
+HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0030, Function | MediumTest | Level1)
 {
     CodecCapbility cap;
     int32_t ret = codecObj->CodecGetCapbility(codecObj, MEDIA_MIMETYPE_VIDEO_HEVC, VIDEO_ENCODER, 0, &cap);
@@ -133,14 +133,14 @@ HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_GetCapbility_0010, Function | MediumTe
     PrintCapability("codec_config_utest", &cap);
 }
 
-HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_InitCodec_0010, Function | MediumTest | Level1)
+HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0040, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(codecObj != nullptr);
     int32_t errorCode = codecObj->CodecInit(codecObj);
     ASSERT_EQ(errorCode, HDF_SUCCESS);
 }
 
-HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_CreateCodec_0010, Function | MediumTest | Level1)
+HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0050, Function | MediumTest | Level1)
 {
     const char* name = "codec.avc.hardware.decoder";
     Param params;
@@ -156,7 +156,7 @@ HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_CreateCodec_0010, Function | MediumTes
     ASSERT_TRUE(handle != nullptr);
 }
 
-HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_SetPortMode_0010, Function | MediumTest | Level1)
+HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0060, Function | MediumTest | Level1)
 {
     DirectionType type = OUTPUT_TYPE;
     BufferMode mode = EXTERNAL;
@@ -165,7 +165,7 @@ HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_SetPortMode_0010, Function | MediumTes
     ASSERT_EQ(errorCode, HDF_SUCCESS);
 }
 
-HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_SetCodecType_0010, Function | MediumTest | Level1)
+HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0070, Function | MediumTest | Level1)
 {
     Param *params;
     int paramCnt = 1;
@@ -181,7 +181,7 @@ HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_SetCodecType_0010, Function | MediumTe
     ASSERT_EQ(errorCode, HDF_SUCCESS);
 }
 
-HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_GetDefaultCfg_0010, Function | MediumTest | Level1)
+HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0080, Function | MediumTest | Level1)
 {
     Param *params;
     int paramCnt = 1;
@@ -196,7 +196,7 @@ HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_GetDefaultCfg_0010, Function | MediumT
     ASSERT_EQ(errorCode, HDF_SUCCESS);
 }
 
-HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_SetSplitMode_0010, Function | MediumTest | Level1)
+HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0090, Function | MediumTest | Level1)
 {
     Param *params;
     int paramCnt = 1;
@@ -212,7 +212,7 @@ HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_SetSplitMode_0010, Function | MediumTe
     ASSERT_EQ(errorCode, HDF_SUCCESS);
 }
 
-HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_QueueInput_0010, Function | MediumTest | Level1)
+HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0100, Function | MediumTest | Level1)
 {
     inputBuffer.id = 0;
     inputBuffer.size = TEST_PACKET_BUFFER_SIZE;
@@ -231,7 +231,7 @@ HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_QueueInput_0010, Function | MediumTest
     ASSERT_EQ(errorCode, HDF_SUCCESS);
 }
 
-HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_DequeInput_0010, Function | MediumTest | Level1)
+HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0110, Function | MediumTest | Level1)
 {
     InputInfo inputInfo = {0};
     CodecBufferInfo codecBufferInfo = {BUFFER_TYPE_FD};
@@ -245,19 +245,19 @@ HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_DequeInput_0010, Function | MediumTest
     ASSERT_EQ(inputInfo.buffers->offset, inputInfoData.buffers->offset);
 }
 
-HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_StartCodec_0010, Function | MediumTest | Level1)
+HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0120, Function | MediumTest | Level1)
 {
     int32_t  errorCode = codecObj->CodecStart(codecObj, handle);
     ASSERT_EQ(errorCode, HDF_SUCCESS);
 }
 
-HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_StopCodec_0010, Function | MediumTest | Level1)
+HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0130, Function | MediumTest | Level1)
 {
     int32_t errorCode = codecObj->CodecStop(codecObj, handle);
     ASSERT_EQ(errorCode, HDF_SUCCESS);
 }
 
-HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_QueueOutput_0010, Function | MediumTest | Level1)
+HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0140, Function | MediumTest | Level1)
 {
     outputBuffer.id = 1;
     outputBuffer.size = TEST_FRAME_BUFFER_SIZE;
@@ -275,7 +275,7 @@ HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_QueueOutput_0010, Function | MediumTes
     ASSERT_EQ(errorCode, HDF_SUCCESS);
 }
 
-HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_DequeueOutput_0010, Function | MediumTest | Level1)
+HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0150, Function | MediumTest | Level1)
 {
     int32_t errorCode = 0;
     int32_t acquireFd;
@@ -290,7 +290,7 @@ HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_DequeueOutput_0010, Function | MediumT
     ASSERT_EQ(outInfo.buffers->offset, outputInfoData.buffers->offset);
 }
 
-HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_Flush_0010, Function | MediumTest | Level1)
+HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0160, Function | MediumTest | Level1)
 {
     DirectionType directType = OUTPUT_TYPE;
 
@@ -299,7 +299,7 @@ HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_Flush_0010, Function | MediumTest | Le
     ASSERT_EQ(directType, OUTPUT_TYPE);
 }
 
-HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_SetCallback_0010, Function | MediumTest | Level1)
+HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0170, Function | MediumTest | Level1)
 {
     UINTPTR instance = 0;
     g_callback = CodecCallbackStubObtain();
@@ -309,13 +309,13 @@ HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_SetCallback_0010, Function | MediumTes
     ASSERT_EQ(errorCode, HDF_SUCCESS);
 }
 
-HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_DestroyCodec_0010, Function | MediumTest | Level1)
+HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0180, Function | MediumTest | Level1)
 {
     int32_t errorCode = codecObj->CodecDestroy(codecObj, handle);
     ASSERT_EQ(errorCode, HDF_SUCCESS);
 }
 
-HWTEST_F(CodecProxyTest, SUB_Codec_HDI_V1_Deinit_0010, Function | MediumTest | Level1)
+HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0190, Function | MediumTest | Level1)
 {
     int32_t errorCode = codecObj->CodecDeinit(codecObj);
     ASSERT_EQ(errorCode, HDF_SUCCESS);

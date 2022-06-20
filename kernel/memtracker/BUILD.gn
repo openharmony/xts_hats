@@ -15,7 +15,6 @@ import("//test/xts/tools/build/suite.gni")
 module_output_path = "hats/memtracker"
 
 memorytracker_external_deps = [
-  "device_driver_framework:libhdf_utils",
   "ipc:ipc_core",
   "memorytracker_device_driver_interface:libmemorytracker_proxy_1.0",
 ]

@@ -19,11 +19,6 @@
 #include "system_ability_definition.h"
 #include "usbd_client.h"
 
-using namespace testing::ext;
-using namespace OHOS;
-using namespace OHOS::USB;
-using namespace std;
-
 const int SLEEP_TIME = 3;
 const int TEST_PORT_ID = 1;
 const int TEST_POWER_ROLE = 2;
@@ -31,6 +26,11 @@ const int TEST_DATAR_ROLE = 2;
 const int USB_FUNCTION_ACM = 1;
 const int USB_FUNCTION_ECM = 2;
 const int USB_FUNCTION_HDC = 4;
+
+using namespace testing::ext;
+using namespace OHOS;
+using namespace OHOS::USB;
+using namespace std;
 
 void UsbdFunctionTest::SetUpTestCase(void)
 {
@@ -53,9 +53,10 @@ void UsbdFunctionTest::TearDown(void) {}
  * @tc.name: UsbdGetCurrentFunctions001
  * @tc.desc: Test functions to GetCurrentFunctions
  * @tc.desc: int32_t GetCurrentFunctions(int32_t &funcs);
+ * @tc.desc: 正向测试：参数正确
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, UsbdGetCurrentFunctions001, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, UsbdGetCurrentFunctions001, TestSize.Level1)
 {
     int32_t funcs = 0;
     auto ret = UsbdClient::GetInstance().GetCurrentFunctions(funcs);
@@ -67,9 +68,10 @@ HWTEST_F(UsbdFunctionTest, UsbdGetCurrentFunctions001, Function | MediumTest | L
  * @tc.name: UsbdGetCurrentFunctions002
  * @tc.desc: Test functions to GetCurrentFunctions
  * @tc.desc: int32_t GetCurrentFunctions(int32_t &funcs);
+ * @tc.desc: 正向测试：参数正确
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, UsbdGetCurrentFunctions002, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, UsbdGetCurrentFunctions002, TestSize.Level1)
 {
     auto ret = UsbdClient::GetInstance().SetCurrentFunctions(1);
     HDF_LOGI("UsbdFunctionTest::UsbdFunction011 %{public}d SetCurrentFunctions=%{public}d", __LINE__, ret);
@@ -80,13 +82,16 @@ HWTEST_F(UsbdFunctionTest, UsbdGetCurrentFunctions002, Function | MediumTest | L
     ASSERT_TRUE(ret == 0);
 }
 
+/**********************************************************************************************************/
+
 /**
  * @tc.name: UsbdSetCurrentFunctions001
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
+ * @tc.desc: 正向测试：参数正确
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions001, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions001, TestSize.Level1)
 {
     int32_t funcs = 1;
     auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
@@ -98,9 +103,10 @@ HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions001, Function | MediumTest | L
  * @tc.name: UsbdSetCurrentFunctions002
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
+ * @tc.desc: 反向测试：参数异常，funcs错误
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions002, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions002, TestSize.Level1)
 {
     int32_t funcs = -1;
     auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
@@ -111,9 +117,10 @@ HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions002, Function | MediumTest | L
  * @tc.name: UsbdSetCurrentFunctions003
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
+ * @tc.desc: 正向测试：参数正确
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions003, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions003, TestSize.Level1)
 {
     int32_t funcs = USB_FUNCTION_ECM;
     auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
@@ -125,9 +132,10 @@ HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions003, Function | MediumTest | L
  * @tc.name: UsbdSetCurrentFunctions004
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
+ * @tc.desc: 正向测试：参数正确
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions004, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions004, TestSize.Level1)
 {
     int32_t funcs = USB_FUNCTION_ACM | USB_FUNCTION_ECM;
     auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
@@ -139,9 +147,10 @@ HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions004, Function | MediumTest | L
  * @tc.name: UsbdSetCurrentFunctions005
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
+ * @tc.desc: 正向测试：参数正确
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions005, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions005, TestSize.Level1)
 {
     int32_t funcs = USB_FUNCTION_HDC;
     auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
@@ -153,9 +162,10 @@ HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions005, Function | MediumTest | L
  * @tc.name: UsbdSetCurrentFunctions006
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
+ * @tc.desc: 正向测试：参数正确
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions006, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions006, TestSize.Level1)
 {
     int32_t funcs = USB_FUNCTION_ACM | USB_FUNCTION_HDC;
     auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
@@ -167,9 +177,10 @@ HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions006, Function | MediumTest | L
  * @tc.name: UsbdSetCurrentFunctions007
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
+ * @tc.desc: 正向测试：参数正确
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions007, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions007, TestSize.Level1)
 {
     int32_t funcs = USB_FUNCTION_ECM | USB_FUNCTION_HDC;
     auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
@@ -178,12 +189,28 @@ HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions007, Function | MediumTest | L
 }
 
 /**
+ * @tc.name: UsbdSetCurrentFunctions008
+ * @tc.desc: Test functions to SetCurrentFunctions
+ * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
+ * @tc.desc: 反向测试：参数异常，funcs错误
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions008, TestSize.Level1)
+{
+    int32_t funcs = 8;
+    auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
+    HDF_LOGI("UsbdFunctionTest::UsbdSetCurrentFunctions008 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
  * @tc.name: UsbdSetPortRole001
  * @tc.desc: Test functions to SetPortRole
  * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
+ * @tc.desc: 正向测试：参数正确
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, UsbdSetPortRole001, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, UsbdSetPortRole001, TestSize.Level1)
 {
     auto ret = UsbdClient::GetInstance().SetPortRole(1, 1, 1);
     HDF_LOGI("UsbdFunctionTest::UsbdSetPortRole001 %{public}d ret=%{public}d", __LINE__, ret);
@@ -194,9 +221,10 @@ HWTEST_F(UsbdFunctionTest, UsbdSetPortRole001, Function | MediumTest | Level1)
  * @tc.name: UsbdSetPortRole002
  * @tc.desc: Test functions to SetPortRole
  * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
+ * @tc.desc: 反向测试：参数异常，portId错误
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, UsbdSetPortRole002, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, UsbdSetPortRole002, TestSize.Level1)
 {
     auto ret = UsbdClient::GetInstance().SetPortRole(2, 1, 1);
     HDF_LOGI("UsbdFunctionTest::UsbdSetPortRole002 %{public}d ret=%{public}d", __LINE__, ret);
@@ -204,12 +232,97 @@ HWTEST_F(UsbdFunctionTest, UsbdSetPortRole002, Function | MediumTest | Level1)
 }
 
 /**
+ * @tc.name: UsbdSetPortRole003
+ * @tc.desc: Test functions to SetPortRole
+ * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
+ * @tc.desc: 反向测试：参数异常，powerRole错误
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdFunctionTest, UsbdSetPortRole003, TestSize.Level1)
+{
+    auto ret = UsbdClient::GetInstance().SetPortRole(1, 4, 2);
+    HDF_LOGI("UsbdFunctionTest::UsbdSetPortRole003 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: UsbdSetPortRole004
+ * @tc.desc: Test functions to SetPortRole
+ * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
+ * @tc.desc: 反向测试：参数异常，dataRole错误
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdFunctionTest, UsbdSetPortRole004, TestSize.Level1)
+{
+    auto ret = UsbdClient::GetInstance().SetPortRole(1, 1, 5);
+    HDF_LOGI("UsbdFunctionTest::UsbdSetPortRole004 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: UsbdSetPortRole005
+ * @tc.desc: Test functions to SetPortRole
+ * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
+ * @tc.desc: 反向测试：参数异常，portId、powerRole错误
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdFunctionTest, UsbdSetPortRole005, TestSize.Level1)
+{
+    auto ret = UsbdClient::GetInstance().SetPortRole(1, 5, 5);
+    HDF_LOGI("UsbdFunctionTest::UsbdSetPortRole005 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: UsbdSetPortRole006
+ * @tc.desc: Test functions to SetPortRole
+ * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
+ * @tc.desc: 反向测试：参数异常，portId、dataRole错误
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdFunctionTest, UsbdSetPortRole006, TestSize.Level1)
+{
+    auto ret = UsbdClient::GetInstance().SetPortRole(5, 1, 5);
+    HDF_LOGI("UsbdFunctionTest::UsbdSetPortRole006 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: UsbdSetPortRole007
+ * @tc.desc: Test functions to SetPortRole
+ * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
+ * @tc.desc: 反向测试：powerRole、dataRole错误
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdFunctionTest, UsbdSetPortRole007, TestSize.Level1)
+{
+    auto ret = UsbdClient::GetInstance().SetPortRole(1, 5, 5);
+    HDF_LOGI("UsbdFunctionTest::UsbdSetPortRole007 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: UsbdSetPortRole008
+ * @tc.desc: Test functions to SetPortRole
+ * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
+ * @tc.desc: 反向测试：portId、powerRole、dataRole错误
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdFunctionTest, UsbdSetPortRole008, TestSize.Level1)
+{
+    auto ret = UsbdClient::GetInstance().SetPortRole(2, 5, 5);
+    HDF_LOGI("UsbdFunctionTest::UsbdSetPortRole008 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
  * @tc.name: SetPortRole009
  * @tc.desc: Test functions to SetPortRole
  * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
+ * @tc.desc: 正向测试：参数正确
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SetPortRole09, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SetPortRole09, TestSize.Level1)
 {
     auto ret = UsbdClient::GetInstance().SetPortRole(1, 2, 2);
     HDF_LOGI("UsbdFunctionTest::SetPortRole09 %{public}d ret=%{public}d", __LINE__, ret);
@@ -220,9 +333,10 @@ HWTEST_F(UsbdFunctionTest, SetPortRole09, Function | MediumTest | Level1)
  * @tc.name: QueryPort001
  * @tc.desc: Test functions to QueryPort
  * @tc.desc: int32_t QueryPort(int32_t &portId, int32_t &powerRole, int32_t &dataRole, int32_t &mode);
+ * @tc.desc: 正向测试：参数正确
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, QueryPort001, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, QueryPort001, TestSize.Level1)
 {
     int32_t portId = 0;
     int32_t powerRole = 0;

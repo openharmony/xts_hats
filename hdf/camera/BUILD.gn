@@ -21,6 +21,9 @@ group("HatsHdfCameraTest") {
     testonly = true
   }
   if (device_name == "rk3568") {
+    if (is_standard_system) {
+      deps = [ "v4l2:hdi" ]
+    }
   } else {
     if (is_standard_system) {
       deps = [ "hdi:hdi" ]

@@ -61,13 +61,13 @@ void UsbdDeviceTest::SetUp(void) {}
 void UsbdDeviceTest::TearDown(void) {}
 
 /**
- * @tc.name: UsbdDevice001
+ * @tc.name: SUB_USB_HDI_0010
  * @tc.desc: Test functions to OpenDevice
  * @tc.desc: int32_t OpenDevice(const UsbDev &dev);
- * @tc.desc: 正向测试：参数正确
+ * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdDeviceTest, UsbdOpenDevice001, TestSize.Level1)
+HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0010, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     auto ret = UsbdClient::GetInstance().OpenDevice(dev);
@@ -76,13 +76,13 @@ HWTEST_F(UsbdDeviceTest, UsbdOpenDevice001, TestSize.Level1)
 }
 
 /**
- * @tc.name: UsbdDevice002
+ * @tc.name: SUB_USB_HDI_0020
  * @tc.desc: Test functions to OpenDevice
  * @tc.desc: int32_t OpenDevice(const UsbDev &dev);
  * @tc.desc:
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdDeviceTest, UsbdOpenDevice002, TestSize.Level1)
+HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0020, Function | MediumTest | Level1)
 {
     struct UsbDev dev = {BUS_NUM_255, dev_.devAddr};
     auto ret = UsbdClient::GetInstance().OpenDevice(dev);
@@ -91,13 +91,13 @@ HWTEST_F(UsbdDeviceTest, UsbdOpenDevice002, TestSize.Level1)
 }
 
 /**
- * @tc.name: UsbdDevice003
+ * @tc.name: SUB_USB_HDI_0030
  * @tc.desc: Test functions to OpenDevice
  * @tc.desc: int32_t OpenDevice(const UsbDev &dev);
  * @tc.desc:
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdDeviceTest, UsbdOpenDevice003, TestSize.Level1)
+HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0030, Function | MediumTest | Level1)
 {
     struct UsbDev dev = {dev_.busNum, DEV_ADDR_255};
     auto ret = UsbdClient::GetInstance().OpenDevice(dev);
@@ -106,13 +106,13 @@ HWTEST_F(UsbdDeviceTest, UsbdOpenDevice003, TestSize.Level1)
 }
 
 /**
- * @tc.name: UsbdDevice004
+ * @tc.name: SUB_USB_HDI_0040
  * @tc.desc: Test functions to OpenDevice
  * @tc.desc: int32_t OpenDevice(const UsbDev &dev);
  * @tc.desc:
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdDeviceTest, UsbdOpenDevice004, TestSize.Level1)
+HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0040, Function | MediumTest | Level1)
 {
     struct UsbDev dev = {BUS_NUM_255, DEV_ADDR_255};
     auto ret = UsbdClient::GetInstance().OpenDevice(dev);
@@ -123,13 +123,13 @@ HWTEST_F(UsbdDeviceTest, UsbdOpenDevice004, TestSize.Level1)
 /**********************************************************************************************************/
 
 /**
- * @tc.name: UsbdDevice011
+ * @tc.name: SUB_USB_HDI_0050
  * @tc.desc: Test functions to CloseDevice
  * @tc.desc: int32_t CloseDevice(const UsbDev &dev);
- * @tc.desc: 正向测试：参数正确
+ * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdDeviceTest, UsbdCloseDevice001, TestSize.Level1)
+HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0050, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     auto ret = UsbdClient::GetInstance().OpenDevice(dev);
@@ -141,13 +141,13 @@ HWTEST_F(UsbdDeviceTest, UsbdCloseDevice001, TestSize.Level1)
 }
 
 /**
- * @tc.name: UsbdDevice012
+ * @tc.name: SUB_USB_HDI_0060
  * @tc.desc: Test functions to CloseDevice
  * @tc.desc: int32_t CloseDevice(const UsbDev &dev);
  * @tc.desc:
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdDeviceTest, UsbdCloseDevice002, TestSize.Level1)
+HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0060, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     auto ret = UsbdClient::GetInstance().OpenDevice(dev);
@@ -162,13 +162,13 @@ HWTEST_F(UsbdDeviceTest, UsbdCloseDevice002, TestSize.Level1)
 }
 
 /**
- * @tc.name: UsbdDevice013
+ * @tc.name: SUB_USB_HDI_0070
  * @tc.desc: Test functions to CloseDevice
  * @tc.desc: int32_t CloseDevice(const UsbDev &dev);
  * @tc.desc:
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdDeviceTest, UsbdCloseDevice003, TestSize.Level1)
+HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0070, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     auto ret = UsbdClient::GetInstance().OpenDevice(dev);
@@ -183,13 +183,13 @@ HWTEST_F(UsbdDeviceTest, UsbdCloseDevice003, TestSize.Level1)
 }
 
 /**
- * @tc.name: UsbdDevice014
+ * @tc.name: SUB_USB_HDI_0080
  * @tc.desc: Test functions to CloseDevice
  * @tc.desc: int32_t CloseDevice(const UsbDev &dev);
  * @tc.desc:
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdDeviceTest, UsbdCloseDevice004, TestSize.Level1)
+HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0080, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     auto ret = UsbdClient::GetInstance().OpenDevice(dev);

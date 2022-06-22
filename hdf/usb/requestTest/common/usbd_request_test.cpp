@@ -952,7 +952,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0380, Function | MediumTest | Level1)
  * @tc.name: SUB_USB_HDI_0390
  * @tc.desc: Test functions to GetConfigDescriptor
  * @tc.desc: int32_t GetConfigDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &descriptor);
- * @tc.desc: Reverse test: parameter exception, devAddr 
+ * @tc.desc: Reverse test: parameter exception, devAddr
  * @tc.type: FUNC
  */
 HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0390, Function | MediumTest | Level1)

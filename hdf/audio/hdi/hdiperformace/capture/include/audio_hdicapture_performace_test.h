@@ -15,5 +15,4 @@
 
 #ifndef AUDIO_HDICAPTURE_PERFORMACE_TEST_H
 #define AUDIO_HDICAPTURE_PERFORMACE_TEST_H
-#include <sys/time.h>
 #endif

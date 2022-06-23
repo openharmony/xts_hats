@@ -43,9 +43,7 @@ using namespace testing::ext;
 using namespace HMOS::Audio;
 
 namespace {
-
 const int BUFFER = 1024 * 4;
-
 class AudioCaptureBenchmarkTest : public benchmark::Fixture {
 public:
     void SetUp(const ::benchmark::State &state);
@@ -96,11 +94,11 @@ void AudioCaptureBenchmarkTest::SetUp(const ::benchmark::State &state) {
     if (GetAudioManager == nullptr) {
         return;
     }
-}
+};
 
 
 void AudioCaptureBenchmarkTest::TearDown(const ::benchmark::State &state) {
-    #ifdef AUDIO_MPI_SO
+#ifdef AUDIO_MPI_SO
     if (SdkExit != nullptr) {
         SdkExit();
     }
@@ -122,8 +120,7 @@ void AudioCaptureBenchmarkTest::TearDown(const ::benchmark::State &state) {
     if (GetAudioManager != nullptr) {
         GetAudioManager = nullptr;
     }
-
-}
+};
 
 /**
 * @tc.name  the performace of AudioCreateCapture
@@ -151,7 +148,7 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCreateCap
         ret = audiopara.adapter->CreateCapture(audiopara.adapter, &audiopara.devDesc, &audiopara.attrs,
                                                &audiopara.capture);
         ret = audiopara.adapter->DestroyCapture(audiopara.adapter, audiopara.capture);
-        audiopara.capture = nullptr;     
+        audiopara.capture = nullptr;
     }
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     audiopara.manager->UnloadAdapter(audiopara.manager, audiopara.adapter);
@@ -216,8 +213,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureSt
                                  &audiopara.capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     for (auto _ : st) {
-        ret = audiopara.capture->control.Start((AudioHandle)audiopara.capture); 
-         audiopara.capture->control.Stop((AudioHandle)audiopara.capture);
+        ret = audiopara.capture->control.Start((AudioHandle)audiopara.capture);
+        audiopara.capture->control.Stop((AudioHandle)audiopara.capture);
     }
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 }
@@ -245,12 +242,12 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCapturePa
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = audiopara.capture->control.Start((AudioHandle)audiopara.capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    for (auto _ : st) {    
-        ret = audiopara.capture->control.Pause((AudioHandle)audiopara.capture);   
-        ret = audiopara.capture->control.Resume((AudioHandle)audiopara.capture);
+    for (auto _ : st) {
+        ret = audiopara.capture->control.Pause((AudioHandle)audiopara.capture);
+        audiopara.capture->control.Resume((AudioHandle)audiopara.capture);
     }
-    ret = StopAudio(audiopara);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
+    ret = StopAudio(audiopara);
 }
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCapturePause_0001)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
@@ -305,10 +302,10 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureSt
     audiopara.manager = GetAudioManager();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateCapture(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
-                                 &audiopara.capture); 
+                                 &audiopara.capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     for (auto _ : st) {
-        ret = audiopara.capture->control.Start((AudioHandle)audiopara.capture);   
+        audiopara.capture->control.Start((AudioHandle)audiopara.capture);
         ret = audiopara.capture->control.Stop((AudioHandle)audiopara.capture);
     }
     ret = audiopara.adapter->DestroyCapture(audiopara.adapter, audiopara.capture);
@@ -340,7 +337,7 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureSe
                              &audiopara.capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     InitAttrs(audiopara.attrs);
-    for (auto _ : st) { 
+    for (auto _ : st) {
         ret = audiopara.capture->attr.SetSampleAttributes(audiopara.capture, &audiopara.attrs);
     }
     ret = audiopara.adapter->DestroyCapture(audiopara.adapter, audiopara.capture);
@@ -363,7 +360,7 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureCa
 {
     int32_t ret = -1;
     struct PrepareAudioPara audiopara = {
-        .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0, 
+        .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0,
         .requestBytes = BUFFER_LENTH
     };
     ASSERT_NE(nullptr, GetAudioManager);
@@ -499,7 +496,7 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGe
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = audiopara.capture->volume.SetMute(audiopara.capture, false);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    for (auto _ : st) {   
+    for (auto _ : st) {
         ret = audiopara.capture->volume.GetMute(audiopara.capture, &audiopara.character.getmute);
     }
     EXPECT_FALSE(audiopara.character.getmute);
@@ -609,7 +606,7 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGe
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     for (auto _ : st) {
         ret = audiopara.capture->volume.GetGain(audiopara.capture, &audiopara.character.getgain);
-    }     
+    }
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_EQ(audiopara.character.setgain, audiopara.character.getgain);
     ret = audiopara.adapter->DestroyCapture(audiopara.adapter, audiopara.capture);
@@ -784,7 +781,6 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureFl
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     audiopara.manager->UnloadAdapter(audiopara.manager, audiopara.adapter);
     audiopara.adapter = nullptr;
-
 }
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureFlush_0001)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
@@ -859,7 +855,6 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureCh
     audiopara.capture = nullptr;
     audiopara.manager->UnloadAdapter(audiopara.manager, audiopara.adapter);
     audiopara.adapter = nullptr;
-
 }
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureCheckSceneCapability_0001)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
@@ -922,7 +917,7 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioGetCaptur
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = audiopara.capture->control.Start((AudioHandle)audiopara.capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    for (auto _ : st) {      
+    for (auto _ : st) {
         ret = audiopara.capture->GetCapturePosition(audiopara.capture, &audiopara.character.getframes, &audiopara.time);
     }
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -981,7 +976,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGe
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0
     };
     char keyValueList[] = "attr-format=24;attr-frame-count=4096;";
-    char keyValueListExp[] = "attr-route=0;attr-format=24;attr-channels=2;attr-frame-count=4096;attr-sampling-rate=48000";
+    char keyValueListExp[] = "attr-route=0;attr-format=24;attr-channels=2;attr-frame-count=4096;\
+                                attr-sampling-rate=48000";
     char keyValueListValue[256] = {};
     int32_t listLenth = 256;
     ASSERT_NE(nullptr, GetAudioManager);

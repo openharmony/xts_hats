@@ -976,8 +976,7 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGe
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0
     };
     char keyValueList[] = "attr-format=24;attr-frame-count=4096;";
-    char keyValueListExp[] = "attr-route=0;attr-format=24;attr-channels=2;attr-frame-count=4096;\
-                                attr-sampling-rate=48000";
+    char keyValueListExp[] = "attr-route=0;attr-format=24;attr-channels=2;attr-frame-count=4096;attr-sampling-rate=48000";
     char keyValueListValue[256] = {};
     int32_t listLenth = 256;
     ASSERT_NE(nullptr, GetAudioManager);

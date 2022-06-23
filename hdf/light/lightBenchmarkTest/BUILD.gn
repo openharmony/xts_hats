@@ -12,24 +12,16 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
+import("//build/test.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
 
-group("HatsHdfVibratorTest") {
-  testonly = true
-  deps = [
-    ":HatsHdfVibratorHdiTest",
-    "hdiService:HatsHdfVibratorServiceTest",
-    "vibratorBenchmarkTest:HatsHdfVibratorbenchmarkTest",
-  ]
-}
-
-module_output_path = "hdf/misc"
-ohos_moduletest_suite("HatsHdfVibratorHdiTest") {
+module_output_path = "hdf/light"
+ohos_moduletest_suite("HatsHdfLightbenchmarkTest") {
   module_out_path = module_output_path
-  include_dirs = []
+  include_dirs = [ "//drivers/peripheral/misc/light/interfaces/include" ]
 
-  sources = [ "./common/hdf_vibrator_test.cpp" ]
+  sources = [ "hdf_light_benchmark_test.cpp" ]
   cflags = [
     "-Wall",
     "-Wextra",
@@ -38,14 +30,23 @@ ohos_moduletest_suite("HatsHdfVibratorHdiTest") {
     "-fno-common",
     "-fno-strict-aliasing",
   ]
-  deps = [ "//drivers/peripheral/misc/vibrator/hal:hdi_vibrator" ]
+
+  deps = [
+    "//third_party/benchmark",
+    "//third_party/googletest:gmock_main",
+    "//third_party/googletest:gtest_main",
+  ]
+
   if (is_standard_system) {
     external_deps = [
       "hdf_core:libhdf_utils",
       "hiviewdfx_hilog_native:libhilog",
+      "ipc:ipc_single",
+      "light_device_driver_interface:liblight_proxy_1.0",
       "utils_base:utils",
     ]
   } else {
     external_deps = [ "hilog:libhilog" ]
   }
+  external_deps += [ "ipc:ipc_single" ]
 }

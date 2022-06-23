@@ -37,7 +37,6 @@ namespace {
     constexpr int32_t g_onTime = 500;
     constexpr int32_t g_offTime = 500;
     sptr<ILightInterface> g_lightInterface = nullptr;
-}
 
 class lightBenchmarkTest : public benchmark::Fixture {
 public:
@@ -47,7 +46,7 @@ public:
 
 void lightBenchmarkTest::SetUp(const ::benchmark::State &state)
 {
-     g_lightInterface = ILightInterface::Get();
+    g_lightInterface = ILightInterface::Get();
 }
 
 void lightBenchmarkTest::TearDown(const ::benchmark::State &state)
@@ -61,12 +60,13 @@ void lightBenchmarkTest::TearDown(const ::benchmark::State &state)
   */
 BENCHMARK_F(lightBenchmarkTest, CheckLightInstanceIsEmpty)(benchmark::State &st)
 {
-    for (auto _ : st){
+    for (auto _ : st) {
         ASSERT_NE(nullptr, g_lightInterface);
     }
 }
 
-BENCHMARK_REGISTER_F(lightBenchmarkTest, CheckLightInstanceIsEmpty)->Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+BENCHMARK_REGISTER_F(lightBenchmarkTest, CheckLightInstanceIsEmpty)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: GetLightInfo001
@@ -78,7 +78,7 @@ BENCHMARK_F(lightBenchmarkTest, GetLightInfo001)(benchmark::State &st)
     ASSERT_NE(nullptr, g_lightInterface);
 
     std::vector<HdfLightInfo> info;
-    for (auto _ : st){
+    for (auto _ : st) {
         int32_t ret = g_lightInterface->GetLightInfo(info);
         EXPECT_EQ(0, ret);
     }
@@ -91,7 +91,8 @@ BENCHMARK_F(lightBenchmarkTest, GetLightInfo001)(benchmark::State &st)
     }
 }
 
-BENCHMARK_REGISTER_F(lightBenchmarkTest, GetLightInfo001)->Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+BENCHMARK_REGISTER_F(lightBenchmarkTest, GetLightInfo001)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: TurnOnLight001
@@ -115,7 +116,7 @@ BENCHMARK_F(lightBenchmarkTest, TurnOnLight001)(benchmark::State &st)
         HdfLightEffect effect;
         effect.lightBrightness = 0x00800000;
         effect.flashEffect.flashMode = HDF_LIGHT_FLASH_NONE;
-        for (auto _ : st){
+        for (auto _ : st) {
             int32_t ret = g_lightInterface->TurnOnLight(iter.lightId, effect);
             EXPECT_EQ(HDF_SUCCESS, ret);
         }
@@ -125,7 +126,8 @@ BENCHMARK_F(lightBenchmarkTest, TurnOnLight001)(benchmark::State &st)
     }
 }
 
-BENCHMARK_REGISTER_F(lightBenchmarkTest, TurnOnLight001)->Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+BENCHMARK_REGISTER_F(lightBenchmarkTest, TurnOnLight001)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: TurnOnLight003
@@ -151,7 +153,7 @@ BENCHMARK_F(lightBenchmarkTest, TurnOnLight003)(benchmark::State &st)
         effect.flashEffect.flashMode = HDF_LIGHT_FLASH_TIMED;
         effect.flashEffect.onTime = g_onTime;
         effect.flashEffect.offTime = g_offTime;
-        for (auto _ : st){
+        for (auto _ : st) {
             int32_t ret = g_lightInterface->TurnOnLight(iter.lightId, effect);
             EXPECT_EQ(HDF_SUCCESS, ret);
         }
@@ -161,6 +163,8 @@ BENCHMARK_F(lightBenchmarkTest, TurnOnLight003)(benchmark::State &st)
     }
 }
 
-BENCHMARK_REGISTER_F(lightBenchmarkTest, TurnOnLight003)->Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+BENCHMARK_REGISTER_F(lightBenchmarkTest, TurnOnLight003)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
+}
 
 BENCHMARK_MAIN();

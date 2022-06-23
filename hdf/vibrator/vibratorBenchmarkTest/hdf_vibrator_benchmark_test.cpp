@@ -37,7 +37,6 @@ namespace {
     std::string g_builtIn = "haptic.default.effect";
     std::string g_arbitraryStr = "arbitraryString";
     sptr<IVibratorInterface> g_vibratorInterface = nullptr;
-}
 
 class vibratorBenchmarkTest : public benchmark::Fixture {
 public:
@@ -47,7 +46,7 @@ public:
 
 void vibratorBenchmarkTest::SetUp(const ::benchmark::State &state)
 {
-     g_vibratorInterface = IVibratorInterface::Get();
+    g_vibratorInterface = IVibratorInterface::Get();
 }
 
 void vibratorBenchmarkTest::TearDown(const ::benchmark::State &state)
@@ -61,12 +60,13 @@ void vibratorBenchmarkTest::TearDown(const ::benchmark::State &state)
   */
 BENCHMARK_F(vibratorBenchmarkTest, CheckVibratorInstanceIsEmpty)(benchmark::State &st)
 {
-    for (auto _ : st){
+    for (auto _ : st) {
         ASSERT_NE(nullptr, g_vibratorInterface);
     }
 }
 
-BENCHMARK_REGISTER_F(vibratorBenchmarkTest, CheckVibratorInstanceIsEmpty)->Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, CheckVibratorInstanceIsEmpty)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: PerformOneShotVibratorDuration001
@@ -78,7 +78,7 @@ BENCHMARK_F(vibratorBenchmarkTest, PerformOneShotVibratorDuration001)(benchmark:
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
-    for (auto _ : st){
+    for (auto _ : st) {
         int32_t startRet = g_vibratorInterface->StartOnce(g_duration);
         EXPECT_EQ(startRet, HDF_SUCCESS);
 
@@ -89,7 +89,8 @@ BENCHMARK_F(vibratorBenchmarkTest, PerformOneShotVibratorDuration001)(benchmark:
     }
 }
 
-BENCHMARK_REGISTER_F(vibratorBenchmarkTest, PerformOneShotVibratorDuration001)->Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, PerformOneShotVibratorDuration001)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: ExecuteVibratorEffect001
@@ -100,7 +101,7 @@ BENCHMARK_REGISTER_F(vibratorBenchmarkTest, PerformOneShotVibratorDuration001)->
 BENCHMARK_F(vibratorBenchmarkTest, ExecuteVibratorEffect001)(benchmark::State &st)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
-    for (auto _ : st){
+    for (auto _ : st) {
         int32_t startRet = g_vibratorInterface->Start(g_timeSequence);
         EXPECT_EQ(startRet, HDF_SUCCESS);
 
@@ -111,7 +112,8 @@ BENCHMARK_F(vibratorBenchmarkTest, ExecuteVibratorEffect001)(benchmark::State &s
     }
 }
 
-BENCHMARK_REGISTER_F(vibratorBenchmarkTest, ExecuteVibratorEffect001)->Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, ExecuteVibratorEffect001)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: ExecuteVibratorEffect002
@@ -123,7 +125,7 @@ BENCHMARK_F(vibratorBenchmarkTest, ExecuteVibratorEffect002)(benchmark::State &s
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
-    for (auto _ : st){
+    for (auto _ : st) {
         int32_t startRet = g_vibratorInterface->Start(g_builtIn);
         EXPECT_EQ(startRet, HDF_SUCCESS);
 
@@ -134,7 +136,8 @@ BENCHMARK_F(vibratorBenchmarkTest, ExecuteVibratorEffect002)(benchmark::State &s
     }
 }
 
-BENCHMARK_REGISTER_F(vibratorBenchmarkTest, ExecuteVibratorEffect002)->Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, ExecuteVibratorEffect002)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: ExecuteVibratorEffect005
@@ -146,7 +149,7 @@ BENCHMARK_REGISTER_F(vibratorBenchmarkTest, ExecuteVibratorEffect002)->Iteration
 BENCHMARK_F(vibratorBenchmarkTest, ExecuteVibratorEffect005)(benchmark::State &st)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
-    for (auto _ : st){
+    for (auto _ : st) {
         int32_t startRet = g_vibratorInterface->Start(g_timeSequence);
         EXPECT_EQ(startRet, HDF_SUCCESS);
 
@@ -157,7 +160,8 @@ BENCHMARK_F(vibratorBenchmarkTest, ExecuteVibratorEffect005)(benchmark::State &s
     }
 }
 
-BENCHMARK_REGISTER_F(vibratorBenchmarkTest, ExecuteVibratorEffect005)->Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, ExecuteVibratorEffect005)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: ExecuteVibratorEffect006
@@ -169,7 +173,7 @@ BENCHMARK_REGISTER_F(vibratorBenchmarkTest, ExecuteVibratorEffect005)->Iteration
 BENCHMARK_F(vibratorBenchmarkTest, ExecuteVibratorEffect006)(benchmark::State &st)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
-    for (auto _ : st){
+    for (auto _ : st) {
         int32_t startRet = g_vibratorInterface->Start(g_builtIn);
         EXPECT_EQ(startRet, HDF_SUCCESS);
 
@@ -180,6 +184,8 @@ BENCHMARK_F(vibratorBenchmarkTest, ExecuteVibratorEffect006)(benchmark::State &s
     }
 }
 
-BENCHMARK_REGISTER_F(vibratorBenchmarkTest, ExecuteVibratorEffect006)->Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, ExecuteVibratorEffect006)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
+}
 
 BENCHMARK_MAIN();

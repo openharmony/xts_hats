@@ -12,24 +12,25 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
+import("//build/test.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
 
-group("HatsHdfSensorTest") {
-  testonly = true
-  deps = [
-    ":HatsHdfSensorHdiTest",
-    "hdiService:HatsHdfSensorServiceTest",
-    "sensorBenchmarkTest:HatsHdfSensorbenchmarkTest",
-  ]
-}
-
 module_output_path = "hdf/sensor"
-ohos_moduletest_suite("HatsHdfSensorHdiTest") {
-  module_out_path = module_output_path
-  include_dirs = []
 
-  sources = [ "./common/hdf_sensor_test.cpp" ]
+ohos_moduletest_suite("HatsHdfSensorbenchmarkTest") {
+  module_out_path = module_output_path
+
+  include_dirs = [
+    "//drivers/peripheral/sensor/interfaces",
+    "//drivers/peripheral/sensor/interfaces/include",
+  ]
+
+  sources = [
+    "hdf_sensor_benchmark_test.cpp",
+    "sensor_callback_impl.cpp",
+    "sensor_callback_impl.h",
+  ]
   cflags = [
     "-Wall",
     "-Wextra",
@@ -38,14 +39,22 @@ ohos_moduletest_suite("HatsHdfSensorHdiTest") {
     "-fno-common",
     "-fno-strict-aliasing",
   ]
-  deps = [ "//drivers/peripheral/sensor/hal:hdi_sensor" ]
+  deps = [
+    "//third_party/benchmark",
+    "//third_party/googletest:gmock_main",
+    "//third_party/googletest:gtest_main",
+  ]
+
   if (is_standard_system) {
     external_deps = [
       "hdf_core:libhdf_utils",
       "hiviewdfx_hilog_native:libhilog",
+      "ipc:ipc_single",
+      "sensor_device_driver_interface:libsensor_proxy_1.0",
       "utils_base:utils",
     ]
   } else {
     external_deps = [ "hilog:libhilog" ]
   }
+  external_deps += [ "ipc:ipc_single" ]
 }

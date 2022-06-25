@@ -3,7 +3,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+# http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,34 +12,12 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
-import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
 
-module_output_path = "hdf/input"
-ohos_moduletest_suite("HatsHdfInputTest") {
-  module_out_path = module_output_path
-  include_dirs = [
-    "//drivers/peripheral/input/hal/include",
-    "//drivers/peripheral/input/interfaces/include",
+group("HatsHdfInputTest") {
+  testonly = true
+  deps = [
+    "hdi_input:HatsHdfInputTest",
+    "inputBenchmarkTest:HatsHdfInputbenchmarkTest",
   ]
-  sources = [ "./common/hdi_input_test.cpp" ]
-  cflags = [
-    "-Wall",
-    "-Wextra",
-    "-Werror",
-    "-fsigned-char",
-    "-fno-common",
-    "-fno-strict-aliasing",
-  ]
-  deps = [ "//drivers/peripheral/input/hal:hdi_input" ]
-  if (is_standard_system) {
-    external_deps = [
-      "hdf_core:libhdf_test_common",
-      "hdf_core:libhdf_utils",
-      "hiviewdfx_hilog_native:libhilog",
-      "utils_base:utils",
-    ]
-  } else {
-    external_deps = [ "hilog:libhilog" ]
-  }
 }

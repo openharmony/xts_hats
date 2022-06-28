@@ -54,138 +54,74 @@ void vibratorBenchmarkTest::TearDown(const ::benchmark::State &state)
 }
 
 /**
-  * @tc.name: CheckVibratorInstanceIsEmpty
-  * @tc.desc: Creat a vibrator instance. The instance is not empty.
+  * @tc.name: SUB_DriverSystem_VibratorBenchmark_0010
+  * @tc.desc: Benchmarktest for interface StartOnce
+  * Controls this vibrator to perform a one-shot vibrator at a given duration.
   * @tc.type: FUNC
   */
-BENCHMARK_F(vibratorBenchmarkTest, CheckVibratorInstanceIsEmpty)(benchmark::State &st)
-{
-    for (auto _ : st) {
-        ASSERT_NE(nullptr, g_vibratorInterface);
-    }
-}
-
-BENCHMARK_REGISTER_F(vibratorBenchmarkTest, CheckVibratorInstanceIsEmpty)->Iterations(100)->
-    Repetitions(3)->ReportAggregatesOnly();
-
-/**
-  * @tc.name: PerformOneShotVibratorDuration001
-  * @tc.desc: Controls this vibrator to perform a one-shot vibrator at a given duration.
-  * Controls this vibrator to stop the vibrator
-  * @tc.type: FUNC
-  */
-BENCHMARK_F(vibratorBenchmarkTest, PerformOneShotVibratorDuration001)(benchmark::State &st)
+BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0010)(benchmark::State &st)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
+    int32_t startRet;
     for (auto _ : st) {
-        int32_t startRet = g_vibratorInterface->StartOnce(g_duration);
-        EXPECT_EQ(startRet, HDF_SUCCESS);
-
-        OsalMSleep(g_sleepTime1);
-
-        int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_ONCE);
-        EXPECT_EQ(endRet, HDF_SUCCESS);
+        startRet = g_vibratorInterface->StartOnce(g_duration);
     }
+
+    OsalMSleep(g_sleepTime1);
+
+    int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_ONCE);
+    EXPECT_EQ(endRet, HDF_SUCCESS);
 }
 
-BENCHMARK_REGISTER_F(vibratorBenchmarkTest, PerformOneShotVibratorDuration001)->Iterations(100)->
-    Repetitions(3)->ReportAggregatesOnly();
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0010)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.name: ExecuteVibratorEffect001
-  * @tc.desc: Controls this Performing Time Series Vibrator Effects.
-  * Controls this vibrator to stop the vibrator
-  * @tc.type: FUNC
-  */
-BENCHMARK_F(vibratorBenchmarkTest, ExecuteVibratorEffect001)(benchmark::State &st)
-{
-    ASSERT_NE(nullptr, g_vibratorInterface);
-    for (auto _ : st) {
-        int32_t startRet = g_vibratorInterface->Start(g_timeSequence);
-        EXPECT_EQ(startRet, HDF_SUCCESS);
-
-        OsalMSleep(g_sleepTime2);
-
-        int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_PRESET);
-        EXPECT_EQ(endRet, HDF_SUCCESS);
-    }
-}
-
-BENCHMARK_REGISTER_F(vibratorBenchmarkTest, ExecuteVibratorEffect001)->Iterations(100)->
-    Repetitions(3)->ReportAggregatesOnly();
-
-/**
-  * @tc.name: ExecuteVibratorEffect002
-  * @tc.desc: Controls this Performing built-in Vibrator Effects.
-  * Controls this vibrator to stop the vibrator.
-  * @tc.type: FUNC
-  */
-BENCHMARK_F(vibratorBenchmarkTest, ExecuteVibratorEffect002)(benchmark::State &st)
-{
-    ASSERT_NE(nullptr, g_vibratorInterface);
-
-    for (auto _ : st) {
-        int32_t startRet = g_vibratorInterface->Start(g_builtIn);
-        EXPECT_EQ(startRet, HDF_SUCCESS);
-
-        OsalMSleep(g_sleepTime1);
-
-        int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_PRESET);
-        EXPECT_EQ(endRet, HDF_SUCCESS);
-    }
-}
-
-BENCHMARK_REGISTER_F(vibratorBenchmarkTest, ExecuteVibratorEffect002)->Iterations(100)->
-    Repetitions(3)->ReportAggregatesOnly();
-
-/**
-  * @tc.name: ExecuteVibratorEffect005
-  * @tc.desc: Controls this vibrator to stop the vibrator.
+  * @tc.name: SUB_DriverSystem_VibratorBenchmark_0020
+  * @tc.desc: Benchmarktest for interface Start
   * Controls this Performing Time Series Vibrator Effects.
-  * Controls this vibrator to stop the vibrator.
   * @tc.type: FUNC
   */
-BENCHMARK_F(vibratorBenchmarkTest, ExecuteVibratorEffect005)(benchmark::State &st)
+BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0020)(benchmark::State &st)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
+    int32_t startRet;
     for (auto _ : st) {
-        int32_t startRet = g_vibratorInterface->Start(g_timeSequence);
-        EXPECT_EQ(startRet, HDF_SUCCESS);
-
-        OsalMSleep(g_sleepTime2);
-
-        int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_PRESET);
-        EXPECT_EQ(endRet, HDF_SUCCESS);
+        startRet = g_vibratorInterface->Start(g_timeSequence);
     }
+
+    OsalMSleep(g_sleepTime2);
+
+    int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_PRESET);
+    EXPECT_EQ(endRet, HDF_SUCCESS);
 }
 
-BENCHMARK_REGISTER_F(vibratorBenchmarkTest, ExecuteVibratorEffect005)->Iterations(100)->
-    Repetitions(3)->ReportAggregatesOnly();
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0020)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.name: ExecuteVibratorEffect006
-  * @tc.desc: Controls this vibrator to stop the vibrator.
-  * Controls this Perform built-in Vibrator Effects.
-  * Controls this vibrator to stop the vibrator.
+  * @tc.name: SUB_DriverSystem_VibratorBenchmark_0030
+  * @tc.desc: Benchmarktest for interface Stop
+  * Controls this Performing built-in Vibrator Effects.
   * @tc.type: FUNC
   */
-BENCHMARK_F(vibratorBenchmarkTest, ExecuteVibratorEffect006)(benchmark::State &st)
+BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0030)(benchmark::State &st)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
+    int32_t startRet = g_vibratorInterface->Start(g_builtIn);
+    EXPECT_EQ(startRet, HDF_SUCCESS);
+
+    OsalMSleep(g_sleepTime1);
+    int32_t endRet;
     for (auto _ : st) {
-        int32_t startRet = g_vibratorInterface->Start(g_builtIn);
-        EXPECT_EQ(startRet, HDF_SUCCESS);
-
-        OsalMSleep(g_sleepTime2);
-
-        int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_PRESET);
+        endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_PRESET);
         EXPECT_EQ(endRet, HDF_SUCCESS);
     }
 }
 
-BENCHMARK_REGISTER_F(vibratorBenchmarkTest, ExecuteVibratorEffect006)->Iterations(100)->
-    Repetitions(3)->ReportAggregatesOnly();
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0030)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 }
 
 BENCHMARK_MAIN();

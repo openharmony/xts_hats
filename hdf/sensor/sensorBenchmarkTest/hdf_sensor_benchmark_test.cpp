@@ -96,8 +96,9 @@ void sensorBenchmarkTest::TearDown(const ::benchmark::State &state)
 }
 
 /**
-  * @tc.name: GetSensorList0001
-  * @tc.desc: Obtains information about all sensors in the system.
+  * @tc.name: SUB_DriverSystem_SensorBenchmark_0010
+  * @tc.desc: Benchmarktest for interface GetAllSensorInfo.
+  * Obtains information about all sensors in the system.
   * @tc.type: FUNC
   */
 BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0010)(benchmark::State &st)
@@ -126,8 +127,9 @@ BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0010)
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.name: RegisterSensorDataCb0001
-  * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
+  * @tc.name: SUB_DriverSystem_SensorBenchmark_0020
+  * @tc.desc: Benchmarktest for interface register.
+  * Returns 0 if the callback is successfully registered; returns a negative value otherwise.
   * @tc.type: FUNC
   */
 BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0020)(benchmark::State &st)
@@ -149,8 +151,9 @@ BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0020)
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.name: UnRegisterSensorDataCb0001
-  * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
+  * @tc.name: SUB_DriverSystem_SensorBenchmark_0030
+  * @tc.desc: Benchmarktest for interface Unregister.
+  * Returns 0 if the callback is successfully registered; returns a negative value otherwise.
   * @tc.type: FUNC
   */
 BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0030)(benchmark::State &st)
@@ -171,8 +174,9 @@ BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0030)
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.name: EnableSensor0001
-  * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
+  * @tc.name: SUB_DriverSystem_SensorBenchmark_0040
+  * @tc.desc: Benchmarktest for interface Enable.
+  * Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
 
@@ -204,8 +208,9 @@ BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0040)
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.name: DisableSensor0001
-  * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
+  * @tc.name: SUB_DriverSystem_SensorBenchmark_0050
+  * @tc.desc: Benchmarktest for interface Disable.
+  * Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
 
@@ -237,8 +242,9 @@ BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0050)
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.name: SetSensorBatch0001
-  * @tc.desc: Sets the sampling time and data report interval for sensors in batches.
+  * @tc.name: SUB_DriverSystem_SensorBenchmark_0060
+  * @tc.desc: Benchmarktest for interface SetBatch.
+  * Sets the sampling time and data report interval for sensors in batches.
   * @tc.type: FUNC
   */
 BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0060)(benchmark::State &st)
@@ -270,8 +276,9 @@ BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0060)
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.name: SetSensorMode0001
-  * @tc.desc: Sets the data reporting mode for the specified sensor.
+  * @tc.name: SUB_DriverSystem_SensorBenchmark_0070
+  * @tc.desc: Benchmarktest for interface SetMode.
+  * Sets the data reporting mode for the specified sensor.
   * @tc.type: FUNC
   */
 BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0070)(benchmark::State &st)
@@ -302,8 +309,9 @@ BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0070)
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.name: SetSensorOption0001
-  * @tc.desc: Sets options for the specified sensor, including its measurement range and accuracy.
+  * @tc.name: SUB_DriverSystem_SensorBenchmark_0080
+  * @tc.desc: Benchmarktest for interface SetOption.
+  * Sets options for the specified sensor, including its measurement range and accuracy.
   * @tc.type: FUNC
   */
 BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0080)(benchmark::State &st)
@@ -317,8 +325,8 @@ BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0080)(benchmar
  
     for (auto _ : st) {
         ret = g_sensorInterface->SetOption(0, 0);
-        EXPECT_EQ(SENSOR_SUCCESS, ret);
     }
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
 }
 
 BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0080)->

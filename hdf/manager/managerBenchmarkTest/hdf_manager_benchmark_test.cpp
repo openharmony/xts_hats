@@ -95,13 +95,12 @@ public:
 int32_t IPCObjectStubTest::payload = 0;
 
 /**
-  * @tc.number: SUB_DriverSystem_ManagerService_0010
+  * @tc.number: SUB_DriverSystem_ManagerBenchmarkTest_0010
   * @tc.name: open input device for ap mode benchmark test
   * @tc.size: Medium
   * @tc.level: level 1
   */
-BENCHMARK_F(managerBenchmarkTest, SUB_DriverSystem_ManagerBenchmarkTest_0010)(
-    benchmark::State &st)
+BENCHMARK_F(managerBenchmarkTest, SendRequest)(benchmark::State &st)
 {
     auto servmgr = IServiceManager::Get();
     ASSERT_TRUE(servmgr != nullptr);
@@ -123,17 +122,16 @@ BENCHMARK_F(managerBenchmarkTest, SUB_DriverSystem_ManagerBenchmarkTest_0010)(
     ASSERT_EQ(status, 0);
 }
 
-BENCHMARK_REGISTER_F(managerBenchmarkTest, SUB_DriverSystem_ManagerBenchmarkTest_0010)->Iterations(100)->
+BENCHMARK_REGISTER_F(managerBenchmarkTest, SendRequest)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_ManagerService_0020
+  * @tc.number: SUB_DriverSystem_ManagerBenchmarkTest_0020
   * @tc.name: open input device for ap mode benchmark test
   * @tc.size: Medium
   * @tc.level: level 1
   */
-BENCHMARK_F(managerBenchmarkTest, SUB_DriverSystem_ManagerBenchmarkTest_0020)(
-    benchmark::State &st)
+BENCHMARK_F(managerBenchmarkTest, GetService)(benchmark::State &st)
 {
     auto servmgr = IServiceManager::Get();
     ASSERT_TRUE(servmgr != nullptr);
@@ -158,86 +156,16 @@ BENCHMARK_F(managerBenchmarkTest, SUB_DriverSystem_ManagerBenchmarkTest_0020)(
     ASSERT_EQ(IPCObjectStubTest::payload, payload);
 }
 
-BENCHMARK_REGISTER_F(managerBenchmarkTest, SUB_DriverSystem_ManagerBenchmarkTest_0020)->Iterations(100)->
-    Repetitions(3)->ReportAggregatesOnly();
-
-
-/**
-  * @tc.number: SUB_DriverSystem_ManagerService_0030
-  * @tc.name: open input device for ap mode benchmark test
-  * @tc.size: Medium
-  * @tc.level: level 1
-  */
-BENCHMARK_F(managerBenchmarkTest, SUB_DriverSystem_ManagerBenchmarkTest_0030)(
-    benchmark::State &st)
-{
-    auto servmgr = IServiceManager::Get();
-    ASSERT_TRUE(servmgr != nullptr);
-
-    auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
-
-    sptr<IRemoteObject> callback = new IPCObjectStubTest();
-    OHOS::MessageParcel data;
-    OHOS::MessageParcel reply;
-    int32_t payload = PAYLOAD_NUM;
-    bool ret = data.WriteInterfaceToken(TEST_SERVICE_INTERFACE_DESC);
-    ASSERT_EQ(ret, true);
-    data.WriteInt32(payload);
-    data.WriteRemoteObject(callback);
-
-    OHOS::MessageOption option;
-    int status;
-    for (auto _ : st) {
-        status = sampleService->SendRequest(SAMPLE_SERVICE_CALLBACK, data, reply, option);
-        }
-    status = 0;
-    ASSERT_EQ(status, 0);
-    ASSERT_EQ(IPCObjectStubTest::payload, payload);
-}
-
-BENCHMARK_REGISTER_F(managerBenchmarkTest, SUB_DriverSystem_ManagerBenchmarkTest_0030)->Iterations(100)->
+BENCHMARK_REGISTER_F(managerBenchmarkTest, GetService)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_ManagerService_0040
-  * @tc.name: open input device test
-  * @tc.size: Medium
-  * @tc.level: level 1
-  */
-BENCHMARK_F(managerBenchmarkTest, SUB_DriverSystem_ManagerBenchmarkTest_0040)(
-    benchmark::State &st)
-{
-    auto servmgr = IServiceManager::Get();
-    ASSERT_TRUE(servmgr != nullptr);
-
-    auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
-
-    OHOS::MessageParcel data;
-    OHOS::MessageParcel reply;
-    bool ret;
-    for (auto _ : st) {
-        ret = data.WriteInterfaceToken(TEST_SERVICE_INTERFACE_DESC);
-        }
-    ret = true;
-    ASSERT_EQ(ret, true);
-    data.WriteCString("sample_service test call");
-
-    OHOS::MessageOption option;
-    int status = sampleService->SendRequest(SAMPLE_SERVICE_PING, data, reply, option);
-    ASSERT_EQ(status, 0);
-}
-
-BENCHMARK_REGISTER_F(managerBenchmarkTest, SUB_DriverSystem_ManagerBenchmarkTest_0040)->Iterations(100)->
-    Repetitions(3)->ReportAggregatesOnly();
-
-/**
-  * @tc.number: SUB_DriverSystem_ManagerService_0050
+  * @tc.number: SUB_DriverSystem_ManagerBenchmarkTest_0030
   * @tc.name: Benchmark_Test device manager Load/UnLoad device and driver dynamic register device
   * @tc.size: Medium
   * @tc.level: level 1
   */
-BENCHMARK_F(managerBenchmarkTest, SUB_DriverSystem_ManagerBenchmarkTest_0050)(
-    benchmark::State &st)
+BENCHMARK_F(managerBenchmarkTest, LoadDevice)(benchmark::State &st)
 {
     auto devmgr = IDeviceManager::Get();
     ASSERT_TRUE(devmgr != nullptr);
@@ -306,17 +234,16 @@ BENCHMARK_F(managerBenchmarkTest, SUB_DriverSystem_ManagerBenchmarkTest_0050)(
     ASSERT_TRUE(sampleService == nullptr);
 }
 
-BENCHMARK_REGISTER_F(managerBenchmarkTest, SUB_DriverSystem_ManagerBenchmarkTest_0050)->Iterations(100)->
+BENCHMARK_REGISTER_F(managerBenchmarkTest, LoadDevice)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_ManagerService_0060
+  * @tc.number: SUB_DriverSystem_ManagerBenchmarkTest_0040
   * @tc.name: Benchmark_Test Device manager Load/UnLoad device and driver dynamic register device 
   * @tc.size: Medium
   * @tc.level: level 1
   */
-BENCHMARK_F(managerBenchmarkTest, SUB_DriverSystem_ManagerBenchmarkTest_0060)(
-    benchmark::State &st)
+BENCHMARK_F(managerBenchmarkTest, UnloadDevice)(benchmark::State &st)
 {
     auto devmgr = IDeviceManager::Get();
     ASSERT_TRUE(devmgr != nullptr);
@@ -386,7 +313,7 @@ BENCHMARK_F(managerBenchmarkTest, SUB_DriverSystem_ManagerBenchmarkTest_0060)(
     ASSERT_TRUE(sampleService == nullptr);
 }
 
-BENCHMARK_REGISTER_F(managerBenchmarkTest, SUB_DriverSystem_ManagerBenchmarkTest_0060)->Iterations(100)->
+BENCHMARK_REGISTER_F(managerBenchmarkTest, UnloadDevice)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 class ServStatListener : public OHOS::HDI::ServiceManager::V1_0::ServStatListenerStub {
@@ -404,13 +331,12 @@ private:
 };
 
 /**
-  * @tc.number: SUB_DriverSystem_MemoryHdi_0010
+  * @tc.number: SUB_DriverSystem_ManagerBenchmarkTest_0050
   * @tc.name: smq test normal read/write (benchmarktest)
   * @tc.size: Medium
   * @tc.level: level 1
   */
-BENCHMARK_F(managerBenchmarkTest, SUB_DriverSystem_MemoryHdi_0010)(
-    benchmark::State &st)
+BENCHMARK_F(managerBenchmarkTest, Marshalling)(benchmark::State &st)
 {
     HDF_LOGI("%{public}s:%{public}d", __func__, __LINE__);
     auto servmgr = IServiceManager::Get();
@@ -442,17 +368,16 @@ BENCHMARK_F(managerBenchmarkTest, SUB_DriverSystem_MemoryHdi_0010)(
     }
 }
 
-BENCHMARK_REGISTER_F(managerBenchmarkTest, SUB_DriverSystem_MemoryHdi_0010)->Iterations(100)->
+BENCHMARK_REGISTER_F(managerBenchmarkTest, Marshalling)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_MemoryHdi_0020
+  * @tc.number: SUB_DriverSystem_ManagerBenchmarkTest_0060
   * @tc.name: smq test normal read/write for (benchmarktest)
   * @tc.size: Medium
   * @tc.level: level 1
   */
-BENCHMARK_F(managerBenchmarkTest, SUB_DriverSystem_MemoryHdi_0020)(
-    benchmark::State &st)
+BENCHMARK_F(managerBenchmarkTest, Write)(benchmark::State &st)
 {
     HDF_LOGI("%{public}s:%{public}d", __func__, __LINE__);
     auto servmgr = IServiceManager::Get();
@@ -491,51 +416,7 @@ BENCHMARK_F(managerBenchmarkTest, SUB_DriverSystem_MemoryHdi_0020)(
     }
 }
 
-BENCHMARK_REGISTER_F(managerBenchmarkTest, SUB_DriverSystem_MemoryHdi_0020)->Iterations(100)->
-    Repetitions(3)->ReportAggregatesOnly();
-
-/**
-  * @tc.number: SUB_DriverSystem_MemoryHdi_0030
-  * @tc.name: smq test with overflow wait (benchmarktest)
-  * @tc.size: Medium
-  * @tc.level: level 1
-  */
-BENCHMARK_F(managerBenchmarkTest, SUB_DriverSystem_MemoryHdi_0030)(
-    benchmark::State &st)
-{
-    auto servmgr = IServiceManager::Get();
-    ASSERT_TRUE(servmgr != nullptr);
-
-    OHOS::MessageParcel data;
-    OHOS::MessageParcel reply;
-    OHOS::MessageOption option;
-    std::unique_ptr<SharedMemQueue<SampleSmqElement>> smq =
-        std::make_unique<SharedMemQueue<SampleSmqElement>>(SMQ_TEST_QUEUE_SIZE, SmqType::SYNCED_SMQ);
-    ASSERT_TRUE(smq->IsGood());
-    bool ret;
-    for (auto _ : st) {
-        ret = data.WriteInterfaceToken(TEST_SERVICE_INTERFACE_DESC);
-        }
-    constexpr uint32_t ELEMENT_SIZE = 2;
-    ret = smq->GetMeta()->Marshalling(data);
-
-    data.WriteUint32(ELEMENT_SIZE);
-
-    constexpr int SEND_TIMES = 20;
-    for (int i = 0; i < SEND_TIMES; i++) {
-        SampleSmqElement t[ELEMENT_SIZE] = {};
-        t[0].data32 = i;
-        t[0].data64 = i + 1;
-        t[1].data32 = i + 1;
-        t[1].data64 = i + 1;
-        HDF_LOGI("%{public}s:write smq message %{public}d", __func__, i);
-        auto status = smq->Write(&t[0], ELEMENT_SIZE, OHOS::MillisecToNanosec(SMQ_TEST_WAIT_TIME));
-        status = 0;
-        ASSERT_EQ(status, 0);
-    }
-}
-
-BENCHMARK_REGISTER_F(managerBenchmarkTest, SUB_DriverSystem_MemoryHdi_0030)->Iterations(100)->
+BENCHMARK_REGISTER_F(managerBenchmarkTest, Write)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 BENCHMARK_MAIN();

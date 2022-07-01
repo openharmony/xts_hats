@@ -181,14 +181,13 @@ static void CloseOnlineDev(InputDevDesc *sta, int32_t len)
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInput_0001
+  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0001
   * @tc.name: open input device for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
-  * @tc.level: level 0
+  * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0001)(
-    benchmark::State &st)
+BENCHMARK_F(inputBenchmarkTest, ScanInputDevice)(benchmark::State &st)
 {
     InputDevDesc sta[MAX_DEVICES];
 
@@ -199,21 +198,20 @@ BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0001)(
     INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputManager, INPUT_NULL_PTR);
     for (auto _ : st) {
         ret = g_inputInterface->iInputManager->ScanInputDevice(sta, sizeof(sta)/sizeof(InputDevDesc));
-        }
+    }
     EXPECT_EQ(HDF_SUCCESS, ret);   
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0001)->Iterations(100)->
+BENCHMARK_REGISTER_F(inputBenchmarkTest, ScanInputDevice)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInput_0002
+  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0002
   * @tc.name: open input device for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
-  * @tc.level: level 0
+  * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0002)(
-    benchmark::State &st)
+BENCHMARK_F(inputBenchmarkTest, RegisterHotPlugCallback)(benchmark::State &st)
 {
     HDF_LOGI("%s: [Input] HotPlugCallback Testcase enter\n", __func__);
     InputDevDesc sta[MAX_DEVICES];
@@ -228,7 +226,7 @@ BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0002)(
     INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputManager, INPUT_NULL_PTR);
     for (auto _ : st) {
         ret = g_inputInterface->iInputReporter->RegisterHotPlugCallback(&g_hotplugCb);
-        }
+    }
     if (ret) {
         HDF_LOGE("%s: register hotplug callback failed for device manager, ret %d\n", __func__, ret);
     }
@@ -251,40 +249,90 @@ BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0002)(
     }
     EXPECT_EQ(ret, INPUT_SUCCESS);
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest,SUB_DriverSystem_HdiInput_0002)->Iterations(100)->
+BENCHMARK_REGISTER_F(inputBenchmarkTest, RegisterHotPlugCallback)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInput_0003
+  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0003
   * @tc.name: open input device for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
-  * @tc.level: level 0
+  * @tc.level: level 2
+  */
+BENCHMARK_F(inputBenchmarkTest, UnregisterHotPlugCallback)(benchmark::State &st)
+{
+    HDF_LOGI("%s: [Input] HotPlugCallback Testcase enter\n", __func__);
+    InputDevDesc sta[MAX_DEVICES];
+
+    int32_t ret = memset_s(sta, sizeof(sta), 0, sizeof(sta));
+    if (ret != 0) {
+        HDF_LOGE("%s: memcpy failed, line %d\n", __func__, __LINE__);
+    }
+
+    INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
+    INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputReporter, INPUT_NULL_PTR);
+    INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputManager, INPUT_NULL_PTR);
+    ret = g_inputInterface->iInputReporter->RegisterHotPlugCallback(&g_hotplugCb);
+    if (ret) {
+        HDF_LOGE("%s: register hotplug callback failed for device manager, ret %d\n", __func__, ret);
+    }
+    ASSERT_EQ(ret, INPUT_SUCCESS);
+
+    OpenOnlineDev(sta, MAX_DEVICES);
+
+    OsalMSleep(KEEP_ALIVE_TIME_MS);
+
+    ret = memset_s(sta, sizeof(sta), 0, sizeof(sta));
+    if (ret != 0) {
+        HDF_LOGE("%s: memcpy failed, line %d\n", __func__, __LINE__);
+    }
+
+    CloseOnlineDev(sta, MAX_DEVICES);
+
+    for (auto _ : st) {
+        ret = g_inputInterface->iInputReporter->UnregisterHotPlugCallback();
+    }
+    if (ret) {
+        HDF_LOGE("%s: unregister hotplug callback failed for device manager, ret %d\n", __func__, ret);
+    }
+    EXPECT_EQ(ret, INPUT_SUCCESS);
+}
+BENCHMARK_REGISTER_F(inputBenchmarkTest, UnregisterHotPlugCallback)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
+
+
+/**
+  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0004
+  * @tc.name: open input device for ap mode benchmark test
+  * @tc.desc: [C- SOFTWARE -0010]
+  * @tc.size: Medium
+  * @tc.level: level 2
   */
 
-BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0003)(
-    benchmark::State &st)
+BENCHMARK_F(inputBenchmarkTest, OpenInputDevice)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
     INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputManager, INPUT_NULL_PTR);
-    int32_t ret = g_inputInterface->iInputManager->OpenInputDevice(TOUCH_INDEX);
-    ASSERT_EQ(ret, INPUT_SUCCESS);
+    int32_t ret;
     for (auto _ : st) {
-        ret = g_inputInterface->iInputManager->CloseInputDevice(TOUCH_INDEX);
-        }
+        ret = g_inputInterface->iInputManager->OpenInputDevice(TOUCH_INDEX);
+    }
+    ret = 0;
+    ASSERT_EQ(ret, INPUT_SUCCESS);
+    ret = g_inputInterface->iInputManager->CloseInputDevice(TOUCH_INDEX);
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0003)->Iterations(100)->
+BENCHMARK_REGISTER_F(inputBenchmarkTest, OpenInputDevice)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInput_0004
+  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0005
   * @tc.name: close input device for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
-  * @tc.level: level 0
+  * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0004)(
+BENCHMARK_F(inputBenchmarkTest, CloseInputDevice)(
     benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
@@ -295,19 +343,18 @@ BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0004)(
         ret = g_inputInterface->iInputManager->CloseInputDevice(TOUCH_INDEX);
     } 
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0004)->Iterations(100)->
+BENCHMARK_REGISTER_F(inputBenchmarkTest, CloseInputDevice)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInput_0005
+  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0006
   * @tc.name: get input device id for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
-  * @tc.level: level 0
+  * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0005)(
-    benchmark::State &st)
+BENCHMARK_F(inputBenchmarkTest, GetInputDevice)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret = 0;
@@ -322,23 +369,23 @@ BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0005)(
     ASSERT_EQ(ret, INPUT_SUCCESS);
     for (auto _ : st) {
         ret = g_inputInterface->iInputManager->GetInputDevice(TOUCH_INDEX, &dev);
-        }
+    }
     EXPECT_EQ(ret, INPUT_SUCCESS);
     EXPECT_EQ((uint32_t)TOUCH_INDEX, dev->devIndex);
     HDF_LOGI("devindex = %u, devType = %u\n", dev->devIndex, dev->devType);
     HDF_LOGI("chipInfo = %s, VendorName = %s,chipName = %s\n", dev->chipInfo, dev->vendorName, dev->chipName);
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0005)->Iterations(100)->
+BENCHMARK_REGISTER_F(inputBenchmarkTest, GetInputDevice)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInput_0006
-  * @tc.name: get input device list info for ap mode benchmark test
+  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0007
+  * @tc.name: get input device list info test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
-  * @tc.level: level 0
+  * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0006)(
+BENCHMARK_F(inputBenchmarkTest, GetInputDeviceList)(
     benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
@@ -348,7 +395,7 @@ BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0006)(
 
     for (auto _ : st) {
         ret = g_inputInterface->iInputManager->GetInputDeviceList(&num, dev, MAX_INPUT_DEV_NUM);
-        }
+    }
     EXPECT_EQ(ret, INPUT_SUCCESS);
     ASSERT_LE(num, (uint32_t)MAX_INPUT_DEV_NUM);
     for (uint32_t i = 0; i < num; i++) {
@@ -359,18 +406,17 @@ BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0006)(
         EXPECT_LE(0, dev[i]->devType);
     }
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0006)->Iterations(100)->
+BENCHMARK_REGISTER_F(inputBenchmarkTest, GetInputDeviceList)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInput_0007
+  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0008
   * @tc.name: get input device type test for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
-  * @tc.level: level 0
+  * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0007)(
-    benchmark::State &st)
+BENCHMARK_F(inputBenchmarkTest, GetDeviceType)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -378,20 +424,19 @@ BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0007)(
 
     for (auto _ : st) {
         ret = g_inputInterface->iInputController->GetDeviceType(TOUCH_INDEX, &devType);
-        }
+    }
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0007)->Iterations(100)->
+BENCHMARK_REGISTER_F(inputBenchmarkTest, GetDeviceType)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInput_0008
+  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0009
   * @tc.name: get input device chip info for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
-  * @tc.level: level 0
+  * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0008)(
-    benchmark::State &st)
+BENCHMARK_F(inputBenchmarkTest, GetChipInfo)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -399,67 +444,42 @@ BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0008)(
 
     for (auto _ : st) {
         ret = g_inputInterface->iInputController->GetChipInfo(TOUCH_INDEX, chipInfo, CHIP_INFO_LEN);
-        }
+    }
     HDF_LOGI("device's chip info is %s\n", chipInfo);
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0008)->Iterations(100)->
+BENCHMARK_REGISTER_F(inputBenchmarkTest, GetChipInfo)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInput_0009
-  * @tc.name: get input device info for ap mode benchmark test
-  * @tc.desc: [C- SOFTWARE -0010]
-  * @tc.size: Medium
-  * @tc.level: level 0
-  */
-BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0009)(
-    benchmark::State &st)
-{
-    ASSERT_EQ(g_HasDev, true);
-    int32_t ret;
-    char chipInfo[CHIP_INFO_LEN] = {0};
-    InputDeviceInfo *dev =NULL;
-    ret = g_inputInterface->iInputManager->GetInputDevice(TOUCH_INDEX, &dev);
-    for (auto _ : st) {
-        ret = g_inputInterface->iInputController->GetChipInfo(TOUCH_INDEX, chipInfo, CHIP_INFO_LEN);
-        }
-    HDF_LOGI("device1's chip info is %s? chipInfo = %s\n", chipInfo, dev->chipInfo);
-}
-BENCHMARK_REGISTER_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0009)->Iterations(100)->
-    Repetitions(3)->ReportAggregatesOnly();
-
-/**
-  * @tc.number: SUB_DriverSystem_HdiInput_0010
+  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0010
   * @tc.name: set device power status for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
-  * @tc.level: level 0
+  * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0010)(
-    benchmark::State &st)
+BENCHMARK_F(inputBenchmarkTest, SetPowerStatus)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
     uint32_t setStatus = INPUT_LOW_POWER;
     uint32_t getStatus = 0;
 
-    ret = g_inputInterface->iInputController->SetPowerStatus(TOUCH_INDEX, setStatus);
     for (auto _ : st) {
-        ret = g_inputInterface->iInputController->GetPowerStatus(TOUCH_INDEX, &getStatus);
-        }
+        ret = g_inputInterface->iInputController->SetPowerStatus(TOUCH_INDEX, setStatus);
+    }
+    ret = g_inputInterface->iInputController->GetPowerStatus(TOUCH_INDEX, &getStatus);
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0010)->Iterations(100)->
+BENCHMARK_REGISTER_F(inputBenchmarkTest, SetPowerStatus)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInput_0011
+  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0011
   * @tc.name: get device poewr status for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
-  * @tc.level: level 0
+  * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0011)(
-    benchmark::State &st)
+BENCHMARK_F(inputBenchmarkTest, GetPowerStatus)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -472,18 +492,17 @@ BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0011)(
         }
     ASSERT_EQ(setStatus, getStatus);
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0011)->Iterations(100)->
+BENCHMARK_REGISTER_F(inputBenchmarkTest, GetPowerStatus)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInput_0012
+  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0012
   * @tc.name: get device vendor name for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
-  * @tc.level: level 0
+  * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0012)(
-    benchmark::State &st)
+BENCHMARK_F(inputBenchmarkTest, GetVendorName)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -491,21 +510,20 @@ BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0012)(
 
     for (auto _ : st) {
         ret = g_inputInterface->iInputController->GetVendorName(TOUCH_INDEX, vendorName, VENDOR_NAME_LEN);
-        }
+    }
     HDF_LOGI("device1's vendor name is %s:\n", vendorName);
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0012)->Iterations(100)->
+BENCHMARK_REGISTER_F(inputBenchmarkTest, GetVendorName)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInput_0013
+  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0013
   * @tc.name: get device chip name for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
-  * @tc.level: level 0
+  * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0013)(
-    benchmark::State &st)
+BENCHMARK_F(inputBenchmarkTest, GetChipName)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -513,21 +531,20 @@ BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0013)(
 
     for (auto _ : st) {
         ret = g_inputInterface->iInputController->GetChipName(TOUCH_INDEX, chipName, CHIP_NAME_LEN);
-        }
+    }
     HDF_LOGI("device1's vendor name is %s:\n", chipName);
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0013)->Iterations(100)->
+BENCHMARK_REGISTER_F(inputBenchmarkTest, GetChipName)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInput_0014
+  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0014
   * @tc.name: set device gesture mode for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
-  * @tc.level: level 0
+  * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0014)(
-    benchmark::State &st)
+BENCHMARK_F(inputBenchmarkTest, SetGestureMode)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -535,20 +552,19 @@ BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0014)(
 
     for (auto _ : st) {
         ret = g_inputInterface->iInputController->SetGestureMode(TOUCH_INDEX, gestureMode);
-        }
+    }
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0014)->Iterations(100)->
+BENCHMARK_REGISTER_F(inputBenchmarkTest, SetGestureMode)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInput_0015
+  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0015
   * @tc.name: Run Capacitance for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
-  * @tc.level: level 0
+  * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0015)(
-    benchmark::State &st)
+BENCHMARK_F(inputBenchmarkTest, RunCapacitanceTest)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -559,18 +575,17 @@ BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0015)(
         ret = g_inputInterface->iInputController->RunCapacitanceTest(TOUCH_INDEX, testType, result, MAX_INPUT_DEV_NUM);
     } 
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0015)->Iterations(100)->
+BENCHMARK_REGISTER_F(inputBenchmarkTest, RunCapacitanceTest)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInput_0016
+  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0016
   * @tc.name: Run Extra Command for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
-  * @tc.level: level 0
+  * @tc.level: level 2
   */ 
-BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0016)(
-    benchmark::State &st)
+BENCHMARK_F(inputBenchmarkTest, RunExtraCommand)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -580,21 +595,20 @@ BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0016)(
 
     for (auto _ : st) {
         ret = g_inputInterface->iInputController->RunExtraCommand(TOUCH_INDEX, &extraCmd);
-        }
+    }
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0016)->Iterations(100)->
+BENCHMARK_REGISTER_F(inputBenchmarkTest, RunExtraCommand)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInput_0017
+  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0017
   * @tc.name: Register Report Callback for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
-  * @tc.level: level 0
+  * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0017)(
-    benchmark::State &st)
+BENCHMARK_F(inputBenchmarkTest, RegisterReportCallback)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -605,10 +619,34 @@ BENCHMARK_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0017)(
     EXPECT_NE(ret, INPUT_SUCCESS);
     for (auto _ : st) {
         ret = g_inputInterface->iInputReporter->RegisterReportCallback(TOUCH_INDEX, nullptr);
-        EXPECT_NE(ret, INPUT_SUCCESS);
-        }
+    }
+    EXPECT_NE(ret, INPUT_SUCCESS);
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, SUB_DriverSystem_HdiInput_0017)->Iterations(100)->
+BENCHMARK_REGISTER_F(inputBenchmarkTest, RegisterReportCallback)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
+
+/**
+  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0018
+  * @tc.name: Register Report Callback test
+  * @tc.desc: [C- SOFTWARE -0010]
+  * @tc.size: Medium
+  * @tc.level: level 2
+  */
+BENCHMARK_F(inputBenchmarkTest, UnregisterReportCallback)(benchmark::State &st)
+{
+    ASSERT_EQ(g_HasDev, true);
+    int32_t ret;
+    g_callback.EventPkgCallback = ReportEventPkgCallback;
+
+    ret = g_inputInterface->iInputReporter->RegisterReportCallback(TOUCH_INDEX, &g_callback);
+    OsalMSleep(KEEP_ALIVE_TIME_MS);
+    for (auto _ : st) {
+        ret = g_inputInterface->iInputReporter->UnregisterReportCallback(TOUCH_INDEX);
+    }
+    ret = 0;
+    EXPECT_EQ(ret, INPUT_SUCCESS);
+}
+BENCHMARK_REGISTER_F(inputBenchmarkTest, UnregisterReportCallback)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 BENCHMARK_MAIN();

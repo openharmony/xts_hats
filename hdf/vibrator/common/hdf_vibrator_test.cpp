@@ -299,7 +299,7 @@ HWTEST_F(HdfVibratorTest, SUB_DriverSystem_VibratorHdi_0130, Function | MediumTe
 
         startRet = g_vibratorDev->EnableVibratorModulation(g_duration, g_intensity1, g_frequency1);
         EXPECT_EQ(startRet, HDF_SUCCESS);
-        OsalMSleep(g_sleepTime1);
+        OsalMSleep(g_sleepTime);
         startRet = g_vibratorDev->Stop(VIBRATOR_MODE_ONCE);
         EXPECT_EQ(startRet, HDF_SUCCESS);
     }

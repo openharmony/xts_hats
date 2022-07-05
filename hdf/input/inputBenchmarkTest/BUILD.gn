@@ -39,7 +39,6 @@ ohos_moduletest_suite("HatsHdfInputbenchmarkTest") {
   ]
   if (is_standard_system) {
     external_deps = [
-      "hdf_core:libhdf_test_common",
       "hdf_core:libhdf_utils",
       "hiviewdfx_hilog_native:libhilog",
       "utils_base:utils",

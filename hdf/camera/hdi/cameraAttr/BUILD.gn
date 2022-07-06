@@ -97,7 +97,7 @@ ohos_moduletest_suite("HatsHdfCameraAttrTest") {
 
   if (is_standard_system) {
     external_deps = [
-      "graphic_graphic_2d:surface",
+      "graphic_standard:surface",
       "hdf_core:libhdf_utils",
       "hdf_core:libhdi",
       "hiviewdfx_hilog_native:libhilog",

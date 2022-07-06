@@ -86,6 +86,7 @@ BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0
 BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0020)(benchmark::State &st)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
+
     int32_t startRet;
     for (auto _ : st) {
         startRet = g_vibratorInterface->Start(g_timeSequence);
@@ -109,6 +110,7 @@ BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0
 BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0030)(benchmark::State &st)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
+
     int32_t startRet = g_vibratorInterface->Start(g_builtIn);
     EXPECT_EQ(startRet, HDF_SUCCESS);
 

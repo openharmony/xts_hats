@@ -616,7 +616,6 @@ HWTEST_F(AudioHdiRenderControlTest, SUB_Audio_HDI_CreateRender_0001, Function | 
     * @tc.name  Test AudioCreateRender API via setting the incoming parameter pins is PIN_IN_MIC.
     * @tc.number  SUB_Audio_HDI_CreateRender_0003
     * @tc.desc  test AudioCreateRender interface,return -1 if the incoming parameter pins is PIN_IN_MIC.
-    * @tc.author: ZHANGHAILIN
 */
 HWTEST_F(AudioHdiRenderControlTest, SUB_Audio_HDI_CreateRender_0003, Function | MediumTest | Level1)
 {
@@ -816,7 +815,6 @@ HWTEST_F(AudioHdiRenderControlTest, SUB_Audio_HDI_CreateRender_0009, Function | 
     * @tc.name  Test AudioCreateRender API via setting the incoming parameter desc which portID is not configed
     * @tc.number  SUB_Audio_HDI_CreateRender_0010
     * @tc.desc  test AudioCreateRender interface,Returns -1 if the incoming desc which portID is not configed
-    * @tc.author: ZHANGHAILIN
 */
 HWTEST_F(AudioHdiRenderControlTest, SUB_Audio_HDI_CreateRender_0010, TestSize.Level1)
 {
@@ -844,7 +842,6 @@ HWTEST_F(AudioHdiRenderControlTest, SUB_Audio_HDI_CreateRender_0010, TestSize.Le
     * @tc.name  Test AudioDestroyRender API via legal input.
     * @tc.number  SUB_Audio_HDI_DestroyRender_0001
     * @tc.desc  Test AudioDestroyRender interface, return 0 if render is destroyed successful.
-    * @tc.author: ZHANGHAILIN
 */
 HWTEST_F(AudioHdiRenderControlTest, SUB_Audio_HDI_DestroyRender_0001, Function | MediumTest | Level1)
 {

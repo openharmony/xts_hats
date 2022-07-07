@@ -16,7 +16,6 @@
 #include <benchmark/benchmark.h>
 #include <string>
 #include <vector>
-
 #include <cmath>
 #include <cstdio>
 #include <gtest/gtest.h>

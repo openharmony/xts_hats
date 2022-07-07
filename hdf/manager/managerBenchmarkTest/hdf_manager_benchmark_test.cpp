@@ -51,7 +51,7 @@ static constexpr int SMQ_TEST_QUEUE_SIZE = 10;
 static constexpr int SMQ_TEST_WAIT_TIME = 100;
 static constexpr int WAIT_LOAD_UNLOAD_TIME = 300;
 
-class managerBenchmarkTest : public benchmark::Fixture {
+class ManagerBenchmarkTest : public benchmark::Fixture {
 public:
     void TestServiceListenerStop(const sptr<IDeviceManager>& devmgr, const sptr<IServiceManager>& servmgr);
     void TestSampleService(sptr<IRemoteObject>& sampleService, const sptr<IDeviceManager>& devmgr,
@@ -59,7 +59,7 @@ public:
     void SetUp(const ::benchmark::State &state);
     void TearDown(const ::benchmark::State &state);
 };
-void managerBenchmarkTest::SetUp(const ::benchmark::State &state)
+void ManagerBenchmarkTest::SetUp(const ::benchmark::State &state)
 {
     auto devmgr = IDeviceManager::Get();
     if (devmgr != nullptr) {
@@ -67,7 +67,7 @@ void managerBenchmarkTest::SetUp(const ::benchmark::State &state)
         devmgr->LoadDevice(TEST_SERVICE_NAME);
     }
 }
-void managerBenchmarkTest::TearDown(const ::benchmark::State &state)
+void ManagerBenchmarkTest::TearDown(const ::benchmark::State &state)
 {
     auto devmgr = IDeviceManager::Get();
     if (devmgr != nullptr) {
@@ -100,7 +100,7 @@ int32_t IPCObjectStubTest::payload = 0;
   * @tc.size: Medium
   * @tc.level: level 1
   */
-BENCHMARK_F(managerBenchmarkTest, SendRequest)(benchmark::State &st)
+BENCHMARK_F(ManagerBenchmarkTest, SendRequest)(benchmark::State &st)
 {
     auto servmgr = IServiceManager::Get();
     ASSERT_TRUE(servmgr != nullptr);
@@ -122,7 +122,7 @@ BENCHMARK_F(managerBenchmarkTest, SendRequest)(benchmark::State &st)
     ASSERT_EQ(status, 0);
 }
 
-BENCHMARK_REGISTER_F(managerBenchmarkTest, SendRequest)->Iterations(100)->
+BENCHMARK_REGISTER_F(ManagerBenchmarkTest, SendRequest)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -131,7 +131,7 @@ BENCHMARK_REGISTER_F(managerBenchmarkTest, SendRequest)->Iterations(100)->
   * @tc.size: Medium
   * @tc.level: level 1
   */
-BENCHMARK_F(managerBenchmarkTest, GetService)(benchmark::State &st)
+BENCHMARK_F(ManagerBenchmarkTest, GetService)(benchmark::State &st)
 {
     auto servmgr = IServiceManager::Get();
     ASSERT_TRUE(servmgr != nullptr);
@@ -156,7 +156,7 @@ BENCHMARK_F(managerBenchmarkTest, GetService)(benchmark::State &st)
     ASSERT_EQ(IPCObjectStubTest::payload, payload);
 }
 
-BENCHMARK_REGISTER_F(managerBenchmarkTest, GetService)->Iterations(100)->
+BENCHMARK_REGISTER_F(ManagerBenchmarkTest, GetService)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -165,7 +165,7 @@ BENCHMARK_REGISTER_F(managerBenchmarkTest, GetService)->Iterations(100)->
   * @tc.size: Medium
   * @tc.level: level 1
   */
-BENCHMARK_F(managerBenchmarkTest, LoadDevice)(benchmark::State &st)
+BENCHMARK_F(ManagerBenchmarkTest, LoadDevice)(benchmark::State &st)
 {
     auto devmgr = IDeviceManager::Get();
     ASSERT_TRUE(devmgr != nullptr);
@@ -234,7 +234,7 @@ BENCHMARK_F(managerBenchmarkTest, LoadDevice)(benchmark::State &st)
     ASSERT_TRUE(sampleService == nullptr);
 }
 
-BENCHMARK_REGISTER_F(managerBenchmarkTest, LoadDevice)->Iterations(100)->
+BENCHMARK_REGISTER_F(ManagerBenchmarkTest, LoadDevice)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -243,7 +243,7 @@ BENCHMARK_REGISTER_F(managerBenchmarkTest, LoadDevice)->Iterations(100)->
   * @tc.size: Medium
   * @tc.level: level 1
   */
-BENCHMARK_F(managerBenchmarkTest, UnloadDevice)(benchmark::State &st)
+BENCHMARK_F(ManagerBenchmarkTest, UnloadDevice)(benchmark::State &st)
 {
     auto devmgr = IDeviceManager::Get();
     ASSERT_TRUE(devmgr != nullptr);
@@ -313,7 +313,7 @@ BENCHMARK_F(managerBenchmarkTest, UnloadDevice)(benchmark::State &st)
     ASSERT_TRUE(sampleService == nullptr);
 }
 
-BENCHMARK_REGISTER_F(managerBenchmarkTest, UnloadDevice)->Iterations(100)->
+BENCHMARK_REGISTER_F(ManagerBenchmarkTest, UnloadDevice)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 class ServStatListener : public OHOS::HDI::ServiceManager::V1_0::ServStatListenerStub {
@@ -336,7 +336,7 @@ private:
   * @tc.size: Medium
   * @tc.level: level 1
   */
-BENCHMARK_F(managerBenchmarkTest, Marshalling)(benchmark::State &st)
+BENCHMARK_F(ManagerBenchmarkTest, Marshalling)(benchmark::State &st)
 {
     HDF_LOGI("%{public}s:%{public}d", __func__, __LINE__);
     auto servmgr = IServiceManager::Get();
@@ -355,8 +355,8 @@ BENCHMARK_F(managerBenchmarkTest, Marshalling)(benchmark::State &st)
         }
     data.WriteUint32(1);
 
-    constexpr int SEND_TIMES = 20;
-    for (size_t i = 0; i < SEND_TIMES; i++) {
+    constexpr int SendTimes = 20;
+    for (size_t i = 0; i < SendTimes; i++) {
         SampleSmqElement t = { 0 };
         t.data32 = i;
         t.data64 = i + 1;
@@ -368,7 +368,7 @@ BENCHMARK_F(managerBenchmarkTest, Marshalling)(benchmark::State &st)
     }
 }
 
-BENCHMARK_REGISTER_F(managerBenchmarkTest, Marshalling)->Iterations(100)->
+BENCHMARK_REGISTER_F(ManagerBenchmarkTest, Marshalling)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -377,7 +377,7 @@ BENCHMARK_REGISTER_F(managerBenchmarkTest, Marshalling)->Iterations(100)->
   * @tc.size: Medium
   * @tc.level: level 1
   */
-BENCHMARK_F(managerBenchmarkTest, Write)(benchmark::State &st)
+BENCHMARK_F(ManagerBenchmarkTest, Write)(benchmark::State &st)
 {
     HDF_LOGI("%{public}s:%{public}d", __func__, __LINE__);
     auto servmgr = IServiceManager::Get();
@@ -401,8 +401,8 @@ BENCHMARK_F(managerBenchmarkTest, Write)(benchmark::State &st)
     int status = sampleService->SendRequest(SAMPLE_TRANS_SMQ, data, reply, option);
     ASSERT_EQ(status, 0);
 
-    constexpr int SEND_TIMES = 20;
-    for (size_t i = 0; i < SEND_TIMES; i++) {
+    constexpr int SendTimes = 20;
+    for (size_t i = 0; i < SendTimes; i++) {
         SampleSmqElement t = { 0 };
         t.data32 = i;
         t.data64 = i + 1;
@@ -416,7 +416,7 @@ BENCHMARK_F(managerBenchmarkTest, Write)(benchmark::State &st)
     }
 }
 
-BENCHMARK_REGISTER_F(managerBenchmarkTest, Write)->Iterations(100)->
+BENCHMARK_REGISTER_F(ManagerBenchmarkTest, Write)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 BENCHMARK_MAIN();

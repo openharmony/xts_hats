@@ -27,11 +27,12 @@
 #include "osal_time.h"
 #include "hdf_log.h"
 #include "input_manager.h"
-#include "hdi_input_test.h"
+#include "../hdi_input/common/hdi_input_test.h"
 
 using namespace std;
 using namespace testing::ext;
 
+namespace  {
 IInputInterface *g_inputInterface;
 InputEventCb g_callback;
 InputHostCb g_hotplugCb;
@@ -42,13 +43,13 @@ static void ReportEventPkgCallback(const InputEventPackage **pkgs, uint32_t coun
 static void CloseOnlineDev(InputDevDesc *sta, int32_t len);
 static void OpenOnlineDev(InputDevDesc *sta, int32_t len);
 
-class inputBenchmarkTest : public benchmark::Fixture {
+class InputBenchmarkTest : public benchmark::Fixture {
 public:
     void SetUp(const ::benchmark::State &state);
     void TearDown(const ::benchmark::State &state);
 };
 
-void inputBenchmarkTest::SetUp(const ::benchmark::State &state)
+void InputBenchmarkTest::SetUp(const ::benchmark::State &state)
 {
     int32_t ret;
     InputDevDesc sta[MAX_DEVICES];
@@ -76,7 +77,7 @@ void inputBenchmarkTest::SetUp(const ::benchmark::State &state)
     }
 }
 
-void inputBenchmarkTest::TearDown(const ::benchmark::State &state)
+void InputBenchmarkTest::TearDown(const ::benchmark::State &state)
 {
     ReleaseInputInterface(g_inputInterface);
 }
@@ -187,7 +188,7 @@ static void CloseOnlineDev(InputDevDesc *sta, int32_t len)
   * @tc.size: Medium
   * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, ScanInputDevice)(benchmark::State &st)
+BENCHMARK_F(InputBenchmarkTest, ScanInputDevice)(benchmark::State &st)
 {
     InputDevDesc sta[MAX_DEVICES];
 
@@ -201,7 +202,7 @@ BENCHMARK_F(inputBenchmarkTest, ScanInputDevice)(benchmark::State &st)
     }
     EXPECT_EQ(HDF_SUCCESS, ret);   
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, ScanInputDevice)->Iterations(100)->
+BENCHMARK_REGISTER_F(InputBenchmarkTest, ScanInputDevice)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -211,7 +212,7 @@ BENCHMARK_REGISTER_F(inputBenchmarkTest, ScanInputDevice)->Iterations(100)->
   * @tc.size: Medium
   * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, RegisterHotPlugCallback)(benchmark::State &st)
+BENCHMARK_F(InputBenchmarkTest, RegisterHotPlugCallback)(benchmark::State &st)
 {
     HDF_LOGI("%s: [Input] HotPlugCallback Testcase enter\n", __func__);
     InputDevDesc sta[MAX_DEVICES];
@@ -249,7 +250,7 @@ BENCHMARK_F(inputBenchmarkTest, RegisterHotPlugCallback)(benchmark::State &st)
     }
     EXPECT_EQ(ret, INPUT_SUCCESS);
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, RegisterHotPlugCallback)->Iterations(100)->
+BENCHMARK_REGISTER_F(InputBenchmarkTest, RegisterHotPlugCallback)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -259,7 +260,7 @@ BENCHMARK_REGISTER_F(inputBenchmarkTest, RegisterHotPlugCallback)->Iterations(10
   * @tc.size: Medium
   * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, UnregisterHotPlugCallback)(benchmark::State &st)
+BENCHMARK_F(InputBenchmarkTest, UnregisterHotPlugCallback)(benchmark::State &st)
 {
     HDF_LOGI("%s: [Input] HotPlugCallback Testcase enter\n", __func__);
     InputDevDesc sta[MAX_DEVICES];
@@ -297,7 +298,7 @@ BENCHMARK_F(inputBenchmarkTest, UnregisterHotPlugCallback)(benchmark::State &st)
     }
     EXPECT_EQ(ret, INPUT_SUCCESS);
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, UnregisterHotPlugCallback)->Iterations(100)->
+BENCHMARK_REGISTER_F(InputBenchmarkTest, UnregisterHotPlugCallback)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 
@@ -309,7 +310,7 @@ BENCHMARK_REGISTER_F(inputBenchmarkTest, UnregisterHotPlugCallback)->Iterations(
   * @tc.level: level 2
   */
 
-BENCHMARK_F(inputBenchmarkTest, OpenInputDevice)(benchmark::State &st)
+BENCHMARK_F(InputBenchmarkTest, OpenInputDevice)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
@@ -322,7 +323,7 @@ BENCHMARK_F(inputBenchmarkTest, OpenInputDevice)(benchmark::State &st)
     ASSERT_EQ(ret, INPUT_SUCCESS);
     ret = g_inputInterface->iInputManager->CloseInputDevice(TOUCH_INDEX);
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, OpenInputDevice)->Iterations(100)->
+BENCHMARK_REGISTER_F(InputBenchmarkTest, OpenInputDevice)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -332,7 +333,7 @@ BENCHMARK_REGISTER_F(inputBenchmarkTest, OpenInputDevice)->Iterations(100)->
   * @tc.size: Medium
   * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, CloseInputDevice)(
+BENCHMARK_F(InputBenchmarkTest, CloseInputDevice)(
     benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
@@ -343,7 +344,7 @@ BENCHMARK_F(inputBenchmarkTest, CloseInputDevice)(
         ret = g_inputInterface->iInputManager->CloseInputDevice(TOUCH_INDEX);
     } 
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, CloseInputDevice)->Iterations(100)->
+BENCHMARK_REGISTER_F(InputBenchmarkTest, CloseInputDevice)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 
@@ -354,7 +355,7 @@ BENCHMARK_REGISTER_F(inputBenchmarkTest, CloseInputDevice)->Iterations(100)->
   * @tc.size: Medium
   * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, GetInputDevice)(benchmark::State &st)
+BENCHMARK_F(InputBenchmarkTest, GetInputDevice)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret = 0;
@@ -375,7 +376,7 @@ BENCHMARK_F(inputBenchmarkTest, GetInputDevice)(benchmark::State &st)
     HDF_LOGI("devindex = %u, devType = %u\n", dev->devIndex, dev->devType);
     HDF_LOGI("chipInfo = %s, VendorName = %s,chipName = %s\n", dev->chipInfo, dev->vendorName, dev->chipName);
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, GetInputDevice)->Iterations(100)->
+BENCHMARK_REGISTER_F(InputBenchmarkTest, GetInputDevice)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -385,7 +386,7 @@ BENCHMARK_REGISTER_F(inputBenchmarkTest, GetInputDevice)->Iterations(100)->
   * @tc.size: Medium
   * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, GetInputDeviceList)(
+BENCHMARK_F(InputBenchmarkTest, GetInputDeviceList)(
     benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
@@ -406,7 +407,7 @@ BENCHMARK_F(inputBenchmarkTest, GetInputDeviceList)(
         EXPECT_LE(0, dev[i]->devType);
     }
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, GetInputDeviceList)->Iterations(100)->
+BENCHMARK_REGISTER_F(InputBenchmarkTest, GetInputDeviceList)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -416,7 +417,7 @@ BENCHMARK_REGISTER_F(inputBenchmarkTest, GetInputDeviceList)->Iterations(100)->
   * @tc.size: Medium
   * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, GetDeviceType)(benchmark::State &st)
+BENCHMARK_F(InputBenchmarkTest, GetDeviceType)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -426,7 +427,7 @@ BENCHMARK_F(inputBenchmarkTest, GetDeviceType)(benchmark::State &st)
         ret = g_inputInterface->iInputController->GetDeviceType(TOUCH_INDEX, &devType);
     }
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, GetDeviceType)->Iterations(100)->
+BENCHMARK_REGISTER_F(InputBenchmarkTest, GetDeviceType)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -436,7 +437,7 @@ BENCHMARK_REGISTER_F(inputBenchmarkTest, GetDeviceType)->Iterations(100)->
   * @tc.size: Medium
   * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, GetChipInfo)(benchmark::State &st)
+BENCHMARK_F(InputBenchmarkTest, GetChipInfo)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -447,7 +448,7 @@ BENCHMARK_F(inputBenchmarkTest, GetChipInfo)(benchmark::State &st)
     }
     HDF_LOGI("device's chip info is %s\n", chipInfo);
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, GetChipInfo)->Iterations(100)->
+BENCHMARK_REGISTER_F(InputBenchmarkTest, GetChipInfo)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -457,7 +458,7 @@ BENCHMARK_REGISTER_F(inputBenchmarkTest, GetChipInfo)->Iterations(100)->
   * @tc.size: Medium
   * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, SetPowerStatus)(benchmark::State &st)
+BENCHMARK_F(InputBenchmarkTest, SetPowerStatus)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -469,7 +470,7 @@ BENCHMARK_F(inputBenchmarkTest, SetPowerStatus)(benchmark::State &st)
     }
     ret = g_inputInterface->iInputController->GetPowerStatus(TOUCH_INDEX, &getStatus);
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, SetPowerStatus)->Iterations(100)->
+BENCHMARK_REGISTER_F(InputBenchmarkTest, SetPowerStatus)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -479,7 +480,7 @@ BENCHMARK_REGISTER_F(inputBenchmarkTest, SetPowerStatus)->Iterations(100)->
   * @tc.size: Medium
   * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, GetPowerStatus)(benchmark::State &st)
+BENCHMARK_F(InputBenchmarkTest, GetPowerStatus)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -492,7 +493,7 @@ BENCHMARK_F(inputBenchmarkTest, GetPowerStatus)(benchmark::State &st)
         }
     ASSERT_EQ(setStatus, getStatus);
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, GetPowerStatus)->Iterations(100)->
+BENCHMARK_REGISTER_F(InputBenchmarkTest, GetPowerStatus)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -502,7 +503,7 @@ BENCHMARK_REGISTER_F(inputBenchmarkTest, GetPowerStatus)->Iterations(100)->
   * @tc.size: Medium
   * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, GetVendorName)(benchmark::State &st)
+BENCHMARK_F(InputBenchmarkTest, GetVendorName)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -513,7 +514,7 @@ BENCHMARK_F(inputBenchmarkTest, GetVendorName)(benchmark::State &st)
     }
     HDF_LOGI("device1's vendor name is %s:\n", vendorName);
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, GetVendorName)->Iterations(100)->
+BENCHMARK_REGISTER_F(InputBenchmarkTest, GetVendorName)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -523,7 +524,7 @@ BENCHMARK_REGISTER_F(inputBenchmarkTest, GetVendorName)->Iterations(100)->
   * @tc.size: Medium
   * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, GetChipName)(benchmark::State &st)
+BENCHMARK_F(InputBenchmarkTest, GetChipName)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -534,7 +535,7 @@ BENCHMARK_F(inputBenchmarkTest, GetChipName)(benchmark::State &st)
     }
     HDF_LOGI("device1's vendor name is %s:\n", chipName);
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, GetChipName)->Iterations(100)->
+BENCHMARK_REGISTER_F(InputBenchmarkTest, GetChipName)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -544,7 +545,7 @@ BENCHMARK_REGISTER_F(inputBenchmarkTest, GetChipName)->Iterations(100)->
   * @tc.size: Medium
   * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, SetGestureMode)(benchmark::State &st)
+BENCHMARK_F(InputBenchmarkTest, SetGestureMode)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -554,7 +555,7 @@ BENCHMARK_F(inputBenchmarkTest, SetGestureMode)(benchmark::State &st)
         ret = g_inputInterface->iInputController->SetGestureMode(TOUCH_INDEX, gestureMode);
     }
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, SetGestureMode)->Iterations(100)->
+BENCHMARK_REGISTER_F(InputBenchmarkTest, SetGestureMode)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -564,7 +565,7 @@ BENCHMARK_REGISTER_F(inputBenchmarkTest, SetGestureMode)->Iterations(100)->
   * @tc.size: Medium
   * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, RunCapacitanceTest)(benchmark::State &st)
+BENCHMARK_F(InputBenchmarkTest, RunCapacitanceTest)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -575,7 +576,7 @@ BENCHMARK_F(inputBenchmarkTest, RunCapacitanceTest)(benchmark::State &st)
         ret = g_inputInterface->iInputController->RunCapacitanceTest(TOUCH_INDEX, testType, result, MAX_INPUT_DEV_NUM);
     } 
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, RunCapacitanceTest)->Iterations(100)->
+BENCHMARK_REGISTER_F(InputBenchmarkTest, RunCapacitanceTest)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -585,7 +586,7 @@ BENCHMARK_REGISTER_F(inputBenchmarkTest, RunCapacitanceTest)->Iterations(100)->
   * @tc.size: Medium
   * @tc.level: level 2
   */ 
-BENCHMARK_F(inputBenchmarkTest, RunExtraCommand)(benchmark::State &st)
+BENCHMARK_F(InputBenchmarkTest, RunExtraCommand)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -597,7 +598,7 @@ BENCHMARK_F(inputBenchmarkTest, RunExtraCommand)(benchmark::State &st)
         ret = g_inputInterface->iInputController->RunExtraCommand(TOUCH_INDEX, &extraCmd);
     }
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, RunExtraCommand)->Iterations(100)->
+BENCHMARK_REGISTER_F(InputBenchmarkTest, RunExtraCommand)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 
@@ -608,7 +609,7 @@ BENCHMARK_REGISTER_F(inputBenchmarkTest, RunExtraCommand)->Iterations(100)->
   * @tc.size: Medium
   * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, RegisterReportCallback)(benchmark::State &st)
+BENCHMARK_F(InputBenchmarkTest, RegisterReportCallback)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -622,7 +623,7 @@ BENCHMARK_F(inputBenchmarkTest, RegisterReportCallback)(benchmark::State &st)
     }
     EXPECT_NE(ret, INPUT_SUCCESS);
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, RegisterReportCallback)->Iterations(100)->
+BENCHMARK_REGISTER_F(InputBenchmarkTest, RegisterReportCallback)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -632,7 +633,7 @@ BENCHMARK_REGISTER_F(inputBenchmarkTest, RegisterReportCallback)->Iterations(100
   * @tc.size: Medium
   * @tc.level: level 2
   */
-BENCHMARK_F(inputBenchmarkTest, UnregisterReportCallback)(benchmark::State &st)
+BENCHMARK_F(InputBenchmarkTest, UnregisterReportCallback)(benchmark::State &st)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -646,7 +647,7 @@ BENCHMARK_F(inputBenchmarkTest, UnregisterReportCallback)(benchmark::State &st)
     ret = 0;
     EXPECT_EQ(ret, INPUT_SUCCESS);
 }
-BENCHMARK_REGISTER_F(inputBenchmarkTest, UnregisterReportCallback)->Iterations(100)->
+BENCHMARK_REGISTER_F(InputBenchmarkTest, UnregisterReportCallback)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
-
+}
 BENCHMARK_MAIN();

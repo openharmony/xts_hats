@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -68,7 +68,7 @@
 #define PATH_MAX 128
 #define BUFFERSCOUNT 8
 #define CAMERA_BUFFER_QUEUE_IPC 654320
-#define RANGE_LIMIT(x) (x > 255 ? 255 : (x < 0 ? 0 : x))
+#define RANGE_LIMIT(x) ((x) > 255 ? 255 : ((x) < 0 ? 0 : (x)))
 #define PREVIEW_WIDTH 640
 #define PREVIEW_HEIGHT 480
 #define CAPTURE_WIDTH 1280

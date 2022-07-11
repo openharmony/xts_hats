@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,8 +18,7 @@ using namespace OHOS;
 using namespace Camera;
 
 TestDisplay::TestDisplay()
-{
-}
+{}
 
 uint64_t TestDisplay::GetCurrentLocalTimeStamp()
 {
@@ -160,7 +159,8 @@ void TestDisplay::ProcessImage(const unsigned char* p, unsigned char* fbp)
     y_pos = 0; // 0:Pixel initial value
     u_pos = 1; // 1:Pixel initial value
     v_pos = 3; // 3:Pixel initial value
-
+    constexpr int Y_POS_RANGE = 2;
+    constexpr int POS_RANGE = 4;
     for (y = ypos; y < (height + ypos); y++) {
         for (j = 0, x = xpos; j < width; j++, x++) {
             location = (x + vinfo_.xoffset) * (vinfo_.bits_per_pixel / 8) + // 8: The bytes for each time
@@ -177,11 +177,11 @@ void TestDisplay::ProcessImage(const unsigned char* p, unsigned char* fbp)
             fbp[location + 1] = ((r & 0xF8) | (g >> 5)); // 5:display range
             fbp[location + 0] = (((g & 0x1C) << 3) | (b >> 3)); // 3:display range
 
-            y_pos += 2;
+            y_pos += Y_POS_RANGE; // 2:display range
 
             if (j & 0x01) {
-                u_pos += 4;
-                v_pos += 4;
+                u_pos += POS_RANGE; // 4:display range
+                v_pos += POS_RANGE; // 4:display range
             }
         }
 

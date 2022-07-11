@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file expected in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,10 +18,10 @@ using namespace OHOS;
 using namespace std;
 using namespace testing::ext;
 using namespace OHOS::Camera;
-
-void PreviewTest::SetUpTestCase(void){
-}
-void PreviewTest::TearDownTestCase(void){}
+void PreviewTest::SetUpTestCase(void)
+{}
+void PreviewTest::TearDownTestCase(void)
+{}
 void PreviewTest::SetUp(void)
 {
     if (display_ == nullptr)

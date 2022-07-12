@@ -57,7 +57,6 @@ ohos_moduletest_suite("HatsHdfCameraAttrTest") {
     "$camera_path/device_manager/include/",
     "$camera_path/device_manager/include/mpi",
     "$camera_path/utils/event",
-    "//base/startup/init_lite/interfaces/innerkits/include/syspara",
     "//drivers/peripheral/camera/interfaces/metadata/include",
 
     #producer

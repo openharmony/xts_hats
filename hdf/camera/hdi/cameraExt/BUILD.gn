@@ -52,7 +52,6 @@ ohos_moduletest_suite("HatsHdfCameraExtTest") {
     "$camera_path/hdi_impl/include/offline_stream_operator",
     "$camera_path/device_manager/include/",
     "$camera_path/device_manager/include/mpi",
-    "//base/startup/init_lite/interfaces/innerkits/include/syspara",
     "$camera_path/utils/event",
     "//drivers/peripheral/camera/interfaces/metadata/include",
 

@@ -27,9 +27,8 @@ ohos_moduletest_suite("HatsHdfSensorbenchmarkTest") {
   ]
 
   sources = [
+    "../hdiService/sensor_callback_impl.cpp",
     "hdf_sensor_benchmark_test.cpp",
-    "sensor_callback_impl.cpp",
-    "sensor_callback_impl.h",
   ]
   cflags = [
     "-Wall",

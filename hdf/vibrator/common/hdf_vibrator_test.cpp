@@ -37,7 +37,6 @@ namespace {
     const char *g_arbitraryStr = "arbitraryString";
     const struct VibratorInterface *g_vibratorDev = nullptr;
     static struct VibratorInfo *g_vibratorInfo = nullptr;
-}
 
 class HdfVibratorTest : public testing::Test {
 public:
@@ -351,4 +350,5 @@ HWTEST_F(HdfVibratorTest, SUB_DriverSystem_VibratorHdi_0160, Function | MediumTe
         startRet = g_vibratorDev->EnableVibratorModulation(g_duration, g_intensity1, g_frequency2);
         EXPECT_EQ(startRet, VIBRATOR_NOT_FREQUENCY);
     }
+}
 }

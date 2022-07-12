@@ -36,7 +36,6 @@ namespace {
     std::string g_builtIn = "haptic.default.effect";
     std::string g_arbitraryStr = "arbitraryString";
     sptr<IVibratorInterface> g_vibratorInterface = nullptr;
-}
 
 class HdfVibratorHdiServiceTest : public testing::Test {
 public:
@@ -329,4 +328,5 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0150, Function 
         startRet = g_vibratorInterface->EnableVibratorModulation(g_duration, g_intensity1, g_frequency2);
         EXPECT_EQ(startRet, -3);
     }
+}
 }

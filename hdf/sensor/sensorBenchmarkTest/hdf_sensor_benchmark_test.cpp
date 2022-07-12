@@ -26,7 +26,7 @@
 #include "osal_time.h"
 #include "v1_0/isensor_interface.h"
 #include "sensor_type.h"
-#include "sensor_callback_impl.h"
+#include "../hdiService/sensor_callback_impl.h"
 
 using namespace OHOS::HDI::Sensor::V1_0;
 using namespace testing::ext;

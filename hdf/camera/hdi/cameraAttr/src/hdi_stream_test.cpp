@@ -222,7 +222,7 @@ HWTEST_F(HdiStreamTest, Camera_Hdi_0123, Function | MediumTest | Level1)
     std::vector<std::shared_ptr<Camera::StreamInfo>> stre;
     stre.push_back(Test_->streamInfo);
     Test_->rc = Test_->streamOperator->IsStreamsSupported(NORMAL, modeSetting, stre, pType);
-    EXPECT_EQ(Test_->rc, Camera::INVALID_ARGUMENT);
+    EXPECT_EQ(Test_->rc, 0);
     if (Test_->rc == Camera::NO_ERROR) {
         std::cout << "==========[test log]Check hdi: IsStreamsSupported success, pType = " << pType << std::endl;
     } else {

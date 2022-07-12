@@ -12,7 +12,7 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
-import("//drivers/adapter/uhdf2/uhdf.gni")
+import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//drivers/peripheral/audio/audio.gni")
 import("//test/xts/tools/build/suite.gni")
 
@@ -29,6 +29,8 @@ group("hdi") {
 
     #"capture/captureTest:HatsHdfAudioCaptureTest",
     "capture/captureVolume:HatsHdfAudioCaptureVolumeTest",
+    "hdiperformace/capture:HatsHdfAudioCaptureBenchmarkTest",
+    "hdiperformace/render:HatsHdfAudioRenderBenchmarkTest",
     "render/renderAttr:HatsHdfAudioRenderAttrTest",
     "render/renderControl:HatsHdfAudioRenderControlTest",
     "render/renderScene:HatsHdfAudioRenderSceneTest",

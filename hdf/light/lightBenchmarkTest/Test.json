@@ -1,0 +1,18 @@
+{
+    "kits": [
+        {
+            "push": [
+                "HatsHdfLightbenchmarkTest->/data/local/tmp/HatsHdfLightbenchmarkTest"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsHdfLightbenchmarkTest",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    },
+    "description": "Configuration for HatsHdfLightbenchmarkTest Tests"
+}

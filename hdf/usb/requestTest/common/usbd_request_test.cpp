@@ -17,17 +17,11 @@
 #include <iostream>
 #include <vector>
 #include "hdf_log.h"
-#include "usb_param.h"
 #include "usbd_client.h"
-
-using namespace testing::ext;
-using namespace OHOS;
-using namespace OHOS::USB;
-using namespace std;
+#include "UsbSubscriberTest.h"
+#include "usb_errors.h"
 
 const int SLEEP_TIME = 3;
-const uint8_t BUS_NUM_1 = 1;
-const uint8_t DEV_ADDR_2 = 2;
 const uint8_t BUS_NUM_255 = 255;
 const uint8_t DEV_ADDR_255 = 255;
 const uint8_t BUS_NUM_222 = 222;
@@ -37,8 +31,16 @@ const uint32_t TAG_LENGTH_NUM_1000 = 1000;
 const int TAG_NUM_10 = 10;
 const int TAG_NUM_11 = 11;
 const uint8_t INTERFACEID_1 = 1;
+const int32_t INT32_INTERFACEID_1 = 1;
 const uint8_t POINTID_1 = 1;
 const uint8_t POINTID_129 = 129;
+
+using namespace testing::ext;
+using namespace OHOS;
+using namespace OHOS::USB;
+using namespace std;
+
+struct UsbDev UsbdRequestTest::dev_ = {0, 0};
 
 void UsbdRequestTest::SetUpTestCase(void)
 {
@@ -49,20 +51,33 @@ void UsbdRequestTest::SetUpTestCase(void)
     if (ret != 0) {
         exit(0);
     }
+
+    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
+    if (UsbdClient::GetInstance().BindUsbdSubscriber(subscriber) != UEC_OK) {
+        HDF_LOGE("%{public}s: bind usbd subscriber failed", __func__);
+        exit(0);
+    }
+    dev_ = {subscriber->busNum_, subscriber->devAddr_};
+
     std::cout << "please connect device, press enter to continue" << std::endl;
     int c;
     while ((c = getchar()) != '\n' && c != EOF) {
     }
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    ret = UsbdClient::GetInstance().OpenDevice(dev);
+
+    ret = UsbdClient::GetInstance().OpenDevice(dev_);
     HDF_LOGI("UsbdRequestTest:: %{public}d OpenDevice=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 void UsbdRequestTest::TearDownTestCase(void)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    auto ret = UsbdClient::GetInstance().CloseDevice(dev);
+    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
+    if (UsbdClient::GetInstance().BindUsbdSubscriber(subscriber) != UEC_OK) {
+        HDF_LOGE("%{public}s: bind usbd subscriber failed", __func__);
+        exit(0);
+    }
+    dev_ = {subscriber->busNum_, subscriber->devAddr_};
+    auto ret = UsbdClient::GetInstance().CloseDevice(dev_);
     HDF_LOGI("UsbdRequestTest:: %{public}d Close=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
@@ -72,500 +87,1117 @@ void UsbdRequestTest::SetUp(void) {}
 void UsbdRequestTest::TearDown(void) {}
 
 /**
- * @tc.name: UsbdConfig001
+ * @tc.name: SUB_USB_HDI_0090
  * @tc.desc: Test functions to SetConfig
  * @tc.desc: int32_t SetConfig(const UsbDev &dev, uint8_t configIndex);
+ * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdSetConfig001, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0090, Function | MediumTest | Level1)
 {
-    uint8_t busNum = 1;
-    uint8_t devAddr = 2;
     uint8_t configIndex = 1;
-    struct UsbDev dev = {busNum, devAddr};
+    struct UsbDev dev = dev_;
     auto ret = UsbdClient::GetInstance().SetConfig(dev, configIndex);
-    HDF_LOGI("UsbdRequestTest::UsbdSetConfigConfig001 %{public}d SetConfig=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0090 %{public}d SetConfig=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdConfig002
+ * @tc.name: SUB_USB_HDI_0100
  * @tc.desc: Test functions to SetConfig
  * @tc.desc: int32_t SetConfig(const UsbDev &dev, uint8_t configIndex);
+ * @tc.desc: Reverse test: parameter exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdSetConfig002, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0100, Function | MediumTest | Level1)
 {
-    uint8_t busNum = BUS_NUM_222;
-    uint8_t devAddr = 2;
     uint8_t configIndex = 1;
-    struct UsbDev dev = {busNum, devAddr};
+    struct UsbDev dev = {BUS_NUM_222, dev_.devAddr};
     auto ret = UsbdClient::GetInstance().SetConfig(dev, configIndex);
-    HDF_LOGI("UsbdRequestTest::UsbdSetConfig002 %{public}d SetConfig=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0100 %{public}d SetConfig=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret != 0);
 }
 
 /**
- * @tc.name: UsbdConfig001
- * @tc.desc: Test functions to GetConfig
- * @tc.desc: int32_t GetConfig(const UsbDev &dev, uint8_t &configIndex);
- * @tc.desc: 正向测试：参数正确
+ * @tc.name: SUB_USB_HDI_0110
+ * @tc.desc: Test functions to SetConfig
+ * @tc.desc: int32_t SetConfig(const UsbDev &dev, uint8_t configIndex);
+ * @tc.desc: Reverse test: parameter exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdGetConfig001, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0110, Function | MediumTest | Level1)
 {
-    uint8_t busNum = 1;
-    uint8_t devAddr = 2;
     uint8_t configIndex = 1;
-    struct UsbDev dev = {busNum, devAddr};
-    auto ret = UsbdClient::GetInstance().GetConfig(dev, configIndex);
-    HDF_LOGI("UsbdRequestTest::UsbdGetConfig001 %{public}d GetConfig=%{public}d", __LINE__, ret);
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_222};
+    auto ret = UsbdClient::GetInstance().SetConfig(dev, configIndex);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0110 %{public}d SetConfig=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0120
+ * @tc.desc: Test functions to SetConfig
+ * @tc.desc: int32_t SetConfig(const UsbDev &dev, uint8_t configIndex);
+ * @tc.desc: Reverse test: parameter exception, configIndex error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0120, Function | MediumTest | Level1)
+{
+    uint8_t configIndex = 222;
+    struct UsbDev dev = dev_;
+    auto ret = UsbdClient::GetInstance().SetConfig(dev, configIndex);
+    ASSERT_TRUE(ret != 0);
+    configIndex = 1;
+    ret = UsbdClient::GetInstance().SetConfig(dev, configIndex);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0120 %{public}d SetConfig=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdConfig002
- * @tc.desc: Test functions to GetConfig
- * @tc.desc: int32_t GetConfig(const UsbDev &dev, uint8_t &configIndex);
+ * @tc.name: SUB_USB_HDI_0130
+ * @tc.desc: Test functions to SetConfig
+ * @tc.desc: int32_t SetConfig(const UsbDev &dev, uint8_t configIndex);
+ * @tc.desc: Reverse test: parameter exception, busNum、devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdGetConfig002, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0130, Function | MediumTest | Level1)
 {
-    uint8_t busNum = BUS_NUM_222;
-    uint8_t devAddr = 2;
     uint8_t configIndex = 1;
-    struct UsbDev dev = {busNum, devAddr};
-    auto ret = UsbdClient::GetInstance().GetConfig(dev, configIndex);
-    HDF_LOGI("UsbdRequestTest::UsbdGetConfig002 %{public}d GetConfig=%{public}d", __LINE__, ret);
+    struct UsbDev dev = {BUS_NUM_222, DEV_ADDR_222};
+    auto ret = UsbdClient::GetInstance().SetConfig(dev, configIndex);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0130 %{public}d SetConfig=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret != 0);
 }
 
 /**
- * @tc.name: UsbdClaimInterface001
+ * @tc.name: SUB_USB_HDI_0140
+ * @tc.desc: Test functions to SetConfig
+ * @tc.desc: int32_t SetConfig(const UsbDev &dev, uint8_t configIndex);
+ * @tc.desc: Reverse test: parameter exception, busNum、configIndex error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0140, Function | MediumTest | Level1)
+{
+    uint8_t configIndex = 222;
+    struct UsbDev dev = {BUS_NUM_222, dev_.devAddr};
+    auto ret = UsbdClient::GetInstance().SetConfig(dev, configIndex);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0140 %{public}d SetConfig=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0150
+ * @tc.desc: Test functions to SetConfig
+ * @tc.desc: int32_t SetConfig(const UsbDev &dev, uint8_t configIndex);
+ * @tc.desc: Reverse test: devAddr、configIndex error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0150, Function | MediumTest | Level1)
+{
+    uint8_t configIndex = 222;
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_222};
+    auto ret = UsbdClient::GetInstance().SetConfig(dev, configIndex);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0150 %{public}d SetConfig=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0160
+ * @tc.desc: Test functions to SetConfig
+ * @tc.desc: int32_t SetConfig(const UsbDev &dev, uint8_t configIndex);
+ * @tc.desc: Reverse test: busNum、devAddr、configIndex error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0160, Function | MediumTest | Level1)
+{
+    uint8_t configIndex = 222;
+    struct UsbDev dev = {BUS_NUM_222, DEV_ADDR_222};
+    auto ret = UsbdClient::GetInstance().SetConfig(dev, configIndex);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0160 %{public}d SetConfig=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**********************************************************************************************************/
+
+/**
+ * @tc.name: SUB_USB_HDI_0170
+ * @tc.desc: Test functions to GetConfig
+ * @tc.desc: int32_t GetConfig(const UsbDev &dev, uint8_t &configIndex);
+ * @tc.desc: Forward test: correct parameters
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0170, Function | MediumTest | Level1)
+{
+    uint8_t configIndex = 1;
+    struct UsbDev dev = dev_;
+    auto ret = UsbdClient::GetInstance().GetConfig(dev, configIndex);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0170 %{public}d GetConfig=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0180
+ * @tc.desc: Test functions to GetConfig
+ * @tc.desc: int32_t GetConfig(const UsbDev &dev, uint8_t &configIndex);
+ * @tc.desc: Reverse test: parameter exception, busNum error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0180, Function | MediumTest | Level1)
+{
+    uint8_t configIndex = 1;
+    struct UsbDev dev = {BUS_NUM_222, dev_.devAddr};
+    auto ret = UsbdClient::GetInstance().GetConfig(dev, configIndex);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0180 %{public}d GetConfig=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0190
+ * @tc.desc: Test functions to GetConfig
+ * @tc.desc: int32_t GetConfig(const UsbDev &dev, uint8_t &configIndex);
+ * @tc.desc: Reverse test: parameter exception, devAddr error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0190, Function | MediumTest | Level1)
+{
+    uint8_t configIndex = 1;
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_222};
+    auto ret = UsbdClient::GetInstance().GetConfig(dev, configIndex);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0190 %{public}d GetConfig=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0200
+ * @tc.desc: Test functions to GetConfig
+ * @tc.desc: int32_t GetConfig(const UsbDev &dev, uint8_t &configIndex);
+ * @tc.desc: Reverse test: parameter exception, busNum、devAddr error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0200, Function | MediumTest | Level1)
+{
+    uint8_t configIndex = 1;
+    struct UsbDev dev = {BUS_NUM_222, DEV_ADDR_222};
+    auto ret = UsbdClient::GetInstance().GetConfig(dev, configIndex);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0200 %{public}d GetConfig=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1010
  * @tc.desc: Test functions to ClaimInterface
  * @tc.desc: int32_t  ClaimInterface(const UsbDev &dev, uint8_t interfaceId);
+ * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdClaimInterface001, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1010, Function | MediumTest | Level1)
 {
-    uint8_t busNum = 1;
-    uint8_t devAddr = 2;
     uint8_t interfaceId = INTERFACEID_1;
-    struct UsbDev dev = {busNum, devAddr};
+    struct UsbDev dev = dev_;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdRequestTest::UsbdClaimInterface001 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1010 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdClaimInterface002
+ * @tc.name: SUB_USB_HDI_1020
  * @tc.desc: Test functions to ClaimInterface
  * @tc.desc: int32_t  ClaimInterface(const UsbDev &dev, uint8_t interfaceId);
+ * @tc.desc: Reverse test: parameter exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdClaimInterface002, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1020, Function | MediumTest | Level1)
 {
-    uint8_t busNum = 1;
-    uint8_t devAddr = 2;
     uint8_t interfaceId = INTERFACEID_1;
-    struct UsbDev dev = {busNum, devAddr};
+    struct UsbDev dev = dev_;
     dev.busNum = 20;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdRequestTest::UsbdClaimInterface002 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1020 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret != 0);
 }
 
 /**
- * @tc.name: UsbdSetInterface001
- * @tc.desc: Test functions to SetInterface
- * @tc.desc: int32_t SetInterface(const UsbDev &dev, uint8_t interfaceId, uint8_t altIndex);
+ * @tc.name: SUB_USB_HDI_1030
+ * @tc.desc: Test functions to ClaimInterface
+ * @tc.desc: int32_t  ClaimInterface(const UsbDev &dev, uint8_t interfaceId);
+ * @tc.desc: Reverse test: parameter exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdSetInterface001, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1030, Function | MediumTest | Level1)
 {
-    uint8_t busNum = 1;
-    uint8_t devAddr = 2;
+    uint8_t interfaceId = INTERFACEID_1;
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_255};
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1030 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1040
+ * @tc.desc: Test functions to ClaimInterface
+ * @tc.desc: int32_t  ClaimInterface(const UsbDev &dev, uint8_t interfaceId);
+ * @tc.desc: Reverse test: parameter exception, interfaceId error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1040, Function | MediumTest | Level1)
+{
+    uint8_t interfaceId = INTERFACEID_1;
+    struct UsbDev dev = dev_;
+    interfaceId = 255;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1040 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1050
+ * @tc.desc: Test functions to ClaimInterface
+ * @tc.desc: int32_t  ClaimInterface(const UsbDev &dev, uint8_t interfaceId);
+ * @tc.desc: Reverse test: parameter exception, busNum、devAddr error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1050, Function | MediumTest | Level1)
+{
+    uint8_t interfaceId = INTERFACEID_1;
+    struct UsbDev dev = {BUS_NUM_255, DEV_ADDR_255};
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1050 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1060
+ * @tc.desc: Test functions to ClaimInterface
+ * @tc.desc: int32_t  ClaimInterface(const UsbDev &dev, uint8_t interfaceId);
+ * @tc.desc: Reverse test: parameter exception, busNum、interfaceId error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1060, Function | MediumTest | Level1)
+{
+    uint8_t interfaceId = 255;
+    struct UsbDev dev = {BUS_NUM_255, dev_.devAddr};
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1060 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1070
+ * @tc.desc: Test functions to ClaimInterface
+ * @tc.desc: int32_t  ClaimInterface(const UsbDev &dev, uint8_t interfaceId);
+ * @tc.desc: Reverse test: devAddr、interfaceId error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1070, Function | MediumTest | Level1)
+{
+    uint8_t interfaceId = 255;
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_255};
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1070 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1080
+ * @tc.desc: Test functions to ClaimInterface
+ * @tc.desc: int32_t  ClaimInterface(const UsbDev &dev, uint8_t interfaceId);
+ * @tc.desc: Reverse test: busNum、devAddr、interfaceId error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1080, Function | MediumTest | Level1)
+{
+    uint8_t interfaceId = 255;
+    struct UsbDev dev = {BUS_NUM_255, DEV_ADDR_255};
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1080 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**********************************************************************************************************/
+
+/**
+ * @tc.name: SUB_USB_HDI_1170
+ * @tc.desc: Test functions to SetInterface
+ * @tc.desc: int32_t SetInterface(const UsbDev &dev, uint8_t interfaceId, uint8_t altIndex);
+ * @tc.desc: Forward test: correct parameters
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1170, Function | MediumTest | Level1)
+{
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t altIndex = 0;
-
-    struct UsbDev dev = {busNum, devAddr};
-
+    struct UsbDev dev = dev_;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdRequestTest::UsbdClaimInterface001 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1170 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     ret = UsbdClient::GetInstance().SetInterface(dev, interfaceId, altIndex);
-    HDF_LOGI("UsbdRequestTest::UsbdSetInterface001 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1170 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdSetInterface002
+ * @tc.name: SUB_USB_HDI_1180
  * @tc.desc: Test functions to SetInterface
  * @tc.desc: int32_t SetInterface(const UsbDev &dev, uint8_t interfaceId, uint8_t altIndex);
+ * @tc.desc: Reverse test: parameter exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdSetInterface002, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1180, Function | MediumTest | Level1)
 {
-    uint8_t busNum = 1;
-    uint8_t devAddr = 2;
     uint8_t interfaceId = INTERFACEID_1;
-
     uint8_t altIndex = 0;
-    struct UsbDev dev = {busNum, devAddr};
-
-    
+    struct UsbDev dev = dev_;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdRequestTest::UsbdSetInterface002 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1180 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     dev.busNum = BUS_NUM_222;
     ret = UsbdClient::GetInstance().SetInterface(dev, interfaceId, altIndex);
-    HDF_LOGI("UsbdRequestTest::UsbdSetInterface002 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1180 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret != 0);
 }
 
 /**
- * @tc.name: UsbdDescriptor001
- * @tc.desc: Test functions to GetDeviceDescriptor
- * @tc.desc: int32_t GetDeviceDescriptor(const UsbDev &dev, std::vector<uint8_t> &decriptor);
+ * @tc.name: SUB_USB_HDI_1190
+ * @tc.desc: Test functions to SetInterface
+ * @tc.desc: int32_t SetInterface(const UsbDev &dev, uint8_t interfaceId, uint8_t altIndex);
+ * @tc.desc: Reverse test: parameter exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdGetDeviceDescriptor001, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1190, Function | MediumTest | Level1)
 {
-    uint8_t busNum = 1;
-    uint8_t devAddr = 2;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t altIndex = 0;
+    struct UsbDev dev = dev_;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1190 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    dev.devAddr = DEV_ADDR_222;
+    ret = UsbdClient::GetInstance().SetInterface(dev, interfaceId, altIndex);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1190 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1200
+ * @tc.desc: Test functions to SetInterface
+ * @tc.desc: int32_t SetInterface(const UsbDev &dev, uint8_t interfaceId, uint8_t altIndex);
+ * @tc.desc: Reverse test: parameter exception, interfaceId error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1200, Function | MediumTest | Level1)
+{
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t altIndex = 222;
+    struct UsbDev dev = dev_;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1200 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    interfaceId = 222;
+    ret = UsbdClient::GetInstance().SetInterface(dev, interfaceId, altIndex);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1200 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1210
+ * @tc.desc: Test functions to SetInterface
+ * @tc.desc: int32_t SetInterface(const UsbDev &dev, uint8_t interfaceId, uint8_t altIndex);
+ * @tc.desc: Reverse test: parameter exception, busNum、devAddr error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1210, Function | MediumTest | Level1)
+{
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t altIndex = 0;
+    struct UsbDev dev = dev_;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1210 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    dev.busNum = 233;
+    dev.devAddr = 233;
+    ret = UsbdClient::GetInstance().SetInterface(dev, interfaceId, altIndex);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1210 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1220
+ * @tc.desc: Test functions to SetInterface
+ * @tc.desc: int32_t SetInterface(const UsbDev &dev, uint8_t interfaceId, uint8_t altIndex);
+ * @tc.desc: Reverse test: parameter exception, busNum、interfaceId error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1220, Function | MediumTest | Level1)
+{
+    int32_t interfaceId = INT32_INTERFACEID_1;
+    uint8_t altIndex = 1;
+    struct UsbDev dev = dev_;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1220 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    dev.busNum = 224;
+    interfaceId = 224;
+    ret = UsbdClient::GetInstance().SetInterface(dev, interfaceId, altIndex);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1220 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1230
+ * @tc.desc: Test functions to SetInterface
+ * @tc.desc: int32_t SetInterface(const UsbDev &dev, uint8_t interfaceId, uint8_t altIndex);
+ * @tc.desc: Reverse test: devAddr、interfaceid error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1230, Function | MediumTest | Level1)
+{
+    int32_t interfaceId = INT32_INTERFACEID_1;
+    uint8_t altIndex = 225;
+    struct UsbDev dev = dev_;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1230 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    dev.devAddr = 225;
+    interfaceId = 225;
+    ret = UsbdClient::GetInstance().SetInterface(dev, interfaceId, altIndex);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1230 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1240
+ * @tc.desc: Test functions to SetInterface
+ * @tc.desc: int32_t SetInterface(const UsbDev &dev, uint8_t interfaceId, uint8_t altIndex);
+ * @tc.desc: Reverse test: busNum、devAddr、interfaceid error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1240, Function | MediumTest | Level1)
+{
+    uint8_t altIndex = 225;
+    int32_t interfaceId = INT32_INTERFACEID_1;
+    struct UsbDev dev = dev_;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1240 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    dev.busNum = 225;
+    dev.devAddr = 225;
+    interfaceId = 225;
+    ret = UsbdClient::GetInstance().SetInterface(dev, interfaceId, altIndex);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1240 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0210
+ * @tc.desc: Test functions to GetDeviceDescriptor
+ * @tc.desc: int32_t GetDeviceDescriptor(const UsbDev &dev, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Forward test: correct parameters
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0210, Function | MediumTest | Level1)
+{
     uint32_t length = LENGTH_NUM_255;
     uint8_t buffer[LENGTH_NUM_255] = {0};
-    struct UsbDev dev = {busNum, devAddr};
+    struct UsbDev dev = dev_;
     std::vector<uint8_t> devdata(buffer, buffer + length);
     auto ret = UsbdClient::GetInstance().GetDeviceDescriptor(dev, devdata);
-    HDF_LOGI("UsbdRequestTest::UsbdGetDeviceDescriptor001 %{public}d ret=%{public}d", __LINE__, ret);
-    HDF_LOGI("UsbdRequestTest::UsbdGetDeviceDescriptor001 %{public}d length=%{public}d buffer=%{public}d", __LINE__,
-             devdata.size(), sizeof(devdata));
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0210 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdDescriptor002
+ * @tc.name: SUB_USB_HDI_0220
  * @tc.desc: Test functions to GetDeviceDescriptor
- * @tc.desc: int32_t GetDeviceDescriptor(const UsbDev &dev, std::vector<uint8_t> &decriptor);
+ * @tc.desc: int32_t GetDeviceDescriptor(const UsbDev &dev, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: parameter exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdGetDeviceDescriptor002, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0220, Function | MediumTest | Level1)
 {
-    uint8_t busNum = BUS_NUM_222;
-    uint8_t devAddr = 2;
     uint8_t buffer[LENGTH_NUM_255] = {0};
     uint32_t length = LENGTH_NUM_255;
-    struct UsbDev dev = {busNum, devAddr};
+    struct UsbDev dev = {BUS_NUM_222, dev_.devAddr};
     std::vector<uint8_t> devdata(buffer, buffer + length);
     auto ret = UsbdClient::GetInstance().GetDeviceDescriptor(dev, devdata);
-    HDF_LOGI("UsbdRequestTest::UsbdGetDeviceDescriptor002 %{public}d length=%{public}d buffer=%{public}d", __LINE__,
-             devdata.size(), sizeof(devdata));
-    HDF_LOGI("UsbdRequestTest::UsbdGetDeviceDescriptor002 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0220 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
     ASSERT_TRUE(ret != 0);
 }
 
 /**
- * @tc.name: UsbdDescriptor004
+ * @tc.name: SUB_USB_HDI_0230
  * @tc.desc: Test functions to GetDeviceDescriptor
- * @tc.desc: int32_t GetDeviceDescriptor(const UsbDev &dev, std::vector<uint8_t> &decriptor);
+ * @tc.desc: int32_t GetDeviceDescriptor(const UsbDev &dev, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: parameter exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdGetDeviceDescriptor004, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0230, Function | MediumTest | Level1)
 {
-    uint8_t busNum = 1;
-    uint8_t devAddr = 2;
+    uint8_t devAddr = 233;
+    uint8_t buffer[LENGTH_NUM_255] = {0};
+    uint32_t length = LENGTH_NUM_255;
+    struct UsbDev dev = {dev_.busNum, devAddr};
+    std::vector<uint8_t> devdata(buffer, buffer + length);
+    auto ret = UsbdClient::GetInstance().GetDeviceDescriptor(dev, devdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0230 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0240
+ * @tc.desc: Test functions to GetDeviceDescriptor
+ * @tc.desc: int32_t GetDeviceDescriptor(const UsbDev &dev, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: parameter exception, length error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0240, Function | MediumTest | Level1)
+{
     uint8_t buffer[LENGTH_NUM_255] = {};
+    uint32_t length = 0;
+    struct UsbDev dev = dev_;
+    std::vector<uint8_t> devdata(buffer, buffer + length);
+    auto ret = UsbdClient::GetInstance().GetDeviceDescriptor(dev, devdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0240 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
+    ASSERT_TRUE(ret == 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0250
+ * @tc.desc: Test functions to GetDeviceDescriptor
+ * @tc.desc: int32_t GetDeviceDescriptor(const UsbDev &dev, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: parameter exception, busNum、devAddr error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0250, Function | MediumTest | Level1)
+{
+    uint8_t busNum = 99;
+    uint8_t devAddr = 99;
+    uint8_t buffer[LENGTH_NUM_255] = {};
+    uint32_t length = LENGTH_NUM_255;
+    struct UsbDev dev = {busNum, devAddr};
+    std::vector<uint8_t> devdata(buffer, buffer + length);
+    auto ret = UsbdClient::GetInstance().GetDeviceDescriptor(dev, devdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0250 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0260
+ * @tc.desc: Test functions to GetDeviceDescriptor
+ * @tc.desc: int32_t GetDeviceDescriptor(const UsbDev &dev, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: parameter exception, busNum、length error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0260, Function | MediumTest | Level1)
+{
+    uint8_t buffer[LENGTH_NUM_255] = {};
+    uint32_t length = 0;
+    struct UsbDev dev = {BUS_NUM_222, dev_.devAddr};
+    std::vector<uint8_t> devdata(buffer, buffer + length);
+    auto ret = UsbdClient::GetInstance().GetDeviceDescriptor(dev, devdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0260 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0270
+ * @tc.desc: Test functions to GetDeviceDescriptor
+ * @tc.desc: int32_t GetDeviceDescriptor(const UsbDev &dev, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: devAddr、length error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0270, Function | MediumTest | Level1)
+{
+    uint8_t buffer[] = {};
+    uint32_t length = 0;
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_222};
+    std::vector<uint8_t> devdata(buffer, buffer + length);
+    auto ret = UsbdClient::GetInstance().GetDeviceDescriptor(dev, devdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0270 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0280
+ * @tc.desc: Test functions to GetDeviceDescriptor
+ * @tc.desc: int32_t GetDeviceDescriptor(const UsbDev &dev, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: busNum、devAddr、length error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0280, Function | MediumTest | Level1)
+{
+    uint8_t busNum = 233;
+    uint8_t devAddr = 234;
+    uint8_t buffer[] = {};
     uint32_t length = 0;
     struct UsbDev dev = {busNum, devAddr};
     std::vector<uint8_t> devdata(buffer, buffer + length);
     auto ret = UsbdClient::GetInstance().GetDeviceDescriptor(dev, devdata);
-    HDF_LOGI("UsbdRequestTest::UsbdGetDeviceDescriptor004 %{public}d length=%{public}d buffer=%{public}d", __LINE__,
-             devdata.size(), sizeof(devdata));
-    HDF_LOGI("UsbdRequestTest::UsbdGetDeviceDescriptor004 %{public}d ret=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret == 0);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0280 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
+    ASSERT_TRUE(ret != 0);
 }
 
+/**********************************************************************************************************/
+
 /**
- * @tc.name: UsbdDescriptor001
+ * @tc.name: SUB_USB_HDI_0290
  * @tc.desc: Test functions to GetStringDescriptor
- * @tc.desc: int32_t GetStringDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &decriptor);
+ * @tc.desc: int32_t GetStringDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdGetStringDescriptor001, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0290, Function | MediumTest | Level1)
 {
-    uint8_t busNum = 1;
-    uint8_t devAddr = 2;
     uint8_t stringId = 0;
     uint8_t buffer[LENGTH_NUM_255] = {0};
     uint32_t length = LENGTH_NUM_255;
-    struct UsbDev dev = {busNum, devAddr};
+    struct UsbDev dev = dev_;
     std::vector<uint8_t> devdata(buffer, buffer + length);
     auto ret = UsbdClient::GetInstance().GetStringDescriptor(dev, stringId, devdata);
-    HDF_LOGI("UsbdRequestTest::UsbdGetStringDescriptor001 %{public}d ret=%{public}d", __LINE__, ret);
-    HDF_LOGI("UsbdRequestTest::UsbdGetStringDescriptor001 %{public}d length=%{public}d buffer=%{public}d", __LINE__,
-             devdata.size(), sizeof(devdata));
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0290 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdDescriptor002
+ * @tc.name: SUB_USB_HDI_0300
  * @tc.desc: Test functions to GetStringDescriptor
- * @tc.desc: int32_t GetStringDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &decriptor);
+ * @tc.desc: int32_t GetStringDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: parameter exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdGetStringDescriptor002, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0300, Function | MediumTest | Level1)
 {
-    uint8_t busNum = 1;
-    uint8_t devAddr = 2;
     uint8_t stringId = 1;
     uint8_t buffer[LENGTH_NUM_255] = {0};
     uint32_t length = LENGTH_NUM_255;
-    struct UsbDev dev = {busNum, devAddr};
+    struct UsbDev dev = dev_;
     std::vector<uint8_t> devdata(buffer, buffer + length);
     auto ret = UsbdClient::GetInstance().GetStringDescriptor(dev, stringId, devdata);
-    HDF_LOGI("UsbdRequestTest::UsbdGetStringDescriptor002 %{public}d length=%{public}d buffer=%{public}d", __LINE__,
-             devdata.size(), sizeof(devdata));
-    HDF_LOGI("UsbdRequestTest::UsbdGetStringDescriptor002 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0300 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdDescriptor003
+ * @tc.name: SUB_USB_HDI_0310
  * @tc.desc: Test functions to GetStringDescriptor
- * @tc.desc: int32_t GetStringDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &decriptor);
+ * @tc.desc: int32_t GetStringDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: parameter exception, stringId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdGetStringDescriptor003, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0310, Function | MediumTest | Level1)
 {
-    uint8_t busNum = 1;
-    uint8_t devAddr = 2;
     uint8_t stringId = 222;
     uint8_t buffer[LENGTH_NUM_255] = {0};
     uint32_t length = LENGTH_NUM_255;
-    struct UsbDev dev = {busNum, devAddr};
+    struct UsbDev dev = dev_;
     std::vector<uint8_t> devdata(buffer, buffer + length);
     auto ret = UsbdClient::GetInstance().GetStringDescriptor(dev, stringId, devdata);
-    HDF_LOGI("UsbdRequestTest::UsbdGetStringDescriptor003 %{public}d length=%{public}d buffer=%{public}d", __LINE__,
-             devdata.size(), sizeof(devdata));
-    HDF_LOGI("UsbdRequestTest::UsbdGetStringDescriptor003 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0310 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdDescriptor004
+ * @tc.name: SUB_USB_HDI_0320
  * @tc.desc: Test functions to GetStringDescriptor
- * @tc.desc: int32_t GetStringDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &decriptor);
+ * @tc.desc: int32_t GetStringDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: parameter exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdGetStringDescriptor004, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0320, Function | MediumTest | Level1)
 {
-    uint8_t busNum = 1;
-    uint8_t devAddr = 255;
     uint8_t stringId = 0;
     uint8_t buffer[LENGTH_NUM_255] = {0};
     uint32_t length = 8;
-    struct UsbDev dev = {busNum, devAddr};
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_255};
     std::vector<uint8_t> devdata(buffer, buffer + length);
     auto ret = UsbdClient::GetInstance().GetStringDescriptor(dev, stringId, devdata);
-    HDF_LOGI("UsbdRequestTest::UsbdGetStringDescriptor004 %{public}d length=%{public}d buffer=%{public}d", __LINE__,
-             devdata.size(), sizeof(devdata));
-    HDF_LOGI("UsbdRequestTest::UsbdGetStringDescriptor004 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0320 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
     ASSERT_TRUE(ret != 0);
 }
 
 /**
- * @tc.name: UsbdDescriptor001
- * @tc.desc: Test functions to GetConfigDescriptor
- * @tc.desc: int32_t GetConfigDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &decriptor);
+ * @tc.name: SUB_USB_HDI_0330
+ * @tc.desc: Test functions to GetStringDescriptor
+ * @tc.desc: int32_t GetStringDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: parameter exception, busNum、devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdGetConfigDescriptor001, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0330, Function | MediumTest | Level1)
 {
-    uint8_t busNum = 1;
-    uint8_t devAddr = 2;
+    uint8_t stringId = 0;
+    uint8_t buffer[LENGTH_NUM_255] = {0};
+    uint32_t length = 8;
+    struct UsbDev dev = {BUS_NUM_222, DEV_ADDR_222};
+    std::vector<uint8_t> devdata(buffer, buffer + length);
+    auto ret = UsbdClient::GetInstance().GetStringDescriptor(dev, stringId, devdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0330 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0340
+ * @tc.desc: Test functions to GetStringDescriptor
+ * @tc.desc: int32_t GetStringDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: parameter exception, busNum error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0340, Function | MediumTest | Level1)
+{
+    uint8_t stringId = 0;
+    uint8_t buffer[LENGTH_NUM_255] = {0};
+    uint32_t length = LENGTH_NUM_255;
+    struct UsbDev dev = {BUS_NUM_222, dev_.devAddr};
+    std::vector<uint8_t> devdata(buffer, buffer + length);
+    auto ret = UsbdClient::GetInstance().GetStringDescriptor(dev, stringId, devdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0340 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0350
+ * @tc.desc: Test functions to GetStringDescriptor
+ * @tc.desc: int32_t GetStringDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: devAddr、stringID error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0350, Function | MediumTest | Level1)
+{
+    uint8_t stringId = 233;
+    uint8_t buffer[LENGTH_NUM_255] = {0};
+    uint32_t length = LENGTH_NUM_255;
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_222};
+    std::vector<uint8_t> devdata(buffer, buffer + length);
+    auto ret = UsbdClient::GetInstance().GetStringDescriptor(dev, stringId, devdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0350 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0360
+ * @tc.desc: Test functions to GetStringDescriptor
+ * @tc.desc: int32_t GetStringDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: busNum、devAddr、length error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0360, Function | MediumTest | Level1)
+{
+    uint8_t stringId = 222;
+    uint8_t buffer[LENGTH_NUM_255] = {0};
+    uint32_t length = LENGTH_NUM_255;
+    struct UsbDev dev = {BUS_NUM_222, DEV_ADDR_222};
+    std::vector<uint8_t> devdata(buffer, buffer + length);
+    auto ret = UsbdClient::GetInstance().GetStringDescriptor(dev, stringId, devdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0360 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**********************************************************************************************************/
+
+/**
+ * @tc.name: SUB_USB_HDI_0370
+ * @tc.desc: Test functions to GetConfigDescriptor
+ * @tc.desc: int32_t GetConfigDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Forward test: correct parameters
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0370, Function | MediumTest | Level1)
+{
     uint8_t configId = 0;
     uint8_t buffer[LENGTH_NUM_255] = {};
     uint32_t length = LENGTH_NUM_255;
-    struct UsbDev dev = {busNum, devAddr};
+    struct UsbDev dev = dev_;
     std::vector<uint8_t> devdata(buffer, buffer + length);
     auto ret = UsbdClient::GetInstance().GetConfigDescriptor(dev, configId, devdata);
-    HDF_LOGI("UsbdRequestTest::UsbdGetConfigDescriptor001 %{public}d ret=%{public}d", __LINE__, ret);
-    HDF_LOGI("UsbdRequestTest::UsbdGetConfigDescriptor001 %{public}d length=%{public}d buffer=%{public}d", __LINE__,
-             devdata.size(), sizeof(devdata));
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0370 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdDescriptor002
+ * @tc.name: SUB_USB_HDI_0380
  * @tc.desc: Test functions to GetConfigDescriptor
- * @tc.desc: int32_t GetConfigDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &decriptor);
+ * @tc.desc: int32_t GetConfigDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: parameter exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdGetConfigDescriptor002, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0380, Function | MediumTest | Level1)
 {
-    uint8_t busNum = BUS_NUM_222;
-    uint8_t devAddr = 2;
     uint8_t configId = 1;
     uint8_t buffer[LENGTH_NUM_255] = {};
     uint32_t length = LENGTH_NUM_255;
-    struct UsbDev dev = {busNum, devAddr};
+    struct UsbDev dev = {BUS_NUM_222, dev_.devAddr};
     std::vector<uint8_t> devdata(buffer, buffer + length);
     auto ret = UsbdClient::GetInstance().GetConfigDescriptor(dev, configId, devdata);
-    HDF_LOGI("UsbdRequestTest::UsbdGetConfigDescriptor002 %{public}d length=%{public}d buffer=%{public}d", __LINE__,
-             devdata.size(), sizeof(devdata));
-    HDF_LOGI("UsbdRequestTest::UsbdGetConfigDescriptor002 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0380 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
     ASSERT_TRUE(ret != 0);
 }
 
 /**
- * @tc.name: UsbdDescriptor004
+ * @tc.name: SUB_USB_HDI_0390
  * @tc.desc: Test functions to GetConfigDescriptor
- * @tc.desc: int32_t GetConfigDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &decriptor);
+ * @tc.desc: int32_t GetConfigDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: parameter exception, devAddr
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdGetConfigDescriptor004, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0390, Function | MediumTest | Level1)
 {
-    uint8_t busNum = 1;
-    uint8_t devAddr = 2;
     uint8_t configId = 1;
     uint8_t buffer[LENGTH_NUM_255] = {};
     uint32_t length = LENGTH_NUM_255;
-    struct UsbDev dev = {busNum, devAddr};
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_222};
     std::vector<uint8_t> devdata(buffer, buffer + length);
     auto ret = UsbdClient::GetInstance().GetConfigDescriptor(dev, configId, devdata);
-    HDF_LOGI("UsbdRequestTest::UsbdGetConfigDescriptor004 %{public}d length=%{public}d buffer=%{public}d", __LINE__,
-             devdata.size(), sizeof(devdata));
-    HDF_LOGI("UsbdRequestTest::UsbdGetConfigDescriptor004 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0390 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0400
+ * @tc.desc: Test functions to GetConfigDescriptor
+ * @tc.desc: int32_t GetConfigDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: parameter exception, configId error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0400, Function | MediumTest | Level1)
+{
+    uint8_t configId = 1;
+    uint8_t buffer[LENGTH_NUM_255] = {};
+    uint32_t length = LENGTH_NUM_255;
+    struct UsbDev dev = dev_;
+    std::vector<uint8_t> devdata(buffer, buffer + length);
+    auto ret = UsbdClient::GetInstance().GetConfigDescriptor(dev, configId, devdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0400 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdGetRawDescriptor001
- * @tc.desc: Test functions to GetRawDescriptor
- * @tc.desc: int32_t GetRawDescriptor(const UsbDev &dev, std::vector<uint8_t> &decriptor);
+ * @tc.name: SUB_USB_HDI_0410
+ * @tc.desc: Test functions to GetConfigDescriptor
+ * @tc.desc: int32_t GetConfigDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: parameter exception, busNum、devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdGetRawDescriptor001, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0410, Function | MediumTest | Level1)
 {
-    uint8_t busNum = 1;
-    uint8_t devAddr = 2;
-    struct UsbDev dev = {busNum, devAddr};
+    uint8_t configId = 1;
+    uint8_t buffer[LENGTH_NUM_255] = {};
+    uint32_t length = LENGTH_NUM_255;
+    struct UsbDev dev = {BUS_NUM_222, DEV_ADDR_222};
+    std::vector<uint8_t> devdata(buffer, buffer + length);
+    auto ret = UsbdClient::GetInstance().GetConfigDescriptor(dev, configId, devdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0410 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0420
+ * @tc.desc: Test functions to GetConfigDescriptor
+ * @tc.desc: int32_t GetConfigDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: parameter exception, busNum、configId error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0420, Function | MediumTest | Level1)
+{
+    uint8_t configId = 222;
+    uint8_t buffer[LENGTH_NUM_255] = {0};
+    uint32_t length = LENGTH_NUM_255;
+    struct UsbDev dev = {BUS_NUM_222, dev_.devAddr};
+    std::vector<uint8_t> devdata(buffer, buffer + length);
+    auto ret = UsbdClient::GetInstance().GetConfigDescriptor(dev, configId, devdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0420 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0430
+ * @tc.desc: Test functions to GetConfigDescriptor
+ * @tc.desc: int32_t GetConfigDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: devAddr、configId error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0430, Function | MediumTest | Level1)
+{
+    uint8_t configId = 222;
+    uint8_t buffer[LENGTH_NUM_255] = {0};
+    uint32_t length = LENGTH_NUM_255;
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_222};
+    std::vector<uint8_t> devdata(buffer, buffer + length);
+    auto ret = UsbdClient::GetInstance().GetConfigDescriptor(dev, configId, devdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0430 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0440
+ * @tc.desc: Test functions to GetConfigDescriptor
+ * @tc.desc: int32_t GetConfigDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: busNum、devAddr、configId error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0440, Function | MediumTest | Level1)
+{
+    uint8_t configId = 222;
+    uint8_t buffer[LENGTH_NUM_255] = {0};
+    uint32_t length = LENGTH_NUM_255;
+    struct UsbDev dev = {BUS_NUM_222, DEV_ADDR_222};
+    std::vector<uint8_t> devdata(buffer, buffer + length);
+    auto ret = UsbdClient::GetInstance().GetConfigDescriptor(dev, configId, devdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0440 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        devdata.size(), sizeof(devdata), ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1710
+ * @tc.desc: Test functions to GetRawDescriptor
+ * @tc.desc: int32_t GetRawDescriptor(const UsbDev &dev, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Forward test: correct parameters
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1710, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
     std::vector<uint8_t> rawData;
     auto ret = UsbdClient::GetInstance().GetRawDescriptor(dev, rawData);
-    HDF_LOGI("UsbdRequestTest::UsbdGetRawDescriptor001 %{public}d length=%{public}d buffer=%{public}d", __LINE__,
-             rawData.size(), sizeof(rawData));
-    HDF_LOGI("UsbdRequestTest::UsbdGetRawDescriptor001 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1710 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        rawData.size(), sizeof(rawData), ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdGetRawDescriptor002
+ * @tc.name: SUB_USB_HDI_1720
  * @tc.desc: Test functions to GetRawDescriptor
- * @tc.desc: int32_t GetRawDescriptor(const UsbDev &dev, std::vector<uint8_t> &decriptor);
+ * @tc.desc: int32_t GetRawDescriptor(const UsbDev &dev, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: parameter error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdGetRawDescriptor002, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1720, Function | MediumTest | Level1)
 {
-    uint8_t busNum = BUS_NUM_222;
-    uint8_t devAddr = 2;
-    struct UsbDev dev = {busNum, devAddr};
+    struct UsbDev dev = {BUS_NUM_222, dev_.devAddr};
     std::vector<uint8_t> rawData;
     auto ret = UsbdClient::GetInstance().GetRawDescriptor(dev, rawData);
-    HDF_LOGI("UsbdRequestTest::UsbdGetRawDescriptor002 %{public}d length=%{public}d buffer=%{public}d", __LINE__,
-             rawData.size(), sizeof(rawData));
-    HDF_LOGI("UsbdRequestTest::UsbdGetRawDescriptor002 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1720 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        rawData.size(), sizeof(rawData), ret);
     ASSERT_TRUE(ret != 0);
 }
 
 /**
- * @tc.name: GetFileDescriptor001
- * @tc.desc: Test functions to GetFileDescriptor
- * @tc.desc: int32_t GetFileDescriptor(const UsbDev &dev, int32_t &fd);
+ * @tc.name: SUB_USB_HDI_1730
+ * @tc.desc: Test functions to GetRawDescriptor
+ * @tc.desc: int32_t GetRawDescriptor(const UsbDev &dev, std::vector<uint8_t> &descriptor);
+ * @tc.desc: Reverse test: parameter error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, GetFileDescriptor001, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1730, Function | MediumTest | Level1)
 {
-    uint8_t busNum = 1;
-    uint8_t devAddr = 2;
-    struct UsbDev dev = {busNum, devAddr};
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_222};
+    std::vector<uint8_t> rawData;
+    auto ret = UsbdClient::GetInstance().GetRawDescriptor(dev, rawData);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1730 length=%{public}zu buffer=%{public}zu ret=%{public}d",
+        rawData.size(), sizeof(rawData), ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1740
+ * @tc.desc: Test functions to GetFileDescriptor
+ * @tc.desc: int32_t GetFileDescriptor(const UsbDev &dev, int32_t &fd);
+ * @tc.desc: Forward test: correct parameters
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1740, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
     int32_t fd = 0;
     auto ret = UsbdClient::GetInstance().GetFileDescriptor(dev, fd);
-    HDF_LOGI("UsbdRequestTest::GetFileDescriptor001 %{public}d GetFileDescriptor=%{public}d", __LINE__, ret);
-    HDF_LOGI("UsbdRequestTest::GetFileDescriptor001 %{public}d fd=%{public}d", __LINE__, fd);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1740 %{public}d fd=%{public}d ret=%{public}d", __LINE__, fd, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: GetFileDescriptor002
+ * @tc.name: SUB_USB_HDI_1750
  * @tc.desc: Test functions to GetFileDescriptor
  * @tc.desc: int32_t GetFileDescriptor(const UsbDev &dev, int32_t &fd);
+ * @tc.desc: Reverse test: parameter error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, GetFileDescriptor002, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1750, Function | MediumTest | Level1)
 {
-    uint8_t busNum = BUS_NUM_222;
-    uint8_t devAddr = 2;
-    struct UsbDev dev = {busNum, devAddr};
+    struct UsbDev dev = {BUS_NUM_222, dev_.devAddr};
     int32_t fd = 0;
     auto ret = UsbdClient::GetInstance().GetFileDescriptor(dev, fd);
-    HDF_LOGI("UsbdRequestTest::GetFileDescriptor002 %{public}d GetFileDescriptor=%{public}d", __LINE__, ret);
-    HDF_LOGI("UsbdRequestTest::GetFileDescriptor002 %{public}d fd=%{public}d", __LINE__, fd);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1750 %{public}d fd=%{public}d ret=%{public}d", __LINE__, fd, ret);
     ASSERT_TRUE(ret != 0);
 }
 
 /**
- * @tc.name: GetFileDescriptor003
+ * @tc.name: SUB_USB_HDI_1760
  * @tc.desc: Test functions to GetFileDescriptor
  * @tc.desc: int32_t GetFileDescriptor(const UsbDev &dev, int32_t &fd);
+ * @tc.desc: Reverse test: parameter error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, GetFileDescriptor003, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1760, Function | MediumTest | Level1)
 {
-    uint8_t busNum = 1;
-    uint8_t devAddr = DEV_ADDR_222;
-    struct UsbDev dev = {busNum, devAddr};
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_222};
     int32_t fd = 0;
     auto ret = UsbdClient::GetInstance().GetFileDescriptor(dev, fd);
-    HDF_LOGI("UsbdRequestTest::GetFileDescriptor003 %{public}d GetFileDescriptor=%{public}d", __LINE__, ret);
-    HDF_LOGI("UsbdRequestTest::GetFileDescriptor003 %{public}d fd=%{public}d", __LINE__, fd);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1760 %{public}d fd=%{public}d ret=%{public}d", __LINE__, fd, ret);
     ASSERT_TRUE(ret != 0);
 }
 
 /**
- * @tc.name: GetFileDescriptor004
+ * @tc.name: SUB_USB_HDI_1770
  * @tc.desc: Test functions to GetFileDescriptor
  * @tc.desc: int32_t GetFileDescriptor(const UsbDev &dev, int32_t &fd);
+ * @tc.desc: Reverse test: parameter error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, GetFileDescriptor004, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1770, Function | MediumTest | Level1)
 {
-    uint8_t busNum = 1;
-    uint8_t devAddr = 2;
-    struct UsbDev dev = {busNum, devAddr};
+    struct UsbDev dev = dev_;
     int32_t fd = LENGTH_NUM_255;
     auto ret = UsbdClient::GetInstance().GetFileDescriptor(dev, fd);
-    HDF_LOGI("UsbdRequestTest::GetFileDescriptor004 %{public}d GetFileDescriptor=%{public}d", __LINE__, ret);
-    HDF_LOGI("UsbdRequestTest::GetFileDescriptor004 %{public}d fd=%{public}d", __LINE__, fd);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1770 %{public}d fd=%{public}d ret=%{public}d", __LINE__, fd, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdRequest001
+ * @tc.name: SUB_USB_HDI_0790
  * @tc.desc: Test functions to RequestQueue
  * @tc.desc: int32_t RequestQueue(const UsbDev &dev, const UsbPipe &pipe, std::vector<uint8_t> &clientData,
         std::vector<uint8_t> &buffer);
+ * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdRequestQueue001, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0790, Function | MediumTest | Level1)
 {
-    uint8_t pointid = POINTID_129;
+    struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    uint8_t pointid = POINTID_129;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestQueue001 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0790 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
     uint8_t buffer[LENGTH_NUM_255] = {0};
@@ -574,87 +1206,258 @@ HWTEST_F(UsbdRequestTest, UsbdRequestQueue001, Function | MediumTest | Level1)
     std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_10};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().RequestQueue(dev, pipe, clientdata, bufferdata);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestQueue001 %{public}d interfaceId=%{public}d pointid=%{public}d", __LINE__,
-             interfaceId, pointid);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestQueue001 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0790 interfaceId=%{public}d pointid=%{public}d ret=%{public}d",
+        interfaceId, pointid, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdRequest002
+ * @tc.name: SUB_USB_HDI_0800
  * @tc.desc: Test functions to RequestQueue
  * @tc.desc: int32_t RequestQueue(const UsbDev &dev, const UsbPipe &pipe, std::vector<uint8_t> &clientData,
         std::vector<uint8_t> &buffer);
+ * @tc.desc: Reverse test: parameter exception, busNum、devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdRequestQueue002, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0800, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.devAddr = DEV_ADDR_2;
-    dev.busNum = BUS_NUM_1;
+    struct UsbDev dev = dev_;
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestQueue002 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0800 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
     uint8_t buffer[LENGTH_NUM_255] = {0};
     uint32_t length = LENGTH_NUM_255;
-    dev = {222, 222};
+    dev = {BUS_NUM_222, DEV_ADDR_222};
     struct UsbPipe pipe = {interfaceId, pointid};
     std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_10};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().RequestQueue(dev, pipe, clientdata, bufferdata);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestQueue002 %{public}d interfaceId=%{public}d pointid=%{public}d", __LINE__,
-             interfaceId, pointid);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestQueue002 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0800 interfaceId=%{public}d pointid=%{public}d ret=%{public}d",
+        interfaceId, pointid, ret);
     ASSERT_TRUE(ret != 0);
 }
 
 /**
- * @tc.name: UsbdRequest007
+ * @tc.name: SUB_USB_HDI_0810
  * @tc.desc: Test functions to RequestQueue
  * @tc.desc: int32_t RequestQueue(const UsbDev &dev, const UsbPipe &pipe, std::vector<uint8_t> &clientData,
         std::vector<uint8_t> &buffer);
+ * @tc.desc: Reverse test: parameter exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdRequestQueue007, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0810, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    uint8_t pointid = POINTID_129;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t buffer[LENGTH_NUM_255] = {0};
+    struct UsbDev dev = dev_;
+    uint32_t length = LENGTH_NUM_255;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0810 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
+    dev.devAddr = DEV_ADDR_222;
+    struct UsbPipe pipe = {interfaceId, pointid};
+    std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_10};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().RequestQueue(dev, pipe, clientdata, bufferdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0810 interfaceId=%{public}d pointid=%{public}d ret=%{public}d",
+        interfaceId, pointid, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0820
+ * @tc.desc: Test functions to RequestQueue
+ * @tc.desc: int32_t RequestQueue(const UsbDev &dev, const UsbPipe &pipe, std::vector<uin        t8_t> &clientData,
+        std::vector<uint8_t> &buffer);
+ * @tc.desc: Reverse test: parameter exception, busNum、configIndex error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0820, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t pointid = POINTID_129;
+    uint8_t interfaceId = INTERFACEID_1;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0820 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
+    interfaceId = 222;
+    dev.busNum = BUS_NUM_222;
+    uint8_t buffer[LENGTH_NUM_255] = {0};
+    uint32_t length = LENGTH_NUM_255;
+    struct UsbPipe pipe = {interfaceId, pointid};
+    std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_10};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().RequestQueue(dev, pipe, clientdata, bufferdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0820 interfaceId=%{public}d pointid=%{public}d ret=%{public}d",
+        interfaceId, pointid, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0830
+ * @tc.desc: Test functions to RequestQueue
+ * @tc.desc: int32_t RequestQueue(const UsbDev &dev, const UsbPipe &pipe, std::vector<uint8_t> &clientData,
+        std::vector<uint8_t> &buffer);
+ * @tc.desc: Reverse test: parameter exception, busNum error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0830, Function | MediumTest | Level1)
+{
+    uint8_t buffer[LENGTH_NUM_255] = {};
+    uint32_t length = LENGTH_NUM_255;
+    struct UsbDev dev = dev_;
+    uint8_t pointid = POINTID_129;
+    uint8_t interfaceId = INTERFACEID_1;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0830 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
+    dev.busNum = BUS_NUM_222;
+    struct UsbPipe pipe = {interfaceId, pointid};
+    std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_10};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().RequestQueue(dev, pipe, clientdata, bufferdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0830 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0840
+ * @tc.desc: Test functions to RequestQueue
+ * @tc.desc: int32_t RequestQueue(const UsbDev &dev, const UsbPipe &pipe, std::vector<uint8_t> &clientData,
+        std::vector<uint8_t> &buffer);
+ * @tc.desc: Reverse test: parameter exception, busNum、interfaceId、pointId error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0840, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t buffer[LENGTH_NUM_255] = {};
+    uint8_t pointid = POINTID_129;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint32_t length = LENGTH_NUM_255;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0840 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
+    dev.busNum = BUS_NUM_222;
+    interfaceId = 222;
+    pointid = 222;
+    struct UsbPipe pipe = {interfaceId, pointid};
+    std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_10};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().RequestQueue(dev, pipe, clientdata, bufferdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0840 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0850
+ * @tc.desc: Test functions to RequestQueue
+ * @tc.desc: int32_t RequestQueue(const UsbDev &dev, const UsbPipe &pipe, std::vector<uint8_t> &clientData,
+        std::vector<uint8_t> &buffer);
+ * @tc.desc: Forward test
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0850, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
     uint8_t buffer[LENGTH_NUM_255] = "request 007";
     uint32_t length = LENGTH_NUM_255;
     uint8_t pointid = POINTID_1;
     uint8_t interfaceId = INTERFACEID_1;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestQueue007 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0850 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue write";
     struct UsbPipe pipe = {interfaceId, pointid};
     std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_11};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().RequestQueue(dev, pipe, clientdata, bufferdata);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestQueue007 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0850 %{public}d RequestQueue=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdRequest001
+ * @tc.name: SUB_USB_HDI_0860
+ * @tc.desc: Test functions to RequestQueue
+ * @tc.desc: int32_t RequestQueue(const UsbDev &dev, const UsbPipe &pipe, std::vector<uint8_t> &clientData,
+        std::vector<uint8_t> &buffer);
+ * @tc.desc: Reverse test: interfaceId error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0860, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t buffer[LENGTH_NUM_255] = "reuquest008";
+    uint32_t length = LENGTH_NUM_255;
+    uint8_t pointid = POINTID_1;
+    uint8_t interfaceId = INTERFACEID_1;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0860 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    uint8_t tag[TAG_LENGTH_NUM_1000] = "queue write";
+    interfaceId = 222;
+    struct UsbPipe pipe = {interfaceId, pointid};
+    std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_11};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().RequestQueue(dev, pipe, clientdata, bufferdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0860 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0870
+ * @tc.desc: Test functions to RequestQueue
+ * @tc.desc: int32_t RequestQueue(const UsbDev &dev, const UsbPipe &pipe, std::vector<uint8_t> &clientData,
+        std::vector<uint8_t> &buffer);
+ * @tc.desc: Reverse test: interfaceId、poinId error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0870, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t buffer[LENGTH_NUM_255] = "request 009";
+    uint32_t length = LENGTH_NUM_255;
+    uint8_t pointid = POINTID_1;
+    uint8_t interfaceId = INTERFACEID_1;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0870 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    uint8_t tag[TAG_LENGTH_NUM_1000] = "queue write";
+    interfaceId = 222;
+    pointid = 222;
+    struct UsbPipe pipe = {interfaceId, pointid};
+    std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_11};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().RequestQueue(dev, pipe, clientdata, bufferdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0870 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**********************************************************************************************************/
+
+/**
+ * @tc.name: SUB_USB_HDI_0880
  * @tc.desc: Test functions to RequestWait
  * @tc.desc: int32_t RequestWait(const UsbDev &dev, std::vector<uint8_t> &clientData, std::vector<uint8_t> &buffer,
  * int32_t timeout);
+ * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdRequestWait001, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0880, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestWait001 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0880 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     uint8_t buffer[LENGTH_NUM_255] = {};
     uint32_t length = LENGTH_NUM_255;
@@ -663,33 +1466,32 @@ HWTEST_F(UsbdRequestTest, UsbdRequestWait001, Function | MediumTest | Level1)
     std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_10};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().RequestQueue(dev, pipe, clientdata, bufferdata);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestWait001 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0880 %{public}d RequestQueue=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     uint8_t *clientObj = new uint8_t[10];
     std::vector<uint8_t> waitdata = {clientObj, clientObj + 10};
     ret = UsbdClient::GetInstance().RequestWait(dev, waitdata, bufferdata, 10000);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestWait001 %{public}d RequestWait=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0880 %{public}d RequestWait=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     delete[] clientObj;
     clientObj = nullptr;
 }
 
 /**
- * @tc.name: UsbdRequest002
+ * @tc.name: SUB_USB_HDI_0890
  * @tc.desc: Test functions to RequestWait
  * @tc.desc: int32_t RequestWait(const UsbDev &dev, std::vector<uint8_t> &clientData, std::vector<uint8_t> &buffer,
  * int32_t timeout);
+ * @tc.desc: Reverse test: busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdRequestWait002, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0890, Function | MediumTest | Level1)
 {
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestWait002 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0890 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     uint8_t buffer[LENGTH_NUM_255] = {};
     uint32_t length = LENGTH_NUM_255;
@@ -698,34 +1500,68 @@ HWTEST_F(UsbdRequestTest, UsbdRequestWait002, Function | MediumTest | Level1)
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     struct UsbPipe pipe = {interfaceId, pointid};
     ret = UsbdClient::GetInstance().RequestQueue(dev, pipe, clientdata, bufferdata);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestWait002 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0890 %{public}d RequestQueue=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     dev.busNum = BUS_NUM_222;
     uint8_t *clientObj = new uint8_t[10];
     std::vector<uint8_t> waitdata = {clientObj, clientObj + 10};
     ret = UsbdClient::GetInstance().RequestWait(dev, waitdata, bufferdata, 10000);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestWait002 %{public}d RequestWait=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0890 %{public}d RequestWait=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret != 0);
     delete[] clientObj;
     clientObj = nullptr;
 }
 
 /**
- * @tc.name: UsbdRequest004
+ * @tc.name: SUB_USB_HDI_0900
  * @tc.desc: Test functions to RequestWait
  * @tc.desc: int32_t RequestWait(const UsbDev &dev, std::vector<uint8_t> &clientData, std::vector<uint8_t> &buffer,
  * int32_t timeout);
+ * @tc.desc: Reverse test: devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdRequestWait004, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0900, Function | MediumTest | Level1)
 {
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestWait004 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0900 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
+    uint8_t buffer[LENGTH_NUM_255] = {};
+    uint32_t length = LENGTH_NUM_255;
+    std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_10};
+    struct UsbPipe pipe = {interfaceId, pointid};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().RequestQueue(dev, pipe, clientdata, bufferdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0900 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    uint8_t *clientObj = new uint8_t[10];
+    dev.devAddr = DEV_ADDR_222;
+    std::vector<uint8_t> waitdata = {clientObj, clientObj + 10};
+    ret = UsbdClient::GetInstance().RequestWait(dev, waitdata, bufferdata, 10000);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0900 %{public}d RequestWait=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+    delete[] clientObj;
+    clientObj = nullptr;
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0910
+ * @tc.desc: Test functions to RequestWait
+ * @tc.desc: int32_t RequestWait(const UsbDev &dev, std::vector<uint8_t> &clientData, std::vector<uint8_t> &buffer,
+ * int32_t timeout);
+ * @tc.desc: Reverse test: timeout error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0910, Function | MediumTest | Level1)
+{
+    uint8_t pointid = POINTID_129;
+    uint8_t interfaceId = INTERFACEID_1;
+    struct UsbDev dev = dev_;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0910 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     uint8_t buffer[LENGTH_NUM_255] = {};
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
@@ -734,33 +1570,32 @@ HWTEST_F(UsbdRequestTest, UsbdRequestWait004, Function | MediumTest | Level1)
     struct UsbPipe pipe = {interfaceId, pointid};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().RequestQueue(dev, pipe, clientdata, bufferdata);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestWait004 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0910 %{public}d RequestQueue=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     uint8_t *clientObj = new uint8_t[10];
     std::vector<uint8_t> waitdata = {clientObj, clientObj + 10};
     ret = UsbdClient::GetInstance().RequestWait(dev, waitdata, bufferdata, -10000);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestWait004 %{public}d RequestWait=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0910 %{public}d RequestWait=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     delete[] clientObj;
     clientObj = nullptr;
 }
 
 /**
- * @tc.name: UsbdRequest005
+ * @tc.name: SUB_USB_HDI_0920
  * @tc.desc: Test functions to RequestWait
  * @tc.desc: int32_t RequestWait(const UsbDev &dev, std::vector<uint8_t> &clientData, std::vector<uint8_t> &buffer,
  * int32_t timeout);
+ * @tc.desc: Reverse test: busNum、devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdRequestWait005, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0920, Function | MediumTest | Level1)
 {
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestWait005 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0920 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     uint32_t length = LENGTH_NUM_255;
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
@@ -769,176 +1604,409 @@ HWTEST_F(UsbdRequestTest, UsbdRequestWait005, Function | MediumTest | Level1)
     std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_10};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().RequestQueue(dev, pipe, clientdata, bufferdata);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestWait005 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0920 %{public}d RequestQueue=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     uint8_t *clientObj = new uint8_t[10];
     std::vector<uint8_t> waitdata = {clientObj, clientObj + 10};
     dev.devAddr = DEV_ADDR_255;
     dev.busNum = BUS_NUM_255;
     ret = UsbdClient::GetInstance().RequestWait(dev, waitdata, bufferdata, 10000);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestWait005 %{public}d RequestWait=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0920 %{public}d RequestWait=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret != 0);
     delete[] clientObj;
     clientObj = nullptr;
 }
 
+/**********************************************************************************************************/
+
 /**
- * @tc.name: UsbdRequest001
+ * @tc.name: SUB_USB_HDI_0930
  * @tc.desc: Test functions to RequestCancel
  * @tc.desc: int32_t RequestCancel(const UsbDev &dev, const UsbPipe &pipe);
+ * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdRequestCancel001, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0930, Function | MediumTest | Level1)
 {
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     uint8_t buffer[LENGTH_NUM_255] = "request001";
     uint32_t length = LENGTH_NUM_255;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestCancel001 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0930 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     EXPECT_TRUE(ret == 0);
     struct UsbPipe pipe = {interfaceId, pointid};
     std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_10};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().RequestQueue(dev, pipe, clientdata, bufferdata);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestCancel001 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0930 %{public}d RequestQueue=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     ret = UsbdClient::GetInstance().RequestCancel(dev, pipe);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestCancel001 %{public}d RequestCancel=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0930 %{public}d RequestCancel=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdRequest002
+ * @tc.name: SUB_USB_HDI_0940
  * @tc.desc: Test functions to RequestCancel
  * @tc.desc: int32_t RequestCancel(const UsbDev &dev, const UsbPipe &pipe);
+ * @tc.desc: Reverse test: parameter exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdRequestCancel002, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0940, Function | MediumTest | Level1)
 {
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     uint32_t length = LENGTH_NUM_255;
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t buffer[LENGTH_NUM_255] = "request002";
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestCancel002 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0940 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     EXPECT_TRUE(ret == 0);
     struct UsbPipe pipe = {interfaceId, pointid};
     std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_10};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ;
     ret = UsbdClient::GetInstance().RequestQueue(dev, pipe, clientdata, bufferdata);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestCancel002 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0940 %{public}d RequestQueue=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     dev.busNum = BUS_NUM_222;
     ret = UsbdClient::GetInstance().RequestCancel(dev, pipe);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestCancel002 %{public}d RequestCancel=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0940 %{public}d RequestCancel=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret != 0);
-    dev.busNum = BUS_NUM_1;
+    dev.busNum = dev_.busNum;
     ret = UsbdClient::GetInstance().RequestCancel(dev, pipe);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdRequest004
+ * @tc.name: SUB_USB_HDI_0950
  * @tc.desc: Test functions to RequestCancel
  * @tc.desc: int32_t RequestCancel(const UsbDev &dev, const UsbPipe &pipe);
+ * @tc.desc: Reverse test: parameter exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdRequestCancel004, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0950, Function | MediumTest | Level1)
 {
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
+    uint8_t buffer[LENGTH_NUM_255] = "request003";
+    uint32_t length = LENGTH_NUM_255;
+    uint8_t pointid = POINTID_129;
+    uint8_t interfaceId = INTERFACEID_1;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0950 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    EXPECT_TRUE(ret == 0);
+    std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_10};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    struct UsbPipe pipe = {interfaceId, pointid};
+    ret = UsbdClient::GetInstance().RequestQueue(dev, pipe, clientdata, bufferdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0950 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    dev.devAddr = DEV_ADDR_222;
+    ret = UsbdClient::GetInstance().RequestCancel(dev, pipe);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0950 %{public}d RequestCancel=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+    dev.devAddr = dev_.devAddr;
+    ret = UsbdClient::GetInstance().RequestCancel(dev, pipe);
+    ASSERT_TRUE(ret == 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0960
+ * @tc.desc: Test functions to RequestCancel
+ * @tc.desc: int32_t RequestCancel(const UsbDev &dev, const UsbPipe &pipe);
+ * @tc.desc: Reverse test: parameter exception, interfaceId error. The result is normal???
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0960, Function | MediumTest | Level1)
+{
+    uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
+    struct UsbDev dev = dev_;
     uint32_t length = LENGTH_NUM_255;
     uint8_t buffer[LENGTH_NUM_255] = "request004";
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestCancel004 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0960 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     EXPECT_TRUE(ret == 0);
     struct UsbPipe pipe = {interfaceId, pointid};
     std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_10};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().RequestQueue(dev, pipe, clientdata, bufferdata);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestCancel004 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0960 %{public}d RequestQueue=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     pipe.interfaceId = 222;
     pipe.endpointId = 222;
     ret = UsbdClient::GetInstance().RequestCancel(dev, pipe);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestCancel004 %{public}d RequestCancel=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0960 %{public}d RequestCancel=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdRequest005
+ * @tc.name: SUB_USB_HDI_0970
  * @tc.desc: Test functions to RequestCancel
  * @tc.desc: int32_t RequestCancel(const UsbDev &dev, const UsbPipe &pipe);
+ * @tc.desc: Forward test
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdRequestCancel005, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0970, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     uint8_t buffer[LENGTH_NUM_255] = "request005";
     uint32_t length = LENGTH_NUM_255;
     uint8_t pointid = POINTID_1;
     uint8_t interfaceId = INTERFACEID_1;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestCancel005 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0970 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     EXPECT_TRUE(ret == 0);
     struct UsbPipe pipe = {interfaceId, pointid};
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue Write";
     std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_11};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().RequestQueue(dev, pipe, clientdata, bufferdata);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestCancel005 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0970 %{public}d RequestQueue=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     ret = UsbdClient::GetInstance().RequestCancel(dev, pipe);
-    HDF_LOGI("UsbdRequestTest::UsbdRequestCancel005 %{public}d RequestCancel=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0970 %{public}d RequestCancel=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdReleaseInterface001
- * @tc.desc: Test functions to ReleaseInterface
- * @tc.desc: int32_t ReleaseInterface(const UsbDev &dev, uint8_t interfaceId);
+ * @tc.name: SUB_USB_HDI_0980
+ * @tc.desc: Test functions to RequestCancel
+ * @tc.desc: int32_t RequestCancel(const UsbDev &dev, const UsbPipe &pipe);
+ * @tc.desc: Reverse test: parameter exception, busNum、interfaceId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdReleaseInterface001, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0980, Function | MediumTest | Level1)
 {
-    uint8_t busNum = 1;
-    uint8_t devAddr = 2;
+    struct UsbDev dev = dev_;
+    uint8_t buffer[LENGTH_NUM_255] = "request006";
+    uint32_t length = LENGTH_NUM_255;
+    uint8_t pointid = POINTID_1;
     uint8_t interfaceId = INTERFACEID_1;
-    struct UsbDev dev = {busNum, devAddr};
-    auto ret = UsbdClient::GetInstance().ReleaseInterface(dev, interfaceId);
-    HDF_LOGI("UsbdRequestTest::UsbdReleaseInterface001 %{public}d ret=%{public}d", __LINE__, ret);
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0980 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    EXPECT_TRUE(ret == 0);
+    uint8_t tag[TAG_LENGTH_NUM_1000] = "queue Write";
+    std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_11};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    struct UsbPipe pipe = {interfaceId, pointid};
+    ret = UsbdClient::GetInstance().RequestQueue(dev, pipe, clientdata, bufferdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0980 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    dev.busNum = 224;
+    pipe.interfaceId = 224;
+    ret = UsbdClient::GetInstance().RequestCancel(dev, pipe);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0980 %{public}d RequestCancel=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+    dev.busNum = dev_.busNum;
+    pipe.interfaceId = INTERFACEID_1;
+    ret = UsbdClient::GetInstance().RequestCancel(dev, pipe);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdReleaseInterface002
- * @tc.desc: Test functions to ReleaseInterface
- * @tc.desc: int32_t ReleaseInterface(const UsbDev &dev, uint8_t interfaceId);
+ * @tc.name: SUB_USB_HDI_0990
+ * @tc.desc: Test functions to RequestCancel
+ * @tc.desc: int32_t RequestCancel(const UsbDev &dev, const UsbPipe &pipe);
+ * @tc.desc: Reverse test: parameter exception, devAddr、interfaceId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdRequestTest, UsbdReleaseInterface002, Function | MediumTest | Level1)
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0990, Function | MediumTest | Level1)
 {
-    uint8_t busNum = 25;
-    uint8_t devAddr = 2;
+    struct UsbDev dev = dev_;
+    uint8_t buffer[LENGTH_NUM_255] = "request007";
+    uint32_t length = LENGTH_NUM_255;
+    uint8_t pointid = POINTID_1;
     uint8_t interfaceId = INTERFACEID_1;
-    struct UsbDev dev = {busNum, devAddr};
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0990 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    EXPECT_TRUE(ret == 0);
+    struct UsbPipe pipe = {interfaceId, pointid};
+    uint8_t tag[TAG_LENGTH_NUM_1000] = "queue Write";
+    std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_11};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().RequestQueue(dev, pipe, clientdata, bufferdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0990 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    dev.devAddr = 224;
+    pipe.interfaceId = 224;
+    ret = UsbdClient::GetInstance().RequestCancel(dev, pipe);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0990 %{public}d RequestCancel=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+    dev.devAddr = dev_.devAddr;
+    pipe.interfaceId = INTERFACEID_1;
+    ret = UsbdClient::GetInstance().RequestCancel(dev, pipe);
+    ASSERT_TRUE(ret == 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1000
+ * @tc.desc: Test functions to RequestCancel
+ * @tc.desc: int32_t RequestCancel(const UsbDev &dev, const UsbPipe &pipe);
+ * @tc.desc: Reverse test: parameter exception, busNum、devAddr、interfaceId error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1000, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t buffer[LENGTH_NUM_255] = "request008";
+    uint8_t pointid = POINTID_1;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint32_t length = LENGTH_NUM_255;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1000 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    EXPECT_TRUE(ret == 0);
+    uint8_t tag[TAG_LENGTH_NUM_1000] = "queue Write";
+    struct UsbPipe pipe = {interfaceId, pointid};
+    std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_11};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().RequestQueue(dev, pipe, clientdata, bufferdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1000 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    dev.busNum = BUS_NUM_222;
+    dev.devAddr = DEV_ADDR_222;
+    pipe.interfaceId = 222;
+    ret = UsbdClient::GetInstance().RequestCancel(dev, pipe);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1000 %{public}d RequestCancel=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+    dev = dev_;
+    pipe.interfaceId = INTERFACEID_1;
+    ret = UsbdClient::GetInstance().RequestCancel(dev, pipe);
+    ASSERT_TRUE(ret == 0);
+}
+
+/**********************************************************************************************************/
+
+/**
+ * @tc.name: SUB_USB_HDI_1090
+ * @tc.desc: Test functions to ReleaseInterface
+ * @tc.desc: int32_t ReleaseInterface(const UsbDev &dev, uint8_t interfaceId);
+ * @tc.desc: Forward test: correct parameters
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1090, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
     auto ret = UsbdClient::GetInstance().ReleaseInterface(dev, interfaceId);
-    HDF_LOGI("UsbdRequestTest::UsbdReleaseInterface002 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1090 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1100
+ * @tc.desc: Test functions to ReleaseInterface
+ * @tc.desc: int32_t ReleaseInterface(const UsbDev &dev, uint8_t interfaceId);
+ * @tc.desc: Reverse test: parameter exception, busNum error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1100, Function | MediumTest | Level1)
+{
+    uint8_t interfaceId = INTERFACEID_1;
+    struct UsbDev dev = {BUS_NUM_255, dev_.devAddr};
+    auto ret = UsbdClient::GetInstance().ReleaseInterface(dev, interfaceId);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1100 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1110
+ * @tc.desc: Test functions to ReleaseInterface
+ * @tc.desc: int32_t ReleaseInterface(const UsbDev &dev, uint8_t interfaceId);
+ * @tc.desc: Reverse test: parameter exception, devAddr error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1110, Function | MediumTest | Level1)
+{
+    uint8_t interfaceId = INTERFACEID_1;
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_255};
+    auto ret = UsbdClient::GetInstance().ReleaseInterface(dev, interfaceId);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1110 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1120
+ * @tc.desc: Test functions to ReleaseInterface
+ * @tc.desc: int32_t ReleaseInterface(const UsbDev &dev, uint8_t interfaceId);
+ * @tc.desc: Reverse test: parameter exception, interfaceId error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1120, Function | MediumTest | Level1)
+{
+    uint8_t interfaceId = 255;
+    struct UsbDev dev = dev_;
+    auto ret = UsbdClient::GetInstance().ReleaseInterface(dev, interfaceId);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1120 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1130
+ * @tc.desc: Test functions to ReleaseInterface
+ * @tc.desc: int32_t ReleaseInterface(const UsbDev &dev, uint8_t interfaceId);
+ * @tc.desc: Reverse test: parameter exception, busNum、devAddr error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1130, Function | MediumTest | Level1)
+{
+    uint8_t interfaceId = INTERFACEID_1;
+    struct UsbDev dev = {BUS_NUM_255, DEV_ADDR_255};
+    auto ret = UsbdClient::GetInstance().ReleaseInterface(dev, interfaceId);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1130 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1140
+ * @tc.desc: Test functions to ReleaseInterface
+ * @tc.desc: int32_t ReleaseInterface(const UsbDev &dev, uint8_t interfaceId);
+ * @tc.desc: Reverse test: parameter exception, busNum、interfaceId error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1140, Function | MediumTest | Level1)
+{
+    int32_t interfaceId = 255;
+    struct UsbDev dev = {DEV_ADDR_255, dev_.devAddr};
+    auto ret = UsbdClient::GetInstance().ReleaseInterface(dev, interfaceId);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1140 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1150
+ * @tc.desc: Test functions to ReleaseInterface
+ * @tc.desc: int32_t ReleaseInterface(const UsbDev &dev, uint8_t interfaceId);
+ * @tc.desc: Reverse test: devAddr、interfaceId error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1150, Function | MediumTest | Level1)
+{
+    int32_t interfaceId = 255;
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_255};
+    auto ret = UsbdClient::GetInstance().ReleaseInterface(dev, interfaceId);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1150 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1160
+ * @tc.desc: Test functions to ReleaseInterface
+ * @tc.desc: int32_t ReleaseInterface(const UsbDev &dev, uint8_t interfaceId);
+ * @tc.desc: Reverse test: busNum、devAddr、interfaceId error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1160, Function | MediumTest | Level1)
+{
+    int32_t interfaceId = 255;
+    struct UsbDev dev = {BUS_NUM_255, DEV_ADDR_255};
+    auto ret = UsbdClient::GetInstance().ReleaseInterface(dev, interfaceId);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1160 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret != 0);
 }

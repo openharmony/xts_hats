@@ -17,6 +17,7 @@ group("hatshdftest") {
     deps = [
       "audio:HatsHdfAudioTest",
       "camera:HatsHdfCameraTest",
+      "codec:HatsHdfCodecTest",
       "input:HatsHdfInputTest",
       "light:HatsHdfLightTest",
       "manager:HatsHdfManagerTest",

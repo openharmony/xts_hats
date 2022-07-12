@@ -21,6 +21,7 @@ group("kernel") {
     deps = [
       "accesstokenid:HatsAccesstokenidTest",
       "cam:HatsCamTest",
+      "memtracker:HatsMemoryTrackerTest",
       "open_posix_testsuite/conformance/interfaces_gn:${posix_interface_module}",
       "prctl:HatsPrctlTest",
     ]

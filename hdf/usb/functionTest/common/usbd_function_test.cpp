@@ -19,11 +19,6 @@
 #include "system_ability_definition.h"
 #include "usbd_client.h"
 
-using namespace testing::ext;
-using namespace OHOS;
-using namespace OHOS::USB;
-using namespace std;
-
 const int SLEEP_TIME = 3;
 const int TEST_PORT_ID = 1;
 const int TEST_POWER_ROLE = 2;
@@ -31,6 +26,11 @@ const int TEST_DATAR_ROLE = 2;
 const int USB_FUNCTION_ACM = 1;
 const int USB_FUNCTION_ECM = 2;
 const int USB_FUNCTION_HDC = 4;
+
+using namespace testing::ext;
+using namespace OHOS;
+using namespace OHOS::USB;
+using namespace std;
 
 void UsbdFunctionTest::SetUpTestCase(void)
 {
@@ -50,185 +50,299 @@ void UsbdFunctionTest::SetUp(void) {}
 void UsbdFunctionTest::TearDown(void) {}
 
 /**
- * @tc.name: UsbdGetCurrentFunctions001
+ * @tc.name: SUB_USB_HDI_1250
  * @tc.desc: Test functions to GetCurrentFunctions
  * @tc.desc: int32_t GetCurrentFunctions(int32_t &funcs);
+ * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, UsbdGetCurrentFunctions001, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1250, Function | MediumTest | Level1)
 {
     int32_t funcs = 0;
     auto ret = UsbdClient::GetInstance().GetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::UsbdGetCurrentFunctions001 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1250 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdGetCurrentFunctions002
+ * @tc.name: SUB_USB_HDI_1260
  * @tc.desc: Test functions to GetCurrentFunctions
  * @tc.desc: int32_t GetCurrentFunctions(int32_t &funcs);
+ * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, UsbdGetCurrentFunctions002, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1260, Function | MediumTest | Level1)
 {
     auto ret = UsbdClient::GetInstance().SetCurrentFunctions(1);
-    HDF_LOGI("UsbdFunctionTest::UsbdFunction011 %{public}d SetCurrentFunctions=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1260 %{public}d SetCurrentFunctions=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     int32_t funcs = 1;
     ret = UsbdClient::GetInstance().GetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::UsbdFunction001 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1260 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
+/**********************************************************************************************************/
+
 /**
- * @tc.name: UsbdSetCurrentFunctions001
+ * @tc.name: SUB_USB_HDI_1270
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
+ * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions001, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1270, Function | MediumTest | Level1)
 {
     int32_t funcs = 1;
     auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::UsbdSetCurrentFunctions001 %{public}d SetCurrentFunctions=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1270 %{public}d SetCurrentFunctions=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdSetCurrentFunctions002
+ * @tc.name: SUB_USB_HDI_1280
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
+ * @tc.desc: Reverse test: parameter exception, Funcs error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions002, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1280, Function | MediumTest | Level1)
 {
     int32_t funcs = -1;
     auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::UsbdFunction002 %{public}d, ret=%{public}d, funcs=%{public}d", __LINE__, ret, funcs);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1280 %{public}d, ret=%{public}d, funcs=%{public}d", __LINE__, ret, funcs);
     ASSERT_TRUE(ret != 0);
 }
 /**
- * @tc.name: UsbdSetCurrentFunctions003
+ * @tc.name: SUB_USB_HDI_1290
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
+ * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions003, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1290, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_ECM;
     auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::UsbdSetCurrentFunctions003 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1290 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdSetCurrentFunctions004
+ * @tc.name: SUB_USB_HDI_1300
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
+ * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions004, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1300, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_ACM | USB_FUNCTION_ECM;
     auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::UsbdSetCurrentFunctions004 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1300 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdSetCurrentFunctions005
+ * @tc.name: SUB_USB_HDI_1310
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
+ * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions005, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1310, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_HDC;
     auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::UsbdSetCurrentFunctions005 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1310 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdSetCurrentFunctions006
+ * @tc.name: SUB_USB_HDI_1320
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
+ * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions006, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1320, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_ACM | USB_FUNCTION_HDC;
     auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::UsbdSetCurrentFunctions006 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1320 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdSetCurrentFunctions007
+ * @tc.name: SUB_USB_HDI_1330
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
+ * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, UsbdSetCurrentFunctions007, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1330, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_ECM | USB_FUNCTION_HDC;
     auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::UsbdSetCurrentFunctions007 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1330 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdSetPortRole001
- * @tc.desc: Test functions to SetPortRole
- * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
+ * @tc.name: SUB_USB_HDI_1340
+ * @tc.desc: Test functions to SetCurrentFunctions
+ * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
+ * @tc.desc: Reverse test: parameter exception, Funcs error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, UsbdSetPortRole001, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1340, Function | MediumTest | Level1)
 {
-    auto ret = UsbdClient::GetInstance().SetPortRole(1, 1, 1);
-    HDF_LOGI("UsbdFunctionTest::UsbdSetPortRole001 %{public}d ret=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret == 0);
-}
-
-/**
- * @tc.name: UsbdSetPortRole002
- * @tc.desc: Test functions to SetPortRole
- * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
- * @tc.type: FUNC
- */
-HWTEST_F(UsbdFunctionTest, UsbdSetPortRole002, Function | MediumTest | Level1)
-{
-    auto ret = UsbdClient::GetInstance().SetPortRole(2, 1, 1);
-    HDF_LOGI("UsbdFunctionTest::UsbdSetPortRole002 %{public}d ret=%{public}d", __LINE__, ret);
+    int32_t funcs = 8;
+    auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1340 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret != 0);
 }
 
 /**
- * @tc.name: SetPortRole009
+ * @tc.name: SUB_USB_HDI_1350
  * @tc.desc: Test functions to SetPortRole
  * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
+ * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SetPortRole09, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1350, Function | MediumTest | Level1)
 {
-    auto ret = UsbdClient::GetInstance().SetPortRole(1, 2, 2);
-    HDF_LOGI("UsbdFunctionTest::SetPortRole09 %{public}d ret=%{public}d", __LINE__, ret);
+    auto ret = UsbdClient::GetInstance().SetPortRole(1, 1, 1);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1350 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: QueryPort001
- * @tc.desc: Test functions to QueryPort
- * @tc.desc: int32_t QueryPort(int32_t &portId, int32_t &powerRole, int32_t &dataRole, int32_t &mode);
+ * @tc.name: SUB_USB_HDI_1360
+ * @tc.desc: Test functions to SetPortRole
+ * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
+ * @tc.desc: Reverse test: parameter exception, portId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, QueryPort001, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1360, Function | MediumTest | Level1)
+{
+    auto ret = UsbdClient::GetInstance().SetPortRole(2, 1, 1);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1360 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1370
+ * @tc.desc: Test functions to SetPortRole
+ * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
+ * @tc.desc: Reverse test: parameter exception, powerRole error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1370, Function | MediumTest | Level1)
+{
+    auto ret = UsbdClient::GetInstance().SetPortRole(1, 4, 2);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1370 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1380
+ * @tc.desc: Test functions to SetPortRole
+ * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
+ * @tc.desc: Reverse test: parameter exception, dataRole error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1380, Function | MediumTest | Level1)
+{
+    auto ret = UsbdClient::GetInstance().SetPortRole(1, 1, 5);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1380 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1390
+ * @tc.desc: Test functions to SetPortRole
+ * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
+ * @tc.desc: Reverse test: parameter exception, portId、powerRole error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1390, Function | MediumTest | Level1)
+{
+    auto ret = UsbdClient::GetInstance().SetPortRole(1, 5, 5);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1390 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1400
+ * @tc.desc: Test functions to SetPortRole
+ * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
+ * @tc.desc: Reverse test: parameter exception, portId、dataRole error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1400, Function | MediumTest | Level1)
+{
+    auto ret = UsbdClient::GetInstance().SetPortRole(5, 1, 5);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1400 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1410
+ * @tc.desc: Test functions to SetPortRole
+ * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
+ * @tc.desc: Reverse test: parameter exception, powerRole、dataRole error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1410, Function | MediumTest | Level1)
+{
+    auto ret = UsbdClient::GetInstance().SetPortRole(1, 5, 5);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1410 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1420
+ * @tc.desc: Test functions to SetPortRole
+ * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
+ * @tc.desc: Reverse test: portId、powerRole、dataRole error
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1420, Function | MediumTest | Level1)
+{
+    auto ret = UsbdClient::GetInstance().SetPortRole(2, 5, 5);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1420 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1430
+ * @tc.desc: Test functions to SetPortRole
+ * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
+ * @tc.desc: Forward test: correct parameters
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1430, Function | MediumTest | Level1)
+{
+    auto ret = UsbdClient::GetInstance().SetPortRole(1, 2, 2);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1430 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1700
+ * @tc.desc: Test functions to QueryPort
+ * @tc.desc: int32_t QueryPort(int32_t &portId, int32_t &powerRole, int32_t &dataRole, int32_t &mode);
+ * @tc.desc: Forward test: correct parameters
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1700, Function | MediumTest | Level1)
 {
     int32_t portId = 0;
     int32_t powerRole = 0;
     int32_t dataRole = 0;
     int32_t mode = 0;
     auto ret = UsbdClient::GetInstance().QueryPort(portId, powerRole, dataRole, mode);
-    HDF_LOGI("UsbdFunctionTest::QueryPort001 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1700 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }

@@ -23,6 +23,7 @@ group("HatsHdfWifiTest") {
       deps = [
         #"hdiService:HatsHdfWifiHdiServiceTest",
         "wifi:HatsHdfWifiHdiTest",
+        "wlanBenchmarkTest:HatsHdfWlanbenchmarkTest",
       ]
     }
   }

@@ -17,23 +17,27 @@
 #include <iostream>
 #include <vector>
 #include "hdf_log.h"
-#include "usb_param.h"
 #include "usbd_client.h"
+#include "UsbSubscriberTest.h"
+#include "usb_errors.h"
+
+const int SLEEP_TIME = 3;
+uint8_t BUS_NUM_1 = 0;
+uint8_t DEV_ADDR_2 = 0;
+const uint8_t BUS_NUM_255 = 255;
+const uint8_t DEV_ADDR_255 = 255;
+const uint8_t BUS_NUM_222 = 222;
+const uint32_t LENGTH_NUM_255 = 255;
+const uint8_t INTERFACEID_1 = 1;
+const uint8_t POINTID_1 = 1;
+const uint8_t POINTID_129 = 129;
 
 using namespace testing::ext;
 using namespace OHOS;
 using namespace OHOS::USB;
 using namespace std;
 
-const int SLEEP_TIME = 3;
-const uint8_t BUS_NUM_1 = 1;
-const uint8_t DEV_ADDR_2 = 2;
-const uint8_t BUS_NUM_255 = 255;
-const uint8_t BUS_NUM_222 = 222;
-const uint32_t LENGTH_NUM_255 = 255;
-const uint8_t INTERFACEID_1 = 1;
-const uint8_t POINTID_1 = 1;
-const uint8_t POINTID_129 = 129;
+struct UsbDev UsbdTransferTest::dev_ = {0, 0};
 
 void UsbdTransferTest::SetUpTestCase(void)
 {
@@ -48,16 +52,27 @@ void UsbdTransferTest::SetUpTestCase(void)
     int c;
     while ((c = getchar()) != '\n' && c != EOF) {
     }
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    ret = UsbdClient::GetInstance().OpenDevice(dev);
+
+    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
+    if (UsbdClient::GetInstance().BindUsbdSubscriber(subscriber) != UEC_OK) {
+        HDF_LOGE("%{public}s: bind usbd subscriber failed\n", __func__);
+        exit(0);
+    }
+    dev_ = {subscriber->busNum_, subscriber->devAddr_};
+    ret = UsbdClient::GetInstance().OpenDevice(dev_);
     HDF_LOGI("UsbdTransferTest:: %{public}d OpenDevice=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 void UsbdTransferTest::TearDownTestCase(void)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    auto ret = UsbdClient::GetInstance().CloseDevice(dev);
+    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
+    if (UsbdClient::GetInstance().BindUsbdSubscriber(subscriber) != UEC_OK) {
+        HDF_LOGE("%{public}s: bind usbd subscriber failed\n", __func__);
+        exit(0);
+    }
+    dev_ = {subscriber->busNum_, subscriber->devAddr_};
+    auto ret = UsbdClient::GetInstance().CloseDevice(dev_);
     HDF_LOGI("UsbdTransferTest:: %{public}d Close=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
@@ -67,178 +82,405 @@ void UsbdTransferTest::SetUp(void) {}
 void UsbdTransferTest::TearDown(void) {}
 
 /**
- * @tc.name: UsbdControlTransfer001
+ * @tc.name: SUB_USB_HDI_0450
  * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
+ * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, UsbdControlTransfer001, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0450, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     uint8_t buffer[LENGTH_NUM_255] = {0};
     uint32_t length = LENGTH_NUM_255;
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     struct UsbCtrlTransfer ctrlparmas = {0b10000000, 8, 0, 0, 1000};
     auto ret = UsbdClient::GetInstance().ControlTransfer(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::UsbdControlTransfer001 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0450 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdControlTransfer002
+ * @tc.name: SUB_USB_HDI_0460
  * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
+ * @tc.desc: Reverse test: BUS_NUM_255
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, UsbdControlTransfer002, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0460, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_255;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = {BUS_NUM_255, dev_.devAddr};
     uint8_t buffer[LENGTH_NUM_255] = {0};
     uint32_t length = LENGTH_NUM_255;
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     struct UsbCtrlTransfer ctrlparmas = {0b10000000, 8, 0, 0, 1000};
     auto ret = UsbdClient::GetInstance().ControlTransfer(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::UsbdControlTransfer002 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0460 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret != 0);
 }
 
 /**
- * @tc.name: UsbdControlTransfer004
+ * @tc.name: SUB_USB_HDI_0470
  * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
+ * @tc.desc: Reverse test: DEV_ADDR_255
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, UsbdControlTransfer004, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0470, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_255};
+    uint8_t buffer[LENGTH_NUM_255] = {0};
+    uint32_t length = LENGTH_NUM_255;
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    struct UsbCtrlTransfer ctrlparmas = {0b10000000, 8, 0, 0, 1000};
+    auto ret = UsbdClient::GetInstance().ControlTransfer(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0470 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0480
+ * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
+ * @tc.desc: Forward test: correct parameters
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0480, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
     uint32_t length = LENGTH_NUM_255;
     uint8_t buffer[LENGTH_NUM_255] = {0};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     struct UsbCtrlTransfer ctrlparmas = {0b10000000, 6, 0x100, 0, 1000};
     auto ret = UsbdClient::GetInstance().ControlTransfer(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::UsbdControlTransfer004 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0480 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdControlTransfer010
+ * @tc.name: SUB_USB_HDI_0490
  * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, UsbdControlTransfer010, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0490, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = {BUS_NUM_255, dev_.devAddr};
+    uint32_t length = LENGTH_NUM_255;
+    uint8_t buffer[LENGTH_NUM_255] = {0};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    struct UsbCtrlTransfer ctrlparmas = {0b10000000, 6, 0x100, 0, 1000};
+    auto ret = UsbdClient::GetInstance().ControlTransfer(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0490 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0500
+ * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0500, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_255};
+    uint32_t length = LENGTH_NUM_255;
+    uint8_t buffer[LENGTH_NUM_255] = {0};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    struct UsbCtrlTransfer ctrlparmas = {0b10000000, 6, 0x100, 0, 1000};
+    auto ret = UsbdClient::GetInstance().ControlTransfer(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0500 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0510
+ * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0510, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    int32_t intercafeidex = 0;
+    uint32_t length = LENGTH_NUM_255;
+    uint8_t buffer[LENGTH_NUM_255] = {0};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    struct UsbCtrlTransfer ctrlparmas = {0b10000001, 0X0A, 0, intercafeidex, 1000};
+    auto ret = UsbdClient::GetInstance().ControlTransfer(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0510 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0520
+ * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0520, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {BUS_NUM_255, dev_.devAddr};
+    int32_t intercafeidex = 0;
+    uint32_t length = LENGTH_NUM_255;
+    uint8_t buffer[LENGTH_NUM_255] = {0};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    struct UsbCtrlTransfer ctrlparmas = {0b10000001, 0X0A, 0, intercafeidex, 1000};
+    auto ret = UsbdClient::GetInstance().ControlTransfer(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0520 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0530
+ * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0530, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_255};
+    int32_t intercafeidex = 0;
+    uint32_t length = LENGTH_NUM_255;
+    uint8_t buffer[LENGTH_NUM_255] = {0};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    struct UsbCtrlTransfer ctrlparmas = {0b10000001, 0X0A, 0, intercafeidex, 1000};
+    auto ret = UsbdClient::GetInstance().ControlTransfer(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0530 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0540
+ * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0540, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
     uint32_t length = LENGTH_NUM_255;
     uint8_t buffer[LENGTH_NUM_255] = {0};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     struct UsbCtrlTransfer ctrlparmas = {0b10000000, 0, 0, 0, 1000};
     auto ret = UsbdClient::GetInstance().ControlTransfer(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::UsbdControlTransfer010 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0540 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdControlTransfer013
+ * @tc.name: SUB_USB_HDI_0550
  * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, UsbdControlTransfer013, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0550, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = {BUS_NUM_255, dev_.devAddr};
+    uint32_t length = LENGTH_NUM_255;
+    uint8_t buffer[LENGTH_NUM_255] = {0};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    struct UsbCtrlTransfer ctrlparmas = {0b10000000, 0, 0, 0, 1000};
+    auto ret = UsbdClient::GetInstance().ControlTransfer(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0550 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0560
+ * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0560, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_255};
+    uint32_t length = LENGTH_NUM_255;
+    uint8_t buffer[LENGTH_NUM_255] = {0};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    struct UsbCtrlTransfer ctrlparmas = {0b10000000, 0, 0, 0, 1000};
+    auto ret = UsbdClient::GetInstance().ControlTransfer(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0560 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0570
+ * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0570, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
     uint32_t length = LENGTH_NUM_255;
     uint8_t buffer[LENGTH_NUM_255] = {0};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     struct UsbCtrlTransfer ctrlparmas = {0b10000001, 0, 0, 0, 1000};
     auto ret = UsbdClient::GetInstance().ControlTransfer(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::UsbdControlTransfer013 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0570 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdControlTransfer016
+ * @tc.name: SUB_USB_HDI_0580
  * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, UsbdControlTransfer016, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0580, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = {BUS_NUM_255, dev_.devAddr};
+    uint32_t length = LENGTH_NUM_255;
+    uint8_t buffer[LENGTH_NUM_255] = {0};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    struct UsbCtrlTransfer ctrlparmas = {0b10000001, 0, 0, 0, 1000};
+    auto ret = UsbdClient::GetInstance().ControlTransfer(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0580 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0590
+ * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0590, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_255};
+    uint32_t length = LENGTH_NUM_255;
+    uint8_t buffer[LENGTH_NUM_255] = {0};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    struct UsbCtrlTransfer ctrlparmas = {0b10000001, 0, 0, 0, 1000};
+    auto ret = UsbdClient::GetInstance().ControlTransfer(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0590 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0600
+ * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0600, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
     uint32_t length = LENGTH_NUM_255;
     uint8_t buffer[LENGTH_NUM_255] = {0};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     struct UsbCtrlTransfer ctrlparmas = {0b10000010, 0, 0, 0, 1000};
     auto ret = UsbdClient::GetInstance().ControlTransfer(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::UsbdControlTransfer016 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0600 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdControlTransfer019
+ * @tc.name: SUB_USB_HDI_0610
  * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, UsbdControlTransfer019, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0610, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = {BUS_NUM_255, dev_.devAddr};
+    uint32_t length = LENGTH_NUM_255;
+    uint8_t buffer[LENGTH_NUM_255] = {0};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    struct UsbCtrlTransfer ctrlparmas = {0b10000010, 0, 0, 0, 1000};
+    auto ret = UsbdClient::GetInstance().ControlTransfer(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0610 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0620
+ * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0620, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_255};
+    uint32_t length = LENGTH_NUM_255;
+    uint8_t buffer[LENGTH_NUM_255] = {0};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    struct UsbCtrlTransfer ctrlparmas = {0b10000010, 0, 0, 0, 1000};
+    auto ret = UsbdClient::GetInstance().ControlTransfer(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0620 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0630
+ * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0630, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
     uint32_t length = LENGTH_NUM_255;
     uint8_t buffer[LENGTH_NUM_255] = {};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     struct UsbCtrlTransfer ctrlparmas = {0b10000010, 0X0C, 0, 0, 1000};
     auto ret = UsbdClient::GetInstance().ControlTransfer(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::UsbdControlTransfer019 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0630 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdBulkTransferRead001
+ * @tc.name: SUB_USB_HDI_0640
+ * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0640, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {BUS_NUM_255, dev_.devAddr};
+    uint32_t length = LENGTH_NUM_255;
+    uint8_t buffer[LENGTH_NUM_255] = {};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    struct UsbCtrlTransfer ctrlparmas = {0b10000010, 0X0C, 0, 0, 1000};
+    auto ret = UsbdClient::GetInstance().ControlTransfer(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0640 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0650
+ * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0650, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_255};
+    uint32_t length = LENGTH_NUM_255;
+    uint8_t buffer[LENGTH_NUM_255] = {};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    struct UsbCtrlTransfer ctrlparmas = {0b10000010, 0X0C, 0, 0, 1000};
+    auto ret = UsbdClient::GetInstance().ControlTransfer(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0650 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0660
  * @tc.desc: Test functions to BulkTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, UsbdBulkTransferRead001, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0660, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t pointid = POINTID_129;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdTransferTest::UsbdBulkTransferRead001 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0660 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     uint8_t buffer[LENGTH_NUM_255] = {0};
     uint32_t length = LENGTH_NUM_255;
     struct UsbPipe pipe = {interfaceId, pointid};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().BulkTransferRead(dev, pipe, 1000, bufferdata);
-    HDF_LOGI("UsbdTransferTest::UsbdBulkTransferRead001 %{public}d UsbdBulkTransferRead=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0660 %{public}d UsbdBulkTransferRead=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdBulkTransferRead002
+ * @tc.name: SUB_USB_HDI_0670
  * @tc.desc: Test functions to BulkTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, UsbdBulkTransferRead002, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0670, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t pointid = POINTID_129;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdTransferTest::UsbdBulkTransferRead002 %{public}d ReleaseInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0670 %{public}d ReleaseInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     dev.busNum = BUS_NUM_222;
     uint32_t length = 100;
@@ -246,50 +488,118 @@ HWTEST_F(UsbdTransferTest, UsbdBulkTransferRead002, Function | MediumTest | Leve
     struct UsbPipe pipe = {interfaceId, pointid};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().BulkTransferRead(dev, pipe, 1000, bufferdata);
-    HDF_LOGI("UsbdTransferTest::UsbdBulkTransferRead002 %{public}d UsbdBulkTransferRead=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0670 %{public}d UsbdBulkTransferRead=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret != 0);
 }
 
 /**
- * @tc.name: UsbdBulkTransferWrite001
+ * @tc.name: SUB_USB_HDI_0680
+ * @tc.desc: Test functions to BulkTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0680, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_129;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0680 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    dev.devAddr = 244;
+    uint32_t length = 100;
+    uint8_t buffer[100] = {0};
+    struct UsbPipe pipe = {interfaceId, pointid};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().BulkTransferRead(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0680 %{public}d UsbdBulkTransferRead=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0690
+ * @tc.desc: Test functions to BulkTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0690, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_129;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0690 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    uint8_t buffer[100] = {0};
+    uint32_t length = 100;
+    struct UsbPipe pipe = {interfaceId, pointid};
+    pipe.interfaceId = 244;
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().BulkTransferRead(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0690 %{public}d UsbdBulkTransferRead=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0700
+ * @tc.desc: Test functions to BulkTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0700, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_129;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0700 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    uint32_t length = 100;
+    uint8_t buffer[100] = {};
+    struct UsbPipe pipe = {interfaceId, pointid};
+    pipe.endpointId = 244;
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().BulkTransferRead(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0700 %{public}d UsbdBulkTransferRead=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0710
  * @tc.desc: Test functions to BulkTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, UsbdBulkTransferWrite001, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0710, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t pointid = POINTID_1;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdTransferTest::UsbdBulkTransferWrite001 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0710 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     uint32_t length = 100;
     uint8_t buffer[100] = "hello world bulk writ01";
     struct UsbPipe pipe = {interfaceId, pointid};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().BulkTransferWrite(dev, pipe, 1000, bufferdata);
-    HDF_LOGI("UsbdTransferTest::UsbdBulkTransferWrite001 %{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0710 %{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdBulkTransferWrite002
+ * @tc.name: SUB_USB_HDI_0720
  * @tc.desc: Test functions to BulkTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, UsbdBulkTransferWrite002, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0720, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t pointid = POINTID_1;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdTransferTest::UsbdBulkTransferWrite002 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0720 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     struct UsbPipe pipe = {interfaceId, pointid};
     dev.busNum = 99;
@@ -297,77 +607,190 @@ HWTEST_F(UsbdTransferTest, UsbdBulkTransferWrite002, Function | MediumTest | Lev
     uint8_t buffer[100] = "hello world bulk writ02";
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().BulkTransferWrite(dev, pipe, 1000, bufferdata);
-    HDF_LOGI("UsbdTransferTest::UsbdBulkTransferWrite002 %{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0720 %{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret != 0);
 }
 
 /**
- * @tc.name: UsbdBulkTransferWrite008
+ * @tc.name: SUB_USB_HDI_0730
  * @tc.desc: Test functions to BulkTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, UsbdBulkTransferWrite008, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0730, Function | MediumTest | Level1)
 {
-    HDF_LOGI("Case Start : UsbdBulkTransferWrite008 : BulkTransferWrite");
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t pointid = POINTID_1;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdTransferTest::UsbdBulkTransferWrite008 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0730 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    dev.devAddr = 244;
+    uint32_t length = 100;
+    uint8_t buffer[100] = "hello world bulk writ03";
+    struct UsbPipe pipe = {interfaceId, pointid};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().BulkTransferWrite(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0730 %{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0740
+ * @tc.desc: Test functions to BulkTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0740, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_1;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0740 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    struct UsbPipe pipe = {interfaceId, pointid};
+    pipe.interfaceId = 255;
+    uint32_t length = 100;
+    uint8_t buffer[100] = "hello world bulk writ04";
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().BulkTransferWrite(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0740 %{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0750
+ * @tc.desc: Test functions to BulkTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0750, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_1;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0750 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    struct UsbPipe pipe = {interfaceId, pointid};
+    pipe.endpointId = 255;
+    uint32_t length = 100;
+    uint8_t buffer[100] = "hello world bulk writ05";
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().BulkTransferWrite(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0750 %{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0760
+ * @tc.desc: Test functions to BulkTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0760, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_1;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0760 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    struct UsbPipe pipe = {interfaceId, pointid};
+    dev.busNum = 99;
+    dev.devAddr = 99;
+    uint32_t length = 100;
+    uint8_t buffer[100] = "hello world bulk writ06";
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().BulkTransferWrite(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0760 %{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0770
+ * @tc.desc: Test functions to BulkTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0770, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = 99;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0770 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    struct UsbPipe pipe = {interfaceId, pointid};
+    uint32_t length = 100;
+    uint8_t buffer[100] = "hello world bulk writ07";
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().BulkTransferWrite(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0770 %{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_0780
+ * @tc.desc: Test functions to BulkTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0780, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_1;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0780 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     struct UsbPipe pipe = {interfaceId, pointid};
     uint32_t length = 100;
     uint8_t buffer[100] = "hello world bulk writ08";
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().BulkTransferWrite(dev, pipe, -1, bufferdata);
-    HDF_LOGI("UsbdTransferTest::UsbdBulkTransferWrite008 %{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0780 %{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: InterruptTransferRead001
+ * @tc.name: SUB_USB_HDI_1440
  * @tc.desc: Test functions to InterruptTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, UsbdInterruptTransferRead001, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1440, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t pointid = POINTID_129;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdTransferTest::UsbdInterruptTransferRead001 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1440 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     uint8_t buffer[LENGTH_NUM_255] = {0};
     uint32_t length = LENGTH_NUM_255;
     struct UsbPipe pipe = {interfaceId, pointid};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().InterruptTransferRead(dev, pipe, 1000, bufferdata);
-    HDF_LOGI("UsbdTransferTest::UsbdInterruptTransferRead001 %{public}d UsbdInterruptTransferRead=%{public}d", __LINE__,
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1440 %{public}d UsbdInterruptTransferRead=%{public}d", __LINE__,
              ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdInterruptTransferRead002
+ * @tc.name: SUB_USB_HDI_1450
  * @tc.desc: Test functions to InterruptTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, UsbdInterruptTransferRead002, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1450, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t pointid = POINTID_129;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdTransferTest::UsbdInterruptTransferRead002 %{public}d ReleaseInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1450 %{public}d ReleaseInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     dev.busNum = BUS_NUM_222;
     uint32_t length = 100;
@@ -375,52 +798,121 @@ HWTEST_F(UsbdTransferTest, UsbdInterruptTransferRead002, Function | MediumTest |
     struct UsbPipe pipe = {interfaceId, pointid};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().InterruptTransferRead(dev, pipe, 1000, bufferdata);
-    HDF_LOGI("UsbdTransferTest::UsbdInterruptTransferRead002 %{public}d UsbdInterruptTransferRead=%{public}d", __LINE__,
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1450 %{public}d UsbdInterruptTransferRead=%{public}d", __LINE__,
              ret);
     ASSERT_TRUE(ret != 0);
 }
 
 /**
- * @tc.name: UsbdInterruptTransferWrite001
+ * @tc.name: SUB_USB_HDI_1460
+ * @tc.desc: Test functions to InterruptTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1460, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_129;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1460 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    dev.devAddr = 244;
+    uint32_t length = 100;
+    uint8_t buffer[100] = {0};
+    struct UsbPipe pipe = {interfaceId, pointid};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().InterruptTransferRead(dev, pipe, 1000, bufferdata);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1470
+ * @tc.desc: Test functions to InterruptTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1470, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_129;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1470 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    uint8_t buffer[100] = {0};
+    uint32_t length = 100;
+    struct UsbPipe pipe = {interfaceId, pointid};
+    pipe.interfaceId = 244;
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().InterruptTransferRead(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1470 %{public}d UsbdInterruptTransferRead=%{public}d", __LINE__,
+             ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1480
+ * @tc.desc: Test functions to InterruptTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1480, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_129;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1480 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    uint32_t length = 100;
+    uint8_t buffer[100] = {};
+    struct UsbPipe pipe = {interfaceId, pointid};
+    pipe.endpointId = 244;
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().InterruptTransferRead(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1480 %{public}d UsbdInterruptTransferRead=%{public}d", __LINE__,
+             ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1490
  * @tc.desc: Test functions to InterruptTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, UsbdInterruptTransferWrite001, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1490, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t pointid = POINTID_1;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdTransferTest::UsbdInterruptTransferWrite001 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1490 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     uint32_t length = 100;
     uint8_t buffer[100] = "hello world Interrupt writ01";
     struct UsbPipe pipe = {interfaceId, pointid};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().InterruptTransferWrite(dev, pipe, 1000, bufferdata);
-    HDF_LOGI("UsbdTransferTest::UsbdInterruptTransferWrite001 %{public}d InterruptTransferWrite=%{public}d", __LINE__,
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1490 %{public}d InterruptTransferWrite=%{public}d", __LINE__,
              ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdInterruptTransferWrite002
+ * @tc.name: SUB_USB_HDI_1500
  * @tc.desc: Test functions to InterruptTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, UsbdInterruptTransferWrite002, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1500, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t pointid = POINTID_1;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdTransferTest::UsbdInterruptTransferWrite002 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1500 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     struct UsbPipe pipe = {interfaceId, pointid};
     dev.busNum = 99;
@@ -428,78 +920,197 @@ HWTEST_F(UsbdTransferTest, UsbdInterruptTransferWrite002, Function | MediumTest 
     uint8_t buffer[100] = "hello world Interrupt writ02";
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().InterruptTransferWrite(dev, pipe, 1000, bufferdata);
-    HDF_LOGI("UsbdTransferTest::UsbdInterruptTransferWrite002 %{public}d InterruptTransferWrite=%{public}d", __LINE__,
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1500 %{public}d InterruptTransferWrite=%{public}d", __LINE__,
              ret);
     ASSERT_TRUE(ret != 0);
 }
 
 /**
- * @tc.name: UsbdInterruptTransferWrite008
+ * @tc.name: SUB_USB_HDI_1510
  * @tc.desc: Test functions to InterruptTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, UsbdInterruptTransferWrite008, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1510, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t pointid = POINTID_1;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdTransferTest::UsbdInterruptTransferWrite008 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1510 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    dev.devAddr = 244;
+    uint32_t length = 100;
+    uint8_t buffer[100] = "hello world Interrupt writ03";
+    struct UsbPipe pipe = {interfaceId, pointid};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().InterruptTransferWrite(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1510 %{public}d InterruptTransferWrite=%{public}d", __LINE__,
+             ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1520
+ * @tc.desc: Test functions to InterruptTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1520, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_1;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1520 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    struct UsbPipe pipe = {interfaceId, pointid};
+    pipe.interfaceId = 255;
+    uint32_t length = 100;
+    uint8_t buffer[100] = "hello world Interrupt writ04";
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().InterruptTransferWrite(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1520 %{public}d InterruptTransferWrite=%{public}d", __LINE__,
+             ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1530
+ * @tc.desc: Test functions to InterruptTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1530, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_1;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1530 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    struct UsbPipe pipe = {interfaceId, pointid};
+    pipe.endpointId = 255;
+    uint32_t length = 100;
+    uint8_t buffer[100] = "hello world Interrupt writ05";
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().InterruptTransferWrite(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1530 %{public}d InterruptTransferWrite=%{public}d", __LINE__,
+             ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1540
+ * @tc.desc: Test functions to InterruptTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1540, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_1;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1540 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    struct UsbPipe pipe = {interfaceId, pointid};
+    dev.busNum = 99;
+    dev.devAddr = 99;
+    uint32_t length = 100;
+    uint8_t buffer[100] = "hello world Interrupt writ06";
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().InterruptTransferWrite(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1540 %{public}d InterruptTransferWrite=%{public}d", __LINE__,
+             ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1550
+ * @tc.desc: Test functions to InterruptTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1550, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = 99;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1550 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    struct UsbPipe pipe = {interfaceId, pointid};
+    uint32_t length = 100;
+    uint8_t buffer[100] = "hello world Interrupt writ07";
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().InterruptTransferWrite(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1550 %{public}d InterruptTransferWrite=%{public}d", __LINE__,
+             ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1560
+ * @tc.desc: Test functions to InterruptTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1560, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_1;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1560 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     struct UsbPipe pipe = {interfaceId, pointid};
     uint32_t length = 100;
     uint8_t buffer[100] = "hello world Interrupt writ08";
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().InterruptTransferWrite(dev, pipe, -1, bufferdata);
-    HDF_LOGI("UsbdTransferTest::UsbdInterruptTransferWrite008 %{public}d InterruptTransferWrite=%{public}d", __LINE__,
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1560 %{public}d InterruptTransferWrite=%{public}d", __LINE__,
              ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdIsoTransferRead001
+ * @tc.name: SUB_USB_HDI_1570
  * @tc.desc: Test functions to IsoTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, UsbdIsoTransferRead001, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1570, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t pointid = POINTID_129;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdTransferTest::UsbdIsoTransferRead001 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1570 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     uint8_t buffer[LENGTH_NUM_255] = {0};
     uint32_t length = LENGTH_NUM_255;
     struct UsbPipe pipe = {interfaceId, pointid};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().IsoTransferRead(dev, pipe, 1000, bufferdata);
-    HDF_LOGI("UsbdTransferTest::UsbdIsoTransferRead001 %{public}d UsbdIsoTransferRead=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1570 %{public}d UsbdIsoTransferRead=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdIsoTransferRead002
+ * @tc.name: SUB_USB_HDI_1580
  * @tc.desc: Test functions to IsoTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, UsbdIsoTransferRead002, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1580, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t pointid = POINTID_129;
-    HDF_LOGI("UsbdTransferTest::UsbdIsoTransferRead002 %{public}d interfaceId=%{public}d", __LINE__, interfaceId);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1580 %{public}d interfaceId=%{public}d", __LINE__, interfaceId);
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdTransferTest::UsbdIsoTransferRead002 %{public}d ReleaseInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1580 %{public}d ReleaseInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     dev.busNum = BUS_NUM_222;
     uint32_t length = 100;
@@ -507,50 +1118,118 @@ HWTEST_F(UsbdTransferTest, UsbdIsoTransferRead002, Function | MediumTest | Level
     struct UsbPipe pipe = {interfaceId, pointid};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().IsoTransferRead(dev, pipe, 1000, bufferdata);
-    HDF_LOGI("UsbdTransferTest::UsbdIsoTransferRead002 %{public}d UsbdIsoTransferRead=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1580 %{public}d UsbdIsoTransferRead=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret != 0);
 }
 
 /**
- * @tc.name: UsbdIsoTransferWrite001
+ * @tc.name: SUB_USB_HDI_1590
+ * @tc.desc: Test functions to IsoTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1590, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_129;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1590 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    dev.devAddr = 244;
+    uint32_t length = 100;
+    uint8_t buffer[100] = {0};
+    struct UsbPipe pipe = {interfaceId, pointid};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().IsoTransferRead(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1590 %{public}d UsbdIsoTransferRead=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1600
+ * @tc.desc: Test functions to IsoTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1600, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_129;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1600 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    uint8_t buffer[100] = {0};
+    uint32_t length = 100;
+    struct UsbPipe pipe = {interfaceId, pointid};
+    pipe.interfaceId = 244;
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().IsoTransferRead(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1600 %{public}d UsbdIsoTransferRead=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1610
+ * @tc.desc: Test functions to IsoTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1610, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_129;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1610 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    uint32_t length = 100;
+    uint8_t buffer[100] = {};
+    struct UsbPipe pipe = {interfaceId, pointid};
+    pipe.endpointId = 244;
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().IsoTransferRead(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1610 %{public}d UsbdIsoTransferRead=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1620
  * @tc.desc: Test functions to IsoTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, UsbdIsoTransferWrite001, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1620, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t pointid = POINTID_1;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdTransferTest::UsbdIsoTransferWrite001 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1620 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     uint32_t length = 100;
     uint8_t buffer[100] = "hello world Iso writ01";
     struct UsbPipe pipe = {interfaceId, pointid};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().IsoTransferWrite(dev, pipe, 1000, bufferdata);
-    HDF_LOGI("UsbdTransferTest::UsbdIsoTransferWrite001 %{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1620 %{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }
 
 /**
- * @tc.name: UsbdIsoTransferWrite002
+ * @tc.name: SUB_USB_HDI_1630
  * @tc.desc: Test functions to IsoTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, UsbdIsoTransferWrite002, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1630, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t pointid = POINTID_1;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdTransferTest::UsbdIsoTransferWrite002 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1630 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     struct UsbPipe pipe = {interfaceId, pointid};
     dev.busNum = 99;
@@ -558,31 +1237,149 @@ HWTEST_F(UsbdTransferTest, UsbdIsoTransferWrite002, Function | MediumTest | Leve
     uint8_t buffer[100] = "hello world Iso writ02";
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().IsoTransferWrite(dev, pipe, 1000, bufferdata);
-    HDF_LOGI("UsbdTransferTest::UsbdIsoTransferWrite002 %{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1630 %{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret != 0);
 }
 
 /**
- * @tc.name: UsbdIsoTransferWrite008
+ * @tc.name: SUB_USB_HDI_1640
  * @tc.desc: Test functions to IsoTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, UsbdIsoTransferWrite008, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1640, Function | MediumTest | Level1)
 {
-    struct UsbDev dev = {BUS_NUM_1, DEV_ADDR_2};
-    dev.busNum = BUS_NUM_1;
-    dev.devAddr = DEV_ADDR_2;
+    struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t pointid = POINTID_1;
     auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
-    HDF_LOGI("UsbdTransferTest::UsbdIsoTransferWrite008 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1640 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    dev.devAddr = 244;
+    uint32_t length = 100;
+    uint8_t buffer[100] = "hello world Iso writ03";
+    struct UsbPipe pipe = {interfaceId, pointid};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().IsoTransferWrite(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1640 %{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1650
+ * @tc.desc: Test functions to IsoTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1650, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_1;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1650 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    struct UsbPipe pipe = {interfaceId, pointid};
+    pipe.interfaceId = 255;
+    uint32_t length = 100;
+    uint8_t buffer[100] = "hello world Iso writ04";
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().IsoTransferWrite(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1650 %{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1660
+ * @tc.desc: Test functions to IsoTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1660, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_1;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1660 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    struct UsbPipe pipe = {interfaceId, pointid};
+    pipe.endpointId = 255;
+    uint32_t length = 100;
+    uint8_t buffer[100] = "hello world Iso writ05";
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().IsoTransferWrite(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1660 %{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1670
+ * @tc.desc: Test functions to IsoTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1670, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_1;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1670 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    struct UsbPipe pipe = {interfaceId, pointid};
+    dev.busNum = 99;
+    dev.devAddr = 99;
+    uint32_t length = 100;
+    uint8_t buffer[100] = "hello world Iso writ06";
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().IsoTransferWrite(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1670 %{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1680
+ * @tc.desc: Test functions to IsoTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1680, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = 99;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1680 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret == 0);
+    struct UsbPipe pipe = {interfaceId, pointid};
+    uint32_t length = 100;
+    uint8_t buffer[100] = "hello world Iso writ07";
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = UsbdClient::GetInstance().IsoTransferWrite(dev, pipe, 1000, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1680 %{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
+    ASSERT_TRUE(ret != 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1690
+ * @tc.desc: Test functions to IsoTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ * std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1690, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_1;
+    auto ret = UsbdClient::GetInstance().ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1690 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
     struct UsbPipe pipe = {interfaceId, pointid};
     uint32_t length = 100;
     uint8_t buffer[100] = "hello world Iso writ08";
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     ret = UsbdClient::GetInstance().IsoTransferWrite(dev, pipe, -1, bufferdata);
-    HDF_LOGI("UsbdTransferTest::UsbdIsoTransferWrite008 %{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1690 %{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_TRUE(ret == 0);
 }

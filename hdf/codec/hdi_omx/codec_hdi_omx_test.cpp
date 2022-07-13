@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Shenzhen Kaihong DID Co., Ltd.
+ * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -336,7 +336,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0050, Function | MediumTe
 /**
 * @tc.name  HdfCodecHdiCreateComponentTest_003
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0060
-* @tc.desc   open OMX.rk.video_encoder.avc 
+* @tc.desc   open OMX.rk.video_encoder.avc
 */
 #ifdef SUPPORT_OMX
 HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0060, Function | MediumTest | Level3)
@@ -352,7 +352,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0060, Function | MediumTe
 /**
 * @tc.name  HdfCodecHdiCreateComponentTest_004
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0070
-* @tc.desc   open OMX.rk.video_dncoder.avc 
+* @tc.desc  open OMX.rk.video_dncoder.avc
 */
 HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0070, Function | MediumTest | Level3)
 {
@@ -538,7 +538,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0180, Function | MediumTe
 /**
 * @tc.name  HdfCodecHdiSetParameterTest_003
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0190
-* @tc.desc  The input parameter is  null 
+* @tc.desc  The input parameter is  null
 */
 HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0190, Function | MediumTest | Level3)
 {
@@ -579,7 +579,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0210, Function | MediumTe
 /**
 * @tc.name  HdfCodecHdiSetParameterTest_006
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0220
-* @tc.desc  
+* @tc.desc
 */
 HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0220, Function | MediumTest | Level3)
 {

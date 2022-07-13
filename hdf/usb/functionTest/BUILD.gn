@@ -18,10 +18,14 @@ module_output_path = "hdf/usb"
 
 ohos_moduletest_suite("HatsHdfUsbFunctionTest") {
   module_out_path = module_output_path
-  sources = [ "./common/usbd_function_test.cpp" ]
+  sources = [
+    "../UsbSubscriberTest/UsbSubscriberTest.cpp",
+    "./common/usbd_function_test.cpp" 
+    ]
 
   include_dirs = [
     "include",
+    "//test/xts/hats/hdf/usb/UsbSubscriberTest",
     "//utils/system/safwk/native/include",
     "//drivers/peripheral/usb/hal/client/include",
   ]

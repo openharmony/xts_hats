@@ -12,6 +12,7 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
+import("//build/test.gni")
 import("//test/xts/tools/build/suite.gni")
 
 group("HatsHdfUsbTest") {

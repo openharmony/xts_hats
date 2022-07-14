@@ -957,7 +957,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetFrameSize_0006, Function
 }
 #ifndef PRODUCT_RK3568
 /**
-* @tc.name  Test RenderGetFrameSize API via define sampleRate to different value
+* @tc.name  Test RenderGetFrameSize API via define sampleRate to different values
 * @tc.number  SUB_Audio_HDI_RenderGetFrameSize_0007
 * @tc.desc  Test RenderGetFrameSize interface,return 0 if get framesize define sampleRate as different values
 */
@@ -1067,7 +1067,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetFrameCount_0003, Functio
     manager->UnloadAdapter(manager, adapter);
 }
 /**
-* @tc.name  Test RenderGetFrameCount API via define channelCount to different value
+* @tc.name  Test RenderGetFrameCount API via define channelCount to different values
 * @tc.number  SUB_Audio_HDI_RenderGetFrameCount_0004
 * @tc.desc  Test RenderGetFrameCount interface,return 0 if get framesize define channelCount as different values
 */
@@ -1105,7 +1105,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetFrameCount_0004, Functio
     manager->UnloadAdapter(manager, adapter);
 }
 /**
-* @tc.name  Test RenderGetFrameCount API via define format to different value
+* @tc.name  Test RenderGetFrameCount API via define format to different values
 * @tc.number  SUB_Audio_HDI_RenderGetFrameCount_0005
 * @tc.desc  Test RenderGetFrameCount interface,return 0 if get framesize define format as different values
 */
@@ -1144,7 +1144,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetFrameCount_0005, Functio
 }
 #ifndef PRODUCT_RK3568
 /**
-* @tc.name  Test RenderGetFrameCount API via define channelCount to different value
+* @tc.name  Test RenderGetFrameCount API via define channelCount to different values
 * @tc.number  SUB_Audio_HDI_RenderGetFrameCount_0006
 * @tc.desc  Test RenderGetFrameCount interface,return 0 if get framesize define channelCount to different values
 */
@@ -1181,7 +1181,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetFrameCount_0006, Functio
     manager->UnloadAdapter(manager, adapter);
 }
 /**
-* @tc.name  Test RenderGetFrameCount API via define format to different value
+* @tc.name  Test RenderGetFrameCount API via define format to different values
 * @tc.number  SUB_Audio_HDI_RenderGetFrameCount_0007
 * @tc.desc  Test RenderGetFrameCount interface,return 0 if get framesize define format as different values
 */

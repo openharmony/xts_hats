@@ -553,7 +553,7 @@ HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_AudioRenderSetChannelMode_0001, Funct
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_EQ(AUDIO_CHANNEL_BOTH_RIGHT, modeSec);
     ret = render->SetChannelMode(render, modeTrd);
- #ifdef PRODUCT_RK3568
+#ifdef PRODUCT_RK3568
     EXPECT_EQ(HDF_FAILURE, ret);
 #else
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);

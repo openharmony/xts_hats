@@ -23,7 +23,7 @@ ohos_moduletest_suite("HatsHdfWlanbenchmarkTest") {
     "//drivers/peripheral/wlan/hal/include",
     "//drivers/peripheral/wlan/interfaces/include",
   ]
-  sources = [ "hdf__wifi_benchmark_test.cpp" ]
+  sources = [ "hdf_wifi_benchmark_test.cpp" ]
   resource_config_file =
       "//drivers/hdf_core/adapter/uhdf2/test/resource/wlan/ohos_test.xml"
   cflags = [
@@ -36,6 +36,7 @@ ohos_moduletest_suite("HatsHdfWlanbenchmarkTest") {
   ]
 
   deps = [
+    "//drivers/hdf_core/adapter/build/test_common:libhdf_test_common",
     "//drivers/peripheral/wlan/client:wifi_driver_client",
     "//drivers/peripheral/wlan/hal:wifi_hal",
     "//third_party/benchmark",
@@ -44,7 +45,6 @@ ohos_moduletest_suite("HatsHdfWlanbenchmarkTest") {
   ]
   if (is_standard_system) {
     external_deps = [
-      "hdf_core:libhdf_test_common",
       "hdf_core:libhdf_utils",
       "hiviewdfx_hilog_native:libhilog",
       "utils_base:utils",

@@ -124,6 +124,7 @@ void AudioHdiRenderBenchmarkTest::TearDown(const ::benchmark::State &state)
 * @tc.number  SUB_DriverSystem_Benchmark_AudioManagerGetAllAdapters_0001
 * @tc.desc  tests the performace of AudioManagerGetAllAdapters interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioManagerGetAllAdapters_0001)
     (benchmark::State &st)
@@ -148,6 +149,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioManagerLoadAdapter_0001
 * @tc.desc  tests the performace of AudioManagerLoadAdapter interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioManagerLoadAdapter_0001)
     (benchmark::State &st)
@@ -178,6 +180,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioManagerUnLoadAdapter_0001
 * @tc.desc  tests the performace of AudioManagerLoadAdapter interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioManagerUnLoadAdapter_0001)
     (benchmark::State &st)
@@ -207,6 +210,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioManagerInitAllPorts_0001
 * @tc.desc  tests the performace of AudioInitAllPorts interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioManagerInitAllPorts_0001)
     (benchmark::State &st)
@@ -235,6 +239,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioGetPortCapability_0001
 * @tc.desc  tests the performace of AudioGetPortCapability interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioGetPortCapability_0001)
     (benchmark::State &st)
@@ -265,6 +270,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioSetPassthroughMode_0001
 * @tc.desc  tests the performace of AudioSetPassthroughMode interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioSetPassthroughMode_0001)
     (benchmark::State &st)
@@ -298,6 +304,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioGetPassthroughMode_0001
 * @tc.desc  tests the performace of AudioGetPassthroughMode interface by executing 100 times,
 * and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioGetPassthroughMode_0001)
     (benchmark::State &st)
@@ -332,6 +339,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioRenderGetLatency_0001
 * @tc.desc  tests the performace of AudioRenderGetLatency interface by executing 100 times,
 * and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderGetLatency_0001)
     (benchmark::State &st)
@@ -364,6 +372,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCreateRender_0001
 * @tc.desc  tests the performace of AudioCreateRender interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCreateRender_0001)
     (benchmark::State &st)
@@ -397,6 +406,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioDestroyRender_0001
 * @tc.desc  tests the performace of AudioDestroyRender interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioDestroyRender_0001)
     (benchmark::State &st)
@@ -429,6 +439,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioRenderGetRenderPosition_0001
 * @tc.desc  tests the performace of AudioRenderGetRenderPosition interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderGetRenderPosition_0001)
     (benchmark::State &st)
@@ -458,6 +469,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioRenderSetRenderSpeed_0001
 * @tc.desc  tests the performace of AudioRenderSetRenderSpeed interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderSetRenderSpeed_0001)
     (benchmark::State &st)
@@ -492,6 +504,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioRenderGetRenderSpeed_0001
 * @tc.desc  tests the performace of AudioRenderGetRenderSpeed interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderGetRenderSpeed_0001)
     (benchmark::State &st)
@@ -559,6 +572,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioRenderGetChannelMode_0001
 * @tc.desc  tests the performace of AudioRenderGetChannelMode interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderGetChannelMode_0001)
     (benchmark::State &st)
@@ -595,6 +609,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioRenderGetFrameCount_0001
 * @tc.desc  tests the performace of AudioRenderGetFrameCount interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderGetFrameCount_0001)
     (benchmark::State &st)
@@ -627,6 +642,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioRenderGetCurrentChannelId_0001
 * @tc.desc  tests the performace of AudioRenderGetCurrentChannelId interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderGetCurrentChannelId_0001)
     (benchmark::State &st)
@@ -659,6 +675,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioRenderFlush_0001
 * @tc.desc  tests the performace of AudioRenderFlush interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderFlush_0001)
     (benchmark::State &st)
@@ -687,6 +704,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioRenderGetFrameSize_0001
 * @tc.desc  tests the performace of AudioRenderGetFrameSize interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderGetFrameSize_0001)
     (benchmark::State &st)
@@ -723,6 +741,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioRenderCheckSceneCapability_0001
 * @tc.desc  tests the performace of AudioRenderCheckSceneCapability interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderCheckSceneCapability_0001)
     (benchmark::State &st)
@@ -759,6 +778,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioRenderSelectScene_0001
 * @tc.desc  tests the performace of AudioRenderSelectScene interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderSelectScene_0001)
     (benchmark::State &st)
@@ -796,6 +816,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudiorenderSetMute_0001
 * @tc.desc  tests the performace of AudiorenderSetMute interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudiorenderSetMute_0001)
     (benchmark::State &st)
@@ -829,6 +850,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudiorenderGetMute_0001
 * @tc.desc  tests the performace of AudiorenderGetMute interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudiorenderGetMute_0001)
     (benchmark::State &st)
@@ -863,6 +885,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudiorenderSetVolume_0001
 * @tc.desc  tests the performace of AudiorenderSetVolume interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudiorenderSetVolume_0001)
     (benchmark::State &st)
@@ -897,6 +920,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudiorenderGetVolume_0001
 * @tc.desc  tests the performace of AudiorenderGetVolume interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudiorenderGetVolume_0001)
     (benchmark::State &st)
@@ -929,6 +953,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudiorenderGetGainThreshold_0001
 * @tc.desc  tests the performace of AudiorenderGetGainThreshold interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudiorenderGetGainThreshold_0001)
     (benchmark::State &st)
@@ -962,6 +987,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudiorenderGetGain_0001
 * @tc.desc  tests the performace of AudiorenderGetGain interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudiorenderGetGain_0001)
     (benchmark::State &st)
@@ -993,6 +1019,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudiorenderSetGain_0001
 * @tc.desc  tests the performace of AudiorenderSetGain interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudiorenderSetGain_0001)
     (benchmark::State &st)
@@ -1027,6 +1054,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioRenderFrame_0001
 * @tc.desc  tests the performace of AudioRenderFrame interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderFrame_0001)
     (benchmark::State &st)
@@ -1077,6 +1105,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioRenderStart_0001
 * @tc.desc  tests the performace of AudioRenderStart interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderStart_0001)
     (benchmark::State &st)
@@ -1104,6 +1133,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioRenderStop_0001
 * @tc.desc  tests the performace of AudioRenderStop interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderStop_0001)
     (benchmark::State &st)
@@ -1133,6 +1163,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioRenderSetSampleAttributes_0001
 * @tc.desc  tests the performace of AudioRenderSetSampleAttributes interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderSetSampleAttributes_0001)
     (benchmark::State &st)
@@ -1164,6 +1195,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioRenderPause_0001
 * @tc.desc  tests the performace of AudioRenderPause interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderPause_0001)
     (benchmark::State &st)
@@ -1196,6 +1228,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioRenderResume_0001
 * @tc.desc  tests the performace of AudioRenderResume interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderResume_0001)
     (benchmark::State &st)
@@ -1228,6 +1261,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioRenderGetSampleAttributes_0001
 * @tc.desc  tests the performace of AudioRenderGetSampleAttributes interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderGetSampleAttributes_0001)
     (benchmark::State &st)
@@ -1261,6 +1295,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioRenderReqMmapBuffer_0001
 * @tc.desc  tests the performace of AudioRenderReqMmapBuffer interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderReqMmapBuffer_0001)
     (benchmark::State &st)
@@ -1315,6 +1350,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioRenderGetMmapPosition_0001
 * @tc.desc  tests the performace of AudioRenderRenderGetMmapPosition interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderGetMmapPosition_0001)
     (benchmark::State &st)
@@ -1357,6 +1393,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioRenderSetExtraParams_0001
 * @tc.desc  tests the performace of AudioRenderSetExtraParams interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderSetExtraParams_0001)
     (benchmark::State &st)
@@ -1386,6 +1423,7 @@ BENCHMARK_REGISTER_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_Aud
 * @tc.number  SUB_DriverSystem_Benchmark_AudioRenderGetExtraParams_0001
 * @tc.desc  tests the performace of AudioRenderGetExtraParams interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
+* @tc.author: liutian
 */
 BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderGetExtraParams_0001)
     (benchmark::State &st)

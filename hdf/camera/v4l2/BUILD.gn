@@ -63,7 +63,6 @@ ohos_moduletest_suite("HatsHdfCameraFunctionTest") {
     "//foundation/graphic/graphic/interfaces/inner_api/surface",
     "//foundation/graphic/graphic/interfaces/inner_api/common",
     "//foundation/graphic/graphic/utils/buffer_handle/export",
-    "//base/startup/syspara_lite/adapter/native/syspara/include",
     "$camera_path/utils/event",
     "//drivers/peripheral/camera/interfaces/metadata/include",
     "//drivers/peripheral/display/interfaces/include",
@@ -122,9 +121,9 @@ ohos_moduletest_suite("HatsHdfCameraFunctionTest") {
   }
 
   external_deps += [
+    "init:libbegetutil",
     "ipc:ipc_single",
     "samgr_standard:samgr_proxy",
-    "startup_l2:syspara",
   ]
 
   public_configs = [ ":cameraTest_config" ]

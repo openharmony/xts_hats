@@ -20,8 +20,8 @@ ohos_moduletest_suite("HatsHdfUsbRequestTest") {
   module_out_path = module_output_path
   sources = [
     "../UsbSubscriberTest/UsbSubscriberTest.cpp",
-    "./common/usbd_request_test.cpp"
-    ]
+    "./common/usbd_request_test.cpp",
+  ]
 
   include_dirs = [
     "include",

@@ -158,8 +158,6 @@ int32_t AudioHdiCaptureAttrTest::AudioCaptureStart(const string path, struct Aud
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0001, Function | MediumTest | Level1)
 {
     int32_t ret = -1;
-    uint32_t ret1 = 1;
-    uint32_t ret2 = 8000;
     struct AudioSampleAttributes attrs = {};
     struct AudioSampleAttributes attrsValue = {};
     struct AudioAdapter *adapter = nullptr;
@@ -171,12 +169,17 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 8000);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
+#ifdef PRODUCT_RK3568
+    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
+#else
+    uint32_t ret1 = 1;
+    uint32_t ret2 = 8000;
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
     EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
-
+#endif
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
 }
@@ -226,8 +229,6 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0003, Function | MediumTest | Level1)
 {
     int32_t ret = -1;
-    uint32_t ret1 = 1;
-    uint32_t ret2 = 22050;
     struct AudioSampleAttributes attrs = {};
     struct AudioSampleAttributes attrsValue = {};
     struct AudioAdapter *adapter = nullptr;
@@ -239,11 +240,17 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 22050);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
+#ifdef PRODUCT_RK3568
+    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
+#else
+    uint32_t ret1 = 1;
+    uint32_t ret2 = 22050;
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
     EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
+#endif
 
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
@@ -294,8 +301,6 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0005, Function | MediumTest | Level1)
 {
     int32_t ret = -1;
-    uint32_t ret1 = 1;
-    uint32_t ret2 = 44100;
     struct AudioSampleAttributes attrs = {};
     struct AudioSampleAttributes attrsValue = {};
     struct AudioAdapter *adapter = nullptr;
@@ -307,11 +312,17 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 44100);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
+#ifdef PRODUCT_RK3568
+    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
+#else
+    uint32_t ret1 = 1;
+    uint32_t ret2 = 44100;
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
     EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
+#endif
 
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
@@ -388,8 +399,6 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0008, Function | MediumTest | Level1)
 {
     int32_t ret = -1;
-    uint32_t ret1 = 1;
-    uint32_t ret2 = 12000;
     struct AudioSampleAttributes attrs = {};
     struct AudioSampleAttributes attrsValue = {};
     struct AudioAdapter *adapter = nullptr;
@@ -401,12 +410,18 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 12000);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
+#ifdef PRODUCT_RK3568
+    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
+#else
+    uint32_t ret1 = 1;
+    uint32_t ret2 = 12000;
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
     EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
+#endif
 
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
@@ -423,8 +438,6 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0009, Function | MediumTest | Level1)
 {
     int32_t ret = -1;
-    uint32_t ret1 = 1;
-    uint32_t ret2 = 16000;
     struct AudioSampleAttributes attrs = {};
     struct AudioSampleAttributes attrsValue = {};
     struct AudioAdapter *adapter = nullptr;
@@ -436,12 +449,18 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 16000);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
+#ifdef PRODUCT_RK3568
+    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
+#else
+    uint32_t ret1 = 1;
+    uint32_t ret2 = 16000;
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
     EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
+#endif
 
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
@@ -493,8 +512,6 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0011, Function | MediumTest | Level1)
 {
     int32_t ret = -1;
-    uint32_t ret1 = 1;
-    uint32_t ret2 = 64000;
     struct AudioSampleAttributes attrs = {};
     struct AudioSampleAttributes attrsValue = {};
     struct AudioAdapter *adapter = nullptr;
@@ -506,13 +523,18 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 64000);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
+#ifdef PRODUCT_RK3568
+    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
+#else
+    uint32_t ret1 = 1;
+    uint32_t ret2 = 64000;
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
     EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
-
+#endif
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
 }
@@ -528,8 +550,6 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0012, Function | MediumTest | Level1)
 {
     int32_t ret = -1;
-    uint32_t ret1 = 1;
-    uint32_t ret2 = 96000;
     struct AudioSampleAttributes attrs = {};
     struct AudioSampleAttributes attrsValue = {};
     struct AudioAdapter *adapter = nullptr;
@@ -541,12 +561,18 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 96000);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
+#ifdef PRODUCT_RK3568
+    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
+#else
+    uint32_t ret1 = 1;
+    uint32_t ret2 = 96000;
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
     EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
+#endif
 
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
@@ -606,8 +632,11 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 
     InitAttrsUpdate(attrs2, AUDIO_FORMAT_PCM_32_BIT, 2, 11025);
     ret = capture->attr.SetSampleAttributes(capture, &attrs2);
+#ifdef ALSA_LIB_MODE
+    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
+#else
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-
+#endif
     InitAttrsUpdate(attrs3, AUDIO_FORMAT_AAC_MAIN, 1, 22050);
     ret = capture->attr.SetSampleAttributes(capture, &attrs3);
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
@@ -723,8 +752,6 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureGetSampleAttributes_0001, Function | MediumTest | Level1)
 {
     int32_t ret = -1;
-    uint32_t ret1 = 32000;
-    uint32_t ret2 = 1;
     struct AudioSampleAttributes attrs = {};
     struct AudioSampleAttributes attrsValue = {};
     struct AudioAdapter *adapter = nullptr;
@@ -738,11 +765,17 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureGetSampleAttributes_
     InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 32000);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
+#ifdef PRODUCT_RK3568
+    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
+#else
+    uint32_t ret1 = 32000;
+    uint32_t ret2 = 1;
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
     EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(ret1, attrsValue.sampleRate);
     EXPECT_EQ(ret2, attrsValue.channelCount);
+#endif
 
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
@@ -874,6 +907,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0004, Functi
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
 }
+#ifndef PRODUCT_RK3568
 /**
     * @tc.name  Test CaptureGetFrameSize API via define sampleRate to different values
     * @tc.number  SUB_Audio_hdi_CaptureGetFrameSize_0005
@@ -908,6 +942,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0005, Functi
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
 }
+#endif
 /**
     * @tc.name  Test CaptureGetFrameSize API via define channelCount to different values
     * @tc.number  SUB_Audio_hdi_CaptureGetFrameSize_0006
@@ -942,6 +977,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0006, Functi
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
 }
+#ifndef PRODUCT_RK3568
 /**
     * @tc.name  Test CaptureGetFrameSize API via define sampleRate to different value
     * @tc.number  SUB_Audio_hdi_CaptureGetFrameSize_0007
@@ -976,6 +1012,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0007, Functi
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
 }
+#endif
 /**
 * @tc.name  Test AudioCaptureGetFrameCount API via legal input
 * @tc.number  SUB_Audio_hdi_CaptureGetFrameCount_0001
@@ -1148,6 +1185,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0006, Funct
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
 }
+#ifndef PRODUCT_RK3568
 /**
     * @tc.name  Test CaptureGetFrameCount API via define channelCount to different value
     * @tc.number  SUB_Audio_hdi_CaptureGetFrameCount_0007
@@ -1224,6 +1262,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0008, Funct
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
 }
+#endif
 /**
     * @tc.name  Test CaptureGetCurrentChannelId API via legal input
     * @tc.number  SUB_Audio_HDI_RenderGetCurrentChannelId_0001
@@ -1248,6 +1287,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureGetCurrentChannelId_0001,
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
 }
+#ifndef PRODUCT_RK3568
 /**
     * @tc.name  Test GetCurrentChannelId API via getting channelId to 1 and set channelCount to 1
     * @tc.number  SUB_Audio_HDI_CaptureGetCurrentChannelId_0002
@@ -1281,6 +1321,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureGetCurrentChannelId_0002,
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
 }
+#endif
 /**
     * @tc.name  Test GetCurrentChannelId API via CurrentChannelId is obtained after started
     * @tc.number  SUB_Audio_HDI_CaptureGetCurrentChannelId_0003

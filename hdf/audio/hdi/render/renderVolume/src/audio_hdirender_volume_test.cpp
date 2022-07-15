@@ -529,7 +529,11 @@ HWTEST_F(AudioHdiRenderVolumeTest, SUB_Audio_HDI_AudioRenderGetMute_0001, Functi
     int32_t ret = -1;
     bool muteTrue = true;
     bool muteFalse = false;
+#ifdef PRODUCT_RK3568
+    bool defaultmute = false;
+#else
     bool defaultmute = true;
+#endif
     struct AudioAdapter *adapter = nullptr;
     struct AudioRender *render = nullptr;
     ASSERT_NE(nullptr, GetAudioManager);

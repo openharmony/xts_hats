@@ -20,12 +20,8 @@ group("HatsHdfAudioTest") {
   if (!defined(ohos_lite)) {
     testonly = true
   }
-
-  if (device_name == "rk3568") {
-  } else {
-    if (is_standard_system) {
-      deps = [ "hdi:hdi" ]
-    }
+  if (is_standard_system) {
+    deps = [ "hdi:hdi" ]
   }
 }
 ###############################################################################

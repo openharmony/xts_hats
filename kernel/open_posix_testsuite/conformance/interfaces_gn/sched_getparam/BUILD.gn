@@ -16,3 +16,15 @@ import(
 posix_interface_bin("sched_getparam_1-1") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sched_getparam/1-1.c" ]
 }
+posix_interface_bin("sched_getparam_2-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sched_getparam/2-1.c" ]
+}
+posix_interface_bin("sched_getparam_3-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sched_getparam/3-1.c" ]
+}
+posix_interface_bin("sched_getparam_4-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sched_getparam/4-1.c" ]
+}
+posix_interface_bin("sched_getparam_6-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sched_getparam/6-1.c" ]
+}

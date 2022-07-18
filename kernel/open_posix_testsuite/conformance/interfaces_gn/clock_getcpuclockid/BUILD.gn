@@ -16,3 +16,15 @@ import(
 posix_interface_bin("clock_getcpuclockid_6-1") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/clock_getcpuclockid/6-1.c" ]
 }
+posix_interface_bin("clock_getcpuclockid_1-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/clock_getcpuclockid/1-1.c" ]
+}
+posix_interface_bin("clock_getcpuclockid_1-2") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/clock_getcpuclockid/1-2.c" ]
+}
+posix_interface_bin("clock_getcpuclockid_2-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/clock_getcpuclockid/2-1.c" ]
+}
+posix_interface_bin("clock_getcpuclockid_5-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/clock_getcpuclockid/5-1.c" ]
+}

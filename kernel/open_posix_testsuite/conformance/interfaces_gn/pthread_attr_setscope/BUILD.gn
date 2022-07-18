@@ -19,3 +19,6 @@ posix_interface_bin("pthread_attr_setscope_4-1") {
 posix_interface_bin("pthread_attr_setscope_5-1") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_attr_setscope/5-1.c" ]
 }
+posix_interface_bin("pthread_attr_setscope_1-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_attr_setscope/1-1.c" ]
+}

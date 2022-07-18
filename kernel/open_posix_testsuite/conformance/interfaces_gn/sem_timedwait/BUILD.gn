@@ -34,3 +34,15 @@ posix_interface_bin("sem_timedwait_6-2") {
 posix_interface_bin("sem_timedwait_7-1") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sem_timedwait/7-1.c" ]
 }
+posix_interface_bin("sem_timedwait_2-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sem_timedwait/2-1.c" ]
+}
+posix_interface_bin("sem_timedwait_3-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sem_timedwait/3-1.c" ]
+}
+posix_interface_bin("sem_timedwait_9-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sem_timedwait/9-1.c" ]
+}
+posix_interface_bin("sem_timedwait_10-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sem_timedwait/10-1.c" ]
+}

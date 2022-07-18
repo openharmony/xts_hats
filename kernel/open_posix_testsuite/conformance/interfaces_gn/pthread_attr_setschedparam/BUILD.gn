@@ -13,11 +13,6 @@
 import(
     "//test/xts/hats/kernel/open_posix_testsuite/conformance/interfaces_gn/posix_interface_template.gni")
 
-posix_interface_bin("pthread_attr_setschedparam_1-1") {
-  sources = [
-    #"//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_attr_setschedparam/1-1.c",
-  ]
-}
 posix_interface_bin("pthread_attr_setschedparam_1-2") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_attr_setschedparam/1-2.c" ]
 }
@@ -34,4 +29,8 @@ posix_interface_bin("pthread_attr_setschedparam_speculative_3-1") {
 }
 posix_interface_bin("pthread_attr_setschedparam_speculative_3-2") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_attr_setschedparam/speculative/3-2.c" ]
+}
+
+posix_interface_bin("pthread_attr_setschedparam_1-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_attr_setschedparam/1-1.c" ]
 }

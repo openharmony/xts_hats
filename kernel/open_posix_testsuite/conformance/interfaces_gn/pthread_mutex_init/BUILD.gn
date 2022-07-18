@@ -25,3 +25,7 @@ posix_interface_bin("pthread_mutex_init_3-1") {
 posix_interface_bin("pthread_mutex_init_4-1") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_mutex_init/1-1.c" ]
 }
+
+posix_interface_bin("pthread_mutex_init_5-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_mutex_init/5-1.c" ]
+}

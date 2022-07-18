@@ -19,3 +19,15 @@ posix_interface_bin("pthread_rwlock_timedrdlock_2-1") {
 posix_interface_bin("pthread_rwlock_timedrdlock_5-1") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_rwlock_timedrdlock/5-1.c" ]
 }
+posix_interface_bin("pthread_rwlock_timedrdlock_1-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_rwlock_timedrdlock/1-1.c" ]
+}
+posix_interface_bin("pthread_rwlock_timedrdlock_3-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_rwlock_timedrdlock/3-1.c" ]
+}
+posix_interface_bin("pthread_rwlock_timedrdlock_6-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_rwlock_timedrdlock/6-1.c" ]
+}
+posix_interface_bin("pthread_rwlock_timedrdlock_6-2") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_rwlock_timedrdlock/6-2.c" ]
+}

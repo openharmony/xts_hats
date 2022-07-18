@@ -14,5 +14,8 @@ import(
     "//test/xts/hats/kernel/open_posix_testsuite/conformance/interfaces_gn/posix_interface_template.gni")
 
 posix_interface_bin("clock_2-1") {
-  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/clock/2-1.c" ]
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/clock/1-1.c" ]
+}
+posix_interface_bin("clock_1-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/clock/1-1.c" ]
 }

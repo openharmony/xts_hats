@@ -19,3 +19,12 @@ posix_interface_bin("sigtimedwait_1-1") {
 posix_interface_bin("sigtimedwait_6-1") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigtimedwait/6-1.c" ]
 }
+posix_interface_bin("sigtimedwait_2-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigtimedwait/2-1.c" ]
+}
+posix_interface_bin("sigtimedwait_4-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigtimedwait/4-1.c" ]
+}
+posix_interface_bin("sigtimedwait_5-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigtimedwait/5-1.c" ]
+}

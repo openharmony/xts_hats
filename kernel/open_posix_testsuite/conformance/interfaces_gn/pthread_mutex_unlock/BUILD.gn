@@ -22,3 +22,9 @@ posix_interface_bin("pthread_mutex_unlock_2-1") {
 posix_interface_bin("pthread_mutex_unlock_3-1") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_mutex_unlock/3-1.c" ]
 }
+posix_interface_bin("pthread_mutex_unlock_5-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_mutex_unlock/5-1.c" ]
+}
+posix_interface_bin("pthread_mutex_unlock_5-2") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_mutex_unlock/5-2.c" ]
+}

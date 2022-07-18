@@ -25,3 +25,9 @@ posix_interface_bin("pthread_cond_signal_2-1") {
 posix_interface_bin("pthread_cond_signal_4-1") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_cond_signal/4-1.c" ]
 }
+posix_interface_bin("pthread_cond_signal_1-2") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_cond_signal/1-2.c" ]
+}
+posix_interface_bin("pthread_cond_signal_4-2") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_cond_signal/4-2.c" ]
+}

@@ -19,3 +19,6 @@ posix_interface_bin("pthread_rwlockattr_getpshared_1-1") {
 posix_interface_bin("pthread_rwlockattr_getpshared_4-1") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_rwlockattr_getpshared/4-1.c" ]
 }
+posix_interface_bin("pthread_rwlockattr_getpshared_2-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_rwlockattr_getpshared/2-1.c" ]
+}

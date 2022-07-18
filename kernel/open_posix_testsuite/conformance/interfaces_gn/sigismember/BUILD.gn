@@ -19,3 +19,6 @@ posix_interface_bin("sigismember_3-1") {
 posix_interface_bin("sigismember_4-1") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigismember/4-1.c" ]
 }
+posix_interface_bin("sigismember_5-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigismember/5-1.c" ]
+}

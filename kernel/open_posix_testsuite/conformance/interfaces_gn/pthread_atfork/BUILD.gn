@@ -31,3 +31,6 @@ posix_interface_bin("pthread_atfork_3-2") {
 posix_interface_bin("pthread_atfork_4-1") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_atfork/4-1.c" ]
 }
+posix_interface_bin("pthread_atfork_3-3") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_atfork/3-3.c" ]
+}

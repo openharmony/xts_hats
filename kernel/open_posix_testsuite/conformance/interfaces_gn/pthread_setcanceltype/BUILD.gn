@@ -19,3 +19,6 @@ posix_interface_bin("pthread_setcanceltype_2-1") {
 posix_interface_bin("pthread_setcanceltype_1-2") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_setcanceltype/1-2.c" ]
 }
+posix_interface_bin("pthread_setcanceltype_1-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_setcanceltype/1-1.c" ]
+}

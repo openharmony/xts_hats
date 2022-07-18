@@ -19,3 +19,30 @@ posix_interface_bin("sigaltstack_11-1") {
 posix_interface_bin("sigaltstack_12-1") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigaltstack/12-1.c" ]
 }
+posix_interface_bin("sigaltstack_1-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigaltstack/1-1.c" ]
+}
+posix_interface_bin("sigaltstack_2-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigaltstack/2-1.c" ]
+}
+posix_interface_bin("sigaltstack_3-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigaltstack/3-1.c" ]
+}
+posix_interface_bin("sigaltstack_5-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigaltstack/5-1.c" ]
+}
+posix_interface_bin("sigaltstack_6-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigaltstack/6-1.c" ]
+}
+posix_interface_bin("sigaltstack_7-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigaltstack/7-1.c" ]
+}
+posix_interface_bin("sigaltstack_8-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigaltstack/8-1.c" ]
+}
+posix_interface_bin("sigaltstack_9-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigaltstack/9-1.c" ]
+}
+posix_interface_bin("sigaltstack_10-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigaltstack/10-1.c" ]
+}

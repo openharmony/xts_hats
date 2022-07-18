@@ -16,3 +16,33 @@ import(
 posix_interface_bin("shm_unlink_10-1") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/shm_unlink/10-1.c" ]
 }
+posix_interface_bin("shm_unlink_1-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/shm_unlink/1-1.c" ]
+}
+posix_interface_bin("shm_unlink_2-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/shm_unlink/2-1.c" ]
+}
+posix_interface_bin("shm_unlink_3-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/shm_unlink/3-1.c" ]
+}
+posix_interface_bin("shm_unlink_4-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/shm_unlink/4-1.c" ]
+}
+posix_interface_bin("shm_unlink_6-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/shm_unlink/6-1.c" ]
+}
+posix_interface_bin("shm_unlink_7-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/shm_unlink/7-1.c" ]
+}
+posix_interface_bin("shm_unlink_8-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/shm_unlink/8-1.c" ]
+}
+posix_interface_bin("shm_unlink_9-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/shm_unlink/9-1.c" ]
+}
+posix_interface_bin("shm_unlink_10-2") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/shm_unlink/10-2.c" ]
+}
+posix_interface_bin("shm_unlink_11-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/shm_unlink/11-1.c" ]
+}

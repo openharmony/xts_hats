@@ -22,3 +22,6 @@ posix_interface_bin("pthread_condattr_setclock_1-2") {
 posix_interface_bin("pthread_condattr_setclock_2-1") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_condattr_setclock/2-1.c" ]
 }
+posix_interface_bin("pthread_condattr_setclock_1-3") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_condattr_setclock/1-3.c" ]
+}

@@ -22,3 +22,15 @@ posix_interface_bin("pthread_mutex_trylock_3-1") {
 posix_interface_bin("pthread_mutex_trylock_4-1") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_mutex_trylock/4-1.c" ]
 }
+posix_interface_bin("pthread_mutex_trylock_4-2") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_mutex_trylock/4-2.c" ]
+}
+posix_interface_bin("pthread_mutex_trylock_4-3") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_mutex_trylock/4-3.c" ]
+}
+posix_interface_bin("pthread_mutex_trylock_1-2") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_mutex_trylock/1-2.c" ]
+}
+posix_interface_bin("pthread_mutex_trylock_2-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_mutex_trylock/2-1.c" ]
+}

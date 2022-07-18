@@ -16,3 +16,24 @@ import(
 posix_interface_bin("sigwait_4-1") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigwait/4-1.c" ]
 }
+posix_interface_bin("sigwait_2-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigwait/2-1.c" ]
+}
+posix_interface_bin("sigwait_1-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigwait/1-1.c" ]
+}
+posix_interface_bin("sigwait_3-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigwait/3-1.c" ]
+}
+posix_interface_bin("sigwait_6-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigwait/6-1.c" ]
+}
+posix_interface_bin("sigwait_6-2") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigwait/6-2.c" ]
+}
+posix_interface_bin("sigwait_7-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigwait/7-1.c" ]
+}
+posix_interface_bin("sigwait_8-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigwait/8-1.c" ]
+}

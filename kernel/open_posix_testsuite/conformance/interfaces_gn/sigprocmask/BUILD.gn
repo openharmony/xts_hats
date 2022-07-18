@@ -46,3 +46,6 @@ posix_interface_bin("sigprocmask_8-3") {
 posix_interface_bin("sigprocmask_9-1") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigprocmask/9-1.c" ]
 }
+posix_interface_bin("sigprocmask_10-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/sigprocmask/10-1.c" ]
+}

@@ -19,3 +19,6 @@ posix_interface_bin("fsync_5-1") {
 posix_interface_bin("fsync_7-1") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/fsync/7-1.c" ]
 }
+posix_interface_bin("fsync_4-1") {
+  sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/fsync/4-1.c" ]
+}

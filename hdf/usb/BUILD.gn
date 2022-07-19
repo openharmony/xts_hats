@@ -22,5 +22,9 @@ group("HatsHdfUsbTest") {
     "functionTest:HatsHdfUsbFunctionTest",
     "requestTest:HatsHdfUsbRequestTest",
     "transferTest:HatsHdfUsbTransferTest",
+    "usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
+    "usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",
+    "usbdBenchmarkTest:HatsHdfUsbBenchmarkRequestTest",
+    "usbdBenchmarkTest:HatsHdfUsbBenchmarkTransferTest",
   ]
 }

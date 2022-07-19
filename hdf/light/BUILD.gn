@@ -38,7 +38,7 @@ ohos_moduletest_suite("HatsHdfLightHdiTest") {
     "-fno-common",
     "-fno-strict-aliasing",
   ]
-  deps = [ "//drivers/peripheral/misc/light/hal:hdi_light" ]
+  deps = [ "//drivers/peripheral/light/hal:hdi_light" ]
   if (is_standard_system) {
     external_deps = [
       "hdf_core:libhdf_utils",

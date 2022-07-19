@@ -38,7 +38,7 @@ ohos_moduletest_suite("HatsHdfVibratorHdiTest") {
     "-fno-common",
     "-fno-strict-aliasing",
   ]
-  deps = [ "//drivers/peripheral/misc/vibrator/hal:hdi_vibrator" ]
+  deps = [ "//drivers/peripheral/vibrator/hal:hdi_vibrator" ]
   if (is_standard_system) {
     external_deps = [
       "hdf_core:libhdf_utils",

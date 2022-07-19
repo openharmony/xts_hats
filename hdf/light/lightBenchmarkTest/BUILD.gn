@@ -19,7 +19,7 @@ import("//test/xts/tools/build/suite.gni")
 module_output_path = "hdf/light"
 ohos_moduletest_suite("HatsHdfLightbenchmarkTest") {
   module_out_path = module_output_path
-  include_dirs = [ "//drivers/peripheral/misc/light/interfaces/include" ]
+  include_dirs = [ "//drivers/peripheral/light/interfaces/include" ]
 
   sources = [ "hdf_light_benchmark_test.cpp" ]
   cflags = [

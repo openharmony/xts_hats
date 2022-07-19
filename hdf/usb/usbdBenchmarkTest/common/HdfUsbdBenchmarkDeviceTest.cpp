@@ -15,9 +15,9 @@
 #include <string>
 #include <vector>
 
-#include "usbd_device_test.h"
 #include <iostream>
 #include <vector>
+#include "usbd_device_test.h"
 #include "hdf_log.h"
 #include "usbd_client.h"
 #include "UsbSubscriberTest.h"
@@ -46,7 +46,6 @@ void HdfUsbdBenchmarkDeviceTest::SetUp(const ::benchmark::State &state)
         exit(0);
     }
     dev_ = {subscriber->busNum_, subscriber->devAddr_};
-
 }
 
 void HdfUsbdBenchmarkDeviceTest::TearDown(const ::benchmark::State &state) {}

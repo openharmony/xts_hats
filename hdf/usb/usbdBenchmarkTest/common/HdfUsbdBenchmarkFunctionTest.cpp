@@ -15,8 +15,8 @@
 #include <string>
 #include <vector>
 
-#include "usbd_function_test.h"
 #include <iostream>
+#include "usbd_function_test.h"
 #include "hdf_log.h"
 #include "if_system_ability_manager.h"
 #include "system_ability_definition.h"

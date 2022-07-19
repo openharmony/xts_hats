@@ -15,9 +15,9 @@
 #include <string>
 #include <vector>
 
-#include "usbd_transfer_test.h"
 #include <iostream>
 #include <vector>
+#include "usbd_transfer_test.h"
 #include "hdf_log.h"
 #include "usbd_client.h"
 #include "UsbSubscriberTest.h"
@@ -57,7 +57,7 @@ void HdfUsbdBenchmarkTransferTest::SetUp(const ::benchmark::State &state)
     ASSERT_TRUE(ret == 0);
 }
 
-void HdfUsbdBenchmarkTransferTest::TearDown(const ::benchmark::State &state) 
+void HdfUsbdBenchmarkTransferTest::TearDown(const ::benchmark::State &state)
 {
     sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
     if (UsbdClient::GetInstance().BindUsbdSubscriber(subscriber) != UEC_OK) {

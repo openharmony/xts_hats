@@ -21,7 +21,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkDeviceTest") {
   module_out_path = module_output_path
   sources = [
     "../UsbSubscriberTest/UsbSubscriberTest.cpp",
-    "common/hdf_usbd_benchmark_device_test.cpp",
+    "common/HdfUsbdBenchmarkDeviceTest.cpp",
   ]
 
   include_dirs = [
@@ -57,7 +57,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkFunctionTest") {
   module_out_path = module_output_path
   sources = [
     "../UsbSubscriberTest/UsbSubscriberTest.cpp",
-    "common/hdf_usbd_benchmark_function_test.cpp",
+    "common/HdfUsbdBenchmarkFunctionTest.cpp",
   ]
 
   include_dirs = [
@@ -93,7 +93,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkRequestTest") {
   module_out_path = module_output_path
   sources = [
     "../UsbSubscriberTest/UsbSubscriberTest.cpp",
-    "common/hdf_usbd_benchmark_request_test.cpp",
+    "common/HdfUsbdBenchmarkRequestTest.cpp",
   ]
 
   include_dirs = [
@@ -129,7 +129,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkTransferTest") {
   module_out_path = module_output_path
   sources = [
     "../UsbSubscriberTest/UsbSubscriberTest.cpp",
-    "common/hdf_usbd_benchmark_transfer_test.cpp",
+    "common/HdfUsbdBenchmarkTransferTest.cpp",
   ]
 
   include_dirs = [

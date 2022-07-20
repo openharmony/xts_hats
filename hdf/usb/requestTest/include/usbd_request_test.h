@@ -16,6 +16,7 @@
 #define USBD_Request_TEST_H
 
 #include <gtest/gtest.h>
+#include "usb_param.h"
 
 class UsbdRequestTest : public testing::Test {
 public:
@@ -23,5 +24,7 @@ public:
     static void TearDownTestCase();
     void SetUp();
     void TearDown();
+
+    static struct OHOS::USB::UsbDev dev_;
 };
 #endif // USBD_Request_TEST_H

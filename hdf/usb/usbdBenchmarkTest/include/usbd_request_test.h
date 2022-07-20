@@ -12,19 +12,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef USBD_TRANSFER_TEST_H
-#define USBD_TRANSFER_TEST_H
+#ifndef USBD_Request_TEST_H
+#define USBD_Request_TEST_H
 
+#include <benchmark/benchmark.h>
 #include <gtest/gtest.h>
 #include "usb_param.h"
 
-class UsbdTransferTest : public testing::Test {
+class HdfUsbdBenchmarkRequestTest : public benchmark::Fixture {
 public:
-    static void SetUpTestCase();
-    static void TearDownTestCase();
-    void SetUp();
-    void TearDown();
+    void SetUp(const ::benchmark::State &state);
+    void TearDown(const ::benchmark::State &state);
 
     static struct OHOS::USB::UsbDev dev_;
 };
-#endif // USBD_TRANSFER_TEST_H
+#endif // USBD_Request_TEST_H

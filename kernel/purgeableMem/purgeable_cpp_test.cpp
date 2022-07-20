@@ -116,7 +116,11 @@ void PurgeableCppTest::SetUp()
 void PurgeableCppTest::TearDown()
 {
 }
-
+/*
+ * @tc.number MULTI_OBJ_CREAT_Test_0100
+ * @tc.name Test Creat purgeable
+ * @tc.desc [C- SOFTWARE -0200]
+*/
 HWTEST_F(PurgeableCppTest, MultiObjCreateTest, TestSize.Level1)
 {
     const char alphabetFinal[] = "BBCDEFGHIJKLMNOPQRSTUVWXYZ\0";
@@ -150,7 +154,11 @@ HWTEST_F(PurgeableCppTest, MultiObjCreateTest, TestSize.Level1)
         std::cout << __func__ << ": ERROR! BeginRead failed." << std::endl;
     }
 }
-
+/*
+ * @tc.number PURGEABLE_READ_Test_0100
+ * @tc.name Test READ purgeable
+ * @tc.desc [C- SOFTWARE -0200]
+*/
 HWTEST_F(PurgeableCppTest, ReadTest, TestSize.Level1)
 {
     const char alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ\0";
@@ -176,7 +184,11 @@ HWTEST_F(PurgeableCppTest, ReadTest, TestSize.Level1)
     delete pobj;
     pobj = nullptr;
 }
-
+/*
+ * @tc.number PURGEABLE_WRITE_Test_0100
+ * @tc.name Test WRITE purgeable
+ * @tc.desc [C- SOFTWARE -0200]
+*/
 HWTEST_F(PurgeableCppTest, WriteTest, TestSize.Level1)
 {
     const char alphabet[] = "CCCDEFGHIJKLMNOPQRSTUVWXYZ\0";
@@ -203,7 +215,11 @@ HWTEST_F(PurgeableCppTest, WriteTest, TestSize.Level1)
     pobj = nullptr;
     LoopReclaimPurgeable(3);
 }
-
+/*
+ * @tc.number PURGEABLE_READ_Test_0100
+ * @tc.name Test READWRITE purgeable
+ * @tc.desc [C- SOFTWARE -0200]
+*/
 HWTEST_F(PurgeableCppTest, ReadWriteTest, TestSize.Level1)
 {
     const char alphabet[] = "DDDDEFGHIJKLMNOPQRSTUVWXYZ\0";

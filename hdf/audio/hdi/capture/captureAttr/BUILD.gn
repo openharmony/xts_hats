@@ -68,4 +68,7 @@ ohos_moduletest_suite("HatsHdfAudioCaptureAttrTest") {
   if (enable_audio_mpi_service) {
     defines += [ "AUDIO_MPI_SERVICE" ]
   }
+  if ("${product_name}" == "rk3568") {
+    defines += [ "PRODUCT_RK3568" ]
+  }
 }

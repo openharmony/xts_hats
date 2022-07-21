@@ -508,7 +508,7 @@ HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_AudioRenderFrame_0005, Function | Med
     ret = RenderFramePrepare(AUDIO_FILE, frame, requestBytes);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = render->RenderFrame(render, frame, requestBytes, &replyBytes);
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
+    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
 
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
@@ -517,6 +517,7 @@ HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_AudioRenderFrame_0005, Function | Med
         frame = nullptr;
     }
 }
+#ifndef ALSA_LIB_MODE
 /**
 * @tc.name  Test SetChannelMode API via setting channel mode to different enumeration values
 * @tc.number  SUB_Audio_HDI_AudioRenderSetChannelMode_0001
@@ -552,10 +553,14 @@ HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_AudioRenderSetChannelMode_0001, Funct
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_EQ(AUDIO_CHANNEL_BOTH_RIGHT, modeSec);
     ret = render->SetChannelMode(render, modeTrd);
+#ifdef PRODUCT_RK3568
+    EXPECT_EQ(HDF_FAILURE, ret);
+#else
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = render->GetChannelMode(render, &modeTrd);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_EQ(AUDIO_CHANNEL_EXCHANGE, modeTrd);
+#endif
     render->control.Stop((AudioHandle)render);
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
@@ -580,29 +585,46 @@ HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_AudioRenderSetChannelMode_0002, Funct
     ret = AudioCreateStartRender(manager, &render, &adapter, ADAPTER_NAME);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = render->SetChannelMode(render, mode);
+#ifdef PRODUCT_RK3568
+        EXPECT_EQ(HDF_FAILURE, ret);
+#else
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = render->GetChannelMode(render, &mode);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_EQ(AUDIO_CHANNEL_MIX, mode);
+#endif
     ret = render->SetChannelMode(render, modeOne);
+#ifdef PRODUCT_RK3568
+    EXPECT_EQ(HDF_FAILURE, ret);
+#else
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = render->GetChannelMode(render, &modeOne);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_EQ(AUDIO_CHANNEL_LEFT_MUTE, modeOne);
+#endif
     ret = render->SetChannelMode(render, modeSec);
+#ifdef PRODUCT_RK3568
+    EXPECT_EQ(HDF_FAILURE, ret);
+#else
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = render->GetChannelMode(render, &modeSec);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_EQ(AUDIO_CHANNEL_RIGHT_MUTE, modeSec);
+#endif
     ret = render->SetChannelMode(render, modeTrd);
+#ifdef PRODUCT_RK3568
+    EXPECT_EQ(HDF_FAILURE, ret);
+#else
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = render->GetChannelMode(render, &modeTrd);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_EQ(AUDIO_CHANNEL_BOTH_MUTE, modeTrd);
+#endif
     render->control.Stop((AudioHandle)render);
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
 }
+#endif
 /**
 * @tc.name  Test SetChannelMode API via setting channel mode after render object is created
 * @tc.number  SUB_Audio_HDI_AudioRenderSetChannelMode_0003
@@ -1009,6 +1031,7 @@ HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_AudioRenderGetRenderPosition_0009, Fu
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
 }
+#ifndef ALSA_LIB_MODE
 /**
 * @tc.name  Test GetRenderPosition API via define format to AUDIO_FORMAT_PCM_24_BIT
 * @tc.number  SUB_Audio_HDI_AudioRenderGetRenderPosition_0010
@@ -1053,6 +1076,8 @@ HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_AudioRenderGetRenderPosition_0010, Fu
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
 }
+#endif
+#ifndef PRODUCT_RK3568
 /**
 * @tc.name  Test GetRenderPosition API via define sampleRate and channelCount to different value
 * @tc.number  SUB_Audio_HDI_AudioRenderGetRenderPosition_0011
@@ -1141,6 +1166,7 @@ HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_AudioRenderGetRenderPosition_0012, Fu
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
 }
+#endif
 /**
 * @tc.name  Test ReqMmapBuffer API via legal input
 * @tc.number  SUB_Audio_HDI_RenderReqMmapBuffer_0001
@@ -1184,6 +1210,7 @@ HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_RenderReqMmapBuffer_0001, Function | 
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
 }
+#ifndef PRODUCT_RK3568
 /**
 * @tc.name  Test ReqMmapBuffer API via setting the incoming parameter reqSize is bigger than
             the size of actual audio file
@@ -1221,6 +1248,7 @@ HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_RenderReqMmapBuffer_0002, Function | 
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
 }
+#endif
 /**
 * @tc.name  Test ReqMmapBuffer API via setting the incoming parameter reqSize is smaller than
             the size of actual audio file
@@ -1461,6 +1489,7 @@ HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_RenderGetMmapPosition_0001, Function 
     audiopara.adapter->DestroyRender(audiopara.adapter, audiopara.render);
     audiopara.manager->UnloadAdapter(audiopara.manager, audiopara.adapter);
 }
+#ifndef PRODUCT_RK3568
 /**
 * @tc.name  Test GetMmapPosition API via SetSampleAttributes and Getting position is normal.
 * @tc.number  SUB_Audio_HDI_RenderGetMmapPosition_0002
@@ -1508,6 +1537,7 @@ HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_RenderGetMmapPosition_0002, Function 
     audiopara.adapter->DestroyRender(audiopara.adapter, audiopara.render);
     audiopara.manager->UnloadAdapter(audiopara.manager, audiopara.adapter);
 }
+#endif
 /**
 * @tc.name  Test ReqMmapBuffer API via inputtint frame is nullptr.
 * @tc.number  SUB_Audio_HDI_RenderGetMmapPosition_0003

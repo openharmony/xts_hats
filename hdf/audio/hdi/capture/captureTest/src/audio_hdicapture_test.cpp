@@ -688,6 +688,7 @@ HWTEST_F(AudioHdiCaptureTest, SUB_Audio_HDI_AudioCaptureGetCapturePosition_0010,
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
 }
+#ifndef PRODUCT_RK3568
 /**
 * @tc.name  Test GetCapturePosition API via define sampleRate and channelCount to different value
 * @tc.number  SUB_Audio_HDI_AudioCaptureGetCapturePosition_0011
@@ -780,6 +781,7 @@ HWTEST_F(AudioHdiCaptureTest, SUB_Audio_HDI_AudioCaptureGetCapturePosition_0012,
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
 }
+#endif
 /**
 * @tc.name  Test ReqMmapBuffer API via legal input
 * @tc.number  SUB_Audio_HDI_CaptureReqMmapBuffer_0001
@@ -1086,6 +1088,7 @@ HWTEST_F(AudioHdiCaptureTest, SUB_Audio_HDI_CaptureGetMmapPosition_0001, Functio
     audiopara.adapter->DestroyCapture(audiopara.adapter, audiopara.capture);
     audiopara.manager->UnloadAdapter(audiopara.manager, audiopara.adapter);
 }
+#ifndef PRODUCT_RK3568
 /**
 * @tc.name  Test GetMmapPosition API via SetSampleAttributes and Getting position is normal.
 * @tc.number  SUB_Audio_HDI_CaptureGetMmapPosition_0002
@@ -1136,6 +1139,7 @@ HWTEST_F(AudioHdiCaptureTest, SUB_Audio_HDI_CaptureGetMmapPosition_0002, Functio
     audiopara.manager->UnloadAdapter(audiopara.manager, audiopara.adapter);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 }
+#endif
 /**
 * @tc.name  Test ReqMmapBuffer API via inputtint frames is nullptr.
 * @tc.number  SUB_Audio_HDI_CaptureGetMmapPosition_0003

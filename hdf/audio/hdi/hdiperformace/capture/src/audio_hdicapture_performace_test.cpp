@@ -127,7 +127,6 @@ void AudioCaptureBenchmarkTest::TearDown(const ::benchmark::State &state) {
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCreateCapture_0001
 * @tc.devDesc  tests the performace of AudioCreateCapture interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCreateCapture_0001)
     (benchmark::State &st)
@@ -162,7 +161,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioDestroyCapture_0001
 * @tc.devDesc  tests the performace of AudioDestroyCapture interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioDestroyCapture_0001)
     (benchmark::State &st)
@@ -197,7 +195,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCaptureStart_0001
 * @tc.devDesc  tests the performace of AudioCaptureStart interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureStart_0001)
     (benchmark::State &st)
@@ -225,7 +222,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCapturePause_0001
 * @tc.devDesc  tests the performace of AudioCapturePause interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCapturePause_0001)
     (benchmark::State &st)
@@ -257,7 +253,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCaptureResume_0001
 * @tc.devDesc  tests the performace of AudioCaptureResume interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureResume_0001)
     (benchmark::State &st)
@@ -289,7 +284,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCaptureStop_0001
 * @tc.devDesc  tests the performace of AudioCaptureStop interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureStop_0001)
     (benchmark::State &st)
@@ -321,7 +315,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCaptureSetSampleAttributes_0001
 * @tc.devDesc  tests the performace of AudioCaptureSetSampleAttributes interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureSetSampleAttributes_0001)
     (benchmark::State &st)
@@ -353,7 +346,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCaptureCaptureFrame_0001
 * @tc.devDesc  tests the performace of AudioCaptureCaptureFrame interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureCaptureFrame_0001)
     (benchmark::State &st)
@@ -409,7 +401,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCaptureGetSampleAttributes_0001
 * @tc.devDesc  tests the performace of AudioCaptureGetSampleAttributes interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGetSampleAttributes_0001)
     (benchmark::State &st)
@@ -444,7 +435,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCaptureSetMute_0001
 * @tc.devDesc  tests the performace of AudioCaptureSetMute interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureSetMute_0001)
     (benchmark::State &st)
@@ -479,7 +469,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCaptureGetMute_0001
 * @tc.devDesc  tests the performace of AudioCaptureGetMute interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGetMute_0001)
     (benchmark::State &st)
@@ -514,7 +503,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCaptureSetVolume_0001
 * @tc.devDesc  tests the performace of AudioCaptureSetVolume interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureSetVolume_0001)
     (benchmark::State &st)
@@ -550,7 +538,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCaptureGetVolume_0001
 * @tc.devDesc  tests the performace of AudioCaptureGetVolume interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGetVolume_0001)
     (benchmark::State &st)
@@ -586,7 +573,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCaptureGetGain_0001
 * @tc.devDesc  tests the performace of AudioCaptureGetGain interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGetGain_0001)
     (benchmark::State &st)
@@ -622,7 +608,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCaptureSetGain_0001
 * @tc.devDesc  tests the performace of AudioCaptureSetGain interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureSetGain_0001)
     (benchmark::State &st)
@@ -657,7 +642,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCaptureGetCurrentChannelId_0001
 * @tc.devDesc  tests the performace of AudioCaptureGetCurrentChannelId interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGetCurrentChannelId_0001)
     (benchmark::State &st)
@@ -690,7 +674,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCaptureGetFrameCount_0001
 * @tc.devDesc  tests the performace of AudioCaptureGetFrameCount interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGetFrameCount_0001)
     (benchmark::State &st)
@@ -723,7 +706,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCaptureGetFrameSize_0001
 * @tc.devDesc  tests the performace of AudioCaptureGetFrameSize interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGetFrameSize_0001)
     (benchmark::State &st)
@@ -756,7 +738,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCaptureFlush_0001
 * @tc.devDesc  tests the performace of AudioCaptureFlush interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureFlush_0001)
     (benchmark::State &st)
@@ -789,7 +770,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCaptureGetGainThreshold_0001
 * @tc.devDesc  tests the performace of AudioCaptureGetGainThreshold interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGetGainThreshold_0001)
     (benchmark::State &st)
@@ -825,7 +805,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCaptureCheckSceneCapability_0001
 * @tc.devDesc  tests the performace of AudioCaptureCheckSceneCapability interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureCheckSceneCapability_0001)
     (benchmark::State &st)
@@ -863,7 +842,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCaptureSelectScene_0001
 * @tc.devDesc  tests the performace of AudioCaptureSelectScene interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureSelectScene_0001)
     (benchmark::State &st)
@@ -900,7 +878,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioGetCapturePosition_0001
 * @tc.devDesc  tests the performace of AudioCaptureGetCapturePosition interface by executing 100 times,
 *              and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioGetCapturePosition_0001)
     (benchmark::State &st)
@@ -934,7 +911,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCaptureSetExtraParams_0001
 * @tc.desc  tests the performace of AudioCaptureSetExtraParams interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureSetExtraParams_0001)
     (benchmark::State &st)
@@ -966,7 +942,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCaptureGetExtraParams_0001
 * @tc.desc  tests the performace of AudioCaptureGetExtraParams interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGetExtraParams_0001)
     (benchmark::State &st)
@@ -1006,7 +981,6 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_Audio
 * @tc.number  SUB_DriverSystem_Benchmark_AudioCaptureGetMmapPosition_0001
 * @tc.desc  tests the performace of AudioCaptureGetMmapPosition interface by executing 100 times,
 *           and calculates the delay time and average of Delay Time.
-* @tc.author: liutian
 */
 BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGetMmapPosition_0001)
     (benchmark::State &st)

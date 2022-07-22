@@ -32,7 +32,7 @@ ohos_moduletest_suite("HatsHdfManagerServiceTest") {
   external_deps = [
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_core",
-    "samgr_standard:samgr_proxy",
+    "samgr:samgr_proxy",
     "utils_base:utils",
   ]
 }

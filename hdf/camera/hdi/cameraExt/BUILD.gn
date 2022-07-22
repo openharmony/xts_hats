@@ -57,7 +57,7 @@ ohos_moduletest_suite("HatsHdfCameraExtTest") {
 
     #producer
     "//utils/native/base/include",
-    "//foundation/distributedschedule/samgr/interfaces/innerkits/samgr_proxy/include",
+    "//foundation/systemabilitymgr/samgr/interfaces/innerkits/samgr_proxy/include",
     "$camera_path/pipeline_core/utils",
     "$camera_path/pipeline_core/include",
     "$camera_path/pipeline_core/host_stream/include",
@@ -106,7 +106,7 @@ ohos_moduletest_suite("HatsHdfCameraExtTest") {
   external_deps += [
     "init:libbegetutil",
     "ipc:ipc_single",
-    "samgr_standard:samgr_proxy",
+    "samgr:samgr_proxy",
   ]
 
   public_configs = [ ":cameraTest_config" ]

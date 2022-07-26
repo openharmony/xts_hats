@@ -28,7 +28,7 @@
 #include <sys/prctl.h>
 #include <sys/utsname.h>
 #include <string>
-
+#include "securec.h"
 #ifndef PR_SET_VMA
 const PR_SET_VMA 0x53564d41
 #endif

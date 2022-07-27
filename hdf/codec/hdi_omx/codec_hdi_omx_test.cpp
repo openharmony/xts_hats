@@ -592,7 +592,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0220, Function | MediumTe
                                          reinterpret_cast<int8_t *>(&pixFormat), sizeof(pixFormat));
     ASSERT_EQ(ret, HDF_SUCCESS);
     pixFormat.codecColorFormat = PIXEL_FMT_RGB_555;
-     ret = g_component->SetParameter(g_component, OMX_IndexCodecVideoPortFormat, reinterpret_cast<int8_t *>(&pixFormat),
+    ret = g_component->SetParameter(g_component, OMX_IndexCodecVideoPortFormat, reinterpret_cast<int8_t *>(&pixFormat),
                                     sizeof(pixFormat));
     ASSERT_EQ(ret, HDF_SUCCESS);
 }

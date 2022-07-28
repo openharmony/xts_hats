@@ -20,7 +20,6 @@ group("kernel") {
   if (is_standard_system) {
     deps = [
       "accesstokenid:HatsAccesstokenidTest",
-      "account_manager:HatsAccountManager",
       "cam:HatsCamTest",
       "memtracker:HatsMemoryTrackerTest",
       "open_posix_testsuite/conformance/interfaces_gn:${posix_interface_module}",

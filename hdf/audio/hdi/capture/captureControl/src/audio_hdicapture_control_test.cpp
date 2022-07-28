@@ -316,7 +316,6 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioCreateCapture_0009, Func
 * @tc.name  Test AudioCreateCapture API via setting the incoming parameter desc which portID is not configed
 * @tc.number  SUB_Audio_HDI_AudioCreateCapture_0010
 * @tc.desc  Test AudioCreateCapture interface,Returns -1 if the incoming parameter desc which portID is not configed
-* @tc.author: liweiming
 */
 HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioCreateCapture_0010, TestSize.Level1)
 {

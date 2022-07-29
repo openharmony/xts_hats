@@ -452,7 +452,6 @@ HWTEST_F(WifiHalTest, SUB_DriverSystem_WifiHdi_0230, Function | MediumTest | Lev
  * @tc.name: WifiHalGetDeviceMacAddress001
  * @tc.desc: Get device Mac address for ap mode
  * @tc.type: FUNC
- * @tc.require: AR000F869G
  */
 HWTEST_F(WifiHalTest, SUB_DriverSystem_WifiHdi_0240, Function | MediumTest | Level1)
 {

@@ -58,7 +58,7 @@ ohos_moduletest_suite("HatsHdfAudioCaptureBenchmarkTest") {
     "//third_party/googletest:gtest_main",
   ]
   defines = []
-  external_deps = [ "utils_base:utils" ]
+  external_deps = [ "c_utils:utils" ]
   if (enable_audio_adm_passthrough) {
     defines += [ "AUDIO_ADM_SO" ]
   }

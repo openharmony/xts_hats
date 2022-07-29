@@ -19,10 +19,8 @@ ohos_moduletest_suite("HatsAccesstokenidTest") {
   module_out_path = module_output_path
   sources = [ "./accesstokenid_test.cpp" ]
 
-  deps = [
-    "//third_party/googletest:gtest_main",
-    "//utils/native/base:utils",
-  ]
+  deps = [ "//third_party/googletest:gtest_main" ]
 
   cflags = [ "-Wno-error" ]
+  external_deps = [ "c_utils:utils" ]
 }

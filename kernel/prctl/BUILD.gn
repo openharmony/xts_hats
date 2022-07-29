@@ -17,13 +17,11 @@ module_output_path = "hats/prctl"
 ohos_moduletest_suite("HatsPrctlTest") {
   module_out_path = module_output_path
   sources = [ "./PrctlApiTest.cpp" ]
-  deps = [
-    "//third_party/googletest:gtest_main",
-    "//utils/native/base:utils",
-  ]
+  deps = [ "//third_party/googletest:gtest_main" ]
   include_dirs = [
     "//test/xts/tools/hctest/include",
     "//utils/",
   ]
   cflags = [ "-Wno-error" ]
+  external_deps = [ "c_utils:utils" ]
 }

@@ -53,11 +53,6 @@ public:
     void TearDown();
     static TestAudioManager *(*GetAudioManager)();
     static void *handleSo;
-#ifdef AUDIO_MPI_SO
-    static int32_t (*SdkInit)();
-    static void (*SdkExit)();
-    static void *sdkSo;
-#endif
 
     static int32_t GetLoadAdapterAudioPara(struct PrepareAudioPara& audiopara);
 };
@@ -66,30 +61,9 @@ using THREAD_FUNC = void *(*)(void *);
 
 TestAudioManager *(*AudioHdiCaptureTest::GetAudioManager)() = nullptr;
 void *AudioHdiCaptureTest::handleSo = nullptr;
-#ifdef AUDIO_MPI_SO
-    int32_t (*AudioHdiCaptureTest::SdkInit)() = nullptr;
-    void (*AudioHdiCaptureTest::SdkExit)() = nullptr;
-    void *AudioHdiCaptureTest::sdkSo = nullptr;
-#endif
 
 void AudioHdiCaptureTest::SetUpTestCase(void)
 {
-#ifdef AUDIO_MPI_SO
-    char sdkResolvedPath[] = HDF_LIBRARY_FULL_PATH("libhdi_audio_interface_lib_render");
-    sdkSo = dlopen(sdkResolvedPath, RTLD_LAZY);
-    if (sdkSo == nullptr) {
-        return;
-    }
-    SdkInit = (int32_t (*)())(dlsym(sdkSo, "MpiSdkInit"));
-    if (SdkInit == nullptr) {
-        return;
-    }
-    SdkExit = (void (*)())(dlsym(sdkSo, "MpiSdkExit"));
-    if (SdkExit == nullptr) {
-        return;
-    }
-    SdkInit();
-#endif
     char absPath[PATH_MAX] = {0};
     if (realpath(RESOLVED_PATH.c_str(), absPath) == nullptr) {
         return;
@@ -106,19 +80,6 @@ void AudioHdiCaptureTest::SetUpTestCase(void)
 
 void AudioHdiCaptureTest::TearDownTestCase(void)
 {
-#ifdef AUDIO_MPI_SO
-    SdkExit();
-    if (sdkSo != nullptr) {
-        dlclose(sdkSo);
-        sdkSo = nullptr;
-    }
-    if (SdkInit != nullptr) {
-        SdkInit = nullptr;
-    }
-    if (SdkExit != nullptr) {
-        SdkExit = nullptr;
-    }
-#endif
     if (handleSo != nullptr) {
         dlclose(handleSo);
         handleSo = nullptr;
@@ -962,7 +923,7 @@ HWTEST_F(AudioHdiCaptureTest, SUB_Audio_HDI_CaptureReqMmapBuffer_0005, Function 
     ret =  capture->control.Start((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret =  capture->attr.ReqMmapBuffer((AudioHandle)capture, reqSize, &desc);
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
+    EXPECT_NE(AUDIO_HAL_SUCCESS, ret);
     (void)fclose(fp);
     capture->control.Stop((AudioHandle)capture);
     adapter->DestroyCapture(adapter, capture);
@@ -1081,8 +1042,8 @@ HWTEST_F(AudioHdiCaptureTest, SUB_Audio_HDI_CaptureGetMmapPosition_0001, Functio
     EXPECT_EQ(AUDIO_HAL_SUCCESS, (intptr_t)result);
     ret = audiopara.capture->attr.GetMmapPosition(audiopara.capture, &framesExpCapture, &(audiopara.time));
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_GT((audiopara.time.tvSec) * SECTONSEC + (audiopara.time.tvNSec), timeExpCaptureing);
-    EXPECT_GT(framesExpCapture, framesCapturing);
+    EXPECT_GE((audiopara.time.tvSec) * SECTONSEC + (audiopara.time.tvNSec), timeExpCaptureing);
+    EXPECT_GE(framesExpCapture, framesCapturing);
 
     audiopara.capture->control.Stop((AudioHandle)audiopara.capture);
     audiopara.adapter->DestroyCapture(audiopara.adapter, audiopara.capture);

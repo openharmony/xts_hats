@@ -51,21 +51,11 @@ namespace Audio {
     const std::string RESOLVED_PATH = HDF_LIBRARY_FULL_PATH("libhdi_audio");
     const int IS_ADM = true;
 #endif
-#ifdef AUDIO_MPI_SO
-    const std::string FUNCTION_NAME = "GetAudioManagerFuncs";
-    const std::string RESOLVED_PATH = HDF_LIBRARY_FULL_PATH("libhdi_audio");
-    const int IS_ADM = false;
-#endif
 #ifdef AUDIO_ADM_SERVICE
     const std::string FUNCTION_NAME = "GetAudioManagerFuncs";
     const std::string RESOLVED_PATH = HDF_LIBRARY_FULL_PATH("libhdi_audio_client");
     using TestAudioManager = struct AudioManager;
     const int IS_ADM = true;
-#endif
-#ifdef AUDIO_MPI_SERVICE
-    const std::string FUNCTION_NAME = "GetAudioManagerFuncs";
-    const std::string RESOLVED_PATH = HDF_LIBRARY_FULL_PATH("libhdi_audio_client");
-    const int IS_ADM = false;
 #endif
 #ifdef __LITEOS__
     const std::string FUNCTION_NAME = "GetAudioManagerFuncs";
@@ -112,6 +102,7 @@ const int AUDIO_FLUSH_COMPLETED_VALUE = 3;
 const int64_t SECTONSEC = 1000000000;
 const int MICROSECOND = 1000000;
 const int RANGE = 3;
+const uint32_t DEFAULT_BUFFER_SIZE = 2048;
 const std::string HDF_CONTROL_SERVICE = "hdf_audio_control";
 const std::string HDF_RENDER_SERVICE = "hdf_audio_render";
 const std::string HDF_CAPTURE_SERVICE = "hdf_audio_capture";

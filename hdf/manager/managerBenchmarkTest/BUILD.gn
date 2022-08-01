@@ -32,9 +32,9 @@ ohos_moduletest_suite("HatsHdfManagerbenchmarkTest") {
 
   include_dirs = [ "$hdf_uhdf_path/host/test/unittest/sample_driver" ]
   external_deps = [
+    "c_utils:utils",
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_core",
     "samgr:samgr_proxy",
-    "utils_base:utils",
   ]
 }

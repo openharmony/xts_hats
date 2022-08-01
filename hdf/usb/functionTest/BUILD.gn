@@ -38,6 +38,7 @@ ohos_moduletest_suite("HatsHdfUsbFunctionTest") {
   external_deps = [
     "ability_base:want",
     "bundle_framework:appexecfwk_base",
+    "c_utils:utils",
     "common_event_service:cesfwk_innerkits",
     "eventhandler:libeventhandler",
     "hdf_core:libhdf_utils",
@@ -45,6 +46,5 @@ ohos_moduletest_suite("HatsHdfUsbFunctionTest") {
     "ipc:ipc_single",
     "safwk:system_ability_fwk",
     "samgr:samgr_proxy",
-    "utils_base:utils",
   ]
 }

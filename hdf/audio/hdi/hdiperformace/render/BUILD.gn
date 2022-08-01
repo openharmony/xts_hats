@@ -58,22 +58,12 @@ ohos_moduletest_suite("HatsHdfAudioRenderBenchmarkTest") {
     "//third_party/googletest:gtest_main",
   ]
   defines = []
-  external_deps = [ "utils_base:utils" ]
-  if (enable_audio_adm_so) {
+  external_deps = [ "c_utils:utils" ]
+  if (enable_audio_adm_passthrough) {
     defines += [ "AUDIO_ADM_SO" ]
-  }
-  if (enable_audio_mpi_so) {
-    defines += [ "AUDIO_MPI_SO" ]
   }
   if (enable_audio_adm_service) {
     defines += [ "AUDIO_ADM_SERVICE" ]
   }
-  if (enable_audio_mpi_service) {
-    defines += [ "AUDIO_MPI_SERVICE" ]
-  }
-
-  # if (enable_audio_hal_notsupport_pathselect) {
-  #   defines += [ "AUDIO_HAL_NOTSUPPORT_PATHSELECT" ]
-  # }
 }
 ###########################end###########################

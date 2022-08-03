@@ -141,36 +141,13 @@ BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0020)(benchmar
     int32_t ret;
     for (auto _ : st) {
         ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_medicalCallback);
-    }
         EXPECT_EQ(SENSOR_SUCCESS, ret);
         ret = g_sensorInterface->Unregister(TRADITIONAL_SENSOR_TYPE, g_medicalCallback);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
+    }
 }
 
 BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0020)->
-    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
-
-/**
-  * @tc.name: SUB_DriverSystem_SensorBenchmark_0030
-  * @tc.desc: Benchmarktest for interface Unregister.
-  * Returns 0 if the callback is successfully registered; returns a negative value otherwise.
-  * @tc.type: FUNC
-  */
-BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0030)(benchmark::State &st)
-{
-    if (g_sensorInterface == nullptr) {
-        ASSERT_NE(nullptr, g_sensorInterface);
-        return;
-    }
-    int32_t ret;
-    ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_medicalCallback);
-    EXPECT_EQ(SENSOR_SUCCESS, ret);
-    for (auto _ : st) {
-        ret = g_sensorInterface->Unregister(TRADITIONAL_SENSOR_TYPE, g_medicalCallback);
-    }
-}
-
-BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0030)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**

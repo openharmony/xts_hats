@@ -537,7 +537,7 @@ int32_t RenderFramePrepare(const std::string &path, char *&frame, uint64_t &read
 {
     int32_t ret = -1;
     size_t numRead = 0;
-    uint32_t bufferSize = DEFAULT_BUFFER_SIZE;
+    uint32_t bufferSize = 2048;
     uint32_t remainingDataSize = 0;
     struct AudioSampleAttributes attrs = {};
     struct AudioHeadInfo headInfo = {};

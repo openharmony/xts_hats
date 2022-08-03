@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -42,9 +42,8 @@
 #include "audio_types.h"
 #include "hdf_io_service_if.h"
 #include "hdf_sbuf.h"
-#include "audio_manager.h"
 
-namespace HMOS {
+namespace OHOS {
 namespace Audio {
 #ifdef AUDIO_ADM_SO
     const std::string FUNCTION_NAME = "GetAudioManagerFuncs";
@@ -66,14 +65,14 @@ namespace Audio {
     const std::string AUDIO_CAPTURE_FILE = "/userdata/audiocapture.wav";
     const std::string AUDIO_LOW_LATENCY_CAPTURE_FILE = "/userdata/lowlatencycapturetest.wav";
 #else
-    const std::string AUDIO_FILE = "//data/audiorendertest.wav";
-    const std::string LOW_LATENCY_AUDIO_FILE = "//data/lowlatencyrendertest.wav";
-    const std::string AUDIO_CAPTURE_FILE = "//data/audiocapture.wav";
-    const std::string AUDIO_LOW_LATENCY_CAPTURE_FILE = "//data/lowlatencycapturetest.wav";
+    const std::string AUDIO_FILE = "/data/audiorendertest.wav";
+    const std::string LOW_LATENCY_AUDIO_FILE = "/data/lowlatencyrendertest.wav";
+    const std::string AUDIO_CAPTURE_FILE = "/data/audiocapture.wav";
+    const std::string AUDIO_LOW_LATENCY_CAPTURE_FILE = "/data/lowlatencycapturetest.wav";
 #endif
-
 const std::string ADAPTER_NAME = "primary";
 const std::string ADAPTER_NAME_OUT = "primary_ext";
+
 using TestAudioManager = struct AudioManager;
 const std::string AUDIO_RIFF = "RIFF";
 const std::string AUDIO_WAVE = "WAVE";
@@ -102,18 +101,25 @@ const int AUDIO_FLUSH_COMPLETED_VALUE = 3;
 const int64_t SECTONSEC = 1000000000;
 const int MICROSECOND = 1000000;
 const int RANGE = 3;
-const uint32_t DEFAULT_BUFFER_SIZE = 2048;
 const std::string HDF_CONTROL_SERVICE = "hdf_audio_control";
 const std::string HDF_RENDER_SERVICE = "hdf_audio_render";
 const std::string HDF_CAPTURE_SERVICE = "hdf_audio_capture";
 
-const int AUDIODRV_CTL_ELEM_IFACE_DAC = 0; /* virtual dac device */
-const int AUDIODRV_CTL_ELEM_IFACE_ADC = 1; /* virtual adc device */
-const int AUDIODRV_CTL_ELEM_IFACE_GAIN = 2; /* virtual gain device */
-const int AUDIODRV_CTL_ELEM_IFACE_MIXER = 3; /* virtual mixer device */
-const int AUDIODRV_CTL_ELEM_IFACE_ACODEC = 4; /* Acodec device */
-const int AUDIODRV_CTL_ELEM_IFACE_PGA = 5; /* PGA device */
-const int AUDIODRV_CTL_ELEM_IFACE_AIAO = 6; /* AIAO device */
+const int AUDIODRV_CTL_ELEM_IFACE_MIXER = 2; /* virtual adc device */
+
+constexpr int SAMPLE_RATE_8000 = 8000;
+constexpr int SAMPLE_RATE_11025 = 11025;
+constexpr int SAMPLE_RATE_22050 = 22050;
+constexpr int SAMPLE_RATE_32000 = 32000;
+constexpr int SAMPLE_RATE_44100 = 44100;
+constexpr int SAMPLE_RATE_48000 = 48000;
+constexpr int SAMPLE_RATE_12000 = 12000;
+constexpr int SAMPLE_RATE_16000 = 16000;
+constexpr int SAMPLE_RATE_24000 = 24000;
+constexpr int SAMPLE_RATE_64000 = 64000;
+constexpr int SAMPLE_RATE_96000 = 96000;
+constexpr int DOUBLE_CHANNEL_COUNT = 2;
+constexpr int SINGLE_CHANNEL_COUNT = 1;
 
 enum ControlDispMethodCmd {
     AUDIODRV_CTRL_IOCTRL_ELEM_INFO,
@@ -122,12 +128,13 @@ enum ControlDispMethodCmd {
     AUDIODRV_CTRL_IOCTRL_ELEM_BUTT,
 };
 
-enum AudioPCMBit {
-    PCM_8_BIT  = 8,
-    PCM_16_BIT = 16,
-    PCM_24_BIT = 24,
-    PCM_32_BIT = 32,
-};
+constexpr int PCM_8_BIT  = 8;
+constexpr int PCM_16_BIT = 16;
+constexpr int PCM_24_BIT = 24;
+constexpr int PCM_32_BIT = 32;
+
+constexpr int PCM_BYTE_MIN = 1024;
+constexpr int PCM_BYTE_MAX = 8 * 1024;
 
 struct AudioCtlElemId {
     const char *cardServiceName;
@@ -212,12 +219,12 @@ struct PrepareAudioPara {
 
 int32_t InitAttrs(struct AudioSampleAttributes &attrs);
 
-int32_t InitDevDesc(struct AudioDeviceDescriptor &devDesc, const uint32_t portId, enum AudioPortPin pins);
+int32_t InitDevDesc(struct AudioDeviceDescriptor &devDesc, const uint32_t portId, int pins);
 
 int32_t SwitchAdapter(struct AudioAdapterDescriptor *descs, const std::string &adapterNameCase,
-    enum AudioPortDirection portFlag, struct AudioPort *&audioPort, int size);
+    int portFlag, struct AudioPort *&audioPort, int size);
 
-uint32_t PcmFormatToBits(enum AudioFormat format);
+uint32_t PcmFormatToBits(int format);
 
 uint32_t PcmFramesToBytes(const struct AudioSampleAttributes attrs);
 
@@ -225,13 +232,13 @@ int32_t WavHeadAnalysis(struct AudioHeadInfo &wavHeadInfo, FILE *file, struct Au
 
 int32_t GetAdapters(TestAudioManager *manager, struct AudioAdapterDescriptor **descs, int &size);
 
-int32_t GetLoadAdapter(TestAudioManager *manager, enum AudioPortDirection portType,
+int32_t GetLoadAdapter(TestAudioManager *manager, int portType,
     const std::string &adapterName, struct AudioAdapter **adapter, struct AudioPort *&audioPort);
 
-int32_t AudioCreateRender(TestAudioManager *manager, enum AudioPortPin pins, const std::string &adapterName,
+int32_t AudioCreateRender(TestAudioManager *manager, int pins, const std::string &adapterName,
     struct AudioAdapter **adapter, struct AudioRender **render);
 
-int32_t AudioCreateCapture(TestAudioManager *manager, enum AudioPortPin pins, const std::string &adapterName,
+int32_t AudioCreateCapture(TestAudioManager *manager, int pins, const std::string &adapterName,
     struct AudioAdapter **adapter, struct AudioCapture **capture);
 
 int32_t FrameStart(struct AudioHeadInfo wavHeadInfo, struct AudioRender *render, FILE *file,
@@ -272,8 +279,8 @@ int32_t PlayAudioFile(struct PrepareAudioPara &audiopara);
 
 int32_t RecordAudio(struct PrepareAudioPara &audiopara);
 
-int32_t InitAttrsUpdate(struct AudioSampleAttributes &attrs, enum AudioFormat format, uint32_t channelCount,
-    uint32_t sampleRate);
+int32_t InitAttrsUpdate(struct AudioSampleAttributes &attrs, int format, uint32_t channelCount,
+    uint32_t sampleRate, uint32_t silenceThreshold = BUFFER_LENTH);
 
 int32_t AudioRenderSetGetSampleAttributes(struct AudioSampleAttributes attrs, struct AudioSampleAttributes &attrsValue,
     struct AudioRender *render);

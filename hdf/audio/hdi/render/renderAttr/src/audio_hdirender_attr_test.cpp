@@ -38,7 +38,7 @@
 
 using namespace std;
 using namespace testing::ext;
-using namespace HMOS::Audio;
+using namespace OHOS::Audio;
 
 namespace {
 class AudioHdiRenderAttrTest : public testing::Test {
@@ -1306,7 +1306,6 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetCurrentChannelId_0005, F
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
 }
-#if defined (AUDIO_ADM_SERVICE) || defined (AUDIO_ADM_SO) || defined (__LITEOS__)
 /**
 * @tc.name  Test RenderSetExtraParams API via setting ExtraParams during playback
 * @tc.number  SUB_Audio_HDI_RenderSetExtraParams_0001
@@ -1690,5 +1689,99 @@ attr-sampling-rate=48000";
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
 }
+/**
+    * @tc.name  Test RenderAddAudioEffect API via legal input
+    * @tc.number  SUB_Audio_HDI_RenderAddAudioEffect_0001
+    * @tc.desc  Test RenderAddAudioEffect interface,return 0 if set the legal parameter
+*/
+HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderAddAudioEffect_0001, TestSize.Level1)
+{
+    int32_t ret = -1;
+    struct AudioAdapter *adapter = nullptr;
+    struct AudioRender *render = nullptr;
+    uint64_t effectid = 14;
+    ASSERT_NE(nullptr, GetAudioManager);
+    TestAudioManager* manager = GetAudioManager();
+    ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
+    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
+    ret = render->attr.AddAudioEffect((AudioHandle)render, effectid);
+    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
+
+    adapter->DestroyRender(adapter, render);
+    manager->UnloadAdapter(manager, adapter);
+}
+/**
+    * @tc.name  Test RenderAddAudioEffect API via setting the parameter render is nullptr
+    * @tc.number  SUB_Audio_HDI_RenderAddAudioEffect_0001
+    * @tc.desc  Test RenderAddAudioEffect interface,return -3 if set the parameter render is nullptr
+*/
+HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderAddAudioEffect_0002, TestSize.Level1)
+{
+    int32_t ret = -1;
+    struct AudioAdapter *adapter = nullptr;
+    struct AudioRender *render = nullptr;
+    struct AudioRender *renderNull = nullptr;
+    uint64_t effectid = 14;
+    ASSERT_NE(nullptr, GetAudioManager);
+    TestAudioManager* manager = GetAudioManager();
+    ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
+    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
+    ret = render->attr.AddAudioEffect((AudioHandle)renderNull, effectid);
+#ifdef AUDIO_ADM_SERVICE
+    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
+#else
+    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 #endif
+    adapter->DestroyRender(adapter, render);
+    manager->UnloadAdapter(manager, adapter);
+}
+/**
+    * @tc.name  Test RenderAddAudioEffect API via legal input
+    * @tc.number  SUB_Audio_HDI_RenderRemoveAudioEffect_0001
+    * @tc.desc  Test RenderAddAudioEffect interface,return -3 if set the legal parameter
+*/
+HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderRemoveAudioEffect_0001, TestSize.Level1)
+{
+    int32_t ret = -1;
+    struct AudioAdapter *adapter = nullptr;
+    struct AudioRender *render = nullptr;
+    uint64_t effectid = 14;
+    ASSERT_NE(nullptr, GetAudioManager);
+    TestAudioManager* manager = GetAudioManager();
+    ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
+    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
+    ret = render->attr.AddAudioEffect((AudioHandle)render, effectid);
+    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
+    ret = render->attr.RemoveAudioEffect((AudioHandle)render, effectid);
+    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
+
+    adapter->DestroyRender(adapter, render);
+    manager->UnloadAdapter(manager, adapter);
+}
+/**
+    * @tc.name  Test RenderAddAudioEffect API via setting the parameter render is nullptr
+    * @tc.number  SUB_Audio_HDI_RenderAddAudioEffect_0002
+    * @tc.desc  Test RenderAddAudioEffect interface,return -3 if setting the parameter render is nullptr
+*/
+HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderRemoveAudioEffect_0002, TestSize.Level1)
+{
+    int32_t ret = -1;
+    struct AudioAdapter *adapter = nullptr;
+    struct AudioRender *render = nullptr;
+    struct AudioRender *renderNull = nullptr;
+    uint64_t effectid = 14;
+    ASSERT_NE(nullptr, GetAudioManager);
+    TestAudioManager* manager = GetAudioManager();
+    ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
+    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
+    ret = render->attr.RemoveAudioEffect((AudioHandle)renderNull, effectid);
+#ifdef AUDIO_ADM_SERVICE
+    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
+#else
+    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
+#endif
+
+    adapter->DestroyRender(adapter, render);
+    manager->UnloadAdapter(manager, adapter);
+}
 }

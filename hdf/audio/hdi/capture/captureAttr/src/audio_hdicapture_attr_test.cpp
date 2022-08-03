@@ -38,7 +38,7 @@
 
 using namespace std;
 using namespace testing::ext;
-using namespace HMOS::Audio;
+using namespace OHOS::Audio;
 
 namespace {
 class AudioHdiCaptureAttrTest : public testing::Test {
@@ -1355,7 +1355,6 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureGetCurrentChannelId_0005,
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
 }
-#if defined (AUDIO_ADM_SERVICE) || defined (AUDIO_ADM_SO) || defined (__LITEOS__)
 /**
     * @tc.name  Test CaptureSetExtraParams API via setting ExtraParams during playback
     * @tc.number  SUB_Audio_HDI_CaptureSetExtraParams_0001
@@ -1742,5 +1741,100 @@ attr-sampling-rate=48000";
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
 }
+/**
+    * @tc.name  Test CaptureAddAudioEffect API via legal input
+    * @tc.number  SUB_Audio_HDI_CaptureAddAudioEffect_0001
+    * @tc.desc  Test CaptureAddAudioEffect interface,return 0 if set the legal parameter
+*/
+HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureAddAudioEffect_0001, TestSize.Level1)
+{
+    int32_t ret = -1;
+    struct AudioAdapter *adapter = nullptr;
+    struct AudioCapture *capture = nullptr;
+    uint64_t effectid = 14;
+    ASSERT_NE(nullptr, GetAudioManager);
+    TestAudioManager* manager = GetAudioManager();
+    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
+    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
+    ret = capture->attr.AddAudioEffect((AudioHandle)capture, effectid);
+    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
+
+    adapter->DestroyCapture(adapter, capture);
+    manager->UnloadAdapter(manager, adapter);
+}
+/**
+    * @tc.name  Test CaptureAddAudioEffect API via setting the parameter Capture is nullptr
+    * @tc.number  SUB_Audio_HDI_CaptureAddAudioEffect_0001
+    * @tc.desc  Test CaptureAddAudioEffect interface,return -3 if set the parameter Capture is nullptr
+*/
+HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureAddAudioEffect_0002, TestSize.Level1)
+{
+    int32_t ret = -1;
+    struct AudioAdapter *adapter = nullptr;
+    struct AudioCapture *capture = nullptr;
+    struct AudioCapture *captureNull = nullptr;
+    uint64_t effectid = 14;
+    ASSERT_NE(nullptr, GetAudioManager);
+    TestAudioManager* manager = GetAudioManager();
+    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
+    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
+    ret = capture->attr.AddAudioEffect((AudioHandle)captureNull, effectid);
+#ifdef AUDIO_ADM_SERVICE
+    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
+#else
+    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 #endif
+
+    adapter->DestroyCapture(adapter, capture);
+    manager->UnloadAdapter(manager, adapter);
+}
+/**
+    * @tc.name  Test CaptureRemoveAudioEffect API via legal input
+    * @tc.number  SUB_Audio_HDI_CaptureRemoveAudioEffect_0001
+    * @tc.desc  Test CaptureAddAudioEffect interface,return 0 if set the legal parameter
+*/
+HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureRemoveAudioEffect_0001, TestSize.Level1)
+{
+    int32_t ret = -1;
+    struct AudioAdapter *adapter = nullptr;
+    struct AudioCapture *capture = nullptr;
+    uint64_t effectid = 14;
+    ASSERT_NE(nullptr, GetAudioManager);
+    TestAudioManager* manager = GetAudioManager();
+    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
+    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
+    ret = capture->attr.AddAudioEffect((AudioHandle)capture, effectid);
+    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
+    ret = capture->attr.RemoveAudioEffect((AudioHandle)capture, effectid);
+    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
+
+    adapter->DestroyCapture(adapter, capture);
+    manager->UnloadAdapter(manager, adapter);
+}
+/**
+    * @tc.name  Test CaptureAddAudioEffect API via setting the parameter Capture is nullptr
+    * @tc.number  SUB_Audio_HDI_CaptureAddAudioEffect_0002
+    * @tc.desc  Test CaptureAddAudioEffect interface,return -3 if setting the parameter Capture is nullptr
+*/
+HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureRemoveAudioEffect_0002, TestSize.Level1)
+{
+    int32_t ret = -1;
+    struct AudioAdapter *adapter = nullptr;
+    struct AudioCapture *capture = nullptr;
+    struct AudioCapture *captureNull = nullptr;
+    uint64_t effectid = 14;
+    ASSERT_NE(nullptr, GetAudioManager);
+    TestAudioManager* manager = GetAudioManager();
+    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
+    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
+    ret = capture->attr.RemoveAudioEffect((AudioHandle)captureNull, effectid);
+#ifdef AUDIO_ADM_SERVICE
+    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
+#else
+    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
+#endif
+
+    adapter->DestroyCapture(adapter, capture);
+    manager->UnloadAdapter(manager, adapter);
+}
 }

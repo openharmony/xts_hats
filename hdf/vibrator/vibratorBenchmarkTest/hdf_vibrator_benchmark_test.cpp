@@ -30,8 +30,8 @@ using namespace std;
 
 namespace {
     uint32_t g_duration = 1;
-    uint32_t g_sleepTime1 = 2;
-    uint32_t g_sleepTime2 = 5;
+    uint32_t g_sleepTime1 = 1;
+    uint32_t g_sleepTime2 = 2;
     std::string g_timeSequence = "haptic.clock.timer";
     std::string g_builtIn = "haptic.default.effect";
     std::string g_arbitraryStr = "arbitraryString";
@@ -63,14 +63,16 @@ BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0010)(benc
     ASSERT_NE(nullptr, g_vibratorInterface);
 
     int32_t startRet;
+    int32_t endRet;
     for (auto _ : st) {
         startRet = g_vibratorInterface->StartOnce(g_duration);
+        EXPECT_EQ(startRet, HDF_SUCCESS);
+
+        OsalMSleep(g_sleepTime1);
+
+        endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_ONCE);
+        EXPECT_EQ(endRet, HDF_SUCCESS);
     }
-
-    OsalMSleep(g_sleepTime1);
-
-    int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_ONCE);
-    EXPECT_EQ(endRet, HDF_SUCCESS);
 }
 
 BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0010)->
@@ -87,14 +89,16 @@ BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0020)(benc
     ASSERT_NE(nullptr, g_vibratorInterface);
 
     int32_t startRet;
+    int32_t endRet;
     for (auto _ : st) {
         startRet = g_vibratorInterface->Start(g_timeSequence);
+        EXPECT_EQ(startRet, HDF_SUCCESS);
+
+        OsalMSleep(g_sleepTime2);
+
+        endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_PRESET);
+        EXPECT_EQ(endRet, HDF_SUCCESS);
     }
-
-    OsalMSleep(g_sleepTime2);
-
-    int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_PRESET);
-    EXPECT_EQ(endRet, HDF_SUCCESS);
 }
 
 BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0020)->
@@ -109,13 +113,15 @@ BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0
 BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0030)(benchmark::State &st)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
-
-    int32_t startRet = g_vibratorInterface->Start(g_builtIn);
-    EXPECT_EQ(startRet, HDF_SUCCESS);
-
-    OsalMSleep(g_sleepTime1);
+    int32_t startRet;
     int32_t endRet;
+
     for (auto _ : st) {
+        startRet = g_vibratorInterface->Start(g_builtIn);
+        EXPECT_EQ(startRet, HDF_SUCCESS);
+
+        OsalMSleep(g_sleepTime1);
+
         endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_PRESET);
         EXPECT_EQ(endRet, HDF_SUCCESS);
     }

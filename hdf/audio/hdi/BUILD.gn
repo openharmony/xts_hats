@@ -28,6 +28,7 @@ group("hdi") {
     "capture/captureScene:HatsHdfAudioCaptureSceneTest",
     "capture/captureTest:HatsHdfAudioCaptureTest",
     "capture/captureVolume:HatsHdfAudioCaptureVolumeTest",
+    "manager:HatsHdfAudioManagerTest",
 
     #"hdiperformace/capture:HatsHdfAudioCaptureBenchmarkTest",
     #"hdiperformace/render:HatsHdfAudioRenderBenchmarkTest",

@@ -40,7 +40,7 @@
 
 using namespace std;
 using namespace testing::ext;
-using namespace HMOS::Audio;
+using namespace OHOS::Audio;
 
 namespace {
 const int BUFFER = 1024 * 4;

@@ -48,4 +48,7 @@ ohos_moduletest_suite("HatsHdfVibratorHdiTest") {
   } else {
     external_deps = [ "hilog:libhilog" ]
   }
+
+  subsystem_name = "hdf"
+  part_name = "drivers_peripheral_vibrator"
 }

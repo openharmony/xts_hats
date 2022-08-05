@@ -51,6 +51,8 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkDeviceTest") {
     "safwk:system_ability_fwk",
     "samgr_standard:samgr_proxy",
   ]
+  subsystem_name = "usb"
+  part_name = "drivers_peripheral_usb"
 }
 
 ohos_moduletest_suite("HatsHdfUsbBenchmarkFunctionTest") {
@@ -87,6 +89,8 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkFunctionTest") {
     "safwk:system_ability_fwk",
     "samgr_standard:samgr_proxy",
   ]
+  subsystem_name = "usb"
+  part_name = "drivers_peripheral_usb"
 }
 
 ohos_moduletest_suite("HatsHdfUsbBenchmarkRequestTest") {
@@ -123,6 +127,8 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkRequestTest") {
     "safwk:system_ability_fwk",
     "samgr_standard:samgr_proxy",
   ]
+  subsystem_name = "usb"
+  part_name = "drivers_peripheral_usb"
 }
 
 ohos_moduletest_suite("HatsHdfUsbBenchmarkTransferTest") {
@@ -159,4 +165,6 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkTransferTest") {
     "safwk:system_ability_fwk",
     "samgr_standard:samgr_proxy",
   ]
+  subsystem_name = "usb"
+  part_name = "drivers_peripheral_usb"
 }

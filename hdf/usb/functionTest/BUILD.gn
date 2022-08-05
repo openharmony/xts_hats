@@ -47,4 +47,6 @@ ohos_moduletest_suite("HatsHdfUsbFunctionTest") {
     "safwk:system_ability_fwk",
     "samgr_standard:samgr_proxy",
   ]
+  subsystem_name = "usb"
+  part_name = "drivers_peripheral_usb"
 }

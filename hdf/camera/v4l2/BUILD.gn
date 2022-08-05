@@ -127,6 +127,8 @@ ohos_moduletest_suite("HatsHdfCameraFunctionTest") {
   ]
 
   public_configs = [ ":cameraTest_config" ]
+  subsystem_name = "hdf"
+  part_name = "drivers_peripheral_camera"
 }
 
 group("hdi") {

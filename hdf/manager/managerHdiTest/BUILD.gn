@@ -36,4 +36,6 @@ ohos_moduletest_suite("HatsHdfManagerHdiTest") {
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_core",
   ]
+  subsystem_name = "hdf"
+  part_name = "hdf_core"
 }

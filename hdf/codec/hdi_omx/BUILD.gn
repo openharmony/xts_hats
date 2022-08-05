@@ -60,4 +60,6 @@ ohos_moduletest_suite("HatsHdfOmxCodecTest") {
   if (device_name == "rk3568") {
     cflags += [ "-DSUPPORT_OMX" ]
   }
+  subsystem_name = "hdf"
+  part_name = "drivers_peripheral_codec"
 }

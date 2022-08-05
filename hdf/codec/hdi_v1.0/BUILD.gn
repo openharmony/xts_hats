@@ -64,4 +64,6 @@ ohos_moduletest_suite("HatsHdfV1CodecTest") {
   } else {
     external_deps = [ "hilog:libhilog" ]
   }
+  subsystem_name = "hdf"
+  part_name = "drivers_peripheral_codec"
 }

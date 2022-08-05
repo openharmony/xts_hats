@@ -35,4 +35,6 @@ ohos_moduletest_suite("HatsHdfManagerServiceTest") {
     "ipc:ipc_core",
     "samgr_standard:samgr_proxy",
   ]
+  subsystem_name = "hdf"
+  part_name = "hdf_core"
 }

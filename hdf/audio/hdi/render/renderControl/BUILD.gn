@@ -65,4 +65,6 @@ ohos_moduletest_suite("HatsHdfAudioRenderControlTest") {
   if ("${product_name}" == "rk3568") {
     defines += [ "PRODUCT_RK3568" ]
   }
+  subsystem_name = "hdf"
+  part_name = "drivers_peripheral_audio"
 }

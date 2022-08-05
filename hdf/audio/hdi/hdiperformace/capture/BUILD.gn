@@ -65,5 +65,7 @@ ohos_moduletest_suite("HatsHdfAudioCaptureBenchmarkTest") {
   if (enable_audio_adm_service) {
     defines += [ "AUDIO_ADM_SERVICE" ]
   }
+  subsystem_name = "hdf"
+  part_name = "drivers_peripheral_audio"
 }
 ###########################end###########################

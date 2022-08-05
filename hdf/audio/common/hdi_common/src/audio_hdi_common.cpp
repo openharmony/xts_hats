@@ -43,6 +43,8 @@ static int g_renderFull = 0;
 static int g_flushCompleted = 0;
 namespace OHOS {
 namespace Audio {
+const int BUFFER_SIZE = 2048;
+
 int32_t InitAttrs(struct AudioSampleAttributes &attrs)
 {
     attrs.format = AUDIO_FORMAT_PCM_16_BIT;
@@ -537,7 +539,6 @@ int32_t RenderFramePrepare(const std::string &path, char *&frame, uint64_t &read
 {
     int32_t ret = -1;
     size_t numRead = 0;
-    uint32_t bufferSize = 2048;
     uint32_t remainingDataSize = 0;
     struct AudioSampleAttributes attrs = {};
     struct AudioHeadInfo headInfo = {};
@@ -555,13 +556,13 @@ int32_t RenderFramePrepare(const std::string &path, char *&frame, uint64_t &read
         fclose(file);
         return HDF_FAILURE;
     }
-    frame = (char *)calloc(1, bufferSize);
+    frame = (char *)calloc(1, BUFFER_SIZE);
     if (frame == nullptr) {
         fclose(file);
         return HDF_ERR_MALLOC_FAIL;
     }
     remainingDataSize = headInfo.dataSize;
-    readSize = (remainingDataSize) > (bufferSize) ? (bufferSize) : (remainingDataSize);
+    readSize = (remainingDataSize) > (BUFFER_SIZE) ? (BUFFER_SIZE) : (remainingDataSize);
     size_t readSizes = static_cast<size_t>(readSize);
     numRead = fread(frame, readSizes, 1, file);
     if (numRead < 1) {

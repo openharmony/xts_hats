@@ -20,6 +20,15 @@ using namespace std;
 using namespace testing::ext;
 using namespace OHOS::Camera;
 
+const int STREAMINFO_WIDTH1 = 640;
+const int STREAMINFO_WIDTH2 = 1280;
+const int STREAMINFO_HEIGHT1 = 480;
+const int STREAMINFO_HEIGHT2 = 960;
+const int STREAMINFO_DATASPACE1 = 10;
+const int STREAMINFO_DATASPACE2 = 8;
+const int STREAMINFO_TUNNELED_MODE = 5;
+const int QUEUE_SIZE = 8;
+
 void PipelineTest::SetUpTestCase(void) {}
 void PipelineTest::TearDownTestCase(void) {}
 void PipelineTest::SetUp(void)
@@ -118,12 +127,12 @@ HWTEST_F(PipelineTest, Camera_Ppl_0004, TestSize.Level2)
     }
     Test_->streamInfo = std::make_shared<Camera::StreamInfo>();
     Test_->streamInfo->streamId_ = Test_->streamId_video;
-    Test_->streamInfo->width_ = 640;
-    Test_->streamInfo->height_ = 480;
+    Test_->streamInfo->width_ = STREAMINFO_WIDTH1;
+    Test_->streamInfo->height_ = STREAMINFO_HEIGHT1;
     Test_->StreamInfoFormat();
-    Test_->streamInfo->datasapce_ = 10;
+    Test_->streamInfo->datasapce_ = STREAMINFO_DATASPACE1;
     Test_->streamInfo->intent_ = Camera::VIDEO;
-    Test_->streamInfo->tunneledMode_ = 5;
+    Test_->streamInfo->tunneledMode_ = STREAMINFO_TUNNELED_MODE;
     std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
         std::make_shared<OHOS::Camera::Test::StreamConsumer>();
 #ifdef CAMERA_BUILT_ON_OHOS_LITE
@@ -135,7 +144,7 @@ HWTEST_F(PipelineTest, Camera_Ppl_0004, TestSize.Level2)
         Test_->SaveYUV("preview", addr, size);
     });
 #endif
-    Test_->streamInfo->bufferQueue_->SetQueueSize(8);
+    Test_->streamInfo->bufferQueue_->SetQueueSize(QUEUE_SIZE);
     Test_->consumerMap_[Camera::PREVIEW] = consumer;
     std::vector<std::shared_ptr<Camera::StreamInfo>>().swap(Test_->streamInfos);
     Test_->streamInfos.push_back(Test_->streamInfo);
@@ -206,9 +215,9 @@ HWTEST_F(PipelineTest, Camera_Ppl_0007, TestSize.Level1)
     // Create data stream 1
     Test_->streamInfo = std::make_shared<StreamInfo>();
     Test_->streamInfo->streamId_ = Test_->streamId_preview;
-    Test_->streamInfo->width_ = 1280;
-    Test_->streamInfo->height_ = 960;
-    Test_->streamInfo->datasapce_ = 8;
+    Test_->streamInfo->width_ = STREAMINFO_WIDTH2;
+    Test_->streamInfo->height_ = STREAMINFO_HEIGHT2;
+    Test_->streamInfo->datasapce_ = STREAMINFO_DATASPACE2;
     Test_->streamInfo->format_ = PIXEL_FMT_YCRCB_420_SP;
     Test_->streamInfo->intent_ = Camera::PREVIEW;
     std::shared_ptr<OHOS::Camera::Test::StreamConsumer> preview_consumer =
@@ -216,18 +225,18 @@ HWTEST_F(PipelineTest, Camera_Ppl_0007, TestSize.Level1)
     Test_->streamInfo->bufferQueue_ = preview_consumer->CreateProducer([this](void* addr, uint32_t size) {
         Test_->SaveYUV("preview", addr, size);
     });
-    Test_->streamInfo->bufferQueue_->SetQueueSize(8);
+    Test_->streamInfo->bufferQueue_->SetQueueSize(QUEUE_SIZE);
     Test_->consumerMap_[Camera::PREVIEW] = preview_consumer;
-    Test_->streamInfo->tunneledMode_ = 5;
+    Test_->streamInfo->tunneledMode_ = STREAMINFO_TUNNELED_MODE;
     std::vector<std::shared_ptr<StreamInfo>>().swap(Test_->streamInfos);
     Test_->streamInfos.push_back(Test_->streamInfo);
 
     // Create data stream 2
     Test_->streamInfo2 = std::make_shared<StreamInfo>();
     Test_->streamInfo2->streamId_ = Test_->streamId_preview_double;
-    Test_->streamInfo2->width_ = 1280;
-    Test_->streamInfo2->height_ = 960;
-    Test_->streamInfo2->datasapce_ = 8;
+    Test_->streamInfo2->width_ = STREAMINFO_WIDTH2;
+    Test_->streamInfo2->height_ = STREAMINFO_HEIGHT2;
+    Test_->streamInfo2->datasapce_ = STREAMINFO_DATASPACE2;
     Test_->streamInfo2->format_ = PIXEL_FMT_YCRCB_420_SP;
     Test_->streamInfo2->intent_ = Camera::PREVIEW;
     std::shared_ptr<OHOS::Camera::Test::StreamConsumer> preview_consumer2 =
@@ -235,9 +244,9 @@ HWTEST_F(PipelineTest, Camera_Ppl_0007, TestSize.Level1)
     Test_->streamInfo2->bufferQueue_ = preview_consumer2->CreateProducer([this](void* addr, uint32_t size) {
         Test_->SaveYUV("preview2", addr, size);
     });
-    Test_->streamInfo2->bufferQueue_->SetQueueSize(8);
+    Test_->streamInfo2->bufferQueue_->SetQueueSize(QUEUE_SIZE);
     Test_->consumerMap_[Camera::PREVIEW] = preview_consumer2;
-    Test_->streamInfo2->tunneledMode_ = 5;
+    Test_->streamInfo2->tunneledMode_ = STREAMINFO_TUNNELED_MODE;
     Test_->streamInfos.push_back(Test_->streamInfo2);
 
     Test_->rc = Test_->streamOperator->CreateStreams(Test_->streamInfos);

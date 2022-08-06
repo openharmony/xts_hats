@@ -49,7 +49,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkDeviceTest") {
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_single",
     "safwk:system_ability_fwk",
-    "samgr_standard:samgr_proxy",
+    "samgr:samgr_proxy",
   ]
 }
 
@@ -85,7 +85,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkFunctionTest") {
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_single",
     "safwk:system_ability_fwk",
-    "samgr_standard:samgr_proxy",
+    "samgr:samgr_proxy",
   ]
 }
 
@@ -121,7 +121,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkRequestTest") {
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_single",
     "safwk:system_ability_fwk",
-    "samgr_standard:samgr_proxy",
+    "samgr:samgr_proxy",
   ]
 }
 
@@ -157,6 +157,6 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkTransferTest") {
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_single",
     "safwk:system_ability_fwk",
-    "samgr_standard:samgr_proxy",
+    "samgr:samgr_proxy",
   ]
 }

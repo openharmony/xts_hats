@@ -12,6 +12,7 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
+import("//drivers/peripheral/usb/usb.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hdf/usb"
@@ -27,20 +28,16 @@ ohos_moduletest_suite("HatsHdfUsbDeviceTest") {
     "include",
     "//test/xts/hats/hdf/usb/UsbSubscriberTest",
     "//utils/system/safwk/native/include",
-    "//drivers/peripheral/usb/hal/client/include",
   ]
 
-  deps = [
-    "//drivers/peripheral/usb/ddk:libusb_core",
-    "//drivers/peripheral/usb/hal/client:usbd_client",
-    "//third_party/googletest:gtest_main",
-  ]
+  deps = [ "//third_party/googletest:gtest_main" ]
 
   external_deps = [
     "ability_base:want",
     "bundle_framework:appexecfwk_base",
     "c_utils:utils",
     "common_event_service:cesfwk_innerkits",
+    "drivers_interface_usb:libusb_proxy_1.0",
     "eventhandler:libeventhandler",
     "hdf_core:libhdf_utils",
     "hiviewdfx_hilog_native:libhilog",
@@ -48,6 +45,7 @@ ohos_moduletest_suite("HatsHdfUsbDeviceTest") {
     "safwk:system_ability_fwk",
     "samgr:samgr_proxy",
   ]
-  subsystem_name = "usb"
+
+  subsystem_name = "hdf"
   part_name = "drivers_peripheral_usb"
 }

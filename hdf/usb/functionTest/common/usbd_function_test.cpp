@@ -17,7 +17,8 @@
 #include "hdf_log.h"
 #include "if_system_ability_manager.h"
 #include "system_ability_definition.h"
-#include "usbd_client.h"
+#include "v1_0/usb_types.h"
+#include "v1_0/iusb_interface.h"
 
 const int SLEEP_TIME = 3;
 const int TEST_PORT_ID = 1;
@@ -29,15 +30,24 @@ const int USB_FUNCTION_HDC = 4;
 
 using namespace testing::ext;
 using namespace OHOS;
-using namespace OHOS::USB;
 using namespace std;
+using namespace OHOS::HDI::Usb::V1_0;
+
+namespace {
+    sptr<IUsbInterface> g_usbInterface = nullptr;
+}
 
 void UsbdFunctionTest::SetUpTestCase(void)
 {
-    auto ret = UsbdClient::GetInstance().SetPortRole(TEST_PORT_ID, TEST_POWER_ROLE, TEST_DATAR_ROLE);
+    g_usbInterface = IUsbInterface::Get();
+    if (g_usbInterface == nullptr) {
+        HDF_LOGE("%{public}s:IUsbInterface::Get() failed.", __func__);
+        exit(0);
+    }
+    auto ret = g_usbInterface->SetPortRole(TEST_PORT_ID, TEST_POWER_ROLE, TEST_DATAR_ROLE);
     sleep(SLEEP_TIME);
     HDF_LOGI("UsbdFunctionTest::[Device] %{public}d SetPortRole=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
     if (ret != 0) {
         exit(0);
     }
@@ -59,9 +69,9 @@ void UsbdFunctionTest::TearDown(void) {}
 HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1250, Function | MediumTest | Level1)
 {
     int32_t funcs = 0;
-    auto ret = UsbdClient::GetInstance().GetCurrentFunctions(funcs);
+    auto ret = g_usbInterface->GetCurrentFunctions(funcs);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1250 %{public}d ret=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
 }
 
 /**
@@ -73,13 +83,13 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1250, Function | MediumTest | Level1)
  */
 HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1260, Function | MediumTest | Level1)
 {
-    auto ret = UsbdClient::GetInstance().SetCurrentFunctions(1);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1260 %{public}d SetCurrentFunctions=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret == 0);
+    auto ret = g_usbInterface->SetCurrentFunctions(1);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1270 %{public}d SetCurrentFunctions=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
     int32_t funcs = 1;
-    ret = UsbdClient::GetInstance().GetCurrentFunctions(funcs);
+    ret = g_usbInterface->GetCurrentFunctions(funcs);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1260 %{public}d ret=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
 }
 
 /**********************************************************************************************************/
@@ -94,9 +104,9 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1260, Function | MediumTest | Level1)
 HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1270, Function | MediumTest | Level1)
 {
     int32_t funcs = 1;
-    auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
+    auto ret = g_usbInterface->SetCurrentFunctions(funcs);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1270 %{public}d SetCurrentFunctions=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
 }
 
 /**
@@ -109,9 +119,9 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1270, Function | MediumTest | Level1)
 HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1280, Function | MediumTest | Level1)
 {
     int32_t funcs = -1;
-    auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
+    auto ret = g_usbInterface->SetCurrentFunctions(funcs);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1280 %{public}d, ret=%{public}d, funcs=%{public}d", __LINE__, ret, funcs);
-    ASSERT_TRUE(ret != 0);
+    ASSERT_NE(ret, 0);
 }
 /**
  * @tc.name: SUB_USB_HDI_1290
@@ -123,9 +133,9 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1280, Function | MediumTest | Level1)
 HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1290, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_ECM;
-    auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
+    auto ret = g_usbInterface->SetCurrentFunctions(funcs);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1290 %{public}d ret=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
 }
 
 /**
@@ -138,9 +148,9 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1290, Function | MediumTest | Level1)
 HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1300, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_ACM | USB_FUNCTION_ECM;
-    auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
+    auto ret = g_usbInterface->SetCurrentFunctions(funcs);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1300 %{public}d ret=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
 }
 
 /**
@@ -153,9 +163,9 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1300, Function | MediumTest | Level1)
 HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1310, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_HDC;
-    auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
+    auto ret = g_usbInterface->SetCurrentFunctions(funcs);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1310 %{public}d ret=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
 }
 
 /**
@@ -168,9 +178,9 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1310, Function | MediumTest | Level1)
 HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1320, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_ACM | USB_FUNCTION_HDC;
-    auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
+    auto ret = g_usbInterface->SetCurrentFunctions(funcs);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1320 %{public}d ret=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
 }
 
 /**
@@ -183,9 +193,9 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1320, Function | MediumTest | Level1)
 HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1330, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_ECM | USB_FUNCTION_HDC;
-    auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
+    auto ret = g_usbInterface->SetCurrentFunctions(funcs);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1330 %{public}d ret=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
 }
 
 /**
@@ -198,9 +208,9 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1330, Function | MediumTest | Level1)
 HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1340, Function | MediumTest | Level1)
 {
     int32_t funcs = 8;
-    auto ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
+    auto ret = g_usbInterface->SetCurrentFunctions(funcs);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1340 %{public}d ret=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret != 0);
+    ASSERT_NE(ret, 0);
 }
 
 /**
@@ -212,9 +222,9 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1340, Function | MediumTest | Level1)
  */
 HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1350, Function | MediumTest | Level1)
 {
-    auto ret = UsbdClient::GetInstance().SetPortRole(1, 1, 1);
+    auto ret = g_usbInterface->SetPortRole(1, 1, 1);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1350 %{public}d ret=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
 }
 
 /**
@@ -226,9 +236,9 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1350, Function | MediumTest | Level1)
  */
 HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1360, Function | MediumTest | Level1)
 {
-    auto ret = UsbdClient::GetInstance().SetPortRole(2, 1, 1);
+    auto ret = g_usbInterface->SetPortRole(2, 1, 1);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1360 %{public}d ret=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret != 0);
+    ASSERT_NE(ret, 0);
 }
 
 /**
@@ -240,9 +250,9 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1360, Function | MediumTest | Level1)
  */
 HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1370, Function | MediumTest | Level1)
 {
-    auto ret = UsbdClient::GetInstance().SetPortRole(1, 4, 2);
+    auto ret = g_usbInterface->SetPortRole(1, 4, 2);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1370 %{public}d ret=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret != 0);
+    ASSERT_NE(ret, 0);
 }
 
 /**
@@ -254,9 +264,9 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1370, Function | MediumTest | Level1)
  */
 HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1380, Function | MediumTest | Level1)
 {
-    auto ret = UsbdClient::GetInstance().SetPortRole(1, 1, 5);
+    auto ret = g_usbInterface->SetPortRole(1, 1, 5);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1380 %{public}d ret=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret != 0);
+    ASSERT_NE(ret, 0);
 }
 
 /**
@@ -268,9 +278,9 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1380, Function | MediumTest | Level1)
  */
 HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1390, Function | MediumTest | Level1)
 {
-    auto ret = UsbdClient::GetInstance().SetPortRole(1, 5, 5);
+    auto ret = g_usbInterface->SetPortRole(1, 5, 5);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1390 %{public}d ret=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret != 0);
+    ASSERT_NE(ret, 0);
 }
 
 /**
@@ -282,9 +292,9 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1390, Function | MediumTest | Level1)
  */
 HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1400, Function | MediumTest | Level1)
 {
-    auto ret = UsbdClient::GetInstance().SetPortRole(5, 1, 5);
+    auto ret = g_usbInterface->SetPortRole(5, 1, 5);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1400 %{public}d ret=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret != 0);
+    ASSERT_NE(ret, 0);
 }
 
 /**
@@ -296,9 +306,9 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1400, Function | MediumTest | Level1)
  */
 HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1410, Function | MediumTest | Level1)
 {
-    auto ret = UsbdClient::GetInstance().SetPortRole(1, 5, 5);
+    auto ret = g_usbInterface->SetPortRole(1, 5, 5);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1410 %{public}d ret=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret != 0);
+    ASSERT_NE(ret, 0);
 }
 
 /**
@@ -310,9 +320,9 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1410, Function | MediumTest | Level1)
  */
 HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1420, Function | MediumTest | Level1)
 {
-    auto ret = UsbdClient::GetInstance().SetPortRole(2, 5, 5);
+    auto ret = g_usbInterface->SetPortRole(2, 5, 5);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1420 %{public}d ret=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret != 0);
+    ASSERT_NE(ret, 0);
 }
 
 /**
@@ -324,9 +334,9 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1420, Function | MediumTest | Level1)
  */
 HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1430, Function | MediumTest | Level1)
 {
-    auto ret = UsbdClient::GetInstance().SetPortRole(1, 2, 2);
+    auto ret = g_usbInterface->SetPortRole(1, 2, 2);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1430 %{public}d ret=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
 }
 
 /**
@@ -342,7 +352,7 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1700, Function | MediumTest | Level1)
     int32_t powerRole = 0;
     int32_t dataRole = 0;
     int32_t mode = 0;
-    auto ret = UsbdClient::GetInstance().QueryPort(portId, powerRole, dataRole, mode);
+    auto ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1700 %{public}d ret=%{public}d", __LINE__, ret);
-    ASSERT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
 }

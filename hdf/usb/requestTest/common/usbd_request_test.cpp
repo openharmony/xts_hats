@@ -456,7 +456,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1180, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t altIndex = 0;
     struct UsbDev dev = dev_;
-     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1180 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     dev.busNum = BUS_NUM_222;
@@ -519,7 +519,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1210, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t altIndex = 0;
     struct UsbDev dev = dev_;
-     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1210 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     dev.busNum = 233;
@@ -593,7 +593,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1240, Function | MediumTest | Level1)
     interfaceId = 225;
     ret = g_usbInterface->SetInterface(dev, interfaceId, altIndex);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1240 %{public}d ret=%{public}d", __LINE__, ret);
-     ASSERT_NE(ret, 0);
+    ASSERT_NE(ret, 0);
 }
 
 /**

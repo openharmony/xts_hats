@@ -940,7 +940,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0006, Functi
 }
 #ifndef PRODUCT_RK3568
 /**
-    * @tc.name  Test CaptureGetFrameSize API via define sampleRate to different value
+    * @tc.name  Test CaptureGetFrameSize API via define sampleRate to different values
     * @tc.number  SUB_Audio_hdi_CaptureGetFrameSize_0007
     * @tc.desc  Test AudioCaptureGetFrameSize API, and check if 0 is returned when sampleRate is set to different values
 */
@@ -1071,7 +1071,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0004, Funct
     manager->UnloadAdapter(manager, adapter);
 }
 /**
-    * @tc.name  Test CaptureGetFrameCount API via define channelCount to different value
+    * @tc.name  Test CaptureGetFrameCount API via define channelCount to different values
     * @tc.number  SUB_Audio_hdi_CaptureGetFrameCount_0005
     * @tc.desc  Test the AudioCaptureGetFrameCount API, and check if 0 is returned when channelCount is set to different values
 */
@@ -1109,7 +1109,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0005, Funct
     manager->UnloadAdapter(manager, adapter);
 }
 /**
-    * @tc.name  Test CaptureGetFrameCount API via define format to different value
+    * @tc.name  Test CaptureGetFrameCount API via define format to different values
     * @tc.number  SUB_Audio_hdi_CaptureGetFrameCount_0006
     * @tc.desc Test the AudioCaptureGetFrameCount API, and check if 0 is returned when format is set to different values
 */
@@ -1148,7 +1148,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0006, Funct
 }
 #ifndef PRODUCT_RK3568
 /**
-    * @tc.name  Test CaptureGetFrameCount API via define channelCount to different value
+    * @tc.name  Test CaptureGetFrameCount API via define channelCount to different values
     * @tc.number  SUB_Audio_hdi_CaptureGetFrameCount_0007
     * @tc.desc  Test the AudioCaptureGetFrameCount API, and check if 0 is returned when channelCount is set to different values
 */
@@ -1186,7 +1186,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0007, Funct
     manager->UnloadAdapter(manager, adapter);
 }
 /**
-    * @tc.name  Test CaptureGetFrameCount API via define format to different value
+    * @tc.name  Test CaptureGetFrameCount API via define format to different values
     * @tc.number  SUB_Audio_hdi_CaptureGetFrameCount_0008
     * @tc.desc  Test the AudioCaptureGetFrameCount API, and check if 0 is returned when format is set to different values
 */

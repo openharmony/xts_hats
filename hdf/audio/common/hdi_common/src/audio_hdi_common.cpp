@@ -1021,24 +1021,27 @@ int32_t AudioRenderCallback(enum AudioCallbackType type, void *reserved, void *c
 }
 int32_t CheckWriteCompleteValue()
 {
-    if (g_writeCompleted == AUDIO_WRITE_COMPELETED_VALUE)
+    if (g_writeCompleted == AUDIO_WRITE_COMPELETED_VALUE) {
         return HDF_SUCCESS;
-    else
+    } else {
         return HDF_FAILURE;
+    }
 }
 int32_t CheckRenderFullValue()
 {
-    if (g_renderFull == AUDIO_RENDER_FULL_VALUE)
+    if (g_renderFull == AUDIO_RENDER_FULL_VALUE) {
         return HDF_SUCCESS;
-    else
+    } else {
         return HDF_FAILURE;
+    }
 }
 int32_t CheckFlushValue()
 {
-    if (g_flushCompleted == AUDIO_FLUSH_COMPLETED_VALUE)
+    if (g_flushCompleted == AUDIO_FLUSH_COMPLETED_VALUE) {
         return HDF_SUCCESS;
-    else
+    } else {
         return HDF_FAILURE;
+    }
 }
 }
 }

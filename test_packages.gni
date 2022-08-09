@@ -16,6 +16,7 @@ import("//test/xts/tools/build/suite.gni")
 _all_test_packages = [
   "${HATS_ROOT}/hdf:hatshdftest",
   "${HATS_ROOT}/kernel:kernel",
+  "${HATS_ROOT}/useriam:useriam",
 ]
 
 _all_test_packages_ivi = [

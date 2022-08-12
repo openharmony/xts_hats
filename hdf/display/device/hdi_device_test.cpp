@@ -459,9 +459,9 @@ TEST_P(LayerRotateTest, SplitCheck)
     std::vector<LayerSettings> layersCheck;
     for (uint32_t i = 0; i < splitRects.size(); i++) {
         uint32_t color = splitColors[(i + startIndex) % sizeof(splitColors.size())];
-        layersCheck.push_back( {
+        layersCheck.push_back({
             .displayRect = splitRects[i],
-            .color = color } );
+            .color = color });
     }
     ASSERT_TRUE((handle != nullptr));
     /* for rotation may scale the buffer, Near the edge of rect the color will Smooth gradient,

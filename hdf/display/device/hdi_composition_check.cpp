@@ -24,14 +24,14 @@ void HdiCompositionCheck::GetCheckPoints(Point center, std::vector<Point> &point
 {
     constexpr uint32_t step = 3;
     points.push_back(center);
-    points.push_back( { center.x + step, center.y } );
-    points.push_back( { center.x + step, center.y + step } );
-    points.push_back( { center.x + step, center.y - step } );
-    points.push_back( { center.x, center.y + step } );
-    points.push_back( { center.x - step, center.y } );
-    points.push_back( { center.x - step, center.y - step } );
-    points.push_back( { center.x - step, center.y + step } );
-    points.push_back( { center.x, center.y - step } );
+    points.push_back({ center.x + step, center.y });
+    points.push_back({ center.x + step, center.y + step });
+    points.push_back({ center.x + step, center.y - step });
+    points.push_back({ center.x, center.y + step });
+    points.push_back({ center.x - step, center.y });
+    points.push_back({ center.x - step, center.y - step });
+    points.push_back({ center.x - step, center.y + step });
+    points.push_back({ center.x, center.y - step });
 }
 // simple handle the alpha it may not compatible with all scenarios
 void HdiCompositionCheck::SimpleHandleAlpha(const LayerSettings &layers, uint32_t &color)
@@ -85,12 +85,12 @@ int32_t HdiCompositionCheck::Check(std::vector<LayerSettings> &layers, BufferHan
     for (auto layer : layers) {
         IRect &rect = layer.displayRect;
         if (checkType == CHECK_VERTEX) {
-            GetCheckPoints( { rect.x, rect.y }, points);
-            GetCheckPoints( { rect.x, rect.y + rect.h }, points);
-            GetCheckPoints( { rect.x + rect.w, rect.y }, points);
-            GetCheckPoints( { rect.x + rect.w, rect.y + rect.h }, points);
+            GetCheckPoints({ rect.x, rect.y }, points);
+            GetCheckPoints({ rect.x, rect.y + rect.h }, points);
+            GetCheckPoints({ rect.x + rect.w, rect.y }, points);
+            GetCheckPoints({ rect.x + rect.w, rect.y + rect.h }, points);
         } else {
-            GetCheckPoints( { rect.x + rect.w / midPos, rect.y + rect.h / midPos }, points); // center point
+            GetCheckPoints({ rect.x + rect.w / midPos, rect.y + rect.h / midPos }, points); // center point
         }
     }
 

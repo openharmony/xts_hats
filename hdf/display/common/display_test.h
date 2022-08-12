@@ -24,7 +24,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#define __FILENAME__ (strrchr("/" __FILE__, '/') + 1)
+#define __FILENAMES__ (strrchr("/" __FILE__, '/') + 1)
 #ifndef DISPLAY_TEST_CHK_RETURN_NOT_VALUE
 #define DISPLAY_TEST_CHK_RETURN_NOT_VALUE(val, ret, ...) \
     do {                                                 \
@@ -47,7 +47,7 @@ extern "C" {
 
 #define DISPLAY_TEST_LOGD(format, ...)                                                          \
     do {                                                                                        \
-        printf("[%s@%s:%d] " format "\n", __FUNCTION__, __FILENAME__, __LINE__, ##__VA_ARGS__); \
+        printf("[%s@%s:%d] " format "\n", __FUNCTION__, __FILENAMES__, __LINE__, ##__VA_ARGS__); \
     } while (0)
 
 #define DISPLAY_TEST_LOGE(format, ...)                            \
@@ -55,7 +55,7 @@ extern "C" {
         printf("\033[0;32;31m"                                    \
             "[%s@%s:%d] " format "\033[m"                         \
             "\n",                                                 \
-            __FUNCTION__, __FILENAME__, __LINE__, ##__VA_ARGS__); \
+            __FUNCTION__, __FILENAMES__, __LINE__, ##__VA_ARGS__); \
     } while (0)
 
 #ifdef __cplusplus

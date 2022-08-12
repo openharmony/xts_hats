@@ -39,8 +39,7 @@ public:
         mDispW = w;
         mDispH = h;
     }
-    enum Check
-    {
+    enum Check{
         CHECK_CENTER,
         CHECK_VERTEX
     };

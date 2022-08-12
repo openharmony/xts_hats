@@ -19,6 +19,9 @@ StreamCustomer::StreamCustomer()
 {}
 StreamCustomer::~StreamCustomer()
 {}
+#ifndef CAMERA_BUILT_ON_OHOS_LITE
+const int DELAY_TIME = 12000;
+#endif
 
 void StreamCustomer::CamFrame(const std::function<void(void*, uint32_t)> callback)
 {
@@ -40,7 +43,7 @@ void StreamCustomer::CamFrame(const std::function<void(void*, uint32_t)> callbac
     OHOS::Rect damage;
     int32_t flushFence = 0;
     int64_t timestamp = 0;
-    constexpr uint32_t delayTime = 12000;
+    constexpr uint32_t delayTime = DELAY_TIME;
 
     do {
         OHOS::sptr<OHOS::SurfaceBuffer> buff = nullptr;

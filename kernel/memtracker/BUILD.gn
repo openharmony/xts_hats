@@ -33,4 +33,5 @@ ohos_moduletest_suite("HatsMemoryTrackerTest") {
     "//utils/",
   ]
   cflags = [ "-Wno-error" ]
+  subsystem_name = "kernel"
 }

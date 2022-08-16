@@ -1,0 +1,18 @@
+{
+    "description": "Configuration for HatsMallocPressureTest Tests",
+    "kits": [
+        {
+            "push": [
+                "HatsMallocPressureTest->/data/local/tmp/HatsMallocPressureTest"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsMallocPressureTest",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    }
+}

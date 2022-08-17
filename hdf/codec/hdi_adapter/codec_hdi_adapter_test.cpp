@@ -277,7 +277,8 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0030, Function |
 /**
 * @tc.name  HdfCodecHdiCreateComponentCompNameErrorTest_001
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0040
-* @tc.desc If compName is a component name that does not exist, the CreateComponent interface is invoked to create a component
+* @tc.desc If compName is a component name that does not exist, the CreateComponent 
+           interface is invoked to create a component
 */
 HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0040, Function | MediumTest | Level3)
 {
@@ -304,7 +305,8 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0050, Function |
 /**
 * @tc.name  HdfCodecHdiCreateComponentAppdataMaxTest_003
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0060
-* @tc.desc When Appdata is the maximum value in the value range, the CreateComponent interface is invoked to create a component
+* @tc.desc When Appdata is the maximum value in the value range, the CreateComponent
+           interface is invoked to create a component
 */
 HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0060, Function | MediumTest | Level3)
 {
@@ -325,7 +327,8 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0060, Function |
 /**
 * @tc.name HdfCodecHdiCreateComponentAppdataMinTest_004
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0070
-* @tc.desc When Appdata is the minimum value in the value range, the CreateComponent interface is invoked to create a componentt
+* @tc.desc When Appdata is the minimum value in the value range, the CreateComponent 
+           interface is invoked to create a componentt
 */
 HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0070, Function | MediumTest | Level3)
 {
@@ -473,7 +476,8 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0160, Function |
 /**
 * @tc.name HdfCodecHdiSetParameterParamIndexNotMatchParamStructTest_003
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0170
-* @tc.desc When paramIndex does not match paramStruct, the SetParameter interface is invoked to set component parameters
+* @tc.desc When paramIndex does not match paramStruct, the SetParameter 
+           interface is invoked to set component parameters
 */
 HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0170, Function | MediumTest | Level3)
 {
@@ -488,7 +492,8 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0170, Function |
 /**
 * @tc.name HdfCodecHdiSetParameterParamIndexUnusedTest_004
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0180
-* @tc.desc When paramIndex is set to OMX_IndexVideoStartUnused, the SetParameter interface is invoked to set component parameters
+* @tc.desc When paramIndex is set to OMX_IndexVideoStartUnused, the SetParameter
+           interface is invoked to set component parameters
 */
 HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0180, Function | MediumTest | Level3)
 {
@@ -618,7 +623,7 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0260, Function |
 /**
 * @tc.name HdfCodecHdiAllocateBufferInvalidInputBufferTypeTest_001
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0270
-* @tc.desc When bufferType is set to InvalidInput and portIndex is set to PORT_INDEX_INPUT, the AllocateBuffer 
+* @tc.desc When bufferType is set to InvalidInput and portIndex is set to PORT_INDEX_INPUT, the AllocateBuffer
            interface is invoked to set the external buffer
 */
 struct OmxCodecBuffer allocBuffer;
@@ -653,7 +658,7 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0280, Function |
 /**
 * @tc.name HdfCodecHdiAllocateBufferInvalidOutputBufferTypeTest_003
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0290
-* @tc.desc When bufferType is set to InvalidInput and portIndex is set to PORT_INDEX_OUTPUT, the AllocateBuffer 
+* @tc.desc When bufferType is set to InvalidInput and portIndex is set to PORT_INDEX_OUTPUT, the AllocateBuffer
            interface is invoked to set the external buffer
 */
 HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0290, Function | MediumTest | Level3)
@@ -729,7 +734,7 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0330, Function |
 /**
 * @tc.name HdfCodecHdiUseBufferInvalidOutputBufferTypeTest_002
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0340
-* @tc.desc When bufferType is set to InvalidInput and portIndex is set to PORT_INDEX_OUTPUT, 
+* @tc.desc When bufferType is set to InvalidInput and portIndex is set to PORT_INDEX_OUTPUT,
            the UseBuffer interface is called to set the internal buffer
 */
 HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0340, Function | MediumTest | Level3)
@@ -753,7 +758,7 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0340, Function |
 /**
 * @tc.name HdfCodecHdiUseBufferTestVirtualAddrInputTest_003
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0350
-* @tc.desc When the buffer is not initialized and portIndex is set to PORT_INDEX_INPUT, 
+* @tc.desc When the buffer is not initialized and portIndex is set to PORT_INDEX_INPUT,
            the UseBuffer interface is invoked to set the internal buffer
 */
 HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0350, Function | MediumTest | Level3)
@@ -777,7 +782,7 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0350, Function |
 /**
 * @tc.name HdfCodecHdiUseBufferTestVirtualAddrOutput_004
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0360
-* @tc.desc When the buffer is not initialized and portIndex is set to PORT_INDEX_OUTPUT, 
+* @tc.desc When the buffer is not initialized and portIndex is set to PORT_INDEX_OUTPUT,
            call the UseBuffer interface to set the internal buffer
 */
 HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0360, Function | MediumTest | Level3)
@@ -902,7 +907,7 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0410, Function |
 /**
 * @tc.name HdfCodecHdiSetStateIdleToExecutingTest_002
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0420
-* @tc.desc The status of the component that invokes the SendCommand 
+* @tc.desc The status of the component that invokes the SendCommand
            interface changes from OMX_StateIdle to OMX_StateExecuting
 */
 HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0420, Function | MediumTest | Level3)
@@ -914,7 +919,7 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0420, Function |
 /**
 * @tc.name HdfCodecHdiSetStateExecutingToPauseTest_003
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0430
-* @tc.desc The status of the component that invokes the SendCommand 
+* @tc.desc The status of the component that invokes the SendCommand
            interface changes from OMX_StateExecuting to OMX_StatePause
 */
 HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0430, Function | MediumTest | Level3)
@@ -1177,7 +1182,8 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0590, Function |
 /**
 * @tc.name HdfCodecHdiSetStateIdleToLoadedTest_001
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0600
-* @tc.desc The status of the component that invokes the SendCommand interface changes from OMX_StateIdle to OMX_StateLoaded
+* @tc.desc The status of the component that invokes the SendCommand
+           interface changes from OMX_StateIdle to OMX_StateLoaded
 */
 HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0600, Function | MediumTest | Level3)
 {

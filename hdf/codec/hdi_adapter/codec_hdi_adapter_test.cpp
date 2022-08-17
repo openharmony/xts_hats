@@ -277,7 +277,7 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0030, Function |
 /**
 * @tc.name  HdfCodecHdiCreateComponentCompNameErrorTest_001
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0040
-* @tc.desc If compName is a component name that does not exist, the CreateComponent 
+* @tc.desc If compName is a component name that does not exist, the CreateComponent
            interface is invoked to create a component
 */
 HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0040, Function | MediumTest | Level3)
@@ -327,7 +327,7 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0060, Function |
 /**
 * @tc.name HdfCodecHdiCreateComponentAppdataMinTest_004
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0070
-* @tc.desc When Appdata is the minimum value in the value range, the CreateComponent 
+* @tc.desc When Appdata is the minimum value in the value range, the CreateComponent
            interface is invoked to create a componentt
 */
 HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0070, Function | MediumTest | Level3)
@@ -476,7 +476,7 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0160, Function |
 /**
 * @tc.name HdfCodecHdiSetParameterParamIndexNotMatchParamStructTest_003
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0170
-* @tc.desc When paramIndex does not match paramStruct, the SetParameter 
+* @tc.desc When paramIndex does not match paramStruct, the SetParameter
            interface is invoked to set component parameters
 */
 HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0170, Function | MediumTest | Level3)
@@ -645,7 +645,7 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0270, Function |
 /**
 * @tc.name HdfCodecHdiAllocateBufferInputBufferNotInitTest_002
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0280
-* @tc.desc When the buffer is not initialized and portIndex is set to PORT_INDEX_INPUT, the AllocateBuffer 
+* @tc.desc When the buffer is not initialized and portIndex is set to PORT_INDEX_INPUT, the AllocateBuffer
            interface is invoked to set the external buffer
 */
 HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0280, Function | MediumTest | Level3)
@@ -671,7 +671,7 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0290, Function |
 /**
 * @tc.name HdfCodecHdiAllocateBufferOutputBufferNotInitTest_004
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0300
-* @tc.desc When the buffer is not initialized and portIndex is set to PORT_INDEX_OUTPUT, the AllocateBuffer 
+* @tc.desc When the buffer is not initialized and portIndex is set to PORT_INDEX_OUTPUT, the AllocateBuffer
            interface is invoked to set the external buffer
 */
 HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0300, Function | MediumTest | Level3)
@@ -684,7 +684,7 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0300, Function |
 /**
 * @tc.name HdfCodecHdiAllocateBufferAvshareMemFdInputNotInitTest_005
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0310
-* @tc.desc When the buffer is not initialized and portIndex is set to PORT_INDEX_OUTPUT, the AllocateBuffer 
+* @tc.desc When the buffer is not initialized and portIndex is set to PORT_INDEX_OUTPUT, the AllocateBuffer
            interface is invoked to set the external buffer
 */
 HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0310, Function | MediumTest | Level3)
@@ -697,7 +697,7 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0310, Function |
 /**
 * @tc.name HdfCodecHdiAllocateBufferAvshareMemFdOutputNotInitTest_006
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0320
-* @tc.desc When the buffer is not initialized and portIndex is set to PORT_INDEX_OUTPUT, the AllocateBuffer 
+* @tc.desc When the buffer is not initialized and portIndex is set to PORT_INDEX_OUTPUT, the AllocateBuffer
            interface is invoked to set the external buffer
 */
 HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0320, Function | MediumTest | Level3)

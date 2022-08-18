@@ -12,7 +12,7 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
-import("//build/test.gni")
+import("//drivers/peripheral/usb/usb.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hdf/usb"

@@ -1591,7 +1591,7 @@ HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_RenderGetMmapPosition_0005, Function 
 /**
 * @tc.name  Test DrainBuffer API via inputtint type is AUDIO_DRAIN_NORMAL_MODE.
 * @tc.number  SUB_Audio_HDI_RenderDrainBuffer_0001
-* @tc.desc  Test GetMmapPosition interface,return -3 if Error in incoming parameter.
+* @tc.desc  Test RenderDrainBuffer interface,return -2 if Error in incoming parameter.
 */
 HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_RenderDrainBuffer_0001, Function | MediumTest | Level1)
 {
@@ -1620,7 +1620,7 @@ HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_RenderDrainBuffer_0001, Function | Me
 /**
 * @tc.name  Test DrainBuffer API via inputtint type is AUDIO_DRAIN_EARLY_MODE.
 * @tc.number  SUB_Audio_HDI_RenderDrainBuffer_0002
-* @tc.desc  Test GetMmapPosition interface,return -3 if Error in incoming parameter.
+* @tc.desc  Test RenderDrainBuffer interface,return -2 if Error in incoming parameter.
 */
 HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_RenderDrainBuffer_0002, Function | MediumTest | Level1)
 {

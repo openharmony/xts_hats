@@ -803,9 +803,9 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPassthroughMode_0004, Func
     manager->UnloadAdapter(manager, adapter);
 }
 /**
-* @tc.name  Test AdapterUpdateAudioRoute API  when the parameter mode is nullptr.
+* @tc.name  Test AdapterUpdateAudioRoute API
 * @tc.number  SUB_Audio_HDI_UpdateAudioRoute_0001
-* @tc.desc  Test the UpdateAudioRoute API, 
+* @tc.desc  Test the UpdateAudioRoute API,return -2 if Error in incoming parameter.
 */
 HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterUpdateAudioRoute_0001, Function | MediumTest | Level1)
 {

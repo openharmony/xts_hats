@@ -1588,4 +1588,62 @@ HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_RenderGetMmapPosition_0005, Function 
     audiopara.adapter->DestroyRender(audiopara.adapter, audiopara.render);
     audiopara.manager->UnloadAdapter(audiopara.manager, audiopara.adapter);
 }
+/**
+* @tc.name  Test DrainBuffer API via inputtint type is AUDIO_DRAIN_NORMAL_MODE.
+* @tc.number  SUB_Audio_HDI_RenderDrainBuffer_0001
+* @tc.desc  Test GetMmapPosition interface,return -3 if Error in incoming parameter.
+*/
+HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_RenderDrainBuffer_0001, Function | MediumTest | Level1)
+{
+    int32_t ret = -1;
+    enum AudioDrainNotifyType type = AUDIO_DRAIN_NORMAL_MODE;
+    struct PrepareAudioPara audiopara = {
+        .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .self = this, .pins = PIN_OUT_SPEAKER,
+        .path = LOW_LATENCY_AUDIO_FILE.c_str()
+    };
+    ASSERT_NE(GetAudioManager, nullptr);
+    audiopara.manager = GetAudioManager();
+    ASSERT_NE(audiopara.manager, nullptr);
+    ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
+                            &audiopara.render);
+    if (ret < 0 || audiopara.render == nullptr) {
+        ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
+        ASSERT_EQ(nullptr, audiopara.render);
+    }
+
+    ret = audiopara.render->DrainBuffer(audiopara.render, &type);
+    EXPECT_EQ(AUDIO_HAL_ERR_NOT_SUPPORT, ret);
+
+    audiopara.adapter->DestroyRender(audiopara.adapter, audiopara.render);
+    audiopara.manager->UnloadAdapter(audiopara.manager, audiopara.adapter);
+}
+/**
+* @tc.name  Test DrainBuffer API via inputtint type is AUDIO_DRAIN_EARLY_MODE.
+* @tc.number  SUB_Audio_HDI_RenderDrainBuffer_0002
+* @tc.desc  Test GetMmapPosition interface,return -3 if Error in incoming parameter.
+*/
+HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_RenderDrainBuffer_0002, Function | MediumTest | Level1)
+{
+    int32_t ret = -1;
+    enum AudioDrainNotifyType type = AUDIO_DRAIN_EARLY_MODE;
+    struct PrepareAudioPara audiopara = {
+        .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .self = this, .pins = PIN_OUT_SPEAKER,
+        .path = LOW_LATENCY_AUDIO_FILE.c_str()
+    };
+    ASSERT_NE(GetAudioManager, nullptr);
+    audiopara.manager = GetAudioManager();
+    ASSERT_NE(audiopara.manager, nullptr);
+    ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
+                            &audiopara.render);
+    if (ret < 0 || audiopara.render == nullptr) {
+        ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
+        ASSERT_EQ(nullptr, audiopara.render);
+    }
+
+    ret = audiopara.render->DrainBuffer(audiopara.render, &type);
+    EXPECT_EQ(AUDIO_HAL_ERR_NOT_SUPPORT, ret);
+
+    audiopara.adapter->DestroyRender(audiopara.adapter, audiopara.render);
+    audiopara.manager->UnloadAdapter(audiopara.manager, audiopara.adapter);
+}
 }

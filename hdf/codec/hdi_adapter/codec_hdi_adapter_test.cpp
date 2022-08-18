@@ -895,7 +895,7 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0400, Function |
 /**
 * @tc.name HdfCodecHdiSetStateLoadedToIdleTest_001
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0410
-* @tc.desc The status of the component that invokes the SendCommand 
+* @tc.desc The status of the component that invokes the SendCommand
            interface changes from OMX_StateLoaded to OMX_StateIdle
 */
 HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0410, Function | MediumTest | Level3)

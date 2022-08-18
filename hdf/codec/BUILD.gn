@@ -17,6 +17,7 @@ import("//test/xts/tools/build/suite.gni")
 group("HatsHdfCodecTest") {
   testonly = true
   deps = [
+    "hdi_adapter:HatsHdfAdapterCodecTest",
     "hdi_omx:HatsHdfOmxCodecTest",
     "hdi_v1.0:HatsHdfV1CodecTest",
   ]

@@ -475,6 +475,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_DriverSystem_PnpManager_0050, Function | M
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_DriverSystem_PnpManager_0020, Function | MediumTest | Level1)
 {
+    constexpr int SLEEP_TIME = 10;
     auto devmgr = IDeviceManager::Get();
     ASSERT_TRUE(devmgr != nullptr);
     devmgr->UnloadDevice(TEST_SERVICE_NAME);
@@ -529,7 +530,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_DriverSystem_PnpManager_0020, Function | M
     ret = devmgr->UnloadDevice(TEST_SERVICE_NAME);
     ASSERT_EQ(ret, HDF_SUCCESS);
 
-    OsalMSleep(10);
+    OsalMSleep(SLEEP_TIME);
     ASSERT_FALSE(callbacked);
 
     ret = devmgr->LoadDevice(TEST_SERVICE_NAME);

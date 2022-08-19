@@ -69,7 +69,8 @@ group("${posix_interface_module}_bin") {
     #"clock_settime:clock_settime_8-1",
     "ctime:ctime_1-1",
     "difftime:difftime_1-1",
-    "fsync:fsync_4-1",
+
+    #"fsync:fsync_4-1",
     "fsync:fsync_5-1",
     "fsync:fsync_7-1",
 

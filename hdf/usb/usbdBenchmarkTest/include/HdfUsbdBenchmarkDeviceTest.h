@@ -12,18 +12,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef USBD_Request_TEST_H
-#define USBD_Request_TEST_H
+#ifndef USBD_DEVICE_TEST_H
+#define USBD_DEVICE_TEST_H
 
 #include <benchmark/benchmark.h>
 #include <gtest/gtest.h>
-#include "usb_param.h"
+#include "v1_0/usb_types.h"
 
-class HdfUsbdBenchmarkRequestTest : public benchmark::Fixture {
+using OHOS::HDI::Usb::V1_0::UsbDev;
+
+class HdfUsbdBenchmarkDeviceTest : public benchmark::Fixture {
 public:
     void SetUp(const ::benchmark::State &state);
     void TearDown(const ::benchmark::State &state);
 
-    static struct OHOS::USB::UsbDev dev_;
+    static struct UsbDev dev_;
 };
-#endif // USBD_Request_TEST_H
+#endif // USBD_DEVICE_TEST_H

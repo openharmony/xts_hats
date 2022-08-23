@@ -17,13 +17,15 @@
 
 #include <benchmark/benchmark.h>
 #include <gtest/gtest.h>
-#include "usb_param.h"
+#include "v1_0/usb_types.h"
+
+using OHOS::HDI::Usb::V1_0::UsbDev;
 
 class HdfUsbdBenchmarkTransferTest : public benchmark::Fixture {
 public:
     void SetUp(const ::benchmark::State &state);
     void TearDown(const ::benchmark::State &state);
 
-    static struct OHOS::USB::UsbDev dev_;
+    static struct UsbDev dev_;
 };
 #endif // USBD_TRANSFER_TEST_H

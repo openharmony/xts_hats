@@ -33,6 +33,8 @@ const uint32_t IFNAME_MIN_NUM = 0;
 const uint32_t IFNAME_MAX_NUM = 32;
 const uint32_t MAX_IF_NAME_LENGTH = 16;
 const uint32_t SIZE = 4;
+const uint32_t DEFAULT_COMBO_SIZE = 10;
+const uint32_t RESET_TIME = 20;
 
 class WifiHalTest : public testing::Test {
 public:
@@ -358,7 +360,8 @@ HWTEST_F(WifiHalTest,  SUB_DriverSystem_WifiHdi_0200, Function | MediumTest | Le
     ret = apFeature->setCountryCode(apFeature, "CN", 3);
     EXPECT_NE(ret, HDF_SUCCESS);
     ret = apFeature->setCountryCode(apFeature, "99", 2);
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    bool flag = (ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+    ASSERT_TRUE(flag);
     ret = apFeature->setCountryCode(apFeature, "CN", 2);
     EXPECT_EQ(HDF_SUCCESS, ret);
 
@@ -651,7 +654,7 @@ HWTEST_F(WifiHalTest, SUB_DriverSystem_WifiHdi_0300, Function | MediumTest | Lev
     EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
     ret = g_wifi->resetDriver(chipId, staFeature->baseFeature.ifName);
     EXPECT_EQ(ret, HDF_SUCCESS);
-
+    sleep(RESET_TIME);
     ret = g_wifi->destroyFeature((struct IWiFiBaseFeature *)staFeature);
     EXPECT_EQ(HDF_SUCCESS, ret);
 }
@@ -708,7 +711,7 @@ HWTEST_F(WifiHalTest, SUB_DriverSystem_WifiHdi_0320, Function | MediumTest | Lev
     EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
     ret = g_wifi->resetDriver(chipId, apFeature->baseFeature.ifName);
     EXPECT_EQ(ret, HDF_SUCCESS);
-
+    sleep(RESET_TIME);
     ret = g_wifi->destroyFeature((struct IWiFiBaseFeature *)apFeature);
     EXPECT_EQ(HDF_SUCCESS, ret);
 }
@@ -1262,5 +1265,28 @@ HWTEST_F(WifiHalTest, SUB_DriverSystem_WifiHdi_0530, Function | MediumTest | Lev
 
     ret = g_wifi->destroyFeature((struct IWiFiBaseFeature *)staFeature);
     EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.name: WifiHalGetSupportCombo001
+ * @tc.desc: Get supported combo
+ * @tc.type: FUNC
+ */
+HWTEST_F(WifiHalTest, SUB_DriverSystem_WifiHdi_0540, Function | MediumTest | Level1)
+{
+    int ret;
+    uint8_t support[PROTOCOL_80211_IFTYPE_NUM + 1] = {0};
+    uint64_t combo[DEFAULT_COMBO_SIZE] = {0};
+  
+    ret = g_wifi->getSupportFeature(support, PROTOCOL_80211_IFTYPE_NUM + 1);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+    ret = g_wifi->getSupportCombo(nullptr, 0);
+    EXPECT_NE(HDF_SUCCESS, ret);
+    ret = g_wifi->getSupportCombo(combo, DEFAULT_COMBO_SIZE);
+    if (support[PROTOCOL_80211_IFTYPE_NUM] == 0) {
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+} else {
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
 }
 };

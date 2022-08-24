@@ -14,8 +14,8 @@
 import("//build/ohos_var.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//drivers/peripheral/audio/audio.gni")
-import("//test/xts/tools/build/suite.gni")
 import("//test/xts/hats/hdf/audio/audio.gni")
+import("//test/xts/tools/build/suite.gni")
 
 ###########################systemtest##############################
 module_output_path = "hdf/audio"

@@ -78,7 +78,8 @@ void HdfUsbdBenchmarkTransferTest::TearDown(const ::benchmark::State& state)
 /**
  * @tc.name: SUB_USB_HDI_Benchmark_0200
  * @tc.desc: Benchmark test
- * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
+ * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, 
+ * std::vector<uint8_t> &data);
  * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */

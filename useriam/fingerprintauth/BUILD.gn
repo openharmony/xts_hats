@@ -36,7 +36,10 @@ ohos_moduletest_suite("HatsUserIamFingerprintAuthTest") {
     "//utils/native/base/include",
   ]
 
-  sources = [ "./src/fingerprint_auth_hdi.cpp" ]
+  sources = [
+    "./src/fingerprint_auth_hdi.cpp",
+    "./src/fingerprint_type_test.cpp",
+  ]
 
   deps = [
     "../common:useriam_test_common",

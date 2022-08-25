@@ -14,11 +14,10 @@
 import("//build/config/features.gni")
 import("//build/ohos_var.gni")
 import("//build/test.gni")
-import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
 
-ohos_moduletest_suite("HatsUserIamFaceAuthTest") {
-  module_out_path = "hdf/face_auth"
+ohos_moduletest_suite("HatsUserIamUserAuthTest") {
+  module_out_path = "useriam/user_auth"
   cflags = [
     "-g",
     "-O0",
@@ -28,8 +27,7 @@ ohos_moduletest_suite("HatsUserIamFaceAuthTest") {
   include_dirs = [
     "./include",
     "../common/include",
-    "//drivers/peripheral/face_auth/hdi_service/include",
-    "//drivers/peripheral/face_auth/hdi_service/src",
+    "//drivers/peripheral/user_auth/hdi_service/include",
     "//base/useriam/user_auth_framework/common",
     "//base/useriam/user_auth_framework/common/logs",
     "//third_party/googletest/googletest/include/gtest",
@@ -37,20 +35,20 @@ ohos_moduletest_suite("HatsUserIamFaceAuthTest") {
   ]
 
   sources = [
-    "./src/face_auth_hdi.cpp",
-    "./src/face_auth_type_test.cpp",
+    "./src/user_auth_hdi.cpp",
+    "./src/user_auth_type_test.cpp",
   ]
 
   deps = [
     "../common:useriam_test_common",
     "//base/useriam/user_auth_framework/common:iam_test",
-    "//drivers/peripheral/face_auth/hdi_service:libface_auth_interface_service_1.0",
+    "//drivers/peripheral/user_auth/hdi_service:libuser_auth_interface_service_1.0",
     "//third_party/googletest:gtest_main",
     "//utils/native/base:utils",
   ]
 
   external_deps = [
-    "drivers_interface_face_auth:face_auth_idl_headers",
+    "drivers_interface_user_auth:user_auth_idl_headers",
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_core",
     "utils_base:utils",

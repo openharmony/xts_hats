@@ -12,8 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef FACE_AUTH_HDI_H
-#define FACE_AUTH_HDI_H
+#ifndef PIN_AUTH_HDI_H
+#define PIN_AUTH_HDI_H
 
 #include <cstddef>
 #include <cstdint>
@@ -23,10 +23,8 @@
 #include <string>
 #include "parcel.h"
 #include "executor_impl.h"
-#include "face_auth_defines.h"
-#include "face_auth_interface_service.h"
 
-class UserIamFaceAuthTest : public testing::Test {
+class UserIamPinAuthTest : public testing::Test {
 public:
     static void SetUpTestCase();
     static void TearDownTestCase();
@@ -34,7 +32,7 @@ public:
     void TearDown();
 };
 
-class FaceAuthTypeTest : public testing::Test {
+class PinAuthTypeTest : public testing::Test {
 public:
     static void SetUpTestCase();
     static void TearDownTestCase();

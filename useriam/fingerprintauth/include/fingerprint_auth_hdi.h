@@ -23,8 +23,18 @@
 #include <string>
 #include "parcel.h"
 #include "executor_impl.h"
+#include "fingerprint_auth_defines.h"
+#include "fingerprint_auth_interface_service.h"
 
 class UserIamFingerprintAuthTest : public testing::Test {
+public:
+    static void SetUpTestCase();
+    static void TearDownTestCase();
+    void SetUp();
+    void TearDown();
+};
+
+class FingerPrintTypeTest : public testing::Test {
 public:
     static void SetUpTestCase();
     static void TearDownTestCase();

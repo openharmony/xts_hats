@@ -15,8 +15,6 @@
 
 #include <hdf_base.h>
 #include "iam_hat_test.h"
-#include "executor_impl.h"
-#include "face_auth_defines.h"
 #include "face_auth_hdi.h"
 
 #define LOG_LABEL OHOS::UserIam::Common::LABEL_FACE_AUTH_IMPL
@@ -221,7 +219,7 @@ HWTEST_F(UserIamFaceAuthTest, Security_IAM_Face_HDI_FUNC_0106, Function | Medium
  */
 HWTEST_F(UserIamFaceAuthTest, Security_IAM_Face_HDI_FUNC_0107, Function | MediumTest | Level1)
 {
-    cout << "start test Enroll_001" << endl;
+    cout << "start test Enroll" << endl;
     uint64_t scheduleId = parcel.ReadUint64();
     std::vector<uint8_t> extraInfo;
     FillTestUint8Vector(parcel, extraInfo);
@@ -270,6 +268,23 @@ HWTEST_F(UserIamFaceAuthTest, Security_IAM_Face_HDI_FUNC_0109, Function | Medium
     sptr<IExecutorCallback> callbackObj;
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.Identify(scheduleId, extraInfo, callbackObj);
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+
+/**
+ * @tc.number: Security_IAM_Face_HDI_FUNC_0110
+ * @tc.name: Test GetExecutorList
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ * @tc.level: Level1
+ */
+HWTEST_F(UserIamFaceAuthTest, Security_IAM_Face_HDI_FUNC_0110, Function | MediumTest | Level1)
+{
+    cout << "start test GetExecutorList" << endl;
+    FaceAuthInterfaceService faceauth_Interface;
+    std::vector<sptr<IExecutor>> executorList;
+    int32_t ret = faceauth_Interface.GetExecutorList(executorList);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
 }

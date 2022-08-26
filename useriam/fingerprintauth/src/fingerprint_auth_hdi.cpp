@@ -15,8 +15,6 @@
 
 #include <hdf_base.h>
 #include "iam_hat_test.h"
-#include "executor_impl.h"
-#include "fingerprint_auth_defines.h"
 #include "fingerprint_auth_hdi.h"
 
 #define LOG_LABEL OHOS::UserIam::Common::LABEL_FINGERPRINT_AUTH_IMPL
@@ -271,6 +269,23 @@ HWTEST_F(UserIamFingerprintAuthTest, Security_IAM_Fingerprint_HDI_FUNC_0109, Fun
     sptr<IExecutorCallback> callbackObj;
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.Identify(scheduleId, extraInfo, callbackObj);
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+
+/**
+ * @tc.number: Security_IAM_Fingerprint_HDI_FUNC_0110
+ * @tc.name: Test GetExecutorList
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ * @tc.level: Level1
+ */
+HWTEST_F(UserIamFingerprintAuthTest, Security_IAM_Fingerprint_HDI_FUNC_0110, Function | MediumTest | Level1)
+{
+    cout << "start test GetExecutorList" << endl;
+    FingerprintAuthInterfaceService fingerprint_Interface;
+    std::vector<sptr<IExecutor>> executorList;
+    int32_t ret = fingerprint_Interface.GetExecutorList(executorList);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
 }

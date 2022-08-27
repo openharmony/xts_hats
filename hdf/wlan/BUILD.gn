@@ -23,6 +23,9 @@ group("HatsHdfWifiTest") {
       deps = [
         #"hdiService:HatsHdfWifiHdiServiceTest",
         "wifi:HatsHdfWifiHdiTest",
+        "wifi:HatsHdfWifiHdistartandstopTest",
+        "wifi:HatsHdfWificlientTest",
+        "wifi:HatsHdfWificommonTest",
         "wlanBenchmarkTest:HatsHdfWlanbenchmarkTest",
       ]
     }

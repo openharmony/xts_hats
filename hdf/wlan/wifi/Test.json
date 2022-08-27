@@ -16,3 +16,60 @@
     },
     "description": "Configuration for HatsHdfWifiHdiTest Tests"
 }
+
+{
+    "kits": [
+        {
+            "push": [
+                "HatsHdfWificlientTest->/data/local/tmp/HatsHdfWificlientTest"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsHdfWificlientTest",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    },
+    "description": "Configuration for HatsHdfWificlientTest Tests"
+}
+
+{
+    "kits": [
+        {
+            "push": [
+                "HatsHdfWificommonTest->/data/local/tmp/HatsHdfWificommonTest"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsHdfWificommonTest",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    },
+    "description": "Configuration for HatsHdfWificommonTest Tests"
+}
+
+{
+    "kits": [
+        {
+            "push": [
+                "HatsHdfWifiHdistartandstopTest->/data/local/tmp/HatsHdfWifiHdistartandstopTest"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsHdfWifiHdistartandstopTest",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    },
+    "description": "Configuration for HatsHdfWifiHdistartandstopTest Tests"
+}

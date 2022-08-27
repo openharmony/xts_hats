@@ -12,37 +12,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+#include <iostream>
 #include <string>
 #include <vector>
 
-#include <iostream>
-#include "usbd_function_test.h"
 #include "hdf_log.h"
 #include "if_system_ability_manager.h"
 #include "system_ability_definition.h"
-#include "usbd_client.h"
+#include "v1_0/iusb_interface.h"
+#include "v1_0/usb_types.h"
+#include "HdfUsbdBenchmarkFunctionTest.h"
 
 using namespace benchmark::internal;
 using namespace OHOS;
-using namespace OHOS::USB;
 using namespace std;
+using namespace OHOS::HDI::Usb::V1_0;
 
 const int SLEEP_TIME = 3;
 const int TEST_PORT_ID = 1;
 const int TEST_POWER_ROLE = 2;
 const int TEST_DATAR_ROLE = 2;
 
-void HdfUsbdBenchmarkFunctionTest::SetUp(const ::benchmark::State &state)
+namespace {
+sptr<IUsbInterface> g_usbInterface = nullptr;
+}
+
+void HdfUsbdBenchmarkFunctionTest::SetUp(const ::benchmark::State& state)
 {
-    auto ret = UsbdClient::GetInstance().SetPortRole(TEST_PORT_ID, TEST_POWER_ROLE, TEST_DATAR_ROLE);
+    g_usbInterface = IUsbInterface::Get();
+    if (g_usbInterface == nullptr) {
+        exit(0);
+    }
+    auto ret = g_usbInterface->SetPortRole(TEST_PORT_ID, TEST_POWER_ROLE, TEST_DATAR_ROLE);
     sleep(SLEEP_TIME);
-    ASSERT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
     if (ret != 0) {
         exit(0);
     }
 }
 
-void HdfUsbdBenchmarkFunctionTest::TearDown(const ::benchmark::State &state) {}
+void HdfUsbdBenchmarkFunctionTest::TearDown(const ::benchmark::State& state) {}
 
 /**
  * @tc.name: SUB_USB_HDI_Benchmark_0030
@@ -51,18 +60,21 @@ void HdfUsbdBenchmarkFunctionTest::TearDown(const ::benchmark::State &state) {}
  * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0030)(benchmark::State &st)
+BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0030)
+(benchmark::State& st)
 {
     int32_t funcs = 0;
     auto ret = 0;
     for (auto _ : st) {
-        ret = UsbdClient::GetInstance().GetCurrentFunctions(funcs);
+        ret = g_usbInterface->GetCurrentFunctions(funcs);
     }
-    ASSERT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0030)->Iterations(100)->
-    Repetitions(3)->ReportAggregatesOnly();
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0030)
+    ->Iterations(100)
+    ->Repetitions(3)
+    ->ReportAggregatesOnly();
 
 /**
  * @tc.name: SUB_USB_HDI_Benchmark_0040
@@ -71,18 +83,21 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0030)->
  * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0040)(benchmark::State &st)
+BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0040)
+(benchmark::State& st)
 {
     int32_t funcs = 1;
     auto ret = 0;
     for (auto _ : st) {
-        ret = UsbdClient::GetInstance().SetCurrentFunctions(funcs);
+        ret = g_usbInterface->SetCurrentFunctions(funcs);
     }
-    ASSERT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0040)->Iterations(100)->
-    Repetitions(3)->ReportAggregatesOnly();
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0040)
+    ->Iterations(100)
+    ->Repetitions(3)
+    ->ReportAggregatesOnly();
 
 /**
  * @tc.name: SUB_USB_HDI_Benchmark_0050
@@ -91,17 +106,20 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0040)->
  * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0050)(benchmark::State &st)
+BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0050)
+(benchmark::State& st)
 {
     auto ret = 0;
     for (auto _ : st) {
-        ret = UsbdClient::GetInstance().SetPortRole(1, 1, 1);
+        ret = g_usbInterface->SetPortRole(1, 1, 1);
     }
-    ASSERT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0050)->Iterations(100)->
-    Repetitions(3)->ReportAggregatesOnly();
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0050)
+    ->Iterations(100)
+    ->Repetitions(3)
+    ->ReportAggregatesOnly();
 
 /**
  * @tc.name: SUB_USB_HDI_Benchmark_0060
@@ -110,7 +128,8 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0050)->
  * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0060)(benchmark::State &st)
+BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0060)
+(benchmark::State& st)
 {
     int32_t portId = 0;
     int32_t powerRole = 0;
@@ -118,12 +137,14 @@ BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0060)(benchmark:
     int32_t mode = 0;
     auto ret = 0;
     for (auto _ : st) {
-        ret = UsbdClient::GetInstance().QueryPort(portId, powerRole, dataRole, mode);
+        ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
     }
-    ASSERT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0060)->Iterations(100)->
-    Repetitions(3)->ReportAggregatesOnly();
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0060)
+    ->Iterations(100)
+    ->Repetitions(3)
+    ->ReportAggregatesOnly();
 
 BENCHMARK_MAIN();

@@ -12,43 +12,51 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+#include <iostream>
 #include <string>
 #include <vector>
 
-#include <iostream>
-#include <vector>
-#include "usbd_device_test.h"
-#include "hdf_log.h"
-#include "usbd_client.h"
 #include "UsbSubscriberTest.h"
-#include "usb_errors.h"
+#include "hdf_log.h"
+#include "v1_0/iusb_interface.h"
+#include "v1_0/usb_types.h"
+#include "HdfUsbdBenchmarkDeviceTest.h"
 
 using namespace benchmark::internal;
 using namespace OHOS;
 using namespace OHOS::USB;
 using namespace std;
+using namespace OHOS::HDI::Usb::V1_0;
 
 const int SLEEP_TIME = 3;
 
-struct UsbDev HdfUsbdBenchmarkDeviceTest::dev_ = {0, 0};
+namespace {
+sptr<IUsbInterface> g_usbInterface = nullptr;
+}
 
-void HdfUsbdBenchmarkDeviceTest::SetUp(const ::benchmark::State &state)
+struct UsbDev HdfUsbdBenchmarkDeviceTest::dev_ = { 0, 0 };
+
+void HdfUsbdBenchmarkDeviceTest::SetUp(const ::benchmark::State& state)
 {
-    auto ret = UsbdClient::GetInstance().SetPortRole(1, 1, 1);
+    g_usbInterface = IUsbInterface::Get();
+    if (g_usbInterface == nullptr) {
+        exit(0);
+    }
+    auto ret = g_usbInterface->SetPortRole(1, 1, 1);
     sleep(SLEEP_TIME);
-    ASSERT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
     if (ret != 0) {
         exit(0);
     }
 
     sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    if (UsbdClient::GetInstance().BindUsbdSubscriber(subscriber) != UEC_OK) {
+    if (g_usbInterface->BindUsbdSubscriber(subscriber) != HDF_SUCCESS) {
         exit(0);
     }
-    dev_ = {subscriber->busNum_, subscriber->devAddr_};
+    dev_ = { subscriber->busNum_, subscriber->devAddr_ };
 }
 
-void HdfUsbdBenchmarkDeviceTest::TearDown(const ::benchmark::State &state) {}
+void HdfUsbdBenchmarkDeviceTest::TearDown(const ::benchmark::State& state) {}
 
 /**
  * @tc.name: SUB_USB_HDI_Benchmark_0010
@@ -57,18 +65,21 @@ void HdfUsbdBenchmarkDeviceTest::TearDown(const ::benchmark::State &state) {}
  * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0010)(benchmark::State &st)
+BENCHMARK_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0010)
+(benchmark::State& st)
 {
     struct UsbDev dev = dev_;
     auto ret = 0;
     for (auto _ : st) {
-        ret = UsbdClient::GetInstance().OpenDevice(dev);
+        ret = g_usbInterface->OpenDevice(dev);
     }
-    ASSERT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0010)->Iterations(100)->
-    Repetitions(3)->ReportAggregatesOnly();
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0010)
+    ->Iterations(100)
+    ->Repetitions(3)
+    ->ReportAggregatesOnly();
 
 /**
  * @tc.name: SUB_USB_HDI_Benchmark_0020
@@ -77,18 +88,21 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0010)->It
  * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0020)(benchmark::State &st)
+BENCHMARK_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0020)
+(benchmark::State& st)
 {
     struct UsbDev dev = dev_;
-    auto ret = UsbdClient::GetInstance().OpenDevice(dev);
-    ASSERT_TRUE(ret == 0);
+    auto ret = g_usbInterface->OpenDevice(dev);
+    ASSERT_EQ(0, ret);
     for (auto _ : st) {
-        ret = UsbdClient::GetInstance().CloseDevice(dev);
+        ret = g_usbInterface->CloseDevice(dev);
     }
-    ASSERT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0020)->Iterations(100)->
-    Repetitions(3)->ReportAggregatesOnly();
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0020)
+    ->Iterations(100)
+    ->Repetitions(3)
+    ->ReportAggregatesOnly();
 
 BENCHMARK_MAIN();

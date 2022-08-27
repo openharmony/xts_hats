@@ -223,6 +223,159 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0270, TestSize.Level1)
 
 /**
   * @tc.name: EnableSensor0002
+  * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0271, TestSize.Level1)
+{
+    if (g_sensorInterface == nullptr) {
+        ASSERT_NE(nullptr, g_sensorInterface);
+        return;
+    }
+    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_ACCELEROMETER);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+    ret = g_sensorInterface->Disable(SENSOR_TYPE_ACCELEROMETER);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: EnableSensor0003
+  * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0272, TestSize.Level1)
+{
+    if (g_sensorInterface == nullptr) {
+        ASSERT_NE(nullptr, g_sensorInterface);
+        return;
+    }
+    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_PHOTOPLETHYSMOGRAPH);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+    ret = g_sensorInterface->Disable(SENSOR_TYPE_PHOTOPLETHYSMOGRAPH);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+}
+
+/**
+  * @tc.name: EnableSensor0004
+  * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0273, TestSize.Level1)
+{
+    if (g_sensorInterface == nullptr) {
+        ASSERT_NE(nullptr, g_sensorInterface);
+        return;
+    }
+    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_ELECTROCARDIOGRAPH);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+    ret = g_sensorInterface->Disable(SENSOR_TYPE_ELECTROCARDIOGRAPH);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+}
+
+/**
+  * @tc.name: EnableSensor0005
+  * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0274, TestSize.Level1)
+{
+    if (g_sensorInterface == nullptr) {
+        ASSERT_NE(nullptr, g_sensorInterface);
+        return;
+    }
+    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_CAPACITIVE);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+    ret = g_sensorInterface->Disable(SENSOR_TYPE_CAPACITIVE);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+}
+
+/**
+  * @tc.name: EnableSensor0006
+  * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0275, TestSize.Level1)
+{
+    if (g_sensorInterface == nullptr) {
+        ASSERT_NE(nullptr, g_sensorInterface);
+        return;
+    }
+    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_TEMPERATURE);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+    ret = g_sensorInterface->Disable(SENSOR_TYPE_TEMPERATURE);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+}
+
+/**
+  * @tc.name: EnableSensor0007
+  * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0276, TestSize.Level1)
+{
+    if (g_sensorInterface == nullptr) {
+        ASSERT_NE(nullptr, g_sensorInterface);
+        return;
+    }
+    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_GESTURE);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+    ret = g_sensorInterface->Disable(SENSOR_TYPE_GESTURE);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+}
+
+/**
+  * @tc.name: EnableSensor0008
+  * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0277, TestSize.Level1)
+{
+    if (g_sensorInterface == nullptr) {
+        ASSERT_NE(nullptr, g_sensorInterface);
+        return;
+    }
+    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_HUMIDITY);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+    ret = g_sensorInterface->Disable(SENSOR_TYPE_HUMIDITY);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+}
+
+/**
+  * @tc.name: EnableSensor0009
+  * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0278, TestSize.Level1)
+{
+    if (g_sensorInterface == nullptr) {
+        ASSERT_NE(nullptr, g_sensorInterface);
+        return;
+    }
+    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_MEDICAL_BEGIN);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+    ret = g_sensorInterface->Disable(SENSOR_TYPE_MEDICAL_BEGIN);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+}
+
+/**
+  * @tc.name: EnableSensor0010
+  * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0279, TestSize.Level1)
+{
+    if (g_sensorInterface == nullptr) {
+        ASSERT_NE(nullptr, g_sensorInterface);
+        return;
+    }
+    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_MEDICAL_END);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+    ret = g_sensorInterface->Disable(SENSOR_TYPE_MEDICAL_END);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+}
+
+/**
+  * @tc.name: EnableSensor0011
   * @tc.desc: Enables the sensor available in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
@@ -235,6 +388,57 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0280, TestSize.Level1)
     int32_t ret = g_sensorInterface->Enable(ABNORMAL_SENSORID);
     EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
     ret = g_sensorInterface->Disable(ABNORMAL_SENSORID);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+}
+
+/**
+  * @tc.name: EnableSensor0012
+  * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0281, TestSize.Level1)
+{
+    if (g_sensorInterface == nullptr) {
+        ASSERT_NE(nullptr, g_sensorInterface);
+        return;
+    }
+    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_PHYSICAL_MAX);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+    ret = g_sensorInterface->Disable(SENSOR_TYPE_PHYSICAL_MAX);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+}
+
+/**
+  * @tc.name: EnableSensor0013
+  * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0282, TestSize.Level1)
+{
+    if (g_sensorInterface == nullptr) {
+        ASSERT_NE(nullptr, g_sensorInterface);
+        return;
+    }
+    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_ORIENTATION);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+    ret = g_sensorInterface->Disable(SENSOR_TYPE_ORIENTATION);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+}
+
+/**
+  * @tc.name: EnableSensor0014
+  * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0283, TestSize.Level1)
+{
+    if (g_sensorInterface == nullptr) {
+        ASSERT_NE(nullptr, g_sensorInterface);
+        return;
+    }
+    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_LINEAR_ACCELERATION);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+    ret = g_sensorInterface->Disable(SENSOR_TYPE_LINEAR_ACCELERATION);
     EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
 }
 

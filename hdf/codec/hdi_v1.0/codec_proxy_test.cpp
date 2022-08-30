@@ -178,7 +178,7 @@ HWTEST_F(CodecProxyTest, HdfCodecHdiV1CreateCodecByTypeTest_001, TestSize.Level1
     CodecType type = VIDEO_DECODER;
     AvCodecMime mime = MEDIA_MIMETYPE_VIDEO_AVC;
     int32_t errorCode = g_codecObj->CodecCreateByType(g_codecObj, type, mime, &g_handle);
-    ASSERT_EQ(errorCode, HDF_FAILURE);
+    ASSERT_EQ(errorCode, HDF_ERR_NOT_SUPPORT);
 }
 
 HWTEST_F(CodecProxyTest, HdfCodecHdiV1SetPortModeTest_001, TestSize.Level1)
@@ -187,7 +187,7 @@ HWTEST_F(CodecProxyTest, HdfCodecHdiV1SetPortModeTest_001, TestSize.Level1)
     AllocateBufferMode mode = ALLOCATE_INPUT_BUFFER_CODEC_PRESET;
     BufferType type = BUFFER_TYPE_FD;
     int32_t errorCode = g_codecObj->CodecSetPortMode(g_codecObj, g_handle, direct, mode, type);
-    ASSERT_EQ(errorCode, HDF_FAILURE);
+    ASSERT_EQ(errorCode, HDF_ERR_NOT_SUPPORT);
 }
 
 HWTEST_F(CodecProxyTest, HdfCodecHdiV1GetPortModeTest_001, TestSize.Level1)
@@ -196,7 +196,7 @@ HWTEST_F(CodecProxyTest, HdfCodecHdiV1GetPortModeTest_001, TestSize.Level1)
     AllocateBufferMode mode;
     BufferType type;
     int32_t errorCode = g_codecObj->CodecGetPortMode(g_codecObj, g_handle, direct, &mode, &type);
-    ASSERT_EQ(errorCode, HDF_FAILURE);
+    ASSERT_EQ(errorCode, HDF_ERR_NOT_SUPPORT);
 }
 
 HWTEST_F(CodecProxyTest, HdfCodecHdiV1SetCodecTypeTest_001, TestSize.Level1)
@@ -302,7 +302,7 @@ HWTEST_F(CodecProxyTest, HdfCodecHdiV1StopCodecTest_001, TestSize.Level1)
 HWTEST_F(CodecProxyTest, HdfCodecHdiV1ResetCodecTest_001, TestSize.Level1)
 {
     int32_t errorCode = g_codecObj->CodecReset(g_codecObj, g_handle);
-    ASSERT_EQ(errorCode, HDF_FAILURE);
+    ASSERT_EQ(errorCode, HDF_ERR_NOT_SUPPORT);
 }
 
 HWTEST_F(CodecProxyTest, HdfCodecHdiV1QueueOutputTest_001, TestSize.Level1)
@@ -358,10 +358,10 @@ HWTEST_F(CodecProxyTest, HdfCodecHdiV1FlushTest_001, TestSize.Level1)
 HWTEST_F(CodecProxyTest, HdfCodecHdiV1SetCallbackTest_001, TestSize.Level1)
 {
     UINTPTR instance = 0;
-    ICodecCallback *g_callback = CodecCallbackStubObtain();
-    ASSERT_TRUE(g_callback != nullptr);
+    ICodecCallback *callback = CodecCallbackStubObtain();
+    ASSERT_TRUE(callback != nullptr);
 
-    int32_t errorCode = g_codecObj->CodecSetCallback(g_codecObj, g_handle, g_callback, instance);
+    int32_t errorCode = g_codecObj->CodecSetCallback(g_codecObj, g_handle, callback, instance);
     ASSERT_EQ(errorCode, HDF_SUCCESS);
 }
 

@@ -55,10 +55,10 @@ void MallocModifyPointer::SetUpTestCase()
 void MallocModifyPointer::TearDownTestCase()
 {
 }
-
+const int MAX_NUMBER_VALUE = 512;
 volatile uintptr_t *g_p0;
 volatile uintptr_t *g_p1;
-volatile uintptr_t *g_tmp;
+volatile void *g_tmp[MAX_NUMBER_VALUE];
 
 static int child(void)
 {
@@ -67,14 +67,14 @@ static int child(void)
         printf("Malloc failed:%s\n", strerror(errno));
     }
     /* Malloc a dividing chunk to avoid combination of neighbouring freed chunk */
-    g_tmp = (uintptr_t *)malloc(10 * sizeof(uintptr_t));
+    g_tmp[0] = (uintptr_t *)malloc(10 * sizeof(uintptr_t));
     /* Malloc another chunk to get a key */
     g_p1 = (uintptr_t *)malloc(10 * sizeof(uintptr_t));
     if (!g_p1) {
         printf("Malloc failed:%s\n", strerror(errno));
     }
     /* Malloc a dividing chunk to avoid combination of neighbouring freed chunk */
-    g_tmp = (uintptr_t *)malloc(10 * sizeof(uintptr_t));
+    g_tmp[0] = (uintptr_t *)malloc(10 * sizeof(uintptr_t));
 
     if (g_p0 != nullptr) {
         free(static_cast<void *>(const_cast<uintptr_t *>(g_p0)));
@@ -91,13 +91,16 @@ static int child(void)
     g_p0[0] = reinterpret_cast<uintptr_t>(fake_ptr);
     g_p1[0] = reinterpret_cast<uintptr_t>(fake_ptr);
 
-    for (int i = 0; i < 512; ++i) {
+    for (int i = 0; i < MAX_NUMBER_VALUE; ++i) {
         /*
          * The init procedure makes the freelist unpredictable. To make sure to trigger the ivalid ptr
          * acess, here we create as many chunks as possible to make sure there are enough chunks in
          * bin[j] of size "10 * sizeof(uintptr_t)". Basically this is heap spray.
          */
-        g_p0 = (uintptr_t *)malloc(10 * sizeof(uintptr_t));
+        g_tmp[i] = (uintptr_t *)malloc(10 * sizeof(uintptr_t));
+    }
+    for (int i = 0; i < MAX_NUMBER_VALUE; ++i) {
+        free(const_cast<void *>(g_tmp[i]));
     }
     return 0;
 }

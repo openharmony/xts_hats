@@ -26,12 +26,19 @@ config("cameraTest_config") {
   visibility = [ ":*" ]
 }
 
-ohos_moduletest_suite("HatsHdfCameraFunctionTest") {
+ohos_moduletest_suite("HatsHdfCameraTest") {
   testonly = true
   module_out_path = module_output_path
   sources = [
+    "./src/camera_ability_test.cpp",
+    "./src/camera_capture_test.cpp",
+    "./src/camera_fps_test.cpp",
+    "./src/camera_preview_test.cpp",
+    "./src/camera_stabili_test.cpp",
+    "./src/camera_video_test.cpp",
+    "./src/double_preview_test.cpp",
+    "./src/hdfcamera_facedetect.cpp",
     "./src/open_camera_test.cpp",
-    "./src/preview_test.cpp",
     "./src/stream_customer.cpp",
     "./src/test_display.cpp",
   ]
@@ -41,13 +48,10 @@ ohos_moduletest_suite("HatsHdfCameraFunctionTest") {
     "./include",
     "$camera_path/../interfaces/include",
     "$camera_path/../interfaces/hdi_ipc",
-    "$camera_path/../interfaces/hdi_ipc/server/include",
     "$camera_path/../interfaces/hdi_ipc/utils/include",
-    "$camera_path/../interfaces/hdi_ipc/client/include",
     "$camera_path/../interfaces/hdi_ipc/callback/host/include",
     "$camera_path/../interfaces/hdi_ipc/callback/device/include",
     "$camera_path/../interfaces/hdi_ipc/callback/operator/include",
-    "//foundation/graphic/graphic/frameworks/surface/include",
     "$camera_path/include",
     "$camera_path/hdi_impl",
     "$camera_path/hdi_impl/include",
@@ -58,11 +62,6 @@ ohos_moduletest_suite("HatsHdfCameraFunctionTest") {
     "$camera_path/hdi_impl/src/stream_operator/stream_tunnel/standard",
     "$camera_path/device_manager/include/",
     "$camera_path/device_manager/include/v4l2",
-    "//foundation/graphic/utils/interfaces/kits",
-    "//foundation/graphic/graphic/interfaces/kits",
-    "//foundation/graphic/graphic/interfaces/inner_api/surface",
-    "//foundation/graphic/graphic/interfaces/inner_api/common",
-    "//foundation/graphic/graphic/utils/buffer_handle/export",
     "$camera_path/utils/event",
     "//drivers/peripheral/camera/interfaces/metadata/include",
     "//drivers/peripheral/display/interfaces/include",
@@ -71,7 +70,7 @@ ohos_moduletest_suite("HatsHdfCameraFunctionTest") {
     "//base/hiviewdfx/interfaces/innerkits/libhilog/include",
 
     #producer
-    "//commonlibrary/c_utils/base/include",
+    "//utils/native/base/include",
     "//foundation/systemabilitymgr/samgr/interfaces/innerkits/samgr_proxy/include",
     "$camera_path/pipeline_core/utils",
     "$camera_path/pipeline_core/include",
@@ -93,11 +92,11 @@ ohos_moduletest_suite("HatsHdfCameraFunctionTest") {
   ]
 
   deps = [
-    "$camera_path/../interfaces/hdi_ipc/client:libcamera_client",
     "$camera_path/buffer_manager:camera_buffer_manager",
     "$camera_path/device_manager:camera_device_manager",
-    "$camera_path/hdi_impl:camera_hdi_impl",
+    "$camera_path/hdi_impl:camera_host_service_1.0",
     "$camera_path/pipeline_core:camera_pipeline_core",
+    "//drivers/interface/camera/v1_0:libcamera_proxy_1.0",
     "//drivers/peripheral/camera/interfaces/metadata:metadata",
     "//third_party/googletest:gmock",
     "//third_party/googletest:gmock_main",
@@ -135,5 +134,5 @@ group("hdi") {
   if (!defined(ohos_lite)) {
     testonly = true
   }
-  deps = [ ":HatsHdfCameraFunctionTest" ]
+  deps = [ ":HatsHdfCameraTest" ]
 }

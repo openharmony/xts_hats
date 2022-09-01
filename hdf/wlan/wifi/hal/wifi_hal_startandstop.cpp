@@ -12,17 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <cstdint>
 #include <gtest/gtest.h>
-#include <securec.h>
+#include <osal_mem.h>
 #include "hdf_base.h"
-#include "hdf_uhdf_test.h"
-#include "hdf_wifi_test.h"
 #include "hdf_sbuf.h"
 #include "wifi_hal.h"
 #include "wifi_hal_ap_feature.h"
 #include "wifi_hal_base_feature.h"
 #include "wifi_hal_sta_feature.h"
+#include "securec.h"
 
 using namespace testing::ext;
 

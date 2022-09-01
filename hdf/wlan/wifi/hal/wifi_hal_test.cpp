@@ -12,17 +12,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <cstdint>
+
 #include <gtest/gtest.h>
-#include <securec.h>
+#include <osal_mem.h>
 #include "hdf_base.h"
-#include "hdf_uhdf_test.h"
-#include "hdf_wifi_test.h"
 #include "hdf_sbuf.h"
 #include "wifi_hal.h"
 #include "wifi_hal_ap_feature.h"
 #include "wifi_hal_base_feature.h"
 #include "wifi_hal_sta_feature.h"
+#include "securec.h"
 
 using namespace testing::ext;
 
@@ -32,7 +31,10 @@ const int32_t WLAN_TX_POWER = 160;
 const uint32_t IFNAME_MIN_NUM = 0;
 const uint32_t IFNAME_MAX_NUM = 32;
 const uint32_t MAX_IF_NAME_LENGTH = 16;
+const uint32_t TEST_PARAM_BUF_SIZE = 64;
 const uint32_t SIZE = 4;
+const int32_t TEST_CMD = 123;
+const uint32_t TEST_BUF_SIZE = 64;
 const uint32_t DEFAULT_COMBO_SIZE = 10;
 const uint32_t RESET_TIME = 20;
 
@@ -1288,5 +1290,147 @@ HWTEST_F(WifiHalTest, SUB_DriverSystem_WifiHdi_0540, Function | MediumTest | Lev
 } else {
     EXPECT_EQ(ret, HDF_SUCCESS);
 }
+}
+
+/**
+ * @tc.name: SetProjectionScreenParam001
+ * @tc.desc: wifi hal config projection screen function test
+ * @tc.type: FUNC
+ */
+HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0001, Function | MediumTest | Level1)
+{
+    int32_t ret;
+    bool flag;
+    struct IWiFiAp *apFeature = nullptr;
+    ProjScrnCmdParam *param;
+
+    param = (ProjScrnCmdParam *)OsalMemCalloc(sizeof(ProjScrnCmdParam) + TEST_PARAM_BUF_SIZE);
+    EXPECT_NE(nullptr, param);
+    param->cmdId = TEST_CMD;
+    param->bufLen = 1;
+    param->buf[0] = 0;
+    ret = g_wifi->createFeature(PROTOCOL_80211_IFTYPE_AP, (struct IWiFiBaseFeature **)&apFeature);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    ret = g_wifi->setProjectionScreenParam(nullptr, nullptr);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->setProjectionScreenParam(apFeature->baseFeature.ifName, nullptr);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->setProjectionScreenParam(nullptr, param);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->setProjectionScreenParam(apFeature->baseFeature.ifName, param);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    for (int i = CMD_CLOSE_GO_CAC; i <= CMD_ID_CTRL_ROAM_CHANNEL; i++) {
+        param->cmdId = i;
+        ret = g_wifi->setProjectionScreenParam(apFeature->baseFeature.ifName, param);
+        printf("SetProjectionScreenParam001_%d: ret = %d\n", __LINE__, ret);
+        flag = (ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+        ASSERT_TRUE(flag);
+    }
+    ret = g_wifi->destroyFeature((struct IWiFiBaseFeature *)apFeature);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    OsalMemFree(param);
+}
+
+/**
+ * @tc.name: SetProjectionScreenParam002
+ * @tc.desc: wifi hal config projection screen function test
+ * @tc.type: FUNC
+ */
+HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0002, Function | MediumTest | Level1)
+{
+    int32_t ret;
+    bool flag;
+    struct IWiFiSta *staFeature = nullptr;
+    ProjScrnCmdParam *param;
+
+    param = (ProjScrnCmdParam *)OsalMemCalloc(sizeof(ProjScrnCmdParam) + TEST_PARAM_BUF_SIZE);
+    EXPECT_NE(nullptr, param);
+    param->cmdId = TEST_CMD;
+    param->bufLen = 1;
+    param->buf[0] = 0;
+    ret = g_wifi->createFeature(PROTOCOL_80211_IFTYPE_STATION, (struct IWiFiBaseFeature **)&staFeature);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    ret = g_wifi->setProjectionScreenParam(nullptr, nullptr);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->setProjectionScreenParam(staFeature->baseFeature.ifName, nullptr);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->setProjectionScreenParam(nullptr, param);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->setProjectionScreenParam(staFeature->baseFeature.ifName, param);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    for (int i = CMD_CLOSE_GO_CAC; i <= CMD_ID_CTRL_ROAM_CHANNEL; i++) {
+        param->cmdId = i;
+        ret = g_wifi->setProjectionScreenParam(staFeature->baseFeature.ifName, param);
+        printf("SetProjectionScreenParam001_%d: ret = %d\n", __LINE__, ret);
+        flag = (ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+        ASSERT_TRUE(flag);
+    }
+    ret = g_wifi->destroyFeature((struct IWiFiBaseFeature *)staFeature);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    OsalMemFree(param);
+}
+
+/**
+ * @tc.name: SendCmdIoctl001
+ * @tc.desc: wifi hal send ioctl command function test
+ * @tc.type: FUNC
+ */
+HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0001, Function | MediumTest | Level1)
+{
+    int32_t cmdId = 0;
+    int32_t ret;
+    bool flag;
+    struct IWiFiAp *apFeature = nullptr;
+    int8_t data[TEST_BUF_SIZE] = {0};
+    const char *ifName = "wlan0";
+
+    ret = g_wifi->createFeature(PROTOCOL_80211_IFTYPE_AP, (struct IWiFiBaseFeature **)&apFeature);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    ret = g_wifi->sendCmdIoctl(nullptr, cmdId, nullptr, TEST_BUF_SIZE);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->sendCmdIoctl(ifName, cmdId, nullptr, TEST_BUF_SIZE);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->sendCmdIoctl(nullptr, cmdId, data, TEST_BUF_SIZE);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    for (cmdId = CMD_HID2D_MODULE_INIT; cmdId <= CMD_SET_CHAN_ADJUST; cmdId++) {
+        ret = g_wifi->sendCmdIoctl(ifName, cmdId, data, TEST_BUF_SIZE);
+        printf("sendCmdIoctl_%d: ret = %d\n", __LINE__, ret);
+        flag = (ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+        ASSERT_TRUE(flag);
+    }
+    ret = g_wifi->destroyFeature((struct IWiFiBaseFeature *)apFeature);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.name: SendCmdIoctl002
+ * @tc.desc: wifi hal send ioctl command function test
+ * @tc.type: FUNC
+ */
+HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0002, Function | MediumTest | Level1)
+{
+    int32_t cmdId = 0;
+    int32_t ret;
+    bool flag;
+    struct IWiFiSta *staFeature = nullptr;
+    int8_t data[TEST_BUF_SIZE] = {0};
+    const char *ifName = "wlan0";
+
+    ret = g_wifi->createFeature(PROTOCOL_80211_IFTYPE_STATION, (struct IWiFiBaseFeature **)&staFeature);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    ret = g_wifi->sendCmdIoctl(nullptr, cmdId, nullptr, TEST_BUF_SIZE);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->sendCmdIoctl(ifName, cmdId, nullptr, TEST_BUF_SIZE);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->sendCmdIoctl(nullptr, cmdId, data, TEST_BUF_SIZE);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    for (cmdId = CMD_HID2D_MODULE_INIT; cmdId <= CMD_SET_CHAN_ADJUST; cmdId++) {
+        ret = g_wifi->sendCmdIoctl(ifName, cmdId, data, TEST_BUF_SIZE);
+        printf("sendCmdIoctl_%d: ret = %d\n", __LINE__, ret);
+        flag = (ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+        ASSERT_TRUE(flag);
+    }
+    ret = g_wifi->destroyFeature((struct IWiFiBaseFeature *)staFeature);
+    EXPECT_EQ(ret, HDF_SUCCESS);
 }
 };

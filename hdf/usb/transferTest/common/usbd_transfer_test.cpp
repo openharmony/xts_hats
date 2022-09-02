@@ -17,9 +17,9 @@
 
 #include "UsbSubscriberTest.h"
 #include "hdf_log.h"
-#include "usbd_transfer_test.h"
 #include "v1_0/iusb_interface.h"
 #include "v1_0/usb_types.h"
+#include "usbd_transfer_test.h"
 
 const int SLEEP_TIME = 3;
 uint8_t BUS_NUM_1 = 0;
@@ -30,7 +30,10 @@ const uint8_t BUS_NUM_222 = 222;
 const uint32_t LENGTH_NUM_255 = 255;
 const uint8_t INTERFACEID_1 = 1;
 const uint8_t POINTID_1 = 1;
-const uint8_t POINTID_129 = 130;
+const uint8_t POINTID_130 = 130;
+const uint8_t SAMPLE_DATA_1 = 1;
+const uint8_t SAMPLE_DATA_2 = 2;
+const uint8_t SAMPLE_DATA_3 = 3;
 
 using namespace testing::ext;
 using namespace OHOS;
@@ -51,7 +54,9 @@ void UsbdTransferTest::SetUpTestCase(void)
         HDF_LOGE("%{public}s:IUsbInterface::Get() failed.", __func__);
         exit(0);
     }
-    auto ret = g_usbInterface->SetPortRole(1, 1, 1);
+    const int32_t DEFAULT_PORT_ID = 1;
+    const int32_t DEFAULT_ROLE_HOST = 1;
+    auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, DEFAULT_ROLE_HOST, DEFAULT_ROLE_HOST);
     sleep(SLEEP_TIME);
     HDF_LOGI("UsbdTransferTest::[Device] %{public}d SetPortRole=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
@@ -61,7 +66,7 @@ void UsbdTransferTest::SetUpTestCase(void)
 
     sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
     if (g_usbInterface->BindUsbdSubscriber(subscriber) != HDF_SUCCESS) {
-        HDF_LOGE("%{public}s: bind usbd subscriber failed\n", __func__);
+        HDF_LOGE("%{public}s: bind usbd subscriber failed", __func__);
         exit(0);
     }
 
@@ -71,6 +76,7 @@ void UsbdTransferTest::SetUpTestCase(void)
     }
 
     dev_ = { subscriber->busNum_, subscriber->devAddr_ };
+    HDF_LOGI("%{public}s: busNum:%{public}d, devAddr:%{public}d", __func__, subscriber->busNum_, subscriber->devAddr_);
     ret = g_usbInterface->OpenDevice(dev_);
     HDF_LOGI("UsbdTransferTest:: %{public}d OpenDevice=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
@@ -80,7 +86,7 @@ void UsbdTransferTest::TearDownTestCase(void)
 {
     sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
     if (g_usbInterface->BindUsbdSubscriber(subscriber) != HDF_SUCCESS) {
-        HDF_LOGE("%{public}s: bind usbd subscriber failed\n", __func__);
+        HDF_LOGE("%{public}s: bind usbd subscriber failed", __func__);
         exit(0);
     }
     dev_ = { subscriber->busNum_, subscriber->devAddr_ };
@@ -95,7 +101,7 @@ void UsbdTransferTest::TearDown(void) {}
 
 /**
  * @tc.name: SUB_USB_HDI_0450
- * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl,
+ * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
@@ -108,13 +114,13 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0450, Function | MediumTest | Level1)
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
     struct UsbCtrlTransfer ctrlparmas = { 0b10000000, 8, 0, 0, 1000 };
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0450 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0450 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
  * @tc.name: SUB_USB_HDI_0460
- * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl,
+ * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.desc: Reverse test: BUS_NUM_255
  * @tc.type: FUNC
@@ -127,13 +133,13 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0460, Function | MediumTest | Level1)
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
     struct UsbCtrlTransfer ctrlparmas = { 0b10000000, 8, 0, 0, 1000 };
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0460 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0460 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
  * @tc.name: SUB_USB_HDI_0470
- * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl,
+ * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.desc: Reverse test: DEV_ADDR_255
  * @tc.type: FUNC
@@ -146,13 +152,13 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0470, Function | MediumTest | Level1)
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
     struct UsbCtrlTransfer ctrlparmas = { 0b10000000, 8, 0, 0, 1000 };
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0470 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0470 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
  * @tc.name: SUB_USB_HDI_0480
- * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl,
+ * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.desc: Forward test: correct parameters
  * @tc.type: FUNC
@@ -165,13 +171,13 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0480, Function | MediumTest | Level1)
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
     struct UsbCtrlTransfer ctrlparmas = { 0b10000000, 6, 0x100, 0, 1000 };
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0480 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0480 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
  * @tc.name: SUB_USB_HDI_0490
- * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl,
+ * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
@@ -183,13 +189,13 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0490, Function | MediumTest | Level1)
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
     struct UsbCtrlTransfer ctrlparmas = { 0b10000000, 6, 0x100, 0, 1000 };
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0490 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0490 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
  * @tc.name: SUB_USB_HDI_0500
- * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl,
+ * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
@@ -201,13 +207,13 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0500, Function | MediumTest | Level1)
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
     struct UsbCtrlTransfer ctrlparmas = { 0b10000000, 6, 0x100, 0, 1000 };
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0500 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0500 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
  * @tc.name: SUB_USB_HDI_0510
- * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl,
+ * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
@@ -220,13 +226,13 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0510, Function | MediumTest | Level1)
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
     struct UsbCtrlTransfer ctrlparmas = { 0b10000001, 0X0A, 0, intercafeidex, 1000 };
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0510 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0510 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
  * @tc.name: SUB_USB_HDI_0520
- * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl,
+ * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
@@ -239,13 +245,13 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0520, Function | MediumTest | Level1)
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
     struct UsbCtrlTransfer ctrlparmas = { 0b10000001, 0X0A, 0, intercafeidex, 1000 };
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0520 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0520 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
  * @tc.name: SUB_USB_HDI_0530
- * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl,
+ * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
@@ -258,13 +264,13 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0530, Function | MediumTest | Level1)
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
     struct UsbCtrlTransfer ctrlparmas = { 0b10000001, 0X0A, 0, intercafeidex, 1000 };
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0530 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0530 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
  * @tc.name: SUB_USB_HDI_0540
- * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl,
+ * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
@@ -276,13 +282,13 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0540, Function | MediumTest | Level1)
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
     struct UsbCtrlTransfer ctrlparmas = { 0b10000000, 0, 0, 0, 1000 };
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0540 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0540 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
  * @tc.name: SUB_USB_HDI_0550
- * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl,
+ * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
@@ -294,13 +300,13 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0550, Function | MediumTest | Level1)
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
     struct UsbCtrlTransfer ctrlparmas = { 0b10000000, 0, 0, 0, 1000 };
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0550 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0550 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
  * @tc.name: SUB_USB_HDI_0560
- * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl,
+ * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
@@ -312,13 +318,13 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0560, Function | MediumTest | Level1)
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
     struct UsbCtrlTransfer ctrlparmas = { 0b10000000, 0, 0, 0, 1000 };
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0560 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0560 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
  * @tc.name: SUB_USB_HDI_0570
- * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl,
+ * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
@@ -330,13 +336,13 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0570, Function | MediumTest | Level1)
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
     struct UsbCtrlTransfer ctrlparmas = { 0b10000001, 0, 0, 0, 1000 };
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0570 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0570 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
  * @tc.name: SUB_USB_HDI_0580
- * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl,
+ * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
@@ -348,13 +354,13 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0580, Function | MediumTest | Level1)
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
     struct UsbCtrlTransfer ctrlparmas = { 0b10000001, 0, 0, 0, 1000 };
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0580 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0580 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
  * @tc.name: SUB_USB_HDI_0590
- * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl,
+ * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
@@ -366,13 +372,13 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0590, Function | MediumTest | Level1)
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
     struct UsbCtrlTransfer ctrlparmas = { 0b10000001, 0, 0, 0, 1000 };
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0590 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0590 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
  * @tc.name: SUB_USB_HDI_0600
- * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl,
+ * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
@@ -384,13 +390,13 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0600, Function | MediumTest | Level1)
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
     struct UsbCtrlTransfer ctrlparmas = { 0b10000010, 0, 0, 0, 1000 };
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0600 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0600 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
  * @tc.name: SUB_USB_HDI_0610
- * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl,
+ * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
@@ -402,13 +408,13 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0610, Function | MediumTest | Level1)
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
     struct UsbCtrlTransfer ctrlparmas = { 0b10000010, 0, 0, 0, 1000 };
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0610 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0610 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
  * @tc.name: SUB_USB_HDI_0620
- * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl,
+ * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
@@ -420,13 +426,13 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0620, Function | MediumTest | Level1)
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
     struct UsbCtrlTransfer ctrlparmas = { 0b10000010, 0, 0, 0, 1000 };
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0620 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0620 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
  * @tc.name: SUB_USB_HDI_0630
- * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl,
+ * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
@@ -438,13 +444,13 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0630, Function | MediumTest | Level1)
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
     struct UsbCtrlTransfer ctrlparmas = { 0b10000010, 0X0C, 0, 0, 1000 };
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0630 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0630 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
  * @tc.name: SUB_USB_HDI_0640
- * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl,
+ * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
@@ -456,13 +462,13 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0640, Function | MediumTest | Level1)
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
     struct UsbCtrlTransfer ctrlparmas = { 0b10000010, 0X0C, 0, 0, 1000 };
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0640 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0640 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
  * @tc.name: SUB_USB_HDI_0650
- * @tc.desc: Test functions to ControlTransfer(const UsbDev &dev, UsbCtrlTransfer &ctrl,
+ * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.type: FUNC
  */
@@ -474,7 +480,413 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0650, Function | MediumTest | Level1)
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
     struct UsbCtrlTransfer ctrlparmas = { 0b10000010, 0X0C, 0, 0, 1000 };
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferdata);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0650 %{public}d ControlTransfer=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0650 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_NE(ret, 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1780
+ * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, const UsbCtrlTransfer &ctrl,
+ * const std::vector<uint8_t> &data);
+ * @tc.desc: 正向测试：参数正确
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1780, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    std::vector<uint8_t> bufferdata(LENGTH_NUM_255);
+    bufferdata.push_back(SAMPLE_DATA_1);
+    bufferdata.push_back(SAMPLE_DATA_2);
+    bufferdata.push_back(SAMPLE_DATA_3);
+    struct UsbCtrlTransfer ctrlparmas = {0b0001, 8, 0, 0, 1000};
+    auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1780 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1790
+ * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, const UsbCtrlTransfer &ctrl,
+ * const std::vector<uint8_t> &data);
+ * @tc.desc: 反向测试：BUS_NUM_255
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1790, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {BUS_NUM_255, dev_.devAddr};
+    std::vector<uint8_t> bufferdata(LENGTH_NUM_255);
+    bufferdata.push_back(SAMPLE_DATA_1);
+    bufferdata.push_back(SAMPLE_DATA_2);
+    bufferdata.push_back(SAMPLE_DATA_3);
+    struct UsbCtrlTransfer ctrlparmas = {0b0001, 8, 0, 0, 1000};
+    auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1790 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_NE(ret, 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1800
+ * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, const UsbCtrlTransfer &ctrl,
+ * const std::vector<uint8_t> &data);
+ * @tc.desc: 反向测试：DEV_ADDR_255
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1800, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_255};
+    std::vector<uint8_t> bufferdata(LENGTH_NUM_255);
+    bufferdata.push_back(SAMPLE_DATA_1);
+    bufferdata.push_back(SAMPLE_DATA_2);
+    bufferdata.push_back(SAMPLE_DATA_3);
+    struct UsbCtrlTransfer ctrlparmas = {0b0001, 8, 0, 0, 1000};
+    auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1800 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_NE(ret, 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1810
+ * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, const UsbCtrlTransfer &ctrl,
+ * const std::vector<uint8_t> &data);
+ * @tc.desc: 反向测试：参数正确
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1810, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    std::vector<uint8_t> bufferdata(LENGTH_NUM_255);
+    bufferdata.push_back(SAMPLE_DATA_1);
+    bufferdata.push_back(SAMPLE_DATA_2);
+    bufferdata.push_back(SAMPLE_DATA_3);
+    struct UsbCtrlTransfer ctrlparmas = {0b0001, 6, 0x100, 0, 1000};
+    auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1810 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1820
+ * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, const UsbCtrlTransfer &ctrl,
+ * const std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1820, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {BUS_NUM_255, dev_.devAddr};
+    std::vector<uint8_t> bufferdata(LENGTH_NUM_255);
+    bufferdata.push_back(SAMPLE_DATA_1);
+    bufferdata.push_back(SAMPLE_DATA_2);
+    bufferdata.push_back(SAMPLE_DATA_3);
+    struct UsbCtrlTransfer ctrlparmas = {0b0001, 6, 0x100, 0, 1000};
+    auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1820 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_NE(ret, 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1830
+ * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, const UsbCtrlTransfer &ctrl,
+ * const std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1830, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_255};
+    std::vector<uint8_t> bufferdata(LENGTH_NUM_255);
+    bufferdata.push_back(SAMPLE_DATA_1);
+    bufferdata.push_back(SAMPLE_DATA_2);
+    bufferdata.push_back(SAMPLE_DATA_3);
+    struct UsbCtrlTransfer ctrlparmas = {0b0001, 6, 0x100, 0, 1000};
+    auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1830 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_NE(ret, 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1840
+ * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, const UsbCtrlTransfer &ctrl,
+ * const std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1840, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    int32_t intercafeidex = 0;
+    std::vector<uint8_t> bufferdata(LENGTH_NUM_255);
+    bufferdata.push_back(SAMPLE_DATA_1);
+    bufferdata.push_back(SAMPLE_DATA_2);
+    bufferdata.push_back(SAMPLE_DATA_3);
+    struct UsbCtrlTransfer ctrlparmas = {0, 0X0A, 0, intercafeidex, 1000};
+    auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1840 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1850
+ * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, const UsbCtrlTransfer &ctrl,
+ * const std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1850, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {BUS_NUM_255, dev_.devAddr};
+    int32_t intercafeidex = 0;
+    std::vector<uint8_t> bufferdata(LENGTH_NUM_255);
+    bufferdata.push_back(SAMPLE_DATA_1);
+    bufferdata.push_back(SAMPLE_DATA_2);
+    bufferdata.push_back(SAMPLE_DATA_3);
+    struct UsbCtrlTransfer ctrlparmas = {0, 0X0A, 0, intercafeidex, 1000};
+    auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1850 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_NE(ret, 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1860
+ * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, const UsbCtrlTransfer &ctrl,
+ * const std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1860, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_255};
+    int32_t intercafeidex = 0;
+    std::vector<uint8_t> bufferdata(LENGTH_NUM_255);
+    bufferdata.push_back(SAMPLE_DATA_1);
+    bufferdata.push_back(SAMPLE_DATA_2);
+    bufferdata.push_back(SAMPLE_DATA_3);
+    struct UsbCtrlTransfer ctrlparmas = {0, 0X0A, 0, intercafeidex, 1000};
+    auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1860 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_NE(ret, 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1870
+ * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, const UsbCtrlTransfer &ctrl,
+ * const std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1870, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    std::vector<uint8_t> bufferdata(LENGTH_NUM_255);
+    bufferdata.push_back(SAMPLE_DATA_1);
+    bufferdata.push_back(SAMPLE_DATA_2);
+    bufferdata.push_back(SAMPLE_DATA_3);
+    struct UsbCtrlTransfer ctrlparmas = {0b0001, 0, 0, 0, 1000};
+    auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1870 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1880
+ * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, const UsbCtrlTransfer &ctrl,
+ * const std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1880, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {BUS_NUM_255, dev_.devAddr};
+    std::vector<uint8_t> bufferdata(LENGTH_NUM_255);
+    bufferdata.push_back(SAMPLE_DATA_1);
+    bufferdata.push_back(SAMPLE_DATA_2);
+    bufferdata.push_back(SAMPLE_DATA_3);
+    struct UsbCtrlTransfer ctrlparmas = {0b0001, 0, 0, 0, 1000};
+    auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1880 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_NE(ret, 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1890
+ * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, const UsbCtrlTransfer &ctrl,
+ * const std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1890, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_255};
+    std::vector<uint8_t> bufferdata(LENGTH_NUM_255);
+    bufferdata.push_back(SAMPLE_DATA_1);
+    bufferdata.push_back(SAMPLE_DATA_2);
+    bufferdata.push_back(SAMPLE_DATA_3);
+    struct UsbCtrlTransfer ctrlparmas = {0b0001, 0, 0, 0, 1000};
+    auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1890 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_NE(ret, 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1900
+ * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, const UsbCtrlTransfer &ctrl,
+ * const std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1900, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    std::vector<uint8_t> bufferdata(LENGTH_NUM_255);
+    bufferdata.push_back(SAMPLE_DATA_1);
+    bufferdata.push_back(SAMPLE_DATA_2);
+    bufferdata.push_back(SAMPLE_DATA_3);
+    struct UsbCtrlTransfer ctrlparmas = {0b0, 0, 0, 0, 1000};
+    auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1900 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1910
+ * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, const UsbCtrlTransfer &ctrl,
+ * const std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1910, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {BUS_NUM_255, dev_.devAddr};
+    std::vector<uint8_t> bufferdata(LENGTH_NUM_255);
+    bufferdata.push_back(SAMPLE_DATA_1);
+    bufferdata.push_back(SAMPLE_DATA_2);
+    bufferdata.push_back(SAMPLE_DATA_3);
+    struct UsbCtrlTransfer ctrlparmas = {0b0, 0, 0, 0, 1000};
+    auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1910 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_NE(ret, 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1920
+ * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, const UsbCtrlTransfer &ctrl,
+ * const std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1920, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_255};
+    std::vector<uint8_t> bufferdata(LENGTH_NUM_255);
+    bufferdata.push_back(SAMPLE_DATA_1);
+    bufferdata.push_back(SAMPLE_DATA_2);
+    bufferdata.push_back(SAMPLE_DATA_3);
+    struct UsbCtrlTransfer ctrlparmas = {0b0, 0, 0, 0, 1000};
+    auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1920 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_NE(ret, 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1930
+ * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, const UsbCtrlTransfer &ctrl,
+ * const std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1930, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    std::vector<uint8_t> bufferdata(LENGTH_NUM_255);
+    bufferdata.push_back(SAMPLE_DATA_1);
+    bufferdata.push_back(SAMPLE_DATA_2);
+    bufferdata.push_back(SAMPLE_DATA_3);
+    struct UsbCtrlTransfer ctrlparmas = {0b0010, 0, 0, 0, 1000};
+    auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1930 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1940
+ * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, const UsbCtrlTransfer &ctrl,
+ * const std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1940, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {BUS_NUM_255, dev_.devAddr};
+    std::vector<uint8_t> bufferdata(LENGTH_NUM_255);
+    bufferdata.push_back(SAMPLE_DATA_1);
+    bufferdata.push_back(SAMPLE_DATA_2);
+    bufferdata.push_back(SAMPLE_DATA_3);
+    struct UsbCtrlTransfer ctrlparmas = {0b0010, 0, 0, 0, 1000};
+    auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1940 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_NE(ret, 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1950
+ * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, const UsbCtrlTransfer &ctrl,
+ * const std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1950, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_255};
+    std::vector<uint8_t> bufferdata(LENGTH_NUM_255);
+    bufferdata.push_back(SAMPLE_DATA_1);
+    bufferdata.push_back(SAMPLE_DATA_2);
+    bufferdata.push_back(SAMPLE_DATA_3);
+    struct UsbCtrlTransfer ctrlparmas = {0b0010, 0, 0, 0, 1000};
+    auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1950 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_NE(ret, 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1960
+ * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, const UsbCtrlTransfer &ctrl,
+ * const std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1960, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    std::vector<uint8_t> bufferdata(LENGTH_NUM_255);
+    bufferdata.push_back(SAMPLE_DATA_1);
+    bufferdata.push_back(SAMPLE_DATA_2);
+    bufferdata.push_back(SAMPLE_DATA_3);
+    struct UsbCtrlTransfer ctrlparmas = {0b0010, 0X0C, 0, 0, 1000};
+    auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1960 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1970
+ * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, const UsbCtrlTransfer &ctrl,
+ * const std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1970, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {BUS_NUM_255, dev_.devAddr};
+    std::vector<uint8_t> bufferdata(LENGTH_NUM_255);
+    bufferdata.push_back(SAMPLE_DATA_1);
+    bufferdata.push_back(SAMPLE_DATA_2);
+    bufferdata.push_back(SAMPLE_DATA_3);
+    struct UsbCtrlTransfer ctrlparmas = {0b0010, 0X0C, 0, 0, 1000};
+    auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1970 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_NE(ret, 0);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_1980
+ * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, const UsbCtrlTransfer &ctrl,
+ * const std::vector<uint8_t> &data);
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1980, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_255};
+    std::vector<uint8_t> bufferdata(LENGTH_NUM_255);
+    bufferdata.push_back(SAMPLE_DATA_1);
+    bufferdata.push_back(SAMPLE_DATA_2);
+    bufferdata.push_back(SAMPLE_DATA_3);
+    struct UsbCtrlTransfer ctrlparmas = {0b0010, 0X0C, 0, 0, 1000};
+    auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferdata);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1980 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
@@ -488,7 +900,7 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0660, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_129;
+    uint8_t pointid = POINTID_130;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0660 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
@@ -511,7 +923,7 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0670, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_129;
+    uint8_t pointid = POINTID_130;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0670 %{public}d ReleaseInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
@@ -535,7 +947,7 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0680, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_129;
+    uint8_t pointid = POINTID_130;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0680 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
@@ -559,7 +971,7 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0690, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_129;
+    uint8_t pointid = POINTID_130;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0690 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
@@ -583,7 +995,7 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0700, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_129;
+    uint8_t pointid = POINTID_130;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0700 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
@@ -797,7 +1209,7 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1440, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_129;
+    uint8_t pointid = POINTID_130;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1440 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
@@ -820,7 +1232,7 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1450, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_129;
+    uint8_t pointid = POINTID_130;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1450 %{public}d ReleaseInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
@@ -844,7 +1256,7 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1460, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_129;
+    uint8_t pointid = POINTID_130;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1460 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
@@ -867,7 +1279,7 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1470, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_129;
+    uint8_t pointid = POINTID_130;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1470 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
@@ -891,7 +1303,7 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1480, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_129;
+    uint8_t pointid = POINTID_130;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1480 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
@@ -1105,7 +1517,7 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1570, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_129;
+    uint8_t pointid = POINTID_130;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1570 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
@@ -1128,7 +1540,7 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1580, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_129;
+    uint8_t pointid = POINTID_130;
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1580 %{public}d interfaceId=%{public}d", __LINE__, interfaceId);
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1580 %{public}d ReleaseInterface=%{public}d", __LINE__, ret);
@@ -1153,7 +1565,7 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1590, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_129;
+    uint8_t pointid = POINTID_130;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1590 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
@@ -1177,7 +1589,7 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1600, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_129;
+    uint8_t pointid = POINTID_130;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1600 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
@@ -1201,7 +1613,7 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1610, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_129;
+    uint8_t pointid = POINTID_130;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1610 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);

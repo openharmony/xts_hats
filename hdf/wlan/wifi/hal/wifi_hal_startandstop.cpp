@@ -59,7 +59,7 @@ void WifiHalTest::TearDown() {}
  * @tc.desc: Wifi hal start and stop g_wifi test
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_DriverSystem_WifiHdi_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_WLAN_HDI_StartAndStop_0001, Function | MediumTest | Level1)
 {
     int ret1, ret2;
     ret1 = g_wifi->start(nullptr);
@@ -70,5 +70,29 @@ HWTEST_F(WifiHalTest, SUB_DriverSystem_WifiHdi_0001, Function | MediumTest | Lev
     ASSERT_EQ(HDF_ERR_INVALID_PARAM, ret2);
     ret2 = g_wifi->stop(g_wifi);
     ASSERT_EQ(HDF_SUCCESS, ret2);
+}
+
+/**
+ * @tc.name: WifiHalStart001
+ * @tc.desc: Wifi hal start g_wifi test
+ * @tc.type: FUNC
+ */
+HWTEST_F(WifiHalTest, SUB_WLAN_HDI_Start_0001, Function | MediumTest | Level1)
+{
+    int ret;
+    ret = g_wifi->start(nullptr);
+    ASSERT_NE(HDF_SUCCESS, ret);
+}
+
+/**
+ * @tc.name: WifiHalStop001
+ * @tc.desc: Wifi hal stop g_wifi test
+ * @tc.type: FUNC
+ */
+HWTEST_F(WifiHalTest, SUB_WLAN_HDI_Stop_0001, Function | MediumTest | Level1)
+{
+    int ret;
+    ret = g_wifi->stop(nullptr);
+    ASSERT_NE(HDF_SUCCESS, ret);
 }
 };

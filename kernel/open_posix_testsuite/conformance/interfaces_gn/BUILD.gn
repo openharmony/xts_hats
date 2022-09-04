@@ -333,7 +333,8 @@ group("${posix_interface_module}_bin") {
     "pthread_rwlock_trywrlock:pthread_rwlock_trywrlock_speculative_3-1",
     "pthread_rwlock_unlock:pthread_rwlock_unlock_1-1",
     "pthread_rwlock_unlock:pthread_rwlock_unlock_2-1",
-    "pthread_rwlock_unlock:pthread_rwlock_unlock_3-1",
+
+    #"pthread_rwlock_unlock:pthread_rwlock_unlock_3-1",
 
     #"pthread_rwlock_unlock:pthread_rwlock_unlock_4-1",
     #"pthread_rwlock_unlock:pthread_rwlock_unlock_4-2",

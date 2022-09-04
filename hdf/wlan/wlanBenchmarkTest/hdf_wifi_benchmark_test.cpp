@@ -16,15 +16,15 @@
 #include <string>
 #include <vector>
 
-#include <securec.h>
 #include <gtest/gtest.h>
+#include <osal_mem.h>
 #include "hdf_base.h"
-#include "hdf_uhdf_test.h"
 #include "hdf_sbuf.h"
 #include "wifi_hal.h"
 #include "wifi_hal_ap_feature.h"
 #include "wifi_hal_base_feature.h"
 #include "wifi_hal_sta_feature.h"
+#include "securec.h"
 
 using namespace std;
 using namespace testing::ext;
@@ -42,6 +42,10 @@ const int32_t WLAN_BAND_2G = 0;
 const int32_t WLAN_FREQ_MAX_NUM = 14;
 const int32_t WLAN_MAX_NUM_STA_WITH_AP = 4;
 const uint32_t DEFAULT_COMBO_SIZE = 10;
+const uint32_t TEST_BUF_SIZE = 64;
+const uint32_t TEST_PARAM_BUF_SIZE = 64;
+const int32_t TEST_CMD = 123;
+const uint32_t RESET_TIME = 20;
 
 class wlanBenchmarkTest : public benchmark::Fixture {
 public:
@@ -391,6 +395,7 @@ BENCHMARK_F(wlanBenchmarkTest, WifiHalsetCountryCode001)(
 
 BENCHMARK_REGISTER_F(wlanBenchmarkTest, WifiHalsetCountryCode001)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
+
 /**
  * @tc.name: WifiHalGetIfNamesByChipId001
  * @tc.desc: Obtain all ifNames and the number of the current chip
@@ -589,7 +594,7 @@ BENCHMARK_REGISTER_F(wlanBenchmarkTest, WifiHalgetValidFreqsWithBand001)->Iterat
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
- * @tc.name: WifiHalGetAssociatedStas001
+ * @tc.name: WifiHalGetAsscociatedStas001
  * @tc.desc: Get asscociated STA info benchmark test
  * @tc.type: FUNC
  */
@@ -670,6 +675,288 @@ BENCHMARK_F(wlanBenchmarkTest, WifiHalgetNetDevInfo001)(
 }
 
 BENCHMARK_REGISTER_F(wlanBenchmarkTest, WifiHalgetNetDevInfo001)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
+
+ 
+/**
+ * @tc.name: GetPowerModeTest001
+ * @tc.desc: Wifi hdi get power mode function test
+ * @tc.type: FUNC
+ */
+
+BENCHMARK_F(wlanBenchmarkTest, GetPowerMode001)(
+    benchmark::State &st)
+{
+    g_wifi->start(g_wifi);
+    int32_t ret;
+    struct IWiFiAp *apFeature = nullptr;
+    const char *ifName = "eth0";
+    uint8_t mode;
+
+    ret = g_wifi->createFeature(PROTOCOL_80211_IFTYPE_AP, (struct IWiFiBaseFeature **)&apFeature);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_NE(apFeature, nullptr);
+    for (auto _ : st) {
+        ret = g_wifi->getPowerMode(nullptr, &mode);
+    }
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->getPowerMode(ifName, nullptr);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->getPowerMode(ifName, &mode);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->getPowerMode(apFeature->baseFeature.ifName, nullptr);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->getPowerMode(apFeature->baseFeature.ifName, &mode);
+    bool flag = (ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+    ASSERT_TRUE(flag);
+    ret = g_wifi->destroyFeature((struct IWiFiBaseFeature *)apFeature);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    g_wifi->stop(g_wifi);
+}
+
+BENCHMARK_REGISTER_F(wlanBenchmarkTest, GetPowerMode001)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
+
+/**
+ * @tc.name: SetPowerModeTest001
+ * @tc.desc: Wifi hdi set power mode function test
+ * @tc.type: FUNC
+ */
+
+BENCHMARK_F(wlanBenchmarkTest, SetPowerModeTest001)(
+    benchmark::State &st)
+{
+    g_wifi->start(g_wifi);
+    int32_t ret;
+    struct IWiFiAp *apFeature = nullptr;
+    const char *ifName = "eth0";
+
+    ret = g_wifi->createFeature(PROTOCOL_80211_IFTYPE_AP, (struct IWiFiBaseFeature **)&apFeature);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_NE(apFeature, nullptr);
+    ret = g_wifi->setPowerMode(nullptr, WIFI_POWER_MODE_SLEEPING);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->setPowerMode(ifName, WIFI_POWER_MODE_SLEEPING);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    for (auto _ : st) {
+        ret = g_wifi->setPowerMode(apFeature->baseFeature.ifName, WIFI_POWER_MODE_SLEEPING);
+    }
+    bool flag = (ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+    ASSERT_TRUE(flag);
+    ret = g_wifi->destroyFeature((struct IWiFiBaseFeature *)apFeature);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    g_wifi->stop(g_wifi);
+}
+
+BENCHMARK_REGISTER_F(wlanBenchmarkTest, SetPowerModeTest001)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
+
+/**
+ * @tc.name: SetProjectionScreenParam001
+ * @tc.desc: wifi hal config projection screen function test
+ * @tc.type: FUNC
+ */
+
+BENCHMARK_F(wlanBenchmarkTest, SetProjectionScreenParam001)(
+    benchmark::State &st)
+{
+    g_wifi->start(g_wifi);
+    int32_t ret;
+    bool flag;
+    struct IWiFiAp *apFeature = nullptr;
+    ProjScrnCmdParam *param;
+
+    param = (ProjScrnCmdParam *)OsalMemCalloc(sizeof(ProjScrnCmdParam) + TEST_PARAM_BUF_SIZE);
+    EXPECT_NE(nullptr, param);
+    param->cmdId = TEST_CMD;
+    param->bufLen = 1;
+    param->buf[0] = 0;
+    ret = g_wifi->createFeature(PROTOCOL_80211_IFTYPE_AP, (struct IWiFiBaseFeature **)&apFeature);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    ret = g_wifi->setProjectionScreenParam(nullptr, nullptr);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->setProjectionScreenParam(apFeature->baseFeature.ifName, nullptr);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->setProjectionScreenParam(nullptr, param);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    for (auto _ : st) {
+    ret = g_wifi->setProjectionScreenParam(apFeature->baseFeature.ifName, param);
+    }
+    EXPECT_NE(ret, HDF_SUCCESS);
+    for (int i = CMD_CLOSE_GO_CAC; i <= CMD_ID_CTRL_ROAM_CHANNEL; i++) {
+        param->cmdId = i;
+        ret = g_wifi->setProjectionScreenParam(apFeature->baseFeature.ifName, param);
+        flag = (ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+        ASSERT_TRUE(flag);
+    }
+    ret = g_wifi->destroyFeature((struct IWiFiBaseFeature *)apFeature);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    OsalMemFree(param);
+    g_wifi->stop(g_wifi);
+}
+
+BENCHMARK_REGISTER_F(wlanBenchmarkTest, SetProjectionScreenParam001)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
+
+    
+/**
+ * @tc.name: SendCmdIoctl001
+ * @tc.desc: wifi hal send ioctl command function test
+ * @tc.type: FUNC
+ */
+
+BENCHMARK_F(wlanBenchmarkTest, SendCmdIoctl001)(
+    benchmark::State &st)
+{
+    g_wifi->start(g_wifi);
+    int32_t cmdId = 0;
+    int32_t ret;
+    bool flag;
+    struct IWiFiAp *apFeature = nullptr;
+    int8_t data[TEST_BUF_SIZE] = {0};
+    const char *ifName = "wlan0";
+
+    ret = g_wifi->createFeature(PROTOCOL_80211_IFTYPE_AP, (struct IWiFiBaseFeature **)&apFeature);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    ret = g_wifi->sendCmdIoctl(nullptr, cmdId, nullptr, TEST_BUF_SIZE);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->sendCmdIoctl(ifName, cmdId, nullptr, TEST_BUF_SIZE);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    for (auto _ : st) {
+        ret = g_wifi->sendCmdIoctl(nullptr, cmdId, data, TEST_BUF_SIZE);
+    }
+    EXPECT_NE(ret, HDF_SUCCESS);
+    for (cmdId = CMD_HID2D_MODULE_INIT; cmdId <= CMD_SET_CHAN_ADJUST; cmdId++) {
+        ret = g_wifi->sendCmdIoctl(ifName, cmdId, data, TEST_BUF_SIZE);
+        flag = (ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+        ASSERT_TRUE(flag);
+    }
+    ret = g_wifi->destroyFeature((struct IWiFiBaseFeature *)apFeature);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    g_wifi->stop(g_wifi);
+}
+
+BENCHMARK_REGISTER_F(wlanBenchmarkTest, SendCmdIoctl001)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
+  
+/**
+ * @tc.name: GetStationInfo001
+ * @tc.desc: Wifi hdi get station information function test
+ * @tc.type: FUNC
+ */
+
+BENCHMARK_F(wlanBenchmarkTest, GetStationInfo001)(
+    benchmark::State &st)
+{
+    g_wifi->start(g_wifi);
+    int32_t ret;
+    StationInfo info;
+    bool flag;
+    uint8_t mac[ETH_ADDR_LEN] = {0};
+    struct IWiFiAp *apFeature = nullptr;
+    const char *ifName = "wlan0";
+
+    ret = g_wifi->createFeature(PROTOCOL_80211_IFTYPE_AP, (struct IWiFiBaseFeature **)&apFeature);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    ret = g_wifi->getStationInfo(nullptr, nullptr, nullptr, ETH_ADDR_LEN);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->getStationInfo(ifName, nullptr, nullptr, ETH_ADDR_LEN);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->getStationInfo(nullptr, &info, nullptr, ETH_ADDR_LEN);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->getStationInfo(nullptr, nullptr, mac, ETH_ADDR_LEN);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->getStationInfo(ifName, &info, nullptr, ETH_ADDR_LEN);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->getStationInfo(nullptr, &info, mac, ETH_ADDR_LEN);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    ret = g_wifi->getStationInfo(ifName, nullptr, mac, ETH_ADDR_LEN);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    for (auto _ : st) {
+        ret = g_wifi->getStationInfo(ifName, &info, mac, ETH_ADDR_LEN);
+    }
+    flag = (ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+    ASSERT_TRUE(flag);
+    ret = g_wifi->destroyFeature((struct IWiFiBaseFeature *)apFeature);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    g_wifi->stop(g_wifi);
+}
+
+BENCHMARK_REGISTER_F(wlanBenchmarkTest, GetStationInfo001)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
+
+/**
+ * @tc.name: HalGetChipId001
+ * @tc.desc: wifi hal get chip ID function test
+ * @tc.type: FUNC
+ */
+
+BENCHMARK_F(wlanBenchmarkTest, GetChipId001)(
+    benchmark::State &st)
+{
+    g_wifi->start(g_wifi);
+    int32_t ret;
+    struct IWiFiSta *staFeature = nullptr;
+    unsigned char chipId = 0;
+
+    ret = g_wifi->createFeature(PROTOCOL_80211_IFTYPE_STATION, (struct IWiFiBaseFeature **)&staFeature);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+    EXPECT_NE(nullptr, staFeature);
+
+    ret = staFeature->baseFeature.getChipId(nullptr, &chipId);
+    EXPECT_NE(HDF_SUCCESS, ret);
+    ret = staFeature->baseFeature.getChipId((struct IWiFiBaseFeature *)staFeature, nullptr);
+    EXPECT_NE(HDF_SUCCESS, ret);
+    for (auto _ : st) {
+        ret = staFeature->baseFeature.getChipId((struct IWiFiBaseFeature *)staFeature, &chipId);
+    }
+    ASSERT_TRUE(chipId < MAX_WLAN_DEVICE);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+
+    ret = g_wifi->destroyFeature((struct IWiFiBaseFeature *)staFeature);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+    g_wifi->stop(g_wifi);
+}
+
+BENCHMARK_REGISTER_F(wlanBenchmarkTest, GetChipId001)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
+
+/**
+ * @tc.name: ResetDriver001
+ * @tc.desc: wifi hal reset driver function test
+ * @tc.type: FUNC
+ */
+
+BENCHMARK_F(wlanBenchmarkTest, ResetDriver001)(
+    benchmark::State &st)
+{
+    g_wifi->start(g_wifi);
+    int32_t ret;
+    struct IWiFiSta *staFeature = nullptr;
+    uint8_t chipId = 0;
+    uint8_t chipIdInvalid = 20;
+
+    ret = g_wifi->createFeature(PROTOCOL_80211_IFTYPE_STATION, (struct IWiFiBaseFeature **)&staFeature);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+    EXPECT_NE(nullptr, staFeature);
+    ret = staFeature->baseFeature.getChipId((struct IWiFiBaseFeature *)staFeature, &chipId);
+    ASSERT_TRUE(chipId < MAX_WLAN_DEVICE);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+    for (auto _ : st) {
+        ret = g_wifi->resetDriver(chipIdInvalid, "wlan0");
+    }
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
+    ret = g_wifi->resetDriver(chipId, nullptr);
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
+    ret = g_wifi->resetDriver(chipId, staFeature->baseFeature.ifName);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+    sleep(RESET_TIME);
+    ret = g_wifi->destroyFeature((struct IWiFiBaseFeature *)staFeature);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+    g_wifi->stop(g_wifi);
+}
+
+BENCHMARK_REGISTER_F(wlanBenchmarkTest, ResetDriver001)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 }
 BENCHMARK_MAIN();

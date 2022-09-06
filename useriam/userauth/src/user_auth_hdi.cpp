@@ -547,7 +547,7 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0120, Function | Me
     uint32_t authTrustLevel = parcel.ReadUint32();
     int32_t ret = g_service.GetAuthTrustLevel(userId, authType, authTrustLevel);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 5);
+    EXPECT_EQ(ret, 6);
 }
 
 /**

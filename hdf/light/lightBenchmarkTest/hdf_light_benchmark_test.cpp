@@ -98,7 +98,9 @@ BENCHMARK_F(lightBenchmarkTest, SUB_DriverSystem_LightBenchmark_0020)(benchmark:
         EXPECT_LE(iter.lightId, g_maxLightId);
 
         HdfLightEffect effect;
-        effect.lightBrightness = 0x00800000;
+        effect.lightColor.colorValue.rgbColor.r = 255;
+        effect.lightColor.colorValue.rgbColor.g = 0;
+        effect.lightColor.colorValue.rgbColor.b = 0;
         effect.flashEffect.flashMode = HDF_LIGHT_FLASH_NONE;
         int32_t ret;
         for (auto _ : st) {
@@ -134,8 +136,10 @@ BENCHMARK_F(lightBenchmarkTest, SUB_DriverSystem_LightBenchmark_0030)(benchmark:
         EXPECT_LE(iter.lightId, g_maxLightId);
 
         HdfLightEffect effect;
-        effect.lightBrightness = 0x00800000;
-        effect.flashEffect.flashMode = HDF_LIGHT_FLASH_TIMED;
+        effect.lightColor.colorValue.rgbColor.r = 255;
+        effect.lightColor.colorValue.rgbColor.g = 0;
+        effect.lightColor.colorValue.rgbColor.b = 0;
+        effect.flashEffect.flashMode = HDF_LIGHT_FLASH_BLINK;
         effect.flashEffect.onTime = g_onTime;
         effect.flashEffect.offTime = g_offTime;
         int32_t ret = g_lightInterface->TurnOnLight(iter.lightId, effect);

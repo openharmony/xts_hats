@@ -154,7 +154,7 @@ HWTEST_F(AudioHdiCaptureTest, SUB_Audio_HDI_AudioCaptureFrame_0001, Function | M
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Start((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    char *frame = (char *)calloc(1, BUFFER_SIZE);
+    char *frame = static_cast<char *>(calloc(1, BUFFER_SIZE));
     EXPECT_NE(nullptr, frame);
     ret = capture->CaptureFrame(capture, frame, requestBytes, &replyBytes);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -213,7 +213,7 @@ HWTEST_F(AudioHdiCaptureTest, SUB_Audio_HDI_AudioCaptureFrame_0003, Function | M
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Start((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    char *frame = (char *)calloc(1, BUFFER_SIZE);
+    char *frame = static_cast<char *>(calloc(1, BUFFER_SIZE));
     EXPECT_NE(nullptr, frame);
     ret = capture->CaptureFrame(capture, frame, requestBytes, replyBytes);
     EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
@@ -246,7 +246,7 @@ HWTEST_F(AudioHdiCaptureTest, SUB_Audio_HDI_AudioCaptureFrame_0004, Function | M
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Start((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    char *frame = (char *)calloc(1, BUFFER_SIZE);
+    char *frame = static_cast<char *>(calloc(1, BUFFER_SIZE));
     EXPECT_NE(nullptr, frame);
     ret = capture->CaptureFrame(captureNull, frame, requestBytes, &replyBytes);
     EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
@@ -276,7 +276,7 @@ HWTEST_F(AudioHdiCaptureTest, SUB_Audio_HDI_AudioCaptureFrame_0005, Function | M
     ASSERT_NE(nullptr, GetAudioManager);
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    char *frame = (char *)calloc(1, BUFFER_SIZE);
+    char *frame = static_cast<char *>(calloc(1, BUFFER_SIZE));
     EXPECT_NE(nullptr, frame);
     ret = capture->CaptureFrame(capture, frame, requestBytes, &replyBytes);
     EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
@@ -309,7 +309,7 @@ HWTEST_F(AudioHdiCaptureTest, SUB_Audio_HDI_AudioCaptureFrame_0006, Function | M
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->control.Start((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    char *frame = (char *)calloc(1, BUFFER_SIZE);
+    char *frame = static_cast<char *>(calloc(1, BUFFER_SIZE));
     EXPECT_NE(nullptr, frame);
     ret = capture->CaptureFrame(capture, frame, requestBytes, &replyBytes);
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);

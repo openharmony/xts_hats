@@ -132,13 +132,14 @@ HWTEST_F(HdfLightTest, SUB_DriverSystem_LightHdi_0120, Function | MediumTest | L
     int32_t i;
     int32_t ret;
     struct LightEffect effect;
-    effect.lightBrightness = 0x00800000;
+    effect.lightColor.colorValue.rgbColor.r = 255;
+    effect.lightColor.colorValue.rgbColor.g = 0;
+    effect.lightColor.colorValue.rgbColor.b = 0;
     effect.flashEffect.flashMode = LIGHT_FLASH_NONE;
     effect.flashEffect.onTime = 0;
     effect.flashEffect.offTime = 0;
 
     for (i = 0; i < g_count; ++i) {
-
         ret = g_lightDev->TurnOnLight(g_lightInfo[i].lightId, &effect);
         EXPECT_EQ(0, ret);
 
@@ -159,8 +160,10 @@ HWTEST_F(HdfLightTest, SUB_DriverSystem_LightHdi_0130, Function | MediumTest | L
     int32_t i;
     int32_t ret;
     struct LightEffect effect;
-    effect.lightBrightness = 0x00800000;
-    effect.flashEffect.flashMode = LIGHT_FLASH_TIMED;
+    effect.lightColor.colorValue.rgbColor.r = 255;
+    effect.lightColor.colorValue.rgbColor.g = 0;
+    effect.lightColor.colorValue.rgbColor.b = 0;
+    effect.flashEffect.flashMode = LIGHT_FLASH_BLINK;
     effect.flashEffect.onTime = g_onTime;
     effect.flashEffect.offTime = g_offTime;
 
@@ -191,7 +194,9 @@ HWTEST_F(HdfLightTest, SUB_DriverSystem_LightHdi_0140, Function | MediumTest | L
     EXPECT_EQ(LIGHT_NOT_SUPPORT, ret);
 
     for (i = 0; i < g_count; ++i) {
-        effect.lightBrightness = 0x00800000;
+        effect.lightColor.colorValue.rgbColor.r = 255;
+        effect.lightColor.colorValue.rgbColor.g = 0;
+        effect.lightColor.colorValue.rgbColor.b = 0;
         effect.flashEffect.flashMode = LIGHT_FLASH_BUTT;
         effect.flashEffect.onTime = g_onTime;
         effect.flashEffect.offTime = g_offTime;
@@ -199,7 +204,7 @@ HWTEST_F(HdfLightTest, SUB_DriverSystem_LightHdi_0140, Function | MediumTest | L
         ret = g_lightDev->TurnOnLight(g_lightInfo[i].lightId, &effect);
         EXPECT_EQ(LIGHT_NOT_FLASH, ret);
 
-        effect.flashEffect.flashMode = LIGHT_FLASH_TIMED;
+        effect.flashEffect.flashMode = LIGHT_FLASH_BLINK;
         effect.flashEffect.onTime = 0;
         ret = g_lightDev->TurnOnLight(g_lightInfo[i].lightId, &effect);
         EXPECT_EQ(LIGHT_NOT_FLASH, ret);

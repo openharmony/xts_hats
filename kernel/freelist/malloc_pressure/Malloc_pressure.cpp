@@ -22,6 +22,7 @@
 #define SIZE_ALIGN (4 * sizeof(size_t))
 #define THRESHOLD (0x1c00 * SIZE_ALIGN)
 const int ITER_TIME = 20;
+const int TIME_SPEC_LEN = 2;
 
 using namespace testing::ext;
 using namespace std;
@@ -56,7 +57,7 @@ void MallocPressure::TearDownTestCase()
 */
 HWTEST_F(MallocPressure, pressureTest0100, Function | MediumTest | Level1)
 {
-    struct timespec ts[2];
+    struct timespec ts[TIME_SPEC_LEN];
     clock_gettime(CLOCK_REALTIME, &ts[0]);
     for (int i = 0; i < ITER_TIME; ++i) {
         for (size_t size = 0; size < THRESHOLD; size += SIZE_ALIGN + 1) {

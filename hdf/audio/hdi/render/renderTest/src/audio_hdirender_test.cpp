@@ -1040,7 +1040,7 @@ HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_AudioRenderGetRenderPosition_0010, Fu
 #endif
 #ifndef PRODUCT_RK3568
 /**
-* @tc.name  Test GetRenderPosition API via define sampleRate and channelCount to different value
+* @tc.name  Test GetRenderPosition API via define sampleRate and channelCount to different values
 * @tc.number  SUB_Audio_HDI_AudioRenderGetRenderPosition_0011
 * @tc.desc  Test GetRenderPosition interface,return 0 if get framesize define channelCount  as different values
 */

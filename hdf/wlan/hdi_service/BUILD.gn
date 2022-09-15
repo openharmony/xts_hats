@@ -3,7 +3,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,6 +12,7 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
+import("//build/test.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
 
@@ -19,14 +20,17 @@ module_output_path = "hdf/wlan"
 
 ###########################palTest###########################
 
-ohos_moduletest_suite("HatsHdfWlanHdiServiceTest") {
+ohos_moduletest_suite("WlanHdiServiceTestC") {
   module_out_path = module_output_path
-  sources = [ "wlan_hdi_hal_services_test.cpp" ]
+  sources = [
+    "wlan_callback_impl.c",
+    "wlan_hdi_hal_services_c_test.cpp",
+  ]
 
   deps = [
     "//drivers/peripheral/wlan/client:wifi_driver_client",
     "//drivers/peripheral/wlan/hal:wifi_hal",
-    "//drivers/peripheral/wlan/hdi_service:wifi_hdi_device",
+    "//drivers/peripheral/wlan/hdi_service:hdi_wlan_service",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
   ]
@@ -34,15 +38,15 @@ ohos_moduletest_suite("HatsHdfWlanHdiServiceTest") {
   include_dirs = [
     "include",
     "//drivers/peripheral/wlan/interfaces/include",
-    "//drivers/peripheral/wlan/hdi_service/services",
+    "//drivers/peripheral/wlan/hdi_service",
     "//drivers/peripheral/wlan/client/include",
     "//drivers/peripheral/wlan/hal/include",
-    "//drivers/peripheral/wlan/hdi_service/include",
   ]
 
   if (is_standard_system) {
     external_deps = [
       "c_utils:utils",
+      "drivers_interface_wlan:libwlan_proxy_1.0",
       "hdf_core:libhdf_host",
       "hdf_core:libhdf_ipc_adapter",
       "hdf_core:libhdf_utils",
@@ -54,48 +58,4 @@ ohos_moduletest_suite("HatsHdfWlanHdiServiceTest") {
   }
   external_deps += [ "ipc:ipc_single" ]
 }
-
-ohos_moduletest_suite("HatsHdfWlanHdiServiceTestC") {
-  module_out_path = module_output_path
-  sources = [ "wlan_hdi_hal_services_c_test.cpp" ]
-
-  deps = [
-    "//drivers/peripheral/wlan/client:wifi_driver_client",
-    "//drivers/peripheral/wlan/hal:wifi_hal",
-    "//drivers/peripheral/wlan/hdi_service:wifi_hdi_c_device",
-    "//third_party/googletest:gmock_main",
-    "//third_party/googletest:gtest_main",
-  ]
-
-  include_dirs = [
-    "include",
-    "//drivers/peripheral/wlan/interfaces/include",
-    "//drivers/peripheral/wlan/hdi_service/services",
-    "//drivers/peripheral/wlan/client/include",
-    "//drivers/peripheral/wlan/hal/include",
-    "//drivers/peripheral/wlan/hdi_service/include",
-  ]
-
-  if (is_standard_system) {
-    external_deps = [
-      "c_utils:utils",
-      "hdf_core:libhdf_host",
-      "hdf_core:libhdf_ipc_adapter",
-      "hdf_core:libhdf_utils",
-      "hdf_core:libhdi",
-      "hiviewdfx_hilog_native:libhilog",
-    ]
-  } else {
-    external_deps = [ "hilog:libhilog" ]
-  }
-  external_deps += [ "ipc:ipc_single" ]
-}
-
 ###########################end###########################
-group("HatsHdfWifiHdiServiceTest") {
-  testonly = true
-  deps = [
-    ":HatsHdfWlanHdiServiceTest",
-    ":HatsHdfWlanHdiServiceTestC",
-  ]
-}

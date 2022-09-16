@@ -16,6 +16,7 @@ group("hatshdftest") {
   if (is_standard_system) {
     deps = [
       "audio:HatsHdfAudioTest",
+      "bluetooth:HatsHdfBluetoothTest",
       "camera:HatsHdfCameraTest",
       "codec:HatsHdfCodecTest",
       "display:HatsHdfDisplayTest",

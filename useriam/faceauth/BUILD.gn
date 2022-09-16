@@ -44,6 +44,7 @@ ohos_moduletest_suite("HatsUserIamFaceAuthTest") {
   deps = [
     "../common:useriam_test_common",
     "//base/useriam/user_auth_framework/common:iam_test",
+    "//drivers/hdf_core/adapter/uhdf2/model/camera/sequenceable/buffer_producer:libbuffer_producer_sequenceable_1.0",
     "//drivers/peripheral/face_auth/hdi_service:libface_auth_interface_service_1.0",
     "//third_party/googletest:gtest_main",
     "//utils/native/base:utils",
@@ -51,6 +52,7 @@ ohos_moduletest_suite("HatsUserIamFaceAuthTest") {
 
   external_deps = [
     "drivers_interface_face_auth:face_auth_idl_headers",
+    "graphic_standard:surface",
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_core",
     "utils_base:utils",

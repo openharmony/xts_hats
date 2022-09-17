@@ -2021,3 +2021,164 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1160, Function | MediumTest | Level1)
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1160 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
+
+/**
+ * @tc.name: SUB_USB_HDI_1990
+ * @tc.desc: Test functions to BulkCancel
+ * @tc.desc: int32_t BulkCancel(const UsbDev &dev, const UsbPipe &pipe);
+ * @tc.desc: 正向测试：参数正确
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1990, Function | MediumTest | Level1)
+{
+    uint8_t pointid = POINTID_129;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
+    struct UsbDev dev = dev_;
+    uint8_t buffer[LENGTH_NUM_255] = "request001";
+    uint32_t length = LENGTH_NUM_255;
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1990 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    EXPECT_TRUE(ret == 0);
+    struct UsbPipe pipe = {interfaceId, pointid};
+    std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_10};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = g_usbInterface->RequestQueue(dev, pipe, clientdata, bufferdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1990 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+    ret = g_usbInterface->BulkCancel(dev, pipe);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1990 %{public}d BulkCancel=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_2000
+ * @tc.desc: Test functions to BulkCancel
+ * @tc.desc: int32_t BulkCancel(const UsbDev &dev, const UsbPipe &pipe);
+ * @tc.desc: 反向测试：参数异常，busNum错误
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_2000, Function | MediumTest | Level1)
+{
+    uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
+    struct UsbDev dev = dev_;
+    uint32_t length = LENGTH_NUM_255;
+    uint8_t pointid = POINTID_129;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t buffer[LENGTH_NUM_255] = "request002";
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_2000 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    EXPECT_TRUE(ret == 0);
+    struct UsbPipe pipe = {interfaceId, pointid};
+    std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_10};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ;
+    ret = g_usbInterface->RequestQueue(dev, pipe, clientdata, bufferdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_2000 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+    dev.busNum = BUS_NUM_222;
+    ret = g_usbInterface->BulkCancel(dev, pipe);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_2000 %{public}d BulkCancel=%{public}d", __LINE__, ret);
+    ASSERT_NE(ret, 0);
+    dev.busNum = dev_.busNum;
+    ret = g_usbInterface->RequestCancel(dev, pipe);
+    ASSERT_EQ(0, ret);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_2010
+ * @tc.desc: Test functions to BulkCancel
+ * @tc.desc: int32_t BulkCancel(const UsbDev &dev, const UsbPipe &pipe);
+ * @tc.desc: 反向测试：参数异常，devAddr错误
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_2010, Function | MediumTest | Level1)
+{
+    uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
+    struct UsbDev dev = dev_;
+    uint8_t buffer[LENGTH_NUM_255] = "request003";
+    uint32_t length = LENGTH_NUM_255;
+    uint8_t pointid = POINTID_129;
+    uint8_t interfaceId = INTERFACEID_1;
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_2010 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    EXPECT_TRUE(ret == 0);
+    std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_10};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    struct UsbPipe pipe = {interfaceId, pointid};
+    ret = g_usbInterface->RequestQueue(dev, pipe, clientdata, bufferdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_2010 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+    dev.devAddr = DEV_ADDR_222;
+    ret = g_usbInterface->BulkCancel(dev, pipe);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_2010 %{public}d BulkCancel=%{public}d", __LINE__, ret);
+    ASSERT_NE(ret, 0);
+    dev.devAddr = dev_.devAddr;
+    ret = g_usbInterface->BulkCancel(dev, pipe);
+    ASSERT_EQ(0, ret);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_2020
+ * @tc.desc: Test functions to BulkCancel
+ * @tc.desc: int32_t BulkCancel(const UsbDev &dev, const UsbPipe &pipe);
+ * @tc.desc: 反向测试：参数异常，busNum、devAddr、interfaceid错误
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_2020, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t buffer[LENGTH_NUM_255] = "request004";
+    uint8_t pointid = POINTID_1;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint32_t length = LENGTH_NUM_255;
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_2020 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    EXPECT_TRUE(ret == 0);
+    uint8_t tag[TAG_LENGTH_NUM_1000] = "queue Write";
+    struct UsbPipe pipe = {interfaceId, pointid};
+    std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_11};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = g_usbInterface->RequestQueue(dev, pipe, clientdata, bufferdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_2020 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+    dev.busNum = BUS_NUM_222;
+    dev.devAddr = DEV_ADDR_222;
+    pipe.intfId = 222;
+    ret = g_usbInterface->BulkCancel(dev, pipe);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_2020 %{public}d BulkCancel=%{public}d", __LINE__, ret);
+    ASSERT_NE(ret, 0);
+    dev = dev_;
+    pipe.intfId = INTERFACEID_1;
+    ret = g_usbInterface->BulkCancel(dev, pipe);
+    ASSERT_EQ(0, ret);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_2030
+ * @tc.desc: Test functions to BulkCancel
+ * @tc.desc: int32_t BulkCancel(const UsbDev &dev, const UsbPipe &pipe);
+ * @tc.desc: 正向测试
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdRequestTest, SUB_USB_HDI_2030, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t buffer[LENGTH_NUM_255] = "request005";
+    uint32_t length = LENGTH_NUM_255;
+    uint8_t pointid = POINTID_1;
+    uint8_t interfaceId = INTERFACEID_1;
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_2030 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    EXPECT_TRUE(ret == 0);
+    struct UsbPipe pipe = {interfaceId, pointid};
+    uint8_t tag[TAG_LENGTH_NUM_1000] = "queue Write";
+    std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_11};
+    std::vector<uint8_t> bufferdata = {buffer, buffer + length};
+    ret = g_usbInterface->RequestQueue(dev, pipe, clientdata, bufferdata);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_2030 %{public}d RequestQueue=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+    ret = g_usbInterface->BulkCancel(dev, pipe);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_2030 %{public}d BulkCancel=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+}

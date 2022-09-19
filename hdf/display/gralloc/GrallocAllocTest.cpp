@@ -409,5 +409,5 @@ TEST_P(GrallocAllocTest, GrallocAlloc)
     ASSERT_TRUE(ret == DISPLAY_SUCCESS);
 }
 
-INSTANTIATE_TEST_CASE_P(AllocTest, GrallocAllocTest, ::testing::ValuesIn(GRALLOC_TEST_SETS));
+INSTANTIATE_TEST_SUITE_P(AllocTest, GrallocAllocTest, ::testing::ValuesIn(GRALLOC_TEST_SETS));
 }

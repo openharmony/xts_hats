@@ -28,15 +28,12 @@ ohos_moduletest_suite("HatsStartupPartitionSlotTest") {
     "./include",
     "//drivers/peripheral/partitionslot/hal/src",
     "//third_party/googletest/googletest/include/gtest",
-    "//utils/native/base/include",
+    "//commonlibrary/c_utils/base/include",
   ]
 
   sources = [ "./src/partitionslot_test.cpp" ]
 
-  deps = [
-    "//third_party/googletest:gtest_main",
-    "//utils/native/base:utils",
-  ]
+  deps = [ "//third_party/googletest:gtest_main" ]
 
   external_deps = [
     "c_utils:utils",

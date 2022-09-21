@@ -17,7 +17,6 @@ ohos_source_set("useriam_test_common") {
   testonly = true
   sources = [ "src/iam_hat_test.cpp" ]
   include_dirs = [ "./include" ]
-  deps = [ "//utils/native/base:utils" ]
 
   external_deps = [
     "c_utils:utils",

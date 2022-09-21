@@ -70,7 +70,7 @@ ohos_moduletest_suite("HatsHdfCameraTest") {
     "//base/hiviewdfx/interfaces/innerkits/libhilog/include",
 
     #producer
-    "//utils/native/base/include",
+    "//commonlibrary/c_utils/base/include",
     "//foundation/systemabilitymgr/samgr/interfaces/innerkits/samgr_proxy/include",
     "$camera_path/pipeline_core/utils",
     "$camera_path/pipeline_core/include",

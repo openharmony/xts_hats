@@ -48,7 +48,3 @@ private:
 } // OHOS
 
 #endif // OHOS_HDI_BLUETOOTH_HCI_V1_0_IHCICALLBACKIMPL_H
-
-
-
-

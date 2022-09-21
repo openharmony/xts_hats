@@ -16,9 +16,9 @@
 #ifndef BLUETOOTH_HDI_H
 #define BLUETOOTH_HDI_H
 
-#include <stdlib.h>
-#include <stdbool.h>
-#include <stdint.h>
+//#include <cstdlib.h>
+//#include <cstdbool.h>
+//#include <cstdint.h>
 
 #ifdef __cplusplus
 extern "C" {

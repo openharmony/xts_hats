@@ -62,5 +62,3 @@ int32_t HciCallbackImpl::OnReceivedHciPacket(BtType type, const std::vector<uint
 } // Bluetooth
 } // HDI
 } // OHOS
-
-

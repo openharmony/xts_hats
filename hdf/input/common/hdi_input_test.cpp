@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -32,11 +32,12 @@ IInputInterface *g_inputInterface;
 InputEventCb g_callback;
 InputHostCb g_hotplugCb;
 bool g_HasDev = false;
+InputDevDesc g_allDev[MAX_DEVICES];
 
-static void ReportHotPlugEventPkgCallback(const HotPlugEvent *msg);
-static void ReportEventPkgCallback(const EventPackage **pkgs, uint32_t count, uint32_t devIndex);
-static void CloseOnlineDev(DevDesc *sta, int32_t len);
-static void OpenOnlineDev(DevDesc *sta, int32_t len);
+static void ReportHotPlugEventPkgCallback(const InputHotPlugEvent *msg);
+static void ReportEventPkgCallback(const InputEventPackage **pkgs, uint32_t count, uint32_t devIndex);
+static void CloseOnlineDev();
+static void OpenOnlineDev();
 
 class HdiInputTest : public testing::Test {
 public:
@@ -49,8 +50,7 @@ public:
 void HdiInputTest::SetUpTestCase()
 {
     int32_t ret;
-    DevDesc sta[MAX_DEVICES];
-    ret = memset_s(sta, MAX_DEVICES * sizeof(DevDesc), 0, MAX_DEVICES * sizeof(DevDesc));
+    ret = memset_s(g_allDev, MAX_DEVICES * sizeof(InputDevDesc), 0, MAX_DEVICES * sizeof(InputDevDesc));
     if (ret != 0) {
         HDF_LOGE("memset failed.\n");
         return;
@@ -62,15 +62,19 @@ void HdiInputTest::SetUpTestCase()
 
     g_callback.EventPkgCallback = ReportEventPkgCallback;
     g_hotplugCb.HotPlugCallback = ReportHotPlugEventPkgCallback;
-    ret = g_inputInterface->iInputManager->ScanInputDevice(sta, MAX_DEVICES);
+    ret = g_inputInterface->iInputManager->ScanInputDevice(g_allDev, MAX_DEVICES);
     if (ret) {
         HDF_LOGE("%s: scan device failed, ret %d \n", __func__, ret);
     }
-    for (int32_t i = 0; i < MAX_DEVICES; i++) {
-        if (sta[i].devIndex == 0) {
+    if (g_allDev[0].devIndex == 1){
+        g_HasDev = true;
+        printf("%s: scan deviceIndex:%d,devType:%d. \n", __func__, g_allDev[0].devIndex, g_allDev[0].devType);
+    }
+    for (int32_t i = 1; i < MAX_DEVICES; i++) {
+        if (g_allDev[i].devIndex == 0) {
             break;
         }
-        printf("%s: scan deviceIndex:%d,devType:%d. \n", __func__, sta[i].devIndex, sta[i].devType);
+        printf("%s: scan deviceIndex:%d,devType:%d. \n", __func__, g_allDev[i].devIndex, g_allDev[i].devType);
         g_HasDev = true;
     }
 }
@@ -88,9 +92,9 @@ void HdiInputTest::TearDown()
 {
 }
 
-static void ReportEventPkgCallback(const EventPackage **pkgs, uint32_t count, uint32_t devIndex)
+static void ReportEventPkgCallback(const InputEventPackage **pkgs, uint32_t count, uint32_t devIndex)
 {
-    if (pkgs == NULL) {
+    if (pkgs == nullptr) {
         return;
     }
     for (int32_t i = 0; i < count; i++) {
@@ -101,10 +105,10 @@ static void ReportEventPkgCallback(const EventPackage **pkgs, uint32_t count, ui
     }
 }
 
-static void ReportHotPlugEventPkgCallback(const HotPlugEvent *msg)
+static void ReportHotPlugEventPkgCallback(const InputHotPlugEvent *msg)
 {
     int32_t ret;
-    if (msg == NULL) {
+    if (msg == nullptr) {
         return;
     }
     HDF_LOGI("%s: status =%d devId=%d type =%d \n", __func__, msg->status, msg->devIndex, msg->devType);
@@ -135,53 +139,41 @@ static void ReportHotPlugEventPkgCallback(const HotPlugEvent *msg)
     }
 }
 
-static void OpenOnlineDev(DevDesc *sta, int32_t len)
+static void OpenOnlineDev()
 {
-    int32_t ret = g_inputInterface->iInputManager->ScanInputDevice(sta, len);
-    if (ret) {
-        HDF_LOGE("%s: scan device failed, ret %d \n", __func__, ret);
-    }
-    ASSERT_EQ(ret, INPUT_SUCCESS);
-
-    for (int32_t i = 0; i < len; i++) {
-        if (sta[i].devIndex == 0) {
+    for (int32_t i = 0; i < MAX_DEVICES; i++) {
+        if (g_allDev[i].devIndex == 0) {
             break;
         }
-        ret = g_inputInterface->iInputManager->OpenInputDevice(sta[i].devIndex);
+        int32_t ret = g_inputInterface->iInputManager->OpenInputDevice(g_allDev[i].devIndex);
         if (ret) {
-            HDF_LOGE("%s: open device[%d] failed, ret %d \n", __func__, sta[i].devIndex, ret);
+            HDF_LOGE("%s: open device[%d] failed, ret %d \n", __func__, g_allDev[i].devIndex, ret);
         }
         ASSERT_EQ(ret, INPUT_SUCCESS);
 
-        ret  = g_inputInterface->iInputReporter->RegisterReportCallback(sta[i].devIndex, &g_callback);
+        ret  = g_inputInterface->iInputReporter->RegisterReportCallback(g_allDev[i].devIndex, &g_callback);
         if (ret) {
-            HDF_LOGE("%s: register callback failed for device[%d], ret %d \n", __func__, sta[i].devIndex, ret);
+            HDF_LOGE("%s: register callback failed for device[%d], ret %d \n", __func__, g_allDev[i].devIndex, ret);
         }
         ASSERT_EQ(ret, INPUT_SUCCESS);
     }
 }
 
-static void CloseOnlineDev(DevDesc *sta, int32_t len)
+static void CloseOnlineDev()
 {
-    int32_t ret = g_inputInterface->iInputManager->ScanInputDevice(sta, len);
-    if (ret) {
-        HDF_LOGE("%s: scan device failed, ret %d \n", __func__, ret);
-    }
-    ASSERT_EQ(ret, INPUT_SUCCESS);
-
-    for (int32_t i = 0; i < len; i++) {
-        if (sta[i].devIndex == 0) {
+    for (int32_t i = 0; i < MAX_DEVICES; i++) {
+        if (g_allDev[i].devIndex == 0) {
             break;
         }
-        ret = g_inputInterface->iInputReporter->UnregisterReportCallback(sta[i].devIndex);
+        int32_t ret = g_inputInterface->iInputReporter->UnregisterReportCallback(g_allDev[i].devIndex);
         if (ret) {
-            HDF_LOGE("%s: register callback failed for device[%d], ret %d \n", __func__, sta[i].devIndex, ret);
+            HDF_LOGE("%s: register callback failed for device[%d], ret %d \n", __func__, g_allDev[i].devIndex, ret);
         }
         ASSERT_EQ(ret, INPUT_SUCCESS);
 
-        ret = g_inputInterface->iInputManager->CloseInputDevice(sta[i].devIndex);
+        ret = g_inputInterface->iInputManager->CloseInputDevice(g_allDev[i].devIndex);
         if (ret) {
-            HDF_LOGE("%s: close device[%d] failed, ret %d \n", __func__, sta[i].devIndex, ret);
+            HDF_LOGE("%s: close device[%d] failed, ret %d \n", __func__, g_allDev[i].devIndex, ret);
         }
         ASSERT_EQ(ret, INPUT_SUCCESS);
     }
@@ -196,15 +188,13 @@ static void CloseOnlineDev(DevDesc *sta, int32_t len)
   */
 HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0001, Function | MediumTest | Level1)
 {
-    DevDesc sta[MAX_DEVICES];
-
     HDF_LOGI("%s: [Input] RegisterCallbackAndReportData001 enter \n", __func__);
     int32_t ret;
 
     INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
     INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputManager, INPUT_NULL_PTR);
 
-    ret  = g_inputInterface->iInputManager->ScanInputDevice(sta, sizeof(sta)/sizeof(DevDesc));
+    ret  = g_inputInterface->iInputManager->ScanInputDevice(g_allDev, sizeof(g_allDev)/sizeof(InputDevDesc));
     EXPECT_EQ(ret, INPUT_SUCCESS);
 }
 
@@ -218,35 +208,24 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0001, Function | MediumTest | L
 HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0002, Function | MediumTest | Level3)
 {
     HDF_LOGI("%s: [Input] HotPlugCallback Testcase enter\n", __func__);
-    DevDesc sta[MAX_DEVICES];
-
-    int32_t ret = memset_s(sta, sizeof(sta), 0, sizeof(sta));
-    if (ret != 0) {
-        HDF_LOGE("%s: memcpy failed, line %d\n", __func__, __LINE__);
-    }
 
     INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
     INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputReporter, INPUT_NULL_PTR);
     INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputManager, INPUT_NULL_PTR);
 
-    ret = g_inputInterface->iInputReporter->RegisterHotPlugCallback(&g_hotplugCb);
+    int32_t ret = g_inputInterface->iInputReporter->RegisterHotPlugCallback(&g_hotplugCb);
     if (ret) {
         HDF_LOGE("%s: register hotplug callback failed for device manager, ret %d\n", __func__, ret);
     }
     ASSERT_EQ(ret, INPUT_SUCCESS);
 
-    OpenOnlineDev(sta, MAX_DEVICES);
+    OpenOnlineDev();
 
     printf("%s: wait 5s for testing, pls hotplug now\n", __func__);
     printf("%s: The event data is as following:\n", __func__);
     OsalMSleep(KEEP_ALIVE_TIME_MS);
 
-    ret = memset_s(sta, sizeof(sta), 0, sizeof(sta));
-    if (ret != 0) {
-        HDF_LOGE("%s: memcpy failed, line %d\n", __func__, __LINE__);
-    }
-
-    CloseOnlineDev(sta, MAX_DEVICES);
+    CloseOnlineDev();
 
     ret = g_inputInterface->iInputReporter->UnregisterHotPlugCallback();
     if (ret) {
@@ -264,13 +243,18 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0002, Function | MediumTest | L
   */
 HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0010, Function | MediumTest | Level0)
 {
-    ASSERT_EQ(g_HasDev, true);
-    INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
-    INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputManager, INPUT_NULL_PTR);
-    int32_t ret = g_inputInterface->iInputManager->OpenInputDevice(TOUCH_INDEX);
-    ASSERT_EQ(ret, INPUT_SUCCESS);
-    ret = g_inputInterface->iInputManager->CloseInputDevice(TOUCH_INDEX);
-    ASSERT_EQ(ret, INPUT_SUCCESS);
+    if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
+        ASSERT_EQ(g_HasDev, true);
+        INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
+        INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputManager, INPUT_NULL_PTR);
+        int32_t ret = g_inputInterface->iInputManager->OpenInputDevice(TOUCH_INDEX);
+        ASSERT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterface->iInputManager->CloseInputDevice(TOUCH_INDEX);
+        ASSERT_EQ(ret, INPUT_SUCCESS);
+    }
+    int32_t ret = INPUT_SUCCESS;
+    EXPECT_EQ(ret, INPUT_SUCCESS);
+    
 }
 
 /**
@@ -301,11 +285,15 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0020, Function | MediumTest | L
   */
 HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0040, Function | MediumTest | Level0)
 {
-    ASSERT_EQ(g_HasDev, true);
-    int32_t ret = 0;
-    g_inputInterface->iInputManager->OpenInputDevice(TOUCH_INDEX);
-    EXPECT_EQ(ret, INPUT_SUCCESS);
-    ret = g_inputInterface->iInputManager->CloseInputDevice(TOUCH_INDEX);
+    if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
+        ASSERT_EQ(g_HasDev, true);
+        int32_t ret = 0;
+        g_inputInterface->iInputManager->OpenInputDevice(TOUCH_INDEX);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterface->iInputManager->CloseInputDevice(TOUCH_INDEX);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    }
+    int32_t ret = INPUT_SUCCESS;
     EXPECT_EQ(ret, INPUT_SUCCESS);
 }
 /**
@@ -334,22 +322,26 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0050, Function | MediumTest | L
   */
 HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0070, Function | MediumTest | Level0)
 {
-    ASSERT_EQ(g_HasDev, true);
-    int32_t ret = 0;
-    DeviceInfo *dev = NULL;
-    INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
-    INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputManager, INPUT_NULL_PTR);
+    if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
+        ASSERT_EQ(g_HasDev, true);
+        int32_t ret = 0;
+        InputDeviceInfo *dev = nullptr;
+        INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
+        INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputManager, INPUT_NULL_PTR);
 
-    ret = g_inputInterface->iInputManager->OpenInputDevice(TOUCH_INDEX);
-    if (ret) {
-        HDF_LOGE("%s: open device1 failed, ret %d\n", __func__, ret);
+        ret = g_inputInterface->iInputManager->OpenInputDevice(TOUCH_INDEX);
+        if (ret) {
+            HDF_LOGE("%s: open device1 failed, ret %d\n", __func__, ret);
+        }
+        ASSERT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterface->iInputManager->GetInputDevice(TOUCH_INDEX, &dev);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        EXPECT_EQ((uint32_t)TOUCH_INDEX, dev->devIndex);
+        HDF_LOGI("devindex = %u, devType = %u\n", dev->devIndex, dev->devType);
+        HDF_LOGI("chipInfo = %s, VendorName = %s,chipName = %s\n", dev->chipInfo, dev->vendorName, dev->chipName);
     }
-    ASSERT_EQ(ret, INPUT_SUCCESS);
-    ret = g_inputInterface->iInputManager->GetInputDevice(TOUCH_INDEX, &dev);
+    int32_t ret = INPUT_SUCCESS;
     EXPECT_EQ(ret, INPUT_SUCCESS);
-    EXPECT_EQ((uint32_t)TOUCH_INDEX, dev->devIndex);
-    HDF_LOGI("devindex = %u, devType = %u\n", dev->devIndex, dev->devType);
-    HDF_LOGI("chipInfo = %s, VendorName = %s,chipName = %s\n", dev->chipInfo, dev->vendorName, dev->chipName);
 }
 
 /**
@@ -363,7 +355,7 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0080, Function | MediumTest | L
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret = 0;
-    DeviceInfo *dev = NULL;
+    InputDeviceInfo *dev = nullptr;
 
     ret = g_inputInterface->iInputManager->GetInputDevice(TOUCH_INDEX, nullptr);
     EXPECT_NE(ret, INPUT_SUCCESS);
@@ -387,7 +379,7 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0100, Function | MediumTest | L
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
     uint32_t num = 0;
-    DeviceInfo *dev[MAX_INPUT_DEV_NUM] = {0};
+    InputDeviceInfo *dev[MAX_INPUT_DEV_NUM] = {0};
 
     ret = g_inputInterface->iInputManager->GetInputDeviceList(&num, dev, MAX_INPUT_DEV_NUM);
     EXPECT_EQ(ret, INPUT_SUCCESS);
@@ -412,7 +404,7 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0110, Function | MediumTest | L
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
     uint32_t num = 0;
-    DeviceInfo *dev[MAX_INPUT_DEV_NUM] = {0}; 
+    InputDeviceInfo *dev[MAX_INPUT_DEV_NUM] = {0}; 
 
     ret = g_inputInterface->iInputManager->GetInputDeviceList(nullptr, dev, MAX_INPUT_DEV_NUM);
     EXPECT_NE(ret, INPUT_SUCCESS);
@@ -431,13 +423,17 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0110, Function | MediumTest | L
   */
 HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0130, Function | MediumTest | Level0)
 {
-    ASSERT_EQ(g_HasDev, true);
-    int32_t ret;
-    uint32_t devType = INIT_DEFAULT_VALUE;
+    if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
+        ASSERT_EQ(g_HasDev, true);
+        int32_t ret;
+        uint32_t devType = INIT_DEFAULT_VALUE;
 
-    ret = g_inputInterface->iInputController->GetDeviceType(TOUCH_INDEX, &devType);
+        ret = g_inputInterface->iInputController->GetDeviceType(TOUCH_INDEX, &devType);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        EXPECT_EQ(devType, INDEV_TYPE_TOUCH);
+    }
+    int32_t ret = INPUT_SUCCESS;
     EXPECT_EQ(ret, INPUT_SUCCESS);
-    EXPECT_EQ(devType, INDEV_TYPE_TOUCH);
 }
 /**
   * @tc.number: SUB_DriverSystem_HdiInput_0140
@@ -469,13 +465,17 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0140, Function | MediumTest | L
   */
 HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0160, Function | MediumTest | Level0)
 {
-    ASSERT_EQ(g_HasDev, true);
-    int32_t ret;
-    char chipInfo[CHIP_INFO_LEN] = {0};
+    if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
+        ASSERT_EQ(g_HasDev, true);
+        int32_t ret;
+        char chipInfo[CHIP_INFO_LEN] = {0};
 
-    ret = g_inputInterface->iInputController->GetChipInfo(TOUCH_INDEX, chipInfo, CHIP_INFO_LEN);
-    ASSERT_EQ(ret, INPUT_SUCCESS);
-    HDF_LOGI("device's chip info is %s\n", chipInfo);
+        ret = g_inputInterface->iInputController->GetChipInfo(TOUCH_INDEX, chipInfo, CHIP_INFO_LEN);
+        ASSERT_EQ(ret, INPUT_SUCCESS);
+        HDF_LOGI("device's chip info is %s\n", chipInfo);
+    }
+    int32_t ret = INPUT_SUCCESS;
+    EXPECT_EQ(ret, INPUT_SUCCESS);
 }
 /**
   * @tc.number: SUB_DriverSystem_HdiInput_0170
@@ -509,15 +509,19 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0170, Function | MediumTest | L
   */
 HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0190, Function | MediumTest | Level0)
 {
-    ASSERT_EQ(g_HasDev, true);
-    int32_t ret;
-    char chipInfo[CHIP_INFO_LEN] = {0};
-    DeviceInfo *dev =NULL;
-    ret = g_inputInterface->iInputManager->GetInputDevice(TOUCH_INDEX, &dev);
+    if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
+        ASSERT_EQ(g_HasDev, true);
+        int32_t ret;
+        char chipInfo[CHIP_INFO_LEN] = {0};
+        InputDeviceInfo *dev =NULL;
+        ret = g_inputInterface->iInputManager->GetInputDevice(TOUCH_INDEX, &dev);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterface->iInputController->GetChipInfo(TOUCH_INDEX, chipInfo, CHIP_INFO_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        HDF_LOGI("device1's chip info is %s? chipInfo = %s\n", chipInfo, dev->chipInfo);
+    }
+    int32_t ret = INPUT_SUCCESS;
     EXPECT_EQ(ret, INPUT_SUCCESS);
-    ret = g_inputInterface->iInputController->GetChipInfo(TOUCH_INDEX, chipInfo, CHIP_INFO_LEN);
-    EXPECT_EQ(ret, INPUT_SUCCESS);
-    HDF_LOGI("device1's chip info is %s? chipInfo = %s\n", chipInfo, dev->chipInfo);
 }
 /**
   * @tc.number: SUB_DriverSystem_HdiInput_0200
@@ -528,16 +532,20 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0190, Function | MediumTest | L
   */
 HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0200, Function | MediumTest | Level0)
 {
-    ASSERT_EQ(g_HasDev, true);
-    int32_t ret;
-    uint32_t setStatus = INPUT_LOW_POWER;
-    uint32_t getStatus = 0;
+    if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
+        ASSERT_EQ(g_HasDev, true);
+        int32_t ret;
+        uint32_t setStatus = INPUT_LOW_POWER;
+        uint32_t getStatus = 0;
 
-    ret = g_inputInterface->iInputController->SetPowerStatus(TOUCH_INDEX, setStatus);
+        ret = g_inputInterface->iInputController->SetPowerStatus(TOUCH_INDEX, setStatus);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterface->iInputController->GetPowerStatus(TOUCH_INDEX, &getStatus);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ASSERT_EQ(setStatus, getStatus);
+    }
+    int32_t ret = INPUT_SUCCESS;
     EXPECT_EQ(ret, INPUT_SUCCESS);
-    ret = g_inputInterface->iInputController->GetPowerStatus(TOUCH_INDEX, &getStatus);
-    EXPECT_EQ(ret, INPUT_SUCCESS);
-    ASSERT_EQ(setStatus, getStatus);
 }
 /**
   * @tc.number: SUB_DriverSystem_HdiInput_0210
@@ -569,16 +577,20 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0210, Function | MediumTest | L
   */
 HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0230, Function | MediumTest | Level0)
 {
-    ASSERT_EQ(g_HasDev, true);
-    int32_t ret;
-    uint32_t setStatus = INPUT_RESUME;
-    uint32_t getStatus = 0;
+    if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
+        ASSERT_EQ(g_HasDev, true);
+        int32_t ret;
+        uint32_t setStatus = INPUT_RESUME;
+        uint32_t getStatus = 0;
 
-    ret = g_inputInterface->iInputController->SetPowerStatus(TOUCH_INDEX, setStatus);
+        ret = g_inputInterface->iInputController->SetPowerStatus(TOUCH_INDEX, setStatus);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterface->iInputController->GetPowerStatus(TOUCH_INDEX, &getStatus);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ASSERT_EQ(setStatus, getStatus);
+    }
+    int32_t ret = INPUT_SUCCESS;
     EXPECT_EQ(ret, INPUT_SUCCESS);
-    ret = g_inputInterface->iInputController->GetPowerStatus(TOUCH_INDEX, &getStatus);
-    EXPECT_EQ(ret, INPUT_SUCCESS);
-    ASSERT_EQ(setStatus, getStatus);
 }
 
 /**
@@ -611,13 +623,17 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0240, Function | MediumTest | L
   */
 HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0260, Function | MediumTest | Level0)
 {
-    ASSERT_EQ(g_HasDev, true);
-    int32_t ret;
-    char vendorName[VENDOR_NAME_LEN] = {0};
+    if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
+        ASSERT_EQ(g_HasDev, true);
+        int32_t ret;
+        char vendorName[VENDOR_NAME_LEN] = {0};
 
-    ret = g_inputInterface->iInputController->GetVendorName(TOUCH_INDEX, vendorName, VENDOR_NAME_LEN);
+        ret = g_inputInterface->iInputController->GetVendorName(TOUCH_INDEX, vendorName, VENDOR_NAME_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        HDF_LOGI("device1's vendor name is %s:\n", vendorName);
+    }
+    int32_t ret = INPUT_SUCCESS;
     EXPECT_EQ(ret, INPUT_SUCCESS);
-    HDF_LOGI("device1's vendor name is %s:\n", vendorName);
 }
 
 /**
@@ -653,13 +669,17 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0270, Function | MediumTest | L
   */
 HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0290, Function | MediumTest | Level0)
 {
-    ASSERT_EQ(g_HasDev, true);
-    int32_t ret;
-    char chipName[CHIP_NAME_LEN] = {0};
+    if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
+        ASSERT_EQ(g_HasDev, true);
+        int32_t ret;
+        char chipName[CHIP_NAME_LEN] = {0};
 
-    ret = g_inputInterface->iInputController->GetChipName(TOUCH_INDEX, chipName, CHIP_NAME_LEN);
+        ret = g_inputInterface->iInputController->GetChipName(TOUCH_INDEX, chipName, CHIP_NAME_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        HDF_LOGI("device1's vendor name is %s:\n", chipName);
+    }
+    int32_t ret = INPUT_SUCCESS;
     EXPECT_EQ(ret, INPUT_SUCCESS);
-    HDF_LOGI("device1's vendor name is %s:\n", chipName);
 }
 /**
   * @tc.number: SUB_DriverSystem_HdiInput_0300
@@ -693,11 +713,15 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0300, Function | MediumTest | L
   */
 HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0320, Function | MediumTest | Level0)
 {
-    ASSERT_EQ(g_HasDev, true);
-    int32_t ret;
-    uint32_t gestureMode = 1;
+    if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
+        ASSERT_EQ(g_HasDev, true);
+        int32_t ret;
+        uint32_t gestureMode = 1;
 
-    ret = g_inputInterface->iInputController->SetGestureMode(TOUCH_INDEX, gestureMode);
+        ret = g_inputInterface->iInputController->SetGestureMode(TOUCH_INDEX, gestureMode);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    }
+    int32_t ret = INPUT_SUCCESS;
     EXPECT_EQ(ret, INPUT_SUCCESS);
 }
 
@@ -729,12 +753,16 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0330, Function | MediumTest | L
   */
 HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0350, Function | MediumTest | Level0)
 {
-    ASSERT_EQ(g_HasDev, true);
-    int32_t ret;
-    uint32_t testType = MMI_TEST;
-    char result[MAX_INPUT_DEV_NUM] = {0};
+    if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
+        ASSERT_EQ(g_HasDev, true);
+        int32_t ret;
+        uint32_t testType = MMI_TEST;
+        char result[MAX_INPUT_DEV_NUM] = {0};
 
-    ret = g_inputInterface->iInputController->RunCapacitanceTest(TOUCH_INDEX, testType, result, MAX_INPUT_DEV_NUM);
+        ret = g_inputInterface->iInputController->RunCapacitanceTest(TOUCH_INDEX, testType, result, MAX_INPUT_DEV_NUM);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    }
+    int32_t ret = INPUT_SUCCESS;
     EXPECT_EQ(ret, INPUT_SUCCESS);
 }
 
@@ -773,13 +801,17 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0360, Function | MediumTest | L
   */
 HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0380, Function | MediumTest | Level0)
 {
-    ASSERT_EQ(g_HasDev, true);
-    int32_t ret;
-    InputExtraCmd extraCmd = {0};
-    extraCmd.cmdCode = "WakeUpMode";
-    extraCmd.cmdValue = "Enable";
+    if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
+        ASSERT_EQ(g_HasDev, true);
+        int32_t ret;
+        InputExtraCmd extraCmd = {0};
+        extraCmd.cmdCode = "WakeUpMode";
+        extraCmd.cmdValue = "Enable";
 
-    ret = g_inputInterface->iInputController->RunExtraCommand(TOUCH_INDEX, &extraCmd);
+        ret = g_inputInterface->iInputController->RunExtraCommand(TOUCH_INDEX, &extraCmd);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    }
+    int32_t ret = INPUT_SUCCESS;
     EXPECT_EQ(ret, INPUT_SUCCESS);
 }
 
@@ -835,15 +867,19 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0410, Function | MediumTest | L
   */
 HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0420, Function | MediumTest | Level0)
 {
-    ASSERT_EQ(g_HasDev, true);
-    int32_t ret;
-    g_callback.EventPkgCallback = ReportEventPkgCallback;
+    if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
+        ASSERT_EQ(g_HasDev, true);
+        int32_t ret;
+        g_callback.EventPkgCallback = ReportEventPkgCallback;
 
-    ret = g_inputInterface->iInputReporter->RegisterReportCallback(TOUCH_INDEX, &g_callback);
-    EXPECT_EQ(ret, INPUT_SUCCESS);
-    printf("wait 5 for testing, pls  touch the panel now\n");
-    printf("the event data is as following:\n");
-    OsalMSleep(KEEP_ALIVE_TIME_MS);
-    ret = g_inputInterface->iInputReporter->UnregisterReportCallback(TOUCH_INDEX);
+        ret = g_inputInterface->iInputReporter->RegisterReportCallback(TOUCH_INDEX, &g_callback);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        printf("wait 5 for testing, pls  touch the panel now\n");
+        printf("the event data is as following:\n");
+        OsalMSleep(KEEP_ALIVE_TIME_MS);
+        ret = g_inputInterface->iInputReporter->UnregisterReportCallback(TOUCH_INDEX);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    }
+    int32_t ret = INPUT_SUCCESS;
     EXPECT_EQ(ret, INPUT_SUCCESS);
 }

@@ -60,11 +60,11 @@ void HdfBluetoothHdiTest::TearDown()
 }
 
 /**
-  * @tc.name: RegisterSensorDataCb0001
-  * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
+  * @tc.name: HdiBluetoothInit_0100
+  * @tc.desc: Returns 0 if the callback is successfully Init.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiInit_0100, TestSize.Level1)
+HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothInit_0100, TestSize.Level1)
 {
     g_hciCallbacks = new (std::nothrow) HciCallbackImpl();
     if (g_hciCallbacks == nullptr) {
@@ -76,21 +76,21 @@ HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiInit_0100, TestSize.Level1)
 }
 
 /**
-  * @tc.name: GetSensorClient0001
-  * @tc.desc: Get a client and check whether the client is empty.
+  * @tc.name: HdiBluetoothGet_0200
+  * @tc.desc: Get IHciInterface and check whether is empty.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiHci_0200, TestSize.Level1)
+HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothGet_0200, TestSize.Level2)
 {
     ASSERT_NE(nullptr, g_iBtHci);
 }
 
 /**
-  * @tc.name: GetSensorList0001
-  * @tc.desc: Obtains information about all sensors in the system.
+  * @tc.name: HdiBluetoothSend_0300
+  * @tc.desc: the HCI ACL_DATA packets is sent successfully.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetooth_0300, TestSize.Level1)
+HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0300, TestSize.Level1)
 {
     if (g_iBtHci == nullptr) {
         ASSERT_NE(nullptr, g_iBtHci);
@@ -100,15 +100,82 @@ HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetooth_0300, TestSize.Level
     std::vector<uint8_t> data;
     int32_t ret = g_iBtHci->SendHciPacket(btType, data);
     EXPECT_EQ(HDF_FAILURE, ret);
-
 }
 
 /**
-  * @tc.name: GetSensorList0001
-  * @tc.desc: Obtains information about all sensors in the system.
+  * @tc.name: HdiBluetoothSend_0400
+  * @tc.desc: the HCI HCI_CMD packets is sent successfully.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetooth_0400, TestSize.Level1)
+HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0400, TestSize.Level1)
+{
+    if (g_iBtHci == nullptr) {
+        ASSERT_NE(nullptr, g_iBtHci);
+        return;
+    }
+    BtType btType = BtType::HCI_CMD;
+    std::vector<uint8_t> data;
+    int32_t ret = g_iBtHci->SendHciPacket(btType, data);
+    EXPECT_EQ(HDF_FAILURE, ret);
+}
+
+/**
+  * @tc.name: HdiBluetoothSend_0500
+  * @tc.desc: the HCI SCO_DATA packets is sent successfully.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0500, TestSize.Level1)
+{
+    if (g_iBtHci == nullptr) {
+        ASSERT_NE(nullptr, g_iBtHci);
+        return;
+    }
+    BtType btType = BtType::SCO_DATA;
+    std::vector<uint8_t> data;
+    int32_t ret = g_iBtHci->SendHciPacket(btType, data);
+    EXPECT_EQ(HDF_FAILURE, ret);
+}
+
+/**
+  * @tc.name: HdiBluetoothSend_0600
+  * @tc.desc: the HCI HCI_EVENT packets is sent successfully.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0600, TestSize.Level1)
+{
+    if (g_iBtHci == nullptr) {
+        ASSERT_NE(nullptr, g_iBtHci);
+        return;
+    }
+    BtType btType = BtType::HCI_EVENT;
+    std::vector<uint8_t> data;
+    int32_t ret = g_iBtHci->SendHciPacket(btType, data);
+    EXPECT_EQ(HDF_FAILURE, ret);
+}
+
+/**
+  * @tc.name: HdiBluetoothSend_0700
+  * @tc.desc: the HCI ISO_DATA packets is sent successfully.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0700, TestSize.Level1)
+{
+    if (g_iBtHci == nullptr) {
+        ASSERT_NE(nullptr, g_iBtHci);
+        return;
+    }
+    BtType btType = BtType::ISO_DATA;
+    std::vector<uint8_t> data;
+    int32_t ret = g_iBtHci->SendHciPacket(btType, data);
+    EXPECT_EQ(HDF_FAILURE, ret);
+}
+
+/**
+  * @tc.name: HdiBluetoothClose_0800
+  * @tc.desc: Disable the HCI interface.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothClose_0800, TestSize.Level1)
 {
     if (g_iBtHci == nullptr) {
         ASSERT_NE(nullptr, g_iBtHci);
@@ -116,8 +183,5 @@ HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetooth_0400, TestSize.Level
     }
     int32_t ret = g_iBtHci->Close();
     EXPECT_EQ(HDF_SUCCESS, ret);
-
 }
-
-
 

@@ -33,7 +33,7 @@ ohos_moduletest_suite("HatsUserIamFingerprintAuthTest") {
     "//base/useriam/user_auth_framework/common",
     "//base/useriam/user_auth_framework/common/logs",
     "//third_party/googletest/googletest/include/gtest",
-    "//utils/native/base/include",
+    "//commonlibrary/c_utils/base/include",
   ]
 
   sources = [
@@ -46,13 +46,12 @@ ohos_moduletest_suite("HatsUserIamFingerprintAuthTest") {
     "//base/useriam/user_auth_framework/common:iam_test",
     "//drivers/peripheral/fingerprint_auth/hdi_service:libfingerprint_auth_interface_service_1.0",
     "//third_party/googletest:gtest_main",
-    "//utils/native/base:utils",
   ]
 
   external_deps = [
+    "c_utils:utils",
     "drivers_interface_fingerprint_auth:fingerprint_auth_idl_headers",
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_core",
-    "utils_base:utils",
   ]
 }

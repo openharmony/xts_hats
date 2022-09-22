@@ -34,8 +34,8 @@ ohos_static_library("disp_hdi_test_common") {
   ]
 
   external_deps = [
+    "c_utils:utils",
     "hiviewdfx_hilog_native:libhilog",
-    "utils_base:utils",
   ]
   subsystem_name = "hdf"
   part_name = "drivers_peripheral_display"
@@ -63,9 +63,9 @@ ohos_moduletest_suite("HatsHdfDisplayDeviceTest") {
     ".",
   ]
   external_deps = [
+    "c_utils:utils",
     "hdf_core:libhdf_utils",
     "hiviewdfx_hilog_native:libhilog",
-    "utils_base:utils",
   ]
   cflags = [ "-Wno-unused-function" ]
 }

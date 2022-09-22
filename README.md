@@ -15,12 +15,14 @@
 
 ## 简介<a name="section465982318513"></a>
 
-XTS子系统是OpenHarmony生态认证测试套件的集合，当前包括hats（hardware abstract test suite）HAL兼容性测试套件。
+XTS子系统是OpenHarmony生态认证测试套件的集合，当前包括hats（hardware abstract test suite),HAL兼容性测试套件。
 
 XTS子系统当前包括hats与tools软件包：
 
--   hats，存放hats相关测试用例源码与配置文件，其目的是帮助终端设备厂商尽早发现HAL层软件与OpenHarmony的不兼容性，确保软件在整个开发过程中满足OpenHarmony的兼容性要求。
--   tools，存放hats相关测试用例开发框架。
+-   hats:存放hats相关测试用例源码与配置文件，其目的是帮助终端设备厂商尽早发现HAL层软件与OpenHarmony的不兼容性，确保软件在整个开发过程中满足OpenHarmony的兼容性要求。
+-   tools:存放hats相关测试用例开发框架。
+
+更多XTS子系统相关概念，请参考：[xts\_acts/README_zh.md](https://gitee.com/openharmony/xts_acts/blob/master/README_zh.md)。
 
 ## 系统类型<a name="section125090457443"></a>
 
@@ -73,35 +75,35 @@ OpenHarmony支持如下几种系统类型：
 </td>
 <td class="cellrowborder" valign="top" width="33.283328332833285%" headers="mcps1.2.4.1.2 "><p id="p1548945204514"><a name="p1548945204514"></a><a name="p1548945204514"></a>冒烟</p>
 </td>
-<td class="cellrowborder" valign="top" width="33.383338333833386%" headers="mcps1.2.4.1.3 "><p id="p174824517456"><a name="p174824517456"></a><a name="p174824517456"></a>验证关键功能点基本功能/最基本DFX属性在最常见输入下的表现，通过表示功能基本可运行。</p>
+<td class="cellrowborder" valign="top" width="33.383338333833386%" headers="mcps1.2.4.1.3 "><p id="p174824517456"><a name="p174824517456"></a><a name="p174824517456"></a>验证关键功能点基本功能/最基本DFX属性在最常见输入下的表现，通过表示功能基本可运行</p>
 </td>
 </tr>
 <tr id="row28563372451"><td class="cellrowborder" valign="top" width="33.333333333333336%" headers="mcps1.2.4.1.1 "><p id="p448445144512"><a name="p448445144512"></a><a name="p448445144512"></a>Level1</p>
 </td>
 <td class="cellrowborder" valign="top" width="33.283328332833285%" headers="mcps1.2.4.1.2 "><p id="p44813452452"><a name="p44813452452"></a><a name="p44813452452"></a>基本</p>
 </td>
-<td class="cellrowborder" valign="top" width="33.383338333833386%" headers="mcps1.2.4.1.3 "><p id="p648184584514"><a name="p648184584514"></a><a name="p648184584514"></a>验证各功能点基本功能/基本DFX属性在常见输入下的表现，通过表示功能基本可测试。</p>
+<td class="cellrowborder" valign="top" width="33.383338333833386%" headers="mcps1.2.4.1.3 "><p id="p648184584514"><a name="p648184584514"></a><a name="p648184584514"></a>验证各功能点基本功能/基本DFX属性在常见输入下的表现，通过表示功能基本可测试</p>
 </td>
 </tr>
 <tr id="row12856137204514"><td class="cellrowborder" valign="top" width="33.333333333333336%" headers="mcps1.2.4.1.1 "><p id="p164834520453"><a name="p164834520453"></a><a name="p164834520453"></a>Level2</p>
 </td>
 <td class="cellrowborder" valign="top" width="33.283328332833285%" headers="mcps1.2.4.1.2 "><p id="p148245184511"><a name="p148245184511"></a><a name="p148245184511"></a>重要</p>
 </td>
-<td class="cellrowborder" valign="top" width="33.383338333833386%" headers="mcps1.2.4.1.3 "><p id="p348945124510"><a name="p348945124510"></a><a name="p348945124510"></a>验证各功能点的基本功能/基本DFX属性在常规输入/常见异常情况下的表现，通过表示功能基本正常可用，可开展Beta。</p>
+<td class="cellrowborder" valign="top" width="33.383338333833386%" headers="mcps1.2.4.1.3 "><p id="p348945124510"><a name="p348945124510"></a><a name="p348945124510"></a>验证各功能点的基本功能/基本DFX属性在常规输入/常见异常情况下的表现，通过表示功能基本正常可用，可开展Beta</p>
 </td>
 </tr>
 <tr id="row48571137204514"><td class="cellrowborder" valign="top" width="33.333333333333336%" headers="mcps1.2.4.1.1 "><p id="p7481545184513"><a name="p7481545184513"></a><a name="p7481545184513"></a>Level3</p>
 </td>
 <td class="cellrowborder" valign="top" width="33.283328332833285%" headers="mcps1.2.4.1.2 "><p id="p1748184514455"><a name="p1748184514455"></a><a name="p1748184514455"></a>一般</p>
 </td>
-<td class="cellrowborder" valign="top" width="33.383338333833386%" headers="mcps1.2.4.1.3 "><p id="p8481245104519"><a name="p8481245104519"></a><a name="p8481245104519"></a>验证各功能点的全部功能/全部DFX属性在各种常规/非常规输入组合下，或各种正常/异常预置条件组合下的表现。</p>
+<td class="cellrowborder" valign="top" width="33.383338333833386%" headers="mcps1.2.4.1.3 "><p id="p8481245104519"><a name="p8481245104519"></a><a name="p8481245104519"></a>验证各功能点的全部功能/全部DFX属性在各种常规/非常规输入组合下，或各种正常/异常预置条件组合下的表现</p>
 </td>
 </tr>
 <tr id="row14857133712451"><td class="cellrowborder" valign="top" width="33.333333333333336%" headers="mcps1.2.4.1.1 "><p id="p1248144515456"><a name="p1248144515456"></a><a name="p1248144515456"></a>Level4</p>
 </td>
 <td class="cellrowborder" valign="top" width="33.283328332833285%" headers="mcps1.2.4.1.2 "><p id="p94804514519"><a name="p94804514519"></a><a name="p94804514519"></a>生僻</p>
 </td>
-<td class="cellrowborder" valign="top" width="33.383338333833386%" headers="mcps1.2.4.1.3 "><p id="p1248445164516"><a name="p1248445164516"></a><a name="p1248445164516"></a>验证关键功能点在极端异常预置条件下、用户难以触及的异常输入组合下的表现。</p>
+<td class="cellrowborder" valign="top" width="33.383338333833386%" headers="mcps1.2.4.1.3 "><p id="p1248445164516"><a name="p1248445164516"></a><a name="p1248445164516"></a>验证关键功能点在极端异常预置条件下、用户难以触及的异常输入组合下的表现</p>
 </td>
 </tr>
 </tbody>
@@ -168,12 +170,12 @@ OpenHarmony支持如下几种系统类型：
 </tr>
 <tr id="row6821330114618"><td class="cellrowborder" valign="top" width="19.040000000000003%" headers="mcps1.2.3.1.1 "><p id="p13917164454612"><a name="p13917164454612"></a><a name="p13917164454612"></a>Reliability</p>
 </td>
-<td class="cellrowborder" valign="top" width="80.96%" headers="mcps1.2.3.1.2 "><p id="p11917194416465"><a name="p11917194416465"></a><a name="p11917194416465"></a>验证被测对象在正常/异常输入情况下，或业务量压力和长时间连续运行压力情况下业务表现的测试项，含稳定性、压力、故障注入、Monkey测试项</p>
+<td class="cellrowborder" valign="top" width="80.96%" headers="mcps1.2.3.1.2 "><p id="p11917194416465"><a name="p11917194416465"></a><a name="p11917194416465"></a>验证被测对象在正常/异常输入情况下，业务量压力和长时间连续运行压力情况下业务表现的测试项，含稳定性、压力、故障注入、Monkey测试项</p>
 </td>
 </tr>
 <tr id="row11821930184612"><td class="cellrowborder" valign="top" width="19.040000000000003%" headers="mcps1.2.3.1.1 "><p id="p1691774474618"><a name="p1691774474618"></a><a name="p1691774474618"></a>Security</p>
 </td>
-<td class="cellrowborder" valign="top" width="80.96%" headers="mcps1.2.3.1.2 "><p id="p1791784410463"><a name="p1791784410463"></a><a name="p1791784410463"></a>验证系统对恶意威胁的防护能力，威胁包括但不限于未授权访问、使用、泄露、破坏、修改、毁灭，以保障信息的机密性、完整性和可用性; 验证系统对用户隐私的保护能力，保障用户的隐私数据被收集、使用、保有、披露和处置符合法律规范，保障用户的隐私权; 验证对各类安全规范的遵从情况，如安全设计规范、安全红线、工信部安全认证规范等，保障安全相关法律法规的合规。</p>
+<td class="cellrowborder" valign="top" width="80.96%" headers="mcps1.2.3.1.2 "><p id="p1791784410463"><a name="p1791784410463"></a><a name="p1791784410463"></a>验证系统对恶意威胁的防护能力，威胁包括但不限于未授权访问、使用、泄露、破坏、修改、毁灭，以保障信息的机密性、完整性和可用性; 验证系统对用户隐私的保护能力，保障用户的隐私数据被收集、使用、保有、披露和处置符合法律规范，保障用户的隐私权; 验证对各类安全规范的遵从情况，如安全设计规范、安全红线、工信部安全认证规范等，保障安全相关法律法规的合规</p>
 </td>
 </tr>
 <tr id="row16825307467"><td class="cellrowborder" valign="top" width="19.040000000000003%" headers="mcps1.2.3.1.1 "><p id="p129188444462"><a name="p129188444462"></a><a name="p129188444462"></a>Global</p>
@@ -183,7 +185,7 @@ OpenHarmony支持如下几种系统类型：
 </tr>
 <tr id="row08211308464"><td class="cellrowborder" valign="top" width="19.040000000000003%" headers="mcps1.2.3.1.1 "><p id="p191814447465"><a name="p191814447465"></a><a name="p191814447465"></a>Compatibility</p>
 </td>
-<td class="cellrowborder" valign="top" width="80.96%" headers="mcps1.2.3.1.2 "><p id="p99181344144613"><a name="p99181344144613"></a><a name="p99181344144613"></a>当被测对象为应用时，包括被测对象对于自身数据的后向兼容性、对于系统的前后向兼容性、对于不同用户数据(如播放器之音频文件格式/智能短信之用户短信内容)的兼容性测试项； 当被测对象为系统时，包括被测系统对于系统自身数据的后向兼容性、以及对于生态中常用应用的兼容性测试项；当被测对象为软件时，包括被测系统对于相关的硬件的兼容性；</p>
+<td class="cellrowborder" valign="top" width="80.96%" headers="mcps1.2.3.1.2 "><p id="p99181344144613"><a name="p99181344144613"></a><a name="p99181344144613"></a>当被测对象为应用时，包括被测对象对于自身数据的后向兼容性、对于系统的前后向兼容性、对于不同用户数据(如播放器之音频文件格式/智能短信之用户短信内容)的兼容性测试项； 当被测对象为系统时，包括被测系统对于系统自身数据的后向兼容性、以及对于生态中常用应用的兼容性测试项；当被测对象为软件时，包括被测系统对于相关的硬件的兼容性</p>
 </td>
 </tr>
 <tr id="row1782730124618"><td class="cellrowborder" valign="top" width="19.040000000000003%" headers="mcps1.2.3.1.1 "><p id="p13918144134614"><a name="p13918144134614"></a><a name="p13918144134614"></a>User</p>
@@ -198,12 +200,12 @@ OpenHarmony支持如下几种系统类型：
 </tr>
 <tr id="row382830124619"><td class="cellrowborder" valign="top" width="19.040000000000003%" headers="mcps1.2.3.1.1 "><p id="p119181044164619"><a name="p119181044164619"></a><a name="p119181044164619"></a>Safety</p>
 </td>
-<td class="cellrowborder" valign="top" width="80.96%" headers="mcps1.2.3.1.2 "><p id="p1291818443468"><a name="p1291818443468"></a><a name="p1291818443468"></a>验证被测对象的Safety属性，避免产品可能对人身安全、健康以及产品本身带来的危害。</p>
+<td class="cellrowborder" valign="top" width="80.96%" headers="mcps1.2.3.1.2 "><p id="p1291818443468"><a name="p1291818443468"></a><a name="p1291818443468"></a>验证被测对象的Safety属性，避免产品可能对人身安全、健康以及产品本身带来的危害</p>
 </td>
 </tr>
 <tr id="row1083153014465"><td class="cellrowborder" valign="top" width="19.040000000000003%" headers="mcps1.2.3.1.1 "><p id="p39187441469"><a name="p39187441469"></a><a name="p39187441469"></a>Resilience</p>
 </td>
-<td class="cellrowborder" valign="top" width="80.96%" headers="mcps1.2.3.1.2 "><p id="p891815444462"><a name="p891815444462"></a><a name="p891815444462"></a>验证被测对象的韧性属性，确保系统受攻击时承受并保持在有定义的运行状态（包括降级）、恢复并适应攻击以保障Mission达成。</p>
+<td class="cellrowborder" valign="top" width="80.96%" headers="mcps1.2.3.1.2 "><p id="p891815444462"><a name="p891815444462"></a><a name="p891815444462"></a>验证被测对象的韧性属性，确保系统受攻击时承受并保持在有定义的运行状态（包括降级）、恢复并适应攻击以保障Mission达成</p>
 </td>
 </tr>
 </tbody>
@@ -252,7 +254,7 @@ OpenHarmony支持如下几种系统类型：
 
 **示例：轻量系统测试用例开发**
 
-当前使用的测试框架是hctest，hctest测试框架支持使用C语言编写测试用例，是在开源测试框架unity的基础上进行增强和适配。
+当前使用的测试框架是hctest，hctest测试框架支持使用C语言编写测试用例，在开源测试框架unity的基础上进行了增强和适配。
 
 1.  用例目录规范：测试用例存储到test/xts/hats仓中
 
@@ -271,7 +273,7 @@ OpenHarmony支持如下几种系统类型：
     1.引用测试框架
 
     ```
-    #include "hctest.h"
+    #include"hctest.h"
     ```
 
     2. 使用宏定义LITE\_TEST\_SUIT定义子系统、模块、测试套件名称
@@ -318,7 +320,7 @@ OpenHarmony支持如下几种系统类型：
     hctest_suite("HatsDemoTest") {
         suite_name = "hats"
         sources = [
-            "src/test_demo.c",
+            "src/test_demo.cpp",
         ]
         include_dirs = [ ]
         cflags = [ "-Wno-error" ]
@@ -356,17 +358,17 @@ OpenHarmony支持如下几种系统类型：
 
 **测试结果分析指导**
 
-基于串口打印日志进行分析；
+基于串口打印日志进行分析。
 
-每个测试套件执行以Start to run test suite开始，以xx Tests xx Failures xx Ignored结束。
+执行每个测试套件以Start to run test suite开始，以xx Tests xx Failures xx Ignored结束。
 
 ### C++语言用例开发编译指导（适用于小型系统、标准系统用例开发）<a name="section3822123311540"></a>
 
 **示例：小型系统测试用例开发**（标准系统参考具体样例目录：global/i18n\_standard）
 
-当前使用的测试框架是hcpptest，hcpptest测试框架是在开源的googletest测试框架的基础上进行的增强和适配。
+当前使用的测试框架是hcpptest，hcpptest测试框架在开源的googletest测试框架的基础上进行了增强和适配。
 
-1.  规范用例目录：测试用例存储到test/xts/hats仓中。
+1.  规范用例目录：测试用例存储到test/xts/hats仓中：
 
     ```
     ├── hats
@@ -380,7 +382,7 @@ OpenHarmony支持如下几种系统类型：
 
 2.  测试模块src下用例编写样例：
 
-    1. 引用测试框架：
+    1. 引用测试框架
 
     需要引用gtest.h  如：\#include "gtest/gtest.h"
 
@@ -416,7 +418,7 @@ OpenHarmony支持如下几种系统类型：
 
     普通测试用例的定义：HWTEST（测试套名称， 测试用例名称， 用例标注）。
 
-    包含SetUp和TearDown的测试用例的定义 ：HWTEST\_F（测试套名称， 测试用例名称，用例标注）。
+    包含SetUp和TearDown的测试用例的定义 ：HWTEST\_F（测试套名称， 测试用例名称， 用例标注）。
 
     宏定义包括三个参数：测试套件名称，测试用例名称，用例属性（测试类型、用例粒度、用例级别）。
 
@@ -457,7 +459,7 @@ OpenHarmony支持如下几种系统类型：
     将测试模块加入到hats目录下的编译脚本中，编译脚本为：test/xts/hats/build\_lite/BUILD.gn。
 
     ```
-     lite_component("hats") {  
+     lite_component("hats") {
     ...
     else if(board_name == "liteos_a") {
             features += [
@@ -474,7 +476,7 @@ OpenHarmony支持如下几种系统类型：
 
 **示例：小型系统测试用例执行**
 
-目前的用例执行采用nfs共享的方式，mount到单板去执行。
+目前执行用例采用nfs共享的方式，mount到单板去执行。
 
 **环境搭建**
 
@@ -498,21 +500,21 @@ OpenHarmony支持如下几种系统类型：
 
 ### 全量编译指导（适用于标准系统）<a name="section128222336544"></a>
 
-全量编译test/xts/hats目录下执行编译命令: ./build.sh suite=hats system_size=standard
+全量编译test/xts/hats目录下执行编译命令:./build.sh product_name=hispark\_taurus\_standard suite=hats system\_size=standard
 
-测试用例输出目录：out/release/suites/hats/testcases
+测试用例输出目录：out/hispark\_taurus/suites/hats/testcases
 
-测试框架&用例整体输出目录：out/release/suites/hats(编译用例时会同步编译测试套执行框架)
+测试框架&用例整体输出目录：out/hispark\_taurus/suites/hats(编译用例时会同步编译测试套执行框架)
 
 ### 全量用例执行指导（适用于小型系统、标准系统）<a name="section128222336544"></a>
 
-搭建测试环境 Windows工作台下安装python3.7及以上版本，确保工作台和测试设备正常连接。
+搭建测试环境Windows工作台下安装python3.7及以上版本，确保工作台和测试设备正常连接。
 
-测试执行目录（对应编译生成的out/release/suites/hats目录）
+测试执行目录（对应编译生成的out/hispark\_taurus/suites/hats目录）
 
   ```
-├── testcase                       # 测试套文件存放目录 
-│ └──xxx.hap                       # 测试套可执行hap文件
+├── testcase                       # 测试套文件存放目录
+│ └──xxx                           # 测试套可执行二进制文件
 │ └──xxx.json                      # 测试套对应执行配置文件
 ├── tools                          # 测试框架工具目录
 ├── run.bat                        # window平台测试套启动执行文件
@@ -527,14 +529,14 @@ OpenHarmony支持如下几种系统类型：
 
 全量执行：run hats
 
-模块执行(具体模块可以查看\hats\testcases)：run –l ActsSamgrTest
+模块执行(具体模块可以查看\hats\testcases)：run –l HatsHdfInputTest
 
 查看测试报告。 进入hats\reports\，获取当前的执行记录，打开“summary_report.html”可以获取到测试报告。
 
 
 ## 相关仓<a name="section1371113476307"></a>
 
-xts\_hats
+[xts\_hats](https://gitee.com/openharmony/xts_hats)
 
-xts\_tools
+[xts\_tools](https://gitee.com/openharmony/xts_tools)
 

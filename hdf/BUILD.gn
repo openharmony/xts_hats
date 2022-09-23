@@ -25,7 +25,7 @@ group("hatshdftest") {
       "sensor:HatsHdfSensorTest",
       "vibrator:HatsHdfVibratorTest",
       "wlan:HatsHdfWifiTest",
-
+      "bluetooth:HatsHdfBluetoothTest",
       # "usb:HatsHdfUsbTest",
     ]
   }

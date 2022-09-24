@@ -151,6 +151,33 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_0060, TestSize.Level2)
 
 /**
   * @tc.name: Preview
+  * @tc.desc: GetStreamOperator, input normal.
+  * @tc.level: Level2
+  * @tc.size: MediumTest
+  * @tc.type: Function
+  */
+HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1000, TestSize.Level2)
+{
+    std::cout << "==========[test log] GetStreamOperator, input nullptr." << std::endl;
+    // Get the configured cameraId
+    display_->cameraHost->GetCameraIds(display_->cameraIds);
+    std::cout << "cameraIds.front() = " << display_->cameraIds.front() << std::endl;
+    // Open the camera device and get the device
+    const OHOS::sptr<ICameraDeviceCallback> callback = new DemoCameraDeviceCallback();
+    display_->rc = (CamRetCode)display_->cameraHost->OpenCamera(display_->cameraIds.front(),
+        callback, display_->cameraDevice);
+    std::cout << "OpenCamera's RetCode = " << display_->rc << std::endl;
+    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+    // Create and get streamOperator information
+    OHOS::sptr<IStreamOperatorCallback> streamOperatorCallback = new DemoStreamOperatorCallback();
+    display_->rc = (CamRetCode)display_->cameraDevice->GetStreamOperator(streamOperatorCallback,
+        display_->streamOperator);
+    std::cout << "GetStreamOperator's RetCode = " << display_->rc << std::endl;
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, display_->rc);
+}
+
+/**
+  * @tc.name: Preview
   * @tc.desc: CreateStreams, success.
   * @tc.level: Level1
   * @tc.size: MediumTest
@@ -1025,6 +1052,46 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_0100, TestSize.Level2)
     std::shared_ptr<StreamInfo> streamInfo = std::make_shared<StreamInfo>();
     display_->rc = (CamRetCode)display_->streamOperator->ReleaseStreams(
         {9999});
+    std::cout << "streamOperator->ReleaseStreams's RetCode = " << display_->rc << std::endl;
+    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+  * @tc.name: Preview
+  * @tc.desc: ReleaseStreams no exist streamID, expect success.
+  * @tc.level: Level2
+  * @tc.size: MediumTest
+  * @tc.type: Function
+  */
+HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_0101, TestSize.Level2)
+{
+    std::cout << "==========[test log] ReleaseStreams no exist streamID, expect success." << std::endl;
+    // Create and get streamOperator information
+    display_->AchieveStreamOperator();
+    std::vector<std::shared_ptr<StreamInfo>> streamInfos;
+    std::shared_ptr<StreamInfo> streamInfo = std::make_shared<StreamInfo>();
+    display_->rc = (CamRetCode)display_->streamOperator->ReleaseStreams(
+        {0});
+    std::cout << "streamOperator->ReleaseStreams's RetCode = " << display_->rc << std::endl;
+    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+  * @tc.name: Preview
+  * @tc.desc: ReleaseStreams no exist streamID, expect success.
+  * @tc.level: Level2
+  * @tc.size: MediumTest
+  * @tc.type: Function
+  */
+HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_0102, TestSize.Level2)
+{
+    std::cout << "==========[test log] ReleaseStreams no exist streamID, expect success." << std::endl;
+    // Create and get streamOperator information
+    display_->AchieveStreamOperator();
+    std::vector<std::shared_ptr<StreamInfo>> streamInfos;
+    std::shared_ptr<StreamInfo> streamInfo = std::make_shared<StreamInfo>();
+    display_->rc = (CamRetCode)display_->streamOperator->ReleaseStreams(
+        {99999999});
     std::cout << "streamOperator->ReleaseStreams's RetCode = " << display_->rc << std::endl;
     EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
 }

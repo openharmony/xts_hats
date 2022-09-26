@@ -823,7 +823,7 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterUpdateAudioRoute_0001, Functi
     ret = adapter->InitAllPorts(adapter);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = adapter->UpdateAudioRoute(adapter, &route, &routeHandle);
-    EXPECT_EQ(AUDIO_HAL_ERR_NOT_SUPPORT, ret);
+    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
     ret = adapter->ReleaseAudioRoute(adapter, routeHandle);
     EXPECT_EQ(AUDIO_HAL_ERR_NOT_SUPPORT, ret);
     manager->UnloadAdapter(manager, adapter);

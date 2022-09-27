@@ -32,10 +32,10 @@ IInputInterface *g_inputInterface;
 InputEventCb g_callback;
 InputHostCb g_hotplugCb;
 bool g_HasDev = false;
-InputDevDesc g_allDev[MAX_DEVICES];
+DevDesc g_allDev[MAX_DEVICES];
 
-static void ReportHotPlugEventPkgCallback(const InputHotPlugEvent *msg);
-static void ReportEventPkgCallback(const InputEventPackage **pkgs, uint32_t count, uint32_t devIndex);
+static void ReportHotPlugEventPkgCallback(const HotPlugEvent *msg);
+static void ReportEventPkgCallback(const EventPackage **pkgs, uint32_t count, uint32_t devIndex);
 static void CloseOnlineDev();
 static void OpenOnlineDev();
 
@@ -50,7 +50,7 @@ public:
 void HdiInputTest::SetUpTestCase()
 {
     int32_t ret;
-    ret = memset_s(g_allDev, MAX_DEVICES * sizeof(InputDevDesc), 0, MAX_DEVICES * sizeof(InputDevDesc));
+    ret = memset_s(g_allDev, MAX_DEVICES * sizeof(DevDesc), 0, MAX_DEVICES * sizeof(DevDesc));
     if (ret != 0) {
         HDF_LOGE("memset failed.\n");
         return;
@@ -92,7 +92,7 @@ void HdiInputTest::TearDown()
 {
 }
 
-static void ReportEventPkgCallback(const InputEventPackage **pkgs, uint32_t count, uint32_t devIndex)
+static void ReportEventPkgCallback(const EventPackage **pkgs, uint32_t count, uint32_t devIndex)
 {
     if (pkgs == nullptr) {
         return;
@@ -105,7 +105,7 @@ static void ReportEventPkgCallback(const InputEventPackage **pkgs, uint32_t coun
     }
 }
 
-static void ReportHotPlugEventPkgCallback(const InputHotPlugEvent *msg)
+static void ReportHotPlugEventPkgCallback(const HotPlugEvent *msg)
 {
     int32_t ret;
     if (msg == nullptr) {
@@ -194,7 +194,7 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0001, Function | MediumTest | L
     INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
     INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputManager, INPUT_NULL_PTR);
 
-    ret  = g_inputInterface->iInputManager->ScanInputDevice(g_allDev, sizeof(g_allDev)/sizeof(InputDevDesc));
+    ret  = g_inputInterface->iInputManager->ScanInputDevice(g_allDev, sizeof(g_allDev)/sizeof(DevDesc));
     EXPECT_EQ(ret, INPUT_SUCCESS);
 }
 
@@ -325,7 +325,7 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0070, Function | MediumTest | L
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
         int32_t ret = 0;
-        InputDeviceInfo *dev = nullptr;
+        DeviceInfo *dev = nullptr;
         INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
         INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputManager, INPUT_NULL_PTR);
 
@@ -355,7 +355,7 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0080, Function | MediumTest | L
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret = 0;
-    InputDeviceInfo *dev = nullptr;
+    DeviceInfo *dev = nullptr;
 
     ret = g_inputInterface->iInputManager->GetInputDevice(TOUCH_INDEX, nullptr);
     EXPECT_NE(ret, INPUT_SUCCESS);
@@ -379,7 +379,7 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0100, Function | MediumTest | L
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
     uint32_t num = 0;
-    InputDeviceInfo *dev[MAX_INPUT_DEV_NUM] = {0};
+    DeviceInfo *dev[MAX_INPUT_DEV_NUM] = {0};
 
     ret = g_inputInterface->iInputManager->GetInputDeviceList(&num, dev, MAX_INPUT_DEV_NUM);
     EXPECT_EQ(ret, INPUT_SUCCESS);
@@ -404,7 +404,7 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0110, Function | MediumTest | L
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
     uint32_t num = 0;
-    InputDeviceInfo *dev[MAX_INPUT_DEV_NUM] = {0}; 
+    DeviceInfo *dev[MAX_INPUT_DEV_NUM] = {0}; 
 
     ret = g_inputInterface->iInputManager->GetInputDeviceList(nullptr, dev, MAX_INPUT_DEV_NUM);
     EXPECT_NE(ret, INPUT_SUCCESS);
@@ -513,7 +513,7 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0190, Function | MediumTest | L
         ASSERT_EQ(g_HasDev, true);
         int32_t ret;
         char chipInfo[CHIP_INFO_LEN] = {0};
-        InputDeviceInfo *dev =NULL;
+        DeviceInfo *dev =NULL;
         ret = g_inputInterface->iInputManager->GetInputDevice(TOUCH_INDEX, &dev);
         EXPECT_EQ(ret, INPUT_SUCCESS);
         ret = g_inputInterface->iInputController->GetChipInfo(TOUCH_INDEX, chipInfo, CHIP_INFO_LEN);

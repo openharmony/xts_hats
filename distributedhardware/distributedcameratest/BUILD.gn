@@ -21,11 +21,9 @@ config("dcamera_hdf_demo_config") {
 ohos_moduletest_suite("HatsdisCameraProviderCase") {
   module_out_path = module_output_path
   install_enable = true
-  sources = [
-    "dcameraprovidercase.cpp",
-  ]
+  sources = [ "dcameraprovidercase.cpp" ]
 
-    include_dirs = [
+  include_dirs = [
     "//foundation/distributedhardware/distributed_camera/services/cameraservice/sourceservice/include/distributedcameramgr",
     "//drivers/peripheral/distributed_camera/hdi_service/include/dcamera_provider",
     "//third_party/googletest/googletest/include",
@@ -62,12 +60,11 @@ ohos_moduletest_suite("HatsdisCameraProviderCase") {
   deps = [
     "//drivers/interface/camera/v1_0:libcamera_stub_1.0",
     "//drivers/peripheral/distributed_camera/hdi_service:libdistributed_camera_hdf_service_1.0",
-    "//third_party/jsoncpp:jsoncpp",
-     
     "//foundation/distributedhardware/distributed_camera/common:distributed_camera_utils",
     "//foundation/distributedhardware/distributed_camera/services/cameraservice/sourceservice:distributed_camera_source",
     "//foundation/distributedhardware/distributed_camera/services/channel:distributed_camera_channel",
     "//third_party/googletest:gtest_main",
+    "//third_party/jsoncpp:jsoncpp",
   ]
 
   cflags = [
@@ -76,12 +73,12 @@ ohos_moduletest_suite("HatsdisCameraProviderCase") {
   ]
 
   external_deps = [
-    "drivers_interface_camera:libcamera_proxy_1.0",
-    "hiviewdfx_hilog_native:libhilog",
     "c_utils:utils",
+    "drivers_interface_camera:libcamera_proxy_1.0",
     "drivers_interface_distributed_camera:libdistributed_camera_provider_proxy_1.0",
     "dsoftbus:softbus_client",
     "eventhandler:libeventhandler",
+    "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_core",
   ]
 

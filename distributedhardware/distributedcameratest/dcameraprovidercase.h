@@ -15,11 +15,7 @@
 
 #ifndef ID_CAMERA_PROVIDER_CASE_H_
 #define ID_CAMERA_PROVIDER_CASE_H_
-/*
-#include "dcamera_provider.h"
-#include "v1_0/id_camera_provider_callback.h"
-#include "v1_0/types.h"
-*/
+
 #include "dcamera_source_dev.h"
 #include "distributed_camera_errno.h"
 #include "idistributed_camera_source.h"

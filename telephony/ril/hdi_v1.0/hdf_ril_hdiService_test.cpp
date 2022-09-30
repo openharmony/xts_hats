@@ -235,6 +235,7 @@ public:
     int32_t CallSsNotice(const RilRadioResponseInfo &responseInfo, const SsNoticeInfo &ssNoticeInfo) override;
     int32_t CallEmergencyNotice(
         const RilRadioResponseInfo &responseInfo, const EmergencyInfoList &emergencyInfoList) override;
+    int32_t CallRsrvccStatusNotify(const RilRadioResponseInfo &responseInfo) override;
     int32_t SetEmergencyCallListResponse(const RilRadioResponseInfo &responseInfo) override;
     int32_t GetEmergencyCallListResponse(
         const RilRadioResponseInfo &responseInfo, const EmergencyInfoList &emergencyInfoList) override;
@@ -1193,6 +1194,12 @@ int32_t RilCallback::CallSsNotice(const RilRadioResponseInfo &responseInfo, cons
     HDF_LOGI("GetBoolResult CallSsNotice slotId : %{public}d, result: %{public}d, serviceType: %{public}d,"
          "requestType: %{public}d, serviceClass: %{public}d", responseInfo.slotId, ssNoticeInfo.result,
          ssNoticeInfo.serviceType, ssNoticeInfo.requestType, ssNoticeInfo.serviceClass);
+    return 0;
+}
+
+int32_t RilCallback::CallRsrvccStatusNotify(const RilRadioResponseInfo &responseInfo)
+{
+    HDF_LOGI("GetBoolResult CallRsrvccStatusNotify slotId : %{public}d", responseInfo.slotId);
     return 0;
 }
 
@@ -2878,7 +2885,7 @@ HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetPsRegStatus_V1_0200, Function 
 HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetOperatorInfo_V1_0100, Function | MediumTest | Level3)
 {
     if (!IsReady(SLOTID_1)) {
-        return;
+    return;
     }
     int32_t ret = g_rilInterface->GetOperatorInfo(SLOTID_1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
@@ -2889,7 +2896,7 @@ HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetOperatorInfo_V1_0100, Function
 HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetOperatorInfo_V1_0200, Function | MediumTest | Level3)
 {
     if (!IsReady(SLOTID_2)) {
-        return;
+    return;
     }
     int32_t ret = g_rilInterface->GetOperatorInfo(SLOTID_2, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);

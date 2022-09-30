@@ -2884,9 +2884,9 @@ HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetPsRegStatus_V1_0200, Function 
 
 HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetOperatorInfo_V1_0100, Function | MediumTest | Level3)
 {
-  if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_1)) {
     return;
-  }
+    }
     int32_t ret = g_rilInterface->GetOperatorInfo(SLOTID_1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -2895,9 +2895,9 @@ HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetOperatorInfo_V1_0100, Function
 
 HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetOperatorInfo_V1_0200, Function | MediumTest | Level3)
 {
-  if (!IsReady(SLOTID_2)) {
+    if (!IsReady(SLOTID_2)) {
     return;
-  }
+    }
     int32_t ret = g_rilInterface->GetOperatorInfo(SLOTID_2, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);

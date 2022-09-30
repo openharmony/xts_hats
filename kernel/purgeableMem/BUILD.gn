@@ -20,11 +20,11 @@ ohos_moduletest_suite("HatsPurgeable") {
   sources = [ "./purgeable_cpp_test.cpp" ]
   deps = [
     "//base/hiviewdfx/hilog/interfaces/native/innerkits:libhilog",
-    "//utils/memory/libpurgeablemem:libpurgeablemem",
+    "//commonlibrary/memory_utils/libpurgeablemem:libpurgeablemem",
   ]
   include_dirs = [
     "//test/xts/tools/hctest/include",
-    "//utils/",
+    "//commonlibrary/memory_utils/",
   ]
   cflags = [ "-Wno-error" ]
   subsystem_name = "kernel"

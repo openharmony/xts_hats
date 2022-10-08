@@ -55,7 +55,7 @@ public:
         return result_;
     }
 
-    int32_t OnAcquireInfo(int32_t acquire, const std::vector<uint8_t> &extraInfo) override
+    int32_t OnTip(int32_t acquire, const std::vector<uint8_t> &extraInfo) override
     {
         cout << "result is " << acquire << " extraInfo len is " << extraInfo.size() << endl;
         return acquire_;
@@ -81,8 +81,8 @@ static void FillTestExecutorInfo(Parcel &parcel, ExecutorInfo &executorInfo)
 static void FillTestTemplateInfo(Parcel &parcel, TemplateInfo &templateInfo)
 {
     templateInfo.executorType = parcel.ReadUint32();
-    templateInfo.freezingTime = parcel.ReadInt32();
-    templateInfo.remainTimes = parcel.ReadInt32();
+    templateInfo.lockoutDuration = parcel.ReadInt32();
+    templateInfo.remainAttempts = parcel.ReadInt32();
     FillTestUint8Vector(parcel, templateInfo.extraInfo);
     cout << "success" << endl;
 }

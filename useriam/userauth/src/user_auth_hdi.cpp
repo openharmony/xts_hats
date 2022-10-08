@@ -168,8 +168,8 @@ static void FillExecutorSendMsgVector(Parcel &parcel, vector<ExecutorSendMsg> &v
 static void FillAuthResultInfo(Parcel &parcel, AuthResultInfo &authResultInfo)
 {
     authResultInfo.result = parcel.ReadUint32();
-    authResultInfo.freezingTime = parcel.ReadInt32();
-    authResultInfo.remainTimes = parcel.ReadInt32();
+    authResultInfo.lockoutDuration = parcel.ReadInt32();
+    authResultInfo.remainAttempts = parcel.ReadInt32();
     FillExecutorSendMsgVector(parcel, authResultInfo.msgs);
     FillTestUint8Vector(parcel, authResultInfo.token);
 }

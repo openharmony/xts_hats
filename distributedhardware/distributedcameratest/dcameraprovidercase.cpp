@@ -148,34 +148,57 @@ HWTEST_F(DCameraProviderTest, DCameraCase_0040, TestSize.Level1)
 
 HWTEST_F(DCameraProviderTest, DCameraCase_0050, TestSize.Level1)
 {
+    int32_t ret = cameraProvider.OnSettingsResult(dhBase, result);
+    EXPECT_NE(0, ret) << "OnSettingsResult fail";
+}
+
+HWTEST_F(DCameraProviderTest, DCameraCase_0060, TestSize.Level1)
+{
+    int32_t ret = cameraProvider.UpdateSettings(dhBase, settings);
+    EXPECT_NE(0, ret) << "UpdateSettings fail";
+}
+
+HWTEST_F(DCameraProviderTest, DCameraCase_0070, TestSize.Level1)
+{
+    int32_t ret = cameraProvider.AcquireBuffer(dhBase, TEST_STREAMID, buffer);
+    EXPECT_NE(0, ret) << "AcquireBuffer fail";
+}
+
+HWTEST_F(DCameraProviderTest, DCameraCase_0080, TestSize.Level1)
+{
     int32_t ret = cameraProvider.Notify(dhBase, hdiEvent);
     EXPECT_EQ(0, ret) << "Notify fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0060, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, DCameraCase_0090, TestSize.Level1)
+{
+    int32_t ret = cameraProvider.ShutterBuffer(dhBase, TEST_STREAMID, buffer);
+    EXPECT_NE(0, ret) << "ShutterBuffer fail";
+}
+
+HWTEST_F(DCameraProviderTest, DCameraCase_0100, TestSize.Level1)
 {
     int32_t ret = cameraProvider.StopCapture(dhBase, streamIds);
     EXPECT_NE(0, ret) << "StopCapture fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0070, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, DCameraCase_0110, TestSize.Level1)
 {
     int32_t ret = cameraProvider.ReleaseStreams(dhBase, streamIds);
     EXPECT_NE(0, ret) << "ReleaseStreams fail";
 }
 
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0080, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, DCameraCase_0120, TestSize.Level1)
 {
     int32_t ret = cameraProvider.CloseSession(dhBase);
     EXPECT_NE(0, ret) << "CloseSession fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0090, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, DCameraCase_0130, TestSize.Level1)
 {
     int32_t ret = cameraProvider.DisableDCameraDevice(dhBase);
     EXPECT_EQ(0, ret) << "DisableDCameraDevice fail";
 }
-
 }
 }

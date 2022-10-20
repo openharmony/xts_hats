@@ -558,9 +558,9 @@ HWTEST_F(AudioHdiCaptureTest, SUB_Audio_HDI_AudioCaptureGetCapturePosition_0008,
     manager->UnloadAdapter(manager, adapter);
 }
 /**
-* @tc.name  Test GetCapturePosition API via define format to AUDIO_FORMAT_PCM_16_BIT
+* @tc.name  Test GetCapturePosition API via define format to AUDIO_FORMAT_TYPE_PCM_16_BIT
 * @tc.number  SUB_Audio_HDI_AudioCaptureGetCapturePosition_0009
-* @tc.desc  Test GetCapturePosition interface,return 0 if get framesize define format to AUDIO_FORMAT_PCM_16_BIT
+* @tc.desc  Test GetCapturePosition interface,return 0 if get framesize define format to AUDIO_FORMAT_TYPE_PCM_16_BIT
 */
 HWTEST_F(AudioHdiCaptureTest, SUB_Audio_HDI_AudioCaptureGetCapturePosition_0009, Function | MediumTest | Level1)
 {
@@ -581,7 +581,7 @@ HWTEST_F(AudioHdiCaptureTest, SUB_Audio_HDI_AudioCaptureGetCapturePosition_0009,
     InitAttrs(attrs);
     attrs.type = AUDIO_IN_MEDIA;
     attrs.interleaved = false;
-    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
+    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
     attrs.sampleRate = 48000;
     attrs.channelCount = 2;
     ret = capture->attr.SetSampleAttributes(capture, &attrs);
@@ -589,7 +589,7 @@ HWTEST_F(AudioHdiCaptureTest, SUB_Audio_HDI_AudioCaptureGetCapturePosition_0009,
     ret = capture->attr.GetSampleAttributes(capture, &attrsValue);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(channelCountExp, attrsValue.channelCount);
 
     ret = AudioCaptureStartAndOneFrame(capture);
@@ -604,9 +604,9 @@ HWTEST_F(AudioHdiCaptureTest, SUB_Audio_HDI_AudioCaptureGetCapturePosition_0009,
     manager->UnloadAdapter(manager, adapter);
 }
 /**
-* @tc.name  Test GetCapturePosition API via define format to AUDIO_FORMAT_PCM_24_BIT
+* @tc.name  Test GetCapturePosition API via define format to AUDIO_FORMAT_TYPE_PCM_24_BIT
 * @tc.number  SUB_Audio_HDI_AudioCaptureGetCapturePosition_0010
-* @tc.desc  Test GetCapturePosition interface,return 0 if get framesize define format to AUDIO_FORMAT_PCM_24_BIT
+* @tc.desc  Test GetCapturePosition interface,return 0 if get framesize define format to AUDIO_FORMAT_TYPE_PCM_24_BIT
 */
 HWTEST_F(AudioHdiCaptureTest, SUB_Audio_HDI_AudioCaptureGetCapturePosition_0010, Function | MediumTest | Level1)
 {
@@ -627,14 +627,14 @@ HWTEST_F(AudioHdiCaptureTest, SUB_Audio_HDI_AudioCaptureGetCapturePosition_0010,
     InitAttrs(attrs);
     attrs.type = AUDIO_IN_MEDIA;
     attrs.interleaved = false;
-    attrs.format = AUDIO_FORMAT_PCM_24_BIT;
+    attrs.format = AUDIO_FORMAT_TYPE_PCM_24_BIT;
     attrs.sampleRate = 48000;
     attrs.channelCount = 2;
     ret = capture->attr.SetSampleAttributes(capture, &attrs);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->attr.GetSampleAttributes(capture, &attrsValue);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(channelCountExp, attrsValue.channelCount);
     EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
 
@@ -674,14 +674,14 @@ HWTEST_F(AudioHdiCaptureTest, SUB_Audio_HDI_AudioCaptureGetCapturePosition_0011,
     InitAttrs(attrs);
     attrs.type = AUDIO_IN_MEDIA;
     attrs.interleaved = false;
-    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
+    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
     attrs.sampleRate = 48000;
     attrs.channelCount = 1;
     ret = capture->attr.SetSampleAttributes(capture, &attrs);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->attr.GetSampleAttributes(capture, &attrsValue);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
     EXPECT_EQ(channelCountExp, attrsValue.channelCount);
 
@@ -720,7 +720,7 @@ HWTEST_F(AudioHdiCaptureTest, SUB_Audio_HDI_AudioCaptureGetCapturePosition_0012,
     InitAttrs(attrs);
     attrs.type = AUDIO_IN_MEDIA;
     attrs.interleaved = false;
-    attrs.format = AUDIO_FORMAT_PCM_24_BIT;
+    attrs.format = AUDIO_FORMAT_TYPE_PCM_24_BIT;
     attrs.sampleRate = 48000;
     attrs.channelCount = 1;
     ret = capture->attr.SetSampleAttributes(capture, &attrs);
@@ -728,7 +728,7 @@ HWTEST_F(AudioHdiCaptureTest, SUB_Audio_HDI_AudioCaptureGetCapturePosition_0012,
     ret = capture->attr.GetSampleAttributes(capture, &attrsValue);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_EQ(channelCountExp, attrsValue.channelCount);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
 
     ret = AudioCaptureStartAndOneFrame(capture);
@@ -1074,7 +1074,7 @@ HWTEST_F(AudioHdiCaptureTest, SUB_Audio_HDI_CaptureGetMmapPosition_0002, Functio
         ASSERT_EQ(nullptr, audiopara.capture);
     }
     InitAttrs(audiopara.attrs);
-    audiopara.attrs.format = AUDIO_FORMAT_PCM_24_BIT;
+    audiopara.attrs.format = AUDIO_FORMAT_TYPE_PCM_24_BIT;
     audiopara.attrs.channelCount = 1;
     ret = audiopara.capture->attr.SetSampleAttributes(audiopara.capture, &(audiopara.attrs));
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);

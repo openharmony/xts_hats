@@ -90,7 +90,7 @@ void AudioHdiRenderAttrTest::TearDown(void) {}
 * @tc.number  SUB_Audio_HDI_AudioRenderSetSampleAttributes_0001
 * @tc.desc  Test AudioRenderSetSampleAttributes ,the setting parameters are as follows.
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
 *    attrs.sampleRate = AUDIO_SAMPLE_RATE_MASK_8000;
 *    attrs.channelCount = 1;
 */
@@ -104,7 +104,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 8000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 1, 8000);
 
     ret = render->attr.SetSampleAttributes(render, &attrs);
 #ifdef PRODUCT_RK3568
@@ -118,7 +118,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
 #endif
@@ -131,7 +131,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
 * @tc.number  SUB_Audio_HDI_AudioRenderSetSampleAttributes_0002
 * @tc.desc  Test AudioRenderSetSampleAttributes ,the setting parameters are as follows.
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_24_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_24_BIT;
 *    attrs.sampleRate = 11025;
 *    attrs.channelCount = 2;
 */
@@ -148,13 +148,13 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 2, 11025);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 2, 11025);
 
     ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(ret1, attrsValue.sampleRate);
     EXPECT_EQ(ret2, attrsValue.channelCount);
 
@@ -166,7 +166,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
 * @tc.number  SUB_Audio_HDI_AudioRenderSetSampleAttributes_0003
 * @tc.desc  Test AudioRenderSetSampleAttributes ,the setting parameters are as follows.
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
 *    attrs.sampleRate = 22050;
 *    attrs.channelCount = 1;
 */
@@ -183,13 +183,13 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 2, 22050);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 2, 22050);
 
     ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(ret1, attrsValue.sampleRate);
     EXPECT_EQ(ret2, attrsValue.channelCount);
 
@@ -201,7 +201,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
 * @tc.number  SUB_Audio_HDI_AudioRenderSetSampleAttributes_0004
 * @tc.desc  Test AudioRenderSetSampleAttributes ,the setting parameters are as follows.
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_24_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_24_BIT;
 *    attrs.sampleRate = 32000;
 *    attrs.channelCount = 2;
 */
@@ -218,13 +218,13 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 2, 32000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 2, 32000);
 
     ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(ret1, attrsValue.sampleRate);
     EXPECT_EQ(ret2, attrsValue.channelCount);
 
@@ -236,7 +236,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
 * @tc.number  SUB_Audio_HDI_AudioRenderSetSampleAttributes_0005
 * @tc.desc  Test AudioRenderSetSampleAttributes ,the setting parameters are as follows.
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
 *    attrs.sampleRate = 44100;
 *    attrs.channelCount = 1;
 */
@@ -251,7 +251,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 44100);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 1, 44100);
 
     ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
 #ifdef PRODUCT_RK3568
@@ -262,7 +262,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(ret1, attrsValue.sampleRate);
     EXPECT_EQ(ret2, attrsValue.channelCount);
 #endif
@@ -273,7 +273,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
 * @tc.name  Test AudioRenderSetSampleAttributes API via legal input.
 * @tc.desc  Test AudioRenderSetSampleAttributes ,the setting parameters are as follows.
 *    attrs.type = AUDIO_IN_COMMUNICATION;
-*    attrs.format = AUDIO_FORMAT_PCM_24_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_24_BIT;
 *    attrs.sampleRate = 48000;
 *    attrs.channelCount = 2;
 */
@@ -290,13 +290,13 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 2, 48000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 2, 48000);
 
     ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(ret1, attrsValue.sampleRate);
     EXPECT_EQ(ret2, attrsValue.channelCount);
 
@@ -319,7 +319,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 8000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 1, 8000);
 
     ret = render->attr.SetSampleAttributes(renderNull, &attrs);
     EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
@@ -334,7 +334,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
 * @tc.number  SUB_Audio_HDI_AudioRenderSetSampleAttributes_0008
 * @tc.desc  Test AudioRenderSetSampleAttributes ,the setting parameters are as follows.
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
 *    attrs.sampleRate = 12000;
 *    attrs.channelCount = 1;
 */
@@ -349,7 +349,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 12000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 1, 12000);
 
     ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
 #ifdef PRODUCT_RK3568
@@ -360,7 +360,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
 #endif
@@ -372,7 +372,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
 * @tc.number  SUB_Audio_HDI_AudioRenderSetSampleAttributes_0009
 * @tc.desc  Test AudioRenderSetSampleAttributes ,the setting parameters are as follows.
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_24_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_24_BIT;
 *    attrs.sampleRate = 16000;
 *    attrs.channelCount = 1;
 */
@@ -387,7 +387,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 16000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 1, 16000);
     ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
 #ifdef PRODUCT_RK3568
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
@@ -397,7 +397,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
 #endif
@@ -410,7 +410,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
 * @tc.number  SUB_Audio_HDI_AudioRenderSetSampleAttributes_0010
 * @tc.desc  Test AudioRenderSetSampleAttributes ,the setting parameters are as follows.
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
 *    attrs.sampleRate = 24000;
 *    attrs.channelCount = 2;
 */
@@ -428,12 +428,12 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
 
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 2, 24000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 2, 24000);
     ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
 
@@ -445,7 +445,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
 * @tc.number  SUB_Audio_HDI_AudioRenderSetSampleAttributes_0011
 * @tc.desc  Test AudioRenderSetSampleAttributes ,the setting parameters are as follows.
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
 *    attrs.sampleRate = 64000;
 *    attrs.channelCount = 2;
 */
@@ -462,13 +462,13 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 2, 64000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 2, 64000);
 
     ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
 
@@ -480,7 +480,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
 * @tc.number  SUB_Audio_HDI_AudioRenderSetSampleAttributes_0012
 * @tc.desc  Test AudioRenderSetSampleAttributes ,the setting parameters are as follows.
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_24_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_24_BIT;
 *    attrs.sampleRate = 96000;
 *    attrs.channelCount = 1;
 */
@@ -496,7 +496,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 96000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 1, 96000);
 
     ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
 #ifdef PRODUCT_RK3568
@@ -507,7 +507,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
 #endif
@@ -519,7 +519,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
 * @tc.number  SUB_Audio_HDI_AudioRenderSetSampleAttributes_0013
 * @tc.desc  Test AudioRenderSetSampleAttributes ,the setting parameters are as follows.
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
 *    attrs.sampleRate = 0xFFFFFFFFu;
 *    attrs.channelCount = 2;
 */
@@ -533,7 +533,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 2, 0xFFFFFFFFu);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 2, 0xFFFFFFFFu);
 
     ret = render->attr.SetSampleAttributes(render, &attrs);
     EXPECT_EQ(AUDIO_HAL_ERR_NOT_SUPPORT, ret);
@@ -564,18 +564,18 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
 
-    InitAttrsUpdate(attrs1, AUDIO_FORMAT_PCM_8_BIT, 1, 8000);
+    InitAttrsUpdate(attrs1, AUDIO_FORMAT_TYPE_PCM_8_BIT, 1, 8000);
     ret = render->attr.SetSampleAttributes(render, &attrs1);
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
 
-    InitAttrsUpdate(attrs2, AUDIO_FORMAT_PCM_32_BIT, 2, 11025);
+    InitAttrsUpdate(attrs2, AUDIO_FORMAT_TYPE_PCM_32_BIT, 2, 11025);
     ret = render->attr.SetSampleAttributes(render, &attrs2);
 #ifdef ALSA_LIB_MODE
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 #else
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
 #endif
-    InitAttrsUpdate(attrs3, AUDIO_FORMAT_AAC_MAIN, 1, 22050);
+    InitAttrsUpdate(attrs3, AUDIO_FORMAT_TYPE_AAC_MAIN, 1, 22050);
     ret = render->attr.SetSampleAttributes(render, &attrs3);
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
 
@@ -587,7 +587,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
 * @tc.number  SUB_Audio_HDI_AudioRenderSetSampleAttributes_0015
 * @tc.desc  Test AudioRenderSetSampleAttributes ,the setting parameters are as follows.
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_AAC_LC/LD/ELD;
+*    attrs.format = AUDIO_FORMAT_TYPE_AAC_LC/LD/ELD;
 *    attrs.sampleRate = 32000/44100/48000;
 *    attrs.channelCount = 1/2;
 */
@@ -604,15 +604,15 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
 
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs1, AUDIO_FORMAT_AAC_LC, 2, 32000);
+    InitAttrsUpdate(attrs1, AUDIO_FORMAT_TYPE_AAC_LC, 2, 32000);
     ret = render->attr.SetSampleAttributes(render, &attrs1);
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
 
-    InitAttrsUpdate(attrs2, AUDIO_FORMAT_AAC_LD, 1, 44100);
+    InitAttrsUpdate(attrs2, AUDIO_FORMAT_TYPE_AAC_LD, 1, 44100);
     ret = render->attr.SetSampleAttributes(render, &attrs2);
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
 
-    InitAttrsUpdate(attrs3, AUDIO_FORMAT_AAC_ELD, 2, 48000);
+    InitAttrsUpdate(attrs3, AUDIO_FORMAT_TYPE_AAC_ELD, 2, 48000);
     ret = render->attr.SetSampleAttributes(render, &attrs3);
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
 
@@ -624,7 +624,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
 * @tc.number  SUB_Audio_HDI_AudioRenderSetSampleAttributes_0016
 * @tc.desc  Test AudioRenderSetSampleAttributes ,the setting parameters are as follows.
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_AAC_HE_V1/V2
+*    attrs.format = AUDIO_FORMAT_TYPE_AAC_HE_V1/V2
 *    attrs.sampleRate = 8000/44100;
 *    attrs.channelCount = 1/2;
 */
@@ -640,11 +640,11 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
 
-    InitAttrsUpdate(attrs1, AUDIO_FORMAT_AAC_HE_V1, 1, 8000);
+    InitAttrsUpdate(attrs1, AUDIO_FORMAT_TYPE_AAC_HE_V1, 1, 8000);
     ret = render->attr.SetSampleAttributes(render, &attrs1);
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
 
-    InitAttrsUpdate(attrs2, AUDIO_FORMAT_AAC_HE_V2, 2, 44100);
+    InitAttrsUpdate(attrs2, AUDIO_FORMAT_TYPE_AAC_HE_V2, 2, 44100);
     ret = render->attr.SetSampleAttributes(render, &attrs2);
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
 
@@ -656,7 +656,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
 * @tc.number  SUB_Audio_HDI_AudioRenderSetSampleAttributes_0017
 * @tc.desc  Test AudioRenderSetSampleAttributes ,the setting parameters are as follows.
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT
 *    attrs.sampleRate = 8000;
 *    attrs.channelCount = 5;
 */
@@ -671,7 +671,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
 
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 5, 8000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 5, 8000);
     ret = render->attr.SetSampleAttributes(render, &attrs);
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
 
@@ -683,7 +683,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
 * @tc.number  SUB_Audio_HDI_AudioRenderGetSampleAttributes_0001
 * @tc.desc  Test AudioRenderGetSampleAttributes ,the setting parameters are as follows.
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
 *    attrs.sampleRate = 8000;
 *    attrs.channelCount = 1;
 */
@@ -699,7 +699,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderGetSampleAttributes_00
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
 
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 8000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 1, 8000);
     ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
 #ifdef PRODUCT_RK3568
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
@@ -709,7 +709,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderGetSampleAttributes_00
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(ret1, attrsValue.sampleRate);
     EXPECT_EQ(ret2, attrsValue.channelCount);
 #endif
@@ -733,7 +733,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderGetSampleAttributes_00
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 44100);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 1, 44100);
 
     ret = render->attr.GetSampleAttributes(renderNull, &attrs);
     EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
@@ -831,11 +831,11 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetFrameSize_0004, Function
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 2, 48000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 2, 48000);
 
     ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
     EXPECT_EQ(channelCountExp, attrsValue.channelCount);
 
@@ -866,11 +866,11 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetFrameSize_0005, Function
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 48000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 1, 48000);
 
     ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
     EXPECT_EQ(channelCountExp, attrsValue.channelCount);
 
@@ -901,11 +901,11 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetFrameSize_0006, Function
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 2, 44100);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 2, 44100);
 
     ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
     EXPECT_EQ(channelCountExp, attrsValue.channelCount);
 
@@ -936,11 +936,11 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetFrameSize_0007, Function
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 48000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 1, 48000);
 
     ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
     EXPECT_EQ(channelCountExp, attrsValue.channelCount);
 
@@ -1046,11 +1046,11 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetFrameCount_0004, Functio
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 2, 8000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 2, 8000);
 
     ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
     EXPECT_EQ(channelCountExp, attrsValue.channelCount);
 
@@ -1084,11 +1084,11 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetFrameCount_0005, Functio
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 2, 8000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 2, 8000);
 
     ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
     EXPECT_EQ(channelCountExp, attrsValue.channelCount);
 
@@ -1123,11 +1123,11 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetFrameCount_0006, Functio
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 44100);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 1, 44100);
 
     ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
     EXPECT_EQ(channelCountExp, attrsValue.channelCount);
 
@@ -1160,11 +1160,11 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetFrameCount_0007, Functio
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 32000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 1, 32000);
 
     ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
     EXPECT_EQ(channelCountExp, attrsValue.channelCount);
 
@@ -1223,7 +1223,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetCurrentChannelId_0002, F
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 32000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 1, 32000);
 
     ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);

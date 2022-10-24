@@ -620,7 +620,7 @@ HWTEST_F(AudioHdiRenderControlTest, SUB_Audio_HDI_CreateRender_0004, Function | 
 
     InitAttrs(attrs);
     InitDevDesc(devDesc, renderPort->portId, PIN_OUT_SPEAKER);
-    attrs.format = AUDIO_FORMAT_AAC_MAIN;
+    attrs.format = AUDIO_FORMAT_TYPE_AAC_MAIN;
     ret = adapter->CreateRender(adapter, &devDesc, &attrs, &render);
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
     attrs.channelCount = channelCountErr;

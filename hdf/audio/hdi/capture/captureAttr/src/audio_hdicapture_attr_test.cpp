@@ -112,7 +112,7 @@ int32_t AudioHdiCaptureAttrTest::AudioCaptureStart(const string path, struct Aud
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0001
 * @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
 *    attrs.sampleRate = 8000;
 *    attrs.channelCount = 1;
 */
@@ -127,7 +127,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 8000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 1, 8000);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
 #ifdef PRODUCT_RK3568
@@ -137,7 +137,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     uint32_t ret2 = 8000;
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
 #endif
@@ -149,7 +149,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0002
 * @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_24_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_24_BIT;
 *    attrs.sampleRate = 11025;
 *    attrs.channelCount = 2;
 */
@@ -166,12 +166,12 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 2, 11025);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 2, 11025);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
 
@@ -183,7 +183,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0003
 * @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
 *    attrs.sampleRate = 22050;
 *    attrs.channelCount = 1;
 */
@@ -198,7 +198,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 22050);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 1, 22050);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
 #ifdef PRODUCT_RK3568
@@ -208,7 +208,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     uint32_t ret2 = 22050;
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
 #endif
@@ -221,7 +221,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0004
 * @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_24_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_24_BIT;
 *    attrs.sampleRate = 32000;
 *    attrs.channelCount = 2;
 */
@@ -238,12 +238,12 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 2, 32000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 2, 32000);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
 
@@ -255,7 +255,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0005
 * @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
 *    attrs.sampleRate = 44100;
 *    attrs.channelCount = 1;
 */
@@ -270,7 +270,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 44100);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 1, 44100);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
 #ifdef PRODUCT_RK3568
@@ -280,7 +280,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     uint32_t ret2 = 44100;
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
 #endif
@@ -293,7 +293,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0006
 * @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_COMMUNICATION;
-*    attrs.format = AUDIO_FORMAT_PCM_24_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_24_BIT;
 *    attrs.sampleRate = 48000;
 *    attrs.channelCount = 2;
 */
@@ -310,12 +310,12 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 2, 48000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 2, 48000);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
 
@@ -338,7 +338,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 8000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 1, 8000);
 
     ret = capture->attr.SetSampleAttributes(captureNull, &attrs);
     EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
@@ -353,7 +353,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0008
 * @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
 *    attrs.sampleRate = 12000;
 *    attrs.channelCount = 1;
 */
@@ -368,7 +368,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 12000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 1, 12000);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
 #ifdef PRODUCT_RK3568
@@ -379,7 +379,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
 #endif
@@ -392,7 +392,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0009
 * @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_24_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_24_BIT;
 *    attrs.sampleRate = 16000;
 *    attrs.channelCount = 1;
 */
@@ -407,7 +407,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 16000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 1, 16000);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
 #ifdef PRODUCT_RK3568
@@ -418,7 +418,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
 #endif
@@ -431,7 +431,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0010
 * @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
 *    attrs.sampleRate = 24000;
 *    attrs.channelCount = 2;
 */
@@ -448,13 +448,13 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 2, 24000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 2, 24000);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
 
@@ -466,7 +466,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0011
 * @tc.desc Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
 *    attrs.sampleRate = 64000;
 *    attrs.channelCount = 1;
 */
@@ -481,7 +481,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 64000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 1, 64000);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
 #ifdef PRODUCT_RK3568
@@ -492,7 +492,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
 #endif
@@ -504,7 +504,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0012
 * @tc.desc Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_24_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_24_BIT;
 *    attrs.sampleRate = 96000;
 *    attrs.channelCount = 1;
 */
@@ -519,7 +519,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 96000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 1, 96000);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
 #ifdef PRODUCT_RK3568
@@ -530,7 +530,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
 #endif
@@ -557,7 +557,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 2, 0xFFFFFFFFu);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 2, 0xFFFFFFFFu);
 
     ret = capture->attr.SetSampleAttributes(capture, &attrs);
     EXPECT_EQ(AUDIO_HAL_ERR_NOT_SUPPORT, ret);
@@ -587,18 +587,18 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
 
-    InitAttrsUpdate(attrs1, AUDIO_FORMAT_PCM_8_BIT, 1, 8000);
+    InitAttrsUpdate(attrs1, AUDIO_FORMAT_TYPE_PCM_8_BIT, 1, 8000);
     ret = capture->attr.SetSampleAttributes(capture, &attrs1);
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
 
-    InitAttrsUpdate(attrs2, AUDIO_FORMAT_PCM_32_BIT, 2, 11025);
+    InitAttrsUpdate(attrs2, AUDIO_FORMAT_TYPE_PCM_32_BIT, 2, 11025);
     ret = capture->attr.SetSampleAttributes(capture, &attrs2);
 #ifdef ALSA_LIB_MODE
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 #else
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
 #endif
-    InitAttrsUpdate(attrs3, AUDIO_FORMAT_AAC_MAIN, 1, 22050);
+    InitAttrsUpdate(attrs3, AUDIO_FORMAT_TYPE_AAC_MAIN, 1, 22050);
     ret = capture->attr.SetSampleAttributes(capture, &attrs3);
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
 
@@ -610,7 +610,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0015
 * @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_AAC_LC/LD/ELD;
+*    attrs.format = AUDIO_FORMAT_TYPE_AAC_LC/LD/ELD;
 *    attrs.sampleRate = 32000/44100/48000;
 *    attrs.channelCount = 1/2;
 */
@@ -627,15 +627,15 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
 
-    InitAttrsUpdate(attrs1, AUDIO_FORMAT_AAC_LC, 2, 32000);
+    InitAttrsUpdate(attrs1, AUDIO_FORMAT_TYPE_AAC_LC, 2, 32000);
     ret = capture->attr.SetSampleAttributes(capture, &attrs1);
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
 
-    InitAttrsUpdate(attrs2, AUDIO_FORMAT_AAC_LD, 1, 44100);
+    InitAttrsUpdate(attrs2, AUDIO_FORMAT_TYPE_AAC_LD, 1, 44100);
     ret = capture->attr.SetSampleAttributes(capture, &attrs2);
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
 
-    InitAttrsUpdate(attrs3, AUDIO_FORMAT_AAC_ELD, 2, 48000);
+    InitAttrsUpdate(attrs3, AUDIO_FORMAT_TYPE_AAC_ELD, 2, 48000);
     ret = capture->attr.SetSampleAttributes(capture, &attrs3);
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
 
@@ -647,7 +647,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0016
 * @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_AAC_HE_V1/V2
+*    attrs.format = AUDIO_FORMAT_TYPE_AAC_HE_V1/V2
 *    attrs.sampleRate = 8000/44100;
 *    attrs.channelCount = 1/2;
 */
@@ -663,11 +663,11 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
 
-    InitAttrsUpdate(attrs1, AUDIO_FORMAT_AAC_HE_V1, 1, 8000);
+    InitAttrsUpdate(attrs1, AUDIO_FORMAT_TYPE_AAC_HE_V1, 1, 8000);
     ret = capture->attr.SetSampleAttributes(capture, &attrs1);
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
 
-    InitAttrsUpdate(attrs2, AUDIO_FORMAT_AAC_HE_V2, 2, 44100);
+    InitAttrsUpdate(attrs2, AUDIO_FORMAT_TYPE_AAC_HE_V2, 2, 44100);
     ret = capture->attr.SetSampleAttributes(capture, &attrs2);
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
 
@@ -679,7 +679,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0017
 * @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT
 *    attrs.sampleRate = 8000;
 *    attrs.channelCount = 5;
 */
@@ -694,7 +694,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
 
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 5, 8000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 5, 8000);
     ret = capture->attr.SetSampleAttributes(capture, &attrs);
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
 
@@ -706,7 +706,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 * @tc.number  SUB_Audio_HDI_AudioCaptureGetSampleAttributes_0001
 * @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
+*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
 *    attrs.sampleRate = 8000;
 *    attrs.channelCount = 1;
 */
@@ -723,7 +723,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureGetSampleAttributes_
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = capture->attr.GetSampleAttributes(capture, &attrsValue);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 32000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 1, 32000);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
 #ifdef PRODUCT_RK3568
@@ -733,7 +733,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureGetSampleAttributes_
     uint32_t ret2 = 1;
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(ret1, attrsValue.sampleRate);
     EXPECT_EQ(ret2, attrsValue.channelCount);
 #endif
@@ -757,7 +757,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureGetSampleAttributes_
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 48000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 1, 48000);
 
     ret = capture->attr.GetSampleAttributes(captureNull, &attrs);
     EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
@@ -853,11 +853,11 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0004, Functi
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 2, 48000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 2, 48000);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
     EXPECT_EQ(channelCountExp, attrsValue.channelCount);
 
@@ -888,11 +888,11 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0005, Functi
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 48000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 1, 48000);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
     EXPECT_EQ(channelCountExp, attrsValue.channelCount);
 
@@ -923,11 +923,11 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0006, Functi
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 2, 44100);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 2, 44100);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
     EXPECT_EQ(channelCountExp, attrsValue.channelCount);
 
@@ -958,11 +958,11 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0007, Functi
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 48000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 1, 48000);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
     EXPECT_EQ(channelCountExp, attrsValue.channelCount);
 
@@ -1089,11 +1089,11 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0005, Funct
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 2, 8000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 2, 8000);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
     EXPECT_EQ(channelCountExp, attrsValue.channelCount);
 
@@ -1127,11 +1127,11 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0006, Funct
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 2, 8000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 2, 8000);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
     EXPECT_EQ(channelCountExp, attrsValue.channelCount);
 
@@ -1166,11 +1166,11 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0007, Funct
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 44100);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 1, 44100);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
     EXPECT_EQ(channelCountExp, attrsValue.channelCount);
 
@@ -1204,11 +1204,11 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0008, Funct
     TestAudioManager* manager = GetAudioManager();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 32000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 1, 32000);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
+    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
     EXPECT_EQ(channelCountExp, attrsValue.channelCount);
 
@@ -1269,7 +1269,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureGetCurrentChannelId_0002,
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
 
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 48000);
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 1, 48000);
 
     ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);

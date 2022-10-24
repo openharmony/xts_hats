@@ -380,7 +380,7 @@ HWTEST_F(AudioHdiRenderSceneTest, SUB_Audio_HDI_AudioRenderRegCallback_0001, Fun
 }
 
 /**
-* @tc.name  Test AudioRenderRegCallback API via input "AUDIO_NONBLOCK_WRITE_COMPELETED"
+* @tc.name  Test AudioRenderRegCallback API via input "AUDIO_NONBLOCK_WRITE_COMPLETED"
 * @tc.number  SUB_Audio_HDI_AudioRenderRegCallback_0002
 * @tc.desc  Test AudioRenderRegCallback interface,return 0 if the interface use correctly.
 */

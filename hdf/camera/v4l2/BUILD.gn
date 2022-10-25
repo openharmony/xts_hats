@@ -65,7 +65,6 @@ ohos_moduletest_suite("HatsHdfCameraFunctionTest") {
     "//foundation/graphic/graphic/utils/buffer_handle/export",
     "$camera_path/utils/event",
     "//drivers/peripheral/camera/interfaces/metadata/include",
-    "//drivers/peripheral/display/interfaces/include",
     "//drivers/peripheral/display/hdi_service/gralloc/include",
     "//drivers/peripheral/base",
     "//base/hiviewdfx/interfaces/innerkits/libhilog/include",

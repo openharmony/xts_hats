@@ -20,7 +20,6 @@ usage()
     echo
     echo "USAGE"
     echo "       ./build.sh [suite=BUILD_TARGET] [target_os=TARGET_OS] [target_arch=TARGET_ARCH] [variant=BUILD_VARIANT] [target_subsystem=TARGET_SUBSYSTEM]"
-    echo "                  target_platform  : TARGET_PLATFORM  the target platform, such as phone or ivi; Default to phone"
     echo "                  suite            : BUILD_TARGET       cts/hit/vts and so on, default value is hit"
     echo "                  target_arch      : TARGET_ARCH      arm64 or arm32, default value is arm64"
     echo "                  variant          : BUILD_VARIANT    release or debug, default value is debug"
@@ -46,8 +45,9 @@ parse_cmdline()
     TARGET_ARCH=arm
     BUILD_VARIANT=release
     UPLOAD_API_INFO=False
-    SYSTEM_SIZE=large
+    SYSTEM_SIZE=standard
     PRODUCT_NAME=""
+    USE_MUSL=false
     export PATH=${BASE_HOME}/prebuilts/python/linux-x86/3.8.3/bin:$PATH
 
     while [ -n "$1" ]
@@ -64,8 +64,10 @@ parse_cmdline()
         target_arch)      TARGET_ARCH="$PARAM"
                           ;;
         variant)          BUILD_VARIANT="$PARAM"
-                          ;;
-	target_platform)  TARGET_PLATFORM="$PARAM"
+                          ;; 
+        use_musl)         USE_MUSL="$PARAM"
+                          ;;                       
+	    target_platform)  TARGET_PLATFORM="$PARAM"
                           ;;
         target_subsystem) export target_subsystem=${PARAM}
                           ;;
@@ -97,8 +99,14 @@ do_make()
 
     rm -rf "$BASE_HOME/test/xts/autogen_apiobjs"
     export XTS_SUITENAME=hats
-    if [ "$SYSTEM_SIZE" = "standard" ]; then
-       ./build.sh --product-name $PRODUCT_NAME --gn-args build_xts=true --build-target $BUILD_TARGET --build-target "deploy_testtools" --gn-args is_standard_system=true --target-cpu $TARGET_ARCH
+       if [ "$SYSTEM_SIZE" = "standard" ]; then
+        MUSL_ARGS=""
+        if [ "$PRODUCT_NAME" = "m40" ]; then
+		    if [ "$USE_MUSL" = "false" ]; then
+                        MUSL_ARGS="--gn-args use_musl=false --gn-args use_custom_libcxx=true --gn-args use_custom_clang=true"			
+		    fi
+        fi
+       ./build.sh --product-name $PRODUCT_NAME --gn-args build_xts=true --build-target $BUILD_TARGET --build-target "deploy_testtools" --gn-args is_standard_system=true $MUSL_ARGS --target-cpu $TARGET_ARCH
     else
        if [ "$BUILD_TARGET" = "hats hats_ivi hats_intellitv hats_wearable" ]; then
          ./build.sh --product-name $PRODUCT_NAME --gn-args build_xts=true --build-target "hats" --build-target "hats_ivi" --build-target "hats_intellitv" --build-target "hats_wearable" --build-target "deploy_testtools"

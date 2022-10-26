@@ -1888,7 +1888,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0001, Function | MediumTest
     ret = g_wifi->createFeature(PROTOCOL_80211_IFTYPE_AP, (struct IWiFiBaseFeature **)&apFeature);
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_NE(apFeature, nullptr);
-    ret = apFeature->getAsscociatedStas(nullptr, staInfo, MAX_ASSOC_STA_NUM, &num);
+    ret = apFeature->getAssociatedStas(nullptr, staInfo, MAX_ASSOC_STA_NUM, &num);
     EXPECT_NE(ret, HDF_SUCCESS);
 
     ret = g_wifi->destroyFeature((struct IWiFiBaseFeature *)apFeature);
@@ -1911,7 +1911,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0002, Function | MediumTest
     ret = g_wifi->createFeature(PROTOCOL_80211_IFTYPE_AP, (struct IWiFiBaseFeature **)&apFeature);
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_NE(apFeature, nullptr);
-    ret = apFeature->getAsscociatedStas(apFeature, nullptr, MAX_ASSOC_STA_NUM, &num);
+    ret = apFeature->getAssociatedStas(apFeature, nullptr, MAX_ASSOC_STA_NUM, &num);
     EXPECT_NE(ret, HDF_SUCCESS);
 
     ret = g_wifi->destroyFeature((struct IWiFiBaseFeature *)apFeature);
@@ -1934,7 +1934,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0003, Function | MediumTest
     ret = g_wifi->createFeature(PROTOCOL_80211_IFTYPE_AP, (struct IWiFiBaseFeature **)&apFeature);
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_NE(apFeature, nullptr);
-    ret = apFeature->getAsscociatedStas(apFeature, staInfo, 0, &num);
+    ret = apFeature->getAssociatedStas(apFeature, staInfo, 0, &num);
     EXPECT_NE(ret, HDF_SUCCESS);
 
 
@@ -1957,7 +1957,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0004, Function | MediumTest
     ret = g_wifi->createFeature(PROTOCOL_80211_IFTYPE_AP, (struct IWiFiBaseFeature **)&apFeature);
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_NE(apFeature, nullptr);
-    ret = apFeature->getAsscociatedStas(apFeature, staInfo, MAX_ASSOC_STA_NUM, nullptr);
+    ret = apFeature->getAssociatedStas(apFeature, staInfo, MAX_ASSOC_STA_NUM, nullptr);
     EXPECT_NE(ret, HDF_SUCCESS);
 
 
@@ -1981,7 +1981,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0005, Function | MediumTest
     ret = g_wifi->createFeature(PROTOCOL_80211_IFTYPE_AP, (struct IWiFiBaseFeature **)&apFeature);
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_NE(apFeature, nullptr);
-    ret = apFeature->getAsscociatedStas(apFeature, staInfo, MAX_ASSOC_STA_NUM, &num);
+    ret = apFeature->getAssociatedStas(apFeature, staInfo, MAX_ASSOC_STA_NUM, &num);
     EXPECT_EQ(ret, HDF_SUCCESS);
 
     ret = g_wifi->destroyFeature((struct IWiFiBaseFeature *)apFeature);

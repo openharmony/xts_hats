@@ -128,11 +128,11 @@ HWTEST_F(HdfWifiServiceCTest, GetFeatureByIfNameTest_003, Function | MediumTest 
 }
 
 /**
- * @tc.name: GetAsscociatedStasTest_004
+ * @tc.name: GetAssociatedStasTest_004
  * @tc.desc: Wifi hdi get assoc stas function test
  * @tc.type: FUNC
  */
-HWTEST_F(HdfWifiServiceCTest, GetAsscociatedStasTest_004, Function | MediumTest | Level1)
+HWTEST_F(HdfWifiServiceCTest, GetAssociatedStasTest_004, Function | MediumTest | Level1)
 {
     const int32_t wlanType = PROTOCOL_80211_IFTYPE_AP;
     struct HdfFeatureInfo ifeature;
@@ -142,7 +142,7 @@ HWTEST_F(HdfWifiServiceCTest, GetAsscociatedStasTest_004, Function | MediumTest 
 
     int32_t rc = g_wlanObj->CreateFeature(g_wlanObj, wlanType, &ifeature);
     ASSERT_EQ(rc, HDF_SUCCESS);
-    rc = g_wlanObj->GetAsscociatedStas(g_wlanObj, &ifeature, staInfo, &staInfoLen, &num);
+    rc = g_wlanObj->GetAssociatedStas(g_wlanObj, &ifeature, staInfo, &staInfoLen, &num);
     ASSERT_EQ(rc, HDF_SUCCESS);
     rc = g_wlanObj->DestroyFeature(g_wlanObj, &ifeature);
     ASSERT_EQ(rc, HDF_SUCCESS);

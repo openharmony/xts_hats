@@ -26,7 +26,10 @@ ohos_moduletest_suite("HatsHdfOmxCodecTest") {
     "//third_party/openmax/api/1.1.2",
     "//drivers/peripheral/display/hdi_service/gralloc/include",
   ]
-  sources = [ "codec_hdi_omx_test.cpp" ]
+  sources = [
+    "codec_hdi_manger_test.cpp",
+    "codec_hdi_omx_test.cpp",
+  ]
 
   cflags = [
     "-Wall",
@@ -38,7 +41,7 @@ ohos_moduletest_suite("HatsHdfOmxCodecTest") {
   ]
 
   deps = [
-    "//drivers/peripheral/codec/hal:codec_hdi_omx",
+    "//drivers/peripheral/codec/hal:libcodec_hdi_omx_client",
     "//third_party/googletest:gtest_main",
   ]
 

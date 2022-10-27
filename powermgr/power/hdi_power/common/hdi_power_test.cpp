@@ -238,8 +238,6 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest006, TestSize.Level1)
     ret = HdfPowerHdiTest::ReadFile(lockBuf, lockValue, sizeof(lockValue));
     EXPECT_EQ(0, ret);
     std::string lock = lockValue;
-    lock.erase(std::remove(lock.begin(), lock.end(), '\n'), lock.end());
-    EXPECT_EQ(lock, testName) << "HdfPowerHdiTest006 failed";
     std::vector<std::string> lockList;
     HdfPowerHdiTest::SplitString(lock, lockList, " ");
     EXPECT_FALSE(lock.empty());

@@ -44,7 +44,7 @@ public:
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0020
 * @tc.desc   Obtain the total number of codec HDI2.0 capability sets
 */
-HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0020, TestSize.Level1)
+HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0020, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(manager_ != nullptr);
     auto count = manager_->GetComponentNum();
@@ -55,7 +55,7 @@ HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0020, TestSize.Level1
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0030
 * @tc.desc   Obtains the capability data of the codec capability and prints the data to the Hilog
 */
-HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0030, TestSize.Level1)
+HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0030, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(manager_ != nullptr);
     auto count = manager_->GetComponentNum();
@@ -72,7 +72,7 @@ HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0030, TestSize.Level1
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0040
 * @tc.desc   Open the OpenMax component based on a name that does not exist
 */
-HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0040, TestSize.Level1)
+HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0040, Function | MediumTest | Level3)
 {
     struct CodecCallbackType *callback = CodecCallbackTypeStubGetInstance();
     ASSERT_TRUE(callback != nullptr);
@@ -90,7 +90,7 @@ HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0040, TestSize.Level1
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0050
 * @tc.desc   When a component is opened, the name of the component is transferred to a null pointer
 */
-HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0050, TestSize.Level1)
+HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0050, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(manager_ != nullptr);
     std::string compName("");
@@ -120,7 +120,7 @@ HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0050, TestSize.Level1
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0740
 * @tc.desc Releasing Components
 */
-HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0740, TestSize.Level1)
+HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0740, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(manager_ != nullptr);
     auto ret = manager_->DestroyComponent(0);

@@ -238,7 +238,7 @@ public:
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0080
 * @tc.desc   Reads the version information of an open component
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0080, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0080, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     struct CompVerInfo verInfo;
@@ -250,7 +250,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0080, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0090
 * @tc.desc  The input parameter is empty. GetComponentVersion is error.
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0090, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0090, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     auto ret = component_->GetComponentVersion(component_, nullptr);
@@ -261,7 +261,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0090, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0100
 * @tc.desc  The input parameter structure pointer is null when the OMX_IndexParamVideoPortFormat parameter is read
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0100, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0100, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     CodecVideoPortFormatParam pixFormat;
@@ -276,7 +276,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0100, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0110
 * @tc.desc  The OMX_IndexParamVideoPortFormat parameter of the input port of the component is normally read
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0110, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0110, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     CodecVideoPortFormatParam pixFormat;
@@ -291,7 +291,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0110, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0120
 * @tc.desc  The version information is not set for the input parameter. As a result, the parameter fails to be read
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0120, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0120, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     auto ret = component_->GetParameter(component_, OMX_IndexParamVideoPortFormat, nullptr, 0);
@@ -302,7 +302,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0120, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0130
 * @tc.desc  The input parameter structure does not match the index. As a result, the parameter fails to be read
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0130, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0130, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_VIDEO_PARAM_PORTFORMATTYPE param;
@@ -318,7 +318,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0130, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0140
 * @tc.desc  The input parameter index is not supported. As a result, the parameter fails to be read
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0140, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0140, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_VIDEO_PARAM_PORTFORMATTYPE param;
@@ -334,7 +334,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0140, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0150
 * @tc.desc  The input parameter prot is not supported. As a result, the parameter fails to be read
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0150, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0150, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_VIDEO_CONFIG_BITRATETYPE param;
@@ -349,7 +349,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0150, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0160
 * @tc.desc  The input parameter MX_IndexVideoStartUnused. As a result, the parameter fails to be read
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0160, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0160, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_VIDEO_CONFIG_BITRATETYPE param;
@@ -364,7 +364,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0160, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0170
 * @tc.desc  Setting the OMX_IndexParamVideoPortFormat Parameter of the Component Input Port
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0170, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0170, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_VIDEO_PARAM_PORTFORMATTYPE param;
@@ -379,7 +379,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0170, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0180
 * @tc.desc  The input parameter version information is not set. As a result, the parameter setting fails
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0180, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0180, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_VIDEO_PARAM_PORTFORMATTYPE param;
@@ -394,7 +394,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0180, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0190
 * @tc.desc  The input parameter is  null
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0190, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0190, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     auto ret = component_->SetParameter(component_, OMX_IndexParamVideoPortFormat, nullptr, 0);
@@ -405,7 +405,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0190, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0200
 * @tc.desc  Parameter does not match index
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0200, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0200, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_VIDEO_CONFIG_BITRATETYPE param;
@@ -420,7 +420,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0200, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0210
 * @tc.desc  The parameter index is not supported
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0210, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0210, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_VIDEO_PARAM_PORTFORMATTYPE param;
@@ -435,7 +435,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0210, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0220
 * @tc.desc
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0220, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0220, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     CodecVideoPortFormatParam pixFormat;
@@ -454,7 +454,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0220, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0230
 * @tc.desc  The configuration is read normally
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0230, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0230, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_VIDEO_CONFIG_BITRATETYPE param;
@@ -469,7 +469,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0230, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0240
 * @tc.desc  Reading Unsupported Port Parameters
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0240, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0240, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_VIDEO_CONFIG_BITRATETYPE param;
@@ -484,7 +484,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0240, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0250
 * @tc.desc  The input parameter is a null pointer
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0250, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0250, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     auto ret = component_->GetConfig(component_, OMX_IndexConfigVideoBitrate, nullptr, 0);
@@ -495,7 +495,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0250, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0260
 * @tc.desc  The input parameter index is not supported
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0260, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0260, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_VIDEO_CONFIG_BITRATETYPE param;
@@ -510,7 +510,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0260, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0270
 * @tc.desc  The configuration is successful
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0270, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0270, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_VIDEO_CONFIG_BITRATETYPE param;
@@ -526,7 +526,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0270, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0280
 * @tc.desc  Configure parameters. The port cannot be modified
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0280, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0280, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_VIDEO_CONFIG_BITRATETYPE param;
@@ -542,7 +542,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0280, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0290
 * @tc.desc  The input parameter is a null poin
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0290, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0290, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     auto ret = component_->SetConfig(component_, OMX_IndexConfigVideoBitrate, nullptr, 0);
@@ -553,7 +553,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0290, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0300
 * @tc.desc  The input parameter index is not supported
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0300, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0300, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_VIDEO_CONFIG_BITRATETYPE param;
@@ -568,7 +568,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0300, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0310
 * @tc.desc  Obtaining the extended index normally
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0310, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0310, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_INDEXTYPE indexType;
@@ -581,7 +581,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0310, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0320
 * @tc.desc  The parameter name is null pointer
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0320, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0320, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_INDEXTYPE indexType;
@@ -593,7 +593,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0320, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0330
 * @tc.desc  Unsupported parameter
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0330, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0330, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_INDEXTYPE indexType;
@@ -605,7 +605,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0330, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0340
 * @tc.desc  Index is null pointer
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0340, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0340, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     auto ret = component_->GetExtensionIndex(component_, "OMX.Topaz.index.param.extended_video", nullptr);
@@ -616,7 +616,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0340, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0350
 * @tc.desc  Reads the current status of the component
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0350, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0350, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_STATETYPE state;
@@ -629,7 +629,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0350, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0360
 * @tc.desc  The input parameter is a null pointer
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0360, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0360, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     auto ret = component_->GetState(component_, nullptr);
@@ -640,7 +640,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0360, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0370
 * @tc.desc  The interface is not supported
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0370, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0370, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     const int32_t tunneledComp = 1002;
@@ -657,7 +657,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0370, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0380
 * @tc.desc The status is changed to OMX_StateExecuting
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0380, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0380, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     auto ret = component_->SendCommand(component_, OMX_CommandStateSet, OMX_StateExecuting, nullptr, 0);
@@ -669,7 +669,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0380, TestSize.Level1)
 * @tc.desc The input buffer type is CODEC_BUFFER_TYPE_INVALID
 */
 struct OmxCodecBuffer allocBuffer;
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0390, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0390, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     allocBuffer.bufferType = CODEC_BUFFER_TYPE_INVALID;
@@ -689,7 +689,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0390, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0410
 * @tc.desc The input buffer type is CODEC_BUFFER_TYPE_VIRTUAL_ADDR
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0410, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0410, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     allocBuffer.bufferType = CODEC_BUFFER_TYPE_VIRTUAL_ADDR;
@@ -701,7 +701,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0410, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0420
 * @tc.desc The output buffer type is CODEC_BUFFER_TYPE_INVALID
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0420, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0420, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     allocBuffer.bufferType = CODEC_BUFFER_TYPE_INVALID;
@@ -713,7 +713,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0420, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0430
 * @tc.desc The output buffer type is CODEC_BUFFER_TYPE_VIRTUAL_ADDR
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0430, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0430, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     allocBuffer.bufferType = CODEC_BUFFER_TYPE_VIRTUAL_ADDR;
@@ -725,7 +725,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0430, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0440
 * @tc.desc The input buffer type is CODEC_BUFFER_TYPE_INVALID
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0440, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0440, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     std::shared_ptr<OmxCodecBuffer> omxBuffer = std::make_shared<OmxCodecBuffer>();
@@ -748,7 +748,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0440, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0450
 * @tc.desc The output buffer type is CODEC_BUFFER_TYPE_INVALID
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0450, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0450, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     std::shared_ptr<OmxCodecBuffer> omxBuffer = std::make_shared<OmxCodecBuffer>();
@@ -771,7 +771,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0450, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0460
 * @tc.desc The input buffer type is CODEC_BUFFER_TYPE_VIRTUAL_ADDR
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0460, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0460, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     std::shared_ptr<OmxCodecBuffer> omxBuffer = std::make_shared<OmxCodecBuffer>();
@@ -794,7 +794,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0460, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0470
 * @tc.desc The output buffer type is CODEC_BUFFER_TYPE_VIRTUAL_ADDR
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0470, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0470, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     std::shared_ptr<OmxCodecBuffer> omxBuffer = std::make_shared<OmxCodecBuffer>();
@@ -817,7 +817,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0470, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0480
 * @tc.desc The intput buffer type is CODEC_BUFFER_TYPE_AVSHARE_MEM_FD
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0480, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0480, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_PARAM_PORTDEFINITIONTYPE param;
@@ -837,7 +837,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0480, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0490
 * @tc.desc The intput buffer type is CODEC_BUFFER_TYPE_HANDLE
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0490, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0490, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     auto err = component_->SendCommand(component_, OMX_CommandStateSet, OMX_StateIdle, NULL, 0);
@@ -881,7 +881,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0490, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0500
 * @tc.desc The output buffer type is CODEC_BUFFER_TYPE_AVSHARE_MEM_FD
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0500, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0500, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_PARAM_PORTDEFINITIONTYPE param;
@@ -902,7 +902,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0500, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0510
 * @tc.desc The output buffer type is CODEC_BUFFER_TYPE_DYNAMIC_HANDLE
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0510, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0510, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     auto err = component_->SendCommand(component_, OMX_CommandStateSet, OMX_StateIdle, NULL, 0);
@@ -937,7 +937,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0510, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0520
 * @tc.desc The input buffer is full
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0520, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0520, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_PARAM_PORTDEFINITIONTYPE param;
@@ -957,7 +957,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0520, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0530
 * @tc.desc The output buffer is full
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0530, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0530, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_PARAM_PORTDEFINITIONTYPE param;
@@ -976,7 +976,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0530, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0540
 * @tc.desc The input buffer is full
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0540, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0540, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     allocBuffer.bufferType = CODEC_BUFFER_TYPE_AVSHARE_MEM_FD;
@@ -988,7 +988,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0540, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0550
 * @tc.desc The output buffer is full
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0550, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0550, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     allocBuffer.bufferType = CODEC_BUFFER_TYPE_AVSHARE_MEM_FD;
@@ -1000,7 +1000,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0550, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0560
 * @tc.desc The interface is invoked successfully. The OMX does not support this function
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0560, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0560, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     struct OmxCodecBuffer buffer;
@@ -1025,7 +1025,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0560, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0580
 * @tc.desc FillThisBuffer test
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0580, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0580, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     auto err = component_->SendCommand(component_, OMX_CommandStateSet, OMX_StateIdle, NULL, 0);
@@ -1081,7 +1081,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0580, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0590
 * @tc.desc The buffer ID is incorrect
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0590, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0590, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     allocBuffer.bufferType = CODEC_BUFFER_TYPE_AVSHARE_MEM_FD;
@@ -1102,7 +1102,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0590, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0600
 * @tc.desc EmptyThisBuffer test
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0600, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0600, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     allocBuffer.bufferType = CODEC_BUFFER_TYPE_AVSHARE_MEM_FD;
@@ -1123,7 +1123,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0600, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0620
 * @tc.desc Setting Component Callbacks
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0620, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0620, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     if (callback_ != nullptr) {
@@ -1139,7 +1139,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0620, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0630
 * @tc.desc The callback pointer is null
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0630, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0630, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     uint8_t role[ROLE_LEN] = {0};
@@ -1151,7 +1151,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0630, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0640
 * @tc.desc Obtaining Component Roles Based on Indexes
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0640, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0640, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     auto ret = component_->ComponentRoleEnum(component_, nullptr, 0, 0);
@@ -1162,7 +1162,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0640, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0650
 * @tc.desc The role is null
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0650, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0650, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     uint8_t role[ROLE_LEN] = {0};
@@ -1174,7 +1174,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0650, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0660
 * @tc.desc The index is too large
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0660, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0660, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     auto ret = component_->SendCommand(component_, OMX_CommandStateSet, OMX_StateIdle, nullptr, 0);
@@ -1185,7 +1185,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0660, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0670
 * @tc.desc The component enters the OMX_Idle state
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0670, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0670, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     allocBuffer.bufferType = CODEC_BUFFER_TYPE_AVSHARE_MEM_FD;
@@ -1206,7 +1206,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0670, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0680
 * @tc.desc The buffer ID of the output port is incorrect
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0680, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0680, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_PARAM_PORTDEFINITIONTYPE param;
@@ -1227,7 +1227,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0680, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0690
 * @tc.desc Test on normal release of the output port
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0690, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0690, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     allocBuffer.bufferType = CODEC_BUFFER_TYPE_AVSHARE_MEM_FD;
@@ -1248,7 +1248,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0690, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0700
 * @tc.desc The buffer ID of the input port is incorrect
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0700, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0700, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     OMX_PARAM_PORTDEFINITIONTYPE param;
@@ -1270,7 +1270,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0700, TestSize.Level1)
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0710
 * @tc.desc Test on normal release of the input port
 */
-HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0710, TestSize.Level1)
+HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0710, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
     auto ret = component_->SendCommand(component_, OMX_CommandStateSet, OMX_StateLoaded, nullptr, 0);

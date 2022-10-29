@@ -593,6 +593,110 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0240, Function |
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
 /**
+* @tc.name HdfCodecHdiGetStateSuccessTest_002
+* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0241
+* @tc.desc When state is set to OMX_StateInvalid, the GetState interface is invoked to obtain the component status
+*/
+HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0241, Function | MediumTest | Level3)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    OMX_STATETYPE state;
+    int32_t ret = g_component->GetState(g_component, &state);
+    ASSERT_NE(state, OMX_StateInvalid);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+}
+/**
+* @tc.name HdfCodecHdiGetStateSuccessTest_003
+* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0242
+* @tc.desc When state is set to OMX_StateExecuting, the GetState interface is invoked to obtain the component status
+*/
+HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0242, Function | MediumTest | Level3)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    OMX_STATETYPE state;
+    int32_t ret = g_component->GetState(g_component, &state);
+    ASSERT_NE(state, OMX_StateExecuting);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+}
+/**
+* @tc.name HdfCodecHdiGetStateSuccessTest_004
+* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0243
+* @tc.desc When state is set to OMX_StateIdle, the GetState interface is invoked to obtain the component status
+*/
+HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0243, Function | MediumTest | Level3)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    OMX_STATETYPE state;
+    int32_t ret = g_component->GetState(g_component, &state);
+    ASSERT_NE(state, OMX_StateIdle);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+}
+/**
+* @tc.name HdfCodecHdiGetStateSuccessTest_005
+* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0244
+* @tc.desc When state is set to OMX_StatePause, the GetState interface is invoked to obtain the component status
+*/
+HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0244, Function | MediumTest | Level3)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    OMX_STATETYPE state;
+    int32_t ret = g_component->GetState(g_component, &state);
+    ASSERT_NE(state, OMX_StatePause);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+}
+/**
+* @tc.name HdfCodecHdiGetStateSuccessTest_006
+* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0245
+* @tc.desc When state is set to OMX_StateWaitForResources, the GetState interface is invoked to obtain the component status
+*/
+HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0245, Function | MediumTest | Level3)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    OMX_STATETYPE state;
+    int32_t ret = g_component->GetState(g_component, &state);
+    ASSERT_NE(state, OMX_StateWaitForResources);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+}
+/**
+* @tc.name HdfCodecHdiGetStateSuccessTest_007
+* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0246
+* @tc.desc When state is set to OMX_StateKhronosExtensions, the GetState interface is invoked to obtain the component status
+*/
+HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0246, Function | MediumTest | Level3)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    OMX_STATETYPE state;
+    int32_t ret = g_component->GetState(g_component, &state);
+    ASSERT_NE(state, OMX_StateKhronosExtensions);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+}
+/**
+* @tc.name HdfCodecHdiGetStateSuccessTest_008
+* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0247
+* @tc.desc When state is set to OMX_StateVendorStartUnused, the GetState interface is invoked to obtain the component status
+*/
+HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0247, Function | MediumTest | Level3)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    OMX_STATETYPE state;
+    int32_t ret = g_component->GetState(g_component, &state);
+    ASSERT_NE(state, OMX_StateVendorStartUnused);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+}
+/**
+* @tc.name HdfCodecHdiGetStateSuccessTest_009
+* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0248
+* @tc.desc When state is set to OMX_StateMax, the GetState interface is invoked to obtain the component status
+*/
+HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0248, Function | MediumTest | Level3)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    OMX_STATETYPE state;
+    int32_t ret = g_component->GetState(g_component, &state);
+    ASSERT_NE(state, OMX_StateMax);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+}
+/**
 * @tc.name HdfCodecHdiGetStateStateNullptrTest_002
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0250
 * @tc.desc When state is set to nullptr, the GetState interface is invoked to obtain the component status

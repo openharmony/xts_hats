@@ -35,6 +35,9 @@
 
 #include "audio_hdi_common.h"
 
+#define SREREO_CHANNEL 2
+#define MONO_CHANNEL   1
+
 using namespace std;
 
 static int g_frameStatus = 1;
@@ -43,8 +46,6 @@ static int g_renderFull = 0;
 static int g_flushCompleted = 0;
 namespace OHOS {
 namespace Audio {
-const int BUFFER_SIZE = 2048;
-
 int32_t InitAttrs(struct AudioSampleAttributes &attrs)
 {
     attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
@@ -166,7 +167,7 @@ uint32_t PcmFormatToBits(int format)
 
 uint32_t PcmFramesToBytes(const struct AudioSampleAttributes attrs)
 {
-    if (attrs.channelCount < 1 || attrs.channelCount > 2) {
+    if (attrs.channelCount < MONO_CHANNEL || attrs.channelCount > SREREO_CHANNEL) {
         return 0;
     }
     uint32_t formatBits = PcmFormatToBits(attrs.format);
@@ -459,11 +460,11 @@ int32_t FrameStart(struct AudioHeadInfo wavHeadInfo, struct AudioRender *render,
     }
     uint32_t remainingDataSize = wavHeadInfo.dataSize;
     uint32_t bufferSize = PcmFramesToBytes(attrs);
-    if (bufferSize <= 0) {
+    if (bufferSize == 0) {
         return HDF_FAILURE;
     }
     char *frame = nullptr;
-    frame = (char *)calloc(1, bufferSize);
+    frame = reinterpret_cast<char *>(calloc(1, bufferSize));
     if (frame == nullptr) {
         return HDF_ERR_MALLOC_FAIL;
     }
@@ -512,11 +513,11 @@ int32_t FrameStartCapture(struct AudioCapture *capture, FILE *file, const struct
         return HDF_FAILURE;
     }
     bufferSize = FRAME_COUNT * pcmBytes;
-    if (bufferSize <= 0) {
+    if (bufferSize == 0) {
         return HDF_FAILURE;
     }
     char *frame = nullptr;
-    frame = (char *)calloc(1, bufferSize);
+    frame = reinterpret_cast<char *>(calloc(1, bufferSize));
     if (frame == nullptr) {
         return HDF_ERR_MALLOC_FAIL;
     }
@@ -539,6 +540,7 @@ int32_t RenderFramePrepare(const std::string &path, char *&frame, uint64_t &read
 {
     int32_t ret = -1;
     size_t numRead = 0;
+    uint32_t bufferSize = 4096;
     uint32_t remainingDataSize = 0;
     struct AudioSampleAttributes attrs = {};
     struct AudioHeadInfo headInfo = {};
@@ -556,13 +558,13 @@ int32_t RenderFramePrepare(const std::string &path, char *&frame, uint64_t &read
         fclose(file);
         return HDF_FAILURE;
     }
-    frame = (char *)calloc(1, BUFFER_SIZE);
+    frame = reinterpret_cast<char *>(calloc(1, bufferSize));
     if (frame == nullptr) {
         fclose(file);
         return HDF_ERR_MALLOC_FAIL;
     }
     remainingDataSize = headInfo.dataSize;
-    readSize = (remainingDataSize) > (BUFFER_SIZE) ? (BUFFER_SIZE) : (remainingDataSize);
+    readSize = (remainingDataSize) > (bufferSize) ? (bufferSize) : (remainingDataSize);
     size_t readSizes = static_cast<size_t>(readSize);
     numRead = fread(frame, readSizes, 1, file);
     if (numRead < 1) {
@@ -595,7 +597,7 @@ int32_t StartRecord(struct AudioCapture *capture, FILE *file, uint64_t filesize)
     if (ret < 0) {
         return ret;
     }
-    char *frame = (char *)calloc(1, BUFFER_LENTH);
+    char *frame = reinterpret_cast<char *>(calloc(1, BUFFER_LENTH));
     if (frame == nullptr) {
         return HDF_ERR_MALLOC_FAIL;
     }
@@ -618,7 +620,7 @@ int32_t StartRecord(struct AudioCapture *capture, FILE *file, uint64_t filesize)
             tryNumFrame = 0;
             uint32_t replyByte = static_cast<uint32_t>(replyBytes);
             size_t writeRet = fwrite(frame, replyByte, 1, file);
-            if (writeRet < 0) {
+            if (writeRet == 0) {
                 free(frame);
                 frame = nullptr;
                 return HDF_FAILURE;
@@ -779,6 +781,9 @@ int32_t CheckRegisterStatus(const struct AudioCtlElemId firstId, const struct Au
 
 int32_t StopAudio(struct PrepareAudioPara &audiopara)
 {
+    if (audiopara.manager == nullptr || audiopara.adapter == nullptr) {
+        return HDF_FAILURE;
+    }
     int32_t ret = -1;
     if (audiopara.capture != nullptr) {
         ret = audiopara.capture->control.Stop((AudioHandle)(audiopara.capture));
@@ -804,10 +809,8 @@ int32_t StopAudio(struct PrepareAudioPara &audiopara)
         audiopara.adapter->DestroyRender(audiopara.adapter, audiopara.render);
         audiopara.render = nullptr;
     }
-    if (audiopara.manager != nullptr && audiopara.adapter != nullptr) {
-        audiopara.manager->UnloadAdapter(audiopara.manager, audiopara.adapter);
-        audiopara.adapter = nullptr;
-    }
+    audiopara.manager->UnloadAdapter(audiopara.manager, audiopara.adapter);
+    audiopara.adapter = nullptr;
     return AUDIO_HAL_SUCCESS;
 }
 
@@ -1021,27 +1024,72 @@ int32_t AudioRenderCallback(enum AudioCallbackType type, void *reserved, void *c
 }
 int32_t CheckWriteCompleteValue()
 {
-    if (g_writeCompleted == AUDIO_WRITE_COMPLETED_VALUE) {
+    if (g_writeCompleted == AUDIO_WRITE_COMPLETED_VALUE)
         return HDF_SUCCESS;
-    } else {
+    else
         return HDF_FAILURE;
-    }
 }
 int32_t CheckRenderFullValue()
 {
-    if (g_renderFull == AUDIO_RENDER_FULL_VALUE) {
+    if (g_renderFull == AUDIO_RENDER_FULL_VALUE)
         return HDF_SUCCESS;
-    } else {
+    else
         return HDF_FAILURE;
-    }
 }
 int32_t CheckFlushValue()
 {
-    if (g_flushCompleted == AUDIO_FLUSH_COMPLETED_VALUE) {
+    if (g_flushCompleted == AUDIO_FLUSH_COMPLETED_VALUE)
         return HDF_SUCCESS;
-    } else {
+    else
+        return HDF_FAILURE;
+}
+int32_t LoadFunction(void *&handle, TestGetAudioManager &getAudioManager)
+{
+    char absPath[PATH_MAX] = {0};
+    if (realpath(RESOLVED_PATH.c_str(), absPath) == nullptr) {
         return HDF_FAILURE;
     }
+    handle = dlopen(absPath, RTLD_LAZY);
+    if (handle == nullptr) {
+        return HDF_FAILURE;
+    }
+    getAudioManager = (TestGetAudioManager)(dlsym(handle, FUNCTION_NAME.c_str()));
+    if (getAudioManager == nullptr) {
+        return HDF_FAILURE;
+    }
+    return HDF_SUCCESS;
+}
+int32_t ReleaseCaptureSource(struct AudioManager *manager, struct AudioAdapter *&adapter,
+    struct AudioCapture *&capture)
+{
+    if (manager == nullptr || adapter == nullptr || capture == nullptr ||
+        adapter->DestroyCapture == nullptr || manager->UnloadAdapter == nullptr) {
+        return HDF_FAILURE;
+    }
+    int32_t ret = adapter->DestroyCapture(adapter, capture);
+    if (ret != HDF_SUCCESS) {
+        return ret;
+    }
+    capture = nullptr;
+    manager->UnloadAdapter(manager, adapter);
+    adapter = nullptr;
+    return HDF_SUCCESS;
+}
+int32_t ReleaseRenderSource(struct AudioManager *manager, struct AudioAdapter *&adapter,
+    struct AudioRender *&render)
+{
+    if (manager == nullptr || adapter == nullptr || render == nullptr ||
+        adapter->DestroyRender == nullptr || manager->UnloadAdapter == nullptr) {
+        return HDF_FAILURE;
+    }
+    int32_t ret = adapter->DestroyRender(adapter, render);
+    if (ret != HDF_SUCCESS) {
+        return ret;
+    }
+    render = nullptr;
+    manager->UnloadAdapter(manager, adapter);
+    adapter = nullptr;
+    return HDF_SUCCESS;
 }
 }
 }

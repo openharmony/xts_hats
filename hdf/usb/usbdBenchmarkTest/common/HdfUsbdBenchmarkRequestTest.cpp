@@ -138,7 +138,7 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0090)
     struct UsbDev dev = dev_;
     auto ret = 0;
     for (auto _ : st) {
-        ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+        ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     }
     ASSERT_EQ(0, ret);
 }
@@ -161,7 +161,7 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0100)
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t altIndex = 0;
     struct UsbDev dev = dev_;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     ASSERT_EQ(0, ret);
     for (auto _ : st) {
         ret = g_usbInterface->SetInterface(dev, interfaceId, altIndex);
@@ -316,7 +316,7 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0160)
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t pointid = POINTID_129;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     ASSERT_EQ(0, ret);
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
     uint8_t buffer[LENGTH_NUM_255] = { 0 };
@@ -349,7 +349,7 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0170)
     struct UsbDev dev = dev_;
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     ASSERT_EQ(0, ret);
     uint8_t buffer[LENGTH_NUM_255] = {};
     uint32_t length = LENGTH_NUM_255;
@@ -390,7 +390,7 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0180)
     struct UsbDev dev = dev_;
     uint8_t buffer[LENGTH_NUM_255] = "request001";
     uint32_t length = LENGTH_NUM_255;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     EXPECT_TRUE(ret == 0);
     struct UsbPipe pipe = { interfaceId, pointid };
     std::vector<uint8_t> clientdata = { tag, tag + TAG_NUM_10 };

@@ -197,6 +197,20 @@ HWTEST_F(CodecProxyTest, HdfCodecHdiV1CreateCodecByTypeTest_003, TestSize.Level1
     ASSERT_EQ(errorCode, HDF_ERR_NOT_SUPPORT);
 }
 
+HWTEST_F(CodecProxyTest, HdfCodecHdiV1CreateCodecByTypeTest_004 TestSize.Level1)
+{
+    AvCodecMime mime = MEDIA_MIMETYPE_VIDEO_AVC;
+    int32_t errorCode = g_codecObj->CodecCreateByType(g_codecObj, AUDIO_ENCODER, mime, &g_handle);
+    ASSERT_EQ(errorCode, HDF_ERR_NOT_SUPPORT);
+}
+
+HWTEST_F(CodecProxyTest, HdfCodecHdiV1CreateCodecByTypeTest_005, TestSize.Level1)
+{
+    AvCodecMime mime = MEDIA_MIMETYPE_VIDEO_AVC;
+    int32_t errorCode = g_codecObj->CodecCreateByType(g_codecObj, INVALID_TYPE, mime, &g_handle);
+    ASSERT_EQ(errorCode, HDF_ERR_NOT_SUPPORT);
+}
+
 HWTEST_F(CodecProxyTest, HdfCodecHdiV1SetPortModeTest_001, TestSize.Level1)
 {
     DirectionType direct = OUTPUT_TYPE;

@@ -620,6 +620,97 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0260, Function |
                                                       tunneledPort, &tunnelSetup);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
+
+/**
+* @tc.name HdfCodecHdiTunnelRequestUnsupportedTest_002
+* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0261
+* @tc.desc Invoke the ComponentTunnelRequest interface to set component pipe communication
+*/
+HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0261, Function | MediumTest | Level3)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    const int32_t tunneledComp = 1002;
+    const uint32_t tunneledPort = 101;
+    OMX_TUNNELSETUPTYPE tunnelSetup;
+    tunnelSetup.eSupplier = OMX_BufferSupplyUnspecified;
+
+    int32_t ret = g_component->ComponentTunnelRequest(g_component, (uint32_t)PortIndex::PORT_INDEX_OUTPUT, tunneledComp,
+                                                      tunneledPort, &tunnelSetup);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.name HdfCodecHdiTunnelRequestUnsupportedTest_003
+* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0262
+* @tc.desc Invoke the ComponentTunnelRequest interface to set component pipe communication
+*/
+HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0262, Function | MediumTest | Level3)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    const int32_t tunneledComp = 1002;
+    const uint32_t tunneledPort = 101;
+    OMX_TUNNELSETUPTYPE tunnelSetup;
+    tunnelSetup.eSupplier = OMX_BufferSupplyOutput;
+
+    int32_t ret = g_component->ComponentTunnelRequest(g_component, (uint32_t)PortIndex::PORT_INDEX_OUTPUT, tunneledComp,
+                                                      tunneledPort, &tunnelSetup);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.name HdfCodecHdiTunnelRequestUnsupportedTest_004
+* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0263
+* @tc.desc Invoke the ComponentTunnelRequest interface to set component pipe communication
+*/
+HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0263, Function | MediumTest | Level3)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    const int32_t tunneledComp = 1002;
+    const uint32_t tunneledPort = 101;
+    OMX_TUNNELSETUPTYPE tunnelSetup;
+    tunnelSetup.eSupplier = OMX_BufferSupplyKhronosExtensions;
+
+    int32_t ret = g_component->ComponentTunnelRequest(g_component, (uint32_t)PortIndex::PORT_INDEX_OUTPUT, tunneledComp,
+                                                      tunneledPort, &tunnelSetup);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.name HdfCodecHdiTunnelRequestUnsupportedTest_005
+* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0264
+* @tc.desc Invoke the ComponentTunnelRequest interface to set component pipe communication
+*/
+HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0264, Function | MediumTest | Level3)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    const int32_t tunneledComp = 1002;
+    const uint32_t tunneledPort = 101;
+    OMX_TUNNELSETUPTYPE tunnelSetup;
+    tunnelSetup.eSupplier = OMX_BufferSupplyVendorStartUnused;
+
+    int32_t ret = g_component->ComponentTunnelRequest(g_component, (uint32_t)PortIndex::PORT_INDEX_OUTPUT, tunneledComp,
+                                                      tunneledPort, &tunnelSetup);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.name HdfCodecHdiTunnelRequestUnsupportedTest_006
+* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0265
+* @tc.desc Invoke the ComponentTunnelRequest interface to set component pipe communication
+*/
+HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0265, Function | MediumTest | Level3)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    const int32_t tunneledComp = 1002;
+    const uint32_t tunneledPort = 101;
+    OMX_TUNNELSETUPTYPE tunnelSetup;
+    tunnelSetup.eSupplier = OMX_BufferSupplyMax;
+
+    int32_t ret = g_component->ComponentTunnelRequest(g_component, (uint32_t)PortIndex::PORT_INDEX_OUTPUT, tunneledComp,
+                                                      tunneledPort, &tunnelSetup);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
 /**
 * @tc.name HdfCodecHdiAllocateBufferInvalidInputBufferTypeTest_001
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0270
@@ -968,6 +1059,85 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0460, Function |
     int32_t ret = g_component->SendCommand(g_component, OMX_CommandMax, OMX_StatePause, nullptr, 0);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
+
+/**
+* @tc.name HdfCodecHdiSendCommandAbnormalCommandTest_006_1
+* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0461
+* @tc.desc When OMX_COMMANDTYPE is set to OMX_CommandFlush, the SendCommand
+           interface is invoked to send instructions
+*/
+HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0461, Function | MediumTest | Level3)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    int32_t ret = g_component->SendCommand(g_component, OMX_CommandFlush, OMX_StatePause, nullptr, 0);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.name HdfCodecHdiSendCommandAbnormalCommandTest_006_2
+* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0462
+* @tc.desc When OMX_COMMANDTYPE is set to OMX_CommandPortDisable, the SendCommand
+           interface is invoked to send instructions
+*/
+HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0462, Function | MediumTest | Level3)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    int32_t ret = g_component->SendCommand(g_component, OMX_CommandPortDisable, OMX_StatePause, nullptr, 0);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.name HdfCodecHdiSendCommandAbnormalCommandTest_006_3
+* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0463
+* @tc.desc When OMX_COMMANDTYPE is set to OMX_CommandPortEnable, the SendCommand
+           interface is invoked to send instructions
+*/
+HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0463, Function | MediumTest | Level3)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    int32_t ret = g_component->SendCommand(g_component, OMX_CommandPortEnable, OMX_StatePause, nullptr, 0);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.name HdfCodecHdiSendCommandAbnormalCommandTest_006_4
+* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0464
+* @tc.desc When OMX_COMMANDTYPE is set to OMX_CommandMarkBuffer, the SendCommand
+           interface is invoked to send instructions
+*/
+HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0464, Function | MediumTest | Level3)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    int32_t ret = g_component->SendCommand(g_component, OMX_CommandMarkBuffer, OMX_StatePause, nullptr, 0);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.name HdfCodecHdiSendCommandAbnormalCommandTest_006_5
+* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0465
+* @tc.desc When OMX_COMMANDTYPE is set to OMX_CommandKhronosExtensions, the SendCommand
+           interface is invoked to send instructions
+*/
+HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0465, Function | MediumTest | Level3)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    int32_t ret = g_component->SendCommand(g_component, OMX_CommandKhronosExtensions, OMX_StatePause, nullptr, 0);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.name HdfCodecHdiSendCommandAbnormalCommandTest_006_6
+* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0466
+* @tc.desc When OMX_COMMANDTYPE is set to OMX_CommandVendorStartUnused, the SendCommand
+           interface is invoked to send instructions
+*/
+HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0466, Function | MediumTest | Level3)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    int32_t ret = g_component->SendCommand(g_component, OMX_CommandVendorStartUnused, OMX_StatePause, nullptr, 0);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
 /**
 * @tc.name HdfCodecHdiSendCommandAbnormalParamTest_007
 * @tc.number  SUB_DriverSystem_CodecHdi_adapter_0470

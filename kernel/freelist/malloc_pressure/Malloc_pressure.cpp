@@ -62,7 +62,7 @@ HWTEST_F(MallocPressure, pressureTest0100, Function | MediumTest | Level1)
         for (size_t size = 0; size < THRESHOLD; size += SIZE_ALIGN + 1) {
             void *ptr = malloc(size);
             if (!ptr) {
-                printf("Malloc failed for size %u\n", size);
+                printf("Malloc failed for size %zu\n", size);
                 ASSERT_TRUE(true) << "malloc error = " << errno;
             }
             free(ptr);

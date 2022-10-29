@@ -305,7 +305,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1010, Function | MediumTest | Level1)
 {
     uint8_t interfaceId = INTERFACEID_1;
     struct UsbDev dev = dev_;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1010 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
@@ -322,7 +322,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1020, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_1;
     struct UsbDev dev = dev_;
     dev.busNum = 20;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1020 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
@@ -338,7 +338,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1030, Function | MediumTest | Level1)
 {
     uint8_t interfaceId = INTERFACEID_1;
     struct UsbDev dev = { dev_.busNum, DEV_ADDR_255 };
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1030 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
@@ -355,7 +355,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1040, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_1;
     struct UsbDev dev = dev_;
     interfaceId = 255;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1040 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
@@ -371,7 +371,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1050, Function | MediumTest | Level1)
 {
     uint8_t interfaceId = INTERFACEID_1;
     struct UsbDev dev = { BUS_NUM_255, DEV_ADDR_255 };
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1050 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
@@ -387,7 +387,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1060, Function | MediumTest | Level1)
 {
     uint8_t interfaceId = 255;
     struct UsbDev dev = { BUS_NUM_255, dev_.devAddr };
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1060 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
@@ -403,7 +403,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1070, Function | MediumTest | Level1)
 {
     uint8_t interfaceId = 255;
     struct UsbDev dev = { dev_.busNum, DEV_ADDR_255 };
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1070 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
@@ -419,7 +419,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1080, Function | MediumTest | Level1)
 {
     uint8_t interfaceId = 255;
     struct UsbDev dev = { BUS_NUM_255, DEV_ADDR_255 };
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1080 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
@@ -438,7 +438,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1170, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t altIndex = 0;
     struct UsbDev dev = dev_;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1170 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     ret = g_usbInterface->SetInterface(dev, interfaceId, altIndex);
@@ -458,7 +458,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1180, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t altIndex = 0;
     struct UsbDev dev = dev_;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1180 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     dev.busNum = BUS_NUM_222;
@@ -479,7 +479,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1190, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t altIndex = 0;
     struct UsbDev dev = dev_;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1190 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     dev.devAddr = DEV_ADDR_222;
@@ -500,7 +500,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1200, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t altIndex = 222;
     struct UsbDev dev = dev_;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1200 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     interfaceId = 222;
@@ -521,7 +521,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1210, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t altIndex = 0;
     struct UsbDev dev = dev_;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1210 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     dev.busNum = 233;
@@ -543,7 +543,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1220, Function | MediumTest | Level1)
     int32_t interfaceId = INT32_INTERFACEID_1;
     uint8_t altIndex = 1;
     struct UsbDev dev = dev_;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1220 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     dev.busNum = 224;
@@ -565,7 +565,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1230, Function | MediumTest | Level1)
     int32_t interfaceId = INT32_INTERFACEID_1;
     uint8_t altIndex = 225;
     struct UsbDev dev = dev_;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1230 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     dev.devAddr = 225;
@@ -587,7 +587,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1240, Function | MediumTest | Level1)
     uint8_t altIndex = 225;
     int32_t interfaceId = INT32_INTERFACEID_1;
     struct UsbDev dev = dev_;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1240 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     dev.busNum = 225;
@@ -1207,7 +1207,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0790, Function | MediumTest | Level1)
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t pointid = POINTID_129;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0790 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
@@ -1235,7 +1235,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0800, Function | MediumTest | Level1)
     struct UsbDev dev = dev_;
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0800 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
@@ -1266,7 +1266,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0810, Function | MediumTest | Level1)
     uint8_t buffer[LENGTH_NUM_255] = { 0 };
     struct UsbDev dev = dev_;
     uint32_t length = LENGTH_NUM_255;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0810 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
@@ -1293,7 +1293,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0820, Function | MediumTest | Level1)
     struct UsbDev dev = dev_;
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0820 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
@@ -1325,7 +1325,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0830, Function | MediumTest | Level1)
     struct UsbDev dev = dev_;
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0830 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
@@ -1353,7 +1353,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0840, Function | MediumTest | Level1)
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
     uint32_t length = LENGTH_NUM_255;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0840 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
@@ -1383,7 +1383,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0850, Function | MediumTest | Level1)
     uint32_t length = LENGTH_NUM_255;
     uint8_t pointid = POINTID_1;
     uint8_t interfaceId = INTERFACEID_1;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0850 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue write";
@@ -1410,7 +1410,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0860, Function | MediumTest | Level1)
     uint32_t length = LENGTH_NUM_255;
     uint8_t pointid = POINTID_1;
     uint8_t interfaceId = INTERFACEID_1;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0860 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue write";
@@ -1438,7 +1438,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0870, Function | MediumTest | Level1)
     uint32_t length = LENGTH_NUM_255;
     uint8_t pointid = POINTID_1;
     uint8_t interfaceId = INTERFACEID_1;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0870 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue write";
@@ -1467,7 +1467,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0880, Function | MediumTest | Level1)
     struct UsbDev dev = dev_;
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0880 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     uint8_t buffer[LENGTH_NUM_255] = {};
@@ -1501,7 +1501,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0890, Function | MediumTest | Level1)
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
     struct UsbDev dev = dev_;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0890 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     uint8_t buffer[LENGTH_NUM_255] = {};
@@ -1536,7 +1536,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0900, Function | MediumTest | Level1)
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
     struct UsbDev dev = dev_;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0900 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
@@ -1571,7 +1571,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0910, Function | MediumTest | Level1)
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
     struct UsbDev dev = dev_;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0910 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     uint8_t buffer[LENGTH_NUM_255] = {};
@@ -1605,7 +1605,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0920, Function | MediumTest | Level1)
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
     struct UsbDev dev = dev_;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0920 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     uint32_t length = LENGTH_NUM_255;
@@ -1645,9 +1645,9 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0930, Function | MediumTest | Level1)
     struct UsbDev dev = dev_;
     uint8_t buffer[LENGTH_NUM_255] = "request001";
     uint32_t length = LENGTH_NUM_255;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0930 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
-    EXPECT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
     struct UsbPipe pipe = { interfaceId, pointid };
     std::vector<uint8_t> clientdata = { tag, tag + TAG_NUM_10 };
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
@@ -1674,9 +1674,9 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0940, Function | MediumTest | Level1)
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t buffer[LENGTH_NUM_255] = "request002";
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0940 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
-    EXPECT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
     struct UsbPipe pipe = { interfaceId, pointid };
     std::vector<uint8_t> clientdata = { tag, tag + TAG_NUM_10 };
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
@@ -1708,9 +1708,9 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0950, Function | MediumTest | Level1)
     uint32_t length = LENGTH_NUM_255;
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0950 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
-    EXPECT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
     std::vector<uint8_t> clientdata = { tag, tag + TAG_NUM_10 };
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
     struct UsbPipe pipe = { interfaceId, pointid };
@@ -1741,9 +1741,9 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0960, Function | MediumTest | Level1)
     uint8_t buffer[LENGTH_NUM_255] = "request004";
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0960 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
-    EXPECT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
     struct UsbPipe pipe = { interfaceId, pointid };
     std::vector<uint8_t> clientdata = { tag, tag + TAG_NUM_10 };
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
@@ -1771,9 +1771,9 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0970, Function | MediumTest | Level1)
     uint32_t length = LENGTH_NUM_255;
     uint8_t pointid = POINTID_1;
     uint8_t interfaceId = INTERFACEID_1;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0970 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
-    EXPECT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
     struct UsbPipe pipe = { interfaceId, pointid };
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue Write";
     std::vector<uint8_t> clientdata = { tag, tag + TAG_NUM_11 };
@@ -1800,9 +1800,9 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0980, Function | MediumTest | Level1)
     uint32_t length = LENGTH_NUM_255;
     uint8_t pointid = POINTID_1;
     uint8_t interfaceId = INTERFACEID_1;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0980 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
-    EXPECT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue Write";
     std::vector<uint8_t> clientdata = { tag, tag + TAG_NUM_11 };
     std::vector<uint8_t> bufferdata = { buffer, buffer + length };
@@ -1835,9 +1835,9 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_0990, Function | MediumTest | Level1)
     uint32_t length = LENGTH_NUM_255;
     uint8_t pointid = POINTID_1;
     uint8_t interfaceId = INTERFACEID_1;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_0990 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
-    EXPECT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
     struct UsbPipe pipe = { interfaceId, pointid };
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue Write";
     std::vector<uint8_t> clientdata = { tag, tag + TAG_NUM_11 };
@@ -1870,9 +1870,9 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1000, Function | MediumTest | Level1)
     uint8_t pointid = POINTID_1;
     uint8_t interfaceId = INTERFACEID_1;
     uint32_t length = LENGTH_NUM_255;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1000 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
-    EXPECT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue Write";
     struct UsbPipe pipe = { interfaceId, pointid };
     std::vector<uint8_t> clientdata = { tag, tag + TAG_NUM_11 };
@@ -2037,9 +2037,9 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_1990, Function | MediumTest | Level1)
     struct UsbDev dev = dev_;
     uint8_t buffer[LENGTH_NUM_255] = "request001";
     uint32_t length = LENGTH_NUM_255;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_1990 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
-    EXPECT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
     struct UsbPipe pipe = {interfaceId, pointid};
     std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_10};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
@@ -2066,9 +2066,9 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_2000, Function | MediumTest | Level1)
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
     uint8_t buffer[LENGTH_NUM_255] = "request002";
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_2000 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
-    EXPECT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
     struct UsbPipe pipe = {interfaceId, pointid};
     std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_10};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
@@ -2100,9 +2100,9 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_2010, Function | MediumTest | Level1)
     uint32_t length = LENGTH_NUM_255;
     uint8_t pointid = POINTID_129;
     uint8_t interfaceId = INTERFACEID_1;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_2010 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
-    EXPECT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
     std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_10};
     std::vector<uint8_t> bufferdata = {buffer, buffer + length};
     struct UsbPipe pipe = {interfaceId, pointid};
@@ -2132,9 +2132,9 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_2020, Function | MediumTest | Level1)
     uint8_t pointid = POINTID_1;
     uint8_t interfaceId = INTERFACEID_1;
     uint32_t length = LENGTH_NUM_255;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_2020 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
-    EXPECT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue Write";
     struct UsbPipe pipe = {interfaceId, pointid};
     std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_11};
@@ -2168,9 +2168,9 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HDI_2030, Function | MediumTest | Level1)
     uint32_t length = LENGTH_NUM_255;
     uint8_t pointid = POINTID_1;
     uint8_t interfaceId = INTERFACEID_1;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, true);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HDI_2030 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
-    EXPECT_TRUE(ret == 0);
+    ASSERT_EQ(0, ret);
     struct UsbPipe pipe = {interfaceId, pointid};
     uint8_t tag[TAG_LENGTH_NUM_1000] = "queue Write";
     std::vector<uint8_t> clientdata = {tag, tag + TAG_NUM_11};

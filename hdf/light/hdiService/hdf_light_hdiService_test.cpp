@@ -21,6 +21,7 @@
 #include "osal_time.h"
 #include "v1_0/ilight_interface.h"
 #include "light_type.h"
+#include <hdf_log.h>
 
 using namespace OHOS::HDI::Light::V1_0;
 using namespace testing::ext;
@@ -32,7 +33,6 @@ namespace {
     constexpr int32_t g_onTime = 500;
     constexpr int32_t g_offTime = 500;
     sptr<ILightInterface> g_lightInterface = nullptr;
-}
 
 class HdfLightHdiServiceTest : public testing::Test {
 public:
@@ -113,7 +113,7 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_LightHdi_0030, Function | Medi
         effect.lightColor.colorValue.rgbColor.r = 255;
         effect.lightColor.colorValue.rgbColor.g = 0;
         effect.lightColor.colorValue.rgbColor.b = 0;
-        effect.flashEffect.flashMode = HDF_LIGHT_FLASH_NONE;
+        effect.flashEffect.flashMode = LIGHT_FLASH_NONE;
         int32_t ret = g_lightInterface->TurnOnLight(iter.lightId, effect);
         EXPECT_EQ(HDF_SUCCESS, ret);
         OsalSleep(g_sleepTime);
@@ -145,7 +145,7 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_LightHdi_0040, Function | Medi
         effect.lightColor.colorValue.rgbColor.r = 255;
         effect.lightColor.colorValue.rgbColor.g = 0;
         effect.lightColor.colorValue.rgbColor.b = 0;
-        effect.flashEffect.flashMode = HDF_LIGHT_FLASH_BUTT;
+        effect.flashEffect.flashMode = LIGHT_FLASH_BUTT;
         int32_t ret = g_lightInterface->TurnOnLight(iter.lightId, effect);
         EXPECT_EQ(LIGHT_NOT_FLASH, ret);
     }
@@ -174,11 +174,43 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_LightHdi_0050, Function | Medi
         effect.lightColor.colorValue.rgbColor.r = 255;
         effect.lightColor.colorValue.rgbColor.g = 0;
         effect.lightColor.colorValue.rgbColor.b = 0;
-        effect.flashEffect.flashMode = HDF_LIGHT_FLASH_BLINK;
+        effect.flashEffect.flashMode = LIGHT_FLASH_BLINK;
         effect.flashEffect.onTime = g_onTime;
         effect.flashEffect.offTime = g_offTime;
         int32_t ret = g_lightInterface->TurnOnLight(iter.lightId, effect);
         EXPECT_EQ(HDF_SUCCESS, ret);
+        OsalSleep(g_sleepTime);
+        ret = g_lightInterface->TurnOffLight(iter.lightId);
+        EXPECT_EQ(HDF_SUCCESS, ret);
+    }
+}
+
+/**
+  * @tc.name: TurnOnLight005
+  * @tc.desc: TurnOnLight.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_LightHdi_0170, Function | MediumTest | Level1)
+{
+    ASSERT_NE(nullptr, g_lightInterface);
+
+    std::vector<HdfLightInfo> info;
+    int32_t ret = g_lightInterface->GetLightInfo(info);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+    printf("get light list num[%zu]\n\r", info.size());
+
+    for (auto iter : info)
+    {
+        EXPECT_GE(iter.lightId, g_minLightId);
+        EXPECT_LE(iter.lightId, g_maxLightId);
+
+        HdfLightEffect effect;
+        effect.lightColor.colorValue.rgbColor.r = 255;
+        effect.lightColor.colorValue.rgbColor.g = 0;
+        effect.lightColor.colorValue.rgbColor.b = 0;
+        effect.flashEffect.flashMode = LIGHT_FLASH_GRADIENT;
+        int32_t ret = g_lightInterface->TurnOnLight(iter.lightId, effect);
+        EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
         OsalSleep(g_sleepTime);
         ret = g_lightInterface->TurnOffLight(iter.lightId);
         EXPECT_EQ(HDF_SUCCESS, ret);
@@ -199,4 +231,22 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_LightHdi_0160, Function | Medi
     EXPECT_EQ(LIGHT_NOT_SUPPORT, ret);
     ret  = g_lightInterface->TurnOffLight(HDF_LIGHT_ID_BUTT);
     EXPECT_EQ(LIGHT_NOT_SUPPORT, ret);
+}
+
+/**
+  * @tc.name: DisableLight002
+  * @tc.desc: DisableLight.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_LightHdi_0180, Function | MediumTest | Level1)
+{
+    ASSERT_NE(nullptr, g_lightInterface);
+
+    HdfLightEffect effect;
+    int32_t ret  = g_lightInterface->TurnOnLight(HDF_LIGHT_ID_NOTIFICATIONS, effect);
+    EXPECT_EQ(LIGHT_NOT_SUPPORT, ret);
+    ret  = g_lightInterface->TurnOffLight(HDF_LIGHT_ID_NOTIFICATIONS);
+    EXPECT_EQ(LIGHT_NOT_SUPPORT, ret);
+}
+
 }

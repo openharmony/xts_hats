@@ -23,6 +23,7 @@ using namespace OHOS::HDI::PinAuth::V1_0;
 
 static ExecutorImpl g_executorImpl(make_shared<OHOS::UserIam::PinAuth::PinAuth>());
 static OHOS::Parcel parcel;
+int32_t Expectedvalue = NULL;
 
 void UserIamPinAuthTest::SetUpTestCase()
 {
@@ -112,7 +113,7 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0101, Function | Medi
     FillTestExecutorInfo(parcel, executorInfo);
     int32_t ret = g_executorImpl.GetExecutorInfo(executorInfo);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 2);
+    ASSERT_EQ(ret != Expectedvalue, true);
 }
 
 /**
@@ -130,7 +131,7 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0102, Function | Medi
     FillTestTemplateInfo(parcel, templateInfo);
     int32_t ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 2);
+    ASSERT_EQ(ret != Expectedvalue, true);
 }
 
 /**
@@ -170,7 +171,7 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0104, Function | Medi
     FillTestUint8Vector(parcel, data);
     int32_t ret = g_executorImpl.OnSetData(scheduleId, authSubType, data);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, -1);
+    ASSERT_EQ(ret != Expectedvalue, true);
 }
 
 /**
@@ -210,7 +211,7 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0106, Function | Medi
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.Authenticate(scheduleId, templateId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, -1);
+    ASSERT_EQ(ret != Expectedvalue, true);
 }
 
 /**
@@ -226,7 +227,7 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0107, Function | Medi
     uint64_t templateId = parcel.ReadUint64();
     int32_t ret = g_executorImpl.Delete(templateId);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 2);
+    ASSERT_EQ(ret != Expectedvalue, true);
 }
 
 /**

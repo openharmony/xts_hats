@@ -112,7 +112,7 @@ static int32_t HalCallbackEvent(uint32_t event, void *respData, const char *ifNa
 
 /**
  * @tc.name: WifiHalCreateAndDestroyFeature001
- * @tc.desc: Wifi hal create and destroy feature function test
+ * @tc.desc: Wifi hal create and destroy feature function test_01
  * @tc.type: FUNC
  */
 
@@ -131,7 +131,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateAndDestroyFeature_0001, Function | Medi
 
 /**
  * @tc.name: WifiHalCreateAndDestroyFeature002
- * @tc.desc: Wifi hal create and destroy feature function test
+ * @tc.desc: Wifi hal create and destroy feature function test_02
  * @tc.type: FUNC
  */
 
@@ -150,7 +150,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateAndDestroyFeature_0002, Function | Medi
 
 /**
  * @tc.name: WifiHalCreateAndDestroyFeature003
- * @tc.desc: Wifi hal create and destroy feature function test
+ * @tc.desc: Wifi hal create and destroy feature function test_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateAndDestroyFeature_0003, Function | MediumTest | Level1)
@@ -168,7 +168,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateAndDestroyFeature_0003, Function | Medi
 
 /**
  * @tc.name: WifiHalCreateAndDestroyFeature004
- * @tc.desc: Wifi hal create and destroy feature function test
+ * @tc.desc: Wifi hal create and destroy feature function test_04
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateAndDestroyFeature_0004, Function | MediumTest | Level1)
@@ -186,7 +186,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateAndDestroyFeature_0004, Function | Medi
 
 /**
  * @tc.name: WifiHalCreateFeature001
- * @tc.desc: Wifi hal create feature function test
+ * @tc.desc: Wifi hal create feature function test_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateFeature_0001, Function | MediumTest | Level1)
@@ -198,7 +198,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateFeature_0001, Function | MediumTest | L
 
 /**
  * @tc.name: WifiHalCreateFeature002
- * @tc.desc: Wifi hal create feature function test
+ * @tc.desc: Wifi hal create feature function test_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateFeature_0002, Function | MediumTest | Level1)
@@ -210,7 +210,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateFeature_0002, Function | MediumTest | L
 
 /**
  * @tc.name: WifiHalCreateFeature003
- * @tc.desc: Wifi hal create feature function test
+ * @tc.desc: Wifi hal create feature function test_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateFeature_0003, Function | MediumTest | Level1)
@@ -224,7 +224,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateFeature_0003, Function | MediumTest | L
 
 /**
  * @tc.name: WifiHalCreateFeature004
- * @tc.desc: Wifi hal create feature function test
+ * @tc.desc: Wifi hal create feature function test_04
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateFeature_0004, Function | MediumTest | Level1)
@@ -238,7 +238,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateFeature_0004, Function | MediumTest | L
 
 /**
  * @tc.name: WifiHalGetFeatureByIfName001
- * @tc.desc: Wifi hal get feature by ifname function test
+ * @tc.desc: Wifi hal get feature by ifname function test_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0001, Function | MediumTest | Level1)
@@ -259,7 +259,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0001, Function | MediumTes
 
 /**
  * @tc.name: WifiHalGetFeatureByIfName002
- * @tc.desc: Wifi hal get feature by ifname function test
+ * @tc.desc: Wifi hal get feature by ifname function test_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0002, Function | MediumTest | Level1)
@@ -281,7 +281,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0002, Function | MediumTes
 
 /**
  * @tc.name: WifiHalGetFeatureByIfName003
- * @tc.desc: Wifi hal get feature by ifname function test
+ * @tc.desc: Wifi hal get feature by ifname function test_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0003, Function | MediumTest | Level1)
@@ -303,7 +303,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0003, Function | MediumTes
 
 /**
  * @tc.name: WifiHalGetFeatureByIfName004
- * @tc.desc: Wifi hal get feature by ifname function test
+ * @tc.desc: Wifi hal get feature by ifname function test_04
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0004, Function | MediumTest | Level1)
@@ -323,7 +323,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0004, Function | MediumTes
 
 /**
  * @tc.name: WifiHalGetFeatureByIfName005
- * @tc.desc: Wifi hal get feature by ifname function test
+ * @tc.desc: Wifi hal get feature by ifname function test_05
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0005, Function | MediumTest | Level1)
@@ -344,7 +344,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0005, Function | MediumTes
 
 /**
  * @tc.name: WifiHalGetFeatureByIfName006
- * @tc.desc: Wifi hal get feature by ifname function test
+ * @tc.desc: Wifi hal get feature by ifname function test_06
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0006, Function | MediumTest | Level1)
@@ -365,7 +365,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0006, Function | MediumTes
 }
 /**
  * @tc.name: WifiHalRegisterEventCallback001
- * @tc.desc: Wifi hal register callback function test
+ * @tc.desc: Wifi hal register callback function test_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_RegisterEventCallback_0001, Function | MediumTest | Level1)
@@ -378,7 +378,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_RegisterEventCallback_0001, Function | Medium
 
 /**
  * @tc.name: WifiHalRegisterEventCallback002
- * @tc.desc: Wifi hal register event callback test
+ * @tc.desc: Wifi hal register event callback test_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_RegisterEventCallback_0002, Function | MediumTest | Level1)
@@ -392,7 +392,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_RegisterEventCallback_0002, Function | Medium
 
 /**
  * @tc.name: WifiHalRegisterEventCallback003
- * @tc.desc: Wifi hal register event callback test
+ * @tc.desc: Wifi hal register event callback test_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_RegisterEventCallback_0003, Function | MediumTest | Level1)
@@ -405,7 +405,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_RegisterEventCallback_0003, Function | Medium
 
 /**
  * @tc.name: WifiHalUnRegisterEventCallback001
- * @tc.desc: Wifi hal unregister callback function test
+ * @tc.desc: Wifi hal unregister callback function test_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_UnRegisterEventCallback_0001, Function | MediumTest | Level1)
@@ -418,7 +418,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_UnRegisterEventCallback_0001, Function | Medi
 
 /**
  * @tc.name: WifiHalUnRegisterEventCallback002
- * @tc.desc: Wifi hal unregister event callback test
+ * @tc.desc: Wifi hal unregister event callback test_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_UnRegisterEventCallback_0002, Function | MediumTest | Level1)
@@ -432,7 +432,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_UnRegisterEventCallback_0002, Function | Medi
 
 /**
  * @tc.name: WifiHalUnRegisterEventCallback003
- * @tc.desc: Wifi hal unregister event callback test
+ * @tc.desc: Wifi hal unregister event callback test_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_UnRegisterEventCallback_0003, Function | MediumTest | Level1)
@@ -445,7 +445,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_UnRegisterEventCallback_0003, Function | Medi
 
 /**
  * @tc.name: WifiHalGetNetworkIfaceName001
- * @tc.desc: Wifi hal get network iface name function test
+ * @tc.desc: Wifi hal get network iface name function test_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetworkIfaceName_0001, Function | MediumTest | Level1)
@@ -464,7 +464,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetworkIfaceName_0001, Function | MediumTe
 
 /**
  * @tc.name: WifiHalGetNetworkIfaceName002
- * @tc.desc: Wifi hal get network iface name function test
+ * @tc.desc: Wifi hal get network iface name function test_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetworkIfaceName_0002, Function | MediumTest | Level1)
@@ -484,7 +484,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetworkIfaceName_0002, Function | MediumTe
 
 /**
  * @tc.name: WifiHalGetNetworkIfaceName003
- * @tc.desc: Wifi hal get network iface name function test
+ * @tc.desc: Wifi hal get network iface name function test_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetworkIfaceName_0003, Function | MediumTest | Level1)
@@ -503,7 +503,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetworkIfaceName_0003, Function | MediumTe
 
 /**
  * @tc.name: WifiHalGetNetworkIfaceName004
- * @tc.desc: Wifi hal get network iface name function test
+ * @tc.desc: Wifi hal get network iface name function test_04
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetworkIfaceName_0004, Function | MediumTest | Level1)
@@ -530,7 +530,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetworkIfaceName_0004, Function | MediumTe
 
 /**
  * @tc.name: WifiHalGetFeatureType001
- * @tc.desc: Wifi hal get feature type function test
+ * @tc.desc: Wifi hal get feature type function test_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureType_0001, Function | MediumTest | Level1)
@@ -550,7 +550,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureType_0001, Function | MediumTest | 
 
 /**
  * @tc.name: WifiHalGetFeatureType002
- * @tc.desc: Wifi hal get feature type function test
+ * @tc.desc: Wifi hal get feature type function test_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureType_0002, Function | MediumTest | Level1)
@@ -570,7 +570,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureType_0002, Function | MediumTest | 
 
 /**
  * @tc.name: WifiHalGetFeatureType003
- * @tc.desc: Wifi hal get feature type function test
+ * @tc.desc: Wifi hal get feature type function test_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureType_0003, Function | MediumTest | Level1)
@@ -591,7 +591,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureType_0003, Function | MediumTest | 
 
 /**
  * @tc.name: WifiHalGetFeatureType004
- * @tc.desc: Wifi hal get feature type function test
+ * @tc.desc: Wifi hal get feature type function test_04
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureType_0004, Function | MediumTest | Level1)
@@ -612,7 +612,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureType_0004, Function | MediumTest | 
 
 /**
  * @tc.name: WifiHalSetMacAddress001
- * @tc.desc: Wifi hal set Mac address function test
+ * @tc.desc: Wifi hal set Mac address function test_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_SetMacAddress_0001, Function | MediumTest | Level1)
@@ -633,7 +633,7 @@ HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_SetMacAddress_0001, Function | MediumTest | 
 
 /**
  * @tc.name: WifiHalSetMacAddress002
- * @tc.desc: Wifi hal set Mac address function test
+ * @tc.desc: Wifi hal set Mac address function test_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_SetMacAddress_0002, Function | MediumTest | Level1)
@@ -652,7 +652,7 @@ HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_SetMacAddress_0002, Function | MediumTest | 
 
 /**
  * @tc.name: WifiHalSetMacAddress003
- * @tc.desc: Wifi hal set Mac address function test
+ * @tc.desc: Wifi hal set Mac address function test_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_SetMacAddress_0003, Function | MediumTest | Level1)
@@ -673,7 +673,7 @@ HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_SetMacAddress_0003, Function | MediumTest | 
 
 /**
  * @tc.name: WifiHalSetMacAddress004
- * @tc.desc: Wifi hal set Mac address function test
+ * @tc.desc: Wifi hal set Mac address function test_04
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_SetMacAddress_0004, Function | MediumTest | Level1)
@@ -694,7 +694,7 @@ HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_SetMacAddress_0004, Function | MediumTest | 
 
 /**
  * @tc.name: WifiHalSetMacAddress005
- * @tc.desc: Wifi hal set Mac address function test
+ * @tc.desc: Wifi hal set Mac address function test_05
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_SetMacAddress_0005, Function | MediumTest | Level1)
@@ -717,7 +717,7 @@ HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_SetMacAddress_0005, Function | MediumTest | 
 
 /**
  * @tc.name: WifiHalSetMacAddress006
- * @tc.desc: Wifi hal set Mac address function test
+ * @tc.desc: Wifi hal set Mac address function test_06
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetMacAddress_0006, Function | MediumTest | Level1)
@@ -738,7 +738,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetMacAddress_0006, Function | MediumTest | L
 
 /**
  * @tc.name: WifiHalSetMacAddress007
- * @tc.desc: Wifi hal set Mac address function test
+ * @tc.desc: Wifi hal set Mac address function test_07
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetMacAddress_0007, Function | MediumTest | Level1)
@@ -758,7 +758,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetMacAddress_0007, Function | MediumTest | L
 
 /**
  * @tc.name: WifiHalSetMacAddress008
- * @tc.desc: Wifi hal set Mac address function test
+ * @tc.desc: Wifi hal set Mac address function test_08
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetMacAddress_0008, Function | MediumTest | Level1)
@@ -779,7 +779,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetMacAddress_0008, Function | MediumTest | L
 
 /**
  * @tc.name: WifiHalSetMacAddress009
- * @tc.desc: Wifi hal set Mac address function test
+ * @tc.desc: Wifi hal set Mac address function test_09
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetMacAddress_0009, Function | MediumTest | Level1)
@@ -800,7 +800,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetMacAddress_0009, Function | MediumTest | L
 
 /**
  * @tc.name: WifiHalSetMacAddress010
- * @tc.desc: Wifi hal set Mac address function test
+ * @tc.desc: Wifi hal set Mac address function test_10
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetMacAddress_0010, Function | MediumTest | Level1)
@@ -823,7 +823,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetMacAddress_0010, Function | MediumTest | L
 
 /**
  * @tc.name: WifiHalSetTxPower001
- * @tc.desc: Wifi hal set transmit power function test
+ * @tc.desc: Wifi hal set transmit power function test_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0001, Function | MediumTest | Level1)
@@ -843,7 +843,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0001, Function | MediumTest | Leve
 
 /**
  * @tc.name: WifiHalSetTxPower002
- * @tc.desc: Wifi hal set transmit power function test
+ * @tc.desc: Wifi hal set transmit power function test_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0002, Function | MediumTest | Level1)
@@ -863,7 +863,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0002, Function | MediumTest | Leve
 
 /**
  * @tc.name: WifiHalSetTxPower003
- * @tc.desc: Wifi hal set transmit power function test
+ * @tc.desc: Wifi hal set transmit power function test_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0003, Function | MediumTest | Level1)
@@ -883,7 +883,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0003, Function | MediumTest | Leve
 
 /**
  * @tc.name: WifiHalSetTxPower004
- * @tc.desc: Wifi hal set transmit power function test
+ * @tc.desc: Wifi hal set transmit power function test_04
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0004, Function | MediumTest | Level1)
@@ -903,7 +903,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0004, Function | MediumTest | Leve
 
 /**
  * @tc.name: WifiHalSetTxPower005
- * @tc.desc: Wifi hal set transmit power function test
+ * @tc.desc: Wifi hal set transmit power function test_05
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0005, Function | MediumTest | Level1)
@@ -923,7 +923,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0005, Function | MediumTest | Leve
 
 /**
  * @tc.name: WifiHalSetTxPower006
- * @tc.desc: Wifi hal set transmit power function test
+ * @tc.desc: Wifi hal set transmit power function test_06
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0006, Function | MediumTest | Level1)
@@ -943,7 +943,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0006, Function | MediumTest | Leve
 
 /**
  * @tc.name: WifiHalSetCountryCode001
- * @tc.desc: Wifi hal set country code function test
+ * @tc.desc: Wifi hal set country code function test_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetCountryCode_0001, Function | MediumTest | Level1)
@@ -963,7 +963,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetCountryCode_0001, Function | MediumTest | 
 
 /**
  * @tc.name: WifiHalSetCountryCode002
- * @tc.desc: Wifi hal set country code function test
+ * @tc.desc: Wifi hal set country code function test_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetCountryCode_0002, Function | MediumTest | Level1)
@@ -983,7 +983,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetCountryCode_0002, Function | MediumTest | 
 
 /**
  * @tc.name: WifiHalSetCountryCode003
- * @tc.desc: Wifi hal set country code function test
+ * @tc.desc: Wifi hal set country code function test_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetCountryCode_0003, Function | MediumTest | Level1)
@@ -1003,7 +1003,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetCountryCode_0003, Function | MediumTest | 
 
 /**
  * @tc.name: WifiHalSetCountryCode004
- * @tc.desc: Wifi hal set country code function test
+ * @tc.desc: Wifi hal set country code function test_04
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetCountryCode_0004, Function | MediumTest | Level1)
@@ -1024,7 +1024,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetCountryCode_0004, Function | MediumTest | 
 
 /**
  * @tc.name: WifiHalSetCountryCode005
- * @tc.desc: Wifi hal set country code function test
+ * @tc.desc: Wifi hal set country code function test_05
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetCountryCode_0005, Function | MediumTest | Level1)
@@ -1044,7 +1044,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetCountryCode_0005, Function | MediumTest | 
 
 /**
  * @tc.name: WifiHalGetIfNamesByChipId001
- * @tc.desc: Obtain all ifNames and the number of the current chip
+ * @tc.desc: Obtain all ifNames and the number of the current chip_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0001, Function | MediumTest | Level1)
@@ -1077,7 +1077,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0001, Function | MediumTes
 
 /**
  * @tc.name: WifiHalGetIfNamesByChipId002
- * @tc.desc: Obtain all ifNames and the number of the current chip
+ * @tc.desc: Obtain all ifNames and the number of the current chip_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0002, Function | MediumTest | Level1)
@@ -1109,7 +1109,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0002, Function | MediumTes
 
 /**
  * @tc.name: WifiHalGetIfNamesByChipId003
- * @tc.desc: Obtain all ifNames and the number of the current chip
+ * @tc.desc: Obtain all ifNames and the number of the current chip_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0003, Function | MediumTest | Level1)
@@ -1142,7 +1142,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0003, Function | MediumTes
 
 /**
  * @tc.name: WifiHalGetIfNamesByChipId004
- * @tc.desc: Obtain all ifNames and the number of the current chip
+ * @tc.desc: Obtain all ifNames and the number of the current chip_04
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0004, Function | MediumTest | Level1)
@@ -1176,7 +1176,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0004, Function | MediumTes
 
 /**
  * @tc.name: WifiHalGetIfNamesByChipId005
- * @tc.desc: Obtain all ifNames and the number of the current chip
+ * @tc.desc: Obtain all ifNames and the number of the current chip_05
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0005, Function | MediumTest | Level1)
@@ -1210,7 +1210,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0005, Function | MediumTes
 
 /**
  * @tc.name: WifiHalGetIfNamesByChipId006
- * @tc.desc: Obtain all ifNames and the number of the current chip
+ * @tc.desc: Obtain all ifNames and the number of the current chip_06
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0006, Function | MediumTest | Level1)
@@ -1245,7 +1245,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0006, Function | MediumTes
 
 /**
  * @tc.name: WifiHalGetSupportFeature001
- * @tc.desc: Get supported features
+ * @tc.desc: Get supported features_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetSupportFeature_0001, Function | MediumTest | Level1)
@@ -1257,7 +1257,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetSupportFeature_0001, Function | MediumTest
 
 /**
  * @tc.name: WifiHalGetSupportFeature002
- * @tc.desc: Get supported features
+ * @tc.desc: Get supported features_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetSupportFeature_0002, Function | MediumTest | Level1)
@@ -1270,7 +1270,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetSupportFeature_0002, Function | MediumTest
 
 /**
  * @tc.name: WifiHalGetSupportFeature003
- * @tc.desc: Get supported features
+ * @tc.desc: Get supported features_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetSupportFeature_0003, Function | MediumTest | Level1)
@@ -1284,7 +1284,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetSupportFeature_0003, Function | MediumTest
 
 /**
  * @tc.name: HalGetChipId001
- * @tc.desc: wifi hal get chip ID function test
+ * @tc.desc: wifi hal get chip ID function test_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0001, Function | MediumTest | Level1)
@@ -1305,7 +1305,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0001, Function | MediumTest | Level
 
 /**
  * @tc.name: HalGetChipId002
- * @tc.desc: wifi hal get chip ID function test
+ * @tc.desc: wifi hal get chip ID function test_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0002, Function | MediumTest | Level1)
@@ -1325,7 +1325,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0002, Function | MediumTest | Level
 
 /**
  * @tc.name: HalGetChipId003
- * @tc.desc: wifi hal get chip ID function test
+ * @tc.desc: wifi hal get chip ID function test_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0003, Function | MediumTest | Level1)
@@ -1347,7 +1347,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0003, Function | MediumTest | Level
 
 /**
  * @tc.name: HalGetChipId004
- * @tc.desc: wifi hal get chip ID function test
+ * @tc.desc: wifi hal get chip ID function test_04
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0004, Function | MediumTest | Level1)
@@ -1368,7 +1368,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0004, Function | MediumTest | Level
 
 /**
  * @tc.name: HalGetChipId005
- * @tc.desc: wifi hal get chip ID function test
+ * @tc.desc: wifi hal get chip ID function test_05
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0005, Function | MediumTest | Level1)
@@ -1388,7 +1388,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0005, Function | MediumTest | Level
 
 /**
  * @tc.name: HalGetChipId006
- * @tc.desc: wifi hal get chip ID function test
+ * @tc.desc: wifi hal get chip ID function test_06
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0006, Function | MediumTest | Level1)
@@ -1410,7 +1410,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0006, Function | MediumTest | Level
 
 /**
  * @tc.name: WifiHalGetDeviceMacAddress001
- * @tc.desc: Get device Mac address for ap mode
+ * @tc.desc: Get device Mac address for ap mode_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0001, Function | MediumTest | Level1)
@@ -1432,7 +1432,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0001, Function | MediumTe
 
 /**
  * @tc.name: WifiHalGetDeviceMacAddress002
- * @tc.desc: Get device Mac address for ap mode
+ * @tc.desc: Get device Mac address for ap mode_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0002, Function | MediumTest | Level1)
@@ -1453,7 +1453,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0002, Function | MediumTe
 
 /**
  * @tc.name: WifiHalGetDeviceMacAddress003
- * @tc.desc: Get device Mac address for ap mode
+ * @tc.desc: Get device Mac address for ap mode_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0003, Function | MediumTest | Level1)
@@ -1475,7 +1475,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0003, Function | MediumTe
 
 /**
  * @tc.name: WifiHalGetDeviceMacAddress004
- * @tc.desc: Get device Mac address for ap mode
+ * @tc.desc: Get device Mac address for ap mode_04
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0004, Function | MediumTest | Level1)
@@ -1497,7 +1497,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0004, Function | MediumTe
 
 /**
  * @tc.name: WifiHalGetDeviceMacAddress005
- * @tc.desc: Get device Mac address for sta mode
+ * @tc.desc: Get device Mac address for sta mode_05
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0005, Function | MediumTest | Level1)
@@ -1519,7 +1519,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0005, Function | MediumTe
 
 /**
  * @tc.name: WifiHalGetDeviceMacAddress006
- * @tc.desc: Get device Mac address for sta mode
+ * @tc.desc: Get device Mac address for sta mode_06
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0006, Function | MediumTest | Level1)
@@ -1540,7 +1540,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0006, Function | MediumTe
 
 /**
  * @tc.name: WifiHalGetDeviceMacAddress007
- * @tc.desc: Get device Mac address for sta mode
+ * @tc.desc: Get device Mac address for sta mode_07
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0007, Function | MediumTest | Level1)
@@ -1562,7 +1562,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0007, Function | MediumTe
 
 /**
  * @tc.name: WifiHalGetDeviceMacAddress008
- * @tc.desc: Get device Mac address for sta mode
+ * @tc.desc: Get device Mac address for sta mode_08
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0008, Function | MediumTest | Level1)
@@ -1584,7 +1584,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0008, Function | MediumTe
 
 /**
  * @tc.name: WifiHaGetValidFreqsWithBand001
- * @tc.desc: Get available frequencies
+ * @tc.desc: Get available frequencies_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0001, Function | MediumTest | Level1)
@@ -1608,7 +1608,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0001, Function | Medium
 
 /**
  * @tc.name: WifiHaGetValidFreqsWithBand002
- * @tc.desc: Get available frequencies
+ * @tc.desc: Get available frequencies_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0002, Function | MediumTest | Level1)
@@ -1635,7 +1635,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0002, Function | Medium
 
 /**
  * @tc.name: WifiHaGetValidFreqsWithBand003
- * @tc.desc: Get available frequencies
+ * @tc.desc: Get available frequencies_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0003, Function | MediumTest | Level1)
@@ -1658,7 +1658,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0003, Function | Medium
 
 /**
  * @tc.name: WifiHaGetValidFreqsWithBand004
- * @tc.desc: Get available frequencies
+ * @tc.desc: Get available frequencies_04
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0004, Function | MediumTest | Level1)
@@ -1682,7 +1682,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0004, Function | Medium
 
 /**
  * @tc.name: WifiHaGetValidFreqsWithBand005
- * @tc.desc: Get available frequencies
+ * @tc.desc: Get available frequencies_05
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0005, Function | MediumTest | Level1)
@@ -1707,7 +1707,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0005, Function | Medium
 
 /**
  * @tc.name: WifiHaGetValidFreqsWithBand006
- * @tc.desc: Get available frequencies
+ * @tc.desc: Get available frequencies_06
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0006, Function | MediumTest | Level1)
@@ -1732,7 +1732,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0006, Function | Medium
 
 /**
  * @tc.name: GetValidFreqsWithBand007
- * @tc.desc: Wifi hal get valid frequency with specific band test
+ * @tc.desc: Wifi hal get valid frequency with specific band test_07
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0007, Function | MediumTest | Level1)
@@ -1756,7 +1756,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0007, Function | Medium
 
 /**
  * @tc.name: GetValidFreqsWithBand008
- * @tc.desc: Wifi hal get valid frequency with specific band test
+ * @tc.desc: Wifi hal get valid frequency with specific band test_08
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0008, Function | MediumTest | Level1)
@@ -1779,7 +1779,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0008, Function | Medium
 
 /**
  * @tc.name: GetValidFreqsWithBand009
- * @tc.desc: Wifi hal get valid frequency with specific band test
+ * @tc.desc: Wifi hal get valid frequency with specific band test_09
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0009, Function | MediumTest | Level1)
@@ -1801,7 +1801,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0009, Function | Medium
 
 /**
  * @tc.name: GetValidFreqsWithBand010
- * @tc.desc: Wifi hal get valid frequency with specific band test
+ * @tc.desc: Wifi hal get valid frequency with specific band test_10
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0010, Function | MediumTest | Level1)
@@ -1825,7 +1825,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0010, Function | Medium
 
 /**
  * @tc.name: GetValidFreqsWithBand011
- * @tc.desc: Wifi hal get valid frequency with specific band test
+ * @tc.desc: Wifi hal get valid frequency with specific band test_11
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0011, Function | MediumTest | Level1)
@@ -1850,7 +1850,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0011, Function | Medium
 
 /**
  * @tc.name: GetValidFreqsWithBand012
- * @tc.desc: Wifi hal get valid frequency with specific band test
+ * @tc.desc: Wifi hal get valid frequency with specific band test_12
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0012, Function | MediumTest | Level1)
@@ -1874,7 +1874,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0012, Function | Medium
 
 /**
  * @tc.name: WifiHalGetAssociatedStas001
- * @tc.desc: Get asscociated STA info
+ * @tc.desc: Get asscociated STA info_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0001, Function | MediumTest | Level1)
@@ -1897,7 +1897,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0001, Function | MediumTest
 
 /**
  * @tc.name: WifiHalGetAssociatedStas002
- * @tc.desc: Get asscociated STA info
+ * @tc.desc: Get asscociated STA info_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0002, Function | MediumTest | Level1)
@@ -1920,7 +1920,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0002, Function | MediumTest
 
 /**
  * @tc.name: WifiHalGetAssociatedStas003
- * @tc.desc: Get asscociated STA info
+ * @tc.desc: Get asscociated STA info_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0003, Function | MediumTest | Level1)
@@ -1944,7 +1944,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0003, Function | MediumTest
 
 /**
  * @tc.name: WifiHalGetAssociatedStas004
- * @tc.desc: Get asscociated STA info
+ * @tc.desc: Get asscociated STA info_04
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0004, Function | MediumTest | Level1)
@@ -1967,7 +1967,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0004, Function | MediumTest
 
 /**
  * @tc.name: WifiHalGetAssociatedStas005
- * @tc.desc: Get asscociated STA info
+ * @tc.desc: Get asscociated STA info_05
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0005, Function | MediumTest | Level1)
@@ -1990,7 +1990,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0005, Function | MediumTest
 
 /**
  * @tc.name: WifiHalSetScanningMacAddress001
- * @tc.desc: Set Mac address scanning
+ * @tc.desc: Set Mac address scanning_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetScanningMacAddress_0001, Function | MediumTest | Level1)
@@ -2011,7 +2011,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetScanningMacAddress_0001, Function | Medium
 
 /**
  * @tc.name: WifiHalSetScanningMacAddress002
- * @tc.desc: Set Mac address scanning
+ * @tc.desc: Set Mac address scanning_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetScanningMacAddress_0002, Function | MediumTest | Level1)
@@ -2031,7 +2031,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetScanningMacAddress_0002, Function | Medium
 
 /**
  * @tc.name: WifiHalSetScanningMacAddress003
- * @tc.desc: Set Mac address scanning
+ * @tc.desc: Set Mac address scanning_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetScanningMacAddress_0003, Function | MediumTest | Level1)
@@ -2052,7 +2052,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetScanningMacAddress_0003, Function | Medium
 
 /**
  * @tc.name: WifiHalSetScanningMacAddress004
- * @tc.desc: Set Mac address scanning
+ * @tc.desc: Set Mac address scanning_04
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetScanningMacAddress_0004, Function | MediumTest | Level1)
@@ -2074,7 +2074,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetScanningMacAddress_0004, Function | Medium
 
 /**
  * @tc.name: WifiHalGetNetDevInfo001
- * @tc.desc: Wifi hdi get netdev info function test
+ * @tc.desc: Wifi hdi get netdev info function test_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetDevInfo_0001, Function | MediumTest | Level1)
@@ -2093,7 +2093,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetDevInfo_0001, Function | MediumTest | L
 
 /**
  * @tc.name: WifiHalGetNetDevInfo002
- * @tc.desc: Wifi hdi get netdev info function test
+ * @tc.desc: Wifi hdi get netdev info function test_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetDevInfo_0002, Function | MediumTest | Level1)
@@ -2113,7 +2113,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetDevInfo_0002, Function | MediumTest | L
 
 /**
  * @tc.name: WifiHalStartScan001
- * @tc.desc: start scan is successfully
+ * @tc.desc: start scan is successfully_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_StartScan_0001, Function | MediumTest | Level3)
@@ -2135,7 +2135,7 @@ HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_StartScan_0001, Function | MediumTest | Leve
 
 /**
  * @tc.name: WifiHalStartScan002
- * @tc.desc: start scan is successfully
+ * @tc.desc: start scan is successfully_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_StartScan_0002, Function | MediumTest | Level3)
@@ -2156,7 +2156,7 @@ HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_StartScan_0002, Function | MediumTest | Leve
 
 /**
  * @tc.name: WifiHalStartScan003
- * @tc.desc: start scan is successfully
+ * @tc.desc: start scan is successfully_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_StartScan_0003, Function | MediumTest | Level3)
@@ -2178,7 +2178,7 @@ HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_StartScan_0003, Function | MediumTest | Leve
 
 /**
  * @tc.name: GetPowerModeTest_001
- * @tc.desc: Wifi hdi get power mode function test
+ * @tc.desc: Wifi hdi get power mode function test_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0001, Function | MediumTest | Level1)
@@ -2199,7 +2199,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0001, Function | MediumTest | Le
 
 /**
  * @tc.name: GetPowerModeTest_002
- * @tc.desc: Wifi hdi get power mode function test
+ * @tc.desc: Wifi hdi get power mode function test_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0002, Function | MediumTest | Level1)
@@ -2220,7 +2220,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0002, Function | MediumTest | Le
 
 /**
  * @tc.name: GetPowerModeTest_003
- * @tc.desc: Wifi hdi get power mode function test
+ * @tc.desc: Wifi hdi get power mode function test_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0003, Function | MediumTest | Level1)
@@ -2242,7 +2242,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0003, Function | MediumTest | Le
 
 /**
  * @tc.name: GetPowerModeTest_004
- * @tc.desc: Wifi hdi get power mode function test
+ * @tc.desc: Wifi hdi get power mode function test_04
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0004, Function | MediumTest | Level1)
@@ -2262,7 +2262,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0004, Function | MediumTest | Le
 
 /**
  * @tc.name: GetPowerModeTest_005
- * @tc.desc: Wifi hdi get power mode function test
+ * @tc.desc: Wifi hdi get power mode function test_05
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0005, Function | MediumTest | Level1)
@@ -2285,7 +2285,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0005, Function | MediumTest | Le
 
 /**
  * @tc.name: GetPowerModeTest_006
- * @tc.desc: Wifi hdi get power mode function test
+ * @tc.desc: Wifi hdi get power mode function test_06
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0006, Function | MediumTest | Level1)
@@ -2306,7 +2306,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0006, Function | MediumTest | Le
 
 /**
  * @tc.name: GetPowerModeTest_007
- * @tc.desc: Wifi hdi get power mode function test
+ * @tc.desc: Wifi hdi get power mode function test_07
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0007, Function | MediumTest | Level1)
@@ -2327,7 +2327,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0007, Function | MediumTest | Le
 
 /**
  * @tc.name: GetPowerModeTest_008
- * @tc.desc: Wifi hdi get power mode function test
+ * @tc.desc: Wifi hdi get power mode function test_08
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0008, Function | MediumTest | Level1)
@@ -2349,7 +2349,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0008, Function | MediumTest | Le
 
 /**
  * @tc.name: GetPowerModeTest_009
- * @tc.desc: Wifi hdi get power mode function test
+ * @tc.desc: Wifi hdi get power mode function test_09
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0009, Function | MediumTest | Level1)
@@ -2369,7 +2369,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0009, Function | MediumTest | Le
 
 /**
  * @tc.name: GetPowerModeTest_010
- * @tc.desc: Wifi hdi get power mode function test
+ * @tc.desc: Wifi hdi get power mode function test_10
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0010, Function | MediumTest | Level1)
@@ -2392,7 +2392,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0010, Function | MediumTest | Le
 
 /**
  * @tc.name: SetPowerModeTest_001
- * @tc.desc: Wifi hdi set power mode function test
+ * @tc.desc: Wifi hdi set power mode function test_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0001, Function | MediumTest | Level1)
@@ -2417,7 +2417,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0001, Function | MediumTest | Le
 
 /**
  * @tc.name: SetPowerModeTest_002
- * @tc.desc: Wifi hdi set power mode function test
+ * @tc.desc: Wifi hdi set power mode function test_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0002, Function | MediumTest | Level1)
@@ -2443,7 +2443,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0002, Function | MediumTest | Le
 
 /**
  * @tc.name: SetPowerModeTest_003
- * @tc.desc: Wifi hdi set power mode function test
+ * @tc.desc: Wifi hdi set power mode function test_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0003, Function | MediumTest | Level1)
@@ -2469,7 +2469,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0003, Function | MediumTest | Le
 
 /**
  * @tc.name: SetPowerModeTest_004
- * @tc.desc: Wifi hdi set power mode function test
+ * @tc.desc: Wifi hdi set power mode function test_04
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0004, Function | MediumTest | Level1)
@@ -2495,7 +2495,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0004, Function | MediumTest | Le
 
 /**
  * @tc.name: SetPowerModeTest_005
- * @tc.desc: Wifi hdi set power mode function test
+ * @tc.desc: Wifi hdi set power mode function test_05
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0005, Function | MediumTest | Level1)
@@ -2520,7 +2520,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0005, Function | MediumTest | Le
 
 /**
  * @tc.name: SetPowerModeTest_006
- * @tc.desc: Wifi hdi set power mode function test
+ * @tc.desc: Wifi hdi set power mode function test_06
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0006, Function | MediumTest | Level1)
@@ -2546,7 +2546,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0006, Function | MediumTest | Le
 
 /**
  * @tc.name: SetPowerModeTest_007
- * @tc.desc: Wifi hdi set power mode function test
+ * @tc.desc: Wifi hdi set power mode function test_07
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0007, Function | MediumTest | Level1)
@@ -2572,7 +2572,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0007, Function | MediumTest | Le
 
 /**
  * @tc.name: SetPowerModeTest_008
- * @tc.desc: Wifi hdi set power mode function test
+ * @tc.desc: Wifi hdi set power mode function test_08
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0008, Function | MediumTest | Level1)
@@ -2598,7 +2598,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0008, Function | MediumTest | Le
 
 /**
  * @tc.name: WifiHalGetSupportCombo001
- * @tc.desc: Get supported combo
+ * @tc.desc: Get supported combo_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetSupportCombo_0001, Function | MediumTest | Level1)
@@ -2614,7 +2614,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetSupportCombo_0001, Function | MediumTest |
 
 /**
  * @tc.name: WifiHalGetSupportCombo002
- * @tc.desc: Get supported combo
+ * @tc.desc: Get supported combo_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetSupportCombo_0002, Function | MediumTest | Level1)
@@ -2635,7 +2635,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetSupportCombo_0002, Function | MediumTest |
 
 /**
  * @tc.name: SetProjectionScreenParam001
- * @tc.desc: wifi hal config projection screen function test
+ * @tc.desc: wifi hal config projection screen function test_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0001, Function | MediumTest | Level1)
@@ -2660,7 +2660,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0001, Function | Med
 
 /**
  * @tc.name: SetProjectionScreenParam002
- * @tc.desc: wifi hal config projection screen function test
+ * @tc.desc: wifi hal config projection screen function test_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0002, Function | MediumTest | Level1)
@@ -2685,7 +2685,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0002, Function | Med
 
 /**
  * @tc.name: SetProjectionScreenParam003
- * @tc.desc: wifi hal config projection screen function test
+ * @tc.desc: wifi hal config projection screen function test_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0003, Function | MediumTest | Level1)
@@ -2710,7 +2710,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0003, Function | Med
 
 /**
  * @tc.name: SetProjectionScreenParam004
- * @tc.desc: wifi hal config projection screen function test
+ * @tc.desc: wifi hal config projection screen function test_04
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0004, Function | MediumTest | Level1)
@@ -2736,7 +2736,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0004, Function | Med
 
 /**
  * @tc.name: SetProjectionScreenParam005
- * @tc.desc: wifi hal config projection screen function test
+ * @tc.desc: wifi hal config projection screen function test_05
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0005, Function | MediumTest | Level1)
@@ -2767,7 +2767,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0005, Function | Med
 
 /**
  * @tc.name: SetProjectionScreenParam006
- * @tc.desc: wifi hal config projection screen function test
+ * @tc.desc: wifi hal config projection screen function test_06
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0006, Function | MediumTest | Level1)
@@ -2792,7 +2792,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0006, Function | Med
 
 /**
  * @tc.name: SetProjectionScreenParam007
- * @tc.desc: wifi hal config projection screen function test
+ * @tc.desc: wifi hal config projection screen function test_07
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0007, Function | MediumTest | Level1)
@@ -2817,7 +2817,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0007, Function | Med
 
 /**
  * @tc.name: SetProjectionScreenParam008
- * @tc.desc: wifi hal config projection screen function test
+ * @tc.desc: wifi hal config projection screen function test_08
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0008, Function | MediumTest | Level1)
@@ -2842,7 +2842,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0008, Function | Med
 
 /**
  * @tc.name: SetProjectionScreenParam009
- * @tc.desc: wifi hal config projection screen function test
+ * @tc.desc: wifi hal config projection screen function test_09
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0009, Function | MediumTest | Level1)
@@ -2867,7 +2867,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0009, Function | Med
 
 /**
  * @tc.name: SetProjectionScreenParam010
- * @tc.desc: wifi hal config projection screen function test
+ * @tc.desc: wifi hal config projection screen function test_10
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0010, Function | MediumTest | Level1)
@@ -2898,7 +2898,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0010, Function | Med
 
 /**
  * @tc.name: SendCmdIoctl001
- * @tc.desc: wifi hal send ioctl command function test
+ * @tc.desc: wifi hal send ioctl command function test_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0001, Function | MediumTest | Level1)
@@ -2917,7 +2917,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0001, Function | MediumTest | Le
 
 /**
  * @tc.name: SendCmdIoctl002
- * @tc.desc: wifi hal send ioctl command function test
+ * @tc.desc: wifi hal send ioctl command function test_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0002, Function | MediumTest | Level1)
@@ -2937,7 +2937,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0002, Function | MediumTest | Le
 
 /**
  * @tc.name: SendCmdIoctl003
- * @tc.desc: wifi hal send ioctl command function test
+ * @tc.desc: wifi hal send ioctl command function test_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0003, Function | MediumTest | Level1)
@@ -2957,7 +2957,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0003, Function | MediumTest | Le
 
 /**
  * @tc.name: SendCmdIoctl004
- * @tc.desc: wifi hal send ioctl command function test
+ * @tc.desc: wifi hal send ioctl command function test_04
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0004, Function | MediumTest | Level1)
@@ -2983,7 +2983,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0004, Function | MediumTest | Le
 
 /**
  * @tc.name: SendCmdIoctl005
- * @tc.desc: wifi hal send ioctl command function test
+ * @tc.desc: wifi hal send ioctl command function test_05
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0005, Function | MediumTest | Level1)
@@ -3002,7 +3002,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0005, Function | MediumTest | Le
 
 /**
  * @tc.name: SendCmdIoctl006
- * @tc.desc: wifi hal send ioctl command function test
+ * @tc.desc: wifi hal send ioctl command function test_06
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0006, Function | MediumTest | Level1)
@@ -3022,7 +3022,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0006, Function | MediumTest | Le
 
 /**
  * @tc.name: SendCmdIoctl007
- * @tc.desc: wifi hal send ioctl command function test
+ * @tc.desc: wifi hal send ioctl command function test_07
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0007, Function | MediumTest | Level1)
@@ -3043,7 +3043,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0007, Function | MediumTest | Le
 
 /**
  * @tc.name: SendCmdIoctl008
- * @tc.desc: wifi hal send ioctl command function test
+ * @tc.desc: wifi hal send ioctl command function test_08
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0008, Function | MediumTest | Level1)
@@ -3069,7 +3069,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0008, Function | MediumTest | Le
 
 /**
  * @tc.name: GetStationInfo001
- * @tc.desc: Wifi hdi get station information function test
+ * @tc.desc: Wifi hdi get station information function test_01
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0001, Function | MediumTest | Level1)
@@ -3087,7 +3087,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0001, Function | MediumTest | 
 
 /**
  * @tc.name: GetStationInfo002
- * @tc.desc: Wifi hdi get station information function test
+ * @tc.desc: Wifi hdi get station information function test_02
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0002, Function | MediumTest | Level1)
@@ -3106,7 +3106,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0002, Function | MediumTest | 
 
 /**
  * @tc.name: GetStationInfo003
- * @tc.desc: Wifi hdi get station information function test
+ * @tc.desc: Wifi hdi get station information function test_03
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0003, Function | MediumTest | Level1)
@@ -3125,7 +3125,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0003, Function | MediumTest | 
 
 /**
  * @tc.name: GetStationInfo004
- * @tc.desc: Wifi hdi get station information function test
+ * @tc.desc: Wifi hdi get station information function test_04
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0004, Function | MediumTest | Level1)
@@ -3144,7 +3144,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0004, Function | MediumTest | 
 
 /**
  * @tc.name: GetStationInfo005
- * @tc.desc: Wifi hdi get station information function test
+ * @tc.desc: Wifi hdi get station information function test_05
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0005, Function | MediumTest | Level1)
@@ -3164,7 +3164,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0005, Function | MediumTest | 
 
 /**
  * @tc.name: GetStationInfo006
- * @tc.desc: Wifi hdi get station information function test
+ * @tc.desc: Wifi hdi get station information function test_06
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0006, Function | MediumTest | Level1)
@@ -3184,7 +3184,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0006, Function | MediumTest | 
 
 /**
  * @tc.name: GetStationInfo007
- * @tc.desc: Wifi hdi get station information function test
+ * @tc.desc: Wifi hdi get station information function test_07
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0007, Function | MediumTest | Level1)
@@ -3204,7 +3204,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0007, Function | MediumTest | 
 
 /**
  * @tc.name: GetStationInfo008
- * @tc.desc: Wifi hdi get station information function test
+ * @tc.desc: Wifi hdi get station information function test_08
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0008, Function | MediumTest | Level1)
@@ -3227,7 +3227,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0008, Function | MediumTest | 
 
 /**
  * @tc.name: GetStationInfo009
- * @tc.desc: Wifi hdi get station information function test
+ * @tc.desc: Wifi hdi get station information function test_09
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0009, Function | MediumTest | Level1)
@@ -3245,7 +3245,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0009, Function | MediumTest | 
 
 /**
  * @tc.name: GetStationInfo010
- * @tc.desc: Wifi hdi get station information function test
+ * @tc.desc: Wifi hdi get station information function test_10
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0010, Function | MediumTest | Level1)
@@ -3264,7 +3264,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0010, Function | MediumTest | 
 
 /**
  * @tc.name: GetStationInfo011
- * @tc.desc: Wifi hdi get station information function test
+ * @tc.desc: Wifi hdi get station information function test_11
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0011, Function | MediumTest | Level1)
@@ -3283,7 +3283,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0011, Function | MediumTest | 
 
 /**
  * @tc.name: GetStationInfo012
- * @tc.desc: Wifi hdi get station information function test
+ * @tc.desc: Wifi hdi get station information function test_12
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0012, Function | MediumTest | Level1)
@@ -3302,7 +3302,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0012, Function | MediumTest | 
 
 /**
  * @tc.name: GetStationInfo013
- * @tc.desc: Wifi hdi get station information function test
+ * @tc.desc: Wifi hdi get station information function test_13
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0013, Function | MediumTest | Level1)
@@ -3322,7 +3322,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0013, Function | MediumTest | 
 
 /**
  * @tc.name: GetStationInfo014
- * @tc.desc: Wifi hdi get station information function test
+ * @tc.desc: Wifi hdi get station information function test_14
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0014, Function | MediumTest | Level1)
@@ -3342,7 +3342,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0014, Function | MediumTest | 
 
 /**
  * @tc.name: GetStationInfo015
- * @tc.desc: Wifi hdi get station information function test
+ * @tc.desc: Wifi hdi get station information function test_15
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0015, Function | MediumTest | Level1)
@@ -3362,7 +3362,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0015, Function | MediumTest | 
 
 /**
  * @tc.name: GetStationInfo016
- * @tc.desc: Wifi hdi get station information function test
+ * @tc.desc: Wifi hdi get station information function test_16
  * @tc.type: FUNC
  */
 HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0016, Function | MediumTest | Level1)
@@ -3385,7 +3385,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0016, Function | MediumTest | 
 
 /**
  * @tc.number: WifiHalResetDriver001
- * @tc.name: Reset the WiFi driver
+ * @tc.name: Reset the WiFi driver_01
  * @tc.size:Medium
  * @tc.level: Level 3
  */
@@ -3416,7 +3416,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_ResetDriver_0001, Function | MediumTest | Lev
 
 /**
  * @tc.number: WifiHalResetDriver002
- * @tc.name: Reset the WiFi driver
+ * @tc.name: Reset the WiFi driver_02
  * @tc.size:Medium
  * @tc.level: Level 3
  */

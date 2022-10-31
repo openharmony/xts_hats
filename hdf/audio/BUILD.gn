@@ -21,7 +21,7 @@ group("HatsHdfAudioTest") {
     testonly = true
   }
   if (is_standard_system) {
-    deps = [ "hdi:hdi" ]
+    deps = [ "hdi:audio_hdi" ]
   }
 }
 ###############################################################################

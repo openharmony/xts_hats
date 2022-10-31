@@ -80,11 +80,11 @@ group("${posix_interface_module}_bin") {
     "mktime:mktime_1-1",
 
     #"mq_close:mq_close_1-1",
-    "mq_close:mq_close_3-2",
+    #"mq_close:mq_close_3-2",
 
     #"mq_close:mq_close_2-1",
     #"mq_close:mq_close_3-1",
-    "mq_close:mq_close_3-3",
+    #"mq_close:mq_close_3-3",
 
     #"mq_close:mq_close_4-1",
 
@@ -95,14 +95,14 @@ group("${posix_interface_module}_bin") {
     #"mq_open:mq_open_12-1",
     #"mq_open:mq_open_13-1",
     #"mq_open:mq_open_15-1",
-    "mq_open:mq_open_21-1",
+    #"mq_open:mq_open_21-1",
 
     #"mq_open:mq_open_23-1",
     #"mq_open:mq_open_25-2",
     #"mq_open:mq_open_27-1",
     #"mq_open:mq_open_27-2",
     #"mq_open:mq_open_29-1",
-    "mq_open:mq_open_3-1",
+    #"mq_open:mq_open_3-1",
 
     #"mq_open:mq_open_7-3",
     #"mq_open:mq_open_speculative_2-2",
@@ -199,7 +199,8 @@ group("${posix_interface_module}_bin") {
     #"pthread_barrier_destroy:pthread_barrier_destroy_2-1",
     "pthread_barrier_init:pthread_barrier_init_1-1",
     "pthread_barrier_init:pthread_barrier_init_3-1",
-    "pthread_barrier_init:pthread_barrier_init_4-1",
+
+    #"pthread_barrier_init:pthread_barrier_init_4-1",
     "pthread_barrier_wait:pthread_barrier_wait_1-1",
     "pthread_barrier_wait:pthread_barrier_wait_2-1",
     "pthread_barrier_wait:pthread_barrier_wait_3-1",
@@ -210,19 +211,22 @@ group("${posix_interface_module}_bin") {
     "pthread_barrierattr_init:pthread_barrierattr_init_2-1",
     "pthread_barrierattr_setpshared:pthread_barrierattr_setpshared_1-1",
     "pthread_barrierattr_setpshared:pthread_barrierattr_setpshared_2-1",
-    "pthread_cancel:pthread_cancel_1-1",
+
+    #"pthread_cancel:pthread_cancel_1-1",
     "pthread_cancel:pthread_cancel_1-2",
-    "pthread_cancel:pthread_cancel_1-3",
-    "pthread_cancel:pthread_cancel_2-1",
-    "pthread_cancel:pthread_cancel_2-2",
-    "pthread_cancel:pthread_cancel_2-3",
-    "pthread_cancel:pthread_cancel_3-1",
-    "pthread_cancel:pthread_cancel_4-1",
+
+    #"pthread_cancel:pthread_cancel_1-3",
+    #"pthread_cancel:pthread_cancel_2-1",
+    #"pthread_cancel:pthread_cancel_2-2",
+    #"pthread_cancel:pthread_cancel_2-3",
+    #"pthread_cancel:pthread_cancel_3-1",
+    #"pthread_cancel:pthread_cancel_4-1",
     "pthread_cleanup_pop:pthread_cleanup_pop_1-1",
     "pthread_cleanup_pop:pthread_cleanup_pop_1-2",
     "pthread_cleanup_pop:pthread_cleanup_pop_1-3",
     "pthread_cleanup_push:pthread_cleanup_push_1-1",
-    "pthread_cleanup_push:pthread_cleanup_push_1-2",
+
+    #"pthread_cleanup_push:pthread_cleanup_push_1-2",
     "pthread_cleanup_push:pthread_cleanup_push_1-3",
     "pthread_cond_signal:pthread_cond_signal_1-1",
 
@@ -301,7 +305,8 @@ group("${posix_interface_module}_bin") {
     "pthread_once:pthread_once_1-2",
     "pthread_once:pthread_once_1-3",
     "pthread_once:pthread_once_2-1",
-    "pthread_once:pthread_once_3-1",
+
+    #"pthread_once:pthread_once_3-1",
 
     #"pthread_once:pthread_once_4-1-buildonly",
     "pthread_rwlock_destroy:pthread_rwlock_destroy_1-1",
@@ -352,14 +357,15 @@ group("${posix_interface_module}_bin") {
     "pthread_rwlockattr_init:pthread_rwlockattr_init_2-1",
     "pthread_rwlockattr_setpshared:pthread_rwlockattr_setpshared_1-1",
     "pthread_self:pthread_self_1-1",
-    "pthread_setcancelstate:pthread_setcancelstate_1-1",
-    "pthread_setcancelstate:pthread_setcancelstate_1-2",
-    "pthread_setcancelstate:pthread_setcancelstate_2-1",
+
+    #"pthread_setcancelstate:pthread_setcancelstate_1-1",
+    #"pthread_setcancelstate:pthread_setcancelstate_1-2",
+    #"pthread_setcancelstate:pthread_setcancelstate_2-1",
     "pthread_setcancelstate:pthread_setcancelstate_3-1",
 
     #"pthread_setcanceltype:pthread_setcanceltype_1-1",
-    "pthread_setcanceltype:pthread_setcanceltype_1-2",
-    "pthread_setcanceltype:pthread_setcanceltype_2-1",
+    #"pthread_setcanceltype:pthread_setcanceltype_1-2",
+    #"pthread_setcanceltype:pthread_setcanceltype_2-1",
     "pthread_setschedparam:pthread_setschedparam_1-1",
     "pthread_setschedparam:pthread_setschedparam_1-2",
 
@@ -492,7 +498,7 @@ group("${posix_interface_module}_bin") {
     #"sem_unlink:sem_unlink_7-1",
     #"sem_unlink:sem_unlink_9-1",
 
-    "shm_open:shm_open_39-1",
+    #"shm_open:shm_open_39-1",
 
     #"shm_open:shm_open_1-1",
     #"shm_open:shm_open_5-1",
@@ -521,8 +527,8 @@ group("${posix_interface_module}_bin") {
     #"shm_open:shm_open_37-1",
     #"shm_open:shm_open_38-1",
     #"shm_open:shm_open_39-2",
-    "shm_open:shm_open_41-1",
-    "shm_unlink:shm_unlink_10-1",
+    #"shm_open:shm_open_41-1",
+    #"shm_unlink:shm_unlink_10-1",
 
     #"shm_unlink:shm_unlink_1-1",
     #"shm_unlink:shm_unlink_2-1",
@@ -533,7 +539,7 @@ group("${posix_interface_module}_bin") {
     #"shm_unlink:shm_unlink_8-1",
     #"shm_unlink:shm_unlink_9-1",
     #"shm_unlink:shm_unlink_10-2",
-    "shm_unlink:shm_unlink_11-1",
+    #"shm_unlink:shm_unlink_11-1",
     "sigaddset:sigaddset_1-1",
     "sigaddset:sigaddset_1-2",
     "sigaddset:sigaddset_1-3",

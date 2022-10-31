@@ -216,7 +216,7 @@ HWTEST_F(MallocFreePerformance, freeperformance0100, Function | MediumTest | Lev
         for (int j = 0; j < CLUSTER_SIZE; ++j) {
             ptr[j] = malloc(g_sizes[index]);
             if (!ptr[j]) {
-                printf("Malloc size of %u byte(s) failed: %s\n", g_sizes[index], strerror(errno));
+                printf("Malloc size of %zu byte(s) failed: %s\n", g_sizes[index], strerror(errno));
             }
             ++index;
             index %= SIZE_ARR_SIZE;

@@ -25,6 +25,7 @@ group("HatsHdfCameraTest") {
       deps = [
         "buffer_manager:HatsHdfCameraBufferTest",
         "pipeline_core:HatsHdfCameraPipelineTest",
+        "ut:HatsHdfCameraUtTest",
         "v4l2:hdi",
 
         # "cameraBenchmarkTest:HatsHdfCamerabenchmarkTest",

@@ -197,7 +197,7 @@ HWTEST_F(CodecProxyTest, HdfCodecHdiV1CreateCodecByTypeTest_003, TestSize.Level1
     ASSERT_EQ(errorCode, HDF_ERR_NOT_SUPPORT);
 }
 
-HWTEST_F(CodecProxyTest, HdfCodecHdiV1CreateCodecByTypeTest_004 TestSize.Level1)
+HWTEST_F(CodecProxyTest, HdfCodecHdiV1CreateCodecByTypeTest_004, TestSize.Level1)
 {
     AvCodecMime mime = MEDIA_MIMETYPE_VIDEO_AVC;
     int32_t errorCode = g_codecObj->CodecCreateByType(g_codecObj, AUDIO_ENCODER, mime, &g_handle);

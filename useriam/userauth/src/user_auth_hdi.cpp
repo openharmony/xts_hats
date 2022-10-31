@@ -23,6 +23,7 @@ using namespace OHOS::HDI::UserAuth::V1_0;
 
 static const uint32_t MAX_FUZZ_STRUCT_LEN = 20;
 static UserAuthInterfaceService g_service;
+int32_t Expectedvalue = NULL;
 static OHOS::Parcel parcel;
 
 void UserIamUserAuthTest::SetUpTestCase()
@@ -207,7 +208,7 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0102, Function | Me
     FillTestUint64Vector(parcel, templateIds);
     int32_t ret = g_service.AddExecutor(info, index, publicKey, templateIds);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 2);
+    ASSERT_EQ(ret != Expectedvalue, true);
 }
 
 /**
@@ -246,7 +247,7 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0104, Function | Me
     FillEnrolledInfoVector(parcel, infos);
     int32_t ret = g_service.GetUserInfo(userId, secureUid, pinSubType, infos);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 6);
+    ASSERT_EQ(ret != Expectedvalue, true);
 }
 
 /**
@@ -266,7 +267,7 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0105, Function | Me
     FillCredentialInfoVector(parcel, deletedInfos);
     int32_t ret = g_service.DeleteUser(userId, authToken, deletedInfos);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 2);
+    ASSERT_EQ(ret != Expectedvalue, true);
 }
 
 /**
@@ -288,7 +289,7 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0106, Function | Me
     FillScheduleInfo(parcel, scheduleInfo);
     int32_t ret = g_service.BeginIdentification(contextId, authType, challenge, executorId, scheduleInfo);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 1);
+    ASSERT_EQ(ret != Expectedvalue, true);
 }
 
 /**
@@ -304,7 +305,7 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0107, Function | Me
     uint64_t index = parcel.ReadUint64();
     int32_t ret = g_service.DeleteExecutor(index);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 6);
+    ASSERT_EQ(ret != Expectedvalue, true);
 }
 
 /**
@@ -360,7 +361,7 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0110, Function | Me
     FillScheduleInfo(parcel, info);
     int32_t ret = g_service.BeginEnrollment(userId, authToken, param, info);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 2);
+    ASSERT_EQ(ret != Expectedvalue, true);
 }
 
 /**
@@ -382,7 +383,7 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0111, Function | Me
     FillTestUint8Vector(parcel, info.rootSecret);
     int32_t ret = g_service.UpdateEnrollmentResult(userId, scheduleResult, info);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 2);
+    ASSERT_EQ(ret != Expectedvalue, true);
 }
 
 /**
@@ -419,7 +420,7 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0113, Function | Me
     FillCredentialInfo(parcel, info);
     int32_t ret = g_service.DeleteCredential(userId, credentialId, authToken, info);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 2);
+    ASSERT_EQ(ret != Expectedvalue, true);
 }
 
 /**
@@ -437,7 +438,7 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0114, Function | Me
     FillCredentialInfoVector(parcel, deletedInfos);
     int32_t ret = g_service.EnforceDeleteUser(userId, deletedInfos);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 6);
+    ASSERT_EQ(ret != Expectedvalue, true);
 }
 
 /**
@@ -457,7 +458,7 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0115, Function | Me
     FillScheduleInfoVector(parcel, scheduleInfos);
     int32_t ret = g_service.BeginAuthentication(contextId, param, scheduleInfos);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 1);
+    ASSERT_EQ(ret != Expectedvalue, true);
 }
 
 /**
@@ -477,7 +478,7 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0116, Function | Me
     FillAuthResultInfo(parcel, info);
     int32_t ret = g_service.UpdateAuthenticationResult(contextId, scheduleResult, info);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 2);
+    ASSERT_EQ(ret != Expectedvalue, true);
 }
 
 /**
@@ -493,7 +494,7 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0117, Function | Me
     uint64_t contextId = parcel.ReadUint64();
     int32_t ret = g_service.CancelAuthentication(contextId);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 6);
+    ASSERT_EQ(ret != Expectedvalue, true);
 }
 
 /**
@@ -513,7 +514,7 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0118, Function | Me
     FillIdentifyResultInfo(parcel, info);
     int32_t ret = g_service.UpdateIdentificationResult(contextId, scheduleResult, info);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 2);
+    ASSERT_EQ(ret != Expectedvalue, true);
 }
 
 /**
@@ -529,7 +530,7 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0119, Function | Me
     uint64_t contextId = parcel.ReadUint64();
     int32_t ret = g_service.CancelIdentification(contextId);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 6);
+    ASSERT_EQ(ret != Expectedvalue, true);
 }
 
 /**
@@ -547,7 +548,7 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0120, Function | Me
     uint32_t authTrustLevel = parcel.ReadUint32();
     int32_t ret = g_service.GetAuthTrustLevel(userId, authType, authTrustLevel);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 6);
+    ASSERT_EQ(ret != Expectedvalue, true);
 }
 
 /**

@@ -20,7 +20,7 @@ module_output_path = "hdf/wlan"
 
 ###########################palTest###########################
 
-ohos_moduletest_suite("WlanHdiServiceTestC") {
+ohos_moduletest_suite("HatsHdfWlanHdiServiceTest") {
   module_out_path = module_output_path
   sources = [
     "wlan_callback_impl.c",

@@ -594,12 +594,12 @@ BENCHMARK_REGISTER_F(wlanBenchmarkTest, WifiHalgetValidFreqsWithBand001)->Iterat
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
- * @tc.name: WifiHalGetAsscociatedStas001
+ * @tc.name: WifiHalGetAssociatedStas001
  * @tc.desc: Get asscociated STA info benchmark test
  * @tc.type: FUNC
  */
 
-BENCHMARK_F(wlanBenchmarkTest, WifiHalgetAsscociatedStas001)(
+BENCHMARK_F(wlanBenchmarkTest, WifiHalgetAssociatedStas001)(
     benchmark::State &st)
 {
     g_wifi->start(g_wifi);
@@ -610,10 +610,10 @@ BENCHMARK_F(wlanBenchmarkTest, WifiHalgetAsscociatedStas001)(
     ret = g_wifi->createFeature(PROTOCOL_80211_IFTYPE_AP, (struct IWiFiBaseFeature **)&apFeature);
     EXPECT_EQ(HDF_SUCCESS, ret);
     EXPECT_NE(nullptr, apFeature);
-    ret = apFeature->getAsscociatedStas(apFeature, nullptr, 0, nullptr);
+    ret = apFeature->getAssociatedStas(apFeature, nullptr, 0, nullptr);
     EXPECT_NE(HDF_SUCCESS, ret);
     for (auto _ : st) {
-        ret = apFeature->getAsscociatedStas(apFeature, staInfo, WLAN_MAX_NUM_STA_WITH_AP, &num);
+        ret = apFeature->getAssociatedStas(apFeature, staInfo, WLAN_MAX_NUM_STA_WITH_AP, &num);
     }
     EXPECT_EQ(HDF_SUCCESS, ret);
     ret = g_wifi->destroyFeature((struct IWiFiBaseFeature *)apFeature);
@@ -621,7 +621,7 @@ BENCHMARK_F(wlanBenchmarkTest, WifiHalgetAsscociatedStas001)(
     g_wifi->stop(g_wifi);
 }
 
-BENCHMARK_REGISTER_F(wlanBenchmarkTest, WifiHalgetAsscociatedStas001)->Iterations(100)->
+BENCHMARK_REGISTER_F(wlanBenchmarkTest, WifiHalgetAssociatedStas001)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**

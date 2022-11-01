@@ -1227,7 +1227,7 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderR
     int32_t ret = -1;
     bool isRender = true;
     int32_t reqSize = 0;
-    struct AudioMmapBufferDescripter desc = {};
+    struct AudioMmapBufferDescriptor desc = {};
     struct PrepareAudioPara audiopara = {
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER, .totalTime = 0
     };

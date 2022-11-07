@@ -53,6 +53,7 @@ ohos_moduletest_suite("HatsHdfAudioCaptureVolumeTest") {
     "-fno-strict-aliasing",
   ]
   deps = [
+    "//drivers/peripheral/audio/hal/hdi_binder/proxy:hdi_audio_client",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
   ]

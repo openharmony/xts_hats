@@ -26,7 +26,6 @@ ohos_moduletest_suite("HatsHdfAudioAdapterTest") {
     "../../common/hdi_common/src/audio_hdi_common.cpp",
     "src/audio_hdiadapter_test.cpp",
   ]
-
   include_dirs = [
     "//drivers/peripheral/audio/hal/hdi_passthrough/include",
     "//drivers/peripheral/audio/interfaces/include",
@@ -52,6 +51,7 @@ ohos_moduletest_suite("HatsHdfAudioAdapterTest") {
     "-fno-strict-aliasing",
   ]
   deps = [
+    "//drivers/peripheral/audio/hal/hdi_binder/proxy:hdi_audio_client",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
   ]

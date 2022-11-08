@@ -525,7 +525,7 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0150, Function | MediumTest | L
 }
 /**
   * @tc.number: SUB_DriverSystem_HdiInput_0160
-  * @tc.name: set device power status test
+  * @tc.name: set device power status test-INPUT_LOW_POWER
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
@@ -536,6 +536,55 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0160, Function | MediumTest | L
         ASSERT_EQ(g_HasDev, true);
         int32_t ret;
         uint32_t setStatus = INPUT_LOW_POWER;
+        uint32_t getStatus = 0;
+
+        ret = g_inputInterface->iInputController->SetPowerStatus(TOUCH_INDEX, setStatus);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterface->iInputController->GetPowerStatus(TOUCH_INDEX, &getStatus);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ASSERT_EQ(setStatus, getStatus);
+    }
+    int32_t ret = INPUT_SUCCESS;
+    EXPECT_EQ(ret, INPUT_SUCCESS);
+}
+/**
+  * @tc.number: SUB_DriverSystem_HdiInput_0161
+  * @tc.name: set device power status test-INPUT_SUSPEND
+  * @tc.desc: [C- SOFTWARE -0010]
+  * @tc.size: Medium
+  * @tc.level: level 0
+  */
+HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0161, Function | MediumTest | Level0)
+{
+    if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
+        ASSERT_EQ(g_HasDev, true);
+        int32_t ret;
+        uint32_t setStatus = INPUT_SUSPEND;
+        uint32_t getStatus = 0;
+
+        ret = g_inputInterface->iInputController->SetPowerStatus(TOUCH_INDEX, setStatus);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterface->iInputController->GetPowerStatus(TOUCH_INDEX, &getStatus);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ASSERT_EQ(setStatus, getStatus);
+    }
+    int32_t ret = INPUT_SUCCESS;
+    EXPECT_EQ(ret, INPUT_SUCCESS);
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_HdiInput_0162
+  * @tc.name: set device power status test-INPUT_RESUME
+  * @tc.desc: [C- SOFTWARE -0010]
+  * @tc.size: Medium
+  * @tc.level: level 0
+  */
+HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0162, Function | MediumTest | Level0)
+{
+    if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
+        ASSERT_EQ(g_HasDev, true);
+        int32_t ret;
+        uint32_t setStatus = INPUT_RESUME;
         uint32_t getStatus = 0;
 
         ret = g_inputInterface->iInputController->SetPowerStatus(TOUCH_INDEX, setStatus);
@@ -931,7 +980,7 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0264, Function | MediumTest | L
 
 /**
   * @tc.number: SUB_DriverSystem_HdiInput_0270
-  * @tc.name: Run Capacitance error test
+  * @tc.name: Run Capacitance error test-MMI_TEST
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
@@ -954,7 +1003,83 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0270, Function | MediumTest | L
     ret = g_inputInterface->iInputController->RunCapacitanceTest(TOUCH_INDEX, testType, nullptr, MAX_INPUT_DEV_NUM);
     EXPECT_NE(ret, INPUT_SUCCESS);
 }
+/**
+  * @tc.number: SUB_DriverSystem_HdiInput_0271
+  * @tc.name: Run Capacitance error test-BASE_TEST
+  * @tc.desc: [C- SOFTWARE -0010]
+  * @tc.size: Medium
+  * @tc.level: level 0
+  */
+HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0271, Function | MediumTest | Level0)
+{
+    ASSERT_EQ(g_HasDev, true);
+    int32_t ret;
+    uint32_t testType = BASE_TEST;
+    char result[MAX_INPUT_DEV_NUM] = {0};
 
+    ret = g_inputInterface->iInputController->RunCapacitanceTest(0, testType, result, MAX_INPUT_DEV_NUM);
+    EXPECT_NE(ret, INPUT_SUCCESS);
+    ret = g_inputInterface->iInputController->RunCapacitanceTest(MAX_INPUT_DEV_NUM, testType, result,
+        MAX_INPUT_DEV_NUM);
+    EXPECT_NE(ret, INPUT_SUCCESS);
+    ret = g_inputInterface->iInputController->RunCapacitanceTest(TOUCH_INDEX, TEST_TYPE_UNKNOWN, result,
+        MAX_INPUT_DEV_NUM);
+    EXPECT_NE(ret, INPUT_SUCCESS);
+    ret = g_inputInterface->iInputController->RunCapacitanceTest(TOUCH_INDEX, testType, nullptr, MAX_INPUT_DEV_NUM);
+    EXPECT_NE(ret, INPUT_SUCCESS);
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_HdiInput_0272
+  * @tc.name: Run Capacitance error test-FULL_TEST
+  * @tc.desc: [C- SOFTWARE -0010]
+  * @tc.size: Medium
+  * @tc.level: level 0
+  */
+HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0272, Function | MediumTest | Level0)
+{
+    ASSERT_EQ(g_HasDev, true);
+    int32_t ret;
+    uint32_t testType = FULL_TEST;
+    char result[MAX_INPUT_DEV_NUM] = {0};
+
+    ret = g_inputInterface->iInputController->RunCapacitanceTest(0, testType, result, MAX_INPUT_DEV_NUM);
+    EXPECT_NE(ret, INPUT_SUCCESS);
+    ret = g_inputInterface->iInputController->RunCapacitanceTest(MAX_INPUT_DEV_NUM, testType, result,
+        MAX_INPUT_DEV_NUM);
+    EXPECT_NE(ret, INPUT_SUCCESS);
+    ret = g_inputInterface->iInputController->RunCapacitanceTest(TOUCH_INDEX, TEST_TYPE_UNKNOWN, result,
+        MAX_INPUT_DEV_NUM);
+    EXPECT_NE(ret, INPUT_SUCCESS);
+    ret = g_inputInterface->iInputController->RunCapacitanceTest(TOUCH_INDEX, testType, nullptr, MAX_INPUT_DEV_NUM);
+    EXPECT_NE(ret, INPUT_SUCCESS);
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_HdiInput_0273
+  * @tc.name: Run Capacitance error test-RUNNING_TEST
+  * @tc.desc: [C- SOFTWARE -0010]
+  * @tc.size: Medium
+  * @tc.level: level 0
+  */
+HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0273, Function | MediumTest | Level0)
+{
+    ASSERT_EQ(g_HasDev, true);
+    int32_t ret;
+    uint32_t testType = RUNNING_TEST;
+    char result[MAX_INPUT_DEV_NUM] = {0};
+
+    ret = g_inputInterface->iInputController->RunCapacitanceTest(0, testType, result, MAX_INPUT_DEV_NUM);
+    EXPECT_NE(ret, INPUT_SUCCESS);
+    ret = g_inputInterface->iInputController->RunCapacitanceTest(MAX_INPUT_DEV_NUM, testType, result,
+        MAX_INPUT_DEV_NUM);
+    EXPECT_NE(ret, INPUT_SUCCESS);
+    ret = g_inputInterface->iInputController->RunCapacitanceTest(TOUCH_INDEX, TEST_TYPE_UNKNOWN, result,
+        MAX_INPUT_DEV_NUM);
+    EXPECT_NE(ret, INPUT_SUCCESS);
+    ret = g_inputInterface->iInputController->RunCapacitanceTest(TOUCH_INDEX, testType, nullptr, MAX_INPUT_DEV_NUM);
+    EXPECT_NE(ret, INPUT_SUCCESS);
+}
 /**
   * @tc.number: SUB_DriverSystem_HdiInput_0280
   * @tc.name: Run Extra Command test

@@ -48,37 +48,12 @@ class AudioCaptureBenchmarkTest : public benchmark::Fixture {
 public:
     void SetUp(const ::benchmark::State &state);
     void TearDown(const ::benchmark::State &state);
-    static TestAudioManager *(*GetAudioManager)();
-    static void *handleSo;
 };
 
-TestAudioManager *(*AudioCaptureBenchmarkTest::GetAudioManager)() = nullptr;
-void *AudioCaptureBenchmarkTest::handleSo = nullptr;
 
-void AudioCaptureBenchmarkTest::SetUp(const ::benchmark::State &state) {
-    char absPath[PATH_MAX] = {0};
-    if (realpath(RESOLVED_PATH.c_str(), absPath) == nullptr) {
-        return;
-    }
-    handleSo = dlopen(absPath, RTLD_LAZY);
-    if (handleSo == nullptr) {
-        return;
-    }
-    GetAudioManager = (TestAudioManager *(*)())(dlsym(handleSo, FUNCTION_NAME.c_str()));
-    if (GetAudioManager == nullptr) {
-        return;
-    }
-};
+void AudioCaptureBenchmarkTest::SetUp(const ::benchmark::State &state) {};
 
-void AudioCaptureBenchmarkTest::TearDown(const ::benchmark::State &state) {
-    if (handleSo != nullptr) {
-        dlclose(handleSo);
-        handleSo = nullptr;
-    }
-    if (GetAudioManager != nullptr) {
-        GetAudioManager = nullptr;
-    }
-};
+void AudioCaptureBenchmarkTest::TearDown(const ::benchmark::State &state) {};
 
 /**
 * @tc.name  the performace of AudioCreateCapture
@@ -93,8 +68,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCreateCap
     struct PrepareAudioPara audiopara = {
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = GetLoadAdapter(audiopara.manager, audiopara.portType, audiopara.adapterName,
                          &audiopara.adapter, audiopara.audioPort);
@@ -127,8 +102,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioDestroyCa
     struct PrepareAudioPara audiopara = {
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = GetLoadAdapter(audiopara.manager, audiopara.portType, audiopara.adapterName,
                          &audiopara.adapter, audiopara.audioPort);
@@ -161,8 +136,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureSt
     struct PrepareAudioPara audiopara = {
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateCapture(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                                  &audiopara.capture);
@@ -188,8 +163,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCapturePa
     struct PrepareAudioPara audiopara = {
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateCapture(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                              &audiopara.capture);
@@ -219,8 +194,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureRe
     struct PrepareAudioPara audiopara = {
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateCapture(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                              &audiopara.capture);
@@ -250,8 +225,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureSt
     struct PrepareAudioPara audiopara = {
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateCapture(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                                  &audiopara.capture);
@@ -281,8 +256,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureSe
     struct PrepareAudioPara audiopara = {
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateCapture(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                              &audiopara.capture);
@@ -313,8 +288,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureCa
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0,
         .requestBytes = BUFFER_LENTH
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     audiopara.frame = (char *)calloc(1, BUFFER_LENTH);
     ASSERT_NE(nullptr, audiopara.frame);
@@ -367,8 +342,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGe
     struct PrepareAudioPara audiopara = {
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateCapture(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                              &audiopara.capture);
@@ -401,8 +376,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureSe
     struct PrepareAudioPara audiopara = {
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateCapture(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                              &audiopara.capture);
@@ -435,8 +410,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGe
     struct PrepareAudioPara audiopara = {
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateCapture(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                              &audiopara.capture);
@@ -470,8 +445,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureSe
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0,
         .character.setvolume = 0.7
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateCapture(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                              &audiopara.capture);
@@ -505,8 +480,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGe
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0,
         .character.setvolume = 0.8
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateCapture(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                              &audiopara.capture);
@@ -540,8 +515,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGe
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0,
         .character.setgain = 7
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateCapture(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                              &audiopara.capture);
@@ -575,8 +550,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureSe
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0,
         .character.setgain = 8
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateCapture(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                              &audiopara.capture);
@@ -608,8 +583,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGe
     struct PrepareAudioPara audiopara = {
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateCapture(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                              &audiopara.capture);
@@ -640,8 +615,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGe
     struct PrepareAudioPara audiopara = {
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateCapture(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                              &audiopara.capture);
@@ -672,8 +647,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGe
     struct PrepareAudioPara audiopara = {
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateCapture(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                              &audiopara.capture);
@@ -704,8 +679,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureFl
     struct PrepareAudioPara audiopara = {
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateCapture(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                              &audiopara.capture);
@@ -736,8 +711,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGe
     struct PrepareAudioPara audiopara = {
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateCapture(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                              &audiopara.capture);
@@ -773,8 +748,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureCh
     };
     struct AudioSceneDescriptor scenes = { .scene.id = 0, .desc.pins = PIN_IN_MIC };
     bool supported = false;
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateCapture(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                              &audiopara.capture);
@@ -809,8 +784,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureSe
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0
     };
     struct AudioSceneDescriptor scenes = { .scene.id = 0, .desc.pins = PIN_IN_MIC };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateCapture(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                              &audiopara.capture);
@@ -844,8 +819,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioGetCaptur
     struct PrepareAudioPara audiopara = {
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateCapture(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                              &audiopara.capture);
@@ -878,8 +853,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureSe
     struct PrepareAudioPara audiopara = {
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateStartCapture(audiopara.manager, &audiopara.capture, &audiopara.adapter, ADAPTER_NAME);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -912,8 +887,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGe
     char keyValueListExp[] = "attr-route=0;attr-format=24;attr-channels=2;attr-frame-count=4096;attr-sampling-rate=48000";
     char keyValueListValue[256] = {};
     int32_t listLenth = 256;
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
 
     ret = AudioCreateStartCapture(audiopara.manager, &audiopara.capture, &audiopara.adapter, ADAPTER_NAME);
@@ -949,8 +924,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCaptureGe
     struct PrepareAudioPara audiopara = {
         .portType = PORT_IN, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_IN_MIC, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+    
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateCapture(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                              &audiopara.capture);

@@ -435,10 +435,12 @@ int32_t AudioCaptureStartAndOneFrame(struct AudioCapture *capture)
     if (file == nullptr) {
         return HDF_FAILURE;
     }
+
     ret = FrameStartCapture(capture, file, attrs);
     if (ret < 0) {
         fclose(file);
         return ret;
+
     }
     (void)fclose(file);
     return AUDIO_HAL_SUCCESS;

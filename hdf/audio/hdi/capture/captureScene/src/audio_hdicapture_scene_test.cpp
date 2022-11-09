@@ -47,40 +47,12 @@ public:
     static void TearDownTestCase(void);
     void SetUp();
     void TearDown();
-    static TestAudioManager *(*GetAudioManager)();
-    static void *handleSo;
     int32_t AudioCaptureStart(const string path, struct AudioCapture *capture) const;
 };
 
-TestAudioManager *(*AudioHdiCaptureSceneTest::GetAudioManager)() = nullptr;
-void *AudioHdiCaptureSceneTest::handleSo = nullptr;
+void AudioHdiCaptureSceneTest::SetUpTestCase(void) {}
 
-void AudioHdiCaptureSceneTest::SetUpTestCase(void)
-{
-    char absPath[PATH_MAX] = {0};
-    if (realpath(RESOLVED_PATH.c_str(), absPath) == nullptr) {
-        return;
-    }
-    handleSo = dlopen(absPath, RTLD_LAZY);
-    if (handleSo == nullptr) {
-        return;
-    }
-    GetAudioManager = (TestAudioManager *(*)())(dlsym(handleSo, FUNCTION_NAME.c_str()));
-    if (GetAudioManager == nullptr) {
-        return;
-    }
-}
-
-void AudioHdiCaptureSceneTest::TearDownTestCase(void)
-{
-    if (handleSo != nullptr) {
-        dlclose(handleSo);
-        handleSo = nullptr;
-    }
-    if (GetAudioManager != nullptr) {
-        GetAudioManager = nullptr;
-    }
-}
+void AudioHdiCaptureSceneTest::TearDownTestCase(void) {}
 int32_t AudioHdiCaptureSceneTest::AudioCaptureStart(const string path, struct AudioCapture *capture) const
 {
     int32_t ret = -1;
@@ -113,8 +85,8 @@ HWTEST_F(AudioHdiCaptureSceneTest, SUB_Audio_HDI_CaptureCheckSceneCapability_000
     struct AudioSceneDescriptor scenes = {};
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture *capture = nullptr;
-    ASSERT_NE(nullptr, GetAudioManager);
-    TestAudioManager* manager = GetAudioManager();
+  
+    TestAudioManager* manager = GetAudioManagerFuncs();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     scenes.scene.id = 0;
@@ -138,8 +110,8 @@ HWTEST_F(AudioHdiCaptureSceneTest, SUB_Audio_HDI_CaptureCheckSceneCapability_000
     struct AudioSceneDescriptor scenes = {};
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture *capture = nullptr;
-    ASSERT_NE(nullptr, GetAudioManager);
-    TestAudioManager* manager = GetAudioManager();
+  
+    TestAudioManager* manager = GetAudioManagerFuncs();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     scenes.scene.id = 5;
@@ -163,8 +135,8 @@ HWTEST_F(AudioHdiCaptureSceneTest, SUB_Audio_HDI_CaptureCheckSceneCapability_000
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture *capture = nullptr;
     struct AudioCapture *captureNull = nullptr;
-    ASSERT_NE(nullptr, GetAudioManager);
-    TestAudioManager* manager = GetAudioManager();
+  
+    TestAudioManager* manager = GetAudioManagerFuncs();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     scenes.scene.id = 0;
@@ -191,8 +163,8 @@ HWTEST_F(AudioHdiCaptureSceneTest, SUB_Audio_HDI_CaptureCheckSceneCapability_000
     struct AudioSceneDescriptor *scenes = nullptr;
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture *capture = nullptr;
-    ASSERT_NE(nullptr, GetAudioManager);
-    TestAudioManager* manager = GetAudioManager();
+  
+    TestAudioManager* manager = GetAudioManagerFuncs();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
 
@@ -217,8 +189,8 @@ HWTEST_F(AudioHdiCaptureSceneTest, SUB_Audio_HDI_CaptureCheckSceneCapability_000
     struct AudioSceneDescriptor scenes = {};
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture *capture = nullptr;
-    ASSERT_NE(nullptr, GetAudioManager);
-    TestAudioManager* manager = GetAudioManager();
+  
+    TestAudioManager* manager = GetAudioManagerFuncs();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
 
@@ -241,8 +213,8 @@ HWTEST_F(AudioHdiCaptureSceneTest, SUB_Audio_HDI_AudioCaptureSelectScene_0001, F
     struct AudioSceneDescriptor scenes = {};
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture *capture = nullptr;
-    ASSERT_NE(nullptr, GetAudioManager);
-    TestAudioManager* manager = GetAudioManager();
+  
+    TestAudioManager* manager = GetAudioManagerFuncs();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     scenes.scene.id = 0;
@@ -264,8 +236,8 @@ HWTEST_F(AudioHdiCaptureSceneTest, SUB_Audio_HDI_AudioCaptureSelectScene_0002, F
     struct AudioSceneDescriptor scenes = {};
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture *capture = nullptr;
-    ASSERT_NE(nullptr, GetAudioManager);
-    TestAudioManager* manager = GetAudioManager();
+  
+    TestAudioManager* manager = GetAudioManagerFuncs();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
 
@@ -293,8 +265,8 @@ HWTEST_F(AudioHdiCaptureSceneTest, SUB_Audio_HDI_AudioCaptureSelectScene_0003, F
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture *capture = nullptr;
     struct AudioCapture *captureNull = nullptr;
-    ASSERT_NE(nullptr, GetAudioManager);
-    TestAudioManager* manager = GetAudioManager();
+  
+    TestAudioManager* manager = GetAudioManagerFuncs();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
 
@@ -317,8 +289,8 @@ HWTEST_F(AudioHdiCaptureSceneTest, SUB_Audio_HDI_AudioCaptureSelectScene_0004, F
     struct AudioSceneDescriptor *scenes = nullptr;
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture *capture = nullptr;
-    ASSERT_NE(nullptr, GetAudioManager);
-    TestAudioManager* manager = GetAudioManager();
+  
+    TestAudioManager* manager = GetAudioManagerFuncs();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
 
@@ -339,8 +311,8 @@ HWTEST_F(AudioHdiCaptureSceneTest, SUB_Audio_HDI_AudioCaptureSelectScene_0005, F
     struct AudioSceneDescriptor scenes = {};
     struct AudioAdapter *adapter = nullptr;
     struct AudioCapture *capture = nullptr;
-    ASSERT_NE(nullptr, GetAudioManager);
-    TestAudioManager* manager = GetAudioManager();
+  
+    TestAudioManager* manager = GetAudioManagerFuncs();
     ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
 

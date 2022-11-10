@@ -45,39 +45,11 @@ class AudioHdiRenderBenchmarkTest : public benchmark::Fixture {
 public:
     void SetUp(const ::benchmark::State &state);
     void TearDown(const ::benchmark::State &state);
-    static TestAudioManager *(*GetAudioManager)();
-    static void *handleSo;
 };
 
-TestAudioManager *(*AudioHdiRenderBenchmarkTest::GetAudioManager)() = nullptr;
-void *AudioHdiRenderBenchmarkTest::handleSo = nullptr;
+void AudioHdiRenderBenchmarkTest::SetUp(const ::benchmark::State &state) {}
 
-void AudioHdiRenderBenchmarkTest::SetUp(const ::benchmark::State &state)
-{
-    char absPath[PATH_MAX] = {0};
-    if (realpath(RESOLVED_PATH.c_str(), absPath) == nullptr) {
-        return;
-    }
-    handleSo = dlopen(absPath, RTLD_LAZY);
-    if (handleSo == nullptr) {
-        return;
-    }
-    GetAudioManager = (TestAudioManager *(*)())(dlsym(handleSo, FUNCTION_NAME.c_str()));
-    if (GetAudioManager == nullptr) {
-        return;
-    }
-}
-
-void AudioHdiRenderBenchmarkTest::TearDown(const ::benchmark::State &state)
-{
-    if (handleSo != nullptr) {
-        dlclose(handleSo);
-        handleSo = nullptr;
-    }
-    if (GetAudioManager != nullptr) {
-        GetAudioManager = nullptr;
-    }
-}
+void AudioHdiRenderBenchmarkTest::TearDown(const ::benchmark::State &state) {}
 /**
 * @tc.name  the performace of AudioManagerGetAllAdapters
 * @tc.number  SUB_DriverSystem_Benchmark_AudioManagerGetAllAdapters_0001
@@ -91,8 +63,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioManager
     int size = 0;
     struct PrepareAudioPara audiopara = { .totalTime = 0 };
 
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
 
     for (auto _ : st) {
@@ -114,8 +86,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioManager
     int32_t ret = -1;
     int size = 0;
     struct PrepareAudioPara audiopara = { .totalTime = 0 };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = audiopara.manager->GetAllAdapters(audiopara.manager, &audiopara.descs, &size);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -144,8 +116,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioManager
     int32_t ret = -1;
     int size = 0;
     struct PrepareAudioPara audiopara = { .totalTime = 0 };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = audiopara.manager->GetAllAdapters(audiopara.manager, &audiopara.descs, &size);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -174,8 +146,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioManager
     struct PrepareAudioPara audiopara = {
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = GetLoadAdapter(audiopara.manager, audiopara.portType, audiopara.adapterName,
                          &audiopara.adapter, audiopara.audioPort);
@@ -202,8 +174,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioGetPort
     struct PrepareAudioPara audiopara = {
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = GetLoadAdapter(audiopara.manager, audiopara.portType, audiopara.adapterName,
                          &audiopara.adapter, audiopara.audioPort);
@@ -233,8 +205,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioSetPass
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .mode = PORT_PASSTHROUGH_LPCM,
         .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = GetLoadAdapter(audiopara.manager, audiopara.portType, audiopara.adapterName,
                          &audiopara.adapter, audiopara.audioPort);
@@ -266,8 +238,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioGetPass
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .mode = PORT_PASSTHROUGH_LPCM,
         .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = GetLoadAdapter(audiopara.manager, audiopara.portType, audiopara.adapterName,
                          &audiopara.adapter, audiopara.audioPort);
@@ -302,8 +274,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderG
     };
     uint32_t latencyTimeExpc = 0;
     uint32_t latencyTime = 0;
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = PlayAudioFile(audiopara);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -332,8 +304,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioCreateR
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = GetLoadAdapter(audiopara.manager, audiopara.portType, audiopara.adapterName,
                          &audiopara.adapter, audiopara.audioPort);
@@ -365,8 +337,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioDestroy
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = GetLoadAdapter(audiopara.manager, audiopara.portType, audiopara.adapterName,
                          &audiopara.adapter, audiopara.audioPort);
@@ -397,8 +369,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderG
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .path = AUDIO_FILE.c_str(), .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = PlayAudioFile(audiopara);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -427,8 +399,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderS
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                             &audiopara.render);
@@ -461,8 +433,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderG
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                             &audiopara.render);
@@ -494,8 +466,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderS
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                             &audiopara.render);
@@ -528,8 +500,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderG
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                             &audiopara.render);
@@ -563,8 +535,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderG
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                             &audiopara.render);
@@ -595,8 +567,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderG
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                             &audiopara.render);
@@ -627,8 +599,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderF
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                                 &audiopara.render);
@@ -656,8 +628,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderG
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                             &audiopara.render);
@@ -692,8 +664,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderC
         .totalTime = 0
     };
     struct AudioSceneDescriptor scenes = {.scene.id = 0, .desc.pins = PIN_OUT_SPEAKER};
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                             &audiopara.render);
@@ -728,8 +700,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderS
         .totalTime = 0
     };
     struct AudioSceneDescriptor scenes = {.scene.id = 0, .desc.pins = PIN_OUT_SPEAKER};
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                             &audiopara.render);
@@ -764,8 +736,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudiorenderS
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                             &audiopara.render);
@@ -797,8 +769,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudiorenderG
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                             &audiopara.render);
@@ -831,8 +803,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudiorenderS
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .character.setvolume = 0.8, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                             &audiopara.render);
@@ -865,8 +837,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudiorenderG
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                             &audiopara.render);
@@ -897,8 +869,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudiorenderG
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                             &audiopara.render);
@@ -930,8 +902,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudiorenderG
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                             &audiopara.render);
@@ -961,8 +933,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudiorenderS
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .character.setgain = 7, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                             &audiopara.render);
@@ -995,8 +967,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderF
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .path = AUDIO_FILE.c_str(), .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                             &audiopara.render);
@@ -1045,8 +1017,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderS
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                                 &audiopara.render);
@@ -1071,8 +1043,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderS
     struct PrepareAudioPara audiopara = {
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                                 &audiopara.render);
@@ -1100,8 +1072,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderS
     struct PrepareAudioPara audiopara = {
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                             &audiopara.render);
@@ -1132,8 +1104,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderP
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                             &audiopara.render);
@@ -1164,8 +1136,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderR
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                             &audiopara.render);
@@ -1196,8 +1168,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderG
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                             &audiopara.render);
@@ -1231,8 +1203,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderR
     struct PrepareAudioPara audiopara = {
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER, .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
 
     audiopara.render = nullptr;
@@ -1284,8 +1256,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderG
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .pins = PIN_OUT_SPEAKER,
         .path = LOW_LATENCY_AUDIO_FILE.c_str(), .totalTime = 0
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateRender(audiopara.manager, audiopara.pins, audiopara.adapterName, &audiopara.adapter,
                             &audiopara.render);
@@ -1325,8 +1297,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderS
     struct PrepareAudioPara audiopara = {
         .portType = PORT_OUT, .adapterName = ADAPTER_NAME.c_str(), .self = this, .pins = PIN_OUT_SPEAKER,
     };
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
     ret = AudioCreateStartRender(audiopara.manager, &audiopara.render, &audiopara.adapter, ADAPTER_NAME);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
@@ -1357,8 +1329,8 @@ BENCHMARK_F(AudioHdiRenderBenchmarkTest, SUB_DriverSystem_Benchmark_AudioRenderG
     char keyValueListExp[] = "attr-route=0;attr-format=24;attr-channels=2;attr-frame-count=4096;\
 attr-sampling-rate=48000";
     int32_t listLenth = 256;
-    ASSERT_NE(nullptr, GetAudioManager);
-    audiopara.manager = GetAudioManager();
+   
+    audiopara.manager = GetAudioManagerFuncs();
     ASSERT_NE(nullptr, audiopara.manager);
 
     ret = AudioCreateStartRender(audiopara.manager, &audiopara.render, &audiopara.adapter, ADAPTER_NAME);

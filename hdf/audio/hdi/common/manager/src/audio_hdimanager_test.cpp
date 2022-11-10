@@ -52,7 +52,7 @@ public:
 
 void AudioHdiManagerTest::SetUpTestCase(void) {}
     
-void AudioHdiManagerTest::TearDownTestCase(void){}
+void AudioHdiManagerTest::TearDownTestCase(void) {}
 void AudioHdiManagerTest::SetUp(void)
 {
     manager = GetAudioManagerFuncs();

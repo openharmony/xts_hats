@@ -33,8 +33,9 @@ ohos_moduletest_suite("HatsHdfAudioCaptureHarwareDependenceTest") {
     "//drivers/hdf_core/adapter/uhdf2/include/hdi",
     "//drivers/hdf_core/framework/include/utils",
     "//drivers/hdf_core/framework/include/core",
-    "//drivers/peripheral/audio/test/systemtest/common/hdi_common/include",
+    "//test/xts/hats/hdf/audio/common/hdi_common/include",
     "//third_party/googletest/googletest/include/gtest",
+    "//test/xts/hats/hdf/audio/hdi/hardwaredependence/capture/include",
   ]
   cflags = [
     "-Wall",

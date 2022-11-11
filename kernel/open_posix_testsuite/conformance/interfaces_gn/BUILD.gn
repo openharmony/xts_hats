@@ -213,7 +213,7 @@ group("${posix_interface_module}_bin") {
     "pthread_barrierattr_setpshared:pthread_barrierattr_setpshared_2-1",
 
     #"pthread_cancel:pthread_cancel_1-1",
-    "pthread_cancel:pthread_cancel_1-2",
+    #"pthread_cancel:pthread_cancel_1-2",
 
     #"pthread_cancel:pthread_cancel_1-3",
     #"pthread_cancel:pthread_cancel_2-1",
@@ -228,13 +228,14 @@ group("${posix_interface_module}_bin") {
 
     #"pthread_cleanup_push:pthread_cleanup_push_1-2",
     "pthread_cleanup_push:pthread_cleanup_push_1-3",
-    "pthread_cond_signal:pthread_cond_signal_1-1",
+
+    #"pthread_cond_signal:pthread_cond_signal_1-1",
 
     #"pthread_cond_signal:pthread_cond_signal_1-2",
     #"pthread_cond_signal:pthread_cond_signal_4-2",
-    "pthread_cond_signal:pthread_cond_signal_2-1",
-    "pthread_cond_signal:pthread_cond_signal_2-2",
-    "pthread_cond_signal:pthread_cond_signal_4-1",
+    #"pthread_cond_signal:pthread_cond_signal_2-1",
+    #"pthread_cond_signal:pthread_cond_signal_2-2",
+    #"pthread_cond_signal:pthread_cond_signal_4-1",
     "pthread_condattr_destroy:pthread_condattr_destroy_1-1",
     "pthread_condattr_destroy:pthread_condattr_destroy_2-1",
     "pthread_condattr_destroy:pthread_condattr_destroy_3-1",

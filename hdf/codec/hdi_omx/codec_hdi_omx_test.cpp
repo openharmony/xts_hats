@@ -411,6 +411,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0100, Function | MediumTe
     CodecVideoPortFormatParam pixFormat;
     InitOhosParam(pixFormat);
     pixFormat.portIndex = (uint32_t)PortIndex::PORT_INDEX_OUTPUT;
+    pixFormat.codecColorFormat = 0;
     auto ret = g_component->GetParameter(g_component, OMX_IndexCodecVideoPortFormat,
                                          reinterpret_cast<int8_t *>(&pixFormat), sizeof(pixFormat));
     ASSERT_EQ(ret, HDF_SUCCESS);
@@ -426,6 +427,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0110, Function | MediumTe
     CodecVideoPortFormatParam pixFormat;
     InitOhosParam(pixFormat);
     pixFormat.portIndex = (uint32_t)PortIndex::PORT_INDEX_INPUT;
+    pixFormat.codecColorFormat = 0;
     auto ret = g_component->GetParameter(g_component, OMX_IndexCodecVideoPortFormat,
                                          reinterpret_cast<int8_t *>(&pixFormat), sizeof(pixFormat));
     ASSERT_EQ(ret, HDF_SUCCESS);

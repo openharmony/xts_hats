@@ -18,10 +18,14 @@
 #include <string>
 #include <vector>
 
+#include "camera_video_test.h"
+#include "camera_capture_test.h"
+
+using namespace OHOS::HDI::Camera::V1_0;
 using namespace OHOS;
 using namespace std;
 using namespace testing::ext;
-using namespace OHOS::Camera;
+//using namespace OHOS::Camera;
 
 class wlanBenchmarkTest : public benchmark::Fixture {
 public:
@@ -130,4 +134,41 @@ BENCHMARK_F(CameraBenchmarkTest, SUB_GetStreamOperator_benchmark_0010)(
 BENCHMARK_REGISTER_F(CameraBenchmarkTest, SUB_GetStreamOperator_benchmark_0010)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
+/**
+  * @tc.name: Close
+  * @tc.desc: Close, benchmark.
+  * @tc.level: Level0
+  * @tc.size: MediumTest
+  * @tc.type: Function
+  */
+BENCHMARK_F(CameraBenchmarkTest, SUB_Close_benchmark_0010)(
+    benchmark::State &st)
+{ 
+    std::cout << "==========[test log] Preview + video, commit together, then close device,";
+    std::cout << "and preview + video again." << std::endl;
+    // Create and get streamOperator information
+    display_->Init();
+   // std::cout << "==========[test log] The 2nd time11." << std::endl;
+    display_->AchieveStreamOperator();
+    // start stream
+    display_->intents = {PREVIEW, VIDEO};
+    display_->StartStream(display_->intents);
+    // Get preview
+    display_->StartCapture(display_->streamId_preview, display_->captureId_preview, false, true);
+    display_->StartCapture(display_->streamId_video, display_->captureId_video, false, true);
+    // release stream
+    display_->captureIds = {display_->captureId_preview, display_->captureId_video};
+    display_->streamIds = {display_->streamId_preview, display_->streamId_video};
+    display_->StopStream(display_->captureIds, display_->streamIds);
+
+    // Turn off the device
+    for (auto _ : st) {
+    display_->Close();
+    }
+    // Turn on the device
+    display_->Init();
+    std::cout << "==========[test log] The 2nd time." << std::endl;
+}
+BENCHMARK_REGISTER_F(CameraBenchmarkTest, SUB_Close_benchmark_0010)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
 BENCHMARK_MAIN();

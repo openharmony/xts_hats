@@ -445,6 +445,21 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPortCapability_0002, Funct
     manager->UnloadAdapter(manager, adapter);
 }
 /**
+* @tc.name  Test AudioAdapterGetPortCapability API when the PortType is PORT_OUT_IN.
+* @tc.number  SUB_Audio_HDI_AdapterGetPortCapability_0003
+* @tc.desc  Test the AudioAdapterGetPortCapability API,and check if -1 is returned when  PortType is PORT_OUT_IN.
+*/
+HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPortCapability_0003, Function | MediumTest | Level1)
+{
+    int32_t ret = -1;
+    struct AudioPort* audioPort = nullptr;
+    struct AudioAdapter *adapter = {};
+
+    TestAudioManager* manager = GetAudioManagerFuncs();
+    ret = GetLoadAdapter(manager, PORT_OUT_IN, ADAPTER_NAME, &adapter, audioPort);
+    ASSERT_NE(AUDIO_HAL_SUCCESS, ret);
+}
+/**
 * @tc.name  Test AudioAdapterGetPortCapability API, when the parameter adapter is empty.
 * @tc.number  SUB_Audio_HDI_AdapterGetPortCapability_0004
 * @tc.desc   Test the AudioAdapterGetPortCapability API,and check if -1 is returned when  the parameter adapter is empty.
@@ -636,6 +651,29 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterSetPassthroughMode_0005, Func
     ret = adapter->InitAllPorts(adapter);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = adapter->SetPassthroughMode(adapter, audioPort, PORT_PASSTHROUGH_RAW);
+    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
+
+    manager->UnloadAdapter(manager, adapter);
+}
+
+/**
+* @tc.name  Test AdapterSetPassthroughMode API when the not supported mode.
+* @tc.number  SUB_Audio_HDI_AdapterSetPassthroughMode_0005
+* @tc.desc  Test the AdapterSetPassthroughMode API, and check if -1 is returned when  the mode is not supported 
+*/
+HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterSetPassthroughMode_0006666666666666666, Function | MediumTest | Level1)
+{
+    int32_t ret = -1;
+    struct AudioPort* audioPort = nullptr;
+    struct AudioAdapter *adapter = nullptr;
+
+    TestAudioManager* manager = GetAudioManagerFuncs();
+    ret = GetLoadAdapter(manager, PORT_OUT, ADAPTER_NAME, &adapter, audioPort);
+    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
+    ASSERT_NE(nullptr, adapter);
+    ret = adapter->InitAllPorts(adapter);
+    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
+    ret = adapter->SetPassthroughMode(adapter, audioPort, PORT_PASSTHROUGH_HBR2LBR);
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
 
     manager->UnloadAdapter(manager, adapter);

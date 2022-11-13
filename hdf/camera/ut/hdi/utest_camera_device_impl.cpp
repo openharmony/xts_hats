@@ -89,6 +89,20 @@ HWTEST_F(CameraDeviceImplTest, SUB_DriverSystem_CameraHdi_5020, TestSize.Level0)
 }
 
 /**
+  * @tc.name: SetResultMode
+  * @tc.desc: SetResultMode, success.
+  * @tc.level: Level0
+  * @tc.size: MediumTest
+  * @tc.type: Function
+  */
+HWTEST_F(CameraDeviceImplTest, SUB_DriverSystem_CameraHdi_5021, TestSize.Level0)
+{
+    ResultCallbackMode mode = ON_CHANGED;
+    CamRetCode rc = (CamRetCode)cameraDevice_->SetResultMode(mode);
+    ASSERT_EQ(HDI::Camera::V1_0::NO_ERROR, rc);
+}
+
+/**
   * @tc.name: GetEnabledResults
   * @tc.desc: GetEnabledResults, success.
   * @tc.level: Level0

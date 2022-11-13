@@ -511,6 +511,69 @@ HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_HDI_AudioCaptureGetSam
     EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
 }
 /**
+* @tc.name  AudioCaptureSetSampleAttributes_0181
+* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
+*    attrs.type = AUDIO_IN_MEDIA;
+*    attrs.format = AUDIO_FORMAT_TYPE_G711A
+*    attrs.sampleRate = SAMPLE_RATE_8000;
+*    attrs.channelCount = 2;
+*    silenceThreshold = 32*1024 "the value of silenceThreshold is greater than requested";
+* @tc.type: FUNC
+*/
+HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_HDI_AudioCaptureGetSampleAttributes_000181, TestSize.Level1)
+{
+    int32_t ret = -1;
+    struct AudioSampleAttributes attrs = {};
+    int32_t silenceThreshold = 32*1024;
+    ASSERT_NE(nullptr, capture);
+
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_G711A, DOUBLE_CHANNEL_COUNT, SAMPLE_RATE_8000, silenceThreshold);
+    ret = capture->attr.SetSampleAttributes(capture, &attrs);
+    EXPECT_NE(AUDIO_HAL_ERR_INTERNAL, ret);
+}
+/**
+* @tc.name  AudioCaptureSetSampleAttributes_0182
+* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
+*    attrs.type = AUDIO_IN_MEDIA;
+*    attrs.format = AUDIO_FORMAT_TYPE_G711A
+*    attrs.sampleRate = SAMPLE_RATE_8000;
+*    attrs.channelCount = 2;
+*    silenceThreshold = 32*1024 "the value of silenceThreshold is greater than requested";
+* @tc.type: FUNC
+*/
+HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_HDI_AudioCaptureGetSampleAttributes_000182, TestSize.Level1)
+{
+    int32_t ret = -1;
+    struct AudioSampleAttributes attrs = {};
+    int32_t silenceThreshold = 32*1024;
+    ASSERT_NE(nullptr, capture);
+
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_G711U, DOUBLE_CHANNEL_COUNT, SAMPLE_RATE_8000, silenceThreshold);
+    ret = capture->attr.SetSampleAttributes(capture, &attrs);
+    EXPECT_NE(AUDIO_HAL_ERR_INTERNAL, ret);
+}
+/**
+* @tc.name  AudioCaptureSetSampleAttributes_0183
+* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
+*    attrs.type = AUDIO_IN_MEDIA;
+*    attrs.format = AUDIO_FORMAT_TYPE_G711A
+*    attrs.sampleRate = SAMPLE_RATE_8000;
+*    attrs.channelCount = 2;
+*    silenceThreshold = 32*1024 "the value of silenceThreshold is greater than requested";
+* @tc.type: FUNC
+*/
+HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_HDI_AudioCaptureGetSampleAttributes_000183, TestSize.Level1)
+{
+    int32_t ret = -1;
+    struct AudioSampleAttributes attrs = {};
+    int32_t silenceThreshold = 32*1024;
+    ASSERT_NE(nullptr, capture);
+
+    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_G726, DOUBLE_CHANNEL_COUNT, SAMPLE_RATE_8000, silenceThreshold);
+    ret = capture->attr.SetSampleAttributes(capture, &attrs);
+    EXPECT_NE(AUDIO_HAL_ERR_INTERNAL, ret);
+}
+/**
 * @tc.name  AudioCaptureSetSampleAttributes_019
 * @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
 *    attrs.type = AUDIO_IN_MEDIA;

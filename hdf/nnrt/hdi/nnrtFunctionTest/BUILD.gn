@@ -15,7 +15,6 @@ import("//build/ohos.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
 module_output_path = "hats/nnrt"
-#nnrt_path = "//drivers/peripheral/nnrt/"
 
 config("nnrtTest_config") {
   visibility = [ ":*" ]
@@ -37,21 +36,19 @@ ohos_moduletest_suite("HatsHdfNnrtFunctionTest") {
     "//third_party/googletest/googletest/include/",
     "//foundation/ai/neural_network_runtime",
     "//foundation/ai/neural_network_runtime/third_party/include",
-    "//third_party/mindspore/mindspore/lite/mindir/include"
+    "//third_party/mindspore/mindspore/lite/mindir/include",
   ]
 
-  deps = [
-   "//foundation/ai/neural_network_runtime/frameworks:libneural_network_runtime",
-  ]
+  deps = [ "//foundation/ai/neural_network_runtime/frameworks:libneural_network_runtime" ]
 
-   lib_dirs = ["//foundation/ai/neural_network_runtime/third_party/lib32"]
+  lib_dirs = [ "//foundation/ai/neural_network_runtime/third_party/lib32" ]
 
   external_deps = [
     "c_utils:utils",
-    "ipc:ipc_single",
     "drivers_interface_nnrt:libnnrt_proxy_1.0",
     "hilog_native:libhilog",
-    "mindspore:mindir"
+    "ipc:ipc_single",
+    "mindspore:mindir",
   ]
 
   cflags = [ "-Wno-error" ]

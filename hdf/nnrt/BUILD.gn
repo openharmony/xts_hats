@@ -18,6 +18,6 @@ import("//test/xts/tools/build/suite.gni")
 group("HatsHdfNnrtTest") {
   testonly = true
   if (is_standard_system) {
-      deps = [ "hdi:hdi" ]
+    deps = [ "hdi:hdi" ]
   }
 }

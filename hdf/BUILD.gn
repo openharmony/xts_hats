@@ -23,10 +23,10 @@ group("hatshdftest") {
       "input:HatsHdfInputTest",
       "light:HatsHdfLightTest",
       "manager:HatsHdfManagerTest",
+      "nnrt:HatsHdfNnrtTest",
       "sensor:HatsHdfSensorTest",
       "vibrator:HatsHdfVibratorTest",
       "wlan:HatsHdfWifiTest",
-	    "nnrt:HatsHdfNnrtTest",
 
       # "usb:HatsHdfUsbTest",
     ]

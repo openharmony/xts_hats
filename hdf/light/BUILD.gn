@@ -17,11 +17,13 @@ import("//test/xts/tools/build/suite.gni")
 
 group("HatsHdfLightTest") {
   testonly = true
-  deps = [
-    ":HatsHdfLightHdiTest",
-    "hdiService:HatsHdfLightServiceTest",
-    "lightBenchmarkTest:HatsHdfLightbenchmarkTest",
-  ]
+  if (device_name == "rk3568") {
+    deps = [
+      ":HatsHdfLightHdiTest",
+      "hdiService:HatsHdfLightServiceTest",
+      "lightBenchmarkTest:HatsHdfLightbenchmarkTest",
+    ]
+  }
 }
 
 module_output_path = "hdf/light"

@@ -17,11 +17,13 @@ import("//test/xts/tools/build/suite.gni")
 
 group("HatsHdfVibratorTest") {
   testonly = true
-  deps = [
-    ":HatsHdfVibratorHdiTest",
-    "hdiService:HatsHdfVibratorServiceTest",
-    "vibratorBenchmarkTest:HatsHdfVibratorbenchmarkTest",
-  ]
+  if (device_name == "rk3568") {
+    deps = [
+      ":HatsHdfVibratorHdiTest",
+      "hdiService:HatsHdfVibratorServiceTest",
+      "vibratorBenchmarkTest:HatsHdfVibratorbenchmarkTest",
+    ]
+  }
 }
 
 module_output_path = "hdf/misc"

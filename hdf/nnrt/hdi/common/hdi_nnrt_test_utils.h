@@ -46,12 +46,12 @@ public:
     static OH_NN_ReturnCode ConvertModel(OHOS::sptr<V1_0::INnrtDevice> device_, OH_NNModel *model,
                                          V1_0::SharedBuffer &tensorBuffer, V1_0::Model **iModel);
     static V1_0::IOTensor CreateIOTensor(OHOS::sptr<V1_0::INnrtDevice> &device);
-    static V1_0::IOTensor CreateInputIOTensor(OHOS::sptr<V1_0::INnrtDevice> &device, size_t length, void *data);
+    static V1_0::IOTensor CreateInputIOTensor(OHOS::sptr<V1_0::INnrtDevice> &device, size_t length, float* data);
     static V1_0::IOTensor CreateOutputIOTensor(OHOS::sptr<V1_0::INnrtDevice> &device, size_t length);
-    static void *MapMemory(int fd, size_t length);
-    static void UnmapMemory(void *buffer);
-    static void UnmapAllMemory(std::vector<void *> &buffers);
-    static void SetData(void *buffer, size_t length, void *data);
+    static void* MapMemory(int fd, size_t length);
+    static void UnmapMemory(float* buffer);
+    static void UnmapAllMemory(std::vector<void* > &buffers);
+    static void SetData(float* buffer, size_t length, float* data);
     static void ReleaseBufferOfTensors(OHOS::sptr<V1_0::INnrtDevice> &device, std::vector<V1_0::IOTensor> &tensors);
 };
 

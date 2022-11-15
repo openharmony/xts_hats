@@ -46,7 +46,8 @@ void HDICommon::BuildAddGraph(OH_NNModel **model)
     uint32_t paramIndicesValue{2};
     OH_NN_UInt32Array paramIndices{&paramIndicesValue, 1};
     ASSERT_EQ(OH_NN_SUCCESS, OH_NNModel_AddTensor(*model, &activationType));
-    ASSERT_EQ(OH_NN_SUCCESS, OH_NNModel_SetTensorData(*model, 2, (void *)&activationValue, sizeof(int8_t)));
+    int opCnt = 2;
+    ASSERT_EQ(OH_NN_SUCCESS, OH_NNModel_SetTensorData(*model, opCnt, (void *)&activationValue, sizeof(int8_t)));
 
     // add output of Add operation
     OH_NN_Tensor output{OH_NN_FLOAT32, 3, dimensions, nullptr, OH_NN_TENSOR};
@@ -84,7 +85,8 @@ void HDICommon::BuildAddGraphDynamic(OH_NNModel **model)
     uint32_t paramIndicesValue{2};
     OH_NN_UInt32Array paramIndices{&paramIndicesValue, 1};
     ASSERT_EQ(OH_NN_SUCCESS, OH_NNModel_AddTensor(*model, &activationType));
-    ASSERT_EQ(OH_NN_SUCCESS, OH_NNModel_SetTensorData(*model, 2, (void *)&activationValue, sizeof(int8_t)));
+    int opCnt = 2;
+    ASSERT_EQ(OH_NN_SUCCESS, OH_NNModel_SetTensorData(*model, opCnt, (void *)&activationValue, sizeof(int8_t)));
 
     // add output of Add operation
     OH_NN_Tensor output{OH_NN_FLOAT32, 3, dimensions, nullptr, OH_NN_TENSOR};
@@ -118,7 +120,8 @@ OH_NN_ReturnCode HDICommon::ConvertModel(OHOS::sptr<V1_0::INnrtDevice> device_, 
     if (tensorSize > 0) {
         hdiRet = device_->AllocateBuffer(tensorSize, tensorBuffer);
         if (hdiRet != HDF_SUCCESS || tensorBuffer.fd == NNRT_INVALID_FD) {
-            printf("[NNRtTest] [ConvertModel] allocate tensor buffer failed after get const tensor size, ret:%d\n", hdiRet);
+            printf("[NNRtTest] [ConvertModel] allocate tensor buffer failed after get const tensor size,
+                ret:%d\n", hdiRet);
             return OH_NN_FAILED;
         }
     }
@@ -150,7 +153,7 @@ V1_0::IOTensor HDICommon::CreateIOTensor(OHOS::sptr<V1_0::INnrtDevice> &device)
     return tensor;
 }
 
-V1_0::IOTensor HDICommon::CreateInputIOTensor(OHOS::sptr<V1_0::INnrtDevice> &device, size_t length, void *data)
+V1_0::IOTensor HDICommon::CreateInputIOTensor(OHOS::sptr<V1_0::INnrtDevice> &device, size_t length, float* data)
 {
     if (length == 0) {
         std::cout << "The length param is invalid, length=0" << std::endl;
@@ -201,7 +204,7 @@ V1_0::IOTensor HDICommon::CreateOutputIOTensor(OHOS::sptr<V1_0::INnrtDevice> &de
     return tensor;
 }
 
-void *HDICommon::MapMemory(int fd, size_t length)
+void* HDICommon::MapMemory(int fd, size_t length)
 {
     auto memManager = MemoryManager::GetInstance();
     auto memAddress = memManager->MapMemory(fd, length);
@@ -212,7 +215,7 @@ void *HDICommon::MapMemory(int fd, size_t length)
     return memAddress;
 }
 
-void HDICommon::UnmapMemory(void *buffer)
+void HDICommon::UnmapMemory(float* buffer)
 {
     auto memManager = MemoryManager::GetInstance();
     auto ret = memManager->UnMapMemory(buffer);
@@ -221,7 +224,7 @@ void HDICommon::UnmapMemory(void *buffer)
     }
 }
 
-void HDICommon::SetData(void *buffer, size_t length, void *data)
+void HDICommon::SetData(float* buffer, size_t length, float* data)
 {
     if (buffer == nullptr || data == nullptr) {
         printf("[NNRtTest] [SetData] buffer or data is nullprt\n");
@@ -241,8 +244,8 @@ void HDICommon::ReleaseBufferOfTensors(OHOS::sptr<V1_0::INnrtDevice> &device, st
     }
 
     for (auto &tensor : tensors) {
-        printf("[NNRtTest] [ReleaseBufferOfTensors] fd: %d, buffer size:%zu, offset:%zu data size:%zu.\n", tensor.data.fd,
-               tensor.data.bufferSize, tensor.data.offset, tensor.data.dataSize);
+        printf("[NNRtTest] [ReleaseBufferOfTensors] fd: %d, buffer size:%zu, offset:%zu data size:%zu.\n",
+            tensor.data.fd, tensor.data.bufferSize, tensor.data.offset, tensor.data.dataSize);
 
         auto ret = device->ReleaseBuffer(tensor.data);
         if (ret != HDF_SUCCESS) {
@@ -251,7 +254,7 @@ void HDICommon::ReleaseBufferOfTensors(OHOS::sptr<V1_0::INnrtDevice> &device, st
     }
 }
 
-void HDICommon::UnmapAllMemory(std::vector<void *> &buffers)
+void HDICommon::UnmapAllMemory(std::vector<void* > &buffers)
 {
     printf("[NNRtTest] [UnmapAllMemory] buffer num: %u\n", buffers.size());
     auto memoryMenager = MemoryManager::GetInstance();

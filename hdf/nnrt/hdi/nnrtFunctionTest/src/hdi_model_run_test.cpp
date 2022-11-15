@@ -68,7 +68,7 @@ void AddModelTest(OHOS::sptr<V1_0::INnrtDevice> &device_, V1_0::ModelConfig &mod
         auto memAddress = HDICommon::MapMemory(tensor.data.fd, ADDEND_BUFFER_LENGTH);
         mapedMemorys.emplace_back(memAddress);
         // set input data
-        HDICommon::SetData((float* )memAddress, ADDEND_BUFFER_LENGTH, (float* )data.data());
+        HDICommon::SetData((float*)memAddress, ADDEND_BUFFER_LENGTH, (float*)data.data());
         inputs.emplace_back(tensor);
     }
     // set outputs
@@ -223,7 +223,7 @@ HWTEST_F(ModelRunTest, SUB_AI_NNRt_Func_South_Model_Invoke_Run_0600, Function | 
         auto memAddress = HDICommon::MapMemory(tensor.data.fd, ADDEND_BUFFER_LENGTH);
         mapedMemorys.emplace_back(memAddress);
         // set input data
-        HDICommon::SetData((float* )memAddress, ADDEND_BUFFER_LENGTH, (float* )data.data());
+        HDICommon::SetData((float*)memAddress, ADDEND_BUFFER_LENGTH, (float*)data.data());
         inputs.emplace_back(tensor);
     }
     // model run
@@ -392,7 +392,7 @@ HWTEST_F(ModelRunTest, SUB_AI_NNRt_Func_South_Model_Invoke_CombRun_1000, Functio
         auto memAddress = HDICommon::MapMemory(tensor.data.fd, ADDEND_BUFFER_LENGTH);
         mapedMemorys.emplace_back(memAddress);
         // set input data
-        HDICommon::SetData((float* )memAddress, ADDEND_BUFFER_LENGTH, (float* )data.data());
+        HDICommon::SetData((float*)memAddress, ADDEND_BUFFER_LENGTH, (float*)data.data());
         inputs.emplace_back(tensor);
     }
     // set outputs

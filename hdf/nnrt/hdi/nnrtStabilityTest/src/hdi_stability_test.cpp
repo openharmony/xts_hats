@@ -71,7 +71,7 @@ void RunModelTest(OHOS::sptr<V1_0::INnrtDevice> device, OHOS::sptr<V1_0::IPrepar
         auto memAddress = HDICommon::MapMemory(tensor.data.fd, ADDEND_BUFFER_LENGTH);
         mapedMemorys.emplace_back(memAddress);
         // set input data
-        HDICommon::SetData((float* )memAddress, ADDEND_BUFFER_LENGTH, (float* )data.data());
+        HDICommon::SetData((float*)memAddress, ADDEND_BUFFER_LENGTH, (float*)data.data());
         inputs.emplace_back(tensor);
     }
     // set outputs

@@ -120,8 +120,8 @@ OH_NN_ReturnCode HDICommon::ConvertModel(OHOS::sptr<V1_0::INnrtDevice> device_, 
     if (tensorSize > 0) {
         hdiRet = device_->AllocateBuffer(tensorSize, tensorBuffer);
         if (hdiRet != HDF_SUCCESS || tensorBuffer.fd == NNRT_INVALID_FD) {
-            printf("[NNRtTest] [ConvertModel] allocate tensor buffer failed after get const tensor size,
-                ret:%d\n", hdiRet);
+            printf("[NNRtTest] [ConvertModel] allocate tensor buffer failed after get const tensor size,"\
+                "ret:%d\n", hdiRet);
             return OH_NN_FAILED;
         }
     }

@@ -102,6 +102,91 @@ HWTEST_F(CameraDeviceImplTest, SUB_DriverSystem_CameraHdi_5021, TestSize.Level0)
     ASSERT_EQ(HDI::Camera::V1_0::NO_ERROR, rc);
 }
 
+
+/**
+  * @tc.name: SetResultMode_02
+  * @tc.desc: SetResultMode, success.
+  * @tc.level: Level0
+  * @tc.size: MediumTest
+  * @tc.type: Function
+  */
+HWTEST_F(CameraDeviceImplTest, SUB_DriverSystem_CameraHdi_5022, TestSize.Level0)
+{
+    ResultCallbackMode mode = PER_FRAME;
+    CamRetCode rc = (CamRetCode)cameraDevice_->SetResultMode(mode);
+    ASSERT_NE(HDI::Camera::V1_0::CAMERA_BUSY, rc);
+}
+
+/**
+  * @tc.name: SetResultMode_03
+  * @tc.desc: SetResultMode, success.
+  * @tc.level: Level0
+  * @tc.size: MediumTest
+  * @tc.type: Function
+  */
+HWTEST_F(CameraDeviceImplTest, SUB_DriverSystem_CameraHdi_5023, TestSize.Level0)
+{
+    ResultCallbackMode mode = PER_FRAME;
+    CamRetCode rc = (CamRetCode)cameraDevice_->SetResultMode(mode);
+    ASSERT_NE(HDI::Camera::V1_0::INSUFFICIENT_RESOURCES, rc);
+}
+
+/**
+  * @tc.name: SetResultMode_04
+  * @tc.desc: SetResultMode, success.
+  * @tc.level: Level0
+  * @tc.size: MediumTest
+  * @tc.type: Function
+  */
+HWTEST_F(CameraDeviceImplTest, SUB_DriverSystem_CameraHdi_5024, TestSize.Level0)
+{
+    ResultCallbackMode mode = PER_FRAME;
+    CamRetCode rc = (CamRetCode)cameraDevice_->SetResultMode(mode);
+    ASSERT_NE(HDI::Camera::V1_0::METHOD_NOT_SUPPORTED, rc);
+}
+
+/**
+  * @tc.name: SetResultMode_05
+  * @tc.desc: SetResultMode, success.
+  * @tc.level: Level0
+  * @tc.size: MediumTest
+  * @tc.type: Function
+  */
+HWTEST_F(CameraDeviceImplTest, SUB_DriverSystem_CameraHdi_5025, TestSize.Level0)
+{
+    ResultCallbackMode mode = PER_FRAME;
+    CamRetCode rc = (CamRetCode)cameraDevice_->SetResultMode(mode);
+    ASSERT_NE(HDI::Camera::V1_0::CAMERA_CLOSED, rc);
+}
+
+/**
+  * @tc.name: SetResultMode_06
+  * @tc.desc: SetResultMode, success.
+  * @tc.level: Level0
+  * @tc.size: MediumTest
+  * @tc.type: Function
+  */
+HWTEST_F(CameraDeviceImplTest, SUB_DriverSystem_CameraHdi_5026, TestSize.Level0)
+{
+    ResultCallbackMode mode = PER_FRAME;
+    CamRetCode rc = (CamRetCode)cameraDevice_->SetResultMode(mode);
+    ASSERT_NE(HDI::Camera::V1_0::DEVICE_ERROR, rc);
+}
+
+/**
+  * @tc.name: SetResultMode_07
+  * @tc.desc: SetResultMode, success.
+  * @tc.level: Level0
+  * @tc.size: MediumTest
+  * @tc.type: Function
+  */
+HWTEST_F(CameraDeviceImplTest, SUB_DriverSystem_CameraHdi_5027, TestSize.Level0)
+{
+    ResultCallbackMode mode = PER_FRAME;
+    CamRetCode rc = (CamRetCode)cameraDevice_->SetResultMode(mode);
+    ASSERT_NE(HDI::Camera::V1_0::NO_PERMISSION, rc);
+}
+
 /**
   * @tc.name: GetEnabledResults
   * @tc.desc: GetEnabledResults, success.

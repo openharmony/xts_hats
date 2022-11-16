@@ -22,6 +22,7 @@ group("hatshdftest") {
       "display:HatsHdfDisplayTest",
       "input:HatsHdfInputTest",
       "light:HatsHdfLightTest",
+      "location:HatsHdfLocationTest",
       "manager:HatsHdfManagerTest",
       "sensor:HatsHdfSensorTest",
       "vibrator:HatsHdfVibratorTest",

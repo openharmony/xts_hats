@@ -33,7 +33,7 @@ group("HatsHdfCameraTest") {
     }
   } else {
     if (is_standard_system) {
-      deps = [ "hdi:hdi" ]
+      #deps = [ "hdi:hdi" ]
     }
   }
 }

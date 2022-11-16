@@ -300,8 +300,8 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_Memory_0400, Function | Mediu
     V1_0::SharedBuffer tensorBuffer{NNRT_INVALID_FD, 0, 0, 0};
     size_t tensorSize = 224;
     auto hdiRet = device_->AllocateBuffer(tensorSize, tensorBuffer);
-    printf("[NNRtTest] [buffer] fd:%d, buffer size:%zu, offset:%zu, data size:%zu\n", tensorBuffer.fd, tensorBuffer.bufferSize,
-           tensorBuffer.offset, tensorBuffer.dataSize);
+    printf("[NNRtTest] [buffer] fd:%d, buffer size:%zu, offset:%zu, data size:%zu\n",
+        tensorBuffer.fd, tensorBuffer.bufferSize, tensorBuffer.offset, tensorBuffer.dataSize);
     EXPECT_TRUE(hdiRet == HDF_SUCCESS && tensorBuffer.fd != NNRT_INVALID_FD && tensorBuffer.bufferSize == tensorSize)
         << tensorBuffer.fd << tensorBuffer.bufferSize;
     hdiRet = device_->ReleaseBuffer(tensorBuffer);

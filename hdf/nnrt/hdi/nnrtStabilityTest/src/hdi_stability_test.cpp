@@ -60,7 +60,7 @@ void RunModelTest(OHOS::sptr<V1_0::INnrtDevice> device, OHOS::sptr<V1_0::IPrepar
     std::vector<V1_0::IOTensor> outputs;
     std::vector<std::vector<int32_t>> outputsDims;
     std::vector<bool> isOutputBufferEnough;
-    std::vector<void *> mapedMemorys;
+    std::vector<void* > mapedMemorys;
 
     // set inputs
     std::vector<float> inputValue = {ADD_VALUE_1, ADD_VALUE_2};
@@ -71,7 +71,7 @@ void RunModelTest(OHOS::sptr<V1_0::INnrtDevice> device, OHOS::sptr<V1_0::IPrepar
         auto memAddress = HDICommon::MapMemory(tensor.data.fd, ADDEND_BUFFER_LENGTH);
         mapedMemorys.emplace_back(memAddress);
         // set input data
-        HDICommon::SetData(memAddress, ADDEND_BUFFER_LENGTH, (void *)data.data());
+        HDICommon::SetData((float*)memAddress, ADDEND_BUFFER_LENGTH, (float*)data.data());
         inputs.emplace_back(tensor);
     }
     // set outputs
@@ -132,7 +132,6 @@ HWTEST_F(StabilityTest, SUB_AI_NNRt_Reliability_South_Stress_0100, Reliability |
         if (i % PRINT_FREQ == 0) {
             printf("[NnrtTest] SUB_AI_NNRt_Reliability_South_Stress_0100 times: %d/%d\n", i, STRESS_COUNT);
         }
-        
     }
     for (int i=0; i< iModels.size(); i++) {
         mindspore::lite::MindIR_Model_Destroy(&iModels[i]);

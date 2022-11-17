@@ -129,11 +129,7 @@ HWTEST_F(ModelPrepareTest, SUB_AI_NNRt_Func_South_Model_PreparedModelFromCache_0
     EXPECT_EQ(HDF_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
     std::vector<V1_0::SharedBuffer> modelCache;
     EXPECT_EQ(HDF_SUCCESS, iPreparedModel->ExportModelCache(modelCache));
-    printf("[NNRtTest] model cache num:%u\n", modelCache.size());
-    for (auto cache : modelCache) {
-        printf("[NNRtTest] fd: %d, buffer size:%zu, offset:%zu data size:%zu.\n", cache.fd, cache.bufferSize,
-            cache.offset, cache.dataSize);
-    }
+
     // prepare model from invalid model cache
     OHOS::HDI::Nnrt::V1_0::SharedBuffer invalidBuffer{NNRT_INVALID_FD, 0, 0, 0};
     modelCache.emplace_back(invalidBuffer);

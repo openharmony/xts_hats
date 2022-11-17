@@ -25,8 +25,7 @@ group("hatshdftest") {
       #"light:HatsHdfLightTest",
       "location:HatsHdfLocationTest",
       "manager:HatsHdfManagerTest",
-
-      #"nnrt:HatsHdfNnrtTest",
+      "nnrt:HatsHdfNnrtTest",
       "sensor:HatsHdfSensorTest",
       "vibrator:HatsHdfVibratorTest",
       "wlan:HatsHdfWifiTest",

@@ -204,7 +204,6 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_ModelSupport_0200, Function |
 
     std::vector<bool> supportedOperations;
     EXPECT_EQ(HDF_SUCCESS, device_->GetSupportedOperation(*iModel, supportedOperations));
-    printf("[NNRtTest] operation num:%u\n", supportedOperations.size());
     for (uint32_t i = 0; i < supportedOperations.size(); i++) {
         EXPECT_EQ(false, supportedOperations[i]);
     }
@@ -237,7 +236,6 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_ModelSupport_0300, Function |
 
     std::vector<bool> supportedOperations;
     EXPECT_EQ(HDF_SUCCESS, device_->GetSupportedOperation(*iModel, supportedOperations));
-    printf("[NNRtTest] operation num:%u\n", supportedOperations.size());
     for (uint32_t i = 0; i < supportedOperations.size(); i++) {
         EXPECT_EQ(false, supportedOperations[i]);
     }
@@ -300,8 +298,6 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_Memory_0400, Function | Mediu
     V1_0::SharedBuffer tensorBuffer{NNRT_INVALID_FD, 0, 0, 0};
     size_t tensorSize = 224;
     auto hdiRet = device_->AllocateBuffer(tensorSize, tensorBuffer);
-    printf("[NNRtTest] [buffer] fd:%d, buffer size:%zu, offset:%zu, data size:%zu\n",
-        tensorBuffer.fd, tensorBuffer.bufferSize, tensorBuffer.offset, tensorBuffer.dataSize);
     EXPECT_TRUE(hdiRet == HDF_SUCCESS && tensorBuffer.fd != NNRT_INVALID_FD && tensorBuffer.bufferSize == tensorSize)
         << tensorBuffer.fd << tensorBuffer.bufferSize;
     hdiRet = device_->ReleaseBuffer(tensorBuffer);

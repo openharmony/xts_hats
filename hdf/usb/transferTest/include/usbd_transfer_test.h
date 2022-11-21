@@ -16,12 +16,12 @@
 #define USBD_TRANSFER_TEST_H
 
 #include <gtest/gtest.h>
-
-#include "v1_0/iusbd_bulk_callback.h"
 #include "v1_0/usb_types.h"
+#include "v1_0/iusbd_bulk_callback.h"
 
 using OHOS::HDI::Usb::V1_0::UsbDev;
 
+namespace {
 class UsbdTransferTest : public testing::Test {
 public:
     static void SetUpTestCase();
@@ -44,4 +44,5 @@ public:
         return 0;
     };
 };
+}
 #endif // USBD_TRANSFER_TEST_H

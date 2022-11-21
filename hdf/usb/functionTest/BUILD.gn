@@ -29,7 +29,11 @@ ohos_moduletest_suite("HatsHdfUsbFunctionTest") {
     "//utils/system/safwk/native/include",
   ]
 
-  deps = [ "//third_party/googletest:gtest_main" ]
+  deps = [
+    "//drivers/peripheral/usb/ddk:libusb_core",
+    "//drivers/peripheral/usb/hdi_service:libusb_interface_service_1.0",
+    "//third_party/googletest:gtest_main",
+  ]
 
   external_deps = [
     "ability_base:want",

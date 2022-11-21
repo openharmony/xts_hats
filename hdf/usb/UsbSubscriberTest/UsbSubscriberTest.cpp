@@ -15,14 +15,18 @@
 
 #include "UsbSubscriberTest.h"
 #include "hdf_log.h"
+#include "usbd_type.h"
 
 namespace OHOS {
 namespace USB {
 int32_t UsbSubscriberTest::DeviceEvent(const USBDeviceInfo &info)
 {
+    if (info.status == ACT_UPDEVICE || info.status == ACT_DOWNDEVICE) {
+        return 0;
+    }
     busNum_ = info.busNum;
     devAddr_ = info.devNum;
-    HDF_LOGI("%{public}s: busNum is %{public}d, devAddris %{public}d", __func__, busNum_, devAddr_);
+    HDF_LOGI("%{public}s: busNum is %{public}d, devAddr is %{public}d", __func__, busNum_, devAddr_);
     return 0;
 }
 } // namespace USB

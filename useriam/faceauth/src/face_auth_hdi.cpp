@@ -288,3 +288,29 @@ HWTEST_F(UserIamFaceAuthTest, Security_IAM_Face_HDI_FUNC_0110, Function | Medium
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
 }
+
+/**
+ * @tc.number: Security_IAM_Face_HDI_FUNC_0111
+ * @tc.name: Test SetBufferProducer
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ * @tc.level: Level1
+ */
+HWTEST_F(UserIamFaceAuthTest, Security_IAM_Face_HDI_FUNC_0111, Function | MediumTest | Level1)
+{
+    cout << "start test SetBufferProducer" << endl;
+    sptr<IBufferProducer> bufferProducer = nullptr;
+    if (parcel.ReadBool()) {
+        auto surface = Surface::CreateSurfaceAsConsumer();
+        if (surface == nullptr) {
+            cout << "CreateSurfaceAsConsumer fail" << endl;
+        }
+        bufferProducer = surface->GetProducer();
+    }
+    sptr<BufferProducerSequenceable> producerSequenceable =
+        new (std::nothrow) BufferProducerSequenceable(bufferProducer);
+    int32_t ret = g_executorImpl.SetBufferProducer(producerSequenceable);
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+

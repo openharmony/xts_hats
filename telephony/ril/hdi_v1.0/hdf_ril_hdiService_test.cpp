@@ -4716,7 +4716,7 @@ HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_SendCdmaSms_V1_0200, Function | M
 
 HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_SendDataSleepMode_V1_0100, Function | MediumTest | Level3)
 {
- if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t serialId = GetSerialId();
@@ -4730,7 +4730,7 @@ HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_SendDataSleepMode_V1_0100, Functi
 
 HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_SendDataSleepMode_V1_0200, Function | MediumTest | Level3)
 {
- if (!IsReady(SLOTID_2)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     int32_t serialId = GetSerialId();
@@ -4744,7 +4744,7 @@ HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_SendDataSleepMode_V1_0200, Functi
 
 HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_SendDataPerformanceMode_V1_0100, Function | MediumTest | Level3)
 {
-     if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t serialId = GetSerialId();

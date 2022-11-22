@@ -2,7 +2,7 @@
     "kits": [
         {
             "push": [
-                "HatsHdfDisplayDeviceTest->/data/local/tmp/HatsHdfDisplayDeviceTest"
+                #"HatsHdfDisplayDeviceTest->/data/local/tmp/HatsHdfDisplayDeviceTest"
             ],
             "type": "PushKit"
         }

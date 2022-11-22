@@ -21,11 +21,13 @@
 
 using OHOS::HDI::Usb::V1_0::UsbDev;
 
+namespace {
 class HdfUsbdBenchmarkDeviceTest : public benchmark::Fixture {
 public:
     void SetUp(const ::benchmark::State &state);
     void TearDown(const ::benchmark::State &state);
 
-    static struct UsbDev dev_;
+    static UsbDev dev_;
 };
+}
 #endif // USBD_DEVICE_TEST_H

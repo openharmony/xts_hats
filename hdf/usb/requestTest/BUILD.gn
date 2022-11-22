@@ -31,6 +31,7 @@ ohos_moduletest_suite("HatsHdfUsbRequestTest") {
 
   deps = [
     "//drivers/peripheral/usb/ddk:libusb_core",
+    "//drivers/peripheral/usb/hdi_service:libusb_interface_service_1.0",
     "//third_party/googletest:gtest_main",
   ]
 

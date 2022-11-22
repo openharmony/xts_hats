@@ -18,9 +18,11 @@
 #include <benchmark/benchmark.h>
 #include <gtest/gtest.h>
 
+namespace {
 class HdfUsbdBenchmarkFunctionTest : public benchmark::Fixture {
 public:
     void SetUp(const ::benchmark::State &state);
     void TearDown(const ::benchmark::State &state);
 };
+}
 #endif // USBD_FUNCTION_TEST_H

@@ -18,9 +18,9 @@ import("//test/xts/tools/build/suite.gni")
 group("HatsHdfSensorTest") {
   testonly = true
   deps = [
-    ":HatsHdfSensorHdiTest",
+    #":HatsHdfSensorHdiTest",
     "hdiService:HatsHdfSensorServiceTest",
-    "sensorBenchmarkTest:HatsHdfSensorbenchmarkTest",
+    #"sensorBenchmarkTest:HatsHdfSensorbenchmarkTest",
   ]
 }
 

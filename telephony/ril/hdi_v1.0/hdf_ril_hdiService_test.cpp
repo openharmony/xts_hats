@@ -120,6 +120,8 @@ enum class HdiId {
     HREQ_DATA_SET_LINK_BANDWIDTH_REPORTING_RULE,
     HREQ_DATA_SET_DATA_PROFILE_INFO,
     HREQ_DATA_SET_DATA_PERMITTED,
+    HREQ_DATA_SEND_DATA_SLEEP_MODE,
+    HREQ_DATA_SEND_DATA_PERFORMANCE_MODE,
 
     HREQ_NETWORK_BASE = 400,
     HREQ_NETWORK_GET_SIGNAL_STRENGTH,
@@ -289,6 +291,7 @@ public:
         const RilRadioResponseInfo &responseInfo, const DataLinkBandwidthInfo &dataLinkBandwidthInfo) override;
     int32_t SetDataPermittedResponse(const RilRadioResponseInfo &responseInfo) override;
     int32_t SetDataProfileInfoResponse(const RilRadioResponseInfo &responseInfo);
+
     // Modem
     int32_t RadioStateUpdated(const RilRadioResponseInfo &responseInfo, int32_t state) override;
     int32_t VoiceRadioTechUpdated(
@@ -4709,4 +4712,62 @@ HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_SendCdmaSms_V1_0200, Function | M
     WaitFor(WAIT_TIME_SECOND_LONG);
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SMS_SEND_CDMA_SMS));
+}
+
+HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_SendDataSleepMode_V1_0100, Function | MediumTest | Level3)
+{
+ if (!IsReady(SLOTID_1)) {
+        return;
+    }
+    int32_t serialId = GetSerialId();
+    DataSleepInfo dataSleepInfo;
+    dataSleepInfo.sleepEnable = 1;
+    int32_t ret = g_rilInterface->SendDataSleepMode(SLOTID_1, serialId, dataSleepInfo);
+    WaitFor(WAIT_TIME_SECOND_LONG);
+    EXPECT_EQ(SUCCESS, ret);
+    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_DATA_SEND_DATA_SLEEP_MODE));
+}
+
+HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_SendDataSleepMode_V1_0200, Function | MediumTest | Level3)
+{
+ if (!IsReady(SLOTID_2)) {
+        return;
+    }
+    int32_t serialId = GetSerialId();
+    DataSleepInfo dataSleepInfo;
+    dataSleepInfo.sleepEnable = 1;
+    int32_t ret = g_rilInterface->SendDataSleepMode(SLOTID_2, serialId, dataSleepInfo);
+    WaitFor(WAIT_TIME_SECOND_LONG);
+    EXPECT_EQ(SUCCESS, ret);
+    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_DATA_SEND_DATA_SLEEP_MODE));
+}
+
+HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_SendDataPerformanceMode_V1_0100, Function | MediumTest | Level3)
+{
+     if (!IsReady(SLOTID_1)) {
+        return;
+    }
+    int32_t serialId = GetSerialId();
+    DataPerformanceInfo dataPerformanceInfo;
+    dataPerformanceInfo.performanceEnable = 0;
+    dataPerformanceInfo.enforce = 1;
+    int32_t ret = g_rilInterface->SendDataPerformanceMode(SLOTID_1, serialId, dataPerformanceInfo);
+    WaitFor(WAIT_TIME_SECOND_LONG);
+    EXPECT_EQ(SUCCESS, ret);
+    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_DATA_SEND_DATA_PERFORMANCE_MODE));
+}
+
+HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_SendDataPerformanceMode_V1_0200, Function | MediumTest | Level3)
+{
+    if (!IsReady(SLOTID_2)) {
+        return;
+    }
+    int32_t serialId = GetSerialId();
+    DataPerformanceInfo dataPerformanceInfo;
+    dataPerformanceInfo.performanceEnable = 0;
+    dataPerformanceInfo.enforce = 1;
+    int32_t ret = g_rilInterface->SendDataPerformanceMode(SLOTID_2, serialId, dataPerformanceInfo);
+    WaitFor(WAIT_TIME_SECOND_LONG);
+    EXPECT_EQ(SUCCESS, ret);
+    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_DATA_SEND_DATA_PERFORMANCE_MODE));
 }

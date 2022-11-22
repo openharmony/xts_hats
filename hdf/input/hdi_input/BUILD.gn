@@ -13,25 +13,52 @@
 
 import("//build/ohos_var.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
+import("//drivers/peripheral/input/input.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hdf/input"
 ohos_moduletest_suite("HatsHdfInputTest") {
   module_out_path = module_output_path
-  include_dirs = [
-    "//drivers/peripheral/input/hal/include",
-    "//drivers/peripheral/input/interfaces/include",
-  ]
-  sources = [ "./common/hdi_input_test.cpp" ]
+  include_dirs = [ "//third_party/FreeBSD/sys/dev/evdev" ]
   cflags = [
     "-Wall",
     "-Wextra",
     "-Werror",
-    "-fsigned-char",
-    "-fno-common",
+    "-Wno-error",
+    "-DGST_DISABLE_DEPRECATED",
+    "-DHAVE_CONFIG_H",
+    "-DCOLORSPACE=\"videoconvert\"",
     "-fno-strict-aliasing",
+    "-Wno-sign-compare",
+    "-Wno-builtin-requires-header",
+    "-WnO-unused-variable",
+    "-Wno-unused-label",
+    "-Wno-implicit-function-declaration",
+    "-Wno-format",
+    "-Wno-int32_t-conversion",
+    "-Wno-unused-function",
+    "-Wno-thread-sagety-attributes",
+    "-Wno-inconsistent-missing-override",
+    "-fno-rtti",
+    "-fno-exceptions",
+    "-ffunction-sections",
+    "-fdata-sections",
   ]
-  deps = [ "//drivers/peripheral/input/hal:hdi_input" ]
+  if (drivers_peripheral_input_feature_model) {
+    deps = [ "//drivers/peripheral/input/hal:hdi_input" ]
+    sources = [ "./common/hdi_input_test.cpp" ]
+    include_dirs += [
+      "//drivers/peripheral/input/hal/include",
+      "//drivers/peripheral/input/interfaces/include",
+    ]
+  }
+  if (drivers_peripheral_input_feature_udriver) {
+    include_dirs += [
+      "//drivers/peripheral/adapter/input/hal/include/",
+      "//drivers/peripheral/adapter/input/hal:hdi_input_adapter",
+    ]
+    sources = [ "./hdi_input/hdi_input_test.cpp" ]
+  }
   if (is_standard_system) {
     external_deps = [
       "c_utils:utils",

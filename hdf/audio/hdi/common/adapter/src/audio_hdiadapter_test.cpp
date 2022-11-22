@@ -658,10 +658,10 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterSetPassthroughMode_0005, Func
 
 /**
 * @tc.name  Test AdapterSetPassthroughMode API when the not supported mode.
-* @tc.number  SUB_Audio_HDI_AdapterSetPassthroughMode_0005
+* @tc.number  SUB_Audio_HDI_AdapterSetPassthroughMode_0006
 * @tc.desc  Test the AdapterSetPassthroughMode API, and check if -1 is returned when  the mode is not supported 
 */
-HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterSetPassthroughMode_0006666666666666666, Function | MediumTest | Level1)
+HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterSetPassthroughMode_0006, Function | MediumTest | Level1)
 {
     int32_t ret = -1;
     struct AudioPort* audioPort = nullptr;

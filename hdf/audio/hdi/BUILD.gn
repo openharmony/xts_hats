@@ -25,7 +25,8 @@ group("audio_hdi") {
   deps = [
     "common:hdi_common",
     "hardwaredependence:hdi_hardwaredependence",
-    "hdiperformace/capture:HatsHdfAudioCaptureBenchmarkTest",
-    "hdiperformace/render:HatsHdfAudioRenderBenchmarkTest",
+
+    #"hdiperformace/capture:HatsHdfAudioCaptureBenchmarkTest",
+    #"hdiperformace/render:HatsHdfAudioRenderBenchmarkTest",
   ]
 }

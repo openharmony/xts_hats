@@ -1,8 +1,15 @@
 {
     "kits": [
         {
+            "pre-push": [
+             "mount -o rw,remount /",
+             "rm /data/test/*",
+             "mkdir -p /data/test"
+            ],
             "push": [
-                "HatsHdfAudioRenderTest->/data/local/tmp/HatsHdfAudioRenderTest"
+                "HatsHdfAudioRenderTest->/data/local/tmp/HatsHdfAudioRenderTest",
+                "./resource/audio/audiorendertest.wav->/data/test",
+                "./resource/audio/lowlatencyrendertest.wav->/data/test"
             ],
             "type": "PushKit"
         }

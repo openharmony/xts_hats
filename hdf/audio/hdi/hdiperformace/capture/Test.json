@@ -2,7 +2,9 @@
     "kits": [
         {
             "push": [
-                "HatsHdfAudioCaptureBenchmarkTest->/data/local/tmp/HatsHdfAudioCaptureBenchmarkTest"
+                "HatsHdfAudioCaptureBenchmarkTest->/data/local/tmp/HatsHdfAudioCaptureBenchmarkTest",
+                "./resource/audio/audiorendertest.wav->/data",
+                "./resource/audio/lowlatencyrendertest.wav->/data"
             ],
             "type": "PushKit"
         }

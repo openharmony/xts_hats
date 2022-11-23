@@ -21,11 +21,26 @@
 
 using OHOS::HDI::Usb::V1_0::UsbDev;
 
+namespace {
 class HdfUsbdBenchmarkTransferTest : public benchmark::Fixture {
 public:
     void SetUp(const ::benchmark::State &state);
     void TearDown(const ::benchmark::State &state);
 
-    static struct UsbDev dev_;
+    static UsbDev dev_;
 };
+class UsbdBulkCallbackTest : public OHOS::HDI::Usb::V1_0::IUsbdBulkCallback {
+public:
+    UsbdBulkCallbackTest() = default;
+    ~UsbdBulkCallbackTest() = default;
+    int32_t OnBulkWriteCallback(int32_t status, int32_t actLength) override
+    {
+        return 0;
+    };
+    int32_t OnBulkReadCallback(int32_t status, int32_t actLength) override
+    {
+        return 0;
+    };
+};
+}
 #endif // USBD_TRANSFER_TEST_H

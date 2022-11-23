@@ -12,16 +12,15 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
-import("//drivers/peripheral/usb/usb.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hdf/usb"
 
-ohos_moduletest_suite("HatsHdfUsbDeviceTest") {
+ohos_moduletest_suite("HatsHdfUsbAutoFunctionTest") {
   module_out_path = module_output_path
   sources = [
     "../UsbSubscriberTest/UsbSubscriberTest.cpp",
-    "./common/usbd_device_test.cpp",
+    "./common/usbd_auto_function_test.cpp",
   ]
 
   include_dirs = [

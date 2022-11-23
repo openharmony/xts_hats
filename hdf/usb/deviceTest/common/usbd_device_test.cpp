@@ -33,7 +33,6 @@ using namespace OHOS::HDI::Usb::V1_0;
 
 namespace {
 sptr<IUsbInterface> g_usbInterface = nullptr;
-}
 
 struct UsbDev UsbdDeviceTest::dev_ = { 0, 0 };
 
@@ -75,7 +74,7 @@ void UsbdDeviceTest::TearDown(void) {}
  * @tc.name: SUB_USB_HDI_0010
  * @tc.desc: Test functions to OpenDevice
  * @tc.desc: int32_t OpenDevice(const UsbDev &dev);
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0010, Function | MediumTest | Level1)
@@ -90,7 +89,7 @@ HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0010, Function | MediumTest | Level1)
  * @tc.name: SUB_USB_HDI_0020
  * @tc.desc: Test functions to OpenDevice
  * @tc.desc: int32_t OpenDevice(const UsbDev &dev);
- * @tc.desc:
+ * @tc.desc: Negative test: parameters exception, busNum error
  * @tc.type: FUNC
  */
 HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0020, Function | MediumTest | Level1)
@@ -105,7 +104,7 @@ HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0020, Function | MediumTest | Level1)
  * @tc.name: SUB_USB_HDI_0030
  * @tc.desc: Test functions to OpenDevice
  * @tc.desc: int32_t OpenDevice(const UsbDev &dev);
- * @tc.desc:
+ * @tc.desc: Negative test: parameters exception, devAddr error
  * @tc.type: FUNC
  */
 HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0030, Function | MediumTest | Level1)
@@ -120,7 +119,7 @@ HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0030, Function | MediumTest | Level1)
  * @tc.name: SUB_USB_HDI_0040
  * @tc.desc: Test functions to OpenDevice
  * @tc.desc: int32_t OpenDevice(const UsbDev &dev);
- * @tc.desc:
+ * @tc.desc: Negative test: parameters exception, busNum && devAddr error
  * @tc.type: FUNC
  */
 HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0040, Function | MediumTest | Level1)
@@ -137,7 +136,7 @@ HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0040, Function | MediumTest | Level1)
  * @tc.name: SUB_USB_HDI_0050
  * @tc.desc: Test functions to CloseDevice
  * @tc.desc: int32_t CloseDevice(const UsbDev &dev);
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0050, Function | MediumTest | Level1)
@@ -155,7 +154,7 @@ HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0050, Function | MediumTest | Level1)
  * @tc.name: SUB_USB_HDI_0060
  * @tc.desc: Test functions to CloseDevice
  * @tc.desc: int32_t CloseDevice(const UsbDev &dev);
- * @tc.desc:
+ * @tc.desc: Negative test: parameters exception, busNum error
  * @tc.type: FUNC
  */
 HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0060, Function | MediumTest | Level1)
@@ -176,7 +175,7 @@ HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0060, Function | MediumTest | Level1)
  * @tc.name: SUB_USB_HDI_0070
  * @tc.desc: Test functions to CloseDevice
  * @tc.desc: int32_t CloseDevice(const UsbDev &dev);
- * @tc.desc:
+ * @tc.desc: Negative test: parameters exception, devAddr error
  * @tc.type: FUNC
  */
 HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0070, Function | MediumTest | Level1)
@@ -197,7 +196,7 @@ HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0070, Function | MediumTest | Level1)
  * @tc.name: SUB_USB_HDI_0080
  * @tc.desc: Test functions to CloseDevice
  * @tc.desc: int32_t CloseDevice(const UsbDev &dev);
- * @tc.desc:
+ * @tc.desc: Negative test: parameters exception, busNum && devAddr error
  * @tc.type: FUNC
  */
 HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0080, Function | MediumTest | Level1)
@@ -214,3 +213,4 @@ HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0080, Function | MediumTest | Level1)
     dev = dev_;
     g_usbInterface->CloseDevice(dev);
 }
+} // namespace

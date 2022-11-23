@@ -109,7 +109,7 @@ static void ReportHotPlugEventPkgCallback(const InputHotPlugEvent *msg)
   * @tc.type: FUNC
   * @tc.require: AR000F867R
   */
-HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0010, TestSize.Level1)
+HWTEST_F(HdiInputTest, ScanInputDevice001, TestSize.Level1)
 {
     InputDevDesc sta[MAX_DEVICES] = {0};
     printf("%s: [Input] ScanInputDevice001 enter %d\n", __func__, __LINE__);
@@ -138,7 +138,7 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0010, TestSize.Level1)
   * @tc.type: FUNC
   * @tc.require: AR000F867R
   */
-HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0020, TestSize.Level1)
+HWTEST_F(HdiInputTest, OpenInputDev001, TestSize.Level1)
 {
     printf("%s: [Input] OpenInputDev001 enter %d\n", __func__, __LINE__);
     INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
@@ -156,7 +156,7 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0020, TestSize.Level1)
   * @tc.type: FUNC
   * @tc.require: AR000F867R
   */
-HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0030, TestSize.Level1)
+HWTEST_F(HdiInputTest, OpenInputDevice002, TestSize.Level1)
 {
     printf("%s: [Input] OpenInputDev002 enter %d\n", __func__, __LINE__);
     INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
@@ -176,7 +176,7 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0030, TestSize.Level1)
   * @tc.type: FUNC
   * @tc.require: AR000F867R
   */
-HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0040, TestSize.Level1)
+HWTEST_F(HdiInputTest, OpenInputDevice003, TestSize.Level1)
 {
     printf("%s: [Input] OpenInputDev003 enter %d\n", __func__, __LINE__);
     INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
@@ -195,7 +195,7 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0040, TestSize.Level1)
   * @tc.type: FUNC
   * @tc.require: AR000F867T, AR000F8QNL
   */
-HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0050, TestSize.Level1)
+HWTEST_F(HdiInputTest, CloseInputDevice001, TestSize.Level1)
 {
     printf("%s: [Input] CloseInputDev001 enter %d\n", __func__, __LINE__);
     INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
@@ -213,7 +213,7 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0050, TestSize.Level1)
   * @tc.type: FUNC
   * @tc.require: AR000F867T
   */
-HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0060, TestSize.Level1)
+HWTEST_F(HdiInputTest, CloseInputDevice002, TestSize.Level1)
 {
     printf("%s: [Input] CloseInputDev002 enter %d\n", __func__, __LINE__);
     INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
@@ -232,7 +232,7 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0060, TestSize.Level1)
   * @tc.type: FUNC
   * @tc.require: AR000F867T
   */
-HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0070, TestSize.Level1)
+HWTEST_F(HdiInputTest, CloseInputDevice003, TestSize.Level1)
 {
     printf("%s: [Input] CloseInputDev002 enter %d\n", __func__, __LINE__);
     INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
@@ -251,7 +251,7 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0070, TestSize.Level1)
   * @tc.type: FUNC
   * @tc.require: AR000F867S
   */
-HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0080, TestSize.Level1)
+HWTEST_F(HdiInputTest, GetInputDevice001, TestSize.Level1)
 {
     printf("%s: [Input] GetInputDevice001 enter %d\n", __func__, __LINE__);
     InputDeviceInfo *dev = new InputDeviceInfo();
@@ -275,7 +275,7 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0080, TestSize.Level1)
   * @tc.type: FUNC
   * @tc.require: AR000F867S
   */
-HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0090, TestSize.Level1)
+HWTEST_F(HdiInputTest, GetInputDevice002, TestSize.Level1)
 {
     printf("%s: [Input] GetInputDevice002 enter %d\n", __func__, __LINE__);
     InputDeviceInfo *dev = new InputDeviceInfo();
@@ -294,7 +294,7 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0090, TestSize.Level1)
   * @tc.type: FUNC
   * @tc.require: AR000F867S
   */
-HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0100, TestSize.Level1)
+HWTEST_F(HdiInputTest, GetInputDevice003, TestSize.Level1)
 {
     printf("%s: [Input] GetInputDevice003 enter %d\n", __func__, __LINE__);
     InputDeviceInfo *dev = new InputDeviceInfo();
@@ -313,9 +313,9 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0100, TestSize.Level1)
   * @tc.type: FUNC
   * @tc.require: AR000F8680
   */
-HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0110, TestSize.Level1)
+HWTEST_F(HdiInputTest, GetInputDeviceList001, TestSize.Level1)
 {
-    printf("%s: [Input] GetInputDeviceList001 enter", __func__);
+    printf("%s: [Input] GetInputDeviceList001 enter\n", __func__);
     int32_t ret;
     uint32_t num = 0;
     InputDeviceInfo *dev = new InputDeviceInfo[MAX_INPUT_DEV_NUM] {};
@@ -342,9 +342,9 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0110, TestSize.Level1)
   * @tc.type: FUNC
   * @tc.require: AR000F8682, AR000F8QNL
   */
-HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0120, TestSize.Level1)
+HWTEST_F(HdiInputTest, RegisterCallbackAndReportData001, TestSize.Level1)
 {
-    printf("%s: [Input] RegisterCallbackAndReportData001 enter", __func__);
+    printf("%s: [Input] RegisterCallbackAndReportData001 enter\n", __func__);
     int32_t ret;
     g_callback.EventPkgCallback = ReportEventPkgCallback;
     g_hotplugCb.HotPlugCallback = ReportHotPlugEventPkgCallback;
@@ -369,9 +369,9 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0120, TestSize.Level1)
   * @tc.type: FUNC
   * @tc.require: SR000F867Q
   */
-HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_00130, TestSize.Level1)
+HWTEST_F(HdiInputTest, UnregisterReportCallback001, TestSize.Level1)
 {
-    printf("%s: [Input] UnregisterReportCallback001 enter", __func__);
+    printf("%s: [Input] UnregisterReportCallback001 enter\n", __func__);
     int32_t ret;
     INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
     INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputReporter, INPUT_NULL_PTR);

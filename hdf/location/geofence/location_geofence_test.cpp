@@ -83,7 +83,6 @@ void LocationGeofenceTest::SetUpTestCase()
         return;
     }
     g_igeofenceHci = IGeofenceInterface::Get();
-    printf("SetUpTestCase");
 }
 
 void LocationGeofenceTest::TearDownTestCase()
@@ -105,17 +104,14 @@ void LocationGeofenceTest::TearDownTestCase()
         printf("Load geofence service failed!");
         return;
     }
-    printf("TearDownTestCase");
 }
 
 void LocationGeofenceTest::SetUp()
 {
-    printf("SetUp");
 }
 
 void LocationGeofenceTest::TearDown()
 {
-    printf("TearDown");
 }
 
 

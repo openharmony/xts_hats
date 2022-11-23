@@ -305,7 +305,6 @@ void LocationAgnssTest::SetUpTestCase()
         return;
     }
     g_ignssHci->EnableGnss(gnss_callback);
-    printf("SetUpTestCase");
 }
 
 void LocationAgnssTest::TearDownTestCase()
@@ -328,17 +327,14 @@ void LocationAgnssTest::TearDownTestCase()
         return;
     }
     g_ignssHci->DisableGnss();
-    printf("TearDownTestCase");
 }
 
 void LocationAgnssTest::SetUp()
 {
-    printf("SetUp");
 }
 
 void LocationAgnssTest::TearDown()
 {
-    printf("TearDown");
 }
 
 

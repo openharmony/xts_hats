@@ -66,7 +66,6 @@ public:
     void SetUp();
     void TearDown();
     static int32_t ReadFile(const char *path, char *buf, size_t size);
-    void SplitString(const std::string &str, std::vector<std::string> &ret, const std::string &sep);
 };
 
 void HdfPowerHdiTest::SetUpTestCase()
@@ -91,7 +90,7 @@ int32_t HdfPowerHdiTest::ReadFile(const char *path, char *buf, size_t size)
     std::lock_guard<std::mutex> lock(g_mutex);
     int32_t ret;
 
-    int32_t fd = open(path, O_RDONLY);
+    int32_t fd = open(path, O_RDONLY, S_IRUSR | S_IRGRP | S_IROTH);
     if (fd < HDF_SUCCESS) {
         return HDF_FAILURE;
     }
@@ -106,34 +105,6 @@ int32_t HdfPowerHdiTest::ReadFile(const char *path, char *buf, size_t size)
     buf[size - 1] = '\0';
     return HDF_SUCCESS;
 }
-
-void HdfPowerHdiTest::SplitString(const std::string &str, std::vector<std::string> &ret, const std::string &sep)
-{
-    if (str.empty()) {
-        return;
-    }
-
-    std::string temp;
-    std::string::size_type begin = str.find_first_not_of(sep);
-    std::string::size_type pos = 0;
-    while (begin != std::string::npos) {
-        pos = str.find(sep, begin);
-        if (pos != std::string::npos) {
-            temp = str.substr(begin, pos - begin);
-            begin = pos + sep.length();
-        } else {
-            temp = str.substr(begin);
-            begin = pos;
-        }
-
-        if (!temp.empty()) {
-            ret.push_back(temp);
-            temp.clear();
-        }
-    }
-    return;
-}
-
 }
 
 namespace {
@@ -179,16 +150,9 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest003, TestSize.Level1)
     ret = HdfPowerHdiTest::ReadFile(stateBuf, stateValue, sizeof(stateValue));
     EXPECT_EQ(0, ret);
     std::string state = stateValue;
-    std::vector<std::string> stateList;
-    HdfPowerHdiTest::SplitString(state, stateList, " ");
     EXPECT_FALSE(state.empty());
-    for (auto& iter : stateList) {
-        if (iter == SUSPEND_STATE) {
-            ret = 1;
-        }
-    }
-    
-    EXPECT_EQ(ret, 1) << "HdfPowerHdiTest003 failed";
+    auto pos = state.find(SUSPEND_STATE);
+    EXPECT_TRUE(pos != std::string::npos) << "HdfPowerHdiTest003 failed state: " << state;
 }
 
 /**
@@ -238,16 +202,9 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest006, TestSize.Level1)
     ret = HdfPowerHdiTest::ReadFile(lockBuf, lockValue, sizeof(lockValue));
     EXPECT_EQ(0, ret);
     std::string lock = lockValue;
-    std::vector<std::string> lockList;
-    HdfPowerHdiTest::SplitString(lock, lockList, " ");
     EXPECT_FALSE(lock.empty());
-    for (auto& iter : lockList) {
-        if (iter == testName) {
-            ret = 1;
-        }
-    }
-    
-    EXPECT_EQ(ret, 1) << "HdfPowerHdiTest006 failed";
+    auto pos = lock.find(testName);
+    EXPECT_TRUE(pos != std::string::npos) << "HdfPowerHdiTest006 failed lock: " << lock;
 }
 
 /**
@@ -273,16 +230,9 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest007, TestSize.Level1)
     ret = HdfPowerHdiTest::ReadFile(unLockBuf, unLockValue, sizeof(unLockValue));
     EXPECT_EQ(0, ret);
     std::string unLock = unLockValue;
-    std::vector<std::string> unLockList;
-    HdfPowerHdiTest::SplitString(unLock, unLockList, " ");
     EXPECT_FALSE(unLock.empty());
-    for (auto& iter : unLockList) {
-        if (iter == testName) {
-            ret = 1;
-        }
-    }
-    
-    EXPECT_EQ(ret, 1) << "HdfPowerHdiTest007 failed";
+    auto pos = unLock.find(testName);
+    EXPECT_TRUE(pos != std::string::npos) << "HdfPowerHdiTest007 failed unLock: " << unLock;
 }
 
 /**

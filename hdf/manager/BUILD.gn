@@ -12,13 +12,18 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
+import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
 group("HatsHdfManagerTest") {
   testonly = true
-  deps = [
-    "managerBenchmarkTest:HatsHdfManagerbenchmarkTest",
-    "managerHdiTest:HatsHdfManagerHdiTest",
-    "managerServiceTest:HatsHdfManagerServiceTest",
-  ]
+  if (xts_hats_rich == true) {
+    deps = [ "managerHdiTest:HatsHdfManagerHdiTest" ]
+  } else {
+    deps = [
+      #"managerBenchmarkTest:HatsHdfManagerbenchmarkTest",
+      "managerHdiTest:HatsHdfManagerHdiTest",
+      "managerServiceTest:HatsHdfManagerServiceTest",
+    ]
+  }
 }

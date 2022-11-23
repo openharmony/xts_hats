@@ -18,6 +18,6 @@ group("HatsHdfInputTest") {
   testonly = true
   deps = [
     "hdi_input:HatsHdfInputTest",
-    "inputBenchmarkTest:HatsHdfInputbenchmarkTest",
+    #"inputBenchmarkTest:HatsHdfInputbenchmarkTest",
   ]
 }

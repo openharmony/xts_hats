@@ -20,7 +20,7 @@
 #include <gtest/gtest.h>
 #include <hdf_io_service_if.h>
 #include <hdf_log.h>
-#include <hdi_smq.h>
+#include <base/hdi_smq.h>
 #include <idevmgr_hdi.h>
 #include <iostream>
 #include <ipc_object_stub.h>
@@ -139,7 +139,7 @@ BENCHMARK_F(ManagerBenchmarkTest, GetService)(benchmark::State &st)
     for (auto _ : st) {
         sampleService = servmgr->GetService(TEST_SERVICE_NAME);
         }
-
+    ASSERT_TRUE(sampleService != nullptr);
     sptr<IRemoteObject> callback = new IPCObjectStubTest();
     OHOS::MessageParcel data;
     OHOS::MessageParcel reply;
@@ -198,7 +198,7 @@ BENCHMARK_F(ManagerBenchmarkTest, LoadDevice)(benchmark::State &st)
     ASSERT_EQ(status, HDF_SUCCESS);
 
     auto sampleService2 = servmgr->GetService(newServName);
-    ASSERT_TRUE(sampleService != nullptr);
+    ASSERT_TRUE(sampleService2 != nullptr);
 
     data.FlushBuffer();
     reply.FlushBuffer();
@@ -274,7 +274,7 @@ BENCHMARK_F(ManagerBenchmarkTest, UnloadDevice)(benchmark::State &st)
     ASSERT_EQ(status, HDF_SUCCESS);
 
     auto sampleService2 = servmgr->GetService(newServName);
-    ASSERT_TRUE(sampleService != nullptr);
+    ASSERT_TRUE(sampleService2 != nullptr);
 
     data.FlushBuffer();
     reply.FlushBuffer();

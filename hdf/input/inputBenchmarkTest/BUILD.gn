@@ -15,7 +15,7 @@ import("//build/test.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
 
-module_output_path = "hdf/input"
+module_output_path = "hats/input"
 ohos_moduletest_suite("HatsHdfInputbenchmarkTest") {
   module_out_path = module_output_path
   include_dirs = [
@@ -46,6 +46,4 @@ ohos_moduletest_suite("HatsHdfInputbenchmarkTest") {
   } else {
     external_deps = [ "hilog:libhilog" ]
   }
-  subsystem_name = "hdf"
-  part_name = "drivers_peripheral_input"
 }

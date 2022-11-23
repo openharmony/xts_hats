@@ -163,7 +163,6 @@ void LocationGnssTest::SetUpTestCase()
         return;
     }
     g_ignssHci = IGnssInterface::Get();
-    printf("SetUpTestCase");
 }
 
 void LocationGnssTest::TearDownTestCase()
@@ -185,17 +184,14 @@ void LocationGnssTest::TearDownTestCase()
         printf("Load geofence service failed!");
         return;
     }
-    printf("TearDownTestCase");
 }
 
 void LocationGnssTest::SetUp()
 {
-    printf("SetUp");
 }
 
 void LocationGnssTest::TearDown()
 {
-    printf("TearDown");
 }
 
 

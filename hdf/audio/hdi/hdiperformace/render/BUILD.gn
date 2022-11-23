@@ -17,7 +17,7 @@ import("//drivers/peripheral/audio/audio.gni")
 import("//test/xts/tools/build/suite.gni")
 
 ###########################SystemTest##########################################
-module_output_path = "hdf/audio"
+module_output_path = "hats/audio"
 
 ###########################hdf_audio_hdi_render_performace_test#####################
 ohos_moduletest_suite("HatsHdfAudioRenderBenchmarkTest") {

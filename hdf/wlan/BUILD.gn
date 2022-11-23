@@ -27,7 +27,7 @@ group("HatsHdfWifiTest") {
 
         #"wifi:HatsHdfWificlientTest",
         #"wifi:HatsHdfWificommonTest",
-        "wlanBenchmarkTest:HatsHdfWlanbenchmarkTest",
+        #"wlanBenchmarkTest:HatsHdfWlanbenchmarkTest",
       ]
     }
   }

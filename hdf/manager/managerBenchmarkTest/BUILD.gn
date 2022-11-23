@@ -16,7 +16,7 @@ import("//build/test.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
 
-module_output_path = "hdf/manager"
+module_output_path = "hats/manager"
 
 ohos_moduletest_suite("HatsHdfManagerbenchmarkTest") {
   module_out_path = module_output_path

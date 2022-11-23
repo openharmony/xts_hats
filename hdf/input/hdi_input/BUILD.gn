@@ -13,25 +13,50 @@
 
 import("//build/ohos_var.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
+import("//drivers/peripheral/input/input.gni")
 import("//test/xts/tools/build/suite.gni")
 
-module_output_path = "hdf/input"
+module_output_path = "hats/input"
 ohos_moduletest_suite("HatsHdfInputTest") {
   module_out_path = module_output_path
   include_dirs = [
-    "//drivers/peripheral/input/hal/include",
+    "//third_party/FreeBSD/sys/dev/evdev",
     "//drivers/peripheral/input/interfaces/include",
   ]
-  sources = [ "./common/hdi_input_test.cpp" ]
-  cflags = [
+  cflags_cc = [
     "-Wall",
     "-Wextra",
     "-Werror",
-    "-fsigned-char",
-    "-fno-common",
+    "-Wno-error",
+    "-DGST_DISABLE_DEPRECATED",
+    "-DHAVE_CONFIG_H",
+    "-DCOLORSPACE=\"videoconvert\"",
     "-fno-strict-aliasing",
+    "-Wno-sign-compare",
+    "-Wno-builtin-requires-header",
+    "-WnO-unused-variable",
+    "-Wno-unused-label",
+    "-Wno-implicit-function-declaration",
+    "-Wno-format",
+    "-Wno-int32_t-conversion",
+    "-Wno-unused-function",
+    "-Wno-thread-sagety-attributes",
+    "-Wno-inconsistent-missing-override",
+    "-fno-rtti",
+    "-fno-exceptions",
+    "-ffunction-sections",
+    "-fdata-sections",
   ]
-  deps = [ "//drivers/peripheral/input/hal:hdi_input" ]
+  if (drivers_peripheral_input_feature_model) {
+    deps = [ "//drivers/peripheral/input/hal:hdi_input" ]
+    sources = [ "./common/hdi_input_test.cpp" ]
+    include_dirs += [ "//drivers/peripheral/input/hal/include" ]
+  }
+  if (drivers_peripheral_input_feature_udriver) {
+    deps = [ "//drivers/peripheral/input/udriver:hdi_input_udriver" ]
+    sources = [ "./hdi_input/hdi_input_test.cpp" ]
+    include_dirs += [ "//drivers/peripheral/input/udriver/include" ]
+  }
   if (is_standard_system) {
     external_deps = [
       "c_utils:utils",
@@ -41,6 +66,4 @@ ohos_moduletest_suite("HatsHdfInputTest") {
   } else {
     external_deps = [ "hilog:libhilog" ]
   }
-  subsystem_name = "hdf"
-  part_name = "drivers_peripheral_input"
 }

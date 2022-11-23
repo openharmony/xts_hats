@@ -24,9 +24,10 @@ group("HatsHdfWifiTest") {
         "hdi_service:WlanHdiServiceTestC",
         "wifi:HatsHdfWifiHdiTest",
         "wifi:HatsHdfWifiHdistartandstopTest",
-        "wifi:HatsHdfWificlientTest",
-        "wifi:HatsHdfWificommonTest",
-        "wlanBenchmarkTest:HatsHdfWlanbenchmarkTest",
+
+        #"wifi:HatsHdfWificlientTest",
+        #"wifi:HatsHdfWificommonTest",
+        #"wlanBenchmarkTest:HatsHdfWlanbenchmarkTest",
       ]
     }
   }

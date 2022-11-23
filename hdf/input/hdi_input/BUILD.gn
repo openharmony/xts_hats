@@ -16,11 +16,14 @@ import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//drivers/peripheral/input/input.gni")
 import("//test/xts/tools/build/suite.gni")
 
-module_output_path = "hdf/input"
+module_output_path = "hats/input"
 ohos_moduletest_suite("HatsHdfInputTest") {
   module_out_path = module_output_path
-  include_dirs = [ "//third_party/FreeBSD/sys/dev/evdev" ]
-  cflags = [
+  include_dirs = [
+    "//third_party/FreeBSD/sys/dev/evdev",
+    "//drivers/peripheral/input/interfaces/include",
+  ]
+  cflags_cc = [
     "-Wall",
     "-Wextra",
     "-Werror",
@@ -47,17 +50,12 @@ ohos_moduletest_suite("HatsHdfInputTest") {
   if (drivers_peripheral_input_feature_model) {
     deps = [ "//drivers/peripheral/input/hal:hdi_input" ]
     sources = [ "./common/hdi_input_test.cpp" ]
-    include_dirs += [
-      "//drivers/peripheral/input/hal/include",
-      "//drivers/peripheral/input/interfaces/include",
-    ]
+    include_dirs += [ "//drivers/peripheral/input/hal/include" ]
   }
   if (drivers_peripheral_input_feature_udriver) {
-    include_dirs += [
-      "//drivers/peripheral/adapter/input/hal/include/",
-      "//drivers/peripheral/adapter/input/hal:hdi_input_adapter",
-    ]
+    deps = [ "//drivers/peripheral/input/udriver:hdi_input_udriver" ]
     sources = [ "./hdi_input/hdi_input_test.cpp" ]
+    include_dirs += [ "//drivers/peripheral/input/udriver/include" ]
   }
   if (is_standard_system) {
     external_deps = [
@@ -68,6 +66,4 @@ ohos_moduletest_suite("HatsHdfInputTest") {
   } else {
     external_deps = [ "hilog:libhilog" ]
   }
-  subsystem_name = "hdf"
-  part_name = "drivers_peripheral_input"
 }

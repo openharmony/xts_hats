@@ -37,9 +37,6 @@ public:
     
     int32_t OnReceivedHciPacket(BtType btType, const std::vector<uint8_t>& data) override;
     
-private:
-    
-    BtHciCallbacks *callbacks_;
 };
 } // V1_0
 } // Hci

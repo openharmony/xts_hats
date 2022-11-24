@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+# Copyright (c) 2022 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -12,37 +12,29 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
+import("//build/test.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//drivers/peripheral/audio/audio.gni")
-import("//test/xts/hats/hdf/audio/audio.gni")
 import("//test/xts/tools/build/suite.gni")
 
-###########################systemtest##############################
-module_output_path = "hats/audio"
+module_output_path = "hads/audio"
 
-###########################HatsHdfAudioRenderControlTest######################
-ohos_moduletest_suite("HatsHdfAudioRenderControlTest") {
+ohos_moduletest_suite("HatsAudioProxyRenderTest") {
   module_out_path = module_output_path
   sources = [
-    "../../../common/hdi_common/src/audio_hdi_common.cpp",
-    "src/audio_hdirender_control_test.cpp",
+    "../common/src/audio_proxy_common_fun_test.cpp",
+    "src/audio_proxy_render_test.cpp",
   ]
 
   include_dirs = [
-    "//drivers/peripheral/audio/hal/hdi_passthrough/include",
+    "//test/xts/hats/hdf/audio/client_advance/common/include",
     "//drivers/peripheral/audio/interfaces/include",
+    "//drivers/peripheral/audio/hal/hdi_passthrough/include",
+    "//drivers/peripheral/audio/hal/hdi_binder/proxy/include",
+    "//drivers/peripheral/audio/hal/hdi_binder/server/include",
     "//drivers/hdf_core/adapter/uhdf2/include/hdi",
     "//drivers/hdf_core/adapter/uhdf2/shared/include",
-    "//drivers/hdf_core/framework/include/core",
-    "//drivers/hdf_core/framework/include/utils",
-    "//drivers/hdf_core/framework/include/osal",
-    "//drivers/hdf_core/framework/include",
-    "//third_party/bounds_checking_function/include",
-    "//drivers/hdf_core/framework/utils/include",
-    "//drivers/hdf_core/adapter/uhdf2/osal/include",
     "//third_party/googletest/googletest/include/gtest",
-    "//test/xts/hats/hdf/audio/common/hdi_common/include",
-    "//test/xts/hats/hdf/audio/hdi/render/renderControl/include",
   ]
   cflags = [
     "-Wall",
@@ -54,19 +46,15 @@ ohos_moduletest_suite("HatsHdfAudioRenderControlTest") {
   ]
   deps = [
     "//drivers/peripheral/audio/hal/hdi_binder/proxy:hdi_audio_client",
+    "//drivers/peripheral/audio/hal/hdi_passthrough:hdi_audio",
+    "//drivers/peripheral/audio/hal/hdi_passthrough:hdi_audio_common",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
   ]
-  defines = []
-  if (enable_audio_adm_passthrough) {
-    defines += [ "AUDIO_ADM_SO" ]
-  }
-  if (enable_audio_adm_service) {
-    defines += [ "AUDIO_ADM_SERVICE" ]
-  }
-  if (enable_audio_product_rk) {
-    defines += [ "PRODUCT_RK3568" ]
-  }
+  external_deps = [
+    "c_utils:utils",
+    "hdf_core:libhdf_utils",
+  ]
   subsystem_name = "hdf"
   part_name = "drivers_peripheral_audio"
 }

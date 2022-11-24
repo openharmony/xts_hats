@@ -44,6 +44,7 @@ using namespace testing::ext;
 namespace {
     sptr<IHciInterface>  g_iBtHci = nullptr;
     sptr<HciCallbackImpl> g_hciCallbacks = nullptr;
+    constexpr int32_t SENSOR_WAIT_TIME = 1000;
    
 }
 class HdfBluetoothHdiTest : public testing::Test {
@@ -56,6 +57,7 @@ public:
 void HdfBluetoothHdiTest::SetUpTestCase()
 {
     g_iBtHci = IHciInterface::Get();
+    std::cout << "g_iBtHci = " << g_iBtHci << std::endl;
 }
 void HdfBluetoothHdiTest::TearDownTestCase()
 {
@@ -75,21 +77,13 @@ void HdfBluetoothHdiTest::TearDown()
 HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothInit_0100, TestSize.Level1)
 {
     g_hciCallbacks = new (std::nothrow) HciCallbackImpl();
-    if (g_hciCallbacks == nullptr) {
-        return;
-    }
+    ASSERT_NE(nullptr, g_hciCallbacks);
+    std::cout << "g_hciCallbacks = " << g_hciCallbacks << std::endl;
+    ASSERT_NE(nullptr, g_iBtHci);
+    std::cout << "g_iBtHci0100 = " << g_iBtHci << std::endl;
     int32_t ret = g_iBtHci->Init(g_hciCallbacks);
     EXPECT_EQ(HDF_SUCCESS, ret);
-}
-
-/**
-  * @tc.name: HdiBluetoothGet_0200
-  * @tc.desc: Get IHciInterface and check whether is empty.
-  * @tc.type: FUNC
-  */
-HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothGet_0200, TestSize.Level2)
-{
-    ASSERT_NE(nullptr, g_iBtHci);
+    OsalMSleep(SENSOR_WAIT_TIME);
 }
 
 /**
@@ -99,10 +93,8 @@ HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothGet_0200, TestSize.Le
   */
 HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0100, TestSize.Level2)
 {
-    if (g_iBtHci == nullptr) {
-        ASSERT_NE(nullptr, g_iBtHci);
-        return;
-    }
+    ASSERT_NE(nullptr, g_iBtHci);
+    std::cout << "g_iBtHci002 = " << g_iBtHci << std::endl;
     int n = 0;
     std::vector<uint8_t> acl_vector;
     acl_vector.push_back(static_cast<uint8_t>(0xff));
@@ -114,6 +106,7 @@ HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0100, TestSize.L
     }
     BtType btType = BtType::ACL_DATA;
     int32_t ret = g_iBtHci->SendHciPacket(btType, acl_vector);
+    std::cout << "HdiBluetoothSend_0100_ret = " << ret << std::endl;
     EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
@@ -124,13 +117,12 @@ HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0100, TestSize.L
   */
 HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0200, TestSize.Level2)
 {
-    if (g_iBtHci == nullptr) {
-        ASSERT_NE(nullptr, g_iBtHci);
-        return;
-    }
+    ASSERT_NE(nullptr, g_iBtHci);
+    std::cout << "g_iBtHci003 = " << g_iBtHci << std::endl;
     BtType btType = BtType::ACL_DATA;
     std::vector<uint8_t> data;
     int32_t ret = g_iBtHci->SendHciPacket(btType, data);
+    std::cout << "HdiBluetoothSend_0200_ret = " << ret << std::endl;
     EXPECT_EQ(HDF_FAILURE, ret);
 }
 
@@ -141,13 +133,12 @@ HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0200, TestSize.L
   */
 HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0300, TestSize.Level2)
 {
-    if (g_iBtHci == nullptr) {
-        ASSERT_NE(nullptr, g_iBtHci);
-        return;
-    }
+    ASSERT_NE(nullptr, g_iBtHci);
+    std::cout << "g_iBtHci004 = " << g_iBtHci << std::endl;
     std::vector<uint8_t> cmd = COMMAND_HCI_RESET;
     BtType btType = BtType::HCI_CMD;
     int32_t ret = g_iBtHci->SendHciPacket(btType, cmd);
+    std::cout << "HdiBluetoothSend_0300_ret = " << ret << std::endl;
     EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
@@ -158,13 +149,12 @@ HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0300, TestSize.L
   */
 HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0400, TestSize.Level2)
 {
-    if (g_iBtHci == nullptr) {
-        ASSERT_NE(nullptr, g_iBtHci);
-        return;
-    }
+    ASSERT_NE(nullptr, g_iBtHci);
+    std::cout << "g_iBtHci005 = " << g_iBtHci << std::endl;
     std::vector<uint8_t> cmd = COMMAND_HCI_READ_LOCAL_VERSION_INFORMATION;
     BtType btType = BtType::HCI_CMD;
     int32_t ret = g_iBtHci->SendHciPacket(btType, cmd);
+    std::cout << "HdiBluetoothSend_0400_ret = " << ret << std::endl;
     EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
@@ -175,13 +165,12 @@ HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0400, TestSize.L
   */
 HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0500, TestSize.Level2)
 {
-    if (g_iBtHci == nullptr) {
-        ASSERT_NE(nullptr, g_iBtHci);
-        return;
-    }
+   ASSERT_NE(nullptr, g_iBtHci);
+   std::cout << "g_iBtHci006 = " << g_iBtHci << std::endl;
     std::vector<uint8_t> cmd = COMMAND_HCI_SHOULD_BE_UNKNOWN;
     BtType btType = BtType::HCI_CMD;
     int32_t ret = g_iBtHci->SendHciPacket(btType, cmd);
+    std::cout << "HdiBluetoothSend_0500_ret = " << ret << std::endl;
     EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
@@ -192,13 +181,12 @@ HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0500, TestSize.L
   */
 HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0600, TestSize.Level2)
 {
-    if (g_iBtHci == nullptr) {
-        ASSERT_NE(nullptr, g_iBtHci);
-        return;
-    }
+    ASSERT_NE(nullptr, g_iBtHci);
+    std::cout << "g_iBtHci007 = " << g_iBtHci << std::endl;
     std::vector<uint8_t> cmd = COMMAND_HCI_READ_BUFFER_SIZE;
     BtType btType = BtType::HCI_CMD;
     int32_t ret = g_iBtHci->SendHciPacket(btType, cmd);
+    std::cout << "HdiBluetoothSend_0600_ret = " << ret << std::endl;
     EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
@@ -209,10 +197,8 @@ HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0600, TestSize.L
   */
 HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0700, TestSize.Level2)
 {
-    if (g_iBtHci == nullptr) {
-        ASSERT_NE(nullptr, g_iBtHci);
-        return;
-    }
+    ASSERT_NE(nullptr, g_iBtHci);
+    std::cout << "g_iBtHci008 = " << g_iBtHci << std::endl;
      // Send an HCI packet
     std::vector<uint8_t> writeName = COMMAND_HCI_WRITE_LOCAL_NAME;
     // With a name
@@ -231,6 +217,7 @@ HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0700, TestSize.L
     std::vector<uint8_t> cmd = writeName;
     BtType btType = BtType::HCI_CMD;
     int32_t ret = g_iBtHci->SendHciPacket(btType, cmd);
+    std::cout << "HdiBluetoothSend_0700_ret = " << ret << std::endl;
     EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
@@ -242,13 +229,12 @@ HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0700, TestSize.L
   */
 HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0800, TestSize.Level2)
 {
-    if (g_iBtHci == nullptr) {
-        ASSERT_NE(nullptr, g_iBtHci);
-        return;
-    }
+    ASSERT_NE(nullptr, g_iBtHci);
+    std::cout << "g_iBtHci009 = " << g_iBtHci << std::endl;
     BtType btType = BtType::HCI_CMD;
     std::vector<uint8_t> data;
     int32_t ret = g_iBtHci->SendHciPacket(btType, data);
+    std::cout << "HdiBluetoothSend_0800_ret = " << ret << std::endl;
     EXPECT_EQ(HDF_FAILURE, ret);
 }
 
@@ -259,10 +245,8 @@ HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0800, TestSize.L
   */
 HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0900, TestSize.Level2)
 {
-    if (g_iBtHci == nullptr) {
-        ASSERT_NE(nullptr, g_iBtHci);
-        return;
-    }
+    ASSERT_NE(nullptr, g_iBtHci);
+    std::cout << "g_iBtHci100 = " << g_iBtHci << std::endl;
     int n = 0;
     std::vector<uint8_t> sco_vector;
     sco_vector.push_back(static_cast<uint8_t>(0xff));
@@ -274,6 +258,7 @@ HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0900, TestSize.L
     }
     BtType btType = BtType::SCO_DATA;
     int32_t ret = g_iBtHci->SendHciPacket(btType, sco_vector);
+    std::cout << "HdiBluetoothSend_0900_ret = " << ret << std::endl;
     EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
@@ -284,13 +269,12 @@ HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_0900, TestSize.L
   */
 HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_1000, TestSize.Level2)
 {
-    if (g_iBtHci == nullptr) {
-        ASSERT_NE(nullptr, g_iBtHci);
-        return;
-    }
+    ASSERT_NE(nullptr, g_iBtHci);
+    std::cout << "g_iBtHci110 = " << g_iBtHci << std::endl;
     BtType btType = BtType::SCO_DATA;
     std::vector<uint8_t> data;
     int32_t ret = g_iBtHci->SendHciPacket(btType, data);
+    std::cout << "HdiBluetoothSend_1000_ret = " << ret << std::endl;
     EXPECT_EQ(HDF_FAILURE, ret);
 }
 
@@ -301,13 +285,12 @@ HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_1000, TestSize.L
   */
 HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_1100, TestSize.Level2)
 {
-    if (g_iBtHci == nullptr) {
-        ASSERT_NE(nullptr, g_iBtHci);
-        return;
-    }
+    ASSERT_NE(nullptr, g_iBtHci);
+    std::cout << "g_iBtHci120 = " << g_iBtHci << std::endl;
     BtType btType = BtType::HCI_EVENT;
     std::vector<uint8_t> data;
     int32_t ret = g_iBtHci->SendHciPacket(btType, data);
+    std::cout << "HdiBluetoothSend_1100_ret = " << ret << std::endl;
     EXPECT_EQ(HDF_FAILURE, ret);
 }
 
@@ -318,13 +301,12 @@ HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_1100, TestSize.L
   */
 HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_1200, TestSize.Level2)
 {
-    if (g_iBtHci == nullptr) {
-        ASSERT_NE(nullptr, g_iBtHci);
-        return;
-    }
+    ASSERT_NE(nullptr, g_iBtHci);
+    std::cout << "g_iBtHci130 = " << g_iBtHci << std::endl;
     BtType btType = BtType::ISO_DATA;
     std::vector<uint8_t> data;
     int32_t ret = g_iBtHci->SendHciPacket(btType, data);
+    std::cout << "HdiBluetoothSend_1200_ret = " << ret << std::endl;
     EXPECT_EQ(HDF_FAILURE, ret);
 }
 
@@ -335,10 +317,10 @@ HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothSend_1200, TestSize.L
   */
 HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothClose_0100, TestSize.Level3)
 {
-    if (g_iBtHci == nullptr) {
-        ASSERT_NE(nullptr, g_iBtHci);
-        return;
-    }
+    ASSERT_NE(nullptr, g_iBtHci);
+    std::cout << "g_iBtHci140 = " << g_iBtHci << std::endl;
     int32_t ret = g_iBtHci->Close();
+    std::cout << "diBluetoothClose_0100_ret = " << ret << std::endl;
     EXPECT_EQ(HDF_SUCCESS, ret);
 }
+

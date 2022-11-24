@@ -18,7 +18,7 @@ import("//test/xts/hats/hdf/audio/audio.gni")
 import("//test/xts/tools/build/suite.gni")
 
 ###########################systemtest##############################
-module_output_path = "hdf/audio"
+module_output_path = "hats/audio"
 
 ###########################HatsHdfAudioRenderAttrTest######################
 ohos_moduletest_suite("HatsHdfAudioRenderAttrTest") {

@@ -17,7 +17,7 @@ import("//drivers/peripheral/audio/audio.gni")
 import("//test/xts/tools/build/suite.gni")
 
 ###########################NOT LITEOS##############################
-module_output_path = "hdf/audio"
+module_output_path = "hats/audio"
 
 ###########################HatsHdfAudioAdapterTest#####################
 ohos_moduletest_suite("HatsHdfAudioAdapterTest") {

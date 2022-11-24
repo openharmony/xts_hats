@@ -39,3 +39,28 @@ ohos_moduletest_suite("HatsHdfDisplayGrallocTest") {
   subsystem_name = "hdf"
   part_name = "drivers_peripheral_display"
 }
+
+module_output_path = "hats/display"
+ohos_moduletest_suite("HatsHdfDisplayAdaptationTest") {
+  module_out_path = module_output_path
+  sources = [ "GrallocAdaptation.cpp" ]
+  deps = [
+    "//drivers/peripheral/display/hal:hdi_display_gralloc",
+    "//third_party/googletest:gtest_main",
+  ]
+  include_dirs = [
+    "common",
+    "//drivers/peripheral/display/hal/default_standard/include",
+    "//drivers/peripheral/display/hal/default_standard/src/display_gralloc",
+    "//drivers/peripheral/display/interfaces/include",
+    "//drivers/peripheral/base",
+    "//drivers/peripheral/display/interfaces/include",
+    "//foundation/graphic/standard/utils/include",
+  ]
+  external_deps = [
+    "c_utils:utils",
+    "hdf_core:libhdf_utils",
+  ]
+  subsystem_name = "hdf"
+  part_name = "drivers_peripheral_display"
+}

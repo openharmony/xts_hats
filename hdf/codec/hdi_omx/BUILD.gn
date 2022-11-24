@@ -13,9 +13,10 @@
 import("//build/ohos.gni")
 import("//build/test.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
+import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
-module_output_path = "hdf/codec"
+module_output_path = "hats/codec"
 
 ohos_moduletest_suite("HatsHdfOmxCodecTest") {
   module_out_path = module_output_path
@@ -26,7 +27,10 @@ ohos_moduletest_suite("HatsHdfOmxCodecTest") {
     "//third_party/openmax/api/1.1.2",
     "//drivers/peripheral/display/hdi_service/gralloc/include",
   ]
-  sources = [ "codec_hdi_omx_test.cpp" ]
+  sources = [
+    "codec_hdi_manger_test.cpp",
+    "codec_hdi_omx_test.cpp",
+  ]
 
   cflags = [
     "-Wall",
@@ -38,7 +42,7 @@ ohos_moduletest_suite("HatsHdfOmxCodecTest") {
   ]
 
   deps = [
-    "//drivers/peripheral/codec/hal:codec_hdi_omx",
+    "//drivers/peripheral/codec/hal:libcodec_hdi_omx_client",
     "//third_party/googletest:gtest_main",
   ]
 
@@ -59,6 +63,11 @@ ohos_moduletest_suite("HatsHdfOmxCodecTest") {
 
   if (device_name == "rk3568") {
     cflags += [ "-DSUPPORT_OMX" ]
+  }
+
+  defines = []
+  if (xts_hats_rich) {
+    defines += [ "SUPPORT_OMX" ]
   }
   subsystem_name = "hdf"
   part_name = "drivers_peripheral_codec"

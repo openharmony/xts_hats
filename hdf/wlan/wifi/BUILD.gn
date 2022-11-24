@@ -15,7 +15,7 @@ import("//build/ohos_var.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
 
-module_output_path = "hdf/wlan"
+module_output_path = "hats/wlan"
 ohos_moduletest_suite("HatsHdfWifiHdiTest") {
   module_out_path = module_output_path
   include_dirs = [
@@ -53,7 +53,7 @@ ohos_moduletest_suite("HatsHdfWifiHdiTest") {
   part_name = "drivers_peripheral_wlan"
 }
 
-module_output_path = "hdf/wlan"
+module_output_path = "hats/wlan"
 ohos_moduletest_suite("HatsHdfWifiHdistartandstopTest") {
   module_out_path = module_output_path
   include_dirs = [
@@ -91,7 +91,7 @@ ohos_moduletest_suite("HatsHdfWifiHdistartandstopTest") {
   part_name = "drivers_peripheral_wlan"
 }
 
-module_output_path = "hdf/wlan"
+module_output_path = "hats/wlan"
 ohos_moduletest_suite("HatsHdfWificlientTest") {
   module_out_path = module_output_path
   include_dirs = [
@@ -129,7 +129,7 @@ ohos_moduletest_suite("HatsHdfWificlientTest") {
   part_name = "drivers_peripheral_wlan"
 }
 
-module_output_path = "hdf/wlan"
+module_output_path = "hats/wlan"
 ohos_moduletest_suite("HatsHdfWificommonTest") {
   module_out_path = module_output_path
   include_dirs = [

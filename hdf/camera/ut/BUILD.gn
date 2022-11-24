@@ -20,7 +20,7 @@ import("//build/ohos.gni")
 import("//build/test.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//drivers/peripheral/camera/hal/camera.gni")
-module_output_path = "hdf/camera"
+module_output_path = "hats/camera"
 
 config("cameraTest_config") {
   visibility = [ ":*" ]

@@ -18,13 +18,13 @@ import("//test/xts/tools/build/suite.gni")
 group("HatsHdfSensorTest") {
   testonly = true
   deps = [
-    ":HatsHdfSensorHdiTest",
+    #":HatsHdfSensorHdiTest",
     "hdiService:HatsHdfSensorServiceTest",
-    "sensorBenchmarkTest:HatsHdfSensorbenchmarkTest",
+    #"sensorBenchmarkTest:HatsHdfSensorbenchmarkTest",
   ]
 }
 
-module_output_path = "hdf/sensor"
+module_output_path = "hats/sensor"
 ohos_moduletest_suite("HatsHdfSensorHdiTest") {
   module_out_path = module_output_path
   include_dirs = []

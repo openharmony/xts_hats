@@ -12,6 +12,7 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
+import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
 group("HatsHdfCodecTest") {
@@ -23,5 +24,7 @@ group("HatsHdfCodecTest") {
       "hdi_v1.0:HatsHdfV1CodecTest",
     ]
   } else {
+    testonly = true
+    deps = [ "hdi_omx:HatsHdfOmxCodecTest" ]
   }
 }

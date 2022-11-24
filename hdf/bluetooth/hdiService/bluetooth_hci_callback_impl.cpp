@@ -22,19 +22,15 @@ namespace Hci {
 namespace V1_0 {
 int32_t HciCallbackImpl::OnInited(BtStatus status)
 {
-    if ((callbacks_ != nullptr) && (callbacks_->OnInited)) {
         BtInitStatus initStatus = BtInitStatus::SUCCESS;
         if (status != BtStatus::SUCCESS) {
             initStatus = BtInitStatus::INITIALIZATION_ERROR;
-        }
-        callbacks_->OnInited(initStatus);
-    }
+        }    
     return 0;
 }
 
 int32_t HciCallbackImpl::OnReceivedHciPacket(BtType type, const std::vector<uint8_t> &data)
 {
-    if ((callbacks_ != nullptr) && (callbacks_->OnReceivedHciPacket)) {
         BtPacketType packetType = BtPacketType::PACKET_TYPE_UNKNOWN;
         switch (type) {
             case BtType::HCI_EVENT:
@@ -49,16 +45,12 @@ int32_t HciCallbackImpl::OnReceivedHciPacket(BtType type, const std::vector<uint
             default:
                 break;
         }
-        BtPacket packet = {
-            .data = (data.size() ? (uint8_t *)&data[0] : nullptr),
-            .size = data.size(),
-        };
-        callbacks_->OnReceivedHciPacket(packetType, &packet);
-    }
-    return 0;
-}
+        return 0;
+}    
+
 } // V1_0
 } // Hci
 } // Bluetooth
 } // HDI
 } // OHOS
+

@@ -14,6 +14,8 @@ import("//build/ohos.gni")
 import("//build/test.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
+import("//build/ohos.gni")
+import("//test/xts/hats/build.gni")
 
 module_output_path = "hats/codec"
 
@@ -62,6 +64,11 @@ ohos_moduletest_suite("HatsHdfOmxCodecTest") {
 
   if (device_name == "rk3568") {
     cflags += [ "-DSUPPORT_OMX" ]
+  }
+
+  defines = []
+  if(xts_hats_rich){
+    defines += [ "SUPPORT_OMX" ]
   }
   subsystem_name = "hdf"
   part_name = "drivers_peripheral_codec"

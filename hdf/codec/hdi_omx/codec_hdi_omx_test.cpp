@@ -38,9 +38,11 @@ using namespace testing::ext;
 namespace {
 constexpr int32_t WIDTH = 640;
 constexpr int32_t HEIGHT = 480;
+#ifndef SUPPORT_OMX
 constexpr uint32_t MAX_ROLE_INDEX = 1000;
-constexpr int32_t BUFFER_SIZE = WIDTH * HEIGHT * 3;
 constexpr int32_t ROLE_LEN = 240;
+#endif
+constexpr int32_t BUFFER_SIZE = WIDTH * HEIGHT * 3;
 constexpr int32_t FRAMERATE = 30 << 16;
 constexpr uint32_t BUFFER_ID_ERROR = 65000;
 class CodecHdiOmxTest : public testing::Test {
@@ -245,6 +247,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0080, Function | MediumTe
     auto ret = component_->GetComponentVersion(component_, &verInfo);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
+#ifndef SUPPORT_OMX
 /**
 * @tc.name  HdfCodecHdiGetVersionTest_002
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0090
@@ -288,6 +291,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0110, Function | MediumTe
                                         reinterpret_cast<int8_t *>(&pixFormat), sizeof(pixFormat));
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
+#endif
 /**
 * @tc.name  HdfCodecHdiGetParameterTest_003
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0120
@@ -432,6 +436,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0210, Function | MediumTe
                                         sizeof(param));
     ASSERT_NE(ret, HDF_SUCCESS);
 }
+#ifndef SUPPORT_OMX
 /**
 * @tc.name  HdfCodecHdiSetParameterTest_006
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0220
@@ -452,6 +457,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0220, Function | MediumTe
                                    sizeof(pixFormat));
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
+#endif
 /**
 * @tc.name  HdfCodecHdiGetConfigTest_001
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0230
@@ -566,6 +572,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0300, Function | MediumTe
         component_->SetConfig(component_, OMX_IndexVideoStartUnused, reinterpret_cast<int8_t *>(&param), sizeof(param));
     ASSERT_NE(ret, HDF_SUCCESS);
 }
+#ifndef SUPPORT_OMX
 /**
 * @tc.name  HdfCodecHdiGetExtensionIndexTest_001
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0310
@@ -579,6 +586,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0310, Function | MediumTe
         component_->GetExtensionIndex(component_, "OMX.Topaz.index.param.extended_video", (uint32_t *)&indexType);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
+#endif
 /**
 * @tc.name  HdfCodecHdiGetExtensionIndexTest_002
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0320
@@ -638,6 +646,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0360, Function | MediumTe
     auto ret = component_->GetState(component_, nullptr);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
+#ifndef SUPPORT_OMX
 /**
 * @tc.name  HdfCodecHdiTunnelRequestTest_001
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0370
@@ -655,6 +664,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0370, Function | MediumTe
                                                   tunneledPort, &tunnelSetup);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
+#endif
 /**
 * @tc.name  HdfCodecHdiLoadedToExecutingTest_001
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0380
@@ -815,6 +825,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0470, Function | MediumTe
     auto err = component_->UseBuffer(component_, (uint32_t)PortIndex::PORT_INDEX_OUTPUT, omxBuffer.get());
     ASSERT_NE(err, HDF_SUCCESS);
 }
+#ifndef SUPPORT_OMX
 /**
 * @tc.name  HdfCodecHdiUseBufferTest_005
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0480
@@ -974,6 +985,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0530, Function | MediumTe
     FreeBufferOnPort(PortIndex::PORT_INDEX_OUTPUT);
     ASSERT_FALSE(ret);
 }
+#endif
 /**
 * @tc.name  HdfCodecHdiAllocateBufferTest_005
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0540
@@ -1023,6 +1035,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0560, Function | MediumTe
     ASSERT_NE(ret, HDF_SUCCESS);
     eglImage = nullptr;
 }
+#ifndef SUPPORT_OMX
 /**
 * @tc.name  HdfCodecHdiFillThisBufferTest_001
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0580
@@ -1079,6 +1092,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0580, Function | MediumTe
     } while (state != OMX_StateLoaded);
     component_->ComponentDeInit(component_);
 }
+#endif
 /**
 * @tc.name  HdfCodecHdiFillThisBufferTest_002
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0590
@@ -1137,6 +1151,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0620, Function | MediumTe
     auto ret = component_->SetCallbacks(component_, callback_, (int64_t)this);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
+#ifndef SUPPORT_OMX
 /**
 * @tc.name  HdfCodecHdiSetCallbackTest_002
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0630
@@ -1149,6 +1164,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0630, Function | MediumTe
     auto ret = component_->ComponentRoleEnum(component_, role, ROLE_LEN, 0);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
+#endif
 /**
 * @tc.name  HdfCodecHdiRoleEnumTest_001
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0640
@@ -1160,6 +1176,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0640, Function | MediumTe
     auto ret = component_->ComponentRoleEnum(component_, nullptr, 0, 0);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
+#ifndef SUPPORT_OMX
 /**
 * @tc.name  HdfCodecHdiRoleEnumTest_002
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0650
@@ -1172,6 +1189,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0650, Function | MediumTe
     auto ret = component_->ComponentRoleEnum(component_, role, ROLE_LEN, MAX_ROLE_INDEX);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
+#endif
 /**
 * @tc.name  HdfCodecHdiRoleEnumTest_003
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0660
@@ -1204,6 +1222,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0670, Function | MediumTe
     auto ret = component_->FreeBuffer(component_, (uint32_t)PortIndex::PORT_INDEX_OUTPUT, &allocBuffer);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
+#ifndef SUPPORT_OMX
 /**
 * @tc.name  HdfCodecHdiFreeBufferTest_001
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0680
@@ -1225,6 +1244,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0680, Function | MediumTe
     ret = FreeBufferOnPort(PortIndex::PORT_INDEX_OUTPUT);
     ASSERT_TRUE(ret);
 }
+#endif
 /**
 * @tc.name  HdfCodecHdiFreeBufferTest_002
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0690
@@ -1246,6 +1266,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0690, Function | MediumTe
     auto ret = component_->FreeBuffer(component_, (uint32_t)PortIndex::PORT_INDEX_INPUT, &allocBuffer);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
+#ifndef SUPPORT_OMX
 /**
 * @tc.name  HdfCodecHdiFreeBufferTest_003
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0700
@@ -1288,5 +1309,5 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0710, Function | MediumTe
     ret = component_->ComponentDeInit(component_);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
-
+#endif
 }  // namespace

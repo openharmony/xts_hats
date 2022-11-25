@@ -618,6 +618,67 @@ HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0170, Function | MediumTest | L
 }
 
 /**
+  * @tc.number: SUB_DriverSystem_HdiInput_0171
+  * @tc.name: set device power status error test_2
+  * @tc.desc: [C- SOFTWARE -0010]
+  * @tc.size: Medium
+  * @tc.level: level 0
+  */
+HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0171, Function | MediumTest | Level0)
+{
+    if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
+        ASSERT_EQ(g_HasDev, true);
+        int32_t ret;
+        uint32_t setStatus = INPUT_SUSPEND;
+        uint32_t getStatus = 0;
+
+        ret = g_inputInterface->iInputController->SetPowerStatus(0, setStatus);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+        ret = g_inputInterface->iInputController->GetPowerStatus(TOUCH_INDEX, &getStatus);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ASSERT_NE(setStatus, getStatus);
+        ret = g_inputInterface->iInputController->SetPowerStatus(TOUCH_INDEX, setStatus);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterface->iInputController->GetPowerStatus(TOUCH_INDEX, &getStatus);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ASSERT_EQ(setStatus, getStatus);
+    }
+    int32_t ret = INPUT_SUCCESS;
+    EXPECT_EQ(ret, INPUT_SUCCESS);
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_HdiInput_0172
+  * @tc.name: set device power status error test_2
+  * @tc.desc: [C- SOFTWARE -0010]
+  * @tc.size: Medium
+  * @tc.level: level 0
+  */
+HWTEST_F(HdiInputTest, SUB_DriverSystem_HdiInput_0172, Function | MediumTest | Level0)
+{
+    if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
+        ASSERT_EQ(g_HasDev, true);
+        int32_t ret;
+        uint32_t setStatus = INPUT_RESUME;
+        uint32_t getStatus = 0;
+
+        ret = g_inputInterface->iInputController->SetPowerStatus(TOUCH_INDEX, setStatus);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterface->iInputController->GetPowerStatus(TOUCH_INDEX, &getStatus);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ASSERT_EQ(setStatus, getStatus);
+        ret = g_inputInterface->iInputController->SetPowerStatus(0, setStatus);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+        ret = g_inputInterface->iInputController->GetPowerStatus(TOUCH_INDEX, &getStatus);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ASSERT_EQ(setStatus, getStatus);
+
+    }
+    int32_t ret = INPUT_SUCCESS;
+    EXPECT_EQ(ret, INPUT_SUCCESS);
+}
+
+/**
   * @tc.number: SUB_DriverSystem_HdiInput_0180-INPUT_RESUME
   * @tc.name: get device poewr status test
   * @tc.desc: [C- SOFTWARE -0010]

@@ -24,7 +24,7 @@ group("HatsHdfSensorTest") {
   ]
 }
 
-module_output_path = "hdf/sensor"
+module_output_path = "hats/sensor"
 ohos_moduletest_suite("HatsHdfSensorHdiTest") {
   module_out_path = module_output_path
   include_dirs = []

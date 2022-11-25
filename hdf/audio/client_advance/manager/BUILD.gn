@@ -17,9 +17,9 @@ import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//drivers/peripheral/audio/audio.gni")
 import("//test/xts/tools/build/suite.gni")
 
-module_output_path = "hads/audio"
+module_output_path = "hats/audio"
 
-ohos_unittest("HatsAudioProxyManagerTest") {
+ohos_moduletest_suite("HatsAudioProxyManagerTest") {
   module_out_path = module_output_path
   sources = [
     "../common/src/audio_proxy_common_fun_test.cpp",

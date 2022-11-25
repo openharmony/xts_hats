@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+# Copyright (c) 2022 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -11,21 +11,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//build/ohos_var.gni")
+import("//build/test.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
-import("//test/xts/tools/build/suite.gni")
+import("//drivers/peripheral/audio/audio.gni")
 
-#################################group#########################################
-group("HatsHdfAudioTest") {
-  if (!defined(ohos_lite)) {
+group("HdiClientAdvance") {
+  if (!defined(ohos_lite) && !drivers_peripheral_audio_user_mode) {
     testonly = true
-  }
-  if (is_standard_system) {
-    if (device_name == "rk3568") {
-      deps = [ "hdi:audio_hdi" ]
-    } else {
-      deps = [ "client_advance:HdiClientAdvance" ]
-    }
+    deps = [
+      "adapter:HatsAudioProxyAdaptrTest",
+      "capture:HatsAudioProxyCaptureTest",
+      "common:HatsAudioProxyCommonTest",
+      "manager:HatsAudioProxyManagerTest",
+      "render:HatsAudioProxyRenderTest",
+    ]
   }
 }
-###############################################################################

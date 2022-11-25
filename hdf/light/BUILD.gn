@@ -24,7 +24,7 @@ group("HatsHdfLightTest") {
   ]
 }
 
-module_output_path = "hdf/light"
+module_output_path = "hats/light"
 ohos_moduletest_suite("HatsHdfLightHdiTest") {
   module_out_path = module_output_path
   include_dirs = []

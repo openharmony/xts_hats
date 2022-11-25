@@ -11,11 +11,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import("//build/ohos.gni")
+import("//build/ohos.gni")
 import("//build/test.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
-import("//test/xts/tools/build/suite.gni")
-import("//build/ohos.gni")
 import("//test/xts/hats/build.gni")
+import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/codec"
 
@@ -67,7 +67,7 @@ ohos_moduletest_suite("HatsHdfOmxCodecTest") {
   }
 
   defines = []
-  if(xts_hats_rich){
+  if (xts_hats_rich) {
     defines += [ "SUPPORT_OMX" ]
   }
   subsystem_name = "hdf"

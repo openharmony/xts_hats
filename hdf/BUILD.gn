@@ -21,8 +21,7 @@ group("hatshdftest") {
       "codec:HatsHdfCodecTest",
       "display:HatsHdfDisplayTest",
       "input:HatsHdfInputTest",
-
-      #"light:HatsHdfLightTest",
+      "light:HatsHdfLightTest",
       "location:HatsHdfLocationTest",
       "manager:HatsHdfManagerTest",
       "nfc:HatsHdfNfcTest",

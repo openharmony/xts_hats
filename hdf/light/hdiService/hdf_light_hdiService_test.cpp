@@ -249,4 +249,28 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_LightHdi_0180, Function | Medi
     EXPECT_EQ(LIGHT_NOT_SUPPORT, ret);
 }
 
+/**
+  * @tc.name: TurnOnMultiLights001
+  * @tc.desc: DTurnOnMultiLights.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_LightHdi_0190, Function | MediumTest | Level1)
+{
+    ASSERT_NE(nullptr, g_lightInterface);
+
+    std::vector<HdfLightInfo> info;
+    int32_t ret = g_lightInterface-> GetLightInfo(info);
+    EXPECT_EQ(0, ret);
+    for (auto iter : info)
+    {
+        EXPECT_GE(iter.lightId, g_minLightId);
+        EXPECT_LE(iter.lightId, g_maxLightId);
+        std::vector<HdfLightColor> lightColor;
+        struct HdfLightColor light;
+        light.colorValue.rgbColor.b = 0;
+        lightColor.push_back(light);
+        ret = g_lightInterface->TurnOnMultiLights(iter.lightId, lightColor);
+        EXPECT_EQ(HDF_SUCCESS, ret);
+    }
+}
 }

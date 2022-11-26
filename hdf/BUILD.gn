@@ -28,6 +28,7 @@ group("hatshdftest") {
       "sensor:HatsHdfSensorTest",
 
       #"vibrator:HatsHdfVibratorTest",
+      "nfc:HatsHdfNfcTest",
       "wlan:HatsHdfWifiTest",
 
       # "usb:HatsHdfUsbTest",

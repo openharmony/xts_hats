@@ -24,7 +24,7 @@
 #include "v1_0/infc_interface.h"
 #include "v1_0/nfc_types.h"
 #include "NfcAdaptation.h"
-
+#include "nfc_chip_type_parser.h"
 
 using namespace OHOS::HDI::Nfc::V1_0;
 using namespace testing::ext;
@@ -34,7 +34,7 @@ using INfcV1_0 = OHOS::HDI::Nfc::V1_0::INfcInterface;
 using OHOS::HDI::Nfc::V1_0::NfcStatus;
 using OHOS::HDI::Nfc::V1_0::NfcEvent;
 using OHOS::HDI::Nfc::V1_0::INfcCallback;
-using INfcV1_0 = OHOS::HDI::Nfc::V1_0::INfcInterface;
+using OHOS::NFC::NfcChipTypeParser;
 
 extern "C" INfcInterface *NfcInterfaceImplGetInstance(void)
 {
@@ -55,14 +55,17 @@ namespace {
 
 class NfcClientCallback : public INfcCallback {
     public:
+        NfcClientCallback()
+    {}
+    virtual ~NfcClientCallback()
+    {}
     NfcClientCallback(tHAL_NFC_CBACK* eventCallback, tHAL_NFC_DATA_CBACK dataCallback)
     {
         mEventCallback = eventCallback;
         mDataCallback = dataCallback;
     };
-    virtual ~NfcClientCallback() = default;
 
-    int32_t OnData(const std::vector<uint8_t>& data)
+    int32_t OnData(const std::vector<uint8_t>& data) override
     {
         if (mDataCallback != nullptr && !data.empty()) {
             mDataCallback(data.size(), (uint8_t *)&data[0]);
@@ -70,7 +73,7 @@ class NfcClientCallback : public INfcCallback {
         return HDF_SUCCESS;
     }
 
-    int32_t OnEvent(NfcEvent event, NfcStatus status)
+    int32_t OnEvent(NfcEvent event, NfcStatus status) override
     {
         if (mEventCallback != nullptr) {
             mEventCallback((uint8_t)event, (tHAL_NFC_STATUS)status);
@@ -124,18 +127,24 @@ static void DataCallback(uint16_t len, uint8_t *data)
 */
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_Hdinfcopen_0100, TestSize.Level2)
 {
-    if (mHal == nullptr) {
+    if (!NfcChipTypeParser::IsSn110()) {
+        EXPECT_EQ(HDF_SUCCESS, HDF_SUCCESS);
+    }
+    else{
+        if (mHal == nullptr) {
         ASSERT_NE(nullptr, mHal);
         return;
+        }
+        mCallback = new NfcClientCallback(EventCallback, DataCallback);
+        if (mCallback == nullptr) {
+            ASSERT_NE(nullptr, mCallback);
+            return;
+        }
+        NfcStatus nfcbtType = NfcStatus::OK;
+        int32_t ret = mHal->Open(mCallback, nfcbtType);
+        EXPECT_EQ(HDF_SUCCESS, ret);
     }
-    mCallback = new NfcClientCallback(EventCallback, DataCallback);
-    if (mCallback == nullptr) {
-        ASSERT_NE(nullptr, mCallback);
-        return;
-    }
-    NfcStatus nfcbtType = NfcStatus::OK;
-    int32_t ret = mHal->Open(mCallback, nfcbtType);
-    EXPECT_EQ(HDF_SUCCESS, ret);
+
 }
 
 /**
@@ -145,14 +154,19 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_Hdinfcopen_0100, TestSize.Level2)
 */
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcCoreInitialized_0200, TestSize.Level2)
 {
-    if (mHal == nullptr) {
-        ASSERT_NE(nullptr, mHal);
-        return;
+    if (!NfcChipTypeParser::IsSn110()) {
+        EXPECT_EQ(HDF_SUCCESS, HDF_SUCCESS);
     }
-    std::vector<uint8_t> data(0);
-    NfcStatus nfcbtType = NfcStatus::OK;
-    int32_t ret = mHal->CoreInitialized(data, nfcbtType);
-    EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
+    else{
+        if (mHal == nullptr) {
+            ASSERT_NE(nullptr, mHal);
+            return;
+        }
+        std::vector<uint8_t> data(0);
+        NfcStatus nfcbtType = NfcStatus::OK;
+        int32_t ret = mHal->CoreInitialized(data, nfcbtType);
+        EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
+    }
 }
 
 /**
@@ -162,13 +176,18 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcCoreInitialized_0200, TestSize.Le
 */
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcPrediscover_0300, TestSize.Level2)
 {
-    if (mHal == nullptr) {
-        ASSERT_NE(nullptr, mHal);
-        return;
+    if (!NfcChipTypeParser::IsSn110()) {
+        EXPECT_EQ(HDF_SUCCESS, HDF_SUCCESS);
     }
-    NfcStatus nfcbtType = NfcStatus::OK;
-    int32_t ret = mHal->Prediscover(nfcbtType);
-    EXPECT_EQ(HDF_SUCCESS, ret);
+    else{
+        if (mHal == nullptr) {
+            ASSERT_NE(nullptr, mHal);
+            return;
+        }
+        NfcStatus nfcbtType = NfcStatus::OK;
+        int32_t ret = mHal->Prediscover(nfcbtType);
+        EXPECT_EQ(HDF_SUCCESS, ret);
+    }
 }
 
 /**
@@ -178,14 +197,19 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcPrediscover_0300, TestSize.Level2
 */
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcWrite_0400, TestSize.Level2)
 {
-    if (mHal == nullptr) {
-        ASSERT_NE(nullptr, mHal);
-        return;
+    if (!NfcChipTypeParser::IsSn110()) {
+        EXPECT_EQ(HDF_SUCCESS, HDF_SUCCESS);
     }
-    std::vector<uint8_t> data;
-    NfcStatus nfcbtType = NfcStatus::OK;
-    int32_t ret = mHal->Write(data, nfcbtType);
-    EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
+    else{
+        if (mHal == nullptr) {
+            ASSERT_NE(nullptr, mHal);
+            return;
+        }
+        std::vector<uint8_t> data;
+        NfcStatus nfcbtType = NfcStatus::OK;
+        int32_t ret = mHal->Write(data, nfcbtType);
+        EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
+    }
 }
 
 /**
@@ -195,13 +219,18 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcWrite_0400, TestSize.Level2)
 */
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcControlGranted_0500, TestSize.Level2)
 {
-    if (mHal == nullptr) {
-        ASSERT_NE(nullptr, mHal);
-        return;
+    if (!NfcChipTypeParser::IsSn110()) {
+        EXPECT_EQ(HDF_SUCCESS, HDF_SUCCESS);
     }
-    NfcStatus nfcbtType = NfcStatus::OK;
-    int32_t ret = mHal->ControlGranted(nfcbtType);
-    EXPECT_EQ(HDF_SUCCESS, ret);
+    else{
+        if (mHal == nullptr) {
+            ASSERT_NE(nullptr, mHal);
+            return;
+        }
+        NfcStatus nfcbtType = NfcStatus::OK;
+        int32_t ret = mHal->ControlGranted(nfcbtType);
+        EXPECT_EQ(HDF_SUCCESS, ret);
+    }
 }
 
 /**
@@ -211,13 +240,18 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcControlGranted_0500, TestSize.Lev
 */
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcPowerCycle_0600, TestSize.Level2)
 {
-    if (mHal == nullptr) {
-        ASSERT_NE(nullptr, mHal);
-        return;
+    if (!NfcChipTypeParser::IsSn110()) {
+        EXPECT_EQ(HDF_SUCCESS, HDF_SUCCESS);
     }
-    NfcStatus nfcbtType = NfcStatus::OK;
-    int32_t ret = mHal->PowerCycle(nfcbtType);
-    EXPECT_EQ(HDF_SUCCESS, ret);
+    else{
+        if (mHal == nullptr) {
+            ASSERT_NE(nullptr, mHal);
+            return;
+        }
+        NfcStatus nfcbtType = NfcStatus::OK;
+        int32_t ret = mHal->PowerCycle(nfcbtType);
+        EXPECT_EQ(HDF_SUCCESS, ret);
+    }
 }
 
 /**
@@ -227,18 +261,23 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcPowerCycle_0600, TestSize.Level2)
 */
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcIoctl_0700, TestSize.Level2)
 {
-    if (mHal == nullptr) {
-        ASSERT_NE(nullptr, mHal);
-        return;
+    if (!NfcChipTypeParser::IsSn110()) {
+        EXPECT_EQ(HDF_SUCCESS, HDF_SUCCESS);
     }
-    uint8_t p_core_init_rsp_params = 0;
-    uint16_t data_len = sizeof(uint8_t);
-    std::vector<uint8_t> v_data(p_core_init_rsp_params,
-                                p_core_init_rsp_params + data_len / sizeof(uint8_t));
-    NfcStatus nfcbtType = NfcStatus::OK;
-    NfcCommand nfcCommand = NfcCommand::CMD_INVALID ;
-    int32_t ret = mHal->Ioctl(nfcCommand, v_data, nfcbtType);
-    EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
+    else{
+        if (mHal == nullptr) {
+            ASSERT_NE(nullptr, mHal);
+            return;
+        }
+        uint8_t p_core_init_rsp_params = 0;
+        uint16_t data_len = sizeof(uint8_t);
+        std::vector<uint8_t> v_data(p_core_init_rsp_params,
+                                    p_core_init_rsp_params + data_len / sizeof(uint8_t));
+        NfcStatus nfcbtType = NfcStatus::OK;
+        NfcCommand nfcCommand = NfcCommand::CMD_INVALID ;
+        int32_t ret = mHal->Ioctl(nfcCommand, v_data, nfcbtType);
+        EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
+    }
 }
 
 /**
@@ -248,11 +287,16 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcIoctl_0700, TestSize.Level2)
 */
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcClose_0800, TestSize.Level2)
 {
-    if (mHal == nullptr) {
-        ASSERT_NE(nullptr, mHal);
-        return;
+    if (!NfcChipTypeParser::IsSn110()) {
+        EXPECT_EQ(HDF_SUCCESS, HDF_SUCCESS);
     }
-    NfcStatus nfcbtType = NfcStatus::OK;
-    int32_t ret = mHal->Close(nfcbtType);
-    EXPECT_EQ(HDF_SUCCESS, ret);
+    else{
+        if (mHal == nullptr) {
+            ASSERT_NE(nullptr, mHal);
+            return;
+        }
+        NfcStatus nfcbtType = NfcStatus::OK;
+        int32_t ret = mHal->Close(nfcbtType);
+        EXPECT_EQ(HDF_SUCCESS, ret);
+    }
 }

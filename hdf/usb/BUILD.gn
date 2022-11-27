@@ -14,19 +14,24 @@
 import("//build/ohos_var.gni")
 import("//build/test.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
+import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
 group("HatsHdfUsbTest") {
   testonly = true
-  deps = [
-    "autoFunctionTest:HatsHdfUsbAutoFunctionTest",
-    "deviceTest:HatsHdfUsbDeviceTest",
-    "functionTest:HatsHdfUsbFunctionTest",
-    "requestTest:HatsHdfUsbRequestTest",
-    "transferTest:HatsHdfUsbTransferTest",
-    "usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
-    "usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",
-    "usbdBenchmarkTest:HatsHdfUsbBenchmarkRequestTest",
-    "usbdBenchmarkTest:HatsHdfUsbBenchmarkTransferTest",
-  ]
+  if (xts_hats_rich == true) {
+  } else {
+    deps = [
+      "autoFunctionTest:HatsHdfUsbAutoFunctionTest",
+      "deviceTest:HatsHdfUsbDeviceTest",
+      "functionTest:HatsHdfUsbFunctionTest",
+      "requestTest:HatsHdfUsbRequestTest",
+      "transferTest:HatsHdfUsbTransferTest",
+
+      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
+      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",
+      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkRequestTest",
+      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkTransferTest",
+    ]
+  }
 }

@@ -29,7 +29,7 @@ using namespace OHOS::HDI::Usb::V1_0;
 namespace {
 sptr<IUsbInterface> g_usbInterface = nullptr;
 
-void UsbdFunctionTest::SetUpTestCase(void)
+void UsbdAutoFunctionTest::SetUpTestCase(void)
 {
     g_usbInterface = IUsbInterface::Get();
     if (g_usbInterface == nullptr) {
@@ -37,11 +37,11 @@ void UsbdFunctionTest::SetUpTestCase(void)
     }
 }
 
-void UsbdFunctionTest::TearDownTestCase(void) {}
+void UsbdAutoFunctionTest::TearDownTestCase(void) {}
 
-void UsbdFunctionTest::SetUp(void) {}
+void UsbdAutoFunctionTest::SetUp(void) {}
 
-void UsbdFunctionTest::TearDown(void) {}
+void UsbdAutoFunctionTest::TearDown(void) {}
 
 /**
  * @tc.name: SUB_USB_HDI_1250
@@ -50,11 +50,11 @@ void UsbdFunctionTest::TearDown(void) {}
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1250, Function | MediumTest | Level1)
+HWTEST_F(UsbdAutoFunctionTest, SUB_USB_HDI_1250, Function | MediumTest | Level1)
 {
     int32_t funcs = 0;
     auto ret = g_usbInterface->GetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1250 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdAutoFunctionTest::SUB_USB_HDI_1250 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
@@ -65,14 +65,14 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1250, Function | MediumTest | Level1)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1700, Function | MediumTest | Level1)
+HWTEST_F(UsbdAutoFunctionTest, SUB_USB_HDI_1700, Function | MediumTest | Level1)
 {
     int32_t portId = 0;
     int32_t powerRole = 0;
     int32_t dataRole = 0;
     int32_t mode = 0;
     auto ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1700 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdAutoFunctionTest::SUB_USB_HDI_1700 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 } // namespace

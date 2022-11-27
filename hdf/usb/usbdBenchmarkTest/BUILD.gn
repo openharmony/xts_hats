@@ -32,6 +32,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkDeviceTest") {
 
   deps = [
     "//drivers/peripheral/usb/ddk:libusb_core",
+    "//drivers/peripheral/usb/hdi_service:libusb_interface_service_1.0",
     "//third_party/benchmark",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
@@ -58,7 +59,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkFunctionTest") {
   module_out_path = module_output_path
   sources = [
     "../UsbSubscriberTest/UsbSubscriberTest.cpp",
-    "common/HdfUsbdBenchmarkFunctionTest.cpp",
+    "./common/HdfUsbdBenchmarkFunctionTest.cpp",
   ]
 
   include_dirs = [
@@ -69,6 +70,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkFunctionTest") {
 
   deps = [
     "//drivers/peripheral/usb/ddk:libusb_core",
+    "//drivers/peripheral/usb/hdi_service:libusb_interface_service_1.0",
     "//third_party/benchmark",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
@@ -95,7 +97,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkRequestTest") {
   module_out_path = module_output_path
   sources = [
     "../UsbSubscriberTest/UsbSubscriberTest.cpp",
-    "common/HdfUsbdBenchmarkRequestTest.cpp",
+    "./common/HdfUsbdBenchmarkRequestTest.cpp",
   ]
 
   include_dirs = [
@@ -106,6 +108,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkRequestTest") {
 
   deps = [
     "//drivers/peripheral/usb/ddk:libusb_core",
+    "//drivers/peripheral/usb/hdi_service:libusb_interface_service_1.0",
     "//third_party/benchmark",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
@@ -132,7 +135,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkTransferTest") {
   module_out_path = module_output_path
   sources = [
     "../UsbSubscriberTest/UsbSubscriberTest.cpp",
-    "common/HdfUsbdBenchmarkTransferTest.cpp",
+    "./common/HdfUsbdBenchmarkTransferTest.cpp",
   ]
 
   include_dirs = [
@@ -143,6 +146,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkTransferTest") {
 
   deps = [
     "//drivers/peripheral/usb/ddk:libusb_core",
+    "//drivers/peripheral/usb/hdi_service:libusb_interface_service_1.0",
     "//third_party/benchmark",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",

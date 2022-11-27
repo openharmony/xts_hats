@@ -12,12 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef USBD_Request_TEST_H
-#define USBD_Request_TEST_H
+#ifndef USBD_REQUEST_TEST_H
+#define USBD_REQUEST_TEST_H
 
 #include <benchmark/benchmark.h>
 #include <gtest/gtest.h>
 #include "v1_0/usb_types.h"
+#include "v1_0/iusbd_bulk_callback.h"
 
 using OHOS::HDI::Usb::V1_0::UsbDev;
 
@@ -43,4 +44,4 @@ public:
     };
 };
 }
-#endif // USBD_Request_TEST_H
+#endif // USBD_REQUEST_TEST_H

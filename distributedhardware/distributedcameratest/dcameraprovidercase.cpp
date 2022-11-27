@@ -83,6 +83,7 @@ void DCameraProviderTest::SetUpTestCase(void)
 
     result.type_ = METADATA_RESULT;
     result.value_ = "SettingValue";
+	
 
     DCStreamInfo streamInfo1;
     streamInfo1.streamId_ = 1;
@@ -252,6 +253,54 @@ HWTEST_F(DCameraProviderTest, DCameraCase_0190, TestSize.Level1)
 {
     int32_t ret = cameraProvider.DisableDCameraDevice(dhBase);
     EXPECT_EQ(0, ret) << "DisableDCameraDevice fail";
+}
+
+HWTEST_F(DCameraProviderTest, DCameraCase_0200, TestSize.Level1)
+{
+    int32_t ret = cameraProvider.OpenSession(dhBase);
+    EXPECT_NE(SUCCESS, ret) << "OpenSession fail";
+}
+
+HWTEST_F(DCameraProviderTest, DCameraCase_0210, TestSize.Level1)
+{
+    int32_t ret = cameraProvider.ConfigureStreams(dhBase, streamInfos);
+    EXPECT_NE(CAMERA_BUSY, ret) << "ConfigureStreams fail";
+}
+
+HWTEST_F(DCameraProviderTest, DCameraCase_0220, TestSize.Level1)
+{
+    int32_t ret = cameraProvider.StartCapture(dhBase, captureInfos);
+    EXPECT_EQ(INVALID_ARGUMENT, ret) << "StartCapture fail";
+}
+
+HWTEST_F(DCameraProviderTest, DCameraCase_0230, TestSize.Level1)
+{
+    int32_t ret = cameraProvider.OnSettingsResult(dhBase, result);
+    EXPECT_NE(METHOD_NOT_SUPPORTED, ret) << "OnSettingsResult fail";
+}
+
+HWTEST_F(DCameraProviderTest, DCameraCase_0240, TestSize.Level1)
+{
+    int32_t ret = cameraProvider.UpdateSettings(dhBase, settings);
+    EXPECT_NE(CAMERA_OFFLINE, ret) << "UpdateSettings fail";
+}
+
+HWTEST_F(DCameraProviderTest, DCameraCase_0250, TestSize.Level1)
+{
+    int32_t ret = cameraProvider.AcquireBuffer(dhBase, TEST_STREAMID, buffer);
+    EXPECT_NE(EXCEED_MAX_NUMBER, ret) << "AcquireBuffer fail";
+}
+
+HWTEST_F(DCameraProviderTest, DCameraCase_0260, TestSize.Level1)
+{
+    int32_t ret = cameraProvider.Notify(dhBase, hdiEvent);
+    EXPECT_NE(DEVICE_NOT_INIT, ret) << "Notify fail";
+}
+
+HWTEST_F(DCameraProviderTest, DCameraCase_0270, TestSize.Level1)
+{
+    int32_t ret = cameraProvider.ShutterBuffer(dhBase, TEST_STREAMID, buffer);
+    EXPECT_NE(FAILED, ret) << "ShutterBuffer fail";
 }
 }
 }

@@ -20,6 +20,7 @@ group("HatsHdfUsbTest") {
   testonly = true
   deps = [
       "autoFunctionTest:HatsHdfUsbAutoFunctionTest",
+
       # "deviceTest:HatsHdfUsbDeviceTest",
       # "functionTest:HatsHdfUsbFunctionTest",
       # "requestTest:HatsHdfUsbRequestTest",

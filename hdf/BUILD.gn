@@ -30,8 +30,7 @@ group("hatshdftest") {
       #"vibrator:HatsHdfVibratorTest",
       "nfc:HatsHdfNfcTest",
       "wlan:HatsHdfWifiTest",
-
-      # "usb:HatsHdfUsbTest",
+      "usb:HatsHdfUsbTest",
     ]
   }
 }

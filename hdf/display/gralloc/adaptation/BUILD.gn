@@ -16,56 +16,26 @@ import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/display"
-config("module_private_config") {
-  visibility = [ ":*" ]
-}
-
-ohos_static_library("disp_hdi_test_common") {
-  sources = [ "../common/display_test_utils.cpp" ]
-  include_dirs = [
-    "include",
-    "//drivers/peripheral/display/interfaces/include",
-    "//drivers/peripheral/base",
-  ]
-  output_name = "disp_hdi_test_common"
-  cflags = [
-    "-DGRALLOC_GBM_SUPPORT",
-    "-Wno-macro-redefined",
-  ]
-
-  external_deps = [
-    "c_utils:utils",
-    "hiviewdfx_hilog_native:libhilog",
-  ]
-  subsystem_name = "hdf"
-  part_name = "drivers_peripheral_display"
-}
-
-ohos_moduletest_suite("HatsHdfDisplayDeviceTest") {
+ohos_moduletest_suite("HatsHdfDisplayAdaptationTest") {
   module_out_path = module_output_path
-  sources = [
-    "hdi_composition_check.cpp",
-    "hdi_device_test.cpp",
-    "hdi_test_device.cpp",
-    "hdi_test_display.cpp",
-    "hdi_test_layer.cpp",
-  ]
+  sources = [ "GrallocAdaptation.cpp" ]
   deps = [
-    ":disp_hdi_test_common",
-    "//drivers/peripheral/display/hal:hdi_display_device",
     "//drivers/peripheral/display/hal:hdi_display_gralloc",
     "//third_party/googletest:gtest_main",
   ]
   include_dirs = [
-    "../common",
+    "common",
+    "//drivers/peripheral/display/hal/default_standard/include",
+    "//drivers/peripheral/display/hal/default_standard/src/display_gralloc",
     "//drivers/peripheral/display/interfaces/include",
     "//drivers/peripheral/base",
-    ".",
+    "//drivers/peripheral/display/interfaces/include",
+    "//foundation/graphic/standard/utils/include",
   ]
   external_deps = [
     "c_utils:utils",
     "hdf_core:libhdf_utils",
-    "hiviewdfx_hilog_native:libhilog",
   ]
-  cflags = [ "-Wno-unused-function" ]
+  subsystem_name = "hdf"
+  part_name = "drivers_peripheral_display"
 }

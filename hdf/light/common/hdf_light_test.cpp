@@ -228,3 +228,5 @@ HWTEST_F(HdfLightTest, SUB_DriverSystem_LightHdi_0150, Function | MediumTest | L
     int32_t ret = g_lightDev->TurnOffLight(lightId);
     EXPECT_EQ(HDF_FAILURE, ret);
 }
+
+

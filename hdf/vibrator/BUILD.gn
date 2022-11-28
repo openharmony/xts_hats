@@ -13,42 +13,17 @@
 
 import("//build/ohos_var.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
+import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
 group("HatsHdfVibratorTest") {
   testonly = true
-  deps = [
-    ":HatsHdfVibratorHdiTest",
-    "hdiService:HatsHdfVibratorServiceTest",
-    "vibratorBenchmarkTest:HatsHdfVibratorbenchmarkTest",
-  ]
-}
-
-module_output_path = "hats/misc"
-ohos_moduletest_suite("HatsHdfVibratorHdiTest") {
-  module_out_path = module_output_path
-  include_dirs = []
-
-  sources = [ "./common/hdf_vibrator_test.cpp" ]
-  cflags = [
-    "-Wall",
-    "-Wextra",
-    "-Werror",
-    "-fsigned-char",
-    "-fno-common",
-    "-fno-strict-aliasing",
-  ]
-  deps = [ "//drivers/peripheral/vibrator/hal:hdi_vibrator" ]
-  if (is_standard_system) {
-    external_deps = [
-      "c_utils:utils",
-      "hdf_core:libhdf_utils",
-      "hiviewdfx_hilog_native:libhilog",
-    ]
+  if (xts_hats_rich == true) {
   } else {
-    external_deps = [ "hilog:libhilog" ]
+    deps = [
+      #"common:HatsHdfVibratorHdiTest",
+      "hdiService:HatsHdfVibratorServiceTest",
+      #"vibratorBenchmarkTest:HatsHdfVibratorbenchmarkTest",
+    ]
   }
-
-  subsystem_name = "hdf"
-  part_name = "drivers_peripheral_vibrator"
 }

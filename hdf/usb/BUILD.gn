@@ -19,14 +19,15 @@ import("//test/xts/tools/build/suite.gni")
 group("HatsHdfUsbTest") {
   testonly = true
   deps = [
-    "autoFunctionTest:HatsHdfUsbAutoFunctionTest",
-    "deviceTest:HatsHdfUsbDeviceTest",
-    "functionTest:HatsHdfUsbFunctionTest",
-    "requestTest:HatsHdfUsbRequestTest",
-    "transferTest:HatsHdfUsbTransferTest",
-    "usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
-    "usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",
-    "usbdBenchmarkTest:HatsHdfUsbBenchmarkRequestTest",
-    "usbdBenchmarkTest:HatsHdfUsbBenchmarkTransferTest",
-  ]
+      "autoFunctionTest:HatsHdfUsbAutoFunctionTest",
+
+      # "deviceTest:HatsHdfUsbDeviceTest",
+      # "functionTest:HatsHdfUsbFunctionTest",
+      # "requestTest:HatsHdfUsbRequestTest",
+      # "transferTest:HatsHdfUsbTransferTest",
+      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
+      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",
+      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkRequestTest",
+      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkTransferTest",
+      ]
 }

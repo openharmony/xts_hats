@@ -29,17 +29,19 @@ using namespace std;
 using namespace OHOS::HDI::Usb::V1_0;
 
 const int SLEEP_TIME = 3;
+const uint8_t INDEX_0 = 0;
+const uint8_t INDEX_1 = 1;
+const uint8_t CONFIG_ID_0 = 0;
 const uint32_t LENGTH_NUM_255 = 255;
 const uint32_t TAG_LENGTH_NUM_1000 = 1000;
 const int TAG_NUM_10 = 10;
 const uint8_t INTERFACEID_1 = 1;
 const uint8_t POINTID_129 = 130;
+const uint8_t POINTID_BULK_IN = 0x82;
+UsbDev HdfUsbdBenchmarkRequestTest::dev_ = { 0, 0 };
 
 namespace {
 sptr<IUsbInterface> g_usbInterface = nullptr;
-}
-
-struct UsbDev HdfUsbdBenchmarkRequestTest::dev_ = { 0, 0 };
 
 void HdfUsbdBenchmarkRequestTest::SetUp(const ::benchmark::State& state)
 {
@@ -80,13 +82,13 @@ void HdfUsbdBenchmarkRequestTest::TearDown(const ::benchmark::State& state)
  * @tc.name: SUB_USB_HDI_Benchmark_0070
  * @tc.desc: Test functions to SetConfig benchmark test
  * @tc.desc: int32_t SetConfig(const UsbDev &dev, uint8_t configIndex);
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0070)
 (benchmark::State& st)
 {
-    uint8_t configIndex = 1;
+    uint8_t configIndex = INDEX_1;
     struct UsbDev dev = dev_;
     auto ret = 0;
     for (auto _ : st) {
@@ -104,7 +106,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0070)
  * @tc.name: SUB_USB_HDI_Benchmark_0080
  * @tc.desc: Test functions to GetConfig benchmark test
  * @tc.desc: int32_t GetConfig(const UsbDev &dev, uint8_t &configIndex);
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0080)
@@ -128,7 +130,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0080)
  * @tc.name: SUB_USB_HDI_Benchmark_0090
  * @tc.desc: Test functions to ClaimInterface benchmark test
  * @tc.desc: int32_t  ClaimInterface(const UsbDev &dev, uint8_t interfaceId);
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0090)
@@ -152,14 +154,14 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0090)
  * @tc.name: SUB_USB_HDI_Benchmark_0100
  * @tc.desc: Test functions to SetInterface benchmark test
  * @tc.desc: int32_t SetInterface(const UsbDev &dev, uint8_t interfaceId, uint8_t altIndex);
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0100)
 (benchmark::State& st)
 {
     uint8_t interfaceId = INTERFACEID_1;
-    uint8_t altIndex = 0;
+    uint8_t altIndex = INDEX_0;
     struct UsbDev dev = dev_;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     ASSERT_EQ(0, ret);
@@ -178,7 +180,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0100)
  * @tc.name: SUB_USB_HDI_Benchmark_0110
  * @tc.desc: Test functions to GetDeviceDescriptor benchmark test
  * @tc.desc: int32_t GetDeviceDescriptor(const UsbDev &dev, std::vector<uint8_t> &descriptor);
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0110)
@@ -204,7 +206,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0110)
  * @tc.name: SUB_USB_HDI_Benchmark_0120
  * @tc.desc: Test functions to GetStringDescriptor benchmark test
  * @tc.desc: int32_t GetStringDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &descriptor);
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0120)
@@ -231,13 +233,13 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0120)
  * @tc.name: SUB_USB_HDI_Benchmark_0130
  * @tc.desc: Test functions to GetConfigDescriptor benchmark test
  * @tc.desc: int32_t GetConfigDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &descriptor);
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0130)
 (benchmark::State& st)
 {
-    uint8_t configId = 0;
+    uint8_t configId = CONFIG_ID_0;
     uint8_t buffer[LENGTH_NUM_255] = {};
     uint32_t length = LENGTH_NUM_255;
     struct UsbDev dev = dev_;
@@ -258,7 +260,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0130)
  * @tc.name: SUB_USB_HDI_Benchmark_0140
  * @tc.desc: Test functions to GetRawDescriptor benchmark test
  * @tc.desc: int32_t GetRawDescriptor(const UsbDev &dev, std::vector<uint8_t> &descriptor);
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0140)
@@ -282,7 +284,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0140)
  * @tc.name: SUB_USB_HDI_Benchmark_0150
  * @tc.desc: Test functions to GetFileDescriptor benchmark test
  * @tc.desc: int32_t GetFileDescriptor(const UsbDev &dev, int32_t &fd);
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0150)
@@ -307,7 +309,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0150)
  * @tc.desc: Test functions to RequestQueue benchmark test
  * @tc.desc: int32_t RequestQueue(const UsbDev &dev, const UsbPipe &pipe, std::vector<uint8_t> &clientData,
         std::vector<uint8_t> &buffer);
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0160)
@@ -340,7 +342,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0160)
  * @tc.desc: Test functions to RequestWait benchmark test
  * @tc.desc: int32_t RequestWait(const UsbDev &dev, std::vector<uint8_t> &clientData, std::vector<uint8_t> &buffer,
  * int32_t timeout);
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0170)
@@ -378,7 +380,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0170)
  * @tc.name: SUB_USB_HDI_Benchmark_0180
  * @tc.desc: Test functions to RequestCancel benchmark test
  * @tc.desc: int32_t RequestCancel(const UsbDev &dev, const UsbPipe &pipe);
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0180)
@@ -412,7 +414,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0180)
  * @tc.name: SUB_USB_HDI_Benchmark_0190
  * @tc.desc: Test functions to ReleaseInterface benchmark test
  * @tc.desc: int32_t ReleaseInterface(const UsbDev &dev, uint8_t interfaceId);
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0190)
@@ -431,5 +433,36 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0190)
     ->Iterations(100)
     ->Repetitions(3)
     ->ReportAggregatesOnly();
+
+/**
+ * @tc.name: SUB_USB_HDI_Benchmark_0280
+ * @tc.desc: Test functions to BulkCancel benchmark test
+ * @tc.desc: int32_t BulkCancel(const UsbDev &dev, const UsbPipe &pipe);
+ * @tc.desc: Positive test: parameters correctly
+ * @tc.type: FUNC
+ */
+BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0280)
+(benchmark::State& st)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_BULK_IN;
+    struct UsbPipe pipe = {interfaceId, pointid};
+    sptr<UsbdBulkCallbackTest> usbdBulkCallback = new UsbdBulkCallbackTest();
+    auto ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
+    ASSERT_EQ(ret, 0);
+    for (auto _ : st) {
+        ret = g_usbInterface->BulkCancel(dev, pipe);
+    }
+    ASSERT_EQ(0, ret);
+    ret = g_usbInterface->UnRegBulkCallback(dev, pipe);
+    ASSERT_EQ(ret, 0);
+}
+
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0280)
+    ->Iterations(100)
+    ->Repetitions(3)
+    ->ReportAggregatesOnly();
+} // namespace
 
 BENCHMARK_MAIN();

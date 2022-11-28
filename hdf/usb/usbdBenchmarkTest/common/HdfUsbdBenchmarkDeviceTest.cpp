@@ -32,7 +32,6 @@ const int SLEEP_TIME = 3;
 
 namespace {
 sptr<IUsbInterface> g_usbInterface = nullptr;
-}
 
 struct UsbDev HdfUsbdBenchmarkDeviceTest::dev_ = { 0, 0 };
 
@@ -62,7 +61,7 @@ void HdfUsbdBenchmarkDeviceTest::TearDown(const ::benchmark::State& state) {}
  * @tc.name: SUB_USB_HDI_Benchmark_0010
  * @tc.desc: Test functions to OpenDevice benchmark test
  * @tc.desc: int32_t OpenDevice(const UsbDev &dev);
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0010)
@@ -85,7 +84,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0010)
  * @tc.name: SUB_USB_HDI_Benchmark_0020
  * @tc.desc: Test functions to CloseDevice benchmark test
  * @tc.desc: int32_t CloseDevice(const UsbDev &dev);
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0020)
@@ -104,5 +103,6 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0020)
     ->Iterations(100)
     ->Repetitions(3)
     ->ReportAggregatesOnly();
+} // namespace
 
 BENCHMARK_MAIN();

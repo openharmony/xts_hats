@@ -28,9 +28,9 @@ group("hatshdftest") {
       "nfc:HatsHdfNfcTest",
       "nnrt:HatsHdfNnrtTest",
       "sensor:HatsHdfSensorTest",
+      "usb:HatsHdfUsbTest",
       "vibrator:HatsHdfVibratorTest",
       "wlan:HatsHdfWifiTest",
-      "usb:HatsHdfUsbTest",
     ]
   }
 }

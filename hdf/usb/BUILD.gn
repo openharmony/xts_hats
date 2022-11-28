@@ -20,7 +20,6 @@ group("HatsHdfUsbTest") {
   testonly = true
   deps = [
       "autoFunctionTest:HatsHdfUsbAutoFunctionTest",
-
       # "deviceTest:HatsHdfUsbDeviceTest",
       # "functionTest:HatsHdfUsbFunctionTest",
       # "requestTest:HatsHdfUsbRequestTest",
@@ -29,5 +28,5 @@ group("HatsHdfUsbTest") {
       # "usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",
       # "usbdBenchmarkTest:HatsHdfUsbBenchmarkRequestTest",
       # "usbdBenchmarkTest:HatsHdfUsbBenchmarkTransferTest",
-      ]
+  ]
 }

@@ -2,10 +2,16 @@
     "kits": [
         {
             "push": [
-                #"HatsHdfDisplayDeviceTest->/data/local/tmp/HatsHdfDisplayDeviceTest"
+                "HatsHdfDisplayDeviceTest->/data/local/tmp/HatsHdfDisplayDeviceTest"
             ],
             "type": "PushKit"
-        }
+        },
+        {
+            "type": "ShellKit",
+            "run-command": [
+                "stop_service render_service"
+            ]
+        }   
     ],
     "driver": {
         "native-test-timeout": "120000",

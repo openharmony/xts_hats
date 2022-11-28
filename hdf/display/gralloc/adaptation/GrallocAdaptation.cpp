@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-#include "GrallocAllocTest.h"
+#include "../GrallocAllocTest.h"
 #include <securec.h>
 #include "gtest/gtest.h"
 #include "display_gralloc.h"
-#include "../common/display_test.h"
+#include "../../common/display_test.h"
 
 namespace {
 struct AllocTestPrms {

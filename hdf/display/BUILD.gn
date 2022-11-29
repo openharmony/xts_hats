@@ -18,11 +18,11 @@ import("//test/xts/tools/build/suite.gni")
 group("HatsHdfDisplayTest") {
   testonly = true
   if (xts_hats_rich == true) {
-    deps = [ "gralloc:HatsHdfDisplayAdaptationTest" ]
+    deps = [ "gralloc/adaptation:HatsHdfDisplayAdaptationTest" ]
   } else {
     deps = [
       "device:HatsHdfDisplayDeviceTest",
-      "gralloc:HatsHdfDisplayGrallocTest",
+      "gralloc/alloctest:HatsHdfDisplayGrallocTest",
     ]
   }
 }

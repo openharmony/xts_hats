@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-#include "GrallocAllocTest.h"
+#include "../GrallocAllocTest.h"
 #include <securec.h>
 #include "gtest/gtest.h"
 #include "display_gralloc.h"
-#include "../common/display_test.h"
+#include "../../common/display_test.h"
 
 namespace {
 struct AllocTestPrms {
@@ -295,6 +295,54 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
         .expectStride = 4352, // expectStride
         .expectSize = 8355840 // expectSize
     },
+    // num21
+    // SUB_DriverSystem_DisplayHdi_0260
+    {
+        .allocInfo = {
+            .width = 1080,
+            .height = 1920,
+            .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
+            .format = PIXEL_FMT_YCBCR_422_SP
+        },
+        .expectStride = 2176,
+        .expectSize = 4177920,
+    },
+    // num22
+    // SUB_DriverSystem_DisplayHdi_0270
+    {
+        .allocInfo = {
+            .width = 1080,
+            .height = 1920,
+            .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
+            .format = PIXEL_FMT_YCRCB_422_SP
+        },
+        .expectStride = 2176,
+        .expectSize = 4177920,
+    },
+    // num23
+    // SUB_DriverSystem_DisplayHdi_0280
+    {
+        .allocInfo = {
+            .width = 1080,
+            .height = 1920,
+            .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
+            .format = PIXEL_FMT_YCBCR_422_P
+        },
+        .expectStride = 2176,
+        .expectSize = 4177920,
+    },
+    // num24
+    // SUB_DriverSystem_DisplayHdi_0290
+    {
+        .allocInfo = {
+            .width = 1080,
+            .height = 1920,
+            .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
+            .format = PIXEL_FMT_YCRCB_422_P
+        },
+        .expectStride = 2176,
+        .expectSize = 4177920,
+    },
 };
 
 static bool CheckBufferHandle(AllocTestPrms &info, BufferHandle &buffer)
@@ -408,6 +456,5 @@ TEST_P(GrallocAllocTest, GrallocAlloc)
     int ret = AllocMemTest(params);
     ASSERT_TRUE(ret == DISPLAY_SUCCESS);
 }
-
 INSTANTIATE_TEST_SUITE_P(AllocTest, GrallocAllocTest, ::testing::ValuesIn(GRALLOC_TEST_SETS));
 }

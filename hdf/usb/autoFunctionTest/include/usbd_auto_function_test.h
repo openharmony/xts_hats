@@ -18,7 +18,7 @@
 #include <gtest/gtest.h>
 
 namespace {
-class UsbdFunctionTest : public testing::Test {
+class UsbdAutoFunctionTest : public testing::Test {
 public:
     static void SetUpTestCase();
     static void TearDownTestCase();

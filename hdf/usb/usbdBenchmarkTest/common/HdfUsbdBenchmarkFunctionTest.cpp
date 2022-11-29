@@ -35,7 +35,6 @@ const int TEST_DATAR_ROLE = 2;
 
 namespace {
 sptr<IUsbInterface> g_usbInterface = nullptr;
-}
 
 void HdfUsbdBenchmarkFunctionTest::SetUp(const ::benchmark::State& state)
 {
@@ -57,7 +56,7 @@ void HdfUsbdBenchmarkFunctionTest::TearDown(const ::benchmark::State& state) {}
  * @tc.name: SUB_USB_HDI_Benchmark_0030
  * @tc.desc: Test functions to GetCurrentFunctions benchmark test
  * @tc.desc: int32_t GetCurrentFunctions(int32_t &funcs);
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0030)
@@ -80,7 +79,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0030)
  * @tc.name: SUB_USB_HDI_Benchmark_0040
  * @tc.desc: Test functions to SetCurrentFunctions benchmark test
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0040)
@@ -103,7 +102,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0040)
  * @tc.name: SUB_USB_HDI_Benchmark_0050
  * @tc.desc: Test functions to SetPortRole benchmark test
  * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0050)
@@ -125,7 +124,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0050)
  * @tc.name: SUB_USB_HDI_Benchmark_0060
  * @tc.desc: Test functions to QueryPort benchmark test
  * @tc.desc: int32_t QueryPort(int32_t &portId, int32_t &powerRole, int32_t &dataRole, int32_t &mode);
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0060)
@@ -146,5 +145,6 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0060)
     ->Iterations(100)
     ->Repetitions(3)
     ->ReportAggregatesOnly();
+} // namespace
 
 BENCHMARK_MAIN();

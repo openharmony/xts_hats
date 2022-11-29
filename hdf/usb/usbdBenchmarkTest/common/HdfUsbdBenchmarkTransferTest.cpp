@@ -18,6 +18,7 @@
 
 #include "UsbSubscriberTest.h"
 #include "hdf_log.h"
+#include "securec.h"
 #include "v1_0/iusb_interface.h"
 #include "v1_0/usb_types.h"
 #include "HdfUsbdBenchmarkTransferTest.h"
@@ -34,16 +35,44 @@ uint8_t DEV_ADDR_2 = 0;
 const uint32_t LENGTH_NUM_255 = 255;
 const uint8_t INTERFACEID_1 = 1;
 const uint8_t POINTID_1 = 1;
-const uint8_t POINTID_130 = 130;
+const uint8_t POINTID_129 = 130;
+const uint8_t POINTID_BULK_IN = 0x82;
+const uint8_t POINTID_BULK_OUT = 0x01;
+const int32_t ASHMEM_MAX_SIZE = 1024;
 const uint8_t SAMPLE_DATA_1 = 1;
 const uint8_t SAMPLE_DATA_2 = 2;
 const uint8_t SAMPLE_DATA_3 = 3;
+UsbDev HdfUsbdBenchmarkTransferTest::dev_ = { 0, 0 };
 
 namespace {
 sptr<IUsbInterface> g_usbInterface = nullptr;
-}
 
-struct UsbDev HdfUsbdBenchmarkTransferTest::dev_ = { 0, 0 };
+int32_t InitAshmemOne(sptr<Ashmem>& asmptr, int32_t asmSize, uint8_t rflg)
+{
+    asmptr = Ashmem::CreateAshmem("ttashmem000", asmSize);
+    if (asmptr == nullptr) {
+        return HDF_FAILURE;
+    }
+
+    asmptr->MapReadAndWriteAshmem();
+
+    if (rflg == 0) {
+        uint8_t tdata[ASHMEM_MAX_SIZE];
+        int32_t offset = 0;
+        int32_t tlen = 0;
+
+        int32_t retSafe = memset_s(tdata, sizeof(tdata), 'Y', ASHMEM_MAX_SIZE);
+        if (retSafe != EOK) {
+            return HDF_FAILURE;
+        }
+        while (offset < asmSize) {
+            tlen = (asmSize - offset) < ASHMEM_MAX_SIZE ? (asmSize - offset) : ASHMEM_MAX_SIZE;
+            asmptr->WriteToAshmem(tdata, tlen, offset);
+            offset += tlen;
+        }
+    }
+    return HDF_SUCCESS;
+}
 
 void HdfUsbdBenchmarkTransferTest::SetUp(const ::benchmark::State& state)
 {
@@ -61,6 +90,9 @@ void HdfUsbdBenchmarkTransferTest::SetUp(const ::benchmark::State& state)
     }
 
     sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
+    if (subscriber == nullptr) {
+        exit(0);
+    }
     if (g_usbInterface->BindUsbdSubscriber(subscriber) != HDF_SUCCESS) {
         exit(0);
     }
@@ -72,6 +104,9 @@ void HdfUsbdBenchmarkTransferTest::SetUp(const ::benchmark::State& state)
 void HdfUsbdBenchmarkTransferTest::TearDown(const ::benchmark::State& state)
 {
     sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
+    if (subscriber == nullptr) {
+        exit(0);
+    }
     if (g_usbInterface->BindUsbdSubscriber(subscriber) != HDF_SUCCESS) {
         exit(0);
     }
@@ -85,7 +120,7 @@ void HdfUsbdBenchmarkTransferTest::TearDown(const ::benchmark::State& state)
  * @tc.desc: Benchmark test
  * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly, standard request: get configuration
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0200)
@@ -113,7 +148,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0200)
  * @tc.desc: Benchmark test
  * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
- * @tc.desc: Forward test: correct parameters
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0270)
@@ -142,6 +177,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0270)
  * @tc.desc: Benchmark test
  * @tc.desc: Test functions to BulkTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0210)
@@ -149,7 +185,7 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0210)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_130;
+    uint8_t pointid = POINTID_BULK_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     ASSERT_EQ(0, ret);
     uint8_t buffer[LENGTH_NUM_255] = { 0 };
@@ -172,6 +208,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0210)
  * @tc.desc: Benchmark test
  * @tc.desc: Test functions to BulkTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0220)
@@ -202,6 +239,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0220)
  * @tc.desc: Benchmark test
  * @tc.desc: Test functions to InterruptTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0230)
@@ -209,7 +247,7 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0230)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_130;
+    uint8_t pointid = POINTID_129;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     ASSERT_EQ(0, ret);
     uint8_t buffer[LENGTH_NUM_255] = { 0 };
@@ -232,6 +270,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0230)
  * @tc.desc: Benchmark test
  * @tc.desc: Test functions to InterruptTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0240)
@@ -262,6 +301,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0240)
  * @tc.desc: Benchmark test
  * @tc.desc: Test functions to IsoTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0250)
@@ -269,7 +309,7 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0250)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_130;
+    uint8_t pointid = POINTID_129;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     ASSERT_EQ(0, ret);
     uint8_t buffer[LENGTH_NUM_255] = { 0 };
@@ -292,6 +332,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0250)
  * @tc.desc: Benchmark test
  * @tc.desc: Test functions to IsoTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
+ * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
 BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0260)
@@ -316,5 +357,183 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0260)
     ->Iterations(100)
     ->Repetitions(3)
     ->ReportAggregatesOnly();
+
+/**
+ * @tc.name: SUB_USB_HDI_Benchmark_0290
+ * @tc.desc: Benchmark test
+ * @tc.desc: Test functions to int32_t BulkWrite(const UsbDev &dev, const UsbPipe &pipe, const sptr<Ashmem> &ashmem)
+ * @tc.desc: Positive test: parameters correctly
+ * @tc.type: FUNC
+ */
+BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0290)
+(benchmark::State& st)
+{
+    sptr<Ashmem> ashmem;
+    uint8_t rflg = 0;
+    int32_t asmSize = LENGTH_NUM_255;
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_129;
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
+    ASSERT_EQ(0, ret);
+    struct UsbPipe pipe = { interfaceId, pointid };
+    (void)InitAshmemOne(ashmem, asmSize, rflg);
+    for (auto _ : st) {
+        ret = g_usbInterface->BulkWrite(dev, pipe, ashmem);
+    }
+    ASSERT_EQ(ret, 0);
+}
+
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0290)
+    ->Iterations(100)
+    ->Repetitions(3)
+    ->ReportAggregatesOnly();
+
+/**
+ * @tc.name: SUB_USB_HDI_Benchmark_0300
+ * @tc.desc: Benchmark test
+ * @tc.desc: Test functions to int32_t BulkRead(const UsbDev &dev, const UsbPipe &pipe, const sptr<Ashmem> &ashmem)
+ * @tc.desc: Positive test: parameters correctly
+ * @tc.type: FUNC
+ */
+BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0300)
+(benchmark::State& st)
+{
+    sptr<Ashmem> ashmem;
+    uint8_t rflg = 0;
+    int32_t asmSize = LENGTH_NUM_255;
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_129;
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
+    ASSERT_EQ(0, ret);
+    struct UsbPipe pipe = { interfaceId, pointid };
+    (void)InitAshmemOne(ashmem, asmSize, rflg);
+    for (auto _ : st) {
+        ret = g_usbInterface->BulkRead(dev, pipe, ashmem);
+    }
+    ASSERT_EQ(ret, 0);
+}
+
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0300)
+    ->Iterations(100)
+    ->Repetitions(3)
+    ->ReportAggregatesOnly();
+
+/**
+ * @tc.name: SUB_USB_HDI_Benchmark_0310
+ * @tc.desc: Benchmark test
+ * @tc.desc: int32_t RegBulkCallback(const UsbDev &dev, const UsbPipe &pipe, const sptr<IUsbdBulkCallback> &cb)
+ * @tc.desc: Positive test: parameters correctly
+ * @tc.type: FUNC
+ */
+BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0310)
+(benchmark::State& st)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_BULK_OUT;
+    struct UsbPipe pipe = {interfaceId, pointid};
+    sptr<UsbdBulkCallbackTest> usbdBulkCallback = new UsbdBulkCallbackTest();
+    if (usbdBulkCallback == nullptr) {
+        exit(0);
+    }
+    auto ret = 0;
+    for (auto _ : st) {
+        ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
+    }
+    ASSERT_EQ(ret, 0);
+}
+
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0310)
+    ->Iterations(100)
+    ->Repetitions(3)
+    ->ReportAggregatesOnly();
+
+/**
+ * @tc.name: SUB_USB_HDI_Benchmark_0320
+ * @tc.desc: Benchmark test
+ * @tc.desc: Test functions to int32_t UnRegBulkCallback(const UsbDev &dev, const UsbPipe &pipe)
+ * @tc.desc: Positive test: parameters correctly
+ * @tc.type: FUNC
+ */
+BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0320)
+(benchmark::State& st)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointid = POINTID_1;
+    struct UsbPipe pipe = {interfaceId, pointid};
+    sptr<UsbdBulkCallbackTest> usbdBulkCallback = new UsbdBulkCallbackTest();
+    if (usbdBulkCallback == nullptr) {
+        exit(0);
+    }
+    auto ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
+    ASSERT_EQ(ret, 0);
+    for (auto _ : st) {
+        ret = g_usbInterface->UnRegBulkCallback(dev, pipe);
+    }
+    ASSERT_EQ(ret, 0);
+}
+
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0320)
+    ->Iterations(100)
+    ->Repetitions(3)
+    ->ReportAggregatesOnly();
+
+/**
+ * @tc.name: SUB_USB_HDI_Benchmark_0330
+ * @tc.desc: Benchmark test
+ * @tc.desc: Test functions to int32_t BindUsbdSubscriber(const sptr<IUsbdSubscriber> &subscriber)
+ * @tc.desc: Positive test: parameters correctly
+ * @tc.type: FUNC
+ */
+BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0330)
+(benchmark::State& st)
+{
+    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
+    if (subscriber == nullptr) {
+        exit(0);
+    }
+    auto ret = 0;
+    for (auto _ : st) {
+        ret = g_usbInterface->BindUsbdSubscriber(subscriber);
+    }
+    ASSERT_EQ(ret, 0);
+}
+
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0330)
+    ->Iterations(100)
+    ->Repetitions(3)
+    ->ReportAggregatesOnly();
+
+/**
+ * @tc.name: SUB_USB_HDI_Benchmark_0340
+ * @tc.desc: Benchmark test
+ * @tc.desc: Test functions to int32_t UnbindUsbdSubscriber(const sptr<IUsbdSubscriber> &subscriber)
+ * @tc.desc: Positive test: parameters correctly
+ * @tc.type: FUNC
+ */
+BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0340)
+(benchmark::State& st)
+{
+    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
+    if (subscriber == nullptr) {
+        exit(0);
+    }
+    auto ret = g_usbInterface->BindUsbdSubscriber(subscriber);
+    ASSERT_EQ(0, ret);
+    ret = 0;
+    for (auto _ : st) {
+        ret = g_usbInterface->UnbindUsbdSubscriber(subscriber);
+    }
+    ASSERT_EQ(ret, 0);
+}
+
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0340)
+    ->Iterations(100)
+    ->Repetitions(3)
+    ->ReportAggregatesOnly();
+} // namespace
 
 BENCHMARK_MAIN();

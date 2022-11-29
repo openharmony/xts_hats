@@ -20,13 +20,13 @@ group("HatsHdfUsbTest") {
   testonly = true
   deps = [
     "autoFunctionTest:HatsHdfUsbAutoFunctionTest",
-    "deviceTest:HatsHdfUsbDeviceTest",
-    "functionTest:HatsHdfUsbFunctionTest",
-    "requestTest:HatsHdfUsbRequestTest",
-    "transferTest:HatsHdfUsbTransferTest",
-    "usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
-    "usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",
-    "usbdBenchmarkTest:HatsHdfUsbBenchmarkRequestTest",
-    "usbdBenchmarkTest:HatsHdfUsbBenchmarkTransferTest",
+    # "deviceTest:HatsHdfUsbDeviceTest",
+    # "functionTest:HatsHdfUsbFunctionTest",
+    # "requestTest:HatsHdfUsbRequestTest",
+    # "transferTest:HatsHdfUsbTransferTest",
+    # "usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
+    # "usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",
+    # "usbdBenchmarkTest:HatsHdfUsbBenchmarkRequestTest",
+    # "usbdBenchmarkTest:HatsHdfUsbBenchmarkTransferTest",
   ]
 }

@@ -57,7 +57,13 @@ const int32_t TEST_STREAMID = 2;
 }
 
 std::vector<DCStreamInfo> streamInfos;
+std::vector<DCStreamInfo> streamInfos1;
+std::vector<DCStreamInfo> streamInfos2;
+std::vector<DCStreamInfo> streamInfos3;
+std::vector<DCStreamInfo> streamInfos4;
 std::vector<DCCaptureInfo> captureInfos;
+std::vector<DCCaptureInfo> captureInfos1;
+std::vector<DCCaptureInfo> captureInfos2;
 std::vector<DCameraSettings> settings;
 std::vector<int> streamIds;
 DCameraSettings result;
@@ -67,6 +73,12 @@ DCameraSettings result3;
 DCameraSettings result4;
 DCameraSettings result5;
 DCameraSettings result6;
+DCStreamInfo streamInfo2;
+DCStreamInfo streamInfo3;
+DCStreamInfo streamInfo4;
+DCStreamInfo streamInfo5;
+DCCaptureInfo captureInfo2;
+DCCaptureInfo captureInfo3;
 DHBase dhBase;
 DCameraProvider cameraProvider;
 DCameraBuffer buffer;
@@ -83,6 +95,7 @@ void DCameraProviderTest::SetUpTestCase(void)
 
     result.type_ = METADATA_RESULT;
     result.value_ = "SettingValue";
+	
 
     DCStreamInfo streamInfo1;
     streamInfo1.streamId_ = 1;
@@ -242,6 +255,7 @@ HWTEST_F(DCameraProviderTest, DCameraCase_0170, TestSize.Level1)
     EXPECT_NE(0, ret) << "ReleaseStreams fail";
 }
 
+
 HWTEST_F(DCameraProviderTest, DCameraCase_0180, TestSize.Level1)
 {
     int32_t ret = cameraProvider.CloseSession(dhBase);
@@ -300,6 +314,96 @@ HWTEST_F(DCameraProviderTest, DCameraCase_0270, TestSize.Level1)
 {
     int32_t ret = cameraProvider.ShutterBuffer(dhBase, TEST_STREAMID, buffer);
     EXPECT_NE(FAILED, ret) << "ShutterBuffer fail";
+}
+
+HWTEST_F(DCameraProviderTest, DCameraCase_0280, TestSize.Level1)
+{
+    streamInfo2.streamId_ = 1;
+    streamInfo2.width_ = TEST_WIDTH;
+    streamInfo2.height_ = TEST_HEIGTH;
+    streamInfo2.stride_ = 1;
+    streamInfo2.format_ = 1;
+    streamInfo2.dataspace_ = 1;
+    streamInfo2.encodeType_ = ENCODE_TYPE_NULL;
+    streamInfo2.type_ = SNAPSHOT_FRAME;
+    streamInfos1.push_back(streamInfo2);
+    int32_t ret = cameraProvider.ConfigureStreams(dhBase, streamInfos1);
+    EXPECT_NE(0, ret) << "ConfigureStreams fail";
+}
+
+HWTEST_F(DCameraProviderTest, DCameraCase_0290, TestSize.Level1)
+{
+    streamInfo3.streamId_ = 1;
+    streamInfo3.width_ = TEST_WIDTH;
+    streamInfo3.height_ = TEST_HEIGTH;
+    streamInfo3.stride_ = 1;
+    streamInfo3.format_ = 1;
+    streamInfo3.dataspace_ = 1;
+    streamInfo3.encodeType_ = ENCODE_TYPE_H264;
+    streamInfo3.type_ = SNAPSHOT_FRAME;
+    streamInfos2.push_back(streamInfo3);
+    int32_t ret = cameraProvider.ConfigureStreams(dhBase, streamInfos2);
+    EXPECT_NE(0, ret) << "ConfigureStreams fail";
+}
+
+HWTEST_F(DCameraProviderTest, DCameraCase_3000, TestSize.Level1)
+{
+    streamInfo4.streamId_ = 1;
+    streamInfo4.width_ = TEST_WIDTH;
+    streamInfo4.height_ = TEST_HEIGTH;
+    streamInfo4.stride_ = 1;
+    streamInfo4.format_ = 1;
+    streamInfo4.dataspace_ = 1;
+    streamInfo4.encodeType_ = ENCODE_TYPE_H265;
+    streamInfo4.type_ = SNAPSHOT_FRAME;
+    streamInfos3.push_back(streamInfo4);
+    int32_t ret = cameraProvider.ConfigureStreams(dhBase, streamInfos3);
+    EXPECT_NE(0, ret) << "ConfigureStreams fail";
+}
+
+HWTEST_F(DCameraProviderTest, DCameraCase_3001, TestSize.Level1)
+{
+    streamInfo5.streamId_ = 1;
+    streamInfo5.width_ = TEST_WIDTH;
+    streamInfo5.height_ = TEST_HEIGTH;
+    streamInfo5.stride_ = 1;
+    streamInfo5.format_ = 1;
+    streamInfo5.dataspace_ = 1;
+    streamInfo5.encodeType_ = ENCODE_TYPE_JPEG;
+    streamInfo5.type_ = SNAPSHOT_FRAME;
+    streamInfos4.push_back(streamInfo5);
+    int32_t ret = cameraProvider.ConfigureStreams(dhBase, streamInfos4);
+    EXPECT_NE(0, ret) << "ConfigureStreams fail";
+}
+
+HWTEST_F(DCameraProviderTest, DCameraCase_3002, TestSize.Level1)
+{
+    captureInfo2.streamIds_.push_back(1);
+    captureInfo2.width_ = TEST_WIDTH;
+    captureInfo2.height_ = TEST_HEIGTH;
+    captureInfo2.stride_ = 1;
+    captureInfo2.format_ = 1;
+    captureInfo2.dataspace_ = 1;
+    captureInfo2.encodeType_ = ENCODE_TYPE_H265;
+    captureInfo2.type_ = CONTINUOUS_FRAME;
+    captureInfos1.push_back(captureInfo2);
+    int32_t ret = cameraProvider.StartCapture(dhBase, captureInfos1);
+    EXPECT_EQ(INVALID_ARGUMENT, ret) << "StartCapture fail";
+}
+
+HWTEST_F(DCameraProviderTest, DCameraCase_3003, TestSize.Level1)
+{
+    captureInfo3.streamIds_.push_back(1);
+    captureInfo3.width_ = TEST_WIDTH;
+    captureInfo3.height_ = TEST_HEIGTH;
+    captureInfo3.stride_ = 1;
+    captureInfo3.format_ = 1;
+    captureInfo3.dataspace_ = 1;
+    captureInfo3.encodeType_ = ENCODE_TYPE_H265;
+    captureInfo3.type_ = SNAPSHOT_FRAME;
+    captureInfos2.push_back(captureInfo3);
+    int32_t ret = cameraProvider.StartCapture(dhBase, captureInfos2);
+    EXPECT_EQ(INVALID_ARGUMENT, ret) << "StartCapture fail";
 }
 }
 }

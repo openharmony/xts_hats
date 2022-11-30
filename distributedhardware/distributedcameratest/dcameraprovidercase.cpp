@@ -96,7 +96,6 @@ void DCameraProviderTest::SetUpTestCase(void)
     result.type_ = METADATA_RESULT;
     result.value_ = "SettingValue";
 	
-
     DCStreamInfo streamInfo1;
     streamInfo1.streamId_ = 1;
     streamInfo1.width_ = TEST_WIDTH;

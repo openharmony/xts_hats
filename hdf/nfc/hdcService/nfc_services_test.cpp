@@ -128,7 +128,7 @@ static void DataCallback(uint16_t len, uint8_t *data)
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_Hdinfcopen_0100, TestSize.Level2)
 {
     if (!NfcChipTypeParser::IsSn110()) {
-        EXPECT_EQ(HDF_SUCCESS, HDF_SUCCESS);
+        EXPECT_EQ(HDF_SUCCESS, 0);
     }
     else{
         if (mHal == nullptr) {
@@ -144,7 +144,6 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_Hdinfcopen_0100, TestSize.Level2)
         int32_t ret = mHal->Open(mCallback, nfcbtType);
         EXPECT_EQ(HDF_SUCCESS, ret);
     }
-
 }
 
 /**
@@ -155,7 +154,7 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_Hdinfcopen_0100, TestSize.Level2)
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcCoreInitialized_0200, TestSize.Level2)
 {
     if (!NfcChipTypeParser::IsSn110()) {
-        EXPECT_EQ(HDF_SUCCESS, HDF_SUCCESS);
+        EXPECT_EQ(HDF_SUCCESS, 0);
     }
     else{
         if (mHal == nullptr) {
@@ -177,7 +176,7 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcCoreInitialized_0200, TestSize.Le
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcPrediscover_0300, TestSize.Level2)
 {
     if (!NfcChipTypeParser::IsSn110()) {
-        EXPECT_EQ(HDF_SUCCESS, HDF_SUCCESS);
+        EXPECT_EQ(HDF_SUCCESS, 0);
     }
     else{
         if (mHal == nullptr) {
@@ -198,7 +197,7 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcPrediscover_0300, TestSize.Level2
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcWrite_0400, TestSize.Level2)
 {
     if (!NfcChipTypeParser::IsSn110()) {
-        EXPECT_EQ(HDF_SUCCESS, HDF_SUCCESS);
+        EXPECT_EQ(HDF_SUCCESS, 0);
     }
     else{
         if (mHal == nullptr) {
@@ -220,7 +219,7 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcWrite_0400, TestSize.Level2)
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcControlGranted_0500, TestSize.Level2)
 {
     if (!NfcChipTypeParser::IsSn110()) {
-        EXPECT_EQ(HDF_SUCCESS, HDF_SUCCESS);
+        EXPECT_EQ(HDF_SUCCESS, 0);
     }
     else{
         if (mHal == nullptr) {
@@ -241,7 +240,7 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcControlGranted_0500, TestSize.Lev
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcPowerCycle_0600, TestSize.Level2)
 {
     if (!NfcChipTypeParser::IsSn110()) {
-        EXPECT_EQ(HDF_SUCCESS, HDF_SUCCESS);
+        EXPECT_EQ(HDF_SUCCESS, 0);
     }
     else{
         if (mHal == nullptr) {
@@ -262,7 +261,7 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcPowerCycle_0600, TestSize.Level2)
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcIoctl_0700, TestSize.Level2)
 {
     if (!NfcChipTypeParser::IsSn110()) {
-        EXPECT_EQ(HDF_SUCCESS, HDF_SUCCESS);
+        EXPECT_EQ(HDF_SUCCESS, 0);
     }
     else{
         if (mHal == nullptr) {
@@ -288,7 +287,7 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcIoctl_0700, TestSize.Level2)
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcClose_0800, TestSize.Level2)
 {
     if (!NfcChipTypeParser::IsSn110()) {
-        EXPECT_EQ(HDF_SUCCESS, HDF_SUCCESS);
+        EXPECT_EQ(HDF_SUCCESS, 0);
     }
     else{
         if (mHal == nullptr) {
@@ -300,3 +299,4 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcClose_0800, TestSize.Level2)
         EXPECT_EQ(HDF_SUCCESS, ret);
     }
 }
+

@@ -31,65 +31,65 @@ std::vector<IRect> SplitBuffer(const BufferHandle &handle, std::vector<uint32_t>
 
 class HdiDisplay {
 public:
-    static int32_t SetDisplayBacklight(uint32_t devId, uint32_t &level){
+    static int32_t SetDisplayBacklight(uint32_t devId, uint32_t &level) {
         return DISPLAY_NOT_SUPPORT;
     };
-	static int32_t SetDisplayClientCrop(uint32_t devId, IRect *rect){
+	static int32_t SetDisplayClientCrop(uint32_t devId, IRect *rect) {
 		return DISPLAY_NOT_SUPPORT;
 	};	
-	static int32_t SetDisplayClientDestRect(uint32_t devId, IRect *rect){
+	static int32_t SetDisplayClientDestRect(uint32_t devId, IRect *rect) {
 		return DISPLAY_NOT_SUPPORT;
 	};	
-	static int32_t SetDisplayMode(uint32_t devId, uint32_t modeId){
+	static int32_t SetDisplayMode(uint32_t devId, uint32_t modeId) {
 		return DISPLAY_NOT_SUPPORT;
 	};	
-	static int32_t SetDisplayPowerStatus(uint32_t devId, DispPowerStatus status){
+	static int32_t SetDisplayPowerStatus(uint32_t devId, DispPowerStatus status) {
 		return DISPLAY_NOT_SUPPORT;
 	};	
-    static int32_t GetDisplayBacklight(uint32_t devId, uint32_t &level){
+    static int32_t GetDisplayBacklight(uint32_t devId, uint32_t &level) {
 		return DISPLAY_NOT_SUPPORT;
 	};
-	static int32_t SetDisplayProperty(uint32_t devId, uint32_t id, uint64_t value){
+	static int32_t SetDisplayProperty(uint32_t devId, uint32_t id, uint64_t value) {
 		return DISPLAY_NOT_SUPPORT;
 	};	
-	static int32_t DestroyVirtualDisplay(uint32_t devId){
+	static int32_t DestroyVirtualDisplay(uint32_t devId) {
 		return DISPLAY_NOT_SUPPORT;
 	};	
-	static int32_t GetDisplayPowerStatus(uint32_t devId, DispPowerStatus status){
+	static int32_t GetDisplayPowerStatus(uint32_t devId, DispPowerStatus status) {
 		return DISPLAY_NOT_SUPPORT;
 	};	
-	static int32_t GetDisplayProperty(uint32_t devId, uint32_t id, uint64_t value){
+	static int32_t GetDisplayProperty(uint32_t devId, uint32_t id, uint64_t value) {
 		return DISPLAY_NOT_SUPPORT;
 	};	
-	static int32_t SetVirtualDisplayBuffer(uint32_t devId, BufferHandle *buffer, int32_t fence){
+	static int32_t SetVirtualDisplayBuffer(uint32_t devId, BufferHandle *buffer, int32_t fence) {
 		return DISPLAY_NOT_SUPPORT;
 	};	
-	static int32_t DestroyLayer(uint32_t devId, uint32_t layerId){
+	static int32_t DestroyLayer(uint32_t devId, uint32_t layerId) {
 		return DISPLAY_NOT_SUPPORT;
 	};	
-	static int32_t InitCmdRequest(uint32_t &request){
+	static int32_t InitCmdRequest(uint32_t &request) {
 		return DISPLAY_NOT_SUPPORT;
 	};	
-	static int32_t CreateVirtualDisplay(uint32_t width, uint32_t height, int32_t format, uint32_t devId){
+	static int32_t CreateVirtualDisplay(uint32_t width, uint32_t height, int32_t format, uint32_t devId) {
 		return DISPLAY_NOT_SUPPORT;
 	};	
-	static int32_t CmdRequest(uint32_t inEleCnt, uint32_t &inFds, uint32_t &outEleCnt){
+	static int32_t CmdRequest(uint32_t inEleCnt, uint32_t &inFds, uint32_t &outEleCnt) {
 		return DISPLAY_NOT_SUPPORT;
 	};	
-    static int32_t GetCmdReply(int32_t reply){
+    static int32_t GetCmdReply(int32_t reply) {
 		return DISPLAY_NOT_SUPPORT;
 	};	
 };
 
 class DisplayRegisterCallbackBase {
 public:
-    static int32_t OnHotplugIn(uint32_t outputId, bool connected){
+    static int32_t OnHotplugIn(uint32_t outputId, bool connected) {
 		return DISPLAY_NOT_SUPPORT;
 	};	
-    static int32_t OnVBlankCallback(unsigned int sequence, uint64_t ns){
+    static int32_t OnVBlankCallback(unsigned int sequence, uint64_t ns) {
 		return DISPLAY_NOT_SUPPORT;
 	};	
-    static int32_t OnRefreshCallback(uint32_t devId){
+    static int32_t OnRefreshCallback(uint32_t devId) {
 		return DISPLAY_NOT_SUPPORT;
 	};
 };

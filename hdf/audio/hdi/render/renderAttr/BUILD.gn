@@ -41,7 +41,6 @@ ohos_moduletest_suite("HatsHdfAudioRenderAttrTest") {
     "//drivers/hdf_core/framework/utils/include",
     "//drivers/hdf_core/adapter/uhdf2/osal/include",
     "//third_party/googletest/googletest/include/gtest",
-    "//drivers/peripheral/audio/test/systemtest/hdi/render/include",
     "//test/xts/hats/hdf/audio/common/hdi_common/include",
     "//test/xts/hats/hdf/audio/hdi/render/renderAttr/include",
   ]

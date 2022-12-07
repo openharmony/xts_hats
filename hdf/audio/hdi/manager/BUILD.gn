@@ -36,9 +36,9 @@ ohos_moduletest_suite("HatsHdfAudioManagerTest") {
     "//drivers/hdf_core/framework/include",
     "//drivers/hdf_core/framework/utils/include",
     "//third_party/bounds_checking_function/include",
-    "//drivers/peripheral/audio/test/systemtest/common/hdi_common/include",
+    "//test/xts/hats/hdf/audio/common/hdi_common/include",
+    "//test/xts/hats/hdf/audio/hdi/manager/include",
     "//third_party/googletest/googletest/include/gtest",
-    "//drivers/peripheral/audio/test/systemtest/hdi/common/manager/include",
   ]
 
   deps = [

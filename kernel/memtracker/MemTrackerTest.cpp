@@ -28,7 +28,7 @@ using namespace testing;
 using namespace testing::ext;
 using namespace OHOS::HDI::Memorytracker::V1_0;
 
-class MemTrackerTest : public testing::Test {
+class HdfMemoryTrackerTest : public testing::Test {
 public:
     static void SetUpTestCase();
     static void TearDownTestCase();
@@ -36,27 +36,23 @@ public:
     void TearDown();
 };
 
-void MemTrackerTest::SetUpTestCase()
+void HdfMemoryTrackerTest::SetUpTestCase()
 {
 }
 
-void MemTrackerTest::TearDownTestCase()
+void HdfMemoryTrackerTest::TearDownTestCase()
 {
 }
 
-void MemTrackerTest::SetUp()
+void HdfMemoryTrackerTest::SetUp()
 {
 }
 
-void MemTrackerTest::TearDown()
+void HdfMemoryTrackerTest::TearDown()
 {
 }
-/**
- * @tc.number SUB_KERNEL_Get_MemoryTest_0101
- * @tc.name   Unable to obtain related services
- * @tc.desc   [C- SOFTWARE -0200]
- */
-HWTEST_F(MemTrackerTest, GetMemoryTest_01, TestSize.Level1)
+
+HWTEST_F(HdfMemoryTrackerTest, GetMemoryTest_01, TestSize.Level1)
 {
     printf("begin call memtrack by service \n");
     sptr<IMemoryTrackerInterface> memtrack = IMemoryTrackerInterface::Get();
@@ -67,14 +63,16 @@ HWTEST_F(MemTrackerTest, GetMemoryTest_01, TestSize.Level1)
 
     std::vector<MemoryRecord> records;
     int errCode = memtrack->GetDevMem(0, MEMORY_TRACKER_TYPE_GL, records);
-    ASSERT_EQ(errCode, HDF_SUCCESS);
+    if (errCode == HDF_SUCCESS) {
+        printf("memtrack calll GetMemory success, num_records=%zu \n", records.size());
+        int i = 0;
+        for (auto record : records) {
+            printf("memtrack: \trecords[%d], flag=%d, size=%lld \n", i++, record.flags, (long long)record.size);
+        }
+    }
 }
-/**
- * @tc.number SUB_KERNEL_Get_MemoryTest_0102
- * @tc.name   Obtain relevant services and input legal parameters
- * @tc.desc   [C- SOFTWARE -0200]
- */
-HWTEST_F(MemTrackerTest, GetMemoryTest_02, TestSize.Level1)
+
+HWTEST_F(HdfMemoryTrackerTest, GetMemoryTest_02, TestSize.Level1)
 {
     printf("begin call memtrack passthrough \n");
     sptr<IMemoryTrackerInterface> memtrack = IMemoryTrackerInterface::Get(true);
@@ -85,82 +83,13 @@ HWTEST_F(MemTrackerTest, GetMemoryTest_02, TestSize.Level1)
 
     std::vector<MemoryRecord> records;
     int errCode = memtrack->GetDevMem(0, MEMORY_TRACKER_TYPE_GL, records);
-    ASSERT_EQ(errCode, HDF_SUCCESS);
-}
-/**
- * @tc.number SUB_KERNEL_Get_MemoryTest_0103
- * @tc.name   replace MemoryTrackerType is MEMORY_TRACKER_TYPE_CAM
- * @tc.desc   [C- SOFTWARE -0200]
- */
-HWTEST_F(MemTrackerTest, GetMemoryTest_03, TestSize.Level1)
-{
-    printf("begin call memtrack passthrough \n");
-    sptr<IMemoryTrackerInterface> memtrack = IMemoryTrackerInterface::Get(true);
-    if (memtrack == nullptr) {
-        printf("memtrack service is null \n");
-        return;
+    if (errCode == HDF_SUCCESS) {
+        printf("memtrack calll GetMemory success, num_records=%zu \n", records.size());
+        int i = 0;
+        for (auto record : records) {
+            printf("memtrack: \trecords[%d], flag=%d, size=%lld \n", i++, record.flags, (long long)record.size);
+        }
     }
-
-    std::vector<MemoryRecord> records;
-    int errCode = memtrack->GetDevMem(0, MEMORY_TRACKER_TYPE_CAM, records);
-    ASSERT_EQ(errCode, HDF_SUCCESS);
-}
-
-/**
- * @tc.number SUB_KERNEL_Get_MemoryTest_0104
- * @tc.name   replace MemoryTrackerType is MEMORY_TRACKER_TYPE_MM
- * @tc.desc   [C- SOFTWARE -0200]
- */
-HWTEST_F(MemTrackerTest, GetMemoryTest_04, TestSize.Level1)
-{
-    printf("begin call memtrack passthrough \n");
-    sptr<IMemoryTrackerInterface> memtrack = IMemoryTrackerInterface::Get(true);
-    if (memtrack == nullptr) {
-        printf("memtrack service is null \n");
-        return;
-    }
-
-    std::vector<MemoryRecord> records;
-    int errCode = memtrack->GetDevMem(0, MEMORY_TRACKER_TYPE_MM, records);
-    ASSERT_EQ(errCode, HDF_SUCCESS);
-}
-
-/**
- * @tc.number SUB_KERNEL_Get_MemoryTest_0105
- * @tc.name   replace MemoryTrackerType is MEMORY_TRACKER_TYPE_GRAPH
- * @tc.desc   [C- SOFTWARE -0200]
- */
-HWTEST_F(MemTrackerTest, GetMemoryTest_05, TestSize.Level1)
-{
-    printf("begin call memtrack passthrough \n");
-    sptr<IMemoryTrackerInterface> memtrack = IMemoryTrackerInterface::Get(true);
-    if (memtrack == nullptr) {
-        printf("memtrack service is null \n");
-        return;
-    }
-
-    std::vector<MemoryRecord> records;
-    int errCode = memtrack->GetDevMem(0, MEMORY_TRACKER_TYPE_GRAPH, records);
-    ASSERT_EQ(errCode, HDF_SUCCESS);
-}
-
-/**
- * @tc.number SUB_KERNEL_Get_MemoryTest_0106
- * @tc.name   replace MemoryTrackerType is MEMORY_TRACKER_TYPE_OTHER
- * @tc.desc   [C- SOFTWARE -0200]
- */
-HWTEST_F(MemTrackerTest, GetMemoryTest_06, TestSize.Level1)
-{
-    printf("begin call memtrack passthrough \n");
-    sptr<IMemoryTrackerInterface> memtrack = IMemoryTrackerInterface::Get(true);
-    if (memtrack == nullptr) {
-        printf("memtrack service is null \n");
-        return;
-    }
-
-    std::vector<MemoryRecord> records;
-    int errCode = memtrack->GetDevMem(0, MEMORY_TRACKER_TYPE_OTHER, records);
-    ASSERT_EQ(errCode, HDF_SUCCESS);
 }
 }
 }

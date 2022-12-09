@@ -275,7 +275,7 @@ HWTEST_F(AudioHdiCaptureControlTest, SUB_Audio_HDI_AudioCreateCapture_0009, Test
     struct AudioCapture *capture = nullptr;
 
     ASSERT_NE(nullptr, manager);
-    ret = GetLoadAdapter(manager, PORT_OUT, ADAPTER_NAME_OUT, &adapter, capturePort);
+    ret = GetLoadAdapter(manager, PORT_OUT, ADAPTER_NAME, &adapter, capturePort);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = InitAttrs(attrs);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);

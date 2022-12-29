@@ -12,12 +12,13 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
+import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
 group("HatsHdfWifiTest") {
   testonly = true
 
-  if (device_name == "rk3568") {
+  if (xts_hats_rich == false) {
   } else {
     if (is_standard_system) {
       deps = [

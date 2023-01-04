@@ -48,7 +48,7 @@ int ALIGN_UP(int x, int a)
 {
     return ((x + (a-1)) / a) * a;
 }
-const int WIDTH_ALIGN = 8U;
+const int HEIGHT_ALIGN = 2U;
 const AllocTestPrms GRALLOC_TEST_SETS[] = {
     // num0
     // SUB_DriverSystem_DisplayHdi_0050
@@ -71,8 +71,8 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
             .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
             .format = PIXEL_FMT_RGBX_8888
             },
-        .expectStride = 4352,
-        .expectSize = 8355840
+        .expectStride = 1088 * 4,
+        .expectSize = 1920 * 1088 * 4
     },
     // num2
     // SUB_DriverSystem_DisplayHdi_0070
@@ -95,8 +95,8 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
             .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
             .format = PIXEL_FMT_RGBA_8888
             },
-        .expectStride = 4352,
-        .expectSize = 8355840
+        .expectStride = 1088 * 4,
+        .expectSize = 1920 * 1088 * 4
     },
     // num4
     // SUB_DriverSystem_DisplayHdi_0090
@@ -107,8 +107,8 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
             .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
             .format = PIXEL_FMT_RGB_888
         },
-        .expectStride = 3264,
-        .expectSize = 6266880
+        .expectStride = 1088 * 3,
+        .expectSize =  1920 * 1088 * 3
     },
     // num5
     // SUB_DriverSystem_DisplayHdi_0100
@@ -119,8 +119,8 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
             .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
             .format = PIXEL_FMT_BGRA_8888
             },
-        .expectStride = 4352,
-        .expectSize = 8355840
+        .expectStride = 1088 * 4,
+        .expectSize = 1920 * 1088 * 4
     },
     // num6
     // SUB_DriverSystem_DisplayHdi_0110
@@ -131,8 +131,8 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
             .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
             .format = PIXEL_FMT_BGRX_8888
         },
-        .expectStride = 4352,
-        .expectSize = 8355840
+        .expectStride = 1088 * 4,
+        .expectSize = 1920 * 1088 * 4
     },
     // num7
     // SUB_DriverSystem_DisplayHdi_0120
@@ -143,8 +143,8 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
             .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
             .format = PIXEL_FMT_RGBA_4444
         },
-        .expectStride = 2176,
-        .expectSize = 4177920
+        .expectStride = 1088 * 2,
+        .expectSize = 1920 * 1088 * 2
     },
     // num8
     // SUB_DriverSystem_DisplayHdi_0130
@@ -156,8 +156,8 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
             .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
             .format = PIXEL_FMT_RGBX_4444
         },
-        .expectStride = 2176,
-        .expectSize = 4177920
+        .expectStride = 1088 * 2,
+        .expectSize = 1920 * 1088 * 2
     },
     // num9
     // SUB_DriverSystem_DisplayHdi_0140
@@ -168,8 +168,8 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
             .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
             .format = PIXEL_FMT_BGRA_4444
         },
-        .expectStride = 2176,
-        .expectSize = 4177920
+        .expectStride = 1088 * 2,
+        .expectSize = 1920 * 1088 * 2
     },
     // num10
     // SUB_DriverSystem_DisplayHdi_0150
@@ -180,8 +180,8 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
             .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
             .format = PIXEL_FMT_BGRX_4444
         },
-        .expectStride = 2176,
-        .expectSize = 4177920
+        .expectStride = 1088 * 2,
+        .expectSize = 1920 * 1088 * 2
     },
     // num11
     // SUB_DriverSystem_DisplayHdi_0160
@@ -192,8 +192,8 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
             .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
             .format = PIXEL_FMT_BGR_565
         },
-        .expectStride = 2176,
-        .expectSize = 4177920
+        .expectStride = 1088 * 2,
+        .expectSize = 1920 * 1088 * 2
     },
     // num12
     // SUB_DriverSystem_DisplayHdi_0170
@@ -204,8 +204,8 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
             .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
             .format = PIXEL_FMT_BGRA_5551
         },
-        .expectStride = 2176,
-        .expectSize = 4177920
+        .expectStride = 1088 * 2,
+        .expectSize = 1920 * 1088 * 2
     },
     // num13
     // SUB_DriverSystem_DisplayHdi_0180
@@ -216,8 +216,8 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
             .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
             .format = PIXEL_FMT_BGRX_5551
         },
-        .expectStride = 2176,
-        .expectSize = 4177920
+        .expectStride = 1088 * 2,
+        .expectSize = 1920 * 1088 * 2
     },
     // num14
     // SUB_DriverSystem_DisplayHdi_0190
@@ -228,8 +228,8 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
             .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
             .format = PIXEL_FMT_YCBCR_420_SP
         },
-        .expectStride = 1664,
-        .expectSize = 3194880,
+        .expectStride = 1088,
+        .expectSize = 1920 * 1088 * 3 / 2,
     },
     // num15
     // SUB_DriverSystem_DisplayHdi_0200
@@ -240,8 +240,8 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
             .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
             .format = PIXEL_FMT_YCRCB_420_SP
         },
-        .expectStride = 1664,
-        .expectSize = 3194880,
+        .expectStride = 1088,
+        .expectSize = 1920 * 1088 * 3 / 2,
     },
     // num16
     // SUB_DriverSystem_DisplayHdi_0210
@@ -252,8 +252,8 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
             .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
             .format = PIXEL_FMT_YCBCR_420_P
         },
-        .expectStride = 1664,
-        .expectSize = 3194880
+        .expectStride = 1088,
+        .expectSize = 1920 * 1088 * 3 / 2
     },
     // num17
     // SUB_DriverSystem_DisplayHdi_0220
@@ -264,8 +264,8 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
             .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
             .format = PIXEL_FMT_YCRCB_420_P
         },
-        .expectStride = 1664,
-        .expectSize = 3194880
+        .expectStride = 1088,
+        .expectSize = 1920 * 1088 * 3 / 2
     },
     // num18
     // SUB_DriverSystem_DisplayHdi_0230
@@ -276,8 +276,8 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
             .usage = HBM_USE_MEM_DMA,
             .format = PIXEL_FMT_RGBX_8888
         },
-        .expectStride = 4352,
-        .expectSize = 8355840
+        .expectStride = 1088 * 4,
+        .expectSize = 1920 * 1088 * 4
     },
     // num19
     // SUB_DriverSystem_DisplayHdi_0240
@@ -288,8 +288,8 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
             .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ,
             .format = PIXEL_FMT_RGBX_8888
         },
-        .expectStride = 4352, // expectStride
-        .expectSize = 8355840 // expectSize
+        .expectStride = 1088 * 4,
+        .expectSize = 1920 * 1088 * 4
     },
     // num20
     // SUB_DriverSystem_DisplayHdi_0250
@@ -300,8 +300,8 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
             .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_WRITE,
             .format = PIXEL_FMT_RGBX_8888
         },
-        .expectStride = 4352, // expectStride
-        .expectSize = 8355840 // expectSize
+        .expectStride = 1088 * 4,
+        .expectSize = 1920 * 1088 * 4
     },
     // num21
     // SUB_DriverSystem_DisplayHdi_0260
@@ -310,10 +310,10 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
             .width = 1080,
             .height = 1920,
             .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
-            .format = PIXEL_FMT_YCBCR_422_SP
-        },
-        .expectStride = 2176,
-        .expectSize = 4177920,
+            .format = PIXEL_FMT_RGBX_8888
+            },
+        .expectStride = 4352,
+        .expectSize = 8355840
     },
     // num22
     // SUB_DriverSystem_DisplayHdi_0270
@@ -322,10 +322,10 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
             .width = 1080,
             .height = 1920,
             .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
-            .format = PIXEL_FMT_YCRCB_422_SP
+            .format = PIXEL_FMT_RGB_888
         },
-        .expectStride = 2176,
-        .expectSize = 4177920,
+        .expectStride = 3264,
+        .expectSize = 6266880
     },
     // num23
     // SUB_DriverSystem_DisplayHdi_0280
@@ -334,10 +334,10 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
             .width = 1080,
             .height = 1920,
             .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
-            .format = PIXEL_FMT_YCBCR_422_P
+            .format = PIXEL_FMT_RGBA_4444
         },
         .expectStride = 2176,
-        .expectSize = 4177920,
+        .expectSize = 4177920
     },
     // num24
     // SUB_DriverSystem_DisplayHdi_0290
@@ -345,17 +345,17 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
         .allocInfo = {
             .width = 1080,
             .height = 1920,
-            .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
-            .format = PIXEL_FMT_YCRCB_422_P
+            .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_WRITE,
+            .format = PIXEL_FMT_RGBX_8888
         },
-        .expectStride = 2176,
-        .expectSize = 4177920,
+        .expectStride = 4352, // expectStride
+        .expectSize = 8355840 // expectSize
     },
 };
 
 static bool CheckBufferHandle(AllocTestPrms &info, BufferHandle &buffer)
 {
-    if (buffer.stride != (ALIGN_UP(info.expectStride, WIDTH_ALIGN))) {
+    if (buffer.stride != (ALIGN_UP(info.expectStride, HEIGHT_ALIGN))) {
         DISPLAY_TEST_LOGE("stride check failed stride %d, expect stride %d ", buffer.stride, info.expectStride);
         DISPLAY_TEST_LOGE("stride check failed format %d width %d, height %d ", info.allocInfo.format,
             info.allocInfo.width, info.allocInfo.height);

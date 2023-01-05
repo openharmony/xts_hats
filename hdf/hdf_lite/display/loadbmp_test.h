@@ -48,7 +48,7 @@ typedef struct {
     OsdColorFmt       colorFmt;      /* color format */
     uint16_t          height;        /* operation height */
     uint16_t          width;         /* operation width */
-    uint16_t          stride;        /* surface stride */
+    uint16_t          stride;        /* esurface stride */
     uint16_t          reserved;
 } OsdSurface;
 

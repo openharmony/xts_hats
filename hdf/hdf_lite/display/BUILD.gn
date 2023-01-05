@@ -11,11 +11,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# import("//build/lite/config/component/lite_component.gni")
+# import("//build/lite/config/test.gni")
 import("//test/xts/tools/lite/build/suite_lite.gni")
 
 hcpptest_suite("HatsDisplayLiteTest") {
   suite_name = "hats"
-
   # output_extension = "bin"
   # output_dir = "$root_out_dir/test/unittest/hdf"
   include_dirs = [

@@ -26,7 +26,7 @@ static int32_t LoadBmp(const int8_t *fileName, BufferHandle **buffer)
 {
     int32_t ret;
     uint8_t *pBuf = NULL;
-    OsdSurface surface;
+    OsdSurface esurface;
     OsdBitMapFileHeader bmpFileHeader = {0};
     OsdBitMapInfo bmpInfo = {0};
 
@@ -54,8 +54,8 @@ static int32_t LoadBmp(const int8_t *fileName, BufferHandle **buffer)
     }
     // load bmp picture
     pBuf = (uint8_t *)(*buffer)->virAddr;
-    surface.colorFmt = OSD_COLOR_FMT_RGB1555;
-    CreateSurfaceByBitMap(fileName, &surface, pBuf, (*buffer)->size);
+    esurface.colorFmt = OSD_COLOR_FMT_RGB1555;
+    CreateSurfaceByBitMap(fileName, &esurface, pBuf, (*buffer)->size);
     return DISPLAY_SUCCESS;
 }
 
@@ -85,31 +85,31 @@ static void WriteDataToBuf(int32_t width, int32_t height, uint16_t *pBuf)
     }
 }
 
-static void PicSourceSurfaceInit(ISurface *surface, uint64_t phyAddr, int32_t bpp)
+static void PicSourceSurfaceInit(ISurface *esurface, uint64_t phyAddr, int32_t bpp)
 {
-    surface->width = SAMPLE_IMAGE_WIDTH;
-    surface->height = SAMPLE_IMAGE_HEIGHT;
-    surface->phyAddr = phyAddr;
-    surface->enColorFmt = PIXEL_FMT_RGBA_5551;
-    surface->stride = SAMPLE_IMAGE_WIDTH * bpp / BITS_PER_BYTE;
-    surface->bAlphaExt1555 = true;
-    surface->bAlphaMax255  = true;
-    surface->alpha0 = 0XFF;
-    surface->alpha1 = 0XFF;
+    esurface->width = SAMPLE_IMAGE_WIDTH;
+    esurface->height = SAMPLE_IMAGE_HEIGHT;
+    esurface->phyAddr = phyAddr;
+    esurface->enColorFmt = PIXEL_FMT_RGBA_5551;
+    esurface->stride = SAMPLE_IMAGE_WIDTH * bpp / BITS_PER_BYTE;
+    esurface->bAlphaExt1555 = true;
+    esurface->bAlphaMax255  = true;
+    esurface->alpha0 = 0XFF;
+    esurface->alpha1 = 0XFF;
 }
 
-static void DestSurfaceInit(ISurface *surface, uint64_t phyAddr, int32_t bpp)
+static void DestSurfaceInit(ISurface *esurface, uint64_t phyAddr, int32_t bpp)
 {
-    surface->width = (uint32_t)g_displayTest.displayInfo.width;
-    surface->height = (uint32_t)g_displayTest.displayInfo.height;
-    surface->phyAddr = phyAddr;
-    surface->enColorFmt = PIXEL_FMT_RGBA_5551;
-    surface->stride = g_displayTest.displayInfo.width * bpp / BITS_PER_BYTE;
-    surface->bAlphaExt1555 = true;
-    surface->bAlphaMax255  = true;
-    surface->alpha0 = 0XFF;
-    surface->alpha1 = 0XFF;
-    surface->bYCbCrClut = 0;
+    esurface->width = (uint32_t)g_displayTest.displayInfo.width;
+    esurface->height = (uint32_t)g_displayTest.displayInfo.height;
+    esurface->phyAddr = phyAddr;
+    esurface->enColorFmt = PIXEL_FMT_RGBA_5551;
+    esurface->stride = g_displayTest.displayInfo.width * bpp / BITS_PER_BYTE;
+    esurface->bAlphaExt1555 = true;
+    esurface->bAlphaMax255  = true;
+    esurface->alpha0 = 0XFF;
+    esurface->alpha1 = 0XFF;
+    esurface->bYCbCrClut = 0;
 }
 
 int32_t DisplayInit(void)
@@ -333,10 +333,10 @@ int32_t BlitTest(void)
         HDF_LOGE("%s: LoadBmp fail", __func__);
         return DISPLAY_FAILURE;
     }
-    // use picture buffer to create source surface
+    // use picture buffer to create source esurface
     IRect srcRect = {0, 0, SAMPLE_IMAGE_WIDTH, SAMPLE_IMAGE_HEIGHT};
     PicSourceSurfaceInit(&srcSurface, pictureBuf->phyAddr, LAYER_BPP);
-    // use layer buffer to create dest surface
+    // use layer buffer to create dest esurface
     IRect dstRect = srcRect;
     DestSurfaceInit(&dstSurface, g_displayTest.buffer.data.phyAddr, LAYER_BPP);
     // TDE: copy bmp picture buffer to layer buffer

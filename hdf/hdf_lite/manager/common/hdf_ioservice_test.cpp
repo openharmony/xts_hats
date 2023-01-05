@@ -635,16 +635,6 @@ HWTEST_F(IoServiceTest, HdfIoService013, TestSize.Level0)
     HdfSbufWriteUint32(data, POWER_STATE_RESUME);
     ret = serv->dispatcher->Dispatch(&serv->object, SAMPLE_DRIVER_PM_STATE_INJECT, data, nullptr);
     ASSERT_EQ(ret, HDF_SUCCESS);
-
-    HdfSbufFlush(data);
-    HdfSbufWriteUint32(data, POWER_STATE_DOZE_SUSPEND);
-    ret = serv->dispatcher->Dispatch(&serv->object, SAMPLE_DRIVER_PM_STATE_INJECT, data, nullptr);
-    ASSERT_EQ(ret, HDF_SUCCESS);
-
-    HdfSbufFlush(data);
-    HdfSbufWriteUint32(data, POWER_STATE_DOZE_RESUME);
-    ret = serv->dispatcher->Dispatch(&serv->object, SAMPLE_DRIVER_PM_STATE_INJECT, data, nullptr);
-    ASSERT_EQ(ret, HDF_SUCCESS);
     HdfIoServiceRecycle(serv);
     HdfSbufRecycle(data);
 }

@@ -23,6 +23,6 @@
     ],
     "driver": {
         "type": "CppTestLite",
-        "execute": "/test_root/hdf_lite/HatsDisplayLiteTest.bin"
+        "execute": "/test_root/hdf_lite/ActsDisplayLiteTest.bin"
     }
 }

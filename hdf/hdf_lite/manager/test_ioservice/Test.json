@@ -1,0 +1,28 @@
+{
+    "description": "Config for hdf_lite test cases",
+    "environment": [
+        {
+            "type": "device",
+            "label": "ipcamera"
+        }
+    ],
+    "kits": [
+        {
+            "type": "MountKit",
+            "server": "NfsServer",
+            "mount": [
+                {
+                    "source": "testcases/hdf_lite",
+                    "target": "/test_root/hdf_lite"
+                },{
+                    "source": "resource/hdf_lite/door",
+                    "target": "/test_root/hdf_lite/door"
+                }
+            ]
+        }
+    ],
+    "driver": {
+        "type": "CppTestLite",
+        "execute": "/test_root/hdf_lite/HatsIoserviceTest.bin"
+    }
+}

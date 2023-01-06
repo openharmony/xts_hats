@@ -24,10 +24,10 @@ HdiTestDisplay::HdiTestDisplay(const uint32_t id, const DeviceFuncs &deviceFunc)
 
 int32_t HdiTestDisplay::Init()
 {
-    DISPLAY_TEST_LOGD();
+    DISPLAY_TEST_LOGI();
     int ret = mDeviceFunc.GetDisplayCapability(mId, &mCap);
     DISPLAY_TEST_CHK_RETURN((ret != DISPLAY_SUCCESS), DISPLAY_FAILURE, DISPLAY_TEST_LOGE("can not get cap"));
-    DISPLAY_TEST_LOGD("the capablility name %s type : %d phyWidth : %d phyHeight : %d", mCap.name, mCap.type,
+    DISPLAY_TEST_LOGI("the capablility name %s type : %d phyWidth : %d phyHeight : %d", mCap.name, mCap.type,
         mCap.phyWidth, mCap.phyHeight);
     // get the modes
     uint32_t num = 0;
@@ -37,7 +37,7 @@ int32_t HdiTestDisplay::Init()
     mModes.resize(num);
     ret = mDeviceFunc.GetDisplaySupportedModes(mId, &num, mModes.data());
     DISPLAY_TEST_CHK_RETURN((ret != DISPLAY_SUCCESS), DISPLAY_FAILURE, DISPLAY_TEST_LOGE("can not get modes"));
-    DISPLAY_TEST_LOGD("the modes size() %zd", mModes.size());
+    DISPLAY_TEST_LOGI("the modes size() %zd", mModes.size());
 
     ret = mDeviceFunc.GetDisplayMode(mId, &mActiveModeId);
     DISPLAY_TEST_CHK_RETURN((ret != DISPLAY_SUCCESS), DISPLAY_FAILURE,
@@ -61,11 +61,11 @@ int32_t HdiTestDisplay::Init()
 
 int32_t HdiTestDisplay::GetModeInfoFromId(int32_t id, DisplayModeInfo &modeInfo) const
 {
-    DISPLAY_TEST_LOGD();
+    DISPLAY_TEST_LOGI();
     for (const auto &mode : mModes) {
         if (mode.id == id) {
             modeInfo = mode;
-            DISPLAY_TEST_LOGD("the mode width: %d height : %d freshRate : %u id: %d", mode.width, mode.height,
+            DISPLAY_TEST_LOGI("the mode width: %d height : %d freshRate : %u id: %d", mode.width, mode.height,
                 mode.freshRate, mode.id);
             return DISPLAY_SUCCESS;
         }
@@ -76,11 +76,11 @@ int32_t HdiTestDisplay::GetModeInfoFromId(int32_t id, DisplayModeInfo &modeInfo)
 
 std::shared_ptr<HdiTestLayer> HdiTestDisplay::CreateHdiTestLayer(LayerInfo &info)
 {
-    DISPLAY_TEST_LOGD();
+    DISPLAY_TEST_LOGI();
     uint32_t layerId = 0;
     LayerFuncs &layerFuncs = HdiTestDevice::GetInstance().GetLayerFuncs();
     int ret = layerFuncs.CreateLayer(mId, &info, &layerId);
-    DISPLAY_TEST_LOGD(" layerId %d", layerId);
+    DISPLAY_TEST_LOGI(" layerId %d", layerId);
     DISPLAY_TEST_CHK_RETURN((ret != DISPLAY_SUCCESS), nullptr, DISPLAY_TEST_LOGE("layer create failed"));
     auto layer = std::make_shared<HdiTestLayer>(info, layerId, mId);
     ret = layer->Init();
@@ -106,14 +106,14 @@ int32_t HdiTestDisplay::RefreshLayersCompType()
     ret = GetDeviceFuncs().GetDisplayCompChange(mId, &num, nullptr, nullptr);
     DISPLAY_TEST_CHK_RETURN((ret != DISPLAY_SUCCESS), DISPLAY_FAILURE,
         DISPLAY_TEST_LOGE("GetDisplayCompChange get number failed"));
-    DISPLAY_TEST_LOGD("the change numbers %d", num);
+    DISPLAY_TEST_LOGI("the change numbers %d", num);
     layers.resize(num);
     types.resize(num);
     ret = GetDeviceFuncs().GetDisplayCompChange(mId, &num, layers.data(), types.data());
     DISPLAY_TEST_CHK_RETURN((ret != DISPLAY_SUCCESS), DISPLAY_FAILURE,
         DISPLAY_TEST_LOGE("GetDisplayCompChange get layers and types failed"));
     for (uint32_t i = 0; i < layers.size(); i++) {
-        DISPLAY_TEST_LOGD(" the layer id %d ", layers[i]);
+        DISPLAY_TEST_LOGI(" the layer id %d ", layers[i]);
         std::shared_ptr<HdiTestLayer> layer = GetLayerFromId(layers[i]);
         layer->SetCompType(static_cast<CompositionType>(types[i]));
     }
@@ -135,7 +135,7 @@ int32_t HdiTestDisplay::GetLayersReleaseFence()
     ret = HdiTestDevice::GetInstance().GetDeviceFuncs().GetDisplayReleaseFence(mId, &num, layers.data(), fences.data());
     DISPLAY_TEST_CHK_RETURN((ret != 0), DISPLAY_FAILURE, DISPLAY_TEST_LOGE("GetDisplayReleaseFence get data failed"));
     for (uint32_t i = 0; i < layers.size(); i++) {
-        DISPLAY_TEST_LOGD(" the layer id %d ", layers[i]);
+        DISPLAY_TEST_LOGI(" the layer id %d ", layers[i]);
         std::shared_ptr<HdiTestLayer> layer = GetLayerFromId(layers[i]);
         layer->SetReleaseFence(fences[i]);
     }
@@ -146,7 +146,7 @@ int32_t HdiTestDisplay::PrepareDisplayLayers()
 {
     int ret;
     mNeedFlushFb = false;
-    DISPLAY_TEST_LOGD("id : %d  layer size %zd", mId, mLayerMaps.size());
+    DISPLAY_TEST_LOGI("id : %d  layer size %zd", mId, mLayerMaps.size());
     for (const auto &layerMap : mLayerMaps) {
         ret = layerMap.second->PreparePresent();
         DISPLAY_TEST_CHK_RETURN((ret != DISPLAY_SUCCESS), DISPLAY_FAILURE,
@@ -178,7 +178,7 @@ int32_t HdiTestDisplay::Commit()
         ClearColor(*handle, 0); // need clear the fb first
         ret = HdiTestDevice::GetInstance().GetDeviceFuncs().SetDisplayClientBuffer(mId, handle, -1);
         mCurrentFb = handle;
-        DISPLAY_TEST_LOGD("client fb phyaddr %" PRIx64 " virtual addr %p", handle->phyAddr, handle->virAddr);
+        DISPLAY_TEST_LOGI("client fb phyaddr %" PRIx64 " virtual addr %p", handle->phyAddr, handle->virAddr);
         DISPLAY_TEST_CHK_RETURN((ret != DISPLAY_SUCCESS), DISPLAY_FAILURE,
             DISPLAY_TEST_LOGE("set client buffer handle failed"));
     }
@@ -220,13 +220,13 @@ std::shared_ptr<HdiTestLayer> HdiTestDisplay::GetLayerFromId(uint32_t id)
 
 void HdiTestDisplay::Clear()
 {
-    DISPLAY_TEST_LOGD();
+    DISPLAY_TEST_LOGI();
     for (auto const & iter : mLayerMaps) {
         uint32_t layerId = iter.first;
         HdiTestDevice::GetInstance().GetLayerFuncs().CloseLayer(mId, layerId);
     }
     mLayerMaps.clear();
-    DISPLAY_TEST_LOGD("mLayerMaps size %zd", mLayerMaps.size());
+    DISPLAY_TEST_LOGI("mLayerMaps size %zd", mLayerMaps.size());
 }
 } // OHOS
 } // HDI

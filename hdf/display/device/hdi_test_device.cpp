@@ -29,13 +29,13 @@ HdiTestDevice &HdiTestDevice::GetInstance()
 
 void HdiTestDevice::HotPlug(uint32_t outputId, bool connected, void *data)
 {
-    DISPLAY_TEST_LOGD("outputId %d connected %d", outputId, connected);
+    DISPLAY_TEST_LOGI("outputId %d connected %d", outputId, connected);
     DISPLAY_TEST_CHK_RETURN_NOT_VALUE((data == nullptr), DISPLAY_TEST_LOGE("the data is null ptr"));
     HdiTestDevice *device = static_cast<HdiTestDevice *>(data);
     if (connected) {
         device->FindDisplayOrCreate(outputId);
     }
-    DISPLAY_TEST_LOGD("end");
+    DISPLAY_TEST_LOGI("end");
 }
 
 int32_t HdiTestDevice::InitDevice()
@@ -57,7 +57,7 @@ int32_t HdiTestDevice::InitDevice()
 std::shared_ptr<HdiTestDisplay> HdiTestDevice::GetDisplayFromId(uint32_t id)
 {
     auto iter = mDisplays.find(id);
-    DISPLAY_TEST_CHK_RETURN((iter == mDisplays.end()), nullptr, DISPLAY_TEST_LOGD("can not find the display %d", id));
+    DISPLAY_TEST_CHK_RETURN((iter == mDisplays.end()), nullptr, DISPLAY_TEST_LOGI("can not find the display %d", id));
     return mDisplays[id];
 }
 
@@ -66,7 +66,7 @@ std::shared_ptr<HdiTestDisplay> HdiTestDevice::FindDisplayOrCreate(uint32_t id)
     int ret;
     std::shared_ptr<HdiTestDisplay> display = GetDisplayFromId(id);
     if (display == nullptr) {
-        DISPLAY_TEST_LOGD("the display not find will create a display");
+        DISPLAY_TEST_LOGI("the display not find will create a display");
     }
     display = std::make_shared<HdiTestDisplay>(id, *mDeviceFuncs);
     ret = display->Init();

@@ -54,7 +54,7 @@ void SaveFile(const char *fileName, uint8_t *data, int size)
 {
     int fileFd = open(fileName, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
     int hasWriten = write(fileFd, data, size);
-    DISPLAY_TEST_LOGD("SaveFile hasWriten %d", hasWriten);
+    DISPLAY_TEST_LOGI("SaveFile hasWriten %d", hasWriten);
     close(fileFd);
 }
 
@@ -120,9 +120,9 @@ uint32_t CheckPixel(const BufferHandle &handle, int x, int y, uint32_t color)
     uint32_t *pixel = reinterpret_cast<uint32_t *>(handle.virAddr) + position;
     uint32_t checkColor = ConverToRGBA(static_cast<PixelFormat>(handle.format), GetUint32(*pixel));
     if (checkColor != color) {
-        DISPLAY_TEST_LOGD("the pixel color not match vAddr:%p position:%d pixel:%08x color:%08x", handle.virAddr,
+        DISPLAY_TEST_LOGI("the pixel color not match vAddr:%p position:%d pixel:%08x color:%08x", handle.virAddr,
             position, checkColor, color);
-        DISPLAY_TEST_LOGD("x:%d y:%d width:%d", x, y, handle.width);
+        DISPLAY_TEST_LOGI("x:%d y:%d width:%d", x, y, handle.width);
         SaveFile("/data/display_test_bitmap_", static_cast<uint8_t *>(handle.virAddr), handle.size);
         return DISPLAY_FAILURE;
     }
@@ -170,7 +170,7 @@ void ClearColor(const BufferHandle &handle, uint32_t color)
 
 void ClearColorRect(const BufferHandle &handle, uint32_t color, IRect &rect)
 {
-    DISPLAY_TEST_LOGD("x %d, y %d w %d h %d color %x ", rect.x, rect.y, rect.w, rect.h, color);
+    DISPLAY_TEST_LOGI("x %d, y %d w %d h %d color %x ", rect.x, rect.y, rect.w, rect.h, color);
     for (int32_t x = 0; x < rect.w; x++) {
         for (int32_t y = 0; y < rect.h; y++) {
             SetPixel(handle, x + rect.x, y + rect.y, color);
@@ -182,18 +182,18 @@ std::vector<IRect> SplitBuffer(const BufferHandle &handle, std::vector<uint32_t>
 {
     std::vector<IRect> splitRects;
     if (colors.empty()) {
-        DISPLAY_TEST_LOGD("the colors empty");
+        DISPLAY_TEST_LOGI("the colors empty");
     }
     const uint32_t rowNum = sqrt(colors.size());
     const uint32_t colNum = rowNum;
     if (colNum == 0) {
-        DISPLAY_TEST_LOGD("rowNum and colNum are zero");
+        DISPLAY_TEST_LOGI("rowNum and colNum are zero");
         return splitRects;
     }
     const uint32_t cellWidth = handle.width / rowNum;
     const uint32_t cellHeight = handle.height / colNum;
     IRect rect = { 0, 0, cellWidth, cellHeight };
-    DISPLAY_TEST_LOGD("rowNum %u, colNum %u cellWidth %u cellHeight %u", rowNum, colNum, cellWidth, cellHeight);
+    DISPLAY_TEST_LOGI("rowNum %u, colNum %u cellWidth %u cellHeight %u", rowNum, colNum, cellWidth, cellHeight);
     uint32_t count = 0;
     for (uint32_t x = 0; x < rowNum; x++) {
         for (uint32_t y = 0; y < colNum; y++) {

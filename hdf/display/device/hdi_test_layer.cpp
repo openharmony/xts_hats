@@ -58,7 +58,7 @@ HdiGrallocBuffer::~HdiGrallocBuffer()
 
 void HdiGrallocBuffer::SetReleaseFence(int fd)
 {
-    DISPLAY_TEST_LOGD("the fd is %d", fd);
+    DISPLAY_TEST_LOGI("the fd is %d", fd);
     if (mReleaseFence != -1) {
         close(mReleaseFence);
         mReleaseFence = -1;
@@ -68,7 +68,7 @@ void HdiGrallocBuffer::SetReleaseFence(int fd)
 
 void HdiGrallocBuffer::SetAcquirceFence(int fd)
 {
-    DISPLAY_TEST_LOGD("the fd is %d", fd);
+    DISPLAY_TEST_LOGI("the fd is %d", fd);
     mAcquireFence = fd;
 }
 
@@ -109,7 +109,7 @@ HdiTestLayer::HdiTestLayer(const LayerInfo &info, const uint32_t id, const uint3
 int32_t HdiTestLayer::Init()
 {
     // init the font queue
-    DISPLAY_TEST_LOGD();
+    DISPLAY_TEST_LOGI();
     const int maxBufferCount = 3;
     for (int i = 0; i < maxBufferCount; i++) {
         std::unique_ptr<HdiGrallocBuffer> buffer =
@@ -143,19 +143,19 @@ int32_t HdiTestLayer::SwapBackToFrontQ()
 
 void HdiTestLayer::SetLayerSize(IRect &rect)
 {
-    DISPLAY_TEST_LOGD("x : %d y : %d w : %d h : %d", rect.x, rect.y, rect.w, rect.h);
+    DISPLAY_TEST_LOGI("x : %d y : %d w : %d h : %d", rect.x, rect.y, rect.w, rect.h);
     mDisplayRect = rect;
 }
 
 void HdiTestLayer::SetLayerCrop(IRect &rect)
 {
-    DISPLAY_TEST_LOGD("x : %d y : %d w : %d h : %d", rect.x, rect.y, rect.w, rect.h);
+    DISPLAY_TEST_LOGI("x : %d y : %d w : %d h : %d", rect.x, rect.y, rect.w, rect.h);
     mCropRect = rect;
 }
 
 int32_t HdiTestLayer::PreparePresent()
 {
-    DISPLAY_TEST_LOGD();
+    DISPLAY_TEST_LOGI();
     int ret = HdiTestDevice::GetInstance().GetLayerFuncs().SetLayerSize(mDisplayID, mId, &mDisplayRect);
     DISPLAY_TEST_CHK_RETURN((ret != DISPLAY_SUCCESS), DISPLAY_FAILURE, DISPLAY_TEST_LOGE("set display rect failed"));
 
@@ -188,13 +188,13 @@ int32_t HdiTestLayer::PreparePresent()
 
 void HdiTestLayer::SetZorder(uint32_t zorder)
 {
-    DISPLAY_TEST_LOGD("the zorder is %d", zorder);
+    DISPLAY_TEST_LOGI("the zorder is %d", zorder);
     mZorder = zorder;
 }
 
 void HdiTestLayer::SetCompType(CompositionType type)
 {
-    DISPLAY_TEST_LOGD("layer id %d ,the type is : %d", mId, type);
+    DISPLAY_TEST_LOGI("layer id %d ,the type is : %d", mId, type);
     mCompType = type;
 }
 
@@ -205,19 +205,19 @@ void HdiTestLayer::SetTransform(TransformType transform)
 
 void HdiTestLayer::SetAlpha(LayerAlpha alpha)
 {
-    DISPLAY_TEST_LOGD();
+    DISPLAY_TEST_LOGI();
     mAlpha = alpha;
 }
 
 void HdiTestLayer::SetBlendType(BlendType type)
 {
-    DISPLAY_TEST_LOGD("type %d", type);
+    DISPLAY_TEST_LOGI("type %d", type);
     mBlendType = type;
 }
 
 void HdiTestLayer::SetReleaseFence(int fd)
 {
-    DISPLAY_TEST_LOGD("layer id %d , fd %d", mId, fd);
+    DISPLAY_TEST_LOGI("layer id %d , fd %d", mId, fd);
 }
 
 HdiTestLayer::~HdiTestLayer() {}

@@ -51,7 +51,7 @@ public:
     void Clear();
     BufferHandle *SnapShot()
     {
-        DISPLAY_TEST_LOGD("client fb phyaddr %" PRIx64 " virtual addr %p", mCurrentFb->phyAddr, mCurrentFb->virAddr);
+        DISPLAY_TEST_LOGI("client fb phyaddr %" PRIx64 " virtual addr %p", mCurrentFb->phyAddr, mCurrentFb->virAddr);
         return mCurrentFb;
     }
 

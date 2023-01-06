@@ -9,7 +9,10 @@
         {
             "type": "ShellKit",
             "run-command": [
-                "stop_service render_service"
+                "service_control stop render_service"
+            ],
+            "teardown-command": [
+                "service_control start render_service"
             ]
         }   
     ],

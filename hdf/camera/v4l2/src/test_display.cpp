@@ -65,7 +65,7 @@ void TestDisplay::StoreImage(const void *bufStart, const uint32_t size) const
         return;
     }
 
-    CAMERA_LOGD("demo test:StoreImage %{public}s buf_start == %{public}p size == %{public}d\n", path, bufStart, size);
+    CAMERA_LOGI("demo test:StoreImage %{public}s buf_start == %{public}p size == %{public}d\n", path, bufStart, size);
 
     ret = write(imgFD, bufStart, size);
     if (ret == -1) {
@@ -83,7 +83,7 @@ void TestDisplay::StoreVideo(const void *bufStart, const uint32_t size) const
     if (ret == -1) {
         CAMERA_LOGE("demo test:write video file error %{public}s.....\n", strerror(errno));
     }
-    CAMERA_LOGD("demo test:StoreVideo buf_start == %{public}p size == %{public}d\n", bufStart, size);
+    CAMERA_LOGI("demo test:StoreVideo buf_start == %{public}p size == %{public}d\n", bufStart, size);
 }
 
 void TestDisplay::OpenVideoFile()

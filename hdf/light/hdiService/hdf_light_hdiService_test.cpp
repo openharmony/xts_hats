@@ -21,7 +21,6 @@
 #include "osal_time.h"
 #include "v1_0/ilight_interface.h"
 #include "light_type.h"
-#include <hdf_log.h>
 
 using namespace OHOS::HDI::Light::V1_0;
 using namespace testing::ext;
@@ -30,8 +29,11 @@ namespace {
     constexpr uint32_t g_sleepTime = 3;
     constexpr int32_t g_minLightId = HDF_LIGHT_ID_BATTERY;
     constexpr int32_t g_maxLightId = HDF_LIGHT_ID_ATTENTION;
-    constexpr int32_t g_onTime = 500;
-    constexpr int32_t g_offTime = 500;
+    constexpr int32_t MAX_VALUE = 255;
+    constexpr int32_t MIN_VALUE = 0;
+    constexpr int32_t ON_TIME = 500;
+    constexpr int32_t OFF_TIME = 500;
+    std::vector<HdfLightInfo> g_info;
     sptr<ILightInterface> g_lightInterface = nullptr;
 
 class HdfLightHdiServiceTest : public testing::Test {
@@ -57,6 +59,14 @@ void HdfLightHdiServiceTest::SetUp()
 
 void HdfLightHdiServiceTest::TearDown()
 {
+}
+
+void InitConfig(HdfLightEffect &effect)
+{
+    effect.lightColor.colorValue.rgbColor.r = MIN_VALUE;
+    effect.lightColor.colorValue.rgbColor.g = MIN_VALUE;
+    effect.lightColor.colorValue.rgbColor.b = MIN_VALUE;
+    effect.flashEffect.flashMode = HDF_LIGHT_FLASH_NONE;
 }
 
 /**
@@ -175,8 +185,8 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_LightHdi_0050, Function | Medi
         effect.lightColor.colorValue.rgbColor.g = 0;
         effect.lightColor.colorValue.rgbColor.b = 0;
         effect.flashEffect.flashMode = LIGHT_FLASH_BLINK;
-        effect.flashEffect.onTime = g_onTime;
-        effect.flashEffect.offTime = g_offTime;
+        effect.flashEffect.onTime = ON_TIME;
+        effect.flashEffect.offTime = OFF_TIME;
         int32_t ret = g_lightInterface->TurnOnLight(iter.lightId, effect);
         EXPECT_EQ(HDF_SUCCESS, ret);
         OsalSleep(g_sleepTime);
@@ -272,5 +282,333 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_LightHdi_0190, Function | Medi
         ret = g_lightInterface->TurnOnMultiLights(iter.lightId, lightColor);
         EXPECT_EQ(HDF_SUCCESS, ret);
     }
+}
+
+/**
+  * @tc.name: TurnOnLightRed001
+  * @tc.desc: Turn on the battery light is steady on red.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightRed_001, Function | MediumTest | Level1)
+{
+    ASSERT_NE(nullptr, g_lightInterface);
+
+    HdfLightEffect effect;
+    InitConfig(effect);
+    effect.lightColor.colorValue.rgbColor.r = MAX_VALUE;
+
+    int32_t ret = g_lightInterface->TurnOnLight(LIGHT_ID_BATTERY, effect);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+
+    OsalSleep(g_sleepTime);
+
+    ret = g_lightInterface->TurnOffLight(LIGHT_ID_BATTERY);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: TurnOnLightGreen001
+  * @tc.desc: Turn on the battery light is steady on green.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightGreen_001, Function | MediumTest | Level1)
+{
+    ASSERT_NE(nullptr, g_lightInterface);
+
+    HdfLightEffect effect;
+    InitConfig(effect);
+    effect.lightColor.colorValue.rgbColor.g = MAX_VALUE;
+
+    int32_t ret = g_lightInterface->TurnOnLight(LIGHT_ID_BATTERY, effect);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+
+    OsalSleep(g_sleepTime);
+
+    ret = g_lightInterface->TurnOffLight(LIGHT_ID_BATTERY);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: TurnOnLightBlue001
+  * @tc.desc: Turn on the battery light is steady on blue.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightBlue_001, Function | MediumTest | Level1)
+{
+    ASSERT_NE(nullptr, g_lightInterface);
+
+    HdfLightEffect effect;
+    InitConfig(effect);
+    effect.lightColor.colorValue.rgbColor.b = MAX_VALUE;
+
+    int32_t ret = g_lightInterface->TurnOnLight(LIGHT_ID_BATTERY, effect);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+
+    OsalSleep(g_sleepTime);
+
+    ret = g_lightInterface->TurnOffLight(LIGHT_ID_BATTERY);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: TurnOnLightRed002
+  * @tc.desc: Turn on the battery light blinking red.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightRed_002, Function | MediumTest | Level1)
+{
+    ASSERT_NE(nullptr, g_lightInterface);
+
+    HdfLightEffect effect;
+    InitConfig(effect);
+    effect.lightColor.colorValue.rgbColor.r = MAX_VALUE;
+    effect.flashEffect.flashMode = HDF_LIGHT_FLASH_BLINK;
+    effect.flashEffect.onTime = ON_TIME;
+    effect.flashEffect.offTime = OFF_TIME;
+
+    int32_t ret = g_lightInterface->TurnOnLight(LIGHT_ID_BATTERY, effect);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+
+    OsalSleep(g_sleepTime);
+
+    ret = g_lightInterface->TurnOffLight(LIGHT_ID_BATTERY);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: TurnOnLightGreen002
+  * @tc.desc: Turn on the battery light blinking green.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightGreen_002, Function | MediumTest | Level1)
+{
+    ASSERT_NE(nullptr, g_lightInterface);
+
+    HdfLightEffect effect;
+    InitConfig(effect);
+    effect.lightColor.colorValue.rgbColor.g = MAX_VALUE;
+    effect.flashEffect.flashMode = HDF_LIGHT_FLASH_BLINK;
+    effect.flashEffect.onTime = ON_TIME;
+    effect.flashEffect.offTime = OFF_TIME;
+
+    int32_t ret = g_lightInterface->TurnOnLight(LIGHT_ID_BATTERY, effect);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+
+    OsalSleep(g_sleepTime);
+
+    ret = g_lightInterface->TurnOffLight(LIGHT_ID_BATTERY);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: TurnOnLightBlue002
+  * @tc.desc: Turn on the battery light blinking blue.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightBlue_002, Function | MediumTest | Level1)
+{
+    ASSERT_NE(nullptr, g_lightInterface);
+
+    HdfLightEffect effect;
+    InitConfig(effect);
+    effect.lightColor.colorValue.rgbColor.b = MAX_VALUE;
+    effect.flashEffect.flashMode = HDF_LIGHT_FLASH_BLINK;
+    effect.flashEffect.onTime = ON_TIME;
+    effect.flashEffect.offTime = OFF_TIME;
+    int32_t ret = g_lightInterface->TurnOnLight(LIGHT_ID_BATTERY, effect);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+
+    OsalSleep(g_sleepTime);
+
+    ret = g_lightInterface->TurnOffLight(LIGHT_ID_BATTERY);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: TurnOnLightUnsupport001
+  * @tc.desc: Unsupported flashmode(HDF_LIGHT_FLASH_GRADIENT).
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightUnsupport_001, Function | MediumTest | Level1)
+{
+    ASSERT_NE(nullptr, g_lightInterface);
+
+    HdfLightEffect effect;
+    InitConfig(effect);
+    effect.lightColor.colorValue.rgbColor.r = MAX_VALUE;
+    effect.lightColor.colorValue.rgbColor.g = MAX_VALUE;
+    effect.lightColor.colorValue.rgbColor.b = MAX_VALUE;
+    effect.flashEffect.flashMode = HDF_LIGHT_FLASH_GRADIENT;
+    effect.flashEffect.onTime = ON_TIME;
+    effect.flashEffect.offTime = OFF_TIME;
+
+    int32_t ret = g_lightInterface->TurnOnLight(LIGHT_ID_BATTERY, effect);
+    EXPECT_EQ(LIGHT_NOT_FLASH, ret);
+
+    ret = g_lightInterface->TurnOffLight(LIGHT_ID_BATTERY);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: TurnOnLightUnsupport002
+  * @tc.desc: Unsupported lightID(LIGHT_ID_NOTIFICATIONS).
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightUnsupport_002, Function | MediumTest | Level1)
+{
+    ASSERT_NE(nullptr, g_lightInterface);
+
+    HdfLightEffect effect;
+    InitConfig(effect);
+    effect.lightColor.colorValue.rgbColor.r = MAX_VALUE;
+    effect.lightColor.colorValue.rgbColor.g = MAX_VALUE;
+    effect.lightColor.colorValue.rgbColor.b = MAX_VALUE;
+
+    int32_t ret = g_lightInterface->TurnOnLight(LIGHT_ID_NOTIFICATIONS, effect);
+    EXPECT_EQ(LIGHT_NOT_SUPPORT, ret);
+}
+
+/**
+  * @tc.name: TurnOnLightUnsupport003
+  * @tc.desc: Unsupported lightID(LIGHT_ID_ATTENTION).
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightUnsupport_003, Function | MediumTest | Level1)
+{
+    ASSERT_NE(nullptr, g_lightInterface);
+
+    HdfLightEffect effect;
+    InitConfig(effect);
+    effect.lightColor.colorValue.rgbColor.r = MAX_VALUE;
+    effect.lightColor.colorValue.rgbColor.g = MAX_VALUE;
+    effect.lightColor.colorValue.rgbColor.b = MAX_VALUE;
+
+    int32_t ret = g_lightInterface->TurnOnLight(LIGHT_ID_ATTENTION, effect);
+    EXPECT_EQ(LIGHT_NOT_SUPPORT, ret);
+}
+
+/**
+  * @tc.name: TurnOnLightAbnormal001
+  * @tc.desc: Abnormal onTime in gradient mode.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightAbnormal_001, Function | MediumTest | Level1)
+{
+    ASSERT_NE(nullptr, g_lightInterface);
+
+    HdfLightEffect effect;
+    InitConfig(effect);
+    effect.lightColor.colorValue.rgbColor.r = MAX_VALUE;
+    effect.lightColor.colorValue.rgbColor.g = MAX_VALUE;
+    effect.lightColor.colorValue.rgbColor.b = MAX_VALUE;
+    effect.flashEffect.flashMode = HDF_LIGHT_FLASH_GRADIENT;
+    effect.flashEffect.onTime = 0;
+    effect.flashEffect.offTime = OFF_TIME;
+
+    int32_t ret = g_lightInterface->TurnOnLight(LIGHT_ID_BATTERY, effect);
+    EXPECT_EQ(LIGHT_NOT_FLASH, ret);
+
+    ret = g_lightInterface->TurnOffLight(LIGHT_ID_BATTERY);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: TurnOnLightAbnormal002
+  * @tc.desc: Abnormal offTime in gradient mode.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightAbnormal_002, Function | MediumTest | Level1)
+{
+    ASSERT_NE(nullptr, g_lightInterface);
+
+    HdfLightEffect effect;
+    InitConfig(effect);
+    effect.lightColor.colorValue.rgbColor.r = MAX_VALUE;
+    effect.lightColor.colorValue.rgbColor.g = MAX_VALUE;
+    effect.lightColor.colorValue.rgbColor.b = MAX_VALUE;
+    effect.flashEffect.flashMode = HDF_LIGHT_FLASH_GRADIENT;
+    effect.flashEffect.onTime = ON_TIME;
+    effect.flashEffect.offTime = 0;
+
+    int32_t ret = g_lightInterface->TurnOnLight(LIGHT_ID_BATTERY, effect);
+    EXPECT_EQ(LIGHT_NOT_FLASH, ret);
+
+    ret = g_lightInterface->TurnOffLight(LIGHT_ID_BATTERY);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: TurnOnLightAbnormal003
+  * @tc.desc: Abnormal onTime in blinking mode.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightAbnormal_003, Function | MediumTest | Level1)
+{
+    ASSERT_NE(nullptr, g_lightInterface);
+
+    HdfLightEffect effect;
+    InitConfig(effect);
+    effect.lightColor.colorValue.rgbColor.r = MAX_VALUE;
+    effect.lightColor.colorValue.rgbColor.g = MAX_VALUE;
+    effect.lightColor.colorValue.rgbColor.b = MAX_VALUE;
+    effect.flashEffect.flashMode = HDF_LIGHT_FLASH_BLINK;
+    effect.flashEffect.onTime = 0;
+    effect.flashEffect.offTime = OFF_TIME;
+
+    int32_t ret = g_lightInterface->TurnOnLight(LIGHT_ID_BATTERY, effect);
+    EXPECT_EQ(LIGHT_NOT_FLASH, ret);
+
+    ret = g_lightInterface->TurnOffLight(LIGHT_ID_BATTERY);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: TurnOnLightAbnormal004
+  * @tc.desc: Abnormal offTime in blinking mode.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightAbnormal_004, Function | MediumTest | Level1)
+{
+    ASSERT_NE(nullptr, g_lightInterface);
+
+    HdfLightEffect effect;
+    InitConfig(effect);
+    effect.lightColor.colorValue.rgbColor.r = MAX_VALUE;
+    effect.lightColor.colorValue.rgbColor.g = MAX_VALUE;
+    effect.lightColor.colorValue.rgbColor.b = MAX_VALUE;
+    effect.flashEffect.flashMode = HDF_LIGHT_FLASH_BLINK;
+    effect.flashEffect.onTime = ON_TIME;
+    effect.flashEffect.offTime = 0;
+
+    int32_t ret = g_lightInterface->TurnOnLight(LIGHT_ID_BATTERY, effect);
+    EXPECT_EQ(LIGHT_NOT_FLASH, ret);
+
+    ret = g_lightInterface->TurnOffLight(LIGHT_ID_BATTERY);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: TurnOnMultiLights001
+  * @tc.desc: TurnOnMultiLights.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnMultiLights_001, Function | MediumTest | Level1)
+{
+    ASSERT_NE(nullptr, g_lightInterface);
+
+    std::vector<HdfLightColor> lightColor;
+    struct HdfLightColor light;
+    light.colorValue.rgbColor.r = MAX_VALUE;
+    light.colorValue.rgbColor.g = MIN_VALUE;
+    light.colorValue.rgbColor.b = MIN_VALUE;
+    lightColor.push_back(light);
+
+    int32_t ret = g_lightInterface->TurnOnMultiLights(LIGHT_ID_BATTERY, lightColor);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+
+    OsalSleep(g_sleepTime);
+
+    ret = g_lightInterface->TurnOffLight(LIGHT_ID_BATTERY);
+    EXPECT_EQ(HDF_SUCCESS, ret);
 }
 }

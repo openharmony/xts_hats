@@ -45,7 +45,7 @@ extern "C" {
     } while (0)
 #endif
 
-#define DISPLAY_TEST_LOGD(format, ...)                                                          \
+#define DISPLAY_TEST_LOGI(format, ...)                                                          \
     do {                                                                                        \
         printf("[%s@%s:%d] " format "\n", __FUNCTION__, __FILENAMES__, __LINE__, ##__VA_ARGS__); \
     } while (0)

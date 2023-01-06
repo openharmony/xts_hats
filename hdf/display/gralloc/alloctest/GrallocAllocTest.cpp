@@ -18,8 +18,12 @@
 #include "gtest/gtest.h"
 #include "display_gralloc.h"
 #include "../../common/display_test.h"
+#include "../../common/display_test_utils.h"
 
-namespace {
+namespace OHOS {
+namespace HDI {
+namespace DISPLAY {
+namespace TEST {
 struct AllocTestPrms {
     AllocInfo allocInfo;
     int32_t expectStride;
@@ -33,14 +37,18 @@ protected:
     int32_t AllocMemTest(AllocTestPrms &info);
     GrallocFuncs *mGrallocFuncs = nullptr;
 };
-}
 
-namespace {
+class HdiDisplayTest : public ::testing::Test {
+protected:
+    void TearDown();
+    int ret;
+};
+
 int ALIGN_UP(int x, int a)
 {
     return ((x + (a-1)) / a) * a;
 }
-const int WIDTH_ALIGN = 8U;
+const int HEIGHT_ALIGN = 2U;
 const AllocTestPrms GRALLOC_TEST_SETS[] = {
     // num0
     // SUB_DriverSystem_DisplayHdi_0050
@@ -347,7 +355,7 @@ const AllocTestPrms GRALLOC_TEST_SETS[] = {
 
 static bool CheckBufferHandle(AllocTestPrms &info, BufferHandle &buffer)
 {
-    if (buffer.stride != (ALIGN_UP(info.expectStride, WIDTH_ALIGN))) {
+    if (buffer.stride != (ALIGN_UP(info.expectStride, HEIGHT_ALIGN))) {
         DISPLAY_TEST_LOGE("stride check failed stride %d, expect stride %d ", buffer.stride, info.expectStride);
         DISPLAY_TEST_LOGE("stride check failed format %d width %d, height %d ", info.allocInfo.format,
             info.allocInfo.width, info.allocInfo.height);
@@ -377,6 +385,10 @@ void GrallocAllocTest::TearDown()
         DISPLAY_TEST_LOGE("DisplayUninit failure\n");
         ASSERT_TRUE(0);
     }
+}
+
+void HdiDisplayTest::TearDown()
+{
 }
 
 int32_t GrallocAllocTest::AllocMemTest(AllocTestPrms &info)
@@ -457,4 +469,160 @@ TEST_P(GrallocAllocTest, GrallocAlloc)
     ASSERT_TRUE(ret == DISPLAY_SUCCESS);
 }
 INSTANTIATE_TEST_SUITE_P(AllocTest, GrallocAllocTest, ::testing::ValuesIn(GRALLOC_TEST_SETS));
+
+TEST_F(HdiDisplayTest, SUB_DriverSystem_DisplayHdi_001)
+{
+    uint32_t devId = 0xffffff;
+    uint32_t level = 0x7FFFFFFF;
+    ret=HdiDisplay::SetDisplayBacklight(devId, level);
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);  
 }
+
+
+TEST_F(HdiDisplayTest, SUB_DriverSystem_DisplayHdi_002)
+{
+    uint32_t devId = 0xffffff;
+    ret = HdiDisplay::SetDisplayClientCrop(devId, nullptr);
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);  
+}
+
+TEST_F(HdiDisplayTest, SUB_DriverSystem_DisplayHdi_003)
+{
+    uint32_t devId = 0xffffff;
+    ret = HdiDisplay::SetDisplayClientDestRect(devId, nullptr);
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);  
+}
+
+TEST_F(HdiDisplayTest, SUB_DriverSystem_DisplayHdi_004)
+{
+    uint32_t devId = UINT32_MAX;
+    uint32_t modeId = 0;
+    ret = HdiDisplay::SetDisplayMode(devId, modeId);
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);  
+}
+
+TEST_F(HdiDisplayTest, SUB_DriverSystem_DisplayHdi_005)
+{
+    uint32_t devId = 0xffffff;
+    ret = HdiDisplay::SetDisplayPowerStatus(devId, DispPowerStatus::POWER_STATUS_ON);
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);  
+}
+
+TEST_F(HdiDisplayTest, SUB_DriverSystem_DisplayHdi_006)
+{
+    uint32_t devId = 0xffffff;
+    uint32_t level = 0x7FFFFFFF;
+    ret = HdiDisplay::GetDisplayBacklight(devId, level);
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);  
+}
+
+
+TEST_F(HdiDisplayTest, SUB_DriverSystem_DisplayHdi_007)
+{
+    uint32_t devId = 0xffffff;
+    uint32_t id = 0;
+    uint64_t value = 1000;
+    ret = HdiDisplay::SetDisplayProperty(devId, id, value);
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);  
+}
+
+TEST_F(HdiDisplayTest, SUB_DriverSystem_DisplayHdi_008)
+{
+    uint32_t devId = 0xffffff;
+    ret = HdiDisplay::DestroyVirtualDisplay(devId);
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);  
+}
+
+TEST_F(HdiDisplayTest, SUB_DriverSystem_DisplayHdi_009)
+{
+    uint32_t devId = 0xffffff;
+    DispPowerStatus status = DispPowerStatus::POWER_STATUS_OFF;
+    ret = HdiDisplay::GetDisplayPowerStatus(devId, status);
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);  
+}
+
+TEST_F(HdiDisplayTest, SUB_DriverSystem_DisplayHdi_010)
+{
+    uint32_t devId = 0xffffff;
+    uint32_t id = 0;
+    uint64_t value = 1000;
+    ret = HdiDisplay::GetDisplayProperty(devId, id, value);
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);  
+}
+
+TEST_F(HdiDisplayTest, SUB_DriverSystem_DisplayHdi_011)
+{
+    uint32_t devId = 0;
+    uint32_t fence = -1;
+    ret = HdiDisplay::SetVirtualDisplayBuffer(devId, 0, fence);
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);  
+}
+
+TEST_F(HdiDisplayTest, SUB_DriverSystem_DisplayHdi_012)
+{
+    uint32_t devId = 0xffffff;
+    uint32_t layerId = 0x7FFFFFFF;
+    ret = HdiDisplay::DestroyLayer(devId, layerId);
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
+}
+
+TEST_F(HdiDisplayTest, SUB_DriverSystem_DisplayHdi_013)
+{
+    uint32_t request = 0xffffff;
+    ret = HdiDisplay::InitCmdRequest(request);
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);  
+}
+
+TEST_F(HdiDisplayTest, SUB_DriverSystem_DisplayHdi_014)
+{
+    uint32_t width = 1080;
+    uint32_t height = 1080;
+    uint32_t format = PIXEL_FMT_YCRCB_422_P;
+    uint32_t devId = 0x7FFFFFFF;
+    ret = HdiDisplay::CreateVirtualDisplay(width, height, format, devId);
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);  
+}
+
+TEST_F(HdiDisplayTest, SUB_DriverSystem_DisplayHdi_015)
+{
+    uint32_t inEleCnt = 0xffffff;
+    uint32_t inFds = 0x7FFFFFFF;
+    uint32_t outEleCnt = 0x7FFFFFFF;
+    ret = HdiDisplay::CmdRequest(inEleCnt, inFds, outEleCnt);
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);  
+}
+
+TEST_F(HdiDisplayTest, SUB_DriverSystem_DisplayHdi_016)
+{
+    uint32_t inEleCnt = 0xffffff;
+    uint32_t inFds = 0xffffff;
+    uint32_t outEleCnt = 0xffffff;
+    ret = HdiDisplay::CmdRequest(inEleCnt, inFds, outEleCnt);
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);  
+}
+
+TEST_F(HdiDisplayTest, SUB_DriverSystem_DisplayHdi_017)
+{
+    uint32_t reply = 0xffffff;
+    ret = HdiDisplay::GetCmdReply(reply);
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);  
+}
+
+TEST_F(HdiDisplayTest, SUB_DriverSystem_DisplayHdi_018)
+{
+    uint32_t devId = 0x7FFFFFFF;
+    uint32_t outputId = 0xffffff;
+    bool connected = 0x7FFFFFFF;
+    unsigned int sequence = 0;
+    uint64_t ns =0;
+    ret = DisplayRegisterCallbackBase::OnHotplugIn(outputId, connected);
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);  
+    ret = DisplayRegisterCallbackBase::OnHotplugIn(sequence, ns);
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);  
+    ret = DisplayRegisterCallbackBase::OnRefreshCallback(devId);
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);  
+}
+} // OHOS
+} // HDI
+} // DISPLAY
+} // TEST

@@ -209,7 +209,7 @@ static std::shared_ptr<HdiTestLayer> CreateTestLayer(LayerSettings setting, uint
 {
     int ret;
     HdiTestDevice::GetInstance();
-    DISPLAY_TEST_LOGD("color 0x%x", setting.color);
+    DISPLAY_TEST_LOGI("color 0x%x", setting.color);
     std::shared_ptr<HdiTestDisplay> display = HdiTestDevice::GetInstance().GetFirstDisplay();
     DISPLAY_TEST_CHK_RETURN((display == nullptr), nullptr, DISPLAY_TEST_LOGE("can not get display"));
 
@@ -240,7 +240,7 @@ static std::shared_ptr<HdiTestLayer> CreateTestLayer(LayerSettings setting, uint
 static int PrepareAndPrensent()
 {
     int ret;
-    DISPLAY_TEST_LOGD();
+    DISPLAY_TEST_LOGI();
     std::shared_ptr<HdiTestDisplay> display = HdiTestDevice::GetInstance().GetFirstDisplay();
     DISPLAY_TEST_CHK_RETURN((display == nullptr), DISPLAY_FAILURE, DISPLAY_TEST_LOGE("can not get display"));
 
@@ -255,23 +255,23 @@ static int PrepareAndPrensent()
 static void TestVBlankCallback(unsigned int sequence, uint64_t ns, void *data)
 {
     static uint64_t lastns;
-    DISPLAY_TEST_LOGD("seq %d  ns %" PRId64 " duration %" PRId64 " ns", sequence, ns, (ns - lastns));
+    DISPLAY_TEST_LOGI("seq %d  ns %" PRId64 " duration %" PRId64 " ns", sequence, ns, (ns - lastns));
     lastns = ns;
     VblankCtr::GetInstance().NotifyVblank(sequence, ns, data);
 }
 
 static void AdjustLayerSettings(std::vector<LayerSettings> &settings, uint32_t w, uint32_t h)
 {
-    DISPLAY_TEST_LOGD();
+    DISPLAY_TEST_LOGI();
     for (uint32_t i = 0; i < settings.size(); i++) {
         LayerSettings &setting = settings[i];
-        DISPLAY_TEST_LOGD(" ratio w: %f  ratio h: %f", setting.rectRatio.w, setting.rectRatio.h);
+        DISPLAY_TEST_LOGI(" ratio w: %f  ratio h: %f", setting.rectRatio.w, setting.rectRatio.h);
         if ((setting.rectRatio.w > 0.0f) && (setting.rectRatio.h > 0.0f)) {
             setting.displayRect.h = static_cast<uint32_t>(setting.rectRatio.h * h);
             setting.displayRect.w = static_cast<uint32_t>(setting.rectRatio.w * w);
             setting.displayRect.x = static_cast<uint32_t>(setting.rectRatio.x * w);
             setting.displayRect.y = static_cast<uint32_t>(setting.rectRatio.y * h);
-            DISPLAY_TEST_LOGD("display rect adust form %f %f %f %f to %d %d %d %d ", setting.rectRatio.x,
+            DISPLAY_TEST_LOGI("display rect adust form %f %f %f %f to %d %d %d %d ", setting.rectRatio.x,
                 setting.rectRatio.y, setting.rectRatio.w, setting.rectRatio.h, setting.displayRect.x,
                 setting.displayRect.y, setting.displayRect.w, setting.displayRect.h);
         }
@@ -279,12 +279,12 @@ static void AdjustLayerSettings(std::vector<LayerSettings> &settings, uint32_t w
         if ((setting.bufferRatio.h > 0.0f) || (setting.bufferRatio.w > 0.0f)) {
             setting.bufferSize.h = static_cast<uint32_t>(setting.bufferRatio.h * h);
             setting.bufferSize.w = static_cast<uint32_t>(setting.bufferRatio.w * w);
-            DISPLAY_TEST_LOGD("buffer size adjust for %f %f to %d %d", setting.bufferRatio.w, setting.bufferRatio.h,
+            DISPLAY_TEST_LOGI("buffer size adjust for %f %f to %d %d", setting.bufferRatio.w, setting.bufferRatio.h,
                 setting.bufferSize.w, setting.bufferSize.h);
         }
 
         if ((setting.bufferSize.w == 0) || (setting.bufferSize.h == 0)) {
-            DISPLAY_TEST_LOGD("buffer size adjust for %d %d to %d %d", setting.bufferSize.w, setting.bufferSize.h,
+            DISPLAY_TEST_LOGI("buffer size adjust for %d %d to %d %d", setting.bufferSize.w, setting.bufferSize.h,
                 setting.displayRect.w, setting.displayRect.h);
 
             setting.bufferSize.w = setting.displayRect.w;
@@ -295,7 +295,7 @@ static void AdjustLayerSettings(std::vector<LayerSettings> &settings, uint32_t w
 
 static std::vector<std::shared_ptr<HdiTestLayer>> CreateLayers(std::vector<LayerSettings> &settings)
 {
-    DISPLAY_TEST_LOGD("settings %zd", settings.size());
+    DISPLAY_TEST_LOGI("settings %zd", settings.size());
     std::vector<std::shared_ptr<HdiTestLayer>> layers;
     DisplayModeInfo mode = GetFirstDisplay()->GetCurrentMode();
     AdjustLayerSettings(settings, mode.width, mode.height);
@@ -321,13 +321,13 @@ static inline void PresentAndCheck(std::vector<LayerSettings> &layerSettings,
 
 void LayerRotateTest::TearDown()
 {
-    DISPLAY_TEST_LOGD();
+    DISPLAY_TEST_LOGI();
     HdiTestDevice::GetInstance().Clear();
 }
 
 void DeviceTest::TearDown()
 {
-    DISPLAY_TEST_LOGD();
+    DISPLAY_TEST_LOGI();
     HdiTestDevice::GetInstance().Clear();
 }
 
@@ -339,14 +339,14 @@ void DeviceLayerDisplay::TearDown()
 void VblankCtr::NotifyVblank(unsigned int sequence, uint64_t ns, void *data)
 
 {
-    DISPLAY_TEST_LOGD();
+    DISPLAY_TEST_LOGI();
     if (data != nullptr) {
-        DISPLAY_TEST_LOGD("sequence = %u, ns = %" PRIu64 "", sequence, ns);
+        DISPLAY_TEST_LOGI("sequence = %u, ns = %" PRIu64 "", sequence, ns);
     }
     std::unique_lock<std::mutex> lg(mVblankMutex);
     mHasVblank = true;
     mVblankCondition.notify_one();
-    DISPLAY_TEST_LOGD();
+    DISPLAY_TEST_LOGI();
 }
 
 VblankCtr::~VblankCtr() {}
@@ -354,11 +354,11 @@ VblankCtr::~VblankCtr() {}
 int32_t VblankCtr::WaitVblank(uint32_t ms)
 {
     bool ret;
-    DISPLAY_TEST_LOGD();
+    DISPLAY_TEST_LOGI();
     std::unique_lock<std::mutex> lck(mVblankMutex);
     mHasVblank = false; // must wait next vblank
     ret = mVblankCondition.wait_for(lck, std::chrono::milliseconds(ms), [=] { return mHasVblank; });
-    DISPLAY_TEST_LOGD();
+    DISPLAY_TEST_LOGI();
     if (!ret) {
         return DISPLAY_FAILURE;
     }
@@ -497,7 +497,7 @@ TEST_F(DeviceTest, crop)
 TEST_F(VblankTest, CtrlTest)
 {
     int ret;
-    DISPLAY_TEST_LOGD();
+    DISPLAY_TEST_LOGI();
     std::shared_ptr<HdiTestDisplay> display = HdiTestDevice::GetInstance().GetFirstDisplay();
     ret = display->RegDisplayVBlankCallback(TestVBlankCallback, nullptr);
     ASSERT_TRUE(ret == DISPLAY_SUCCESS) << "RegDisplayVBlankCallback failed";

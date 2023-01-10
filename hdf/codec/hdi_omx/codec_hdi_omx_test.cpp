@@ -45,6 +45,20 @@ constexpr int32_t ROLE_LEN = 240;
 constexpr int32_t BUFFER_SIZE = WIDTH * HEIGHT * 3;
 constexpr int32_t FRAMERATE = 30 << 16;
 constexpr uint32_t BUFFER_ID_ERROR = 65000;
+
+static void InitCodecBuffer(OmxCodecBuffer& buffer, CodecBufferType type, OMX_VERSIONTYPE& version)
+{
+    buffer.bufferType = type;
+    buffer.fenceFd = -1;
+    buffer.version = version;
+    buffer.allocLen = BUFFER_SIZE;
+    buffer.buffer = 0;
+    buffer.bufferLen = 0;
+    buffer.pts = 0;
+    buffer.flag = 0;
+    buffer.type = READ_WRITE_TYPE;
+}
+
 class CodecHdiOmxTest : public testing::Test {
 public:
     enum class PortIndex { PORT_INDEX_INPUT = 0, PORT_INDEX_OUTPUT = 1 };
@@ -685,15 +699,7 @@ struct OmxCodecBuffer allocBuffer;
 HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0390, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
-    allocBuffer.bufferType = CODEC_BUFFER_TYPE_INVALID;
-    allocBuffer.fenceFd = -1;
-    allocBuffer.version = version_;
-    allocBuffer.allocLen = BUFFER_SIZE;
-    allocBuffer.buffer = 0;
-    allocBuffer.bufferLen = 0;
-    allocBuffer.pts = 0;
-    allocBuffer.flag = 0;
-    allocBuffer.type = READ_ONLY_TYPE;
+    InitCodecBuffer(allocBuffer, CODEC_BUFFER_TYPE_INVALID, version_);
     auto ret = component_->AllocateBuffer(component_, (uint32_t)PortIndex::PORT_INDEX_INPUT, &allocBuffer);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
@@ -705,7 +711,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0390, Function | MediumTe
 HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0410, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
-    allocBuffer.bufferType = CODEC_BUFFER_TYPE_VIRTUAL_ADDR;
+    InitCodecBuffer(allocBuffer, CODEC_BUFFER_TYPE_VIRTUAL_ADDR, version_);
     auto ret = component_->AllocateBuffer(component_, (uint32_t)PortIndex::PORT_INDEX_INPUT, &allocBuffer);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
@@ -717,7 +723,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0410, Function | MediumTe
 HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0420, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
-    allocBuffer.bufferType = CODEC_BUFFER_TYPE_INVALID;
+    InitCodecBuffer(allocBuffer, CODEC_BUFFER_TYPE_INVALID, version_);
     auto ret = component_->AllocateBuffer(component_, (uint32_t)PortIndex::PORT_INDEX_OUTPUT, &allocBuffer);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
@@ -729,7 +735,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0420, Function | MediumTe
 HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0430, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
-    allocBuffer.bufferType = CODEC_BUFFER_TYPE_VIRTUAL_ADDR;
+    InitCodecBuffer(allocBuffer, CODEC_BUFFER_TYPE_VIRTUAL_ADDR, version_);
     auto ret = component_->AllocateBuffer(component_, (uint32_t)PortIndex::PORT_INDEX_OUTPUT, &allocBuffer);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
@@ -994,9 +1000,13 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0530, Function | MediumTe
 HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0540, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
-    allocBuffer.bufferType = CODEC_BUFFER_TYPE_AVSHARE_MEM_FD;
-    auto ret = component_->AllocateBuffer(component_, (uint32_t)PortIndex::PORT_INDEX_INPUT, &allocBuffer);
-    ASSERT_NE(ret, HDF_SUCCESS);
+    auto err = component_->SendCommand(component_, OMX_CommandStateSet, OMX_StateIdle, NULL, 0);
+    ASSERT_EQ(err, HDF_SUCCESS);
+    InitCodecBuffer(allocBuffer, CODEC_BUFFER_TYPE_AVSHARE_MEM_FD, version_);
+    err = component_->AllocateBuffer(component_, (uint32_t)PortIndex::PORT_INDEX_INPUT, &allocBuffer);
+    ASSERT_EQ(err, HDF_SUCCESS);
+    err = component_->FreeBuffer(component_, (uint32_t)PortIndex::PORT_INDEX_INPUT, &allocBuffer);
+    ASSERT_EQ(err, HDF_SUCCESS);
 }
 /**
 * @tc.name  HdfCodecHdiAllocateBufferTest_006
@@ -1006,9 +1016,14 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0540, Function | MediumTe
 HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0550, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(component_ != nullptr);
-    allocBuffer.bufferType = CODEC_BUFFER_TYPE_AVSHARE_MEM_FD;
-    auto ret = component_->AllocateBuffer(component_, (uint32_t)PortIndex::PORT_INDEX_OUTPUT, &allocBuffer);
-    ASSERT_NE(ret, HDF_SUCCESS);
+    auto err = component_->SendCommand(component_, OMX_CommandStateSet, OMX_StateIdle, NULL, 0);
+    ASSERT_EQ(err, HDF_SUCCESS);
+    InitCodecBuffer(allocBuffer, CODEC_BUFFER_TYPE_AVSHARE_MEM_FD, version_);
+    allocBuffer.type = READ_WRITE_TYPE;
+    err = component_->AllocateBuffer(component_, (uint32_t)PortIndex::PORT_INDEX_OUTPUT, &allocBuffer);
+    ASSERT_EQ(err, HDF_SUCCESS);
+    err = component_->FreeBuffer(component_, (uint32_t)PortIndex::PORT_INDEX_INPUT, &allocBuffer);
+    ASSERT_EQ(err, HDF_SUCCESS);
 }
 /**
 * @tc.name  HdfCodecHdiUseEglImageTest_001

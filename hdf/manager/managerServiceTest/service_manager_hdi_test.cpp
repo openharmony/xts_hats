@@ -24,6 +24,7 @@
 #include <iservmgr_hdi.h>
 #include <osal_time.h>
 #include <string>
+#include <iservstat_listener_hdi.h>
 
 #include "sample_hdi.h"
 
@@ -40,8 +41,15 @@ using OHOS::HDI::ServiceManager::V1_0::IServiceManager;
 using OHOS::HDI::ServiceManager::V1_0::IServStatListener;
 using OHOS::HDI::ServiceManager::V1_0::ServiceStatus;
 using OHOS::HDI::ServiceManager::V1_0::ServStatListenerStub;
+using OHOS::HDI::DeviceManager::V1_0::HdiDevHostInfo;
+using OHOS::HDI::ServiceManager::V1_0::HdiServiceInfo;
 static constexpr const char *TEST_SERVICE_NAME = "sample_driver_service";
+static constexpr const char *TEST1_SERVICE_NAME = "sample1_driver_service";
 static constexpr const char16_t *TEST_SERVICE_INTERFACE_DESC = u"hdf.test.sampele_service";
+static constexpr const char *TEST_SERVICE_INTERFACE_DESC_N = "hdf.test.sampele_service";
+static constexpr const char *TEST_SERVICE_INTERFACE_DESC_INVALID = "___";
+static constexpr const char *TEST_SERVICE_INTERFACE_DESC_VOID = "";
+static constexpr const char *TEST_SERVICE_INTERFACE_DESC_NULL = nullptr;
 static constexpr int PAYLOAD_NUM = 1234;
 static constexpr int SMQ_TEST_QUEUE_SIZE = 10;
 static constexpr int SMQ_TEST_WAIT_TIME = 100;
@@ -708,4 +716,101 @@ HWTEST_F(HdfServiceMangerHdiTest, ServMgrTest013, Function | MediumTest | Level1
     ASSERT_EQ(servStatus, OHOS::HDI::ServiceManager::V1_0::SERVIE_STATUS_START);
     status = servmgr->UnregisterServiceStatusListener(listener);
     ASSERT_EQ(status, HDF_SUCCESS);
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_InterfaceQuery_0010
+  * @tc.name: Test get service set by interfacedesc
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */
+HWTEST_F(HdfServiceMangerHdiTest, SUB_DriverSystem_InterfaceQuery_0010, Function | MediumTest | Level1)
+{
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+    std::vector<std::string> serviceNames;
+    int ret = servmgr->ListServiceByInterfaceDesc(serviceNames, TEST_SERVICE_INTERFACE_DESC_N);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+    ASSERT_FALSE(serviceNames.empty());
+    ASSERT_TRUE(serviceNames.front().compare(TEST_SERVICE_NAME) == 0);
+}
+
+
+/**
+  * @tc.number: SUB_DriverSystem_InterfaceQuery_0020
+  * @tc.name: Test get service set by interfacedesc
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */
+HWTEST_F(HdfServiceMangerHdiTest, SUB_DriverSystem_InterfaceQuery_0020, Function | MediumTest | Level1)
+{
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+    std::vector<std::string> serviceNames;
+    int ret = servmgr->ListServiceByInterfaceDesc(serviceNames, TEST_SERVICE_INTERFACE_DESC_INVALID);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+    ASSERT_TRUE(serviceNames.empty());
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_InterfaceQuery_0030
+  * @tc.name: Test get service set by interfacedesc
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */
+HWTEST_F(HdfServiceMangerHdiTest, SUB_DriverSystem_InterfaceQuery_0030, Function | MediumTest | Level1)
+{
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+    std::vector<std::string> serviceNames;
+    int ret = servmgr->ListServiceByInterfaceDesc(serviceNames, TEST_SERVICE_INTERFACE_DESC_VOID);
+    ASSERT_TRUE(ret == HDF_ERR_INVALID_PARAM);
+    ASSERT_TRUE(serviceNames.empty());
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_InterfaceQuery_0040
+  * @tc.name: Test get service set by interfacedesc
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */
+HWTEST_F(HdfServiceMangerHdiTest, SUB_DriverSystem_InterfaceQuery_0040, Function | MediumTest | Level1)
+{
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+    std::vector<std::string> serviceNames;
+    int ret = servmgr->ListServiceByInterfaceDesc(serviceNames, TEST_SERVICE_INTERFACE_DESC_NULL);
+    ASSERT_TRUE(ret == HDF_ERR_INVALID_PARAM);
+    ASSERT_TRUE(serviceNames.empty());
+}
+
+ /**
+  * @tc.number: SUB_DriverSystem_InterfaceQuery_0050
+  * @tc.name: Test get service set by interfacedesc
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */
+HWTEST_F(HdfServiceMangerHdiTest, SUB_DriverSystem_InterfaceQuery_0050, Function | MediumTest | Level1)
+{
+    auto devmgr = IDeviceManager::Get();
+    ASSERT_TRUE(devmgr != nullptr);
+    int ret = devmgr->LoadDevice(TEST1_SERVICE_NAME);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+    OsalMSleep(WAIT_LOAD_UNLOAD_TIME);
+    auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService != nullptr);
+    auto sample1Service = servmgr->GetService(TEST1_SERVICE_NAME);
+    ASSERT_TRUE(sample1Service != nullptr);
+
+    std::vector<std::string> serviceNames;
+    ret = servmgr->ListServiceByInterfaceDesc(serviceNames, TEST_SERVICE_INTERFACE_DESC_N);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+    constexpr int sampleServiceCount = 2;
+    ASSERT_TRUE(serviceNames.size() == sampleServiceCount);
+    ASSERT_TRUE(serviceNames[0].compare(TEST_SERVICE_NAME) == 0);
+    ASSERT_TRUE(serviceNames[1].compare(TEST1_SERVICE_NAME) == 0);
+    ret = devmgr->UnloadDevice(TEST1_SERVICE_NAME);
+    ASSERT_EQ(ret, HDF_SUCCESS);
 }

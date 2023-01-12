@@ -68,11 +68,11 @@ int32_t AgnssCallbackImpl::RequestSubscriberSetId(SubscriberSetIdType type)
 {
     printf("AGnssEventCallback::RequestSubscriberSetId. type:%d", static_cast<int>(type));
     int slotId = Telephony::CellularDataClient::GetInstance().GetDefaultCellularDataSlotId();
-    std::string imsi =
-        Str16ToStr8(DelayedRefSingleton<Telephony::CoreServiceClient>::GetInstance().GetIMSI(slotId));
+    std::u16string imsi;
+    DelayedRefSingleton<Telephony::CoreServiceClient>::GetInstance().GetIMSI(slotId, imsi);
     SubscriberSetId setId;
     setId.type = HDI::Location::Agnss::V1_0::SETID_TYPE_IMSI;
-    setId.id = imsi;
+    setId.id = Str16ToStr8(imsi);
     if (g_iagnssHci == nullptr) {
         printf("g_iagnssHci is null!");
         return HDF_FAILURE;

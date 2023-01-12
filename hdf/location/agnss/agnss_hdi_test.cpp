@@ -88,9 +88,8 @@ int32_t AgnssCallbackImpl::RequestAgnssRefInfo()
         return HDF_FAILURE;
     }
     int slotId = Telephony::CellularDataClient::GetInstance().GetDefaultCellularDataSlotId();
-    std::vector<sptr<CellInformation>> cellInformations =
-        DelayedRefSingleton<Telephony::CoreServiceClient>::GetInstance().GetCellInfoList(slotId);
-
+    std::vector<sptr<CellInformation>> cellInformations;
+    DelayedRefSingleton<Telephony::CoreServiceClient>::GetInstance().GetCellInfoList(slotId, cellInformations);
     printf("RequestAgnssRefInfo,cellInformations.");
     for (sptr<CellInformation> infoItem : cellInformations) {
         if (!infoItem->GetIsCamped()) {

@@ -25,7 +25,7 @@
 #include "audio_render.h"
 #include "audio_capture.h"
 
-namespace comfun {
+namespace commonfun {
     const int32_t PORTNUM = 1;
     const int32_t AUDIO_CAPTURE_CHANNELCOUNT = 1;
     const int32_t AUDIO_CHANNELCOUNT = 2;

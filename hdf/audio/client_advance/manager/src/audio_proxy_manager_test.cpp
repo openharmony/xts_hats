@@ -17,16 +17,16 @@
 #include <gtest/gtest.h>
 #include "hdf_dlist.h"
 #include "audio_proxy_common_fun_test.h"
+#include "osal_mem.h"
 
 using namespace std;
-using namespace comfun;
+using namespace commonfun;
 using namespace testing::ext;
 namespace {
 class AudioProxyManagerTest : public testing::Test {
 public:
     uint32_t audioCheck = 0xAAAAAAAA;
     struct AudioManager *manager = nullptr;
-    struct AudioManager *(*getAudioManager)(void) = NULL;
     struct AudioAdapterDescriptor *descs = nullptr;
     struct AudioAdapterDescriptor *desc = nullptr;
     struct AudioAdapter *adapter = nullptr;
@@ -37,14 +37,11 @@ public:
 
 void AudioProxyManagerTest::SetUp()
 {
-    clientHandle = GetDynamicLibHandle(RESOLVED_PATH);
-    ASSERT_NE(clientHandle, nullptr);
-    getAudioManager = (struct AudioManager *(*)())(dlsym(clientHandle, FUNCTION_NAME.c_str()));
-    ASSERT_NE(getAudioManager, nullptr);
-    manager = getAudioManager();
+    manager = GetAudioManagerFuncs();
     ASSERT_NE(manager, nullptr);
     int32_t size = 0;
-    ASSERT_EQ(HDF_SUCCESS, manager->GetAllAdapters(manager, &descs, &size));
+    ASSERT_EQ(HDF_SUCCESS, GetAdapters(manager, &descs, size));
+    
     desc = &descs[0];
     ASSERT_EQ(HDF_SUCCESS, manager->LoadAdapter(manager, desc, &adapter));
 }
@@ -64,9 +61,9 @@ HWTEST_F(AudioProxyManagerTest, ManagerGetAllAdapters_001, TestSize.Level1)
     struct AudioManager managerFuncs;
     struct AudioAdapterDescriptor *descs = nullptr;
     int size = 0;
-    ASSERT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, manager->GetAllAdapters(nullptr, &descs, &size));
-    ASSERT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, manager->GetAllAdapters(&managerFuncs, nullptr, &size));
-    ASSERT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, manager->GetAllAdapters(&managerFuncs, &descs, nullptr));
+    ASSERT_EQ(HDF_ERR_INVALID_PARAM, manager->GetAllAdapters(nullptr, &descs, &size));
+    ASSERT_EQ(HDF_ERR_INVALID_PARAM, manager->GetAllAdapters(&managerFuncs, nullptr, &size));
+    ASSERT_EQ(HDF_ERR_INVALID_PARAM, manager->GetAllAdapters(&managerFuncs, &descs, nullptr));
 }
 
 HWTEST_F(AudioProxyManagerTest, ManagerGetAllAdapters_002, TestSize.Level1)
@@ -75,7 +72,7 @@ HWTEST_F(AudioProxyManagerTest, ManagerGetAllAdapters_002, TestSize.Level1)
     struct AudioManager *managerFuncs = &proxyMgr.impl;
     struct AudioAdapterDescriptor *descs = nullptr;
     int size = 0;
-    ASSERT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, manager->GetAllAdapters(managerFuncs, &descs, &size));
+    ASSERT_EQ(HDF_ERR_INVALID_PARAM, manager->GetAllAdapters(managerFuncs, &descs, &size));
 }
 
 HWTEST_F(AudioProxyManagerTest, ManagerGetAllAdapters_003, TestSize.Level1)
@@ -92,14 +89,14 @@ HWTEST_F(AudioProxyManagerTest, ManagerGetAllAdapters_003, TestSize.Level1)
     proxyManager->remote = nullptr;
     proxyManager->usbRemote = nullptr;
     proxyManager->a2dpRemote = nullptr;
-    ASSERT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, manager->GetAllAdapters(manager, &descs, &size));
+    ASSERT_EQ(HDF_ERR_INVALID_PARAM, manager->GetAllAdapters(manager, &descs, &size));
     proxyManager->remote = remoteService;
     proxyManager->usbRemote = usbRemoteService;
     proxyManager->a2dpRemote = a2dpRemoteService;
 
     uint32_t audioMagic = proxyManager->audioMagic;
     proxyManager->audioMagic = audioCheck - 1;
-    ASSERT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, manager->GetAllAdapters(manager, &descs, &size));
+    ASSERT_EQ(HDF_ERR_INVALID_PARAM, manager->GetAllAdapters(manager, &descs, &size));
     proxyManager->audioMagic = audioMagic;
 
     remoteService = nullptr;
@@ -113,9 +110,9 @@ HWTEST_F(AudioProxyManagerTest, ManagerLoadAdapter_001, TestSize.Level1)
     const struct AudioAdapterDescriptor *desc = &descObject;
     struct AudioAdapter adapterObject;
     struct AudioAdapter *adapter = &adapterObject;
-    ASSERT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, manager->LoadAdapter(nullptr, desc, &adapter));
-    ASSERT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, manager->LoadAdapter(&managerFuncs, nullptr, &adapter));
-    ASSERT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, manager->LoadAdapter(&managerFuncs, desc, nullptr));
+    ASSERT_EQ(HDF_ERR_INVALID_PARAM, manager->LoadAdapter(nullptr, desc, &adapter));
+    ASSERT_EQ(HDF_ERR_INVALID_PARAM, manager->LoadAdapter(&managerFuncs, nullptr, &adapter));
+    ASSERT_EQ(HDF_ERR_INVALID_PARAM, manager->LoadAdapter(&managerFuncs, desc, nullptr));
 }
 
 HWTEST_F(AudioProxyManagerTest, ManagerLoadAdapter_002, TestSize.Level1)
@@ -130,16 +127,16 @@ HWTEST_F(AudioProxyManagerTest, ManagerLoadAdapter_002, TestSize.Level1)
     struct HdfRemoteService *remoteService = nullptr;
     struct AudioProxyManager *proxyManager = CONTAINER_OF(manager, struct AudioProxyManager, impl);
 
-    ASSERT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, manager->LoadAdapter(&managerFuncs, desc, &adapter));
+    ASSERT_EQ(HDF_ERR_INVALID_PARAM, manager->LoadAdapter(&managerFuncs, desc, &adapter));
 
     remoteService = proxyManager->remote;
     proxyManager->remote = nullptr;
-    ASSERT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, manager->LoadAdapter(manager, desc, &adapter));
+    ASSERT_EQ(HDF_ERR_INVALID_PARAM, manager->LoadAdapter(manager, desc, &adapter));
     proxyManager->remote = remoteService;
 
     uint32_t audioMagic = proxyManager->audioMagic;
     proxyManager->audioMagic = audioCheck - 1;
-    ASSERT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, manager->LoadAdapter(manager, desc, &adapter));
+    ASSERT_EQ(HDF_ERR_INVALID_PARAM, manager->LoadAdapter(manager, desc, &adapter));
     proxyManager->audioMagic = audioMagic;
 
     remoteService = nullptr;

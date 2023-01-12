@@ -19,8 +19,9 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include "hdf_remote_service.h"
+#include "osal_mem.h"
 
-namespace comfun {
+namespace commonfun {
 void *GetDynamicLibHandle(const std::string path)
 {
     char absPath[PATH_MAX] = {0};
@@ -188,53 +189,68 @@ int32_t SwitchAdapter(struct AudioAdapterDescriptor *descs, const std::string &a
 
 int32_t GetAdapters(TestAudioManager *manager, struct AudioAdapterDescriptor **descs, int &size)
 {
-    int32_t ret = -1;
     if (descs == nullptr) {
-        return AUDIO_HAL_ERR_INVALID_PARAM;
+        return HDF_ERR_INVALID_PARAM;
     }
-    ret = manager->GetAllAdapters(manager, descs, &size);
-    if (ret < 0) {
-        return ret;
-    }
+    size = 1;
+    uint32_t portNum = 2;
+    struct AudioPort *ports = reinterpret_cast<struct AudioPort*>(OsalMemCalloc(sizeof(struct AudioPort) *
+        (portNum)));
+    ports[0] = {
+        .dir = PORT_OUT,
+        .portId = 0,
+    };
+    ports[1] = {
+        .dir = PORT_IN,
+        .portId = 11,
+    };
+    *descs = reinterpret_cast<struct AudioAdapterDescriptor*>(OsalMemCalloc(sizeof(struct AudioAdapterDescriptor) *
+        (size)));
     if (*descs == nullptr) {
-        return AUDIO_HAL_ERR_INTERNAL;
+        return HDF_FAILURE;
     }
-    return AUDIO_HAL_SUCCESS;
+
+    **descs = {
+        .adapterName = "primary",
+        .portNum = portNum,
+        .ports = ports,
+    };
+
+    return HDF_SUCCESS;
 }
 
 int32_t GetLoadAdapter(TestAudioManager *manager, int portType,
                        const std::string &adapterName, struct AudioAdapter **adapter, struct AudioPort *&audioPort)
 {
-    int32_t ret = -1;
     int size = 0;
     struct AudioAdapterDescriptor *desc = nullptr;
     struct AudioAdapterDescriptor *descs = nullptr;
     if (adapter == nullptr) {
-        return AUDIO_HAL_ERR_INVALID_PARAM;
+        return HDF_ERR_INVALID_PARAM;
     }
-    ret = GetAdapters(manager, &descs, size);
+    int32_t ret = GetAdapters(manager, &descs, size);
     if (ret < 0) {
         return ret;
     }
     if (descs == nullptr) {
-        return AUDIO_HAL_ERR_INTERNAL;
+        return HDF_FAILURE;
     }
 
     int index = SwitchAdapter(descs, adapterName, portType, audioPort, size);
     if (index < 0) {
-        return AUDIO_HAL_ERR_INTERNAL;
+        return HDF_FAILURE;
     }
     desc = &descs[index];
     if (desc == nullptr) {
-        return AUDIO_HAL_ERR_INVALID_PARAM;
+        return HDF_ERR_INVALID_PARAM;
     }
     ret = manager->LoadAdapter(manager, desc, adapter);
     if (ret < 0) {
         return ret;
     }
     if (*adapter == nullptr) {
-        return AUDIO_HAL_ERR_INTERNAL;
+        return HDF_FAILURE;
     }
-    return AUDIO_HAL_SUCCESS;
+    return HDF_SUCCESS;
 }
 }

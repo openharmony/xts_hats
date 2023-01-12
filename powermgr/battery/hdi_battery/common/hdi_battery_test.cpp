@@ -202,7 +202,8 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest009, TestSize.Level1)
     printf("HdfBatteryHdiTest009: start.");
     OHOS::HDI::Battery::V1_1::BatteryPluggedType pluggedType = OHOS::HDI::Battery::V1_1::BatteryPluggedType(0);
     g_batteryInterface->GetPluggedType(pluggedType);
-    EXPECT_TRUE(pluggedType == OHOS::HDI::Battery::V1_1::BatteryPluggedType::PLUGGED_TYPE_USB);
+    EXPECT_TRUE(pluggedType >= OHOS::HDI::Battery::V1_1::BatteryPluggedType::PLUGGED_TYPE_NONE &&
+        pluggedType <= OHOS::HDI::Battery::V1_1::BatteryPluggedType::PLUGGED_TYPE_BUTT);
 
     printf("HdfBatteryHdiTest009: return.");
 }

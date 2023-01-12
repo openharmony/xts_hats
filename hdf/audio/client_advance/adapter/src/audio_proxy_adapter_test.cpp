@@ -17,9 +17,10 @@
 #include <gtest/gtest.h>
 #include "audio_proxy_common_fun_test.h"
 #include "audio_proxy_internal.h"
+#include "osal_mem.h"
 
 using namespace std;
-using namespace comfun;
+using namespace commonfun;
 using namespace testing::ext;
 namespace {
 class AudioProxyAdapterTest : public testing::Test {
@@ -43,7 +44,8 @@ void AudioProxyAdapterTest::SetUp()
     managerFuncs = GetAudioManagerFuncs();
     ASSERT_NE(managerFuncs, nullptr);
     int32_t size = 0;
-    ASSERT_EQ(HDF_SUCCESS, managerFuncs->GetAllAdapters(managerFuncs, &descs, &size));
+    ASSERT_EQ(HDF_SUCCESS, GetAdapters(managerFuncs, &descs, size));
+    
     desc = &descs[0];
     ASSERT_EQ(HDF_SUCCESS, managerFuncs->LoadAdapter(managerFuncs, desc, &adapter));
     ASSERT_NE(adapter, nullptr);
@@ -77,9 +79,9 @@ HWTEST_F(AudioProxyAdapterTest, AdapterGetPortCapability_001, TestSize.Level1)
     ASSERT_NE(adapter, nullptr);
     const struct AudioPort *port = nullptr;
     struct AudioPortCapability capability;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, adapter->GetPortCapability(nullptr, port, &capability));
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, adapter->GetPortCapability(adapter, nullptr, &capability));
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, adapter->GetPortCapability(adapter, port, nullptr));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, adapter->GetPortCapability(nullptr, port, &capability));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, adapter->GetPortCapability(adapter, nullptr, &capability));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, adapter->GetPortCapability(adapter, port, nullptr));
 }
 
 HWTEST_F(AudioProxyAdapterTest, AdapterGetPortCapability_002, TestSize.Level1)
@@ -94,7 +96,7 @@ HWTEST_F(AudioProxyAdapterTest, AdapterGetPortCapability_002, TestSize.Level1)
     struct AudioHwAdapter *hwAdapter = (struct AudioHwAdapter *)adapter;
     struct HdfRemoteService *proxyRemoteHandle = hwAdapter->proxyRemoteHandle;
     hwAdapter->proxyRemoteHandle = nullptr;
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, adapter->GetPortCapability(adapter, &port, &capability));
+    EXPECT_EQ(HDF_FAILURE, adapter->GetPortCapability(adapter, &port, &capability));
     hwAdapter->proxyRemoteHandle = proxyRemoteHandle;
 }
 
@@ -110,7 +112,7 @@ HWTEST_F(AudioProxyAdapterTest, AdapterGetPortCapability_003, TestSize.Level1)
     struct AudioHwAdapter *hwAdapter = (struct AudioHwAdapter *)adapter;
     struct AudioPortAndCapability *hwAdapterPortCapabilitys = hwAdapter->portCapabilitys;
     hwAdapter->portCapabilitys = nullptr;
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, adapter->GetPortCapability(adapter, &port, &capability));
+    EXPECT_EQ(HDF_FAILURE, adapter->GetPortCapability(adapter, &port, &capability));
     hwAdapter->portCapabilitys = hwAdapterPortCapabilitys;
 }
 
@@ -126,7 +128,7 @@ HWTEST_F(AudioProxyAdapterTest, AdapterGetPortCapability_004, TestSize.Level1)
     struct AudioHwAdapter *hwAdapter = (struct AudioHwAdapter *)adapter;
     int32_t portNum = hwAdapter->adapterDescriptor.portNum;
     hwAdapter->adapterDescriptor.portNum = 0;
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, adapter->GetPortCapability(adapter, &port, &capability));
+    EXPECT_EQ(HDF_FAILURE, adapter->GetPortCapability(adapter, &port, &capability));
     hwAdapter->adapterDescriptor.portNum = portNum;
 }
 
@@ -139,12 +141,12 @@ HWTEST_F(AudioProxyAdapterTest, AdapterSetPassthroughMode_001, TestSize.Level1)
         .portName = "AOP",
     };
     int32_t ret = adapter->SetPassthroughMode(nullptr, &port, PORT_PASSTHROUGH_LPCM);
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
     ret = adapter->SetPassthroughMode(adapter, nullptr, PORT_PASSTHROUGH_LPCM);
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
     port.portName = nullptr;
     ret = adapter->SetPassthroughMode(adapter, &port, PORT_PASSTHROUGH_LPCM);
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
+    EXPECT_EQ(HDF_FAILURE, ret);
 }
 
 HWTEST_F(AudioProxyAdapterTest, AdapterSetPassthroughMode_002, TestSize.Level1)
@@ -154,7 +156,7 @@ HWTEST_F(AudioProxyAdapterTest, AdapterSetPassthroughMode_002, TestSize.Level1)
     port.dir = PORT_IN;
     port.portName = nullptr;
     AudioPortPassthroughMode mode = PORT_PASSTHROUGH_LPCM;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, adapter->SetPassthroughMode(adapter, &port, mode));
+    EXPECT_EQ(HDF_FAILURE, adapter->SetPassthroughMode(adapter, &port, mode));
 }
 
 HWTEST_F(AudioProxyAdapterTest, AdapterSetPassthroughMode_003, TestSize.Level1)
@@ -167,7 +169,7 @@ HWTEST_F(AudioProxyAdapterTest, AdapterSetPassthroughMode_003, TestSize.Level1)
     port.portId = 0;
     port.portName = "AOP";
     ret = adapter->SetPassthroughMode(adapter, &port, PORT_PASSTHROUGH_LPCM);
-    EXPECT_EQ(AUDIO_HAL_ERR_NOT_SUPPORT, ret);
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 }
 
 HWTEST_F(AudioProxyAdapterTest, AdapterSetPassthroughMode_004, TestSize.Level1)
@@ -178,18 +180,18 @@ HWTEST_F(AudioProxyAdapterTest, AdapterSetPassthroughMode_004, TestSize.Level1)
     port.portId = 1;
     port.portName = "abc";
     int32_t ret = adapter->SetPassthroughMode(adapter, &port, PORT_PASSTHROUGH_LPCM);
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 }
 
 HWTEST_F(AudioProxyAdapterTest, AdapterGetPassthroughMode_001, TestSize.Level1)
 {
     ASSERT_NE(adapter, nullptr);
     struct AudioPort port;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, adapter->GetPassthroughMode(nullptr, &port, nullptr));
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, adapter->GetPassthroughMode(adapter, nullptr, nullptr));
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, adapter->GetPassthroughMode(adapter, &port, nullptr));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, adapter->GetPassthroughMode(nullptr, &port, nullptr));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, adapter->GetPassthroughMode(adapter, nullptr, nullptr));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, adapter->GetPassthroughMode(adapter, &port, nullptr));
     port.portName = nullptr;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, adapter->GetPassthroughMode(adapter, &port, nullptr));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, adapter->GetPassthroughMode(adapter, &port, nullptr));
 }
 
 HWTEST_F(AudioProxyAdapterTest, AdapterGetPassthroughMode_002, TestSize.Level1)
@@ -200,7 +202,7 @@ HWTEST_F(AudioProxyAdapterTest, AdapterGetPassthroughMode_002, TestSize.Level1)
     port.portId = 1;
     port.portName = "abc";
     AudioPortPassthroughMode mode;
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, adapter->GetPassthroughMode(adapter, &port, &mode));
+    EXPECT_EQ(HDF_FAILURE, adapter->GetPassthroughMode(adapter, &port, &mode));
 }
 
 HWTEST_F(AudioProxyAdapterTest, AdapterGetPassthroughMode_003, TestSize.Level1)
@@ -211,8 +213,8 @@ HWTEST_F(AudioProxyAdapterTest, AdapterGetPassthroughMode_003, TestSize.Level1)
     port->portId = 0;
     port->portName = "AOP";
     AudioPortPassthroughMode mode;
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, adapter->InitAllPorts(adapter));
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, adapter->GetPassthroughMode(adapter, port, &mode));
+    EXPECT_EQ(HDF_SUCCESS, adapter->InitAllPorts(adapter));
+    EXPECT_EQ(HDF_FAILURE, adapter->GetPassthroughMode(adapter, port, &mode));
     delete port;
     port = nullptr;
 }
@@ -225,6 +227,6 @@ HWTEST_F(AudioProxyAdapterTest, AdapterGetPassthroughMode_004, TestSize.Level1)
     port.portId = 1;
     port.portName = "abc";
     AudioPortPassthroughMode mode = PORT_PASSTHROUGH_LPCM;
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, adapter->GetPassthroughMode(adapter, &port, &mode));
+    EXPECT_EQ(HDF_FAILURE, adapter->GetPassthroughMode(adapter, &port, &mode));
 }
 }

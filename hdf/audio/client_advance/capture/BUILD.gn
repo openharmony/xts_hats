@@ -53,6 +53,7 @@ ohos_moduletest_suite("HatsAudioProxyCaptureTest") {
   ]
   external_deps = [
     "c_utils:utils",
+    "hdf_core:libhdf_utils",
     "hdf_core:libhdi",
   ]
   subsystem_name = "hdf"

@@ -16,8 +16,9 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include "audio_proxy_common_fun_test.h"
+#include "osal_mem.h"
 
-using namespace comfun;
+using namespace commonfun;
 using namespace testing::ext;
 namespace {
 class AudioProxyCaptureTest : public testing::Test {
@@ -39,7 +40,7 @@ void AudioProxyCaptureTest::SetUp()
     managerFuncs = GetAudioManagerFuncs();
     ASSERT_NE(managerFuncs, nullptr);
     int32_t size = 0;
-    ASSERT_EQ(HDF_SUCCESS,  managerFuncs->GetAllAdapters(managerFuncs, &descs, &size));
+    ASSERT_EQ(HDF_SUCCESS, GetAdapters(managerFuncs, &descs, size));
 
     desc = &descs[0];
     ASSERT_EQ(HDF_SUCCESS, managerFuncs->LoadAdapter(managerFuncs, desc, &adapter));
@@ -65,7 +66,7 @@ void AudioProxyCaptureTest::TearDown()
 
 HWTEST_F(AudioProxyCaptureTest, CaptureStart_001, TestSize.Level1)
 {
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->control.Start(nullptr));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->control.Start(nullptr));
 }
 
 HWTEST_F(AudioProxyCaptureTest, CaptureStart_002, TestSize.Level1)
@@ -74,20 +75,20 @@ HWTEST_F(AudioProxyCaptureTest, CaptureStart_002, TestSize.Level1)
     struct AudioHwCapture *hwCapture = (struct AudioHwCapture *)capture;
     struct HdfRemoteService *proxyRemoteHandle = hwCapture->proxyRemoteHandle;
     hwCapture->proxyRemoteHandle = nullptr;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->control.Start((AudioHandle)capture));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->control.Start((AudioHandle)capture));
     hwCapture->proxyRemoteHandle = proxyRemoteHandle;
 }
 
 HWTEST_F(AudioProxyCaptureTest, CaptureStart_003, TestSize.Level1)
 {
     ASSERT_NE(capture, nullptr);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, capture->control.Start((AudioHandle)capture));
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, capture->control.Stop((AudioHandle)capture));
+    EXPECT_EQ(HDF_SUCCESS, capture->control.Start((AudioHandle)capture));
+    EXPECT_EQ(HDF_SUCCESS, capture->control.Stop((AudioHandle)capture));
 }
 
 HWTEST_F(AudioProxyCaptureTest, CaptureStop_001, TestSize.Level1)
 {
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->control.Stop(nullptr));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->control.Stop(nullptr));
 }
 
 HWTEST_F(AudioProxyCaptureTest, CaptureStop_002, TestSize.Level1)
@@ -96,7 +97,7 @@ HWTEST_F(AudioProxyCaptureTest, CaptureStop_002, TestSize.Level1)
     struct AudioHwCapture *hwCapture = (struct AudioHwCapture *)capture;
     struct HdfRemoteService *proxyRemoteHandle = hwCapture->proxyRemoteHandle;
     hwCapture->proxyRemoteHandle = nullptr;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->control.Stop((AudioHandle)capture));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->control.Stop((AudioHandle)capture));
     hwCapture->proxyRemoteHandle = proxyRemoteHandle;
 }
 
@@ -104,8 +105,8 @@ HWTEST_F(AudioProxyCaptureTest, CaptureGetFrameSize_001, TestSize.Level1)
 {
     ASSERT_NE(capture, nullptr);
     uint64_t size = 0;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->attr.GetFrameSize(nullptr, &size));
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->attr.GetFrameSize((AudioHandle)capture, nullptr));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->attr.GetFrameSize(nullptr, &size));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->attr.GetFrameSize((AudioHandle)capture, nullptr));
 }
 
 HWTEST_F(AudioProxyCaptureTest, CaptureGetFrameSize_002, TestSize.Level1)
@@ -115,7 +116,7 @@ HWTEST_F(AudioProxyCaptureTest, CaptureGetFrameSize_002, TestSize.Level1)
     struct HdfRemoteService *proxyRemoteHandle = hwCapture->proxyRemoteHandle;
     hwCapture->proxyRemoteHandle = nullptr;
     uint64_t size = 0;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->attr.GetFrameSize((AudioHandle)capture, &size));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->attr.GetFrameSize((AudioHandle)capture, &size));
     hwCapture->proxyRemoteHandle = proxyRemoteHandle;
 }
 
@@ -123,7 +124,7 @@ HWTEST_F(AudioProxyCaptureTest, CaptureGetFrameSize_003, TestSize.Level1)
 {
     ASSERT_NE(capture, nullptr);
     uint64_t size = 0;
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, capture->attr.GetFrameSize((AudioHandle)capture, &size));
+    EXPECT_EQ(HDF_SUCCESS, capture->attr.GetFrameSize((AudioHandle)capture, &size));
     EXPECT_NE(size, 0);
 }
 
@@ -131,8 +132,8 @@ HWTEST_F(AudioProxyCaptureTest, CaptureGetFrameCount_001, TestSize.Level1)
 {
     ASSERT_NE(capture, nullptr);
     uint64_t count = 0;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->attr.GetFrameCount(nullptr, &count));
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->attr.GetFrameCount((AudioHandle)capture, nullptr));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->attr.GetFrameCount(nullptr, &count));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->attr.GetFrameCount((AudioHandle)capture, nullptr));
 }
 
 HWTEST_F(AudioProxyCaptureTest, CaptureGetFrameCount_002, TestSize.Level1)
@@ -142,15 +143,15 @@ HWTEST_F(AudioProxyCaptureTest, CaptureGetFrameCount_002, TestSize.Level1)
     struct HdfRemoteService *proxyRemoteHandle = hwCapture->proxyRemoteHandle;
     hwCapture->proxyRemoteHandle = nullptr;
     uint64_t count = 0;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->attr.GetFrameCount((AudioHandle)capture, &count));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->attr.GetFrameCount((AudioHandle)capture, &count));
     hwCapture->proxyRemoteHandle = proxyRemoteHandle;
 }
 
 HWTEST_F(AudioProxyCaptureTest, CaptureGetCurrentChannelId_001, TestSize.Level1)
 {
     uint32_t channelId = 0;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->attr.GetCurrentChannelId(nullptr, &channelId));
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->attr.GetCurrentChannelId((AudioHandle)capture, nullptr));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->attr.GetCurrentChannelId(nullptr, &channelId));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->attr.GetCurrentChannelId((AudioHandle)capture, nullptr));
 }
 
 HWTEST_F(AudioProxyCaptureTest, CaptureGetCurrentChannelId_002, TestSize.Level1)
@@ -160,7 +161,7 @@ HWTEST_F(AudioProxyCaptureTest, CaptureGetCurrentChannelId_002, TestSize.Level1)
     struct HdfRemoteService *proxyRemoteHandle = hwCapture->proxyRemoteHandle;
     hwCapture->proxyRemoteHandle = nullptr;
     uint32_t channelId = 0;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->attr.GetCurrentChannelId((AudioHandle)capture, &channelId));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->attr.GetCurrentChannelId((AudioHandle)capture, &channelId));
     hwCapture->proxyRemoteHandle = proxyRemoteHandle;
 }
 
@@ -171,10 +172,10 @@ HWTEST_F(AudioProxyCaptureTest, CaptureCheckSceneCapability_001, TestSize.Level1
     scene.scene.id = 0;
     scene.desc.pins = PIN_IN_MIC;
     bool supported = false;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->scene.CheckSceneCapability(nullptr, &scene, &supported));
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->scene.CheckSceneCapability((AudioHandle)capture, nullptr,
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->scene.CheckSceneCapability(nullptr, &scene, &supported));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->scene.CheckSceneCapability((AudioHandle)capture, nullptr,
                                                                                  &supported));
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->scene.CheckSceneCapability((AudioHandle)capture, &scene,
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->scene.CheckSceneCapability((AudioHandle)capture, &scene,
                                                                                  nullptr));
 }
 
@@ -188,7 +189,7 @@ HWTEST_F(AudioProxyCaptureTest, CaptureCheckSceneCapability_002, TestSize.Level1
     scene.scene.id = 0;
     scene.desc.pins = PIN_IN_MIC;
     bool supported = false;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->scene.CheckSceneCapability((AudioHandle)capture, &scene,
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->scene.CheckSceneCapability((AudioHandle)capture, &scene,
                                                                                  &supported));
     hwCapture->proxyRemoteHandle = proxyRemoteHandle;
 }
@@ -199,8 +200,8 @@ HWTEST_F(AudioProxyCaptureTest, CaptureSelectScene_001, TestSize.Level1)
     struct AudioSceneDescriptor scene;
     scene.scene.id = 0;
     scene.desc.pins = PIN_IN_MIC;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->scene.SelectScene(nullptr, &scene));
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->scene.SelectScene((AudioHandle)capture, nullptr));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->scene.SelectScene(nullptr, &scene));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->scene.SelectScene((AudioHandle)capture, nullptr));
 }
 
 HWTEST_F(AudioProxyCaptureTest, CaptureSelectScene_002, TestSize.Level1)
@@ -212,7 +213,7 @@ HWTEST_F(AudioProxyCaptureTest, CaptureSelectScene_002, TestSize.Level1)
     struct AudioSceneDescriptor scene;
     scene.scene.id = 0;
     scene.desc.pins = PIN_IN_MIC;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->scene.SelectScene((AudioHandle)capture, &scene));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->scene.SelectScene((AudioHandle)capture, &scene));
     hwCapture->proxyRemoteHandle = proxyRemoteHandle;
 }
 
@@ -222,9 +223,9 @@ HWTEST_F(AudioProxyCaptureTest, CaptureSelectScene_003, TestSize.Level1)
     struct AudioSceneDescriptor *scene  = new AudioSceneDescriptor;
     scene->scene.id = 0; // 0 is Media
     scene->desc.pins = PIN_IN_HS_MIC;
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, capture->scene.SelectScene((AudioHandle)capture, scene));
+    EXPECT_EQ(HDF_SUCCESS, capture->scene.SelectScene((AudioHandle)capture, scene));
     scene->desc.pins = PIN_IN_MIC;
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, capture->scene.SelectScene((AudioHandle)capture, scene));
+    EXPECT_EQ(HDF_SUCCESS, capture->scene.SelectScene((AudioHandle)capture, scene));
     delete scene;
     scene = nullptr;
 }
@@ -234,9 +235,9 @@ HWTEST_F(AudioProxyCaptureTest, CaptureGetCapturePosition_001, TestSize.Level1)
     ASSERT_NE(capture, nullptr);
     uint64_t frames;
     struct AudioTimeStamp time;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->GetCapturePosition(nullptr, &frames, &time));
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->GetCapturePosition(capture, nullptr, &time));
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->GetCapturePosition(capture, &frames, nullptr));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->GetCapturePosition(nullptr, &frames, &time));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->GetCapturePosition(capture, nullptr, &time));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->GetCapturePosition(capture, &frames, nullptr));
 }
 
 HWTEST_F(AudioProxyCaptureTest, CaptureGetCapturePosition_002, TestSize.Level1)
@@ -247,7 +248,7 @@ HWTEST_F(AudioProxyCaptureTest, CaptureGetCapturePosition_002, TestSize.Level1)
     hwCapture->proxyRemoteHandle = nullptr;
     uint64_t frames;
     struct AudioTimeStamp time;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->GetCapturePosition(capture, &frames, &time));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->GetCapturePosition(capture, &frames, &time));
     hwCapture->proxyRemoteHandle = proxyRemoteHandle;
 }
 
@@ -255,8 +256,8 @@ HWTEST_F(AudioProxyCaptureTest, CaptureSetExtraParams_001, TestSize.Level1)
 {
     ASSERT_NE(capture, nullptr);
     char keyValueList[AUDIO_CAPTURE_BUF_TEST];
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->attr.SetExtraParams(nullptr, keyValueList));
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->attr.SetExtraParams((AudioHandle)capture, nullptr));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->attr.SetExtraParams(nullptr, keyValueList));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->attr.SetExtraParams((AudioHandle)capture, nullptr));
 }
 
 HWTEST_F(AudioProxyCaptureTest, CaptureSetExtraParams_002, TestSize.Level1)
@@ -266,7 +267,7 @@ HWTEST_F(AudioProxyCaptureTest, CaptureSetExtraParams_002, TestSize.Level1)
     struct HdfRemoteService *proxyRemoteHandle = hwCapture->proxyRemoteHandle;
     hwCapture->proxyRemoteHandle = nullptr;
     char keyValueList[AUDIO_CAPTURE_BUF_TEST];
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->attr.SetExtraParams((AudioHandle)capture, keyValueList));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->attr.SetExtraParams((AudioHandle)capture, keyValueList));
     hwCapture->proxyRemoteHandle = proxyRemoteHandle;
 }
 
@@ -275,9 +276,9 @@ HWTEST_F(AudioProxyCaptureTest, CaptureGetExtraParams_001, TestSize.Level1)
     ASSERT_NE(capture, nullptr);
     char keyValueList[AUDIO_CAPTURE_BUF_TEST];
     int32_t listLenth = AUDIO_CAPTURE_BUF_TEST;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->attr.GetExtraParams(nullptr, keyValueList, listLenth));
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->attr.GetExtraParams((AudioHandle)capture, nullptr, listLenth));
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->attr.GetExtraParams((AudioHandle)capture, keyValueList, 0));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->attr.GetExtraParams(nullptr, keyValueList, listLenth));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->attr.GetExtraParams((AudioHandle)capture, nullptr, listLenth));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->attr.GetExtraParams((AudioHandle)capture, keyValueList, 0));
 }
 
 HWTEST_F(AudioProxyCaptureTest, CaptureGetExtraParams_002, TestSize.Level1)
@@ -288,14 +289,14 @@ HWTEST_F(AudioProxyCaptureTest, CaptureGetExtraParams_002, TestSize.Level1)
     hwCapture->proxyRemoteHandle = nullptr;
     char keyValueList[AUDIO_CAPTURE_BUF_TEST];
     int32_t listLenth = AUDIO_CAPTURE_BUF_TEST;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->attr.GetExtraParams((AudioHandle)capture, keyValueList,
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->attr.GetExtraParams((AudioHandle)capture, keyValueList,
                                                                            listLenth));
     hwCapture->proxyRemoteHandle = proxyRemoteHandle;
 }
 
 HWTEST_F(AudioProxyCaptureTest, CaptureTurnStandbyMode_001, TestSize.Level1)
 {
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->control.TurnStandbyMode(nullptr));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->control.TurnStandbyMode(nullptr));
 }
 
 HWTEST_F(AudioProxyCaptureTest, CaptureTurnStandbyMode_002, TestSize.Level1)
@@ -304,7 +305,7 @@ HWTEST_F(AudioProxyCaptureTest, CaptureTurnStandbyMode_002, TestSize.Level1)
     struct AudioHwCapture *hwCapture = (struct AudioHwCapture *)capture;
     struct HdfRemoteService *proxyRemoteHandle = hwCapture->proxyRemoteHandle;
     hwCapture->proxyRemoteHandle = nullptr;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, capture->control.TurnStandbyMode((AudioHandle)capture));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, capture->control.TurnStandbyMode((AudioHandle)capture));
     hwCapture->proxyRemoteHandle = proxyRemoteHandle;
 }
 }

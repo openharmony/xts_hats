@@ -56,9 +56,9 @@ HWTEST_F(AudioProxyCommonTest, AudioProxyDispatchCall_001, TestSize.Level1)
     struct HdfSBuf *data = AudioProxyObtainHdfSBuf();
     struct HdfSBuf *reply = AudioProxyObtainHdfSBuf();
     struct HdfRemoteService self;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, AudioProxyDispatchCall(nullptr, id, data, reply));
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, AudioProxyDispatchCall(&self, id, nullptr, reply));
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, AudioProxyDispatchCall(&self, id, data, nullptr));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, AudioProxyDispatchCall(nullptr, id, data, reply));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, AudioProxyDispatchCall(&self, id, nullptr, reply));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, AudioProxyDispatchCall(&self, id, data, nullptr));
     HdfSbufRecycle(data);
     HdfSbufRecycle(reply);
 }
@@ -70,7 +70,7 @@ HWTEST_F(AudioProxyCommonTest, AudioProxyDispatchCall_002, TestSize.Level1)
     struct HdfSBuf *reply = AudioProxyObtainHdfSBuf();
     struct HdfRemoteService self;
     self.dispatcher = nullptr;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, AudioProxyDispatchCall(nullptr, id, data, reply));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, AudioProxyDispatchCall(nullptr, id, data, reply));
     HdfSbufRecycle(data);
     HdfSbufRecycle(reply);
 }
@@ -80,9 +80,9 @@ HWTEST_F(AudioProxyCommonTest, AdapterGetRemoteHandle_001, TestSize.Level1)
     char adapterName[NAME_LEN];
     struct AudioHwAdapter hwAdapter;
     struct AudioProxyManager proxyManager;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, AudioProxyAdapterGetRemoteHandle(nullptr, &hwAdapter, adapterName));
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, AudioProxyAdapterGetRemoteHandle(&proxyManager, nullptr, adapterName));
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, AudioProxyAdapterGetRemoteHandle(&proxyManager, &hwAdapter, nullptr));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, AudioProxyAdapterGetRemoteHandle(nullptr, &hwAdapter, adapterName));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, AudioProxyAdapterGetRemoteHandle(&proxyManager, nullptr, adapterName));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, AudioProxyAdapterGetRemoteHandle(&proxyManager, &hwAdapter, nullptr));
 }
 
 HWTEST_F(AudioProxyCommonTest, AdapterGetRemoteHandle_002, TestSize.Level1)
@@ -90,7 +90,7 @@ HWTEST_F(AudioProxyCommonTest, AdapterGetRemoteHandle_002, TestSize.Level1)
     const char *adapterName = "abc";
     struct AudioHwAdapter hwAdapter;
     struct AudioProxyManager proxyManager;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, AudioProxyAdapterGetRemoteHandle(&proxyManager, &hwAdapter, adapterName));
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, AudioProxyAdapterGetRemoteHandle(&proxyManager, &hwAdapter, adapterName));
 }
 
 HWTEST_F(AudioProxyCommonTest, AudioProxyPreprocessRender_001, TestSize.Level1)
@@ -134,78 +134,78 @@ HWTEST_F(AudioProxyCommonTest, AudioProxyReadSapmleAttrbutes_001, TestSize.Level
 HWTEST_F(AudioProxyCommonTest, SetRenderCtrlParam_001, TestSize.Level1)
 {
     int cmId = AUDIO_HDI_RENDER_SET_VOLUME;
-    float param = comfun::HALF_OF_NORMAL_VALUE; // normal value
+    float param = commonfun::HALF_OF_NORMAL_VALUE; // normal value
     struct AudioHwRender hwRender;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, AudioProxyCommonSetRenderCtrlParam(cmId, nullptr, param));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, AudioProxyCommonSetRenderCtrlParam(cmId, nullptr, param));
 
     hwRender.proxyRemoteHandle = nullptr;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, AudioProxyCommonSetRenderCtrlParam(cmId, (AudioHandle)(&hwRender), param));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, AudioProxyCommonSetRenderCtrlParam(cmId, (AudioHandle)(&hwRender), param));
 }
 
 HWTEST_F(AudioProxyCommonTest, SetRenderCtrlParam_002, TestSize.Level1)
 {
     int cmId = AUDIO_HDI_RENDER_SET_VOLUME;
-    float volume = comfun::MIN_VALUE_OUT_OF_BOUNDS; // The volume value is not within the threshold range [0,1]
+    float volume = commonfun::MIN_VALUE_OUT_OF_BOUNDS; // The volume value is not within the threshold range [0,1]
     struct AudioHwRender hwRender;
     struct HdfRemoteService remoteHandle;
     hwRender.proxyRemoteHandle = &remoteHandle;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, AudioProxyCommonSetRenderCtrlParam(cmId, (AudioHandle)(&hwRender), volume));
-    volume = comfun::MAX_VALUE_OUT_OF_BOUNDS; // The volume value is not within the threshold range [0,1]
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, AudioProxyCommonSetRenderCtrlParam(cmId, (AudioHandle)(&hwRender), volume));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, AudioProxyCommonSetRenderCtrlParam(cmId, (AudioHandle)(&hwRender), volume));
+    volume = commonfun::MAX_VALUE_OUT_OF_BOUNDS; // The volume value is not within the threshold range [0,1]
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, AudioProxyCommonSetRenderCtrlParam(cmId, (AudioHandle)(&hwRender), volume));
 }
 
 HWTEST_F(AudioProxyCommonTest, GetRenderCtrlParam_001, TestSize.Level1)
 {
     int cmId = AUDIO_HDI_RENDER_SET_VOLUME;
-    float param = comfun::HALF_OF_NORMAL_VALUE; // normal value
+    float param = commonfun::HALF_OF_NORMAL_VALUE; // normal value
     struct AudioHwRender hwRender;
     int32_t ret  = AudioProxyCommonGetRenderCtrlParam(cmId, nullptr, &param);
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
     ret = AudioProxyCommonGetRenderCtrlParam(cmId, (AudioHandle)(&hwRender), nullptr);
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
     hwRender.proxyRemoteHandle = nullptr;
     ret = AudioProxyCommonGetRenderCtrlParam(cmId, (AudioHandle)(&hwRender), &param);
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
 }
 
 
 HWTEST_F(AudioProxyCommonTest, SetCaptureCtrlParam_001, TestSize.Level1)
 {
     int cmId = AUDIO_HDI_RENDER_SET_VOLUME;
-    float param = comfun::HALF_OF_NORMAL_VALUE; // normal value
+    float param = commonfun::HALF_OF_NORMAL_VALUE; // normal value
     struct AudioHwCapture hwCapture;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, AudioProxyCommonSetCaptureCtrlParam(cmId, nullptr, param));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, AudioProxyCommonSetCaptureCtrlParam(cmId, nullptr, param));
 
     hwCapture.proxyRemoteHandle = nullptr;
     int32_t ret = AudioProxyCommonSetCaptureCtrlParam(cmId, (AudioHandle)(&hwCapture), param);
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
 }
 
 HWTEST_F(AudioProxyCommonTest, SetCaptureCtrlParam_002, TestSize.Level1)
 {
     int cmId = AUDIO_HDI_CAPTURE_SET_VOLUME;
-    float volume = comfun::MIN_VALUE_OUT_OF_BOUNDS; // The volume value is not within the threshold range [0,1].
+    float volume = commonfun::MIN_VALUE_OUT_OF_BOUNDS; // The volume value is not within the threshold range [0,1].
     struct AudioHwCapture hwCapture;
     struct HdfRemoteService remoteHandle;
     hwCapture.proxyRemoteHandle = &remoteHandle;
     int32_t ret = AudioProxyCommonSetCaptureCtrlParam(cmId, (AudioHandle)(&hwCapture), volume);
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
     ret = AudioProxyCommonSetCaptureCtrlParam(cmId, (AudioHandle)(&hwCapture), volume);
-    volume = comfun::MAX_VALUE_OUT_OF_BOUNDS; // The volume value is not within the threshold range [0,1].
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
+    volume = commonfun::MAX_VALUE_OUT_OF_BOUNDS; // The volume value is not within the threshold range [0,1].
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
 }
 
 HWTEST_F(AudioProxyCommonTest, GetCaptureCtrlParam_001, TestSize.Level1)
 {
     int cmId = AUDIO_HDI_CAPTURE_SET_VOLUME;
-    float param = comfun::HALF_OF_NORMAL_VALUE; // normal value
+    float param = commonfun::HALF_OF_NORMAL_VALUE; // normal value
     struct AudioHwCapture hwCapture;
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, AudioProxyCommonGetCaptureCtrlParam(cmId, nullptr, &param));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, AudioProxyCommonGetCaptureCtrlParam(cmId, nullptr, &param));
     int32_t ret = AudioProxyCommonGetCaptureCtrlParam(cmId, (AudioHandle)(&hwCapture), nullptr);
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
     hwCapture.proxyRemoteHandle = nullptr;
     ret = AudioProxyCommonGetCaptureCtrlParam(cmId, (AudioHandle)(&hwCapture), &param);
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
 }
 
 HWTEST_F(AudioProxyCommonTest, GetMmapPositionRead_001, TestSize.Level1)

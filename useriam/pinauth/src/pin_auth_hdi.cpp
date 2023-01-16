@@ -211,7 +211,7 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0106, Function | Medi
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.Authenticate(scheduleId, templateId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    ASSERT_EQ(ret != Expectedvalue, true);
+    ASSERT_EQ(ret, 0);
 }
 
 /**

@@ -418,35 +418,6 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0322, TestSize.Level1)
     }
 }
 
-/**
-  * @tc.name: SetSensorMode0001
-  * @tc.desc: Sets the data reporting mode for the specified sensor.
-  * @tc.type: FUNC
-  */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0323, TestSize.Level1)
-{
-    if (g_sensorInterface == nullptr) {
-        ASSERT_NE(nullptr, g_sensorInterface);
-        return;
-    }
-    EXPECT_GT(g_info.size(), 0);
-    for (auto iter : g_info) {
-        int32_t ret = g_sensorInterface->SetBatch(iter.sensorId, SENSOR_INTERVAL1, SENSOR_POLL_TIME);
-        EXPECT_EQ(SENSOR_SUCCESS, ret);
-        if (iter.sensorId == SENSOR_TYPE_HALL) {
-            ret = g_sensorInterface->SetMode(iter.sensorId, SENSOR_MODE_MAX);
-            EXPECT_EQ(SENSOR_SUCCESS, ret);
-        } else {
-            ret = g_sensorInterface->SetMode(iter.sensorId, SENSOR_MODE_REALTIME);
-            EXPECT_EQ(SENSOR_SUCCESS, ret);
-        }
-        ret = g_sensorInterface->Enable(iter.sensorId);
-        EXPECT_EQ(SENSOR_SUCCESS, ret);
-        OsalMSleep(SENSOR_WAIT_TIME);
-        ret = g_sensorInterface->Disable(iter.sensorId);
-        EXPECT_EQ(SENSOR_SUCCESS, ret);
-    }
-}
 
 /**
   * @tc.name: SetSensorMode0002

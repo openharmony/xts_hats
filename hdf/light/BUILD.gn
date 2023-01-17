@@ -21,8 +21,10 @@ group("HatsHdfLightTest") {
   if (xts_hats_rich == true) {
   } else {
     deps = [
-      #"common:HatsHdfLightHdiTest",
+      #"liteos:HatsHdfLightHdiTest",
+      "hdiService:HatsHdfLightCommonTest",
       "hdiService:HatsHdfLightServiceTest",
+
       #"lightBenchmarkTest:HatsHdfLightbenchmarkTest",
     ]
   }

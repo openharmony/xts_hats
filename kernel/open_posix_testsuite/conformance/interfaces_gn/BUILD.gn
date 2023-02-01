@@ -20,7 +20,8 @@ posix_interface_json("${posix_interface_module}") {
 group("${posix_interface_module}_bin") {
   deps = [
     "asctime:asctime_1-1",
-    "clock:clock_1-1",
+
+    #"clock:clock_1-1",
     "clock:clock_2-1",
     "clock_getcpuclockid:clock_getcpuclockid_1-1",
     "clock_getcpuclockid:clock_getcpuclockid_1-2",

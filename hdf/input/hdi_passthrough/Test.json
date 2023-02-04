@@ -1,0 +1,18 @@
+{
+    "kits": [
+        {
+            "push": [
+                "HatsHdfInputPassthroughTest->/data/local/tmp/HatsHdfInputPassthroughTest"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsHdfInputPassthroughTest",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    },
+    "description": "Configuration for HatsHdfInputPassthroughTest Tests"
+}

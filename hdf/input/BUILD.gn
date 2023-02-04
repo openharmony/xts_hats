@@ -12,12 +12,19 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
+import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
 group("HatsHdfInputTest") {
   testonly = true
-  deps = [
-    "hdi_input:HatsHdfInputTest",
-    #"inputBenchmarkTest:HatsHdfInputbenchmarkTest",
-  ]
+  if (xts_hats_rich == true) {
+    deps = [ "hdi_input:HatsHdfInputTest" ]
+  } else {
+    deps = [
+      "hdi_input:HatsHdfInputTest",
+      "hdi_passthrough:HatsHdfInputPassthroughTest",
+
+      #"inputBenchmarkTest:HatsHdfInputbenchmarkTest",
+    ]
+  }
 }

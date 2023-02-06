@@ -19,7 +19,9 @@ group("HatsHdfNnrtTest") {
   testonly = true
   if (device_name == "rk3568") {
     if (is_standard_system) {
-      deps = [ "hdi:hdi" ]
+      if (xts_hats_nnrt) {
+        deps = [ "hdi:hdi" ]
+      }
     }
   }
 }

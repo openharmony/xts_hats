@@ -14,7 +14,8 @@
         "subsystem": "xts",
         "syscap": [],
         "features": [
-            "xts_hats_rich"
+            "xts_hats_rich",
+            "xts_hats_nnrt"
           ],
         "adapted_system_type": [],
         "rom": "",

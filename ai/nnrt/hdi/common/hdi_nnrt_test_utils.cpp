@@ -161,6 +161,7 @@ V1_0::IOTensor HDICommon::CreateInputIOTensor(OHOS::sptr<V1_0::INnrtDevice> &dev
 
     V1_0::SharedBuffer buffer{NNRT_INVALID_FD, 0, 0, 0};
     auto ret = device->AllocateBuffer(length, buffer);
+
     if (ret != HDF_SUCCESS || buffer.fd == NNRT_INVALID_FD) {
         printf("[NNRtTest] [CreateInputIOTensor] allocate buffer error. ret: %d, fd: %d\n", ret, buffer.fd);
     }
@@ -188,6 +189,7 @@ V1_0::IOTensor HDICommon::CreateOutputIOTensor(OHOS::sptr<V1_0::INnrtDevice> &de
 
     V1_0::SharedBuffer buffer{NNRT_INVALID_FD, 0, 0, 0};
     int ret = device->AllocateBuffer(length, buffer);
+
     if (ret != HDF_SUCCESS || buffer.fd == NNRT_INVALID_FD) {
         printf("[NNRtTest] Allocate buffer error. ErrorCode: %d, fd: %d", ret, buffer.fd);
     }

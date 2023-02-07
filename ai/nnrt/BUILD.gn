@@ -10,8 +10,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import("//build/ohos.gni")
-declare_args() {
-  xts_hats_rich = false
-  xts_hats_nnrt = false
+
+import("//build/ohos_var.gni")
+import("//test/xts/tools/build/suite.gni")
+
+group("HatsHdfNnrtTest") {
+  testonly = true
+  if (device_name == "rk3568") {
+    if (is_standard_system) {
+      if (xts_hats_nnrt) {
+        deps = [ "hdi:hdi" ]
+      }
+    }
+  }
 }

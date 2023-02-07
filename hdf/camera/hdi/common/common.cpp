@@ -480,7 +480,7 @@ std::shared_ptr<OHOS::Surface> Test::StreamConsumer::CreateProducer(std::functio
 #else
 OHOS::sptr<OHOS::IBufferProducer> Test::StreamConsumer::CreateProducer(std::function<void(void*, uint32_t)> callback)
 {
-    consumer_ = OHOS::Surface::CreateSurfaceAsConsumer();
+    consumer_ = OHOS::IConsumerSurface::Create();
     if (consumer_ == nullptr) {
         return nullptr;
     }

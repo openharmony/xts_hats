@@ -15,6 +15,7 @@
 
 #include <hdf_base.h>
 #include "iam_hat_test.h"
+#include "iconsumer_surface.h"
 #include "face_auth_hdi.h"
 
 #define LOG_LABEL OHOS::UserIam::Common::LABEL_FACE_AUTH_IMPL
@@ -301,7 +302,7 @@ HWTEST_F(UserIamFaceAuthTest, Security_IAM_Face_HDI_FUNC_0111, Function | Medium
     cout << "start test SetBufferProducer" << endl;
     sptr<IBufferProducer> bufferProducer = nullptr;
     if (parcel.ReadBool()) {
-        auto surface = Surface::CreateSurfaceAsConsumer();
+        auto surface = IConsumerSurface::Create();
         if (surface == nullptr) {
             cout << "CreateSurfaceAsConsumer fail" << endl;
         }

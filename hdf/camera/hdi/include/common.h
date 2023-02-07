@@ -35,6 +35,7 @@
 #include "camera_host.h"
 #include "types.h"
 #include <surface.h>
+#include "iconsumer_surface.h"
 #include "idevice_manager.h"
 #include "camera_metadata_info.h"
 #include "ibuffer.h"
@@ -166,7 +167,7 @@ public:
         std::shared_ptr<OHOS::Surface> consumer_ = nullptr;
         std::function<void(OHOS::SurfaceBuffer*)> callback_ = nullptr;
 #else
-        OHOS::sptr<OHOS::Surface> consumer_ = nullptr;
+        OHOS::sptr<OHOS::IConsumerSurface> consumer_ = nullptr;
         std::function<void(void*, uint32_t)> callback_ = nullptr;
 #endif
         std::thread* consumerThread_ = nullptr;

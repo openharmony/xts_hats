@@ -26,7 +26,6 @@ group("hatshdftest") {
       "manager:HatsHdfManagerTest",
       "motion:HatsHdfMotionTest",
       "nfc:HatsHdfNfcTest",
-      "nnrt:HatsHdfNnrtTest",
       "sensor:HatsHdfSensorTest",
       "usb:HatsHdfUsbTest",
       "vibrator:HatsHdfVibratorTest",

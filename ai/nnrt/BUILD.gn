@@ -12,14 +12,16 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
-import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
+import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
 group("HatsHdfNnrtTest") {
   testonly = true
   if (device_name == "rk3568") {
     if (is_standard_system) {
-      deps = [ "hdi:hdi" ]
+      if (xts_hats_nnrt) {
+        deps = [ "hdi:hdi" ]
+      }
     }
   }
 }

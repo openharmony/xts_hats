@@ -13,4 +13,5 @@
 import("//build/ohos.gni")
 declare_args() {
   xts_hats_rich = false
+  xts_hats_nnrt = false
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,6 +18,8 @@
 #include "if_system_ability_manager.h"
 #include "system_ability_definition.h"
 #include "usbd_auto_function_test.h"
+#include "usbd_function.h"
+#include "usbd_port.h"
 #include "v1_0/iusb_interface.h"
 #include "v1_0/usb_types.h"
 
@@ -52,7 +54,7 @@ void UsbdAutoFunctionTest::TearDown(void) {}
  */
 HWTEST_F(UsbdAutoFunctionTest, SUB_USB_HDI_1250, Function | MediumTest | Level1)
 {
-    int32_t funcs = 0;
+    int32_t funcs = USB_FUNCTION_NONE;
     auto ret = g_usbInterface->GetCurrentFunctions(funcs);
     HDF_LOGI("UsbdAutoFunctionTest::SUB_USB_HDI_1250 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
@@ -67,10 +69,10 @@ HWTEST_F(UsbdAutoFunctionTest, SUB_USB_HDI_1250, Function | MediumTest | Level1)
  */
 HWTEST_F(UsbdAutoFunctionTest, SUB_USB_HDI_1700, Function | MediumTest | Level1)
 {
-    int32_t portId = 0;
-    int32_t powerRole = 0;
-    int32_t dataRole = 0;
-    int32_t mode = 0;
+    int32_t portId = DEFAULT_PORT_ID;
+    int32_t powerRole = POWER_ROLE_NONE;
+    int32_t dataRole = DATA_ROLE_NONE;
+    int32_t mode = PORT_MODE_NONE;
     auto ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
     HDF_LOGI("UsbdAutoFunctionTest::SUB_USB_HDI_1700 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);

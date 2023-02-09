@@ -14,7 +14,6 @@
 import("//build/ohos_var.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//drivers/peripheral/audio/audio.gni")
-import("//test/xts/hats/hdf/audio/audio.gni")
 import("//test/xts/tools/build/suite.gni")
 
 ###########################systemtest##############################
@@ -64,7 +63,7 @@ ohos_moduletest_suite("HatsHdfAudioRenderControlTest") {
   if (enable_audio_adm_service) {
     defines += [ "AUDIO_ADM_SERVICE" ]
   }
-  if (enable_audio_product_rk) {
+  if ("${product_name}" == "rk3568") {
     defines += [ "PRODUCT_RK3568" ]
   }
   subsystem_name = "hdf"

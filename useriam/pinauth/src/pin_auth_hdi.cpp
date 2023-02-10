@@ -23,7 +23,7 @@ using namespace OHOS::HDI::PinAuth::V1_0;
 
 static ExecutorImpl g_executorImpl(make_shared<OHOS::UserIam::PinAuth::PinAuth>());
 static OHOS::Parcel parcel;
-int32_t Expectedvalue = NULL;
+int32_t Expectedvalue = 0;
 
 void UserIamPinAuthTest::SetUpTestCase()
 {

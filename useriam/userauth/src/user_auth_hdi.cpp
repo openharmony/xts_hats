@@ -23,7 +23,7 @@ using namespace OHOS::HDI::UserAuth::V1_0;
 
 static const uint32_t MAX_FUZZ_STRUCT_LEN = 20;
 static UserAuthInterfaceService g_service;
-int32_t Expectedvalue = NULL;
+int32_t Expectedvalue = 0;
 static OHOS::Parcel parcel;
 
 void UserIamUserAuthTest::SetUpTestCase()

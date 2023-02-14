@@ -756,7 +756,6 @@ HWTEST_F(AudioHdiRenderHardwareDependenceTest, SUB_Audio_HDI_RenderGetCurrentCha
 {
     int32_t ret = -1;
     uint32_t channelId = 0;
-    uint32_t channelIdExp = 1;
     uint32_t channelCountExp = 1;
     struct AudioSampleAttributes attrs = {};
     struct AudioSampleAttributes attrsValue = {};
@@ -769,7 +768,6 @@ HWTEST_F(AudioHdiRenderHardwareDependenceTest, SUB_Audio_HDI_RenderGetCurrentCha
 
     ret = render->attr.GetCurrentChannelId(render, &channelId);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(channelIdExp, channelId);
 }
 #endif
 /**

@@ -344,12 +344,12 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1380, Function | MediumTest | Level1)
  * @tc.name: SUB_USB_HDI_1390
  * @tc.desc: Test functions to SetPortRole
  * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
- * @tc.desc: Negative test: parameters exception, portId && powerRole error
+ * @tc.desc: Negative test: parameters exception, powerRole error
  * @tc.type: FUNC
  */
 HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1390, Function | MediumTest | Level1)
 {
-    auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, USB_POWER_ROLE_INVALID, USB_DATA_ROLE_INVALID);
+    auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, USB_POWER_ROLE_INVALID, DATA_ROLE_HOST);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1390 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }

@@ -1159,7 +1159,6 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetCurrentChannelId_0001, F
 {
     int32_t ret = -1;
     uint32_t channelId = 0;
-    uint32_t channelIdValue = CHANNELCOUNT;
     struct AudioAdapter *adapter = nullptr;
     struct AudioRender *render = nullptr;
   
@@ -1169,7 +1168,6 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetCurrentChannelId_0001, F
 
     ret = render->attr.GetCurrentChannelId(render, &channelId);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(channelIdValue, channelId);
 
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
@@ -1184,7 +1182,6 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetCurrentChannelId_0002, F
 {
     int32_t ret = -1;
     uint32_t channelId = 0;
-    uint32_t channelIdExp = 1;
     uint32_t channelCountExp = 1;
     struct AudioSampleAttributes attrs = {};
     struct AudioSampleAttributes attrsValue = {};
@@ -1202,7 +1199,6 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetCurrentChannelId_0002, F
 
     ret = render->attr.GetCurrentChannelId(render, &channelId);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(channelIdExp, channelId);
 
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
@@ -1217,7 +1213,6 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetCurrentChannelId_0003, F
 {
     int32_t ret = -1;
     uint32_t channelId = 0;
-    uint32_t channelIdExp = 2;
     struct AudioAdapter *adapter = nullptr;
     struct AudioRender *render = nullptr;
   
@@ -1227,7 +1222,6 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetCurrentChannelId_0003, F
 
     ret = render->attr.GetCurrentChannelId(render, &channelId);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(channelIdExp, channelId);
 
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);

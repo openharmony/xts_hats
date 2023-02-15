@@ -23,21 +23,21 @@
 #include <unistd.h>
 
 #include <fstream>
-#include "v1_1/battery_interface_proxy.h"
-#include "v1_1/ibattery_callback.h"
-#include "v1_1/types.h"
+#include "v1_2/battery_interface_proxy.h"
+#include "v1_2/ibattery_callback.h"
+#include "v1_2/types.h"
 
 using namespace OHOS::HDI::Battery;
-using namespace OHOS::HDI::Battery::V1_1;
+using namespace OHOS::HDI::Battery::V1_2;
 using namespace testing::ext;
 using namespace OHOS;
 
 namespace {
-class BatteryCallback : public HDI::Battery::V1_1::IBatteryCallback {
+class BatteryCallback : public HDI::Battery::V1_2::IBatteryCallback {
 public:
     BatteryCallback() {};
     ~BatteryCallback() override {};
-    int32_t Update(const HDI::Battery::V1_1::BatteryInfo& event) override
+    int32_t Update(const HDI::Battery::V1_2::BatteryInfo& event) override
     {
         (void)event;
         return 0;
@@ -185,7 +185,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest007, TestSize.Level1)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest008, TestSize.Level1)
 {
     printf("HdfBatteryHdiTest007: start.");
-    OHOS::HDI::Battery::V1_1::BatteryHealthState healthState = OHOS::HDI::Battery::V1_1::BatteryHealthState(0);
+    OHOS::HDI::Battery::V1_2::BatteryHealthState healthState = OHOS::HDI::Battery::V1_2::BatteryHealthState(0);
     g_batteryInterface->GetHealthState(healthState);
     EXPECT_TRUE(healthState >= 0 && healthState <= 6);
 
@@ -200,10 +200,10 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest008, TestSize.Level1)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest009, TestSize.Level1)
 {
     printf("HdfBatteryHdiTest009: start.");
-    OHOS::HDI::Battery::V1_1::BatteryPluggedType pluggedType = OHOS::HDI::Battery::V1_1::BatteryPluggedType(0);
+    OHOS::HDI::Battery::V1_2::BatteryPluggedType pluggedType = OHOS::HDI::Battery::V1_2::BatteryPluggedType(0);
     g_batteryInterface->GetPluggedType(pluggedType);
-    EXPECT_TRUE(pluggedType >= OHOS::HDI::Battery::V1_1::BatteryPluggedType::PLUGGED_TYPE_NONE &&
-        pluggedType <= OHOS::HDI::Battery::V1_1::BatteryPluggedType::PLUGGED_TYPE_BUTT);
+    EXPECT_TRUE(pluggedType >= OHOS::HDI::Battery::V1_2::BatteryPluggedType::PLUGGED_TYPE_NONE &&
+        pluggedType <= OHOS::HDI::Battery::V1_2::BatteryPluggedType::PLUGGED_TYPE_BUTT);
 
     printf("HdfBatteryHdiTest009: return.");
 }
@@ -216,7 +216,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest009, TestSize.Level1)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest010, TestSize.Level1)
 {
     printf("HdfBatteryHdiTest010: start.");
-    OHOS::HDI::Battery::V1_1::BatteryChargeState chargeState = OHOS::HDI::Battery::V1_1::BatteryChargeState(0);
+    OHOS::HDI::Battery::V1_2::BatteryChargeState chargeState = OHOS::HDI::Battery::V1_2::BatteryChargeState(0);
     g_batteryInterface->GetChargeState(chargeState);
     EXPECT_TRUE(chargeState >= 0 && chargeState <= 4);
 
@@ -319,7 +319,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest016, TestSize.Level1)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest017, TestSize.Level1)
 {
     printf("HdfBatteryHdiTest017: start.");
-    OHOS::HDI::Battery::V1_1::BatteryInfo event = {
+    OHOS::HDI::Battery::V1_2::BatteryInfo event = {
         .capacity = -1,
     };
     g_batteryInterface->GetBatteryInfo(event);
@@ -330,10 +330,45 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest017, TestSize.Level1)
 
 /**
  * @tc.name: HdfBatteryHdiTest018
- * @tc.desc: Test limit charging current
+ * @tc.desc: GetChargeType
  * @tc.type: FUNC
  */
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest018, TestSize.Level1)
+{
+    printf("HdfBatteryHdiTest018: start.");
+    OHOS::HDI::Battery::V1_2::ChargeType chargeType = OHOS::HDI::Battery::V1_2::ChargeType(0);
+    g_batteryInterface->GetChargeType(chargeType);
+    EXPECT_TRUE(chargeType >= OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_NONE &&
+        chargeType <= OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRELESS_SUPER_QUICK);
+
+    printf("HdfBatteryHdiTest018: return.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest019
+ * @tc.desc: Judgment ChargeType enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest019, TestSize.Level1)
+{
+    printf("HdfBatteryHdiTest019: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_NONE == 0);
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRED_NORMAL == 1);
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRED_QUICK == 2);
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRED_SUPER_QUICK == 3);
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRELESS_NORMAL == 4);
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRELESS_QUICK == 5);
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRELESS_SUPER_QUICK == 6);
+
+    printf("HdfBatteryHdiTest019: return.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest020
+ * @tc.desc: Test limit charging current
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest020, TestSize.Level1)
 {
     ChargingLimit scLimit;
     scLimit.type = TYPE_CURRENT;
@@ -364,11 +399,11 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest018, TestSize.Level1)
 }
 
 /**
- * @tc.name: HdfBatteryHdiTest019
+ * @tc.name: HdfBatteryHdiTest021
  * @tc.desc: Test limit charging voltage
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest019, TestSize.Level1)
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest021, TestSize.Level1)
 {
     ChargingLimit scLimit;
     scLimit.type = TYPE_VOLTAGE;

@@ -53,6 +53,7 @@
 #include "if_system_ability_manager.h"
 #include "iservice_registry.h"
 #include "v1_0/camera_host_proxy.h"
+#include "iconsumer_surface.h"
 #endif
 
 using namespace OHOS::HDI::Camera::V1_0;

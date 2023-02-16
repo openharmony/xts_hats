@@ -54,7 +54,7 @@ void StreamCustomer::CamFrame(const std::function<void(void*, uint32_t)> callbac
 
 OHOS::sptr<OHOS::IBufferProducer> StreamCustomer::CreateProducer()
 {
-    consumer_ = OHOS::Surface::CreateSurfaceAsConsumer();
+    consumer_ = OHOS::IConsumerSurface::Create();
     if (consumer_ == nullptr) {
         return nullptr;
     }

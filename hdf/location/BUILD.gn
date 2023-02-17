@@ -19,7 +19,7 @@ import("//test/xts/tools/build/suite.gni")
 group("HatsHdfLocationTest") {
   testonly = true
 
-  if (device_name == "rk3568") {
+  if (device_name == "rk3568" || device_name == "rk3588") {
   } else {
     if (is_standard_system) {
       deps = [

@@ -19,14 +19,6 @@ ohos_moduletest_suite("HatsPowermgrThermalTest") {
   module_out_path = "powermgr/thermal"
 
   sources = [ "./common/hdi_thermal_test.cpp" ]
-  cflags = [
-    "-Wall",
-    "-Wextra",
-    "-Werror",
-    "-fsigned-char",
-    "-fno-common",
-    "-fno-strict-aliasing",
-  ]
 
   deps = [ "//third_party/googletest:gtest_main" ]
 

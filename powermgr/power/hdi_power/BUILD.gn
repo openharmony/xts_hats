@@ -19,14 +19,6 @@ ohos_moduletest_suite("HatsPowermgrPowerTest") {
   module_out_path = "powermgr/power"
 
   sources = [ "./common/hdi_power_test.cpp" ]
-  cflags = [
-    "-Wall",
-    "-Wextra",
-    "-Werror",
-    "-fsigned-char",
-    "-fno-common",
-    "-fno-strict-aliasing",
-  ]
 
   deps = [
     "//drivers/interface/power/v1_0:libpower_stub_1.0",

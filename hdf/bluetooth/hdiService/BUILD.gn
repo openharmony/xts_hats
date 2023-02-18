@@ -18,8 +18,6 @@ import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hdf/bluetooth"
 
-###########################palTest###########################
-
 ohos_moduletest_suite("HatsBluetoothHdiTest") {
   module_out_path = module_output_path
   sources = [
@@ -32,12 +30,7 @@ ohos_moduletest_suite("HatsBluetoothHdiTest") {
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
   ]
-
-  include_dirs = [
-    "include",
-    "//drivers/peripheral/bluetooth/hci/hdi_service",
-    "//drivers/peripheral/bluetooth/hci/hdi_service/implement",
-  ]
+  configs = [ ":hdf_bluetooth" ]
 
   if (is_standard_system) {
     external_deps = [
@@ -58,5 +51,10 @@ ohos_moduletest_suite("HatsBluetoothHdiTest") {
   part_name = "drivers_peripheral_bluetooth"
 }
 
-###########################end###########################
-
+config("hdf_bluetooth") {
+  include_dirs = [
+    "include",
+    "//drivers/peripheral/bluetooth/hci/hdi_service",
+    "//drivers/peripheral/bluetooth/hci/hdi_service/implement",
+  ]
+}

@@ -21,25 +21,10 @@ module_output_path = "hats/codec"
 
 ohos_moduletest_suite("HatsHdfOmxCodecTest") {
   module_out_path = module_output_path
-  include_dirs = [
-    "//drivers/hdf_core/adapter/uhdf2/include/hdi",
-    "//drivers/peripheral/codec/interfaces/include",
-    "//drivers/peripheral/codec/hal/include",
-    "//third_party/openmax/api/1.1.2",
-    "//drivers/peripheral/display/hdi_service/gralloc/include",
-  ]
+  configs = [ ":hdf_codec_omx" ]
   sources = [
     "codec_hdi_manger_test.cpp",
     "codec_hdi_omx_test.cpp",
-  ]
-
-  cflags = [
-    "-Wall",
-    "-Wextra",
-    "-Werror",
-    "-fsigned-char",
-    "-fno-common",
-    "-fno-strict-aliasing",
   ]
 
   deps = [
@@ -62,14 +47,31 @@ ohos_moduletest_suite("HatsHdfOmxCodecTest") {
     external_deps = [ "hilog:libhilog" ]
   }
 
-  if (device_name == "rk3568") {
-    cflags += [ "-DSUPPORT_OMX" ]
-  }
-
   defines = []
   if (xts_hats_rich) {
     defines += [ "SUPPORT_OMX" ]
   }
   subsystem_name = "hdf"
   part_name = "drivers_peripheral_codec"
+}
+
+config("hdf_codec_omx") {
+  include_dirs = [
+    "//drivers/hdf_core/adapter/uhdf2/include/hdi",
+    "//drivers/peripheral/codec/interfaces/include",
+    "//drivers/peripheral/codec/hal/include",
+    "//third_party/openmax/api/1.1.2",
+    "//drivers/peripheral/display/hdi_service/gralloc/include",
+  ]
+  cflags = [
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fsigned-char",
+    "-fno-common",
+    "-fno-strict-aliasing",
+  ]
+  if (device_name == "rk3568") {
+    cflags += [ "-DSUPPORT_OMX" ]
+  }
 }

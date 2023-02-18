@@ -19,14 +19,6 @@ ohos_moduletest_suite("HatsPowermgrBatteryTest") {
   module_out_path = "powermgr/battery"
 
   sources = [ "./common/hdi_battery_test.cpp" ]
-  cflags = [
-    "-Wall",
-    "-Wextra",
-    "-Werror",
-    "-fsigned-char",
-    "-fno-common",
-    "-fno-strict-aliasing",
-  ]
 
   deps = [ "//third_party/googletest:gtest_main" ]
 

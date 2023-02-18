@@ -68,11 +68,11 @@ int32_t AgnssCallbackImpl::RequestSubscriberSetId(SubscriberSetIdType type)
 {
     printf("AGnssEventCallback::RequestSubscriberSetId. type:%d", static_cast<int>(type));
     int slotId = Telephony::CellularDataClient::GetInstance().GetDefaultCellularDataSlotId();
-    std::string imsi =
-        Str16ToStr8(DelayedRefSingleton<Telephony::CoreServiceClient>::GetInstance().GetIMSI(slotId));
+    std::u16string imsi;
+    DelayedRefSingleton<Telephony::CoreServiceClient>::GetInstance().GetIMSI(slotId, imsi);
     SubscriberSetId setId;
     setId.type = HDI::Location::Agnss::V1_0::SETID_TYPE_IMSI;
-    setId.id = imsi;
+    setId.id = Str16ToStr8(imsi);
     if (g_iagnssHci == nullptr) {
         printf("g_iagnssHci is null!");
         return HDF_FAILURE;
@@ -88,9 +88,8 @@ int32_t AgnssCallbackImpl::RequestAgnssRefInfo()
         return HDF_FAILURE;
     }
     int slotId = Telephony::CellularDataClient::GetInstance().GetDefaultCellularDataSlotId();
-    std::vector<sptr<CellInformation>> cellInformations =
-        DelayedRefSingleton<Telephony::CoreServiceClient>::GetInstance().GetCellInfoList(slotId);
-
+    std::vector<sptr<CellInformation>> cellInformations;
+    DelayedRefSingleton<Telephony::CoreServiceClient>::GetInstance().GetCellInfoList(slotId, cellInformations);
     printf("RequestAgnssRefInfo,cellInformations.");
     for (sptr<CellInformation> infoItem : cellInformations) {
         if (!infoItem->GetIsCamped()) {

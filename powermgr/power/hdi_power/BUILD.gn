@@ -21,7 +21,7 @@ ohos_moduletest_suite("HatsPowermgrPowerTest") {
   sources = [ "./common/hdi_power_test.cpp" ]
 
   deps = [
-    "//drivers/interface/power/v1_0:libpower_stub_1.0",
+    "//drivers/interface/power/v1_1:libpower_stub_1.1",
     "//third_party/googletest:gtest_main",
   ]
 

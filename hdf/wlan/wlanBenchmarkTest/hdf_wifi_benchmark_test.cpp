@@ -764,9 +764,9 @@ BENCHMARK_F(wlanBenchmarkTest, SetProjectionScreenParam001)(
     int32_t ret;
     bool flag;
     struct IWiFiAp *apFeature = nullptr;
-    ProjScrnCmdParam *param;
+    ProjectionScreenParam *param;
 
-    param = (ProjScrnCmdParam *)OsalMemCalloc(sizeof(ProjScrnCmdParam) + TEST_PARAM_BUF_SIZE);
+    param = (ProjectionScreenParam *)OsalMemCalloc(sizeof(ProjectionScreenParam) + TEST_PARAM_BUF_SIZE);
     EXPECT_NE(nullptr, param);
     param->cmdId = TEST_CMD;
     param->bufLen = 1;

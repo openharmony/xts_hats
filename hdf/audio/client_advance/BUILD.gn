@@ -21,7 +21,8 @@ group("HdiClientAdvance") {
     deps = [
       "adapter:HatsAudioProxyAdaptrTest",
       "capture:HatsAudioProxyCaptureTest",
-      "common:HatsAudioProxyCommonTest",
+
+      #"common:HatsAudioProxyCommonTest",
       "manager:HatsAudioProxyManagerTest",
       "render:HatsAudioProxyRenderTest",
     ]

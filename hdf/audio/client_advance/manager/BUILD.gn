@@ -25,17 +25,8 @@ ohos_moduletest_suite("HatsAudioProxyManagerTest") {
     "../common/src/audio_proxy_common_fun_test.cpp",
     "src/audio_proxy_manager_test.cpp",
   ]
+  configs = [ ":audio_hdi_client_advancae_manager" ]
 
-  include_dirs = [
-    "//test/xts/hats/hdf/audio/client_advance/common/include",
-    "//drivers/peripheral/audio/interfaces/include",
-    "//drivers/peripheral/audio/hal/hdi_passthrough/include",
-    "//drivers/peripheral/audio/hal/hdi_binder/proxy/include",
-    "//drivers/peripheral/audio/hal/hdi_binder/server/include",
-    "//drivers/hdf_core/adapter/uhdf2/include/hdi",
-    "//drivers/hdf_core/adapter/uhdf2/shared/include",
-    "//third_party/googletest/googletest/include/gtest",
-  ]
   cflags = [
     "-Wall",
     "-Wextra",
@@ -57,4 +48,17 @@ ohos_moduletest_suite("HatsAudioProxyManagerTest") {
   ]
   subsystem_name = "hdf"
   part_name = "drivers_peripheral_audio"
+}
+
+config("audio_hdi_client_advancae_manager") {
+  include_dirs = [
+    "//test/xts/hats/hdf/audio/client_advance/common/include",
+    "//drivers/peripheral/audio/interfaces/include",
+    "//drivers/peripheral/audio/hal/hdi_passthrough/include",
+    "//drivers/peripheral/audio/hal/hdi_binder/proxy/include",
+    "//drivers/peripheral/audio/hal/hdi_binder/server/include",
+    "//drivers/hdf_core/adapter/uhdf2/include/hdi",
+    "//drivers/hdf_core/adapter/uhdf2/shared/include",
+    "//third_party/googletest/googletest/include/gtest",
+  ]
 }

@@ -18,22 +18,10 @@ import("//test/xts/tools/build/suite.gni")
 module_output_path = "hdf/location/agnss"
 ohos_moduletest_suite("HatsHdfLocationagnssTest") {
   module_out_path = module_output_path
-  include_dirs = [
-    "include",
-    "//test/xts/hats/hdf/location/gnss",
-    "//drivers/peripheral/location/agnss/hdi_service",
-    "//drivers/peripheral/location/gnss/hdi_service",
-  ]
+  configs = [ ":hdf_agnss" ]
+
   sources = [ "agnss_hdi_test.cpp" ]
 
-  cflags = [
-    "-Wall",
-    "-Wextra",
-    "-Werror",
-    "-fsigned-char",
-    "-fno-common",
-    "-fno-strict-aliasing",
-  ]
   deps = [
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
@@ -63,4 +51,21 @@ ohos_moduletest_suite("HatsHdfLocationagnssTest") {
 
   subsystem_name = "hdf"
   part_name = "drivers_peripheral_location_agnss"
+}
+
+config("hdf_agnss") {
+  include_dirs = [
+    "include",
+    "//test/xts/hats/hdf/location/gnss",
+    "//drivers/peripheral/location/agnss/hdi_service",
+    "//drivers/peripheral/location/gnss/hdi_service",
+  ]
+  cflags = [
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fsigned-char",
+    "-fno-common",
+    "-fno-strict-aliasing",
+  ]
 }

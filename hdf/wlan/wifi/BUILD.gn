@@ -18,11 +18,9 @@ import("//test/xts/tools/build/suite.gni")
 module_output_path = "hats/wlan"
 ohos_moduletest_suite("HatsHdfWifiHdiTest") {
   module_out_path = module_output_path
-  include_dirs = [
-    "//drivers/peripheral/wlan/client/include",
-    "//drivers/peripheral/wlan/hal/include",
-    "//drivers/peripheral/wlan/interfaces/include",
-  ]
+
+  configs = [ ":hdf_wlan_hdicommon" ]
+
   sources = [ "./hal/wifi_hal_test.cpp" ]
   resource_config_file =
       "//drivers/hdf_core/adapter/uhdf2/test/resource/wlan/ohos_test.xml"
@@ -53,14 +51,19 @@ ohos_moduletest_suite("HatsHdfWifiHdiTest") {
   part_name = "drivers_peripheral_wlan"
 }
 
-module_output_path = "hats/wlan"
-ohos_moduletest_suite("HatsHdfWifiHdistartandstopTest") {
-  module_out_path = module_output_path
+config("hdf_wlan_hdicommon") {
   include_dirs = [
     "//drivers/peripheral/wlan/client/include",
     "//drivers/peripheral/wlan/hal/include",
     "//drivers/peripheral/wlan/interfaces/include",
   ]
+}
+
+module_output_path = "hats/wlan"
+ohos_moduletest_suite("HatsHdfWifiHdistartandstopTest") {
+  module_out_path = module_output_path
+  configs = [ ":hdf_wlan_hdicommonsecond" ]
+
   sources = [ "./hal/wifi_hal_startandstop.cpp" ]
   resource_config_file =
       "//drivers/hdf_core/adapter/uhdf2/test/resource/wlan/ohos_test.xml"
@@ -91,14 +94,19 @@ ohos_moduletest_suite("HatsHdfWifiHdistartandstopTest") {
   part_name = "drivers_peripheral_wlan"
 }
 
-module_output_path = "hats/wlan"
-ohos_moduletest_suite("HatsHdfWificlientTest") {
-  module_out_path = module_output_path
+config("hdf_wlan_hdicommonsecond") {
   include_dirs = [
     "//drivers/peripheral/wlan/client/include",
     "//drivers/peripheral/wlan/hal/include",
     "//drivers/peripheral/wlan/interfaces/include",
   ]
+}
+
+module_output_path = "hats/wlan"
+ohos_moduletest_suite("HatsHdfWificlientTest") {
+  module_out_path = module_output_path
+  configs = [ ":hdf_wlan_hdicommonthird" ]
+
   sources = [ "./client/hdf_client_test.cpp" ]
   resource_config_file =
       "//drivers/hdf_core/adapter/uhdf2/test/resource/wlan/ohos_test.xml"
@@ -129,14 +137,18 @@ ohos_moduletest_suite("HatsHdfWificlientTest") {
   part_name = "drivers_peripheral_wlan"
 }
 
-module_output_path = "hats/wlan"
-ohos_moduletest_suite("HatsHdfWificommonTest") {
-  module_out_path = module_output_path
+config("hdf_wlan_hdicommonthird") {
   include_dirs = [
     "//drivers/peripheral/wlan/client/include",
     "//drivers/peripheral/wlan/hal/include",
     "//drivers/peripheral/wlan/interfaces/include",
   ]
+}
+module_output_path = "hats/wlan"
+ohos_moduletest_suite("HatsHdfWificommonTest") {
+  module_out_path = module_output_path
+
+  configs = [ ":hdf_wlan_hdicommonfour" ]
   sources = [
     "./common/hdf_flow_control_test.cpp",
     "./common/hdf_message_test.cpp",
@@ -171,4 +183,12 @@ ohos_moduletest_suite("HatsHdfWificommonTest") {
 
   subsystem_name = "hdf"
   part_name = "drivers_peripheral_wlan"
+}
+
+config("hdf_wlan_hdicommonfour") {
+  include_dirs = [
+    "//drivers/peripheral/wlan/client/include",
+    "//drivers/peripheral/wlan/hal/include",
+    "//drivers/peripheral/wlan/interfaces/include",
+  ]
 }

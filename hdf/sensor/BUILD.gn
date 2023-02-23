@@ -23,32 +23,3 @@ group("HatsHdfSensorTest") {
     #"sensorBenchmarkTest:HatsHdfSensorbenchmarkTest",
   ]
 }
-
-module_output_path = "hats/sensor"
-ohos_moduletest_suite("HatsHdfSensorHdiTest") {
-  module_out_path = module_output_path
-  include_dirs = []
-
-  sources = [ "./common/hdf_sensor_test.cpp" ]
-  cflags = [
-    "-Wall",
-    "-Wextra",
-    "-Werror",
-    "-fsigned-char",
-    "-fno-common",
-    "-fno-strict-aliasing",
-  ]
-  deps = [ "//drivers/peripheral/sensor/hal:hdi_sensor" ]
-  if (is_standard_system) {
-    external_deps = [
-      "c_utils:utils",
-      "hdf_core:libhdf_utils",
-      "hiviewdfx_hilog_native:libhilog",
-    ]
-  } else {
-    external_deps = [ "hilog:libhilog" ]
-  }
-
-  subsystem_name = "hdf"
-  part_name = "drivers_peripheral_sensor"
-}

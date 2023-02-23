@@ -21,13 +21,7 @@ module_output_path = "hats/input"
 
 ohos_moduletest_suite("HatsHdfInputPassthroughTest") {
   module_out_path = module_output_path
-
-  include_dirs = [
-    "../../../../../../drivers/peripheral/input/interfaces/include",
-    "../../../../../../drivers/peripheral/input/interfaces",
-    "//third_party/FreeBSD/sys/dev/evdev",
-    "../../../../../../drivers/peripheral/input/hdi_service",
-  ]
+  configs = [ ":hdf_input_through" ]
 
   sources = [
     "hdf_input_hdi_test.cpp",
@@ -54,4 +48,13 @@ ohos_moduletest_suite("HatsHdfInputPassthroughTest") {
     external_deps = [ "hilog:libhilog" ]
   }
   external_deps += [ "ipc:ipc_single" ]
+}
+
+config("hdf_input_through") {
+  include_dirs = [
+    "../../../../../../drivers/peripheral/input/interfaces/include",
+    "../../../../../../drivers/peripheral/input/interfaces",
+    "//third_party/FreeBSD/sys/dev/evdev",
+    "../../../../../../drivers/peripheral/input/hdi_service",
+  ]
 }

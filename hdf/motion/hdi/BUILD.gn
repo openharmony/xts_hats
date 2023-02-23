@@ -21,20 +21,12 @@ module_output_path = "hats/motion"
 ohos_moduletest_suite("HatsHdfMotionTest") {
   module_out_path = module_output_path
 
-  include_dirs = []
-
   sources = [
     "hdf_motion_hdi_test.cpp",
     "motion_callback_service.cpp",
   ]
-  cflags = [
-    "-Wall",
-    "-Wextra",
-    "-Werror",
-    "-fsigned-char",
-    "-fno-common",
-    "-fno-strict-aliasing",
-  ]
+
+  configs = [ ":hdf_motion" ]
 
   if (is_standard_system) {
     external_deps = [
@@ -49,4 +41,14 @@ ohos_moduletest_suite("HatsHdfMotionTest") {
 
   subsystem_name = "hdf"
   part_name = "drivers_peripheral_motion"
+}
+config("hdf_motion") {
+  cflags = [
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fsigned-char",
+    "-fno-common",
+    "-fno-strict-aliasing",
+  ]
 }

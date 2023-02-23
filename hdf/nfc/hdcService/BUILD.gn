@@ -18,8 +18,6 @@ import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hdf/nfc"
 
-###########################palTest###########################
-
 ohos_moduletest_suite("HatsHdfNfcHdiTest") {
   module_out_path = module_output_path
   sources = [ "nfc_services_test.cpp" ]
@@ -31,19 +29,7 @@ ohos_moduletest_suite("HatsHdfNfcHdiTest") {
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
   ]
-
-  include_dirs = [
-    "include",
-    "//drivers/peripheral/nfc/hdi_service",
-    "//drivers/peripheral/nfc/vendor_adaptor",
-    "//third_party/nfc_hdiimpl/SN100x/halimpl/inc",
-    "//third_party/libnfc-nci/SN100x/src/include/",
-    "//third_party/libnfc-nci/SN100x/utils/include/",
-    "//third_party/nfc_hdiimpl/SN100x/halimpl/src/include/",
-    "//third_party/libnfc-nci/SN100x/src/gki/ulinux/",
-    "//third_party/libnfc-nci/SN100x/src/gki/common/",
-    "//foundation/communication/nfc/services/src/utils/",
-  ]
+  configs = [ ":hdf_nfc" ]
 
   if (is_standard_system) {
     external_deps = [
@@ -64,5 +50,17 @@ ohos_moduletest_suite("HatsHdfNfcHdiTest") {
   part_name = "drivers_peripheral_nfc"
 }
 
-###########################end###########################
-
+config("hdf_nfc") {
+  include_dirs = [
+    "include",
+    "//drivers/peripheral/nfc/hdi_service",
+    "//drivers/peripheral/nfc/vendor_adaptor",
+    "//third_party/nfc_hdiimpl/SN100x/halimpl/inc",
+    "//third_party/libnfc-nci/SN100x/src/include/",
+    "//third_party/libnfc-nci/SN100x/utils/include/",
+    "//third_party/nfc_hdiimpl/SN100x/halimpl/src/include/",
+    "//third_party/libnfc-nci/SN100x/src/gki/ulinux/",
+    "//third_party/libnfc-nci/SN100x/src/gki/common/",
+    "//foundation/communication/nfc/services/src/utils/",
+  ]
+}

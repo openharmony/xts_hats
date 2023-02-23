@@ -2642,9 +2642,9 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0001, Function | Med
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
-    ProjScrnCmdParam *param;
+    ProjectionScreenParam *param;
 
-    param = (ProjScrnCmdParam *)OsalMemCalloc(sizeof(ProjScrnCmdParam) + TEST_PARAM_BUF_SIZE);
+    param = (ProjectionScreenParam *)OsalMemCalloc(sizeof(ProjectionScreenParam) + TEST_PARAM_BUF_SIZE);
     EXPECT_NE(nullptr, param);
     param->cmdId = TEST_CMD;
     param->bufLen = 1;
@@ -2667,9 +2667,9 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0002, Function | Med
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
-    ProjScrnCmdParam *param;
+    ProjectionScreenParam *param;
 
-    param = (ProjScrnCmdParam *)OsalMemCalloc(sizeof(ProjScrnCmdParam) + TEST_PARAM_BUF_SIZE);
+    param = (ProjectionScreenParam *)OsalMemCalloc(sizeof(ProjectionScreenParam) + TEST_PARAM_BUF_SIZE);
     EXPECT_NE(nullptr, param);
     param->cmdId = TEST_CMD;
     param->bufLen = 1;
@@ -2692,9 +2692,9 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0003, Function | Med
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
-    ProjScrnCmdParam *param;
+    ProjectionScreenParam *param;
 
-    param = (ProjScrnCmdParam *)OsalMemCalloc(sizeof(ProjScrnCmdParam) + TEST_PARAM_BUF_SIZE);
+    param = (ProjectionScreenParam *)OsalMemCalloc(sizeof(ProjectionScreenParam) + TEST_PARAM_BUF_SIZE);
     EXPECT_NE(nullptr, param);
     param->cmdId = TEST_CMD;
     param->bufLen = 1;
@@ -2717,9 +2717,9 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0004, Function | Med
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
-    ProjScrnCmdParam *param;
+    ProjectionScreenParam *param;
 
-    param = (ProjScrnCmdParam *)OsalMemCalloc(sizeof(ProjScrnCmdParam) + TEST_PARAM_BUF_SIZE);
+    param = (ProjectionScreenParam *)OsalMemCalloc(sizeof(ProjectionScreenParam) + TEST_PARAM_BUF_SIZE);
     EXPECT_NE(nullptr, param);
     param->cmdId = TEST_CMD;
     param->bufLen = 1;
@@ -2744,9 +2744,9 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0005, Function | Med
     int32_t ret;
     bool flag;
     struct IWiFiAp *apFeature = nullptr;
-    ProjScrnCmdParam *param;
+    ProjectionScreenParam *param;
 
-    param = (ProjScrnCmdParam *)OsalMemCalloc(sizeof(ProjScrnCmdParam) + TEST_PARAM_BUF_SIZE);
+    param = (ProjectionScreenParam *)OsalMemCalloc(sizeof(ProjectionScreenParam) + TEST_PARAM_BUF_SIZE);
     EXPECT_NE(nullptr, param);
     param->cmdId = TEST_CMD;
     param->bufLen = 1;
@@ -2774,9 +2774,9 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0006, Function | Med
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
-    ProjScrnCmdParam *param;
+    ProjectionScreenParam *param;
 
-    param = (ProjScrnCmdParam *)OsalMemCalloc(sizeof(ProjScrnCmdParam) + TEST_PARAM_BUF_SIZE);
+    param = (ProjectionScreenParam *)OsalMemCalloc(sizeof(ProjectionScreenParam) + TEST_PARAM_BUF_SIZE);
     EXPECT_NE(nullptr, param);
     param->cmdId = TEST_CMD;
     param->bufLen = 1;
@@ -2799,9 +2799,9 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0007, Function | Med
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
-    ProjScrnCmdParam *param;
+    ProjectionScreenParam *param;
 
-    param = (ProjScrnCmdParam *)OsalMemCalloc(sizeof(ProjScrnCmdParam) + TEST_PARAM_BUF_SIZE);
+    param = (ProjectionScreenParam *)OsalMemCalloc(sizeof(ProjectionScreenParam) + TEST_PARAM_BUF_SIZE);
     EXPECT_NE(nullptr, param);
     param->cmdId = TEST_CMD;
     param->bufLen = 1;
@@ -2824,9 +2824,9 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0008, Function | Med
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
-    ProjScrnCmdParam *param;
+    ProjectionScreenParam *param;
 
-    param = (ProjScrnCmdParam *)OsalMemCalloc(sizeof(ProjScrnCmdParam) + TEST_PARAM_BUF_SIZE);
+    param = (ProjectionScreenParam *)OsalMemCalloc(sizeof(ProjectionScreenParam) + TEST_PARAM_BUF_SIZE);
     EXPECT_NE(nullptr, param);
     param->cmdId = TEST_CMD;
     param->bufLen = 1;
@@ -2849,9 +2849,9 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0009, Function | Med
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
-    ProjScrnCmdParam *param;
+    ProjectionScreenParam *param;
 
-    param = (ProjScrnCmdParam *)OsalMemCalloc(sizeof(ProjScrnCmdParam) + TEST_PARAM_BUF_SIZE);
+    param = (ProjectionScreenParam *)OsalMemCalloc(sizeof(ProjectionScreenParam) + TEST_PARAM_BUF_SIZE);
     EXPECT_NE(nullptr, param);
     param->cmdId = TEST_CMD;
     param->bufLen = 1;
@@ -2875,9 +2875,9 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0010, Function | Med
     int32_t ret;
     bool flag;
     struct IWiFiSta *staFeature = nullptr;
-    ProjScrnCmdParam *param;
+    ProjectionScreenParam *param;
 
-    param = (ProjScrnCmdParam *)OsalMemCalloc(sizeof(ProjScrnCmdParam) + TEST_PARAM_BUF_SIZE);
+    param = (ProjectionScreenParam *)OsalMemCalloc(sizeof(ProjectionScreenParam) + TEST_PARAM_BUF_SIZE);
     EXPECT_NE(nullptr, param);
     param->cmdId = TEST_CMD;
     param->bufLen = 1;

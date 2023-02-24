@@ -230,6 +230,8 @@ int32_t GnssCallbackImpl::ReportGnssWorkingStatus(GnssWorkingStatus status)
 
 int32_t GnssCallbackImpl::ReportNmea(int64_t timestamp, const std::string& nmea, int32_t length)
 {
+    (void)nmea;
+    (void)timestamp;
     if (length >= 0) {
         printf("Report nmea success");
         return HDF_SUCCESS;
@@ -242,6 +244,7 @@ int32_t GnssCallbackImpl::ReportNmea(int64_t timestamp, const std::string& nmea,
 
 int32_t GnssCallbackImpl::ReportGnssCapabilities(GnssCapabilities capabilities)
 {
+    (void)capabilities;
     return HDF_SUCCESS;
 }
 
@@ -263,6 +266,7 @@ int32_t GnssCallbackImpl::ReportSatelliteStatusInfo(const SatelliteStatusInfo& i
 
 int32_t GnssCallbackImpl::RequestGnssReferenceInfo(GnssRefInfoType type)
 {
+    (void)type;
     return HDF_SUCCESS;
 }
 
@@ -273,6 +277,7 @@ int32_t GnssCallbackImpl::RequestPredictGnssData()
 
 int32_t GnssCallbackImpl::ReportCachedLocation(const std::vector<LocationInfo>& gnssLocations)
 {
+    (void)gnssLocations;
     return HDF_SUCCESS;
 }
 

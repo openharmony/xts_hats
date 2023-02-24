@@ -18,21 +18,11 @@ import("//test/xts/tools/build/suite.gni")
 module_output_path = "hdf/location/geofence"
 ohos_moduletest_suite("HatsHdfLocationgeofenceTest") {
   module_out_path = module_output_path
-  include_dirs = [
-    "include",
-    "//drivers/peripheral/location/geofence/hdi_service",
-    "//drivers/peripheral/location/gnss/hdi_service",
-  ]
+
   sources = [ "location_geofence_test.cpp" ]
 
-  cflags = [
-    "-Wall",
-    "-Wextra",
-    "-Werror",
-    "-fsigned-char",
-    "-fno-common",
-    "-fno-strict-aliasing",
-  ]
+  configs = [ ":hdf_geofence" ]
+
   deps = [
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
@@ -60,4 +50,20 @@ ohos_moduletest_suite("HatsHdfLocationgeofenceTest") {
 
   subsystem_name = "hdf"
   part_name = "drivers_peripheral_location_geofence"
+}
+
+config("hdf_geofence") {
+  include_dirs = [
+    "include",
+    "//drivers/peripheral/location/geofence/hdi_service",
+    "//drivers/peripheral/location/gnss/hdi_service",
+  ]
+  cflags = [
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fsigned-char",
+    "-fno-common",
+    "-fno-strict-aliasing",
+  ]
 }

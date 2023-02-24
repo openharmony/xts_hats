@@ -20,10 +20,7 @@ module_output_path = "hats/sensor"
 ohos_moduletest_suite("HatsHdfSensorServiceTest") {
   module_out_path = module_output_path
 
-  include_dirs = [
-    "//drivers/peripheral/sensor/interfaces",
-    "//drivers/peripheral/sensor/interfaces/include",
-  ]
+  configs = [ ":hdf_sensor_hdiservice" ]
 
   sources = [
     "hdf_sensor_hdiService_test.cpp",
@@ -50,4 +47,11 @@ ohos_moduletest_suite("HatsHdfSensorServiceTest") {
     external_deps = [ "hilog:libhilog" ]
   }
   external_deps += [ "ipc:ipc_single" ]
+}
+
+config("hdf_sensor_hdiservice") {
+  include_dirs = [
+    "//drivers/peripheral/sensor/interfaces",
+    "//drivers/peripheral/sensor/interfaces/include",
+  ]
 }

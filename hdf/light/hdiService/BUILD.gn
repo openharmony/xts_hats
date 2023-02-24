@@ -18,9 +18,43 @@ import("//test/xts/tools/build/suite.gni")
 module_output_path = "hats/light"
 ohos_moduletest_suite("HatsHdfLightServiceTest") {
   module_out_path = module_output_path
-  include_dirs = [ "//drivers/peripheral/light/interfaces/include" ]
+  configs = [ ":hdf_light_hdiservice" ]
 
   sources = [ "hdf_light_hdiService_test.cpp" ]
+
+  cflags = [
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fsigned-char",
+    "-fno-common",
+    "-fno-strict-aliasing",
+  ]
+
+  if (is_standard_system) {
+    external_deps = [
+      "c_utils:utils",
+      "drivers_interface_light:liblight_proxy_1.0",
+      "hdf_core:libhdf_utils",
+      "hiviewdfx_hilog_native:libhilog",
+      "ipc:ipc_single",
+    ]
+  } else {
+    external_deps = [ "hilog:libhilog" ]
+  }
+  external_deps += [ "ipc:ipc_single" ]
+}
+config("hdf_light_hdiservice") {
+  include_dirs = [ "//drivers/peripheral/light/interfaces/include" ]
+}
+
+ohos_moduletest_suite("HatsHdfLightCommonTest") {
+  module_out_path = module_output_path
+
+  configs = [ ":hdf_light_common" ]
+
+  sources = [ "hdf_light_hdi_common_test.cpp" ]
+
   cflags = [
     "-Wall",
     "-Wextra",
@@ -44,30 +78,6 @@ ohos_moduletest_suite("HatsHdfLightServiceTest") {
   external_deps += [ "ipc:ipc_single" ]
 }
 
-ohos_moduletest_suite("HatsHdfLightCommonTest") {
-  module_out_path = module_output_path
+config("hdf_light_common") {
   include_dirs = [ "//drivers/peripheral/light/interfaces/include" ]
-
-  sources = [ "hdf_light_hdi_common_test.cpp" ]
-  cflags = [
-    "-Wall",
-    "-Wextra",
-    "-Werror",
-    "-fsigned-char",
-    "-fno-common",
-    "-fno-strict-aliasing",
-  ]
-
-  if (is_standard_system) {
-    external_deps = [
-      "c_utils:utils",
-      "drivers_interface_light:liblight_proxy_1.0",
-      "hdf_core:libhdf_utils",
-      "hiviewdfx_hilog_native:libhilog",
-      "ipc:ipc_single",
-    ]
-  } else {
-    external_deps = [ "hilog:libhilog" ]
-  }
-  external_deps += [ "ipc:ipc_single" ]
 }

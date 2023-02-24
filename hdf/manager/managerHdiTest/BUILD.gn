@@ -28,12 +28,14 @@ ohos_moduletest_suite("HatsHdfManagerHdiTest") {
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
   ]
-
-  include_dirs = [ "$hdf_uhdf_path/host/test/unittest/sample_driver" ]
+  configs = [ ":hdf_manager" ]
 
   external_deps = [
     "c_utils:utils",
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_core",
   ]
+}
+config("hdf_manager") {
+  include_dirs = [ "$hdf_uhdf_path/host/test/unittest/sample_driver" ]
 }

@@ -50,7 +50,7 @@ ohos_moduletest_suite("HatsHdfAudioCaptureHarwareDependenceTest") {
   if (enable_audio_adm_service) {
     defines += [ "AUDIO_ADM_SERVICE" ]
   }
-  if ("${product_name}" == "rk3568") {
+  if ("${product_name}" == "rk3568" || "${product_name}" == "rk3588") {
     defines += [ "PRODUCT_RK3568" ]
   }
   if (defined(drivers_peripheral_audio_alsa_lib) &&

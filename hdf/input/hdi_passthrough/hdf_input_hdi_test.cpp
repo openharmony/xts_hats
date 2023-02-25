@@ -286,6 +286,34 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0070, Function | 
 }
 
 /**
+  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0071
+  * @tc.name: GetInputDevice002
+  * @tc.desc: get input device info test
+  * @tc.type: func
+  * @tc.require:
+  */
+HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0071, Function | MediumTest | Level1)
+{
+    if (g_inputInterfaces == nullptr) {
+        ASSERT_NE(nullptr, g_inputInterfaces);
+        return;
+    }
+    HDF_LOGI("%s: [hdi-input] GetInputDevice002 enter", __func__);
+    struct DeviceInfo dev;
+
+    int32_t ret = g_inputInterfaces->GetInputDevice(INVALID_INDEX, dev);
+    if (ret != INPUT_SUCCESS) {
+        HDF_LOGE("%s: get device failed, ret %d", __func__, ret);
+    }
+    ASSERT_NE(ret, INPUT_SUCCESS);
+
+    HDF_LOGI("%s: devindex = %u, devType = %u", __func__, dev.devIndex, dev.devType);
+    HDF_LOGI("%s: chipInfo = %s, vendorName = %s, chipName = %s",
+        __func__, dev.chipInfo.c_str(), dev.vendorName.c_str(), dev.chipName.c_str());
+    EXPECT_NE(ret, INPUT_SUCCESS);
+}
+
+/**
   * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0080
   * @tc.name: GetInputDeviceList001
   * @tc.desc: get input device list info test
@@ -348,6 +376,33 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0090, Function | 
 }
 
 /**
+  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0091
+  * @tc.name: GetDeviceType002
+  * @tc.desc: get input device type test
+  * @tc.type: func
+  * @tc.require:
+  */
+HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0091, Function | MediumTest | Level1)
+{
+    if (g_inputInterfaces == nullptr) {
+        ASSERT_NE(nullptr, g_inputInterfaces);
+        return;
+    }
+    HDF_LOGI("%s: [hdi-input] GetDeviceType002 enter", __func__);
+    int32_t ret;
+    uint32_t devType = INIT_DEFAULT_VALUE;
+
+    ret = g_inputInterfaces->GetDeviceType(INVALID_INDEX, devType);
+    if (ret != INPUT_SUCCESS) {
+        HDF_LOGE("%s: get device's type failed, ret %d", __func__, ret);
+    }
+    ASSERT_NE(ret, INPUT_SUCCESS);
+
+    HDF_LOGI("%s: device's type is %u", __func__, devType);
+    EXPECT_NE(ret, INPUT_SUCCESS);
+}
+
+/**
   * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0100
   * @tc.name: GetChipInfo001
   * @tc.desc: get input device chip info test
@@ -375,8 +430,35 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0100, Function | 
 }
 
 /**
+  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0101
+  * @tc.name: GetChipInfo002
+  * @tc.desc: get input device chip info test
+  * @tc.type: func
+  * @tc.require:
+  */
+HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0101, Function | MediumTest | Level1)
+{
+    if (g_inputInterfaces == nullptr) {
+        ASSERT_NE(nullptr, g_inputInterfaces);
+        return;
+    }
+    HDF_LOGI("%s: [hdi-input] GetChipInfo002 enter", __func__);
+    int32_t ret;
+    std::string chipInfo;
+
+    ret = g_inputInterfaces->GetChipInfo(INVALID_INDEX, chipInfo);
+    if (ret != INPUT_SUCCESS) {
+        HDF_LOGE("%s: get device's chip info failed, ret %d", __func__, ret);
+    }
+    ASSERT_NE(ret, INPUT_SUCCESS);
+
+    HDF_LOGI("%s: device's chip info is %s", __func__, chipInfo.c_str());
+    EXPECT_NE(ret, INPUT_SUCCESS);
+}
+
+/**
   * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0110
-  * @tc.name: GetInputDevice002
+  * @tc.name: GetInputDevice003
   * @tc.desc: get input device chip info test
   * @tc.type: FUNC
   * @tc.require:
@@ -388,7 +470,7 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0110, Function | 
         return;
     }
 
-    HDF_LOGI("%s: [hdi-input] GetInputDevice002 enter", __func__);
+    HDF_LOGI("%s: [hdi-input] GetInputDevice003 enter", __func__);
     struct DeviceInfo dev;
 
     int32_t ret = g_inputInterfaces->GetInputDevice(TOUCH_INDEX, dev);
@@ -401,6 +483,35 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0110, Function | 
     HDF_LOGI("%s: new chipInfo = %s, vendorName = %s, chipName = %s",
         __func__, dev.chipInfo.c_str(), dev.vendorName.c_str(), dev.chipName.c_str());
     EXPECT_EQ(ret, INPUT_SUCCESS);
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0111
+  * @tc.name: GetInputDevice004
+  * @tc.desc: get input device chip info test
+  * @tc.type: FUNC
+  * @tc.require:
+  */
+HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0111, Function | MediumTest | Level1)
+{
+    if (g_inputInterfaces == nullptr) {
+        ASSERT_NE(nullptr, g_inputInterfaces);
+        return;
+    }
+
+    HDF_LOGI("%s: [hdi-input] GetInputDevice004 enter", __func__);
+    struct DeviceInfo dev;
+
+    int32_t ret = g_inputInterfaces->GetInputDevice(INVALID_INDEX, dev);
+    if (ret != INPUT_SUCCESS) {
+        HDF_LOGE("%s: get device failed, ret %d", __func__, ret);
+    }
+
+    HDF_LOGI("%s: After fill the info, new device's info is:", __func__);
+    HDF_LOGI("%s: new devIndex = %u, devType = %u", __func__, dev.devIndex, dev.devType);
+    HDF_LOGI("%s: new chipInfo = %s, vendorName = %s, chipName = %s",
+        __func__, dev.chipInfo.c_str(), dev.vendorName.c_str(), dev.chipName.c_str());
+    EXPECT_NE(ret, INPUT_SUCCESS);
 }
 
 /**
@@ -451,8 +562,56 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0130, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0140
+  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0131
   * @tc.name: SetPowerStatus002
+  * @tc.desc: set device power status test
+  * @tc.type: func
+  * @tc.require:
+  */
+HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0131, Function | MediumTest | Level1)
+{
+    if (g_inputInterfaces == nullptr) {
+        ASSERT_NE(nullptr, g_inputInterfaces);
+        return;
+    }
+    HDF_LOGI("%s: [hdi-input] SetPowerStatus002 enter", __func__);
+    int32_t ret;
+    uint32_t setStatus = INPUT_SUSPEND;
+
+    ret = g_inputInterfaces->SetPowerStatus(TOUCH_INDEX, setStatus);
+    if (ret != INPUT_SUCCESS) {
+        HDF_LOGE("%s: set device's power status failed, ret %d", __func__, ret);
+    }
+    EXPECT_EQ(ret, INPUT_SUCCESS);
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0132
+  * @tc.name: SetPowerStatus003
+  * @tc.desc: set device power status test
+  * @tc.type: func
+  * @tc.require:
+  */
+HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0132, Function | MediumTest | Level1)
+{
+    if (g_inputInterfaces == nullptr) {
+        ASSERT_NE(nullptr, g_inputInterfaces);
+        return;
+    }
+    HDF_LOGI("%s: [hdi-input] SetPowerStatus003 enter", __func__);
+    int32_t ret;
+    uint32_t setStatus = INPUT_RESUME;
+
+    ret = g_inputInterfaces->SetPowerStatus(TOUCH_INDEX, setStatus);
+    if (ret != INPUT_SUCCESS) {
+        HDF_LOGE("%s: set device's power status failed, ret %d", __func__, ret);
+    }
+    EXPECT_EQ(ret, INPUT_SUCCESS);
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0140
+  * @tc.name: SetPowerStatus004
   * @tc.desc: set device power status test
   * @tc.type: func
   * @tc.require:
@@ -463,7 +622,7 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0140, Function | 
         ASSERT_NE(nullptr, g_inputInterfaces);
         return;
     }
-    HDF_LOGI("%s: [hdi-input] SetPowerStatus002 enter", __func__);
+    HDF_LOGI("%s: [hdi-input] SetPowerStatus004 enter", __func__);
     int32_t ret;
     uint32_t setStatus = INPUT_LOW_POWER;
     /* Device "5" is used for testing nonexistent device node */
@@ -704,6 +863,106 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0230, Function | 
 }
 
 /**
+  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0231
+  * @tc.name: RunCapacitanceTest002
+  * @tc.desc: run capacitanceTest test
+  * @tc.type: FUNC
+  * @tc.require:
+  */
+HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0231, Function | MediumTest | Level1)
+{
+    if (g_inputInterfaces == nullptr) {
+        ASSERT_NE(nullptr, g_inputInterfaces);
+        return;
+    }
+    HDF_LOGI("%s: [hdi-input] RunCapacitanceTest002 enter", __func__);
+    int32_t ret;
+    std::string result;
+    uint32_t testType = BASE_TEST;
+
+    ret = g_inputInterfaces->RunCapacitanceTest(TOUCH_INDEX, testType, result, TEST_RESULT_LEN);
+    if (ret != INPUT_SUCCESS) {
+        HDF_LOGE("%s: run capacitanceTest failed, ret %d", __func__, ret);
+    }
+    EXPECT_EQ(ret, INPUT_SUCCESS);
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0232
+  * @tc.name: RunCapacitanceTest003
+  * @tc.desc: run capacitanceTest test
+  * @tc.type: FUNC
+  * @tc.require:
+  */
+HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0232, Function | MediumTest | Level1)
+{
+    if (g_inputInterfaces == nullptr) {
+        ASSERT_NE(nullptr, g_inputInterfaces);
+        return;
+    }
+    HDF_LOGI("%s: [hdi-input] RunCapacitanceTest003 enter", __func__);
+    int32_t ret;
+    std::string result;
+    uint32_t testType = FULL_TEST;
+
+    ret = g_inputInterfaces->RunCapacitanceTest(TOUCH_INDEX, testType, result, TEST_RESULT_LEN);
+    if (ret != INPUT_SUCCESS) {
+        HDF_LOGE("%s: run capacitanceTest failed, ret %d", __func__, ret);
+    }
+    EXPECT_EQ(ret, INPUT_SUCCESS);
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0233
+  * @tc.name: RunCapacitanceTest004
+  * @tc.desc: run capacitanceTest test
+  * @tc.type: FUNC
+  * @tc.require:
+  */
+HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0233, Function | MediumTest | Level1)
+{
+    if (g_inputInterfaces == nullptr) {
+        ASSERT_NE(nullptr, g_inputInterfaces);
+        return;
+    }
+    HDF_LOGI("%s: [hdi-input] RunCapacitanceTest004 enter", __func__);
+    int32_t ret;
+    std::string result;
+    uint32_t testType = RUNNING_TEST;
+
+    ret = g_inputInterfaces->RunCapacitanceTest(TOUCH_INDEX, testType, result, TEST_RESULT_LEN);
+    if (ret != INPUT_SUCCESS) {
+        HDF_LOGE("%s: run capacitanceTest failed, ret %d", __func__, ret);
+    }
+    EXPECT_EQ(ret, INPUT_SUCCESS);
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0234
+  * @tc.name: RunCapacitanceTest005
+  * @tc.desc: run capacitanceTest test
+  * @tc.type: FUNC
+  * @tc.require:
+  */
+HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0234, Function | MediumTest | Level1)
+{
+    if (g_inputInterfaces == nullptr) {
+        ASSERT_NE(nullptr, g_inputInterfaces);
+        return;
+    }
+    HDF_LOGI("%s: [hdi-input] RunCapacitanceTest005 enter", __func__);
+    int32_t ret;
+    std::string result;
+    uint32_t testType = MMI_TEST;
+
+    ret = g_inputInterfaces->RunCapacitanceTest(INVALID_INDEX, testType, result, TEST_RESULT_LEN);
+    if (ret != INPUT_SUCCESS) {
+        HDF_LOGE("%s: run capacitanceTest failed, ret %d", __func__, ret);
+    }
+    EXPECT_NE(ret, INPUT_SUCCESS);
+}
+
+/**
   * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0240
   * @tc.name: RunExtraCommand001
   * @tc.desc: run extra command test
@@ -727,6 +986,32 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0240, Function | 
         HDF_LOGE("%s: run extraCommand failed, ret %d", __func__, ret);
     }
     EXPECT_EQ(ret, INPUT_SUCCESS);
+}
+
+/**
+  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0241
+  * @tc.name: RunExtraCommand002
+  * @tc.desc: run extra command test
+  * @tc.type: FUNC
+  * @tc.require:
+  */
+HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0241, Function | MediumTest | Level1)
+{
+    if (g_inputInterfaces == nullptr) {
+        ASSERT_NE(nullptr, g_inputInterfaces);
+        return;
+    }
+    HDF_LOGI("%s: [hdi-input] RunExtraCommand002 enter", __func__);
+    int32_t ret;
+    struct ExtraCmd extraCmd;
+    extraCmd.cmdCode = "WakeUpMode";
+    extraCmd.cmdValue = "Enable";
+
+    ret = g_inputInterfaces->RunExtraCommand(INVALID_INDEX, extraCmd);
+    if (ret != INPUT_SUCCESS) {
+        HDF_LOGE("%s: run extraCommand failed, ret %d", __func__, ret);
+    }
+    EXPECT_NE(ret, INPUT_SUCCESS);
 }
 
 /**

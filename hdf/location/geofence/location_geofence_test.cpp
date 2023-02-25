@@ -50,16 +50,24 @@ public:
 
 int32_t GeofenceCallbackImpl::ReportGeofenceAvailability(bool isAvailable)
 {
+    (void)isAvailable;
     return HDF_SUCCESS;
 }
 
 int32_t GeofenceCallbackImpl::ReportGeofenceEvent(int32_t fenceIndex, const LocationInfo& location, GeofenceEvent event, int64_t timestamp)
 {
+    (void)fenceIndex;
+    (void)location;
+    (void)event;
+    (void)timestamp;
     return HDF_SUCCESS;
 }
 
 int32_t GeofenceCallbackImpl::ReportGeofenceOperateResult(int32_t fenceIndex, GeofenceOperateType type, GeofenceOperateResult result)
 {
+    (void)fenceIndex;
+    (void)type;
+    (void)result;
     return HDF_SUCCESS;
 }
 

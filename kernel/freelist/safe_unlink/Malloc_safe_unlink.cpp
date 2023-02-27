@@ -71,7 +71,7 @@ static int child(void)
     uintptr_t *d;
 
     /* Set first dividing chunk */
-    if (set_devide_chunk(sizeof(size_t))) {
+    if (set_devide_chunk(sizeof(uintptr_t))) {
         return -1;
     }
 

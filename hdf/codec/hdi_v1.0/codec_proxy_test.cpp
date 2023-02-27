@@ -326,21 +326,6 @@ HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0140, TestSize.Level1)
     int paramCnt = 1;
     params = (Param *)OsalMemAlloc(sizeof(Param)*paramCnt);
     ASSERT_TRUE(params != nullptr);
-    params->key = (ParamKey)ParamExtKey::KEY_EXT_DEFAULT_CFG_RK;
-    params->val = nullptr;
-    params->size = 0;
-
-    int32_t errorCode = g_codecObj->CodecGetParameter(g_codecObj, g_handle, params, paramCnt);
-    OsalMemFree(params);
-    ASSERT_EQ(errorCode, HDF_SUCCESS);
-}
-
-HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0141, TestSize.Level1)
-{
-    Param *params;
-    int paramCnt = 1;
-    params = (Param *)OsalMemAlloc(sizeof(Param)*paramCnt);
-    ASSERT_TRUE(params != nullptr);
     params->key = (ParamKey)ParamExtKey::KEY_EXT_SPLIT_PARSE_RK;
     params->val = nullptr;
     params->size = 0;
@@ -350,7 +335,7 @@ HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0141, TestSize.Level1)
     ASSERT_EQ(errorCode, HDF_SUCCESS);
 }
 
-HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0142, TestSize.Level1)
+HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0141, TestSize.Level1)
 {
     Param *params;
     int paramCnt = 1;
@@ -366,7 +351,7 @@ HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0142, TestSize.Level1)
     ASSERT_EQ(errorCode, HDF_SUCCESS);
 }
 
-HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0143, TestSize.Level1)
+HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0142, TestSize.Level1)
 {
     Param *params;
     int paramCnt = 1;

@@ -11,14 +11,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import("//build/ohos_var.gni")
+import("../build.gni")
 group("useriam") {
   testonly = true
   if (is_standard_system) {
-    deps = [
-      "faceauth:HatsUserIamFaceAuthTest",
-      "fingerprintauth:HatsUserIamFingerprintAuthTest",
-      "pinauth:HatsUserIamPinAuthTest",
-      "userauth:HatsUserIamUserAuthTest",
-    ]
+    if (xts_hats_rich == false) {
+      deps = [
+        "faceauth:HatsUserIamFaceAuthTest",
+        "fingerprintauth:HatsUserIamFingerprintAuthTest",
+        "pinauth:HatsUserIamPinAuthTest",
+        "userauth:HatsUserIamUserAuthTest",
+      ]
+    }
   }
 }

@@ -25,12 +25,13 @@
 
 #include "hdf_base.h"
 #include "osal_time.h"
-#include "v1_0/ipower_interface.h"
-#include "v1_0/ipower_hdi_callback.h"
-#include "v1_0/power_types.h"
+#include "v1_1/ipower_interface.h"
+#include "v1_1/ipower_hdi_callback.h"
+#include "v1_1/power_types.h"
+#include "v1_1/running_lock_types.h"
 
 using namespace OHOS::HDI;
-using namespace OHOS::HDI::Power::V1_0;
+using namespace OHOS::HDI::Power::V1_1;
 using namespace testing::ext;
 
 namespace {
@@ -236,7 +237,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest007, TestSize.Level1)
 }
 
 /**
-  * @tc.name: HdfPowerHdiTest007
+  * @tc.name: HdfPowerHdiTest008
   * @tc.desc: PowerDump
   * @tc.type: FUNC
   */
@@ -247,5 +248,37 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest008, TestSize.Level1)
         EXPECT_TRUE(HDF_SUCCESS ==
         g_powerInterface->PowerDump(dump))<< "HdfPowerHdiTest008 failed";
     }
+}
+
+/**
+  * @tc.name: HdfPowerHdiTest009
+  * @tc.desc: HoldRunningLock
+  * @tc.type: FUNC
+ */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest009, TestSize.Level1)
+{
+    struct RunningLockInfo info = {
+        .name = "acts_test",
+        .type = RunningLockType::RUNNINGLOCK_BACKGROUND_PHONE,
+        .timeoutMs = 3000,
+        .pid = 0,
+        .uid = 0,
+    };
+    int32_t ret = g_powerInterface->HoldRunningLock(info);
+    EXPECT_TRUE(HDF_SUCCESS == ret) << "HdfPowerHdiTest009 failed";
+}
+
+/**
+  * @tc.name: HdfPowerHdiTest010
+  * @tc.desc: UnholdRunningLock
+  * @tc.type: FUNC
+ */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest010, TestSize.Level1)
+{
+    struct RunningLockInfo info = {
+        .name = "acts_test",
+    };
+    int32_t ret = g_powerInterface->UnholdRunningLock(info);
+    EXPECT_TRUE(HDF_SUCCESS == ret) << "HdfPowerHdiTest010 failed";
 }
 }

@@ -37,7 +37,7 @@ enum class HdiId {
     HREQ_CALL_HANGUP,
     HREQ_CALL_REJECT,
     HREQ_CALL_ANSWER,
-    HREQ_CALL_HOLD_CALL, // call hold value 6
+    HREQ_CALL_HOLD_CALL,   // call hold value 6
     HREQ_CALL_UNHOLD_CALL, // call active value 6
     HREQ_CALL_SWITCH_CALL,
     HREQ_CALL_COMBINE_CONFERENCE,
@@ -66,6 +66,7 @@ enum class HdiId {
     HREQ_CALL_SET_EMERGENCY_LIST,
     HREQ_CALL_GET_FAIL_REASON,
     HREQ_CALL_SET_BARRING_PASSWORD,
+    HREQ_CALL_CLOSE_UNFINISHED_USSD,
 
     HREQ_SMS_BASE = 100,
     HREQ_SMS_SEND_GSM_SMS,
@@ -276,6 +277,7 @@ public:
     int32_t GetMuteResponse(const RilRadioResponseInfo &responseInfo, int32_t mute) override;
     int32_t GetCallFailReasonResponse(const RilRadioResponseInfo &responseInfo, int32_t callFail) override;
     int32_t SetBarringPasswordResponse(const RilRadioResponseInfo &responseInfo) override;
+    int32_t CloseUnFinishedUssdResponse(const RilRadioResponseInfo &responseInfo) override;
 
     // Data
     int32_t PdpContextListUpdated(
@@ -1513,6 +1515,15 @@ int32_t RilCallback::SetBarringPasswordResponse(const RilRadioResponseInfo &resp
 {
     HDF_LOGI("GetBoolResult SetBarringPasswordResponse");
     hdiId_ = HdiId::HREQ_CALL_SET_BARRING_PASSWORD;
+    resultInfo_ = responseInfo;
+    NotifyAll();
+    return 0;
+}
+
+int32_t RilCallback::CloseUnFinishedUssdResponse(const RilRadioResponseInfo &responseInfo)
+{
+    HDF_LOGI("GetBoolResult CloseUnFinishedUssdResponse");
+    hdiId_ = HdiId::HREQ_CALL_CLOSE_UNFINISHED_USSD;
     resultInfo_ = responseInfo;
     NotifyAll();
     return 0;

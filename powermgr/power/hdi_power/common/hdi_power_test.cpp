@@ -270,15 +270,80 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest009, TestSize.Level1)
 
 /**
   * @tc.name: HdfPowerHdiTest010
-  * @tc.desc: UnholdRunningLock
+  * @tc.desc: HoldRunningLock, name is null
   * @tc.type: FUNC
  */
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest010, TestSize.Level1)
 {
     struct RunningLockInfo info = {
+        .name = "",
+        .type = RunningLockType::RUNNINGLOCK_BACKGROUND_PHONE,
+        .timeoutMs = 3000,
+        .pid = 0,
+        .uid = 0,
+    };
+    int32_t ret = g_powerInterface->HoldRunningLock(info);
+    EXPECT_TRUE(HDF_ERR_INVALID_PARAM == ret) << "HdfPowerHdiTest010 failed";
+}
+
+/**
+  * @tc.name: HdfPowerHdiTest011
+  * @tc.desc: HoldRunningLock, type is invaild
+  * @tc.type: FUNC
+ */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest011, TestSize.Level1)
+{
+    struct RunningLockInfo info = {
+        .name = "acts_test",
+        .type = static_cast<RunningLockType>(100),
+        .timeoutMs = 3000,
+        .pid = 0,
+        .uid = 0,
+    };
+    int32_t ret = g_powerInterface->HoldRunningLock(info);
+    EXPECT_TRUE(HDF_ERR_INVALID_PARAM == ret) << "HdfPowerHdiTest011 failed";
+}
+
+/**
+  * @tc.name: HdfPowerHdiTest012
+  * @tc.desc: UnholdRunningLock
+  * @tc.type: FUNC
+ */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest012, TestSize.Level1)
+{
+    struct RunningLockInfo info = {
         .name = "acts_test",
     };
     int32_t ret = g_powerInterface->UnholdRunningLock(info);
-    EXPECT_TRUE(HDF_SUCCESS == ret) << "HdfPowerHdiTest010 failed";
+    EXPECT_TRUE(HDF_SUCCESS == ret) << "HdfPowerHdiTest012 failed";
+}
+
+/**
+  * @tc.name: HdfPowerHdiTest013
+  * @tc.desc: UnholdRunningLock, name is null
+  * @tc.type: FUNC
+ */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest013, TestSize.Level1)
+{
+    struct RunningLockInfo info = {
+        .name = "",
+    };
+    int32_t ret = g_powerInterface->UnholdRunningLock(info);
+    EXPECT_TRUE(HDF_ERR_INVALID_PARAM == ret) << "HdfPowerHdiTest013 failed";
+}
+
+/**
+  * @tc.name: HdfPowerHdiTest014
+  * @tc.desc: UnholdRunningLock, name is null
+  * @tc.type: FUNC
+ */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest014, TestSize.Level1)
+{
+    struct RunningLockInfo info = {
+        .name = "acts_test",
+        .type = static_cast<RunningLockType>(100),
+    };
+    int32_t ret = g_powerInterface->UnholdRunningLock(info);
+    EXPECT_TRUE(HDF_ERR_INVALID_PARAM == ret) << "HdfPowerHdiTest014 failed";
 }
 }

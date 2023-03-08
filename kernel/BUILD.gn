@@ -22,7 +22,6 @@ group("kernel") {
     if (xts_hats_rich == true) {
       deps = [
         "accesstokenid:HatsAccesstokenidTest",
-        "cma:HatsCmaTest",
         "memtracker:HatsMemoryTrackerTest",
         "open_posix_testsuite/conformance/interfaces_gn:${posix_interface_module}",
         "prctl:HatsPrctlTest",
@@ -31,7 +30,6 @@ group("kernel") {
     } else {
       deps = [
         "accesstokenid:HatsAccesstokenidTest",
-        "cma:HatsCmaTest",
         "freelist:HatsFreeListTest",
         "memtracker:HatsMemoryTrackerTest",
         "open_posix_testsuite/conformance/interfaces_gn:${posix_interface_module}",

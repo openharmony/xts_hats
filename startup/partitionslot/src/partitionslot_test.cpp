@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,7 +17,7 @@
 #include <osal_mem.h>
 #include <unistd.h>
 #include "hdf_log.h"
-#include "hdi/idevmgr_hdi.h"
+#include "idevmgr_hdi.h"
 #include "v1_0/ipartition_slot.h"
 
 using namespace testing;

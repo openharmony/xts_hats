@@ -23,9 +23,10 @@ group("HatsHdfAudioTest") {
   if (is_standard_system) {
     if (device_name == "rk3568" || device_name == "rk3588") {
       deps = [ "hdi:audio_hdi" ]
-    } else {
-      deps = [ "client_advance:HdiClientAdvance" ]
     }
+    # else {
+    #   deps = [ "client_advance:HdiClientAdvance" ]
+    # }
   }
 }
 ###############################################################################

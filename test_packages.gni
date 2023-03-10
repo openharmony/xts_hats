@@ -21,6 +21,7 @@ _all_test_packages = [
   "${HATS_ROOT}/useriam:useriam",
   "${HATS_ROOT}/telephony:telephony",
   "${HATS_ROOT}/startup:startup",
+  "${HATS_ROOT}/ai:hatsaitest",
 ]
 
 _all_test_packages_ivi = [

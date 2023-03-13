@@ -41,7 +41,7 @@ ohos_static_library("disp_hdi_test_common") {
   part_name = "drivers_peripheral_display"
 }
 
-ohos_moduletest_suite("HatsHdfDisplayDeviceTest") {
+ohos_moduletest_suite("HatszHdfDisplayDeviceTest") {
   module_out_path = module_output_path
   sources = [
     "hdi_composition_check.cpp",

@@ -21,7 +21,7 @@ group("HatsHdfDisplayTest") {
     deps = [ "gralloc/adaptation:HatsHdfDisplayAdaptationTest" ]
   } else {
     deps = [
-      "device:HatsHdfDisplayDeviceTest",
+      "device:HatszHdfDisplayDeviceTest",
       "gralloc/alloctest:HatsHdfDisplayGrallocTest",
     ]
   }

@@ -13,6 +13,7 @@
 
 import("//build/ohos_var.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
+import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
 #################################group#########################################
@@ -20,7 +21,7 @@ group("HatsHdfCameraTest") {
   if (!defined(ohos_lite)) {
     testonly = true
   }
-  if (device_name == "rk3568") {
+  if (xts_hats_rich == false) {
     if (is_standard_system) {
       deps = [
         "buffer_manager:HatsHdfCameraBufferTest",

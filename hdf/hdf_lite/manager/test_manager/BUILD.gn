@@ -19,17 +19,6 @@ hcpptest_suite("HatsManagerTest") {
   include_dirs = [
     "//third_party/googletest/googletest/include",
     "//third_party/bounds_checking_function/include",
-
-    "//drivers/hdf_core/framework/include/platform",
-    "//drivers/hdf_core/framework/include/core",
-    "//drivers/hdf_core/framework/core/common/include/host",
-    "//drivers/hdf_core/framework/core/shared/include",
-    "//drivers/hdf_core/framework/include/osal",
-    "//drivers/hdf_core/adapter/uhdf/posix/include",
-    "//drivers/hdf_core/framework/include/utils",
-    "//drivers/hdf_core/framework/include",
-    "//drivers/hdf_core/framework/test/unittest/include",
-    "//drivers/hdf_core/framework/test/unittest/manager",
     "//base/hiviewdfx/hilog_lite/interfaces/native/innerkits",
   ]
 
@@ -37,11 +26,11 @@ hcpptest_suite("HatsManagerTest") {
   sources = [
     "//test/xts/hats/hdf/hdf_lite/manager/common/hdf_lite_manager_test.cpp",
   ]
-  deps = [
-    "//base/hiviewdfx/hilog_lite/frameworks/featured:hilog_shared",
+  deps = [ "//base/hiviewdfx/hilog_lite/frameworks/featured:hilog_shared" ]
+  public_deps = [
     "//drivers/hdf_core/adapter/build/test_common:libhdf_test_common",
     "//drivers/hdf_core/adapter/uhdf/manager:hdf_core",
     "//drivers/hdf_core/adapter/uhdf/posix:hdf_posix_osal",
+    "//third_party/bounds_checking_function:libsec_shared",
   ]
-  public_deps = [ "//third_party/bounds_checking_function:libsec_shared" ]
 }

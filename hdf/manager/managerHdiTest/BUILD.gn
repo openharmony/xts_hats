@@ -22,9 +22,6 @@ ohos_moduletest_suite("HatsHdfManagerHdiTest") {
   sources = [ "service_manager_hdi_c_test.cpp" ]
 
   deps = [
-    "$hdf_uhdf_path/hdi:libhdi",
-    "$hdf_uhdf_path/ipc:libhdf_ipc_adapter",
-    "$hdf_uhdf_path/utils:libhdf_utils",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
   ]
@@ -32,6 +29,9 @@ ohos_moduletest_suite("HatsHdfManagerHdiTest") {
 
   external_deps = [
     "c_utils:utils",
+    "hdf_core:libhdf_ipc_adapter",
+    "hdf_core:libhdf_utils",
+    "hdf_core:libhdi",
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_core",
   ]

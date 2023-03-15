@@ -61,7 +61,7 @@ ohos_moduletest_suite("HatsHdfOmxCodecTest") {
     external_deps = [ "hilog:libhilog" ]
   }
 
-  if (device_name == "rk3568") {
+  if (xts_hats_rich == false) {
     cflags += [ "-DSUPPORT_OMX" ]
   }
 

@@ -81,43 +81,6 @@ int32_t AudioHdiCaptureAttrTest::AudioCaptureStart(const string path, struct Aud
 
 /**
 * @tc.name  Test AudioCaptureSetSampleAttributes API via legal input.
-* @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0001
-* @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
-*    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
-*    attrs.sampleRate = 8000;
-*    attrs.channelCount = 1;
-*/
-HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0001, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioCapture *capture = nullptr;
-    
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 8000);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-#ifdef PRODUCT_RK3568
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-#else
-    uint32_t ret1 = 1;
-    uint32_t ret2 = 8000;
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
-    EXPECT_EQ(ret2, attrsValue.sampleRate);
-    EXPECT_EQ(ret1, attrsValue.channelCount);
-#endif
-    adapter->DestroyCapture(adapter, capture);
-    manager->UnloadAdapter(manager, adapter);
-}
-/**
-* @tc.name  Test AudioCaptureSetSampleAttributes API via legal input.
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0002
 * @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
@@ -152,44 +115,6 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 }
 /**
 * @tc.name  Test AudioCaptureSetSampleAttributes API via legal input.
-* @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0003
-* @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
-*    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
-*    attrs.sampleRate = 22050;
-*    attrs.channelCount = 1;
-*/
-HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0003, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioCapture *capture = nullptr;
-    
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 22050);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-#ifdef PRODUCT_RK3568
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-#else
-    uint32_t ret1 = 1;
-    uint32_t ret2 = 22050;
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
-    EXPECT_EQ(ret2, attrsValue.sampleRate);
-    EXPECT_EQ(ret1, attrsValue.channelCount);
-#endif
-
-    adapter->DestroyCapture(adapter, capture);
-    manager->UnloadAdapter(manager, adapter);
-}
-/**
-* @tc.name  Test AudioCaptureSetSampleAttributes API via legal input.
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0004
 * @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
@@ -218,44 +143,6 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
-
-    adapter->DestroyCapture(adapter, capture);
-    manager->UnloadAdapter(manager, adapter);
-}
-/**
-* @tc.name  Test AudioCaptureSetSampleAttributes API via legal input.
-* @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0005
-* @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
-*    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
-*    attrs.sampleRate = 44100;
-*    attrs.channelCount = 1;
-*/
-HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0005, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioCapture *capture = nullptr;
-    
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 44100);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-#ifdef PRODUCT_RK3568
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-#else
-    uint32_t ret1 = 1;
-    uint32_t ret2 = 44100;
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
-    EXPECT_EQ(ret2, attrsValue.sampleRate);
-    EXPECT_EQ(ret1, attrsValue.channelCount);
-#endif
 
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
@@ -322,84 +209,6 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
 }
 /**
 * @tc.name  Test AudioCaptureSetSampleAttributes API via legal input.
-* @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0008
-* @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
-*    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
-*    attrs.sampleRate = 12000;
-*    attrs.channelCount = 1;
-*/
-HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0008, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioCapture *capture = nullptr;
-    
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 12000);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-#ifdef PRODUCT_RK3568
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-#else
-    uint32_t ret1 = 1;
-    uint32_t ret2 = 12000;
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-
-    EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
-    EXPECT_EQ(ret2, attrsValue.sampleRate);
-    EXPECT_EQ(ret1, attrsValue.channelCount);
-#endif
-
-    adapter->DestroyCapture(adapter, capture);
-    manager->UnloadAdapter(manager, adapter);
-}
-/**
-* @tc.name  Test AudioCaptureSetSampleAttributes API via legal input.
-* @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0009
-* @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
-*    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_24_BIT;
-*    attrs.sampleRate = 16000;
-*    attrs.channelCount = 1;
-*/
-HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0009, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioCapture *capture = nullptr;
-    
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 16000);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-#ifdef PRODUCT_RK3568
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-#else
-    uint32_t ret1 = 1;
-    uint32_t ret2 = 16000;
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-
-    EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
-    EXPECT_EQ(ret2, attrsValue.sampleRate);
-    EXPECT_EQ(ret1, attrsValue.channelCount);
-#endif
-
-    adapter->DestroyCapture(adapter, capture);
-    manager->UnloadAdapter(manager, adapter);
-}
-/**
-* @tc.name  Test AudioCaptureSetSampleAttributes API via legal input.
 * @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0010
 * @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
 *    attrs.type = AUDIO_IN_MEDIA;
@@ -429,83 +238,6 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
-
-    adapter->DestroyCapture(adapter, capture);
-    manager->UnloadAdapter(manager, adapter);
-}
-/**
-* @tc.name  Test AudioCaptureSetSampleAttributes API via legal input.
-* @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0011
-* @tc.desc Test AudioCaptureSetSampleAttributes with the following parameter settings 
-*    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
-*    attrs.sampleRate = 64000;
-*    attrs.channelCount = 1;
-*/
-HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0011, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioCapture *capture = nullptr;
-    
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 64000);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-#ifdef PRODUCT_RK3568
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-#else
-    uint32_t ret1 = 1;
-    uint32_t ret2 = 64000;
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-
-    EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
-    EXPECT_EQ(ret2, attrsValue.sampleRate);
-    EXPECT_EQ(ret1, attrsValue.channelCount);
-#endif
-    adapter->DestroyCapture(adapter, capture);
-    manager->UnloadAdapter(manager, adapter);
-}
-/**
-* @tc.name  Test AudioCaptureSetSampleAttributes API via legal input.
-* @tc.number  SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0012
-* @tc.desc Test AudioCaptureSetSampleAttributes with the following parameter settings 
-*    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_24_BIT;
-*    attrs.sampleRate = 96000;
-*    attrs.channelCount = 1;
-*/
-HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0012, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioCapture *capture = nullptr;
-    
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 96000);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-#ifdef PRODUCT_RK3568
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-#else
-    uint32_t ret1 = 1;
-    uint32_t ret2 = 96000;
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-
-    EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
-    EXPECT_EQ(ret2, attrsValue.sampleRate);
-    EXPECT_EQ(ret1, attrsValue.channelCount);
-#endif
 
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
@@ -674,46 +406,6 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_
     manager->UnloadAdapter(manager, adapter);
 }
 /**
-* @tc.name  Test AudioCaptureGetSampleAttributes API via legal input.
-* @tc.number  SUB_Audio_HDI_AudioCaptureGetSampleAttributes_0001
-* @tc.desc  Test AudioCaptureSetSampleAttributes with the following parameter settings 
-*    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
-*    attrs.sampleRate = 8000;
-*    attrs.channelCount = 1;
-*/
-HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_AudioCaptureGetSampleAttributes_0001, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioCapture *capture = nullptr;
-    
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = capture->attr.GetSampleAttributes(capture, &attrsValue);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 32000);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-#ifdef PRODUCT_RK3568
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-#else
-    uint32_t ret1 = 32000;
-    uint32_t ret2 = 1;
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
-    EXPECT_EQ(ret1, attrsValue.sampleRate);
-    EXPECT_EQ(ret2, attrsValue.channelCount);
-#endif
-
-    adapter->DestroyCapture(adapter, capture);
-    manager->UnloadAdapter(manager, adapter);
-}
-/**
 * @tc.name  Test AudioCaptureGetSampleAttributes API via setting the capture is empty .
 * @tc.number  SUB_Audio_HDI_AudioCaptureGetSampleAttributes_0002
 * @tc.desc   Test AudioCaptureGetSampleAttributes , and check if -1 is returned when the parameter capture is empty.
@@ -840,42 +532,6 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0004, Functi
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
 }
-#ifndef PRODUCT_RK3568
-/**
-    * @tc.name  Test CaptureGetFrameSize API via define sampleRate to different values
-    * @tc.number  SUB_Audio_hdi_CaptureGetFrameSize_0005
-    * @tc.desc  Test AudioCaptureGetFrameSize API, and check if 0 is returned when sampleRate is set to different values
-*/
-HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0005, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    uint64_t size = 0;
-    uint64_t channelCountExp = 1;
-    uint32_t sampleRateExp = 48000;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioCapture *capture = nullptr;
-    
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 48000);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
-    EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
-    EXPECT_EQ(channelCountExp, attrsValue.channelCount);
-
-    ret = capture->attr.GetFrameSize(capture, &size);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_GT(size, INITIAL_VALUE);
-
-    adapter->DestroyCapture(adapter, capture);
-    manager->UnloadAdapter(manager, adapter);
-}
-#endif
 /**
     * @tc.name  Test CaptureGetFrameSize API via define channelCount to different values
     * @tc.number  SUB_Audio_hdi_CaptureGetFrameSize_0006
@@ -910,42 +566,6 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0006, Functi
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
 }
-#ifndef PRODUCT_RK3568
-/**
-    * @tc.name  Test CaptureGetFrameSize API via define sampleRate to different values
-    * @tc.number  SUB_Audio_hdi_CaptureGetFrameSize_0007
-    * @tc.desc  Test AudioCaptureGetFrameSize API, and check if 0 is returned when sampleRate is set to different values
-*/
-HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameSize_0007, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    uint64_t size = 0;
-    uint64_t channelCountExp = 1;
-    uint32_t sampleRateExp = 48000;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioCapture *capture = nullptr;
-    
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 48000);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
-    EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
-    EXPECT_EQ(channelCountExp, attrsValue.channelCount);
-
-    ret = capture->attr.GetFrameSize(capture, &size);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_GT(size, INITIAL_VALUE);
-
-    adapter->DestroyCapture(adapter, capture);
-    manager->UnloadAdapter(manager, adapter);
-}
-#endif
 /**
 * @tc.name  Test AudioCaptureGetFrameCount API via legal input
 * @tc.number  SUB_Audio_hdi_CaptureGetFrameCount_0001
@@ -1118,84 +738,7 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0006, Funct
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
 }
-#ifndef PRODUCT_RK3568
-/**
-    * @tc.name  Test CaptureGetFrameCount API via define channelCount to different values
-    * @tc.number  SUB_Audio_hdi_CaptureGetFrameCount_0007
-    * @tc.desc  Test the AudioCaptureGetFrameCount API, and check if 0 is returned when channelCount is set to different values
-*/
-HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0007, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    uint64_t count = 0;
-    uint64_t channelCountExp = 1;
-    uint32_t sampleRateExp = 44100;
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioCapture *capture = nullptr;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 44100);
 
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
-    EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
-    EXPECT_EQ(channelCountExp, attrsValue.channelCount);
-
-    ret = AudioCaptureStartAndOneFrame(capture);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = capture->attr.GetFrameCount(capture, &count);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_GT(count, INITIAL_VALUE);
-
-    ret = capture->control.Stop((AudioHandle)capture);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    adapter->DestroyCapture(adapter, capture);
-    manager->UnloadAdapter(manager, adapter);
-}
-/**
-    * @tc.name  Test CaptureGetFrameCount API via define format to different values
-    * @tc.number  SUB_Audio_hdi_CaptureGetFrameCount_0008
-    * @tc.desc  Test the AudioCaptureGetFrameCount API, and check if 0 is returned when format is set to different values
-*/
-HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_hdi_CaptureGetFrameCount_0008, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    uint64_t count = 0;
-    uint64_t channelCountExp = 1;
-    uint32_t sampleRateExp = 32000;
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioCapture *capture = nullptr;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 32000);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
-    EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
-    EXPECT_EQ(channelCountExp, attrsValue.channelCount);
-
-    ret = AudioCaptureStartAndOneFrame(capture);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = capture->attr.GetFrameCount(capture, &count);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_GT(count, INITIAL_VALUE);
-
-    ret = capture->control.Stop((AudioHandle)capture);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    adapter->DestroyCapture(adapter, capture);
-    manager->UnloadAdapter(manager, adapter);
-}
-#endif
 /**
     * @tc.name  Test CaptureGetCurrentChannelId API via legal input
     * @tc.number  SUB_Audio_HDI_RenderGetCurrentChannelId_0001
@@ -1220,41 +763,6 @@ HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureGetCurrentChannelId_0001,
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
 }
-#ifndef PRODUCT_RK3568
-/**
-    * @tc.name  Test GetCurrentChannelId API via getting channelId to 1 and set channelCount to 1
-    * @tc.number  SUB_Audio_HDI_CaptureGetCurrentChannelId_0002
-    * @tc.desc  Test the GetCurrentChannelId API, and check if 0 is returned when channelId is set to 1 and channelCount is set to 1
-*/
-HWTEST_F(AudioHdiCaptureAttrTest, SUB_Audio_HDI_CaptureGetCurrentChannelId_0002, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    uint32_t channelId = 0;
-    uint32_t channelIdExp = 1;
-    uint32_t channelCountExp = 1;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioCapture *capture = nullptr;
-    
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateCapture(manager, PIN_IN_MIC, ADAPTER_NAME, &adapter, &capture);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 48000);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(channelCountExp, attrsValue.channelCount);
-
-    ret = capture->attr.GetCurrentChannelId(capture, &channelId);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(channelIdExp, channelId);
-
-    adapter->DestroyCapture(adapter, capture);
-    manager->UnloadAdapter(manager, adapter);
-}
-#endif
 /**
     * @tc.name  Test GetCurrentChannelId API via CurrentChannelId is obtained after started
     * @tc.number  SUB_Audio_HDI_CaptureGetCurrentChannelId_0003

@@ -13,6 +13,7 @@
 
 import("//build/ohos_var.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
+import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
 #################################group#########################################
@@ -21,7 +22,7 @@ group("HatsHdfAudioTest") {
     testonly = true
   }
   if (is_standard_system) {
-    if (device_name == "rk3568" || device_name == "rk3588") {
+    if (xts_hats_rich == false) {
       deps = [ "hdi:audio_hdi" ]
     }
     # else {

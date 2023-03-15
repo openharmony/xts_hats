@@ -63,7 +63,7 @@ config("hdf_codec_omx") {
     "-fno-common",
     "-fno-strict-aliasing",
   ]
-  if (device_name == "rk3568") {
+  if (xts_hats_rich == false) {
     cflags += [ "-DSUPPORT_OMX" ]
   }
 }

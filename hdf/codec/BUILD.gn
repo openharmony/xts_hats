@@ -14,10 +14,11 @@
 import("//build/ohos.gni")
 import("//build/ohos_var.gni")
 import("//test/xts/hats/build.gni")
+import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
 group("HatsHdfCodecTest") {
-  if (device_name == "rk3568") {
+  if (xts_hats_rich == false) {
     testonly = true
     deps = [
       "hdi_adapter:HatsHdfAdapterCodecTest",

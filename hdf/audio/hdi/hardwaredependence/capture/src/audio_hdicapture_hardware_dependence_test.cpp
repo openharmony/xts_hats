@@ -53,35 +53,6 @@ void AudioHdiCaptureHardwareDependenceTest::TearDown(void)
     int32_t ret = ReleaseCaptureSource(manager, adapter, capture);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
 }
-
-/**
-* @tc.name  AudioCaptureSetSampleAttributes_001
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
-*    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
-*    attrs.sampleRate = SAMPLE_RATE_8000;
-*    attrs.channelCount = 1;
-* @tc.type: FUNC
-*/
-HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0001, TestSize.Level1)
-{
-    int32_t ret = -1;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    ASSERT_NE(nullptr, capture);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 1, SAMPLE_RATE_8000);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-#ifdef PRODUCT_RK3568
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-#else
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
-    EXPECT_EQ(SAMPLE_RATE_8000, attrsValue.sampleRate);
-    EXPECT_EQ(SINGLE_CHANNEL_COUNT, attrsValue.channelCount);
-#endif
-}
 /**
 * @tc.name  AudioCaptureSetSampleAttributes_002
 * @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
@@ -107,34 +78,6 @@ HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_HDI_AudioCaptureSetSam
     EXPECT_EQ(DOUBLE_CHANNEL_COUNT, attrsValue.channelCount);
 }
 /**
-* @tc.name  AudioCaptureSetSampleAttributes_003
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
-*    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
-*    attrs.sampleRate = SAMPLE_RATE_22050;
-*    attrs.channelCount = 1;
-* @tc.type: FUNC
-*/
-HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0003, TestSize.Level1)
-{
-    int32_t ret = -1;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    ASSERT_NE(nullptr, capture);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, 1, SAMPLE_RATE_22050);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-#ifdef PRODUCT_RK3568
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-#else
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
-    EXPECT_EQ(SAMPLE_RATE_22050, attrsValue.sampleRate);
-    EXPECT_EQ(SINGLE_CHANNEL_COUNT, attrsValue.channelCount);
-#endif
-}
-/**
 * @tc.name  AudioCaptureSetSampleAttributes_004
 * @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
 *    attrs.type = AUDIO_IN_MEDIA;
@@ -157,34 +100,6 @@ HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_HDI_AudioCaptureSetSam
     EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
     EXPECT_EQ(SAMPLE_RATE_32000, attrsValue.sampleRate);
     EXPECT_EQ(DOUBLE_CHANNEL_COUNT, attrsValue.channelCount);
-}
-/**
-* @tc.name  AudioCaptureSetSampleAttributes_005
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
-*    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
-*    attrs.sampleRate = SAMPLE_RATE_44100;
-*    attrs.channelCount = 1;
-* @tc.type: FUNC
-*/
-HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0005, TestSize.Level1)
-{
-    int32_t ret = -1;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    ASSERT_NE(nullptr, capture);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, SINGLE_CHANNEL_COUNT, SAMPLE_RATE_44100);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-#ifdef PRODUCT_RK3568
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-#else
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
-    EXPECT_EQ(SAMPLE_RATE_44100, attrsValue.sampleRate);
-    EXPECT_EQ(SINGLE_CHANNEL_COUNT, attrsValue.channelCount);
-#endif
 }
 /**
 * @tc.name  AudioCaptureSetSampleAttributes_006
@@ -229,62 +144,6 @@ HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_HDI_AudioCaptureSetSam
     EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
 }
 /**
-* @tc.name  AudioCaptureSetSampleAttributes_008
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
-*    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
-*    attrs.sampleRate = SAMPLE_RATE_12000;
-*    attrs.channelCount = 1;
-* @tc.type: FUNC
-*/
-HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0008, TestSize.Level1)
-{
-    int32_t ret = -1;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    ASSERT_NE(nullptr, capture);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, SINGLE_CHANNEL_COUNT, SAMPLE_RATE_12000);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-#ifdef PRODUCT_RK3568
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-#else
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
-    EXPECT_EQ(SAMPLE_RATE_12000, attrsValue.sampleRate);
-    EXPECT_EQ(SINGLE_CHANNEL_COUNT, attrsValue.channelCount);
-#endif
-}
-/**
-* @tc.name  AudioCaptureSetSampleAttributes_009
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
-*    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_TYPE_PCM_24_BIT;
-*    attrs.sampleRate = SAMPLE_RATE_16000;
-*    attrs.channelCount = 1;
-* @tc.type: FUNC
-*/
-HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0009, TestSize.Level1)
-{
-    int32_t ret = -1;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    ASSERT_NE(nullptr, capture);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, SINGLE_CHANNEL_COUNT, SAMPLE_RATE_16000);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-#ifdef PRODUCT_RK3568
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-#else
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
-    EXPECT_EQ(SAMPLE_RATE_16000, attrsValue.sampleRate);
-    EXPECT_EQ(SINGLE_CHANNEL_COUNT, attrsValue.channelCount);
-#endif
-}
-/**
 * @tc.name  AudioCaptureSetSampleAttributes_010
 * @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
 *    attrs.type = AUDIO_IN_MEDIA;
@@ -308,62 +167,6 @@ HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_HDI_AudioCaptureSetSam
     EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
     EXPECT_EQ(SAMPLE_RATE_24000, attrsValue.sampleRate);
     EXPECT_EQ(DOUBLE_CHANNEL_COUNT, attrsValue.channelCount);
-}
-/**
-* @tc.name  AudioCaptureSetSampleAttributes_011
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
-*    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
-*    attrs.sampleRate = SAMPLE_RATE_64000;
-*    attrs.channelCount = 1;
-* @tc.type: FUNC
-*/
-HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0011, TestSize.Level1)
-{
-    int32_t ret = -1;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    ASSERT_NE(nullptr, capture);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, SINGLE_CHANNEL_COUNT, SAMPLE_RATE_64000);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-#ifdef PRODUCT_RK3568
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-#else
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
-    EXPECT_EQ(SAMPLE_RATE_64000, attrsValue.sampleRate);
-    EXPECT_EQ(SINGLE_CHANNEL_COUNT, attrsValue.channelCount);
-#endif
-}
-/**
-* @tc.name  AudioCaptureSetSampleAttributes_012
-* @tc.desc  Test AudioCaptureSetSampleAttributes ,the setting parameters are as follows.
-*    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_TYPE_PCM_24_BIT;
-*    attrs.sampleRate = SAMPLE_RATE_96000;
-*    attrs.channelCount = 1;
-* @tc.type: FUNC
-*/
-HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_HDI_AudioCaptureSetSampleAttributes_0012, TestSize.Level1)
-{
-    int32_t ret = -1;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    ASSERT_NE(nullptr, capture);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, 1, SAMPLE_RATE_96000);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-#ifdef PRODUCT_RK3568
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-#else
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
-    EXPECT_EQ(SAMPLE_RATE_96000, attrsValue.sampleRate);
-    EXPECT_EQ(SINGLE_CHANNEL_COUNT, attrsValue.channelCount);
-#endif
 }
 /**
 * @tc.name  AudioCaptureSetSampleAttributes_013
@@ -596,36 +399,6 @@ HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_HDI_AudioCaptureGetSam
 }
 #endif
 /**
-* @tc.name  AudioCaptureGetSampleAttributes_001
-* @tc.desc  Test AudioCaptureGetSampleAttributes ,the setting parameters are as follows.
-*    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
-*    attrs.sampleRate = SAMPLE_RATE_8000;
-*    attrs.channelCount = 1;
-* @tc.type: FUNC
-*/
-HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_HDI_AudioCaptureGetSampleAttributes_0001, TestSize.Level1)
-{
-    int32_t ret = -1;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    ASSERT_NE(nullptr, capture);
-    ret = capture->attr.GetSampleAttributes(capture, &attrsValue);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, SINGLE_CHANNEL_COUNT, SAMPLE_RATE_32000);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-#ifdef PRODUCT_RK3568
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-#else
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
-    EXPECT_EQ(SAMPLE_RATE_32000, attrsValue.sampleRate);
-    EXPECT_EQ(SINGLE_CHANNEL_COUNT, attrsValue.channelCount);
-#endif
-}
-/**
 * @tc.name  AudioCaptureGetSampleAttributes_002
 * @tc.desc   Test AudioCaptureGetSampleAttributes interface, return -1 if the capture is empty.
 * @tc.type: FUNC
@@ -667,32 +440,6 @@ HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_hdi_CaptureGetFrameSiz
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_GT(size, INITIAL_VALUE);
 }
-#ifndef PRODUCT_RK3568
-/**
-    * @tc.name  AudioCaptureGetFrameSize_005
-    * @tc.desc  Test CaptureGetFrameSize interface,return 0 if get framesize define sampleRate as different values
-* @tc.type: FUNC
-*/
-HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_hdi_CaptureGetFrameSize_0005, TestSize.Level1)
-{
-    int32_t ret = -1;
-    uint64_t size = 0;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    ASSERT_NE(nullptr, capture);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, SINGLE_CHANNEL_COUNT, SAMPLE_RATE_48000);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
-    EXPECT_EQ(SAMPLE_RATE_48000, attrsValue.sampleRate);
-    EXPECT_EQ(SINGLE_CHANNEL_COUNT, attrsValue.channelCount);
-
-    ret = capture->attr.GetFrameSize(capture, &size);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_GT(size, INITIAL_VALUE);
-}
-#endif
 /**
     * @tc.name  AudioCaptureGetFrameSize_006
     * @tc.desc  Test CaptureGetFrameSize interface,return 0 if get framesize define channelCount as different values
@@ -717,32 +464,6 @@ HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_hdi_CaptureGetFrameSiz
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
     EXPECT_GT(size, INITIAL_VALUE);
 }
-#ifndef PRODUCT_RK3568
-/**
-    * @tc.name  AudioCaptureGetFrameSize_007
-    * @tc.desc  Test CaptureGetFrameSize interface,return 0 if get framesize define sampleRate as different values
-* @tc.type: FUNC
-*/
-HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_hdi_CaptureGetFrameSize_0007, TestSize.Level1)
-{
-    int32_t ret = -1;
-    uint64_t size = 0;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    ASSERT_NE(nullptr, capture);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, SINGLE_CHANNEL_COUNT, SAMPLE_RATE_48000);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
-    EXPECT_EQ(SAMPLE_RATE_48000, attrsValue.sampleRate);
-    EXPECT_EQ(SINGLE_CHANNEL_COUNT, attrsValue.channelCount);
-
-    ret = capture->attr.GetFrameSize(capture, &size);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_GT(size, INITIAL_VALUE);
-}
-#endif
 /**
     * @tc.name  AudioCaptureGetFrameCount_005
     * @tc.desc  Test CaptureGetFrameCount interface,return 0 if get framesize define channelCount as different values
@@ -801,91 +522,6 @@ HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_hdi_CaptureGetFrameCou
     ret = capture->control.Stop((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 }
-#ifndef PRODUCT_RK3568
-/**
-    * @tc.name  AudioCaptureGetFrameCount_007
-    * @tc.desc  Test CaptureGetFrameCount interface,return 0 if get framesize define channelCount to different values
-* @tc.type: FUNC
-*/
-HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_hdi_CaptureGetFrameCount_0007, TestSize.Level1)
-{
-    int32_t ret = -1;
-    uint64_t count = 0;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    ASSERT_NE(nullptr, capture);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_24_BIT, SINGLE_CHANNEL_COUNT, SAMPLE_RATE_44100);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
-    EXPECT_EQ(SAMPLE_RATE_44100, attrsValue.sampleRate);
-    EXPECT_EQ(SINGLE_CHANNEL_COUNT, attrsValue.channelCount);
-
-    ret = AudioCaptureStartAndOneFrame(capture);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = capture->attr.GetFrameCount(capture, &count);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_GT(count, INITIAL_VALUE);
-
-    ret = capture->control.Stop((AudioHandle)capture);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-}
-/**
-    * @tc.name  AudioCaptureGetFrameCount_008
-    * @tc.desc  Test CaptureGetFrameCount interface,return 0 if get framesize define format as different values
-* @tc.type: FUNC
-*/
-HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_hdi_CaptureGetFrameCount_0008, TestSize.Level1)
-{
-    int32_t ret = -1;
-    uint64_t count = 0;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    ASSERT_NE(nullptr, capture);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, SINGLE_CHANNEL_COUNT, SAMPLE_RATE_32000);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
-    EXPECT_EQ(SAMPLE_RATE_32000, attrsValue.sampleRate);
-    EXPECT_EQ(SINGLE_CHANNEL_COUNT, attrsValue.channelCount);
-
-    ret = AudioCaptureStartAndOneFrame(capture);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = capture->attr.GetFrameCount(capture, &count);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_GT(count, INITIAL_VALUE);
-
-    ret = capture->control.Stop((AudioHandle)capture);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-}
-#endif
-#ifndef PRODUCT_RK3568
-/**
-    * @tc.name  AudioCaptureGetCurrentChannelId_002
-    * @tc.desc  Test GetCurrentChannelId interface,return 0 if get channelId to 1 and set channelCount to 1
-* @tc.type: FUNC
-*/
-HWTEST_F(AudioHdiCaptureHardwareDependenceTest, SUB_Audio_HDI_CaptureGetCurrentChannelId_0002, TestSize.Level1)
-{
-    int32_t ret = -1;
-    uint32_t channelId = 0;
-    uint32_t channelIdExp = 1;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    ASSERT_NE(nullptr, capture);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_TYPE_PCM_16_BIT, SINGLE_CHANNEL_COUNT, SAMPLE_RATE_48000);
-
-    ret = AudioCaptureSetGetSampleAttributes(attrs, attrsValue, capture);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(SINGLE_CHANNEL_COUNT, attrsValue.channelCount);
-
-    ret = capture->attr.GetCurrentChannelId(capture, &channelId);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(channelIdExp, channelId);
-}
-#endif
 /**
     * @tc.name  AudioCaptureGetCapturePosition_009
     * @tc.desc  Test GetCapturePosition interface,return 0 if get framesize
@@ -964,115 +600,4 @@ HWTEST_F(AudioHdiCaptureHardwareDependenceTest, AudioCaptureGetCapturePosition_0
     ret = capture->control.Stop((AudioHandle)capture);
     EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
 }
-#ifndef PRODUCT_RK3568
-/**
-    * @tc.name  AudioCaptureGetCapturePosition_011
-    * @tc.desc  Test GetCapturePosition interface,return 0 if get framesize define channelCount  as different values
-* @tc.type: FUNC
-*/
-HWTEST_F(AudioHdiCaptureHardwareDependenceTest, AudioCaptureGetCapturePosition_011, TestSize.Level1)
-{
-    int32_t ret = -1;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    uint64_t frames = 0;
-    int64_t timeExp = 0;
-    struct AudioTimeStamp time = {.tvSec = 0, .tvNSec = 0};
-    ASSERT_NE(nullptr, capture);
-    InitAttrs(attrs);
-    attrs.type = AUDIO_IN_MEDIA;
-    attrs.interleaved = false;
-    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
-    attrs.sampleRate = SAMPLE_RATE_48000;
-    attrs.channelCount = 1;
-    ret = capture->attr.SetSampleAttributes(capture, &attrs);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = capture->attr.GetSampleAttributes(capture, &attrsValue);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_16_BIT, attrsValue.format);
-    EXPECT_EQ(SAMPLE_RATE_48000, attrsValue.sampleRate);
-    EXPECT_EQ(SINGLE_CHANNEL_COUNT, attrsValue.channelCount);
-
-    ret = AudioCaptureStartAndOneFrame(capture);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = capture->GetCapturePosition(capture, &frames, &time);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_GT((time.tvSec) * SECTONSEC + (time.tvNSec), timeExp);
-    EXPECT_GT(frames, INITIAL_VALUE);
-
-    capture->control.Stop((AudioHandle)capture);
-}
-/**
-    * @tc.name  AudioCaptureGetCapturePosition_012
-    * @tc.desc  Test GetCapturePosition interface,return 0 if get framesize define channelCount to 1
-* @tc.type: FUNC
-*/
-HWTEST_F(AudioHdiCaptureHardwareDependenceTest, AudioCaptureGetCapturePosition_012, TestSize.Level1)
-{
-    int32_t ret = -1;
-    uint64_t frames = 0;
-    int64_t timeExp = 0;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    struct AudioTimeStamp time = {.tvSec = 0, .tvNSec = 0};
-    ASSERT_NE(nullptr, capture);
-    InitAttrs(attrs);
-    attrs.type = AUDIO_IN_MEDIA;
-    attrs.interleaved = false;
-    attrs.format = AUDIO_FORMAT_TYPE_PCM_24_BIT;
-    attrs.sampleRate = SAMPLE_RATE_48000;
-    attrs.channelCount = 1;
-    ret = capture->attr.SetSampleAttributes(capture, &attrs);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = capture->attr.GetSampleAttributes(capture, &attrsValue);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(SINGLE_CHANNEL_COUNT, attrsValue.channelCount);
-    EXPECT_EQ(AUDIO_FORMAT_TYPE_PCM_24_BIT, attrsValue.format);
-    EXPECT_EQ(SAMPLE_RATE_48000, attrsValue.sampleRate);
-
-    ret = AudioCaptureStartAndOneFrame(capture);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = capture->GetCapturePosition(capture, &frames, &time);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_GT((time.tvSec) * SECTONSEC + (time.tvNSec), timeExp);
-    EXPECT_GT(frames, INITIAL_VALUE);
-
-    capture->control.Stop((AudioHandle)capture);
-}
-/**
-* @tc.name  AudioCaptureGetMmapPosition_002
-* @tc.desc  Test GetMmapPosition interface,return 0 if Getting position successfully.
-* @tc.type: FUNC
-*/
-HWTEST_F(AudioHdiCaptureHardwareDependenceTest, AudioCaptureGetMmapPosition_002, TestSize.Level1)
-{
-    int32_t ret = -1;
-    uint64_t frames = 0;
-    int64_t timeExp = 0;
-    struct PrepareAudioPara audiopara = {
-        .capture = capture, .path = AUDIO_LOW_LATENCY_CAPTURE_FILE.c_str()
-    };
-    ASSERT_NE(nullptr, audiopara.capture);
-    InitAttrs(audiopara.attrs);
-    audiopara.attrs.format = AUDIO_FORMAT_TYPE_PCM_24_BIT;
-    audiopara.attrs.channelCount = 1;
-    ret = audiopara.capture->attr.SetSampleAttributes(audiopara.capture, &(audiopara.attrs));
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-
-    ret = pthread_create(&audiopara.tids, NULL, (THREAD_FUNC)RecordMapAudio, &audiopara);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-
-    void *result = nullptr;
-    pthread_join(audiopara.tids, &result);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, (intptr_t)result);
-
-    ret = audiopara.capture->attr.GetMmapPosition(audiopara.capture, &frames, &(audiopara.time));
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_GT((audiopara.time.tvSec) * SECTONSEC + (audiopara.time.tvNSec), timeExp);
-    EXPECT_GT(frames, INITIAL_VALUE);
-
-    ret = audiopara.capture->control.Stop((AudioHandle)audiopara.capture);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-}
-#endif
 }

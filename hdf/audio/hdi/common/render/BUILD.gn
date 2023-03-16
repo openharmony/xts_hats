@@ -50,9 +50,6 @@ ohos_moduletest_suite("HatsHdfAudioRenderTest") {
   if (enable_audio_adm_service) {
     defines += [ "AUDIO_ADM_SERVICE" ]
   }
-  if (enable_audio_product_rk) {
-    defines += [ "PRODUCT_RK3568" ]
-  }
   subsystem_name = "hdf"
   part_name = "drivers_peripheral_audio"
 }

@@ -58,47 +58,6 @@ void AudioHdiRenderAttrTest::TearDown(void) {}
 
 /**
 * @tc.name  Test AudioRenderSetSampleAttributes API via legal input.
-* @tc.number  SUB_Audio_HDI_AudioRenderSetSampleAttributes_0001
-* @tc.desc  Test AudioRenderSetSampleAttributes ,the setting parameters are as follows.
-*    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
-*    attrs.sampleRate = AUDIO_SAMPLE_RATE_MASK_8000;
-*    attrs.channelCount = 1;
-*/
-HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_0001, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioRender *render = nullptr;
-    struct AudioSampleAttributes attrs = {};
-  
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 8000);
-
-    ret = render->attr.SetSampleAttributes(render, &attrs);
-#ifdef PRODUCT_RK3568
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-#else
-    uint32_t ret1 = 1;
-    uint32_t ret2 = 8000;
-    struct AudioSampleAttributes attrsValue = {};
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = render->attr.GetSampleAttributes(render, &attrsValue);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-
-    EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
-    EXPECT_EQ(ret2, attrsValue.sampleRate);
-    EXPECT_EQ(ret1, attrsValue.channelCount);
-#endif
-
-    adapter->DestroyRender(adapter, render);
-    manager->UnloadAdapter(manager, adapter);
-}
-/**
-* @tc.name  Test AudioRenderSetSampleAttributes API via legal input.
 * @tc.number  SUB_Audio_HDI_AudioRenderSetSampleAttributes_0002
 * @tc.desc  Test AudioRenderSetSampleAttributes ,the setting parameters are as follows.
 *    attrs.type = AUDIO_IN_MEDIA;
@@ -204,44 +163,6 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
 }
 /**
 * @tc.name  Test AudioRenderSetSampleAttributes API via legal input.
-* @tc.number  SUB_Audio_HDI_AudioRenderSetSampleAttributes_0005
-* @tc.desc  Test AudioRenderSetSampleAttributes ,the setting parameters are as follows.
-*    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
-*    attrs.sampleRate = 44100;
-*    attrs.channelCount = 1;
-*/
-HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_0005, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioRender *render = nullptr;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-  
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 44100);
-
-    ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
-#ifdef PRODUCT_RK3568
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-#else
-    uint32_t ret1 = 44100;
-    uint32_t ret2 = 1;
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-
-    EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
-    EXPECT_EQ(ret1, attrsValue.sampleRate);
-    EXPECT_EQ(ret2, attrsValue.channelCount);
-#endif
-    adapter->DestroyRender(adapter, render);
-    manager->UnloadAdapter(manager, adapter);
-}
-/**
-* @tc.name  Test AudioRenderSetSampleAttributes API via legal input.
 * @tc.desc  Test AudioRenderSetSampleAttributes ,the setting parameters are as follows.
 *    attrs.type = AUDIO_IN_COMMUNICATION;
 *    attrs.format = AUDIO_FORMAT_PCM_24_BIT;
@@ -296,82 +217,6 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
     ret = render->attr.SetSampleAttributes(render, nullptr);
     EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
-
-    adapter->DestroyRender(adapter, render);
-    manager->UnloadAdapter(manager, adapter);
-}
-/**
-* @tc.name  Test AudioRenderSetSampleAttributes API via legal input.
-* @tc.number  SUB_Audio_HDI_AudioRenderSetSampleAttributes_0008
-* @tc.desc  Test AudioRenderSetSampleAttributes ,the setting parameters are as follows.
-*    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
-*    attrs.sampleRate = 12000;
-*    attrs.channelCount = 1;
-*/
-HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_0008, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioRender *render = nullptr;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-  
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 12000);
-
-    ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
-#ifdef PRODUCT_RK3568
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-#else
-    uint32_t ret1 = 1;
-    uint32_t ret2 = 12000;
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-
-    EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
-    EXPECT_EQ(ret2, attrsValue.sampleRate);
-    EXPECT_EQ(ret1, attrsValue.channelCount);
-#endif
-    adapter->DestroyRender(adapter, render);
-    manager->UnloadAdapter(manager, adapter);
-}
-/**
-* @tc.name  Test AudioRenderSetSampleAttributes API via legal input.
-* @tc.number  SUB_Audio_HDI_AudioRenderSetSampleAttributes_0009
-* @tc.desc  Test AudioRenderSetSampleAttributes ,the setting parameters are as follows.
-*    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_24_BIT;
-*    attrs.sampleRate = 16000;
-*    attrs.channelCount = 1;
-*/
-HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_0009, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioRender *render = nullptr;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-  
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 16000);
-    ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
-#ifdef PRODUCT_RK3568
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-#else
-    uint32_t ret1 = 1;
-    uint32_t ret2 = 16000;
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-
-    EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
-    EXPECT_EQ(ret2, attrsValue.sampleRate);
-    EXPECT_EQ(ret1, attrsValue.channelCount);
-#endif
 
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
@@ -443,45 +288,6 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     EXPECT_EQ(ret2, attrsValue.sampleRate);
     EXPECT_EQ(ret1, attrsValue.channelCount);
 
-    adapter->DestroyRender(adapter, render);
-    manager->UnloadAdapter(manager, adapter);
-}
-/**
-* @tc.name  Test AudioRenderSetSampleAttributes API via legal input.
-* @tc.number  SUB_Audio_HDI_AudioRenderSetSampleAttributes_0012
-* @tc.desc  Test AudioRenderSetSampleAttributes ,the setting parameters are as follows.
-*    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_24_BIT;
-*    attrs.sampleRate = 96000;
-*    attrs.channelCount = 1;
-*/
-HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_0012, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioRender *render = nullptr;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-  
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 96000);
-
-    ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
-#ifdef PRODUCT_RK3568
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-#else
-    uint32_t ret1 = 1;
-    uint32_t ret2 = 96000;
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-
-    EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
-    EXPECT_EQ(ret2, attrsValue.sampleRate);
-    EXPECT_EQ(ret1, attrsValue.channelCount);
-#endif
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
 }
@@ -650,44 +456,6 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderSetSampleAttributes_00
     manager->UnloadAdapter(manager, adapter);
 }
 /**
-* @tc.name  Test AudioRenderGetSampleAttributes API via legal input.
-* @tc.number  SUB_Audio_HDI_AudioRenderGetSampleAttributes_0001
-* @tc.desc  Test AudioRenderGetSampleAttributes ,the setting parameters are as follows.
-*    attrs.type = AUDIO_IN_MEDIA;
-*    attrs.format = AUDIO_FORMAT_PCM_16_BIT;
-*    attrs.sampleRate = 8000;
-*    attrs.channelCount = 1;
-*/
-HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_AudioRenderGetSampleAttributes_0001, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioRender *render = nullptr;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-  
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 8000);
-    ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
-#ifdef PRODUCT_RK3568
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
-#else
-    uint32_t ret1 = 8000;
-    uint32_t ret2 = 1;
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-
-    EXPECT_EQ(AUDIO_IN_MEDIA, attrsValue.type);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
-    EXPECT_EQ(ret1, attrsValue.sampleRate);
-    EXPECT_EQ(ret2, attrsValue.channelCount);
-#endif
-    adapter->DestroyRender(adapter, render);
-    manager->UnloadAdapter(manager, adapter);
-}
-/**
 * @tc.name  Test AudioRendereGetSampleAttributes API via setting the render is empty .
 * @tc.number  SUB_Audio_HDI_AudioRenderGetSampleAttributes_0002
 * @tc.desc   Test AudioRendereGetSampleAttributes interface, return -1 if the render is empty.
@@ -817,42 +585,7 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetFrameSize_0004, Function
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
 }
-#ifndef PRODUCT_RK3568
-/**
-* @tc.name  Test RenderGetFrameSize API via define sampleRate to different values
-* @tc.number  SUB_Audio_HDI_RenderGetFrameSize_0005
-* @tc.desc  Test RenderGetFrameSize interface,return 0 if get framesize define sampleRate as different values
-*/
-HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetFrameSize_0005, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    uint64_t size = 0;
-    uint64_t channelCountExp = 1;
-    uint32_t sampleRateExp = 48000;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioRender *render = nullptr;
-  
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 48000);
 
-    ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
-    EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
-    EXPECT_EQ(channelCountExp, attrsValue.channelCount);
-
-    ret = render->attr.GetFrameSize(render, &size);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_GT(size, INITIAL_VALUE);
-
-    adapter->DestroyRender(adapter, render);
-    manager->UnloadAdapter(manager, adapter);
-}
-#endif
 /**
 * @tc.name  Test RenderGetFrameSize API via define channelCount to different values
 * @tc.number  SUB_Audio_HDI_RenderGetFrameSize_0006
@@ -887,42 +620,6 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetFrameSize_0006, Function
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
 }
-#ifndef PRODUCT_RK3568
-/**
-* @tc.name  Test RenderGetFrameSize API via define sampleRate to different values
-* @tc.number  SUB_Audio_HDI_RenderGetFrameSize_0007
-* @tc.desc  Test RenderGetFrameSize interface,return 0 if get framesize define sampleRate as different values
-*/
-HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetFrameSize_0007, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    uint64_t size = 0;
-    uint64_t channelCountExp = 1;
-    uint32_t sampleRateExp = 48000;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioRender *render = nullptr;
-  
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 48000);
-
-    ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
-    EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
-    EXPECT_EQ(channelCountExp, attrsValue.channelCount);
-
-    ret = render->attr.GetFrameSize(render, &size);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_GT(size, INITIAL_VALUE);
-
-    adapter->DestroyRender(adapter, render);
-    manager->UnloadAdapter(manager, adapter);
-}
-#endif
 /**
 * @tc.name  Test RenderGetFrameCount API via legal
 * @tc.number  SUB_Audio_HDI_RenderGetFrameCount_0001
@@ -1074,82 +771,6 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetFrameCount_0005, Functio
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
 }
-#ifndef PRODUCT_RK3568
-/**
-* @tc.name  Test RenderGetFrameCount API via define channelCount to different values
-* @tc.number  SUB_Audio_HDI_RenderGetFrameCount_0006
-* @tc.desc  Test RenderGetFrameCount interface,return 0 if get framesize define channelCount to different values
-*/
-HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetFrameCount_0006, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    uint64_t count = 0;
-    uint64_t channelCountExp = 1;
-    uint32_t sampleRateExp = 44100;
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioRender *render = nullptr;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-  
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 44100);
-
-    ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_24_BIT, attrsValue.format);
-    EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
-    EXPECT_EQ(channelCountExp, attrsValue.channelCount);
-
-    ret = AudioRenderStartAndOneFrame(render);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = render->attr.GetFrameCount(render, &count);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_GT(count, INITIAL_VALUE);
-
-    render->control.Stop((AudioHandle)render);
-    adapter->DestroyRender(adapter, render);
-    manager->UnloadAdapter(manager, adapter);
-}
-/**
-* @tc.name  Test RenderGetFrameCount API via define format to different values
-* @tc.number  SUB_Audio_HDI_RenderGetFrameCount_0007
-* @tc.desc  Test RenderGetFrameCount interface,return 0 if get framesize define format as different values
-*/
-HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetFrameCount_0007, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    uint64_t count = 0;
-    uint64_t channelCountExp = 1;
-    uint32_t sampleRateExp = 32000;
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioRender *render = nullptr;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-  
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_16_BIT, 1, 32000);
-
-    ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(AUDIO_FORMAT_PCM_16_BIT, attrsValue.format);
-    EXPECT_EQ(sampleRateExp, attrsValue.sampleRate);
-    EXPECT_EQ(channelCountExp, attrsValue.channelCount);
-
-    ret = AudioRenderStartAndOneFrame(render);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = render->attr.GetFrameCount(render, &count);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_GT(count, INITIAL_VALUE);
-
-    render->control.Stop((AudioHandle)render);
-    adapter->DestroyRender(adapter, render);
-    manager->UnloadAdapter(manager, adapter);
-}
-#endif
 /**
 * @tc.name  Test RenderGetCurrentChannelId API via legal input
 * @tc.number  SUB_Audio_HDI_RenderGetCurrentChannelId_0001
@@ -1172,38 +793,6 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetCurrentChannelId_0001, F
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
 }
-#ifndef PRODUCT_RK3568
-/**
-* @tc.name  Test GetCurrentChannelId API via get channelId to 1 and set channelCount to 1
-* @tc.number  SUB_Audio_HDI_RenderGetCurrentChannelId_0003
-* @tc.desc  Test GetCurrentChannelId interface,return 0 if get channelId to 1 and set channelCount to 1
-*/
-HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderGetCurrentChannelId_0002, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    uint32_t channelId = 0;
-    uint32_t channelCountExp = 1;
-    struct AudioSampleAttributes attrs = {};
-    struct AudioSampleAttributes attrsValue = {};
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioRender *render = nullptr;
-  
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    InitAttrsUpdate(attrs, AUDIO_FORMAT_PCM_24_BIT, 1, 32000);
-
-    ret = AudioRenderSetGetSampleAttributes(attrs, attrsValue, render);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    EXPECT_EQ(channelCountExp, attrs.channelCount);
-
-    ret = render->attr.GetCurrentChannelId(render, &channelId);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-
-    adapter->DestroyRender(adapter, render);
-    manager->UnloadAdapter(manager, adapter);
-}
-#endif
 /**
 * @tc.name  Test RenderGetCurrentChannelId API via CurrentChannelId is obtained after created
 * @tc.number  SUB_Audio_HDI_RenderGetCurrentChannelId_0003

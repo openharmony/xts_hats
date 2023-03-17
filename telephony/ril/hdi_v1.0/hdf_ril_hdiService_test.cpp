@@ -24,9 +24,9 @@
 #include "securec.h"
 #include "stdlib.h"
 #include "unistd.h"
-#include "v1_0/iril.h"
+#include "v1_1/iril.h"
 
-using namespace OHOS::HDI::Ril::V1_0;
+using namespace OHOS::HDI::Ril::V1_1;
 using namespace testing::ext;
 
 enum class HdiId {
@@ -395,14 +395,14 @@ public:
 
     // Sms
     int32_t NewSmsNotify(
-        const HDI::Ril::V1_0::RilRadioResponseInfo &responseInfo, const SmsMessageInfo &smsMessageInfo) override;
+        const HDI::Ril::V1_1::RilRadioResponseInfo &responseInfo, const SmsMessageInfo &smsMessageInfo) override;
     int32_t NewCdmaSmsNotify(
-        const HDI::Ril::V1_0::RilRadioResponseInfo &responseInfo, const SmsMessageInfo &smsMessageInfo) override;
+        const HDI::Ril::V1_1::RilRadioResponseInfo &responseInfo, const SmsMessageInfo &smsMessageInfo) override;
     int32_t SmsStatusReportNotify(
-        const HDI::Ril::V1_0::RilRadioResponseInfo &responseInfo, const SmsMessageInfo &smsMessageInfo) override;
-    int32_t NewSmsStoredOnSimNotify(const HDI::Ril::V1_0::RilRadioResponseInfo &responseInfo, int32_t recordNumber,
+        const HDI::Ril::V1_1::RilRadioResponseInfo &responseInfo, const SmsMessageInfo &smsMessageInfo) override;
+    int32_t NewSmsStoredOnSimNotify(const HDI::Ril::V1_1::RilRadioResponseInfo &responseInfo, int32_t recordNumber,
         int32_t indicationType) override;
-    int32_t CBConfigNotify(const HDI::Ril::V1_0::RilRadioResponseInfo &responseInfo,
+    int32_t CBConfigNotify(const HDI::Ril::V1_1::RilRadioResponseInfo &responseInfo,
         const CBConfigReportInfo &cellBroadConfigReportInfo) override;
     int32_t SendGsmSmsResponse(
         const RilRadioResponseInfo &responseInfo, const SendSmsResultInfo &sendSmsResultInfo) override;
@@ -596,7 +596,7 @@ int32_t RilCallback::SimRefreshNotify(const RilRadioResponseInfo &responseInfo)
 }
 
 int32_t RilCallback::GetSimStatusResponse(
-    const HDI::Ril::V1_0::RilRadioResponseInfo &responseInfo, const HDI::Ril::V1_0::CardStatusInfo &result)
+    const HDI::Ril::V1_1::RilRadioResponseInfo &responseInfo, const HDI::Ril::V1_1::CardStatusInfo &result)
 {
     HDF_LOGI("GetBoolResult GetSimStatus result : slotId = %{public}d, simType = %{public}d, simState = %{public}d",
         responseInfo.slotId, result.simType, result.simState);
@@ -1749,28 +1749,28 @@ int32_t RilCallback::SetDataProfileInfoResponse(const RilRadioResponseInfo &resp
 
 // Sms
 int32_t RilCallback::NewSmsNotify(
-    const HDI::Ril::V1_0::RilRadioResponseInfo &responseInfo, const SmsMessageInfo &smsMessageInfo)
+    const HDI::Ril::V1_1::RilRadioResponseInfo &responseInfo, const SmsMessageInfo &smsMessageInfo)
 {
     HDF_LOGI("RilCallback::NewSmsNotify smsMessageInfo size : %{public}d", smsMessageInfo.size);
     return 0;
 }
 
 int32_t RilCallback::NewCdmaSmsNotify(
-    const HDI::Ril::V1_0::RilRadioResponseInfo &responseInfo, const SmsMessageInfo &smsMessageInfo)
+    const HDI::Ril::V1_1::RilRadioResponseInfo &responseInfo, const SmsMessageInfo &smsMessageInfo)
 {
     HDF_LOGI("RilCallback::NewCdmaSmsNotify smsMessageInfo size : %{public}d", smsMessageInfo.size);
     return 0;
 }
 
 int32_t RilCallback::SmsStatusReportNotify(
-    const HDI::Ril::V1_0::RilRadioResponseInfo &responseInfo, const SmsMessageInfo &smsMessageInfo)
+    const HDI::Ril::V1_1::RilRadioResponseInfo &responseInfo, const SmsMessageInfo &smsMessageInfo)
 {
     HDF_LOGI("RilCallback::SmsStatusReportNotify smsMessageInfo size : %{public}d", smsMessageInfo.size);
     return 0;
 }
 
 int32_t RilCallback::NewSmsStoredOnSimNotify(
-    const HDI::Ril::V1_0::RilRadioResponseInfo &responseInfo, int32_t recordNumber, int32_t indicationType)
+    const HDI::Ril::V1_1::RilRadioResponseInfo &responseInfo, int32_t recordNumber, int32_t indicationType)
 {
     HDF_LOGI("RilCallback::NewSmsStoredOnSimNotify recordNumber : %{public}d, indicationType : %{public}d",
         recordNumber, indicationType);
@@ -1778,7 +1778,7 @@ int32_t RilCallback::NewSmsStoredOnSimNotify(
 }
 
 int32_t RilCallback::CBConfigNotify(
-    const HDI::Ril::V1_0::RilRadioResponseInfo &responseInfo, const CBConfigReportInfo &cellBroadConfigReportInfo)
+    const HDI::Ril::V1_1::RilRadioResponseInfo &responseInfo, const CBConfigReportInfo &cellBroadConfigReportInfo)
 {
     HDF_LOGI("RilCallback::CBConfigNotify cellBroadConfigReportInfo dcs : %{public}s",
         cellBroadConfigReportInfo.dcs.c_str());

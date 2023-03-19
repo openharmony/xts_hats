@@ -261,7 +261,6 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0080, Function | MediumTe
     auto ret = component_->GetComponentVersion(component_, &verInfo);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
-#ifndef SUPPORT_OMX
 /**
 * @tc.name  HdfCodecHdiGetVersionTest_002
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0090
@@ -273,6 +272,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0090, Function | MediumTe
     auto ret = component_->GetComponentVersion(component_, nullptr);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
+#ifndef SUPPORT_OMX
 /**
 * @tc.name  HdfCodecHdiGetParameterTest_003
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0100
@@ -991,7 +991,6 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0530, Function | MediumTe
     FreeBufferOnPort(PortIndex::PORT_INDEX_OUTPUT);
     ASSERT_FALSE(ret);
 }
-#endif
 /**
 * @tc.name  HdfCodecHdiAllocateBufferTest_005
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0540
@@ -1022,9 +1021,10 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0550, Function | MediumTe
     allocBuffer.type = READ_WRITE_TYPE;
     err = component_->AllocateBuffer(component_, (uint32_t)PortIndex::PORT_INDEX_OUTPUT, &allocBuffer);
     ASSERT_EQ(err, HDF_SUCCESS);
-    err = component_->FreeBuffer(component_, (uint32_t)PortIndex::PORT_INDEX_INPUT, &allocBuffer);
+    err = component_->FreeBuffer(component_, (uint32_t)PortIndex::PORT_INDEX_OUTPUT, &allocBuffer);
     ASSERT_EQ(err, HDF_SUCCESS);
 }
+#endif
 /**
 * @tc.name  HdfCodecHdiUseEglImageTest_001
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0560
@@ -1204,7 +1204,6 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0650, Function | MediumTe
     auto ret = component_->ComponentRoleEnum(component_, role, ROLE_LEN, MAX_ROLE_INDEX);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
-#endif
 /**
 * @tc.name  HdfCodecHdiRoleEnumTest_003
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0660
@@ -1216,6 +1215,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0660, Function | MediumTe
     auto ret = component_->SendCommand(component_, OMX_CommandStateSet, OMX_StateIdle, nullptr, 0);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
+#endif
 /**
 * @tc.name  HdfCodecHdiExecutingToIdleTest_001
 * @tc.number  SUB_DriverSystem_CodecHdi_V2_0670

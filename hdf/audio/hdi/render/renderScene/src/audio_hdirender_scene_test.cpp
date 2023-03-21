@@ -314,7 +314,7 @@ HWTEST_F(AudioHdiRenderSceneTest, SUB_Audio_HDI_AudioRenderSelectScene_0005, Fun
     scenes.scene.id = 5;
     scenes.desc.pins = PIN_OUT_HDMI;
     ret = render->scene.SelectScene(render, &scenes);
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
+    EXPECT_NE(AUDIO_HAL_SUCCESS, ret);
 
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);

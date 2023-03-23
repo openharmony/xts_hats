@@ -68,9 +68,10 @@ int set_devide_chunk(size_t size)
 static int child(void)
 {
     uintptr_t *c;
+	uintptr_t *d;
 
     /* Set first dividing chunk */
-    if (set_devide_chunk(sizeof(size_t))) {
+    if (set_devide_chunk(sizeof(uintptr_t))) {
         return -1;
     }
 
@@ -80,14 +81,24 @@ static int child(void)
      * bin[0] and malloc again. Basically this is heap spray.
      */
     for (int i = 0; i < 512; ++i) {
-        if (set_devide_chunk(sizeof(size_t))) {
-            return -1;
-        }
+
         c = (uintptr_t *)malloc(sizeof(uintptr_t));
         if (!c) {
             printf("Malloc failed: %s\n", strerror(errno));
             return -1;
         }
+        if (set_devide_chunk(sizeof(uintptr_t))) {
+            return -1;
+        }
+        d = (uintptr_t *)malloc(sizeof(uintptr_t));
+        if (!c) {
+            printf("Malloc failed: %s\n", strerror(errno));
+            return -1;
+        }
+        if (set_devide_chunk(sizeof(uintptr_t))) {
+            return -1;
+        }
+        free(d);
         free(c);
         /* exchange the prev and next pointer */
         uintptr_t temp = c[0];

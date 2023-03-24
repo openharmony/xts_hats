@@ -893,7 +893,7 @@ attr-sampling-rate=48000";
     {
         ret = render->attr.GetExtraParams((AudioHandle)render, keyValueListValueOne, listLenth);
         EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-        EXPECT_STREQ(keyValueListOneExp, keyValueListValueOne)
+        EXPECT_STREQ(keyValueListOneExp, keyValueListValueOne);
     }
     ret = render->attr.SetExtraParams((AudioHandle)render, keyValueListTwo);
     if(ret != AUDIO_HAL_SUCCESS){

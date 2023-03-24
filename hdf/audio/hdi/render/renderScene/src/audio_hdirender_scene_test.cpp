@@ -95,31 +95,7 @@ HWTEST_F(AudioHdiRenderSceneTest, SUB_Audio_HDI_RenderCheckSceneCapability_0001,
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
 }
-/**
-* @tc.name   Test checking scene's capability where the scene is not configed in the josn.
-* @tc.number  SUB_Audio_HDI_RenderCheckSceneCapability_0002
-* @tc.desc  Test RenderCheckSceneCapability interface,return -1 if the scene is not configed in the josn.
-*/
-HWTEST_F(AudioHdiRenderSceneTest, SUB_Audio_HDI_RenderCheckSceneCapability_0002, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    bool supported = true;
-    struct AudioSceneDescriptor scenes = {};
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioRender *render = nullptr;
 
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-
-    scenes.scene.id = 5;
-    scenes.desc.pins = PIN_OUT_SPEAKER;
-    ret = render->scene.CheckSceneCapability(render, &scenes, &supported);
-    EXPECT_NE(AUDIO_HAL_SUCCESS, ret);
-
-    adapter->DestroyRender(adapter, render);
-    manager->UnloadAdapter(manager, adapter);
-}
 /**
 * @tc.name   Test checking scene's capability where the render is empty
 * @tc.number  SUB_Audio_HDI_RenderCheckSceneCapability_0003

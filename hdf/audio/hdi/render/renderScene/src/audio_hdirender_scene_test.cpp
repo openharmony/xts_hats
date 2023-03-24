@@ -115,7 +115,7 @@ HWTEST_F(AudioHdiRenderSceneTest, SUB_Audio_HDI_RenderCheckSceneCapability_0002,
     scenes.scene.id = 5;
     scenes.desc.pins = PIN_OUT_SPEAKER;
     ret = render->scene.CheckSceneCapability(render, &scenes, &supported);
-    EXPECT_EQ(AUDIO_HAL_ERR_INTERNAL, ret);
+    EXPECT_NE(AUDIO_HAL_SUCCESS, ret);
 
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);

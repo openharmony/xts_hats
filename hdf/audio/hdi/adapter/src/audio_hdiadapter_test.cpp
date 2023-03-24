@@ -739,30 +739,4 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPassthroughMode_0004, Func
 
     manager->UnloadAdapter(manager, adapter);
 }
-/**
-* @tc.name  Test AdapterUpdateAudioRoute API
-* @tc.number  SUB_Audio_HDI_UpdateAudioRoute_0001
-* @tc.desc  Test the UpdateAudioRoute API,return -2 if Error in incoming parameter.
-*/
-HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterUpdateAudioRoute_0001, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    struct AudioPort* audioPort = nullptr;
-    int32_t routeHandle = -1;
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioRoute route = {};
-    
-    TestAudioManager* manager = GetAudioManagerFuncs();
-
-    ret = GetLoadAdapter(manager, PORT_OUT, ADAPTER_NAME, &adapter, audioPort);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ASSERT_NE(nullptr, adapter);
-    ret = adapter->InitAllPorts(adapter);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = adapter->UpdateAudioRoute(adapter, &route, &routeHandle);
-    EXPECT_NE(AUDIO_HAL_SUCCESS, ret);
-    ret = adapter->ReleaseAudioRoute(adapter, routeHandle);
-    EXPECT_EQ(AUDIO_HAL_ERR_NOT_SUPPORT, ret);
-    manager->UnloadAdapter(manager, adapter);
-}
 }

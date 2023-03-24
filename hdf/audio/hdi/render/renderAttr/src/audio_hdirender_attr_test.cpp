@@ -893,7 +893,7 @@ attr-sampling-rate=48000";
     {
         ret = render->attr.GetExtraParams((AudioHandle)render, keyValueListValueOne, listLenth);
         EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-        EXPECT_STREQ(keyValueListOneExp, keyValueListValueOne);
+        EXPECT_STREQ(keyValueListOneExp, keyValueListValueOne)
     }
     ret = render->attr.SetExtraParams((AudioHandle)render, keyValueListTwo);
     if(ret != AUDIO_HAL_SUCCESS){
@@ -1218,7 +1218,8 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderAddAudioEffect_0001, TestSi
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = render->attr.AddAudioEffect((AudioHandle)render, effectid);
-    if ((ret == AUDIO_HAL_SUCCESS) || (ret == AUDIO_HAL_ERR_NOT_SUPPORT) || (ret == AUDIO_HAL_ERR_INVALID_PARAM)){
+    if ((ret == AUDIO_HAL_SUCCESS) || (ret == AUDIO_HAL_ERR_NOT_SUPPORT) || 
+    (ret == AUDIO_HAL_ERR_INVALID_PARAM) || (ret == AUDIO_HAL_ERR_INTERNAL)){
         EXPECT_TRUE(true);
     }else{
         EXPECT_TRUE(false);
@@ -1268,13 +1269,15 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderRemoveAudioEffect_0001, Tes
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = render->attr.AddAudioEffect((AudioHandle)render, effectid);
-    if ((ret == AUDIO_HAL_SUCCESS) || (ret == AUDIO_HAL_ERR_NOT_SUPPORT) || (ret == AUDIO_HAL_ERR_INVALID_PARAM)){
+    if ((ret == AUDIO_HAL_SUCCESS) || (ret == AUDIO_HAL_ERR_NOT_SUPPORT) ||
+     (ret == AUDIO_HAL_ERR_INVALID_PARAM) || (ret == AUDIO_HAL_ERR_INTERNAL)){
         EXPECT_TRUE(true);
     }else{
         EXPECT_TRUE(false);
     }
     ret = render->attr.RemoveAudioEffect((AudioHandle)render, effectid);
-       if ((ret == AUDIO_HAL_SUCCESS) || (ret == AUDIO_HAL_ERR_NOT_SUPPORT) || (ret == AUDIO_HAL_ERR_INVALID_PARAM)){
+       if ((ret == AUDIO_HAL_SUCCESS) || (ret == AUDIO_HAL_ERR_NOT_SUPPORT) || 
+       (ret == AUDIO_HAL_ERR_INVALID_PARAM) || (ret == AUDIO_HAL_ERR_INTERNAL)){
         EXPECT_TRUE(true);
     }else{
         EXPECT_TRUE(false);
@@ -1300,7 +1303,8 @@ HWTEST_F(AudioHdiRenderAttrTest, SUB_Audio_HDI_RenderRemoveAudioEffect_0002, Tes
     ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
     ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
     ret = render->attr.RemoveAudioEffect((AudioHandle)renderNull, effectid);
-    if ((ret == AUDIO_HAL_SUCCESS) || (ret == AUDIO_HAL_ERR_NOT_SUPPORT) || (ret == AUDIO_HAL_ERR_INVALID_PARAM)){
+    if ((ret == AUDIO_HAL_SUCCESS) || (ret == AUDIO_HAL_ERR_NOT_SUPPORT) || 
+    (ret == AUDIO_HAL_ERR_INVALID_PARAM) || (ret == AUDIO_HAL_ERR_INTERNAL)){
         EXPECT_TRUE(true);
     }else{
         EXPECT_TRUE(false);

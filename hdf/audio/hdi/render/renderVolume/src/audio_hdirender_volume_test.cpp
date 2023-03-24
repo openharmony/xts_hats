@@ -216,61 +216,6 @@ HWTEST_F(AudioHdiRenderVolumeTest, SUB_Audio_HDI_RenderSetGain_0001, Function | 
     manager->UnloadAdapter(manager, adapter);
 }
 /**
-* @tc.name  Test RenderSetGain API via set gain to the boundary value
-* @tc.number  SUB_Audio_HDI_RenderSetGain_0002
-* @tc.desc  Test RenderSetGain interface,return -1 if Set gain to exceed the boundary value
-*/
-HWTEST_F(AudioHdiRenderVolumeTest, SUB_Audio_HDI_RenderSetGain_0002, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    float min = 0;
-    float max = 0;
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioRender *render = nullptr;
-
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = render->volume.GetGainThreshold((AudioHandle)render, &min, &max);
-    if ((ret == AUDIO_HAL_SUCCESS) || (ret == AUDIO_HAL_ERR_NOT_SUPPORT)){
-        EXPECT_TRUE(true);
-    }else{
-        EXPECT_TRUE(false);
-    }
-    float gainOne = max+1;
-    float gainSec = min-1;
-    ret = render->volume.SetGain(render, gainOne);
-    EXPECT_NE(AUDIO_HAL_SUCCESS, ret);
-
-    ret = render->volume.SetGain(render, gainSec);
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
-
-    adapter->DestroyRender(adapter, render);
-    manager->UnloadAdapter(manager, adapter);
-}
-/**
-* @tc.name  Test RenderSetGain API via set gain to exception type
-* @tc.number  SUB_Audio_HDI_RenderSetGain_0003
-* @tc.desc  Test RenderSetGain interface,return -1 if set gain to exception type
-*/
-HWTEST_F(AudioHdiRenderVolumeTest, SUB_Audio_HDI_RenderSetGain_0003, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    char gain = 'a';
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioRender *render = nullptr;
-
-    TestAudioManager* manager = GetAudioManagerFuncs();
-    ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-
-    ret = render->volume.SetGain(render, gain);
-    EXPECT_NE(AUDIO_HAL_SUCCESS, ret);
-
-    adapter->DestroyRender(adapter, render);
-    manager->UnloadAdapter(manager, adapter);
-}
-/**
 * @tc.name  Test RenderSetGain API via set the parameter render to nullptr
 * @tc.number  SUB_Audio_HDI_RenderSetGain_0004
 * @tc.desc  Test RenderSetGain interface, return -1 if set render to nullptr

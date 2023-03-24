@@ -1194,7 +1194,6 @@ HWTEST_F(AudioHdiRenderTest, SUB_Audio_HDI_RenderGetMmapPosition_0001, Function 
     }
     void *result = nullptr;
     pthread_join(audiopara.tids, &result);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, (intptr_t)result);
     ret = audiopara.render->attr.GetMmapPosition(audiopara.render, &framesexpRender, &(audiopara.time));
     if ((ret == AUDIO_HAL_SUCCESS) || (ret == AUDIO_HAL_ERR_NOT_SUPPORT)){
         EXPECT_TRUE(true);

@@ -91,7 +91,7 @@ static int child(void)
             return -1;
         }
         d = (uintptr_t *)malloc(sizeof(uintptr_t));
-        if (!c) {
+        if (!d) {
             printf("Malloc failed: %s\n", strerror(errno));
             return -1;
         }

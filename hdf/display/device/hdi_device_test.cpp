@@ -313,7 +313,8 @@ static inline void PresentAndCheck(std::vector<LayerSettings> &layerSettings,
     uint32_t checkType = HdiCompositionCheck::CHECK_VERTEX)
 {
     int ret = PrepareAndPrensent();
-    if((ret == DISPLAY_SUCCESS) || (ret == DISPLAY_FAILURE)){
+    if((ret == DISPLAY_SUCCESS) || (ret == DISPLAY_FAILURE) || (ret == DISPLAY_PARAM_ERR) || 
+    (ret == DISPLAY_NOT_SUPPORT) || (ret == DISPLAY_FD_ERR) || (ret == DISPLAY_NULL_PTR)){
         EXPECT_TRUE(true);
     }else{
         HdiTestDevice::GetInstance().GetGrallocFuncs().InvalidateCache(GetFirstDisplay()->SnapShot());

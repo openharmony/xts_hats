@@ -89,6 +89,15 @@ void RunModelTest(OHOS::sptr<V1_0::INnrtDevice> device, OHOS::sptr<V1_0::IPrepar
     std::vector<float> outputValue(buffer, buffer + ADDEND_DATA_SIZE);
     // check output
     EXPECT_TRUE(CheckExpectOutput(outputValue, expectValue)) << "output value check failed.";
+
+    // release
+    HDICommon::ReleaseBufferOfTensors(device, inputs);
+    HDICommon::ReleaseBufferOfTensors(device, outputs);
+    HDICommon::UnmapAllMemory(mapedMemorys);
+    outputsDims.clear();
+    isOutputBufferEnough.clear();
+    expectValue.clear();
+    outputValue.clear();
 }
 
 } // namespace

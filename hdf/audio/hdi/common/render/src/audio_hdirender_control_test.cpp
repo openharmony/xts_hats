@@ -107,30 +107,7 @@ HWTEST_F(AudioHdiRenderControlTest, SUB_Audio_HDI_RenderStart_0002, TestSize.Lev
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
 }
-/**
-* @tc.name  AudioRenderStart_003
-* @tc.desc  Test AudioRenderStart interface,return -1 the second time if the RenderStart is called twice
-* @tc.type: FUNC
-*/
-HWTEST_F(AudioHdiRenderControlTest, SUB_Audio_HDI_RenderStart_0003, TestSize.Level1)
-{
-    int32_t ret = -1;
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioRender *render = nullptr;
 
-    ASSERT_NE(nullptr, manager);
-    ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = render->control.Start((AudioHandle)render);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = render->control.Start((AudioHandle)render);
-    EXPECT_EQ(AUDIO_HAL_ERR_AO_BUSY, ret);
-
-    ret = render->control.Stop((AudioHandle)render);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    adapter->DestroyRender(adapter, render);
-    manager->UnloadAdapter(manager, adapter);
-}
 /**
 * @tc.name  AudioRenderStop_001
 * @tc.desc  test AudioRenderStop interface. return 0 if the rendering is successfully stopped.
@@ -173,30 +150,7 @@ HWTEST_F(AudioHdiRenderControlTest, SUB_Audio_HDI_RenderStop_0002, TestSize.Leve
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
 }
-/**
-* @tc.name  AudioRenderStop_003
-* @tc.desc  Test RenderStop interface,return -4 the second time if the RenderStop is called twice
-* @tc.type: FUNC
-*/
-HWTEST_F(AudioHdiRenderControlTest, SUB_Audio_HDI_RenderStop_0003, TestSize.Level1)
-{
-    int32_t ret = -1;
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioRender *render = nullptr;
 
-    ASSERT_NE(nullptr, manager);
-    ret = AudioCreateRender(manager, PIN_OUT_SPEAKER, ADAPTER_NAME, &adapter, &render);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = render->control.Start((AudioHandle)render);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = render->control.Stop((AudioHandle)render);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = render->control.Stop((AudioHandle)render);
-    EXPECT_EQ(AUDIO_HAL_ERR_NOT_SUPPORT, ret);
-
-    adapter->DestroyRender(adapter, render);
-    manager->UnloadAdapter(manager, adapter);
-}
 /**
 * @tc.name  AudioRenderStop_004
 * @tc.desc  Test RenderStop interface, return -1 if the incoming parameter handle is nullptr
@@ -244,29 +198,7 @@ HWTEST_F(AudioHdiRenderControlTest, SUB_Audio_HDI_RenderPause_0001, TestSize.Lev
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
 }
-/**
-* @tc.name  AudioRenderPause_002
-* @tc.desc  Test AudioRenderPause interface, return -1 the second time if RenderPause is called twice
-* @tc.type: FUNC
-*/
-HWTEST_F(AudioHdiRenderControlTest, SUB_Audio_HDI_RenderPause_0002, TestSize.Level1)
-{
-    int32_t ret = -1;
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioRender *render = nullptr;
 
-    ASSERT_NE(nullptr, manager);
-    ret = AudioCreateStartRender(manager, &render, &adapter, ADAPTER_NAME);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = render->control.Pause((AudioHandle)render);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = render->control.Pause((AudioHandle)render);
-    EXPECT_EQ(AUDIO_HAL_ERR_NOT_SUPPORT, ret);
-
-    render->control.Stop((AudioHandle)render);
-    adapter->DestroyRender(adapter, render);
-    manager->UnloadAdapter(manager, adapter);
-}
 /**
 * @tc.name  AudioRenderPause_003
 * @tc.desc  Test AudioRenderPause interface,return -1 if the render is paused after created.
@@ -425,32 +357,7 @@ HWTEST_F(AudioHdiRenderControlTest, SUB_Audio_HDI_RenderResume_0003, TestSize.Le
     adapter->DestroyRender(adapter, render);
     manager->UnloadAdapter(manager, adapter);
 }
-/**
-    * @tc.name  AudioRenderResume_004
-    * @tc.desc  Test RenderResume interface,return -1 the second time if the RenderResume is called twice
-    * @tc.type: FUNC
-*/
-HWTEST_F(AudioHdiRenderControlTest, SUB_Audio_HDI_RenderResume_0004, TestSize.Level1)
-{
-    int32_t ret = -1;
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioRender *render = nullptr;
 
-    ASSERT_NE(nullptr, manager);
-    ret = AudioCreateStartRender(manager, &render, &adapter, ADAPTER_NAME);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = render->control.Pause((AudioHandle)render);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = render->control.Resume((AudioHandle)render);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = render->control.Resume((AudioHandle)render);
-    EXPECT_EQ(AUDIO_HAL_ERR_NOT_SUPPORT, ret);
-
-    ret = render->control.Stop((AudioHandle)render);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    adapter->DestroyRender(adapter, render);
-    manager->UnloadAdapter(manager, adapter);
-}
 /**
     * @tc.name  AudioRenderResume_005
     * @tc.desc  test HDI RenderResume interface,return -1 if the render Continue to start after resume

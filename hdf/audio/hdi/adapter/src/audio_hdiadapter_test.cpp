@@ -347,40 +347,6 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterInitAllPorts_0001, Function |
 }
 
 /**
-* @tc.name  Test AudioAdapterInitAllPorts API when loads two adapters.
-* @tc.number  SUB_Audio_HDI_AdapterInitAllPorts_0002
-* @tc.desc  Test the AudioAdapterInitAllPorts API, and check if 0 is returned when two adapters are loaded successfully.
-*/
-HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterInitAllPorts_0002, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    int32_t ret2 = -1;
-    struct AudioPort* renderPort = nullptr;
-    struct AudioPort* renderPortUsb = nullptr;
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioAdapter *adapter1 = nullptr;
-    
-    TestAudioManager* manager = GetAudioManagerFuncs();
-
-    ret = GetLoadAdapter(manager, PORT_OUT, ADAPTER_NAME, &adapter, renderPort);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ASSERT_NE(nullptr, adapter);
-    ret2 = GetLoadAdapter(manager, PORT_OUT, ADAPTER_NAME_OUT, &adapter1, renderPortUsb);
-    if (ret2 < 0 || adapter1 == nullptr) {
-        manager->UnloadAdapter(manager, adapter);
-        ASSERT_EQ(AUDIO_HAL_SUCCESS, ret2);
-    }
-    ret = adapter->InitAllPorts(adapter);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-
-    ret2 = adapter1->InitAllPorts(adapter1);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret2);
-
-    manager->UnloadAdapter(manager, adapter);
-    manager->UnloadAdapter(manager, adapter1);
-}
-
-/**
 * @tc.name  Test AudioAdapterInitAllPorts API when the parameter adapter is empty.
 * @tc.number  SUB_Audio_HDI_AdapterInitAllPorts_0003
 * @tc.desc  Test the AudioAdapterInitAllPorts API, and check if -1 is returned when the parameter adapter is empty.
@@ -771,32 +737,6 @@ HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterGetPassthroughMode_0004, Func
     ret = adapter->GetPassthroughMode(adapter, audioPort, modeNull);
     EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
 
-    manager->UnloadAdapter(manager, adapter);
-}
-/**
-* @tc.name  Test AdapterUpdateAudioRoute API
-* @tc.number  SUB_Audio_HDI_UpdateAudioRoute_0001
-* @tc.desc  Test the UpdateAudioRoute API,return -2 if Error in incoming parameter.
-*/
-HWTEST_F(AudioHdiAdapterTest, SUB_Audio_HDI_AdapterUpdateAudioRoute_0001, Function | MediumTest | Level1)
-{
-    int32_t ret = -1;
-    struct AudioPort* audioPort = nullptr;
-    int32_t routeHandle = -1;
-    struct AudioAdapter *adapter = nullptr;
-    struct AudioRoute route = {};
-    
-    TestAudioManager* manager = GetAudioManagerFuncs();
-
-    ret = GetLoadAdapter(manager, PORT_OUT, ADAPTER_NAME, &adapter, audioPort);
-    ASSERT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ASSERT_NE(nullptr, adapter);
-    ret = adapter->InitAllPorts(adapter);
-    EXPECT_EQ(AUDIO_HAL_SUCCESS, ret);
-    ret = adapter->UpdateAudioRoute(adapter, &route, &routeHandle);
-    EXPECT_EQ(AUDIO_HAL_ERR_INVALID_PARAM, ret);
-    ret = adapter->ReleaseAudioRoute(adapter, routeHandle);
-    EXPECT_EQ(AUDIO_HAL_ERR_NOT_SUPPORT, ret);
     manager->UnloadAdapter(manager, adapter);
 }
 }

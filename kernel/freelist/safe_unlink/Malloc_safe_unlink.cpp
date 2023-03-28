@@ -23,6 +23,8 @@
 #define SIZE_ALIGN (4 * sizeof(size_t))
 #define THRESHOLD (0x1c00 * SIZE_ALIGN)
 #define ITER_TIME 20
+const int MALLOC_SIZE_ONE = 1024;
+const int MALLOC_SIZE_TWO = 2048;
 
 static void handler(int s)
 {
@@ -56,7 +58,7 @@ void MallocSafeUnlink::TearDownTestCase()
 
 volatile void *g_ptr;
 
-int set_devide_chunk(size_t size)
+int set_devide_chunk(int size)
 {
     if (!(g_ptr = malloc(size))) {
         printf("Malloc failed: %s\n", strerror(errno));
@@ -67,11 +69,11 @@ int set_devide_chunk(size_t size)
 
 static int child(void)
 {
-    uintptr_t *c;
-	uintptr_t *d;
+    int *c;
+	int *d;
 
     /* Set first dividing chunk */
-    if (set_devide_chunk(sizeof(uintptr_t))) {
+    if (set_devide_chunk(MALLOC_SIZE_TWO)) {
         return -1;
     }
 
@@ -82,20 +84,20 @@ static int child(void)
      */
     for (int i = 0; i < 512; ++i) {
 
-        c = (uintptr_t *)malloc(sizeof(uintptr_t));
+        c = (int *)malloc(MALLOC_SIZE_ONE);
         if (!c) {
             printf("Malloc failed: %s\n", strerror(errno));
             return -1;
         }
-        if (set_devide_chunk(sizeof(uintptr_t))) {
+        if (set_devide_chunk(MALLOC_SIZE_TWO)) {
             return -1;
         }
-        d = (uintptr_t *)malloc(sizeof(uintptr_t));
+        d = (int *)malloc(MALLOC_SIZE_ONE);
         if (!d) {
             printf("Malloc failed: %s\n", strerror(errno));
             return -1;
         }
-        if (set_devide_chunk(sizeof(uintptr_t))) {
+        if (set_devide_chunk(MALLOC_SIZE_TWO)) {
             return -1;
         }
         free(d);

@@ -305,7 +305,10 @@ HWTEST_F(UserIamFaceAuthTest, Security_IAM_Face_HDI_FUNC_0111, Function | Medium
         if (surface == nullptr) {
             cout << "CreateSurfaceAsConsumer fail" << endl;
         }
-        bufferProducer = surface->GetProducer();
+        else
+        {
+            bufferProducer = surface->GetProducer();
+        }
     }
     sptr<BufferProducerSequenceable> producerSequenceable =
         new (std::nothrow) BufferProducerSequenceable(bufferProducer);

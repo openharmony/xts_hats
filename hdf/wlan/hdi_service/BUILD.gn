@@ -37,7 +37,7 @@ ohos_moduletest_suite("HatsHdfWlanHdiServiceTest") {
   if (is_standard_system) {
     external_deps = [
       "c_utils:utils",
-      "drivers_interface_wlan:libwlan_proxy_1.0",
+      "drivers_interface_wlan:libwlan_proxy_1.1",
       "hdf_core:libhdf_host",
       "hdf_core:libhdf_ipc_adapter",
       "hdf_core:libhdf_utils",

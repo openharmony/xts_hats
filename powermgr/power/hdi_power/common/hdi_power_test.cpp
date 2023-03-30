@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -308,27 +308,28 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest011, TestSize.Level1)
 
 /**
   * @tc.name: HdfPowerHdiTest012
-  * @tc.desc: UnholdRunningLock
+  * @tc.desc: UnholdRunningLock, name is null
   * @tc.type: FUNC
  */
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest012, TestSize.Level1)
 {
     struct RunningLockInfo info = {
-        .name = "acts_test",
+        .name = "",
     };
     int32_t ret = g_powerInterface->UnholdRunningLock(info);
-    EXPECT_TRUE(HDF_SUCCESS == ret) << "HdfPowerHdiTest012 failed";
+    EXPECT_TRUE(HDF_ERR_INVALID_PARAM == ret) << "HdfPowerHdiTest012 failed";
 }
 
 /**
   * @tc.name: HdfPowerHdiTest013
-  * @tc.desc: UnholdRunningLock, name is null
+  * @tc.desc: UnholdRunningLock, type is invaild
   * @tc.type: FUNC
  */
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest013, TestSize.Level1)
 {
     struct RunningLockInfo info = {
-        .name = "",
+        .name = "acts_test",
+        .type = static_cast<RunningLockType>(100),
     };
     int32_t ret = g_powerInterface->UnholdRunningLock(info);
     EXPECT_TRUE(HDF_ERR_INVALID_PARAM == ret) << "HdfPowerHdiTest013 failed";
@@ -336,16 +337,44 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest013, TestSize.Level1)
 
 /**
   * @tc.name: HdfPowerHdiTest014
-  * @tc.desc: UnholdRunningLock, name is null
+  * @tc.desc: UnholdRunningLock, runninglock type not found
   * @tc.type: FUNC
  */
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest014, TestSize.Level1)
 {
     struct RunningLockInfo info = {
         .name = "acts_test",
-        .type = static_cast<RunningLockType>(100),
+        .type = RunningLockType::RUNNINGLOCK_BACKGROUND_TASK,
     };
     int32_t ret = g_powerInterface->UnholdRunningLock(info);
-    EXPECT_TRUE(HDF_ERR_INVALID_PARAM == ret) << "HdfPowerHdiTest014 failed";
+    EXPECT_TRUE(HDF_ERR_NOT_SUPPORT == ret) << "HdfPowerHdiTest014 failed";
+}
+
+/**
+  * @tc.name: HdfPowerHdiTest015
+  * @tc.desc: UnholdRunningLock, runninglock name not found
+  * @tc.type: FUNC
+ */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest015, TestSize.Level1)
+{
+    struct RunningLockInfo info = {
+        .name = "",
+        .type = RunningLockType::RUNNINGLOCK_BACKGROUND_NOTIFICATION,
+        .timeoutMs = -1,
+        .pid = 0,
+        .uid = 0,
+    };
+    std::string lockName = "acts_test";
+    std::string errorLockName = "error_acts_test";
+
+    info.name = lockName;
+    int32_t ret = g_powerInterface->HoldRunningLock(info);
+    EXPECT_TRUE(HDF_SUCCESS == ret);
+    info.name = errorLockName;
+    ret = g_powerInterface->UnholdRunningLock(info);
+    EXPECT_TRUE(HDF_ERR_NOT_SUPPORT == ret);
+    info.name = lockName;
+    ret = g_powerInterface->UnholdRunningLock(info);
+    EXPECT_TRUE(HDF_SUCCESS == ret);
 }
 }

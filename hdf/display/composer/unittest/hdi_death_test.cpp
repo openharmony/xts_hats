@@ -38,7 +38,7 @@ void DeathTest::SetUp()
 
 void ComposerDiedRecipient::OnRemoteDied(const wptr<IRemoteObject>& remote)
 {
-    if (remote == nullptr) { 
+    if (remote == nullptr) {
         return;
     }
     DISPLAY_TEST_LOGE("display composer service dead");

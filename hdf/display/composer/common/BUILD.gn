@@ -22,7 +22,7 @@ config("module_private_config") {
   visibility = [ ":*" ]
 }
 
-ohos_static_library("disp_dev_hdi_test_common") {
+ohos_static_library("disp_dev_hdi_test") {
   defines = []
   defines += display_defines
   sources = [
@@ -40,7 +40,7 @@ ohos_static_library("disp_dev_hdi_test_common") {
     "$base_root/drivers/interface/display/composer/bufferhandle_parcelable",
     "$base_root/drivers/peripheral/display",
   ]
-  output_name = "disp_dev_hdi_test_common"
+  output_name = "disp_dev_hdi_test"
   cflags = [
     "-DGRALLOC_GBM_SUPPORT",
     "-Wno-macro-redefined",

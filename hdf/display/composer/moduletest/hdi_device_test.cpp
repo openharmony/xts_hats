@@ -295,22 +295,21 @@ static void AdjustLayerSettings(std::vector<LayerSettings> &settings, uint32_t w
             setting.displayRect.w = static_cast<uint32_t>(setting.rectRatio.w * w);
             setting.displayRect.x = static_cast<uint32_t>(setting.rectRatio.x * w);
             setting.displayRect.y = static_cast<uint32_t>(setting.rectRatio.y * h);
-            DISPLAY_TEST_LOGE("display rect adust form %f %f %f %f to %{public}d %{public}d %{public}d %{public}d ", setting.rectRatio.x,
-                setting.rectRatio.y, setting.rectRatio.w, setting.rectRatio.h, setting.displayRect.x,
-                setting.displayRect.y, setting.displayRect.w, setting.displayRect.h);
+            DISPLAY_TEST_LOGE("display rect adust form %f %f %f %f to %{public}d %{public}d %{public}d %{public}d ", 
+                setting.rectRatio.x, setting.rectRatio.y, setting.rectRatio.w, setting.rectRatio.h, 
+                setting.displayRect.x, setting.displayRect.y, setting.displayRect.w, setting.displayRect.h);
         }
 
         if ((setting.bufferRatio.h > 0.0f) || (setting.bufferRatio.w > 0.0f)) {
             setting.bufferSize.h = static_cast<uint32_t>(setting.bufferRatio.h * h);
             setting.bufferSize.w = static_cast<uint32_t>(setting.bufferRatio.w * w);
-            DISPLAY_TEST_LOGE("buffer size adjust for %f %f to %{public}d %{public}d", setting.bufferRatio.w, setting.bufferRatio.h,
-                setting.bufferSize.w, setting.bufferSize.h);
+            DISPLAY_TEST_LOGE("buffer size adjust for %f %f to %{public}d %{public}d", setting.bufferRatio.w,
+                setting.bufferRatio.h, setting.bufferSize.w, setting.bufferSize.h);
         }
 
         if ((setting.bufferSize.w == 0) || (setting.bufferSize.h == 0)) {
-            DISPLAY_TEST_LOGE("buffer size adjust for %{public}d %{public}d to %{public}d %{public}d", setting.bufferSize.w, setting.bufferSize.h,
-                setting.displayRect.w, setting.displayRect.h);
-
+            DISPLAY_TEST_LOGE("buffer size adjust for %{public}d %{public}d to %{public}d %{public}d",
+                setting.bufferSize.w, setting.bufferSize.h, setting.displayRect.w, setting.displayRect.h);
             setting.bufferSize.w = setting.displayRect.w;
             setting.bufferSize.h = setting.displayRect.h;
         }

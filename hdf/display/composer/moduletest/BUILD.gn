@@ -28,7 +28,7 @@ ohos_moduletest_suite("HatsHdfDisplayComposerMtTest") {
   module_out_path = module_output_path
   sources = [ "hdi_device_test.cpp" ]
   deps = [
-    "$base_root/test/xts/hats/hdf/display/composer/common:disp_dev_hdi_test_common",
+    "$base_root/test/xts/hats/hdf/display/composer/common:disp_dev_hdi_test",
     "$base_root/third_party/googletest:gtest_main",
   ]
   include_dirs = [

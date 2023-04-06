@@ -63,6 +63,10 @@ ohos_moduletest_suite("HatsHdfAudioCaptureAttrTest") {
   if (enable_audio_adm_service) {
     defines += [ "AUDIO_ADM_SERVICE" ]
   }
+  if (defined(drivers_peripheral_audio_alsa_lib) &&
+      drivers_peripheral_audio_alsa_lib == true) {
+    defines += [ "ALSA_LIB_MODE" ]
+  }
   subsystem_name = "hdf"
   part_name = "drivers_peripheral_audio"
 }

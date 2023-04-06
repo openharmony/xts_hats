@@ -18,12 +18,12 @@ import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/codec"
-
+base_root = "../../../../../../"
 ohos_moduletest_suite("HatsHdfOmxCodecTest") {
   module_out_path = module_output_path
   configs = [ ":hdf_codec_omx" ]
   sources = [
-    "codec_hdi_manger_test.cpp",
+    "codec_hdi_manager_test.cpp",
     "codec_hdi_omx_test.cpp",
   ]
 
@@ -32,14 +32,17 @@ ohos_moduletest_suite("HatsHdfOmxCodecTest") {
   if (is_standard_system) {
     external_deps = [
       "c_utils:utils",
+      "drivers_interface_display:display_buffer_idl_headers",
+      "drivers_interface_display:display_composer_idl_headers",
+      "drivers_interface_display:libdisplay_buffer_hdi_impl",
       "drivers_peripheral_codec:libcodec_hdi_omx_client",
-      "drivers_peripheral_display:hdi_gralloc_client",
       "graphic_chipsetsdk:buffer_handle",
       "hdf_core:libhdf_host",
       "hdf_core:libhdf_ipc_adapter",
       "hdf_core:libhdf_utils",
       "hdf_core:libhdi",
       "hiviewdfx_hilog_native:libhilog",
+      "ipc:ipc_single",
     ]
   } else {
     external_deps = [ "hilog:libhilog" ]
@@ -54,7 +57,10 @@ ohos_moduletest_suite("HatsHdfOmxCodecTest") {
 }
 
 config("hdf_codec_omx") {
-  include_dirs = [ "//third_party/openmax/api/1.1.2" ]
+  include_dirs = [
+    "//third_party/openmax/api/1.1.2",
+    "$base_root/drivers/interface/display/composer/hdifd_parcelable",
+  ]
   cflags = [
     "-Wall",
     "-Wextra",

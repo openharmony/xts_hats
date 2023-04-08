@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -24,11 +24,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkDeviceTest") {
     "./common/HdfUsbdBenchmarkDeviceTest.cpp",
   ]
 
-  include_dirs = [
-    "include",
-    "//test/xts/hats/hdf/usb/UsbSubscriberTest",
-    "//utils/system/safwk/native/include",
-  ]
+  configs = [ ":hdf_usb" ]
 
   deps = [
     "//drivers/peripheral/usb/ddk:libusb_core",
@@ -45,6 +41,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkDeviceTest") {
     "common_event_service:cesfwk_innerkits",
     "drivers_interface_usb:libusb_proxy_1.0",
     "eventhandler:libeventhandler",
+    "hdf_core:libhdf_host",
     "hdf_core:libhdf_utils",
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_single",
@@ -62,11 +59,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkFunctionTest") {
     "./common/HdfUsbdBenchmarkFunctionTest.cpp",
   ]
 
-  include_dirs = [
-    "include",
-    "//test/xts/hats/hdf/usb/UsbSubscriberTest",
-    "//utils/system/safwk/native/include",
-  ]
+  configs = [ ":hdf_usb" ]
 
   deps = [
     "//drivers/peripheral/usb/ddk:libusb_core",
@@ -83,6 +76,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkFunctionTest") {
     "common_event_service:cesfwk_innerkits",
     "drivers_interface_usb:libusb_proxy_1.0",
     "eventhandler:libeventhandler",
+    "hdf_core:libhdf_host",
     "hdf_core:libhdf_utils",
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_single",
@@ -100,11 +94,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkRequestTest") {
     "./common/HdfUsbdBenchmarkRequestTest.cpp",
   ]
 
-  include_dirs = [
-    "include",
-    "//test/xts/hats/hdf/usb/UsbSubscriberTest",
-    "//utils/system/safwk/native/include",
-  ]
+  configs = [ ":hdf_usb" ]
 
   deps = [
     "//drivers/peripheral/usb/ddk:libusb_core",
@@ -121,6 +111,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkRequestTest") {
     "common_event_service:cesfwk_innerkits",
     "drivers_interface_usb:libusb_proxy_1.0",
     "eventhandler:libeventhandler",
+    "hdf_core:libhdf_host",
     "hdf_core:libhdf_utils",
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_single",
@@ -137,12 +128,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkTransferTest") {
     "../UsbSubscriberTest/UsbSubscriberTest.cpp",
     "./common/HdfUsbdBenchmarkTransferTest.cpp",
   ]
-
-  include_dirs = [
-    "include",
-    "//test/xts/hats/hdf/usb/UsbSubscriberTest",
-    "//utils/system/safwk/native/include",
-  ]
+  configs = [ ":hdf_usb" ]
 
   deps = [
     "//drivers/peripheral/usb/ddk:libusb_core",
@@ -159,6 +145,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkTransferTest") {
     "common_event_service:cesfwk_innerkits",
     "drivers_interface_usb:libusb_proxy_1.0",
     "eventhandler:libeventhandler",
+    "hdf_core:libhdf_host",
     "hdf_core:libhdf_utils",
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_single",
@@ -167,4 +154,12 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkTransferTest") {
   ]
   subsystem_name = "hdf"
   part_name = "drivers_peripheral_usb"
+}
+
+config("hdf_usb") {
+  include_dirs = [
+    "include",
+    "//test/xts/hats/hdf/usb/UsbSubscriberTest",
+    "//utils/system/safwk/native/include",
+  ]
 }

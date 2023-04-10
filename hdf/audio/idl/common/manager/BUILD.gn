@@ -10,23 +10,30 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 import("//build/ohos_var.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
-import("//test/xts/hats/build.gni")
+import("//drivers/peripheral/audio/audio.gni")
 import("//test/xts/tools/build/suite.gni")
 
-#################################group#########################################
-group("HatsHdfAudioTest") {
-  if (!defined(ohos_lite)) {
-    testonly = true
-  }
-  if (is_standard_system) {
-    if (xts_hats_rich == false) {
-      deps = [ "idl:hdi_base_common" ]
-    } else {
-      deps = [ "idl:hdi_base_common" ]
-    }
-  }
+module_output_path = "hats/audio"
+ohos_moduletest_suite("HatsHdfAudioIdlManagerTest") {
+  module_out_path = module_output_path
+  sources = [ "src/audio_manager_common_test.cpp" ]
+  configs = [ ":audio_idl_manager" ]
+
+  deps = [ "//third_party/bounds_checking_function:libsec_shared" ]
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_audio:audio_idl_headers",
+    "drivers_interface_audio:libaudio_proxy_1.0",
+    "hdf_core:libhdf_utils",
+    "hiviewdfx_hilog_native:libhilog",
+  ]
+
+  subsystem_name = "hdf"
+  part_name = "drivers_peripheral_audio"
 }
-###############################################################################
+
+config("audio_idl_manager") {
+  include_dirs = []
+}

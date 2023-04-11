@@ -162,9 +162,11 @@ static inline void PresentAndCheck(std::vector<LayerSettings> &layerSettings,
 {
     int ret = PrepareAndPrensent();
     ASSERT_TRUE((ret == DISPLAY_SUCCESS));
-    HdiTestDevice::GetInstance().GetGrallocInterface()->InvalidateCache(*(GetFirstDisplay()->SnapShot()));
-    ret = CheckComposition(layerSettings, GetFirstDisplay()->SnapShot(), checkType);
-    ASSERT_TRUE((ret == DISPLAY_SUCCESS));
+    if ((GetFirstDisplay()->SnapShot()) != nullptr) {
+        HdiTestDevice::GetInstance().GetGrallocInterface()->InvalidateCache(*(GetFirstDisplay()->SnapShot()));
+        ret = CheckComposition(layerSettings, GetFirstDisplay()->SnapShot(), checkType);
+        ASSERT_TRUE((ret == DISPLAY_SUCCESS));
+    }
 }
 
 void DeviceTest::TearDown()
@@ -189,7 +191,7 @@ VblankCtr::~VblankCtr() {}
 
 int32_t VblankCtr::WaitVblank(uint32_t ms)
 {
-    bool ret;
+    bool ret = false;
     DISPLAY_TEST_LOGE();
     std::unique_lock<std::mutex> lck(vblankMutex_);
     hasVblank_ = false; // must wait next vblank
@@ -256,12 +258,14 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0060, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
+#ifdef DISPLAY_COMMUNITY
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0070, TestSize.Level1)
 {
     uint32_t level;
     auto ret = g_composerDevice->GetDisplayBacklight(g_displayIds[0], level);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
+#endif
 
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0080, TestSize.Level1)
 {

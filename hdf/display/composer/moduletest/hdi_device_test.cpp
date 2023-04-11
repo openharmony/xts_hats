@@ -377,7 +377,7 @@ VblankCtr::~VblankCtr() {}
 
 int32_t VblankCtr::WaitVblank(uint32_t ms)
 {
-    bool ret;
+    bool ret = false;
     DISPLAY_TEST_LOGE();
     std::unique_lock<std::mutex> lck(vblankMutex_);
     hasVblank_ = false; // must wait next vblank

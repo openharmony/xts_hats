@@ -22,9 +22,9 @@ config("module_private_config") {
   visibility = [ ":*" ]
 }
 
-ohos_moduletest_suite("HatsHdfDisplayComposerUtTest") {
+ohos_moduletest_suite("HatsHdfDisplayComposerDeathTest") {
   module_out_path = module_output_path
-  sources = [ "hdi_composer_ut.cpp" ]
+  sources = [ "hdi_death_test.cpp" ]
   deps = [
     "$base_root/test/xts/hats/hdf/display/composer/common:disp_dev_hdi_test",
     "$base_root/third_party/googletest:gtest_main",
@@ -34,11 +34,11 @@ ohos_moduletest_suite("HatsHdfDisplayComposerUtTest") {
     "$base_root/drivers/interface/display/composer/bufferhandle_parcelable",
     "$base_root/test/xts/hats/hdf/display/composer/common",
     "$base_root/foundation/communication/ipc/interfaces/innerkits/ipc_core/include",
+    "$base_root/drivers/peripheral/display/utils/include",
     "$base_root/drivers/peripheral/base",
     "utils",
     ".",
   ]
-
   external_deps = [
     "c_utils:utils",
     "drivers_interface_display:display_buffer_idl_headers",

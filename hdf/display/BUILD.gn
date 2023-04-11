@@ -18,7 +18,10 @@ import("//test/xts/tools/build/suite.gni")
 group("HatsHdfDisplayTest") {
   testonly = true
   if (xts_hats_rich == true) {
-    deps = [ "gralloc/adaptation:HatsHdfDisplayAdaptationTest" ]
+    deps = [
+      "buffer:HatsHdfDisplayBufferTest",
+      "composer:HatsHdfDisplayComposerTest",
+    ]
   } else {
     deps = [
       #"device:HatsHdfDisplayDeviceTest",

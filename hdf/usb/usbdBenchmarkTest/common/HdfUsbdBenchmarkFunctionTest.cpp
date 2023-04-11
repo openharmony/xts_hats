@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,6 +20,8 @@
 #include "hdf_log.h"
 #include "if_system_ability_manager.h"
 #include "system_ability_definition.h"
+#include "usbd_function.h"
+#include "usbd_port.h"
 #include "v1_0/iusb_interface.h"
 #include "v1_0/usb_types.h"
 
@@ -28,10 +30,7 @@ using namespace OHOS;
 using namespace std;
 using namespace OHOS::HDI::Usb::V1_0;
 
-const int SLEEP_TIME = 3;
-const int TEST_PORT_ID = 1;
-const int TEST_POWER_ROLE = 2;
-const int TEST_DATAR_ROLE = 2;
+constexpr int32_t SLEEP_TIME = 3;
 
 namespace {
 sptr<IUsbInterface> g_usbInterface = nullptr;
@@ -42,7 +41,7 @@ void HdfUsbdBenchmarkFunctionTest::SetUp(const ::benchmark::State& state)
     if (g_usbInterface == nullptr) {
         exit(0);
     }
-    auto ret = g_usbInterface->SetPortRole(TEST_PORT_ID, TEST_POWER_ROLE, TEST_DATAR_ROLE);
+    auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
     sleep(SLEEP_TIME);
     ASSERT_EQ(0, ret);
     if (ret != 0) {
@@ -62,7 +61,7 @@ void HdfUsbdBenchmarkFunctionTest::TearDown(const ::benchmark::State& state) {}
 BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0030)
 (benchmark::State& st)
 {
-    int32_t funcs = 0;
+    int32_t funcs = USB_FUNCTION_NONE;
     auto ret = 0;
     for (auto _ : st) {
         ret = g_usbInterface->GetCurrentFunctions(funcs);
@@ -85,7 +84,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0030)
 BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0040)
 (benchmark::State& st)
 {
-    int32_t funcs = 1;
+    int32_t funcs = USB_FUNCTION_ACM;
     auto ret = 0;
     for (auto _ : st) {
         ret = g_usbInterface->SetCurrentFunctions(funcs);
@@ -110,7 +109,7 @@ BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0050)
 {
     auto ret = 0;
     for (auto _ : st) {
-        ret = g_usbInterface->SetPortRole(1, 1, 1);
+        ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
     }
     ASSERT_EQ(0, ret);
 }
@@ -130,10 +129,10 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0050)
 BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0060)
 (benchmark::State& st)
 {
-    int32_t portId = 0;
-    int32_t powerRole = 0;
-    int32_t dataRole = 0;
-    int32_t mode = 0;
+    int32_t portId = DEFAULT_PORT_ID;
+    int32_t powerRole = POWER_ROLE_NONE;
+    int32_t dataRole = DATA_ROLE_NONE;
+    int32_t mode = PORT_MODE_NONE;
     auto ret = 0;
     for (auto _ : st) {
         ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);

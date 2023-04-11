@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,7 +18,10 @@
 
 #include "UsbSubscriberTest.h"
 #include "hdf_log.h"
+#include "usb_ddk.h"
+#include "usb_ddk_interface.h"
 #include "securec.h"
+#include "usbd_type.h"
 #include "v1_0/iusb_interface.h"
 #include "v1_0/usb_types.h"
 #include "HdfUsbdBenchmarkTransferTest.h"
@@ -30,18 +33,16 @@ using namespace std;
 using namespace OHOS::HDI::Usb::V1_0;
 
 const int SLEEP_TIME = 3;
-uint8_t BUS_NUM_1 = 0;
-uint8_t DEV_ADDR_2 = 0;
-const uint32_t LENGTH_NUM_255 = 255;
-const uint8_t INTERFACEID_1 = 1;
-const uint8_t POINTID_1 = 1;
-const uint8_t POINTID_129 = 130;
-const uint8_t POINTID_BULK_IN = 0x82;
-const uint8_t POINTID_BULK_OUT = 0x01;
+const uint32_t MAX_BUFFER_LENGTH = 255;
+const uint8_t INTERFACEID_OK = 1;
+// data interface have 2 point : 1->bulk_out 2->bulk_in
+const uint8_t POINTID_BULK_IN = USB_ENDPOINT_DIR_IN | 2;
+const uint8_t POINTID_BULK_OUT = USB_ENDPOINT_DIR_OUT | 1;
 const int32_t ASHMEM_MAX_SIZE = 1024;
 const uint8_t SAMPLE_DATA_1 = 1;
 const uint8_t SAMPLE_DATA_2 = 2;
 const uint8_t SAMPLE_DATA_3 = 3;
+const int32_t TRANSFER_TIME_OUT = 1000;
 UsbDev HdfUsbdBenchmarkTransferTest::dev_ = { 0, 0 };
 
 namespace {
@@ -127,13 +128,11 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0200)
 (benchmark::State& st)
 {
     struct UsbDev dev = dev_;
-    uint8_t buffer[LENGTH_NUM_255] = { 0 };
-    uint32_t length = LENGTH_NUM_255;
-    std::vector<uint8_t> bufferdata = { buffer, buffer + length };
-    struct UsbCtrlTransfer ctrlparmas = { 0b10000000, 8, 0, 0, 1000 };
+    std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
+    struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN, USB_DDK_REQ_GET_CONFIGURATION, 0, 0, TRANSFER_TIME_OUT};
     auto ret = 0;
     for (auto _ : st) {
-        ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferdata);
+        ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
     }
     ASSERT_EQ(0, ret);
 }
@@ -155,14 +154,15 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0270)
 (benchmark::State& st)
 {
     struct UsbDev dev = dev_;
-    std::vector<uint8_t> bufferdata(LENGTH_NUM_255);
-    bufferdata.push_back(SAMPLE_DATA_1);
-    bufferdata.push_back(SAMPLE_DATA_2);
-    bufferdata.push_back(SAMPLE_DATA_3);
-    struct UsbCtrlTransfer ctrlparmas = {0b0001, 8, 0, 0, 1000};
+    std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
+    bufferData.push_back(SAMPLE_DATA_1);
+    bufferData.push_back(SAMPLE_DATA_2);
+    bufferData.push_back(SAMPLE_DATA_3);
+    struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_INTERFACE,
+        USB_DDK_REQ_GET_CONFIGURATION, 0, 0, TRANSFER_TIME_OUT};
     auto ret = 0;
     for (auto _ : st) {
-        ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferdata);
+        ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
     }
     ASSERT_EQ(0, ret);
 }
@@ -184,16 +184,14 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0210)
 (benchmark::State& st)
 {
     struct UsbDev dev = dev_;
-    uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_BULK_IN;
+    uint8_t interfaceId = INTERFACEID_OK;
+    uint8_t pointId = POINTID_BULK_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     ASSERT_EQ(0, ret);
-    uint8_t buffer[LENGTH_NUM_255] = { 0 };
-    uint32_t length = LENGTH_NUM_255;
-    struct UsbPipe pipe = { interfaceId, pointid };
-    std::vector<uint8_t> bufferdata = { buffer, buffer + length };
+    OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
+    std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     for (auto _ : st) {
-        ret = g_usbInterface->BulkTransferRead(dev, pipe, 1000, bufferdata);
+        ret = g_usbInterface->BulkTransferRead(dev, pipe, TRANSFER_TIME_OUT, bufferData);
     }
     ASSERT_EQ(0, ret);
 }
@@ -215,16 +213,14 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0220)
 (benchmark::State& st)
 {
     struct UsbDev dev = dev_;
-    uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_1;
+    uint8_t interfaceId = INTERFACEID_OK;
+    uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     ASSERT_EQ(0, ret);
-    uint32_t length = 100;
-    uint8_t buffer[100] = "hello world bulk writ01";
-    struct UsbPipe pipe = { interfaceId, pointid };
-    std::vector<uint8_t> bufferdata = { buffer, buffer + length };
+    OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
+    std::vector<uint8_t> bufferData = {'b', 'u', 'l', 'k', 'w', 'r', 'i', 't', 'e', '0', '1'};
     for (auto _ : st) {
-        ret = g_usbInterface->BulkTransferWrite(dev, pipe, 1000, bufferdata);
+        ret = g_usbInterface->BulkTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
     }
     ASSERT_EQ(0, ret);
 }
@@ -246,16 +242,14 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0230)
 (benchmark::State& st)
 {
     struct UsbDev dev = dev_;
-    uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_129;
+    uint8_t interfaceId = INTERFACEID_OK;
+    uint8_t pointId = POINTID_BULK_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     ASSERT_EQ(0, ret);
-    uint8_t buffer[LENGTH_NUM_255] = { 0 };
-    uint32_t length = LENGTH_NUM_255;
-    struct UsbPipe pipe = { interfaceId, pointid };
-    std::vector<uint8_t> bufferdata = { buffer, buffer + length };
+    OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
+    std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     for (auto _ : st) {
-        ret = g_usbInterface->InterruptTransferRead(dev, pipe, 1000, bufferdata);
+        ret = g_usbInterface->InterruptTransferRead(dev, pipe, TRANSFER_TIME_OUT, bufferData);
     }
     ASSERT_EQ(0, ret);
 }
@@ -277,16 +271,14 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0240)
 (benchmark::State& st)
 {
     struct UsbDev dev = dev_;
-    uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_1;
+    uint8_t interfaceId = INTERFACEID_OK;
+    uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     ASSERT_EQ(0, ret);
-    uint32_t length = 100;
-    uint8_t buffer[100] = "hello world Interrupt writ01";
-    struct UsbPipe pipe = { interfaceId, pointid };
-    std::vector<uint8_t> bufferdata = { buffer, buffer + length };
+    OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
+    std::vector<uint8_t> bufferData = {'i', 'n', 't', 'w', 'r', 'i', 't', 'e', '0', '1'};
     for (auto _ : st) {
-        ret = g_usbInterface->InterruptTransferWrite(dev, pipe, 1000, bufferdata);
+        ret = g_usbInterface->InterruptTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
     }
     ASSERT_EQ(0, ret);
 }
@@ -308,16 +300,14 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0250)
 (benchmark::State& st)
 {
     struct UsbDev dev = dev_;
-    uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_129;
+    uint8_t interfaceId = INTERFACEID_OK;
+    uint8_t pointId = POINTID_BULK_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     ASSERT_EQ(0, ret);
-    uint8_t buffer[LENGTH_NUM_255] = { 0 };
-    uint32_t length = LENGTH_NUM_255;
-    struct UsbPipe pipe = { interfaceId, pointid };
-    std::vector<uint8_t> bufferdata = { buffer, buffer + length };
+    OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
+    std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     for (auto _ : st) {
-        ret = g_usbInterface->IsoTransferRead(dev, pipe, 1000, bufferdata);
+        ret = g_usbInterface->IsoTransferRead(dev, pipe, TRANSFER_TIME_OUT, bufferData);
     }
     ASSERT_EQ(0, ret);
 }
@@ -339,16 +329,14 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0260)
 (benchmark::State& st)
 {
     struct UsbDev dev = dev_;
-    uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_1;
+    uint8_t interfaceId = INTERFACEID_OK;
+    uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     ASSERT_EQ(0, ret);
-    uint32_t length = 100;
-    uint8_t buffer[100] = "hello world Iso writ01";
-    struct UsbPipe pipe = { interfaceId, pointid };
-    std::vector<uint8_t> bufferdata = { buffer, buffer + length };
+    OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
+    std::vector<uint8_t> bufferData = {'i', 's', 'o', 'w', 'r', 'i', 't', 'e', '0', '1'};
     for (auto _ : st) {
-        ret = g_usbInterface->IsoTransferWrite(dev, pipe, 1000, bufferdata);
+        ret = g_usbInterface->IsoTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
     }
     ASSERT_EQ(0, ret);
 }
@@ -370,13 +358,13 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0290)
 {
     sptr<Ashmem> ashmem;
     uint8_t rflg = 0;
-    int32_t asmSize = LENGTH_NUM_255;
+    int32_t asmSize = MAX_BUFFER_LENGTH;
     struct UsbDev dev = dev_;
-    uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_129;
+    uint8_t interfaceId = INTERFACEID_OK;
+    uint8_t pointId = POINTID_BULK_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     ASSERT_EQ(0, ret);
-    struct UsbPipe pipe = { interfaceId, pointid };
+    OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     (void)InitAshmemOne(ashmem, asmSize, rflg);
     for (auto _ : st) {
         ret = g_usbInterface->BulkWrite(dev, pipe, ashmem);
@@ -401,13 +389,13 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0300)
 {
     sptr<Ashmem> ashmem;
     uint8_t rflg = 0;
-    int32_t asmSize = LENGTH_NUM_255;
+    int32_t asmSize = MAX_BUFFER_LENGTH;
     struct UsbDev dev = dev_;
-    uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_129;
+    uint8_t interfaceId = INTERFACEID_OK;
+    uint8_t pointId = POINTID_BULK_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     ASSERT_EQ(0, ret);
-    struct UsbPipe pipe = { interfaceId, pointid };
+    OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     (void)InitAshmemOne(ashmem, asmSize, rflg);
     for (auto _ : st) {
         ret = g_usbInterface->BulkRead(dev, pipe, ashmem);
@@ -431,9 +419,9 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0310)
 (benchmark::State& st)
 {
     struct UsbDev dev = dev_;
-    uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_BULK_OUT;
-    struct UsbPipe pipe = {interfaceId, pointid};
+    uint8_t interfaceId = INTERFACEID_OK;
+    uint8_t pointId = POINTID_BULK_OUT;
+    OHOS::HDI::Usb::V1_0::UsbPipe pipe = {interfaceId, pointId};
     sptr<UsbdBulkCallbackTest> usbdBulkCallback = new UsbdBulkCallbackTest();
     if (usbdBulkCallback == nullptr) {
         exit(0);
@@ -461,9 +449,9 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0320)
 (benchmark::State& st)
 {
     struct UsbDev dev = dev_;
-    uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_1;
-    struct UsbPipe pipe = {interfaceId, pointid};
+    uint8_t interfaceId = INTERFACEID_OK;
+    uint8_t pointId = POINTID_BULK_OUT;
+    OHOS::HDI::Usb::V1_0::UsbPipe pipe = {interfaceId, pointId};
     sptr<UsbdBulkCallbackTest> usbdBulkCallback = new UsbdBulkCallbackTest();
     if (usbdBulkCallback == nullptr) {
         exit(0);
@@ -499,7 +487,7 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0330)
     for (auto _ : st) {
         ret = g_usbInterface->BindUsbdSubscriber(subscriber);
     }
-    ASSERT_EQ(ret, 0);
+    ASSERT_EQ(0, ret);
 }
 
 BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0330)
@@ -527,7 +515,7 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0340)
     for (auto _ : st) {
         ret = g_usbInterface->UnbindUsbdSubscriber(subscriber);
     }
-    ASSERT_EQ(ret, 0);
+    ASSERT_EQ(0, ret);
 }
 
 BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0340)

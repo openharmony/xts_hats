@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,6 +19,7 @@
 #include "HdfUsbdBenchmarkRequestTest.h"
 #include "UsbSubscriberTest.h"
 #include "hdf_log.h"
+#include "usbd_type.h"
 #include "v1_0/iusb_interface.h"
 #include "v1_0/usb_types.h"
 
@@ -32,12 +33,12 @@ const int SLEEP_TIME = 3;
 const uint8_t INDEX_0 = 0;
 const uint8_t INDEX_1 = 1;
 const uint8_t CONFIG_ID_0 = 0;
-const uint32_t LENGTH_NUM_255 = 255;
-const uint32_t TAG_LENGTH_NUM_1000 = 1000;
+const uint32_t MAX_BUFFER_LENGTH = 255;
 const int TAG_NUM_10 = 10;
-const uint8_t INTERFACEID_1 = 1;
-const uint8_t POINTID_129 = 130;
-const uint8_t POINTID_BULK_IN = 0x82;
+const uint8_t INTERFACEID_OK = 1;
+// data interface have 2 point : 1->bulk_out 2->bulk_in
+const uint8_t POINTID_DIR_IN = USB_ENDPOINT_DIR_IN | 2;
+const uint32_t TIME_WAIT = 10000;
 UsbDev HdfUsbdBenchmarkRequestTest::dev_ = { 0, 0 };
 
 namespace {
@@ -112,7 +113,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0070)
 BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0080)
 (benchmark::State& st)
 {
-    uint8_t configIndex = 1;
+    uint8_t configIndex = INDEX_1;
     struct UsbDev dev = dev_;
     auto ret = 0;
     for (auto _ : st) {
@@ -136,7 +137,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0080)
 BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0090)
 (benchmark::State& st)
 {
-    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t interfaceId = INTERFACEID_OK;
     struct UsbDev dev = dev_;
     auto ret = 0;
     for (auto _ : st) {
@@ -160,7 +161,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0090)
 BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0100)
 (benchmark::State& st)
 {
-    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t interfaceId = INTERFACEID_OK;
     uint8_t altIndex = INDEX_0;
     struct UsbDev dev = dev_;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
@@ -186,13 +187,11 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0100)
 BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0110)
 (benchmark::State& st)
 {
-    uint32_t length = LENGTH_NUM_255;
-    uint8_t buffer[LENGTH_NUM_255] = { 0 };
     struct UsbDev dev = dev_;
-    std::vector<uint8_t> devdata(buffer, buffer + length);
+    std::vector<uint8_t> devData(MAX_BUFFER_LENGTH);
     auto ret = 0;
     for (auto _ : st) {
-        ret = g_usbInterface->GetDeviceDescriptor(dev, devdata);
+        ret = g_usbInterface->GetDeviceDescriptor(dev, devData);
     }
     ASSERT_EQ(0, ret);
 }
@@ -213,13 +212,11 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0120)
 (benchmark::State& st)
 {
     uint8_t stringId = 0;
-    uint8_t buffer[LENGTH_NUM_255] = { 0 };
-    uint32_t length = LENGTH_NUM_255;
     struct UsbDev dev = dev_;
-    std::vector<uint8_t> devdata(buffer, buffer + length);
+    std::vector<uint8_t> devData(MAX_BUFFER_LENGTH);
     auto ret = 0;
     for (auto _ : st) {
-        ret = g_usbInterface->GetStringDescriptor(dev, stringId, devdata);
+        ret = g_usbInterface->GetStringDescriptor(dev, stringId, devData);
     }
     ASSERT_EQ(0, ret);
 }
@@ -240,13 +237,11 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0130)
 (benchmark::State& st)
 {
     uint8_t configId = CONFIG_ID_0;
-    uint8_t buffer[LENGTH_NUM_255] = {};
-    uint32_t length = LENGTH_NUM_255;
     struct UsbDev dev = dev_;
-    std::vector<uint8_t> devdata(buffer, buffer + length);
+    std::vector<uint8_t> devData(MAX_BUFFER_LENGTH);
     auto ret = 0;
     for (auto _ : st) {
-        ret = g_usbInterface->GetConfigDescriptor(dev, configId, devdata);
+        ret = g_usbInterface->GetConfigDescriptor(dev, configId, devData);
     }
     ASSERT_EQ(0, ret);
 }
@@ -316,18 +311,15 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0160)
 (benchmark::State& st)
 {
     struct UsbDev dev = dev_;
-    uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_129;
+    uint8_t interfaceId = INTERFACEID_OK;
+    uint8_t pointId = POINTID_DIR_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     ASSERT_EQ(0, ret);
-    uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
-    uint8_t buffer[LENGTH_NUM_255] = { 0 };
-    uint32_t length = LENGTH_NUM_255;
-    struct UsbPipe pipe = { interfaceId, pointid };
-    std::vector<uint8_t> clientdata = { tag, tag + TAG_NUM_10 };
-    std::vector<uint8_t> bufferdata = { buffer, buffer + length };
+    struct UsbPipe pipe = { interfaceId, pointId };
+    std::vector<uint8_t> clientData = {'q', 'u', 'e', 'u', 'e', 'r', 'e', 'a', 'd'};
+    std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     for (auto _ : st) {
-        ret = g_usbInterface->RequestQueue(dev, pipe, clientdata, bufferdata);
+        ret = g_usbInterface->RequestQueue(dev, pipe, clientData, bufferData);
     }
     ASSERT_EQ(0, ret);
 }
@@ -349,26 +341,20 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0170)
 (benchmark::State& st)
 {
     struct UsbDev dev = dev_;
-    uint8_t pointid = POINTID_129;
-    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t pointId = POINTID_DIR_IN;
+    uint8_t interfaceId = INTERFACEID_OK;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     ASSERT_EQ(0, ret);
-    uint8_t buffer[LENGTH_NUM_255] = {};
-    uint32_t length = LENGTH_NUM_255;
-    uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
-    struct UsbPipe pipe = { interfaceId, pointid };
-    std::vector<uint8_t> clientdata = { tag, tag + TAG_NUM_10 };
-    std::vector<uint8_t> bufferdata = { buffer, buffer + length };
-    ret = g_usbInterface->RequestQueue(dev, pipe, clientdata, bufferdata);
+    struct UsbPipe pipe = { interfaceId, pointId };
+    std::vector<uint8_t> clientData = {'q', 'u', 'e', 'u', 'e', 'r', 'e', 'a', 'd'};
+    std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
+    ret = g_usbInterface->RequestQueue(dev, pipe, clientData, bufferData);
     ASSERT_EQ(0, ret);
-    uint8_t* clientObj = new uint8_t[10];
-    std::vector<uint8_t> waitdata = { clientObj, clientObj + 10 };
+    std::vector<uint8_t> waitData(TAG_NUM_10);
     for (auto _ : st) {
-        ret = g_usbInterface->RequestWait(dev, waitdata, bufferdata, 10000);
+        ret = g_usbInterface->RequestWait(dev, waitData, bufferData, TIME_WAIT);
     }
     ASSERT_EQ(0, ret);
-    delete[] clientObj;
-    clientObj = nullptr;
 }
 
 BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0170)
@@ -386,18 +372,15 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0170)
 BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0180)
 (benchmark::State& st)
 {
-    uint8_t pointid = POINTID_129;
-    uint8_t interfaceId = INTERFACEID_1;
-    uint8_t tag[TAG_LENGTH_NUM_1000] = "queue read";
+    uint8_t pointId = POINTID_DIR_IN;
+    uint8_t interfaceId = INTERFACEID_OK;
     struct UsbDev dev = dev_;
-    uint8_t buffer[LENGTH_NUM_255] = "request001";
-    uint32_t length = LENGTH_NUM_255;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    EXPECT_TRUE(ret == 0);
-    struct UsbPipe pipe = { interfaceId, pointid };
-    std::vector<uint8_t> clientdata = { tag, tag + TAG_NUM_10 };
-    std::vector<uint8_t> bufferdata = { buffer, buffer + length };
-    ret = g_usbInterface->RequestQueue(dev, pipe, clientdata, bufferdata);
+    ASSERT_EQ(0, ret);
+    struct UsbPipe pipe = { interfaceId, pointId };
+    std::vector<uint8_t> clientData = {'q', 'u', 'e', 'u', 'e', 'r', 'e', 'a', 'd'};
+    std::vector<uint8_t> bufferData = {'r', 'e', 'q', 'u', 'e', 's', 't', '0', '0', '1'};
+    ret = g_usbInterface->RequestQueue(dev, pipe, clientData, bufferData);
     ASSERT_EQ(0, ret);
     for (auto _ : st) {
         ret = g_usbInterface->RequestCancel(dev, pipe);
@@ -421,7 +404,7 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0190)
 (benchmark::State& st)
 {
     struct UsbDev dev = dev_;
-    uint8_t interfaceId = INTERFACEID_1;
+    uint8_t interfaceId = INTERFACEID_OK;
     auto ret = 0;
     for (auto _ : st) {
         ret = g_usbInterface->ReleaseInterface(dev, interfaceId);
@@ -445,9 +428,9 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0280)
 (benchmark::State& st)
 {
     struct UsbDev dev = dev_;
-    uint8_t interfaceId = INTERFACEID_1;
-    uint8_t pointid = POINTID_BULK_IN;
-    struct UsbPipe pipe = {interfaceId, pointid};
+    uint8_t interfaceId = INTERFACEID_OK;
+    uint8_t pointId = POINTID_DIR_IN;
+    struct UsbPipe pipe = {interfaceId, pointId};
     sptr<UsbdBulkCallbackTest> usbdBulkCallback = new UsbdBulkCallbackTest();
     auto ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
     ASSERT_EQ(ret, 0);

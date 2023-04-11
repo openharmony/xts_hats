@@ -16,7 +16,7 @@ import("//test/xts/tools/build/suite.gni")
 group("hdi") {
   testonly = true
   deps = [
-    "nnrtFunctionTest:HatsHdfNnrtFunctionTest",
-    "nnrtStabilityTest:HatsHdfNnrtStabilityTest",
+    "nnrtFunctionTest:HatsHdfNnrtFunctionV2_0Test",
+    "nnrtStabilityTest:HatsHdfNnrtStabilityV2_0Test",
   ]
 }

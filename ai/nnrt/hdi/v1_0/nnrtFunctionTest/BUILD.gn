@@ -20,7 +20,7 @@ config("nnrtTest_config") {
   visibility = [ ":*" ]
 }
 
-ohos_moduletest_suite("HatsHdfNnrtFunctionTest") {
+ohos_moduletest_suite("HatsHdfNnrtFunctionV1_0Test") {
   testonly = true
   module_out_path = module_output_path
   sources = [
@@ -31,12 +31,12 @@ ohos_moduletest_suite("HatsHdfNnrtFunctionTest") {
   ]
 
   include_dirs = [
-    "../../hdi",
+    "../../v1_0",
     "//commonlibrary/c_utils/base/include",
     "//third_party/googletest/googletest/include/",
     "//foundation/ai/neural_network_runtime",
     "//foundation/ai/neural_network_runtime/third_party/include",
-    "//third_party/mindspore/mindspore/lite/mindir/include",
+    "//third_party/mindspore/mindspore-src/source/mindspore/lite/mindir/include",
   ]
 
   deps = [ "//foundation/ai/neural_network_runtime/frameworks:libneural_network_runtime" ]

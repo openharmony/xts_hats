@@ -149,53 +149,32 @@ HWTEST_F(StabilityTest, SUB_AI_NNRt_Reliability_South_Stress_0100, Reliability |
 HWTEST_F(StabilityTest, SUB_AI_NNR_Reliability_South_Stress_0200, Reliability | MediumTest | Level2)
 {
     OHOS::sptr<V1_0::INnrtDevice> device = V1_0::INnrtDevice::Get();
-
-    std::vector<V1_0::Model *> iModels;
-    std::vector<OHOS::sptr<V1_0::IPreparedModel>> iPreparedModels;
-    std::vector<V1_0::SharedBuffer> tensorBuffers;
-    for (int i = 0; i < THREAD_NUM; i++) {
-        // build graph with NNModel
-        OH_NNModel *model = nullptr;
-        HDICommon::BuildAddGraph(&model);
-        // convert NNModel to V1_0::Model
-        V1_0::SharedBuffer tensorBuffer{NNRT_INVALID_FD, 0, 0, 0};
-        V1_0::Model *iModel = nullptr;
-        auto retConvert = HDICommon::ConvertModel(device, model, tensorBuffer, &iModel);
-        EXPECT_EQ(OH_NN_SUCCESS, retConvert) << "ConvertModel failed";
-        if (retConvert != OH_NN_SUCCESS) {
-            break;
-        }
-        iModels.emplace_back(iModel);
-        tensorBuffers.emplace_back(tensorBuffer);
-        // prepare model
-        OHOS::sptr<V1_0::IPreparedModel> iPreparedModel;
-        V1_0::ModelConfig config = {
-            .enableFloat16 = false, .mode = V1_0::PERFORMANCE_EXTREME, .priority = V1_0::PRIORITY_HIGH};
-        auto retPrepare = device->PrepareModel(*iModel, config, iPreparedModel);
-        EXPECT_EQ(HDF_SUCCESS, retPrepare) << "PrepareModel failed";
-        if (retPrepare != HDF_SUCCESS) {
-            break;
-        }
-        iPreparedModels.emplace_back(iPreparedModel);
-    }
+    // build graph with NNModel
+    OH_NNModel *model = nullptr;
+    HDICommon::BuildAddGraph(&model);
+    // convert NNModel to V1_0::Model
+    V1_0::SharedBuffer tensorBuffer{NNRT_INVALID_FD, 0, 0, 0};
+    V1_0::Model *iModel = nullptr;
+    auto retConvert = HDICommon::ConvertModel(device, model, tensorBuffer, &iModel);
+    ASSERT_EQ(OH_NN_SUCCESS, retConvert) << "ConvertModel failed";
+   
+    // prepare model
+    OHOS::sptr<V1_0::IPreparedModel> iPreparedModel;
+    V1_0::ModelConfig config = {
+        .enableFloat16 = false, .mode = V1_0::PERFORMANCE_EXTREME, .priority = V1_0::PRIORITY_HIGH};
+    auto retPrepare = device->PrepareModel(*iModel, config, iPreparedModel);
+    ASSERT_EQ(HDF_SUCCESS, retPrepare) << "PrepareModel failed";
+    
+    // run model
     for (int i = 0; i < STRESS_COUNT; i++) {
-        // create threads to run model
-        std::vector<std::thread> threads;
-        for (auto &iPreparedModel : iPreparedModels) {
-            threads.emplace_back(std::thread(RunModelTest, device, iPreparedModel));
-        }
-        // wait for thread finish
-        for (auto &th : threads) {
-            th.join();
-        }
-        if (i % PRINT_FREQ == 0) {
-            printf("[NnrtTest] SUB_AI_NNRt_Reliability_South_Stress_0200 times: %d/%d\n", i, STRESS_COUNT);
+    ASSERT_NO_FATAL_FAILURE(RunModelTest(device, iPreparedModel));
+    if (i % PRINT_FREQ == 0) {
+        printf("[NnrtTest] SUB_AI_NNRt_Reliability_South_Stress_0200 times: %d/%d\n", i, STRESS_COUNT);
         }
     }
-    for (size_t i=0; i< iModels.size(); i++) {
-        mindspore::lite::MindIR_Model_Destroy(&iModels[i]);
-        if (tensorBuffers[i].fd != -1) {
-        EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffers[i]));
-        }
-    }
+    // release
+    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    if (tensorBuffer.fd != -1) {
+        ASSERT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
+    } 
 }

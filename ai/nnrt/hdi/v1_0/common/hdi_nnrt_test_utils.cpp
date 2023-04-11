@@ -104,7 +104,7 @@ void HDICommon::BuildAddGraphDynamic(OH_NNModel **model)
 }
 
 OH_NN_ReturnCode HDICommon::ConvertModel(OHOS::sptr<V1_0::INnrtDevice> device_, OH_NNModel *model,
-                                         V1_0::SharedBuffer &tensorBuffer, V1_0::Model **iModel)
+                                         OHOS::HDI::Nnrt::V1_0::SharedBuffer &tensorBuffer, V1_0::Model **iModel)
 {
     printf("[NNRtTest] [ConvertModel] convert OH_NNModel to V1_0::Model\n");
     auto *innerModel = reinterpret_cast<InnerModel *>(model);
@@ -140,7 +140,7 @@ OH_NN_ReturnCode HDICommon::ConvertModel(OHOS::sptr<V1_0::INnrtDevice> device_, 
 
 V1_0::IOTensor HDICommon::CreateIOTensor(OHOS::sptr<V1_0::INnrtDevice> &device)
 {
-    V1_0::SharedBuffer buffer{NNRT_INVALID_FD, 0, 0, 0};
+    OHOS::HDI::Nnrt::V1_0::SharedBuffer buffer{NNRT_INVALID_FD, 0, 0, 0};
     int ret = device->AllocateBuffer(ADDEND_BUFFER_LENGTH, buffer);
     if (ret != HDF_SUCCESS || buffer.fd == NNRT_INVALID_FD) {
         printf("[NNRtTest] [CreateIOTensor] allocate buffer error. ret: %d, fd: %d\n", ret, buffer.fd);
@@ -159,7 +159,7 @@ V1_0::IOTensor HDICommon::CreateInputIOTensor(OHOS::sptr<V1_0::INnrtDevice> &dev
         std::cout << "The length param is invalid, length=0" << std::endl;
     }
 
-    V1_0::SharedBuffer buffer{NNRT_INVALID_FD, 0, 0, 0};
+    OHOS::HDI::Nnrt::V1_0::SharedBuffer buffer{NNRT_INVALID_FD, 0, 0, 0};
     auto ret = device->AllocateBuffer(length, buffer);
 
     if (ret != HDF_SUCCESS || buffer.fd == NNRT_INVALID_FD) {
@@ -187,7 +187,7 @@ V1_0::IOTensor HDICommon::CreateOutputIOTensor(OHOS::sptr<V1_0::INnrtDevice> &de
         printf("[NNRtTest] The length param is invalid, length=0");
     }
 
-    V1_0::SharedBuffer buffer{NNRT_INVALID_FD, 0, 0, 0};
+    OHOS::HDI::Nnrt::V1_0::SharedBuffer buffer{NNRT_INVALID_FD, 0, 0, 0};
     int ret = device->AllocateBuffer(length, buffer);
 
     if (ret != HDF_SUCCESS || buffer.fd == NNRT_INVALID_FD) {

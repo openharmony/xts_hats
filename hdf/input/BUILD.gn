@@ -25,6 +25,7 @@ group("HatsHdfInputTest") {
       "hdi_passthrough:HatsHdfInputPassthroughTest",
 
       #"inputBenchmarkTest:HatsHdfInputbenchmarkTest",
+      #"PassthroughBenchmarkTest:HatsHdfInputPassthroughBenchmarkTest",
     ]
   }
 }

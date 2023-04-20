@@ -26,6 +26,6 @@ group("hdi_base_common") {
     "common/manager:HatsHdfAudioIdlManagerTest",
     "common/render:HatsHdfAudioIdlRenderTest",
 
-    #"benchmarktest:HatdHdfAudioBnechmarkTest"
+    #"benchmarktest:HatsHdfAudioBenchmarkTest"
   ]
 }

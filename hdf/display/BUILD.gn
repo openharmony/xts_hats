@@ -20,14 +20,18 @@ group("HatsHdfDisplayTest") {
   if (xts_hats_rich == true) {
     deps = [
       "buffer:HatsHdfDisplayBufferTest",
-      "composer:HatsHdfDisplayComposerTest",
+      #"composer/death:HatsHdfDisplayComposerDeathTest",
+      #"composer/moduletest:HatsHdfDisplayComposerMtTest",
+      #"composer/unittest:HatsHdfDisplayComposerUtTest",
     ]
   } else {
     deps = [
-      #"device:HatsHdfDisplayDeviceTest",
-      #"gralloc/alloctest:HatsHdfDisplayGrallocTest",
       "buffer:HatsHdfDisplayBufferTest",
-      "composer:HatsHdfDisplayComposerTest",
+      "composer/death:HatsHdfDisplayComposerDeathTest",
+      "composer/moduletest:HatsHdfDisplayComposerMtTest",
+      "composer/unittest:HatsHdfDisplayComposerUtTest",
+
+      #"composer/benchmark:HatsHdfDisplayabenchmarkTest",
     ]
   }
 }

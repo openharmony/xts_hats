@@ -18,11 +18,12 @@ import("//drivers/peripheral/codec/codec.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/codec"
+base_root = "../../../../../../"
 
 ohos_moduletest_suite("HatsHdfCodecBenchmarkTest") {
   module_out_path = module_output_path
   include_dirs = [
-    "//drivers/peripheral/codec/interfaces/include",
+    "$base_root/drivers/peripheral/codec/interfaces/include",
     "//third_party/openmax/api/1.1.2",
   ]
   sources = [

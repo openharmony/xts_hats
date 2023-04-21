@@ -21,6 +21,7 @@ group("HatsHdfCodecTest") {
   if (xts_hats_rich == false) {
     testonly = true
     deps = [
+      #"benchmarktest:HatsHdfCodecBenchmarkTest",
       "hdi_adapter:HatsHdfAdapterCodecTest",
       "hdi_omx:HatsHdfOmxCodecTest",
       "hdi_v1.0:HatsHdfV1CodecTest",

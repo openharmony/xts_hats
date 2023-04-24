@@ -27,6 +27,7 @@
 #include <iservmgr_hdi.h>
 #include <osal_time.h>
 #include <string>
+#include <iservstat_listener_hdi.h>
 
 #include "sample_hdi.h"
 
@@ -44,8 +45,11 @@ using OHOS::HDI::ServiceManager::V1_0::IServiceManager;
 using OHOS::HDI::ServiceManager::V1_0::IServStatListener;
 using OHOS::HDI::ServiceManager::V1_0::ServiceStatus;
 using OHOS::HDI::ServiceManager::V1_0::ServStatListenerStub;
+using OHOS::HDI::DeviceManager::V1_0::HdiDevHostInfo;
+using OHOS::HDI::ServiceManager::V1_0::HdiServiceInfo;
 static constexpr const char *TEST_SERVICE_NAME = "sample_driver_service";
 static constexpr const char16_t *TEST_SERVICE_INTERFACE_DESC = u"hdf.test.sampele_service";
+static constexpr const char *TEST_SERVICE_INTERFACE_DESC_N = "hdf.test.sampele_service";
 static constexpr int PAYLOAD_NUM = 1234;
 static constexpr int SMQ_TEST_QUEUE_SIZE = 10;
 static constexpr int SMQ_TEST_WAIT_TIME = 100;
@@ -121,7 +125,6 @@ BENCHMARK_F(ManagerBenchmarkTest, SendRequest)(benchmark::State &st)
         }
     ASSERT_EQ(status, 0);
 }
-
 BENCHMARK_REGISTER_F(ManagerBenchmarkTest, SendRequest)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
@@ -155,7 +158,6 @@ BENCHMARK_F(ManagerBenchmarkTest, GetService)(benchmark::State &st)
     ASSERT_EQ(status, 0);
     ASSERT_EQ(IPCObjectStubTest::payload, payload);
 }
-
 BENCHMARK_REGISTER_F(ManagerBenchmarkTest, GetService)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
@@ -233,7 +235,6 @@ BENCHMARK_F(ManagerBenchmarkTest, LoadDevice)(benchmark::State &st)
     sampleService = servmgr->GetService(TEST_SERVICE_NAME);
     ASSERT_TRUE(sampleService == nullptr);
 }
-
 BENCHMARK_REGISTER_F(ManagerBenchmarkTest, LoadDevice)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
@@ -312,7 +313,6 @@ BENCHMARK_F(ManagerBenchmarkTest, UnloadDevice)(benchmark::State &st)
     sampleService = servmgr->GetService(TEST_SERVICE_NAME);
     ASSERT_TRUE(sampleService == nullptr);
 }
-
 BENCHMARK_REGISTER_F(ManagerBenchmarkTest, UnloadDevice)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
@@ -367,7 +367,6 @@ BENCHMARK_F(ManagerBenchmarkTest, Marshalling)(benchmark::State &st)
         ASSERT_EQ(status, 0);
     }
 }
-
 BENCHMARK_REGISTER_F(ManagerBenchmarkTest, Marshalling)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
@@ -415,8 +414,29 @@ BENCHMARK_F(ManagerBenchmarkTest, Write)(benchmark::State &st)
         ASSERT_EQ(status, 0);
     }
 }
-
 BENCHMARK_REGISTER_F(ManagerBenchmarkTest, Write)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
+
+/**
+  * @tc.number: SUB_DriverSystem_InterfaceQuery_0010
+  * @tc.name: Test get service set by interfacedesc(benchmarktest)
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */
+BENCHMARK_F(ManagerBenchmarkTest, ListServiceByInterfaceDesc)(benchmark::State &st)
+{
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+    std::vector<std::string> serviceNames;
+    int ret;
+    for (auto _ : st) {
+        ret = servmgr->ListServiceByInterfaceDesc(serviceNames, TEST_SERVICE_INTERFACE_DESC_N);
+        }
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+    ASSERT_FALSE(serviceNames.empty());
+    ASSERT_TRUE(serviceNames.front().compare(TEST_SERVICE_NAME) == 0);
+}
+BENCHMARK_REGISTER_F(ManagerBenchmarkTest, ListServiceByInterfaceDesc)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 BENCHMARK_MAIN();

@@ -51,7 +51,7 @@ void PrepareModelTest(OHOS::sptr<V2_0::INnrtDevice> device, V2_0::Model *iModel)
 {
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     V2_0::ModelConfig config;
-    EXPECT_EQ(HDF_SUCCESS, device->PrepareModel(*iModel, config, iPreparedModel));
+    EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device->PrepareModel(*iModel, config, iPreparedModel));
 }
 
 void RunModelTest(OHOS::sptr<V2_0::INnrtDevice> device, OHOS::sptr<V2_0::IPreparedModel> iPreparedModel)
@@ -78,7 +78,7 @@ void RunModelTest(OHOS::sptr<V2_0::INnrtDevice> device, OHOS::sptr<V2_0::IPrepar
     auto outputTensor = HDICommon::CreateIOTensor(device);
     outputs.emplace_back(outputTensor);
     // model run
-    EXPECT_EQ(HDF_SUCCESS, iPreparedModel->Run(inputs, outputs, outputsDims, isOutputBufferEnough));
+    EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, iPreparedModel->Run(inputs, outputs, outputsDims));
 
     // map memory to get output buffer
     auto memAddress = HDICommon::MapMemory(outputs[0].data.fd, ADDEND_BUFFER_LENGTH);
@@ -145,7 +145,7 @@ HWTEST_F(StabilityTest, SUB_AI_NNRt_Reliability_South_Stress_0100, Reliability |
     for (int i=0; i< iModels.size(); i++) {
         mindspore::lite::MindIR_Model_Destroy(&iModels[i]);
         if (tensorBuffers[i].fd != -1) {
-        EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffers[i]));
+        EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffers[i]));
         }
     }
 }
@@ -172,7 +172,7 @@ HWTEST_F(StabilityTest, SUB_AI_NNR_Reliability_South_Stress_0200, Reliability | 
     V2_0::ModelConfig config = {
         .enableFloat16 = false, .mode = V2_0::PERFORMANCE_EXTREME, .priority = V2_0::PRIORITY_HIGH};
     auto retPrepare = device->PrepareModel(*iModel, config, iPreparedModel);
-    ASSERT_EQ(HDF_SUCCESS, retPrepare) << "PrepareModel failed";
+    ASSERT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, retPrepare) << "PrepareModel failed";
     
     // run model
     for (int i = 0; i < STRESS_COUNT; i++) {
@@ -184,6 +184,6 @@ HWTEST_F(StabilityTest, SUB_AI_NNR_Reliability_South_Stress_0200, Reliability | 
     // release
     mindspore::lite::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
-        ASSERT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
+        ASSERT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     } 
 }

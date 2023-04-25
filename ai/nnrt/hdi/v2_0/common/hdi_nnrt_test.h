@@ -28,7 +28,6 @@
 namespace V2_0 = OHOS::HDI::Nnrt::V2_0;
 
 namespace OHOS::NeuralNetworkRuntime::Test {
-
 class HDINNRtTest : public testing::Test {
 public:
     // device ptr

@@ -46,7 +46,7 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_DeviceInfo_0100, Function | M
 {
     std::string deviceName;
     auto hdiRet = device_->GetDeviceName(deviceName);
-    ASSERT_EQ(HDF_SUCCESS, hdiRet) << hdiRet;
+    ASSERT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, hdiRet) << hdiRet;
     std::cout << "deviceName:" << deviceName << std::endl;
     ASSERT_TRUE(!deviceName.empty());
 }
@@ -60,7 +60,7 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_DeviceInfo_0200, Function | M
 {
     std::string vendorName;
     auto hdiRet = device_->GetVendorName(vendorName);
-    ASSERT_EQ(HDF_SUCCESS, hdiRet) << hdiRet;
+    ASSERT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, hdiRet) << hdiRet;
     std::cout << "vendorName:" << vendorName << std::endl;
     ASSERT_TRUE(!vendorName.empty());
 }
@@ -74,7 +74,7 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_DeviceInfo_0300, Function | M
 {
     V2_0::DeviceType deviceType;
     auto hdiRet = device_->GetDeviceType(deviceType);
-    ASSERT_EQ(HDF_SUCCESS, hdiRet);
+    ASSERT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, hdiRet);
 
     ASSERT_TRUE(deviceType == V2_0::DeviceType::OTHER || deviceType == V2_0::DeviceType::GPU ||
                 deviceType == V2_0::DeviceType::CPU || deviceType == V2_0::DeviceType::ACCELERATOR)
@@ -90,7 +90,7 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_DeviceInfo_0400, Function | M
 {
     V2_0::DeviceStatus deviceStatus;
     auto hdiRet = device_->GetDeviceStatus(deviceStatus);
-    ASSERT_EQ(HDF_SUCCESS, hdiRet);
+    ASSERT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, hdiRet);
     ASSERT_TRUE(deviceStatus == V2_0::DeviceStatus::AVAILABLE || deviceStatus == V2_0::DeviceStatus::BUSY ||
                 deviceStatus == V2_0::DeviceStatus::OFFLINE || deviceStatus == V2_0::DeviceStatus::UNKNOWN)
         << deviceStatus;
@@ -105,7 +105,7 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_DeviceConfig_0100, Function |
 {
     bool isSupportedFp16;
     auto hdiRet = device_->IsFloat16PrecisionSupported(isSupportedFp16);
-    ASSERT_EQ(HDF_SUCCESS, hdiRet) << hdiRet;
+    ASSERT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, hdiRet) << hdiRet;
 }
 
 /**
@@ -117,7 +117,7 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_DeviceConfig_0200, Function |
 {
     bool isSupportedPerformance;
     auto hdiRet = device_->IsPerformanceModeSupported(isSupportedPerformance);
-    ASSERT_EQ(HDF_SUCCESS, hdiRet) << hdiRet;
+    ASSERT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, hdiRet) << hdiRet;
 }
 
 /**
@@ -129,7 +129,7 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_DeviceConfig_0300, Function |
 {
     bool isSupportedPriority;
     auto hdiRet = device_->IsPrioritySupported(isSupportedPriority);
-    ASSERT_EQ(HDF_SUCCESS, hdiRet) << hdiRet;
+    ASSERT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, hdiRet) << hdiRet;
 }
 
 /**
@@ -141,7 +141,7 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_DeviceConfig_0400, Function |
 {
     bool isSupportedDynamicInput;
     auto hdiRet = device_->IsDynamicInputSupported(isSupportedDynamicInput);
-    ASSERT_EQ(HDF_SUCCESS, hdiRet) << hdiRet;
+    ASSERT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, hdiRet) << hdiRet;
 }
 
 /**
@@ -153,7 +153,7 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_DeviceConfig_0500, Function |
 {
     bool isSupportedCache;
     auto hdiRet = device_->IsModelCacheSupported(isSupportedCache);
-    ASSERT_EQ(HDF_SUCCESS, hdiRet) << hdiRet;
+    ASSERT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, hdiRet) << hdiRet;
 }
 
 /**
@@ -173,13 +173,13 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_ModelSupport_0100, Function |
     // set nodes to empty
     iModel->nodes = {};
     std::vector<bool> supportedOperations;
-    EXPECT_EQ(HDF_SUCCESS, device_->GetSupportedOperation(*iModel, supportedOperations));
+    EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->GetSupportedOperation(*iModel, supportedOperations));
     EXPECT_TRUE(supportedOperations.empty());
 
     // release
     mindspore::lite::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
-        EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
+        EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
 }
 
@@ -203,7 +203,7 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_ModelSupport_0200, Function |
     }
 
     std::vector<bool> supportedOperations;
-    EXPECT_EQ(HDF_SUCCESS, device_->GetSupportedOperation(*iModel, supportedOperations));
+    EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->GetSupportedOperation(*iModel, supportedOperations));
     for (uint32_t i = 0; i < supportedOperations.size(); i++) {
         EXPECT_EQ(false, supportedOperations[i]);
     }
@@ -211,7 +211,7 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_ModelSupport_0200, Function |
     // release
     mindspore::lite::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
-        EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
+        EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
 }
 
@@ -235,7 +235,7 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_ModelSupport_0300, Function |
     }
 
     std::vector<bool> supportedOperations;
-    EXPECT_EQ(HDF_SUCCESS, device_->GetSupportedOperation(*iModel, supportedOperations));
+    EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->GetSupportedOperation(*iModel, supportedOperations));
     for (uint32_t i = 0; i < supportedOperations.size(); i++) {
         EXPECT_EQ(false, supportedOperations[i]);
     }
@@ -243,7 +243,7 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_ModelSupport_0300, Function |
     // release
     mindspore::lite::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
-        EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
+        EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
 }
 
@@ -257,7 +257,7 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_Memory_0100, Function | Mediu
     V2_0::SharedBuffer tensorBuffer{NNRT_INVALID_FD, 0, 0, 0};
     size_t tensorSize = 1;
     auto hdiRet = device_->AllocateBuffer(tensorSize, tensorBuffer);
-    EXPECT_TRUE(hdiRet == HDF_SUCCESS) << hdiRet;
+    EXPECT_TRUE(hdiRet == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) << hdiRet;
     EXPECT_TRUE(tensorBuffer.fd != NNRT_INVALID_FD && tensorBuffer.bufferSize == tensorSize)
         << tensorBuffer.fd << tensorBuffer.bufferSize;
 }
@@ -272,7 +272,7 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_Memory_0200, Function | Mediu
     V2_0::SharedBuffer tensorBuffer{NNRT_INVALID_FD, 0, 0, 0};
     size_t tensorSize = 0;
     auto hdiRet = device_->AllocateBuffer(tensorSize, tensorBuffer);
-    EXPECT_TRUE(hdiRet != HDF_SUCCESS) << hdiRet;
+    EXPECT_TRUE(hdiRet != V2_0::NNRT_ReturnCode::NNRT_SUCCESS) << hdiRet;
     EXPECT_TRUE(tensorBuffer.fd == NNRT_INVALID_FD) << tensorBuffer.fd;
 }
 
@@ -285,7 +285,7 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_Memory_0300, Function | Mediu
 {
     V2_0::SharedBuffer tensorBuffer{NNRT_INVALID_FD, 0, 0, 0};
     auto hdiRet = device_->ReleaseBuffer(tensorBuffer);
-    EXPECT_TRUE(hdiRet != HDF_SUCCESS);
+    EXPECT_TRUE(hdiRet == V2_0::NNRT_ReturnCode::NNRT_INVALID_BUFFER);
 }
 
 /**
@@ -298,8 +298,8 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_Memory_0400, Function | Mediu
     V2_0::SharedBuffer tensorBuffer{NNRT_INVALID_FD, 0, 0, 0};
     size_t tensorSize = 224;
     auto hdiRet = device_->AllocateBuffer(tensorSize, tensorBuffer);
-    EXPECT_TRUE(hdiRet == HDF_SUCCESS && tensorBuffer.fd != NNRT_INVALID_FD && tensorBuffer.bufferSize == tensorSize)
-        << tensorBuffer.fd << tensorBuffer.bufferSize;
+    EXPECT_TRUE(hdiRet == V2_0::NNRT_ReturnCode::NNRT_SUCCESS && tensorBuffer.fd != NNRT_INVALID_FD &&
+        tensorBuffer.bufferSize == tensorSize) << tensorBuffer.fd << tensorBuffer.bufferSize;
     hdiRet = device_->ReleaseBuffer(tensorBuffer);
-    EXPECT_TRUE(hdiRet == HDF_SUCCESS);
+    EXPECT_TRUE(hdiRet == V2_0::NNRT_ReturnCode::NNRT_SUCCESS);
 }

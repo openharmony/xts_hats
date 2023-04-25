@@ -13,25 +13,29 @@
 
 import("//build/test.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
-import("//drivers/peripheral/audio/audio.gni")
 import("//test/xts/tools/build/suite.gni")
 
-group("hdi_base_common") {
-  if (!defined(ohos_lite)) {
-    testonly = true
-  }
-  deps = [
-    "common/adapter:HatsHdfAudioIdlAdapterTest",
-    "common/capture:HatsHdfAudioIdlCaptureTest",
-    "common/manager:HatsHdfAudioIdlManagerTest",
-    "common/render:HatsHdfAudioIdlRenderTest",
-
-    #"benchmarktest:HatsHdfAudioBenchmarkTest"
+module_output_path = "hats/audio"
+base_root = "../../../../../../../"
+ohos_moduletest_suite("HatsHdfAudioEffectTest") {
+  module_out_path = module_output_path
+  sources = [
+    "src/effect_common.cpp",
+    "src/effect_control_test.cpp",
+    "src/effect_model_test.cpp",
   ]
+  configs = [ ":audio_idl_effect" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_audio:effect_idl_headers",
+    "drivers_interface_audio:libeffect_proxy_1.0",
+    "hdf_core:libhdf_utils",
+    "hiviewdfx_hilog_native:libhilog",
+  ]
+  subsystem_name = "hdf"
+  part_name = "drivers_peripheral_audio"
 }
-group("hdi_effect") {
-  if (!defined(ohos_lite)) {
-    testonly = true
-  }
-  deps = [ "effect:HatsHdfAudioEffectTest" ]
+config("audio_idl_effect") {
+  include_dirs = [ "$base_root/drivers/peripheral/audio/effect/test/unittest/" ]
 }

@@ -17,21 +17,16 @@ import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
 #################################group#########################################
-group("HatsHdfCameraTest") {
+group("HatsHdfCameraHdiTest") {
   if (!defined(ohos_lite)) {
     testonly = true
   }
   if (is_standard_system) {
-    if (xts_hats_rich == false) {
-      deps = [
-        "cameraHdi:HatsHdfCameraHdiTest",
-        "cameraMg:HatsHdfCameraMgTest",
-
-        #"cameraBenchmarkTest:HatsHdfCamerabenchmarkTest",
-      ]
-    } else {
-      deps = [ "cameraMg:HatsHdfCameraMgTest" ]
-    }
+    deps = [
+      "buffer_manager:HatsHdfCameraBufferTest",
+      "pipeline_core:HatsHdfCameraPipelineTest",
+      "v4l2:HatsHdfCameraTest",
+    ]
   }
 }
 ###############################################################################

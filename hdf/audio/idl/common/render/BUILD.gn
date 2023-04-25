@@ -18,9 +18,10 @@ import("//test/xts/tools/build/suite.gni")
 module_output_path = "hats/audio"
 ohos_moduletest_suite("HatsHdfAudioIdlRenderTest") {
   module_out_path = module_output_path
-  sources = [ "src/audio_render_common_test.cpp",
-              "src/audio_render_mmap_test.cpp"
-   ]
+  sources = [
+    "src/audio_render_common_test.cpp",
+    "src/audio_render_mmap_test.cpp",
+  ]
   configs = [ ":audio_idl_render" ]
 
   deps = [ "//third_party/bounds_checking_function:libsec_shared" ]

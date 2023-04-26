@@ -59,14 +59,14 @@ public:
 
 int32_t AgnssCallbackImpl::RequestSetUpAgnssDataLink(const AGnssDataLinkRequest& request)
 {
-    printf("AGnssEventCallback::RequestSetUpAgnssDataLink. agnsstype:%d, setUpType:%d",
+    printf("AGnssEventCallback::RequestSetUpAgnssDataLink. agnsstype:%d, setUpType:%d\n",
         static_cast<int>(request.agnssType), static_cast<int>(request.setUpType));
     return HDF_SUCCESS;
 }
 
 int32_t AgnssCallbackImpl::RequestSubscriberSetId(SubscriberSetIdType type)
 {
-    printf("AGnssEventCallback::RequestSubscriberSetId. type:%d", static_cast<int>(type));
+    printf("AGnssEventCallback::RequestSubscriberSetId. type:%d\n", static_cast<int>(type));
     int slotId = Telephony::CellularDataClient::GetInstance().GetDefaultCellularDataSlotId();
     std::u16string imsi;
     DelayedRefSingleton<Telephony::CoreServiceClient>::GetInstance().GetIMSI(slotId, imsi);
@@ -74,7 +74,7 @@ int32_t AgnssCallbackImpl::RequestSubscriberSetId(SubscriberSetIdType type)
     setId.type = HDI::Location::Agnss::V1_0::SETID_TYPE_IMSI;
     setId.id = Str16ToStr8(imsi);
     if (g_iagnssHci == nullptr) {
-        printf("g_iagnssHci is null!");
+        printf("g_iagnssHci is null!\n");
         return HDF_FAILURE;
     }
     g_iagnssHci->SetSubscriberSetId(setId);
@@ -84,16 +84,16 @@ int32_t AgnssCallbackImpl::RequestSubscriberSetId(SubscriberSetIdType type)
 int32_t AgnssCallbackImpl::RequestAgnssRefInfo()
 {
     if (g_iagnssHci == nullptr) {
-        printf("g_iagnssHci is null!");
+        printf("g_iagnssHci is null!\n");
         return HDF_FAILURE;
     }
     int slotId = Telephony::CellularDataClient::GetInstance().GetDefaultCellularDataSlotId();
     std::vector<sptr<CellInformation>> cellInformations;
     DelayedRefSingleton<Telephony::CoreServiceClient>::GetInstance().GetCellInfoList(slotId, cellInformations);
-    printf("RequestAgnssRefInfo,cellInformations.");
+    printf("RequestAgnssRefInfo,cellInformations.\n");
     for (sptr<CellInformation> infoItem : cellInformations) {
         if (!infoItem->GetIsCamped()) {
-            printf("GetIsCamped return false");
+            printf("GetIsCamped return false\n");
             continue;
         }
         AGnssRefInfo refInfo;
@@ -191,11 +191,11 @@ std::string AgnssCallbackImpl::Str16ToStr8(std::u16string str)
 int32_t GnssCallbackImpl::ReportLocation(const LocationInfo& location)
 {
     if (location.timeSinceBoot != 0) {
-        printf("Location success!!");
+        printf("Location success!!\n");
         return HDF_SUCCESS;
     }
     else{
-        printf("Location fail!!");
+        printf("Location fail!!\n");
         return HDF_FAILURE;
     }
 }
@@ -203,27 +203,27 @@ int32_t GnssCallbackImpl::ReportLocation(const LocationInfo& location)
 int32_t GnssCallbackImpl::ReportGnssWorkingStatus(GnssWorkingStatus status)
 {
     if (status == GnssWorkingStatus::GNSS_STATUS_NONE) {
-        printf("GNSS_STATUS_NONE");
+        printf("GNSS_STATUS_NONE\n");
         return HDF_SUCCESS;
     }
     else if(status == GnssWorkingStatus::GNSS_STATUS_SESSION_BEGIN){
-        printf("GNSS_STATUS_SESSION_BEGIN");
+        printf("GNSS_STATUS_SESSION_BEGIN\n");
         return HDF_SUCCESS;
     }
     else if(status == GnssWorkingStatus::GNSS_STATUS_SESSION_END){
-        printf("GNSS_STATUS_SESSION_END");
+        printf("GNSS_STATUS_SESSION_END\n");
         return HDF_SUCCESS;
     }
     else if(status == GnssWorkingStatus::GNSS_STATUS_ENGINE_ON){
-        printf("GNSS_STATUS_ENGINE_ON");
+        printf("GNSS_STATUS_ENGINE_ON\n");
         return HDF_SUCCESS;
     }
     else if(status == GnssWorkingStatus::GNSS_STATUS_ENGINE_OFF){
-        printf("GNSS_STATUS_ENGINE_OFF");
+        printf("GNSS_STATUS_ENGINE_OFF\n");
         return HDF_SUCCESS;
     }
     else{
-        printf("Gnss status fail");
+        printf("Gnss status fail\n");
         return HDF_FAILURE;
     }
 }
@@ -233,11 +233,11 @@ int32_t GnssCallbackImpl::ReportNmea(int64_t timestamp, const std::string& nmea,
     (void)nmea;
     (void)timestamp;
     if (length >= 0) {
-        printf("Report nmea success");
+        printf("Report nmea success\n");
         return HDF_SUCCESS;
     }
     else{
-        printf("Report nmea fail");
+        printf("Report nmea fail\n");
         return HDF_FAILURE;
     }
 }
@@ -251,15 +251,15 @@ int32_t GnssCallbackImpl::ReportGnssCapabilities(GnssCapabilities capabilities)
 int32_t GnssCallbackImpl::ReportSatelliteStatusInfo(const SatelliteStatusInfo& info)
 {
     if (info.satellitesNumber <= 0) {
-        printf("SvStatusCallback, satellites_num <= 0!");
+        printf("SvStatusCallback, satellites_num <= 0!\n");
         return HDF_ERR_INVALID_PARAM;
     }
     if (((info.carrierFrequencies).size()) > 0) {
-        printf("Get satellite info success!!");
+        printf("Get satellite info success!!\n");
         return HDF_SUCCESS;
     }
     else{
-        printf("Get satellite info fail!!");
+        printf("Get satellite info fail!!\n");
         return HDF_FAILURE;
     }
 }
@@ -286,19 +286,19 @@ void LocationAgnssTest::SetUpTestCase()
 {
     auto devmgr = HDI::DeviceManager::V1_0::IDeviceManager::Get();
     if (devmgr == nullptr) {
-        printf("fail to get devmgr.");
+        printf("fail to get devmgr.\n");
         return;
     }
     if (devmgr->LoadDevice(GNSS_SERVICE_NAME) != 0) {
-        printf("Load gnss service failed!");
+        printf("Load gnss service failed!\n");
         return;
     }
     if (devmgr->LoadDevice(AGNSS_SERVICE_NAME) != 0) {
-        printf("Load agnss service failed!");
+        printf("Load agnss service failed!\n");
         return;
     }
     if (devmgr->LoadDevice(GEOFENCE_SERVICE_NAME) != 0) {
-        printf("Load geofence service failed!");
+        printf("Load geofence service failed!\n");
         return;
     }
     g_iagnssHci = IAGnssInterface::Get();
@@ -315,19 +315,19 @@ void LocationAgnssTest::TearDownTestCase()
 {
     auto devmgr = HDI::DeviceManager::V1_0::IDeviceManager::Get();
     if (devmgr == nullptr) {
-        printf("fail to get devmgr.");
+        printf("fail to get devmgr.\n");
         return;
     }
     if (devmgr->UnloadDevice(GNSS_SERVICE_NAME) != 0) {
-        printf("Load gnss service failed!");
+        printf("Load gnss service failed!\n");
         return;
     }
     if (devmgr->UnloadDevice(AGNSS_SERVICE_NAME) != 0) {
-        printf("Load agnss service failed!");
+        printf("Load agnss service failed!\n");
         return;
     }
     if (devmgr->UnloadDevice(GEOFENCE_SERVICE_NAME) != 0) {
-        printf("Load geofence service failed!");
+        printf("Load geofence service failed!\n");
         return;
     }
     g_ignssHci->DisableGnss();

@@ -17,18 +17,19 @@
 #include <vector>
 
 #include "HdfUsbdBenchmarkDeviceTest.h"
-#include "UsbSubscriberTest.h"
 #include "hdf_log.h"
+#include "usbd_port.h"
 #include "v1_0/iusb_interface.h"
-#include "v1_0/usb_types.h"
 
 using namespace benchmark::internal;
+using namespace std;
 using namespace OHOS;
 using namespace OHOS::USB;
-using namespace std;
 using namespace OHOS::HDI::Usb::V1_0;
 
 const int SLEEP_TIME = 3;
+constexpr int32_t ITERATION_FREQUENCY = 100;
+constexpr int32_t REPETITION_FREQUENCY = 3;
 
 namespace {
 sptr<IUsbInterface> g_usbInterface = nullptr;
@@ -38,24 +39,31 @@ struct UsbDev HdfUsbdBenchmarkDeviceTest::dev_ = { 0, 0 };
 void HdfUsbdBenchmarkDeviceTest::SetUp(const ::benchmark::State& state)
 {
     g_usbInterface = IUsbInterface::Get();
-    if (g_usbInterface == nullptr) {
-        exit(0);
-    }
-    auto ret = g_usbInterface->SetPortRole(1, 1, 1);
+    ASSERT_NE(g_usbInterface, nullptr);
+    auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
     sleep(SLEEP_TIME);
     ASSERT_EQ(0, ret);
-    if (ret != 0) {
-        exit(0);
-    }
-
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    if (g_usbInterface->BindUsbdSubscriber(subscriber) != HDF_SUCCESS) {
-        exit(0);
-    }
-    dev_ = { subscriber->busNum_, subscriber->devAddr_ };
 }
 
-void HdfUsbdBenchmarkDeviceTest::TearDown(const ::benchmark::State& state) {}
+void HdfUsbdBenchmarkDeviceTest::TearDown(const ::benchmark::State& state){}
+
+void HdfUsbdBenchmarkDeviceTest::InitPara(const sptr<UsbSubscriberTest> &subscriber)
+{
+    auto ret = g_usbInterface->BindUsbdSubscriber(subscriber);
+    ASSERT_EQ(0, ret);
+    dev_ = {subscriber->busNum_, subscriber->devAddr_};
+    ret = g_usbInterface->OpenDevice(dev_);
+    ASSERT_EQ(0, ret);
+}
+
+void HdfUsbdBenchmarkDeviceTest::ReleasePara(const sptr<UsbSubscriberTest> &subscriber)
+{
+    ASSERT_TRUE(g_usbInterface != nullptr);
+    auto ret = g_usbInterface->UnbindUsbdSubscriber(subscriber);
+    EXPECT_EQ(0, ret);
+    ret = g_usbInterface->CloseDevice(dev_);
+    ASSERT_EQ(0, ret);
+}
 
 /**
  * @tc.name: SUB_USB_HDI_Benchmark_0010
@@ -67,17 +75,22 @@ void HdfUsbdBenchmarkDeviceTest::TearDown(const ::benchmark::State& state) {}
 BENCHMARK_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0010)
 (benchmark::State& st)
 {
+    ASSERT_NE(g_usbInterface, nullptr);
+    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
+    ASSERT_NE(subscriber, nullptr);
+    InitPara(subscriber);
     struct UsbDev dev = dev_;
     auto ret = 0;
     for (auto _ : st) {
         ret = g_usbInterface->OpenDevice(dev);
     }
     ASSERT_EQ(0, ret);
+    ReleasePara(subscriber);
 }
 
 BENCHMARK_REGISTER_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0010)
-    ->Iterations(100)
-    ->Repetitions(3)
+    ->Iterations(ITERATION_FREQUENCY)
+    ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
@@ -90,18 +103,24 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0010)
 BENCHMARK_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0020)
 (benchmark::State& st)
 {
+    ASSERT_NE(g_usbInterface, nullptr);
+    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
+    ASSERT_NE(subscriber, nullptr);
+    InitPara(subscriber);
     struct UsbDev dev = dev_;
-    auto ret = g_usbInterface->OpenDevice(dev);
-    ASSERT_EQ(0, ret);
+    int32_t ret;
     for (auto _ : st) {
+        ret = g_usbInterface->OpenDevice(dev);
+        ASSERT_EQ(0, ret);
         ret = g_usbInterface->CloseDevice(dev);
+        ASSERT_EQ(0, ret);
     }
-    ASSERT_EQ(0, ret);
+    ReleasePara(subscriber);
 }
 
 BENCHMARK_REGISTER_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0020)
-    ->Iterations(100)
-    ->Repetitions(3)
+    ->Iterations(ITERATION_FREQUENCY)
+    ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 } // namespace
 

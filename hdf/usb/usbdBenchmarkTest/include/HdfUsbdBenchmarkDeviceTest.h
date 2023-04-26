@@ -17,6 +17,7 @@
 
 #include <benchmark/benchmark.h>
 #include <gtest/gtest.h>
+#include "UsbSubscriberTest.h"
 #include "v1_0/usb_types.h"
 
 using OHOS::HDI::Usb::V1_0::UsbDev;
@@ -26,6 +27,8 @@ class HdfUsbdBenchmarkDeviceTest : public benchmark::Fixture {
 public:
     void SetUp(const ::benchmark::State &state);
     void TearDown(const ::benchmark::State &state);
+    void InitPara(const OHOS::sptr<OHOS::USB::UsbSubscriberTest> &subscriber);
+    void ReleasePara(const OHOS::sptr<OHOS::USB::UsbSubscriberTest> &subscriber);
 
     static UsbDev dev_;
 };

@@ -11,11 +11,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+base_root = "../../../../.."
 import("//build/ohos.gni")
 import("//build/ohos_var.gni")
-import("//test/xts/hats/build.gni")
-import("//test/xts/hats/build.gni")
-import("//test/xts/tools/build/suite.gni")
+import("$base_root/test/xts/hats/build.gni")
+import("$base_root/test/xts/tools/build/suite.gni")
 
 group("HatsHdfCodecTest") {
   if (xts_hats_rich == false) {

@@ -11,20 +11,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//build/ohos_var.gni")
-import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
-import("//test/xts/tools/build/suite.gni")
-
 base_root = "../../../../../../../"
+import("//build/ohos_var.gni")
+import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
+import("$base_root/test/xts/tools/build/suite.gni")
+
 module_output_path = "hats/display"
 ohos_moduletest_suite("HatsHdfDisplayabenchmarkTest") {
   module_out_path = module_output_path
   sources = [ "display_benchmark_test.cpp" ]
   deps = [
     "$base_root/test/xts/hats/hdf/display/composer/common:disp_dev_hdi_test",
-    "$base_root/third_party/benchmark",
-    "$base_root/third_party/googletest:gmock_main",
-    "$base_root/third_party/googletest:gtest_main",
+    "//third_party/benchmark",
+    "//third_party/googletest:gmock_main",
+    "//third_party/googletest:gtest_main",
   ]
   include_dirs = [
     "$base_root/drivers/interface/display/composer/hdifd_parcelable",
@@ -35,7 +35,6 @@ ohos_moduletest_suite("HatsHdfDisplayabenchmarkTest") {
     "utils",
     ".",
   ]
-
   cflags = [
     "-Wall",
     "-Wextra",

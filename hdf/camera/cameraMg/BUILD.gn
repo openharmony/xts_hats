@@ -21,12 +21,13 @@ import("//drivers/peripheral/camera/hal/camera.gni")
 module_output_path = "hats/camera"
 base_root = "../../../../../../"
 
-config("cameraTest_config") {
-  visibility = [ ":*" ]
-}
+#config("cameraTest_config") {
+#  visibility = [ ":*" ]
+#}
 
 ohos_moduletest_suite("HatsHdfCameraMgTest") {
-  testonly = true
+  #testonly = true
+  configs = [ ":hdf_cameramg" ]
   module_out_path = module_output_path
   sources = [
     "./src/camera_3a_uttest.cpp",
@@ -36,18 +37,6 @@ ohos_moduletest_suite("HatsHdfCameraMgTest") {
     "./src/hdi_host_uttest.cpp",
     "./src/hdi_stream_uttest.cpp",
   ]
-
-  include_dirs = [
-    # common includes
-    "./include",
-    "$base_root/system/core/include/cutils",
-    "//third_party/googletest/googletest/include",
-    "$base_root/drivers/peripheral/display/interfaces/include",
-    "$base_root/drivers/peripheral/display/hdi_service/gralloc/include",
-    "$base_root/drivers/peripheral/camera/interfaces/include",
-    "$base_root/drivers/peripheral/camera/hal/include",
-  ]
-
   deps = [
     "$base_root/drivers/interface/camera/v1_0:libcamera_proxy_1.0",
     "//third_party/googletest:gmock_main",
@@ -73,7 +62,20 @@ ohos_moduletest_suite("HatsHdfCameraMgTest") {
     "drivers_interface_camera:metadata",
     "samgr:samgr_proxy",
   ]
-  public_configs = [ ":cameraTest_config" ]
-  subsystem_name = "hdf"
-  part_name = "drivers_peripheral_camera"
+
+  # public_configs = [ ":cameraTest_config" ]
+  # subsystem_name = "hdf"
+  # part_name = "drivers_peripheral_camera"
+}
+config("hdf_cameramg") {
+  include_dirs = [
+    # common includes
+    "./include",
+    "$base_root/system/core/include/cutils",
+    "//third_party/googletest/googletest/include",
+    "$base_root/drivers/peripheral/display/interfaces/include",
+    "$base_root/drivers/peripheral/display/hdi_service/gralloc/include",
+    "$base_root/drivers/peripheral/camera/interfaces/include",
+    "$base_root/drivers/peripheral/camera/hal/include",
+  ]
 }

@@ -14,6 +14,7 @@
 import("//build/ohos_var.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
+ROOT_PATH = "//drivers/peripheral"
 
 module_output_path = "hdf/location/geofence"
 ohos_moduletest_suite("HatsHdfLocationgeofenceTest") {
@@ -55,8 +56,8 @@ ohos_moduletest_suite("HatsHdfLocationgeofenceTest") {
 config("hdf_geofence") {
   include_dirs = [
     "include",
-    "//drivers/peripheral/location/geofence/hdi_service",
-    "//drivers/peripheral/location/gnss/hdi_service",
+    "$ROOT_PATH/location/geofence/hdi_service",
+    "$ROOT_PATH/location/gnss/hdi_service",
   ]
   cflags = [
     "-Wall",

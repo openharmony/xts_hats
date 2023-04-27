@@ -16,6 +16,9 @@ import("//build/ohos_var.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
 
+base_root = "//drivers"
+root_path = "//foundation/communication"
+
 module_output_path = "hdf/nfc"
 
 ohos_moduletest_suite("HatsHdfNfcHdiTest") {
@@ -23,9 +26,9 @@ ohos_moduletest_suite("HatsHdfNfcHdiTest") {
   sources = [ "nfc_services_test.cpp" ]
 
   deps = [
-    "//drivers/interface/nfc/v1_0:libnfc_proxy_1.0",
-    "//drivers/peripheral/nfc/hdi_service:hdi_nfc_service",
-    "//foundation/communication/nfc/services:nfc_service",
+    "${base_root}/interface/nfc/v1_0:libnfc_proxy_1.0",
+    "${base_root}/peripheral/nfc/hdi_service:hdi_nfc_service",
+    "${root_path}/nfc/services:nfc_service",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
   ]
@@ -53,8 +56,8 @@ ohos_moduletest_suite("HatsHdfNfcHdiTest") {
 config("hdf_nfc") {
   include_dirs = [
     "include",
-    "//drivers/peripheral/nfc/hdi_service",
-    "//drivers/peripheral/nfc/vendor_adaptor",
+    "${base_root}/peripheral/nfc/hdi_service",
+    "${base_root}/peripheral/nfc/vendor_adaptor",
     "//third_party/nfc_hdiimpl/SN100x/halimpl/inc",
     "//third_party/libnfc-nci/SN100x/src/include/",
     "//third_party/libnfc-nci/SN100x/utils/include/",

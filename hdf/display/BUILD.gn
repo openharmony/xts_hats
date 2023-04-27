@@ -11,9 +11,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+base_root = "../../../../../"
 import("//build/ohos_var.gni")
-import("//test/xts/hats/build.gni")
-import("//test/xts/tools/build/suite.gni")
+import("$base_root/test/xts/hats/build.gni")
+import("$base_root/test/xts/tools/build/suite.gni")
 
 group("HatsHdfDisplayTest") {
   testonly = true
@@ -21,17 +22,17 @@ group("HatsHdfDisplayTest") {
     deps = [
       "buffer:HatsHdfDisplayBufferTest",
       #"composer/death:HatsHdfDisplayComposerDeathTest",
-      #"composer/moduletest:HatsHdfDisplayComposerMtTest",
-      #"composer/unittest:HatsHdfDisplayComposerUtTest",
+      #"composer/moduletest:HatszHdfDisplayComposerMtTest",
+      #"composer/unittest:HatszHdfDisplayComposerUtTest",
     ]
   } else {
     deps = [
       "buffer:HatsHdfDisplayBufferTest",
-      "composer/death:HatsHdfDisplayComposerDeathTest",
-      "composer/moduletest:HatsHdfDisplayComposerMtTest",
-      "composer/unittest:HatsHdfDisplayComposerUtTest",
 
-      #"composer/benchmark:HatsHdfDisplayabenchmarkTest",
+      # "composer/benchmark:HatsHdfDisplayabenchmarkTest",
+      "composer/death:HatsHdfDisplayComposerDeathTest",
+      "composer/moduletest:HatszHdfDisplayComposerMtTest",
+      "composer/unittest:HatszHdfDisplayComposerUtTest",
     ]
   }
 }

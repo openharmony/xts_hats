@@ -11,14 +11,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+base_root = "../../../../../../../"
 import("//build/ohos_var.gni")
-import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
-import("//drivers/peripheral/display/display_config.gni")
-import("//test/xts/tools/build/suite.gni")
+import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
+import("$base_root/drivers/peripheral/display/display_config.gni")
+import("$base_root/test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/display"
-base_root = "../../../../../../../"
-
 ohos_moduletest_suite("HatsHdfDisplayBufferDeathTest") {
   defines = []
   defines += display_defines

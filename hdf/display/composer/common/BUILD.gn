@@ -11,12 +11,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//build/ohos_var.gni")
-import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
-import("//drivers/peripheral/display/display_config.gni")
-import("//test/xts/tools/build/suite.gni")
-
 base_root = "../../../../../../../"
+import("//build/ohos_var.gni")
+import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
+import("$base_root/drivers/peripheral/display/display_config.gni")
+import("$base_root/test/xts/tools/build/suite.gni")
 
 config("module_private_config") {
   visibility = [ ":*" ]
@@ -33,7 +32,6 @@ ohos_static_library("disp_dev_hdi_test") {
     "hdi_test_layer.cpp",
   ]
   include_dirs = [
-    "include",
     "$base_root/foundation/communication/ipc/interfaces/innerkits/ipc_core/include",
     "$base_root/drivers/peripheral/base",
     "$base_root/drivers/interface/display/composer/hdifd_parcelable",
@@ -45,9 +43,7 @@ ohos_static_library("disp_dev_hdi_test") {
     "-DGRALLOC_GBM_SUPPORT",
     "-Wno-macro-redefined",
   ]
-
   deps = []
-
   external_deps = [
     "c_utils:utils",
     "drivers_interface_display:display_buffer_idl_headers",

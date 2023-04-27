@@ -11,11 +11,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+base_root = "../../../../../../"
 import("//build/ohos.gni")
 import("//build/test.gni")
-import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
-import("//drivers/peripheral/input/input.gni")
-import("//test/xts/tools/build/suite.gni")
+import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
+import("$base_root/drivers/peripheral/input/input.gni")
+import("$base_root/test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/input"
 
@@ -52,9 +53,9 @@ ohos_moduletest_suite("HatsHdfInputPassthroughTest") {
 
 config("hdf_input_through") {
   include_dirs = [
-    "../../../../../../drivers/peripheral/input/interfaces/include",
-    "../../../../../../drivers/peripheral/input/interfaces",
+    "$base_root/drivers/peripheral/input/interfaces/include",
+    "$base_root./drivers/peripheral/input/interfaces",
     "//third_party/FreeBSD/sys/dev/evdev",
-    "../../../../../../drivers/peripheral/input/hdi_service",
+    "$base_root/drivers/peripheral/input/hdi_service",
   ]
 }

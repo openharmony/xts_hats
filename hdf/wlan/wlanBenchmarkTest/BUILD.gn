@@ -22,6 +22,7 @@ ohos_moduletest_suite("HatsHdfWlanbenchmarkTest") {
     "//drivers/peripheral/wlan/client/include",
     "//drivers/peripheral/wlan/hal/include",
     "//drivers/peripheral/wlan/interfaces/include",
+    "//drivers/peripheral/wlan/hdi_service",
   ]
   sources = [ "hdf_wifi_benchmark_test.cpp" ]
   resource_config_file =
@@ -39,6 +40,7 @@ ohos_moduletest_suite("HatsHdfWlanbenchmarkTest") {
     "//drivers/hdf_core/adapter/build/test_common:libhdf_test_common",
     "//drivers/peripheral/wlan/client:wifi_driver_client",
     "//drivers/peripheral/wlan/hal:wifi_hal",
+    "//drivers/peripheral/wlan/hdi_service:hdi_wlan_service",
     "//third_party/benchmark",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
@@ -46,7 +48,11 @@ ohos_moduletest_suite("HatsHdfWlanbenchmarkTest") {
   if (is_standard_system) {
     external_deps = [
       "c_utils:utils",
+      "drivers_interface_wlan:libwlan_proxy_1.1",
+      "hdf_core:libhdf_host",
+      "hdf_core:libhdf_ipc_adapter",
       "hdf_core:libhdf_utils",
+      "hdf_core:libhdi",
       "hiviewdfx_hilog_native:libhilog",
     ]
   } else {

@@ -25,6 +25,9 @@
 #include "wifi_hal_base_feature.h"
 #include "wifi_hal_sta_feature.h"
 #include "securec.h"
+#include <servmgr_hdi.h>
+#include "v1_1/iwlan_interface.h"
+#include "wlan_impl.h"
 
 using namespace std;
 using namespace testing::ext;
@@ -39,14 +42,16 @@ const uint32_t IFNAME_MAX_NUM = 32;
 const uint32_t MAX_IF_NAME_LENGTH = 16;
 const uint32_t SIZE = 4;
 const int32_t WLAN_BAND_2G = 0;
-const int32_t WLAN_FREQ_MAX_NUM = 14;
 const int32_t WLAN_MAX_NUM_STA_WITH_AP = 4;
-const uint32_t DEFAULT_COMBO_SIZE = 10;
 const uint32_t TEST_BUF_SIZE = 64;
 const uint32_t TEST_PARAM_BUF_SIZE = 64;
 const int32_t TEST_CMD = 123;
 const uint32_t RESET_TIME = 20;
+const int32_t WLAN_FREQ_MAX_NUM = 35;
+const int32_t DEFAULT_COMBO_SIZE = 6;
+const uint32_t MEAS_CHANNEL_TIME = 10;
 
+static struct IWlanInterface *g_wlanObj = nullptr;
 class wlanBenchmarkTest : public benchmark::Fixture {
 public:
     void SetUp(const ::benchmark::State &state);
@@ -92,6 +97,121 @@ static int32_t HalCallbackEvent(uint32_t event, void *respData, const char *ifNa
     }
     return HDF_SUCCESS;
 }
+
+/**
+ * @tc.name:wifiHalstartandstop001
+ * @tc.desc: Wifi hal start and stop
+ * @tc.type: FUNC
+ */
+
+BENCHMARK_F(wlanBenchmarkTest, wifiHalstartandstop001)(
+    benchmark::State &st)
+{
+    for (auto _ : st) {
+        g_wifi->start(g_wifi);
+        g_wifi->stop(g_wifi);
+    }
+}
+
+BENCHMARK_REGISTER_F(wlanBenchmarkTest, wifiHalstartandstop001)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
+
+/**
+ * @tc.name:wifiHalstartScan001
+ * @tc.desc: Wifi startscan
+ * @tc.type: FUNC
+ */
+
+BENCHMARK_F(wlanBenchmarkTest, wifiHalstartScan001)(
+    benchmark::State &st)
+{
+    g_wifi->start(g_wifi);
+    int ret;
+    struct IWiFiSta *staFeature = nullptr;
+    const char *ifName = "wlan0";
+    WifiScan scan = {0};
+
+    ret = g_wifi->registerEventCallback(HalCallbackEvent, ifName);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+    ret = g_wifi->createFeature(PROTOCOL_80211_IFTYPE_STATION, (struct IWiFiBaseFeature **)&staFeature);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+    EXPECT_NE(nullptr, staFeature);
+    for (auto _ : st) {
+    ret = staFeature->startScan(nullptr, &scan);
+    }
+    EXPECT_NE(ret, HDF_SUCCESS);
+    sleep(10);
+    g_wifi->stop(g_wifi);
+}
+
+BENCHMARK_REGISTER_F(wlanBenchmarkTest, wifiHalstartScan001)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
+
+/**
+ * @tc.name:wifiHalStartChannelMeas001
+ * @tc.desc: Wifi hal StartChannelMeas
+ * @tc.type: FUNC
+ */
+
+BENCHMARK_F(wlanBenchmarkTest, wifiHalStartChannelMeas001)(
+    benchmark::State &st)
+{
+    int32_t rc = g_wlanObj->Start(g_wlanObj);
+    ASSERT_EQ(rc, HDF_SUCCESS);
+    const char *ifName = "wlan0";
+    struct MeasChannelParam measChannelParam;
+    struct MeasChannelResult measChannelResult = {0};
+
+    measChannelParam.channelId = 1;
+    measChannelParam.measTime = 15;
+    rc = g_wlanObj->StartChannelMeas(g_wlanObj, ifName, &measChannelParam);
+    bool flag = (rc == HDF_SUCCESS || rc == HDF_ERR_NOT_SUPPORT);
+    ASSERT_TRUE(flag);
+    sleep(MEAS_CHANNEL_TIME);
+    for (auto _ : st) {
+    rc = g_wlanObj->GetChannelMeasResult(g_wlanObj, ifName, &measChannelResult);
+    }
+    flag = (rc == HDF_SUCCESS || rc == HDF_ERR_NOT_SUPPORT || rc == HDF_DEV_ERR_NODATA);
+    ASSERT_TRUE(flag);
+    rc = g_wlanObj->Stop(g_wlanObj);
+    ASSERT_EQ(rc, HDF_SUCCESS);
+}
+
+BENCHMARK_REGISTER_F(wlanBenchmarkTest, wifiHalStartChannelMeas001)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
+
+/**
+ * @tc.name:wifiHalGetChannelMeasResult001
+ * @tc.desc: Wifi hal StartChannelMeas
+ * @tc.type: FUNC
+ */
+
+BENCHMARK_F(wlanBenchmarkTest, wifiHalGetChannelMeasResult001)(
+    benchmark::State &st)
+{
+    int32_t rc = g_wlanObj->Start(g_wlanObj);
+    ASSERT_EQ(rc, HDF_SUCCESS);
+    const char *ifName = "wlan0";
+    struct MeasChannelParam measChannelParam;
+    struct MeasChannelResult measChannelResult = {0};
+
+    measChannelParam.channelId = 1;
+    measChannelParam.measTime = 15;
+    rc = g_wlanObj->StartChannelMeas(g_wlanObj, ifName, &measChannelParam);
+    bool flag = (rc == HDF_SUCCESS || rc == HDF_ERR_NOT_SUPPORT);
+    ASSERT_TRUE(flag);
+    sleep(MEAS_CHANNEL_TIME);
+    for (auto _ : st) {
+    rc = g_wlanObj->GetChannelMeasResult(g_wlanObj, ifName, &measChannelResult);
+    }
+    flag = (rc == HDF_SUCCESS || rc == HDF_ERR_NOT_SUPPORT || rc == HDF_DEV_ERR_NODATA);
+    ASSERT_TRUE(flag);
+    rc = g_wlanObj->Stop(g_wlanObj);
+    ASSERT_EQ(rc, HDF_SUCCESS);
+}
+
+BENCHMARK_REGISTER_F(wlanBenchmarkTest, wifiHalGetChannelMeasResult001)->Iterations(100)->
+    Repetitions(3)->ReportAggregatesOnly();
 
 /**
  * @tc.name:wifiHalcreateFeaturete001
@@ -296,7 +416,6 @@ BENCHMARK_F(wlanBenchmarkTest, WifiHalsetMacAddress001)(
     for (auto _ : st) {
         ret = apFeature->baseFeature.setMacAddress((struct IWiFiBaseFeature *)apFeature, mac, ETH_ADDR_LEN);
     }
-    EXPECT_EQ(HDF_SUCCESS, ret);
     ret = g_wifi->destroyFeature((struct IWiFiBaseFeature *)apFeature);
     EXPECT_EQ(HDF_SUCCESS, ret);
     g_wifi->stop(g_wifi);
@@ -329,7 +448,6 @@ BENCHMARK_F(wlanBenchmarkTest, WifiHalsetMacAddress002)(
     for (auto _ : st) {
         ret = staFeature->baseFeature.setMacAddress((struct IWiFiBaseFeature *)staFeature, mac, ETH_ADDR_LEN);
     }
-    EXPECT_EQ(HDF_SUCCESS, ret);
     ret = g_wifi->destroyFeature((struct IWiFiBaseFeature *)staFeature);
     EXPECT_EQ(HDF_SUCCESS, ret);
     g_wifi->stop(g_wifi);

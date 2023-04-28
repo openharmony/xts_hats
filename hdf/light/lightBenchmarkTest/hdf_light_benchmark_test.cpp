@@ -154,6 +154,34 @@ BENCHMARK_F(lightBenchmarkTest, SUB_DriverSystem_LightBenchmark_0030)(benchmark:
 
 BENCHMARK_REGISTER_F(lightBenchmarkTest, SUB_DriverSystem_LightBenchmark_0030)->
     Iterations(100)-> Repetitions(3)->ReportAggregatesOnly();
-}
 
+/**
+  * @tc.name: SUB_DriverSystem_LightBenchmark_0040
+  * @tc.desc: Benchmarktest for interface TurnOnMultiLights.
+  * @tc.type: FUNC
+  */
+BENCHMARK_F(lightBenchmarkTest, SUB_DriverSystem_LightBenchmark_0030)(benchmark::State &st)
+{
+    ASSERT_NE(nullptr, g_lightInterface);
+
+    std::vector<HdfLightInfo> info;
+    int32_t ret = g_lightInterface-> GetLightInfo(info);
+    EXPECT_EQ(0, ret);
+    for (auto iter : info)
+    {
+        EXPECT_GE(iter.lightId, g_minLightId);
+        EXPECT_LE(iter.lightId, g_maxLightId);
+        std::vector<HdfLightColor> lightColor;
+        struct HdfLightColor light;
+        light.colorValue.rgbColor.b = 0;
+        lightColor.push_back(light);
+        for (auto _ : st) {
+        ret = g_lightInterface->TurnOnMultiLights(iter.lightId, lightColor);
+        }
+        EXPECT_EQ(HDF_SUCCESS, ret);
+    }
+}
+BENCHMARK_REGISTER_F(lightBenchmarkTest, SUB_DriverSystem_LightBenchmark_0040)->
+    Iterations(100)-> Repetitions(3)->ReportAggregatesOnly();
+}
 BENCHMARK_MAIN();

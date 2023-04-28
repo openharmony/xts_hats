@@ -95,7 +95,8 @@ BENCHMARK_F(CameraBenchmarkTest, SUB_GetStreamOperator_benchmark_0010)(
     cameraTest->Open();
     cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
     for (auto _ : st) {
-        cameraTest->rc = cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback,cameraTest->streamOperator);
+    cameraTest->rc = cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback,
+        cameraTest->streamOperator);
     }
 }
 BENCHMARK_REGISTER_F(CameraBenchmarkTest, SUB_GetStreamOperator_benchmark_0010)->Iterations(100)->
@@ -275,7 +276,7 @@ BENCHMARK_F(CameraBenchmarkTest, SUB_ReleaseStreams_benchmark_0010)(
     cameraTest->intents = {PREVIEW};
     cameraTest->StartStream(cameraTest->intents);
     for (auto _ : st) {
-        cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});   
+        cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
     }
 }
 BENCHMARK_REGISTER_F(CameraBenchmarkTest, SUB_ReleaseStreams_benchmark_0010)->Iterations(100)->
@@ -300,7 +301,7 @@ BENCHMARK_F(CameraBenchmarkTest, SUB_Capture_benchmark_0010)(
     cameraTest->captureInfo->captureSetting_ = cameraTest->abilityVec;
     cameraTest->captureInfo->enableShutterCallback_ = true;
     for (auto _ : st) {
-        cameraTest->rc = cameraTest->streamOperator->Capture(captureId, *cameraTest->captureInfo, true);   
+        cameraTest->rc = cameraTest->streamOperator->Capture(captureId, *cameraTest->captureInfo, true);
     }
 }
 BENCHMARK_REGISTER_F(CameraBenchmarkTest, SUB_Capture_benchmark_0010)->Iterations(100)->
@@ -326,7 +327,7 @@ BENCHMARK_F(CameraBenchmarkTest, SUB_CancelCapture_benchmark_0010)(
     cameraTest->captureInfo->enableShutterCallback_ = true;
     cameraTest->rc = cameraTest->streamOperator->Capture(captureId, *cameraTest->captureInfo, true);
     for (auto _ : st) {
-        cameraTest->streamOperator->CancelCapture(captureId);   
+        cameraTest->streamOperator->CancelCapture(captureId);
     }
 }
 BENCHMARK_REGISTER_F(CameraBenchmarkTest, SUB_CancelCapture_benchmark_0010)->Iterations(100)->
@@ -344,7 +345,7 @@ BENCHMARK_F(CameraBenchmarkTest, SUB_Close_benchmark_0010)(
 {
     cameraTest->Open();
     for (auto _ : st) {
-        cameraTest->cameraDevice->Close();   
+        cameraTest->cameraDevice->Close();
     }
 }
 BENCHMARK_REGISTER_F(CameraBenchmarkTest, SUB_Close_benchmark_0010)->Iterations(100)->

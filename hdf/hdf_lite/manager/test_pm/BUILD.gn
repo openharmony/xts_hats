@@ -11,24 +11,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+base_root = "../../../../../../"
 import("//build/lite/config/test.gni")
-import("//test/xts/tools/lite/build/suite_lite.gni")
+import("$base_root/test/xts/tools/lite/build/suite_lite.gni")
 
 hcpptest_suite("HatsPmTest") {
   suite_name = "hats"
   include_dirs = [
     "//third_party/googletest/googletest/include",
     "//third_party/bounds_checking_function/include",
-    "//base/hiviewdfx/hilog_lite/interfaces/native/innerkits",
+    "$base_root/base/hiviewdfx/hilog_lite/interfaces/native/innerkits",
   ]
 
   defines = [ "__USER__" ]
-  sources = [ "//test/xts/hats/hdf/hdf_lite/manager/common/hdf_pm_test.cpp" ]
+  sources = [ "../common/hdf_pm_test.cpp" ]
   deps = [
-    "//base/hiviewdfx/hilog_lite/frameworks/featured:hilog_shared",
-    "//drivers/hdf_core/adapter/build/test_common:libhdf_test_common",
-    "//drivers/hdf_core/adapter/uhdf/manager:hdf_core",
-    "//drivers/hdf_core/adapter/uhdf/posix:hdf_posix_osal",
+    "$base_root/base/hiviewdfx/hilog_lite/frameworks/featured:hilog_shared",
+    "$base_root/drivers/hdf_core/adapter/build/test_common:libhdf_test_common",
+    "$base_root/drivers/hdf_core/adapter/uhdf/manager:hdf_core",
+    "$base_root/drivers/hdf_core/adapter/uhdf/posix:hdf_posix_osal",
   ]
   public_deps = [ "//third_party/bounds_checking_function:libsec_shared" ]
 }

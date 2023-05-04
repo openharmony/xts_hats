@@ -11,12 +11,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-base_root = "../../../../../.."
 import("//build/ohos.gni")
 import("//build/test.gni")
-import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
-import("$base_root/test/xts/hats/build.gni")
-import("$base_root/test/xts/tools/build/suite.gni")
+import("//test/xts/hats/build.gni")
+import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/codec"
 ohos_moduletest_suite("HatsHdfOmxCodecTest") {
@@ -35,6 +33,7 @@ ohos_moduletest_suite("HatsHdfOmxCodecTest") {
       "drivers_interface_display:display_buffer_idl_headers",
       "drivers_interface_display:display_composer_idl_headers",
       "drivers_interface_display:libdisplay_buffer_hdi_impl",
+      "drivers_interface_display:libdisplay_composer_hdi_impl",
       "drivers_peripheral_codec:libcodec_hdi_omx_client",
       "graphic_chipsetsdk:buffer_handle",
       "hdf_core:libhdf_host",
@@ -57,10 +56,7 @@ ohos_moduletest_suite("HatsHdfOmxCodecTest") {
 }
 
 config("hdf_codec_omx") {
-  include_dirs = [
-    "//third_party/openmax/api/1.1.2",
-    "$base_root/drivers/interface/display/composer/hdifd_parcelable",
-  ]
+  include_dirs = [ "//third_party/openmax/api/1.1.2" ]
   cflags = [
     "-Wall",
     "-Wextra",

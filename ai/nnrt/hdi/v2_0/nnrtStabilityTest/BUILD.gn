@@ -22,7 +22,7 @@ config("nnrtTest_config") {
   visibility = [ ":*" ]
 }
 
-ohos_moduletest_suite("HatsHdfNnrtStabilityTest") {
+ohos_moduletest_suite("HatsHdfNnrtStabilityV2_0Test") {
   testonly = true
   module_out_path = module_output_path
   sources = [
@@ -30,25 +30,15 @@ ohos_moduletest_suite("HatsHdfNnrtStabilityTest") {
     "src/hdi_stability_test.cpp",
   ]
 
-  include_dirs = [
-    "../../hdi",
-    "//commonlibrary/c_utils/base/include",
-    "//third_party/googletest/googletest/include/",
-    "//foundation/ai/neural_network_runtime",
-    "//foundation/ai/neural_network_runtime/third_party/include",
-    "//third_party/mindspore/mindspore/lite/mindir/include",
-  ]
-
-  deps = [ "//foundation/ai/neural_network_runtime/frameworks:libneural_network_runtime" ]
-
-  lib_dirs = [ "//foundation/ai/neural_network_runtime/third_party/lib32" ]
+  include_dirs = [ "../../v2_0" ]
 
   external_deps = [
     "c_utils:utils",
-    "drivers_interface_nnrt:libnnrt_proxy_1.0",
+    "drivers_interface_nnrt:libnnrt_proxy_2.0",
     "hilog_native:libhilog",
     "ipc:ipc_single",
     "mindspore:mindir",
+    "neural_network_runtime:nnrt_target",
   ]
 
   cflags = [ "-Wno-error" ]

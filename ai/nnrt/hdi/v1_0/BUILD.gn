@@ -12,19 +12,11 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
-import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
-
-group("HatsHdfNnrtTest") {
+group("hdi") {
   testonly = true
-  if (xts_hats_rich == false) {
-    if (is_standard_system) {
-      if (xts_hats_nnrt) {
-        deps = [
-          "hdi/v1_0:hdi",
-          "hdi/v2_0:hdi",
-        ]
-      }
-    }
-  }
+  deps = [
+    "nnrtFunctionTest:HatsHdfNnrtFunctionV1_0Test",
+    "nnrtStabilityTest:HatsHdfNnrtStabilityV1_0Test",
+  ]
 }

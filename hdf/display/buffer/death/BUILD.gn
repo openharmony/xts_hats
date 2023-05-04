@@ -30,7 +30,6 @@ ohos_moduletest_suite("HatsHdfDisplayBufferDeathTest") {
     "drivers_interface_display:libdisplay_buffer_hdi_impl",
     "drivers_interface_display:libdisplay_composer_hdi_impl",
     "graphic_chipsetsdk:buffer_handle",
-    "graphic_chipsetsdk:buffer_handle",
     "hdf_core:libhdf_utils",
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_core",

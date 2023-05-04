@@ -71,8 +71,6 @@ void EffectModelBenchmarkTest::TearDown(const ::benchmark::State &state)
 /**
  * @tc.name: HdfAudioIsSupplyEffectLibs
  * @tc.desc: Verify the EffectModelIsSupplyEffectLibs function.
- * @tc.type: FUNC
- * @tc.require: I6I658
  */
 BENCHMARK_F(EffectModelBenchmarkTest, HdfAudioIsSupplyEffectLibs)(benchmark::State &state)
 {
@@ -89,8 +87,6 @@ BENCHMARK_REGISTER_F(EffectModelBenchmarkTest, HdfAudioIsSupplyEffectLibs)->
 /**
  * @tc.name: HdfAudioGetAllEffectDescriptors
  * @tc.desc: Verify the EffectModelGetAllEffectDescriptors function.
- * @tc.type: FUNC
- * @tc.require: I6I658
  */
 BENCHMARK_F(EffectModelBenchmarkTest, HdfAudioGetAllEffectDescriptors)(benchmark::State &state)
 {
@@ -108,8 +104,6 @@ BENCHMARK_REGISTER_F(EffectModelBenchmarkTest, HdfAudioGetAllEffectDescriptors)-
 /**
  * @tc.name: HdfAudioCreateDestroyController
  * @tc.desc: Verify the EffectModelCreateEffectController and EffectModelDestroyEffectController function.
- * @tc.type: FUNC
- * @tc.require: I6I658
  */
 BENCHMARK_F(EffectModelBenchmarkTest, HdfAudioCreateDestroyController)(benchmark::State &state)
 {
@@ -137,8 +131,6 @@ BENCHMARK_REGISTER_F(EffectModelBenchmarkTest, HdfAudioCreateDestroyController)-
 /**
  * @tc.name: HdfAudioGetEffectDescriptor
  * @tc.desc: Verify the EffectModelGetEffectDescriptor function.
- * @tc.type: FUNC
- * @tc.require: I6I658
  */
 BENCHMARK_F(EffectModelBenchmarkTest, HdfAudioGetEffectDescriptor)(benchmark::State &state)
 {

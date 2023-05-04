@@ -91,8 +91,6 @@ void EffectControlBenchmarkTest::TearDown(const ::benchmark::State &state)
 /**
  * @tc.name: HdfAudioEffectProcess
  * @tc.desc: Verify the EffectControlEffectProcess function.
- * @tc.type: FUNC
- * @tc.require: I6I658
  */
 BENCHMARK_F(EffectControlBenchmarkTest, HdfAudioEffectProcess)(benchmark::State &state)
 {
@@ -110,8 +108,6 @@ BENCHMARK_REGISTER_F(EffectControlBenchmarkTest, HdfAudioEffectProcess)->
 /**
  * @tc.name: HdfAudioSendCommandInit
  * @tc.desc: Verify the EffectControlEffectProcess function when cmdId is AUDIO_EFFECT_COMMAND_INIT_CONTOLLER.
- * @tc.type: FUNC
- * @tc.require: I6I658
  */
 BENCHMARK_F(EffectControlBenchmarkTest, HdfAudioSendCommandInit)(benchmark::State &state)
 {
@@ -130,8 +126,6 @@ BENCHMARK_REGISTER_F(EffectControlBenchmarkTest, HdfAudioSendCommandInit)->
 /**
  * @tc.name: HdfAudioGetDescriptor
  * @tc.desc: Verify the EffectGetOwnDescriptor function.
- * @tc.type: FUNC
- * @tc.require: I6I658
  */
 BENCHMARK_F(EffectControlBenchmarkTest, HdfAudioGetDescriptor)(benchmark::State &state)
 {

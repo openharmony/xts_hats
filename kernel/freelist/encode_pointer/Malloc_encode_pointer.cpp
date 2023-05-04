@@ -65,12 +65,13 @@ struct group_in {
 };
 
 static struct group_in *get_group(const uint8_t *p) {
-    int offset = *(const uint16_t *)(p - OFF_OFFSET);
+    int offset = *(const uint16_t *)((uintptr_t)p - OFF_OFFSET);
 
     if (p[FIRST_OFFSET]) {
-        offset = *(uintptr_t *)(p - FIRST_OFF_OFFSET);
+        offset = *(uintptr_t *)((uintptr_t)p - FIRST_OFF_OFFSET);
     }
-    struct group_in *base = (struct group_in *)(p - UNIT*offset - UNIT);
+
+    struct group_in *base = (struct group_in *)((uintptr_t)p - UNIT*offset - UNIT);
     return base;
 }
 
@@ -90,12 +91,14 @@ static int child(void) {
             printf("Malloc d0 failed: %s\n", strerror(errno));
             return -1;
         }
+        printf("Malloc d0,d0 = %p\n", d0);
         g0 = get_group((uint8_t *)d0);
         d1 = malloc(MALLOC_SIZE_L);
         if (!d1) {
             printf("Malloc d1 failed: %s\n", strerror(errno));
             return -1;
         }
+        printf("Malloc d1,d1 = %p\n", d1);
         g1 = get_group((uint8_t *)d1);
 
         if ((uintptr_t)g0->meta->mem == (uintptr_t)g0) {

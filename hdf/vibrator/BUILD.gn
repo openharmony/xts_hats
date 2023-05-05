@@ -18,7 +18,7 @@ import("//test/xts/tools/build/suite.gni")
 
 group("HatsHdfVibratorTest") {
   testonly = true
-  if (xts_hats_features_nnrt == true) {
+  if (xts_hats_features_rich == true) {
     deps = [
       #"hdi_adapter:HatsHdfVibratorAdapterTest"
     ]

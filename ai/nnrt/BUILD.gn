@@ -17,9 +17,9 @@ import("//test/xts/tools/build/suite.gni")
 
 group("HatsHdfNnrtTest") {
   testonly = true
-  if (xts_hats_rich == false) {
+  if (xts_hats_features_nnrt == false) {
     if (is_standard_system) {
-      if (xts_hats_nnrt) {
+      if (xts_hats_features_nnrt) {
         deps = [ "hdi:hdi" ]
       }
     }

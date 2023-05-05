@@ -15,7 +15,7 @@ import("//test/xts/hats/build.gni")
 
 group("startup") {
   testonly = true
-  if (xts_hats_rich == true) {
+  if (xts_hats_features_nnrt == true) {
     deps = [
       #"partitionslot:HatsStartupPartitionSlotTest"
     ]

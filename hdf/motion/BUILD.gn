@@ -17,7 +17,7 @@ import("//test/xts/tools/build/suite.gni")
 
 group("HatsHdfMotionTest") {
   testonly = true
-  if (xts_hats_rich == false) {
+  if (xts_hats_features_nnrt == false) {
   } else {
     if (is_standard_system) {
       deps = [ "hdi:HatsHdfMotionTest" ]

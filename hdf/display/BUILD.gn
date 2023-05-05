@@ -18,7 +18,7 @@ import("$base_root/test/xts/tools/build/suite.gni")
 
 group("HatsHdfDisplayTest") {
   testonly = true
-  if (xts_hats_rich == true) {
+  if (xts_hats_features_nnrt == true) {
     deps = [
       "buffer:HatsHdfDisplayBufferTest",
       #"composer/death:HatsHdfDisplayComposerDeathTest",

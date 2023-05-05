@@ -31,6 +31,6 @@ ohos_moduletest_suite("HatsPowermgrPowerTest") {
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_single",
   ]
-  subsystem_name = "hdf"
+  subsystem_name = "xts"
   part_name = "drivers_peripheral_power"
 }

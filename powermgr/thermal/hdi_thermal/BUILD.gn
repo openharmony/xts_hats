@@ -31,6 +31,6 @@ ohos_moduletest_suite("HatsPowermgrThermalTest") {
     "init:libbeget_proxy",
     "ipc:ipc_single",
   ]
-  subsystem_name = "hdf"
+  subsystem_name = "xts"
   part_name = "drivers_peripheral_thermal"
 }

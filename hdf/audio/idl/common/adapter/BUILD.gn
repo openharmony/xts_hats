@@ -31,8 +31,8 @@ ohos_moduletest_suite("HatsHdfAudioIdlAdapterTest") {
     "hiviewdfx_hilog_native:libhilog",
   ]
 
-  subsystem_name = "hdf"
-  part_name = "drivers_peripheral_audio"
+  subsystem_name = "xts"
+  part_name = "xts_hats"
 }
 
 config("audio_idl_adapter") {

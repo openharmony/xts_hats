@@ -57,8 +57,8 @@ ohos_moduletest_suite("HatsHdfCodecBenchmarkTest") {
     external_deps = [ "hilog:libhilog" ]
   }
 
-  subsystem_name = "hdf"
-  part_name = "drivers_peripheral_codec"
+  subsystem_name = "xts"
+  part_name = "xts_hats"
 
   defines = []
   if (drivers_peripheral_codec_feature_support_omx_extend_test) {

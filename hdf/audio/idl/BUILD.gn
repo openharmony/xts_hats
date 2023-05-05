@@ -32,5 +32,8 @@ group("hdi_effect") {
   if (!defined(ohos_lite)) {
     testonly = true
   }
-  deps = [ "effect:HatsHdfAudioEffectTest" ]
+  deps = [
+    "effect:HatsHdfAudioEffectTest",
+    #"benchmarktest/effect:HatsHdfAudioEffectBenchmarkTest"
+  ]
 }

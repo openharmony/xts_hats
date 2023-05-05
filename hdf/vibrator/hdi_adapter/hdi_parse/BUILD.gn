@@ -11,9 +11,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+base_root = "../../../../../../"
 import("//build/ohos.gni")
-import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
+import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 
 module_output_path = "hats/misc"
 ohos_moduletest_suite("HatsHdfVibratorParseTest") {
@@ -22,22 +23,20 @@ ohos_moduletest_suite("HatsHdfVibratorParseTest") {
   configs = [ ":hdf_vibrator_parse" ]
   sources = [ "hdi_vibrator_parse_test.cpp" ]
 
-  deps = [
-    "../../../../../../drivers/peripheral/adapter/vibrator/hdi_impl:libhdi_vibrator_common",
-    "//third_party/googletest:gtest",
-  ]
+  deps = []
   external_deps = [
+    "$base_root/drivers/peripheral/adapter/vibrator/hdi_impl:libhdi_vibrator_common",
     "c_utils:utils",
     "drivers_interface_vibrator:libvibrator_proxy_1.1",
     "hdf_core:libhdf_utils",
     "hiviewdfx_hilog_native:libhilog",
     "init:libbegetutil",
     "ipc:ipc_single",
+    "//third_party/googletest:gtest",
   ]
 }
 
 config("hdf_vibrator_pares") {
-  include_dirs = [
-    "../../../../../../drivers/peripheral/adapter/vibrator/hdi_impl/include",
-  ]
+  include_dirs =
+      [ "$base_root/drivers/peripheral/adapter/vibrator/hdi_impl/include" ]
 }

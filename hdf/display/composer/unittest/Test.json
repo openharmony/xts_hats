@@ -10,14 +10,12 @@
             "type": "ShellKit",
             "run-command": [
                 "mount -o rw,remount /",
-                "cd system/bin",
-                "mv render_service render_service_bk",
+                "cd system/bin;mv render_service render_service_bk",
                 "reboot"
             ],
             "teardown-command": [
                 "mount -o rw,remount /",
-                "cd system/bin",
-                "mv render_service_bk render_service",
+                "cd system/bin;mv render_service_bk render_service",
                 "reboot"
             ]
         }

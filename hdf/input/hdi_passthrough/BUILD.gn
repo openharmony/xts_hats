@@ -14,12 +14,10 @@
 base_root = "../../../../../../"
 import("//build/ohos.gni")
 import("//build/test.gni")
-import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
+import("//test/xts/tools/build/suite.gni")
 import("$base_root/drivers/peripheral/input/input.gni")
-import("$base_root/test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/input"
-
 ohos_moduletest_suite("HatsHdfInputPassthroughTest") {
   module_out_path = module_output_path
   configs = [ ":hdf_input_through" ]

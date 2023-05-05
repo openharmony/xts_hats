@@ -23,10 +23,8 @@ group("HatsHdfWifiTest") {
     if (is_standard_system) {
       deps = [
         "hdi_service:HatsHdfWlanHdiServiceTest",
-
         #"wifi:HatsHdfWifiHdiTest",
         #"wifi:HatsHdfWifiHdistartandstopTest",
-
         #"wifi:HatsHdfWificlientTest",
         #"wifi:HatsHdfWificommonTest",
         #"wlanBenchmarkTest:HatsHdfWlanbenchmarkTest",

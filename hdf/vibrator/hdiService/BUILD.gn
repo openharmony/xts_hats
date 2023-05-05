@@ -11,9 +11,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+base_root = "../../../../../../"
 import("//build/ohos_var.gni")
-import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
+import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 
 module_output_path = "hats/misc"
 ohos_moduletest_suite("HatsHdfVibratorServiceTest") {

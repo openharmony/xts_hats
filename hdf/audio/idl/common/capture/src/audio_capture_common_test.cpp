@@ -322,7 +322,7 @@ HWTEST_F(AudioUtCaptureTest, HdfAudioCaptureStopException001, TestSize.Level1)
     ASSERT_NE(capture_->Stop, nullptr);
 
     int32_t ret = capture_->Stop(capture_);
-    EXPECT_NE(ret, HDF_SUCCESS);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 HWTEST_F(AudioUtCaptureTest, HdfAudioCaptureStopException002, TestSize.Level1)

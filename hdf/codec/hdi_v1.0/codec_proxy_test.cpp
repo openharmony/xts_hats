@@ -19,7 +19,6 @@
 #include <unistd.h>
 #include "codec_callback_stub.h"
 #include "hdf_log.h"
-#include "hdi_mpp_ext_param_keys.h"
 #include "icodec.h"
 #include "share_mem.h"
 
@@ -350,52 +349,6 @@ HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0135, TestSize.Level1)
     params->size = sizeof(format);
 
     int32_t errorCode = g_codecObj->CodecSetParameter(g_codecObj, g_handle, params, paramCnt);
-    OsalMemFree(params);
-    ASSERT_EQ(errorCode, HDF_SUCCESS);
-}
-
-HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0140, TestSize.Level1)
-{
-    Param *params;
-    int paramCnt = 1;
-    params = (Param *)OsalMemAlloc(sizeof(Param)*paramCnt);
-    ASSERT_TRUE(params != nullptr);
-    params->key = (ParamKey)ParamExtKey::KEY_EXT_SPLIT_PARSE_RK;
-    params->val = nullptr;
-    params->size = 0;
-
-    int32_t errorCode = g_codecObj->CodecGetParameter(g_codecObj, g_handle, params, paramCnt);
-    OsalMemFree(params);
-    ASSERT_EQ(errorCode, HDF_SUCCESS);
-}
-
-HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0141, TestSize.Level1)
-{
-    Param *params;
-    int paramCnt = 1;
-    params = (Param *)OsalMemAlloc(sizeof(Param)*paramCnt);
-    ASSERT_TRUE(params != nullptr);
-    params->key = (ParamKey)ParamExtKey::KEY_EXT_DEC_FRAME_NUM_RK;
-    int32_t frameNum = 1;
-    params->val = (void *)&frameNum;
-    params->size = sizeof(frameNum);
-
-    int32_t errorCode = g_codecObj->CodecSetParameter(g_codecObj, g_handle, params, paramCnt);
-    OsalMemFree(params);
-    ASSERT_EQ(errorCode, HDF_SUCCESS);
-}
-
-HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0142, TestSize.Level1)
-{
-    Param *params;
-    int paramCnt = 1;
-    params = (Param *)OsalMemAlloc(sizeof(Param)*paramCnt);
-    ASSERT_TRUE(params != nullptr);
-    params->key = (ParamKey)ParamExtKey::KEY_EXT_DEC_FRAME_NUM_RK;
-    params->val = nullptr;
-    params->size = 0;
-
-    int32_t errorCode = g_codecObj->CodecGetParameter(g_codecObj, g_handle, params, paramCnt);
     OsalMemFree(params);
     ASSERT_EQ(errorCode, HDF_SUCCESS);
 }

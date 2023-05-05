@@ -11,20 +11,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# import("//build/lite/config/component/lite_component.gni")
-# import("//build/lite/config/test.gni")
 import("//test/xts/tools/lite/build/suite_lite.gni")
+
+base_root = "../../../../../../"
 hcpptest_suite("HatsDisplayLiteTest") {
   suite_name = "hats"
 
-  # output_extension = "bin"
-  # output_dir = "$root_out_dir/test/unittest/hdf"
   include_dirs = [
     "//third_party/googletest/googletest/include",
     "//third_party/bounds_checking_function/include",
-    "//base/hiviewdfx/hilog_lite/interfaces/native/innerkits",
-    "//drivers/peripheral/base",
-    "//drivers/peripheral/display/interfaces/include",
+    "$base_root/base/hiviewdfx/hilog_lite/interfaces/native/innerkits",
+    "$base_root/drivers/peripheral/base",
+    "$base_root/drivers/peripheral/display/interfaces/include",
     ".",
   ]
 
@@ -35,15 +33,15 @@ hcpptest_suite("HatsDisplayLiteTest") {
   ]
 
   deps = [
-    "//base/hiviewdfx/hilog_lite/frameworks/featured:hilog_shared",
-    "//drivers/peripheral/display/hal:hdi_display",
+    "$base_root/base/hiviewdfx/hilog_lite/frameworks/featured:hilog_shared",
+    "$base_root/drivers/peripheral/display/hal:hdi_display",
     "//third_party/bounds_checking_function:libsec_shared",
   ]
 
   public_deps = [
-    "//drivers/hdf_core/adapter/uhdf/manager:hdf_core",
-    "//drivers/hdf_core/adapter/uhdf/posix:hdf_posix_osal",
-    "//drivers/peripheral/display/hal:hdi_display",
+    "$base_root/drivers/hdf_core/adapter/uhdf/manager:hdf_core",
+    "$base_root/drivers/hdf_core/adapter/uhdf/posix:hdf_posix_osal",
+    "$base_root/drivers/peripheral/display/hal:hdi_display",
   ]
   ldflags = [
     "-ldisplay_gfx",

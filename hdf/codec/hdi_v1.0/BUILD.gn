@@ -11,31 +11,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-base_root = "../../../../../.."
 import("//build/test.gni")
-import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
-import("$base_root/test/xts/tools/build/suite.gni")
+import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/codec"
 
 ohos_moduletest_suite("HatsHdfV1CodecTest") {
   module_out_path = module_output_path
-  CODEC_OEM_PATH = rebase_path(
-          "$base_root/device/soc/${device_company}/${product_name}/hardware/codec")
-  cmd = "if [ -f ${CODEC_OEM_PATH}/BUILD.gn ]; then echo true; else echo false; fi"
-  HAVE_CODEC_OEM_PATH =
-      exec_script("//build/lite/run_shell_cmd.py", [ cmd ], "value")
 
-  if (HAVE_CODEC_OEM_PATH) {
-    include_dirs = [
-      "${CODEC_OEM_PATH}/include",
-      "$base_root/drivers/peripheral/codec/interfaces/include",
-      "$base_root/drivers/peripheral/codec/hdi_service/codec_proxy",
-      "$base_root/drivers/peripheral/codec/hdi_service/codec_service_stub",
-      "$base_root/drivers/peripheral/codec/hal/v1.0/share_mem/include",
-    ]
-    sources = [ "codec_proxy_test.cpp" ]
-  }
+  sources = [ "codec_proxy_test.cpp" ]
 
   cflags = [
     "-Wall",
@@ -46,20 +30,12 @@ ohos_moduletest_suite("HatsHdfV1CodecTest") {
     "-fno-strict-aliasing",
   ]
 
-  deps = [
-    "$base_root/drivers/peripheral/codec/hdi_service:codec_client",
-    "//third_party/googletest:gtest_main",
-  ]
-
-  if (HAVE_CODEC_OEM_PATH) {
-    deps += [
-      "$base_root/drivers/peripheral/codec/hdi_service:libcodec_server_static",
-    ]
-  }
+  deps = [ "//third_party/googletest:gtest_main" ]
 
   if (is_standard_system) {
     external_deps = [
       "c_utils:utils",
+      "drivers_peripheral_codec:libcodec_client",
       "drivers_peripheral_display:hdi_gralloc_client",
       "graphic_chipsetsdk:buffer_handle",
       "hdf_core:libhdf_host",

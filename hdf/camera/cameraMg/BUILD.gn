@@ -11,15 +11,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//build/ohos_var.gni")
-import("//test/xts/tools/build/suite.gni")
-
-import("//build/ohos.gni")
-import("//build/test.gni")
-import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
-import("//drivers/peripheral/camera/hal/camera.gni")
-module_output_path = "hats/camera"
 base_root = "../../../../../../"
+import("//build/ohos.gni")
+import("//build/ohos_var.gni")
+import("//build/test.gni")
+import("//test/xts/tools/build/suite.gni")
+import("$base_root/drivers/peripheral/camera/hal/camera.gni")
+module_output_path = "hats/camera"
 
 #config("cameraTest_config") {
 #  visibility = [ ":*" ]
@@ -38,7 +36,6 @@ ohos_moduletest_suite("HatsHdfCameraMgTest") {
     "./src/hdi_stream_uttest.cpp",
   ]
   deps = [
-    "$base_root/drivers/interface/camera/v1_0:libcamera_proxy_1.0",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest",
     "//third_party/googletest:gtest_main",
@@ -59,6 +56,7 @@ ohos_moduletest_suite("HatsHdfCameraMgTest") {
   }
 
   external_deps += [
+    "drivers_interface_camera:libcamera_proxy_1.0",
     "drivers_interface_camera:metadata",
     "samgr:samgr_proxy",
   ]
@@ -71,11 +69,11 @@ config("hdf_cameramg") {
   include_dirs = [
     # common includes
     "./include",
-    "$base_root/system/core/include/cutils",
     "//third_party/googletest/googletest/include",
-    "$base_root/drivers/peripheral/display/interfaces/include",
-    "$base_root/drivers/peripheral/display/hdi_service/gralloc/include",
-    "$base_root/drivers/peripheral/camera/interfaces/include",
-    "$base_root/drivers/peripheral/camera/hal/include",
+    "$camera_path/../interfaces/include",
+    "$camera_path/include",
+
+    #"$base_root/drivers/peripheral/camera/interfaces/include",
+    #"$base_root/drivers/peripheral/camera/hal/include",
   ]
 }

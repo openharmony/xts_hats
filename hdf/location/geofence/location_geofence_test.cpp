@@ -75,19 +75,19 @@ void LocationGeofenceTest::SetUpTestCase()
 {
     auto devmgr = HDI::DeviceManager::V1_0::IDeviceManager::Get();
     if (devmgr == nullptr) {
-        printf("fail to get devmgr.");
+        printf("fail to get devmgr.\n");
         return;
     }
     if (devmgr->LoadDevice(GNSS_SERVICE_NAME) != 0) {
-        printf("Load gnss service failed!");
+        printf("Load gnss service failed!\n");
         return;
     }
     if (devmgr->LoadDevice(AGNSS_SERVICE_NAME) != 0) {
-        printf("Load agnss service failed!");
+        printf("Load agnss service failed!\n");
         return;
     }
     if (devmgr->LoadDevice(GEOFENCE_SERVICE_NAME) != 0) {
-        printf("Load geofence service failed!");
+        printf("Load geofence service failed!\n");
         return;
     }
     g_igeofenceHci = IGeofenceInterface::Get();
@@ -97,19 +97,19 @@ void LocationGeofenceTest::TearDownTestCase()
 {
     auto devmgr = HDI::DeviceManager::V1_0::IDeviceManager::Get();
     if (devmgr == nullptr) {
-        printf("fail to get devmgr.");
+        printf("fail to get devmgr.\n");
         return;
     }
     if (devmgr->UnloadDevice(GNSS_SERVICE_NAME) != 0) {
-        printf("Load gnss service failed!");
+        printf("Load gnss service failed!\n");
         return;
     }
     if (devmgr->UnloadDevice(AGNSS_SERVICE_NAME) != 0) {
-        printf("Load agnss service failed!");
+        printf("Load agnss service failed!\n");
         return;
     }
     if (devmgr->UnloadDevice(GEOFENCE_SERVICE_NAME) != 0) {
-        printf("Load geofence service failed!");
+        printf("Load geofence service failed!\n");
         return;
     }
 }

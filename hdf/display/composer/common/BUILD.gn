@@ -13,9 +13,8 @@
 
 base_root = "../../../../../../../"
 import("//build/ohos_var.gni")
-import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
+import("//test/xts/tools/build/suite.gni")
 import("$base_root/drivers/peripheral/display/display_config.gni")
-import("$base_root/test/xts/tools/build/suite.gni")
 
 config("module_private_config") {
   visibility = [ ":*" ]
@@ -31,13 +30,7 @@ ohos_static_library("disp_dev_hdi_test") {
     "hdi_test_display.cpp",
     "hdi_test_layer.cpp",
   ]
-  include_dirs = [
-    "$base_root/foundation/communication/ipc/interfaces/innerkits/ipc_core/include",
-    "$base_root/drivers/peripheral/base",
-    "$base_root/drivers/interface/display/composer/hdifd_parcelable",
-    "$base_root/drivers/interface/display/composer/bufferhandle_parcelable",
-    "$base_root/drivers/peripheral/display",
-  ]
+
   output_name = "disp_dev_hdi_test"
   cflags = [
     "-DGRALLOC_GBM_SUPPORT",
@@ -50,8 +43,10 @@ ohos_static_library("disp_dev_hdi_test") {
     "drivers_interface_display:display_composer_idl_headers",
     "drivers_interface_display:libdisplay_buffer_hdi_impl",
     "drivers_interface_display:libdisplay_composer_hdi_impl",
+    "graphic_chipsetsdk:buffer_handle",
     "hdf_core:libhdf_utils",
     "hiviewdfx_hilog_native:libhilog",
+    "ipc:ipc_core",
   ]
   subsystem_name = "xts"
   part_name = "xts_hats"

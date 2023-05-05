@@ -13,9 +13,8 @@
 
 base_root = "../../../../../../../"
 import("//build/ohos_var.gni")
-import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
+import("//test/xts/tools/build/suite.gni")
 import("$base_root/drivers/peripheral/display/display_config.gni")
-import("$base_root/test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/display"
 ohos_moduletest_suite("HatsHdfDisplayBufferDeathTest") {
@@ -23,17 +22,14 @@ ohos_moduletest_suite("HatsHdfDisplayBufferDeathTest") {
   defines += display_defines
   module_out_path = module_output_path
   sources = [ "death_test.cpp" ]
-  deps = [ "$base_root/third_party/googletest:gtest_main" ]
-  include_dirs = [
-    "utils",
-    "$base_root/drivers/peripheral/base",
-    "$base_root/drivers/interface/display/composer/hdifd_parcelable",
-  ]
+
   external_deps = [
     "c_utils:utils",
     "drivers_interface_display:display_buffer_idl_headers",
     "drivers_interface_display:display_composer_idl_headers",
     "drivers_interface_display:libdisplay_buffer_hdi_impl",
+    "drivers_interface_display:libdisplay_composer_hdi_impl",
+    "graphic_chipsetsdk:buffer_handle",
     "hdf_core:libhdf_utils",
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_core",

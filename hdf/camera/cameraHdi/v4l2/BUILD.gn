@@ -12,8 +12,6 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
-import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
-import("//drivers/peripheral/audio/audio.gni")
 import("//test/xts/tools/build/suite.gni")
 
 import("//build/ohos.gni")
@@ -61,14 +59,8 @@ ohos_moduletest_suite("HatsHdfCameraTest") {
     "$camera_path/device_manager/include/",
     "$camera_path/device_manager/include/v4l2",
     "$camera_path/utils/event",
-    "//drivers/peripheral/display/interfaces/include",
-    "//drivers/peripheral/display/hdi_service/gralloc/include",
-    "//drivers/peripheral/base",
-    "//base/hiviewdfx/interfaces/innerkits/libhilog/include",
 
     #producer
-    "//commonlibrary/c_utils/base/include",
-    "//foundation/systemabilitymgr/samgr/interfaces/innerkits/samgr_proxy/include",
     "$camera_path/pipeline_core/utils",
     "$camera_path/pipeline_core/include",
     "$camera_path/pipeline_core/host_stream/include",
@@ -83,9 +75,6 @@ ohos_moduletest_suite("HatsHdfCameraTest") {
     "$camera_path/pipeline_core/pipeline_impl/src/parser",
     "$camera_path/pipeline_core/pipeline_impl/src/strategy",
     "$camera_path/pipeline_core/ipp/include",
-
-    # hcs parser
-    "//system/core/include/cutils",
   ]
 
   deps = [
@@ -93,7 +82,6 @@ ohos_moduletest_suite("HatsHdfCameraTest") {
     "$camera_path/device_manager:camera_device_manager",
     "$camera_path/hdi_impl:camera_host_service_1.0_static",
     "$camera_path/pipeline_core:camera_pipeline_core",
-    "//drivers/interface/camera/v1_0:libcamera_proxy_1.0",
     "//third_party/googletest:gmock",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest",
@@ -116,6 +104,7 @@ ohos_moduletest_suite("HatsHdfCameraTest") {
   }
 
   external_deps += [
+    "drivers_interface_camera:libcamera_proxy_1.0",
     "drivers_interface_camera:metadata",
     "init:libbegetutil",
     "ipc:ipc_single",

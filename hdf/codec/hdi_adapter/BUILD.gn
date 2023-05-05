@@ -10,12 +10,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-base_root = "../../../../../.."
 
-import("//build/ohos.gni")
 import("//build/test.gni")
-import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
-import("$base_root/test/xts/tools/build/suite.gni")
+import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/codec"
 
@@ -25,14 +22,12 @@ ohos_moduletest_suite("HatsHdfAdapterCodecTest") {
 
   sources = [ "codec_hdi_adapter_test.cpp" ]
 
-  deps = [
-    "$base_root/drivers/peripheral/codec/hal/passthrough:codec_hdi_passthrough",
-    "//third_party/googletest:gtest_main",
-  ]
+  deps = [ "//third_party/googletest:gtest_main" ]
 
   if (is_standard_system) {
     external_deps = [
       "c_utils:utils",
+      "drivers_peripheral_codec:libcodec_hdi_passthrough_impl",
       "hdf_core:libhdf_utils",
       "hdf_core:libhdi",
       "hiviewdfx_hilog_native:libhilog",
@@ -44,8 +39,5 @@ ohos_moduletest_suite("HatsHdfAdapterCodecTest") {
   part_name = "xts_hats"
 }
 config("hdc_codec_adapter") {
-  include_dirs = [
-    "$base_root/drivers/peripheral/codec/interfaces/include",
-    "//third_party/openmax/api/1.1.2",
-  ]
+  include_dirs = [ "//third_party/openmax/api/1.1.2" ]
 }

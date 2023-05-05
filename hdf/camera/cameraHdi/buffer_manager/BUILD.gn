@@ -12,8 +12,6 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
-import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
-import("//drivers/peripheral/audio/audio.gni")
 import("//test/xts/tools/build/suite.gni")
 
 import("//build/ohos.gni")
@@ -33,12 +31,7 @@ ohos_moduletest_suite("HatsHdfCameraBufferTest") {
 
   include_dirs = [
     # common includes
-    "//system/core/include/cutils",
     "//third_party/googletest/googletest/include",
-    "//drivers/peripheral/display/interfaces/include",
-    "//drivers/peripheral/display/hdi_service/gralloc/include",
-
-    #"//base/hiviewdfx/interfaces/innerkits/libhilog/include",
 
     # camera common includes
     "$camera_path/include",
@@ -57,26 +50,6 @@ ohos_moduletest_suite("HatsHdfCameraBufferTest") {
     "$camera_path/buffer_manager/include",
     "$camera_path/buffer_manager/src/buffer_adapter/standard",
 
-    # pipeline core includes
-    "$camera_path/pipeline_core",
-    "$camera_path/pipeline_core/host_stream/include",
-    "$camera_path/pipeline_core/utils",
-    "$camera_path/pipeline_core/nodes/include",
-    "$camera_path/pipeline_core/nodes/src/node_base",
-    "$camera_path/pipeline_core/nodes/src/sink_node",
-    "$camera_path/pipeline_core/nodes/src/sensor_node",
-    "$camera_path/pipeline_core/nodes/src/merge_node",
-    "$camera_path/pipeline_core/nodes/src/dummy_node",
-    "$camera_path/pipeline_core/pipeline_impl/include",
-    "$camera_path/pipeline_core/pipeline_impl/src",
-    "$camera_path/pipeline_core/include",
-    "$camera_path/pipeline_core/pipeline_impl/src/builder",
-    "$camera_path/pipeline_core/pipeline_impl/src/dispatcher",
-    "$camera_path/pipeline_core/pipeline_impl/src/parser",
-    "$camera_path/pipeline_core/pipeline_impl/src/strategy",
-    "$camera_path/pipeline_core/pipeline_impl/src/strategy/config",
-    "$camera_path/pipeline_core/ipp/include",
-
     # hdi impl includes
     "$camera_path/hdi_impl",
     "$camera_path/hdi_impl/include",
@@ -92,8 +65,6 @@ ohos_moduletest_suite("HatsHdfCameraBufferTest") {
     "$camera_path/device_manager:camera_device_manager",
     "$camera_path/hdi_impl:camera_host_service_1.0_static",
     "$camera_path/pipeline_core:camera_pipeline_core",
-    "//drivers/interface/camera/v1_0:libcamera_proxy_1.0",
-    "//drivers/interface/camera/v1_0:libcamera_stub_1.0",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest",
     "//third_party/googletest:gtest_main",
@@ -115,6 +86,8 @@ ohos_moduletest_suite("HatsHdfCameraBufferTest") {
   }
 
   external_deps += [
+    "drivers_interface_camera:libcamera_proxy_1.0",
+    "drivers_interface_camera:libcamera_stub_1.0",
     "drivers_interface_camera:metadata",
     "init:libbegetutil",
     "ipc:ipc_single",

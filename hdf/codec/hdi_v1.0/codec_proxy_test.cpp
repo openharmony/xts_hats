@@ -483,10 +483,11 @@ HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0222, TestSize.Level1)
 HWTEST_F(CodecProxyTest, SUB_DriverSystem_CodecHdi_V1_0230, TestSize.Level1)
 {
     UINTPTR instance = 0;
-    ICodecCallback *callback = CodecCallbackStubObtain();
-    ASSERT_TRUE(callback != nullptr);
+    CodecCallback callback;
+    struct CodecCallbackStub *stub = CodecCallbackStubObtain(&callback);
+    ASSERT_TRUE(stub != nullptr);
 
-    int32_t errorCode = g_codecObj->CodecSetCallback(g_codecObj, g_handle, callback, instance);
+    int32_t errorCode = g_codecObj->CodecSetCallback(g_codecObj, g_handle, &stub->service, instance);
     ASSERT_EQ(errorCode, HDF_SUCCESS);
 }
 

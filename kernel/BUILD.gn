@@ -12,7 +12,7 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
-import("//test/xts/hats/build.gni")
+import("../build.gni")
 import(
     "open_posix_testsuite/conformance/interfaces_gn/posix_interface_config.gni")
 

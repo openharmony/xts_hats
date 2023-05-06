@@ -23,6 +23,7 @@
 #include "hdf_base.h"
 #include "osal_time.h"
 #include "v1_1/ivibrator_interface.h"
+#include "parameters.h"
 
 using namespace OHOS::HDI::Vibrator::V1_1;
 using namespace testing::ext;
@@ -37,6 +38,8 @@ namespace {
     std::string g_timeSequence = "haptic.clock.timer";
     std::string g_builtIn = "haptic.default.effect";
     std::string g_arbitraryStr = "arbitraryString";
+    const std::string DEVICETYPE_KEY = "const.product.devicetype";
+    const std::string DEVICETYPE_TYPE = "phone";
     sptr<IVibratorInterface> g_vibratorInterface = nullptr;
 
 class vibratorBenchmarkTest : public benchmark::Fixture {
@@ -208,6 +211,75 @@ BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0050)(benc
 BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0050)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
+/**
+  * @tc.name: SUB_DriverSystem_VibratorBenchmark_0060
+  * @tc.desc: Start periodic vibration with custom composite effect
+  * @tc.type: FUNC
+  */
+ BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0060)(benchmark::State &state)
+{
+  
+        PrimitiveEffect primitiveEffect1 { 0, 60007, 0};
+        PrimitiveEffect primitiveEffect2 { 1000, 60007, 0};
+        PrimitiveEffect primitiveEffect3 { 1000, 60007, 0};
+        CompositeEffect effect1 = {
+        .primitiveEffect = primitiveEffect1
+        };
+        CompositeEffect effect2 = {
+        .primitiveEffect = primitiveEffect2
+        };
+        CompositeEffect effect3 = {
+        .primitiveEffect = primitiveEffect3
+        };
+        std::vector<CompositeEffect> vec;
+        vec.push_back(effect1);
+        vec.push_back(effect2);
+        vec.push_back(effect3);
+        HdfCompositeEffect effect;
+        effect.type = HDF_EFFECT_TYPE_PRIMITIVE;
+        effect.compositeEffects = vec;
+        int32_t ret;
+        for (auto _ : state) {
+        ret = g_vibratorInterface -> EnableCompositeEffect(effect);
+        }
+        OsalMSleep(2);
+}
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0060)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
+/**
+  * @tc.name: SUB_DriverSystem_VibratorBenchmark_0070
+  * @tc.desc: Get effect information with the given effect type
+  * @tc.type: FUNC
+  */
+BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0070)(benchmark::State &state)
+{
+    ASSERT_NE(nullptr, g_vibratorInterface);
+    HdfEffectInfo effectInfo;
+    int32_t ret;
+    for (auto _ : state) {
+    ret = g_vibratorInterface -> GetEffectInfo("haptic.pattern.type1", effectInfo);
+    }
+    EXPECT_EQ(HDF_SUCCESS, ret);
+}
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0070)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
+/**
+  * @tc.name: SUB_DriverSystem_VibratorBenchmark_0080
+  * @tc.desc: Get vibration status.
+  * @tc.type: FUNC
+  */
+ BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0080)(benchmark::State &state)
+{
+    ASSERT_NE(nullptr, g_vibratorInterface); 
+    bool stat {false};  
+    for (auto _ : state) {
+    g_vibratorInterface -> IsVibratorRunning(stat);
+    }
+}
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0080)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 }
 
 BENCHMARK_MAIN();

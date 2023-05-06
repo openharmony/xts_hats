@@ -20,7 +20,8 @@ import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 module_output_path = "hats/misc"
 ohos_moduletest_suite("HatsHdfVibratorbenchmarkTest") {
   module_out_path = module_output_path
-  include_dirs = []
+  include_dirs =
+      [ "$base_root/drivers/peripheral/vibrator/interfances/include" ]
 
   sources = [ "hdf_vibrator_benchmark_test.cpp" ]
   cflags = [
@@ -32,17 +33,19 @@ ohos_moduletest_suite("HatsHdfVibratorbenchmarkTest") {
     "-fno-strict-aliasing",
   ]
 
-  deps = []
+  deps = [
+    "//third_party/benchmark",
+    "//third_party/googletest:gmock_main",
+    "//third_party/googletest:gtest_main",
+  ]
   if (is_standard_system) {
     external_deps = [
       "c_utils:utils",
       "drivers_interface_vibrator:libvibrator_proxy_1.1",
       "hdf_core:libhdf_utils",
       "hiviewdfx_hilog_native:libhilog",
+      "init:libbegetutil",
       "ipc:ipc_single",
-      "//third_party/benchmark",
-      "//third_party/googletest:gmock_main",
-      "//third_party/googletest:gtest_main",
     ]
   } else {
     external_deps = [ "hilog:libhilog" ]

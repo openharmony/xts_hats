@@ -133,8 +133,8 @@ static void AdjustLayerSettings(std::vector<LayerSettings> &settings, uint32_t w
             setting.displayRect.x = static_cast<uint32_t>(setting.rectRatio.x * w);
             setting.displayRect.y = static_cast<uint32_t>(setting.rectRatio.y * h);
             DISPLAY_TEST_LOGE("display rect adust form %f %f %f %f to %{public}d %{public}d %{public}d %{public}d ",
-            setting.rectRatio.x, setting.rectRatio.y, setting.rectRatio.w, setting.rectRatio.h, setting.displayRect.x,
-                setting.displayRect.y, setting.displayRect.w, setting.displayRect.h);
+                setting.rectRatio.x, setting.rectRatio.y, setting.rectRatio.w, setting.rectRatio.h,
+                setting.displayRect.x,setting.displayRect.y, setting.displayRect.w, setting.displayRect.h);
         }
 
         if ((setting.bufferRatio.h > 0.0f) || (setting.bufferRatio.w > 0.0f)) {
@@ -369,6 +369,82 @@ BENCHMARK_F(DisplayBenchmarkTest, AllocMemTest)(benchmark::State &state)
 BENCHMARK_REGISTER_F(DisplayBenchmarkTest, AllocMemTest)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
+BENCHMARK_F(DisplayBenchmarkTest, MmapTest)(benchmark::State &state)
+{
+    BufferHandle* buffer = nullptr;
+    AllocInfo info;
+    info.width  = 800;
+    info.height = 600;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_MEM_DMA |
+            OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_READ |
+            OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_WRITE;
+    info.format = PIXEL_FMT_RGBA_8888;
+    g_gralloc->AllocMem(info, buffer);
+    for (auto _ : state) {
+        g_gralloc->Mmap(*buffer);
+    }
+}
+
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, MmapTest)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
+BENCHMARK_F(DisplayBenchmarkTest, InvalidateCacheTest)(benchmark::State &state)
+{
+    BufferHandle* buffer = nullptr;
+    AllocInfo info;
+    info.width  = 800;
+    info.height = 600;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_MEM_DMA |
+            OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_READ |
+            OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_WRITE;
+    info.format = PIXEL_FMT_RGBA_8888;
+    g_gralloc->AllocMem(info, buffer);
+    for (auto _ : state) {
+        g_gralloc->InvalidateCache(*buffer);
+    }
+}
+
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, InvalidateCacheTest)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
+BENCHMARK_F(DisplayBenchmarkTest, FlushCacheTest)(benchmark::State &state)
+{
+    BufferHandle* buffer = nullptr;
+    AllocInfo info;
+    info.width  = 800;
+    info.height = 600;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_MEM_DMA |
+            OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_READ |
+            OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_WRITE;
+    info.format = PIXEL_FMT_RGBA_8888;
+    g_gralloc->AllocMem(info, buffer);
+    for (auto _ : state) {
+        g_gralloc->FlushCache(*buffer);
+    }
+}
+
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, FlushCacheTest)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
+BENCHMARK_F(DisplayBenchmarkTest, UnmapTest)(benchmark::State &state)
+{
+    BufferHandle* buffer = nullptr;
+    AllocInfo info;
+    info.width  = 800;
+    info.height = 600;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_MEM_DMA |
+            OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_READ |
+            OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_WRITE;
+    info.format = PIXEL_FMT_RGBA_8888;
+    g_gralloc->AllocMem(info, buffer);
+    for (auto _ : state) {
+        g_gralloc->Unmap(*buffer);
+    }
+}
+
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, UnmapTest)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
 BENCHMARK_F(DisplayBenchmarkTest, SetLayerCropTest)(benchmark::State &state)
 {
     std::vector<LayerSettings> settings = {
@@ -513,9 +589,7 @@ BENCHMARK_F(DisplayBenchmarkTest, SetLayerRegionTest)(benchmark::State &state)
         const int32_t HEIGHT = 100;
         auto layer = layers[0];
         IRect rect = {0, 0, WIDTH, HEIGHT};
-
         ret = g_composerDevice->SetLayerRegion(g_displayIds[0], layer->GetId(), rect);
-
     }
     PrepareAndPrensent();
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
@@ -598,7 +672,6 @@ BENCHMARK_F(DisplayBenchmarkTest, SetLayerVisibleRegionTest)(benchmark::State &s
         ASSERT_TRUE((layers.size() > 0));
         PrepareAndPrensent();
         auto layer = layers[0];
-
         const int32_t WIDTH = 500;
         const int32_t HEIGHT = 500;
         IRect region = {0, 0, WIDTH, HEIGHT};
@@ -654,7 +727,6 @@ BENCHMARK_F(DisplayBenchmarkTest, SetLayerBlendTypeTest)(benchmark::State &state
         ret = g_composerDevice->SetLayerBlendType(g_displayIds[0], layer->GetId(), type);
     }
     PrepareAndPrensent();
-
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
@@ -675,7 +747,7 @@ BENCHMARK_F(DisplayBenchmarkTest, DestroyLayerTest)(benchmark::State &state)
         ASSERT_TRUE((layers.size() > 0));
         auto layer = layers[0];
         PrepareAndPrensent();
-        sleep(1);
+        // sleep(1);
         ret = g_composerDevice->DestroyLayer(g_displayIds[0], layer->GetId());
     }
     PrepareAndPrensent();
@@ -684,6 +756,46 @@ BENCHMARK_F(DisplayBenchmarkTest, DestroyLayerTest)(benchmark::State &state)
 
 BENCHMARK_REGISTER_F(DisplayBenchmarkTest, DestroyLayerTest)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
+BENCHMARK_F(DisplayBenchmarkTest, CreateLayersTest)(benchmark::State &state)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = PURPLE
+        }
+    };
+    for (auto _ : state) {
+        std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+        ASSERT_TRUE((layers.size() > 0));
+    }
+    PrepareAndPrensent();
+}
+
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, CreateLayersTest)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
+
+BENCHMARK_F(DisplayBenchmarkTest, FreeMemTest)(benchmark::State &state)
+{
+    BufferHandle* buffer = nullptr;
+    AllocInfo info;
+    info.width  = 800;
+    info.height = 600;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_MEM_DMA |
+            OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_READ |
+            OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_WRITE;
+    info.format = PIXEL_FMT_RGBA_8888;
+    for (auto _ : state) {
+        g_gralloc->AllocMem(info, buffer);
+        g_gralloc->Unmap(*buffer);
+        g_gralloc->FreeMem(*buffer);
+    }
+}
+
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, FreeMemTest)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
 }
 int main(int argc, char** argv)
 {

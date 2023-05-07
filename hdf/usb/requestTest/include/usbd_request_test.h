@@ -21,6 +21,16 @@
 
 using OHOS::HDI::Usb::V1_0::UsbDev;
 
+/**
+ * Used to signify direction of data for USBEndpoint is IN, device to host
+ */
+const int32_t USB_ENDPOINT_DIR_IN = 0x80;
+
+/**
+ * Used to signify direction of data for USBEndpoint is OUT, host to device
+ */
+const int32_t USB_ENDPOINT_DIR_OUT = 0;
+
 namespace {
 class UsbdRequestTest : public testing::Test {
 public:

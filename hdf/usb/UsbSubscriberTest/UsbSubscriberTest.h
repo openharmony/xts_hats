@@ -21,6 +21,13 @@
 using OHOS::HDI::Usb::V1_0::PortInfo;
 using OHOS::HDI::Usb::V1_0::USBDeviceInfo;
 
+enum UsbdDeviceAction {
+    ACT_DEVUP = 0,
+    ACT_DEVDOWN,
+    ACT_UPDEVICE,
+    ACT_DOWNDEVICE,
+};
+
 namespace OHOS {
 namespace USB {
 class UsbSubscriberTest : public OHOS::HDI::Usb::V1_0::IUsbdSubscriber {

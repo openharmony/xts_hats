@@ -18,8 +18,6 @@
 #include "if_system_ability_manager.h"
 #include "system_ability_definition.h"
 #include "usbd_function_test.h"
-#include "usbd_function.h"
-#include "usbd_port.h"
 #include "v1_0/iusb_interface.h"
 #include "v1_0/usb_types.h"
 

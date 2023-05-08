@@ -35,8 +35,8 @@ ohos_moduletest_suite("HatsHdfAudioEffectBenchmarkTest") {
     "hdf_core:libhdf_utils",
     "hiviewdfx_hilog_native:libhilog",
   ]
-  subsystem_name = "hdf"
-  part_name = "drivers_peripheral_audio"
+  subsystem_name = "xts"
+  part_name = "xts_hats"
 }
 config("audio_idl_effect") {
   include_dirs = []

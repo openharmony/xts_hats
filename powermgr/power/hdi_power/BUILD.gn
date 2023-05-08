@@ -21,13 +21,13 @@ ohos_moduletest_suite("HatsPowermgrPowerTest") {
   sources = [ "./common/hdi_power_test.cpp" ]
 
   deps = [
-    "//drivers/interface/power/v1_1:libpower_stub_1.1",
     "//third_party/googletest:gtest_main",
   ]
 
   external_deps = [
     "c_utils:utils",
     "hdf_core:libhdf_utils",
+    "power_interface_service:libpower_stub_1.1",
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_single",
   ]

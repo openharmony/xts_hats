@@ -1,7 +1,7 @@
 {
     "name": "@ohos/xts_hats",
     "description": "hats",
-    "version": "3.1",
+    "version": "4.0",
     "license": "Apache License 2.0",
     "publishAs": "code-segment",
     "segment": {
@@ -14,12 +14,12 @@
         "subsystem": "xts",
         "syscap": [],
         "features": [
-            "xts_hats_rich",
-            "xts_hats_nnrt"
+            "xts_hats_features_rich",
+            "xts_hats_features_nnrt"
           ],
-        "adapted_system_type": [],
-        "rom": "",
-        "ram": "",
+        "adapted_system_type": [ "standard" ],
+        "rom": "0KB",
+        "ram": "0KB",
         "deps": {
             "components": [],
             "third_party": []

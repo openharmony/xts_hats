@@ -48,8 +48,8 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkDeviceTest") {
     "safwk:system_ability_fwk",
     "samgr:samgr_proxy",
   ]
-  subsystem_name = "hdf"
-  part_name = "drivers_peripheral_usb"
+  subsystem_name = "xts"
+  part_name = "xts_hats"
 }
 
 ohos_moduletest_suite("HatsHdfUsbBenchmarkFunctionTest") {
@@ -83,8 +83,8 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkFunctionTest") {
     "safwk:system_ability_fwk",
     "samgr:samgr_proxy",
   ]
-  subsystem_name = "hdf"
-  part_name = "drivers_peripheral_usb"
+  subsystem_name = "xts"
+  part_name = "xts_hats"
 }
 
 ohos_moduletest_suite("HatsHdfUsbBenchmarkRequestTest") {
@@ -118,8 +118,8 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkRequestTest") {
     "safwk:system_ability_fwk",
     "samgr:samgr_proxy",
   ]
-  subsystem_name = "hdf"
-  part_name = "drivers_peripheral_usb"
+  subsystem_name = "xts"
+  part_name = "xts_hats"
 }
 
 ohos_moduletest_suite("HatsHdfUsbBenchmarkTransferTest") {
@@ -152,8 +152,8 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkTransferTest") {
     "safwk:system_ability_fwk",
     "samgr:samgr_proxy",
   ]
-  subsystem_name = "hdf"
-  part_name = "drivers_peripheral_usb"
+  subsystem_name = "xts"
+  part_name = "xts_hats"
 }
 
 config("hdf_usb") {

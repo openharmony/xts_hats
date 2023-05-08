@@ -14,10 +14,12 @@
         "subsystem": "xts",
         "syscap": [],
         "features": [
-            "xts_hats_features_rich",
-            "xts_hats_features_nnrt"
-          ],
-        "adapted_system_type": [ "standard" ],
+            "xts_hats_rich",
+            "xts_hats_nnrt"
+        ],
+        "adapted_system_type": [
+            "standard"
+        ],
         "rom": "0KB",
         "ram": "0KB",
         "deps": {
@@ -27,7 +29,9 @@
         "build": {
             "sub_component": [],
             "inner_kits": [],
-            "test": [ "//test/xts/hats:hats" ]
+            "test": [
+                "//test/xts/hats:hats"
+            ]
         }
     }
 }

@@ -21,7 +21,7 @@ group("HatsHdfAudioTest") {
     testonly = true
   }
   if (is_standard_system) {
-    if (xts_hats_features_rich == false) {
+    if (xts_hats_rich == false) {
       deps = [ "idl:hdi_base_common" ]
     } else {
       deps = [

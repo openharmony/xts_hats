@@ -18,7 +18,7 @@ import("//test/xts/tools/build/suite.gni")
 
 group("HatsHdfLightTest") {
   testonly = true
-  if (xts_hats_features_rich == true) {
+  if (xts_hats_rich == true) {
   } else {
     deps = [
       #"liteos:HatsHdfLightHdiTest",

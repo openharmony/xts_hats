@@ -21,7 +21,7 @@ group("HatsHdfCameraTest") {
     testonly = true
   }
   if (is_standard_system) {
-    if (xts_hats_features_rich == false) {
+    if (xts_hats_rich == false) {
       deps = [
         "cameraHdi:HatsHdfCameraHdiTest",
         "cameraMg:HatsHdfCameraMgTest",

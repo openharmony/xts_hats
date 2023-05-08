@@ -20,7 +20,7 @@ import("//test/xts/tools/build/suite.gni")
 group("HatsHdfLocationTest") {
   testonly = true
 
-  if (xts_hats_features_rich == false) {
+  if (xts_hats_rich == false) {
   } else {
     if (is_standard_system) {
       deps = [

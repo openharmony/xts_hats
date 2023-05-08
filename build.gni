@@ -12,6 +12,6 @@
 # limitations under the License.
 import("//build/ohos.gni")
 declare_args() {
-  xts_hats_features_rich = false
-  xts_hats_features_nnrt = false
+  xts_hats_rich = false
+  xts_hats_nnrt = false
 }

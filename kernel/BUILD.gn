@@ -19,7 +19,7 @@ import(
 group("kernel") {
   testonly = true
   if (is_standard_system) {
-    if (xts_hats_features_rich == true) {
+    if (xts_hats_rich == true) {
       deps = [
         "accesstokenid:HatsAccesstokenidTest",
         "dmabuffer:HatsDmaBufferTest",

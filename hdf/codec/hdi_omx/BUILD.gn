@@ -48,7 +48,7 @@ ohos_moduletest_suite("HatsHdfOmxCodecTest") {
   }
 
   defines = []
-  if (xts_hats_features_rich) {
+  if (xts_hats_rich) {
     defines += [ "SUPPORT_OMX" ]
   }
   subsystem_name = "xts"
@@ -65,7 +65,7 @@ config("hdf_codec_omx") {
     "-fno-common",
     "-fno-strict-aliasing",
   ]
-  if (xts_hats_features_rich == false) {
+  if (xts_hats_rich == false) {
     cflags += [ "-DSUPPORT_OMX" ]
   }
 }

@@ -20,7 +20,7 @@ import("//test/xts/tools/build/suite.gni")
 group("HatsHdfNfcTest") {
   testonly = true
 
-  if (xts_hats_features_rich == true) {
+  if (xts_hats_rich == true) {
     if (is_standard_system) {
       deps = [ "hdcService:HatsHdfNfcHdiTest" ]
     }

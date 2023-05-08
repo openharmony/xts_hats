@@ -10,8 +10,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import(
-    "//test/xts/hats/kernel/open_posix_testsuite/conformance/interfaces_gn/posix_interface_template.gni")
+import("../posix_interface_template.gni")
 
 posix_interface_bin("pthread_attr_getdetachstate_1-1") {
   sources = [ "//third_party/ltp/testcases/open_posix_testsuite/conformance/interfaces/pthread_attr_getdetachstate/1-1.c" ]

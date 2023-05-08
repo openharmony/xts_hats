@@ -1,4 +1,4 @@
-# Copyright (C) 2022 Huawei Device Co., Ltd.
+# Copyright (C) 2023 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -11,21 +11,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//test/xts/tools/build/suite.gni")
+import("../../../tools/build/suite.gni")
 
 module_output_path = "hats/purgeableMem"
 
 ohos_moduletest_suite("HatsPurgeable") {
   module_out_path = module_output_path
   sources = [ "./purgeable_cpp_test.cpp" ]
-  deps = [
-    "//base/hiviewdfx/hilog/interfaces/native/innerkits:libhilog",
-    "//commonlibrary/memory_utils/libpurgeablemem:libpurgeablemem",
+  external_deps = [
+    "c_utils:utils",
+    "hilog_native:libhilog",
+    "memory_utils:libpurgeablemem",
   ]
-  include_dirs = [
-    "//test/xts/tools/hctest/include",
-    "//commonlibrary/memory_utils/",
-  ]
+  include_dirs = [ "include" ]
   cflags = [ "-Wno-error" ]
   subsystem_name = "kernel"
 }

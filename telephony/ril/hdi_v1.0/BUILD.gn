@@ -13,7 +13,7 @@
 
 import("//build/ohos_var.gni")
 import("../../../../../../drivers/hdf_core/adapter/uhdf2/uhdf.gni")
-import("../../../tools/build/suite.gni")
+import("../../../../tools/build/suite.gni")
 
 module_output_path = "hdf/ril"
 ohos_moduletest_suite("HatsHdfV1RilServiceTest") {

@@ -340,4 +340,19 @@ BENCHMARK_F(AudioAdapterBenchmarkTest, SetExtraParams)(benchmark::State &state)
 
 BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, SetExtraParams)->
     Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
+
+BENCHMARK_F(AudioAdapterBenchmarkTest, GetExtraParams)(benchmark::State &state)
+{
+    int32_t ret;
+    enum AudioExtParamKey key = AUDIO_EXT_PARAM_KEY_NONE;
+    char condition[AUDIO_ADAPTER_BUF_TEST];
+    char value[AUDIO_ADAPTER_BUF_TEST];
+    uint32_t valueLen = AUDIO_ADAPTER_BUF_TEST;
+    for (auto _ : state) {
+        ret = adapter_->GetExtraParams(adapter_, key, condition, value, valueLen);
+    }
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+}
+BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, GetExtraParams)->
+    Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
 }

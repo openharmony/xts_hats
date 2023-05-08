@@ -15,7 +15,6 @@
 
 #include "UsbSubscriberTest.h"
 #include "hdf_log.h"
-#include "usbd_type.h"
 
 namespace OHOS {
 namespace USB {

@@ -17,6 +17,25 @@
 
 #include <gtest/gtest.h>
 
+#define DEFAULT_PORT_ID 1
+
+#define POWER_ROLE_NONE   0
+#define POWER_ROLE_SOURCE 1
+#define POWER_ROLE_SINK   2
+
+#define DATA_ROLE_NONE   0
+#define DATA_ROLE_HOST   1
+#define DATA_ROLE_DEVICE 2
+
+#define PORT_MODE_NONE   0
+
+#define USB_FUNCTION_NONE    0
+#define USB_FUNCTION_ACM     (1 << 0)
+#define USB_FUNCTION_ECM     (1 << 1)
+#define USB_FUNCTION_HDC     (1 << 2)
+#define USB_FUNCTION_RNDIS   (1 << 5)
+#define USB_FUNCTION_STORAGE (1 << 9)
+
 namespace {
 class UsbdFunctionTest : public testing::Test {
 public:

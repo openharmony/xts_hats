@@ -17,6 +17,12 @@
 
 #include <gtest/gtest.h>
 
+#define USB_FUNCTION_NONE    0
+#define DEFAULT_PORT_ID 1
+#define POWER_ROLE_NONE   0
+#define DATA_ROLE_NONE   0
+#define PORT_MODE_NONE   0
+
 namespace {
 class UsbdAutoFunctionTest : public testing::Test {
 public:

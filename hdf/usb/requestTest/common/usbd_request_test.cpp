@@ -19,7 +19,6 @@
 #include "UsbSubscriberTest.h"
 #include "hdf_log.h"
 #include "usbd_request_test.h"
-#include "usbd_type.h"
 #include "v1_0/iusb_interface.h"
 #include "v1_0/usb_types.h"
 

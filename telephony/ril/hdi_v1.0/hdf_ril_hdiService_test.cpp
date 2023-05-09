@@ -141,6 +141,9 @@ enum class HdiId {
     HREQ_NETWORK_SET_LOCATE_UPDATES,
     HREQ_NETWORK_SET_NOTIFICATION_FILTER,
     HREQ_NETWORK_SET_DEVICE_STATE,
+    HREQ_NETWORK_GET_RRC_CONNECTION_STATE,
+    HREQ_NETWORK_SET_NR_OPTION_MODE,
+    HREQ_NETWORK_GET_NR_OPTION_MODE,
 
     HREQ_COMMON_BASE = 500,
     HREQ_MODEM_SHUT_DOWN,
@@ -154,6 +157,8 @@ enum class HdiId {
 };
 
 enum class DeviceStateType { POWER_SAVE_MODE, CHARGING_STATE, LOW_DATA_STATE };
+
+enum class NrMode { NR_MODE_UNKNOWN, NR_MODE_NSA_ONLY, NR_MODE_SA_ONLY, NR_MODE_NSA_AND_SA };
 
 enum class NotificationFilter {
     NOTIFICATION_FILTER_ALL = -1,
@@ -392,6 +397,10 @@ public:
     int32_t SetLocateUpdatesResponse(const RilRadioResponseInfo &responseInfo) override;
     int32_t SetNotificationFilterResponse(const RilRadioResponseInfo &responseInfo) override;
     int32_t SetDeviceStateResponse(const RilRadioResponseInfo &responseInfo) override;
+    int32_t GetRrcConnectionStateResponse(const RilRadioResponseInfo &responseInfo, int32_t state) override;
+    int32_t SetNrOptionModeResponse(const RilRadioResponseInfo &responseInfo) override;
+    int32_t GetNrOptionModeResponse(const RilRadioResponseInfo &responseInfo, int32_t mode) override;
+    int32_t GetRrcConnectionStateUpdated(const RilRadioResponseInfo &responseInfo, int32_t state) override;
 
     // Sms
     int32_t NewSmsNotify(
@@ -1154,6 +1163,39 @@ int32_t RilCallback::SetDeviceStateResponse(const RilRadioResponseInfo &response
     hdiId_ = HdiId::HREQ_NETWORK_SET_DEVICE_STATE;
     resultInfo_ = responseInfo;
     NotifyAll();
+    return 0;
+}
+
+int32_t RilCallback::GetRrcConnectionStateResponse(const RilRadioResponseInfo &responseInfo, int32_t state)
+{
+    HDF_LOGI("RilCallback::GetRrcConnectionStateResponse state:%{public}d", state);
+    hdiId_ = HdiId::HREQ_NETWORK_GET_RRC_CONNECTION_STATE;
+    resultInfo_ = responseInfo;
+    NotifyAll();
+    return 0;
+}
+
+int32_t RilCallback::SetNrOptionModeResponse(const RilRadioResponseInfo &responseInfo)
+{
+    HDF_LOGI("RilCallback::SetDeviceStateResponse error:%{public}d", responseInfo.error);
+    hdiId_ = HdiId::HREQ_NETWORK_SET_NR_OPTION_MODE;
+    resultInfo_ = responseInfo;
+    NotifyAll();
+    return 0;
+}
+
+int32_t RilCallback::GetNrOptionModeResponse(const RilRadioResponseInfo &responseInfo, int32_t state)
+{
+    HDF_LOGI("RilCallback::GetNrOptionModeResponse state:%{public}d", state);
+    hdiId_ = HdiId::HREQ_NETWORK_GET_NR_OPTION_MODE;
+    resultInfo_ = responseInfo;
+    NotifyAll();
+    return 0;
+}
+
+int32_t RilCallback::GetRrcConnectionStateUpdated(const RilRadioResponseInfo &responseInfo, int32_t state)
+{
+    HDF_LOGI("RilCallback::GetRrcConnectionStateUpdated state:%{public}d", state);
     return 0;
 }
 
@@ -3180,6 +3222,74 @@ HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_SetDeviceState_V1_0200, Function 
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_NETWORK_SET_DEVICE_STATE));
+}
+
+HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetRrcConnectionState_V1_0100, Function | MediumTest | Level3)
+{
+    if (!IsReady(SLOTID_1)) {
+        return;
+    }
+    int32_t ret = g_rilInterface->GetRrcConnectionState(SLOTID_1, GetSerialId());
+    WaitFor(WAIT_TIME_SECOND);
+    EXPECT_EQ(SUCCESS, ret);
+    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_NETWORK_GET_RRC_CONNECTION_STATE));
+}
+
+HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetRrcConnectionState_V1_0200, Function | MediumTest | Level3)
+{
+    if (!IsReady(SLOTID_2)) {
+        return;
+    }
+    int32_t ret = g_rilInterface->GetRrcConnectionState(SLOTID_2, GetSerialId());
+    WaitFor(WAIT_TIME_SECOND);
+    EXPECT_EQ(SUCCESS, ret);
+    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_NETWORK_GET_RRC_CONNECTION_STATE));
+}
+
+HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_SetNrOptionMode_V1_0100, Function | MediumTest | Level3)
+{
+    if (!IsReady(SLOTID_1)) {
+        return;
+    }
+    int32_t ret =
+        g_rilInterface->SetNrOptionMode(SLOTID_1, GetSerialId(), static_cast<int32_t>(NrMode::NR_MODE_NSA_AND_SA));
+    WaitFor(WAIT_TIME_SECOND);
+    EXPECT_EQ(SUCCESS, ret);
+    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_NETWORK_SET_NR_OPTION_MODE));
+}
+
+HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_SetNrOptionMode_V1_0200, Function | MediumTest | Level3)
+{
+    if (!IsReady(SLOTID_2)) {
+        return;
+    }
+    int32_t ret =
+        g_rilInterface->SetNrOptionMode(SLOTID_2, GetSerialId(), static_cast<int32_t>(NrMode::NR_MODE_NSA_AND_SA));
+    WaitFor(WAIT_TIME_SECOND);
+    EXPECT_EQ(SUCCESS, ret);
+    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_NETWORK_SET_NR_OPTION_MODE));
+}
+
+HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetNrOptionMode_V1_0100, Function | MediumTest | Level3)
+{
+    if (!IsReady(SLOTID_1)) {
+        return;
+    }
+    int32_t ret = g_rilInterface->GetNrOptionMode(SLOTID_1, GetSerialId());
+    WaitFor(WAIT_TIME_SECOND);
+    EXPECT_EQ(SUCCESS, ret);
+    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_NETWORK_GET_NR_OPTION_MODE));
+}
+
+HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetNrOptionMode_V1_0200, Function | MediumTest | Level3)
+{
+    if (!IsReady(SLOTID_2)) {
+        return;
+    }
+    int32_t ret = g_rilInterface->GetNrOptionMode(SLOTID_2, GetSerialId());
+    WaitFor(WAIT_TIME_SECOND);
+    EXPECT_EQ(SUCCESS, ret);
+    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_NETWORK_GET_NR_OPTION_MODE));
 }
 
 /**

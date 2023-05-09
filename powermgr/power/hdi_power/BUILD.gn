@@ -24,10 +24,10 @@ ohos_moduletest_suite("HatsPowermgrPowerTest") {
 
   external_deps = [
     "c_utils:utils",
+    "drivers_interface_power:libpower_stub_1.1",
     "hdf_core:libhdf_utils",
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_single",
-    "power_interface_service:libpower_stub_1.1",
   ]
   subsystem_name = "hdf"
   part_name = "drivers_peripheral_power"

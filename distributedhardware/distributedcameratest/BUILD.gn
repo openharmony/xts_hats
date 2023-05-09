@@ -1,9 +1,9 @@
-# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     http:$base_root/www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -11,7 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//test/xts/tools/build/suite.gni")
+base_root = "../../../../../"
+import("$base_root/test/xts/tools/build/suite.gni")
 module_output_path = "hats/distributedhardware"
 
 config("dcamera_hdf_demo_config") {
@@ -24,47 +25,47 @@ ohos_moduletest_suite("HatsdisCameraProviderCase") {
   sources = [ "dcameraprovidercase.cpp" ]
 
   include_dirs = [
-    "//foundation/distributedhardware/distributed_camera/services/cameraservice/sourceservice/include/distributedcameramgr",
-    "//drivers/peripheral/distributed_camera/hdi_service/include/dcamera_provider",
-    "//third_party/googletest/googletest/include",
-    "//base/hiviewdfx/hitrace/interfaces/native/innerkits/include/hitrace_meter",
-    "//foundation/distributedhardware/distributed_camera/services/cameraservice/sourceservice/include/distributedcamera",
-    "//foundation/distributedhardware/distributed_camera/services/cameraservice/sourceservice/include/distributedcameramgr/dcameracontrol",
-    "//foundation/distributedhardware/distributed_camera/services/cameraservice/sourceservice/include/distributedcameramgr/dcameradata",
-    "//foundation/distributedhardware/distributed_camera/services/cameraservice/sourceservice/include/distributedcameramgr/dcamerahdf",
-    "//foundation/distributedhardware/distributed_camera/services/cameraservice/sourceservice/include/distributedcameramgr/dcamerainterface",
-    "//foundation/distributedhardware/distributed_camera/services/cameraservice/sourceservice/include/distributedcameramgr/dcamerastate",
-    "//foundation/distributedhardware/distributed_camera/services/cameraservice/cameraoperator/client/include",
-    "//foundation/distributedhardware/distributed_camera/services/cameraservice/base/include",
-    "//foundation/distributedhardware/distributed_camera/services/channel/include",
-    "//foundation/distributedhardware/distributed_camera/services/data_process/include/pipeline",
-    "//foundation/distributedhardware/distributed_camera/services/data_process/include/interfaces",
-    "//foundation/distributedhardware/distributed_camera/services/data_process/include/utils",
-    "//foundation/distributedhardware/distributed_camera/services/data_process/include/eventbus",
-    "//foundation/distributedhardware/distributed_camera/common/include/constants",
-    "//foundation/distributedhardware/distributed_camera/common/include/utils",
+    "$base_root/foundation/distributedhardware/distributed_camera/services/cameraservice/sourceservice/include/distributedcameramgr",
+    "$base_root/drivers/peripheral/distributed_camera/hdi_service/include/dcamera_provider",
+    "$base_root/third_party/googletest/googletest/include",
+    "$base_root/base/hiviewdfx/hitrace/interfaces/native/innerkits/include/hitrace_meter",
+    "$base_root/foundation/distributedhardware/distributed_camera/services/cameraservice/sourceservice/include/distributedcamera",
+    "$base_root/foundation/distributedhardware/distributed_camera/services/cameraservice/sourceservice/include/distributedcameramgr/dcameracontrol",
+    "$base_root/foundation/distributedhardware/distributed_camera/services/cameraservice/sourceservice/include/distributedcameramgr/dcameradata",
+    "$base_root/foundation/distributedhardware/distributed_camera/services/cameraservice/sourceservice/include/distributedcameramgr/dcamerahdf",
+    "$base_root/foundation/distributedhardware/distributed_camera/services/cameraservice/sourceservice/include/distributedcameramgr/dcamerainterface",
+    "$base_root/foundation/distributedhardware/distributed_camera/services/cameraservice/sourceservice/include/distributedcameramgr/dcamerastate",
+    "$base_root/foundation/distributedhardware/distributed_camera/services/cameraservice/cameraoperator/client/include",
+    "$base_root/foundation/distributedhardware/distributed_camera/services/cameraservice/base/include",
+    "$base_root/foundation/distributedhardware/distributed_camera/services/channel/include",
+    "$base_root/foundation/distributedhardware/distributed_camera/services/data_process/include/pipeline",
+    "$base_root/foundation/distributedhardware/distributed_camera/services/data_process/include/interfaces",
+    "$base_root/foundation/distributedhardware/distributed_camera/services/data_process/include/utils",
+    "$base_root/foundation/distributedhardware/distributed_camera/services/data_process/include/eventbus",
+    "$base_root/foundation/distributedhardware/distributed_camera/common/include/constants",
+    "$base_root/foundation/distributedhardware/distributed_camera/common/include/utils",
 
-    "//foundation/distributedhardware/distributed_camera/interfaces/inner_kits/native_cpp/camera_source/include",
-    "//foundation/distributedhardware/distributed_camera/interfaces/inner_kits/native_cpp/camera_source/include/callback",
-    "//foundation/distributedhardware/distributed_camera/interfaces/inner_kits/native_cpp/camera_sink/include",
+    "$base_root/foundation/distributedhardware/distributed_camera/interfaces/inner_kits/native_cpp/camera_source/include",
+    "$base_root/foundation/distributedhardware/distributed_camera/interfaces/inner_kits/native_cpp/camera_source/include/callback",
+    "$base_root/foundation/distributedhardware/distributed_camera/interfaces/inner_kits/native_cpp/camera_sink/include",
 
-    "//foundation/distributedhardware/distributed_hardware_fwk/utils/include",
-    "//foundation/distributedhardware/distributed_hardware_fwk/utils/include/eventbus",
-    "//foundation/distributedhardware/distributed_hardware_fwk/common/utils/include",
-    "//commonlibrary/c_utils/base/include",
-    "//utils/system/safwk/native/include",
-    "//third_party/jsoncpp/include",
-    "//drivers/peripheral/base/",
+    "$base_root/foundation/distributedhardware/distributed_hardware_fwk/utils/include",
+    "$base_root/foundation/distributedhardware/distributed_hardware_fwk/utils/include/eventbus",
+    "$base_root/foundation/distributedhardware/distributed_hardware_fwk/common/utils/include",
+    "$base_root/commonlibrary/c_utils/base/include",
+    "$base_root/utils/system/safwk/native/include",
+    "$base_root/third_party/jsoncpp/include",
+    "$base_root/drivers/peripheral/base/",
   ]
 
   deps = [
-    "//drivers/interface/camera/v1_0:libcamera_stub_1.0",
-    "//drivers/peripheral/distributed_camera/hdi_service:libdistributed_camera_hdf_service_1.0",
-    "//foundation/distributedhardware/distributed_camera/common:distributed_camera_utils",
-    "//foundation/distributedhardware/distributed_camera/services/cameraservice/sourceservice:distributed_camera_source",
-    "//foundation/distributedhardware/distributed_camera/services/channel:distributed_camera_channel",
-    "//third_party/googletest:gtest_main",
-    "//third_party/jsoncpp:jsoncpp",
+    "$base_root/drivers/interface/camera/v1_0:libcamera_stub_1.0",
+    "$base_root/drivers/peripheral/distributed_camera/hdi_service:libdistributed_camera_hdf_service_1.0",
+    "$base_root/foundation/distributedhardware/distributed_camera/common:distributed_camera_utils",
+    "$base_root/foundation/distributedhardware/distributed_camera/services/cameraservice/sourceservice:distributed_camera_source",
+    "$base_root/foundation/distributedhardware/distributed_camera/services/channel:distributed_camera_channel",
+    "$base_root/third_party/googletest:gtest_main",
+    "$base_root/third_party/jsoncpp:jsoncpp",
   ]
 
   cflags = [

@@ -35,6 +35,7 @@ const int TEST_SAMPLE_RATE_MASK_48000 = 48000;
 const int TEST_CHANNEL_COUNT = 2;
 const int32_t ITERATION_FREQUENCY = 100;
 const int32_t REPETITION_FREQUENCY = 3;
+const int32_t MMAP_SUGGUEST_REQ_SIZE = 1920;
 
 class AudioCaptureBenchmarkTest : public benchmark::Fixture {
 public:
@@ -578,6 +579,35 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, GetFrameCount)(benchmark::State &state)
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetFrameCount)->
+    Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
+
+BENCHMARK_F(AudioCaptureBenchmarkTest, CheckSceneCapability)(benchmark::State &state)
+{
+    int32_t ret;
+    bool supported = false;
+    struct AudioSceneDescriptor scenes = {};
+    scenes.scene.id = 0;
+    scenes.desc.pins = PIN_IN_MIC;
+    scenes.desc.desc = strdup("mic");
+    for (auto _ : state) {
+        ret = capture_->CheckSceneCapability(capture_, &scenes, &supported);
+    }
+    EXPECT_EQ(HDF_SUCCESS, ret);
+    free(scenes.desc.desc);
+}
+BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, CheckSceneCapability)->
+    Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
+
+BENCHMARK_F(AudioCaptureBenchmarkTest, ReqMmapBuffer)(benchmark::State &state)
+{
+    int32_t ret;
+    struct AudioMmapBufferDescriptor desc = {0};
+    for (auto _ : state) {
+        ret = capture_->ReqMmapBuffer(capture_, MMAP_SUGGUEST_REQ_SIZE, &desc);
+    }
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT ||ret == HDF_ERR_INVALID_PARAM);
+}
+BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, ReqMmapBuffer)->
     Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
 }
 

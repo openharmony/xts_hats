@@ -17,7 +17,7 @@ import("../../../../tools/build/suite.gni")
 
 import("//build/ohos.gni")
 import("//build/test.gni")
-import("$base_root/drivers/peripheral/camera/hal/camera.gni")
+import("$base_root/drivers/peripheral/camera/camera.gni")
 module_output_path = "hats/camera"
 
 ohos_moduletest_suite("HatsHdfCamerabenchmarkTest") {
@@ -33,7 +33,7 @@ ohos_moduletest_suite("HatsHdfCamerabenchmarkTest") {
     "$base_root/system/core/include/cutils",
     "//third_party/googletest/googletest/include",
     "$base_root/drivers/peripheral/camera/interfaces/include",
-    "$base_root/drivers/peripheral/camera/hal/include",
+    "$base_root/drivers/peripheral/camera/vdi_base/common/include",
   ]
   deps = [
     "//third_party/benchmark",

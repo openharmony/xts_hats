@@ -22,6 +22,7 @@
 using namespace std;
 using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
+using namespace OHOS::HDI::FingerprintAuth;
 using namespace OHOS::HDI::FingerprintAuth::V1_0;
 
 static ExecutorImpl g_executorImpl;
@@ -284,7 +285,7 @@ HWTEST_F(UserIamFingerprintAuthTest, Security_IAM_Fingerprint_HDI_FUNC_0110, Fun
 {
     cout << "start test GetExecutorList" << endl;
     FingerprintAuthInterfaceService fingerprint_Interface;
-    std::vector<sptr<IExecutor>> executorList;
+    std::vector<sptr<V1_0::IExecutor>> executorList;
     int32_t ret = fingerprint_Interface.GetExecutorList(executorList);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);

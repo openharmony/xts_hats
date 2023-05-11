@@ -19,6 +19,7 @@
 using namespace std;
 using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
+using namespace OHOS::HDI::PinAuth;
 using namespace OHOS::HDI::PinAuth::V1_0;
 
 static ExecutorImpl g_executorImpl(make_shared<OHOS::UserIam::PinAuth::PinAuth>());

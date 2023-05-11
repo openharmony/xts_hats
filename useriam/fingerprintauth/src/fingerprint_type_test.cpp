@@ -22,6 +22,7 @@
 using namespace std;
 using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
+using namespace OHOS::HDI::FingerprintAuth;
 using namespace OHOS::HDI::FingerprintAuth::V1_0;
 
 static OHOS::Parcel parcel;

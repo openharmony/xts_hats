@@ -23,6 +23,7 @@
 using namespace std;
 using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
+using namespace OHOS::HDI::FaceAuth;
 using namespace OHOS::HDI::FaceAuth::V1_0;
 
 static ExecutorImpl g_executorImpl;
@@ -284,7 +285,7 @@ HWTEST_F(UserIamFaceAuthTest, Security_IAM_Face_HDI_FUNC_0110, Function | Medium
 {
     cout << "start test GetExecutorList" << endl;
     FaceAuthInterfaceService faceauth_Interface;
-    std::vector<sptr<IExecutor>> executorList;
+    std::vector<sptr<V1_0::IExecutor>> executorList;
     int32_t ret = faceauth_Interface.GetExecutorList(executorList);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);

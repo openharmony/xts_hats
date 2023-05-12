@@ -30,7 +30,11 @@ ohos_moduletest_suite("HatsHdfNnrtFunctionV2_0Test") {
     "src/hdi_model_run_test.cpp",
   ]
 
-  include_dirs = [ "../../v2_0" ]
+  include_dirs = [
+    "../../v2_0",
+    "../../../../../../../../foundation/ai/neural_network_runtime",
+    "//third_party/mindspore/mindspore-src/source/mindspore/lite/mindir/include",
+  ]
 
   external_deps = [
     "c_utils:utils",

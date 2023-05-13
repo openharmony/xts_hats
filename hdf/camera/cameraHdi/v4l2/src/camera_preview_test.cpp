@@ -52,10 +52,10 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_0030, TestSize.Level1)
     display_->intents = {PREVIEW};
     display_->StartStream(display_->intents);
     // Get preview
-    display_->StartCapture(display_->streamId_preview, display_->captureId_preview, false, true);
+    display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
     // release stream
-    display_->captureIds = {display_->captureId_preview};
-    display_->streamIds = {display_->streamId_preview};
+    display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
+    display_->streamIds = {display_->STREAM_ID_PREVIEW};
     display_->StopStream(display_->captureIds, display_->streamIds);
 }
 
@@ -90,6 +90,7 @@ HWTEST_F(CameraPreviewTest, camera_preview_003, TestSize.Level2)
     streamInfo.intent_ = PREVIEW;
     streamInfo.tunneledMode_ = 5; // 5:tunnel mode
     streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
     streamInfos.push_back(streamInfo);
     display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
     EXPECT_EQ(true, display_->rc != HDI::Camera::V1_0::NO_ERROR);
@@ -208,6 +209,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1010, TestSize.Level1)
     streamInfo.intent_ = PREVIEW;
     streamInfo.tunneledMode_ = 5; // 5:tunnel mode
     streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
     std::vector<StreamInfo>().swap(streamInfos);
     streamInfos.push_back(streamInfo);
     display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
@@ -223,9 +225,9 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1010, TestSize.Level1)
         std::cout << "==========[test log] CommitStreams fail, rc = " << display_->rc << std::endl;
     }
     // capture
-    display_->StartCapture(1001, display_->captureId_preview, false, true);
+    display_->StartCapture(1001, display_->CAPTURE_ID_PREVIEW, false, true);
     // release stream
-    display_->captureIds = {display_->captureId_preview};
+    display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
     display_->streamIds = {1001};
     display_->StopStream(display_->captureIds, display_->streamIds);
 }
@@ -261,6 +263,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1020, TestSize.Level2)
     streamInfo.intent_ = PREVIEW;
     streamInfo.tunneledMode_ = 5; // 5:tunnel mode
     streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
     streamInfos.push_back(streamInfo);
     display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
     std::cout << "CreateStreams's RetCode = " << display_->rc << std::endl;
@@ -303,6 +306,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1030, TestSize.Level2)
     streamInfo.intent_ = PREVIEW;
     streamInfo.tunneledMode_ = 5; // 5:tunnel mode
     streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
     std::vector<StreamInfo>().swap(streamInfos);
     streamInfos.push_back(streamInfo);
     display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
@@ -318,9 +322,9 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1030, TestSize.Level2)
     EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
     std::cout << "==========[test log] CommitStreams success." << std::endl;
     // capture
-    display_->StartCapture(2147483647, display_->captureId_preview, false, true);
+    display_->StartCapture(2147483647, display_->CAPTURE_ID_PREVIEW, false, true);
     // release stream
-    display_->captureIds = {display_->captureId_preview};
+    display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
     display_->streamIds = {2147483647};
     display_->StopStream(display_->captureIds, display_->streamIds);
 }
@@ -356,6 +360,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1040, TestSize.Level2)
     streamInfo.intent_ = PREVIEW;
     streamInfo.tunneledMode_ = 5; // 5:tunnel mode
     streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
     std::vector<StreamInfo>().swap(streamInfos);
     streamInfos.push_back(streamInfo);
     display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
@@ -399,6 +404,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1060, TestSize.Level2)
     streamInfo.intent_ = PREVIEW;
     streamInfo.tunneledMode_ = 5; // 5:tunnel mode
     streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
     std::vector<StreamInfo>().swap(streamInfos);
     streamInfos.push_back(streamInfo);
     display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
@@ -441,6 +447,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1080, TestSize.Level2)
     streamInfo.intent_ = PREVIEW;
     streamInfo.tunneledMode_ = 5; // 5:tunnel mode
     streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
     std::vector<StreamInfo>().swap(streamInfos);
     streamInfos.push_back(streamInfo);
     display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
@@ -484,6 +491,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1110, TestSize.Level2)
     streamInfo.intent_ = PREVIEW;
     streamInfo.tunneledMode_ = 5; // 5:tunnel mode
     streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
     std::vector<StreamInfo>().swap(streamInfos);
     streamInfos.push_back(streamInfo);
     display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
@@ -499,9 +507,9 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1110, TestSize.Level2)
     EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
     std::cout << "==========[test log] CommitStreams success." << std::endl;
     // capture
-    display_->StartCapture(1001, display_->captureId_preview, false, true);
+    display_->StartCapture(1001, display_->CAPTURE_ID_PREVIEW, false, true);
     // release stream
-    display_->captureIds = {display_->captureId_preview};
+    display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
     display_->streamIds = {1001};
     display_->StopStream(display_->captureIds, display_->streamIds);
 }
@@ -523,10 +531,10 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1120, TestSize.Level2)
     display_->intents = {PREVIEW};
     display_->StartStream(display_->intents);
     // capture
-    display_->StartCapture(display_->streamId_preview, display_->captureId_preview, false, true);
+    display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
     // release stream
-    display_->captureIds = {display_->captureId_preview};
-    display_->streamIds = {display_->streamId_preview};
+    display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
+    display_->streamIds = {display_->STREAM_ID_PREVIEW};
     display_->StopStream(display_->captureIds, display_->streamIds);
 }
 
@@ -546,11 +554,11 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1130, TestSize.Level2)
     display_->intents = {PREVIEW, VIDEO};
     display_->StartStream(display_->intents);
     // Get preview
-    display_->StartCapture(display_->streamId_preview, display_->captureId_preview, false, true);
-    display_->StartCapture(display_->streamId_video, display_->captureId_video, false, true);
+    display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
+    display_->StartCapture(display_->STREAM_ID_VIDEO, display_->CAPTURE_ID_VIDEO, false, true);
     // release stream
-    display_->captureIds = {display_->captureId_preview, display_->captureId_video};
-    display_->streamIds = {display_->streamId_preview, display_->streamId_video};
+    display_->captureIds = {display_->CAPTURE_ID_PREVIEW, display_->CAPTURE_ID_VIDEO};
+    display_->streamIds = {display_->STREAM_ID_PREVIEW, display_->STREAM_ID_VIDEO};
     display_->StopStream(display_->captureIds, display_->streamIds);
 }
 
@@ -571,11 +579,11 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1140, TestSize.Level2)
     display_->intents = {PREVIEW, STILL_CAPTURE};
     display_->StartStream(display_->intents);
     // Get preview
-    display_->StartCapture(display_->streamId_preview, display_->captureId_preview, false, true);
-    display_->StartCapture(display_->streamId_capture, display_->captureId_capture, false, true);
+    display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
+    display_->StartCapture(display_->STREAM_ID_CAPTURE, display_->CAPTURE_ID_CAPTURE, false, true);
     // release stream
-    display_->captureIds = {display_->captureId_preview, display_->captureId_capture};
-    display_->streamIds = {display_->streamId_preview, display_->streamId_capture};
+    display_->captureIds = {display_->CAPTURE_ID_PREVIEW, display_->CAPTURE_ID_CAPTURE};
+    display_->streamIds = {display_->STREAM_ID_PREVIEW, display_->STREAM_ID_CAPTURE};
     display_->StopStream(display_->captureIds, display_->streamIds);
 }
 
@@ -612,6 +620,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1150, TestSize.Level2)
     streamInfo.intent_ = POST_VIEW;
     streamInfo.tunneledMode_ = 5; // 5:tunnel mode
     streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
     std::vector<StreamInfo>().swap(streamInfos);
     streamInfos.push_back(streamInfo);
     display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
@@ -666,6 +675,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1160, TestSize.Level2)
     streamInfo.intent_ = ANALYZE;
     streamInfo.tunneledMode_ = 5; // 5:tunnel mode
     streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
     std::vector<StreamInfo>().swap(streamInfos);
     streamInfos.push_back(streamInfo);
     display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
@@ -718,6 +728,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1170, TestSize.Level2)
     streamInfo.intent_ = CUSTOM;
     streamInfo.tunneledMode_ = 5; // 5:tunnel mode
     streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
     std::vector<StreamInfo>().swap(streamInfos);
     streamInfos.push_back(streamInfo);
     display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
@@ -761,6 +772,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1180, TestSize.Level2)
     streamInfo.intent_ = PREVIEW;
     streamInfo.tunneledMode_ = false;
     streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
     std::vector<StreamInfo>().swap(streamInfos);
     streamInfos.push_back(streamInfo);
     display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
@@ -806,6 +818,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1190, TestSize.Level2)
     streamInfo.tunneledMode_ = 0;
     streamInfo.minFrameDuration_ = -1;
     streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
     std::vector<StreamInfo>().swap(streamInfos);
     streamInfos.push_back(streamInfo);
     display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
@@ -847,6 +860,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1200, TestSize.Level2)
     streamInfo.tunneledMode_ = 0;
     streamInfo.minFrameDuration_ = 2147483647;
     streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
     std::vector<StreamInfo>().swap(streamInfos);
     streamInfos.push_back(streamInfo);
     display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
@@ -885,6 +899,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_0070, TestSize.Level2)
     streamInfo.intent_ = PREVIEW;
     streamInfo.tunneledMode_ = 0;
     streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
     std::vector<StreamInfo>().swap(streamInfos);
     streamInfos.push_back(streamInfo);
     display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
@@ -952,6 +967,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_0090, TestSize.Level1)
     streamInfo.intent_ = PREVIEW;
     streamInfo.tunneledMode_ = 5; // 5:tunnel mode
     streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
     std::vector<StreamInfo>().swap(streamInfos);
     streamInfos.push_back(streamInfo);
     display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
@@ -967,7 +983,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_0090, TestSize.Level1)
     captureInfo.enableShutterCallback_ = false;
     display_->rc = (CamRetCode)display_->streamOperator->Capture(captureId, captureInfo, true);
     EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
-    sleep(5);
+    sleep(3);
     display_->streamOperator->CancelCapture(captureId);
     EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
     // release stream
@@ -1007,6 +1023,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1220, TestSize.Level2)
     streamInfo.intent_ = PREVIEW;
     streamInfo.tunneledMode_ = 5; // 5:tunnel mode
     streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
     std::vector<StreamInfo>().swap(streamInfos);
     streamInfos.push_back(streamInfo);
     display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
@@ -1022,7 +1039,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1220, TestSize.Level2)
     captureInfo.enableShutterCallback_ = false;
     display_->rc = (CamRetCode)display_->streamOperator->Capture(captureId, captureInfo, true);
     EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
-    sleep(5);
+    sleep(3);
     display_->streamOperator->CancelCapture(captureId);
     EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
     // release stream
@@ -1048,11 +1065,8 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_0100, TestSize.Level2)
     std::cout << "==========[test log] ReleaseStreams no exist streamID, expect success." << std::endl;
     // Create and get streamOperator information
     display_->AchieveStreamOperator();
-    std::vector<std::shared_ptr<StreamInfo>> streamInfos;
-    std::shared_ptr<StreamInfo> streamInfo = std::make_shared<StreamInfo>();
     display_->rc = (CamRetCode)display_->streamOperator->ReleaseStreams(
         {9999});
-    std::cout << "streamOperator->ReleaseStreams's RetCode = " << display_->rc << std::endl;
     EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
 }
 
@@ -1072,7 +1086,6 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_0101, TestSize.Level2)
     std::shared_ptr<StreamInfo> streamInfo = std::make_shared<StreamInfo>();
     display_->rc = (CamRetCode)display_->streamOperator->ReleaseStreams(
         {0});
-    std::cout << "streamOperator->ReleaseStreams's RetCode = " << display_->rc << std::endl;
     EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
 }
 
@@ -1092,7 +1105,6 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_0102, TestSize.Level2)
     std::shared_ptr<StreamInfo> streamInfo = std::make_shared<StreamInfo>();
     display_->rc = (CamRetCode)display_->streamOperator->ReleaseStreams(
         {99999999});
-    std::cout << "streamOperator->ReleaseStreams's RetCode = " << display_->rc << std::endl;
     EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
 }
 
@@ -1129,6 +1141,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1270, TestSize.Level2)
     streamInfo.intent_ = PREVIEW;
     streamInfo.tunneledMode_ = 5; // 5:tunnel mode
     streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
     std::vector<StreamInfo>().swap(streamInfos);
     streamInfos.push_back(streamInfo);
     display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
@@ -1186,6 +1199,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1280, TestSize.Level2)
     streamInfo.intent_ = PREVIEW;
     streamInfo.tunneledMode_ = 5; // 5:tunnel mode
     streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
     std::vector<StreamInfo>().swap(streamInfos);
     streamInfos.push_back(streamInfo);
     display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
@@ -1202,7 +1216,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1280, TestSize.Level2)
     bool isStreaming = true;
     display_->rc = (CamRetCode)display_->streamOperator->Capture(captureId, captureInfo, isStreaming);
     EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
-    sleep(5);
+    sleep(3);
     display_->streamOperator->CancelCapture(captureId);
     // release stream
     display_->rc = (CamRetCode)display_->streamOperator->ReleaseStreams(captureInfo.streamIds_);
@@ -1226,10 +1240,10 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1290, TestSize.Level2)
     display_->intents = {PREVIEW};
     display_->StartStream(display_->intents);
     // Get preview
-    display_->StartCapture(display_->streamId_preview, display_->captureId_preview, false, true);
+    display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
     // release stream
-    display_->captureIds = {display_->captureId_preview};
-    display_->streamIds = {display_->streamId_preview};
+    display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
+    display_->streamIds = {display_->STREAM_ID_PREVIEW};
     display_->StopStream(display_->captureIds, display_->streamIds);
 }
 
@@ -1251,12 +1265,12 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1300, TestSize.Level2)
     // Get preview
     int captureId = 2001;
     CaptureInfo captureInfo = {};
-    captureInfo.streamIds_ = {display_->streamId_preview};
+    captureInfo.streamIds_ = {display_->STREAM_ID_PREVIEW};
     captureInfo.captureSetting_ = display_->ability_;
     captureInfo.enableShutterCallback_ = true;
     display_->rc = (CamRetCode)display_->streamOperator->Capture(captureId, captureInfo, false);
     EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
-    sleep(5);
+    sleep(3);
     display_->streamOperator->CancelCapture(captureId);
     EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
     // release stream
@@ -1282,7 +1296,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1310, TestSize.Level2)
     // Get preview
     int captureId = -1;
     CaptureInfo captureInfo = {};
-    captureInfo.streamIds_ = {display_->streamId_preview};
+    captureInfo.streamIds_ = {display_->STREAM_ID_PREVIEW};
     captureInfo.captureSetting_ = display_->ability_;
     captureInfo.enableShutterCallback_ = false;
     bool isStreaming = true;
@@ -1307,10 +1321,10 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1320, TestSize.Level2)
     display_->intents = {PREVIEW};
     display_->StartStream(display_->intents);
     // Get preview
-    display_->StartCapture(display_->streamId_preview, display_->captureId_preview, true, true);
+    display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, true, true);
     // release stream
-    display_->captureIds = {display_->captureId_preview};
-    display_->streamIds = {display_->streamId_preview};
+    display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
+    display_->streamIds = {display_->STREAM_ID_PREVIEW};
     display_->StopStream(display_->captureIds, display_->streamIds);
 }
 
@@ -1346,6 +1360,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1340, TestSize.Level2)
     streamInfo.intent_ = PREVIEW;
     streamInfo.tunneledMode_ = 5; // 5:tunnel mode
     streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
     std::vector<StreamInfo>().swap(streamInfos);
     streamInfos.push_back(streamInfo);
     display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
@@ -1362,7 +1377,7 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_1340, TestSize.Level2)
     bool isStreaming = true;
     display_->rc = (CamRetCode)display_->streamOperator->Capture(captureId, captureInfo, isStreaming);
     EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
-    sleep(5);
+    sleep(3);
     display_->rc = (CamRetCode)display_->streamOperator->CancelCapture(-1);
     EXPECT_EQ(INVALID_ARGUMENT, display_->rc);
     display_->rc = (CamRetCode)display_->streamOperator->CancelCapture(captureId);
@@ -1414,10 +1429,10 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_0120, TestSize.Level2)
     display_->intents = {PREVIEW};
     display_->StartStream(display_->intents);
     // Get preview
-    display_->StartCapture(display_->streamId_preview, display_->captureId_preview, false, true);
+    display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
     // release stream
-    display_->captureIds = {display_->captureId_preview};
-    display_->streamIds = {display_->streamId_preview};
+    display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
+    display_->streamIds = {display_->STREAM_ID_PREVIEW};
     display_->StopStream(display_->captureIds, display_->streamIds);
 }
 
@@ -1437,9 +1452,9 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_0130, TestSize.Level2)
     display_->intents = {PREVIEW};
     display_->StartStream(display_->intents);
 
-    int captureId = display_->captureId_preview;
+    int captureId = display_->CAPTURE_ID_PREVIEW;
     CaptureInfo captureInfo = {};
-    captureInfo.streamIds_ = {display_->streamId_preview};
+    captureInfo.streamIds_ = {display_->STREAM_ID_PREVIEW};
     captureInfo.captureSetting_ = display_->ability_;
     captureInfo.enableShutterCallback_ = false;
     bool isStreaming = true;
@@ -1468,16 +1483,16 @@ HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_0130, TestSize.Level2)
   */
 HWTEST_F(CameraPreviewTest, SUB_DriverSystem_CameraHdi_0140, TestSize.Level2)
 {
-    std::cout << "==========[test log] Different captureIDs, Create capture，expected success." << std::endl;
+    std::cout << "==========[test log] Different captureIDs, Create capture,expected success." << std::endl;
     // Create and get streamOperator information
     display_->AchieveStreamOperator();
     // Create data stream
     display_->intents = {PREVIEW};
     display_->StartStream(display_->intents);
     // Get preview
-    int captureId = display_->captureId_preview;
+    int captureId = display_->CAPTURE_ID_PREVIEW;
     CaptureInfo captureInfo = {};
-    captureInfo.streamIds_ = {display_->streamId_preview};
+    captureInfo.streamIds_ = {display_->STREAM_ID_PREVIEW};
     captureInfo.captureSetting_ = display_->ability_;
     captureInfo.enableShutterCallback_ = false;
     bool isStreaming = true;

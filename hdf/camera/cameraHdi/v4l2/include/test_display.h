@@ -21,7 +21,7 @@
 #include "utils.h"
 #include <thread>
 #include <map>
-#include <stdio.h>
+#include <cstdio>
 #include <climits>
 #include "v1_0/types.h"
 #include "camera_device_impl.h"
@@ -45,15 +45,15 @@
 #include "v1_0/camera_host_proxy.h"
 #include "ibuffer.h"
 #include <algorithm>
-#include <assert.h>
-#include <errno.h>
+#include <cassert>
+#include <cerrno>
 #include <getopt.h>
 #include <linux/fb.h>
 #include <linux/videodev2.h>
 #include <mutex>
 #include <pthread.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstring>
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <sys/time.h>
@@ -78,22 +78,26 @@
 #define ANALYZE_WIDTH 640
 #define ANALYZE_HEIGHT 480
 
+constexpr int DEFAULT_STREAM_ID = 1001;
+constexpr int INVALID_VALUE_TEST = 2147483647;
+
 using namespace OHOS::HDI::Camera::V1_0;
 using namespace OHOS::Camera;
 class TestDisplay {
 public:
     // This should get the size setting according to the bottom layer
     unsigned int bufSize_ = 614400; // 614400:bufSize
-    unsigned char* displayBuf_;
+    unsigned char* displayBuf_ = nullptr;
     unsigned int camframeV4l2Exit_ = 1;
     unsigned int numOfReadyFrames_ = 0;
     unsigned int bufCont_ = BUFFERSCOUNT;
-    pthread_cond_t sub_thread_ready_cond = PTHREAD_COND_INITIALIZER;
-    pthread_mutex_t sub_thread_ready_mutex = PTHREAD_MUTEX_INITIALIZER;
+    pthread_cond_t subThreadReadyCond = PTHREAD_COND_INITIALIZER;
+    pthread_mutex_t subThreadReadyMutex = PTHREAD_MUTEX_INITIALIZER;
     pthread_t previewThreadId_;
     std::mutex readyFrameLock_;
 
-    int fbFd_, readIndex_;
+    int fbFd_ = 0;
+    int readIndex_ = 0;
     struct fb_var_screeninfo vinfo_;
     struct fb_fix_screeninfo finfo_;
     
@@ -119,24 +123,24 @@ public:
     std::vector<int> streamIds;
     std::vector<StreamIntent> intents;
     enum {
-        streamId_preview = 1000, // 1000:preview streamID
-        streamId_capture,
-        streamId_video,
-        streamId_analyze,
-        captureId_preview = 2000, // 2000:preview captureId
-        captureId_capture,
-        captureId_video,
-        captureId_analyze
+        STREAM_ID_PREVIEW = 1000, // 1000:preview streamID
+        STREAM_ID_CAPTURE,
+        STREAM_ID_VIDEO,
+        STREAM_ID_ANALYZE,
+        CAPTURE_ID_PREVIEW = 2000, // 2000:preview captureId
+        CAPTURE_ID_CAPTURE,
+        CAPTURE_ID_VIDEO,
+        CAPTURE_ID_ANALYZE
     };
     enum {
-        preview_mode = 0,
-        capture_mode,
-        video_mode,
-        analyze_mode,
+        PREVIEW_MODE = 0,
+        CAPTURE_MODE,
+        VIDEO_MODE,
+        ANALYZE_MODE,
     };
     CamRetCode rc;
-    int init_flag = 0;
-    bool status;
+    int initFlag = 0;
+    bool status = false;
 
 public:
     TestDisplay();
@@ -147,22 +151,24 @@ public:
     unsigned char* DoFbMmap(int* pmemfd);
     void FBLog();
     OHOS::Camera::RetCode FBInit();
-    void ProcessImage(const unsigned char* p, unsigned char* fbp);
-    void LcdDrawScreen(unsigned char* displayBuf_, unsigned char* addr);
-    void BufferCallback(void* addr, int choice);
+    void ProcessImage(unsigned char* p, unsigned char* fbp);
+    void LcdDrawScreen(unsigned char* displayBuf, unsigned char* addr);
+    void BufferCallback(unsigned char* addr, int choice);
     void Init();
     void UsbInit();
+    std::shared_ptr<CameraAbility> GetCameraAbility();
+    void OpenUsbCamera();
     void Close();
     void OpenCamera();
     void AchieveStreamOperator();
     void StartStream(std::vector<StreamIntent> intents);
     void StopStream(std::vector<int>& captureIds, std::vector<int>& streamIds);
     void StartCapture(int streamId, int captureId, bool shutterCallback, bool isStreaming);
-    float calTime(struct timeval start, struct timeval end);
-    void StoreImage(const void *bufStart, const uint32_t size) const;
-    void StoreVideo(const void *bufStart, const uint32_t size) const;
+    float CalTime(struct timeval start, struct timeval end);
+    void StoreImage(const unsigned char *bufStart, const uint32_t size) const;
+    void StoreVideo(const unsigned char *bufStart, const uint32_t size) const;
     void OpenVideoFile();
-    void PrintFaceDetectInfo(const void *bufStart, const uint32_t size) const;
+    void PrintFaceDetectInfo(const unsigned char *bufStart, const uint32_t size) const;
     void CloseFd();
     int videoFd_ = -1;
 };
@@ -175,8 +181,9 @@ public:
     int32_t OnError(ErrorType type, int32_t errorCode) override;
     int32_t OnResult(uint64_t timestamp, const std::vector<uint8_t>& result) override;
 
-    void PrintStabiliInfo(const std::shared_ptr<CameraMetadata>& result);
-    void PrintFpsInfo(const std::shared_ptr<CameraMetadata>& result);
+    void PrintStabiliInfo(const std::vector<uint8_t>& result);
+    void PrintFpsInfo(const std::vector<uint8_t>& result);
+    void DealCameraMetadata(const std::vector<uint8_t> &settings);
 };
 
 class DemoCameraHostCallback : public ICameraHostCallback {

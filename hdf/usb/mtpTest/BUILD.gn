@@ -1,0 +1,55 @@
+# Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos_var.gni")
+import("//test/xts/tools/build/suite.gni")
+
+module_output_path = "hdf/usb"
+root_path = "//drivers/peripheral/usb"
+
+ohos_moduletest_suite("HatsHdfUsbFnMtpTest") {
+  module_out_path = module_output_path
+  sources = [
+    "./common/usbfn_mtp_test.cpp",
+  ]
+  configs = [ ":hdf_usb" ]
+
+  deps = [
+    "${root_path}/gadget/function/mtp:libusbfn_mtp_interface_service_1.0",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "bundle_framework:appexecfwk_base",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "drivers_interface_usb:libusbfn_mtp_proxy_1.0",
+    "eventhandler:libeventhandler",
+    "hdf_core:libhdf_host",
+    "hdf_core:libhdf_utils",
+    "hiviewdfx_hilog_native:libhilog",
+    "ipc:ipc_single",
+  ]
+
+  subsystem_name = "xts"
+  part_name = "xts_hats"
+}
+
+config("hdf_usb") {
+  include_dirs = [
+    "include",
+    "../UsbSubscriberTest",
+  ]
+}

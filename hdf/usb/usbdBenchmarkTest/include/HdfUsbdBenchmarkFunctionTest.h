@@ -18,6 +18,21 @@
 #include <benchmark/benchmark.h>
 #include <gtest/gtest.h>
 
+#define DEFAULT_PORT_ID 1
+
+#define POWER_ROLE_NONE   0
+#define POWER_ROLE_SINK   2
+#define POWER_ROLE_SOURCE 1
+
+#define DATA_ROLE_DEVICE 2
+#define DATA_ROLE_HOST   1
+#define DATA_ROLE_NONE   0
+
+#define PORT_MODE_NONE   0
+
+#define USB_FUNCTION_NONE    0
+#define USB_FUNCTION_ACM     (1 << 0)
+
 namespace {
 class HdfUsbdBenchmarkFunctionTest : public benchmark::Fixture {
 public:

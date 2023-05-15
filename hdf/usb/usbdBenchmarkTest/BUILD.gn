@@ -27,8 +27,6 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkDeviceTest") {
   configs = [ ":hdf_usb" ]
 
   deps = [
-    "//drivers/peripheral/usb/ddk:libusb_core",
-    "//drivers/peripheral/usb/hdi_service:libusb_interface_service_1.0",
     "//third_party/benchmark",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
@@ -62,8 +60,6 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkFunctionTest") {
   configs = [ ":hdf_usb" ]
 
   deps = [
-    "//drivers/peripheral/usb/ddk:libusb_core",
-    "//drivers/peripheral/usb/hdi_service:libusb_interface_service_1.0",
     "//third_party/benchmark",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
@@ -97,8 +93,6 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkRequestTest") {
   configs = [ ":hdf_usb" ]
 
   deps = [
-    "//drivers/peripheral/usb/ddk:libusb_core",
-    "//drivers/peripheral/usb/hdi_service:libusb_interface_service_1.0",
     "//third_party/benchmark",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
@@ -131,8 +125,6 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkTransferTest") {
   configs = [ ":hdf_usb" ]
 
   deps = [
-    "//drivers/peripheral/usb/ddk:libusb_core",
-    "//drivers/peripheral/usb/hdi_service:libusb_interface_service_1.0",
     "//third_party/benchmark",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
@@ -159,7 +151,6 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkTransferTest") {
 config("hdf_usb") {
   include_dirs = [
     "include",
-    "//test/xts/hats/hdf/usb/UsbSubscriberTest",
-    "//utils/system/safwk/native/include",
+    "../UsbSubscriberTest",
   ]
 }

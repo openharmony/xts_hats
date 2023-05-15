@@ -18,11 +18,7 @@
 
 #include "HdfUsbdBenchmarkTransferTest.h"
 #include "hdf_log.h"
-#include "usb_ddk.h"
-#include "usb_ddk_interface.h"
 #include "securec.h"
-#include "usbd_type.h"
-#include "usbd_port.h"
 #include "v1_0/iusb_interface.h"
 
 using namespace benchmark::internal;

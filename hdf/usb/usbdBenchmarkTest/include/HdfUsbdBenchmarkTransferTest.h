@@ -23,6 +23,20 @@
 
 using OHOS::HDI::Usb::V1_0::UsbDev;
 
+#define DEFAULT_PORT_ID 1
+#define POWER_ROLE_SOURCE 1
+#define DATA_ROLE_HOST   1
+#define USB_DDK_REQ_GET_CONFIGURATION 0x08
+const int32_t USB_ENDPOINT_DIR_OUT = 0;
+const int32_t USB_ENDPOINT_DIR_IN = 0x80;
+
+typedef enum {
+    USB_REQUEST_TARGET_INTERFACE,
+    USB_REQUEST_TARGET_DEVICE,
+    USB_REQUEST_TARGET_ENDPOINT,
+    USB_REQUEST_TARGET_OTHER,
+} UsbRequestTargetType;
+
 namespace {
 class HdfUsbdBenchmarkTransferTest : public benchmark::Fixture {
 public:

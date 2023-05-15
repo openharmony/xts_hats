@@ -22,6 +22,10 @@
 
 using OHOS::HDI::Usb::V1_0::UsbDev;
 
+#define DEFAULT_PORT_ID 1
+#define POWER_ROLE_SOURCE 1
+#define DATA_ROLE_HOST   1
+
 namespace {
 class HdfUsbdBenchmarkDeviceTest : public benchmark::Fixture {
 public:

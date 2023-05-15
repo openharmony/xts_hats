@@ -120,9 +120,10 @@ enum class HdiId {
     HREQ_DATA_GET_LINK_BANDWIDTH_INFO,
     HREQ_DATA_SET_LINK_BANDWIDTH_REPORTING_RULE,
     HREQ_DATA_SET_DATA_PROFILE_INFO,
-    HREQ_DATA_SET_DATA_PERMITTED,
-    HREQ_DATA_SEND_DATA_SLEEP_MODE,
     HREQ_DATA_SEND_DATA_PERFORMANCE_MODE,
+    HREQ_DATA_SEND_DATA_SLEEP_MODE,
+    HREQ_DATA_SET_DATA_PERMITTED,
+    HREQ_DATA_GET_LINK_CAPABILITY,
 
     HREQ_NETWORK_BASE = 400,
     HREQ_NETWORK_GET_SIGNAL_STRENGTH,
@@ -282,6 +283,8 @@ public:
     // Data
     int32_t PdpContextListUpdated(
         const RilRadioResponseInfo &responseInfo, const DataCallResultList &dataCallResultList) override;
+    int32_t DataLinkCapabilityUpdated(
+        const RilRadioResponseInfo &responseInfo, const DataLinkCapability &dataLinkCapability) override;
     int32_t ActivatePdpContextResponse(
         const RilRadioResponseInfo &responseInfo, const SetupDataCallResultInfo &setupDataCallResultInfo) override;
     int32_t DeactivatePdpContextResponse(const RilRadioResponseInfo &responseInfo) override;
@@ -293,11 +296,14 @@ public:
         const RilRadioResponseInfo &responseInfo, const DataLinkBandwidthInfo &dataLinkBandwidthInfo) override;
     int32_t SetDataPermittedResponse(const RilRadioResponseInfo &responseInfo) override;
     int32_t SetDataProfileInfoResponse(const RilRadioResponseInfo &responseInfo);
+    int32_t GetLinkCapabilityResponse(
+        const RilRadioResponseInfo &responseInfo, const DataLinkCapability &dataLinkCapability) override;
 
     // Modem
     int32_t RadioStateUpdated(const RilRadioResponseInfo &responseInfo, int32_t state) override;
     int32_t VoiceRadioTechUpdated(
         const RilRadioResponseInfo &responseInfo, const VoiceRadioTechnology &voiceRadioTechnology) override;
+    int32_t DsdsModeUpdated(const RilRadioResponseInfo &responseInfo, int32_t mode) override;
     int32_t ShutDownResponse(const RilRadioResponseInfo &responseInfo) override;
     int32_t SetRadioStateResponse(const RilRadioResponseInfo &responseInfo) override;
     int32_t GetRadioStateResponse(const RilRadioResponseInfo &responseInfo, int32_t state) override;
@@ -1550,6 +1556,12 @@ int32_t RilCallback::VoiceRadioTechUpdated(
     return 0;
 }
 
+int32_t RilCallback::DsdsModeUpdated(const RilRadioResponseInfo &responseInfo, int32_t mode)
+{
+    HDF_LOGI("DsdsModeUpdated mode : %{public}d", mode);
+    return 0;
+}
+
 int32_t RilCallback::ShutDownResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("ShutDownResponse");
@@ -1639,6 +1651,17 @@ int32_t RilCallback::PdpContextListUpdated(
             setupDataCallResultInfo.pCscfPrimAddr.c_str(), setupDataCallResultInfo.pCscfSecAddr.c_str(),
             setupDataCallResultInfo.pduSessionId);
     }
+    return 0;
+}
+
+int32_t RilCallback::DataLinkCapabilityUpdated(
+    const RilRadioResponseInfo &responseInfo, const DataLinkCapability &dataLinkCapability)
+{
+    HDF_LOGI(
+        "RilCallback::DataLinkCapabilityUpdated primaryDownlinkKbps:%{public}d primaryUplinkKbps:%{public}d "
+        "secondaryDownlinkKbps:%{public}d secondaryUplinkKbps:%{public}d",
+        dataLinkCapability.primaryDownlinkKbps, dataLinkCapability.primaryUplinkKbps,
+        dataLinkCapability.secondaryDownlinkKbps, dataLinkCapability.secondaryUplinkKbps);
     return 0;
 }
 
@@ -1742,6 +1765,20 @@ int32_t RilCallback::SetDataProfileInfoResponse(const RilRadioResponseInfo &resp
 {
     HDF_LOGI("RilCallback::SetDataProfileInfoResponse error:%{public}d", responseInfo.error);
     hdiId_ = HdiId::HREQ_DATA_SET_DATA_PROFILE_INFO;
+    resultInfo_ = responseInfo;
+    NotifyAll();
+    return 0;
+}
+
+int32_t RilCallback::GetLinkCapabilityResponse(
+    const RilRadioResponseInfo &responseInfo, const DataLinkCapability &dataLinkCapability)
+{
+    HDF_LOGI(
+        "RilCallbackTest::GetLinkCapabilityResponse primaryDownlinkKbps:%{public}d "
+        "primaryUplinkKbps:%{public}d secondaryDownlinkKbps:%{public}d secondaryUplinkKbps:%{public}d",
+        dataLinkCapability.primaryDownlinkKbps, dataLinkCapability.primaryUplinkKbps,
+        dataLinkCapability.secondaryDownlinkKbps, dataLinkCapability.secondaryUplinkKbps);
+    hdiId_ = HdiId::HREQ_DATA_GET_LINK_CAPABILITY;
     resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
@@ -4789,4 +4826,28 @@ HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_SendDataPerformanceMode_V1_0200, 
     WaitFor(WAIT_TIME_SECOND_LONG);
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_DATA_SEND_DATA_PERFORMANCE_MODE));
+}
+
+HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetLinkCapability_V1_0100, Function | MediumTest | Level3)
+{
+    if (!IsReady(SLOTID_1)) {
+        return;
+    }
+    int32_t serialId = GetSerialId();
+    int32_t ret = g_rilInterface->GetLinkCapability(SLOTID_1, serialId);
+    WaitFor(WAIT_TIME_SECOND_LONG);
+    EXPECT_EQ(SUCCESS, ret);
+    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_DATA_GET_LINK_CAPABILITY));
+}
+
+HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetLinkCapability_V1_0200, Function | MediumTest | Level3)
+{
+    if (!IsReady(SLOTID_2)) {
+        return;
+    }
+    int32_t serialId = GetSerialId();
+    int32_t ret = g_rilInterface->GetLinkCapability(SLOTID_2, serialId);
+    WaitFor(WAIT_TIME_SECOND_LONG);
+    EXPECT_EQ(SUCCESS, ret);
+    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_DATA_GET_LINK_CAPABILITY));
 }

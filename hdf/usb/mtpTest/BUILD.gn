@@ -15,7 +15,6 @@ import("//build/ohos_var.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hdf/usb"
-root_path = "//drivers/peripheral/usb"
 
 ohos_moduletest_suite("HatsHdfUsbFnMtpTest") {
   module_out_path = module_output_path
@@ -23,7 +22,7 @@ ohos_moduletest_suite("HatsHdfUsbFnMtpTest") {
   configs = [ ":hdf_usb" ]
 
   deps = [
-    "${root_path}/gadget/function/mtp:libusbfn_mtp_interface_service_1.0",
+    "../../../../../../drivers/peripheral/usb/gadget/function/mtp:libusbfn_mtp_interface_service_1.0",
     "//third_party/googletest:gtest_main",
   ]
 

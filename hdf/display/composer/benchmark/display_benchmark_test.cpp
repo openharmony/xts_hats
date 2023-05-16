@@ -733,6 +733,29 @@ BENCHMARK_F(DisplayBenchmarkTest, SetLayerBlendTypeTest)(benchmark::State &state
 BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetLayerBlendTypeTest)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
+BENCHMARK_F(DisplayBenchmarkTest, SetLayerMaskInfoTest)(benchmark::State &state)
+{
+    int32_t ret;
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = GREEN
+        }
+    };
+    for (auto _ : state) {
+        std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+        ASSERT_TRUE((layers.size() > 0));
+        auto layer = layers[0];
+        MaskInfo maskInfo = MaskInfo::LAYER_HBM_SYNC;
+        ret = g_composerDevice->SetLayerMaskInfo(g_displayIds[0], layer->GetId(), maskInfo);
+    }
+    PrepareAndPrensent();
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetLayerMaskInfoTest)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
 BENCHMARK_F(DisplayBenchmarkTest, DestroyLayerTest)(benchmark::State &state)
 {
     int32_t ret;
@@ -747,7 +770,6 @@ BENCHMARK_F(DisplayBenchmarkTest, DestroyLayerTest)(benchmark::State &state)
         ASSERT_TRUE((layers.size() > 0));
         auto layer = layers[0];
         PrepareAndPrensent();
-        // sleep(1);
         ret = g_composerDevice->DestroyLayer(g_displayIds[0], layer->GetId());
     }
     PrepareAndPrensent();

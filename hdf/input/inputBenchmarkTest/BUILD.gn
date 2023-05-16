@@ -15,7 +15,7 @@ import("//build/ohos_var.gni")
 import("//build/test.gni")
 import("//test/xts/tools/build/suite.gni")
 
-base_root = "../../../../../"
+base_root = "../../../../../../"
 module_output_path = "hats/input"
 ohos_moduletest_suite("HatsHdfInputbenchmarkTest") {
   module_out_path = module_output_path

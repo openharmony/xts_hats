@@ -609,6 +609,28 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0230, TestSize.Level1)
     std::vector<LayerSettings> settings = {
         {
             .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = GREEN
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    MaskInfo maskInfo = MaskInfo::LAYER_HBM_SYNC;
+    auto ret = g_composerDevice->SetLayerMaskInfo(g_displayIds[0], layer->GetId(), maskInfo);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0240, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
             .color = PURPLE
         }
     };
@@ -626,7 +648,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0230, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(VblankTest, SUB_DriverSystem_DisplayComposer_0240, TestSize.Level1)
+HWTEST_F(VblankTest, SUB_DriverSystem_DisplayComposer_0250, TestSize.Level1)
 {
     int ret;
     DISPLAY_TEST_LOGE();

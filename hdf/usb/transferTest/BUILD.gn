@@ -24,11 +24,7 @@ ohos_moduletest_suite("HatsHdfUsbTransferTest") {
   ]
   configs = [ ":hdf_usb" ]
 
-  deps = [
-    "//drivers/peripheral/usb/ddk:libusb_core",
-    "//drivers/peripheral/usb/hdi_service:libusb_interface_service_1.0",
-    "//third_party/googletest:gtest_main",
-  ]
+  deps = [ "//third_party/googletest:gtest_main" ]
 
   external_deps = [
     "ability_base:want",
@@ -52,7 +48,6 @@ ohos_moduletest_suite("HatsHdfUsbTransferTest") {
 config("hdf_usb") {
   include_dirs = [
     "include",
-    "//test/xts/hats/hdf/usb/UsbSubscriberTest",
-    "//utils/system/safwk/native/include",
+    "../UsbSubscriberTest",
   ]
 }

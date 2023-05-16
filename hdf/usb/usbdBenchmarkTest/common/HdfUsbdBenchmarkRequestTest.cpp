@@ -18,8 +18,6 @@
 
 #include "HdfUsbdBenchmarkRequestTest.h"
 #include "hdf_log.h"
-#include "usbd_type.h"
-#include "usbd_port.h"
 #include "v1_0/usb_types.h"
 #include "v1_0/iusb_interface.h"
 

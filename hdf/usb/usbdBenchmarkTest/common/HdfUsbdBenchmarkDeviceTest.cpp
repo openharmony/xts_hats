@@ -18,7 +18,6 @@
 
 #include "HdfUsbdBenchmarkDeviceTest.h"
 #include "hdf_log.h"
-#include "usbd_port.h"
 #include "v1_0/iusb_interface.h"
 
 using namespace benchmark::internal;

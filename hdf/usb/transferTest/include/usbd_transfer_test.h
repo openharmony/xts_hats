@@ -21,6 +21,20 @@
 
 using OHOS::HDI::Usb::V1_0::UsbDev;
 
+#define USB_DDK_REQ_GET_DESCRIPTOR    0x06
+#define USB_DDK_REQ_GET_CONFIGURATION 0x08
+#define USB_DDK_REQ_GET_INTERFACE     0x0A
+#define USB_DDK_REQ_SYNCH_FRAME       0x0C
+const int32_t USB_ENDPOINT_DIR_IN = 0x80;
+const int32_t USB_ENDPOINT_DIR_OUT = 0;
+
+typedef enum {
+    USB_REQUEST_TARGET_DEVICE,
+    USB_REQUEST_TARGET_INTERFACE,
+    USB_REQUEST_TARGET_ENDPOINT,
+    USB_REQUEST_TARGET_OTHER,
+} UsbRequestTargetType;
+
 namespace {
 class UsbdTransferTest : public testing::Test {
 public:

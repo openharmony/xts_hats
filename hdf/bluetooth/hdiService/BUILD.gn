@@ -17,6 +17,7 @@ import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hdf/bluetooth"
+root_path = "//drivers/peripheral/bluetooth/hci"
 
 ohos_moduletest_suite("HatsBluetoothHdiTest") {
   module_out_path = module_output_path
@@ -26,7 +27,7 @@ ohos_moduletest_suite("HatsBluetoothHdiTest") {
   ]
 
   deps = [
-    "//drivers/peripheral/bluetooth/hci/hdi_service:hdi_bluetooth_hci_service",
+    "${root_path}/hdi_service:hdi_bluetooth_hci_service",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
   ]
@@ -54,7 +55,7 @@ ohos_moduletest_suite("HatsBluetoothHdiTest") {
 config("hdf_bluetooth") {
   include_dirs = [
     "include",
-    "//drivers/peripheral/bluetooth/hci/hdi_service",
-    "//drivers/peripheral/bluetooth/hci/hdi_service/implement",
+    "${root_path}/hdi_service",
+    "${root_path}/hdi_service/implement",
   ]
 }

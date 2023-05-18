@@ -16,7 +16,7 @@ import("//build/ohos.gni")
 import("//build/ohos_var.gni")
 import("//build/test.gni")
 import("//test/xts/tools/build/suite.gni")
-import("$base_root/drivers/peripheral/camera/hal/camera.gni")
+import("$base_root/drivers/peripheral/camera/camera.gni")
 module_output_path = "hats/camera"
 
 #config("cameraTest_config") {
@@ -70,10 +70,7 @@ config("hdf_cameramg") {
     # common includes
     "./include",
     "//third_party/googletest/googletest/include",
-    "$camera_path/../interfaces/include",
+    "$camera_path/../../interfaces/include",
     "$camera_path/include",
-
-    #"$base_root/drivers/peripheral/camera/interfaces/include",
-    #"$base_root/drivers/peripheral/camera/hal/include",
   ]
 }

@@ -16,7 +16,7 @@ import("//test/xts/tools/build/suite.gni")
 
 import("//build/ohos.gni")
 import("//build/test.gni")
-import("//drivers/peripheral/camera/hal/camera.gni")
+import("//drivers/peripheral/camera/camera.gni")
 
 module_output_path = "hats/camera"
 
@@ -44,18 +44,18 @@ ohos_moduletest_suite("HatsHdfCameraTest") {
   include_dirs = [
     "//third_party/googletest/googletest/include/gtest",
     "./include",
-    "$camera_path/../interfaces/include",
-    "$camera_path/../interfaces/hdi_ipc",
-    "$camera_path/../interfaces/hdi_ipc/utils/include",
-    "$camera_path/test/common/callback/include",
+    "$camera_path/../../interfaces/include",
+    "$camera_path/../../interfaces/hdi_ipc",
+    "$camera_path/../../interfaces/hdi_ipc/utils/include",
+    "$camera_path/../../test/common/callback/include",
     "$camera_path/include",
-    "$camera_path/hdi_impl",
-    "$camera_path/hdi_impl/include",
-    "$camera_path/hdi_impl/include/camera_host",
-    "$camera_path/hdi_impl/include/camera_device",
-    "$camera_path/hdi_impl/include/stream_operator",
-    "$camera_path/hdi_impl/include/offline_stream_operator",
-    "$camera_path/hdi_impl/src/stream_operator/stream_tunnel/standard",
+    "$camera_path/../v4l2",
+    "$camera_path/../v4l2/include",
+    "$camera_path/../v4l2/include/camera_host",
+    "$camera_path/../v4l2/include/camera_device",
+    "$camera_path/../v4l2/include/stream_operator",
+    "$camera_path/../v4l2/include/offline_stream_operator",
+    "$camera_path/../v4l2/src/stream_operator/stream_tunnel/standard",
     "$camera_path/device_manager/include/",
     "$camera_path/device_manager/include/v4l2",
     "$camera_path/utils/event",
@@ -78,9 +78,9 @@ ohos_moduletest_suite("HatsHdfCameraTest") {
   ]
 
   deps = [
+    "$camera_path/../v4l2:camera_host_service_1.0_static",
     "$camera_path/buffer_manager:camera_buffer_manager",
     "$camera_path/device_manager:camera_device_manager",
-    "$camera_path/hdi_impl:camera_host_service_1.0_static",
     "$camera_path/pipeline_core:camera_pipeline_core",
     "//third_party/googletest:gmock",
     "//third_party/googletest:gmock_main",

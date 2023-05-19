@@ -117,6 +117,29 @@ HWTEST_F(EffectControlTest, HdfAudioEffectProcess002, TestSize.Level1)
 }
 
 /**
+ * @tc.name: HdfAudioEffectProcess003
+ * @tc.desc: Verify the value of EffectControlEffectProcess function's datatag.
+ * @tc.type: FUNC
+ * @tc.require: I6I658
+ */
+HWTEST_F(EffectControlTest, HdfAudioEffectProcess003, TestSize.Level1)
+{
+    struct AudioEffectBuffer input = {0};
+    struct AudioEffectBuffer output = {0};
+
+    int32_t ret = controller_->EffectProcess(controller_, &input, &output);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+
+    int tag = output.datatag;
+    if (tag == 0 || tag == 1 || tag == 2 || tag == 4 || tag == 8)
+    {
+        EXPECT_TRUE(true);
+    } else {
+        EXPECT_TRUE(false);
+    }
+}
+
+/**
  * @tc.name: HdfAudioSendCommand001
  * @tc.desc: Verify the EffectControlSendCommand function when the input parameter is invalid.
  * @tc.type: FUNC

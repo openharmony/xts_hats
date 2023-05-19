@@ -31,7 +31,7 @@ namespace {
 class EffectModelTest : public testing::Test {
 public:
     struct IEffectModel *model_ = nullptr;
-    struct ControllerId contollerId_;
+    struct ControllerId controllerId_;
     char *libName_ = nullptr;
     char *effectId_ = nullptr;
     virtual void SetUp();
@@ -146,6 +146,48 @@ HWTEST_F(EffectModelTest, HdfAudioGetAllEffectDescriptors003, TestSize.Level1)
 }
 
 /**
+ * @tc.name: HdfAudioCreateEffectController001
+ * @tc.desc: Verify the CreateEffectController function when the input parameter is invalid.
+ * @tc.type: FUNC
+ * @tc.require: I6I658
+*/
+HWTEST_F(EffectModelTest, HdfAudioCreateEffectController001, TestSize.Level1)
+{
+    struct EffectInfo info = {
+        .libName = libName_,
+        .effectId = effectId_,
+        .ioDirection = 1,
+    };
+
+    struct IEffectControl *controller = NULL;
+	EXPECT_EQ(HDF_ERR_INVALID_OBJECT, model_->CreateEffectController(nullptr, &info, &controller, &controllerId_);
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->CreateEffectController(model_, nullptr, &controller, &controllerId_);
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->CreateEffectController(model_, &info, &controller, nullptr);
+}
+
+/**
+ * @tc.name: HdfAudioDestroyEffectController001
+ * @tc.desc: Verify the DestroyEffectController function when the input parameter is invalid.
+ * @tc.type: FUNC
+ * @tc.require: I6I658
+*/
+HWTEST_F(EffectModelTest, HdfAudioDestroyEffectController001, TestSize.Level1)
+{
+    struct EffectInfo info = {
+        .libName = libName_,
+        .effectId = effectId_,
+        .ioDirection = 1,
+    };
+
+    struct IEffectControl *controller = NULL;
+	ASSERT_EQ(HDF_SUCCESS, model_->CreateEffectController(model_, &info, &controller, &controllerId_);
+	ASSERT_NE(controller, nullptr);
+	
+	EXPECT_EQ(HDF_ERR_INVALID_OBJECT, model_->DestroyEffectController(nullptr, &controllerId_));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->DestroyEffectController(model_, nullptr));
+}
+
+/**
  * @tc.name: HdfAudioCreateDestroyController001
  * @tc.desc: Verify the EffectModelCreateEffectController and EffectModelDestroyEffectController function.
  * @tc.type: FUNC
@@ -159,14 +201,14 @@ HWTEST_F(EffectModelTest, HdfAudioCreateDestroyController001, TestSize.Level1)
         .ioDirection = 1,
     };
 
-    struct IEffectControl *contoller = NULL;
-    int32_t ret = model_->CreateEffectController(model_, &info, &contoller, &contollerId_);
+    struct IEffectControl *controller = NULL;
+    int32_t ret = model_->CreateEffectController(model_, &info, &controller, &controllerId_);
     if (ret == HDF_SUCCESS) {
-        ASSERT_NE(contoller, nullptr);
+        ASSERT_NE(controller, nullptr);
     }
 
-    if (contoller != nullptr) {
-        ret = model_->DestroyEffectController(model_, &contollerId_);
+    if (controller != nullptr) {
+        ret = model_->DestroyEffectController(model_, &controllerId_);
     }
 }
 

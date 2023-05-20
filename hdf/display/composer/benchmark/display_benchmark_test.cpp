@@ -756,6 +756,39 @@ BENCHMARK_F(DisplayBenchmarkTest, SetLayerMaskInfoTest)(benchmark::State &state)
 BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetLayerMaskInfoTest)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
+BENCHMARK_F(DisplayBenchmarkTest, SetLayerColorTest)(benchmark::State &state)
+{
+    int32_t ret;
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = GREEN
+        }
+    };
+    for (auto _ : state) {
+        std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+        ASSERT_TRUE((layers.size() > 0));
+        auto layer = layers[0];
+        const uint32_t COLOR_R = 155;
+        const uint32_t COLOR_G = 224;
+        const uint32_t COLOR_B = 88;
+        const uint32_t COLOR_A = 128;
+        LayerColor layerColor = {
+            .r = COLOR_R,
+            .g = COLOR_G,
+            .b = COLOR_B,
+            .a = COLOR_A
+        };
+        ret = g_composerDevice->SetLayerColor(g_displayIds[0], layer->GetId(), layerColor);
+    }
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetLayerColorTest)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
 BENCHMARK_F(DisplayBenchmarkTest, DestroyLayerTest)(benchmark::State &state)
 {
     int32_t ret;

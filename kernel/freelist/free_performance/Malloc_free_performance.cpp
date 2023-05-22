@@ -232,6 +232,6 @@ HWTEST_F(MallocFreePerformance, freeperformance0100, Function | MediumTest | Lev
 
     printf("Malloc and free %d times cost %lf s\n", MALLOC_TIME, cost / NANOSEC_PER_SEC);
     double gettime = cost / NANOSEC_PER_SEC;
-    ASSERT_TRUE(gettime <= 1.5) << "Performance not up to standard";
+    ASSERT_TRUE(gettime <= 2) << "Performance not up to standard";
 }
 

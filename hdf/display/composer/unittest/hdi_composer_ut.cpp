@@ -631,6 +631,38 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0240, TestSize.Level1)
     std::vector<LayerSettings> settings = {
         {
             .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = GREEN
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+    const uint32_t COLOR_R = 155;
+    const uint32_t COLOR_G = 224;
+    const uint32_t COLOR_B = 88;
+    const uint32_t COLOR_A = 128;
+
+    LayerColor layerColor = {
+        .r = COLOR_R,
+        .g = COLOR_G,
+        .b = COLOR_B,
+        .a = COLOR_A
+    };
+
+    auto ret = g_composerDevice->SetLayerColor(g_displayIds[0], layer->GetId(), layerColor);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0250, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
             .color = PURPLE
         }
     };
@@ -648,7 +680,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0240, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(VblankTest, SUB_DriverSystem_DisplayComposer_0250, TestSize.Level1)
+HWTEST_F(VblankTest, SUB_DriverSystem_DisplayComposer_0260, TestSize.Level1)
 {
     int ret;
     DISPLAY_TEST_LOGE();

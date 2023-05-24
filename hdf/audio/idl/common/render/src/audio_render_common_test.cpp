@@ -431,6 +431,8 @@ HWTEST_F(AudioUtRenderTest, RenderTurnStandbyModeIsValid001, TestSize.Level1)
 {
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
     EXPECT_EQ(HDF_SUCCESS, render_->TurnStandbyMode(render_));
+    int32_t ret = render_->Stop(render_);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 HWTEST_F(AudioUtRenderTest, RenderAudioDevDumpNull001, TestSize.Level1)

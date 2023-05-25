@@ -125,7 +125,7 @@ OH_NN_ReturnCode HDICommon::ConvertModel(OHOS::sptr<V2_0::INnrtDevice> device_, 
             return OH_NN_FAILED;
         }
     }
-    *iModel = mindspore::lite::MindIR_LiteGraph_To_Model_V2_0(m_liteGraph.get(), tensorBuffer);
+    *iModel = mindspore::lite::MindIR_LiteGraph_To_Model(m_liteGraph.get(), tensorBuffer);
     if (iModel == nullptr) {
         printf("[NNRtTest] Parse litegraph to hdi model failed.\n");
         device_->ReleaseBuffer(tensorBuffer);

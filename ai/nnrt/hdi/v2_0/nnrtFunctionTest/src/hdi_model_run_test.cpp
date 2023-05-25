@@ -51,7 +51,7 @@ void AddModelTest(OHOS::sptr<V2_0::INnrtDevice> &device_, V2_0::ModelConfig &mod
     ASSERT_EQ(OH_NN_SUCCESS, HDICommon::ConvertModel(device_, model, tensorBuffer, &iModel));
     // prepare model
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
-    EXPECT_EQ(HDF_SUCCESS, device_->PrepareModel(*iModel, modelConfig, iPreparedModel));
+    EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, iPreparedModel));
 
     std::vector<V2_0::IOTensor> inputs;
     std::vector<V2_0::IOTensor> outputs;
@@ -75,7 +75,7 @@ void AddModelTest(OHOS::sptr<V2_0::INnrtDevice> &device_, V2_0::ModelConfig &mod
     auto outputTensor = HDICommon::CreateIOTensor(device_);
     outputs.emplace_back(outputTensor);
     // model run
-    EXPECT_EQ(HDF_SUCCESS, iPreparedModel->Run(inputs, outputs, outputsDims, isOutputBufferEnough));
+    EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, iPreparedModel->Run(inputs, outputs, outputsDims));
 
     // map memory to get output buffer
     auto memAddress = HDICommon::MapMemory(outputs[0].data.fd, ADDEND_BUFFER_LENGTH);
@@ -90,7 +90,7 @@ void AddModelTest(OHOS::sptr<V2_0::INnrtDevice> &device_, V2_0::ModelConfig &mod
 
     // release
     if (tensorBuffer.fd != -1) {
-        EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
+        EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
     HDICommon::ReleaseBufferOfTensors(device_, inputs);
     HDICommon::ReleaseBufferOfTensors(device_, outputs);
@@ -119,7 +119,7 @@ HWTEST_F(ModelRunTest, SUB_AI_NNRt_Func_South_Model_Invoke_Run_0200, Function | 
 HWTEST_F(ModelRunTest, SUB_AI_NNRt_Func_South_Model_Invoke_Run_0300, Function | MediumTest | Level2)
 {
     bool isFloat16Supported = false;
-    EXPECT_EQ(HDF_SUCCESS, device_->IsFloat16PrecisionSupported(isFloat16Supported));
+    EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsFloat16PrecisionSupported(isFloat16Supported));
     if (!isFloat16Supported) {
         GTEST_SKIP() << "Float16 precision is not supported.";
     }
@@ -137,7 +137,7 @@ HWTEST_F(ModelRunTest, SUB_AI_NNRt_Func_South_Model_Invoke_Run_0300, Function | 
 HWTEST_F(ModelRunTest, SUB_AI_NNRt_Func_South_Model_Invoke_Run_0400, Function | MediumTest | Level2)
 {
     bool isDynamicInputSupported = false;
-    EXPECT_EQ(HDF_SUCCESS, device_->IsDynamicInputSupported(isDynamicInputSupported));
+    EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsDynamicInputSupported(isDynamicInputSupported));
     if (!isDynamicInputSupported) {
         GTEST_SKIP() << "Dynamic input is not supported.";
     }
@@ -166,7 +166,7 @@ HWTEST_F(ModelRunTest, SUB_AI_NNRt_Func_South_Model_Invoke_Run_0500, Function | 
         .enableFloat16 = false, .mode = V2_0::PERFORMANCE_EXTREME, .priority = V2_0::PRIORITY_HIGH};
     // prepared model
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
-    EXPECT_EQ(HDF_SUCCESS, device_->PrepareModel(*iModel, modelConfig, iPreparedModel));
+    EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, iPreparedModel));
 
     std::vector<V2_0::IOTensor> inputs;
     std::vector<V2_0::IOTensor> outputs;
@@ -177,12 +177,12 @@ HWTEST_F(ModelRunTest, SUB_AI_NNRt_Func_South_Model_Invoke_Run_0500, Function | 
     // only set outputs
     auto outputTensor = HDICommon::CreateIOTensor(device_);
     outputs.emplace_back(outputTensor);
-    // model run, retcode less than HDF_SUCCESS
-    EXPECT_GT(HDF_SUCCESS, iPreparedModel->Run(inputs, outputs, outputsDims, isOutputBufferEnough));
+    // model run, retcode less than V2_0::NNRT_ReturnCode::NNRT_SUCCESS
+    EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_INPUT, iPreparedModel->Run(inputs, outputs, outputsDims));
 
     // release
     if (tensorBuffer.fd != -1) {
-        EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
+        EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
     HDICommon::ReleaseBufferOfTensors(device_, outputs);
 }
@@ -206,7 +206,7 @@ HWTEST_F(ModelRunTest, SUB_AI_NNRt_Func_South_Model_Invoke_Run_0600, Function | 
         .enableFloat16 = false, .mode = V2_0::PERFORMANCE_EXTREME, .priority = V2_0::PRIORITY_HIGH};
     // prepared model
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
-    EXPECT_EQ(HDF_SUCCESS, device_->PrepareModel(*iModel, modelConfig, iPreparedModel));
+    EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, iPreparedModel));
 
     std::vector<V2_0::IOTensor> inputs;
     std::vector<V2_0::IOTensor> outputs;
@@ -227,11 +227,11 @@ HWTEST_F(ModelRunTest, SUB_AI_NNRt_Func_South_Model_Invoke_Run_0600, Function | 
         inputs.emplace_back(tensor);
     }
     // model run
-    EXPECT_GT(HDF_SUCCESS, iPreparedModel->Run(inputs, outputs, outputsDims, isOutputBufferEnough));
+    EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_OUTPUT, iPreparedModel->Run(inputs, outputs, outputsDims));
 
     // release
     if (tensorBuffer.fd != -1) {
-        EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
+        EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
     HDICommon::ReleaseBufferOfTensors(device_, inputs);
     HDICommon::UnmapAllMemory(mapedMemorys);
@@ -353,7 +353,7 @@ HWTEST_F(ModelRunTest, SUB_AI_NNRt_Func_South_Model_Invoke_CombRun_0900, Functio
 HWTEST_F(ModelRunTest, SUB_AI_NNRt_Func_South_Model_Invoke_CombRun_1000, Function | MediumTest | Level1)
 {
     bool isModelCacheSupported = false;
-    EXPECT_EQ(HDF_SUCCESS, device_->IsModelCacheSupported(isModelCacheSupported));
+    EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isModelCacheSupported));
     if (!isModelCacheSupported) {
         GTEST_SKIP() << "Model cache is not supported.";
     }
@@ -370,13 +370,16 @@ HWTEST_F(ModelRunTest, SUB_AI_NNRt_Func_South_Model_Invoke_CombRun_1000, Functio
         .enableFloat16 = false, .mode = V2_0::PERFORMANCE_HIGH, .priority = V2_0::PRIORITY_HIGH};
     // prepared model
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
-    EXPECT_EQ(HDF_SUCCESS, device_->PrepareModel(*iModel, modelConfig, iPreparedModel));
+    EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, iPreparedModel));
+
     // export model cache
     std::vector<V2_0::SharedBuffer> modelCache;
-    EXPECT_EQ(HDF_SUCCESS, iPreparedModel->ExportModelCache(modelCache));
+    EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, iPreparedModel->ExportModelCache(modelCache));
+
     // prepared model from cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel1;
-    EXPECT_EQ(HDF_SUCCESS, device_->PrepareModelFromModelCache(modelCache, modelConfig, iPreparedModel1));
+    EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS,
+        device_->PrepareModelFromModelCache(modelCache, modelConfig, iPreparedModel1));
 
     std::vector<V2_0::IOTensor> inputs;
     std::vector<V2_0::IOTensor> outputs;
@@ -399,7 +402,7 @@ HWTEST_F(ModelRunTest, SUB_AI_NNRt_Func_South_Model_Invoke_CombRun_1000, Functio
     auto outputTensor = HDICommon::CreateIOTensor(device_);
     outputs.emplace_back(outputTensor);
     // model run
-    EXPECT_EQ(HDF_SUCCESS, iPreparedModel1->Run(inputs, outputs, outputsDims, isOutputBufferEnough));
+    EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, iPreparedModel1->Run(inputs, outputs, outputsDims));
 
     // map memory to get output buffer
     auto memAddress = HDICommon::MapMemory(outputs[0].data.fd, ADDEND_BUFFER_LENGTH);
@@ -413,7 +416,7 @@ HWTEST_F(ModelRunTest, SUB_AI_NNRt_Func_South_Model_Invoke_CombRun_1000, Functio
 
     // release
     if (tensorBuffer.fd != -1) {
-        EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
+        EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
     HDICommon::ReleaseBufferOfTensors(device_, inputs);
     HDICommon::ReleaseBufferOfTensors(device_, outputs);

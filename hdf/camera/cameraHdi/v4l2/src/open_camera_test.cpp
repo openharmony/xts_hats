@@ -25,14 +25,9 @@ void OpenCameraTest::TearDownTestCase(void)
 {}
 void OpenCameraTest::SetUp(void)
 {
-    std::cout << "==========[test log] OpenCameraTest::SetUp.display_0: "<<display_<< std::endl;
     if (display_ == nullptr) {
-        std::cout << "==========[test log] OpenCameraTest::SetUp.display_1: "<<display_<< std::endl;
         display_ = std::make_shared<TestDisplay>();
-        std::cout << "==========[test log] OpenCameraTest::SetUp.display_2: "<<display_<< std::endl;
-        std::cout << "==========[test log] OpenCameraTest::SetUp.display_3: "<<display_<< std::endl;
         display_->Init();
-        std::cout << "==========[test log] OpenCameraTest::SetUp.display_4: "<<display_<< std::endl;
     }
 }
 void OpenCameraTest::TearDown(void)
@@ -49,7 +44,6 @@ void OpenCameraTest::TearDown(void)
   */
 HWTEST_F(OpenCameraTest, SUB_DriverSystem_CameraHdi_0010, TestSize.Level0)
 {
-    std::cout << "==========[test log] OpenCamera, success."<< std::endl;
     std::vector<std::string> cameraIds;
     display_->cameraHost->GetCameraIds(cameraIds);
     for (auto &cameraId : cameraIds) {
@@ -71,13 +65,13 @@ HWTEST_F(OpenCameraTest, SUB_DriverSystem_CameraHdi_0010, TestSize.Level0)
   */
 HWTEST_F(OpenCameraTest, SUB_DriverSystem_CameraHdi_0670, TestSize.Level0)
 {
-    std::cout << "==========[test log] OpenCamera, cameraID is not found."<< std::endl;
+    CAMERA_LOGD("OpenCamera, cameraID is not found.");
     sptr<ICameraHost> cameraHost = display_->CameraHostImplGetInstance();
     std::string cameraId = "qwerty";
     OHOS::sptr<ICameraDeviceCallback> callback = new DemoCameraDeviceCallback();
-    std::cout << "opencamera begin" << std::endl;
+    CAMERA_LOGD("opencamera begin");
     display_->rc = (CamRetCode)cameraHost->OpenCamera(cameraId, callback, display_->cameraDevice);
-    std::cout << "opencamera end" << std::endl;
+    CAMERA_LOGD("opencamera end");
     EXPECT_EQ(INVALID_ARGUMENT, display_->rc);
 }
 
@@ -90,7 +84,7 @@ HWTEST_F(OpenCameraTest, SUB_DriverSystem_CameraHdi_0670, TestSize.Level0)
   */
 HWTEST_F(OpenCameraTest, SUB_DriverSystem_CameraHdi_0680, TestSize.Level0)
 {
-    std::cout << "==========[test log] OpenCamera, cameraID is illegal."<< std::endl;
+    CAMERA_LOGD("OpenCamera, cameraID is illegal.");
     std::string cameraId = "1";
     OHOS::sptr<ICameraDeviceCallback> callback = new DemoCameraDeviceCallback();
     display_->rc = (CamRetCode)display_->cameraHost->OpenCamera(cameraId, callback, display_->cameraDevice);

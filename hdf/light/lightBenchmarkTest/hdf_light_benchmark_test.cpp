@@ -160,7 +160,7 @@ BENCHMARK_REGISTER_F(lightBenchmarkTest, SUB_DriverSystem_LightBenchmark_0030)->
   * @tc.desc: Benchmarktest for interface TurnOnMultiLights.
   * @tc.type: FUNC
   */
-BENCHMARK_F(lightBenchmarkTest, SUB_DriverSystem_LightBenchmark_0030)(benchmark::State &st)
+BENCHMARK_F(lightBenchmarkTest, SUB_DriverSystem_LightBenchmark_0040)(benchmark::State &st)
 {
     ASSERT_NE(nullptr, g_lightInterface);
 

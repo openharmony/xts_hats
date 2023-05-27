@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-base_root = "../../../../../../"
+base_root = "../../../../../.."
 import("//build/ohos_var.gni")
 import("//build/test.gni")
 import("//test/xts/tools/build/suite.gni")
@@ -32,7 +32,11 @@ ohos_moduletest_suite("HatsHdfLightbenchmarkTest") {
     "-fno-strict-aliasing",
   ]
 
-  deps = []
+  deps = [
+    "//third_party/benchmark",
+    "//third_party/googletest:gmock_main",
+    "//third_party/googletest:gtest_main",
+  ]
   if (is_standard_system) {
     external_deps = [
       "c_utils:utils",
@@ -40,9 +44,6 @@ ohos_moduletest_suite("HatsHdfLightbenchmarkTest") {
       "hdf_core:libhdf_utils",
       "hiviewdfx_hilog_native:libhilog",
       "ipc:ipc_single",
-      "//third_party/benchmark",
-      "//third_party/googletest:gmock_main",
-      "//third_party/googletest:gtest_main",
     ]
   } else {
     external_deps = [ "hilog:libhilog" ]

@@ -416,6 +416,7 @@ HWTEST_F(AudioHdiCaptureVolumeTest, SUB_Audio_HDI_AudioCaptureGetVolume_0003, Fu
 * @tc.number  SUB_Audio_hdi_CaptureGetGainThreshold_0001
 * @tc.desc  test AudioCaptureGetGainThreshold interface, return 0 is call successfully.
 */
+#ifndef ALSA_LIB_MODE
 HWTEST_F(AudioHdiCaptureVolumeTest, SUB_Audio_hdi_CaptureGetGainThreshold_0001, Function | MediumTest | Level1)
 {
     int32_t ret = -1;
@@ -436,6 +437,7 @@ HWTEST_F(AudioHdiCaptureVolumeTest, SUB_Audio_hdi_CaptureGetGainThreshold_0001, 
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
 }
+#endif
 /**
 * @tc.name  Test AudioCaptureGetGainThreshold API via setting the incoming parameter handle is nullptr
 * @tc.number  SUB_Audio_hdi_CaptureGetGainThreshold_0002
@@ -557,6 +559,7 @@ HWTEST_F(AudioHdiCaptureVolumeTest, SUB_Audio_hdi_CaptureSetGain_0001, Function 
 * @tc.number  SUB_Audio_hdi_CaptureSetGain_0002
 * @tc.desc  test AudioCaptureSetGain interface, return -1 if gain greater than the maximum and less than the minimum
 */
+#ifndef ALSA_LIB_MODE
 HWTEST_F(AudioHdiCaptureVolumeTest, SUB_Audio_hdi_CaptureSetGain_0002, Function | MediumTest | Level1)
 {
     int32_t ret = -1;
@@ -582,6 +585,7 @@ HWTEST_F(AudioHdiCaptureVolumeTest, SUB_Audio_hdi_CaptureSetGain_0002, Function 
     adapter->DestroyCapture(adapter, capture);
     manager->UnloadAdapter(manager, adapter);
 }
+#endif
 /**
 * @tc.name  Test AudioCaptureSetGain API via setting the incoming parameter handle is nullptr.
 * @tc.number  SUB_Audio_hdi_CaptureSetGain_0006

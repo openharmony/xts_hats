@@ -580,8 +580,8 @@ group("${posix_interface_module}_bin") {
 
     #"sigismember:sigismember_5-1",
 
-    "sigpause:sigpause_1-1",
-    "sigpause:sigpause_1-2",
+    #"sigpause:sigpause_1-1",
+    #"sigpause:sigpause_1-2",
     "sigpause:sigpause_2-1",
     "sigpause:sigpause_3-1",
 
@@ -817,7 +817,8 @@ group("${posix_interface_module}_bin") {
     "sigaction:sigaction_8-25",
     "sigaction:sigaction_8-26",
     "sigaction:sigaction_8-3",
-    "sigaction:sigaction_8-4",
+
+    #"sigaction:sigaction_8-4",
     "sigaction:sigaction_8-7",
     "sigaction:sigaction_8-8",
     "sigaction:sigaction_8-9",

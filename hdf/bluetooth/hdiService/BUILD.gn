@@ -17,7 +17,7 @@ import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hdf/bluetooth"
-root_path = "//drivers/peripheral/bluetooth/hci"
+root_path = "../../../../../../drivers/peripheral/bluetooth/hci"
 
 ohos_moduletest_suite("HatsBluetoothHdiTest") {
   module_out_path = module_output_path

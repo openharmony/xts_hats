@@ -14,7 +14,7 @@
 import("//build/ohos_var.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
-ROOT_PATH = "//drivers/peripheral"
+ROOT_PATH = "../../../../../../drivers/peripheral"
 LOCATION_PATH = "../"
 
 module_output_path = "hdf/location/agnss"

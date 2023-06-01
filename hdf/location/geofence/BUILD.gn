@@ -14,7 +14,7 @@
 import("//build/ohos_var.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
-ROOT_PATH = "//drivers/peripheral"
+ROOT_PATH = "../../../../../../drivers/peripheral"
 
 module_output_path = "hdf/location/geofence"
 ohos_moduletest_suite("HatsHdfLocationgeofenceTest") {

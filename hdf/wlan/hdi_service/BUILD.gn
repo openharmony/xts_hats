@@ -26,14 +26,14 @@ ohos_moduletest_suite("HatsHdfWlanHdiServiceTest") {
     "wlan_hdi_hal_services_c_test.cpp",
   ]
 
-  deps = []
+  deps = [
+    "//third_party/googletest:gmock_main",
+    "//third_party/googletest:gtest_main",
+  ]
   configs = [ ":hdf_wlan_hdiservice" ]
 
   if (is_standard_system) {
     external_deps = [
-      "$base_root/drivers/peripheral/wlan/client:wifi_driver_client",
-      "$base_root/drivers/peripheral/wlan/hal:wifi_hal",
-      "$base_root/drivers/peripheral/wlan/hdi_service:hdi_wlan_service",
       "c_utils:utils",
       "drivers_interface_wlan:libwlan_proxy_1.1",
       "hdf_core:libhdf_host",
@@ -41,8 +41,6 @@ ohos_moduletest_suite("HatsHdfWlanHdiServiceTest") {
       "hdf_core:libhdf_utils",
       "hdf_core:libhdi",
       "hiviewdfx_hilog_native:libhilog",
-      "//third_party/googletest:gmock_main",
-      "//third_party/googletest:gtest_main",
     ]
   } else {
     external_deps = [ "hilog:libhilog" ]

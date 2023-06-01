@@ -372,10 +372,10 @@ public:
     int32_t NetworkTimeUpdated(const RilRadioResponseInfo &responseInfo, const std::string &timeStr) override;
     int32_t NetworkPhyChnlCfgUpdated(const RilRadioResponseInfo &responseInfo,
         const ChannelConfigInfoList &channelConfigInfoList) override;
-    int32_t NetworkCurrentCellUpdated(const RilRadioResponseInfo &responseInfo,
-        const CellListCurrentInfo &cellListCurrentInfo) override;
-    int32_t NetworkCurrentCellInfoUpdated(const RilRadioResponseInfo &responseInfo,
-        const CellListCurrentInformation &cellListCurrentInformation) override;
+    int32_t NetworkCurrentCellUpdated(
+        const RilRadioResponseInfo &responseInfo, const CellListCurrentInfo &cellListCurrentInfo) override;
+    int32_t NetworkCurrentCellUpdated_1_1(
+        const RilRadioResponseInfo &responseInfo, const CellListCurrentInfo_1_1 &cellListCurrentInfo) override;
     int32_t GetSignalStrengthResponse(const RilRadioResponseInfo &responseInfo, const Rssi &rssi) override;
     int32_t GetCsRegStatusResponse(
         const RilRadioResponseInfo &responseInfo, const CsRegStatusInfo &csRegStatusInfo) override;
@@ -390,8 +390,8 @@ public:
     int32_t SetNetworkSelectionModeResponse(const RilRadioResponseInfo &responseInfo) override;
     int32_t GetNeighboringCellInfoListResponse(
         const RilRadioResponseInfo &responseInfo, const CellListNearbyInfo &cellInfoList) override;
-    int32_t GetCurrentCellInformationResponse(const RilRadioResponseInfo &responseInfo,
-        const CellListCurrentInformation &cellListCurrentInformation) override;
+    int32_t GetCurrentCellInfoResponse_1_1(const RilRadioResponseInfo &responseInfo,
+        const CellListCurrentInfo_1_1 &cellInfoList) override;
     int32_t GetCurrentCellInfoResponse(
         const RilRadioResponseInfo &responseInfo, const CellListCurrentInfo &cellInfoList) override;
     int32_t SetPreferredNetworkResponse(const RilRadioResponseInfo &responseInfo) override;
@@ -882,8 +882,8 @@ int32_t RilCallback::NetworkPhyChnlCfgUpdated(const RilRadioResponseInfo &respon
     return 0;
 }
 
-int32_t RilCallback::NetworkCurrentCellUpdated(const RilRadioResponseInfo &responseInfo,
-    const CellListCurrentInfo &cellListCurrentInfo)
+int32_t RilCallback::NetworkCurrentCellUpdated(
+    const RilRadioResponseInfo &responseInfo, const CellListCurrentInfo &cellListCurrentInfo)
 {
     HDF_LOGI("RilCallback::NetworkCurrentCellUpdated itemNum:%{public}d", cellListCurrentInfo.itemNum);
     for (auto info : cellListCurrentInfo.cellCurrentInfo) {
@@ -925,12 +925,12 @@ int32_t RilCallback::NetworkCurrentCellUpdated(const RilRadioResponseInfo &respo
     return 0;
 }
 
-int32_t RilCallback::NetworkCurrentCellInfoUpdated(
-    const RilRadioResponseInfo &responseInfo, const CellListCurrentInformation &cellListCurrentInformation)
+int32_t RilCallback::NetworkCurrentCellUpdated_1_1(
+    const RilRadioResponseInfo &responseInfo, const CellListCurrentInfo_1_1 &cellListCurrentInfo)
 {
-    HDF_LOGI("RilCallback::NetworkCurrentCellInfoUpdated itemNum:%{public}d", cellListCurrentInformation.itemNum);
-    for (auto info : cellListCurrentInformation.cellCurrentInfo) {
-        HDF_LOGI("RilCallback::NetworkCurrentCellInfoUpdated ratType:%{public}d, mcc:%{public}d, mnc:%{public}d",
+    HDF_LOGI("RilCallback::NetworkCurrentCellUpdated_1_1 itemNum:%{public}d", cellListCurrentInfo.itemNum);
+    for (auto info : cellListCurrentInfo.cellCurrentInfo) {
+        HDF_LOGI("RilCallback::NetworkCurrentCellUpdated_1_1 ratType:%{public}d, mcc:%{public}d, mnc:%{public}d",
             info.ratType, info.mcc, info.mnc);
         switch (static_cast<RatType>(info.ratType)) {
             case RatType::NETWORK_TYPE_LTE:
@@ -964,7 +964,7 @@ int32_t RilCallback::NetworkCurrentCellInfoUpdated(
                 HDF_LOGI("rsrq:%{public}d", info.serviceCells.nr.rsrq);
                 break;
             default:
-                HDF_LOGE("RilCallback::NetworkCurrentCellInfoUpdated invalid ratType");
+                HDF_LOGE("RilCallback::NetworkCurrentCellUpdated_1_1 invalid ratType");
         }
     }
     return 0;
@@ -1144,12 +1144,12 @@ int32_t RilCallback::GetCurrentCellInfoResponse(
     return 0;
 }
 
-int32_t RilCallback::GetCurrentCellInformationResponse(
-    const RilRadioResponseInfo &responseInfo, const CellListCurrentInformation &cellListCurrentInformation)
+int32_t RilCallback::GetCurrentCellInfoResponse_1_1(
+    const RilRadioResponseInfo &responseInfo, const CellListCurrentInfo_1_1 &cellListCurrentInfo)
 {
-    HDF_LOGI("RilCallback::GetCurrentCellInformationResponse itemNum:%{public}d", cellListCurrentInformation.itemNum);
-    for (auto info : cellListCurrentInformation.cellCurrentInfo) {
-        HDF_LOGI("RilCallback::GetCurrentCellInformationResponse ratType:%{public}d, mcc:%{public}d, mnc:%{public}d",
+    HDF_LOGI("RilCallback::GetCurrentCellInfoResponse_1_1 itemNum:%{public}d", cellListCurrentInfo.itemNum);
+    for (auto info : cellListCurrentInfo.cellCurrentInfo) {
+        HDF_LOGI("RilCallback::GetCurrentCellInfoResponse_1_1 ratType:%{public}d, mcc:%{public}d, mnc:%{public}d",
             info.ratType, info.mcc, info.mnc);
         switch (static_cast<RatType>(info.ratType)) {
             case RatType::NETWORK_TYPE_LTE:
@@ -1183,7 +1183,7 @@ int32_t RilCallback::GetCurrentCellInformationResponse(
                 HDF_LOGI("rsrq:%{public}d", info.serviceCells.nr.rsrq);
                 break;
             default:
-                HDF_LOGE("RilCallback::GetCurrentCellInformationResponse invalid ratType");
+                HDF_LOGE("RilCallback::GetCurrentCellInfoResponse_1_1 invalid ratType");
         }
     }
     hdiId_ = HdiId::HREQ_NETWORK_GET_CURRENT_CELL_INFO;

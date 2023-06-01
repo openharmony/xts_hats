@@ -142,10 +142,10 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest003, TestSize.Level1)
     if (false) {
       int32_t ret = g_powerInterface->StartSuspend();
       EXPECT_EQ(0, ret);
-  
+
       char stateBuf[MAX_PATH] = {0};
       char stateValue[MAX_PATH] = {0};
-  
+
       ret = snprintf_s(stateBuf, MAX_PATH, sizeof(stateBuf) - 1, SUSPEND_STATE_PATH.c_str());
       EXPECT_FALSE(ret < EOK);
       sleep(WAIT_TIME);

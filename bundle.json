@@ -21,7 +21,7 @@
             "standard"
         ],
         "rom": "0KB",
-        "ram": "0KB",
+        "ram": "518144KB",
         "deps": {
             "components": [],
             "third_party": []

@@ -67,6 +67,7 @@ enum class HdiId {
     HREQ_CALL_GET_FAIL_REASON,
     HREQ_CALL_SET_BARRING_PASSWORD,
     HREQ_CALL_CLOSE_UNFINISHED_USSD,
+    HREQ_SET_VONR_SWITCH,
 
     HREQ_SMS_BASE = 100,
     HREQ_SMS_SEND_GSM_SMS,
@@ -279,6 +280,7 @@ public:
     int32_t GetCallFailReasonResponse(const RilRadioResponseInfo &responseInfo, int32_t callFail) override;
     int32_t SetBarringPasswordResponse(const RilRadioResponseInfo &responseInfo) override;
     int32_t CloseUnFinishedUssdResponse(const RilRadioResponseInfo &responseInfo) override;
+    int32_t SetVonrSwitchResponse(const RilRadioResponseInfo &responseInfo) override;
 
     // Data
     int32_t PdpContextListUpdated(
@@ -1530,6 +1532,15 @@ int32_t RilCallback::CloseUnFinishedUssdResponse(const RilRadioResponseInfo &res
 {
     HDF_LOGI("GetBoolResult CloseUnFinishedUssdResponse");
     hdiId_ = HdiId::HREQ_CALL_CLOSE_UNFINISHED_USSD;
+    resultInfo_ = responseInfo;
+    NotifyAll();
+    return 0;
+}
+
+int32_t RilCallback::SetVonrSwitchResponse(const RilRadioResponseInfo &responseInfo)
+{
+    HDF_LOGI("GetBoolResult SetVonrSwitchResponse");
+    hdiId_ = HdiId::HREQ_SET_VONR_SWITCH;
     resultInfo_ = responseInfo;
     NotifyAll();
     return 0;

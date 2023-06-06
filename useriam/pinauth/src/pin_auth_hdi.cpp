@@ -294,7 +294,6 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_NEW_FUNC_0101, Function | 
     std::vector<GetPropertyType> propertyTypes;
     FillTestGetPropertyTypeVector(parcel, propertyTypes);
     Property property;
-    // FillTestProperty(parcel, property);
 
     int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
 

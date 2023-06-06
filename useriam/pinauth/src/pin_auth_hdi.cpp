@@ -21,6 +21,7 @@ using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
 using namespace OHOS::HDI::PinAuth;
 using namespace OHOS::HDI::PinAuth::V1_0;
+using Property = OHOS::HDI::PinAuth::V1_1::Property;
 
 static ExecutorImpl g_executorImpl(make_shared<OHOS::UserIam::PinAuth::PinAuth>());
 static OHOS::Parcel parcel;
@@ -98,6 +99,17 @@ static void FillTestIExecutorCallback(Parcel &parcel, sptr<IExecutorCallback> &c
             cout << "callbackObj construct fail" << endl;
         }
     }
+}
+
+void FillTestGetPropertyTypeVector(Parcel &parcel, std::vector<GetPropertyType> &types)
+{
+    std::vector<uint32_t> propertyTypeUint32;
+    FillTestUint32Vector(parcel, propertyTypeUint32);
+    for (const auto& val : propertyTypeUint32) {
+        types.push_back(static_cast<GetPropertyType>(val));
+    }
+
+    cout << "success"  << endl;
 }
 
 /**
@@ -265,4 +277,46 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0109, Function | Medi
     int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
+}
+
+/**
+ * @tc.number: Security_IAM_PinAuth_HDI_NEW_FUNC_0101
+ * @tc.name: Test GetProperty
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ * @tc.level: Level1
+ */
+HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_NEW_FUNC_0101, Function | MediumTest | Level1)
+{
+    cout << "start GetProperty" << endl;
+    std::vector<uint64_t> templateIdList;
+    FillTestUint64Vector(parcel, templateIdList);
+    std::vector<GetPropertyType> propertyTypes;
+    FillTestGetPropertyTypeVector(parcel, propertyTypes);
+    Property property;
+    // FillTestProperty(parcel, property);
+
+    int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
+
+    cout << "ret is " << ret << endl;
+    ASSERT_EQ(ret != Expectedvalue, true);
+}
+
+/**
+ * @tc.number: Security_IAM_PinAuth_HDI_NEW_FUNC_0102
+ * @tc.name: Test GetExecutorListV1_1
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ * @tc.level: Level1
+ */
+HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_NEW_FUNC_0102, Function | MediumTest | Level1)
+{
+    cout << "start GetExecutorListV1_1" << endl;
+    std::vector<sptr<V1_1::IExecutor>> executorList;
+    PinAuthInterfaceService pin_Interface;
+
+    int32_t ret = pin_Interface.GetExecutorListV1_1(executorList);
+
+    cout << "ret is " << ret << endl;
+    ASSERT_EQ(ret, 0);
 }

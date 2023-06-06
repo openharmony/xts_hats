@@ -24,6 +24,10 @@ using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
 using namespace OHOS::HDI::FingerprintAuth;
 using namespace OHOS::HDI::FingerprintAuth::V1_0;
+using Property = OHOS::HDI::FingerprintAuth::V1_1::Property;
+using SaCommandParamNone = OHOS::HDI::FingerprintAuth::V1_1::SaCommandParamNone;
+using SaCommandParam = OHOS::HDI::FingerprintAuth::V1_1::SaCommandParam;
+using SaCommand = OHOS::HDI::FingerprintAuth::V1_1::SaCommand;
 
 static ExecutorImpl g_executorImpl;
 static OHOS::Parcel parcel;
@@ -67,6 +71,21 @@ private:
     int32_t acquire_;
 };
 
+class DummyISaCommandCallback : public ISaCommandCallback {
+public:
+    explicit DummyISaCommandCallback(int32_t result) : result_(result)
+    {
+    }
+
+    int32_t OnSaCommands(const std::vector<SaCommand> &commands) override
+    {
+        return result_;
+    }
+
+private:
+    int32_t result_;
+};
+
 static void FillTestExecutorInfo(Parcel &parcel, ExecutorInfo &executorInfo)
 {
     executorInfo.sensorId = parcel.ReadUint16();
@@ -100,6 +119,49 @@ static void FillTestIExecutorCallback(Parcel &parcel, sptr<IExecutorCallback> &c
         }
     }
     cout << "success" << endl;
+}
+
+void FillTestGetPropertyTypeVector(Parcel &parcel, std::vector<GetPropertyType> &types)
+{
+    std::vector<uint32_t> propertyTypeUint32;
+    FillTestUint32Vector(parcel, propertyTypeUint32);
+    for (const auto& val : propertyTypeUint32) {
+        types.push_back(static_cast<GetPropertyType>(val));
+    }
+
+    cout << "success"  << endl;
+}
+
+void FillTestProperty(Parcel &parcel, Property &property)
+{
+    property.authSubType = parcel.ReadUint64();
+    property.lockoutDuration = parcel.ReadInt32();
+    property.remainAttempts = parcel.ReadInt32();
+    FillTestString(parcel, property.enrollmentProgress);
+    FillTestString(parcel, property.sensorInfo);
+
+    cout << "success"  << endl;
+}
+
+void FillTestISaCommandCallback(Parcel &parcel, sptr<ISaCommandCallback> &callbackObj)
+{
+    bool isNull = parcel.ReadBool();
+    if (isNull) {
+        callbackObj = nullptr;
+    } else {
+        callbackObj = new (std::nothrow) DummyISaCommandCallback(parcel.ReadInt32());
+        if (callbackObj == nullptr) {
+            cout << "callbackObj construct fail"  << endl;
+        }
+    }
+    cout << "success"  << endl;
+}
+
+int32_t ExecutorImpl::Authenticate(uint64_t scheduleId, const std::vector<uint64_t> &templateIdList,
+    const std::vector<uint8_t> &extraInfo, const sptr<IExecutorCallback> &callbackObj)
+{
+    cout << "interface mock start"  << endl;
+    return AuthenticateV1_1(scheduleId, templateIdList, true, extraInfo, callbackObj);
 }
 
 /**
@@ -287,6 +349,108 @@ HWTEST_F(UserIamFingerprintAuthTest, Security_IAM_Fingerprint_HDI_FUNC_0110, Fun
     FingerprintAuthInterfaceService fingerprint_Interface;
     std::vector<sptr<V1_0::IExecutor>> executorList;
     int32_t ret = fingerprint_Interface.GetExecutorList(executorList);
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+
+/**
+ * @tc.number: Security_IAM_Fingerprint_HDI_NEW_FUNC_0101
+ * @tc.name: Test GetProperty
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ * @tc.level: Level1
+ */
+HWTEST_F(UserIamFingerprintAuthTest, Security_IAM_Fingerprint_HDI_NEW_FUNC_0101, Function | MediumTest | Level1)
+{
+    cout << "start test GetProperty" << endl;
+    std::vector<uint64_t> templateIdList;
+    FillTestUint64Vector(parcel, templateIdList);
+    std::vector<GetPropertyType> propertyTypes;
+    FillTestGetPropertyTypeVector(parcel, propertyTypes);
+    Property property;
+    FillTestProperty(parcel, property);
+
+    int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+
+/**
+ * @tc.number: Security_IAM_Fingerprint_HDI_NEW_FUNC_0102
+ * @tc.name: Test SetCachedTemplates
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ * @tc.level: Level1
+ */
+HWTEST_F(UserIamFingerprintAuthTest, Security_IAM_Fingerprint_HDI_NEW_FUNC_0102, Function | MediumTest | Level1)
+{
+    cout << "start test SetCachedTemplates" << endl;
+    std::vector<uint64_t> templateIdList;
+    FillTestUint64Vector(parcel, templateIdList);
+
+    int32_t ret = g_executorImpl.SetCachedTemplates(templateIdList);
+
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+
+/**
+ * @tc.number: Security_IAM_Fingerprint_HDI_NEW_FUNC_0103
+ * @tc.name: Test RegisterSaCommandCallback
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ * @tc.level: Level1
+ */
+HWTEST_F(UserIamFingerprintAuthTest, Security_IAM_Fingerprint_HDI_NEW_FUNC_0103, Function | MediumTest | Level1)
+{
+    cout << "start test RegisterSaCommandCallback" << endl;
+    sptr<ISaCommandCallback> callbackObj = nullptr;
+    FillTestISaCommandCallback(parcel, callbackObj);
+
+    int32_t ret = g_executorImpl.RegisterSaCommandCallback(callbackObj);
+
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+
+/**
+ * @tc.number: Security_IAM_Fingerprint_HDI_NEW_FUNC_0104
+ * @tc.name: Test GetExecutorListV1_1
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ * @tc.level: Level1
+ */
+HWTEST_F(UserIamFingerprintAuthTest, Security_IAM_Fingerprint_HDI_NEW_FUNC_0104, Function | MediumTest | Level1)
+{
+    cout << "start test GetExecutorListV1_1" << endl;
+    std::vector<sptr<V1_1::IExecutor>> executorList;
+    FingerprintAuthInterfaceService fingerprint_Interface;
+
+    int32_t ret = fingerprint_Interface.GetExecutorListV1_1(executorList);
+
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+
+/**
+ * @tc.number: Security_IAM_Fingerprint_HDI_NEW_FUNC_0105
+ * @tc.name: Test GetExecutorListV1_1
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ * @tc.level: Level1
+ */
+HWTEST_F(UserIamFingerprintAuthTest, Security_IAM_Fingerprint_HDI_NEW_FUNC_0105, Function | MediumTest | Level1)
+{
+    cout << "start test GetExecutorListV1_1" << endl;
+    uint64_t scheduleId = parcel.ReadUint64();
+    std::vector<uint64_t> templateIdList;
+    FillTestUint64Vector(parcel, templateIdList);
+    std::vector<uint8_t> extraInfo;
+    FillTestUint8Vector(parcel, extraInfo);
+    sptr<IExecutorCallback> callbackObj;
+    FillTestIExecutorCallback(parcel, callbackObj);
+    int32_t ret = g_executorImpl.AuthenticateV1_1(scheduleId, templateIdList, true, extraInfo, callbackObj);
+
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
 }

@@ -24,6 +24,7 @@ using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
 using namespace OHOS::HDI::UserAuth;
 using namespace OHOS::HDI::UserAuth::V1_0;
+using namespace OHOS::HDI::UserAuth::V1_1;
 
 static OHOS::Parcel parcel;
 
@@ -55,7 +56,7 @@ HWTEST_F(UserAuthTypeTest, Security_IAM_UserAuth_HDI_FUNC_0201, Function | Mediu
     cout << "start test AuthType" << endl;
     AuthType all = ALL;
     AuthType pin = PIN;
-    AuthType face = FACE;
+    AuthType face = FACE;/**/
     AuthType fingerprint = FINGERPRINT;
     EXPECT_EQ(all, 0);
     EXPECT_EQ(pin, 1);

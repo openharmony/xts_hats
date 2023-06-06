@@ -152,3 +152,43 @@ HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_FUNC_0205, Function | MediumTes
     EXPECT_EQ(f_detected, 11);
     EXPECT_EQ(f_begin, 10000);
 }
+
+/**
+ * @tc.number: Security_IAM_Face_HDI_NEW_FUNC_0101
+ * @tc.name: Test GetPropertyType
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ * @tc.level: Level1
+ */
+HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_NEW_FUNC_0201, Function | MediumTest | Level1)
+{
+    cout << "start test GetPropertyType" << endl;
+    GetPropertyType g_type = OHOS::HDI::FaceAuth::V1_1::AUTH_SUB_TYPE;
+    GetPropertyType g_duration = OHOS::HDI::FaceAuth::V1_1::LOCKOUT_DURATION;
+    GetPropertyType g_attempts = OHOS::HDI::FaceAuth::V1_1::REMAIN_ATTEMPTS;
+    GetPropertyType g_progress = OHOS::HDI::FaceAuth::V1_1::ENROLL_PROGRESS;
+    GetPropertyType g_info = OHOS::HDI::FaceAuth::V1_1::SENSOR_INFO;
+
+    EXPECT_EQ(g_type, 1);
+    EXPECT_EQ(g_duration, 2);
+    EXPECT_EQ(g_attempts, 3);
+    EXPECT_EQ(g_progress, 4);
+    EXPECT_EQ(g_info, 5);
+}
+
+/**
+ * @tc.number: Security_IAM_Face_HDI_NEW_FUNC_0202
+ * @tc.name: Test SaCommandId
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ * @tc.level: Level1
+ */
+HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_NEW_FUNC_0202, Function | MediumTest | Level1)
+{
+    cout << "start test SaCommandId" << endl;
+    SaCommandId begin_screen_brightness_increase = OHOS::HDI::FaceAuth::V1_1::BEGIN_SCREEN_BRIGHTNESS_INCREASE;
+    SaCommandId end_screen_brightness_increase = OHOS::HDI::FaceAuth::V1_1::END_SCREEN_BRIGHTNESS_INCREASE;
+    
+    EXPECT_EQ(begin_screen_brightness_increase, 1);
+    EXPECT_EQ(end_screen_brightness_increase, 2);
+}

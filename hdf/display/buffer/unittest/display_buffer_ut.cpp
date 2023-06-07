@@ -215,7 +215,7 @@ const AllocInfo DISPLAY_BUFFER_TEST_SETS[] = {
         .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
         .format = PIXEL_FMT_BGRX_5551
     },
-
+#elif RGBA_1010102
     // num21
     {
         .width = ALLOC_SIZE_1080,
@@ -253,6 +253,7 @@ int32_t DisplayBufferUt::AllocMemTest(AllocInfo& info)
         void *vAddr = displayBuffer_->Mmap(*buffer);
         if (vAddr == nullptr) {
             HDF_LOGE("Mmap failed");
+            displayBuffer_->FreeMem(*buffer);
             return DISPLAY_FAILURE;
         }
 
@@ -260,11 +261,15 @@ int32_t DisplayBufferUt::AllocMemTest(AllocInfo& info)
             ret = displayBuffer_->InvalidateCache(*buffer);
             if (ret != DISPLAY_SUCCESS) {
                 HDF_LOGE("InvalidateCache failed");
+                displayBuffer_->Unmap(*buffer);
+                displayBuffer_->FreeMem(*buffer);
                 return ret;
             }
         }
         if (memset_s(vAddr, buffer->size, 0, buffer->size) != EOK) {
             HDF_LOGE("Insufficient memory");
+            displayBuffer_->Unmap(*buffer);
+            displayBuffer_->FreeMem(*buffer);
             return DISPLAY_NOMEM;
         }
 
@@ -272,6 +277,8 @@ int32_t DisplayBufferUt::AllocMemTest(AllocInfo& info)
             ret = displayBuffer_->FlushCache(*buffer);
             if (ret != DISPLAY_SUCCESS) {
                 HDF_LOGE("FlushCache failed");
+                displayBuffer_->Unmap(*buffer);
+                displayBuffer_->FreeMem(*buffer);
                 return ret;
             }
         }

@@ -17,6 +17,7 @@
 #define HDI_COMPOSER_UT_H
 #include "v1_0/display_composer_type.h"
 #include "v1_0/display_buffer_type.h"
+#include "v1_0/include/idisplay_composer_interface.h"
 #include "display_test_utils.h"
 #include "gtest/gtest.h"
 #include <iremote_broker.h>
@@ -32,8 +33,8 @@ using namespace OHOS::HDI::Display::Buffer::V1_0;
 using namespace OHOS::HDI::Display::Composer::V1_0;
 
 class DeathTest : public ::testing::Test {
-protected:
-    void SetUp();
+public:
+    sptr<IDisplayComposerInterface> displayComposer_;
 };
 } // namespace SYSTEMTEST
 } // namespace Display
@@ -43,7 +44,6 @@ protected:
 namespace OHOS {
 class ComposerDiedRecipient : public IRemoteObject::DeathRecipient {
 public:
-    int32_t val_ = 1;
     ComposerDiedRecipient() = default;
     virtual ~ComposerDiedRecipient() = default;
     void OnRemoteDied(const wptr<IRemoteObject>& remote) override;

@@ -31,11 +31,8 @@ using OHOS::HDI::Display::Buffer::V1_0::AllocInfo;
 using OHOS::HDI::Display::Buffer::V1_0::IDisplayBuffer;
 
 class DeathTest : public::testing::Test {
-protected:
-    virtual void SetUp();
-    virtual void TearDown();
 public:
-    IDisplayBuffer* displayBuffer_{ nullptr };
+    std::shared_ptr<IDisplayBuffer> displayBuffer_;
 };
 
 class BufferDiedRecipient : public OHOS::IRemoteObject::DeathRecipient {

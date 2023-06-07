@@ -62,6 +62,7 @@ public:
     OHOS::sptr<ICameraDeviceCallback> deviceCallback = nullptr;
     std::vector<StreamInfo> streamInfos;
     std::shared_ptr<StreamInfo> streamInfo = nullptr;
+    std::shared_ptr<StreamInfo> streamInfoSnapshot = nullptr;
     std::shared_ptr<StreamInfo> streamInfoCapture = nullptr;
     std::shared_ptr<StreamInfo> streamInfoAnalyze = nullptr;
     std::shared_ptr<StreamInfo> streamInfoPre = nullptr;

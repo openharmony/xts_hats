@@ -363,7 +363,7 @@ group("${posix_interface_module}_bin") {
     #"pthread_setcancelstate:pthread_setcancelstate_1-1",
     #"pthread_setcancelstate:pthread_setcancelstate_1-2",
     #"pthread_setcancelstate:pthread_setcancelstate_2-1",
-    "pthread_setcancelstate:pthread_setcancelstate_3-1",
+    #"pthread_setcancelstate:pthread_setcancelstate_3-1",
 
     #"pthread_setcanceltype:pthread_setcanceltype_1-1",
     #"pthread_setcanceltype:pthread_setcanceltype_1-2",

@@ -101,3 +101,33 @@ HWTEST_F(HdiDeviceUtTest, SUB_DriverSystem_CameraHdiMg_0320, TestSize.Level0)
     cameraTest->rc = cameraTest->cameraDevice->SetResultMode(ON_CHANGED);
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
 }
+
+/**
+ * @tc.name: EnableResult
+ * @tc.desc: EnableResult normal
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(HdiDeviceUtTest, SUB_DriverSystem_CameraHdiMg_0590, TestSize.Level0)
+{
+    cameraTest->Open();
+    std::vector<int32_t> resultsList;
+    resultsList.push_back(OHOS_CAMERA_STREAM_ID);
+    resultsList.push_back(OHOS_CONTROL_AE_EXPOSURE_COMPENSATION);
+    cameraTest->rc = cameraTest->cameraDevice->EnableResult(resultsList);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.name: DisableResult
+ * @tc.desc: DisableResult normal
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(HdiDeviceUtTest, SUB_DriverSystem_CameraHdiMg_0600, TestSize.Level0)
+{
+    cameraTest->Open();
+    std::vector<OHOS::Camera::MetaType> resultsOriginal;
+    cameraTest->cameraDevice->DisableResult(resultsOriginal);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}

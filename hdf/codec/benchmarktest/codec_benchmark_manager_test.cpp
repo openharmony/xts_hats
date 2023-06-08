@@ -112,7 +112,7 @@ BENCHMARK_F(CodecBenchmarkManagerTest, DestoryComponent)(benchmark::State &state
     ASSERT_EQ(ret, HDF_SUCCESS);
     for (auto _ : state) {
         if (componentId != 0) {
-            manager_->DestoryComponent(componentId);
+            manager_->DestroyComponent(componentId);
         }
     }
 }

@@ -31,8 +31,6 @@
 using namespace OHOS::HDI::Display::Buffer::V1_0;
 using namespace OHOS::HDI::Display::Composer::V1_0;
 using namespace OHOS::HDI::Display::TEST;
-static std::shared_ptr<HdiTestLayer> g_testFreshLayer;
-const int SLEEP_CONT = 100;
 
 static const std::vector<std::vector<LayerSettings>> TEST_SINGLE_LAYER = {
     // one layer display test
@@ -346,13 +344,22 @@ static inline void PresentAndCheck(std::vector<LayerSettings> &layerSettings,
 
 void LayerRotateTest::TearDown()
 {
-    DISPLAY_TEST_LOGE();
     HdiTestDevice::GetInstance().Clear();
+}
+
+void LayerRotateTest::TearDownTestCase()
+{
+    HdiTestDevice::GetInstance().GetFirstDisplay()->ResetClientLayer();
+}
+
+void DeviceTest::SetUpTestCase()
+{
+    int ret = HdiTestDevice::GetInstance().InitDevice();
+    ASSERT_TRUE(ret == DISPLAY_SUCCESS);
 }
 
 void DeviceTest::TearDown()
 {
-    DISPLAY_TEST_LOGE();
     HdiTestDevice::GetInstance().Clear();
 }
 
@@ -389,16 +396,6 @@ int32_t VblankCtr::WaitVblank(uint32_t ms)
     return DISPLAY_SUCCESS;
 }
 
-void VblankTest::TearDown()
-{
-    auto display = HdiTestDevice::GetInstance().GetFirstDisplay();
-    int32_t ret = display->SetDisplayVsyncEnabled(false);
-    if (ret != DISPLAY_SUCCESS) {
-        DISPLAY_TEST_LOGE("vsync disable failed");
-    }
-    VblankCtr::GetInstance().WaitVblank(100); // wait for last vsync 100ms.
-    HdiTestDevice::GetInstance().Clear();
-}
 namespace {
 TEST_P(DeviceLayerDisplay, LayerDisplay)
 {
@@ -522,11 +519,12 @@ TEST_F(DeviceTest, crop)
     }
 }
 
-TEST_F(VblankTest, CtrlTest)
+TEST_F(DeviceTest, CtrlTest)
 {
     int ret;
     DISPLAY_TEST_LOGE();
     std::shared_ptr<HdiTestDisplay> display = HdiTestDevice::GetInstance().GetFirstDisplay();
+    ASSERT_TRUE(display != nullptr) << "get display failed";
     ret = display->RegDisplayVBlankCallback(TestVBlankCallback, nullptr);
     ASSERT_TRUE(ret == DISPLAY_SUCCESS) << "RegDisplayVBlankCallback failed";
     ret = display->SetDisplayVsyncEnabled(true);
@@ -548,19 +546,4 @@ INSTANTIATE_TEST_SUITE_P(LayerAlpha, DeviceLayerDisplay, ::testing::ValuesIn(TES
 INSTANTIATE_TEST_SUITE_P(VideoLayer, DeviceLayerDisplay, ::testing::ValuesIn(TEST_VIDEO));
 INSTANTIATE_TEST_SUITE_P(Rotation, LayerRotateTest, ::testing::ValuesIn(TEST_ROTATE));
 #endif // DISPLAY_COMMUNITY
-}
-int main(int argc, char **argv)
-{
-    int ret = HdiTestDevice::GetInstance().InitDevice();
-    DISPLAY_TEST_CHK_RETURN((ret != DISPLAY_SUCCESS), DISPLAY_FAILURE, DISPLAY_TEST_LOGE("Init Device Failed"));
-    ::testing::InitGoogleTest(&argc, argv);
-    ret = RUN_ALL_TESTS();
-    auto display = HdiTestDevice::GetInstance().GetFirstDisplay();
-    if (display != nullptr) {
-        // avoid vsync call back affer the destruction of VblankCtr
-        display->SetDisplayVsyncEnabled(false);
-        VblankCtr::GetInstance().WaitVblank(SLEEP_CONT);
-    }
-    HdiTestDevice::GetInstance().GetFirstDisplay()->ResetClientLayer();
-    return ret;
 }

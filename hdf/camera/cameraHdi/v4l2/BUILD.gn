@@ -18,6 +18,12 @@ import("//build/ohos.gni")
 import("//build/test.gni")
 import("//drivers/peripheral/camera/camera.gni")
 
+if (defined(ohos_lite)) {
+  import("//device/board/hisilicon/hispark_taurus/device.gni")
+} else {
+  import("//vendor/$product_company/$product_name/product.gni")
+}
+
 module_output_path = "hats/camera"
 
 config("cameraTest_config") {
@@ -73,10 +79,10 @@ ohos_moduletest_suite("HatsHdfCameraTest") {
   ]
 
   deps = [
+    "$board_camera_path/device_manager:camera_device_manager",
+    "$board_camera_path/pipeline_core:camera_pipeline_core",
     "$camera_path/../../hdi_service/v1_0:camera_host_service_1.0_static",
     "$camera_path/buffer_manager:camera_buffer_manager",
-    "$camera_path/device_manager:camera_device_manager",
-    "$camera_path/pipeline_core:camera_pipeline_core",
     "//third_party/googletest:gmock",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest",

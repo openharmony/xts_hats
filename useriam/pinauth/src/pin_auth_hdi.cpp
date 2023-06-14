@@ -280,6 +280,23 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0109, Function | Medi
 }
 
 /**
+ * @tc.number: Security_IAM_PinAuth_HDI_FUNC_0110
+ * @tc.name: Test GetExecutorList
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ * @tc.level: Level1
+ */
+HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0110, Function | MediumTest | Level1)
+{
+    cout << "start GetExecutorList" << endl;
+    PinAuthInterfaceService g_pinAuthInterFaceService;
+    std::vector<sptr<IExecutorV1_0>> executorList;
+    int32_t ret = g_pinAuthInterFaceService.GetExecutorList(executorList);
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+
+/**
  * @tc.number: Security_IAM_PinAuth_HDI_NEW_FUNC_0101
  * @tc.name: Test GetProperty
  * @tc.size: MediumTest

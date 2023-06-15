@@ -2885,6 +2885,28 @@ HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_SetBarringPassword_V1_0200, Funct
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_BARRING_PASSWORD));
 }
 
+HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_CloseUnFinishedUssd_V1_0100, Function | MediumTest | Level3)
+{
+    if (!IsReady(SLOTID_1)) {
+        return;
+    }
+    int32_t ret = g_rilInterface->CloseUnFinishedUssd(SLOTID_1, GetSerialId());
+    WaitFor(WAIT_TIME_SECOND);
+    EXPECT_EQ(SUCCESS, ret);
+    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_CLOSE_UNFINISHED_USSD));
+}
+
+HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_CloseUnFinishedUssd_V1_0200, Function | MediumTest | Level3)
+{
+    if (!IsReady(SLOTID_2)) {
+        return;
+    }
+    int32_t ret = g_rilInterface->CloseUnFinishedUssd(SLOTID_2, GetSerialId());
+    WaitFor(WAIT_TIME_SECOND);
+    EXPECT_EQ(SUCCESS, ret);
+    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_CLOSE_UNFINISHED_USSD));
+}
+
 // Network
 HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetSignalStrength_V1_0100, Function | MediumTest | Level3)
 {

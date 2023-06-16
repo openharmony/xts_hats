@@ -2949,6 +2949,28 @@ HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_CloseUnFinishedUssd_V1_0200, Func
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_CLOSE_UNFINISHED_USSD));
 }
 
+HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_SetVonrSwitch_V1_0100, Function | MediumTest | Level3)
+{
+    if (!IsReady(SLOTID_1)) {
+        return;
+    }
+    int32_t ret = g_rilInterface->SetVonrSwitch(SLOTID_1, GetSerialId(), 1);
+    WaitFor(WAIT_TIME_SECOND);
+    EXPECT_EQ(SUCCESS, ret);
+    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SET_VONR_SWITCH));
+}
+
+HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_SetVonrSwitch_V1_0200, Function | MediumTest | Level3)
+{
+    if (!IsReady(SLOTID_2)) {
+        return;
+    }
+    int32_t ret = g_rilInterface->SetVonrSwitch(SLOTID_2, GetSerialId(), 1);
+    WaitFor(WAIT_TIME_SECOND);
+    EXPECT_EQ(SUCCESS, ret);
+    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SET_VONR_SWITCH));
+}
+
 // Network
 HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetSignalStrength_V1_0100, Function | MediumTest | Level3)
 {

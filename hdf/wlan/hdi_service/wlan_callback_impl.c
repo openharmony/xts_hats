@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,11 +19,40 @@
 #include <hdf_log.h>
 #include <osal_mem.h>
 
+#define WLAN_EID_SSID 0
+#define MAX_SSID_LEN 32
+
+struct ElementHeader {
+    uint8_t id;
+    uint8_t datalen;
+};
+
 static int32_t WlanCallbackResetDriver(struct IWlanCallback *self, uint32_t event, int32_t code, const char *ifName)
 {
     (void)self;
     HDF_LOGE("WlanCallbackResetDriver: receive resetStatus=%{public}d", code);
     return HDF_SUCCESS;
+}
+
+static void PrintSsid(const uint8_t *ie, uint32_t len)
+{
+    char ssid[MAX_SSID_LEN] = {0};
+    uint8_t *pos = NULL;
+    struct ElementHeader *hdr = (struct ElementHeader *)ie;
+
+    if (ie == NULL || len < sizeof(struct ElementHeader)) {
+        return;
+    }
+    while ((ie + len) >= ((uint8_t *)hdr + sizeof(*hdr) + hdr->datalen)) {
+        pos = (uint8_t *)hdr + sizeof(*hdr);
+        if (hdr->id == WLAN_EID_SSID) {
+            if (hdr->datalen < MAX_SSID_LEN && memcpy_s(ssid, MAX_SSID_LEN, pos, hdr->datalen) == EOK) {
+                HDF_LOGE("ssid: %{public}s", ssid);
+            }
+            return;
+        }
+        hdr = (struct ElementHeader *)(pos + hdr->datalen);
+    }
 }
 
 static int32_t WlanCallbackScanResult(struct IWlanCallback *self, uint32_t event,
@@ -39,6 +68,29 @@ static int32_t WlanCallbackScanResult(struct IWlanCallback *self, uint32_t event
     HDF_LOGE("HdiProcessScanResult: qual=%{public}d, beaconIeLen=%{public}d, level=%{public}d", scanResult->qual,
         scanResult->beaconIeLen, scanResult->level);
     HDF_LOGE("HdiProcessScanResult: age=%{public}d, ieLen=%{public}d", scanResult->age, scanResult->ieLen);
+    PrintSsid(scanResult->ie, scanResult->ieLen);
+    return HDF_SUCCESS;
+}
+
+static int32_t WlanCallbackScanResults(struct IWlanCallback *self, uint32_t event,
+    const struct HdfWifiScanResults *scanResults, const char *ifName)
+{
+    uint32_t i;
+    (void)self;
+    if (scanResults == NULL || ifName == NULL) {
+        HDF_LOGE("%{public}s: input parameter invalid!", __func__);
+        return HDF_ERR_INVALID_PARAM;
+    }
+    HDF_LOGI("%{public}s: Receive %u scan results!", __func__, scanResults->resLen);
+    for (i = 0; i < scanResults->resLen; i++) {
+        struct HdfWifiScanResultExt *scanResult = &scanResults->res[i];
+        HDF_LOGI("HdiProcessScanResult: flags=%{public}d, caps=%{public}d, freq=%{public}d, beaconInt=%{public}d",
+            scanResult->flags, scanResult->caps, scanResult->freq, scanResult->beaconInt);
+        HDF_LOGI("HdiProcessScanResult: qual=%{public}d, beaconIeLen=%{public}d, level=%{public}d", scanResult->qual,
+            scanResult->beaconIeLen, scanResult->level);
+        HDF_LOGI("HdiProcessScanResult: age=%{public}d, ieLen=%{public}d", scanResult->age, scanResult->ieLen);
+        PrintSsid(scanResult->ie, scanResult->ieLen);
+    }
     return HDF_SUCCESS;
 }
 
@@ -70,6 +122,7 @@ struct IWlanCallback *WlanCallbackServiceGet(void)
     service->interface.ResetDriverResult = WlanCallbackResetDriver;
     service->interface.ScanResult = WlanCallbackScanResult;
     service->interface.WifiNetlinkMessage = WlanCallbackNetlinkMessage;
+    service->interface.ScanResults = WlanCallbackScanResults;
     return &service->interface;
 }
 

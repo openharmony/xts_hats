@@ -23,10 +23,12 @@ ohos_moduletest_suite("HatsHdfWlanHdiServiceTest") {
   module_out_path = module_output_path
   sources = [
     "wlan_callback_impl.c",
+    "wlan_hdi_direct_test.cpp",
     "wlan_hdi_hal_services_c_test.cpp",
   ]
 
   deps = [
+    "$base_root/drivers/peripheral/wlan/hdi_service:hdi_wlan_service",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
   ]

@@ -16,12 +16,13 @@
 #define USB_CAMERA_TEST_H
 #include "test_display.h"
 
-class UtestUSBCameraTest : public testing::Test {
+class USBCameraTest : public testing::Test {
 public:
     static void SetUpTestCase(void);
     static void TearDownTestCase(void);
     void SetUp(void);
     void TearDown(void);
     std::shared_ptr<TestDisplay> display_ = nullptr;
+    std::shared_ptr<CameraAbility> ability_ = nullptr;
 };
 #endif

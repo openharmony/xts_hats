@@ -45,6 +45,8 @@ ohos_moduletest_suite("HatsHdfCameraTest") {
     "./src/open_camera_test.cpp",
     "./src/stream_customer.cpp",
     "./src/test_display.cpp",
+
+    #"./src/usb_camera_test.cpp",
   ]
 
   include_dirs = [

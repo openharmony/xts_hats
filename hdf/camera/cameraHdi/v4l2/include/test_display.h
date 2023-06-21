@@ -143,6 +143,7 @@ public:
 
 public:
     TestDisplay();
+    sptr<ICameraHost> CameraHostImplGetInstance(void);
     uint64_t GetCurrentLocalTimeStamp();
     int32_t SaveYUV(char* type, unsigned char* buffer, int32_t size);
     int DoFbMunmap(unsigned char* addr);

@@ -39,7 +39,7 @@ ohos_moduletest_suite("HatsHdfNnrtStabilityV2_0Test") {
   external_deps = [
     "c_utils:utils",
     "drivers_interface_nnrt:libnnrt_proxy_2.0",
-    "hilog_native:libhilog",
+    "hilog:libhilog",
     "ipc:ipc_single",
     "mindspore:mindir",
     "neural_network_runtime:nnrt_target",

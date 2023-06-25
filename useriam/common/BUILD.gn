@@ -21,7 +21,7 @@ ohos_source_set("useriam_test_common") {
 
   external_deps = [
     "c_utils:utils",
-    "hilog_native:libhilog",
+    "hilog:libhilog",
   ]
   subsystem_name = "useriam"
   part_name = "pin_auth"

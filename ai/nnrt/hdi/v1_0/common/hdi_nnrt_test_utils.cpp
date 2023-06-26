@@ -116,9 +116,8 @@ OH_NN_ReturnCode HDICommon::ConvertModel(OHOS::sptr<V1_0::INnrtDevice> device_, 
 
     size_t tensorSize = mindspore::lite::MindIR_LiteGraph_GetConstTensorSize(m_liteGraph.get());
     std::cout << "[ConvertModel] const tensorsize:" << tensorSize << std::endl;
-    int32_t hdiRet{0};
     if (tensorSize > 0) {
-        hdiRet = device_->AllocateBuffer(tensorSize, tensorBuffer);
+        int32_t hdiRet = device_->AllocateBuffer(tensorSize, tensorBuffer);
         if (hdiRet != HDF_SUCCESS || tensorBuffer.fd == NNRT_INVALID_FD) {
             printf("[NNRtTest] [ConvertModel] allocate tensor buffer failed after get const tensor size,"\
                 "ret:%d\n", hdiRet);
@@ -133,7 +132,11 @@ OH_NN_ReturnCode HDICommon::ConvertModel(OHOS::sptr<V1_0::INnrtDevice> device_, 
     }
     // release model
     OH_NNModel_Destroy(&model);
-    model = nullptr;
+    if(model != nullptr) {
+        printf("[NNRtTest] OH_NNModel_Destroy failed.\n");
+        return OH_NN_FAILED;
+    }
+    
     printf("[NNRtTest] [ConvertModel] convert model done\n");
     return OH_NN_SUCCESS;
 }
@@ -249,7 +252,7 @@ void HDICommon::ReleaseBufferOfTensors(OHOS::sptr<V1_0::INnrtDevice> &device, st
     }
 }
 
-void HDICommon::UnmapAllMemory(std::vector<void* > &buffers)
+void HDICommon::UnmapAllMemory(const std::vector<void* > &buffers)
 {
     auto memoryMenager = MemoryManager::GetInstance();
     for (auto buffer : buffers) {

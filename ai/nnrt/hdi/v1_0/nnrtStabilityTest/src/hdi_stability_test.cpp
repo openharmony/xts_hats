@@ -71,7 +71,7 @@ void RunModelTest(OHOS::sptr<V1_0::INnrtDevice> device, OHOS::sptr<V1_0::IPrepar
         auto memAddress = HDICommon::MapMemory(tensor.data.fd, ADDEND_BUFFER_LENGTH);
         mapedMemorys.emplace_back(memAddress);
         // set input data
-        HDICommon::SetData((float*)memAddress, ADDEND_BUFFER_LENGTH, (float*)data.data());
+        HDICommon::SetData(static_cast<float*>(memAddress), ADDEND_BUFFER_LENGTH, (float*)data.data());
         inputs.emplace_back(tensor);
     }
     // set outputs
@@ -84,7 +84,7 @@ void RunModelTest(OHOS::sptr<V1_0::INnrtDevice> device, OHOS::sptr<V1_0::IPrepar
     auto memAddress = HDICommon::MapMemory(outputs[0].data.fd, ADDEND_BUFFER_LENGTH);
     mapedMemorys.emplace_back(memAddress);
 
-    auto buffer = (float *)memAddress;
+    auto buffer = static_cast<float*>(memAddress);
     std::vector<float> expectValue(ADDEND_DATA_SIZE, ADD_VALUE_RESULT);
     std::vector<float> outputValue(buffer, buffer + ADDEND_DATA_SIZE);
     // check output
@@ -111,7 +111,6 @@ HWTEST_F(StabilityTest, SUB_AI_NNRt_Reliability_South_Stress_0100, Reliability |
 {
     OHOS::sptr<V1_0::INnrtDevice> device = V1_0::INnrtDevice::Get();
     std::vector<V1_0::Model *> iModels;
-    std::vector<OHOS::sptr<V1_0::IPreparedModel>> iPreparedModels;
     std::vector<V1_0::SharedBuffer> tensorBuffers;
     for (int i = 0; i < THREAD_NUM; i++) {
         // build graph with NNModel

@@ -50,7 +50,7 @@ public:
     static V1_0::IOTensor CreateOutputIOTensor(OHOS::sptr<V1_0::INnrtDevice> &device, size_t length);
     static void* MapMemory(int fd, size_t length);
     static void UnmapMemory(float* buffer);
-    static void UnmapAllMemory(std::vector<void* > &buffers);
+    static void UnmapAllMemory(const std::vector<void* > &buffers);
     static void SetData(float* buffer, size_t length, float* data);
     static void ReleaseBufferOfTensors(OHOS::sptr<V1_0::INnrtDevice> &device, std::vector<V1_0::IOTensor> &tensors);
 };

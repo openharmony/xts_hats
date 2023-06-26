@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-#include "v1_0/motion_callback_service.h"
+#include "motion_callback_impl.h"
 #include <hdf_base.h>
 
 namespace OHOS {

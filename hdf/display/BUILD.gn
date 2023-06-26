@@ -21,8 +21,7 @@ group("HatsHdfDisplayTest") {
   if (xts_hats_rich == true) {
     deps = [
       "buffer:HatsHdfDisplayBufferTest",
-
-      #"composer/death:HatsHdfDisplayComposerDeathTest",
+      "composer/death:HatsHdfDisplayComposerDeathTest",
       "composer/moduletest:HatszHdfDisplayComposerMtTest",
       "composer/unittest:HatszHdfDisplayComposerUtTest",
     ]

@@ -37,7 +37,7 @@ static sptr<IDisplayComposerInterface> g_composerDevice = nullptr;
 static std::shared_ptr<IDisplayBuffer> g_gralloc = nullptr;
 static std::vector<uint32_t> g_displayIds;
 const int SLEEP_CONT_100 = 100;
-const int SLEEP_CONT_1000 = 1000;
+const int SLEEP_CONT_2000 = 2000;
 
 static inline std::shared_ptr<HdiTestDisplay> GetFirstDisplay()
 {
@@ -217,6 +217,12 @@ int32_t VblankCtr::WaitVblank(uint32_t ms)
     return DISPLAY_SUCCESS;
 }
 
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0000, TestSize.Level1)
+{
+    const uint32_t CACHE_COUNT = 5;
+    auto ret = g_composerDevice->SetClientBufferCacheCount(g_displayIds[0], CACHE_COUNT);
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0010, TestSize.Level1)
 {
     DisplayCapability info;
@@ -329,7 +335,8 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0130, TestSize.Level1)
     g_gralloc->AllocMem(info, buffer);
     ASSERT_TRUE(buffer != nullptr);
 
-    auto ret = g_composerDevice->SetDisplayClientBuffer(g_displayIds[0], *buffer, -1);
+    uint32_t bufferSeq = 1;
+    auto ret = g_composerDevice->SetDisplayClientBuffer(g_displayIds[0], buffer, bufferSeq, -1);
     g_gralloc->FreeMem(*buffer);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
@@ -626,26 +633,14 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0270, TestSize.Level1)
     ASSERT_TRUE((layers.size() > 0));
 
     auto layer = layers[0];
-
-    BufferHandle* buffer = nullptr;
-
-    const int32_t WIDTH = 800;
-    const int32_t HEIGHT = 600;
-    AllocInfo info;
-    info.width  = WIDTH;
-    info.height = HEIGHT;
-    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_MEM_DMA |
-            OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_READ |
-            OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_WRITE;
-    info.format = PIXEL_FMT_RGBA_8888;
-
-    g_gralloc->AllocMem(info, buffer);
-    ASSERT_TRUE(buffer != nullptr);
-
-    auto ret = g_composerDevice->SetLayerBuffer(g_displayIds[0], layer->GetId(), *buffer, -1);
-
+    auto graphicBuffer = layer->AcquireBackBuffer();
+    int32_t ret = graphicBuffer->SetGraphicBuffer([&](const BufferHandle* buffer, uint32_t seqNo) -> int32_t {
+        std::vector<uint32_t> deletingList;
+        int32_t result = g_composerDevice->SetLayerBuffer(g_displayIds[0], layer->GetId(), buffer, seqNo, -1,
+            deletingList);
+        return result;
+    });
     PrepareAndPrensent();
-    g_gralloc->FreeMem(*buffer);
 
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
@@ -780,11 +775,11 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0330, TestSize.Level1)
     ASSERT_TRUE(ret == DISPLAY_SUCCESS) << "RegDisplayVBlankCallback failed";
     ret = display->SetDisplayVsyncEnabled(true);
     ASSERT_TRUE(ret == DISPLAY_SUCCESS) << "SetDisplayVsyncEnabled failed";
-    ret = VblankCtr::GetInstance().WaitVblank(SLEEP_CONT_1000); // 1000ms
+    ret = VblankCtr::GetInstance().WaitVblank(SLEEP_CONT_2000); // 2000ms
     ASSERT_TRUE(ret == DISPLAY_SUCCESS) << "WaitVblank timeout";
     ret = display->SetDisplayVsyncEnabled(false);
     ASSERT_TRUE(ret == DISPLAY_SUCCESS) << "SetDisplayVsyncEnabled failed";
-    usleep(SLEEP_CONT_100 * SLEEP_CONT_1000);                              // wait for 100ms avoid the last vsync.
-    ret = VblankCtr::GetInstance().WaitVblank(SLEEP_CONT_1000); // 1000ms
+    usleep(SLEEP_CONT_100 * SLEEP_CONT_2000); // wait for 100ms avoid the last vsync.
+    ret = VblankCtr::GetInstance().WaitVblank(SLEEP_CONT_2000); // 2000ms
     ASSERT_TRUE(ret != DISPLAY_SUCCESS) << "vblank do not disable";
 }

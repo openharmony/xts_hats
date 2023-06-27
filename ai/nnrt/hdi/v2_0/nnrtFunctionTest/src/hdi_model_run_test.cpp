@@ -56,7 +56,6 @@ void AddModelTest(OHOS::sptr<V2_0::INnrtDevice> &device_, V2_0::ModelConfig &mod
     std::vector<V2_0::IOTensor> inputs;
     std::vector<V2_0::IOTensor> outputs;
     std::vector<std::vector<int32_t>> outputsDims;
-    std::vector<bool> isOutputBufferEnough;
 
     std::vector<void* > mapedMemorys;
     // set inputs
@@ -68,7 +67,7 @@ void AddModelTest(OHOS::sptr<V2_0::INnrtDevice> &device_, V2_0::ModelConfig &mod
         auto memAddress = HDICommon::MapMemory(tensor.data.fd, ADDEND_BUFFER_LENGTH);
         mapedMemorys.emplace_back(memAddress);
         // set input data
-        HDICommon::SetData((float*)memAddress, ADDEND_BUFFER_LENGTH, (float*)data.data());
+        HDICommon::SetData(static_cast<float*>(memAddress), ADDEND_BUFFER_LENGTH, (float*)data.data());
         inputs.emplace_back(tensor);
     }
     // set outputs
@@ -81,7 +80,7 @@ void AddModelTest(OHOS::sptr<V2_0::INnrtDevice> &device_, V2_0::ModelConfig &mod
     auto memAddress = HDICommon::MapMemory(outputs[0].data.fd, ADDEND_BUFFER_LENGTH);
     mapedMemorys.emplace_back(memAddress);
 
-    auto buffer = (float *)memAddress;
+    auto buffer = static_cast<float*>(memAddress);
     std::vector<float> expectValue(ADDEND_DATA_SIZE, ADD_VALUE_RESULT);
     std::vector<float> outputValue(buffer, buffer + ADDEND_DATA_SIZE);
     PrintTensor(buffer, ADDEND_DATA_SIZE);
@@ -171,7 +170,6 @@ HWTEST_F(ModelRunTest, SUB_AI_NNRt_Func_South_Model_Invoke_Run_0500, Function | 
     std::vector<V2_0::IOTensor> inputs;
     std::vector<V2_0::IOTensor> outputs;
     std::vector<std::vector<int32_t>> outputsDims;
-    std::vector<bool> isOutputBufferEnough;
     vector<void* > mapedMemorys;
 
     // only set outputs
@@ -211,7 +209,6 @@ HWTEST_F(ModelRunTest, SUB_AI_NNRt_Func_South_Model_Invoke_Run_0600, Function | 
     std::vector<V2_0::IOTensor> inputs;
     std::vector<V2_0::IOTensor> outputs;
     std::vector<std::vector<int32_t>> outputsDims;
-    std::vector<bool> isOutputBufferEnough;
     vector<void* > mapedMemorys;
 
     // only set inputs
@@ -223,7 +220,7 @@ HWTEST_F(ModelRunTest, SUB_AI_NNRt_Func_South_Model_Invoke_Run_0600, Function | 
         auto memAddress = HDICommon::MapMemory(tensor.data.fd, ADDEND_BUFFER_LENGTH);
         mapedMemorys.emplace_back(memAddress);
         // set input data
-        HDICommon::SetData((float*)memAddress, ADDEND_BUFFER_LENGTH, (float*)data.data());
+        HDICommon::SetData(static_cast<float*>(memAddress), ADDEND_BUFFER_LENGTH, (float*)data.data());
         inputs.emplace_back(tensor);
     }
     // model run
@@ -384,7 +381,6 @@ HWTEST_F(ModelRunTest, SUB_AI_NNRt_Func_South_Model_Invoke_CombRun_1000, Functio
     std::vector<V2_0::IOTensor> inputs;
     std::vector<V2_0::IOTensor> outputs;
     std::vector<std::vector<int32_t>> outputsDims;
-    std::vector<bool> isOutputBufferEnough;
     vector<void* > mapedMemorys;
 
     // set inputs
@@ -395,7 +391,7 @@ HWTEST_F(ModelRunTest, SUB_AI_NNRt_Func_South_Model_Invoke_CombRun_1000, Functio
         auto memAddress = HDICommon::MapMemory(tensor.data.fd, ADDEND_BUFFER_LENGTH);
         mapedMemorys.emplace_back(memAddress);
         // set input data
-        HDICommon::SetData((float*)memAddress, ADDEND_BUFFER_LENGTH, (float*)data.data());
+        HDICommon::SetData(static_cast<float*>(memAddress), ADDEND_BUFFER_LENGTH, (float*)data.data());
         inputs.emplace_back(tensor);
     }
     // set outputs
@@ -408,7 +404,7 @@ HWTEST_F(ModelRunTest, SUB_AI_NNRt_Func_South_Model_Invoke_CombRun_1000, Functio
     auto memAddress = HDICommon::MapMemory(outputs[0].data.fd, ADDEND_BUFFER_LENGTH);
     mapedMemorys.emplace_back(memAddress);
 
-    auto buffer = (float *)memAddress;
+    auto buffer = static_cast<float*>(memAddress);
     std::vector<float> expectValue(ADDEND_DATA_SIZE, ADD_VALUE_RESULT);
     std::vector<float> outputValue(buffer, buffer + ADDEND_DATA_SIZE);
     // check output

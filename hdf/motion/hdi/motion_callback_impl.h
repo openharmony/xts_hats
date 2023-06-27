@@ -17,6 +17,7 @@
 #define OHOS_HDI_MOTION_V1_0_MOTIONCALLBACKSERVICE_H
 
 #include "v1_0/imotion_callback.h"
+#include "v1_0/motion_types.h"
 
 namespace OHOS {
 namespace HDI {

@@ -92,6 +92,34 @@ void TestDisplay::StoreVideo(const unsigned char *bufStart, const uint32_t size)
     CAMERA_LOGD("demo test:StoreVideo size == %{public}d\n", size);
 }
 
+void TestDisplay::StartStreamUpdate(int wide, int hight)
+{
+    if (streamCustomerPreview_ == nullptr) {
+            streamCustomerPreview_ = std::make_shared<StreamCustomer>();
+        }
+        OHOS::sptr<OHOS::IBufferProducer> producer = streamCustomerPreview_->CreateProducer();
+        producer->SetQueueSize(8); // 8:set bufferQueue size
+
+        std::vector<StreamInfo> streamInfos;
+        StreamInfo streamInfo = {};
+        streamInfo.streamId_ = STREAM_ID_PREVIEW;
+        streamInfo.width_ = wide; // 320:picture width
+        streamInfo.height_ = hight; // 240:picture height
+        streamInfo.format_ = PIXEL_FMT_RGBA_8888;
+        streamInfo.dataspace_ = 8; // 8:picture dataspace
+        streamInfo.intent_ = PREVIEW;
+        streamInfo.tunneledMode_ = 5; // 5:tunnel mode
+        streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+        ASSERT_NE(streamInfo.bufferQueue_, nullptr);
+        std::vector<StreamInfo>().swap(streamInfos);
+        streamInfos.push_back(streamInfo);
+        rc = (CamRetCode)streamOperator->CreateStreams(streamInfos);
+        EXPECT_EQ(true, rc == HDI::Camera::V1_0::NO_ERROR);
+        // Submit stream information
+        rc = (CamRetCode)streamOperator->CommitStreams(NORMAL, ability_);
+        EXPECT_EQ(true, rc == HDI::Camera::V1_0::NO_ERROR);
+}
+
 void TestDisplay::OpenVideoFile()
 {
     constexpr uint32_t pathLen = 64;

@@ -499,30 +499,31 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0170, TestSize.Level1)
     // Create and get streamOperator information
     display_->AchieveStreamOperator();
     // Create data stream
-    if (display_->streamCustomerPreview_ == nullptr) {
-        display_->streamCustomerPreview_ = std::make_shared<StreamCustomer>();
-    }
-    OHOS::sptr<OHOS::IBufferProducer> producer = display_->streamCustomerPreview_->CreateProducer();
-    producer->SetQueueSize(8); // 8:set bufferQueue size
+    display_->StartStreamUpdate(640,480);
+    // if (display_->streamCustomerPreview_ == nullptr) {
+    //     display_->streamCustomerPreview_ = std::make_shared<StreamCustomer>();
+    // }
+    // OHOS::sptr<OHOS::IBufferProducer> producer = display_->streamCustomerPreview_->CreateProducer();
+    // producer->SetQueueSize(8); // 8:set bufferQueue size
 
-    std::vector<StreamInfo> streamInfos;
-    StreamInfo streamInfo = {};
-    streamInfo.streamId_ = display_->STREAM_ID_PREVIEW;
-    streamInfo.width_ = 640; // 640:picture width
-    streamInfo.height_ = 480; // 480:picture height
-    streamInfo.format_ = PIXEL_FMT_RGBA_8888;
-    streamInfo.dataspace_ = 8; // 8:picture dataspace
-    streamInfo.intent_ = PREVIEW;
-    streamInfo.tunneledMode_ = 5; // 5:tunnel mode
-    streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
-    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
-    std::vector<StreamInfo>().swap(streamInfos);
-    streamInfos.push_back(streamInfo);
-    display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
-    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
-    // Submit stream information
-    display_->rc = (CamRetCode)display_->streamOperator->CommitStreams(NORMAL, display_->ability_);
-    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+    // std::vector<StreamInfo> streamInfos;
+    // StreamInfo streamInfo = {};
+    // streamInfo.streamId_ = display_->STREAM_ID_PREVIEW;
+    // streamInfo.width_ = 640; // 640:picture width
+    // streamInfo.height_ = 480; // 480:picture height
+    // streamInfo.format_ = PIXEL_FMT_RGBA_8888;
+    // streamInfo.dataspace_ = 8; // 8:picture dataspace
+    // streamInfo.intent_ = PREVIEW;
+    // streamInfo.tunneledMode_ = 5; // 5:tunnel mode
+    // streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    // ASSERT_NE(streamInfo.bufferQueue_, nullptr);
+    // std::vector<StreamInfo>().swap(streamInfos);
+    // streamInfos.push_back(streamInfo);
+    // display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
+    // EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+    // // Submit stream information
+    // display_->rc = (CamRetCode)display_->streamOperator->CommitStreams(NORMAL, display_->ability_);
+    // EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
     
     // updateSettings
     const uint32_t ITEM_CAPACITY = 100;
@@ -566,30 +567,32 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0180, TestSize.Level1)
     // Create and get streamOperator information
     display_->AchieveStreamOperator();
     // Create data stream
-    if (display_->streamCustomerPreview_ == nullptr) {
-        display_->streamCustomerPreview_ = std::make_shared<StreamCustomer>();
-    }
-    OHOS::sptr<OHOS::IBufferProducer> producer = display_->streamCustomerPreview_->CreateProducer();
-    producer->SetQueueSize(8); // 8:set bufferQueue size
 
-    std::vector<StreamInfo> streamInfos;
-    StreamInfo streamInfo = {};
-    streamInfo.streamId_ = display_->STREAM_ID_PREVIEW;
-    streamInfo.width_ = 640; // 640:picture width
-    streamInfo.height_ = 480; // 480:picture height
-    streamInfo.format_ = PIXEL_FMT_RGBA_8888;
-    streamInfo.dataspace_ = 8; // 8:picture dataspace
-    streamInfo.intent_ = PREVIEW;
-    streamInfo.tunneledMode_ = 5; // 5:tunnel mode
-    streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
-    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
-    std::vector<StreamInfo>().swap(streamInfos);
-    streamInfos.push_back(streamInfo);
-    display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
-    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
-    // Submit stream information
-    display_->rc = (CamRetCode)display_->streamOperator->CommitStreams(NORMAL, display_->ability_);
-    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+    display_->StartStreamUpdate(640,480);
+    // if (display_->streamCustomerPreview_ == nullptr) {
+    //     display_->streamCustomerPreview_ = std::make_shared<StreamCustomer>();
+    // }
+    // OHOS::sptr<OHOS::IBufferProducer> producer = display_->streamCustomerPreview_->CreateProducer();
+    // producer->SetQueueSize(8); // 8:set bufferQueue size
+
+    // std::vector<StreamInfo> streamInfos;
+    // StreamInfo streamInfo = {};
+    // streamInfo.streamId_ = display_->STREAM_ID_PREVIEW;
+    // streamInfo.width_ = 640; // 640:picture width
+    // streamInfo.height_ = 480; // 480:picture height
+    // streamInfo.format_ = PIXEL_FMT_RGBA_8888;
+    // streamInfo.dataspace_ = 8; // 8:picture dataspace
+    // streamInfo.intent_ = PREVIEW;
+    // streamInfo.tunneledMode_ = 5; // 5:tunnel mode
+    // streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    // ASSERT_NE(streamInfo.bufferQueue_, nullptr);
+    // std::vector<StreamInfo>().swap(streamInfos);
+    // streamInfos.push_back(streamInfo);
+    // display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
+    // EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+    // // Submit stream information
+    // display_->rc = (CamRetCode)display_->streamOperator->CommitStreams(NORMAL, display_->ability_);
+    // EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
     
     // updateSettings
     const uint32_t ITEM_CAPACITY = 100;
@@ -632,30 +635,31 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0190, TestSize.Level1)
     // Create and get streamOperator information
     display_->AchieveStreamOperator();
     // Create data stream
-    if (display_->streamCustomerPreview_ == nullptr) {
-        display_->streamCustomerPreview_ = std::make_shared<StreamCustomer>();
-    }
-    OHOS::sptr<OHOS::IBufferProducer> producer = display_->streamCustomerPreview_->CreateProducer();
-    producer->SetQueueSize(8); // 8:set bufferQueue size
+    display_->StartStreamUpdate(800,600);
+    // if (display_->streamCustomerPreview_ == nullptr) {
+    //     display_->streamCustomerPreview_ = std::make_shared<StreamCustomer>();
+    // }
+    // OHOS::sptr<OHOS::IBufferProducer> producer = display_->streamCustomerPreview_->CreateProducer();
+    // producer->SetQueueSize(8); // 8:set bufferQueue size
 
-    std::vector<StreamInfo> streamInfos;
-    StreamInfo streamInfo = {};
-    streamInfo.streamId_ = display_->STREAM_ID_PREVIEW;
-    streamInfo.width_ = 800; // 800:picture width
-    streamInfo.height_ = 600; // 600:picture height
-    streamInfo.format_ = PIXEL_FMT_RGBA_8888;
-    streamInfo.dataspace_ = 8; // 8:picture dataspace
-    streamInfo.intent_ = PREVIEW;
-    streamInfo.tunneledMode_ = 5; // 5:tunnel mode
-    streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
-    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
-    std::vector<StreamInfo>().swap(streamInfos);
-    streamInfos.push_back(streamInfo);
-    display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
-    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
-    // Submit stream information
-    display_->rc = (CamRetCode)display_->streamOperator->CommitStreams(NORMAL, display_->ability_);
-    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+    // std::vector<StreamInfo> streamInfos;
+    // StreamInfo streamInfo = {};
+    // streamInfo.streamId_ = display_->STREAM_ID_PREVIEW;
+    // streamInfo.width_ = 800; // 800:picture width
+    // streamInfo.height_ = 600; // 600:picture height
+    // streamInfo.format_ = PIXEL_FMT_RGBA_8888;
+    // streamInfo.dataspace_ = 8; // 8:picture dataspace
+    // streamInfo.intent_ = PREVIEW;
+    // streamInfo.tunneledMode_ = 5; // 5:tunnel mode
+    // streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    // ASSERT_NE(streamInfo.bufferQueue_, nullptr);
+    // std::vector<StreamInfo>().swap(streamInfos);
+    // streamInfos.push_back(streamInfo);
+    // display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
+    // EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+    // // Submit stream information
+    // display_->rc = (CamRetCode)display_->streamOperator->CommitStreams(NORMAL, display_->ability_);
+    // EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
     
     // updateSettings
     const uint32_t ITEM_CAPACITY = 100;
@@ -699,30 +703,31 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0200, TestSize.Level1)
     // Create and get streamOperator information
     display_->AchieveStreamOperator();
     // Create data stream
-    if (display_->streamCustomerPreview_ == nullptr) {
-        display_->streamCustomerPreview_ = std::make_shared<StreamCustomer>();
-    }
-    OHOS::sptr<OHOS::IBufferProducer> producer = display_->streamCustomerPreview_->CreateProducer();
-    producer->SetQueueSize(8); // 8:set bufferQueue size
+    display_->StartStreamUpdate(352,288);
+    // if (display_->streamCustomerPreview_ == nullptr) {
+    //     display_->streamCustomerPreview_ = std::make_shared<StreamCustomer>();
+    // }
+    // OHOS::sptr<OHOS::IBufferProducer> producer = display_->streamCustomerPreview_->CreateProducer();
+    // producer->SetQueueSize(8); // 8:set bufferQueue size
 
-    std::vector<StreamInfo> streamInfos;
-    StreamInfo streamInfo = {};
-    streamInfo.streamId_ = display_->STREAM_ID_PREVIEW;
-    streamInfo.width_ = 352; // 352:picture width
-    streamInfo.height_ = 288; // 288:picture height
-    streamInfo.format_ = PIXEL_FMT_RGBA_8888;
-    streamInfo.dataspace_ = 8; // 8:picture dataspace
-    streamInfo.intent_ = PREVIEW;
-    streamInfo.tunneledMode_ = 5; // 5:tunnel mode
-    streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
-    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
-    std::vector<StreamInfo>().swap(streamInfos);
-    streamInfos.push_back(streamInfo);
-    display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
-    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
-    // Submit stream information
-    display_->rc = (CamRetCode)display_->streamOperator->CommitStreams(NORMAL, display_->ability_);
-    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+    // std::vector<StreamInfo> streamInfos;
+    // StreamInfo streamInfo = {};
+    // streamInfo.streamId_ = display_->STREAM_ID_PREVIEW;
+    // streamInfo.width_ = 352; // 352:picture width
+    // streamInfo.height_ = 288; // 288:picture height
+    // streamInfo.format_ = PIXEL_FMT_RGBA_8888;
+    // streamInfo.dataspace_ = 8; // 8:picture dataspace
+    // streamInfo.intent_ = PREVIEW;
+    // streamInfo.tunneledMode_ = 5; // 5:tunnel mode
+    // streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    // ASSERT_NE(streamInfo.bufferQueue_, nullptr);
+    // std::vector<StreamInfo>().swap(streamInfos);
+    // streamInfos.push_back(streamInfo);
+    // display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
+    // EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+    // // Submit stream information
+    // display_->rc = (CamRetCode)display_->streamOperator->CommitStreams(NORMAL, display_->ability_);
+    // EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
 
      // updateSettings
     const uint32_t ITEM_CAPACITY = 100;
@@ -765,31 +770,33 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0210, TestSize.Level1)
     display_->OpenUsbCamera();
     // Create and get streamOperator information
     display_->AchieveStreamOperator();
+    
     // Create data stream
-    if (display_->streamCustomerPreview_ == nullptr) {
-        display_->streamCustomerPreview_ = std::make_shared<StreamCustomer>();
-    }
-    OHOS::sptr<OHOS::IBufferProducer> producer = display_->streamCustomerPreview_->CreateProducer();
-    producer->SetQueueSize(8); // 8:set bufferQueue size
+    display_->StartStreamUpdate(320,240);
+    // if (display_->streamCustomerPreview_ == nullptr) {
+    //     display_->streamCustomerPreview_ = std::make_shared<StreamCustomer>();
+    // }
+    // OHOS::sptr<OHOS::IBufferProducer> producer = display_->streamCustomerPreview_->CreateProducer();
+    // producer->SetQueueSize(8); // 8:set bufferQueue size
 
-    std::vector<StreamInfo> streamInfos;
-    StreamInfo streamInfo = {};
-    streamInfo.streamId_ = display_->STREAM_ID_PREVIEW;
-    streamInfo.width_ = 320; // 320:picture width
-    streamInfo.height_ = 240; // 240:picture height
-    streamInfo.format_ = PIXEL_FMT_RGBA_8888;
-    streamInfo.dataspace_ = 8; // 8:picture dataspace
-    streamInfo.intent_ = PREVIEW;
-    streamInfo.tunneledMode_ = 5; // 5:tunnel mode
-    streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
-    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
-    std::vector<StreamInfo>().swap(streamInfos);
-    streamInfos.push_back(streamInfo);
-    display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
-    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
-    // Submit stream information
-    display_->rc = (CamRetCode)display_->streamOperator->CommitStreams(NORMAL, display_->ability_);
-    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+    // std::vector<StreamInfo> streamInfos;
+    // StreamInfo streamInfo = {};
+    // streamInfo.streamId_ = display_->STREAM_ID_PREVIEW;
+    // streamInfo.width_ = 320; // 320:picture width
+    // streamInfo.height_ = 240; // 240:picture height
+    // streamInfo.format_ = PIXEL_FMT_RGBA_8888;
+    // streamInfo.dataspace_ = 8; // 8:picture dataspace
+    // streamInfo.intent_ = PREVIEW;
+    // streamInfo.tunneledMode_ = 5; // 5:tunnel mode
+    // streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    // ASSERT_NE(streamInfo.bufferQueue_, nullptr);
+    // std::vector<StreamInfo>().swap(streamInfos);
+    // streamInfos.push_back(streamInfo);
+    // display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
+    // EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+    // // Submit stream information
+    // display_->rc = (CamRetCode)display_->streamOperator->CommitStreams(NORMAL, display_->ability_);
+    // EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
 
     // updateSettings
     const uint32_t ITEM_CAPACITY = 100;
@@ -832,30 +839,31 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0220, TestSize.Level1)
     // Create and get streamOperator information
     display_->AchieveStreamOperator();
     // Create data stream
-    if (display_->streamCustomerPreview_ == nullptr) {
-        display_->streamCustomerPreview_ = std::make_shared<StreamCustomer>();
-    }
-    OHOS::sptr<OHOS::IBufferProducer> producer = display_->streamCustomerPreview_->CreateProducer();
-    producer->SetQueueSize(8); // 8:set bufferQueue size
+    display_->StartStreamUpdate(176,144);
+    // if (display_->streamCustomerPreview_ == nullptr) {
+    //     display_->streamCustomerPreview_ = std::make_shared<StreamCustomer>();
+    // }
+    // OHOS::sptr<OHOS::IBufferProducer> producer = display_->streamCustomerPreview_->CreateProducer();
+    // producer->SetQueueSize(8); // 8:set bufferQueue size
 
-    std::vector<StreamInfo> streamInfos;
-    StreamInfo streamInfo = {};
-    streamInfo.streamId_ = display_->STREAM_ID_PREVIEW;
-    streamInfo.width_ = 176; // 176:picture width
-    streamInfo.height_ = 144; // 144:picture height
-    streamInfo.format_ = PIXEL_FMT_RGBA_8888;
-    streamInfo.dataspace_ = 8; // 8:picture dataspace
-    streamInfo.intent_ = PREVIEW;
-    streamInfo.tunneledMode_ = 5; // 5:tunnel mode
-    streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
-    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
-    std::vector<StreamInfo>().swap(streamInfos);
-    streamInfos.push_back(streamInfo);
-    display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
-    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
-    // Submit stream information
-    display_->rc = (CamRetCode)display_->streamOperator->CommitStreams(NORMAL, display_->ability_);
-    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+    // std::vector<StreamInfo> streamInfos;
+    // StreamInfo streamInfo = {};
+    // streamInfo.streamId_ = display_->STREAM_ID_PREVIEW;
+    // streamInfo.width_ = 176; // 176:picture width
+    // streamInfo.height_ = 144; // 144:picture height
+    // streamInfo.format_ = PIXEL_FMT_RGBA_8888;
+    // streamInfo.dataspace_ = 8; // 8:picture dataspace
+    // streamInfo.intent_ = PREVIEW;
+    // streamInfo.tunneledMode_ = 5; // 5:tunnel mode
+    // streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    // ASSERT_NE(streamInfo.bufferQueue_, nullptr);
+    // std::vector<StreamInfo>().swap(streamInfos);
+    // streamInfos.push_back(streamInfo);
+    // display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
+    // EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+    // // Submit stream information
+    // display_->rc = (CamRetCode)display_->streamOperator->CommitStreams(NORMAL, display_->ability_);
+    // EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
 
     // updateSettings
     const uint32_t ITEM_CAPACITY = 100;
@@ -898,30 +906,32 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0230, TestSize.Level1)
     // Create and get streamOperator information
     display_->AchieveStreamOperator();
     // Create data stream
-    if (display_->streamCustomerPreview_ == nullptr) {
-        display_->streamCustomerPreview_ = std::make_shared<StreamCustomer>();
-    }
-    OHOS::sptr<OHOS::IBufferProducer> producer = display_->streamCustomerPreview_->CreateProducer();
-    producer->SetQueueSize(8); // 8:set bufferQueue size
 
-    std::vector<StreamInfo> streamInfos;
-    StreamInfo streamInfo = {};
-    streamInfo.streamId_ = display_->STREAM_ID_PREVIEW;
-    streamInfo.width_ = 160; // 160:picture width
-    streamInfo.height_ = 120; // 120:picture height
-    streamInfo.format_ = PIXEL_FMT_RGBA_8888;
-    streamInfo.dataspace_ = 8; // 8:picture dataspace
-    streamInfo.intent_ = PREVIEW;
-    streamInfo.tunneledMode_ = 5; // 5:tunnel mode
-    streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
-    ASSERT_NE(streamInfo.bufferQueue_, nullptr);
-    std::vector<StreamInfo>().swap(streamInfos);
-    streamInfos.push_back(streamInfo);
-    display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
-    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
-    // Submit stream information
-    display_->rc = (CamRetCode)display_->streamOperator->CommitStreams(NORMAL, display_->ability_);
-    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+    display_->StartStreamUpdate(160,120);
+    // if (display_->streamCustomerPreview_ == nullptr) {
+    //     display_->streamCustomerPreview_ = std::make_shared<StreamCustomer>();
+    // }
+    // OHOS::sptr<OHOS::IBufferProducer> producer = display_->streamCustomerPreview_->CreateProducer();
+    // producer->SetQueueSize(8); // 8:set bufferQueue size
+
+    // std::vector<StreamInfo> streamInfos;
+    // StreamInfo streamInfo = {};
+    // streamInfo.streamId_ = display_->STREAM_ID_PREVIEW;
+    // streamInfo.width_ = 160; // 160:picture width
+    // streamInfo.height_ = 120; // 120:picture height
+    // streamInfo.format_ = PIXEL_FMT_RGBA_8888;
+    // streamInfo.dataspace_ = 8; // 8:picture dataspace
+    // streamInfo.intent_ = PREVIEW;
+    // streamInfo.tunneledMode_ = 5; // 5:tunnel mode
+    // streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
+    // ASSERT_NE(streamInfo.bufferQueue_, nullptr);
+    // std::vector<StreamInfo>().swap(streamInfos);
+    // streamInfos.push_back(streamInfo);
+    // display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
+    // EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+    // // Submit stream information
+    // display_->rc = (CamRetCode)display_->streamOperator->CommitStreams(NORMAL, display_->ability_);
+    // EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
 
     // updateSettings
     const uint32_t ITEM_CAPACITY = 100;

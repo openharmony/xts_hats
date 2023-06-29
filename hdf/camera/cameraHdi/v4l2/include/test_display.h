@@ -168,6 +168,7 @@ public:
     void StoreVideo(const unsigned char *bufStart, const uint32_t size) const;
     void OpenVideoFile();
     void PrintFaceDetectInfo(const unsigned char *bufStart, const uint32_t size) const;
+    void StartStreamUpdate(int wide, int hight);
     void CloseFd();
     int videoFd_ = -1;
 };

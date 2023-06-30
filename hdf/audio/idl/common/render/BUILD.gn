@@ -29,7 +29,7 @@ ohos_moduletest_suite("HatsHdfAudioIdlRenderTest") {
     "drivers_interface_audio:audio_idl_headers",
     "drivers_interface_audio:libaudio_proxy_1.0",
     "hdf_core:libhdf_utils",
-    "hiviewdfx_hilog_native:libhilog",
+    "hilog:libhilog",
   ]
 
   subsystem_name = "xts"

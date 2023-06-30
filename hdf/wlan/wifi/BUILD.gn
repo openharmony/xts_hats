@@ -40,7 +40,7 @@ ohos_moduletest_suite("HatsHdfWifiHdiTest") {
       "$base_root/drivers/peripheral/wlan/hal:wifi_hal",
       "c_utils:utils",
       "hdf_core:libhdf_utils",
-      "hiviewdfx_hilog_native:libhilog",
+      "hilog:libhilog",
     ]
   } else {
     external_deps = [ "hilog:libhilog" ]
@@ -81,7 +81,7 @@ ohos_moduletest_suite("HatsHdfWifiHdistartandstopTest") {
       "$base_root/drivers/peripheral/wlan/hal:wifi_hal",
       "c_utils:utils",
       "hdf_core:libhdf_utils",
-      "hiviewdfx_hilog_native:libhilog",
+      "hilog:libhilog",
     ]
   } else {
     external_deps = [ "hilog:libhilog" ]
@@ -122,7 +122,7 @@ ohos_moduletest_suite("HatsHdfWificlientTest") {
       "$base_root/drivers/peripheral/wlan/hal:wifi_hal",
       "c_utils:utils",
       "hdf_core:libhdf_utils",
-      "hiviewdfx_hilog_native:libhilog",
+      "hilog:libhilog",
     ]
   } else {
     external_deps = [ "hilog:libhilog" ]
@@ -168,7 +168,7 @@ ohos_moduletest_suite("HatsHdfWificommonTest") {
       "$base_root/drivers/peripheral/wlan/hal:wifi_hal",
       "c_utils:utils",
       "hdf_core:libhdf_utils",
-      "hiviewdfx_hilog_native:libhilog",
+      "hilog:libhilog",
     ]
   } else {
     external_deps = [ "hilog:libhilog" ]

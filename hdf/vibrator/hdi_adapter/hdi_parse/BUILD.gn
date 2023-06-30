@@ -29,7 +29,7 @@ ohos_moduletest_suite("HatsHdfVibratorParseTest") {
     "c_utils:utils",
     "drivers_interface_vibrator:libvibrator_proxy_1.1",
     "hdf_core:libhdf_utils",
-    "hiviewdfx_hilog_native:libhilog",
+    "hilog:libhilog",
     "init:libbegetutil",
     "ipc:ipc_single",
     "//third_party/googletest:gtest",

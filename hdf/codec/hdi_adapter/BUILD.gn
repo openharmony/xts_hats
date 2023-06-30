@@ -30,7 +30,7 @@ ohos_moduletest_suite("HatsHdfAdapterCodecTest") {
       "drivers_peripheral_codec:libcodec_hdi_passthrough_impl",
       "hdf_core:libhdf_utils",
       "hdf_core:libhdi",
-      "hiviewdfx_hilog_native:libhilog",
+      "hilog:libhilog",
     ]
   } else {
     external_deps = [ "hilog:libhilog" ]

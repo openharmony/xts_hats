@@ -20,7 +20,7 @@ ohos_moduletest_suite("HatsPurgeable") {
   sources = [ "./purgeable_cpp_test.cpp" ]
   external_deps = [
     "c_utils:utils",
-    "hilog_native:libhilog",
+    "hilog:libhilog",
     "memory_utils:libpurgeablemem",
   ]
   include_dirs = [ "include" ]

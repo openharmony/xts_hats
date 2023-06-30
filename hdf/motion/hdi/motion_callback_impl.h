@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-#ifndef OHOS_HDI_MOTION_V1_0_MOTIONCALLBACKSERVICE_H
-#define OHOS_HDI_MOTION_V1_0_MOTIONCALLBACKSERVICE_H
+#ifndef OHOS_HDI_MOTION_V1_0_MOTIONCALLBACKIMPL_H
+#define OHOS_HDI_MOTION_V1_0_MOTIONCALLBACKIMPL_H
 
 #include "v1_0/imotion_callback.h"
 #include "v1_0/motion_types.h"
@@ -23,10 +23,10 @@ namespace OHOS {
 namespace HDI {
 namespace Motion {
 namespace V1_0 {
-class MotionCallbackService : public IMotionCallback {
+class MotionCallbackImpl : public IMotionCallback {
 public:
-    MotionCallbackService() = default;
-    virtual ~MotionCallbackService() = default;
+    MotionCallbackImpl() = default;
+    virtual ~MotionCallbackImpl() = default;
     int32_t OnDataEvent(const HdfMotionEvent &event) override;
 };
 } // V1_0
@@ -34,4 +34,4 @@ public:
 } // HDI
 } // OHOS
 
-#endif // OHOS_HDI_MOTION_V1_0_MOTIONCALLBACKSERVICE_H
+#endif // OHOS_HDI_MOTION_V1_0_MOTIONCALLBACKIMPL_H

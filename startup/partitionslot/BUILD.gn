@@ -40,6 +40,6 @@ ohos_moduletest_suite("HatsStartupPartitionSlotTest") {
     "hdf_core:libhdf_ipc_adapter",
     "hdf_core:libhdf_utils",
     "hdf_core:libhdi",
-    "hiviewdfx_hilog_native:libhilog",
+    "hilog:libhilog",
   ]
 }

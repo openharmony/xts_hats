@@ -21,7 +21,7 @@
 #include <vector>
 #include "hdf_base.h"
 #include "osal_time.h"
-#include "v1_0/imotion_interface.h"
+#include "v1_1/imotion_interface.h"
 #include "motion_callback_impl.h"
 
 using namespace OHOS::HDI::Motion::V1_1;

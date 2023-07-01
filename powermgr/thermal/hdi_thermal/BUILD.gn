@@ -27,7 +27,7 @@ ohos_moduletest_suite("HatsPowermgrThermalTest") {
     "drivers_interface_thermal:libthermal_proxy_1.0",
     "drivers_interface_thermal:thermal_idl_headers",
     "hdf_core:libhdf_utils",
-    "hiviewdfx_hilog_native:libhilog",
+    "hilog:libhilog",
     "init:libbeget_proxy",
     "ipc:ipc_single",
   ]

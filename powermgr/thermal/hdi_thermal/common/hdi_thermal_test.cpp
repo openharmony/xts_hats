@@ -24,12 +24,12 @@
 
 #include "hdf_base.h"
 #include "osal_time.h"
-#include "v1_0/ithermal_interface.h"
-#include "v1_0/ithermal_callback.h"
-#include "v1_0/thermal_types.h"
+#include "v1_1/ithermal_interface.h"
+#include "v1_1/ithermal_callback.h"
+#include "v1_1/thermal_types.h"
 
 using namespace OHOS::HDI;
-using namespace OHOS::HDI::Thermal::V1_0;
+using namespace OHOS::HDI::Thermal::V1_1;
 using namespace testing::ext;
 
 namespace {

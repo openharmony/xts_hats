@@ -24,7 +24,7 @@ ohos_moduletest_suite("HatsPowermgrThermalTest") {
 
   external_deps = [
     "c_utils:utils",
-    "drivers_interface_thermal:libthermal_proxy_1.0",
+    "drivers_interface_thermal:libthermal_proxy_1.1",
     "drivers_interface_thermal:thermal_idl_headers",
     "hdf_core:libhdf_utils",
     "hilog:libhilog",

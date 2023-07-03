@@ -670,7 +670,7 @@ HWTEST_F(AudioUtRenderTest, RenderSetVolumeIsValid001, TestSize.Level1)
     float volume = 0.2;
     int32_t ret = render_->SetVolume(render_, volume);
 
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 } // end of namespace

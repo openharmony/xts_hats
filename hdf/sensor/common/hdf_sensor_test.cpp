@@ -634,3 +634,75 @@ HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0560, TestSize.Level1)
     int32_t ret = g_sensorDev->SetOption(ABNORMAL_SENSORID, 0);
     EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
 }
+
+/**
+  * @tc.name: ReadSensorData001
+  * @tc.desc: Read event data for the specified sensor.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0570, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_sensorDev);
+
+    g_sensorEvents = (struct SensorEvents*)OsalMemCalloc(sizeof(*g_sensorEvents));
+    ASSERT_NE(nullptr, g_sensorEvents);
+    g_sensorEvents->data = (uint8_t *)OsalMemCalloc(SENSOR_DATA_LEN);
+    ASSERT_NE(nullptr, g_sensorEvents->data);
+    g_sensorEvents->dataLen = SENSOR_DATA_LEN;
+
+    int32_t ret = g_sensorDev->Enable(SENSOR_TYPE_AMBIENT_LIGHT);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+    ret = g_sensorDev->ReadData(SENSOR_TYPE_AMBIENT_LIGHT, g_sensorEvents);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+
+    printf("sensorId[%d], mode[%d], option[%u]\n\r",
+        g_sensorEvents->sensorId, g_sensorEvents->mode, g_sensorEvents->option);
+    for (int32_t i = 0; i < g_listNum; i++) {
+        if (g_sensorEvents->sensorId == g_sensorList[i].sensorTypeId) {
+            float *data = reinterpret_cast<float*>(g_sensorEvents->data);
+            SensorDataVerification(*data, g_sensorList[i]);
+        }
+    }
+
+    ret = g_sensorDev->Disable(SENSOR_TYPE_AMBIENT_LIGHT);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+
+    OsalMemFree(g_sensorEvents->data);
+    OsalMemFree(g_sensorEvents);
+}
+
+/**
+  * @tc.name: ReadSensorData002
+  * @tc.desc: Read event data for the specified sensor.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0580, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_sensorDev);
+
+    int32_t ret = g_sensorDev->ReadData(SENSOR_TYPE_AMBIENT_LIGHT, nullptr);
+    EXPECT_EQ(SENSOR_NULL_PTR, ret);
+}
+
+/**
+  * @tc.name: ReadSensorData003
+  * @tc.desc: Read event data for the specified sensor.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorTest, SUB_DriverSystem_HdiSensor_0590, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_sensorDev);
+
+    g_sensorEvents = (struct SensorEvents*)OsalMemCalloc(sizeof(*g_sensorEvents));
+    ASSERT_NE(nullptr, g_sensorEvents);
+    g_sensorEvents->data = (uint8_t *)OsalMemCalloc(SENSOR_DATA_LEN);
+    ASSERT_NE(nullptr, g_sensorEvents->data);
+    g_sensorEvents->dataLen = SENSOR_DATA_LEN;
+
+    int32_t ret = g_sensorDev->ReadData(ABNORMAL_SENSORID, g_sensorEvents);
+    EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
+
+    OsalMemFree(g_sensorEvents->data);
+    OsalMemFree(g_sensorEvents);
+}
+

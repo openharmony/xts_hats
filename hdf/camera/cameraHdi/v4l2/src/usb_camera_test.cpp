@@ -787,7 +787,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0230, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, camera_usb_0025, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0250, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         GTEST_SKIP() << "No usb camera plugged in" << std::endl;
@@ -821,4 +821,3 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0260, TestSize.Level1)
     EXPECT_EQ(ret, CAM_META_SUCCESS);
     std::cout << "OHOS_JPEG_ORIENTATION value is " << static_cast<int>(entry.data.u8[0]) << std::endl;
 }
-

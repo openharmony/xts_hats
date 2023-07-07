@@ -70,7 +70,7 @@ HWTEST_F(BuilderTest, NormalTest, TestSize.Level0)
 
     std::unique_ptr<StreamPipelineBuilder> b = StreamPipelineBuilder::Create(streamMgr);
     EXPECT_TRUE(b != nullptr);
-    std::shared_ptr<Pipeline> pipeline = b->Build(spec_);
+    std::shared_ptr<Pipeline> pipeline = b->Build(spec_, "lcam001");
     EXPECT_TRUE(pipeline != nullptr);
 }
 
@@ -85,7 +85,7 @@ HWTEST_F(BuilderTest, AbNormalTest, TestSize.Level0)
                 }, nullptr);
     std::unique_ptr<StreamPipelineBuilder> b = StreamPipelineBuilder::Create(streamMgr);
     EXPECT_TRUE(b != nullptr);
-    std::shared_ptr<Pipeline> pipeline = b->Build(spec_);
+    std::shared_ptr<Pipeline> pipeline = b->Build(spec_, "lcam001");
     EXPECT_TRUE(pipeline == nullptr);
 }
 }

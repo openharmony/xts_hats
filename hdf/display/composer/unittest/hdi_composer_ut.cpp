@@ -783,3 +783,616 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0330, TestSize.Level1)
     ret = VblankCtr::GetInstance().WaitVblank(SLEEP_CONT_2000); // 2000ms
     ASSERT_TRUE(ret != DISPLAY_SUCCESS) << "vblank do not disable";
 }
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0340, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = RED
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    PrepareAndPrensent();
+
+    auto layer = layers[0];
+
+    TransformType type = TransformType::MIRROR_H;
+    auto ret = g_composerDevice->SetLayerTransformMode(g_displayIds[0], layer->GetId(), type);
+    PrepareAndPrensent();
+
+    type = TransformType::MIRROR_V;
+    ret = g_composerDevice->SetLayerTransformMode(g_displayIds[0], layer->GetId(), type);
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0350, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = RED
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    PrepareAndPrensent();
+
+    auto layer = layers[0];
+
+    TransformType type = TransformType::MIRROR_H_ROTATE_90;
+    auto ret = g_composerDevice->SetLayerTransformMode(g_displayIds[0], layer->GetId(), type);
+    PrepareAndPrensent();
+
+    type = TransformType::MIRROR_V_ROTATE_90;
+    ret = g_composerDevice->SetLayerTransformMode(g_displayIds[0], layer->GetId(), type);
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0360, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = RED
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    PrepareAndPrensent();
+
+    auto layer = layers[0];
+
+    TransformType type = TransformType::ROTATE_BUTT;
+    auto ret = g_composerDevice->SetLayerTransformMode(g_displayIds[0], layer->GetId(), type);
+    PrepareAndPrensent();
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0370, TestSize.Level1)
+{
+    auto ret = g_composerDevice->SetDisplayPowerStatus(g_displayIds[0], DispPowerStatus::POWER_STATUS_SUSPEND);
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+
+    ret = g_composerDevice->SetDisplayPowerStatus(g_displayIds[0], DispPowerStatus::POWER_STATUS_BUTT);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0380, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = GREEN
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    BlendType type = BlendType::BLEND_CLEAR;
+    auto ret = g_composerDevice->SetLayerBlendType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0390, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = GREEN
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    BlendType type = BlendType::BLEND_SRC;
+    auto ret = g_composerDevice->SetLayerBlendType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0400, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = GREEN
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    BlendType type = BlendType::BLEND_SRCOVER;
+    auto ret = g_composerDevice->SetLayerBlendType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0410, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = GREEN
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    BlendType type = BlendType::BLEND_DSTOVER;
+    auto ret = g_composerDevice->SetLayerBlendType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0420, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = GREEN
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    BlendType type = BlendType::BLEND_SRCIN;
+    auto ret = g_composerDevice->SetLayerBlendType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0430, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = GREEN
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    BlendType type = BlendType::BLEND_DSTIN;
+    auto ret = g_composerDevice->SetLayerBlendType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0440, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = GREEN
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    BlendType type = BlendType::BLEND_SRCOUT;
+    auto ret = g_composerDevice->SetLayerBlendType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0450, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = GREEN
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    BlendType type = BlendType::BLEND_DSTOUT;
+    auto ret = g_composerDevice->SetLayerBlendType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0460, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = GREEN
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    BlendType type = BlendType::BLEND_SRCATOP;
+    auto ret = g_composerDevice->SetLayerBlendType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0470, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = GREEN
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    BlendType type = BlendType::BLEND_DSTATOP;
+    auto ret = g_composerDevice->SetLayerBlendType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0480, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = GREEN
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    BlendType type = BlendType::BLEND_ADD;
+    auto ret = g_composerDevice->SetLayerBlendType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0490, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = GREEN
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    BlendType type = BlendType::BLEND_XOR;
+    auto ret = g_composerDevice->SetLayerBlendType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0500, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = GREEN
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    BlendType type = BlendType::BLEND_DST;
+    auto ret = g_composerDevice->SetLayerBlendType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0510, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = GREEN
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    BlendType type = BlendType::BLEND_AKS;
+    auto ret = g_composerDevice->SetLayerBlendType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0520, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = GREEN
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    BlendType type = BlendType::BLEND_AKD;
+    auto ret = g_composerDevice->SetLayerBlendType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0530, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = GREEN
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    BlendType type = BlendType::BLEND_BUTT;
+    auto ret = g_composerDevice->SetLayerBlendType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0540, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = GREEN
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    MaskInfo maskInfo = MaskInfo::LAYER_NORAML;
+    auto ret = g_composerDevice->SetLayerMaskInfo(g_displayIds[0], layer->GetId(), maskInfo);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0550, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = BLUE
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    CompositionType type = CompositionType::COMPOSITION_DEVICE;
+    auto ret = g_composerDevice->SetLayerCompositionType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0560, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = BLUE
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    CompositionType type = CompositionType::COMPOSITION_CURSOR;
+    auto ret = g_composerDevice->SetLayerCompositionType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0570, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = BLUE
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    CompositionType type = CompositionType::COMPOSITION_VIDEO;
+    auto ret = g_composerDevice->SetLayerCompositionType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0580, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = BLUE
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    CompositionType type = CompositionType::COMPOSITION_DEVICE_CLEAR;
+    auto ret = g_composerDevice->SetLayerCompositionType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0590, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = BLUE
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    CompositionType type = CompositionType::COMPOSITION_CLIENT_CLEAR;
+    auto ret = g_composerDevice->SetLayerCompositionType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0600, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = BLUE
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    CompositionType type = CompositionType::COMPOSITION_TUNNEL;
+    auto ret = g_composerDevice->SetLayerCompositionType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0610, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = BLUE
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    auto layer = layers[0];
+
+    CompositionType type = CompositionType::COMPOSITION_BUTT;
+    auto ret = g_composerDevice->SetLayerCompositionType(g_displayIds[0], layer->GetId(), type);
+
+    PrepareAndPrensent();
+
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}

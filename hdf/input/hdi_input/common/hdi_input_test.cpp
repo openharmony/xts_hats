@@ -81,7 +81,7 @@ void HdiInputTest::SetUpTestCase()
 
 void HdiInputTest::TearDownTestCase()
 {
-    ReleaseInputInterface(g_inputInterface);
+    ReleaseInputInterface(&g_inputInterface);
 }
 
 void HdiInputTest::SetUp()

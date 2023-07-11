@@ -53,10 +53,7 @@ void HdiInputTest::SetUpTestCase()
 
 void HdiInputTest::TearDownTestCase()
 {
-    if (g_inputInterface != nullptr) {
-        free(g_inputInterface);
-        g_inputInterface = nullptr;
-    }
+    ReleaseInputInterface(&g_inputInterface);
 }
 
 void HdiInputTest::SetUp()

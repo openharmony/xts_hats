@@ -22,6 +22,7 @@ group("HatsHdfCodecTest") {
     deps = [
       #"benchmarktest:HatsHdfCodecBenchmarkTest",
       "hdi_adapter:HatsHdfAdapterCodecTest",
+      "hdi_image:HatsHdfImageCodecTest",
       "hdi_omx:HatsHdfOmxCodecTest",
       "hdi_v1.0:HatsHdfV1CodecTest",
     ]

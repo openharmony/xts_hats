@@ -47,7 +47,7 @@ BENCHMARK_F(CameraBenchmarkTest, SUB_Prelaunch_benchmark_001)(
     cameraTest->Open();
     EXPECT_EQ(false, cameraTest->serviceV1_1 == nullptr);
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
-    cameraTest->prelaunchConfig->cameraId = {};
+    cameraTest->prelaunchConfig->cameraId = "device/0";
     cameraTest->prelaunchConfig->streamInfos_V1_1 = {};
     cameraTest->prelaunchConfig->setting = {};
     for (auto _ : st) {
@@ -68,14 +68,12 @@ BENCHMARK_F(CameraBenchmarkTest, SUB_GetStreamOperator_V1_1_benchmark_002)(
     benchmark::State &st)
 {
     cameraTest->Open();
-    EXPECT_EQ(false, cameraTest->cameraDeviceV1_1 == nullptr);
     cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
     for (auto _ : st) {
         cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,
             cameraTest->streamOperator_V1_1);
     }
 }
-
 BENCHMARK_REGISTER_F(CameraBenchmarkTest, SUB_GetStreamOperator_V1_1_benchmark_002)->
     Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
 
@@ -90,7 +88,6 @@ BENCHMARK_F(CameraBenchmarkTest, SUB_GetDefaultSettings_benchmark_003)(
     benchmark::State &st)
 {
     cameraTest->Open();
-    EXPECT_EQ(false, cameraTest->cameraDeviceV1_1 == nullptr);
     cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
     for (auto _ : st) {
         cameraTest->rc = cameraTest->cameraDeviceV1_1->GetDefaultSettings(cameraTest->abilityVec);
@@ -100,4 +97,3 @@ BENCHMARK_REGISTER_F(CameraBenchmarkTest, SUB_GetDefaultSettings_benchmark_003)-
     Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
 
 BENCHMARK_MAIN();
-

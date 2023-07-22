@@ -831,7 +831,6 @@ BENCHMARK_F(CameraBenchmarkTest, SUB_OfflineReleaseStreams_benchmark_0010)(
     cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
     cameraTest->rc = cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback,
         cameraTest->streamOperator);
-
     cameraTest->streamInfo = std::make_shared<StreamInfo>();
     cameraTest->streamInfo->streamId_ = 101;
     cameraTest->streamInfo->width_ = 720;

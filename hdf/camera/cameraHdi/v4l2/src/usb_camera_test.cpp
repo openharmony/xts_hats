@@ -436,15 +436,15 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0140, TestSize.Level1)
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
     } else if (usbCameraExit_) {
-       ability_ = display_->GetCameraAbility();
-       EXPECT_NE(ability_, nullptr);
-       common_metadata_header_t *data = ability_->get();
-       camera_metadata_item_t entry;
-       int ret = FindCameraMetadataItem(data, OHOS_ABILITY_FPS_RANGES, &entry);
-       EXPECT_EQ(ret, CAM_META_SUCCESS);
-       std::cout << "supported fps ranges list: [";
-       std::cout << static_cast<int>(entry.data.i32[0]) << "," << static_cast<int>(entry.data.i32[1]) << "]";
-       std::cout << std::endl;
+        ability_ = display_->GetCameraAbility();
+        EXPECT_NE(ability_, nullptr);
+        common_metadata_header_t *data = ability_->get();
+        camera_metadata_item_t entry;
+        int ret = FindCameraMetadataItem(data, OHOS_ABILITY_FPS_RANGES, &entry);
+        EXPECT_EQ(ret, CAM_META_SUCCESS);
+        std::cout << "supported fps ranges list: [";
+        std::cout << static_cast<int>(entry.data.i32[0]) << "," << static_cast<int>(entry.data.i32[1]) << "]";
+        std::cout << std::endl;
     }
 }
 
@@ -594,35 +594,33 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0190, TestSize.Level1)
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
     } else if (usbCameraExit_) {
-       // Get the device manager
-       display_->OpenUsbCamera();
-       // Create and get streamOperator information
-       display_->AchieveStreamOperator();
-       // Create data stream
-       display_->StartStreamUpdate(800,600);
-       // updateSettings
-       const uint32_t ITEM_CAPACITY = 100;
-       const uint32_t DATA_CAPACITY = 2000;
-       const int32_t FPS_VALUE = 10;// 10:fps
-       std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(
-           ITEM_CAPACITY, DATA_CAPACITY);
-       std::vector<int32_t> fpsRange;
-       fpsRange.push_back(FPS_VALUE);
-       fpsRange.push_back(FPS_VALUE);
-       meta->addEntry(OHOS_CONTROL_FPS_RANGES, fpsRange.data(), fpsRange.size());
-       const int32_t DEVICE_STREAM_ID = 0;
-       meta->addEntry(OHOS_CAMERA_STREAM_ID, &DEVICE_STREAM_ID, 1);
-       std::vector<uint8_t> setting;
-       MetadataUtils::ConvertMetadataToVec(meta, setting);
-       display_->rc = (CamRetCode)display_->cameraDevice->UpdateSettings(setting);
-       EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+        display_->OpenUsbCamera();
+        // Create and get streamOperator information
+        display_->AchieveStreamOperator();
+        // Create data stream
+        display_->StartStreamUpdate(800,600);
+        // updateSettings
+        const uint32_t ITEM_CAPACITY = 100;
+        const uint32_t DATA_CAPACITY = 2000;
+        const int32_t FPS_VALUE = 10;// 10:fps
+        std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+        std::vector<int32_t> fpsRange;
+        fpsRange.push_back(FPS_VALUE);
+        fpsRange.push_back(FPS_VALUE);
+        meta->addEntry(OHOS_CONTROL_FPS_RANGES, fpsRange.data(), fpsRange.size());
+        const int32_t DEVICE_STREAM_ID = 0;
+        meta->addEntry(OHOS_CAMERA_STREAM_ID, &DEVICE_STREAM_ID, 1);
+        std::vector<uint8_t> setting;
+        MetadataUtils::ConvertMetadataToVec(meta, setting);
+        display_->rc = (CamRetCode)display_->cameraDevice->UpdateSettings(setting);
+        EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
 
-       // capture
-       display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
-       // release stream
-       display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
-       display_->streamIds = {display_->STREAM_ID_PREVIEW};
-       display_->StopStream(display_->captureIds, display_->streamIds);
+        // capture
+        display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
+        // release stream
+        display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
+        display_->streamIds = {display_->STREAM_ID_PREVIEW};
+        display_->StopStream(display_->captureIds, display_->streamIds);
     }
 }
 

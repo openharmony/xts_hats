@@ -12,13 +12,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include "common.h"
 
-class DeviceAbilityUtTest : public testing::Test {
+#ifndef CAMERA_BENCHMARK_TEST_H
+#define CAMERA_BENCHMARK_TEST_H
+
+#include <benchmark/benchmark.h>
+#include <gtest/gtest.h>
+#include <string>
+#include <vector>
+#include "ut_common.h"
+
+class CameraBenchmarkTest : public benchmark::Fixture {
 public:
-    static void SetUpTestCase(void);
-    static void TearDownTestCase(void);
-    void SetUp(void);
-    void TearDown(void);
+    void SetUp(const ::benchmark::State &state);
+    void TearDown(const ::benchmark::State &state);
     std::shared_ptr<OHOS::Camera::Test> cameraTest = nullptr;
 };
+#endif

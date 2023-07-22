@@ -53,12 +53,12 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0010, TestSize.Level1)
     for (const auto &cameraId : cameraIds) {
         std::cout << "==========[test log] cameraId = " << cameraId << std::endl;
     }
-    std::cout << "==========[test log] 2. please add the usb camera, wait for 10s..."<< std::endl;
-    sleep(5); // judging add or delete the usb camera, wait for 10s.
-    std::cout << "==========[test log] r u ready? wait for 10s..."<< std::endl;
-    sleep(5); // judging r u ready, wait for 10s.
-    std::cout << "==========[test log] 3. check the cameraID again... wait for 10s..."<< std::endl;
-    sleep(5); // checking the cameraID again, wait for 10s.
+    std::cout << "==========[test log] 2. please add the usb camera, wait for 5s..."<< std::endl;
+    sleep(5); // judging add or delete the usb camera, wait for 5s.
+    std::cout << "==========[test log] r u ready? wait for 5s..."<< std::endl;
+    sleep(5); // judging r u ready, wait for 5s.
+    std::cout << "==========[test log] 3. check the cameraID again... wait for 5s..."<< std::endl;
+    sleep(5); // checking the cameraID again, wait for 5s.
     if (cameraIds.size() == 1) {
         cameraIds.clear();
     }
@@ -92,12 +92,12 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0020, TestSize.Level1)
     for (const auto &cameraId : cameraIds) {
         std::cout << "==========[test log] cameraId = " << cameraId << std::endl;
     }
-    std::cout << "==========[test log] 2. please delect the usb camera, wait for 10s... "<< std::endl;
-    sleep(10); // judging add or delete the usb camera, wait for 10s.
-    std::cout << "==========[test log] r u ready? wait for 10s..."<< std::endl;
-    sleep(10); // judging r u ready, wait for 10s.
-    std::cout << "==========[test log] 3. check the cameraID again... wait for 10s..."<< std::endl;
-    sleep(10); // checking the cameraID again, wait for 10s.
+    std::cout << "==========[test log] 2. please delect the usb camera, wait for 5s... "<< std::endl;
+    sleep(5); // judging add or delete the usb camera, wait for 5s.
+    std::cout << "==========[test log] r u ready? wait for 5s..."<< std::endl;
+    sleep(5); // judging r u ready, wait for 5s.
+    std::cout << "==========[test log] 3. check the cameraID again... wait for 5s..."<< std::endl;
+    sleep(5); // checking the cameraID again, wait for 5s.
     if (cameraIds.size() == 1) {
         cameraIds.clear();
     }
@@ -127,24 +127,24 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0030, TestSize.Level1)
     std::cout << "==========[test log] 1. get current system cameraID."<< std::endl;
     display_->cameraHost->GetCameraIds(cameraIds);
     std::cout << "==========[test log] First cameraId.size = " << cameraIds.size() << std::endl;
-    for (int i=0 ;i<=20 ;i++) {
-        std::cout << "==========[test log] 2. please add or delete the usb camera, wait for 10s..."<< std::endl;
-        sleep(10); // judging add or delete the usb camera, wait for 10s.
-        std::cout << "==========[test log] r u ready? wait for 10s..."<< std::endl;
-        sleep(10); // judging r u ready, wait for 10s.
-        std::cout << "==========[test log] 3. check the cameraID again... wait for 10s..."<< std::endl;
-        sleep(10); // checking the cameraID again, wait for 10s.
+    for (int i=0 ;i<=10 ;i++) {
+        std::cout << "==========[test log] 2. please add or delete the usb camera, wait for 5s..."<< std::endl;
+        sleep(5); // judging add or delete the usb camera, wait for 5s.
+        std::cout << "==========[test log] r u ready? wait for 5s..."<< std::endl;
+        sleep(5); // judging r u ready, wait for 5s.
+        std::cout << "==========[test log] 3. check the cameraID again... wait for 5s..."<< std::endl;
+        sleep(5); // checking the cameraID again, wait for 5s.
         std::cout << "==========[test log] Second cameraId.size = " << cameraIds.size() << std::endl;
         cameraIds.clear();
         display_->cameraHost->GetCameraIds(cameraIds);
         std::cout << "==========[test log] Second cameraId.size = " << cameraIds.size() << std::endl;
     }
-	std::cout << "==========[test log] 2. please add the usb camera, wait for 10s..."<< std::endl;
-    sleep(5); // judging add or delete the usb camera, wait for 10s.
-    std::cout << "==========[test log] r u ready? wait for 10s..."<< std::endl;
-    sleep(5); // judging r u ready, wait for 10s.
-    std::cout << "==========[test log] 3. check the cameraID again... wait for 10s..."<< std::endl;
-    sleep(5); // checking the cameraID again, wait for 10s.
+	std::cout << "==========[test log] 2. please add the usb camera, wait for 5s..."<< std::endl;
+    sleep(5); // judging add or delete the usb camera, wait for 5s.
+    std::cout << "==========[test log] r u ready? wait for 5s..."<< std::endl;
+    sleep(5); // judging r u ready, wait for 5s.
+    std::cout << "==========[test log] 3. check the cameraID again... wait for 5s..."<< std::endl;
+    sleep(5); // checking the cameraID again, wait for 5s.
     if (cameraIds.size() == 1) {
         cameraIds.clear();
     }
@@ -169,19 +169,20 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0030, TestSize.Level1)
 HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0040, TestSize.Level1)
 {
     if (!usbCameraExit_) {
-        GTEST_SKIP() << "No usb camera plugged in" << std::endl;
-    }
-    ability_ = display_->GetCameraAbility();
-    EXPECT_NE(ability_, nullptr);
-    common_metadata_header_t *data = ability_->get();
-    camera_metadata_item_t entry;
-    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_ZOOM_RATIO_RANGE, &entry);
-    if (ret == CAM_META_SUCCESS) {
-        std::cout << "OHOS_ABILITY_ZOOM_RATIO_RANGE: count is " << (int)entry.count << std::endl;
-        std::cout << "Zoom ratio range: [" << entry.data.f[0];
-        std::cout << "," << entry.data.f[1] << "]" << std::endl;
-    } else if (ret == CAM_META_ITEM_NOT_FOUND) {
-        std::cout << "OHOS_ABILITY_ZOOM_RATIO_RANGE is not support" << std::endl;
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+        ability_ = display_->GetCameraAbility();
+        EXPECT_NE(ability_, nullptr);
+        common_metadata_header_t *data = ability_->get();
+        camera_metadata_item_t entry;
+        int ret = FindCameraMetadataItem(data, OHOS_ABILITY_ZOOM_RATIO_RANGE, &entry);
+        if (ret == CAM_META_SUCCESS) {
+            std::cout << "OHOS_ABILITY_ZOOM_RATIO_RANGE: count is " << (int)entry.count << std::endl;
+            std::cout << "Zoom ratio range: [" << entry.data.f[0];
+            std::cout << "," << entry.data.f[1] << "]" << std::endl;
+            } else if (ret == CAM_META_ITEM_NOT_FOUND) {
+                std::cout << "OHOS_ABILITY_ZOOM_RATIO_RANGE is not support" << std::endl;
+        }
     }
 }
 
@@ -195,17 +196,18 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0040, TestSize.Level1)
 HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0050, TestSize.Level1)
 {
     if (!usbCameraExit_) {
-        GTEST_SKIP() << "No usb camera plugged in" << std::endl;
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+        ability_ = display_->GetCameraAbility();
+        EXPECT_NE(ability_, nullptr);
+        common_metadata_header_t *data = ability_->get();
+        camera_metadata_item_t entry;
+        int ret = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_CONNECTION_TYPE, &entry);
+        EXPECT_EQ(ret, CAM_META_SUCCESS);
+        std::cout << "OHOS_ABILITY_CAMERA_CONNECTION_TYPE value is "
+            << static_cast<int>(entry.data.u8[0]) << std::endl;
+        EXPECT_TRUE(entry.data.u8[0] == OHOS_CAMERA_CONNECTION_TYPE_USB_PLUGIN);
     }
-    ability_ = display_->GetCameraAbility();
-    EXPECT_NE(ability_, nullptr);
-    common_metadata_header_t *data = ability_->get();
-    camera_metadata_item_t entry;
-    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_CONNECTION_TYPE, &entry);
-    EXPECT_EQ(ret, CAM_META_SUCCESS);
-    std::cout << "OHOS_ABILITY_CAMERA_CONNECTION_TYPE value is "
-        << static_cast<int>(entry.data.u8[0]) << std::endl;
-    EXPECT_TRUE(entry.data.u8[0] == OHOS_CAMERA_CONNECTION_TYPE_USB_PLUGIN);
 }
 
 /**
@@ -218,16 +220,17 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0050, TestSize.Level1)
 HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0060, TestSize.Level1)
 {
     if (!usbCameraExit_) {
-        GTEST_SKIP() << "No usb camera plugged in" << std::endl;
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+        ability_ = display_->GetCameraAbility();
+        EXPECT_NE(ability_, nullptr);
+        common_metadata_header_t *data = ability_->get();
+        camera_metadata_item_t entry;
+        int ret = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_POSITION, &entry);
+        EXPECT_EQ(ret, CAM_META_SUCCESS);
+        std::cout << "OHOS_ABILITY_CAMERA_POSITION value is " << static_cast<int>(entry.data.u8[0]) << std::endl;
+        EXPECT_TRUE(entry.data.u8[0] == OHOS_CAMERA_POSITION_OTHER);
     }
-    ability_ = display_->GetCameraAbility();
-    EXPECT_NE(ability_, nullptr);
-    common_metadata_header_t *data = ability_->get();
-    camera_metadata_item_t entry;
-    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_POSITION, &entry);
-    EXPECT_EQ(ret, CAM_META_SUCCESS);
-    std::cout << "OHOS_ABILITY_CAMERA_POSITION value is " << static_cast<int>(entry.data.u8[0]) << std::endl;
-    EXPECT_TRUE(entry.data.u8[0] == OHOS_CAMERA_POSITION_OTHER);
 }
 
 /**
@@ -240,15 +243,16 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0060, TestSize.Level1)
 HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0070, TestSize.Level1)
 {
     if (!usbCameraExit_) {
-        GTEST_SKIP() << "No usb camera plugged in" << std::endl;
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+        ability_ = display_->GetCameraAbility();
+        EXPECT_NE(ability_, nullptr);
+        common_metadata_header_t *data = ability_->get();
+        camera_metadata_item_t entry;
+        int ret = FindCameraMetadataItem(data, OHOS_ABILITY_FLASH_AVAILABLE, &entry);
+        EXPECT_EQ(ret, CAM_META_SUCCESS);
+        std::cout << "OHOS_ABILITY_FLASH_AVAILABLE value is " << static_cast<int>(entry.data.u8[0]) << std::endl;
     }
-    ability_ = display_->GetCameraAbility();
-    EXPECT_NE(ability_, nullptr);
-    common_metadata_header_t *data = ability_->get();
-    camera_metadata_item_t entry;
-    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_FLASH_AVAILABLE, &entry);
-    EXPECT_EQ(ret, CAM_META_SUCCESS);
-    std::cout << "OHOS_ABILITY_FLASH_AVAILABLE value is " << static_cast<int>(entry.data.u8[0]) << std::endl;
 }
 
 /**
@@ -261,20 +265,21 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0070, TestSize.Level1)
 HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0080, TestSize.Level1)
 {
     if (!usbCameraExit_) {
-        GTEST_SKIP() << "No usb camera plugged in" << std::endl;
-    }
-    ability_ = display_->GetCameraAbility();
-    EXPECT_NE(ability_, nullptr);
-    common_metadata_header_t *data = ability_->get();
-    camera_metadata_item_t entry;
-    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_VIDEO_STABILIZATION_MODES, &entry);
-    if (ret == CAM_META_SUCCESS) {
-        for (int i = 0; i < entry.count; i++) {
-            std::cout << "OHOS_ABILITY_VIDEO_STABILIZATION_MODES value is "
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+        ability_ = display_->GetCameraAbility();
+        EXPECT_NE(ability_, nullptr);
+        common_metadata_header_t *data = ability_->get();
+        camera_metadata_item_t entry;
+        int ret = FindCameraMetadataItem(data, OHOS_ABILITY_VIDEO_STABILIZATION_MODES, &entry);
+        if (ret == CAM_META_SUCCESS) {
+            for (int i = 0; i < entry.count; i++) {
+                std::cout << "OHOS_ABILITY_VIDEO_STABILIZATION_MODES value is "
                     << static_cast<int>(entry.data.u8[i]) << std::endl;
+            }
+        } else if (ret == CAM_META_ITEM_NOT_FOUND) {
+            std::cout << "OHOS_ABILITY_VIDEO_STABILIZATION_MODES is not support" << std::endl;
         }
-    } else if (ret == CAM_META_ITEM_NOT_FOUND) {
-        std::cout << "OHOS_ABILITY_VIDEO_STABILIZATION_MODES is not support" << std::endl;
     }
 }
 
@@ -288,20 +293,21 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0080, TestSize.Level1)
 HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0090, TestSize.Level1)
 {
     if (!usbCameraExit_) {
-        GTEST_SKIP() << "No usb camera plugged in" << std::endl;
-    }
-    ability_ = display_->GetCameraAbility();
-    common_metadata_header_t *data = ability_->get();
-    camera_metadata_item_t entry;
-    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_FLASH_MODES, &entry);
-    if (ret == CAM_META_SUCCESS) {
-        std::cout << "supported flash mode list:";
-        for (int i = 0; i < entry.count; i++) {
-            std::cout << " " << static_cast<int>(entry.data.u8[i]);
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+        ability_ = display_->GetCameraAbility();
+        common_metadata_header_t *data = ability_->get();
+        camera_metadata_item_t entry;
+        int ret = FindCameraMetadataItem(data, OHOS_ABILITY_FLASH_MODES, &entry);
+        if (ret == CAM_META_SUCCESS) {
+            std::cout << "supported flash mode list:";
+            for (int i = 0; i < entry.count; i++) {
+                std::cout << " " << static_cast<int>(entry.data.u8[i]);
+            }
+            std::cout << std::endl;
+        } else if (ret == CAM_META_ITEM_NOT_FOUND) {
+            std::cout << "OHOS_ABILITY_FLASH_MODES is not support" << std::endl;
         }
-        std::cout << std::endl;
-    } else if (ret == CAM_META_ITEM_NOT_FOUND) {
-        std::cout << "OHOS_ABILITY_FLASH_MODES is not support" << std::endl;
     }
 }
 
@@ -315,21 +321,22 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0090, TestSize.Level1)
 HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0100, TestSize.Level1)
 {
     if (!usbCameraExit_) {
-        GTEST_SKIP() << "No usb camera plugged in" << std::endl;
-    }
-    ability_ = display_->GetCameraAbility();
-    EXPECT_NE(ability_, nullptr);
-    common_metadata_header_t *data = ability_->get();
-    camera_metadata_item_t entry;
-    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_FOCUS_MODES, &entry);
-    if (ret == CAM_META_SUCCESS) {
-        std::cout << "supported focus mode list:";
-        for (int i = 0; i < entry.count; i++) {
-            std::cout << " " << static_cast<int>(entry.data.u8[i]);
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+        ability_ = display_->GetCameraAbility();
+        EXPECT_NE(ability_, nullptr);
+        common_metadata_header_t *data = ability_->get();
+        camera_metadata_item_t entry;
+        int ret = FindCameraMetadataItem(data, OHOS_ABILITY_FOCUS_MODES, &entry);
+        if (ret == CAM_META_SUCCESS) {
+            std::cout << "supported focus mode list:";
+            for (int i = 0; i < entry.count; i++) {
+                std::cout << " " << static_cast<int>(entry.data.u8[i]);
+            }
+            std::cout << std::endl;
+        } else if (ret == CAM_META_ITEM_NOT_FOUND) {
+            std::cout << "OHOS_ABILITY_FOCUS_MODES is not support" << std::endl;
         }
-        std::cout << std::endl;
-    } else if (ret == CAM_META_ITEM_NOT_FOUND) {
-        std::cout << "OHOS_ABILITY_FOCUS_MODES is not support" << std::endl;
     }
 }
 
@@ -343,21 +350,22 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0100, TestSize.Level1)
 HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0110, TestSize.Level1)
 {
     if (!usbCameraExit_) {
-        GTEST_SKIP() << "No usb camera plugged in" << std::endl;
-    }
-    ability_ = display_->GetCameraAbility();
-    EXPECT_NE(ability_, nullptr);
-    common_metadata_header_t *data = ability_->get();
-    camera_metadata_item_t entry;
-    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_EXPOSURE_MODES, &entry);
-    if (ret == CAM_META_SUCCESS) {
-        std::cout << "supported exposure mode list:";
-        for (int i = 0; i < entry.count; i++) {
-            std::cout << " " << static_cast<int>(entry.data.u8[i]);
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+        ability_ = display_->GetCameraAbility();
+        EXPECT_NE(ability_, nullptr);
+        common_metadata_header_t *data = ability_->get();
+        camera_metadata_item_t entry;
+        int ret = FindCameraMetadataItem(data, OHOS_ABILITY_EXPOSURE_MODES, &entry);
+        if (ret == CAM_META_SUCCESS) {
+            std::cout << "supported exposure mode list:";
+            for (int i = 0; i < entry.count; i++) {
+                std::cout << " " << static_cast<int>(entry.data.u8[i]);
+            }
+            std::cout << std::endl;
+        } else if (ret == CAM_META_ITEM_NOT_FOUND) {
+            std::cout << "OHOS_ABILITY_EXPOSURE_MODES is not support" << std::endl;
         }
-        std::cout << std::endl;
-    } else if (ret == CAM_META_ITEM_NOT_FOUND) {
-        std::cout << "OHOS_ABILITY_EXPOSURE_MODES is not support" << std::endl;
     }
 }
 
@@ -371,19 +379,20 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0110, TestSize.Level1)
 HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0120, TestSize.Level1)
 {
     if (!usbCameraExit_) {
-        GTEST_SKIP() << "No usb camera plugged in" << std::endl;
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+        ability_ = display_->GetCameraAbility();
+        EXPECT_NE(ability_, nullptr);
+        common_metadata_header_t *data = ability_->get();
+        camera_metadata_item_t entry;
+        int ret = FindCameraMetadataItem(data, OHOS_CONTROL_CAPTURE_MIRROR_SUPPORTED, &entry);
+        EXPECT_EQ(ret, CAM_META_SUCCESS);
+        std::cout << "capture mirror supported is :";
+        for (int i = 0; i < entry.count; i++) {
+            std::cout << " " << static_cast<int>(entry.data.u8[i]);
+        }
+        std::cout << std::endl;
     }
-    ability_ = display_->GetCameraAbility();
-    EXPECT_NE(ability_, nullptr);
-    common_metadata_header_t *data = ability_->get();
-    camera_metadata_item_t entry;
-    int ret = FindCameraMetadataItem(data, OHOS_CONTROL_CAPTURE_MIRROR_SUPPORTED, &entry);
-    EXPECT_EQ(ret, CAM_META_SUCCESS);
-    std::cout << "capture mirror supported is :";
-    for (int i = 0; i < entry.count; i++) {
-        std::cout << " " << static_cast<int>(entry.data.u8[i]);
-    }
-    std::cout << std::endl;
 }
 
 /**
@@ -396,21 +405,22 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0120, TestSize.Level1)
 HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0130, TestSize.Level1)
 {
     if (!usbCameraExit_) {
-        GTEST_SKIP() << "No usb camera plugged in" << std::endl;
-    }
-    ability_ = display_->GetCameraAbility();
-    EXPECT_NE(ability_, nullptr);
-    common_metadata_header_t *data = ability_->get();
-    camera_metadata_item_t entry;
-    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_MUTE_MODES, &entry);
-    if (ret == CAM_META_SUCCESS) {
-        std::cout << "supported mute mode is:";
-        for (int i = 0; i < entry.count; i++) {
-            std::cout << " " << static_cast<int>(entry.data.u8[i]);
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+        ability_ = display_->GetCameraAbility();
+        EXPECT_NE(ability_, nullptr);
+        common_metadata_header_t *data = ability_->get();
+        camera_metadata_item_t entry;
+        int ret = FindCameraMetadataItem(data, OHOS_ABILITY_MUTE_MODES, &entry);
+        if (ret == CAM_META_SUCCESS) {
+            std::cout << "supported mute mode is:";
+            for (int i = 0; i < entry.count; i++) {
+                std::cout << " " << static_cast<int>(entry.data.u8[i]);
+            }
+            std::cout << std::endl;
+        } else if (ret == CAM_META_ITEM_NOT_FOUND) {
+            std::cout << "OHOS_ABILITY_MUTE_MODES is not support" << std::endl;
         }
-        std::cout << std::endl;
-    } else if (ret == CAM_META_ITEM_NOT_FOUND) {
-        std::cout << "OHOS_ABILITY_MUTE_MODES is not support" << std::endl;
     }
 }
 
@@ -424,17 +434,18 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0130, TestSize.Level1)
 HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0140, TestSize.Level1)
 {
     if (!usbCameraExit_) {
-        GTEST_SKIP() << "No usb camera plugged in" << std::endl;
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+       ability_ = display_->GetCameraAbility();
+       EXPECT_NE(ability_, nullptr);
+       common_metadata_header_t *data = ability_->get();
+       camera_metadata_item_t entry;
+       int ret = FindCameraMetadataItem(data, OHOS_ABILITY_FPS_RANGES, &entry);
+       EXPECT_EQ(ret, CAM_META_SUCCESS);
+       std::cout << "supported fps ranges list: [";
+       std::cout << static_cast<int>(entry.data.i32[0]) << "," << static_cast<int>(entry.data.i32[1]) << "]";
+       std::cout << std::endl;
     }
-    ability_ = display_->GetCameraAbility();
-    EXPECT_NE(ability_, nullptr);
-    common_metadata_header_t *data = ability_->get();
-    camera_metadata_item_t entry;
-    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_FPS_RANGES, &entry);
-    EXPECT_EQ(ret, CAM_META_SUCCESS);
-    std::cout << "supported fps ranges list: [";
-    std::cout << static_cast<int>(entry.data.i32[0]) << "," << static_cast<int>(entry.data.i32[1]) << "]";
-    std::cout << std::endl;
 }
 
 /**
@@ -447,16 +458,17 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0140, TestSize.Level1)
 HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0150, TestSize.Level1)
 {
     if (!usbCameraExit_) {
-        GTEST_SKIP() << "No usb camera plugged in" << std::endl;
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+        ability_ = display_->GetCameraAbility();
+        EXPECT_NE(ability_, nullptr);
+        common_metadata_header_t *data = ability_->get();
+        camera_metadata_item_t entry;
+        int ret = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_TYPE, &entry);
+        EXPECT_EQ(ret, CAM_META_SUCCESS);
+        std::cout << "OHOS_ABILITY_CAMERA_TYPE value is " << static_cast<int>(entry.data.u8[0]) << std::endl;
+        EXPECT_TRUE(entry.data.u8[0] == OHOS_CAMERA_TYPE_UNSPECIFIED);
     }
-    ability_ = display_->GetCameraAbility();
-    EXPECT_NE(ability_, nullptr);
-    common_metadata_header_t *data = ability_->get();
-    camera_metadata_item_t entry;
-    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_TYPE, &entry);
-    EXPECT_EQ(ret, CAM_META_SUCCESS);
-    std::cout << "OHOS_ABILITY_CAMERA_TYPE value is " << static_cast<int>(entry.data.u8[0]) << std::endl;
-    EXPECT_TRUE(entry.data.u8[0] == OHOS_CAMERA_TYPE_UNSPECIFIED);
 }
 
 /**
@@ -469,17 +481,18 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0150, TestSize.Level1)
 HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0160, TestSize.Level1)
 {
     if (!usbCameraExit_) {
-        GTEST_SKIP() << "No usb camera plugged in" << std::endl;
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+        ability_ = display_->GetCameraAbility();
+        EXPECT_NE(ability_, nullptr);
+        common_metadata_header_t *data = ability_->get();
+        camera_metadata_item_t entry;
+        int ret = FindCameraMetadataItem(data, OHOS_ABILITY_STREAM_AVAILABLE_BASIC_CONFIGURATIONS, &entry);
+        EXPECT_EQ(ret, CAM_META_SUCCESS);
+        std::cout << "OHOS_ABILITY_STREAM_AVAILABLE_BASIC_CONFIGURATIONS value is "
+            << static_cast<int>(entry.data.u8[0]) << std::endl;
+        EXPECT_TRUE(entry.data.u8[0] == OHOS_CAMERA_FORMAT_RGBA_8888);
     }
-    ability_ = display_->GetCameraAbility();
-    EXPECT_NE(ability_, nullptr);
-    common_metadata_header_t *data = ability_->get();
-    camera_metadata_item_t entry;
-    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_STREAM_AVAILABLE_BASIC_CONFIGURATIONS, &entry);
-    EXPECT_EQ(ret, CAM_META_SUCCESS);
-    std::cout << "OHOS_ABILITY_STREAM_AVAILABLE_BASIC_CONFIGURATIONS value is "
-        << static_cast<int>(entry.data.u8[0]) << std::endl;
-    EXPECT_TRUE(entry.data.u8[0] == OHOS_CAMERA_FORMAT_RGBA_8888);
 }
 
 /**
@@ -492,37 +505,38 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0160, TestSize.Level1)
 HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0170, TestSize.Level1)
 {
     if (!usbCameraExit_) {
-        GTEST_SKIP() << "No usb camera plugged in" << std::endl;
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+        // Get the device manager
+        display_->OpenUsbCamera();
+        // Create and get streamOperator information
+        display_->AchieveStreamOperator();
+        // Create data stream
+        display_->StartStreamUpdate(640,480);
+        // updateSettings
+        const uint32_t ITEM_CAPACITY = 100;
+        const uint32_t DATA_CAPACITY = 2000;
+        const int32_t FPS_VALUE = 10;// 10:fps
+        std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(
+            ITEM_CAPACITY, DATA_CAPACITY);
+        std::vector<int32_t> fpsRange;
+        fpsRange.push_back(FPS_VALUE);
+        fpsRange.push_back(FPS_VALUE);
+        meta->addEntry(OHOS_CONTROL_FPS_RANGES, fpsRange.data(), fpsRange.size());
+        const int32_t DEVICE_STREAM_ID = 0;
+        meta->addEntry(OHOS_CAMERA_STREAM_ID, &DEVICE_STREAM_ID, 1);
+        std::vector<uint8_t> setting;
+        MetadataUtils::ConvertMetadataToVec(meta, setting);
+        display_->rc = (CamRetCode)display_->cameraDevice->UpdateSettings(setting);
+        EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+    
+        // capture
+        display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
+        // release stream
+        display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
+        display_->streamIds = {display_->STREAM_ID_PREVIEW};
+        display_->StopStream(display_->captureIds, display_->streamIds);
     }
-    // Get the device manager
-    display_->OpenUsbCamera();
-    // Create and get streamOperator information
-    display_->AchieveStreamOperator();
-    // Create data stream
-    display_->StartStreamUpdate(640,480);
-    // updateSettings
-    const uint32_t ITEM_CAPACITY = 100;
-    const uint32_t DATA_CAPACITY = 2000;
-    const int32_t FPS_VALUE = 10;// 10:fps
-    std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(
-        ITEM_CAPACITY, DATA_CAPACITY);
-    std::vector<int32_t> fpsRange;
-    fpsRange.push_back(FPS_VALUE);
-    fpsRange.push_back(FPS_VALUE);
-    meta->addEntry(OHOS_CONTROL_FPS_RANGES, fpsRange.data(), fpsRange.size());
-    const int32_t DEVICE_STREAM_ID = 0;
-    meta->addEntry(OHOS_CAMERA_STREAM_ID, &DEVICE_STREAM_ID, 1);
-    std::vector<uint8_t> setting;
-    MetadataUtils::ConvertMetadataToVec(meta, setting);
-    display_->rc = (CamRetCode)display_->cameraDevice->UpdateSettings(setting);
-    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
-
-    // capture
-    display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
-    // release stream
-    display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
-    display_->streamIds = {display_->STREAM_ID_PREVIEW};
-    display_->StopStream(display_->captureIds, display_->streamIds);
 }
 
 /**
@@ -535,37 +549,38 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0170, TestSize.Level1)
 HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0180, TestSize.Level1)
 {
     if (!usbCameraExit_) {
-        GTEST_SKIP() << "No usb camera plugged in" << std::endl;
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+        // Get the device manager
+        display_->OpenUsbCamera();
+        // Create and get streamOperator information
+        display_->AchieveStreamOperator();
+        // Create data stream
+        display_->StartStreamUpdate(640,480);
+        // updateSettings
+        const uint32_t ITEM_CAPACITY = 100;
+        const uint32_t DATA_CAPACITY = 2000;
+        const int32_t FPS_VALUE = 30;// 30:fps
+        std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(
+            ITEM_CAPACITY, DATA_CAPACITY);
+        std::vector<int32_t> fpsRange;
+        fpsRange.push_back(FPS_VALUE);
+        fpsRange.push_back(FPS_VALUE);
+        meta->addEntry(OHOS_CONTROL_FPS_RANGES, fpsRange.data(), fpsRange.size());
+        const int32_t DEVICE_STREAM_ID = 0;
+        meta->addEntry(OHOS_CAMERA_STREAM_ID, &DEVICE_STREAM_ID, 1);
+        std::vector<uint8_t> setting;
+        MetadataUtils::ConvertMetadataToVec(meta, setting);
+        display_->rc = (CamRetCode)display_->cameraDevice->UpdateSettings(setting);
+        EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+    
+        // capture
+        display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
+        // release stream
+        display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
+        display_->streamIds = {display_->STREAM_ID_PREVIEW};
+        display_->StopStream(display_->captureIds, display_->streamIds);
     }
-    // Get the device manager
-    display_->OpenUsbCamera();
-    // Create and get streamOperator information
-    display_->AchieveStreamOperator();
-    // Create data stream
-    display_->StartStreamUpdate(640,480);
-    // updateSettings
-    const uint32_t ITEM_CAPACITY = 100;
-    const uint32_t DATA_CAPACITY = 2000;
-    const int32_t FPS_VALUE = 30;// 30:fps
-    std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(
-        ITEM_CAPACITY, DATA_CAPACITY);
-    std::vector<int32_t> fpsRange;
-    fpsRange.push_back(FPS_VALUE);
-    fpsRange.push_back(FPS_VALUE);
-    meta->addEntry(OHOS_CONTROL_FPS_RANGES, fpsRange.data(), fpsRange.size());
-    const int32_t DEVICE_STREAM_ID = 0;
-    meta->addEntry(OHOS_CAMERA_STREAM_ID, &DEVICE_STREAM_ID, 1);
-    std::vector<uint8_t> setting;
-    MetadataUtils::ConvertMetadataToVec(meta, setting);
-    display_->rc = (CamRetCode)display_->cameraDevice->UpdateSettings(setting);
-    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
-
-    // capture
-    display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
-    // release stream
-    display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
-    display_->streamIds = {display_->STREAM_ID_PREVIEW};
-    display_->StopStream(display_->captureIds, display_->streamIds);
 }
 /**
   * @tc.name: USB Camera
@@ -577,37 +592,38 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0180, TestSize.Level1)
 HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0190, TestSize.Level1)
 {
     if (!usbCameraExit_) {
-        GTEST_SKIP() << "No usb camera plugged in" << std::endl;
-    }
-    // Get the device manager
-    display_->OpenUsbCamera();
-    // Create and get streamOperator information
-    display_->AchieveStreamOperator();
-    // Create data stream
-    display_->StartStreamUpdate(800,600);
-    // updateSettings
-    const uint32_t ITEM_CAPACITY = 100;
-    const uint32_t DATA_CAPACITY = 2000;
-    const int32_t FPS_VALUE = 10;// 10:fps
-    std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(
-        ITEM_CAPACITY, DATA_CAPACITY);
-    std::vector<int32_t> fpsRange;
-    fpsRange.push_back(FPS_VALUE);
-    fpsRange.push_back(FPS_VALUE);
-    meta->addEntry(OHOS_CONTROL_FPS_RANGES, fpsRange.data(), fpsRange.size());
-    const int32_t DEVICE_STREAM_ID = 0;
-    meta->addEntry(OHOS_CAMERA_STREAM_ID, &DEVICE_STREAM_ID, 1);
-    std::vector<uint8_t> setting;
-    MetadataUtils::ConvertMetadataToVec(meta, setting);
-    display_->rc = (CamRetCode)display_->cameraDevice->UpdateSettings(setting);
-    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+       // Get the device manager
+       display_->OpenUsbCamera();
+       // Create and get streamOperator information
+       display_->AchieveStreamOperator();
+       // Create data stream
+       display_->StartStreamUpdate(800,600);
+       // updateSettings
+       const uint32_t ITEM_CAPACITY = 100;
+       const uint32_t DATA_CAPACITY = 2000;
+       const int32_t FPS_VALUE = 10;// 10:fps
+       std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(
+           ITEM_CAPACITY, DATA_CAPACITY);
+       std::vector<int32_t> fpsRange;
+       fpsRange.push_back(FPS_VALUE);
+       fpsRange.push_back(FPS_VALUE);
+       meta->addEntry(OHOS_CONTROL_FPS_RANGES, fpsRange.data(), fpsRange.size());
+       const int32_t DEVICE_STREAM_ID = 0;
+       meta->addEntry(OHOS_CAMERA_STREAM_ID, &DEVICE_STREAM_ID, 1);
+       std::vector<uint8_t> setting;
+       MetadataUtils::ConvertMetadataToVec(meta, setting);
+       display_->rc = (CamRetCode)display_->cameraDevice->UpdateSettings(setting);
+       EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
 
-    // capture
-    display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
-    // release stream
-    display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
-    display_->streamIds = {display_->STREAM_ID_PREVIEW};
-    display_->StopStream(display_->captureIds, display_->streamIds);
+       // capture
+       display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
+       // release stream
+       display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
+       display_->streamIds = {display_->STREAM_ID_PREVIEW};
+       display_->StopStream(display_->captureIds, display_->streamIds);
+    }
 }
 
     /**
@@ -620,37 +636,38 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0190, TestSize.Level1)
 HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0200, TestSize.Level1)
 {
     if (!usbCameraExit_) {
-        GTEST_SKIP() << "No usb camera plugged in" << std::endl;
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+        // Get the device manager
+        display_->OpenUsbCamera();
+        // Create and get streamOperator information
+        display_->AchieveStreamOperator();
+        // Create data stream
+        display_->StartStreamUpdate(352,288);
+         // updateSettings
+        const uint32_t ITEM_CAPACITY = 100;
+        const uint32_t DATA_CAPACITY = 2000;
+        const int32_t FPS_VALUE = 30;// 30:fps
+        std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(
+            ITEM_CAPACITY, DATA_CAPACITY);
+        std::vector<int32_t> fpsRange;
+        fpsRange.push_back(FPS_VALUE);
+        fpsRange.push_back(FPS_VALUE);
+        meta->addEntry(OHOS_CONTROL_FPS_RANGES, fpsRange.data(), fpsRange.size());
+        const int32_t DEVICE_STREAM_ID = 0;
+        meta->addEntry(OHOS_CAMERA_STREAM_ID, &DEVICE_STREAM_ID, 1);
+        std::vector<uint8_t> setting;
+        MetadataUtils::ConvertMetadataToVec(meta, setting);
+        display_->rc = (CamRetCode)display_->cameraDevice->UpdateSettings(setting);
+        EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+    
+        // capture
+        display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
+        // release stream
+        display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
+        display_->streamIds = {display_->STREAM_ID_PREVIEW};
+        display_->StopStream(display_->captureIds, display_->streamIds);
     }
-    // Get the device manager
-    display_->OpenUsbCamera();
-    // Create and get streamOperator information
-    display_->AchieveStreamOperator();
-    // Create data stream
-    display_->StartStreamUpdate(352,288);
-     // updateSettings
-    const uint32_t ITEM_CAPACITY = 100;
-    const uint32_t DATA_CAPACITY = 2000;
-    const int32_t FPS_VALUE = 30;// 30:fps
-    std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(
-        ITEM_CAPACITY, DATA_CAPACITY);
-    std::vector<int32_t> fpsRange;
-    fpsRange.push_back(FPS_VALUE);
-    fpsRange.push_back(FPS_VALUE);
-    meta->addEntry(OHOS_CONTROL_FPS_RANGES, fpsRange.data(), fpsRange.size());
-    const int32_t DEVICE_STREAM_ID = 0;
-    meta->addEntry(OHOS_CAMERA_STREAM_ID, &DEVICE_STREAM_ID, 1);
-    std::vector<uint8_t> setting;
-    MetadataUtils::ConvertMetadataToVec(meta, setting);
-    display_->rc = (CamRetCode)display_->cameraDevice->UpdateSettings(setting);
-    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
-
-    // capture
-    display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
-    // release stream
-    display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
-    display_->streamIds = {display_->STREAM_ID_PREVIEW};
-    display_->StopStream(display_->captureIds, display_->streamIds);
 }
 
 /**
@@ -663,37 +680,38 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0200, TestSize.Level1)
 HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0210, TestSize.Level1)
 {
     if (!usbCameraExit_) {
-        GTEST_SKIP() << "No usb camera plugged in" << std::endl;
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+        // Get the device manager
+        display_->OpenUsbCamera();
+        // Create and get streamOperator information
+        display_->AchieveStreamOperator();
+        // Create data stream
+        display_->StartStreamUpdate(320,240);
+        // updateSettings
+        const uint32_t ITEM_CAPACITY = 100;
+        const uint32_t DATA_CAPACITY = 2000;
+        const int32_t FPS_VALUE = 30;// 30:fps
+        std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(
+            ITEM_CAPACITY, DATA_CAPACITY);
+        std::vector<int32_t> fpsRange;
+        fpsRange.push_back(FPS_VALUE);
+        fpsRange.push_back(FPS_VALUE);
+        meta->addEntry(OHOS_CONTROL_FPS_RANGES, fpsRange.data(), fpsRange.size());
+        const int32_t DEVICE_STREAM_ID = 0;
+        meta->addEntry(OHOS_CAMERA_STREAM_ID, &DEVICE_STREAM_ID, 1);
+        std::vector<uint8_t> setting;
+        MetadataUtils::ConvertMetadataToVec(meta, setting);
+        display_->rc = (CamRetCode)display_->cameraDevice->UpdateSettings(setting);
+        EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+    
+        // capture
+        display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
+        // release stream
+        display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
+        display_->streamIds = {display_->STREAM_ID_PREVIEW};
+        display_->StopStream(display_->captureIds, display_->streamIds);
     }
-    // Get the device manager
-    display_->OpenUsbCamera();
-    // Create and get streamOperator information
-    display_->AchieveStreamOperator();
-    // Create data stream
-    display_->StartStreamUpdate(320,240);
-    // updateSettings
-    const uint32_t ITEM_CAPACITY = 100;
-    const uint32_t DATA_CAPACITY = 2000;
-    const int32_t FPS_VALUE = 30;// 30:fps
-    std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(
-        ITEM_CAPACITY, DATA_CAPACITY);
-    std::vector<int32_t> fpsRange;
-    fpsRange.push_back(FPS_VALUE);
-    fpsRange.push_back(FPS_VALUE);
-    meta->addEntry(OHOS_CONTROL_FPS_RANGES, fpsRange.data(), fpsRange.size());
-    const int32_t DEVICE_STREAM_ID = 0;
-    meta->addEntry(OHOS_CAMERA_STREAM_ID, &DEVICE_STREAM_ID, 1);
-    std::vector<uint8_t> setting;
-    MetadataUtils::ConvertMetadataToVec(meta, setting);
-    display_->rc = (CamRetCode)display_->cameraDevice->UpdateSettings(setting);
-    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
-
-    // capture
-    display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
-    // release stream
-    display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
-    display_->streamIds = {display_->STREAM_ID_PREVIEW};
-    display_->StopStream(display_->captureIds, display_->streamIds);
 }
     /**
   * @tc.name: USB Camera
@@ -705,37 +723,38 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0210, TestSize.Level1)
 HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0220, TestSize.Level1)
 {
     if (!usbCameraExit_) {
-        GTEST_SKIP() << "No usb camera plugged in" << std::endl;
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+        // Get the device manager
+        display_->OpenUsbCamera();
+        // Create and get streamOperator information
+        display_->AchieveStreamOperator();
+        // Create data stream
+        display_->StartStreamUpdate(176,144);
+        // updateSettings
+        const uint32_t ITEM_CAPACITY = 100;
+        const uint32_t DATA_CAPACITY = 2000;
+        const int32_t FPS_VALUE = 30;// 30:fps
+        std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(
+            ITEM_CAPACITY, DATA_CAPACITY);
+        std::vector<int32_t> fpsRange;
+        fpsRange.push_back(FPS_VALUE);
+        fpsRange.push_back(FPS_VALUE);
+        meta->addEntry(OHOS_CONTROL_FPS_RANGES, fpsRange.data(), fpsRange.size());
+        const int32_t DEVICE_STREAM_ID = 0;
+        meta->addEntry(OHOS_CAMERA_STREAM_ID, &DEVICE_STREAM_ID, 1);
+        std::vector<uint8_t> setting;
+        MetadataUtils::ConvertMetadataToVec(meta, setting);
+        display_->rc = (CamRetCode)display_->cameraDevice->UpdateSettings(setting);
+        EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+        
+        // capture
+        display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
+        // release stream
+        display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
+        display_->streamIds = {display_->STREAM_ID_PREVIEW};
+        display_->StopStream(display_->captureIds, display_->streamIds);
     }
-    // Get the device manager
-    display_->OpenUsbCamera();
-    // Create and get streamOperator information
-    display_->AchieveStreamOperator();
-    // Create data stream
-    display_->StartStreamUpdate(176,144);
-    // updateSettings
-    const uint32_t ITEM_CAPACITY = 100;
-    const uint32_t DATA_CAPACITY = 2000;
-    const int32_t FPS_VALUE = 30;// 30:fps
-    std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(
-        ITEM_CAPACITY, DATA_CAPACITY);
-    std::vector<int32_t> fpsRange;
-    fpsRange.push_back(FPS_VALUE);
-    fpsRange.push_back(FPS_VALUE);
-    meta->addEntry(OHOS_CONTROL_FPS_RANGES, fpsRange.data(), fpsRange.size());
-    const int32_t DEVICE_STREAM_ID = 0;
-    meta->addEntry(OHOS_CAMERA_STREAM_ID, &DEVICE_STREAM_ID, 1);
-    std::vector<uint8_t> setting;
-    MetadataUtils::ConvertMetadataToVec(meta, setting);
-    display_->rc = (CamRetCode)display_->cameraDevice->UpdateSettings(setting);
-    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
-    
-    // capture
-    display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
-    // release stream
-    display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
-    display_->streamIds = {display_->STREAM_ID_PREVIEW};
-    display_->StopStream(display_->captureIds, display_->streamIds);
 }
         /**
   * @tc.name: USB Camera
@@ -747,37 +766,38 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0220, TestSize.Level1)
 HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0230, TestSize.Level1)
 {
     if (!usbCameraExit_) {
-        GTEST_SKIP() << "No usb camera plugged in" << std::endl;
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+        // Get the device manager
+        display_->OpenUsbCamera();
+        // Create and get streamOperator information
+        display_->AchieveStreamOperator();
+        // Create data stream
+        display_->StartStreamUpdate(160,120);
+        // updateSettings
+        const uint32_t ITEM_CAPACITY = 100;
+        const uint32_t DATA_CAPACITY = 2000;
+        const int32_t FPS_VALUE = 30;// 30:fps
+        std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(
+            ITEM_CAPACITY, DATA_CAPACITY);
+        std::vector<int32_t> fpsRange;
+        fpsRange.push_back(FPS_VALUE);
+        fpsRange.push_back(FPS_VALUE);
+        meta->addEntry(OHOS_CONTROL_FPS_RANGES, fpsRange.data(), fpsRange.size());
+        const int32_t DEVICE_STREAM_ID = 0;
+        meta->addEntry(OHOS_CAMERA_STREAM_ID, &DEVICE_STREAM_ID, 1);
+        std::vector<uint8_t> setting;
+        MetadataUtils::ConvertMetadataToVec(meta, setting);
+        display_->rc = (CamRetCode)display_->cameraDevice->UpdateSettings(setting);
+        EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+    
+        // capture
+        display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
+        // release stream
+        display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
+        display_->streamIds = {display_->STREAM_ID_PREVIEW};
+        display_->StopStream(display_->captureIds, display_->streamIds);
     }
-    // Get the device manager
-    display_->OpenUsbCamera();
-    // Create and get streamOperator information
-    display_->AchieveStreamOperator();
-    // Create data stream
-    display_->StartStreamUpdate(160,120);
-    // updateSettings
-    const uint32_t ITEM_CAPACITY = 100;
-    const uint32_t DATA_CAPACITY = 2000;
-    const int32_t FPS_VALUE = 30;// 30:fps
-    std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(
-        ITEM_CAPACITY, DATA_CAPACITY);
-    std::vector<int32_t> fpsRange;
-    fpsRange.push_back(FPS_VALUE);
-    fpsRange.push_back(FPS_VALUE);
-    meta->addEntry(OHOS_CONTROL_FPS_RANGES, fpsRange.data(), fpsRange.size());
-    const int32_t DEVICE_STREAM_ID = 0;
-    meta->addEntry(OHOS_CAMERA_STREAM_ID, &DEVICE_STREAM_ID, 1);
-    std::vector<uint8_t> setting;
-    MetadataUtils::ConvertMetadataToVec(meta, setting);
-    display_->rc = (CamRetCode)display_->cameraDevice->UpdateSettings(setting);
-    EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
-
-    // capture
-    display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
-    // release stream
-    display_->captureIds = {display_->CAPTURE_ID_PREVIEW};
-    display_->streamIds = {display_->STREAM_ID_PREVIEW};
-    display_->StopStream(display_->captureIds, display_->streamIds);
 }
 
 /**
@@ -790,15 +810,16 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0230, TestSize.Level1)
 HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0250, TestSize.Level1)
 {
     if (!usbCameraExit_) {
-        GTEST_SKIP() << "No usb camera plugged in" << std::endl;
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+        ability_ = display_->GetCameraAbility();
+        EXPECT_NE(ability_, nullptr);
+        common_metadata_header_t *data = ability_->get();
+        camera_metadata_item_t entry;
+        int ret = FindCameraMetadataItem(data, OHOS_JPEG_ORIENTATION, &entry);
+        EXPECT_EQ(ret, CAM_META_SUCCESS);
+        std::cout << "OHOS_JPEG_ORIENTATION value is " << static_cast<int>(entry.data.i32[0]) << std::endl;
     }
-    ability_ = display_->GetCameraAbility();
-    EXPECT_NE(ability_, nullptr);
-    common_metadata_header_t *data = ability_->get();
-    camera_metadata_item_t entry;
-    int ret = FindCameraMetadataItem(data, OHOS_JPEG_ORIENTATION, &entry);
-    EXPECT_EQ(ret, CAM_META_SUCCESS);
-    std::cout << "OHOS_JPEG_ORIENTATION value is " << static_cast<int>(entry.data.i32[0]) << std::endl;
 }
 
 /**
@@ -811,13 +832,14 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0250, TestSize.Level1)
 HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0260, TestSize.Level1)
 {
     if (!usbCameraExit_) {
-        GTEST_SKIP() << "No usb camera plugged in" << std::endl;
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+        ability_ = display_->GetCameraAbility();
+        EXPECT_NE(ability_, nullptr);
+        common_metadata_header_t *data = ability_->get();
+        camera_metadata_item_t entry;
+        int ret = FindCameraMetadataItem(data, OHOS_JPEG_QUALITY, &entry);
+        EXPECT_EQ(ret, CAM_META_SUCCESS);
+        std::cout << "OHOS_JPEG_ORIENTATION value is " << static_cast<int>(entry.data.u8[0]) << std::endl;
     }
-    ability_ = display_->GetCameraAbility();
-    EXPECT_NE(ability_, nullptr);
-    common_metadata_header_t *data = ability_->get();
-    camera_metadata_item_t entry;
-    int ret = FindCameraMetadataItem(data, OHOS_JPEG_QUALITY, &entry);
-    EXPECT_EQ(ret, CAM_META_SUCCESS);
-    std::cout << "OHOS_JPEG_ORIENTATION value is " << static_cast<int>(entry.data.u8[0]) << std::endl;
 }

@@ -19,6 +19,7 @@ group("HatsHdfDisplayBufferTest") {
   testonly = true
   deps = [
     "death:HatsHdfDisplayBufferDeathTest",
+    "moduletest:HatsHdfDisplayBufferMtTest",
     "unittest:HatsHdfDisplayBufferUtTest",
   ]
 }

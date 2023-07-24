@@ -398,7 +398,7 @@ public:
     int32_t GetNeighboringCellInfoListResponse(
         const RilRadioResponseInfo &responseInfo, const CellListNearbyInfo &cellInfoList) override;
     int32_t GetCurrentCellInfoResponse_1_1(const RilRadioResponseInfo &responseInfo,
-        const CellListCurrentInfo_1_1 &cellInfoList) override;
+        const CellListCurrentInfo_1_1 &cellListCurrentInfo) override;
     int32_t GetCurrentCellInfoResponse(
         const RilRadioResponseInfo &responseInfo, const CellListCurrentInfo &cellInfoList) override;
     int32_t SetPreferredNetworkResponse(const RilRadioResponseInfo &responseInfo) override;

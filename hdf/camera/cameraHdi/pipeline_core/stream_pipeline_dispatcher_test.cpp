@@ -68,7 +68,7 @@ HWTEST_F(DispatcherTest, NormalTest, TestSize.Level0)
 
     std::unique_ptr<StreamPipelineBuilder> b = StreamPipelineBuilder::Create(streamMgr);
     EXPECT_TRUE(b != nullptr);
-    std::shared_ptr<Pipeline> pipeline = b->Build(spec_);
+    std::shared_ptr<Pipeline> pipeline = b->Build(spec_, "lcam001");
     EXPECT_TRUE(pipeline != nullptr);
     std::unique_ptr<StreamPipelineDispatcher> d = StreamPipelineDispatcher::Create();
     EXPECT_TRUE(d != nullptr);
@@ -92,7 +92,7 @@ HWTEST_F(DispatcherTest, ConfigTest, TestSize.Level0)
 
     std::unique_ptr<StreamPipelineBuilder> b = StreamPipelineBuilder::Create(streamMgrConf);
     EXPECT_TRUE(b != nullptr);
-    std::shared_ptr<Pipeline> pipeline = b->Build(spec_);
+    std::shared_ptr<Pipeline> pipeline = b->Build(spec_, "lcam001");
     EXPECT_TRUE(pipeline != nullptr);
     std::unique_ptr<StreamPipelineDispatcher> d = StreamPipelineDispatcher::Create();
     EXPECT_TRUE(d != nullptr);
@@ -116,7 +116,7 @@ HWTEST_F(DispatcherTest, AbConfigTest, TestSize.Level0)
 
     std::unique_ptr<StreamPipelineBuilder> b = StreamPipelineBuilder::Create(streamMgrAbConf);
     EXPECT_TRUE(b != nullptr);
-    std::shared_ptr<Pipeline> pipeline = b->Build(spec_);
+    std::shared_ptr<Pipeline> pipeline = b->Build(spec_, "lcam001");
     EXPECT_TRUE(pipeline != nullptr);
     std::unique_ptr<StreamPipelineDispatcher> d = StreamPipelineDispatcher::Create();
     EXPECT_TRUE(d != nullptr);

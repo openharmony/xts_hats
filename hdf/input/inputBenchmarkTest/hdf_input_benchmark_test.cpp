@@ -79,7 +79,7 @@ void InputBenchmarkTest::SetUp(const ::benchmark::State &state)
 
 void InputBenchmarkTest::TearDown(const ::benchmark::State &state)
 {
-    ReleaseInputInterface(g_inputInterface);
+    ReleaseInputInterface(&g_inputInterface);
 }
 
 static void ReportEventPkgCallback(const InputEventPackage **pkgs, uint32_t count, uint32_t devIndex)

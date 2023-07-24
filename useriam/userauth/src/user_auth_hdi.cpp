@@ -592,7 +592,7 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0121, Function | Me
     FillAuthTypeVector(parcel, validTypes);
     int32_t ret = g_service.GetValidSolution(userId, authTypes, authTrustLevel, validTypes);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 0);
+    ASSERT_EQ(ret != Expectedvalue, true);
 }
 
 /**

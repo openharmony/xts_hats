@@ -23,6 +23,7 @@ group("kernel") {
       deps = [
         "accesstokenid:HatsAccesstokenidTest",
         "dmabuffer:HatsDmaBufferTest",
+        "libmeminfoPc:HatsMemInfoTest",
         "memtracker:HatsMemoryTrackerTest",
         "open_posix_testsuite/conformance/interfaces_gn:${posix_interface_module}",
         "prctl:HatsPrctlTest",
@@ -33,6 +34,7 @@ group("kernel") {
         "accesstokenid:HatsAccesstokenidTest",
         "dmabuffer:HatsDmaBufferTest",
         "freelist:HatsFreeListTest",
+        "libmeminfoPc:HatsMemInfoTest",
         "memtracker:HatsMemoryTrackerTest",
         "open_posix_testsuite/conformance/interfaces_gn:${posix_interface_module}",
         "prctl:HatsPrctlTest",

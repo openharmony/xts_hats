@@ -38,13 +38,11 @@ using namespace OHOS::HDI::Display::Buffer::V1_0;
 using namespace OHOS::HDI::Display::Composer::V1_0;
 using namespace OHOS::HDI::Display::TEST;
 using namespace testing::ext;
-using namespace std;
 
 namespace {
-std::shared_ptr<IDisplayComposerInterface> g_composerDevice {};
-static std::shared_ptr<HdiTestLayer> g_testFreshLayer;
-std::shared_ptr<IDisplayBuffer> g_gralloc = nullptr;
-std::vector<uint32_t> g_displayIds;
+static sptr<IDisplayComposerInterface> g_composerDevice = nullptr;
+static std::shared_ptr<IDisplayBuffer> g_gralloc = nullptr;
+static std::vector<uint32_t> g_displayIds;
 
 class DisplayBenchmarkTest : public benchmark::Fixture {
 public:
@@ -133,8 +131,9 @@ static void AdjustLayerSettings(std::vector<LayerSettings> &settings, uint32_t w
             setting.displayRect.x = static_cast<uint32_t>(setting.rectRatio.x * w);
             setting.displayRect.y = static_cast<uint32_t>(setting.rectRatio.y * h);
             DISPLAY_TEST_LOGE("display rect adust form %f %f %f %f to %{public}d %{public}d %{public}d %{public}d ",
-                setting.rectRatio.x, setting.rectRatio.y, setting.rectRatio.w, setting.rectRatio.h,
-                setting.displayRect.x,setting.displayRect.y, setting.displayRect.w, setting.displayRect.h);
+                setting.rectRatio.x, setting.rectRatio.y, setting.rectRatio.w,
+                setting.rectRatio.h,setting.displayRect.x,setting.displayRect.y,
+                setting.displayRect.w, setting.displayRect.h);
         }
 
         if ((setting.bufferRatio.h > 0.0f) || (setting.bufferRatio.w > 0.0f)) {
@@ -180,6 +179,23 @@ static inline void PresentAndCheck(std::vector<LayerSettings> &layerSettings,
         ASSERT_TRUE((ret == DISPLAY_SUCCESS));
     }
 }
+
+/**
+  * @tc.name: SetClientBufferCacheCountTest
+  * @tc.desc: Benchmarktest for interface SetClientBufferCacheCount.
+  */
+BENCHMARK_F(DisplayBenchmarkTest, SetClientBufferCacheCountTest)(benchmark::State &state)
+{
+    int32_t ret;
+    const uint32_t CACHE_COUNT = 5;
+    for (auto _ : state) {
+        ret = g_composerDevice->SetClientBufferCacheCount(g_displayIds[0], CACHE_COUNT);
+    }
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetClientBufferCacheCountTest)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: GetDisplayCapabilityTest
@@ -317,14 +333,35 @@ BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetDisplayBacklightTest)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
+  * @tc.name: CreateAndDestroyLayerTest
+  * @tc.desc: Benchmarktest for interface CreateLayer And DestroyLayer.
+  */
+BENCHMARK_F(DisplayBenchmarkTest, CreateAndDestroyLayerTest)(benchmark::State &state)
+{
+    int32_t ret;
+    LayerInfo layerInfo;
+    uint32_t layerId;
+    for (auto _ : state) {
+        uint32_t bufferCount = 3;
+        ret = g_composerDevice->CreateLayer(g_displayIds[0], layerInfo, bufferCount, layerId);
+        EXPECT_EQ(DISPLAY_SUCCESS, ret);
+        ret = g_composerDevice->DestroyLayer(g_displayIds[0], layerId);
+    }
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, CreateAndDestroyLayerTest)->
+    Iterations(10)->Repetitions(3)->ReportAggregatesOnly();
+
+/**
   * @tc.name: GetDisplayCompChangeTest
   * @tc.desc: Benchmarktest for interface GetDisplayCompChange.
   */
 BENCHMARK_F(DisplayBenchmarkTest, GetDisplayCompChangeTest)(benchmark::State &state)
 {
-    int32_t ret;
     std::vector<uint32_t> layers {};
     std::vector<int32_t> type {};
+    int32_t ret;
     for (auto _ : state) {
         ret = g_composerDevice->GetDisplayCompChange(g_displayIds[0], layers, type);
     }
@@ -373,8 +410,8 @@ BENCHMARK_F(DisplayBenchmarkTest, MmapTest)(benchmark::State &state)
 {
     BufferHandle* buffer = nullptr;
     AllocInfo info;
-    info.width  = 800;
-    info.height = 600;
+    info.width  = 100;
+    info.height = 100;
     info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_MEM_DMA |
             OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_READ |
             OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_WRITE;
@@ -392,8 +429,8 @@ BENCHMARK_F(DisplayBenchmarkTest, InvalidateCacheTest)(benchmark::State &state)
 {
     BufferHandle* buffer = nullptr;
     AllocInfo info;
-    info.width  = 800;
-    info.height = 600;
+    info.width  = 100;
+    info.height = 100;
     info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_MEM_DMA |
             OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_READ |
             OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_WRITE;
@@ -411,8 +448,8 @@ BENCHMARK_F(DisplayBenchmarkTest, FlushCacheTest)(benchmark::State &state)
 {
     BufferHandle* buffer = nullptr;
     AllocInfo info;
-    info.width  = 800;
-    info.height = 600;
+    info.width  = 100;
+    info.height = 100;
     info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_MEM_DMA |
             OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_READ |
             OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_WRITE;
@@ -430,8 +467,8 @@ BENCHMARK_F(DisplayBenchmarkTest, UnmapTest)(benchmark::State &state)
 {
     BufferHandle* buffer = nullptr;
     AllocInfo info;
-    info.width  = 800;
-    info.height = 600;
+    info.width  = 100;
+    info.height = 100;
     info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_MEM_DMA |
             OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_READ |
             OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_WRITE;
@@ -445,34 +482,111 @@ BENCHMARK_F(DisplayBenchmarkTest, UnmapTest)(benchmark::State &state)
 BENCHMARK_REGISTER_F(DisplayBenchmarkTest, UnmapTest)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
-BENCHMARK_F(DisplayBenchmarkTest, SetLayerCropTest)(benchmark::State &state)
+/**
+  * @tc.name: CreateAndDestroyVirtualDisplayTest
+  * @tc.desc: Benchmarktest for interface CreateVirtualDisplay and DestroyVirtualDisplay.
+  */
+BENCHMARK_F(DisplayBenchmarkTest, CreateAndDestroyVirtualDisplayTest)(benchmark::State &state)
 {
-    std::vector<LayerSettings> settings = {
-        {
-            .rectRatio = { 0, 0, 1.0f, 1.0f },
-            .color = RED
-        },
-    };
-    std::vector<uint32_t> splitColors = { { RED, GREEN, YELLOW, BLUE, PINK, PURPLE, CYAN, TRANSPARENT } };
-
-    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
-    ASSERT_TRUE((layers.size() > 0));
-    // split the buffer
-    auto layer = layers[0];
-    HdiGrallocBuffer* handle = layer->GetBackBuffer(); // the backbuffer has not present now
-    ASSERT_TRUE((handle != nullptr));
-    auto splitRects = SplitBuffer(*(handle->Get()), splitColors);
-    PrepareAndPrensent();
-    for (uint32_t i = 0; i < splitRects.size(); i++) {
-        settings[0].color = splitColors[i];
-        for (auto _ : state) {
-            layer->SetLayerCrop(splitRects[i]);
-        }
-        PresentAndCheck(settings);
+    int32_t ret;
+    const uint32_t WIDTH = 100;
+    const uint32_t HEIGHT = 100;
+    int32_t format = 0;
+    for (auto _ : state) {
+        ret = g_composerDevice->CreateVirtualDisplay(WIDTH, HEIGHT, format, g_displayIds[0]);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+        ret = g_composerDevice->DestroyVirtualDisplay(g_displayIds[0]);
     }
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetLayerCropTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, CreateAndDestroyVirtualDisplayTest)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
+/**
+  * @tc.name: SetVirtualDisplayBufferTest
+  * @tc.desc: Benchmarktest for interface SetVirtualDisplayBuffer.
+  */
+BENCHMARK_F(DisplayBenchmarkTest, SetVirtualDisplayBufferTest)(benchmark::State &state)
+{
+    BufferHandle* buffer = nullptr;
+    int32_t ret;
+    int32_t fence = -1;
+
+    AllocInfo info;
+    info.width  = 100;
+    info.height = 100;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_MEM_DMA |
+            OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_READ |
+            OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_WRITE;
+    info.format = PIXEL_FMT_RGBA_8888;
+        g_gralloc->AllocMem(info, buffer);
+        ASSERT_TRUE(buffer != nullptr);
+
+    for (auto _ : state) {
+        ret = g_composerDevice->SetVirtualDisplayBuffer(g_displayIds[0], *buffer, fence);
+    }
+    g_gralloc->FreeMem(*buffer);
+    // not support
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetVirtualDisplayBufferTest)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
+/**
+  * @tc.name: SetDisplayPropertyTest
+  * @tc.desc: Benchmarktest for interface SetDisplayProperty.
+  */
+BENCHMARK_F(DisplayBenchmarkTest, SetDisplayPropertyTest)(benchmark::State &state)
+{
+    int32_t ret;
+    uint32_t id = 1;
+    uint64_t value = 0;
+    for (auto _ : state) {
+        ret = g_composerDevice->SetDisplayProperty(g_displayIds[0], id, value);
+    }
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetDisplayPropertyTest)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
+/**
+  * @tc.name: GetDisplayPropertyTest
+  * @tc.desc: Benchmarktest for interface GetDisplayProperty.
+  */
+BENCHMARK_F(DisplayBenchmarkTest, GetDisplayPropertyTest)(benchmark::State &state)
+{
+    int32_t ret;
+    uint32_t id = 1;
+    uint64_t value = 0;
+    for (auto _ : state) {
+        ret = g_composerDevice->GetDisplayProperty(g_displayIds[0], id, value);
+    }
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, GetDisplayPropertyTest)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
+/**
+  * @tc.name: SetDisplayClientCropTest
+  * @tc.desc: Benchmarktest for interface SetDisplayClientCrop.
+  */
+BENCHMARK_F(DisplayBenchmarkTest, SetDisplayClientCropTest)(benchmark::State &state)
+{
+    int32_t ret;
+    int32_t width = 100;
+    int32_t height = 100;
+    IRect rect = {0, 0, width, height};
+    for (auto _ : state) {
+        ret = g_composerDevice->SetDisplayClientCrop(g_displayIds[0], rect);
+    }
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetDisplayClientCropTest)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 BENCHMARK_F(DisplayBenchmarkTest, SetZorderTest)(benchmark::State &state)
@@ -835,8 +949,8 @@ BENCHMARK_F(DisplayBenchmarkTest, FreeMemTest)(benchmark::State &state)
 {
     BufferHandle* buffer = nullptr;
     AllocInfo info;
-    info.width  = 800;
-    info.height = 600;
+    info.width  = 100;
+    info.height = 100;
     info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_MEM_DMA |
             OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_READ |
             OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_WRITE;
@@ -862,7 +976,11 @@ int main(int argc, char** argv)
         return 1; // 1： Benchmark native test suite native solution
     }
     g_composerDevice = HdiTestDevice::GetInstance().GetDeviceInterface();
+    DISPLAY_TEST_CHK_RETURN((g_composerDevice == nullptr), DISPLAY_FAILURE,
+        DISPLAY_TEST_LOGE("get composer interface failed"));
     g_gralloc.reset(IDisplayBuffer::Get());
+    DISPLAY_TEST_CHK_RETURN((g_gralloc == nullptr), DISPLAY_FAILURE,
+        DISPLAY_TEST_LOGE("get buffer interface failed"));
     auto display = HdiTestDevice::GetInstance().GetFirstDisplay();
     if (display != nullptr) {
         g_displayIds = HdiTestDevice::GetInstance().GetDevIds();

@@ -30,11 +30,11 @@ ohos_moduletest_suite("HatsHdfDisplayBufferMtTest") {
     "drivers_interface_display:display_composer_idl_headers",
     "drivers_interface_display:libdisplay_buffer_hdi_impl",
     "drivers_interface_display:libdisplay_composer_hdi_impl",
+    "googletest:gtest",
     "graphic_chipsetsdk:buffer_handle",
     "hdf_core:libhdf_utils",
     "hilog:libhilog",
     "ipc:ipc_core",
-    "thirdparty_googletest:gtest",
   ]
   subsystem_name = "hdf"
   part_name = "drivers_peripheral_display"

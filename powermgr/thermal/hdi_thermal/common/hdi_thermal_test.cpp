@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -24,6 +24,7 @@
 
 #include "hdf_base.h"
 #include "osal_time.h"
+#include "v1_1/ifan_callback.h"
 #include "v1_1/ithermal_interface.h"
 #include "v1_1/ithermal_callback.h"
 #include "v1_1/thermal_types.h"
@@ -49,14 +50,32 @@ public:
     }
 };
 
+class FanCallbackMock : public IFanCallback {
+public:
+    virtual ~FanCallbackMock() {}
+    using FanEventCallback = std::function<int32_t(const HdfThermalCallbackInfo &event)>;
+    static int32_t RegisterFanEvent(const FanEventCallback &eventCb)
+    {
+        (void)eventCb;
+        return 0;
+    }
+    int32_t OnFanDataEvent(const HdfThermalCallbackInfo &event) override
+    {
+        (void)event;
+        return 0;
+    }
+};
+
 sptr<IThermalInterface> g_thermalInterface = nullptr;
 sptr<IThermalCallback> g_callback = new ThermalCallbackMock();
+sptr<IFanCallback> g_fanCallback = new FanCallbackMock();
 std::mutex g_mutex;
 const uint32_t MAX_PATH = 256;
 const uint32_t WAIT_TIME = 1;
 const std::string CPU_FREQ_PATH = "/data/service/el0/thermal/cooling/cpu/freq";
 const std::string GPU_FREQ_PATH = "/data/service/el0/thermal/cooling/gpu/freq";
 const std::string BATTERY_CHARGER_CURRENT_PATH = "/data/service/el0/thermal/cooling/battery/current";
+const std::string ISOLATE_PATH = "/data/service/el0/thermal/sensor/soc/isolate";
 
 class HdfThermalHdiTest : public testing::Test {
 public:
@@ -266,5 +285,63 @@ HWTEST_F(HdfThermalHdiTest, HdfThermalHdiTest007, TestSize.Level1)
     int32_t ret = g_thermalInterface->Unregister();
     EXPECT_EQ(0, ret) << "HdfThermalHdiTest007 failed";
     printf("HdfThermalHdiTest007: return.");
+}
+
+/**
+  * @tc.name: HdfThermalHdiTest008
+  * @tc.desc: RegisterFanCallback
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfThermalHdiTest, HdfThermalHdiTest008, TestSize.Level1)
+{
+    printf("HdfThermalHdiTest008: start.");
+    int32_t ret = g_thermalInterface->RegisterFanCallback(g_fanCallback);
+    EXPECT_EQ(0, ret) << "HdfThermalHdiTest008 failed";
+    printf("HdfThermalHdiTest008: return.");
+}
+
+/**
+  * @tc.name: HdfThermalHdiTest009
+  * @tc.desc: UnregisterFanCallback
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfThermalHdiTest, HdfThermalHdiTest009, TestSize.Level1)
+{
+    printf("HdfThermalHdiTest009: start.");
+    int32_t ret = g_thermalInterface->UnregisterFanCallback();
+    EXPECT_EQ(0, ret) << "HdfThermalHdiTest009 failed";
+    printf("HdfThermalHdiTest009: return.");
+}
+
+/**
+  * @tc.name: HdfThermalHdiTest010
+  * @tc.desc: IsolateCpu
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfThermalHdiTest, HdfThermalHdiTest010, TestSize.Level1)
+{
+    printf("HdfThermalHdiTest010: start.");
+    int32_t isolateNum = 2;
+    int32_t ret = g_thermalInterface->IsolateCpu(isolateNum);
+    EXPECT_EQ(0, ret);
+
+    char path[MAX_PATH] = {0};
+    char valueBuf[MAX_PATH] = {0};
+
+    if (snprintf_s(path, MAX_PATH, sizeof(path) - 1, ISOLATE_PATH.c_str()) < EOK) {
+        return;
+    }
+
+    sleep(WAIT_TIME);
+    ret = HdfThermalHdiTest::ReadFile(path, valueBuf, sizeof(valueBuf));
+    if (ret != HDF_SUCCESS) {
+        printf("HdfThermalHdiTest010: Failed to read file ");
+        return;
+    }
+
+    std::string isolateNumStr = valueBuf;
+    int32_t value = HdfThermalHdiTest::ConvertInt(isolateNumStr);
+    EXPECT_EQ(value, isolateNum) << "HdfThermalHdiTest010 failed";
+    printf("HdfThermalHdiTest010: return.");
 }
 }

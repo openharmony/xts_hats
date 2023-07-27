@@ -15,17 +15,21 @@ import("../../../tools/build/suite.gni")
 
 module_output_path = "hats/rtginterface"
 
-frame_aware_sched_deps = [ "//foundation/resourceschedule/frame_aware_sched/interfaces/innerkits/frameintf:frame_msg_intf" ]
+base_root = "../../../../../"
 
-frame_aware_sched_public_deps = [ "//third_party/googletest:gtest_main" ]
+frame_aware_sched_deps = [ "$base_root/foundation/resourceschedule/frame_aware_sched/interfaces/innerkits/frameintf:frame_msg_intf" ]
+
+frame_aware_sched_public_deps =
+    [ "$base_root/third_party/googletest:gtest_main" ]
 
 ohos_moduletest_suite("HatsRtgInterfaceTest") {
   module_out_path = module_output_path
 
   sources = [ "./rtg_interface_test.cpp" ]
 
-  include_dirs =
-      [ "//foundation/resourceschedule/frame_aware_sched/common/include" ]
+  include_dirs = [
+    "$base_root/foundation/resourceschedule/frame_aware_sched/common/include",
+  ]
 
   deps = frame_aware_sched_deps
 
@@ -33,8 +37,9 @@ ohos_moduletest_suite("HatsRtgInterfaceTest") {
     public_deps = frame_aware_sched_public_deps
   }
 
-  cflags = [ "-Wno-error" ]
   external_deps = [ "c_utils:utils" ]
+
+  cflags = [ "-Wno-error" ]
   part_name = "xts_hats"
   subsystem_name = "kernel"
 }

@@ -43,7 +43,7 @@ void UserIamPinAuthTest::TearDown()
 {
 }
 
-class DummyIExecutorCallback : public IExecutorCallback {
+class DummyIExecutorCallback : public IExecutorCallbackV1_0 {
 public:
     DummyIExecutorCallback(int32_t onResultResult, int32_t onGetDataResult)
         : onResultResult_(onResultResult), onGetDataResult_(onGetDataResult)
@@ -88,7 +88,7 @@ static void FillTestTemplateInfo(Parcel &parcel, TemplateInfo &templateInfo)
     FillTestUint8Vector(parcel, templateInfo.extraInfo);
 }
 
-static void FillTestIExecutorCallback(Parcel &parcel, sptr<IExecutorCallback> &callbackObj)
+static void FillTestIExecutorCallback(Parcel &parcel, sptr<IExecutorCallbackV1_0> &callbackObj)
 {
     bool isNull = parcel.ReadBool();
     if (isNull) {
@@ -199,7 +199,7 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0105, Function | Medi
     cout << "start Enroll" << endl;
     uint64_t scheduleId = parcel.ReadUint64();
     std::vector<uint8_t> extraInfo;
-    sptr<IExecutorCallback> callbackObj;
+    sptr<IExecutorCallbackV1_0> callbackObj;
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.Enroll(scheduleId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
@@ -220,7 +220,7 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0106, Function | Medi
     uint64_t templateId = parcel.ReadUint64();
     std::vector<uint8_t> extraInfo;
     FillTestUint8Vector(parcel, extraInfo);
-    sptr<IExecutorCallback> callbackObj;
+    sptr<IExecutorCallbackV1_0> callbackObj;
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.Authenticate(scheduleId, templateId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
@@ -272,7 +272,7 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0109, Function | Medi
     int32_t commandId = parcel.ReadInt32();
     std::vector<uint8_t> extraInfo;
     FillTestUint8Vector(parcel, extraInfo);
-    sptr<IExecutorCallback> callbackObj;
+    sptr<IExecutorCallbackV1_0> callbackObj;
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;

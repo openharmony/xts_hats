@@ -28,6 +28,7 @@ group("kernel") {
         "open_posix_testsuite/conformance/interfaces_gn:${posix_interface_module}",
         "prctl:HatsPrctlTest",
         "purgeableMem:HatsPurgeable",
+        "rtginterface:HatsRtgInterfaceTest",
       ]
     } else {
       deps = [
@@ -39,6 +40,7 @@ group("kernel") {
         "open_posix_testsuite/conformance/interfaces_gn:${posix_interface_module}",
         "prctl:HatsPrctlTest",
         "purgeableMem:HatsPurgeable",
+        "rtginterface:HatsRtgInterfaceTest",
       ]
     }
   }

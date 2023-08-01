@@ -24,6 +24,7 @@ using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
 using namespace OHOS::HDI::FingerprintAuth;
 using namespace OHOS::HDI::FingerprintAuth::V1_0;
+using CommandIdV1_1 = OHOS::HDI::FingerprintAuth::V1_1::CommandId;
 using FingerprintTipsCodeV1_1 = OHOS::HDI::FingerprintAuth::V1_1::FingerprintTipsCode;
 
 static OHOS::Parcel parcel;
@@ -110,12 +111,14 @@ HWTEST_F(FingerPrintTypeTest, Security_IAM_Fingerprint_HDI_FUNC_0203, Function |
 HWTEST_F(FingerPrintTypeTest, Security_IAM_Fingerprint_HDI_FUNC_0204, Function | MediumTest | Level1)
 {
     cout << "start test CommandId" << endl;
-    CommandId lock_template = LOCK_TEMPLATE;
-    CommandId unlock_template = UNLOCK_TEMPLATE;
-    CommandId vendor_command_begin = VENDOR_COMMAND_BEGIN;
+    CommandIdV1_1 lock_template = LOCK_TEMPLATE;
+    CommandIdV1_1 unlock_template = UNLOCK_TEMPLATE;
+    CommandIdV1_1 vendor_command_begin = VENDOR_COMMAND_BEGIN;
+    CommandIdV1_1 init_algorithm = OHOS::HDI::FaceAuth::V1_1::INIT_ALGORITHM;
     EXPECT_EQ(lock_template, 1);
     EXPECT_EQ(unlock_template, 2);
     EXPECT_EQ(vendor_command_begin, 10000);
+    EXPECT_EQ(init_algorithm, 3);
 }
 
 /**

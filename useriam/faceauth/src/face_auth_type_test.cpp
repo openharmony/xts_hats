@@ -110,9 +110,9 @@ HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_FUNC_0203, Function | MediumTes
 HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_FUNC_0204, Function | MediumTest | Level1)
 {
     cout << "start test CommandId" << endl;
-    CommandId lock_template = LOCK_TEMPLATE;
-    CommandId unlock_template = UNLOCK_TEMPLATE;
-    CommandId vendor_command_begin = VENDOR_COMMAND_BEGIN;
+    CommandIdV1_1 lock_template = LOCK_TEMPLATE;
+    CommandIdV1_1 unlock_template = UNLOCK_TEMPLATE;
+    CommandIdV1_1 vendor_command_begin = VENDOR_COMMAND_BEGIN;
     CommandIdV1_1 init_algorithm = OHOS::HDI::FaceAuth::V1_1::INIT_ALGORITHM;
     EXPECT_EQ(lock_template, 1);
     EXPECT_EQ(unlock_template, 2);

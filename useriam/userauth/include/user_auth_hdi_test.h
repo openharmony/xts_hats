@@ -23,6 +23,7 @@
 #include <string>
 #include "parcel.h"
 #include "v1_1/user_auth_interface_service.h"
+#include "user_auth_hdi.h"
 
 class UserIamUserAuthTest : public testing::Test {
 public:

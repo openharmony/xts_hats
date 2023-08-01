@@ -25,6 +25,8 @@
 #include "executor_impl.h"
 #include "face_auth_defines.h"
 #include "face_auth_interface_service.h"
+#include "face_auth_hdi.h"
+
 
 class UserIamFaceAuthTest : public testing::Test {
 public:

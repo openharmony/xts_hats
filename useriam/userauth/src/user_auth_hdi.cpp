@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-#include "user_auth_hdi.h"
+#include "user_auth_hdi_test.h"
 #include "iam_hat_test.h"
 
 using namespace std;

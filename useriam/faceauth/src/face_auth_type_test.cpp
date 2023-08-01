@@ -15,7 +15,7 @@
 
 #include <hdf_base.h>
 #include "iam_hat_test.h"
-#include "face_auth_hdi.h"
+#include "face_auth_hdi_test.h"
 
 #define LOG_LABEL OHOS::UserIam::Common::LABEL_FACE_AUTH_IMPL
 
@@ -112,9 +112,11 @@ HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_FUNC_0204, Function | MediumTes
     CommandId lock_template = LOCK_TEMPLATE;
     CommandId unlock_template = UNLOCK_TEMPLATE;
     CommandId vendor_command_begin = VENDOR_COMMAND_BEGIN;
+    CommandId init_algorithm = OHOS::HDI::FaceAuth::V1_1::INIT_ALGORITHM;
     EXPECT_EQ(lock_template, 1);
     EXPECT_EQ(unlock_template, 2);
     EXPECT_EQ(vendor_command_begin, 10000);
+    EXPECT_EQ(init_algorithm, 3);
 }
 
 /**

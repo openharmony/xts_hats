@@ -25,7 +25,6 @@
 #include "executor_impl.h"
 #include "fingerprint_auth_defines.h"
 #include "fingerprint_auth_interface_service.h"
-#include "fingerprint_auth_hdi.h"
 
 class UserIamFingerprintAuthTest : public testing::Test {
 public:

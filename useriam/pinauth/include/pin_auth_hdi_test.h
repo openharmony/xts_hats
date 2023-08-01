@@ -23,7 +23,6 @@
 #include <string>
 #include "parcel.h"
 #include "executor_impl.h"
-#include "pin_auth_hdi.h"
 
 class UserIamPinAuthTest : public testing::Test {
 public:

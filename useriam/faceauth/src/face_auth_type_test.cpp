@@ -23,7 +23,7 @@ using namespace std;
 using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
 using namespace OHOS::HDI::FaceAuth;
-using namespace OHOS::HDI::FaceAuth::V1_0;
+using namespace OHOS::HDI::FaceAuth::V1_1;
 
 static OHOS::Parcel parcel;
 
@@ -109,9 +109,9 @@ HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_FUNC_0203, Function | MediumTes
 HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_FUNC_0204, Function | MediumTest | Level1)
 {
     cout << "start test CommandId" << endl;
-    CommandId lock_template = LOCK_TEMPLATE;
-    CommandId unlock_template = UNLOCK_TEMPLATE;
-    CommandId vendor_command_begin = VENDOR_COMMAND_BEGIN;
+    CommandId lock_template = OHOS::HDI::FaceAuth::V1_1::LOCK_TEMPLATE;
+    CommandId unlock_template = OHOS::HDI::FaceAuth::V1_1::UNLOCK_TEMPLATE;
+    CommandId vendor_command_begin = OHOS::HDI::FaceAuth::V1_1::VENDOR_COMMAND_BEGIN;
     CommandId init_algorithm = OHOS::HDI::FaceAuth::V1_1::INIT_ALGORITHM;
     EXPECT_EQ(lock_template, 1);
     EXPECT_EQ(unlock_template, 2);

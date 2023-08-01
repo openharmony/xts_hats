@@ -111,10 +111,10 @@ HWTEST_F(FingerPrintTypeTest, Security_IAM_Fingerprint_HDI_FUNC_0203, Function |
 HWTEST_F(FingerPrintTypeTest, Security_IAM_Fingerprint_HDI_FUNC_0204, Function | MediumTest | Level1)
 {
     cout << "start test CommandId" << endl;
-    CommandIdV1_1 lock_template = LOCK_TEMPLATE;
-    CommandIdV1_1 unlock_template = UNLOCK_TEMPLATE;
-    CommandIdV1_1 vendor_command_begin = VENDOR_COMMAND_BEGIN;
-    CommandIdV1_1 init_algorithm = OHOS::HDI::FaceAuth::V1_1::INIT_ALGORITHM;
+    CommandIdV1_1 lock_template = OHOS::HDI::FingerprintAuth::V1_1::CommandId::LOCK_TEMPLATE;
+    CommandIdV1_1 unlock_template = OHOS::HDI::FingerprintAuth::V1_1::CommandId::UNLOCK_TEMPLATE;
+    CommandIdV1_1 vendor_command_begin = OHOS::HDI::FingerprintAuth::V1_1::CommandId::VENDOR_COMMAND_BEGIN;
+    CommandIdV1_1 init_algorithm = OHOS::HDI::FingerprintAuth::V1_1::CommandId::INIT_ALGORITHM;
     EXPECT_EQ(lock_template, 1);
     EXPECT_EQ(unlock_template, 2);
     EXPECT_EQ(vendor_command_begin, 10000);

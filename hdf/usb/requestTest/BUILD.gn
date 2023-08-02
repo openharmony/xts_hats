@@ -21,6 +21,7 @@ ohos_moduletest_suite("HatsHdfUsbRequestTest") {
   sources = [
     "../UsbSubscriberTest/UsbSubscriberTest.cpp",
     "./common/usbd_request_test.cpp",
+    "./common/usbd_interface_test.cpp"
   ]
   configs = [ ":hdf_usb" ]
 

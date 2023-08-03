@@ -15,7 +15,7 @@
 
 #include <hdf_base.h>
 #include "iam_hat_test.h"
-#include "face_auth_hdi.h"
+#include "face_auth_hdi_test.h"
 
 #define LOG_LABEL OHOS::UserIam::Common::LABEL_FACE_AUTH_IMPL
 
@@ -24,6 +24,7 @@ using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
 using namespace OHOS::HDI::FaceAuth;
 using namespace OHOS::HDI::FaceAuth::V1_0;
+using CommandIdV1_1 = OHOS::HDI::FaceAuth::V1_1::CommandId;
 
 static OHOS::Parcel parcel;
 
@@ -109,12 +110,14 @@ HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_FUNC_0203, Function | MediumTes
 HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_FUNC_0204, Function | MediumTest | Level1)
 {
     cout << "start test CommandId" << endl;
-    CommandId lock_template = LOCK_TEMPLATE;
-    CommandId unlock_template = UNLOCK_TEMPLATE;
-    CommandId vendor_command_begin = VENDOR_COMMAND_BEGIN;
+    CommandIdV1_1 lock_template = OHOS::HDI::FaceAuth::V1_1::CommandId::LOCK_TEMPLATE;
+    CommandIdV1_1 unlock_template = OHOS::HDI::FaceAuth::V1_1::CommandId::UNLOCK_TEMPLATE;
+    CommandIdV1_1 vendor_command_begin = OHOS::HDI::FaceAuth::V1_1::CommandId::VENDOR_COMMAND_BEGIN;
+    CommandIdV1_1 init_algorithm = OHOS::HDI::FaceAuth::V1_1::CommandId::INIT_ALGORITHM;
     EXPECT_EQ(lock_template, 1);
     EXPECT_EQ(unlock_template, 2);
     EXPECT_EQ(vendor_command_begin, 10000);
+    EXPECT_EQ(init_algorithm, 3);
 }
 
 /**

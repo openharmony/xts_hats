@@ -15,7 +15,7 @@
 
 #include <hdf_base.h>
 #include "iam_hat_test.h"
-#include "fingerprint_auth_hdi.h"
+#include "fingerprint_auth_hdi_test.h"
 
 #define LOG_LABEL OHOS::UserIam::Common::LABEL_FINGERPRINT_AUTH_IMPL
 

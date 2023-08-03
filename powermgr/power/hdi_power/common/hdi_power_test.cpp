@@ -383,7 +383,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest015, TestSize.Level1)
  * @tc.desc: Judgment PowerHdfCmd enum value of the PowerTypes.idl
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest016, TestSize.Level3)
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest016, TestSize.Level3)
 {
     printf("HdfPowerHdiTest016: start.");
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::PowerHdfCmd::CMD_REGISTER_CALLBCK == 0);
@@ -395,7 +395,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest016, TestSize.Level3)
  * @tc.desc: Judgment PowerHdfCmd enum value of the PowerTypes.idl
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest017, TestSize.Level3)
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest017, TestSize.Level3)
 {
     printf("HdfPowerHdiTest017: start.");
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::PowerHdfCmd::CMD_START_SUSPEND == 1);
@@ -407,7 +407,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest017, TestSize.Level3)
  * @tc.desc: Judgment PowerHdfCmd enum value of the PowerTypes.idl
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest018, TestSize.Level3)
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest018, TestSize.Level3)
 {
     printf("HdfPowerHdiTest018: start.");
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::PowerHdfCmd::CMD_STOP_SUSPEND == 2);
@@ -419,7 +419,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest018, TestSize.Level3)
  * @tc.desc: Judgment PowerHdfCmd enum value of the PowerTypes.idl
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest019, TestSize.Level3)
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest019, TestSize.Level3)
 {
     printf("HdfPowerHdiTest019: start.");
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::PowerHdfCmd::CMD_FORCE_SUSPEND == 3);
@@ -431,7 +431,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest019, TestSize.Level3)
  * @tc.desc: Judgment PowerHdfCmd enum value of the PowerTypes.idl
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest020, TestSize.Level3)
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest020, TestSize.Level3)
 {
     printf("HdfPowerHdiTest020: start.");
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::PowerHdfCmd::CMD_SUSPEND_BLOCK == 4);
@@ -443,7 +443,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest020, TestSize.Level3)
  * @tc.desc: Judgment PowerHdfCmd enum value of the PowerTypes.idl
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest021, TestSize.Level3)
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest021, TestSize.Level3)
 {
     printf("HdfPowerHdiTest021: start.");
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::PowerHdfCmd::CMD_SUSPEND_UNBLOCK == 5);
@@ -455,7 +455,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest021, TestSize.Level3)
  * @tc.desc: Judgment PowerHdfCmd enum value of the PowerTypes.idl
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest022, TestSize.Level3)
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest022, TestSize.Level3)
 {
     printf("HdfPowerHdiTest022: start.");
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::PowerHdfCmd::CMD_DUMP == 6);
@@ -467,7 +467,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest022, TestSize.Level3)
  * @tc.desc: Judgment PowerHdfCallbackCmd enum value of the PowerTypes.idl
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest023, TestSize.Level3)
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest023, TestSize.Level3)
 {
     printf("HdfPowerHdiTest023: start.");
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::PowerHdfCallbackCmd::CMD_ON_SUSPEND == 0);
@@ -479,7 +479,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest023, TestSize.Level3)
  * @tc.desc: Judgment PowerHdfCallbackCmd enum value of the PowerTypes.idl
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest024, TestSize.Level3)
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest024, TestSize.Level3)
 {
     printf("HdfPowerHdiTest024: start.");
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::PowerHdfCallbackCmd::CMD_ON_WAKEUP == 1);
@@ -491,7 +491,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest024, TestSize.Level3)
  * @tc.desc: Judgment PowerHdfState enum value of the PowerTypes.idl
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest025, TestSize.Level3)
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest025, TestSize.Level3)
 {
     printf("HdfPowerHdiTest025: start.");
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::PowerHdfState::AWAKE == 0);
@@ -503,7 +503,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest025, TestSize.Level3)
  * @tc.desc: Judgment PowerHdfState enum value of the PowerTypes.idl
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest026, TestSize.Level3)
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest026, TestSize.Level3)
 {
     printf("HdfPowerHdiTest026: start.");
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::PowerHdfState::INACTIVE == 1);
@@ -515,7 +515,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest026, TestSize.Level3)
  * @tc.desc: Judgment PowerHdfState enum value of the PowerTypes.idl
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest027, TestSize.Level3)
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest027, TestSize.Level3)
 {
     printf("HdfPowerHdiTest027: start.");
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::PowerHdfState::SLEEP == 2);
@@ -527,7 +527,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest027, TestSize.Level3)
  * @tc.desc: Judgment BaseRunningLockType enum value of the RunningLockTypes.idl
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest028, TestSize.Level3)
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest028, TestSize.Level3)
 {
     printf("HdfPowerHdiTest028: start.");
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::BaseRunningLockType::RUNNINGLOCK_SCREEN == 0);
@@ -539,7 +539,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest028, TestSize.Level3)
  * @tc.desc: Judgment BaseRunningLockType enum value of the RunningLockTypes.idl
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest029, TestSize.Level3)
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest029, TestSize.Level3)
 {
     printf("HdfPowerHdiTest029: start.");
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::BaseRunningLockType::RUNNINGLOCK_BACKGROUND == 1);
@@ -551,7 +551,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest029, TestSize.Level3)
  * @tc.desc: Judgment BaseRunningLockType enum value of the RunningLockTypes.idl
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest030, TestSize.Level3)
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest030, TestSize.Level3)
 {
     printf("HdfPowerHdiTest030: start.");
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::BaseRunningLockType::RUNNINGLOCK_PROXIMITY_SCREEN_CONTROL == 2);
@@ -563,7 +563,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest030, TestSize.Level3)
  * @tc.desc: Judgment RunningLockType enum value of the RunningLockTypes.idl
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest031, TestSize.Level3)
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest031, TestSize.Level3)
 {
     printf("HdfPowerHdiTest031: start.");
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::RunningLockType::RUNNINGLOCK_BACKGROUND_PHONE == 3);
@@ -575,7 +575,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest031, TestSize.Level3)
  * @tc.desc: Judgment RunningLockType enum value of the RunningLockTypes.idl
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest032, TestSize.Level3)
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest032, TestSize.Level3)
 {
     printf("HdfPowerHdiTest032: start.");
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::RunningLockType::RUNNINGLOCK_BACKGROUND_NOTIFICATION == 5);
@@ -587,7 +587,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest032, TestSize.Level3)
  * @tc.desc: Judgment RunningLockType enum value of the RunningLockTypes.idl
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest033, TestSize.Level3)
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest033, TestSize.Level3)
 {
     printf("HdfPowerHdiTest033: start.");
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::RunningLockType::RUNNINGLOCK_BACKGROUND_AUDIO == 9);
@@ -599,7 +599,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest033, TestSize.Level3)
  * @tc.desc: Judgment RunningLockType enum value of the RunningLockTypes.idl
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest034, TestSize.Level3)
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest034, TestSize.Level3)
 {
     printf("HdfPowerHdiTest034: start.");
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::RunningLockType::RUNNINGLOCK_BACKGROUND_SPORT == 17);
@@ -611,7 +611,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest034, TestSize.Level3)
  * @tc.desc: Judgment RunningLockType enum value of the RunningLockTypes.idl
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest035, TestSize.Level3)
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest035, TestSize.Level3)
 {
     printf("HdfPowerHdiTest035: start.");
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::RunningLockType::RUNNINGLOCK_BACKGROUND_NAVIGATION == 33);
@@ -623,7 +623,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest035, TestSize.Level3)
  * @tc.desc: Judgment RunningLockType enum value of the RunningLockTypes.idl
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest036, TestSize.Level3)
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest036, TestSize.Level3)
 {
     printf("HdfPowerHdiTest036: start.");
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::RunningLockType::RUNNINGLOCK_BACKGROUND_TASK == 65);
@@ -635,10 +635,9 @@ HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest036, TestSize.Level3)
  * @tc.desc: Judgment RunningLockType enum value of the RunningLockTypes.idl
  * @tc.type: FUNC
  */
-HWTEST_F(HdfBatteryHdiTest, HdfPowerHdiTest037, TestSize.Level3)
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest037, TestSize.Level3)
 {
     printf("HdfPowerHdiTest037: start.");
-    printf("MMMMMMMMMMMMMMMMMMMM" + OHOS::HDI::Power::V1_1::RunningLockType::RUNNINGLOCK_BUTT);
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::RunningLockType::RUNNINGLOCK_BUTT == 66);
     printf("HdfPowerHdiTest037: end.");
 }

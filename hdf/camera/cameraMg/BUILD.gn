@@ -1,4 +1,4 @@
-# Copyright (c) 2022 - 2023 Huawei Device Co., Ltd.
+# Copyright (c) 2021-2022 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -11,69 +11,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-base_root = "../../../../../../"
-import("//build/ohos.gni")
 import("//build/ohos_var.gni")
-import("//build/test.gni")
+import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
-import("$base_root/drivers/peripheral/camera/camera.gni")
-module_output_path = "hats/camera"
 
-#config("cameraTest_config") {
-#  visibility = [ ":*" ]
-#}
-
-ohos_moduletest_suite("HatsHdfCameraMgTest") {
-  #testonly = true
-  configs = [ ":hdf_cameramg" ]
-  module_out_path = module_output_path
-  sources = [
-    "./src/camera_3a_uttest.cpp",
-    "./src/common.cpp",
-    "./src/device_ability_uttest.cpp",
-    "./src/hdi_device_uttest.cpp",
-    "./src/hdi_host_uttest.cpp",
-    "./src/hdi_stream_uttest.cpp",
-  ]
-  deps = [
-    "//third_party/googletest:gmock_main",
-    "//third_party/googletest:gtest",
-    "//third_party/googletest:gtest_main",
-  ]
-
-  if (is_standard_system) {
-    external_deps = [
-      "c_utils:utils",
-      "hdf_core:libhdf_host",
-      "hdf_core:libhdf_ipc_adapter",
-      "hdf_core:libhdf_utils",
-      "hdf_core:libhdi",
-      "hilog:libhilog",
-      "ipc:ipc_single",
-    ]
-  } else {
-    external_deps = [ "hilog:libhilog" ]
+#################################group#########################################
+group("HatsHdfCameraMgTest") {
+  if (!defined(ohos_lite)) {
+    testonly = true
   }
-
-  external_deps += [
-    "drivers_interface_camera:libbuffer_producer_sequenceable_1.0",
-    "drivers_interface_camera:libcamera_proxy_1.0",
-    "drivers_interface_camera:metadata",
-    "drivers_interface_display:libdisplay_composer_proxy_1.0",
-    "graphic_chipsetsdk:surface",
-    "samgr:samgr_proxy",
-  ]
-
-  # public_configs = [ ":cameraTest_config" ]
-  subsystem_name = "xts"
-  part_name = "xts_hats"
+  if (is_standard_system) {
+    deps = [
+      "v1_0:HatsHdfCameraMgTestv0",
+      "v1_1:HatsHdfCameraMgTestv1",
+    ]
+  }
 }
-config("hdf_cameramg") {
-  include_dirs = [
-    # common includes
-    "./include",
-    "//third_party/googletest/googletest/include",
-    "$camera_path/../../interfaces/include",
-    "$camera_path/include",
-  ]
-}
+###############################################################################

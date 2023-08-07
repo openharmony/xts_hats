@@ -20,6 +20,7 @@ group("hatshdftest") {
       "camera:HatsHdfCameraTest",
       "codec:HatsHdfCodecTest",
       "display:HatsHdfDisplayTest",
+      "external_device_manager:HatsHdfExternalDeviceTest",
       "input:HatsHdfInputTest",
       "light:HatsHdfLightTest",
       "location:HatsHdfLocationTest",

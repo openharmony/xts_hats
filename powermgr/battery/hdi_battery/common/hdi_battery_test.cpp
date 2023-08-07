@@ -353,13 +353,6 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest019, TestSize.Level1)
 {
     printf("HdfBatteryHdiTest019: start.");
     EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_NONE == 0);
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRED_NORMAL == 1);
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRED_QUICK == 2);
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRED_SUPER_QUICK == 3);
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRELESS_NORMAL == 4);
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRELESS_QUICK == 5);
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRELESS_SUPER_QUICK == 6);
-
     printf("HdfBatteryHdiTest019: return.");
 }
 
@@ -431,5 +424,306 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest021, TestSize.Level1)
         }
     }
     EXPECT_EQ(true, voltageLimitStr == writeVoltageInfo);
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest022
+ * @tc.desc: Judgment BatteryHealthState enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest022, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest022: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryHealthState::BATTERY_HEALTH_UNKNOWN == 0);
+    printf("HdfBatteryHdiTest022: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest023
+ * @tc.desc: Judgment BatteryHealthState enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest023, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest023: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryHealthState::BATTERY_HEALTH_GOOD == 1);
+    printf("HdfBatteryHdiTest023: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest024
+ * @tc.desc: Judgment BatteryHealthState enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest024, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest024: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryHealthState::BATTERY_HEALTH_OVERHEAT == 2);
+    printf("HdfBatteryHdiTest024: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest025
+ * @tc.desc: Judgment BatteryHealthState enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest025, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest025: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryHealthState::BATTERY_HEALTH_OVERVOLTAGE == 3);
+    printf("HdfBatteryHdiTest025: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest026
+ * @tc.desc: Judgment BatteryHealthState enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest026, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest026: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryHealthState::BATTERY_HEALTH_COLD == 4);
+    printf("HdfBatteryHdiTest026: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest027
+ * @tc.desc: Judgment BatteryHealthState enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest027, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest027: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryHealthState::BATTERY_HEALTH_DEAD == 5);
+    printf("HdfBatteryHdiTest027: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest028
+ * @tc.desc: Judgment BatteryHealthState enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest028, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest028: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryHealthState::BATTERY_HEALTH_RESERVED == 6);
+    printf("HdfBatteryHdiTest028: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest029
+ * @tc.desc: Judgment BatteryChargeState enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest029, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest029: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryChargeState::CHARGE_STATE_NONE == 0);
+    printf("HdfBatteryHdiTest029: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest030
+ * @tc.desc: Judgment BatteryChargeState enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest030, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest030: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryChargeState::CHARGE_STATE_ENABLE == 1);
+    printf("HdfBatteryHdiTest030: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest031
+ * @tc.desc: Judgment BatteryChargeState enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest031, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest031: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryChargeState::CHARGE_STATE_DISABLE == 2);
+    printf("HdfBatteryHdiTest031: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest032
+ * @tc.desc: Judgment BatteryChargeState enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest032, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest032: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryChargeState::CHARGE_STATE_FULL == 3);
+    printf("HdfBatteryHdiTest032: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest033
+ * @tc.desc: Judgment BatteryChargeState enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest033, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest033: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryChargeState::CHARGE_STATE_RESERVED == 4);
+    printf("HdfBatteryHdiTest033: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest034
+ * @tc.desc: Judgment BatteryPluggedType enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest034, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest034: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryPluggedType::PLUGGED_TYPE_NONE == 0);
+    printf("HdfBatteryHdiTest034: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest035
+ * @tc.desc: Judgment BatteryPluggedType enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest035, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest035: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryPluggedType::PLUGGED_TYPE_AC == 1);
+    printf("HdfBatteryHdiTest035: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest036
+ * @tc.desc: Judgment BatteryPluggedType enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest036, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest036: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryPluggedType::PLUGGED_TYPE_USB == 2);
+    printf("HdfBatteryHdiTest036: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest037
+ * @tc.desc: Judgment BatteryPluggedType enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest037, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest037: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryPluggedType::PLUGGED_TYPE_WIRELESS == 3);
+    printf("HdfBatteryHdiTest037: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest038
+ * @tc.desc: Judgment BatteryPluggedType enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest038, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest038: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryPluggedType::PLUGGED_TYPE_BUTT == 4);
+    printf("HdfBatteryHdiTest038: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest039
+ * @tc.desc: Judgment ChargingLimitType enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest039, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest039: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargingLimitType::TYPE_CURRENT == 0);
+    printf("HdfBatteryHdiTest039: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest040
+ * @tc.desc: Judgment ChargingLimitType enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest040, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest040: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargingLimitType::TYPE_VOLTAGE == 1);
+    printf("HdfBatteryHdiTest040: end.");
+}
+
+
+/**
+ * @tc.name: HdfBatteryHdiTest041
+ * @tc.desc: Judgment ChargeType enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest041, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest041: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRED_NORMAL == 1);
+    printf("HdfBatteryHdiTest041: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest042
+ * @tc.desc: Judgment ChargeType enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest042, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest042: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRED_QUICK == 2);
+    printf("HdfBatteryHdiTest042: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest043
+ * @tc.desc: Judgment ChargeType enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest043, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest043: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRED_SUPER_QUICK == 3);
+    printf("HdfBatteryHdiTest043: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest044
+ * @tc.desc: Judgment ChargeType enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest044, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest044: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRELESS_NORMAL == 4);
+    printf("HdfBatteryHdiTest044: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest045
+ * @tc.desc: Judgment ChargeType enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest045, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest045: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRELESS_QUICK == 5);
+    printf("HdfBatteryHdiTest045: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest046
+ * @tc.desc: Judgment ChargeType enum value of the Types.idl
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest046, TestSize.Level3)
+{
+    printf("HdfBatteryHdiTest046: start.");
+    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRELESS_SUPER_QUICK == 6);
+    printf("HdfBatteryHdiTest046: end.");
 }
 }

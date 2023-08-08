@@ -29,7 +29,7 @@
 #include "idevice_manager.h"
 #include "camera_metadata_info.h"
 #include "metadata_utils.h"
-#include <display_type.h>
+#include <v1_0/display_composer_type.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
@@ -81,6 +81,7 @@ constexpr int DEFAULT_STREAM_ID = 1001;
 constexpr int INVALID_VALUE_TEST = 2147483647;
 
 using namespace OHOS::HDI::Camera::V1_0;
+using namespace OHOS::HDI::Display::Composer::V1_0;
 using namespace OHOS::Camera;
 class TestDisplay {
 public:

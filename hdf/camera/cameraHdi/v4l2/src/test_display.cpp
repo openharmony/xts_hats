@@ -767,20 +767,21 @@ int32_t DemoCameraDeviceCallback::OnResult(uint64_t timestamp, const std::vector
 
 int32_t DemoCameraHostCallback::OnCameraStatus(const std::string& cameraId, CameraStatus status)
 {
-    CAMERA_LOGI("%{public}s, enter.", __func__);
+    CAMERA_LOGI("%{public}s, enter. cameraId = %{public}s, status = %{public}d",
+        __func__, cameraId.c_str(), static_cast<int>(status));
     return RC_OK;
 }
 
 int32_t DemoCameraHostCallback::OnFlashlightStatus(const std::string& cameraId, FlashlightStatus status)
 {
-    CAMERA_LOGI("%{public}s, enter. cameraId = %s, status = %d",
+    CAMERA_LOGI("%{public}s, enter. cameraId = %{public}s, status = %{public}d",
         __func__, cameraId.c_str(), static_cast<int>(status));
     return RC_OK;
 }
 
 int32_t DemoCameraHostCallback::OnCameraEvent(const std::string& cameraId, CameraEvent event)
 {
-    CAMERA_LOGI("%{public}s, enter. cameraId = %s, event = %d",
+    CAMERA_LOGI("%{public}s, enter. cameraId = %{public}s, event = %{public}d",
         __func__, cameraId.c_str(), static_cast<int>(event));
     return RC_OK;
 }

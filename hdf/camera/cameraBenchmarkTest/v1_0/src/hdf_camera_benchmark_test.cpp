@@ -708,17 +708,14 @@ BENCHMARK_F(CameraBenchmarkTest, SUB_ChangeToOfflineStream_benchmark_0010)(
     }
 
     sleep(UT_SECOND_TIMES);
-    cameraTest->rc = (CamRetCode)offlineStreamOperator->CancelCapture(2020);
-    EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR
-        || cameraTest->rc == HDI::Camera::V1_0::METHOD_NOT_SUPPORTED);
+    cameraTest->rc = (CamRetCode)offlineStreamOperator->CancelCapture(captureId);
+    EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
 
     std::vector<int> streamIds = {102};
     cameraTest->rc = (CamRetCode)offlineStreamOperator->ReleaseStreams(streamIds);
-    EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR
-        || cameraTest->rc == HDI::Camera::V1_0::METHOD_NOT_SUPPORTED);
+    EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
     cameraTest->rc = (CamRetCode)offlineStreamOperator->Release();
-    EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR
-        || cameraTest->rc == HDI::Camera::V1_0::METHOD_NOT_SUPPORTED);
+    EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
     cameraTest->rc = (CamRetCode)cameraTest->streamOperator->ReleaseStreams({1201});
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
     sleep(UT_SECOND_TIMES);
@@ -799,16 +796,14 @@ BENCHMARK_F(CameraBenchmarkTest, SUB_OfflineCancelCapture_benchmark_0010)(
     streamOperatorCallback, offlineStreamOperator);
     sleep(UT_SECOND_TIMES);
     for (auto _ : st) {
-        cameraTest->rc = (CamRetCode)offlineStreamOperator->CancelCapture(2020);
+        cameraTest->rc = (CamRetCode)offlineStreamOperator->CancelCapture(captureId);
     }
     std::vector<int> streamIds = {102};
     cameraTest->rc = (CamRetCode)offlineStreamOperator->ReleaseStreams(streamIds);
-    EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR
-        || cameraTest->rc == HDI::Camera::V1_0::METHOD_NOT_SUPPORTED);
+    EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
 
     cameraTest->rc = (CamRetCode)offlineStreamOperator->Release();
-    EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR
-        || cameraTest->rc == HDI::Camera::V1_0::METHOD_NOT_SUPPORTED);
+    EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
 
     cameraTest->rc = (CamRetCode)cameraTest->streamOperator->ReleaseStreams({1201});
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
@@ -887,7 +882,7 @@ BENCHMARK_F(CameraBenchmarkTest, SUB_OfflineReleaseStreams_benchmark_0010)(
     OHOS::sptr<IOfflineStreamOperator> offlineStreamOperator = nullptr;
     cameraTest->streamOperator->ChangeToOfflineStream({cameraTest->streamInfoSnapshot->streamId_},
     streamOperatorCallback, offlineStreamOperator);
-    cameraTest->rc = (CamRetCode)offlineStreamOperator->CancelCapture(2020);
+    cameraTest->rc = (CamRetCode)offlineStreamOperator->CancelCapture(captureId);
     std::vector<int> streamIds = {102};
     sleep(UT_SECOND_TIMES);
     for (auto _ : st) {
@@ -970,7 +965,7 @@ BENCHMARK_F(CameraBenchmarkTest, SUB_OfflineRelease_benchmark_0010)(
     OHOS::sptr<IOfflineStreamOperator> offlineStreamOperator = nullptr;
     cameraTest->streamOperator->ChangeToOfflineStream({cameraTest->streamInfoSnapshot->streamId_},
     streamOperatorCallback, offlineStreamOperator);
-    cameraTest->rc = (CamRetCode)offlineStreamOperator->CancelCapture(2020);
+    cameraTest->rc = (CamRetCode)offlineStreamOperator->CancelCapture(captureId);
     std::vector<int> streamIds = {102};
     cameraTest->rc = (CamRetCode)offlineStreamOperator->ReleaseStreams(streamIds);
     sleep(UT_SECOND_TIMES);

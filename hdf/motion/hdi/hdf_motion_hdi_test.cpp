@@ -107,10 +107,10 @@ HWTEST_F(HdfMotionTest, EnableMotion_001, Function | MediumTest | Level1)
     }
 
     vector<int32_t> vec;
-    vec.push_back(HDF_MOTION_TYPE_PICKUP);
-    vec.push_back(HDF_MOTION_TYPE_FLIP);
-    vec.push_back(HDF_MOTION_TYPE_SHAKE);
-    vec.push_back(HDF_MOTION_TYPE_ROTATION);
+    vec.push_back(OHOS::HDI::Motion::V1_1::HDF_MOTION_TYPE_PICKUP);
+    vec.push_back(OHOS::HDI::Motion::V1_1::HDF_MOTION_TYPE_FLIP);
+    vec.push_back(OHOS::HDI::Motion::V1_1::HDF_MOTION_TYPE_SHAKE);
+    vec.push_back(OHOS::HDI::Motion::V1_1::HDF_MOTION_TYPE_ROTATION);
 
     int32_t ret = g_motionInterface->Register(g_motionCallback);
     EXPECT_EQ(HDF_SUCCESS, ret);
@@ -145,7 +145,7 @@ HWTEST_F(HdfMotionTest, EnableMotion_002, Function | MediumTest | Level1)
         ASSERT_NE(nullptr, g_motionInterface);
         return;
     }
-    int32_t ret = g_motionInterface->EnableMotion(HDF_MOTION_TYPE_MAX);
+    int32_t ret = g_motionInterface->EnableMotion(OHOS::HDI::Motion::V1_1::HDF_MOTION_TYPE_MAX);
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
 }
 
@@ -158,9 +158,9 @@ HWTEST_F(HdfMotionTest, DisableMotion_001, Function | MediumTest | Level1)
     int32_t ret = g_motionInterface->Register(g_motionCallback);
     EXPECT_EQ(HDF_SUCCESS, ret);
 
-    ret = g_motionInterface->EnableMotion(HDF_MOTION_TYPE_PICKUP);
+    ret = g_motionInterface->EnableMotion(OHOS::HDI::Motion::V1_1::HDF_MOTION_TYPE_PICKUP);
     EXPECT_EQ(HDF_SUCCESS, ret);
-    ret = g_motionInterface->DisableMotion(HDF_MOTION_TYPE_PICKUP);
+    ret = g_motionInterface->DisableMotion(OHOS::HDI::Motion::V1_1::HDF_MOTION_TYPE_PICKUP);
     EXPECT_EQ(HDF_SUCCESS, ret);
 
     ret = g_motionInterface->Unregister(g_motionCallback);
@@ -173,6 +173,6 @@ HWTEST_F(HdfMotionTest, DisableMotion_002, Function | MediumTest | Level1)
         ASSERT_NE(nullptr, g_motionInterface);
         return;
     }
-    int32_t ret = g_motionInterface->DisableMotion(HDF_MOTION_TYPE_MAX);
+    int32_t ret = g_motionInterface->DisableMotion(OHOS::HDI::Motion::V1_1::HDF_MOTION_TYPE_MAX);
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
 }

@@ -40,6 +40,6 @@ ohos_moduletest_suite("HatsRtgInterfaceTest") {
   external_deps = [ "c_utils:utils" ]
 
   cflags = [ "-Wno-error" ]
-  part_name = "xts_hats"
+  part_name = "hats"
   subsystem_name = "kernel"
 }

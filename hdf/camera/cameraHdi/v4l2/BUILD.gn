@@ -115,7 +115,7 @@ ohos_moduletest_suite("HatsHdfCameraTest") {
 
   public_configs = [ ":cameraTest_config" ]
   subsystem_name = "xts"
-  part_name = "xts_hats"
+  part_name = "hats"
 }
 
 group("hdi") {

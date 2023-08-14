@@ -17,7 +17,7 @@ import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
 group("HatsHdfCodecTest") {
-  if (xts_hats_rich == false) {
+  if (hats_rich == false) {
     testonly = true
     deps = [
       #"benchmarktest:HatsHdfCodecBenchmarkTest",

@@ -49,5 +49,5 @@ ohos_static_library("disp_dev_hdi_test") {
     "ipc:ipc_core",
   ]
   subsystem_name = "xts"
-  part_name = "xts_hats"
+  part_name = "hats"
 }

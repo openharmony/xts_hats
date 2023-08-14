@@ -36,7 +36,7 @@ ohos_moduletest_suite("HatsHdfAdapterCodecTest") {
     external_deps = [ "hilog:libhilog" ]
   }
   subsystem_name = "xts"
-  part_name = "xts_hats"
+  part_name = "hats"
 }
 config("hdc_codec_adapter") {
   include_dirs = [ "//third_party/openmax/api/1.1.2" ]

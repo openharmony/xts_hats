@@ -52,7 +52,7 @@ ohos_moduletest_suite("HatsHdfLocationagnssTest") {
   }
 
   subsystem_name = "xts"
-  part_name = "xts_hats"
+  part_name = "hats"
 }
 
 config("hdf_agnss") {

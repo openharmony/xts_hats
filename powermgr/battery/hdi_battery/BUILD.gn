@@ -30,5 +30,5 @@ ohos_moduletest_suite("HatsPowermgrBatteryTest") {
     "ipc:ipc_single",
   ]
   subsystem_name = "xts"
-  part_name = "xts_hats"
+  part_name = "hats"
 }

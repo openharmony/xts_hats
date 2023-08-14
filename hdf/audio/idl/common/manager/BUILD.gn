@@ -30,7 +30,7 @@ ohos_moduletest_suite("HatsHdfAudioIdlManagerTest") {
   ]
 
   subsystem_name = "xts"
-  part_name = "xts_hats"
+  part_name = "hats"
 }
 
 config("audio_idl_manager") {

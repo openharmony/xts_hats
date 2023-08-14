@@ -35,5 +35,5 @@ ohos_moduletest_suite("HatsHdfExternalControllerTest") {
   ]
   configs = [ "${utils_path}:utils_config" ]
   subsystem_name = "xts"
-  part_name = "xts_hats"
+  part_name = "hats"
 }

@@ -1,5 +1,5 @@
 {
-    "name": "@ohos/xts_hats",
+    "name": "@ohos/hats",
     "description": "hats",
     "version": "4.0",
     "license": "Apache License 2.0",
@@ -10,12 +10,12 @@
     "dirs": {},
     "scripts": {},
     "component": {
-        "name": "xts_hats",
+        "name": "hats",
         "subsystem": "xts",
         "syscap": [],
         "features": [
-            "xts_hats_rich",
-            "xts_hats_nnrt"
+            "hats_rich",
+            "hats_nnrt"
         ],
         "adapted_system_type": [
             "standard"
@@ -30,7 +30,7 @@
             "sub_component": [],
             "inner_kits": [],
             "test": [
-                "//test/xts/hats:hats"
+                "//test/xts/hats:xts_hats"
             ]
         }
     }

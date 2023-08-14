@@ -388,3 +388,49 @@ HWTEST_F(CameraCaptureTest, camera_capture_021, TestSize.Level1)
         std::cout << "==========[test log] ReleaseStreams fail, rc = ." << display_->rc << std::endl;
     }
 }
+
+/**
+  * @tc.name: RE_CONFIGURED_REQUIRED
+  * @tc.desc: RE_CONFIGURED_REQUIRED
+  * @tc.size: MediumTest
+  * @tc.type: Function
+  */
+HWTEST_F(CameraCaptureTest, Camera_Capture_022, TestSize.Level1)
+{
+    std::cout << "==========[test log]check Capture: Preview + video, then capture a photo." << std::endl;
+    std::cout << "==========[test log]check Capture: First, create Preview + video." << std::endl;
+    // Configure two streams of information
+    display_->AchieveStreamOperator();
+    display_->intents = {PREVIEW, VIDEO};
+    display_->StartStream(display_->intents);
+    // Capture preview stream
+    display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
+    // Capture video stream
+    display_->StartCapture(display_->STREAM_ID_VIDEO, display_->CAPTURE_ID_VIDEO, false, true);
+
+    // Start the capture stream
+    std::shared_ptr<HDI::Camera::V1_0::StreamInfo> streamInfo_capture =
+        std::make_shared<HDI::Camera::V1_0::StreamInfo>();
+    streamInfo_capture->streamId_ = display_->STREAM_ID_CAPTURE;
+    streamInfo_capture->width_ = 640;
+    streamInfo_capture->height_ = 480;
+    streamInfo_capture->format_ = PIXEL_FMT_YCRCB_420_SP;
+    streamInfo_capture->dataspace_ = 8;
+    streamInfo_capture->intent_ = HDI::Camera::V1_0::STILL_CAPTURE;
+    streamInfo_capture->tunneledMode_ = 5;
+
+    // Query whether the IsStreamsSupported interface supports
+    HDI::Camera::V1_0::StreamSupportType pType;
+    std::vector<HDI::Camera::V1_0::StreamInfo> stre;
+    stre.push_back(*streamInfo_capture);
+    display_->rc = (CamRetCode)display_->streamOperator->IsStreamsSupported(HDI::Camera::V1_0::NORMAL,
+        display_->ability_, stre, pType);
+    EXPECT_EQ(display_->rc, HDI::Camera::V1_0::NO_ERROR);
+    std::cout << "ptype = " << pType << std::endl;
+    EXPECT_EQ(true, pType == HDI::Camera::V1_0::RE_CONFIGURED_REQUIRED);
+    // post-processing
+    display_->captureIds = {display_->CAPTURE_ID_PREVIEW, display_->CAPTURE_ID_VIDEO};
+    display_->streamIds.push_back(display_->STREAM_ID_PREVIEW);
+    display_->streamIds.push_back(display_->STREAM_ID_VIDEO);
+    display_->StopStream(display_->captureIds, display_->streamIds);
+}

@@ -15,7 +15,6 @@
 #include <iostream>
 #include <vector>
 
-#include "UsbSubscriberTest.h"
 #include "hdf_log.h"
 #include "securec.h"
 #include "usbd_transfer_test.h"
@@ -38,13 +37,15 @@ const uint8_t SAMPLE_DATA_2 = 2;
 const uint8_t SAMPLE_DATA_3 = 3;
 const int32_t TRANSFER_TIME_OUT = 1000;
 const int32_t CTL_VALUE = 0x100;
-UsbDev UsbdTransferTest::dev_ = {0, 0};
 
 using namespace testing::ext;
 using namespace OHOS;
 using namespace OHOS::USB;
 using namespace std;
 using namespace OHOS::HDI::Usb::V1_0;
+
+UsbDev UsbdTransferTest::dev_ = {0, 0};
+sptr<UsbSubscriberTest> UsbdTransferTest::subscriber_ = nullptr;
 
 namespace {
 sptr<IUsbInterface> g_usbInterface = nullptr;
@@ -95,13 +96,13 @@ void UsbdTransferTest::SetUpTestCase(void)
         exit(0);
     }
 
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    if (subscriber == nullptr) {
+    subscriber_ = new UsbSubscriberTest();
+    if (subscriber_ == nullptr) {
         HDF_LOGE("%{public}s:UsbSubscriberTest new failed.", __func__);
         exit(0);
     }
-    if (g_usbInterface->BindUsbdSubscriber(subscriber) != HDF_SUCCESS) {
-        HDF_LOGE("%{public}s: bind usbd subscriber failed\n", __func__);
+    if (g_usbInterface->BindUsbdSubscriber(subscriber_) != HDF_SUCCESS) {
+        HDF_LOGE("%{public}s: bind usbd subscriber_ failed\n", __func__);
         exit(0);
     }
 
@@ -109,7 +110,7 @@ void UsbdTransferTest::SetUpTestCase(void)
     int c;
     while ((c = getchar()) != '\n' && c != EOF) {}
 
-    dev_ = { subscriber->busNum_, subscriber->devAddr_ };
+    dev_ = { subscriber_->busNum_, subscriber_->devAddr_ };
     ret = g_usbInterface->OpenDevice(dev_);
     HDF_LOGI("UsbdTransferTest:: %{public}d OpenDevice=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
@@ -117,16 +118,8 @@ void UsbdTransferTest::SetUpTestCase(void)
 
 void UsbdTransferTest::TearDownTestCase(void)
 {
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    if (subscriber == nullptr) {
-        HDF_LOGE("%{public}s:UsbSubscriberTest new failed.", __func__);
-        exit(0);
-    }
-    if (g_usbInterface->BindUsbdSubscriber(subscriber) != HDF_SUCCESS) {
-        HDF_LOGE("%{public}s: bind usbd subscriber failed\n", __func__);
-        exit(0);
-    }
-    dev_ = { subscriber->busNum_, subscriber->devAddr_ };
+    g_usbInterface->UnbindUsbdSubscriber(subscriber_);
+    dev_ = { subscriber_->busNum_, subscriber_->devAddr_ };
     auto ret = g_usbInterface->CloseDevice(dev_);
     HDF_LOGI("UsbdTransferTest:: %{public}d Close=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
@@ -2338,12 +2331,12 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2330, Function | MediumTest | Level1)
  */
 HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2140, Function | MediumTest | Level1)
 {
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    if (subscriber == nullptr) {
+    subscriber_ = new UsbSubscriberTest();
+    if (subscriber_ == nullptr) {
         HDF_LOGE("%{public}s:UsbSubscriberTest new failed.", __func__);
         exit(0);
     }
-    auto ret = g_usbInterface->BindUsbdSubscriber(subscriber);
+    auto ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2140 %{public}d BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
@@ -2356,16 +2349,16 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2140, Function | MediumTest | Level1)
  */
 HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2150, Function | MediumTest | Level1)
 {
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    if (subscriber == nullptr) {
+    subscriber_ = new UsbSubscriberTest();
+    if (subscriber_ == nullptr) {
         HDF_LOGE("%{public}s:UsbSubscriberTest new failed.", __func__);
         exit(0);
     }
-    auto ret = g_usbInterface->BindUsbdSubscriber(subscriber);
+    auto ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2150 %{public}d BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     sptr<UsbSubscriberTest> subscriber2 = new UsbSubscriberTest();
-    if (subscriber == nullptr) {
+    if (subscriber_ == nullptr) {
         HDF_LOGE("%{public}s:UsbSubscriberTest new failed.", __func__);
         exit(0);
     }
@@ -2382,15 +2375,15 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2150, Function | MediumTest | Level1)
  */
 HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2160, Function | MediumTest | Level1)
 {
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    if (subscriber == nullptr) {
+    subscriber_ = new UsbSubscriberTest();
+    if (subscriber_ == nullptr) {
         HDF_LOGE("%{public}s:UsbSubscriberTest new failed.", __func__);
         exit(0);
     }
-    auto ret = g_usbInterface->BindUsbdSubscriber(subscriber);
+    auto ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2160 %{public}d BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
-    ret = g_usbInterface->BindUsbdSubscriber(subscriber);
+    ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2160 %{public}d again BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
@@ -2403,19 +2396,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2160, Function | MediumTest | Level1)
  */
 HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2170, Function | MediumTest | Level1)
 {
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    if (subscriber == nullptr) {
+    subscriber_ = new UsbSubscriberTest();
+    if (subscriber_ == nullptr) {
         HDF_LOGE("%{public}s:UsbSubscriberTest new failed.", __func__);
         exit(0);
     }
-    auto ret = g_usbInterface->BindUsbdSubscriber(subscriber);
+    auto ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2170 %{public}d BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
-    ret = g_usbInterface->UnbindUsbdSubscriber(subscriber);
+    ret = g_usbInterface->UnbindUsbdSubscriber(subscriber_);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2170 %{public}d UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     sptr<UsbSubscriberTest> subscriber2 = new UsbSubscriberTest();
-    if (subscriber == nullptr) {
+    if (subscriber_ == nullptr) {
         HDF_LOGE("%{public}s:UsbSubscriberTest new failed.", __func__);
         exit(0);
     }
@@ -2432,18 +2425,18 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2170, Function | MediumTest | Level1)
  */
 HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2180, Function | MediumTest | Level1)
 {
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    if (subscriber == nullptr) {
+    subscriber_ = new UsbSubscriberTest();
+    if (subscriber_ == nullptr) {
         HDF_LOGE("%{public}s:UsbSubscriberTest new failed.", __func__);
         exit(0);
     }
-    auto ret = g_usbInterface->BindUsbdSubscriber(subscriber);
+    auto ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2180 %{public}d BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
-    ret = g_usbInterface->UnbindUsbdSubscriber(subscriber);
+    ret = g_usbInterface->UnbindUsbdSubscriber(subscriber_);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2180 %{public}d UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
-    ret = g_usbInterface->BindUsbdSubscriber(subscriber);
+    ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2180 %{public}d again BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
@@ -2456,15 +2449,15 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2180, Function | MediumTest | Level1)
  */
 HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2190, Function | MediumTest | Level1)
 {
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    if (subscriber == nullptr) {
+    subscriber_ = new UsbSubscriberTest();
+    if (subscriber_ == nullptr) {
         HDF_LOGE("%{public}s:UsbSubscriberTest new failed.", __func__);
         exit(0);
     }
-    auto ret = g_usbInterface->BindUsbdSubscriber(subscriber);
+    auto ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2190 %{public}d first BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
-    ret = g_usbInterface->UnbindUsbdSubscriber(subscriber);
+    ret = g_usbInterface->UnbindUsbdSubscriber(subscriber_);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2190 %{public}d UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
@@ -2477,12 +2470,12 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2190, Function | MediumTest | Level1)
  */
 HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2200, Function | MediumTest | Level1)
 {
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    if (subscriber == nullptr) {
+    subscriber_ = new UsbSubscriberTest();
+    if (subscriber_ == nullptr) {
         HDF_LOGE("%{public}s:UsbSubscriberTest new failed.", __func__);
         exit(0);
     }
-    auto ret = g_usbInterface->UnbindUsbdSubscriber(subscriber);
+    auto ret = g_usbInterface->UnbindUsbdSubscriber(subscriber_);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2200 %{public}d UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_NE(0, ret);
 }
@@ -2495,18 +2488,18 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2200, Function | MediumTest | Level1)
  */
 HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2210, Function | MediumTest | Level1)
 {
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    if (subscriber == nullptr) {
+    subscriber_ = new UsbSubscriberTest();
+    if (subscriber_ == nullptr) {
         HDF_LOGE("%{public}s:UsbSubscriberTest new failed.", __func__);
         exit(0);
     }
-    auto ret = g_usbInterface->UnbindUsbdSubscriber(subscriber);
+    auto ret = g_usbInterface->UnbindUsbdSubscriber(subscriber_);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2210 %{public}d UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_NE(0, ret);
-    ret = g_usbInterface->BindUsbdSubscriber(subscriber);
+    ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2210 %{public}d first BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
-    ret = g_usbInterface->UnbindUsbdSubscriber(subscriber);
+    ret = g_usbInterface->UnbindUsbdSubscriber(subscriber_);
     HDF_LOGI(
         "UsbdTransferTest::SUB_USB_HDI_2210 %{public}d again UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
@@ -2520,19 +2513,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2210, Function | MediumTest | Level1)
  */
 HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2220, Function | MediumTest | Level1)
 {
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    if (subscriber == nullptr) {
+    subscriber_ = new UsbSubscriberTest();
+    if (subscriber_ == nullptr) {
         HDF_LOGE("%{public}s:UsbSubscriberTest new failed.", __func__);
         exit(0);
     }
-    auto ret = g_usbInterface->BindUsbdSubscriber(subscriber);
+    auto ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2220 %{public}d first BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
-    ret = g_usbInterface->UnbindUsbdSubscriber(subscriber);
+    ret = g_usbInterface->UnbindUsbdSubscriber(subscriber_);
     HDF_LOGI(
         "UsbdTransferTest::SUB_USB_HDI_2220 %{public}d first UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
-    ret = g_usbInterface->UnbindUsbdSubscriber(subscriber);
+    ret = g_usbInterface->UnbindUsbdSubscriber(subscriber_);
     HDF_LOGI(
         "UsbdTransferTest::SUB_USB_HDI_2220 %{public}d again UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_NE(0, ret);
@@ -2546,22 +2539,22 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2220, Function | MediumTest | Level1)
  */
 HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2230, Function | MediumTest | Level1)
 {
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    if (subscriber == nullptr) {
+    subscriber_ = new UsbSubscriberTest();
+    if (subscriber_ == nullptr) {
         HDF_LOGE("%{public}s:UsbSubscriberTest new failed.", __func__);
         exit(0);
     }
-    auto ret = g_usbInterface->BindUsbdSubscriber(subscriber);
+    auto ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2230 %{public}d first BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
-    ret = g_usbInterface->UnbindUsbdSubscriber(subscriber);
+    ret = g_usbInterface->UnbindUsbdSubscriber(subscriber_);
     HDF_LOGI(
         "UsbdTransferTest::SUB_USB_HDI_2230 %{public}d first UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
-    ret = g_usbInterface->BindUsbdSubscriber(subscriber);
+    ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2230 %{public}d again BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
-    ret = g_usbInterface->UnbindUsbdSubscriber(subscriber);
+    ret = g_usbInterface->UnbindUsbdSubscriber(subscriber_);
     HDF_LOGI(
         "UsbdTransferTest::SUB_USB_HDI_2230 %{public}d again UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);

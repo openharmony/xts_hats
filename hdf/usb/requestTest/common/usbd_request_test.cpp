@@ -16,7 +16,6 @@
 #include <iostream>
 #include <vector>
 
-#include "UsbSubscriberTest.h"
 #include "hdf_log.h"
 #include "usbd_request_test.h"
 #include "v1_0/iusb_interface.h"
@@ -41,13 +40,14 @@ const uint8_t POINTID_DIR_OUT = USB_ENDPOINT_DIR_OUT | 1;
 const uint8_t INVALID_NUM = 222;
 const uint32_t TIME_WAIT = 10000;
 
-UsbDev UsbdRequestTest::dev_ = {0, 0};
-
 using namespace testing::ext;
 using namespace OHOS;
 using namespace OHOS::USB;
 using namespace std;
 using namespace OHOS::HDI::Usb::V1_0;
+
+UsbDev UsbdRequestTest::dev_ = {0, 0};
+sptr<UsbSubscriberTest> UsbdRequestTest::subscriber_ = nullptr;
 
 namespace {
 sptr<IUsbInterface> g_usbInterface = nullptr;
@@ -67,16 +67,16 @@ void UsbdRequestTest::SetUpTestCase(void)
         exit(0);
     }
 
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    if (g_usbInterface->BindUsbdSubscriber(subscriber) != HDF_SUCCESS) {
-        HDF_LOGE("%{public}s: bind usbd subscriber failed", __func__);
+    subscriber_ = new UsbSubscriberTest();
+    if (g_usbInterface->BindUsbdSubscriber(subscriber_) != HDF_SUCCESS) {
+        HDF_LOGE("%{public}s: bind usbd subscriber_ failed", __func__);
         exit(0);
     }
 
     std::cout << "please connect device, press enter to continue" << std::endl;
     int c;
     while ((c = getchar()) != '\n' && c != EOF) {}
-    dev_ = { subscriber->busNum_, subscriber->devAddr_ };
+    dev_ = { subscriber_->busNum_, subscriber_->devAddr_ };
 
     ret = g_usbInterface->OpenDevice(dev_);
     HDF_LOGI("UsbdRequestTest:: %{public}d OpenDevice=%{public}d", __LINE__, ret);
@@ -85,12 +85,8 @@ void UsbdRequestTest::SetUpTestCase(void)
 
 void UsbdRequestTest::TearDownTestCase(void)
 {
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    if (g_usbInterface->BindUsbdSubscriber(subscriber) != HDF_SUCCESS) {
-        HDF_LOGE("%{public}s: bind usbd subscriber failed", __func__);
-        exit(0);
-    }
-    dev_ = { subscriber->busNum_, subscriber->devAddr_ };
+    g_usbInterface->UnbindUsbdSubscriber(subscriber_);
+    dev_ = { subscriber_->busNum_, subscriber_->devAddr_ };
     auto ret = g_usbInterface->CloseDevice(dev_);
     HDF_LOGI("UsbdRequestTest:: %{public}d Close=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);

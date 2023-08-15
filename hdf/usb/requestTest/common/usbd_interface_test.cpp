@@ -14,7 +14,6 @@
  */
 
 #include <gtest/gtest.h>
-
 #include <iostream>
 
 #include "UsbSubscriberTest.h"
@@ -24,6 +23,11 @@
 #include "v1_0/usb_types.h"
 
 using OHOS::HDI::Usb::V1_0::UsbDev;
+using namespace testing::ext;
+using namespace OHOS;
+using namespace OHOS::USB;
+using namespace std;
+using namespace OHOS::HDI::Usb::V1_0;
 
 namespace {
 const uint8_t INDEX_0 = 0;
@@ -43,14 +47,10 @@ public:
     void TearDown();
 
     static UsbDev dev_;
+    static OHOS::sptr<OHOS::USB::UsbSubscriberTest> subscriber_;
 };
 UsbDev UsbdInterfaceTest::dev_ = {0, 0};
-
-using namespace testing::ext;
-using namespace OHOS;
-using namespace OHOS::USB;
-using namespace std;
-using namespace OHOS::HDI::Usb::V1_0;
+OHOS::sptr<OHOS::USB::UsbSubscriberTest> UsbdInterfaceTest::subscriber_ = nullptr;
 
 sptr<IUsbInterface> g_usbInterface = nullptr;
 
@@ -69,16 +69,16 @@ void UsbdInterfaceTest::SetUpTestCase(void)
         exit(0);
     }
 
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    if (g_usbInterface->BindUsbdSubscriber(subscriber) != HDF_SUCCESS) {
-        HDF_LOGE("%{public}s: bind usbd subscriber failed", __func__);
+    subscriber_ = new UsbSubscriberTest();
+    if (g_usbInterface->BindUsbdSubscriber(subscriber_) != HDF_SUCCESS) {
+        HDF_LOGE("%{public}s: bind usbd subscriber_ failed", __func__);
         exit(0);
     }
 
     std::cout << "please connect device, press enter to continue" << std::endl;
     int c;
     while ((c = getchar()) != '\n' && c != EOF) {}
-    dev_ = {subscriber->busNum_, subscriber->devAddr_};
+    dev_ = {subscriber_->busNum_, subscriber_->devAddr_};
 
     ret = g_usbInterface->OpenDevice(dev_);
     ASSERT_EQ(0, ret);
@@ -89,12 +89,8 @@ void UsbdInterfaceTest::SetUpTestCase(void)
 
 void UsbdInterfaceTest::TearDownTestCase(void)
 {
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    if (g_usbInterface->BindUsbdSubscriber(subscriber) != HDF_SUCCESS) {
-        HDF_LOGE("%{public}s: bind usbd subscriber failed", __func__);
-        exit(0);
-    }
-    dev_ = {subscriber->busNum_, subscriber->devAddr_};
+    g_usbInterface->UnbindUsbdSubscriber(subscriber_);
+    dev_ = {subscriber_->busNum_, subscriber_->devAddr_};
     auto ret = g_usbInterface->CloseDevice(dev_);
     HDF_LOGI("UsbdInterfaceTest:: %{public}d Close=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
@@ -103,6 +99,7 @@ void UsbdInterfaceTest::TearDownTestCase(void)
 void UsbdInterfaceTest::SetUp(void) {}
 
 void UsbdInterfaceTest::TearDown(void) {}
+
 /**
  * @tc.name: SUB_USB_HDI_1170
  * @tc.desc: Test functions to SetInterface

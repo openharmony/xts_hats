@@ -15,7 +15,6 @@
 #include <iostream>
 #include <vector>
 
-#include "UsbSubscriberTest.h"
 #include "hdf_log.h"
 #include "usbd_device_test.h"
 #include "v1_0/iusb_interface.h"

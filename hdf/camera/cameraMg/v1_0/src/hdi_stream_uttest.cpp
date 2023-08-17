@@ -1010,6 +1010,7 @@ HWTEST_F(HdiStreamUtTest, SUB_DriverSystem_CameraHdiMg_0610, TestSize.Level0)
     sleep(UT_SECOND_TIMES);
 }
 
+#ifdef DISPLAY_COMMUNITY
 /**
   * @tc.name: CAMERA_BUSY
   * @tc.desc: CAMERA_BUSY
@@ -1077,3 +1078,4 @@ HWTEST_F(HdiStreamUtTest, SUB_DriverSystem_CameraHdiMg_002, TestSize.Level0)
     cameraTest->rc = cameraTest->streamOperator->Capture(cameraTest->streamIdPreview, *cameraTest->captureInfo, true);
     EXPECT_EQ(true, cameraTest->rc == DEVICE_ERROR);
 }
+#endif

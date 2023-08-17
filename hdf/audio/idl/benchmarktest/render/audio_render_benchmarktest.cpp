@@ -652,4 +652,53 @@ BENCHMARK_F(AudioRenderBenchmarkTest, CheckSceneCapability)(benchmark::State &st
 }
 BENCHMARK_REGISTER_F(AudioRenderBenchmarkTest, CheckSceneCapability)->
     Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
+
+BENCHMARK_F(AudioRenderBenchmarkTest, AddAndRemoveAudioEffect)(benchmark::State &state)
+{
+    ASSERT_NE(render_, nullptr);
+    int32_t ret;
+    uint64_t effectId = 0;
+
+    for (auto _ : state) {
+        ret = render_->AddAudioEffect(render_, effectId);
+        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
+
+        ret = render_->RemoveAudioEffect(render_, effectId);
+        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
+    }
+}
+
+BENCHMARK_REGISTER_F(AudioRenderBenchmarkTest, AddAndRemoveAudioEffect)->
+    Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
+
+BENCHMARK_F(AudioRenderBenchmarkTest, GetFrameBufferSize)(benchmark::State &state)
+{
+    ASSERT_NE(render_, nullptr);
+    int32_t ret;
+    uint64_t bufferSize = BUFFER_LENTH;
+
+    for (auto _ : state) {
+        ret = render_->GetFrameBufferSize(render_, &bufferSize);
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
+    }
+}
+
+BENCHMARK_REGISTER_F(AudioRenderBenchmarkTest, GetFrameBufferSize)->
+    Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
+
+BENCHMARK_F(AudioRenderBenchmarkTest, IsSupportsPauseAndResume)(benchmark::State &state)
+{
+    ASSERT_NE(render_, nullptr);
+    int32_t ret;
+    bool supportPause = false;
+    bool supportResume = false;
+
+    for (auto _ : state) {
+        ret = render_->IsSupportsPauseAndResume(render_, &supportPause, &supportResume);
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
+    }
+}
+
+BENCHMARK_REGISTER_F(AudioRenderBenchmarkTest, IsSupportsPauseAndResume)->
+    Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
 }

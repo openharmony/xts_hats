@@ -353,6 +353,55 @@ BENCHMARK_F(AudioAdapterBenchmarkTest, GetExtraParams)(benchmark::State &state)
     }
     ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
+
 BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, GetExtraParams)->
+    Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
+
+
+BENCHMARK_F(AudioAdapterBenchmarkTest, UpdateAudioRoute)(benchmark::State &state)
+{
+    ASSERT_NE(adapter_, nullptr);
+    int32_t ret;
+    struct AudioRoute route = {};
+    int32_t routeHandle = 0;
+
+    for (auto _ : state) {
+        ret = adapter_->UpdateAudioRoute(adapter_, &route, &routeHandle);
+        EXPECT_NE(HDF_SUCCESS, ret);
+    }
+}
+
+BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, UpdateAudioRoute)->
+    Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
+
+BENCHMARK_F(AudioAdapterBenchmarkTest, ReleaseAudioRoute)(benchmark::State &state)
+{
+    ASSERT_NE(adapter_, nullptr);
+    int32_t ret;
+    int32_t routeHandle = 0;
+
+    for (auto _ : state) {
+        ret = adapter_->ReleaseAudioRoute(adapter_, routeHandle);
+        EXPECT_NE(HDF_SUCCESS, ret);
+    }
+}
+
+BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, ReleaseAudioRoute)->
+    Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
+
+BENCHMARK_F(AudioAdapterBenchmarkTest, RegExtraParamObserver)(benchmark::State &state)
+{
+    ASSERT_NE(adapter_, nullptr);
+    int32_t ret;
+    int8_t cookie = 0;
+    struct IAudioCallback *audioCallback = nullptr;
+
+    for (auto _ : state) {
+        ret = adapter_->RegExtraParamObserver(adapter_, audioCallback, cookie);
+        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_INVALID_PARAM);
+    }
+}
+
+BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, RegExtraParamObserver)->
     Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
 }

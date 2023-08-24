@@ -609,5 +609,54 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, ReqMmapBuffer)(benchmark::State &state)
 }
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, ReqMmapBuffer)->
     Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
+
+BENCHMARK_F(AudioCaptureBenchmarkTest, AddAndRemoveAudioEffect)(benchmark::State &state)
+{
+    ASSERT_NE(capture_, nullptr);
+    int32_t ret;
+    uint64_t effectId = 0;
+
+    for (auto _ : state) {
+        ret = capture_->AddAudioEffect(capture_, effectId);
+        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
+
+        ret = capture_->RemoveAudioEffect(capture_, effectId);
+        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
+    }
+}
+
+BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, AddAndRemoveAudioEffect)->
+    Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
+
+BENCHMARK_F(AudioCaptureBenchmarkTest, GetFrameBufferSize)(benchmark::State &state)
+{
+    ASSERT_NE(capture_, nullptr);
+    int32_t ret;
+    uint64_t bufferSize = 0;
+
+    for (auto _ : state) {
+        ret = capture_->GetFrameBufferSize(capture_, &bufferSize);
+        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
+    }
+}
+
+BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetFrameBufferSize)->
+    Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
+
+BENCHMARK_F(AudioCaptureBenchmarkTest, IsSupportsPauseAndResume)(benchmark::State &state)
+{
+    ASSERT_NE(capture_, nullptr);
+    int32_t ret;
+    bool supportPause = false;
+    bool supportResume = false;
+
+    for (auto _ : state) {
+        ret = capture_->IsSupportsPauseAndResume(capture_, &supportPause, &supportResume);
+        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
+    }
+}
+
+BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, IsSupportsPauseAndResume)->
+    Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
 }
 

@@ -232,6 +232,7 @@ HWTEST_F(AudioUtCaptureTest, HdfAudioCaptureFrameExceptions001, TestSize.Level1)
     EXPECT_NE(HDF_SUCCESS, capture_->CaptureFrame(nullptr, frame, &invalidLen, &requestBytes));
     EXPECT_NE(HDF_SUCCESS, capture_->CaptureFrame(capture_, frame, &invalidLen, &requestBytes));
 
+    capture_->Stop(capture_);
     if (frame != nullptr) {
         free(frame);
         frame = nullptr;
@@ -258,7 +259,7 @@ HWTEST_F(AudioUtCaptureTest, HdfAudioGetCapturePosition001, TestSize.Level1)
     EXPECT_EQ(ret, HDF_SUCCESS);
 
     ret = capture_->GetCapturePosition(capture_, &frames, &time);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+    EXPECT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 
     capture_->Stop(capture_);
     if (frame != nullptr) {
@@ -295,6 +296,7 @@ HWTEST_F(AudioUtCaptureTest, HdfAudioCaptureStart001, TestSize.Level1)
 
     int32_t ret = capture_->Start(capture_);
     EXPECT_EQ(ret, HDF_SUCCESS);
+    capture_->Stop(capture_);
 }
 
 HWTEST_F(AudioUtCaptureTest, HdfAudioCaptureException001, TestSize.Level1)
@@ -303,6 +305,7 @@ HWTEST_F(AudioUtCaptureTest, HdfAudioCaptureException001, TestSize.Level1)
 
     int32_t ret = capture_->Start(nullptr);
     EXPECT_NE(ret, HDF_SUCCESS);
+    capture_->Stop(capture_);
 }
 
 /* capture stop cases */
@@ -336,7 +339,8 @@ HWTEST_F(AudioUtCaptureTest, HdfAudioCapturePause001, TestSize.Level1)
     EXPECT_EQ(ret, HDF_SUCCESS);
 
     ret = capture_->Pause(capture_);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
+    EXPECT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
+    capture_->Stop(capture_);
 }
 
 HWTEST_F(AudioUtCaptureTest, HdfAudioCapturePauseException001, TestSize.Level1)
@@ -356,10 +360,11 @@ HWTEST_F(AudioUtCaptureTest, HdfAudioCapturePauseException002, TestSize.Level1)
     EXPECT_EQ(ret, HDF_SUCCESS);
 
     ret = capture_->Pause(capture_);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+    EXPECT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 
     ret = capture_->Pause(capture_);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+    EXPECT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+    capture_->Stop(capture_);
 }
 
 /* capture resume cases */
@@ -371,13 +376,13 @@ HWTEST_F(AudioUtCaptureTest, HdfAudioCaptureResume001, TestSize.Level1)
     ASSERT_NE(capture_->Stop, nullptr);
 
     int32_t ret = capture_->Start(capture_);
-    ASSERT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(ret, HDF_SUCCESS);
 
     ret = capture_->Pause(capture_);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+    EXPECT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 
     ret = capture_->Resume(capture_);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+    EXPECT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 
     ret = capture_->Stop(capture_);
     ASSERT_EQ(ret, HDF_SUCCESS);
@@ -427,6 +432,7 @@ HWTEST_F(AudioUtCaptureTest, HdfAudioCaptureTurnStandbyMode001, TestSize.Level1)
 
     ret = capture_->TurnStandbyMode(capture_);
     EXPECT_EQ(ret, HDF_SUCCESS);
+    capture_->Stop(capture_);
 }
 
 HWTEST_F(AudioUtCaptureTest, HdfAudioCaptureTurnStandbyModeException001, TestSize.Level1)

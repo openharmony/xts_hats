@@ -185,6 +185,7 @@ void AudioUtRenderTest::TearDown()
 HWTEST_F(AudioUtRenderTest, RenderStartNull001, TestSize.Level1)
 {
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->Start(nullptr));
+    render_->Stop(render_);
 }
 
 HWTEST_F(AudioUtRenderTest, RenderStartNull002, TestSize.Level1)
@@ -192,6 +193,7 @@ HWTEST_F(AudioUtRenderTest, RenderStartNull002, TestSize.Level1)
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
     EXPECT_NE(HDF_SUCCESS, render_->Start(render_));
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
+    render_->Stop(render_);
 }
 
 HWTEST_F(AudioUtRenderTest, RenderStartStopIsValid001, TestSize.Level1)
@@ -404,6 +406,32 @@ HWTEST_F(AudioUtRenderTest, RenderGetRenderPositionIsValid001, TestSize.Level1)
     ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_INVALID_PARAM);
 }
 
+HWTEST_F(AudioUtRenderTest, RenderGetRenderPositionIsValid002, TestSize.Level1)
+{
+    uint64_t frames;
+    struct AudioTimeStamp time;
+    uint32_t frameLen = (uint64_t)GetRenderBufferSize();
+    uint64_t requestBytes = frameLen;
+
+    int32_t ret = render_->Start(render_);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+
+    int8_t *frame = (int8_t *)calloc(1, frameLen);
+    EXPECT_NE(nullptr, frame);
+
+    ret = render_->RenderFrame(render_, frame, frameLen, &requestBytes);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+
+    ret = render_->GetRenderPosition(render_, &frames, &time);
+    EXPECT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_INVALID_PARAM);
+
+    render_->Stop(render_);
+    if (frame != nullptr) {
+        free(frame);
+        frame = nullptr;
+    }
+}
+
 HWTEST_F(AudioUtRenderTest, RenderSetExtraParamsNull001, TestSize.Level1)
 {
     char keyValueList[AUDIO_RENDER_BUF_TEST];
@@ -451,7 +479,7 @@ HWTEST_F(AudioUtRenderTest, RenderTurnStandbyModeNull001, TestSize.Level1)
 HWTEST_F(AudioUtRenderTest, RenderTurnStandbyModeIsValid001, TestSize.Level1)
 {
     int32_t ret = render_->Start(render_);
-	ASSERT_EQ(HDF_SUCCESS, ret);
+	EXPECT_EQ(HDF_SUCCESS, ret);
 
     ret = render_->TurnStandbyMode(render_);
     EXPECT_EQ(HDF_SUCCESS, ret);

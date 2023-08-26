@@ -22,7 +22,10 @@ ohos_moduletest_suite("HatsHdfDisplayBufferMtTest") {
   defines = []
   defines += display_defines
   module_out_path = module_output_path
-  sources = [ "display_buffer_mt.cpp" ]
+  sources = [
+    "display_buffer_mt.cpp",
+    "display_test.cpp",
+  ]
 
   external_deps = [
     "c_utils:utils",

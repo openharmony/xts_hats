@@ -32,6 +32,13 @@ protected:
 public:
     int32_t RunTest(const AllocInfo& info);
 };
+
+class DisplayBuffer : public ::testing::Test {
+protected:
+    static void SetUpTestCase();
+public:
+    int32_t RunTest(const AllocInfo& info);
+};
 } // OHOS
 } // HDI
 } // DISPLAY

@@ -1078,4 +1078,160 @@ HWTEST_F(HdiStreamUtTest, SUB_DriverSystem_CameraHdiMg_002, TestSize.Level0)
     cameraTest->rc = cameraTest->streamOperator->Capture(cameraTest->streamIdPreview, *cameraTest->captureInfo, true);
     EXPECT_EQ(true, cameraTest->rc == DEVICE_ERROR);
 }
+
+/**
+ * @tc.name: INSUFFICIENT_RESOURCES
+ * @tc.desc: INSUFFICIENT_RESOURCES
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(HdiStreamUtTest, SUB_DriverSystem_CameraHdiMg_003, TestSize.Level0)
+{
+    EXPECT_TRUE(HDI::Camera::V1_0::INSUFFICIENT_RESOURCES == -2);
+}
+
+/**
+ * @tc.name: CAMERA_CLOSED
+ * @tc.desc: CAMERA_CLOSED
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(HdiStreamUtTest, SUB_DriverSystem_CameraHdiMg_004, TestSize.Level0)
+{
+    EXPECT_TRUE(HDI::Camera::V1_0::CAMERA_CLOSED == -5);
+}
+
+/**
+ * @tc.name: NO_PERMISSION
+ * @tc.desc: NO_PERMISSION
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(HdiStreamUtTest, SUB_DriverSystem_CameraHdiMg_005, TestSize.Level0)
+{
+    EXPECT_TRUE(HDI::Camera::V1_0::NO_PERMISSION == -7);
+}
+
+/**
+ * @tc.name: FLASHLIGHT_UNAVAILABLE
+ * @tc.desc: FLASHLIGHT_UNAVAILABLE
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(HdiStreamUtTest, SUB_DriverSystem_CameraHdiMg_006, TestSize.Level0)
+{
+    EXPECT_TRUE(HDI::Camera::V1_0::FLASHLIGHT_UNAVAILABLE == 2);
+}
+
+/**
+ * @tc.name: UNKNOWN_ERROR
+ * @tc.desc: UNKNOWN_ERROR
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(HdiStreamUtTest, SUB_DriverSystem_CameraHdiMg_007, TestSize.Level0)
+{
+    EXPECT_TRUE(HDI::Camera::V1_0::UNKNOWN_ERROR == 0);
+}
+
+/**
+ * @tc.name: BUFFER_LOST
+ * @tc.desc: BUFFER_LOST
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(HdiStreamUtTest, SUB_DriverSystem_CameraHdiMg_008, TestSize.Level0)
+{
+    EXPECT_TRUE(HDI::Camera::V1_0::BUFFER_LOST == 1);
+}
+
+/**
+ * @tc.name: FATAL_ERROR
+ * @tc.desc: FATAL_ERROR
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(HdiStreamUtTest, SUB_DriverSystem_CameraHdiMg_009, TestSize.Level0)
+{
+    EXPECT_TRUE(HDI::Camera::V1_0::FATAL_ERROR == 0);
+}
+
+/**
+ * @tc.name: REQUEST_TIMEOUT
+ * @tc.desc: REQUEST_TIMEOUT
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(HdiStreamUtTest, SUB_DriverSystem_CameraHdiMg_010, TestSize.Level0)
+{
+    EXPECT_TRUE(HDI::Camera::V1_0::REQUEST_TIMEOUT == 1);
+}
+
+/**
+ * @tc.name: DRIVER_ERROR
+ * @tc.desc: DRIVER_ERROR
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(HdiStreamUtTest, SUB_DriverSystem_CameraHdiMg_011, TestSize.Level0)
+{
+    EXPECT_TRUE(HDI::Camera::V1_0::DRIVER_ERROR == 2);
+}
+
+/**
+ * @tc.name: DEVICE_PREEMPT
+ * @tc.desc: DEVICE_PREEMPT
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(HdiStreamUtTest, SUB_DriverSystem_CameraHdiMg_012, TestSize.Level0)
+{
+    EXPECT_TRUE(HDI::Camera::V1_0::DEVICE_PREEMPT == 3);
+}
+
+/**
+ * @tc.name: DEVICE_DISCONNECT
+ * @tc.desc: DEVICE_DISCONNECT
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(HdiStreamUtTest, SUB_DriverSystem_CameraHdiMg_013, TestSize.Level0)
+{
+    EXPECT_TRUE(HDI::Camera::V1_0::DEVICE_DISCONNECT == 4);
+}
+
+/**
+ * @tc.name: DCAMERA_ERROR_BEGIN
+ * @tc.desc: DCAMERA_ERROR_BEGIN
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(HdiStreamUtTest, SUB_DriverSystem_CameraHdiMg_014, TestSize.Level0)
+{
+    EXPECT_TRUE(HDI::Camera::V1_0::DCAMERA_ERROR_BEGIN == 1024);
+}
+
+/**
+ * @tc.name: DCAMERA_ERROR_DEVICE_IN_USE
+ * @tc.desc: DCAMERA_ERROR_DEVICE_IN_USE
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(HdiStreamUtTest, SUB_DriverSystem_CameraHdiMg_015, TestSize.Level0)
+{
+    EXPECT_TRUE(HDI::Camera::V1_0::DCAMERA_ERROR_DEVICE_IN_USE == 1025);
+    std::cout << "DCAMERA_ERROR_DEVICE_IN_USE value is " << HDI::Camera::V1_0::DCAMERA_ERROR_DEVICE_IN_USE << std::endl;
+}
+
+/**
+ * @tc.name: DCAMERA_ERROR_NO_PERMISSION
+ * @tc.desc: DCAMERA_ERROR_NO_PERMISSION
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(HdiStreamUtTest, SUB_DriverSystem_CameraHdiMg_016, TestSize.Level0)
+{
+    EXPECT_TRUE(HDI::Camera::V1_0::DCAMERA_ERROR_NO_PERMISSION == 1026);
+    std::cout << "DCAMERA_ERROR_NO_PERMISSION value is " << HDI::Camera::V1_0::DCAMERA_ERROR_NO_PERMISSION << std::endl;
+}
 #endif

@@ -493,6 +493,666 @@ HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0210, TestSize.Level1)
     }
 }
 
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0220, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_MEM_MMZ;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0230, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_MEM_SHARE;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0240, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_MEM_MMZ_CACHE;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0250, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_MEM_FB;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0260, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_ASSIGN_SIZE;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0270, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_HW_RENDER;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0280, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_HW_TEXTURE;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0290, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_HW_COMPOSER;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0300, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_PROTECTED;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0310, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_CAMERA_READ;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0320, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_CAMERA_WRITE;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0330, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_VIDEO_ENCODER;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0340, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_VIDEO_DECODER;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0350, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_VENDOR_PRI0;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0360, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_VENDOR_PRI1;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0370, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_VENDOR_PRI2;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0380, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_VENDOR_PRI3;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0390, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_VENDOR_PRI4;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0400, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_VENDOR_PRI5;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0410, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_VENDOR_PRI6;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0420, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_VENDOR_PRI7;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0430, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_VENDOR_PRI8;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0440, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_VENDOR_PRI9;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0450, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_VENDOR_PRI10;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0460, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_VENDOR_PRI11;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0470, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_VENDOR_PRI12;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0480, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_VENDOR_PRI13;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0490, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_VENDOR_PRI14;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0500, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_VENDOR_PRI15;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0510, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_VENDOR_PRI16;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0520, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_VENDOR_PRI17;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0530, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_VENDOR_PRI18;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0540, TestSize.Level1)
+{
+    AllocInfo info;
+    info.width  = INFO_WIDTH;
+    info.height = INFO_HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_VENDOR_PRI19;
+    info.format = PIXEL_FMT_RGBX_8888;
+
+    for (int i = 0; i < LOOP_COUNT; i++) {
+        int32_t ret = RunTest(info);
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    }
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0550, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REQUEST_CMD_PREPARE_DISPLAY_LAYERS;
+    EXPECT_EQ(64, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0560, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER;
+    EXPECT_EQ(65, ret);
+}
+
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0570, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REQUEST_CMD_SET_DISPLAY_CLIENT_DAMAGE;
+    EXPECT_EQ(66, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0580, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REQUEST_CMD_COMMIT;
+    EXPECT_EQ(67, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0590, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REQUEST_CMD_SET_LAYER_ALPHA;
+    EXPECT_EQ(68, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0600, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REQUEST_CMD_SET_LAYER_REGION;
+    EXPECT_EQ(69, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0610, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REQUEST_CMD_SET_LAYER_CROP;
+    EXPECT_EQ(70, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0620, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REQUEST_CMD_SET_LAYER_ZORDER;
+    EXPECT_EQ(71, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0630, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REQUEST_CMD_SET_LAYER_PREMULTI;
+    EXPECT_EQ(72, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0640, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REQUEST_CMD_SET_LAYER_TRANSFORM_MODE;
+    EXPECT_EQ(73, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0650, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REQUEST_CMD_SET_LAYER_DIRTY_REGION;
+    EXPECT_EQ(74, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0660, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REQUEST_CMD_SET_LAYER_VISIBLE_REGION;
+    EXPECT_EQ(75, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0670, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REQUEST_CMD_SET_LAYER_BUFFER;
+    EXPECT_EQ(76, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0680, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REQUEST_CMD_SET_LAYER_COMPOSITION_TYPE;
+    EXPECT_EQ(77, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0690, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REQUEST_CMD_SET_LAYER_BLEND_TYPE;
+    EXPECT_EQ(78, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0700, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REQUEST_CMD_SET_LAYER_VISIBLE;
+    EXPECT_EQ(79, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0710, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REQUEST_CMD_SET_LAYER_MASK_INFO;
+    EXPECT_EQ(80, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0720, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REQUEST_CMD_SET_LAYER_COLOR;
+    EXPECT_EQ(81, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0730, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REQUEST_CMD_BUTT;
+    EXPECT_EQ(82, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0740, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REPLY_CMD_SET_ERROR;
+    EXPECT_EQ(512, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0750, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REPLY_CMD_PREPARE_DISPLAY_LAYERS;
+    EXPECT_EQ(513, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0760, TestSize.Level1)
+{    
+    int ret;    
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REPLY_CMD_COMMIT;
+    EXPECT_EQ(514, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0770, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REPLY_CMD_BUTT;
+    EXPECT_EQ(515, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0780, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::CONTROL_CMD_REQUEST_BEGIN;
+    EXPECT_EQ(1024, ret);
+}
+
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0790, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::CONTROL_CMD_REPLY_BEGIN;
+    EXPECT_EQ(1025, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0800, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::CONTROL_CMD_REQUEST_END;
+    EXPECT_EQ(1026, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0810, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::CONTROL_CMD_REPLY_END;
+    EXPECT_EQ(1027, ret);
+}
+
+HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0820, TestSize.Level1)
+{
+    int ret;
+    ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::CONTROL_CMD_BUTT;
+    EXPECT_EQ(1028, ret);
+}
+
 #endif // DISPLAY_COMMUNITY
 } // OHOS
 } // HDI

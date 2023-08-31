@@ -18,7 +18,7 @@ using namespace OHOS;
 using namespace std;
 using namespace testing::ext;
 using namespace OHOS::Camera;
-
+int64_t OHOS::Camera::Test::StreamConsumer::g_timestamp[2] = {0};
 void CameraHdiTestV1_1::SetUpTestCase(void) {}
 void CameraHdiTestV1_1::TearDownTestCase(void) {}
 void CameraHdiTestV1_1::SetUp(void)
@@ -222,4 +222,281 @@ HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0680, TestSize.Level1)
     if (!metastrings.empty()) {
         std::cout << "DefaultSettings1 = " << metastrings << std::endl;
     }
+}
+/**
+ * @tc.name: GetStreamOperator_V1_1,defer_stream
+ * @tc.desc: GetStreamOperator_V1_1,defer_stream
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0690, TestSize.Level1)
+{
+    cameraTest->Init();
+    if (cameraTest->serviceV1_1 == nullptr) {
+        return;
+    }
+    cameraTest->Open();
+    if (cameraTest->cameraDeviceV1_1 == nullptr) {
+        return;
+    }
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,
+        cameraTest->streamOperator_V1_1);
+
+    // Create stream
+    cameraTest->streamInfoV1_1 = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
+    cameraTest->DefaultPreview(cameraTest->streamInfoV1_1);
+    cameraTest->streamInfosV1_1.push_back(*cameraTest->streamInfoV1_1);
+    cameraTest->rc = cameraTest->streamOperator_V1_1->CreateStreams_V1_1(cameraTest->streamInfosV1_1);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+    cameraTest->rc = cameraTest->streamOperator_V1_1->CommitStreams(OperationMode::NORMAL, cameraTest->abilityVec);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+
+    // Attach bufferqueue
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    OHOS::sptr<BufferProducerSequenceable> bufferQueue =
+        consumer->CreateProducerSeq([this](void* addr, uint32_t size) {
+            cameraTest->DumpImageFile(111, "yuv", addr, size);
+    });
+    EXPECT_NE(bufferQueue, nullptr);
+    EXPECT_NE(bufferQueue->producer_, nullptr);
+    bufferQueue->producer_->SetQueueSize(UT_DATA_SIZE);
+    cameraTest->rc = cameraTest->streamOperator_V1_1->AttachBufferQueue(
+        cameraTest->streamInfoV1_1->v1_0.streamId_, bufferQueue);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    // Capture
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    sleep(UT_SECOND_TIMES);
+
+    // Release
+    cameraTest->rc = cameraTest->streamOperator_V1_1->DetachBufferQueue(cameraTest->streamInfoV1_1->v1_0.streamId_);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    std::vector<int> streamIds = {cameraTest->streamInfoV1_1->v1_0.streamId_};
+    cameraTest->rc = cameraTest->streamOperator_V1_1->ReleaseStreams(streamIds);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.name: Quick Thumbnail
+ * @tc.desc: OHOS_ABILITY_STREAM_QUICK_THUMBNAIL_AVAILABLE
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0700, TestSize.Level1)
+{
+    cameraTest->Init();
+    if (cameraTest->serviceV1_1 == nullptr) {
+        return;
+    }
+    cameraTest->Open();
+    if (cameraTest->cameraDeviceV1_1 == nullptr) {
+        return;
+    }
+    EXPECT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    int ret = FindCameraMetadataItem(data,OHOS_ABILITY_STREAM_QUICK_THUMBNAIL_AVAILABLE, &entry);
+    EXPECT_EQ(ret, CAM_META_SUCCESS);
+    std::cout << "OHOS_ABILITY_STREAM_QUICK_THUMBNAIL_AVAILABLE value is " << static_cast<int>(entry.data.i32[0]) << std::endl;
+}
+/**
+ * @tc.name: Quick Thumbnail
+ * @tc.desc: timestamp query,EXTENDED_STREAM_INFO_QUICK_THUMBNAIL set 0
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0710, TestSize.Level1)
+{
+    int64_t timeStampCapture = 0;
+    int64_t timeStampThumbnail = 0;
+    cameraTest->Init();
+    if (cameraTest->serviceV1_1 == nullptr) {
+        return;
+    }
+
+    cameraTest->Open();
+    if (cameraTest->cameraDeviceV1_1 == nullptr) {
+        return;
+    }
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(
+        cameraTest->streamOperatorCallback, cameraTest->streamOperator_V1_1);
+    EXPECT_NE(cameraTest->streamOperator_V1_1, nullptr);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+
+    // preview streamInfo
+    cameraTest->streamInfoV1_1 = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
+    cameraTest->DefaultInfosPreview(cameraTest->streamInfoV1_1);
+    cameraTest->streamInfosV1_1.push_back(*cameraTest->streamInfoV1_1);
+
+    // capture extended streamInfo
+    OHOS::HDI::Camera::V1_1::ExtendedStreamInfo extendedStreamInfo;
+    extendedStreamInfo.type = OHOS::HDI::Camera::V1_1::EXTENDED_STREAM_INFO_QUICK_THUMBNAIL;
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer2 =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    extendedStreamInfo.bufferQueue = consumer2->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(105, "yuv", addr, size);
+    });
+    EXPECT_NE(extendedStreamInfo.bufferQueue, nullptr);
+    EXPECT_NE(extendedStreamInfo.bufferQueue->producer_, nullptr);
+    extendedStreamInfo.bufferQueue->producer_->SetQueueSize(UT_DATA_SIZE);
+    // quikThumbnial do not need these param
+    extendedStreamInfo.width = 0;
+    extendedStreamInfo.height = 0;
+    extendedStreamInfo.format = 0;
+    extendedStreamInfo.dataspace = 0;
+
+    // capture streamInfo
+    cameraTest->streamInfoCapture = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
+    cameraTest->streamInfoCapture->extendedStreamInfos = {extendedStreamInfo};
+    cameraTest->DefaultInfosCapture(cameraTest->streamInfoCapture);
+    cameraTest->streamInfosV1_1.push_back(*cameraTest->streamInfoCapture);
+
+    cameraTest->rc = cameraTest->streamOperator_V1_1->CreateStreams_V1_1(cameraTest->streamInfosV1_1);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+    cameraTest->rc = cameraTest->streamOperator_V1_1->CommitStreams(OperationMode::NORMAL, cameraTest->abilityVec);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+    sleep(UT_SECOND_TIMES);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    cameraTest->StartCapture(cameraTest->streamIdCapture, cameraTest->captureIdCapture, false, false);
+    timeStampThumbnail = OHOS::Camera::Test::StreamConsumer::g_timestamp[0];
+    timeStampCapture = OHOS::Camera::Test::StreamConsumer::g_timestamp[1];
+    EXPECT_EQ(true, timeStampThumbnail == timeStampCapture);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.name: Quick Thumbnail
+ * @tc.desc: XTENDED_STREAM_INFO_QUICK_THUMBNAIL set 0
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0720, TestSize.Level1)
+{
+
+    cameraTest->Init();
+    if (cameraTest->serviceV1_1 == nullptr) {
+        return;
+    }
+
+    cameraTest->Open();
+    if (cameraTest->cameraDeviceV1_1 == nullptr) {
+        return;
+    }
+
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(
+        cameraTest->streamOperatorCallback, cameraTest->streamOperator_V1_1);
+    EXPECT_NE(cameraTest->streamOperator_V1_1, nullptr);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+
+    // preview streamInfo
+    cameraTest->streamInfoV1_1 = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
+    cameraTest->DefaultInfosPreview(cameraTest->streamInfoV1_1);
+    cameraTest->streamInfosV1_1.push_back(*cameraTest->streamInfoV1_1);
+
+    // capture extended streamInfo
+    OHOS::HDI::Camera::V1_1::ExtendedStreamInfo extendedStreamInfo;
+    extendedStreamInfo.type = OHOS::HDI::Camera::V1_1::EXTENDED_STREAM_INFO_QUICK_THUMBNAIL;
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer2 =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    extendedStreamInfo.bufferQueue = consumer2->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(105, "yuv", addr, size);
+    });
+    EXPECT_NE(extendedStreamInfo.bufferQueue, nullptr);
+    EXPECT_NE(extendedStreamInfo.bufferQueue->producer_, nullptr);
+    extendedStreamInfo.bufferQueue->producer_->SetQueueSize(UT_DATA_SIZE);
+    // quikThumbnial do not need these param
+    extendedStreamInfo.width = 0;
+    extendedStreamInfo.height = 0;
+    extendedStreamInfo.format = 0;
+    extendedStreamInfo.dataspace = 0;
+
+    // capture streamInfo
+    cameraTest->streamInfoCapture = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
+    cameraTest->streamInfoCapture->extendedStreamInfos = {extendedStreamInfo};
+    cameraTest->DefaultInfosCapture(cameraTest->streamInfoCapture);
+    cameraTest->streamInfosV1_1.push_back(*cameraTest->streamInfoCapture);
+
+    cameraTest->rc = cameraTest->streamOperator_V1_1->CreateStreams_V1_1(cameraTest->streamInfosV1_1);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+    cameraTest->rc = cameraTest->streamOperator_V1_1->CommitStreams(OperationMode::NORMAL, cameraTest->abilityVec);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+    sleep(UT_SECOND_TIMES);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    cameraTest->StartCapture(cameraTest->streamIdCapture, cameraTest->captureIdCapture, false, false);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+
+
+/**
+ * @tc.name: Quick Thumbnail  
+ * @tc.desc: Quick Thumbnail BufferSize Set different,Size = 40
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0750, TestSize.Level1)
+{
+    cameraTest->Init();
+    if (cameraTest->serviceV1_1 == nullptr) {
+        return;
+    }
+    cameraTest->Open();
+    if (cameraTest->cameraDeviceV1_1 == nullptr) {
+        return;
+    }
+
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(
+        cameraTest->streamOperatorCallback, cameraTest->streamOperator_V1_1);
+    EXPECT_NE(cameraTest->streamOperator_V1_1, nullptr);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+
+    // preview streamInfo
+    cameraTest->streamInfoV1_1 = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
+    cameraTest->DefaultInfosPreview(cameraTest->streamInfoV1_1);
+    cameraTest->streamInfosV1_1.push_back(*cameraTest->streamInfoV1_1);
+
+    // capture extended streamInfo
+    OHOS::HDI::Camera::V1_1::ExtendedStreamInfo extendedStreamInfo;
+    extendedStreamInfo.type = OHOS::HDI::Camera::V1_1::EXTENDED_STREAM_INFO_QUICK_THUMBNAIL;
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer2 =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    extendedStreamInfo.bufferQueue = consumer2->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(105, "yuv", addr, 40);
+    });
+    EXPECT_NE(extendedStreamInfo.bufferQueue, nullptr);
+    EXPECT_NE(extendedStreamInfo.bufferQueue->producer_, nullptr);
+    extendedStreamInfo.bufferQueue->producer_->SetQueueSize(UT_DATA_SIZE);
+    // quikThumbnial do not need these param
+    extendedStreamInfo.width = 0;
+    extendedStreamInfo.height = 0;
+    extendedStreamInfo.format = 0;
+    extendedStreamInfo.dataspace = 0;
+
+    // capture streamInfo
+    cameraTest->streamInfoCapture = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
+    cameraTest->streamInfoCapture->extendedStreamInfos = {extendedStreamInfo};
+    cameraTest->DefaultInfosCapture(cameraTest->streamInfoCapture);
+    cameraTest->streamInfosV1_1.push_back(*cameraTest->streamInfoCapture);
+
+    cameraTest->rc = cameraTest->streamOperator_V1_1->CreateStreams_V1_1(cameraTest->streamInfosV1_1);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+    cameraTest->rc = cameraTest->streamOperator_V1_1->CommitStreams(OperationMode::NORMAL, cameraTest->abilityVec);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+    sleep(UT_SECOND_TIMES);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    cameraTest->StartCapture(cameraTest->streamIdCapture, cameraTest->captureIdCapture, false, false);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
 }

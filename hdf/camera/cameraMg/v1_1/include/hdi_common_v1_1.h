@@ -42,6 +42,7 @@ enum CameraUtConstants {
     UT_SECOND_TIMES,
     UT_TUNNEL_MODE = 5,
     UT_DATA_SIZE = 8,
+    UT_PREVIEW_SIZE = 3112960,
 };
 
 enum ImageDataSaveSwitch {
@@ -116,7 +117,7 @@ public:
     int streamIdAnalyze = 103;
     std::vector<int> captureIds;
     std::vector<int> streamIds;
-    int32_t imageDataSaveSwitch = SWITCH_OFF;
+    int32_t imageDataSaveSwitch = SWITCH_ON;
 
     int32_t rc;
     bool status;
@@ -149,6 +150,7 @@ public:
     class StreamConsumer {
     public:
         void CalculateFps(int64_t timestamp, int32_t streamId);
+        void ReturnTimeStamp(int64_t *g_timestamp, uint32_t lenght,int64_t timestamp, int32_t gotSize);
         OHOS::sptr<OHOS::IBufferProducer> CreateProducer(std::function<void(void*, uint32_t)> callback);
         OHOS::sptr<BufferProducerSequenceable> CreateProducerSeq(std::function<void(void*, uint32_t)> callback);
         void TakeSnapshoe()
@@ -179,6 +181,7 @@ public:
         std::function<void(void*, uint32_t)> callback_ = nullptr;
         bool isFirstCalculateFps_ = false;
         int timestampCount_ = 0;
+        static int64_t g_timestamp[2];
         int64_t intervalTimestamp_ = 0;
         const int64_t ONESECOND_OF_MICROSECOND_UNIT = 1000000000;
         int64_t interval_ = ONESECOND_OF_MICROSECOND_UNIT;

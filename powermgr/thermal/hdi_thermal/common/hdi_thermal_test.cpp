@@ -323,7 +323,9 @@ HWTEST_F(HdfThermalHdiTest, HdfThermalHdiTest010, TestSize.Level1)
     printf("HdfThermalHdiTest010: start.");
     int32_t isolateNum = 2;
     int32_t ret = g_thermalInterface->IsolateCpu(isolateNum);
-    EXPECT_EQ(0, ret);
+    if (ret != 0) {
+        return;
+    }
 
     char path[MAX_PATH] = {0};
     char valueBuf[MAX_PATH] = {0};

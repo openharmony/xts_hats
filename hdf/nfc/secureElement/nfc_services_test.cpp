@@ -27,7 +27,6 @@
 #include "v1_0/isecure_element_callback.h"
 #include "nfc_chip_type_parser.h"
 #include "common_utils.h"
-// #include "se_terminal.h"
 
 using namespace OHOS::HDI::SecureElement::V1_0;
 using namespace testing::ext;
@@ -39,22 +38,17 @@ using OHOS::HDI::SecureElement::V1_0::ISecureElementCallback;
 using namespace OHOS::NFC;
 using namespace OHOS::SE;
 std::vector<uint8_t> vecCommand = {128, 202, 159, 127, 0};
-// int MAX_APDU_RESP_BYTES = 512;
 std::recursive_mutex mLock_{};
-// tHAL_NFC_CBACK* NfcAdaptation::mSeHdi_Callback = nullptr;
-// tHAL_NFC_DATA_CBACK* NfcAdaptation::mSeHdi_DataCallback = nullptr;
 
 class SeClientCallback : public ISecureElementCallback {
 public:
     explicit SeClientCallback() {
-
     }
 
     int32_t OnSeStateChanged(bool connected) override
     {
         return HDF_SUCCESS;
     }
-
 };
 
 OHOS::sptr<ISeHdiV1_0> mSeHdi_ = nullptr;
@@ -92,14 +86,13 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0100, TestSize.Level2)
     if (!NfcChipTypeParser::IsSn110()) {
         EXPECT_EQ(HDF_SUCCESS, 0);
     }
-    else{
+    else {
         SecureElementStatus status = SecureElementStatus::SE_GENERAL_ERROR;
         int32_t ret = mSeHdi_->init(mSeHdiCallback, status);
         if (ret != HDF_SUCCESS) {
             printf("SeTerminal Error Initialize secure element hdf ret =  %d", ret);
         }
         if (status != SecureElementStatus::SE_SUCCESS) {
-            // printf("SeTerminal::Error Initialize secure element hdf status = ", status);
             EXPECT_EQ(HDF_SUCCESS, 0);
         }
     }
@@ -116,7 +109,7 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0200, TestSize.Level2)
         printf("SeTerminal SUB_DriverSystem_secureElement_0200 1 ");
         EXPECT_EQ(HDF_SUCCESS, 0);
     }
-    else{
+    else {
         if (mSeHdi_ == nullptr) {
         printf("SeTerminal SUB_DriverSystem_secureElement_0200 2");
             ASSERT_NE(nullptr, mSeHdi_);
@@ -140,7 +133,7 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0300, TestSize.Level2)
         printf("SeTerminal SUB_DriverSystem_secureElement_0300 1 ");
         EXPECT_EQ(HDF_SUCCESS, 0);
     }
-    else{
+    else {
         if (mSeHdi_ == nullptr) {
         printf("SeTerminal SUB_DriverSystem_secureElement_0300 2 ");
             ASSERT_NE(nullptr, mSeHdi_);
@@ -163,7 +156,7 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0400, TestSize.Level2)
     if (!NfcChipTypeParser::IsSn110()) {
         EXPECT_EQ(HDF_SUCCESS, 0);
     }
-    else{
+    else {
         if (mSeHdi_ == nullptr) {
             ASSERT_NE(nullptr, mSeHdi_);
             return;
@@ -191,7 +184,7 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0500, TestSize.Level2)
     if (!NfcChipTypeParser::IsSn110()) {
         EXPECT_EQ(HDF_SUCCESS, 0);
     }
-    else{
+    else {
         if (mSeHdi_ == nullptr) {
             ASSERT_NE(nullptr, mSeHdi_);
             return;
@@ -213,7 +206,7 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0600, TestSize.Level2)
     if (!NfcChipTypeParser::IsSn110()) {
         EXPECT_EQ(HDF_SUCCESS, 0);
     }
-    else{
+    else {
         if (mSeHdi_ == nullptr) {
             ASSERT_NE(nullptr, mSeHdi_);
             return;
@@ -240,7 +233,7 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0700, TestSize.Level2)
     if (!NfcChipTypeParser::IsSn110()) {
         EXPECT_EQ(HDF_SUCCESS, 0);
     }
-    else{
+    else {
         if (mSeHdi_ == nullptr) {
             ASSERT_NE(nullptr, mSeHdi_);
             return;
@@ -265,7 +258,7 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0800, TestSize.Level2)
     if (!NfcChipTypeParser::IsSn110()) {
         EXPECT_EQ(HDF_SUCCESS, 0);
     }
-    else{
+    else {
         if (mSeHdi_ == nullptr) {
             ASSERT_NE(nullptr, mSeHdi_);
             return;
@@ -276,3 +269,44 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0800, TestSize.Level2)
     }
 }
 
+/**
+* @tc.name: SUB_DriverSystem_secureElement_0900
+* @tc.desc: HdinfcType test
+* @tc.type: FUNC
+*/
+HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0900, TestSize.Level2)
+{
+    SecureElementStatus success = SecureElementStatus::SE_SUCCESS;
+    std::cout << "SecureElementStatus SE_SUCCESS = " << success << std::endl;
+    EXPECT_EQ(success, 0);
+
+    SecureElementStatus null_pointer_error = SecureElementStatus::SE_NULL_POINTER_ERROR;
+    std::cout << "SecureElementStatus SE_NULL_POINTER_ERROR = " << null_pointer_error << std::endl;
+
+    SecureElementStatus illegal_parameter_error = SecureElementStatus::SE_ILLEGAL_PARAMETER_ERROR;
+    std::cout << "SecureElementStatus SE_ILLEGAL_PARAMETER_ERROR = " << illegal_parameter_error << std::endl;
+
+    SecureElementStatus illegal_state_error = SecureElementStatus::SE_ILLEGAL_STATE_ERROR;
+    std::cout << "SecureElementStatus SE_ILLEGAL_STATE_ERROR = " << illegal_state_error << std::endl;
+
+    SecureElementStatus security_error = SecureElementStatus::SE_SECURITY_ERROR;
+    std::cout << "SecureElementStatus SE_SECURITY_ERROR = " << security_error << std::endl;
+
+    SecureElementStatus channel_not_available_error = SecureElementStatus::SE_CHANNEL_NOT_AVAILABLE_ERROR;
+    std::cout << "SecureElementStatus SE_CHANNEL_NOT_AVAILABLE_ERROR = " << channel_not_available_error << std::endl;
+
+    SecureElementStatus no_such_element_error = SecureElementStatus::SE_NO_SUCH_ELEMENT_ERROR;
+    std::cout << "SecureElementStatus SE_NO_SUCH_ELEMENT_ERROR = " << no_such_element_error << std::endl;
+
+    SecureElementStatus illegal_reference_error = SecureElementStatus::SE_ILLEGAL_REFERENCE_ERROR;
+    std::cout << "SecureElementStatus SE_ILLEGAL_REFERENCE_ERROR = " << illegal_reference_error << std::endl;
+
+    SecureElementStatus operation_not_supported_error = SecureElementStatus::SE_OPERATION_NOT_SUPPORTED_ERROR;
+    std::cout << "SecureElementStatus SE_OPERATION_NOT_SUPPORTED_ERROR = " << operation_not_supported_error << std::endl;
+
+    SecureElementStatus io_error = SecureElementStatus::SE_IO_ERROR;
+    std::cout << "SecureElementStatus SE_IO_ERROR = " << io_error << std::endl;
+
+    SecureElementStatus general_error = SecureElementStatus::SE_GENERAL_ERROR;
+    std::cout << "SecureElementStatus SE_GENERAL_ERROR = " << general_error << std::endl;
+}

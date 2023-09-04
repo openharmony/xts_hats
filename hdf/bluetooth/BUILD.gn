@@ -19,5 +19,8 @@ import("//test/xts/tools/build/suite.gni")
 group("HatsHdfBluetoothTest") {
   testonly = true
 
-  deps = [ "hdiService:HatsBluetoothHdiTest" ]
+  deps = [
+    "a2dp:HatsBluetootha2dpTest",
+    "hdiService:HatsBluetoothHdiTest",
+  ]
 }

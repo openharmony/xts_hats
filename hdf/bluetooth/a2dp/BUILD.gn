@@ -14,27 +14,32 @@
 import("//build/ohos_var.gni")
 
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
+import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
 
-module_output_path = "hdf/nfc"
+module_output_path = "hdf/bluetooth"
+root_path =
+    "../../../../../../drivers/peripheral/adapter/bluetooth/a2dp/hdi_service"
 
-ohos_moduletest_suite("HatsHdfNfcHdiTest") {
+ohos_moduletest_suite("HatsBluetootha2dpTest") {
   module_out_path = module_output_path
-  sources = [ "nfc_services_test.cpp" ]
+  sources = [
+    "a2dp_services_test.cpp",
+    "bluetooth_hci_callback_impl.cpp",
+  ]
 
   deps = [
-    "../../../../../../drivers/interface/nfc/v1_0:libnfc_proxy_1.0",
-    "../../../../../../drivers/peripheral/nfc/hdi_service:hdi_nfc_service",
-    "../../../../../../foundation/communication/nfc/services:nfc_service",
+    "${root_path}/utils/session:libbluetooth_audio_session",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
   ]
-  configs = [ ":hdf_nfc" ]
+  configs = [ ":hdf_bluetooth" ]
 
   if (is_standard_system) {
     external_deps = [
       "c_utils:utils",
-      "drivers_interface_nfc:nfc_idl_headers",
+      "drivers_interface_bluetooth:libbluetooth_a2dp_proxy_1.0",
+      "drivers_interface_bluetooth:libbluetooth_hci_proxy_1.0",
       "hdf_core:libhdf_host",
       "hdf_core:libhdf_ipc_adapter",
       "hdf_core:libhdf_utils",
@@ -47,20 +52,13 @@ ohos_moduletest_suite("HatsHdfNfcHdiTest") {
   external_deps += [ "ipc:ipc_single" ]
 
   subsystem_name = "xts"
-  part_name = "hats"
+  part_name = "xts_hats"
 }
 
-config("hdf_nfc") {
+config("hdf_bluetooth") {
   include_dirs = [
     "include",
-    "../../../../../../drivers/peripheral/nfc/hdi_service",
-    "../../../../../../drivers/peripheral/nfc/vendor_adaptor",
-    "//third_party/nfc_hdiimpl/SN100x/halimpl/inc",
-    "//third_party/libnfc-nci/SN100x/src/include/",
-    "//third_party/libnfc-nci/SN100x/utils/include/",
-    "//third_party/nfc_hdiimpl/SN100x/halimpl/src/include/",
-    "//third_party/libnfc-nci/SN100x/src/gki/ulinux/",
-    "//third_party/libnfc-nci/SN100x/src/gki/common/",
-    "../../../../../../foundation//communication/nfc/services/src/utils/",
+    "${root_path}/hdi_service",
+    "${root_path}/hdi_service/utils/session",
   ]
 }

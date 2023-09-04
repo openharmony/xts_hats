@@ -300,3 +300,67 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcClose_0800, TestSize.Level2)
     }
 }
 
+/**
+  * @tc.name: SUB_DriverSystem_HdinfcClose_0900
+  * @tc.desc: the HdiNfc enum types test
+  * @tc.type: FUNC
+  */
+
+HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_HdinfcClose_0900, TestSize.Level2)
+{
+    NfcEvent open_cplt = NfcEvent::OPEN_CPLT;
+    std::cout << "NfcEvent OPEN_CPLT = " << open_cplt << std::endl;
+    EXPECT_EQ(open_cplt, 0);
+
+    NfcEvent close_cplt = NfcEvent::CLOSE_CPLT;
+    std::cout << "NfcEvent CLOSE_CPLT = " << close_cplt << std::endl;
+    EXPECT_EQ(close_cplt, 1);
+
+    NfcEvent post_init_cplt = NfcEvent::POST_INIT_CPLT;
+    std::cout << "NfcEvent POST_INIT_CPLT = " << post_init_cplt << std::endl;
+    EXPECT_EQ(post_init_cplt, 2);
+
+    NfcEvent per_discover_cplt = NfcEvent::PRE_DISCOVER_CPLT;
+    std::cout << "NfcEvent PRE_DISCOVER_CPLT = " << per_discover_cplt << std::endl;
+    EXPECT_EQ(per_discover_cplt, 3);
+
+    NfcEvent request_control = NfcEvent::REQUEST_CONTROL;
+    std::cout << "NfcEvent REQUEST_CONTROL = " << request_control << std::endl;
+    EXPECT_EQ(request_control, 4);
+
+    NfcEvent release_control = NfcEvent::RELEASE_CONTROL;
+    std::cout << "NfcEvent RELEASE_CONTROL = " << release_control << std::endl;
+    EXPECT_EQ(release_control, 5);
+
+    NfcEvent error = NfcEvent::ERROR;
+    std::cout << "NfcEvent ERROR = " << error << std::endl;
+    EXPECT_EQ(error, 6);
+
+    NfcEvent hci_network_reset = NfcEvent::HCI_NETWORK_RESET;
+    std::cout << "NfcEvent HCI_NETWORK_RESET = " << hci_network_reset << std::endl;
+    EXPECT_EQ(hci_network_reset, 7);
+
+    NfcStatus ok = NfcStatus::OK;
+    std::cout << "NfcStatus OK = " << ok << std::endl;
+    EXPECT_EQ(ok, 0);
+
+    NfcStatus failed = NfcStatus::FAILED;
+    std::cout << "NfcStatus FAILED = " << failed << std::endl;
+    EXPECT_EQ(failed, 1);
+
+    NfcStatus err_transport = NfcStatus::ERR_TRANSPORT;
+    std::cout << "NfcStatus ERR_TRANSPORT = " << err_transport << std::endl;
+    EXPECT_EQ(err_transport, 2);
+
+    NfcStatus err_cmd_timeout = NfcStatus::ERR_CMD_TIMEOUT;
+    std::cout << "NfcStatus ERR_CMD_TIMEOUT = " << err_cmd_timeout << std::endl;
+    EXPECT_EQ(err_cmd_timeout, 3);
+
+    NfcStatus refused = NfcStatus::REFUSED;
+    std::cout << "NfcStatus REFUSED = " << refused << std::endl;
+    EXPECT_EQ(refused, 4);
+
+    NfcCommand cmd_invalid = NfcCommand::CMD_INVALID;
+    std::cout << "NfcCommand CMD_INVALID = " << cmd_invalid << std::endl;
+    EXPECT_EQ(cmd_invalid, 0);
+}

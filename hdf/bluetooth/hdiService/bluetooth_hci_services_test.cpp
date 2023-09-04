@@ -324,3 +324,24 @@ HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothClose_0100, TestSize.
     EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
+/**
+  * @tc.name: HdiBluetoothHciType_0100
+  * @tc.desc: the Hdibluetooth hci enum types test
+  * @tc.type: FUNC
+  */
+
+HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothHciType_0100, TestSize.Level2)
+{
+    BtStatus btstatus_success = BtStatus::SUCCESS;
+    std::cout << "BtStatus SUCCESS = " << btstatus_success << std::endl;
+    EXPECT_EQ(btstatus_success, 0);
+
+    BtStatus btstatus_initialError = BtStatus::INITIAL_ERROR;
+    std::cout << "BtStatus INITIAL_ERROR = " << btstatus_initialError << std::endl;
+    EXPECT_EQ(btstatus_initialError, 1);
+
+    BtStatus btstatus_unknown = BtStatus::UNKNOWN;
+    std::cout << "BtStatus UNKNOWN = " << btstatus_unknown << std::endl;
+    EXPECT_EQ(btstatus_unknown, 2);
+
+}

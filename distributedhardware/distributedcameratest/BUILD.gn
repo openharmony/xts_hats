@@ -56,6 +56,7 @@ ohos_moduletest_suite("HatsdisCameraProviderCase") {
     "$base_root/utils/system/safwk/native/include",
     "$base_root/third_party/jsoncpp/include",
     "$base_root/drivers/peripheral/base/",
+    "$base_root/third_party/cJSON",
   ]
 
   deps = [
@@ -64,6 +65,7 @@ ohos_moduletest_suite("HatsdisCameraProviderCase") {
     "$base_root/foundation/distributedhardware/distributed_camera/common:distributed_camera_utils",
     "$base_root/foundation/distributedhardware/distributed_camera/services/cameraservice/sourceservice:distributed_camera_source",
     "$base_root/foundation/distributedhardware/distributed_camera/services/channel:distributed_camera_channel",
+    "$base_root/third_party/cJSON:cjson",
     "$base_root/third_party/googletest:gtest_main",
     "$base_root/third_party/jsoncpp:jsoncpp",
   ]

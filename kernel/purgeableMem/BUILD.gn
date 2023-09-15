@@ -21,8 +21,15 @@ ohos_moduletest_suite("HatsPurgeable") {
   external_deps = [
     "c_utils:utils",
     "hilog:libhilog",
-    "memory_utils:libpurgeablemem",
   ]
+
+  if (defined(global_parts_info) &&
+      defined(global_parts_info.resourceschedule_memmgr_plugin)) {
+    external_deps += [ "memmgr_plugin:libpurgeablemem_plugin" ]
+  } else {
+    external_deps += [ "memory_utils:libpurgeablemem" ]
+  }
+
   include_dirs = [ "include" ]
   cflags = [ "-Wno-error" ]
   subsystem_name = "kernel"

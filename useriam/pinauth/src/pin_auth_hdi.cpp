@@ -21,6 +21,7 @@ using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
 using namespace OHOS::HDI::PinAuth;
 using namespace OHOS::HDI::PinAuth::V1_0;
+using namespace OHOS::HDI::PinAuth::V1_1;
 using Property = OHOS::HDI::PinAuth::V1_1::Property;
 
 static ExecutorImpl g_executorImpl(make_shared<OHOS::UserIam::PinAuth::PinAuth>());
@@ -45,8 +46,8 @@ void UserIamPinAuthTest::TearDown()
 
 class DummyIExecutorCallback : public IExecutorCallbackV1_0 {
 public:
-    DummyIExecutorCallback(int32_t onResultResult, int32_t onGetDataResult)
-        : onResultResult_(onResultResult), onGetDataResult_(onGetDataResult)
+    DummyIExecutorCallback(int32_t onResultResult, int32_t onGetDataResult, int32_t onGetDataV1Result)
+        : onResultResult_(onResultResult), onGetDataResult_(onGetDataResult), onGetDataV1Result_(onGetDataV1Result)
     {
     }
 
@@ -56,17 +57,26 @@ public:
         return onResultResult_;
     }
 
-    int32_t OnGetData(uint64_t scheduleId, const std::vector<uint8_t> &salt, uint64_t authSubType) override
+    int32_t OnGetData(uint64_t scheduleId, const std::vector<uint8_t> &algoParameter, uint64_t authSubType) override
     {
         cout << "scheduleId is " << scheduleId << endl;
-        cout << " salt len is " << salt.size() << endl;
+        cout << " algoParameter len is " << algoParameter.size() << endl;
         cout << " authSubType is " << authSubType << endl;
         return onGetDataResult_;
+    }
+
+    int32_t OnGetDataV1_1(uint64_t scheduleId, const std::vector<uint8_t> &algoParameter, uint64_t authSubType,
+        uint32_t algoVersion)
+    {
+        cout << "scheduleId is " << scheduleId << endl;
+        cout << " authSubType is " << authSubType << endl;
+        return onGetDataV1Result_;
     }
 
 private:
     int32_t onResultResult_;
     int32_t onGetDataResult_;
+    int32_t onGetDataV1Result_;
 };
 
 static void FillTestExecutorInfo(Parcel &parcel, ExecutorInfo &executorInfo)
@@ -94,7 +104,8 @@ static void FillTestIExecutorCallback(Parcel &parcel, sptr<IExecutorCallbackV1_0
     if (isNull) {
         callbackObj = nullptr;
     } else {
-        callbackObj = new (std::nothrow) DummyIExecutorCallback(parcel.ReadInt32(), parcel.ReadInt32());
+        callbackObj = new (std::nothrow) DummyIExecutorCallback(parcel.ReadInt32(),
+            parcel.ReadInt32(), parcel.ReadInt32());
         if (callbackObj == nullptr) {
             cout << "callbackObj construct fail" << endl;
         }

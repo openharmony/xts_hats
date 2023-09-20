@@ -39,6 +39,7 @@ ohos_moduletest_suite("HatsUserIamPinAuthTest") {
 
   sources = [
     "./src/pin_auth_hdi.cpp",
+    "./src/pin_auth_hdi_two.cpp",
     "./src/pin_auth_type_test.cpp",
   ]
 

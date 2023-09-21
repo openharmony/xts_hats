@@ -32,6 +32,14 @@ public:
     void TearDown();
 };
 
+class UserIamPinAuthTwoTest : public testing::Test {
+public:
+    static void SetUpTestCase();
+    static void TearDownTestCase();
+    void SetUp();
+    void TearDown();
+};
+
 class PinAuthTypeTest : public testing::Test {
 public:
     static void SetUpTestCase();

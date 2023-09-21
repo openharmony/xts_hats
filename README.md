@@ -508,9 +508,15 @@ OpenHarmony支持如下几种系统类型：
 
 ### 全量用例执行指导（适用于小型系统、标准系统）<a name="section128222336544"></a>
 
-搭建测试环境Windows工作台下安装python3.7及以上版本，确保工作台和测试设备正常连接。
+Windows工作台下安装python3.7及以上版本，确保工作台和测试设备正常连接。
 
-测试执行目录（对应编译生成的out/hispark\_taurus/suites/hats目录）
+**注：高版本python不带 easy_install，可以安装低于 52.0.0 的 setuptools，解决该问题。**
+
+```
+pip install setuptools==50.0.0
+```
+
+测试执行目录（对应编译生成的out/hispark_taurus/suites/hats目录）
 
   ```
 ├── testcase                       # 测试套文件存放目录

@@ -33,6 +33,8 @@
 #define USB_FUNCTION_ACM     (1 << 0)
 #define USB_FUNCTION_ECM     (1 << 1)
 #define USB_FUNCTION_HDC     (1 << 2)
+#define USB_FUNCTION_MTP     (1 << 3)
+#define USB_FUNCTION_PTP     (1 << 4)
 #define USB_FUNCTION_RNDIS   (1 << 5)
 #define USB_FUNCTION_STORAGE (1 << 9)
 

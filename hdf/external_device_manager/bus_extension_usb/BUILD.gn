@@ -26,7 +26,6 @@ ohos_moduletest_suite("HatsHdfExternalBusUsbTest") {
     "src/usb_subscriber_test.cpp",
   ]
   include_dirs = [
-    "//third_party/jsoncpp/include/json",
     "include",
     "${usb_bus_extension_include_path}",
   ]

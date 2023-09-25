@@ -22,7 +22,7 @@
 #include <iostream>
 #include <string>
 #include "parcel.h"
-#include "v1_1/user_auth_interface_service.h"
+#include "v1_2/user_auth_interface_service.h"
 
 class UserIamUserAuthTest : public testing::Test {
 public:

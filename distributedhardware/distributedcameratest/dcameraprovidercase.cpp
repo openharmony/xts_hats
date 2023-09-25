@@ -140,37 +140,37 @@ void DCameraProviderTest::TearDown(void)
     stateListener_ = nullptr;
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0010, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_0100, TestSize.Level1)
 {
     int32_t ret = cameraProvider.EnableDCameraDevice(dhBase, testParam, hdiCallback_);
     EXPECT_EQ(0, ret) << "EnableDCameraDevice fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0020, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_0200, TestSize.Level1)
 {
     int32_t ret = cameraProvider.OpenSession(dhBase);
     EXPECT_NE(0, ret) << "OpenSession fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0030, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_0300, TestSize.Level1)
 {
     int32_t ret = cameraProvider.ConfigureStreams(dhBase, streamInfos);
     EXPECT_NE(0, ret) << "ConfigureStreams fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0040, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_0400, TestSize.Level1)
 {
     int32_t ret = cameraProvider.StartCapture(dhBase, captureInfos);
     EXPECT_NE(0, ret) << "StartCapture fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0050, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_0500, TestSize.Level1)
 {
     int32_t ret = cameraProvider.OnSettingsResult(dhBase, result);
     EXPECT_NE(0, ret) << "OnSettingsResult fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0060, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_0600, TestSize.Level1)
 {
     result1.type_ = UPDATE_METADATA;
     result1.value_ = "SettingValue";
@@ -178,7 +178,7 @@ HWTEST_F(DCameraProviderTest, DCameraCase_0060, TestSize.Level1)
     EXPECT_NE(0, ret) << "OnSettingsResult fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0070, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_0700, TestSize.Level1)
 {
     result2.type_ = ENABLE_METADATA;
     result2.value_ = "SettingValue";
@@ -186,7 +186,7 @@ HWTEST_F(DCameraProviderTest, DCameraCase_0070, TestSize.Level1)
     EXPECT_NE(0, ret) << "OnSettingsResult fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0080, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_0800, TestSize.Level1)
 {
     result3.type_ = DISABLE_METADATA;
     result3.value_ = "SettingValue";
@@ -194,7 +194,7 @@ HWTEST_F(DCameraProviderTest, DCameraCase_0080, TestSize.Level1)
     EXPECT_NE(0, ret) << "OnSettingsResult fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0090, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_0900, TestSize.Level1)
 {
     result4.type_ = SET_FLASH_LIGHT;
     result4.value_ = "SettingValue";
@@ -202,7 +202,7 @@ HWTEST_F(DCameraProviderTest, DCameraCase_0090, TestSize.Level1)
     EXPECT_NE(0, ret) << "OnSettingsResult fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0100, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_1000, TestSize.Level1)
 {
     result5.type_ = FPS_RANGE;
     result5.value_ = "SettingValue";
@@ -210,7 +210,7 @@ HWTEST_F(DCameraProviderTest, DCameraCase_0100, TestSize.Level1)
     EXPECT_NE(0, ret) << "OnSettingsResult fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0110, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_1100, TestSize.Level1)
 {
     result6.type_ = UPDATE_FRAME_METADATA;
     result6.value_ = "SettingValue";
@@ -218,104 +218,104 @@ HWTEST_F(DCameraProviderTest, DCameraCase_0110, TestSize.Level1)
     EXPECT_NE(0, ret) << "OnSettingsResult fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0120, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_1200, TestSize.Level1)
 {
     int32_t ret = cameraProvider.UpdateSettings(dhBase, settings);
     EXPECT_NE(0, ret) << "UpdateSettings fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0130, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_1300, TestSize.Level1)
 {
     int32_t ret = cameraProvider.AcquireBuffer(dhBase, TEST_STREAMID, buffer);
     EXPECT_NE(0, ret) << "AcquireBuffer fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0140, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_1400, TestSize.Level1)
 {
     int32_t ret = cameraProvider.Notify(dhBase, hdiEvent);
     EXPECT_EQ(0, ret) << "Notify fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0150, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_1500, TestSize.Level1)
 {
     int32_t ret = cameraProvider.ShutterBuffer(dhBase, TEST_STREAMID, buffer);
     EXPECT_NE(0, ret) << "ShutterBuffer fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0160, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_1600, TestSize.Level1)
 {
     int32_t ret = cameraProvider.StopCapture(dhBase, streamIds);
     EXPECT_NE(0, ret) << "StopCapture fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0170, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_1700, TestSize.Level1)
 {
     int32_t ret = cameraProvider.ReleaseStreams(dhBase, streamIds);
     EXPECT_NE(0, ret) << "ReleaseStreams fail";
 }
 
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0180, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_1800, TestSize.Level1)
 {
     int32_t ret = cameraProvider.CloseSession(dhBase);
     EXPECT_NE(0, ret) << "CloseSession fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0190, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_1900, TestSize.Level1)
 {
     int32_t ret = cameraProvider.DisableDCameraDevice(dhBase);
     EXPECT_EQ(0, ret) << "DisableDCameraDevice fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0200, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_2000, TestSize.Level1)
 {
     int32_t ret = cameraProvider.OpenSession(dhBase);
     EXPECT_NE(SUCCESS, ret) << "OpenSession fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0210, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_2100, TestSize.Level1)
 {
     int32_t ret = cameraProvider.ConfigureStreams(dhBase, streamInfos);
     EXPECT_NE(CAMERA_BUSY, ret) << "ConfigureStreams fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0220, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_2200, TestSize.Level1)
 {
     int32_t ret = cameraProvider.StartCapture(dhBase, captureInfos);
     EXPECT_EQ(INVALID_ARGUMENT, ret) << "StartCapture fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0230, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_2300, TestSize.Level1)
 {
     int32_t ret = cameraProvider.OnSettingsResult(dhBase, result);
     EXPECT_NE(METHOD_NOT_SUPPORTED, ret) << "OnSettingsResult fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0240, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_2400, TestSize.Level1)
 {
     int32_t ret = cameraProvider.UpdateSettings(dhBase, settings);
     EXPECT_NE(CAMERA_OFFLINE, ret) << "UpdateSettings fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0250, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_2500, TestSize.Level1)
 {
     int32_t ret = cameraProvider.AcquireBuffer(dhBase, TEST_STREAMID, buffer);
     EXPECT_NE(EXCEED_MAX_NUMBER, ret) << "AcquireBuffer fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0260, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_2600, TestSize.Level1)
 {
     int32_t ret = cameraProvider.Notify(dhBase, hdiEvent);
     EXPECT_NE(DEVICE_NOT_INIT, ret) << "Notify fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0270, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_2700, TestSize.Level1)
 {
     int32_t ret = cameraProvider.ShutterBuffer(dhBase, TEST_STREAMID, buffer);
     EXPECT_NE(FAILED, ret) << "ShutterBuffer fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0280, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_2800, TestSize.Level1)
 {
     streamInfo2.streamId_ = 1;
     streamInfo2.width_ = TEST_WIDTH;
@@ -330,7 +330,7 @@ HWTEST_F(DCameraProviderTest, DCameraCase_0280, TestSize.Level1)
     EXPECT_NE(0, ret) << "ConfigureStreams fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_0290, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_2900, TestSize.Level1)
 {
     streamInfo3.streamId_ = 1;
     streamInfo3.width_ = TEST_WIDTH;
@@ -345,7 +345,7 @@ HWTEST_F(DCameraProviderTest, DCameraCase_0290, TestSize.Level1)
     EXPECT_NE(0, ret) << "ConfigureStreams fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_3000, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_3000, TestSize.Level1)
 {
     streamInfo4.streamId_ = 1;
     streamInfo4.width_ = TEST_WIDTH;
@@ -360,7 +360,7 @@ HWTEST_F(DCameraProviderTest, DCameraCase_3000, TestSize.Level1)
     EXPECT_NE(0, ret) << "ConfigureStreams fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_3001, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_3100, TestSize.Level1)
 {
     streamInfo5.streamId_ = 1;
     streamInfo5.width_ = TEST_WIDTH;
@@ -375,7 +375,7 @@ HWTEST_F(DCameraProviderTest, DCameraCase_3001, TestSize.Level1)
     EXPECT_NE(0, ret) << "ConfigureStreams fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_3002, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_3200, TestSize.Level1)
 {
     captureInfo2.streamIds_.push_back(1);
     captureInfo2.width_ = TEST_WIDTH;
@@ -390,7 +390,7 @@ HWTEST_F(DCameraProviderTest, DCameraCase_3002, TestSize.Level1)
     EXPECT_EQ(INVALID_ARGUMENT, ret) << "StartCapture fail";
 }
 
-HWTEST_F(DCameraProviderTest, DCameraCase_3003, TestSize.Level1)
+HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_3300, TestSize.Level1)
 {
     captureInfo3.streamIds_.push_back(1);
     captureInfo3.width_ = TEST_WIDTH;

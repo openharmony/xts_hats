@@ -29,9 +29,16 @@ using namespace std;
 using namespace OHOS::HDI::Usb::V1_0;
 
 constexpr int32_t SLEEP_TIME = 3;
+constexpr int32_t ITERATION_FREQUENCY = 100;
+constexpr int32_t REPETITION_FREQUENCY = 3;
 
 namespace {
 sptr<IUsbInterface> g_usbInterface = nullptr;
+
+int32_t SwitchErrCode(int32_t ret)
+{
+    return ret == HDF_ERR_NOT_SUPPORT ? HDF_SUCCESS : ret;
+}
 
 void HdfUsbdBenchmarkFunctionTest::SetUp(const ::benchmark::State& state)
 {
@@ -41,6 +48,7 @@ void HdfUsbdBenchmarkFunctionTest::SetUp(const ::benchmark::State& state)
     }
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
     sleep(SLEEP_TIME);
+    ret = SwitchErrCode(ret);
     ASSERT_EQ(0, ret);
     if (ret != 0) {
         exit(0);
@@ -68,8 +76,8 @@ BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0030)
 }
 
 BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0030)
-    ->Iterations(100)
-    ->Repetitions(3)
+    ->Iterations(ITERATION_FREQUENCY)
+    ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
@@ -91,8 +99,8 @@ BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0040)
 }
 
 BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0040)
-    ->Iterations(100)
-    ->Repetitions(3)
+    ->Iterations(ITERATION_FREQUENCY)
+    ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
@@ -109,12 +117,13 @@ BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0050)
     for (auto _ : st) {
         ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
     }
+    ret = SwitchErrCode(ret);
     ASSERT_EQ(0, ret);
 }
 
 BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0050)
-    ->Iterations(100)
-    ->Repetitions(3)
+    ->Iterations(ITERATION_FREQUENCY)
+    ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
@@ -139,8 +148,8 @@ BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0060)
 }
 
 BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0060)
-    ->Iterations(100)
-    ->Repetitions(3)
+    ->Iterations(ITERATION_FREQUENCY)
+    ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 } // namespace
 

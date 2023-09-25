@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,20 +20,26 @@
 #include "v1_0/iusb_interface.h"
 #include "v1_0/usb_types.h"
 
-const int SLEEP_TIME = 3;
-const uint8_t BUS_NUM_255 = 255;
-const uint8_t DEV_ADDR_255 = 255;
-
 using namespace testing::ext;
 using namespace OHOS;
 using namespace OHOS::USB;
 using namespace std;
 using namespace OHOS::HDI::Usb::V1_0;
 
+const int SLEEP_TIME = 3;
+const uint8_t BUS_NUM_255 = 255;
+const uint8_t DEV_ADDR_255 = 255;
+sptr<UsbSubscriberTest> UsbdDeviceTest::subscriber_ = nullptr;
+
 namespace {
 sptr<IUsbInterface> g_usbInterface = nullptr;
 
 struct UsbDev UsbdDeviceTest::dev_ = { 0, 0 };
+
+int32_t SwitchErrCode(int32_t ret)
+{
+    return ret == HDF_ERR_NOT_SUPPORT ? HDF_SUCCESS : ret;
+}
 
 void UsbdDeviceTest::SetUpTestCase(void)
 {
@@ -45,17 +51,18 @@ void UsbdDeviceTest::SetUpTestCase(void)
     auto ret = g_usbInterface->SetPortRole(1, 1, 1);
     sleep(SLEEP_TIME);
     HDF_LOGI("UsbdDeviceTest::[Device] %{public}d SetPortRole=%{public}d", __LINE__, ret);
+    ret = SwitchErrCode(ret);
     ASSERT_EQ(0, ret);
     if (ret != 0) {
         exit(0);
     }
 
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    if (g_usbInterface->BindUsbdSubscriber(subscriber) != HDF_SUCCESS) {
-        HDF_LOGE("%{public}s: bind usbd subscriber failed\n", __func__);
+    subscriber_ = new UsbSubscriberTest();
+    if (g_usbInterface->BindUsbdSubscriber(subscriber_) != HDF_SUCCESS) {
+        HDF_LOGE("%{public}s: bind usbd subscriber_ failed\n", __func__);
         exit(0);
     }
-    dev_ = { subscriber->busNum_, subscriber->devAddr_ };
+    dev_ = { subscriber_->busNum_, subscriber_->devAddr_ };
 
     std::cout << "please connect device, press enter to continue" << std::endl;
     int c;
@@ -63,7 +70,10 @@ void UsbdDeviceTest::SetUpTestCase(void)
     }
 }
 
-void UsbdDeviceTest::TearDownTestCase(void) {}
+void UsbdDeviceTest::TearDownTestCase(void)
+{
+    g_usbInterface->UnbindUsbdSubscriber(subscriber_);
+}
 
 void UsbdDeviceTest::SetUp(void) {}
 

@@ -26,7 +26,7 @@
 #include "wifi_hal_sta_feature.h"
 #include "securec.h"
 #include <servmgr_hdi.h>
-#include "v1_1/iwlan_interface.h"
+#include "v1_2/iwlan_interface.h"
 #include "wlan_impl.h"
 
 using namespace std;

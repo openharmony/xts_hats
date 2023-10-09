@@ -39,7 +39,7 @@ void Camera3AUtTest::TearDown(void)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0010, TestSize.Level0)
+HWTEST_F(Camera3AUtTest, SUB_Driver_Camera_Merge_0100, TestSize.Level0)
 {
     cameraTest->intents = {PREVIEW};
     cameraTest->StartStream(cameraTest->intents);
@@ -63,7 +63,7 @@ HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0010, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0020, TestSize.Level0)
+HWTEST_F(Camera3AUtTest, SUB_Driver_Camera_Merge_0200, TestSize.Level0)
 {
     cameraTest->intents = {PREVIEW};
     cameraTest->StartStream(cameraTest->intents);
@@ -87,7 +87,7 @@ HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0020, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0030, TestSize.Level0)
+HWTEST_F(Camera3AUtTest, SUB_Driver_Camera_Merge_0300, TestSize.Level0)
 {
     cameraTest->intents = {PREVIEW};
     cameraTest->StartStream(cameraTest->intents);
@@ -111,7 +111,7 @@ HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0030, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0040, TestSize.Level0)
+HWTEST_F(Camera3AUtTest, SUB_Driver_Camera_Merge_0400, TestSize.Level0)
 {
     cameraTest->intents = {PREVIEW};
     cameraTest->StartStream(cameraTest->intents);
@@ -135,7 +135,7 @@ HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0040, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0050, TestSize.Level0)
+HWTEST_F(Camera3AUtTest, SUB_Driver_Camera_Merge_0500, TestSize.Level0)
 {
     cameraTest->intents = {PREVIEW};
     cameraTest->StartStream(cameraTest->intents);
@@ -159,7 +159,7 @@ HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0050, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0060, TestSize.Level0)
+HWTEST_F(Camera3AUtTest, SUB_Driver_Camera_Merge_0600, TestSize.Level0)
 {
     cameraTest->intents = {PREVIEW};
     cameraTest->StartStream(cameraTest->intents);
@@ -183,7 +183,7 @@ HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0060, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0070, TestSize.Level0)
+HWTEST_F(Camera3AUtTest, SUB_Driver_Camera_Merge_0700, TestSize.Level0)
 {
     cameraTest->intents = {PREVIEW};
     cameraTest->StartStream(cameraTest->intents);
@@ -207,7 +207,7 @@ HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0070, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0080, TestSize.Level0)
+HWTEST_F(Camera3AUtTest, SUB_Driver_Camera_Merge_0800, TestSize.Level0)
 {
     cameraTest->intents = {PREVIEW};
     cameraTest->StartStream(cameraTest->intents);
@@ -231,7 +231,7 @@ HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0080, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0090, TestSize.Level0)
+HWTEST_F(Camera3AUtTest, SUB_Driver_Camera_Merge_0900, TestSize.Level0)
 {
     cameraTest->intents = {PREVIEW};
     cameraTest->StartStream(cameraTest->intents);
@@ -255,7 +255,7 @@ HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0090, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0100, TestSize.Level0)
+HWTEST_F(Camera3AUtTest, SUB_Driver_Camera_Merge_1000, TestSize.Level0)
 {
     cameraTest->intents = {PREVIEW};
     cameraTest->StartStream(cameraTest->intents);
@@ -279,7 +279,7 @@ HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0100, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0110, TestSize.Level0)
+HWTEST_F(Camera3AUtTest, SUB_Driver_Camera_Merge_1100, TestSize.Level0)
 {
     cameraTest->intents = {PREVIEW};
     cameraTest->StartStream(cameraTest->intents);
@@ -313,7 +313,7 @@ HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0110, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0120, TestSize.Level0)
+HWTEST_F(Camera3AUtTest, SUB_Driver_Camera_Merge_1200, TestSize.Level0)
 {
     cameraTest->intents = {PREVIEW};
     cameraTest->StartStream(cameraTest->intents);
@@ -338,7 +338,7 @@ HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0120, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0130, TestSize.Level0)
+HWTEST_F(Camera3AUtTest, SUB_Driver_Camera_Merge_1300, TestSize.Level0)
 {
     std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(100, 2000);
     int32_t expo = 0xa0;
@@ -355,7 +355,7 @@ HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0130, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(Camera3AUtTest, SUB_DriverSystem_CameraHdiMg_0140, TestSize.Level0)
+HWTEST_F(Camera3AUtTest, SUB_Driver_Camera_Merge_1400, TestSize.Level0)
 {
     std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(100, 2000);
     int32_t awbMode = OHOS_CAMERA_AWB_MODE_AUTO;

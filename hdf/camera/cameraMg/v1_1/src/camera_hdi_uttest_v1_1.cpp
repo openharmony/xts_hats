@@ -37,7 +37,7 @@ void CameraHdiTestV1_1::TearDown(void)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0620, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_Prelaunch_0100, TestSize.Level1)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -62,7 +62,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0620, TestSize.Level1)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0630, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_Prelaunch_0200, TestSize.Level1)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -87,7 +87,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0630, TestSize.Level1)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0640, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_Prelaunch_0300, TestSize.Level1)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -112,7 +112,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0640, TestSize.Level1)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0650, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_Prelaunch_0400, TestSize.Level1)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -137,7 +137,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0650, TestSize.Level1)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0660, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_Prelaunch_0500, TestSize.Level1)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -162,7 +162,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0660, TestSize.Level1)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0670, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_GetDefaultSettings_0100, TestSize.Level1)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -183,7 +183,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0670, TestSize.Level1)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0680, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_GetDefaultSettings_0200, TestSize.Level1)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -229,7 +229,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0680, TestSize.Level1)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0690, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_DelayStream_0100, TestSize.Level1)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -285,7 +285,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0690, TestSize.Level1)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0700, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_QuickThumbnail_0100, TestSize.Level1)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -309,7 +309,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0700, TestSize.Level1)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0710, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_QuickThumbnail_0200, TestSize.Level1)
 {
     int64_t timeStampCapture = 0;
     int64_t timeStampThumbnail = 0;
@@ -377,7 +377,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0710, TestSize.Level1)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0720, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_QuickThumbnail_0300, TestSize.Level1)
 {
 
     cameraTest->Init();
@@ -444,7 +444,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0720, TestSize.Level1)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(CameraHdiTestV1_1, SUB_DriverSystem_CameraHdiMg_0750, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_QuickThumbnail_0400, TestSize.Level1)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {

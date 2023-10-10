@@ -49,6 +49,7 @@ int32_t HdiTestDevice::InitDevice()
 
     gralloc_.reset(IDisplayBuffer::Get());
     DISPLAY_TEST_CHK_RETURN((gralloc_ == nullptr), DISPLAY_FAILURE, DISPLAY_TEST_LOGE("get IDisplayBuffer failed"));
+
     displayDevice_->RegHotPlugCallback(HotPlug, static_cast<void *>(this));
 
     return DISPLAY_SUCCESS;

@@ -217,48 +217,49 @@ int32_t VblankCtr::WaitVblank(uint32_t ms)
     return DISPLAY_SUCCESS;
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0000, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_4600, TestSize.Level1)
 {
     const uint32_t CACHE_COUNT = 5;
     auto ret = g_composerDevice->SetClientBufferCacheCount(g_displayIds[0], CACHE_COUNT);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0010, TestSize.Level1)
+
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_4700, TestSize.Level1)
 {
     DisplayCapability info;
     auto ret = g_composerDevice->GetDisplayCapability(g_displayIds[0], info);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0020, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_4800, TestSize.Level1)
 {
     std::vector<DisplayModeInfo> modes;
     auto ret = g_composerDevice->GetDisplaySupportedModes(g_displayIds[0], modes);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0030, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_4900, TestSize.Level1)
 {
     uint32_t MODE = 0;
     auto ret = g_composerDevice->GetDisplayMode(g_displayIds[0], MODE);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0040, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5000, TestSize.Level1)
 {
     const uint32_t MODE = 0;
     auto ret = g_composerDevice->SetDisplayMode(g_displayIds[0], MODE);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0050, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5100, TestSize.Level1)
 {
     DispPowerStatus powerStatus = DispPowerStatus::POWER_STATUS_OFF;
     auto ret = g_composerDevice->GetDisplayPowerStatus(g_displayIds[0], powerStatus);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0060, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5200, TestSize.Level1)
 {
     auto ret = g_composerDevice->SetDisplayPowerStatus(g_displayIds[0], DispPowerStatus::POWER_STATUS_STANDBY);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
@@ -268,7 +269,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0060, TestSize.Level1)
 }
 
 #ifdef DISPLAY_COMMUNITY
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0070, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5300, TestSize.Level1)
 {
     uint32_t level;
     auto ret = g_composerDevice->GetDisplayBacklight(g_displayIds[0], level);
@@ -276,14 +277,14 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0070, TestSize.Level1)
 }
 #endif
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0080, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5400, TestSize.Level1)
 {
     const uint32_t LEVEL = 10;
     auto ret = g_composerDevice->SetDisplayBacklight(g_displayIds[0], LEVEL);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0090, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5500, TestSize.Level1)
 {
     const uint32_t PROPERTY_ID = 1;
     uint64_t propertyValue = 0;
@@ -292,7 +293,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0090, TestSize.Level1)
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0100, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5600, TestSize.Level1)
 {
     std::vector<uint32_t> layers {};
     std::vector<int32_t> type {};
@@ -300,7 +301,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0100, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0110, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5700, TestSize.Level1)
 {
     const int32_t WIDTH = 1920;
     const int32_t HEIGHT = 1080;
@@ -310,7 +311,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0110, TestSize.Level1)
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0120, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5800, TestSize.Level1)
 {
     std::vector<uint32_t> layers {};
     std::vector<int32_t> fences {};
@@ -318,7 +319,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0120, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0130, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5900, TestSize.Level1)
 {
     BufferHandle* buffer = nullptr;
     const int32_t WIDTH = 800;
@@ -341,7 +342,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0130, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0140, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6000, TestSize.Level1)
 {
     const int32_t WIDTH = 1920;
     const int32_t HEIGHT = 1080;
@@ -353,7 +354,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0140, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0150, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6100, TestSize.Level1)
 {
     const uint32_t WIDTH = 1920;
     const uint32_t HEIGHT = 1080;
@@ -364,7 +365,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0150, TestSize.Level1)
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0160, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6200, TestSize.Level1)
 {
     uint32_t devId = 0;
     auto ret = g_composerDevice->DestroyVirtualDisplay(devId);
@@ -372,7 +373,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0160, TestSize.Level1)
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0170, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6300, TestSize.Level1)
 {
     BufferHandle* buffer = nullptr;
     int32_t fence = -1;
@@ -396,7 +397,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0170, TestSize.Level1)
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0180, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6400, TestSize.Level1)
 {
     const uint32_t PROPERTY_ID = 1;
     const uint64_t PROPERTY_VALUE = 0;
@@ -405,7 +406,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0180, TestSize.Level1)
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0190, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6500, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
         {
@@ -430,7 +431,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0190, TestSize.Level1)
     }
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0200, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6600, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
         {
@@ -467,7 +468,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0200, TestSize.Level1)
     HdiTestDevice::GetInstance().Clear();
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0210, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6700, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
         {
@@ -489,7 +490,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0210, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0220, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6800, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
         {
@@ -518,7 +519,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0220, TestSize.Level1)
     HdiTestDevice::GetInstance().Clear();
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0230, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6900, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
         {.rectRatio = {0, 0, 1.0f, 1.0f}, .color = GREEN, .alpha = 0xFF}
@@ -537,7 +538,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0230, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0240, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7000, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
         {
@@ -564,7 +565,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0240, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0250, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7100, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
         {
@@ -595,7 +596,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0250, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0260, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7200, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
         {
@@ -620,7 +621,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0260, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0270, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7300, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
         {
@@ -633,6 +634,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0270, TestSize.Level1)
     ASSERT_TRUE((layers.size() > 0));
 
     auto layer = layers[0];
+
     auto graphicBuffer = layer->AcquireBackBuffer();
     int32_t ret = graphicBuffer->SetGraphicBuffer([&](const BufferHandle* buffer, uint32_t seqNo) -> int32_t {
         std::vector<uint32_t> deletingList;
@@ -645,7 +647,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0270, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0280, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7400, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
         {
@@ -667,7 +669,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0280, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0290, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7500, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
         {
@@ -689,7 +691,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0290, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0300, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_MaskInfo_0100, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
         {
@@ -711,7 +713,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0300, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0310, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_Luminance_0100, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
         {
@@ -743,7 +745,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0310, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0320, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7600, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
         {
@@ -765,7 +767,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0320, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0330, TestSize.Level1)
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7700, TestSize.Level1)
 {
     int ret;
     DISPLAY_TEST_LOGE();

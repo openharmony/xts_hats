@@ -146,7 +146,7 @@ void AudioUtRenderMmapTest::TearDown()
     }
 }
 
-HWTEST_F(AudioUtRenderMmapTest, RenderReqMmapBufferNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTest, SUB_Driver_Audio_RenderHdi_9200, TestSize.Level1)
 {
     int32_t reqSize = MMAP_SUGGEST_BUFFER_SIZE;
     struct AudioMmapBufferDescriptor desc;
@@ -154,7 +154,7 @@ HWTEST_F(AudioUtRenderMmapTest, RenderReqMmapBufferNull001, TestSize.Level1)
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->ReqMmapBuffer(nullptr, reqSize, &desc));
 }
 
-HWTEST_F(AudioUtRenderMmapTest, RenderReqMmapBufferIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTest, SUB_Driver_Audio_RenderHdi_9300, TestSize.Level1)
 {
     int32_t reqSize = MMAP_SUGGEST_BUFFER_SIZE;
     struct AudioMmapBufferDescriptor desc;
@@ -164,7 +164,7 @@ HWTEST_F(AudioUtRenderMmapTest, RenderReqMmapBufferIsValid001, TestSize.Level1)
     ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_INVALID_PARAM);
 }
 
-HWTEST_F(AudioUtRenderMmapTest, RenderGetMmapPositionNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTest, SUB_Driver_Audio_RenderHdi_9400, TestSize.Level1)
 {
     uint64_t frames = 0;
     struct AudioTimeStamp time;
@@ -173,7 +173,7 @@ HWTEST_F(AudioUtRenderMmapTest, RenderGetMmapPositionNull001, TestSize.Level1)
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->GetMmapPosition(nullptr, &frames, &time));
 }
 
-HWTEST_F(AudioUtRenderMmapTest, RenderGetMmapPositionIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTest, SUB_Driver_Audio_RenderHdi_9500, TestSize.Level1)
 {
     uint64_t frames = 0;
     struct AudioTimeStamp time;

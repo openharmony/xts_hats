@@ -20,12 +20,14 @@ module_output_path = "hdf/nfc"
 
 ohos_moduletest_suite("HatsNfcEseHdiTest") {
   module_out_path = module_output_path
-  sources = [ "nfc_services_test.cpp" ]
+  sources = [
+    "../utils/nfc_chip_type_parser.cpp",
+    "nfc_services_test.cpp",
+  ]
 
   deps = [
     "../../../../../../drivers/interface/nfc/v1_0:libnfc_proxy_1.0",
     "../../../../../../drivers/peripheral/nfc/hdi_service:hdi_nfc_service",
-    "../../../../../../foundation/communication/nfc/services:nfc_service",
     "../../../../../../foundation/communication/secure_element/interfaces/inner_api:se_inner_kits",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
@@ -65,5 +67,6 @@ config("hdf_nfc") {
     "//third_party/libnfc-nci/SN100x/src/gki/ulinux/",
     "//third_party/libnfc-nci/SN100x/src/gki/common/",
     "../../../../../../foundation/communication/secure_element/interfaces/inner_api/include",
+    "../utils",
   ]
 }

@@ -83,7 +83,7 @@ void HdfNfcHdiTest::TearDown()
 */
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0100, TestSize.Level2)
 {
-    if (!NfcChipTypeParser::IsSn110()) {
+    if (!NfcChipTypeParser::IsSupportedChipType()) {
         EXPECT_EQ(HDF_SUCCESS, 0);
     }
     else {
@@ -105,7 +105,7 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0100, TestSize.Level2)
 */
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0200, TestSize.Level2)
 {
-    if (!NfcChipTypeParser::IsSn110()) {
+    if (!NfcChipTypeParser::IsSupportedChipType()) {
         printf("SeTerminal SUB_DriverSystem_secureElement_0200 1 ");
         EXPECT_EQ(HDF_SUCCESS, 0);
     }
@@ -129,7 +129,7 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0200, TestSize.Level2)
 */
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0300, TestSize.Level2)
 {
-    if (!NfcChipTypeParser::IsSn110()) {
+    if (!NfcChipTypeParser::IsSupportedChipType()) {
         printf("SeTerminal SUB_DriverSystem_secureElement_0300 1 ");
         EXPECT_EQ(HDF_SUCCESS, 0);
     }
@@ -153,7 +153,7 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0300, TestSize.Level2)
 */
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0400, TestSize.Level2)
 {
-    if (!NfcChipTypeParser::IsSn110()) {
+    if (!NfcChipTypeParser::IsSupportedChipType()) {
         EXPECT_EQ(HDF_SUCCESS, 0);
     }
     else {
@@ -181,7 +181,7 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0400, TestSize.Level2)
 */
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0500, TestSize.Level2)
 {
-    if (!NfcChipTypeParser::IsSn110()) {
+    if (!NfcChipTypeParser::IsSupportedChipType()) {
         EXPECT_EQ(HDF_SUCCESS, 0);
     }
     else {
@@ -203,7 +203,7 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0500, TestSize.Level2)
 */
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0600, TestSize.Level2)
 {
-    if (!NfcChipTypeParser::IsSn110()) {
+    if (!NfcChipTypeParser::IsSupportedChipType()) {
         EXPECT_EQ(HDF_SUCCESS, 0);
     }
     else {
@@ -230,7 +230,7 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0600, TestSize.Level2)
 */
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0700, TestSize.Level2)
 {
-    if (!NfcChipTypeParser::IsSn110()) {
+    if (!NfcChipTypeParser::IsSupportedChipType()) {
         EXPECT_EQ(HDF_SUCCESS, 0);
     }
     else {
@@ -255,7 +255,7 @@ HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0700, TestSize.Level2)
 */
 HWTEST_F(HdfNfcHdiTest, SUB_DriverSystem_secureElement_0800, TestSize.Level2)
 {
-    if (!NfcChipTypeParser::IsSn110()) {
+    if (!NfcChipTypeParser::IsSupportedChipType()) {
         EXPECT_EQ(HDF_SUCCESS, 0);
     }
     else {

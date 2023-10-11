@@ -123,7 +123,7 @@ void DisplayBenchmarkTest::TearDown(const ::benchmark::State &state)
     HdiTestDevice::GetInstance().Clear();
 }
 
-BENCHMARK_F(DisplayBenchmarkTest, RegDisplayVBlankCallbackTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3700)(benchmark::State &state)
 {
     int ret;
     DISPLAY_TEST_LOGE();
@@ -134,11 +134,11 @@ BENCHMARK_F(DisplayBenchmarkTest, RegDisplayVBlankCallbackTest)(benchmark::State
     ASSERT_TRUE(ret == DISPLAY_SUCCESS) << "RegDisplayVBlankCallback failed";
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, RegDisplayVBlankCallbackTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3700)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 
-BENCHMARK_F(DisplayBenchmarkTest, SetDisplayVsyncEnabledTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3800)(benchmark::State &state)
 {
     int ret;
     DISPLAY_TEST_LOGE();
@@ -158,7 +158,7 @@ BENCHMARK_F(DisplayBenchmarkTest, SetDisplayVsyncEnabledTest)(benchmark::State &
     ASSERT_TRUE(ret != DISPLAY_SUCCESS) << "vblank do not disable";
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetDisplayVsyncEnabledTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3800)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 } // namespace

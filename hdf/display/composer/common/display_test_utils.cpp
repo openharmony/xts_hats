@@ -112,6 +112,7 @@ uint32_t GetPixelValue(const BufferHandle &handle, int x, int y)
     }
     uint32_t *pixel = reinterpret_cast<uint32_t *>(handle.virAddr) + position;
     DISPLAY_TEST_CHK_RETURN((pixel == nullptr), DISPLAY_FAILURE, DISPLAY_TEST_LOGE("get pixel failed"));
+
     return *pixel;
 }
 
@@ -144,6 +145,7 @@ uint32_t CheckPixel(const BufferHandle &handle, int x, int y, uint32_t color)
     }
     uint32_t *pixel = reinterpret_cast<uint32_t *>(handle.virAddr) + position;
     DISPLAY_TEST_CHK_RETURN((pixel == nullptr), DISPLAY_FAILURE, DISPLAY_TEST_LOGE("get pixel failed"));
+
     uint32_t checkColor = ConverToRGBA(static_cast<PixelFormat>(handle.format), GetUint32(*pixel));
     if (checkColor != color) {
         DISPLAY_TEST_LOGE("x:%{public}d y:%{public}d width:%{public}d", x, y, handle.width);
@@ -157,8 +159,8 @@ void SetUint32(uint32_t &dst, uint32_t value)
 {
     uint8_t *data = reinterpret_cast<uint8_t *>(&dst);
     if (data != nullptr) {
-    for (uint8_t i = 0; i < sizeof(uint32_t); i++) {
-        *(data + i) = (value >> ((sizeof(uint32_t) - i - 1) * BITS_PER_BYTE)) & 0xff;
+        for (uint8_t i = 0; i < sizeof(uint32_t); i++) {
+            *(data + i) = (value >> ((sizeof(uint32_t) - i - 1) * BITS_PER_BYTE)) & 0xff;
         }
     } else {
         DISPLAY_TEST_LOGE("SetUint32 failed");
@@ -184,6 +186,7 @@ void SetPixel(const BufferHandle &handle, int x, int y, uint32_t color)
     }
     uint32_t *pixel = reinterpret_cast<uint32_t *>(handle.virAddr) + position;
     DISPLAY_TEST_CHK_RETURN_NOT_VALUE((pixel == nullptr), DISPLAY_TEST_LOGE("get pixel failed"));
+
     SetUint32(*pixel, color);
 }
 

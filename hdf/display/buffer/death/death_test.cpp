@@ -37,7 +37,7 @@ void BufferDiedRecipient::OnRemoteDied(const OHOS::wptr<OHOS::IRemoteObject>& re
     EXPECT_EQ(g_isServiceDead, true);
 }
 
-HWTEST_F(DeathTest, SUB_DriverSystem_DisplayBufferDeath_0010, TestSize.Level1)
+HWTEST_F(DeathTest, SUB_Driver_Display_Death_0100, TestSize.Level1)
 {
     displayBuffer_.reset(IDisplayBuffer::Get());
     ASSERT_TRUE(displayBuffer_ != nullptr);
@@ -49,7 +49,7 @@ HWTEST_F(DeathTest, SUB_DriverSystem_DisplayBufferDeath_0010, TestSize.Level1)
     system("killall allocator_host");
 }
 
-HWTEST_F(DeathTest, SUB_DriverSystem_DisplayBufferDeath_0020, TestSize.Level1)
+HWTEST_F(DeathTest, SUB_Driver_Display_Death_0200, TestSize.Level1)
 {
     displayBuffer_.reset(IDisplayBuffer::Get());
     ASSERT_TRUE(displayBuffer_ != nullptr);

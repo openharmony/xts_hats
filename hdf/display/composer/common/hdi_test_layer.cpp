@@ -40,12 +40,14 @@ HdiGrallocBuffer::HdiGrallocBuffer(uint32_t seqNo, uint32_t w, uint32_t h, Pixel
     if (ret != DISPLAY_SUCCESS) {
         DISPLAY_TEST_LOGE("can not alloc memory");
     }
-    void* vaddr = gralloc->Mmap(*buffer);
-    if (vaddr == nullptr) {
-        DISPLAY_TEST_LOGE("mmap failed");
+    if (buffer != nullptr) {
+        void* vaddr = gralloc->Mmap(*buffer);
+        if (vaddr == nullptr) {
+            DISPLAY_TEST_LOGE("mmap failed");
+        }
+        buffer_ = buffer;
+        seqNo_ = seqNo;
     }
-    buffer_ = buffer;
-    seqNo_ = seqNo;
 }
 
 HdiGrallocBuffer::~HdiGrallocBuffer()
@@ -80,6 +82,7 @@ void HdiGrallocBuffer::SetAcquirceFence(int fd)
     DISPLAY_TEST_LOGE("the fd is %{public}d", fd);
     mAcquireFence = fd;
 }
+
 int32_t HdiGrallocBuffer::SetGraphicBuffer(std::function<int32_t (const BufferHandle*, uint32_t)> realFunc)
 {
     DISPLAY_TEST_CHK_RETURN(buffer_ == nullptr, DISPLAY_FAILURE,
@@ -130,6 +133,12 @@ HdiGrallocBuffer* HdiTestLayer::GetBackBuffer() const
 HdiTestLayer::HdiTestLayer(LayerInfo& info, uint32_t id, uint32_t displayId)
     : id_(id), displayID_(displayId), layerBufferCount_(MAX_BUFFER_COUNT), layerInfo_(info)
 {}
+
+static uint32_t GenerateSeq()
+{
+    static uint32_t originSeq = 0;
+    return originSeq++;
+}
 
 int32_t HdiTestLayer::Init(uint32_t bufferCount)
 {
@@ -228,6 +237,7 @@ int32_t HdiTestLayer::PreparePresent()
         return DISPLAY_SUCCESS;
     });
     DISPLAY_TEST_CHK_RETURN((ret != DISPLAY_SUCCESS), ret, DISPLAY_TEST_LOGE("set buffer handle failed"));
+
     ret = HdiTestDevice::GetInstance().GetDeviceInterface()->SetLayerBlendType(displayID_, id_, blendType_);
     DISPLAY_TEST_CHK_RETURN((ret != DISPLAY_SUCCESS), DISPLAY_FAILURE, DISPLAY_TEST_LOGE("set blend type failed"));
     return DISPLAY_SUCCESS;
@@ -274,6 +284,7 @@ uint32_t HdiTestLayer::GetLayerBuffercount() const
 {
     return layerBufferCount_;
 }
+
 HdiTestLayer::~HdiTestLayer() {}
 } // OHOS
 } // HDI

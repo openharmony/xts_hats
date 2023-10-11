@@ -184,7 +184,7 @@ static inline void PresentAndCheck(std::vector<LayerSettings> &layerSettings,
   * @tc.name: SetClientBufferCacheCountTest
   * @tc.desc: Benchmarktest for interface SetClientBufferCacheCount.
   */
-BENCHMARK_F(DisplayBenchmarkTest, SetClientBufferCacheCountTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_0100)(benchmark::State &state)
 {
     int32_t ret;
     const uint32_t CACHE_COUNT = 5;
@@ -194,14 +194,14 @@ BENCHMARK_F(DisplayBenchmarkTest, SetClientBufferCacheCountTest)(benchmark::Stat
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetClientBufferCacheCountTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_0100)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: GetDisplayCapabilityTest
   * @tc.desc: Benchmarktest for interface GetDisplayCapability.
   */
-BENCHMARK_F(DisplayBenchmarkTest, GetDisplayCapabilityTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_0200)(benchmark::State &state)
 {
     int32_t ret;
     DisplayCapability info;
@@ -211,14 +211,14 @@ BENCHMARK_F(DisplayBenchmarkTest, GetDisplayCapabilityTest)(benchmark::State &st
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, GetDisplayCapabilityTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_0200)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: GetDisplaySupportedModesTest
   * @tc.desc: Benchmarktest for interface GetDisplaySupportedModes.
   */
-BENCHMARK_F(DisplayBenchmarkTest, GetDisplaySupportedModesTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_0300)(benchmark::State &state)
 {
     int32_t ret;
     std::vector<DisplayModeInfo> modes;
@@ -228,14 +228,14 @@ BENCHMARK_F(DisplayBenchmarkTest, GetDisplaySupportedModesTest)(benchmark::State
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, GetDisplaySupportedModesTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_0300)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: GetDisplayModeTest
   * @tc.desc: Benchmarktest for interface GetDisplayMode.
   */
-BENCHMARK_F(DisplayBenchmarkTest, GetDisplayModeTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_0400)(benchmark::State &state)
 {
     int32_t ret;
     uint32_t modeId = 0;
@@ -245,14 +245,14 @@ BENCHMARK_F(DisplayBenchmarkTest, GetDisplayModeTest)(benchmark::State &state)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, GetDisplayModeTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_0400)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: SetDisplayModeTest
   * @tc.desc: Benchmarktest for interface SetDisplayMode.
   */
-BENCHMARK_F(DisplayBenchmarkTest, SetDisplayModeTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_0500)(benchmark::State &state)
 {
     int32_t ret;
     const uint32_t modeId = 0;
@@ -262,14 +262,14 @@ BENCHMARK_F(DisplayBenchmarkTest, SetDisplayModeTest)(benchmark::State &state)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetDisplayModeTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_0500)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: GetDisplayPowerStatusTest
   * @tc.desc: Benchmarktest for interface GetDisplayPowerStatus.
   */
-BENCHMARK_F(DisplayBenchmarkTest, GetDisplayPowerStatusTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_0600)(benchmark::State &state)
 {
     int32_t ret;
     DispPowerStatus powerStatus = DispPowerStatus::POWER_STATUS_OFF;
@@ -279,14 +279,14 @@ BENCHMARK_F(DisplayBenchmarkTest, GetDisplayPowerStatusTest)(benchmark::State &s
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, GetDisplayPowerStatusTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_0600)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: SetDisplayPowerStatusTest
   * @tc.desc: Benchmarktest for interface SetDisplayPowerStatus.
   */
-BENCHMARK_F(DisplayBenchmarkTest, SetDisplayPowerStatusTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_0700)(benchmark::State &state)
 {
     int32_t ret;
     for (auto _ : state) {
@@ -295,14 +295,14 @@ BENCHMARK_F(DisplayBenchmarkTest, SetDisplayPowerStatusTest)(benchmark::State &s
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetDisplayPowerStatusTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_0700)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: GetDisplayBacklightTest
   * @tc.desc: Benchmarktest for interface GetDisplayBacklight.
   */
-BENCHMARK_F(DisplayBenchmarkTest, GetDisplayBacklightTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_0800)(benchmark::State &state)
 {
     int32_t ret;
     uint32_t level;
@@ -312,14 +312,14 @@ BENCHMARK_F(DisplayBenchmarkTest, GetDisplayBacklightTest)(benchmark::State &sta
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, GetDisplayBacklightTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_0800)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: SetDisplayBacklightTest
   * @tc.desc: Benchmarktest for interface SetDisplayBacklight.
   */
-BENCHMARK_F(DisplayBenchmarkTest, SetDisplayBacklightTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_0900)(benchmark::State &state)
 {
     int32_t ret;
     const uint32_t level = 10;
@@ -329,14 +329,14 @@ BENCHMARK_F(DisplayBenchmarkTest, SetDisplayBacklightTest)(benchmark::State &sta
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetDisplayBacklightTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_0900)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: CreateAndDestroyLayerTest
   * @tc.desc: Benchmarktest for interface CreateLayer And DestroyLayer.
   */
-BENCHMARK_F(DisplayBenchmarkTest, CreateAndDestroyLayerTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_1000)(benchmark::State &state)
 {
     int32_t ret;
     LayerInfo layerInfo;
@@ -350,14 +350,14 @@ BENCHMARK_F(DisplayBenchmarkTest, CreateAndDestroyLayerTest)(benchmark::State &s
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, CreateAndDestroyLayerTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_1000)->
     Iterations(10)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: GetDisplayCompChangeTest
   * @tc.desc: Benchmarktest for interface GetDisplayCompChange.
   */
-BENCHMARK_F(DisplayBenchmarkTest, GetDisplayCompChangeTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_1100)(benchmark::State &state)
 {
     std::vector<uint32_t> layers {};
     std::vector<int32_t> type {};
@@ -368,14 +368,14 @@ BENCHMARK_F(DisplayBenchmarkTest, GetDisplayCompChangeTest)(benchmark::State &st
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, GetDisplayCompChangeTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_1100)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: GetDisplayReleaseFenceTest
   * @tc.desc: Benchmarktest for interface GetDisplayReleaseFence.
   */
-BENCHMARK_F(DisplayBenchmarkTest, GetDisplayReleaseFenceTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_1200)(benchmark::State &state)
 {
     int32_t ret;
     std::vector<uint32_t> layers {};
@@ -386,10 +386,10 @@ BENCHMARK_F(DisplayBenchmarkTest, GetDisplayReleaseFenceTest)(benchmark::State &
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, GetDisplayReleaseFenceTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_1200)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
-BENCHMARK_F(DisplayBenchmarkTest, AllocMemTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_1300)(benchmark::State &state)
 {
     BufferHandle* buffer = nullptr;
     AllocInfo info;
@@ -403,10 +403,10 @@ BENCHMARK_F(DisplayBenchmarkTest, AllocMemTest)(benchmark::State &state)
     }
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, AllocMemTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_1300)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
-BENCHMARK_F(DisplayBenchmarkTest, MmapTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_1400)(benchmark::State &state)
 {
     BufferHandle* buffer = nullptr;
     AllocInfo info;
@@ -422,10 +422,10 @@ BENCHMARK_F(DisplayBenchmarkTest, MmapTest)(benchmark::State &state)
     }
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, MmapTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_1400)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
-BENCHMARK_F(DisplayBenchmarkTest, InvalidateCacheTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_1500)(benchmark::State &state)
 {
     BufferHandle* buffer = nullptr;
     AllocInfo info;
@@ -441,10 +441,10 @@ BENCHMARK_F(DisplayBenchmarkTest, InvalidateCacheTest)(benchmark::State &state)
     }
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, InvalidateCacheTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_1500)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
-BENCHMARK_F(DisplayBenchmarkTest, FlushCacheTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_1600)(benchmark::State &state)
 {
     BufferHandle* buffer = nullptr;
     AllocInfo info;
@@ -460,10 +460,10 @@ BENCHMARK_F(DisplayBenchmarkTest, FlushCacheTest)(benchmark::State &state)
     }
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, FlushCacheTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_1600)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
-BENCHMARK_F(DisplayBenchmarkTest, UnmapTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_1700)(benchmark::State &state)
 {
     BufferHandle* buffer = nullptr;
     AllocInfo info;
@@ -479,14 +479,14 @@ BENCHMARK_F(DisplayBenchmarkTest, UnmapTest)(benchmark::State &state)
     }
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, UnmapTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_1700)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: CreateAndDestroyVirtualDisplayTest
   * @tc.desc: Benchmarktest for interface CreateVirtualDisplay and DestroyVirtualDisplay.
   */
-BENCHMARK_F(DisplayBenchmarkTest, CreateAndDestroyVirtualDisplayTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_1800)(benchmark::State &state)
 {
     int32_t ret;
     const uint32_t WIDTH = 100;
@@ -500,14 +500,14 @@ BENCHMARK_F(DisplayBenchmarkTest, CreateAndDestroyVirtualDisplayTest)(benchmark:
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, CreateAndDestroyVirtualDisplayTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_1800)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: SetVirtualDisplayBufferTest
   * @tc.desc: Benchmarktest for interface SetVirtualDisplayBuffer.
   */
-BENCHMARK_F(DisplayBenchmarkTest, SetVirtualDisplayBufferTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_1900)(benchmark::State &state)
 {
     BufferHandle* buffer = nullptr;
     int32_t ret;
@@ -520,8 +520,9 @@ BENCHMARK_F(DisplayBenchmarkTest, SetVirtualDisplayBufferTest)(benchmark::State 
             OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_READ |
             OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_WRITE;
     info.format = PIXEL_FMT_RGBA_8888;
-        g_gralloc->AllocMem(info, buffer);
-        ASSERT_TRUE(buffer != nullptr);
+
+    g_gralloc->AllocMem(info, buffer);
+    ASSERT_TRUE(buffer != nullptr);
 
     for (auto _ : state) {
         ret = g_composerDevice->SetVirtualDisplayBuffer(g_displayIds[0], *buffer, fence);
@@ -531,14 +532,14 @@ BENCHMARK_F(DisplayBenchmarkTest, SetVirtualDisplayBufferTest)(benchmark::State 
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetVirtualDisplayBufferTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_1900)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: SetDisplayPropertyTest
   * @tc.desc: Benchmarktest for interface SetDisplayProperty.
   */
-BENCHMARK_F(DisplayBenchmarkTest, SetDisplayPropertyTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2000)(benchmark::State &state)
 {
     int32_t ret;
     uint32_t id = 1;
@@ -549,14 +550,14 @@ BENCHMARK_F(DisplayBenchmarkTest, SetDisplayPropertyTest)(benchmark::State &stat
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetDisplayPropertyTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2000)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: GetDisplayPropertyTest
   * @tc.desc: Benchmarktest for interface GetDisplayProperty.
   */
-BENCHMARK_F(DisplayBenchmarkTest, GetDisplayPropertyTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2100)(benchmark::State &state)
 {
     int32_t ret;
     uint32_t id = 1;
@@ -567,14 +568,14 @@ BENCHMARK_F(DisplayBenchmarkTest, GetDisplayPropertyTest)(benchmark::State &stat
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, GetDisplayPropertyTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2100)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: SetDisplayClientCropTest
   * @tc.desc: Benchmarktest for interface SetDisplayClientCrop.
   */
-BENCHMARK_F(DisplayBenchmarkTest, SetDisplayClientCropTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2200)(benchmark::State &state)
 {
     int32_t ret;
     int32_t width = 100;
@@ -586,10 +587,10 @@ BENCHMARK_F(DisplayBenchmarkTest, SetDisplayClientCropTest)(benchmark::State &st
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetDisplayClientCropTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2200)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
-BENCHMARK_F(DisplayBenchmarkTest, SetZorderTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2300)(benchmark::State &state)
 {
     std::vector<LayerSettings> settings = {
         {
@@ -628,10 +629,10 @@ BENCHMARK_F(DisplayBenchmarkTest, SetZorderTest)(benchmark::State &state)
     HdiTestDevice::GetInstance().Clear();
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetZorderTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2300)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
-BENCHMARK_F(DisplayBenchmarkTest, SetLayerPreMultiTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2400)(benchmark::State &state)
 {
     int32_t ret;
     std::vector<LayerSettings> settings = {
@@ -653,10 +654,10 @@ BENCHMARK_F(DisplayBenchmarkTest, SetLayerPreMultiTest)(benchmark::State &state)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetLayerPreMultiTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2400)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
-BENCHMARK_F(DisplayBenchmarkTest, SetAlphaTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2500)(benchmark::State &state)
 {
     std::vector<LayerSettings> settings = {
         {
@@ -686,10 +687,10 @@ BENCHMARK_F(DisplayBenchmarkTest, SetAlphaTest)(benchmark::State &state)
     HdiTestDevice::GetInstance().Clear();
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetAlphaTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2500)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
-BENCHMARK_F(DisplayBenchmarkTest, SetLayerRegionTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2600)(benchmark::State &state)
 {
     int32_t ret;
     std::vector<LayerSettings> settings = {
@@ -709,10 +710,10 @@ BENCHMARK_F(DisplayBenchmarkTest, SetLayerRegionTest)(benchmark::State &state)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetLayerRegionTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2600)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
-BENCHMARK_F(DisplayBenchmarkTest, SetLayerDirtyRegionTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2700)(benchmark::State &state)
 {
     int32_t ret;
     std::vector<LayerSettings> settings = {
@@ -737,10 +738,10 @@ BENCHMARK_F(DisplayBenchmarkTest, SetLayerDirtyRegionTest)(benchmark::State &sta
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetLayerDirtyRegionTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2700)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
-BENCHMARK_F(DisplayBenchmarkTest, SetLayerTransformModeTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2800)(benchmark::State &state)
 {
     int32_t ret;
     std::vector<LayerSettings> settings = {
@@ -769,10 +770,10 @@ BENCHMARK_F(DisplayBenchmarkTest, SetLayerTransformModeTest)(benchmark::State &s
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetLayerTransformModeTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2800)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
-BENCHMARK_F(DisplayBenchmarkTest, SetLayerVisibleRegionTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2900)(benchmark::State &state)
 {
     int32_t ret;
     std::vector<LayerSettings> settings = {
@@ -797,10 +798,10 @@ BENCHMARK_F(DisplayBenchmarkTest, SetLayerVisibleRegionTest)(benchmark::State &s
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetLayerVisibleRegionTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2900)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
-BENCHMARK_F(DisplayBenchmarkTest, SetLayerCompositionTypeTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3000)(benchmark::State &state)
 {
     int32_t ret;
     std::vector<LayerSettings> settings = {
@@ -821,10 +822,10 @@ BENCHMARK_F(DisplayBenchmarkTest, SetLayerCompositionTypeTest)(benchmark::State 
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetLayerCompositionTypeTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3000)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
-BENCHMARK_F(DisplayBenchmarkTest, SetLayerBlendTypeTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3100)(benchmark::State &state)
 {
     int32_t ret;
     std::vector<LayerSettings> settings = {
@@ -844,10 +845,10 @@ BENCHMARK_F(DisplayBenchmarkTest, SetLayerBlendTypeTest)(benchmark::State &state
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetLayerBlendTypeTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3100)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
-BENCHMARK_F(DisplayBenchmarkTest, SetLayerMaskInfoTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3200)(benchmark::State &state)
 {
     int32_t ret;
     std::vector<LayerSettings> settings = {
@@ -867,10 +868,10 @@ BENCHMARK_F(DisplayBenchmarkTest, SetLayerMaskInfoTest)(benchmark::State &state)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetLayerMaskInfoTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3200)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
-BENCHMARK_F(DisplayBenchmarkTest, SetLayerColorTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3300)(benchmark::State &state)
 {
     int32_t ret;
     std::vector<LayerSettings> settings = {
@@ -900,10 +901,10 @@ BENCHMARK_F(DisplayBenchmarkTest, SetLayerColorTest)(benchmark::State &state)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetLayerColorTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3300)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
-BENCHMARK_F(DisplayBenchmarkTest, DestroyLayerTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3400)(benchmark::State &state)
 {
     int32_t ret;
     std::vector<LayerSettings> settings = {
@@ -923,10 +924,10 @@ BENCHMARK_F(DisplayBenchmarkTest, DestroyLayerTest)(benchmark::State &state)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, DestroyLayerTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3400)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
-BENCHMARK_F(DisplayBenchmarkTest, CreateLayersTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3500)(benchmark::State &state)
 {
     std::vector<LayerSettings> settings = {
         {
@@ -941,11 +942,11 @@ BENCHMARK_F(DisplayBenchmarkTest, CreateLayersTest)(benchmark::State &state)
     PrepareAndPrensent();
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, CreateLayersTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3500)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 
-BENCHMARK_F(DisplayBenchmarkTest, FreeMemTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3600)(benchmark::State &state)
 {
     BufferHandle* buffer = nullptr;
     AllocInfo info;
@@ -962,7 +963,7 @@ BENCHMARK_F(DisplayBenchmarkTest, FreeMemTest)(benchmark::State &state)
     }
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, FreeMemTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3600)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 }

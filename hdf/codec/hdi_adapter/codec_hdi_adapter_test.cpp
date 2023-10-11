@@ -238,10 +238,10 @@ static void PrintCapability(CodecCompCapability *cap, int32_t index)
 }
 /**
 * @tc.name  HdfCodecHdiGetCodecComponentManagerTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0010
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_0100
 * @tc.desc Invoke the GetCodecComponentManager interface to obtain component management objects
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0010, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_0100, Function | MediumTest | Level3)
 {
     g_manager = GetCodecComponentManager();
     ASSERT_TRUE(g_manager != nullptr);
@@ -250,10 +250,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0010, Function |
 }
 /**
 * @tc.name  HdfCodecHdiGetComponentNumTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0020
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_0200
 * @tc.desc Invoke the GetComponentNumber interface to obtain the number of components
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0020, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_0200, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_manager != nullptr);
     g_count = g_manager->GetComponentNum();
@@ -261,10 +261,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0020, Function |
 }
 /**
 * @tc.name  HdfCodecHdiGetComponentCapabilityListTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0030
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_0300
 * @tc.desc Invoke the GetComponentCapabilityList interface to obtain the component capability set
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0030, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_0300, Function | MediumTest | Level3)
 {
     ASSERT_GT(g_count, 0);
     ASSERT_TRUE(g_manager != nullptr);
@@ -279,11 +279,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0030, Function |
 }
 /**
 * @tc.name  HdfCodecHdiCreateComponentCompNameErrorTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0040
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_0400
 * @tc.desc If compName is a component name that does not exist, the CreateComponent
            interface is invoked to create a component
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0040, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_0400, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_manager != nullptr);
     ASSERT_TRUE(g_callback != nullptr);
@@ -294,10 +294,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0040, Function |
 }
 /**
 * @tc.name  HdfCodecHdiCreateComponentCompNameNullptrTest_002
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0050
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_0500
 * @tc.desc When compName is set to Nullptr, the CreateComponent interface is invoked to create a component
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0050, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_0500, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_manager != nullptr);
     ASSERT_TRUE(g_callback != nullptr);
@@ -307,11 +307,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0050, Function |
 }
 /**
 * @tc.name  HdfCodecHdiCreateComponentAppdataMaxTest_003
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0060
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_0600
 * @tc.desc When Appdata is the maximum value in the value range, the CreateComponent
            interface is invoked to create a component
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0060, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_0600, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_manager != nullptr);
     struct CodecCallbackType *callback = CodecCallbackTypeGet(nullptr);
@@ -329,11 +329,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0060, Function |
 }
 /**
 * @tc.name HdfCodecHdiCreateComponentAppdataMinTest_004
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0070
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_0700
 * @tc.desc When Appdata is the minimum value in the value range, the CreateComponent
            interface is invoked to create a componentt
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0070, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_0700, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_manager != nullptr);
     struct CodecCallbackType *callback = CodecCallbackTypeGet(nullptr);
@@ -351,10 +351,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0070, Function |
 }
 /**
 * @tc.name HdfCodecHdiCreateComponentCallbackIsNullptrTest_005
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0080
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_0800
 * @tc.desc When callback is nullptr, the CreateComponent interface is invoked to create a component
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0080, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_0800, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_manager != nullptr);
     struct CodecCallbackType *callback = nullptr;
@@ -366,10 +366,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0080, Function |
 }
 /**
 * @tc.name HdfCodecHdiCreateComponentSuccessTest_006
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0090
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_0900
 * @tc.desc Invoke the CreateComponent interface to create a video encoding component
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0090, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_0900, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_manager != nullptr);
     ASSERT_TRUE(g_callback != nullptr);
@@ -381,10 +381,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0090, Function |
 // Test GetComponentVersion Adapter not support
 /**
 * @tc.name HdfCodecHdiGetComponentVersionUnsupportedTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0100
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_1000
 * @tc.desc Invoke the GetComponentVersion interface to obtain the component version
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0100, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_1000, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     struct CompVerInfo verInfo;
@@ -395,10 +395,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0100, Function |
 // Test GetParameter
 /**
 * @tc.name HdfCodecHdiGetParameterParamStructNullptrTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0110
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_1100
 * @tc.desc When paramStrut is set to nullptr, the GetParameter interface is invoked to obtain component parameters
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0110, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_1100, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     auto ret = g_component->GetParameter(g_component, OMX_IndexParamVideoPortFormat, nullptr, 0);
@@ -406,10 +406,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0110, Function |
 }
 /**
 * @tc.name HdfCodecHdiGetParameterSuccessTest_002
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0120
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_1200
 * @tc.desc The GetParameter interface is invoked to obtain component parameters
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0120, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_1200, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_VIDEO_PARAM_PORTFORMATTYPE param;
@@ -422,10 +422,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0120, Function |
 }
 /**
 * @tc.name HdfCodecHdiGetParameterSuccessTest_002
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0130
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_1300
 * @tc.desc Invoke the GetParameter interface to obtain component parameters when paramIndex does not match
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0130, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_1300, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_VIDEO_CONFIG_BITRATETYPE param;
@@ -437,10 +437,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0130, Function |
 }
 /**
 * @tc.name HdfCodecHdiGetParameterParamIndexUnusedTest_004
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0140
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_1400
 * @tc.desc When paramIndex is set to, invoke the GetParameter interface to obtain component parameters
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0140, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_1400, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_VIDEO_CONFIG_BITRATETYPE param;
@@ -452,11 +452,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0140, Function |
 }
 /**
 * @tc.name HdfCodecHdiSetPortDefineSuccessTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0150
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_1500
 * @tc.desc Invoke the GetParameter interface to obtain component parameters,
 *          then invoke SetParameter interface to set back the modified component parameters
 */
-HWTEST_F(CodecHdiAdapterTest, HdfCodecHdiSetPortDefineSuccessTest_0150, TestSize.Level1)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_1500, TestSize.Level1)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_PARAM_PORTDEFINITIONTYPE param;
@@ -474,10 +474,10 @@ HWTEST_F(CodecHdiAdapterTest, HdfCodecHdiSetPortDefineSuccessTest_0150, TestSize
 }
 /**
 * @tc.name HdfCodecHdiSetParameterSuccessTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0151
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_6400
 * @tc.desc The SetParameter interface is invoked to set component parameters
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0151, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_6400, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_VIDEO_PARAM_PORTFORMATTYPE param;
@@ -490,10 +490,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0151, Function |
 }
 /**
 * @tc.name HdfCodecHdiSetParameterParamStructNullptrTest_002
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0160
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_1600
 * @tc.desc When paramStrut is set to nullptr, the SetParameter interface is invoked to set component parameters
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0160, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_1600, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     int32_t ret = g_component->SetParameter(g_component, OMX_IndexParamVideoPortFormat, nullptr, 0);
@@ -501,11 +501,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0160, Function |
 }
 /**
 * @tc.name HdfCodecHdiSetParameterParamIndexNotMatchParamStructTest_003
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0170
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_1700
 * @tc.desc When paramIndex does not match paramStruct, the SetParameter
            interface is invoked to set component parameters
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0170, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_1700, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_VIDEO_CONFIG_BITRATETYPE param;
@@ -517,11 +517,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0170, Function |
 }
 /**
 * @tc.name HdfCodecHdiSetParameterParamIndexUnusedTest_004
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0180
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_1800
 * @tc.desc When paramIndex is set to OMX_IndexVideoStartUnused, the SetParameter
            interface is invoked to set component parameters
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0180, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_1800, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_VIDEO_PARAM_PORTFORMATTYPE param;
@@ -533,10 +533,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0180, Function |
 }
 /**
 * @tc.name HdfCodecHdiSetParameterCodecComponentTypeNullptrTest_005
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0190
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_1900
 * @tc.desc When CodecComponentType is set to nullptr, the SetParameter interface is invoked to set component parameters
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0190, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_1900, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_VIDEO_PARAM_PORTFORMATTYPE param;
@@ -548,10 +548,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0190, Function |
 }
 /**
 * @tc.name HdfCodecHdiSetParameterParamStructLenNotMatchTest_006
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0200
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_2000
 * @tc.desc Invoke the SetParameter interface to set component parameters when paramStructLen does not match
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0200, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_2000, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_VIDEO_PARAM_PORTFORMATTYPE param;
@@ -563,10 +563,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0200, Function |
 }
 /**
 * @tc.name HdfCodecHdiGetConfigUnsupportedTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0210
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_2100
 * @tc.desc Invoke the GetConfig interface to obtain component configurations
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0210, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_2100, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_VIDEO_CONFIG_BITRATETYPE param;
@@ -578,10 +578,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0210, Function |
 }
 /**
 * @tc.name HdfCodecHdiSetConfigUnsupportedTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0220
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_2200
 * @tc.desc Invoke the SetConfig interface to set component configurations
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0220, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_2200, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_VIDEO_CONFIG_BITRATETYPE param;
@@ -594,10 +594,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0220, Function |
 }
 /**
 * @tc.name HdfCodecHdiGetExtensionIndexUnsupportedTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0230
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_2300
 * @tc.desc Invoke the GetExtensionIndex interface to obtain the component extended index
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0230, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_2300, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_INDEXTYPE indexType;
@@ -607,10 +607,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0230, Function |
 }
 /**
 * @tc.name HdfCodecHdiGetStateSuccessTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0240
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_2400
 * @tc.desc When state is set to OMX_StateLoaded, the GetState interface is invoked to obtain the component status
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0240, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_2400, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_STATETYPE state;
@@ -620,10 +620,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0240, Function |
 }
 /**
 * @tc.name HdfCodecHdiGetStateSuccessTest_002
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0241
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_6500
 * @tc.desc When state is set to OMX_StateInvalid, the GetState interface is invoked to obtain the component status
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0241, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_6500, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_STATETYPE state;
@@ -633,10 +633,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0241, Function |
 }
 /**
 * @tc.name HdfCodecHdiGetStateSuccessTest_003
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0242
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_6600
 * @tc.desc When state is set to OMX_StateExecuting, the GetState interface is invoked to obtain the component status
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0242, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_6600, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_STATETYPE state;
@@ -646,10 +646,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0242, Function |
 }
 /**
 * @tc.name HdfCodecHdiGetStateSuccessTest_004
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0243
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_6700
 * @tc.desc When state is set to OMX_StateIdle, the GetState interface is invoked to obtain the component status
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0243, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_6700, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_STATETYPE state;
@@ -659,10 +659,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0243, Function |
 }
 /**
 * @tc.name HdfCodecHdiGetStateSuccessTest_005
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0244
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_6800
 * @tc.desc When state is set to OMX_StatePause, the GetState interface is invoked to obtain the component status
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0244, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_6800, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_STATETYPE state;
@@ -672,10 +672,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0244, Function |
 }
 /**
 * @tc.name HdfCodecHdiGetStateSuccessTest_006
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0245
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_6900
 * @tc.desc When state is set to OMX_StateWaitForResources, the GetState interface is invoked to obtain the component status
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0245, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_6900, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_STATETYPE state;
@@ -685,10 +685,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0245, Function |
 }
 /**
 * @tc.name HdfCodecHdiGetStateSuccessTest_007
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0246
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_7000
 * @tc.desc When state is set to OMX_StateKhronosExtensions, the GetState interface is invoked to obtain the component status
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0246, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_7000, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_STATETYPE state;
@@ -698,10 +698,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0246, Function |
 }
 /**
 * @tc.name HdfCodecHdiGetStateSuccessTest_008
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0247
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_7100
 * @tc.desc When state is set to OMX_StateVendorStartUnused, the GetState interface is invoked to obtain the component status
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0247, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_7100, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_STATETYPE state;
@@ -711,10 +711,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0247, Function |
 }
 /**
 * @tc.name HdfCodecHdiGetStateSuccessTest_009
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0248
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_7200
 * @tc.desc When state is set to OMX_StateMax, the GetState interface is invoked to obtain the component status
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0248, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_7200, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_STATETYPE state;
@@ -724,10 +724,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0248, Function |
 }
 /**
 * @tc.name HdfCodecHdiGetStateStateNullptrTest_002
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0250
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_2500
 * @tc.desc When state is set to nullptr, the GetState interface is invoked to obtain the component status
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0250, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_2500, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     int32_t ret = g_component->GetState(g_component, nullptr);
@@ -735,10 +735,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0250, Function |
 }
 /**
 * @tc.name HdfCodecHdiTunnelRequestUnsupportedTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0260
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_2600
 * @tc.desc Invoke the ComponentTunnelRequest interface to set component pipe communication
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0260, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_2600, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     const int32_t tunneledComp = 1002;
@@ -753,10 +753,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0260, Function |
 
 /**
 * @tc.name HdfCodecHdiTunnelRequestUnsupportedTest_002
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0261
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_7300
 * @tc.desc Invoke the ComponentTunnelRequest interface to set component pipe communication
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0261, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_7300, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     const int32_t tunneledComp = 1002;
@@ -771,10 +771,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0261, Function |
 
 /**
 * @tc.name HdfCodecHdiTunnelRequestUnsupportedTest_003
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0262
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_7400
 * @tc.desc Invoke the ComponentTunnelRequest interface to set component pipe communication
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0262, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_7400, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     const int32_t tunneledComp = 1002;
@@ -789,10 +789,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0262, Function |
 
 /**
 * @tc.name HdfCodecHdiTunnelRequestUnsupportedTest_004
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0263
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_7500
 * @tc.desc Invoke the ComponentTunnelRequest interface to set component pipe communication
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0263, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_7500, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     const int32_t tunneledComp = 1002;
@@ -807,10 +807,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0263, Function |
 
 /**
 * @tc.name HdfCodecHdiTunnelRequestUnsupportedTest_005
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0264
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_7600
 * @tc.desc Invoke the ComponentTunnelRequest interface to set component pipe communication
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0264, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_7600, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     const int32_t tunneledComp = 1002;
@@ -825,10 +825,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0264, Function |
 
 /**
 * @tc.name HdfCodecHdiTunnelRequestUnsupportedTest_006
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0265
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_7700
 * @tc.desc Invoke the ComponentTunnelRequest interface to set component pipe communication
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0265, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_7700, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     const int32_t tunneledComp = 1002;
@@ -843,12 +843,12 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0265, Function |
 
 /**
 * @tc.name HdfCodecHdiAllocateBufferInvalidInputBufferTypeTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0270
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_2700
 * @tc.desc When bufferType is set to InvalidInput and portIndex is set to PORT_INDEX_INPUT, the AllocateBuffer
            interface is invoked to set the external buffer
 */
 struct OmxCodecBuffer allocBuffer;
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0270, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_2700, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     allocBuffer.bufferType = CODEC_BUFFER_TYPE_INVALID;
@@ -865,11 +865,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0270, Function |
 }
 /**
 * @tc.name HdfCodecHdiAllocateBufferInputBufferNotInitTest_002
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0280
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_2800
 * @tc.desc When the buffer is not initialized and portIndex is set to PORT_INDEX_INPUT, the AllocateBuffer
            interface is invoked to set the external buffer
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0280, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_2800, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     allocBuffer.bufferType = CODEC_BUFFER_TYPE_VIRTUAL_ADDR;
@@ -878,11 +878,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0280, Function |
 }
 /**
 * @tc.name HdfCodecHdiAllocateBufferInvalidOutputBufferTypeTest_003
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0290
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_2900
 * @tc.desc When bufferType is set to InvalidInput and portIndex is set to PORT_INDEX_OUTPUT, the AllocateBuffer
            interface is invoked to set the external buffer
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0290, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_2900, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     allocBuffer.bufferType = CODEC_BUFFER_TYPE_INVALID;
@@ -891,11 +891,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0290, Function |
 }
 /**
 * @tc.name HdfCodecHdiAllocateBufferOutputBufferNotInitTest_004
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0300
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_3000
 * @tc.desc When the buffer is not initialized and portIndex is set to PORT_INDEX_OUTPUT, the AllocateBuffer
            interface is invoked to set the external buffer
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0300, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_3000, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     allocBuffer.bufferType = CODEC_BUFFER_TYPE_VIRTUAL_ADDR;
@@ -904,11 +904,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0300, Function |
 }
 /**
 * @tc.name HdfCodecHdiAllocateBufferAvshareMemFdInputNotInitTest_005
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0310
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_3100
 * @tc.desc When the buffer is not initialized and portIndex is set to PORT_INDEX_OUTPUT, the AllocateBuffer
            interface is invoked to set the external buffer
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0310, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_3100, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     allocBuffer.bufferType = CODEC_BUFFER_TYPE_AVSHARE_MEM_FD;
@@ -917,11 +917,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0310, Function |
 }
 /**
 * @tc.name HdfCodecHdiAllocateBufferAvshareMemFdOutputNotInitTest_006
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0320
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_3200
 * @tc.desc When the buffer is not initialized and portIndex is set to PORT_INDEX_OUTPUT, the AllocateBuffer
            interface is invoked to set the external buffer
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0320, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_3200, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     allocBuffer.bufferType = CODEC_BUFFER_TYPE_AVSHARE_MEM_FD;
@@ -930,11 +930,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0320, Function |
 }
 /**
 * @tc.name HdfCodecHdiUseBufferInvalidInputBufferTypeTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0330
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_3300
 * @tc.desc When bufferType is set to InvalidInput and portIndex is set to PORT_INDEX_INPUT,
            the UseBuffer interface is invoked to set the internal buffer
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0330, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_3300, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     std::shared_ptr<OmxCodecBuffer> omxBuffer = std::make_shared<OmxCodecBuffer>();
@@ -954,11 +954,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0330, Function |
 }
 /**
 * @tc.name HdfCodecHdiUseBufferInvalidOutputBufferTypeTest_002
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0340
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_3400
 * @tc.desc When bufferType is set to InvalidInput and portIndex is set to PORT_INDEX_OUTPUT,
            the UseBuffer interface is called to set the internal buffer
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0340, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_3400, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     std::shared_ptr<OmxCodecBuffer> omxBuffer = std::make_shared<OmxCodecBuffer>();
@@ -978,11 +978,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0340, Function |
 }
 /**
 * @tc.name HdfCodecHdiUseBufferTestVirtualAddrInputTest_003
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0350
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_3500
 * @tc.desc When the buffer is not initialized and portIndex is set to PORT_INDEX_INPUT,
            the UseBuffer interface is invoked to set the internal buffer
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0350, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_3500, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     std::shared_ptr<OmxCodecBuffer> omxBuffer = std::make_shared<OmxCodecBuffer>();
@@ -1002,11 +1002,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0350, Function |
 }
 /**
 * @tc.name HdfCodecHdiUseBufferTestVirtualAddrOutput_004
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0360
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_3600
 * @tc.desc When the buffer is not initialized and portIndex is set to PORT_INDEX_OUTPUT,
            call the UseBuffer interface to set the internal buffer
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0360, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_3600, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     std::shared_ptr<OmxCodecBuffer> omxBuffer = std::make_shared<OmxCodecBuffer>();
@@ -1026,11 +1026,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0360, Function |
 }
 /**
 * @tc.name HdfCodecHdiUseBufferInputSuccessTest_005
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0370
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_3700
 * @tc.desc After the buffer is initialized and portIndex is set to PORT_INDEX_INPUT
            the UseBuffer interface is invoked to set the internal buffe
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0370, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_3700, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_PARAM_PORTDEFINITIONTYPE param;
@@ -1046,11 +1046,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0370, Function |
 }
 /**
 * @tc.name HdfCodecHdiUseBufferOutputSuccessTest_006
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0380
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_3800
 * @tc.desc After the buffer is initialized and portIndex is set to PORT_INDEX_OUTPUT,
            call the UseBuffer interface to set the internal buffer
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0380, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_3800, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_PARAM_PORTDEFINITIONTYPE param;
@@ -1066,11 +1066,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0380, Function |
 }
 /**
 * @tc.name HdfCodecHdiUseBufferDynamicHandleOutputTest_007
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0390
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_3900
 * @tc.desc When bufferType is set to DynamicHandle and portIndex is set to PORT_INDEX_INPUT,
            the UseBuffer interface is invoked to set the internal buffer
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0390, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_3900, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     std::shared_ptr<OmxCodecBuffer> omxBuffer = std::make_shared<OmxCodecBuffer>();
@@ -1095,11 +1095,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0390, Function |
 }
 /**
 * @tc.name HdfCodecHdiUseBufferAbnormalPortIndexTest_008
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0400
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_4000
 * @tc.desc After the buffer is initialized and portIndex is set to PORT_INDEX_ERROR_INPUT,
            call the UseBuffer interface to set the internal buffer
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0400, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_4000, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_PARAM_PORTDEFINITIONTYPE param;
@@ -1115,11 +1115,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0400, Function |
 }
 /**
 * @tc.name HdfCodecHdiSetStateLoadedToIdleTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0410
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_4100
 * @tc.desc The status of the component that invokes the SendCommand
            interface changes from OMX_StateLoaded to OMX_StateIdle
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0410, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_4100, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     int32_t ret = g_component->SendCommand(g_component, OMX_CommandStateSet, OMX_StateIdle, nullptr, 0);
@@ -1127,11 +1127,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0410, Function |
 }
 /**
 * @tc.name HdfCodecHdiSetStateIdleToExecutingTest_002
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0420
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_4200
 * @tc.desc The status of the component that invokes the SendCommand
            interface changes from OMX_StateIdle to OMX_StateExecuting
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0420, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_4200, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     int32_t ret = g_component->SendCommand(g_component, OMX_CommandStateSet, OMX_StateExecuting, nullptr, 0);
@@ -1139,11 +1139,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0420, Function |
 }
 /**
 * @tc.name HdfCodecHdiSetStateExecutingToPauseTest_003
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0430
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_4300
 * @tc.desc The status of the component that invokes the SendCommand
            interface changes from OMX_StateExecuting to OMX_StatePause
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0430, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_4300, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     int32_t ret = g_component->SendCommand(g_component, OMX_CommandStateSet, OMX_StatePause, nullptr, 0);
@@ -1151,11 +1151,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0430, Function |
 }
 /**
 * @tc.name HdfCodecHdiSetStatePauseToIdleTest_004
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0440
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_4400
 * @tc.desc The status of the component that invokes the SendCommand
            interface changes from OMX_StatePause to OMX_StateIdle
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0440, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_4400, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     int32_t ret = g_component->SendCommand(g_component, OMX_CommandStateSet, OMX_StateIdle, nullptr, 0);
@@ -1167,11 +1167,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0440, Function |
 }
 /**
 * @tc.name HdfCodecHdiSendCommandCodecComponentTypeNullptrTest_005
-* @tc.number SUB_DriverSystem_CodecHdi_adapter_0450
+* @tc.number SUB_Driver_Codec_AdapterCodeHDI_4500
 * @tc.desc When CodecComponentType is set to Nullptr, the SendCommand
            interface is invoked to send instructions
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0450, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_4500, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     int32_t ret = g_component->SendCommand(nullptr, OMX_CommandStateSet, OMX_StateIdle, nullptr, 0);
@@ -1179,11 +1179,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0450, Function |
 }
 /**
 * @tc.name HdfCodecHdiSendCommandAbnormalCommandTest_006
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0460
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_4600
 * @tc.desc When OMX_COMMANDTYPE is set to OMX_StateMax, the SendCommand
            interface is invoked to send instructions
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0460, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_4600, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     int32_t ret = g_component->SendCommand(g_component, OMX_CommandMax, OMX_StatePause, nullptr, 0);
@@ -1192,11 +1192,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0460, Function |
 
 /**
 * @tc.name HdfCodecHdiSendCommandAbnormalCommandTest_006_1
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0461
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_7800
 * @tc.desc When OMX_COMMANDTYPE is set to OMX_CommandFlush, the SendCommand
            interface is invoked to send instructions
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0461, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_7800, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     int32_t ret = g_component->SendCommand(g_component, OMX_CommandFlush, OMX_StatePause, nullptr, 0);
@@ -1205,11 +1205,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0461, Function |
 
 /**
 * @tc.name HdfCodecHdiSendCommandAbnormalCommandTest_006_2
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0462
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_7900
 * @tc.desc When OMX_COMMANDTYPE is set to OMX_CommandPortDisable, the SendCommand
            interface is invoked to send instructions
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0462, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_7900, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     int32_t ret = g_component->SendCommand(g_component, OMX_CommandPortDisable, OMX_StatePause, nullptr, 0);
@@ -1218,11 +1218,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0462, Function |
 
 /**
 * @tc.name HdfCodecHdiSendCommandAbnormalCommandTest_006_3
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0463
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_8000
 * @tc.desc When OMX_COMMANDTYPE is set to OMX_CommandPortEnable, the SendCommand
            interface is invoked to send instructions
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0463, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_8000, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     int32_t ret = g_component->SendCommand(g_component, OMX_CommandPortEnable, OMX_StatePause, nullptr, 0);
@@ -1231,11 +1231,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0463, Function |
 
 /**
 * @tc.name HdfCodecHdiSendCommandAbnormalCommandTest_006_4
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0464
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_8100
 * @tc.desc When OMX_COMMANDTYPE is set to OMX_CommandMarkBuffer, the SendCommand
            interface is invoked to send instructions
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0464, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_8100, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     int32_t ret = g_component->SendCommand(g_component, OMX_CommandMarkBuffer, OMX_StatePause, nullptr, 0);
@@ -1244,11 +1244,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0464, Function |
 
 /**
 * @tc.name HdfCodecHdiSendCommandAbnormalCommandTest_006_5
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0465
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_8200
 * @tc.desc When OMX_COMMANDTYPE is set to OMX_CommandKhronosExtensions, the SendCommand
            interface is invoked to send instructions
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0465, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_8200, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     int32_t ret = g_component->SendCommand(g_component, OMX_CommandKhronosExtensions, OMX_StatePause, nullptr, 0);
@@ -1257,11 +1257,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0465, Function |
 
 /**
 * @tc.name HdfCodecHdiSendCommandAbnormalCommandTest_006_6
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0466
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_8300
 * @tc.desc When OMX_COMMANDTYPE is set to OMX_CommandVendorStartUnused, the SendCommand
            interface is invoked to send instructions
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0466, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_8300, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     int32_t ret = g_component->SendCommand(g_component, OMX_CommandVendorStartUnused, OMX_StatePause, nullptr, 0);
@@ -1270,11 +1270,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0466, Function |
 
 /**
 * @tc.name HdfCodecHdiSendCommandAbnormalParamTest_007
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0470
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_4700
 * @tc.desc When the cmd command is set to OMX_StateMax, the SendCommand
            interface is invoked to send the command
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0470, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_4700, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     int32_t ret = g_component->SendCommand(g_component, OMX_CommandStateSet, OMX_StateMax, nullptr, 0);
@@ -1282,10 +1282,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0470, Function |
 }
 /**
 * @tc.name HdfCodecHdiUseEglImageUnsupportedTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0480
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_4800
 * @tc.desc Invoke the UseEglImage interface to use the EGL image
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0480, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_4800, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     struct OmxCodecBuffer buffer;
@@ -1307,10 +1307,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0480, Function |
 }
 /**
 * @tc.name HdfCodecHdiWaitStateIdleTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0490
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_4900
 * @tc.desc The status of the listening component changes to OMX_StateIdle
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0490, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_4900, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     // wait for Idle status
@@ -1323,10 +1323,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0490, Function |
 }
 /**
 * @tc.name HdfCodecHdiFillThisBufferSuccessTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0500
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_5000
 * @tc.desc Invoke the FillThisBuffer interface to execute the codec output to fill the buffer
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0500, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_5000, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     auto iter = outputBuffers.begin();
@@ -1337,10 +1337,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0500, Function |
 }
 /**
 * @tc.name HdfCodecHdiFillThisBufferUseErrorBufferIdTest_002
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0510
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_5100
 * @tc.desc Invoke the FillThisBuffer interface when bufferID is set to BUFFER_ID_ERROR
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0510, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_5100, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     auto iter = outputBuffers.begin();
@@ -1355,10 +1355,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0510, Function |
 }
 /**
 * @tc.name HdfCodecHdiEmptyThisBufferSuccessTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0520
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_5200
 * @tc.desc The EmptyThisBuffer interface is invoked to execute the codec output to fill the buffer
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0520, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_5200, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     auto iter = inputBuffers.begin();
@@ -1369,10 +1369,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0520, Function |
 }
 /**
 * @tc.name HdfCodecHdiEmptyThisBufferUseErrorBufferIdTest_002
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0530
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_5300
 * @tc.desc Invoke the EmptyThisBuffer interface when bufferID is set to BUFFER_ID_ERROR
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0530, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_5300, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     auto iter = inputBuffers.begin();
@@ -1387,10 +1387,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0530, Function |
 }
 /**
 * @tc.name HdfCodecHdiSetCallbackSuccessTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0540
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_5400
 * @tc.desc The SetCallback interface is invoked to set the callback
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0540, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_5400, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     if (g_callback != nullptr) {
@@ -1403,11 +1403,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0540, Function |
 }
 /**
 * @tc.name HdfCodecHdiSetCallbackAppDataLenMaxTest_002
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0550
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_5500
 * @tc.desc When AppData is set to the maximum value in the value range,
            the SetCallback interface is invoked to set the callback
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0550, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_5500, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     if (g_callback != nullptr) {
@@ -1420,11 +1420,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0550, Function |
 }
 /**
 * @tc.name HdfCodecHdiSetCallbackAppDataLenMinTest_003
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0560
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_5600
 * @tc.desc When AppData is set to the minimum value in the value range,
       the SetCallback interface is invoked to set the callback
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0560, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_5600, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     if (g_callback != nullptr) {
@@ -1437,10 +1437,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0560, Function |
 }
 /**
 * @tc.name HdfCodecHdiRoleEnumUnsupportedTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0570
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_5700
 * @tc.desc Invoke the ComponentRoleEnum interface to obtain component tasks
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0570, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_5700, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     uint8_t role[ROLE_LEN] = {0};
@@ -1449,10 +1449,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0570, Function |
 }
 /**
 * @tc.name HdfCodecHdiFreeBufferPortIndexOutputUnsupportedTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0580
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_5800
 * @tc.desc Set portIndex to PORT_INDEX_OUTPUT and invoke the FreeBuffer interface to obtain component tasks
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0580, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_5800, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     auto iter = outputBuffers.begin();
@@ -1465,10 +1465,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0580, Function |
 }
 /**
 * @tc.name HdfCodecHdiFreeBufferPortIndexInputUnsupportedTest_002
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0590
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_5900
 * @tc.desc Set portIndex to PORT_INDEX_INPUT and invoke the FreeBuffer interface to obtain component tasks
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0590, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_5900, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     auto iter = inputBuffers.begin();
@@ -1481,11 +1481,11 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0590, Function |
 }
 /**
 * @tc.name HdfCodecHdiSetStateIdleToLoadedTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0600
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_6000
 * @tc.desc The status of the component that invokes the SendCommand
            interface changes from OMX_StateIdle to OMX_StateLoaded
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0600, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_6000, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     int32_t ret = g_component->SendCommand(g_component, OMX_CommandStateSet, OMX_StateLoaded, nullptr, 0);
@@ -1500,10 +1500,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0600, Function |
 }
 /**
 * @tc.name HdfCodecHdiDeInitUnsupportedTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0610
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_6100
 * @tc.desc Invoke the ComponentDeInit interface to deinitialize the component
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0610, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_6100, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     int32_t ret = g_component->ComponentDeInit(g_component);
@@ -1511,10 +1511,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0610, Function |
 }
 /**
 * @tc.name HdfCodecHdiDestoryComponentSuccessTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0620
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_6200
 * @tc.desc Invoke the DestoryComponent interface to destroy components
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0620, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_6200, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_component != nullptr);
     ASSERT_TRUE(g_manager != nullptr);
@@ -1523,10 +1523,10 @@ HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0620, Function |
 }
 /**
 * @tc.name HdfCodecHdiCallbackTypeReleaseAndManagerReleaseTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_adapter_0630
+* @tc.number  SUB_Driver_Codec_AdapterCodeHDI_6300
 * @tc.desc Destroy callback events and component management objects
 */
-HWTEST_F(CodecHdiAdapterTest, SUB_DriverSystem_CodecHdi_adapter_0630, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiAdapterTest, SUB_Driver_Codec_AdapterCodeHDI_6300, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(g_manager != nullptr);
     ASSERT_TRUE(g_callback != nullptr);

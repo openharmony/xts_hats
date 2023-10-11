@@ -182,13 +182,13 @@ void AudioUtRenderTest::TearDown()
     }
 }
 
-HWTEST_F(AudioUtRenderTest, RenderStartNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_0100, TestSize.Level1)
 {
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->Start(nullptr));
     render_->Stop(render_);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderStartNull002, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_0200, TestSize.Level1)
 {
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
     EXPECT_NE(HDF_SUCCESS, render_->Start(render_));
@@ -196,138 +196,138 @@ HWTEST_F(AudioUtRenderTest, RenderStartNull002, TestSize.Level1)
     render_->Stop(render_);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderStartStopIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_0300, TestSize.Level1)
 {
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderFlushNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_0400, TestSize.Level1)
 {
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->Flush(nullptr));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderFlushIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_0500, TestSize.Level1)
 {
     EXPECT_NE(HDF_SUCCESS, render_->Flush(render_));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderStopNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_0600, TestSize.Level1)
 {
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->Stop(nullptr));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderStopInvalid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_0700, TestSize.Level1)
 {
     int32_t ret = render_->Stop(render_);
     ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_FAILURE);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetFrameSizeNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_0800, TestSize.Level1)
 {
     uint64_t frameSize = 0;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->GetFrameSize(nullptr, &frameSize));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetFrameSizeNull002, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_0900, TestSize.Level1)
 {
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, render_->GetFrameSize(render_, nullptr));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetFrameSizeIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_1000, TestSize.Level1)
 {
     uint64_t frameSize = 0;
     EXPECT_EQ(HDF_SUCCESS, render_->GetFrameSize(render_, &frameSize));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetFrameCountNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_1100, TestSize.Level1)
 {
     uint64_t frameCount = 0;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->GetFrameCount(nullptr, &frameCount));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetFrameCountNull002, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_1200, TestSize.Level1)
 {
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, render_->GetFrameCount(render_, nullptr));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetFrameCountIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_1300, TestSize.Level1)
 {
     uint64_t frameCount = 0;
     EXPECT_EQ(HDF_SUCCESS, render_->GetFrameCount(render_, &frameCount));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderSetSampleAttributesNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_1400, TestSize.Level1)
 {
     struct AudioSampleAttributes attrs;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->SetSampleAttributes(nullptr, &attrs));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderSetSampleAttributesNull002, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_1500, TestSize.Level1)
 {
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, render_->SetSampleAttributes(render_, nullptr));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderSetSampleAttributesIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_1600, TestSize.Level1)
 {
     struct AudioSampleAttributes attrs = attrsRender_;
     EXPECT_EQ(HDF_SUCCESS, render_->SetSampleAttributes(render_, &attrs));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetSampleAttributesNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_1700, TestSize.Level1)
 {
     struct AudioSampleAttributes attrs;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->GetSampleAttributes(nullptr, &attrs));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetSampleAttributesNull002, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_1800, TestSize.Level1)
 {
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, render_->GetSampleAttributes(render_, nullptr));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetSampleAttributesIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_1900, TestSize.Level1)
 {
     struct AudioSampleAttributes attrs;
     EXPECT_EQ(HDF_SUCCESS, render_->GetSampleAttributes(render_, &attrs));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetCurrentChannelIdNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_2000, TestSize.Level1)
 {
     uint32_t channelId;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->GetCurrentChannelId(nullptr, &channelId));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetCurrentChannelIdNull002, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_2100, TestSize.Level1)
 {
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, render_->GetCurrentChannelId(render_, nullptr));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetCurrentChannelIdIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_2200, TestSize.Level1)
 {
     uint32_t channelId;
     EXPECT_EQ(HDF_SUCCESS, render_->GetCurrentChannelId(render_, &channelId));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderCheckSceneCapabilityNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_2300, TestSize.Level1)
 {
     struct AudioSceneDescriptor scene;
     bool supported = false;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->CheckSceneCapability(nullptr, &scene, &supported));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderCheckSceneCapabilityNull002, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_2400, TestSize.Level1)
 {
     bool supported = false;
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, render_->CheckSceneCapability(render_, nullptr, &supported));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderCheckSceneCapabilityNull003, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_2500, TestSize.Level1)
 {
     struct AudioSceneDescriptor scene;
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, render_->CheckSceneCapability(render_, &scene, nullptr));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderCheckSceneCapabilityIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_2600, TestSize.Level1)
 {
     struct AudioSceneDescriptor scene;
     bool supported = false;
@@ -336,18 +336,18 @@ HWTEST_F(AudioUtRenderTest, RenderCheckSceneCapabilityIsValid001, TestSize.Level
     EXPECT_EQ(HDF_SUCCESS, render_->CheckSceneCapability(render_, &scene, &supported));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderSelectSceneNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_2700, TestSize.Level1)
 {
     struct AudioSceneDescriptor scene;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->SelectScene(nullptr, &scene));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderSelectSceneNull002, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_2800, TestSize.Level1)
 {
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, render_->SelectScene(render_, nullptr));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderSelectSceneIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_2900, TestSize.Level1)
 {
     struct AudioSceneDescriptor scene;
     scene.scene.id = AUDIO_IN_MEDIA;
@@ -359,43 +359,43 @@ HWTEST_F(AudioUtRenderTest, RenderSelectSceneIsValid001, TestSize.Level1)
     free(scene.desc.desc);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetLatencyNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_3000, TestSize.Level1)
 {
     uint32_t ms = 0;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->GetLatency(nullptr, &ms));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetLatencyNull002, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_3100, TestSize.Level1)
 {
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, render_->GetLatency(render_, nullptr));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetLatencyIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_3200, TestSize.Level1)
 {
     uint32_t ms = 0;
     EXPECT_EQ(HDF_SUCCESS, render_->GetLatency(render_, &ms));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetRenderPositionNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_3300, TestSize.Level1)
 {
     uint64_t frames = 0;
     struct AudioTimeStamp time;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->GetRenderPosition(nullptr, &frames, &time));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetRenderPositionNull002, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_3400, TestSize.Level1)
 {
     struct AudioTimeStamp time;
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, render_->GetRenderPosition(render_, nullptr, &time));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetRenderPositionNull003, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_3500, TestSize.Level1)
 {
     uint64_t frames = 0;
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, render_->GetRenderPosition(render_, &frames, nullptr));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetRenderPositionIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_3600, TestSize.Level1)
 {
     uint64_t frames = 0;
     struct AudioTimeStamp time;
@@ -406,7 +406,7 @@ HWTEST_F(AudioUtRenderTest, RenderGetRenderPositionIsValid001, TestSize.Level1)
     ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_INVALID_PARAM);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetRenderPositionIsValid002, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_3700, TestSize.Level1)
 {
     uint64_t frames;
     struct AudioTimeStamp time;
@@ -432,38 +432,38 @@ HWTEST_F(AudioUtRenderTest, RenderGetRenderPositionIsValid002, TestSize.Level1)
     }
 }
 
-HWTEST_F(AudioUtRenderTest, RenderSetExtraParamsNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_3800, TestSize.Level1)
 {
     char keyValueList[AUDIO_RENDER_BUF_TEST];
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->SetExtraParams(nullptr, keyValueList));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderSetExtraParamsNull002, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_3900, TestSize.Level1)
 {
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, render_->SetExtraParams(render_, nullptr));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderSetExtraParamsIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_4000, TestSize.Level1)
 {
     char keyValueList[AUDIO_RENDER_BUF_TEST] =
         "attr-route=1;attr-format=32;attr-channels=2;attr-frame-count=82;attr-sampling-rate=48000";
     EXPECT_EQ(HDF_SUCCESS, render_->SetExtraParams(render_, keyValueList));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetExtraParamsNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_4100, TestSize.Level1)
 {
     char keyValueList[AUDIO_RENDER_BUF_TEST];
     uint32_t keyValueListLen = 0;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->GetExtraParams(nullptr, keyValueList, keyValueListLen));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetExtraParamsNull002, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_4200, TestSize.Level1)
 {
     uint32_t keyValueListLen = 0;
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, render_->GetExtraParams(render_, nullptr, keyValueListLen));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetExtraParamsIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_4300, TestSize.Level1)
 {
     char keyValueList[AUDIO_RENDER_BUF_TEST] = {};
     uint32_t keyValueListLen = BUFFER_LENTH;
@@ -471,12 +471,12 @@ HWTEST_F(AudioUtRenderTest, RenderGetExtraParamsIsValid001, TestSize.Level1)
     ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_INVALID_PARAM);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderTurnStandbyModeNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_4400, TestSize.Level1)
 {
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->TurnStandbyMode(nullptr));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderTurnStandbyModeIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_4500, TestSize.Level1)
 {
     int32_t ret = render_->Start(render_);
 	EXPECT_EQ(HDF_SUCCESS, ret);
@@ -488,13 +488,13 @@ HWTEST_F(AudioUtRenderTest, RenderTurnStandbyModeIsValid001, TestSize.Level1)
     ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_SUCCESS);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderAudioDevDumpNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_4600, TestSize.Level1)
 {
     int32_t range = 4;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->AudioDevDump(nullptr, range, -1));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderAudioDevDumpIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_4700, TestSize.Level1)
 {
     int32_t range = 4;
     char pathBuf[] = "/data/RenderDump.log";
@@ -513,13 +513,13 @@ HWTEST_F(AudioUtRenderTest, RenderAudioDevDumpIsValid001, TestSize.Level1)
     fclose(file);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetGainNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_4800, TestSize.Level1)
 {
     float gain;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->GetGain(nullptr, &gain));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetGainIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_4900, TestSize.Level1)
 {
     float gain;
     int32_t ret = render_->GetGain(render_, &gain);
@@ -527,14 +527,14 @@ HWTEST_F(AudioUtRenderTest, RenderGetGainIsValid001, TestSize.Level1)
     ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetGainThresholdNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_5000, TestSize.Level1)
 {
     float min = 0.0;
     float max = 1.0;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->GetGainThreshold(nullptr, &min, &max));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetGainThresholdIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_5100, TestSize.Level1)
 {
     float min = 0.0;
     float max = 1.0;
@@ -545,13 +545,13 @@ HWTEST_F(AudioUtRenderTest, RenderGetGainThresholdIsValid001, TestSize.Level1)
     EXPECT_LE(max, MAX_GAINTHRESHOLD);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetMuteNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_5200, TestSize.Level1)
 {
     bool isMute = false;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->GetMute(nullptr, &isMute));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetMuteIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_5300, TestSize.Level1)
 {
     bool isMute = false;
     int32_t ret = render_->GetMute(render_, &isMute);
@@ -559,14 +559,14 @@ HWTEST_F(AudioUtRenderTest, RenderGetMuteIsValid001, TestSize.Level1)
     ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetVersionNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_5400, TestSize.Level1)
 {
     uint32_t majorVer;
     uint32_t minorVer;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->GetVersion(nullptr, &majorVer, &minorVer));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetVersionIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_5500, TestSize.Level1)
 {
     uint32_t majorVer;
     uint32_t minorVer;
@@ -575,13 +575,13 @@ HWTEST_F(AudioUtRenderTest, RenderGetVersionIsValid001, TestSize.Level1)
     EXPECT_EQ(IAUDIO_MANAGER_MINOR_VERSION, minorVer);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetVolumeNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_5600, TestSize.Level1)
 {
     float val = 0.0;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->GetVolume(nullptr, &val));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetVolumeIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_5700, TestSize.Level1)
 {
     float val = 0.0;
     int32_t ret = render_->GetVolume(render_, &val);
@@ -589,22 +589,22 @@ HWTEST_F(AudioUtRenderTest, RenderGetVolumeIsValid001, TestSize.Level1)
     ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderPauseNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_5800, TestSize.Level1)
 {
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->Pause(nullptr));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderResumeNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_5900, TestSize.Level1)
 {
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->Resume(nullptr));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderResumeInvalid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_6000, TestSize.Level1)
 {
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Resume(render_));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderPauseResumeIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_6100, TestSize.Level1)
 {
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
     int32_t ret = render_->Pause(render_);
@@ -620,7 +620,7 @@ HWTEST_F(AudioUtRenderTest, RenderPauseResumeIsValid001, TestSize.Level1)
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderRenderFrameNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_6200, TestSize.Level1)
 {
     uint32_t frameLen = DEFAULT_BUFFER_SIZE;
     uint64_t requestBytes = frameLen;
@@ -633,7 +633,7 @@ HWTEST_F(AudioUtRenderTest, RenderRenderFrameNull001, TestSize.Level1)
     }
 }
 
-HWTEST_F(AudioUtRenderTest, RenderRenderFrameIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_6300, TestSize.Level1)
 {
     uint32_t frameLen = (uint64_t)GetRenderBufferSize();
     uint64_t requestBytes = frameLen;
@@ -651,13 +651,13 @@ HWTEST_F(AudioUtRenderTest, RenderRenderFrameIsValid001, TestSize.Level1)
     }
 }
 
-HWTEST_F(AudioUtRenderTest, RenderSetChannelModeNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_6400, TestSize.Level1)
 {
     AudioChannelMode mode = AUDIO_CHANNEL_NORMAL;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->SetChannelMode(nullptr, mode));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderSetChannelModeIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_6500, TestSize.Level1)
 {
     AudioChannelMode mode = AUDIO_CHANNEL_NORMAL;
     int32_t ret = render_->SetChannelMode(render_, mode);
@@ -665,13 +665,13 @@ HWTEST_F(AudioUtRenderTest, RenderSetChannelModeIsValid001, TestSize.Level1)
     ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderSetGainNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_6600, TestSize.Level1)
 {
     float gain = 1.0;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->SetGain(nullptr, gain));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderSetGainIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_6700, TestSize.Level1)
 {
     float gain = 1.0;
     int32_t ret = render_->SetGain(render_, gain);
@@ -679,13 +679,13 @@ HWTEST_F(AudioUtRenderTest, RenderSetGainIsValid001, TestSize.Level1)
     ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderSetMuteNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_6800, TestSize.Level1)
 {
     bool mute = false;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->SetMute(nullptr, mute));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderSetMuteIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_6900, TestSize.Level1)
 {
     bool mute = false;
     int32_t ret = render_->SetMute(render_, mute);
@@ -693,37 +693,37 @@ HWTEST_F(AudioUtRenderTest, RenderSetMuteIsValid001, TestSize.Level1)
     ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderSetRenderSpeedNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_7000, TestSize.Level1)
 {
     float speed = 2.0;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->SetRenderSpeed(nullptr, speed));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderSetRenderSpeedIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_7100, TestSize.Level1)
 {
     float speed = 2.0;
     EXPECT_NE(HDF_SUCCESS, render_->SetRenderSpeed(render_, speed));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderSetVolumeNull001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_7200, TestSize.Level1)
 {
     float volume = 0.2;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->SetVolume(nullptr, volume));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderSetVolumeIsInValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_7300, TestSize.Level1)
 {
     float volume = -1.0;
     EXPECT_NE(HDF_SUCCESS, render_->SetVolume(render_, volume));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderSetVolumeIsInValid002, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_7400, TestSize.Level1)
 {
     float volume = 2.0;
     EXPECT_NE(HDF_SUCCESS, render_->SetVolume(render_, volume));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderSetVolumeIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_7500, TestSize.Level1)
 {
     float volume = 0.2;
     int32_t ret = render_->SetVolume(render_, volume);
@@ -731,7 +731,7 @@ HWTEST_F(AudioUtRenderTest, RenderSetVolumeIsValid001, TestSize.Level1)
     ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetRenderSpeedIsInValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_7600, TestSize.Level1)
 {
     float speed = 0.0;
     ASSERT_EQ(HDF_SUCCESS, render_->Start(render_));
@@ -740,7 +740,7 @@ HWTEST_F(AudioUtRenderTest, RenderGetRenderSpeedIsInValid001, TestSize.Level1)
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetRenderSpeedIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_7700, TestSize.Level1)
 {
     float speed = 0.0;
     ASSERT_EQ(HDF_SUCCESS, render_->Start(render_));
@@ -748,7 +748,7 @@ HWTEST_F(AudioUtRenderTest, RenderGetRenderSpeedIsValid001, TestSize.Level1)
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetChannelModeIsInValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_7800, TestSize.Level1)
 {
     enum AudioChannelMode channelMode = AUDIO_CHANNEL_NORMAL;
     int32_t ret = render_->GetChannelMode(nullptr, &channelMode);
@@ -758,14 +758,14 @@ HWTEST_F(AudioUtRenderTest, RenderGetChannelModeIsInValid001, TestSize.Level1)
     ASSERT_TRUE(ret == HDF_ERR_INVALID_PARAM || ret == HDF_ERR_NOT_SUPPORT);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetChannelModeIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_7900, TestSize.Level1)
 {
     enum AudioChannelMode channelMode = AUDIO_CHANNEL_NORMAL;
     int32_t ret = render_->GetChannelMode(render_, &channelMode);
     ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderRegCallbackIsInValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_8000, TestSize.Level1)
 {
     int8_t cookie = 0;
     struct IAudioCallback *audioCallback = nullptr;
@@ -773,7 +773,7 @@ HWTEST_F(AudioUtRenderTest, RenderRegCallbackIsInValid001, TestSize.Level1)
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, render_->RegCallback(render_, nullptr, cookie));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderRegCallbackIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_8100, TestSize.Level1)
 {
     int8_t cookie = 0;
     struct IAudioCallback *audioCallback = nullptr;
@@ -781,20 +781,20 @@ HWTEST_F(AudioUtRenderTest, RenderRegCallbackIsValid001, TestSize.Level1)
     ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_INVALID_PARAM);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderDrainBufferIsInValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_8200, TestSize.Level1)
 {
     enum AudioDrainNotifyType type = AUDIO_DRAIN_NORMAL_MODE;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->DrainBuffer(nullptr, &type));
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->DrainBuffer(render_, nullptr));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderDrainBufferIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_8300, TestSize.Level1)
 {
     enum AudioDrainNotifyType type = AUDIO_DRAIN_NORMAL_MODE;
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->DrainBuffer(render_, &type));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderIsSupportsDrainIsInValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_8400, TestSize.Level1)
 {
     bool support = false;
     int32_t ret = render_->IsSupportsDrain(nullptr, &support);
@@ -803,26 +803,26 @@ HWTEST_F(AudioUtRenderTest, RenderIsSupportsDrainIsInValid001, TestSize.Level1)
     ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderIsSupportsDrainIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_8500, TestSize.Level1)
 {
     bool support = false;
     int32_t ret = render_->IsSupportsDrain(render_, &support);
     ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_SUCCESS);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderAddAudioEffectIsInValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_8600, TestSize.Level1)
 {
     uint64_t effectId = 0;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->AddAudioEffect(nullptr, effectId));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderRemoveAudioEffectIsInValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_8700, TestSize.Level1)
 {
     uint64_t effectId = 0;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->RemoveAudioEffect(nullptr, effectId));
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetFrameBufferSizeIsInValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_8800, TestSize.Level1)
 {
     uint64_t bufferSize = BUFFER_LENTH;
     int32_t ret = render_->GetFrameBufferSize(nullptr, &bufferSize);
@@ -832,14 +832,14 @@ HWTEST_F(AudioUtRenderTest, RenderGetFrameBufferSizeIsInValid001, TestSize.Level
     ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderGetFrameBufferSizeIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_8900, TestSize.Level1)
 {
     uint64_t bufferSize = BUFFER_LENTH;
     int32_t ret = render_->GetFrameBufferSize(render_, &bufferSize);
     ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderIsSupportsPauseAndResumeIsInValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_9000, TestSize.Level1)
 {
     bool supportPause = false;
     bool supportResume = false;
@@ -853,7 +853,7 @@ HWTEST_F(AudioUtRenderTest, RenderIsSupportsPauseAndResumeIsInValid001, TestSize
     ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
 }
 
-HWTEST_F(AudioUtRenderTest, RenderIsSupportsPauseAndResumeIsValid001, TestSize.Level1)
+HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_9100, TestSize.Level1)
 {
     bool supportPause = false;
     bool supportResume = false;

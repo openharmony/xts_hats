@@ -86,30 +86,30 @@ void HdfAudioUtManagerTest::TearDownTestCase()
     IAudioManagerRelease(g_manager, false);
 }
 
-HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerGetVersionNull001, TestSize.Level1)
+HWTEST_F(HdfAudioUtManagerTest, SUB_Driver_Audio_ManagerHdi_0100, TestSize.Level1)
 {
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, g_manager->GetVersion(nullptr, nullptr, nullptr));
 }
 
-HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerGetVersionNull002, TestSize.Level1)
+HWTEST_F(HdfAudioUtManagerTest, SUB_Driver_Audio_ManagerHdi_0200, TestSize.Level1)
 {
     uint32_t version;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, g_manager->GetVersion(nullptr, &version, &version));
 }
 
-HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerGetVersionNull003, TestSize.Level1)
+HWTEST_F(HdfAudioUtManagerTest, SUB_Driver_Audio_ManagerHdi_0300, TestSize.Level1)
 {
     uint32_t version;
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, g_manager->GetVersion(g_manager, nullptr, &version));
 }
 
-HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerGetVersionNull004, TestSize.Level1)
+HWTEST_F(HdfAudioUtManagerTest, SUB_Driver_Audio_ManagerHdi_0400, TestSize.Level1)
 {
     uint32_t version;
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, g_manager->GetVersion(g_manager, &version, nullptr));
 }
 
-HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerGetVersionIsValid001, TestSize.Level1)
+HWTEST_F(HdfAudioUtManagerTest, SUB_Driver_Audio_ManagerHdi_0500, TestSize.Level1)
 {
     uint32_t majorVer;
     uint32_t minorVer;
@@ -118,39 +118,39 @@ HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerGetVersionIsValid001, TestSize.Le
     EXPECT_EQ(IAUDIO_MANAGER_MINOR_VERSION, minorVer);
 }
 
-HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerGetAllAdaptersNull001, TestSize.Level1)
+HWTEST_F(HdfAudioUtManagerTest, SUB_Driver_Audio_ManagerHdi_0600, TestSize.Level1)
 {
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, g_manager->GetAllAdapters(nullptr, nullptr, nullptr));
 }
 
-HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerGetAllAdaptersNull002, TestSize.Level1)
+HWTEST_F(HdfAudioUtManagerTest, SUB_Driver_Audio_ManagerHdi_0700, TestSize.Level1)
 {
     uint32_t size = 0;
     struct AudioAdapterDescriptor descs;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, g_manager->GetAllAdapters(nullptr, &descs, &size));
 }
 
-HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerGetAllAdaptersNull003, TestSize.Level1)
+HWTEST_F(HdfAudioUtManagerTest, SUB_Driver_Audio_ManagerHdi_0800, TestSize.Level1)
 {
     uint32_t size = 0;
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, g_manager->GetAllAdapters(g_manager, nullptr, &size));
 }
 
-HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerGetAllAdaptersParaInvalid001, TestSize.Level1)
+HWTEST_F(HdfAudioUtManagerTest, SUB_Driver_Audio_ManagerHdi_0900, TestSize.Level1)
 {
     uint32_t size = 0;
     struct AudioAdapterDescriptor descs;
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, g_manager->GetAllAdapters(g_manager, &descs, &size));
 }
 
-HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerGetAllAdaptersParaInvalid002, TestSize.Level1)
+HWTEST_F(HdfAudioUtManagerTest, SUB_Driver_Audio_ManagerHdi_1000, TestSize.Level1)
 {
     uint32_t size = UINT_MAX;
     struct AudioAdapterDescriptor descs;
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, g_manager->GetAllAdapters(g_manager, &descs, &size));
 }
 
-HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerGetAllAdaptersSizeIsValid_001, TestSize.Level1)
+HWTEST_F(HdfAudioUtManagerTest, SUB_Driver_Audio_ManagerHdi_1100, TestSize.Level1)
 {
     uint32_t size = g_audioAdapterNumMax;
     struct AudioAdapterDescriptor *descs = (struct AudioAdapterDescriptor *)OsalMemCalloc(
@@ -161,7 +161,7 @@ HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerGetAllAdaptersSizeIsValid_001, Te
     ReleaseAdapterDescs(&descs, g_audioAdapterNumMax);
 }
 
-HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerGetAllAdaptersDescsIsValid_001, TestSize.Level1)
+HWTEST_F(HdfAudioUtManagerTest, SUB_Driver_Audio_ManagerHdi_1200, TestSize.Level1)
 {
     uint32_t size = g_audioAdapterNumMax;
     struct AudioAdapterDescriptor *descs = (struct AudioAdapterDescriptor *)OsalMemCalloc(
@@ -178,31 +178,31 @@ HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerGetAllAdaptersDescsIsValid_001, T
     ReleaseAdapterDescs(&descs, g_audioAdapterNumMax);
 }
 
-HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerLoadAdapterNull_001, TestSize.Level1)
+HWTEST_F(HdfAudioUtManagerTest, SUB_Driver_Audio_ManagerHdi_1300, TestSize.Level1)
 {
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, g_manager->LoadAdapter(nullptr, nullptr, nullptr));
 }
 
-HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerLoadAdapterNull_002, TestSize.Level1)
+HWTEST_F(HdfAudioUtManagerTest, SUB_Driver_Audio_ManagerHdi_1400, TestSize.Level1)
 {
     struct AudioAdapterDescriptor descs;
     struct IAudioAdapter *adapter = nullptr;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, g_manager->LoadAdapter(nullptr, &descs, &adapter));
 }
 
-HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerLoadAdapterNull_003, TestSize.Level1)
+HWTEST_F(HdfAudioUtManagerTest, SUB_Driver_Audio_ManagerHdi_1500, TestSize.Level1)
 {
     struct IAudioAdapter *adapter = nullptr;
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, g_manager->LoadAdapter(g_manager, nullptr, &adapter));
 }
 
-HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerLoadAdapterNull_004, TestSize.Level1)
+HWTEST_F(HdfAudioUtManagerTest, SUB_Driver_Audio_ManagerHdi_1600, TestSize.Level1)
 {
     struct AudioAdapterDescriptor descs;
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, g_manager->LoadAdapter(g_manager, &descs, nullptr));
 }
 
-HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerLoadAdapterSuccess_001, TestSize.Level1)
+HWTEST_F(HdfAudioUtManagerTest, SUB_Driver_Audio_ManagerHdi_1700, TestSize.Level1)
 {
     uint32_t size = g_audioAdapterNumMax;
     struct IAudioAdapter *adapter = nullptr;
@@ -222,7 +222,7 @@ HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerLoadAdapterSuccess_001, TestSize.
     ReleaseAdapterDescs(&descs, g_audioAdapterNumMax);
 }
 
-HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerLoadAdapterSuccess_002, TestSize.Level1)
+HWTEST_F(HdfAudioUtManagerTest, SUB_Driver_Audio_ManagerHdi_1800, TestSize.Level1)
 {
     uint32_t size = g_audioAdapterNumMax;
     struct IAudioAdapter *firstAdapter = nullptr;
@@ -248,7 +248,7 @@ HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerLoadAdapterSuccess_002, TestSize.
     ReleaseAdapterDescs(&descs, g_audioAdapterNumMax);
 }
 
-HWTEST_F(HdfAudioUtManagerTest, HdfAudioManagerReleaseAudioManagerObjectNull_001, TestSize.Level1)
+HWTEST_F(HdfAudioUtManagerTest, SUB_Driver_Audio_ManagerHdi_1900, TestSize.Level1)
 {
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, g_manager->ReleaseAudioManagerObject(nullptr));
 }

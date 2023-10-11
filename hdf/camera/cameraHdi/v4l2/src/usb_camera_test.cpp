@@ -41,7 +41,7 @@ void USBCameraTest::TearDown(void)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0010, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbHotSwap_0100, TestSize.Level1)
 {
     uint32_t rc = 0;
     std::cout << "==========[test log] Add USB Camera, getCameraID success."<< std::endl;
@@ -80,7 +80,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0010, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0020, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbHotSwap_0200, TestSize.Level1)
 {
     uint32_t rc = 0;
     std::cout << "==========[test log] Delect USB Camera, getCameraID success."<< std::endl;
@@ -119,7 +119,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0020, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0030, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbHotSwap_0300, TestSize.Level1)
 {
     uint32_t rc = 0;
     std::cout << "==========[test log] Insert USB Camera, getCameraID success."<< std::endl;
@@ -166,7 +166,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0030, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0040, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbAbility_0100, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -193,7 +193,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0040, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0050, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbAbility_0200, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -217,7 +217,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0050, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0060, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbAbility_0300, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -240,7 +240,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0060, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0070, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbAbility_0400, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -262,7 +262,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0070, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0080, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbAbility_0500, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -290,7 +290,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0080, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0090, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbAbility_0600, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -318,7 +318,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0090, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0100, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbAbility_0700, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -347,7 +347,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0100, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0110, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbAbility_0800, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -376,7 +376,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0110, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0120, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbAbility_0900, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -402,7 +402,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0120, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0130, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbAbility_1000, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -431,7 +431,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0130, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0140, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbAbility_1100, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -455,7 +455,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0140, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0150, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbAbility_1200, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -478,7 +478,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0150, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0160, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbAbility_1300, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -502,7 +502,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0160, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0170, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbPreview_0100, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -546,7 +546,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0170, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0180, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbPreview_0200, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -589,7 +589,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0180, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0190, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbPreview_0300, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -631,7 +631,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0190, TestSize.Level1)
     * @tc.size: MediumTest
     * @tc.type: Function
     */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0200, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbPreview_0400, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -675,7 +675,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0200, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0210, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbPreview_0500, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -718,7 +718,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0210, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0220, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbPreview_0600, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -761,7 +761,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0220, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0230, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbPreview_0700, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -805,7 +805,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0230, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0250, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbAbility_1400, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -827,7 +827,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0250, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0260, TestSize.Level1)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbAbility_1500, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -848,7 +848,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0260, TestSize.Level1)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0270, TestSize.Level3)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbPicture_0100, TestSize.Level3)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -876,7 +876,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0270, TestSize.Level3)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0280, TestSize.Level3)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbPicture_0200, TestSize.Level3)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -935,7 +935,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0280, TestSize.Level3)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0290, TestSize.Level3)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbPicture_0300, TestSize.Level3)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -970,7 +970,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0290, TestSize.Level3)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0300, TestSize.Level3)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbPicture_0400, TestSize.Level3)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -1004,7 +1004,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0300, TestSize.Level3)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0310, TestSize.Level3)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbVideo_0100, TestSize.Level3)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -1032,7 +1032,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0310, TestSize.Level3)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0320, TestSize.Level3)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbVideo_0200, TestSize.Level3)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -1091,7 +1091,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0320, TestSize.Level3)
   * @tc.type: Function
   */
 
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0330, TestSize.Level3)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbVideo_0300, TestSize.Level3)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -1122,7 +1122,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0330, TestSize.Level3)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0340, TestSize.Level3)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbAbility_1600, TestSize.Level3)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -1144,7 +1144,7 @@ HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0340, TestSize.Level3)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-HWTEST_F(USBCameraTest, SUB_DriverSystem_UsbCameraHdi_0350, TestSize.Level3)
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbAbility_1700, TestSize.Level3)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;

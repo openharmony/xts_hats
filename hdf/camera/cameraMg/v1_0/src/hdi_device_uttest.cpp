@@ -38,7 +38,7 @@ void HdiDeviceUtTest::TearDown(void)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(HdiDeviceUtTest, SUB_DriverSystem_CameraHdiMg_0290, TestSize.Level0)
+HWTEST_F(HdiDeviceUtTest, SUB_Driver_Camera_Merge_2900, TestSize.Level0)
 {
     cameraTest->Open();
     cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
@@ -53,7 +53,7 @@ HWTEST_F(HdiDeviceUtTest, SUB_DriverSystem_CameraHdiMg_0290, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(HdiDeviceUtTest, SUB_DriverSystem_CameraHdiMg_0300, TestSize.Level0)
+HWTEST_F(HdiDeviceUtTest, SUB_Driver_Camera_Merge_3000, TestSize.Level0)
 {
     cameraTest->Open();
     cameraTest->streamOperatorCallback = nullptr;
@@ -68,7 +68,7 @@ HWTEST_F(HdiDeviceUtTest, SUB_DriverSystem_CameraHdiMg_0300, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(HdiDeviceUtTest, SUB_DriverSystem_CameraHdiMg_0310, TestSize.Level0)
+HWTEST_F(HdiDeviceUtTest, SUB_Driver_Camera_Merge_3100, TestSize.Level0)
 {
     cameraTest->Open();
     EXPECT_EQ(true, cameraTest->cameraDevice != nullptr);
@@ -88,7 +88,7 @@ HWTEST_F(HdiDeviceUtTest, SUB_DriverSystem_CameraHdiMg_0310, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(HdiDeviceUtTest, SUB_DriverSystem_CameraHdiMg_0320, TestSize.Level0)
+HWTEST_F(HdiDeviceUtTest, SUB_Driver_Camera_Merge_3200, TestSize.Level0)
 {
     cameraTest->Open();
     EXPECT_EQ(true, cameraTest->cameraDevice != nullptr);
@@ -108,7 +108,7 @@ HWTEST_F(HdiDeviceUtTest, SUB_DriverSystem_CameraHdiMg_0320, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(HdiDeviceUtTest, SUB_DriverSystem_CameraHdiMg_0590, TestSize.Level0)
+HWTEST_F(HdiDeviceUtTest, SUB_Driver_Camera_Merge_5900, TestSize.Level0)
 {
     cameraTest->Open();
     std::vector<int32_t> resultsList;
@@ -124,7 +124,7 @@ HWTEST_F(HdiDeviceUtTest, SUB_DriverSystem_CameraHdiMg_0590, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(HdiDeviceUtTest, SUB_DriverSystem_CameraHdiMg_0600, TestSize.Level0)
+HWTEST_F(HdiDeviceUtTest, SUB_Driver_Camera_Merge_6000, TestSize.Level0)
 {
     cameraTest->Open();
     std::vector<OHOS::Camera::MetaType> resultsOriginal;

@@ -40,7 +40,7 @@ void DeviceAbilityUtTest::TearDown(void)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(DeviceAbilityUtTest, SUB_DriverSystem_CameraHdiMg_0570, TestSize.Level1)
+HWTEST_F(DeviceAbilityUtTest, SUB_Driver_Camera_Refined_0100, TestSize.Level1)
 {
     EXPECT_NE(cameraTest->ability, nullptr);
     common_metadata_header_t* data = cameraTest->ability->get();

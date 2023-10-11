@@ -38,7 +38,7 @@ void HdiHostUtTest::TearDown(void)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0150, TestSize.Level0)
+HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_Merge_1500, TestSize.Level0)
 {
     EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
     if (cameraTest->cameraDevice == nullptr) {
@@ -55,7 +55,7 @@ HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0150, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0160, TestSize.Level0)
+HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_Merge_1600, TestSize.Level0)
 {
     EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
     if (cameraTest->cameraDevice == nullptr) {
@@ -71,7 +71,7 @@ HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0160, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0170, TestSize.Level0)
+HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_Merge_1700, TestSize.Level0)
 {
     EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
     if (cameraTest->cameraDevice == nullptr) {
@@ -87,7 +87,7 @@ HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0170, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0180, TestSize.Level0)
+HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_Merge_1800, TestSize.Level0)
 {
     EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
     if (cameraTest->cameraDevice == nullptr) {
@@ -109,7 +109,7 @@ HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0180, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0190, TestSize.Level0)
+HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_Merge_1900, TestSize.Level0)
 {
     EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
     if (cameraTest->cameraDevice == nullptr) {
@@ -127,7 +127,7 @@ HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0190, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0200, TestSize.Level0)
+HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_Merge_2000, TestSize.Level0)
 {
     EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
     if (cameraTest->cameraDevice == nullptr) {
@@ -145,7 +145,7 @@ HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0200, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0210, TestSize.Level0)
+HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_Merge_2100, TestSize.Level0)
 {
     EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
     if (cameraTest->cameraDevice == nullptr) {
@@ -163,7 +163,7 @@ HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0210, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0220, TestSize.Level0)
+HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_Merge_2200, TestSize.Level0)
 {
     EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
     if (cameraTest->cameraDevice == nullptr) {
@@ -181,7 +181,7 @@ HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0220, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0230, TestSize.Level0)
+HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_Merge_2300, TestSize.Level0)
 {
     EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
     if (cameraTest->cameraDevice == nullptr) {
@@ -199,7 +199,7 @@ HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0230, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0240, TestSize.Level0)
+HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_Merge_2400, TestSize.Level0)
 {
     EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
     if (cameraTest->cameraDevice == nullptr) {
@@ -216,7 +216,7 @@ HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0240, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0250, TestSize.Level0)
+HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_Merge_2500, TestSize.Level0)
 {
     EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
     if (cameraTest->cameraDevice == nullptr) {
@@ -233,7 +233,7 @@ HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0250, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0260, TestSize.Level0)
+HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_Merge_2600, TestSize.Level0)
 {
     EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
     if (cameraTest->cameraDevice == nullptr) {
@@ -250,7 +250,7 @@ HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0260, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0270, TestSize.Level0)
+HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_Merge_2700, TestSize.Level0)
 {
     EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
     if (cameraTest->cameraDevice == nullptr) {
@@ -267,7 +267,7 @@ HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0270, TestSize.Level0)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(HdiHostUtTest, SUB_DriverSystem_CameraHdiMg_0280, TestSize.Level0)
+HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_Merge_2800, TestSize.Level0)
 {
     EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
     if (cameraTest->cameraDevice == nullptr) {

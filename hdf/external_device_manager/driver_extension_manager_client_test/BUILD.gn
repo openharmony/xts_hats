@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+# Copyright (c) 2023 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -12,20 +12,21 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
-import("//test/xts/hats/build.gni")
+import("//drivers/external_device_manager/extdevmgr.gni")
 import("//test/xts/tools/build/suite.gni")
 
-group("HatsHdfExternalDeviceTest") {
-  testonly = true
-  if (hats_rich == true) {
-    deps = []
-  } else {
-    deps = [
-      "bus_extension_usb:HatsHdfExternalBusUsbTest",
-      "device_manager_test:HatsHdfExternalDeviceManagerTest",
-      "driver_extension_controller:HatsHdfExternalControllerTest",
-      "driver_extension_manager_client_test:HatsHdfExternalManagerClientTest",
-      "drivers_pkg_manager_test:HatsHdfExternalPkgManagerTest",
-    ]
-  }
+module_output_path = "hats/external_device_manager"
+ohos_moduletest_suite("HatsHdfExternalManagerClientTest") {
+  module_out_path = module_output_path
+  sources = [ "driver_extension_manager_client_test.cpp" ]
+  include_dirs = [ "${ext_mgr_path}/services/zidl/include" ]
+  deps = [ "${ext_mgr_path}/interfaces/innerkits:driver_ext_mgr_client" ]
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+    "samgr:samgr_proxy",
+  ]
+  subsystem_name = "xts"
+  part_name = "hats"
 }

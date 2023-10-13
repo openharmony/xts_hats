@@ -64,7 +64,7 @@ void PassthroughBenchmarkTest::TearDown(const ::benchmark::State &state)
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0010
+  * @tc.number: SUB_Driver_Input_PassthroughPerformance_0100
   * @tc.name: ScanInputDevice001
   * @tc.desc: scan input device test-benchmark
   * @tc.type: FUNC
@@ -92,7 +92,7 @@ BENCHMARK_REGISTER_F(PassthroughBenchmarkTest, ScanInputDevice)->Iterations(100)
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0020
+  * @tc.number: SUB_Driver_Input_PassthroughPerformance_0200
   * @tc.name: OpenInputDev001
   * @tc.desc: open input device test-benchmark
   * @tc.type: func
@@ -117,7 +117,7 @@ BENCHMARK_REGISTER_F(PassthroughBenchmarkTest, OpenInputDevice)->Iterations(100)
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0030
+  * @tc.number: SUB_Driver_Input_PassthroughPerformance_0300
   * @tc.name: CloseInputDevice001
   * @tc.desc: close input device test-benchmark
   * @tc.type: func
@@ -143,7 +143,7 @@ BENCHMARK_REGISTER_F(PassthroughBenchmarkTest, CloseInputDevice)->Iterations(100
 
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0040
+  * @tc.number: SUB_Driver_Input_PassthroughPerformance_0400
   * @tc.name: GetInputDeviceList001
   * @tc.desc: get input device list info test-benchmark
   * @tc.type: func
@@ -181,7 +181,7 @@ BENCHMARK_REGISTER_F(PassthroughBenchmarkTest, GetInputDeviceList)->Iterations(1
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0050
+  * @tc.number: SUB_Driver_Input_PassthroughPerformance_0500
   * @tc.name: GetDeviceType001
   * @tc.desc: get input device type test-benchmark
   * @tc.type: func
@@ -210,7 +210,7 @@ BENCHMARK_REGISTER_F(PassthroughBenchmarkTest, GetDeviceType)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0060
+  * @tc.number: SUB_Driver_Input_PassthroughPerformance_0600
   * @tc.name: GetChipInfo001
   * @tc.desc: get input device chip info test-benchmark
   * @tc.type: func
@@ -239,7 +239,7 @@ BENCHMARK_REGISTER_F(PassthroughBenchmarkTest, GetChipInfo)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0070
+  * @tc.number: SUB_Driver_Input_PassthroughPerformance_0700
   * @tc.name: SetPowerStatus001
   * @tc.desc: set device power status test-benchmark
   * @tc.type: func
@@ -266,7 +266,7 @@ BENCHMARK_REGISTER_F(PassthroughBenchmarkTest, SetPowerStatus)->Iterations(100)-
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0080
+  * @tc.number: SUB_Driver_Input_PassthroughPerformance_0800
   * @tc.name: GetPowerStatus001
   * @tc.desc: get device power status test-benchmark
   * @tc.type: func
@@ -295,7 +295,7 @@ BENCHMARK_REGISTER_F(PassthroughBenchmarkTest, GetPowerStatus)->Iterations(100)-
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0090
+  * @tc.number: SUB_Driver_Input_PassthroughPerformance_0900
   * @tc.name: GetVendorName001
   * @tc.desc: get device vendor name test-benchmark
   * @tc.type: func
@@ -324,7 +324,7 @@ BENCHMARK_REGISTER_F(PassthroughBenchmarkTest, GetVendorName)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0100
+  * @tc.number: SUB_Driver_Input_PassthroughPerformance_1000
   * @tc.name: GetChipName001
   * @tc.desc: get device chip name test-benchmark
   * @tc.type: func
@@ -353,7 +353,7 @@ BENCHMARK_REGISTER_F(PassthroughBenchmarkTest, GetChipName)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0110
+  * @tc.number: SUB_Driver_Input_PassthroughPerformance_1100
   * @tc.name: SetGestureMode001
   * @tc.desc: set device gesture mode test-benchmark
   * @tc.type: func
@@ -380,7 +380,7 @@ BENCHMARK_REGISTER_F(PassthroughBenchmarkTest, SetGestureMode)->Iterations(100)-
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0120
+  * @tc.number: SUB_Driver_Input_PassthroughPerformance_1200
   * @tc.name: RunCapacitanceTest001
   * @tc.desc: run capacitanceTest test-benchmark
   * @tc.type: FUNC
@@ -408,7 +408,7 @@ BENCHMARK_REGISTER_F(PassthroughBenchmarkTest, RunCapacitanceTest)->Iterations(1
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0130
+  * @tc.number: SUB_Driver_Input_PassthroughPerformance_1300
   * @tc.name: RunExtraCommand001
   * @tc.desc: run extra command test-benchmark
   * @tc.type: FUNC
@@ -437,7 +437,7 @@ BENCHMARK_REGISTER_F(PassthroughBenchmarkTest, RunExtraCommand)->Iterations(100)
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0140
+  * @tc.number: SUB_Driver_Input_PassthroughPerformance_1400
   * @tc.name: RegisterCallbackAndReportData001
   * @tc.desc: register callback and report data test-benchmark
   * @tc.type: func
@@ -464,7 +464,7 @@ BENCHMARK_REGISTER_F(PassthroughBenchmarkTest, RegisterReportCallback)->Iteratio
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0150
+  * @tc.number: SUB_Driver_Input_PassthroughPerformance_1500
   * @tc.name: UnregisterReportCallback001
   * @tc.desc: unregister reportCallback test-benchmark
   * @tc.type: func

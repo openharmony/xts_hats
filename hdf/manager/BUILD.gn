@@ -21,7 +21,7 @@ group("HatsHdfManagerTest") {
     deps = [ "managerHdiTest:HatsHdfManagerHdiTest" ]
   } else {
     deps = [
-      #"managerBenchmarkTest:HatsHdfManagerbenchmarkTest",
+      "managerBenchmarkTest:HatsHdfManagerbenchmarkTest",
       "managerHdiTest:HatsHdfManagerHdiTest",
       "managerServiceTest:HatsHdfManagerServiceTest",
     ]

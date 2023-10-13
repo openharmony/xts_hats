@@ -67,7 +67,7 @@ void HdfVibratorHdiServiceTest::TearDown()
   * @tc.desc: Creat a vibrator instance. The instance is not empty.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0010, Function | MediumTest | Level1)
+HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_0100, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 }
@@ -78,7 +78,7 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0010, Function 
   * Controls this vibrator to stop the vibrator
   * @tc.type: FUNC
   */
-HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0020, Function | MediumTest | Level1)
+HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_0200, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
@@ -97,7 +97,7 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0020, Function 
   * Controls this vibrator to stop the vibrator
   * @tc.type: FUNC
   */
-HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0030, Function | MediumTest | Level1)
+HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_0300, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
@@ -114,7 +114,7 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0030, Function 
   * Controls this vibrator to stop the vibrator
   * @tc.type: FUNC
   */
-HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0040, Function | MediumTest | Level1)
+HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_0400, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
@@ -133,7 +133,7 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0040, Function 
   * Controls this vibrator to stop the vibrator.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0050, Function | MediumTest | Level1)
+HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_0500, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
@@ -152,7 +152,7 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0050, Function 
   * Controls this vibrator to stop the vibrator.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0090, Function | MediumTest | Level1)
+HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_0600, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
@@ -175,7 +175,7 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0090, Function 
   * Controls this vibrator to stop the vibrator.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0070, Function | MediumTest | Level1)
+HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_0700, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
@@ -195,7 +195,7 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0070, Function 
   * Controls this vibrator to stop the vibrator.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0080, Function | MediumTest | Level1)
+HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_0800, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
@@ -214,7 +214,7 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0080, Function 
   * Controls this vibrator to stop the vibrator.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0100, Function | MediumTest | Level1)
+HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_0900, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
@@ -231,7 +231,7 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0100, Function 
  * range in the system. Validity check of input parameters.
  * @tc.type: FUNC
  */
-HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0110, Function | MediumTest | Level1) {
+HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_1000, Function | MediumTest | Level1) {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
     std::vector<HdfVibratorInfo> info;
@@ -250,7 +250,7 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0110, Function 
  * @tc.desc: Start vibrator based on the setting vibration effect.
  * @tc.type: FUNC
  */
-HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0120, Function | MediumTest | Level1) {
+HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_1100, Function | MediumTest | Level1) {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
     std::vector<HdfVibratorInfo> info;
@@ -278,7 +278,7 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0120, Function 
  * @tc.desc: Start vibrator based on the setting vibration effect.
  * @tc.type: FUNC
  */
-HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0130, Function | MediumTest | Level1) {
+HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_1200, Function | MediumTest | Level1) {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
     std::vector<HdfVibratorInfo> info;
@@ -297,7 +297,7 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0130, Function 
  * @tc.desc: Start vibrator based on the setting vibration effect.
  * @tc.type: FUNC
  */
-HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0140, Function | MediumTest | Level1) {
+HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_1300, Function | MediumTest | Level1) {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
     std::vector<HdfVibratorInfo> info;
@@ -316,7 +316,7 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0140, Function 
  * @tc.desc: Start vibrator based on the setting vibration effect.
  * @tc.type: FUNC
  */
-HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0150, Function | MediumTest | Level1) {
+HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_1400, Function | MediumTest | Level1) {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
     std::vector<HdfVibratorInfo> info;

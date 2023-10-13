@@ -71,7 +71,7 @@ void InitConfig(HdfLightEffect &effect)
   * @tc.desc: Create a light instance. The instance is not empty.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_CheckLightInstanceIsEmpty_001, Function | MediumTest | Level1)
+HWTEST_F(HdfLightHdiServiceTest, SUB_Driver_Sensor_HdiLight_2400, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_lightInterface);
 }
@@ -81,7 +81,7 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_CheckLightInstanceIsEmpty_001,
   * @tc.desc: Get light info.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_GetLightInfo_001, Function | MediumTest | Level1)
+HWTEST_F(HdfLightHdiServiceTest, SUB_Driver_Sensor_HdiLight_2500, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_lightInterface);
 
@@ -101,7 +101,7 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_GetLightInfo_001, Function | M
   * @tc.desc: Turn on the light always on red.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightRed_001, Function | MediumTest | Level1)
+HWTEST_F(HdfLightHdiServiceTest, SUB_Driver_Sensor_HdiLight_2600, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_lightInterface);
 
@@ -123,7 +123,7 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightRed_001, Function |
   * @tc.desc: Turn on the light always on green.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightGreen_001, Function | MediumTest | Level1)
+HWTEST_F(HdfLightHdiServiceTest, SUB_Driver_Sensor_HdiLight_2700, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_lightInterface);
 
@@ -144,7 +144,7 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightGreen_001, Function
   * @tc.desc: Turn on the light always on blue.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightBlue_001, Function | MediumTest | Level1)
+HWTEST_F(HdfLightHdiServiceTest, SUB_Driver_Sensor_HdiLight_2800, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_lightInterface);
 
@@ -166,7 +166,7 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightBlue_001, Function 
   * @tc.desc: Abnormal flashmode.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightAbnormal_001, Function | MediumTest | Level1)
+HWTEST_F(HdfLightHdiServiceTest, SUB_Driver_Sensor_HdiLight_2900, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_lightInterface);
 
@@ -189,7 +189,7 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightAbnormal_001, Funct
   * @tc.desc: Abnormal flashmode.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightAbnormal_002, Function | MediumTest | Level1)
+HWTEST_F(HdfLightHdiServiceTest, SUB_Driver_Sensor_HdiLight_3000, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_lightInterface);
 
@@ -212,7 +212,7 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightAbnormal_002, Funct
   * @tc.desc: Abnormal lightID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightAbnormal_003, Function | MediumTest | Level1)
+HWTEST_F(HdfLightHdiServiceTest, SUB_Driver_Sensor_HdiLight_3100, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_lightInterface);
 
@@ -231,7 +231,7 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightAbnormal_003, Funct
   * @tc.desc: Abnormal lightID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfLightHdiServiceTest, SUB_DriverSystem_TurnOnLightAbnormal_004, Function | MediumTest | Level1)
+HWTEST_F(HdfLightHdiServiceTest, SUB_Driver_Sensor_HdiLight_3200, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_lightInterface);
 

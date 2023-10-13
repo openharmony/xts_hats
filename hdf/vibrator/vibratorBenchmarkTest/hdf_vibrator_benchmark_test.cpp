@@ -63,7 +63,7 @@ void vibratorBenchmarkTest::TearDown(const ::benchmark::State &state)
   * Controls this vibrator to perform a one-shot vibrator at a given duration.
   * @tc.type: FUNC
   */
-BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0010)(benchmark::State &st)
+BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0100)(benchmark::State &st)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
@@ -80,7 +80,7 @@ BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0010)(benc
     }
 }
 
-BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0010)->
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0100)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -89,7 +89,7 @@ BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0
   * Controls this Performing Time Series Vibrator Effects.
   * @tc.type: FUNC
   */
-BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0020)(benchmark::State &st)
+BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0200)(benchmark::State &st)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
@@ -106,7 +106,7 @@ BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0020)(benc
     }
 }
 
-BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0020)->
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0200)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -115,7 +115,7 @@ BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0
   * Controls this Performing built-in Vibrator Effects.
   * @tc.type: FUNC
   */
-BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0030)(benchmark::State &st)
+BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0300)(benchmark::State &st)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
     int32_t startRet;
@@ -132,7 +132,7 @@ BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0030)(benc
     }
 }
 
-BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0030)->
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0300)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -141,7 +141,7 @@ BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0
   * Controls this Performing Time Series Vibrator Effects.
   * @tc.type: FUNC
   */
-BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0040)(benchmark::State &state)
+BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0400)(benchmark::State &state)
 {
     uint32_t majorVer;
     uint32_t minorVer;
@@ -163,7 +163,7 @@ BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0040)(benc
     }
 }
 
-BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0040)->
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0400)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -172,7 +172,7 @@ BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0
   * Controls this Performing built-in Vibrator Effects.
   * @tc.type: FUNC
   */
-BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0050)(benchmark::State &state)
+BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0500)(benchmark::State &state)
 {
     uint32_t majorVer;
     uint32_t minorVer;
@@ -208,7 +208,7 @@ BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0050)(benc
     }
 }
 
-BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0050)->
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0500)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -216,7 +216,7 @@ BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0
   * @tc.desc: Start periodic vibration with custom composite effect
   * @tc.type: FUNC
   */
- BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0060)(benchmark::State &state)
+ BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0600)(benchmark::State &state)
 {
   
         PrimitiveEffect primitiveEffect1 { 0, 60007, 0};
@@ -244,7 +244,7 @@ BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0
         }
         OsalMSleep(2);
 }
-BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0060)->
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0600)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -252,7 +252,7 @@ BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0
   * @tc.desc: Get effect information with the given effect type
   * @tc.type: FUNC
   */
-BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0070)(benchmark::State &state)
+BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0700)(benchmark::State &state)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
     HdfEffectInfo effectInfo;
@@ -262,7 +262,7 @@ BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0070)(benc
     }
     EXPECT_EQ(HDF_SUCCESS, ret);
 }
-BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0070)->
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0700)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -270,7 +270,7 @@ BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0
   * @tc.desc: Get vibration status.
   * @tc.type: FUNC
   */
- BENCHMARK_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0080)(benchmark::State &state)
+ BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0800)(benchmark::State &state)
 {
     ASSERT_NE(nullptr, g_vibratorInterface); 
     bool stat {false};  
@@ -278,7 +278,7 @@ BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0
     g_vibratorInterface -> IsVibratorRunning(stat);
     }
 }
-BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_DriverSystem_VibratorBenchmark_0080)->
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0800)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 }
 

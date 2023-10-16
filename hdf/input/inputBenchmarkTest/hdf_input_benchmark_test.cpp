@@ -182,7 +182,7 @@ static void CloseOnlineDev(InputDevDesc *sta, int32_t len)
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0001
+  * @tc.number: SUB_Driver_Input_HdiPerformance_0900
   * @tc.name: open input device for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
@@ -206,7 +206,7 @@ BENCHMARK_REGISTER_F(InputBenchmarkTest, ScanInputDevice)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0002
+  * @tc.number: SUB_Driver_Input_HdiPerformance_0500
   * @tc.name: open input device for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
@@ -254,7 +254,7 @@ BENCHMARK_REGISTER_F(InputBenchmarkTest, RegisterHotPlugCallback)->Iterations(10
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0003
+  * @tc.number: SUB_Driver_Input_HdiPerformance_1000
   * @tc.name: open input device for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
@@ -303,7 +303,7 @@ BENCHMARK_REGISTER_F(InputBenchmarkTest, UnregisterHotPlugCallback)->Iterations(
 
 
 /**
-  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0004
+  * @tc.number: SUB_Driver_Input_HdiPerformance_0400
   * @tc.name: open input device for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
@@ -327,7 +327,7 @@ BENCHMARK_REGISTER_F(InputBenchmarkTest, OpenInputDevice)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0005
+  * @tc.number: SUB_Driver_Input_HdiPerformance_0100
   * @tc.name: close input device for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
@@ -349,7 +349,7 @@ BENCHMARK_REGISTER_F(InputBenchmarkTest, CloseInputDevice)->Iterations(100)->
 
 
 /**
-  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0006
+  * @tc.number: SUB_Driver_Input_HdiPerformance_0600
   * @tc.name: get input device id for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
@@ -380,7 +380,7 @@ BENCHMARK_REGISTER_F(InputBenchmarkTest, GetInputDevice)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0007
+  * @tc.number: SUB_Driver_Input_HdiPerformance_0700
   * @tc.name: get input device list info test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
@@ -411,7 +411,7 @@ BENCHMARK_REGISTER_F(InputBenchmarkTest, GetInputDeviceList)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0008
+  * @tc.number: SUB_Driver_Input_HdiPerformance_0800
   * @tc.name: get input device type test for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
@@ -431,7 +431,7 @@ BENCHMARK_REGISTER_F(InputBenchmarkTest, GetDeviceType)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0009
+  * @tc.number: SUB_Driver_Input_HdiPerformance_0200
   * @tc.name: get input device chip info for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
@@ -452,7 +452,7 @@ BENCHMARK_REGISTER_F(InputBenchmarkTest, GetChipInfo)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0010
+  * @tc.number: SUB_Driver_Input_HdiPerformance_1300
   * @tc.name: set device power status for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
@@ -474,7 +474,7 @@ BENCHMARK_REGISTER_F(InputBenchmarkTest, SetPowerStatus)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0011
+  * @tc.number: SUB_Driver_Input_HdiPerformance_1100
   * @tc.name: get device poewr status for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
@@ -497,7 +497,7 @@ BENCHMARK_REGISTER_F(InputBenchmarkTest, GetPowerStatus)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0012
+  * @tc.number: SUB_Driver_Input_HdiPerformance_1200
   * @tc.name: get device vendor name for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
@@ -518,7 +518,7 @@ BENCHMARK_REGISTER_F(InputBenchmarkTest, GetVendorName)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0013
+  * @tc.number: SUB_Driver_Input_HdiPerformance_0300
   * @tc.name: get device chip name for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
@@ -539,7 +539,7 @@ BENCHMARK_REGISTER_F(InputBenchmarkTest, GetChipName)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0014
+  * @tc.number: SUB_Driver_Input_HdiPerformance_1400
   * @tc.name: set device gesture mode for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
@@ -559,7 +559,7 @@ BENCHMARK_REGISTER_F(InputBenchmarkTest, SetGestureMode)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0015
+  * @tc.number: SUB_Driver_Input_HdiPerformance_1500
   * @tc.name: Run Capacitance for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
@@ -580,7 +580,7 @@ BENCHMARK_REGISTER_F(InputBenchmarkTest, RunCapacitanceTest)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0016
+  * @tc.number: SUB_Driver_Input_HdiPerformance_1600
   * @tc.name: Run Extra Command for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
@@ -603,7 +603,7 @@ BENCHMARK_REGISTER_F(InputBenchmarkTest, RunExtraCommand)->Iterations(100)->
 
 
 /**
-  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0017
+  * @tc.number: SUB_Driver_Input_HdiPerformance_1700
   * @tc.name: Register Report Callback for ap mode benchmark test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
@@ -627,7 +627,7 @@ BENCHMARK_REGISTER_F(InputBenchmarkTest, RegisterReportCallback)->Iterations(100
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_Input_benchmarkTest_0018
+  * @tc.number: SUB_Driver_Input_HdiPerformance_1800
   * @tc.name: Register Report Callback test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium

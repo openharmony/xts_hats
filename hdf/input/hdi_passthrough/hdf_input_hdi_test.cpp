@@ -124,25 +124,25 @@ static void CloseOnlineDev(std::vector<DevDesc> sta)
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0010
+  * @tc.number: SUB_Driver_Input_Passthrough_0900
   * @tc.name: GetInputClient001
   * @tc.desc: Get a client and check whether the client is empty.
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0010, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_0900, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_inputInterfaces);
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0020
+  * @tc.number: SUB_Driver_Input_Passthrough_3100
   * @tc.name: ScanInputDevice001
   * @tc.desc: scan input device test
   * @tc.type: FUNC
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0020, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_3100, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -162,13 +162,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0020, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0030
+  * @tc.number: SUB_Driver_Input_Passthrough_2000
   * @tc.name: OpenInputDev001
   * @tc.desc: open input device test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0030, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_2000, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -184,13 +184,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0030, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0040
+  * @tc.number: SUB_Driver_Input_Passthrough_2100
   * @tc.name: OpenInputDev002
   * @tc.desc: open input device test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0040, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_2100, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -207,13 +207,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0040, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0050
+  * @tc.number: SUB_Driver_Input_Passthrough_0100
   * @tc.name: CloseInputDevice001
   * @tc.desc: close input device test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0050, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_0100, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -229,13 +229,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0050, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0060
+  * @tc.number: SUB_Driver_Input_Passthrough_0200
   * @tc.name: CloseInputDevice002
   * @tc.desc: close input device test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0060, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_0200, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -252,13 +252,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0060, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0070
+  * @tc.number: SUB_Driver_Input_Passthrough_1000
   * @tc.name: GetInputDevice001
   * @tc.desc: get input device info test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0070, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_1000, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -286,13 +286,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0070, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0071
+  * @tc.number: SUB_Driver_Input_Passthrough_1100
   * @tc.name: GetInputDevice002
   * @tc.desc: get input device info test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0071, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_1100, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -314,13 +314,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0071, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0080
+  * @tc.number: SUB_Driver_Input_Passthrough_1400
   * @tc.name: GetInputDeviceList001
   * @tc.desc: get input device list info test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0080, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_1400, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -349,13 +349,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0080, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0090
+  * @tc.number: SUB_Driver_Input_Passthrough_0700
   * @tc.name: GetDeviceType001
   * @tc.desc: get input device type test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0090, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_0700, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -376,13 +376,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0090, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0091
+  * @tc.number: SUB_Driver_Input_Passthrough_0800
   * @tc.name: GetDeviceType002
   * @tc.desc: get input device type test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0091, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_0800, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -403,13 +403,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0091, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0100
+  * @tc.number: SUB_Driver_Input_Passthrough_0300
   * @tc.name: GetChipInfo001
   * @tc.desc: get input device chip info test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0100, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_0300, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -430,13 +430,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0100, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0101
+  * @tc.number: SUB_Driver_Input_Passthrough_0400
   * @tc.name: GetChipInfo002
   * @tc.desc: get input device chip info test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0101, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_0400, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -457,13 +457,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0101, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0110
+  * @tc.number: SUB_Driver_Input_Passthrough_1200
   * @tc.name: GetInputDevice003
   * @tc.desc: get input device chip info test
   * @tc.type: FUNC
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0110, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_1200, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -486,13 +486,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0110, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0111
+  * @tc.number: SUB_Driver_Input_Passthrough_1300
   * @tc.name: GetInputDevice004
   * @tc.desc: get input device chip info test
   * @tc.type: FUNC
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0111, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_1300, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -515,13 +515,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0111, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0120
+  * @tc.number: SUB_Driver_Input_Passthrough_2200
   * @tc.name: RegisterCallback001
   * @tc.desc: register input device report test
   * @tc.type: FUNC
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0120, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_2200, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -538,13 +538,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0120, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0130
+  * @tc.number: SUB_Driver_Input_Passthrough_3400
   * @tc.name: SetPowerStatus001
   * @tc.desc: set device power status test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0130, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_3400, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -562,13 +562,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0130, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0131
+  * @tc.number: SUB_Driver_Input_Passthrough_3500
   * @tc.name: SetPowerStatus002
   * @tc.desc: set device power status test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0131, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_3500, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -586,13 +586,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0131, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0132
+  * @tc.number: SUB_Driver_Input_Passthrough_3600
   * @tc.name: SetPowerStatus003
   * @tc.desc: set device power status test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0132, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_3600, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -610,13 +610,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0132, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0140
+  * @tc.number: SUB_Driver_Input_Passthrough_3700
   * @tc.name: SetPowerStatus004
   * @tc.desc: set device power status test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0140, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_3700, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -634,13 +634,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0140, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0150
+  * @tc.number: SUB_Driver_Input_Passthrough_1500
   * @tc.name: GetPowerStatus001
   * @tc.desc: get device power status test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0150, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_1500, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -661,13 +661,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0150, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0160
+  * @tc.number: SUB_Driver_Input_Passthrough_1600
   * @tc.name: GetPowerStatus002
   * @tc.desc: get device power status test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0160, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_1600, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -686,13 +686,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0160, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0170
+  * @tc.number: SUB_Driver_Input_Passthrough_1700
   * @tc.name: GetVendorName001
   * @tc.desc: get device vendor name test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0170, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_1700, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -713,13 +713,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0170, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0180
+  * @tc.number: SUB_Driver_Input_Passthrough_1800
   * @tc.name: GetVendorName002
   * @tc.desc: get device vendor name test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0180, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_1800, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -738,13 +738,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0180, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0190
+  * @tc.number: SUB_Driver_Input_Passthrough_0500
   * @tc.name: GetChipName001
   * @tc.desc: get device chip name test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0190, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_0500, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -765,13 +765,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0190, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0200
+  * @tc.number: SUB_Driver_Input_Passthrough_0600
   * @tc.name: GetChipName002
   * @tc.desc: get device chip name test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0200, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_0600, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -790,13 +790,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0200, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0210
+  * @tc.number: SUB_Driver_Input_Passthrough_3200
   * @tc.name: SetGestureMode001
   * @tc.desc: set device gesture mode test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0210, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_3200, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -814,13 +814,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0210, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0220
+  * @tc.number: SUB_Driver_Input_Passthrough_3300
   * @tc.name: SetGestureMode002
   * @tc.desc: set device gesture mode test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0220, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_3300, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -838,13 +838,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0220, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0230
+  * @tc.number: SUB_Driver_Input_Passthrough_2400
   * @tc.name: RunCapacitanceTest001
   * @tc.desc: run capacitanceTest test
   * @tc.type: FUNC
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0230, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_2400, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -863,13 +863,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0230, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0231
+  * @tc.number: SUB_Driver_Input_Passthrough_2500
   * @tc.name: RunCapacitanceTest002
   * @tc.desc: run capacitanceTest test
   * @tc.type: FUNC
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0231, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_2500, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -888,13 +888,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0231, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0232
+  * @tc.number: SUB_Driver_Input_Passthrough_2600
   * @tc.name: RunCapacitanceTest003
   * @tc.desc: run capacitanceTest test
   * @tc.type: FUNC
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0232, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_2600, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -913,13 +913,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0232, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0233
+  * @tc.number: SUB_Driver_Input_Passthrough_2700
   * @tc.name: RunCapacitanceTest004
   * @tc.desc: run capacitanceTest test
   * @tc.type: FUNC
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0233, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_2700, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -938,13 +938,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0233, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0234
+  * @tc.number: SUB_Driver_Input_Passthrough_2800
   * @tc.name: RunCapacitanceTest005
   * @tc.desc: run capacitanceTest test
   * @tc.type: FUNC
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0234, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_2800, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -963,13 +963,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0234, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0240
+  * @tc.number: SUB_Driver_Input_Passthrough_2900
   * @tc.name: RunExtraCommand001
   * @tc.desc: run extra command test
   * @tc.type: FUNC
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0240, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_2900, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -989,13 +989,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0240, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0241
+  * @tc.number: SUB_Driver_Input_Passthrough_3000
   * @tc.name: RunExtraCommand002
   * @tc.desc: run extra command test
   * @tc.type: FUNC
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0241, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_3000, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -1015,13 +1015,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0241, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0250
+  * @tc.number: SUB_Driver_Input_Passthrough_2300
   * @tc.name: RegisterCallbackAndReportData001
   * @tc.desc: register callback and report data test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0250, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_2300, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -1041,13 +1041,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0250, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0260
+  * @tc.number: SUB_Driver_Input_Passthrough_3800
   * @tc.name: UnregisterReportCallback001
   * @tc.desc: unregister reportCallback test
   * @tc.type: func
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0260, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_3800, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);
@@ -1070,13 +1070,13 @@ HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0260, Function | 
 }
 
 /**
-  * @tc.number: SUB_DriverSystem_HdiInputPassthrough_0270
+  * @tc.number: SUB_Driver_Input_Passthrough_1900
   * @tc.name: HotPlugCallback001
   * @tc.desc: input device hot plug test
   * @tc.type: FUNC
   * @tc.require:
   */
-HWTEST_F(HdfInputHdiTest, SUB_DriverSystem_HdiInputPassthrough_0270, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTest, SUB_Driver_Input_Passthrough_1900, Function | MediumTest | Level1)
 {
     if (g_inputInterfaces == nullptr) {
         ASSERT_NE(nullptr, g_inputInterfaces);

@@ -99,7 +99,7 @@ public:
 int32_t IPCObjectStubTest::payload = 0;
 
 /**
-  * @tc.number: SUB_DriverSystem_ManagerBenchmarkTest_0010
+  * @tc.number: SUB_Driver_Manager_Performance_0100
   * @tc.name: open input device for ap mode benchmark test
   * @tc.size: Medium
   * @tc.level: level 1
@@ -129,7 +129,7 @@ BENCHMARK_REGISTER_F(ManagerBenchmarkTest, SendRequest)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_ManagerBenchmarkTest_0020
+  * @tc.number: SUB_Driver_Manager_Performance_0200
   * @tc.name: open input device for ap mode benchmark test
   * @tc.size: Medium
   * @tc.level: level 1
@@ -162,7 +162,7 @@ BENCHMARK_REGISTER_F(ManagerBenchmarkTest, GetService)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_ManagerBenchmarkTest_0030
+  * @tc.number: SUB_Driver_Manager_Performance_0300
   * @tc.name: Benchmark_Test device manager Load/UnLoad device and driver dynamic register device
   * @tc.size: Medium
   * @tc.level: level 1
@@ -239,7 +239,7 @@ BENCHMARK_REGISTER_F(ManagerBenchmarkTest, LoadDevice)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_ManagerBenchmarkTest_0040
+  * @tc.number: SUB_Driver_Manager_Performance_0400
   * @tc.name: Benchmark_Test Device manager Load/UnLoad device and driver dynamic register device 
   * @tc.size: Medium
   * @tc.level: level 1
@@ -331,7 +331,7 @@ private:
 };
 
 /**
-  * @tc.number: SUB_DriverSystem_ManagerBenchmarkTest_0050
+  * @tc.number: SUB_Driver_Manager_Performance_0500
   * @tc.name: smq test normal read/write (benchmarktest)
   * @tc.size: Medium
   * @tc.level: level 1
@@ -371,7 +371,7 @@ BENCHMARK_REGISTER_F(ManagerBenchmarkTest, Marshalling)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_ManagerBenchmarkTest_0060
+  * @tc.number: SUB_Driver_Manager_Performance_0600
   * @tc.name: smq test normal read/write for (benchmarktest)
   * @tc.size: Medium
   * @tc.level: level 1
@@ -418,7 +418,7 @@ BENCHMARK_REGISTER_F(ManagerBenchmarkTest, Write)->Iterations(100)->
     Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.number: SUB_DriverSystem_InterfaceQuery_0010
+  * @tc.number: SUB_Driver_Manager_Performance_0700
   * @tc.name: Test get service set by interfacedesc(benchmarktest)
   * @tc.size: Medium
   * @tc.level: level 1

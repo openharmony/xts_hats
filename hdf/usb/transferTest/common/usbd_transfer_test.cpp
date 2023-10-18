@@ -79,11 +79,6 @@ int32_t InitAshmemOne(sptr<Ashmem> &asmptr, int32_t asmSize, uint8_t rflg)
     return HDF_SUCCESS;
 }
 
-int32_t SwitchErrCode(int32_t ret)
-{
-    return ret == HDF_ERR_NOT_SUPPORT ? HDF_SUCCESS : ret;
-}
-
 void UsbdTransferTest::SetUpTestCase(void)
 {
     g_usbInterface = IUsbInterface::Get();
@@ -96,7 +91,6 @@ void UsbdTransferTest::SetUpTestCase(void)
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, DEFAULT_ROLE_HOST, DEFAULT_ROLE_HOST);
     sleep(SLEEP_TIME);
     HDF_LOGI("UsbdTransferTest::[Device] %{public}d SetPortRole=%{public}d", __LINE__, ret);
-    ret = SwitchErrCode(ret);
     ASSERT_EQ(0, ret);
     if (ret != 0) {
         exit(0);
@@ -524,7 +518,7 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1780, Function | MediumTest | Level1)
     bufferData.push_back(SAMPLE_DATA_1);
     bufferData.push_back(SAMPLE_DATA_2);
     bufferData.push_back(SAMPLE_DATA_3);
-    struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_INTERFACE,
+    struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT,
         USB_DDK_REQ_GET_CONFIGURATION, 0, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1780 %{public}d ret=%{public}d", __LINE__, ret);
@@ -587,7 +581,7 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1810, Function | MediumTest | Level1)
     bufferData.push_back(SAMPLE_DATA_1);
     bufferData.push_back(SAMPLE_DATA_2);
     bufferData.push_back(SAMPLE_DATA_3);
-    struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_INTERFACE,
+    struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT,
         USB_DDK_REQ_GET_DESCRIPTOR, CTL_VALUE, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1810 %{public}d ret=%{public}d", __LINE__, ret);
@@ -713,7 +707,7 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1870, Function | MediumTest | Level1)
     bufferData.push_back(SAMPLE_DATA_1);
     bufferData.push_back(SAMPLE_DATA_2);
     bufferData.push_back(SAMPLE_DATA_3);
-    struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_INTERFACE, 0, 0, 0,
+    struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT, USB_DDK_REQ_GET_DESCRIPTOR, 0, 0,
         TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1870 %{public}d ret=%{public}d", __LINE__, ret);
@@ -776,7 +770,7 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1900, Function | MediumTest | Level1)
     bufferData.push_back(SAMPLE_DATA_1);
     bufferData.push_back(SAMPLE_DATA_2);
     bufferData.push_back(SAMPLE_DATA_3);
-    struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT, 0, 0, 0, TRANSFER_TIME_OUT};
+    struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT, USB_DDK_REQ_GET_INTERFACE, 0, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1900 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
@@ -836,7 +830,7 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1930, Function | MediumTest | Level1)
     bufferData.push_back(SAMPLE_DATA_1);
     bufferData.push_back(SAMPLE_DATA_2);
     bufferData.push_back(SAMPLE_DATA_3);
-    struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_ENDPOINT, 0, 0, 0,
+    struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT, USB_DDK_REQ_GET_CONFIGURATION, 0, 0,
         TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1930 %{public}d ret=%{public}d", __LINE__, ret);

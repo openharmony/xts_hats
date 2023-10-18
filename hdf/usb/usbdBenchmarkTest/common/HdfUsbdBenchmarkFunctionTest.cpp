@@ -35,11 +35,6 @@ constexpr int32_t REPETITION_FREQUENCY = 3;
 namespace {
 sptr<IUsbInterface> g_usbInterface = nullptr;
 
-int32_t SwitchErrCode(int32_t ret)
-{
-    return ret == HDF_ERR_NOT_SUPPORT ? HDF_SUCCESS : ret;
-}
-
 void HdfUsbdBenchmarkFunctionTest::SetUp(const ::benchmark::State& state)
 {
     g_usbInterface = IUsbInterface::Get();
@@ -48,7 +43,6 @@ void HdfUsbdBenchmarkFunctionTest::SetUp(const ::benchmark::State& state)
     }
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
     sleep(SLEEP_TIME);
-    ret = SwitchErrCode(ret);
     ASSERT_EQ(0, ret);
     if (ret != 0) {
         exit(0);
@@ -117,7 +111,6 @@ BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0050)
     for (auto _ : st) {
         ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
     }
-    ret = SwitchErrCode(ret);
     ASSERT_EQ(0, ret);
 }
 

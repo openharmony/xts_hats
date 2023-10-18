@@ -44,18 +44,12 @@ UsbDev HdfUsbdBenchmarkRequestTest::dev_ = { 0, 0 };
 namespace {
 sptr<IUsbInterface> g_usbInterface = nullptr;
 
-int32_t SwitchErrCode(int32_t ret)
-{
-    return ret == HDF_ERR_NOT_SUPPORT ? HDF_SUCCESS : ret;
-}
-
 void HdfUsbdBenchmarkRequestTest::SetUp(const ::benchmark::State& state)
 {
     g_usbInterface = IUsbInterface::Get();
     ASSERT_TRUE(g_usbInterface != nullptr);
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
     sleep(SLEEP_TIME);
-    ret = SwitchErrCode(ret);
     ASSERT_EQ(0, ret);
 }
 

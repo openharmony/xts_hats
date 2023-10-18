@@ -54,11 +54,6 @@ OHOS::sptr<OHOS::USB::UsbSubscriberTest> UsbdInterfaceTest::subscriber_ = nullpt
 
 sptr<IUsbInterface> g_usbInterface = nullptr;
 
-int32_t SwitchErrCode(int32_t ret)
-{
-    return ret == HDF_ERR_NOT_SUPPORT ? HDF_SUCCESS : ret;
-}
-
 void UsbdInterfaceTest::SetUpTestCase(void)
 {
     g_usbInterface = IUsbInterface::Get();
@@ -69,7 +64,6 @@ void UsbdInterfaceTest::SetUpTestCase(void)
     auto ret = g_usbInterface->SetPortRole(1, 1, 1);
     sleep(SLEEP_TIME);
     HDF_LOGI("UsbdInterfaceTest::[Device] %{public}d SetPortRole=%{public}d", __LINE__, ret);
-    ret = SwitchErrCode(ret);
     ASSERT_EQ(0, ret);
     if (ret != 0) {
         exit(0);

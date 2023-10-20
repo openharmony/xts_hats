@@ -119,7 +119,7 @@ void HdfSensorHdiTest::TearDown()
   * @tc.desc: Get a client and check whether the client is empty.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0210, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_0100, TestSize.Level1)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
 }
@@ -129,7 +129,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0210, TestSize.Level1)
   * @tc.desc: Obtains information about all sensors in the system.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0230, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_0200, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -156,7 +156,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0230, TestSize.Level1)
   * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0240, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_0300, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -173,7 +173,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0240, TestSize.Level1)
   * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0250, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_0400, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -190,7 +190,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0250, TestSize.Level1)
   * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0260, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_0500, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -207,7 +207,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0260, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0270, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_0700, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -238,7 +238,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0270, TestSize.Level1)
   * @tc.desc: Sets the sampling time and data report interval for sensors in batches.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0290, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_0800, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -267,7 +267,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0290, TestSize.Level1)
     @tc.desc: Sets the sampling time and data report interval for sensors in batches.
     @tc.type: FUNC
     */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0300, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_0900, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -282,7 +282,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0300, TestSize.Level1)
   * @tc.desc: Sets the sampling time and data report interval for sensors in batches.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0310, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_1000, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -299,7 +299,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0310, TestSize.Level1)
   * @tc.desc: Sets the sampling time and data report interval for sensors in batches.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0311, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_1100, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -316,7 +316,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0311, TestSize.Level1)
   * @tc.desc: Sets the sampling time and data report interval for sensors in batches.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0312, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_1200, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -333,7 +333,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0312, TestSize.Level1)
   * @tc.desc: Sets the data reporting mode for the specified sensor.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0320, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_1400, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -363,7 +363,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0320, TestSize.Level1)
   * @tc.desc: Sets the data reporting mode for the specified sensor.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0321, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_1500, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -393,7 +393,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0321, TestSize.Level1)
   * @tc.desc: Sets the data reporting mode for the specified sensor.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0322, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_1600, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -425,7 +425,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0322, TestSize.Level1)
   * Other values are invalid.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0330, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_1700, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -441,7 +441,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0330, TestSize.Level1)
   * Other values are invalid.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0340, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_1800, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -466,7 +466,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0340, TestSize.Level1)
   * @tc.desc: Sets options for the specified sensor, including its measurement range and accuracy.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0350, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_1900, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -484,7 +484,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0350, TestSize.Level1)
   * @tc.desc: Sets options for the specified sensor, including its measurement range and accuracy.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0360, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2300, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -499,7 +499,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0360, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0362, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2400, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -518,7 +518,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0362, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0363, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2500, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -537,7 +537,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0363, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0364, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2600, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -556,7 +556,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0364, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0365, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2700, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -575,7 +575,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0365, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0366, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2800, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -594,7 +594,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0366, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0367, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2900, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -613,7 +613,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0367, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0368, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3100, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -632,7 +632,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0368, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0369, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3200, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -651,7 +651,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0369, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0370, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3300, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -670,7 +670,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0370, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0371, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3400, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -689,7 +689,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0371, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0372, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3500, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -708,7 +708,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0372, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0373, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3600, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -727,7 +727,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0373, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0374, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3700, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -746,7 +746,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0374, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0375, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3800, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -765,7 +765,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0375, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0376, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5100, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -784,7 +784,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0376, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0377, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5200, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -803,7 +803,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0377, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0378, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5300, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -822,7 +822,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0378, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0379, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5400, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -841,7 +841,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0379, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0380, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5500, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -860,7 +860,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0380, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0381, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5600, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -879,7 +879,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0381, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0382, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5700, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -898,7 +898,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0382, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0383, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5800, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -917,7 +917,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0383, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0384, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5900, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -936,7 +936,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0384, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0385, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6000, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -955,7 +955,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0385, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0386, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6100, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -974,7 +974,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0386, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0387, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6200, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -993,7 +993,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0387, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0388, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6300, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -1012,7 +1012,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0388, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0389, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6400, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -1031,7 +1031,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0389, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0390, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6500, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -1050,7 +1050,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0390, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0391, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6600, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -1069,7 +1069,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0391, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0392, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6700, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -1088,7 +1088,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0392, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0393, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6800, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -1107,7 +1107,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0393, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0394, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6900, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -1126,7 +1126,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0394, TestSize.Level1)
   * @tc.desc: Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
   */
-HWTEST_F(HdfSensorHdiTest, SUB_DriverSystem_HdiSensor_0395, TestSize.Level1)
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7000, TestSize.Level1)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);

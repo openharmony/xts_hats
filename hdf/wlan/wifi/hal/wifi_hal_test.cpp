@@ -116,7 +116,7 @@ static int32_t HalCallbackEvent(uint32_t event, void *respData, const char *ifNa
  * @tc.type: FUNC
  */
 
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateAndDestroyFeature_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_3700, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -135,7 +135,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateAndDestroyFeature_0001, Function | Medi
  * @tc.type: FUNC
  */
 
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateAndDestroyFeature_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_3800, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -153,7 +153,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateAndDestroyFeature_0002, Function | Medi
  * @tc.desc: Wifi hal create and destroy feature function test_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateAndDestroyFeature_0003, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_3900, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -171,7 +171,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateAndDestroyFeature_0003, Function | Medi
  * @tc.desc: Wifi hal create and destroy feature function test_04
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateAndDestroyFeature_0004, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_4000, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -189,7 +189,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateAndDestroyFeature_0004, Function | Medi
  * @tc.desc: Wifi hal create feature function test_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateFeature_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_4100, Function | MediumTest | Level1)
 {
     int32_t ret;
     ret = g_wifi->createFeature(PROTOCOL_80211_IFTYPE_STATION, nullptr);
@@ -201,7 +201,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateFeature_0001, Function | MediumTest | L
  * @tc.desc: Wifi hal create feature function test_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateFeature_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_4200, Function | MediumTest | Level1)
 {
     int32_t ret;
     ret = g_wifi->createFeature(PROTOCOL_80211_IFTYPE_AP, nullptr);
@@ -213,7 +213,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateFeature_0002, Function | MediumTest | L
  * @tc.desc: Wifi hal create feature function test_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateFeature_0003, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_4300, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -227,7 +227,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateFeature_0003, Function | MediumTest | L
  * @tc.desc: Wifi hal create feature function test_04
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateFeature_0004, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_4400, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -241,7 +241,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_CreateFeature_0004, Function | MediumTest | L
  * @tc.desc: Wifi hal get feature by ifname function test_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_4450, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -262,7 +262,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0001, Function | MediumTes
  * @tc.desc: Wifi hal get feature by ifname function test_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_4550, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -284,7 +284,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0002, Function | MediumTes
  * @tc.desc: Wifi hal get feature by ifname function test_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0003, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_4650, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -306,7 +306,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0003, Function | MediumTes
  * @tc.desc: Wifi hal get feature by ifname function test_04
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0004, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_4750, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -326,7 +326,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0004, Function | MediumTes
  * @tc.desc: Wifi hal get feature by ifname function test_05
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0005, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_4850, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -347,7 +347,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0005, Function | MediumTes
  * @tc.desc: Wifi hal get feature by ifname function test_06
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0006, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_4950, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -368,7 +368,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureByIfName_0006, Function | MediumTes
  * @tc.desc: Wifi hal register callback function test_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_RegisterEventCallback_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_7100, Function | MediumTest | Level1)
 {
     int ret;
 
@@ -381,7 +381,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_RegisterEventCallback_0001, Function | Medium
  * @tc.desc: Wifi hal register event callback test_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_RegisterEventCallback_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_7200, Function | MediumTest | Level1)
 {
     int32_t ret;
 
@@ -395,7 +395,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_RegisterEventCallback_0002, Function | Medium
  * @tc.desc: Wifi hal register event callback test_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_RegisterEventCallback_0003, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_7300, Function | MediumTest | Level1)
 {
     int32_t ret;
 
@@ -408,7 +408,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_RegisterEventCallback_0003, Function | Medium
  * @tc.desc: Wifi hal unregister callback function test_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_UnRegisterEventCallback_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_9300, Function | MediumTest | Level1)
 {
     int ret;
 
@@ -421,7 +421,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_UnRegisterEventCallback_0001, Function | Medi
  * @tc.desc: Wifi hal unregister event callback test_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_UnRegisterEventCallback_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_9400, Function | MediumTest | Level1)
 {
     int32_t ret;
 
@@ -435,7 +435,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_UnRegisterEventCallback_0002, Function | Medi
  * @tc.desc: Wifi hal unregister event callback test_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_UnRegisterEventCallback_0003, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_9500, Function | MediumTest | Level1)
 {
     int32_t ret;
 
@@ -448,7 +448,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_UnRegisterEventCallback_0003, Function | Medi
  * @tc.desc: Wifi hal get network iface name function test_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetworkIfaceName_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_6100, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -467,7 +467,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetworkIfaceName_0001, Function | MediumTe
  * @tc.desc: Wifi hal get network iface name function test_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetworkIfaceName_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_6200, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -487,7 +487,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetworkIfaceName_0002, Function | MediumTe
  * @tc.desc: Wifi hal get network iface name function test_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetworkIfaceName_0003, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_6300, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -506,7 +506,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetworkIfaceName_0003, Function | MediumTe
  * @tc.desc: Wifi hal get network iface name function test_04
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetworkIfaceName_0004, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_6400, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -533,7 +533,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetworkIfaceName_0004, Function | MediumTe
  * @tc.desc: Wifi hal get feature type function test_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureType_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_5700, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -553,7 +553,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureType_0001, Function | MediumTest | 
  * @tc.desc: Wifi hal get feature type function test_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureType_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_5800, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -573,7 +573,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureType_0002, Function | MediumTest | 
  * @tc.desc: Wifi hal get feature type function test_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureType_0003, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_5900, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -594,7 +594,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureType_0003, Function | MediumTest | 
  * @tc.desc: Wifi hal get feature type function test_04
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureType_0004, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_6000, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -615,7 +615,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetFeatureType_0004, Function | MediumTest | 
  * @tc.desc: Wifi hal set Mac address function test_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_SetMacAddress_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest,  SUB_Driver_Wlan_SetDeviceMACaddress_0500, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -636,7 +636,7 @@ HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_SetMacAddress_0001, Function | MediumTest | 
  * @tc.desc: Wifi hal set Mac address function test_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_SetMacAddress_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest,  SUB_Driver_Wlan_SetDeviceMACaddress_0600, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -655,7 +655,7 @@ HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_SetMacAddress_0002, Function | MediumTest | 
  * @tc.desc: Wifi hal set Mac address function test_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_SetMacAddress_0003, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest,  SUB_Driver_Wlan_SetDeviceMACaddress_0700, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -676,7 +676,7 @@ HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_SetMacAddress_0003, Function | MediumTest | 
  * @tc.desc: Wifi hal set Mac address function test_04
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_SetMacAddress_0004, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest,  SUB_Driver_Wlan_SetDeviceMACaddress_0800, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -697,7 +697,7 @@ HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_SetMacAddress_0004, Function | MediumTest | 
  * @tc.desc: Wifi hal set Mac address function test_05
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_SetMacAddress_0005, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest,  SUB_Driver_Wlan_SetDeviceMACaddress_0900, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -720,7 +720,7 @@ HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_SetMacAddress_0005, Function | MediumTest | 
  * @tc.desc: Wifi hal set Mac address function test_06
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetMacAddress_0006, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SetDeviceMACaddress_1000, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -741,7 +741,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetMacAddress_0006, Function | MediumTest | L
  * @tc.desc: Wifi hal set Mac address function test_07
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetMacAddress_0007, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SetDeviceMACaddress_1100, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -761,7 +761,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetMacAddress_0007, Function | MediumTest | L
  * @tc.desc: Wifi hal set Mac address function test_08
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetMacAddress_0008, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SetDeviceMACaddress_1200, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -782,7 +782,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetMacAddress_0008, Function | MediumTest | L
  * @tc.desc: Wifi hal set Mac address function test_09
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetMacAddress_0009, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SetDeviceMACaddress_1300, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -803,7 +803,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetMacAddress_0009, Function | MediumTest | L
  * @tc.desc: Wifi hal set Mac address function test_10
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetMacAddress_0010, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SetDeviceMACaddress_1400, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -826,7 +826,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetMacAddress_0010, Function | MediumTest | L
  * @tc.desc: Wifi hal set transmit power function test_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_8700, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -846,7 +846,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0001, Function | MediumTest | Leve
  * @tc.desc: Wifi hal set transmit power function test_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_8800, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -866,7 +866,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0002, Function | MediumTest | Leve
  * @tc.desc: Wifi hal set transmit power function test_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0003, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_8900, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -886,7 +886,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0003, Function | MediumTest | Leve
  * @tc.desc: Wifi hal set transmit power function test_04
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0004, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_9000, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -906,7 +906,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0004, Function | MediumTest | Leve
  * @tc.desc: Wifi hal set transmit power function test_05
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0005, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_9100, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -926,7 +926,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0005, Function | MediumTest | Leve
  * @tc.desc: Wifi hal set transmit power function test_06
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0006, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_9200, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -946,7 +946,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetTxPower_0006, Function | MediumTest | Leve
  * @tc.desc: Wifi hal set country code function test_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetCountryCode_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_8200, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -966,7 +966,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetCountryCode_0001, Function | MediumTest | 
  * @tc.desc: Wifi hal set country code function test_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetCountryCode_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_8300, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -986,7 +986,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetCountryCode_0002, Function | MediumTest | 
  * @tc.desc: Wifi hal set country code function test_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetCountryCode_0003, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_8400, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1006,7 +1006,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetCountryCode_0003, Function | MediumTest | 
  * @tc.desc: Wifi hal set country code function test_04
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetCountryCode_0004, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_8500, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1027,7 +1027,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetCountryCode_0004, Function | MediumTest | 
  * @tc.desc: Wifi hal set country code function test_05
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetCountryCode_0005, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_8600, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1047,7 +1047,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetCountryCode_0005, Function | MediumTest | 
  * @tc.desc: Obtain all ifNames and the number of the current chip_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_1600, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -1080,7 +1080,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0001, Function | MediumTes
  * @tc.desc: Obtain all ifNames and the number of the current chip_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_1700, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -1112,7 +1112,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0002, Function | MediumTes
  * @tc.desc: Obtain all ifNames and the number of the current chip_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0003, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_1800, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -1145,7 +1145,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0003, Function | MediumTes
  * @tc.desc: Obtain all ifNames and the number of the current chip_04
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0004, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_1900, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1179,7 +1179,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0004, Function | MediumTes
  * @tc.desc: Obtain all ifNames and the number of the current chip_05
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0005, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_2000, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1213,7 +1213,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0005, Function | MediumTes
  * @tc.desc: Obtain all ifNames and the number of the current chip_06
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0006, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_2100, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1248,7 +1248,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetIfNamesByChipId_0006, Function | MediumTes
  * @tc.desc: Get supported features_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetSupportFeature_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_1300, Function | MediumTest | Level1)
 {
     int32_t ret;
     ret = g_wifi->getSupportFeature(nullptr, PROTOCOL_80211_IFTYPE_NUM + 1);
@@ -1260,7 +1260,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetSupportFeature_0001, Function | MediumTest
  * @tc.desc: Get supported features_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetSupportFeature_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_1400, Function | MediumTest | Level1)
 {
     int32_t ret;
     uint8_t supType[PROTOCOL_80211_IFTYPE_NUM + 1] = {0};
@@ -1273,7 +1273,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetSupportFeature_0002, Function | MediumTest
  * @tc.desc: Get supported features_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetSupportFeature_0003, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_1500, Function | MediumTest | Level1)
 {
     int32_t ret;
     uint8_t supType[PROTOCOL_80211_IFTYPE_NUM + 1] = {0};
@@ -1287,7 +1287,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetSupportFeature_0003, Function | MediumTest
  * @tc.desc: wifi hal get chip ID function test_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_5100, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1308,7 +1308,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0001, Function | MediumTest | Level
  * @tc.desc: wifi hal get chip ID function test_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_5200, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1328,7 +1328,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0002, Function | MediumTest | Level
  * @tc.desc: wifi hal get chip ID function test_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0003, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_5300, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1350,7 +1350,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0003, Function | MediumTest | Level
  * @tc.desc: wifi hal get chip ID function test_04
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0004, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_5400, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -1371,7 +1371,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0004, Function | MediumTest | Level
  * @tc.desc: wifi hal get chip ID function test_05
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0005, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_5500, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -1391,7 +1391,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0005, Function | MediumTest | Level
  * @tc.desc: wifi hal get chip ID function test_06
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0006, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_5600, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -1413,7 +1413,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetChipId_0006, Function | MediumTest | Level
  * @tc.desc: Get device Mac address for ap mode_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_GetDeviceMACaddress_0100, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1435,7 +1435,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0001, Function | MediumTe
  * @tc.desc: Get device Mac address for ap mode_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_GetDeviceMACaddress_0200, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1456,7 +1456,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0002, Function | MediumTe
  * @tc.desc: Get device Mac address for ap mode_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0003, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_GetDeviceMACaddress_0300, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1478,7 +1478,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0003, Function | MediumTe
  * @tc.desc: Get device Mac address for ap mode_04
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0004, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_GetDeviceMACaddress_0400, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1500,7 +1500,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0004, Function | MediumTe
  * @tc.desc: Get device Mac address for sta mode_05
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0005, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_GetDeviceMACaddress_0500, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -1522,7 +1522,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0005, Function | MediumTe
  * @tc.desc: Get device Mac address for sta mode_06
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0006, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_GetDeviceMACaddress_0600, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -1543,7 +1543,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0006, Function | MediumTe
  * @tc.desc: Get device Mac address for sta mode_07
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0007, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_GetDeviceMACaddress_0700, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -1565,7 +1565,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0007, Function | MediumTe
  * @tc.desc: Get device Mac address for sta mode_08
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0008, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_GetDeviceMACaddress_0800, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -1587,7 +1587,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetDeviceMacAddress_0008, Function | MediumTe
  * @tc.desc: Get available frequencies_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_0600, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -1611,7 +1611,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0001, Function | Medium
  * @tc.desc: Get available frequencies_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_0700, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -1638,7 +1638,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0002, Function | Medium
  * @tc.desc: Get available frequencies_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0003, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_0800, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -1661,7 +1661,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0003, Function | Medium
  * @tc.desc: Get available frequencies_04
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0004, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_0900, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -1685,7 +1685,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0004, Function | Medium
  * @tc.desc: Get available frequencies_05
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0005, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_1000, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -1710,7 +1710,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0005, Function | Medium
  * @tc.desc: Get available frequencies_06
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0006, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_1100, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -1735,7 +1735,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0006, Function | Medium
  * @tc.desc: Wifi hal get valid frequency with specific band test_07
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0007, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_6500, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1759,7 +1759,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0007, Function | Medium
  * @tc.desc: Wifi hal get valid frequency with specific band test_08
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0008, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_6600, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1782,7 +1782,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0008, Function | Medium
  * @tc.desc: Wifi hal get valid frequency with specific band test_09
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0009, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_6700, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1804,7 +1804,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0009, Function | Medium
  * @tc.desc: Wifi hal get valid frequency with specific band test_10
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0010, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_6800, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1828,7 +1828,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0010, Function | Medium
  * @tc.desc: Wifi hal get valid frequency with specific band test_11
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0011, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_6900, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1853,7 +1853,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0011, Function | Medium
  * @tc.desc: Wifi hal get valid frequency with specific band test_12
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0012, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_7000, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1877,7 +1877,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetValidFreqsWithBand_0012, Function | Medium
  * @tc.desc: Get asscociated STA info_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_0100, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1900,7 +1900,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0001, Function | MediumTest
  * @tc.desc: Get asscociated STA info_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_0200, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1923,7 +1923,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0002, Function | MediumTest
  * @tc.desc: Get asscociated STA info_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0003, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_0300, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1947,7 +1947,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0003, Function | MediumTest
  * @tc.desc: Get asscociated STA info_04
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0004, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_0400, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1970,7 +1970,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0004, Function | MediumTest
  * @tc.desc: Get asscociated STA info_05
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0005, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_0500, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -1993,7 +1993,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetAssociatedStas_0005, Function | MediumTest
  * @tc.desc: Set Mac address scanning_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetScanningMacAddress_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SetDeviceMACaddress_0100, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -2014,7 +2014,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetScanningMacAddress_0001, Function | Medium
  * @tc.desc: Set Mac address scanning_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetScanningMacAddress_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SetDeviceMACaddress_0200, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -2034,7 +2034,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetScanningMacAddress_0002, Function | Medium
  * @tc.desc: Set Mac address scanning_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetScanningMacAddress_0003, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SetDeviceMACaddress_0300, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -2055,7 +2055,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetScanningMacAddress_0003, Function | Medium
  * @tc.desc: Set Mac address scanning_04
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetScanningMacAddress_0004, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SetDeviceMACaddress_0400, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -2077,7 +2077,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetScanningMacAddress_0004, Function | Medium
  * @tc.desc: Wifi hdi get netdev info function test_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetDevInfo_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_9600, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -2096,7 +2096,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetDevInfo_0001, Function | MediumTest | L
  * @tc.desc: Wifi hdi get netdev info function test_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetDevInfo_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_9700, Function | MediumTest | Level1)
 {
     int ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -2116,7 +2116,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetNetDevInfo_0002, Function | MediumTest | L
  * @tc.desc: start scan is successfully_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_StartScan_0001, Function | MediumTest | Level3)
+HWTEST_F(WifiHalTest,  SUB_Driver_Wlan_WifiHdi_2400, Function | MediumTest | Level3)
 {
     int ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -2138,7 +2138,7 @@ HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_StartScan_0001, Function | MediumTest | Leve
  * @tc.desc: start scan is successfully_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_StartScan_0002, Function | MediumTest | Level3)
+HWTEST_F(WifiHalTest,  SUB_Driver_Wlan_WifiHdi_2500, Function | MediumTest | Level3)
 {
     int ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -2159,7 +2159,7 @@ HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_StartScan_0002, Function | MediumTest | Leve
  * @tc.desc: start scan is successfully_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_StartScan_0003, Function | MediumTest | Level3)
+HWTEST_F(WifiHalTest,  SUB_Driver_Wlan_WifiHdi_2600, Function | MediumTest | Level3)
 {
     int ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -2181,7 +2181,7 @@ HWTEST_F(WifiHalTest,  SUB_WLAN_HDI_StartScan_0003, Function | MediumTest | Leve
  * @tc.desc: Wifi hdi get power mode function test_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SgetPowerMode_0100, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -2202,7 +2202,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0001, Function | MediumTest | Le
  * @tc.desc: Wifi hdi get power mode function test_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SgetPowerMode_0200, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -2223,7 +2223,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0002, Function | MediumTest | Le
  * @tc.desc: Wifi hdi get power mode function test_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0003, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SgetPowerMode_0300, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -2245,7 +2245,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0003, Function | MediumTest | Le
  * @tc.desc: Wifi hdi get power mode function test_04
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0004, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SgetPowerMode_0400, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -2265,7 +2265,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0004, Function | MediumTest | Le
  * @tc.desc: Wifi hdi get power mode function test_05
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0005, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SgetPowerMode_0500, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -2288,7 +2288,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0005, Function | MediumTest | Le
  * @tc.desc: Wifi hdi get power mode function test_06
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0006, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SgetPowerMode_0600, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -2309,7 +2309,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0006, Function | MediumTest | Le
  * @tc.desc: Wifi hdi get power mode function test_07
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0007, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SgetPowerMode_0700, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -2330,7 +2330,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0007, Function | MediumTest | Le
  * @tc.desc: Wifi hdi get power mode function test_08
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0008, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SgetPowerMode_0800, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -2352,7 +2352,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0008, Function | MediumTest | Le
  * @tc.desc: Wifi hdi get power mode function test_09
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0009, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SgetPowerMode_0900, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -2372,7 +2372,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0009, Function | MediumTest | Le
  * @tc.desc: Wifi hdi get power mode function test_10
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0010, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SgetPowerMode_1000, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -2395,7 +2395,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetPowerMode_0010, Function | MediumTest | Le
  * @tc.desc: Wifi hdi set power mode function test_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SgetPowerMode_1100, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -2420,7 +2420,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0001, Function | MediumTest | Le
  * @tc.desc: Wifi hdi set power mode function test_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SgetPowerMode_1200, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -2446,7 +2446,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0002, Function | MediumTest | Le
  * @tc.desc: Wifi hdi set power mode function test_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0003, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SgetPowerMode_1300, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -2472,7 +2472,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0003, Function | MediumTest | Le
  * @tc.desc: Wifi hdi set power mode function test_04
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0004, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SgetPowerMode_1400, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -2498,7 +2498,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0004, Function | MediumTest | Le
  * @tc.desc: Wifi hdi set power mode function test_05
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0005, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SgetPowerMode_1500, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -2523,7 +2523,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0005, Function | MediumTest | Le
  * @tc.desc: Wifi hdi set power mode function test_06
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0006, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SgetPowerMode_1600, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -2549,7 +2549,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0006, Function | MediumTest | Le
  * @tc.desc: Wifi hdi set power mode function test_07
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0007, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SgetPowerMode_1700, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -2575,7 +2575,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0007, Function | MediumTest | Le
  * @tc.desc: Wifi hdi set power mode function test_08
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0008, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_SgetPowerMode_1800, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -2601,7 +2601,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetPowerMode_0008, Function | MediumTest | Le
  * @tc.desc: Get supported combo_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetSupportCombo_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_1200, Function | MediumTest | Level1)
 {
     int ret;
     uint8_t support[PROTOCOL_80211_IFTYPE_NUM + 1] = {0};
@@ -2617,7 +2617,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetSupportCombo_0001, Function | MediumTest |
  * @tc.desc: Get supported combo_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetSupportCombo_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_1250, Function | MediumTest | Level1)
 {
     int ret;
     uint8_t support[PROTOCOL_80211_IFTYPE_NUM + 1] = {0};
@@ -2638,7 +2638,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetSupportCombo_0002, Function | MediumTest |
  * @tc.desc: wifi hal config projection screen function test_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_2700, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -2663,7 +2663,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0001, Function | Med
  * @tc.desc: wifi hal config projection screen function test_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_2800, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -2688,7 +2688,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0002, Function | Med
  * @tc.desc: wifi hal config projection screen function test_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0003, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_2900, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -2713,7 +2713,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0003, Function | Med
  * @tc.desc: wifi hal config projection screen function test_04
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0004, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_3000, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -2739,7 +2739,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0004, Function | Med
  * @tc.desc: wifi hal config projection screen function test_05
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0005, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_3100, Function | MediumTest | Level1)
 {
     int32_t ret;
     bool flag;
@@ -2770,7 +2770,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0005, Function | Med
  * @tc.desc: wifi hal config projection screen function test_06
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0006, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_3200, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -2795,7 +2795,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0006, Function | Med
  * @tc.desc: wifi hal config projection screen function test_07
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0007, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_3300, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -2820,7 +2820,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0007, Function | Med
  * @tc.desc: wifi hal config projection screen function test_08
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0008, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_3400, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -2845,7 +2845,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0008, Function | Med
  * @tc.desc: wifi hal config projection screen function test_09
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0009, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_3500, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -2870,7 +2870,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0009, Function | Med
  * @tc.desc: wifi hal config projection screen function test_10
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0010, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_3600, Function | MediumTest | Level1)
 {
     int32_t ret;
     bool flag;
@@ -2901,7 +2901,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SetProjectionScreenParam_0010, Function | Med
  * @tc.desc: wifi hal send ioctl command function test_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_7400, Function | MediumTest | Level1)
 {
     int32_t cmdId = 0;
     int32_t ret;
@@ -2920,7 +2920,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0001, Function | MediumTest | Le
  * @tc.desc: wifi hal send ioctl command function test_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_7500, Function | MediumTest | Level1)
 {
     int32_t cmdId = 0;
     int32_t ret;
@@ -2940,7 +2940,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0002, Function | MediumTest | Le
  * @tc.desc: wifi hal send ioctl command function test_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0003, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_7600, Function | MediumTest | Level1)
 {
     int32_t cmdId = 0;
     int32_t ret;
@@ -2960,7 +2960,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0003, Function | MediumTest | Le
  * @tc.desc: wifi hal send ioctl command function test_04
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0004, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_7700, Function | MediumTest | Level1)
 {
     int32_t cmdId = 0;
     int32_t ret;
@@ -2986,7 +2986,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0004, Function | MediumTest | Le
  * @tc.desc: wifi hal send ioctl command function test_05
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0005, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_7800, Function | MediumTest | Level1)
 {
     int32_t cmdId = 0;
     int32_t ret;
@@ -3005,7 +3005,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0005, Function | MediumTest | Le
  * @tc.desc: wifi hal send ioctl command function test_06
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0006, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_7900, Function | MediumTest | Level1)
 {
     int32_t cmdId = 0;
     int32_t ret;
@@ -3025,7 +3025,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0006, Function | MediumTest | Le
  * @tc.desc: wifi hal send ioctl command function test_07
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0007, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_8000, Function | MediumTest | Level1)
 {
     int32_t cmdId = 0;
     int32_t ret;
@@ -3046,7 +3046,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0007, Function | MediumTest | Le
  * @tc.desc: wifi hal send ioctl command function test_08
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0008, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_8100, Function | MediumTest | Level1)
 {
     int32_t cmdId = 0;
     int32_t ret;
@@ -3072,7 +3072,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_SendCmdIoctl_0008, Function | MediumTest | Le
  * @tc.desc: Wifi hdi get station information function test_01
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0001, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_ReportSTAEvent_0100, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -3090,7 +3090,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0001, Function | MediumTest | 
  * @tc.desc: Wifi hdi get station information function test_02
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0002, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_ReportSTAEvent_0200, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;
@@ -3109,7 +3109,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0002, Function | MediumTest | 
  * @tc.desc: Wifi hdi get station information function test_03
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0003, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_ReportSTAEvent_0300, Function | MediumTest | Level1)
 {
     int32_t ret;
     StationInfo info;
@@ -3128,7 +3128,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0003, Function | MediumTest | 
  * @tc.desc: Wifi hdi get station information function test_04
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0004, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_ReportSTAEvent_0400, Function | MediumTest | Level1)
 {
     int32_t ret;
     uint8_t mac[ETH_ADDR_LEN] = {0};
@@ -3147,7 +3147,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0004, Function | MediumTest | 
  * @tc.desc: Wifi hdi get station information function test_05
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0005, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_ReportSTAEvent_0500, Function | MediumTest | Level1)
 {
     int32_t ret;
     StationInfo info;
@@ -3167,7 +3167,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0005, Function | MediumTest | 
  * @tc.desc: Wifi hdi get station information function test_06
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0006, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_ReportSTAEvent_0600, Function | MediumTest | Level1)
 {
     int32_t ret;
     StationInfo info;
@@ -3187,7 +3187,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0006, Function | MediumTest | 
  * @tc.desc: Wifi hdi get station information function test_07
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0007, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_ReportSTAEvent_0700, Function | MediumTest | Level1)
 {
     int32_t ret;
     uint8_t mac[ETH_ADDR_LEN] = {0};
@@ -3207,7 +3207,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0007, Function | MediumTest | 
  * @tc.desc: Wifi hdi get station information function test_08
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0008, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_ReportSTAEvent_0800, Function | MediumTest | Level1)
 {
     int32_t ret;
     StationInfo info;
@@ -3230,7 +3230,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0008, Function | MediumTest | 
  * @tc.desc: Wifi hdi get station information function test_09
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0009, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_ReportSTAEvent_0900, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -3248,7 +3248,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0009, Function | MediumTest | 
  * @tc.desc: Wifi hdi get station information function test_10
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0010, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_ReportSTAEvent_1000, Function | MediumTest | Level1)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -3267,7 +3267,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0010, Function | MediumTest | 
  * @tc.desc: Wifi hdi get station information function test_11
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0011, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_ReportSTAEvent_1100, Function | MediumTest | Level1)
 {
     int32_t ret;
     StationInfo info;
@@ -3286,7 +3286,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0011, Function | MediumTest | 
  * @tc.desc: Wifi hdi get station information function test_12
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0012, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_ReportSTAEvent_1200, Function | MediumTest | Level1)
 {
     int32_t ret;
     uint8_t mac[ETH_ADDR_LEN] = {0};
@@ -3305,7 +3305,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0012, Function | MediumTest | 
  * @tc.desc: Wifi hdi get station information function test_13
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0013, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_ReportSTAEvent_1300, Function | MediumTest | Level1)
 {
     int32_t ret;
     StationInfo info;
@@ -3325,7 +3325,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0013, Function | MediumTest | 
  * @tc.desc: Wifi hdi get station information function test_14
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0014, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_ReportSTAEvent_1400, Function | MediumTest | Level1)
 {
     int32_t ret;
     StationInfo info;
@@ -3345,7 +3345,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0014, Function | MediumTest | 
  * @tc.desc: Wifi hdi get station information function test_15
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0015, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_ReportSTAEvent_1500, Function | MediumTest | Level1)
 {
     int32_t ret;
     uint8_t mac[ETH_ADDR_LEN] = {0};
@@ -3365,7 +3365,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0015, Function | MediumTest | 
  * @tc.desc: Wifi hdi get station information function test_16
  * @tc.type: FUNC
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0016, Function | MediumTest | Level1)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_ReportSTAEvent_1600, Function | MediumTest | Level1)
 {
     int32_t ret;
     StationInfo info;
@@ -3389,7 +3389,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_GetStationInfo_0016, Function | MediumTest | 
  * @tc.size:Medium
  * @tc.level: Level 3
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_ResetDriver_0001, Function | MediumTest | Level3)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_2200, Function | MediumTest | Level3)
 {
     int32_t ret;
     struct IWiFiSta *staFeature = nullptr;
@@ -3420,7 +3420,7 @@ HWTEST_F(WifiHalTest, SUB_WLAN_HDI_ResetDriver_0001, Function | MediumTest | Lev
  * @tc.size:Medium
  * @tc.level: Level 3
  */
-HWTEST_F(WifiHalTest, SUB_WLAN_HDI_ResetDriver_0002, Function | MediumTest | Level3)
+HWTEST_F(WifiHalTest, SUB_Driver_Wlan_WifiHdi_2300, Function | MediumTest | Level3)
 {
     int32_t ret;
     struct IWiFiAp *apFeature = nullptr;

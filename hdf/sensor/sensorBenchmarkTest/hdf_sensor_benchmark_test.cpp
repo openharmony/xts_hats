@@ -101,7 +101,7 @@ void sensorBenchmarkTest::TearDown(const ::benchmark::State &state)
   * Obtains information about all sensors in the system.
   * @tc.type: FUNC
   */
-BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0010)(benchmark::State &st)
+BENCHMARK_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0100)(benchmark::State &st)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -123,7 +123,7 @@ BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0010)(benchmar
     }
 }
 
-BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0010)->
+BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0100)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -132,7 +132,7 @@ BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0010)
   * Returns 0 if the callback is successfully registered; returns a negative value otherwise.
   * @tc.type: FUNC
   */
-BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0020)(benchmark::State &st)
+BENCHMARK_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0200)(benchmark::State &st)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -147,7 +147,7 @@ BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0020)(benchmar
     }
 }
 
-BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0020)->
+BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0200)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -157,7 +157,7 @@ BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0020)
   * @tc.type: FUNC
   */
 
-BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0040)(benchmark::State &st)
+BENCHMARK_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0300)(benchmark::State &st)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -181,7 +181,7 @@ BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0040)(benchmar
     SensorCallbackImpl::sensorDataFlag = 1;
 }
 
-BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0040)->
+BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0300)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -191,7 +191,7 @@ BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0040)
   * @tc.type: FUNC
   */
 
-BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0050)(benchmark::State &st)
+BENCHMARK_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0400)(benchmark::State &st)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -215,7 +215,7 @@ BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0050)(benchmar
     SensorCallbackImpl::sensorDataFlag = 1;
 }
 
-BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0050)->
+BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0400)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -224,7 +224,7 @@ BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0050)
   * Sets the sampling time and data report interval for sensors in batches.
   * @tc.type: FUNC
   */
-BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0060)(benchmark::State &st)
+BENCHMARK_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0500)(benchmark::State &st)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -249,7 +249,7 @@ BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0060)(benchmar
     SensorCallbackImpl::sensorDataFlag = 1;
 }
 
-BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0060)->
+BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0500)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -258,7 +258,7 @@ BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0060)
   * Sets the data reporting mode for the specified sensor.
   * @tc.type: FUNC
   */
-BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0070)(benchmark::State &st)
+BENCHMARK_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0600)(benchmark::State &st)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -282,7 +282,7 @@ BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0070)(benchmar
         EXPECT_EQ(SENSOR_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0070)->
+BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0600)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
@@ -291,7 +291,7 @@ BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0070)
   * Sets options for the specified sensor, including its measurement range and accuracy.
   * @tc.type: FUNC
   */
-BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0080)(benchmark::State &st)
+BENCHMARK_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0700)(benchmark::State &st)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -306,7 +306,7 @@ BENCHMARK_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0080)(benchmar
     EXPECT_EQ(SENSOR_SUCCESS, ret);
 }
 
-BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_DriverSystem_SensorBenchmark_0080)->
+BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0700)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 }
 

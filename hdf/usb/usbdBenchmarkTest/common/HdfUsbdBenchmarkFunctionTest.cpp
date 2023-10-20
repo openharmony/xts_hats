@@ -29,6 +29,8 @@ using namespace std;
 using namespace OHOS::HDI::Usb::V1_0;
 
 constexpr int32_t SLEEP_TIME = 3;
+constexpr int32_t ITERATION_FREQUENCY = 100;
+constexpr int32_t REPETITION_FREQUENCY = 3;
 
 namespace {
 sptr<IUsbInterface> g_usbInterface = nullptr;
@@ -68,8 +70,8 @@ BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0030)
 }
 
 BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0030)
-    ->Iterations(100)
-    ->Repetitions(3)
+    ->Iterations(ITERATION_FREQUENCY)
+    ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
@@ -91,8 +93,8 @@ BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0040)
 }
 
 BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0040)
-    ->Iterations(100)
-    ->Repetitions(3)
+    ->Iterations(ITERATION_FREQUENCY)
+    ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
@@ -113,8 +115,8 @@ BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0050)
 }
 
 BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0050)
-    ->Iterations(100)
-    ->Repetitions(3)
+    ->Iterations(ITERATION_FREQUENCY)
+    ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
@@ -139,8 +141,8 @@ BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0060)
 }
 
 BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0060)
-    ->Iterations(100)
-    ->Repetitions(3)
+    ->Iterations(ITERATION_FREQUENCY)
+    ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 } // namespace
 

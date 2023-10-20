@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 #include <iostream>
 
 #include "hdf_log.h"
@@ -248,6 +249,96 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_2360, Function | MediumTest | Level1)
     int32_t funcs = USB_FUNCTION_STORAGE | USB_FUNCTION_HDC;
     auto ret = g_usbInterface->SetCurrentFunctions(funcs);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_2360 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_2700
+ * @tc.desc: Test functions to SetCurrentFunctions
+ * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
+ * @tc.desc: Positive test: parameters correctly
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_2700, Function | MediumTest | Level1)
+{
+    int32_t funcs = USB_FUNCTION_MTP;
+    auto ret = g_usbInterface->SetCurrentFunctions(funcs);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_2700 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_2710
+ * @tc.desc: Test functions to SetCurrentFunctions
+ * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
+ * @tc.desc: Positive test: parameters correctly
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_2710, Function | MediumTest | Level1)
+{
+    int32_t funcs = USB_FUNCTION_PTP;
+    auto ret = g_usbInterface->SetCurrentFunctions(funcs);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_2710 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_2720
+ * @tc.desc: Test functions to SetCurrentFunctions
+ * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
+ * @tc.desc: Positive test: parameters correctly
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_2720, Function | MediumTest | Level1)
+{
+    int32_t funcs = USB_FUNCTION_MTP | USB_FUNCTION_HDC;
+    auto ret = g_usbInterface->SetCurrentFunctions(funcs);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_2720 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_2730
+ * @tc.desc: Test functions to SetCurrentFunctions
+ * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
+ * @tc.desc: Positive test: parameters correctly
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_2730, Function | MediumTest | Level1)
+{
+    int32_t funcs = USB_FUNCTION_PTP | USB_FUNCTION_HDC;
+    auto ret = g_usbInterface->SetCurrentFunctions(funcs);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_2730 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_2740
+ * @tc.desc: Test functions to SetCurrentFunctions
+ * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
+ * @tc.desc: Positive test: parameters correctly
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_2740, Function | MediumTest | Level1)
+{
+    int32_t funcs = USB_FUNCTION_MTP | USB_FUNCTION_RNDIS;
+    auto ret = g_usbInterface->SetCurrentFunctions(funcs);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_2740 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+}
+
+/**
+ * @tc.name: SUB_USB_HDI_2750
+ * @tc.desc: Test functions to SetCurrentFunctions
+ * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
+ * @tc.desc: Positive test: parameters correctly
+ * @tc.type: FUNC
+ */
+HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_2750, Function | MediumTest | Level1)
+{
+    int32_t funcs = USB_FUNCTION_PTP | USB_FUNCTION_RNDIS;
+    auto ret = g_usbInterface->SetCurrentFunctions(funcs);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_2750 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 

@@ -40,10 +40,10 @@ public:
 };
 /**
 * @tc.name  HdfCodecHdiGetComponentNumTest
-* @tc.number  SUB_DriverSystem_CodecHdi_V2_0020
+* @tc.number  SUB_Driver_Codec_CodecHdi_0200
 * @tc.desc   Obtain the total number of codec HDI2.0 capability sets
 */
-HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0020, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiManagerTest, SUB_Driver_Codec_CodecHdi_0200, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(manager_ != nullptr);
     auto count = manager_->GetComponentNum();
@@ -51,10 +51,10 @@ HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0020, Function | Medi
 }
 /**
 * @tc.name  HdfCodecHdiGetCapabilityListTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_V2_0030
+* @tc.number  SUB_Driver_Codec_CodecHdi_0300
 * @tc.desc   Obtains the capability data of the codec capability and prints the data to the Hilog
 */
-HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0030, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiManagerTest, SUB_Driver_Codec_CodecHdi_0300, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(manager_ != nullptr);
     auto count = manager_->GetComponentNum();
@@ -68,10 +68,10 @@ HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0030, Function | Medi
 }
 /**
 * @tc.name  HdfCodecHdiCreateComponentTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_V2_0040
+* @tc.number  SUB_Driver_Codec_CodecHdi_0400
 * @tc.desc   Open the OpenMax component based on a name that does not exist
 */
-HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0040, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiManagerTest, SUB_Driver_Codec_CodecHdi_0400, Function | MediumTest | Level3)
 {
     struct CodecCallbackType *callback = CodecCallbackTypeGet(nullptr);
     ASSERT_TRUE(callback != nullptr);
@@ -86,10 +86,10 @@ HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0040, Function | Medi
 }
 /**
 * @tc.name  HdfCodecHdiCreateComponentTest_002
-* @tc.number  SUB_DriverSystem_CodecHdi_V2_0050
+* @tc.number  SUB_Driver_Codec_CodecHdi_0500
 * @tc.desc   When a component is opened, the name of the component is transferred to a null pointer
 */
-HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0050, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiManagerTest, SUB_Driver_Codec_CodecHdi_0500, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(manager_ != nullptr);
     std::string compName("");
@@ -116,10 +116,10 @@ HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0050, Function | Medi
 }
 /**
 * @tc.name  HdfCodecHdiDestoryComponentTest_001
-* @tc.number  SUB_DriverSystem_CodecHdi_V2_0740
+* @tc.number  SUB_Driver_Codec_CodecHdi_7400
 * @tc.desc Releasing Components
 */
-HWTEST_F(CodecHdiManagerTest, SUB_DriverSystem_CodecHdi_V2_0740, Function | MediumTest | Level3)
+HWTEST_F(CodecHdiManagerTest, SUB_Driver_Codec_CodecHdi_7400, Function | MediumTest | Level3)
 {
     ASSERT_TRUE(manager_ != nullptr);
     auto ret = manager_->DestroyComponent(0);

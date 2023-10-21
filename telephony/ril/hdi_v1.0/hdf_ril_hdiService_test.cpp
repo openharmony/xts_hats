@@ -24,9 +24,9 @@
 #include "securec.h"
 #include "stdlib.h"
 #include "unistd.h"
-#include "v1_1/iril.h"
+#include "v1_2/iril.h"
 
-using namespace OHOS::HDI::Ril::V1_1;
+using namespace OHOS::HDI::Ril::V1_2;
 using namespace testing::ext;
 
 enum class HdiId {
@@ -229,7 +229,7 @@ enum class SimMessageStatus {
     SIM_MESSAGE_STATUS_SENT = 3,
 };
 
-class RilCallback : public IRilCallback {
+class RilCallback : public OHOS::HDI::Ril::V1_2::IRilCallback {
 public:
     void NotifyAll();
     void WaitFor(int32_t timeoutSecond);
@@ -383,6 +383,7 @@ public:
         const RilRadioResponseInfo &responseInfo, const CellListCurrentInfo &cellListCurrentInfo) override;
     int32_t NetworkCurrentCellUpdated_1_1(
         const RilRadioResponseInfo &responseInfo, const CellListCurrentInfo_1_1 &cellListCurrentInfo) override;
+    int32_t ResidentNetworkUpdated(const RilRadioResponseInfo &responseInfo, const std::string &plmn) override;
     int32_t GetSignalStrengthResponse(const RilRadioResponseInfo &responseInfo, const Rssi &rssi) override;
     int32_t GetCsRegStatusResponse(
         const RilRadioResponseInfo &responseInfo, const CsRegStatusInfo &csRegStatusInfo) override;
@@ -466,7 +467,7 @@ public:
 };
 
 namespace {
-sptr<IRil> g_rilInterface = nullptr;
+sptr<OHOS::HDI::Ril::V1_2::IRil> g_rilInterface = nullptr;
 RilCallback callback_;
 constexpr static int32_t SLOTID_1 = 0;
 constexpr static int32_t SLOTID_2 = 1;
@@ -978,6 +979,12 @@ int32_t RilCallback::NetworkCurrentCellUpdated_1_1(
                 HDF_LOGE("RilCallback::NetworkCurrentCellUpdated_1_1 invalid ratType");
         }
     }
+    return 0;
+}
+
+int32_t RilCallback::ResidentNetworkUpdated(const RilRadioResponseInfo &responseInfo, const std::string &plmn)
+{
+    HDF_LOGI("RilCallback::ResidentNetworkUpdated plmn:%{public}s", plmn.c_str());
     return 0;
 }
 
@@ -2152,9 +2159,9 @@ void HdfRilHdiTest::TearDown() {}
 
 HWTEST_F(HdfRilHdiTest, CheckRilInstanceIsEmpty, Function | MediumTest | Level1)
 {
-    g_rilInterface = IRil::Get();
+    g_rilInterface = OHOS::HDI::Ril::V1_2::IRil::Get();
     if (g_rilInterface != nullptr) {
-        g_rilInterface->SetCallback(&callback_);
+        g_rilInterface->SetCallback1_2(&callback_);
     }
 }
 

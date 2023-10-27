@@ -65,8 +65,8 @@ void DeviceTestAdditional::TearDownTestCase()
  */
 HWTEST_F(DeviceTestAdditional, testClientBufferCount001, Function | MediumTest | Level1)
 {
-    const uint32_t CACHE_COUNT = 20;
-    auto ret = g_composerDevice->SetClientBufferCacheCount(g_displayIds[0], CACHE_COUNT);
+    const uint32_t cacheCount = 20;
+    auto ret = g_composerDevice->SetClientBufferCacheCount(g_displayIds[0], cacheCount);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
@@ -77,8 +77,8 @@ HWTEST_F(DeviceTestAdditional, testClientBufferCount001, Function | MediumTest |
  */
 HWTEST_F(DeviceTestAdditional, testClientBufferCount002, Function | MediumTest | Level1)
 {
-    const uint32_t CACHE_COUNT = 0;
-    auto ret = g_composerDevice->SetClientBufferCacheCount(g_displayIds[0], CACHE_COUNT);
+    const uint32_t cacheCount = 0;
+    auto ret = g_composerDevice->SetClientBufferCacheCount(g_displayIds[0], cacheCount);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
@@ -89,8 +89,8 @@ HWTEST_F(DeviceTestAdditional, testClientBufferCount002, Function | MediumTest |
  */
 HWTEST_F(DeviceTestAdditional, testClientBufferCount003, Function | MediumTest | Level1)
 {
-    const uint32_t CACHE_COUNT = 15;
-    auto ret = g_composerDevice->SetClientBufferCacheCount(g_displayIds[0], CACHE_COUNT);
+    const uint32_t cacheCount = 15;
+    auto ret = g_composerDevice->SetClientBufferCacheCount(g_displayIds[0], cacheCount);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
@@ -101,8 +101,8 @@ HWTEST_F(DeviceTestAdditional, testClientBufferCount003, Function | MediumTest |
  */
 HWTEST_F(DeviceTestAdditional, testClientBufferCount004, Function | MediumTest | Level1)
 {
-    const uint32_t CACHE_COUNT = 5;
-    auto ret = g_composerDevice->SetClientBufferCacheCount(20, CACHE_COUNT);
+    const uint32_t cacheCount = 5;
+    auto ret = g_composerDevice->SetClientBufferCacheCount(20, cacheCount);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
@@ -113,8 +113,8 @@ HWTEST_F(DeviceTestAdditional, testClientBufferCount004, Function | MediumTest |
  */
 HWTEST_F(DeviceTestAdditional, testClientBufferCount005, Function | MediumTest | Level1)
 {
-    const uint32_t CACHE_COUNT = 5;
-    auto ret = g_composerDevice->SetClientBufferCacheCount(0, CACHE_COUNT);
+    const uint32_t cacheCount = 5;
+    auto ret = g_composerDevice->SetClientBufferCacheCount(0, cacheCount);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
@@ -125,8 +125,8 @@ HWTEST_F(DeviceTestAdditional, testClientBufferCount005, Function | MediumTest |
  */
 HWTEST_F(DeviceTestAdditional, testClientBufferCount006, Function | MediumTest | Level1)
 {
-    const uint32_t CACHE_COUNT = 5;
-    auto ret = g_composerDevice->SetClientBufferCacheCount(15, CACHE_COUNT);
+    const uint32_t cacheCount = 5;
+    auto ret = g_composerDevice->SetClientBufferCacheCount(15, cacheCount);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
@@ -137,8 +137,8 @@ HWTEST_F(DeviceTestAdditional, testClientBufferCount006, Function | MediumTest |
  */
 HWTEST_F(DeviceTestAdditional, testClientBufferCount007, Function | MediumTest | Level2)
 {
-    const uint32_t CACHE_COUNT = 5;
-    auto ret = g_composerDevice->SetClientBufferCacheCount(-1, CACHE_COUNT);
+    const uint32_t cacheCount = 5;
+    auto ret = g_composerDevice->SetClientBufferCacheCount(-1, cacheCount);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
@@ -149,14 +149,14 @@ HWTEST_F(DeviceTestAdditional, testClientBufferCount007, Function | MediumTest |
  */
 HWTEST_F(DeviceTestAdditional, testClientBufferCount008, Function | MediumTest | Level1)
 {
-    const uint32_t CACHE_COUNT = -1;
-    auto ret = g_composerDevice->SetClientBufferCacheCount(g_displayIds[0], CACHE_COUNT);
+    const uint32_t cacheCount = -1;
+    auto ret = g_composerDevice->SetClientBufferCacheCount(g_displayIds[0], cacheCount);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
 /**
  * @tc.number : SUB_Driver_Display_Capability_0100
- * @tc.name   : testCapability001 
+ * @tc.name   : testCapability001
  * @tc.desc   : test devId Max
  */
 HWTEST_F(DeviceTestAdditional, testCapability001, Function | MediumTest | Level1)
@@ -252,7 +252,7 @@ HWTEST_F(DeviceTestAdditional, testSupportedModes004, Function | MediumTest | Le
 
 /**
  * @tc.number : SUB_Driver_Display_DisplayMode_0100
- * @tc.name   :	testDisplayMode001 
+ * @tc.name   :	testDisplayMode001
  * @tc.desc   : test devId Max
  */
 HWTEST_F(DeviceTestAdditional, testDisplayMode001, Function | MediumTest | Level1)
@@ -276,7 +276,7 @@ HWTEST_F(DeviceTestAdditional, testDisplayMode002, Function | MediumTest | Level
 
 /**
  * @tc.number : SUB_Driver_Display_DisplayMode_0300
- * @tc.name   :testDisplayMode003 
+ * @tc.name   : testDisplayMode003
  * @tc.desc   : test devId Random
  */
 HWTEST_F(DeviceTestAdditional, testDisplayMode003, Function | MediumTest | Level1)

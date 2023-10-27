@@ -119,7 +119,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch003, TestSize.
     EXPECT_EQ(SENSOR_SUCCESS, ret);
     ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
-    for(int a = 0; a <= 50; a++){
+    for (int a = 0; a <= 50; a++) {
         for (auto iter : g_info) {
             int i = 0;
             ret = g_sensorInterface->SetBatch(iter.sensorId, i, SENSOR_POLL_TIME);
@@ -158,7 +158,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch005, TestSize.
     }
     int32_t ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
-    for(int i = 0; i <= 50; i++){
+    for (int i = 0; i <= 50; i++) {
         ret = g_sensorInterface->SetBatch(-1, SENSOR_INTERVAL2, SENSOR_POLL_TIME);
         EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
     }
@@ -201,7 +201,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch007, TestSize.
     EXPECT_EQ(SENSOR_SUCCESS, ret);
     ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
-    for(int a = 0; a <= 50; a++){
+    for (int a = 0; a <= 50; a++) {
         for (auto iter : g_info) {
             int i = -1;
             ret = g_sensorInterface->SetBatch(iter.sensorId, i, SENSOR_POLL_TIME);
@@ -269,7 +269,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch010, TestSize.
     EXPECT_EQ(SENSOR_SUCCESS, ret);
     ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
-    for(int a = 0; a <= 50; a++){
+    for (int a = 0; a <= 50; a++) {
         for (auto iter : g_info) {
             int i = 0;
             ret = g_sensorInterface->SetBatch(iter.sensorId, SENSOR_INTERVAL2, i);
@@ -315,7 +315,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch012, TestSize.
     EXPECT_EQ(SENSOR_SUCCESS, ret);
     ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
-    for(int a = 0; a <= 50; a++){
+    for (int a = 0; a <= 50; a++) {
         for (auto iter : g_info) {
             int i = -1;
             ret = g_sensorInterface->SetBatch(iter.sensorId, SENSOR_INTERVAL2, i);
@@ -367,7 +367,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister003, TestSize.
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    for(int i = 0; i <= 50; i++){
+    for (int i = 0; i <= 50; i++) {
         int32_t ret = g_sensorInterface->Register(HDF_MEDICAL_SENSOR_TYPE, nullptr);
         EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
     }
@@ -401,7 +401,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister005, TestSize.
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    for(int i = 0; i <= 50; i++){
+    for (int i = 0; i <= 50; i++) {
         int32_t ret = g_sensorInterface->Register(HDF_MEDICAL_SENSOR_TYPE, g_traditionalCallback);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
         ret = g_sensorInterface->Unregister(HDF_MEDICAL_SENSOR_TYPE, g_traditionalCallback);
@@ -437,7 +437,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister007, TestSize.
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    for(int i = 0; i <= 50; i++){
+    for (int i = 0; i <= 50; i++) {
         int32_t ret = g_sensorInterface->Register(HDF_MEDICAL_SENSOR_TYPE, nullptr);
         EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
         ret = g_sensorInterface->Unregister(HDF_MEDICAL_SENSOR_TYPE, nullptr);
@@ -473,7 +473,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister009, TestSize.
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    for(int i = 0; i <= 50; i++){
+    for (int i = 0; i <= 50; i++) {
         int32_t ret = g_sensorInterface->Register(HDF_TRADITIONAL_SENSOR_TYPE, nullptr);
         EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
         ret = g_sensorInterface->Unregister(HDF_TRADITIONAL_SENSOR_TYPE, nullptr);
@@ -509,7 +509,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister011, TestSize.
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    for(int i = 0; i <= 50; i++){
+    for (int i = 0; i <= 50; i++) {
         int32_t ret = g_sensorInterface->Register(HDF_SENSOR_GROUP_TYPE_MAX, nullptr);
         EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
         ret = g_sensorInterface->Unregister(HDF_SENSOR_GROUP_TYPE_MAX, nullptr);
@@ -545,7 +545,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister002, TestSiz
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    for(int i = 0; i <= 50; i++){
+    for (int i = 0; i <= 50; i++) {
         int32_t ret = g_sensorInterface->Register(HDF_SENSOR_TYPE_MAGNETIC_FIELD, g_traditionalCallback);
         EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
         ret = g_sensorInterface->Unregister(-1, g_traditionalCallback);
@@ -566,7 +566,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister003, TestSiz
     }
     int32_t ret = g_sensorInterface->Register(HDF_SENSOR_TYPE_CAPACITIVE, g_traditionalCallback);
     EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
-    for(int i = 0; i <= 50; i++){
+    for (int i = 0; i <= 50; i++) {
         ret = g_sensorInterface->Unregister(-1, g_traditionalCallback);
         EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
     }
@@ -600,7 +600,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister005, TestSiz
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    for(int i = 0; i <= 50; i++){
+    for (int i = 0; i <= 50; i++) {
         int32_t ret = g_sensorInterface->Register(SENSOR_GROUP_TYPE_MAX, g_medicalCallback);
         EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
         ret = g_sensorInterface->Unregister(SENSOR_GROUP_TYPE_MAX, nullptr);
@@ -636,7 +636,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister007, TestSiz
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    for(int i = 0; i <= 50; i++){
+    for (int i = 0; i <= 50; i++) {
         int32_t ret = g_sensorInterface->Register(SENSOR_GROUP_TYPE_MAX, g_traditionalCallback);
         EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
         ret = g_sensorInterface->Unregister(SENSOR_GROUP_TYPE_MAX, nullptr);
@@ -672,7 +672,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister009, TestSiz
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    for(int i = 0; i <= 50; i++){
+    for (int i = 0; i <= 50; i++) {
         int32_t ret = g_sensorInterface->GetAllSensorInfo(g_info);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
         ret = g_sensorInterface->Unregister(TRADITIONAL_SENSOR_TYPE, g_medicalCallback);
@@ -761,7 +761,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorEnable003, TestSize.Le
     }
     int32_t ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
-    for(int i = 0; i <= 50; i++){
+    for (int i = 0; i <= 50; i++) {
         ret = g_sensorInterface->Enable(-1);
         EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
     }
@@ -812,7 +812,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorGetAllSensorInfo001, T
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    for(int i = 0;i <= 50;i++){
+    for (int i = 0; i <= 50; i++) {
         int32_t ret = g_sensorInterface->GetAllSensorInfo(g_info);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
     }

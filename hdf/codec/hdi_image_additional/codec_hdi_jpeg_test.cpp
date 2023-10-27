@@ -19,8 +19,8 @@
 #include "v1_0/include/idisplay_buffer.h"
 #include "v1_0/display_composer_type.h"
 #include "v1_0/display_buffer_type.h"
-#include "v1_0/codec_types.h" 
-#include "v1_0/codec_image_type.h" 
+#include "v1_0/codec_types.h"
+#include "v1_0/codec_image_type.h"
 #include "v1_0/icodec_image.h"
 #define HDF_LOG_TAG codec_jpeg_test
 

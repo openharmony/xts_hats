@@ -20,9 +20,7 @@ module_output_path = "hats/codec"
 ohos_moduletest_suite("HatsHdfOmxCodecTestAdditional") {
   module_out_path = module_output_path
   configs = [ ":hdf_codec_omx" ]
-  sources = [
-    "codec_hdi_manager_test.cpp",
-  ]
+  sources = [ "codec_hdi_manager_test.cpp" ]
 
   deps = [ "//third_party/googletest:gtest_main" ]
 

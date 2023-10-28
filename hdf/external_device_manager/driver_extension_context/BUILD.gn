@@ -39,6 +39,7 @@ ohos_moduletest_suite("HatsHdfExtensionContextTest") {
     cflags += [ "-DBINDER_IPC_32BIT" ]
   }
   deps = [
+    "$base_root/drivers/external_device_manager/services/native/driver_extension:driver_extension",
     "${ability_runtime_napi_path}/inner/napi_common:napi_common",
     "${ability_runtime_native_path}/ability/native:ability_business_error",
     "${ability_runtime_native_path}/ability/native:abilitykit_native",
@@ -48,7 +49,6 @@ ohos_moduletest_suite("HatsHdfExtensionContextTest") {
     "${ability_runtime_test_path}/mock/services_abilitymgr_test/libs/aakit:aakit_mock",
     "${ability_runtime_test_path}/mock/services_abilitymgr_test/libs/appexecfwk_core:appexecfwk_appmgr_mock",
     "${ability_runtime_test_path}/mock/services_abilitymgr_test/libs/appexecfwk_core:appexecfwk_bundlemgr_mock",
-    "$base_root/drivers/external_device_manager/services/native/driver_extension:driver_extension",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
   ]

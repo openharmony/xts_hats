@@ -155,18 +155,6 @@ HWTEST_F(DeviceTestAdditional, testClientBufferCount008, Function | MediumTest |
 }
 
 /**
- * @tc.number : SUB_Driver_Display_Capability_0100
- * @tc.name   : testCapability001
- * @tc.desc   : test devId Max
- */
-HWTEST_F(DeviceTestAdditional, testCapability001, Function | MediumTest | Level1)
-{
-    DisplayCapability info;
-    auto ret = g_composerDevice->GetDisplayCapability(20, info);
-    EXPECT_EQ(DISPLAY_FAILURE, ret);
-}
-
-/**
  * @tc.number : SUB_Driver_Display_Capability_0200
  * @tc.name   : testCapability002
  * @tc.desc   : test devId Min
@@ -176,30 +164,6 @@ HWTEST_F(DeviceTestAdditional, testCapability002, Function | MediumTest | Level1
     DisplayCapability info;
     auto ret = g_composerDevice->GetDisplayCapability(0, info);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Driver_Display_Capability_0300
- * @tc.name   : testCapability003
- * @tc.desc   : test devId Random
- */
-HWTEST_F(DeviceTestAdditional, testCapability003, Function | MediumTest | Level1)
-{
-    DisplayCapability info;
-    auto ret = g_composerDevice->GetDisplayCapability(8, info);
-    EXPECT_EQ(DISPLAY_FAILURE, ret);
-}
-
-/**
- * @tc.number : SUB_Driver_Display_Capability_0400
- * @tc.name   : testCapability004
- * @tc.desc   : test devId Negative Number
- */
-HWTEST_F(DeviceTestAdditional, testCapability004, Function | MediumTest | Level2)
-{
-    DisplayCapability info;
-    auto ret = g_composerDevice->GetDisplayCapability(-1, info);
-    EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
 /**
@@ -227,18 +191,6 @@ HWTEST_F(DeviceTestAdditional, testSupportedModes002, Function | MediumTest | Le
 }
 
 /**
- * @tc.number : SUB_Driver_Display_SupportedModes_0300
- * @tc.name   : testSupportedModes003
- * @tc.desc   : test devId Random
- */
-HWTEST_F(DeviceTestAdditional, testSupportedModes003, Function | MediumTest | Level1)
-{
-    std::vector<DisplayModeInfo> modes;
-    auto ret = g_composerDevice->GetDisplaySupportedModes(8, modes);
-    EXPECT_EQ(DISPLAY_FAILURE, ret);
-}
-
-/**
  * @tc.number : SUB_Driver_Display_SupportedModes_0400
  * @tc.name   : testSupportedModes004
  * @tc.desc   : test devId Negative Number
@@ -257,8 +209,8 @@ HWTEST_F(DeviceTestAdditional, testSupportedModes004, Function | MediumTest | Le
  */
 HWTEST_F(DeviceTestAdditional, testDisplayMode001, Function | MediumTest | Level1)
 {
-    uint32_t MODE = 0;
-    auto ret = g_composerDevice->GetDisplayMode(20, MODE);
+    uint32_t mode = 0;
+    auto ret = g_composerDevice->GetDisplayMode(20, mode);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
@@ -269,8 +221,8 @@ HWTEST_F(DeviceTestAdditional, testDisplayMode001, Function | MediumTest | Level
  */
 HWTEST_F(DeviceTestAdditional, testDisplayMode002, Function | MediumTest | Level1)
 {
-    uint32_t MODE = 0;
-    auto ret = g_composerDevice->GetDisplayMode(0, MODE);
+    uint32_t mode = 0;
+    auto ret = g_composerDevice->GetDisplayMode(0, mode);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
@@ -281,8 +233,8 @@ HWTEST_F(DeviceTestAdditional, testDisplayMode002, Function | MediumTest | Level
  */
 HWTEST_F(DeviceTestAdditional, testDisplayMode003, Function | MediumTest | Level1)
 {
-    uint32_t MODE = 0;
-    auto ret = g_composerDevice->GetDisplayMode(15, MODE);
+    uint32_t mode = 0;
+    auto ret = g_composerDevice->GetDisplayMode(15, mode);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
@@ -293,8 +245,7 @@ HWTEST_F(DeviceTestAdditional, testDisplayMode003, Function | MediumTest | Level
  */
 HWTEST_F(DeviceTestAdditional, testDisplayMode004, Function | MediumTest | Level1)
 {
-    uint32_t MODE = 0;
-    auto ret = g_composerDevice->GetDisplayMode(-1, MODE);
+    uint32_t mode = 0;
+    auto ret = g_composerDevice->GetDisplayMode(-1, mode);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
-

@@ -17,6 +17,10 @@
 
 #define private public
 #define protected public
+#include <fcntl.h>
+#include <securec.h>
+#include <sys/ioctl.h>
+#include <unistd.h>
 #include "rtg_interface.h"
 #undef private
 #undef protected
@@ -42,6 +46,35 @@ public:
     void SetUp();
     void TearDown();
 };
+
+namespace {
+    const char RTG_SCHED_IPC_MAGIC = 0xAB;
+}
+
+#define CMD_ID_SET_RTG \
+    _IOWR(RTG_SCHED_IPC_MAGIC, SET_RTG, struct rtg_str_data)
+
+int CreateNewRtgGrp(int prioType, int rtNum)
+{
+    struct rtg_grp_data grp_data;
+    int ret;
+    char fileName[] = "/proc/self/sched_rtg_ctrl";
+    int fd = open(fileName, O_RDWR);
+    if (fd < 0) {
+        return fd;
+    }
+    (void)memset_s(&grp_data, sizeof(struct rtg_grp_data), 0, sizeof(struct rtg_grp_data));
+    if ((prioType > 0) && (prioType < RTG_TYPE_MAX)) {
+        grp_data.prio_type = prioType;
+    }
+    if (rtNum > 0) {
+        grp_data.rt_cnt = rtNum;
+    }
+    grp_data.rtg_cmd = CMD_CREATE_RTG_GRP;
+    ret = ioctl(fd, CMD_ID_SET_RTG, &grp_data);
+    close(fd);
+    return ret;
+}
 
 void RtgInterfaceTest::SetUpTestCase()
 {

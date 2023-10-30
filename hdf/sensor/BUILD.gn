@@ -20,6 +20,8 @@ group("HatsHdfSensorTest") {
   deps = [
     #":HatsHdfSensorHdiTest",
     "hdiService:HatsHdfSensorServiceTest",
+    "hdiService_additional:HatsHdfSensorServiceTestAdditional",
+
     #"sensorBenchmarkTest:HatsHdfSensorbenchmarkTest",
   ]
 }

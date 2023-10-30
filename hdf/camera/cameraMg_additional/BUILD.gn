@@ -3,7 +3,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -11,26 +11,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//build/ohos.gni")
 import("//build/ohos_var.gni")
 import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
-group("HatsHdfCodecTest") {
-  if (hats_rich == false) {
+#################################group#########################################
+group("HatsHdfCameraMgTestAdditional") {
+  if (!defined(ohos_lite)) {
     testonly = true
-    deps = [
-      #"benchmarktest:HatsHdfCodecBenchmarkTest",
-      "hdi_adapter:HatsHdfAdapterCodecTest",
-      "hdi_adapter_additional:HatsHdfAdapterCodecTestAdditional",
-      "hdi_image:HatsHdfImageCodecTest",
-      "hdi_image_additional:HatsHdfImageCodecTestAdditional",
-      "hdi_omx:HatsHdfOmxCodecTest",
-      "hdi_omx_additional:HatsHdfOmxCodecTestAdditional",
-      "hdi_v1.0:HatsHdfV1CodecTest",
-    ]
-  } else {
-    testonly = true
-    deps = [ "hdi_omx:HatsHdfOmxCodecTest" ]
+  }
+  if (is_standard_system) {
+    deps = [ "v1_0:HatsHdfCameraMgTestv0Additional" ]
   }
 }
+###############################################################################

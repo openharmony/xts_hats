@@ -23,6 +23,8 @@ ohos_moduletest_suite("HatsHdfSensorServiceTestAdditional") {
 
   configs = [ ":hdf_sensor_hdiservice_additional" ]
 
+  deps = [ "../../../../../../drivers/peripheral/sensor/hal:hdi_sensor" ]
+
   sources = [
     "hdf_sensor_hdiService_test.cpp",
     "sensor_callback_impl.cpp",

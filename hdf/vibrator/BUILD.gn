@@ -25,6 +25,7 @@ group("HatsHdfVibratorTest") {
     deps = [
       #"common:HatsHdfVibratorHdiTest",
       "hdiService:HatsHdfVibratorServiceTest",
+      "hdiService_additional:HatsHdfVibratorServiceTestAdditional",
       #"vibratorBenchmarkTest:HatsHdfVibratorbenchmarkTest",
     ]
   }

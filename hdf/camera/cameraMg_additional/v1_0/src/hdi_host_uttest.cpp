@@ -27,16 +27,13 @@ void HdiHostUtTestAdditional::SetUp(void)
     cameraTest->Init();
 }
 
-void HdiHostUtTestAdditional::TearDown(void)
-{
-    cameraTest->Close();
-}
+void HdiHostUtTestAdditional::TearDown(void) { cameraTest->Close(); }
 
 /**
  * @tc.number: SUB_Driver_Camera_GetCameraIds_0100
  * @tc.name: testGetCameraIds001
  * @tc.desc: GetCameraIds stability test
-*/
+ */
 HWTEST_F(HdiHostUtTestAdditional, testGetCameraIds001, Function | MediumTest | Level1)
 {
     EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
@@ -46,6 +43,56 @@ HWTEST_F(HdiHostUtTestAdditional, testGetCameraIds001, Function | MediumTest | L
             EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
             EXPECT_LT(0, cameraTest->cameraIds.size());
             CAMERA_LOGE("check hdi_host: cameraIds.size() = %{public}zu", cameraTest->cameraIds.size());
+        }
+    }
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_SetFlashLight_0100
+ * @tc.name: testSetFlashLight001
+ * @tc.desc: SetFlashlight, cameraId is not found, status is false
+ */
+HWTEST_F(HdiHostUtTestAdditional, testSetFlashLight001, Function | MediumTest | Level2)
+{
+    EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
+    if (cameraTest->cameraDevice == nullptr) {
+        std::string testCameraId = "abc";
+        cameraTest->status = false;
+        cameraTest->rc = cameraTest->service->SetFlashlight(testCameraId, cameraTest->status);
+        EXPECT_EQ(true, cameraTest->rc == INVALID_ARGUMENT);
+    }
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_SetFlashLight_0200
+ * @tc.name: testSetFlashLight002
+ * @tc.desc: SetFlashlight, cameraId is not found, status is false
+ */
+HWTEST_F(HdiHostUtTestAdditional, testSetFlashLight002, Function | MediumTest | Level2)
+{
+    EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
+    if (cameraTest->cameraDevice == nullptr) {
+        std::string testCameraId = "";
+        cameraTest->status = false;
+        cameraTest->rc = cameraTest->service->SetFlashlight(testCameraId, cameraTest->status);
+        EXPECT_EQ(true, cameraTest->rc == INVALID_ARGUMENT);
+    }
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_SetFlashLight_0300
+ * @tc.name: testSetFlashLight003
+ * @tc.desc: SetFlashlight stability test
+ */
+HWTEST_F(HdiHostUtTestAdditional, testSetFlashLight003, Function | MediumTest | Level1)
+{
+    EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
+    if (cameraTest->cameraDevice == nullptr) {
+        for (int i = 0; i < 100; i++) {
+            cameraTest->service->GetCameraIds(cameraTest->cameraIds);
+            cameraTest->status = true;
+            cameraTest->rc = cameraTest->service->SetFlashlight(cameraTest->cameraIds.front(), cameraTest->status);
+            EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
         }
     }
 }

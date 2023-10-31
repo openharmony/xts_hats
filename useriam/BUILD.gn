@@ -22,6 +22,7 @@ group("useriam") {
         "fingerprintauth:HatsUserIamFingerprintAuthTest",
         "pinauth:HatsUserIamPinAuthTest",
         "userauth:HatsUserIamUserAuthTest",
+        "userauth_additional:HatsUserIamUserAuthTestAdditional",
       ]
     }
   }

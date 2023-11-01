@@ -19,7 +19,6 @@
 #include <climits>
 #include <gtest/gtest.h>
 
-
 using namespace std;
 using namespace testing::ext;
 namespace {

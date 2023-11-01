@@ -614,7 +614,7 @@ HWTEST_F(DeviceTestAdditional, testSetDisplayBacklight004, Function | MediumTest
 /**
  * @tc.number : SUB_Driver_Display_SetDisplayBacklight_0500
  * @tc.name   : testSetDisplayBacklight005
- * @tc.desc   : test level Max 
+ * @tc.desc   : test level Max
  */
 HWTEST_F(DeviceTestAdditional, testSetDisplayBacklight005, Function | MediumTest | Level1)
 {
@@ -626,7 +626,7 @@ HWTEST_F(DeviceTestAdditional, testSetDisplayBacklight005, Function | MediumTest
 /**
  * @tc.number : SUB_Driver_Display_SetDisplayBacklight_0600
  * @tc.name   : testSetDisplayBacklight006
- * @tc.desc   : test level Min 
+ * @tc.desc   : test level Min
  */
 HWTEST_F(DeviceTestAdditional, testSetDisplayBacklight006, Function | MediumTest | Level1)
 {

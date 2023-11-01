@@ -37,7 +37,6 @@ public:
     struct IAudioAdapter *adapter_ = nullptr;
     struct IAudioCapture *capture_ = nullptr;
     uint32_t captureId_ = 0;
-    std::string devDescriptorName_;
     struct AudioAdapterDescriptor *adapterDescs_ = nullptr;
     virtual void SetUp();
     virtual void TearDown();
@@ -81,8 +80,7 @@ uint64_t AudioUtCaptureTestAdditional::GetCaptureBufferSize()
 void AudioUtCaptureTestAdditional::InitCaptureDevDesc(struct AudioDeviceDescriptor &devDesc)
 {
     devDesc.pins = (enum AudioPortPin)PIN_IN_MIC;
-    devDescriptorName_ = "cardname";
-    devDesc.desc = const_cast<char *>(devDescriptorName_.c_str());
+    devDesc.desc = strdup("cardname");
 
     ASSERT_NE(adapterDescs_, nullptr);
     ASSERT_NE(adapterDescs_->ports, nullptr);

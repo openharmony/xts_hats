@@ -11,20 +11,35 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+base_root = "../../../../../../"
 import("//build/ohos_var.gni")
-import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
+import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 
-#################################group#########################################
-group("HatsHdfCameraMgTestAdditional") {
-  if (!defined(ohos_lite)) {
-    testonly = true
-  }
+module_output_path = "hats/misc"
+ohos_moduletest_suite("HatsHdfVibratorServiceTestAdditional") {
+  module_out_path = module_output_path
+
+  sources = [ "hdf_vibrator_hdiService_test.cpp" ]
+  cflags = [
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fsigned-char",
+    "-fno-common",
+    "-fno-strict-aliasing",
+  ]
+
   if (is_standard_system) {
-    deps = [
-      "v1_0:HatsHdfCameraMgTestv0Additional",
-      "v1_1:HatsHdfCameraMgTestv1Additional",
+    external_deps = [
+      "c_utils:utils",
+      "drivers_interface_vibrator:libvibrator_proxy_1.1",
+      "hdf_core:libhdf_utils",
+      "hilog:libhilog",
+      "ipc:ipc_single",
     ]
+  } else {
+    external_deps = [ "hilog:libhilog" ]
   }
+  external_deps += [ "ipc:ipc_single" ]
 }
-###############################################################################

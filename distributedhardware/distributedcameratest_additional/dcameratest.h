@@ -19,7 +19,6 @@
 #include "distributed_camera_errno.h"
 #include "icamera_state_listener.h"
 
-
 namespace OHOS {
 namespace DistributedHardware {
 class HdiDCameraSourceStateListener : public ICameraStateListener {

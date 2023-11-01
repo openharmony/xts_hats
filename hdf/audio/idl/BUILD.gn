@@ -22,10 +22,10 @@ group("hdi_base_common") {
   deps = [
     "common/adapter:HatsHdfAudioIdlAdapterTest",
     "common/capture:HatsHdfAudioIdlCaptureTest",
-	"common/capture_additional:HatsHdfAudioIdlCaptureTestAdditional",
+    "common/capture_additional:HatsHdfAudioIdlCaptureTestAdditional",
     "common/manager:HatsHdfAudioIdlManagerTest",
     "common/render:HatsHdfAudioIdlRenderTest",
-     
+
     #"benchmarktest:HatsHdfAudioBenchmarkTest"
   ]
 }

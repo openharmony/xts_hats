@@ -81,8 +81,8 @@ uint64_t AudioUtCaptureTestAdditional::GetCaptureBufferSize()
 void AudioUtCaptureTestAdditional::InitCaptureDevDesc(struct AudioDeviceDescriptor &devDesc)
 {
     devDesc.pins = (enum AudioPortPin)PIN_IN_MIC;
-    devDescriptorName_ = strdup("cardname");
-    devDesc.desc = devDescriptorName_;
+    devDescriptorName_ = "cardname";
+    devDesc.desc = const_cast<char *>(devDescriptorName_.c_str());
 
     ASSERT_NE(adapterDescs_, nullptr);
     ASSERT_NE(adapterDescs_->ports, nullptr);
@@ -178,9 +178,6 @@ void AudioUtCaptureTestAdditional::SetUp()
 
 void AudioUtCaptureTestAdditional::TearDown()
 {
-    ASSERT_NE(devDescriptorName_, nullptr);
-    free(devDescriptorName_);
-
     ASSERT_NE(capture_, nullptr);
     EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, captureId_));
 
@@ -580,8 +577,9 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene001, TestSize.
 {
     ASSERT_NE(capture_->SelectScene, nullptr);
     struct AudioSceneDescriptor sceneDesc = {};
+    std::string devDes = "mic";
     sceneDesc.desc.pins = PIN_IN_MIC;
-    sceneDesc.desc.desc = strdup("mic");
+    sceneDesc.desc.desc = const_cast<char *>(devDes.c_str());
     sceneDesc.scene.id = AUDIO_IN_MEDIA;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
@@ -597,8 +595,9 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene002, TestSize.
 {
     ASSERT_NE(capture_->SelectScene, nullptr);
     struct AudioSceneDescriptor sceneDesc = {};
+    std::string devDes = "mic";
     sceneDesc.desc.pins = PIN_IN_MIC;
-    sceneDesc.desc.desc = strdup("mic");
+    sceneDesc.desc.desc = const_cast<char *>(devDes.c_str());
     sceneDesc.scene.id = AUDIO_IN_COMMUNICATION;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
@@ -614,8 +613,9 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene004, TestSize.
 {
     ASSERT_NE(capture_->SelectScene, nullptr);
     struct AudioSceneDescriptor sceneDesc = {};
+    std::string devDes = "speaker";
     sceneDesc.desc.pins = PIN_IN_MIC;
-    sceneDesc.desc.desc = strdup("speaker");
+    sceneDesc.desc.desc = const_cast<char *>(devDes.c_str());
     sceneDesc.scene.id = AUDIO_IN_MEDIA;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
@@ -631,8 +631,9 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene005, TestSize.
 {
     ASSERT_NE(capture_->SelectScene, nullptr);
     struct AudioSceneDescriptor sceneDesc = {};
+    std::string devDes = "speaker";
     sceneDesc.desc.pins = PIN_IN_MIC;
-    sceneDesc.desc.desc = strdup("speaker");
+    sceneDesc.desc.desc = const_cast<char *>(devDes.c_str());
     sceneDesc.scene.id = AUDIO_IN_COMMUNICATION;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
@@ -648,8 +649,9 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene007, TestSize.
 {
     ASSERT_NE(capture_->SelectScene, nullptr);
     struct AudioSceneDescriptor sceneDesc = {};
+    std::string devDes = "speaker";
     sceneDesc.desc.pins = PIN_IN_MIC;
-    sceneDesc.desc.desc = strdup("speaker");
+    sceneDesc.desc.desc = const_cast<char *>(devDes.c_str());
     sceneDesc.scene.id = AUDIO_IN_CALL;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
@@ -665,7 +667,8 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene008, TestSize.
 {
     ASSERT_NE(capture_->SelectScene, nullptr);
     struct AudioSceneDescriptor sceneDesc = {};
-    sceneDesc.desc.desc = strdup("mic");
+    std::string devDes = "mic";
+    sceneDesc.desc.desc = const_cast<char *>(devDes.c_str());
     sceneDesc.scene.id = AUDIO_IN_MEDIA;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
@@ -681,7 +684,8 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene009, TestSize.
 {
     ASSERT_NE(capture_->SelectScene, nullptr);
     struct AudioSceneDescriptor sceneDesc = {};
-    sceneDesc.desc.desc = strdup("mic");
+    std::string devDes = "mic";
+    sceneDesc.desc.desc = const_cast<char *>(devDes.c_str());
     sceneDesc.scene.id = AUDIO_IN_COMMUNICATION;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
@@ -697,7 +701,8 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene010, TestSize.
 {
     ASSERT_NE(capture_->SelectScene, nullptr);
     struct AudioSceneDescriptor sceneDesc = {};
-    sceneDesc.desc.desc = strdup("mic");
+    std::string devDes = "mic";
+    sceneDesc.desc.desc = const_cast<char *>(devDes.c_str());
     sceneDesc.scene.id = AUDIO_IN_RINGTONE;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
@@ -713,7 +718,8 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene011, TestSize.
 {
     ASSERT_NE(capture_->SelectScene, nullptr);
     struct AudioSceneDescriptor sceneDesc = {};
-    sceneDesc.desc.desc = strdup("mic");
+    std::string devDes = "mic";
+    sceneDesc.desc.desc = const_cast<char *>(devDes.c_str());
     sceneDesc.scene.id = AUDIO_IN_CALL;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
@@ -732,7 +738,8 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene012, TestSize.
     int i = 0;
     int32_t ret = HDF_ERR_NOT_SUPPORT;
     sceneDesc.desc.pins = PIN_IN_MIC;
-    sceneDesc.desc.desc = strdup("mic");
+    std::string devDes = "mic";
+    sceneDesc.desc.desc = const_cast<char *>(devDes.c_str());
     sceneDesc.scene.id = AUDIO_IN_CALL;
     for (i = 0; i < 1000; i++) {
         ret = capture_->SelectScene(capture_, &sceneDesc);
@@ -750,7 +757,8 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene013, TestSize.
     ASSERT_NE(capture_->SelectScene, nullptr);
     struct AudioSceneDescriptor sceneDesc = {};
     sceneDesc.desc.pins = PIN_OUT_SPEAKER;
-    sceneDesc.desc.desc = strdup("speaker");
+    std::string devDes = "speaker";
+    sceneDesc.desc.desc = const_cast<char *>(devDes.c_str());
     sceneDesc.scene.id = AUDIO_IN_MEDIA;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
@@ -767,7 +775,8 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene014, TestSize.
     ASSERT_NE(capture_->SelectScene, nullptr);
     struct AudioSceneDescriptor sceneDesc = {};
     sceneDesc.desc.pins = PIN_OUT_SPEAKER;
-    sceneDesc.desc.desc = strdup("speaker");
+    std::string devDes = "speaker";
+    sceneDesc.desc.desc = const_cast<char *>(devDes.c_str());
     sceneDesc.scene.id = AUDIO_IN_COMMUNICATION;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
@@ -784,7 +793,8 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene015, TestSize.
     ASSERT_NE(capture_->SelectScene, nullptr);
     struct AudioSceneDescriptor sceneDesc = {};
     sceneDesc.desc.pins = PIN_OUT_SPEAKER;
-    sceneDesc.desc.desc = strdup("speaker");
+    std::string devDes = "speaker";
+    sceneDesc.desc.desc = const_cast<char *>(devDes.c_str());
     sceneDesc.scene.id = AUDIO_IN_RINGTONE;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
@@ -801,7 +811,8 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene016, TestSize.
     ASSERT_NE(capture_->SelectScene, nullptr);
     struct AudioSceneDescriptor sceneDesc = {};
     sceneDesc.desc.pins = PIN_OUT_SPEAKER;
-    sceneDesc.desc.desc = strdup("speaker");
+    std::string devDes = "speaker";
+    sceneDesc.desc.desc = const_cast<char *>(devDes.c_str());
     sceneDesc.scene.id = AUDIO_IN_CALL;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);

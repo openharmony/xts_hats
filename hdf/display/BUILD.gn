@@ -24,17 +24,14 @@ group("HatsHdfDisplayTest") {
       "composer/death:HatsHdfDisplayComposerDeathTest",
       "composer/moduletest:HatszHdfDisplayComposerMtTest",
       "composer/unittest:HatszHdfDisplayComposerUtTest",
-      "composer/unittest_additional:HatsHdfDisplayComposerUtTestAdditional",
     ]
   } else {
     deps = [
       "buffer:HatsHdfDisplayBufferTest",
-
       # "composer/benchmark:HatsHdfDisplayabenchmarkTest",
       "composer/death:HatsHdfDisplayComposerDeathTest",
       "composer/moduletest:HatszHdfDisplayComposerMtTest",
       "composer/unittest:HatszHdfDisplayComposerUtTest",
-      "composer/unittest_additional:HatsHdfDisplayComposerUtTestAdditional",
     ]
   }
 }

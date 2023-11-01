@@ -21,5 +21,6 @@ group("HatsHdfDisplayBufferTest") {
     "death:HatsHdfDisplayBufferDeathTest",
     "moduletest:HatsHdfDisplayBufferMtTest",
     "unittest:HatsHdfDisplayBufferUtTest",
+    "moduletest_additional:HatsHdfDisplayBufferMtTestAdditional",
   ]
 }

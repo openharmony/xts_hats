@@ -530,6 +530,8 @@ HWTEST_F(DisplayBufferMtAdditional, testHatsHdfDisplayBufferMtTestAdditionalAllo
         EXPECT_EQ(HDF_SUCCESS, ret);
     }
 }
+
+#ifdef DISPLAY_COMMUNITY
 /**
  * @tc.number : SUB_Driver_Display_0030
  * @tc.name   : testHatsHdfDisplayBufferMtTestAdditionalAllocInfo020
@@ -2330,6 +2332,7 @@ HWTEST_F(DisplayBufferMtAdditional, SUB_Driver_Display_0550, TestSize.Level2)
     }
 }
 
+#endif
 }
 }
 }

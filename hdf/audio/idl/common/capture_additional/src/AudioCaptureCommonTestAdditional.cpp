@@ -37,7 +37,7 @@ public:
     struct IAudioAdapter *adapter_ = nullptr;
     struct IAudioCapture *capture_ = nullptr;
     uint32_t captureId_ = 0;
-    char *devDescriptorName_ = nullptr;
+    std::string devDescriptorName_;
     struct AudioAdapterDescriptor *adapterDescs_ = nullptr;
     virtual void SetUp();
     virtual void TearDown();
@@ -493,12 +493,12 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetGain007, TestSize.Leve
  */
 HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureGetGain001, TestSize.Level1)
 {
-    float Gain = 2.0;
+    float gain = 2.0;
     int i = 0;
     int32_t ret = 0;
     EXPECT_NE(capture_->SetGain, nullptr);
     for (i = 0; i < 1000; i++) {
-        ret = capture_->GetGain(capture_, &Gain);
+        ret = capture_->GetGain(capture_, &gain);
         EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }

@@ -26,6 +26,7 @@ group("HatsHdfVibratorTest") {
       #"common:HatsHdfVibratorHdiTest",
       "hdiService:HatsHdfVibratorServiceTest",
       "hdiService_additional:HatsHdfVibratorServiceTestAdditional",
+
       #"vibratorBenchmarkTest:HatsHdfVibratorbenchmarkTest",
     ]
   }

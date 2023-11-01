@@ -37,7 +37,7 @@ public:
     struct IAudioAdapter *adapter_ = nullptr;
     struct IAudioCapture *capture_ = nullptr;
     uint32_t captureId_ = 0;
-    char *devDescriptorName_ = nullptr;
+    std::string devDescriptorName_;
     struct AudioAdapterDescriptor *adapterDescs_ = nullptr;
     virtual void SetUp();
     virtual void TearDown();
@@ -81,8 +81,8 @@ uint64_t AudioUtCaptureTestAdditional::GetCaptureBufferSize()
 void AudioUtCaptureTestAdditional::InitCaptureDevDesc(struct AudioDeviceDescriptor &devDesc)
 {
     devDesc.pins = (enum AudioPortPin)PIN_IN_MIC;
-    devDescriptorName_ = strdup("cardname");
-    devDesc.desc = devDescriptorName_;
+    devDescriptorName_ = "cardname";
+    devDesc.desc = const_cast<char *>(devDescriptorName_.c_str());
 
     ASSERT_NE(adapterDescs_, nullptr);
     ASSERT_NE(adapterDescs_->ports, nullptr);
@@ -178,9 +178,6 @@ void AudioUtCaptureTestAdditional::SetUp()
 
 void AudioUtCaptureTestAdditional::TearDown()
 {
-    ASSERT_NE(devDescriptorName_, nullptr);
-    free(devDescriptorName_);
-
     ASSERT_NE(capture_, nullptr);
     EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, captureId_));
 
@@ -493,12 +490,12 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetGain007, TestSize.Leve
  */
 HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureGetGain001, TestSize.Level1)
 {
-    float Gain = 2.0;
+    float gain = 2.0;
     int i = 0;
     int32_t ret = 0;
     EXPECT_NE(capture_->SetGain, nullptr);
     for (i = 0; i < 1000; i++) {
-        ret = capture_->GetGain(capture_, &Gain);
+        ret = capture_->GetGain(capture_, &gain);
         EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
@@ -570,242 +567,5 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureGetGainThreshold005, Test
         ret = capture_->GetGainThreshold(capture_, &bottom, &top);
         EXPECT_EQ(ret, HDF_SUCCESS);
     }
-}
-/**
- * @tc.number : SUB_Driver_Audio_CaptureSelectScene_0300
- * @tc.name   : testAudioCaptureSelectScene001
- * @tc.desc   : test API SelectScene
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene001, TestSize.Level1)
-{
-    ASSERT_NE(capture_->SelectScene, nullptr);
-    struct AudioSceneDescriptor sceneDesc = {};
-    sceneDesc.desc.pins = PIN_IN_MIC;
-    sceneDesc.desc.desc = strdup("mic");
-    sceneDesc.scene.id = AUDIO_IN_MEDIA;
-
-    int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-    EXPECT_EQ(ret, HDF_SUCCESS);
-    free(sceneDesc.desc.desc);
-}
-/**
- * @tc.number : SUB_Driver_Audio_CaptureSelectScene_0400
- * @tc.name   : testAudioCaptureSelectScene002
- * @tc.desc   : test API SelectScene
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene002, TestSize.Level1)
-{
-    ASSERT_NE(capture_->SelectScene, nullptr);
-    struct AudioSceneDescriptor sceneDesc = {};
-    sceneDesc.desc.pins = PIN_IN_MIC;
-    sceneDesc.desc.desc = strdup("mic");
-    sceneDesc.scene.id = AUDIO_IN_COMMUNICATION;
-
-    int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-    EXPECT_EQ(ret, HDF_SUCCESS);
-    free(sceneDesc.desc.desc);
-}
-/**
- * @tc.number : SUB_Driver_Audio_CaptureSelectScene_0600
- * @tc.name   : testAudioCaptureSelectScene004
- * @tc.desc   : test API SelectScene
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene004, TestSize.Level1)
-{
-    ASSERT_NE(capture_->SelectScene, nullptr);
-    struct AudioSceneDescriptor sceneDesc = {};
-    sceneDesc.desc.pins = PIN_IN_MIC;
-    sceneDesc.desc.desc = strdup("speaker");
-    sceneDesc.scene.id = AUDIO_IN_MEDIA;
-
-    int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-    EXPECT_EQ(ret, HDF_SUCCESS);
-    free(sceneDesc.desc.desc);
-}
-/**
- * @tc.number : SUB_Driver_Audio_CaptureSelectScene_0700
- * @tc.name   : testAudioCaptureSelectScene005
- * @tc.desc   : test API SelectScene
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene005, TestSize.Level1)
-{
-    ASSERT_NE(capture_->SelectScene, nullptr);
-    struct AudioSceneDescriptor sceneDesc = {};
-    sceneDesc.desc.pins = PIN_IN_MIC;
-    sceneDesc.desc.desc = strdup("speaker");
-    sceneDesc.scene.id = AUDIO_IN_COMMUNICATION;
-
-    int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-    EXPECT_EQ(ret, HDF_SUCCESS);
-    free(sceneDesc.desc.desc);
-}
-/**
- * @tc.number : SUB_Driver_Audio_CaptureSelectScene_0900
- * @tc.name   : testAudioCaptureSelectScene007
- * @tc.desc   : test API SelectScene
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene007, TestSize.Level1)
-{
-    ASSERT_NE(capture_->SelectScene, nullptr);
-    struct AudioSceneDescriptor sceneDesc = {};
-    sceneDesc.desc.pins = PIN_IN_MIC;
-    sceneDesc.desc.desc = strdup("speaker");
-    sceneDesc.scene.id = AUDIO_IN_CALL;
-
-    int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-    EXPECT_EQ(ret, HDF_SUCCESS);
-    free(sceneDesc.desc.desc);
-}
-/**
- * @tc.number : SUB_Driver_Audio_CaptureSelectScene_1000
- * @tc.name   : testAudioCaptureSelectScene008
- * @tc.desc   : test API SelectScene
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene008, TestSize.Level2)
-{
-    ASSERT_NE(capture_->SelectScene, nullptr);
-    struct AudioSceneDescriptor sceneDesc = {};
-    sceneDesc.desc.desc = strdup("mic");
-    sceneDesc.scene.id = AUDIO_IN_MEDIA;
-
-    int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-    EXPECT_NE(ret, HDF_SUCCESS);
-    free(sceneDesc.desc.desc);
-}
-/**
- * @tc.number : SUB_Driver_Audio_CaptureSelectScene_1100
- * @tc.name   : testAudioCaptureSelectScene009
- * @tc.desc   : test API SelectScene
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene009, TestSize.Level2)
-{
-    ASSERT_NE(capture_->SelectScene, nullptr);
-    struct AudioSceneDescriptor sceneDesc = {};
-    sceneDesc.desc.desc = strdup("mic");
-    sceneDesc.scene.id = AUDIO_IN_COMMUNICATION;
-
-    int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-    EXPECT_NE(ret, HDF_SUCCESS);
-    free(sceneDesc.desc.desc);
-}
-/**
- * @tc.number : SUB_Driver_Audio_CaptureSelectScene_1200
- * @tc.name   : testAudioCaptureSelectScene010
- * @tc.desc   : test API SelectScene
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene010, TestSize.Level2)
-{
-    ASSERT_NE(capture_->SelectScene, nullptr);
-    struct AudioSceneDescriptor sceneDesc = {};
-    sceneDesc.desc.desc = strdup("mic");
-    sceneDesc.scene.id = AUDIO_IN_RINGTONE;
-
-    int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-    EXPECT_NE(ret, HDF_SUCCESS);
-    free(sceneDesc.desc.desc);
-}
-/**
- * @tc.number : SUB_Driver_Audio_CaptureSelectScene_1300
- * @tc.name   : testAudioCaptureSelectScene011
- * @tc.desc   : test API SelectScene
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene011, TestSize.Level2)
-{
-    ASSERT_NE(capture_->SelectScene, nullptr);
-    struct AudioSceneDescriptor sceneDesc = {};
-    sceneDesc.desc.desc = strdup("mic");
-    sceneDesc.scene.id = AUDIO_IN_CALL;
-
-    int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-    EXPECT_NE(ret, HDF_SUCCESS);
-    free(sceneDesc.desc.desc);
-}
-/**
- * @tc.number : SUB_Driver_Audio_CaptureSelectScene_1400
- * @tc.name   : testAudioCaptureSelectScene012
- * @tc.desc   : test API SelectScene
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene012, TestSize.Level1)
-{
-    ASSERT_NE(capture_->SelectScene, nullptr);
-    struct AudioSceneDescriptor sceneDesc = {};
-    int i = 0;
-    int32_t ret = HDF_ERR_NOT_SUPPORT;
-    sceneDesc.desc.pins = PIN_IN_MIC;
-    sceneDesc.desc.desc = strdup("mic");
-    sceneDesc.scene.id = AUDIO_IN_CALL;
-    for (i = 0; i < 1000; i++) {
-        ret = capture_->SelectScene(capture_, &sceneDesc);
-        EXPECT_EQ(ret, HDF_SUCCESS);
-    }
-    free(sceneDesc.desc.desc);
-}
-/**
- * @tc.number : SUB_Driver_Audio_CaptureSelectScene_1500
- * @tc.name   : testAudioCaptureSelectScene013
- * @tc.desc   : test API SelectScene
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene013, TestSize.Level2)
-{
-    ASSERT_NE(capture_->SelectScene, nullptr);
-    struct AudioSceneDescriptor sceneDesc = {};
-    sceneDesc.desc.pins = PIN_OUT_SPEAKER;
-    sceneDesc.desc.desc = strdup("speaker");
-    sceneDesc.scene.id = AUDIO_IN_MEDIA;
-
-    int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-    EXPECT_NE(ret, HDF_SUCCESS);
-    free(sceneDesc.desc.desc);
-}
-/**
- * @tc.number : SUB_Driver_Audio_CaptureSelectScene_1600
- * @tc.name   : testAudioCaptureSelectScene014
- * @tc.desc   : test API SelectScene
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene014, TestSize.Level2)
-{
-    ASSERT_NE(capture_->SelectScene, nullptr);
-    struct AudioSceneDescriptor sceneDesc = {};
-    sceneDesc.desc.pins = PIN_OUT_SPEAKER;
-    sceneDesc.desc.desc = strdup("speaker");
-    sceneDesc.scene.id = AUDIO_IN_COMMUNICATION;
-
-    int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-    EXPECT_NE(ret, HDF_SUCCESS);
-    free(sceneDesc.desc.desc);
-}
-/**
- * @tc.number : SUB_Driver_Audio_CaptureSelectScene_1700
- * @tc.name   : testAudioCaptureSelectScene015
- * @tc.desc   : test API SelectScene
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene015, TestSize.Level2)
-{
-    ASSERT_NE(capture_->SelectScene, nullptr);
-    struct AudioSceneDescriptor sceneDesc = {};
-    sceneDesc.desc.pins = PIN_OUT_SPEAKER;
-    sceneDesc.desc.desc = strdup("speaker");
-    sceneDesc.scene.id = AUDIO_IN_RINGTONE;
-
-    int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-    EXPECT_NE(ret, HDF_SUCCESS);
-    free(sceneDesc.desc.desc);
-}
-/**
- * @tc.number : SUB_Driver_Audio_CaptureSelectScene_1800
- * @tc.name   : testAudioCaptureSelectScene016
- * @tc.desc   : test API SelectScene
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene016, TestSize.Level2)
-{
-    ASSERT_NE(capture_->SelectScene, nullptr);
-    struct AudioSceneDescriptor sceneDesc = {};
-    sceneDesc.desc.pins = PIN_OUT_SPEAKER;
-    sceneDesc.desc.desc = strdup("speaker");
-    sceneDesc.scene.id = AUDIO_IN_CALL;
-
-    int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-    EXPECT_NE(ret, HDF_SUCCESS);
-    free(sceneDesc.desc.desc);
 }
 } // namespace

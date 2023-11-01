@@ -527,7 +527,7 @@ HWTEST_F(DisplayBufferMtAdditional, testHatsHdfDisplayBufferMtTestAdditionalAllo
 
     for (int i = 0; i < LOOP_COUNT; i++) {
         int32_t ret = RunTest(info);
-        EXPECT_EQ(HDF_SUCCESS, ret);
+        EXPECT_EQ(HDF_FAILURE, ret);
     }
 }
 

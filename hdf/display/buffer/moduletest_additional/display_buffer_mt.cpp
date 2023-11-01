@@ -527,7 +527,11 @@ HWTEST_F(DisplayBufferMtAdditional, testHatsHdfDisplayBufferMtTestAdditionalAllo
 
     for (int i = 0; i < LOOP_COUNT; i++) {
         int32_t ret = RunTest(info);
+<<<<<<< HEAD
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+=======
         EXPECT_EQ(HDF_FAILURE, ret);
+>>>>>>> 74d55b75093ddd6dd635615bd57caac12d4740a4
     }
 }
 
@@ -2287,7 +2291,7 @@ HWTEST_F(DisplayBufferMtAdditional, testHatsHdfDisplayBufferMtTestAdditionalAllo
  * @tc.name   : testHatsHdfDisplayBufferMtTestAdditionalAllocInfo055
  * @tc.desc   : Reliability of function(AllocInfo、FreeMem、Mmap、Unmap、FlushCache、InvalidateCache)
  */
-HWTEST_F(DisplayBufferMtAdditional, SUB_Driver_Display_0550, TestSize.Level2)
+HWTEST_F(DisplayBufferMtAdditional, testHatsHdfDisplayBufferMtTestAdditionalAllocInfo055, TestSize.Level2)
 {
     AllocInfo info;
     info.width = 1024;

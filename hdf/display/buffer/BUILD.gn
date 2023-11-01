@@ -20,7 +20,7 @@ group("HatsHdfDisplayBufferTest") {
   deps = [
     "death:HatsHdfDisplayBufferDeathTest",
     "moduletest:HatsHdfDisplayBufferMtTest",
-    "unittest:HatsHdfDisplayBufferUtTest",
     "moduletest_additional:HatsHdfDisplayBufferMtTestAdditional",
+    "unittest:HatsHdfDisplayBufferUtTest",
   ]
 }

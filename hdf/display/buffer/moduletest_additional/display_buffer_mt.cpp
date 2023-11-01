@@ -43,9 +43,9 @@ static const int LOOP_COUNT = 10;
 #define HDF_LOG_TAG display_buffer_module_test
 static void WriteBuffer(const BufferHandle &handle)
 {
-    const char VERIFY_MSG[] = "12345678, (*~*)";
+    const char verifyMsg[] = "12345678, (*~*)";
     // write msg to display buffer fully.
-    int strSize = strlen(VERIFY_MSG) + 1;
+    int strSize = strlen(verifyMsg) + 1;
     int i = 0;
     char *ptr = reinterpret_cast<char *>(handle.virAddr);
     if (ptr == nullptr) {
@@ -54,7 +54,7 @@ static void WriteBuffer(const BufferHandle &handle)
     }
 
     for (; i < handle.size - strSize;) {
-        errno_t ret = memcpy_s(&ptr[i], sizeof(VERIFY_MSG), VERIFY_MSG, sizeof(VERIFY_MSG));
+        errno_t ret = memcpy_s(&ptr[i], sizeof(verifyMsg), verifyMsg, sizeof(verifyMsg));
         if (ret != EOK) {
             HDF_LOGE("memcpy_s error : %d", ret);
             return;
@@ -71,7 +71,7 @@ static void WriteBuffer(const BufferHandle &handle)
              strSize);
     // verify buffer contents from strings written.
     for (i = 0; i < handle.size - SIZE_TIMES * strSize; i = i + strSize) {
-        if (strncmp(VERIFY_MSG, &ptr[i], sizeof(VERIFY_MSG)) != 0) {
+        if (strncmp(verifyMsg, &ptr[i], sizeof(verifyMsg)) != 0) {
             HDF_LOGD("%{public}s(%{public}d), buffer[%{public}d]:%{public}s", __func__, __LINE__, i, &ptr[i]);
         }
     }

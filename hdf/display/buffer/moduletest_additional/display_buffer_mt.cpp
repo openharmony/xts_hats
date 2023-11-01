@@ -44,7 +44,6 @@ static const int LOOP_COUNT = 10;
 static void WriteBuffer(const BufferHandle &handle)
 {
     const char verifyMsg[] = "12345678, (*~*)";
-    // write msg to display buffer fully.
     int strSize = strlen(verifyMsg) + 1;
     int i = 0;
     char *ptr = reinterpret_cast<char *>(handle.virAddr);
@@ -66,10 +65,8 @@ static void WriteBuffer(const BufferHandle &handle)
         ptr[i] = 'z';
     }
 
-    // read all contents from buffer
     HDF_LOGD("%{public}s(%{public}d), buffer size:%{public}d, len:%{public}d", __func__, __LINE__, handle.size,
              strSize);
-    // verify buffer contents from strings written.
     for (i = 0; i < handle.size - SIZE_TIMES * strSize; i = i + strSize) {
         if (strncmp(verifyMsg, &ptr[i], sizeof(verifyMsg)) != 0) {
             HDF_LOGD("%{public}s(%{public}d), buffer[%{public}d]:%{public}s", __func__, __LINE__, i, &ptr[i]);
@@ -83,7 +80,6 @@ static void WriteBuffer(const BufferHandle &handle)
 
 static void DumpBufferHandle(const BufferHandle &handle)
 {
-    // dump buffer handle infomation
     HDF_LOGD("-------------------------------------");
     HDF_LOGD("fd                =%{public}d", handle.fd);
     HDF_LOGD("width             =%{public}d", handle.width);
@@ -100,14 +96,12 @@ static void DumpBufferHandle(const BufferHandle &handle)
 int32_t DisplayBufferMtAdditional::RunTest(const AllocInfo &info)
 {
     BufferHandle *bHandle = nullptr;
-    // AllocMem
     int32_t ec = g_dispbuf->AllocMem(info, bHandle);
     if (ec != HDF_SUCCESS || bHandle == nullptr) {
         HDF_LOGE("%{public}s, line=%{public}d, AllocMem failed. ec=0x%{public}x", __func__, __LINE__, ec);
         return HDF_FAILURE;
     }
 
-    // Mmap
     void *buffer = g_dispbuf->Mmap(*bHandle);
     if (buffer == nullptr) {
         HDF_LOGE("Mmap failed.");
@@ -119,7 +113,6 @@ int32_t DisplayBufferMtAdditional::RunTest(const AllocInfo &info)
     DumpBufferHandle(*bHandle);
     WriteBuffer(*bHandle);
 
-    // InvalidateCache
     ec = g_dispbuf->InvalidateCache(*bHandle);
     if (ec != HDF_SUCCESS) {
         HDF_LOGE("InvalidateCache failed.");
@@ -127,7 +120,6 @@ int32_t DisplayBufferMtAdditional::RunTest(const AllocInfo &info)
         g_dispbuf->FreeMem(*bHandle);
         return HDF_FAILURE;
     }
-    // InvalidateCache
     ec = g_dispbuf->FlushCache(*bHandle);
     if (ec != HDF_SUCCESS) {
         HDF_LOGE("flushCache failed.");
@@ -136,7 +128,6 @@ int32_t DisplayBufferMtAdditional::RunTest(const AllocInfo &info)
         return HDF_FAILURE;
     }
     HDF_LOGD("flush Cache success.");
-    // free buffer
     g_dispbuf->Unmap(*bHandle);
     g_dispbuf->FreeMem(*bHandle);
     return HDF_SUCCESS;
@@ -539,7 +530,6 @@ HWTEST_F(DisplayBufferMtAdditional, testHatsHdfDisplayBufferMtTestAdditionalAllo
         EXPECT_EQ(HDF_SUCCESS, ret);
     }
 }
-#ifdef DISPLAY_COMMUNITY
 /**
  * @tc.number : SUB_Driver_Display_0030
  * @tc.name   : testHatsHdfDisplayBufferMtTestAdditionalAllocInfo020
@@ -2340,8 +2330,7 @@ HWTEST_F(DisplayBufferMtAdditional, SUB_Driver_Display_0550, TestSize.Level2)
     }
 }
 
-#endif
-} // namespace TEST
-} // namespace Display
-} // namespace HDI
-} // namespace OHOS
+}
+}
+}
+}

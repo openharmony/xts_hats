@@ -32,8 +32,8 @@ protected:
 public:
     int32_t RunTest(const AllocInfo& info);
 };
-} // OHOS
-} // HDI
-} // DISPLAY
-} // TEST
-#endif // DISPLAY_BUFFER_UT_H
+}
+}
+}
+}
+#endif

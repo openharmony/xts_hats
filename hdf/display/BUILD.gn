@@ -29,6 +29,7 @@ group("HatsHdfDisplayTest") {
   } else {
     deps = [
       "buffer:HatsHdfDisplayBufferTest",
+
       # "composer/benchmark:HatsHdfDisplayabenchmarkTest",
       "composer/death:HatsHdfDisplayComposerDeathTest",
       "composer/moduletest:HatszHdfDisplayComposerMtTest",

@@ -13,6 +13,9 @@
  * limitations under the License.
  */
 
+#ifndef DCAMERA_TEST_H
+#define DCAMERA_TEST_H
+
 #include "distributed_camera_errno.h"
 #include "icamera_state_listener.h"
 
@@ -40,3 +43,4 @@ public:
 };
 } // namespace DistributedHardware
 } // namespace OHOS
+#endif

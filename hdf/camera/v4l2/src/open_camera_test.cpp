@@ -71,13 +71,12 @@ HWTEST_F(OpenCameraTest, SUB_DriverSystem_CameraHdi_0010, TestSize.Level0)
   */
 HWTEST_F(OpenCameraTest, SUB_DriverSystem_CameraHdi_0670, TestSize.Level0)
 {
-    std::cout << "==========[test log] OpenCamera, cameraID is not found."<< std::endl;
-    sptr<ICameraHost> cameraHost = display_->CameraHostImplGetInstance();
+    CAMERA_LOGD("OpenCamera, cameraID is not found.");
     std::string cameraId = "qwerty";
     OHOS::sptr<ICameraDeviceCallback> callback = new DemoCameraDeviceCallback();
-    std::cout << "opencamera begin" << std::endl;
-    display_->rc = (CamRetCode)cameraHost->OpenCamera(cameraId, callback, display_->cameraDevice);
-    std::cout << "opencamera end" << std::endl;
+    CAMERA_LOGD("opencamera begin");
+    display_->rc = (CamRetCode)display_->cameraHost->OpenCamera(cameraId, callback, display_->cameraDevice);
+    CAMERA_LOGD("opencamera end");
     EXPECT_EQ(INVALID_ARGUMENT, display_->rc);
 }
 
@@ -139,7 +138,6 @@ HWTEST_F(OpenCameraTest, SUB_DriverSystem_CameraHdi_0700, TestSize.Level0)
 HWTEST_F(OpenCameraTest, SUB_DriverSystem_CameraHdi_0710, TestSize.Level0)
 {
     std::cout << "==========[test log] OpenCamera, cameraID is not found, callback is null."<< std::endl;
-    sptr<ICameraHost> cameraHost = display_->CameraHostImplGetInstance();
     std::string cameraId = "qwerty";
     OHOS::sptr<ICameraDeviceCallback> callback = nullptr;
     std::cout << "opencamera begin" << std::endl;

@@ -17,10 +17,18 @@ import("//test/xts/tools/build/suite.gni")
 
 group("HatsHdfDisplayBufferTest") {
   testonly = true
-  deps = [
-    "death:HatsHdfDisplayBufferDeathTest",
-    "moduletest:HatsHdfDisplayBufferMtTest",
-    "moduletest_additional:HatsHdfDisplayBufferMtTestAdditional",
-    "unittest:HatsHdfDisplayBufferUtTest",
-  ]
+  if (hats_rich == true) {
+    deps = [
+      "death:HatsHdfDisplayBufferDeathTest",
+      "moduletest:HatsHdfDisplayBufferMtTest",
+      "unittest:HatsHdfDisplayBufferUtTest",
+    ]
+  } else {
+    deps = [
+      "death:HatsHdfDisplayBufferDeathTest",
+      "moduletest:HatsHdfDisplayBufferMtTest",
+      "moduletest_additional:HatsHdfDisplayBufferMtTestAdditional",
+      "unittest:HatsHdfDisplayBufferUtTest",
+    ]
+  }
 }

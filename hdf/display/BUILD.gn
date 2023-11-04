@@ -13,6 +13,7 @@
 
 base_root = "../../../../../"
 import("//build/ohos_var.gni")
+import("//test/xts/hats/build.gni")
 import("$base_root/test/xts/hats/build.gni")
 import("$base_root/test/xts/tools/build/suite.gni")
 
@@ -24,7 +25,6 @@ group("HatsHdfDisplayTest") {
       "composer/death:HatsHdfDisplayComposerDeathTest",
       "composer/moduletest:HatszHdfDisplayComposerMtTest",
       "composer/unittest:HatszHdfDisplayComposerUtTest",
-      "composer/unittest_additional:HatsHdfDisplayComposerUtTestAdditional",
     ]
   } else {
     deps = [

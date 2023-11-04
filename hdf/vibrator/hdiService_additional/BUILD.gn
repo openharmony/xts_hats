@@ -11,24 +11,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-base_root = "../../../../../.."
+base_root = "../../../../../../"
 import("//build/ohos_var.gni")
 import("//test/xts/tools/build/suite.gni")
 import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 
-module_output_path = "hats/sensor"
-
-ohos_moduletest_suite("HatsHdfSensorServiceTestAdditional") {
+module_output_path = "hats/misc"
+ohos_moduletest_suite("HatsHdfVibratorServiceTestAdditional") {
   module_out_path = module_output_path
 
-  configs = [ ":hdf_sensor_hdiservice_additional" ]
-
-  deps = [ "../../../../../../drivers/peripheral/sensor/hal:hdi_sensor" ]
-
-  sources = [
-    "hdf_sensor_hdiService_test.cpp",
-    "sensor_callback_impl.cpp",
-  ]
+  sources = [ "hdf_vibrator_hdiService_test.cpp" ]
   cflags = [
     "-Wall",
     "-Wextra",
@@ -41,7 +33,7 @@ ohos_moduletest_suite("HatsHdfSensorServiceTestAdditional") {
   if (is_standard_system) {
     external_deps = [
       "c_utils:utils",
-      "drivers_interface_sensor:libsensor_proxy_1.1",
+      "drivers_interface_vibrator:libvibrator_proxy_1.1",
       "hdf_core:libhdf_utils",
       "hilog:libhilog",
       "ipc:ipc_single",
@@ -50,11 +42,4 @@ ohos_moduletest_suite("HatsHdfSensorServiceTestAdditional") {
     external_deps = [ "hilog:libhilog" ]
   }
   external_deps += [ "ipc:ipc_single" ]
-}
-
-config("hdf_sensor_hdiservice_additional") {
-  include_dirs = [
-    "$base_root/drivers/peripheral/sensor/interfaces",
-    "$base_root/drivers/peripheral/sensor/interfaces/include",
-  ]
 }

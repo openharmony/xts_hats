@@ -158,7 +158,7 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0270)
     bufferData.push_back(SAMPLE_DATA_1);
     bufferData.push_back(SAMPLE_DATA_2);
     bufferData.push_back(SAMPLE_DATA_3);
-    struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_INTERFACE,
+    struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT,
         USB_DDK_REQ_GET_CONFIGURATION, 0, 0, TRANSFER_TIME_OUT};
     auto ret = 0;
     for (auto _ : st) {

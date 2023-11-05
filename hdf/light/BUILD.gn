@@ -22,8 +22,8 @@ group("HatsHdfLightTest") {
     deps = [
       #"liteos:HatsHdfLightHdiTest",
       "hdiService:HatsHdfLightCommonTest",
+      "hdiService_additional:HatsHdfLightCommonTestAdditional",
       "hdiService:HatsHdfLightServiceTest",
-
       #"lightBenchmarkTest:HatsHdfLightbenchmarkTest",
     ]
   }

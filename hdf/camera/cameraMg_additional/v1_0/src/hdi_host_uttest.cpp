@@ -96,3 +96,67 @@ HWTEST_F(HdiHostUtTestAdditional, testSetFlashLight003, Function | MediumTest | 
         }
     }
 }
+
+/**
+ * @tc.number: SUB_Driver_Camera_GetCameraAbility_0100
+ * @tc.name: testGetCameraAbility001
+ * @tc.desc: GetCameraAbility, cameraId is not found
+ */
+HWTEST_F(HdiHostUtTestAdditional, testGetCameraAbility001, Function | MediumTest | Level2)
+{
+    EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
+    if (cameraTest->cameraDevice == nullptr) {
+        std::string testCameraId = "abc";
+        cameraTest->rc = cameraTest->service->GetCameraAbility(testCameraId, cameraTest->abilityVec);
+        EXPECT_EQ(true, cameraTest->rc == INVALID_ARGUMENT);
+    }
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_GetCameraAbility_0200
+ * @tc.name: testGetCameraAbility002
+ * @tc.desc: GetCameraAbility, cameraId is not found
+ */
+HWTEST_F(HdiHostUtTestAdditional, testGetCameraAbility002, Function | MediumTest | Level2)
+{
+    EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
+    if (cameraTest->cameraDevice == nullptr) {
+        std::string testCameraId = "1";
+        cameraTest->rc = cameraTest->service->GetCameraAbility(testCameraId, cameraTest->abilityVec);
+        EXPECT_EQ(true, cameraTest->rc == INVALID_ARGUMENT);
+    }
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_OpenCamera_0100
+ * @tc.name: testOpenCamera001
+ * @tc.desc: OpenCamera, cameraId is illegal, callback is null
+ */
+HWTEST_F(HdiHostUtTestAdditional, testOpenCamera001, Function | MediumTest | Level2)
+{
+    EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
+    if (cameraTest->cameraDevice == nullptr) {
+        std::string testCameraId = "1";
+        cameraTest->deviceCallback = nullptr;
+        cameraTest->rc =
+            cameraTest->service->OpenCamera(testCameraId, cameraTest->deviceCallback, cameraTest->cameraDevice);
+        EXPECT_EQ(true, cameraTest->rc == INVALID_ARGUMENT);
+    }
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_OpenCamera_0200
+ * @tc.name: testOpenCamera002
+ * @tc.desc: OpenCamera, cameraId is empty, callback is null
+ */
+HWTEST_F(HdiHostUtTestAdditional, testOpenCamera002, Function | MediumTest | Level2)
+{
+    EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
+    if (cameraTest->cameraDevice == nullptr) {
+        std::string testCameraId = "";
+        cameraTest->deviceCallback = nullptr;
+        cameraTest->rc =
+            cameraTest->service->OpenCamera(testCameraId, cameraTest->deviceCallback, cameraTest->cameraDevice);
+        EXPECT_EQ(true, cameraTest->rc == INVALID_ARGUMENT);
+    }
+}

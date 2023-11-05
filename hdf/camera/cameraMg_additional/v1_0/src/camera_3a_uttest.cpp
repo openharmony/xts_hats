@@ -1474,3 +1474,579 @@ HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings060, Function | MediumTest 
     cameraTest->streamIds = {cameraTest->streamIdPreview};
     cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
 }
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_6100
+ * @tc.name: testUpdateSettings061
+ * @tc.desc: UpdateSettings, OHOS_CONTROL_AWB_LOCK
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings061, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t awbLock = OHOS_CAMERA_AWB_LOCK_OFF;
+    meta->addEntry(OHOS_CONTROL_AWB_LOCK, &awbLock, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_6200
+ * @tc.name: testUpdateSettings062
+ * @tc.desc: UpdateSettings, OHOS_CONTROL_AWB_LOCK
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings062, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t awbLock = OHOS_CAMERA_AWB_LOCK_ON;
+    meta->addEntry(OHOS_CONTROL_AWB_LOCK, &awbLock, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_6300
+ * @tc.name: testUpdateSettings063
+ * @tc.desc: UpdateSettings, OHOS_CONTROL_AWB_MODE
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings063, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t awbMode = OHOS_CAMERA_AWB_MODE_OFF;
+    meta->addEntry(OHOS_CONTROL_AWB_MODE, &awbMode, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_6400
+ * @tc.name: testUpdateSettings064
+ * @tc.desc: UpdateSettings, OHOS_CONTROL_AWB_MODE
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings064, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t awbMode = OHOS_CAMERA_AWB_MODE_INCANDESCENT;
+    meta->addEntry(OHOS_CONTROL_AWB_MODE, &awbMode, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_6500
+ * @tc.name: testUpdateSettings065
+ * @tc.desc: UpdateSettings, OHOS_CONTROL_AWB_MODE
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings065, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t awbMode = OHOS_CAMERA_AWB_MODE_FLUORESCENT;
+    meta->addEntry(OHOS_CONTROL_AWB_MODE, &awbMode, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_6600
+ * @tc.name: testUpdateSettings066
+ * @tc.desc: UpdateSettings, OHOS_CONTROL_AWB_MODE
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings066, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t awbMode = OHOS_CAMERA_AWB_MODE_WARM_FLUORESCENT;
+    meta->addEntry(OHOS_CONTROL_AWB_MODE, &awbMode, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_6700
+ * @tc.name: testUpdateSettings067
+ * @tc.desc: UpdateSettings, OHOS_CONTROL_AWB_MODE
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings067, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t awbMode = OHOS_CAMERA_AWB_MODE_DAYLIGHT;
+    meta->addEntry(OHOS_CONTROL_AWB_MODE, &awbMode, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_6800
+ * @tc.name: testUpdateSettings068
+ * @tc.desc: UpdateSettings, OHOS_CONTROL_AWB_MODE
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings068, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t awbMode = OHOS_CAMERA_AWB_MODE_CLOUDY_DAYLIGHT;
+    meta->addEntry(OHOS_CONTROL_AWB_MODE, &awbMode, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_6900
+ * @tc.name: testUpdateSettings069
+ * @tc.desc: UpdateSettings, OHOS_CONTROL_AWB_MODE
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings069, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t awbMode = OHOS_CAMERA_AWB_MODE_TWILIGHT;
+    meta->addEntry(OHOS_CONTROL_AWB_MODE, &awbMode, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_7000
+ * @tc.name: testUpdateSettings070
+ * @tc.desc: UpdateSettings, OHOS_CONTROL_AWB_MODE
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings070, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t awbMode = OHOS_CAMERA_AWB_MODE_SHADE;
+    meta->addEntry(OHOS_CONTROL_AWB_MODE, &awbMode, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_7100
+ * @tc.name: testUpdateSettings071
+ * @tc.desc: UpdateSettings, OHOS_STATISTICS_FACE_DETECT_MODE
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings071, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t faceDetectMode = OHOS_CAMERA_FACE_DETECT_MODE_OFF;
+    meta->addEntry(OHOS_STATISTICS_FACE_DETECT_MODE, &faceDetectMode, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_7200
+ * @tc.name: testUpdateSettings072
+ * @tc.desc: UpdateSettings, OHOS_STATISTICS_FACE_DETECT_MODE
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings072, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t faceDetectMode = OHOS_CAMERA_FACE_DETECT_MODE_SIMPLE;
+    meta->addEntry(OHOS_STATISTICS_FACE_DETECT_MODE, &faceDetectMode, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_7300
+ * @tc.name: testUpdateSettings073
+ * @tc.desc: UpdateSettings, OHOS_STATISTICS_HISTOGRAM_MODE
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings073, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t histogramMode = OHOS_CAMERA_HISTOGRAM_MODE_OFF;
+    meta->addEntry(OHOS_STATISTICS_HISTOGRAM_MODE, &histogramMode, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_7400
+ * @tc.name: testUpdateSettings074
+ * @tc.desc: UpdateSettings, OHOS_STATISTICS_HISTOGRAM_MODE
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings074, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t histogramMode = OHOS_CAMERA_HISTOGRAM_MODE_ON;
+    meta->addEntry(OHOS_STATISTICS_HISTOGRAM_MODE, &histogramMode, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_7500
+ * @tc.name: testUpdateSettings075
+ * @tc.desc: UpdateSettings, OHOS_STREAM_AVAILABLE_FORMATS
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings075, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t availableFormats = OHOS_CAMERA_FORMAT_RGBA_8888;
+    meta->addEntry(OHOS_STREAM_AVAILABLE_FORMATS, &availableFormats, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_7600
+ * @tc.name: testUpdateSettings076
+ * @tc.desc: UpdateSettings, OHOS_STREAM_AVAILABLE_FORMATS
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings076, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t availableFormats = OHOS_CAMERA_FORMAT_YCBCR_420_888;
+    meta->addEntry(OHOS_STREAM_AVAILABLE_FORMATS, &availableFormats, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_7700
+ * @tc.name: testUpdateSettings077
+ * @tc.desc: UpdateSettings, OHOS_STREAM_AVAILABLE_FORMATS
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings077, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t availableFormats = OHOS_CAMERA_FORMAT_YCRCB_420_SP;
+    meta->addEntry(OHOS_STREAM_AVAILABLE_FORMATS, &availableFormats, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_7800
+ * @tc.name: testUpdateSettings078
+ * @tc.desc: UpdateSettings, OHOS_STREAM_AVAILABLE_FORMATS
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings078, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t availableFormats = OHOS_CAMERA_FORMAT_JPEG;
+    meta->addEntry(OHOS_STREAM_AVAILABLE_FORMATS, &availableFormats, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_7900
+ * @tc.name: testUpdateSettings079
+ * @tc.desc: UpdateSettings, OHOS_STREAM_AVAILABLE_FORMATS
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings079, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t availableFormats = OHOS_CAMERA_FORMAT_IMPLEMENTATION_DEFINED;
+    meta->addEntry(OHOS_STREAM_AVAILABLE_FORMATS, &availableFormats, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_8000
+ * @tc.name: testUpdateSettings080
+ * @tc.desc: UpdateSettings, OHOS_ABILITY_STREAM_QUICK_THUMBNAIL_AVAILABLE
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings080, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t quickAvailable = OHOS_CAMERA_QUICK_THUMBNAIL_FALSE;
+    meta->addEntry(OHOS_ABILITY_STREAM_QUICK_THUMBNAIL_AVAILABLE, &quickAvailable, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_8100
+ * @tc.name: testUpdateSettings081
+ * @tc.desc: UpdateSettings, OHOS_ABILITY_STREAM_QUICK_THUMBNAIL_AVAILABLE
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings081, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t quickAvailable = OHOS_CAMERA_QUICK_THUMBNAIL_TRUE;
+    meta->addEntry(OHOS_ABILITY_STREAM_QUICK_THUMBNAIL_AVAILABLE, &quickAvailable, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_8200
+ * @tc.name: testUpdateSettings082
+ * @tc.desc: UpdateSettings, OHOS_CONTROL_FOCUS_STATE
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings082, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t focusState = OHOS_CAMERA_FOCUS_STATE_SCAN;
+    meta->addEntry(OHOS_CONTROL_FOCUS_STATE, &focusState, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_8300
+ * @tc.name: testUpdateSettings083
+ * @tc.desc: UpdateSettings, OHOS_CONTROL_FOCUS_STATE
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings083, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t focusState = OHOS_CAMERA_FOCUS_STATE_FOCUSED;
+    meta->addEntry(OHOS_CONTROL_FOCUS_STATE, &focusState, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number: SUB_Driver_Camera_UpdateSettings_8400
+ * @tc.name: testUpdateSettings084
+ * @tc.desc: UpdateSettings, OHOS_CONTROL_FOCUS_STATE
+ */
+HWTEST_F(Camera3AUtTestAdditional, testUpdateSettings084, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    std::shared_ptr<CameraMetadata> meta = std::make_shared<CameraSetting>(100, 200);
+    uint8_t focusState = OHOS_CAMERA_FOCUS_STATE_UNFOCUSED;
+    meta->addEntry(OHOS_CONTROL_FOCUS_STATE, &focusState, 1);
+    std::vector<uint8_t> metaVec;
+    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
+    cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}

@@ -1530,3 +1530,2244 @@ HWTEST_F(HdiStreamUtTestAdditional, testCreateStreams009, Function | MediumTest 
         EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     }
 }
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_0100
+ * @tc.name   : testCommitStreams001
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AE_EXPOSURE_COMPENSATION, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams001, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    int32_t expo = 0xa0;
+    modeSetting->addEntry(OHOS_CONTROL_AE_EXPOSURE_COMPENSATION, &expo, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_0200
+ * @tc.name   : testCommitStreams002
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AF_STATE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams002, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t afState = OHOS_CAMERA_AF_STATE_INACTIVE;
+    modeSetting->addEntry(OHOS_CONTROL_AF_STATE, &afState, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_0300
+ * @tc.name   : testCommitStreams003
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AF_STATE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams003, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t afState = OHOS_CAMERA_AF_STATE_PASSIVE_SCAN;
+    modeSetting->addEntry(OHOS_CONTROL_AF_STATE, &afState, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_0400
+ * @tc.name   : testCommitStreams004
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AF_STATE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams004, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t afState = OHOS_CAMERA_AF_STATE_PASSIVE_FOCUSED;
+    modeSetting->addEntry(OHOS_CONTROL_AF_STATE, &afState, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_0500
+ * @tc.name   : testCommitStreams005
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AF_STATE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams005, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t afState = OHOS_CAMERA_AF_STATE_ACTIVE_SCAN;
+    modeSetting->addEntry(OHOS_CONTROL_AF_STATE, &afState, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_0600
+ * @tc.name   : testCommitStreams006
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AF_STATE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams006, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t afState = OHOS_CAMERA_AF_STATE_FOCUSED_LOCKED;
+    modeSetting->addEntry(OHOS_CONTROL_AF_STATE, &afState, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_0700
+ * @tc.name   : testCommitStreams007
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AF_STATE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams007, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t afState = OHOS_CAMERA_AF_STATE_NOT_FOCUSED_LOCKED;
+    modeSetting->addEntry(OHOS_CONTROL_AF_STATE, &afState, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_0800
+ * @tc.name   : testCommitStreams008
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AF_STATE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams008, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t afState = OHOS_CAMERA_AF_STATE_PASSIVE_UNFOCUSED;
+    modeSetting->addEntry(OHOS_CONTROL_AF_STATE, &afState, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_0900
+ * @tc.name   : testCommitStreams009
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AF_MODE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams009, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t afMode = OHOS_CAMERA_AF_MODE_OFF;
+    modeSetting->addEntry(OHOS_CONTROL_AF_MODE, &afMode, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_1000
+ * @tc.name   : testCommitStreams010
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AF_MODE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams010, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t afMode = OHOS_CAMERA_AF_MODE_AUTO;
+    modeSetting->addEntry(OHOS_CONTROL_AF_MODE, &afMode, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_1100
+ * @tc.name   : testCommitStreams011
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AF_MODE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams011, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t afMode = OHOS_CAMERA_AF_MODE_MACRO;
+    modeSetting->addEntry(OHOS_CONTROL_AF_MODE, &afMode, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_1200
+ * @tc.name   : testCommitStreams012
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AF_MODE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams012, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t afMode = OHOS_CAMERA_AF_MODE_CONTINUOUS_VIDEO;
+    modeSetting->addEntry(OHOS_CONTROL_AF_MODE, &afMode, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_1300
+ * @tc.name   : testCommitStreams013
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AF_MODE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams013, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t afMode = OHOS_CAMERA_AF_MODE_CONTINUOUS_PICTURE;
+    modeSetting->addEntry(OHOS_CONTROL_AF_MODE, &afMode, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_1400
+ * @tc.name   : testCommitStreams014
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AF_MODE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams014, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t afMode = OHOS_CAMERA_AF_MODE_EDOF;
+    modeSetting->addEntry(OHOS_CONTROL_AF_MODE, &afMode, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_1500
+ * @tc.name   : testCommitStreams015
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AE_ANTIBANDING_MODE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams015, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t aeAntibandingMode = OHOS_CAMERA_AE_ANTIBANDING_MODE_OFF;
+    modeSetting->addEntry(OHOS_CONTROL_AE_ANTIBANDING_MODE, &aeAntibandingMode, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_1600
+ * @tc.name   : testCommitStreams016
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AE_ANTIBANDING_MODE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams016, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t aeAntibandingMode = OHOS_CAMERA_AE_ANTIBANDING_MODE_50HZ;
+    modeSetting->addEntry(OHOS_CONTROL_AE_ANTIBANDING_MODE, &aeAntibandingMode, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_1700
+ * @tc.name   : testCommitStreams017
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AE_ANTIBANDING_MODE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams017, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t aeAntibandingMode = OHOS_CAMERA_AE_ANTIBANDING_MODE_60HZ;
+    modeSetting->addEntry(OHOS_CONTROL_AE_ANTIBANDING_MODE, &aeAntibandingMode, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_1800
+ * @tc.name   : testCommitStreams018
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AE_ANTIBANDING_MODE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams018, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t aeAntibandingMode = OHOS_CAMERA_AE_ANTIBANDING_MODE_AUTO;
+    modeSetting->addEntry(OHOS_CONTROL_AE_ANTIBANDING_MODE, &aeAntibandingMode, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_1900
+ * @tc.name   : testCommitStreams019
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AF_TRIGGER, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams019, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t afTrigger = OHOS_CAMERA_AF_TRIGGER_IDLE;
+    modeSetting->addEntry(OHOS_CONTROL_AF_TRIGGER, &afTrigger, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_2000
+ * @tc.name   : testCommitStreams020
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AF_TRIGGER, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams020, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t afTrigger = OHOS_CAMERA_AF_TRIGGER_START;
+    modeSetting->addEntry(OHOS_CONTROL_AF_TRIGGER, &afTrigger, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_2100
+ * @tc.name   : testCommitStreams021
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AF_TRIGGER, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams021, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t afTrigger = OHOS_CAMERA_AF_TRIGGER_CANCEL;
+    modeSetting->addEntry(OHOS_CONTROL_AF_TRIGGER, &afTrigger, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_2200
+ * @tc.name   : testCommitStreams022
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AF_TRIGGER, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams022, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t abilityCameraPosition = OHOS_CAMERA_POSITION_FRONT;
+    modeSetting->addEntry(OHOS_ABILITY_CAMERA_POSITION, &abilityCameraPosition, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_2300
+ * @tc.name   : testCommitStreams023
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AF_TRIGGER, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams023, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t abilityCameraPosition = OHOS_CAMERA_POSITION_BACK;
+    modeSetting->addEntry(OHOS_ABILITY_CAMERA_POSITION, &abilityCameraPosition, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_2400
+ * @tc.name   : testCommitStreams024
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AF_TRIGGER, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams024, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t abilityCameraPosition = OHOS_CAMERA_POSITION_OTHER;
+    modeSetting->addEntry(OHOS_ABILITY_CAMERA_POSITION, &abilityCameraPosition, 1);
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_GetStreamAttributes_0100
+ * @tc.name   : testGetStreamAttributes001
+ * @tc.desc   : GetStreamAttributes, StreamInfo->streamId_ = -1, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testGetStreamAttributes001, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc =
+        cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback, cameraTest->streamOperator);
+    EXPECT_EQ(false, cameraTest->rc != HDI::Camera::V1_0::NO_ERROR || cameraTest->streamOperator == nullptr);
+
+    cameraTest->streamInfo = std::make_shared<StreamInfo>();
+    cameraTest->streamInfo->streamId_ = -1;
+    cameraTest->streamInfo->width_ = 640;
+    cameraTest->streamInfo->height_ = 480;
+    cameraTest->streamInfo->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfo->dataspace_ = 8;
+    cameraTest->streamInfo->intent_ = PREVIEW;
+    cameraTest->streamInfo->tunneledMode_ = 5;
+
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfo->bufferQueue_ = consumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+    });
+
+    cameraTest->consumerMap_[cameraTest->streamInfo->intent_] = consumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
+    cameraTest->rc = cameraTest->streamOperator->CreateStreams(cameraTest->streamInfos);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::INVALID_ARGUMENT);
+
+    std::vector<StreamAttribute> attributes;
+    cameraTest->rc = cameraTest->streamOperator->GetStreamAttributes(attributes);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_AttachBufferQueue_0100
+ * @tc.name   : testAttachBufferQueue001
+ * @tc.desc   : AttachBufferQueue, StreamInfo->streamId_ = 2147483647, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testAttachBufferQueue001, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc =
+        cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback, cameraTest->streamOperator);
+
+    cameraTest->streamInfo = std::make_shared<StreamInfo>();
+    cameraTest->streamInfo->streamId_ = 101; // PREVIEW streamId
+    cameraTest->streamInfo->width_ = 720;    // Pixel Width
+    cameraTest->streamInfo->height_ = 480;   // Pixel height
+    cameraTest->streamInfo->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfo->dataspace_ = UT_DATA_SIZE;
+    cameraTest->streamInfo->intent_ = PREVIEW;
+    cameraTest->streamInfo->tunneledMode_ = UT_TUNNEL_MODE;
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfo->bufferQueue_ = consumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+    });
+
+    cameraTest->streamInfo->bufferQueue_->producer_->SetQueueSize(UT_DATA_SIZE);
+    cameraTest->consumerMap_[cameraTest->streamInfo->intent_] = consumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
+
+    cameraTest->streamInfoSnapshot = std::make_shared<StreamInfo>();
+    cameraTest->streamInfoSnapshot->streamId_ = 2147483647; // STILL_CAPTURE streamId
+    cameraTest->streamInfoSnapshot->width_ = 720;           // Pixel Width
+    cameraTest->streamInfoSnapshot->height_ = 480;          // Pixel height
+    cameraTest->streamInfoSnapshot->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfoSnapshot->dataspace_ = UT_DATA_SIZE;
+    cameraTest->streamInfoSnapshot->intent_ = STILL_CAPTURE;
+    cameraTest->streamInfoSnapshot->tunneledMode_ = UT_TUNNEL_MODE;
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> snapshotConsumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfoSnapshot->bufferQueue_ =
+        snapshotConsumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+            cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+        });
+
+    cameraTest->streamInfoSnapshot->bufferQueue_->producer_->SetQueueSize(UT_DATA_SIZE);
+    cameraTest->consumerMap_[cameraTest->streamInfoSnapshot->intent_] = snapshotConsumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfoSnapshot);
+
+    cameraTest->rc = cameraTest->streamOperator->CreateStreams(cameraTest->streamInfos);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> preview_consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    OHOS::sptr<OHOS::IBufferProducer> producerTemp =
+        preview_consumer->CreateProducer([this](void *addr, uint32_t size) {
+            cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+        });
+
+    OHOS::sptr<BufferProducerSequenceable> bufferQueue = new BufferProducerSequenceable(producerTemp);
+    cameraTest->rc =
+        cameraTest->streamOperator->AttachBufferQueue(cameraTest->streamInfoSnapshot->streamId_, bufferQueue);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    cameraTest->rc = cameraTest->streamOperator->DetachBufferQueue(cameraTest->streamInfoSnapshot->streamId_);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<int> streamIds = {cameraTest->streamInfo->streamId_, cameraTest->streamInfoSnapshot->streamId_};
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams(streamIds);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_DetachBufferQueue_0100
+ * @tc.name   : testDetachBufferQueue001
+ * @tc.desc   : DetachBufferQueue, params = 101, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testDetachBufferQueue001, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc =
+        cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback, cameraTest->streamOperator);
+
+    cameraTest->streamInfo = std::make_shared<StreamInfo>();
+    cameraTest->streamInfo->streamId_ = 101; // PREVIEW streamId
+    cameraTest->streamInfo->width_ = 720;    // Pixel Width
+    cameraTest->streamInfo->height_ = 480;   // Pixel height
+    cameraTest->streamInfo->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfo->dataspace_ = UT_DATA_SIZE;
+    cameraTest->streamInfo->intent_ = PREVIEW;
+    cameraTest->streamInfo->tunneledMode_ = UT_TUNNEL_MODE;
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfo->bufferQueue_ = consumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+    });
+
+    cameraTest->streamInfo->bufferQueue_->producer_->SetQueueSize(UT_DATA_SIZE);
+    cameraTest->consumerMap_[cameraTest->streamInfo->intent_] = consumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
+
+    cameraTest->streamInfoSnapshot = std::make_shared<StreamInfo>();
+    cameraTest->streamInfoSnapshot->streamId_ = 102; // STILL_CAPTURE streamId
+    cameraTest->streamInfoSnapshot->width_ = 720;    // Pixel Width
+    cameraTest->streamInfoSnapshot->height_ = 480;   // Pixel height
+    cameraTest->streamInfoSnapshot->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfoSnapshot->dataspace_ = UT_DATA_SIZE;
+    cameraTest->streamInfoSnapshot->intent_ = STILL_CAPTURE;
+    cameraTest->streamInfoSnapshot->tunneledMode_ = UT_TUNNEL_MODE;
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> snapshotConsumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfoSnapshot->bufferQueue_ =
+        snapshotConsumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+            cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+        });
+
+    cameraTest->streamInfoSnapshot->bufferQueue_->producer_->SetQueueSize(UT_DATA_SIZE);
+    cameraTest->consumerMap_[cameraTest->streamInfoSnapshot->intent_] = snapshotConsumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfoSnapshot);
+
+    cameraTest->rc = cameraTest->streamOperator->CreateStreams(cameraTest->streamInfos);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> preview_consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    OHOS::sptr<OHOS::IBufferProducer> producerTemp =
+        preview_consumer->CreateProducer([this](void *addr, uint32_t size) {
+            cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+        });
+
+    OHOS::sptr<BufferProducerSequenceable> bufferQueue = new BufferProducerSequenceable(producerTemp);
+    cameraTest->rc =
+        cameraTest->streamOperator->AttachBufferQueue(cameraTest->streamInfoSnapshot->streamId_, bufferQueue);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    cameraTest->rc = cameraTest->streamOperator->DetachBufferQueue(cameraTest->streamInfo->streamId_);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<int> streamIds = {cameraTest->streamInfo->streamId_, cameraTest->streamInfoSnapshot->streamId_};
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams(streamIds);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_ChangeToOfflineStream_0100
+ * @tc.name   : testChangeToOfflineStream001
+ * @tc.desc   : ChangeToOfflineStream, StreamInfo->streamId_ = 2147483647, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testChangeToOfflineStream001, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc =
+        cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback, cameraTest->streamOperator);
+
+    cameraTest->streamInfo = std::make_shared<StreamInfo>();
+    cameraTest->streamInfo->streamId_ = 101;
+    cameraTest->streamInfo->width_ = 720;
+    cameraTest->streamInfo->height_ = 480;
+    cameraTest->streamInfo->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfo->dataspace_ = UT_DATA_SIZE;
+    cameraTest->streamInfo->intent_ = PREVIEW;
+    cameraTest->streamInfo->tunneledMode_ = UT_TUNNEL_MODE;
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfo->bufferQueue_ = consumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+    });
+    cameraTest->streamInfo->bufferQueue_->producer_->SetQueueSize(UT_DATA_SIZE);
+    cameraTest->consumerMap_[cameraTest->streamInfo->intent_] = consumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
+
+    cameraTest->streamInfoSnapshot = std::make_shared<StreamInfo>();
+    cameraTest->streamInfoSnapshot->streamId_ = 2147483647;
+    cameraTest->streamInfoSnapshot->width_ = 720;
+    cameraTest->streamInfoSnapshot->height_ = 480;
+    cameraTest->streamInfoSnapshot->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfoSnapshot->dataspace_ = UT_DATA_SIZE;
+    cameraTest->streamInfoSnapshot->intent_ = STILL_CAPTURE;
+    cameraTest->streamInfoSnapshot->tunneledMode_ = UT_TUNNEL_MODE;
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> snapshotConsumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfoSnapshot->bufferQueue_ =
+        snapshotConsumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+            cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+        });
+    cameraTest->streamInfoSnapshot->bufferQueue_->producer_->SetQueueSize(UT_DATA_SIZE);
+    cameraTest->consumerMap_[cameraTest->streamInfoSnapshot->intent_] = snapshotConsumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfoSnapshot);
+
+    cameraTest->rc = (CamRetCode)cameraTest->streamOperator->CreateStreams(cameraTest->streamInfos);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+
+    cameraTest->rc =
+        (CamRetCode)cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, cameraTest->abilityVec);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+
+    int captureId = 2001;
+    cameraTest->captureInfo = std::make_shared<CaptureInfo>();
+    cameraTest->captureInfo->streamIds_ = {2147483647};
+    cameraTest->captureInfo->captureSetting_ = cameraTest->abilityVec;
+    cameraTest->captureInfo->enableShutterCallback_ = true;
+    bool isStreaming = true;
+    cameraTest->rc = (CamRetCode)cameraTest->streamOperator->Capture(captureId, *cameraTest->captureInfo, isStreaming);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+    sleep(UT_SECOND_TIMES);
+    OHOS::sptr<IStreamOperatorCallback> streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    OHOS::sptr<IOfflineStreamOperator> offlineStreamOperator = nullptr;
+
+    cameraTest->rc = (CamRetCode)cameraTest->streamOperator->ChangeToOfflineStream(
+        {cameraTest->streamInfoSnapshot->streamId_}, streamOperatorCallback, offlineStreamOperator);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+
+    sleep(UT_SECOND_TIMES);
+
+    cameraTest->rc = (CamRetCode)offlineStreamOperator->CancelCapture(captureId);
+
+    EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<int> streamIds = {2147483647};
+    cameraTest->rc = (CamRetCode)offlineStreamOperator->ReleaseStreams(streamIds);
+    EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+
+    cameraTest->rc = (CamRetCode)offlineStreamOperator->Release();
+    EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_Capture_0100
+ * @tc.name   : testCapture001
+ * @tc.desc   : Capture, streamIds_ = -1, captureId = -1, return error
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCapture001, Function | MediumTest | Level2)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+    int captureId = -1;
+    cameraTest->captureInfo = std::make_shared<CaptureInfo>();
+    cameraTest->captureInfo->streamIds_ = {-1};
+    cameraTest->captureInfo->captureSetting_ = cameraTest->abilityVec;
+    cameraTest->captureInfo->enableShutterCallback_ = true;
+    cameraTest->rc = cameraTest->streamOperator->Capture(captureId, *cameraTest->captureInfo, true);
+    EXPECT_EQ(HDI::Camera::V1_0::INVALID_ARGUMENT, cameraTest->rc);
+    sleep(1);
+    cameraTest->streamOperator->CancelCapture(captureId);
+    cameraTest->captureIds = {};
+    cameraTest->streamIds = {cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CancelCapture_0500
+ * @tc.name   : testCancelCapture005
+ * @tc.desc   : CancelCapture, captureId = 2147483647, return error
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCancelCapture005, Function | MediumTest | Level2)
+{
+    cameraTest->Open();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc =
+        cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback, cameraTest->streamOperator);
+
+    cameraTest->streamInfo = std::make_shared<StreamInfo>();
+    cameraTest->streamInfo->streamId_ = 101;
+    cameraTest->streamInfo->width_ = 720;
+    cameraTest->streamInfo->height_ = 480;
+    cameraTest->streamInfo->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfo->dataspace_ = UT_DATA_SIZE;
+    cameraTest->streamInfo->intent_ = PREVIEW;
+    cameraTest->streamInfo->tunneledMode_ = UT_TUNNEL_MODE;
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfo->bufferQueue_ = consumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+    });
+    cameraTest->streamInfo->bufferQueue_->producer_->SetQueueSize(UT_DATA_SIZE);
+    cameraTest->consumerMap_[cameraTest->streamInfo->intent_] = consumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
+
+    cameraTest->streamInfoSnapshot = std::make_shared<StreamInfo>();
+    cameraTest->streamInfoSnapshot->streamId_ = 102;
+    cameraTest->streamInfoSnapshot->width_ = 720;
+    cameraTest->streamInfoSnapshot->height_ = 480;
+    cameraTest->streamInfoSnapshot->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfoSnapshot->dataspace_ = UT_DATA_SIZE;
+    cameraTest->streamInfoSnapshot->intent_ = STILL_CAPTURE;
+    cameraTest->streamInfoSnapshot->tunneledMode_ = UT_TUNNEL_MODE;
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> snapshotConsumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfoSnapshot->bufferQueue_ =
+        snapshotConsumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+            cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+        });
+    cameraTest->streamInfoSnapshot->bufferQueue_->producer_->SetQueueSize(UT_DATA_SIZE);
+    cameraTest->consumerMap_[cameraTest->streamInfoSnapshot->intent_] = snapshotConsumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfoSnapshot);
+
+    cameraTest->rc = (CamRetCode)cameraTest->streamOperator->CreateStreams(cameraTest->streamInfos);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+
+    cameraTest->rc =
+        (CamRetCode)cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, cameraTest->abilityVec);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+
+    int captureId = 2147483647;
+    cameraTest->captureInfo = std::make_shared<CaptureInfo>();
+    cameraTest->captureInfo->streamIds_ = {102};
+    cameraTest->captureInfo->captureSetting_ = cameraTest->abilityVec;
+    cameraTest->captureInfo->enableShutterCallback_ = true;
+    bool isStreaming = true;
+    cameraTest->rc = (CamRetCode)cameraTest->streamOperator->Capture(captureId, *cameraTest->captureInfo, isStreaming);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+    sleep(UT_SECOND_TIMES);
+    OHOS::sptr<IStreamOperatorCallback> streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    OHOS::sptr<IOfflineStreamOperator> offlineStreamOperator = nullptr;
+
+    cameraTest->rc = (CamRetCode)cameraTest->streamOperator->ChangeToOfflineStream(
+        {cameraTest->streamInfoSnapshot->streamId_}, streamOperatorCallback, offlineStreamOperator);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+
+    sleep(UT_SECOND_TIMES);
+
+    cameraTest->rc = (CamRetCode)offlineStreamOperator->CancelCapture(captureId);
+
+    EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<int> streamIds = {102};
+    cameraTest->rc = (CamRetCode)offlineStreamOperator->ReleaseStreams(streamIds);
+    EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+
+    cameraTest->rc = (CamRetCode)offlineStreamOperator->Release();
+    EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_ReleaseStreams_0300
+ * @tc.name   : testReleaseStreams003
+ * @tc.desc   : ReleaseStreams, params = 101, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testReleaseStreams003, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc =
+        cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback, cameraTest->streamOperator);
+
+    cameraTest->streamInfo = std::make_shared<StreamInfo>();
+    cameraTest->streamInfo->streamId_ = 101;
+    cameraTest->streamInfo->width_ = 720;
+    cameraTest->streamInfo->height_ = 480;
+    cameraTest->streamInfo->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfo->dataspace_ = UT_DATA_SIZE;
+    cameraTest->streamInfo->intent_ = PREVIEW;
+    cameraTest->streamInfo->tunneledMode_ = UT_TUNNEL_MODE;
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfo->bufferQueue_ = consumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+    });
+    cameraTest->streamInfo->bufferQueue_->producer_->SetQueueSize(UT_DATA_SIZE);
+    cameraTest->consumerMap_[cameraTest->streamInfo->intent_] = consumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
+
+    cameraTest->streamInfoSnapshot = std::make_shared<StreamInfo>();
+    cameraTest->streamInfoSnapshot->streamId_ = 102;
+    cameraTest->streamInfoSnapshot->width_ = 720;
+    cameraTest->streamInfoSnapshot->height_ = 480;
+    cameraTest->streamInfoSnapshot->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfoSnapshot->dataspace_ = UT_DATA_SIZE;
+    cameraTest->streamInfoSnapshot->intent_ = STILL_CAPTURE;
+    cameraTest->streamInfoSnapshot->tunneledMode_ = UT_TUNNEL_MODE;
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> snapshotConsumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfoSnapshot->bufferQueue_ =
+        snapshotConsumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+            cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+        });
+    cameraTest->streamInfoSnapshot->bufferQueue_->producer_->SetQueueSize(UT_DATA_SIZE);
+    cameraTest->consumerMap_[cameraTest->streamInfoSnapshot->intent_] = snapshotConsumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfoSnapshot);
+
+    cameraTest->rc = (CamRetCode)cameraTest->streamOperator->CreateStreams(cameraTest->streamInfos);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+
+    cameraTest->rc =
+        (CamRetCode)cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, cameraTest->abilityVec);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+
+    int captureId = 2001;
+    cameraTest->captureInfo = std::make_shared<CaptureInfo>();
+    cameraTest->captureInfo->streamIds_ = {102};
+    cameraTest->captureInfo->captureSetting_ = cameraTest->abilityVec;
+    cameraTest->captureInfo->enableShutterCallback_ = true;
+    bool isStreaming = true;
+    cameraTest->rc = (CamRetCode)cameraTest->streamOperator->Capture(captureId, *cameraTest->captureInfo, isStreaming);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+    sleep(UT_SECOND_TIMES);
+    OHOS::sptr<IStreamOperatorCallback> streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    OHOS::sptr<IOfflineStreamOperator> offlineStreamOperator = nullptr;
+
+    cameraTest->rc = (CamRetCode)cameraTest->streamOperator->ChangeToOfflineStream(
+        {cameraTest->streamInfoSnapshot->streamId_}, streamOperatorCallback, offlineStreamOperator);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+
+    sleep(UT_SECOND_TIMES);
+
+    cameraTest->rc = (CamRetCode)offlineStreamOperator->CancelCapture(captureId);
+
+    EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<int> streamIds = {102};
+    cameraTest->rc = (CamRetCode)offlineStreamOperator->ReleaseStreams(streamIds);
+    EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+
+    cameraTest->rc = (CamRetCode)offlineStreamOperator->Release();
+    EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+
+    cameraTest->rc = (CamRetCode)cameraTest->streamOperator->ReleaseStreams({101});
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+    sleep(UT_SECOND_TIMES);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_2500
+ * @tc.name   : testCommitStreams025
+ * @tc.desc   : CommitStreams, OHOS_ABILITY_CAMERA_TYPE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams025, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t abilityCameraType = OHOS_CAMERA_TYPE_WIDE_ANGLE;
+    modeSetting->addEntry(OHOS_ABILITY_CAMERA_TYPE, &abilityCameraType, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_2600
+ * @tc.name   : testCommitStreams026
+ * @tc.desc   : CommitStreams, OHOS_ABILITY_CAMERA_TYPE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams026, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t abilityCameraType = OHOS_CAMERA_TYPE_ULTRA_WIDE;
+    modeSetting->addEntry(OHOS_ABILITY_CAMERA_TYPE, &abilityCameraType, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_2700
+ * @tc.name   : testCommitStreams027
+ * @tc.desc   : CommitStreams, OHOS_ABILITY_CAMERA_TYPE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams027, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t abilityCameraType = OHOS_CAMERA_TYPE_TELTPHOTO;
+    modeSetting->addEntry(OHOS_ABILITY_CAMERA_TYPE, &abilityCameraType, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_2800
+ * @tc.name   : testCommitStreams028
+ * @tc.desc   : CommitStreams, OHOS_ABILITY_CAMERA_TYPE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams028, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t abilityCameraType = OHOS_CAMERA_TYPE_TRUE_DEAPTH;
+    modeSetting->addEntry(OHOS_ABILITY_CAMERA_TYPE, &abilityCameraType, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_2900
+ * @tc.name   : testCommitStreams029
+ * @tc.desc   : CommitStreams, OHOS_ABILITY_CAMERA_TYPE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams029, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t abilityCameraType = OHOS_CAMERA_TYPE_LOGICAL;
+    modeSetting->addEntry(OHOS_ABILITY_CAMERA_TYPE, &abilityCameraType, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_3000
+ * @tc.name   : testCommitStreams030
+ * @tc.desc   : CommitStreams, OHOS_ABILITY_CAMERA_TYPE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams030, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t abilityCameraType = OHOS_CAMERA_TYPE_UNSPECIFIED;
+    modeSetting->addEntry(OHOS_ABILITY_CAMERA_TYPE, &abilityCameraType, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_3100
+ * @tc.name   : testCommitStreams031
+ * @tc.desc   : CommitStreams, OHOS_ABILITY_CAMERA_CONNECTION_TYPE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams031, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t abilityCameraConnType = OHOS_CAMERA_CONNECTION_TYPE_BUILTIN;
+    modeSetting->addEntry(OHOS_ABILITY_CAMERA_CONNECTION_TYPE, &abilityCameraConnType, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_3200
+ * @tc.name   : testCommitStreams032
+ * @tc.desc   : CommitStreams, OHOS_ABILITY_CAMERA_CONNECTION_TYPE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams032, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t abilityCameraConnType = OHOS_CAMERA_CONNECTION_TYPE_USB_PLUGIN;
+    modeSetting->addEntry(OHOS_ABILITY_CAMERA_CONNECTION_TYPE, &abilityCameraConnType, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_3300
+ * @tc.name   : testCommitStreams033
+ * @tc.desc   : CommitStreams, OHOS_ABILITY_CAMERA_CONNECTION_TYPE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams033, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t abilityCameraConnType = OHOS_CAMERA_CONNECTION_TYPE_REMOTE;
+    modeSetting->addEntry(OHOS_ABILITY_CAMERA_CONNECTION_TYPE, &abilityCameraConnType, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_3400
+ * @tc.name   : testCommitStreams034
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_EXPOSUREMODE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams034, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t exposureMode = OHOS_CAMERA_EXPOSURE_MODE_MANUAL;
+    modeSetting->addEntry(OHOS_CONTROL_EXPOSUREMODE, &exposureMode, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_3500
+ * @tc.name   : testCommitStreams035
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_EXPOSUREMODE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams035, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t exposureMode = OHOS_CAMERA_EXPOSURE_MODE_CONTINUOUS_AUTO;
+    modeSetting->addEntry(OHOS_CONTROL_EXPOSUREMODE, &exposureMode, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_3600
+ * @tc.name   : testCommitStreams036
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_EXPOSUREMODE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams036, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t exposureMode = OHOS_CAMERA_EXPOSURE_MODE_LOCKED;
+    modeSetting->addEntry(OHOS_CONTROL_EXPOSUREMODE, &exposureMode, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_3700
+ * @tc.name   : testCommitStreams037
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_EXPOSUREMODE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams037, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t exposureMode = OHOS_CAMERA_EXPOSURE_MODE_AUTO;
+    modeSetting->addEntry(OHOS_CONTROL_EXPOSUREMODE, &exposureMode, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_3800
+ * @tc.name   : testCommitStreams038
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_FLASH_STATE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams038, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t flashState = OHOS_CAMERA_FLASH_STATE_UNAVAILABLE;
+    modeSetting->addEntry(OHOS_CONTROL_FLASH_STATE, &flashState, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_3900
+ * @tc.name   : testCommitStreams039
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_FLASH_STATE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams039, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t flashState = OHOS_CAMERA_FLASH_STATE_CHARGING;
+    modeSetting->addEntry(OHOS_CONTROL_FLASH_STATE, &flashState, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_4000
+ * @tc.name   : testCommitStreams040
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_FLASH_STATE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams040, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t flashState = OHOS_CAMERA_FLASH_STATE_READY;
+    modeSetting->addEntry(OHOS_CONTROL_FLASH_STATE, &flashState, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_4100
+ * @tc.name   : testCommitStreams041
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_FLASH_STATE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams041, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t flashState = OHOS_CAMERA_FLASH_STATE_FLASHING;
+    modeSetting->addEntry(OHOS_CONTROL_FLASH_STATE, &flashState, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_4200
+ * @tc.name   : testCommitStreams042
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_FLASH_STATE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams042, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t flashState = OHOS_CAMERA_FLASH_STATE_UNKNOWN;
+    modeSetting->addEntry(OHOS_CONTROL_FLASH_STATE, &flashState, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_4300
+ * @tc.name   : testCommitStreams043
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_FOCUS_MODE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams043, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t focusMode = OHOS_CAMERA_FOCUS_MODE_MANUAL;
+    modeSetting->addEntry(OHOS_CONTROL_FOCUS_MODE, &focusMode, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_4400
+ * @tc.name   : testCommitStreams044
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_FOCUS_MODE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams044, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t focusMode = OHOS_CAMERA_FOCUS_MODE_CONTINUOUS_AUTO;
+    modeSetting->addEntry(OHOS_CONTROL_FOCUS_MODE, &focusMode, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_4500
+ * @tc.name   : testCommitStreams045
+ * @tc.desc   : CommitStreams, testCommitStreams045, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams045, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t focusMode = OHOS_CAMERA_FOCUS_MODE_AUTO;
+    modeSetting->addEntry(OHOS_CONTROL_FOCUS_MODE, &focusMode, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_4600
+ * @tc.name   : testCommitStreams046
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_FOCUS_MODE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams046, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t focusMode = OHOS_CAMERA_FOCUS_MODE_LOCKED;
+    modeSetting->addEntry(OHOS_CONTROL_FOCUS_MODE, &focusMode, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_4700
+ * @tc.name   : testCommitStreams047
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AE_LOCK, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams047, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t aeLock = OHOS_CAMERA_AE_LOCK_OFF;
+    modeSetting->addEntry(OHOS_CONTROL_AE_LOCK, &aeLock, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_4800
+ * @tc.name   : testCommitStreams048
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_AE_LOCK, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams048, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t aeLock = OHOS_CAMERA_AE_LOCK_ON;
+    modeSetting->addEntry(OHOS_CONTROL_AE_LOCK, &aeLock, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_GetStreamAttributes_0200
+ * @tc.name   : testGetStreamAttributes002
+ * @tc.desc   : GetStreamAttributes, StreamInfo->streamId_ = 2147483647, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testGetStreamAttributes002, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc =
+        cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback, cameraTest->streamOperator);
+    EXPECT_EQ(false, cameraTest->rc != HDI::Camera::V1_0::NO_ERROR || cameraTest->streamOperator == nullptr);
+
+    cameraTest->streamInfo = std::make_shared<StreamInfo>();
+    cameraTest->streamInfo->streamId_ = 2147483647;
+    cameraTest->streamInfo->width_ = 640;
+    cameraTest->streamInfo->height_ = 480;
+    cameraTest->streamInfo->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfo->dataspace_ = 8;
+    cameraTest->streamInfo->intent_ = PREVIEW;
+    cameraTest->streamInfo->tunneledMode_ = 5;
+
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfo->bufferQueue_ = consumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+    });
+
+    cameraTest->consumerMap_[cameraTest->streamInfo->intent_] = consumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
+    cameraTest->rc = cameraTest->streamOperator->CreateStreams(cameraTest->streamInfos);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<StreamAttribute> attributes;
+    cameraTest->rc = cameraTest->streamOperator->GetStreamAttributes(attributes);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<int> streamIds;
+    streamIds.push_back(cameraTest->streamInfo->streamId_);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams(streamIds);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_GetStreamAttributes_0300
+ * @tc.name   : testGetStreamAttributes003
+ * @tc.desc   : GetStreamAttributes, StreamInfo->width_ = -1, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testGetStreamAttributes003, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc =
+        cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback, cameraTest->streamOperator);
+    EXPECT_EQ(false, cameraTest->rc != HDI::Camera::V1_0::NO_ERROR || cameraTest->streamOperator == nullptr);
+
+    cameraTest->streamInfo = std::make_shared<StreamInfo>();
+    cameraTest->streamInfo->streamId_ = 101;
+    cameraTest->streamInfo->width_ = -1;
+    cameraTest->streamInfo->height_ = 480;
+    cameraTest->streamInfo->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfo->dataspace_ = 8;
+    cameraTest->streamInfo->intent_ = PREVIEW;
+    cameraTest->streamInfo->tunneledMode_ = 5;
+
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfo->bufferQueue_ = consumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+    });
+
+    cameraTest->consumerMap_[cameraTest->streamInfo->intent_] = consumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
+    cameraTest->rc = cameraTest->streamOperator->CreateStreams(cameraTest->streamInfos);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::INVALID_ARGUMENT);
+
+    std::vector<StreamAttribute> attributes;
+    cameraTest->rc = cameraTest->streamOperator->GetStreamAttributes(attributes);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_GetStreamAttributes_0400
+ * @tc.name   : testGetStreamAttributes004
+ * @tc.desc   : GetStreamAttributes, StreamInfo->width_ = 2147483647, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testGetStreamAttributes004, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc =
+        cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback, cameraTest->streamOperator);
+    EXPECT_EQ(false, cameraTest->rc != HDI::Camera::V1_0::NO_ERROR || cameraTest->streamOperator == nullptr);
+
+    cameraTest->streamInfo = std::make_shared<StreamInfo>();
+    cameraTest->streamInfo->streamId_ = 101;
+    cameraTest->streamInfo->width_ = 2147483647;
+    cameraTest->streamInfo->height_ = 480;
+    cameraTest->streamInfo->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfo->dataspace_ = 8;
+    cameraTest->streamInfo->intent_ = PREVIEW;
+    cameraTest->streamInfo->tunneledMode_ = 5;
+
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfo->bufferQueue_ = consumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+    });
+
+    cameraTest->consumerMap_[cameraTest->streamInfo->intent_] = consumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
+    cameraTest->rc = cameraTest->streamOperator->CreateStreams(cameraTest->streamInfos);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<StreamAttribute> attributes;
+    cameraTest->rc = cameraTest->streamOperator->GetStreamAttributes(attributes);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<int> streamIds;
+    streamIds.push_back(cameraTest->streamInfo->streamId_);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams(streamIds);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_GetStreamAttributes_0500
+ * @tc.name   : testGetStreamAttributes005
+ * @tc.desc   : GetStreamAttributes, StreamInfo->height_ = -1, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testGetStreamAttributes005, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc =
+        cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback, cameraTest->streamOperator);
+    EXPECT_EQ(false, cameraTest->rc != HDI::Camera::V1_0::NO_ERROR || cameraTest->streamOperator == nullptr);
+
+    cameraTest->streamInfo = std::make_shared<StreamInfo>();
+    cameraTest->streamInfo->streamId_ = 101;
+    cameraTest->streamInfo->width_ = 640;
+    cameraTest->streamInfo->height_ = -1;
+    cameraTest->streamInfo->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfo->dataspace_ = 8;
+    cameraTest->streamInfo->intent_ = PREVIEW;
+    cameraTest->streamInfo->tunneledMode_ = 5;
+
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfo->bufferQueue_ = consumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+    });
+
+    cameraTest->consumerMap_[cameraTest->streamInfo->intent_] = consumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
+    cameraTest->rc = cameraTest->streamOperator->CreateStreams(cameraTest->streamInfos);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::INVALID_ARGUMENT);
+
+    std::vector<StreamAttribute> attributes;
+    cameraTest->rc = cameraTest->streamOperator->GetStreamAttributes(attributes);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_GetStreamAttributes_0600
+ * @tc.name   : testGetStreamAttributes006
+ * @tc.desc   : GetStreamAttributes, StreamInfo->height_ = 2147483647, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testGetStreamAttributes006, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc =
+        cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback, cameraTest->streamOperator);
+    EXPECT_EQ(false, cameraTest->rc != HDI::Camera::V1_0::NO_ERROR || cameraTest->streamOperator == nullptr);
+
+    cameraTest->streamInfo = std::make_shared<StreamInfo>();
+    cameraTest->streamInfo->streamId_ = 101;
+    cameraTest->streamInfo->width_ = 640;
+    cameraTest->streamInfo->height_ = 2147483647;
+    cameraTest->streamInfo->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfo->dataspace_ = 8;
+    cameraTest->streamInfo->intent_ = PREVIEW;
+    cameraTest->streamInfo->tunneledMode_ = 5;
+
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfo->bufferQueue_ = consumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+    });
+
+    cameraTest->consumerMap_[cameraTest->streamInfo->intent_] = consumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
+    cameraTest->rc = cameraTest->streamOperator->CreateStreams(cameraTest->streamInfos);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<StreamAttribute> attributes;
+    cameraTest->rc = cameraTest->streamOperator->GetStreamAttributes(attributes);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<int> streamIds;
+    streamIds.push_back(cameraTest->streamInfo->streamId_);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams(streamIds);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_GetStreamAttributes_0700
+ * @tc.name   : testGetStreamAttributes007
+ * @tc.desc   : GetStreamAttributes, StreamInfo->format_ = -1, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testGetStreamAttributes007, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc =
+        cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback, cameraTest->streamOperator);
+    EXPECT_EQ(false, cameraTest->rc != HDI::Camera::V1_0::NO_ERROR || cameraTest->streamOperator == nullptr);
+
+    cameraTest->streamInfo = std::make_shared<StreamInfo>();
+    cameraTest->streamInfo->streamId_ = 101;
+    cameraTest->streamInfo->width_ = 640;
+    cameraTest->streamInfo->height_ = 480;
+    cameraTest->streamInfo->format_ = -1;
+    cameraTest->streamInfo->dataspace_ = 8;
+    cameraTest->streamInfo->intent_ = PREVIEW;
+    cameraTest->streamInfo->tunneledMode_ = 5;
+
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfo->bufferQueue_ = consumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+    });
+
+    cameraTest->consumerMap_[cameraTest->streamInfo->intent_] = consumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
+    cameraTest->rc = cameraTest->streamOperator->CreateStreams(cameraTest->streamInfos);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::INVALID_ARGUMENT);
+
+    std::vector<StreamAttribute> attributes;
+    cameraTest->rc = cameraTest->streamOperator->GetStreamAttributes(attributes);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_GetStreamAttributes_0800
+ * @tc.name   : testGetStreamAttributes008
+ * @tc.desc   : GetStreamAttributes, StreamInfo->format_ = 2147483647, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testGetStreamAttributes008, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc =
+        cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback, cameraTest->streamOperator);
+    EXPECT_EQ(false, cameraTest->rc != HDI::Camera::V1_0::NO_ERROR || cameraTest->streamOperator == nullptr);
+
+    cameraTest->streamInfo = std::make_shared<StreamInfo>();
+    cameraTest->streamInfo->streamId_ = 101;
+    cameraTest->streamInfo->width_ = 640;
+    cameraTest->streamInfo->height_ = 480;
+    cameraTest->streamInfo->format_ = 2147483647;
+    cameraTest->streamInfo->dataspace_ = 8;
+    cameraTest->streamInfo->intent_ = PREVIEW;
+    cameraTest->streamInfo->tunneledMode_ = 5;
+
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfo->bufferQueue_ = consumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+    });
+
+    cameraTest->consumerMap_[cameraTest->streamInfo->intent_] = consumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
+    cameraTest->rc = cameraTest->streamOperator->CreateStreams(cameraTest->streamInfos);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<StreamAttribute> attributes;
+    cameraTest->rc = cameraTest->streamOperator->GetStreamAttributes(attributes);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<int> streamIds;
+    streamIds.push_back(cameraTest->streamInfo->streamId_);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams(streamIds);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_GetStreamAttributes_0900
+ * @tc.name   : testGetStreamAttributes009
+ * @tc.desc   : GetStreamAttributes, StreamInfo->dataspace_ = -1, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testGetStreamAttributes009, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc =
+        cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback, cameraTest->streamOperator);
+    EXPECT_EQ(false, cameraTest->rc != HDI::Camera::V1_0::NO_ERROR || cameraTest->streamOperator == nullptr);
+
+    cameraTest->streamInfo = std::make_shared<StreamInfo>();
+    cameraTest->streamInfo->streamId_ = 101;
+    cameraTest->streamInfo->width_ = 640;
+    cameraTest->streamInfo->height_ = 480;
+    cameraTest->streamInfo->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfo->dataspace_ = -1;
+    cameraTest->streamInfo->intent_ = PREVIEW;
+    cameraTest->streamInfo->tunneledMode_ = 5;
+
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfo->bufferQueue_ = consumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+    });
+
+    cameraTest->consumerMap_[cameraTest->streamInfo->intent_] = consumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
+    cameraTest->rc = cameraTest->streamOperator->CreateStreams(cameraTest->streamInfos);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::INVALID_ARGUMENT);
+
+    std::vector<StreamAttribute> attributes;
+    cameraTest->rc = cameraTest->streamOperator->GetStreamAttributes(attributes);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_GetStreamAttributes_1000
+ * @tc.name   : testGetStreamAttributes010
+ * @tc.desc   : GetStreamAttributes, StreamInfo->dataspace_ = 2147483647, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testGetStreamAttributes010, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc =
+        cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback, cameraTest->streamOperator);
+    EXPECT_EQ(false, cameraTest->rc != HDI::Camera::V1_0::NO_ERROR || cameraTest->streamOperator == nullptr);
+
+    cameraTest->streamInfo = std::make_shared<StreamInfo>();
+    cameraTest->streamInfo->streamId_ = 101;
+    cameraTest->streamInfo->width_ = 640;
+    cameraTest->streamInfo->height_ = 480;
+    cameraTest->streamInfo->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfo->dataspace_ = 2147483647;
+    cameraTest->streamInfo->intent_ = PREVIEW;
+    cameraTest->streamInfo->tunneledMode_ = 5;
+
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfo->bufferQueue_ = consumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+    });
+
+    cameraTest->consumerMap_[cameraTest->streamInfo->intent_] = consumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
+    cameraTest->rc = cameraTest->streamOperator->CreateStreams(cameraTest->streamInfos);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<StreamAttribute> attributes;
+    cameraTest->rc = cameraTest->streamOperator->GetStreamAttributes(attributes);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<int> streamIds;
+    streamIds.push_back(cameraTest->streamInfo->streamId_);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams(streamIds);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_GetStreamAttributes_1100
+ * @tc.name   : testGetStreamAttributes011
+ * @tc.desc   : GetStreamAttributes, StreamInfo->intent_ = PREVIEW, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testGetStreamAttributes011, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc =
+        cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback, cameraTest->streamOperator);
+    EXPECT_EQ(false, cameraTest->rc != HDI::Camera::V1_0::NO_ERROR || cameraTest->streamOperator == nullptr);
+
+    cameraTest->streamInfo = std::make_shared<StreamInfo>();
+    cameraTest->streamInfo->streamId_ = 101;
+    cameraTest->streamInfo->width_ = 640;
+    cameraTest->streamInfo->height_ = 480;
+    cameraTest->streamInfo->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfo->dataspace_ = 8;
+    cameraTest->streamInfo->intent_ = PREVIEW;
+    cameraTest->streamInfo->tunneledMode_ = 5;
+
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfo->bufferQueue_ = consumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+    });
+
+    cameraTest->consumerMap_[cameraTest->streamInfo->intent_] = consumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
+    cameraTest->rc = cameraTest->streamOperator->CreateStreams(cameraTest->streamInfos);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<StreamAttribute> attributes;
+    cameraTest->rc = cameraTest->streamOperator->GetStreamAttributes(attributes);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<int> streamIds;
+    streamIds.push_back(cameraTest->streamInfo->streamId_);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams(streamIds);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_GetStreamAttributes_1200
+ * @tc.name   : testGetStreamAttributes012
+ * @tc.desc   : GetStreamAttributes, StreamInfo->intent_ = VIDEO, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testGetStreamAttributes012, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc =
+        cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback, cameraTest->streamOperator);
+    EXPECT_EQ(false, cameraTest->rc != HDI::Camera::V1_0::NO_ERROR || cameraTest->streamOperator == nullptr);
+
+    cameraTest->streamInfo = std::make_shared<StreamInfo>();
+    cameraTest->streamInfo->streamId_ = 101;
+    cameraTest->streamInfo->width_ = 640;
+    cameraTest->streamInfo->height_ = 480;
+    cameraTest->streamInfo->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfo->dataspace_ = 8;
+    cameraTest->streamInfo->intent_ = VIDEO;
+    cameraTest->streamInfo->tunneledMode_ = 5;
+
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfo->bufferQueue_ = consumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+    });
+
+    cameraTest->consumerMap_[cameraTest->streamInfo->intent_] = consumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
+    cameraTest->rc = cameraTest->streamOperator->CreateStreams(cameraTest->streamInfos);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<StreamAttribute> attributes;
+    cameraTest->rc = cameraTest->streamOperator->GetStreamAttributes(attributes);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<int> streamIds;
+    streamIds.push_back(cameraTest->streamInfo->streamId_);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams(streamIds);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_GetStreamAttributes_1300
+ * @tc.name   : testGetStreamAttributes013
+ * @tc.desc   : GetStreamAttributes, StreamInfo->intent_ = STILL_CAPTURE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testGetStreamAttributes013, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc =
+        cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback, cameraTest->streamOperator);
+    EXPECT_EQ(false, cameraTest->rc != HDI::Camera::V1_0::NO_ERROR || cameraTest->streamOperator == nullptr);
+
+    cameraTest->streamInfo = std::make_shared<StreamInfo>();
+    cameraTest->streamInfo->streamId_ = 101;
+    cameraTest->streamInfo->width_ = 640;
+    cameraTest->streamInfo->height_ = 480;
+    cameraTest->streamInfo->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfo->dataspace_ = 8;
+    cameraTest->streamInfo->intent_ = STILL_CAPTURE;
+    cameraTest->streamInfo->tunneledMode_ = 5;
+
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfo->bufferQueue_ = consumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+    });
+
+    cameraTest->consumerMap_[cameraTest->streamInfo->intent_] = consumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
+    cameraTest->rc = cameraTest->streamOperator->CreateStreams(cameraTest->streamInfos);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<StreamAttribute> attributes;
+    cameraTest->rc = cameraTest->streamOperator->GetStreamAttributes(attributes);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<int> streamIds;
+    streamIds.push_back(cameraTest->streamInfo->streamId_);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams(streamIds);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_GetStreamAttributes_1400
+ * @tc.name   : testGetStreamAttributes014
+ * @tc.desc   : GetStreamAttributes, StreamInfo->intent_ = POST_VIEW, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testGetStreamAttributes014, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc =
+        cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback, cameraTest->streamOperator);
+    EXPECT_EQ(false, cameraTest->rc != HDI::Camera::V1_0::NO_ERROR || cameraTest->streamOperator == nullptr);
+
+    cameraTest->streamInfo = std::make_shared<StreamInfo>();
+    cameraTest->streamInfo->streamId_ = 101;
+    cameraTest->streamInfo->width_ = 640;
+    cameraTest->streamInfo->height_ = 480;
+    cameraTest->streamInfo->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfo->dataspace_ = 8;
+    cameraTest->streamInfo->intent_ = POST_VIEW;
+    cameraTest->streamInfo->tunneledMode_ = 5;
+
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfo->bufferQueue_ = consumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+    });
+
+    cameraTest->consumerMap_[cameraTest->streamInfo->intent_] = consumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
+    cameraTest->rc = cameraTest->streamOperator->CreateStreams(cameraTest->streamInfos);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<StreamAttribute> attributes;
+    cameraTest->rc = cameraTest->streamOperator->GetStreamAttributes(attributes);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<int> streamIds;
+    streamIds.push_back(cameraTest->streamInfo->streamId_);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams(streamIds);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_GetStreamAttributes_1500
+ * @tc.name   : testGetStreamAttributes015
+ * @tc.desc   : GetStreamAttributes, StreamInfo->intent_ = ANALYZE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testGetStreamAttributes015, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc =
+        cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback, cameraTest->streamOperator);
+    EXPECT_EQ(false, cameraTest->rc != HDI::Camera::V1_0::NO_ERROR || cameraTest->streamOperator == nullptr);
+
+    cameraTest->streamInfo = std::make_shared<StreamInfo>();
+    cameraTest->streamInfo->streamId_ = 101;
+    cameraTest->streamInfo->width_ = 640;
+    cameraTest->streamInfo->height_ = 480;
+    cameraTest->streamInfo->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfo->dataspace_ = 8;
+    cameraTest->streamInfo->intent_ = ANALYZE;
+    cameraTest->streamInfo->tunneledMode_ = 5;
+
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfo->bufferQueue_ = consumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+    });
+
+    cameraTest->consumerMap_[cameraTest->streamInfo->intent_] = consumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
+    cameraTest->rc = cameraTest->streamOperator->CreateStreams(cameraTest->streamInfos);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<StreamAttribute> attributes;
+    cameraTest->rc = cameraTest->streamOperator->GetStreamAttributes(attributes);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+
+    std::vector<int> streamIds;
+    streamIds.push_back(cameraTest->streamInfo->streamId_);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams(streamIds);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
+ * @tc.number : SUB_Driver_Camera_Release_0100
+ * @tc.name   : testRelease001
+ * @tc.desc   : Release, return error
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testRelease001, Function | MediumTest | Level2)
+{
+    cameraTest->Open();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->rc =
+        cameraTest->cameraDevice->GetStreamOperator(cameraTest->streamOperatorCallback, cameraTest->streamOperator);
+
+    cameraTest->streamInfo = std::make_shared<StreamInfo>();
+    cameraTest->streamInfo->streamId_ = 101;
+    cameraTest->streamInfo->width_ = 720;
+    cameraTest->streamInfo->height_ = 480;
+    cameraTest->streamInfo->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfo->dataspace_ = UT_DATA_SIZE;
+    cameraTest->streamInfo->intent_ = PREVIEW;
+    cameraTest->streamInfo->tunneledMode_ = UT_TUNNEL_MODE;
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfo->bufferQueue_ = consumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+        cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+    });
+    cameraTest->streamInfo->bufferQueue_->producer_->SetQueueSize(UT_DATA_SIZE);
+    cameraTest->consumerMap_[cameraTest->streamInfo->intent_] = consumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
+
+    cameraTest->streamInfoSnapshot = std::make_shared<StreamInfo>();
+    cameraTest->streamInfoSnapshot->streamId_ = 102;
+    cameraTest->streamInfoSnapshot->width_ = 720;
+    cameraTest->streamInfoSnapshot->height_ = 480;
+    cameraTest->streamInfoSnapshot->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfoSnapshot->dataspace_ = UT_DATA_SIZE;
+    cameraTest->streamInfoSnapshot->intent_ = STILL_CAPTURE;
+    cameraTest->streamInfoSnapshot->tunneledMode_ = UT_TUNNEL_MODE;
+    std::shared_ptr<OHOS::Camera::Test::StreamConsumer> snapshotConsumer =
+        std::make_shared<OHOS::Camera::Test::StreamConsumer>();
+    cameraTest->streamInfoSnapshot->bufferQueue_ =
+        snapshotConsumer->CreateProducerSeq([this](void *addr, uint32_t size) {
+            cameraTest->DumpImageFile(cameraTest->streamIdPreview, "yuv", addr, size);
+        });
+    cameraTest->streamInfoSnapshot->bufferQueue_->producer_->SetQueueSize(UT_DATA_SIZE);
+    cameraTest->consumerMap_[cameraTest->streamInfoSnapshot->intent_] = snapshotConsumer;
+    cameraTest->streamInfos.push_back(*cameraTest->streamInfoSnapshot);
+
+    cameraTest->rc = (CamRetCode)cameraTest->streamOperator->CreateStreams(cameraTest->streamInfos);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+
+    cameraTest->rc =
+        (CamRetCode)cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, cameraTest->abilityVec);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+
+    OHOS::sptr<IStreamOperatorCallback> streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    OHOS::sptr<IOfflineStreamOperator> offlineStreamOperator = nullptr;
+
+    cameraTest->rc = (CamRetCode)cameraTest->streamOperator->ChangeToOfflineStream(
+        {cameraTest->streamInfoSnapshot->streamId_}, streamOperatorCallback, offlineStreamOperator);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+
+    std::vector<int> streamIds = {102};
+    cameraTest->rc = (CamRetCode)offlineStreamOperator->ReleaseStreams(streamIds);
+    EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+
+    cameraTest->rc = (CamRetCode)offlineStreamOperator->Release();
+    EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+}

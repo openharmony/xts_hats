@@ -13,33 +13,22 @@
 
 import("//build/test.gni")
 import("//drivers/peripheral/audio/audio.gni")
-import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
 group("hdi_base_common") {
   if (!defined(ohos_lite)) {
     testonly = true
   }
-  if (hats_rich == false) {
-    deps = [
-      "common/adapter:HatsHdfAudioIdlAdapterTest",
-      "common/capture:HatsHdfAudioIdlCaptureTest",
-      "common/capture_additional:HatsHdfAudioIdlCaptureTestAdditional",
-      "common/manager:HatsHdfAudioIdlManagerTest",
-      "common/render:HatsHdfAudioIdlRenderTest",
+  deps = [
+    "common/adapter:HatsHdfAudioIdlAdapterTest",
+    "common/capture:HatsHdfAudioIdlCaptureTest",
+    "common/capture_additional:HatsHdfAudioIdlCaptureTestAdditional",
+    "common/manager:HatsHdfAudioIdlManagerTest",
+    "common/render:HatsHdfAudioIdlRenderTest",
+    "common/render_additional:HatsHdfAudioIdlRenderTestAdditional",
 
-      #"benchmarktest:HatsHdfAudioBenchmarkTest"
-    ]
-  } else {
-    deps = [
-      "common/adapter:HatsHdfAudioIdlAdapterTest",
-      "common/capture:HatsHdfAudioIdlCaptureTest",
-      "common/manager:HatsHdfAudioIdlManagerTest",
-      "common/render:HatsHdfAudioIdlRenderTest",
-
-      #"benchmarktest:HatsHdfAudioBenchmarkTest"
-    ]
-  }
+    #"benchmarktest:HatsHdfAudioBenchmarkTest"
+  ]
 }
 group("hdi_effect") {
   if (!defined(ohos_lite)) {

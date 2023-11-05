@@ -762,3 +762,662 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayProperty008, Function | MediumTest 
     auto ret = g_composerDevice->GetDisplayProperty(g_displayIds[0], propertyId, propertyValue);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
+
+/**
+ * @tc.number : SUB_Driver_Display_SetDisplayProperty_0100
+ * @tc.name   : testSetDisplayProperty001
+ * @tc.desc   : test devid Max
+ */
+HWTEST_F(DeviceTestAdditional, testSetDisplayProperty001, Function | MediumTest | Level2)
+{
+    const uint32_t propertyId = 1;
+    uint64_t propertyValue = 0;
+    auto ret = g_composerDevice->SetDisplayProperty(20, propertyId, propertyValue);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_SetDisplayProperty_0200
+ * @tc.name   : testSetDisplayProperty002
+ * @tc.desc   : test devid Min
+ */
+HWTEST_F(DeviceTestAdditional, testSetDisplayProperty002, Function | MediumTest | Level2)
+{
+    const uint32_t propertyId = 1;
+    uint64_t propertyValue = 0;
+    auto ret = g_composerDevice->SetDisplayProperty(0, propertyId, propertyValue);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_SetDisplayProperty_0300
+ * @tc.name   : testSetDisplayProperty003
+ * @tc.desc   : test devid Random
+ */
+HWTEST_F(DeviceTestAdditional, testSetDisplayProperty003, Function | MediumTest | Level2)
+{
+    const uint32_t propertyId = 1;
+    uint64_t propertyValue = 0;
+    auto ret = g_composerDevice->SetDisplayProperty(15, propertyId, propertyValue);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_SetDisplayProperty_0400
+ * @tc.name   : testSetDisplayProperty004
+ * @tc.desc   : test devid Negative Number
+ */
+HWTEST_F(DeviceTestAdditional, testSetDisplayProperty004, Function | MediumTest | Level2)
+{
+    const uint32_t propertyId = 1;
+    uint64_t propertyValue = 0;
+    auto ret = g_composerDevice->SetDisplayProperty(-1, propertyId, propertyValue);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_SetDisplayProperty_0500
+ * @tc.name   : testSetDisplayProperty005
+ * @tc.desc   : test propertyId Random
+ */
+HWTEST_F(DeviceTestAdditional, testSetDisplayProperty005, Function | MediumTest | Level2)
+{
+    const uint32_t propertyId = 20;
+    uint64_t propertyValue = 0;
+    auto ret = g_composerDevice->SetDisplayProperty(g_displayIds[0], propertyId, propertyValue);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_SetDisplayProperty_0600
+ * @tc.name   : testSetDisplayProperty006
+ * @tc.desc   : test propertyId Min
+ */
+HWTEST_F(DeviceTestAdditional, testSetDisplayProperty006, Function | MediumTest | Level2)
+{
+    const uint32_t propertyId = 0;
+    uint64_t propertyValue = 0;
+    auto ret = g_composerDevice->SetDisplayProperty(g_displayIds[0], propertyId, propertyValue);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_SetDisplayProperty_0700
+ * @tc.name   : testSetDisplayProperty007
+ * @tc.desc   : test propertyId Negative Number
+ */
+HWTEST_F(DeviceTestAdditional, testSetDisplayProperty007, Function | MediumTest | Level2)
+{
+    const uint32_t propertyId = -1;
+    uint64_t propertyValue = 0;
+    auto ret = g_composerDevice->SetDisplayProperty(g_displayIds[0], propertyId, propertyValue);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_SetDisplayProperty_0800
+ * @tc.name   : testSetDisplayProperty008
+ * @tc.desc   : test propertyValue Random
+ */
+HWTEST_F(DeviceTestAdditional, testSetDisplayProperty008, Function | MediumTest | Level2)
+{
+    const uint32_t propertyId = 0;
+    uint64_t propertyValue = 20;
+    auto ret = g_composerDevice->SetDisplayProperty(g_displayIds[0], propertyId, propertyValue);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_SetDisplayProperty_0900
+ * @tc.name   : testSetDisplayProperty009
+ * @tc.desc   : test propertyValue Negative Number
+ */
+HWTEST_F(DeviceTestAdditional, testSetDisplayProperty009, Function | MediumTest | Level2)
+{
+    const uint32_t propertyId = 0;
+    uint64_t propertyValue = -1;
+    auto ret = g_composerDevice->SetDisplayProperty(g_displayIds[0], propertyId, propertyValue);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_SetDisplayVsyncEnabled_0100
+ * @tc.name   : testSetDisplayVsyncEnabled001
+ * @tc.desc   : test devid Max
+ */
+HWTEST_F(DeviceTestAdditional, testSetDisplayVsyncEnabled001, Function | MediumTest | Level2)
+{
+    auto ret = g_composerDevice->SetDisplayVsyncEnabled(20, true);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_SetDisplayVsyncEnabled_0200
+ * @tc.name   : testSetDisplayVsyncEnabled002
+ * @tc.desc   : test devid Min
+ */
+HWTEST_F(DeviceTestAdditional, testSetDisplayVsyncEnabled002, Function | MediumTest | Level1)
+{
+    auto ret = g_composerDevice->SetDisplayVsyncEnabled(0, true);
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_SetDisplayVsyncEnabled_0300
+ * @tc.name   : testSetDisplayVsyncEnabled003
+ * @tc.desc   : test devid Random
+ */
+HWTEST_F(DeviceTestAdditional, testSetDisplayVsyncEnabled003, Function | MediumTest | Level2)
+{
+    auto ret = g_composerDevice->SetDisplayVsyncEnabled(15, true);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_SetDisplayVsyncEnabled_0400
+ * @tc.name   : testSetDisplayVsyncEnabled004
+ * @tc.desc   : test devid Negative Number
+ */
+HWTEST_F(DeviceTestAdditional, testSetDisplayVsyncEnabled004, Function | MediumTest | Level2)
+{
+    auto ret = g_composerDevice->SetDisplayVsyncEnabled(-1, true);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_SetDisplayVsyncEnabled_0500
+ * @tc.name   : testSetDisplayVsyncEnabled005
+ * @tc.desc   : test enabled true
+ */
+HWTEST_F(DeviceTestAdditional, testSetDisplayVsyncEnabled005, Function | MediumTest | Level1)
+{
+    auto ret = g_composerDevice->SetDisplayVsyncEnabled(g_displayIds[0], true);
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_SetDisplayVsyncEnabled_0600
+ * @tc.name   : testSetDisplayVsyncEnabled006
+ * @tc.desc   : test enabled true
+ */
+HWTEST_F(DeviceTestAdditional, testSetDisplayVsyncEnabled006, Function | MediumTest | Level1)
+{
+    auto ret = g_composerDevice->SetDisplayVsyncEnabled(g_displayIds[0], false);
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_CreateLayer_0100
+ * @tc.name   : testCreateLayer001
+ * @tc.desc   : test devId Max
+ */
+HWTEST_F(DeviceTestAdditional, testCreateLayer001, Function | MediumTest | Level2)
+{
+    LayerInfo layerInfo;
+    uint32_t count = 3;
+    uint32_t layerId;
+    auto ret = g_composerDevice->CreateLayer(20, layerInfo, count, layerId);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_CreateLayer_0200
+ * @tc.name   : testCreateLayer002
+ * @tc.desc   : test devId Min
+ */
+HWTEST_F(DeviceTestAdditional, testCreateLayer002, Function | MediumTest | Level1)
+{
+    LayerInfo layerInfo;
+    uint32_t count = 3;
+    uint32_t layerId;
+    auto ret = g_composerDevice->CreateLayer(0, layerInfo, count, layerId);
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_CreateLayer_0300
+ * @tc.name   : testCreateLayer003
+ * @tc.desc   : test devId Random
+ */
+HWTEST_F(DeviceTestAdditional, testCreateLayer003, Function | MediumTest | Level2)
+{
+    LayerInfo layerInfo;
+    uint32_t count = 3;
+    uint32_t layerId;
+    auto ret = g_composerDevice->CreateLayer(15, layerInfo, count, layerId);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_CreateLayer_0400
+ * @tc.name   : testCreateLayer004
+ * @tc.desc   : test devId Negative Number
+ */
+HWTEST_F(DeviceTestAdditional, testCreateLayer004, Function | MediumTest | Level2)
+{
+    LayerInfo layerInfo;
+    uint32_t count = 3;
+    uint32_t layerId;
+    auto ret = g_composerDevice->CreateLayer(-1, layerInfo, count, layerId);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_CreateLayer_0500
+ * @tc.name   : testCreateLayer005
+ * @tc.desc   : test cacheCount Max
+ */
+HWTEST_F(DeviceTestAdditional, testCreateLayer005, Function | MediumTest | Level1)
+{
+    LayerInfo layerInfo;
+    uint32_t count = 20;
+    uint32_t layerId;
+    auto ret = g_composerDevice->CreateLayer(g_displayIds[0], layerInfo, count, layerId);
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_CreateLayer_0600
+ * @tc.name   : testCreateLayer006
+ * @tc.desc   : test devId Min
+ */
+HWTEST_F(DeviceTestAdditional, testCreateLayer006, Function | MediumTest | Level1)
+{
+    LayerInfo layerInfo;
+    uint32_t count = 0;
+    uint32_t layerId;
+    auto ret = g_composerDevice->CreateLayer(g_displayIds[0], layerInfo, count, layerId);
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_CreateLayer_0700
+ * @tc.name   : testCreateLayer007
+ * @tc.desc   : test devId Random
+ */
+HWTEST_F(DeviceTestAdditional, testCreateLayer007, Function | MediumTest | Level1)
+{
+    LayerInfo layerInfo;
+    uint32_t count = 15;
+    uint32_t layerId;
+    auto ret = g_composerDevice->CreateLayer(g_displayIds[0], layerInfo, count, layerId);
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_CreateLayer_0800
+ * @tc.name   : testCreateLayer008
+ * @tc.desc   : test devId Negative Number
+ */
+HWTEST_F(DeviceTestAdditional, testCreateLayer008, Function | MediumTest | Level1)
+{
+    LayerInfo layerInfo;
+    uint32_t count = -1;
+    uint32_t layerId;
+    auto ret = g_composerDevice->CreateLayer(g_displayIds[0], layerInfo, count, layerId);
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_DestroyLayer_0100
+ * @tc.name   : testDestroyLayer001
+ * @tc.desc   : test devId Max
+ */
+HWTEST_F(DeviceTestAdditional, testDestroyLayer001, Function | MediumTest | Level2)
+{
+    uint32_t layerId = 1;
+    auto ret = g_composerDevice->DestroyLayer(20, layerId);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_DestroyLayer_0200
+ * @tc.name   : testDestroyLayer002
+ * @tc.desc   : test devId Min
+ */
+HWTEST_F(DeviceTestAdditional, testDestroyLayer002, Function | MediumTest | Level2)
+{
+    uint32_t layerId = 1;
+    auto ret = g_composerDevice->DestroyLayer(0, layerId);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_DestroyLayer_0300
+ * @tc.name   : testDestroyLayer003
+ * @tc.desc   : test devId Random
+ */
+HWTEST_F(DeviceTestAdditional, testDestroyLayer003, Function | MediumTest | Level2)
+{
+    uint32_t layerId = 1;
+    auto ret = g_composerDevice->DestroyLayer(15, layerId);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_DestroyLayer_0400
+ * @tc.name   : testDestroyLayer004
+ * @tc.desc   : test devId Negative Number
+ */
+HWTEST_F(DeviceTestAdditional, testDestroyLayer004, Function | MediumTest | Level2)
+{
+    uint32_t layerId = 1;
+    auto ret = g_composerDevice->DestroyLayer(-1, layerId);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_DestroyLayer_0500
+ * @tc.name   : testDestroyLayer005
+ * @tc.desc   : test layerId Max
+ */
+HWTEST_F(DeviceTestAdditional, testDestroyLayer005, Function | MediumTest | Level2)
+{
+    uint32_t layerId = 20;
+    auto ret = g_composerDevice->DestroyLayer(g_displayIds[0], layerId);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_DestroyLayer_0600
+ * @tc.name   : testDestroyLayer006
+ * @tc.desc   : test layerId Min
+ */
+HWTEST_F(DeviceTestAdditional, testDestroyLayer006, Function | MediumTest | Level2)
+{
+    uint32_t layerId = 0;
+    auto ret = g_composerDevice->DestroyLayer(g_displayIds[0], layerId);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_DestroyLayer_0700
+ * @tc.name   : testDestroyLayer007
+ * @tc.desc   : test layerId Random
+ */
+HWTEST_F(DeviceTestAdditional, testDestroyLayer007, Function | MediumTest | Level2)
+{
+    uint32_t layerId = 15;
+    auto ret = g_composerDevice->DestroyLayer(g_displayIds[0], layerId);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_DestroyLayer_0800
+ * @tc.name   : testDestroyLayer008
+ * @tc.desc   : test layerId Negative Number
+ */
+HWTEST_F(DeviceTestAdditional, testDestroyLayer008, Function | MediumTest | Level2)
+{
+    uint32_t layerId = -1;
+    auto ret = g_composerDevice->DestroyLayer(g_displayIds[0], layerId);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_SetDisplayClientCrop_0100
+ * @tc.name   : testSetDisplayClientCrop001
+ * @tc.desc   : test layerId Max
+ */
+HWTEST_F(DeviceTestAdditional, testSetDisplayClientCrop001, Function | MediumTest | Level2)
+{
+    const int32_t width = 1920;
+    const int32_t height = 1080;
+    IRect rect = {0, 0, width, height};
+    auto ret = g_composerDevice->SetDisplayClientCrop(20, rect);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_SetDisplayClientCrop_0200
+ * @tc.name   : testSetDisplayClientCrop002
+ * @tc.desc   : test layerId Min
+ */
+HWTEST_F(DeviceTestAdditional, testSetDisplayClientCrop002, Function | MediumTest | Level2)
+{
+    const int32_t width = 1920;
+    const int32_t height = 1080;
+    IRect rect = {0, 0, width, height};
+    auto ret = g_composerDevice->SetDisplayClientCrop(0, rect);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_SetDisplayClientCrop_0300
+ * @tc.name   : testSetDisplayClientCrop003
+ * @tc.desc   : test layerId Random
+ */
+HWTEST_F(DeviceTestAdditional, testSetDisplayClientCrop003, Function | MediumTest | Level2)
+{
+    const int32_t width = 1920;
+    const int32_t height = 1080;
+    IRect rect = {0, 0, width, height};
+    auto ret = g_composerDevice->SetDisplayClientCrop(15, rect);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_SetDisplayClientCrop_0400
+ * @tc.name   : testSetDisplayClientCrop004
+ * @tc.desc   : test layerId Negative Number
+ */
+HWTEST_F(DeviceTestAdditional, testSetDisplayClientCrop004, Function | MediumTest | Level2)
+{
+    const int32_t width = 1920;
+    const int32_t height = 1080;
+    IRect rect = {0, 0, width, height};
+    auto ret = g_composerDevice->SetDisplayClientCrop(-1, rect);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_GetDisplayReleaseFence_0100
+ * @tc.name   : testGetDisplayReleaseFence001
+ * @tc.desc   : test devId Max
+ */
+HWTEST_F(DeviceTestAdditional, testGetDisplayReleaseFence001, Function | MediumTest | Level2)
+{
+    std::vector<uint32_t> layers{};
+    std::vector<int32_t> fences{};
+    auto ret = g_composerDevice->GetDisplayReleaseFence(20, layers, fences);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_GetDisplayReleaseFence_0200
+ * @tc.name   : testGetDisplayReleaseFence002
+ * @tc.desc   : test devId Min
+ */
+HWTEST_F(DeviceTestAdditional, testGetDisplayReleaseFence002, Function | MediumTest | Level1)
+{
+    std::vector<uint32_t> layers{};
+    std::vector<int32_t> fences{};
+    auto ret = g_composerDevice->GetDisplayReleaseFence(0, layers, fences);
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_GetDisplayReleaseFence_0300
+ * @tc.name   : testGetDisplayReleaseFence003
+ * @tc.desc   : test devId Random
+ */
+HWTEST_F(DeviceTestAdditional, testGetDisplayReleaseFence003, Function | MediumTest | Level2)
+{
+    std::vector<uint32_t> layers{};
+    std::vector<int32_t> fences{};
+    auto ret = g_composerDevice->GetDisplayReleaseFence(15, layers, fences);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_GetDisplayReleaseFence_0400
+ * @tc.name   : testGetDisplayReleaseFence004
+ * @tc.desc   : test devId Negative Number
+ */
+HWTEST_F(DeviceTestAdditional, testGetDisplayReleaseFence004, Function | MediumTest | Level2)
+{
+    std::vector<uint32_t> layers{};
+    std::vector<int32_t> fences{};
+    auto ret = g_composerDevice->GetDisplayReleaseFence(-1, layers, fences);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_CreateVirtualDisplay_0100
+ * @tc.name   : testCreateVirtualDisplay001
+ * @tc.desc   : test width Min
+ */
+HWTEST_F(DeviceTestAdditional, testCreateVirtualDisplay001, Function | MediumTest | Level2)
+{
+    uint32_t width = 0;
+    uint32_t height = 1080;
+    int32_t format = 0;
+    uint32_t devId = 0;
+    auto ret = g_composerDevice->CreateVirtualDisplay(width, height, format, devId);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_CreateVirtualDisplay_0200
+ * @tc.name   : testCreateVirtualDisplay002
+ * @tc.desc   : test width Random
+ */
+HWTEST_F(DeviceTestAdditional, testCreateVirtualDisplay002, Function | MediumTest | Level2)
+{
+    uint32_t width = 2560;
+    uint32_t height = 1080;
+    int32_t format = 0;
+    uint32_t devId = 0;
+    auto ret = g_composerDevice->CreateVirtualDisplay(width, height, format, devId);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_CreateVirtualDisplay_0300
+ * @tc.name   : testCreateVirtualDisplay003
+ * @tc.desc   : test height Min
+ */
+HWTEST_F(DeviceTestAdditional, testCreateVirtualDisplay003, Function | MediumTest | Level2)
+{
+    uint32_t width = 1920;
+    uint32_t height = 0;
+    int32_t format = 0;
+    uint32_t devId = 0;
+    auto ret = g_composerDevice->CreateVirtualDisplay(width, height, format, devId);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_CreateVirtualDisplay_0400
+ * @tc.name   : testCreateVirtualDisplay004
+ * @tc.desc   : test height Random
+ */
+HWTEST_F(DeviceTestAdditional, testCreateVirtualDisplay004, Function | MediumTest | Level2)
+{
+    uint32_t width = 1920;
+    uint32_t height = 1440;
+    int32_t format = 0;
+    uint32_t devId = 0;
+    auto ret = g_composerDevice->CreateVirtualDisplay(width, height, format, devId);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_DestroyVirtualDisplay_0100
+ * @tc.name   : testDestroyVirtualDisplay001
+ * @tc.desc   : test devId Max
+ */
+HWTEST_F(DeviceTestAdditional, testDestroyVirtualDisplay001, Function | MediumTest | Level2)
+{
+    uint32_t devId = 20;
+    auto ret = g_composerDevice->DestroyVirtualDisplay(devId);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_DestroyVirtualDisplay_0200
+ * @tc.name   : testDestroyVirtualDisplay002
+ * @tc.desc   : test devId 1
+ */
+HWTEST_F(DeviceTestAdditional, testDestroyVirtualDisplay002, Function | MediumTest | Level2)
+{
+    uint32_t devId = 1;
+    auto ret = g_composerDevice->DestroyVirtualDisplay(devId);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_DestroyVirtualDisplay_0300
+ * @tc.name   : testDestroyVirtualDisplay003
+ * @tc.desc   : test devId Random
+ */
+HWTEST_F(DeviceTestAdditional, testDestroyVirtualDisplay003, Function | MediumTest | Level2)
+{
+    uint32_t devId = 15;
+    auto ret = g_composerDevice->DestroyVirtualDisplay(devId);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_DestroyVirtualDisplay_0300
+ * @tc.name   : testDestroyVirtualDisplay004
+ * @tc.desc   : test devId Negative Number
+ */
+HWTEST_F(DeviceTestAdditional, testDestroyVirtualDisplay004, Function | MediumTest | Level2)
+{
+    uint32_t devId = -1;
+    auto ret = g_composerDevice->DestroyVirtualDisplay(devId);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_SetVirtualDisplayBuffer_0100
+ * @tc.name   : testSetVirtualDisplayBuffer001
+ * @tc.desc   : test devId Max
+ */
+HWTEST_F(DeviceTestAdditional, testSetVirtualDisplayBuffer001, Function | MediumTest | Level2)
+{
+    BufferHandle buffer;
+    int32_t fence = 1;
+    auto ret = g_composerDevice->SetVirtualDisplayBuffer(20, buffer, fence);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_SetVirtualDisplayBuffer_0200
+ * @tc.name   : testSetVirtualDisplayBuffer002
+ * @tc.desc   : test devId Min
+ */
+HWTEST_F(DeviceTestAdditional, testSetVirtualDisplayBuffer002, Function | MediumTest | Level2)
+{
+    BufferHandle buffer;
+    int32_t fence = 1;
+    auto ret = g_composerDevice->SetVirtualDisplayBuffer(0, buffer, fence);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_SetVirtualDisplayBuffer_0300
+ * @tc.name   : testSetVirtualDisplayBuffer003
+ * @tc.desc   : test devId Random
+ */
+HWTEST_F(DeviceTestAdditional, testSetVirtualDisplayBuffer003, Function | MediumTest | Level2)
+{
+    BufferHandle buffer;
+    int32_t fence = 1;
+    auto ret = g_composerDevice->SetVirtualDisplayBuffer(0, buffer, fence);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_SetVirtualDisplayBuffer_0400
+ * @tc.name   : testSetVirtualDisplayBuffer004
+ * @tc.desc   : test devId Negative Number
+ */
+HWTEST_F(DeviceTestAdditional, testSetVirtualDisplayBuffer004, Function | MediumTest | Level2)
+{
+    BufferHandle buffer;
+    int32_t fence = 1;
+    auto ret = g_composerDevice->SetVirtualDisplayBuffer(0, buffer, fence);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
+}

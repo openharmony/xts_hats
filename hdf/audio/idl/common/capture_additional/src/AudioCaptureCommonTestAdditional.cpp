@@ -1192,4 +1192,1019 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureGetCapturePosition006, Te
     ret = capture_->GetCapturePosition(capture_, nullptr, &time);
     EXPECT_NE(ret, HDF_SUCCESS);
 }
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_GetFrameSize_0100
+ * @tc.name   : testCaptureGetFrameSize001
+ * @tc.desc   : ret = HDF_SUCCESS
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetFrameSize001, Function | MediumTest | Level1)
+{
+    uint64_t frameSize = 0;
+    int32_t ret = 0;
+
+    ret = capture_->GetFrameSize(capture_, &frameSize);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_GetFrameSize_0200
+ * @tc.name   : testCaptureGetFrameSize002
+ * @tc.desc   : Call 1000 times
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetFrameSize002, Function | MediumTest | Level1)
+{
+    uint64_t frameSize = 0;
+    int32_t ret = 0;
+
+    for (int i = 0; i < 1000; i++) {
+        ret = capture_->GetFrameSize(capture_, &frameSize);
+        EXPECT_EQ(ret, HDF_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_GetFrameSize_0300
+ * @tc.name   : testCaptureGetFrameSize003
+ * @tc.desc   : capture_ is nullptr
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetFrameSize003, Function | MediumTest | Level2)
+{
+    uint64_t frameSize = 0;
+    int32_t ret = 0;
+
+    ret = capture_->GetFrameSize(nullptr, &frameSize);
+    EXPECT_EQ(ret, HDF_ERR_INVALID_OBJECT);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_GetFrameSize_0400
+ * @tc.name   : testCaptureGetFrameSize004
+ * @tc.desc   : &frameSize is nullptr
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetFrameSize004, Function | MediumTest | Level2)
+{
+    int32_t ret = 0;
+
+    ret = capture_->GetFrameSize(capture_, nullptr);
+    EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_GetFrameCount_0100
+ * @tc.name   : testCaptureGetFrameCount001
+ * @tc.desc   : ret = HDF_SUCCESS
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetFrameCount001, Function | MediumTest | Level1)
+{
+    uint64_t frameCount = 0;
+    int32_t ret = 0;
+
+    ret = capture_->GetFrameCount(capture_, &frameCount);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_GetFrameCount_0200
+ * @tc.name   : testCaptureGetFrameCount002
+ * @tc.desc   : Call 1000 times
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetFrameCount002, Function | MediumTest | Level1)
+{
+    uint64_t frameCount = 0;
+    int32_t ret = 0;
+
+    for (int i = 0; i < 1000; i++) {
+        ret = capture_->GetFrameCount(capture_, &frameCount);
+        EXPECT_EQ(ret, HDF_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_GetFrameCount_0300
+ * @tc.name   : testCaptureGetFrameCount003
+ * @tc.desc   : capture_ is nullptr
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetFrameCount003, Function | MediumTest | Level2)
+{
+    uint64_t frameCount = 0;
+    int32_t ret = 0;
+
+    ret = capture_->GetFrameCount(nullptr, &frameCount);
+    EXPECT_EQ(ret, HDF_ERR_INVALID_OBJECT);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_GetFrameCount_0400
+ * @tc.name   : testCaptureGetFrameCount004
+ * @tc.desc   : &frameCount is nullptr
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetFrameCount004, Function | MediumTest | Level2)
+{
+    int32_t ret = 0;
+
+    ret = capture_->GetFrameCount(capture_, nullptr);
+    EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_SetSampleAttributes_0200
+ * @tc.name   : testCaptureSetSampleAttributes001
+ * @tc.desc   : ret = success
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes001, Function | MediumTest | Level1)
+{
+    struct AudioSampleAttributes attrs = {
+        .type = AUDIO_IN_MEDIA,
+        .interleaved = 0,
+        .format = AUDIO_FORMAT_TYPE_PCM_16_BIT,
+        .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
+        .channelCount = TEST_CHANNEL_COUNT,
+        .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .isBigEndian = false,
+        .isSignedData = true,
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .stopThreshold = INT_MAX,
+        .silenceThreshold = BUFFER_LENTH,
+    };
+    int32_t ret = 0;
+
+    ret = capture_->SetSampleAttributes(capture_, &attrs);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_SetSampleAttributes_0300
+ * @tc.name   : testCaptureSetSampleAttributes002
+ * @tc.desc   : format is AUDIO_FORMAT_TYPE_PCM_8_BIT
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes002, Function | MediumTest | Level2)
+{
+    struct AudioSampleAttributes attrs = {
+        .type = AUDIO_IN_MEDIA,
+        .interleaved = 0,
+        .format = AUDIO_FORMAT_TYPE_PCM_8_BIT,
+        .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
+        .channelCount = TEST_CHANNEL_COUNT,
+        .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .isBigEndian = false,
+        .isSignedData = true,
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .stopThreshold = INT_MAX,
+        .silenceThreshold = BUFFER_LENTH,
+    };
+    int32_t ret = 0;
+
+    ret = capture_->SetSampleAttributes(capture_, &attrs);
+    EXPECT_EQ(ret, HDF_FAILURE);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_SetSampleAttributes_0400
+ * @tc.name   : testCaptureSetSampleAttributes003
+ * @tc.desc   : sampleRate is 44000
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes003, Function | MediumTest | Level2)
+{
+    struct AudioSampleAttributes attrs = {
+        .type = AUDIO_IN_MEDIA,
+        .interleaved = 0,
+        .format = AUDIO_FORMAT_TYPE_PCM_16_BIT,
+        .sampleRate = 44000,
+        .channelCount = TEST_CHANNEL_COUNT,
+        .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .isBigEndian = false,
+        .isSignedData = true,
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .stopThreshold = INT_MAX,
+        .silenceThreshold = BUFFER_LENTH,
+    };
+    int32_t ret = 0;
+
+    ret = capture_->SetSampleAttributes(capture_, &attrs);
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_SetSampleAttributes_0500
+ * @tc.name   : testCaptureSetSampleAttributes004
+ * @tc.desc   : channelCount is 3
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes004, Function | MediumTest | Level2)
+{
+    struct AudioSampleAttributes attrs = {
+        .type = AUDIO_IN_MEDIA,
+        .interleaved = 0,
+        .format = AUDIO_FORMAT_TYPE_PCM_16_BIT,
+        .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
+        .channelCount = 3,
+        .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .isBigEndian = false,
+        .isSignedData = true,
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .stopThreshold = INT_MAX,
+        .silenceThreshold = BUFFER_LENTH,
+    };
+    int32_t ret = 0;
+
+    ret = capture_->SetSampleAttributes(capture_, &attrs);
+    EXPECT_EQ(ret, HDF_FAILURE);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_SetSampleAttributes_0600
+ * @tc.name   : testCaptureSetSampleAttributes005
+ * @tc.desc   : channelCount is 1
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes005, Function | MediumTest | Level2)
+{
+    struct AudioSampleAttributes attrs = {
+        .type = AUDIO_IN_MEDIA,
+        .interleaved = 0,
+        .format = AUDIO_FORMAT_TYPE_PCM_16_BIT,
+        .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
+        .channelCount = 1,
+        .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .isBigEndian = false,
+        .isSignedData = true,
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .stopThreshold = INT_MAX,
+        .silenceThreshold = BUFFER_LENTH,
+    };
+    int32_t ret = 0;
+
+    ret = capture_->SetSampleAttributes(capture_, &attrs);
+    EXPECT_EQ(ret, HDF_FAILURE);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_SetSampleAttributes_0700
+ * @tc.name   : testCaptureSetSampleAttributes006
+ * @tc.desc   : channelCount is 0
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes006, Function | MediumTest | Level2)
+{
+    struct AudioSampleAttributes attrs = {
+        .type = AUDIO_IN_MEDIA,
+        .interleaved = 0,
+        .format = AUDIO_FORMAT_TYPE_PCM_16_BIT,
+        .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
+        .channelCount = 0,
+        .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .isBigEndian = false,
+        .isSignedData = true,
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .stopThreshold = INT_MAX,
+        .silenceThreshold = BUFFER_LENTH,
+    };
+    int32_t ret = 0;
+
+    ret = capture_->SetSampleAttributes(capture_, &attrs);
+    EXPECT_EQ(ret, HDF_FAILURE);
+}
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_SetSampleAttributes_0800
+ * @tc.name   : testCaptureSetSampleAttributes007
+ * @tc.desc   : period is 3 * 1024
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes007, Function | MediumTest | Level1)
+{
+    struct AudioSampleAttributes attrs = {
+        .type = AUDIO_IN_COMMUNICATION,
+        .interleaved = 0,
+        .format = AUDIO_FORMAT_TYPE_PCM_16_BIT,
+        .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
+        .channelCount = TEST_CHANNEL_COUNT,
+        .period = 3 * 1024,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .isBigEndian = false,
+        .isSignedData = true,
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .stopThreshold = INT_MAX,
+        .silenceThreshold = BUFFER_LENTH,
+    };
+    int32_t ret = 0;
+
+    ret = capture_->SetSampleAttributes(capture_, &attrs);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_SetSampleAttributes_0900
+ * @tc.name   : testCaptureSetSampleAttributes008
+ * @tc.desc   : period is 5 * 1024
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes008, Function | MediumTest | Level1)
+{
+    struct AudioSampleAttributes attrs = {
+        .type = AUDIO_IN_MEDIA,
+        .interleaved = 0,
+        .format = AUDIO_FORMAT_TYPE_PCM_16_BIT,
+        .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
+        .channelCount = TEST_CHANNEL_COUNT,
+        .period = 5 * 1024,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .isBigEndian = false,
+        .isSignedData = true,
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .stopThreshold = INT_MAX,
+        .silenceThreshold = BUFFER_LENTH,
+    };
+    int32_t ret = 0;
+
+    ret = capture_->SetSampleAttributes(capture_, &attrs);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_SetSampleAttributes_1000
+ * @tc.name   : testCaptureSetSampleAttributes009
+ * @tc.desc   : frameSize is AUDIO_FORMAT_TYPE_PCM_16_BIT * 3 / MOVE_LEFT_NUM
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes009, Function | MediumTest | Level1)
+{
+    struct AudioSampleAttributes attrs = {
+        .type = AUDIO_IN_MEDIA,
+        .interleaved = 0,
+        .format = AUDIO_FORMAT_TYPE_PCM_16_BIT,
+        .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
+        .channelCount = TEST_CHANNEL_COUNT,
+        .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * 3 / MOVE_LEFT_NUM,
+        .isBigEndian = false,
+        .isSignedData = true,
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .stopThreshold = INT_MAX,
+        .silenceThreshold = BUFFER_LENTH,
+    };
+    int32_t ret = 0;
+
+    ret = capture_->SetSampleAttributes(capture_, &attrs);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_SetSampleAttributes_1100
+ * @tc.name   : testCaptureSetSampleAttributes010
+ * @tc.desc   : isBigEndian is true
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes010, Function | MediumTest | Level1)
+{
+    struct AudioSampleAttributes attrs = {
+        .type = AUDIO_IN_MEDIA,
+        .interleaved = 0,
+        .format = AUDIO_FORMAT_TYPE_PCM_16_BIT,
+        .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
+        .channelCount = TEST_CHANNEL_COUNT,
+        .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .isBigEndian = true,
+        .isSignedData = true,
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .stopThreshold = INT_MAX,
+        .silenceThreshold = BUFFER_LENTH,
+    };
+    int32_t ret = 0;
+
+    ret = capture_->SetSampleAttributes(capture_, &attrs);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_SetSampleAttributes_1200
+ * @tc.name   : testCaptureSetSampleAttributes011
+ * @tc.desc   : isSignedData is false
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes011, Function | MediumTest | Level1)
+{
+    struct AudioSampleAttributes attrs = {
+        .type = AUDIO_IN_MEDIA,
+        .interleaved = 0,
+        .format = AUDIO_FORMAT_TYPE_PCM_16_BIT,
+        .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
+        .channelCount = TEST_CHANNEL_COUNT,
+        .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .isBigEndian = false,
+        .isSignedData = false,
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .stopThreshold = INT_MAX,
+        .silenceThreshold = BUFFER_LENTH,
+    };
+    int32_t ret = 0;
+
+    ret = capture_->SetSampleAttributes(capture_, &attrs);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_SetSampleAttributes_1300
+ * @tc.name   : testCaptureSetSampleAttributes012
+ * @tc.desc   : startThreshold is (5 * 1024) / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM)
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes012, Function | MediumTest | Level1)
+{
+    struct AudioSampleAttributes attrs = {
+        .type = AUDIO_IN_MEDIA,
+        .interleaved = 0,
+        .format = AUDIO_FORMAT_TYPE_PCM_16_BIT,
+        .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
+        .channelCount = TEST_CHANNEL_COUNT,
+        .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .isBigEndian = false,
+        .isSignedData = true,
+        .startThreshold = (5 * 1024) / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .stopThreshold = INT_MAX,
+        .silenceThreshold = BUFFER_LENTH,
+    };
+    int32_t ret = 0;
+
+    ret = capture_->SetSampleAttributes(capture_, &attrs);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_SetSampleAttributes_1400
+ * @tc.name   : testCaptureSetSampleAttributes013
+ * @tc.desc   : stopThreshold is INT_MAX - 1024
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes013, Function | MediumTest | Level1)
+{
+    struct AudioSampleAttributes attrs = {
+        .type = AUDIO_IN_MEDIA,
+        .interleaved = 0,
+        .format = AUDIO_FORMAT_TYPE_PCM_16_BIT,
+        .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
+        .channelCount = TEST_CHANNEL_COUNT,
+        .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .isBigEndian = false,
+        .isSignedData = true,
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .stopThreshold = INT_MAX - 1024,
+        .silenceThreshold = BUFFER_LENTH,
+    };
+    int32_t ret = 0;
+
+    ret = capture_->SetSampleAttributes(capture_, &attrs);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_SetSampleAttributes_1500
+ * @tc.name   : testCaptureSetSampleAttributes014
+ * @tc.desc   : silenceThreshold is 1024
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes014, Function | MediumTest | Level2)
+{
+    struct AudioSampleAttributes attrs = {
+        .type = AUDIO_IN_MEDIA,
+        .interleaved = 0,
+        .format = AUDIO_FORMAT_TYPE_PCM_16_BIT,
+        .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
+        .channelCount = TEST_CHANNEL_COUNT,
+        .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .isBigEndian = false,
+        .isSignedData = true,
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .stopThreshold = INT_MAX,
+        .silenceThreshold = 1024,
+    };
+    int32_t ret = 0;
+
+    ret = capture_->SetSampleAttributes(capture_, &attrs);
+    EXPECT_EQ(ret, HDF_FAILURE);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_GetSampleAttributes_0300
+ * @tc.name   : testCaptureGetSampleAttributes001
+ * @tc.desc   : ret = success, the obtained property values are correct
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetSampleAttributes001, Function | MediumTest | Level1)
+{
+    struct AudioSampleAttributes attrs = {};
+
+    int32_t ret = capture_->GetSampleAttributes(capture_, &attrs);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(attrs.format, AUDIO_FORMAT_TYPE_PCM_16_BIT);
+    EXPECT_EQ(attrs.sampleRate, TEST_SAMPLE_RATE_MASK_48000);
+    EXPECT_EQ(attrs.channelCount, TEST_CHANNEL_COUNT);
+    EXPECT_EQ(attrs.interleaved, 0);
+    EXPECT_EQ(attrs.type, AUDIO_IN_MEDIA);
+    EXPECT_EQ(attrs.period, DEEP_BUFFER_CAPTURE_PERIOD_SIZE);
+    EXPECT_EQ(attrs.frameSize, AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM);
+    EXPECT_EQ(attrs.isBigEndian, false);
+    EXPECT_EQ(attrs.isSignedData, true);
+    EXPECT_EQ(attrs.startThreshold,
+              DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM));
+    EXPECT_EQ(attrs.stopThreshold, INT_MAX);
+    EXPECT_EQ(attrs.silenceThreshold, BUFFER_LENTH);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_GetSampleAttributes_0400
+ * @tc.name   : testCaptureGetSampleAttributes002
+ * @tc.desc   : Change the isBigEndian, isSignedData, and stopThreshold attribute values to get attribute values correct
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetSampleAttributes002, Function | MediumTest | Level1)
+{
+    struct AudioSampleAttributes attrsGet = {};
+    struct AudioSampleAttributes attrsSet = {
+        .type = AUDIO_IN_MEDIA,
+        .interleaved = 0,
+        .format = AUDIO_FORMAT_TYPE_PCM_16_BIT,
+        .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
+        .channelCount = TEST_CHANNEL_COUNT,
+        .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .isBigEndian = true,
+        .isSignedData = false,
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrsSet.format * attrsSet.channelCount / MOVE_LEFT_NUM),
+        .stopThreshold = 15 * 1024,
+        .silenceThreshold = BUFFER_LENTH,
+    };
+    int32_t ret = 0;
+
+    ret = capture_->SetSampleAttributes(capture_, &attrsSet);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+
+    ret = capture_->GetSampleAttributes(capture_, &attrsGet);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(attrsGet.isBigEndian, true);
+    EXPECT_EQ(attrsGet.isSignedData, false);
+    EXPECT_EQ(attrsGet.stopThreshold, 15 * 1024);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_ReqMmapBuffer_0100
+ * @tc.name   : testCaptureReqMmapBuffer001
+ * @tc.desc   : ret = success or ret = not_support
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureReqMmapBuffer001, Function | MediumTest | Level1)
+{
+    int32_t ret = 0;
+    struct AudioMmapBufferDescriptor desc = {};
+
+    ret = capture_->ReqMmapBuffer(capture_, MMAP_SUGGUEST_REQ_SIZE, &desc);
+    EXPECT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_ReqMmapBuffer_0200
+ * @tc.name   : testCaptureReqMmapBuffer002
+ * @tc.desc   : capture_ is nullptr
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureReqMmapBuffer002, Function | MediumTest | Level2)
+{
+    int32_t ret = 0;
+    struct AudioMmapBufferDescriptor desc = {};
+
+    ret = capture_->ReqMmapBuffer(nullptr, MMAP_SUGGUEST_REQ_SIZE, &desc);
+    EXPECT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_ReqMmapBuffer_0300
+ * @tc.name   : testCaptureReqMmapBuffer003
+ * @tc.desc   : MMAP_SUGGUEST_REQ_SIZE is 0
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureReqMmapBuffer003, Function | MediumTest | Level2)
+{
+    int32_t ret = 0;
+    struct AudioMmapBufferDescriptor desc = {};
+
+    ret = capture_->ReqMmapBuffer(capture_, 0, &desc);
+    EXPECT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_ReqMmapBuffer_0400
+ * @tc.name   : testCaptureReqMmapBuffer004
+ * @tc.desc   : MMAP_SUGGUEST_REQ_SIZE is -1
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureReqMmapBuffer004, Function | MediumTest | Level2)
+{
+    int32_t ret = 0;
+    struct AudioMmapBufferDescriptor desc = {};
+
+    ret = capture_->ReqMmapBuffer(capture_, -1, &desc);
+    EXPECT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_ReqMmapBuffer_0500
+ * @tc.name   : testCaptureReqMmapBuffer005
+ * @tc.desc   : MMAP_SUGGUEST_REQ_SIZE is 2147483647
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureReqMmapBuffer005, Function | MediumTest | Level2)
+{
+    int32_t ret = 0;
+    struct AudioMmapBufferDescriptor desc = {};
+
+    ret = capture_->ReqMmapBuffer(capture_, 2147483647, &desc);
+    EXPECT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_ReqMmapBuffer_0600
+ * @tc.name   : testCaptureReqMmapBuffer006
+ * @tc.desc   : &desc is nullptr
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureReqMmapBuffer006, Function | MediumTest | Level2)
+{
+    int32_t ret = 0;
+
+    ret = capture_->ReqMmapBuffer(capture_, MMAP_SUGGUEST_REQ_SIZE, nullptr);
+    EXPECT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_GetMmapPosition_0100
+ * @tc.name   : testCaptureGetMmapPosition001
+ * @tc.desc   : capture_ is nullptr
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetMmapPosition001, Function | MediumTest | Level1)
+{
+    int32_t ret = 0;
+    uint64_t frames = 0;
+    struct AudioTimeStamp time = {0};
+
+    ret = capture_->GetMmapPosition(nullptr, &frames, &time);
+    EXPECT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_GetMmapPosition_0200
+ * @tc.name   : testCaptureGetMmapPosition002
+ * @tc.desc   : &frames is nullptr
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetMmapPosition002, Function | MediumTest | Level2)
+{
+    int32_t ret = 0;
+    struct AudioTimeStamp time = {0};
+
+    ret = capture_->GetMmapPosition(capture_, nullptr, &time);
+    EXPECT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_GetMmapPosition_0300
+ * @tc.name   : testCaptureGetMmapPosition003
+ * @tc.desc   : &time is nullptr
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetMmapPosition003, Function | MediumTest | Level2)
+{
+    int32_t ret = 0;
+    uint64_t frames = 0;
+
+    ret = capture_->GetMmapPosition(capture_, &frames, nullptr);
+    EXPECT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_Pause_0500
+ * @tc.name   : testCapturePause001
+ * @tc.desc   : Direct call, ret != success
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCapturePause001, Function | MediumTest | Level2)
+{
+    int32_t ret = 0;
+
+    ret = capture_->Pause(capture_);
+    EXPECT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_Pause_0600
+ * @tc.name   : testCapturePause002
+ * @tc.desc   : After calling start and stop, pause is called
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCapturePause002, Function | MediumTest | Level2)
+{
+    int32_t ret = 0;
+
+    ret = capture_->Start(capture_);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    ret = capture_->Pause(capture_);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    ret = capture_->Stop(capture_);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_Stop_0300
+ * @tc.name   : testCaptureStop001
+ * @tc.desc   : Direct call, ret = success
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureStop001, Function | MediumTest | Level1)
+{
+    int32_t ret = 0;
+
+    ret = capture_->Stop(capture_);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_Stop_0400
+ * @tc.name   : testCaptureStop002
+ * @tc.desc   : Loop through start and stop 1000 times
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureStop002, Function | MediumTest | Level1)
+{
+    int32_t ret = 0;
+
+    for (int32_t i = 0; i < 1000; i++) {
+        ret = capture_->Start(capture_);
+        EXPECT_EQ(ret, HDF_SUCCESS);
+        ret = capture_->Stop(capture_);
+        EXPECT_EQ(ret, HDF_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_Resume_0400
+ * @tc.name   : testCaptureResume001
+ * @tc.desc   : Loop through Pause and Resume 1000 times
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureResume001, Function | MediumTest | Level1)
+{
+    int32_t ret = 0;
+
+    ret = capture_->Start(capture_);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    for (int32_t i = 0; i < 1000; i++) {
+        ret = capture_->Pause(capture_);
+        EXPECT_EQ(ret, HDF_SUCCESS);
+        ret = capture_->Resume(capture_);
+        EXPECT_EQ(ret, HDF_SUCCESS);
+    }
+    ret = capture_->Stop(capture_);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_TurnStandbyMode_0400
+ * @tc.name   : testCaptureTurnStandbyMode001
+ * @tc.desc   : Call start, then call TurnStandbyMode
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureTurnStandbyMode001, Function | MediumTest | Level1)
+{
+    int32_t ret = 0;
+
+    ret = capture_->Start(capture_);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    sleep(1);
+    ret = capture_->TurnStandbyMode(capture_);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    ret = capture_->Stop(capture_);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_TurnStandbyMode_0500
+ * @tc.name   : testCaptureTurnStandbyMode002
+ * @tc.desc   : Call TurnStandbyMode first, then start and stop
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureTurnStandbyMode002, Function | MediumTest | Level1)
+{
+    int32_t ret = 0;
+
+    ret = capture_->TurnStandbyMode(capture_);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    ret = capture_->Start(capture_);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    ret = capture_->Stop(capture_);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_TurnStandbyMode_0600
+ * @tc.name   : testCaptureTurnStandbyMode003
+ * @tc.desc   : Loop call 1000 times
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureTurnStandbyMode003, Function | MediumTest | Level1)
+{
+    int32_t ret = 0;
+    for (int32_t i = 0; i < 1000; i++) {
+        ret = capture_->TurnStandbyMode(capture_);
+        EXPECT_EQ(ret, HDF_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_AudioDevDump_0300
+ * @tc.name   : testCaptureAudioDevDump001
+ * @tc.desc   : Dump to binary file
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump001, Function | MediumTest | Level1)
+{
+    int32_t range = 3;
+    int32_t ret = 0;
+
+    FILE *file = fopen("/data/CaptureDump.log", "wb+");
+    ASSERT_NE(nullptr, file);
+    int32_t fd = fileno(file);
+    if (fd == -1) {
+        fclose(file);
+        ASSERT_NE(fd, -1);
+    }
+
+    ret = capture_->AudioDevDump(capture_, range, fd);
+    EXPECT_TRUE(ret == HDF_SUCCESS);
+    fclose(file);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_AudioDevDump_0400
+ * @tc.name   : testCaptureAudioDevDump002
+ * @tc.desc   : Dump to a text file
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump002, Function | MediumTest | Level1)
+{
+    int32_t range = 3;
+    int32_t ret = 0;
+
+    FILE *file = fopen("/data/CaptureDump.log", "w+");
+    ASSERT_NE(nullptr, file);
+    int32_t fd = fileno(file);
+    if (fd == -1) {
+        fclose(file);
+        ASSERT_NE(fd, -1);
+    }
+
+    ret = capture_->AudioDevDump(capture_, range, fd);
+    EXPECT_TRUE(ret == HDF_SUCCESS);
+    fclose(file);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_AudioDevDump_0500
+ * @tc.name   : testCaptureAudioDevDump003
+ * @tc.desc   : Dump to a read-only file
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump003, Function | MediumTest | Level1)
+{
+    int32_t range = 3;
+    int32_t ret = 0;
+
+    FILE *file = fopen("/data/CaptureDump.log", "w");
+    ASSERT_NE(nullptr, file);
+    ret = fclose(file);
+    ASSERT_EQ(0, ret);
+
+    file = fopen("/data/CaptureDump.log", "r");
+    int32_t fd = fileno(file);
+    if (fd == -1) {
+        fclose(file);
+        ASSERT_NE(fd, -1);
+    }
+
+    ret = capture_->AudioDevDump(capture_, range, fd);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    fclose(file);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_AudioDevDump_0600
+ * @tc.name   : testCaptureAudioDevDump004
+ * @tc.desc   : range is 5
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump004, Function | MediumTest | Level1)
+{
+    int32_t range = 5;
+    int32_t ret = 0;
+
+    FILE *file = fopen("/data/CaptureDump.log", "wb+");
+    ASSERT_NE(nullptr, file);
+    int32_t fd = fileno(file);
+    if (fd == -1) {
+        fclose(file);
+        ASSERT_NE(fd, -1);
+    }
+
+    ret = capture_->AudioDevDump(capture_, range, fd);
+    EXPECT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+    fclose(file);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_AudioDevDump_0700
+ * @tc.name   : testCaptureAudioDevDump005
+ * @tc.desc   : capture_ is nullptr
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump005, Function | MediumTest | Level2)
+{
+    int32_t range = 4;
+    int32_t ret = 0;
+
+    FILE *file = fopen("/data/CaptureDump.log", "wb+");
+    ASSERT_NE(nullptr, file);
+    int32_t fd = fileno(file);
+    if (fd == -1) {
+        fclose(file);
+        ASSERT_NE(fd, -1);
+    }
+    ret = capture_->AudioDevDump(nullptr, range, fd);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    fclose(file);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_AudioDevDump_0800
+ * @tc.name   : testCaptureAudioDevDump006
+ * @tc.desc   : range is 2
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump006, Function | MediumTest | Level2)
+{
+    int32_t ret = 0;
+
+    FILE *file = fopen("/data/CaptureDump.log", "wb+");
+    ASSERT_NE(nullptr, file);
+    int32_t fd = fileno(file);
+    if (fd == -1) {
+        fclose(file);
+        ASSERT_NE(fd, -1);
+    }
+    ret = capture_->AudioDevDump(capture_, 2, fd);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    fclose(file);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_AudioDevDump_0900
+ * @tc.name   : testCaptureAudioDevDump007
+ * @tc.desc   : range is -1
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump007, Function | MediumTest | Level2)
+{
+    int32_t ret = 0;
+
+    FILE *file = fopen("/data/CaptureDump.log", "wb+");
+    ASSERT_NE(nullptr, file);
+    int fd = fileno(file);
+    if (fd == -1) {
+        fclose(file);
+        ASSERT_NE(fd, -1);
+    }
+    ret = capture_->AudioDevDump(capture_, -1, fd);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    fclose(file);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_AudioDevDump_1000
+ * @tc.name   : testCaptureAudioDevDump008
+ * @tc.desc   : range is 2147483647
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump008, Function | MediumTest | Level2)
+{
+    int32_t ret = 0;
+
+    FILE *file = fopen("/data/CaptureDump.log", "wb+");
+    ASSERT_NE(nullptr, file);
+    int32_t fd = fileno(file);
+    if (fd == -1) {
+        fclose(file);
+        ASSERT_NE(fd, -1);
+    }
+    ret = capture_->AudioDevDump(capture_, 2147483647, fd);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    fclose(file);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_AudioDevDump_1100
+ * @tc.name   : testCaptureAudioDevDump009
+ * @tc.desc   : fd is -1
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump009, Function | MediumTest | Level2)
+{
+    int32_t range = 4;
+    int32_t ret = 0;
+
+    ret = capture_->AudioDevDump(capture_, range, -1);
+    EXPECT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_AudioDevDump_1200
+ * @tc.name   : testCaptureAudioDevDump010
+ * @tc.desc   : fd is 2147483647
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump010, Function | MediumTest | Level2)
+{
+    int32_t range = 4;
+    int32_t ret = 0;
+
+    ret = capture_->AudioDevDump(capture_, range, 2147483647);
+    EXPECT_NE(ret, HDF_SUCCESS);
+}
+
 } // namespace

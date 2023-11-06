@@ -151,7 +151,7 @@ void AudioUtRenderMmapTestAdditional::TearDown()
  * @tc.name  testCommonRenderGetMmapPosition001
  * @tc.desc  Reliability of function(GetMmapPosition)
  */
-HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition001, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition001, TestSize.Level2)
 {
     uint64_t frames = 256;
     struct AudioTimeStamp time;
@@ -165,7 +165,7 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition001, Te
  * @tc.name  testCommonRenderGetMmapPosition002
  * @tc.desc  Reliability of function(GetMmapPosition)
  */
-HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition002, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition002, TestSize.Level2)
 {
     uint64_t frames = -256;
     struct AudioTimeStamp time;
@@ -179,7 +179,7 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition002, Te
  * @tc.name  testCommonRenderGetMmapPosition003
  * @tc.desc  Reliability of function(GetMmapPosition)
  */
-HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition003, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition003, TestSize.Level2)
 {
     uint64_t frames = 0;
     struct AudioTimeStamp time;
@@ -193,7 +193,7 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition003, Te
  * @tc.name  testCommonRenderGetMmapPosition004
  * @tc.desc  Reliability of function(GetMmapPosition)
  */
-HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition004, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition004, TestSize.Level2)
 {
     uint64_t frames = 0;
     struct AudioTimeStamp time;
@@ -207,7 +207,7 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition004, Te
  * @tc.name  testCommonRenderGetMmapPosition005
  * @tc.desc  Reliability of function(GetMmapPosition)
  */
-HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition005, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition005, TestSize.Level2)
 {
     uint64_t frames = 0;
     struct AudioTimeStamp time;
@@ -221,7 +221,7 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition005, Te
  * @tc.name  testCommonRenderGetMmapPosition006
  * @tc.desc  Reliability of function(GetMmapPosition)
  */
-HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition006, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition006, TestSize.Level2)
 {
     uint64_t frames = 2;
     struct AudioTimeStamp time;
@@ -235,9 +235,8 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition006, Te
  * @tc.name  testCommonRenderGetMmapPosition007
  * @tc.desc  Reliability of function(GetMmapPosition)
  */
-HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition007, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition007, TestSize.Level2)
 {
-
     struct AudioTimeStamp time;
     time.tvNSec = 0;
     time.tvSec = 0;
@@ -249,7 +248,7 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition007, Te
  * @tc.name  testCommonRenderGetMmapPosition008
  * @tc.desc  Reliability of function(GetMmapPosition)
  */
-HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition008, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition008, TestSize.Level2)
 {
     uint64_t frames = 0;
     struct AudioTimeStamp time;
@@ -263,9 +262,8 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition008, Te
  * @tc.name  testCommonRenderGetMmapPosition009
  * @tc.desc  Reliability of function(GetMmapPosition)
  */
-HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition009, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition009, TestSize.Level2)
 {
-
     struct AudioTimeStamp time;
     time.tvNSec = 0;
     time.tvSec = 0;
@@ -304,7 +302,7 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition010, Te
  * @tc.name  testCommonRenderGetMmapPosition011
  * @tc.desc  Reliability of function(GetMmapPosition)
  */
-HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition011, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition011, TestSize.Level2)
 {
     uint64_t frames = 42949672950;
     struct AudioTimeStamp time;
@@ -318,7 +316,7 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition011, Te
  * @tc.name  testCommonRenderGetMmapPosition012
  * @tc.desc  Reliability of function(GetMmapPosition)
  */
-HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition012, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition012, TestSize.Level2)
 {
     uint64_t frames = 200;
     struct AudioTimeStamp time;
@@ -332,7 +330,7 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition012, Te
  * @tc.name  testCommonRenderGetMmapPosition013
  * @tc.desc  Reliability of function(GetMmapPosition)
  */
-HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition013, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition013, TestSize.Level2)
 {
     uint64_t frames = 0;
     struct AudioTimeStamp time;
@@ -346,7 +344,7 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition013, Te
  * @tc.name  testCommonRenderGetMmapPosition014
  * @tc.desc  Reliability of function(GetMmapPosition)
  */
-HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition014, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition014, TestSize.Level2)
 {
     uint64_t frames = 0;
     struct AudioTimeStamp time;
@@ -360,12 +358,8 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition014, Te
  * @tc.name  testCommonRenderGetMmapPosition015
  * @tc.desc  Reliability of function(GetMmapPosition)
  */
-HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition015, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition015, TestSize.Level2)
 {
-
-    struct AudioTimeStamp time;
-    time.tvNSec = 0;
-    time.tvSec = 0;
     int32_t i;
     for (i = 0; i < 50; i++) {
         EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->GetMmapPosition(nullptr, nullptr, nullptr));
@@ -377,7 +371,7 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition015, Te
  * @tc.name  testCommonRenderGetMmapPosition016
  * @tc.desc  Reliability of function(GetMmapPosition)
  */
-HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition016, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition016, TestSize.Level2)
 {
     uint64_t frames = 0;
     struct AudioTimeStamp time;
@@ -394,7 +388,7 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition016, Te
  * @tc.name  testCommonRenderGetMmapPosition017
  * @tc.desc  Reliability of function(GetMmapPosition)
  */
-HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition017, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition017, TestSize.Level2)
 {
     uint64_t frames = 0;
     struct AudioTimeStamp time;
@@ -411,9 +405,8 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition017, Te
  * @tc.name  testCommonRenderGetMmapPosition018
  * @tc.desc  Reliability of function(GetMmapPosition)
  */
-HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition018, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition018, TestSize.Level2)
 {
-
     struct AudioTimeStamp time;
     time.tvNSec = 0;
     time.tvSec = 0;
@@ -428,9 +421,8 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition018, Te
  * @tc.name  testCommonRenderGetMmapPosition019
  * @tc.desc  Reliability of function(GetMmapPosition)
  */
-HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition019, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition019, TestSize.Level2)
 {
-
     struct AudioTimeStamp time;
     time.tvNSec = 256;
     time.tvSec = 256;
@@ -445,7 +437,7 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition019, Te
  * @tc.name  testCommonRenderGetMmapPosition020
  * @tc.desc  Reliability of function(GetMmapPosition)
  */
-HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition020, TestSize.Level1)
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition020, TestSize.Level2)
 {
     uint64_t frames = 256;
     struct AudioTimeStamp time;

@@ -1022,7 +1022,7 @@ HWTEST_F(CodecHdiOmxTest, SUB_DriverSystem_CodecHdi_V2_0550, Function | MediumTe
     allocBuffer.type = READ_WRITE_TYPE;
     err = component_->AllocateBuffer(component_, (uint32_t)PortIndex::PORT_INDEX_OUTPUT, &allocBuffer);
     ASSERT_EQ(err, HDF_SUCCESS);
-    err = component_->FreeBuffer(component_, (uint32_t )PortIndex::PORT_INDEX_OUTPUT, &allocBuffer);
+    err = component_->FreeBuffer(component_, (uint32_t)PortIndex::PORT_INDEX_OUTPUT, &allocBuffer);
     ASSERT_EQ(err, HDF_SUCCESS);
 }
 /**

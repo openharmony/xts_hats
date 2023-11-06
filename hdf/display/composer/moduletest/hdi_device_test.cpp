@@ -532,7 +532,7 @@ TEST_F(DeviceTest, CtrlTest)
     ASSERT_TRUE(ret == DISPLAY_SUCCESS) << "RegDisplayVBlankCallback failed";
     ret = display->SetDisplayVsyncEnabled(true);
     ASSERT_TRUE(ret == DISPLAY_SUCCESS) << "SetDisplayVsyncEnabled failed";
-    ret = VblankCtr::GetInstance().WaitVblank(SLEEP_CONT_2000); // 1000ms
+    ret = VblankCtr::GetInstance().WaitVblank(SLEEP_CONT_2000); // 2000ms
     ASSERT_TRUE(ret == DISPLAY_SUCCESS) << "WaitVblank timeout";
     ret = display->SetDisplayVsyncEnabled(false);
     ASSERT_TRUE(ret == DISPLAY_SUCCESS) << "SetDisplayVsyncEnabled failed";

@@ -27,6 +27,8 @@
 #include "hdi_test_device_common.h"
 #include "hdi_test_display.h"
 #include "hdi_test_render_utils.h"
+#include "v1_0/hdi_impl/display_buffer_hdi_impl.h"
+#include "v1_0/display_command/display_cmd_requester.h"
 
 using namespace OHOS::HDI::Display::Buffer::V1_0;
 using namespace OHOS::HDI::Display::Composer::V1_0;
@@ -1397,4 +1399,69 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0610, TestSize.Level1)
     PrepareAndPrensent();
 
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+constexpr int32_t FD_INVALID = -1;
+constexpr int32_t FD_INVALID_2 = 1000;
+
+// test Init() with invalid fd
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_HdifdParcelableInit1, TestSize.Level1)
+{
+    bool ret;
+    HdifdParcelable hdifdParcelable(FD_INVALID);
+    ret = hdifdParcelable.Init(FD_INVALID);
+    EXPECT_EQ(false, ret);
+}
+
+// test Init() with invalid fd that is not -1
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_HdifdParcelableInit2, TestSize.Level1)
+{
+    bool ret;
+    HdifdParcelable hdifdParcelable(FD_INVALID);
+    ret = hdifdParcelable.Init(FD_INVALID_2);
+    EXPECT_EQ(false, ret);
+}
+
+// test Move() with invalid fd
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_Move, TestSize.Level1)
+{
+    int32_t hdiFd;
+    HdifdParcelable hdifdParcelable;
+    hdiFd = hdifdParcelable.Move();
+    EXPECT_EQ(FD_INVALID, hdiFd);
+}
+
+// test GetFd() with invalid fd
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_GetFd, TestSize.Level1)
+{
+    int32_t hdiFd;
+    HdifdParcelable hdifdParcelable;
+    hdiFd = hdifdParcelable.GetFd();
+    EXPECT_EQ(FD_INVALID, hdiFd);
+}
+
+// test Dump with invalid fd
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_Dump, TestSize.Level1)
+{
+    HdifdParcelable hdifdParcelable;
+    std::string  str = hdifdParcelable.Dump();
+    std::string dump("fd: {-1}\n");
+    ASSERT_TRUE(dump.compare(str) == 0) << "Dump Result" << str;
+}
+
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_AddDeathRecipient, TestSize.Level1)
+{
+    bool ret;
+    sptr<IRemoteObject::DeathRecipient> recipient;
+    ret = g_gralloc->AddDeathRecipient(recipient);
+    EXPECT_EQ(true, ret);
+}
+
+HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_IsSupportedAlloc, TestSize.Level1)
+{
+    int32_t ret;
+    const std::vector<VerifyAllocInfo> infos;
+    std::vector<bool> supporteds;
+    ret = g_gralloc->IsSupportedAlloc(infos, supporteds);
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 }

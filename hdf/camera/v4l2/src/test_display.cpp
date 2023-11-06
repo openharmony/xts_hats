@@ -19,18 +19,6 @@ TestDisplay::TestDisplay()
 {
 }
 
-sptr<ICameraHost> TestDisplay::CameraHostImplGetInstance(void)
-{
-    using OHOS::Camera::CameraHostImpl;
-    CameraHostImpl *service = new (std::nothrow) CameraHostImpl();
-    if (service == nullptr) {
-        return nullptr;
-    }
-
-    service->Init();
-    return service;
-}
-
 uint64_t TestDisplay::GetCurrentLocalTimeStamp()
 {
     std::chrono::time_point<std::chrono::system_clock, std::chrono::milliseconds> tp =
@@ -349,30 +337,25 @@ void TestDisplay::BufferCallback(void* addr, int choice)
 
 void TestDisplay::Init()
 {
-    std::shared_ptr<OHOS::Camera::IDeviceManager> deviceManager = OHOS::Camera::IDeviceManager::GetInstance();
-    if (!init_flag) {
-        deviceManager->Init();
-        init_flag = 1;
-    }
-    constexpr const char *DEMO_SERVICE_NAME = "camera_service";
-    std::cout << "==========[test log] TestDisplay::Init()." << std::endl;
+    CAMERA_LOGD("TestDisplay::Init().");
     if (cameraHost == nullptr) {
+        constexpr const char *DEMO_SERVICE_NAME = "camera_service";
         cameraHost = ICameraHost::Get(DEMO_SERVICE_NAME, false);
-        std::cout << "==========[test log] Camera::CameraHost::CreateCameraHost();" << std::endl;
+        CAMERA_LOGI("Camera::CameraHost::CreateCameraHost()");
         if (cameraHost == nullptr) {
-            std::cout << "==========[test log] CreateCameraHost failed." << std::endl;
+            CAMERA_LOGE("CreateCameraHost failed.");
             return;
         }
-        std::cout << "==========[test log] CreateCameraHost success." << std::endl;
+        CAMERA_LOGI("CreateCameraHost success.");
     }
 
     OHOS::sptr<DemoCameraHostCallback> cameraHostCallback = new DemoCameraHostCallback();
     OHOS::Camera::RetCode ret = cameraHost->SetCallback(cameraHostCallback);
     if (ret != HDI::Camera::V1_0::NO_ERROR) {
-        std::cout << "==========[test log] SetCallback failed." << std::endl;
+        CAMERA_LOGE("SetCallback failed.");
         return;
     } else {
-        std::cout << "==========[test log] SetCallback success." << std::endl;
+        CAMERA_LOGI("SetCallback success.");
     }
 
     if (cameraDevice == nullptr) {
@@ -382,22 +365,17 @@ void TestDisplay::Init()
         const OHOS::sptr<DemoCameraDeviceCallback> callback = new DemoCameraDeviceCallback();
         rc = (CamRetCode)cameraHost->OpenCamera(cameraIds.front(), callback, cameraDevice);
         if (rc != HDI::Camera::V1_0::NO_ERROR || cameraDevice == nullptr) {
-            std::cout << "==========[test log] OpenCamera failed, rc = " << rc << std::endl;
+            CAMERA_LOGE("OpenCamera failed, rc = %{public}d", rc);
             return;
         }
-        std::cout << "==========[test log]  OpenCamera success." << std::endl;
+        CAMERA_LOGI("OpenCamera success.");
     }
 }
 
 void TestDisplay::UsbInit()
 {
-    std::shared_ptr<OHOS::Camera::IDeviceManager> deviceManager = OHOS::Camera::IDeviceManager::GetInstance();
-    if (!init_flag) {
-        deviceManager->Init();
-        init_flag = 1;
-    }
-    constexpr const char *DEMO_SERVICE_NAME = "camera_service";
     if (cameraHost == nullptr) {
+        constexpr const char *DEMO_SERVICE_NAME = "camera_service";
         cameraHost = ICameraHost::Get(DEMO_SERVICE_NAME, false);
         if (cameraHost == nullptr) {
             std::cout << "==========[test log] CreateCameraHost failed." << std::endl;

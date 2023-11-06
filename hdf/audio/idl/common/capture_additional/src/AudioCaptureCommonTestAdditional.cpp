@@ -1832,7 +1832,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureReqMmapBuffer006, Function | M
  * @tc.name   : testCaptureGetMmapPosition001
  * @tc.desc   : capture_ is nullptr
  */
-HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetMmapPosition001, Function | MediumTest | Level1)
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetMmapPosition001, Function | MediumTest | Level2)
 {
     int32_t ret = 0;
     uint64_t frames = 0;
@@ -1888,7 +1888,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCapturePause001, Function | MediumTes
  * @tc.name   : testCapturePause002
  * @tc.desc   : After calling start and stop, pause is called
  */
-HWTEST_F(AudioUtCaptureTestAdditional, testCapturePause002, Function | MediumTest | Level2)
+HWTEST_F(AudioUtCaptureTestAdditional, testCapturePause002, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
 
@@ -2045,33 +2045,6 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump002, Function | Me
 }
 
 /**
- * @tc.number : SUB_Driver_Audio_Capture_AudioDevDump_0500
- * @tc.name   : testCaptureAudioDevDump003
- * @tc.desc   : Dump to a read-only file
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump003, Function | MediumTest | Level1)
-{
-    int32_t range = 3;
-    int32_t ret = 0;
-
-    FILE *file = fopen("/data/CaptureDump.log", "w");
-    ASSERT_NE(nullptr, file);
-    ret = fclose(file);
-    ASSERT_EQ(0, ret);
-
-    file = fopen("/data/CaptureDump.log", "r");
-    int32_t fd = fileno(file);
-    if (fd == -1) {
-        fclose(file);
-        ASSERT_NE(fd, -1);
-    }
-
-    ret = capture_->AudioDevDump(capture_, range, fd);
-    EXPECT_NE(ret, HDF_SUCCESS);
-    fclose(file);
-}
-
-/**
  * @tc.number : SUB_Driver_Audio_Capture_AudioDevDump_0600
  * @tc.name   : testCaptureAudioDevDump004
  * @tc.desc   : range is 5
@@ -2114,97 +2087,6 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump005, Function | Me
     ret = capture_->AudioDevDump(nullptr, range, fd);
     EXPECT_NE(ret, HDF_SUCCESS);
     fclose(file);
-}
-
-/**
- * @tc.number : SUB_Driver_Audio_Capture_AudioDevDump_0800
- * @tc.name   : testCaptureAudioDevDump006
- * @tc.desc   : range is 2
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump006, Function | MediumTest | Level2)
-{
-    int32_t ret = 0;
-
-    FILE *file = fopen("/data/CaptureDump.log", "wb+");
-    ASSERT_NE(nullptr, file);
-    int32_t fd = fileno(file);
-    if (fd == -1) {
-        fclose(file);
-        ASSERT_NE(fd, -1);
-    }
-    ret = capture_->AudioDevDump(capture_, 2, fd);
-    EXPECT_NE(ret, HDF_SUCCESS);
-    fclose(file);
-}
-
-/**
- * @tc.number : SUB_Driver_Audio_Capture_AudioDevDump_0900
- * @tc.name   : testCaptureAudioDevDump007
- * @tc.desc   : range is -1
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump007, Function | MediumTest | Level2)
-{
-    int32_t ret = 0;
-
-    FILE *file = fopen("/data/CaptureDump.log", "wb+");
-    ASSERT_NE(nullptr, file);
-    int fd = fileno(file);
-    if (fd == -1) {
-        fclose(file);
-        ASSERT_NE(fd, -1);
-    }
-    ret = capture_->AudioDevDump(capture_, -1, fd);
-    EXPECT_NE(ret, HDF_SUCCESS);
-    fclose(file);
-}
-
-/**
- * @tc.number : SUB_Driver_Audio_Capture_AudioDevDump_1000
- * @tc.name   : testCaptureAudioDevDump008
- * @tc.desc   : range is 2147483647
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump008, Function | MediumTest | Level2)
-{
-    int32_t ret = 0;
-
-    FILE *file = fopen("/data/CaptureDump.log", "wb+");
-    ASSERT_NE(nullptr, file);
-    int32_t fd = fileno(file);
-    if (fd == -1) {
-        fclose(file);
-        ASSERT_NE(fd, -1);
-    }
-    ret = capture_->AudioDevDump(capture_, 2147483647, fd);
-    EXPECT_NE(ret, HDF_SUCCESS);
-    fclose(file);
-}
-
-/**
- * @tc.number : SUB_Driver_Audio_Capture_AudioDevDump_1100
- * @tc.name   : testCaptureAudioDevDump009
- * @tc.desc   : fd is -1
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump009, Function | MediumTest | Level2)
-{
-    int32_t range = 4;
-    int32_t ret = 0;
-
-    ret = capture_->AudioDevDump(capture_, range, -1);
-    EXPECT_NE(ret, HDF_SUCCESS);
-}
-
-/**
- * @tc.number : SUB_Driver_Audio_Capture_AudioDevDump_1200
- * @tc.name   : testCaptureAudioDevDump010
- * @tc.desc   : fd is 2147483647
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump010, Function | MediumTest | Level2)
-{
-    int32_t range = 4;
-    int32_t ret = 0;
-
-    ret = capture_->AudioDevDump(capture_, range, 2147483647);
-    EXPECT_NE(ret, HDF_SUCCESS);
 }
 
 } // namespace

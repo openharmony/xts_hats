@@ -130,7 +130,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch003, TestSize.
     EXPECT_EQ(SENSOR_SUCCESS, ret);
     ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
-    for (int a = 0; a <= 50; a++) {
+    for (int a = 0; a < 50; a++) {
         for (auto iter : g_info) {
             int i = 0;
             ret = g_sensorInterface->SetBatch(iter.sensorId, i, SENSOR_POLL_TIME);
@@ -144,7 +144,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch003, TestSize.
  * @tc.name: testHdiSetBatchSensor004
  * @tc.desc: Sets the sampling time and data report interval for sensors in batches.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch004, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch004, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -161,7 +161,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch004, TestSize.
  * @tc.name: testHdiSensorSetBatch005
  * @tc.desc: Sets the sampling time and data report interval for sensors in batches.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch005, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch005, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -169,7 +169,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch005, TestSize.
     }
     int32_t ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
-    for (int i = 0; i <= 50; i++) {
+    for (int i = 0; i < 50; i++) {
         ret = g_sensorInterface->SetBatch(-1, SENSOR_INTERVAL2, SENSOR_POLL_TIME);
         EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
     }
@@ -180,7 +180,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch005, TestSize.
  * @tc.name: testHdiSensorSetBatch006
  * @tc.desc: Sets the sampling time and data report interval for sensors in batches.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch006, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch006, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -202,7 +202,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch006, TestSize.
  * @tc.name: testHdiSensorSetBatch007
  * @tc.desc: Sets the sampling time and data report interval for sensors in batches.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch007, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch007, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -212,7 +212,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch007, TestSize.
     EXPECT_EQ(SENSOR_SUCCESS, ret);
     ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
-    for (int a = 0; a <= 50; a++) {
+    for (int a = 0; a < 50; a++) {
         for (auto iter : g_info) {
             int i = -1;
             ret = g_sensorInterface->SetBatch(iter.sensorId, i, SENSOR_POLL_TIME);
@@ -280,7 +280,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch010, TestSize.
     EXPECT_EQ(SENSOR_SUCCESS, ret);
     ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
-    for (int a = 0; a <= 50; a++) {
+    for (int a = 0; a < 50; a++) {
         for (auto iter : g_info) {
             int i = 0;
             ret = g_sensorInterface->SetBatch(iter.sensorId, SENSOR_INTERVAL2, i);
@@ -294,7 +294,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch010, TestSize.
  * @tc.name: testHdiSensorSetBatch011
  * @tc.desc: Sets the sampling time and data report interval for sensors in batches.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch011, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch011, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -316,7 +316,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch011, TestSize.
  * @tc.name: testHdiSensorSetBatch012
  * @tc.desc: Sets the sampling time and data report interval for sensors in batches.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch012, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch012, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -326,7 +326,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch012, TestSize.
     EXPECT_EQ(SENSOR_SUCCESS, ret);
     ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
-    for (int a = 0; a <= 50; a++) {
+    for (int a = 0; a < 50; a++) {
         for (auto iter : g_info) {
             int i = -1;
             ret = g_sensorInterface->SetBatch(iter.sensorId, SENSOR_INTERVAL2, i);
@@ -357,7 +357,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister001, TestSize.
  * @tc.name: testHdiSensorRegister002
  * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister002, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister002, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -372,13 +372,13 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister002, TestSize.
  * @tc.name: testHdiSensorRegister003
  * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister003, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister003, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    for (int i = 0; i <= 50; i++) {
+    for (int i = 0; i < 50; i++) {
         int32_t ret = g_sensorInterface->Register(HDF_MEDICAL_SENSOR_TYPE, nullptr);
         EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
     }
@@ -412,7 +412,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister005, TestSize.
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    for (int i = 0; i <= 50; i++) {
+    for (int i = 0; i < 50; i++) {
         int32_t ret = g_sensorInterface->Register(HDF_MEDICAL_SENSOR_TYPE, g_traditionalCallback);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
         ret = g_sensorInterface->Unregister(HDF_MEDICAL_SENSOR_TYPE, g_traditionalCallback);
@@ -425,7 +425,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister005, TestSize.
  * @tc.name: testHdiSensorRegister006
  * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister006, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister006, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -442,13 +442,13 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister006, TestSize.
  * @tc.name: testHdiSensorRegister007
  * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister007, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister007, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    for (int i = 0; i <= 50; i++) {
+    for (int i = 0; i < 50; i++) {
         int32_t ret = g_sensorInterface->Register(HDF_MEDICAL_SENSOR_TYPE, nullptr);
         EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
         ret = g_sensorInterface->Unregister(HDF_MEDICAL_SENSOR_TYPE, nullptr);
@@ -461,7 +461,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister007, TestSize.
  * @tc.name: testHdiSensorRegister008
  * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister008, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister008, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -478,13 +478,13 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister008, TestSize.
  * @tc.name: testHdiSensorRegister009
  * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister009, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister009, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    for (int i = 0; i <= 50; i++) {
+    for (int i = 0; i < 50; i++) {
         int32_t ret = g_sensorInterface->Register(HDF_TRADITIONAL_SENSOR_TYPE, nullptr);
         EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
         ret = g_sensorInterface->Unregister(HDF_TRADITIONAL_SENSOR_TYPE, nullptr);
@@ -497,7 +497,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister009, TestSize.
  * @tc.name: testHdiSensorRegister010
  * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister010, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister010, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -514,13 +514,13 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister010, TestSize.
  * @tc.name: testHdiSensorRegister011
  * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister011, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister011, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    for (int i = 0; i <= 50; i++) {
+    for (int i = 0; i < 50; i++) {
         int32_t ret = g_sensorInterface->Register(HDF_SENSOR_GROUP_TYPE_MAX, nullptr);
         EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
         ret = g_sensorInterface->Unregister(HDF_SENSOR_GROUP_TYPE_MAX, nullptr);
@@ -533,7 +533,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorRegister011, TestSize.
  * @tc.name: testHdiSensorUnregister001
  * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister001, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister001, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -550,13 +550,13 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister001, TestSiz
  * @tc.name: testHdiSensorUnregister002
  * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister002, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister002, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    for (int i = 0; i <= 50; i++) {
+    for (int i = 0; i < 50; i++) {
         int32_t ret = g_sensorInterface->Register(HDF_SENSOR_TYPE_MAGNETIC_FIELD, g_traditionalCallback);
         EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
         ret = g_sensorInterface->Unregister(-1, g_traditionalCallback);
@@ -569,7 +569,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister002, TestSiz
  * @tc.name: testHdiSensorUnregister003
  * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister003, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister003, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -577,7 +577,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister003, TestSiz
     }
     int32_t ret = g_sensorInterface->Register(HDF_SENSOR_TYPE_CAPACITIVE, g_traditionalCallback);
     EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
-    for (int i = 0; i <= 50; i++) {
+    for (int i = 0; i < 50; i++) {
         ret = g_sensorInterface->Unregister(-1, g_traditionalCallback);
         EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
     }
@@ -588,7 +588,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister003, TestSiz
  * @tc.name: testHdiSensorUnregister004
  * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister004, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister004, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -605,13 +605,13 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister004, TestSiz
  * @tc.name: testHdiSensorUnregister005
  * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister005, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister005, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    for (int i = 0; i <= 50; i++) {
+    for (int i = 0; i < 50; i++) {
         int32_t ret = g_sensorInterface->Register(SENSOR_GROUP_TYPE_MAX, g_medicalCallback);
         EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
         ret = g_sensorInterface->Unregister(SENSOR_GROUP_TYPE_MAX, nullptr);
@@ -624,7 +624,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister005, TestSiz
  * @tc.name: testHdiSensorUnregister006
  * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister006, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister006, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -641,13 +641,13 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister006, TestSiz
  * @tc.name: testHdiSensorUnregister007
  * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister007, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister007, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    for (int i = 0; i <= 50; i++) {
+    for (int i = 0; i < 50; i++) {
         int32_t ret = g_sensorInterface->Register(SENSOR_GROUP_TYPE_MAX, g_traditionalCallback);
         EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
         ret = g_sensorInterface->Unregister(SENSOR_GROUP_TYPE_MAX, nullptr);
@@ -660,7 +660,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister007, TestSiz
  * @tc.name: testHdiSensorUnregister008
  * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister008, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister008, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -677,13 +677,13 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister008, TestSiz
  * @tc.name: testHdiSensorUnregister009
  * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister009, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister009, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    for (int i = 0; i <= 50; i++) {
+    for (int i = 0; i < 50; i++) {
         int32_t ret = g_sensorInterface->GetAllSensorInfo(g_info);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
         ret = g_sensorInterface->Unregister(TRADITIONAL_SENSOR_TYPE, g_medicalCallback);
@@ -696,7 +696,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister009, TestSiz
  * @tc.name: testHdiSensorUnregister010
  * @tc.desc: Returns 0 if the callback is successfully registered; returns a negative value otherwise.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister010, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister010, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -747,7 +747,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorEnable001, TestSize.Le
  * @tc.name: testHdiSensorEnable002
  * @tc.desc: Enables the sensor available in the sensor list based on the specified sensor ID.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorEnable002, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorEnable002, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -764,7 +764,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorEnable002, TestSize.Le
  * @tc.name: testHdiSensorEnable003
  * @tc.desc: Enables the sensor available in the sensor list based on the specified sensor ID.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorEnable003, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorEnable003, TestSize.Level2)
 {
     if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
@@ -772,7 +772,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorEnable003, TestSize.Le
     }
     int32_t ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
-    for (int i = 0; i <= 50; i++) {
+    for (int i = 0; i < 50; i++) {
         ret = g_sensorInterface->Enable(-1);
         EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
     }
@@ -823,7 +823,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorGetAllSensorInfo001, T
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    for (int i = 0; i <= 50; i++) {
+    for (int i = 0; i < 50; i++) {
         int32_t ret = g_sensorInterface->GetAllSensorInfo(g_info);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
     }
@@ -861,7 +861,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetOption002, TestSize
     }
     int32_t ret = g_sensorInterface->GetAllSensorInfo(g_info);
     EXPECT_GT(g_info.size(), 0);
-    for (int i = 0; i <= 50; i++) {
+    for (int i = 0; i < 50; i++) {
         for (auto iter : g_info) {
             ret = g_sensorInterface->SetOption(iter.sensorId, 100);
             EXPECT_EQ(SENSOR_SUCCESS, ret);
@@ -901,7 +901,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetOption004, TestSize
     }
     int32_t ret = g_sensorInterface->GetAllSensorInfo(g_info);
     EXPECT_GT(g_info.size(), 0);
-    for (int i = 0; i <= 50; i++) {
+    for (int i = 0; i < 50; i++) {
         for (auto iter : g_info) {
             ret = g_sensorInterface->SetOption(iter.sensorId, 1000);
             EXPECT_EQ(SENSOR_SUCCESS, ret);
@@ -941,7 +941,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetOption006, TestSize
     }
     int32_t ret = g_sensorInterface->GetAllSensorInfo(g_info);
     EXPECT_GT(g_info.size(), 0);
-    for (int i = 0; i <= 50; i++) {
+    for (int i = 0; i < 50; i++) {
         for (auto iter : g_info) {
             ret = g_sensorInterface->SetOption(iter.sensorId, 10000);
             EXPECT_EQ(SENSOR_SUCCESS, ret);
@@ -954,7 +954,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetOption006, TestSize
  * @tc.name: testHdiSensorReadData001
  * @tc.desc: Read event data for the specified sensor.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData001, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData001, TestSize.Level2)
 {
     ASSERT_NE(nullptr, g_sensorDev);
     int32_t ret = g_sensorDev->ReadData(HDF_SENSOR_TYPE_ACCELEROMETER, nullptr);
@@ -966,7 +966,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData001, TestSize.
  * @tc.name: testHdiSensorReadData002
  * @tc.desc: Read event data for the specified sensor.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData002, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData002, TestSize.Level2)
 {
     ASSERT_NE(nullptr, g_sensorDev);
     int32_t ret = g_sensorDev->ReadData(HDF_SENSOR_TYPE_GYROSCOPE, nullptr);
@@ -978,7 +978,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData002, TestSize.
  * @tc.name: testHdiSensorReadData003
  * @tc.desc: Read event data for the specified sensor.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData003, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData003, TestSize.Level2)
 {
     ASSERT_NE(nullptr, g_sensorDev);
     int32_t ret = g_sensorDev->ReadData(HDF_SENSOR_TYPE_PHOTOPLETHYSMOGRAPH, nullptr);
@@ -990,7 +990,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData003, TestSize.
  * @tc.name: testHdiSensorReadData004
  * @tc.desc: Read event data for the specified sensor.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData004, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData004, TestSize.Level2)
 {
     ASSERT_NE(nullptr, g_sensorDev);
     int32_t ret = g_sensorDev->ReadData(HDF_SENSOR_TYPE_ELECTROCARDIOGRAPH, nullptr);
@@ -1002,7 +1002,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData004, TestSize.
  * @tc.name: testHdiSensorReadData005
  * @tc.desc: Read event data for the specified sensor.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData005, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData005, TestSize.Level2)
 {
     ASSERT_NE(nullptr, g_sensorDev);
     int32_t ret = g_sensorDev->ReadData(HDF_SENSOR_TYPE_MAGNETIC_FIELD, nullptr);
@@ -1014,7 +1014,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData005, TestSize.
  * @tc.name: testHdiSensorReadData006
  * @tc.desc: Read event data for the specified sensor.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData006, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData006, TestSize.Level2)
 {
     ASSERT_NE(nullptr, g_sensorDev);
     int32_t ret = g_sensorDev->ReadData(HDF_SENSOR_TYPE_CAPACITIVE, nullptr);
@@ -1026,7 +1026,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData006, TestSize.
  * @tc.name: testHdiSensorReadData007
  * @tc.desc: Read event data for the specified sensor.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData007, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData007, TestSize.Level2)
 {
     ASSERT_NE(nullptr, g_sensorDev);
     int32_t ret = g_sensorDev->ReadData(HDF_SENSOR_TYPE_BAROMETER, nullptr);
@@ -1038,7 +1038,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData007, TestSize.
  * @tc.name: testHdiSensorReadData008
  * @tc.desc: Read event data for the specified sensor.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData008, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData008, TestSize.Level2)
 {
     ASSERT_NE(nullptr, g_sensorDev);
     int32_t ret = g_sensorDev->ReadData(HDF_SENSOR_TYPE_TEMPERATURE, nullptr);
@@ -1050,7 +1050,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData008, TestSize.
  * @tc.name: testHdiSensorReadData009
  * @tc.desc: Read event data for the specified sensor.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData009, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData009, TestSize.Level2)
 {
     ASSERT_NE(nullptr, g_sensorDev);
     int32_t ret = g_sensorDev->ReadData(HDF_SENSOR_TYPE_HALL, nullptr);
@@ -1062,7 +1062,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData009, TestSize.
  * @tc.name: testHdiSensorReadData010
  * @tc.desc: Read event data for the specified sensor.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData010, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData010, TestSize.Level2)
 {
     ASSERT_NE(nullptr, g_sensorDev);
     int32_t ret = g_sensorDev->ReadData(HDF_SENSOR_TYPE_GESTURE, nullptr);
@@ -1074,7 +1074,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData010, TestSize.
  * @tc.name: testHdiSensorReadData011
  * @tc.desc: Read event data for the specified sensor.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData011, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData011, TestSize.Level2)
 {
     ASSERT_NE(nullptr, g_sensorDev);
     int32_t ret = g_sensorDev->ReadData(HDF_SENSOR_TYPE_PROXIMITY, nullptr);
@@ -1086,7 +1086,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData011, TestSize.
  * @tc.name: testHdiSensorReadData012
  * @tc.desc: Read event data for the specified sensor.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData012, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData012, TestSize.Level2)
 {
     ASSERT_NE(nullptr, g_sensorDev);
     int32_t ret = g_sensorDev->ReadData(HDF_SENSOR_TYPE_HUMIDITY, nullptr);
@@ -1098,7 +1098,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData012, TestSize.
  * @tc.name: testHdiSensorReadData013
  * @tc.desc: Read event data for the specified sensor.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData013, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData013, TestSize.Level2)
 {
     ASSERT_NE(nullptr, g_sensorDev);
     int32_t ret = g_sensorDev->ReadData(HDF_SENSOR_TYPE_ORIENTATION, nullptr);
@@ -1110,7 +1110,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData013, TestSize.
  * @tc.name: testHdiSensorReadData014
  * @tc.desc: Read event data for the specified sensor.
  */
-HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData014, TestSize.Level1)
+HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorReadData014, TestSize.Level2)
 {
     ASSERT_NE(nullptr, g_sensorDev);
     int32_t ret = g_sensorDev->ReadData(HDF_SENSOR_TYPE_GRAVITY, nullptr);

@@ -30,6 +30,7 @@ const float HALF_OF_MAX_VOLUME = 0.5;
 const int MOVE_LEFT_NUM = 8;
 const int TEST_SAMPLE_RATE_MASK_48000 = 48000;
 const int TEST_CHANNEL_COUNT = 2;
+const int32_t MMAP_SUGGUEST_REQ_SIZE = 1920;
 
 class AudioUtCaptureTestAdditional : public testing::Test {
 public:

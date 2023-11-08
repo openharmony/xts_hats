@@ -13,15 +13,15 @@
  * limitations under the License.
  */
 
+#include "hdf_log.h"
+#include "v1_0/codec_image_type.h"
+#include "v1_0/codec_types.h"
+#include "v1_0/display_buffer_type.h"
+#include "v1_0/display_composer_type.h"
+#include "v1_0/icodec_image.h"
+#include "v1_0/include/idisplay_buffer.h"
 #include <buffer_handle.h>
 #include <gtest/gtest.h>
-#include "hdf_log.h"
-#include "v1_0/include/idisplay_buffer.h"
-#include "v1_0/display_composer_type.h"
-#include "v1_0/display_buffer_type.h"
-#include "v1_0/codec_types.h"
-#include "v1_0/codec_image_type.h"
-#include "v1_0/icodec_image.h"
 #define HDF_LOG_TAG codec_jpeg_test
 
 using namespace std;
@@ -38,14 +38,12 @@ static OHOS::sptr<ICodecImage> hdiJpeg_;
 static IDisplayBuffer *hdiBuffer_;
 class CodecHdiJpegTestAdditional : public testing::Test {
 public:
-
     void InitOutBuffer(CodecImageBuffer &outBuffer)
     {
-        AllocInfo alloc = {
-            .width = WIDTH,
-            .height = HEIGHT,
-            .usage = HBM_USE_CPU_READ | HBM_USE_CPU_WRITE | HBM_USE_MEM_DMA,
-            .format = PIXEL_FMT_YCBCR_420_SP};
+        AllocInfo alloc = {.width = WIDTH,
+                           .height = HEIGHT,
+                           .usage = HBM_USE_CPU_READ | HBM_USE_CPU_WRITE | HBM_USE_MEM_DMA,
+                           .format = PIXEL_FMT_YCBCR_420_SP};
 
         BufferHandle *bufferHandle = nullptr;
         auto err = hdiBuffer_->AllocMem(alloc, bufferHandle);
@@ -228,7 +226,7 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode0009, TestSize.Level2)
  * @tc.name   : testCodecDoJpegDecode010
  * @tc.desc   : Determines the result of the function when the wrong argument is passed
  */
-HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode0010, TestSize.Level2)
+HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode010, TestSize.Level2)
 {
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     struct CodecImageBuffer inBuffer;
@@ -244,7 +242,7 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode0010, TestSize.Level2)
  * @tc.name   : testCodecDoJpegDecode011
  * @tc.desc   : Determines the result of the function when the wrong argument is passed
  */
-HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode0011, TestSize.Level2)
+HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode011, TestSize.Level2)
 {
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     struct CodecImageBuffer inBuffer;
@@ -260,7 +258,7 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode0011, TestSize.Level2)
  * @tc.name   : testCodecDoJpegDecode012
  * @tc.desc   : Determines the result of the function when the wrong argument is passed
  */
-HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode0012, TestSize.Level2)
+HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode012, TestSize.Level2)
 {
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     struct CodecImageBuffer inBuffer;
@@ -512,4 +510,28 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecAllocateInBuffer006, TestSize.Leve
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, 200, CODEC_IMAGE_JPEG);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
-}  // namespace
+
+/**
+ * @tc.number : SUB_Driver_Codec_Init_0100
+ * @tc.name   : testInit001
+ * @tc.desc   : Determines the result of the function when the correct argument is passed in
+ */
+HWTEST_F(CodecHdiJpegTestAdditional, testInit002, TestSize.Level2)
+{
+    ASSERT_TRUE(hdiJpeg_ != nullptr);
+    auto ret = hdiJpeg_->Init(CODEC_IMAGE_INVALID);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Codec_DeInit_0100
+ * @tc.name   : testDeInit001
+ * @tc.desc   : Determines the result of the function when the correct argument is passed in
+ */
+HWTEST_F(CodecHdiJpegTestAdditional, testDeInit002, TestSize.Level2)
+{
+    ASSERT_TRUE(hdiJpeg_ != nullptr);
+    auto ret = hdiJpeg_->DeInit(CODEC_IMAGE_INVALID);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+} // namespace

@@ -514,7 +514,7 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecAllocateInBuffer006, TestSize.Leve
 /**
  * @tc.number : SUB_Driver_Codec_Init_0100
  * @tc.name   : testInit001
- * @tc.desc   : Determines the result of the function when the correct argument is passed in
+ * @tc.desc   : Determines the result of the function when the correct argument is invalid
  */
 HWTEST_F(CodecHdiJpegTestAdditional, testInit002, TestSize.Level2)
 {
@@ -526,7 +526,7 @@ HWTEST_F(CodecHdiJpegTestAdditional, testInit002, TestSize.Level2)
 /**
  * @tc.number : SUB_Driver_Codec_DeInit_0100
  * @tc.name   : testDeInit001
- * @tc.desc   : Determines the result of the function when the correct argument is passed in
+ * @tc.desc   : Determines the result of the function when the correct argument is invalid
  */
 HWTEST_F(CodecHdiJpegTestAdditional, testDeInit002, TestSize.Level2)
 {

@@ -256,11 +256,11 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetParameter006, Function | Me
 }
 /**
 * @tc.number : SUB_Driver_Codec_GetParameter_0800
-* @tc.name   : HdfCodecHdiGetVersionTest_007
+* @tc.name   : testGetParameter007
 * @tc.desc   : When the index = OMX_IndexParamVideoIntraRefresh,structure inParamStruct not initialize,
                 send the command failed
 */
-HWTEST_F(CodecBenchmarkManagerTestAdditional, HdfCodecHdiGetVersionTest_007, Function | MediumTest | Level2)
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetParameter007, Function | MediumTest | Level2)
 {
     int32_t ret;
     std::vector<int8_t> inParam;
@@ -1433,7 +1433,7 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testComponentRoleEnum001, Function
 /**
  * @tc.number : SUB_Driver_Codec_ComponentRoleEnum_0300
  * @tc.name   : testComponentRoleEnum002
- * @tc.desc   : When index=64000, sending command failed
+ * @tc.desc   : When index=65000, sending command failed
  */
 HWTEST_F(CodecBenchmarkManagerTestAdditional, testComponentRoleEnum002, Function | MediumTest | Level2)
 {
@@ -1503,7 +1503,7 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testUseEglImage003, Function | Med
 /**
  * @tc.number : SUB_Driver_Codec_SetCallbacks_0200
  * @tc.name   : testSetCallbacks001
- * @tc.desc   : Set component status to OMX_StateLoaded, portIndex=INPUT_INDEX, sending command failed.
+ * @tc.desc   : Set the function entry to appData = -1
  */
 HWTEST_F(CodecBenchmarkManagerTestAdditional, testSetCallbacks001, Function | MediumTest | Level1)
 {
@@ -1516,7 +1516,7 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testSetCallbacks001, Function | Me
 /**
  * @tc.number  SUB_Driver_Codec_GetComponentVersion_0100
  * @tc.name  testGetComponentVersion001
- * @tc.desc  The input parameter is empty. GetComponentVersion is error.
+ * @tc.desc  The input parameter is empty.
  */
 HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetComponentVersion001, Function | MediumTest | Level1)
 {

@@ -29,6 +29,7 @@ using OHOS::HDI::Display::Buffer::V1_0::IDisplayBuffer;
 class DisplayBufferMtAdditional : public ::testing::Test {
 protected:
     static void SetUpTestCase();
+    int32_t AfterCache(BufferHandle *handle);
 public:
     int32_t RunTest(const AllocInfo& info);
 };

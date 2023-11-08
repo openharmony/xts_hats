@@ -1421,3 +1421,25 @@ HWTEST_F(DeviceTestAdditional, testSetVirtualDisplayBuffer004, Function | Medium
     auto ret = g_composerDevice->SetVirtualDisplayBuffer(-1, buffer, fence);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
+
+/**
+ * @tc.number : SUB_Driver_Display_RegDisplayVBlankCallback_0100
+ * @tc.name   : testRegDisplayVBlankCallback001
+ * @tc.desc   : test RegDisplayVBlankCallback
+ */
+HWTEST_F(DeviceTestAdditional, testRegDisplayVBlankCallback001, Function | MediumTest | Level1)
+{
+    auto ret = g_composerDevice->RegDisplayVBlankCallback(g_displayIds[0], nullptr, nullptr);
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_RegHotPlugCallback_0100
+ * @tc.name   : testRegHotPlugCallback001
+ * @tc.desc   : test RegHotPlugCallback
+ */
+HWTEST_F(DeviceTestAdditional, testRegHotPlugCallback001, Function | MediumTest | Level1)
+{
+    auto ret = g_composerDevice->RegHotPlugCallback(nullptr, nullptr);
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+}

@@ -801,10 +801,10 @@ HWTEST_F(EffectModelTestAdditional, testGetEffectDescriptor027, TestSize.Level2)
 }
 /**
  * @tc.number : SUB_Driver_Audio_DestroyEffectController_0100
- * @tc.name   : HdfAudioDestroyEffectController001
+ * @tc.name   : testAudioDestroyEffectController001
  * @tc.desc   : Reliability of function(DestroyEffectController)
  */
-HWTEST_F(EffectModelTestAdditional, HdfAudioDestroyEffectController001, TestSize.Level2)
+HWTEST_F(EffectModelTestAdditional, testAudioDestroyEffectController001, TestSize.Level2)
 {
     struct EffectInfo info = {
         .libName = strdup("libmock_effect_lib"),
@@ -823,10 +823,10 @@ HWTEST_F(EffectModelTestAdditional, HdfAudioDestroyEffectController001, TestSize
 }
 /**
  * @tc.number : SUB_Driver_Audio_DestroyEffectController_0200
- * @tc.name   : HdfAudioDestroyEffectController002
+ * @tc.name   : testAudioDestroyEffectController002
  * @tc.desc   : Reliability of function(DestroyEffectController)
  */
-HWTEST_F(EffectModelTestAdditional, HdfAudioDestroyEffectController002, TestSize.Level1)
+HWTEST_F(EffectModelTestAdditional, testAudioDestroyEffectController002, TestSize.Level1)
 {
     struct EffectInfo info = {
         .libName = strdup("libmock_effect_lib"),
@@ -841,10 +841,10 @@ HWTEST_F(EffectModelTestAdditional, HdfAudioDestroyEffectController002, TestSize
 }
 /**
  * @tc.number : SUB_Driver_Audio_DestroyEffectController_0300
- * @tc.name   : HdfAudioDestroyEffectController003
+ * @tc.name   : testAudioDestroyEffectController003
  * @tc.desc   : Reliability of function(DestroyEffectController)
  */
-HWTEST_F(EffectModelTestAdditional, HdfAudioDestroyEffectController003, TestSize.Level1)
+HWTEST_F(EffectModelTestAdditional, testAudioDestroyEffectController003, TestSize.Level1)
 {
     struct EffectInfo info = {
         .libName = strdup("libmock_effect_lib"),
@@ -862,10 +862,10 @@ HWTEST_F(EffectModelTestAdditional, HdfAudioDestroyEffectController003, TestSize
 }
 /**
  * @tc.number : SUB_Driver_Audio_DestroyEffectController_0400
- * @tc.name   : HdfAudioDestroyEffectController004
+ * @tc.name   : testAudioDestroyEffectController004
  * @tc.desc   : Reliability of function(DestroyEffectController)
  */
-HWTEST_F(EffectModelTestAdditional, HdfAudioDestroyEffectController004, TestSize.Level2)
+HWTEST_F(EffectModelTestAdditional, testAudioDestroyEffectController004, TestSize.Level2)
 {
     struct EffectInfo info = {
         .libName = strdup("libmock_effect_lib"),
@@ -881,10 +881,10 @@ HWTEST_F(EffectModelTestAdditional, HdfAudioDestroyEffectController004, TestSize
 }
 /**
  * @tc.number : SUB_Driver_Audio_DestroyEffectController_0500
- * @tc.name   : HdfAudioDestroyEffectController005
+ * @tc.name   : testAudioDestroyEffectController005
  * @tc.desc   : Reliability of function(DestroyEffectController)
  */
-HWTEST_F(EffectModelTestAdditional, HdfAudioDestroyEffectController005, TestSize.Level2)
+HWTEST_F(EffectModelTestAdditional, testAudioDestroyEffectController005, TestSize.Level2)
 {
     struct EffectInfo info = {
         .libName = strdup("libmock_effect_lib"),

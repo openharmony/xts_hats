@@ -1706,7 +1706,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop008, TestSize.Level1)
  * @tc.name  testCommonRenderStop009
  * @tc.desc  Reliability of function(Stop)
  */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop010, TestSize.Level1)
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop009, TestSize.Level1)
 {
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->GetRenderSpeed(nullptr, nullptr));
@@ -1718,7 +1718,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop010, TestSize.Level1)
  * @tc.name  testCommonRenderStop010
  * @tc.desc  Reliability of function(Stop)
  */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop011, TestSize.Level1)
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop010, TestSize.Level1)
 {
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
@@ -1734,7 +1734,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop011, TestSize.Level1)
  * @tc.name  testCommonRenderStop011
  * @tc.desc  Reliability of function(Stop)
  */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop012, TestSize.Level1)
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop011, TestSize.Level1)
 {
     int32_t i;
     for (i = 0; i < 100; i++) {
@@ -1749,7 +1749,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop012, TestSize.Level1)
  * @tc.name  testCommonRenderStop012
  * @tc.desc  Reliability of function(Stop)
  */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop013, TestSize.Level1)
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop012, TestSize.Level1)
 {
     int32_t i;
     for (i = 0; i < 100; i++) {
@@ -1764,7 +1764,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop013, TestSize.Level1)
  * @tc.name  testCommonRenderStop013
  * @tc.desc  Reliability of function(Stop)
  */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop014, TestSize.Level2)
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop013, TestSize.Level2)
 {
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->Stop(nullptr));
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->Start(nullptr));
@@ -1779,7 +1779,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop014, TestSize.Level2)
  * @tc.name  testCommonRenderStop014
  * @tc.desc  Reliability of function(Stop)
  */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop015, TestSize.Level2)
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop014, TestSize.Level2)
 {
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->Stop(nullptr));
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->Start(nullptr));

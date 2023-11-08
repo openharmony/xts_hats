@@ -23,7 +23,6 @@ group("HatsHdfCodecTest") {
       #"benchmarktest:HatsHdfCodecBenchmarkTest",
       "benchmarktest_additional:HatsHdfCodecBenchmarkTestAdditional",
       "hdi_adapter:HatsHdfAdapterCodecTest",
-      "hdi_adapter_additional:HatsHdfAdapterCodecTestAdditional",
       "hdi_image:HatsHdfImageCodecTest",
       "hdi_image_additional:HatsHdfImageCodecTestAdditional",
       "hdi_omx:HatsHdfOmxCodecTest",

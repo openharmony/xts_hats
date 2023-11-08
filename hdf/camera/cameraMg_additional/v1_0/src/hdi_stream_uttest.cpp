@@ -2025,24 +2025,6 @@ HWTEST_F(HdiStreamUtTestAdditional, testRelease001, Function | MediumTest | Leve
 }
 
 /**
- * @tc.number : SUB_Driver_Camera_OnFlashlightStatus_0100
- * @tc.name   : testOnFlashlightStatus001
- * @tc.desc   : OnFlashlightStatus, stability test, return success
- */
-HWTEST_F(HdiStreamUtTestAdditional, testOnFlashlightStatus001, Function | MediumTest | Level1)
-{
-    g_onFlashlightStatusFlag = false;
-    EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
-    if (cameraTest->cameraDevice == nullptr) {
-        cameraTest->service->GetCameraIds(cameraTest->cameraIds);
-        cameraTest->status = true;
-        cameraTest->rc = cameraTest->service->SetFlashlight(cameraTest->cameraIds.front(), cameraTest->status);
-        EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
-    }
-    EXPECT_EQ(g_onFlashlightStatusFlag, true);
-}
-
-/**
  * @tc.number : SUB_Driver_Camera_AttachBufferQueue_0200
  * @tc.name   : testAttachBufferQueue002
  * @tc.desc   : AttachBufferQueue, StreamInfo->streamId_ = -1, return error

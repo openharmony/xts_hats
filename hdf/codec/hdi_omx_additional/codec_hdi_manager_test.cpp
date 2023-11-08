@@ -12,23 +12,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <gtest/gtest.h>
-#include <osal_mem.h>
 #include "codec_callback_if.h"
 #include "codec_component_manager.h"
+#include <gtest/gtest.h>
+#include <osal_mem.h>
 using namespace std;
 using namespace testing::ext;
 namespace {
 class CodecHdiManagerTestAdditional : public testing::Test {
 public:
-    static void SetUpTestCase()
-    {}
-    static void TearDownTestCase()
-    {}
-    void SetUp()
-    {
-        manager_ = GetCodecComponentManager();
-    }
+    static void SetUpTestCase() {}
+    static void TearDownTestCase() {}
+    void SetUp() { manager_ = GetCodecComponentManager(); }
     void TearDown()
     {
         CodecComponentManagerRelease();
@@ -40,10 +35,10 @@ public:
 };
 
 /**
-* @tc.number  SUB_Driver_Codec_CodecHdi_0600
-* @tc.name  testCodecGetComponentNum001
-* @tc.desc   Determines whether the function gets the param correctly
-*/
+ * @tc.number  SUB_Driver_Codec_CodecHdi_0600
+ * @tc.name  testCodecGetComponentNum001
+ * @tc.desc   Determines whether the function gets the param correctly
+ */
 HWTEST_F(CodecHdiManagerTestAdditional, testCodecGetComponentNum001, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(manager_ != nullptr);
@@ -53,10 +48,10 @@ HWTEST_F(CodecHdiManagerTestAdditional, testCodecGetComponentNum001, Function | 
 }
 
 /**
-* @tc.number  SUB_Driver_Codec_CodecHdi_0700
-* @tc.name  testCodecGetComponentCapabilityList001
-* @tc.desc   Determine whether the function can obtain the correct value if there are existing values in the structure
-*/
+ * @tc.number  SUB_Driver_Codec_CodecHdi_0700
+ * @tc.name  testCodecGetComponentCapabilityList001
+ * @tc.desc   Determine whether the function can obtain the correct value if there are existing values in the structure
+ */
 HWTEST_F(CodecHdiManagerTestAdditional, testCodecGetComponentCapabilityList001, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(manager_ != nullptr);
@@ -69,10 +64,10 @@ HWTEST_F(CodecHdiManagerTestAdditional, testCodecGetComponentCapabilityList001, 
 }
 
 /**
-* @tc.number  SUB_Driver_Codec_CodecHdi_0800
-* @tc.name  testCodecGetComponentCapabilityList002
-* @tc.desc   Determine whether the function can obtain the correct value if there are existing values in the structure
-*/
+ * @tc.number  SUB_Driver_Codec_CodecHdi_0800
+ * @tc.name  testCodecGetComponentCapabilityList002
+ * @tc.desc   Determine whether the function can obtain the correct value if there are existing values in the structure
+ */
 HWTEST_F(CodecHdiManagerTestAdditional, testCodecGetComponentCapabilityList002, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(manager_ != nullptr);
@@ -86,10 +81,10 @@ HWTEST_F(CodecHdiManagerTestAdditional, testCodecGetComponentCapabilityList002, 
 }
 
 /**
-* @tc.number  SUB_Driver_Codec_CodecHdi_0900
-* @tc.name  testCodecGetComponentCapabilityList003
-* @tc.desc   Determine whether the function can obtain the correct value if there are existing values in the structure
-*/
+ * @tc.number  SUB_Driver_Codec_CodecHdi_0900
+ * @tc.name  testCodecGetComponentCapabilityList003
+ * @tc.desc   Determine whether the function can obtain the correct value if there are existing values in the structure
+ */
 HWTEST_F(CodecHdiManagerTestAdditional, testCodecGetComponentCapabilityList003, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(manager_ != nullptr);
@@ -102,10 +97,10 @@ HWTEST_F(CodecHdiManagerTestAdditional, testCodecGetComponentCapabilityList003, 
 }
 
 /**
-* @tc.number  SUB_Driver_Codec_CodecHdi_1000
-* @tc.name  testCodecGetComponentCapabilityList004
-* @tc.desc   Determine whether the function can obtain the correct value if there are existing values in the structure
-*/
+ * @tc.number  SUB_Driver_Codec_CodecHdi_1000
+ * @tc.name  testCodecGetComponentCapabilityList004
+ * @tc.desc   Determine whether the function can obtain the correct value if there are existing values in the structure
+ */
 HWTEST_F(CodecHdiManagerTestAdditional, testCodecGetComponentCapabilityList004, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(manager_ != nullptr);
@@ -118,10 +113,10 @@ HWTEST_F(CodecHdiManagerTestAdditional, testCodecGetComponentCapabilityList004, 
 }
 
 /**
-* @tc.number  SUB_Driver_Codec_CodecHdi_1100
-* @tc.name  testCodecGetComponentCapabilityList005
-* @tc.desc   Determine whether the function can obtain the correct value if there are existing values in the structure
-*/
+ * @tc.number  SUB_Driver_Codec_CodecHdi_1100
+ * @tc.name  testCodecGetComponentCapabilityList005
+ * @tc.desc   Determine whether the function can obtain the correct value if there are existing values in the structure
+ */
 HWTEST_F(CodecHdiManagerTestAdditional, testCodecGetComponentCapabilityList005, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(manager_ != nullptr);
@@ -134,26 +129,26 @@ HWTEST_F(CodecHdiManagerTestAdditional, testCodecGetComponentCapabilityList005, 
 }
 
 /**
-* @tc.number  SUB_Driver_Codec_CodecHdi_1200
-* @tc.name  testCodecGetComponentCapabilityList006
-* @tc.desc   When the number of codec components is negative, the validity of the function is judged
-*/
+ * @tc.number  SUB_Driver_Codec_CodecHdi_1200
+ * @tc.name  testCodecGetComponentCapabilityList006
+ * @tc.desc   When the number of codec components is negative, the validity of the function is judged
+ */
 HWTEST_F(CodecHdiManagerTestAdditional, testCodecGetComponentCapabilityList006, Function | MediumTest | Level2)
 {
     ASSERT_TRUE(manager_ != nullptr);
     int count = -1;
-    CodecCompCapability *capList = (CodecCompCapability *)
-        OsalMemAlloc(sizeof(CodecCompCapability) * (manager_->GetComponentNum()));
+    CodecCompCapability *capList =
+        (CodecCompCapability *)OsalMemAlloc(sizeof(CodecCompCapability) * (manager_->GetComponentNum()));
     ASSERT_TRUE(capList != nullptr);
     auto err = manager_->GetComponentCapabilityList(capList, count);
     EXPECT_NE(err, HDF_SUCCESS);
 }
 
 /**
-* @tc.number  SUB_Driver_Codec_CodecHdi_1300
-* @tc.name  testCodecCreateComponent001
-* @tc.desc   When the parameter passed by the function already has a value, determine whether it will have an effect
-*/
+ * @tc.number  SUB_Driver_Codec_CodecHdi_1300
+ * @tc.name  testCodecCreateComponent001
+ * @tc.desc   When the parameter passed by the function already has a value, determine whether it will have an effect
+ */
 HWTEST_F(CodecHdiManagerTestAdditional, testCodecCreateComponent001, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(manager_ != nullptr);
@@ -180,10 +175,10 @@ HWTEST_F(CodecHdiManagerTestAdditional, testCodecCreateComponent001, Function | 
 }
 
 /**
-* @tc.number  SUB_Driver_Codec_CodecHdi_1400
-* @tc.name  testCodecCreateComponent002
-* @tc.desc   Open the OpenMax component based on a non-existent compName
-*/
+ * @tc.number  SUB_Driver_Codec_CodecHdi_1400
+ * @tc.name  testCodecCreateComponent002
+ * @tc.desc   Open the OpenMax component based on a non-existent compName
+ */
 HWTEST_F(CodecHdiManagerTestAdditional, testCodecCreateComponent002, Function | MediumTest | Level2)
 {
     struct CodecCallbackType *callback = CodecCallbackTypeGet(nullptr);
@@ -199,10 +194,10 @@ HWTEST_F(CodecHdiManagerTestAdditional, testCodecCreateComponent002, Function | 
 }
 
 /**
-* @tc.number  SUB_Driver_Codec_CodecHdi_1500
-* @tc.name  testCodecCreateComponent003
-* @tc.desc   Open the OpenMax component based on a non-existent compName
-*/
+ * @tc.number  SUB_Driver_Codec_CodecHdi_1500
+ * @tc.name  testCodecCreateComponent003
+ * @tc.desc   Open the OpenMax component based on a non-existent compName
+ */
 HWTEST_F(CodecHdiManagerTestAdditional, testCodecCreateComponent003, Function | MediumTest | Level2)
 {
     struct CodecCallbackType *callback = CodecCallbackTypeGet(nullptr);
@@ -218,10 +213,10 @@ HWTEST_F(CodecHdiManagerTestAdditional, testCodecCreateComponent003, Function | 
 }
 
 /**
-* @tc.number  SUB_Driver_Codec_CodecHdi_1600
-* @tc.name  testCodecCreateComponent004
-* @tc.desc   Open the OpenMax component based on a non-existent compName
-*/
+ * @tc.number  SUB_Driver_Codec_CodecHdi_1600
+ * @tc.name  testCodecCreateComponent004
+ * @tc.desc   Open the OpenMax component based on a non-existent compName
+ */
 HWTEST_F(CodecHdiManagerTestAdditional, testCodecCreateComponent004, Function | MediumTest | Level2)
 {
     struct CodecCallbackType *callback = CodecCallbackTypeGet(nullptr);
@@ -237,10 +232,10 @@ HWTEST_F(CodecHdiManagerTestAdditional, testCodecCreateComponent004, Function | 
 }
 
 /**
-* @tc.number  SUB_Driver_Codec_CodecHdi_1700
-* @tc.name  testCodecCreateComponent005
-* @tc.desc   Open the OpenMax component based on a non-existent compName
-*/
+ * @tc.number  SUB_Driver_Codec_CodecHdi_1700
+ * @tc.name  testCodecCreateComponent005
+ * @tc.desc   Open the OpenMax component based on a non-existent compName
+ */
 HWTEST_F(CodecHdiManagerTestAdditional, testCodecCreateComponent005, Function | MediumTest | Level2)
 {
     struct CodecCallbackType *callback = CodecCallbackTypeGet(nullptr);
@@ -256,10 +251,10 @@ HWTEST_F(CodecHdiManagerTestAdditional, testCodecCreateComponent005, Function | 
 }
 
 /**
-* @tc.number  SUB_Driver_Codec_CodecHdi_1800
-* @tc.name  testCodecCreateComponent006
-* @tc.desc   Open the OpenMax component based on a non-existent compName
-*/
+ * @tc.number  SUB_Driver_Codec_CodecHdi_1800
+ * @tc.name  testCodecCreateComponent006
+ * @tc.desc   Open the OpenMax component based on a non-existent compName
+ */
 HWTEST_F(CodecHdiManagerTestAdditional, testCodecCreateComponent006, Function | MediumTest | Level1)
 {
     struct CodecCallbackType *callback = CodecCallbackTypeGet(nullptr);
@@ -275,10 +270,10 @@ HWTEST_F(CodecHdiManagerTestAdditional, testCodecCreateComponent006, Function | 
 }
 
 /**
-* @tc.number  SUB_Driver_Codec_CodecHdi_1900
-* @tc.name  testCodecCreateComponent007
-* @tc.desc   Open the OpenMax component based on a non-existent compName
-*/
+ * @tc.number  SUB_Driver_Codec_CodecHdi_1900
+ * @tc.name  testCodecCreateComponent007
+ * @tc.desc   Open the OpenMax component based on a non-existent compName
+ */
 HWTEST_F(CodecHdiManagerTestAdditional, testCodecCreateComponent007, Function | MediumTest | Level2)
 {
     struct CodecCallbackType *callback = CodecCallbackTypeGet(nullptr);
@@ -294,10 +289,10 @@ HWTEST_F(CodecHdiManagerTestAdditional, testCodecCreateComponent007, Function | 
 }
 
 /**
-* @tc.number  SUB_Driver_Codec_CodecHdi_2000
-* @tc.name  testCodecCreateComponent008
-* @tc.desc   Open the OpenMax component based on a non-existent compName
-*/
+ * @tc.number  SUB_Driver_Codec_CodecHdi_2000
+ * @tc.name  testCodecCreateComponent008
+ * @tc.desc   Open the OpenMax component based on a non-existent compName
+ */
 HWTEST_F(CodecHdiManagerTestAdditional, testCodecCreateComponent008, Function | MediumTest | Level2)
 {
     struct CodecCallbackType *callback = CodecCallbackTypeGet(nullptr);
@@ -311,4 +306,34 @@ HWTEST_F(CodecHdiManagerTestAdditional, testCodecCreateComponent008, Function | 
     EXPECT_EQ(component, nullptr);
     CodecCallbackTypeRelease(callback);
 }
-}  // namespace
+
+/**
+ * @tc.number  SUB_Driver_Codec_CodecHdi_2100
+ * @tc.name  testCodecDestroyComponent001
+ * @tc.desc   Test its stability by iterating through the DestroyComponent function
+ */
+HWTEST_F(CodecHdiManagerTestAdditional, testCodecDestroyComponent001, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(manager_ != nullptr);
+    uint32_t componentId = 0;
+    int i = 0;
+    while (i < 50) {
+        int32_t ret = manager_->DestroyComponent(componentId);
+        ASSERT_EQ(ret, HDF_SUCCESS);
+        i++;
+    }
+}
+
+/**
+ * @tc.number  SUB_Driver_Codec_CodecHdi_2200
+ * @tc.name  testCodecDestroyComponent002
+ * @tc.desc   Open the OpenMax component based on a non-existent compName
+ */
+HWTEST_F(CodecHdiManagerTestAdditional, testCodecDestroyComponent002, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(manager_ != nullptr);
+    uint32_t componentId = -1;
+    int32_t ret = manager_->DestroyComponent(componentId);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+}
+} // namespace

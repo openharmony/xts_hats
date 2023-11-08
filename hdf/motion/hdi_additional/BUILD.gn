@@ -1,4 +1,4 @@
-# Copyright (c) 2022 - 2023 Huawei Device Co., Ltd.
+# Copyright (c) 2023 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -11,33 +11,45 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+base_root = "../../../../../../"
+import("//build/ohos.gni")
 import("//build/test.gni")
-import("//test/xts/tools/build/suite.gni")
+import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
+import("$base_root/test/xts/tools/build/suite.gni")
 
-module_output_path = "hats/codec"
+module_output_path = "hats/motion"
 
-ohos_moduletest_suite("HatsHdfAdapterCodecTestAdditional") {
+ohos_moduletest_suite("HatsHdfMotionTestAdditional") {
   module_out_path = module_output_path
-  configs = [ ":hdc_codec_adapter_additional" ]
 
-  sources = [ "codec_hdi_adapter_test.cpp" ]
+  sources = [
+    "hdf_motion_hdi_test.cpp",
+    "motion_callback_impl.cpp",
+  ]
 
-  deps = [ "//third_party/googletest:gtest_main" ]
+  configs = [ ":hdf_motion_additional" ]
 
   if (is_standard_system) {
     external_deps = [
       "c_utils:utils",
-      "drivers_peripheral_codec:libcodec_hdi_passthrough_impl",
+      "drivers_interface_motion:libmotion_proxy_1.1",
       "hdf_core:libhdf_utils",
-      "hdf_core:libhdi",
       "hilog:libhilog",
+      "ipc:ipc_single",
     ]
-  } else {
-    external_deps = [ "hilog:libhilog" ]
   }
+  external_deps += [ "ipc:ipc_single" ]
+
   subsystem_name = "xts"
   part_name = "hats"
 }
-config("hdc_codec_adapter_additional") {
-  include_dirs = [ "//third_party/openmax/api/1.1.2" ]
+config("hdf_motion_additional") {
+  cflags = [
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fsigned-char",
+    "-fno-common",
+    "-fno-strict-aliasing",
+  ]
 }

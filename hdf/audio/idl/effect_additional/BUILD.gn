@@ -1,0 +1,39 @@
+# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/test.gni")
+import("//test/xts/tools/build/suite.gni")
+
+module_output_path = "hats/audio"
+ohos_moduletest_suite("HatsHdfAudioEffectTestAdditional") {
+  module_out_path = module_output_path
+  sources = [
+    "src/effect_common.cpp",
+    "src/effect_control_test.cpp",
+    "src/effect_model_test.cpp",
+  ]
+  configs = [ ":audio_idl_effect_additional" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_audio:effect_idl_headers",
+    "drivers_interface_audio:libeffect_proxy_1.0",
+    "hdf_core:libhdf_utils",
+    "hilog:libhilog",
+  ]
+  subsystem_name = "xts"
+  part_name = "hats"
+}
+config("audio_idl_effect_additional") {
+  include_dirs = []
+}

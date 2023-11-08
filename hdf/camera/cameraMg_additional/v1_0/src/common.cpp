@@ -19,6 +19,7 @@
 
 namespace OHOS::Camera {
 Test::ResultCallback Test::resultCallback_ = 0;
+bool g_onFlashlightStatusFlag = false;
 
 uint64_t Test::GetCurrentLocalTimeStamp()
 {

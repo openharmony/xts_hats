@@ -345,7 +345,7 @@ HWTEST_F(HdfMotionTestAdditional, testHdiUnregister001, Function | MediumTest | 
  * @tc.name   : testHdiUnregister002
  * @tc.desc   : Testing the effectiveness of the Unregister function
  */
-HWTEST_F(HdfMotionTestAdditional, testHdiUnregister002, Function | MediumTest | Level1)
+HWTEST_F(HdfMotionTestAdditional, testHdiUnregister002, Function | MediumTest | Level2)
 {
     if (g_motionInterface == nullptr) {
         ASSERT_NE(nullptr, g_motionInterface);

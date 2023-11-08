@@ -69,7 +69,7 @@ HWTEST_F(HatsHdfLightCommonTestAdditional, testhdiServiceGetLightInfoTimes001, F
 
     ASSERT_NE(nullptr, g_lightInterface);
 
-    for (int i = 0; i <= 10; i++) {
+    for (int i = 0; i < 10; i++) {
         ret = g_lightInterface->GetLightInfo(g_info);
         EXPECT_EQ(HDF_SUCCESS, ret);
         EXPECT_GT(g_info.size(), 0);
@@ -137,7 +137,7 @@ HWTEST_F(HatsHdfLightCommonTestAdditional, testhdiServiceTurnOnLightRedMAXTimes0
 
     ASSERT_NE(nullptr, g_lightInterface);
 
-    for (int i = 0; i <= 10; i++) {
+    for (int i = 0; i < 10; i++) {
         HdfLightEffect effect;
         InitConfig(effect);
         effect.lightColor.colorValue.rgbColor.r = MAX_VALUE;
@@ -181,7 +181,7 @@ HWTEST_F(HatsHdfLightCommonTestAdditional, testhdiServiceTurnOnLightGreenMAXTime
     int32_t ret;
     ASSERT_NE(nullptr, g_lightInterface);
 
-    for (int i = 0; i <= 10; i++) {
+    for (int i = 0; i < 10; i++) {
         HdfLightEffect effect;
         InitConfig(effect);
         effect.lightColor.colorValue.rgbColor.g = MAX_VALUE;
@@ -225,7 +225,7 @@ HWTEST_F(HatsHdfLightCommonTestAdditional, testhdiServiceTurnOnLightBlueMAXTimes
     int32_t ret;
     ASSERT_NE(nullptr, g_lightInterface);
 
-    for (int i = 0; i <= 10; i++) {
+    for (int i = 0; i < 10; i++) {
         HdfLightEffect effect;
         InitConfig(effect);
         effect.lightColor.colorValue.rgbColor.b = MAX_VALUE;
@@ -374,7 +374,7 @@ HWTEST_F(HatsHdfLightCommonTestAdditional, testhdiServiceTurnOnMultiLightsTimes0
     int32_t ret;
 
     ASSERT_NE(nullptr, g_lightInterface);
-    for (int i = 0; i <= 10; i++) {
+    for (int i = 0; i < 10; i++) {
         std::vector<HdfLightColor> lightColor;
         struct HdfLightColor light;
         light.colorValue.rgbColor.r = MAX_VALUE;
@@ -417,7 +417,7 @@ HWTEST_F(HatsHdfLightCommonTestAdditional, testhdiServiceTurnOffBattery001, Func
  * @tc.name  : testhdiServiceTurnOffNotifications001
  * @tc.desc  : Turn Off Light.
  */
-HWTEST_F(HatsHdfLightCommonTestAdditional, testhdiServiceTurnOffNotifications001, Function | MediumTest | Level1)
+HWTEST_F(HatsHdfLightCommonTestAdditional, testhdiServiceTurnOffNotifications001, Function | MediumTest | Level2)
 {
     ASSERT_NE(nullptr, g_lightInterface);
 

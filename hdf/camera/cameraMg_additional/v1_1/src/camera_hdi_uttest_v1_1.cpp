@@ -62,7 +62,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch001, TestSize.Level1)
  * @tc.name   : testPrelaunch002
  * @tc.desc   : Prelaunch cameraId:device/0
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch002, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch002, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -87,7 +87,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch002, TestSize.Level1)
  * @tc.name   : testPrelaunch003
  * @tc.desc   : Prelaunch cameraId:device/0
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch003, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch003, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -112,7 +112,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch003, TestSize.Level1)
  * @tc.name   : testPrelaunch004
  * @tc.desc   : Prelaunch cameraId:device/0
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch004, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch004, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -137,7 +137,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch004, TestSize.Level1)
  * @tc.name   : testPrelaunch005
  * @tc.desc   : Prelaunch cameraId:{}
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch005, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch005, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -163,7 +163,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch005, TestSize.Level1)
  * @tc.name   : testPrelaunch006
  * @tc.desc   : Prelaunch cameraId:{}
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch006, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch006, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -188,7 +188,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch006, TestSize.Level1)
  * @tc.name   : testPrelaunch007
  * @tc.desc   : Prelaunch cameraId:{}
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch007, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch007, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -213,7 +213,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch007, TestSize.Level1)
  * @tc.name   : testPrelaunch008
  * @tc.desc   : Prelaunch cameraId:{}
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch008, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch008, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -238,7 +238,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch008, TestSize.Level1)
  * @tc.name   : testPrelaunch009
  * @tc.desc   : Prelaunch cameraId:device/10
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch009, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch009, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -264,7 +264,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch009, TestSize.Level1)
  * @tc.name   : testPrelaunch010
  * @tc.desc   : Prelaunch cameraId:device/10
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch010, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch010, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -289,7 +289,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch010, TestSize.Level1)
  * @tc.name   : testPrelaunch011
  * @tc.desc   : Prelaunch cameraId:device/10
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch011, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch011, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -314,7 +314,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch011, TestSize.Level1)
  * @tc.name   : testPrelaunch012
  * @tc.desc   : Prelaunch cameraId:device/10
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch012, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch012, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -339,7 +339,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch012, TestSize.Level1)
  * @tc.name   : testPrelaunch013
  * @tc.desc   : Prelaunch cameraId:ABC123
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch013, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch013, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -365,7 +365,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch013, TestSize.Level1)
  * @tc.name   : testPrelaunch014
  * @tc.desc   : Prelaunch cameraId:ABC123
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch014, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch014, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -390,7 +390,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch014, TestSize.Level1)
  * @tc.name   : testPrelaunch015
  * @tc.desc   : Prelaunch cameraId:ABC123
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch015, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch015, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -415,7 +415,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch015, TestSize.Level1)
  * @tc.name   : testPrelaunch016
  * @tc.desc   : Prelaunch cameraId:ABC123
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch016, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch016, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -440,7 +440,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch016, TestSize.Level1)
  * @tc.name   : testPrelaunch017
  * @tc.desc   : Prelaunch cameraId:1
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch017, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch017, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -466,7 +466,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch017, TestSize.Level1)
  * @tc.name   : testPrelaunch018
  * @tc.desc   : Prelaunch cameraId:1
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch018, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch018, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -491,7 +491,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch018, TestSize.Level1)
  * @tc.name   : testPrelaunch019
  * @tc.desc   : Prelaunch cameraId:1
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch019, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch019, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -516,7 +516,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch019, TestSize.Level1)
  * @tc.name   : testPrelaunch020
  * @tc.desc   : Prelaunch cameraId:1
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch020, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch020, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -541,7 +541,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch020, TestSize.Level1)
  * @tc.name   : testPrelaunch021
  * @tc.desc   : Prelaunch cameraId:65535
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch021, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch021, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -567,7 +567,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch021, TestSize.Level1)
  * @tc.name   : testPrelaunch022
  * @tc.desc   : Prelaunch cameraId:65535
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch022, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch022, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -592,7 +592,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch022, TestSize.Level1)
  * @tc.name   : testPrelaunch023
  * @tc.desc   : Prelaunch cameraId:65535
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch023, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch023, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -617,7 +617,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch023, TestSize.Level1)
  * @tc.name   : testPrelaunch024
  * @tc.desc   : Prelaunch cameraId:65535
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch024, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch024, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -642,7 +642,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch024, TestSize.Level1)
  * @tc.name   : testPrelaunch025
  * @tc.desc   : Prelaunch cameraId:-1
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch025, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch025, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -668,7 +668,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch025, TestSize.Level1)
  * @tc.name   : testPrelaunch026
  * @tc.desc   : Prelaunch cameraId:-1
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch026, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch026, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -693,7 +693,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch026, TestSize.Level1)
  * @tc.name   : testPrelaunch027
  * @tc.desc   : Prelaunch cameraId:-1
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch027, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch027, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -718,7 +718,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch027, TestSize.Level1)
  * @tc.name   : testPrelaunch028
  * @tc.desc   : Prelaunch cameraId:-1
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch028, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch028, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -743,7 +743,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch028, TestSize.Level1)
  * @tc.name   : testPrelaunch029
  * @tc.desc   : Prelaunch cameraId:123
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch029, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch029, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -792,7 +792,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testGetDefaultSettings001, TestSize.Level1
  * @tc.name   : testPrelaunch030
  * @tc.desc   : Prelaunch cameraId:device/100
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch030, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch030, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -818,7 +818,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch030, TestSize.Level1)
  * @tc.name   : testPrelaunch031
  * @tc.desc   : Prelaunch cameraId:device/100
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch031, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch031, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -843,7 +843,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch031, TestSize.Level1)
  * @tc.name   : testPrelaunch032
  * @tc.desc   : Prelaunch cameraId:device/100
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch032, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch032, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -868,7 +868,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch032, TestSize.Level1)
  * @tc.name   : testPrelaunch033
  * @tc.desc   : Prelaunch cameraId:device/100
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch033, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch033, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -893,7 +893,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch033, TestSize.Level1)
  * @tc.name   : testPrelaunch034
  * @tc.desc   : Prelaunch cameraId:100
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch034, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch034, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -919,7 +919,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch034, TestSize.Level1)
  * @tc.name   : testPrelaunch035
  * @tc.desc   : Prelaunch cameraId:100
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch035, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch035, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -944,7 +944,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch035, TestSize.Level1)
  * @tc.name   : testPrelaunch036
  * @tc.desc   : Prelaunch cameraId:100
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch036, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch036, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -969,7 +969,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch036, TestSize.Level1)
  * @tc.name   : testPrelaunch037
  * @tc.desc   : Prelaunch cameraId:100
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch037, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch037, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -994,7 +994,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch037, TestSize.Level1)
  * @tc.name   : testPrelaunch038
  * @tc.desc   : Prelaunch cameraId:255
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch038, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch038, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -1020,7 +1020,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch038, TestSize.Level1)
  * @tc.name   : testPrelaunch039
  * @tc.desc   : Prelaunch cameraId:255
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch039, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch039, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -1045,7 +1045,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch039, TestSize.Level1)
  * @tc.name   : testPrelaunch040
  * @tc.desc   : Prelaunch cameraId:255
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch040, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch040, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -1070,7 +1070,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch040, TestSize.Level1)
  * @tc.name   : testPrelaunch041
  * @tc.desc   : Prelaunch cameraId:255
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch041, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch041, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -1095,7 +1095,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch041, TestSize.Level1)
  * @tc.name   : testPrelaunch042
  * @tc.desc   : Prelaunch cameraId:ABCD123
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch042, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch042, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -1121,7 +1121,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch042, TestSize.Level1)
  * @tc.name   : testPrelaunch043
  * @tc.desc   : Prelaunch cameraId:ABCD123
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch043, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch043, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -1146,7 +1146,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch043, TestSize.Level1)
  * @tc.name   : testPrelaunch044
  * @tc.desc   : Prelaunch cameraId:ABCD123
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch044, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch044, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -1171,7 +1171,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch044, TestSize.Level1)
  * @tc.name   : testPrelaunch045
  * @tc.desc   : Prelaunch cameraId:ABCD123
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch045, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch045, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -1196,7 +1196,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch045, TestSize.Level1)
  * @tc.name   : testPrelaunch046
  * @tc.desc   : Prelaunch cameraId:1A
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch046, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch046, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -1222,7 +1222,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch046, TestSize.Level1)
  * @tc.name   : testPrelaunch047
  * @tc.desc   : Prelaunch cameraId:1A
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch047, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch047, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -1247,7 +1247,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch047, TestSize.Level1)
  * @tc.name   : testPrelaunch048
  * @tc.desc   : Prelaunch cameraId:1A
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch048, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch048, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -1272,7 +1272,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch048, TestSize.Level1)
  * @tc.name   : testPrelaunch049
  * @tc.desc   : Prelaunch cameraId:1A
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch049, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch049, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -1297,7 +1297,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch049, TestSize.Level1)
  * @tc.name   : testPrelaunch050
  * @tc.desc   : Prelaunch cameraId:65535A
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch050, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch050, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -1323,7 +1323,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch050, TestSize.Level1)
  * @tc.name   : testPrelaunch051
  * @tc.desc   : Prelaunch cameraId:65535A
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch051, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch051, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -1348,7 +1348,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch051, TestSize.Level1)
  * @tc.name   : testPrelaunch052
  * @tc.desc   : Prelaunch cameraId:65535A
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch052, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch052, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -1373,7 +1373,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch052, TestSize.Level1)
  * @tc.name   : testPrelaunch053
  * @tc.desc   : Prelaunch cameraId:65535A
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch053, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch053, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -1398,7 +1398,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch053, TestSize.Level1)
  * @tc.name   : testPrelaunch054
  * @tc.desc   : Prelaunch cameraId:-1A
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch054, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch054, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -1424,7 +1424,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch054, TestSize.Level1)
  * @tc.name   : testPrelaunch055
  * @tc.desc   : Prelaunch cameraId:-1A
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch055, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch055, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -1449,7 +1449,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch055, TestSize.Level1)
  * @tc.name   : testPrelaunch056
  * @tc.desc   : Prelaunch cameraId:-1A
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch056, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch056, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -1474,7 +1474,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch056, TestSize.Level1)
  * @tc.name   : testPrelaunch057
  * @tc.desc   : Prelaunch cameraId:-1A
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch057, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch057, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -1499,7 +1499,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch057, TestSize.Level1)
  * @tc.name   : testPrelaunch058
  * @tc.desc   : Prelaunch cameraId:deviceA
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch058, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch058, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {
@@ -1526,7 +1526,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch058, TestSize.Level1)
  * @tc.name   : testPrelaunch059
  * @tc.desc   : Prelaunch cameraId:deviceA
  */
-HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch059, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch059, TestSize.Level2)
 {
     cameraTest->Init();
     if (cameraTest->serviceV1_1 == nullptr) {

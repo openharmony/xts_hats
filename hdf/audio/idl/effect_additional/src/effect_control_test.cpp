@@ -157,7 +157,7 @@ HWTEST_F(EffectControlTestAdditional, testEffectSendCommand005, TestSize.Level1)
     uint32_t replyLen = GET_BUFFER_LEN;
     int32_t ret = HDF_SUCCESS;
 
-    for (int32_t i = 0; i < 5; i++) {
+    for (int32_t i = 0; i < 1000; i++) {
         ret = controller_->SendCommand(controller_, AUDIO_EFFECT_COMMAND_SET_PARAM, input, SEND_COMMAND_LEN, output,
                                        &replyLen);
         EXPECT_EQ(ret, HDF_SUCCESS);

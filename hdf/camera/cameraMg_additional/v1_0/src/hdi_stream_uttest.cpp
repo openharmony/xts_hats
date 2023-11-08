@@ -1958,9 +1958,9 @@ HWTEST_F(HdiStreamUtTestAdditional, testReleaseStreams003, Function | MediumTest
 /**
  * @tc.number : SUB_Driver_Camera_Release_0100
  * @tc.name   : testRelease001
- * @tc.desc   : Release, return error
+ * @tc.desc   : Release, return success
  */
-HWTEST_F(HdiStreamUtTestAdditional, testRelease001, Function | MediumTest | Level2)
+HWTEST_F(HdiStreamUtTestAdditional, testRelease001, Function | MediumTest | Level1)
 {
     cameraTest->Open();
     cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();

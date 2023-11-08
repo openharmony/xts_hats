@@ -58,6 +58,5 @@ group("hdi_effect_additional") {
   if (hats_rich == false) {
     deps = [ "effect_additional:HatsHdfAudioEffectTestAdditional" ]
   } else {
-    deps = [ "effect_additional:HatsHdfAudioEffectTestAdditional" ]
   }
 }

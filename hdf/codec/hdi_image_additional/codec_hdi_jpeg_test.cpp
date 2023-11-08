@@ -210,7 +210,7 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode008, TestSize.Level2)
  * @tc.name   : testCodecDoJpegDecode009
  * @tc.desc   : Determines the result of the function when the wrong argument is passed
  */
-HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode0009, TestSize.Level2)
+HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode009, TestSize.Level2)
 {
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     struct CodecImageBuffer inBuffer;
@@ -516,7 +516,7 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecAllocateInBuffer006, TestSize.Leve
  * @tc.name   : testInit001
  * @tc.desc   : Determines the result of the function when the correct argument is invalid
  */
-HWTEST_F(CodecHdiJpegTestAdditional, testInit002, TestSize.Level2)
+HWTEST_F(CodecHdiJpegTestAdditional, testInit001, TestSize.Level2)
 {
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     auto ret = hdiJpeg_->Init(CODEC_IMAGE_INVALID);
@@ -528,7 +528,7 @@ HWTEST_F(CodecHdiJpegTestAdditional, testInit002, TestSize.Level2)
  * @tc.name   : testDeInit001
  * @tc.desc   : Determines the result of the function when the correct argument is invalid
  */
-HWTEST_F(CodecHdiJpegTestAdditional, testDeInit002, TestSize.Level2)
+HWTEST_F(CodecHdiJpegTestAdditional, testDeInit001, TestSize.Level2)
 {
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     auto ret = hdiJpeg_->DeInit(CODEC_IMAGE_INVALID);

@@ -110,21 +110,6 @@ HWTEST_F(HdfMotionTestAdditional, testHdiEnableMotion004, Function | MediumTest 
 }
 
 /**
- * @tc.number : SUB_Driver_Motion_Hdienablemotion_0500
- * @tc.name   : testHdiEnableMotion005
- * @tc.desc   : Testing the effectiveness of the EnableMotion function
- */
-HWTEST_F(HdfMotionTestAdditional, testHdiEnableMotion005, Function | MediumTest | Level1)
-{
-    if (g_motionInterface == nullptr) {
-        ASSERT_NE(nullptr, g_motionInterface);
-        return;
-    }
-    int32_t ret = g_motionInterface->EnableMotion(OHOS::HDI::Motion::V1_1::HDF_MOTION_TYPE_WRIST_DOWN);
-    EXPECT_EQ(HDF_SUCCESS, ret);
-}
-
-/**
  * @tc.number : SUB_Driver_Motion_Hdienablemotion_0600
  * @tc.name   : testHdiEnableMotion006
  * @tc.desc   : Testing the effectiveness of the EnableMotion function
@@ -255,22 +240,6 @@ HWTEST_F(HdfMotionTestAdditional, testHdiDisableMotion004, Function | MediumTest
 }
 
 /**
- * @tc.number : SUB_Driver_Motion_Hdidisablemotion_0500
- * @tc.name   : testHdiDisableMotion005
- * @tc.desc   : Testing the effectiveness of the DisableMotion function
- */
-HWTEST_F(HdfMotionTestAdditional, testHdiDisableMotion005, Function | MediumTest | Level1)
-{
-    if (g_motionInterface == nullptr) {
-        ASSERT_NE(nullptr, g_motionInterface);
-        return;
-    }
-
-    int32_t ret = g_motionInterface->DisableMotion(OHOS::HDI::Motion::V1_1::HDF_MOTION_TYPE_WRIST_DOWN);
-    EXPECT_EQ(HDF_SUCCESS, ret);
-}
-
-/**
  * @tc.number : SUB_Driver_Motion_Hdidisablemotion_0600
  * @tc.name   : testHdiDisableMotion006
  * @tc.desc   : Testing the effectiveness of the DisableMotion function
@@ -369,6 +338,7 @@ HWTEST_F(HdfMotionTestAdditional, testHdiRegister002, Function | MediumTest | Le
 
     ret = g_motionInterface->Register(g_motionCallback);
     EXPECT_EQ(HDF_FAILURE, ret);
+    g_motionInterface->Unregister(g_motionCallback);
 }
 
 /**

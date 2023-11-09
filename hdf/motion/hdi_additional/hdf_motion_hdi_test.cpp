@@ -147,7 +147,7 @@ HWTEST_F(HdfMotionTestAdditional, testHdiEnableMotion006, Function | MediumTest 
  * @tc.name   : testHdiEnableMotion007
  * @tc.desc   : Testing the effectiveness of the EnableMotion function
  */
-HWTEST_F(HdfMotionTestAdditional, testHdiEnableMotion007, Function | MediumTest | Level1)
+HWTEST_F(HdfMotionTestAdditional, testHdiEnableMotion007, Function | MediumTest | Level2)
 {
     if (g_motionInterface == nullptr) {
         ASSERT_NE(nullptr, g_motionInterface);
@@ -179,7 +179,7 @@ HWTEST_F(HdfMotionTestAdditional, testHdiEnableMotion008, Function | MediumTest 
  * @tc.name   : testHdiEnableMotion009
  * @tc.desc   : Testing the effectiveness of the EnableMotion function
  */
-HWTEST_F(HdfMotionTestAdditional, testHdiEnableMotion009, Function | MediumTest | Level1)
+HWTEST_F(HdfMotionTestAdditional, testHdiEnableMotion009, Function | MediumTest | Level2)
 {
     if (g_motionInterface == nullptr) {
         ASSERT_NE(nullptr, g_motionInterface);
@@ -293,7 +293,7 @@ HWTEST_F(HdfMotionTestAdditional, testHdiDisableMotion006, Function | MediumTest
  * @tc.name   : testHdiDisableMotion007
  * @tc.desc   : Testing the effectiveness of the DisableMotion function
  */
-HWTEST_F(HdfMotionTestAdditional, testHdiDisableMotion007, Function | MediumTest | Level1)
+HWTEST_F(HdfMotionTestAdditional, testHdiDisableMotion007, Function | MediumTest | Level2)
 {
     if (g_motionInterface == nullptr) {
         ASSERT_NE(nullptr, g_motionInterface);
@@ -325,7 +325,7 @@ HWTEST_F(HdfMotionTestAdditional, testHdiDisableMotion008, Function | MediumTest
  * @tc.name   : testHdiDisableMotion009
  * @tc.desc   : Testing the effectiveness of the DisableMotion function
  */
-HWTEST_F(HdfMotionTestAdditional, testHdiDisableMotion009, Function | MediumTest | Level1)
+HWTEST_F(HdfMotionTestAdditional, testHdiDisableMotion009, Function | MediumTest | Level2)
 {
     if (g_motionInterface == nullptr) {
         ASSERT_NE(nullptr, g_motionInterface);
@@ -357,7 +357,7 @@ HWTEST_F(HdfMotionTestAdditional, testHdiRegister001, Function | MediumTest | Le
  * @tc.name   : testHdiRegister002
  * @tc.desc   : Testing the effectiveness of the Register function
  */
-HWTEST_F(HdfMotionTestAdditional, testHdiRegister002, Function | MediumTest | Level1)
+HWTEST_F(HdfMotionTestAdditional, testHdiRegister002, Function | MediumTest | Level2)
 {
     if (g_motionInterface == nullptr) {
         ASSERT_NE(nullptr, g_motionInterface);
@@ -416,7 +416,7 @@ HWTEST_F(HdfMotionTestAdditional, testHdiUnregister001, Function | MediumTest | 
  * @tc.name   : testHdiUnregister002
  * @tc.desc   : Testing the effectiveness of the Unregister function
  */
-HWTEST_F(HdfMotionTestAdditional, testHdiUnregister002, Function | MediumTest | Level1)
+HWTEST_F(HdfMotionTestAdditional, testHdiUnregister002, Function | MediumTest | Level2)
 {
     if (g_motionInterface == nullptr) {
         ASSERT_NE(nullptr, g_motionInterface);

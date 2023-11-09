@@ -347,7 +347,7 @@ HWTEST_F(HatsHdfLightCommonTestAdditional, testhdiServiceTurnOnLightTime004, Fun
  * @tc.name  : testhdiServiceTurnOnMultiLightsRedMAX001
  * @tc.desc  : Turn on the light Abnormal lightid.
  */
-HWTEST_F(HatsHdfLightCommonTestAdditional, testhdiServiceTurnOnMultiLightsRedMAX001, Function | MediumTest | Level2)
+HWTEST_F(HatsHdfLightCommonTestAdditional, testhdiServiceTurnOnMultiLightsRedMAX001, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_lightInterface);
 
@@ -439,7 +439,7 @@ HWTEST_F(HatsHdfLightCommonTestAdditional, testhdiServiceTurnOffNotifications001
  * @tc.name  : testhdiServiceTurnOffAttention001
  * @tc.desc  : Turn Off Light.
  */
-HWTEST_F(HatsHdfLightCommonTestAdditional, testhdiServiceTurnOffAttention001, Function | MediumTest | Level1)
+HWTEST_F(HatsHdfLightCommonTestAdditional, testhdiServiceTurnOffAttention001, Function | MediumTest | Level2)
 {
     ASSERT_NE(nullptr, g_lightInterface);
 

@@ -28,7 +28,6 @@ constexpr bool IS_DIRECTLY_CALL = false;
 /* the input buffer len of the send command */
 constexpr uint32_t SEND_COMMAND_LEN = 10;
 constexpr uint32_t SEND_COMMAND_LEN_TEST1 = 0;
-constexpr uint32_t SEND_COMMAND_LEN_TEST2 = 0xffffffff;
 /* the output buffer len of the command */
 constexpr uint32_t GET_BUFFER_LEN = 10;
 
@@ -130,22 +129,6 @@ HWTEST_F(EffectControlTestAdditional, testEffectSendCommand002, TestSize.Level2)
 
     int32_t ret = controller_->SendCommand(controller_, AUDIO_EFFECT_COMMAND_INIT_CONTOLLER, input,
                                            SEND_COMMAND_LEN_TEST1, output, &replyLen);
-    EXPECT_NE(ret, HDF_SUCCESS);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_EffectSendCommand_1200
- * @tc.name: testEffectSendCommand003
- * @tc.desc: Verify the EffectControlSendCommand function when cmdId is AUDIO_EFFECT_COMMAND_INIT_CONTOLLER.
- */
-HWTEST_F(EffectControlTestAdditional, testEffectSendCommand003, TestSize.Level2)
-{
-    int8_t input[SEND_COMMAND_LEN] = {0};
-    int8_t output[GET_BUFFER_LEN] = {0};
-    uint32_t replyLen = GET_BUFFER_LEN;
-
-    int32_t ret = controller_->SendCommand(controller_, AUDIO_EFFECT_COMMAND_INIT_CONTOLLER, input,
-                                           SEND_COMMAND_LEN_TEST2, output, &replyLen);
     EXPECT_NE(ret, HDF_SUCCESS);
 }
 

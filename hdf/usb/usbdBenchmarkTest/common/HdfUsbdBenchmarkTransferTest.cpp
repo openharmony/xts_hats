@@ -108,14 +108,14 @@ void HdfUsbdBenchmarkTransferTest::ReleasePara(const sptr<UsbSubscriberTest> &su
 }
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0200
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_1300
  * @tc.desc: Benchmark test
  * @tc.desc: Test functions to ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly, standard request: get configuration
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0200)
+BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_1300)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -133,20 +133,20 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0200)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0200)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_1300)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0270
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_2000
  * @tc.desc: Benchmark test
  * @tc.desc: Test functions to ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl,
  * std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0270)
+BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_2000)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -168,20 +168,20 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0270)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0270)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_2000)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0210
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_1400
  * @tc.desc: Benchmark test
  * @tc.desc: Test functions to BulkTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0210)
+BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_1400)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -202,20 +202,20 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0210)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0210)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_1400)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0220
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_1500
  * @tc.desc: Benchmark test
  * @tc.desc: Test functions to BulkTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0220)
+BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_1500)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -236,20 +236,20 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0220)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0220)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_1500)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0230
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_1600
  * @tc.desc: Benchmark test
  * @tc.desc: Test functions to InterruptTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0230)
+BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_1600)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -270,20 +270,20 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0230)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0230)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_1600)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0240
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_1700
  * @tc.desc: Benchmark test
  * @tc.desc: Test functions to InterruptTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0240)
+BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_1700)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -304,20 +304,20 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0240)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0240)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_1700)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0250
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_1800
  * @tc.desc: Benchmark test
  * @tc.desc: Test functions to IsoTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0250)
+BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_1800)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -338,20 +338,20 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0250)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0250)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_1800)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0260
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_1900
  * @tc.desc: Benchmark test
  * @tc.desc: Test functions to IsoTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0260)
+BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_1900)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -372,19 +372,19 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0260)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0260)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_1900)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0290
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_2200
  * @tc.desc: Benchmark test
  * @tc.desc: Test functions to int32_t BulkWrite(const UsbDev &dev, const UsbPipe &pipe, const sptr<Ashmem> &ashmem)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0290)
+BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_2200)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -408,19 +408,19 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0290)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0290)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_2200)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0300
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_2300
  * @tc.desc: Benchmark test
  * @tc.desc: Test functions to int32_t BulkRead(const UsbDev &dev, const UsbPipe &pipe, const sptr<Ashmem> &ashmem)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0300)
+BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_2300)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -444,19 +444,19 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0300)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0300)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_2300)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0310
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_2400
  * @tc.desc: Benchmark test
  * @tc.desc: int32_t RegBulkCallback(const UsbDev &dev, const UsbPipe &pipe, const sptr<IUsbdBulkCallback> &cb)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0310)
+BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_2400)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -476,19 +476,19 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0310)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0310)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_2400)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0320
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_2500
  * @tc.desc: Benchmark test
  * @tc.desc: Test functions to int32_t UnRegBulkCallback(const UsbDev &dev, const UsbPipe &pipe)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0320)
+BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_2500)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -509,19 +509,19 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0320)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0320)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_2500)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0330
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_2600
  * @tc.desc: Benchmark test
  * @tc.desc: Test functions to int32_t BindUsbdSubscriber(const sptr<IUsbdSubscriber> &subscriber)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0330)
+BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_2600)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -536,19 +536,19 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0330)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0330)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_2600)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0340
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_2700
  * @tc.desc: Benchmark test
  * @tc.desc: Test functions to int32_t UnbindUsbdSubscriber(const sptr<IUsbdSubscriber> &subscriber)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0340)
+BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_2700)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -565,7 +565,7 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0340)
     ASSERT_EQ(0, ret);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HDI_Benchmark_0340)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_2700)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();

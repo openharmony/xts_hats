@@ -1536,7 +1536,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetCurrentChannelId002, Fu
 }
 
 /**
- * @tc.number  SUB_Driver_Audio_SetExtraParams_0400
+ * @tc.number  SUB_Driver_Audio_RenderSetExtraParams_0400
  * @tc.name  testCommonRenderSetExtraParams001
  * @tc.desc  Reliability of function(SetExtraParams)
  */
@@ -1553,7 +1553,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetExtraParams001, Functio
 }
 
 /**
- * @tc.number  SUB_Driver_Audio_SetExtraParams_0500
+ * @tc.number  SUB_Driver_Audio_RenderSetExtraParams_0500
  * @tc.name  testCommonRenderSetExtraParams002
  * @tc.desc  Test parameters with abnormal input
  */
@@ -1563,7 +1563,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetExtraParams002, Functio
 }
 
 /**
- * @tc.number  SUB_Driver_Audio_GetExtraParams_0400
+ * @tc.number  SUB_Driver_Audio_RenderGetExtraParams_0400
  * @tc.name  testCommonRenderGetExtraParams001
  * @tc.desc  Reliability of function(GetExtraParams)
  */
@@ -1580,7 +1580,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetExtraParams001, Functio
 }
 
 /**
- * @tc.number  SUB_Driver_Audio_GetExtraParams_0500
+ * @tc.number  SUB_Driver_Audio_RenderGetExtraParams_0500
  * @tc.name  testCommonRenderGetExtraParams002
  * @tc.desc  Test parameters with abnormal input
  */
@@ -1591,7 +1591,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetExtraParams002, Functio
 }
 
 /**
- * @tc.number  SUB_Driver_Audio_GetExtraParams_0600
+ * @tc.number  SUB_Driver_Audio_RenderGetExtraParams_0600
  * @tc.name  testCommonRenderGetExtraParams003
  * @tc.desc  Test input param
  */

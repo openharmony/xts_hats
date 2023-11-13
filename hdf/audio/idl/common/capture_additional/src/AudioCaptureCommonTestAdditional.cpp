@@ -965,6 +965,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureCaptureFrame002, TestSize
     EXPECT_EQ(ret, HDF_SUCCESS);
 
     EXPECT_NE(HDF_SUCCESS, capture_->CaptureFrame(nullptr, nullptr, nullptr, &requestBytes));
+    capture_->Stop(capture_);
 }
 /**
  * @tc.number : SUB_Driver_Audio_CaptureCaptureFrame_0500
@@ -980,6 +981,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureCaptureFrame003, TestSize
     EXPECT_EQ(ret, HDF_SUCCESS);
 
     EXPECT_NE(HDF_SUCCESS, capture_->CaptureFrame(nullptr, nullptr, &frameLen, nullptr));
+    capture_->Stop(capture_);
 }
 /**
  * @tc.number : SUB_Driver_Audio_CaptureCaptureFrame_0600
@@ -996,6 +998,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureCaptureFrame004, TestSize
     EXPECT_EQ(ret, HDF_SUCCESS);
 
     EXPECT_NE(HDF_SUCCESS, capture_->CaptureFrame(nullptr, nullptr, &frameLen, &requestBytes));
+    capture_->Stop(capture_);
 }
 /**
  * @tc.number : SUB_Driver_Audio_CaptureCaptureFrame_0700
@@ -1013,7 +1016,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureCaptureFrame005, TestSize
     EXPECT_NE(nullptr, frame);
 
     EXPECT_NE(HDF_SUCCESS, capture_->CaptureFrame(nullptr, frame, nullptr, nullptr));
-
+    capture_->Stop(capture_);
     if (frame != nullptr) {
         free(frame);
         frame = nullptr;
@@ -1037,7 +1040,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureCaptureFrame006, TestSize
     EXPECT_NE(nullptr, frame);
 
     EXPECT_NE(HDF_SUCCESS, capture_->CaptureFrame(nullptr, frame, nullptr, &requestBytes));
-
+    capture_->Stop(capture_);
     if (frame != nullptr) {
         free(frame);
         frame = nullptr;
@@ -1060,7 +1063,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureCaptureFrame007, TestSize
     EXPECT_NE(nullptr, frame);
 
     EXPECT_NE(HDF_SUCCESS, capture_->CaptureFrame(nullptr, frame, &frameLen, nullptr));
-
+    capture_->Stop(capture_);
     if (frame != nullptr) {
         free(frame);
         frame = nullptr;
@@ -1079,6 +1082,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureCaptureFrame008, TestSize
     EXPECT_EQ(ret, HDF_SUCCESS);
 
     EXPECT_NE(HDF_SUCCESS, capture_->CaptureFrame(capture_, nullptr, nullptr, nullptr));
+    capture_->Stop(capture_);
 }
 /**
  * @tc.number : SUB_Driver_Audio_CaptureCaptureFrame_1100
@@ -1095,6 +1099,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureCaptureFrame009, TestSize
     EXPECT_EQ(ret, HDF_SUCCESS);
 
     EXPECT_NE(HDF_SUCCESS, capture_->CaptureFrame(capture_, nullptr, nullptr, &requestBytes));
+    capture_->Stop(capture_);
 }
 /**
  * @tc.number : SUB_Driver_Audio_CaptureCaptureFrame_1200
@@ -1110,6 +1115,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureCaptureFrame010, TestSize
     EXPECT_EQ(ret, HDF_SUCCESS);
 
     EXPECT_NE(HDF_SUCCESS, capture_->CaptureFrame(capture_, nullptr, &frameLen, nullptr));
+    capture_->Stop(capture_);
 }
 /**
  * @tc.number : SUB_Driver_Audio_CaptureCaptureFrame_1300
@@ -1126,6 +1132,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureCaptureFrame011, TestSize
     EXPECT_EQ(ret, HDF_SUCCESS);
 
     EXPECT_NE(HDF_SUCCESS, capture_->CaptureFrame(capture_, nullptr, &frameLen, &requestBytes));
+    capture_->Stop(capture_);
 }
 /**
  * @tc.number : SUB_Driver_Audio_CaptureCaptureFrame_1400
@@ -1145,7 +1152,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureCaptureFrame012, TestSize
     EXPECT_NE(nullptr, frame);
 
     EXPECT_NE(HDF_SUCCESS, capture_->CaptureFrame(capture_, frame, nullptr, &requestBytes));
-
+    capture_->Stop(capture_);
     if (frame != nullptr) {
         free(frame);
         frame = nullptr;

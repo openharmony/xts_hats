@@ -309,6 +309,21 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetRenderPosition001, Func
 }
 
 /**
+ * @tc.number : SUB_Driver_Audio_SetRenderSpeed_0300
+ * @tc.name   : testCommonRenderSetRenderSpeed001
+ * @tc.desc   : Reliability of function(SetRenderSpeed)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetRenderSpeed001, Function | MediumTest | Level1)
+{
+    float speed = 2.0;
+    int i, ret = 0;
+    for (i = 0; i < 1000; i++) {
+        ret |= render_->SetRenderSpeed(render_, speed);
+    }
+    EXPECT_EQ(HDF_SUCCESS, ret);
+}
+
+/**
  * @tc.number : SUB_Driver_Audio_SetRenderSpeed_0400
  * @tc.name   : testCommonRenderSetRenderSpeed002
  * @tc.desc   : Test parameters with abnormal input
@@ -328,6 +343,24 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetRenderSpeed003, Functio
 {
     float speed = 0;
     EXPECT_NE(HDF_SUCCESS, render_->SetRenderSpeed(render_, speed));
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_GetRenderSpeed_0300
+ * @tc.name   : testCommonRenderGetRenderSpeed001
+ * @tc.desc   : Reliability of function(GetRenderSpeed)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetRenderSpeed001, Function | MediumTest | Level1)
+{
+    float speed = 0.0;
+    int32_t ret = 0;
+    int i = 0;
+    ASSERT_EQ(HDF_SUCCESS, render_->Start(render_));
+    for (i = 0; i < 1000; i++) {
+        ret = render_->GetRenderSpeed(render_, &speed);
+    }
+    EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
+    EXPECT_EQ(ret, HDF_SUCCESS);
 }
 
 /**
@@ -355,7 +388,6 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode002, Functio
 {
     AudioChannelMode mode = AUDIO_CHANNEL_BOTH_LEFT;
     int32_t ret = render_->SetChannelMode(render_, mode);
-
     EXPECT_EQ(ret, HDF_SUCCESS);
 }
 
@@ -368,7 +400,66 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode003, Functio
 {
     AudioChannelMode mode = AUDIO_CHANNEL_BOTH_RIGHT;
     int32_t ret = render_->SetChannelMode(render_, mode);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
 
+/**
+ * @tc.number : SUB_Driver_Audio_SetChannelMode_0600
+ * @tc.name   : testCommonRenderSetChannelMode004
+ * @tc.desc   : Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode004, Function | MediumTest | Level1)
+{
+    AudioChannelMode mode = AUDIO_CHANNEL_EXCHANGE;
+    int32_t ret = render_->SetChannelMode(render_, mode);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_SetChannelMode_0700
+ * @tc.name   : testCommonRenderSetChannelMode005
+ * @tc.desc   : Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode005, Function | MediumTest | Level1)
+{
+    AudioChannelMode mode = AUDIO_CHANNEL_MIX;
+    int32_t ret = render_->SetChannelMode(render_, mode);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_SetChannelMode_0800
+ * @tc.name   : testCommonRenderSetChannelMode006
+ * @tc.desc   : Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode006, Function | MediumTest | Level1)
+{
+    AudioChannelMode mode = AUDIO_CHANNEL_LEFT_MUTE;
+    int32_t ret = render_->SetChannelMode(render_, mode);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_SetChannelMode_0900
+ * @tc.name   : testCommonRenderSetChannelMode007
+ * @tc.desc   : Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode007, Function | MediumTest | Level1)
+{
+    AudioChannelMode mode = AUDIO_CHANNEL_RIGHT_MUTE;
+    int32_t ret = render_->SetChannelMode(render_, mode);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_SetChannelMode_1000
+ * @tc.name   : testCommonRenderSetChannelMode008
+ * @tc.desc   : Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode008, Function | MediumTest | Level1)
+{
+    AudioChannelMode mode = AUDIO_CHANNEL_BOTH_MUTE;
+    int32_t ret = render_->SetChannelMode(render_, mode);
     EXPECT_EQ(ret, HDF_SUCCESS);
 }
 
@@ -396,6 +487,51 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetChannelMode001, Functio
     for (i = 0; i < 1000; i++) {
         ret = render_->GetChannelMode(render_, &channelMode);
     }
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_RegCallback_0300
+ * @tc.name   : testCommonRenderRegCallback001
+ * @tc.desc   : Reliability of function(RegCallback)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRegCallback001, Function | MediumTest | Level1)
+{
+    int i = 0;
+    int32_t ret = 0;
+    int8_t cookie = 0;
+    struct IAudioCallback audioCallback;
+    for (i = 0; i < 1000; i++) {
+        ret = render_->RegCallback(render_, &audioCallback, cookie);
+    }
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_RegCallback_0400
+ * @tc.name   : testCommonRenderRegCallback002
+ * @tc.desc   : Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRegCallback002, Function | MediumTest | Level1)
+{
+    int32_t ret = 0;
+    int8_t cookie = 127;
+    struct IAudioCallback audioCallback;
+    ret = render_->RegCallback(render_, &audioCallback, cookie);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_RegCallback_0500
+ * @tc.name   : testCommonRenderRegCallback003
+ * @tc.desc   : Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRegCallback003, Function | MediumTest | Level1)
+{
+    int32_t ret = 0;
+    int8_t cookie = -1;
+    struct IAudioCallback audioCallback;
+    ret = render_->RegCallback(render_, &audioCallback, cookie);
     EXPECT_EQ(ret, HDF_SUCCESS);
 }
 
@@ -435,6 +571,22 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderDrainBufferk003, Function 
 {
     enum AudioDrainNotifyType type = AUDIO_DRAIN_EARLY_MODE;
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->DrainBuffer(render_, &type));
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_IsSupportsDrain_0300
+ * @tc.name   : testCommonRenderIsSupportsDrain001
+ * @tc.desc   : Reliability of function(IsSupportsDrain)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsDrain001, Function | MediumTest | Level1)
+{
+    int i = 0;
+    int32_t ret = 0;
+    bool support = false;
+    for (i = 0; i < 1000; i++) {
+        ret |= render_->IsSupportsDrain(render_, &support);
+    }
+    EXPECT_EQ(ret, HDF_SUCCESS);
 }
 
 /**
@@ -732,6 +884,342 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene013, Function |
     struct AudioSceneDescriptor scene;
     scene.scene.id = AUDIO_IN_CALL;
     scene.desc.pins = PIN_NONE;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_1700
+ * @tc.name  testCommonRenderSelectScene014
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene014, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_CALL;
+    scene.desc.pins = PIN_OUT_LINEOUT;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_1800
+ * @tc.name  testCommonRenderSelectScene015
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene015, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_MEDIA;
+    scene.desc.pins = PIN_OUT_LINEOUT;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_1900
+ * @tc.name  testCommonRenderSelectScene016
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene016, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_COMMUNICATION;
+    scene.desc.pins = PIN_OUT_LINEOUT;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_2000
+ * @tc.name  testCommonRenderSelectScene017
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene017, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_RINGTONE;
+    scene.desc.pins = PIN_OUT_LINEOUT;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_2100
+ * @tc.name  testCommonRenderSelectScene018
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene018, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_MEDIA;
+    scene.desc.pins = PIN_OUT_HDMI;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_2200
+ * @tc.name  testCommonRenderSelectScene019
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene019, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_COMMUNICATION;
+    scene.desc.pins = PIN_OUT_HDMI;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_2300
+ * @tc.name  testCommonRenderSelectScene020
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene020, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_RINGTONE;
+    scene.desc.pins = PIN_OUT_HDMI;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_2400
+ * @tc.name  testCommonRenderSelectScene021
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene021, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_CALL;
+    scene.desc.pins = PIN_OUT_HDMI;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_2500
+ * @tc.name  testCommonRenderSelectScene022
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene022, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_MEDIA;
+    scene.desc.pins = PIN_IN_MIC;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_2600
+ * @tc.name  testCommonRenderSelectScene023
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene023, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_COMMUNICATION;
+    scene.desc.pins = PIN_IN_MIC;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_2700
+ * @tc.name  testCommonRenderSelectScene024
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene024, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_RINGTONE;
+    scene.desc.pins = PIN_IN_MIC;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_2800
+ * @tc.name  testCommonRenderSelectScene025
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene025, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_CALL;
+    scene.desc.pins = PIN_IN_MIC;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_2900
+ * @tc.name  testCommonRenderSelectScene026
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene026, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_MEDIA;
+    scene.desc.pins = PIN_IN_HS_MIC;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_3000
+ * @tc.name  testCommonRenderSelectScene027
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene027, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_COMMUNICATION;
+    scene.desc.pins = PIN_IN_HS_MIC;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_3100
+ * @tc.name  testCommonRenderSelectScene028
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene028, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_RINGTONE;
+    scene.desc.pins = PIN_IN_HS_MIC;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_3200
+ * @tc.name  testCommonRenderSelectScene029
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene029, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_CALL;
+    scene.desc.pins = PIN_IN_HS_MIC;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_3300
+ * @tc.name  testCommonRenderSelectScene030
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene030, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_MEDIA;
+    scene.desc.pins = PIN_IN_LINEIN;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_3400
+ * @tc.name  testCommonRenderSelectScene031
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene031, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_COMMUNICATION;
+    scene.desc.pins = PIN_IN_LINEIN;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_3500
+ * @tc.name  testCommonRenderSelectScene032
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene032, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_RINGTONE;
+    scene.desc.pins = PIN_IN_LINEIN;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_3600
+ * @tc.name  testCommonRenderSelectScene033
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene033, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_CALL;
+    scene.desc.pins = PIN_IN_LINEIN;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_3700
+ * @tc.name  testCommonRenderSelectScene034
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene034, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_MEDIA;
+    scene.desc.pins = PIN_IN_USB_EXT;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_3800
+ * @tc.name  testCommonRenderSelectScene035
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene035, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_COMMUNICATION;
+    scene.desc.pins = PIN_IN_USB_EXT;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_3900
+ * @tc.name  testCommonRenderSelectScene036
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene036, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_RINGTONE;
+    scene.desc.pins = PIN_IN_USB_EXT;
+    scene.desc.desc = strdup("mic");
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SelectScene_4000
+ * @tc.name  testCommonRenderSelectScene037
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene037, Function | MediumTest | Level1)
+{
+    struct AudioSceneDescriptor scene;
+    scene.scene.id = AUDIO_IN_CALL;
+    scene.desc.pins = PIN_IN_USB_EXT;
     scene.desc.desc = strdup("mic");
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
@@ -1048,7 +1536,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetCurrentChannelId002, Fu
 }
 
 /**
- * @tc.number  SUB_Driver_Audio_RenderSetExtraParams_0400
+ * @tc.number  SUB_Driver_Audio_SetExtraParams_0400
  * @tc.name  testCommonRenderSetExtraParams001
  * @tc.desc  Reliability of function(SetExtraParams)
  */
@@ -1065,7 +1553,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetExtraParams001, Functio
 }
 
 /**
- * @tc.number  SUB_Driver_Audio_RenderSetExtraParams_0500
+ * @tc.number  SUB_Driver_Audio_SetExtraParams_0500
  * @tc.name  testCommonRenderSetExtraParams002
  * @tc.desc  Test parameters with abnormal input
  */
@@ -1075,7 +1563,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetExtraParams002, Functio
 }
 
 /**
- * @tc.number  SUB_Driver_Audio_RenderGetExtraParams_0400
+ * @tc.number  SUB_Driver_Audio_GetExtraParams_0400
  * @tc.name  testCommonRenderGetExtraParams001
  * @tc.desc  Reliability of function(GetExtraParams)
  */
@@ -1092,7 +1580,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetExtraParams001, Functio
 }
 
 /**
- * @tc.number  SUB_Driver_Audio_RenderGetExtraParams_0500
+ * @tc.number  SUB_Driver_Audio_GetExtraParams_0500
  * @tc.name  testCommonRenderGetExtraParams002
  * @tc.desc  Test parameters with abnormal input
  */
@@ -1103,7 +1591,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetExtraParams002, Functio
 }
 
 /**
- * @tc.number  SUB_Driver_Audio_RenderGetExtraParams_0600
+ * @tc.number  SUB_Driver_Audio_GetExtraParams_0600
  * @tc.name  testCommonRenderGetExtraParams003
  * @tc.desc  Test input param
  */

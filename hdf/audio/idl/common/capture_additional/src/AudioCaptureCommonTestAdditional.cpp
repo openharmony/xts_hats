@@ -359,7 +359,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureGetMute001, TestSize.Leve
  */
 HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureGetMute002, TestSize.Level2)
 {
-    bool isSupport = false;
+    bool isSupport = true;
     EXPECT_NE(capture_->GetMute, nullptr);
 
     int32_t ret = capture_->GetMute(nullptr, &isSupport);

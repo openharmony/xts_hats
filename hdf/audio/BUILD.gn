@@ -22,7 +22,10 @@ group("HatsHdfAudioTest") {
   }
   if (is_standard_system) {
     if (hats_rich == false) {
-      deps = [ "idl:hdi_base_common" ]
+      deps = [
+        "idl:hdi_base_common",
+        "idl:hdi_effect_additional",
+      ]
     } else {
       deps = [
         "idl:hdi_base_common",

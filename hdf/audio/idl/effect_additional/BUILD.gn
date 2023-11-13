@@ -1,4 +1,4 @@
-# Copyright (c) 2022 - 2023 Huawei Device Co., Ltd.
+# Copyright (c) 2023 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,30 +14,26 @@
 import("//build/test.gni")
 import("//test/xts/tools/build/suite.gni")
 
-module_output_path = "hats/codec"
-
-ohos_moduletest_suite("HatsHdfAdapterCodecTestAdditional") {
+module_output_path = "hats/audio"
+ohos_moduletest_suite("HatsHdfAudioEffectTestAdditional") {
   module_out_path = module_output_path
-  configs = [ ":hdc_codec_adapter_additional" ]
+  sources = [
+    "src/effect_common.cpp",
+    "src/effect_control_test.cpp",
+    "src/effect_model_test.cpp",
+  ]
+  configs = [ ":audio_idl_effect_additional" ]
 
-  sources = [ "codec_hdi_adapter_test.cpp" ]
-
-  deps = [ "//third_party/googletest:gtest_main" ]
-
-  if (is_standard_system) {
-    external_deps = [
-      "c_utils:utils",
-      "drivers_peripheral_codec:libcodec_hdi_passthrough_impl",
-      "hdf_core:libhdf_utils",
-      "hdf_core:libhdi",
-      "hilog:libhilog",
-    ]
-  } else {
-    external_deps = [ "hilog:libhilog" ]
-  }
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_audio:effect_idl_headers",
+    "drivers_interface_audio:libeffect_proxy_1.0",
+    "hdf_core:libhdf_utils",
+    "hilog:libhilog",
+  ]
   subsystem_name = "xts"
   part_name = "hats"
 }
-config("hdc_codec_adapter_additional") {
-  include_dirs = [ "//third_party/openmax/api/1.1.2" ]
+config("audio_idl_effect_additional") {
+  include_dirs = []
 }

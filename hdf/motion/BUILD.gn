@@ -20,7 +20,10 @@ group("HatsHdfMotionTest") {
   if (hats_rich == false) {
   } else {
     if (is_standard_system) {
-      deps = [ "hdi:HatsHdfMotionTest" ]
+      deps = [
+        "hdi:HatsHdfMotionTest",
+        "hdi_additional:HatsHdfMotionTestAdditional",
+      ]
     }
   }
 }

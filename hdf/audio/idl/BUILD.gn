@@ -51,3 +51,12 @@ group("hdi_effect") {
     #"benchmarktest/effect:HatsHdfAudioEffectBenchmarkTest"
   ]
 }
+group("hdi_effect_additional") {
+  if (!defined(ohos_lite)) {
+    testonly = true
+  }
+  if (hats_rich == false) {
+    deps = [ "effect_additional:HatsHdfAudioEffectTestAdditional" ]
+  } else {
+  }
+}

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,28 +13,19 @@
  * limitations under the License.
  */
 
-#ifndef DISPLAY_BUFFER_UT_H
-#define DISPLAY_BUFFER_UT_H
-#include "gtest/gtest.h"
-#include "v1_0/display_buffer_type.h"
-#include "v1_0/include/idisplay_buffer.h"
+#include "motion_callback_impl.h"
+#include <hdf_base.h>
 
 namespace OHOS {
 namespace HDI {
-namespace Display {
-namespace TEST {
-using OHOS::HDI::Display::Buffer::V1_0::AllocInfo;
-using OHOS::HDI::Display::Buffer::V1_0::IDisplayBuffer;
-
-class DisplayBufferMtAdditional : public ::testing::Test {
-protected:
-    static void SetUpTestCase();
-    int32_t AfterCache(BufferHandle *handle);
-public:
-    int32_t RunTest(const AllocInfo& info);
-};
+namespace Motion {
+namespace V1_0 {
+int32_t MotionCallbackImpl::OnDataEvent(const HdfMotionEvent &event)
+{
+    printf("moton :[%d], result[%d]:, status[%d]\n\r", event.motion, event.result, event.status);
+    return HDF_SUCCESS;
 }
-}
-}
-}
-#endif
+} // namespace V1_0
+} // namespace Motion
+} // namespace HDI
+} // namespace OHOS

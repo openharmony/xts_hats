@@ -19,6 +19,7 @@
 
 namespace OHOS::Camera {
 Test::ResultCallback Test::resultCallback_ = 0;
+bool g_onFlashlightStatusFlag = false;
 
 uint64_t Test::GetCurrentLocalTimeStamp()
 {
@@ -429,6 +430,7 @@ int32_t Test::TestCameraHostCallback::OnCameraStatus(const std::string& cameraId
 int32_t Test::TestCameraHostCallback::OnFlashlightStatus(const std::string& cameraId, FlashlightStatus status)
 {
     CAMERA_LOGE("cameraId: %{public}s, status: %{public}d", cameraId.c_str(), status);
+    g_onFlashlightStatusFlag = true;
     return HDI::Camera::V1_0::NO_ERROR;
 }
 

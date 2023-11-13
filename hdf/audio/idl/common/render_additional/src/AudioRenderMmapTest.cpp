@@ -391,9 +391,6 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition016, Te
 HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition017, TestSize.Level2)
 {
     uint64_t frames = 0;
-    struct AudioTimeStamp time;
-    time.tvNSec = 0;
-    time.tvSec = 0;
     int32_t i;
     for (i = 0; i < 70; i++) {
         EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->GetMmapPosition(nullptr, &frames, nullptr));

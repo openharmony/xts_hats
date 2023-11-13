@@ -48,6 +48,24 @@ HWTEST_F(HdiHostUtTestAdditional, testGetCameraIds001, Function | MediumTest | L
 }
 
 /**
+ * @tc.number : SUB_Driver_Camera_OnFlashlightStatus_0100
+ * @tc.name   : testOnFlashlightStatus001
+ * @tc.desc   : OnFlashlightStatus, stability test, return success
+ */
+HWTEST_F(HdiHostUtTestAdditional, testOnFlashlightStatus001, Function | MediumTest | Level1)
+{
+    g_onFlashlightStatusFlag = false;
+    EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
+    if (cameraTest->cameraDevice == nullptr) {
+        cameraTest->service->GetCameraIds(cameraTest->cameraIds);
+        cameraTest->status = true;
+        cameraTest->rc = cameraTest->service->SetFlashlight(cameraTest->cameraIds.front(), cameraTest->status);
+        EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+    }
+    EXPECT_EQ(g_onFlashlightStatusFlag, true);
+}
+
+/**
  * @tc.number: SUB_Driver_Camera_SetFlashLight_0100
  * @tc.name: testSetFlashLight001
  * @tc.desc: SetFlashlight, cameraId is not found, status is false

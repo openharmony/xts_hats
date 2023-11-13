@@ -13,28 +13,12 @@
  * limitations under the License.
  */
 
-#ifndef DISPLAY_BUFFER_UT_H
-#define DISPLAY_BUFFER_UT_H
-#include "gtest/gtest.h"
-#include "v1_0/display_buffer_type.h"
-#include "v1_0/include/idisplay_buffer.h"
+#ifndef EFFECT_COMMON_H
+#define EFFECT_COMMON_H
 
-namespace OHOS {
-namespace HDI {
-namespace Display {
-namespace TEST {
-using OHOS::HDI::Display::Buffer::V1_0::AllocInfo;
-using OHOS::HDI::Display::Buffer::V1_0::IDisplayBuffer;
+#include "v1_0/effect_types.h"
 
-class DisplayBufferMtAdditional : public ::testing::Test {
-protected:
-    static void SetUpTestCase();
-    int32_t AfterCache(BufferHandle *handle);
-public:
-    int32_t RunTest(const AllocInfo& info);
-};
-}
-}
-}
-}
+void EffectControllerReleaseDesc(struct EffectControllerDescriptor *desc);
+void EffectControllerReleaseDescs(struct EffectControllerDescriptor *descs, const uint32_t *descsLen);
+
 #endif

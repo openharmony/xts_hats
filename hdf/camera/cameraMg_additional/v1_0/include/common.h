@@ -46,6 +46,7 @@ enum ImageDataSaveSwitch {
 };
 using namespace OHOS::HDI::Camera::V1_0;
 using namespace OHOS::HDI::Display::Composer::V1_0;
+extern bool g_onFlashlightStatusFlag;
 class Test {
 public:
     void Init();

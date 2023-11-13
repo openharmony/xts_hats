@@ -453,6 +453,32 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetGain003, TestSize.Leve
     EXPECT_NE(ret, HDF_SUCCESS);
 }
 /**
+ * @tc.number : SUB_Driver_Audio_CaptureSetGain_0600
+ * @tc.name   : testAudioCaptureSetGain004
+ * @tc.desc   : test API SetGain param is 1.1
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetGain004, TestSize.Level1)
+{
+    float gain = 1.1;
+    EXPECT_NE(capture_->SetGain, nullptr);
+
+    int32_t ret = capture_->SetGain(capture_, gain);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Audio_CaptureSetGain_0700
+ * @tc.name   : testAudioCaptureSetGain005
+ * @tc.desc   : test API SetGain param is 2.0
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetGain005, TestSize.Level1)
+{
+    float gain = 2.0;
+    EXPECT_NE(capture_->SetGain, nullptr);
+
+    int32_t ret = capture_->SetGain(capture_, gain);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+/**
  * @tc.number : SUB_Driver_Audio_CaptureSetGain_0800
  * @tc.name   : testAudioCaptureSetGain006
  * @tc.desc   : test API SetGain 1000times
@@ -602,6 +628,23 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene002, TestSize.
     free(sceneDesc.desc.desc);
 }
 /**
+ * @tc.number : SUB_Driver_Audio_CaptureSelectScene_0500
+ * @tc.name   : testAudioCaptureSelectScene003
+ * @tc.desc   : test API SelectScene
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene003, TestSize.Level1)
+{
+    ASSERT_NE(capture_->SelectScene, nullptr);
+    struct AudioSceneDescriptor sceneDesc = {};
+    sceneDesc.desc.pins = PIN_IN_MIC;
+    sceneDesc.desc.desc = strdup("mic");
+    sceneDesc.scene.id = AUDIO_IN_RINGTONE;
+
+    int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    free(sceneDesc.desc.desc);
+}
+/**
  * @tc.number : SUB_Driver_Audio_CaptureSelectScene_0600
  * @tc.name   : testAudioCaptureSelectScene004
  * @tc.desc   : test API SelectScene
@@ -630,6 +673,23 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene005, TestSize.
     sceneDesc.desc.pins = PIN_IN_MIC;
     sceneDesc.desc.desc = strdup("speaker");
     sceneDesc.scene.id = AUDIO_IN_COMMUNICATION;
+
+    int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    free(sceneDesc.desc.desc);
+}
+/**
+ * @tc.number : SUB_Driver_Audio_CaptureSelectScene_0800
+ * @tc.name   : testAudioCaptureSelectScene006
+ * @tc.desc   : test API SelectScene
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene006, TestSize.Level1)
+{
+    ASSERT_NE(capture_->SelectScene, nullptr);
+    struct AudioSceneDescriptor sceneDesc = {};
+    sceneDesc.desc.pins = PIN_IN_MIC;
+    sceneDesc.desc.desc = strdup("speaker");
+    sceneDesc.scene.id = AUDIO_IN_RINGTONE;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
     EXPECT_EQ(ret, HDF_SUCCESS);

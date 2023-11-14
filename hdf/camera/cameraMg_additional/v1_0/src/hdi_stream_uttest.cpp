@@ -3220,6 +3220,30 @@ HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams045, Function | MediumTest 
 }
 
 /**
+ * @tc.number : SUB_Driver_Camera_CommitStreams_4600
+ * @tc.name   : testCommitStreams046
+ * @tc.desc   : CommitStreams, OHOS_CONTROL_VIDEO_STABILIZATION_MODE, return success
+ */
+HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams046, Function | MediumTest | Level1)
+{
+    cameraTest->Open();
+    cameraTest->intents = {PREVIEW};
+    cameraTest->StartStream(cameraTest->intents);
+
+    std::shared_ptr<CameraMetadata> modeSetting = std::make_shared<CameraMetadata>(2, 128);
+    uint8_t videoStabilizationMode = OHOS_CAMERA_VIDEO_STABILIZATION_LOW;
+    modeSetting->addEntry(OHOS_CONTROL_VIDEO_STABILIZATION_MODE, &videoStabilizationMode, 1);
+
+    std::vector<uint8_t> modeSettingVec;
+    MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
+
+    cameraTest->rc = cameraTest->streamOperator->CommitStreams(OperationMode::NORMAL, modeSettingVec);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+}
+
+/**
  * @tc.number : SUB_Driver_Camera_GetStreamAttributes_0100
  * @tc.name   : testGetStreamAttributes001
  * @tc.desc   : CommitStreams, stability test, return success

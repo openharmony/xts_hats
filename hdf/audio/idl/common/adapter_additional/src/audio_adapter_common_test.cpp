@@ -664,7 +664,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetVoiceVolume002, TestSize.Level2
 
 /**
  * @tc.number: SUB_Driver_Audio_GetMicMute_0400
- * @tc.name  : testGetMicMute001
+ * @tc.name  : testGetMicMute002
  * @tc.desc  : Verify the reliability of the GetMicMute function when parameter
  * mute as true.
  */

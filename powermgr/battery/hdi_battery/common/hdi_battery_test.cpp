@@ -726,4 +726,45 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest046, TestSize.Level3)
     EXPECT_TRUE(OHOS::HDI::Battery::V2_0::ChargeType::CHARGE_TYPE_WIRELESS_SUPER_QUICK == 6);
     printf("HdfBatteryHdiTest046: end.");
 }
+
+/**
+ * @tc.name: HdfBatteryHdiTest047
+ * @tc.desc: Test SetBatteryConfig
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest047, TestSize.Level1)
+{
+    std::string sceneName = "xxx";
+    std::string value = "";
+    int32_t result = g_batteryInterface->SetBatteryConfig(sceneName, value);
+    EXPECT_EQ(true, result != 0);
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest048
+ * @tc.desc: Test GetBatteryConfig
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest048, TestSize.Level1)
+{
+    std::string sceneName = "xxx";
+    std::string value = "";
+    int32_t result = g_batteryInterface->GetBatteryConfig(sceneName, value);
+    EXPECT_EQ(true, value == "");
+    EXPECT_EQ(true, result != 0);
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest049
+ * @tc.desc: Test IsBatteryConfigSupported
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest049, TestSize.Level1)
+{
+    std::string sceneName = "xxx";
+    bool value = false;
+    int32_t result = g_batteryInterface->IsBatteryConfigSupported(sceneName, value);
+    EXPECT_EQ(true, value == false);
+    EXPECT_EQ(true, result != 0);
+}
 }

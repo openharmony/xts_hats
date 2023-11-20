@@ -810,8 +810,8 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture001, TestSize.Level1)
     InitAttrs(attrs);
     attrs.silenceThreshold = DEEP_BUFFER_RENDER_PERIOD_SIZE;
     for (int i = 0; i < 100; i++) {
-        EXPECT_EQ(HDF_SUCCESS, adapter_->CreateCapture(nullptr, &devicedesc, &attrs, &capture, &captureId_));
-        EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(nullptr, captureId_));
+        EXPECT_EQ(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
+        EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, captureId_));
     }
 }
 } // namespace

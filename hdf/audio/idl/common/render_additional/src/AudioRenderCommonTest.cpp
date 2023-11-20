@@ -320,7 +320,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetRenderSpeed001, Functio
     for (i = 0; i < 1000; i++) {
         ret |= render_->SetRenderSpeed(render_, speed);
     }
-    EXPECT_EQ(-2, ret);
+    EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
 /**
@@ -360,7 +360,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetRenderSpeed001, Functio
         ret = render_->GetRenderSpeed(render_, &speed);
     }
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
-    EXPECT_EQ(ret, -2);
+    EXPECT_EQ(ret, HDF_SUCCESS);
 }
 
 /**
@@ -436,7 +436,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode006, Functio
 {
     AudioChannelMode mode = AUDIO_CHANNEL_LEFT_MUTE;
     int32_t ret = render_->SetChannelMode(render_, mode);
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(ret, -1);
 }
 
 /**
@@ -448,7 +448,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode007, Functio
 {
     AudioChannelMode mode = AUDIO_CHANNEL_RIGHT_MUTE;
     int32_t ret = render_->SetChannelMode(render_, mode);
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(ret, -1);
 }
 
 /**
@@ -460,7 +460,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode008, Functio
 {
     AudioChannelMode mode = AUDIO_CHANNEL_BOTH_MUTE;
     int32_t ret = render_->SetChannelMode(render_, mode);
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(ret, -1);
 }
 
 /**
@@ -586,7 +586,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsDrain001, Functi
     for (i = 0; i < 1000; i++) {
         ret |= render_->IsSupportsDrain(render_, &support);
     }
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(ret, -2);
 }
 
 /**

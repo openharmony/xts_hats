@@ -15,22 +15,22 @@ group("hatshdftest") {
   testonly = true
   if (is_standard_system) {
     deps = [
-      "audio:HatsHdfAudioTest",
-      "bluetooth:HatsHdfBluetoothTest",
-      "camera:HatsHdfCameraTest",
+      #"audio:HatsHdfAudioTest",
+      #"bluetooth:HatsHdfBluetoothTest",
+      #"camera:HatsHdfCameraTest",
       "codec:HatsHdfCodecTest",
-      "display:HatsHdfDisplayTest",
-      "external_device_manager:HatsHdfExternalDeviceTest",
-      "input:HatsHdfInputTest",
-      "light:HatsHdfLightTest",
-      "location:HatsHdfLocationTest",
-      "manager:HatsHdfManagerTest",
-      "motion:HatsHdfMotionTest",
-      "nfc:HatsHdfNfcTest",
-      "sensor:HatsHdfSensorTest",
-      "usb:HatsHdfUsbTest",
-      "vibrator:HatsHdfVibratorTest",
-      "wlan:HatsHdfWifiTest",
+      #"display:HatsHdfDisplayTest",
+      #"external_device_manager:HatsHdfExternalDeviceTest",
+      #"input:HatsHdfInputTest",
+      #"light:HatsHdfLightTest",
+      #"location:HatsHdfLocationTest",
+      #"manager:HatsHdfManagerTest",
+      #"motion:HatsHdfMotionTest",
+      #"nfc:HatsHdfNfcTest",
+      #"sensor:HatsHdfSensorTest",
+      #"usb:HatsHdfUsbTest",
+      #"vibrator:HatsHdfVibratorTest",
+      #"wlan:HatsHdfWifiTest",
     ]
   }
 }

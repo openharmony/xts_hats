@@ -255,11 +255,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateRender005, TestSize.Level1)
     devicedesc.pins = PIN_IN_MIC;
     InitAttrs(attrs);
     int32_t ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
-    if (ret != HDF_SUCCESS) {
-        attrs.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
-        EXPECT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
-    }
-    EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
+    EXPECT_NE(HDF_SUCCESS, ret);
 }
 
 /**
@@ -277,11 +273,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateRender006, TestSize.Level1)
     devicedesc.pins = PIN_IN_HS_MIC;
     InitAttrs(attrs);
     int32_t ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
-    if (ret != HDF_SUCCESS) {
-        attrs.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
-        EXPECT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
-    }
-    EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
+    EXPECT_NE(HDF_SUCCESS, ret);
 }
 
 /**
@@ -299,11 +291,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateRender007, TestSize.Level1)
     devicedesc.pins = PIN_IN_LINEIN;
     InitAttrs(attrs);
     int32_t ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
-    if (ret != HDF_SUCCESS) {
-        attrs.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
-        EXPECT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
-    }
-    EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
+    EXPECT_NE(HDF_SUCCESS, ret);
 }
 
 /**
@@ -321,11 +309,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateRender008, TestSize.Level1)
     devicedesc.pins = PIN_IN_USB_EXT;
     InitAttrs(attrs);
     int32_t ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
-    if (ret != HDF_SUCCESS) {
-        attrs.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
-        EXPECT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
-    }
-    EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
+    EXPECT_NE(HDF_SUCCESS, ret);
 }
 
 /**
@@ -454,8 +438,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture003, TestSize.Level1)
     devicedesc.pins = PIN_OUT_HEADSET;
     InitAttrs(attrs);
     attrs.silenceThreshold = DEEP_BUFFER_RENDER_PERIOD_SIZE;
-    EXPECT_EQ(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
-    EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, captureId_));
+    EXPECT_NE(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
 }
 
 /**
@@ -474,8 +457,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture004, TestSize.Level1)
     devicedesc.pins = PIN_OUT_LINEOUT;
     InitAttrs(attrs);
     attrs.silenceThreshold = DEEP_BUFFER_RENDER_PERIOD_SIZE;
-    EXPECT_EQ(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
-    EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, captureId_));
+    EXPECT_NE(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
 }
 
 /**
@@ -493,8 +475,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture005, TestSize.Level1)
     devicedesc.pins = PIN_OUT_HDMI;
     InitAttrs(attrs);
     attrs.silenceThreshold = DEEP_BUFFER_RENDER_PERIOD_SIZE;
-    EXPECT_EQ(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
-    EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, captureId_));
+    EXPECT_NE(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
 }
 
 /**

@@ -422,6 +422,7 @@ HWTEST_F(EffectModelTestAdditional, testEffectCreateEffectController007, TestSiz
     struct IEffectControl *controller = NULL;
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->CreateEffectController(model_, nullptr, nullptr, &controllerId_));
     EXPECT_EQ(HDF_SUCCESS, model_->CreateEffectController(model_, &info, &controller, &controllerId_));
+    EXPECT_EQ(HDF_SUCCESS, model_->DestroyEffectController(model_, &controllerId_));
 }
 
 /**
@@ -439,6 +440,7 @@ HWTEST_F(EffectModelTestAdditional, testEffectCreateEffectController008, TestSiz
     struct IEffectControl *controller = NULL;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, model_->CreateEffectController(nullptr, nullptr, &controller, &controllerId_));
     EXPECT_EQ(HDF_SUCCESS, model_->CreateEffectController(model_, &info, &controller, &controllerId_));
+    EXPECT_EQ(HDF_SUCCESS, model_->DestroyEffectController(model_, &controllerId_));
 }
 
 /**
@@ -820,6 +822,7 @@ HWTEST_F(EffectModelTestAdditional, testAudioDestroyEffectController001, TestSiz
         EXPECT_EQ(HDF_ERR_INVALID_OBJECT, model_->DestroyEffectController(nullptr, &controllerId_));
         EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->DestroyEffectController(model_, nullptr));
     }
+    EXPECT_EQ(HDF_SUCCESS, model_->DestroyEffectController(model_, &controllerId_));
 }
 /**
  * @tc.number : SUB_Driver_Audio_DestroyEffectController_0200
@@ -878,6 +881,7 @@ HWTEST_F(EffectModelTestAdditional, testAudioDestroyEffectController004, TestSiz
     ASSERT_NE(controller, nullptr);
 
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, model_->DestroyEffectController(nullptr, &controllerId_));
+    EXPECT_EQ(HDF_SUCCESS, model_->DestroyEffectController(model_, &controllerId_));
 }
 /**
  * @tc.number : SUB_Driver_Audio_DestroyEffectController_0500
@@ -897,5 +901,6 @@ HWTEST_F(EffectModelTestAdditional, testAudioDestroyEffectController005, TestSiz
     ASSERT_NE(controller, nullptr);
 
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->DestroyEffectController(model_, nullptr));
+    EXPECT_EQ(HDF_SUCCESS, model_->DestroyEffectController(model_, &controllerId_));
 }
 } // end of namespace

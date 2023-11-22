@@ -447,6 +447,33 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderGetMmapPosition020, Te
 }
 
 /**
+ * @tc.number  SUB_Driver_Audio_ReqMmapBuffer_0100
+ * @tc.name  testCommonRenderReqMmapBuffer001
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderReqMmapBuffer001, Function | MediumTest | Level1)
+{
+    int32_t reqSize = 256;
+    struct AudioMmapBufferDescriptor desc;
+    EXPECT_EQ(HDF_SUCCESS, render_->ReqMmapBuffer(render_, reqSize, &desc));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_ReqMmapBuffer_0200
+ * @tc.name  testCommonRenderReqMmapBuffer002
+ * @tc.desc  Reliability of function(ReqMmapBuffer)
+ */
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderReqMmapBuffer002, Function | MediumTest | Level1)
+{
+    int32_t reqSize = 1000;
+    struct AudioMmapBufferDescriptor desc;
+    int32_t i;
+    for (i = 0; i < 1000; i++) {
+        EXPECT_EQ(HDF_SUCCESS, render_->ReqMmapBuffer(render_, reqSize, &desc));
+    }
+}
+
+/**
  * @tc.number  SUB_Driver_Audio_ReqMmapBuffer_0300
  * @tc.name  testCommonRenderReqMmapBuffer003
  * @tc.desc  Test parameters with abnormal input
@@ -455,7 +482,137 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderReqMmapBuffer003, Func
 {
     int32_t reqSize = 256;
     struct AudioMmapBufferDescriptor desc;
-
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->ReqMmapBuffer(nullptr, reqSize, &desc));
 }
+
+/**
+ * @tc.number  SUB_Driver_Audio_ReqMmapBuffer_0400
+ * @tc.name  testCommonRenderReqMmapBuffer004
+ * @tc.desc  Test parameters with abnormal input
+ */
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderReqMmapBuffer004, Function | MediumTest | Level2)
+{
+    int32_t reqSize = -1;
+    struct AudioMmapBufferDescriptor desc;
+    EXPECT_EQ(HDF_SUCCESS, render_->ReqMmapBuffer(render_, reqSize, &desc));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_ReqMmapBuffer_0500
+ * @tc.name  testCommonRenderReqMmapBuffer005
+ * @tc.desc  Test parameters with abnormal input
+ */
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderReqMmapBuffer005, Function | MediumTest | Level2)
+{
+    int32_t reqSize = 0;
+    struct AudioMmapBufferDescriptor desc;
+    EXPECT_EQ(HDF_SUCCESS, render_->ReqMmapBuffer(render_, reqSize, &desc));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_ReqMmapBuffer_0600
+ * @tc.name  testCommonRenderReqMmapBuffer006
+ * @tc.desc  Test parameters with abnormal input
+ */
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderReqMmapBuffer006, Function | MediumTest | Level2)
+{
+    int32_t reqSize = 0;
+    struct AudioMmapBufferDescriptor desc;
+    desc.memoryAddress = nullptr;
+    EXPECT_NE(HDF_SUCCESS, render_->ReqMmapBuffer(render_, reqSize, &desc));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_ReqMmapBuffer_0700
+ * @tc.name  testCommonRenderReqMmapBuffer007
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderReqMmapBuffer007, Function | MediumTest | Level1)
+{
+    int32_t reqSize = 0;
+    struct AudioMmapBufferDescriptor desc;
+    desc.memoryFd = 0;
+    EXPECT_EQ(HDF_SUCCESS, render_->ReqMmapBuffer(render_, reqSize, &desc));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_ReqMmapBuffer_0800
+ * @tc.name  testCommonRenderReqMmapBuffer008
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderReqMmapBuffer008, Function | MediumTest | Level1)
+{
+    int32_t reqSize = 0;
+    struct AudioMmapBufferDescriptor desc;
+    desc.totalBufferFrames = 0;
+    EXPECT_EQ(HDF_SUCCESS, render_->ReqMmapBuffer(render_, reqSize, &desc));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_ReqMmapBuffer_0900
+ * @tc.name  testCommonRenderReqMmapBuffer009
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderReqMmapBuffer009, Function | MediumTest | Level1)
+{
+    int32_t reqSize = 0;
+    struct AudioMmapBufferDescriptor desc;
+    desc.transferFrameSize = 0;
+    EXPECT_EQ(HDF_SUCCESS, render_->ReqMmapBuffer(render_, reqSize, &desc));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_ReqMmapBuffer_1000
+ * @tc.name  testCommonRenderReqMmapBuffer010
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderReqMmapBuffer010, Function | MediumTest | Level1)
+{
+    int32_t reqSize = 0;
+    struct AudioMmapBufferDescriptor desc;
+    desc.isShareable = 0;
+    EXPECT_EQ(HDF_SUCCESS, render_->ReqMmapBuffer(render_, reqSize, &desc));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_ReqMmapBuffer_1100
+ * @tc.name  testCommonRenderReqMmapBuffer011
+ * @tc.desc  Test input param
+ */
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderReqMmapBuffer011, Function | MediumTest | Level1)
+{
+    int32_t reqSize = 0;
+    struct AudioMmapBufferDescriptor desc;
+    desc.offset = 0;
+    EXPECT_EQ(HDF_SUCCESS, render_->ReqMmapBuffer(render_, reqSize, &desc));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_ReqMmapBuffer_1200
+ * @tc.name  testCommonRenderReqMmapBuffer012
+ * @tc.desc  Test parameters with abnormal input
+ */
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderReqMmapBuffer012, Function | MediumTest | Level2)
+{
+    int32_t reqSize = 0;
+    struct AudioMmapBufferDescriptor desc;
+    desc.filePath = nullptr;
+    EXPECT_NE(HDF_SUCCESS, render_->ReqMmapBuffer(render_, reqSize, &desc));
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_ReqMmapBuffer_1300
+ * @tc.name  testCommonRenderReqMmapBuffer013
+ * @tc.desc  Test parameters with abnormal input
+ */
+HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderReqMmapBuffer013, Function | MediumTest | Level2)
+{
+    int32_t reqSize = 0;
+    struct AudioMmapBufferDescriptor desc;
+    desc.filePath = nullptr;
+    for (int i = 0; i < 10; i++) {
+        EXPECT_NE(HDF_SUCCESS, render_->ReqMmapBuffer(render_, reqSize, &desc));
+    }
+}
+
 } // end of namespace

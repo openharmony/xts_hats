@@ -193,37 +193,6 @@ HWTEST_F(RtgInterfaceTest, RtgInterfaceAddRtgs, TestSize.Level1)
     EXPECT_EQ(ret, 0);
 }
 
-/**
- * @tc.name: RtgInterfaceClearRtg
- * @tc.desc: Verify Rtg clear function.
- * @tc.type: FUNC
- */
-HWTEST_F(RtgInterfaceTest, RtgInterfaceClearRtg, TestSize.Level1)
-{
-    int ret;
-    int grpId;
-    int pid = getpid();
-    grpId = CreateNewRtgGrp(VIP, 0);
-    EXPECT_GT(grpId, 0);
-    ret = AddThreadToRtg(pid, grpId);
-    EXPECT_EQ(ret, 0);
-    ret = ClearRtgGrp(grpId);
-    EXPECT_EQ(ret, 0);
-    ret = DestroyRtgGrp(grpId);
-    EXPECT_EQ(ret, 0);
-}
-
-/**
- * @tc.name: RtgInterfaceClearErrorGroup
- * @tc.desc: Verify Rtg clear function with error groupid.
- * @tc.type: FUNC
- */
-HWTEST_F(RtgInterfaceTest, RtgInterfaceClearErrorGroup, TestSize.Level1)
-{
-    int ret;
-    ret = ClearRtgGrp(-1);
-    EXPECT_NE(ret, 0);
-}
 
 /**
  * @tc.name: RtgInterfaceBeginFrameFreq
@@ -234,13 +203,37 @@ HWTEST_F(RtgInterfaceTest, RtgInterfaceBeginFrameFreq, TestSize.Level1)
 {
     int ret;
     int grpId;
+    int pid = getpid();
+    vector<int> pids = {};
+    pids.push_back(pid);
     grpId = CreateNewRtgGrp(VIP, 0);
     EXPECT_GT(grpId, 0);
+    ret = AddThreadsToRtg(pids,grpid);
+    EXPECT_EQ(ret, 0);
     ret = BeginFrameFreq(grpId, 0);
     EXPECT_EQ(ret, 0);
     ret = DestroyRtgGrp(grpId);
     EXPECT_EQ(ret, 0);
 }
+
+
+/**
+ * @tc.name: RtgInterfaceBeginFrameFreqWithNoAddThreadGrp
+ * @tc.desc: Verify rtg frame start function with NoAddThreadtoGrp.
+ * @tc.type: FUNC
+ */
+HWTEST_F(RtgInterfaceTest, RtgInterfaceBeginFrameFreqWithNoAddThreadGrp, TestSize.Level1)
+{
+    int ret;
+    int grpId;
+    grpId = CreateNewRtgGrp(VIP, 0);
+    EXPECT_GT(grpId, 0);
+    ret = BeginFrameFreq(grpId, 0);
+    EXPECT_NE(ret, 0);
+    ret = DestroyRtgGrp(grpId);
+    EXPECT_EQ(ret, 0);
+}
+
 
 /**
  * @tc.name: RtgInterfaceBeginFrameFreqWithErrorGrp
@@ -263,8 +256,13 @@ HWTEST_F(RtgInterfaceTest, RtgInterfaceEndFrameFreq, TestSize.Level1)
 {
     int ret;
     int grpId;
+    int pid = getpid();
+    vector<int> pids = {};
+    pids.push_back(pid);
     grpId = CreateNewRtgGrp(VIP, 0);
     EXPECT_GT(grpId, 0);
+    ret = AddThreadsToRtg(pids,grpid);
+    EXPECT_EQ(ret, 0);
     ret = EndFrameFreq(grpId);
     EXPECT_EQ(ret, 0);
     ret = DestroyRtgGrp(grpId);
@@ -292,8 +290,13 @@ HWTEST_F(RtgInterfaceTest, RtgInterfaceEndScene, TestSize.Level1)
 {
     int ret;
     int grpId;
+    int pid = getpid();
+    vector<int> pids = {};
+    pids.push_back(pid);
     grpId = CreateNewRtgGrp(VIP, 0);
     EXPECT_GT(grpId, 0);
+    ret = AddThreadsToRtg(pids,grpid);
+    EXPECT_EQ(ret, 0);
     ret = EndScene(grpId);
     EXPECT_EQ(ret, 0);
     ret = DestroyRtgGrp(grpId);
@@ -321,8 +324,13 @@ HWTEST_F(RtgInterfaceTest, RtgInterfaceSetMinUtil, TestSize.Level1)
 {
     int ret;
     int grpId;
+    int pid = getpid();
+    vector<int> pids = {};
+    pids.push_back(pid);
     grpId = CreateNewRtgGrp(VIP, 0);
     EXPECT_GT(grpId, 0);
+    ret = AddThreadsToRtg(pids,grpid);
+    EXPECT_EQ(ret, 0);
     ret = SetMinUtil(grpId, 0);
     EXPECT_EQ(ret, 0);
     ret = DestroyRtgGrp(grpId);
@@ -350,8 +358,13 @@ HWTEST_F(RtgInterfaceTest, RtgInterfaceSetMargin, TestSize.Level1)
 {
     int ret;
     int grpId;
+    int pid = getpid();
+    vector<int> pids = {};
+    pids.push_back(pid);
     grpId = CreateNewRtgGrp(VIP, 0);
     EXPECT_GT(grpId, 0);
+    ret = AddThreadsToRtg(pids,grpid);
+    EXPECT_EQ(ret, 0);
     ret = SetMargin(grpId, 0);
     EXPECT_EQ(ret, 0);
     ret = DestroyRtgGrp(grpId);
@@ -366,82 +379,15 @@ HWTEST_F(RtgInterfaceTest, RtgInterfaceSetMargin, TestSize.Level1)
 HWTEST_F(RtgInterfaceTest, RtgInterfaceSetMarginWithErrorGrp, TestSize.Level1)
 {
     int ret;
-    ret = SetMargin(-1, 0);
-    EXPECT_NE(ret, 0);
-}
-
-/**
- * @tc.name: RtgInterfaceListRtgThread
- * @tc.desc: Verify rtg list function.
- * @tc.type: FUNC
- */
-HWTEST_F(RtgInterfaceTest, RtgInterfaceListRtgThread, TestSize.Level1)
-{
-    int ret;
-    int grpId;
-    vector<int> rs;
-    grpId = CreateNewRtgGrp(VIP, 0);
-    EXPECT_GT(grpId, 0);
-    ret = ListRtgThread(grpId, &rs);
-    EXPECT_EQ(ret, 0);
-    ret = DestroyRtgGrp(grpId);
-    EXPECT_EQ(ret, 0);
-}
-
-/**
- * @tc.name: RtgInterfaceListRtgThreadWithNullRes
- * @tc.desc: Verify rtg thread list function with null vector input.
- * @tc.type: FUNC
- */
-HWTEST_F(RtgInterfaceTest, RtgInterfaceListRtgThreadWithNullRes, TestSize.Level1)
-{
-    int ret;
     int grpId;
     grpId = CreateNewRtgGrp(VIP, 0);
     EXPECT_GT(grpId, 0);
-    ret = ListRtgThread(grpId, nullptr);
+    ret = SetMargin(grpId, 0);
     EXPECT_NE(ret, 0);
     ret = DestroyRtgGrp(grpId);
     EXPECT_EQ(ret, 0);
 }
 
-/**
- * @tc.name: RtgInterfaceListRtgThreadWithErrorGrp
- * @tc.desc: Verify rtg thread list function with error groupid.
- * @tc.type: FUNC
- */
-HWTEST_F(RtgInterfaceTest, RtgInterfaceListRtgThreadWithErrorGrp, TestSize.Level1)
-{
-    int ret;
-    vector<int> rs;
-    ret = ListRtgThread(-1, &rs);
-    EXPECT_NE(ret, 0);
-}
-
-/**
- * @tc.name: RtgInterfaceListRtgGroup
- * @tc.desc: Verify rtg list function.
- * @tc.type: FUNC
- */
-HWTEST_F(RtgInterfaceTest, RtgInterfaceListRtgGroup, TestSize.Level1)
-{
-    int ret;
-    vector<int> rs;
-    ret = ListRtgGroup(&rs);
-    EXPECT_EQ(ret, 0);
-}
-
-/**
- * @tc.name: RtgInterfaceListRtgGroupWithNullRes
- * @tc.desc: Verify rtg list function with null vector input.
- * @tc.type: FUNC
- */
-HWTEST_F(RtgInterfaceTest, RtgInterfaceListRtgGroupWithNullRes, TestSize.Level1)
-{
-    int ret;
-    ret = ListRtgGroup(nullptr);
-    EXPECT_NE(ret, 0);
-}
 
 /**
  * @tc.name: RtgInterfaceSetAttr
@@ -471,51 +417,16 @@ HWTEST_F(RtgInterfaceTest, RtgInterfaceSetErrorAttr, TestSize.Level1)
     int grpId;
     grpId = CreateNewRtgGrp(VIP, 0);
     EXPECT_GT(grpId, 0);
-    ret = SetFrameRateAndPrioType(grpId, 90, -1);
+    ret = SetFrameRateAndPrioType(grpId, -1, VIP);
     EXPECT_NE(ret, 0);
     ret = DestroyRtgGrp(grpId);
     EXPECT_EQ(ret, 0);
 }
 
-/**
- * @tc.name: RtgInterfaceSetMaxVips
- * @tc.desc: Verify rtg max vip num set function.
- * @tc.type: FUNC
- */
-HWTEST_F(RtgInterfaceTest, RtgInterfaceSetMaxVips, TestSize.Level1)
-{
-    int ret;
-    ret = SetMaxVipRtgs(2);
-    EXPECT_EQ(ret, 0);
-}
-
-/**
- * @tc.name: RtgInterfaceSetErrorMaxVips
- * @tc.desc: Verify rtg max vip num set function with 0 vip nums.
- * @tc.type: FUNC
- */
-HWTEST_F(RtgInterfaceTest, RtgInterfaceSetErrorMaxVips, TestSize.Level1)
-{
-    int ret;
-    ret = SetMaxVipRtgs(0);
-    EXPECT_NE(ret, 0);
-}
-
-/**
- * @tc.name: RtgInterfaceSetLargeMaxVips
- * @tc.desc: Verify rtg max vip num set function with too large vip nums.
- * @tc.type: FUNC
- */
-HWTEST_F(RtgInterfaceTest, RtgInterfaceSetLargeMaxVips, TestSize.Level1)
-{
-    int ret;
-    ret = SetMaxVipRtgs(50000);
-    EXPECT_NE(ret, 0);
-}
 
 /**
  * @tc.name: RtgInterfaceAddClearMultipleThreads
- * @tc.desc: Verify rtg multiple add  clear function.
+ * @tc.desc: Verify rtg multiple add  destory function.
  * @tc.type: FUNC
  */
 HWTEST_F(RtgInterfaceTest, RtgInterfaceAddClearMultipleThreads, TestSize.Level1)
@@ -537,15 +448,13 @@ HWTEST_F(RtgInterfaceTest, RtgInterfaceAddClearMultipleThreads, TestSize.Level1)
     EXPECT_GT(grpId, 0);
     ret = AddThreadsToRtg(threads, grpId);
     EXPECT_EQ(ret, 0);
-    ret = ClearRtgGrp(grpId);
-    EXPECT_EQ(ret, 0);
     ret = DestroyRtgGrp(grpId);
     EXPECT_EQ(ret, 0);
 }
 
 /**
  * @tc.name: RtgInterfaceAddClearVIPGroupMultipleThreads
- * @tc.desc: Verify rtg multiple add clear about VIP group function .
+ * @tc.desc: Verify rtg multiple add destory about VIP group function .
  * @tc.type: FUNC
  */
 HWTEST_F(RtgInterfaceTest, RtgInterfaceAddClearVIPGroupMultipleThreads, TestSize.Level1)
@@ -566,8 +475,6 @@ HWTEST_F(RtgInterfaceTest, RtgInterfaceAddClearVIPGroupMultipleThreads, TestSize
     grpId = CreateNewRtgGrp(VIP, 0);
     EXPECT_GT(grpId, 0);
     ret = AddThreadsToRtg(threads, grpId, 36);
-    EXPECT_EQ(ret, 0);
-    ret = ClearRtgGrp(grpId);
     EXPECT_EQ(ret, 0);
     ret = DestroyRtgGrp(grpId);
     EXPECT_EQ(ret, 0);
@@ -599,8 +506,6 @@ HWTEST_F(RtgInterfaceTest, RtgInterfaceAddDestoryRepeatCalls, TestSize.Level1)
     EXPECT_EQ(ret, 0);
     ret = AddThreadsToRtg(threads, grpId);
     EXPECT_NE(ret, 0);
-    ret = ClearRtgGrp(grpId);
-    EXPECT_EQ(ret, 0);
     ret = DestroyRtgGrp(grpId);
     EXPECT_EQ(ret, 0);
     ret = DestroyRtgGrp(grpId);

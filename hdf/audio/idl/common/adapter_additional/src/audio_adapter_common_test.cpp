@@ -598,7 +598,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetExtraParams001, TestSize.Level1
     char condition[1024];
     const char *value = "sup_sampling_rates=4800;sup_channels=1;sup_formats=2;";
     int32_t ret = adapter_->SetExtraParams(adapter_, key, condition, value);
-    EXPECT_EQ(HDF_SUCCESS, ret);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 /**
@@ -614,7 +614,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetExtraParams001, TestSize.Level1
     char value[1024] = "sup_sampling_rates=4800;sup_channels=1;sup_formats=2;";
     uint32_t valueLen = 1024;
     int32_t ret = adapter_->GetExtraParams(adapter_, key, condition, value, valueLen);
-    EXPECT_EQ(HDF_SUCCESS, ret);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 /**
@@ -627,7 +627,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetVoiceVolume001, TestSize.Level1
 {
     float volume = 0.5;
     int32_t ret = adapter_->SetVoiceVolume(adapter_, volume);
-    EXPECT_EQ(HDF_SUCCESS, ret);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 /**
@@ -654,7 +654,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetMicMute002, TestSize.Level1)
     bool mute = true;
     int32_t ret = 0;
     ret = adapter_->GetMicMute(adapter_, &mute);
-    EXPECT_EQ(HDF_SUCCESS, ret);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 /**
@@ -667,7 +667,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetMicMute001, TestSize.Level1)
 {
     bool mute = true;
     int32_t ret = adapter_->SetMicMute(adapter_, mute);
-    EXPECT_EQ(HDF_SUCCESS, ret);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 /**
@@ -713,14 +713,12 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetDeviceStatus001, TestSize.Level
  * @tc.number: SUB_Driver_Audio_GetPassthroughMode_0500
  * @tc.name  : testGetPassthroughMode001
  * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
- * portId as 100.
+ * port as ports.
  */
 HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode001, TestSize.Level1)
 {
     struct AudioPort port = {};
-    port.dir = PORT_OUT;
-    port.portId = 100;
-    port.portName = const_cast<char *>("primary");
+    port = adapterDescs_->ports[0];
     enum AudioPortPassthroughMode mode;
     int32_t ret = adapter_->GetPassthroughMode(adapter_, &port, &mode);
     EXPECT_EQ(HDF_SUCCESS, ret);

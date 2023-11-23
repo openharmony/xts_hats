@@ -18,7 +18,7 @@ import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/codec"
 
-ohos_moduletest_suite("HatsHdfCodecBenchmarkTestAdditional") {
+ohos_moduletest_suite("HatsHdfCodecBenchmarkAdditionalTest") {
   module_out_path = module_output_path
   include_dirs = [
     "./",

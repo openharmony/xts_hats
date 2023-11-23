@@ -15,7 +15,7 @@ import("//build/ohos_var.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/audio"
-ohos_moduletest_suite("HatsHdfAudioIdlCaptureTestAdditional") {
+ohos_moduletest_suite("HatsHdfAudioIdlCaptureAdditionalTest") {
   module_out_path = module_output_path
   sources = [ "src/AudioCaptureCommonTestAdditional.cpp" ]
   configs = [ ":audio_idl_capture_additional" ]

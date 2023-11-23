@@ -15,7 +15,7 @@ import("//build/test.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/audio"
-ohos_moduletest_suite("HatsHdfAudioEffectTestAdditional") {
+ohos_moduletest_suite("HatsHdfAudioEffectAdditionalTest") {
   module_out_path = module_output_path
   sources = [
     "src/effect_common.cpp",

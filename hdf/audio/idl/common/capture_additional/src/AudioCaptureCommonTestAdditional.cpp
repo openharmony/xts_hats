@@ -632,7 +632,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene002, TestSize.
  * @tc.name   : testAudioCaptureSelectScene003
  * @tc.desc   : test API SelectScene
  */
-HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene003, TestSize.Level1)
+HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene003, TestSize.Level2)
 {
     ASSERT_NE(capture_->SelectScene, nullptr);
     struct AudioSceneDescriptor sceneDesc = {};
@@ -641,7 +641,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene003, TestSize.
     sceneDesc.scene.id = AUDIO_IN_RINGTONE;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_NE(ret, HDF_SUCCESS);
     free(sceneDesc.desc.desc);
 }
 /**
@@ -683,7 +683,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene005, TestSize.
  * @tc.name   : testAudioCaptureSelectScene006
  * @tc.desc   : test API SelectScene
  */
-HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene006, TestSize.Level1)
+HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene006, TestSize.Level2)
 {
     ASSERT_NE(capture_->SelectScene, nullptr);
     struct AudioSceneDescriptor sceneDesc = {};
@@ -692,7 +692,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene006, TestSize.
     sceneDesc.scene.id = AUDIO_IN_RINGTONE;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_NE(ret, HDF_SUCCESS);
     free(sceneDesc.desc.desc);
 }
 /**

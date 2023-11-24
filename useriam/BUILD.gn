@@ -19,7 +19,9 @@ group("useriam") {
     if (hats_rich == false) {
       deps = [
         "faceauth:HatsUserIamFaceAuthTest",
+        "faceauth_additional:HatsUserIamFaceAuthAdditionalTest",
         "fingerprintauth:HatsUserIamFingerprintAuthTest",
+        "fingerprintauth_additional:HatsUserIamFingerprintAuthAdditionalTest",
         "pinauth:HatsUserIamPinAuthTest",
         "userauth:HatsUserIamUserAuthTest",
       ]

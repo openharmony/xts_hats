@@ -37,9 +37,7 @@ ohos_moduletest_suite("HatsUserIamFingerprintAuthAdditionalTest") {
     "$base_root/commonlibrary/c_utils/base/include",
   ]
 
-  sources = [
-    "./src/fingerprint_auth_hdi.cpp",
-  ]
+  sources = [ "./src/fingerprint_auth_hdi.cpp" ]
 
   deps = [
     "$base_root/base/useriam/user_auth_framework/common:iam_test",

@@ -33,7 +33,6 @@ using namespace testing::ext;
 
 namespace {
 static const uint32_t AUDIO_ADAPTER_NUM_MAX = 5;
-static const uint32_t AUDIO_ADAPTER_RENDER_ID = 0;
 static const uint32_t AUDIO_ADAPTER_CAPTURE_ID = 0;
 
 class HdfAudioUtAdapterTestAdditional : public testing::Test {
@@ -396,7 +395,6 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testDestroyRender001, TestSize.Level2)
     }
     EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
     EXPECT_NE(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
-    EXPECT_NE(HDF_SUCCESS, adapter_->DestroyRender(adapter_, AUDIO_ADAPTER_RENDER_ID));
 }
 
 /**

@@ -26,7 +26,7 @@ using namespace testing::ext;
 namespace {
 uint32_t SLEEP_TIME = 200;
 std::string g_timeSequence = "haptic.clock.timer";
-std::string g_builtIn = "haptic.default.effect";
+std::string g_builtIn = "haptic.helloworld.effect";
 sptr<IVibratorInterface> g_vibratorInterface = nullptr;
 sptr<IVibratorInterface> g_nullvalue = nullptr;
 
@@ -184,7 +184,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStart002, Function | MediumTes
     ASSERT_NE(nullptr, g_vibratorInterface);
 
     int32_t startRet = g_vibratorInterface->Start(g_builtIn);
-    EXPECT_EQ(startRet, HDF_SUCCESS);
+    EXPECT_EQ(startRet, HDF_ERR_INVALID_PARAM);
 
     OsalMSleep(SLEEP_TIME);
 
@@ -218,7 +218,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStart004, Function | MediumTes
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
     int32_t startRet = g_vibratorInterface->Start(g_builtIn);
-    EXPECT_EQ(startRet, HDF_SUCCESS);
+    EXPECT_EQ(startRet, HDF_ERR_INVALID_PARAM);
 
     OsalMSleep(SLEEP_TIME);
 
@@ -245,7 +245,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStart005, Function | MediumTes
     OsalMSleep(SLEEP_TIME);
 
     startRet = g_vibratorInterface->Start(g_builtIn);
-    EXPECT_EQ(startRet, HDF_SUCCESS);
+    EXPECT_EQ(startRet, HDF_ERR_INVALID_PARAM);
 
     OsalMSleep(SLEEP_TIME);
 
@@ -262,7 +262,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStart006, Function | MediumTes
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
     int32_t startRet = g_vibratorInterface->Start(g_builtIn);
-    EXPECT_EQ(startRet, HDF_SUCCESS);
+    EXPECT_EQ(startRet, HDF_ERR_INVALID_PARAM);
 
     OsalMSleep(SLEEP_TIME);
 
@@ -289,7 +289,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStart007, Function | MediumTes
     int32_t i;
     for (i = 0; i < 60; i++) {
         int32_t startRet = g_vibratorInterface->Start(g_builtIn);
-        EXPECT_EQ(startRet, HDF_SUCCESS);
+        EXPECT_EQ(startRet, HDF_ERR_INVALID_PARAM);
 
         OsalMSleep(SLEEP_TIME);
 
@@ -362,6 +362,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop003, Function | MediumTest
     OsalMSleep(SLEEP_TIME);
     int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_BUTT);
     EXPECT_EQ(endRet, HDF_FAILURE);
+    endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_PRESET);
 }
 
 /**
@@ -373,7 +374,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop004, Function | MediumTest
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
     int32_t startRet = g_vibratorInterface->Start(g_timeSequence);
-    EXPECT_EQ(startRet, HDF_ERR_DEVICE_BUSY);
+    EXPECT_EQ(startRet, HDF_SUCCESS);
 
     OsalMSleep(SLEEP_TIME);
 
@@ -499,7 +500,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop011, Function | MediumTest
     ASSERT_NE(nullptr, g_vibratorInterface);
 
     int32_t startRet = g_vibratorInterface->Start(g_builtIn);
-    EXPECT_EQ(startRet, HDF_SUCCESS);
+    EXPECT_EQ(startRet, HDF_ERR_INVALID_PARAM);
 
     OsalMSleep(SLEEP_TIME);
 

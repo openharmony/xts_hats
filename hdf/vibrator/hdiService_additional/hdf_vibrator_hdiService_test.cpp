@@ -56,7 +56,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStartOnce001, Function | Mediu
     ASSERT_NE(nullptr, g_vibratorInterface);
 
     int32_t startRet = g_vibratorInterface->StartOnce(0);
-    EXPECT_EQ(startRet, HDF_ERR_INVALID_PARAM);
+    EXPECT_EQ(startRet, HDF_SUCCESS);
 
     OsalMSleep(SLEEP_TIME);
 

@@ -126,6 +126,7 @@ enum class HdiId {
     HREQ_DATA_SEND_DATA_SLEEP_MODE,
     HREQ_DATA_SET_DATA_PERMITTED,
     HREQ_DATA_GET_LINK_CAPABILITY,
+    HREQ_DATA_CLEAN_ALL_CONNECTIONS,
 
     HREQ_NETWORK_BASE = 400,
     HREQ_NETWORK_GET_SIGNAL_STRENGTH,
@@ -306,6 +307,7 @@ public:
     int32_t SetDataProfileInfoResponse(const RilRadioResponseInfo &responseInfo);
     int32_t GetLinkCapabilityResponse(
         const RilRadioResponseInfo &responseInfo, const DataLinkCapability &dataLinkCapability) override;
+    int32_t CleanAllConnectionsResponse(const RilRadioResponseInfo &responseInfo) override;
 
     // Modem
     int32_t RadioStateUpdated(const RilRadioResponseInfo &responseInfo, int32_t state) override;
@@ -1952,6 +1954,14 @@ int32_t RilCallback::GetLinkCapabilityResponse(
     return 0;
 }
 
+int32_t RilCallback::CleanAllConnectionsResponse(const RilRadioResponseInfo &responseInfo)
+{
+    HDF_LOGI("RilCallback::CleanAllConnectionsResponse error:%{public}d", responseInfo.error);
+    hdiId_ = HdiId::HREQ_DATA_CLEAN_ALL_CONNECTIONS;
+    resultInfo_ = responseInfo;
+    NotifyAll();
+    return 0;
+}
 // Sms
 int32_t RilCallback::NewSmsNotify(
     const HDI::Ril::V1_1::RilRadioResponseInfo &responseInfo, const SmsMessageInfo &smsMessageInfo)

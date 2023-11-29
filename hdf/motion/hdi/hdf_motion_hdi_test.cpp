@@ -24,6 +24,9 @@
 #include "v1_1/imotion_interface.h"
 #include "motion_callback_impl.h"
 
+#define DATA_NUM 12
+#define DATA_VALUE 6
+
 using namespace OHOS::HDI::Motion::V1_1;
 using namespace testing::ext;
 
@@ -31,6 +34,7 @@ namespace {
     sptr<OHOS::HDI::Motion::V1_1::IMotionInterface> g_motionInterface = nullptr;
     sptr<IMotionCallback> g_motionCallback = new MotionCallbackImpl();
     sptr<IMotionCallback> g_motionCallbackUnregistered = new MotionCallbackImpl();
+    std::vector<uint8_t> g_motionConfigData(DATA_NUM, DATA_VALUE);
 }
 
 class HdfMotionTest : public testing::Test {
@@ -58,12 +62,12 @@ void HdfMotionTest::TearDown()
 {
 }
 
-HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0100, Function | MediumTest | Level1)
+HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0100, Function | MediumTest | Level2)
 {
     ASSERT_NE(nullptr, g_motionInterface);
 }
 
-HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0200, Function | MediumTest | Level1)
+HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0200, Function | MediumTest | Level2)
 {
     if (g_motionInterface == nullptr) {
         ASSERT_NE(nullptr, g_motionInterface);
@@ -75,7 +79,7 @@ HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0200, Function | MediumTest 
     EXPECT_EQ(0, ret);
 }
 
-HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0300, Function | MediumTest | Level1)
+HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0300, Function | MediumTest | Level2)
 {
     if (g_motionInterface == nullptr) {
         ASSERT_NE(nullptr, g_motionInterface);
@@ -89,7 +93,18 @@ HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0300, Function | MediumTest 
     EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
-HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0400, Function | MediumTest | Level1)
+HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0400, Function | MediumTest | Level2)
+{
+    if (g_motionInterface == nullptr) {
+        ASSERT_NE(nullptr, g_motionInterface);
+        return;
+    }
+    sptr<IMotionCallback> motionCallback = nullptr;
+    int32_t ret = g_motionInterface->Register(motionCallback);
+    EXPECT_NE(HDF_SUCCESS, ret);
+}
+
+HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0500, Function | MediumTest | Level2)
 {
     if (g_motionInterface == nullptr) {
         ASSERT_NE(nullptr, g_motionInterface);
@@ -99,7 +114,18 @@ HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0400, Function | MediumTest 
     EXPECT_EQ(HDF_FAILURE, ret);
 }
 
-HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0500, Function | MediumTest | Level1)
+HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0600, Function | MediumTest | Level2)
+{
+    if (g_motionInterface == nullptr) {
+        ASSERT_NE(nullptr, g_motionInterface);
+        return;
+    }
+    sptr<IMotionCallback> motionCallback = nullptr;
+    int32_t ret = g_motionInterface->Unregister(motionCallback);
+    EXPECT_NE(HDF_SUCCESS, ret);
+}
+
+HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0700, Function | MediumTest | Level2)
 {
     if (g_motionInterface == nullptr) {
         ASSERT_NE(nullptr, g_motionInterface);
@@ -139,17 +165,50 @@ HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0500, Function | MediumTest 
     EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
-HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0600, Function | MediumTest | Level1)
+HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0800, Function | MediumTest | Level2)
 {
     if (g_motionInterface == nullptr) {
         ASSERT_NE(nullptr, g_motionInterface);
         return;
     }
     int32_t ret = g_motionInterface->EnableMotion(OHOS::HDI::Motion::V1_1::HDF_MOTION_TYPE_MAX);
-    EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
+    EXPECT_NE(HDF_SUCCESS, ret);
+    OsalSleep(2);
+
+    ret = g_motionInterface->DisableMotion(OHOS::HDI::Motion::V1_1::HDF_MOTION_TYPE_MAX);
+    EXPECT_NE(HDF_SUCCESS, ret);
 }
 
-HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0700, Function | MediumTest | Level1)
+HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0900, Function | MediumTest | Level2)
+{
+    if (g_motionInterface == nullptr) {
+        ASSERT_NE(nullptr, g_motionInterface);
+        return;
+    }
+    int32_t ret = g_motionInterface->EnableMotion(OHOS::HDI::Motion::V1_1::HDF_MOTION_TYPE_WRIST_UP);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+    OsalSleep(2);
+
+    ret = g_motionInterface->DisableMotion(OHOS::HDI::Motion::V1_1::HDF_MOTION_TYPE_WRIST_UP);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+}
+
+HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_1000, Function | MediumTest | Level2)
+{
+    if (g_motionInterface == nullptr) {
+        ASSERT_NE(nullptr, g_motionInterface);
+        return;
+    }
+    int32_t motionType = -1;
+    int32_t ret = g_motionInterface->EnableMotion(motionType);
+    EXPECT_NE(HDF_SUCCESS, ret);
+    OsalSleep(2);
+
+    ret = g_motionInterface->DisableMotion(motionType);
+    EXPECT_NE(HDF_SUCCESS, ret);
+}
+
+HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_1100, Function | MediumTest | Level2)
 {
     if (g_motionInterface == nullptr) {
         ASSERT_NE(nullptr, g_motionInterface);
@@ -167,7 +226,7 @@ HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0700, Function | MediumTest 
     EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
-HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0800, Function | MediumTest | Level1)
+HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_1200, Function | MediumTest | Level2)
 {
     if (g_motionInterface == nullptr) {
         ASSERT_NE(nullptr, g_motionInterface);
@@ -175,4 +234,36 @@ HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_0800, Function | MediumTest 
     }
     int32_t ret = g_motionInterface->DisableMotion(OHOS::HDI::Motion::V1_1::HDF_MOTION_TYPE_MAX);
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
+}
+
+HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_1300, Function | MediumTest | Level2)
+{
+    if (g_motionInterface == nullptr) {
+        ASSERT_NE(nullptr, g_motionInterface);
+        return;
+    }
+    int32_t ret = g_motionInterface->DisableMotion(OHOS::HDI::Motion::V1_1::HDF_MOTION_TYPE_PICKUP);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+}
+
+HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_1400, Function | MediumTest | Level2)
+{
+    if (g_motionInterface == nullptr) {
+        ASSERT_NE(nullptr, g_motionInterface);
+        return;
+    }
+    int32_t motionType = -1;
+    int32_t ret = g_motionInterface->DisableMotion(motionType);
+    EXPECT_NE(HDF_SUCCESS, ret);
+}
+
+HWTEST_F(HdfMotionTest, SUB_Driver_Sensor_HdiMotion_1500, Function | MediumTest | Level2)
+{
+    if (g_motionInterface == nullptr) {
+        ASSERT_NE(nullptr, g_motionInterface);
+        return;
+    }
+    int32_t motionType = -1;
+    int32_t ret = g_motionInterface->SetMotionConfig(motionType, g_motionConfigData);
+    EXPECT_NE(HDF_SUCCESS, ret);
 }

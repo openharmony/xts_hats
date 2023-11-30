@@ -26,11 +26,14 @@
 
 using namespace OHOS::HDI::Motion::V1_1;
 using namespace testing::ext;
+#define DATA_NUM 12
+#define DATA_VALUE 6
 
 namespace {
 sptr<OHOS::HDI::Motion::V1_1::IMotionInterface> g_motionInterface = nullptr;
 sptr<IMotionCallback> g_motionCallback = new MotionCallbackImpl();
 sptr<IMotionCallback> g_motionCallbackUnregistered = new MotionCallbackImpl();
+std::vector<uint8_t> g_motionConfigData(DATA_NUM, DATA_VALUE);
 } // namespace
 
 class HdfMotionTestAdditional : public testing::Test {
@@ -121,8 +124,9 @@ HWTEST_F(HdfMotionTestAdditional, testHdiEnableMotion006, Function | MediumTest 
         return;
     }
 
+    int32_t ret = 0;
     for (size_t i = 0; i < 1000; i++) {
-        int32_t ret = g_motionInterface->EnableMotion(OHOS::HDI::Motion::V1_1::HDF_MOTION_CLOSE_TO_EAR);
+        ret = g_motionInterface->EnableMotion(OHOS::HDI::Motion::V1_1::HDF_MOTION_CLOSE_TO_EAR);
         EXPECT_EQ(HDF_SUCCESS, ret);
     }
 }
@@ -251,8 +255,9 @@ HWTEST_F(HdfMotionTestAdditional, testHdiDisableMotion006, Function | MediumTest
         return;
     }
 
+    int32_t ret = 0;
     for (size_t i = 0; i < 1000; i++) {
-        int32_t ret = g_motionInterface->DisableMotion(OHOS::HDI::Motion::V1_1::HDF_MOTION_CLOSE_TO_EAR);
+        ret = g_motionInterface->DisableMotion(OHOS::HDI::Motion::V1_1::HDF_MOTION_CLOSE_TO_EAR);
         EXPECT_EQ(HDF_SUCCESS, ret);
     }
 }
@@ -310,23 +315,7 @@ HWTEST_F(HdfMotionTestAdditional, testHdiDisableMotion009, Function | MediumTest
  * @tc.name   : testHdiRegister001
  * @tc.desc   : Testing the effectiveness of the Register function
  */
-HWTEST_F(HdfMotionTestAdditional, testHdiRegister001, Function | MediumTest | Level1)
-{
-    if (g_motionInterface == nullptr) {
-        ASSERT_NE(nullptr, g_motionInterface);
-        return;
-    }
-
-    int32_t ret = g_motionInterface->Register(g_motionCallback);
-    EXPECT_EQ(HDF_SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Driver_Motion_Hdiregister_0200
- * @tc.name   : testHdiRegister002
- * @tc.desc   : Testing the effectiveness of the Register function
- */
-HWTEST_F(HdfMotionTestAdditional, testHdiRegister002, Function | MediumTest | Level2)
+HWTEST_F(HdfMotionTestAdditional, testHdiRegister001, Function | MediumTest | Level2)
 {
     if (g_motionInterface == nullptr) {
         ASSERT_NE(nullptr, g_motionInterface);
@@ -342,19 +331,20 @@ HWTEST_F(HdfMotionTestAdditional, testHdiRegister002, Function | MediumTest | Le
 }
 
 /**
- * @tc.number : SUB_Driver_Motion_Hdiregister_0300
- * @tc.name   : testHdiRegister003
+ * @tc.number : SUB_Driver_Motion_Hdiregister_0200
+ * @tc.name   : testHdiRegister002
  * @tc.desc   : Testing the effectiveness of the Register function
  */
-HWTEST_F(HdfMotionTestAdditional, testHdiRegister003, Function | MediumTest | Level1)
+HWTEST_F(HdfMotionTestAdditional, testHdiRegister002, Function | MediumTest | Level1)
 {
     if (g_motionInterface == nullptr) {
         ASSERT_NE(nullptr, g_motionInterface);
         return;
     }
 
+    int32_t ret = 0;
     for (size_t i = 0; i < 1000; i++) {
-        int32_t ret = g_motionInterface->Register(g_motionCallback);
+        ret = g_motionInterface->Register(g_motionCallback);
         EXPECT_EQ(HDF_SUCCESS, ret);
 
         ret = g_motionInterface->Unregister(g_motionCallback);
@@ -404,22 +394,161 @@ HWTEST_F(HdfMotionTestAdditional, testHdiUnregister002, Function | MediumTest | 
 }
 
 /**
- * @tc.number : SUB_Driver_Motion_Hdiunregister_0300
- * @tc.name   : testHdiUnregister003
- * @tc.desc   : Testing the effectiveness of the Unregister function
+ * @tc.number : SUB_Driver_Motion_Hdisetmotionconfig_0100
+ * @tc.name   : testHdiSetMotionConfig001
+ * @tc.desc   : Testing the effectiveness of the SetMotionConfig function
  */
-HWTEST_F(HdfMotionTestAdditional, testHdiUnregister003, Function | MediumTest | Level1)
+HWTEST_F(HdfMotionTestAdditional, testHdiSetMotionConfig001, Function | MediumTest | Level1)
 {
     if (g_motionInterface == nullptr) {
         ASSERT_NE(nullptr, g_motionInterface);
         return;
     }
+    int32_t motionType = HDF_MOTION_TYPE_PICKUP;
+    int32_t ret = g_motionInterface->SetMotionConfig(motionType, g_motionConfigData);
+    EXPECT_NE(HDF_SUCCESS, ret);
+}
 
-    for (size_t i = 0; i < 1000; i++) {
-        int32_t ret = g_motionInterface->Register(g_motionCallback);
-        EXPECT_EQ(HDF_SUCCESS, ret);
-
-        ret = g_motionInterface->Unregister(g_motionCallback);
-        EXPECT_EQ(HDF_SUCCESS, ret);
+/**
+ * @tc.number : SUB_Driver_Motion_Hdisetmotionconfig_0200
+ * @tc.name   : testHdiSetMotionConfig002
+ * @tc.desc   : Testing the effectiveness of the SetMotionConfig function
+ */
+HWTEST_F(HdfMotionTestAdditional, testHdiSetMotionConfig002, Function | MediumTest | Level1)
+{
+    if (g_motionInterface == nullptr) {
+        ASSERT_NE(nullptr, g_motionInterface);
+        return;
     }
+    int32_t motionType = HDF_MOTION_TYPE_FLIP;
+    int32_t ret = g_motionInterface->SetMotionConfig(motionType, g_motionConfigData);
+    EXPECT_NE(HDF_SUCCESS, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Motion_Hdisetmotionconfig_0300
+ * @tc.name   : testHdiSetMotionConfig003
+ * @tc.desc   : Testing the effectiveness of the SetMotionConfig function
+ */
+HWTEST_F(HdfMotionTestAdditional, testHdiSetMotionConfig003, Function | MediumTest | Level1)
+{
+    if (g_motionInterface == nullptr) {
+        ASSERT_NE(nullptr, g_motionInterface);
+        return;
+    }
+    int32_t motionType = HDF_MOTION_CLOSE_TO_EAR;
+    int32_t ret = g_motionInterface->SetMotionConfig(motionType, g_motionConfigData);
+    EXPECT_NE(HDF_SUCCESS, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Motion_Hdisetmotionconfig_0400
+ * @tc.name   : testHdiSetMotionConfig004
+ * @tc.desc   : Testing the effectiveness of the SetMotionConfig function
+ */
+HWTEST_F(HdfMotionTestAdditional, testHdiSetMotionConfig004, Function | MediumTest | Level1)
+{
+    if (g_motionInterface == nullptr) {
+        ASSERT_NE(nullptr, g_motionInterface);
+        return;
+    }
+    int32_t motionType = HDF_MOTION_TYPE_SHAKE;
+    int32_t ret = g_motionInterface->SetMotionConfig(motionType, g_motionConfigData);
+    EXPECT_NE(HDF_SUCCESS, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Motion_Hdisetmotionconfig_0500
+ * @tc.name   : testHdiSetMotionConfig005
+ * @tc.desc   : Testing the effectiveness of the SetMotionConfig function
+ */
+HWTEST_F(HdfMotionTestAdditional, testHdiSetMotionConfig005, Function | MediumTest | Level1)
+{
+    if (g_motionInterface == nullptr) {
+        ASSERT_NE(nullptr, g_motionInterface);
+        return;
+    }
+    int32_t motionType = HDF_MOTION_TYPE_ROTATION;
+    int32_t ret = g_motionInterface->SetMotionConfig(motionType, g_motionConfigData);
+    EXPECT_NE(HDF_SUCCESS, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Motion_Hdisetmotionconfig_0600
+ * @tc.name   : testHdiSetMotionConfig006
+ * @tc.desc   : Testing the effectiveness of the SetMotionConfig function
+ */
+HWTEST_F(HdfMotionTestAdditional, testHdiSetMotionConfig006, Function | MediumTest | Level1)
+{
+    if (g_motionInterface == nullptr) {
+        ASSERT_NE(nullptr, g_motionInterface);
+        return;
+    }
+    int32_t motionType = HDF_MOTION_TYPE_POCKET_MODE;
+    int32_t ret = g_motionInterface->SetMotionConfig(motionType, g_motionConfigData);
+    EXPECT_NE(HDF_SUCCESS, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Motion_Hdisetmotionconfig_0700
+ * @tc.name   : testHdiSetMotionConfig007
+ * @tc.desc   : Testing the effectiveness of the SetMotionConfig function
+ */
+HWTEST_F(HdfMotionTestAdditional, testHdiSetMotionConfig007, Function | MediumTest | Level1)
+{
+    if (g_motionInterface == nullptr) {
+        ASSERT_NE(nullptr, g_motionInterface);
+        return;
+    }
+    int32_t motionType = HDF_MOTION_TYPE_LEAVE_EAR;
+    int32_t ret = g_motionInterface->SetMotionConfig(motionType, g_motionConfigData);
+    EXPECT_NE(HDF_SUCCESS, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Motion_Hdisetmotionconfig_0800
+ * @tc.name   : testHdiSetMotionConfig008
+ * @tc.desc   : Testing the effectiveness of the SetMotionConfig function
+ */
+HWTEST_F(HdfMotionTestAdditional, testHdiSetMotionConfig008, Function | MediumTest | Level1)
+{
+    if (g_motionInterface == nullptr) {
+        ASSERT_NE(nullptr, g_motionInterface);
+        return;
+    }
+    int32_t motionType = HDF_MOTION_TYPE_WRIST_DOWN;
+    int32_t ret = g_motionInterface->SetMotionConfig(motionType, g_motionConfigData);
+    EXPECT_NE(HDF_SUCCESS, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Motion_Hdisetmotionconfig_0900
+ * @tc.name   : testHdiSetMotionConfig009
+ * @tc.desc   : Testing the effectiveness of the SetMotionConfig function
+ */
+HWTEST_F(HdfMotionTestAdditional, testHdiSetMotionConfig009, Function | MediumTest | Level1)
+{
+    if (g_motionInterface == nullptr) {
+        ASSERT_NE(nullptr, g_motionInterface);
+        return;
+    }
+    int32_t motionType = HDF_MOTION_TYPE_MAX;
+    int32_t ret = g_motionInterface->SetMotionConfig(motionType, g_motionConfigData);
+    EXPECT_NE(HDF_ERR_INVALID_PARAM, ret);
+}
+
+/**
+ * @tc.number : SUB_Driver_Motion_Hdiondataevent_0100
+ * @tc.name   : testHdiOnDataEvent001
+ * @tc.desc   : Testing the effectiveness of the OnDataEvent function
+ */
+HWTEST_F(HdfMotionTestAdditional, testHdiOnDataEvent001, Function | MediumTest | Level1)
+{
+    if (g_motionInterface == nullptr) {
+        ASSERT_NE(nullptr, g_motionInterface);
+        return;
+    }
+    int32_t ret = g_motionInterface->EnableMotion(OHOS::HDI::Motion::V1_1::HDF_MOTION_CLOSE_TO_EAR);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+    EXPECT_EQ(g_onDataEventFlag, true);
 }

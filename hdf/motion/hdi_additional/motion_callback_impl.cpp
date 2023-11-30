@@ -20,9 +20,11 @@ namespace OHOS {
 namespace HDI {
 namespace Motion {
 namespace V1_0 {
+bool g_onDataEventFlag = false;
 int32_t MotionCallbackImpl::OnDataEvent(const HdfMotionEvent &event)
 {
     printf("moton :[%d], result[%d]:, status[%d]\n\r", event.motion, event.result, event.status);
+    g_onDataEventFlag = true;
     return HDF_SUCCESS;
 }
 } // namespace V1_0

@@ -23,6 +23,7 @@ namespace OHOS {
 namespace HDI {
 namespace Motion {
 namespace V1_0 {
+extern bool g_onDataEventFlag;
 class MotionCallbackImpl : public IMotionCallback {
 public:
     MotionCallbackImpl() = default;

@@ -17,7 +17,7 @@ import("//test/xts/tools/build/suite.gni")
 import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 
 module_output_path = "hats/misc"
-ohos_moduletest_suite("HatsHdfVibratorServiceTestAdditional") {
+ohos_moduletest_suite("HatsHdfVibratorServiceAdditionalTest") {
   module_out_path = module_output_path
 
   sources = [ "hdf_vibrator_hdiService_test.cpp" ]

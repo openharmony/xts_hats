@@ -18,7 +18,7 @@ import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 
 module_output_path = "hats/sensor"
 
-ohos_moduletest_suite("HatsHdfSensorServiceTestAdditional") {
+ohos_moduletest_suite("HatsHdfSensorServiceAdditionalTest") {
   module_out_path = module_output_path
 
   configs = [ ":hdf_sensor_hdiservice_additional" ]

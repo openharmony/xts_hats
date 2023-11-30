@@ -20,7 +20,7 @@ import("$base_root/drivers/peripheral/camera/camera.gni")
 import("$base_root/drivers/peripheral/display/display_config.gni")
 module_output_path = "hats/camera"
 
-ohos_moduletest_suite("HatsHdfCameraMgTestv0Additional") {
+ohos_moduletest_suite("HatsHdfCameraMgv0AdditionalTest") {
   #testonly = true
   defines = []
   defines += display_defines

@@ -37,9 +37,7 @@ ohos_moduletest_suite("HatsUserIamPinAuthAdditionalTest") {
     "$base_root/commonlibrary/c_utils/base/include",
   ]
 
-  sources = [
-    "./src/pin_auth_hdi.cpp",
-  ]
+  sources = [ "./src/pin_auth_hdi.cpp" ]
 
   deps = [
     "$base_root/base/useriam/user_auth_framework/common:iam_test",

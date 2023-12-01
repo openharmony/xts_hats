@@ -1,0 +1,18 @@
+{
+  "kits": [
+    {
+      "push": [
+        "HatsStartupPartitionSlotAdditionalTest->/data/local/tmp/HatsStartupPartitionSlotAdditionalTest"
+      ],
+      "type": "PushKit"
+    }
+  ],
+  "driver": {
+    "native-test-timeout": "120000",
+    "type": "CppTest",
+    "module-name": "HatsStartupPartitionSlotAdditionalTest",
+    "runtime-hint": "1s",
+    "native-test-device-path": "/data/local/tmp"
+  },
+  "description": "Configuration for HatsStartupPartitionSlotAdditionalTest Tests"
+}

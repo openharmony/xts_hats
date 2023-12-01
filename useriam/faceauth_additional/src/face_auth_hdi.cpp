@@ -36,28 +36,17 @@ bool g_onResultFlag = false;
 bool g_onTipFlag = false;
 bool g_onSaCommandsFlag = false;
 
-void UserIamFaceAuthTestAdditional::SetUpTestCase()
-{
-}
+void UserIamFaceAuthTestAdditional::SetUpTestCase() {}
 
-void UserIamFaceAuthTestAdditional::TearDownTestCase()
-{
-}
+void UserIamFaceAuthTestAdditional::TearDownTestCase() {}
 
-void UserIamFaceAuthTestAdditional::SetUp()
-{
-}
+void UserIamFaceAuthTestAdditional::SetUp() {}
 
-void UserIamFaceAuthTestAdditional::TearDown()
-{
-}
+void UserIamFaceAuthTestAdditional::TearDown() {}
 
-class DummyIExecutorCallback : public IExecutorCallback
-{
+class DummyIExecutorCallback : public IExecutorCallback {
 public:
-    DummyIExecutorCallback(int32_t result, int32_t acquire) : result_(result), acquire_(acquire)
-    {
-    }
+    DummyIExecutorCallback(int32_t result, int32_t acquire) : result_(result), acquire_(acquire) {}
 
     int32_t OnResult(int32_t result, const std::vector<uint8_t> &extraInfo) override
     {
@@ -78,12 +67,9 @@ private:
     int32_t acquire_;
 };
 
-class DummyISaCommandCallback : public ISaCommandCallback
-{
+class DummyISaCommandCallback : public ISaCommandCallback {
 public:
-    explicit DummyISaCommandCallback(int32_t result) : result_(result)
-    {
-    }
+    explicit DummyISaCommandCallback(int32_t result) : result_(result) {}
 
     int32_t OnSaCommands(const std::vector<SaCommand> &commands) override
     {
@@ -98,15 +84,11 @@ private:
 static void FillTestIExecutorCallback(Parcel &parcel, sptr<IExecutorCallback> &callbackObj)
 {
     bool isNull = parcel.ReadBool();
-    if (isNull)
-    {
+    if (isNull) {
         callbackObj = nullptr;
-    }
-    else
-    {
+    } else {
         callbackObj = new (std::nothrow) DummyIExecutorCallback(parcel.ReadInt32(), parcel.ReadInt32());
-        if (callbackObj == nullptr)
-        {
+        if (callbackObj == nullptr) {
             cout << "callbackObj construct fail" << endl;
         }
     }
@@ -117,8 +99,7 @@ void FillTestGetPropertyTypeVector(Parcel &parcel, std::vector<GetPropertyType> 
 {
     std::vector<uint32_t> propertyTypeUint32;
     FillTestUint32Vector(parcel, propertyTypeUint32);
-    for (const auto &val : propertyTypeUint32)
-    {
+    for (const auto &val : propertyTypeUint32) {
         types.push_back(static_cast<GetPropertyType>(val));
     }
 
@@ -139,15 +120,11 @@ void FillTestProperty(Parcel &parcel, Property &property)
 void FillTestISaCommandCallback(Parcel &parcel, sptr<ISaCommandCallback> &callbackObj)
 {
     bool isNull = parcel.ReadBool();
-    if (isNull)
-    {
+    if (isNull) {
         callbackObj = nullptr;
-    }
-    else
-    {
+    } else {
         callbackObj = new (std::nothrow) DummyISaCommandCallback(parcel.ReadInt32());
-        if (callbackObj == nullptr)
-        {
+        if (callbackObj == nullptr) {
             cout << "callbackObj construct fail" << endl;
         }
     }
@@ -178,8 +155,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetExecutorInfo002, Func
     cout << "start test testFaceAuthTestGetExecutorInfo002" << endl;
     ExecutorInfo executorInfo;
     int32_t ret = 0;
-    for (int32_t i = 0; i < 1000; i++)
-    {
+    for (int32_t i = 0; i < 1000; i++) {
         ret = g_executorImpl.GetExecutorInfo(executorInfo);
         cout << "ret " << i << " is " << ret << endl;
         EXPECT_EQ(ret, 0);
@@ -252,8 +228,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetTemplateInfo005, Func
     uint64_t templateId = 0x01;
     TemplateInfo templateInfo;
     int32_t ret = 0;
-    for (int32_t i = 0; i < 1000; i++)
-    {
+    for (int32_t i = 0; i < 1000; i++) {
         ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
         cout << "ret " << i << " is " << ret << endl;
         EXPECT_EQ(ret, 0);
@@ -274,8 +249,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestOnRegisterFinish008, Fun
     std::vector<uint8_t> extraInfo;
     FillTestUint8Vector(parcel, extraInfo);
     int32_t ret = 0;
-    for (int32_t i = 0; i < 1000; i++)
-    {
+    for (int32_t i = 0; i < 1000; i++) {
         ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
         cout << "ret " << i << " is " << ret << endl;
         EXPECT_EQ(ret, 0);
@@ -375,8 +349,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestEnroll007, Function | Me
     sptr<IExecutorCallback> callbackObj;
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = 0;
-    for (int32_t i = 0; i < 1000; i++)
-    {
+    for (int32_t i = 0; i < 1000; i++) {
         ret = g_executorImpl.Enroll(scheduleId, extraInfo, callbackObj);
         cout << "ret " << i << " is " << ret << endl;
         EXPECT_EQ(ret, 0);
@@ -519,8 +492,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestAuthenticate011, Functio
     sptr<IExecutorCallback> callbackObj;
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = 0;
-    for (int32_t i = 0; i < 1000; i++)
-    {
+    for (int32_t i = 0; i < 1000; i++) {
         ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
         cout << "ret is " << ret << endl;
         EXPECT_EQ(ret, 0);
@@ -620,8 +592,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestIdentify007, Function | 
     sptr<IExecutorCallback> callbackObj;
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = 0;
-    for (int32_t i = 0; i < 1000; i++)
-    {
+    for (int32_t i = 0; i < 1000; i++) {
         ret = g_executorImpl.Identify(scheduleId, extraInfo, callbackObj);
         cout << "ret is " << ret << endl;
         EXPECT_EQ(ret, 0);
@@ -638,8 +609,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestDelete002, Function | Me
     std::vector<uint64_t> templateIdList;
     FillTestUint64Vector(parcel, templateIdList);
     int32_t ret = 0;
-    for (int32_t i = 0; i < 1000; i++)
-    {
+    for (int32_t i = 0; i < 1000; i++) {
         ret = g_executorImpl.Delete(templateIdList);
         cout << "ret is " << ret << endl;
         EXPECT_EQ(ret, 0);
@@ -694,9 +664,8 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestCancel004, Function | Me
     cout << "start test testFaceAuthTestCancel004" << endl;
     uint64_t scheduleId = 0;
     int32_t ret = 0;
-    for (int32_t i = 0; i < 1000; i++)
-    {
-        g_executorImpl.Cancel(scheduleId);
+    for (int32_t i = 0; i < 1000; i++) {
+        ret = g_executorImpl.Cancel(scheduleId);
         cout << "ret is " << ret << endl;
         EXPECT_EQ(ret, 0);
     }
@@ -795,8 +764,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSendCommand011, Function
     sptr<IExecutorCallback> callbackObj;
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = 0;
-    for (int32_t i = 0; i < 1000; i++)
-    {
+    for (int32_t i = 0; i < 1000; i++) {
         ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
         cout << "ret is " << ret << endl;
         EXPECT_EQ(ret, 0);
@@ -823,23 +791,18 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSetBufferProducer002, Fu
 {
     cout << "start test testFaceAuthTestSetBufferProducer002" << endl;
     sptr<IBufferProducer> bufferProducer = nullptr;
-    if (parcel.ReadBool())
-    {
+    if (parcel.ReadBool()) {
         auto surface = IConsumerSurface::Create();
-        if (surface == nullptr)
-        {
+        if (surface == nullptr) {
             cout << "CreateSurfaceAsConsumer fail" << endl;
-        }
-        else
-        {
+        } else {
             bufferProducer = surface->GetProducer();
         }
     }
     sptr<BufferProducerSequenceable> producerSequenceable =
         new (std::nothrow) BufferProducerSequenceable(bufferProducer);
     int32_t ret = 0;
-    for (int32_t i = 0; i < 1000; i++)
-    {
+    for (int32_t i = 0; i < 1000; i++) {
         ret = g_executorImpl.SetBufferProducer(producerSequenceable);
         cout << "ret is " << ret << endl;
         EXPECT_EQ(ret, 0);
@@ -955,8 +918,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetProperty009, Function
     Property property;
     FillTestProperty(parcel, property);
     int32_t ret = 0;
-    for (int32_t i = 0; i < 1000; i++)
-    {
+    for (int32_t i = 0; i < 1000; i++) {
         ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
         cout << "ret is " << ret << endl;
         EXPECT_EQ(ret, 0);
@@ -974,8 +936,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSetCachedTemplates002, F
     FillTestUint64Vector(parcel, templateIdList);
 
     int32_t ret = 0;
-    for (int32_t i = 0; i < 1000; i++)
-    {
+    for (int32_t i = 0; i < 1000; i++) {
         ret = g_executorImpl.SetCachedTemplates(templateIdList);
         cout << "ret is " << ret << endl;
         EXPECT_EQ(ret, 0);
@@ -993,8 +954,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestRegisterSaCommandCallbac
     FillTestISaCommandCallback(parcel, callbackObj);
 
     int32_t ret = 0;
-    for (int32_t i = 0; i < 1000; i++)
-    {
+    for (int32_t i = 0; i < 1000; i++) {
         ret = g_executorImpl.RegisterSaCommandCallback(callbackObj);
 
         cout << "ret is " << ret << endl;
@@ -1012,8 +972,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetExecutorList001, Func
     FaceAuthInterfaceService faceauth_Interface;
     std::vector<sptr<V1_0::IExecutor>> executorList;
     int32_t ret = 0;
-    for (int32_t i = 0; i < 1000; i++)
-    {
+    for (int32_t i = 0; i < 1000; i++) {
         ret = faceauth_Interface.GetExecutorList(executorList);
         cout << "ret is " << ret << endl;
         EXPECT_EQ(ret, 0);
@@ -1030,8 +989,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetExecutorListV1_1001, 
     FaceAuthInterfaceService faceauth_Interface;
     std::vector<sptr<V1_1::IExecutor>> executorList;
     int32_t ret = 0;
-    for (int32_t i = 0; i < 1000; i++)
-    {
+    for (int32_t i = 0; i < 1000; i++) {
         ret = faceauth_Interface.GetExecutorListV1_1(executorList);
         cout << "ret is " << ret << endl;
         EXPECT_EQ(ret, 0);

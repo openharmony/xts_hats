@@ -18,7 +18,7 @@ group("powermgr") {
     deps = [
       "battery:HatsPowermgrBatteryTest",
       "power:HatsPowermgrPowerTest",
-      "thermal:HatsPowermgrThermalAdditionalTest",
+      "thermal:HatsPowermgrThermalTest",
     ]
   }
 }

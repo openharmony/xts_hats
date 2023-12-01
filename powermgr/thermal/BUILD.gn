@@ -14,7 +14,10 @@
 import("//build/ohos_var.gni")
 import("//test/xts/tools/build/suite.gni")
 
-group("HatsPowermgrThermalAdditionalTest") {
+group("HatsPowermgrThermalTest") {
   testonly = true
-  deps = [ "hdi_thermal_additional:HatsPowermgrThermalAdditionalTest" ]
+  deps = [
+      "hdi_thermal:HatsPowermgrThermalTest",
+      "hdi_thermal_additional:HatsPowermgrThermalAdditionalTest" 
+  ]
 }

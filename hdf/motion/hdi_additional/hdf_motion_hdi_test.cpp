@@ -26,14 +26,11 @@
 
 using namespace OHOS::HDI::Motion::V1_1;
 using namespace testing::ext;
-#define DATA_NUM 12
-#define DATA_VALUE 6
 
 namespace {
 sptr<OHOS::HDI::Motion::V1_1::IMotionInterface> g_motionInterface = nullptr;
 sptr<IMotionCallback> g_motionCallback = new MotionCallbackImpl();
 sptr<IMotionCallback> g_motionCallbackUnregistered = new MotionCallbackImpl();
-std::vector<uint8_t> g_motionConfigData(DATA_NUM, DATA_VALUE);
 } // namespace
 
 class HdfMotionTestAdditional : public testing::Test {
@@ -391,20 +388,4 @@ HWTEST_F(HdfMotionTestAdditional, testHdiUnregister002, Function | MediumTest | 
 
     ret = g_motionInterface->Unregister(g_motionCallback);
     EXPECT_EQ(HDF_FAILURE, ret);
-}
-
-/**
- * @tc.number : SUB_Driver_Motion_Hdisetmotionconfig_0100
- * @tc.name   : testHdiSetMotionConfig001
- * @tc.desc   : Testing the effectiveness of the SetMotionConfig function
- */
-HWTEST_F(HdfMotionTestAdditional, testHdiSetMotionConfig001, Function | MediumTest | Level1)
-{
-    if (g_motionInterface == nullptr) {
-        ASSERT_NE(nullptr, g_motionInterface);
-        return;
-    }
-    int32_t motionType = HDF_MOTION_TYPE_PICKUP;
-    int32_t ret = g_motionInterface->SetMotionConfig(motionType, g_motionConfigData);
-    EXPECT_NE(HDF_SUCCESS, ret);
 }

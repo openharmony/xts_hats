@@ -677,7 +677,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister008, TestSiz
     int32_t ret = g_sensorInterface->GetAllSensorInfo(g_info);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
     ret = g_sensorInterface->Unregister(TRADITIONAL_SENSOR_TYPE, g_medicalCallback);
-    EXPECT_EQ(SENSOR_FAILURE, ret);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
 }
 
 /**
@@ -696,7 +696,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister009, TestSiz
         ret = g_sensorInterface->GetAllSensorInfo(g_info);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
         ret = g_sensorInterface->Unregister(TRADITIONAL_SENSOR_TYPE, g_medicalCallback);
-        EXPECT_EQ(SENSOR_FAILURE, ret);
+        EXPECT_EQ(SENSOR_SUCCESS, ret);
     }
 }
 

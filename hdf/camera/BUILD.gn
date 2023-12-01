@@ -25,7 +25,7 @@ group("HatsHdfCameraTest") {
       deps = [
         "cameraHdi:HatsHdfCameraHdiTest",
         "cameraMg:HatsHdfCameraMgTest",
-        "cameraMg_additional:HatsHdfCameraMgTestAdditional",
+        "cameraMg_additional:HatsHdfCameraMgAdditionalTest",
 
         #"cameraBenchmarkTest:HatsHdfCamerabenchmarkTest",
       ]

@@ -15,7 +15,7 @@ import("//build/ohos_var.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/audio"
-ohos_moduletest_suite("HatsHdfAudioIdlRenderTestAdditional") {
+ohos_moduletest_suite("HatsHdfAudioIdlRenderAdditionalTest") {
   module_out_path = module_output_path
   sources = [
     "src/AudioRenderCommonTest.cpp",

@@ -16,8 +16,8 @@
 #include <gtest/gtest.h>
 #include <climits>
 #include "osal_mem.h"
-#include "v1_0/iaudio_capture.h"
-#include "v1_0/iaudio_manager.h"
+#include "v2_0/iaudio_capture.h"
+#include "v2_0/iaudio_manager.h"
 
 using namespace std;
 using namespace testing::ext;
@@ -27,7 +27,6 @@ const int BUFFER_LENTH = 1024 * 16;
 const int DEEP_BUFFER_CAPTURE_PERIOD_SIZE = 4 * 1024;
 const int DEFAULT_BUFFER_SIZE = 16384;
 const float HALF_OF_MAX_VOLUME = 0.5;
-const int MOVE_LEFT_NUM = 8;
 const int TEST_SAMPLE_RATE_MASK_48000 = 48000;
 const int TEST_CHANNEL_COUNT = 2;
 
@@ -102,10 +101,10 @@ void AudioUtCaptureTest::InitCaptureAttrs(struct AudioSampleAttributes &attrs)
     attrs.interleaved = 0;
     attrs.type = AUDIO_IN_MEDIA;
     attrs.period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE;
-    attrs.frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM;
+    attrs.frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT;
     attrs.isBigEndian = false;
     attrs.isSignedData = true;
-    attrs.startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM);
+    attrs.startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount);
     attrs.stopThreshold = INT_MAX;
     attrs.silenceThreshold = BUFFER_LENTH;
 }

@@ -2,7 +2,7 @@
     "kits": [
         {
             "push": [
-                "HatsHdfOmxCodecTestAdditional->/data/local/tmp/HatsHdfOmxCodecTestAdditional"
+                "HatsHdfOmxCodecAdditionalTest->/data/local/tmp/HatsHdfOmxCodecAdditionalTest"
             ],
             "type": "PushKit"
         }
@@ -10,9 +10,9 @@
     "driver": {
         "native-test-timeout": "120000",
         "type": "CppTest",
-        "module-name": "HatsHdfOmxCodecTestAdditional",
+        "module-name": "HatsHdfOmxCodecAdditionalTest",
         "runtime-hint": "1s",
         "native-test-device-path": "/data/local/tmp"
     },
-    "description": "Configuration for HatsHdfOmxCodecTestAdditional Tests"
+    "description": "Configuration for HatsHdfOmxCodecAdditionalTest Tests"
 }

@@ -17,7 +17,7 @@ import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/codec"
-ohos_moduletest_suite("HatsHdfOmxCodecTestAdditional") {
+ohos_moduletest_suite("HatsHdfOmxCodecAdditionalTest") {
   module_out_path = module_output_path
   configs = [ ":hdf_codec_omx" ]
   sources = [ "codec_hdi_manager_test.cpp" ]

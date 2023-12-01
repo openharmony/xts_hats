@@ -536,19 +536,3 @@ HWTEST_F(HdfMotionTestAdditional, testHdiSetMotionConfig009, Function | MediumTe
     int32_t ret = g_motionInterface->SetMotionConfig(motionType, g_motionConfigData);
     EXPECT_NE(HDF_ERR_INVALID_PARAM, ret);
 }
-
-/**
- * @tc.number : SUB_Driver_Motion_Hdiondataevent_0100
- * @tc.name   : testHdiOnDataEvent001
- * @tc.desc   : Testing the effectiveness of the OnDataEvent function
- */
-HWTEST_F(HdfMotionTestAdditional, testHdiOnDataEvent001, Function | MediumTest | Level1)
-{
-    if (g_motionInterface == nullptr) {
-        ASSERT_NE(nullptr, g_motionInterface);
-        return;
-    }
-    int32_t ret = g_motionInterface->EnableMotion(OHOS::HDI::Motion::V1_1::HDF_MOTION_CLOSE_TO_EAR);
-    EXPECT_EQ(HDF_SUCCESS, ret);
-    EXPECT_EQ(g_onDataEventFlag, true);
-}

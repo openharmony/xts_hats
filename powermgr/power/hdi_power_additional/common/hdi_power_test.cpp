@@ -92,7 +92,6 @@ int32_t HdfPowerHdiTestAdditional::ReadFile(const std::string path, std::string 
     }
     EXPECT_FALSE(buf.empty());
     close(fd);
-    //buf[size - 1] = '\0';
     buf.push_back('\0');
     return HDF_SUCCESS;
 }

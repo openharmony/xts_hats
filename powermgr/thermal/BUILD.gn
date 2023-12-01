@@ -18,6 +18,6 @@ group("HatsPowermgrThermalTest") {
   testonly = true
   deps = [
       "hdi_thermal:HatsPowermgrThermalTest",
-      "hdi_thermal_additional:HatsPowermgrThermalAdditionalTest" 
+      "hdi_thermal_additional:HatsPowermgrThermalAdditionalTest",
   ]
 }

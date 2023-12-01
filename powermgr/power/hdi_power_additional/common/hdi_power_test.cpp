@@ -87,7 +87,7 @@ int32_t HdfPowerHdiTestAdditional::ReadFile(const std::string path, std::string 
         return HDF_FAILURE;
     }
     buf = readbuf;
-    if(readbuf[0] == '\0'){
+    if (readbuf[0] == '\0') {
         EXPECT_EQ(0, 1);
     }
     EXPECT_FALSE(buf.empty());
@@ -1244,8 +1244,8 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock001, Function | MediumTest
     EXPECT_EQ(0, ret);
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string  unLockBuf_s;
-    std::string  unLockValue;
+    std::string unLockBuf_s;
+    std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
     unLockBuf_s = unLockBuf;
@@ -1271,8 +1271,8 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock002, Function | MediumTest
     EXPECT_EQ(0, ret);
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string  unLockBuf_s;
-    std::string  unLockValue;
+    std::string unLockBuf_s;
+    std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
     unLockBuf_s = unLockBuf;
@@ -1298,8 +1298,8 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock003, Function | MediumTest
     EXPECT_EQ(0, ret);
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string  unLockBuf_s;
-    std::string  unLockValue;
+    std::string unLockBuf_s;
+    std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
     unLockBuf_s = unLockBuf;
@@ -1325,8 +1325,8 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock004, Function | MediumTest
     EXPECT_NE(0, ret);
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string  unLockBuf_s;
-    std::string  unLockValue;
+    std::string unLockBuf_s;
+    std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
     unLockBuf_s = unLockBuf;
@@ -1352,8 +1352,8 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock005, Function | MediumTest
     EXPECT_EQ(0, ret);
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string  unLockBuf_s;
-    std::string  unLockValue;
+    std::string unLockBuf_s;
+    std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
     unLockBuf_s = unLockBuf;
@@ -1379,8 +1379,8 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock006, Function | MediumTest
     EXPECT_EQ(0, ret);
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string  unLockBuf_s;
-    std::string  unLockValue;
+    std::string unLockBuf_s;
+    std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
     unLockBuf_s = unLockBuf;
@@ -1409,8 +1409,8 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock007, Function | MediumTest
     }
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string  unLockBuf_s;
-    std::string  unLockValue;
+    std::string unLockBuf_s;
+    std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
     unLockBuf_s = unLockBuf;
@@ -1439,8 +1439,8 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock008, Function | MediumTest
     }
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string  unLockBuf_s;
-    std::string  unLockValue;
+    std::string unLockBuf_s;
+    std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
     unLockBuf_s = unLockBuf;
@@ -1469,8 +1469,8 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock009, Function | MediumTest
     }
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string  unLockBuf_s;
-    std::string  unLockValue;
+    std::string unLockBuf_s;
+    std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
     unLockBuf_s = unLockBuf;
@@ -1499,8 +1499,8 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock010, Function | MediumTest
     }
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string  unLockBuf_s;
-    std::string  unLockValue;
+    std::string unLockBuf_s;
+    std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
     unLockBuf_s = unLockBuf;
@@ -1528,8 +1528,8 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock011, Function | MediumTest
     }
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string  unLockBuf_s;
-    std::string  unLockValue;
+    std::string unLockBuf_s;
+    std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
     unLockBuf_s = unLockBuf;
@@ -1558,8 +1558,8 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock012, Function | MediumTest
     }
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string  unLockBuf_s;
-    std::string  unLockValue;
+    std::string unLockBuf_s;
+    std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
     unLockBuf_s = unLockBuf;

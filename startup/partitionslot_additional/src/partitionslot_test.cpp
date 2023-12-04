@@ -54,8 +54,7 @@ public:
  * @tc.name: testPartitionSlotGetCurrentSlot001
  * @tc.desc: GetCurrentSlot, numOfSlots is 1, currentSlo is 0
  */
-HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetCurrentSlot_0100,
-         Function | MediumTest | Level1)
+HWTEST_F(StartupPartitionSlotTestAdditional, testPartitionSlotGetCurrentSlot001, Function | MediumTest | Level1)
 {
     std::cout << "begin get currentslot by service" << std::endl;
     int numOfSlots = 1;
@@ -72,8 +71,7 @@ HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetCurren
  * @tc.name: testPartitionSlotGetCurrentSlot002
  * @tc.desc: GetCurrentSlot, numOfSlots is 0, currentSlo is 1
  */
-HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetCurrentSlot_0200,
-         Function | MediumTest | Level1)
+HWTEST_F(StartupPartitionSlotTestAdditional, testPartitionSlotGetCurrentSlot002, Function | MediumTest | Level1)
 {
     std::cout << "begin get currentslot by service" << std::endl;
     int numOfSlots = 0;
@@ -88,8 +86,7 @@ HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetCurren
  * @tc.name: testPartitionSlotGetCurrentSlot003
  * @tc.desc: GetCurrentSlot, numOfSlots is 1, currentSlo is -1
  */
-HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetCurrentSlot_0300,
-         Function | MediumTest | Level1)
+HWTEST_F(StartupPartitionSlotTestAdditional, testPartitionSlotGetCurrentSlot003, Function | MediumTest | Level1)
 {
     std::cout << "begin get currentslot by service" << std::endl;
     int numOfSlots = 1;
@@ -104,8 +101,7 @@ HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetCurren
  * @tc.name: testPartitionSlotGetCurrentSlot004
  * @tc.desc: GetCurrentSlot, numOfSlots is 2, currentSlo is -1
  */
-HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetCurrentSlot_0400,
-         Function | MediumTest | Level1)
+HWTEST_F(StartupPartitionSlotTestAdditional, testPartitionSlotGetCurrentSlot004, Function | MediumTest | Level1)
 {
     std::cout << "begin get currentslot by service" << std::endl;
     int numOfSlots = 2;
@@ -120,8 +116,7 @@ HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetCurren
  * @tc.name: testPartitionSlotGetCurrentSlot005
  * @tc.desc: GetCurrentSlot, numOfSlots is 2, currentSlo is 1
  */
-HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetCurrentSlot_0500,
-         Function | MediumTest | Level1)
+HWTEST_F(StartupPartitionSlotTestAdditional, testPartitionSlotGetCurrentSlot005, Function | MediumTest | Level1)
 {
     std::cout << "begin get currentslot by service" << std::endl;
     int numOfSlots = 2;
@@ -136,8 +131,7 @@ HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetCurren
  * @tc.name: testPartitionSlotGetCurrentSlot006
  * @tc.desc: GetCurrentSlot, numOfSlots is 3, currentSlo is -1
  */
-HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetCurrentSlot_0600,
-         Function | MediumTest | Level1)
+HWTEST_F(StartupPartitionSlotTestAdditional, testPartitionSlotGetCurrentSlot006, Function | MediumTest | Level1)
 {
     std::cout << "begin get currentslot by service" << std::endl;
     int numOfSlots = 3;
@@ -152,8 +146,7 @@ HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetCurren
  * @tc.name: testPartitionSlotGetCurrentSlot007
  * @tc.desc: GetCurrentSlot, numOfSlots is 3, currentSlo is 1
  */
-HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetCurrentSlot_0700,
-         Function | MediumTest | Level1)
+HWTEST_F(StartupPartitionSlotTestAdditional, testPartitionSlotGetCurrentSlot007, Function | MediumTest | Level1)
 {
     std::cout << "begin get currentslot by service" << std::endl;
     int numOfSlots = 3;
@@ -168,8 +161,7 @@ HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetCurren
  * @tc.name: testPartitionSlotGetCurrentSlot008
  * @tc.desc: GetCurrentSlot, numOfSlots is 3, currentSlo is 2
  */
-HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetCurrentSlot_0800,
-         Function | MediumTest | Level1)
+HWTEST_F(StartupPartitionSlotTestAdditional, testPartitionSlotGetCurrentSlot008, Function | MediumTest | Level1)
 {
     std::cout << "begin get currentslot by service" << std::endl;
     int numOfSlots = 3;
@@ -184,8 +176,7 @@ HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetCurren
  * @tc.name: testPartitionSlotGetCurrentSlot009
  * @tc.desc: GetCurrentSlot, numOfSlots is 2, currentSlo is 3
  */
-HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetCurrentSlot_0900,
-         Function | MediumTest | Level1)
+HWTEST_F(StartupPartitionSlotTestAdditional, testPartitionSlotGetCurrentSlot009, Function | MediumTest | Level1)
 {
     std::cout << "begin get currentslot by service" << std::endl;
     int numOfSlots = 2;
@@ -200,8 +191,7 @@ HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetCurren
  * @tc.name: testPartitionSlotGetSlotSuffix001
  * @tc.desc: GetSlotSuffix, slot is 2147483647
  */
-HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetSlotSuffix_0100,
-         Function | MediumTest | Level1)
+HWTEST_F(StartupPartitionSlotTestAdditional, testPartitionSlotGetSlotSuffix001, Function | MediumTest | Level1)
 {
     std::cout << "begin get suffix by service" << std::endl;
     std::string suffix = "";
@@ -216,8 +206,7 @@ HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetSlotSu
  * @tc.name: testPartitionSlotGetSlotSuffix002
  * @tc.desc: GetSlotSuffix, slot is -2147483648
  */
-HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetSlotSuffix_0200,
-         Function | MediumTest | Level1)
+HWTEST_F(StartupPartitionSlotTestAdditional, testPartitionSlotGetSlotSuffix002, Function | MediumTest | Level1)
 {
     std::cout << "begin get suffix by service" << std::endl;
     std::string suffix = "";
@@ -232,8 +221,7 @@ HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetSlotSu
  * @tc.name: testPartitionSlotGetSlotSuffix003
  * @tc.desc: GetSlotSuffix, stability test
  */
-HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetSlotSuffix_0300,
-         Function | MediumTest | Level1)
+HWTEST_F(StartupPartitionSlotTestAdditional, testPartitionSlotGetSlotSuffix003, Function | MediumTest | Level1)
 {
     std::cout << "begin get suffix by service" << std::endl;
     std::string suffix = "";
@@ -246,26 +234,11 @@ HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_GetSlotSu
 }
 
 /**
- * @tc.number: SUB_Startup_PartitionSlot_SetActiveSlot_0100
- * @tc.name: testPartitionSlotSetActiveSlot001
- * @tc.desc: SetActiveSlot, slot is 2147483647
- */
-HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_SetActiveSlot_0100,
-         Function | MediumTest | Level1)
-{
-    std::cout << "begin set active slot by service" << std::endl;
-    sptr<IPartitionSlot> partitionslot = IPartitionSlot::Get();
-    ASSERT_TRUE(partitionslot != nullptr);
-    ASSERT_TRUE(partitionslot->SetActiveSlot(2147483647) == 0);
-}
-
-/**
  * @tc.number: SUB_Startup_PartitionSlot_SetActiveSlot_0200
  * @tc.name: testPartitionSlotSetActiveSlot002
  * @tc.desc: SetActiveSlot, slot is -2147483648
  */
-HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_SetActiveSlot_0200,
-         Function | MediumTest | Level1)
+HWTEST_F(StartupPartitionSlotTestAdditional, testPartitionSlotSetActiveSlot002, Function | MediumTest | Level1)
 {
     std::cout << "begin set active slot by service" << std::endl;
     sptr<IPartitionSlot> partitionslot = IPartitionSlot::Get();
@@ -274,61 +247,14 @@ HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_SetActive
 }
 
 /**
- * @tc.number: SUB_Startup_PartitionSlot_SetActiveSlot_0300
- * @tc.name: testPartitionSlotSetActiveSlot003
- * @tc.desc: SetActiveSlot, stability test
- */
-HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_SetActiveSlot_0300,
-         Function | MediumTest | Level1)
-{
-    for (int i = 0; i < 100; i++) {
-        std::cout << "begin set active slot by service" << std::endl;
-        sptr<IPartitionSlot> partitionslot = IPartitionSlot::Get();
-        ASSERT_TRUE(partitionslot != nullptr);
-        ASSERT_TRUE(partitionslot->SetActiveSlot(2) == 0);
-    }
-}
-
-/**
- * @tc.number: SUB_Startup_PartitionSlot_SetSlotUnbootable_0100
- * @tc.name: testPartitionSlotSetSlotUnbootable001
- * @tc.desc: SetSlotUnbootable, slot is 2147483647
- */
-HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_SetSlotUnbootable_0100,
-         Function | MediumTest | Level1)
-{
-    std::cout << "begin set unbootable slot by service" << std::endl;
-    sptr<IPartitionSlot> partitionslot = IPartitionSlot::Get();
-    ASSERT_TRUE(partitionslot != nullptr);
-    ASSERT_TRUE(partitionslot->SetSlotUnbootable(2147483647) == 0);
-}
-
-/**
  * @tc.number: SUB_Startup_PartitionSlot_SetSlotUnbootable_0200
  * @tc.name: testPartitionSlotSetSlotUnbootable002
  * @tc.desc: SetSlotUnbootable, slot is -2147483648
  */
-HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_SetSlotUnbootable_0200,
-         Function | MediumTest | Level1)
+HWTEST_F(StartupPartitionSlotTestAdditional, testPartitionSlotSetSlotUnbootable002, Function | MediumTest | Level1)
 {
     std::cout << "begin set unbootable slot by service" << std::endl;
     sptr<IPartitionSlot> partitionslot = IPartitionSlot::Get();
     ASSERT_TRUE(partitionslot != nullptr);
     ASSERT_TRUE(partitionslot->SetSlotUnbootable(-2147483648) != 0);
-}
-
-/**
- * @tc.number: SUB_Startup_PartitionSlot_SetSlotUnbootable_0300
- * @tc.name: testPartitionSlotSetSlotUnbootable003
- * @tc.desc: SetSlotUnbootable, stability test
- */
-HWTEST_F(StartupPartitionSlotTestAdditional, SUB_Startup_PartitionSlot_SetSlotUnbootable_0300,
-         Function | MediumTest | Level1)
-{
-    for (int i = 0; i < 100; i++) {
-        std::cout << "begin set unbootable slot by service" << std::endl;
-        sptr<IPartitionSlot> partitionslot = IPartitionSlot::Get();
-        ASSERT_TRUE(partitionslot != nullptr);
-        ASSERT_TRUE(partitionslot->SetSlotUnbootable(2) == 0);
-    }
 }

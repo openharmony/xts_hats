@@ -29,7 +29,7 @@ static OHOS::Parcel parcel;
 int32_t Expectedvalue = 0;
 bool g_onResultFlag = false;
 bool g_onGetDataFlag = false;
-bool g_onGetDataV1_1Flag = false;
+bool g_onGetDataV11Flag = false;
 
 void UserIamPinAuthTestAdditional::SetUpTestCase() {}
 
@@ -67,7 +67,7 @@ public:
     {
         cout << "scheduleId is " << scheduleId << endl;
         cout << " authSubType is " << authSubType << endl;
-        g_onGetDataV1_1Flag = true;
+        g_onGetDataV11Flag = true;
         return onGetDataV1Result_;
     }
 
@@ -790,5 +790,5 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnGetDataV1_1001, Function
     int32_t ret = g_executorImpl.AuthenticateV1_1(scheduleId, templateId, extraInfo, callbackObj);
 
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(g_onGetDataV1_1Flag, true);
+    EXPECT_EQ(g_onGetDataV11Flag, true);
 }

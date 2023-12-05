@@ -1244,13 +1244,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock001, Function | MediumTest
     EXPECT_EQ(0, ret);
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string unLockBuf_s;
+    std::string unLockBufS;
     std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
-    unLockBuf_s = unLockBuf;
+    unLockBufS = unLockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBuf_s, unLockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBufS, unLockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
@@ -1271,13 +1271,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock002, Function | MediumTest
     EXPECT_EQ(0, ret);
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string unLockBuf_s;
+    std::string unLockBufS;
     std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
-    unLockBuf_s = unLockBuf;
+    unLockBufS = unLockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBuf_s, unLockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBufS, unLockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
@@ -1298,13 +1298,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock003, Function | MediumTest
     EXPECT_EQ(0, ret);
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string unLockBuf_s;
+    std::string unLockBufS;
     std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
-    unLockBuf_s = unLockBuf;
+    unLockBufS = unLockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBuf_s, unLockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBufS, unLockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
@@ -1325,13 +1325,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock004, Function | MediumTest
     EXPECT_NE(0, ret);
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string unLockBuf_s;
+    std::string unLockBufS;
     std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
-    unLockBuf_s = unLockBuf;
+    unLockBufS = unLockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBuf_s, unLockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBufS, unLockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
@@ -1352,13 +1352,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock005, Function | MediumTest
     EXPECT_EQ(0, ret);
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string unLockBuf_s;
+    std::string unLockBufS;
     std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
-    unLockBuf_s = unLockBuf;
+    unLockBufS = unLockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBuf_s, unLockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBufS, unLockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
@@ -1379,13 +1379,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock006, Function | MediumTest
     EXPECT_EQ(0, ret);
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string unLockBuf_s;
+    std::string unLockBufS;
     std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
-    unLockBuf_s = unLockBuf;
+    unLockBufS = unLockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBuf_s, unLockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBufS, unLockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
@@ -1409,13 +1409,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock007, Function | MediumTest
     }
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string unLockBuf_s;
+    std::string unLockBufS;
     std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
-    unLockBuf_s = unLockBuf;
+    unLockBufS = unLockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBuf_s, unLockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBufS, unLockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
@@ -1439,13 +1439,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock008, Function | MediumTest
     }
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string unLockBuf_s;
+    std::string unLockBufS;
     std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
-    unLockBuf_s = unLockBuf;
+    unLockBufS = unLockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBuf_s, unLockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBufS, unLockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
@@ -1469,13 +1469,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock009, Function | MediumTest
     }
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string unLockBuf_s;
+    std::string unLockBufS;
     std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
-    unLockBuf_s = unLockBuf;
+    unLockBufS = unLockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBuf_s, unLockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBufS, unLockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
@@ -1499,13 +1499,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock010, Function | MediumTest
     }
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string unLockBuf_s;
+    std::string unLockBufS;
     std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
-    unLockBuf_s = unLockBuf;
+    unLockBufS = unLockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBuf_s, unLockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBufS, unLockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
@@ -1528,13 +1528,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock011, Function | MediumTest
     }
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string unLockBuf_s;
+    std::string unLockBufS;
     std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
-    unLockBuf_s = unLockBuf;
+    unLockBufS = unLockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBuf_s, unLockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBufS, unLockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
@@ -1558,13 +1558,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock012, Function | MediumTest
     }
 
     char unLockBuf[MAX_PATH] = {0};
-    std::string unLockBuf_s;
+    std::string unLockBufS;
     std::string unLockValue;
 
     ret = snprintf_s(unLockBuf, MAX_PATH, sizeof(unLockBuf) - 1, UNLOCK_PATH.c_str());
-    unLockBuf_s = unLockBuf;
+    unLockBufS = unLockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBuf_s, unLockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(unLockBufS, unLockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
@@ -1585,13 +1585,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock001, Function | MediumTest |
     EXPECT_EQ(0, ret);
 
     char lockBuf[MAX_PATH] = {0};
-    std::string LockBuf_s;
+    std::string lockBufS;
     std::string lockValue;
 
     ret = snprintf_s(lockBuf, MAX_PATH, sizeof(lockBuf) - 1, LOCK_PATH.c_str());
-    LockBuf_s = lockBuf;
+    lockBufS = lockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(LockBuf_s, lockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(lockBufS, lockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);
@@ -1612,13 +1612,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock002, Function | MediumTest |
     EXPECT_EQ(0, ret);
 
     char lockBuf[MAX_PATH] = {0};
-    std::string LockBuf_s;
+    std::string lockBufS;
     std::string lockValue;
 
     ret = snprintf_s(lockBuf, MAX_PATH, sizeof(lockBuf) - 1, LOCK_PATH.c_str());
-    LockBuf_s = lockBuf;
+    lockBufS = lockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(LockBuf_s, lockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(lockBufS, lockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);
@@ -1639,13 +1639,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock003, Function | MediumTest |
     EXPECT_EQ(0, ret);
 
     char lockBuf[MAX_PATH] = {0};
-    std::string LockBuf_s;
+    std::string lockBufS;
     std::string lockValue;
 
     ret = snprintf_s(lockBuf, MAX_PATH, sizeof(lockBuf) - 1, LOCK_PATH.c_str());
-    LockBuf_s = lockBuf;
+    lockBufS = lockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(LockBuf_s, lockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(lockBufS, lockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);
@@ -1666,13 +1666,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock004, Function | MediumTest |
     EXPECT_NE(0, ret);
 
     char lockBuf[MAX_PATH] = {0};
-    std::string LockBuf_s;
+    std::string lockBufS;
     std::string lockValue;
 
     ret = snprintf_s(lockBuf, MAX_PATH, sizeof(lockBuf) - 1, LOCK_PATH.c_str());
-    LockBuf_s = lockBuf;
+    lockBufS = lockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(LockBuf_s, lockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(lockBufS, lockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);
@@ -1693,13 +1693,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock005, Function | MediumTest |
     EXPECT_EQ(0, ret);
 
     char lockBuf[MAX_PATH] = {0};
-    std::string LockBuf_s;
+    std::string lockBufS;
     std::string lockValue;
 
     ret = snprintf_s(lockBuf, MAX_PATH, sizeof(lockBuf) - 1, LOCK_PATH.c_str());
-    LockBuf_s = lockBuf;
+    lockBufS = lockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(LockBuf_s, lockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(lockBufS, lockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);
@@ -1720,13 +1720,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock006, Function | MediumTest |
     EXPECT_EQ(0, ret);
 
     char lockBuf[MAX_PATH] = {0};
-    std::string LockBuf_s;
+    std::string lockBufS;
     std::string lockValue;
 
     ret = snprintf_s(lockBuf, MAX_PATH, sizeof(lockBuf) - 1, LOCK_PATH.c_str());
-    LockBuf_s = lockBuf;
+    lockBufS = lockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(LockBuf_s, lockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(lockBufS, lockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);
@@ -1750,13 +1750,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock007, Function | MediumTest |
     }
 
     char lockBuf[MAX_PATH] = {0};
-    std::string LockBuf_s;
+    std::string lockBufS;
     std::string lockValue;
 
     ret = snprintf_s(lockBuf, MAX_PATH, sizeof(lockBuf) - 1, LOCK_PATH.c_str());
-    LockBuf_s = lockBuf;
+    lockBufS = lockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(LockBuf_s, lockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(lockBufS, lockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);
@@ -1780,13 +1780,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock008, Function | MediumTest |
     }
 
     char lockBuf[MAX_PATH] = {0};
-    std::string LockBuf_s;
+    std::string lockBufS;
     std::string lockValue;
 
     ret = snprintf_s(lockBuf, MAX_PATH, sizeof(lockBuf) - 1, LOCK_PATH.c_str());
-    LockBuf_s = lockBuf;
+    lockBufS = lockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(LockBuf_s, lockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(lockBufS, lockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);
@@ -1810,13 +1810,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock009, Function | MediumTest |
     }
 
     char lockBuf[MAX_PATH] = {0};
-    std::string LockBuf_s;
+    std::string lockBufS;
     std::string lockValue;
 
     ret = snprintf_s(lockBuf, MAX_PATH, sizeof(lockBuf) - 1, LOCK_PATH.c_str());
-    LockBuf_s = lockBuf;
+    lockBufS = lockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(LockBuf_s, lockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(lockBufS, lockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);
@@ -1840,13 +1840,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock010, Function | MediumTest |
     }
 
     char lockBuf[MAX_PATH] = {0};
-    std::string LockBuf_s;
+    std::string lockBufS;
     std::string lockValue;
 
     ret = snprintf_s(lockBuf, MAX_PATH, sizeof(lockBuf) - 1, LOCK_PATH.c_str());
-    LockBuf_s = lockBuf;
+    lockBufS = lockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(LockBuf_s, lockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(lockBufS, lockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);
@@ -1870,13 +1870,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock011, Function | MediumTest |
     }
 
     char lockBuf[MAX_PATH] = {0};
-    std::string LockBuf_s;
+    std::string lockBufS;
     std::string lockValue;
 
     ret = snprintf_s(lockBuf, MAX_PATH, sizeof(lockBuf) - 1, LOCK_PATH.c_str());
-    LockBuf_s = lockBuf;
+    lockBufS = lockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(LockBuf_s, lockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(lockBufS, lockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);
@@ -1900,13 +1900,13 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock012, Function | MediumTest |
     }
 
     char lockBuf[MAX_PATH] = {0};
-    std::string LockBuf_s;
+    std::string lockBufS;
     std::string lockValue;
 
     ret = snprintf_s(lockBuf, MAX_PATH, sizeof(lockBuf) - 1, LOCK_PATH.c_str());
-    LockBuf_s = lockBuf;
+    lockBufS = lockBuf;
     sleep(WAIT_TIME);
-    ret = HdfPowerHdiTestAdditional::ReadFile(LockBuf_s, lockValue, MAX_PATH);
+    ret = HdfPowerHdiTestAdditional::ReadFile(lockBufS, lockValue, MAX_PATH);
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);

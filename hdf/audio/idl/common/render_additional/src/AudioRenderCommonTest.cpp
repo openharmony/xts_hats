@@ -1925,8 +1925,6 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize008, Tes
         EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
     }
     ret = render_->GetFrameBufferSize(render_, nullptr);
-    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
-    int32_t ret = render_->GetFrameBufferSize(render_, nullptr);
     ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
 }
 
@@ -2174,9 +2172,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop007, TestSize.Level1)
     ret = render_->TurnStandbyMode(render_);
     EXPECT_EQ(HDF_SUCCESS, ret);
     ret = render_->Stop(render_);
+    EXPECT_EQ(HDF_SUCCESS, ret);
     int32_t i;
     for (i = 0; i < 50; i++) {
         ret = render_->Start(render_);
+        EXPECT_EQ(HDF_SUCCESS, ret);
         ret = render_->Stop(render_);
         EXPECT_EQ(HDF_SUCCESS, ret);
     }

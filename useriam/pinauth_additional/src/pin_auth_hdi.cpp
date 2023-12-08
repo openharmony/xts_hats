@@ -140,6 +140,222 @@ void FillTestGetPropertyTypeVector(Parcel &parcel, std::vector<GetPropertyType> 
     cout << "success" << endl;
 }
 /**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_GetExecutorInfo_0200
+ * @tc.name  testPinAuthTestGetExecutorInfo001
+ * @tc.desc  test GetExecutorInfo executorInfo not empty
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestGetExecutorInfo001, Function | MediumTest | Level1)
+{
+    cout << "start test testPinAuthTestGetExecutorInfo001" << endl;
+    ExecutorInfo executorInfo;
+    int32_t ret = g_executorImpl.GetExecutorInfo(executorInfo);
+    cout << "ret is" << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_GetExecutorInfo_0300
+ * @tc.name  testPinAuthTestGetExecutorInfo002
+ * @tc.desc  test GetExecutorInfo 1000 times
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestGetExecutorInfo002, Function | MediumTest | Level1)
+{
+    cout << "start test testPinAuthTestGetExecutorInfo002" << endl;
+    ExecutorInfo executorInfo;
+    int32_t ret = 0;
+    for (int32_t i = 0; i < 1000; i++) {
+        ret = g_executorImpl.GetExecutorInfo(executorInfo);
+        cout << "ret" << i << "is" << ret << endl;
+        EXPECT_EQ(ret, 0);
+    }
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_GetTemplateInfo_0200
+ * @tc.name  testPinAuthTestGetTemplateInfo001
+ * @tc.desc  test GetTemplateInfo templateId 0
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestGetTemplateInfo001, Function | MediumTest | Level1)
+{
+    cout << "start test testPinAuthTestGetTemplateInfo001" << endl;
+    uint64_t templateId = 0;
+    TemplateInfo templateInfo;
+    int32_t ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
+    cout << "ret is" << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_GetTemplateInfo_0300
+ * @tc.name  testPinAuthTestGetTemplateInfo002
+ * @tc.desc  test GetTemplateInfo templateId 0x7FFFFFFFFFFFFFFF
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestGetTemplateInfo002, Function | MediumTest | Level1)
+{
+    cout << "start test testPinAuthTestGetTemplateInfo002" << endl;
+    uint64_t templateId = 0x7FFFFFFFFFFFFFFF;
+    TemplateInfo templateInfo;
+    int32_t ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
+    cout << "ret is" << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_GetTemplateInfo_0400
+ * @tc.name  testPinAuthTestGetTemplateInfo003
+ * @tc.desc  test GetTemplateInfo templateId 0xFFFFFFFFFFFFFFFF
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestGetTemplateInfo003, Function | MediumTest | Level1)
+{
+    cout << "start test testPinAuthTestGetTemplateInfo003" << endl;
+    uint64_t templateId = 0xFFFFFFFFFFFFFFFF;
+    TemplateInfo templateInfo;
+    int32_t ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
+    cout << "ret is" << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_GetTemplateInfo_0500
+ * @tc.name  testPinAuthTestGetTemplateInfo004
+ * @tc.desc  test GetTemplateInfo templateId 0x10
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestGetTemplateInfo004, Function | MediumTest | Level1)
+{
+    cout << "start test testPinAuthTestGetTemplateInfo004" << endl;
+    uint64_t templateId = 0x10;
+    TemplateInfo templateInfo;
+    int32_t ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
+    cout << "ret is" << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_GetTemplateInfo_0600
+ * @tc.name  testPinAuthTestGetTemplateInfo005
+ * @tc.desc  test GetTemplateInfo 1000 times
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestGetTemplateInfo005, Function | MediumTest | Level1)
+{
+    cout << "start test testPinAuthTestGetTemplateInfo005" << endl;
+    uint64_t templateId = 0x01;
+    TemplateInfo templateInfo;
+    int32_t ret = 0;
+    for (int32_t i = 0; i < 1000; i++) {
+        ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
+        cout << "ret" << i << "is" << ret << endl;
+        EXPECT_EQ(ret, 0);
+    }
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_OnRegisterFinish_0200
+ * @tc.name  testPinAuthTestOnRegisterFinish001
+ * @tc.desc  test OnRegisterFinish templateIdList empty
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnRegisterFinish001, Function | MediumTest | Level2)
+{
+    cout << "start test testPinAuthTestOnRegisterFinish001" << endl;
+    std::vector<uint64_t> templateIdList;
+    std::vector<uint8_t> frameworkPublicKey;
+    FillTestUint8Vector(parcel, frameworkPublicKey);
+    std::vector<uint8_t> extraInfo;
+    FillTestUint8Vector(parcel, extraInfo);
+    int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
+    cout << "ret is" << ret << endl;
+    EXPECT_NE(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_OnRegisterFinish_0300
+ * @tc.name  testPinAuthTestOnRegisterFinish002
+ * @tc.desc  test OnRegisterFinish frameworkPublicKey empty
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnRegisterFinish002, Function | MediumTest | Level2)
+{
+    cout << "start test testPinAuthTestOnRegisterFinish002" << endl;
+    std::vector<uint64_t> templateIdList;
+    FillTestUint64Vector(parcel, templateIdList);
+    std::vector<uint8_t> frameworkPublicKey;
+    std::vector<uint8_t> extraInfo;
+    FillTestUint8Vector(parcel, extraInfo);
+    int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
+    cout << "ret is" << ret << endl;
+    EXPECT_NE(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_OnRegisterFinish_0400
+ * @tc.name  testPinAuthTestOnRegisterFinish003
+ * @tc.desc  test OnRegisterFinish extraInfo empty
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnRegisterFinish003, Function | MediumTest | Level2)
+{
+    cout << "start test testPinAuthTestOnRegisterFinish003" << endl;
+    std::vector<uint64_t> templateIdList;
+    FillTestUint64Vector(parcel, templateIdList);
+    std::vector<uint8_t> frameworkPublicKey;
+    FillTestUint8Vector(parcel, frameworkPublicKey);
+    std::vector<uint8_t> extraInfo;
+    int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
+    cout << "ret is" << ret << endl;
+    EXPECT_NE(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_OnRegisterFinish_0500
+ * @tc.name  testPinAuthTestOnRegisterFinish004
+ * @tc.desc  test OnRegisterFinish frameworkPublicKey and extraInfo empty
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnRegisterFinish004, Function | MediumTest | Level2)
+{
+    cout << "start test testPinAuthTestOnRegisterFinish004" << endl;
+    std::vector<uint64_t> templateIdList;
+    FillTestUint64Vector(parcel, templateIdList);
+    std::vector<uint8_t> frameworkPublicKey;
+    std::vector<uint8_t> extraInfo;
+    int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
+    cout << "ret is" << ret << endl;
+    EXPECT_NE(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_OnRegisterFinish_0600
+ * @tc.name  testPinAuthTestOnRegisterFinish005
+ * @tc.desc  test OnRegisterFinish templateIdList and extraInfo empty
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnRegisterFinish005, Function | MediumTest | Level2)
+{
+    cout << "start test testPinAuthTestOnRegisterFinish005" << endl;
+    std::vector<uint64_t> templateIdList;
+    std::vector<uint8_t> frameworkPublicKey;
+    FillTestUint8Vector(parcel, frameworkPublicKey);
+    std::vector<uint8_t> extraInfo;
+    int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
+    cout << "ret is" << ret << endl;
+    EXPECT_NE(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_OnRegisterFinish_0700
+ * @tc.name  testPinAuthTestOnRegisterFinish006
+ * @tc.desc  test OnRegisterFinish templateIdList and frameworkPublicKey empty
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnRegisterFinish006, Function | MediumTest | Level2)
+{
+    cout << "start test testPinAuthTestOnRegisterFinish006" << endl;
+    std::vector<uint64_t> templateIdList;
+    std::vector<uint8_t> frameworkPublicKey;
+    std::vector<uint8_t> extraInfo;
+    FillTestUint8Vector(parcel, extraInfo);
+    int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
+    cout << "ret is" << ret << endl;
+    EXPECT_NE(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_OnRegisterFinish_0800
+ * @tc.name  testPinAuthTestOnRegisterFinish007
+ * @tc.desc  test OnRegisterFinish templateIdList and frameworkPublicKey and extraInfo empty
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnRegisterFinish007, Function | MediumTest | Level2)
+{
+    cout << "start test testPinAuthTestOnRegisterFinish007" << endl;
+    std::vector<uint64_t> templateIdList;
+    std::vector<uint8_t> frameworkPublicKey;
+    std::vector<uint8_t> extraInfo;
+    int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
+    cout << "ret is" << ret << endl;
+    EXPECT_NE(ret, 0);
+}
+/**
  * @tc.number  SUB_Security_Iam_PinAuth_HDI_OnRegisterFinish_0900
  * @tc.name  testPinAuthTestOnRegisterFinish008
  * @tc.desc  test OnRegisterFinish 1000 times
@@ -161,6 +377,120 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnRegisterFinish008, Funct
     }
 }
 /**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_OnSetData_0200
+ * @tc.name  testPinAuthTestOnSetData001
+ * @tc.desc  test OnSetData scheduleId 0
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnSetData001, Function | MediumTest | Level1)
+{
+    cout << "start OnSetData" << endl;
+    uint64_t scheduleId = 0;
+    uint64_t authSubType = parcel.ReadUint64();
+    std::vector<uint8_t> data;
+    FillTestUint8Vector(parcel, data);
+    int32_t ret = g_executorImpl.OnSetData(scheduleId, authSubType, data);
+    cout << "ret is" << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_OnSetData_0300
+ * @tc.name  testPinAuthTestOnSetData002
+ * @tc.desc  test OnSetData scheduleId 0x7FFFFFFFFFFFFFFF
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnSetData002, Function | MediumTest | Level1)
+{
+    cout << "start OnSetData" << endl;
+    uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
+    uint64_t authSubType = parcel.ReadUint64();
+    std::vector<uint8_t> data;
+    FillTestUint8Vector(parcel, data);
+    int32_t ret = g_executorImpl.OnSetData(scheduleId, authSubType, data);
+    cout << "ret is" << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_OnSetData_0400
+ * @tc.name  testPinAuthTestOnSetData003
+ * @tc.desc  test OnSetData scheduleId 0xFFFFFFFFFFFFFFFF
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnSetData003, Function | MediumTest | Level1)
+{
+    cout << "start OnSetData" << endl;
+    uint64_t scheduleId = 0xFFFFFFFFFFFFFFFF;
+    uint64_t authSubType = parcel.ReadUint64();
+    std::vector<uint8_t> data;
+    FillTestUint8Vector(parcel, data);
+    int32_t ret = g_executorImpl.OnSetData(scheduleId, authSubType, data);
+    cout << "ret is" << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_OnSetData_0500
+ * @tc.name  testPinAuthTestOnSetData004
+ * @tc.desc  test OnSetData authSubType 0
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnSetData004, Function | MediumTest | Level1)
+{
+    cout << "start OnSetData" << endl;
+    uint64_t scheduleId = parcel.ReadUint64();
+    uint64_t authSubType = 0;
+    std::vector<uint8_t> data;
+    FillTestUint8Vector(parcel, data);
+    int32_t ret = g_executorImpl.OnSetData(scheduleId, authSubType, data);
+    cout << "ret is" << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_OnSetData_0600
+ * @tc.name  testPinAuthTestOnSetData005
+ * @tc.desc  test OnSetData authSubType 0x7FFFFFFFFFFFFFFF
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnSetData005, Function | MediumTest | Level1)
+{
+    cout << "start OnSetData" << endl;
+    uint64_t scheduleId = parcel.ReadUint64();
+    uint64_t authSubType = 0x7FFFFFFFFFFFFFFF;
+    std::vector<uint8_t> data;
+    FillTestUint8Vector(parcel, data);
+    int32_t ret = g_executorImpl.OnSetData(scheduleId, authSubType, data);
+    cout << "ret is" << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_OnSetData_0700
+ * @tc.name  testPinAuthTestOnSetData006
+ * @tc.desc  test OnSetData authSubType 0xFFFFFFFFFFFFFFFF
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnSetData006, Function | MediumTest | Level1)
+{
+    cout << "start OnSetData" << endl;
+    uint64_t scheduleId = parcel.ReadUint64();
+    uint64_t authSubType = 0xFFFFFFFFFFFFFFFF;
+    std::vector<uint8_t> data;
+    FillTestUint8Vector(parcel, data);
+    int32_t ret = g_executorImpl.OnSetData(scheduleId, authSubType, data);
+    cout << "ret is" << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_OnSetData_0800
+ * @tc.name  testPinAuthTestOnSetData007
+ * @tc.desc  test OnSetData data len 1000
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnSetData007, Function | MediumTest | Level1)
+{
+    cout << "start OnSetData" << endl;
+    uint64_t scheduleId = parcel.ReadUint64();
+    uint64_t authSubType = parcel.ReadUint64();
+    std::vector<uint8_t> data;
+    for (int32_t i = 0; i < 1000; i++) {
+        data.push_back(i);
+    }
+    int32_t ret = g_executorImpl.OnSetData(scheduleId, authSubType, data);
+    cout << "ret is" << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
  * @tc.number  SUB_Security_Iam_PinAuth_HDI_OnSetData_0900
  * @tc.name  testPinAuthTestOnSetData008
  * @tc.desc  test OnSetData data empty
@@ -175,6 +505,26 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnSetData008, Function | M
     cout << "ret is" << ret << endl;
     EXPECT_NE(ret, 0);
 }
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_OnSetData_1000
+ * @tc.name  testPinAuthTestOnSetData009
+ * @tc.desc  test OnSetData 1000 times
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnSetData009, Function | MediumTest | Level1)
+{
+    cout << "start OnSetData" << endl;
+    uint64_t scheduleId = parcel.ReadUint64();
+    uint64_t authSubType = parcel.ReadUint64();
+    std::vector<uint8_t> data;
+    FillTestUint8Vector(parcel, data);
+    int32_t ret = 0;
+    for (int32_t i = 0; i < 1000; i++) {
+        ret = g_executorImpl.OnSetData(scheduleId, authSubType, data);
+        cout << "ret is" << ret << endl;
+        EXPECT_EQ(ret, 0);
+    }
+}
+
 /**
  * @tc.number  SUB_Security_Iam_PinAuth_HDI_Enroll_0200
  * @tc.name  testPinAuthTestEnroll001
@@ -225,6 +575,22 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestEnroll003, Function | Medi
     int32_t ret = g_executorImpl.Enroll(scheduleId, extraInfo, callbackObj);
     cout << "ret is" << ret << endl;
     EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_Enroll_0500
+ * @tc.name  testPinAuthTestEnroll004
+ * @tc.desc  test Enroll extraInfo empty
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestEnroll004, Function | MediumTest | Level2)
+{
+    cout << "start test testPinAuthTestEnroll004" << endl;
+    uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
+    std::vector<uint8_t> extraInfo;
+    sptr<IExecutorCallbackV1_0> callbackObj;
+    FillTestIExecutorCallbackV1_0(parcel, callbackObj);
+    int32_t ret = g_executorImpl.Enroll(scheduleId, extraInfo, callbackObj);
+    cout << "ret is" << ret << endl;
+    EXPECT_NE(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_PinAuth_HDI_Enroll_0600
@@ -384,6 +750,23 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestAuthenticate006, Function 
     EXPECT_EQ(ret, 0);
 }
 /**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_Authenticate_0800
+ * @tc.name  testPinAuthTestAuthenticate007
+ * @tc.desc  test Authenticate extraInfo empty
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestAuthenticate007, Function | MediumTest | Level2)
+{
+    cout << "start testPinAuthTestAuthenticate007" << endl;
+    uint64_t scheduleId = parcel.ReadUint64();
+    uint64_t templateId = parcel.ReadUint64();
+    std::vector<uint8_t> extraInfo;
+    sptr<IExecutorCallbackV1_0> callbackObj;
+    FillTestIExecutorCallbackV1_0(parcel, callbackObj);
+    int32_t ret = g_executorImpl.Authenticate(scheduleId, templateId, extraInfo, callbackObj);
+    cout << "ret is" << ret << endl;
+    EXPECT_NE(ret, 0);
+}
+/**
  * @tc.number  SUB_Security_Iam_PinAuth_HDI_Authenticate_0900
  * @tc.name  testPinAuthTestAuthenticate008
  * @tc.desc  test Authenticate callbackObj null
@@ -436,6 +819,61 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestAuthenticate010, Function 
     }
 }
 /**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_Delete_0200
+ * @tc.name  testPinAuthTestDelete001
+ * @tc.desc  test Delete templateId 0
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestDelete001, Function | MediumTest | Level1)
+{
+    cout << "start Delete" << endl;
+    uint64_t templateId = 0;
+    int32_t ret = g_executorImpl.Delete(templateId);
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_Delete_0300
+ * @tc.name  testPinAuthTestDelete002
+ * @tc.desc  test Delete templateId 0x7FFFFFFFFFFFFFFF
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestDelete002, Function | MediumTest | Level1)
+{
+    cout << "start Delete" << endl;
+    uint64_t templateId = 0x7FFFFFFFFFFFFFFF;
+    int32_t ret = g_executorImpl.Delete(templateId);
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_Delete_0400
+ * @tc.name  testPinAuthTestDelete003
+ * @tc.desc  test Delete templateId 0xFFFFFFFFFFFFFFFF
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestDelete003, Function | MediumTest | Level1)
+{
+    cout << "start Delete" << endl;
+    uint64_t templateId = 0xFFFFFFFFFFFFFFFF;
+    int32_t ret = g_executorImpl.Delete(templateId);
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_Delete_0500
+ * @tc.name  testPinAuthTestDelete004
+ * @tc.desc  test Delete 1000 times
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestDelete004, Function | MediumTest | Level1)
+{
+    cout << "start Delete" << endl;
+    uint64_t templateId = 0;
+    int32_t ret = 0;
+    for (int32_t i = 0; i < 1000; i++) {
+        ret = g_executorImpl.Delete(templateId);
+        cout << "ret is " << ret << endl;
+        EXPECT_EQ(ret, 0);
+    }
+}
+/**
  * @tc.number  SUB_Security_Iam_PinAuth_HDI_Cancel_0200
  * @tc.name  testPinAuthTestCancel001
  * @tc.desc  test Cancel scheduleId 0
@@ -475,6 +913,22 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestCancel003, Function | Medi
     EXPECT_EQ(ret, 0);
 }
 /**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_Cancel_0500
+ * @tc.name  testPinAuthTestCancel004
+ * @tc.desc  test Cancel 1000 times
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestCancel004, Function | MediumTest | Level1)
+{
+    cout << "start Cancel" << endl;
+    uint64_t scheduleId = 0;
+    int32_t ret = 0;
+    for (int32_t i = 0; i < 1000; i++) {
+        ret = g_executorImpl.Cancel(scheduleId);
+        cout << "ret is " << ret << endl;
+        EXPECT_EQ(ret, 0);
+    }
+}
+/**
  * @tc.number  SUB_Security_Iam_PinAuth_HDI_SendCommand_0200
  * @tc.name  testPinAuthTestSendCommand001
  * @tc.desc  test SendCommand commandId DEFAULT
@@ -490,6 +944,119 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestSendCommand001, Function |
     int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_SendCommand_0300
+ * @tc.name  testPinAuthTestSendCommand002
+ * @tc.desc  test SendCommand commandId 0x01
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestSendCommand002, Function | MediumTest | Level2)
+{
+    cout << "start SendCommand" << endl;
+    int32_t commandId = 0x01;
+    std::vector<uint8_t> extraInfo;
+    FillTestUint8Vector(parcel, extraInfo);
+    sptr<IExecutorCallbackV1_0> callbackObj;
+    FillTestIExecutorCallbackV1_0(parcel, callbackObj);
+    int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
+    cout << "ret is " << ret << endl;
+    EXPECT_NE(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_SendCommand_0400
+ * @tc.name  testPinAuthTestSendCommand003
+ * @tc.desc  test SendCommand commandId 0x7FFFFFFF
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestSendCommand003, Function | MediumTest | Level2)
+{
+    cout << "start SendCommand" << endl;
+    int32_t commandId = 0x7FFFFFFF;
+    std::vector<uint8_t> extraInfo;
+    FillTestUint8Vector(parcel, extraInfo);
+    sptr<IExecutorCallbackV1_0> callbackObj;
+    FillTestIExecutorCallbackV1_0(parcel, callbackObj);
+    int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
+    cout << "ret is " << ret << endl;
+    EXPECT_NE(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_SendCommand_0500
+ * @tc.name  testPinAuthTestSendCommand004
+ * @tc.desc  test SendCommand commandId -0x01
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestSendCommand004, Function | MediumTest | Level2)
+{
+    cout << "start SendCommand" << endl;
+    int32_t commandId = -0x01;
+    std::vector<uint8_t> extraInfo;
+    FillTestUint8Vector(parcel, extraInfo);
+    sptr<IExecutorCallbackV1_0> callbackObj;
+    FillTestIExecutorCallbackV1_0(parcel, callbackObj);
+    int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
+    cout << "ret is " << ret << endl;
+    EXPECT_NE(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_SendCommand_0600
+ * @tc.name  testPinAuthTestSendCommand005
+ * @tc.desc  test SendCommand commandId -0x7FFFFFFF
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestSendCommand005, Function | MediumTest | Level2)
+{
+    cout << "start SendCommand" << endl;
+    int32_t commandId = -0x7FFFFFFF;
+    std::vector<uint8_t> extraInfo;
+    FillTestUint8Vector(parcel, extraInfo);
+    sptr<IExecutorCallbackV1_0> callbackObj;
+    FillTestIExecutorCallbackV1_0(parcel, callbackObj);
+    int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
+    cout << "ret is " << ret << endl;
+    EXPECT_NE(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_SendCommand_0700
+ * @tc.name  testPinAuthTestSendCommand006
+ * @tc.desc  test SendCommand extraInfo empty
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestSendCommand006, Function | MediumTest | Level2)
+{
+    cout << "start SendCommand" << endl;
+    int32_t commandId = DEFAULT;
+    std::vector<uint8_t> extraInfo;
+    sptr<IExecutorCallbackV1_0> callbackObj;
+    FillTestIExecutorCallbackV1_0(parcel, callbackObj);
+    int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
+    cout << "ret is " << ret << endl;
+    EXPECT_NE(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_SendCommand_0800
+ * @tc.name  testPinAuthTestSendCommand007
+ * @tc.desc  test SendCommand callbackObj null
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestSendCommand007, Function | MediumTest | Level2)
+{
+    cout << "start SendCommand" << endl;
+    int32_t commandId = DEFAULT;
+    std::vector<uint8_t> extraInfo;
+    FillTestUint8Vector(parcel, extraInfo);
+    int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, nullptr);
+    cout << "ret is " << ret << endl;
+    EXPECT_NE(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_SendCommand_0900
+ * @tc.name  testPinAuthTestSendCommand008
+ * @tc.desc  test SendCommand extraInfo empty and callbackObj null
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestSendCommand008, Function | MediumTest | Level2)
+{
+    cout << "start SendCommand" << endl;
+    int32_t commandId = DEFAULT;
+    std::vector<uint8_t> extraInfo;
+    int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, nullptr);
+    cout << "ret is " << ret << endl;
+    EXPECT_NE(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_PinAuth_HDI_SendCommand_1000
@@ -510,6 +1077,63 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestSendCommand009, Function |
         cout << "ret is " << ret << endl;
         EXPECT_EQ(ret, 0);
     }
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_GetProperty_0200
+ * @tc.name  testPinAuthTestGetProperty001
+ * @tc.desc  test GetProperty propertyTypes AUTH_SUB_TYPE
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestGetProperty001, Function | MediumTest | Level1)
+{
+    cout << "start GetProperty" << endl;
+    std::vector<uint64_t> templateIdList;
+    FillTestUint64Vector(parcel, templateIdList);
+    std::vector<GetPropertyType> propertyTypes;
+    propertyTypes.push_back(OHOS::HDI::PinAuth::V1_1::AUTH_SUB_TYPE);
+    Property property;
+
+    int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
+
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_GetProperty_0300
+ * @tc.name  testPinAuthTestGetProperty002
+ * @tc.desc  test GetProperty propertyTypes LOCKOUT_DURATION
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestGetProperty002, Function | MediumTest | Level1)
+{
+    cout << "start GetProperty" << endl;
+    std::vector<uint64_t> templateIdList;
+    FillTestUint64Vector(parcel, templateIdList);
+    std::vector<GetPropertyType> propertyTypes;
+    propertyTypes.push_back(OHOS::HDI::PinAuth::V1_1::LOCKOUT_DURATION);
+    Property property;
+
+    int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
+
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_GetProperty_0400
+ * @tc.name  testPinAuthTestGetProperty003
+ * @tc.desc  test GetProperty propertyTypes REMAIN_ATTEMPTS
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestGetProperty003, Function | MediumTest | Level1)
+{
+    cout << "start GetProperty" << endl;
+    std::vector<uint64_t> templateIdList;
+    FillTestUint64Vector(parcel, templateIdList);
+    std::vector<GetPropertyType> propertyTypes;
+    propertyTypes.push_back(OHOS::HDI::PinAuth::V1_1::REMAIN_ATTEMPTS);
+    Property property;
+
+    int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
+
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_PinAuth_HDI_GetProperty_0500
@@ -546,6 +1170,28 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestGetProperty005, Function |
 
     cout << "ret is " << ret << endl;
     EXPECT_NE(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_GetProperty_0700
+ * @tc.name  testPinAuthTestGetProperty006
+ * @tc.desc  test GetProperty 1000 times
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestGetProperty006, Function | MediumTest | Level1)
+{
+    cout << "start GetProperty" << endl;
+    std::vector<uint64_t> templateIdList;
+    FillTestUint64Vector(parcel, templateIdList);
+    std::vector<GetPropertyType> propertyTypes;
+    propertyTypes.push_back(OHOS::HDI::PinAuth::V1_1::AUTH_SUB_TYPE);
+    Property property;
+
+    int32_t ret = 0;
+    for (int32_t i = 0; i < 1000; i++) {
+        ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
+
+        cout << "ret is " << ret << endl;
+        EXPECT_EQ(ret, 0);
+    }
 }
 /**
  * @tc.number  SUB_Security_Iam_PinAuth_HDI_EnrollV1_1_0100
@@ -599,6 +1245,22 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestEnrollV1_1003, Function | 
     EXPECT_EQ(ret, 0);
 }
 /**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_EnrollV1_1_0400
+ * @tc.name  testPinAuthTestEnrollV1_1004
+ * @tc.desc  test EnrollV1_1 extraInfo empty
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestEnrollV1_1004, Function | MediumTest | Level2)
+{
+    cout << "start test EnrollV1_1" << endl;
+    uint64_t scheduleId = 0;
+    std::vector<uint8_t> extraInfo;
+    sptr<OHOS::HDI::PinAuth::IExecutorCallback> callbackObj;
+    FillTestIExecutorCallback(parcel, callbackObj);
+    int32_t ret = g_executorImpl.EnrollV1_1(scheduleId, extraInfo, callbackObj);
+    cout << "ret is" << ret << endl;
+    EXPECT_NE(ret, 0);
+}
+/**
  * @tc.number  SUB_Security_Iam_PinAuth_HDI_EnrollV1_1_0500
  * @tc.name  testPinAuthTestEnrollV1_1005
  * @tc.desc  test EnrollV1_1 callbackObj null
@@ -646,6 +1308,126 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestEnrollV1_1007, Function | 
         cout << "ret is" << ret << endl;
         EXPECT_EQ(ret, 0);
     }
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_AuthenticateV1_1_0100
+ * @tc.name  testPinAuthTestAuthenticateV1_1001
+ * @tc.desc  test AuthenticateV1_1 scheduleId 0
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestAuthenticateV1_1001, Function | MediumTest | Level1)
+{
+    cout << "start AuthenticateV1_1" << endl;
+
+    uint64_t scheduleId = 0;
+    uint64_t templateId = parcel.ReadUint64();
+    std::vector<uint8_t> extraInfo;
+    FillTestUint8Vector(parcel, extraInfo);
+    sptr<OHOS::HDI::PinAuth::IExecutorCallback> callbackObj;
+    FillTestIExecutorCallback(parcel, callbackObj);
+    int32_t ret = g_executorImpl.AuthenticateV1_1(scheduleId, templateId, extraInfo, callbackObj);
+
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_AuthenticateV1_1_0200
+ * @tc.name  testPinAuthTestAuthenticateV1_1002
+ * @tc.desc  test AuthenticateV1_1 scheduleId 0xFFFFFFFFFFFFFFFF
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestAuthenticateV1_1002, Function | MediumTest | Level1)
+{
+    cout << "start AuthenticateV1_1" << endl;
+
+    uint64_t scheduleId = 0xFFFFFFFFFFFFFFFF;
+    uint64_t templateId = parcel.ReadUint64();
+    std::vector<uint8_t> extraInfo;
+    FillTestUint8Vector(parcel, extraInfo);
+    sptr<OHOS::HDI::PinAuth::IExecutorCallback> callbackObj;
+    FillTestIExecutorCallback(parcel, callbackObj);
+    int32_t ret = g_executorImpl.AuthenticateV1_1(scheduleId, templateId, extraInfo, callbackObj);
+
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_AuthenticateV1_1_0300
+ * @tc.name  testPinAuthTestAuthenticateV1_1003
+ * @tc.desc  test AuthenticateV1_1 scheduleId 0x7FFFFFFFFFFFFFFF
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestAuthenticateV1_1003, Function | MediumTest | Level1)
+{
+    cout << "start AuthenticateV1_1" << endl;
+
+    uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
+    uint64_t templateId = parcel.ReadUint64();
+    std::vector<uint8_t> extraInfo;
+    FillTestUint8Vector(parcel, extraInfo);
+    sptr<OHOS::HDI::PinAuth::IExecutorCallback> callbackObj;
+    FillTestIExecutorCallback(parcel, callbackObj);
+    int32_t ret = g_executorImpl.AuthenticateV1_1(scheduleId, templateId, extraInfo, callbackObj);
+
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_AuthenticateV1_1_0400
+ * @tc.name  testPinAuthTestAuthenticateV1_1004
+ * @tc.desc  test AuthenticateV1_1 templateId 0
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestAuthenticateV1_1004, Function | MediumTest | Level1)
+{
+    cout << "start AuthenticateV1_1" << endl;
+
+    uint64_t scheduleId = parcel.ReadUint64();
+    uint64_t templateId = 0;
+    std::vector<uint8_t> extraInfo;
+    FillTestUint8Vector(parcel, extraInfo);
+    sptr<OHOS::HDI::PinAuth::IExecutorCallback> callbackObj;
+    FillTestIExecutorCallback(parcel, callbackObj);
+    int32_t ret = g_executorImpl.AuthenticateV1_1(scheduleId, templateId, extraInfo, callbackObj);
+
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_AuthenticateV1_1_0500
+ * @tc.name  testPinAuthTestAuthenticateV1_1005
+ * @tc.desc  test AuthenticateV1_1 templateId 0xFFFFFFFFFFFFFFFF
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestAuthenticateV1_1005, Function | MediumTest | Level1)
+{
+    cout << "start AuthenticateV1_1" << endl;
+
+    uint64_t scheduleId = parcel.ReadUint64();
+    uint64_t templateId = 0xFFFFFFFFFFFFFFFF;
+    std::vector<uint8_t> extraInfo;
+    FillTestUint8Vector(parcel, extraInfo);
+    sptr<OHOS::HDI::PinAuth::IExecutorCallback> callbackObj;
+    FillTestIExecutorCallback(parcel, callbackObj);
+    int32_t ret = g_executorImpl.AuthenticateV1_1(scheduleId, templateId, extraInfo, callbackObj);
+
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_AuthenticateV1_1_0600
+ * @tc.name  testPinAuthTestAuthenticateV1_1006
+ * @tc.desc  test AuthenticateV1_1 templateId 0x7FFFFFFFFFFFFFFF
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestAuthenticateV1_1006, Function | MediumTest | Level1)
+{
+    cout << "start AuthenticateV1_1" << endl;
+
+    uint64_t scheduleId = parcel.ReadUint64();
+    uint64_t templateId = 0x7FFFFFFFFFFFFFFF;
+    std::vector<uint8_t> extraInfo;
+    FillTestUint8Vector(parcel, extraInfo);
+    sptr<OHOS::HDI::PinAuth::IExecutorCallback> callbackObj;
+    FillTestIExecutorCallback(parcel, callbackObj);
+    int32_t ret = g_executorImpl.AuthenticateV1_1(scheduleId, templateId, extraInfo, callbackObj);
+
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_PinAuth_HDI_AuthenticateV1_1_0700
@@ -700,6 +1482,29 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestAuthenticateV1_1009, Funct
 
     cout << "ret is " << ret << endl;
     EXPECT_NE(ret, 0);
+}
+/**
+ * @tc.number  SUB_Security_Iam_PinAuth_HDI_AuthenticateV1_1_1000
+ * @tc.name  testPinAuthTestAuthenticateV1_1010
+ * @tc.desc  test AuthenticateV1_1 1000 times
+ */
+HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestAuthenticateV1_1010, Function | MediumTest | Level1)
+{
+    cout << "start AuthenticateV1_1" << endl;
+
+    uint64_t scheduleId = parcel.ReadUint64();
+    uint64_t templateId = parcel.ReadUint64();
+    std::vector<uint8_t> extraInfo;
+    FillTestUint8Vector(parcel, extraInfo);
+    sptr<OHOS::HDI::PinAuth::IExecutorCallback> callbackObj;
+    FillTestIExecutorCallback(parcel, callbackObj);
+    int32_t ret = 0;
+    for (int32_t i = 0; i < 1000; i++) {
+        ret = g_executorImpl.AuthenticateV1_1(scheduleId, templateId, extraInfo, callbackObj);
+
+        cout << "ret is " << ret << endl;
+        EXPECT_EQ(ret, 0);
+    }
 }
 /**
  * @tc.number  SUB_Security_Iam_PinAuth_HDI_GetExecutorList_0200

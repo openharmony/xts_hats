@@ -33,7 +33,7 @@ ohos_moduletest_suite("HatszHdfDisplayComposerUtTest") {
     "drivers_interface_display:libdisplay_composer_hdi_impl",
     "drivers_interface_display:libdisplay_composer_stub_1.0",
     "googletest:gtest",
-    "graphic_chipsetsdk:buffer_handle",
+    "graphic_surface:buffer_handle",
     "hdf_core:libhdf_utils",
     "hilog:libhilog",
     "ipc:ipc_core",

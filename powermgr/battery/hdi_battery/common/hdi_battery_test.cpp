@@ -93,13 +93,11 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest001, TestSize.Level1)
   */
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest002, TestSize.Level1)
 {
-    if (false) {
         printf("HdfBatteryHdiTest002: start.");
         int32_t ret = g_batteryInterface->Register(g_callback);
         EXPECT_EQ(0, ret) << "HdfBatteryHdiTest002 failed";
 
         printf("HdfBatteryHdiTest002: return.");
-    }
 }
 
 /**
@@ -109,13 +107,11 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest002, TestSize.Level1)
   */
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest003, TestSize.Level1)
 {
-    if (false) {
         printf("HdfBatteryHdiTest003: start.");
         int32_t ret = g_batteryInterface->UnRegister();
         EXPECT_EQ(0, ret) << "HdfBatteryHdiTest002 failed";
 
         printf("HdfBatteryHdiTest003: return.");
-    }
 }
 
 /**

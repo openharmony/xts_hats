@@ -41,7 +41,10 @@ sptr<UsbSubscriberTest> UsbdTransferTestAdditional::subscriber_ = nullptr;
 namespace {
 sptr<IUsbInterface> g_usbInterface = nullptr;
 
-int32_t SwitchErrCode(int32_t ret) { return ret == HDF_ERR_NOT_SUPPORT ? HDF_SUCCESS : ret; }
+int32_t SwitchErrCode(int32_t ret)
+{
+    return ret == HDF_ERR_NOT_SUPPORT ? HDF_SUCCESS : ret;
+}
 
 void UsbdTransferTestAdditional::SetUpTestCase(void)
 {
@@ -96,12 +99,12 @@ void UsbdTransferTestAdditional::SetUp(void) {}
 void UsbdTransferTestAdditional::TearDown(void) {}
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_2100
- * @tc.name: testHdiusbtransferTestControlTransferWrite001
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_2100
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite001
  * @tc.desc: Performs control transfer for endpoint 0 of the device.
  * dev = (0,255). ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, 0, 0, 0, TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite001, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite001, TestSize.Level2)
 {
     struct UsbDev dev = {0, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -114,12 +117,12 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_2200
- * @tc.name: testHdiusbtransferTestControlTransferWrite002
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_2200
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite002
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (0,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, USB_DDK_REQ_GET_DESCRIPTOR, 0, 0, TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite002, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite002, TestSize.Level2)
 {
     struct UsbDev dev = {0, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -133,13 +136,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_2300
- * @tc.name: testHdiusbtransferTestControlTransferWrite003
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_2300
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite003
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (0,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, USB_DDK_REQ_GET_CONFIGURATION, 0, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite003, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite003, TestSize.Level2)
 {
     struct UsbDev dev = {0, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -153,12 +156,12 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_2400
- * @tc.name: testHdiusbtransferTestControlTransferWrite004
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_2400
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite004
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (0,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, USB_DDK_REQ_GET_INTERFACE, 0, 0, TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite004, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite004, TestSize.Level2)
 {
     struct UsbDev dev = {0, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -172,12 +175,12 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_2500
- * @tc.name: testHdiusbtransferTestControlTransferWrite005
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_2500
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite005
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (0,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, USB_DDK_REQ_SYNCH_FRAME, 0, 0, TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite005, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite005, TestSize.Level2)
 {
     struct UsbDev dev = {0, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -191,12 +194,12 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_2600
- * @tc.name: testHdiusbtransferTestControlTransferWrite006
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_2600
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite006
  * @tc.desc: Performs control transfer for endpoint 0 of the device.
  * dev = (255,0). ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, 0, 0, 0, TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite006, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite006, TestSize.Level2)
 {
     struct UsbDev dev = {255, 0};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -209,12 +212,12 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_2700
- * @tc.name: testHdiusbtransferTestControlTransferWrite007
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_2700
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite007
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,0).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, USB_DDK_REQ_GET_DESCRIPTOR, 0, 0, TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite007, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite007, TestSize.Level2)
 {
     struct UsbDev dev = {255, 0};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -228,13 +231,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_2800
- * @tc.name: testHdiusbtransferTestControlTransferWrite008
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_2800
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite008
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,0).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, USB_DDK_REQ_GET_CONFIGURATION, 0, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite008, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite008, TestSize.Level2)
 {
     struct UsbDev dev = {255, 0};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -248,12 +251,12 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_2900
- * @tc.name: testHdiusbtransferTestControlTransferWrite009
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_2900
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite009
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,0).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, USB_DDK_REQ_GET_INTERFACE, 0, 0, TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite009, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite009, TestSize.Level2)
 {
     struct UsbDev dev = {255, 0};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -267,12 +270,12 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_3000
- * @tc.name: testHdiusbtransferTestControlTransferWrite010
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_3000
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite010
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,0).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, USB_DDK_REQ_SYNCH_FRAME, 0, 0, TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite010, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite010, TestSize.Level2)
 {
     struct UsbDev dev = {255, 0};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -286,12 +289,12 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_3100
- * @tc.name: testHdiusbtransferTestControlTransferWrite011
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_3100
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite011
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_INTERFACE, 0, 0, 0, TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite011, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite011, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -305,13 +308,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_3200
- * @tc.name: testHdiusbtransferTestControlTransferWrite012
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_3200
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite012
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_INTERFACE, USB_DDK_REQ_GET_DESCRIPTOR, 0, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite012, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite012, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -325,13 +328,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_3300
- * @tc.name: testHdiusbtransferTestControlTransferWrite013
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_3300
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite013
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_INTERFACE, USB_DDK_REQ_GET_CONFIGURATION, 0, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite013, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite013, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -345,13 +348,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_3400
- * @tc.name: testHdiusbtransferTestControlTransferWrite014
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_3400
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite014
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_INTERFACE, USB_DDK_REQ_GET_INTERFACE, 0, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite014, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite014, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -365,13 +368,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_3500
- * @tc.name: testHdiusbtransferTestControlTransferWrite015
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_3500
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite015
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_INTERFACE, USB_DDK_REQ_SYNCH_FRAME, 0, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite015, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite015, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -385,12 +388,12 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_3600
- * @tc.name: testHdiusbtransferTestControlTransferWrite016
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_3600
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite016
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_ENDPOINT, 0, 0, 0, TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite016, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite016, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -404,13 +407,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_3700
- * @tc.name: testHdiusbtransferTestControlTransferWrite017
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_3700
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite017
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_ENDPOINT, USB_DDK_REQ_GET_DESCRIPTOR, 0, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite017, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite017, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -424,13 +427,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_3800
- * @tc.name: testHdiusbtransferTestControlTransferWrite018
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_3800
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite018
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_ENDPOINT, USB_DDK_REQ_GET_CONFIGURATION, 0, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite018, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite018, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -444,13 +447,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_3900
- * @tc.name: testHdiusbtransferTestControlTransferWrite019
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_3900
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite019
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_ENDPOINT, USB_DDK_REQ_GET_INTERFACE, 0, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite019, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite019, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -464,13 +467,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_4000
- * @tc.name: testHdiusbtransferTestControlTransferWrite020
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_4000
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite020
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_ENDPOINT, USB_DDK_REQ_SYNCH_FRAME, 0, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite020, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite020, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -484,12 +487,12 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_4100
- * @tc.name: testHdiusbtransferTestControlTransferWrite021
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_4100
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite021
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_OTHER, 0, 0, 0, TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite021, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite021, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -502,12 +505,12 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_4200
- * @tc.name: testHdiusbtransferTestControlTransferWrite022
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_4200
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite022
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_OTHER, USB_DDK_REQ_GET_DESCRIPTOR, 0, 0, TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite022, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite022, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -521,13 +524,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_4300
- * @tc.name: testHdiusbtransferTestControlTransferWrite023
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_4300
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite023
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_OTHER, USB_DDK_REQ_GET_CONFIGURATION, 0, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite023, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite023, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -541,13 +544,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_4400
- * @tc.name: testHdiusbtransferTestControlTransferWrite024
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_4400
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite024
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_OTHER, USB_DDK_REQ_GET_INTERFACE, 0, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite024, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite024, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -561,13 +564,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_4500
- * @tc.name: testHdiusbtransferTestControlTransferWrite025
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_4500
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite025
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_OTHER, USB_DDK_REQ_SYNCH_FRAME, 0, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite025, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite025, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -581,12 +584,12 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_4600
- * @tc.name: testHdiusbtransferTestControlTransferWrite026
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_4600
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite026
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, 0, 0, 0, TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite026, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite026, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -599,12 +602,12 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_4700
- * @tc.name: testHdiusbtransferTestControlTransferWrite027
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_4700
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite027
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, USB_DDK_REQ_GET_DESCRIPTOR, 0, 0, TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite027, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite027, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -618,13 +621,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_4800
- * @tc.name: testHdiusbtransferTestControlTransferWrite028
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_4800
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite028
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, USB_DDK_REQ_GET_CONFIGURATION, 0, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite028, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite028, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -638,13 +641,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_4900
- * @tc.name: testHdiusbtransferTestControlTransferWrite029
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_4900
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite029
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, USB_DDK_REQ_GET_INTERFACE, 0, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite029, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite029, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -658,13 +661,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_5000
- * @tc.name: testHdiusbtransferTestControlTransferWrite030
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_5000
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite030
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, USB_DDK_REQ_SYNCH_FRAME, 0, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite030, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite030, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -678,12 +681,12 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_5100
- * @tc.name: testHdiusbtransferTestControlTransferWrite031
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_5100
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite031
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, 0, CTL_VALUE, 0, TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite031, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite031, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -697,13 +700,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_5200
- * @tc.name: testHdiusbtransferTestControlTransferWrite032
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_5200
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite032
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, USB_DDK_REQ_GET_DESCRIPTOR, CTL_VALUE, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite032, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite032, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -717,13 +720,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_5300
- * @tc.name: testHdiusbtransferTestControlTransferWrite033
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_5300
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite033
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, USB_DDK_REQ_GET_CONFIGURATION, CTL_VALUE, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite033, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite033, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -737,13 +740,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_5400
- * @tc.name: testHdiusbtransferTestControlTransferWrite034
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_5400
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite034
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, USB_DDK_REQ_GET_INTERFACE, CTL_VALUE, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite034, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite034, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -757,13 +760,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_5500
- * @tc.name: testHdiusbtransferTestControlTransferWrite035
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_5500
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite035
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, USB_DDK_REQ_SYNCH_FRAME, CTL_VALUE, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite035, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite035, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -777,12 +780,12 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_5600
- * @tc.name: testHdiusbtransferTestControlTransferWrite036
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_5600
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite036
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_INTERFACE, 0, CTL_VALUE, 0, TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite036, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite036, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -796,13 +799,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_5700
- * @tc.name: testHdiusbtransferTestControlTransferWrite037
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_5700
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite037
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_INTERFACE, USB_DDK_REQ_GET_DESCRIPTOR, CTL_VALUE, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite037, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite037, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -816,13 +819,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_5800
- * @tc.name: testHdiusbtransferTestControlTransferWrite038
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_5800
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite038
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_INTERFACE, USB_DDK_REQ_GET_CONFIGURATION, CTL_VALUE, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite038, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite038, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -836,13 +839,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_5900
- * @tc.name: testHdiusbtransferTestControlTransferWrite039
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_5900
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite039
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_INTERFACE, USB_DDK_REQ_GET_INTERFACE, CTL_VALUE, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite039, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite039, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -856,13 +859,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_6000
- * @tc.name: testHdiusbtransferTestControlTransferWrite040
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_6000
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite040
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_INTERFACE, USB_DDK_REQ_SYNCH_FRAME, CTL_VALUE, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite040, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite040, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -876,12 +879,12 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_6100
- * @tc.name: testHdiusbtransferTestControlTransferWrite041
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_6100
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite041
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_ENDPOINT, 0, CTL_VALUE, 0, TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite041, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite041, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -895,13 +898,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_6200
- * @tc.name: testHdiusbtransferTestControlTransferWrite042
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_6200
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite042
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_ENDPOINT, USB_DDK_REQ_GET_DESCRIPTOR, CTL_VALUE, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite042, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite042, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -915,13 +918,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_6300
- * @tc.name: testHdiusbtransferTestControlTransferWrite043
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_6300
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite043
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_ENDPOINT, USB_DDK_REQ_GET_CONFIGURATION, CTL_VALUE, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite043, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite043, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -935,13 +938,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_6400
- * @tc.name: testHdiusbtransferTestControlTransferWrite044
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_6400
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite044
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_ENDPOINT, USB_DDK_REQ_GET_INTERFACE, CTL_VALUE, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite044, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite044, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -955,13 +958,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_6500
- * @tc.name: testHdiusbtransferTestControlTransferWrite045
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_6500
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite045
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_ENDPOINT, USB_DDK_REQ_SYNCH_FRAME, CTL_VALUE, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite045, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite045, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -975,12 +978,12 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_6600
- * @tc.name: testHdiusbtransferTestControlTransferWrite046
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_6600
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite046
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_OTHER, 0, CTL_VALUE, 0,TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite046, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite046, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -994,13 +997,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_6700
- * @tc.name: testHdiusbtransferTestControlTransferWrite047
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_6700
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite047
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_OTHER, USB_DDK_REQ_GET_DESCRIPTOR, CTL_VALUE,
  * 0,TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite047, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite047, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -1014,13 +1017,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_6800
- * @tc.name: testHdiusbtransferTestControlTransferWrite048
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_6800
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite048
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_OTHER, USB_DDK_REQ_GET_CONFIGURATION, CTL_VALUE,
  * 0,TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite048, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite048, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -1034,13 +1037,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_6900
- * @tc.name: testHdiusbtransferTestControlTransferWrite049
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_6900
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite049
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_OTHER, USB_DDK_REQ_GET_INTERFACE, CTL_VALUE,
  * 0,TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite049, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite049, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -1054,13 +1057,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_7000
- * @tc.name: testHdiusbtransferTestControlTransferWrite050
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_7000
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite050
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (255,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_OTHER, USB_DDK_REQ_SYNCH_FRAME, CTL_VALUE,
  * 0,TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite050, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite050, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -1074,12 +1077,12 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_7100
- * @tc.name: testHdiusbtransferTestControlTransferWrite051
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_7100
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite051
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (0,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, 0, CTL_VALUE, 0, TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite051, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite051, TestSize.Level2)
 {
     struct UsbDev dev = {0, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -1093,13 +1096,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_7200
- * @tc.name: testHdiusbtransferTestControlTransferWrite052
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_7200
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite052
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (0,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, USB_DDK_REQ_GET_DESCRIPTOR, CTL_VALUE, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite052, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite052, TestSize.Level2)
 {
     struct UsbDev dev = {0, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -1113,13 +1116,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_7300
- * @tc.name: testHdiusbtransferTestControlTransferWrite053
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_7300
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite053
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (0,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, USB_DDK_REQ_GET_CONFIGURATION, CTL_VALUE, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite053, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite053, TestSize.Level2)
 {
     struct UsbDev dev = {0, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -1133,13 +1136,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_7400
- * @tc.name: testHdiusbtransferTestControlTransferWrite054
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_7400
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite054
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (0,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, USB_DDK_REQ_GET_INTERFACE, CTL_VALUE, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite054, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite054, TestSize.Level2)
 {
     struct UsbDev dev = {0, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -1153,13 +1156,13 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite0
 }
 
 /**
- * @tc.number: SUB_Driver_usb_transferTest_ControlTransferWrite_7500
- * @tc.name: testHdiusbtransferTestControlTransferWrite055
+ * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferWrite_7500
+ * @tc.name: testHdiUsbTransferTestControlTransferWrite055
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (0,255).
  * ctrlparmas = (USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_DEVICE, USB_DDK_REQ_SYNCH_FRAME, CTL_VALUE, 0,
  * TRANSFER_TIME_OUT).
  */
-HWTEST_F(UsbdTransferTestAdditional, testHdiusbtransferTestControlTransferWrite055, TestSize.Level2)
+HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferWrite055, TestSize.Level2)
 {
     struct UsbDev dev = {0, 255};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);

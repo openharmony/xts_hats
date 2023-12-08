@@ -48,7 +48,10 @@ OHOS::sptr<OHOS::USB::UsbSubscriberTest> UsbdInterfaceTestAdditional::subscriber
 
 sptr<IUsbInterface> g_usbInterface = nullptr;
 
-int32_t SwitchErrCode(int32_t ret) { return ret == HDF_ERR_NOT_SUPPORT ? HDF_SUCCESS : ret; }
+int32_t SwitchErrCode(int32_t ret)
+{
+    return ret == HDF_ERR_NOT_SUPPORT ? HDF_SUCCESS : ret;
+}
 
 void UsbdInterfaceTestAdditional::SetUpTestCase(void)
 {
@@ -99,11 +102,11 @@ void UsbdInterfaceTestAdditional::SetUp(void) {}
 void UsbdInterfaceTestAdditional::TearDown(void) {}
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_0900
- * @tc.name: testHdiusbrequestTestSetInterface001
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_0900
+ * @tc.name: testHdiUsbRequestTestSetInterface001
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,0},255,0).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface001, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface001, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 0;
@@ -114,11 +117,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface001, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_1000
- * @tc.name: testHdiusbrequestTestSetInterface002
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_1000
+ * @tc.name: testHdiUsbRequestTestSetInterface002
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,0},255,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface002, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface002, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 255;
@@ -129,11 +132,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface002, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_1100
- * @tc.name: testHdiusbrequestTestSetInterface003
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_1100
+ * @tc.name: testHdiUsbRequestTestSetInterface003
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,0},0,0).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface003, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface003, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     uint8_t altIndex = 0;
@@ -144,11 +147,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface003, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_1200
- * @tc.name: testHdiusbrequestTestSetInterface004
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_1200
+ * @tc.name: testHdiUsbRequestTestSetInterface004
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,0},0,1).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface004, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface004, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     uint8_t altIndex = 1;
@@ -159,11 +162,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface004, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_1300
- * @tc.name: testHdiusbrequestTestSetInterface005
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_1300
+ * @tc.name: testHdiUsbRequestTestSetInterface005
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,0},0,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface005, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface005, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     uint8_t altIndex = 255;
@@ -174,11 +177,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface005, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_1400
- * @tc.name: testHdiusbrequestTestSetInterface006
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_1400
+ * @tc.name: testHdiUsbRequestTestSetInterface006
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,0},1,1).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface006, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface006, TestSize.Level2)
 {
     int32_t interfaceId = 1;
     uint8_t altIndex = 1;
@@ -189,11 +192,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface006, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_1500
- * @tc.name: testHdiusbrequestTestSetInterface007
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_1500
+ * @tc.name: testHdiUsbRequestTestSetInterface007
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,0},1,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface007, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface007, TestSize.Level2)
 {
     int32_t interfaceId = 1;
     uint8_t altIndex = 255;
@@ -204,11 +207,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface007, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_1600
- * @tc.name: testHdiusbrequestTestSetInterface008
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_1600
+ * @tc.name: testHdiUsbRequestTestSetInterface008
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({100,255},0,0).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface008, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface008, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     uint8_t altIndex = 0;
@@ -220,11 +223,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface008, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_1700
- * @tc.name: testHdiusbrequestTestSetInterface009
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_1700
+ * @tc.name: testHdiUsbRequestTestSetInterface009
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({100,255},0,1).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface009, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface009, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     uint8_t altIndex = 1;
@@ -236,11 +239,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface009, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_1800
- * @tc.name: testHdiusbrequestTestSetInterface010
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_1800
+ * @tc.name: testHdiUsbRequestTestSetInterface010
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({100,255},0,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface010, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface010, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     uint8_t altIndex = 255;
@@ -252,11 +255,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface010, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_1900
- * @tc.name: testHdiusbrequestTestSetInterface011
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_1900
+ * @tc.name: testHdiUsbRequestTestSetInterface011
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({100,255},1,0).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface011, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface011, TestSize.Level2)
 {
     int32_t interfaceId = 1;
     uint8_t altIndex = 0;
@@ -268,11 +271,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface011, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_2000
- * @tc.name: testHdiusbrequestTestSetInterface012
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_2000
+ * @tc.name: testHdiUsbRequestTestSetInterface012
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({100,255},1,1).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface012, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface012, TestSize.Level2)
 {
     int32_t interfaceId = 1;
     uint8_t altIndex = 1;
@@ -284,11 +287,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface012, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_2100
- * @tc.name: testHdiusbrequestTestSetInterface013
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_2100
+ * @tc.name: testHdiUsbRequestTestSetInterface013
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({100,0},1,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface013, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface013, TestSize.Level2)
 {
     int32_t interfaceId = 1;
     uint8_t altIndex = 255;
@@ -299,11 +302,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface013, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_2200
- * @tc.name: testHdiusbrequestTestSetInterface014
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_2200
+ * @tc.name: testHdiUsbRequestTestSetInterface014
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({100,0},255,0).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface014, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface014, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 0;
@@ -314,11 +317,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface014, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_2300
- * @tc.name: testHdiusbrequestTestSetInterface015
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_2300
+ * @tc.name: testHdiUsbRequestTestSetInterface015
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({100,0},255,1).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface015, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface015, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 1;
@@ -329,11 +332,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface015, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_2400
- * @tc.name: testHdiusbrequestTestSetInterface016
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_2400
+ * @tc.name: testHdiUsbRequestTestSetInterface016
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({100,0},255,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface016, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface016, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 255;
@@ -344,11 +347,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface016, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_2500
- * @tc.name: testHdiusbrequestTestSetInterface017
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_2500
+ * @tc.name: testHdiUsbRequestTestSetInterface017
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({0,100},255,10).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface017, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface017, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 10;
@@ -359,11 +362,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface017, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_2600
- * @tc.name: testHdiusbrequestTestSetInterface018
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_2600
+ * @tc.name: testHdiUsbRequestTestSetInterface018
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({0,100},10,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface018, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface018, TestSize.Level2)
 {
     int32_t interfaceId = 10;
     uint8_t altIndex = 255;
@@ -374,11 +377,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface018, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_2700
- * @tc.name: testHdiusbrequestTestSetInterface019
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_2700
+ * @tc.name: testHdiUsbRequestTestSetInterface019
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({0,100},0,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface019, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface019, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     uint8_t altIndex = 255;
@@ -389,11 +392,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface019, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_2800
- * @tc.name: testHdiusbrequestTestSetInterface020
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_2800
+ * @tc.name: testHdiUsbRequestTestSetInterface020
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({0,100},100,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface020, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface020, TestSize.Level2)
 {
     int32_t interfaceId = 100;
     uint8_t altIndex = 255;
@@ -404,11 +407,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface020, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_2900
- * @tc.name: testHdiusbrequestTestSetInterface021
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_2900
+ * @tc.name: testHdiUsbRequestTestSetInterface021
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({0,100},255,100).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface021, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface021, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 100;
@@ -419,11 +422,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface021, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_3000
- * @tc.name: testHdiusbrequestTestSetInterface022
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_3000
+ * @tc.name: testHdiUsbRequestTestSetInterface022
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({0,100},1,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface022, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface022, TestSize.Level2)
 {
     int32_t interfaceId = 1;
     uint8_t altIndex = 255;
@@ -434,11 +437,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface022, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_3100
- * @tc.name: testHdiusbrequestTestSetInterface023
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_3100
+ * @tc.name: testHdiUsbRequestTestSetInterface023
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({0,100},255,0).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface023, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface023, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 0;
@@ -449,11 +452,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface023, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_3200
- * @tc.name: testHdiusbrequestTestSetInterface024
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_3200
+ * @tc.name: testHdiUsbRequestTestSetInterface024
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({0,100},255,1).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface024, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface024, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 1;
@@ -464,11 +467,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface024, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_3300
- * @tc.name: testHdiusbrequestTestSetInterface025
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_3300
+ * @tc.name: testHdiUsbRequestTestSetInterface025
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({0,100},255,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface025, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface025, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 255;
@@ -479,11 +482,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface025, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_3400
- * @tc.name: testHdiusbrequestTestSetInterface026
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_3400
+ * @tc.name: testHdiUsbRequestTestSetInterface026
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({0,255},1,0).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface026, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface026, TestSize.Level2)
 {
     int32_t interfaceId = 1;
     uint8_t altIndex = 0;
@@ -494,11 +497,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface026, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_3500
- * @tc.name: testHdiusbrequestTestSetInterface027
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_3500
+ * @tc.name: testHdiUsbRequestTestSetInterface027
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({0,255},1,1).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface027, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface027, TestSize.Level2)
 {
     int32_t interfaceId = 1;
     uint8_t altIndex = 1;
@@ -509,11 +512,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface027, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_3600
- * @tc.name: testHdiusbrequestTestSetInterface028
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_3600
+ * @tc.name: testHdiUsbRequestTestSetInterface028
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({0,255},0,0).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface028, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface028, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     uint8_t altIndex = 0;
@@ -524,11 +527,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface028, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_3700
- * @tc.name: testHdiusbrequestTestSetInterface029
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_3700
+ * @tc.name: testHdiUsbRequestTestSetInterface029
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({0,255},0,1).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface029, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface029, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     uint8_t altIndex = 1;
@@ -539,11 +542,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface029, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_3800
- * @tc.name: testHdiusbrequestTestSetInterface030
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_3800
+ * @tc.name: testHdiUsbRequestTestSetInterface030
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({0,255},0,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface030, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface030, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     uint8_t altIndex = 255;
@@ -554,11 +557,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface030, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_3900
- * @tc.name: testHdiusbrequestTestSetInterface031
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_3900
+ * @tc.name: testHdiUsbRequestTestSetInterface031
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({0,255},255,0).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface031, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface031, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 0;
@@ -569,11 +572,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface031, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_4000
- * @tc.name: testHdiusbrequestTestSetInterface032
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_4000
+ * @tc.name: testHdiUsbRequestTestSetInterface032
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({0,255},255,1).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface032, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface032, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 1;
@@ -584,11 +587,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface032, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_4100
- * @tc.name: testHdiusbrequestTestSetInterface033
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_4100
+ * @tc.name: testHdiUsbRequestTestSetInterface033
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,255},1,1).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface033, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface033, TestSize.Level2)
 {
     int32_t interfaceId = 1;
     uint8_t altIndex = 1;
@@ -600,11 +603,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface033, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_4200
- * @tc.name: testHdiusbrequestTestSetInterface034
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_4200
+ * @tc.name: testHdiUsbRequestTestSetInterface034
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,255},1,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface034, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface034, TestSize.Level2)
 {
     int32_t interfaceId = 1;
     uint8_t altIndex = 255;
@@ -616,11 +619,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface034, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_4300
- * @tc.name: testHdiusbrequestTestSetInterface035
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_4300
+ * @tc.name: testHdiUsbRequestTestSetInterface035
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,255},0,0).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface035, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface035, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     uint8_t altIndex = 0;
@@ -632,11 +635,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface035, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_4400
- * @tc.name: testHdiusbrequestTestSetInterface036
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_4400
+ * @tc.name: testHdiUsbRequestTestSetInterface036
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,255},0,1).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface036, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface036, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     uint8_t altIndex = 1;
@@ -648,11 +651,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface036, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_4500
- * @tc.name: testHdiusbrequestTestSetInterface037
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_4500
+ * @tc.name: testHdiUsbRequestTestSetInterface037
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,255},0,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface037, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface037, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     uint8_t altIndex = 255;
@@ -664,11 +667,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface037, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_4600
- * @tc.name: testHdiusbrequestTestSetInterface038
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_4600
+ * @tc.name: testHdiUsbRequestTestSetInterface038
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,255},255,0).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface038, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface038, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 0;
@@ -680,11 +683,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface038, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_4700
- * @tc.name: testHdiusbrequestTestSetInterface039
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_4700
+ * @tc.name: testHdiUsbRequestTestSetInterface039
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,255},255,1).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface039, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface039, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 1;
@@ -696,11 +699,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface039, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_4800
- * @tc.name: testHdiusbrequestTestSetInterface040
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_4800
+ * @tc.name: testHdiUsbRequestTestSetInterface040
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({1,0},255,100).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface040, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface040, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 100;
@@ -711,11 +714,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface040, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_4900
- * @tc.name: testHdiusbrequestTestSetInterface041
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_4900
+ * @tc.name: testHdiUsbRequestTestSetInterface041
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({1,0},100,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface041, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface041, TestSize.Level2)
 {
     int32_t interfaceId = 100;
     uint8_t altIndex = 255;
@@ -726,11 +729,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface041, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_5000
- * @tc.name: testHdiusbrequestTestSetInterface042
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_5000
+ * @tc.name: testHdiUsbRequestTestSetInterface042
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({1,0},0,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface042, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface042, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     uint8_t altIndex = 255;
@@ -741,11 +744,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface042, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_5100
- * @tc.name: testHdiusbrequestTestSetInterface043
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_5100
+ * @tc.name: testHdiUsbRequestTestSetInterface043
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({1,0},10,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface043, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface043, TestSize.Level2)
 {
     int32_t interfaceId = 10;
     uint8_t altIndex = 255;
@@ -756,11 +759,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface043, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_5200
- * @tc.name: testHdiusbrequestTestSetInterface044
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_5200
+ * @tc.name: testHdiUsbRequestTestSetInterface044
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({1,0},255,10).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface044, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface044, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 10;
@@ -771,11 +774,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface044, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_5300
- * @tc.name: testHdiusbrequestTestSetInterface045
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_5300
+ * @tc.name: testHdiUsbRequestTestSetInterface045
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({1,0},1,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface045, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface045, TestSize.Level2)
 {
     int32_t interfaceId = 1;
     uint8_t altIndex = 255;
@@ -786,11 +789,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface045, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_5400
- * @tc.name: testHdiusbrequestTestSetInterface046
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_5400
+ * @tc.name: testHdiUsbRequestTestSetInterface046
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({1,0},255,0).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface046, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface046, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 0;
@@ -801,11 +804,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface046, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_5500
- * @tc.name: testHdiusbrequestTestSetInterface047
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_5500
+ * @tc.name: testHdiUsbRequestTestSetInterface047
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({1,0},255,1).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface047, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface047, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 1;
@@ -816,11 +819,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface047, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_5600
- * @tc.name: testHdiusbrequestTestSetInterface048
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_5600
+ * @tc.name: testHdiUsbRequestTestSetInterface048
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({1,0},255,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface048, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface048, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 255;
@@ -831,11 +834,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface048, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_5700
- * @tc.name: testHdiusbrequestTestSetInterface049
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_5700
+ * @tc.name: testHdiUsbRequestTestSetInterface049
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({1,1},255,100).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface049, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface049, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 100;
@@ -847,11 +850,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface049, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_5800
- * @tc.name: testHdiusbrequestTestSetInterface050
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_5800
+ * @tc.name: testHdiUsbRequestTestSetInterface050
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({1,1},100,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface050, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface050, TestSize.Level2)
 {
     int32_t interfaceId = 100;
     uint8_t altIndex = 255;
@@ -863,11 +866,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface050, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_5900
- * @tc.name: testHdiusbrequestTestSetInterface051
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_5900
+ * @tc.name: testHdiUsbRequestTestSetInterface051
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({1,1},0,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface051, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface051, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     uint8_t altIndex = 255;
@@ -879,11 +882,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface051, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_6000
- * @tc.name: testHdiusbrequestTestSetInterface052
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_6000
+ * @tc.name: testHdiUsbRequestTestSetInterface052
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({1,1},10,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface052, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface052, TestSize.Level2)
 {
     int32_t interfaceId = 10;
     uint8_t altIndex = 255;
@@ -895,11 +898,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface052, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_6100
- * @tc.name: testHdiusbrequestTestSetInterface053
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_6100
+ * @tc.name: testHdiUsbRequestTestSetInterface053
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({1,1},255,10).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface053, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface053, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 10;
@@ -911,11 +914,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface053, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_6200
- * @tc.name: testHdiusbrequestTestSetInterface054
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_6200
+ * @tc.name: testHdiUsbRequestTestSetInterface054
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({1,1},1,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface054, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface054, TestSize.Level2)
 {
     int32_t interfaceId = 1;
     uint8_t altIndex = 255;
@@ -927,11 +930,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface054, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_6300
- * @tc.name: testHdiusbrequestTestSetInterface055
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_6300
+ * @tc.name: testHdiUsbRequestTestSetInterface055
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({1,1},255,0).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface055, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface055, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 0;
@@ -943,11 +946,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface055, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_6400
- * @tc.name: testHdiusbrequestTestSetInterface056
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_6400
+ * @tc.name: testHdiUsbRequestTestSetInterface056
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({1,1},255,1).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface056, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface056, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 1;
@@ -959,11 +962,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface056, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_6500
- * @tc.name: testHdiusbrequestTestSetInterface057
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_6500
+ * @tc.name: testHdiUsbRequestTestSetInterface057
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({1,1},255,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface057, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface057, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 255;
@@ -975,11 +978,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface057, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_6600
- * @tc.name: testHdiusbrequestTestSetInterface058
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_6600
+ * @tc.name: testHdiUsbRequestTestSetInterface058
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,100},0,0).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface058, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface058, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     uint8_t altIndex = 0;
@@ -991,11 +994,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface058, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_6700
- * @tc.name: testHdiusbrequestTestSetInterface059
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_6700
+ * @tc.name: testHdiUsbRequestTestSetInterface059
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,100},0,1).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface059, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface059, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     uint8_t altIndex = 1;
@@ -1007,11 +1010,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface059, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_6800
- * @tc.name: testHdiusbrequestTestSetInterface060
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_6800
+ * @tc.name: testHdiUsbRequestTestSetInterface060
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,100},0,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface060, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface060, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     uint8_t altIndex = 255;
@@ -1023,11 +1026,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface060, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_6900
- * @tc.name: testHdiusbrequestTestSetInterface061
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_6900
+ * @tc.name: testHdiUsbRequestTestSetInterface061
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,100},1,0).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface061, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface061, TestSize.Level2)
 {
     int32_t interfaceId = 1;
     uint8_t altIndex = 0;
@@ -1039,11 +1042,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface061, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_7000
- * @tc.name: testHdiusbrequestTestSetInterface062
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_7000
+ * @tc.name: testHdiUsbRequestTestSetInterface062
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,100},1,1).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface062, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface062, TestSize.Level2)
 {
     int32_t interfaceId = 1;
     uint8_t altIndex = 1;
@@ -1055,11 +1058,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface062, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_7100
- * @tc.name: testHdiusbrequestTestSetInterface063
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_7100
+ * @tc.name: testHdiUsbRequestTestSetInterface063
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,100},1,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface063, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface063, TestSize.Level2)
 {
     int32_t interfaceId = 1;
     uint8_t altIndex = 255;
@@ -1071,11 +1074,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface063, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_7200
- * @tc.name: testHdiusbrequestTestSetInterface064
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_7200
+ * @tc.name: testHdiUsbRequestTestSetInterface064
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,100},255,0).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface064, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface064, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 0;
@@ -1087,11 +1090,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface064, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_7300
- * @tc.name: testHdiusbrequestTestSetInterface065
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_7300
+ * @tc.name: testHdiUsbRequestTestSetInterface065
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,100},255,1).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface065, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface065, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 1;
@@ -1103,11 +1106,11 @@ HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface065, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetInterface_7400
- * @tc.name: testHdiusbrequestTestSetInterface066
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetInterface_7400
+ * @tc.name: testHdiUsbRequestTestSetInterface066
  * @tc.desc: Sets the alternate settings for the specified USB interface. ({255,100},255,255).
  */
-HWTEST_F(UsbdInterfaceTestAdditional, testHdiusbrequestTestSetInterface066, TestSize.Level2)
+HWTEST_F(UsbdInterfaceTestAdditional, testHdiUsbRequestTestSetInterface066, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     uint8_t altIndex = 255;

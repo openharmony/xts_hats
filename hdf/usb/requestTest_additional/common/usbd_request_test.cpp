@@ -44,7 +44,10 @@ sptr<UsbSubscriberTest> UsbdRequestTestAdditional::subscriber_ = nullptr;
 namespace {
 sptr<IUsbInterface> g_usbInterface = nullptr;
 
-int32_t SwitchErrCode(int32_t ret) { return ret == HDF_ERR_NOT_SUPPORT ? HDF_SUCCESS : ret; }
+int32_t SwitchErrCode(int32_t ret)
+{
+    return ret == HDF_ERR_NOT_SUPPORT ? HDF_SUCCESS : ret;
+}
 
 void UsbdRequestTestAdditional::SetUpTestCase(void)
 {
@@ -93,11 +96,11 @@ void UsbdRequestTestAdditional::SetUp(void) {}
 void UsbdRequestTestAdditional::TearDown(void) {}
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_0900
- * @tc.name: testHdiusbrequestTestClaimInterface001
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_0900
+ * @tc.name: testHdiUsbRequestTestClaimInterface001
  * @tc.desc: Claims a USB interface. ({255, 0}, 1, 0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface001, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface001, TestSize.Level2)
 {
     uint8_t interfaceId = INTERFACEID_OK;
     struct UsbDev dev = dev_;
@@ -107,11 +110,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface001, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_1000
- * @tc.name: testHdiusbrequestTestClaimInterface002
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_1000
+ * @tc.name: testHdiUsbRequestTestClaimInterface002
  * @tc.desc: Claims a USB interface. ({255, 0}, 1, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface002, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface002, TestSize.Level2)
 {
     uint8_t interfaceId = INTERFACEID_OK;
     struct UsbDev dev = dev_;
@@ -121,11 +124,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface002, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_1100
- * @tc.name: testHdiusbrequestTestClaimInterface003
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_1100
+ * @tc.name: testHdiUsbRequestTestClaimInterface003
  * @tc.desc: Claims a USB interface. ({255, 0}, 0, 0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface003, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface003, TestSize.Level2)
 {
     uint8_t interfaceId = 0;
     struct UsbDev dev = dev_;
@@ -135,11 +138,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface003, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_1200
- * @tc.name: testHdiusbrequestTestClaimInterface004
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_1200
+ * @tc.name: testHdiUsbRequestTestClaimInterface004
  * @tc.desc: Claims a USB interface. ({255, 0}, 0, 1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface004, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface004, TestSize.Level2)
 {
     uint8_t interfaceId = 0;
     struct UsbDev dev = dev_;
@@ -149,11 +152,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface004, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_1300
- * @tc.name: testHdiusbrequestTestClaimInterface005
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_1300
+ * @tc.name: testHdiUsbRequestTestClaimInterface005
  * @tc.desc: Claims a USB interface. ({255, 0}, 0, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface005, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface005, TestSize.Level2)
 {
     uint8_t interfaceId = 0;
     struct UsbDev dev = dev_;
@@ -163,11 +166,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface005, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_1400
- * @tc.name: testHdiusbrequestTestClaimInterface006
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_1400
+ * @tc.name: testHdiUsbRequestTestClaimInterface006
  * @tc.desc: Claims a USB interface. ({255, 0}, 255, 0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface006, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface006, TestSize.Level2)
 {
     uint8_t interfaceId = 255;
     struct UsbDev dev = dev_;
@@ -177,11 +180,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface006, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_1500
- * @tc.name: testHdiusbrequestTestClaimInterface007
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_1500
+ * @tc.name: testHdiUsbRequestTestClaimInterface007
  * @tc.desc: Claims a USB interface. ({255, 0}, 255, 1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface007, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface007, TestSize.Level2)
 {
     uint8_t interfaceId = 255;
     struct UsbDev dev = dev_;
@@ -191,11 +194,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface007, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_1600
- * @tc.name: testHdiusbrequestTestClaimInterface008
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_1600
+ * @tc.name: testHdiUsbRequestTestClaimInterface008
  * @tc.desc: Claims a USB interface. ({255, 0}, 255, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface008, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface008, TestSize.Level2)
 {
     uint8_t interfaceId = 255;
     struct UsbDev dev = dev_;
@@ -205,11 +208,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface008, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_1700
- * @tc.name: testHdiusbrequestTestClaimInterface009
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_1700
+ * @tc.name: testHdiUsbRequestTestClaimInterface009
  * @tc.desc: Claims a USB interface. ({200, 255}, 1, 0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface009, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface009, TestSize.Level2)
 {
     uint8_t interfaceId = INTERFACEID_OK;
     struct UsbDev dev = {200, DEV_ADDR_INVALID};
@@ -218,11 +221,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface009, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_1800
- * @tc.name: testHdiusbrequestTestClaimInterface010
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_1800
+ * @tc.name: testHdiUsbRequestTestClaimInterface010
  * @tc.desc: Claims a USB interface. ({200, 255}, 1, 1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface010, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface010, TestSize.Level2)
 {
     uint8_t interfaceId = INTERFACEID_OK;
     struct UsbDev dev = {200, DEV_ADDR_INVALID};
@@ -231,11 +234,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface010, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_1900
- * @tc.name: testHdiusbrequestTestClaimInterface011
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_1900
+ * @tc.name: testHdiUsbRequestTestClaimInterface011
  * @tc.desc: Claims a USB interface. ({100, 0}, 1, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface011, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface011, TestSize.Level2)
 {
     uint8_t interfaceId = INTERFACEID_OK;
     struct UsbDev dev = dev_;
@@ -245,11 +248,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface011, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_2000
- * @tc.name: testHdiusbrequestTestClaimInterface012
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_2000
+ * @tc.name: testHdiUsbRequestTestClaimInterface012
  * @tc.desc: Claims a USB interface. ({200, 255}, 0, 0)
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface012, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface012, TestSize.Level2)
 {
     uint8_t interfaceId = 0;
     struct UsbDev dev = {200, DEV_ADDR_INVALID};
@@ -258,11 +261,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface012, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_2100
- * @tc.name: testHdiusbrequestTestClaimInterface013
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_2100
+ * @tc.name: testHdiUsbRequestTestClaimInterface013
  * @tc.desc: Claims a USB interface. ({200, 255}, 0, 1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface013, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface013, TestSize.Level2)
 {
     uint8_t interfaceId = 0;
     struct UsbDev dev = {200, DEV_ADDR_INVALID};
@@ -271,11 +274,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface013, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_2200
- * @tc.name: testHdiusbrequestTestClaimInterface014
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_2200
+ * @tc.name: testHdiUsbRequestTestClaimInterface014
  * @tc.desc: Claims a USB interface. ({100, 0}, 0, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface014, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface014, TestSize.Level2)
 {
     uint8_t interfaceId = 0;
     struct UsbDev dev = dev_;
@@ -285,11 +288,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface014, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_2300
- * @tc.name: testHdiusbrequestTestClaimInterface015
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_2300
+ * @tc.name: testHdiUsbRequestTestClaimInterface015
  * @tc.desc: Claims a USB interface. ({100, 0}, 255, 0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface015, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface015, TestSize.Level2)
 {
     uint8_t interfaceId = 255;
     struct UsbDev dev = dev_;
@@ -299,11 +302,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface015, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_2400
- * @tc.name: testHdiusbrequestTestClaimInterface016
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_2400
+ * @tc.name: testHdiUsbRequestTestClaimInterface016
  * @tc.desc: Claims a USB interface. ({100, 0}, 255, 1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface016, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface016, TestSize.Level2)
 {
     uint8_t interfaceId = 255;
     struct UsbDev dev = dev_;
@@ -313,11 +316,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface016, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_2500
- * @tc.name: testHdiusbrequestTestClaimInterface017
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_2500
+ * @tc.name: testHdiUsbRequestTestClaimInterface017
  * @tc.desc: Claims a USB interface. ({100, 0}, 255, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface017, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface017, TestSize.Level2)
 {
     uint8_t interfaceId = 255;
     struct UsbDev dev = dev_;
@@ -327,11 +330,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface017, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_2600
- * @tc.name: testHdiusbrequestTestClaimInterface018
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_2600
+ * @tc.name: testHdiUsbRequestTestClaimInterface018
  * @tc.desc: Claims a USB interface. ({255, 200}, 1, 0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface018, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface018, TestSize.Level2)
 {
     uint8_t interfaceId = INTERFACEID_OK;
     struct UsbDev dev = {DEV_ADDR_INVALID, 200};
@@ -340,11 +343,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface018, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_2700
- * @tc.name: testHdiusbrequestTestClaimInterface019
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_2700
+ * @tc.name: testHdiUsbRequestTestClaimInterface019
  * @tc.desc: Claims a USB interface. ({255, 200}, 1, 1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface019, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface019, TestSize.Level2)
 {
     uint8_t interfaceId = INTERFACEID_OK;
     struct UsbDev dev = {DEV_ADDR_INVALID, 200};
@@ -353,11 +356,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface019, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_2800
- * @tc.name: testHdiusbrequestTestClaimInterface020
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_2800
+ * @tc.name: testHdiUsbRequestTestClaimInterface020
  * @tc.desc: Claims a USB interface. ({1, 0}, 1, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface020, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface020, TestSize.Level2)
 {
     uint8_t interfaceId = INTERFACEID_OK;
     struct UsbDev dev = dev_;
@@ -367,11 +370,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface020, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_2900
- * @tc.name: testHdiusbrequestTestClaimInterface021
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_2900
+ * @tc.name: testHdiUsbRequestTestClaimInterface021
  * @tc.desc: Claims a USB interface. ({255, 200}, 0, 0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface021, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface021, TestSize.Level2)
 {
     uint8_t interfaceId = 0;
     struct UsbDev dev = {DEV_ADDR_INVALID, 200};
@@ -380,11 +383,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface021, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_3000
- * @tc.name: testHdiusbrequestTestClaimInterface022
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_3000
+ * @tc.name: testHdiUsbRequestTestClaimInterface022
  * @tc.desc: Claims a USB interface. ({255, 200}, 0, 1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface022, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface022, TestSize.Level2)
 {
     uint8_t interfaceId = 0;
     struct UsbDev dev = {DEV_ADDR_INVALID, 200};
@@ -393,11 +396,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface022, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_3100
- * @tc.name: testHdiusbrequestTestClaimInterface023
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_3100
+ * @tc.name: testHdiUsbRequestTestClaimInterface023
  * @tc.desc: Claims a USB interface. ({1, 0}, 0, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface023, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface023, TestSize.Level2)
 {
     uint8_t interfaceId = 0;
     struct UsbDev dev = dev_;
@@ -407,11 +410,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface023, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_3200
- * @tc.name: testHdiusbrequestTestClaimInterface024
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_3200
+ * @tc.name: testHdiUsbRequestTestClaimInterface024
  * @tc.desc: Claims a USB interface. ({1, 0}, 255, 0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface024, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface024, TestSize.Level2)
 {
     uint8_t interfaceId = 255;
     struct UsbDev dev = dev_;
@@ -421,11 +424,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface024, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_3300
- * @tc.name: testHdiusbrequestTestClaimInterface025
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_3300
+ * @tc.name: testHdiUsbRequestTestClaimInterface025
  * @tc.desc: Claims a USB interface. ({1, 0}, 255, 1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface025, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface025, TestSize.Level2)
 {
     uint8_t interfaceId = 255;
     struct UsbDev dev = dev_;
@@ -435,11 +438,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface025, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_3400
- * @tc.name: testHdiusbrequestTestClaimInterface026
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_3400
+ * @tc.name: testHdiUsbRequestTestClaimInterface026
  * @tc.desc: Claims a USB interface. ({1, 0}, 255, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface026, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface026, TestSize.Level2)
 {
     uint8_t interfaceId = 255;
     struct UsbDev dev = dev_;
@@ -449,11 +452,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface026, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_3500
- * @tc.name: testHdiusbrequestTestClaimInterface027
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_3500
+ * @tc.name: testHdiUsbRequestTestClaimInterface027
  * @tc.desc: Claims a USB interface. ({0, 255}, 1, 0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface027, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface027, TestSize.Level2)
 {
     uint8_t interfaceId = INTERFACEID_OK;
     struct UsbDev dev = {dev_.busNum, DEV_ADDR_INVALID};
@@ -462,11 +465,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface027, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_3600
- * @tc.name: testHdiusbrequestTestClaimInterface028
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_3600
+ * @tc.name: testHdiUsbRequestTestClaimInterface028
  * @tc.desc: Claims a USB interface. ({0, 255}, 1, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface028, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface028, TestSize.Level2)
 {
     uint8_t interfaceId = INTERFACEID_OK;
     struct UsbDev dev = {dev_.busNum, DEV_ADDR_INVALID};
@@ -475,11 +478,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface028, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_3700
- * @tc.name: testHdiusbrequestTestClaimInterface029
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_3700
+ * @tc.name: testHdiUsbRequestTestClaimInterface029
  * @tc.desc: Claims a USB interface. ({0, 255}, 0, 0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface029, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface029, TestSize.Level2)
 {
     uint8_t interfaceId = 0;
     struct UsbDev dev = {dev_.busNum, DEV_ADDR_INVALID};
@@ -488,11 +491,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface029, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_3800
- * @tc.name: testHdiusbrequestTestClaimInterface030
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_3800
+ * @tc.name: testHdiUsbRequestTestClaimInterface030
  * @tc.desc: Claims a USB interface. ({0, 255}, 0, 1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface030, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface030, TestSize.Level2)
 {
     uint8_t interfaceId = 0;
     struct UsbDev dev = {dev_.busNum, DEV_ADDR_INVALID};
@@ -501,11 +504,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface030, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_3900
- * @tc.name: testHdiusbrequestTestClaimInterface031
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_3900
+ * @tc.name: testHdiUsbRequestTestClaimInterface031
  * @tc.desc: Claims a USB interface. ({0, 255}, 0, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface031, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface031, TestSize.Level2)
 {
     uint8_t interfaceId = 0;
     struct UsbDev dev = {dev_.busNum, DEV_ADDR_INVALID};
@@ -514,11 +517,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface031, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_4000
- * @tc.name: testHdiusbrequestTestClaimInterface032
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_4000
+ * @tc.name: testHdiUsbRequestTestClaimInterface032
  * @tc.desc: Claims a USB interface. ({0, 255}, 255, 0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface032, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface032, TestSize.Level2)
 {
     uint8_t interfaceId = 255;
     struct UsbDev dev = {dev_.busNum, DEV_ADDR_INVALID};
@@ -527,11 +530,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface032, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_4100
- * @tc.name: testHdiusbrequestTestClaimInterface033
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_4100
+ * @tc.name: testHdiUsbRequestTestClaimInterface033
  * @tc.desc: Claims a USB interface. ({0, 255}, 255, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface033, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface033, TestSize.Level2)
 {
     uint8_t interfaceId = 255;
     struct UsbDev dev = {dev_.busNum, DEV_ADDR_INVALID};
@@ -540,11 +543,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface033, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_4200
- * @tc.name: testHdiusbrequestTestClaimInterface034
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_4200
+ * @tc.name: testHdiUsbRequestTestClaimInterface034
  * @tc.desc: Claims a USB interface. ({150, 255}, 1, 0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface034, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface034, TestSize.Level2)
 {
     uint8_t interfaceId = INTERFACEID_OK;
     struct UsbDev dev = {150, DEV_ADDR_INVALID};
@@ -553,11 +556,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface034, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_4300
- * @tc.name: testHdiusbrequestTestClaimInterface035
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_4300
+ * @tc.name: testHdiUsbRequestTestClaimInterface035
  * @tc.desc: Claims a USB interface. ({150, 255}, 1, 1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface035, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface035, TestSize.Level2)
 {
     uint8_t interfaceId = INTERFACEID_OK;
     struct UsbDev dev = {150, DEV_ADDR_INVALID};
@@ -566,11 +569,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface035, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_4400
- * @tc.name: testHdiusbrequestTestClaimInterface036
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_4400
+ * @tc.name: testHdiUsbRequestTestClaimInterface036
  * @tc.desc: Claims a USB interface. ({0, 100}, 1, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface036, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface036, TestSize.Level2)
 {
     uint8_t interfaceId = INTERFACEID_OK;
     struct UsbDev dev = {dev_.busNum, 100};
@@ -579,11 +582,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface036, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_4500
- * @tc.name: testHdiusbrequestTestClaimInterface037
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_4500
+ * @tc.name: testHdiUsbRequestTestClaimInterface037
  * @tc.desc: Claims a USB interface. ({150, 255}, 0, 0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface037, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface037, TestSize.Level2)
 {
     uint8_t interfaceId = 0;
     struct UsbDev dev = {150, DEV_ADDR_INVALID};
@@ -592,11 +595,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface037, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_4600
- * @tc.name: testHdiusbrequestTestClaimInterface038
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_4600
+ * @tc.name: testHdiUsbRequestTestClaimInterface038
  * @tc.desc: Claims a USB interface. ({150, 255}, 0, 1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface038, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface038, TestSize.Level2)
 {
     uint8_t interfaceId = 0;
     struct UsbDev dev = {150, DEV_ADDR_INVALID};
@@ -605,11 +608,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface038, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_4700
- * @tc.name: testHdiusbrequestTestClaimInterface039
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_4700
+ * @tc.name: testHdiUsbRequestTestClaimInterface039
  * @tc.desc: Claims a USB interface. ({0, 100}, 0, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface039, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface039, TestSize.Level2)
 {
     uint8_t interfaceId = 0;
     struct UsbDev dev = {dev_.busNum, 100};
@@ -618,11 +621,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface039, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_4800
- * @tc.name: testHdiusbrequestTestClaimInterface040
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_4800
+ * @tc.name: testHdiUsbRequestTestClaimInterface040
  * @tc.desc: Claims a USB interface. ({0, 100}, 255, 0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface040, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface040, TestSize.Level2)
 {
     uint8_t interfaceId = INTERFACEID_INVALID;
     struct UsbDev dev = {dev_.busNum, 100};
@@ -631,11 +634,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface040, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_4900
- * @tc.name: testHdiusbrequestTestClaimInterface041
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_4900
+ * @tc.name: testHdiUsbRequestTestClaimInterface041
  * @tc.desc: Claims a USB interface. ({0, 100}, 255, 1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface041, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface041, TestSize.Level2)
 {
     uint8_t interfaceId = INTERFACEID_INVALID;
     struct UsbDev dev = {dev_.busNum, 100};
@@ -644,11 +647,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface041, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_5000
- * @tc.name: testHdiusbrequestTestClaimInterface042
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_5000
+ * @tc.name: testHdiUsbRequestTestClaimInterface042
  * @tc.desc: Claims a USB interface. ({0, 100}, 255, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface042, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface042, TestSize.Level2)
 {
     uint8_t interfaceId = INTERFACEID_INVALID;
     struct UsbDev dev = {dev_.busNum, 100};
@@ -657,11 +660,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface042, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_5100
- * @tc.name: testHdiusbrequestTestClaimInterface043
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_5100
+ * @tc.name: testHdiUsbRequestTestClaimInterface043
  * @tc.desc: Claims a USB interface. ({0, 255}, 0, 0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface043, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface043, TestSize.Level2)
 {
     uint8_t interfaceId = 0;
     struct UsbDev dev = {dev_.busNum, DEV_ADDR_INVALID};
@@ -670,11 +673,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface043, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_5200
- * @tc.name: testHdiusbrequestTestClaimInterface044
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_5200
+ * @tc.name: testHdiUsbRequestTestClaimInterface044
  * @tc.desc: Claims a USB interface. ({255, 0}, 100, 0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface044, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface044, TestSize.Level2)
 {
     uint8_t interfaceId = 100;
     struct UsbDev dev = {DEV_ADDR_INVALID, dev_.devAddr};
@@ -683,11 +686,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface044, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_5300
- * @tc.name: testHdiusbrequestTestClaimInterface045
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_5300
+ * @tc.name: testHdiUsbRequestTestClaimInterface045
  * @tc.desc: Claims a USB interface. ({255, 0}, 100, 1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface045, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface045, TestSize.Level2)
 {
     uint8_t interfaceId = 100;
     struct UsbDev dev = {DEV_ADDR_INVALID, dev_.devAddr};
@@ -696,11 +699,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface045, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_5400
- * @tc.name: testHdiusbrequestTestClaimInterface046
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_5400
+ * @tc.name: testHdiUsbRequestTestClaimInterface046
  * @tc.desc: Claims a USB interface. ({255, 0}, 100, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface046, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface046, TestSize.Level2)
 {
     uint8_t interfaceId = 100;
     struct UsbDev dev = {DEV_ADDR_INVALID, dev_.devAddr};
@@ -709,11 +712,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface046, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_5500
- * @tc.name: testHdiusbrequestTestClaimInterface047
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_5500
+ * @tc.name: testHdiUsbRequestTestClaimInterface047
  * @tc.desc: Claims a USB interface. ({255, 0}, 1, 100).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface047, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface047, TestSize.Level2)
 {
     uint8_t interfaceId = 1;
     struct UsbDev dev = {DEV_ADDR_INVALID, dev_.devAddr};
@@ -722,11 +725,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface047, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_5600
- * @tc.name: testHdiusbrequestTestClaimInterface048
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_5600
+ * @tc.name: testHdiUsbRequestTestClaimInterface048
  * @tc.desc: Claims a USB interface. ({255, 100}, 1, 1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface048, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface048, TestSize.Level2)
 {
     uint8_t interfaceId = 1;
     struct UsbDev dev = {DEV_ADDR_INVALID, 100};
@@ -735,11 +738,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface048, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_5700
- * @tc.name: testHdiusbrequestTestClaimInterface049
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_5700
+ * @tc.name: testHdiUsbRequestTestClaimInterface049
  * @tc.desc: Claims a USB interface. ({255, 100}, 1, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface049, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface049, TestSize.Level2)
 {
     uint8_t interfaceId = 1;
     struct UsbDev dev = {DEV_ADDR_INVALID, 100};
@@ -748,11 +751,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface049, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_5800
- * @tc.name: testHdiusbrequestTestClaimInterface050
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_5800
+ * @tc.name: testHdiUsbRequestTestClaimInterface050
  * @tc.desc: Claims a USB interface. ({255, 100}, 255, 0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface050, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface050, TestSize.Level2)
 {
     uint8_t interfaceId = 255;
     struct UsbDev dev = {DEV_ADDR_INVALID, 100};
@@ -761,11 +764,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface050, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_5900
- * @tc.name: testHdiusbrequestTestClaimInterface051
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_5900
+ * @tc.name: testHdiUsbRequestTestClaimInterface051
  * @tc.desc: Claims a USB interface. ({255, 100}, 255, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface051, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface051, TestSize.Level2)
 {
     uint8_t interfaceId = 255;
     struct UsbDev dev = {DEV_ADDR_INVALID, 100};
@@ -774,11 +777,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface051, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_6000
- * @tc.name: testHdiusbrequestTestClaimInterface052
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_6000
+ * @tc.name: testHdiUsbRequestTestClaimInterface052
  * @tc.desc: Claims a USB interface. ({255, 255},0, 0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface052, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface052, TestSize.Level2)
 {
     uint8_t interfaceId = 0;
     struct UsbDev dev = {255, 255};
@@ -787,11 +790,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface052, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_6100
- * @tc.name: testHdiusbrequestTestClaimInterface053
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_6100
+ * @tc.name: testHdiUsbRequestTestClaimInterface053
  * @tc.desc: Claims a USB interface. ({255, 255},0, 1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface053, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface053, TestSize.Level2)
 {
     uint8_t interfaceId = 0;
     struct UsbDev dev = {255, 255};
@@ -800,11 +803,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface053, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_6200
- * @tc.name: testHdiusbrequestTestClaimInterface054
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_6200
+ * @tc.name: testHdiUsbRequestTestClaimInterface054
  * @tc.desc: Claims a USB interface. ({255, 255},0, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface054, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface054, TestSize.Level2)
 {
     uint8_t interfaceId = 0;
     struct UsbDev dev = {255, 255};
@@ -813,11 +816,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface054, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_6300
- * @tc.name: testHdiusbrequestTestClaimInterface055
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_6300
+ * @tc.name: testHdiUsbRequestTestClaimInterface055
  * @tc.desc: Claims a USB interface. ({255, 255},1, 0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface055, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface055, TestSize.Level2)
 {
     uint8_t interfaceId = 1;
     struct UsbDev dev = {255, 255};
@@ -826,11 +829,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface055, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_6400
- * @tc.name: testHdiusbrequestTestClaimInterface056
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_6400
+ * @tc.name: testHdiUsbRequestTestClaimInterface056
  * @tc.desc: Claims a USB interface. ({255, 255},1, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface056, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface056, TestSize.Level2)
 {
     uint8_t interfaceId = 1;
     struct UsbDev dev = {255, 255};
@@ -839,11 +842,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface056, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_6500
- * @tc.name: testHdiusbrequestTestClaimInterface057
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_6500
+ * @tc.name: testHdiUsbRequestTestClaimInterface057
  * @tc.desc: Claims a USB interface. ({255, 255},255, 0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface057, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface057, TestSize.Level2)
 {
     uint8_t interfaceId = 255;
     struct UsbDev dev = {255, 255};
@@ -852,11 +855,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface057, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ClaimInterface_6600
- * @tc.name: testHdiusbrequestTestClaimInterface058
+ * @tc.number: SUB_Driver_Usb_RequestTest_ClaimInterface_6600
+ * @tc.name: testHdiUsbRequestTestClaimInterface058
  * @tc.desc: Claims a USB interface. ({255, 255},255, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface058, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestClaimInterface058, TestSize.Level2)
 {
     uint8_t interfaceId = 255;
     struct UsbDev dev = {255, 255};
@@ -865,11 +868,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestClaimInterface058, Test
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetConfig_0900
- * @tc.name: testHdiusbrequestTestSetConfig001
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetConfig_0900
+ * @tc.name: testHdiUsbRequestTestSetConfig001
  * @tc.desc: Sets the configuration information of a USB device. ({100, 255},0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig001, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestSetConfig001, TestSize.Level2)
 {
     uint8_t configIndex = 0;
     struct UsbDev dev = dev_;
@@ -879,11 +882,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig001, TestSize.
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetConfig_1000
- * @tc.name: testHdiusbrequestTestSetConfig002
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetConfig_1000
+ * @tc.name: testHdiUsbRequestTestSetConfig002
  * @tc.desc: Sets the configuration information of a USB device. ({100, 255},1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig002, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestSetConfig002, TestSize.Level2)
 {
     uint8_t configIndex = 1;
     struct UsbDev dev = dev_;
@@ -893,11 +896,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig002, TestSize.
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetConfig_1100
- * @tc.name: testHdiusbrequestTestSetConfig003
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetConfig_1100
+ * @tc.name: testHdiUsbRequestTestSetConfig003
  * @tc.desc: Sets the configuration information of a USB device. ({100, 255},255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig003, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestSetConfig003, TestSize.Level2)
 {
     uint8_t configIndex = 255;
     struct UsbDev dev = dev_;
@@ -907,11 +910,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig003, TestSize.
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetConfig_1200
- * @tc.name: testHdiusbrequestTestSetConfig004
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetConfig_1200
+ * @tc.name: testHdiUsbRequestTestSetConfig004
  * @tc.desc: Sets the configuration information of a USB device. ({1, 0},255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig004, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestSetConfig004, TestSize.Level2)
 {
     uint8_t configIndex = 255;
     struct UsbDev dev = dev_;
@@ -921,11 +924,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig004, TestSize.
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetConfig_1300
- * @tc.name: testHdiusbrequestTestSetConfig005
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetConfig_1300
+ * @tc.name: testHdiUsbRequestTestSetConfig005
  * @tc.desc: Sets the configuration information of a USB device. ({255, 100},0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig005, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestSetConfig005, TestSize.Level2)
 {
     uint8_t configIndex = 0;
     struct UsbDev dev = dev_;
@@ -935,11 +938,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig005, TestSize.
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetConfig_1400
- * @tc.name: testHdiusbrequestTestSetConfig006
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetConfig_1400
+ * @tc.name: testHdiUsbRequestTestSetConfig006
  * @tc.desc: Sets the configuration information of a USB device. ({255, 100},1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig006, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestSetConfig006, TestSize.Level2)
 {
     uint8_t configIndex = 1;
     struct UsbDev dev = dev_;
@@ -949,11 +952,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig006, TestSize.
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetConfig_1500
- * @tc.name: testHdiusbrequestTestSetConfig007
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetConfig_1500
+ * @tc.name: testHdiUsbRequestTestSetConfig007
  * @tc.desc: Sets the configuration information of a USB device. ({0, 1},255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig007, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestSetConfig007, TestSize.Level2)
 {
     uint8_t configIndex = 255;
     struct UsbDev dev = dev_;
@@ -963,11 +966,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig007, TestSize.
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetConfig_1600
- * @tc.name: testHdiusbrequestTestSetConfig008
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetConfig_1600
+ * @tc.name: testHdiUsbRequestTestSetConfig008
  * @tc.desc: Sets the configuration information of a USB device. ({255, 0},0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig008, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestSetConfig008, TestSize.Level2)
 {
     uint8_t configIndex = 0;
     struct UsbDev dev = dev_;
@@ -977,11 +980,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig008, TestSize.
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetConfig_1700
- * @tc.name: testHdiusbrequestTestSetConfig009
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetConfig_1700
+ * @tc.name: testHdiUsbRequestTestSetConfig009
  * @tc.desc: Sets the configuration information of a USB device. ({255, 1},0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig009, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestSetConfig009, TestSize.Level2)
 {
     uint8_t configIndex = 0;
     struct UsbDev dev = dev_;
@@ -991,11 +994,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig009, TestSize.
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetConfig_1800
- * @tc.name: testHdiusbrequestTestSetConfig010
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetConfig_1800
+ * @tc.name: testHdiUsbRequestTestSetConfig010
  * @tc.desc: Sets the configuration information of a USB device. ({255, 1},1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig010, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestSetConfig010, TestSize.Level2)
 {
     uint8_t configIndex = 1;
     struct UsbDev dev = dev_;
@@ -1005,11 +1008,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig010, TestSize.
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetConfig_1900
- * @tc.name: testHdiusbrequestTestSetConfig011
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetConfig_1900
+ * @tc.name: testHdiUsbRequestTestSetConfig011
  * @tc.desc: Sets the configuration information of a USB device. ({255, 1},255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig011, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestSetConfig011, TestSize.Level2)
 {
     uint8_t configIndex = 255;
     struct UsbDev dev = dev_;
@@ -1019,11 +1022,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig011, TestSize.
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetConfig_2000
- * @tc.name: testHdiusbrequestTestSetConfig012
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetConfig_2000
+ * @tc.name: testHdiUsbRequestTestSetConfig012
  * @tc.desc: Sets the configuration information of a USB device. ({0, 255},0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig012, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestSetConfig012, TestSize.Level2)
 {
     uint8_t configIndex = 0;
     struct UsbDev dev = dev_;
@@ -1033,11 +1036,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig012, TestSize.
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetConfig_2100
- * @tc.name: testHdiusbrequestTestSetConfig013
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetConfig_2100
+ * @tc.name: testHdiUsbRequestTestSetConfig013
  * @tc.desc: Sets the configuration information of a USB device. ({1, 255},0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig013, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestSetConfig013, TestSize.Level2)
 {
     uint8_t configIndex = 0;
     struct UsbDev dev = dev_;
@@ -1047,11 +1050,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig013, TestSize.
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetConfig_2200
- * @tc.name: testHdiusbrequestTestSetConfig014
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetConfig_2200
+ * @tc.name: testHdiUsbRequestTestSetConfig014
  * @tc.desc: Sets the configuration information of a USB device. ({1, 255},1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig014, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestSetConfig014, TestSize.Level2)
 {
     uint8_t configIndex = 1;
     struct UsbDev dev = dev_;
@@ -1061,11 +1064,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig014, TestSize.
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetConfig_2300
- * @tc.name: testHdiusbrequestTestSetConfig015
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetConfig_2300
+ * @tc.name: testHdiUsbRequestTestSetConfig015
  * @tc.desc: Sets the configuration information of a USB device. ({1, 255},255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig015, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestSetConfig015, TestSize.Level2)
 {
     uint8_t configIndex = 255;
     struct UsbDev dev = dev_;
@@ -1075,11 +1078,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig015, TestSize.
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_SetConfig_2400
- * @tc.name: testHdiusbrequestTestSetConfig016
+ * @tc.number: SUB_Driver_Usb_RequestTest_SetConfig_2400
+ * @tc.name: testHdiUsbRequestTestSetConfig016
  * @tc.desc: Sets the configuration information of a USB device. ({255, 255},0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig016, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestSetConfig016, TestSize.Level2)
 {
     uint8_t configIndex = 0;
     struct UsbDev dev = dev_;
@@ -1089,11 +1092,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestSetConfig016, TestSize.
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ReleaseInterface_0900
- * @tc.name: testHdiusbrequestTestReleaseInterface001
+ * @tc.number: SUB_Driver_Usb_RequestTest_ReleaseInterface_0900
+ * @tc.name: testHdiUsbRequestTestReleaseInterface001
  * @tc.desc: Releases a USB interface. ({100, 255},0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface001, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestReleaseInterface001, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     struct UsbDev dev = {100, 255};
@@ -1102,11 +1105,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface001, Te
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ReleaseInterface_1000
- * @tc.name: testHdiusbrequestTestReleaseInterface002
+ * @tc.number: SUB_Driver_Usb_RequestTest_ReleaseInterface_1000
+ * @tc.name: testHdiUsbRequestTestReleaseInterface002
  * @tc.desc: Releases a USB interface. ({100, 255},1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface002, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestReleaseInterface002, TestSize.Level2)
 {
     int32_t interfaceId = 1;
     struct UsbDev dev = {100, 255};
@@ -1115,11 +1118,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface002, Te
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ReleaseInterface_1100
- * @tc.name: testHdiusbrequestTestReleaseInterface003
+ * @tc.number: SUB_Driver_Usb_RequestTest_ReleaseInterface_1100
+ * @tc.name: testHdiUsbRequestTestReleaseInterface003
  * @tc.desc: Releases a USB interface. ({100, 255},255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface003, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestReleaseInterface003, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     struct UsbDev dev = {100, 255};
@@ -1128,11 +1131,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface003, Te
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ReleaseInterface_1200
- * @tc.name: testHdiusbrequestTestReleaseInterface004
+ * @tc.number: SUB_Driver_Usb_RequestTest_ReleaseInterface_1200
+ * @tc.name: testHdiUsbRequestTestReleaseInterface004
  * @tc.desc: Releases a USB interface. ({1, 0},255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface004, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestReleaseInterface004, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     struct UsbDev dev = {1, 0};
@@ -1141,11 +1144,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface004, Te
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ReleaseInterface_1300
- * @tc.name: testHdiusbrequestTestReleaseInterface005
+ * @tc.number: SUB_Driver_Usb_RequestTest_ReleaseInterface_1300
+ * @tc.name: testHdiUsbRequestTestReleaseInterface005
  * @tc.desc: Releases a USB interface. ({255, 100},0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface005, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestReleaseInterface005, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     struct UsbDev dev = {255, 100};
@@ -1154,11 +1157,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface005, Te
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ReleaseInterface_1400
- * @tc.name: testHdiusbrequestTestReleaseInterface006
+ * @tc.number: SUB_Driver_Usb_RequestTest_ReleaseInterface_1400
+ * @tc.name: testHdiUsbRequestTestReleaseInterface006
  * @tc.desc: Releases a USB interface. ({255, 100},1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface006, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestReleaseInterface006, TestSize.Level2)
 {
     int32_t interfaceId = 1;
     struct UsbDev dev = {255, 100};
@@ -1167,11 +1170,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface006, Te
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ReleaseInterface_1500
- * @tc.name: testHdiusbrequestTestReleaseInterface007
+ * @tc.number: SUB_Driver_Usb_RequestTest_ReleaseInterface_1500
+ * @tc.name: testHdiUsbRequestTestReleaseInterface007
  * @tc.desc: Releases a USB interface. ({0, 1},255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface007, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestReleaseInterface007, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     struct UsbDev dev = {0, 1};
@@ -1180,11 +1183,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface007, Te
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ReleaseInterface_1600
- * @tc.name: testHdiusbrequestTestReleaseInterface008
+ * @tc.number: SUB_Driver_Usb_RequestTest_ReleaseInterface_1600
+ * @tc.name: testHdiUsbRequestTestReleaseInterface008
  * @tc.desc: Releases a USB interface. ({255, 0},0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface008, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestReleaseInterface008, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     struct UsbDev dev = {255, 0};
@@ -1193,11 +1196,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface008, Te
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ReleaseInterface_1700
- * @tc.name: testHdiusbrequestTestReleaseInterface009
+ * @tc.number: SUB_Driver_Usb_RequestTest_ReleaseInterface_1700
+ * @tc.name: testHdiUsbRequestTestReleaseInterface009
  * @tc.desc: Releases a USB interface. ({255, 1},0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface009, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestReleaseInterface009, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     struct UsbDev dev = {255, 1};
@@ -1206,11 +1209,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface009, Te
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ReleaseInterface_1800
- * @tc.name: testHdiusbrequestTestReleaseInterface010
+ * @tc.number: SUB_Driver_Usb_RequestTest_ReleaseInterface_1800
+ * @tc.name: testHdiUsbRequestTestReleaseInterface010
  * @tc.desc: Releases a USB interface. ({255, 1},1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface010, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestReleaseInterface010, TestSize.Level2)
 {
     int32_t interfaceId = 1;
     struct UsbDev dev = {255, 1};
@@ -1219,11 +1222,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface010, Te
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ReleaseInterface_1900
- * @tc.name: testHdiusbrequestTestReleaseInterface011
+ * @tc.number: SUB_Driver_Usb_RequestTest_ReleaseInterface_1900
+ * @tc.name: testHdiUsbRequestTestReleaseInterface011
  * @tc.desc: Releases a USB interface. ({255, 1},255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface011, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestReleaseInterface011, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     struct UsbDev dev = {255, 1};
@@ -1232,11 +1235,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface011, Te
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ReleaseInterface_2000
- * @tc.name: testHdiusbrequestTestReleaseInterface012
+ * @tc.number: SUB_Driver_Usb_RequestTest_ReleaseInterface_2000
+ * @tc.name: testHdiUsbRequestTestReleaseInterface012
  * @tc.desc: Releases a USB interface. ({0, 255},0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface012, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestReleaseInterface012, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     struct UsbDev dev = {0, 255};
@@ -1245,11 +1248,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface012, Te
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ReleaseInterface_2100
- * @tc.name: testHdiusbrequestTestReleaseInterface013
+ * @tc.number: SUB_Driver_Usb_RequestTest_ReleaseInterface_2100
+ * @tc.name: testHdiUsbRequestTestReleaseInterface013
  * @tc.desc: Releases a USB interface. ({1, 255},0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface013, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestReleaseInterface013, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     struct UsbDev dev = {1, 255};
@@ -1258,11 +1261,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface013, Te
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ReleaseInterface_2200
- * @tc.name: testHdiusbrequestTestReleaseInterface014
+ * @tc.number: SUB_Driver_Usb_RequestTest_ReleaseInterface_2200
+ * @tc.name: testHdiUsbRequestTestReleaseInterface014
  * @tc.desc: Releases a USB interface. ({1, 255},1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface014, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestReleaseInterface014, TestSize.Level2)
 {
     int32_t interfaceId = 1;
     struct UsbDev dev = {1, 255};
@@ -1271,11 +1274,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface014, Te
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ReleaseInterface_2300
- * @tc.name: testHdiusbrequestTestReleaseInterface015
+ * @tc.number: SUB_Driver_Usb_RequestTest_ReleaseInterface_2300
+ * @tc.name: testHdiUsbRequestTestReleaseInterface015
  * @tc.desc: Releases a USB interface. ({1, 255},255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface015, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestReleaseInterface015, TestSize.Level2)
 {
     int32_t interfaceId = 255;
     struct UsbDev dev = {1, 255};
@@ -1284,11 +1287,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface015, Te
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_ReleaseInterface_2400
- * @tc.name: testHdiusbrequestTestReleaseInterface016
+ * @tc.number: SUB_Driver_Usb_RequestTest_ReleaseInterface_2400
+ * @tc.name: testHdiUsbRequestTestReleaseInterface016
  * @tc.desc: Releases a USB interface. ({255, 255},0).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface016, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestReleaseInterface016, TestSize.Level2)
 {
     int32_t interfaceId = 0;
     struct UsbDev dev = {255, 255};
@@ -1297,11 +1300,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestReleaseInterface016, Te
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetDeviceDescriptor_0900
- * @tc.name: testHdiusbrequestTestGetDeviceDescriptor001
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetDeviceDescriptor_0900
+ * @tc.name: testHdiUsbRequestTestGetDeviceDescriptor001
  * @tc.desc: Obtains the USB device descriptor dev(255, 1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetDeviceDescriptor001, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetDeviceDescriptor001, TestSize.Level2)
 {
     struct UsbDev dev = {255, 1};
     std::vector<uint8_t> devData(MAX_BUFFER_LENGTH);
@@ -1310,11 +1313,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetDeviceDescriptor001,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetDeviceDescriptor_1000
- * @tc.name: testHdiusbrequestTestGetDeviceDescriptor002
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetDeviceDescriptor_1000
+ * @tc.name: testHdiUsbRequestTestGetDeviceDescriptor002
  * @tc.desc: Obtains the USB device descriptor dev(1, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetDeviceDescriptor002, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetDeviceDescriptor002, TestSize.Level2)
 {
     struct UsbDev dev = {1, 255};
     std::vector<uint8_t> devData(MAX_BUFFER_LENGTH);
@@ -1323,11 +1326,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetDeviceDescriptor002,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetStringDescriptor_0900
- * @tc.name: testHdiusbrequestTestGetStringDescriptor001
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetStringDescriptor_0900
+ * @tc.name: testHdiUsbRequestTestGetStringDescriptor001
  * @tc.desc: Obtains the string descriptor of a USB device based on the specified string ID. dev(0, 255) stringId = 1.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor001, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetStringDescriptor001, TestSize.Level2)
 {
     uint8_t stringId = 1;
     struct UsbDev dev = {0, 255};
@@ -1337,12 +1340,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor001,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetStringDescriptor_1000
- * @tc.name: testHdiusbrequestTestGetStringDescriptor002
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetStringDescriptor_1000
+ * @tc.name: testHdiUsbRequestTestGetStringDescriptor002
  * @tc.desc: Obtains the string descriptor of a USB device based on the specified string ID. dev(0, 255) stringId =
  * INVALID_NUM.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor002, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetStringDescriptor002, TestSize.Level2)
 {
     uint8_t stringId = INVALID_NUM;
     struct UsbDev dev = {0, 255};
@@ -1352,11 +1355,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor002,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetStringDescriptor_1100
- * @tc.name: testHdiusbrequestTestGetStringDescriptor003
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetStringDescriptor_1100
+ * @tc.name: testHdiUsbRequestTestGetStringDescriptor003
  * @tc.desc: Obtains the string descriptor of a USB device based on the specified string ID. dev(0, 255) stringId = 255.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor003, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetStringDescriptor003, TestSize.Level2)
 {
     uint8_t stringId = 255;
     struct UsbDev dev = {0, 255};
@@ -1366,11 +1369,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor003,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetStringDescriptor_1200
- * @tc.name: testHdiusbrequestTestGetStringDescriptor004
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetStringDescriptor_1200
+ * @tc.name: testHdiUsbRequestTestGetStringDescriptor004
  * @tc.desc: Obtains the string descriptor of a USB device based on the specified string ID. dev(255, 0) stringId = 1.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor004, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetStringDescriptor004, TestSize.Level2)
 {
     uint8_t stringId = 1;
     struct UsbDev dev = {255, 0};
@@ -1380,12 +1383,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor004,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetStringDescriptor_1300
- * @tc.name: testHdiusbrequestTestGetStringDescriptor005
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetStringDescriptor_1300
+ * @tc.name: testHdiUsbRequestTestGetStringDescriptor005
  * @tc.desc: Obtains the string descriptor of a USB device based on the specified string ID. dev(255, 0) stringId =
  * INVALID_NUM.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor005, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetStringDescriptor005, TestSize.Level2)
 {
     uint8_t stringId = INVALID_NUM;
     struct UsbDev dev = {255, 0};
@@ -1395,12 +1398,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor005,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetStringDescriptor_1400
- * @tc.name: testHdiusbrequestTestGetStringDescriptor006
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetStringDescriptor_1400
+ * @tc.name: testHdiUsbRequestTestGetStringDescriptor006
  * @tc.desc: Obtains the string descriptor of a USB device based on the specified string ID. dev(255, 0) stringId =
  * STRING_ID_INVALID.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor006, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetStringDescriptor006, TestSize.Level2)
 {
     uint8_t stringId = STRING_ID_INVALID;
     struct UsbDev dev = {255, 0};
@@ -1410,11 +1413,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor006,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetStringDescriptor_1500
- * @tc.name: testHdiusbrequestTestGetStringDescriptor007
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetStringDescriptor_1500
+ * @tc.name: testHdiUsbRequestTestGetStringDescriptor007
  * @tc.desc: Obtains the string descriptor of a USB device based on the specified string ID. dev(255, 0) stringId = 255.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor007, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetStringDescriptor007, TestSize.Level2)
 {
     uint8_t stringId = 255;
     struct UsbDev dev = {255, 0};
@@ -1424,11 +1427,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor007,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetStringDescriptor_1600
- * @tc.name: testHdiusbrequestTestGetStringDescriptor008
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetStringDescriptor_1600
+ * @tc.name: testHdiUsbRequestTestGetStringDescriptor008
  * @tc.desc: Obtains the string descriptor of a USB device based on the specified string ID. dev(1, 255) stringId = 0.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor008, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetStringDescriptor008, TestSize.Level2)
 {
     uint8_t stringId = 0;
     struct UsbDev dev = {1, 255};
@@ -1438,11 +1441,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor008,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetStringDescriptor_1700
- * @tc.name: testHdiusbrequestTestGetStringDescriptor009
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetStringDescriptor_1700
+ * @tc.name: testHdiUsbRequestTestGetStringDescriptor009
  * @tc.desc: Obtains the string descriptor of a USB device based on the specified string ID. dev(1, 255) stringId = 1.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor009, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetStringDescriptor009, TestSize.Level2)
 {
     uint8_t stringId = 1;
     struct UsbDev dev = {1, 255};
@@ -1452,12 +1455,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor009,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetStringDescriptor_1800
- * @tc.name: testHdiusbrequestTestGetStringDescriptor010
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetStringDescriptor_1800
+ * @tc.name: testHdiUsbRequestTestGetStringDescriptor010
  * @tc.desc: Obtains the string descriptor of a USB device based on the specified string ID. dev(1, 255) stringId =
  * INVALID_NUM.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor010, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetStringDescriptor010, TestSize.Level2)
 {
     uint8_t stringId = INVALID_NUM;
     struct UsbDev dev = {1, 255};
@@ -1467,12 +1470,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor010,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetStringDescriptor_1900
- * @tc.name: testHdiusbrequestTestGetStringDescriptor011
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetStringDescriptor_1900
+ * @tc.name: testHdiUsbRequestTestGetStringDescriptor011
  * @tc.desc: Obtains the string descriptor of a USB device based on the specified string ID. dev(1, 255) stringId =
  * STRING_ID_INVALID.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor011, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetStringDescriptor011, TestSize.Level2)
 {
     uint8_t stringId = STRING_ID_INVALID;
     struct UsbDev dev = {1, 255};
@@ -1482,11 +1485,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor011,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetStringDescriptor_2000
- * @tc.name: testHdiusbrequestTestGetStringDescriptor012
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetStringDescriptor_2000
+ * @tc.name: testHdiUsbRequestTestGetStringDescriptor012
  * @tc.desc: Obtains the string descriptor of a USB device based on the specified string ID. dev(1, 255) stringId = 255.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor012, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetStringDescriptor012, TestSize.Level2)
 {
     uint8_t stringId = 255;
     struct UsbDev dev = {1, 255};
@@ -1496,11 +1499,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor012,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetStringDescriptor_2100
- * @tc.name: testHdiusbrequestTestGetStringDescriptor013
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetStringDescriptor_2100
+ * @tc.name: testHdiUsbRequestTestGetStringDescriptor013
  * @tc.desc: Obtains the string descriptor of a USB device based on the specified string ID. dev(255, 1) stringId = 0.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor013, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetStringDescriptor013, TestSize.Level2)
 {
     uint8_t stringId = 0;
     struct UsbDev dev = {255, 1};
@@ -1510,11 +1513,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor013,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetStringDescriptor_2200
- * @tc.name: testHdiusbrequestTestGetStringDescriptor014
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetStringDescriptor_2200
+ * @tc.name: testHdiUsbRequestTestGetStringDescriptor014
  * @tc.desc: Obtains the string descriptor of a USB device based on the specified string ID. dev(255, 1) stringId = 1.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor014, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetStringDescriptor014, TestSize.Level2)
 {
     uint8_t stringId = 1;
     struct UsbDev dev = {255, 1};
@@ -1524,12 +1527,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor014,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetStringDescriptor_2300
- * @tc.name: testHdiusbrequestTestGetStringDescriptor015
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetStringDescriptor_2300
+ * @tc.name: testHdiUsbRequestTestGetStringDescriptor015
  * @tc.desc: Obtains the string descriptor of a USB device based on the specified string ID. dev(255, 1) stringId =
  * INVALID_NUM.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor015, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetStringDescriptor015, TestSize.Level2)
 {
     uint8_t stringId = INVALID_NUM;
     struct UsbDev dev = {255, 1};
@@ -1539,12 +1542,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor015,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetStringDescriptor_2400
- * @tc.name: testHdiusbrequestTestGetStringDescriptor016
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetStringDescriptor_2400
+ * @tc.name: testHdiUsbRequestTestGetStringDescriptor016
  * @tc.desc: Obtains the string descriptor of a USB device based on the specified string ID. dev(255, 1) stringId =
  * STRING_ID_INVALID.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor016, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetStringDescriptor016, TestSize.Level2)
 {
     uint8_t stringId = STRING_ID_INVALID;
     struct UsbDev dev = {255, 1};
@@ -1554,11 +1557,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor016,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetStringDescriptor_2500
- * @tc.name: testHdiusbrequestTestGetStringDescriptor017
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetStringDescriptor_2500
+ * @tc.name: testHdiUsbRequestTestGetStringDescriptor017
  * @tc.desc: Obtains the string descriptor of a USB device based on the specified string ID. dev(255, 1) stringId = 255.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor017, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetStringDescriptor017, TestSize.Level2)
 {
     uint8_t stringId = 255;
     struct UsbDev dev = {255, 1};
@@ -1568,11 +1571,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor017,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetStringDescriptor_2600
- * @tc.name: testHdiusbrequestTestGetStringDescriptor018
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetStringDescriptor_2600
+ * @tc.name: testHdiUsbRequestTestGetStringDescriptor018
  * @tc.desc: Obtains the string descriptor of a USB device based on the specified string ID. dev(255, 255) stringId = 1.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor018, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetStringDescriptor018, TestSize.Level2)
 {
     uint8_t stringId = 1;
     struct UsbDev dev = {255, 255};
@@ -1582,12 +1585,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor018,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetStringDescriptor_2700
- * @tc.name: testHdiusbrequestTestGetStringDescriptor019
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetStringDescriptor_2700
+ * @tc.name: testHdiUsbRequestTestGetStringDescriptor019
  * @tc.desc: Obtains the string descriptor of a USB device based on the specified string ID. dev(255, 255) stringId =
  * INVALID_NUM.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor019, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetStringDescriptor019, TestSize.Level2)
 {
     uint8_t stringId = INVALID_NUM;
     struct UsbDev dev = {255, 255};
@@ -1597,12 +1600,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor019,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetStringDescriptor_2800
- * @tc.name: testHdiusbrequestTestGetStringDescriptor020
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetStringDescriptor_2800
+ * @tc.name: testHdiUsbRequestTestGetStringDescriptor020
  * @tc.desc: Obtains the string descriptor of a USB device based on the specified string ID. dev(255, 255) stringId =
  * 255.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor020, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetStringDescriptor020, TestSize.Level2)
 {
     uint8_t stringId = 255;
     struct UsbDev dev = {255, 255};
@@ -1612,12 +1615,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetStringDescriptor020,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetConfigDescriptor_0900
- * @tc.name: testHdiusbrequestTestGetConfigDescriptor001
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetConfigDescriptor_0900
+ * @tc.name: testHdiUsbRequestTestGetConfigDescriptor001
  * @tc.desc: Obtains the configuration descriptor of a USB device based on the specified config ID. dev(0, 255)
  * configId = 1.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor001, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetConfigDescriptor001, TestSize.Level2)
 {
     uint8_t configId = 1;
     struct UsbDev dev = {0, 255};
@@ -1627,12 +1630,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor001,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetConfigDescriptor_1000
- * @tc.name: testHdiusbrequestTestGetConfigDescriptor002
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetConfigDescriptor_1000
+ * @tc.name: testHdiUsbRequestTestGetConfigDescriptor002
  * @tc.desc: Obtains the configuration descriptor of a USB device based on the specified config ID. dev(0, 255)
  * configId = 255.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor002, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetConfigDescriptor002, TestSize.Level2)
 {
     uint8_t configId = 255;
     struct UsbDev dev = {0, 255};
@@ -1642,12 +1645,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor002,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetConfigDescriptor_1100
- * @tc.name: testHdiusbrequestTestGetConfigDescriptor003
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetConfigDescriptor_1100
+ * @tc.name: testHdiUsbRequestTestGetConfigDescriptor003
  * @tc.desc: Obtains the configuration descriptor of a USB device based on the specified config ID. dev(1, 255)
  * configId = 0.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor003, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetConfigDescriptor003, TestSize.Level2)
 {
     uint8_t configId = 0;
     struct UsbDev dev = {1, 255};
@@ -1657,12 +1660,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor003,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetConfigDescriptor_1200
- * @tc.name: testHdiusbrequestTestGetConfigDescriptor004
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetConfigDescriptor_1200
+ * @tc.name: testHdiUsbRequestTestGetConfigDescriptor004
  * @tc.desc: Obtains the configuration descriptor of a USB device based on the specified config ID. dev(1, 255)
  * configId = 1.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor004, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetConfigDescriptor004, TestSize.Level2)
 {
     uint8_t configId = 1;
     struct UsbDev dev = {1, 255};
@@ -1672,12 +1675,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor004,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetConfigDescriptor_1300
- * @tc.name: testHdiusbrequestTestGetConfigDescriptor005
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetConfigDescriptor_1300
+ * @tc.name: testHdiUsbRequestTestGetConfigDescriptor005
  * @tc.desc: Obtains the configuration descriptor of a USB device based on the specified config ID. dev(1, 255)
  * configId = CONFIG_ID_INVALID.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor005, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetConfigDescriptor005, TestSize.Level2)
 {
     uint8_t configId = CONFIG_ID_INVALID;
     struct UsbDev dev = {1, 255};
@@ -1687,12 +1690,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor005,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetConfigDescriptor_1400
- * @tc.name: testHdiusbrequestTestGetConfigDescriptor006
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetConfigDescriptor_1400
+ * @tc.name: testHdiUsbRequestTestGetConfigDescriptor006
  * @tc.desc: Obtains the configuration descriptor of a USB device based on the specified config ID. dev(1, 255)
  * configId = 255.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor006, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetConfigDescriptor006, TestSize.Level2)
 {
     uint8_t configId = 255;
     struct UsbDev dev = {1, 255};
@@ -1702,12 +1705,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor006,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetConfigDescriptor_1500
- * @tc.name: testHdiusbrequestTestGetConfigDescriptor007
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetConfigDescriptor_1500
+ * @tc.name: testHdiUsbRequestTestGetConfigDescriptor007
  * @tc.desc: Obtains the configuration descriptor of a USB device based on the specified config ID. dev(255, 0)
  * configId = 1.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor007, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetConfigDescriptor007, TestSize.Level2)
 {
     uint8_t configId = 1;
     struct UsbDev dev = {255, 0};
@@ -1717,12 +1720,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor007,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetConfigDescriptor_1600
- * @tc.name: testHdiusbrequestTestGetConfigDescriptor008
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetConfigDescriptor_1600
+ * @tc.name: testHdiUsbRequestTestGetConfigDescriptor008
  * @tc.desc: Obtains the configuration descriptor of a USB device based on the specified config ID. dev(255, 0)
  * configId = 255.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor008, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetConfigDescriptor008, TestSize.Level2)
 {
     uint8_t configId = 255;
     struct UsbDev dev = {255, 0};
@@ -1732,12 +1735,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor008,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetConfigDescriptor_1700
- * @tc.name: testHdiusbrequestTestGetConfigDescriptor009
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetConfigDescriptor_1700
+ * @tc.name: testHdiUsbRequestTestGetConfigDescriptor009
  * @tc.desc: Obtains the configuration descriptor of a USB device based on the specified config ID. dev(255, 1)
  * configId = 0.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor009, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetConfigDescriptor009, TestSize.Level2)
 {
     uint8_t configId = 0;
     struct UsbDev dev = {255, 1};
@@ -1747,12 +1750,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor009,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetConfigDescriptor_1800
- * @tc.name: testHdiusbrequestTestGetConfigDescriptor010
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetConfigDescriptor_1800
+ * @tc.name: testHdiUsbRequestTestGetConfigDescriptor010
  * @tc.desc: Obtains the configuration descriptor of a USB device based on the specified config ID. dev(255, 1)
  * configId = 1.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor010, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetConfigDescriptor010, TestSize.Level2)
 {
     uint8_t configId = 1;
     struct UsbDev dev = {255, 1};
@@ -1762,12 +1765,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor010,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetConfigDescriptor_1900
- * @tc.name: testHdiusbrequestTestGetConfigDescriptor011
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetConfigDescriptor_1900
+ * @tc.name: testHdiUsbRequestTestGetConfigDescriptor011
  * @tc.desc: Obtains the configuration descriptor of a USB device based on the specified config ID. dev(255, 1)
  * configId = CONFIG_ID_INVALID.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor011, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetConfigDescriptor011, TestSize.Level2)
 {
     uint8_t configId = CONFIG_ID_INVALID;
     struct UsbDev dev = {255, 1};
@@ -1777,12 +1780,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor011,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetConfigDescriptor_2000
- * @tc.name: testHdiusbrequestTestGetConfigDescriptor012
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetConfigDescriptor_2000
+ * @tc.name: testHdiUsbRequestTestGetConfigDescriptor012
  * @tc.desc: Obtains the configuration descriptor of a USB device based on the specified config ID. dev(255, 1)
  * configId = 255.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor012, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetConfigDescriptor012, TestSize.Level2)
 {
     uint8_t configId = 255;
     struct UsbDev dev = {255, 1};
@@ -1792,12 +1795,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor012,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetConfigDescriptor_2100
- * @tc.name: testHdiusbrequestTestGetConfigDescriptor013
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetConfigDescriptor_2100
+ * @tc.name: testHdiUsbRequestTestGetConfigDescriptor013
  * @tc.desc: Obtains the configuration descriptor of a USB device based on the specified config ID. dev(255, 255)
  * configId = 1.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor013, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetConfigDescriptor013, TestSize.Level2)
 {
     uint8_t configId = 1;
     struct UsbDev dev = {255, 255};
@@ -1807,12 +1810,12 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor013,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetConfigDescriptor_2200
- * @tc.name: testHdiusbrequestTestGetConfigDescriptor014
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetConfigDescriptor_2200
+ * @tc.name: testHdiUsbRequestTestGetConfigDescriptor014
  * @tc.desc: Obtains the configuration descriptor of a USB device based on the specified config ID. dev(255, 255)
  * configId = 255.
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor014, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetConfigDescriptor014, TestSize.Level2)
 {
     uint8_t configId = 255;
     struct UsbDev dev = {255, 255};
@@ -1822,11 +1825,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfigDescriptor014,
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetRawDescriptor_0400
- * @tc.name: testHdiusbrequestTestGetRawDescriptor001
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetRawDescriptor_0400
+ * @tc.name: testHdiUsbRequestTestGetRawDescriptor001
  * @tc.desc: Obtains the raw descriptor. dev(1, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetRawDescriptor001, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetRawDescriptor001, TestSize.Level2)
 {
     struct UsbDev dev = {1, 255};
     std::vector<uint8_t> rawData;
@@ -1835,11 +1838,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetRawDescriptor001, Te
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetRawDescriptor_0500
- * @tc.name: testHdiusbrequestTestGetRawDescriptor002
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetRawDescriptor_0500
+ * @tc.name: testHdiUsbRequestTestGetRawDescriptor002
  * @tc.desc: Obtains the raw descriptor. dev(255, 1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetRawDescriptor002, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetRawDescriptor002, TestSize.Level2)
 {
     struct UsbDev dev = {255, 1};
     std::vector<uint8_t> rawData;
@@ -1848,11 +1851,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetRawDescriptor002, Te
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetRawDescriptor_0600
- * @tc.name: testHdiusbrequestTestGetRawDescriptor003
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetRawDescriptor_0600
+ * @tc.name: testHdiUsbRequestTestGetRawDescriptor003
  * @tc.desc: Obtains the raw descriptor. dev(255, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetRawDescriptor003, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetRawDescriptor003, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     std::vector<uint8_t> rawData;
@@ -1861,11 +1864,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetRawDescriptor003, Te
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetFileDescriptor_0500
- * @tc.name: testHdiusbrequestTestGetFileDescriptor001
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetFileDescriptor_0500
+ * @tc.name: testHdiUsbRequestTestGetFileDescriptor001
  * @tc.desc: Obtains the file descriptor. dev(1, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetFileDescriptor001, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetFileDescriptor001, TestSize.Level2)
 {
     struct UsbDev dev = {1, 255};
     int32_t fd = MAX_BUFFER_LENGTH;
@@ -1874,11 +1877,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetFileDescriptor001, T
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetFileDescriptor_0600
- * @tc.name: testHdiusbrequestTestGetFileDescriptor002
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetFileDescriptor_0600
+ * @tc.name: testHdiUsbRequestTestGetFileDescriptor002
  * @tc.desc: Obtains the file descriptor. dev(255, 1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetFileDescriptor002, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetFileDescriptor002, TestSize.Level2)
 {
     struct UsbDev dev = {255, 1};
     int32_t fd = MAX_BUFFER_LENGTH;
@@ -1887,11 +1890,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetFileDescriptor002, T
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetFileDescriptor_0700
- * @tc.name: testHdiusbrequestTestGetFileDescriptor003
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetFileDescriptor_0700
+ * @tc.name: testHdiUsbRequestTestGetFileDescriptor003
  * @tc.desc: Obtains the file descriptor. dev(255, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetFileDescriptor003, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetFileDescriptor003, TestSize.Level2)
 {
     struct UsbDev dev = {255, 255};
     int32_t fd = MAX_BUFFER_LENGTH;
@@ -1900,11 +1903,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetFileDescriptor003, T
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetConfig_0500
- * @tc.name: testHdiusbrequestTestGetConfig001
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetConfig_0500
+ * @tc.name: testHdiUsbRequestTestGetConfig001
  * @tc.desc: Obtains the configuration information of a USB device. dev(1, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfig001, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetConfig001, TestSize.Level2)
 {
     uint8_t configIndex = INDEX_1;
     struct UsbDev dev = {1, 255};
@@ -1913,11 +1916,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfig001, TestSize.
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetConfig_0600
- * @tc.name: testHdiusbrequestTestGetConfig002
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetConfig_0600
+ * @tc.name: testHdiUsbRequestTestGetConfig002
  * @tc.desc: Obtains the configuration information of a USB device. dev(255, 1).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfig002, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetConfig002, TestSize.Level2)
 {
     uint8_t configIndex = INDEX_1;
     struct UsbDev dev = {255, 1};
@@ -1926,11 +1929,11 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfig002, TestSize.
 }
 
 /**
- * @tc.number: SUB_Driver_usb_requestTest_GetConfig_0700
- * @tc.name: testHdiusbrequestTestGetConfig003
+ * @tc.number: SUB_Driver_Usb_RequestTest_GetConfig_0700
+ * @tc.name: testHdiUsbRequestTestGetConfig003
  * @tc.desc: Obtains the configuration information of a USB device. dev(255, 255).
  */
-HWTEST_F(UsbdRequestTestAdditional, testHdiusbrequestTestGetConfig003, TestSize.Level2)
+HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestGetConfig003, TestSize.Level2)
 {
     uint8_t configIndex = INDEX_1;
     struct UsbDev dev = {255, 255};

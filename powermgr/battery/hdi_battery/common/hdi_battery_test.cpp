@@ -94,7 +94,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest001, TestSize.Level1)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest002, TestSize.Level1)
 {
         printf("HdfBatteryHdiTest002: start.");
-        int32_t ret = g_batteryInterface->Register(g_callback);
+        int32_t ret = g_batteryInterface->Register(sptr<IBatteryCallback>(g_callback) = nullptr);
         EXPECT_EQ(0, ret) << "HdfBatteryHdiTest002 failed";
 
         printf("HdfBatteryHdiTest002: return.");

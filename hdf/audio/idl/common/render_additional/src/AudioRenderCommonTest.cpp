@@ -3155,7 +3155,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode001, TestSi
 }
 
 /**
- * @tc.number: SUB_Driver_Audio_TurnStandbyMode_0300
+ * @tc.number: SUB_Driver_Audio_TurnStandbyMode_0200
  * @tc.name: testCommonRenderTurnStandbyMode002
  * @tc.desc: Sets or cancels the standby mode of the audio device.
  */
@@ -3176,7 +3176,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode002, TestSi
 
 /**
  * @tc.number: SUB_Driver_Audio_TurnStandbyMode_0300
- * @tc.name: testCommonRenderTurnStandbyMode005
+ * @tc.name: testCommonRenderTurnStandbyMode003
  * @tc.desc: Sets or cancels the standby mode of the audio device.
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode003, TestSize.Level1)

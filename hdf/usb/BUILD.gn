@@ -22,21 +22,22 @@ group("HatsHdfUsbTest") {
   if (hats_rich == false) {
     deps = [
       "autoFunctionTest:HatsHdfUsbAutoFunctionTest",
-      "requestTest_additional:HatsHdfUsbRequestAdditionalTest",
-      "transferTest_additional:HatsHdfUsbTransferAdditionalTest",
-    ]
-  } else {
-    deps = [
-      "autoFunctionTest:HatsHdfUsbAutoFunctionTest",
+
       # "deviceTest:HatsHdfUsbDeviceTest",
       # "functionTest:HatsHdfUsbFunctionTest",
+      # "mtpTest:HatsHdfUsbFnMtpTest",
       # "requestTest:HatsHdfUsbRequestTest",
+      "requestTest_additional:HatsHdfUsbRequestAdditionalTest",
+
       # "transferTest:HatsHdfUsbTransferTest",
+      "transferTest_additional:HatsHdfUsbTransferAdditionalTest",
+
       # "usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
       # "usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",
       # "usbdBenchmarkTest:HatsHdfUsbBenchmarkRequestTest",
       # "usbdBenchmarkTest:HatsHdfUsbBenchmarkTransferTest",
-      # "mtpTest:HatsHdfUsbFnMtpTest",
     ]
+  } else {
+    deps = [ "autoFunctionTest:HatsHdfUsbAutoFunctionTest" ]
   }
 }

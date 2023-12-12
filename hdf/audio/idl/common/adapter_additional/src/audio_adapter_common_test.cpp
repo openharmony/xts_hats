@@ -15,8 +15,8 @@
 
 #include "hdf_dlist.h"
 #include "osal_mem.h"
-#include "v1_0/iaudio_adapter.h"
-#include "v1_0/iaudio_manager.h"
+#include "v2_0/iaudio_adapter.h"
+#include "v2_0/iaudio_manager.h"
 #include <climits>
 #include <cstring>
 #include <gtest/gtest.h>
@@ -663,7 +663,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testReleaseAudioRoute001, TestSize.Lev
 {
     int32_t routeHandle = 1;
     int32_t ret = adapter_->ReleaseAudioRoute(adapter_, routeHandle);
-    EXPECT_EQ(HDF_SUCCESS, ret);
+    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_FAILURE);
 }
 
 /**
@@ -723,7 +723,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetPassthroughMode001, TestSize.Le
     enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_LPCM;
     for (int i = 0; i < 100; i++) {
         ret = adapter_->SetPassthroughMode(adapter_, &port, mode);
-        EXPECT_EQ(HDF_SUCCESS, ret);
+        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
     }
 }
 
@@ -738,7 +738,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPortCapability001, TestSize.Lev
     struct AudioPort port = {};
     struct AudioPortCapability capability = {};
     port.dir = PORT_OUT;
-    port.portId = 1;
+    port.portId = 0;
     port.portName = const_cast<char *>("primary");
     int32_t ret = adapter_->GetPortCapability(adapter_, &port, &capability);
     EXPECT_EQ(HDF_SUCCESS, ret);

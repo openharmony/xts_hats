@@ -14,8 +14,8 @@
  */
 
 #include "osal_mem.h"
-#include "v1_0/iaudio_capture.h"
-#include "v1_0/iaudio_manager.h"
+#include "v2_0/iaudio_capture.h"
+#include "v2_0/iaudio_manager.h"
 #include <climits>
 #include <gtest/gtest.h>
 

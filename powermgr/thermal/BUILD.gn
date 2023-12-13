@@ -23,8 +23,6 @@ group("HatsPowermgrThermalTest") {
       "hdi_thermal_additional:HatsPowermgrThermalAdditionalTest",
     ]
   } else {
-    deps = [
-      "hdi_thermal:HatsPowermgrThermalTest",
-    ]
+    deps = [ "hdi_thermal:HatsPowermgrThermalTest" ]
   }
 }

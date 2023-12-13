@@ -302,7 +302,6 @@ HWTEST_F(RtgInterfaceTest, RtgInterfaceEndFrameFreqWithErrorParam, TestSize.Leve
     int ret;
     ret = EndFrameFreq(-1);
     EXPECT_NE(ret, 0);
-
 }
 
 /**
@@ -369,8 +368,8 @@ HWTEST_F(RtgInterfaceTest, RtgInterfaceSetMinUtil, TestSize.Level1)
 HWTEST_F(RtgInterfaceTest, RtgInterfaceSetMinUtilWithNoAddThreadtoGrp, TestSize.Level1)
 {
     int ret;
-	int grpId;
-	grpId = CreateNewRtgGrp(VIP, 0);
+    int grpId;
+    grpId = CreateNewRtgGrp(VIP, 0);
     EXPECT_GT(grpId, 0);
     ret = SetMinUtil(0);
     EXPECT_NE(ret, 0);
@@ -440,7 +439,7 @@ HWTEST_F(RtgInterfaceTest, RtgInterfaceSetMarginWithErrorParam, TestSize.Level1)
     EXPECT_GT(grpId, 0);
     ret = SetMargin(-101);
     EXPECT_NE(ret, 0);
-	ret = SetMargin(65536);
+    ret = SetMargin(65536);
     EXPECT_NE(ret, 0);
     ret = DestroyRtgGrp(grpId);
     EXPECT_EQ(ret, 0);
@@ -475,11 +474,11 @@ HWTEST_F(RtgInterfaceTest, RtgInterfaceSetErrorAttr, TestSize.Level1)
     int grpId;
     grpId = CreateNewRtgGrp(VIP, 0);
     EXPECT_GT(grpId, 0);
-	ret = SetFrameRateAndPrioType(grpId, 0, VIP);
+    ret = SetFrameRateAndPrioType(grpId, 0, VIP);
     EXPECT_NE(ret, 0);
     ret = SetFrameRateAndPrioType(grpId, -1, VIP);
     EXPECT_NE(ret, 0);
-	ret = SetFrameRateAndPrioType(grpId, 121, VIP);
+    ret = SetFrameRateAndPrioType(grpId, 121, VIP);
     EXPECT_NE(ret, 0);
     ret = DestroyRtgGrp(grpId);
     EXPECT_EQ(ret, 0);

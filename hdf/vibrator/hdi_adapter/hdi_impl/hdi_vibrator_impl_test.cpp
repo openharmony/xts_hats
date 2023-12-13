@@ -28,9 +28,9 @@ using namespace OHOS::HDI::Vibrator::V1_1;
 using namespace testing::ext;
 
 namespace {
-    const std::string DEVICETYPE_KEY = "const.product.devicetype";
-    const std::string DEVICETYPE_TYPE = "phone";
-    sptr<IVibratorInterface> g_vibratorInterface = nullptr;
+
+    HapticCapacity g_hapticCapacity;
+    sptr<V1_2::IVibratorInterface> g_vibratorInterface = nullptr;
     const std::vector<std::string> g_effect{"haptic.log_press.light","haptic.slide.light","haptic.threshold","haptic.long_press.medium","haptic.fail","haptic.common.notice1","haptic.common.success","haptic.charging","haptic.long_press.heavy"};
     
 }
@@ -45,7 +45,7 @@ public:
 
 void HatsHdfVibratorImplTest::SetUpTestCase()
 {
-    g_vibratorInterface = IVibratorInterface::Get();
+    g_vibratorInterface = V1_2::IVibratorInterface::Get();
 }
 void HatsHdfVibratorImplTest::TearDownTestCase()
 {
@@ -75,7 +75,7 @@ HWTEST_F(HatsHdfVibratorImplTest, SUB_Vibrator_HDI_CheckVibratorInstanceIsEmpty_
 HWTEST_F(HatsHdfVibratorImplTest, SUB_Vibrator_HDI_EnableCompositeEffectTest_0010, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
-    if (OHOS::system::GetParameter(PHONE_KEY, "") == PHONE_TYPE) {
+    if (g_hapticCapacity.isSupportPresetMapping) {
         PrimitiveEffect primitiveEffect1 { 0, 60007, 0};
         PrimitiveEffect primitiveEffect2 { 1000, 60007, 0};
         PrimitiveEffect primitiveEffect3 { 1000, 60007, 0};
@@ -109,7 +109,7 @@ HWTEST_F(HatsHdfVibratorImplTest, SUB_Vibrator_HDI_EnableCompositeEffectTest_001
 HWTEST_F(HatsHdfVibratorImplTest, SUB_Vibrator_HDI_EnableCompositeEffectTest_0020, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
-    if (OHOS::system::GetParameter(DEVICETYPE_KEY, "") == PHONE_TYPE) {
+        if (g_hapticCapacity.isSupportPresetMapping) {
         PrimitiveEffect primitiveEffect1 { 0, 60007, 0};
         PrimitiveEffect primitiveEffect2 { 1000, 60007, 0};
         PrimitiveEffect primitiveEffect3 { 1000, 60007, 0};
@@ -175,7 +175,7 @@ HWTEST_F(HatsHdfVibratorImplTest, SUB_Vibrator_HDI_GetEffectInfoTest_0020, Funct
 HWTEST_F(HatsHdfVibratorImplTest, SUB_Vibrator_HDI_IsVibratorRunningTest_0010, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
-    if (OHOS::system::GetParameter(DEVICETYPE_KEY, "") == PHONE_TYPE) {
+        if (g_hapticCapacity.isSupportPresetMapping) {
         PrimitiveEffect primitiveEffect1 { 0, 60007, 0};
         PrimitiveEffect primitiveEffect2 { 1000, 60007, 0};
         PrimitiveEffect primitiveEffect3 { 1000, 60007, 0};

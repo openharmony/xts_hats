@@ -80,13 +80,13 @@ void UsbdDeviceTest::SetUp(void) {}
 void UsbdDeviceTest::TearDown(void) {}
 
 /**
- * @tc.name: SUB_USB_HDI_0010
+ * @tc.name: SUB_USB_HostManager_HDI_Func_0100
  * @tc.desc: Test functions to OpenDevice
  * @tc.desc: int32_t OpenDevice(const UsbDev &dev);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0010, Function | MediumTest | Level1)
+HWTEST_F(UsbdDeviceTest, SUB_USB_HostManager_HDI_Func_0100, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     auto ret = g_usbInterface->OpenDevice(dev);
@@ -95,13 +95,13 @@ HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0010, Function | MediumTest | Level1)
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0020
+ * @tc.name: SUB_USB_HostManager_HDI_Compatibility_0100
  * @tc.desc: Test functions to OpenDevice
  * @tc.desc: int32_t OpenDevice(const UsbDev &dev);
  * @tc.desc: Negative test: parameters exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0020, Function | MediumTest | Level1)
+HWTEST_F(UsbdDeviceTest, SUB_USB_HostManager_HDI_Compatibility_0100, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { BUS_NUM_255, dev_.devAddr };
     auto ret = g_usbInterface->OpenDevice(dev);
@@ -110,13 +110,13 @@ HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0020, Function | MediumTest | Level1)
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0030
+ * @tc.name: SUB_USB_HostManager_HDI_Compatibility_0200
  * @tc.desc: Test functions to OpenDevice
  * @tc.desc: int32_t OpenDevice(const UsbDev &dev);
  * @tc.desc: Negative test: parameters exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0030, Function | MediumTest | Level1)
+HWTEST_F(UsbdDeviceTest, SUB_USB_HostManager_HDI_Compatibility_0200, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { dev_.busNum, DEV_ADDR_255 };
     auto ret = g_usbInterface->OpenDevice(dev);
@@ -125,13 +125,13 @@ HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0030, Function | MediumTest | Level1)
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0040
+ * @tc.name: SUB_USB_HostManager_HDI_Compatibility_0300
  * @tc.desc: Test functions to OpenDevice
  * @tc.desc: int32_t OpenDevice(const UsbDev &dev);
  * @tc.desc: Negative test: parameters exception, busNum && devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0040, Function | MediumTest | Level1)
+HWTEST_F(UsbdDeviceTest, SUB_USB_HostManager_HDI_Compatibility_0300, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { BUS_NUM_255, DEV_ADDR_255 };
     auto ret = g_usbInterface->OpenDevice(dev);
@@ -142,13 +142,13 @@ HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0040, Function | MediumTest | Level1)
 /**********************************************************************************************************/
 
 /**
- * @tc.name: SUB_USB_HDI_0050
+ * @tc.name: SUB_USB_HostManager_HDI_Func_1400
  * @tc.desc: Test functions to CloseDevice
  * @tc.desc: int32_t CloseDevice(const UsbDev &dev);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0050, Function | MediumTest | Level1)
+HWTEST_F(UsbdDeviceTest, SUB_USB_HostManager_HDI_Func_1400, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     auto ret = g_usbInterface->OpenDevice(dev);
@@ -160,13 +160,13 @@ HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0050, Function | MediumTest | Level1)
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0060
+ * @tc.name: SUB_USB_HostManager_HDI_Compatibility_7000
  * @tc.desc: Test functions to CloseDevice
  * @tc.desc: int32_t CloseDevice(const UsbDev &dev);
  * @tc.desc: Negative test: parameters exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0060, Function | MediumTest | Level1)
+HWTEST_F(UsbdDeviceTest, SUB_USB_HostManager_HDI_Compatibility_7000, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     auto ret = g_usbInterface->OpenDevice(dev);
@@ -181,13 +181,13 @@ HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0060, Function | MediumTest | Level1)
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0070
+ * @tc.name: SUB_USB_HostManager_HDI_Compatibility_7100
  * @tc.desc: Test functions to CloseDevice
  * @tc.desc: int32_t CloseDevice(const UsbDev &dev);
  * @tc.desc: Negative test: parameters exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0070, Function | MediumTest | Level1)
+HWTEST_F(UsbdDeviceTest, SUB_USB_HostManager_HDI_Compatibility_7100, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     auto ret = g_usbInterface->OpenDevice(dev);
@@ -202,13 +202,13 @@ HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0070, Function | MediumTest | Level1)
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0080
+ * @tc.name: SUB_USB_HostManager_HDI_Compatibility_7200
  * @tc.desc: Test functions to CloseDevice
  * @tc.desc: int32_t CloseDevice(const UsbDev &dev);
  * @tc.desc: Negative test: parameters exception, busNum && devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdDeviceTest, SUB_USB_HDI_0080, Function | MediumTest | Level1)
+HWTEST_F(UsbdDeviceTest, SUB_USB_HostManager_HDI_Compatibility_7200, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     auto ret = g_usbInterface->OpenDevice(dev);

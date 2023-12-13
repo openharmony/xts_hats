@@ -19,14 +19,14 @@
 #include "sensor_callback_impl.h"
 #include "sensor_if.h"
 #include "sensor_type.h"
-#include "v1_1/isensor_interface.h"
+#include "v2_0/isensor_interface.h"
 #include <cmath>
 #include <cstdio>
 #include <gtest/gtest.h>
 #include <securec.h>
 #include <unistd.h>
 
-using namespace OHOS::HDI::Sensor::V1_1;
+using namespace OHOS::HDI::Sensor::V2_0;
 using namespace testing::ext;
 
 namespace {
@@ -669,7 +669,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister008, TestSiz
     int32_t ret = g_sensorInterface->GetAllSensorInfo(g_info);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
     ret = g_sensorInterface->Unregister(TRADITIONAL_SENSOR_TYPE, g_medicalCallback);
-    EXPECT_EQ(SENSOR_FAILURE, ret);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
 }
 
 /**
@@ -687,7 +687,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorUnregister009, TestSiz
         int32_t ret = g_sensorInterface->GetAllSensorInfo(g_info);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
         ret = g_sensorInterface->Unregister(TRADITIONAL_SENSOR_TYPE, g_medicalCallback);
-        EXPECT_EQ(SENSOR_FAILURE, ret);
+        EXPECT_EQ(SENSOR_SUCCESS, ret);
     }
 }
 

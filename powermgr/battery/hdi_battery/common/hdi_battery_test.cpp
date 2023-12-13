@@ -23,21 +23,21 @@
 #include <unistd.h>
 
 #include <fstream>
-#include "v1_2/battery_interface_proxy.h"
-#include "v1_2/ibattery_callback.h"
-#include "v1_2/types.h"
+#include "v2_0/battery_interface_proxy.h"
+#include "v2_0/ibattery_callback.h"
+#include "v2_0/types.h"
 
 using namespace OHOS::HDI::Battery;
-using namespace OHOS::HDI::Battery::V1_2;
+using namespace OHOS::HDI::Battery::V2_0;
 using namespace testing::ext;
 using namespace OHOS;
 
 namespace {
-class BatteryCallback : public HDI::Battery::V1_2::IBatteryCallback {
+class BatteryCallback : public HDI::Battery::V2_0::IBatteryCallback {
 public:
     BatteryCallback() {};
     ~BatteryCallback() override {};
-    int32_t Update(const HDI::Battery::V1_2::BatteryInfo& event) override
+    int32_t Update(const HDI::Battery::V2_0::BatteryInfo& event) override
     {
         (void)event;
         return 0;
@@ -93,13 +93,11 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest001, TestSize.Level1)
   */
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest002, TestSize.Level1)
 {
-    if (false) {
         printf("HdfBatteryHdiTest002: start.");
-        int32_t ret = g_batteryInterface->Register(g_callback);
-        EXPECT_EQ(0, ret) << "HdfBatteryHdiTest002 failed";
+        int32_t ret = g_batteryInterface->Register(sptr<IBatteryCallback>(g_callback) = nullptr);
+        EXPECT_NE(0, ret) << "HdfBatteryHdiTest002 failed";
 
         printf("HdfBatteryHdiTest002: return.");
-    }
 }
 
 /**
@@ -109,13 +107,11 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest002, TestSize.Level1)
   */
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest003, TestSize.Level1)
 {
-    if (false) {
         printf("HdfBatteryHdiTest003: start.");
         int32_t ret = g_batteryInterface->UnRegister();
         EXPECT_EQ(0, ret) << "HdfBatteryHdiTest002 failed";
 
         printf("HdfBatteryHdiTest003: return.");
-    }
 }
 
 /**
@@ -185,7 +181,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest007, TestSize.Level1)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest008, TestSize.Level1)
 {
     printf("HdfBatteryHdiTest007: start.");
-    OHOS::HDI::Battery::V1_2::BatteryHealthState healthState = OHOS::HDI::Battery::V1_2::BatteryHealthState(0);
+    OHOS::HDI::Battery::V2_0::BatteryHealthState healthState = OHOS::HDI::Battery::V2_0::BatteryHealthState(0);
     g_batteryInterface->GetHealthState(healthState);
     EXPECT_TRUE(healthState >= 0 && healthState <= 6);
 
@@ -200,10 +196,10 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest008, TestSize.Level1)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest009, TestSize.Level1)
 {
     printf("HdfBatteryHdiTest009: start.");
-    OHOS::HDI::Battery::V1_2::BatteryPluggedType pluggedType = OHOS::HDI::Battery::V1_2::BatteryPluggedType(0);
+    OHOS::HDI::Battery::V2_0::BatteryPluggedType pluggedType = OHOS::HDI::Battery::V2_0::BatteryPluggedType(0);
     g_batteryInterface->GetPluggedType(pluggedType);
-    EXPECT_TRUE(pluggedType >= OHOS::HDI::Battery::V1_2::BatteryPluggedType::PLUGGED_TYPE_NONE &&
-        pluggedType <= OHOS::HDI::Battery::V1_2::BatteryPluggedType::PLUGGED_TYPE_BUTT);
+    EXPECT_TRUE(pluggedType >= OHOS::HDI::Battery::V2_0::BatteryPluggedType::PLUGGED_TYPE_NONE &&
+        pluggedType <= OHOS::HDI::Battery::V2_0::BatteryPluggedType::PLUGGED_TYPE_BUTT);
 
     printf("HdfBatteryHdiTest009: return.");
 }
@@ -216,7 +212,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest009, TestSize.Level1)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest010, TestSize.Level1)
 {
     printf("HdfBatteryHdiTest010: start.");
-    OHOS::HDI::Battery::V1_2::BatteryChargeState chargeState = OHOS::HDI::Battery::V1_2::BatteryChargeState(0);
+    OHOS::HDI::Battery::V2_0::BatteryChargeState chargeState = OHOS::HDI::Battery::V2_0::BatteryChargeState(0);
     g_batteryInterface->GetChargeState(chargeState);
     EXPECT_TRUE(chargeState >= 0 && chargeState <= 4);
 
@@ -319,7 +315,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest016, TestSize.Level1)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest017, TestSize.Level1)
 {
     printf("HdfBatteryHdiTest017: start.");
-    OHOS::HDI::Battery::V1_2::BatteryInfo event = {
+    OHOS::HDI::Battery::V2_0::BatteryInfo event = {
         .capacity = -1,
     };
     g_batteryInterface->GetBatteryInfo(event);
@@ -336,10 +332,10 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest017, TestSize.Level1)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest018, TestSize.Level1)
 {
     printf("HdfBatteryHdiTest018: start.");
-    OHOS::HDI::Battery::V1_2::ChargeType chargeType = OHOS::HDI::Battery::V1_2::ChargeType(0);
+    OHOS::HDI::Battery::V2_0::ChargeType chargeType = OHOS::HDI::Battery::V2_0::ChargeType(0);
     g_batteryInterface->GetChargeType(chargeType);
-    EXPECT_TRUE(chargeType >= OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_NONE &&
-        chargeType <= OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRELESS_SUPER_QUICK);
+    EXPECT_TRUE(chargeType >= OHOS::HDI::Battery::V2_0::ChargeType::CHARGE_TYPE_NONE &&
+        chargeType <= OHOS::HDI::Battery::V2_0::ChargeType::CHARGE_TYPE_WIRELESS_SUPER_QUICK);
 
     printf("HdfBatteryHdiTest018: return.");
 }
@@ -352,7 +348,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest018, TestSize.Level1)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest019, TestSize.Level1)
 {
     printf("HdfBatteryHdiTest019: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_NONE == 0);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::ChargeType::CHARGE_TYPE_NONE == 0);
     printf("HdfBatteryHdiTest019: return.");
 }
 
@@ -434,7 +430,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest021, TestSize.Level1)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest022, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest022: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryHealthState::BATTERY_HEALTH_UNKNOWN == 0);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::BatteryHealthState::BATTERY_HEALTH_UNKNOWN == 0);
     printf("HdfBatteryHdiTest022: end.");
 }
 
@@ -446,7 +442,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest022, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest023, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest023: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryHealthState::BATTERY_HEALTH_GOOD == 1);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::BatteryHealthState::BATTERY_HEALTH_GOOD == 1);
     printf("HdfBatteryHdiTest023: end.");
 }
 
@@ -458,7 +454,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest023, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest024, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest024: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryHealthState::BATTERY_HEALTH_OVERHEAT == 2);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::BatteryHealthState::BATTERY_HEALTH_OVERHEAT == 2);
     printf("HdfBatteryHdiTest024: end.");
 }
 
@@ -470,7 +466,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest024, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest025, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest025: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryHealthState::BATTERY_HEALTH_OVERVOLTAGE == 3);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::BatteryHealthState::BATTERY_HEALTH_OVERVOLTAGE == 3);
     printf("HdfBatteryHdiTest025: end.");
 }
 
@@ -482,7 +478,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest025, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest026, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest026: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryHealthState::BATTERY_HEALTH_COLD == 4);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::BatteryHealthState::BATTERY_HEALTH_COLD == 4);
     printf("HdfBatteryHdiTest026: end.");
 }
 
@@ -494,7 +490,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest026, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest027, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest027: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryHealthState::BATTERY_HEALTH_DEAD == 5);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::BatteryHealthState::BATTERY_HEALTH_DEAD == 5);
     printf("HdfBatteryHdiTest027: end.");
 }
 
@@ -506,7 +502,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest027, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest028, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest028: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryHealthState::BATTERY_HEALTH_RESERVED == 6);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::BatteryHealthState::BATTERY_HEALTH_RESERVED == 6);
     printf("HdfBatteryHdiTest028: end.");
 }
 
@@ -518,7 +514,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest028, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest029, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest029: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryChargeState::CHARGE_STATE_NONE == 0);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::BatteryChargeState::CHARGE_STATE_NONE == 0);
     printf("HdfBatteryHdiTest029: end.");
 }
 
@@ -530,7 +526,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest029, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest030, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest030: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryChargeState::CHARGE_STATE_ENABLE == 1);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::BatteryChargeState::CHARGE_STATE_ENABLE == 1);
     printf("HdfBatteryHdiTest030: end.");
 }
 
@@ -542,7 +538,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest030, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest031, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest031: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryChargeState::CHARGE_STATE_DISABLE == 2);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::BatteryChargeState::CHARGE_STATE_DISABLE == 2);
     printf("HdfBatteryHdiTest031: end.");
 }
 
@@ -554,7 +550,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest031, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest032, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest032: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryChargeState::CHARGE_STATE_FULL == 3);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::BatteryChargeState::CHARGE_STATE_FULL == 3);
     printf("HdfBatteryHdiTest032: end.");
 }
 
@@ -566,7 +562,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest032, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest033, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest033: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryChargeState::CHARGE_STATE_RESERVED == 4);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::BatteryChargeState::CHARGE_STATE_RESERVED == 4);
     printf("HdfBatteryHdiTest033: end.");
 }
 
@@ -578,7 +574,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest033, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest034, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest034: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryPluggedType::PLUGGED_TYPE_NONE == 0);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::BatteryPluggedType::PLUGGED_TYPE_NONE == 0);
     printf("HdfBatteryHdiTest034: end.");
 }
 
@@ -590,7 +586,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest034, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest035, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest035: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryPluggedType::PLUGGED_TYPE_AC == 1);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::BatteryPluggedType::PLUGGED_TYPE_AC == 1);
     printf("HdfBatteryHdiTest035: end.");
 }
 
@@ -602,7 +598,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest035, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest036, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest036: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryPluggedType::PLUGGED_TYPE_USB == 2);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::BatteryPluggedType::PLUGGED_TYPE_USB == 2);
     printf("HdfBatteryHdiTest036: end.");
 }
 
@@ -614,7 +610,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest036, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest037, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest037: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryPluggedType::PLUGGED_TYPE_WIRELESS == 3);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::BatteryPluggedType::PLUGGED_TYPE_WIRELESS == 3);
     printf("HdfBatteryHdiTest037: end.");
 }
 
@@ -626,7 +622,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest037, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest038, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest038: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::BatteryPluggedType::PLUGGED_TYPE_BUTT == 4);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::BatteryPluggedType::PLUGGED_TYPE_BUTT == 4);
     printf("HdfBatteryHdiTest038: end.");
 }
 
@@ -638,7 +634,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest038, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest039, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest039: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargingLimitType::TYPE_CURRENT == 0);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::ChargingLimitType::TYPE_CURRENT == 0);
     printf("HdfBatteryHdiTest039: end.");
 }
 
@@ -650,7 +646,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest039, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest040, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest040: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargingLimitType::TYPE_VOLTAGE == 1);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::ChargingLimitType::TYPE_VOLTAGE == 1);
     printf("HdfBatteryHdiTest040: end.");
 }
 
@@ -663,7 +659,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest040, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest041, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest041: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRED_NORMAL == 1);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::ChargeType::CHARGE_TYPE_WIRED_NORMAL == 1);
     printf("HdfBatteryHdiTest041: end.");
 }
 
@@ -675,7 +671,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest041, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest042, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest042: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRED_QUICK == 2);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::ChargeType::CHARGE_TYPE_WIRED_QUICK == 2);
     printf("HdfBatteryHdiTest042: end.");
 }
 
@@ -687,7 +683,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest042, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest043, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest043: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRED_SUPER_QUICK == 3);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::ChargeType::CHARGE_TYPE_WIRED_SUPER_QUICK == 3);
     printf("HdfBatteryHdiTest043: end.");
 }
 
@@ -699,7 +695,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest043, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest044, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest044: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRELESS_NORMAL == 4);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::ChargeType::CHARGE_TYPE_WIRELESS_NORMAL == 4);
     printf("HdfBatteryHdiTest044: end.");
 }
 
@@ -711,7 +707,7 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest044, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest045, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest045: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRELESS_QUICK == 5);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::ChargeType::CHARGE_TYPE_WIRELESS_QUICK == 5);
     printf("HdfBatteryHdiTest045: end.");
 }
 
@@ -723,7 +719,48 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest045, TestSize.Level3)
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest046, TestSize.Level3)
 {
     printf("HdfBatteryHdiTest046: start.");
-    EXPECT_TRUE(OHOS::HDI::Battery::V1_2::ChargeType::CHARGE_TYPE_WIRELESS_SUPER_QUICK == 6);
+    EXPECT_TRUE(OHOS::HDI::Battery::V2_0::ChargeType::CHARGE_TYPE_WIRELESS_SUPER_QUICK == 6);
     printf("HdfBatteryHdiTest046: end.");
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest047
+ * @tc.desc: Test SetBatteryConfig
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest047, TestSize.Level1)
+{
+    std::string sceneName = "xxx";
+    std::string value = "";
+    int32_t result = g_batteryInterface->SetBatteryConfig(sceneName, value);
+    EXPECT_EQ(true, result != 0);
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest048
+ * @tc.desc: Test GetBatteryConfig
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest048, TestSize.Level1)
+{
+    std::string sceneName = "xxx";
+    std::string value = "";
+    int32_t result = g_batteryInterface->GetBatteryConfig(sceneName, value);
+    EXPECT_EQ(true, value == "");
+    EXPECT_EQ(true, result != 0);
+}
+
+/**
+ * @tc.name: HdfBatteryHdiTest049
+ * @tc.desc: Test IsBatteryConfigSupported
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest049, TestSize.Level1)
+{
+    std::string sceneName = "xxx";
+    bool value = false;
+    int32_t result = g_batteryInterface->IsBatteryConfigSupported(sceneName, value);
+    EXPECT_EQ(true, value == false);
+    EXPECT_EQ(true, result != 0);
 }
 }

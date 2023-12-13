@@ -232,19 +232,19 @@ void UsbfnMtpTest::SetUp(void) {}
 void UsbfnMtpTest::TearDown(void) {}
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpRead_2390
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_0100
  * @tc.desc: Test functions to Read
  * @tc.desc: int32_t Read(std::vector<uint8_t>& data);
  * @tc.desc: Positive test: parameters correctly, read length less then one packet size
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpRead_2390, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_0100, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpRead_2390 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_0100 Case Start");
     std::vector<uint8_t> devData;
 
-    std::cout << "SUB_USB_HDI_FnMtpRead_2390===>use libusb in PC launch bulk-out transfer(size="
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_0100===>use libusb in PC launch bulk-out transfer(size="
               << BULK_OUT_LESS_THEN_ONCE << "), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -255,19 +255,19 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpRead_2390, Function | MediumTest | Level
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpRead_2400
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_0200
  * @tc.desc: Test functions to Read
  * @tc.desc: int32_t Read(std::vector<uint8_t>& data);
  * @tc.desc: Positive test: parameters correctly, read length exactly one packet size
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpRead_2400, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_0200, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpRead_2400 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_0200 Case Start");
     std::vector<uint8_t> devData;
 
-    std::cout << "SUB_USB_HDI_FnMtpRead_2400===>use libusb in PC launch bulk-out transfer(size="
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_0200===>use libusb in PC launch bulk-out transfer(size="
               << BULK_OUT_ONCE_MAX_SIZE << "), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -278,19 +278,19 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpRead_2400, Function | MediumTest | Level
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpRead_2410
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_0300
  * @tc.desc: Test functions to Read
  * @tc.desc: int32_t Read(std::vector<uint8_t>& data);
  * @tc.desc: Positive test: parameters correctly, read length more then one packet size, please read again
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpRead_2410, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_0300, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpRead_2410 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_0300 Case Start");
     std::vector<uint8_t> devData;
 
-    std::cout << "SUB_USB_HDI_FnMtpRead_2410===>use libusb in PC launch bulk-out transfer(size="
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_0300===>use libusb in PC launch bulk-out transfer(size="
               << BULK_OUT_MORE_THEN_ONCE << "), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -305,20 +305,20 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpRead_2410, Function | MediumTest | Level
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpRead_2420
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_0400
  * @tc.desc: Test functions to Read
  * @tc.desc: int32_t Read(std::vector<uint8_t>& data)
  * @tc.desc: Positive test: parameters correctly, no specific read size
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpRead_2420, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_0400, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpRead_2420 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_0400 Case Start");
     std::vector<uint8_t> devData;
 
     std::cout
-        << "SUB_USB_HDI_FnMtpRead_2420===>use libusb in PC launch bulk-out transfer(size in [0, 1024]), "
+        << "SUB_USB_DeviceManager_HDI_MTPPTP_0400===>use libusb in PC launch bulk-out transfer(size in [0, 1024]), "
         << "press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -329,21 +329,22 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpRead_2420, Function | MediumTest | Level
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpRead_2430
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_0500
  * @tc.desc: Test functions to Read
  * @tc.desc: int32_t Read(std::vector<uint8_t>& data)
  * @tc.desc: Positive test: parameters correctly, check read content
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpRead_2430, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_0500, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpRead_2430 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_0500 Case Start");
     std::vector<uint8_t> devData;
     // hex value of string "read005"
     std::vector<uint8_t> expectData = {0x72, 0x65, 0x61, 0x64, 0x30, 0x30, 0x35};
 
-    std::cout << "SUB_USB_HDI_FnMtpRead_2430===>use libusb in PC launch bulk-out transfer(string=read005), "
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_0500===>"
+              << "use libusb in PC launch bulk-out transfer(string=read005), "
               << "press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -355,21 +356,21 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpRead_2430, Function | MediumTest | Level
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpWrite_2440
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_0600
  * @tc.desc: Test functions to Write
  * @tc.desc: int32_t Write(const std::vector<uint8_t>& data)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpWrite_2440, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_0600, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpWrite_2440 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_0600 Case Start");
     uint32_t length = BULK_IN_LESS_THEN_ONCE;
     std::vector<uint8_t> devData;
     devData.assign(length, 'w');
 
-    std::cout << "SUB_USB_HDI_FnMtpWrite_2440===>use libusb in PC launch bulk-in transfer(expect=" << length
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_0600===>use libusb in PC launch bulk-in transfer(expect=" << length
               << "), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -379,20 +380,20 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpWrite_2440, Function | MediumTest | Leve
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpWrite_2450
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_0700
  * @tc.desc: Test functions to Write
  * @tc.desc: int32_t Write(const std::vector<uint8_t>& data)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpWrite_2450, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_0700, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpWrite_2450 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_0700 Case Start");
     uint32_t length = BULK_IN_ONCE_MAX_SIZE;
     std::vector<uint8_t> devData;
     devData.assign(length, 'w');
-    std::cout << "SUB_USB_HDI_FnMtpWrite_2450===>use libusb in PC launch bulk-in transfer(expect=" << length
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_0700===>use libusb in PC launch bulk-in transfer(expect=" << length
               << "), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -402,20 +403,20 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpWrite_2450, Function | MediumTest | Leve
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpWrite_2460
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_0800
  * @tc.desc: Test functions to Write
  * @tc.desc: int32_t Write(const std::vector<uint8_t>& data)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpWrite_2460, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_0800, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpWrite_2460 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_0800 Case Start");
     uint32_t length = BULK_IN_MORE_THEN_ONCE;
     std::vector<uint8_t> devData;
     devData.assign(length, 'w');
-    std::cout << "SUB_USB_HDI_FnMtpWrite_2460===>use libusb in PC launch bulk-in transfer(expect=" << length
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_0800===>use libusb in PC launch bulk-in transfer(expect=" << length
               << "), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -425,35 +426,36 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpWrite_2460, Function | MediumTest | Leve
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpWrite_2470
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_0900
  * @tc.desc: Test functions to Write
  * @tc.desc: int32_t Write(const std::vector<uint8_t>& data)
  * @tc.desc: Positive test: parameters correctly, write empty data
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpWrite_2470, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_0900, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpWrite_2470 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_0900 Case Start");
     std::vector<uint8_t> devData;
     auto ret = g_usbfnMtpInterface->Write(devData);
     ASSERT_EQ(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpWrite_2480
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_1000
  * @tc.desc: Test functions to Write
  * @tc.desc: int32_t Write(const std::vector<uint8_t>& data)
  * @tc.desc: Positive test: parameters correctly, write specific data
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpWrite_2480, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_1000, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpWrite_2480 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_1000 Case Start");
     // hex value of string "write005"
     std::vector<uint8_t> devData = {0x77, 0x72, 0x69, 0x74, 0x65, 0x30, 0x30, 0x35};
-    std::cout << "SUB_USB_HDI_FnMtpWrite_2480===>use libusb in PC launch bulk-in transfer(expect string=write005), "
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_1000===>"
+              << "use libusb in PC launch bulk-in transfer(expect string=write005), "
               << "press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -464,19 +466,19 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpWrite_2480, Function | MediumTest | Leve
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpSendEvent_2490
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_1100
  * @tc.desc: Test functions to SendEvent
  * @tc.desc: int32_t SendEvent(const std::vector<uint8_t> &eventData);
  * @tc.desc: Positive test: parameters correctly, valid length
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpSendEvent_2490, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_1100, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpSendEvent_2490 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_1100 Case Start");
     std::vector<uint8_t> devData;
     devData.assign(MTP_EVENT_PACKET_VALID_LEN, 'e');
-    std::cout << "SUB_USB_HDI_FnMtpSendEvent_2490===>use libusb in PC launch intr-in transfer(expect="
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_1100===>use libusb in PC launch intr-in transfer(expect="
               << devData.size() << "), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -486,19 +488,19 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpSendEvent_2490, Function | MediumTest | 
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpSendEvent_2500
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_1200
  * @tc.desc: Test functions to SendEvent
  * @tc.desc: int32_t SendEvent(const std::vector<uint8_t> &eventData);
  * @tc.desc: Positive test: parameters correctly, max length
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpSendEvent_2500, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_1200, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpSendEvent_2500 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_1200 Case Start");
     std::vector<uint8_t> devData;
     devData.assign(MTP_EVENT_PACKET_MAX_BYTES, 'e');
-    std::cout << "SUB_USB_HDI_FnMtpSendEvent_2500===>use libusb in PC launch intr-in transfer(expect="
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_1200===>use libusb in PC launch intr-in transfer(expect="
               << devData.size() << "), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -507,43 +509,44 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpSendEvent_2500, Function | MediumTest | 
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpSendEvent_2510
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_1300
  * @tc.desc: Test functions to SendEvent
  * @tc.desc: int32_t SendEvent(const std::vector<uint8_t> &eventData);
  * @tc.desc: Negative test: parameters exception, size overflow
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpSendEvent_2510, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_1300, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpSendEvent_2510 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_1300 Case Start");
     std::vector<uint8_t> devData;
     devData.assign(MTP_EVENT_PACKET_INVALID_LEN, 'e');
-    std::cout << "SUB_USB_HDI_FnMtpSendEvent_2510===>use libusb in PC launch intr-in transfer(expect=no data, "
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_1300===>use libusb in PC launch intr-in transfer(expect=no data, "
               << "or error), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
 
     auto ret = g_usbfnMtpInterface->SendEvent(devData);
     ASSERT_NE(0, ret);
-    std::cout << "SUB_USB_HDI_FnMtpSendEvent_2510===>make sure transfer timeout in PC, then start next test "
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_1300===>make sure transfer timeout in PC, then start next test "
               << std::endl;
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpSendEvent_2520
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_1400
  * @tc.desc: Test functions to SendEvent
  * @tc.desc: int32_t SendEvent(const std::vector<uint8_t> &eventData);
  * @tc.desc: Positive test: parameters correctly, max length, check content
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpSendEvent_2520, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_1400, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpSendEvent_2520 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_1400 Case Start");
     // hex value of string "event004"
     std::vector<uint8_t> devData = {0x65, 0x76, 0x65, 0x6E, 0x74, 0x30, 0x30, 0x34};
-    std::cout << "SUB_USB_HDI_FnMtpSendEvent_2520===>use libusb in PC launch intr-in transfer(expect string=event004), "
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_1400===>"
+              << "use libusb in PC launch intr-in transfer(expect string=event004), "
               << "press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -553,21 +556,21 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpSendEvent_2520, Function | MediumTest | 
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpFileReceive_2530
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_1500
  * @tc.desc: Test functions to ReceiveFile
  * @tc.desc: int32_t ReceiveFile(const UsbFnMtpFileSlice &mfs);
  * @tc.desc: Positive test: parameters correctly, one packet enough
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileReceive_2530, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_1500, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
     ASSERT_TRUE(GetCurrentProcPath() == std::string(WORKED_UT_PATH));
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpFileReceive_2530 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_1500 Case Start");
     g_fileTestCount++;
     struct UsbFnMtpFileSlice mfs = g_mfs;
     mfs.length = BULK_OUT_LESS_THEN_ONCE;
-    std::cout << "SUB_USB_HDI_FnMtpFileReceive_2530===>use libusb in PC launch bulk-out transfer(size = "
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_1500===>use libusb in PC launch bulk-out transfer(size = "
               << mfs.length << "), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -582,17 +585,17 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileReceive_2530, Function | MediumTest 
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpFileReceive_2540
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_1600
  * @tc.desc: Test functions to ReceiveFile
  * @tc.desc: int32_t ReceiveFile(const UsbFnMtpFileSlice &mfs);
  * @tc.desc: Positive test: parameters correctly, zero length
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileReceive_2540, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_1600, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
     ASSERT_TRUE(GetCurrentProcPath() == std::string(WORKED_UT_PATH));
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpFileReceive_2540 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_1600 Case Start");
     g_fileTestCount++;
     struct UsbFnMtpFileSlice mfs = g_mfs;
     mfs.length = 0;
@@ -606,21 +609,21 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileReceive_2540, Function | MediumTest 
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpFileReceive_2550
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_1700
  * @tc.desc: Test functions to ReceiveFile
  * @tc.desc: int32_t ReceiveFile(const UsbFnMtpFileSlice &mfs);
  * @tc.desc: Positive test: parameters correctly, one normal packet + short packet
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileReceive_2550, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_1700, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
     ASSERT_TRUE(GetCurrentProcPath() == std::string(WORKED_UT_PATH));
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpFileReceive_2550 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_1700 Case Start");
     g_fileTestCount++;
     struct UsbFnMtpFileSlice mfs = g_mfs;
     mfs.length = BULK_OUT_MORE_THEN_ONCE;
-    std::cout << "SUB_USB_HDI_FnMtpFileReceive_2550===>use libusb in PC launch bulk-out transfer(size = "
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_1700===>use libusb in PC launch bulk-out transfer(size = "
               << mfs.length << "), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -635,21 +638,21 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileReceive_2550, Function | MediumTest 
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpFileReceive_2560
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_1800
  * @tc.desc: Test functions to ReceiveFile
  * @tc.desc: int32_t ReceiveFile(const UsbFnMtpFileSlice &mfs);
  * @tc.desc: Positive test: mfs.length set to max, 12 packet + ZLP
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileReceive_2560, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_1800, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
     ASSERT_TRUE(GetCurrentProcPath() == std::string(WORKED_UT_PATH));
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpFileReceive_2560 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_1800 Case Start");
     g_fileTestCount++;
     struct UsbFnMtpFileSlice mfs = g_mfs;
     mfs.length = MTP_FILE_SIZE_REUSE_REQ;
-    std::cout << "SUB_USB_HDI_FnMtpFileReceive_2560===>use libusb in PC launch bulk-out transfer(size = "
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_1800===>use libusb in PC launch bulk-out transfer(size = "
               << mfs.length << "), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -664,23 +667,23 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileReceive_2560, Function | MediumTest 
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpFileReceive_2570
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_1900
  * @tc.desc: Test functions to ReceiveFile
  * @tc.desc: int32_t ReceiveFile(const UsbFnMtpFileSlice &mfs);
  * @tc.desc: Positive test: parameters correctly, command and transactionId ignored
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileReceive_2570, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_1900, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
     ASSERT_TRUE(GetCurrentProcPath() == std::string(WORKED_UT_PATH));
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpFileReceive_2570 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_1900 Case Start");
     g_fileTestCount++;
     struct UsbFnMtpFileSlice mfs = g_mfs;
     mfs.length = BULK_OUT_LESS_THEN_ONCE;
     mfs.command = CMD_CODE_GET_DEVICE_INFO;
     mfs.transactionId = TRANSACTION_ID_RANDOM;
-    std::cout << "SUB_USB_HDI_FnMtpFileReceive_2570===>use libusb in PC launch bulk-out transfer(size = "
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_1900===>use libusb in PC launch bulk-out transfer(size = "
               << mfs.length << "), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -695,22 +698,22 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileReceive_2570, Function | MediumTest 
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpFileReceive_2580
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_2000
  * @tc.desc: Test functions to ReceiveFile
  * @tc.desc: int32_t ReceiveFile(const UsbFnMtpFileSlice &mfs);
  * @tc.desc: Positive test: mfs.length set to max, recv actual file size depend on xfer count
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileReceive_2580, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_2000, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
     ASSERT_TRUE(GetCurrentProcPath() == std::string(WORKED_UT_PATH));
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpFileReceive_2580 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_2000 Case Start");
     g_fileTestCount++;
     struct UsbFnMtpFileSlice mfs = g_mfs;
     mfs.length = MTP_MAX_FILE_SIZE;
     std::cout
-        << "SUB_USB_HDI_FnMtpFileReceive_2580===>use libusb in PC launch bulk-out transfer(size = any), "
+        << "SUB_USB_DeviceManager_HDI_MTPPTP_2000===>use libusb in PC launch bulk-out transfer(size = any), "
         << "press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -725,21 +728,21 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileReceive_2580, Function | MediumTest 
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpFileReceive_2590
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_2100
  * @tc.desc: Test functions to ReceiveFile
  * @tc.desc: int32_t ReceiveFile(const UsbFnMtpFileSlice &mfs);
  * @tc.desc: Positive test: mfs.length set to max - 1: 4GB - 2
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileReceive_2590, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_2100, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
     ASSERT_TRUE(GetCurrentProcPath() == std::string(WORKED_UT_PATH));
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpFileReceive_2590 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_2100 Case Start");
     g_fileTestCount++;
     struct UsbFnMtpFileSlice mfs = g_mfs;
     mfs.length = MTP_MAX_FILE_SIZE - 1;
-    std::cout << "SUB_USB_HDI_FnMtpFileReceive_2590===>use libusb in PC launch bulk-out transfer(size = "
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_2100===>use libusb in PC launch bulk-out transfer(size = "
               << mfs.length << "), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -754,21 +757,21 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileReceive_2590, Function | MediumTest 
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpFileReceive_2600
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_2200
  * @tc.desc: Test functions to ReceiveFile
  * @tc.desc: int32_t ReceiveFile(const UsbFnMtpFileSlice &mfs);
  * @tc.desc: Positive test: mfs.length set to max + 1: 4GB
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileReceive_2600, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_2200, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
     ASSERT_TRUE(GetCurrentProcPath() == std::string(WORKED_UT_PATH));
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpFileReceive_2600 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_2200 Case Start");
     g_fileTestCount++;
     struct UsbFnMtpFileSlice mfs = g_mfs;
     mfs.length = MTP_MAX_FILE_SIZE + 1;
-    std::cout << "SUB_USB_HDI_FnMtpFileReceive_2600===>use libusb in PC launch bulk-out transfer(size = "
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_2200===>use libusb in PC launch bulk-out transfer(size = "
               << mfs.length << "), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -783,21 +786,21 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileReceive_2600, Function | MediumTest 
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpFileReceive_2610
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_2300
  * @tc.desc: Test functions to ReceiveFile
  * @tc.desc: int32_t ReceiveFile(const UsbFnMtpFileSlice &mfs);
  * @tc.desc: Positive test: mfs.length set to max + 2: 4GB + 1
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileReceive_2610, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_2300, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
     ASSERT_TRUE(GetCurrentProcPath() == std::string(WORKED_UT_PATH));
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpFileReceive_2610 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_2300 Case Start");
     g_fileTestCount++;
     struct UsbFnMtpFileSlice mfs = g_mfs;
     mfs.length = MTP_MAX_FILE_SIZE + 2;
-    std::cout << "SUB_USB_HDI_FnMtpFileReceive_2610===>use libusb in PC launch bulk-out transfer(size = "
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_2300===>use libusb in PC launch bulk-out transfer(size = "
               << mfs.length << "), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -812,23 +815,24 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileReceive_2610, Function | MediumTest 
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpFileSend_2620
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_2400
  * @tc.desc: Test functions to SendFile
  * @tc.desc: int32_t SendFile(const UsbFnMtpFileSlice &mfs);
  * @tc.desc: Positive test: parameters correctly， length in one packet
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileSend_2620, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_2400, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
     ASSERT_TRUE(GetCurrentProcPath() == std::string(WORKED_UT_PATH));
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpFileSend_2620 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_2400 Case Start");
     g_fileTestCount++;
     struct UsbFnMtpFileSlice mfs = g_mfs;
     mfs.length = BULK_IN_LESS_THEN_ONCE;
     std::string filePathName = MTP_TEST_SEND_FILE;
     EXPECT_TRUE(GenerateFile(filePathName, mfs.length));
-    std::cout << "SUB_USB_HDI_FnMtpFileSend_2620===>use libusb in PC launch bulk-in transfer(expect " << mfs.length
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_2400===>"
+              << "use libusb in PC launch bulk-in transfer(expect " << mfs.length
               << "), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -841,24 +845,24 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileSend_2620, Function | MediumTest | L
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpFileSend_2630
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_2500
  * @tc.desc: Test functions to SendFile
  * @tc.desc: int32_t SendFile(const UsbFnMtpFileSlice &mfs);
  * @tc.desc: Positive test: parameters correctly, send header + data in one packet
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileSend_2630, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_2500, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
     ASSERT_TRUE(GetCurrentProcPath() == std::string(WORKED_UT_PATH));
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpFileSend_2630 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_2500 Case Start");
     g_fileTestCount++;
     struct UsbFnMtpFileSlice mfs = g_mfs;
     mfs.length = BULK_IN_LESS_THEN_ONCE;
     mfs.command = CMD_CODE_GET_DEVICE_INFO;
     std::string filePathName = MTP_TEST_SEND_FILE;
     EXPECT_TRUE(GenerateFile(filePathName, mfs.length));
-    std::cout << "SUB_USB_HDI_FnMtpFileSend_2630===>use libusb in PC launch bulk-in transfer(expect "
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_2500===>use libusb in PC launch bulk-in transfer(expect "
               << mfs.length + MTP_PACKET_HEADER_SIZE << "), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -871,17 +875,17 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileSend_2630, Function | MediumTest | L
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpFileSend_2640
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_2600
  * @tc.desc: Test functions to SendFile
  * @tc.desc: int32_t SendFile(const UsbFnMtpFileSlice &mfs);
  * @tc.desc: Positive test: parameters correctly, zero length
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileSend_2640, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_2600, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
     ASSERT_TRUE(GetCurrentProcPath() == std::string(WORKED_UT_PATH));
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpFileSend_2640 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_2600 Case Start");
     g_fileTestCount++;
     struct UsbFnMtpFileSlice mfs = g_mfs;
     mfs.length = 0;
@@ -895,24 +899,24 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileSend_2640, Function | MediumTest | L
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpFileSend_2650
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_2700
  * @tc.desc: Test functions to SendFile
  * @tc.desc: int32_t SendFile(const UsbFnMtpFileSlice &mfs);
  * @tc.desc: Positive test: parameters correctly, send header + data in two packet: normal + short
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileSend_2650, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_2700, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
     ASSERT_TRUE(GetCurrentProcPath() == std::string(WORKED_UT_PATH));
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpFileSend_2650 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_2700 Case Start");
     g_fileTestCount++;
     struct UsbFnMtpFileSlice mfs = g_mfs;
     mfs.length = MTP_FILE_SIZE_ONE_REQ;
     mfs.command = CMD_CODE_GET_DEVICE_INFO;
     std::string filePathName = MTP_TEST_SEND_FILE;
     EXPECT_TRUE(GenerateFile(filePathName, mfs.length));
-    std::cout << "SUB_USB_HDI_FnMtpFileSend_2650===>use libusb in PC launch bulk-in transfer(expect "
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_2700===>use libusb in PC launch bulk-in transfer(expect "
               << mfs.length + MTP_PACKET_HEADER_SIZE << "), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -925,23 +929,23 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileSend_2650, Function | MediumTest | L
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpFileSend_2660
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_2800
  * @tc.desc: Test functions to SendFile
  * @tc.desc: int32_t SendFile(const UsbFnMtpFileSlice &mfs);
  * @tc.desc: Positive test: parameters correctly, mfs.length set to max
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileSend_2660, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_2800, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
     ASSERT_TRUE(GetCurrentProcPath() == std::string(WORKED_UT_PATH));
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpFileSend_2660 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_2800 Case Start");
     g_fileTestCount++;
     struct UsbFnMtpFileSlice mfs = g_mfs;
     mfs.length = MTP_FILE_SIZE_REUSE_REQ;
     std::string filePathName = MTP_TEST_SEND_FILE;
     EXPECT_TRUE(GenerateFile(filePathName, mfs.length));
-    std::cout << "SUB_USB_HDI_FnMtpFileSend_2660===>use libusb in PC launch bulk-in transfer(speed, expect "
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_2800===>use libusb in PC launch bulk-in transfer(speed, expect "
               << mfs.length << "), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -954,23 +958,23 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileSend_2660, Function | MediumTest | L
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpFileSend_2670
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_2900
  * @tc.desc: Test functions to SendFile
  * @tc.desc: int32_t SendFile(const UsbFnMtpFileSlice &mfs);
  * @tc.desc: Positive test: parameters correctly, mfs.length set to max: 4GB - 1
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileSend_2670, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_2900, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
     ASSERT_TRUE(GetCurrentProcPath() == std::string(WORKED_UT_PATH));
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpFileSend_2670 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_2900 Case Start");
     g_fileTestCount++;
     struct UsbFnMtpFileSlice mfs = g_mfs;
     mfs.length = MTP_MAX_FILE_SIZE;
     std::string filePathName = MTP_TEST_SEND_FILE;
     EXPECT_TRUE(GenerateFile(filePathName, mfs.length));
-    std::cout << "SUB_USB_HDI_FnMtpFileSend_2670===>use libusb in PC launch bulk-in transfer(speed, expect "
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_2900===>use libusb in PC launch bulk-in transfer(speed, expect "
               << mfs.length << "), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -983,23 +987,23 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileSend_2670, Function | MediumTest | L
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpFileSend_2680
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_3000
  * @tc.desc: Test functions to SendFile
  * @tc.desc: int32_t SendFile(const UsbFnMtpFileSlice &mfs);
  * @tc.desc: Positive test: parameters correctly, mfs.length set to max + 1: 4GB
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileSend_2680, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_3000, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
     ASSERT_TRUE(GetCurrentProcPath() == std::string(WORKED_UT_PATH));
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpFileSend_2680 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_3000 Case Start");
     g_fileTestCount++;
     struct UsbFnMtpFileSlice mfs = g_mfs;
     mfs.length = MTP_MAX_FILE_SIZE + 1;
     std::string filePathName = MTP_TEST_SEND_FILE;
     EXPECT_TRUE(GenerateFile(filePathName, mfs.length));
-    std::cout << "SUB_USB_HDI_FnMtpFileSend_2680===>use libusb in PC launch bulk-in transfer(speed, expect "
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_3000===>use libusb in PC launch bulk-in transfer(speed, expect "
               << mfs.length << "), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -1012,23 +1016,23 @@ HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileSend_2680, Function | MediumTest | L
 }
 
 /**
- * @tc.name: SUB_USB_HDI_FnMtpFileSend_2690
+ * @tc.name: SUB_USB_DeviceManager_HDI_MTPPTP_3100
  * @tc.desc: Test functions to SendFile
  * @tc.desc: int32_t SendFile(const UsbFnMtpFileSlice &mfs);
  * @tc.desc: Positive test: parameters correctly, mfs.length set to max + 1: 4GB + 1
  * @tc.type: FUNC
  */
-HWTEST_F(UsbfnMtpTest, SUB_USB_HDI_FnMtpFileSend_2690, Function | MediumTest | Level1)
+HWTEST_F(UsbfnMtpTest, SUB_USB_DeviceManager_HDI_MTPPTP_3100, Function | MediumTest | Level1)
 {
     ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
     ASSERT_TRUE(GetCurrentProcPath() == std::string(WORKED_UT_PATH));
-    HDF_LOGI("UsbfnMtpTest::SUB_USB_HDI_FnMtpFileSend_2690 Case Start");
+    HDF_LOGI("UsbfnMtpTest::SUB_USB_DeviceManager_HDI_MTPPTP_3100 Case Start");
     g_fileTestCount++;
     struct UsbFnMtpFileSlice mfs = g_mfs;
     mfs.length = MTP_MAX_FILE_SIZE + 2;
     std::string filePathName = MTP_TEST_SEND_FILE;
     EXPECT_TRUE(GenerateFile(filePathName, mfs.length));
-    std::cout << "SUB_USB_HDI_FnMtpFileSend_2690===>use libusb in PC launch bulk-in transfer(speed, expect "
+    std::cout << "SUB_USB_DeviceManager_HDI_MTPPTP_3100===>use libusb in PC launch bulk-in transfer(speed, expect "
               << mfs.length << "), press enter to continue" << std::endl;
     int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {}

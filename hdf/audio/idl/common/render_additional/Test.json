@@ -2,7 +2,7 @@
     "kits": [
         {
             "push": [
-                "HatsHdfAudioIdlRenderTestAdditional->/data/local/tmp/HatsHdfAudioIdlRenderTestAdditional"
+                "HatsHdfAudioIdlRenderAdditionalTest->/data/local/tmp/HatsHdfAudioIdlRenderAdditionalTest"
             ],
             "type": "PushKit"
         }
@@ -10,9 +10,9 @@
     "driver": {
         "native-test-timeout": "120000",
         "type": "CppTest",
-        "module-name": "HatsHdfAudioIdlRenderTestAdditional",
+        "module-name": "HatsHdfAudioIdlRenderAdditionalTest",
         "runtime-hint": "1s",
         "native-test-device-path": "/data/local/tmp"
     },
-    "description": "Configuration for HatsHdfAudioIdlRenderTestAdditional Tests"
+    "description": "Configuration for HatsHdfAudioIdlRenderAdditionalTest Tests"
 }

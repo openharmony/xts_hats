@@ -71,13 +71,13 @@ void HdfUsbdBenchmarkDeviceTest::ReleasePara(const sptr<UsbSubscriberTest> &subs
 }
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0010
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_1100
  * @tc.desc: Test functions to OpenDevice benchmark test
  * @tc.desc: int32_t OpenDevice(const UsbDev &dev);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0010)
+BENCHMARK_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HostManager_HDI_Performance_1100)
 (benchmark::State& st)
 {
     ASSERT_NE(g_usbInterface, nullptr);
@@ -93,19 +93,19 @@ BENCHMARK_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0010)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0010)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HostManager_HDI_Performance_1100)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0020
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_1200
  * @tc.desc: Test functions to CloseDevice benchmark test
  * @tc.desc: int32_t CloseDevice(const UsbDev &dev);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0020)
+BENCHMARK_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HostManager_HDI_Performance_1200)
 (benchmark::State& st)
 {
     ASSERT_NE(g_usbInterface, nullptr);
@@ -123,7 +123,7 @@ BENCHMARK_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0020)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HDI_Benchmark_0020)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HostManager_HDI_Performance_1200)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();

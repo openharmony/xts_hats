@@ -136,118 +136,123 @@ void UsbdTransferTest::SetUp(void) {}
 void UsbdTransferTest::TearDown(void) {}
 
 /**
- * @tc.name: SUB_USB_HDI_0450
+ * @tc.name: SUB_USB_HostManager_HDI_TranFunc_0100
  * @tc.desc: Test functions to ControlTransferRead
  * @tc.desc: int32_t ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly, standard request: get configuration
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0450, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranFunc_0100, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN, USB_DDK_REQ_GET_CONFIGURATION, 0, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0450 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranFunc_0100 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0460
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_0100
  * @tc.desc: Test functions to ControlTransferRead
  * @tc.desc: int32_t ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum error, standard request: get configuration
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0460, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_0100, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { BUS_NUM_INVALID, dev_.devAddr };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN, USB_DDK_REQ_GET_CONFIGURATION, 0, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0460 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_0100 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0470
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_0200
  * @tc.desc: Test functions to ControlTransferRead
  * @tc.desc: int32_t ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, devAddr error, standard request: get configuration
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0470, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_0200, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { dev_.busNum, DEV_ADDR_INVALID };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN, USB_DDK_REQ_GET_CONFIGURATION, 0, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0470 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_0200 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0480
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_0300
  * @tc.desc: Test functions to ControlTransferRead
  * @tc.desc: int32_t ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly, standard request: get descriptor(device)
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0480, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_0300, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN, USB_DDK_REQ_GET_DESCRIPTOR, CTL_VALUE, 0,
         TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0480 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_0300 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0490
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_0400
  * @tc.desc: Test functions to ControlTransferRead
  * @tc.desc: int32_t ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum error, standard request: get descriptor(device)
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0490, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_0400, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { BUS_NUM_INVALID, dev_.devAddr };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN, USB_DDK_REQ_GET_DESCRIPTOR, CTL_VALUE, 0,
         TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0490 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_0400 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0500
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_0500
  * @tc.desc: Test functions to ControlTransferRead
  * @tc.desc: int32_t ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, devAddr error, standard request: get descriptor(device)
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0500, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_0500, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { dev_.busNum, DEV_ADDR_INVALID };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN, USB_DDK_REQ_GET_DESCRIPTOR, CTL_VALUE, 0,
         TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0500 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_0500 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0510
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_0600
  * @tc.desc: Test functions to ControlTransferRead
  * @tc.desc: int32_t ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly, standard request: get interface
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0510, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_0600, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     int32_t intercafeidex = 0;
@@ -255,18 +260,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0510, Function | MediumTest | Level1)
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN | USB_REQUEST_TARGET_INTERFACE,
         USB_DDK_REQ_GET_INTERFACE, 0, intercafeidex, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0510 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_0600 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0520
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_0700
  * @tc.desc: Test functions to ControlTransferRead
  * @tc.desc: int32_t ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum error, standard request: get interface
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0520, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_0700, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { BUS_NUM_INVALID, dev_.devAddr };
     int32_t intercafeidex = 0;
@@ -274,18 +280,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0520, Function | MediumTest | Level1)
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN | USB_REQUEST_TARGET_INTERFACE,
         USB_DDK_REQ_GET_INTERFACE, 0, intercafeidex, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0520 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_0700 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0530
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_0800
  * @tc.desc: Test functions to ControlTransferRead
  * @tc.desc: int32_t ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, devAddr error, standard request: get interface
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0530, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_0800, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { dev_.busNum, DEV_ADDR_INVALID };
     int32_t intercafeidex = 0;
@@ -293,231 +300,244 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0530, Function | MediumTest | Level1)
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN | USB_REQUEST_TARGET_INTERFACE,
         USB_DDK_REQ_GET_INTERFACE, 0, intercafeidex, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0530 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_0800 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0540
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_0900
  * @tc.desc: Test functions to ControlTransferRead
  * @tc.desc: int32_t ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly, standard request: get status(recipient device)
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0540, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_0900, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN, 0, 0, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0540 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_0900 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0550
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_1000
  * @tc.desc: Test functions to ControlTransferRead
  * @tc.desc: int32_t ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum error, standard request: get status(device)
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0550, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_1000, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { BUS_NUM_INVALID, dev_.devAddr };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN, 0, 0, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0550 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_1000 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0560
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_1100
  * @tc.desc: Test functions to ControlTransferRead
  * @tc.desc: int32_t ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, devAddr error, standard request: get status(device)
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0560, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_1100, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { dev_.busNum, DEV_ADDR_INVALID };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN, 0, 0, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0560 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_1100 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0570
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_1200
  * @tc.desc: Test functions to ControlTransferRead
  * @tc.desc: int32_t ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly, standard request: get status(interface)
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0570, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_1200, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN | USB_REQUEST_TARGET_INTERFACE, 0, 0, 0,
         TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0570 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_1200 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0580
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_1300
  * @tc.desc: Test functions to ControlTransferRead
  * @tc.desc: int32_t ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum error, standard request: get status(interface)
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0580, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_1300, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { BUS_NUM_INVALID, dev_.devAddr };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN | USB_REQUEST_TARGET_INTERFACE, 0, 0, 0,
         TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0580 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_1300 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0590
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_1400
  * @tc.desc: Test functions to ControlTransferRead
  * @tc.desc: int32_t ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, devAddr error, standard request: get status(interface)
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0590, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_1400, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { dev_.busNum, DEV_ADDR_INVALID };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN | USB_REQUEST_TARGET_INTERFACE, 0, 0, 0,
         TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0590 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_1400 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0600
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_1500
  * @tc.desc: Test functions to ControlTransferRead
  * @tc.desc: int32_t ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly, standard request: get status(endpoint)
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0600, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_1500, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN | USB_REQUEST_TARGET_ENDPOINT, 0, 0, 0,
         TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0600 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_1500 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0610
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_1600
  * @tc.desc: Test functions to ControlTransferRead
  * @tc.desc: int32_t ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum error, standard request: get status(endpoint)
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0610, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_1600, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { BUS_NUM_INVALID, dev_.devAddr };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN | USB_REQUEST_TARGET_ENDPOINT, 0, 0, 0,
         TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0610 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_1600 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0620
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_1700
  * @tc.desc: Test functions to ControlTransferRead
  * @tc.desc: int32_t ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, devAddr error, standard request: get status(endpoint)
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0620, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_1700, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { dev_.busNum, DEV_ADDR_INVALID };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN | USB_REQUEST_TARGET_ENDPOINT, 0, 0, 0,
         TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0620 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_1700 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0630
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_1800
  * @tc.desc: Test functions to ControlTransferRead
  * @tc.desc: int32_t ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly, standard request: sync frame
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0630, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_1800, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN | USB_REQUEST_TARGET_ENDPOINT, USB_DDK_REQ_SYNCH_FRAME,
         0, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0630 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_1800 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0640
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_1900
  * @tc.desc: Test functions to ControlTransferRead
  * @tc.desc: int32_t ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum error, standard request: sync frame
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0640, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_1900, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { BUS_NUM_INVALID, dev_.devAddr };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN | USB_REQUEST_TARGET_ENDPOINT, USB_DDK_REQ_SYNCH_FRAME,
         0, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0640 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_1900 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0650
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_2000
  * @tc.desc: Test functions to ControlTransferRead
  * @tc.desc: int32_t ControlTransferRead(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, devAddr error, standard request: sync frame
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0650, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_2000, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { dev_.busNum, DEV_ADDR_INVALID };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN | USB_REQUEST_TARGET_ENDPOINT, USB_DDK_REQ_SYNCH_FRAME,
         0, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0650 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_2000 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1780
+ * @tc.name: SUB_USB_HostManager_HDI_TranFunc_0600
  * @tc.desc: Test functions to ControlTransferWrite
  * @tc.desc: int32_t ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1780, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranFunc_0600, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -527,18 +547,18 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1780, Function | MediumTest | Level1)
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT,
         USB_DDK_REQ_GET_CONFIGURATION, 0, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1780 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranFunc_0600 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1790
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_6100
  * @tc.desc: Test functions to ControlTransferWrite
  * @tc.desc: int32_t ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1790, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_6100, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { BUS_NUM_INVALID, dev_.devAddr };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -548,18 +568,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1790, Function | MediumTest | Level1)
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_INTERFACE,
         USB_DDK_REQ_GET_CONFIGURATION, 0, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1790 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_6100 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1800
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_6200
  * @tc.desc: Test functions to ControlTransferWrite
  * @tc.desc: int32_t ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1800, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_6200, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { dev_.busNum, DEV_ADDR_INVALID };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -569,18 +590,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1800, Function | MediumTest | Level1)
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_INTERFACE,
         USB_DDK_REQ_GET_CONFIGURATION, 0, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1800 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_6200 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1810
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_6300
  * @tc.desc: Test functions to ControlTransferWrite
  * @tc.desc: int32_t ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1810, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_6300, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -590,18 +612,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1810, Function | MediumTest | Level1)
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT,
         USB_DDK_REQ_GET_DESCRIPTOR, CTL_VALUE, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1810 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_6300 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1820
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_6400
  * @tc.desc: Test functions to ControlTransferWrite
  * @tc.desc: int32_t ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1820, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_6400, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { BUS_NUM_INVALID, dev_.devAddr };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -611,18 +634,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1820, Function | MediumTest | Level1)
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_INTERFACE,
         USB_DDK_REQ_GET_DESCRIPTOR, CTL_VALUE, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1820 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_6400 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1830
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_6500
  * @tc.desc: Test functions to ControlTransferWrite
  * @tc.desc: int32_t ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1830, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_6500, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { dev_.busNum, DEV_ADDR_INVALID };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -632,18 +656,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1830, Function | MediumTest | Level1)
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_INTERFACE,
         USB_DDK_REQ_GET_DESCRIPTOR, CTL_VALUE, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1830 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_6500 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1840
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_6600
  * @tc.desc: Test functions to ControlTransferWrite
  * @tc.desc: int32_t ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1840, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_6600, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     int32_t intercafeidex = 0;
@@ -653,18 +678,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1840, Function | MediumTest | Level1)
     bufferData.push_back(SAMPLE_DATA_3);
     struct UsbCtrlTransfer ctrlparmas = {0, USB_DDK_REQ_GET_INTERFACE, 0, intercafeidex, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1840 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_6600 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1850
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_6700
  * @tc.desc: Test functions to ControlTransferWrite
  * @tc.desc: int32_t ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1850, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_6700, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { BUS_NUM_INVALID, dev_.devAddr };
     int32_t intercafeidex = 0;
@@ -674,18 +700,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1850, Function | MediumTest | Level1)
     bufferData.push_back(SAMPLE_DATA_3);
     struct UsbCtrlTransfer ctrlparmas = {0, USB_DDK_REQ_GET_INTERFACE, 0, intercafeidex, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1850 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_6700 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1860
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_6800
  * @tc.desc: Test functions to ControlTransferWrite
  * @tc.desc: int32_t ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1860, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_6800, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { dev_.busNum, DEV_ADDR_INVALID };
     int32_t intercafeidex = 0;
@@ -695,18 +722,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1860, Function | MediumTest | Level1)
     bufferData.push_back(SAMPLE_DATA_3);
     struct UsbCtrlTransfer ctrlparmas = {0, USB_DDK_REQ_GET_INTERFACE, 0, intercafeidex, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1860 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_6800 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1870
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_6900
  * @tc.desc: Test functions to ControlTransferWrite
  * @tc.desc: int32_t ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1870, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_6900, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -716,18 +744,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1870, Function | MediumTest | Level1)
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT, USB_DDK_REQ_GET_DESCRIPTOR, 0, 0,
         TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1870 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_6900 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1880
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_7000
  * @tc.desc: Test functions to ControlTransferWrite
  * @tc.desc: int32_t ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1880, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_7000, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { BUS_NUM_INVALID, dev_.devAddr };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -737,18 +766,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1880, Function | MediumTest | Level1)
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_INTERFACE, 0, 0, 0,
         TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1880 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_7000 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1890
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_7100
  * @tc.desc: Test functions to ControlTransferWrite
  * @tc.desc: int32_t ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1890, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_7100, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { dev_.busNum, DEV_ADDR_INVALID };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -758,18 +788,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1890, Function | MediumTest | Level1)
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_INTERFACE, 0, 0, 0,
         TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1890 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_7100 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1900
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_7200
  * @tc.desc: Test functions to ControlTransferWrite
  * @tc.desc: int32_t ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1900, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_7200, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -778,18 +809,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1900, Function | MediumTest | Level1)
     bufferData.push_back(SAMPLE_DATA_3);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT, USB_DDK_REQ_GET_INTERFACE, 0, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1900 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_7200 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1910
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_7300
  * @tc.desc: Test functions to ControlTransferWrite
  * @tc.desc: int32_t ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1910, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_7300, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { BUS_NUM_INVALID, dev_.devAddr };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -798,18 +830,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1910, Function | MediumTest | Level1)
     bufferData.push_back(SAMPLE_DATA_3);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT, 0, 0, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1910 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_7300 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1920
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_7400
  * @tc.desc: Test functions to ControlTransferWrite
  * @tc.desc: int32_t ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1920, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_7400, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { dev_.busNum, DEV_ADDR_INVALID };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -818,18 +851,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1920, Function | MediumTest | Level1)
     bufferData.push_back(SAMPLE_DATA_3);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT, 0, 0, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1920 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_7400 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1930
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_7500
  * @tc.desc: Test functions to ControlTransferWrite
  * @tc.desc: int32_t ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1930, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_7500, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -839,18 +873,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1930, Function | MediumTest | Level1)
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT, USB_DDK_REQ_GET_CONFIGURATION, 0, 0,
         TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1930 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_7500 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1940
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_7600
  * @tc.desc: Test functions to ControlTransferWrite
  * @tc.desc: int32_t ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1940, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_7600, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { BUS_NUM_INVALID, dev_.devAddr };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -860,18 +895,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1940, Function | MediumTest | Level1)
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_ENDPOINT, 0, 0, 0,
         TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1940 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_7600 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1950
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_7700
  * @tc.desc: Test functions to ControlTransferWrite
  * @tc.desc: int32_t ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1950, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_7700, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { dev_.busNum, DEV_ADDR_INVALID };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -881,18 +917,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1950, Function | MediumTest | Level1)
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_ENDPOINT, 0, 0, 0,
         TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1950 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_7700 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1960
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_7800
  * @tc.desc: Test functions to ControlTransferWrite
  * @tc.desc: int32_t ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1960, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_7800, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -902,18 +939,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1960, Function | MediumTest | Level1)
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_ENDPOINT, USB_DDK_REQ_SYNCH_FRAME,
         0, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1960 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_7800 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1970
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_7900
  * @tc.desc: Test functions to ControlTransferWrite
  * @tc.desc: int32_t ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1970, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_7900, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { BUS_NUM_INVALID, dev_.devAddr };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -923,18 +961,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1970, Function | MediumTest | Level1)
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_ENDPOINT, USB_DDK_REQ_SYNCH_FRAME,
         0, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1970 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_7900 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1980
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_8000
  * @tc.desc: Test functions to ControlTransferWrite
  * @tc.desc: int32_t ControlTransferWrite(const UsbDev &dev, UsbCtrlTransfer &ctrl, std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1980, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_8000, Function | MediumTest | Level1)
 {
     struct UsbDev dev = { dev_.busNum, DEV_ADDR_INVALID };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
@@ -944,365 +983,397 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1980, Function | MediumTest | Level1)
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT | USB_REQUEST_TARGET_ENDPOINT, USB_DDK_REQ_SYNCH_FRAME,
         0, 0, TRANSFER_TIME_OUT};
     auto ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1980 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_8000 "
+        "%{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0660
+ * @tc.name: SUB_USB_HostManager_HDI_TranFunc_0200
  * @tc.desc: Test functions to BulkTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0660, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranFunc_0200, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0660 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranFunc_0200 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     ret = g_usbInterface->BulkTransferRead(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0660 %{public}d UsbdBulkTransferRead=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranFunc_0200 "
+        "%{public}d UsbdBulkTransferRead=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0670
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_2100
  * @tc.desc: Test functions to BulkTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0670, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_2100, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0670 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_2100 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     dev.busNum = BUS_NUM_INVALID;
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     ret = g_usbInterface->BulkTransferRead(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0670 %{public}d UsbdBulkTransferRead=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_2100 "
+        "%{public}d UsbdBulkTransferRead=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0680
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_2200
  * @tc.desc: Test functions to BulkTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0680, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_2200, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0680 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_2200 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     dev.devAddr = DEV_ADDR_INVALID;
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     ret = g_usbInterface->BulkTransferRead(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0680 %{public}d UsbdBulkTransferRead=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_2200 "
+        "%{public}d UsbdBulkTransferRead=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0690
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_2300
  * @tc.desc: Test functions to BulkTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, intfId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0690, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_2300, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0690 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_2300 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     pipe.intfId = PIPE_INTERFACEID_INVALID;
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     ret = g_usbInterface->BulkTransferRead(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0690 %{public}d UsbdBulkTransferRead=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_2300 "
+        "%{public}d UsbdBulkTransferRead=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0700
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_2400
  * @tc.desc: Test functions to BulkTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, endpointId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0700, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_2400, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0700 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_2400 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     pipe.endpointId = PIPE_ENDPOINTID_INVALID;
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     ret = g_usbInterface->BulkTransferRead(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0700 %{public}d UsbdBulkTransferRead=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_2400 "
+        "%{public}d UsbdBulkTransferRead=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0710
+ * @tc.name: SUB_USB_HostManager_HDI_TranFunc_1100
  * @tc.desc: Test functions to BulkTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0710, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranFunc_1100, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0710 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranFunc_1100 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     std::vector<uint8_t> bufferData = {'b', 'u', 'l', 'k', 'w', 'r', 'i', 't', 'e', '0', '1'};
     ret = g_usbInterface->BulkTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0710 %{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranFunc_1100 "
+        "%{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0720
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_2500
  * @tc.desc: Test functions to BulkTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0720, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_2500, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0720 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_2500 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     dev.busNum = BUS_NUM_INVALID;
     std::vector<uint8_t> bufferData = {'b', 'u', 'l', 'k', 'w', 'r', 'i', 't', 'e', '0', '2'};
     ret = g_usbInterface->BulkTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0720 %{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_2500 "
+        "%{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0730
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_2600
  * @tc.desc: Test functions to BulkTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0730, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_2600, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0730 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_2600 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     dev.devAddr = DEV_ADDR_INVALID;
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     std::vector<uint8_t> bufferData = {'b', 'u', 'l', 'k', 'w', 'r', 'i', 't', 'e', '0', '3'};
     ret = g_usbInterface->BulkTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0730 %{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_2600 "
+        "%{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0740
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_2700
  * @tc.desc: Test functions to BulkTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, intfId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0740, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_2700, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0740 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_2700 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     pipe.intfId = PIPE_INTERFACEID_INVALID;
     std::vector<uint8_t> bufferData = {'b', 'u', 'l', 'k', 'w', 'r', 'i', 't', 'e', '0', '4'};
     ret = g_usbInterface->BulkTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0740 %{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_2700 "
+        "%{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0750
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_2800
  * @tc.desc: Test functions to BulkTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, endpointId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0750, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_2800, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0750 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_2800 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     pipe.endpointId = PIPE_ENDPOINTID_INVALID;
     std::vector<uint8_t> bufferData = {'b', 'u', 'l', 'k', 'w', 'r', 'i', 't', 'e', '0', '5'};
     ret = g_usbInterface->BulkTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0750 %{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_2800 "
+        "%{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0760
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_2900
  * @tc.desc: Test functions to BulkTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum && devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0760, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_2900, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0760 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_2900 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     dev.busNum = BUS_NUM_INVALID;
     dev.devAddr = DEV_ADDR_INVALID;
     std::vector<uint8_t> bufferData = {'b', 'u', 'l', 'k', 'w', 'r', 'i', 't', 'e', '0', '6'};
     ret = g_usbInterface->BulkTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0760 %{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_2900 "
+        "%{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0770
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_3000
  * @tc.desc: Test functions to BulkTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, ClaimInterface failed first
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0770, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_3000, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = PIPE_ENDPOINTID_INVALID;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0770 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_3000 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     std::vector<uint8_t> bufferData = {'b', 'u', 'l', 'k', 'w', 'r', 'i', 't', 'e', '0', '7'};
     ret = g_usbInterface->BulkTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0770 %{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_3000 "
+        "%{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_0780
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_3100
  * @tc.desc: Test functions to BulkTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly, different in timeout
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_0780, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_3100, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0780 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_3100 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     std::vector<uint8_t> bufferData = {'b', 'u', 'l', 'k', 'w', 'r', 'i', 't', 'e', '0', '8'};
     ret = g_usbInterface->BulkTransferWrite(dev, pipe, -1, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_0780 %{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_3100 "
+        "%{public}d BulkTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1440
+ * @tc.name: SUB_USB_HostManager_HDI_TranFunc_0400
  * @tc.desc: Test functions to InterruptTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1440, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranFunc_0400, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1440 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranFunc_0400 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     ret = g_usbInterface->InterruptTransferRead(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1440 %{public}d UsbdInterruptTransferRead=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranFunc_0400 "
+        "%{public}d UsbdInterruptTransferRead=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1450
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_3900
  * @tc.desc: Test functions to InterruptTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1450, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_3900, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1450 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_3900 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     dev.busNum = BUS_NUM_INVALID;
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     ret = g_usbInterface->InterruptTransferRead(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1450 %{public}d UsbdInterruptTransferRead=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_3900 "
+        "%{public}d UsbdInterruptTransferRead=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1460
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_4000
  * @tc.desc: Test functions to InterruptTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1460, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_4000, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1460 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_4000 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     dev.devAddr = DEV_ADDR_INVALID;
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
@@ -1312,407 +1383,443 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1460, Function | MediumTest | Level1)
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1470
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_4100
  * @tc.desc: Test functions to InterruptTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, intfId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1470, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_4100, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1470 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_4100 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     pipe.intfId = PIPE_INTERFACEID_INVALID;
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     ret = g_usbInterface->InterruptTransferRead(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1470 %{public}d UsbdInterruptTransferRead=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_4100 "
+        "%{public}d UsbdInterruptTransferRead=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1480
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_4200
  * @tc.desc: Test functions to InterruptTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, endpointId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1480, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_4200, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1480 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_4200 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     pipe.endpointId = PIPE_ENDPOINTID_INVALID;
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     ret = g_usbInterface->InterruptTransferRead(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1480 %{public}d UsbdInterruptTransferRead=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_4200 "
+        "%{public}d UsbdInterruptTransferRead=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1490
+ * @tc.name: SUB_USB_HostManager_HDI_TranFunc_1000
  * @tc.desc: Test functions to InterruptTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1490, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranFunc_1000, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1490 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranFunc_1000 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     std::vector<uint8_t> bufferData = {'i', 'n', 't', 'w', 'r', 'i', 't', 'e', '0', '1'};
     ret = g_usbInterface->InterruptTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1490 %{public}d InterruptTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranFunc_1000 "
+        "%{public}d InterruptTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1500
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_4300
  * @tc.desc: Test functions to InterruptTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1500, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_4300, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1500 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_4300 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     dev.busNum = BUS_NUM_INVALID;
     std::vector<uint8_t> bufferData = {'i', 'n', 't', 'w', 'r', 'i', 't', 'e', '0', '2'};
     ret = g_usbInterface->InterruptTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1500 %{public}d InterruptTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_4300 "
+        "%{public}d InterruptTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1510
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_4400
  * @tc.desc: Test functions to InterruptTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1510, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_4400, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1510 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_4400 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     dev.devAddr = DEV_ADDR_INVALID;
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     std::vector<uint8_t> bufferData = {'i', 'n', 't', 'w', 'r', 'i', 't', 'e', '0', '3'};
     ret = g_usbInterface->InterruptTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1510 %{public}d InterruptTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_4400 "
+        "%{public}d InterruptTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1520
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_4500
  * @tc.desc: Test functions to InterruptTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, intfId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1520, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_4500, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1520 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_4500 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     pipe.intfId = PIPE_INTERFACEID_INVALID;
     std::vector<uint8_t> bufferData = {'i', 'n', 't', 'w', 'r', 'i', 't', 'e', '0', '4'};
     ret = g_usbInterface->InterruptTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1520 %{public}d InterruptTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_4500 "
+        "%{public}d InterruptTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1530
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_4600
  * @tc.desc: Test functions to InterruptTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, endpointId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1530, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_4600, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1530 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_4600 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     pipe.endpointId = PIPE_ENDPOINTID_INVALID;
     std::vector<uint8_t> bufferData = {'i', 'n', 't', 'w', 'r', 'i', 't', 'e', '0', '5'};
     ret = g_usbInterface->InterruptTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1530 %{public}d InterruptTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_4600 "
+        "%{public}d InterruptTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1540
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_4700
  * @tc.desc: Test functions to InterruptTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum && devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1540, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_4700, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1540 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_4700 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     dev.busNum = BUS_NUM_INVALID;
     dev.devAddr = DEV_ADDR_INVALID;
     std::vector<uint8_t> bufferData = {'i', 'n', 't', 'w', 'r', 'i', 't', 'e', '0', '6'};
     ret = g_usbInterface->InterruptTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1540 %{public}d InterruptTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_4700 "
+        "%{public}d InterruptTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1550
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_4800
  * @tc.desc: Test functions to InterruptTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, ClaimInterface failed first
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1550, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_4800, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = PIPE_ENDPOINTID_INVALID;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1550 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_4800 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     std::vector<uint8_t> bufferData = {'i', 'n', 't', 'w', 'r', 'i', 't', 'e', '0', '7'};
     ret = g_usbInterface->InterruptTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1550 %{public}d InterruptTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_4800 "
+        "%{public}d InterruptTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1560
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_4900
  * @tc.desc: Test functions to InterruptTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * Positive test: parameters correctly, different in timeout
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1560, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_4900, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1560 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_4900 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     std::vector<uint8_t> bufferData = {'i', 'n', 't', 'w', 'r', 'i', 't', 'e', '0', '8'};
     ret = g_usbInterface->InterruptTransferWrite(dev, pipe, -1, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1560 %{public}d InterruptTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_4900 "
+        "%{public}d InterruptTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1570
+ * @tc.name: SUB_USB_HostManager_HDI_TranFunc_0500
  * @tc.desc: Test functions to IsoTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1570, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranFunc_0500, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1570 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranFunc_0500 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     ret = g_usbInterface->IsoTransferRead(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1570 %{public}d UsbdIsoTransferRead=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranFunc_0500 "
+        "%{public}d UsbdIsoTransferRead=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1580
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_5000
  * @tc.desc: Test functions to IsoTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1580, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_5000, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_IN;
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1580 %{public}d interfaceId=%{public}d", __LINE__, interfaceId);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_5000 "
+        "%{public}d interfaceId=%{public}d", __LINE__, interfaceId);
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1580 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_5000 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     dev.busNum = BUS_NUM_INVALID;
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     ret = g_usbInterface->IsoTransferRead(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1580 %{public}d UsbdIsoTransferRead=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_5000 "
+        "%{public}d UsbdIsoTransferRead=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1590
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_5100
  * @tc.desc: Test functions to IsoTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1590, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_5100, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1590 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_5100 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     dev.devAddr = DEV_ADDR_INVALID;
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     ret = g_usbInterface->IsoTransferRead(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1590 %{public}d UsbdIsoTransferRead=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_5100 "
+        "%{public}d UsbdIsoTransferRead=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1600
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_5200
  * @tc.desc: Test functions to IsoTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, intfId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1600, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_5200, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1600 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_5200 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     pipe.intfId = PIPE_INTERFACEID_INVALID;
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     ret = g_usbInterface->IsoTransferRead(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1600 %{public}d UsbdIsoTransferRead=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_5200 "
+        "%{public}d UsbdIsoTransferRead=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1610
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_5300
  * @tc.desc: Test functions to IsoTransferRead(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, endpointId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1610, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_5300, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1610 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_5300 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     pipe.endpointId = PIPE_ENDPOINTID_INVALID;
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     ret = g_usbInterface->IsoTransferRead(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1610 %{public}d UsbdIsoTransferRead=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_5300 "
+        "%{public}d UsbdIsoTransferRead=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1620
+ * @tc.name: SUB_USB_HostManager_HDI_TranFunc_1200
  * @tc.desc: Test functions to IsoTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1620, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranFunc_1200, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1620 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranFunc_1200 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     std::vector<uint8_t> bufferData = {'i', 's', 'o', 'w', 'r', 'i', 't', 'e', '0', '1'};
     ret = g_usbInterface->IsoTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1620 %{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranFunc_1200 "
+        "%{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1630
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_5400
  * @tc.desc: Test functions to IsoTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1630, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_5400, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1630 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_5400 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     dev.busNum = BUS_NUM_INVALID;
     std::vector<uint8_t> bufferData = {'i', 's', 'o', 'w', 'r', 'i', 't', 'e', '0', '2'};
     ret = g_usbInterface->IsoTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1630 %{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_5400 "
+        "%{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1640
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_5500
  * @tc.desc: Test functions to IsoTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1640, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_5500, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1640 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_5500 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     dev.devAddr = DEV_ADDR_INVALID;
     uint32_t length = 100;
@@ -1720,131 +1827,142 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1640, Function | MediumTest | Level1)
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     std::vector<uint8_t> bufferData = { buffer, buffer + length };
     ret = g_usbInterface->IsoTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1640 %{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_5500 "
+        "%{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1650
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_5600
  * @tc.desc: Test functions to IsoTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, intfId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1650, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_5600, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1650 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_5600 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     pipe.intfId = PIPE_INTERFACEID_INVALID;
     std::vector<uint8_t> bufferData = {'i', 's', 'o', 'w', 'r', 'i', 't', 'e', '0', '4'};
     ret = g_usbInterface->IsoTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1650 %{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_5600 "
+        "%{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1660
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_5700
  * @tc.desc: Test functions to IsoTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, endpointId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1660, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_5700, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1660 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_5700 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     pipe.endpointId = PIPE_ENDPOINTID_INVALID;
     std::vector<uint8_t> bufferData = {'i', 's', 'o', 'w', 'r', 'i', 't', 'e', '0', '5'};
     ret = g_usbInterface->IsoTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1660 %{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_5700 "
+        "%{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1670
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_5800
  * @tc.desc: Test functions to IsoTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, busNum && devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1670, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_5800, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1670 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_5800 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     dev.busNum = BUS_NUM_INVALID;
     dev.devAddr = DEV_ADDR_INVALID;
     std::vector<uint8_t> bufferData = {'i', 's', 'o', 'w', 'r', 'i', 't', 'e', '0', '6'};
     ret = g_usbInterface->IsoTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1670 %{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_5800 "
+        "%{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1680
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_5900
  * @tc.desc: Test functions to IsoTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Negative test: parameters exception, endpointId error, ClaimInterface failed first
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1680, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_5900, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = PIPE_ENDPOINTID_INVALID;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1680 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_5900 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     std::vector<uint8_t> bufferData = {'i', 's', 'o', 'w', 'r', 'i', 't', 'e', '0', '7'};
     ret = g_usbInterface->IsoTransferWrite(dev, pipe, TRANSFER_TIME_OUT, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1680 %{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_5900 "
+        "%{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1690
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_6000
  * @tc.desc: Test functions to IsoTransferWrite(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
  * std::vector<uint8_t> &data);
  * @tc.desc: Positive test: parameters correctly, different in timeout
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_1690, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_6000, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1690 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_6000 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     std::vector<uint8_t> bufferData = {'i', 's', 'o', 'w', 'r', 'i', 't', 'e', '0', '8'};
     ret = g_usbInterface->IsoTransferWrite(dev, pipe, -1, bufferData);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_1690 %{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_6000 "
+        "%{public}d IsoTransferWrite=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2040
+ * @tc.name: SUB_USB_HostManager_HDI_TranFunc_0800
  * @tc.desc: Test functions to int32_t BulkWrite(const UsbDev &dev, const UsbPipe &pipe, const sptr<Ashmem> &ashmem)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2040, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranFunc_0800, Function | MediumTest | Level1)
 {
     sptr<Ashmem> ashmem;
     uint8_t rflg = 0;
@@ -1853,22 +1971,24 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2040, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2040 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranFunc_0800 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     (void)InitAshmemOne(ashmem, asmSize, rflg);
     ret = g_usbInterface->BulkWrite(dev, pipe, ashmem);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2040 %{public}d BulkWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranFunc_0800 "
+        "%{public}d BulkWrite=%{public}d", __LINE__, ret);
     ASSERT_EQ(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2050
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_8500
  * @tc.desc: Test functions to int32_t BulkWrite(const UsbDev &dev, const UsbPipe &pipe, const sptr<Ashmem> &ashmem)
  * @tc.desc: Negative test: parameters exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2050, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_8500, Function | MediumTest | Level1)
 {
     sptr<Ashmem> ashmem;
     uint8_t rflg = 0;
@@ -1877,23 +1997,25 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2050, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2050 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_8500 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     dev.busNum = BUS_NUM_INVALID;
     (void)InitAshmemOne(ashmem, asmSize, rflg);
     ret = g_usbInterface->BulkWrite(dev, pipe, ashmem);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2050 %{public}d BulkWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_8500 "
+        "%{public}d BulkWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2060
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_8600
  * @tc.desc: Test functions to int32_t BulkWrite(const UsbDev &dev, const UsbPipe &pipe, const sptr<Ashmem> &ashmem)
  * @tc.desc: Negative test: parameters exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2060, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_8600, Function | MediumTest | Level1)
 {
     sptr<Ashmem> ashmem;
     uint8_t rflg = 0;
@@ -1902,23 +2024,25 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2060, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2060 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_8600 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     dev.devAddr = DEV_ADDR_INVALID;
     (void)InitAshmemOne(ashmem, asmSize, rflg);
     ret = g_usbInterface->BulkWrite(dev, pipe, ashmem);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2060 %{public}d BulkWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_8600 "
+        "%{public}d BulkWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2070
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_8700
  * @tc.desc: Test functions to int32_t BulkWrite(const UsbDev &dev, const UsbPipe &pipe, const sptr<Ashmem> &ashmem)
  * @tc.desc: Negative test: parameters exception, intfId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2070, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_8700, Function | MediumTest | Level1)
 {
     sptr<Ashmem> ashmem;
     uint8_t rflg = 0;
@@ -1927,23 +2051,25 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2070, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2070 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_8700 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     pipe.intfId = PIPE_INTERFACEID_INVALID;
     (void)InitAshmemOne(ashmem, asmSize, rflg);
     ret = g_usbInterface->BulkWrite(dev, pipe, ashmem);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2070 %{public}d BulkWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_8700 "
+        "%{public}d BulkWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2080
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_8800
  * @tc.desc: Test functions to int32_t BulkWrite(const UsbDev &dev, const UsbPipe &pipe, const sptr<Ashmem> &ashmem)
  * @tc.desc: Negative test: parameters exception, endpointId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2080, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_8800, Function | MediumTest | Level1)
 {
     sptr<Ashmem> ashmem;
     uint8_t rflg = 0;
@@ -1952,23 +2078,25 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2080, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2080 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_8800 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     pipe.endpointId = PIPE_ENDPOINTID_INVALID;
     (void)InitAshmemOne(ashmem, asmSize, rflg);
     ret = g_usbInterface->BulkWrite(dev, pipe, ashmem);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2080 %{public}d BulkWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_8800 "
+        "%{public}d BulkWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2090
+ * @tc.name: SUB_USB_HostManager_HDI_TranFunc_0900
  * @tc.desc: Test functions to int32_t BulkRead(const UsbDev &dev, const UsbPipe &pipe, const sptr<Ashmem> &ashmem)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2090, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranFunc_0900, Function | MediumTest | Level1)
 {
     sptr<Ashmem> ashmem;
     uint8_t rflg = 0;
@@ -1977,22 +2105,24 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2090, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_IN;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2090 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranFunc_0900 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     (void)InitAshmemOne(ashmem, asmSize, rflg);
     ret = g_usbInterface->BulkRead(dev, pipe, ashmem);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2090 %{public}d BulkWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranFunc_0900 "
+        "%{public}d BulkWrite=%{public}d", __LINE__, ret);
     ASSERT_EQ(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2100
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_8900
  * @tc.desc: Test functions to int32_t BulkRead(const UsbDev &dev, const UsbPipe &pipe, const sptr<Ashmem> &ashmem)
  * @tc.desc: Negative test: parameters exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2100, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_8900, Function | MediumTest | Level1)
 {
     sptr<Ashmem> ashmem;
     uint8_t rflg = 0;
@@ -2001,23 +2131,25 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2100, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2100 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_8900 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     dev.busNum = BUS_NUM_INVALID;
     (void)InitAshmemOne(ashmem, asmSize, rflg);
     ret = g_usbInterface->BulkRead(dev, pipe, ashmem);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2100 %{public}d BulkWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_8900 "
+        "%{public}d BulkWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2110
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_9000
  * @tc.desc: Test functions to int32_t BulkRead(const UsbDev &dev, const UsbPipe &pipe, const sptr<Ashmem> &ashmem)
  * @tc.desc: Negative test: parameters exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2110, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_9000, Function | MediumTest | Level1)
 {
     sptr<Ashmem> ashmem;
     uint8_t rflg = 0;
@@ -2026,23 +2158,25 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2110, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2110 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_9000 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     dev.devAddr = DEV_ADDR_INVALID;
     (void)InitAshmemOne(ashmem, asmSize, rflg);
     ret = g_usbInterface->BulkRead(dev, pipe, ashmem);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2110 %{public}d BulkWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_9000 "
+        "%{public}d BulkWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2120
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_9100
  * @tc.desc: Test functions to int32_t BulkRead(const UsbDev &dev, const UsbPipe &pipe, const sptr<Ashmem> &ashmem)
  * @tc.desc: Negative test: parameters exception, intfId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2120, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_9100, Function | MediumTest | Level1)
 {
     sptr<Ashmem> ashmem;
     uint8_t rflg = 0;
@@ -2051,23 +2185,25 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2120, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2120 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_9100 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     pipe.intfId = PIPE_INTERFACEID_INVALID;
     (void)InitAshmemOne(ashmem, asmSize, rflg);
     ret = g_usbInterface->BulkRead(dev, pipe, ashmem);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2120 %{public}d BulkWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_9100 "
+        "%{public}d BulkWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2130
+ * @tc.name: SUB_USB_HostManager_HDI_TranCompatibility_9200
  * @tc.desc: Test functions to int32_t BulkRead(const UsbDev &dev, const UsbPipe &pipe, const sptr<Ashmem> &ashmem)
  * @tc.desc: Negative test: parameters exception, endpointId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2130, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_9200, Function | MediumTest | Level1)
 {
     sptr<Ashmem> ashmem;
     uint8_t rflg = 0;
@@ -2076,24 +2212,26 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2130, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2130 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_9200 "
+        "%{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     pipe.endpointId = PIPE_ENDPOINTID_INVALID;
     (void)InitAshmemOne(ashmem, asmSize, rflg);
     ret = g_usbInterface->BulkRead(dev, pipe, ashmem);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2130 %{public}d BulkWrite=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_9200 "
+        "%{public}d BulkWrite=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2240
+ * @tc.name: SUB_USB_HostManager_HDI_Func_1200
  * @tc.desc: Test functions to RegBulkCallback
  * @tc.desc: int32_t RegBulkCallback(const UsbDev &dev, const UsbPipe &pipe, const sptr<IUsbdBulkCallback> &cb)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2240, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_Func_1200, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
@@ -2105,18 +2243,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2240, Function | MediumTest | Level1)
         exit(0);
     }
     auto ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2240 %{public}d RegBulkCallback=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Func_1200 "
+        "%{public}d RegBulkCallback=%{public}d", __LINE__, ret);
     ASSERT_EQ(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2250
+ * @tc.name: SUB_USB_HostManager_HDI_Compatibility_6200
  * @tc.desc: Test functions to RegBulkCallback
  * @tc.desc: int32_t RegBulkCallback(const UsbDev &dev, const UsbPipe &pipe, const sptr<IUsbdBulkCallback> &cb)
  * @tc.desc: Negative test: parameters exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2250, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_Compatibility_6200, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
@@ -2129,18 +2268,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2250, Function | MediumTest | Level1)
         exit(0);
     }
     auto ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2250 %{public}d RegBulkCallback=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_6200 "
+        "%{public}d RegBulkCallback=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2260
+ * @tc.name: SUB_USB_HostManager_HDI_Compatibility_6300
  * @tc.desc: Test functions to RegBulkCallback
  * @tc.desc: int32_t RegBulkCallback(const UsbDev &dev, const UsbPipe &pipe, const sptr<IUsbdBulkCallback> &cb)
  * @tc.desc: Negative test: parameters exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2260, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_Compatibility_6300, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
@@ -2153,18 +2293,19 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2260, Function | MediumTest | Level1)
         exit(0);
     }
     auto ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2260 %{public}d RegBulkCallback=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_6300 "
+        "%{public}d RegBulkCallback=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2270
+ * @tc.name: SUB_USB_HostManager_HDI_Compatibility_6400
  * @tc.desc: Test functions to RegBulkCallback
  * @tc.desc: int32_t RegBulkCallback(const UsbDev &dev, const UsbPipe &pipe, const sptr<IUsbdBulkCallback> &cb)
  * @tc.desc: Negative test: parameters exception, intfId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2270, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_Compatibility_6400, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
@@ -2182,30 +2323,31 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2270, Function | MediumTest | Level1)
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2280
+ * @tc.name: SUB_USB_HostManager_HDI_Compatibility_6500
  * @tc.desc: Test functions to RegBulkCallback
  * @tc.desc: int32_t RegBulkCallback(const UsbDev &dev, const UsbPipe &pipe, const sptr<IUsbdBulkCallback> &cb)
  * @tc.desc: Negative test: parameters exception, cb error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2280, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_Compatibility_6500, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_BULK_OUT;
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = {interfaceId, pointId};
     auto ret = g_usbInterface->RegBulkCallback(dev, pipe, nullptr);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2280 %{public}d RegBulkCallback=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_6500 "
+        "%{public}d RegBulkCallback=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2290
+ * @tc.name: SUB_USB_HostManager_HDI_Func_1300
  * @tc.desc: Test functions to int32_t UnRegBulkCallback(const UsbDev &dev, const UsbPipe &pipe)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2290, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_Func_1300, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
@@ -2217,20 +2359,22 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2290, Function | MediumTest | Level1)
         exit(0);
     }
     auto ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2290 %{public}d RegBulkCallback=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Func_1300 "
+        "%{public}d RegBulkCallback=%{public}d", __LINE__, ret);
     ASSERT_EQ(ret, 0);
     ret = g_usbInterface->UnRegBulkCallback(dev, pipe);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2290 %{public}d UnRegBulkCallback=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Func_1300 "
+        "%{public}d UnRegBulkCallback=%{public}d", __LINE__, ret);
     ASSERT_EQ(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2300
+ * @tc.name: SUB_USB_HostManager_HDI_Compatibility_6600
  * @tc.desc: Test functions to int32_t UnRegBulkCallback(const UsbDev &dev, const UsbPipe &pipe)
  * @tc.desc: Negative test: parameters exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2300, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_Compatibility_6600, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
@@ -2242,25 +2386,28 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2300, Function | MediumTest | Level1)
         exit(0);
     }
     auto ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2300 %{public}d RegBulkCallback=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_6600 "
+        "%{public}d RegBulkCallback=%{public}d", __LINE__, ret);
     ASSERT_EQ(ret, 0);
     dev.devAddr = DEV_ADDR_INVALID;
     ret = g_usbInterface->UnRegBulkCallback(dev, pipe);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2300 %{public}d UnRegBulkCallback=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_6600 "
+        "%{public}d UnRegBulkCallback=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
     dev = dev_;
     ret = g_usbInterface->UnRegBulkCallback(dev, pipe);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2300 %{public}d again UnRegBulkCallback=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_6600 "
+        "%{public}d again UnRegBulkCallback=%{public}d", __LINE__, ret);
     ASSERT_EQ(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2310
+ * @tc.name: SUB_USB_HostManager_HDI_Compatibility_6700
  * @tc.desc: Test functions to int32_t UnRegBulkCallback(const UsbDev &dev, const UsbPipe &pipe)
  * @tc.desc: Negative test: parameters exception, intfId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2310, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_Compatibility_6700, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
@@ -2272,25 +2419,28 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2310, Function | MediumTest | Level1)
         exit(0);
     }
     auto ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2310 %{public}d RegBulkCallback=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_6700 "
+        "%{public}d RegBulkCallback=%{public}d", __LINE__, ret);
     ASSERT_EQ(ret, 0);
     pipe.intfId = PIPE_INTERFACEID_INVALID;
     ret = g_usbInterface->UnRegBulkCallback(dev, pipe);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2310 %{public}d UnRegBulkCallback=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_6700 "
+        "%{public}d UnRegBulkCallback=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
     pipe = {interfaceId, pointId};
     ret = g_usbInterface->UnRegBulkCallback(dev, pipe);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2310 %{public}d again UnRegBulkCallback=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_6700 "
+        "%{public}d again UnRegBulkCallback=%{public}d", __LINE__, ret);
     ASSERT_EQ(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2320
+ * @tc.name: SUB_USB_HostManager_HDI_Compatibility_6800
  * @tc.desc: Test functions to int32_t UnRegBulkCallback(const UsbDev &dev, const UsbPipe &pipe)
  * @tc.desc: Positive test: call again
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2320, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_Compatibility_6800, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
@@ -2302,23 +2452,26 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2320, Function | MediumTest | Level1)
         exit(0);
     }
     auto ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2320 %{public}d RegBulkCallback=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_6800 "
+        "%{public}d RegBulkCallback=%{public}d", __LINE__, ret);
     ASSERT_EQ(ret, 0);
     ret = g_usbInterface->UnRegBulkCallback(dev, pipe);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2320 %{public}d UnRegBulkCallback=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_6800 "
+        "%{public}d UnRegBulkCallback=%{public}d", __LINE__, ret);
     ASSERT_EQ(ret, 0);
     ret = g_usbInterface->UnRegBulkCallback(dev, pipe);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2320 %{public}d again UnRegBulkCallback=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_6800 "
+        "%{public}d again UnRegBulkCallback=%{public}d", __LINE__, ret);
     ASSERT_EQ(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2330
+ * @tc.name: SUB_USB_HostManager_HDI_Compatibility_6900
  * @tc.desc: Test functions to int32_t UnRegBulkCallback(const UsbDev &dev, const UsbPipe &pipe)
  * @tc.desc: Positive test: no register
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2330, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_Compatibility_6900, Function | MediumTest | Level1)
 {
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
@@ -2330,12 +2483,12 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2330, Function | MediumTest | Level1)
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2140
+ * @tc.name: SUB_USB_HostManager_HDI_Func_1000
  * @tc.desc: Test functions to int32_t BindUsbdSubscriber(const sptr<IUsbdSubscriber> &subscriber)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2140, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_Func_1000, Function | MediumTest | Level1)
 {
     subscriber_ = new UsbSubscriberTest();
     if (subscriber_ == nullptr) {
@@ -2343,17 +2496,18 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2140, Function | MediumTest | Level1)
         exit(0);
     }
     auto ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2140 %{public}d BindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Func_1000 "
+        "%{public}d BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2150
+ * @tc.name: SUB_USB_HostManager_HDI_Compatibility_5400
  * @tc.desc: Test functions to int32_t BindUsbdSubscriber(const sptr<IUsbdSubscriber> &subscriber)
  * @tc.desc: Positive test: bind different
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2150, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_Compatibility_5400, Function | MediumTest | Level1)
 {
     subscriber_ = new UsbSubscriberTest();
     if (subscriber_ == nullptr) {
@@ -2361,7 +2515,8 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2150, Function | MediumTest | Level1)
         exit(0);
     }
     auto ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2150 %{public}d BindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_5400 "
+        "%{public}d BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     sptr<UsbSubscriberTest> subscriber2 = new UsbSubscriberTest();
     if (subscriber_ == nullptr) {
@@ -2369,17 +2524,18 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2150, Function | MediumTest | Level1)
         exit(0);
     }
     ret = g_usbInterface->BindUsbdSubscriber(subscriber2);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2150 %{public}d again BindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_5400 "
+        "%{public}d again BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2160
+ * @tc.name: SUB_USB_HostManager_HDI_Compatibility_5500
  * @tc.desc: Test functions to int32_t BindUsbdSubscriber(const sptr<IUsbdSubscriber> &subscriber)
  * @tc.desc: Positive test: bind same
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2160, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_Compatibility_5500, Function | MediumTest | Level1)
 {
     subscriber_ = new UsbSubscriberTest();
     if (subscriber_ == nullptr) {
@@ -2387,20 +2543,22 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2160, Function | MediumTest | Level1)
         exit(0);
     }
     auto ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2160 %{public}d BindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_5500 "
+        "%{public}d BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2160 %{public}d again BindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_5500 "
+        "%{public}d again BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2170
+ * @tc.name: SUB_USB_HostManager_HDI_Compatibility_5600
  * @tc.desc: Test functions to int32_t BindUsbdSubscriber(const sptr<IUsbdSubscriber> &subscriber)
  * @tc.desc: Positive test: bind and unbind, then bind another
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2170, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_Compatibility_5600, Function | MediumTest | Level1)
 {
     subscriber_ = new UsbSubscriberTest();
     if (subscriber_ == nullptr) {
@@ -2408,10 +2566,12 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2170, Function | MediumTest | Level1)
         exit(0);
     }
     auto ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2170 %{public}d BindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_5600 "
+        "%{public}d BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     ret = g_usbInterface->UnbindUsbdSubscriber(subscriber_);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2170 %{public}d UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_5600 "
+        "%{public}d UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     sptr<UsbSubscriberTest> subscriber2 = new UsbSubscriberTest();
     if (subscriber_ == nullptr) {
@@ -2419,17 +2579,18 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2170, Function | MediumTest | Level1)
         exit(0);
     }
     ret = g_usbInterface->BindUsbdSubscriber(subscriber2);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2170 again %{public}d BindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_5600 "
+        "again %{public}d BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2180
+ * @tc.name: SUB_USB_HostManager_HDI_Compatibility_5700
  * @tc.desc: Test functions to int32_t BindUsbdSubscriber(const sptr<IUsbdSubscriber> &subscriber)
  * @tc.desc: Positive test: bind again after unbind
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2180, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_Compatibility_5700, Function | MediumTest | Level1)
 {
     subscriber_ = new UsbSubscriberTest();
     if (subscriber_ == nullptr) {
@@ -2437,23 +2598,26 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2180, Function | MediumTest | Level1)
         exit(0);
     }
     auto ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2180 %{public}d BindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_5700 "
+        "%{public}d BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     ret = g_usbInterface->UnbindUsbdSubscriber(subscriber_);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2180 %{public}d UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_5700 "
+        "%{public}d UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2180 %{public}d again BindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_5700 "
+        "%{public}d again BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2190
+ * @tc.name: SUB_USB_HostManager_HDI_Func_1100
  * @tc.desc: Test functions to int32_t UnbindUsbdSubscriber(const sptr<IUsbdSubscriber> &subscriber)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2190, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_Func_1100, Function | MediumTest | Level1)
 {
     subscriber_ = new UsbSubscriberTest();
     if (subscriber_ == nullptr) {
@@ -2461,20 +2625,22 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2190, Function | MediumTest | Level1)
         exit(0);
     }
     auto ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2190 %{public}d first BindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Func_1100 "
+        "%{public}d first BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     ret = g_usbInterface->UnbindUsbdSubscriber(subscriber_);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2190 %{public}d UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Func_1100 "
+        "%{public}d UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2200
+ * @tc.name: SUB_USB_HostManager_HDI_Compatibility_5800
  * @tc.desc: Test functions to int32_t UnbindUsbdSubscriber(const sptr<IUsbdSubscriber> &subscriber)
  * @tc.desc: Negative test: no bind first
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2200, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_Compatibility_5800, Function | MediumTest | Level1)
 {
     subscriber_ = new UsbSubscriberTest();
     if (subscriber_ == nullptr) {
@@ -2482,17 +2648,18 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2200, Function | MediumTest | Level1)
         exit(0);
     }
     auto ret = g_usbInterface->UnbindUsbdSubscriber(subscriber_);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2200 %{public}d UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_5800 "
+        "%{public}d UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_NE(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2210
+ * @tc.name: SUB_USB_HostManager_HDI_Compatibility_5900
  * @tc.desc: Test functions to int32_t UnbindUsbdSubscriber(const sptr<IUsbdSubscriber> &subscriber)
  * @tc.desc: Positive test: no bind first, unbind failed; then bind, unbind success
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2210, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_Compatibility_5900, Function | MediumTest | Level1)
 {
     subscriber_ = new UsbSubscriberTest();
     if (subscriber_ == nullptr) {
@@ -2500,24 +2667,27 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2210, Function | MediumTest | Level1)
         exit(0);
     }
     auto ret = g_usbInterface->UnbindUsbdSubscriber(subscriber_);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2210 %{public}d UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_5900 "
+        "%{public}d UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_NE(0, ret);
     ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2210 %{public}d first BindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI(
+        "UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_5900 %{public}d first BindUsbdSubscriber=%{public}d",
+        __LINE__, ret);
     ASSERT_EQ(0, ret);
     ret = g_usbInterface->UnbindUsbdSubscriber(subscriber_);
-    HDF_LOGI(
-        "UsbdTransferTest::SUB_USB_HDI_2210 %{public}d again UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_5900 "
+        "%{public}d again UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2220
+ * @tc.name: SUB_USB_HostManager_HDI_Compatibility_6000
  * @tc.desc: Test functions to int32_t UnbindUsbdSubscriber(const sptr<IUsbdSubscriber> &subscriber)
  * @tc.desc: Negative test: call twice
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2220, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_Compatibility_6000, Function | MediumTest | Level1)
 {
     subscriber_ = new UsbSubscriberTest();
     if (subscriber_ == nullptr) {
@@ -2525,25 +2695,26 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2220, Function | MediumTest | Level1)
         exit(0);
     }
     auto ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2220 %{public}d first BindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_6000 "
+        "%{public}d first BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     ret = g_usbInterface->UnbindUsbdSubscriber(subscriber_);
-    HDF_LOGI(
-        "UsbdTransferTest::SUB_USB_HDI_2220 %{public}d first UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_6000 "
+        "%{public}d first UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     ret = g_usbInterface->UnbindUsbdSubscriber(subscriber_);
-    HDF_LOGI(
-        "UsbdTransferTest::SUB_USB_HDI_2220 %{public}d again UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_6000 "
+        "%{public}d again UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_NE(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2230
+ * @tc.name: SUB_USB_HostManager_HDI_Compatibility_6100
  * @tc.desc: Test functions to int32_t UnbindUsbdSubscriber(const sptr<IUsbdSubscriber> &subscriber)
  * @tc.desc: Positive test: test repeatedly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2230, Function | MediumTest | Level1)
+HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_Compatibility_6100, Function | MediumTest | Level1)
 {
     subscriber_ = new UsbSubscriberTest();
     if (subscriber_ == nullptr) {
@@ -2551,18 +2722,20 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HDI_2230, Function | MediumTest | Level1)
         exit(0);
     }
     auto ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2230 %{public}d first BindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_6100 "
+        "%{public}d first BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     ret = g_usbInterface->UnbindUsbdSubscriber(subscriber_);
-    HDF_LOGI(
-        "UsbdTransferTest::SUB_USB_HDI_2230 %{public}d first UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_6100 "
+        "%{public}d first UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     ret = g_usbInterface->BindUsbdSubscriber(subscriber_);
-    HDF_LOGI("UsbdTransferTest::SUB_USB_HDI_2230 %{public}d again BindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_6100 "
+        "%{public}d again BindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     ret = g_usbInterface->UnbindUsbdSubscriber(subscriber_);
-    HDF_LOGI(
-        "UsbdTransferTest::SUB_USB_HDI_2230 %{public}d again UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_Compatibility_6100 "
+        "%{public}d again UnbindUsbdSubscriber=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 } // namespace

@@ -20,8 +20,8 @@
 #include <condition_variable>
 #include <benchmark/benchmark.h>
 #include "gtest/gtest.h"
-#include "v1_0/include/idisplay_composer_interface.h"
-#include "v1_0/display_composer_type.h"
+#include "v1_1/include/idisplay_composer_interface.h"
+#include "v1_1/display_composer_type.h"
 #include "v1_0/display_buffer_type.h"
 #include "display_test.h"
 #include "display_test_utils.h"
@@ -32,7 +32,7 @@
 #include "hdi_test_render_utils.h"
 
 using namespace OHOS::HDI::Display::Buffer::V1_0;
-using namespace OHOS::HDI::Display::Composer::V1_0;
+using namespace OHOS::HDI::Display::Composer::V1_1;
 using namespace OHOS::HDI::Display::TEST;
 using namespace testing::ext;
 using namespace std;
@@ -59,10 +59,9 @@ private:
     bool hasVblank_ = false;
 };
 
-std::shared_ptr<IDisplayComposerInterface> g_composerDevice {};
-static std::shared_ptr<HdiTestLayer> g_testFreshLayer;
-std::shared_ptr<IDisplayBuffer> g_gralloc = nullptr;
-std::vector<uint32_t> g_displayIds;
+static sptr<Composer::V1_1::IDisplayComposerInterface> g_composerDevice = nullptr;
+static std::shared_ptr<IDisplayBuffer> g_gralloc = nullptr;
+static std::vector<uint32_t> g_displayIds;
 const int SLEEP_CONT_100 = 100;
 const int SLEEP_CONT_1000 = 1000;
 

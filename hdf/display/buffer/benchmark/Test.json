@@ -2,7 +2,7 @@
     "kits": [
         {
             "push": [
-                "HatsHdfDisplayComposerUtAdditionalTest->/data/local/tmp/HatsHdfDisplayComposerUtAdditionalTest"
+                "HatsHdfDisplayBufferbenchmarkTest->/data/local/tmp/HatsHdfDisplayBufferbenchmarkTest"
             ],
             "type": "PushKit"
         }
@@ -10,9 +10,9 @@
     "driver": {
         "native-test-timeout": "120000",
         "type": "CppTest",
-        "module-name": "HatsHdfDisplayComposerUtAdditionalTest",
+        "module-name": "HatsHdfDisplayBufferbenchmarkTest",
         "runtime-hint": "1s",
         "native-test-device-path": "/data/local/tmp"
     },
-    "description": "Configuration for HatsHdfDisplayComposerUtAdditionalTest Tests"
+    "description": "Configuration for HatsHdfDisplayBufferbenchmarkTest Tests"
 }

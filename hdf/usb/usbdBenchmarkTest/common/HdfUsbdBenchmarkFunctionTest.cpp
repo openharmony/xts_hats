@@ -58,13 +58,13 @@ void HdfUsbdBenchmarkFunctionTest::SetUp(const ::benchmark::State& state)
 void HdfUsbdBenchmarkFunctionTest::TearDown(const ::benchmark::State& state) {}
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0030
+ * @tc.name: SUB_USB_DeviceManager_HDI_Performance_0100
  * @tc.desc: Test functions to GetCurrentFunctions benchmark test
  * @tc.desc: int32_t GetCurrentFunctions(int32_t &funcs);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0030)
+BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_DeviceManager_HDI_Performance_0100)
 (benchmark::State& st)
 {
     int32_t funcs = USB_FUNCTION_NONE;
@@ -75,19 +75,19 @@ BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0030)
     ASSERT_EQ(0, ret);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0030)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_DeviceManager_HDI_Performance_0100)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0040
+ * @tc.name: SUB_USB_DeviceManager_HDI_Performance_0200
  * @tc.desc: Test functions to SetCurrentFunctions benchmark test
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0040)
+BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_DeviceManager_HDI_Performance_0200)
 (benchmark::State& st)
 {
     int32_t funcs = USB_FUNCTION_ACM;
@@ -98,19 +98,19 @@ BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0040)
     ASSERT_EQ(0, ret);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0040)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_DeviceManager_HDI_Performance_0200)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0050
+ * @tc.name: SUB_USB_PortManager_HDI_Performance_0100
  * @tc.desc: Test functions to SetPortRole benchmark test
  * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0050)
+BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_PortManager_HDI_Performance_0100)
 (benchmark::State& st)
 {
     auto ret = 0;
@@ -121,19 +121,19 @@ BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0050)
     ASSERT_EQ(0, ret);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0050)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_PortManager_HDI_Performance_0100)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0060
+ * @tc.name: SUB_USB_PortManager_HDI_Performance_0200
  * @tc.desc: Test functions to QueryPort benchmark test
  * @tc.desc: int32_t QueryPort(int32_t &portId, int32_t &powerRole, int32_t &dataRole, int32_t &mode);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0060)
+BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_PortManager_HDI_Performance_0200)
 (benchmark::State& st)
 {
     int32_t portId = DEFAULT_PORT_ID;
@@ -147,7 +147,7 @@ BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0060)
     ASSERT_EQ(0, ret);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_HDI_Benchmark_0060)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_PortManager_HDI_Performance_0200)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();

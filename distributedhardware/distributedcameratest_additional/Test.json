@@ -1,7 +1,7 @@
 {
     "description": "Config for disSreen test cases",
     "driver": {
-        "module-name": "HatsdisCameraProviderCaseAdditional",
+        "module-name": "HatsdisCameraProviderCaseAdditionalTest",
         "native-test-timeout": "120000",
         "native-test-device-path": "/data/local/tmp",
         "runtime-hint": "1s",
@@ -13,7 +13,7 @@
         "chmod -R 777 /data/local/tmp/*"
      ],
         "push": [
-          "HatsdisCameraProviderCaseAdditional->/data/local/tmp/HatsdisCameraProviderCaseAdditional"
+          "HatsdisCameraProviderCaseAdditionalTest->/data/local/tmp/HatsdisCameraProviderCaseAdditionalTest"
 	],
       "type": "PushKit"
        }

@@ -44,35 +44,35 @@ void UsbdAutoFunctionTest::SetUp(void) {}
 void UsbdAutoFunctionTest::TearDown(void) {}
 
 /**
- * @tc.name: SUB_USB_HDI_1250
+ * @tc.name: SUB_USB_DeviceManager_HDI_Func_0300
  * @tc.desc: Test functions to GetCurrentFunctions
  * @tc.desc: int32_t GetCurrentFunctions(int32_t &funcs);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdAutoFunctionTest, SUB_USB_HDI_1250, Function | MediumTest | Level1)
+HWTEST_F(UsbdAutoFunctionTest, SUB_USB_DeviceManager_HDI_Func_0300, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_NONE;
     auto ret = g_usbInterface->GetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdAutoFunctionTest::SUB_USB_HDI_1250 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdAutoFunctionTest::SUB_USB_DeviceManager_HDI_Func_0300 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1700
+ * @tc.name: SUB_USB_PortManager_HDI_Func_0200
  * @tc.desc: Test functions to QueryPort
  * @tc.desc: int32_t QueryPort(int32_t &portId, int32_t &powerRole, int32_t &dataRole, int32_t &mode);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdAutoFunctionTest, SUB_USB_HDI_1700, Function | MediumTest | Level1)
+HWTEST_F(UsbdAutoFunctionTest, SUB_USB_PortManager_HDI_Func_0200, Function | MediumTest | Level1)
 {
     int32_t portId = DEFAULT_PORT_ID;
     int32_t powerRole = POWER_ROLE_NONE;
     int32_t dataRole = DATA_ROLE_NONE;
     int32_t mode = PORT_MODE_NONE;
     auto ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
-    HDF_LOGI("UsbdAutoFunctionTest::SUB_USB_HDI_1700 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdAutoFunctionTest::SUB_USB_PortManager_HDI_Func_0200 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 } // namespace

@@ -23,7 +23,7 @@ group("HatsHdfLightTest") {
       #"liteos:HatsHdfLightHdiTest",
       "hdiService:HatsHdfLightCommonTest",
       "hdiService:HatsHdfLightServiceTest",
-      "hdiService_additional:HatsHdfLightCommonTestAdditional",
+      "hdiService_additional:HatsHdfLightCommonAdditionalTest",
 
       #"lightBenchmarkTest:HatsHdfLightbenchmarkTest",
     ]

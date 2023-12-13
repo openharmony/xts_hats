@@ -29,6 +29,8 @@ group("HatsHdfDisplayBufferTest") {
       "moduletest:HatsHdfDisplayBufferMtTest",
       "moduletest_additional:HatsHdfDisplayBufferMtAdditionalTest",
       "unittest:HatsHdfDisplayBufferUtTest",
+
+      #"benchmark:HatsHdfDisplayBufferbenchmarkTest",
     ]
   }
 }

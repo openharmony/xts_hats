@@ -30,7 +30,7 @@ group("HatsHdfDisplayTest") {
     deps = [
       "buffer:HatsHdfDisplayBufferTest",
 
-      # "composer/benchmark:HatsHdfDisplayabenchmarkTest",
+      #"composer/benchmark:HatsHdfDisplayabenchmarkTest",
       "composer/death:HatsHdfDisplayComposerDeathTest",
       "composer/moduletest:HatszHdfDisplayComposerMtTest",
       "composer/unittest:HatszHdfDisplayComposerUtTest",

@@ -251,7 +251,7 @@ HWTEST_F(RtgInterfaceTest, RtgInterfaceBeginFrameFreqWithErrorParam, TestSize.Le
 {
     int ret;
     ret = BeginFrameFreq(-1);
-    EXPECT_NE(ret, 0);    
+    EXPECT_NE(ret, 0);
 }
 
 /**

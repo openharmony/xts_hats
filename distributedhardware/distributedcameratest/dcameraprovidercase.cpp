@@ -84,7 +84,6 @@ DHBase dhBaseTest;
 DCameraProvider cameraProvider;
 DCameraBuffer buffer;
 DCameraHDFEvent hdiEvent;
-//const std::string HDF_DCAMERA_EXT_SERVICE = "distributed_camera_provider_service";
 
 void DCameraProviderTest::SetUpTestCase(void)
 {

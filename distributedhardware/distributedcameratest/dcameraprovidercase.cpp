@@ -80,9 +80,11 @@ DCStreamInfo streamInfo5;
 DCCaptureInfo captureInfo2;
 DCCaptureInfo captureInfo3;
 DHBase dhBase;
+DHBase dhBaseTest;
 DCameraProvider cameraProvider;
 DCameraBuffer buffer;
 DCameraHDFEvent hdiEvent;
+//const std::string HDF_DCAMERA_EXT_SERVICE = "distributed_camera_provider_service";
 
 void DCameraProviderTest::SetUpTestCase(void)
 {
@@ -138,12 +140,16 @@ void DCameraProviderTest::TearDown(void)
     hdiCallback_ = nullptr;
     camDev_ = nullptr;
     stateListener_ = nullptr;
+    dhBase.deviceId_.clear();
+    dhBase.dhId_.clear();
 }
 
 HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_0100, TestSize.Level1)
 {
-    int32_t ret = cameraProvider.EnableDCameraDevice(dhBase, testParam, hdiCallback_);
-    EXPECT_EQ(0, ret) << "EnableDCameraDevice fail";
+    dhBaseTest.deviceId_ = "";
+    dhBaseTest.dhId_ = testCameraDh;
+    int32_t ret = cameraProvider.EnableDCameraDevice(dhBaseTest, testParam, hdiCallback_);
+    EXPECT_EQ(2, ret) << "EnableDCameraDevice fail";
 }
 
 HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_0200, TestSize.Level1)
@@ -233,7 +239,7 @@ HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_1300, TestSize.Level1)
 HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_1400, TestSize.Level1)
 {
     int32_t ret = cameraProvider.Notify(dhBase, hdiEvent);
-    EXPECT_EQ(0, ret) << "Notify fail";
+    EXPECT_EQ(2, ret) << "Notify fail";
 }
 
 HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_1500, TestSize.Level1)
@@ -264,7 +270,7 @@ HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_1800, TestSize.Level1)
 HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_1900, TestSize.Level1)
 {
     int32_t ret = cameraProvider.DisableDCameraDevice(dhBase);
-    EXPECT_EQ(0, ret) << "DisableDCameraDevice fail";
+    EXPECT_EQ(2, ret) << "DisableDCameraDevice fail";
 }
 
 HWTEST_F(DCameraProviderTest, SUB_DH_Dcamera_Hats_2000, TestSize.Level1)

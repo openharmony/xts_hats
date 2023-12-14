@@ -23,6 +23,7 @@ group("HatsHdfInputTest") {
     deps = [
       "hdi_input:HatsHdfInputTest",
       "hdi_passthrough:HatsHdfInputPassthroughTest",
+      "hdi_passthrough_additional:HatsHdfInputPassthroughAdditionalTest",
 
       #"inputBenchmarkTest:HatsHdfInputbenchmarkTest",
       #"PassthroughBenchmarkTest:HatsHdfInputPassthroughBenchmarkTest",

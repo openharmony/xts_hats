@@ -446,4 +446,54 @@ HWTEST_F(HdfThermalHdiTestAdditional, testUnregisterFanCallback002, Function | M
     int32_t ret = g_thermalInterface->UnregisterFanCallback();
     EXPECT_NE(0, ret);
 }
+/**
+ * @tc.number  SUB_Powermgr_Thermal_OnThermalDataEvent_0100
+ * @tc.name  testOnThermalDataEvent001
+ * @tc.desc  Test callback
+ */
+HWTEST_F(HdfThermalHdiTestAdditional, testOnThermalDataEvent001, Function | MediumTest | Level1)
+{
+    int32_t ret = g_thermalInterface->Register(g_callback);
+    EXPECT_EQ(0, ret);
+    sleep(7);
+    EXPECT_EQ(true, (g_onThermalDataEventCount != 0));
+    g_thermalInterface->Unregister();
+    g_onThermalDataEventCount = 0;
+}
+/**
+ * @tc.number  SUB_Powermgr_Thermal_OnThermalDataEvent_0200
+ * @tc.name  testOnThermalDataEvent002
+ * @tc.desc  Test callback
+ */
+HWTEST_F(HdfThermalHdiTestAdditional, testOnThermalDataEvent002, Function | MediumTest | Level2)
+{
+    sleep(7);
+    EXPECT_EQ(false, (g_onThermalDataEventCount != 0));
+    g_onThermalDataEventCount = 0;
+}
+/**
+ * @tc.number  SUB_Powermgr_Thermal_OnFanDataEvent_0100
+ * @tc.name  testOnFanDataEvent001
+ * @tc.desc  Test callback
+ */
+HWTEST_F(HdfThermalHdiTestAdditional, testOnFanDataEvent001, Function | MediumTest | Level1)
+{
+    int32_t ret = g_thermalInterface->RegisterFanCallback(g_fanCallback);
+    EXPECT_EQ(0, ret);
+    sleep(6);
+    EXPECT_EQ(true, (g_onFanDataEventCount != 0));
+    g_thermalInterface->UnregisterFanCallback();
+    g_onFanDataEventCount = 0;
+}
+/**
+ * @tc.number  SUB_Powermgr_Thermal_OnFanDataEvent_0200
+ * @tc.name  testOnFanDataEvent002
+ * @tc.desc  Test callback
+ */
+HWTEST_F(HdfThermalHdiTestAdditional, testOnFanDataEvent002, Function | MediumTest | Level2)
+{
+    sleep(6);
+    EXPECT_EQ(false, (g_onFanDataEventCount != 0));
+    g_onFanDataEventCount = 0;
+}
 } // namespace

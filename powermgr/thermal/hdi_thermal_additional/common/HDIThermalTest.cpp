@@ -34,6 +34,8 @@ using namespace OHOS::HDI::Thermal::V1_1;
 using namespace testing::ext;
 
 namespace {
+int g_onFanDataEventCount = 0;
+int g_onThermalDataEventCount = 0;
 class ThermalCallbackMock : public IThermalCallback {
 public:
     virtual ~ThermalCallbackMock() {}
@@ -46,6 +48,7 @@ public:
     int32_t OnThermalDataEvent(const HdfThermalCallbackInfo &event) override
     {
         (void)event;
+        g_onThermalDataEventCount++;
         return 0;
     }
 };
@@ -62,6 +65,7 @@ public:
     int32_t OnFanDataEvent(const HdfThermalCallbackInfo &event) override
     {
         (void)event;
+        g_onFanDataEventCount++;
         return 0;
     }
 };

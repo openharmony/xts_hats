@@ -19,7 +19,7 @@ group("distributedhardware") {
     if (hats_rich == false) {
       deps = [
         "distributedcameratest:HatsdisCameraProviderCase",
-        "distributedcameratest_additional:HatsdisCameraProviderCaseAdditional",
+        "distributedcameratest_additional:HatsdisCameraProviderCaseAdditionalTest",
       ]
     } else {
       deps = [ "distributedcameratest:HatsdisCameraProviderCase" ]

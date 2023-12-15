@@ -19,7 +19,7 @@ config("module_private_config") {
   visibility = [ ":*" ]
 }
 
-ohos_moduletest_suite("HatsHdfDisplayComposerUtTestAdditional") {
+ohos_moduletest_suite("HatsHdfDisplayComposerUtAdditionalTest") {
   module_out_path = module_output_path
   sources = [ "hdi_composer_ut.cpp" ]
   deps = [ "../common:disp_dev_hdi_test" ]
@@ -28,11 +28,11 @@ ohos_moduletest_suite("HatsHdfDisplayComposerUtTestAdditional") {
   external_deps = [
     "c_utils:utils",
     "drivers_interface_display:display_buffer_idl_headers",
-    "drivers_interface_display:display_composer_idl_headers",
+    "drivers_interface_display:display_composer_idl_headers_1.1",
     "drivers_interface_display:libdisplay_buffer_hdi_impl",
-    "drivers_interface_display:libdisplay_composer_hdi_impl",
+    "drivers_interface_display:libdisplay_composer_hdi_impl_1.1",
     "googletest:gtest",
-    "graphic_chipsetsdk:buffer_handle",
+    "graphic_surface:buffer_handle",
     "hdf_core:libhdf_utils",
     "hilog:libhilog",
     "ipc:ipc_core",

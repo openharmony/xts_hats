@@ -80,13 +80,13 @@ void HdfUsbdBenchmarkRequestTest::ReleasePara(const sptr<UsbSubscriberTest> &sub
 }
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0070
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_0100
  * @tc.desc: Test functions to SetConfig benchmark test
  * @tc.desc: int32_t SetConfig(const UsbDev &dev, uint8_t configIndex);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0070)
+BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_0100)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -103,19 +103,19 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0070)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0070)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_0100)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0080
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_0200
  * @tc.desc: Test functions to GetConfig benchmark test
  * @tc.desc: int32_t GetConfig(const UsbDev &dev, uint8_t &configIndex);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0080)
+BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_0200)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -132,19 +132,19 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0080)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0080)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_0200)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0090
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_0300
  * @tc.desc: Test functions to ClaimInterface benchmark test
  * @tc.desc: int32_t  ClaimInterface(const UsbDev &dev, uint8_t interfaceId);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0090)
+BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_0300)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -161,19 +161,19 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0090)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0090)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_0300)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0100
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_0400
  * @tc.desc: Test functions to SetInterface benchmark test
  * @tc.desc: int32_t SetInterface(const UsbDev &dev, uint8_t interfaceId, uint8_t altIndex);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0100)
+BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_0400)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -192,19 +192,19 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0100)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0100)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_0400)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0110
+ * @tc.name: SUB_USB_DeviceManager_HDI_Performance_0300
  * @tc.desc: Test functions to GetDeviceDescriptor benchmark test
  * @tc.desc: int32_t GetDeviceDescriptor(const UsbDev &dev, std::vector<uint8_t> &descriptor);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0110)
+BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_DeviceManager_HDI_Performance_0300)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -221,19 +221,19 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0110)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0110)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_DeviceManager_HDI_Performance_0300)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0120
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_0500
  * @tc.desc: Test functions to GetStringDescriptor benchmark test
  * @tc.desc: int32_t GetStringDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &descriptor);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0120)
+BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_0500)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -251,19 +251,19 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0120)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0120)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_0500)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0130
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_0600
  * @tc.desc: Test functions to GetConfigDescriptor benchmark test
  * @tc.desc: int32_t GetConfigDescriptor(const UsbDev &dev, uint8_t descId, std::vector<uint8_t> &descriptor);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0130)
+BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_0600)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -281,19 +281,19 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0130)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0130)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_0600)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0140
+ * @tc.name: SUB_USB_DeviceManager_HDI_Performance_0400
  * @tc.desc: Test functions to GetRawDescriptor benchmark test
  * @tc.desc: int32_t GetRawDescriptor(const UsbDev &dev, std::vector<uint8_t> &descriptor);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0140)
+BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_DeviceManager_HDI_Performance_0400)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -310,19 +310,19 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0140)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0140)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_DeviceManager_HDI_Performance_0400)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0150
+ * @tc.name: SUB_USB_DeviceManager_HDI_Performance_0500
  * @tc.desc: Test functions to GetFileDescriptor benchmark test
  * @tc.desc: int32_t GetFileDescriptor(const UsbDev &dev, int32_t &fd);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0150)
+BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_DeviceManager_HDI_Performance_0500)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -339,20 +339,20 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0150)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0150)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_DeviceManager_HDI_Performance_0500)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0160
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_0700
  * @tc.desc: Test functions to RequestQueue benchmark test
  * @tc.desc: int32_t RequestQueue(const UsbDev &dev, const UsbPipe &pipe, std::vector<uint8_t> &clientData,
         std::vector<uint8_t> &buffer);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0160)
+BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_0700)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -374,20 +374,20 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0160)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0160)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_0700)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0170
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_0800
  * @tc.desc: Test functions to RequestWait benchmark test
  * @tc.desc: int32_t RequestWait(const UsbDev &dev, std::vector<uint8_t> &clientData, std::vector<uint8_t> &buffer,
  * int32_t timeout);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0170)
+BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_0800)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -411,19 +411,19 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0170)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0170)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_0800)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0180
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_0900
  * @tc.desc: Test functions to RequestCancel benchmark test
  * @tc.desc: int32_t RequestCancel(const UsbDev &dev, const UsbPipe &pipe);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0180)
+BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_0900)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -446,19 +446,19 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0180)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0180)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_0900)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0190
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_1000
  * @tc.desc: Test functions to ReleaseInterface benchmark test
  * @tc.desc: int32_t ReleaseInterface(const UsbDev &dev, uint8_t interfaceId);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0190)
+BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_1000)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -475,19 +475,19 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0190)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0190)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_1000)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
 /**
- * @tc.name: SUB_USB_HDI_Benchmark_0280
+ * @tc.name: SUB_USB_HostManager_HDI_Performance_2100
  * @tc.desc: Test functions to BulkCancel benchmark test
  * @tc.desc: int32_t BulkCancel(const UsbDev &dev, const UsbPipe &pipe);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0280)
+BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_2100)
 (benchmark::State& st)
 {
     ASSERT_TRUE(g_usbInterface != nullptr);
@@ -510,7 +510,7 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0280)
     ReleasePara(subscriber);
 }
 
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HDI_Benchmark_0280)
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_2100)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();

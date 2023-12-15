@@ -44,7 +44,7 @@ void ComposerDiedRecipient::OnRemoteDied(const wptr<IRemoteObject>& remote)
   */
 HWTEST_F(DeathTest, SUB_Driver_Display_Death_0300, TestSize.Level1)
 {
-    displayComposer_ = IDisplayComposerInterface::Get();
+    displayComposer_ = Composer::V1_1::IDisplayComposerInterface::Get();
     ASSERT_TRUE(displayComposer_ != nullptr);
     sptr<IRemoteObject::DeathRecipient> recipient = new ComposerDiedRecipient();
     ASSERT_TRUE(recipient != nullptr);
@@ -61,7 +61,7 @@ HWTEST_F(DeathTest, SUB_Driver_Display_Death_0300, TestSize.Level1)
   */
 HWTEST_F(DeathTest, SUB_Driver_Display_Death_0400, TestSize.Level1)
 {
-    displayComposer_ = IDisplayComposerInterface::Get();
+    displayComposer_ = Composer::V1_1::IDisplayComposerInterface::Get();
     ASSERT_TRUE(displayComposer_ != nullptr);
     sptr<IRemoteObject::DeathRecipient> recipient = new ComposerDiedRecipient();
     ASSERT_TRUE(recipient != nullptr);

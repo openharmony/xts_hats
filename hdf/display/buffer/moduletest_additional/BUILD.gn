@@ -18,7 +18,7 @@ import("$base_root/drivers/peripheral/display/display_config.gni")
 
 module_output_path = "hats/display"
 
-ohos_moduletest_suite("HatsHdfDisplayBufferMtTestAdditional") {
+ohos_moduletest_suite("HatsHdfDisplayBufferMtAdditionalTest") {
   defines = []
   defines += display_defines
   module_out_path = module_output_path

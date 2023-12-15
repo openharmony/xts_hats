@@ -18,7 +18,7 @@ import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 
 module_output_path = "hats/sensor"
 
-ohos_moduletest_suite("HatsHdfSensorServiceTestAdditional") {
+ohos_moduletest_suite("HatsHdfSensorServiceAdditionalTest") {
   module_out_path = module_output_path
 
   configs = [ ":hdf_sensor_hdiservice_additional" ]
@@ -41,7 +41,7 @@ ohos_moduletest_suite("HatsHdfSensorServiceTestAdditional") {
   if (is_standard_system) {
     external_deps = [
       "c_utils:utils",
-      "drivers_interface_sensor:libsensor_proxy_1.1",
+      "drivers_interface_sensor:libsensor_proxy_2.0",
       "hdf_core:libhdf_utils",
       "hilog:libhilog",
       "ipc:ipc_single",

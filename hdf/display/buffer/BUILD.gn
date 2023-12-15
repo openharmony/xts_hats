@@ -27,8 +27,10 @@ group("HatsHdfDisplayBufferTest") {
     deps = [
       "death:HatsHdfDisplayBufferDeathTest",
       "moduletest:HatsHdfDisplayBufferMtTest",
-      "moduletest_additional:HatsHdfDisplayBufferMtTestAdditional",
+      "moduletest_additional:HatsHdfDisplayBufferMtAdditionalTest",
       "unittest:HatsHdfDisplayBufferUtTest",
+
+      #"benchmark:HatsHdfDisplayBufferbenchmarkTest",
     ]
   }
 }

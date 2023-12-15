@@ -8672,7 +8672,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testRunExtraCommand032, Function | MediumTes
  * @tc.name   : testRunExtraCommand033
  * @tc.desc   : Verify the reliability of the RunExtraCommand function when devIndex is 1.
  */
-HWTEST_F(HdfInputHdiTestAdditional, testRunExtraCommand033, Function | MediumTest | Level2)
+HWTEST_F(HdfInputHdiTestAdditional, testRunExtraCommand033, Function | MediumTest | Level1)
 {
     int32_t ret = INPUT_SUCCESS;
     uint32_t devIndex = 1;
@@ -8692,7 +8692,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testRunExtraCommand033, Function | MediumTes
  * @tc.name   : testRunExtraCommand034
  * @tc.desc   : Verify the reliability of the RunExtraCommand function when devIndex is 1.
  */
-HWTEST_F(HdfInputHdiTestAdditional, testRunExtraCommand034, Function | MediumTest | Level2)
+HWTEST_F(HdfInputHdiTestAdditional, testRunExtraCommand034, Function | MediumTest | Level1)
 {
     int32_t ret = INPUT_SUCCESS;
     uint32_t devIndex = 1;

@@ -27,6 +27,20 @@ static UserAuthInterfaceService g_service;
 int32_t Expectedvalue = 0;
 static OHOS::Parcel parcel;
 
+struct HdiBeginEnrollmentV1_1List {
+    int32_t userId[4] = {12345, 1234, 12345, 12345};
+    int32_t authType[4] = {1, 0, 2, 4};
+    uint32_t executorSensorHint[4] = {0, 65535, 1, 0};
+};
+struct HdiBeginAuthenticationV1_1List {
+    uint32_t authType[4] = {0, 1, 2, 4};
+    uint32_t userId[4] = {356581, 1};
+};
+struct HdiBeginIdentificationV1_1List {
+    uint32_t addExecutor[2] = {0, 1};
+    uint32_t authType[4] = {0, 1, 2, 4};
+};
+
 void UserIamUserAuthTestAdditional::SetUpTestCase() {}
 
 void UserIamUserAuthTestAdditional::TearDownTestCase() {}
@@ -2167,4 +2181,159 @@ HWTEST_F(UserIamUserAuthTestAdditional, testGetAuthTrustLevel005, Function | Med
     EXPECT_EQ(g_service.CancelEnrollment(userId), 0);
     EXPECT_EQ(g_service.DeleteExecutor(index), 0);
     EXPECT_EQ(g_service.CloseSession(userId), 0);
+}
+/**
+ * @tc.number: SUB_Security_IAM_UserAuth_HDI_FUNC_9500
+ * @tc.name  : testBeginEnrollmentV1_1_001
+ * @tc.desc  : Call the HDI-encapsulated BeginEnrollmentV1_1 function, and use a loop to assign the parameters
+ *              in the HdiBeginEnrollmentV1_1List struct to the BeginEnrollmentV1_1 function
+ */
+HWTEST_F(UserIamUserAuthTestAdditional, testBeginEnrollmentV1_1_001, Function | MediumTest | Level2)
+{
+    uint32_t i = 0;
+    HdiBeginEnrollmentV1_1List g_hdiBeginEnrollmentV1_1List;
+    uint32_t userId = g_hdiBeginEnrollmentV1_1List.userId[i];
+    std::vector<uint8_t> challenge;
+    EXPECT_EQ(g_service.OpenSession(userId, challenge), 0);
+
+    ExecutorRegisterInfo info = {};
+    info.executorRole = ExecutorRole::ALL_IN_ONE;
+    info.esl = ExecutorSecureLevel::ESL0;
+    info.publicKey.resize(32);
+    uint64_t index = 0;
+    std::vector<uint8_t> publicKey;
+    std::vector<uint64_t> templateIds;
+
+    std::vector<uint8_t> authToken;
+    EnrollParam param = {};
+    ScheduleInfoV1_1 scheduleInfo = {};
+
+    for (i = 0; i < 4; i++) {
+        info.authType = static_cast<AuthType>(g_hdiBeginEnrollmentV1_1List.authType[i]);
+        EXPECT_EQ(g_service.AddExecutor(info, index, publicKey, templateIds), 0);
+
+        param.authType = static_cast<AuthType>(g_hdiBeginEnrollmentV1_1List.authType[i]);
+        param.executorSensorHint = g_hdiBeginEnrollmentV1_1List.executorSensorHint[i];
+        userId = g_hdiBeginEnrollmentV1_1List.userId[i];
+        if (i == 0) {
+            EXPECT_EQ(g_service.BeginEnrollmentV1_1(userId, authToken, param, scheduleInfo), 0);
+        } else {
+            EXPECT_NE(g_service.BeginEnrollmentV1_1(userId, authToken, param, scheduleInfo), 0);
+        }
+
+        EXPECT_EQ(g_service.CancelEnrollment(userId), 0);
+        EXPECT_EQ(g_service.DeleteExecutor(index), 0);
+    }
+    EXPECT_EQ(g_service.CloseSession(userId), 0);
+}
+/**
+ * @tc.number: SUB_Security_IAM_UserAuth_HDI_FUNC_9600
+ * @tc.name  : testBeginAuthenticationV1_1_001
+ * @tc.desc  : Call the HDI-encapsulated BeginAuthenticationV1_1 function, and use a loop to assign the parameters
+ *              in the HdiBeginAuthenticationV1_1List structure to the BeginAuthenticationV1_1 function
+ */
+HWTEST_F(UserIamUserAuthTestAdditional, testBeginAuthenticationV1_1_001, Function | MediumTest | Level2)
+{
+    uint32_t i = 0;
+    uint32_t j;
+    HdiBeginAuthenticationV1_1List g_hdiBeginAuthenticationV1_1List;
+    uint32_t userId = g_hdiBeginAuthenticationV1_1List.userId[i];
+    std::vector<uint8_t> challenge;
+    EXPECT_EQ(g_service.OpenSession(userId, challenge), 0);
+
+    ExecutorRegisterInfo info = {};
+    info.esl = ExecutorSecureLevel::ESL0;
+    info.publicKey.resize(32);
+    std::vector<uint8_t> publicKey;
+    std::vector<uint64_t> templateIds;
+    uint64_t index = 0;
+
+    uint64_t contextId = 1;
+    AuthSolution authParam = {};
+    authParam.authTrustLevel = 0;
+    authParam.executorSensorHint = 0;
+    authParam.challenge = challenge;
+    std::vector<ScheduleInfoV1_1> scheduleInfos;
+
+    for (i = 0; i < 4; i++) {
+        info.authType = static_cast<AuthType>(g_hdiBeginAuthenticationV1_1List.authType[i]);
+        EXPECT_EQ(g_service.AddExecutor(info, index, publicKey, templateIds), 0);
+        for (j = 4; j > 0; j--) {
+            authParam.userId = g_hdiBeginAuthenticationV1_1List.userId[0];
+            authParam.authType = static_cast<AuthType>(g_hdiBeginAuthenticationV1_1List.authType[j - 1]);
+            EXPECT_NE(g_service.BeginAuthenticationV1_1(contextId, authParam, scheduleInfos), 0);
+        }
+        EXPECT_EQ(g_service.DeleteExecutor(index), 0);
+    }
+
+    for (i = 1; i < 2; i++) {
+        info.authType = static_cast<AuthType>(g_hdiBeginAuthenticationV1_1List.authType[i]);
+        EXPECT_EQ(g_service.AddExecutor(info, index, publicKey, templateIds), 0);
+
+        authParam.userId = g_hdiBeginAuthenticationV1_1List.userId[i];
+        authParam.authType = static_cast<AuthType>(g_hdiBeginAuthenticationV1_1List.authType[i]);
+        EXPECT_NE(g_service.BeginAuthenticationV1_1(contextId, authParam, scheduleInfos), 0);
+    }
+    EXPECT_EQ(g_service.CloseSession(userId), 0);
+}
+/**
+ * @tc.number: SUB_Security_IAM_UserAuth_HDI_FUNC_9700
+ * @tc.name  : testBeginIdentificationV1_1_001
+ * @tc.desc  : The AddExecutor function is called first to add the authentication actuator,
+ *              and then the BeginIdentificationV1_1 function is called to start the identification
+ */
+HWTEST_F(UserIamUserAuthTestAdditional, testBeginIdentificationV1_1_001, Function | MediumTest | Level2)
+{
+    uint32_t i = 0;
+    uint32_t j = 0;
+    HdiBeginIdentificationV1_1List g_hdiBeginIdentificationV1_1List;
+
+    ExecutorRegisterInfo info = {};
+    info.authType = AuthType::FACE;
+    info.executorRole = ExecutorRole::ALL_IN_ONE;
+    info.esl = ExecutorSecureLevel::ESL0;
+    info.publicKey.resize(32);
+    uint64_t index = 0;
+    std::vector<uint8_t> publicKey;
+    std::vector<uint64_t> templateIds;
+
+    uint64_t contextId = 123456;
+    AuthType authType = AuthType::FACE;
+    std::vector<uint8_t> challenge;
+    uint32_t executorSensorHint = 0;
+    ScheduleInfoV1_1 scheduleInfo = {};
+
+    for (; i < 2; i++) {
+        for (; j < 4; j++) {
+            authType = static_cast<AuthType>(g_hdiBeginIdentificationV1_1List.authType[j]);
+            if (i == 1 && authType == AuthType::FACE) {
+                EXPECT_EQ(g_service.AddExecutor(info, index, publicKey, templateIds), 0);
+                EXPECT_EQ(g_service.BeginIdentificationV1_1
+                    (contextId, authType, challenge, executorSensorHint, scheduleInfo), 0);
+            } else {
+                EXPECT_NE(g_service.BeginIdentificationV1_1
+                    (contextId, authType, challenge, executorSensorHint, scheduleInfo), 0);
+            }
+        }
+    }
+}
+/**
+ * @tc.number: SUB_Security_IAM_UserAuth_HDI_FUNC_9800
+ * @tc.name  : testGetAllUserInfo001
+ * @tc.desc  : Call the GetAllUserInfo function to get the information
+ */
+HWTEST_F(UserIamUserAuthTestAdditional, testGetAllUserInfo001, Function | MediumTest | Level1)
+{
+    std::vector<UserInfo> userInfos;
+    EXPECT_EQ(g_service.GetAllUserInfo(userInfos), 0);
+}
+/**
+ * @tc.number: SUB_Security_IAM_UserAuth_HDI_FUNC_9900
+ * @tc.name  : testInit001
+ * @tc.desc  : Call the Init function for initialization
+ */
+HWTEST_F(UserIamUserAuthTestAdditional, testInit001, Function | MediumTest | Level1)
+{
+    cout << "start Init" << endl;
+    EXPECT_EQ(g_service.Init(), 0);
 }

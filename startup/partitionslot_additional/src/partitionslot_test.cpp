@@ -234,6 +234,23 @@ HWTEST_F(StartupPartitionSlotTestAdditional, testPartitionSlotGetSlotSuffix003, 
 }
 
 /**
+ * @tc.number: SUB_Startup_PartitionSlot_SetActiveSlot_0100
+ * @tc.name: testPartitionSlotSetActiveSlot001
+ * @tc.desc: SetActiveSlot, slot is 2147483647
+ */
+HWTEST_F(StartupPartitionSlotTestAdditional, testPartitionSlotSetActiveSlot001, Function | MediumTest | Level1)
+{
+    std::cout << "begin set active slot by service" << std::endl;
+    int numOfSlots = 2;
+    int currentSlot = 0;
+    sptr<IPartitionSlot> partitionslot = IPartitionSlot::Get();
+    ASSERT_TRUE(partitionslot != nullptr);
+    partitionslot->GetCurrentSlot(currentSlot, numOfSlots);
+    ASSERT_TRUE(partitionslot->SetActiveSlot(2147483647) == 0);
+    partitionslot->SetActiveSlot(currentSlot);
+}
+
+/**
  * @tc.number: SUB_Startup_PartitionSlot_SetActiveSlot_0200
  * @tc.name: testPartitionSlotSetActiveSlot002
  * @tc.desc: SetActiveSlot, slot is -2147483648
@@ -241,9 +258,45 @@ HWTEST_F(StartupPartitionSlotTestAdditional, testPartitionSlotGetSlotSuffix003, 
 HWTEST_F(StartupPartitionSlotTestAdditional, testPartitionSlotSetActiveSlot002, Function | MediumTest | Level1)
 {
     std::cout << "begin set active slot by service" << std::endl;
+    int numOfSlots = 2;
+    int currentSlot = 0;
     sptr<IPartitionSlot> partitionslot = IPartitionSlot::Get();
     ASSERT_TRUE(partitionslot != nullptr);
+    partitionslot->GetCurrentSlot(currentSlot, numOfSlots);
     ASSERT_TRUE(partitionslot->SetActiveSlot(-2147483648) != 0);
+    partitionslot->SetActiveSlot(currentSlot);
+}
+
+/**
+ * @tc.number: SUB_Startup_PartitionSlot_SetActiveSlot_0300
+ * @tc.name: testPartitionSlotSetActiveSlot003
+ * @tc.desc: SetActiveSlot, stability test
+ */
+HWTEST_F(StartupPartitionSlotTestAdditional, testPartitionSlotSetActiveSlot003, Function | MediumTest | Level1)
+{
+    int numOfSlots = 2;
+    int currentSlot = 0;
+    for (int i = 0; i < 100; i++) {
+        std::cout << "begin set active slot by service" << std::endl;
+        sptr<IPartitionSlot> partitionslot = IPartitionSlot::Get();
+        ASSERT_TRUE(partitionslot != nullptr);
+        partitionslot->GetCurrentSlot(currentSlot, numOfSlots);
+        ASSERT_TRUE(partitionslot->SetActiveSlot(2) == 0);
+        partitionslot->SetActiveSlot(currentSlot);
+    }
+}
+
+/**
+ * @tc.number: SUB_Startup_PartitionSlot_SetSlotUnbootable_0100
+ * @tc.name: testPartitionSlotSetSlotUnbootable001
+ * @tc.desc: SetSlotUnbootable, slot is 2147483647
+ */
+HWTEST_F(StartupPartitionSlotTestAdditional, testPartitionSlotSetSlotUnbootable001, Function | MediumTest | Level1)
+{
+    std::cout << "begin set unbootable slot by service" << std::endl;
+    sptr<IPartitionSlot> partitionslot = IPartitionSlot::Get();
+    ASSERT_TRUE(partitionslot != nullptr);
+    ASSERT_TRUE(partitionslot->SetSlotUnbootable(2147483647) == 0);
 }
 
 /**
@@ -257,4 +310,19 @@ HWTEST_F(StartupPartitionSlotTestAdditional, testPartitionSlotSetSlotUnbootable0
     sptr<IPartitionSlot> partitionslot = IPartitionSlot::Get();
     ASSERT_TRUE(partitionslot != nullptr);
     ASSERT_TRUE(partitionslot->SetSlotUnbootable(-2147483648) != 0);
+}
+
+/**
+ * @tc.number: SUB_Startup_PartitionSlot_SetSlotUnbootable_0300
+ * @tc.name: testPartitionSlotSetSlotUnbootable003
+ * @tc.desc: SetSlotUnbootable, stability test
+ */
+HWTEST_F(StartupPartitionSlotTestAdditional, testPartitionSlotSetSlotUnbootable003, Function | MediumTest | Level1)
+{
+    for (int i = 0; i < 100; i++) {
+        std::cout << "begin set unbootable slot by service" << std::endl;
+        sptr<IPartitionSlot> partitionslot = IPartitionSlot::Get();
+        ASSERT_TRUE(partitionslot != nullptr);
+        ASSERT_TRUE(partitionslot->SetSlotUnbootable(2) == 0);
+    }
 }

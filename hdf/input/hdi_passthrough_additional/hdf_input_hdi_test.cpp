@@ -8668,6 +8668,46 @@ HWTEST_F(HdfInputHdiTestAdditional, testRunExtraCommand032, Function | MediumTes
 }
 
 /**
+ * @tc.number : SUB_Driver_Input_RunExtraCommand_3500
+ * @tc.name   : testRunExtraCommand033
+ * @tc.desc   : Verify the reliability of the RunExtraCommand function when devIndex is 1.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunExtraCommand033, Function | MediumTest | Level2)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 1;
+    struct ExtraCmd extraCmd;
+    extraCmd.cmdCode = "";
+    extraCmd.cmdValue = "";
+    ret = g_inputInterfaces->OpenInputDevice(devIndex);
+    EXPECT_EQ(ret, INPUT_SUCCESS);
+    ret = g_inputInterfaces->RunExtraCommand(devIndex, extraCmd);
+    EXPECT_EQ(ret, INPUT_SUCCESS);
+    ret = g_inputInterfaces->CloseInputDevice(devIndex);
+    EXPECT_EQ(ret, INPUT_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunExtraCommand_3600
+ * @tc.name   : testRunExtraCommand034
+ * @tc.desc   : Verify the reliability of the RunExtraCommand function when devIndex is 1.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunExtraCommand034, Function | MediumTest | Level2)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 1;
+    struct ExtraCmd extraCmd;
+    extraCmd.cmdCode = "";
+    extraCmd.cmdValue = "Enable";
+    ret = g_inputInterfaces->OpenInputDevice(devIndex);
+    EXPECT_EQ(ret, INPUT_SUCCESS);
+    ret = g_inputInterfaces->RunExtraCommand(devIndex, extraCmd);
+    EXPECT_EQ(ret, INPUT_SUCCESS);
+    ret = g_inputInterfaces->CloseInputDevice(devIndex);
+    EXPECT_EQ(ret, INPUT_SUCCESS);
+}
+
+/**
  * @tc.number : SUB_Driver_Input_RunExtraCommand_3700
  * @tc.name   : testRunExtraCommand035
  * @tc.desc   : Verify the reliability of the RunExtraCommand function when devIndex is 1.

@@ -244,7 +244,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestGetTemplat
  * @tc.desc  test OnRegisterFinish templateIdList empty
  */
 HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestOnRegisterFinish001,
-         Function | MediumTest | Level2)
+         Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestOnRegisterFinish001" << endl;
     std::vector<uint64_t> templateIdList;
@@ -254,7 +254,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestOnRegister
     FillTestUint8Vector(parcel, extraInfo);
     int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_OnRegisterFinish_0300
@@ -262,7 +262,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestOnRegister
  * @tc.desc  test OnRegisterFinish frameworkPublicKey empty
  */
 HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestOnRegisterFinish002,
-         Function | MediumTest | Level2)
+         Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestOnRegisterFinish002" << endl;
     std::vector<uint64_t> templateIdList;
@@ -272,7 +272,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestOnRegister
     FillTestUint8Vector(parcel, extraInfo);
     int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_OnRegisterFinish_0400
@@ -280,7 +280,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestOnRegister
  * @tc.desc  test OnRegisterFinish extraInfo empty
  */
 HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestOnRegisterFinish003,
-         Function | MediumTest | Level2)
+         Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestOnRegisterFinish003" << endl;
     std::vector<uint64_t> templateIdList;
@@ -290,7 +290,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestOnRegister
     std::vector<uint8_t> extraInfo;
     int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_OnRegisterFinish_0500
@@ -298,7 +298,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestOnRegister
  * @tc.desc  test OnRegisterFinish frameworkPublicKey and extraInfo empty
  */
 HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestOnRegisterFinish004,
-         Function | MediumTest | Level2)
+         Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestOnRegisterFinish004" << endl;
     std::vector<uint64_t> templateIdList;
@@ -307,7 +307,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestOnRegister
     std::vector<uint8_t> extraInfo;
     int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_OnRegisterFinish_0600
@@ -315,7 +315,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestOnRegister
  * @tc.desc  test OnRegisterFinish templateIdList and extraInfo empty
  */
 HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestOnRegisterFinish005,
-         Function | MediumTest | Level2)
+         Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestOnRegisterFinish005" << endl;
     std::vector<uint64_t> templateIdList;
@@ -324,7 +324,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestOnRegister
     std::vector<uint8_t> extraInfo;
     int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_OnRegisterFinish_0700
@@ -332,7 +332,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestOnRegister
  * @tc.desc  test OnRegisterFinish templateIdList and frameworkPublicKey empty
  */
 HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestOnRegisterFinish006,
-         Function | MediumTest | Level2)
+         Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestOnRegisterFinish006" << endl;
     std::vector<uint64_t> templateIdList;
@@ -341,7 +341,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestOnRegister
     FillTestUint8Vector(parcel, extraInfo);
     int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_OnRegisterFinish_0800
@@ -349,7 +349,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestOnRegister
  * @tc.desc  test OnRegisterFinish templateIdList and frameworkPublicKey and extraInfo empty
  */
 HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestOnRegisterFinish007,
-         Function | MediumTest | Level2)
+         Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestOnRegisterFinish007" << endl;
     std::vector<uint64_t> templateIdList;
@@ -357,7 +357,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestOnRegister
     std::vector<uint8_t> extraInfo;
     int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_OnRegisterFinish_0900
@@ -437,7 +437,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestEnroll003,
  * @tc.name  testFingerprintAuthTestEnroll004
  * @tc.desc  test Enroll extraInfo empty
  */
-HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestEnroll004, Function | MediumTest | Level2)
+HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestEnroll004, Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestEnroll004" << endl;
     uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
@@ -446,7 +446,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestEnroll004,
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.Enroll(scheduleId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_Enroll_0600
@@ -559,7 +559,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestAuthentica
  * @tc.name  testFingerprintAuthTestAuthenticate004
  * @tc.desc  test Authenticate templateIdList empty
  */
-HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestAuthenticate004, Function | MediumTest | Level2)
+HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestAuthenticate004, Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestAuthenticate004" << endl;
     uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
@@ -570,14 +570,14 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestAuthentica
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_Authenticate_0600
  * @tc.name  testFingerprintAuthTestAuthenticate005
  * @tc.desc  test Authenticate extraInfo empty
  */
-HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestAuthenticate005, Function | MediumTest | Level2)
+HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestAuthenticate005, Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestAuthenticate005" << endl;
     uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
@@ -588,7 +588,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestAuthentica
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_Authenticate_0700
@@ -644,7 +644,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestAuthentica
  * @tc.name  testFingerprintAuthTestAuthenticate009
  * @tc.desc  test Authenticate empty
  */
-HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestAuthenticate009, Function | MediumTest | Level2)
+HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestAuthenticate009, Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestAuthenticate009" << endl;
     uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
@@ -654,7 +654,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestAuthentica
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_Authenticate_1100
@@ -749,7 +749,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestIdentify00
  * @tc.name  testFingerprintAuthTestIdentify004
  * @tc.desc  test Identify extraInfo empty
  */
-HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestIdentify004, Function | MediumTest | Level2)
+HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestIdentify004, Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestIdentify004" << endl;
     uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
@@ -758,7 +758,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestIdentify00
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.Identify(scheduleId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_Identify_0600
@@ -814,13 +814,13 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestIdentify00
  * @tc.name  testFingerprintAuthTestDelete001
  * @tc.desc  test Delete templateIdList empty
  */
-HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestDelete001, Function | MediumTest | Level2)
+HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestDelete001, Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestDelete001" << endl;
     std::vector<uint64_t> templateIdList;
     int32_t ret = g_executorImpl.Delete(templateIdList);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_Delete_0300
@@ -950,7 +950,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestSendComman
  * @tc.name  testFingerprintAuthTestSendCommand004
  * @tc.desc  test SendCommand commandId 0
  */
-HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestSendCommand004, Function | MediumTest | Level2)
+HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestSendCommand004, Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestSendCommand004" << endl;
     int32_t commandId = 0;
@@ -960,14 +960,14 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestSendComman
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_SendCommand_0600
  * @tc.name  testFingerprintAuthTestSendCommand005
  * @tc.desc  test SendCommand commandId 0x7FFFFFFF
  */
-HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestSendCommand005, Function | MediumTest | Level2)
+HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestSendCommand005, Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestSendCommand005" << endl;
     int32_t commandId = 0x7FFFFFFF;
@@ -977,14 +977,14 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestSendComman
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_SendCommand_0700
  * @tc.name  testFingerprintAuthTestSendCommand006
  * @tc.desc  test SendCommand commandId -0x01
  */
-HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestSendCommand006, Function | MediumTest | Level2)
+HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestSendCommand006, Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestSendCommand006" << endl;
     int32_t commandId = -0x01;
@@ -994,14 +994,14 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestSendComman
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_SendCommand_0800
  * @tc.name  testFingerprintAuthTestSendCommand007
  * @tc.desc  test SendCommand commandId -0x7FFFFFFF
  */
-HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestSendCommand007, Function | MediumTest | Level2)
+HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestSendCommand007, Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestSendCommand007" << endl;
     int32_t commandId = -0x7FFFFFFF;
@@ -1011,14 +1011,14 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestSendComman
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_SendCommand_0900
  * @tc.name  testFingerprintAuthTestSendCommand008
  * @tc.desc  test SendCommand extraInfo empty
  */
-HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestSendCommand008, Function | MediumTest | Level2)
+HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestSendCommand008, Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestSendCommand008" << endl;
     int32_t commandId = LOCK_TEMPLATE;
@@ -1027,7 +1027,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestSendComman
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_SendCommand_1000
@@ -1184,7 +1184,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestAuthentica
  * @tc.desc  test AuthenticateV1_1 templateIdList empty
  */
 HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestAuthenticateV1_1006,
-         Function | MediumTest | Level2)
+         Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestAuthenticate006" << endl;
     uint64_t scheduleId = parcel.ReadUint64();
@@ -1195,7 +1195,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestAuthentica
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.AuthenticateV1_1(scheduleId, templateIdList, true, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_AuthenticateV1_1_0700
@@ -1203,7 +1203,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestAuthentica
  * @tc.desc  test AuthenticateV1_1 extraInfo empty
  */
 HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestAuthenticateV1_1007,
-         Function | MediumTest | Level2)
+         Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestAuthenticate007" << endl;
     uint64_t scheduleId = parcel.ReadUint64();
@@ -1214,7 +1214,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestAuthentica
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.AuthenticateV1_1(scheduleId, templateIdList, true, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_AuthenticateV1_1_0800
@@ -1274,7 +1274,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestAuthentica
  * @tc.desc  test AuthenticateV1_1 templateIdList and extraInfo empty
  */
 HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestAuthenticateV1_1011,
-         Function | MediumTest | Level2)
+         Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestAuthenticateV1_1011" << endl;
     uint64_t scheduleId = 0;
@@ -1284,7 +1284,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestAuthentica
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.AuthenticateV1_1(scheduleId, templateIdList, true, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_AuthenticateV1_1_1200
@@ -1425,7 +1425,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestGetPropert
  * @tc.name  testFingerprintAuthTestGetProperty006
  * @tc.desc  test GetProperty templateIdList empty
  */
-HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestGetProperty006, Function | MediumTest | Level2)
+HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestGetProperty006, Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestGetProperty006" << endl;
     std::vector<uint64_t> templateIdList;
@@ -1435,14 +1435,14 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestGetPropert
     FillTestProperty(parcel, property);
     int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_GetProperty_0800
  * @tc.name  testFingerprintAuthTestGetProperty007
  * @tc.desc  test GetProperty property empty
  */
-HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestGetProperty007, Function | MediumTest | Level2)
+HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestGetProperty007, Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestGetProperty007" << endl;
     std::vector<uint64_t> templateIdList;
@@ -1452,14 +1452,14 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestGetPropert
     Property property;
     int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_GetProperty_0900
  * @tc.name  testFingerprintAuthTestGetProperty008
  * @tc.desc  test GetProperty templateIdList and property empty
  */
-HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestGetProperty008, Function | MediumTest | Level2)
+HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestGetProperty008, Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestGetProperty008" << endl;
     std::vector<uint64_t> templateIdList;
@@ -1468,7 +1468,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestGetPropert
     Property property;
     int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_GetProperty_1000
@@ -1497,14 +1497,14 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestGetPropert
  * @tc.desc  test SetCachedTemplates templateIdList empty
  */
 HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestSetCachedTemplates001,
-         Function | MediumTest | Level2)
+         Function | MediumTest | Level1)
 {
     cout << "start test testFingerprintAuthTestSetCachedTemplates001" << endl;
     std::vector<uint64_t> templateIdList;
 
     int32_t ret = g_executorImpl.SetCachedTemplates(templateIdList);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_SetCachedTemplates_0300

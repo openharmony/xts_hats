@@ -4780,10 +4780,10 @@ HWTEST_F(HdfInputHdiTestAdditional, testSetGestureMode034, Function | MediumTest
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_0300
- * @tc.name   : tesGetChipInfo001
+ * @tc.name   : testGetChipInfo001
  * @tc.desc   : GetChipInfo, stability test
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo001, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo001, Function | MediumTest | Level1)
 {
     int32_t ret;
 
@@ -4803,10 +4803,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo001, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_0500
- * @tc.name   : tesGetChipInfo003
+ * @tc.name   : testGetChipInfo003
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 2
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo003, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo003, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 2;
@@ -4827,10 +4827,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo003, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_0600
- * @tc.name   : tesGetChipInfo004
+ * @tc.name   : testGetChipInfo004
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 3
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo004, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo004, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 3;
@@ -4851,10 +4851,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo004, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_0700
- * @tc.name   : tesGetChipInfo005
+ * @tc.name   : testGetChipInfo005
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 4
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo005, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo005, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 4;
@@ -4875,10 +4875,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo005, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_0800
- * @tc.name   : tesGetChipInfo006
+ * @tc.name   : testGetChipInfo006
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 6
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo006, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo006, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 6;
@@ -4899,10 +4899,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo006, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_0900
- * @tc.name   : tesGetChipInfo007
+ * @tc.name   : testGetChipInfo007
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 7
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo007, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo007, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 7;
@@ -4923,10 +4923,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo007, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_1000
- * @tc.name   : tesGetChipInfo008
+ * @tc.name   : testGetChipInfo008
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 8
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo008, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo008, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 8;
@@ -4947,10 +4947,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo008, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_1100
- * @tc.name   : tesGetChipInfo009
+ * @tc.name   : testGetChipInfo009
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 9
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo009, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo009, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 9;
@@ -4971,10 +4971,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo009, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_1200
- * @tc.name   : tesGetChipInfo010
+ * @tc.name   : testGetChipInfo010
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 10
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo010, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo010, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 10;
@@ -4995,10 +4995,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo010, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_1300
- * @tc.name   : tesGetChipInfo011
+ * @tc.name   : testGetChipInfo011
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 11
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo011, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo011, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 11;
@@ -5019,10 +5019,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo011, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_1400
- * @tc.name   : tesGetChipInfo012
+ * @tc.name   : testGetChipInfo012
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 12
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo012, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo012, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 12;
@@ -5043,10 +5043,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo012, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_1500
- * @tc.name   : tesGetChipInfo013
+ * @tc.name   : testGetChipInfo013
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 13
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo013, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo013, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 13;
@@ -5067,10 +5067,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo013, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_1600
- * @tc.name   : tesGetChipInfo014
+ * @tc.name   : testGetChipInfo014
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 14
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo014, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo014, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 14;
@@ -5091,10 +5091,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo014, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_1700
- * @tc.name   : tesGetChipInfo015
+ * @tc.name   : testGetChipInfo015
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 15
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo015, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo015, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 15;
@@ -5115,10 +5115,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo015, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_1800
- * @tc.name   : tesGetChipInfo016
+ * @tc.name   : testGetChipInfo016
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 16
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo016, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo016, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 16;
@@ -5139,10 +5139,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo016, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_1900
- * @tc.name   : tesGetChipInfo017
+ * @tc.name   : testGetChipInfo017
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 17
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo017, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo017, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 17;
@@ -5163,10 +5163,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo017, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_2000
- * @tc.name   : tesGetChipInfo018
+ * @tc.name   : testGetChipInfo018
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 18
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo018, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo018, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 18;
@@ -5187,10 +5187,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo018, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_2100
- * @tc.name   : tesGetChipInfo019
+ * @tc.name   : testGetChipInfo019
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 19
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo019, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo019, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 19;
@@ -5211,10 +5211,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo019, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_2200
- * @tc.name   : tesGetChipInfo020
+ * @tc.name   : testGetChipInfo020
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 20
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo020, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo020, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 20;
@@ -5235,10 +5235,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo020, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_2300
- * @tc.name   : tesGetChipInfo021
+ * @tc.name   : testGetChipInfo021
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 21
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo021, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo021, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 21;
@@ -5259,10 +5259,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo021, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_2400
- * @tc.name   : tesGetChipInfo022
+ * @tc.name   : testGetChipInfo022
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 22
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo022, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo022, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 22;
@@ -5283,10 +5283,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo022, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_2500
- * @tc.name   : tesGetChipInfo023
+ * @tc.name   : testGetChipInfo023
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 23
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo023, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo023, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 23;
@@ -5307,10 +5307,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo023, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_2600
- * @tc.name   : tesGetChipInfo024
+ * @tc.name   : testGetChipInfo024
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 24
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo024, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo024, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 24;
@@ -5331,10 +5331,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo024, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_2700
- * @tc.name   : tesGetChipInfo025
+ * @tc.name   : testGetChipInfo025
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 25
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo025, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo025, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 25;
@@ -5355,10 +5355,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo025, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_2800
- * @tc.name   : tesGetChipInfo026
+ * @tc.name   : testGetChipInfo026
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 26
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo026, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo026, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 26;
@@ -5379,10 +5379,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo026, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_2900
- * @tc.name   : tesGetChipInfo027
+ * @tc.name   : testGetChipInfo027
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 27
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo027, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo027, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 27;
@@ -5403,10 +5403,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo027, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_3000
- * @tc.name   : tesGetChipInfo028
+ * @tc.name   : testGetChipInfo028
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 28
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo028, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo028, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 28;
@@ -5427,10 +5427,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo028, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_3100
- * @tc.name   : tesGetChipInfo029
+ * @tc.name   : testGetChipInfo029
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 29
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo029, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo029, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 29;
@@ -5451,10 +5451,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo029, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_3200
- * @tc.name   : tesGetChipInfo030
+ * @tc.name   : testGetChipInfo030
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 30
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo030, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo030, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 30;
@@ -5475,10 +5475,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo030, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_3300
- * @tc.name   : tesGetChipInfo031
+ * @tc.name   : testGetChipInfo031
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 31
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo031, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo031, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 31;
@@ -5499,10 +5499,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo031, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipInfo_3400
- * @tc.name   : tesGetChipInfo032
+ * @tc.name   : testGetChipInfo032
  * @tc.desc   : GetChipInfo, Test input param, devIndex = 32
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo032, Function | MediumTest | Level2)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipInfo032, Function | MediumTest | Level2)
 {
     int32_t ret = 0;
     uint32_t devIndex = MAX_DEVICES;
@@ -5514,10 +5514,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipInfo032, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_0300
- * @tc.name   : tesGetVendorName001
+ * @tc.name   : testGetVendorName001
  * @tc.desc   : GetVendorName, stability test
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName001, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName001, Function | MediumTest | Level1)
 {
     int32_t ret;
 
@@ -5537,10 +5537,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName001, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_0500
- * @tc.name   : tesGetVendorName003
+ * @tc.name   : testGetVendorName003
  * @tc.desc   : GetVendorName, Test input param, devIndex = 2
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName003, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName003, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 2;
@@ -5561,10 +5561,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName003, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_0600
- * @tc.name   : tesGetVendorName004
+ * @tc.name   : testGetVendorName004
  * @tc.desc   : GetVendorName, Test input param, devIndex = 3
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName004, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName004, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 3;
@@ -5585,10 +5585,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName004, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_0700
- * @tc.name   : tesGetVendorName005
+ * @tc.name   : testGetVendorName005
  * @tc.desc   : GetVendorName, Test input param, devIndex = 4
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName005, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName005, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 4;
@@ -5609,10 +5609,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName005, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_0800
- * @tc.name   : tesGetVendorName006
+ * @tc.name   : testGetVendorName006
  * @tc.desc   : GetVendorName, Test input param, devIndex = 6
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName006, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName006, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 6;
@@ -5633,10 +5633,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName006, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_0900
- * @tc.name   : tesGetVendorName007
+ * @tc.name   : testGetVendorName007
  * @tc.desc   : GetVendorName, Test input param, devIndex = 7
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName007, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName007, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 7;
@@ -5657,10 +5657,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName007, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_1000
- * @tc.name   : tesGetVendorName008
+ * @tc.name   : testGetVendorName008
  * @tc.desc   : GetVendorName, Test input param, devIndex = 8
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName008, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName008, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 8;
@@ -5681,10 +5681,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName008, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_1100
- * @tc.name   : tesGetVendorName009
+ * @tc.name   : testGetVendorName009
  * @tc.desc   : GetVendorName, Test input param, devIndex = 9
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName009, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName009, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 9;
@@ -5705,10 +5705,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName009, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_1200
- * @tc.name   : tesGetVendorName010
+ * @tc.name   : testGetVendorName010
  * @tc.desc   : GetVendorName, Test input param, devIndex = 10
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName010, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName010, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 10;
@@ -5729,10 +5729,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName010, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_1300
- * @tc.name   : tesGetVendorName011
+ * @tc.name   : testGetVendorName011
  * @tc.desc   : GetVendorName, Test input param, devIndex = 11
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName011, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName011, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 11;
@@ -5753,10 +5753,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName011, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_1400
- * @tc.name   : tesGetVendorName012
+ * @tc.name   : testGetVendorName012
  * @tc.desc   : GetVendorName, Test input param, devIndex = 12
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName012, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName012, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 12;
@@ -5777,10 +5777,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName012, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_1500
- * @tc.name   : tesGetVendorName013
+ * @tc.name   : testGetVendorName013
  * @tc.desc   : GetVendorName, Test input param, devIndex = 13
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName013, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName013, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 13;
@@ -5801,10 +5801,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName013, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_1600
- * @tc.name   : tesGetVendorName014
+ * @tc.name   : testGetVendorName014
  * @tc.desc   : GetVendorName, Test input param, devIndex = 14
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName014, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName014, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 14;
@@ -5825,10 +5825,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName014, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_1700
- * @tc.name   : tesGetVendorName015
+ * @tc.name   : testGetVendorName015
  * @tc.desc   : GetVendorName, Test input param, devIndex = 15
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName015, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName015, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 15;
@@ -5849,10 +5849,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName015, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_1800
- * @tc.name   : tesGetVendorName016
+ * @tc.name   : testGetVendorName016
  * @tc.desc   : GetVendorName, Test input param, devIndex = 16
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName016, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName016, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 16;
@@ -5873,10 +5873,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName016, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_1900
- * @tc.name   : tesGetVendorName017
+ * @tc.name   : testGetVendorName017
  * @tc.desc   : GetVendorName, Test input param, devIndex = 17
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName017, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName017, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 17;
@@ -5897,10 +5897,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName017, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_2000
- * @tc.name   : tesGetVendorName018
+ * @tc.name   : testGetVendorName018
  * @tc.desc   : GetVendorName, Test input param, devIndex = 18
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName018, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName018, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 18;
@@ -5921,10 +5921,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName018, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_2100
- * @tc.name   : tesGetVendorName019
+ * @tc.name   : testGetVendorName019
  * @tc.desc   : GetVendorName, Test input param, devIndex = 19
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName019, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName019, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 19;
@@ -5945,10 +5945,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName019, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_2200
- * @tc.name   : tesGetVendorName020
+ * @tc.name   : testGetVendorName020
  * @tc.desc   : GetVendorName, Test input param, devIndex = 20
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName020, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName020, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 20;
@@ -5969,10 +5969,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName020, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_2300
- * @tc.name   : tesGetVendorName021
+ * @tc.name   : testGetVendorName021
  * @tc.desc   : GetVendorName, Test input param, devIndex = 21
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName021, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName021, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 21;
@@ -5993,10 +5993,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName021, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_2400
- * @tc.name   : tesGetVendorName022
+ * @tc.name   : testGetVendorName022
  * @tc.desc   : GetVendorName, Test input param, devIndex = 22
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName022, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName022, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 22;
@@ -6017,10 +6017,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName022, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_2500
- * @tc.name   : tesGetVendorName023
+ * @tc.name   : testGetVendorName023
  * @tc.desc   : GetVendorName, Test input param, devIndex = 23
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName023, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName023, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 23;
@@ -6041,10 +6041,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName023, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_2600
- * @tc.name   : tesGetVendorName024
+ * @tc.name   : testGetVendorName024
  * @tc.desc   : GetVendorName, Test input param, devIndex = 24
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName024, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName024, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 24;
@@ -6065,10 +6065,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName024, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_2700
- * @tc.name   : tesGetVendorName025
+ * @tc.name   : testGetVendorName025
  * @tc.desc   : GetVendorName, Test input param, devIndex = 25
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName025, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName025, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 25;
@@ -6089,10 +6089,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName025, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_2800
- * @tc.name   : tesGetVendorName026
+ * @tc.name   : testGetVendorName026
  * @tc.desc   : GetVendorName, Test input param, devIndex = 26
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName026, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName026, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 26;
@@ -6113,10 +6113,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName026, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_2900
- * @tc.name   : tesGetVendorName027
+ * @tc.name   : testGetVendorName027
  * @tc.desc   : GetVendorName, Test input param, devIndex = 27
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName027, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName027, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 27;
@@ -6137,10 +6137,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName027, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_3000
- * @tc.name   : tesGetVendorName028
+ * @tc.name   : testGetVendorName028
  * @tc.desc   : GetVendorName, Test input param, devIndex = 28
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName028, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName028, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 28;
@@ -6161,10 +6161,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName028, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_3100
- * @tc.name   : tesGetVendorName029
+ * @tc.name   : testGetVendorName029
  * @tc.desc   : GetVendorName, Test input param, devIndex = 29
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName029, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName029, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 29;
@@ -6185,10 +6185,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName029, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_3200
- * @tc.name   : tesGetVendorName030
+ * @tc.name   : testGetVendorName030
  * @tc.desc   : GetVendorName, Test input param, devIndex = 30
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName030, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName030, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 30;
@@ -6209,10 +6209,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName030, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_3300
- * @tc.name   : tesGetVendorName031
+ * @tc.name   : testGetVendorName031
  * @tc.desc   : GetVendorName, Test input param, devIndex = 31
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName031, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName031, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 31;
@@ -6233,10 +6233,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName031, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetVendorName_3400
- * @tc.name   : tesGetVendorName032
+ * @tc.name   : testGetVendorName032
  * @tc.desc   : GetVendorName, Test input param, devIndex = 32
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName032, Function | MediumTest | Level2)
+HWTEST_F(HdfInputHdiTestAdditional, testGetVendorName032, Function | MediumTest | Level2)
 {
     int32_t ret = 0;
     uint32_t devIndex = MAX_DEVICES;
@@ -6248,10 +6248,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetVendorName032, Function | MediumTest |
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_0300
- * @tc.name   : tesGetChipName001
+ * @tc.name   : testGetChipName001
  * @tc.desc   : GetChipName, stability test
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName001, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName001, Function | MediumTest | Level1)
 {
     int32_t ret;
 
@@ -6271,10 +6271,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName001, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_0500
- * @tc.name   : tesGetChipName003
+ * @tc.name   : testGetChipName003
  * @tc.desc   : GetChipName, Test input param, devIndex = 2
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName003, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName003, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 2;
@@ -6295,10 +6295,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName003, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_0600
- * @tc.name   : tesGetChipName004
+ * @tc.name   : testGetChipName004
  * @tc.desc   : GetChipName, Test input param, devIndex = 3
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName004, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName004, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 3;
@@ -6319,10 +6319,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName004, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_0700
- * @tc.name   : tesGetChipName005
+ * @tc.name   : testGetChipName005
  * @tc.desc   : GetChipName, Test input param, devIndex = 4
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName005, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName005, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 4;
@@ -6343,10 +6343,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName005, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_0800
- * @tc.name   : tesGetChipName006
+ * @tc.name   : testGetChipName006
  * @tc.desc   : GetChipName, Test input param, devIndex = 6
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName006, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName006, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 6;
@@ -6367,10 +6367,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName006, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_0900
- * @tc.name   : tesGetChipName007
+ * @tc.name   : testGetChipName007
  * @tc.desc   : GetChipName, Test input param, devIndex = 7
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName007, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName007, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 7;
@@ -6391,10 +6391,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName007, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_1000
- * @tc.name   : tesGetChipName008
+ * @tc.name   : testGetChipName008
  * @tc.desc   : GetChipName, Test input param, devIndex = 8
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName008, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName008, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 8;
@@ -6415,10 +6415,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName008, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_1100
- * @tc.name   : tesGetChipName009
+ * @tc.name   : testGetChipName009
  * @tc.desc   : GetChipName, Test input param, devIndex = 9
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName009, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName009, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 9;
@@ -6439,10 +6439,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName009, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_1200
- * @tc.name   : tesGetChipName010
+ * @tc.name   : testGetChipName010
  * @tc.desc   : GetChipName, Test input param, devIndex = 10
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName010, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName010, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 10;
@@ -6463,10 +6463,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName010, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_1300
- * @tc.name   : tesGetChipName011
+ * @tc.name   : testGetChipName011
  * @tc.desc   : GetChipName, Test input param, devIndex = 11
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName011, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName011, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 11;
@@ -6487,10 +6487,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName011, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_1400
- * @tc.name   : tesGetChipName012
+ * @tc.name   : testGetChipName012
  * @tc.desc   : GetChipName, Test input param, devIndex = 12
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName012, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName012, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 12;
@@ -6511,10 +6511,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName012, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_1500
- * @tc.name   : tesGetChipName013
+ * @tc.name   : testGetChipName013
  * @tc.desc   : GetChipName, Test input param, devIndex = 13
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName013, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName013, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 13;
@@ -6535,10 +6535,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName013, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_1600
- * @tc.name   : tesGetChipName014
+ * @tc.name   : testGetChipName014
  * @tc.desc   : GetChipName, Test input param, devIndex = 14
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName014, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName014, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 14;
@@ -6559,10 +6559,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName014, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_1700
- * @tc.name   : tesGetChipName015
+ * @tc.name   : testGetChipName015
  * @tc.desc   : GetChipName, Test input param, devIndex = 15
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName015, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName015, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 15;
@@ -6583,10 +6583,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName015, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_1800
- * @tc.name   : tesGetChipName016
+ * @tc.name   : testGetChipName016
  * @tc.desc   : GetChipName, Test input param, devIndex = 16
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName016, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName016, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 16;
@@ -6607,10 +6607,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName016, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_1900
- * @tc.name   : tesGetChipName017
+ * @tc.name   : testGetChipName017
  * @tc.desc   : GetChipName, Test input param, devIndex = 17
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName017, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName017, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 17;
@@ -6631,10 +6631,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName017, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_2000
- * @tc.name   : tesGetChipName018
+ * @tc.name   : testGetChipName018
  * @tc.desc   : GetChipName, Test input param, devIndex = 18
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName018, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName018, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 18;
@@ -6655,10 +6655,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName018, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_2100
- * @tc.name   : tesGetChipName019
+ * @tc.name   : testGetChipName019
  * @tc.desc   : GetChipName, Test input param, devIndex = 19
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName019, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName019, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 19;
@@ -6679,10 +6679,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName019, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_2200
- * @tc.name   : tesGetChipName020
+ * @tc.name   : testGetChipName020
  * @tc.desc   : GetChipName, Test input param, devIndex = 20
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName020, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName020, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 20;
@@ -6703,10 +6703,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName020, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_2300
- * @tc.name   : tesGetChipName021
+ * @tc.name   : testGetChipName021
  * @tc.desc   : GetChipName, Test input param, devIndex = 21
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName021, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName021, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 21;
@@ -6727,10 +6727,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName021, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_2400
- * @tc.name   : tesGetChipName022
+ * @tc.name   : testGetChipName022
  * @tc.desc   : GetChipName, Test input param, devIndex = 22
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName022, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName022, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 22;
@@ -6751,10 +6751,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName022, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_2500
- * @tc.name   : tesGetChipName023
+ * @tc.name   : testGetChipName023
  * @tc.desc   : GetChipName, Test input param, devIndex = 23
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName023, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName023, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 23;
@@ -6775,10 +6775,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName023, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_2600
- * @tc.name   : tesGetChipName024
+ * @tc.name   : testGetChipName024
  * @tc.desc   : GetChipName, Test input param, devIndex = 24
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName024, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName024, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 24;
@@ -6799,10 +6799,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName024, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_2700
- * @tc.name   : tesGetChipName025
+ * @tc.name   : testGetChipName025
  * @tc.desc   : GetChipName, Test input param, devIndex = 25
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName025, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName025, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 25;
@@ -6823,10 +6823,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName025, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_2800
- * @tc.name   : tesGetChipName026
+ * @tc.name   : testGetChipName026
  * @tc.desc   : GetChipName, Test input param, devIndex = 26
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName026, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName026, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 26;
@@ -6847,10 +6847,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName026, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_2900
- * @tc.name   : tesGetChipName027
+ * @tc.name   : testGetChipName027
  * @tc.desc   : GetChipName, Test input param, devIndex = 27
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName027, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName027, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 27;
@@ -6871,10 +6871,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName027, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_3000
- * @tc.name   : tesGetChipName028
+ * @tc.name   : testGetChipName028
  * @tc.desc   : GetChipName, Test input param, devIndex = 28
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName028, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName028, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 28;
@@ -6895,10 +6895,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName028, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_3100
- * @tc.name   : tesGetChipName029
+ * @tc.name   : testGetChipName029
  * @tc.desc   : GetChipName, Test input param, devIndex = 29
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName029, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName029, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 29;
@@ -6919,10 +6919,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName029, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_3200
- * @tc.name   : tesGetChipName030
+ * @tc.name   : testGetChipName030
  * @tc.desc   : GetChipName, Test input param, devIndex = 30
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName030, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName030, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 30;
@@ -6943,10 +6943,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName030, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_3300
- * @tc.name   : tesGetChipName031
+ * @tc.name   : testGetChipName031
  * @tc.desc   : GetChipName, Test input param, devIndex = 31
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName031, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName031, Function | MediumTest | Level1)
 {
     int32_t ret = 0;
     uint32_t devIndex = 31;
@@ -6967,10 +6967,10 @@ HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName031, Function | MediumTest | L
 
 /**
  * @tc.number : SUB_Driver_Input_GetChipName_3400
- * @tc.name   : tesGetChipName032
+ * @tc.name   : testGetChipName032
  * @tc.desc   : GetChipName, Test input param, devIndex = 32
  */
-HWTEST_F(HdfInputHdiTestAdditional, tesGetChipName032, Function | MediumTest | Level2)
+HWTEST_F(HdfInputHdiTestAdditional, testGetChipName032, Function | MediumTest | Level2)
 {
     int32_t ret = 0;
     uint32_t devIndex = MAX_DEVICES;

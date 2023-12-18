@@ -15,8 +15,7 @@
         "syscap": [],
         "features": [
             "hats_rich",
-            "hats_nnrt",
-            "drivers_peripheral_power_wakeup_cause_path"
+            "hats_nnrt"
         ],
         "adapted_system_type": [
             "mini",

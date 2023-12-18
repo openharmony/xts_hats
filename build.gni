@@ -14,5 +14,4 @@ import("//build/ohos.gni")
 declare_args() {
   hats_rich = false
   hats_nnrt = false
-  drivers_peripheral_power_wakeup_cause_path = false
 }

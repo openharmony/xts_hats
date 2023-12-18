@@ -13,8 +13,8 @@
 
 import("//build/ohos_var.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
+import("//drivers/peripheral/power/power.gni")
 import("//test/xts/tools/build/suite.gni")
-import("//test/xts/hats/build.gni")
 
 ohos_moduletest_suite("HatsPowermgrPowerTest") {
   module_out_path = "powermgr/power"

@@ -11398,6 +11398,8 @@ HWTEST_F(HdfInputHdiTestAdditional, testRegisterHotPlugCallback001, Function | M
     int32_t ret = INPUT_SUCCESS;
     ret = g_inputInterfaces->RegisterHotPlugCallback(g_callback);
     EXPECT_EQ(ret, INPUT_SUCCESS);
+    ret = g_inputInterfaces->UnregisterHotPlugCallback();
+    EXPECT_EQ(ret, INPUT_SUCCESS);
 }
 
 /**
@@ -11406,7 +11408,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testRegisterHotPlugCallback001, Function | M
  * @tc.desc   : Validation function RegisterHotPlugCallback results in success.
  * when the hotPlugCallback parameter is nullptr
  */
-HWTEST_F(HdfInputHdiTestAdditional, testRegisterHotPlugCallback002, Function | MediumTest | Level1)
+HWTEST_F(HdfInputHdiTestAdditional, testRegisterHotPlugCallback002, Function | MediumTest | Level2)
 {
     int32_t ret = INPUT_SUCCESS;
     ret = g_inputInterfaces->RegisterHotPlugCallback(nullptr);

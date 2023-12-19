@@ -459,7 +459,7 @@ HWTEST_F(HdfThermalHdiTestAdditional, testOnThermalDataEvent001, Function | Medi
 {
     int32_t ret = g_thermalInterface->Register(g_callback);
     EXPECT_EQ(0, ret);
-    sleep(7);
+    sleep(35);
     EXPECT_EQ(true, (g_onThermalDataEventCount != 0));
     g_thermalInterface->Unregister();
     g_onThermalDataEventCount = 0;
@@ -471,7 +471,7 @@ HWTEST_F(HdfThermalHdiTestAdditional, testOnThermalDataEvent001, Function | Medi
  */
 HWTEST_F(HdfThermalHdiTestAdditional, testOnThermalDataEvent002, Function | MediumTest | Level2)
 {
-    sleep(7);
+    sleep(35);
     EXPECT_EQ(false, (g_onThermalDataEventCount != 0));
     g_onThermalDataEventCount = 0;
 }
@@ -484,7 +484,7 @@ HWTEST_F(HdfThermalHdiTestAdditional, testOnFanDataEvent001, Function | MediumTe
 {
     int32_t ret = g_thermalInterface->RegisterFanCallback(g_fanCallback);
     EXPECT_EQ(0, ret);
-    sleep(6);
+    sleep(35);
     EXPECT_EQ(true, (g_onFanDataEventCount != 0));
     g_thermalInterface->UnregisterFanCallback();
     g_onFanDataEventCount = 0;
@@ -496,7 +496,7 @@ HWTEST_F(HdfThermalHdiTestAdditional, testOnFanDataEvent001, Function | MediumTe
  */
 HWTEST_F(HdfThermalHdiTestAdditional, testOnFanDataEvent002, Function | MediumTest | Level2)
 {
-    sleep(6);
+    sleep(35);
     EXPECT_EQ(false, (g_onFanDataEventCount != 0));
     g_onFanDataEventCount = 0;
 }

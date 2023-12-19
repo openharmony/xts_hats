@@ -102,7 +102,6 @@ HWTEST_F(HdfInputHdiTestAdditional, testOpenInputDevice001, Function | MediumTes
     int32_t ret = 0;
     int i = 0;
     for (i = 0; i < 1000; i++) {
-        // devIndex 1：touch
         ret |= g_inputInterfaces->OpenInputDevice(TOUCH_INDEX);
         g_inputInterfaces->CloseInputDevice(TOUCH_INDEX);
     }
@@ -511,7 +510,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testOpenInputDevice023, Function | MediumTes
 /**
  * @tc.number : SUB_Driver_Input_OpenInputDevice_2600
  * @tc.name   : testOpenInputDevice024
- * @tc.desc   : Reliability of function(同上)
+ * @tc.desc   : Test input param
  */
 HWTEST_F(HdfInputHdiTestAdditional, testOpenInputDevice024, Function | MediumTest | Level1)
 {
@@ -2038,7 +2037,6 @@ HWTEST_F(HdfInputHdiTestAdditional, testSetPowerStatus001, Function | MediumTest
     uint32_t setStatus = INPUT_SUSPEND;
     g_inputInterfaces->OpenInputDevice(TOUCH_INDEX);
     for (i = 0; i < 1000; i++) {
-        // devIndex 1：touch
         ret = g_inputInterfaces->SetPowerStatus(TOUCH_INDEX, setStatus);
     }
     g_inputInterfaces->CloseInputDevice(TOUCH_INDEX);
@@ -2769,7 +2767,6 @@ HWTEST_F(HdfInputHdiTestAdditional, testGetPowerStatus001, Function | MediumTest
     uint32_t getStatus = 0;
     g_inputInterfaces->OpenInputDevice(TOUCH_INDEX);
     for (i = 0; i < 1000; i++) {
-        // devIndex 1：touch
         ret = g_inputInterfaces->GetPowerStatus(TOUCH_INDEX, getStatus);
     }
     g_inputInterfaces->CloseInputDevice(TOUCH_INDEX);
@@ -3417,7 +3414,6 @@ HWTEST_F(HdfInputHdiTestAdditional, testGetDeviceType001, Function | MediumTest 
     uint32_t devType = INIT_DEFAULT_VALUE;
     g_inputInterfaces->OpenInputDevice(TOUCH_INDEX);
     for (i = 0; i < 1000; i++) {
-        // devIndex 1：touch
         ret = g_inputInterfaces->GetDeviceType(TOUCH_INDEX, devType);
     }
     g_inputInterfaces->CloseInputDevice(TOUCH_INDEX);
@@ -4087,7 +4083,6 @@ HWTEST_F(HdfInputHdiTestAdditional, testSetGestureMode001, Function | MediumTest
     int i = 0;
     g_inputInterfaces->OpenInputDevice(TOUCH_INDEX);
     for (i = 0; i < 1000; i++) {
-        // devIndex 1：touch
         ret = g_inputInterfaces->SetGestureMode(TOUCH_INDEX, gestureMode);
     }
     g_inputInterfaces->CloseInputDevice(TOUCH_INDEX);

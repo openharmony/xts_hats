@@ -7900,6 +7900,2001 @@ HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest042, Function | Medium
 }
 
 /**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_4900
+ * @tc.name   : testRunCapacitanceTest044
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 3 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest044, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 3;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_5000
+ * @tc.name   : testRunCapacitanceTest045
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 4 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest045, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 4;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_5100
+ * @tc.name   : testRunCapacitanceTest046
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 5 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest046, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 5;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_5200
+ * @tc.name   : testRunCapacitanceTest047
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 6 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest047, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 6;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_5300
+ * @tc.name   : testRunCapacitanceTest048
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 7 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest048, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 7;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_5400
+ * @tc.name   : testRunCapacitanceTest049
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 8 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest049, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 8;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_5500
+ * @tc.name   : testRunCapacitanceTest050
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 9 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest050, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 9;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_5600
+ * @tc.name   : testRunCapacitanceTest051
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 10 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest051, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 10;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_5700
+ * @tc.name   : testRunCapacitanceTest052
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 11 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest052, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 11;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_5800
+ * @tc.name   : testRunCapacitanceTest053
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 12 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest053, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 12;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_5900
+ * @tc.name   : testRunCapacitanceTest054
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 13 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest054, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 13;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_6000
+ * @tc.name   : testRunCapacitanceTest055
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 14 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest055, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 14;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_6100
+ * @tc.name   : testRunCapacitanceTest056
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 15 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest056, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 15;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_6200
+ * @tc.name   : testRunCapacitanceTest057
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 16 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest057, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 16;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_6300
+ * @tc.name   : testRunCapacitanceTest058
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 17 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest058, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 17;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_6400
+ * @tc.name   : testRunCapacitanceTest059
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 18 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest059, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 18;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_6500
+ * @tc.name   : testRunCapacitanceTest060
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 19 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest060, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 19;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_6600
+ * @tc.name   : testRunCapacitanceTest061
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 20 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest061, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 20;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_6700
+ * @tc.name   : testRunCapacitanceTest062
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 21 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest062, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 21;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_6800
+ * @tc.name   : testRunCapacitanceTest063
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 22 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest063, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 22;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_6900
+ * @tc.name   : testRunCapacitanceTest064
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 23 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest064, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 23;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_7000
+ * @tc.name   : testRunCapacitanceTest065
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 24 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest065, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 24;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_7100
+ * @tc.name   : testRunCapacitanceTest066
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 25 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest066, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 25;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_7200
+ * @tc.name   : testRunCapacitanceTest067
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 26 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest067, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 26;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_7300
+ * @tc.name   : testRunCapacitanceTest068
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 27 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest068, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 27;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_7400
+ * @tc.name   : testRunCapacitanceTest069
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 28 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest069, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 28;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_7500
+ * @tc.name   : testRunCapacitanceTest070
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 29 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest070, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 29;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_7600
+ * @tc.name   : testRunCapacitanceTest071
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 30 and testType is FULL_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest071, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 30;
+    uint32_t testType = FULL_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_7800
+ * @tc.name   : testRunCapacitanceTest073
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 3 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest073, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 3;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_7900
+ * @tc.name   : testRunCapacitanceTest074
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 4 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest074, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 4;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_8000
+ * @tc.name   : testRunCapacitanceTest075
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 6 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest075, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 6;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_8100
+ * @tc.name   : testRunCapacitanceTest076
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 7 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest076, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 7;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_8200
+ * @tc.name   : testRunCapacitanceTest077
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 8 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest077, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 8;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_8300
+ * @tc.name   : testRunCapacitanceTest078
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 9 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest078, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 9;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_8400
+ * @tc.name   : testRunCapacitanceTest079
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 10 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest079, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 10;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_8500
+ * @tc.name   : testRunCapacitanceTest080
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 11 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest080, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 11;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_8600
+ * @tc.name   : testRunCapacitanceTest081
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 12 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest081, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 12;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_8700
+ * @tc.name   : testRunCapacitanceTest082
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 13 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest082, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 13;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_8800
+ * @tc.name   : testRunCapacitanceTest083
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 14 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest083, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 14;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_8900
+ * @tc.name   : testRunCapacitanceTest084
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 15 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest084, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 15;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_9000
+ * @tc.name   : testRunCapacitanceTest085
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 16 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest085, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 16;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_9100
+ * @tc.name   : testRunCapacitanceTest086
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 17 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest086, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 17;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_9200
+ * @tc.name   : testRunCapacitanceTest087
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 18 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest087, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 18;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_9300
+ * @tc.name   : testRunCapacitanceTest088
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 19 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest088, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 19;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_9400
+ * @tc.name   : testRunCapacitanceTest089
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 20 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest089, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 20;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_9500
+ * @tc.name   : testRunCapacitanceTest090
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 21 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest090, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 21;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_9600
+ * @tc.name   : testRunCapacitanceTest091
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 22 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest091, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 22;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_9700
+ * @tc.name   : testRunCapacitanceTest092
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 23 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest092, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 23;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_9800
+ * @tc.name   : testRunCapacitanceTest093
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 24 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest093, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 24;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_9900
+ * @tc.name   : testRunCapacitanceTest094
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 25 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest094, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 25;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0010
+ * @tc.name   : testRunCapacitanceTest095
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 26 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest095, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 26;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0020
+ * @tc.name   : testRunCapacitanceTest096
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 27 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest096, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 27;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0030
+ * @tc.name   : testRunCapacitanceTest097
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 28 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest097, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 28;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0040
+ * @tc.name   : testRunCapacitanceTest098
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 29 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest098, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 29;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0050
+ * @tc.name   : testRunCapacitanceTest099
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 30 and testType is MMI_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest099, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 30;
+    uint32_t testType = MMI_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0070
+ * @tc.name   : testRunCapacitanceTest101
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 3 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest101, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 3;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0080
+ * @tc.name   : testRunCapacitanceTest102
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 4 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest102, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 4;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0090
+ * @tc.name   : testRunCapacitanceTest103
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 6 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest103, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 6;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0110
+ * @tc.name   : testRunCapacitanceTest104
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 7 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest104, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 7;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0120
+ * @tc.name   : testRunCapacitanceTest105
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 8 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest105, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 8;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0130
+ * @tc.name   : testRunCapacitanceTest106
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 9 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest106, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 9;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0140
+ * @tc.name   : testRunCapacitanceTest107
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 10 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest107, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 10;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0150
+ * @tc.name   : testRunCapacitanceTest108
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 11 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest108, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 11;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0160
+ * @tc.name   : testRunCapacitanceTest109
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 12 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest109, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 12;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0170
+ * @tc.name   : testRunCapacitanceTest110
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 13 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest110, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 13;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0180
+ * @tc.name   : testRunCapacitanceTest111
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 14 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest111, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 14;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0190
+ * @tc.name   : testRunCapacitanceTest112
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 15 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest112, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 15;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0210
+ * @tc.name   : testRunCapacitanceTest113
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 16 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest113, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 16;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0220
+ * @tc.name   : testRunCapacitanceTest114
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 17 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest114, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 17;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0230
+ * @tc.name   : testRunCapacitanceTest115
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 18 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest115, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 18;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0240
+ * @tc.name   : testRunCapacitanceTest116
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 19 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest116, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 19;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0250
+ * @tc.name   : testRunCapacitanceTest117
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 20 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest117, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 20;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0260
+ * @tc.name   : testRunCapacitanceTest118
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 21 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest118, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 21;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0270
+ * @tc.name   : testRunCapacitanceTest119
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 22 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest119, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 22;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0280
+ * @tc.name   : testRunCapacitanceTest120
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 23 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest120, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 23;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0290
+ * @tc.name   : testRunCapacitanceTest121
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 24 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest121, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 24;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0310
+ * @tc.name   : testRunCapacitanceTest122
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 25 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest122, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 25;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0320
+ * @tc.name   : testRunCapacitanceTest123
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 26 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest123, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 26;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0330
+ * @tc.name   : testRunCapacitanceTest124
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 27 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest124, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 27;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0340
+ * @tc.name   : testRunCapacitanceTest125
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 28 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest125, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 28;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0350
+ * @tc.name   : testRunCapacitanceTest126
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 29 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest126, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 29;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RunCapacitanceTest_0360
+ * @tc.name   : testRunCapacitanceTest127
+ * @tc.desc   : Verify the reliability of the RunCapacitanceTest function when devIndex is 30 and testType is
+ * RUNNING_TEST.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRunCapacitanceTest127, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = 30;
+    uint32_t testType = RUNNING_TEST;
+    std::string result;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->RunCapacitanceTest(devIndex, testType, result, TEST_RESULT_LEN);
+        EXPECT_NE(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
  * @tc.number : SUB_Driver_Input_RunExtraCommand_0400
  * @tc.name   : testRunExtraCommand002
  * @tc.desc   : Verify the reliability of the RunExtraCommand function when devIndex is 2.
@@ -9390,4 +11385,42 @@ HWTEST_F(HdfInputHdiTestAdditional, testRegisterReportCallback032, Function | Me
         ret = g_inputInterfaces->CloseInputDevice(devIndex);
         EXPECT_EQ(ret, INPUT_SUCCESS);
     }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RegisterHotPlugCallback_0100
+ * @tc.name   : testRegisterHotPlugCallback001
+ * @tc.desc   : Validation function RegisterHotPlugCallback results in success.
+ * when the hotPlugCallback parameter is g_callback
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRegisterHotPlugCallback001, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    ret = g_inputInterfaces->RegisterHotPlugCallback(g_callback);
+    EXPECT_EQ(ret, INPUT_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_RegisterHotPlugCallback_0200
+ * @tc.name   : testRegisterHotPlugCallback002
+ * @tc.desc   : Validation function RegisterHotPlugCallback results in success.
+ * when the hotPlugCallback parameter is nullptr
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testRegisterHotPlugCallback002, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    ret = g_inputInterfaces->RegisterHotPlugCallback(nullptr);
+    EXPECT_NE(ret, INPUT_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_UnregisterHotPlugCallback_0100
+ * @tc.name   : testUnregisterHotPlugCallback001
+ * @tc.desc   : Verify the reliability of UnregisterHotPlugCallback function and functional
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testUnregisterHotPlugCallback001, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    ret = g_inputInterfaces->UnregisterHotPlugCallback();
+    EXPECT_EQ(ret, INPUT_SUCCESS);
 }

@@ -30,6 +30,7 @@
 #include <securec.h>
 #include <servmgr_hdi.h>
 #include <vector>
+#include "codec_callback_service.h"
 
 extern bool g_eventHandlerFlag;
 

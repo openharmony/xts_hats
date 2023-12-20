@@ -12,9 +12,17 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
+import("//test/xts/hats/build.gni")
 import("../../../tools/build/suite.gni")
 
 group("HatsHdfRilTest") {
   testonly = true
-  deps = [ "hdi_v1.0:HatsHdfV1RilServiceTest" ]
+  if (hats_rich == false) {
+    deps = [
+      "hdi_v1.0:HatsHdfV1RilServiceTest",
+      "hdi_v1.1_additional:HatsHdfV1RilServiceAdditionalTest",
+    ]
+  } else {
+    deps = [ "hdi_v1.0:HatsHdfV1RilServiceTest" ]
+  }
 }

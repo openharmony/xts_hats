@@ -30,12 +30,15 @@
 #include <securec.h>
 #include <servmgr_hdi.h>
 #include <vector>
+// 补
+#include <codec_callback_service.h>
 
+extern bool g_eventHandlerFlag;
+// 补
 using namespace std;
 using namespace testing::ext;
 using OHOS::sptr;
 using namespace OHOS::HDI::Codec::V2_0;
-
 namespace {
 constexpr CodecType TYPE = CodecType::VIDEO_ENCODER;
 constexpr AvCodecRole ROLE = MEDIA_ROLETYPE_VIDEO_AVC;
@@ -1992,4 +1995,1035 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testSendCommand038, Function | Med
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
 
+// 补
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_0100
+ * @tc.name  testEventHandler001
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_STATE_SET and CODEC_STATE_INVALID. EventHandler is
+ * successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler001, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_INVALID, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_0200
+ * @tc.name  testEventHandler002
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_STATE_SET and CODEC_STATE_LOADED. EventHandler is
+ * successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler002, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_LOADED, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_0300
+ * @tc.name  testEventHandler003
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_STATE_SET and CODEC_STATE_IDLE. EventHandler is
+ * successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler003, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_IDLE, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_0400
+ * @tc.name  testEventHandler004
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_STATE_SET and CODEC_STATE_EXECUTING. EventHandler is
+ * successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler004, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_EXECUTING, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_0500
+ * @tc.name  testEventHandler005
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_STATE_SET and CODEC_STATE_PAUSE. EventHandler is
+ * successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler005, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_PAUSE, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_0600
+ * @tc.name  testEventHandler006
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_STATE_SET and CODEC_STATE_WAIT_FOR_RESOURCES.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler006, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_WAIT_FOR_RESOURCES, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_0700
+ * @tc.name  testEventHandler007
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_STATE_SET and CODEC_STATE_KHRONOS_EXTENSIONS.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler007, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_KHRONOS_EXTENSIONS, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_0800
+ * @tc.name  testEventHandler008
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_STATE_SET and CODEC_STATE_VENDOR_START_UNUSED.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler008, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_VENDOR_START_UNUSED, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_0900
+ * @tc.name  testEventHandler009
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_STATE_SET and CODEC_STATE_MAX.EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler009, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_MAX, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_1000
+ * @tc.name  testEventHandler010
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_FLUSH and -1. EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler010, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_FLUSH, -1, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_1100
+ * @tc.name  testEventHandler011
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_FLUSH and CODEC_STATE_INVALID. EventHandler is
+ * successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler011, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_FLUSH, CODEC_STATE_INVALID, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_1200
+ * @tc.name  testEventHandler012
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_FLUSH and CODEC_STATE_LOADED. EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler012, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_FLUSH, CODEC_STATE_LOADED, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_1300
+ * @tc.name  testEventHandler013
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_FLUSH and CODEC_STATE_IDLE. EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler013, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_FLUSH, CODEC_STATE_IDLE, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_1400
+ * @tc.name  testEventHandler014
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_FLUSH and CODEC_STATE_EXECUTING. EventHandler is
+ * successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler014, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_FLUSH, CODEC_STATE_EXECUTING, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_1500
+ * @tc.name  testEventHandler015
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_FLUSH and CODEC_STATE_PAUSE. SendCommand is EventHandler.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler015, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_FLUSH, CODEC_STATE_PAUSE, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_1600
+ * @tc.name  testEventHandler016
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_FLUSH and CODEC_STATE_WAIT_FOR_RESOURCES. EventHandler is
+ * successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler016, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_FLUSH, CODEC_STATE_WAIT_FOR_RESOURCES, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_1700
+ * @tc.name  testEventHandler017
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_FLUSH and CODEC_STATE_KHRONOS_EXTENSIONS.EventHandler is
+ * successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler017, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_FLUSH, CODEC_STATE_KHRONOS_EXTENSIONS, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_1800
+ * @tc.name  testEventHandler018
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_FLUSH and CODEC_STATE_VENDOR_START_UNUSED. EventHandler
+ * is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler018, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_FLUSH, CODEC_STATE_VENDOR_START_UNUSED, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_1900
+ * @tc.name  testEventHandler019
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_FLUSH and CODEC_STATE_MAX. EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler019, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_FLUSH, CODEC_STATE_MAX, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_2000
+ * @tc.name  testEventHandler020
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_PORT_DISABLE and CODEC_STATE_INVALID. EventHandler is
+ * successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler020, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_PORT_DISABLE, CODEC_STATE_INVALID, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_2100
+ * @tc.name  testEventHandler021
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_PORT_DISABLE and CODEC_STATE_LOADED. EventHandler is
+ * successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler021, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_PORT_DISABLE, CODEC_STATE_LOADED, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_2200
+ * @tc.name  testEventHandler022
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_PORT_DISABLE and CODEC_STATE_IDLE. EventHandler is
+ * successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler022, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_PORT_DISABLE, CODEC_STATE_IDLE, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_2300
+ * @tc.name  testEventHandler023
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_PORT_DISABLE and CODEC_STATE_EXECUTING. EventHandler is
+ * successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler023, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_PORT_DISABLE, CODEC_STATE_EXECUTING, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_2400
+ * @tc.name  testEventHandler024
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_PORT_DISABLE and CODEC_STATE_PAUSE. EventHandler is
+ * successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler024, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_PORT_DISABLE, CODEC_STATE_PAUSE, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_2500
+ * @tc.name  testEventHandler025
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_PORT_DISABLE and CODEC_STATE_WAIT_FOR_RESOURCES.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler025, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_PORT_DISABLE, CODEC_STATE_WAIT_FOR_RESOURCES, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_2600
+ * @tc.name  testEventHandler026
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_PORT_DISABLE and CODEC_STATE_KHRONOS_EXTENSIONS.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler026, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_PORT_DISABLE, CODEC_STATE_KHRONOS_EXTENSIONS, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_2700
+ * @tc.name  testEventHandler027
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_PORT_DISABLE and CODEC_STATE_VENDOR_START_UNUSED.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler027, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_PORT_DISABLE, CODEC_STATE_VENDOR_START_UNUSED, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_2800
+ * @tc.name  testEventHandler028
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_PORT_DISABLE and CODEC_STATE_MAX.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler028, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_PORT_DISABLE, CODEC_STATE_MAX, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_2900
+ * @tc.name  testEventHandler029
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_PORT_ENABLE and CODEC_STATE_INVALID.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler029, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_PORT_ENABLE, CODEC_STATE_INVALID, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_3000
+ * @tc.name  testEventHandler030
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_PORT_ENABLE and CODEC_STATE_LOADED.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler030, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_PORT_ENABLE, CODEC_STATE_LOADED, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_3100
+ * @tc.name  testEventHandler031
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_PORT_ENABLE and CODEC_STATE_IDLE.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler031, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_PORT_ENABLE, CODEC_STATE_IDLE, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_3200
+ * @tc.name  testEventHandler032
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_PORT_ENABLE and CODEC_STATE_EXECUTING.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler032, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_PORT_ENABLE, CODEC_STATE_EXECUTING, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_3300
+ * @tc.name  testEventHandler033
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_PORT_ENABLE and CODEC_STATE_PAUSE.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler033, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_PORT_ENABLE, CODEC_STATE_PAUSE, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_3400
+ * @tc.name  testEventHandler034
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_PORT_ENABLE and CODEC_STATE_WAIT_FOR_RESOURCES.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler034, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_PORT_ENABLE, CODEC_STATE_WAIT_FOR_RESOURCES, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_3500
+ * @tc.name  testEventHandler035
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_PORT_ENABLE and CODEC_STATE_KHRONOS_EXTENSIONS.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler035, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_PORT_ENABLE, CODEC_STATE_KHRONOS_EXTENSIONS, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_3600
+ * @tc.name  testEventHandler036
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_PORT_ENABLE and CODEC_STATE_VENDOR_START_UNUSED.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler036, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_PORT_ENABLE, CODEC_STATE_VENDOR_START_UNUSED, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_3700
+ * @tc.name  testEventHandler037
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_PORT_ENABLE and CODEC_STATE_MAX.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler037, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_PORT_ENABLE, CODEC_STATE_MAX, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_3800
+ * @tc.name  testEventHandler038
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_MARK_BUFFER and CODEC_STATE_INVALID.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler038, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_MARK_BUFFER, CODEC_STATE_INVALID, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_3900
+ * @tc.name  testEventHandler039
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_MARK_BUFFER and -1.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler039, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_MARK_BUFFER, -1, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_4000
+ * @tc.name  testEventHandler040
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_MARK_BUFFER and CODEC_STATE_LOADED.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler040, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_MARK_BUFFER, CODEC_STATE_LOADED, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_4100
+ * @tc.name  testEventHandler041
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_MARK_BUFFER and CODEC_STATE_IDLE.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler041, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_MARK_BUFFER, CODEC_STATE_IDLE, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_4200
+ * @tc.name  testEventHandler042
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_MARK_BUFFER and CODEC_STATE_EXECUTING.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler042, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_MARK_BUFFER, CODEC_STATE_EXECUTING, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_4300
+ * @tc.name  testEventHandler043
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_MARK_BUFFER and CODEC_STATE_PAUSE.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler043, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_MARK_BUFFER, CODEC_STATE_PAUSE, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_4400
+ * @tc.name  testEventHandler044
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_MARK_BUFFER and CODEC_STATE_WAIT_FOR_RESOURCES.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler044, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_MARK_BUFFER, CODEC_STATE_WAIT_FOR_RESOURCES, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_4500
+ * @tc.name  testEventHandler045
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_MARK_BUFFER and CODEC_STATE_KHRONOS_EXTENSIONS.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler045, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_MARK_BUFFER, CODEC_STATE_KHRONOS_EXTENSIONS, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_4600
+ * @tc.name  testEventHandler046
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_MARK_BUFFER and CODEC_STATE_VENDOR_START_UNUSED.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler046, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_MARK_BUFFER, CODEC_STATE_VENDOR_START_UNUSED, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_4700
+ * @tc.name  testEventHandler047
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_MARK_BUFFER and CODEC_STATE_MAX.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler047, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_MARK_BUFFER, CODEC_STATE_MAX, cmdData);
+    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_4800
+ * @tc.name  testEventHandler048
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_KHRONOS_EXTENSIONS and CODEC_STATE_INVALID.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler048, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_KHRONOS_EXTENSIONS, CODEC_STATE_INVALID, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_4900
+ * @tc.name  testEventHandler049
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_KHRONOS_EXTENSIONS and CODEC_STATE_LOADED.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler049, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_KHRONOS_EXTENSIONS, CODEC_STATE_LOADED, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_5000
+ * @tc.name  testEventHandler050
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_KHRONOS_EXTENSIONS and CODEC_STATE_IDLE.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler050, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_KHRONOS_EXTENSIONS, CODEC_STATE_IDLE, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_5100
+ * @tc.name  testEventHandler051
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_KHRONOS_EXTENSIONS and CODEC_STATE_EXECUTING.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler051, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_KHRONOS_EXTENSIONS, CODEC_STATE_EXECUTING, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_5200
+ * @tc.name  testEventHandler052
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_KHRONOS_EXTENSIONS and CODEC_STATE_PAUSE.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler052, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_KHRONOS_EXTENSIONS, CODEC_STATE_PAUSE, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_5300
+ * @tc.name  testEventHandler053
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_KHRONOS_EXTENSIONS and CODEC_STATE_WAIT_FOR_RESOURCES.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler053, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_KHRONOS_EXTENSIONS, CODEC_STATE_WAIT_FOR_RESOURCES, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_5400
+ * @tc.name  testEventHandler054
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_KHRONOS_EXTENSIONS and CODEC_STATE_KHRONOS_EXTENSIONS.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler054, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_KHRONOS_EXTENSIONS, CODEC_STATE_KHRONOS_EXTENSIONS, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_5500
+ * @tc.name  testEventHandler055
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_KHRONOS_EXTENSIONS and CODEC_STATE_VENDOR_START_UNUSED.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler055, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_KHRONOS_EXTENSIONS, CODEC_STATE_VENDOR_START_UNUSED, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_5600
+ * @tc.name  testEventHandler056
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_KHRONOS_EXTENSIONS and CODEC_STATE_MAX.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler056, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_KHRONOS_EXTENSIONS, CODEC_STATE_MAX, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_5700
+ * @tc.name  testEventHandler057
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_VENDOR_START_UNUSED and CODEC_STATE_INVALID.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler057, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_VENDOR_START_UNUSED, CODEC_STATE_INVALID, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_5800
+ * @tc.name  testEventHandler058
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_VENDOR_START_UNUSED and CODEC_STATE_LOADED.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler058, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_VENDOR_START_UNUSED, CODEC_STATE_LOADED, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_5900
+ * @tc.name  testEventHandler059
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_VENDOR_START_UNUSED and CODEC_STATE_IDLE.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler059, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_VENDOR_START_UNUSED, CODEC_STATE_IDLE, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_6000
+ * @tc.name  testEventHandler060
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_VENDOR_START_UNUSED and CODEC_STATE_EXECUTING.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler060, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_VENDOR_START_UNUSED, CODEC_STATE_EXECUTING, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_6100
+ * @tc.name  testEventHandler061
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_VENDOR_START_UNUSED and CODEC_STATE_PAUSE.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler061, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_VENDOR_START_UNUSED, CODEC_STATE_PAUSE, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_6200
+ * @tc.name  testEventHandler062
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_VENDOR_START_UNUSED and CODEC_STATE_WAIT_FOR_RESOURCES.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler062, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_VENDOR_START_UNUSED, CODEC_STATE_WAIT_FOR_RESOURCES, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_6300
+ * @tc.name  testEventHandler063
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_VENDOR_START_UNUSED and CODEC_STATE_KHRONOS_EXTENSIONS.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler063, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_VENDOR_START_UNUSED, CODEC_STATE_KHRONOS_EXTENSIONS, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_6400
+ * @tc.name  testEventHandler064
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_VENDOR_START_UNUSED and CODEC_STATE_VENDOR_START_UNUSED.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler064, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_VENDOR_START_UNUSED, CODEC_STATE_VENDOR_START_UNUSED, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_6500
+ * @tc.name  testEventHandler065
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_VENDOR_START_UNUSED and CODEC_STATE_MAX.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler065, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_VENDOR_START_UNUSED, CODEC_STATE_MAX, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_6600
+ * @tc.name  testEventHandler066
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_MAX and CODEC_STATE_INVALID.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler066, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_MAX, CODEC_STATE_INVALID, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_6700
+ * @tc.name  testEventHandler067
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_MAX and CODEC_STATE_LOADED.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler067, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_MAX, CODEC_STATE_LOADED, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_6800
+ * @tc.name  testEventHandler068
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_MAX and CODEC_STATE_IDLE.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler068, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_MAX, CODEC_STATE_IDLE, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_6900
+ * @tc.name  testEventHandler069
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_MAX and CODEC_STATE_EXECUTING.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler069, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_MAX, CODEC_STATE_EXECUTING, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_7000
+ * @tc.name  testEventHandler070
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_MAX and CODEC_STATE_PAUSE.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler070, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_MAX, CODEC_STATE_PAUSE, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_7100
+ * @tc.name  testEventHandler071
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_MAX and CODEC_STATE_WAIT_FOR_RESOURCES.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler071, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_MAX, CODEC_STATE_WAIT_FOR_RESOURCES, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_7200
+ * @tc.name  testEventHandler072
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_MAX and CODEC_STATE_KHRONOS_EXTENSIONS.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler072, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_MAX, CODEC_STATE_KHRONOS_EXTENSIONS, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_7300
+ * @tc.name  testEventHandler073
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_MAX and CODEC_STATE_VENDOR_START_UNUSED.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler073, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_MAX, CODEC_STATE_VENDOR_START_UNUSED, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
+/**
+ * @tc.number  SUB_Driver_Codec_EventHandler_7400
+ * @tc.name  testEventHandler074
+ * @tc.desc  The first and second parameters are CODEC_COMMAND_MAX and CODEC_STATE_MAX.
+ * EventHandler is successful.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testEventHandler074, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    int32_t ret = g_component->SendCommand(CODEC_COMMAND_MAX, CODEC_STATE_MAX, cmdData);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(g_eventHandlerFlag, true);
+}
 } // namespace

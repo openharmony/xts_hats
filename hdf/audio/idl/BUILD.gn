@@ -23,12 +23,13 @@ group("hdi_base_common") {
   if (hats_rich == false) {
     deps = [
       "common/adapter:HatsHdfAudioIdlAdapterTest",
-      "common/adapter_additional:HatsHdfAudioIdlAdapterAdditionalTest",
+      "common/adapter_additional:HatsHdfAudioIdlAdapterTestAdditional",
       "common/capture:HatsHdfAudioIdlCaptureTest",
-      "common/capture_additional:HatsHdfAudioIdlCaptureAdditionalTest",
+      "common/capture_additional:HatsHdfAudioIdlCaptureTestAdditional",
       "common/manager:HatsHdfAudioIdlManagerTest",
+      "common/manager_additional:HatsHdfAudioIdlManagerAdditionalTest",
       "common/render:HatsHdfAudioIdlRenderTest",
-      "common/render_additional:HatsHdfAudioIdlRenderAdditionalTest",
+      "common/render_additional:HatsHdfAudioIdlRenderTestAdditional",
 
       #"benchmarktest:HatsHdfAudioBenchmarkTest"
     ]
@@ -57,7 +58,7 @@ group("hdi_effect_additional") {
     testonly = true
   }
   if (hats_rich == false) {
-    deps = [ "effect_additional:HatsHdfAudioEffectAdditionalTest" ]
+    deps = [ "effect_additional:HatsHdfAudioEffectTestAdditional" ]
   } else {
   }
 }

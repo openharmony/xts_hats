@@ -54,8 +54,6 @@ public:
     static void TearDownTestCase();
     void SetUp();
     void TearDown();
-    static int32_t ReadFile(const char *path, char *buf, size_t size);
-    static int32_t ConvertInt(const std::string &value);
 };
 
 void HdfBatteryHdiTestAdditional::SetUpTestCase(void) { g_batteryInterface = IBatteryInterface::Get(true); }

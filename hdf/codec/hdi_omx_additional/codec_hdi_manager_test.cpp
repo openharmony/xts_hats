@@ -337,7 +337,6 @@ HWTEST_F(CodecHdiManagerTestAdditional, testCodecDestroyComponent002, Function |
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
 
-// 补
 /**
  * @tc.number  SUB_Driver_Codec_CodecHdi_2300
  * @tc.name  testCodecGetComponentCapabilityList007

@@ -535,7 +535,7 @@ HWTEST_F(CodecHdiJpegTestAdditional, testDeInit001, TestSize.Level2)
     auto ret = hdiJpeg_->DeInit(CODEC_IMAGE_INVALID);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
-// 补
+
 /**
  * @tc.number : SUB_Driver_Codec_DoJpegDecode_2100
  * @tc.name   : testCodecDoJpegDecode013

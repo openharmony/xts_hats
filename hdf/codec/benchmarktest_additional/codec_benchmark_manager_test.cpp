@@ -30,11 +30,9 @@
 #include <securec.h>
 #include <servmgr_hdi.h>
 #include <vector>
-// 补
-#include <codec_callback_service.h>
 
 extern bool g_eventHandlerFlag;
-// 补
+
 using namespace std;
 using namespace testing::ext;
 using OHOS::sptr;
@@ -1995,7 +1993,6 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testSendCommand038, Function | Med
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
 
-// 补
 /**
  * @tc.number  SUB_Driver_Codec_EventHandler_0100
  * @tc.name  testEventHandler001

@@ -2337,3 +2337,47 @@ HWTEST_F(UserIamUserAuthTestAdditional, testInit001, Function | MediumTest | Lev
     cout << "start Init" << endl;
     EXPECT_EQ(g_service.Init(), 0);
 }
+/**
+ * @tc.number: SUB_Security_IAM_UserAuth_HDI_FUNC_0010
+ * @tc.name  : testGetValidSolution001
+ * @tc.desc  : Call the GetValidSolution function to get the the authentication information
+ */
+HWTEST_F(UserIamUserAuthTestAdditional, testGetValidSolution001, Function | MediumTest | Level2)
+{
+    int32_t userId = parcel.ReadInt32();
+    std::vector<AuthType> authTypes = {AuthType::ALL, AuthType::PIN, AuthType::FACE, AuthType::FINGERPRINT};
+    uint32_t authTrustLevel = 0;
+    std::vector<AuthType> validTypes;
+    EXPECT_NE(g_service.GetValidSolution(userId, authTypes, authTrustLevel, validTypes), 0);
+}
+/**
+ * @tc.number: SUB_Security_IAM_UserAuth_HDI_FUNC_0020
+ * @tc.name  : testDeleteCredential001
+ * @tc.desc  : Call the DeleteCredential function to deletes credential information
+ */
+HWTEST_F(UserIamUserAuthTestAdditional, testDeleteCredential001, Function | MediumTest | Level2)
+{
+    int32_t userId = parcel.ReadInt32();
+    uint64_t credentialId = parcel.ReadUint64();
+    std::vector<uint8_t> authToken;
+    CredentialInfo info;
+    EXPECT_NE(g_service.DeleteCredential(userId, credentialId, authToken, info), 0);
+}
+/**
+ * @tc.number: SUB_Security_IAM_UserAuth_HDI_FUNC_0030
+ * @tc.name  : testUpdateEnrollmentResult001
+ * @tc.desc  : Call the UpdateEnrollmentResult function directly to update and enroll the result
+ */
+HWTEST_F(UserIamUserAuthTestAdditional, testUpdateEnrollmentResult001, Function | MediumTest | Level2)
+{
+    int32_t userId = 12345;
+    std::vector<uint8_t> challenge;
+    EXPECT_EQ(g_service.OpenSession(userId, challenge), 0);
+
+    std::vector<uint8_t> scheduleResult(1);
+    scheduleResult[0] = 1;
+    EnrollResultInfo enrolledResultInfo = {};
+    EXPECT_NE(g_service.UpdateEnrollmentResult(userId, scheduleResult, enrolledResultInfo), 0);
+
+    EXPECT_EQ(g_service.CloseSession(userId), 0);
+}

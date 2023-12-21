@@ -10133,7 +10133,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetMeid004, Function | MediumTest | Leve
  * @tc.name: testV1GetMeid005
  * @tc.desc: GetMeid, stability test
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetMeid005, Function | MediumTest | Level2)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetMeid005, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -26492,7 +26492,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus001, Function | MediumTe
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_NE(SUCCESS, ret);
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -26515,7 +26514,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus002, Function | MediumTe
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_NE(SUCCESS, ret);
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -26539,7 +26537,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus003, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -26563,7 +26560,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus004, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -26587,7 +26583,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus005, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -26611,7 +26606,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus006, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -26635,7 +26629,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus007, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -26659,7 +26652,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus008, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -26683,7 +26675,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus009, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -26707,7 +26698,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus010, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -26731,7 +26721,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus011, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -26755,7 +26744,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus012, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -26779,7 +26767,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus013, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -26804,7 +26791,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus014, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -26829,7 +26815,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus015, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -26854,7 +26839,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus016, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -26878,7 +26862,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus017, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -26902,7 +26885,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus018, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -26926,7 +26908,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus019, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -26950,7 +26931,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus020, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -26974,7 +26954,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus021, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -26998,7 +26977,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus022, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27022,7 +27000,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus023, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27046,7 +27023,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus024, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27070,7 +27046,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus025, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27095,7 +27070,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus026, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27120,7 +27094,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus027, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27145,7 +27118,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus028, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27169,7 +27141,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus029, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27193,7 +27164,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus030, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27217,7 +27187,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus031, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27241,7 +27210,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus032, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27265,7 +27233,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus033, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27289,7 +27256,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus034, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27313,7 +27279,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus035, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27337,7 +27302,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus036, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27361,7 +27325,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus037, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27385,7 +27348,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus038, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27409,7 +27371,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus039, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27433,7 +27394,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus040, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27457,7 +27417,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus041, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27481,7 +27440,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus042, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27505,7 +27463,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus043, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27529,7 +27486,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus044, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27553,7 +27509,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus045, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27577,7 +27532,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus046, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27601,7 +27555,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus047, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27625,7 +27578,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus048, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27649,7 +27601,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus049, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27674,7 +27625,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus050, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27699,7 +27649,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus051, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27724,7 +27673,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus052, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27748,7 +27696,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus053, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27772,7 +27719,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus054, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27796,7 +27742,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus055, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27820,7 +27765,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus056, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27844,7 +27788,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus057, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27868,7 +27811,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus058, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27892,7 +27834,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus059, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27916,7 +27857,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus060, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27940,7 +27880,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus061, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27965,7 +27904,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus062, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -27990,7 +27928,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus063, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28015,7 +27952,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus064, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28039,7 +27975,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus065, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28063,7 +27998,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus066, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28087,7 +28021,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus067, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28111,7 +28044,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus068, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28135,7 +28067,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus069, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28159,7 +28090,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus070, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28183,7 +28113,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus071, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28207,7 +28136,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus072, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28231,7 +28159,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus073, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28255,7 +28182,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus074, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28279,7 +28205,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus075, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28303,7 +28228,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus076, Function | MediumTe
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28326,7 +28250,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword001, Function | MediumT
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_NE(SUCCESS, ret);
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28349,7 +28272,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword002, Function | MediumT
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_NE(SUCCESS, ret);
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28373,7 +28295,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword003, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28397,7 +28318,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword004, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28421,7 +28341,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword005, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28445,7 +28364,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword006, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28469,7 +28387,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword007, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28493,7 +28410,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword008, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28517,7 +28433,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword009, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28541,7 +28456,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword010, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28565,7 +28479,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword011, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28589,7 +28502,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword012, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28613,7 +28525,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword013, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28637,7 +28548,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword014, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28661,7 +28571,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword015, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28685,7 +28594,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword016, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28709,7 +28617,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword017, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28733,7 +28640,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword018, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28757,7 +28663,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword019, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28781,7 +28686,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword020, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28805,7 +28709,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword021, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28829,7 +28732,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword022, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28853,7 +28755,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword023, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28877,7 +28778,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword024, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28901,7 +28801,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword025, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28925,7 +28824,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword026, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28949,7 +28847,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword027, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28973,7 +28870,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword028, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -28997,7 +28893,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword029, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -29021,7 +28916,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword030, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -29045,7 +28939,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword031, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -29069,7 +28962,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword032, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -33925,7 +33817,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock001, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -33950,7 +33841,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock002, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -33975,7 +33865,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock003, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34000,7 +33889,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock004, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34025,7 +33913,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock005, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34050,7 +33937,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock006, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34075,7 +33961,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock007, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34100,7 +33985,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock008, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34125,7 +34009,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock009, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34150,7 +34033,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock010, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34175,7 +34057,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock011, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34200,7 +34081,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock012, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34225,7 +34105,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock013, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34250,7 +34129,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock014, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34275,7 +34153,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock015, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34300,7 +34177,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock016, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34325,7 +34201,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock017, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34350,7 +34225,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock018, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34375,7 +34249,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock019, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34400,7 +34273,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock020, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34425,7 +34297,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock021, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34450,7 +34321,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock022, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34476,7 +34346,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock023, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34502,7 +34371,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock024, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34550,7 +34418,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock026, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34575,7 +34442,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock027, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34600,7 +34466,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock028, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34625,7 +34490,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock029, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34650,7 +34514,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock030, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34675,7 +34538,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock031, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34700,7 +34562,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock032, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34725,7 +34586,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock033, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34750,7 +34610,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock034, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34775,7 +34634,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock035, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34800,7 +34658,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock036, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34825,7 +34682,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock037, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34850,7 +34706,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock038, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34875,7 +34730,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock039, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34900,7 +34754,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock040, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34925,7 +34778,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock041, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34950,7 +34802,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock042, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -34975,7 +34826,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock043, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -35000,7 +34850,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock044, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -35025,7 +34874,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock045, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -35050,7 +34898,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock046, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -35075,7 +34922,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock047, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -35101,7 +34947,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock048, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -35127,7 +34972,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock049, Function | MediumTest | L
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -37046,7 +36890,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLockResponse001, Function | Medium
     EXPECT_EQ(true, g_setSimLockResponseFlag);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -37072,7 +36915,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLockResponse002, Function | Medium
     EXPECT_EQ(true, g_setSimLockResponseFlag);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_SIM_LOCK));
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -37096,7 +36938,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPasswordResponse001, Function |
     EXPECT_EQ(SUCCESS, ret);
     EXPECT_EQ(true, g_changeSimPasswordResponseFlag);
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**
@@ -37120,7 +36961,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPasswordResponse002, Function |
     EXPECT_EQ(SUCCESS, ret);
     EXPECT_EQ(true, g_changeSimPasswordResponseFlag);
 #endif
-    ASSERT_TRUE(true);
 }
 
 /**

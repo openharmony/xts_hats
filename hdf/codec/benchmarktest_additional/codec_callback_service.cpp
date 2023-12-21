@@ -16,15 +16,12 @@
 #include "v2_0/codec_callback_service.h"
 #include <hdf_base.h>
 
-bool g_eventHandlerFlag = false;
-
 namespace OHOS {
 namespace HDI {
 namespace Codec {
 namespace V2_0 {
 int32_t CodecCallbackService::EventHandler(CodecEventType event, const EventInfo &info)
 {
-    g_eventHandlerFlag = true;
     (void)event;
     (void)info;
     return HDF_SUCCESS;

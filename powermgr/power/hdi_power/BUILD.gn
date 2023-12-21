@@ -13,6 +13,7 @@
 
 import("//build/ohos_var.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
+import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
 ohos_moduletest_suite("HatsPowermgrPowerTest") {
@@ -29,6 +30,11 @@ ohos_moduletest_suite("HatsPowermgrPowerTest") {
     "hilog:libhilog",
     "ipc:ipc_single",
   ]
+
+  if (hats_drivers_peripheral_power_wakeup_cause_path) {
+    defines = [ "HATS_DRIVER_PERIPHERAL_POWER_WAKEUP_CAUSE_PATH" ]
+  }
+
   subsystem_name = "xts"
   part_name = "hats"
 }

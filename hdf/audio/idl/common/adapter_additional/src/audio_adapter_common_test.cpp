@@ -776,4 +776,19 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture001, TestSize.Level1)
         EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, captureId_));
     }
 }
+
+/**
+ * @tc.number: SUB_Driver_Audio_RegExtraParamObserver_0300
+ * @tc.name  : testRegExtraParamObserver001
+ * @tc.desc  : Verify the reliability of the RegExtraParamObserver function cookie as 1.
+ */
+HWTEST_F(HdfAudioUtAdapterTestAdditional, testRegExtraParamObserver001, TestSize.Level1)
+{
+    ASSERT_NE(adapter_, nullptr);
+    int8_t cookie = 1;
+    struct IAudioCallback *audioCallback = nullptr;
+
+    int32_t ret = adapter_->RegExtraParamObserver(adapter_, audioCallback, cookie);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_INVALID_PARAM);
+}
 } // namespace

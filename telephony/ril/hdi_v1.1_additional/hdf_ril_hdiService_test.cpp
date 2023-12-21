@@ -3382,7 +3382,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword008, Function | Medium
  * @tc.name   : testV1SetBarringPassword009
  * @tc.desc   : Call the function V1 SetBarringPassword with fac and a value of 0
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword009, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword009, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -3393,7 +3393,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword009, Function | Medium
     setBarringInfo.newPassword = "2345";
     int32_t ret = g_rilInterface->SetBarringPassword(SLOTID_1, GetSerialId(), setBarringInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_BARRING_PASSWORD));
 }
 
@@ -3402,7 +3402,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword009, Function | Medium
  * @tc.name   : testV1SetBarringPassword010
  * @tc.desc   : Call the function V1 SetBarringPassword with fac and a value of -AB
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword010, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword010, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -3413,7 +3413,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword010, Function | Medium
     setBarringInfo.newPassword = "2345";
     int32_t ret = g_rilInterface->SetBarringPassword(SLOTID_1, GetSerialId(), setBarringInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_BARRING_PASSWORD));
 }
 

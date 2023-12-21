@@ -36057,6 +36057,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallTransferInfoResponse001, Function
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_setCallTransferInfoResponseFlag = false;
     CallForwardSetInfo callForwardSetInfo = {};
     callForwardSetInfo.reason = 1;
     callForwardSetInfo.mode = 1;
@@ -36078,6 +36079,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallTransferInfoResponse002, Function
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_setCallTransferInfoResponseFlag = false;
     CallForwardSetInfo callForwardSetInfo = {};
     callForwardSetInfo.reason = 1;
     callForwardSetInfo.mode = 1;
@@ -36099,6 +36101,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallRestrictionResponse001, Function 
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_getCallRestrictionResponseFlag = false;
     std::string fac = "AO";
     int32_t ret = g_rilInterface->GetCallRestriction(SLOTID_1, GetSerialId(), fac);
     WaitFor(WAIT_TIME_SECOND);
@@ -36116,6 +36119,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallRestrictionResponse002, Function 
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_getCallRestrictionResponseFlag = false;
     std::string fac = "AO";
     int32_t ret = g_rilInterface->GetCallRestriction(SLOTID_2, GetSerialId(), fac);
     WaitFor(WAIT_TIME_SECOND);
@@ -36133,6 +36137,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallRestrictionResponse001, Function 
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_setCallRestrictionResponseFlag = false;
     CallRestrictionInfo callRestrictionInfo = {};
     callRestrictionInfo.fac = "AO";
     callRestrictionInfo.mode = 1;
@@ -36153,6 +36158,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallRestrictionResponse002, Function 
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_setCallRestrictionResponseFlag = false;
     CallRestrictionInfo callRestrictionInfo = {};
     callRestrictionInfo.fac = "AO";
     callRestrictionInfo.mode = 1;
@@ -36173,6 +36179,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetClirResponse001, Function | MediumTes
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_getClirResponseFlag = false;
     int32_t ret = g_rilInterface->GetClir(SLOTID_1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -36189,6 +36196,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetClirResponse002, Function | MediumTes
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_getClirResponseFlag = false;
     int32_t ret = g_rilInterface->GetClir(SLOTID_2, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -36205,6 +36213,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetClirResponse001, Function | MediumTes
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_setClirResponseFlag = false;
     int32_t ret = g_rilInterface->SetClir(SLOTID_1, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -36221,6 +36230,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetClirResponse002, Function | MediumTes
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_setClirResponseFlag = false;
     int32_t ret = g_rilInterface->SetClir(SLOTID_2, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -36237,6 +36247,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmfResponse001, Function | MediumT
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_startDtmfResponseFlag = false;
     DtmfInfo dtmfInfo = {};
     dtmfInfo.callId = 0;
     dtmfInfo.dtmfKey = "#";
@@ -36256,6 +36267,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmfResponse002, Function | MediumT
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_startDtmfResponseFlag = false;
     DtmfInfo dtmfInfo = {};
     dtmfInfo.callId = 0;
     dtmfInfo.dtmfKey = "#";
@@ -36275,6 +36287,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmfResponse001, Function | MediumTe
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_sendDtmfResponseFlag = false;
     DtmfInfo dtmfInfo = {};
     dtmfInfo.callId = 0;
     dtmfInfo.dtmfKey = "#";
@@ -36297,6 +36310,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmfResponse002, Function | MediumTe
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_sendDtmfResponseFlag = false;
     DtmfInfo dtmfInfo = {};
     dtmfInfo.callId = 0;
     dtmfInfo.dtmfKey = "#";
@@ -36319,6 +36333,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmfResponse001, Function | MediumTe
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_stopDtmfResponseFlag = false;
     DtmfInfo dtmfInfo = {};
     dtmfInfo.callId = 0;
     dtmfInfo.dtmfKey = "#";
@@ -36338,6 +36353,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmfResponse002, Function | MediumTe
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_stopDtmfResponseFlag = false;
     DtmfInfo dtmfInfo = {};
     dtmfInfo.callId = 0;
     dtmfInfo.dtmfKey = "#";
@@ -36357,6 +36373,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallPreferenceModeResponse001, Functi
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_getCallPreferenceModeResponseFlag = false;
     int32_t ret = g_rilInterface->GetCallPreferenceMode(SLOTID_1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -36373,6 +36390,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallPreferenceModeResponse002, Functi
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_getCallPreferenceModeResponseFlag = false;
     int32_t ret = g_rilInterface->GetCallPreferenceMode(SLOTID_2, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -36389,6 +36407,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallPreferenceModeResponse001, Functi
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_setCallPreferenceModeResponseFlag = false;
     int32_t ret = g_rilInterface->SetCallPreferenceMode(SLOTID_1, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -36405,6 +36424,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallPreferenceModeResponse002, Functi
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_setCallPreferenceModeResponseFlag = false;
     int32_t ret = g_rilInterface->SetCallPreferenceMode(SLOTID_2, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -36421,6 +36441,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetUssdResponse001, Function | MediumTes
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_setUssdResponseFlag = false;
     int32_t ret = g_rilInterface->SetUssd(SLOTID_1, GetSerialId(), "12345678");
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -36437,6 +36458,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetUssdResponse002, Function | MediumTes
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_setUssdResponseFlag = false;
     int32_t ret = g_rilInterface->SetUssd(SLOTID_2, GetSerialId(), "12345678");
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -36453,6 +36475,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1CloseUnFinishedUssdResponse001, Function
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_closeUnFinishedUssdResponseFlag = false;
     int32_t ret = g_rilInterface->CloseUnFinishedUssd(SLOTID_1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -36469,6 +36492,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1CloseUnFinishedUssdResponse002, Function
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_closeUnFinishedUssdResponseFlag = false;
     int32_t ret = g_rilInterface->CloseUnFinishedUssd(SLOTID_2, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -36485,6 +36509,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallFailReasonResponse001, Function |
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_getCallFailReasonResponseFlag = false;
     int32_t ret = g_rilInterface->GetCallFailReason(SLOTID_1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -36501,6 +36526,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallFailReasonResponse002, Function |
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_getCallFailReasonResponseFlag = false;
     int32_t ret = g_rilInterface->GetCallFailReason(SLOTID_2, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -36517,6 +36543,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPasswordResponse001, Function 
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_setBarringPasswordResponseFlag = false;
     SetBarringInfo setBarringInfo = {};
     setBarringInfo.fac = "AB";
     setBarringInfo.oldPassword = "1234";
@@ -36537,6 +36564,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPasswordResponse002, Function 
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_setBarringPasswordResponseFlag = false;
     SetBarringInfo setBarringInfo = {};
     setBarringInfo.fac = "AB";
     setBarringInfo.oldPassword = "1234";
@@ -36557,6 +36585,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1DeactivatePdpContextResponse001, Functio
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_deactivatePdpContextResponseFlag = false;
     int32_t serialId = 0;
     UniInfo uniInfo;
     uniInfo.serial = serialId;
@@ -36578,6 +36607,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1DeactivatePdpContextResponse002, Functio
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_deactivatePdpContextResponseFlag = false;
     int32_t serialId = 0;
     UniInfo uniInfo;
     uniInfo.serial = serialId;
@@ -36599,6 +36629,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetPdpContextListResponse001, Function |
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_getPdpContextListResponseFlag = false;
     int32_t serialId = 0;
     UniInfo uniInfo;
     uniInfo.serial = serialId;
@@ -36618,6 +36649,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetPdpContextListResponse002, Function |
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_getPdpContextListResponseFlag = false;
     int32_t serialId = 0;
     UniInfo uniInfo;
     uniInfo.serial = serialId;
@@ -36637,6 +36669,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetInitApnInfoResponse001, Function | Me
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_setInitApnInfoResponseFlag = false;
     int32_t serialId = 0;
     DataProfileDataInfo dataProfileInfo;
     dataProfileInfo.profileId = 0;
@@ -36663,6 +36696,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetInitApnInfoResponse002, Function | Me
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_setInitApnInfoResponseFlag = false;
     int32_t serialId = 0;
     DataProfileDataInfo dataProfileInfo;
     dataProfileInfo.profileId = 0;
@@ -36689,6 +36723,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetLinkBandwidthInfoResponse001, Functio
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_getLinkBandwidthInfoResponseFlag = false;
     int32_t ret = g_rilInterface->GetLinkBandwidthInfo(SLOTID_1, 0, 1);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -36705,6 +36740,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetLinkBandwidthInfoResponse002, Functio
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_getLinkBandwidthInfoResponseFlag = false;
     int32_t ret = g_rilInterface->GetLinkBandwidthInfo(SLOTID_2, 0, 1);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -36721,6 +36757,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetLinkCapabilityResponse001, Function |
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_getLinkCapabilityResponseFlag = false;
     int32_t ret = g_rilInterface->GetLinkCapability(SLOTID_1, 0);
     EXPECT_EQ(SUCCESS, ret);
     EXPECT_EQ(true, g_getLinkCapabilityResponseFlag);
@@ -36736,6 +36773,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetLinkCapabilityResponse002, Function |
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_getLinkCapabilityResponseFlag = false;
     int32_t ret = g_rilInterface->GetLinkCapability(SLOTID_2, 0);
     EXPECT_EQ(SUCCESS, ret);
     EXPECT_EQ(true, g_getLinkCapabilityResponseFlag);
@@ -36751,7 +36789,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetVoiceRadioTechnologyResponse001, Func
     if (!IsReady(SLOTID_1)) {
         return;
     }
-
+    g_getVoiceRadioTechnologyResponseFlag = false;
     int32_t ret = g_rilInterface->GetVoiceRadioTechnology(SLOTID_1, GetSerialId());
     ;
     WaitFor(WAIT_TIME_SECOND);
@@ -36769,7 +36807,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetVoiceRadioTechnologyResponse002, Func
     if (!IsReady(SLOTID_2)) {
         return;
     }
-
+    g_getVoiceRadioTechnologyResponseFlag = false;
     int32_t ret = g_rilInterface->GetVoiceRadioTechnology(SLOTID_2, GetSerialId());
     ;
     WaitFor(WAIT_TIME_SECOND);
@@ -36787,6 +36825,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimIOResponse001, Function | MediumTe
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_getSimIOResponseFlag = false;
     SimIoRequestInfo msg;
     msg.command = 0xc0;
     msg.fileId = 0x2FE2;
@@ -36812,6 +36851,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimIOResponse002, Function | MediumTe
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_getSimIOResponseFlag = false;
     SimIoRequestInfo msg;
     msg.command = 0xc0;
     msg.fileId = 0x2FE2;
@@ -36837,6 +36877,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimStatusResponse001, Function | Medi
     if (g_rilInterface == nullptr) {
         return;
     }
+    g_getSimStatusResponseFlag = false;
     int32_t ret = g_rilInterface->GetSimStatus(SLOTID_1, GetSerialId());
     if (ret != 2) {
         WaitFor(WAIT_TIME_SECOND);
@@ -36857,6 +36898,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimStatusResponse002, Function | Medi
     if (g_rilInterface == nullptr) {
         return;
     }
+    g_getSimStatusResponseFlag = false;
     int32_t ret = g_rilInterface->GetSimStatus(SLOTID_2, GetSerialId());
     if (ret != 2) {
         WaitFor(WAIT_TIME_SECOND);
@@ -36878,6 +36920,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLockResponse001, Function | Medium
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_setSimLockResponseFlag = false;
     SimLockInfo simLockInfo;
     simLockInfo.fac = "AO";
     simLockInfo.mode = 0;
@@ -36903,6 +36946,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLockResponse002, Function | Medium
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_setSimLockResponseFlag = false;
     SimLockInfo simLockInfo;
     simLockInfo.fac = "AO";
     simLockInfo.mode = 0;
@@ -36928,6 +36972,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPasswordResponse001, Function |
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_changeSimPasswordResponseFlag = false;
     ISimPasswordInfo simPassword;
     simPassword.fac = "AO";
     simPassword.oldPassword = "1234";
@@ -36951,6 +36996,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPasswordResponse002, Function |
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_changeSimPasswordResponseFlag = false;
     ISimPasswordInfo simPassword;
     simPassword.fac = "AO";
     simPassword.oldPassword = "1234";
@@ -36973,6 +37019,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPinResponse001, Function | MediumT
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_unlockPinResponseFlag = false;
     std::string pin = TEST_STORAGE_PDU;
     int32_t ret = g_rilInterface->UnlockPin(SLOTID_1, GetSerialId(), pin);
     WaitFor(WAIT_TIME_SECOND);
@@ -36990,6 +37037,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPinResponse002, Function | MediumT
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_unlockPinResponseFlag = false;
     std::string pin = TEST_STORAGE_PDU;
     int32_t ret = g_rilInterface->UnlockPin(SLOTID_2, GetSerialId(), pin);
     WaitFor(WAIT_TIME_SECOND);
@@ -37007,6 +37055,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPukResponse001, Function | MediumT
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_unlockPukResponseFlag = false;
     std::string puk = TEST_SEND_PDU;
     std::string pin = TEST_STORAGE_PDU;
     int32_t ret = g_rilInterface->UnlockPuk(SLOTID_1, GetSerialId(), puk, pin);
@@ -37025,6 +37074,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPukResponse002, Function | MediumT
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_unlockPukResponseFlag = false;
     std::string puk = TEST_SEND_PDU;
     std::string pin = TEST_STORAGE_PDU;
     int32_t ret = g_rilInterface->UnlockPuk(SLOTID_2, GetSerialId(), puk, pin);
@@ -37043,6 +37093,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin2Response001, Function | Medium
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_unlockPin2ResponseFlag = false;
     std::string pin2 = TEST_SEND_PDU;
     int32_t ret = g_rilInterface->UnlockPin2(SLOTID_1, GetSerialId(), pin2);
     WaitFor(WAIT_TIME_SECOND);
@@ -37060,6 +37111,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin2Response002, Function | Medium
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_unlockPin2ResponseFlag = false;
     std::string pin2 = TEST_SEND_PDU;
     int32_t ret = g_rilInterface->UnlockPin2(SLOTID_2, GetSerialId(), pin2);
     WaitFor(WAIT_TIME_SECOND);
@@ -37077,6 +37129,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2Response001, Function | Medium
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_unlockPuk2ResponseFlag = false;
     std::string puk2 = TEST_SEND_PDU;
     std::string pin2 = TEST_STORAGE_PDU;
     int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_1, GetSerialId(), puk2, pin2);
@@ -37095,6 +37148,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2Response002, Function | Medium
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_unlockPuk2ResponseFlag = false;
     std::string puk2 = TEST_SEND_PDU;
     std::string pin2 = TEST_STORAGE_PDU;
     int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_2, GetSerialId(), puk2, pin2);
@@ -38373,6 +38427,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetVonrSwitchResponse001, Function | Med
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_setVonrSwitchResponseFlag = false;
     int32_t ret = g_rilInterface->SetVonrSwitch(SLOTID_1, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -38389,6 +38444,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetVonrSwitchResponse002, Function | Med
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_setVonrSwitchResponseFlag = false;
     int32_t ret = g_rilInterface->SetVonrSwitch(SLOTID_2, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -38405,6 +38461,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetVonrSwitchResponse003, Function | Med
     if (!IsReady(SLOTID_1)) {
         return;
     }
+    g_setVonrSwitchResponseFlag = false;
     int32_t ret = g_rilInterface->SetVonrSwitch(SLOTID_1, GetSerialId(), 0);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -38421,6 +38478,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetVonrSwitchResponse004, Function | Med
     if (!IsReady(SLOTID_2)) {
         return;
     }
+    g_setVonrSwitchResponseFlag = false;
     int32_t ret = g_rilInterface->SetVonrSwitch(SLOTID_2, GetSerialId(), 0);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);

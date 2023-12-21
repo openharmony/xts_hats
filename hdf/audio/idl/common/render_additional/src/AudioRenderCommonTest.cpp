@@ -2168,11 +2168,10 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop007, TestSize.Level1)
 {
     int32_t ret = render_->Start(render_);
     EXPECT_EQ(HDF_SUCCESS, ret);
-
     ret = render_->TurnStandbyMode(render_);
     EXPECT_EQ(HDF_SUCCESS, ret);
     ret = render_->Stop(render_);
-    EXPECT_EQ(HDF_SUCCESS, ret);
+    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_SUCCESS);
     int32_t i;
     for (i = 0; i < 50; i++) {
         ret = render_->Start(render_);

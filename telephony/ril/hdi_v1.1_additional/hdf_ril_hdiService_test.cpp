@@ -8647,10 +8647,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode007, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_1200
- * @tc.name  : testV1SendSmsMoreMode08
+ * @tc.name  : testV1SendSmsMoreMode008
  * @tc.desc  : Call function SendSmsMoreMode with the second 1.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode08, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode008, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;

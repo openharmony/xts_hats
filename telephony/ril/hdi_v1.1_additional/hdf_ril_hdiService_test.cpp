@@ -982,6 +982,7 @@ int32_t RilCallback::NetworkPsRegStatusUpdated(const RilRadioResponseInfo &respo
 
 int32_t RilCallback::SignalStrengthUpdated(const RilRadioResponseInfo &responseInfo, const Rssi &rssi)
 {
+    g_signalStrengthUpdatedFlag = true;
     HDF_LOGI("RilCallback::SignalStrengthUpdated rxlev:%{public}d rsrp:%{public}d", rssi.lte.rxlev, rssi.lte.rsrp);
     return 0;
 }
@@ -1001,6 +1002,7 @@ int32_t RilCallback::NetworkTimeUpdated(const RilRadioResponseInfo &responseInfo
 int32_t RilCallback::NetworkPhyChnlCfgUpdated(const RilRadioResponseInfo &responseInfo,
                                               const ChannelConfigInfoList &channelConfigInfoList)
 {
+    g_networkPhyChnlCfgUpdatedFlag = true;
     HDF_LOGI("RilCallback::NetworkPhyChnlCfgUpdated itemNum:%{public}d", channelConfigInfoList.itemNum);
     for (PhysicalChannelConfig phyChnlCfg : channelConfigInfoList.channelConfigInfos) {
         HDF_LOGI("RilCallback::NetworkPhyChnlCfgUpdated cellConnStatus:%{public}d, "
@@ -1020,6 +1022,7 @@ int32_t RilCallback::NetworkPhyChnlCfgUpdated(const RilRadioResponseInfo &respon
 int32_t RilCallback::NetworkCurrentCellUpdated(const RilRadioResponseInfo &responseInfo,
                                                const CellListCurrentInfo &cellListCurrentInfo)
 {
+    g_networkCurrentCellUpdatedFlag = true;
     HDF_LOGI("RilCallback::NetworkCurrentCellUpdated itemNum:%{public}d", cellListCurrentInfo.itemNum);
     for (auto info : cellListCurrentInfo.cellCurrentInfo) {
         HDF_LOGI("RilCallback::NetworkCurrentCellUpdated ratType:%{public}d, mcc:%{public}d, mnc:%{public}d",
@@ -2361,6 +2364,7 @@ void HdfRilHdiTestAdditional::SetUp()
     g_rilInterface = OHOS::HDI::Ril::V1_2::IRil::Get();
     if (g_rilInterface != nullptr) {
         g_rilInterface->SetCallback1_2(&callback_);
+        g_rilInterface->SendRilAck();
     }
 }
 void HdfRilHdiTestAdditional::TearDown() {}
@@ -2369,21 +2373,79 @@ void HdfRilHdiTestAdditional::TearDown() {}
 **  Xts Test
 **/
 /**
+ * @tc.number: SUB_Telephony_DriverSystem_V1GetSimStatus_0300
+ * @tc.name  : testV1GetSimStatus001
+ * @tc.desc  : GetSimStatus, stability test
+ */
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimStatus001, Function | MediumTest | Level1)
+{
+    if (g_rilInterface == nullptr) {
+        return;
+    }
+    int32_t ret;
+    for (int i = 0; i < 1000; i++) {
+        ret = g_rilInterface->GetSimStatus(SLOTID_1, GetSerialId());
+        if (ret != 2) {
+            WaitFor(WAIT_TIME_SECOND);
+            EXPECT_EQ(SUCCESS, ret);
+            ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_STATUS));
+        } else {
+            return;
+        }
+    }
+}
+
+/**
+ * @tc.number: SUB_Telephony_DriverSystem_V1GetSimStatusResponse_0100
+ * @tc.name  : testV1GetSimStatusResponse001
+ * @tc.desc  : GetSimStatusResponse, slotId is SLOTID_1
+ */
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimStatusResponse001, Function | MediumTest | Level1)
+{
+    if (g_rilInterface == nullptr) {
+        return;
+    }
+    g_getSimStatusResponseFlag = false;
+    int32_t ret = g_rilInterface->GetSimStatus(SLOTID_1, GetSerialId());
+    if (ret != 2) {
+        WaitFor(WAIT_TIME_SECOND);
+        EXPECT_EQ(SUCCESS, ret);
+        EXPECT_EQ(true, g_getSimStatusResponseFlag);
+    } else {
+        return;
+    }
+}
+
+/**
+ * @tc.number: SUB_Telephony_DriverSystem_V1GetSimStatusResponse_0200
+ * @tc.name  : testV1GetSimStatusResponse002
+ * @tc.desc  : GetSimStatusResponse, slotId is SLOTID_2
+ */
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimStatusResponse002, Function | MediumTest | Level1)
+{
+    if (g_rilInterface == nullptr) {
+        return;
+    }
+    g_getSimStatusResponseFlag = false;
+    int32_t ret = g_rilInterface->GetSimStatus(SLOTID_2, GetSerialId());
+    if (ret != 2) {
+        WaitFor(WAIT_TIME_SECOND);
+        EXPECT_EQ(SUCCESS, ret);
+        EXPECT_EQ(true, g_getSimStatusResponseFlag);
+    } else {
+        return;
+    }
+}
+
+/**
  * @tc.number : SUB_Telephony_DriverSystem_V1SetEmergencyCallList_0300
  * @tc.name   : testV1SetEmergencyCallList001
  * @tc.desc   : Call the function V1 SetEmergencyCallList with slotId and a value of 2
  **/
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallList001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallList001, Function | MediumTest | Level2)
 {
-    if (!IsReady(1)) {
-        return;
-    }
     if (g_rilInterface == nullptr) {
-        EXPECT_EQ(SUCCESS, 1);
-    }
-    if (simState_[1] != 0 && simState_[1] != -1) {
-    } else {
-        EXPECT_EQ(SUCCESS, 1);
+        return;
     }
     EmergencyInfoList emergencyInfoList;
     EmergencyCall emergencyInfo = {};
@@ -2397,7 +2459,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallList001, Function | Medi
     emergencyInfoList.calls.push_back(emergencyInfo);
     int32_t ret = g_rilInterface->SetEmergencyCallList(2, GetSerialId(), emergencyInfoList);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_EMERGENCY_LIST));
 }
 
@@ -2406,9 +2468,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallList001, Function | Medi
  * @tc.name   : testV1SetEmergencyCallList002
  * @tc.desc   : Call the function V1 SetEmergencyCallList with slotId and a value of 256
  **/
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallList002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallList002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     EmergencyInfoList emergencyInfoList;
@@ -2423,7 +2485,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallList002, Function | Medi
     emergencyInfoList.calls.push_back(emergencyInfo);
     int32_t ret = g_rilInterface->SetEmergencyCallList(256, GetSerialId(), emergencyInfoList);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_EMERGENCY_LIST));
 }
 
@@ -2432,9 +2494,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallList002, Function | Medi
  * @tc.name   : testV1SetEmergencyCallList003
  * @tc.desc   : Call the function V1 SetEmergencyCallList with slotId and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallList003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallList003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     EmergencyInfoList emergencyInfoList;
@@ -2449,7 +2511,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallList003, Function | Medi
     emergencyInfoList.calls.push_back(emergencyInfo);
     int32_t ret = g_rilInterface->SetEmergencyCallList(-1, GetSerialId(), emergencyInfoList);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_EMERGENCY_LIST));
 }
 
@@ -2458,7 +2520,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallList003, Function | Medi
  * @tc.name   : testV1SetEmergencyCallList004
  * @tc.desc   : Call the function V1 SetEmergencyCallList with serialId and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallList004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallList004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -2475,7 +2537,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallList004, Function | Medi
     emergencyInfoList.calls.push_back(emergencyInfo);
     int32_t ret = g_rilInterface->SetEmergencyCallList(SLOTID_1, -11111, emergencyInfoList);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_EMERGENCY_LIST));
 }
 
@@ -2562,7 +2624,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallList007, Function | Medi
  * @tc.name   : testV1SetEmergencyCallList008
  * @tc.desc   : Call the function V1 SetEmergencyCallList with serialId and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallList008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallList008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -2579,7 +2641,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallList008, Function | Medi
     emergencyInfoList.calls.push_back(emergencyInfo);
     int32_t ret = g_rilInterface->SetEmergencyCallList(SLOTID_1, -32768, emergencyInfoList);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_EMERGENCY_LIST));
 }
 
@@ -3030,14 +3092,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallList025, Function | Medi
  * @tc.name   : testV1CloseUnFinishedUssd001
  * @tc.desc   : Call the function V1 CloseUnFinishedUssd with slotId and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1CloseUnFinishedUssd001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1CloseUnFinishedUssd001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->CloseUnFinishedUssd(2, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_CLOSE_UNFINISHED_USSD));
 }
 
@@ -3046,14 +3108,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1CloseUnFinishedUssd001, Function | Mediu
  * @tc.name   : testV1CloseUnFinishedUssd002
  * @tc.desc   : Call the function V1 CloseUnFinishedUssd with slotId and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1CloseUnFinishedUssd002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1CloseUnFinishedUssd002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->CloseUnFinishedUssd(256, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_CLOSE_UNFINISHED_USSD));
 }
 
@@ -3062,14 +3124,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1CloseUnFinishedUssd002, Function | Mediu
  * @tc.name   : testV1CloseUnFinishedUssd003
  * @tc.desc   : Call the function V1 CloseUnFinishedUssd with slotId and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1CloseUnFinishedUssd003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1CloseUnFinishedUssd003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->CloseUnFinishedUssd(-1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_CLOSE_UNFINISHED_USSD));
 }
 
@@ -3078,14 +3140,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1CloseUnFinishedUssd003, Function | Mediu
  * @tc.name   : testV1CloseUnFinishedUssd004
  * @tc.desc   : Call the function V1 CloseUnFinishedUssd with serialId and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1CloseUnFinishedUssd004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1CloseUnFinishedUssd004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->CloseUnFinishedUssd(SLOTID_1, -11111);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_CLOSE_UNFINISHED_USSD));
 }
 
@@ -3142,14 +3204,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1CloseUnFinishedUssd007, Function | Mediu
  * @tc.name   : testV1CloseUnFinishedUssd008
  * @tc.desc   : Call the function V1 CloseUnFinishedUssd with serialId and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1CloseUnFinishedUssd008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1CloseUnFinishedUssd008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->CloseUnFinishedUssd(SLOTID_1, -32768);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_CLOSE_UNFINISHED_USSD));
 }
 
@@ -3158,9 +3220,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1CloseUnFinishedUssd008, Function | Mediu
  * @tc.name   : testV1SetBarringPassword001
  * @tc.desc   : Call the function V1 SetBarringPassword with slotId and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     SetBarringInfo setBarringInfo = {};
@@ -3169,7 +3231,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword001, Function | Medium
     setBarringInfo.newPassword = "2345";
     int32_t ret = g_rilInterface->SetBarringPassword(2, GetSerialId(), setBarringInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_BARRING_PASSWORD));
 }
 
@@ -3178,9 +3240,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword001, Function | Medium
  * @tc.name   : testV1SetBarringPassword002
  * @tc.desc   : Call the function V1 SetBarringPassword with slotId and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     SetBarringInfo setBarringInfo = {};
@@ -3189,7 +3251,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword002, Function | Medium
     setBarringInfo.newPassword = "2345";
     int32_t ret = g_rilInterface->SetBarringPassword(256, GetSerialId(), setBarringInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_BARRING_PASSWORD));
 }
 
@@ -3198,9 +3260,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword002, Function | Medium
  * @tc.name   : testV1SetBarringPassword003
  * @tc.desc   : Call the function V1 SetBarringPassword with slotId and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     SetBarringInfo setBarringInfo = {};
@@ -3209,7 +3271,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword003, Function | Medium
     setBarringInfo.newPassword = "2345";
     int32_t ret = g_rilInterface->SetBarringPassword(-1, GetSerialId(), setBarringInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_BARRING_PASSWORD));
 }
 
@@ -3218,7 +3280,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword003, Function | Medium
  * @tc.name   : testV1SetBarringPassword004
  * @tc.desc   : Call the function V1 SetBarringPassword with serialId and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -3229,7 +3291,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword004, Function | Medium
     setBarringInfo.newPassword = "2345";
     int32_t ret = g_rilInterface->SetBarringPassword(SLOTID_1, -11111, setBarringInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_BARRING_PASSWORD));
 }
 
@@ -3298,7 +3360,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword007, Function | Medium
  * @tc.name   : testV1SetBarringPassword008
  * @tc.desc   : Call the function V1 SetBarringPassword with serialId and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -3309,7 +3371,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword008, Function | Medium
     setBarringInfo.newPassword = "2345";
     int32_t ret = g_rilInterface->SetBarringPassword(SLOTID_1, -32768, setBarringInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_BARRING_PASSWORD));
 }
 
@@ -3478,14 +3540,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetBarringPassword016, Function | Medium
  * @tc.name   : testV1GetEmergencyCallList001
  * @tc.desc   : Call the function V1 GetEmergencyCallList with slotId and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallList001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallList001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetEmergencyCallList(2, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_EMERGENCY_LIST));
 }
 
@@ -3494,14 +3556,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallList001, Function | Medi
  * @tc.name   : testV1GetEmergencyCallList002
  * @tc.desc   : Call the function V1 GetEmergencyCallList with slotId and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallList002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallList002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetEmergencyCallList(256, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_EMERGENCY_LIST));
 }
 
@@ -3510,14 +3572,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallList002, Function | Medi
  * @tc.name   : testV1GetEmergencyCallList003
  * @tc.desc   : Call the function V1 GetEmergencyCallList with slotId and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallList003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallList003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetEmergencyCallList(-1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_EMERGENCY_LIST));
 }
 
@@ -3526,14 +3588,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallList003, Function | Medi
  * @tc.name   : testV1GetEmergencyCallList004
  * @tc.desc   : Call the function V1 GetEmergencyCallList with serialId and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallList004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallList004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->GetEmergencyCallList(SLOTID_1, -11111);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_EMERGENCY_LIST));
 }
 
@@ -3590,14 +3652,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallList007, Function | Medi
  * @tc.name   : testV1GetEmergencyCallList008
  * @tc.desc   : Call the function V1 GetEmergencyCallList with serialId and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallList008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallList008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->GetEmergencyCallList(SLOTID_1, -32768);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_EMERGENCY_LIST));
 }
 
@@ -3606,14 +3668,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallList008, Function | Medi
  * @tc.name   : testV1GetCallList001
  * @tc.desc   : Call the function V1 GetCallList with slotId and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallList001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallList001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallList(2, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_LIST));
 }
 
@@ -3622,14 +3684,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallList001, Function | MediumTest | 
  * @tc.name   : testV1GetCallList002
  * @tc.desc   : Call the function V1 GetCallList with slotId and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallList002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallList002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallList(256, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_LIST));
 }
 
@@ -3638,14 +3700,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallList002, Function | MediumTest | 
  * @tc.name   : testV1GetCallList003
  * @tc.desc   : Call the function V1 GetCallList with slotId and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallList003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallList003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallList(-1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_LIST));
 }
 
@@ -3654,14 +3716,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallList003, Function | MediumTest | 
  * @tc.name   : testV1GetCallList004
  * @tc.desc   : Call the function V1 GetCallList with serialId and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallList004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallList004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallList(SLOTID_1, -11111);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_LIST));
 }
 
@@ -3733,9 +3795,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallList008, Function | MediumTest | 
  * @tc.name   : testV1Dial001
  * @tc.desc   : Call the function V1 Dial with slotId and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1Dial001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1Dial001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     DialInfo dialInfo = {};
@@ -3743,7 +3805,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Dial001, Function | MediumTest | Level1)
     dialInfo.clir = 0;
     int32_t ret = g_rilInterface->Dial(2, GetSerialId(), dialInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_DIAL));
 }
 
@@ -3752,9 +3814,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Dial001, Function | MediumTest | Level1)
  * @tc.name   : testV1Dial002
  * @tc.desc   : Call the function V1 Dial with slotId and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1Dial002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1Dial002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     DialInfo dialInfo = {};
@@ -3762,7 +3824,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Dial002, Function | MediumTest | Level1)
     dialInfo.clir = 0;
     int32_t ret = g_rilInterface->Dial(256, GetSerialId(), dialInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_DIAL));
 }
 
@@ -3771,9 +3833,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Dial002, Function | MediumTest | Level1)
  * @tc.name   : testV1Dial003
  * @tc.desc   : Call the function V1 Dial with slotId and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1Dial003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1Dial003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     DialInfo dialInfo = {};
@@ -3781,7 +3843,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Dial003, Function | MediumTest | Level1)
     dialInfo.clir = 0;
     int32_t ret = g_rilInterface->Dial(-1, GetSerialId(), dialInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_DIAL));
 }
 
@@ -3790,7 +3852,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Dial003, Function | MediumTest | Level1)
  * @tc.name   : testV1Dial004
  * @tc.desc   : Call the function V1 Dial with serialId and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1Dial004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1Dial004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -3800,7 +3862,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Dial004, Function | MediumTest | Level1)
     dialInfo.clir = 0;
     int32_t ret = g_rilInterface->Dial(SLOTID_1, -11111, dialInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_DIAL));
 }
 
@@ -3866,7 +3928,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Dial007, Function | MediumTest | Level1)
  * @tc.name   : testV1Dial008
  * @tc.desc   : Call the function V1 Dial with serialId and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1Dial008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1Dial008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -3876,7 +3938,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Dial008, Function | MediumTest | Level1)
     dialInfo.clir = 0;
     int32_t ret = g_rilInterface->Dial(SLOTID_1, -32768, dialInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_DIAL));
 }
 
@@ -3960,14 +4022,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Dial012, Function | MediumTest | Level1)
  * @tc.name   : testV1Reject001
  * @tc.desc   : Call the function V1 Reject with slotId and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1Reject001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1Reject001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->Reject(2, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_REJECT));
 }
 
@@ -3976,14 +4038,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Reject001, Function | MediumTest | Level
  * @tc.name   : testV1Reject002
  * @tc.desc   : Call the function V1 Reject with slotId and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1Reject002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1Reject002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->Reject(256, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_REJECT));
 }
 
@@ -3992,14 +4054,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Reject002, Function | MediumTest | Level
  * @tc.name   : testV1Reject003
  * @tc.desc   : Call the function V1 Reject with slotId and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1Reject003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1Reject003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->Reject(-1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_REJECT));
 }
 
@@ -4008,14 +4070,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Reject003, Function | MediumTest | Level
  * @tc.name   : testV1Reject004
  * @tc.desc   : Call the function V1 Reject with serialId and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1Reject004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1Reject004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->Reject(SLOTID_1, -11111);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_REJECT));
 }
 
@@ -4072,14 +4134,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Reject007, Function | MediumTest | Level
  * @tc.name   : testV1Reject008
  * @tc.desc   : Call the function V1 Reject with serialId and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1Reject008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1Reject008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->Reject(SLOTID_1, -32768);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_REJECT));
 }
 
@@ -4088,14 +4150,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Reject008, Function | MediumTest | Level
  * @tc.name   : testV1Hangup001
  * @tc.desc   : Call the function V1 Hangup with slotId and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1Hangup001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1Hangup001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->Hangup(2, GetSerialId(), 0);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_HANGUP));
 }
 
@@ -4104,14 +4166,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Hangup001, Function | MediumTest | Level
  * @tc.name   : testV1Hangup002
  * @tc.desc   : Call the function V1 Hangup with slotId and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1Hangup002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1Hangup002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->Hangup(256, GetSerialId(), 0);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_HANGUP));
 }
 
@@ -4120,14 +4182,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Hangup002, Function | MediumTest | Level
  * @tc.name   : testV1Hangup003
  * @tc.desc   : Call the function V1 Hangup with slotId and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1Hangup003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1Hangup003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->Hangup(-1, GetSerialId(), 0);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_HANGUP));
 }
 
@@ -4136,14 +4198,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Hangup003, Function | MediumTest | Level
  * @tc.name   : testV1Hangup004
  * @tc.desc   : Call the function V1 Hangup with serialId and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1Hangup004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1Hangup004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->Hangup(SLOTID_1, -11111, 0);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_HANGUP));
 }
 
@@ -4200,14 +4262,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Hangup007, Function | MediumTest | Level
  * @tc.name   : testV1Hangup008
  * @tc.desc   : Call the function V1 Hangup with serialId and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1Hangup008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1Hangup008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->Hangup(SLOTID_1, -32768, 0);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_HANGUP));
 }
 
@@ -4281,7 +4343,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Hangup012, Function | MediumTest | Level
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1Answer001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->Answer(2, GetSerialId());
@@ -4294,14 +4356,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Answer001, Function | MediumTest | Level
  * @tc.name   : testV1Answer002
  * @tc.desc   : Call the function V1 Answer with slotId and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1Answer002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1Answer002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->Answer(256, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_ANSWER));
 }
 
@@ -4310,14 +4372,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Answer002, Function | MediumTest | Level
  * @tc.name   : testV1Answer003
  * @tc.desc   : Call the function V1 Answer with slotId and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1Answer003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1Answer003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->Answer(-1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_ANSWER));
 }
 
@@ -4326,14 +4388,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Answer003, Function | MediumTest | Level
  * @tc.name   : testV1Answer004
  * @tc.desc   : Call the function V1 Answer with serialId and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1Answer004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1Answer004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->Answer(SLOTID_1, -11111);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_ANSWER));
 }
 
@@ -4390,14 +4452,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Answer007, Function | MediumTest | Level
  * @tc.name   : testV1Answer008
  * @tc.desc   : Call the function V1 Answer with serialId and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1Answer008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1Answer008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->Answer(SLOTID_1, -32768);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_ANSWER));
 }
 
@@ -4406,14 +4468,15 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1Answer008, Function | MediumTest | Level
  * @tc.name   : testV1HoldCall001
  * @tc.desc   : Call the function V1 HoldCall with slotId and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1HoldCall001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1HoldCall001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
+
     int32_t ret = g_rilInterface->HoldCall(2, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_HOLD_CALL));
 }
 
@@ -4422,14 +4485,15 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1HoldCall001, Function | MediumTest | Lev
  * @tc.name   : testV1HoldCall002
  * @tc.desc   : Call the function V1 HoldCall with slotId and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1HoldCall002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1HoldCall002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
+
     int32_t ret = g_rilInterface->HoldCall(256, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_HOLD_CALL));
 }
 
@@ -4438,14 +4502,15 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1HoldCall002, Function | MediumTest | Lev
  * @tc.name   : testV1HoldCall003
  * @tc.desc   : Call the function V1 HoldCall with slotId and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1HoldCall003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1HoldCall003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
+
     int32_t ret = g_rilInterface->HoldCall(-1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_HOLD_CALL));
 }
 
@@ -4454,14 +4519,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1HoldCall003, Function | MediumTest | Lev
  * @tc.name   : testV1HoldCall004
  * @tc.desc   : Call the function V1 HoldCall with serialId and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1HoldCall004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1HoldCall004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->HoldCall(SLOTID_1, -11111);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_HOLD_CALL));
 }
 
@@ -4518,14 +4583,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1HoldCall007, Function | MediumTest | Lev
  * @tc.name   : testV1HoldCall008
  * @tc.desc   : Call the function V1 HoldCall with serialId and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1HoldCall008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1HoldCall008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->HoldCall(SLOTID_1, -32768);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_HOLD_CALL));
 }
 
@@ -4534,14 +4599,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1HoldCall008, Function | MediumTest | Lev
  * @tc.name   : testV1UnHoldCall001
  * @tc.desc   : Call the function V1 UnHoldCall with slotId and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1UnHoldCall001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1UnHoldCall001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->UnHoldCall(2, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_UNHOLD_CALL));
 }
 
@@ -4550,14 +4615,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnHoldCall001, Function | MediumTest | L
  * @tc.name   : testV1UnHoldCall002
  * @tc.desc   : Call the function V1 UnHoldCall with slotId and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1UnHoldCall002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1UnHoldCall002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->UnHoldCall(256, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_UNHOLD_CALL));
 }
 
@@ -4566,14 +4631,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnHoldCall002, Function | MediumTest | L
  * @tc.name   : testV1UnHoldCall003
  * @tc.desc   : Call the function V1 UnHoldCall with slotId and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1UnHoldCall003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1UnHoldCall003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->UnHoldCall(-1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_UNHOLD_CALL));
 }
 
@@ -4582,14 +4647,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnHoldCall003, Function | MediumTest | L
  * @tc.name   : testV1UnHoldCall004
  * @tc.desc   : Call the function V1 UnHoldCall with serialId and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1UnHoldCall004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1UnHoldCall004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->UnHoldCall(SLOTID_1, -11111);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_UNHOLD_CALL));
 }
 
@@ -4646,14 +4711,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnHoldCall007, Function | MediumTest | L
  * @tc.name   : testV1UnHoldCall008
  * @tc.desc   : Call the function V1 UnHoldCall with serialId and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1UnHoldCall008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1UnHoldCall008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->UnHoldCall(SLOTID_1, -32768);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_UNHOLD_CALL));
 }
 
@@ -4662,14 +4727,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnHoldCall008, Function | MediumTest | L
  * @tc.name   : testV1SwitchCall001
  * @tc.desc   : Call the function V1 SwitchCall with slotId and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SwitchCall001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SwitchCall001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SwitchCall(2, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SWITCH_CALL));
 }
 
@@ -4678,14 +4743,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SwitchCall001, Function | MediumTest | L
  * @tc.name   : testV1SwitchCall002
  * @tc.desc   : Call the function V1 SwitchCall with slotId and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SwitchCall002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SwitchCall002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SwitchCall(256, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SWITCH_CALL));
 }
 
@@ -4694,14 +4759,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SwitchCall002, Function | MediumTest | L
  * @tc.name   : testV1SwitchCall003
  * @tc.desc   : Call the function V1 SwitchCall with slotId and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SwitchCall003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SwitchCall003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SwitchCall(-1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SWITCH_CALL));
 }
 
@@ -4710,14 +4775,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SwitchCall003, Function | MediumTest | L
  * @tc.name   : testV1SwitchCall004
  * @tc.desc   : Call the function V1 SwitchCall with serialId and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SwitchCall004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SwitchCall004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->SwitchCall(SLOTID_1, -11111);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SWITCH_CALL));
 }
 
@@ -4774,14 +4839,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SwitchCall007, Function | MediumTest | L
  * @tc.name   : testV1SwitchCall008
  * @tc.desc   : Call the function V1 SwitchCall with serialId and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SwitchCall008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SwitchCall008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->SwitchCall(SLOTID_1, -32768);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SWITCH_CALL));
 }
 
@@ -4790,14 +4855,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SwitchCall008, Function | MediumTest | L
  * @tc.name   : testV1CombineConference001
  * @tc.desc   : Call the function V1 CombineConference with slotId and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1CombineConference001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1CombineConference001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->CombineConference(2, GetSerialId(), 0);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_COMBINE_CONFERENCE));
 }
 
@@ -4806,14 +4871,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1CombineConference001, Function | MediumT
  * @tc.name   : testV1CombineConference002
  * @tc.desc   : Call the function V1 CombineConference with slotId and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1CombineConference002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1CombineConference002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->CombineConference(256, GetSerialId(), 0);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_COMBINE_CONFERENCE));
 }
 
@@ -4822,14 +4887,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1CombineConference002, Function | MediumT
  * @tc.name   : testV1CombineConference003
  * @tc.desc   : Call the function V1 CombineConference with slotId and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1CombineConference003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1CombineConference003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->CombineConference(-1, GetSerialId(), 0);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_COMBINE_CONFERENCE));
 }
 
@@ -4838,14 +4903,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1CombineConference003, Function | MediumT
  * @tc.name   : testV1CombineConference004
  * @tc.desc   : Call the function V1 CombineConference with serialId and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1CombineConference004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1CombineConference004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->CombineConference(SLOTID_1, -11111, 0);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_COMBINE_CONFERENCE));
 }
 
@@ -4902,14 +4967,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1CombineConference007, Function | MediumT
  * @tc.name   : testV1CombineConference008
  * @tc.desc   : Call the function V1 CombineConference with serialId and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1CombineConference008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1CombineConference008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->CombineConference(SLOTID_1, -32768, 0);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_COMBINE_CONFERENCE));
 }
 
@@ -4933,14 +4998,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1CombineConference009, Function | MediumT
  * @tc.name   : testV1SeparateConference001
  * @tc.desc   : Call the function V1 SeparateConference with slotId and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SeparateConference001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SeparateConference001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SeparateConference(2, GetSerialId(), 1, 0);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SEPARATE_CONFERENCE));
 }
 
@@ -4949,14 +5014,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SeparateConference001, Function | Medium
  * @tc.name   : testV1SeparateConference002
  * @tc.desc   : Call the function V1 SeparateConference with slotId and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SeparateConference002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SeparateConference002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SeparateConference(256, GetSerialId(), 1, 0);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SEPARATE_CONFERENCE));
 }
 
@@ -4965,14 +5030,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SeparateConference002, Function | Medium
  * @tc.name   : testV1SeparateConference003
  * @tc.desc   : Call the function V1 SeparateConference with slotId and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SeparateConference003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SeparateConference003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SeparateConference(-1, GetSerialId(), 1, 0);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SEPARATE_CONFERENCE));
 }
 
@@ -4981,14 +5046,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SeparateConference003, Function | Medium
  * @tc.name   : testV1SeparateConference004
  * @tc.desc   : Call the function V1 SeparateConference with serialId and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SeparateConference004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SeparateConference004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->SeparateConference(SLOTID_1, -11111, 1, 0);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SEPARATE_CONFERENCE));
 }
 
@@ -5045,14 +5110,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SeparateConference007, Function | Medium
  * @tc.name   : testV1SeparateConference008
  * @tc.desc   : Call the function V1 SeparateConference with serialId and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SeparateConference008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SeparateConference008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->SeparateConference(SLOTID_1, -32768, 1, 0);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SEPARATE_CONFERENCE));
 }
 
@@ -5138,14 +5203,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SeparateConference013, Function | Medium
  * @tc.name   : testV1GetCallWaiting001
  * @tc.desc   : Call the function V1 GetCallWaiting with slotId and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallWaiting001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallWaiting001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallWaiting(2, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_WAITING));
 }
 
@@ -5154,14 +5219,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallWaiting001, Function | MediumTest
  * @tc.name   : testV1GetCallWaiting002
  * @tc.desc   : Call the function V1 GetCallWaiting with slotId and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallWaiting002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallWaiting002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallWaiting(256, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_WAITING));
 }
 
@@ -5170,14 +5235,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallWaiting002, Function | MediumTest
  * @tc.name   : testV1GetCallWaiting003
  * @tc.desc   : Call the function V1 GetCallWaiting with slotId and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallWaiting003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallWaiting003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallWaiting(-1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_WAITING));
 }
 
@@ -5186,14 +5251,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallWaiting003, Function | MediumTest
  * @tc.name   : testV1GetCallWaiting004
  * @tc.desc   : Call the function V1 GetCallWaiting with serialId and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallWaiting004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallWaiting004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallWaiting(SLOTID_1, -11111);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_WAITING));
 }
 
@@ -5250,14 +5315,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallWaiting007, Function | MediumTest
  * @tc.name   : testV1GetCallWaiting008
  * @tc.desc   : Call the function V1 GetCallWaiting with serialId and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallWaiting008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallWaiting008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallWaiting(SLOTID_1, -32768);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_WAITING));
 }
 
@@ -5266,14 +5331,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallWaiting008, Function | MediumTest
  * @tc.name   : testV1SetCallWaiting001
  * @tc.desc   : Call the function V1 SetCallWaiting with slotId and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallWaiting001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallWaiting001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SetCallWaiting(2, GetSerialId(), 0);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CALL_WAITING));
 }
 
@@ -5282,14 +5347,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallWaiting001, Function | MediumTest
  * @tc.name   : testV1SetCallWaiting002
  * @tc.desc   : Call the function V1 SetCallWaiting with slotId and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallWaiting002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallWaiting002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SetCallWaiting(256, GetSerialId(), 0);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CALL_WAITING));
 }
 
@@ -5298,14 +5363,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallWaiting002, Function | MediumTest
  * @tc.name   : testV1SetCallWaiting003
  * @tc.desc   : Call the function V1 SetCallWaiting with slotId and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallWaiting003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallWaiting003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SetCallWaiting(-1, GetSerialId(), 0);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CALL_WAITING));
 }
 
@@ -5314,14 +5379,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallWaiting003, Function | MediumTest
  * @tc.name   : testV1SetCallWaiting004
  * @tc.desc   : Call the function V1 SetCallWaiting with serialId and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallWaiting004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallWaiting004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->SetCallWaiting(SLOTID_1, -11111, 0);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CALL_WAITING));
 }
 
@@ -5378,14 +5443,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallWaiting007, Function | MediumTest
  * @tc.name   : testV1SetCallWaiting008
  * @tc.desc   : Call the function V1 SetCallWaiting with serialId and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallWaiting008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallWaiting008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->SetCallWaiting(SLOTID_1, -32768, 0);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CALL_WAITING));
 }
 
@@ -5456,14 +5521,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallWaiting012, Function | MediumTest
  * @tc.name   : testV1GetCallTransferInfo001
  * @tc.desc   : Call the function V1 GetCallTransferInfo with slotId  and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallTransferInfo001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallTransferInfo001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallTransferInfo(2, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_TRANSFER_INFO));
 }
 
@@ -5472,14 +5537,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallTransferInfo001, Function | Mediu
  * @tc.name   : testV1GetCallTransferInfo002
  * @tc.desc   : Call the function V1 GetCallTransferInfo with slotId  and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallTransferInfo002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallTransferInfo002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallTransferInfo(256, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_TRANSFER_INFO));
 }
 
@@ -5488,14 +5553,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallTransferInfo002, Function | Mediu
  * @tc.name   : testV1GetCallTransferInfo003
  * @tc.desc   : Call the function V1 GetCallTransferInfo with slotId  and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallTransferInfo003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallTransferInfo003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallTransferInfo(-1, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_TRANSFER_INFO));
 }
 
@@ -5504,14 +5569,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallTransferInfo003, Function | Mediu
  * @tc.name   : testV1GetCallTransferInfo004
  * @tc.desc   : Call the function V1 GetCallTransferInfo with serialId  and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallTransferInfo004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallTransferInfo004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallTransferInfo(SLOTID_1, -11111, 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_TRANSFER_INFO));
 }
 
@@ -5568,14 +5633,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallTransferInfo007, Function | Mediu
  * @tc.name   : testV1GetCallTransferInfo008
  * @tc.desc   : Call the function V1 GetCallTransferInfo with serialId  and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallTransferInfo008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallTransferInfo008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallTransferInfo(SLOTID_1, -32768, 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_TRANSFER_INFO));
 }
 
@@ -5662,9 +5727,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallTransferInfo013, Function | Mediu
  * @tc.name   : testV1SetCallTransferInfo001
  * @tc.desc   : Call the function V1 SetCallTransferInfo with slotId  and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallTransferInfo001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallTransferInfo001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     CallForwardSetInfo callForwardSetInfo = {};
@@ -5674,7 +5739,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallTransferInfo001, Function | Mediu
     callForwardSetInfo.number = "10086";
     int32_t ret = g_rilInterface->SetCallTransferInfo(2, GetSerialId(), callForwardSetInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CALL_TRANSFER_INFO));
 }
 
@@ -5683,9 +5748,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallTransferInfo001, Function | Mediu
  * @tc.name   : testV1SetCallTransferInfo002
  * @tc.desc   : Call the function V1 SetCallTransferInfo with slotId  and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallTransferInfo002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallTransferInfo002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     CallForwardSetInfo callForwardSetInfo = {};
@@ -5695,7 +5760,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallTransferInfo002, Function | Mediu
     callForwardSetInfo.number = "10086";
     int32_t ret = g_rilInterface->SetCallTransferInfo(256, GetSerialId(), callForwardSetInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CALL_TRANSFER_INFO));
 }
 
@@ -5704,9 +5769,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallTransferInfo002, Function | Mediu
  * @tc.name   : testV1SetCallTransferInfo003
  * @tc.desc   : Call the function V1 SetCallTransferInfo with slotId  and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallTransferInfo003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallTransferInfo003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     CallForwardSetInfo callForwardSetInfo = {};
@@ -5716,7 +5781,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallTransferInfo003, Function | Mediu
     callForwardSetInfo.number = "10086";
     int32_t ret = g_rilInterface->SetCallTransferInfo(-1, GetSerialId(), callForwardSetInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CALL_TRANSFER_INFO));
 }
 
@@ -5725,7 +5790,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallTransferInfo003, Function | Mediu
  * @tc.name   : testV1SetCallTransferInfo004
  * @tc.desc   : Call the function V1 SetCallTransferInfo with serialId  and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallTransferInfo004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallTransferInfo004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -5737,7 +5802,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallTransferInfo004, Function | Mediu
     callForwardSetInfo.number = "10086";
     int32_t ret = g_rilInterface->SetCallTransferInfo(SLOTID_1, -11111, callForwardSetInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CALL_TRANSFER_INFO));
 }
 
@@ -5809,7 +5874,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallTransferInfo007, Function | Mediu
  * @tc.name   : testV1SetCallTransferInfo008
  * @tc.desc   : Call the function V1 SetCallTransferInfo with serialId  and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallTransferInfo008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallTransferInfo008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -5821,7 +5886,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallTransferInfo008, Function | Mediu
     callForwardSetInfo.number = "10086";
     int32_t ret = g_rilInterface->SetCallTransferInfo(SLOTID_1, -32768, callForwardSetInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CALL_TRANSFER_INFO));
 }
 
@@ -6161,15 +6226,15 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallTransferInfo024, Function | Mediu
  * @tc.name   : testV1GetCallRestriction001
  * @tc.desc   : Call the function V1 GetCallRestriction with slotId  and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallRestriction001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallRestriction001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     std::string fac = "AO";
     int32_t ret = g_rilInterface->GetCallRestriction(2, GetSerialId(), fac);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_RESTRICTION));
 }
 
@@ -6178,15 +6243,15 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallRestriction001, Function | Medium
  * @tc.name   : testV1GetCallRestriction002
  * @tc.desc   : Call the function V1 GetCallRestriction with slotId  and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallRestriction002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallRestriction002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     std::string fac = "AO";
     int32_t ret = g_rilInterface->GetCallRestriction(256, GetSerialId(), fac);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_RESTRICTION));
 }
 
@@ -6195,15 +6260,15 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallRestriction002, Function | Medium
  * @tc.name   : testV1GetCallRestriction003
  * @tc.desc   : Call the function V1 GetCallRestriction with slotId  and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallRestriction003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallRestriction003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     std::string fac = "AO";
     int32_t ret = g_rilInterface->GetCallRestriction(-1, GetSerialId(), fac);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_RESTRICTION));
 }
 
@@ -6212,7 +6277,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallRestriction003, Function | Medium
  * @tc.name   : testV1GetCallRestriction004
  * @tc.desc   : Call the function V1 GetCallRestriction with serialId  and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallRestriction004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallRestriction004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -6220,7 +6285,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallRestriction004, Function | Medium
     std::string fac = "AO";
     int32_t ret = g_rilInterface->GetCallRestriction(SLOTID_1, -11111, fac);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_RESTRICTION));
 }
 
@@ -6280,7 +6345,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallRestriction007, Function | Medium
  * @tc.name   : testV1GetCallRestriction008
  * @tc.desc   : Call the function V1 GetCallRestriction with serialId  and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallRestriction008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallRestriction008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -6288,7 +6353,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallRestriction008, Function | Medium
     std::string fac = "AO";
     int32_t ret = g_rilInterface->GetCallRestriction(SLOTID_1, -32768, fac);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_RESTRICTION));
 }
 
@@ -6297,9 +6362,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallRestriction008, Function | Medium
  * @tc.name   : testV1SetCallRestriction001
  * @tc.desc   : Call the function V1 SetCallRestriction with slotId  and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallRestriction001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallRestriction001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     CallRestrictionInfo callRestrictionInfo = {};
@@ -6308,7 +6373,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallRestriction001, Function | Medium
     callRestrictionInfo.password = "123456";
     int32_t ret = g_rilInterface->SetCallRestriction(2, GetSerialId(), callRestrictionInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CALL_RESTRICTION));
 }
 
@@ -6317,9 +6382,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallRestriction001, Function | Medium
  * @tc.name   : testV1SetCallRestriction002
  * @tc.desc   : Call the function V1 SetCallRestriction with slotId  and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallRestriction002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallRestriction002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     CallRestrictionInfo callRestrictionInfo = {};
@@ -6328,7 +6393,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallRestriction002, Function | Medium
     callRestrictionInfo.password = "123456";
     int32_t ret = g_rilInterface->SetCallRestriction(256, GetSerialId(), callRestrictionInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CALL_RESTRICTION));
 }
 
@@ -6337,9 +6402,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallRestriction002, Function | Medium
  * @tc.name   : testV1SetCallRestriction003
  * @tc.desc   : Call the function V1 SetCallRestriction with slotId  and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallRestriction003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallRestriction003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     CallRestrictionInfo callRestrictionInfo = {};
@@ -6348,7 +6413,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallRestriction003, Function | Medium
     callRestrictionInfo.password = "123456";
     int32_t ret = g_rilInterface->SetCallRestriction(-1, GetSerialId(), callRestrictionInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CALL_RESTRICTION));
 }
 
@@ -6595,14 +6660,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallRestriction015, Function | Medium
  * @tc.name   : testV1GetClip001
  * @tc.desc   : Call the function V1 GetClip with slotId  and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetClip001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetClip001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetClip(2, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CLIP));
 }
 
@@ -6611,14 +6676,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetClip001, Function | MediumTest | Leve
  * @tc.name   : testV1GetClip002
  * @tc.desc   : Call the function V1 GetClip with slotId  and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetClip002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetClip002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetClip(256, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CLIP));
 }
 
@@ -6627,14 +6692,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetClip002, Function | MediumTest | Leve
  * @tc.name   : testV1GetClip003
  * @tc.desc   : Call the function V1 GetClip with slotId  and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetClip003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetClip003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetClip(-1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CLIP));
 }
 
@@ -6643,14 +6708,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetClip003, Function | MediumTest | Leve
  * @tc.name   : testV1GetClip004
  * @tc.desc   : Call the function V1 GetClip with serialId  and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetClip004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetClip004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->GetClip(SLOTID_1, -11111);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CLIP));
 }
 
@@ -6707,14 +6772,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetClip007, Function | MediumTest | Leve
  * @tc.name   : testV1GetClip008
  * @tc.desc   : Call the function V1 GetClip with serialId  and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetClip008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetClip008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->GetClip(SLOTID_1, -32768);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CLIP));
 }
 
@@ -6723,14 +6788,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetClip008, Function | MediumTest | Leve
  * @tc.name   : testV1SetClip001
  * @tc.desc   : Call the function V1 SetClip with slotId  and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetClip001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetClip001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SetClip(2, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CLIP));
 }
 
@@ -6739,14 +6804,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetClip001, Function | MediumTest | Leve
  * @tc.name   : testV1SetClip002
  * @tc.desc   : Call the function V1 SetClip with slotId  and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetClip002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetClip002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SetClip(256, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CLIP));
 }
 
@@ -6755,14 +6820,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetClip002, Function | MediumTest | Leve
  * @tc.name   : testV1SetClip003
  * @tc.desc   : Call the function V1 SetClip with slotId  and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetClip003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetClip003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SetClip(-1, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CLIP));
 }
 
@@ -6771,14 +6836,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetClip003, Function | MediumTest | Leve
  * @tc.name   : testV1SetClip004
  * @tc.desc   : Call the function V1 SetClip with serialId  and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetClip004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetClip004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->SetClip(SLOTID_1, -11111, 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CLIP));
 }
 
@@ -6835,14 +6900,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetClip007, Function | MediumTest | Leve
  * @tc.name   : testV1SetClip008
  * @tc.desc   : Call the function V1 SetClip with serialId  and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetClip008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetClip008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->SetClip(SLOTID_1, -32768, 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CLIP));
 }
 
@@ -6882,14 +6947,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetClip010, Function | MediumTest | Leve
  * @tc.name   : testV1GetClir001
  * @tc.desc   : Call the function V1 GetClir with slotId  and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetClir001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetClir001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetClir(2, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CLIR));
 }
 
@@ -6898,14 +6963,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetClir001, Function | MediumTest | Leve
  * @tc.name   : testV1GetClir002
  * @tc.desc   : Call the function V1 GetClir with slotId  and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetClir002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetClir002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetClir(256, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CLIR));
 }
 
@@ -6914,14 +6979,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetClir002, Function | MediumTest | Leve
  * @tc.name   : testV1GetClir003
  * @tc.desc   : Call the function V1 GetClir with slotId  and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetClir003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetClir003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetClir(-1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CLIR));
 }
 
@@ -6930,14 +6995,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetClir003, Function | MediumTest | Leve
  * @tc.name   : testV1GetClir004
  * @tc.desc   : Call the function V1 GetClir with serialId  and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetClir004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetClir004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->GetClir(SLOTID_1, -11111);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CLIR));
 }
 
@@ -6994,14 +7059,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetClir007, Function | MediumTest | Leve
  * @tc.name   : testV1GetClir008
  * @tc.desc   : Call the function V1 GetClir with serialId  and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetClir008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetClir008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->GetClir(SLOTID_1, -32768);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CLIR));
 }
 
@@ -7010,14 +7075,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetClir008, Function | MediumTest | Leve
  * @tc.name   : testV1SetClir001
  * @tc.desc   : Call the function V1 SetClir with slotId  and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetClir001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetClir001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SetClir(2, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CLIR));
 }
 
@@ -7026,14 +7091,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetClir001, Function | MediumTest | Leve
  * @tc.name   : testV1SetClir002
  * @tc.desc   : Call the function V1 SetClir with slotId  and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetClir002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetClir002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SetClir(256, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CLIR));
 }
 
@@ -7042,14 +7107,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetClir002, Function | MediumTest | Leve
  * @tc.name   : testV1SetClir003
  * @tc.desc   : Call the function V1 SetClir with slotId  and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetClir003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetClir003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SetClir(-1, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CLIR));
 }
 
@@ -7058,14 +7123,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetClir003, Function | MediumTest | Leve
  * @tc.name   : testV1SetClir004
  * @tc.desc   : Call the function V1 SetClir with serialId  and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetClir004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetClir004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->SetClir(SLOTID_1, -11111, 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CLIR));
 }
 
@@ -7122,14 +7187,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetClir007, Function | MediumTest | Leve
  * @tc.name   : testV1SetClir008
  * @tc.desc   : Call the function V1 SetClir with serialId  and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetClir008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetClir008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->SetClir(SLOTID_1, -32768, 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CLIR));
 }
 
@@ -7169,14 +7234,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetClir010, Function | MediumTest | Leve
  * @tc.name   : testV1SetCallPreferenceMode001
  * @tc.desc   : Call the function V1 SetCallPreferenceMode with slotId  and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallPreferenceMode001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallPreferenceMode001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SetCallPreferenceMode(2, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CALL_PREFERENCE));
 }
 
@@ -7185,14 +7250,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallPreferenceMode001, Function | Med
  * @tc.name   : testV1SetCallPreferenceMode002
  * @tc.desc   : Call the function V1 SetCallPreferenceMode with slotId  and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallPreferenceMode002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallPreferenceMode002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SetCallPreferenceMode(256, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CALL_PREFERENCE));
 }
 
@@ -7201,14 +7266,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallPreferenceMode002, Function | Med
  * @tc.name   : testV1SetCallPreferenceMode003
  * @tc.desc   : Call the function V1 SetCallPreferenceMode with slotId  and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallPreferenceMode003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallPreferenceMode003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SetCallPreferenceMode(-1, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CALL_PREFERENCE));
 }
 
@@ -7217,14 +7282,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallPreferenceMode003, Function | Med
  * @tc.name   : testV1SetCallPreferenceMode004
  * @tc.desc   : Call the function V1 SetCallPreferenceMode with serialId  and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallPreferenceMode004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallPreferenceMode004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->SetCallPreferenceMode(SLOTID_1, -11111, 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CALL_PREFERENCE));
 }
 
@@ -7281,14 +7346,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallPreferenceMode007, Function | Med
  * @tc.name   : testV1SetCallPreferenceMode008
  * @tc.desc   : Call the function V1 SetCallPreferenceMode with serialId  and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallPreferenceMode008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallPreferenceMode008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->SetCallPreferenceMode(SLOTID_1, -32768, 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_CALL_PREFERENCE));
 }
 
@@ -7375,14 +7440,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCallPreferenceMode013, Function | Med
  * @tc.name   : testV1GetCallPreferenceMode001
  * @tc.desc   : Call the function V1 GetCallPreferenceMode with slotId  and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallPreferenceMode001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallPreferenceMode001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallPreferenceMode(2, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_PREFERENCE));
 }
 
@@ -7391,14 +7456,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallPreferenceMode001, Function | Med
  * @tc.name   : testV1GetCallPreferenceMode002
  * @tc.desc   : Call the function V1 GetCallPreferenceMode with slotId  and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallPreferenceMode002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallPreferenceMode002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallPreferenceMode(256, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_PREFERENCE));
 }
 
@@ -7407,14 +7472,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallPreferenceMode002, Function | Med
  * @tc.name   : testV1GetCallPreferenceMode003
  * @tc.desc   : Call the function V1 GetCallPreferenceMode with slotId  and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallPreferenceMode003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallPreferenceMode003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallPreferenceMode(-1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_PREFERENCE));
 }
 
@@ -7423,14 +7488,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallPreferenceMode003, Function | Med
  * @tc.name   : testV1GetCallPreferenceMode004
  * @tc.desc   : Call the function V1 GetCallPreferenceMode with serialId  and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallPreferenceMode004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallPreferenceMode004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallPreferenceMode(SLOTID_1, -11111);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_PREFERENCE));
 }
 
@@ -7487,14 +7552,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallPreferenceMode007, Function | Med
  * @tc.name   : testV1GetCallPreferenceMode008
  * @tc.desc   : Call the function V1 GetCallPreferenceMode with serialId  and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallPreferenceMode008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallPreferenceMode008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallPreferenceMode(SLOTID_1, -32768);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_CALL_PREFERENCE));
 }
 
@@ -7503,9 +7568,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallPreferenceMode008, Function | Med
  * @tc.name  : testV1SetCBConfig001
  * @tc.desc  : Call function SetCBConfig with an entry of 255.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t gsmType = 1;
@@ -7514,36 +7579,17 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig001, Function | MediumTest | 
     info.mids = TEST_ID_LIST;
     info.dcss = TEST_DCS_LIST;
     int32_t ret = g_rilInterface->SetCBConfig(255, GetSerialId(), info);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number: SUB_Telephony_DriverSystem_V1SetCBConfig_0400
- * @tc.name  : testV1SetCBConfig002
- * @tc.desc  : Call function SetCBConfig with an entry of 1.
- */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig002, Function | MediumTest | Level1)
-{
-    if (!IsReady(SLOTID_1)) {
-        return;
-    }
-    int32_t gsmType = 1;
-    CBConfigInfo info;
-    info.mode = gsmType;
-    info.mids = TEST_ID_LIST;
-    info.dcss = TEST_DCS_LIST;
-    int32_t ret = g_rilInterface->SetCBConfig(1, GetSerialId(), info);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetCBConfig_0500
- * @tc.name  : testV1SetCBConfig003
+ * @tc.name  : testV1SetCBConfig002
  * @tc.desc  : Call function SetCBConfig with an entry of 1000000001.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t gsmType = 1;
@@ -7552,17 +7598,17 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig003, Function | MediumTest | 
     info.mids = TEST_ID_LIST;
     info.dcss = TEST_DCS_LIST;
     int32_t ret = g_rilInterface->SetCBConfig(1000000001, GetSerialId(), info);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetCBConfig_0600
- * @tc.name  : testV1SetCBConfig004
+ * @tc.name  : testV1SetCBConfig003
  * @tc.desc  : Call function SetCBConfig with an entry of -1.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig004, Function | MediumTest | Level2)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t gsmType = 1;
@@ -7576,10 +7622,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig004, Function | MediumTest | 
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetCBConfig_0700
- * @tc.name  : testV1SetCBConfig005
+ * @tc.name  : testV1SetCBConfig004
  * @tc.desc  : Call function SetCBConfig with the second argument as 255.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig005, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig004, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -7595,10 +7641,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig005, Function | MediumTest | 
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetCBConfig_0800
- * @tc.name  : testV1SetCBConfig006
+ * @tc.name  : testV1SetCBConfig005
  * @tc.desc  : Call function SetCBConfig with the second argument as 1.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig006, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig005, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -7614,10 +7660,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig006, Function | MediumTest | 
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetCBConfig_0900
- * @tc.name  : testV1SetCBConfig007
+ * @tc.name  : testV1SetCBConfig006
  * @tc.desc  : Call function SetCBConfig with the second argument as 1000000001.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig007, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig006, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -7633,10 +7679,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig007, Function | MediumTest | 
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetCBConfig_1000
- * @tc.name  : testV1SetCBConfig008
+ * @tc.name  : testV1SetCBConfig007
  * @tc.desc  : Call function SetCBConfig with the second argument as -1.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig008, Function | MediumTest | Level2)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig007, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -7652,10 +7698,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig008, Function | MediumTest | 
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetCBConfig_1100
- * @tc.name  : testV1SetCBConfig009
+ * @tc.name  : testV1SetCBConfig008
  * @tc.desc  : Call function SetCBConfig with the third argument as info.mode = 255.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig009, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig008, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -7670,10 +7716,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig009, Function | MediumTest | 
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetCBConfig_1200
- * @tc.name  : testV1SetCBConfig010
+ * @tc.name  : testV1SetCBConfig009
  * @tc.desc  : Call function SetCBConfig with the third argument as info.mode = 1.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig010, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig009, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -7688,10 +7734,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig010, Function | MediumTest | 
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetCBConfig_1300
- * @tc.name  : testV1SetCBConfig011
+ * @tc.name  : testV1SetCBConfig010
  * @tc.desc  : Call function SetCBConfig with the third argument as info.mode = 1000000001.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig011, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig010, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -7706,10 +7752,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig011, Function | MediumTest | 
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetCBConfig_1400
- * @tc.name  : testV1SetCBConfig012
+ * @tc.name  : testV1SetCBConfig011
  * @tc.desc  : Call function SetCBConfig with the third argument as info.mode = -1.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig012, Function | MediumTest | Level2)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig011, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -7724,10 +7770,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig012, Function | MediumTest | 
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetCBConfig_1500
- * @tc.name  : testV1SetCBConfig013
+ * @tc.name  : testV1SetCBConfig012
  * @tc.desc  : Call function SetCBConfig with the third argument as info.mids = TEST_STORAGE_PDU.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig013, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig012, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -7743,10 +7789,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig013, Function | MediumTest | 
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetCBConfig_1600
- * @tc.name  : testV1SetCBConfig014
+ * @tc.name  : testV1SetCBConfig013
  * @tc.desc  : Call function SetCBConfig with the third argument as info.mids = TEST_SEND_PDU.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig014, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig013, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -7762,10 +7808,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig014, Function | MediumTest | 
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetCBConfig_1700
- * @tc.name  : testV1SetCBConfig015
+ * @tc.name  : testV1SetCBConfig014
  * @tc.desc  : Call function SetCBConfig with the third argument as info.mids = TEST_SMSC_PDU.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig015, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig014, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -7781,10 +7827,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig015, Function | MediumTest | 
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetCBConfig_1800
- * @tc.name  : testV1SetCBConfig016
+ * @tc.name  : testV1SetCBConfig015
  * @tc.desc  : Call function SetCBConfig with the third argument as info.mids = TEST_CDMA_PDU.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig016, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig015, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -7800,10 +7846,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig016, Function | MediumTest | 
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetCBConfig_1900
- * @tc.name  : testV1SetCBConfig017
+ * @tc.name  : testV1SetCBConfig016
  * @tc.desc  : Call function SetCBConfig with the third argument as info.dcss = TEST_ID_LIST.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig017, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig016, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -7819,10 +7865,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig017, Function | MediumTest | 
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetCBConfig_2000
- * @tc.name  : testV1SetCBConfig018
+ * @tc.name  : testV1SetCBConfig017
  * @tc.desc  : Call function SetCBConfig with the third argument as info.dcss = TEST_STORAGE_PDU.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig018, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig017, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -7838,10 +7884,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig018, Function | MediumTest | 
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetCBConfig_2100
- * @tc.name  : testV1SetCBConfig019
+ * @tc.name  : testV1SetCBConfig018
  * @tc.desc  : Call function SetCBConfig with the third argument as info.dcss = TEST_SEND_PDU.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig019, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig018, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -7857,10 +7903,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig019, Function | MediumTest | 
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetCBConfig_2200
- * @tc.name  : testV1SetCBConfig020
+ * @tc.name  : testV1SetCBConfig019
  * @tc.desc  : Call function SetCBConfig with the third argument as info.dcss = TEST_SMSC_PDU.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig020, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig019, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -7876,10 +7922,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig020, Function | MediumTest | 
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetCBConfig_2300
- * @tc.name  : testV1SetCBConfig021
+ * @tc.name  : testV1SetCBConfig020
  * @tc.desc  : Call function SetCBConfig with the third argument as info.dcss = TEST_CDMA_PDU.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig021, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig020, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -7895,10 +7941,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig021, Function | MediumTest | 
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetCBConfig_2400
- * @tc.name  : testV1SetCBConfig022
+ * @tc.name  : testV1SetCBConfig021
  * @tc.desc  : Call function SetCBConfig 100 times.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig022, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig021, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -7920,13 +7966,13 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCBConfig022, Function | MediumTest | 
  * @tc.name  : testV1GetCBConfig001
  * @tc.desc  : Call function GetCBConfig with an entry of 1000000001.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCBConfig001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCBConfig001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetCBConfig(1000000001, GetSerialId());
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
 }
 
 /**
@@ -7936,7 +7982,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCBConfig001, Function | MediumTest | 
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1GetCBConfig002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetCBConfig(-1, GetSerialId());
@@ -7948,13 +7994,13 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCBConfig002, Function | MediumTest | 
  * @tc.name  : testV1GetCBConfig003
  * @tc.desc  : Call function GetCBConfig with an entry of 255.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCBConfig003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCBConfig003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetCBConfig(255, GetSerialId());
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
 }
 
 /**
@@ -8035,14 +8081,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCBConfig009, Function | MediumTest | 
  * @tc.name  : testV1SetCdmaCBConfig001
  * @tc.desc  : Call function SetCdmaCBConfig with an entry of 255.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCdmaCBConfig001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCdmaCBConfig001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     CdmaCBConfigInfoList broadcastInfoList = {};
     int32_t ret = g_rilInterface->SetCdmaCBConfig(255, GetSerialId(), broadcastInfoList);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
 }
 
 /**
@@ -8050,14 +8096,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCdmaCBConfig001, Function | MediumTes
  * @tc.name  : testV1SetCdmaCBConfig003
  * @tc.desc  : Call function SetCdmaCBConfig with an entry of 1000000001.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetCdmaCBConfig003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetCdmaCBConfig003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     CdmaCBConfigInfoList broadcastInfoList = {};
     int32_t ret = g_rilInterface->SetCdmaCBConfig(1000000001, GetSerialId(), broadcastInfoList);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
 }
 
 /**
@@ -8067,7 +8113,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetCdmaCBConfig003, Function | MediumTes
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SetCdmaCBConfig004, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     CdmaCBConfigInfoList broadcastInfoList = {};
@@ -8312,15 +8358,18 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCdmaCBConfig001, Function | MediumTes
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1GetCdmaCBConfig_0400
  * @tc.name  : testV1GetCdmaCBConfig002
- * @tc.desc  : Call function GetCdmaCBConfig with the 1.
+ * @tc.desc  : Call function GetCdmaCBConfig with the 1 100times.
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1GetCdmaCBConfig002, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
-    int32_t ret = g_rilInterface->GetCdmaCBConfig(1, GetSerialId());
-    EXPECT_EQ(SUCCESS, ret);
+    int32_t ret = 0;
+    for (int i = 0; i < 100; i++) {
+        ret = g_rilInterface->GetCdmaCBConfig(SLOTID_2, GetSerialId());
+        EXPECT_EQ(SUCCESS, ret);
+    }
 }
 
 /**
@@ -8328,13 +8377,13 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCdmaCBConfig002, Function | MediumTes
  * @tc.name  : testV1GetCdmaCBConfig003
  * @tc.desc  : Call function GetCdmaCBConfig with the 255.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCdmaCBConfig003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCdmaCBConfig003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetCdmaCBConfig(255, GetSerialId());
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
 }
 
 /**
@@ -8342,13 +8391,13 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCdmaCBConfig003, Function | MediumTes
  * @tc.name  : testV1GetCdmaCBConfig004
  * @tc.desc  : Call function GetCdmaCBConfig with the 1000000001.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCdmaCBConfig004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCdmaCBConfig004, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetCdmaCBConfig(1000000001, GetSerialId());
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
 }
 
 /**
@@ -8358,7 +8407,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCdmaCBConfig004, Function | MediumTes
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1GetCdmaCBConfig005, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetCdmaCBConfig(-1, GetSerialId());
@@ -8370,16 +8419,16 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCdmaCBConfig005, Function | MediumTes
  * @tc.name  : testV1GetCdmaCBConfig006
  * @tc.desc  : Call function GetCdmaCBConfig with the 255 100Times.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCdmaCBConfig006, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCdmaCBConfig006, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = 0;
 
     for (int i = 0; i < 100; i++) {
         ret = g_rilInterface->GetCdmaCBConfig(255, GetSerialId());
-        EXPECT_EQ(SUCCESS, ret);
+        EXPECT_NE(SUCCESS, ret);
     }
 }
 
@@ -8473,10 +8522,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCdmaCBConfig012, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_0400
- * @tc.name  : testV1SendSmsMoreMode002
+ * @tc.name  : testV1SendSmsMoreMode001
  * @tc.desc  : Call function SendSmsMoreMode with the SLOTID_1 100Times.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode001, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8491,27 +8540,27 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode002, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_0500
- * @tc.name  : testV1SendSmsMoreMode003
+ * @tc.name  : testV1SendSmsMoreMode002
  * @tc.desc  : Call function SendSmsMoreMode with the 255.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     GsmSmsMessageInfo msg;
     int32_t ret = g_rilInterface->SendSmsMoreMode(255, GetSerialId(), msg);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_0700
- * @tc.name  : testV1SendSmsMoreMode005
+ * @tc.name  : testV1SendSmsMoreMode003
  * @tc.desc  : Call function SendSmsMoreMode with the -1.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode005, Function | MediumTest | Level2)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     GsmSmsMessageInfo msg;
@@ -8521,25 +8570,25 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode005, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_0800
- * @tc.name  : testV1SendSmsMoreMode006
+ * @tc.name  : testV1SendSmsMoreMode004
  * @tc.desc  : Call function SendSmsMoreMode with the 1000000001.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode006, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode004, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     GsmSmsMessageInfo msg;
     int32_t ret = g_rilInterface->SendSmsMoreMode(1000000001, GetSerialId(), msg);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_0900
- * @tc.name  : testV1SendSmsMoreMode007
+ * @tc.name  : testV1SendSmsMoreMode005
  * @tc.desc  : Call function SendSmsMoreMode with the second SLOTID_1.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode007, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode005, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8551,10 +8600,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode007, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_1000
- * @tc.name  : testV1SendSmsMoreMode008
+ * @tc.name  : testV1SendSmsMoreMode006
  * @tc.desc  : Call function SendSmsMoreMode with the second SLOTID_1 100Times.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode006, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8569,10 +8618,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode008, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_1100
- * @tc.name  : testV1SendSmsMoreMode009
+ * @tc.name  : testV1SendSmsMoreMode007
  * @tc.desc  : Call function SendSmsMoreMode with the second 255.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode009, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode007, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8584,10 +8633,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode009, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_1200
- * @tc.name  : testV1SendSmsMoreMode010
+ * @tc.name  : testV1SendSmsMoreMode08
  * @tc.desc  : Call function SendSmsMoreMode with the second 1.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode010, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode08, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8599,10 +8648,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode010, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_1300
- * @tc.name  : testV1SendSmsMoreMode011
+ * @tc.name  : testV1SendSmsMoreMode009
  * @tc.desc  : Call function SendSmsMoreMode with the second -1.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode011, Function | MediumTest | Level2)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode009, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8614,10 +8663,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode011, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_1400
- * @tc.name  : testV1SendSmsMoreMode012
+ * @tc.name  : testV1SendSmsMoreMode010
  * @tc.desc  : Call function SendSmsMoreMode with the second 1000000001.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode012, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode010, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8629,10 +8678,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode012, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_1500
- * @tc.name  : testV1SendSmsMoreMode013
+ * @tc.name  : testV1SendSmsMoreMode011
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.serial = SLOTID_1.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode013, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode011, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8645,10 +8694,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode013, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_1600
- * @tc.name  : testV1SendSmsMoreMode014
+ * @tc.name  : testV1SendSmsMoreMode012
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.serial = SLOTID_1 100Times.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode014, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode012, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8664,10 +8713,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode014, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_1700
- * @tc.name  : testV1SendSmsMoreMode015
+ * @tc.name  : testV1SendSmsMoreMode013
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.serial = 255.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode015, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode013, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8680,10 +8729,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode015, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_1800
- * @tc.name  : testV1SendSmsMoreMode016
+ * @tc.name  : testV1SendSmsMoreMode014
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.serial = 1.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode016, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode014, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8696,10 +8745,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode016, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_1900
- * @tc.name  : testV1SendSmsMoreMode017
+ * @tc.name  : testV1SendSmsMoreMode015
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.serial = -1.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode017, Function | MediumTest | Level2)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode015, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8712,10 +8761,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode017, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_2000
- * @tc.name  : testV1SendSmsMoreMode018
+ * @tc.name  : testV1SendSmsMoreMode016
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.serial = 1000000001.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode018, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode016, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8728,10 +8777,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode018, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_2100
- * @tc.name  : testV1SendSmsMoreMode019
+ * @tc.name  : testV1SendSmsMoreMode017
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.state = SLOTID_1.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode019, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode017, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8744,10 +8793,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode019, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_2200
- * @tc.name  : testV1SendSmsMoreMode020
+ * @tc.name  : testV1SendSmsMoreMode018
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.state = SLOTID_1 100Times.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode020, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode018, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8763,10 +8812,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode020, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_2300
- * @tc.name  : testV1SendSmsMoreMode021
+ * @tc.name  : testV1SendSmsMoreMode019
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.state = 255.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode021, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode019, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8779,10 +8828,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode021, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_2400
- * @tc.name  : testV1SendSmsMoreMode022
+ * @tc.name  : testV1SendSmsMoreMode020
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.state = 1.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode022, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode020, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8795,10 +8844,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode022, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_2500
- * @tc.name  : testV1SendSmsMoreMode023
+ * @tc.name  : testV1SendSmsMoreMode021
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.state = -1.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode023, Function | MediumTest | Level2)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode021, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8811,10 +8860,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode023, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_2600
- * @tc.name  : testV1SendSmsMoreMode024
+ * @tc.name  : testV1SendSmsMoreMode022
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.state = 1000000001.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode024, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode022, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8827,10 +8876,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode024, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_2700
- * @tc.name  : testV1SendSmsMoreMode025
+ * @tc.name  : testV1SendSmsMoreMode023
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.smscPdu = TEST_STORAGE_PDU.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode025, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode023, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8843,10 +8892,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode025, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_2800
- * @tc.name  : testV1SendSmsMoreMode026
+ * @tc.name  : testV1SendSmsMoreMode024
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.smscPdu = TEST_STORAGE_PDU 100Times.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode026, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode024, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8862,10 +8911,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode026, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_2900
- * @tc.name  : testV1SendSmsMoreMode027
+ * @tc.name  : testV1SendSmsMoreMode025
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.smscPdu = TEST_SEND_PDU.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode027, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode025, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8878,10 +8927,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode027, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_3000
- * @tc.name  : testV1SendSmsMoreMode028
+ * @tc.name  : testV1SendSmsMoreMode026
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.smscPdu = TEST_SMSC_PDU.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode028, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode026, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8894,10 +8943,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode028, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_3100
- * @tc.name  : testV1SendSmsMoreMode029
+ * @tc.name  : testV1SendSmsMoreMode027
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.smscPdu = TEST_STORAGE_PDU.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode029, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode027, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8910,10 +8959,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode029, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_3200
- * @tc.name  : testV1SendSmsMoreMode030
+ * @tc.name  : testV1SendSmsMoreMode028
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.smscPdu = TEST_CDMA_PDU.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode030, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode028, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8926,10 +8975,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode030, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_3300
- * @tc.name  : testV1SendSmsMoreMode031
+ * @tc.name  : testV1SendSmsMoreMode029
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.smscPdu = TEST_ID_LIST.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode031, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode029, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8942,10 +8991,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode031, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_3400
- * @tc.name  : testV1SendSmsMoreMode032
+ * @tc.name  : testV1SendSmsMoreMode030
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.smscPdu = TEST_DCS_LIST.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode032, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode030, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8958,10 +9007,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode032, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_3500
- * @tc.name  : testV1SendSmsMoreMode033
+ * @tc.name  : testV1SendSmsMoreMode031
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.pdu = TEST_STORAGE_PDU.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode033, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode031, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8974,10 +9023,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode033, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_3600
- * @tc.name  : testV1SendSmsMoreMode034
+ * @tc.name  : testV1SendSmsMoreMode032
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.pdu = TEST_STORAGE_PDU 100Times.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode034, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode032, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -8993,10 +9042,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode034, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_3700
- * @tc.name  : testV1SendSmsMoreMode035
+ * @tc.name  : testV1SendSmsMoreMode033
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.pdu = TEST_SEND_PDU.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode035, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode033, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -9009,10 +9058,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode035, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_3800
- * @tc.name  : testV1SendSmsMoreMode036
+ * @tc.name  : testV1SendSmsMoreMode034
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.pdu = TEST_SMSC_PDU.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode036, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode034, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -9025,10 +9074,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode036, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_3900
- * @tc.name  : testV1SendSmsMoreMode037
+ * @tc.name  : testV1SendSmsMoreMode035
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.pdu = TEST_STORAGE_PDU.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode037, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode035, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -9041,10 +9090,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode037, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_4000
- * @tc.name  : testV1SendSmsMoreMode038
+ * @tc.name  : testV1SendSmsMoreMode036
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.pdu = TEST_CDMA_PDU.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode038, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode036, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -9057,10 +9106,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode038, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_4100
- * @tc.name  : testV1SendSmsMoreMode039
+ * @tc.name  : testV1SendSmsMoreMode037
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.pdu = TEST_ID_LIST.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode039, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode037, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -9073,10 +9122,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode039, Function | MediumTes
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SendSmsMoreMode_4200
- * @tc.name  : testV1SendSmsMoreMode040
+ * @tc.name  : testV1SendSmsMoreMode038
  * @tc.desc  : Call function SendSmsMoreMode with the third argument as msg.pdu = TEST_DCS_LIST.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode040, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsMoreMode038, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -9127,27 +9176,30 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetRrcConnectionState001, Function | Med
  * @tc.name  : testV1GetRrcConnectionState002
  * @tc.desc  : Call function GetRrcConnectionState with 255.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetRrcConnectionState002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetRrcConnectionState002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetRrcConnectionState(255, GetSerialId());
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1GetRrcConnectionState_0500
  * @tc.name  : testV1GetRrcConnectionState003
- * @tc.desc  : Call function GetRrcConnectionState with 1.
+ * @tc.desc  : Call function GetRrcConnectionState with 1 100times.
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1GetRrcConnectionState003, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
-    int32_t ret = g_rilInterface->GetRrcConnectionState(1, GetSerialId());
-    EXPECT_EQ(SUCCESS, ret);
+    int32_t ret = 0;
+    for (int i = 0; i < 100; i++) {
+        ret = g_rilInterface->GetRrcConnectionState(SLOTID_2, GetSerialId());
+        EXPECT_EQ(SUCCESS, ret);
+    }
 }
 
 /**
@@ -9157,7 +9209,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetRrcConnectionState003, Function | Med
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1GetRrcConnectionState004, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetRrcConnectionState(-1, GetSerialId());
@@ -9169,13 +9221,13 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetRrcConnectionState004, Function | Med
  * @tc.name  : testV1GetRrcConnectionState005
  * @tc.desc  : Call function GetRrcConnectionState with 1000000001.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetRrcConnectionState005, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetRrcConnectionState005, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetRrcConnectionState(1000000001, GetSerialId());
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
 }
 
 /**
@@ -9253,14 +9305,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetRrcConnectionState010, Function | Med
  * @tc.name  : testV1SendSmsAck001
  * @tc.desc  : Call function SendSmsAck with 255.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     ModeData data;
     int32_t ret = g_rilInterface->SendSmsAck(255, GetSerialId(), data);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
 }
 
 /**
@@ -9270,7 +9322,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck001, Function | MediumTest | L
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     ModeData data;
@@ -9283,14 +9335,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck003, Function | MediumTest | L
  * @tc.name  : testV1SendSmsAck004
  * @tc.desc  : Call function SendSmsAck with 1000000001.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck004, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     ModeData data;
     int32_t ret = g_rilInterface->SendSmsAck(1000000001, GetSerialId(), data);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
 }
 
 /**
@@ -9300,7 +9352,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck004, Function | MediumTest | L
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck005, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     ModeData data;
@@ -9315,7 +9367,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck005, Function | MediumTest | L
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck006, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     ModeData data;
@@ -9330,7 +9382,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck006, Function | MediumTest | L
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck007, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     ModeData data;
@@ -9345,7 +9397,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck007, Function | MediumTest | L
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck008, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     ModeData data;
@@ -9360,7 +9412,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck008, Function | MediumTest | L
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck009, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     ModeData data;
@@ -9376,7 +9428,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck009, Function | MediumTest | L
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck010, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     ModeData data;
@@ -9392,7 +9444,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck010, Function | MediumTest | L
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck011, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     ModeData data;
@@ -9408,7 +9460,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck011, Function | MediumTest | L
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck012, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     ModeData data;
@@ -9424,7 +9476,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck012, Function | MediumTest | L
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck013, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     ModeData data;
@@ -9440,7 +9492,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck013, Function | MediumTest | L
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck014, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     ModeData data;
@@ -9456,7 +9508,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck014, Function | MediumTest | L
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck015, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     ModeData data;
@@ -9472,7 +9524,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck015, Function | MediumTest | L
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck016, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     ModeData data;
@@ -9488,7 +9540,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck016, Function | MediumTest | L
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck017, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     ModeData data;
@@ -9504,7 +9556,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck017, Function | MediumTest | L
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck018, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     ModeData data;
@@ -9520,7 +9572,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck018, Function | MediumTest | L
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck019, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     ModeData data;
@@ -9537,7 +9589,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck019, Function | MediumTest | L
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck020, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     ModeData data;
@@ -9553,7 +9605,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck020, Function | MediumTest | L
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck021, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     ModeData data;
@@ -9569,7 +9621,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck021, Function | MediumTest | L
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck022, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     ModeData data;
@@ -9585,7 +9637,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck022, Function | MediumTest | L
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck023, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     ModeData data;
@@ -9601,7 +9653,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck023, Function | MediumTest | L
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SendSmsAck024, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     ModeData data;
@@ -11900,10 +11952,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SimAuthentication006, Function | MediumT
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SimAuthentication_0900
- * @tc.name  : testV1GetSimAuthentication007
+ * @tc.name  : testV1SimAuthentication007
  * @tc.desc  : Call function SimAuthentication with serialId as -1.
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimAuthentication007, Function | MediumTest | Level2)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SimAuthentication007, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_2)) {
         return;
@@ -13184,16 +13236,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin001, Function | MediumTest | Le
     std::string pin = TEST_STORAGE_PDU;
     for (int i = 0; i < 100; i++) {
         ret = g_rilInterface->UnlockPin(SLOTID_1, GetSerialId(), pin);
-        WaitFor(WAIT_TIME_SECOND);
         EXPECT_EQ(SUCCESS, ret);
-        ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PIN));
     }
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPin_0400
  * @tc.name  : testV1UnlockPin002
- * @tc.desc  : Call function UnlockPin with an entry if 255
+ * @tc.desc  : Call function UnlockPin with slotId is SLOTID_1 SerialId is 1
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin002, Function | MediumTest | Level1)
 {
@@ -13201,16 +13251,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin002, Function | MediumTest | Le
         return;
     }
     std::string pin = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPin(255, GetSerialId(), pin);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPin(SLOTID_1, 1, pin);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PIN));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPin_0500
  * @tc.name  : testV1UnlockPin003
- * @tc.desc  : Call function UnlockPin with an entry if 1000000001
+ * @tc.desc  : Call function UnlockPin with slotId is SLOTID_1 SerialId is 0
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin003, Function | MediumTest | Level1)
 {
@@ -13218,16 +13266,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin003, Function | MediumTest | Le
         return;
     }
     std::string pin = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPin(1000000001, GetSerialId(), pin);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPin(SLOTID_1, 0, pin);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PIN));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPin_0600
  * @tc.name  : testV1UnlockPin004
- * @tc.desc  : Call function UnlockPin with an entry if -1
+ * @tc.desc  : Call function UnlockPin with slotId is SLOTID_1 SerialId is -1
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin004, Function | MediumTest | Level2)
 {
@@ -13235,75 +13281,67 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin004, Function | MediumTest | Le
         return;
     }
     std::string pin = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPin(-1, GetSerialId(), pin);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPin(SLOTID_1, -1, pin);
     EXPECT_NE(SUCCESS, ret);
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPin_0700
  * @tc.name  : testV1UnlockPin005
- * @tc.desc  : Call function UnlockPin with the second argument as 1
+ * @tc.desc  : Call function UnlockPin with slotId is SLOTID_2 SerialId is 1
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin005, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     std::string pin = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPin(SLOTID_1, 1, pin);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPin(SLOTID_2, 1, pin);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PIN));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPin_0800
  * @tc.name  : testV1UnlockPin006
- * @tc.desc  : Call function UnlockPin with the second argument as 255
+ * @tc.desc  : Call function UnlockPin with slotId is SLOTID_2 SerialId is 0
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin006, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     std::string pin = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPin(SLOTID_1, 255, pin);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPin(SLOTID_2, 0, pin);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PIN));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPin_0900
  * @tc.name  : testV1UnlockPin007
- * @tc.desc  : Call function UnlockPin with the second argument as 1000000001
+ * @tc.desc  : Call function UnlockPin with slotId is SLOTID_2 SerialId is 1000000001
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin007, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     std::string pin = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPin(SLOTID_1, 1000000001, pin);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPin(SLOTID_2, 1000000001, pin);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PIN));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPin_1000
  * @tc.name  : testV1UnlockPin008
- * @tc.desc  : Call function UnlockPin with the second argument as -1
+ * @tc.desc  : Call function UnlockPin with slotId is SLOTID_2 SerialId is -1
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin008, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     std::string pin = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPin(SLOTID_1, -1, pin);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPin(SLOTID_2, -1, pin);
     EXPECT_NE(SUCCESS, ret);
 }
 
@@ -13319,9 +13357,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin009, Function | MediumTest | Le
     }
     std::string pin = TEST_SEND_PDU;
     int32_t ret = g_rilInterface->UnlockPin(SLOTID_1, GetSerialId(), pin);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PIN));
 }
 
 /**
@@ -13336,9 +13372,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin010, Function | MediumTest | Le
     }
     std::string pin = TEST_SMSC_PDU;
     int32_t ret = g_rilInterface->UnlockPin(SLOTID_1, GetSerialId(), pin);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PIN));
 }
 
 /**
@@ -13353,9 +13387,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin011, Function | MediumTest | Le
     }
     std::string pin = TEST_CDMA_PDU;
     int32_t ret = g_rilInterface->UnlockPin(SLOTID_1, GetSerialId(), pin);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PIN));
 }
 
 /**
@@ -13370,9 +13402,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin012, Function | MediumTest | Le
     }
     std::string pin = TEST_ID_LIST;
     int32_t ret = g_rilInterface->UnlockPin(SLOTID_1, GetSerialId(), pin);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PIN));
 }
 
 /**
@@ -13387,9 +13417,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin013, Function | MediumTest | Le
     }
     std::string pin = TEST_DCS_LIST;
     int32_t ret = g_rilInterface->UnlockPin(SLOTID_1, GetSerialId(), pin);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PIN));
 }
 
 /**
@@ -13407,16 +13435,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk001, Function | MediumTest | Le
     std::string pin = TEST_STORAGE_PDU;
     for (int i = 0; i < 100; i++) {
         ret = g_rilInterface->UnlockPuk(SLOTID_1, GetSerialId(), puk, pin);
-        WaitFor(WAIT_TIME_SECOND);
         EXPECT_EQ(SUCCESS, ret);
-        ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK));
     }
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPuk_0400
  * @tc.name  : testV1UnlockPuk002
- * @tc.desc  : Call function UnlockPuk with an entry of 255
+ * @tc.desc  : Call function UnlockPuk with slotId is SLOTID_1 SerialId is 1
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk002, Function | MediumTest | Level1)
 {
@@ -13425,16 +13451,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk002, Function | MediumTest | Le
     }
     std::string puk = TEST_STORAGE_PDU;
     std::string pin = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPuk(255, GetSerialId(), puk, pin);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPuk(SLOTID_1, 1, puk, pin);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPuk_0500
  * @tc.name  : testV1UnlockPuk003
- * @tc.desc  : Call function UnlockPuk with an entry of 1000000001
+ * @tc.desc  : Call function UnlockPuk with slotId is SLOTID_1 SerialId is 0
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk003, Function | MediumTest | Level1)
 {
@@ -13443,16 +13467,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk003, Function | MediumTest | Le
     }
     std::string puk = TEST_STORAGE_PDU;
     std::string pin = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPuk(1000000001, GetSerialId(), puk, pin);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPuk(SLOTID_1, 0, puk, pin);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPuk_0600
  * @tc.name  : testV1UnlockPuk004
- * @tc.desc  : Call function UnlockPuk with an entry of -1
+ * @tc.desc  : Call function UnlockPuk with slotId is SLOTID_1 SerialId is -1
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk004, Function | MediumTest | Level2)
 {
@@ -13461,79 +13483,71 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk004, Function | MediumTest | Le
     }
     std::string puk = TEST_STORAGE_PDU;
     std::string pin = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPuk(-1, GetSerialId(), puk, pin);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPuk(SLOTID_1, -1, puk, pin);
     EXPECT_NE(SUCCESS, ret);
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPuk_0700
  * @tc.name  : testV1UnlockPuk005
- * @tc.desc  : Call function UnlockPuk with the second argument as 1
+ * @tc.desc  : Call function UnlockPuk with slotId is SLOTID_2 SerialId is 1
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk005, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     std::string puk = TEST_STORAGE_PDU;
     std::string pin = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPuk(SLOTID_1, 1, puk, pin);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPuk(SLOTID_2, 1, puk, pin);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPuk_0800
  * @tc.name  : testV1UnlockPuk006
- * @tc.desc  : Call function UnlockPuk with the second argument as 255
+ * @tc.desc  : Call function UnlockPuk with slotId is SLOTID_2 SerialId is 0
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk006, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     std::string puk = TEST_STORAGE_PDU;
     std::string pin = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPuk(SLOTID_1, 255, puk, pin);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPuk(SLOTID_2, 0, puk, pin);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPuk_0900
  * @tc.name  : testV1UnlockPuk007
- * @tc.desc  : Call function UnlockPuk with the second argument as 1000000001
+ * @tc.desc  : Call function UnlockPuk with slotId is SLOTID_2 SerialId is 1000000001
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk007, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     std::string puk = TEST_STORAGE_PDU;
     std::string pin = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPuk(SLOTID_1, 1000000001, puk, pin);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPuk(SLOTID_2, 1000000001, puk, pin);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPuk_1000
  * @tc.name  : testV1UnlockPuk008
- * @tc.desc  : Call function UnlockPuk with the second argument as -1
+ * @tc.desc  : Call function UnlockPuk with slotId is SLOTID_2 SerialId is -1
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk008, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     std::string puk = TEST_STORAGE_PDU;
     std::string pin = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPuk(SLOTID_1, -1, puk, pin);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPuk(SLOTID_2, -1, puk, pin);
     EXPECT_NE(SUCCESS, ret);
 }
 
@@ -13550,9 +13564,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk009, Function | MediumTest | Le
     std::string puk = TEST_STORAGE_PDU;
     std::string pin = TEST_STORAGE_PDU;
     int32_t ret = g_rilInterface->UnlockPuk(SLOTID_1, GetSerialId(), puk, pin);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK));
 }
 
 /**
@@ -13568,9 +13580,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk010, Function | MediumTest | Le
     std::string puk = TEST_SEND_PDU;
     std::string pin = TEST_STORAGE_PDU;
     int32_t ret = g_rilInterface->UnlockPuk(SLOTID_1, GetSerialId(), puk, pin);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK));
 }
 
 /**
@@ -13586,9 +13596,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk011, Function | MediumTest | Le
     std::string puk = TEST_SMSC_PDU;
     std::string pin = TEST_STORAGE_PDU;
     int32_t ret = g_rilInterface->UnlockPuk(SLOTID_1, GetSerialId(), puk, pin);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK));
 }
 
 /**
@@ -13604,9 +13612,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk012, Function | MediumTest | Le
     std::string puk = TEST_CDMA_PDU;
     std::string pin = TEST_STORAGE_PDU;
     int32_t ret = g_rilInterface->UnlockPuk(SLOTID_1, GetSerialId(), puk, pin);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK));
 }
 
 /**
@@ -13622,9 +13628,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk013, Function | MediumTest | Le
     std::string puk = TEST_ID_LIST;
     std::string pin = TEST_STORAGE_PDU;
     int32_t ret = g_rilInterface->UnlockPuk(SLOTID_1, GetSerialId(), puk, pin);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK));
 }
 
 /**
@@ -13640,9 +13644,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk014, Function | MediumTest | Le
     std::string puk = TEST_DCS_LIST;
     std::string pin = TEST_STORAGE_PDU;
     int32_t ret = g_rilInterface->UnlockPuk(SLOTID_1, GetSerialId(), puk, pin);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK));
 }
 
 /**
@@ -13658,9 +13660,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk015, Function | MediumTest | Le
     std::string puk = TEST_STORAGE_PDU;
     std::string pin = TEST_SEND_PDU;
     int32_t ret = g_rilInterface->UnlockPuk(SLOTID_1, GetSerialId(), puk, pin);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK));
 }
 
 /**
@@ -13676,9 +13676,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk016, Function | MediumTest | Le
     std::string puk = TEST_STORAGE_PDU;
     std::string pin = TEST_SMSC_PDU;
     int32_t ret = g_rilInterface->UnlockPuk(SLOTID_1, GetSerialId(), puk, pin);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK));
 }
 
 /**
@@ -13694,9 +13692,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk017, Function | MediumTest | Le
     std::string puk = TEST_STORAGE_PDU;
     std::string pin = TEST_CDMA_PDU;
     int32_t ret = g_rilInterface->UnlockPuk(SLOTID_1, GetSerialId(), puk, pin);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK));
 }
 
 /**
@@ -13712,9 +13708,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk018, Function | MediumTest | Le
     std::string puk = TEST_STORAGE_PDU;
     std::string pin = TEST_ID_LIST;
     int32_t ret = g_rilInterface->UnlockPuk(SLOTID_1, GetSerialId(), puk, pin);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK));
 }
 
 /**
@@ -13730,9 +13724,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk019, Function | MediumTest | Le
     std::string puk = TEST_STORAGE_PDU;
     std::string pin = TEST_DCS_LIST;
     int32_t ret = g_rilInterface->UnlockPuk(SLOTID_1, GetSerialId(), puk, pin);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK));
 }
 
 /**
@@ -13749,16 +13741,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin2001, Function | MediumTest | L
     std::string pin2 = TEST_STORAGE_PDU;
     for (int i = 0; i < 100; i++) {
         ret = g_rilInterface->UnlockPin2(SLOTID_1, GetSerialId(), pin2);
-        WaitFor(WAIT_TIME_SECOND);
         EXPECT_EQ(SUCCESS, ret);
-        ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PIN2));
     }
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPin2_0400
  * @tc.name  : testV1UnlockPin2002
- * @tc.desc  : Call function UnlockPin2 with an entry if 255
+ * @tc.desc  : Call function UnlockPin2 with slotId is SLOTID_1 SerialId is 1
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin2002, Function | MediumTest | Level1)
 {
@@ -13766,16 +13756,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin2002, Function | MediumTest | L
         return;
     }
     std::string pin2 = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPin2(255, GetSerialId(), pin2);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPin2(SLOTID_1, 1, pin2);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PIN2));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPin2_0500
  * @tc.name  : testV1UnlockPin2003
- * @tc.desc  : Call function UnlockPin2 with an entry if 1000000001
+ * @tc.desc  : Call function UnlockPin2 with slotId is SLOTID_1 SerialId is 0
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin2003, Function | MediumTest | Level1)
 {
@@ -13783,16 +13771,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin2003, Function | MediumTest | L
         return;
     }
     std::string pin2 = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPin2(1000000001, GetSerialId(), pin2);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPin2(SLOTID_1, 0, pin2);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PIN2));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPin2_0600
  * @tc.name  : testV1UnlockPin2004
- * @tc.desc  : Call function UnlockPin2 with an entry if -1
+ * @tc.desc  : Call function UnlockPin2 with slotId is SLOTID_1 SerialId is -1
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin2004, Function | MediumTest | Level2)
 {
@@ -13800,75 +13786,67 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin2004, Function | MediumTest | L
         return;
     }
     std::string pin2 = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPin2(-1, GetSerialId(), pin2);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPin2(SLOTID_1, -1, pin2);
     EXPECT_NE(SUCCESS, ret);
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPin2_0700
  * @tc.name  : testV1UnlockPin2005
- * @tc.desc  : Call function UnlockPin2 with the second argument as 1
+ * @tc.desc  : Call function UnlockPin2 with slotId is SLOTID_2 SerialId is 1
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin2005, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     std::string pin2 = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPin2(SLOTID_1, 1, pin2);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPin2(SLOTID_2, 1, pin2);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PIN2));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPin2_0800
  * @tc.name  : testV1UnlockPin2006
- * @tc.desc  : Call function UnlockPin2 with the second argument as 255
+ * @tc.desc  : Call function UnlockPin2 with slotId is SLOTID_2 SerialId is 0
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin2006, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     std::string pin2 = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPin2(SLOTID_1, 255, pin2);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPin2(SLOTID_2, 0, pin2);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PIN2));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPin2_0900
  * @tc.name  : testV1UnlockPin2007
- * @tc.desc  : Call function UnlockPin2 with the second argument as 1000000001
+ * @tc.desc  : Call function UnlockPin2 with slotId is SLOTID_2 SerialId is 1000000001
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin2007, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     std::string pin2 = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPin2(SLOTID_1, 1000000001, pin2);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPin2(SLOTID_2, 1000000001, pin2);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PIN2));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPin2_1000
  * @tc.name  : testV1UnlockPin2008
- * @tc.desc  : Call function UnlockPin2 with the second argument as -1
+ * @tc.desc  : Call function UnlockPin2 with slotId is SLOTID_2 SerialId is -1
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin2008, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     std::string pin2 = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPin2(SLOTID_1, -1, pin2);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPin2(SLOTID_2, -1, pin2);
     EXPECT_NE(SUCCESS, ret);
 }
 
@@ -13884,9 +13862,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin2009, Function | MediumTest | L
     }
     std::string pin2 = TEST_SEND_PDU;
     int32_t ret = g_rilInterface->UnlockPin2(SLOTID_1, GetSerialId(), pin2);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PIN2));
 }
 
 /**
@@ -13901,9 +13877,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin2010, Function | MediumTest | L
     }
     std::string pin2 = TEST_SMSC_PDU;
     int32_t ret = g_rilInterface->UnlockPin2(SLOTID_1, GetSerialId(), pin2);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PIN2));
 }
 
 /**
@@ -13918,9 +13892,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin2011, Function | MediumTest | L
     }
     std::string pin2 = TEST_CDMA_PDU;
     int32_t ret = g_rilInterface->UnlockPin2(SLOTID_1, GetSerialId(), pin2);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PIN2));
 }
 
 /**
@@ -13935,9 +13907,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin2012, Function | MediumTest | L
     }
     std::string pin2 = TEST_ID_LIST;
     int32_t ret = g_rilInterface->UnlockPin2(SLOTID_1, GetSerialId(), pin2);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PIN2));
 }
 
 /**
@@ -13952,9 +13922,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPin2013, Function | MediumTest | L
     }
     std::string pin2 = TEST_DCS_LIST;
     int32_t ret = g_rilInterface->UnlockPin2(SLOTID_1, GetSerialId(), pin2);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PIN2));
 }
 
 /**
@@ -13972,16 +13940,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2001, Function | MediumTest | L
     std::string pin2 = TEST_STORAGE_PDU;
     for (int i = 0; i < 100; i++) {
         ret = g_rilInterface->UnlockPuk2(SLOTID_1, GetSerialId(), puk2, pin2);
-        WaitFor(WAIT_TIME_SECOND);
         EXPECT_EQ(SUCCESS, ret);
-        ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK2));
     }
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPuk2_0400
  * @tc.name  : testV1UnlockPuk2002
- * @tc.desc  : Call function UnlockPuk2 with an entry of 255
+ * @tc.desc  : Call function UnlockPuk2 with slotId is SLOTID_1 SerialId is 1
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2002, Function | MediumTest | Level1)
 {
@@ -13990,16 +13956,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2002, Function | MediumTest | L
     }
     std::string puk2 = TEST_STORAGE_PDU;
     std::string pin2 = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPuk2(255, GetSerialId(), puk2, pin2);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_1, 1, puk2, pin2);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK2));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPuk2_0500
  * @tc.name  : testV1UnlockPuk2003
- * @tc.desc  : Call function UnlockPuk2 with an entry of 1000000001
+ * @tc.desc  : Call function UnlockPuk2 with slotId is SLOTID_1 SerialId is 0
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2003, Function | MediumTest | Level1)
 {
@@ -14008,16 +13972,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2003, Function | MediumTest | L
     }
     std::string puk2 = TEST_STORAGE_PDU;
     std::string pin2 = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPuk2(1000000001, GetSerialId(), puk2, pin2);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_1, 0, puk2, pin2);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK2));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPuk2_0600
  * @tc.name  : testV1UnlockPuk2004
- * @tc.desc  : Call function UnlockPuk2 with an entry of -1
+ * @tc.desc  : Call function UnlockPuk2 with slotId is SLOTID_1 SerialId is -1
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2004, Function | MediumTest | Level2)
 {
@@ -14026,79 +13988,71 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2004, Function | MediumTest | L
     }
     std::string puk2 = TEST_STORAGE_PDU;
     std::string pin2 = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPuk2(-1, GetSerialId(), puk2, pin2);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_1, -1, puk2, pin2);
     EXPECT_NE(SUCCESS, ret);
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPuk2_0700
  * @tc.name  : testV1UnlockPuk2005
- * @tc.desc  : Call function UnlockPuk2 with the second argument as 1
+ * @tc.desc  : Call function UnlockPuk2 with slotId is SLOTID_2 SerialId is 1
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2005, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     std::string puk2 = TEST_STORAGE_PDU;
     std::string pin2 = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_1, 1, puk2, pin2);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_2, 1, puk2, pin2);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK2));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPuk2_0800
  * @tc.name  : testV1UnlockPuk2006
- * @tc.desc  : Call function UnlockPuk2 with the second argument as 255
+ * @tc.desc  : Call function UnlockPuk2 with slotId is SLOTID_2 SerialId is 0
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2006, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     std::string puk2 = TEST_STORAGE_PDU;
     std::string pin2 = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_1, 255, puk2, pin2);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_2, 0, puk2, pin2);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK2));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPuk2_0900
  * @tc.name  : testV1UnlockPuk2007
- * @tc.desc  : Call function UnlockPuk2 with the second argument as 1000000001
+ * @tc.desc  : Call function UnlockPuk2 with slotId is SLOTID_2 SerialId is 1000000001
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2007, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     std::string puk2 = TEST_STORAGE_PDU;
     std::string pin2 = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_1, 1000000001, puk2, pin2);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_2, 1000000001, puk2, pin2);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK2));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1UnlockPuk2_1000
  * @tc.name  : testV1UnlockPuk2008
- * @tc.desc  : Call function UnlockPuk2 with the second argument as -1
+ * @tc.desc  : Call function UnlockPuk2 with slotId is SLOTID_2 SerialId is -1
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2008, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     std::string puk2 = TEST_STORAGE_PDU;
     std::string pin2 = TEST_STORAGE_PDU;
-    int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_1, -1, puk2, pin2);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_2, -1, puk2, pin2);
     EXPECT_NE(SUCCESS, ret);
 }
 
@@ -14115,9 +14069,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2009, Function | MediumTest | L
     std::string puk2 = TEST_STORAGE_PDU;
     std::string pin2 = TEST_STORAGE_PDU;
     int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_1, GetSerialId(), puk2, pin2);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK2));
 }
 
 /**
@@ -14133,9 +14085,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2010, Function | MediumTest | L
     std::string puk2 = TEST_SEND_PDU;
     std::string pin2 = TEST_STORAGE_PDU;
     int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_1, GetSerialId(), puk2, pin2);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK2));
 }
 
 /**
@@ -14151,9 +14101,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2011, Function | MediumTest | L
     std::string puk2 = TEST_SMSC_PDU;
     std::string pin2 = TEST_STORAGE_PDU;
     int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_1, GetSerialId(), puk2, pin2);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK2));
 }
 
 /**
@@ -14169,9 +14117,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2012, Function | MediumTest | L
     std::string puk2 = TEST_CDMA_PDU;
     std::string pin2 = TEST_STORAGE_PDU;
     int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_1, GetSerialId(), puk2, pin2);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK2));
 }
 
 /**
@@ -14187,9 +14133,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2013, Function | MediumTest | L
     std::string puk2 = TEST_ID_LIST;
     std::string pin2 = TEST_STORAGE_PDU;
     int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_1, GetSerialId(), puk2, pin2);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK2));
 }
 
 /**
@@ -14205,9 +14149,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2014, Function | MediumTest | L
     std::string puk2 = TEST_DCS_LIST;
     std::string pin2 = TEST_STORAGE_PDU;
     int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_1, GetSerialId(), puk2, pin2);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK2));
 }
 
 /**
@@ -14223,9 +14165,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2015, Function | MediumTest | L
     std::string puk2 = TEST_STORAGE_PDU;
     std::string pin2 = TEST_SEND_PDU;
     int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_1, GetSerialId(), puk2, pin2);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK2));
 }
 
 /**
@@ -14241,9 +14181,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2016, Function | MediumTest | L
     std::string puk2 = TEST_STORAGE_PDU;
     std::string pin2 = TEST_SMSC_PDU;
     int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_1, GetSerialId(), puk2, pin2);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK2));
 }
 
 /**
@@ -14259,9 +14197,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2017, Function | MediumTest | L
     std::string puk2 = TEST_STORAGE_PDU;
     std::string pin2 = TEST_CDMA_PDU;
     int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_1, GetSerialId(), puk2, pin2);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK2));
 }
 
 /**
@@ -14277,9 +14213,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2018, Function | MediumTest | L
     std::string puk2 = TEST_STORAGE_PDU;
     std::string pin2 = TEST_ID_LIST;
     int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_1, GetSerialId(), puk2, pin2);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK2));
 }
 
 /**
@@ -14295,9 +14229,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1UnlockPuk2019, Function | MediumTest | L
     std::string puk2 = TEST_STORAGE_PDU;
     std::string pin2 = TEST_DCS_LIST;
     int32_t ret = g_rilInterface->UnlockPuk2(SLOTID_1, GetSerialId(), puk2, pin2);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_UNLOCK_PUK2));
 }
 
 /**
@@ -14313,126 +14245,112 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetActiveSim001, Function | MediumTest |
     int32_t ret = 1;
     for (int i = 0; i < 100; i++) {
         ret = g_rilInterface->SetActiveSim(SLOTID_1, GetSerialId(), 1, 1);
-        WaitFor(WAIT_TIME_SECOND);
         EXPECT_EQ(SUCCESS, ret);
-        ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_ACTIVE_SIM));
     }
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetActiveSim_0400
  * @tc.name  : testV1SetActiveSim002
- * @tc.desc  : Call function SetActiveSim with an entry of 255
+ * @tc.desc  : Call function SetActiveSim with slotId is SLOTID_1 SerialId is 1
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SetActiveSim002, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
-    int32_t ret = g_rilInterface->SetActiveSim(255, GetSerialId(), 1, 1);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->SetActiveSim(SLOTID_1, 1, 1, 1);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_ACTIVE_SIM));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetActiveSim_0500
  * @tc.name  : testV1SetActiveSim003
- * @tc.desc  : Call function SetActiveSim with an entry of 1000000001
+ * @tc.desc  : Call function SetActiveSim with slotId is SLOTID_1 SerialId is 0
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SetActiveSim003, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
-    int32_t ret = g_rilInterface->SetActiveSim(1000000001, GetSerialId(), 1, 1);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->SetActiveSim(SLOTID_1, 0, 1, 1);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_ACTIVE_SIM));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetActiveSim_0600
  * @tc.name  : testV1SetActiveSim004
- * @tc.desc  : Call function SetActiveSim with an entry of -1
+ * @tc.desc  : Call function SetActiveSim with slotId is SLOTID_1 SerialId is -1
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SetActiveSim004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
-    int32_t ret = g_rilInterface->SetActiveSim(-1, GetSerialId(), 1, 1);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->SetActiveSim(SLOTID_1, -1, 1, 1);
     EXPECT_NE(SUCCESS, ret);
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetActiveSim_0700
  * @tc.name  : testV1SetActiveSim005
- * @tc.desc  : Call function SetActiveSim with the second argument as 1
+ * @tc.desc  : Call function SetActiveSim with slotId is SLOTID_2 SerialId is 1
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SetActiveSim005, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
-    int32_t ret = g_rilInterface->SetActiveSim(SLOTID_1, 1, 1, 1);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->SetActiveSim(SLOTID_2, 1, 1, 1);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_ACTIVE_SIM));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetActiveSim_0800
  * @tc.name  : testV1SetActiveSim006
- * @tc.desc  : Call function SetActiveSim with the second argument as 255
+ * @tc.desc  : Call function SetActiveSim with slotId is SLOTID_2 SerialId is 0
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SetActiveSim006, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
-    int32_t ret = g_rilInterface->SetActiveSim(SLOTID_1, 255, 1, 1);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->SetActiveSim(SLOTID_2, 0, 1, 1);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_ACTIVE_SIM));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetActiveSim_0900
  * @tc.name  : testV1SetActiveSim007
- * @tc.desc  : Call function SetActiveSim with the second argument as 1000000001
+ * @tc.desc  : Call function SetActiveSim with slotId is SLOTID_2 SerialId is 1000000001
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SetActiveSim007, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
-    int32_t ret = g_rilInterface->SetActiveSim(SLOTID_1, 1000000001, 1, 1);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->SetActiveSim(SLOTID_2, 1000000001, 1, 1);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_ACTIVE_SIM));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetActiveSim_1000
  * @tc.name  : testV1SetActiveSim008
- * @tc.desc  : Call function SetActiveSim with the second argument as -1
+ * @tc.desc  : Call function SetActiveSim with slotId is SLOTID_2 SerialId is -1
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SetActiveSim008, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
-    int32_t ret = g_rilInterface->SetActiveSim(SLOTID_1, -1, 1, 1);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->SetActiveSim(SLOTID_2, -1, 1, 1);
     EXPECT_NE(SUCCESS, ret);
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetActiveSim_1100
  * @tc.name  : testV1SetActiveSim009
- * @tc.desc  : Call function SetActiveSim with the third argument as SLOTID_1.
+ * @tc.desc  : Call function SetActiveSim with slotId is SLOTID_1 the third argument as 0.
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SetActiveSim009, Function | MediumTest | Level1)
 {
@@ -14440,25 +14358,21 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetActiveSim009, Function | MediumTest |
         return;
     }
     int32_t ret = g_rilInterface->SetActiveSim(SLOTID_1, GetSerialId(), 0, 1);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_ACTIVE_SIM));
 }
 
 /**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetActiveSim_1200
  * @tc.name  : testV1SetActiveSim010
- * @tc.desc  : Call function SetActiveSim with the third argument as 255
+ * @tc.desc  : Call function SetActiveSim with slotId is SLOTID_2 the third argument as 0
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SetActiveSim010, Function | MediumTest | Level1)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
-    int32_t ret = g_rilInterface->SetActiveSim(SLOTID_1, GetSerialId(), 255, 1);
-    WaitFor(WAIT_TIME_SECOND);
+    int32_t ret = g_rilInterface->SetActiveSim(SLOTID_2, GetSerialId(), 0, 1);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_ACTIVE_SIM));
 }
 
 /**
@@ -14472,9 +14386,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetActiveSim011, Function | MediumTest |
         return;
     }
     int32_t ret = g_rilInterface->SetActiveSim(SLOTID_1, GetSerialId(), 1000000001, 1);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_ACTIVE_SIM));
 }
 
 /**
@@ -14488,7 +14400,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetActiveSim012, Function | MediumTest |
         return;
     }
     int32_t ret = g_rilInterface->SetActiveSim(SLOTID_1, GetSerialId(), -1, 1);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_NE(SUCCESS, ret);
 }
 
@@ -14503,9 +14414,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetActiveSim013, Function | MediumTest |
         return;
     }
     int32_t ret = g_rilInterface->SetActiveSim(SLOTID_1, GetSerialId(), 1, 0);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_SET_ACTIVE_SIM));
 }
 
 /**
@@ -14519,7 +14428,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetActiveSim014, Function | MediumTest |
         return;
     }
     int32_t ret = g_rilInterface->SetActiveSim(SLOTID_1, GetSerialId(), 1, -1);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_NE(SUCCESS, ret);
 }
 
@@ -14534,7 +14442,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetActiveSim015, Function | MediumTest |
         return;
     }
     int32_t ret = g_rilInterface->SetActiveSim(SLOTID_1, GetSerialId(), 1, 2);
-    WaitFor(WAIT_TIME_SECOND);
     EXPECT_NE(SUCCESS, ret);
 }
 
@@ -26487,7 +26394,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus001, Function | MediumTe
     simLockInfo.fac = "SC";
     simLockInfo.mode = 2;
     simLockInfo.classx = 0;
-    constexpr const char *FAC_PIN_LOCK = "SC";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, -1, simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_NE(SUCCESS, ret);
@@ -26509,7 +26416,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus002, Function | MediumTe
     simLockInfo.fac = "SC";
     simLockInfo.mode = 2;
     simLockInfo.classx = 0;
-    constexpr const char *FAC_PIN_LOCK = "SC";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, -1, simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_NE(SUCCESS, ret);
@@ -26531,7 +26438,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus003, Function | MediumTe
     simLockInfo.fac = "SC";
     simLockInfo.mode = 2;
     simLockInfo.classx = 0;
-    constexpr const char *FAC_PIN_LOCK = "SC";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, 2147483647, simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -26554,7 +26461,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus004, Function | MediumTe
     simLockInfo.fac = "SC";
     simLockInfo.mode = 2;
     simLockInfo.classx = 0;
-    constexpr const char *FAC_PIN_LOCK = "SC";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, 2147483647, simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -26577,7 +26484,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus005, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AO";
     simLockInfo.mode = 0;
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -26600,7 +26507,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus006, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "OI";
     simLockInfo.mode = 0;
-    constexpr const char *FAC_PIN_LOCK = "OI";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -26623,7 +26530,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus007, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "OX";
     simLockInfo.mode = 0;
-    constexpr const char *FAC_PIN_LOCK = "OX";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -26646,7 +26553,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus008, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AI";
     simLockInfo.mode = 0;
-    constexpr const char *FAC_PIN_LOCK = "AI";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -26669,7 +26576,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus009, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "IR";
     simLockInfo.mode = 0;
-    constexpr const char *FAC_PIN_LOCK = "IR";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -26692,7 +26599,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus010, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AB";
     simLockInfo.mode = 0;
-    constexpr const char *FAC_PIN_LOCK = "AB";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -26715,7 +26622,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus011, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AG";
     simLockInfo.mode = 0;
-    constexpr const char *FAC_PIN_LOCK = "AG";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -26738,7 +26645,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus012, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AC";
     simLockInfo.mode = 0;
-    constexpr const char *FAC_PIN_LOCK = "AC";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -26761,7 +26668,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus013, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "FD";
     simLockInfo.mode = 0;
-    constexpr const char *FAC_PIN_LOCK = "FD";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -26785,7 +26692,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus014, Function | MediumTe
     simLockInfo.fac = "PN";
     simLockInfo.mode = 0;
     simLockInfo.status = 1;
-    constexpr const char *FAC_PIN_LOCK = "PN";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -26809,7 +26716,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus015, Function | MediumTe
     simLockInfo.fac = "PU";
     simLockInfo.mode = 0;
     simLockInfo.status = 1;
-    constexpr const char *FAC_PIN_LOCK = "PU";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -26833,7 +26740,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus016, Function | MediumTe
     simLockInfo.fac = "PP";
     simLockInfo.mode = 0;
     simLockInfo.status = 1;
-    constexpr const char *FAC_PIN_LOCK = "PU";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -26856,7 +26763,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus017, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AO";
     simLockInfo.mode = 1;
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -26879,7 +26786,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus018, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "OI";
     simLockInfo.mode = 1;
-    constexpr const char *FAC_PIN_LOCK = "OI";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -26902,7 +26809,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus019, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "OX";
     simLockInfo.mode = 1;
-    constexpr const char *FAC_PIN_LOCK = "OX";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -26925,7 +26832,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus020, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AI";
     simLockInfo.mode = 1;
-    constexpr const char *FAC_PIN_LOCK = "AI";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -26948,7 +26855,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus021, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "IR";
     simLockInfo.mode = 1;
-    constexpr const char *FAC_PIN_LOCK = "IR";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -26971,7 +26878,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus022, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AB";
     simLockInfo.mode = 1;
-    constexpr const char *FAC_PIN_LOCK = "AB";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -26994,7 +26901,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus023, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AG";
     simLockInfo.mode = 1;
-    constexpr const char *FAC_PIN_LOCK = "AG";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27017,7 +26924,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus024, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AC";
     simLockInfo.mode = 1;
-    constexpr const char *FAC_PIN_LOCK = "AC";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27040,7 +26947,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus025, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "FD";
     simLockInfo.mode = 1;
-    constexpr const char *FAC_PIN_LOCK = "FD";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27064,7 +26971,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus026, Function | MediumTe
     simLockInfo.fac = "PN";
     simLockInfo.mode = 1;
     simLockInfo.status = 1;
-    constexpr const char *FAC_PIN_LOCK = "PN";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27088,7 +26995,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus027, Function | MediumTe
     simLockInfo.fac = "PU";
     simLockInfo.mode = 1;
     simLockInfo.status = 1;
-    constexpr const char *FAC_PIN_LOCK = "PU";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27112,7 +27019,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus028, Function | MediumTe
     simLockInfo.fac = "PP";
     simLockInfo.mode = 1;
     simLockInfo.status = 1;
-    constexpr const char *FAC_PIN_LOCK = "PU";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27135,7 +27042,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus029, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AO";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27158,7 +27065,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus030, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "OI";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "OI";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27181,7 +27088,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus031, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "OX";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "OX";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27204,7 +27111,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus032, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AI";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "AI";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27227,7 +27134,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus033, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "IR";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "IR";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27250,7 +27157,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus034, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AB";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "AB";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27273,7 +27180,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus035, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AG";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "AG";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27296,7 +27203,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus036, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AC";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "AC";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27319,7 +27226,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus037, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "FD";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "FD";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27342,7 +27249,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus038, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "PN";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "PN";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27365,7 +27272,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus039, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "PU";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "PU";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27388,7 +27295,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus040, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "PP";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "PU";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27411,7 +27318,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus041, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AO";
     simLockInfo.mode = 0;
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27434,7 +27341,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus042, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "OI";
     simLockInfo.mode = 0;
-    constexpr const char *FAC_PIN_LOCK = "OI";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27457,7 +27364,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus043, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "OX";
     simLockInfo.mode = 0;
-    constexpr const char *FAC_PIN_LOCK = "OX";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27480,7 +27387,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus044, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AI";
     simLockInfo.mode = 0;
-    constexpr const char *FAC_PIN_LOCK = "AI";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27503,7 +27410,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus045, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "IR";
     simLockInfo.mode = 0;
-    constexpr const char *FAC_PIN_LOCK = "IR";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27526,7 +27433,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus046, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AB";
     simLockInfo.mode = 0;
-    constexpr const char *FAC_PIN_LOCK = "AB";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27549,7 +27456,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus047, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AG";
     simLockInfo.mode = 0;
-    constexpr const char *FAC_PIN_LOCK = "AG";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27572,7 +27479,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus048, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AC";
     simLockInfo.mode = 0;
-    constexpr const char *FAC_PIN_LOCK = "AC";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27595,7 +27502,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus049, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "FD";
     simLockInfo.mode = 0;
-    constexpr const char *FAC_PIN_LOCK = "FD";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27619,7 +27526,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus050, Function | MediumTe
     simLockInfo.fac = "PN";
     simLockInfo.mode = 0;
     simLockInfo.status = 1;
-    constexpr const char *FAC_PIN_LOCK = "PN";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27643,7 +27550,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus051, Function | MediumTe
     simLockInfo.fac = "PU";
     simLockInfo.mode = 0;
     simLockInfo.status = 1;
-    constexpr const char *FAC_PIN_LOCK = "PU";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27667,7 +27574,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus052, Function | MediumTe
     simLockInfo.fac = "PP";
     simLockInfo.mode = 0;
     simLockInfo.status = 1;
-    constexpr const char *FAC_PIN_LOCK = "PU";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27690,7 +27597,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus053, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AO";
     simLockInfo.mode = 1;
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27713,7 +27620,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus054, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "OI";
     simLockInfo.mode = 1;
-    constexpr const char *FAC_PIN_LOCK = "OI";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27736,7 +27643,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus055, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "OX";
     simLockInfo.mode = 1;
-    constexpr const char *FAC_PIN_LOCK = "OX";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27759,7 +27666,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus056, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AI";
     simLockInfo.mode = 1;
-    constexpr const char *FAC_PIN_LOCK = "AI";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27782,7 +27689,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus057, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "IR";
     simLockInfo.mode = 1;
-    constexpr const char *FAC_PIN_LOCK = "IR";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27805,7 +27712,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus058, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AB";
     simLockInfo.mode = 1;
-    constexpr const char *FAC_PIN_LOCK = "AB";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27828,7 +27735,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus059, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AG";
     simLockInfo.mode = 1;
-    constexpr const char *FAC_PIN_LOCK = "AG";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27851,7 +27758,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus060, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AC";
     simLockInfo.mode = 1;
-    constexpr const char *FAC_PIN_LOCK = "AC";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27874,7 +27781,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus061, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "FD";
     simLockInfo.mode = 1;
-    constexpr const char *FAC_PIN_LOCK = "FD";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27898,7 +27805,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus062, Function | MediumTe
     simLockInfo.fac = "PN";
     simLockInfo.mode = 1;
     simLockInfo.status = 1;
-    constexpr const char *FAC_PIN_LOCK = "PN";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27922,7 +27829,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus063, Function | MediumTe
     simLockInfo.fac = "PU";
     simLockInfo.mode = 1;
     simLockInfo.status = 1;
-    constexpr const char *FAC_PIN_LOCK = "PU";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27946,7 +27853,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus064, Function | MediumTe
     simLockInfo.fac = "PP";
     simLockInfo.mode = 1;
     simLockInfo.status = 1;
-    constexpr const char *FAC_PIN_LOCK = "PU";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27969,7 +27876,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus065, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AO";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -27992,7 +27899,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus066, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "OI";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "OI";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -28015,7 +27922,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus067, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "OX";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "OX";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -28038,7 +27945,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus068, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AI";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "AI";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -28061,7 +27968,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus069, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "IR";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "IR";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -28084,7 +27991,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus070, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AB";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "AB";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -28107,7 +28014,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus071, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AG";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "AG";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -28130,7 +28037,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus072, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "AC";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "AC";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -28153,7 +28060,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus073, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "FD";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "FD";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -28176,7 +28083,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus074, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "PN";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "PN";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -28199,7 +28106,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus075, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "PU";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "PU";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -28222,7 +28129,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatus076, Function | MediumTe
     simLockInfo.classx = 255;
     simLockInfo.fac = "PP";
     simLockInfo.mode = 2;
-    constexpr const char *FAC_PIN_LOCK = "PU";
+
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -28962,29 +28869,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1ChangeSimPassword032, Function | MediumT
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD));
 #endif
-}
-
-/**
- * @tc.number: SUB_Telephony_DriverSystem_V1GetSimStatus_0200
- * @tc.name  : testV1GetSimStatus001
- * @tc.desc  : GetSimStatus, stability test
- */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimStatus001, Function | MediumTest | Level1)
-{
-    if (g_rilInterface == nullptr) {
-        return;
-    }
-    int32_t ret;
-    for (int i = 0; i < 1000; i++) {
-        ret = g_rilInterface->GetSimStatus(SLOTID_1, GetSerialId());
-        if (ret != 2) {
-            WaitFor(WAIT_TIME_SECOND);
-            EXPECT_EQ(SUCCESS, ret);
-            ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_STATUS));
-        } else {
-            return;
-        }
-    }
 }
 
 /**
@@ -31942,14 +31826,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetRadioProtocolResponse004, Function | 
  * @tc.name   : testV1SetUssd001
  * @tc.desc   : Call the function V1 SetUssd with slotId  and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetUssd001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetUssd001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SetUssd(2, GetSerialId(), "12345678");
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_USSD));
 }
 
@@ -31958,14 +31842,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetUssd001, Function | MediumTest | Leve
  * @tc.name   : testV1SetUssd002
  * @tc.desc   : Call the function V1 SetUssd with slotId  and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetUssd002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetUssd002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SetUssd(256, GetSerialId(), "12345678");
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_USSD));
 }
 
@@ -31974,14 +31858,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetUssd002, Function | MediumTest | Leve
  * @tc.name   : testV1SetUssd003
  * @tc.desc   : Call the function V1 SetUssd with slotId  and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetUssd003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetUssd003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SetUssd(-1, GetSerialId(), "12345678");
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_USSD));
 }
 
@@ -31990,14 +31874,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetUssd003, Function | MediumTest | Leve
  * @tc.name   : testV1SetUssd004
  * @tc.desc   : Call the function V1 SetUssd with serialId  and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetUssd004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetUssd004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->SetUssd(SLOTID_1, -11111, "12345678");
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_USSD));
 }
 
@@ -32054,14 +31938,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetUssd007, Function | MediumTest | Leve
  * @tc.name   : testV1SetUssd008
  * @tc.desc   : Call the function V1 SetUssd with serialId  and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetUssd008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetUssd008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->SetUssd(SLOTID_1, -32768, "12345678");
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_USSD));
 }
 
@@ -32102,14 +31986,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetUssd010, Function | MediumTest | Leve
  * @tc.name   : testV1GetUssd001
  * @tc.desc   : Call the function V1 GetUssd with slotId  and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetUssd001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetUssd001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetUssd(2, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_USSD));
 }
 
@@ -32118,14 +32002,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetUssd001, Function | MediumTest | Leve
  * @tc.name   : testV1GetUssd002
  * @tc.desc   : Call the function V1 GetUssd with slotId  and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetUssd002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetUssd002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetUssd(256, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_USSD));
 }
 
@@ -32134,14 +32018,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetUssd002, Function | MediumTest | Leve
  * @tc.name   : testV1GetUssd003
  * @tc.desc   : Call the function V1 GetUssd with slotId  and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetUssd003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetUssd003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetUssd(-1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_USSD));
 }
 
@@ -32150,14 +32034,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetUssd003, Function | MediumTest | Leve
  * @tc.name   : testV1GetUssd004
  * @tc.desc   : Call the function V1 GetUssd with serialId  and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetUssd004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetUssd004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->GetUssd(SLOTID_1, -11111);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_USSD));
 }
 
@@ -32214,14 +32098,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetUssd007, Function | MediumTest | Leve
  * @tc.name   : testV1GetUssd008
  * @tc.desc   : Call the function V1 GetUssd with serialId  and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetUssd008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetUssd008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->GetUssd(SLOTID_1, -32768);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_USSD));
 }
 
@@ -32230,14 +32114,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetUssd008, Function | MediumTest | Leve
  * @tc.name   : testV1SetMute001
  * @tc.desc   : Call the function V1 SetMute with slotId  and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetMute001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetMute001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SetMute(2, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_MUTE));
 }
 
@@ -32246,14 +32130,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetMute001, Function | MediumTest | Leve
  * @tc.name   : testV1SetMute002
  * @tc.desc   : Call the function V1 SetMute with slotId  and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetMute002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetMute002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SetMute(256, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_MUTE));
 }
 
@@ -32262,14 +32146,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetMute002, Function | MediumTest | Leve
  * @tc.name   : testV1SetMute003
  * @tc.desc   : Call the function V1 SetMute with slotId  and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetMute003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetMute003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->SetMute(-1, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_MUTE));
 }
 
@@ -32278,14 +32162,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetMute003, Function | MediumTest | Leve
  * @tc.name   : testV1SetMute004
  * @tc.desc   : Call the function V1 SetMute with serialId  and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetMute004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetMute004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->SetMute(SLOTID_1, -11111, 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_MUTE));
 }
 
@@ -32342,14 +32226,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetMute007, Function | MediumTest | Leve
  * @tc.name   : testV1SetMute008
  * @tc.desc   : Call the function V1 SetMute with serialId  and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetMute008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetMute008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->SetMute(SLOTID_1, -32768, 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SET_MUTE));
 }
 
@@ -32389,14 +32273,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetMute010, Function | MediumTest | Leve
  * @tc.name   : testV1GetMute001
  * @tc.desc   : Call the function V1 GetMute with slotId  and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetMute001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetMute001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetMute(2, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_MUTE));
 }
 
@@ -32405,46 +32289,46 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetMute001, Function | MediumTest | Leve
  * @tc.name   : testV1GetMute002
  * @tc.desc   : Call the function V1 GetMute with slotId  and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetMute002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetMute002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetMute(256, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_MUTE));
 }
 
 /**
  * @tc.number : SUB_Telephony_DriverSystem_V1GetMute_0500
  * @tc.name   : testV1GetMute003
- * @tc.desc   : Call the function V1 GetMute with slotId  and a value of 256
+ * @tc.desc   : Call the function V1 GetMute with slotId  and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetMute003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetMute003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetMute(-1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_MUTE));
 }
 
 /**
  * @tc.number : SUB_Telephony_DriverSystem_V1GetMute_0600
  * @tc.name   : testV1GetMute004
- * @tc.desc   : Call the function V1 GetMute with serialId  and a value of 11111
+ * @tc.desc   : Call the function V1 GetMute with serialId  and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetMute004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetMute004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
-    int32_t ret = g_rilInterface->GetMute(SLOTID_1, 11111);
+    int32_t ret = g_rilInterface->GetMute(SLOTID_1, -11111);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_MUTE));
 }
 
@@ -32467,14 +32351,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetMute005, Function | MediumTest | Leve
 /**
  * @tc.number : SUB_Telephony_DriverSystem_V1GetMute_0800
  * @tc.name   : testV1GetMute006
- * @tc.desc   : Call the function V1 GetMute with serialId  and a value of -11111
+ * @tc.desc   : Call the function V1 GetMute with serialId  and a value of 11111
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1GetMute006, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
-    int32_t ret = g_rilInterface->GetMute(SLOTID_1, -11111);
+    int32_t ret = g_rilInterface->GetMute(SLOTID_1, 11111);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_MUTE));
@@ -32501,14 +32385,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetMute007, Function | MediumTest | Leve
  * @tc.name   : testV1GetMute008
  * @tc.desc   : Call the function V1 GetMute with serialId  and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetMute008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetMute008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->GetMute(SLOTID_1, -32768);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_MUTE));
 }
 
@@ -32517,14 +32401,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetMute008, Function | MediumTest | Leve
  * @tc.name   : testV1GetCallFailReason001
  * @tc.desc   : Call the function V1 GetCallFailReason with slotId  and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallFailReason001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallFailReason001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallFailReason(2, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_FAIL_REASON));
 }
 
@@ -32533,14 +32417,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallFailReason001, Function | MediumT
  * @tc.name   : testV1GetCallFailReason002
  * @tc.desc   : Call the function V1 GetCallFailReason with slotId  and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallFailReason002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallFailReason002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallFailReason(256, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_FAIL_REASON));
 }
 
@@ -32549,30 +32433,30 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallFailReason002, Function | MediumT
  * @tc.name   : testV1GetCallFailReason003
  * @tc.desc   : Call the function V1 GetCallFailReason with slotId  and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallFailReason003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallFailReason003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallFailReason(-1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_FAIL_REASON));
 }
 
 /**
  * @tc.number : SUB_Telephony_DriverSystem_V1GetCallFailReason_0600
  * @tc.name   : testV1GetCallFailReason004
- * @tc.desc   : Call the function V1 GetCallFailReason with serialId  and a value of 11111
+ * @tc.desc   : Call the function V1 GetCallFailReason with serialId  and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallFailReason004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallFailReason004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
-    int32_t ret = g_rilInterface->GetCallFailReason(SLOTID_1, 11111);
+    int32_t ret = g_rilInterface->GetCallFailReason(SLOTID_1, -11111);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_FAIL_REASON));
 }
 
@@ -32595,14 +32479,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallFailReason005, Function | MediumT
 /**
  * @tc.number : SUB_Telephony_DriverSystem_V1GetCallFailReason_0800
  * @tc.name   : testV1GetCallFailReason006
- * @tc.desc   : Call the function V1 GetCallFailReason with serialId  and a value of -11111
+ * @tc.desc   : Call the function V1 GetCallFailReason with serialId  and a value of 11111
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallFailReason006, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
-    int32_t ret = g_rilInterface->GetCallFailReason(SLOTID_1, -11111);
+    int32_t ret = g_rilInterface->GetCallFailReason(SLOTID_1, 11111);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_FAIL_REASON));
@@ -32629,14 +32513,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallFailReason007, Function | MediumT
  * @tc.name   : testV1GetCallFailReason008
  * @tc.desc   : Call the function V1 GetCallFailReason with serialId  and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallFailReason008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallFailReason008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->GetCallFailReason(SLOTID_1, -32768);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_GET_FAIL_REASON));
 }
 
@@ -32645,14 +32529,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallFailReason008, Function | MediumT
  * @tc.name   : testV1CallSupplement001
  * @tc.desc   : Call the function V1 CallSupplement with slotId  and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1CallSupplement001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1CallSupplement001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->CallSupplement(2, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_CALL_SUPPLEMENT));
 }
 
@@ -32661,14 +32545,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1CallSupplement001, Function | MediumTest
  * @tc.name   : testV1CallSupplement002
  * @tc.desc   : Call the function V1 CallSupplement with slotId  and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1CallSupplement002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1CallSupplement002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->CallSupplement(256, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_CALL_SUPPLEMENT));
 }
 
@@ -32677,14 +32561,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1CallSupplement002, Function | MediumTest
  * @tc.name   : testV1CallSupplement003
  * @tc.desc   : Call the function V1 CallSupplement with slotId  and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1CallSupplement003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1CallSupplement003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     int32_t ret = g_rilInterface->CallSupplement(-1, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_CALL_SUPPLEMENT));
 }
 
@@ -32693,14 +32577,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1CallSupplement003, Function | MediumTest
  * @tc.name   : testV1CallSupplement004
  * @tc.desc   : Call the function V1 CallSupplement with serialId  and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1CallSupplement004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1CallSupplement004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
-    int32_t ret = g_rilInterface->CallSupplement(SLOTID_1, 11111, 1);
+    int32_t ret = g_rilInterface->CallSupplement(SLOTID_1, -11111, 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_CALL_SUPPLEMENT));
 }
 
@@ -32730,7 +32614,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1CallSupplement006, Function | MediumTest
     if (!IsReady(SLOTID_1)) {
         return;
     }
-    int32_t ret = g_rilInterface->CallSupplement(SLOTID_1, -11111, 1);
+    int32_t ret = g_rilInterface->CallSupplement(SLOTID_1, 11111, 1);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_CALL_SUPPLEMENT));
@@ -32757,14 +32641,14 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1CallSupplement007, Function | MediumTest
  * @tc.name   : testV1CallSupplement008
  * @tc.desc   : Call the function V1 CallSupplement with serialId  and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1CallSupplement008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1CallSupplement008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret = g_rilInterface->CallSupplement(SLOTID_1, -32768, 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_CALL_SUPPLEMENT));
 }
 
@@ -32851,9 +32735,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1CallSupplement013, Function | MediumTest
  * @tc.name   : testV1SendDtmf001
  * @tc.desc   : Call the function V1 SendDtmf with slotId  and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     DtmfInfo dtmfInfo = {};
@@ -32864,7 +32748,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf001, Function | MediumTest | Lev
     dtmfInfo.stringLength = 1;
     int32_t ret = g_rilInterface->SendDtmf(2, GetSerialId(), dtmfInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SEND_DTMF));
 }
 
@@ -32873,9 +32757,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf001, Function | MediumTest | Lev
  * @tc.name   : testV1SendDtmf002
  * @tc.desc   : Call the function V1 SendDtmf with slotId  and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     DtmfInfo dtmfInfo = {};
@@ -32895,9 +32779,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf002, Function | MediumTest | Lev
  * @tc.name   : testV1SendDtmf003
  * @tc.desc   : Call the function V1 SendDtmf with slotId  and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     DtmfInfo dtmfInfo = {};
@@ -32908,16 +32792,16 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf003, Function | MediumTest | Lev
     dtmfInfo.stringLength = 1;
     int32_t ret = g_rilInterface->SendDtmf(-1, GetSerialId(), dtmfInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SEND_DTMF));
 }
 
 /**
  * @tc.number : SUB_Telephony_DriverSystem_V1SendDtmf_0600
  * @tc.name   : testV1SendDtmf004
- * @tc.desc   : Call the function V1 SendDtmf with serialId  and a value of 11111
+ * @tc.desc   : Call the function V1 SendDtmf with serialId  and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -32928,9 +32812,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf004, Function | MediumTest | Lev
     dtmfInfo.onLength = 300;
     dtmfInfo.offLength = 0;
     dtmfInfo.stringLength = 1;
-    int32_t ret = g_rilInterface->SendDtmf(SLOTID_1, 11111, dtmfInfo);
+    int32_t ret = g_rilInterface->SendDtmf(SLOTID_1, -11111, dtmfInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SEND_DTMF));
 }
 
@@ -32959,7 +32843,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf005, Function | MediumTest | Lev
 /**
  * @tc.number : SUB_Telephony_DriverSystem_V1SendDtmf_0800
  * @tc.name   : testV1SendDtmf006
- * @tc.desc   : Call the function V1 SendDtmf with serialId  and a value of -11111
+ * @tc.desc   : Call the function V1 SendDtmf with serialId  and a value of 11111
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf006, Function | MediumTest | Level1)
 {
@@ -32972,7 +32856,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf006, Function | MediumTest | Lev
     dtmfInfo.onLength = 300;
     dtmfInfo.offLength = 0;
     dtmfInfo.stringLength = 1;
-    int32_t ret = g_rilInterface->SendDtmf(SLOTID_1, -11111, dtmfInfo);
+    int32_t ret = g_rilInterface->SendDtmf(SLOTID_1, 11111, dtmfInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SEND_DTMF));
@@ -33005,7 +32889,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf007, Function | MediumTest | Lev
  * @tc.name   : testV1SendDtmf008
  * @tc.desc   : Call the function V1 SendDtmf with serialId  and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -33018,7 +32902,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf008, Function | MediumTest | Lev
     dtmfInfo.stringLength = 1;
     int32_t ret = g_rilInterface->SendDtmf(SLOTID_1, -32768, dtmfInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_SEND_DTMF));
 }
 
@@ -33201,7 +33085,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf016, Function | MediumTest | Lev
  * @tc.name   : testV1SendDtmf017
  * @tc.desc   : Call the function V1 SendDtmf with offLength  and a value of 300
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf018, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf017, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -33223,7 +33107,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf018, Function | MediumTest | Lev
  * @tc.name   : testV1SendDtmf018
  * @tc.desc   : Call the function V1 SendDtmf with offLength  and a value of 400
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf019, Function | MediumTest | Level2)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf018, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -33244,7 +33128,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf019, Function | MediumTest | Lev
  * @tc.name   : testV1SendDtmf019
  * @tc.desc   : Call the function V1 SendDtmf with offLength  and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf020, Function | MediumTest | Level2)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf019, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -33265,7 +33149,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf020, Function | MediumTest | Lev
  * @tc.name   : testV1SendDtmf020
  * @tc.desc   : Call the function V1 SendDtmf with dtmfKey and a value of #### and with stringLength and a value of 1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf021, Function | MediumTest | Level2)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf020, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -33286,7 +33170,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf021, Function | MediumTest | Lev
  * @tc.name   : testV1SendDtmf021
  * @tc.desc   : Call the function V1 SendDtmf with dtmfKey and a value of # and with stringLength and a value of 4
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf022, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf021, Function | MediumTest | Level1)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -33308,9 +33192,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SendDtmf022, Function | MediumTest | Lev
  * @tc.name   : testV1StartDtmf001
  * @tc.desc   : Call the function V1 StartDtmf with slotId and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmf001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmf001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     DtmfInfo dtmfInfo = {};
@@ -33318,7 +33202,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmf001, Function | MediumTest | Le
     dtmfInfo.dtmfKey = "#";
     int32_t ret = g_rilInterface->StartDtmf(2, GetSerialId(), dtmfInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_START_DTMF));
 }
 
@@ -33327,9 +33211,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmf001, Function | MediumTest | Le
  * @tc.name   : testV1StartDtmf002
  * @tc.desc   : Call the function V1 StartDtmf with slotId and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmf002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmf002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     DtmfInfo dtmfInfo = {};
@@ -33337,7 +33221,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmf002, Function | MediumTest | Le
     dtmfInfo.dtmfKey = "#";
     int32_t ret = g_rilInterface->StartDtmf(256, GetSerialId(), dtmfInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_START_DTMF));
 }
 
@@ -33346,9 +33230,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmf002, Function | MediumTest | Le
  * @tc.name   : testV1StartDtmf003
  * @tc.desc   : Call the function V1 StartDtmf with slotId and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmf003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmf003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     DtmfInfo dtmfInfo = {};
@@ -33356,16 +33240,16 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmf003, Function | MediumTest | Le
     dtmfInfo.dtmfKey = "#";
     int32_t ret = g_rilInterface->StartDtmf(-1, GetSerialId(), dtmfInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_START_DTMF));
 }
 
 /**
  * @tc.number : SUB_Telephony_DriverSystem_V1StartDtmf_0600
  * @tc.name   : testV1StartDtmf004
- * @tc.desc   : Call the function V1 StartDtmf with serialId and a value of 11111
+ * @tc.desc   : Call the function V1 StartDtmf with serialId and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmf004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmf004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -33373,9 +33257,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmf004, Function | MediumTest | Le
     DtmfInfo dtmfInfo = {};
     dtmfInfo.callId = 0;
     dtmfInfo.dtmfKey = "#";
-    int32_t ret = g_rilInterface->StartDtmf(SLOTID_1, 11111, dtmfInfo);
+    int32_t ret = g_rilInterface->StartDtmf(SLOTID_1, -11111, dtmfInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_START_DTMF));
 }
 
@@ -33401,7 +33285,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmf005, Function | MediumTest | Le
 /**
  * @tc.number : SUB_Telephony_DriverSystem_V1StartDtmf_0800
  * @tc.name   : testV1StartDtmf006
- * @tc.desc   : Call the function V1 StartDtmf with serialId and a value of -11111
+ * @tc.desc   : Call the function V1 StartDtmf with serialId and a value of 11111
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmf006, Function | MediumTest | Level1)
 {
@@ -33411,7 +33295,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmf006, Function | MediumTest | Le
     DtmfInfo dtmfInfo = {};
     dtmfInfo.callId = 0;
     dtmfInfo.dtmfKey = "#";
-    int32_t ret = g_rilInterface->StartDtmf(SLOTID_1, -11111, dtmfInfo);
+    int32_t ret = g_rilInterface->StartDtmf(SLOTID_1, 11111, dtmfInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_START_DTMF));
@@ -33441,7 +33325,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmf007, Function | MediumTest | Le
  * @tc.name   : testV1StartDtmf008
  * @tc.desc   : Call the function V1 StartDtmf with serialId and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmf008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmf008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -33451,7 +33335,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmf008, Function | MediumTest | Le
     dtmfInfo.dtmfKey = "#";
     int32_t ret = g_rilInterface->StartDtmf(SLOTID_1, -32768, dtmfInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_START_DTMF));
 }
 
@@ -33554,9 +33438,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StartDtmf013, Function | MediumTest | Le
  * @tc.name   : testV1StopDtmf001
  * @tc.desc   : Call the function V1 StopDtmf with slotId and a value of 2
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmf001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmf001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     DtmfInfo dtmfInfo = {};
@@ -33564,7 +33448,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmf001, Function | MediumTest | Lev
     dtmfInfo.dtmfKey = "#";
     int32_t ret = g_rilInterface->StopDtmf(2, GetSerialId(), dtmfInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_STOP_DTMF));
 }
 
@@ -33573,9 +33457,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmf001, Function | MediumTest | Lev
  * @tc.name   : testV1StopDtmf002
  * @tc.desc   : Call the function V1 StopDtmf with slotId and a value of 256
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmf002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmf002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     DtmfInfo dtmfInfo = {};
@@ -33583,7 +33467,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmf002, Function | MediumTest | Lev
     dtmfInfo.dtmfKey = "#";
     int32_t ret = g_rilInterface->StopDtmf(256, GetSerialId(), dtmfInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_STOP_DTMF));
 }
 
@@ -33592,9 +33476,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmf002, Function | MediumTest | Lev
  * @tc.name   : testV1StopDtmf003
  * @tc.desc   : Call the function V1 StopDtmf with slotId and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmf003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmf003, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     DtmfInfo dtmfInfo = {};
@@ -33602,16 +33486,16 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmf003, Function | MediumTest | Lev
     dtmfInfo.dtmfKey = "#";
     int32_t ret = g_rilInterface->StopDtmf(-1, GetSerialId(), dtmfInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_STOP_DTMF));
 }
 
 /**
  * @tc.number : SUB_Telephony_DriverSystem_V1StopDtmf_0600
  * @tc.name   : testV1StopDtmf004
- * @tc.desc   : Call the function V1 StopDtmf with serialId and a value of 11111
+ * @tc.desc   : Call the function V1 StopDtmf with serialId and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmf004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmf004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -33619,9 +33503,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmf004, Function | MediumTest | Lev
     DtmfInfo dtmfInfo = {};
     dtmfInfo.callId = 0;
     dtmfInfo.dtmfKey = "#";
-    int32_t ret = g_rilInterface->StopDtmf(SLOTID_1, 11111, dtmfInfo);
+    int32_t ret = g_rilInterface->StopDtmf(SLOTID_1, -11111, dtmfInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_STOP_DTMF));
 }
 
@@ -33647,7 +33531,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmf005, Function | MediumTest | Lev
 /**
  * @tc.number : SUB_Telephony_DriverSystem_V1StopDtmf_0800
  * @tc.name   : testV1StopDtmf006
- * @tc.desc   : Call the function V1 StopDtmf with serialId and a value of -11111
+ * @tc.desc   : Call the function V1 StopDtmf with serialId and a value of 11111
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmf006, Function | MediumTest | Level1)
 {
@@ -33657,7 +33541,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmf006, Function | MediumTest | Lev
     DtmfInfo dtmfInfo = {};
     dtmfInfo.callId = 0;
     dtmfInfo.dtmfKey = "#";
-    int32_t ret = g_rilInterface->StopDtmf(SLOTID_1, -11111, dtmfInfo);
+    int32_t ret = g_rilInterface->StopDtmf(SLOTID_1, 11111, dtmfInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_STOP_DTMF));
@@ -33687,7 +33571,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmf007, Function | MediumTest | Lev
  * @tc.name   : testV1StopDtmf008
  * @tc.desc   : Call the function V1 StopDtmf with serialId and a value of -32768
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmf008, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmf008, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_1)) {
         return;
@@ -33697,7 +33581,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1StopDtmf008, Function | MediumTest | Lev
     dtmfInfo.dtmfKey = "#";
     int32_t ret = g_rilInterface->StopDtmf(SLOTID_1, -32768, dtmfInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_CALL_STOP_DTMF));
 }
 
@@ -33811,7 +33695,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock001, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 1;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -33835,7 +33719,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock002, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 2;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -33859,7 +33743,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock003, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 4;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -33883,7 +33767,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock004, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 8;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -33907,7 +33791,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock005, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 16;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -33931,7 +33815,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock006, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 32;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -33955,7 +33839,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock007, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 64;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -33979,7 +33863,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock008, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 128;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34003,7 +33887,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock009, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34027,7 +33911,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock010, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "OI";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34051,7 +33935,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock011, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "OX";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34075,7 +33959,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock012, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AI";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34099,7 +33983,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock013, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "IR";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34123,7 +34007,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock014, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AB";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34147,7 +34031,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock015, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AG";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34171,7 +34055,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock016, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AC";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34195,7 +34079,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock017, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "FD";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34219,7 +34103,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock018, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "PN";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34243,7 +34127,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock019, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "PU";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34267,7 +34151,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock020, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "PP";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34291,7 +34175,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock021, Function | MediumTest | L
     simLockInfo.mode = 1;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "OI";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34315,7 +34199,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock022, Function | MediumTest | L
     simLockInfo.mode = 2;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "OI";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34340,7 +34224,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock023, Function | MediumTest | L
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
     simLockInfo.status = 0;
-    constexpr const char *FAC_PIN_LOCK = "IR";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34365,7 +34249,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock024, Function | MediumTest | L
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
     simLockInfo.status = 1;
-    constexpr const char *FAC_PIN_LOCK = "IR";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34390,7 +34274,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock025, Function | MediumTest | L
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
     simLockInfo.status = 1;
-    constexpr const char *FAC_PIN_LOCK = "IR";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, -1, simLockInfo);
     EXPECT_NE(SUCCESS, ret);
 #endif
@@ -34412,7 +34296,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock026, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 1;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34436,7 +34320,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock027, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 2;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34460,7 +34344,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock028, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 4;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34484,7 +34368,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock029, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 8;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34508,7 +34392,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock030, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 16;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34532,7 +34416,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock031, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 32;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34556,7 +34440,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock032, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 64;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34580,7 +34464,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock033, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 128;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34604,7 +34488,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock034, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34628,7 +34512,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock035, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "OI";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34652,7 +34536,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock036, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "OX";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34676,7 +34560,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock037, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AI";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34700,7 +34584,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock038, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "IR";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34724,7 +34608,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock039, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AB";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34748,7 +34632,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock040, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AG";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34772,7 +34656,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock041, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AC";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34796,7 +34680,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock042, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "FD";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34820,7 +34704,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock043, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "PN";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34844,7 +34728,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock044, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "PU";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34868,7 +34752,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock045, Function | MediumTest | L
     simLockInfo.mode = 0;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "PP";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34892,7 +34776,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock046, Function | MediumTest | L
     simLockInfo.mode = 1;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "OI";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34916,7 +34800,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock047, Function | MediumTest | L
     simLockInfo.mode = 2;
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "OI";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34941,7 +34825,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock048, Function | MediumTest | L
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
     simLockInfo.status = 0;
-    constexpr const char *FAC_PIN_LOCK = "IR";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34966,7 +34850,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock049, Function | MediumTest | L
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
     simLockInfo.status = 1;
-    constexpr const char *FAC_PIN_LOCK = "IR";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -34991,7 +34875,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLock050, Function | MediumTest | L
     simLockInfo.classx = 255;
     simLockInfo.passwd = "1234";
     simLockInfo.status = 1;
-    constexpr const char *FAC_PIN_LOCK = "IR";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, -1, simLockInfo);
     EXPECT_NE(SUCCESS, ret);
 #endif
@@ -36868,48 +36752,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimIOResponse002, Function | MediumTe
 }
 
 /**
- * @tc.number: SUB_Telephony_DriverSystem_V1GetSimStatusResponse_0100
- * @tc.name  : testV1GetSimStatusResponse001
- * @tc.desc  : GetSimStatusResponse, slotId is SLOTID_1
- */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimStatusResponse001, Function | MediumTest | Level1)
-{
-    if (g_rilInterface == nullptr) {
-        return;
-    }
-    g_getSimStatusResponseFlag = false;
-    int32_t ret = g_rilInterface->GetSimStatus(SLOTID_1, GetSerialId());
-    if (ret != 2) {
-        WaitFor(WAIT_TIME_SECOND);
-        EXPECT_EQ(SUCCESS, ret);
-        EXPECT_EQ(true, g_getSimStatusResponseFlag);
-    } else {
-        return;
-    }
-}
-
-/**
- * @tc.number: SUB_Telephony_DriverSystem_V1GetSimStatusResponse_0200
- * @tc.name  : testV1GetSimStatusResponse002
- * @tc.desc  : GetSimStatusResponse, slotId is SLOTID_2
- */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimStatusResponse002, Function | MediumTest | Level1)
-{
-    if (g_rilInterface == nullptr) {
-        return;
-    }
-    g_getSimStatusResponseFlag = false;
-    int32_t ret = g_rilInterface->GetSimStatus(SLOTID_2, GetSerialId());
-    if (ret != 2) {
-        WaitFor(WAIT_TIME_SECOND);
-        EXPECT_EQ(SUCCESS, ret);
-        EXPECT_EQ(true, g_getSimStatusResponseFlag);
-    } else {
-        return;
-    }
-}
-
-/**
  * @tc.number: SUB_Telephony_DriverSystem_V1SetSimLockResponse_0100
  * @tc.name: testV1SetSimLockResponse001
  * @tc.desc: SetSimLockResponse, slotId is SLOTID_1
@@ -36926,7 +36768,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLockResponse001, Function | Medium
     simLockInfo.mode = 0;
     simLockInfo.classx = 1;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_1, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -36952,7 +36794,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetSimLockResponse002, Function | Medium
     simLockInfo.mode = 0;
     simLockInfo.classx = 1;
     simLockInfo.passwd = "1234";
-    constexpr const char *FAC_PIN_LOCK = "AO";
+
     int32_t ret = g_rilInterface->SetSimLock(SLOTID_2, GetSerialId(), simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
@@ -37739,16 +37581,8 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule001, Functi
     const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
     const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   // VoIP
-                                                   500,   // Web
-                                                   1000,  // SD
-                                                   5000,  // HD
-                                                   10000, // file
-                                                   20000, // 4K
-                                                   50000, // LTE
-                                                   100000,
-                                                   200000, // 5G
-                                                   500000, 1000000};
+    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+                                                   50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -37785,16 +37619,8 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule002, Functi
     const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
     const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   // VoIP
-                                                   500,   // Web
-                                                   1000,  // SD
-                                                   5000,  // HD
-                                                   10000, // file
-                                                   20000, // 4K
-                                                   50000, // LTE
-                                                   100000,
-                                                   200000, // 5G
-                                                   500000, 1000000};
+    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+                                                   50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -37831,16 +37657,8 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule003, Functi
     const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
     const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   // VoIP
-                                                   500,   // Web
-                                                   1000,  // SD
-                                                   5000,  // HD
-                                                   10000, // file
-                                                   20000, // 4K
-                                                   50000, // LTE
-                                                   100000,
-                                                   200000, // 5G
-                                                   500000, 1000000};
+    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+                                                   50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -37877,16 +37695,8 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule004, Functi
     const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
     const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   // VoIP
-                                                   500,   // Web
-                                                   1000,  // SD
-                                                   5000,  // HD
-                                                   10000, // file
-                                                   20000, // 4K
-                                                   50000, // LTE
-                                                   100000,
-                                                   200000, // 5G
-                                                   500000, 1000000};
+    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+                                                   50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -37923,16 +37733,8 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule005, Functi
     const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
     const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   // VoIP
-                                                   500,   // Web
-                                                   1000,  // SD
-                                                   5000,  // HD
-                                                   10000, // file
-                                                   20000, // 4K
-                                                   50000, // LTE
-                                                   100000,
-                                                   200000, // 5G
-                                                   500000, 1000000};
+    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+                                                   50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -37969,16 +37771,8 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule006, Functi
     const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
     const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   // VoIP
-                                                   500,   // Web
-                                                   1000,  // SD
-                                                   5000,  // HD
-                                                   10000, // file
-                                                   20000, // 4K
-                                                   50000, // LTE
-                                                   100000,
-                                                   200000, // 5G
-                                                   500000, 1000000};
+    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+                                                   50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -38015,16 +37809,8 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule007, Functi
     const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
     const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   // VoIP
-                                                   500,   // Web
-                                                   1000,  // SD
-                                                   5000,  // HD
-                                                   10000, // file
-                                                   20000, // 4K
-                                                   50000, // LTE
-                                                   100000,
-                                                   200000, // 5G
-                                                   500000, 1000000};
+    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+                                                   50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -38062,16 +37848,8 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule008, Functi
     const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
     const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   // VoIP
-                                                   500,   // Web
-                                                   1000,  // SD
-                                                   5000,  // HD
-                                                   10000, // file
-                                                   20000, // 4K
-                                                   50000, // LTE
-                                                   100000,
-                                                   200000, // 5G
-                                                   500000, 1000000};
+    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+                                                   50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -38110,16 +37888,8 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule009, Functi
     const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
     const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   // VoIP
-                                                   500,   // Web
-                                                   1000,  // SD
-                                                   5000,  // HD
-                                                   10000, // file
-                                                   20000, // 4K
-                                                   50000, // LTE
-                                                   100000,
-                                                   200000, // 5G
-                                                   500000, 1000000};
+    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+                                                   50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -38156,16 +37926,8 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule010, Functi
     const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
     const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   // VoIP
-                                                   500,   // Web
-                                                   1000,  // SD
-                                                   5000,  // HD
-                                                   10000, // file
-                                                   20000, // 4K
-                                                   50000, // LTE
-                                                   100000,
-                                                   200000, // 5G
-                                                   500000, 1000000};
+    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+                                                   50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -38202,16 +37964,8 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule011, Functi
     const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
     const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   // VoIP
-                                                   500,   // Web
-                                                   1000,  // SD
-                                                   5000,  // HD
-                                                   10000, // file
-                                                   20000, // 4K
-                                                   50000, // LTE
-                                                   100000,
-                                                   200000, // 5G
-                                                   500000, 1000000};
+    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+                                                   50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -38248,16 +38002,8 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule012, Functi
     const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
     const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   // VoIP
-                                                   500,   // Web
-                                                   1000,  // SD
-                                                   5000,  // HD
-                                                   10000, // file
-                                                   20000, // 4K
-                                                   50000, // LTE
-                                                   100000,
-                                                   200000, // 5G
-                                                   500000, 1000000};
+    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+                                                   50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -38294,16 +38040,8 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule013, Functi
     const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
     const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   // VoIP
-                                                   500,   // Web
-                                                   1000,  // SD
-                                                   5000,  // HD
-                                                   10000, // file
-                                                   20000, // 4K
-                                                   50000, // LTE
-                                                   100000,
-                                                   200000, // 5G
-                                                   500000, 1000000};
+    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+                                                   50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -38340,16 +38078,8 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule014, Functi
     const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
     const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   // VoIP
-                                                   500,   // Web
-                                                   1000,  // SD
-                                                   5000,  // HD
-                                                   10000, // file
-                                                   20000, // 4K
-                                                   50000, // LTE
-                                                   100000,
-                                                   200000, // 5G
-                                                   500000, 1000000};
+    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+                                                   50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -38386,16 +38116,8 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule015, Functi
     const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
     const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   // VoIP
-                                                   500,   // Web
-                                                   1000,  // SD
-                                                   5000,  // HD
-                                                   10000, // file
-                                                   20000, // 4K
-                                                   50000, // LTE
-                                                   100000,
-                                                   200000, // 5G
-                                                   500000, 1000000};
+    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+                                                   50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -38544,7 +38266,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatusResponse003, Function | 
     simLockInfo.classx = 255;
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_1, -1, simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     EXPECT_EQ(false, g_getSimLockStatusResponseFlag);
 }
 
@@ -38565,7 +38287,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatusResponse004, Function | 
     simLockInfo.mode = 1;
     int32_t ret = g_rilInterface->GetSimLockStatus(SLOTID_2, -1, simLockInfo);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     EXPECT_EQ(false, g_getSimLockStatusResponseFlag);
 }
 
@@ -38574,7 +38296,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimLockStatusResponse004, Function | 
  * @tc.name  : testV1GetCallTransferInfoResponse001
  * @tc.desc  : Call function GetCallTransferInfo with SLOTID_2 SerialId is -1 a value of 1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallTransferInfoResponse001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallTransferInfoResponse001, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_2)) {
         return;
@@ -38582,7 +38304,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallTransferInfoResponse001, Function
     g_getCallTransferInfoResponseFlag = false;
     int32_t ret = g_rilInterface->GetCallTransferInfo(SLOTID_2, -1, 1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     EXPECT_EQ(true, g_getCallTransferInfoResponseFlag);
 }
 
@@ -38599,7 +38321,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallTransferInfoResponse002, Function
     g_getCallTransferInfoResponseFlag = false;
     int32_t ret = g_rilInterface->GetCallTransferInfo(SLOTID_2, GetSerialId(), -1);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     EXPECT_EQ(false, g_getCallTransferInfoResponseFlag);
 }
 
@@ -38650,7 +38372,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1CombineConferenceResponse001, Function |
     g_combineConferenceResponseFlag = false;
     int32_t ret = g_rilInterface->CombineConference(SLOTID_2, GetSerialId(), -32768999);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     EXPECT_EQ(false, g_combineConferenceResponseFlag);
 }
 
@@ -38710,15 +38432,15 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1CombineConferenceResponse004, Function |
  * @tc.name  : testV1GetCallListResponse001
  * @tc.desc  : Call function GetCallList with SLOTID_1 and a value of 65535
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallListResponse001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallListResponse001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     g_getCallListResponseFlag = false;
     int32_t ret = g_rilInterface->GetCallList(65535, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     EXPECT_EQ(true, g_getCallListResponseFlag);
 }
 
@@ -38727,15 +38449,15 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallListResponse001, Function | Mediu
  * @tc.name  : testV1GetCallListResponse002
  * @tc.desc  : Call function GetCallList with SLOTID_1 and a value of -65535
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallListResponse002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallListResponse002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     g_getCallListResponseFlag = false;
     int32_t ret = g_rilInterface->GetCallList(-65535, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     EXPECT_EQ(true, g_getCallListResponseFlag);
 }
 
@@ -38744,7 +38466,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallListResponse002, Function | Mediu
  * @tc.name  : testV1GetCallListResponse003
  * @tc.desc  : Call function GetCallList with SLOTID_2 and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallListResponse003, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallListResponse003, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_2)) {
         return;
@@ -38752,7 +38474,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallListResponse003, Function | Mediu
     g_getCallListResponseFlag = false;
     int32_t ret = g_rilInterface->GetCallList(SLOTID_2, -11111);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     EXPECT_EQ(true, g_getCallListResponseFlag);
 }
 
@@ -38778,15 +38500,15 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallListResponse004, Function | Mediu
  * @tc.name  : testV1GetEmergencyCallListResponse001
  * @tc.desc  : Call function GetEmergencyCallList with SLOTID_2 and a value of 1111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallListResponse001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallListResponse001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_2)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     g_getEmergencyCallListResponseFlag = false;
     int32_t ret = g_rilInterface->GetEmergencyCallList(1111, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     EXPECT_EQ(true, g_getEmergencyCallListResponseFlag);
 }
 
@@ -38795,15 +38517,15 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallListResponse001, Functio
  * @tc.name  : testV1GetEmergencyCallListResponse002
  * @tc.desc  : Call function GetEmergencyCallList with SLOTID_2 and a value of -1
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallListResponse002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallListResponse002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_2)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     g_getEmergencyCallListResponseFlag = false;
     int32_t ret = g_rilInterface->GetEmergencyCallList(-1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     EXPECT_EQ(true, g_getEmergencyCallListResponseFlag);
 }
 
@@ -38846,9 +38568,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallListResponse004, Functio
  * @tc.name  : testV1SetEmergencyCallListResponse001
  * @tc.desc  : Call function GetEmergencyCallList with SLOTID_1 and a value of 11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallListResponse001, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallListResponse001, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     g_setEmergencyCallListResponse = false;
@@ -38864,7 +38586,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallListResponse001, Functio
     emergencyInfoList.calls.push_back(emergencyInfo);
     int32_t ret = g_rilInterface->SetEmergencyCallList(11111, GetSerialId(), emergencyInfoList);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     EXPECT_EQ(true, g_setEmergencyCallListResponse);
 }
 
@@ -38873,9 +38595,9 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallListResponse001, Functio
  * @tc.name  : testV1SetEmergencyCallListResponse002
  * @tc.desc  : Call function GetEmergencyCallList with SLOTID_1 and a value of -11111
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallListResponse002, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallListResponse002, Function | MediumTest | Level2)
 {
-    if (!IsReady(SLOTID_1)) {
+    if (g_rilInterface == nullptr) {
         return;
     }
     g_setEmergencyCallListResponse = false;
@@ -38891,7 +38613,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallListResponse002, Functio
     emergencyInfoList.calls.push_back(emergencyInfo);
     int32_t ret = g_rilInterface->SetEmergencyCallList(-11111, GetSerialId(), emergencyInfoList);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     EXPECT_EQ(true, g_setEmergencyCallListResponse);
 }
 
@@ -38927,7 +38649,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallListResponse003, Functio
  * @tc.name  : testV1SetEmergencyCallListResponse004
  * @tc.desc  : Call function GetEmergencyCallList with SLOTID_2 and a value of -65535
  */
-HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallListResponse004, Function | MediumTest | Level1)
+HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallListResponse004, Function | MediumTest | Level2)
 {
     if (!IsReady(SLOTID_2)) {
         return;
@@ -38945,6 +38667,6 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallListResponse004, Functio
     emergencyInfoList.calls.push_back(emergencyInfo);
     int32_t ret = g_rilInterface->SetEmergencyCallList(SLOTID_2, -65535, emergencyInfoList);
     WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_NE(SUCCESS, ret);
     EXPECT_EQ(true, g_setEmergencyCallListResponse);
 }

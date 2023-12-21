@@ -11,31 +11,43 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-base_root = "../../../../../../../"
 import("//build/ohos_var.gni")
 import("//test/xts/tools/build/suite.gni")
-import("$base_root/drivers/peripheral/display/display_config.gni")
 
-module_output_path = "hats/display"
+module_output_path = "hdf/usb"
 
-ohos_moduletest_suite("HatsHdfDisplayBufferMtAdditionalTest") {
-  defines = []
-  defines += display_defines
+ohos_moduletest_suite("HatsHdfUsbTransferAdditionalTest") {
   module_out_path = module_output_path
-  sources = [ "display_buffer_mt.cpp" ]
+  sources = [
+    "../UsbSubscriberTest/UsbSubscriberTest.cpp",
+    "./common/usbd_transfer_test.cpp",
+  ]
+  configs = [ ":hdf_usb_additional" ]
+
+  deps = [ "//third_party/googletest:gtest_main" ]
 
   external_deps = [
+    "ability_base:want",
+    "bundle_framework:appexecfwk_base",
     "c_utils:utils",
-    "drivers_interface_display:display_buffer_idl_headers",
-    "drivers_interface_display:display_composer_idl_headers",
-    "drivers_interface_display:libdisplay_buffer_hdi_impl",
-    "drivers_interface_display:libdisplay_composer_hdi_impl",
-    "googletest:gtest",
-    "graphic_surface:buffer_handle",
+    "common_event_service:cesfwk_innerkits",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "eventhandler:libeventhandler",
+    "hdf_core:libhdf_host",
     "hdf_core:libhdf_utils",
     "hilog:libhilog",
-    "ipc:ipc_core",
+    "ipc:ipc_single",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
   ]
+
   subsystem_name = "xts"
   part_name = "hats"
+}
+
+config("hdf_usb_additional") {
+  include_dirs = [
+    "include",
+    "../UsbSubscriberTest",
+  ]
 }

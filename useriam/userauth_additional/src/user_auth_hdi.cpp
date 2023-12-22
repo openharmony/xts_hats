@@ -27,20 +27,6 @@ static UserAuthInterfaceService g_service;
 int32_t Expectedvalue = 0;
 static OHOS::Parcel parcel;
 
-struct HdiBeginEnrollmentV1_1List {
-    int32_t userId[4] = {12345, 1234, 12345, 12345};
-    int32_t authType[4] = {1, 0, 2, 4};
-    uint32_t executorSensorHint[4] = {0, 65535, 1, 0};
-};
-struct HdiBeginAuthenticationV1_1List {
-    uint32_t authType[4] = {0, 1, 2, 4};
-    uint32_t userId[4] = {356581, 1};
-};
-struct HdiBeginIdentificationV1_1List {
-    uint32_t addExecutor[2] = {0, 1};
-    uint32_t authType[4] = {0, 1, 2, 4};
-};
-
 void UserIamUserAuthTestAdditional::SetUpTestCase() {}
 
 void UserIamUserAuthTestAdditional::TearDownTestCase() {}

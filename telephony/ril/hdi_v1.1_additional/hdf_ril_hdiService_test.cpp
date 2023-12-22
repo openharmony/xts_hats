@@ -470,7 +470,7 @@ constexpr static int32_t SLOTID_2 = 1;
 constexpr static int32_t SUCCESS = 0;
 constexpr static int32_t WAIT_TIME_SECOND = 20;
 constexpr static int32_t WAIT_TIME_SECOND_LONG = 40;
-std::map<int32_t, int32_t> simState_;
+std::map<int32_t, int32_t> simState;
 int32_t g_currentChannelld = 1;
 const std::string TEST_STORAGE_PDU = "1234";
 const std::string TEST_SEND_PDU = "A10305810180F6000004F4F29C0E";
@@ -479,7 +479,7 @@ const std::string TEST_CDMA_PDU = "pdu";
 const std::string TEST_SMSC_ADDR = "00";
 const std::string TEST_ID_LIST = "0,1,5,320-478,922";
 const std::string TEST_DCS_LIST = "0-3,5";
-int32_t g_currentSerialld = 1234567;
+int32_t currentSerialId = 0;
 bool g_hangupResponseFlag = false;
 bool g_rejectResponseFlag = false;
 bool g_answerResponseFlag = false;
@@ -598,14 +598,17 @@ void WaitFor(int32_t timeoutSecond) { g_callback.WaitFor(WAIT_TIME_SECOND); }
 
 bool GetBoolResult(HdiId hdiId) { return g_callback.GetBoolResult(hdiId); }
 
-int32_t GetSerialId() { return g_currentSerialld; }
+int32_t GetSerialId() { 
+    currentSerialId = rand() % 10000000000;
+    return currentSerialId;
+}
 
 bool IsReady(int32_t slotId)
 {
     if (g_rilInterface == nullptr) {
         return false;
     }
-    return simState_[slotId] != 0 && simState_[slotId] != -1;
+    return simState[slotId] != 0 && simState[slotId] != -1;
 }
 
 /**
@@ -709,8 +712,8 @@ int32_t RilCallback::GetSimStatusResponse(const HDI::Ril::V1_1::RilRadioResponse
     g_getSimStatusResponseFlag = true;
     HDF_LOGI("GetBoolResult GetSimStatus result : slotId = %{public}d, simType = %{public}d, simState = %{public}d",
              responseInfo.slotId, result.simType, result.simState);
-    simState_[responseInfo.slotId] = result.simState;
-    HDF_LOGI("IsReady %{public}d %{public}d", responseInfo.slotId, simState_[responseInfo.slotId]);
+    simState[responseInfo.slotId] = result.simState;
+    HDF_LOGI("IsReady %{public}d %{public}d", responseInfo.slotId, simState[responseInfo.slotId]);
     g_hdiResponseld = HdiId::HREQ_SIM_GET_SIM_STATUS;
     g_resultInfo = responseInfo;
     NotifyAll();

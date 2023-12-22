@@ -26,7 +26,7 @@
 #include "v1_2/iril.h"
 #include "gtest/gtest.h"
 
-#define RAND_VALUE 10000000000;
+#define RAND_MAXVALUE 10000000000;
 
 using namespace OHOS::HDI::Ril::V1_2;
 using namespace testing::ext;
@@ -472,7 +472,7 @@ constexpr static int32_t SLOTID_2 = 1;
 constexpr static int32_t SUCCESS = 0;
 constexpr static int32_t WAIT_TIME_SECOND = 20;
 constexpr static int32_t WAIT_TIME_SECOND_LONG = 40;
-std::map<int32_t, int32_t> simState;
+std::map<int32_t, int32_t> g_simState;
 int32_t g_currentChannelld = 1;
 const std::string TEST_STORAGE_PDU = "1234";
 const std::string TEST_SEND_PDU = "A10305810180F6000004F4F29C0E";
@@ -481,7 +481,7 @@ const std::string TEST_CDMA_PDU = "pdu";
 const std::string TEST_SMSC_ADDR = "00";
 const std::string TEST_ID_LIST = "0,1,5,320-478,922";
 const std::string TEST_DCS_LIST = "0-3,5";
-int32_t currentSerialId = 0;
+int32_t g_currentSerialId = 0;
 bool g_hangupResponseFlag = false;
 bool g_rejectResponseFlag = false;
 bool g_answerResponseFlag = false;
@@ -602,8 +602,8 @@ bool GetBoolResult(HdiId hdiId) { return g_callback.GetBoolResult(hdiId); }
 
 int32_t GetSerialId()
 {
-    currentSerialId = rand() % RAND_VALUE;
-    return currentSerialId;
+    g_currentSerialId = rand() % RAND_MAXVALUE;
+    return g_currentSerialId;
 }
 
 bool IsReady(int32_t slotId)
@@ -611,7 +611,7 @@ bool IsReady(int32_t slotId)
     if (g_rilInterface == nullptr) {
         return false;
     }
-    return simState[slotId] != 0 && simState[slotId] != -1;
+    return g_simState[slotId] != 0 && g_simState[slotId] != -1;
 }
 
 /**
@@ -621,9 +621,9 @@ bool IsReady(int32_t slotId)
 void RilCallback::NotifyAll()
 {
     std::unique_lock<std::mutex> callbackLock(g_callbackMutex);
-    if (g_resultInfo.serial != currentSerialId) {
+    if (g_resultInfo.serial != g_currentSerialId) {
         g_hdiResponseld = HdiId::HREQ_NONE;
-        HDF_LOGI("NotifyAll currentSerialId : %{public}d, serial: %{public}d not equal", currentSerialId,
+        HDF_LOGI("NotifyAll g_currentSerialId : %{public}d, serial: %{public}d not equal", g_currentSerialId,
                  g_resultInfo.serial);
         return;
     }
@@ -713,10 +713,10 @@ int32_t RilCallback::GetSimStatusResponse(const HDI::Ril::V1_1::RilRadioResponse
                                           const HDI::Ril::V1_1::CardStatusInfo &result)
 {
     g_getSimStatusResponseFlag = true;
-    HDF_LOGI("GetBoolResult GetSimStatus result : slotId = %{public}d, simType = %{public}d, simState = %{public}d",
+    HDF_LOGI("GetBoolResult GetSimStatus result : slotId = %{public}d, simType = %{public}d, g_simState = %{public}d",
              responseInfo.slotId, result.simType, result.simState);
-    simState[responseInfo.slotId] = result.simState;
-    HDF_LOGI("IsReady %{public}d %{public}d", responseInfo.slotId, simState[responseInfo.slotId]);
+    g_simState[responseInfo.slotId] = result.simState;
+    HDF_LOGI("IsReady %{public}d %{public}d", responseInfo.slotId, g_simState[responseInfo.slotId]);
     g_hdiResponseld = HdiId::HREQ_SIM_GET_SIM_STATUS;
     g_resultInfo = responseInfo;
     NotifyAll();
@@ -2412,7 +2412,7 @@ void HdfRilHdiTestAdditional::TearDown() {}
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimStatus001, Function | MediumTest | Level1)
 {
-    if (g_rilInterface == nullptr) {
+    if (!IsReady(SLOTID_1)) {
         return;
     }
     int32_t ret;
@@ -2435,7 +2435,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimStatus001, Function | MediumTest |
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimStatusResponse001, Function | MediumTest | Level1)
 {
-    if (g_rilInterface == nullptr) {
+    if (!IsReady(SLOTID_1)) {
         return;
     }
     g_getSimStatusResponseFlag = false;
@@ -2456,7 +2456,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimStatusResponse001, Function | Medi
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1GetSimStatusResponse002, Function | MediumTest | Level1)
 {
-    if (g_rilInterface == nullptr) {
+    if (!IsReady(SLOTID_2)) {
         return;
     }
     g_getSimStatusResponseFlag = false;

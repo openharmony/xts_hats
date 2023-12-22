@@ -1802,7 +1802,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetPassthroughMode038, TestSize.Le
  * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
  * when AudioPort.dir=PORT_OUT,portId = 0,mode = PORT_PASSTHROUGH_LPCM
  */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode002, TestSize.Level1)
+HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode002, TestSize.Level2)
 {
     struct AudioPort port = {};
     port.dir = PORT_OUT;
@@ -1819,7 +1819,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode002, TestSize.Le
  * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
  * when AudioPort.dir=PORT_IN,portId = 0,mode = PORT_PASSTHROUGH_LPCM
  */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode003, TestSize.Level1)
+HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode003, TestSize.Level2)
 {
     struct AudioPort port = {};
     port.dir = PORT_IN;
@@ -1836,7 +1836,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode003, TestSize.Le
  * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
  * when AudioPort.dir=PORT_OUT_IN,portId = 0,mode = PORT_PASSTHROUGH_LPCM
  */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode004, TestSize.Level1)
+HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode004, TestSize.Level2)
 {
     struct AudioPort port = {};
     port.dir = PORT_OUT_IN;
@@ -1938,7 +1938,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode009, TestSize.Le
  * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
  * when AudioPort.dir=PORT_OUT_IN,portId = 1,mode = PORT_PASSTHROUGH_LPCM
  */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode010, TestSize.Level1)
+HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode010, TestSize.Level2)
 {
     struct AudioPort port = {};
     port.dir = PORT_OUT_IN;
@@ -1955,7 +1955,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode010, TestSize.Le
  * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
  * when AudioPort.dir=PORT_OUT,portId = 0,mode = PORT_PASSTHROUGH_RAW
  */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode011, TestSize.Level1)
+HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode011, TestSize.Level2)
 {
     struct AudioPort port = {};
     port.dir = PORT_OUT;
@@ -1972,7 +1972,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode011, TestSize.Le
  * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
  * when AudioPort.dir=PORT_IN,portId = 0,mode = PORT_PASSTHROUGH_RAW
  */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode012, TestSize.Level1)
+HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode012, TestSize.Level2)
 {
     struct AudioPort port = {};
     port.dir = PORT_IN;
@@ -1989,7 +1989,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode012, TestSize.Le
  * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
  * when AudioPort.dir=PORT_OUT_IN,portId = 0,mode = PORT_PASSTHROUGH_RAW
  */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode013, TestSize.Level1)
+HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode013, TestSize.Level2)
 {
     struct AudioPort port = {};
     port.dir = PORT_OUT_IN;
@@ -2091,7 +2091,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode018, TestSize.Le
  * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
  * when AudioPort.dir=PORT_OUT_IN,portId = 1,mode = PORT_PASSTHROUGH_RAW
  */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode019, TestSize.Level1)
+HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode019, TestSize.Level2)
 {
     struct AudioPort port = {};
     port.dir = PORT_OUT_IN;
@@ -2108,7 +2108,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode019, TestSize.Le
  * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
  * when AudioPort.dir=PORT_OUT,portId = 0,mode = PORT_PASSTHROUGH_HBR2LBR
  */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode020, TestSize.Level1)
+HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode020, TestSize.Level2)
 {
     struct AudioPort port = {};
     port.dir = PORT_OUT;
@@ -2125,7 +2125,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode020, TestSize.Le
  * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
  * when AudioPort.dir=PORT_IN,portId = 0,mode = PORT_PASSTHROUGH_HBR2LBR
  */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode021, TestSize.Level1)
+HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode021, TestSize.Level2)
 {
     struct AudioPort port = {};
     port.dir = PORT_IN;
@@ -2142,7 +2142,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode021, TestSize.Le
  * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
  * when AudioPort.dir=PORT_OUT_IN,portId = 0,mode = PORT_PASSTHROUGH_HBR2LBR
  */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode022, TestSize.Level1)
+HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode022, TestSize.Level2)
 {
     struct AudioPort port = {};
     port.dir = PORT_OUT_IN;
@@ -2244,7 +2244,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode027, TestSize.Le
  * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
  * when AudioPort.dir=PORT_OUT_IN,portId = 1,mode = PORT_PASSTHROUGH_HBR2LBR
  */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode028, TestSize.Level1)
+HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode028, TestSize.Level2)
 {
     struct AudioPort port = {};
     port.dir = PORT_OUT_IN;
@@ -2261,7 +2261,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode028, TestSize.Le
  * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
  * when AudioPort.dir=PORT_OUT,portId = 0,mode = PORT_PASSTHROUGH_AUTO
  */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode029, TestSize.Level1)
+HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode029, TestSize.Level2)
 {
     struct AudioPort port = {};
     port.dir = PORT_OUT;
@@ -2278,7 +2278,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode029, TestSize.Le
  * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
  * when AudioPort.dir=PORT_IN,portId = 0,mode = PORT_PASSTHROUGH_AUTO
  */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode030, TestSize.Level1)
+HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode030, TestSize.Level2)
 {
     struct AudioPort port = {};
     port.dir = PORT_IN;
@@ -2295,7 +2295,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode030, TestSize.Le
  * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
  * when AudioPort.dir=PORT_OUT_IN,portId = 0,mode = PORT_PASSTHROUGH_AUTO
  */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode031, TestSize.Level1)
+HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode031, TestSize.Level2)
 {
     struct AudioPort port = {};
     port.dir = PORT_OUT_IN;
@@ -2397,7 +2397,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode036, TestSize.Le
  * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
  * when AudioPort.dir=PORT_OUT_IN,portId = 1,mode = PORT_PASSTHROUGH_AUTO
  */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode037, TestSize.Level1)
+HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode037, TestSize.Level2)
 {
     struct AudioPort port = {};
     port.dir = PORT_OUT_IN;

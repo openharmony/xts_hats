@@ -21,7 +21,7 @@
 #include "map"
 #include "mutex"
 #include "securec.h"
-#include "stdlib.h"
+#include "cstdlib"
 #include "unistd.h"
 #include "v1_2/iril.h"
 #include "gtest/gtest.h"
@@ -148,6 +148,7 @@ enum class HdiId {
     HREQ_NETWORK_GET_RRC_CONNECTION_STATE,
     HREQ_NETWORK_SET_NR_OPTION_MODE,
     HREQ_NETWORK_GET_NR_OPTION_MODE,
+    HREQ_NETWORK_GET_NR_SSBID_INFO,
 
     HREQ_COMMON_BASE = 500,
     HREQ_MODEM_SHUT_DOWN,
@@ -235,7 +236,7 @@ class RilCallback : public OHOS::HDI::Ril::V1_2::IRilCallback {
 public:
     void NotifyAll();
     void WaitFor(int32_t timeoutSecond);
-    bool GetBoolResult(HdiId hdiId_);
+    bool GetBoolResult(HdiId hdiId);
     void Clean();
 
     int32_t CallStateUpdated(const RilRadioResponseInfo &responseInfo) override;
@@ -408,6 +409,7 @@ public:
     int32_t SetNrOptionModeResponse(const RilRadioResponseInfo &responseInfo) override;
     int32_t GetNrOptionModeResponse(const RilRadioResponseInfo &responseInfo, int32_t mode) override;
     int32_t GetRrcConnectionStateUpdated(const RilRadioResponseInfo &responseInfo, int32_t state) override;
+    int32_t GetNrSsbIdResponse(const RilRadioResponseInfo &responseInfo, const NrCellSsbIds &nrCellSsbIds) override;
 
     int32_t NewSmsNotify(const HDI::Ril::V1_1::RilRadioResponseInfo &responseInfo,
                          const SmsMessageInfo &smsMessageInfo) override;
@@ -445,10 +447,10 @@ public:
     int32_t CommonErrorResponse(const RilRadioResponseInfo &responseInfo) override;
 
 private:
-    std::mutex callbackMutex_;
-    std::condition_variable cv_;
-    HdiId hdiId_;
-    RilRadioResponseInfo resultInfo_;
+    std::mutex g_callbackMutex;
+    std::condition_variable g_cv;
+    HdiId g_hdiResponseld;
+    RilRadioResponseInfo g_resultInfo;
 };
 
 class HdfRilHdiTestAdditional : public testing::Test {
@@ -461,14 +463,15 @@ public:
 
 namespace {
 sptr<OHOS::HDI::Ril::V1_2::IRil> g_rilInterface = nullptr;
-RilCallback callback_;
+RilCallback g_callback;
+
 constexpr static int32_t SLOTID_1 = 0;
 constexpr static int32_t SLOTID_2 = 1;
 constexpr static int32_t SUCCESS = 0;
 constexpr static int32_t WAIT_TIME_SECOND = 20;
 constexpr static int32_t WAIT_TIME_SECOND_LONG = 40;
 std::map<int32_t, int32_t> simState_;
-int32_t currentChannelId_ = 1;
+int32_t g_currentChannelld = 1;
 const std::string TEST_STORAGE_PDU = "1234";
 const std::string TEST_SEND_PDU = "A10305810180F6000004F4F29C0E";
 const std::string TEST_SMSC_PDU = "00";
@@ -476,7 +479,7 @@ const std::string TEST_CDMA_PDU = "pdu";
 const std::string TEST_SMSC_ADDR = "00";
 const std::string TEST_ID_LIST = "0,1,5,320-478,922";
 const std::string TEST_DCS_LIST = "0-3,5";
-int32_t currentSerialId = 0;
+int32_t g_currentSerialld = 1234567;
 bool g_hangupResponseFlag = false;
 bool g_rejectResponseFlag = false;
 bool g_answerResponseFlag = false;
@@ -505,7 +508,7 @@ bool g_getNetworkSearchInformationResponseFlag = false;
 bool g_getNetworkSelectionModeResponseFlag = false;
 bool g_getNeighboringCellInfoListResponseFlag = false;
 bool g_getCurrentCellInfoResponseFlag = false;
-bool g_getCurrentCellInfoResponse_1_1Flag = false;
+bool g_getCurrentCellInfoResponse11Flag = false;
 bool g_setNetworkSelectionModeResponseFlag = false;
 bool g_setLocateUpdatesResponseFlag = false;
 bool g_setNotificationFilterResponseFlag = false;
@@ -591,15 +594,11 @@ bool g_setEmergencyCallListResponse = false;
 /**
 ** common fun
 **/
-void WaitFor(int32_t timeoutSecond) { callback_.WaitFor(WAIT_TIME_SECOND); }
+void WaitFor(int32_t timeoutSecond) { g_callback.WaitFor(WAIT_TIME_SECOND); }
 
-bool GetBoolResult(HdiId hdiId_) { return callback_.GetBoolResult(hdiId_); }
+bool GetBoolResult(HdiId hdiId) { return g_callback.GetBoolResult(hdiId); }
 
-int32_t GetSerialId()
-{
-    currentSerialId = rand() % 10000000000;
-    return currentSerialId;
-}
+int32_t GetSerialId() { return g_currentSerialld; }
 
 bool IsReady(int32_t slotId)
 {
@@ -615,41 +614,41 @@ bool IsReady(int32_t slotId)
 
 void RilCallback::NotifyAll()
 {
-    std::unique_lock<std::mutex> callbackLock(callbackMutex_);
-    if (resultInfo_.serial != currentSerialId) {
-        hdiId_ = HdiId::HREQ_NONE;
-        HDF_LOGI("NotifyAll currentSerialId : %{public}d, serial: %{public}d not equal", currentSerialId,
-                 resultInfo_.serial);
+    std::unique_lock<std::mutex> callbackLock(g_callbackMutex);
+    if (g_resultInfo.serial != g_currentSerialld) {
+        g_hdiResponseld = HdiId::HREQ_NONE;
+        HDF_LOGI("NotifyAll g_currentSerialld : %{public}d, serial: %{public}d not equal", g_currentSerialld,
+                 g_resultInfo.serial);
         return;
     }
-    cv_.notify_all();
+    g_cv.notify_all();
 }
 
 void RilCallback::WaitFor(int32_t timeoutSecond)
 {
     Clean();
-    std::unique_lock<std::mutex> callbackLock(callbackMutex_);
-    cv_.wait_for(callbackLock, std::chrono::seconds(timeoutSecond));
+    std::unique_lock<std::mutex> callbackLock(g_callbackMutex);
+    g_cv.wait_for(callbackLock, std::chrono::seconds(timeoutSecond));
 }
 
-void RilCallback::Clean() { hdiId_ = HdiId::HREQ_NONE; }
+void RilCallback::Clean() { g_hdiResponseld = HdiId::HREQ_NONE; }
 
 bool RilCallback::GetBoolResult(HdiId hdiId)
 {
-    HDF_LOGI("GetBoolResult hdiId: %{public}d, error: %{public}d", hdiId, (int32_t)resultInfo_.error);
+    HDF_LOGI("GetBoolResult hdiId: %{public}d, error: %{public}d", hdiId, static_cast<int32_t>(g_resultInfo.error));
     bool ret = false;
-    if (hdiId_ == HdiId::HREQ_NONE) {
+    if (g_hdiResponseld == HdiId::HREQ_NONE) {
         HDF_LOGE("response timeout, not implemented."
-                 "hdiId: %d, current hdiId_: %{public}d",
-                 (int32_t)hdiId, hdiId_);
+                 "hdiId: %d, current g_hdiResponseld: %{public}d",
+                 static_cast<int32_t>(hdiId), g_hdiResponseld);
         ret = true;
         Clean();
         return ret;
     }
-    if (hdiId_ != hdiId) {
+    if (g_hdiResponseld != hdiId) {
         ret = false;
-        HDF_LOGE("GetBoolResult hdiId does not match. hdiId: %{public}d, current hdiId: %{public}d", (int32_t)hdiId,
-                 hdiId_);
+        HDF_LOGE("GetBoolResult hdiId does not match. hdiId: %{public}d, current hdiId: %{public}d",
+                 static_cast<int32_t>(hdiId), g_hdiResponseld);
         Clean();
         return ret;
     }
@@ -712,8 +711,8 @@ int32_t RilCallback::GetSimStatusResponse(const HDI::Ril::V1_1::RilRadioResponse
              responseInfo.slotId, result.simType, result.simState);
     simState_[responseInfo.slotId] = result.simState;
     HDF_LOGI("IsReady %{public}d %{public}d", responseInfo.slotId, simState_[responseInfo.slotId]);
-    hdiId_ = HdiId::HREQ_SIM_GET_SIM_STATUS;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SIM_GET_SIM_STATUS;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -723,8 +722,8 @@ int32_t RilCallback::GetSimIOResponse(const RilRadioResponseInfo &responseInfo, 
     g_getSimIOResponseFlag = true;
     HDF_LOGI("GetBoolResult GetSimIO result : sw1 = %{public}d, sw2 = %{public}d, response = %{public}s", result.sw1,
              result.sw2, result.response.c_str());
-    hdiId_ = HdiId::HREQ_SIM_GET_SIM_IO;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SIM_GET_SIM_IO;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -732,8 +731,8 @@ int32_t RilCallback::GetSimIOResponse(const RilRadioResponseInfo &responseInfo, 
 int32_t RilCallback::GetImsiResponse(const RilRadioResponseInfo &responseInfo, const std::string &response)
 {
     HDF_LOGI("GetBoolResult GetImsi result : response = %{public}s", response.c_str());
-    hdiId_ = HdiId::HREQ_SIM_GET_IMSI;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SIM_GET_IMSI;
+    g_resultInfo = responseInfo;
     g_getImsiResponseFlag = true;
     NotifyAll();
     return 0;
@@ -741,8 +740,8 @@ int32_t RilCallback::GetImsiResponse(const RilRadioResponseInfo &responseInfo, c
 int32_t RilCallback::GetSimLockStatusResponse(const RilRadioResponseInfo &responseInfo, int32_t simLockStatus)
 {
     HDF_LOGI("GetBoolResult GetSimLockStatus result : simLockStatus = %{public}d", simLockStatus);
-    hdiId_ = HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -751,8 +750,8 @@ int32_t RilCallback::SetSimLockResponse(const RilRadioResponseInfo &responseInfo
     g_setSimLockResponseFlag = true;
     HDF_LOGI("GetBoolResult SetSimLock result : result = %{public}d, remain = %{public}d", lockStatus.result,
              lockStatus.remain);
-    hdiId_ = HdiId::HREQ_SIM_SET_SIM_LOCK;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SIM_SET_SIM_LOCK;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -762,8 +761,8 @@ int32_t RilCallback::ChangeSimPasswordResponse(const RilRadioResponseInfo &respo
     g_changeSimPasswordResponseFlag = true;
     HDF_LOGI("GetBoolResult ChangeSimPassword result : result = %{public}d, remain = %{public}d", lockStatus.result,
              lockStatus.remain);
-    hdiId_ = HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -772,8 +771,8 @@ int32_t RilCallback::UnlockPinResponse(const RilRadioResponseInfo &responseInfo,
     g_unlockPinResponseFlag = true;
     HDF_LOGI("GetBoolResult UnlockPin result : result = %{public}d, remain = %{public}d", lockStatus.result,
              lockStatus.remain);
-    hdiId_ = HdiId::HREQ_SIM_UNLOCK_PIN;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SIM_UNLOCK_PIN;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -782,8 +781,8 @@ int32_t RilCallback::UnlockPukResponse(const RilRadioResponseInfo &responseInfo,
     g_unlockPukResponseFlag = true;
     HDF_LOGI("GetBoolResult UnlockPuk result : result = %{public}d, remain = %{public}d", lockStatus.result,
              lockStatus.remain);
-    hdiId_ = HdiId::HREQ_SIM_UNLOCK_PUK;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SIM_UNLOCK_PUK;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -792,8 +791,8 @@ int32_t RilCallback::UnlockPin2Response(const RilRadioResponseInfo &responseInfo
     g_unlockPin2ResponseFlag = true;
     HDF_LOGI("GetBoolResult UnlockPin2 result : result = %{public}d, remain = %{public}d", lockStatus.result,
              lockStatus.remain);
-    hdiId_ = HdiId::HREQ_SIM_UNLOCK_PIN2;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SIM_UNLOCK_PIN2;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -802,8 +801,8 @@ int32_t RilCallback::UnlockPuk2Response(const RilRadioResponseInfo &responseInfo
     g_unlockPuk2ResponseFlag = true;
     HDF_LOGI("GetBoolResult UnlockPuk2 result : result = %{public}d, remain = %{public}d", lockStatus.result,
              lockStatus.remain);
-    hdiId_ = HdiId::HREQ_SIM_UNLOCK_PUK2;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SIM_UNLOCK_PUK2;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -811,8 +810,8 @@ int32_t RilCallback::UnlockPuk2Response(const RilRadioResponseInfo &responseInfo
 int32_t RilCallback::SetActiveSimResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("GetBoolResult SetActiveSim result");
-    hdiId_ = HdiId::HREQ_SIM_SET_ACTIVE_SIM;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SIM_SET_ACTIVE_SIM;
+    g_resultInfo = responseInfo;
     g_setActiveSimResponseFlag = true;
     NotifyAll();
     return 0;
@@ -822,8 +821,8 @@ int32_t RilCallback::SimStkSendTerminalResponseResponse(const RilRadioResponseIn
 {
     g_simStkSendTerminalResponseResponseFlag = true;
     HDF_LOGI("GetBoolResult SimStkSendTerminalResponse result");
-    hdiId_ = HdiId::HREQ_SIM_STK_SEND_TERMINAL_RESPONSE;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SIM_STK_SEND_TERMINAL_RESPONSE;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -832,8 +831,8 @@ int32_t RilCallback::SimStkSendEnvelopeResponse(const RilRadioResponseInfo &resp
 {
     g_simStkSendEnvelopeResponseFlag = true;
     HDF_LOGI("GetBoolResult SimStkSendEnvelope result");
-    hdiId_ = HdiId::HREQ_SIM_STK_SEND_ENVELOPE;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SIM_STK_SEND_ENVELOPE;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -842,8 +841,8 @@ int32_t RilCallback::SimStkSendCallSetupRequestResultResponse(const RilRadioResp
 {
     g_simStkSendCallSetupRequestResultResponseFlag = true;
     HDF_LOGI("GetBoolResult SimStkSendCallSetupRequestResult result");
-    hdiId_ = HdiId::HREQ_SIM_STK_SEND_CALL_SETUP_REQUEST_RESULT;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SIM_STK_SEND_CALL_SETUP_REQUEST_RESULT;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -852,8 +851,8 @@ int32_t RilCallback::SimStkIsReadyResponse(const RilRadioResponseInfo &responseI
 {
     g_simStkIsReadyResponseFlag = true;
     HDF_LOGI("GetBoolResult SimStkIsReady result");
-    hdiId_ = HdiId::HREQ_SIM_STK_IS_READY;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SIM_STK_IS_READY;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -864,8 +863,8 @@ int32_t RilCallback::SetRadioProtocolResponse(const RilRadioResponseInfo &respon
     g_setRadioProtocolResponseFlag = true;
     HDF_LOGI("GetBoolResult SetRadioProtocol result : phase = %{public}d, slotId = %{public}d", radioProtocol.phase,
              radioProtocol.slotId);
-    hdiId_ = HdiId::HREQ_SIM_RADIO_PROTOCOL;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SIM_RADIO_PROTOCOL;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -885,9 +884,9 @@ int32_t RilCallback::SimOpenLogicalChannelResponse(const RilRadioResponseInfo &r
              "response = %{public}s",
              pOpenLogicalChannelResponse.sw1, pOpenLogicalChannelResponse.sw2, pOpenLogicalChannelResponse.channelId,
              pOpenLogicalChannelResponse.response.c_str());
-    currentChannelId_ = pOpenLogicalChannelResponse.channelId;
-    hdiId_ = HdiId::HREQ_SIM_OPEN_LOGICAL_CHANNEL;
-    resultInfo_ = responseInfo;
+    g_currentChannelld = pOpenLogicalChannelResponse.channelId;
+    g_hdiResponseld = HdiId::HREQ_SIM_OPEN_LOGICAL_CHANNEL;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -896,8 +895,8 @@ int32_t RilCallback::SimCloseLogicalChannelResponse(const RilRadioResponseInfo &
 {
     g_simCloseLogicalChannelResponseFlag = true;
     HDF_LOGI("GetBoolResult SimCloseLogicalChannel result");
-    hdiId_ = HdiId::HREQ_SIM_CLOSE_LOGICAL_CHANNEL;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SIM_CLOSE_LOGICAL_CHANNEL;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -909,8 +908,8 @@ int32_t RilCallback::SimTransmitApduLogicalChannelResponse(const RilRadioRespons
     HDF_LOGI("GetBoolResult SimTransmitApduLogicalChannel result : sw1 = %{public}d, sw2 = %{public}d, response = "
              "%{public}s",
              result.sw1, result.sw2, result.response.c_str());
-    hdiId_ = HdiId::HREQ_SIM_TRANSMIT_APDU_LOGICAL_CHANNEL;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SIM_TRANSMIT_APDU_LOGICAL_CHANNEL;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -922,8 +921,8 @@ int32_t RilCallback::SimTransmitApduBasicChannelResponse(const RilRadioResponseI
     HDF_LOGI(
         "GetBoolResult SimTransmitApduBasicChannel result : sw1 = %{public}d, sw2 = %{public}d, response = %{public}s",
         result.sw1, result.sw2, result.response.c_str());
-    hdiId_ = HdiId::HREQ_SIM_TRANSMIT_APDU_BASIC_CHANNEL;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SIM_TRANSMIT_APDU_BASIC_CHANNEL;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -932,8 +931,8 @@ int32_t RilCallback::SimAuthenticationResponse(const RilRadioResponseInfo &respo
     g_simAuthenticationResponseFlag = true;
     HDF_LOGI("GetBoolResult SimAuthentication result : sw1 = %{public}d, sw2 = %{public}d, response = %{public}s",
              result.sw1, result.sw2, result.response.c_str());
-    hdiId_ = HdiId::HREQ_SIM_AUTHENTICATION;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SIM_AUTHENTICATION;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -943,8 +942,8 @@ int32_t RilCallback::UnlockSimLockResponse(const RilRadioResponseInfo &responseI
     g_unlockSimLockResponseFlag = true;
     HDF_LOGI("GetBoolResult UnlockSimLock result : result = %{public}d, remain = %{public}d", lockStatus.result,
              lockStatus.remain);
-    hdiId_ = HdiId::HREQ_SIM_UNLOCK_SIM_LOCK;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SIM_UNLOCK_SIM_LOCK;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -952,8 +951,8 @@ int32_t RilCallback::UnlockSimLockResponse(const RilRadioResponseInfo &responseI
 int32_t RilCallback::SendSimMatchedOperatorInfoResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("GetBoolResult SendSimMatchedOperatorInfo result");
-    hdiId_ = HdiId::HREQ_SIM_SEND_NCFG_OPER_INFO;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SIM_SEND_NCFG_OPER_INFO;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1028,36 +1027,36 @@ int32_t RilCallback::NetworkCurrentCellUpdated(const RilRadioResponseInfo &respo
         HDF_LOGI("RilCallback::NetworkCurrentCellUpdated ratType:%{public}d, mcc:%{public}d, mnc:%{public}d",
                  info.ratType, info.mcc, info.mnc);
         switch (static_cast<RatType>(info.ratType)) {
-        case RatType::NETWORK_TYPE_LTE:
-            HDF_LOGI("cellId:%{public}d", info.serviceCells.lte.cellId);
-            HDF_LOGI("arfcn:%{public}d", info.serviceCells.lte.arfcn);
-            HDF_LOGI("pci:%{public}d", info.serviceCells.lte.pci);
-            HDF_LOGI("rsrp:%{public}d", info.serviceCells.lte.rsrp);
-            HDF_LOGI("rsrq:%{public}d", info.serviceCells.lte.rsrq);
-            HDF_LOGI("rxlev:%{public}d", info.serviceCells.lte.rssi);
-            break;
-        case RatType::NETWORK_TYPE_GSM:
-            HDF_LOGI("band:%{public}d", info.serviceCells.gsm.band);
-            HDF_LOGI("arfcn:%{public}d", info.serviceCells.gsm.arfcn);
-            HDF_LOGI("bsic:%{public}d", info.serviceCells.gsm.bsic);
-            HDF_LOGI("cellId:%{public}d", info.serviceCells.gsm.cellId);
-            HDF_LOGI("rxlev:%{public}d", info.serviceCells.gsm.rxlev);
-            HDF_LOGI("lac:%{public}d", info.serviceCells.gsm.lac);
-            break;
-        case RatType::NETWORK_TYPE_WCDMA:
-            HDF_LOGI("arfcn:%{public}d", info.serviceCells.wcdma.arfcn);
-            HDF_LOGI("psc:%{public}d", info.serviceCells.wcdma.psc);
-            HDF_LOGI("rscp:%{public}d", info.serviceCells.wcdma.rscp);
-            HDF_LOGI("ecno:%{public}d", info.serviceCells.wcdma.ecno);
-            break;
-        case RatType::NETWORK_TYPE_NR:
-            HDF_LOGI("arfcn:%{public}d", info.serviceCells.nr.nrArfcn);
-            HDF_LOGI("psc:%{public}d", info.serviceCells.nr.pci);
-            HDF_LOGI("rscp:%{public}d", info.serviceCells.nr.tac);
-            HDF_LOGI("ecno:%{public}d", info.serviceCells.nr.nci);
-            break;
-        default:
-            HDF_LOGE("RilCallback::NetworkCurrentCellUpdated invalid ratType");
+            case RatType::NETWORK_TYPE_LTE:
+                HDF_LOGI("cellId:%{public}d", info.serviceCells.lte.cellId);
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.lte.arfcn);
+                HDF_LOGI("pci:%{public}d", info.serviceCells.lte.pci);
+                HDF_LOGI("rsrp:%{public}d", info.serviceCells.lte.rsrp);
+                HDF_LOGI("rsrq:%{public}d", info.serviceCells.lte.rsrq);
+                HDF_LOGI("rxlev:%{public}d", info.serviceCells.lte.rssi);
+                break;
+            case RatType::NETWORK_TYPE_GSM:
+                HDF_LOGI("band:%{public}d", info.serviceCells.gsm.band);
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.gsm.arfcn);
+                HDF_LOGI("bsic:%{public}d", info.serviceCells.gsm.bsic);
+                HDF_LOGI("cellId:%{public}d", info.serviceCells.gsm.cellId);
+                HDF_LOGI("rxlev:%{public}d", info.serviceCells.gsm.rxlev);
+                HDF_LOGI("lac:%{public}d", info.serviceCells.gsm.lac);
+                break;
+            case RatType::NETWORK_TYPE_WCDMA:
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.wcdma.arfcn);
+                HDF_LOGI("psc:%{public}d", info.serviceCells.wcdma.psc);
+                HDF_LOGI("rscp:%{public}d", info.serviceCells.wcdma.rscp);
+                HDF_LOGI("ecno:%{public}d", info.serviceCells.wcdma.ecno);
+                break;
+            case RatType::NETWORK_TYPE_NR:
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.nr.nrArfcn);
+                HDF_LOGI("psc:%{public}d", info.serviceCells.nr.pci);
+                HDF_LOGI("rscp:%{public}d", info.serviceCells.nr.tac);
+                HDF_LOGI("ecno:%{public}d", info.serviceCells.nr.nci);
+                break;
+            default:
+                HDF_LOGE("RilCallback::NetworkCurrentCellUpdated invalid ratType");
         }
     }
     return 0;
@@ -1071,38 +1070,38 @@ int32_t RilCallback::NetworkCurrentCellUpdated_1_1(const RilRadioResponseInfo &r
         HDF_LOGI("RilCallback::NetworkCurrentCellUpdated_1_1 ratType:%{public}d, mcc:%{public}d, mnc:%{public}d",
                  info.ratType, info.mcc, info.mnc);
         switch (static_cast<RatType>(info.ratType)) {
-        case RatType::NETWORK_TYPE_LTE:
-            HDF_LOGI("cellId:%{public}d", info.serviceCells.lte.cellId);
-            HDF_LOGI("arfcn:%{public}d", info.serviceCells.lte.arfcn);
-            HDF_LOGI("pci:%{public}d", info.serviceCells.lte.pci);
-            HDF_LOGI("rsrp:%{public}d", info.serviceCells.lte.rsrp);
-            HDF_LOGI("rsrq:%{public}d", info.serviceCells.lte.rsrq);
-            HDF_LOGI("rxlev:%{public}d", info.serviceCells.lte.rssi);
-            break;
-        case RatType::NETWORK_TYPE_GSM:
-            HDF_LOGI("band:%{public}d", info.serviceCells.gsm.band);
-            HDF_LOGI("arfcn:%{public}d", info.serviceCells.gsm.arfcn);
-            HDF_LOGI("bsic:%{public}d", info.serviceCells.gsm.bsic);
-            HDF_LOGI("cellId:%{public}d", info.serviceCells.gsm.cellId);
-            HDF_LOGI("rxlev:%{public}d", info.serviceCells.gsm.rxlev);
-            HDF_LOGI("lac:%{public}d", info.serviceCells.gsm.lac);
-            break;
-        case RatType::NETWORK_TYPE_WCDMA:
-            HDF_LOGI("arfcn:%{public}d", info.serviceCells.wcdma.arfcn);
-            HDF_LOGI("psc:%{public}d", info.serviceCells.wcdma.psc);
-            HDF_LOGI("rscp:%{public}d", info.serviceCells.wcdma.rscp);
-            HDF_LOGI("ecno:%{public}d", info.serviceCells.wcdma.ecno);
-            break;
-        case RatType::NETWORK_TYPE_NR:
-            HDF_LOGI("arfcn:%{public}d", info.serviceCells.nr.nrArfcn);
-            HDF_LOGI("psc:%{public}d", info.serviceCells.nr.pci);
-            HDF_LOGI("rscp:%{public}d", info.serviceCells.nr.tac);
-            HDF_LOGI("ecno:%{public}d", info.serviceCells.nr.nci);
-            HDF_LOGI("rsrp:%{public}d", info.serviceCells.nr.rsrp);
-            HDF_LOGI("rsrq:%{public}d", info.serviceCells.nr.rsrq);
-            break;
-        default:
-            HDF_LOGE("RilCallback::NetworkCurrentCellUpdated_1_1 invalid ratType");
+            case RatType::NETWORK_TYPE_LTE:
+                HDF_LOGI("cellId:%{public}d", info.serviceCells.lte.cellId);
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.lte.arfcn);
+                HDF_LOGI("pci:%{public}d", info.serviceCells.lte.pci);
+                HDF_LOGI("rsrp:%{public}d", info.serviceCells.lte.rsrp);
+                HDF_LOGI("rsrq:%{public}d", info.serviceCells.lte.rsrq);
+                HDF_LOGI("rxlev:%{public}d", info.serviceCells.lte.rssi);
+                break;
+            case RatType::NETWORK_TYPE_GSM:
+                HDF_LOGI("band:%{public}d", info.serviceCells.gsm.band);
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.gsm.arfcn);
+                HDF_LOGI("bsic:%{public}d", info.serviceCells.gsm.bsic);
+                HDF_LOGI("cellId:%{public}d", info.serviceCells.gsm.cellId);
+                HDF_LOGI("rxlev:%{public}d", info.serviceCells.gsm.rxlev);
+                HDF_LOGI("lac:%{public}d", info.serviceCells.gsm.lac);
+                break;
+            case RatType::NETWORK_TYPE_WCDMA:
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.wcdma.arfcn);
+                HDF_LOGI("psc:%{public}d", info.serviceCells.wcdma.psc);
+                HDF_LOGI("rscp:%{public}d", info.serviceCells.wcdma.rscp);
+                HDF_LOGI("ecno:%{public}d", info.serviceCells.wcdma.ecno);
+                break;
+            case RatType::NETWORK_TYPE_NR:
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.nr.nrArfcn);
+                HDF_LOGI("psc:%{public}d", info.serviceCells.nr.pci);
+                HDF_LOGI("rscp:%{public}d", info.serviceCells.nr.tac);
+                HDF_LOGI("ecno:%{public}d", info.serviceCells.nr.nci);
+                HDF_LOGI("rsrp:%{public}d", info.serviceCells.nr.rsrp);
+                HDF_LOGI("rsrq:%{public}d", info.serviceCells.nr.rsrq);
+                break;
+            default:
+                HDF_LOGE("RilCallback::NetworkCurrentCellUpdated_1_1 invalid ratType");
         }
     }
     return 0;
@@ -1118,8 +1117,8 @@ int32_t RilCallback::GetSignalStrengthResponse(const RilRadioResponseInfo &respo
 {
     g_getSignalStrengthResponseFlag = true;
     HDF_LOGI("RilCallback::GetSignalStrengthResponse rxlev:%{public}d rsrp:%{public}d", rssi.lte.rxlev, rssi.lte.rsrp);
-    hdiId_ = HdiId::HREQ_NETWORK_GET_SIGNAL_STRENGTH;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_SIGNAL_STRENGTH;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1132,8 +1131,8 @@ int32_t RilCallback::GetCsRegStatusResponse(const RilRadioResponseInfo &response
              "lacCode:%{public}d, cellId:%{public}d, radioTechnology:%{public}d",
              csRegStatusInfo.notifyType, csRegStatusInfo.regStatus, csRegStatusInfo.lacCode, csRegStatusInfo.cellId,
              csRegStatusInfo.radioTechnology);
-    hdiId_ = HdiId::HREQ_NETWORK_GET_CS_REG_STATUS;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_CS_REG_STATUS;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1148,8 +1147,8 @@ int32_t RilCallback::GetPsRegStatusResponse(const RilRadioResponseInfo &response
         psRegStatusInfo.notifyType, psRegStatusInfo.regStatus, psRegStatusInfo.lacCode, psRegStatusInfo.cellId,
         psRegStatusInfo.radioTechnology, psRegStatusInfo.isDcNrRestricted, psRegStatusInfo.isNrAvailable,
         psRegStatusInfo.isEnDcAvailable);
-    hdiId_ = HdiId::HREQ_NETWORK_GET_PS_REG_STATUS;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_PS_REG_STATUS;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1159,8 +1158,8 @@ int32_t RilCallback::GetOperatorInfoResponse(const RilRadioResponseInfo &respons
     g_getOperatorInfoResponseFlag = true;
     HDF_LOGI("RilCallback::GetOperatorInfoResponse longName:%{public}s, shortName:%{public}s, numeric:%{public}s",
              operatorInfo.longName.c_str(), operatorInfo.shortName.c_str(), operatorInfo.numeric.c_str());
-    hdiId_ = HdiId::HREQ_NETWORK_GET_OPERATOR_INFO;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_OPERATOR_INFO;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1177,8 +1176,8 @@ int32_t RilCallback::GetNetworkSearchInformationResponse(const RilRadioResponseI
         HDF_LOGI("longName:%{public}s", availableInfo.longName.c_str());
         HDF_LOGI("rat:%{public}d", availableInfo.rat);
     }
-    hdiId_ = HdiId::HREQ_NETWORK_GET_NETWORK_SEARCH_INFORMATION;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_NETWORK_SEARCH_INFORMATION;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1188,8 +1187,8 @@ int32_t RilCallback::GetNetworkSelectionModeResponse(const RilRadioResponseInfo 
 {
     g_getNetworkSelectionModeResponseFlag = true;
     HDF_LOGI("RilCallback::GetNetworkSelectionModeResponse selectMode:%{public}d", setNetworkModeInfo.selectMode);
-    hdiId_ = HdiId::HREQ_NETWORK_GET_NETWORK_SELECTION_MODE;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_NETWORK_SELECTION_MODE;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1198,8 +1197,8 @@ int32_t RilCallback::SetNetworkSelectionModeResponse(const RilRadioResponseInfo 
 {
     g_setNetworkSelectionModeResponseFlag = true;
     HDF_LOGI("RilCallback::SetNetworkSelectionModeResponse error:%{public}d", responseInfo.error);
-    hdiId_ = HdiId::HREQ_NETWORK_SET_NETWORK_SELECTION_MODE;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_NETWORK_SET_NETWORK_SELECTION_MODE;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1212,39 +1211,39 @@ int32_t RilCallback::GetNeighboringCellInfoListResponse(const RilRadioResponseIn
     for (auto info : cellInfoList.cellNearbyInfo) {
         HDF_LOGI("RilCallback::GetNeighboringCellInfoListResponse ratType:%{public}d", info.ratType);
         switch (static_cast<RatType>(info.ratType)) {
-        case RatType::NETWORK_TYPE_LTE:
-            HDF_LOGI("arfcn:%{public}d", info.serviceCells.lte.arfcn);
-            HDF_LOGI("pci:%{public}d", info.serviceCells.lte.pci);
-            HDF_LOGI("rsrp:%{public}d", info.serviceCells.lte.rsrp);
-            HDF_LOGI("rsrq:%{public}d", info.serviceCells.lte.rsrq);
-            HDF_LOGI("rxlev:%{public}d", info.serviceCells.lte.rxlev);
-            break;
-        case RatType::NETWORK_TYPE_GSM:
-            HDF_LOGI("band:%{public}d", info.serviceCells.gsm.band);
-            HDF_LOGI("arfcn:%{public}d", info.serviceCells.gsm.arfcn);
-            HDF_LOGI("bsic:%{public}d", info.serviceCells.gsm.bsic);
-            HDF_LOGI("cellId:%{public}d", info.serviceCells.gsm.cellId);
-            HDF_LOGI("rxlev:%{public}d", info.serviceCells.gsm.rxlev);
-            HDF_LOGI("lac:%{public}d", info.serviceCells.gsm.lac);
-            break;
-        case RatType::NETWORK_TYPE_WCDMA:
-            HDF_LOGI("arfcn:%{public}d", info.serviceCells.wcdma.arfcn);
-            HDF_LOGI("psc:%{public}d", info.serviceCells.wcdma.psc);
-            HDF_LOGI("rscp:%{public}d", info.serviceCells.wcdma.rscp);
-            HDF_LOGI("ecno:%{public}d", info.serviceCells.wcdma.ecno);
-            break;
-        case RatType::NETWORK_TYPE_NR:
-            HDF_LOGI("arfcn:%{public}d", info.serviceCells.nr.nrArfcn);
-            HDF_LOGI("psc:%{public}d", info.serviceCells.nr.pci);
-            HDF_LOGI("rscp:%{public}d", info.serviceCells.nr.tac);
-            HDF_LOGI("ecno:%{public}d", info.serviceCells.nr.nci);
-            break;
-        default:
-            HDF_LOGE("RilCallback::GetNeighboringCellInfoListResponse invalid ratType");
+            case RatType::NETWORK_TYPE_LTE:
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.lte.arfcn);
+                HDF_LOGI("pci:%{public}d", info.serviceCells.lte.pci);
+                HDF_LOGI("rsrp:%{public}d", info.serviceCells.lte.rsrp);
+                HDF_LOGI("rsrq:%{public}d", info.serviceCells.lte.rsrq);
+                HDF_LOGI("rxlev:%{public}d", info.serviceCells.lte.rxlev);
+                break;
+            case RatType::NETWORK_TYPE_GSM:
+                HDF_LOGI("band:%{public}d", info.serviceCells.gsm.band);
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.gsm.arfcn);
+                HDF_LOGI("bsic:%{public}d", info.serviceCells.gsm.bsic);
+                HDF_LOGI("cellId:%{public}d", info.serviceCells.gsm.cellId);
+                HDF_LOGI("rxlev:%{public}d", info.serviceCells.gsm.rxlev);
+                HDF_LOGI("lac:%{public}d", info.serviceCells.gsm.lac);
+                break;
+            case RatType::NETWORK_TYPE_WCDMA:
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.wcdma.arfcn);
+                HDF_LOGI("psc:%{public}d", info.serviceCells.wcdma.psc);
+                HDF_LOGI("rscp:%{public}d", info.serviceCells.wcdma.rscp);
+                HDF_LOGI("ecno:%{public}d", info.serviceCells.wcdma.ecno);
+                break;
+            case RatType::NETWORK_TYPE_NR:
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.nr.nrArfcn);
+                HDF_LOGI("psc:%{public}d", info.serviceCells.nr.pci);
+                HDF_LOGI("rscp:%{public}d", info.serviceCells.nr.tac);
+                HDF_LOGI("ecno:%{public}d", info.serviceCells.nr.nci);
+                break;
+            default:
+                HDF_LOGE("RilCallback::GetNeighboringCellInfoListResponse invalid ratType");
         }
     }
-    hdiId_ = HdiId::HREQ_NETWORK_GET_NEIGHBORING_CELLINFO_LIST;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_NEIGHBORING_CELLINFO_LIST;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1258,40 +1257,40 @@ int32_t RilCallback::GetCurrentCellInfoResponse(const RilRadioResponseInfo &resp
         HDF_LOGI("RilCallback::GetCurrentCellInfoResponse ratType:%{public}d, mcc:%{public}d, mnc:%{public}d",
                  info.ratType, info.mcc, info.mnc);
         switch (static_cast<RatType>(info.ratType)) {
-        case RatType::NETWORK_TYPE_LTE:
-            HDF_LOGI("cellId:%{public}d", info.serviceCells.lte.cellId);
-            HDF_LOGI("arfcn:%{public}d", info.serviceCells.lte.arfcn);
-            HDF_LOGI("pci:%{public}d", info.serviceCells.lte.pci);
-            HDF_LOGI("rsrp:%{public}d", info.serviceCells.lte.rsrp);
-            HDF_LOGI("rsrq:%{public}d", info.serviceCells.lte.rsrq);
-            HDF_LOGI("rxlev:%{public}d", info.serviceCells.lte.rssi);
-            break;
-        case RatType::NETWORK_TYPE_GSM:
-            HDF_LOGI("band:%{public}d", info.serviceCells.gsm.band);
-            HDF_LOGI("arfcn:%{public}d", info.serviceCells.gsm.arfcn);
-            HDF_LOGI("bsic:%{public}d", info.serviceCells.gsm.bsic);
-            HDF_LOGI("cellId:%{public}d", info.serviceCells.gsm.cellId);
-            HDF_LOGI("rxlev:%{public}d", info.serviceCells.gsm.rxlev);
-            HDF_LOGI("lac:%{public}d", info.serviceCells.gsm.lac);
-            break;
-        case RatType::NETWORK_TYPE_WCDMA:
-            HDF_LOGI("arfcn:%{public}d", info.serviceCells.wcdma.arfcn);
-            HDF_LOGI("psc:%{public}d", info.serviceCells.wcdma.psc);
-            HDF_LOGI("rscp:%{public}d", info.serviceCells.wcdma.rscp);
-            HDF_LOGI("ecno:%{public}d", info.serviceCells.wcdma.ecno);
-            break;
-        case RatType::NETWORK_TYPE_NR:
-            HDF_LOGI("arfcn:%{public}d", info.serviceCells.nr.nrArfcn);
-            HDF_LOGI("psc:%{public}d", info.serviceCells.nr.pci);
-            HDF_LOGI("rscp:%{public}d", info.serviceCells.nr.tac);
-            HDF_LOGI("ecno:%{public}d", info.serviceCells.nr.nci);
-            break;
-        default:
-            HDF_LOGE("RilCallback::GetCurrentCellInfoResponse invalid ratType");
+            case RatType::NETWORK_TYPE_LTE:
+                HDF_LOGI("cellId:%{public}d", info.serviceCells.lte.cellId);
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.lte.arfcn);
+                HDF_LOGI("pci:%{public}d", info.serviceCells.lte.pci);
+                HDF_LOGI("rsrp:%{public}d", info.serviceCells.lte.rsrp);
+                HDF_LOGI("rsrq:%{public}d", info.serviceCells.lte.rsrq);
+                HDF_LOGI("rxlev:%{public}d", info.serviceCells.lte.rssi);
+                break;
+            case RatType::NETWORK_TYPE_GSM:
+                HDF_LOGI("band:%{public}d", info.serviceCells.gsm.band);
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.gsm.arfcn);
+                HDF_LOGI("bsic:%{public}d", info.serviceCells.gsm.bsic);
+                HDF_LOGI("cellId:%{public}d", info.serviceCells.gsm.cellId);
+                HDF_LOGI("rxlev:%{public}d", info.serviceCells.gsm.rxlev);
+                HDF_LOGI("lac:%{public}d", info.serviceCells.gsm.lac);
+                break;
+            case RatType::NETWORK_TYPE_WCDMA:
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.wcdma.arfcn);
+                HDF_LOGI("psc:%{public}d", info.serviceCells.wcdma.psc);
+                HDF_LOGI("rscp:%{public}d", info.serviceCells.wcdma.rscp);
+                HDF_LOGI("ecno:%{public}d", info.serviceCells.wcdma.ecno);
+                break;
+            case RatType::NETWORK_TYPE_NR:
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.nr.nrArfcn);
+                HDF_LOGI("psc:%{public}d", info.serviceCells.nr.pci);
+                HDF_LOGI("rscp:%{public}d", info.serviceCells.nr.tac);
+                HDF_LOGI("ecno:%{public}d", info.serviceCells.nr.nci);
+                break;
+            default:
+                HDF_LOGE("RilCallback::GetCurrentCellInfoResponse invalid ratType");
         }
     }
-    hdiId_ = HdiId::HREQ_NETWORK_GET_CURRENT_CELL_INFO;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_CURRENT_CELL_INFO;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1299,48 +1298,48 @@ int32_t RilCallback::GetCurrentCellInfoResponse(const RilRadioResponseInfo &resp
 int32_t RilCallback::GetCurrentCellInfoResponse_1_1(const RilRadioResponseInfo &responseInfo,
                                                     const CellListCurrentInfo_1_1 &cellListCurrentInfo)
 {
-    g_getCurrentCellInfoResponse_1_1Flag = true;
+    g_getCurrentCellInfoResponse11Flag = true;
     HDF_LOGI("RilCallback::GetCurrentCellInfoResponse_1_1 itemNum:%{public}d", cellListCurrentInfo.itemNum);
     for (auto info : cellListCurrentInfo.cellCurrentInfo) {
         HDF_LOGI("RilCallback::GetCurrentCellInfoResponse_1_1 ratType:%{public}d, mcc:%{public}d, mnc:%{public}d",
                  info.ratType, info.mcc, info.mnc);
         switch (static_cast<RatType>(info.ratType)) {
-        case RatType::NETWORK_TYPE_LTE:
-            HDF_LOGI("cellId:%{public}d", info.serviceCells.lte.cellId);
-            HDF_LOGI("arfcn:%{public}d", info.serviceCells.lte.arfcn);
-            HDF_LOGI("pci:%{public}d", info.serviceCells.lte.pci);
-            HDF_LOGI("rsrp:%{public}d", info.serviceCells.lte.rsrp);
-            HDF_LOGI("rsrq:%{public}d", info.serviceCells.lte.rsrq);
-            HDF_LOGI("rxlev:%{public}d", info.serviceCells.lte.rssi);
-            break;
-        case RatType::NETWORK_TYPE_GSM:
-            HDF_LOGI("band:%{public}d", info.serviceCells.gsm.band);
-            HDF_LOGI("arfcn:%{public}d", info.serviceCells.gsm.arfcn);
-            HDF_LOGI("bsic:%{public}d", info.serviceCells.gsm.bsic);
-            HDF_LOGI("cellId:%{public}d", info.serviceCells.gsm.cellId);
-            HDF_LOGI("rxlev:%{public}d", info.serviceCells.gsm.rxlev);
-            HDF_LOGI("lac:%{public}d", info.serviceCells.gsm.lac);
-            break;
-        case RatType::NETWORK_TYPE_WCDMA:
-            HDF_LOGI("arfcn:%{public}d", info.serviceCells.wcdma.arfcn);
-            HDF_LOGI("psc:%{public}d", info.serviceCells.wcdma.psc);
-            HDF_LOGI("rscp:%{public}d", info.serviceCells.wcdma.rscp);
-            HDF_LOGI("ecno:%{public}d", info.serviceCells.wcdma.ecno);
-            break;
-        case RatType::NETWORK_TYPE_NR:
-            HDF_LOGI("arfcn:%{public}d", info.serviceCells.nr.nrArfcn);
-            HDF_LOGI("psc:%{public}d", info.serviceCells.nr.pci);
-            HDF_LOGI("rscp:%{public}d", info.serviceCells.nr.tac);
-            HDF_LOGI("ecno:%{public}d", info.serviceCells.nr.nci);
-            HDF_LOGI("rsrp:%{public}d", info.serviceCells.nr.rsrp);
-            HDF_LOGI("rsrq:%{public}d", info.serviceCells.nr.rsrq);
-            break;
-        default:
-            HDF_LOGE("RilCallback::GetCurrentCellInfoResponse_1_1 invalid ratType");
+            case RatType::NETWORK_TYPE_LTE:
+                HDF_LOGI("cellId:%{public}d", info.serviceCells.lte.cellId);
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.lte.arfcn);
+                HDF_LOGI("pci:%{public}d", info.serviceCells.lte.pci);
+                HDF_LOGI("rsrp:%{public}d", info.serviceCells.lte.rsrp);
+                HDF_LOGI("rsrq:%{public}d", info.serviceCells.lte.rsrq);
+                HDF_LOGI("rxlev:%{public}d", info.serviceCells.lte.rssi);
+                break;
+            case RatType::NETWORK_TYPE_GSM:
+                HDF_LOGI("band:%{public}d", info.serviceCells.gsm.band);
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.gsm.arfcn);
+                HDF_LOGI("bsic:%{public}d", info.serviceCells.gsm.bsic);
+                HDF_LOGI("cellId:%{public}d", info.serviceCells.gsm.cellId);
+                HDF_LOGI("rxlev:%{public}d", info.serviceCells.gsm.rxlev);
+                HDF_LOGI("lac:%{public}d", info.serviceCells.gsm.lac);
+                break;
+            case RatType::NETWORK_TYPE_WCDMA:
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.wcdma.arfcn);
+                HDF_LOGI("psc:%{public}d", info.serviceCells.wcdma.psc);
+                HDF_LOGI("rscp:%{public}d", info.serviceCells.wcdma.rscp);
+                HDF_LOGI("ecno:%{public}d", info.serviceCells.wcdma.ecno);
+                break;
+            case RatType::NETWORK_TYPE_NR:
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.nr.nrArfcn);
+                HDF_LOGI("psc:%{public}d", info.serviceCells.nr.pci);
+                HDF_LOGI("rscp:%{public}d", info.serviceCells.nr.tac);
+                HDF_LOGI("ecno:%{public}d", info.serviceCells.nr.nci);
+                HDF_LOGI("rsrp:%{public}d", info.serviceCells.nr.rsrp);
+                HDF_LOGI("rsrq:%{public}d", info.serviceCells.nr.rsrq);
+                break;
+            default:
+                HDF_LOGE("RilCallback::GetCurrentCellInfoResponse_1_1 invalid ratType");
         }
     }
-    hdiId_ = HdiId::HREQ_NETWORK_GET_CURRENT_CELL_INFO;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_CURRENT_CELL_INFO;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1348,8 +1347,8 @@ int32_t RilCallback::GetCurrentCellInfoResponse_1_1(const RilRadioResponseInfo &
 int32_t RilCallback::SetPreferredNetworkResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("RilCallback::SetPreferredNetworkResponse error:%{public}d", responseInfo.error);
-    hdiId_ = HdiId::HREQ_NETWORK_SET_PREFERRED_NETWORK;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_NETWORK_SET_PREFERRED_NETWORK;
+    g_resultInfo = responseInfo;
     g_setPreferredNetworkResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1359,8 +1358,8 @@ int32_t RilCallback::GetPreferredNetworkResponse(const RilRadioResponseInfo &res
                                                  const PreferredNetworkTypeInfo &preferredNetworkTypeInfo)
 {
     HDF_LOGI("RilCallback::GetPreferredNetworkResponse type:%{public}d", preferredNetworkTypeInfo.preferredNetworkType);
-    hdiId_ = HdiId::HREQ_NETWORK_GET_PREFERRED_NETWORK;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_PREFERRED_NETWORK;
+    g_resultInfo = responseInfo;
     g_getPreferredNetworkResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1382,8 +1381,8 @@ int32_t RilCallback::GetPhysicalChannelConfigResponse(const RilRadioResponseInfo
             HDF_LOGI("contextIds[%{public}d]:%{public}d", j, phyChnlCfg.contextIds[j]);
         }
     }
-    hdiId_ = HdiId::HREQ_NETWORK_GET_PHYSICAL_CHANNEL_CONFIG;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_PHYSICAL_CHANNEL_CONFIG;
+    g_resultInfo = responseInfo;
     g_getPhysicalChannelConfigResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1393,8 +1392,8 @@ int32_t RilCallback::SetLocateUpdatesResponse(const RilRadioResponseInfo &respon
 {
     g_setLocateUpdatesResponseFlag = true;
     HDF_LOGI("RilCallback::SetLocateUpdatesResponse error:%{public}d", responseInfo.error);
-    hdiId_ = HdiId::HREQ_NETWORK_SET_LOCATE_UPDATES;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_NETWORK_SET_LOCATE_UPDATES;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1403,8 +1402,8 @@ int32_t RilCallback::SetNotificationFilterResponse(const RilRadioResponseInfo &r
 {
     g_setNotificationFilterResponseFlag = true;
     HDF_LOGI("RilCallback::SetNotificationFilterResponse error:%{public}d", responseInfo.error);
-    hdiId_ = HdiId::HREQ_NETWORK_SET_NOTIFICATION_FILTER;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_NETWORK_SET_NOTIFICATION_FILTER;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1413,8 +1412,8 @@ int32_t RilCallback::SetDeviceStateResponse(const RilRadioResponseInfo &response
 {
     g_setDeviceStateResponseFlag = true;
     HDF_LOGI("RilCallback::SetDeviceStateResponse error:%{public}d", responseInfo.error);
-    hdiId_ = HdiId::HREQ_NETWORK_SET_DEVICE_STATE;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_NETWORK_SET_DEVICE_STATE;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1422,8 +1421,8 @@ int32_t RilCallback::SetDeviceStateResponse(const RilRadioResponseInfo &response
 int32_t RilCallback::GetRrcConnectionStateResponse(const RilRadioResponseInfo &responseInfo, int32_t state)
 {
     HDF_LOGI("RilCallback::GetRrcConnectionStateResponse state:%{public}d", state);
-    hdiId_ = HdiId::HREQ_NETWORK_GET_RRC_CONNECTION_STATE;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_RRC_CONNECTION_STATE;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1432,8 +1431,8 @@ int32_t RilCallback::SetNrOptionModeResponse(const RilRadioResponseInfo &respons
 {
     HDF_LOGI("RilCallback::SetDeviceStateResponse error:%{public}d", responseInfo.error);
     g_setNrOptionModeResponseFlag = true;
-    hdiId_ = HdiId::HREQ_NETWORK_SET_NR_OPTION_MODE;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_NETWORK_SET_NR_OPTION_MODE;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1442,8 +1441,8 @@ int32_t RilCallback::GetNrOptionModeResponse(const RilRadioResponseInfo &respons
 {
     HDF_LOGI("RilCallback::GetNrOptionModeResponse state:%{public}d", state);
     g_getNrOptionModeResponseFlag = true;
-    hdiId_ = HdiId::HREQ_NETWORK_GET_NR_OPTION_MODE;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_NR_OPTION_MODE;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1451,6 +1450,32 @@ int32_t RilCallback::GetNrOptionModeResponse(const RilRadioResponseInfo &respons
 int32_t RilCallback::GetRrcConnectionStateUpdated(const RilRadioResponseInfo &responseInfo, int32_t state)
 {
     HDF_LOGI("RilCallback::GetRrcConnectionStateUpdated state:%{public}d", state);
+    return 0;
+}
+
+int32_t RilCallback::GetNrSsbIdResponse(const RilRadioResponseInfo &responseInfo, const NrCellSsbIds &nrCellSsbIds)
+{
+    int32_t ssbListNum = 0;
+    int32_t nbCellNum = 0;
+    HDF_LOGE("rsrp:%{public}d", nrCellSsbIds.rsrp);
+    HDF_LOGE("sinr:%{public}d", nrCellSsbIds.sinr);
+    for (auto info : nrCellSsbIds.sCellSsbList) {
+        ssbListNum = ssbListNum + 1;
+        HDF_LOGE("sCellSsbNum:%{public}d, rsrp:%{public}d", ssbListNum, info.rsrp);
+    }
+    HDF_LOGE("nbCellCount:%{public}d", nrCellSsbIds.nbCellCount);
+    for (auto info : nrCellSsbIds.nbCellSsbList) {
+        nbCellNum = nbCellNum + 1;
+        HDF_LOGE("nbCellNum:%{public}d, rsrp:%{public}d, sinr:%{public}d", nbCellNum, info.rsrp, info.sinr);
+        ssbListNum = 0;
+        for (auto infoNbCell : info.ssbIdList) {
+            ssbListNum = ssbListNum + 1;
+            HDF_LOGE("nbCellSsbNum:%{public}d, rsrp:%{public}d", ssbListNum, infoNbCell.rsrp);
+        }
+    }
+    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_NR_SSBID_INFO;
+    g_resultInfo = responseInfo;
+    NotifyAll();
     return 0;
 }
 
@@ -1509,8 +1534,8 @@ int32_t RilCallback::GetEmergencyCallListResponse(const RilRadioResponseInfo &re
                                                   const EmergencyInfoList &emergencyInfoList)
 {
     HDF_LOGI("GetBoolResult emergencyInfoList callSize : %{public}d", emergencyInfoList.callSize);
-    hdiId_ = HdiId::HREQ_CALL_GET_EMERGENCY_LIST;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_GET_EMERGENCY_LIST;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1518,8 +1543,8 @@ int32_t RilCallback::GetEmergencyCallListResponse(const RilRadioResponseInfo &re
 int32_t RilCallback::SetEmergencyCallListResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("GetBoolResult SetEmergencyCallListResponse");
-    hdiId_ = HdiId::HREQ_CALL_SET_EMERGENCY_LIST;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_SET_EMERGENCY_LIST;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1527,8 +1552,8 @@ int32_t RilCallback::SetEmergencyCallListResponse(const RilRadioResponseInfo &re
 int32_t RilCallback::GetCallListResponse(const RilRadioResponseInfo &responseInfo, const CallInfoList &callList)
 {
     HDF_LOGI("GetBoolResult CallInfoList callSize : %{public}d", callList.callSize);
-    hdiId_ = HdiId::HREQ_CALL_GET_CALL_LIST;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_GET_CALL_LIST;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1537,8 +1562,8 @@ int32_t RilCallback::DialResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_dialResponseFlag = true;
     HDF_LOGI("GetBoolResult DialResponse");
-    hdiId_ = HdiId::HREQ_CALL_DIAL;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_DIAL;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1547,8 +1572,8 @@ int32_t RilCallback::HangupResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_hangupResponseFlag = true;
     HDF_LOGI("GetBoolResult HangupResponse");
-    hdiId_ = HdiId::HREQ_CALL_HANGUP;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_HANGUP;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1557,8 +1582,8 @@ int32_t RilCallback::RejectResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_rejectResponseFlag = true;
     HDF_LOGI("GetBoolResult RejectResponse");
-    hdiId_ = HdiId::HREQ_CALL_REJECT;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_REJECT;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1567,8 +1592,8 @@ int32_t RilCallback::AnswerResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_answerResponseFlag = true;
     HDF_LOGI("GetBoolResult AnswerResponse");
-    hdiId_ = HdiId::HREQ_CALL_ANSWER;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_ANSWER;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1577,8 +1602,8 @@ int32_t RilCallback::HoldCallResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_holdCallResponseFlag = true;
     HDF_LOGI("GetBoolResult HoldCallResponse");
-    hdiId_ = HdiId::HREQ_CALL_HOLD_CALL;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_HOLD_CALL;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1587,8 +1612,8 @@ int32_t RilCallback::UnHoldCallResponse(const RilRadioResponseInfo &responseInfo
 {
     g_unHoldCallResponseFlag = true;
     HDF_LOGI("GetBoolResult UnHoldCallResponse");
-    hdiId_ = HdiId::HREQ_CALL_UNHOLD_CALL;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_UNHOLD_CALL;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1597,8 +1622,8 @@ int32_t RilCallback::SwitchCallResponse(const RilRadioResponseInfo &responseInfo
 {
     g_switchCallResponseFlag = true;
     HDF_LOGI("GetBoolResult SwitchCallResponse");
-    hdiId_ = HdiId::HREQ_CALL_SWITCH_CALL;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_SWITCH_CALL;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1608,8 +1633,8 @@ int32_t RilCallback::GetClipResponse(const RilRadioResponseInfo &responseInfo, c
     g_getClipResponseFlag = true;
     HDF_LOGI("GetBoolResult result: %{public}d, action: %{public}d, clipStat: %{public}d", getClipResult.result,
              getClipResult.action, getClipResult.clipStat);
-    hdiId_ = HdiId::HREQ_CALL_GET_CLIP;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_GET_CLIP;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1618,8 +1643,8 @@ int32_t RilCallback::SetClipResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_setClipResponseFlag = true;
     HDF_LOGI("GetBoolResult SetClipResponse");
-    hdiId_ = HdiId::HREQ_CALL_SET_CLIP;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_SET_CLIP;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1627,8 +1652,8 @@ int32_t RilCallback::SetClipResponse(const RilRadioResponseInfo &responseInfo)
 int32_t RilCallback::CombineConferenceResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("GetBoolResult CombineConferenceResponse");
-    hdiId_ = HdiId::HREQ_CALL_COMBINE_CONFERENCE;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_COMBINE_CONFERENCE;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1636,8 +1661,8 @@ int32_t RilCallback::CombineConferenceResponse(const RilRadioResponseInfo &respo
 int32_t RilCallback::SeparateConferenceResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("GetBoolResult SeparateConferenceResponse");
-    hdiId_ = HdiId::HREQ_CALL_SEPARATE_CONFERENCE;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_SEPARATE_CONFERENCE;
+    g_resultInfo = responseInfo;
     g_separateConferenceResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1646,8 +1671,8 @@ int32_t RilCallback::SeparateConferenceResponse(const RilRadioResponseInfo &resp
 int32_t RilCallback::CallSupplementResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("GetBoolResult CallSupplementResponse");
-    hdiId_ = HdiId::HREQ_CALL_CALL_SUPPLEMENT;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_CALL_SUPPLEMENT;
+    g_resultInfo = responseInfo;
     g_callSupplementResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1658,8 +1683,8 @@ int32_t RilCallback::GetCallWaitingResponse(const RilRadioResponseInfo &response
 {
     HDF_LOGI("GetBoolResult GetCallWaitingResponse result: %{public}d, status: %{public}d, classCw: %{public}d",
              callWaitResult.result, callWaitResult.status, callWaitResult.classCw);
-    hdiId_ = HdiId::HREQ_CALL_GET_CALL_WAITING;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_GET_CALL_WAITING;
+    g_resultInfo = responseInfo;
     g_getCallWaitingResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1668,8 +1693,8 @@ int32_t RilCallback::GetCallWaitingResponse(const RilRadioResponseInfo &response
 int32_t RilCallback::SetCallWaitingResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("GetBoolResult SetCallWaitingResponse");
-    hdiId_ = HdiId::HREQ_CALL_SET_CALL_WAITING;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_SET_CALL_WAITING;
+    g_resultInfo = responseInfo;
     g_setCallWaitingResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1679,8 +1704,8 @@ int32_t RilCallback::GetCallTransferInfoResponse(const RilRadioResponseInfo &res
                                                  const CallForwardQueryInfoList &cFQueryList)
 {
     HDF_LOGI("GetBoolResult GetCallTransferInfoResponse cFQueryList: %{public}d", cFQueryList.callSize);
-    hdiId_ = HdiId::HREQ_CALL_GET_CALL_TRANSFER_INFO;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_GET_CALL_TRANSFER_INFO;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1689,8 +1714,8 @@ int32_t RilCallback::SetCallTransferInfoResponse(const RilRadioResponseInfo &res
 {
     g_setCallTransferInfoResponseFlag = true;
     HDF_LOGI("GetBoolResult SetCallTransferInfoResponse");
-    hdiId_ = HdiId::HREQ_CALL_SET_CALL_TRANSFER_INFO;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_SET_CALL_TRANSFER_INFO;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1701,8 +1726,8 @@ int32_t RilCallback::GetCallRestrictionResponse(const RilRadioResponseInfo &resp
     g_getCallRestrictionResponseFlag = true;
     HDF_LOGI("GetBoolResult result: %{public}d, status: %{public}d, classCw: %{public}d", result.result, result.status,
              result.classCw);
-    hdiId_ = HdiId::HREQ_CALL_GET_CALL_RESTRICTION;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_GET_CALL_RESTRICTION;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1710,8 +1735,8 @@ int32_t RilCallback::SetCallRestrictionResponse(const RilRadioResponseInfo &resp
 {
     g_setCallRestrictionResponseFlag = true;
     HDF_LOGI("GetBoolResult SetCallRestrictionResponse");
-    hdiId_ = HdiId::HREQ_CALL_SET_CALL_RESTRICTION;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_SET_CALL_RESTRICTION;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1720,8 +1745,8 @@ int32_t RilCallback::GetClirResponse(const RilRadioResponseInfo &responseInfo, c
     g_getClirResponseFlag = true;
     HDF_LOGI("GetBoolResult result: %{public}d, action: %{public}d, clirStat: %{public}d", getClirResult.result,
              getClirResult.action, getClirResult.clirStat);
-    hdiId_ = HdiId::HREQ_CALL_GET_CLIR;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_GET_CLIR;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1730,8 +1755,8 @@ int32_t RilCallback::SetClirResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_setClirResponseFlag = true;
     HDF_LOGI("GetBoolResult SetClirResponse");
-    hdiId_ = HdiId::HREQ_CALL_SET_CLIR;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_SET_CLIR;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1740,8 +1765,8 @@ int32_t RilCallback::StartDtmfResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_startDtmfResponseFlag = true;
     HDF_LOGI("GetBoolResult StartDtmfResponse");
-    hdiId_ = HdiId::HREQ_CALL_START_DTMF;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_START_DTMF;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1750,8 +1775,8 @@ int32_t RilCallback::SendDtmfResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_sendDtmfResponseFlag = true;
     HDF_LOGI("GetBoolResult SendDtmfResponse");
-    hdiId_ = HdiId::HREQ_CALL_SEND_DTMF;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_SEND_DTMF;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1760,8 +1785,8 @@ int32_t RilCallback::StopDtmfResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_stopDtmfResponseFlag = true;
     HDF_LOGI("GetBoolResult StopDtmfResponse");
-    hdiId_ = HdiId::HREQ_CALL_STOP_DTMF;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_STOP_DTMF;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1770,8 +1795,8 @@ int32_t RilCallback::GetCallPreferenceModeResponse(const RilRadioResponseInfo &r
 {
     g_getCallPreferenceModeResponseFlag = true;
     HDF_LOGI("GetBoolResult GetCallPreferenceModeResponse mode: %{public}d", mode);
-    hdiId_ = HdiId::HREQ_CALL_GET_CALL_PREFERENCE;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_GET_CALL_PREFERENCE;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1780,8 +1805,8 @@ int32_t RilCallback::SetCallPreferenceModeResponse(const RilRadioResponseInfo &r
 {
     g_setCallPreferenceModeResponseFlag = true;
     HDF_LOGI("GetBoolResult SetCallPreferenceModeResponse");
-    hdiId_ = HdiId::HREQ_CALL_SET_CALL_PREFERENCE;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_SET_CALL_PREFERENCE;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1790,8 +1815,8 @@ int32_t RilCallback::SetUssdResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_setUssdResponseFlag = true;
     HDF_LOGI("GetBoolResult SetUssdResponse");
-    hdiId_ = HdiId::HREQ_CALL_SET_USSD;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_SET_USSD;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1799,8 +1824,8 @@ int32_t RilCallback::SetUssdResponse(const RilRadioResponseInfo &responseInfo)
 int32_t RilCallback::GetUssdResponse(const RilRadioResponseInfo &responseInfo, int32_t cusd)
 {
     HDF_LOGI("GetBoolResult GetUssdResponse cusd: %{public}d", cusd);
-    hdiId_ = HdiId::HREQ_CALL_GET_USSD;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_GET_USSD;
+    g_resultInfo = responseInfo;
     g_getUssdResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1809,8 +1834,8 @@ int32_t RilCallback::GetUssdResponse(const RilRadioResponseInfo &responseInfo, i
 int32_t RilCallback::SetMuteResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("GetBoolResult SetMuteResponse");
-    hdiId_ = HdiId::HREQ_CALL_SET_MUTE;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_SET_MUTE;
+    g_resultInfo = responseInfo;
     g_setMuteResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1819,8 +1844,8 @@ int32_t RilCallback::SetMuteResponse(const RilRadioResponseInfo &responseInfo)
 int32_t RilCallback::GetMuteResponse(const RilRadioResponseInfo &responseInfo, int32_t mute)
 {
     HDF_LOGI("GetBoolResult GetMuteResponse mute: %{public}d", mute);
-    hdiId_ = HdiId::HREQ_CALL_GET_MUTE;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_GET_MUTE;
+    g_resultInfo = responseInfo;
     g_getMuteResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1830,8 +1855,8 @@ int32_t RilCallback::GetCallFailReasonResponse(const RilRadioResponseInfo &respo
 {
     g_getCallFailReasonResponseFlag = true;
     HDF_LOGI("GetBoolResult GetCallFailReasonResponse callFail: %{public}d", callFail);
-    hdiId_ = HdiId::HREQ_CALL_GET_FAIL_REASON;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_GET_FAIL_REASON;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1840,8 +1865,8 @@ int32_t RilCallback::SetBarringPasswordResponse(const RilRadioResponseInfo &resp
 {
     g_setBarringPasswordResponseFlag = true;
     HDF_LOGI("GetBoolResult SetBarringPasswordResponse");
-    hdiId_ = HdiId::HREQ_CALL_SET_BARRING_PASSWORD;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_SET_BARRING_PASSWORD;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1850,8 +1875,8 @@ int32_t RilCallback::CloseUnFinishedUssdResponse(const RilRadioResponseInfo &res
 {
     g_closeUnFinishedUssdResponseFlag = true;
     HDF_LOGI("GetBoolResult CloseUnFinishedUssdResponse");
-    hdiId_ = HdiId::HREQ_CALL_CLOSE_UNFINISHED_USSD;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_CALL_CLOSE_UNFINISHED_USSD;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1860,8 +1885,8 @@ int32_t RilCallback::SetVonrSwitchResponse(const RilRadioResponseInfo &responseI
 {
     g_setVonrSwitchResponseFlag = true;
     HDF_LOGI("GetBoolResult SetVonrSwitchResponse");
-    hdiId_ = HdiId::HREQ_SET_VONR_SWITCH;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SET_VONR_SWITCH;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1897,8 +1922,8 @@ int32_t RilCallback::DsdsModeUpdated(const RilRadioResponseInfo &responseInfo, i
 int32_t RilCallback::ShutDownResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("ShutDownResponse");
-    hdiId_ = HdiId::HREQ_MODEM_SHUT_DOWN;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_MODEM_SHUT_DOWN;
+    g_resultInfo = responseInfo;
     g_shutDownResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1907,8 +1932,8 @@ int32_t RilCallback::ShutDownResponse(const RilRadioResponseInfo &responseInfo)
 int32_t RilCallback::SetRadioStateResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("SetRadioStateResponse");
-    hdiId_ = HdiId::HREQ_MODEM_SET_RADIO_STATUS;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_MODEM_SET_RADIO_STATUS;
+    g_resultInfo = responseInfo;
     g_setRadioStateResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1917,8 +1942,8 @@ int32_t RilCallback::SetRadioStateResponse(const RilRadioResponseInfo &responseI
 int32_t RilCallback::GetRadioStateResponse(const RilRadioResponseInfo &responseInfo, int32_t state)
 {
     HDF_LOGI("GetRadioStateResponse state : %{public}d", state);
-    hdiId_ = HdiId::HREQ_MODEM_GET_RADIO_STATUS;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_MODEM_GET_RADIO_STATUS;
+    g_resultInfo = responseInfo;
     g_getRadioStateResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1927,8 +1952,8 @@ int32_t RilCallback::GetRadioStateResponse(const RilRadioResponseInfo &responseI
 int32_t RilCallback::GetImeiResponse(const RilRadioResponseInfo &responseInfo, const std::string &imei)
 {
     HDF_LOGI("GetImeiResponse imei : %{public}s", imei.c_str());
-    hdiId_ = HdiId::HREQ_MODEM_GET_IMEI;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_MODEM_GET_IMEI;
+    g_resultInfo = responseInfo;
     g_getImeiResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1937,8 +1962,8 @@ int32_t RilCallback::GetImeiResponse(const RilRadioResponseInfo &responseInfo, c
 int32_t RilCallback::GetMeidResponse(const RilRadioResponseInfo &responseInfo, const std::string &meid)
 {
     HDF_LOGI("GetMeidResponse meid : %{public}s", meid.c_str());
-    hdiId_ = HdiId::HREQ_MODEM_GET_MEID;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_MODEM_GET_MEID;
+    g_resultInfo = responseInfo;
     g_getMeidResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1955,8 +1980,8 @@ int32_t RilCallback::GetVoiceRadioTechnologyResponse(const RilRadioResponseInfo 
              voiceRadioTechnology.simStatus, voiceRadioTechnology.lockStatus, voiceRadioTechnology.sysMode,
              voiceRadioTechnology.actType, voiceRadioTechnology.sysModeName.c_str(),
              voiceRadioTechnology.actName.c_str());
-    hdiId_ = HdiId::HREQ_MODEM_GET_VOICE_RADIO;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_MODEM_GET_VOICE_RADIO;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1965,8 +1990,8 @@ int32_t RilCallback::GetBasebandVersionResponse(const RilRadioResponseInfo &resp
                                                 const std::string &basebandVersion)
 {
     HDF_LOGI("GetBasebandVersionResponse basebandVersion : %{public}s", basebandVersion.c_str());
-    hdiId_ = HdiId::HREQ_MODEM_GET_BASEBAND_VERSION;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_MODEM_GET_BASEBAND_VERSION;
+    g_resultInfo = responseInfo;
     g_getBasebandVersionResponseFlag = true;
     NotifyAll();
     return 0;
@@ -2017,8 +2042,8 @@ int32_t RilCallback::ActivatePdpContextResponse(const RilRadioResponseInfo &resp
              setupDataCallResultInfo.gateway.c_str(), setupDataCallResultInfo.maxTransferUnit,
              setupDataCallResultInfo.pCscfPrimAddr.c_str(), setupDataCallResultInfo.pCscfSecAddr.c_str(),
              setupDataCallResultInfo.pduSessionId);
-    hdiId_ = HdiId::HREQ_DATA_ACTIVATE_PDP_CONTEXT;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_DATA_ACTIVATE_PDP_CONTEXT;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2027,8 +2052,8 @@ int32_t RilCallback::DeactivatePdpContextResponse(const RilRadioResponseInfo &re
 {
     g_deactivatePdpContextResponseFlag = true;
     HDF_LOGI("RilCallback::DeactivatePdpContextResponse error:%{public}d", responseInfo.error);
-    hdiId_ = HdiId::HREQ_DATA_DEACTIVATE_PDP_CONTEXT;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_DATA_DEACTIVATE_PDP_CONTEXT;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2052,8 +2077,8 @@ int32_t RilCallback::GetPdpContextListResponse(const RilRadioResponseInfo &respo
             setupDataCallResultInfo.pCscfPrimAddr.c_str(), setupDataCallResultInfo.pCscfSecAddr.c_str(),
             setupDataCallResultInfo.pduSessionId);
     }
-    hdiId_ = HdiId::HREQ_DATA_GET_PDP_CONTEXT_LIST;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_DATA_GET_PDP_CONTEXT_LIST;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2062,8 +2087,8 @@ int32_t RilCallback::SetInitApnInfoResponse(const RilRadioResponseInfo &response
 {
     g_setInitApnInfoResponseFlag = true;
     HDF_LOGI("RilCallback::SetInitApnInfoResponse error:%{public}d", responseInfo.error);
-    hdiId_ = HdiId::HREQ_DATA_SET_INIT_APN_INFO;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_DATA_SET_INIT_APN_INFO;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2071,8 +2096,8 @@ int32_t RilCallback::SetInitApnInfoResponse(const RilRadioResponseInfo &response
 int32_t RilCallback::SetLinkBandwidthReportingRuleResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("RilCallback::SetLinkBandwidthReportingRuleResponse error:%{public}d", responseInfo.error);
-    hdiId_ = HdiId::HREQ_DATA_SET_LINK_BANDWIDTH_REPORTING_RULE;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_DATA_SET_LINK_BANDWIDTH_REPORTING_RULE;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2088,8 +2113,8 @@ int32_t RilCallback::GetLinkBandwidthInfoResponse(const RilRadioResponseInfo &re
         dataLinkBandwidthInfo.serial, dataLinkBandwidthInfo.cid, dataLinkBandwidthInfo.qi, dataLinkBandwidthInfo.dlGfbr,
         dataLinkBandwidthInfo.ulGfbr, dataLinkBandwidthInfo.dlMfbr, dataLinkBandwidthInfo.ulMfbr,
         dataLinkBandwidthInfo.ulSambr, dataLinkBandwidthInfo.dlSambr, dataLinkBandwidthInfo.averagingWindow);
-    hdiId_ = HdiId::HREQ_DATA_GET_LINK_BANDWIDTH_INFO;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_DATA_GET_LINK_BANDWIDTH_INFO;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2097,8 +2122,8 @@ int32_t RilCallback::GetLinkBandwidthInfoResponse(const RilRadioResponseInfo &re
 int32_t RilCallback::SetDataPermittedResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("RilCallback::SetDataPermittedResponse error:%{public}d", responseInfo.error);
-    hdiId_ = HdiId::HREQ_DATA_SET_DATA_PERMITTED;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_DATA_SET_DATA_PERMITTED;
+    g_resultInfo = responseInfo;
     g_setDataPermittedResponseFlag = true;
     NotifyAll();
     return 0;
@@ -2107,8 +2132,8 @@ int32_t RilCallback::SetDataPermittedResponse(const RilRadioResponseInfo &respon
 int32_t RilCallback::SetDataProfileInfoResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("RilCallback::SetDataProfileInfoResponse error:%{public}d", responseInfo.error);
-    hdiId_ = HdiId::HREQ_DATA_SET_DATA_PROFILE_INFO;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_DATA_SET_DATA_PROFILE_INFO;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2121,8 +2146,8 @@ int32_t RilCallback::GetLinkCapabilityResponse(const RilRadioResponseInfo &respo
              "primaryUplinkKbps:%{public}d secondaryDownlinkKbps:%{public}d secondaryUplinkKbps:%{public}d",
              dataLinkCapability.primaryDownlinkKbps, dataLinkCapability.primaryUplinkKbps,
              dataLinkCapability.secondaryDownlinkKbps, dataLinkCapability.secondaryUplinkKbps);
-    hdiId_ = HdiId::HREQ_DATA_GET_LINK_CAPABILITY;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_DATA_GET_LINK_CAPABILITY;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2130,8 +2155,8 @@ int32_t RilCallback::GetLinkCapabilityResponse(const RilRadioResponseInfo &respo
 int32_t RilCallback::CleanAllConnectionsResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("RilCallback::CleanAllConnectionsResponse error:%{public}d", responseInfo.error);
-    hdiId_ = HdiId::HREQ_DATA_CLEAN_ALL_CONNECTIONS;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_DATA_CLEAN_ALL_CONNECTIONS;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2179,8 +2204,8 @@ int32_t RilCallback::SendGsmSmsResponse(const RilRadioResponseInfo &responseInfo
     g_sendGsmSmsResponseFlag = true;
     HDF_LOGI("RilCallback::SendGsmSmsResponse sendSmsResultInfo pdu : %{public}s, error : %{public}d",
              sendSmsResultInfo.pdu.c_str(), sendSmsResultInfo.errCode);
-    hdiId_ = HdiId::HREQ_SMS_SEND_GSM_SMS;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SMS_SEND_GSM_SMS;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2191,8 +2216,8 @@ int32_t RilCallback::SendCdmaSmsResponse(const RilRadioResponseInfo &responseInf
     g_sendCdmaSmsResponseFlag = true;
     HDF_LOGI("RilCallback::SendCdmaSmsResponse sendSmsResultInfo pdu : %{public}s, error : %{public}d",
              sendSmsResultInfo.pdu.c_str(), sendSmsResultInfo.errCode);
-    hdiId_ = HdiId::HREQ_SMS_SEND_CDMA_SMS;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SMS_SEND_CDMA_SMS;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2201,8 +2226,8 @@ int32_t RilCallback::AddSimMessageResponse(const RilRadioResponseInfo &responseI
 {
     g_addSimMessageResponseFlag = true;
     HDF_LOGI("RilCallback::AddSimMessageResponse error : %{public}d", responseInfo.error);
-    hdiId_ = HdiId::HREQ_SMS_ADD_SIM_MESSAGE;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SMS_ADD_SIM_MESSAGE;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2211,8 +2236,8 @@ int32_t RilCallback::DelSimMessageResponse(const RilRadioResponseInfo &responseI
 {
     g_delSimMessageResponseFlag = true;
     HDF_LOGI("RilCallback::DelSimMessageResponse error : %{public}d", responseInfo.error);
-    hdiId_ = HdiId::HREQ_SMS_DEL_SIM_MESSAGE;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SMS_DEL_SIM_MESSAGE;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2220,8 +2245,8 @@ int32_t RilCallback::UpdateSimMessageResponse(const RilRadioResponseInfo &respon
 {
     g_updateSimMessageResponseFlag = true;
     HDF_LOGI("RilCallback::UpdateSimMessageResponse error : %{public}d", responseInfo.error);
-    hdiId_ = HdiId::HREQ_SMS_UPDATE_SIM_MESSAGE;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SMS_UPDATE_SIM_MESSAGE;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2230,8 +2255,8 @@ int32_t RilCallback::AddCdmaSimMessageResponse(const RilRadioResponseInfo &respo
 {
     g_addCdmaSimMessageResponseFlag = true;
     HDF_LOGI("RilCallback::AddCdmaSimMessageResponse error : %{public}d", responseInfo.error);
-    hdiId_ = HdiId::HREQ_SMS_ADD_CDMA_SIM_MESSAGE;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SMS_ADD_CDMA_SIM_MESSAGE;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2240,8 +2265,8 @@ int32_t RilCallback::DelCdmaSimMessageResponse(const RilRadioResponseInfo &respo
 {
     g_delCdmaSimMessageResponseFlag = true;
     HDF_LOGI("RilCallback::DelCdmaSimMessageResponse error : %{public}d", responseInfo.error);
-    hdiId_ = HdiId::HREQ_SMS_DEL_CDMA_SIM_MESSAGE;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SMS_DEL_CDMA_SIM_MESSAGE;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2250,8 +2275,8 @@ int32_t RilCallback::UpdateCdmaSimMessageResponse(const RilRadioResponseInfo &re
 {
     g_updateCdmaSimMessageResponseFlag = true;
     HDF_LOGI("RilCallback::UpdateCdmaSimMessageResponse error : %{public}d", responseInfo.error);
-    hdiId_ = HdiId::HREQ_SMS_UPDATE_CDMA_SIM_MESSAGE;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SMS_UPDATE_CDMA_SIM_MESSAGE;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2260,8 +2285,8 @@ int32_t RilCallback::SetSmscAddrResponse(const RilRadioResponseInfo &responseInf
 {
     g_setSmscAddrResponseFlag = true;
     HDF_LOGI("RilCallback::SetSmscAddrResponse error : %{public}d", responseInfo.error);
-    hdiId_ = HdiId::HREQ_SMS_SET_SMSC_ADDR;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SMS_SET_SMSC_ADDR;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2272,8 +2297,8 @@ int32_t RilCallback::GetSmscAddrResponse(const RilRadioResponseInfo &responseInf
     g_getSmscAddrResponseFlag = true;
     HDF_LOGI("RilCallback::GetSmscAddrResponse serviceCenterAddress tosca : %{public}d, address : %{public}s",
              serviceCenterAddress.tosca, serviceCenterAddress.address.c_str());
-    hdiId_ = HdiId::HREQ_SMS_GET_SMSC_ADDR;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SMS_GET_SMSC_ADDR;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2282,8 +2307,8 @@ int32_t RilCallback::SetCBConfigResponse(const RilRadioResponseInfo &responseInf
 {
     g_setCBConfigResponseFlag = true;
     HDF_LOGI("RilCallback::SetCBConfigResponse error : %{public}d", responseInfo.error);
-    hdiId_ = HdiId::HREQ_SMS_SET_CB_CONFIG;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SMS_SET_CB_CONFIG;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2294,8 +2319,8 @@ int32_t RilCallback::GetCBConfigResponse(const RilRadioResponseInfo &responseInf
     g_getCBConfigResponseFlag = true;
     HDF_LOGI("RilCallback::GetCBConfigResponse cellBroadcastInfo mids : %{public}s, dcss: %{public}s",
              cellBroadcastInfo.mids.c_str(), cellBroadcastInfo.dcss.c_str());
-    hdiId_ = HdiId::HREQ_SMS_GET_CB_CONFIG;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SMS_GET_CB_CONFIG;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2304,8 +2329,8 @@ int32_t RilCallback::SetCdmaCBConfigResponse(const RilRadioResponseInfo &respons
 {
     HDF_LOGI("RilCallback::SetCdmaCBConfigResponse error : %{public}d", responseInfo.error);
     g_setCdmaCBConfigResponseFlag = true;
-    hdiId_ = HdiId::HREQ_SMS_SET_CDMA_CB_CONFIG;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SMS_SET_CDMA_CB_CONFIG;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2317,8 +2342,8 @@ int32_t RilCallback::GetCdmaCBConfigResponse(const RilRadioResponseInfo &respons
              "checked: %{public}d",
              cdmaCBConfigInfo.service, cdmaCBConfigInfo.language, cdmaCBConfigInfo.checked);
     g_getCdmaCBConfigResponseFlag = true;
-    hdiId_ = HdiId::HREQ_SMS_GET_CDMA_CB_CONFIG;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SMS_GET_CDMA_CB_CONFIG;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2329,8 +2354,8 @@ int32_t RilCallback::SendSmsMoreModeResponse(const RilRadioResponseInfo &respons
     HDF_LOGI("RilCallback::SendSmsMoreModeResponse sendSmsResultInfo pdu : %{public}s, error : %{public}d",
              sendSmsResultInfo.pdu.c_str(), sendSmsResultInfo.errCode);
     g_sendSmsMoreModeResponseFlag = true;
-    hdiId_ = HdiId::HREQ_SMS_SEND_SMS_MORE_MODE;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SMS_SEND_SMS_MORE_MODE;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2339,8 +2364,8 @@ int32_t RilCallback::SendSmsAckResponse(const RilRadioResponseInfo &responseInfo
 {
     HDF_LOGI("RilCallback::SendSmsAckResponse error:%{public}d", responseInfo.error);
     g_sendSmsAckResponseFlag = true;
-    hdiId_ = HdiId::HREQ_SMS_SEND_SMS_ACK;
-    resultInfo_ = responseInfo;
+    g_hdiResponseld = HdiId::HREQ_SMS_SEND_SMS_ACK;
+    g_resultInfo = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2363,7 +2388,7 @@ void HdfRilHdiTestAdditional::SetUp()
 {
     g_rilInterface = OHOS::HDI::Ril::V1_2::IRil::Get();
     if (g_rilInterface != nullptr) {
-        g_rilInterface->SetCallback1_2(&callback_);
+        g_rilInterface->SetCallback1_2(&g_callback);
         g_rilInterface->SendRilAck();
         g_rilInterface->GetSimStatus(SLOTID_1, GetSerialId());
         g_rilInterface->GetSimStatus(SLOTID_2, GetSerialId());
@@ -16105,7 +16130,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SimCloseLogicalChannel001, Function | Me
     if (!IsReady(SLOTID_1)) {
         return;
     }
-    int32_t ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_1, 1, currentChannelId_);
+    int32_t ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_1, 1, g_currentChannelld);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CLOSE_LOGICAL_CHANNEL));
@@ -16121,7 +16146,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SimCloseLogicalChannel002, Function | Me
     if (!IsReady(SLOTID_1)) {
         return;
     }
-    int32_t ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_1, -1, currentChannelId_);
+    int32_t ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_1, -1, g_currentChannelld);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_NE(SUCCESS, ret);
 }
@@ -16136,7 +16161,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SimCloseLogicalChannel003, Function | Me
     if (!IsReady(SLOTID_1)) {
         return;
     }
-    int32_t ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_1, 0, currentChannelId_);
+    int32_t ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_1, 0, g_currentChannelld);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CLOSE_LOGICAL_CHANNEL));
@@ -16154,7 +16179,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SimCloseLogicalChannel004, Function | Me
     }
     int32_t ret = 0;
     for (int i = 0; i < 100; i++) {
-        ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_1, 0, currentChannelId_);
+        ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_1, 0, g_currentChannelld);
         WaitFor(WAIT_TIME_SECOND);
         EXPECT_EQ(SUCCESS, ret);
         ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CLOSE_LOGICAL_CHANNEL));
@@ -16171,7 +16196,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SimCloseLogicalChannel005, Function | Me
     if (!IsReady(SLOTID_2)) {
         return;
     }
-    int32_t ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_2, 1, currentChannelId_);
+    int32_t ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_2, 1, g_currentChannelld);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CLOSE_LOGICAL_CHANNEL));
@@ -16187,7 +16212,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SimCloseLogicalChannel006, Function | Me
     if (!IsReady(SLOTID_2)) {
         return;
     }
-    int32_t ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_2, -1, currentChannelId_);
+    int32_t ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_2, -1, g_currentChannelld);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_NE(SUCCESS, ret);
 }
@@ -16202,7 +16227,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SimCloseLogicalChannel007, Function | Me
     if (!IsReady(SLOTID_2)) {
         return;
     }
-    int32_t ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_2, 0, currentChannelId_);
+    int32_t ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_2, 0, g_currentChannelld);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CLOSE_LOGICAL_CHANNEL));
@@ -16220,7 +16245,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SimCloseLogicalChannel008, Function | Me
     }
     int32_t ret = 0;
     for (int i = 0; i < 100; i++) {
-        ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_2, 0, currentChannelId_);
+        ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_2, 0, g_currentChannelld);
         WaitFor(WAIT_TIME_SECOND);
         EXPECT_EQ(SUCCESS, ret);
         ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_CLOSE_LOGICAL_CHANNEL));
@@ -30242,10 +30267,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCurrentCellInfoResponse_1_1001, Funct
     if (!IsReady(SLOTID_1)) {
         return;
     }
-    g_getCurrentCellInfoResponse_1_1Flag = false;
+    g_getCurrentCellInfoResponse11Flag = false;
     int32_t ret = g_rilInterface->GetCurrentCellInfo(SLOTID_1, GetSerialId());
     EXPECT_EQ(SUCCESS, ret);
-    EXPECT_EQ(true, g_getCurrentCellInfoResponse_1_1Flag);
+    EXPECT_EQ(true, g_getCurrentCellInfoResponse11Flag);
 }
 
 /**
@@ -30258,10 +30283,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCurrentCellInfoResponse_1_1002, Funct
     if (!IsReady(SLOTID_2)) {
         return;
     }
-    g_getCurrentCellInfoResponse_1_1Flag = false;
+    g_getCurrentCellInfoResponse11Flag = false;
     int32_t ret = g_rilInterface->GetCurrentCellInfo(SLOTID_2, GetSerialId());
     EXPECT_EQ(SUCCESS, ret);
-    EXPECT_EQ(true, g_getCurrentCellInfoResponse_1_1Flag);
+    EXPECT_EQ(true, g_getCurrentCellInfoResponse11Flag);
 }
 
 /**
@@ -30274,10 +30299,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCurrentCellInfoResponse_1_1003, Funct
     if (!IsReady(SLOTID_1)) {
         return;
     }
-    g_getCurrentCellInfoResponse_1_1Flag = false;
+    g_getCurrentCellInfoResponse11Flag = false;
     int32_t ret = g_rilInterface->GetCurrentCellInfo(SLOTID_1, -1);
     EXPECT_NE(SUCCESS, ret);
-    EXPECT_EQ(false, g_getCurrentCellInfoResponse_1_1Flag);
+    EXPECT_EQ(false, g_getCurrentCellInfoResponse11Flag);
 }
 
 /**
@@ -30290,10 +30315,10 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCurrentCellInfoResponse_1_1004, Funct
     if (!IsReady(SLOTID_2)) {
         return;
     }
-    g_getCurrentCellInfoResponse_1_1Flag = false;
+    g_getCurrentCellInfoResponse11Flag = false;
     int32_t ret = g_rilInterface->GetCurrentCellInfo(SLOTID_2, -1);
     EXPECT_NE(SUCCESS, ret);
-    EXPECT_EQ(false, g_getCurrentCellInfoResponse_1_1Flag);
+    EXPECT_EQ(false, g_getCurrentCellInfoResponse11Flag);
 }
 
 /**
@@ -31218,7 +31243,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SimCloseLogicalChannelResponse001, Funct
         return;
     }
     g_simCloseLogicalChannelResponseFlag = false;
-    int32_t ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_1, GetSerialId(), currentChannelId_);
+    int32_t ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_1, GetSerialId(), g_currentChannelld);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
     EXPECT_EQ(true, g_simCloseLogicalChannelResponseFlag);
@@ -31235,7 +31260,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SimCloseLogicalChannelResponse002, Funct
         return;
     }
     g_simCloseLogicalChannelResponseFlag = false;
-    int32_t ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_2, GetSerialId(), currentChannelId_);
+    int32_t ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_2, GetSerialId(), g_currentChannelld);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
     EXPECT_EQ(true, g_simCloseLogicalChannelResponseFlag);
@@ -31252,7 +31277,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SimCloseLogicalChannelResponse003, Funct
         return;
     }
     g_simCloseLogicalChannelResponseFlag = false;
-    int32_t ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_1, -1, currentChannelId_);
+    int32_t ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_1, -1, g_currentChannelld);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_NE(SUCCESS, ret);
     EXPECT_EQ(false, g_simCloseLogicalChannelResponseFlag);
@@ -31269,7 +31294,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SimCloseLogicalChannelResponse004, Funct
         return;
     }
     g_simCloseLogicalChannelResponseFlag = false;
-    int32_t ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_2, -1, currentChannelId_);
+    int32_t ret = g_rilInterface->SimCloseLogicalChannel(SLOTID_2, -1, g_currentChannelld);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_NE(SUCCESS, ret);
     EXPECT_EQ(false, g_simCloseLogicalChannelResponseFlag);
@@ -37591,26 +37616,25 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule001, Functi
         return;
     }
     int32_t serialId = GetSerialId();
-    const int32_t BANDWIDTH_HYSTERESIS_MS = 3000;
-    const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
-    const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
-    uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+
+    const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
+    uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
+    const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
                                                    50000, 100000, 200000, 500000, 1000000};
-    uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
+    uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
     dLinkBandwidth.rat = static_cast<int32_t>(RatType::NETWORK_TYPE_UNKNOWN);
-    dLinkBandwidth.delayMs = BANDWIDTH_HYSTERESIS_MS;
-    dLinkBandwidth.delayUplinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
-    dLinkBandwidth.delayDownlinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
+    dLinkBandwidth.delayMs = 3000;
+    dLinkBandwidth.delayUplinkKbps = 50;
+    dLinkBandwidth.delayDownlinkKbps = 50;
     dLinkBandwidth.maximumUplinkKbpsSize = uplinkKbpsSize;
     dLinkBandwidth.maximumDownlinkKbpsSize = downlinkKbpsSize;
     for (uint32_t i = 0; i < uplinkKbpsSize; i++) {
-        dLinkBandwidth.maximumUplinkKbps.push_back(MAX_UPLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumUplinkKbps.push_back(maxUplinkLinkBandwidih[i]);
     }
     for (uint32_t i = 0; i < downlinkKbpsSize; i++) {
-        dLinkBandwidth.maximumDownlinkKbps.push_back(MAX_DOWNLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumDownlinkKbps.push_back(maxDownlinkLinkBandwidih[i]);
     }
     int32_t ret = g_rilInterface->SetLinkBandwidthReportingRule(SLOTID_1, GetSerialId(), dLinkBandwidth);
     WaitFor(WAIT_TIME_SECOND);
@@ -37629,26 +37653,25 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule002, Functi
         return;
     }
     int32_t serialId = GetSerialId();
-    const int32_t BANDWIDTH_HYSTERESIS_MS = 3000;
-    const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
-    const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
-    uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+
+    const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
+    uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
+    const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
                                                    50000, 100000, 200000, 500000, 1000000};
-    uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
+    uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
     dLinkBandwidth.rat = static_cast<int32_t>(RatType::NETWORK_TYPE_GSM);
-    dLinkBandwidth.delayMs = BANDWIDTH_HYSTERESIS_MS;
-    dLinkBandwidth.delayUplinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
-    dLinkBandwidth.delayDownlinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
+    dLinkBandwidth.delayMs = 3000;
+    dLinkBandwidth.delayUplinkKbps = 50;
+    dLinkBandwidth.delayDownlinkKbps = 50;
     dLinkBandwidth.maximumUplinkKbpsSize = uplinkKbpsSize;
     dLinkBandwidth.maximumDownlinkKbpsSize = downlinkKbpsSize;
     for (uint32_t i = 0; i < uplinkKbpsSize; i++) {
-        dLinkBandwidth.maximumUplinkKbps.push_back(MAX_UPLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumUplinkKbps.push_back(maxUplinkLinkBandwidih[i]);
     }
     for (uint32_t i = 0; i < downlinkKbpsSize; i++) {
-        dLinkBandwidth.maximumDownlinkKbps.push_back(MAX_DOWNLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumDownlinkKbps.push_back(maxDownlinkLinkBandwidih[i]);
     }
     int32_t ret = g_rilInterface->SetLinkBandwidthReportingRule(SLOTID_1, GetSerialId(), dLinkBandwidth);
     WaitFor(WAIT_TIME_SECOND);
@@ -37667,26 +37690,25 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule003, Functi
         return;
     }
     int32_t serialId = GetSerialId();
-    const int32_t BANDWIDTH_HYSTERESIS_MS = 3000;
-    const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
-    const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
-    uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+
+    const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
+    uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
+    const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
                                                    50000, 100000, 200000, 500000, 1000000};
-    uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
+    uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
     dLinkBandwidth.rat = static_cast<int32_t>(RatType::NETWORK_TYPE_CDMA);
-    dLinkBandwidth.delayMs = BANDWIDTH_HYSTERESIS_MS;
-    dLinkBandwidth.delayUplinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
-    dLinkBandwidth.delayDownlinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
+    dLinkBandwidth.delayMs = 3000;
+    dLinkBandwidth.delayUplinkKbps = 50;
+    dLinkBandwidth.delayDownlinkKbps = 50;
     dLinkBandwidth.maximumUplinkKbpsSize = uplinkKbpsSize;
     dLinkBandwidth.maximumDownlinkKbpsSize = downlinkKbpsSize;
     for (uint32_t i = 0; i < uplinkKbpsSize; i++) {
-        dLinkBandwidth.maximumUplinkKbps.push_back(MAX_UPLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumUplinkKbps.push_back(maxUplinkLinkBandwidih[i]);
     }
     for (uint32_t i = 0; i < downlinkKbpsSize; i++) {
-        dLinkBandwidth.maximumDownlinkKbps.push_back(MAX_DOWNLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumDownlinkKbps.push_back(maxDownlinkLinkBandwidih[i]);
     }
     int32_t ret = g_rilInterface->SetLinkBandwidthReportingRule(SLOTID_1, GetSerialId(), dLinkBandwidth);
     WaitFor(WAIT_TIME_SECOND);
@@ -37705,26 +37727,25 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule004, Functi
         return;
     }
     int32_t serialId = GetSerialId();
-    const int32_t BANDWIDTH_HYSTERESIS_MS = 3000;
-    const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
-    const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
-    uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+
+    const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
+    uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
+    const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
                                                    50000, 100000, 200000, 500000, 1000000};
-    uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
+    uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
     dLinkBandwidth.rat = static_cast<int32_t>(RatType::NETWORK_TYPE_WCDMA);
-    dLinkBandwidth.delayMs = BANDWIDTH_HYSTERESIS_MS;
-    dLinkBandwidth.delayUplinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
-    dLinkBandwidth.delayDownlinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
+    dLinkBandwidth.delayMs = 3000;
+    dLinkBandwidth.delayUplinkKbps = 50;
+    dLinkBandwidth.delayDownlinkKbps = 50;
     dLinkBandwidth.maximumUplinkKbpsSize = uplinkKbpsSize;
     dLinkBandwidth.maximumDownlinkKbpsSize = downlinkKbpsSize;
     for (uint32_t i = 0; i < uplinkKbpsSize; i++) {
-        dLinkBandwidth.maximumUplinkKbps.push_back(MAX_UPLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumUplinkKbps.push_back(maxUplinkLinkBandwidih[i]);
     }
     for (uint32_t i = 0; i < downlinkKbpsSize; i++) {
-        dLinkBandwidth.maximumDownlinkKbps.push_back(MAX_DOWNLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumDownlinkKbps.push_back(maxDownlinkLinkBandwidih[i]);
     }
     int32_t ret = g_rilInterface->SetLinkBandwidthReportingRule(SLOTID_1, GetSerialId(), dLinkBandwidth);
     WaitFor(WAIT_TIME_SECOND);
@@ -37743,26 +37764,25 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule005, Functi
         return;
     }
     int32_t serialId = GetSerialId();
-    const int32_t BANDWIDTH_HYSTERESIS_MS = 3000;
-    const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
-    const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
-    uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+
+    const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
+    uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
+    const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
                                                    50000, 100000, 200000, 500000, 1000000};
-    uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
+    uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
     dLinkBandwidth.rat = static_cast<int32_t>(RatType::NETWORK_TYPE_TDSCDMA);
-    dLinkBandwidth.delayMs = BANDWIDTH_HYSTERESIS_MS;
-    dLinkBandwidth.delayUplinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
-    dLinkBandwidth.delayDownlinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
+    dLinkBandwidth.delayMs = 3000;
+    dLinkBandwidth.delayUplinkKbps = 50;
+    dLinkBandwidth.delayDownlinkKbps = 50;
     dLinkBandwidth.maximumUplinkKbpsSize = uplinkKbpsSize;
     dLinkBandwidth.maximumDownlinkKbpsSize = downlinkKbpsSize;
     for (uint32_t i = 0; i < uplinkKbpsSize; i++) {
-        dLinkBandwidth.maximumUplinkKbps.push_back(MAX_UPLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumUplinkKbps.push_back(maxUplinkLinkBandwidih[i]);
     }
     for (uint32_t i = 0; i < downlinkKbpsSize; i++) {
-        dLinkBandwidth.maximumDownlinkKbps.push_back(MAX_DOWNLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumDownlinkKbps.push_back(maxDownlinkLinkBandwidih[i]);
     }
     int32_t ret = g_rilInterface->SetLinkBandwidthReportingRule(SLOTID_1, GetSerialId(), dLinkBandwidth);
     WaitFor(WAIT_TIME_SECOND);
@@ -37781,26 +37801,25 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule006, Functi
         return;
     }
     int32_t serialId = GetSerialId();
-    const int32_t BANDWIDTH_HYSTERESIS_MS = 3000;
-    const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
-    const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
-    uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+
+    const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
+    uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
+    const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
                                                    50000, 100000, 200000, 500000, 1000000};
-    uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
+    uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
     dLinkBandwidth.rat = static_cast<int32_t>(RatType::NETWORK_TYPE_LTE);
-    dLinkBandwidth.delayMs = BANDWIDTH_HYSTERESIS_MS;
-    dLinkBandwidth.delayUplinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
-    dLinkBandwidth.delayDownlinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
+    dLinkBandwidth.delayMs = 3000;
+    dLinkBandwidth.delayUplinkKbps = 50;
+    dLinkBandwidth.delayDownlinkKbps = 50;
     dLinkBandwidth.maximumUplinkKbpsSize = uplinkKbpsSize;
     dLinkBandwidth.maximumDownlinkKbpsSize = downlinkKbpsSize;
     for (uint32_t i = 0; i < uplinkKbpsSize; i++) {
-        dLinkBandwidth.maximumUplinkKbps.push_back(MAX_UPLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumUplinkKbps.push_back(maxUplinkLinkBandwidih[i]);
     }
     for (uint32_t i = 0; i < downlinkKbpsSize; i++) {
-        dLinkBandwidth.maximumDownlinkKbps.push_back(MAX_DOWNLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumDownlinkKbps.push_back(maxDownlinkLinkBandwidih[i]);
     }
     int32_t ret = g_rilInterface->SetLinkBandwidthReportingRule(SLOTID_1, GetSerialId(), dLinkBandwidth);
     WaitFor(WAIT_TIME_SECOND);
@@ -37819,26 +37838,25 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule007, Functi
         return;
     }
     int32_t serialId = GetSerialId();
-    const int32_t BANDWIDTH_HYSTERESIS_MS = 3000;
-    const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
-    const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
-    uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+
+    const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
+    uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
+    const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
                                                    50000, 100000, 200000, 500000, 1000000};
-    uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
+    uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
     dLinkBandwidth.rat = static_cast<int32_t>(RatType::NETWORK_TYPE_NR);
-    dLinkBandwidth.delayMs = BANDWIDTH_HYSTERESIS_MS;
-    dLinkBandwidth.delayUplinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
-    dLinkBandwidth.delayDownlinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
+    dLinkBandwidth.delayMs = 3000;
+    dLinkBandwidth.delayUplinkKbps = 50;
+    dLinkBandwidth.delayDownlinkKbps = 50;
     dLinkBandwidth.maximumUplinkKbpsSize = uplinkKbpsSize;
     dLinkBandwidth.maximumDownlinkKbpsSize = downlinkKbpsSize;
     for (uint32_t i = 0; i < uplinkKbpsSize; i++) {
-        dLinkBandwidth.maximumUplinkKbps.push_back(MAX_UPLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumUplinkKbps.push_back(maxUplinkLinkBandwidih[i]);
     }
     for (uint32_t i = 0; i < downlinkKbpsSize; i++) {
-        dLinkBandwidth.maximumDownlinkKbps.push_back(MAX_DOWNLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumDownlinkKbps.push_back(maxDownlinkLinkBandwidih[i]);
     }
     int32_t ret = g_rilInterface->SetLinkBandwidthReportingRule(SLOTID_1, GetSerialId(), dLinkBandwidth);
     WaitFor(WAIT_TIME_SECOND);
@@ -37858,26 +37876,25 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule008, Functi
         return;
     }
     int32_t serialId = GetSerialId();
-    const int32_t BANDWIDTH_HYSTERESIS_MS = 3000;
-    const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
-    const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
-    uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+
+    const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
+    uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
+    const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
                                                    50000, 100000, 200000, 500000, 1000000};
-    uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
+    uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
     dLinkBandwidth.rat = static_cast<int32_t>(RatType::NETWORK_TYPE_NR);
-    dLinkBandwidth.delayMs = BANDWIDTH_HYSTERESIS_MS;
-    dLinkBandwidth.delayUplinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
-    dLinkBandwidth.delayDownlinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
+    dLinkBandwidth.delayMs = 3000;
+    dLinkBandwidth.delayUplinkKbps = 50;
+    dLinkBandwidth.delayDownlinkKbps = 50;
     dLinkBandwidth.maximumUplinkKbpsSize = uplinkKbpsSize;
     dLinkBandwidth.maximumDownlinkKbpsSize = downlinkKbpsSize;
     for (uint32_t i = 0; i < uplinkKbpsSize; i++) {
-        dLinkBandwidth.maximumUplinkKbps.push_back(MAX_UPLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumUplinkKbps.push_back(maxUplinkLinkBandwidih[i]);
     }
     for (uint32_t i = 0; i < downlinkKbpsSize; i++) {
-        dLinkBandwidth.maximumDownlinkKbps.push_back(MAX_DOWNLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumDownlinkKbps.push_back(maxDownlinkLinkBandwidih[i]);
     }
     int32_t ret = 0;
     for (int i = 0; i < 100; i++) {
@@ -37898,26 +37915,25 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule009, Functi
         return;
     }
     int32_t serialId = GetSerialId();
-    const int32_t BANDWIDTH_HYSTERESIS_MS = 3000;
-    const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
-    const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
-    uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+
+    const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
+    uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
+    const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
                                                    50000, 100000, 200000, 500000, 1000000};
-    uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
+    uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
     dLinkBandwidth.rat = static_cast<int32_t>(RatType::NETWORK_TYPE_UNKNOWN);
-    dLinkBandwidth.delayMs = BANDWIDTH_HYSTERESIS_MS;
-    dLinkBandwidth.delayUplinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
-    dLinkBandwidth.delayDownlinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
+    dLinkBandwidth.delayMs = 3000;
+    dLinkBandwidth.delayUplinkKbps = 50;
+    dLinkBandwidth.delayDownlinkKbps = 50;
     dLinkBandwidth.maximumUplinkKbpsSize = uplinkKbpsSize;
     dLinkBandwidth.maximumDownlinkKbpsSize = downlinkKbpsSize;
     for (uint32_t i = 0; i < uplinkKbpsSize; i++) {
-        dLinkBandwidth.maximumUplinkKbps.push_back(MAX_UPLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumUplinkKbps.push_back(maxUplinkLinkBandwidih[i]);
     }
     for (uint32_t i = 0; i < downlinkKbpsSize; i++) {
-        dLinkBandwidth.maximumDownlinkKbps.push_back(MAX_DOWNLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumDownlinkKbps.push_back(maxDownlinkLinkBandwidih[i]);
     }
     int32_t ret = g_rilInterface->SetLinkBandwidthReportingRule(SLOTID_2, GetSerialId(), dLinkBandwidth);
     WaitFor(WAIT_TIME_SECOND);
@@ -37936,26 +37952,25 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule010, Functi
         return;
     }
     int32_t serialId = GetSerialId();
-    const int32_t BANDWIDTH_HYSTERESIS_MS = 3000;
-    const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
-    const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
-    uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+
+    const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
+    uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
+    const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
                                                    50000, 100000, 200000, 500000, 1000000};
-    uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
+    uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
     dLinkBandwidth.rat = static_cast<int32_t>(RatType::NETWORK_TYPE_GSM);
-    dLinkBandwidth.delayMs = BANDWIDTH_HYSTERESIS_MS;
-    dLinkBandwidth.delayUplinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
-    dLinkBandwidth.delayDownlinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
+    dLinkBandwidth.delayMs = 3000;
+    dLinkBandwidth.delayUplinkKbps = 50;
+    dLinkBandwidth.delayDownlinkKbps = 50;
     dLinkBandwidth.maximumUplinkKbpsSize = uplinkKbpsSize;
     dLinkBandwidth.maximumDownlinkKbpsSize = downlinkKbpsSize;
     for (uint32_t i = 0; i < uplinkKbpsSize; i++) {
-        dLinkBandwidth.maximumUplinkKbps.push_back(MAX_UPLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumUplinkKbps.push_back(maxUplinkLinkBandwidih[i]);
     }
     for (uint32_t i = 0; i < downlinkKbpsSize; i++) {
-        dLinkBandwidth.maximumDownlinkKbps.push_back(MAX_DOWNLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumDownlinkKbps.push_back(maxDownlinkLinkBandwidih[i]);
     }
     int32_t ret = g_rilInterface->SetLinkBandwidthReportingRule(SLOTID_2, GetSerialId(), dLinkBandwidth);
     WaitFor(WAIT_TIME_SECOND);
@@ -37974,26 +37989,25 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule011, Functi
         return;
     }
     int32_t serialId = GetSerialId();
-    const int32_t BANDWIDTH_HYSTERESIS_MS = 3000;
-    const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
-    const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
-    uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+
+    const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
+    uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
+    const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
                                                    50000, 100000, 200000, 500000, 1000000};
-    uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
+    uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
     dLinkBandwidth.rat = static_cast<int32_t>(RatType::NETWORK_TYPE_CDMA);
-    dLinkBandwidth.delayMs = BANDWIDTH_HYSTERESIS_MS;
-    dLinkBandwidth.delayUplinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
-    dLinkBandwidth.delayDownlinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
+    dLinkBandwidth.delayMs = 3000;
+    dLinkBandwidth.delayUplinkKbps = 50;
+    dLinkBandwidth.delayDownlinkKbps = 50;
     dLinkBandwidth.maximumUplinkKbpsSize = uplinkKbpsSize;
     dLinkBandwidth.maximumDownlinkKbpsSize = downlinkKbpsSize;
     for (uint32_t i = 0; i < uplinkKbpsSize; i++) {
-        dLinkBandwidth.maximumUplinkKbps.push_back(MAX_UPLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumUplinkKbps.push_back(maxUplinkLinkBandwidih[i]);
     }
     for (uint32_t i = 0; i < downlinkKbpsSize; i++) {
-        dLinkBandwidth.maximumDownlinkKbps.push_back(MAX_DOWNLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumDownlinkKbps.push_back(maxDownlinkLinkBandwidih[i]);
     }
     int32_t ret = g_rilInterface->SetLinkBandwidthReportingRule(SLOTID_2, GetSerialId(), dLinkBandwidth);
     WaitFor(WAIT_TIME_SECOND);
@@ -38012,26 +38026,25 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule012, Functi
         return;
     }
     int32_t serialId = GetSerialId();
-    const int32_t BANDWIDTH_HYSTERESIS_MS = 3000;
-    const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
-    const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
-    uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+
+    const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
+    uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
+    const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
                                                    50000, 100000, 200000, 500000, 1000000};
-    uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
+    uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
     dLinkBandwidth.rat = static_cast<int32_t>(RatType::NETWORK_TYPE_WCDMA);
-    dLinkBandwidth.delayMs = BANDWIDTH_HYSTERESIS_MS;
-    dLinkBandwidth.delayUplinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
-    dLinkBandwidth.delayDownlinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
+    dLinkBandwidth.delayMs = 3000;
+    dLinkBandwidth.delayUplinkKbps = 50;
+    dLinkBandwidth.delayDownlinkKbps = 50;
     dLinkBandwidth.maximumUplinkKbpsSize = uplinkKbpsSize;
     dLinkBandwidth.maximumDownlinkKbpsSize = downlinkKbpsSize;
     for (uint32_t i = 0; i < uplinkKbpsSize; i++) {
-        dLinkBandwidth.maximumUplinkKbps.push_back(MAX_UPLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumUplinkKbps.push_back(maxUplinkLinkBandwidih[i]);
     }
     for (uint32_t i = 0; i < downlinkKbpsSize; i++) {
-        dLinkBandwidth.maximumDownlinkKbps.push_back(MAX_DOWNLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumDownlinkKbps.push_back(maxDownlinkLinkBandwidih[i]);
     }
     int32_t ret = g_rilInterface->SetLinkBandwidthReportingRule(SLOTID_2, GetSerialId(), dLinkBandwidth);
     WaitFor(WAIT_TIME_SECOND);
@@ -38050,26 +38063,25 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule013, Functi
         return;
     }
     int32_t serialId = GetSerialId();
-    const int32_t BANDWIDTH_HYSTERESIS_MS = 3000;
-    const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
-    const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
-    uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+
+    const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
+    uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
+    const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
                                                    50000, 100000, 200000, 500000, 1000000};
-    uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
+    uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
     dLinkBandwidth.rat = static_cast<int32_t>(RatType::NETWORK_TYPE_TDSCDMA);
-    dLinkBandwidth.delayMs = BANDWIDTH_HYSTERESIS_MS;
-    dLinkBandwidth.delayUplinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
-    dLinkBandwidth.delayDownlinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
+    dLinkBandwidth.delayMs = 3000;
+    dLinkBandwidth.delayUplinkKbps = 50;
+    dLinkBandwidth.delayDownlinkKbps = 50;
     dLinkBandwidth.maximumUplinkKbpsSize = uplinkKbpsSize;
     dLinkBandwidth.maximumDownlinkKbpsSize = downlinkKbpsSize;
     for (uint32_t i = 0; i < uplinkKbpsSize; i++) {
-        dLinkBandwidth.maximumUplinkKbps.push_back(MAX_UPLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumUplinkKbps.push_back(maxUplinkLinkBandwidih[i]);
     }
     for (uint32_t i = 0; i < downlinkKbpsSize; i++) {
-        dLinkBandwidth.maximumDownlinkKbps.push_back(MAX_DOWNLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumDownlinkKbps.push_back(maxDownlinkLinkBandwidih[i]);
     }
     int32_t ret = g_rilInterface->SetLinkBandwidthReportingRule(SLOTID_2, GetSerialId(), dLinkBandwidth);
     WaitFor(WAIT_TIME_SECOND);
@@ -38088,26 +38100,25 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule014, Functi
         return;
     }
     int32_t serialId = GetSerialId();
-    const int32_t BANDWIDTH_HYSTERESIS_MS = 3000;
-    const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
-    const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
-    uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+
+    const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
+    uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
+    const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
                                                    50000, 100000, 200000, 500000, 1000000};
-    uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
+    uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
     dLinkBandwidth.rat = static_cast<int32_t>(RatType::NETWORK_TYPE_LTE);
-    dLinkBandwidth.delayMs = BANDWIDTH_HYSTERESIS_MS;
-    dLinkBandwidth.delayUplinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
-    dLinkBandwidth.delayDownlinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
+    dLinkBandwidth.delayMs = 3000;
+    dLinkBandwidth.delayUplinkKbps = 50;
+    dLinkBandwidth.delayDownlinkKbps = 50;
     dLinkBandwidth.maximumUplinkKbpsSize = uplinkKbpsSize;
     dLinkBandwidth.maximumDownlinkKbpsSize = downlinkKbpsSize;
     for (uint32_t i = 0; i < uplinkKbpsSize; i++) {
-        dLinkBandwidth.maximumUplinkKbps.push_back(MAX_UPLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumUplinkKbps.push_back(maxUplinkLinkBandwidih[i]);
     }
     for (uint32_t i = 0; i < downlinkKbpsSize; i++) {
-        dLinkBandwidth.maximumDownlinkKbps.push_back(MAX_DOWNLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumDownlinkKbps.push_back(maxDownlinkLinkBandwidih[i]);
     }
     int32_t ret = g_rilInterface->SetLinkBandwidthReportingRule(SLOTID_2, GetSerialId(), dLinkBandwidth);
     WaitFor(WAIT_TIME_SECOND);
@@ -38126,26 +38137,25 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule015, Functi
         return;
     }
     int32_t serialId = GetSerialId();
-    const int32_t BANDWIDTH_HYSTERESIS_MS = 3000;
-    const int32_t BANDWIDTH_HYSTERESIS_KBPS = 50;
-    const int32_t MAX_UPLINK_LINK_BANDWIDTH[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
-    uint32_t uplinkKbpsSize = sizeof(MAX_UPLINK_LINK_BANDWIDTH) / sizeof(int32_t);
-    const int32_t MAX_DOWNLINK_LINK_BANDWIDTH[] = {100,   500,    1000,   5000,   10000,  20000,
+
+    const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
+    uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
+    const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
                                                    50000, 100000, 200000, 500000, 1000000};
-    uint32_t downlinkKbpsSize = sizeof(MAX_DOWNLINK_LINK_BANDWIDTH) / sizeof(int32_t);
+    uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
     dLinkBandwidth.rat = static_cast<int32_t>(RatType::NETWORK_TYPE_NR);
-    dLinkBandwidth.delayMs = BANDWIDTH_HYSTERESIS_MS;
-    dLinkBandwidth.delayUplinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
-    dLinkBandwidth.delayDownlinkKbps = BANDWIDTH_HYSTERESIS_KBPS;
+    dLinkBandwidth.delayMs = 3000;
+    dLinkBandwidth.delayUplinkKbps = 50;
+    dLinkBandwidth.delayDownlinkKbps = 50;
     dLinkBandwidth.maximumUplinkKbpsSize = uplinkKbpsSize;
     dLinkBandwidth.maximumDownlinkKbpsSize = downlinkKbpsSize;
     for (uint32_t i = 0; i < uplinkKbpsSize; i++) {
-        dLinkBandwidth.maximumUplinkKbps.push_back(MAX_UPLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumUplinkKbps.push_back(maxUplinkLinkBandwidih[i]);
     }
     for (uint32_t i = 0; i < downlinkKbpsSize; i++) {
-        dLinkBandwidth.maximumDownlinkKbps.push_back(MAX_DOWNLINK_LINK_BANDWIDTH[i]);
+        dLinkBandwidth.maximumDownlinkKbps.push_back(maxDownlinkLinkBandwidih[i]);
     }
     int32_t ret = g_rilInterface->SetLinkBandwidthReportingRule(SLOTID_2, GetSerialId(), dLinkBandwidth);
     WaitFor(WAIT_TIME_SECOND);

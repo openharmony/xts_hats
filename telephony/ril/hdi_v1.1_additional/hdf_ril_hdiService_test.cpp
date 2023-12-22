@@ -26,6 +26,8 @@
 #include "v1_2/iril.h"
 #include "gtest/gtest.h"
 
+#define RAND_VALUE 10000000000;
+
 using namespace OHOS::HDI::Ril::V1_2;
 using namespace testing::ext;
 
@@ -598,8 +600,9 @@ void WaitFor(int32_t timeoutSecond) { g_callback.WaitFor(WAIT_TIME_SECOND); }
 
 bool GetBoolResult(HdiId hdiId) { return g_callback.GetBoolResult(hdiId); }
 
-int32_t GetSerialId() { 
-    currentSerialId = rand() % 10000000000;
+int32_t GetSerialId()
+{
+    currentSerialId = rand() % RAND_VALUE;
     return currentSerialId;
 }
 
@@ -618,9 +621,9 @@ bool IsReady(int32_t slotId)
 void RilCallback::NotifyAll()
 {
     std::unique_lock<std::mutex> callbackLock(g_callbackMutex);
-    if (g_resultInfo.serial != g_currentSerialld) {
+    if (g_resultInfo.serial != currentSerialId) {
         g_hdiResponseld = HdiId::HREQ_NONE;
-        HDF_LOGI("NotifyAll g_currentSerialld : %{public}d, serial: %{public}d not equal", g_currentSerialld,
+        HDF_LOGI("NotifyAll currentSerialId : %{public}d, serial: %{public}d not equal", currentSerialId,
                  g_resultInfo.serial);
         return;
     }

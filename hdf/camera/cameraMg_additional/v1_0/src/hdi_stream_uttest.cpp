@@ -3246,7 +3246,7 @@ HWTEST_F(HdiStreamUtTestAdditional, testCommitStreams046, Function | MediumTest 
 /**
  * @tc.number : SUB_Driver_Camera_GetStreamAttributes_0100
  * @tc.name   : testGetStreamAttributes001
- * @tc.desc   : CommitStreams, stability test, return success
+ * @tc.desc   : GetStreamAttributes, stability test, return success
  */
 HWTEST_F(HdiStreamUtTestAdditional, testGetStreamAttributes001, Function | MediumTest | Level1)
 {

@@ -26,7 +26,7 @@
 #include "v1_2/iril.h"
 #include "gtest/gtest.h"
 
-#define RAND_MAXVALUE 10000000000;
+#define RAND_MAXVALUE 10000000000
 
 using namespace OHOS::HDI::Ril::V1_2;
 using namespace testing::ext;
@@ -449,10 +449,10 @@ public:
     int32_t CommonErrorResponse(const RilRadioResponseInfo &responseInfo) override;
 
 private:
-    std::mutex g_callbackMutex;
-    std::condition_variable g_cv;
-    HdiId g_hdiResponseld;
-    RilRadioResponseInfo g_resultInfo;
+    std::mutex callbackMutex_;
+    std::condition_variable cv_;
+    HdiId hdiId_;
+    RilRadioResponseInfo resultInfo_;
 };
 
 class HdfRilHdiTestAdditional : public testing::Test {
@@ -620,41 +620,41 @@ bool IsReady(int32_t slotId)
 
 void RilCallback::NotifyAll()
 {
-    std::unique_lock<std::mutex> callbackLock(g_callbackMutex);
-    if (g_resultInfo.serial != g_currentSerialId) {
-        g_hdiResponseld = HdiId::HREQ_NONE;
+    std::unique_lock<std::mutex> callbackLock(callbackMutex_);
+    if (resultInfo_.serial != g_currentSerialId) {
+        hdiId_ = HdiId::HREQ_NONE;
         HDF_LOGI("NotifyAll g_currentSerialId : %{public}d, serial: %{public}d not equal", g_currentSerialId,
-                 g_resultInfo.serial);
+                 resultInfo_.serial);
         return;
     }
-    g_cv.notify_all();
+    cv_.notify_all();
 }
 
 void RilCallback::WaitFor(int32_t timeoutSecond)
 {
     Clean();
-    std::unique_lock<std::mutex> callbackLock(g_callbackMutex);
-    g_cv.wait_for(callbackLock, std::chrono::seconds(timeoutSecond));
+    std::unique_lock<std::mutex> callbackLock(callbackMutex_);
+    cv_.wait_for(callbackLock, std::chrono::seconds(timeoutSecond));
 }
 
-void RilCallback::Clean() { g_hdiResponseld = HdiId::HREQ_NONE; }
+void RilCallback::Clean() { hdiId_ = HdiId::HREQ_NONE; }
 
 bool RilCallback::GetBoolResult(HdiId hdiId)
 {
-    HDF_LOGI("GetBoolResult hdiId: %{public}d, error: %{public}d", hdiId, static_cast<int32_t>(g_resultInfo.error));
+    HDF_LOGI("GetBoolResult hdiId: %{public}d, error: %{public}d", hdiId, static_cast<int32_t>(resultInfo_.error));
     bool ret = false;
-    if (g_hdiResponseld == HdiId::HREQ_NONE) {
+    if (hdiId_ == HdiId::HREQ_NONE) {
         HDF_LOGE("response timeout, not implemented."
-                 "hdiId: %d, current g_hdiResponseld: %{public}d",
-                 static_cast<int32_t>(hdiId), g_hdiResponseld);
+                 "hdiId: %d, current hdiId_: %{public}d",
+                 static_cast<int32_t>(hdiId), hdiId_);
         ret = true;
         Clean();
         return ret;
     }
-    if (g_hdiResponseld != hdiId) {
+    if (hdiId_ != hdiId) {
         ret = false;
         HDF_LOGE("GetBoolResult hdiId does not match. hdiId: %{public}d, current hdiId: %{public}d",
-                 static_cast<int32_t>(hdiId), g_hdiResponseld);
+                 static_cast<int32_t>(hdiId), hdiId_);
         Clean();
         return ret;
     }
@@ -717,8 +717,8 @@ int32_t RilCallback::GetSimStatusResponse(const HDI::Ril::V1_1::RilRadioResponse
              responseInfo.slotId, result.simType, result.simState);
     g_simState[responseInfo.slotId] = result.simState;
     HDF_LOGI("IsReady %{public}d %{public}d", responseInfo.slotId, g_simState[responseInfo.slotId]);
-    g_hdiResponseld = HdiId::HREQ_SIM_GET_SIM_STATUS;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_GET_SIM_STATUS;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -728,8 +728,8 @@ int32_t RilCallback::GetSimIOResponse(const RilRadioResponseInfo &responseInfo, 
     g_getSimIOResponseFlag = true;
     HDF_LOGI("GetBoolResult GetSimIO result : sw1 = %{public}d, sw2 = %{public}d, response = %{public}s", result.sw1,
              result.sw2, result.response.c_str());
-    g_hdiResponseld = HdiId::HREQ_SIM_GET_SIM_IO;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_GET_SIM_IO;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -737,8 +737,8 @@ int32_t RilCallback::GetSimIOResponse(const RilRadioResponseInfo &responseInfo, 
 int32_t RilCallback::GetImsiResponse(const RilRadioResponseInfo &responseInfo, const std::string &response)
 {
     HDF_LOGI("GetBoolResult GetImsi result : response = %{public}s", response.c_str());
-    g_hdiResponseld = HdiId::HREQ_SIM_GET_IMSI;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_GET_IMSI;
+    resultInfo_ = responseInfo;
     g_getImsiResponseFlag = true;
     NotifyAll();
     return 0;
@@ -746,8 +746,8 @@ int32_t RilCallback::GetImsiResponse(const RilRadioResponseInfo &responseInfo, c
 int32_t RilCallback::GetSimLockStatusResponse(const RilRadioResponseInfo &responseInfo, int32_t simLockStatus)
 {
     HDF_LOGI("GetBoolResult GetSimLockStatus result : simLockStatus = %{public}d", simLockStatus);
-    g_hdiResponseld = HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -756,8 +756,8 @@ int32_t RilCallback::SetSimLockResponse(const RilRadioResponseInfo &responseInfo
     g_setSimLockResponseFlag = true;
     HDF_LOGI("GetBoolResult SetSimLock result : result = %{public}d, remain = %{public}d", lockStatus.result,
              lockStatus.remain);
-    g_hdiResponseld = HdiId::HREQ_SIM_SET_SIM_LOCK;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_SET_SIM_LOCK;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -767,8 +767,8 @@ int32_t RilCallback::ChangeSimPasswordResponse(const RilRadioResponseInfo &respo
     g_changeSimPasswordResponseFlag = true;
     HDF_LOGI("GetBoolResult ChangeSimPassword result : result = %{public}d, remain = %{public}d", lockStatus.result,
              lockStatus.remain);
-    g_hdiResponseld = HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_CHANGE_SIM_PASSWORD;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -777,8 +777,8 @@ int32_t RilCallback::UnlockPinResponse(const RilRadioResponseInfo &responseInfo,
     g_unlockPinResponseFlag = true;
     HDF_LOGI("GetBoolResult UnlockPin result : result = %{public}d, remain = %{public}d", lockStatus.result,
              lockStatus.remain);
-    g_hdiResponseld = HdiId::HREQ_SIM_UNLOCK_PIN;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_UNLOCK_PIN;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -787,8 +787,8 @@ int32_t RilCallback::UnlockPukResponse(const RilRadioResponseInfo &responseInfo,
     g_unlockPukResponseFlag = true;
     HDF_LOGI("GetBoolResult UnlockPuk result : result = %{public}d, remain = %{public}d", lockStatus.result,
              lockStatus.remain);
-    g_hdiResponseld = HdiId::HREQ_SIM_UNLOCK_PUK;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_UNLOCK_PUK;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -797,8 +797,8 @@ int32_t RilCallback::UnlockPin2Response(const RilRadioResponseInfo &responseInfo
     g_unlockPin2ResponseFlag = true;
     HDF_LOGI("GetBoolResult UnlockPin2 result : result = %{public}d, remain = %{public}d", lockStatus.result,
              lockStatus.remain);
-    g_hdiResponseld = HdiId::HREQ_SIM_UNLOCK_PIN2;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_UNLOCK_PIN2;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -807,8 +807,8 @@ int32_t RilCallback::UnlockPuk2Response(const RilRadioResponseInfo &responseInfo
     g_unlockPuk2ResponseFlag = true;
     HDF_LOGI("GetBoolResult UnlockPuk2 result : result = %{public}d, remain = %{public}d", lockStatus.result,
              lockStatus.remain);
-    g_hdiResponseld = HdiId::HREQ_SIM_UNLOCK_PUK2;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_UNLOCK_PUK2;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -816,8 +816,8 @@ int32_t RilCallback::UnlockPuk2Response(const RilRadioResponseInfo &responseInfo
 int32_t RilCallback::SetActiveSimResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("GetBoolResult SetActiveSim result");
-    g_hdiResponseld = HdiId::HREQ_SIM_SET_ACTIVE_SIM;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_SET_ACTIVE_SIM;
+    resultInfo_ = responseInfo;
     g_setActiveSimResponseFlag = true;
     NotifyAll();
     return 0;
@@ -827,8 +827,8 @@ int32_t RilCallback::SimStkSendTerminalResponseResponse(const RilRadioResponseIn
 {
     g_simStkSendTerminalResponseResponseFlag = true;
     HDF_LOGI("GetBoolResult SimStkSendTerminalResponse result");
-    g_hdiResponseld = HdiId::HREQ_SIM_STK_SEND_TERMINAL_RESPONSE;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_STK_SEND_TERMINAL_RESPONSE;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -837,8 +837,8 @@ int32_t RilCallback::SimStkSendEnvelopeResponse(const RilRadioResponseInfo &resp
 {
     g_simStkSendEnvelopeResponseFlag = true;
     HDF_LOGI("GetBoolResult SimStkSendEnvelope result");
-    g_hdiResponseld = HdiId::HREQ_SIM_STK_SEND_ENVELOPE;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_STK_SEND_ENVELOPE;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -847,8 +847,8 @@ int32_t RilCallback::SimStkSendCallSetupRequestResultResponse(const RilRadioResp
 {
     g_simStkSendCallSetupRequestResultResponseFlag = true;
     HDF_LOGI("GetBoolResult SimStkSendCallSetupRequestResult result");
-    g_hdiResponseld = HdiId::HREQ_SIM_STK_SEND_CALL_SETUP_REQUEST_RESULT;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_STK_SEND_CALL_SETUP_REQUEST_RESULT;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -857,8 +857,8 @@ int32_t RilCallback::SimStkIsReadyResponse(const RilRadioResponseInfo &responseI
 {
     g_simStkIsReadyResponseFlag = true;
     HDF_LOGI("GetBoolResult SimStkIsReady result");
-    g_hdiResponseld = HdiId::HREQ_SIM_STK_IS_READY;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_STK_IS_READY;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -869,8 +869,8 @@ int32_t RilCallback::SetRadioProtocolResponse(const RilRadioResponseInfo &respon
     g_setRadioProtocolResponseFlag = true;
     HDF_LOGI("GetBoolResult SetRadioProtocol result : phase = %{public}d, slotId = %{public}d", radioProtocol.phase,
              radioProtocol.slotId);
-    g_hdiResponseld = HdiId::HREQ_SIM_RADIO_PROTOCOL;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_RADIO_PROTOCOL;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -891,8 +891,8 @@ int32_t RilCallback::SimOpenLogicalChannelResponse(const RilRadioResponseInfo &r
              pOpenLogicalChannelResponse.sw1, pOpenLogicalChannelResponse.sw2, pOpenLogicalChannelResponse.channelId,
              pOpenLogicalChannelResponse.response.c_str());
     g_currentChannelld = pOpenLogicalChannelResponse.channelId;
-    g_hdiResponseld = HdiId::HREQ_SIM_OPEN_LOGICAL_CHANNEL;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_OPEN_LOGICAL_CHANNEL;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -901,8 +901,8 @@ int32_t RilCallback::SimCloseLogicalChannelResponse(const RilRadioResponseInfo &
 {
     g_simCloseLogicalChannelResponseFlag = true;
     HDF_LOGI("GetBoolResult SimCloseLogicalChannel result");
-    g_hdiResponseld = HdiId::HREQ_SIM_CLOSE_LOGICAL_CHANNEL;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_CLOSE_LOGICAL_CHANNEL;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -914,8 +914,8 @@ int32_t RilCallback::SimTransmitApduLogicalChannelResponse(const RilRadioRespons
     HDF_LOGI("GetBoolResult SimTransmitApduLogicalChannel result : sw1 = %{public}d, sw2 = %{public}d, response = "
              "%{public}s",
              result.sw1, result.sw2, result.response.c_str());
-    g_hdiResponseld = HdiId::HREQ_SIM_TRANSMIT_APDU_LOGICAL_CHANNEL;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_TRANSMIT_APDU_LOGICAL_CHANNEL;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -927,8 +927,8 @@ int32_t RilCallback::SimTransmitApduBasicChannelResponse(const RilRadioResponseI
     HDF_LOGI(
         "GetBoolResult SimTransmitApduBasicChannel result : sw1 = %{public}d, sw2 = %{public}d, response = %{public}s",
         result.sw1, result.sw2, result.response.c_str());
-    g_hdiResponseld = HdiId::HREQ_SIM_TRANSMIT_APDU_BASIC_CHANNEL;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_TRANSMIT_APDU_BASIC_CHANNEL;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -937,8 +937,8 @@ int32_t RilCallback::SimAuthenticationResponse(const RilRadioResponseInfo &respo
     g_simAuthenticationResponseFlag = true;
     HDF_LOGI("GetBoolResult SimAuthentication result : sw1 = %{public}d, sw2 = %{public}d, response = %{public}s",
              result.sw1, result.sw2, result.response.c_str());
-    g_hdiResponseld = HdiId::HREQ_SIM_AUTHENTICATION;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_AUTHENTICATION;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -948,8 +948,8 @@ int32_t RilCallback::UnlockSimLockResponse(const RilRadioResponseInfo &responseI
     g_unlockSimLockResponseFlag = true;
     HDF_LOGI("GetBoolResult UnlockSimLock result : result = %{public}d, remain = %{public}d", lockStatus.result,
              lockStatus.remain);
-    g_hdiResponseld = HdiId::HREQ_SIM_UNLOCK_SIM_LOCK;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_UNLOCK_SIM_LOCK;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -957,8 +957,8 @@ int32_t RilCallback::UnlockSimLockResponse(const RilRadioResponseInfo &responseI
 int32_t RilCallback::SendSimMatchedOperatorInfoResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("GetBoolResult SendSimMatchedOperatorInfo result");
-    g_hdiResponseld = HdiId::HREQ_SIM_SEND_NCFG_OPER_INFO;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SIM_SEND_NCFG_OPER_INFO;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1123,8 +1123,8 @@ int32_t RilCallback::GetSignalStrengthResponse(const RilRadioResponseInfo &respo
 {
     g_getSignalStrengthResponseFlag = true;
     HDF_LOGI("RilCallback::GetSignalStrengthResponse rxlev:%{public}d rsrp:%{public}d", rssi.lte.rxlev, rssi.lte.rsrp);
-    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_SIGNAL_STRENGTH;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_NETWORK_GET_SIGNAL_STRENGTH;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1137,8 +1137,8 @@ int32_t RilCallback::GetCsRegStatusResponse(const RilRadioResponseInfo &response
              "lacCode:%{public}d, cellId:%{public}d, radioTechnology:%{public}d",
              csRegStatusInfo.notifyType, csRegStatusInfo.regStatus, csRegStatusInfo.lacCode, csRegStatusInfo.cellId,
              csRegStatusInfo.radioTechnology);
-    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_CS_REG_STATUS;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_NETWORK_GET_CS_REG_STATUS;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1153,8 +1153,8 @@ int32_t RilCallback::GetPsRegStatusResponse(const RilRadioResponseInfo &response
         psRegStatusInfo.notifyType, psRegStatusInfo.regStatus, psRegStatusInfo.lacCode, psRegStatusInfo.cellId,
         psRegStatusInfo.radioTechnology, psRegStatusInfo.isDcNrRestricted, psRegStatusInfo.isNrAvailable,
         psRegStatusInfo.isEnDcAvailable);
-    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_PS_REG_STATUS;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_NETWORK_GET_PS_REG_STATUS;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1164,8 +1164,8 @@ int32_t RilCallback::GetOperatorInfoResponse(const RilRadioResponseInfo &respons
     g_getOperatorInfoResponseFlag = true;
     HDF_LOGI("RilCallback::GetOperatorInfoResponse longName:%{public}s, shortName:%{public}s, numeric:%{public}s",
              operatorInfo.longName.c_str(), operatorInfo.shortName.c_str(), operatorInfo.numeric.c_str());
-    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_OPERATOR_INFO;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_NETWORK_GET_OPERATOR_INFO;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1182,8 +1182,8 @@ int32_t RilCallback::GetNetworkSearchInformationResponse(const RilRadioResponseI
         HDF_LOGI("longName:%{public}s", availableInfo.longName.c_str());
         HDF_LOGI("rat:%{public}d", availableInfo.rat);
     }
-    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_NETWORK_SEARCH_INFORMATION;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_NETWORK_GET_NETWORK_SEARCH_INFORMATION;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1193,8 +1193,8 @@ int32_t RilCallback::GetNetworkSelectionModeResponse(const RilRadioResponseInfo 
 {
     g_getNetworkSelectionModeResponseFlag = true;
     HDF_LOGI("RilCallback::GetNetworkSelectionModeResponse selectMode:%{public}d", setNetworkModeInfo.selectMode);
-    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_NETWORK_SELECTION_MODE;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_NETWORK_GET_NETWORK_SELECTION_MODE;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1203,8 +1203,8 @@ int32_t RilCallback::SetNetworkSelectionModeResponse(const RilRadioResponseInfo 
 {
     g_setNetworkSelectionModeResponseFlag = true;
     HDF_LOGI("RilCallback::SetNetworkSelectionModeResponse error:%{public}d", responseInfo.error);
-    g_hdiResponseld = HdiId::HREQ_NETWORK_SET_NETWORK_SELECTION_MODE;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_NETWORK_SET_NETWORK_SELECTION_MODE;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1248,8 +1248,8 @@ int32_t RilCallback::GetNeighboringCellInfoListResponse(const RilRadioResponseIn
                 HDF_LOGE("RilCallback::GetNeighboringCellInfoListResponse invalid ratType");
         }
     }
-    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_NEIGHBORING_CELLINFO_LIST;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_NETWORK_GET_NEIGHBORING_CELLINFO_LIST;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1295,8 +1295,8 @@ int32_t RilCallback::GetCurrentCellInfoResponse(const RilRadioResponseInfo &resp
                 HDF_LOGE("RilCallback::GetCurrentCellInfoResponse invalid ratType");
         }
     }
-    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_CURRENT_CELL_INFO;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_NETWORK_GET_CURRENT_CELL_INFO;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1344,8 +1344,8 @@ int32_t RilCallback::GetCurrentCellInfoResponse_1_1(const RilRadioResponseInfo &
                 HDF_LOGE("RilCallback::GetCurrentCellInfoResponse_1_1 invalid ratType");
         }
     }
-    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_CURRENT_CELL_INFO;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_NETWORK_GET_CURRENT_CELL_INFO;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1353,8 +1353,8 @@ int32_t RilCallback::GetCurrentCellInfoResponse_1_1(const RilRadioResponseInfo &
 int32_t RilCallback::SetPreferredNetworkResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("RilCallback::SetPreferredNetworkResponse error:%{public}d", responseInfo.error);
-    g_hdiResponseld = HdiId::HREQ_NETWORK_SET_PREFERRED_NETWORK;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_NETWORK_SET_PREFERRED_NETWORK;
+    resultInfo_ = responseInfo;
     g_setPreferredNetworkResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1364,8 +1364,8 @@ int32_t RilCallback::GetPreferredNetworkResponse(const RilRadioResponseInfo &res
                                                  const PreferredNetworkTypeInfo &preferredNetworkTypeInfo)
 {
     HDF_LOGI("RilCallback::GetPreferredNetworkResponse type:%{public}d", preferredNetworkTypeInfo.preferredNetworkType);
-    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_PREFERRED_NETWORK;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_NETWORK_GET_PREFERRED_NETWORK;
+    resultInfo_ = responseInfo;
     g_getPreferredNetworkResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1387,8 +1387,8 @@ int32_t RilCallback::GetPhysicalChannelConfigResponse(const RilRadioResponseInfo
             HDF_LOGI("contextIds[%{public}d]:%{public}d", j, phyChnlCfg.contextIds[j]);
         }
     }
-    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_PHYSICAL_CHANNEL_CONFIG;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_NETWORK_GET_PHYSICAL_CHANNEL_CONFIG;
+    resultInfo_ = responseInfo;
     g_getPhysicalChannelConfigResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1398,8 +1398,8 @@ int32_t RilCallback::SetLocateUpdatesResponse(const RilRadioResponseInfo &respon
 {
     g_setLocateUpdatesResponseFlag = true;
     HDF_LOGI("RilCallback::SetLocateUpdatesResponse error:%{public}d", responseInfo.error);
-    g_hdiResponseld = HdiId::HREQ_NETWORK_SET_LOCATE_UPDATES;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_NETWORK_SET_LOCATE_UPDATES;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1408,8 +1408,8 @@ int32_t RilCallback::SetNotificationFilterResponse(const RilRadioResponseInfo &r
 {
     g_setNotificationFilterResponseFlag = true;
     HDF_LOGI("RilCallback::SetNotificationFilterResponse error:%{public}d", responseInfo.error);
-    g_hdiResponseld = HdiId::HREQ_NETWORK_SET_NOTIFICATION_FILTER;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_NETWORK_SET_NOTIFICATION_FILTER;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1418,8 +1418,8 @@ int32_t RilCallback::SetDeviceStateResponse(const RilRadioResponseInfo &response
 {
     g_setDeviceStateResponseFlag = true;
     HDF_LOGI("RilCallback::SetDeviceStateResponse error:%{public}d", responseInfo.error);
-    g_hdiResponseld = HdiId::HREQ_NETWORK_SET_DEVICE_STATE;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_NETWORK_SET_DEVICE_STATE;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1427,8 +1427,8 @@ int32_t RilCallback::SetDeviceStateResponse(const RilRadioResponseInfo &response
 int32_t RilCallback::GetRrcConnectionStateResponse(const RilRadioResponseInfo &responseInfo, int32_t state)
 {
     HDF_LOGI("RilCallback::GetRrcConnectionStateResponse state:%{public}d", state);
-    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_RRC_CONNECTION_STATE;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_NETWORK_GET_RRC_CONNECTION_STATE;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1437,8 +1437,8 @@ int32_t RilCallback::SetNrOptionModeResponse(const RilRadioResponseInfo &respons
 {
     HDF_LOGI("RilCallback::SetDeviceStateResponse error:%{public}d", responseInfo.error);
     g_setNrOptionModeResponseFlag = true;
-    g_hdiResponseld = HdiId::HREQ_NETWORK_SET_NR_OPTION_MODE;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_NETWORK_SET_NR_OPTION_MODE;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1447,8 +1447,8 @@ int32_t RilCallback::GetNrOptionModeResponse(const RilRadioResponseInfo &respons
 {
     HDF_LOGI("RilCallback::GetNrOptionModeResponse state:%{public}d", state);
     g_getNrOptionModeResponseFlag = true;
-    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_NR_OPTION_MODE;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_NETWORK_GET_NR_OPTION_MODE;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1479,8 +1479,8 @@ int32_t RilCallback::GetNrSsbIdResponse(const RilRadioResponseInfo &responseInfo
             HDF_LOGE("nbCellSsbNum:%{public}d, rsrp:%{public}d", ssbListNum, infoNbCell.rsrp);
         }
     }
-    g_hdiResponseld = HdiId::HREQ_NETWORK_GET_NR_SSBID_INFO;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_NETWORK_GET_NR_SSBID_INFO;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1540,8 +1540,8 @@ int32_t RilCallback::GetEmergencyCallListResponse(const RilRadioResponseInfo &re
                                                   const EmergencyInfoList &emergencyInfoList)
 {
     HDF_LOGI("GetBoolResult emergencyInfoList callSize : %{public}d", emergencyInfoList.callSize);
-    g_hdiResponseld = HdiId::HREQ_CALL_GET_EMERGENCY_LIST;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_GET_EMERGENCY_LIST;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1549,8 +1549,8 @@ int32_t RilCallback::GetEmergencyCallListResponse(const RilRadioResponseInfo &re
 int32_t RilCallback::SetEmergencyCallListResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("GetBoolResult SetEmergencyCallListResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_SET_EMERGENCY_LIST;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_SET_EMERGENCY_LIST;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1558,8 +1558,8 @@ int32_t RilCallback::SetEmergencyCallListResponse(const RilRadioResponseInfo &re
 int32_t RilCallback::GetCallListResponse(const RilRadioResponseInfo &responseInfo, const CallInfoList &callList)
 {
     HDF_LOGI("GetBoolResult CallInfoList callSize : %{public}d", callList.callSize);
-    g_hdiResponseld = HdiId::HREQ_CALL_GET_CALL_LIST;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_GET_CALL_LIST;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1568,8 +1568,8 @@ int32_t RilCallback::DialResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_dialResponseFlag = true;
     HDF_LOGI("GetBoolResult DialResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_DIAL;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_DIAL;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1578,8 +1578,8 @@ int32_t RilCallback::HangupResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_hangupResponseFlag = true;
     HDF_LOGI("GetBoolResult HangupResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_HANGUP;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_HANGUP;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1588,8 +1588,8 @@ int32_t RilCallback::RejectResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_rejectResponseFlag = true;
     HDF_LOGI("GetBoolResult RejectResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_REJECT;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_REJECT;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1598,8 +1598,8 @@ int32_t RilCallback::AnswerResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_answerResponseFlag = true;
     HDF_LOGI("GetBoolResult AnswerResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_ANSWER;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_ANSWER;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1608,8 +1608,8 @@ int32_t RilCallback::HoldCallResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_holdCallResponseFlag = true;
     HDF_LOGI("GetBoolResult HoldCallResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_HOLD_CALL;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_HOLD_CALL;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1618,8 +1618,8 @@ int32_t RilCallback::UnHoldCallResponse(const RilRadioResponseInfo &responseInfo
 {
     g_unHoldCallResponseFlag = true;
     HDF_LOGI("GetBoolResult UnHoldCallResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_UNHOLD_CALL;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_UNHOLD_CALL;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1628,8 +1628,8 @@ int32_t RilCallback::SwitchCallResponse(const RilRadioResponseInfo &responseInfo
 {
     g_switchCallResponseFlag = true;
     HDF_LOGI("GetBoolResult SwitchCallResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_SWITCH_CALL;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_SWITCH_CALL;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1639,8 +1639,8 @@ int32_t RilCallback::GetClipResponse(const RilRadioResponseInfo &responseInfo, c
     g_getClipResponseFlag = true;
     HDF_LOGI("GetBoolResult result: %{public}d, action: %{public}d, clipStat: %{public}d", getClipResult.result,
              getClipResult.action, getClipResult.clipStat);
-    g_hdiResponseld = HdiId::HREQ_CALL_GET_CLIP;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_GET_CLIP;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1649,8 +1649,8 @@ int32_t RilCallback::SetClipResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_setClipResponseFlag = true;
     HDF_LOGI("GetBoolResult SetClipResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_SET_CLIP;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_SET_CLIP;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1658,8 +1658,8 @@ int32_t RilCallback::SetClipResponse(const RilRadioResponseInfo &responseInfo)
 int32_t RilCallback::CombineConferenceResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("GetBoolResult CombineConferenceResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_COMBINE_CONFERENCE;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_COMBINE_CONFERENCE;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1667,8 +1667,8 @@ int32_t RilCallback::CombineConferenceResponse(const RilRadioResponseInfo &respo
 int32_t RilCallback::SeparateConferenceResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("GetBoolResult SeparateConferenceResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_SEPARATE_CONFERENCE;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_SEPARATE_CONFERENCE;
+    resultInfo_ = responseInfo;
     g_separateConferenceResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1677,8 +1677,8 @@ int32_t RilCallback::SeparateConferenceResponse(const RilRadioResponseInfo &resp
 int32_t RilCallback::CallSupplementResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("GetBoolResult CallSupplementResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_CALL_SUPPLEMENT;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_CALL_SUPPLEMENT;
+    resultInfo_ = responseInfo;
     g_callSupplementResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1689,8 +1689,8 @@ int32_t RilCallback::GetCallWaitingResponse(const RilRadioResponseInfo &response
 {
     HDF_LOGI("GetBoolResult GetCallWaitingResponse result: %{public}d, status: %{public}d, classCw: %{public}d",
              callWaitResult.result, callWaitResult.status, callWaitResult.classCw);
-    g_hdiResponseld = HdiId::HREQ_CALL_GET_CALL_WAITING;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_GET_CALL_WAITING;
+    resultInfo_ = responseInfo;
     g_getCallWaitingResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1699,8 +1699,8 @@ int32_t RilCallback::GetCallWaitingResponse(const RilRadioResponseInfo &response
 int32_t RilCallback::SetCallWaitingResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("GetBoolResult SetCallWaitingResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_SET_CALL_WAITING;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_SET_CALL_WAITING;
+    resultInfo_ = responseInfo;
     g_setCallWaitingResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1710,8 +1710,8 @@ int32_t RilCallback::GetCallTransferInfoResponse(const RilRadioResponseInfo &res
                                                  const CallForwardQueryInfoList &cFQueryList)
 {
     HDF_LOGI("GetBoolResult GetCallTransferInfoResponse cFQueryList: %{public}d", cFQueryList.callSize);
-    g_hdiResponseld = HdiId::HREQ_CALL_GET_CALL_TRANSFER_INFO;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_GET_CALL_TRANSFER_INFO;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1720,8 +1720,8 @@ int32_t RilCallback::SetCallTransferInfoResponse(const RilRadioResponseInfo &res
 {
     g_setCallTransferInfoResponseFlag = true;
     HDF_LOGI("GetBoolResult SetCallTransferInfoResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_SET_CALL_TRANSFER_INFO;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_SET_CALL_TRANSFER_INFO;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1732,8 +1732,8 @@ int32_t RilCallback::GetCallRestrictionResponse(const RilRadioResponseInfo &resp
     g_getCallRestrictionResponseFlag = true;
     HDF_LOGI("GetBoolResult result: %{public}d, status: %{public}d, classCw: %{public}d", result.result, result.status,
              result.classCw);
-    g_hdiResponseld = HdiId::HREQ_CALL_GET_CALL_RESTRICTION;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_GET_CALL_RESTRICTION;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1741,8 +1741,8 @@ int32_t RilCallback::SetCallRestrictionResponse(const RilRadioResponseInfo &resp
 {
     g_setCallRestrictionResponseFlag = true;
     HDF_LOGI("GetBoolResult SetCallRestrictionResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_SET_CALL_RESTRICTION;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_SET_CALL_RESTRICTION;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1751,8 +1751,8 @@ int32_t RilCallback::GetClirResponse(const RilRadioResponseInfo &responseInfo, c
     g_getClirResponseFlag = true;
     HDF_LOGI("GetBoolResult result: %{public}d, action: %{public}d, clirStat: %{public}d", getClirResult.result,
              getClirResult.action, getClirResult.clirStat);
-    g_hdiResponseld = HdiId::HREQ_CALL_GET_CLIR;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_GET_CLIR;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1761,8 +1761,8 @@ int32_t RilCallback::SetClirResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_setClirResponseFlag = true;
     HDF_LOGI("GetBoolResult SetClirResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_SET_CLIR;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_SET_CLIR;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1771,8 +1771,8 @@ int32_t RilCallback::StartDtmfResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_startDtmfResponseFlag = true;
     HDF_LOGI("GetBoolResult StartDtmfResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_START_DTMF;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_START_DTMF;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1781,8 +1781,8 @@ int32_t RilCallback::SendDtmfResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_sendDtmfResponseFlag = true;
     HDF_LOGI("GetBoolResult SendDtmfResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_SEND_DTMF;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_SEND_DTMF;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1791,8 +1791,8 @@ int32_t RilCallback::StopDtmfResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_stopDtmfResponseFlag = true;
     HDF_LOGI("GetBoolResult StopDtmfResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_STOP_DTMF;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_STOP_DTMF;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1801,8 +1801,8 @@ int32_t RilCallback::GetCallPreferenceModeResponse(const RilRadioResponseInfo &r
 {
     g_getCallPreferenceModeResponseFlag = true;
     HDF_LOGI("GetBoolResult GetCallPreferenceModeResponse mode: %{public}d", mode);
-    g_hdiResponseld = HdiId::HREQ_CALL_GET_CALL_PREFERENCE;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_GET_CALL_PREFERENCE;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1811,8 +1811,8 @@ int32_t RilCallback::SetCallPreferenceModeResponse(const RilRadioResponseInfo &r
 {
     g_setCallPreferenceModeResponseFlag = true;
     HDF_LOGI("GetBoolResult SetCallPreferenceModeResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_SET_CALL_PREFERENCE;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_SET_CALL_PREFERENCE;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1821,8 +1821,8 @@ int32_t RilCallback::SetUssdResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_setUssdResponseFlag = true;
     HDF_LOGI("GetBoolResult SetUssdResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_SET_USSD;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_SET_USSD;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1830,8 +1830,8 @@ int32_t RilCallback::SetUssdResponse(const RilRadioResponseInfo &responseInfo)
 int32_t RilCallback::GetUssdResponse(const RilRadioResponseInfo &responseInfo, int32_t cusd)
 {
     HDF_LOGI("GetBoolResult GetUssdResponse cusd: %{public}d", cusd);
-    g_hdiResponseld = HdiId::HREQ_CALL_GET_USSD;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_GET_USSD;
+    resultInfo_ = responseInfo;
     g_getUssdResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1840,8 +1840,8 @@ int32_t RilCallback::GetUssdResponse(const RilRadioResponseInfo &responseInfo, i
 int32_t RilCallback::SetMuteResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("GetBoolResult SetMuteResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_SET_MUTE;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_SET_MUTE;
+    resultInfo_ = responseInfo;
     g_setMuteResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1850,8 +1850,8 @@ int32_t RilCallback::SetMuteResponse(const RilRadioResponseInfo &responseInfo)
 int32_t RilCallback::GetMuteResponse(const RilRadioResponseInfo &responseInfo, int32_t mute)
 {
     HDF_LOGI("GetBoolResult GetMuteResponse mute: %{public}d", mute);
-    g_hdiResponseld = HdiId::HREQ_CALL_GET_MUTE;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_GET_MUTE;
+    resultInfo_ = responseInfo;
     g_getMuteResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1861,8 +1861,8 @@ int32_t RilCallback::GetCallFailReasonResponse(const RilRadioResponseInfo &respo
 {
     g_getCallFailReasonResponseFlag = true;
     HDF_LOGI("GetBoolResult GetCallFailReasonResponse callFail: %{public}d", callFail);
-    g_hdiResponseld = HdiId::HREQ_CALL_GET_FAIL_REASON;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_GET_FAIL_REASON;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1871,8 +1871,8 @@ int32_t RilCallback::SetBarringPasswordResponse(const RilRadioResponseInfo &resp
 {
     g_setBarringPasswordResponseFlag = true;
     HDF_LOGI("GetBoolResult SetBarringPasswordResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_SET_BARRING_PASSWORD;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_SET_BARRING_PASSWORD;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1881,8 +1881,8 @@ int32_t RilCallback::CloseUnFinishedUssdResponse(const RilRadioResponseInfo &res
 {
     g_closeUnFinishedUssdResponseFlag = true;
     HDF_LOGI("GetBoolResult CloseUnFinishedUssdResponse");
-    g_hdiResponseld = HdiId::HREQ_CALL_CLOSE_UNFINISHED_USSD;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_CALL_CLOSE_UNFINISHED_USSD;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1891,8 +1891,8 @@ int32_t RilCallback::SetVonrSwitchResponse(const RilRadioResponseInfo &responseI
 {
     g_setVonrSwitchResponseFlag = true;
     HDF_LOGI("GetBoolResult SetVonrSwitchResponse");
-    g_hdiResponseld = HdiId::HREQ_SET_VONR_SWITCH;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SET_VONR_SWITCH;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1928,8 +1928,8 @@ int32_t RilCallback::DsdsModeUpdated(const RilRadioResponseInfo &responseInfo, i
 int32_t RilCallback::ShutDownResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("ShutDownResponse");
-    g_hdiResponseld = HdiId::HREQ_MODEM_SHUT_DOWN;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_MODEM_SHUT_DOWN;
+    resultInfo_ = responseInfo;
     g_shutDownResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1938,8 +1938,8 @@ int32_t RilCallback::ShutDownResponse(const RilRadioResponseInfo &responseInfo)
 int32_t RilCallback::SetRadioStateResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("SetRadioStateResponse");
-    g_hdiResponseld = HdiId::HREQ_MODEM_SET_RADIO_STATUS;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_MODEM_SET_RADIO_STATUS;
+    resultInfo_ = responseInfo;
     g_setRadioStateResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1948,8 +1948,8 @@ int32_t RilCallback::SetRadioStateResponse(const RilRadioResponseInfo &responseI
 int32_t RilCallback::GetRadioStateResponse(const RilRadioResponseInfo &responseInfo, int32_t state)
 {
     HDF_LOGI("GetRadioStateResponse state : %{public}d", state);
-    g_hdiResponseld = HdiId::HREQ_MODEM_GET_RADIO_STATUS;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_MODEM_GET_RADIO_STATUS;
+    resultInfo_ = responseInfo;
     g_getRadioStateResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1958,8 +1958,8 @@ int32_t RilCallback::GetRadioStateResponse(const RilRadioResponseInfo &responseI
 int32_t RilCallback::GetImeiResponse(const RilRadioResponseInfo &responseInfo, const std::string &imei)
 {
     HDF_LOGI("GetImeiResponse imei : %{public}s", imei.c_str());
-    g_hdiResponseld = HdiId::HREQ_MODEM_GET_IMEI;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_MODEM_GET_IMEI;
+    resultInfo_ = responseInfo;
     g_getImeiResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1968,8 +1968,8 @@ int32_t RilCallback::GetImeiResponse(const RilRadioResponseInfo &responseInfo, c
 int32_t RilCallback::GetMeidResponse(const RilRadioResponseInfo &responseInfo, const std::string &meid)
 {
     HDF_LOGI("GetMeidResponse meid : %{public}s", meid.c_str());
-    g_hdiResponseld = HdiId::HREQ_MODEM_GET_MEID;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_MODEM_GET_MEID;
+    resultInfo_ = responseInfo;
     g_getMeidResponseFlag = true;
     NotifyAll();
     return 0;
@@ -1986,8 +1986,8 @@ int32_t RilCallback::GetVoiceRadioTechnologyResponse(const RilRadioResponseInfo 
              voiceRadioTechnology.simStatus, voiceRadioTechnology.lockStatus, voiceRadioTechnology.sysMode,
              voiceRadioTechnology.actType, voiceRadioTechnology.sysModeName.c_str(),
              voiceRadioTechnology.actName.c_str());
-    g_hdiResponseld = HdiId::HREQ_MODEM_GET_VOICE_RADIO;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_MODEM_GET_VOICE_RADIO;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -1996,8 +1996,8 @@ int32_t RilCallback::GetBasebandVersionResponse(const RilRadioResponseInfo &resp
                                                 const std::string &basebandVersion)
 {
     HDF_LOGI("GetBasebandVersionResponse basebandVersion : %{public}s", basebandVersion.c_str());
-    g_hdiResponseld = HdiId::HREQ_MODEM_GET_BASEBAND_VERSION;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_MODEM_GET_BASEBAND_VERSION;
+    resultInfo_ = responseInfo;
     g_getBasebandVersionResponseFlag = true;
     NotifyAll();
     return 0;
@@ -2048,8 +2048,8 @@ int32_t RilCallback::ActivatePdpContextResponse(const RilRadioResponseInfo &resp
              setupDataCallResultInfo.gateway.c_str(), setupDataCallResultInfo.maxTransferUnit,
              setupDataCallResultInfo.pCscfPrimAddr.c_str(), setupDataCallResultInfo.pCscfSecAddr.c_str(),
              setupDataCallResultInfo.pduSessionId);
-    g_hdiResponseld = HdiId::HREQ_DATA_ACTIVATE_PDP_CONTEXT;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_DATA_ACTIVATE_PDP_CONTEXT;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2058,8 +2058,8 @@ int32_t RilCallback::DeactivatePdpContextResponse(const RilRadioResponseInfo &re
 {
     g_deactivatePdpContextResponseFlag = true;
     HDF_LOGI("RilCallback::DeactivatePdpContextResponse error:%{public}d", responseInfo.error);
-    g_hdiResponseld = HdiId::HREQ_DATA_DEACTIVATE_PDP_CONTEXT;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_DATA_DEACTIVATE_PDP_CONTEXT;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2083,8 +2083,8 @@ int32_t RilCallback::GetPdpContextListResponse(const RilRadioResponseInfo &respo
             setupDataCallResultInfo.pCscfPrimAddr.c_str(), setupDataCallResultInfo.pCscfSecAddr.c_str(),
             setupDataCallResultInfo.pduSessionId);
     }
-    g_hdiResponseld = HdiId::HREQ_DATA_GET_PDP_CONTEXT_LIST;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_DATA_GET_PDP_CONTEXT_LIST;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2093,8 +2093,8 @@ int32_t RilCallback::SetInitApnInfoResponse(const RilRadioResponseInfo &response
 {
     g_setInitApnInfoResponseFlag = true;
     HDF_LOGI("RilCallback::SetInitApnInfoResponse error:%{public}d", responseInfo.error);
-    g_hdiResponseld = HdiId::HREQ_DATA_SET_INIT_APN_INFO;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_DATA_SET_INIT_APN_INFO;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2102,8 +2102,8 @@ int32_t RilCallback::SetInitApnInfoResponse(const RilRadioResponseInfo &response
 int32_t RilCallback::SetLinkBandwidthReportingRuleResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("RilCallback::SetLinkBandwidthReportingRuleResponse error:%{public}d", responseInfo.error);
-    g_hdiResponseld = HdiId::HREQ_DATA_SET_LINK_BANDWIDTH_REPORTING_RULE;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_DATA_SET_LINK_BANDWIDTH_REPORTING_RULE;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2119,8 +2119,8 @@ int32_t RilCallback::GetLinkBandwidthInfoResponse(const RilRadioResponseInfo &re
         dataLinkBandwidthInfo.serial, dataLinkBandwidthInfo.cid, dataLinkBandwidthInfo.qi, dataLinkBandwidthInfo.dlGfbr,
         dataLinkBandwidthInfo.ulGfbr, dataLinkBandwidthInfo.dlMfbr, dataLinkBandwidthInfo.ulMfbr,
         dataLinkBandwidthInfo.ulSambr, dataLinkBandwidthInfo.dlSambr, dataLinkBandwidthInfo.averagingWindow);
-    g_hdiResponseld = HdiId::HREQ_DATA_GET_LINK_BANDWIDTH_INFO;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_DATA_GET_LINK_BANDWIDTH_INFO;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2128,8 +2128,8 @@ int32_t RilCallback::GetLinkBandwidthInfoResponse(const RilRadioResponseInfo &re
 int32_t RilCallback::SetDataPermittedResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("RilCallback::SetDataPermittedResponse error:%{public}d", responseInfo.error);
-    g_hdiResponseld = HdiId::HREQ_DATA_SET_DATA_PERMITTED;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_DATA_SET_DATA_PERMITTED;
+    resultInfo_ = responseInfo;
     g_setDataPermittedResponseFlag = true;
     NotifyAll();
     return 0;
@@ -2138,8 +2138,8 @@ int32_t RilCallback::SetDataPermittedResponse(const RilRadioResponseInfo &respon
 int32_t RilCallback::SetDataProfileInfoResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("RilCallback::SetDataProfileInfoResponse error:%{public}d", responseInfo.error);
-    g_hdiResponseld = HdiId::HREQ_DATA_SET_DATA_PROFILE_INFO;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_DATA_SET_DATA_PROFILE_INFO;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2152,8 +2152,8 @@ int32_t RilCallback::GetLinkCapabilityResponse(const RilRadioResponseInfo &respo
              "primaryUplinkKbps:%{public}d secondaryDownlinkKbps:%{public}d secondaryUplinkKbps:%{public}d",
              dataLinkCapability.primaryDownlinkKbps, dataLinkCapability.primaryUplinkKbps,
              dataLinkCapability.secondaryDownlinkKbps, dataLinkCapability.secondaryUplinkKbps);
-    g_hdiResponseld = HdiId::HREQ_DATA_GET_LINK_CAPABILITY;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_DATA_GET_LINK_CAPABILITY;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2161,8 +2161,8 @@ int32_t RilCallback::GetLinkCapabilityResponse(const RilRadioResponseInfo &respo
 int32_t RilCallback::CleanAllConnectionsResponse(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("RilCallback::CleanAllConnectionsResponse error:%{public}d", responseInfo.error);
-    g_hdiResponseld = HdiId::HREQ_DATA_CLEAN_ALL_CONNECTIONS;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_DATA_CLEAN_ALL_CONNECTIONS;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2210,8 +2210,8 @@ int32_t RilCallback::SendGsmSmsResponse(const RilRadioResponseInfo &responseInfo
     g_sendGsmSmsResponseFlag = true;
     HDF_LOGI("RilCallback::SendGsmSmsResponse sendSmsResultInfo pdu : %{public}s, error : %{public}d",
              sendSmsResultInfo.pdu.c_str(), sendSmsResultInfo.errCode);
-    g_hdiResponseld = HdiId::HREQ_SMS_SEND_GSM_SMS;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SMS_SEND_GSM_SMS;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2222,8 +2222,8 @@ int32_t RilCallback::SendCdmaSmsResponse(const RilRadioResponseInfo &responseInf
     g_sendCdmaSmsResponseFlag = true;
     HDF_LOGI("RilCallback::SendCdmaSmsResponse sendSmsResultInfo pdu : %{public}s, error : %{public}d",
              sendSmsResultInfo.pdu.c_str(), sendSmsResultInfo.errCode);
-    g_hdiResponseld = HdiId::HREQ_SMS_SEND_CDMA_SMS;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SMS_SEND_CDMA_SMS;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2232,8 +2232,8 @@ int32_t RilCallback::AddSimMessageResponse(const RilRadioResponseInfo &responseI
 {
     g_addSimMessageResponseFlag = true;
     HDF_LOGI("RilCallback::AddSimMessageResponse error : %{public}d", responseInfo.error);
-    g_hdiResponseld = HdiId::HREQ_SMS_ADD_SIM_MESSAGE;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SMS_ADD_SIM_MESSAGE;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2242,8 +2242,8 @@ int32_t RilCallback::DelSimMessageResponse(const RilRadioResponseInfo &responseI
 {
     g_delSimMessageResponseFlag = true;
     HDF_LOGI("RilCallback::DelSimMessageResponse error : %{public}d", responseInfo.error);
-    g_hdiResponseld = HdiId::HREQ_SMS_DEL_SIM_MESSAGE;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SMS_DEL_SIM_MESSAGE;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2251,8 +2251,8 @@ int32_t RilCallback::UpdateSimMessageResponse(const RilRadioResponseInfo &respon
 {
     g_updateSimMessageResponseFlag = true;
     HDF_LOGI("RilCallback::UpdateSimMessageResponse error : %{public}d", responseInfo.error);
-    g_hdiResponseld = HdiId::HREQ_SMS_UPDATE_SIM_MESSAGE;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SMS_UPDATE_SIM_MESSAGE;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2261,8 +2261,8 @@ int32_t RilCallback::AddCdmaSimMessageResponse(const RilRadioResponseInfo &respo
 {
     g_addCdmaSimMessageResponseFlag = true;
     HDF_LOGI("RilCallback::AddCdmaSimMessageResponse error : %{public}d", responseInfo.error);
-    g_hdiResponseld = HdiId::HREQ_SMS_ADD_CDMA_SIM_MESSAGE;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SMS_ADD_CDMA_SIM_MESSAGE;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2271,8 +2271,8 @@ int32_t RilCallback::DelCdmaSimMessageResponse(const RilRadioResponseInfo &respo
 {
     g_delCdmaSimMessageResponseFlag = true;
     HDF_LOGI("RilCallback::DelCdmaSimMessageResponse error : %{public}d", responseInfo.error);
-    g_hdiResponseld = HdiId::HREQ_SMS_DEL_CDMA_SIM_MESSAGE;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SMS_DEL_CDMA_SIM_MESSAGE;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2281,8 +2281,8 @@ int32_t RilCallback::UpdateCdmaSimMessageResponse(const RilRadioResponseInfo &re
 {
     g_updateCdmaSimMessageResponseFlag = true;
     HDF_LOGI("RilCallback::UpdateCdmaSimMessageResponse error : %{public}d", responseInfo.error);
-    g_hdiResponseld = HdiId::HREQ_SMS_UPDATE_CDMA_SIM_MESSAGE;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SMS_UPDATE_CDMA_SIM_MESSAGE;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2291,8 +2291,8 @@ int32_t RilCallback::SetSmscAddrResponse(const RilRadioResponseInfo &responseInf
 {
     g_setSmscAddrResponseFlag = true;
     HDF_LOGI("RilCallback::SetSmscAddrResponse error : %{public}d", responseInfo.error);
-    g_hdiResponseld = HdiId::HREQ_SMS_SET_SMSC_ADDR;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SMS_SET_SMSC_ADDR;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2303,8 +2303,8 @@ int32_t RilCallback::GetSmscAddrResponse(const RilRadioResponseInfo &responseInf
     g_getSmscAddrResponseFlag = true;
     HDF_LOGI("RilCallback::GetSmscAddrResponse serviceCenterAddress tosca : %{public}d, address : %{public}s",
              serviceCenterAddress.tosca, serviceCenterAddress.address.c_str());
-    g_hdiResponseld = HdiId::HREQ_SMS_GET_SMSC_ADDR;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SMS_GET_SMSC_ADDR;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2313,8 +2313,8 @@ int32_t RilCallback::SetCBConfigResponse(const RilRadioResponseInfo &responseInf
 {
     g_setCBConfigResponseFlag = true;
     HDF_LOGI("RilCallback::SetCBConfigResponse error : %{public}d", responseInfo.error);
-    g_hdiResponseld = HdiId::HREQ_SMS_SET_CB_CONFIG;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SMS_SET_CB_CONFIG;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2325,8 +2325,8 @@ int32_t RilCallback::GetCBConfigResponse(const RilRadioResponseInfo &responseInf
     g_getCBConfigResponseFlag = true;
     HDF_LOGI("RilCallback::GetCBConfigResponse cellBroadcastInfo mids : %{public}s, dcss: %{public}s",
              cellBroadcastInfo.mids.c_str(), cellBroadcastInfo.dcss.c_str());
-    g_hdiResponseld = HdiId::HREQ_SMS_GET_CB_CONFIG;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SMS_GET_CB_CONFIG;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2335,8 +2335,8 @@ int32_t RilCallback::SetCdmaCBConfigResponse(const RilRadioResponseInfo &respons
 {
     HDF_LOGI("RilCallback::SetCdmaCBConfigResponse error : %{public}d", responseInfo.error);
     g_setCdmaCBConfigResponseFlag = true;
-    g_hdiResponseld = HdiId::HREQ_SMS_SET_CDMA_CB_CONFIG;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SMS_SET_CDMA_CB_CONFIG;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2348,8 +2348,8 @@ int32_t RilCallback::GetCdmaCBConfigResponse(const RilRadioResponseInfo &respons
              "checked: %{public}d",
              cdmaCBConfigInfo.service, cdmaCBConfigInfo.language, cdmaCBConfigInfo.checked);
     g_getCdmaCBConfigResponseFlag = true;
-    g_hdiResponseld = HdiId::HREQ_SMS_GET_CDMA_CB_CONFIG;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SMS_GET_CDMA_CB_CONFIG;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2360,8 +2360,8 @@ int32_t RilCallback::SendSmsMoreModeResponse(const RilRadioResponseInfo &respons
     HDF_LOGI("RilCallback::SendSmsMoreModeResponse sendSmsResultInfo pdu : %{public}s, error : %{public}d",
              sendSmsResultInfo.pdu.c_str(), sendSmsResultInfo.errCode);
     g_sendSmsMoreModeResponseFlag = true;
-    g_hdiResponseld = HdiId::HREQ_SMS_SEND_SMS_MORE_MODE;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SMS_SEND_SMS_MORE_MODE;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -2370,8 +2370,8 @@ int32_t RilCallback::SendSmsAckResponse(const RilRadioResponseInfo &responseInfo
 {
     HDF_LOGI("RilCallback::SendSmsAckResponse error:%{public}d", responseInfo.error);
     g_sendSmsAckResponseFlag = true;
-    g_hdiResponseld = HdiId::HREQ_SMS_SEND_SMS_ACK;
-    g_resultInfo = responseInfo;
+    hdiId_ = HdiId::HREQ_SMS_SEND_SMS_ACK;
+    resultInfo_ = responseInfo;
     NotifyAll();
     return 0;
 }
@@ -16312,12 +16312,12 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1DialResponse003, Function | MediumTest |
     if (!IsReady(SLOTID_1)) {
         return;
     }
-    g_dialResponseFlag = false;
     DialInfo dialInfo = {};
     dialInfo.address = "10086";
     dialInfo.clir = 0;
     int32_t ret = 0;
     for (int i = 0; i < 100; i++) {
+        g_dialResponseFlag = false;
         ret = g_rilInterface->Dial(SLOTID_1, GetSerialId(), dialInfo);
         EXPECT_EQ(SUCCESS, ret);
         WaitFor(WAIT_TIME_SECOND);

@@ -38329,7 +38329,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallTransferInfoResponse001, Function
     int32_t ret = g_rilInterface->GetCallTransferInfo(SLOTID_2, -1, 1);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_NE(SUCCESS, ret);
-    EXPECT_EQ(true, g_getCallTransferInfoResponseFlag);
+    EXPECT_EQ(false, g_getCallTransferInfoResponseFlag);
 }
 
 /**
@@ -38458,7 +38458,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1CombineConferenceResponse004, Function |
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallListResponse001, Function | MediumTest | Level1)
 {
-    if (65535) {
+    if (!IsReady(65535)) {
         return;
     }
     g_getCallListResponseFlag = false;
@@ -38475,7 +38475,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallListResponse001, Function | Mediu
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallListResponse002, Function | MediumTest | Level1)
 {
-    if (-65535) {
+    if (!IsReady(-65535)) {
         return;
     }
     g_getCallListResponseFlag = false;
@@ -38499,7 +38499,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallListResponse003, Function | Mediu
     int32_t ret = g_rilInterface->GetCallList(SLOTID_2, -11111);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_NE(SUCCESS, ret);
-    EXPECT_EQ(true, g_getCallListResponseFlag);
+    EXPECT_EQ(false, g_getCallListResponseFlag);
 }
 
 /**
@@ -38526,7 +38526,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetCallListResponse004, Function | Mediu
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallListResponse001, Function | MediumTest | Level1)
 {
-    if (1111) {
+    if (!IsReady(1111)) {
         return;
     }
     g_getEmergencyCallListResponseFlag = false;
@@ -38543,7 +38543,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallListResponse001, Functio
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallListResponse002, Function | MediumTest | Level1)
 {
-    if (-1) {
+    if (!IsReady(-1)) {
         return;
     }
     g_getEmergencyCallListResponseFlag = false;
@@ -38590,11 +38590,11 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1GetEmergencyCallListResponse004, Functio
 /**
  * @tc.number: SUB_Telephony_Driversystem_V1SetEmergencyCallListResponse_0100
  * @tc.name  : testV1SetEmergencyCallListResponse001
- * @tc.desc  : Call function GetEmergencyCallList with SLOTID_1 and a value of 11111
+ * @tc.desc  : Call function GetEmergencyCallList with SLOTID is 11111
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallListResponse001, Function | MediumTest | Level1)
 {
-    if (11111) {
+    if (!IsReady(11111)) {
         return;
     }
     g_setEmergencyCallListResponse = false;
@@ -38617,11 +38617,11 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallListResponse001, Functio
 /**
  * @tc.number: SUB_Telephony_Driversystem_V1SetEmergencyCallListResponse_0200
  * @tc.name  : testV1SetEmergencyCallListResponse002
- * @tc.desc  : Call function GetEmergencyCallList with SLOTID_1 and a value of -11111
+ * @tc.desc  : Call function GetEmergencyCallList with SLOTID is -11111
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallListResponse002, Function | MediumTest | Level1)
 {
-    if (-11111) {
+    if (!IsReady(-11111)) {
         return;
     }
     g_setEmergencyCallListResponse = false;
@@ -38644,7 +38644,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallListResponse002, Functio
 /**
  * @tc.number: SUB_Telephony_Driversystem_V1SetEmergencyCallListResponse_0300
  * @tc.name  : testV1SetEmergencyCallListResponse003
- * @tc.desc  : Call function GetEmergencyCallList with SLOTID_2 and a value of 65535
+ * @tc.desc  : Call function GetEmergencyCallList with SerialID is 65535
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallListResponse003, Function | MediumTest | Level1)
 {
@@ -38671,7 +38671,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallListResponse003, Functio
 /**
  * @tc.number: SUB_Telephony_Driversystem_V1SetEmergencyCallListResponse_0400
  * @tc.name  : testV1SetEmergencyCallListResponse004
- * @tc.desc  : Call function GetEmergencyCallList with SLOTID_2 and a value of -65535
+ * @tc.desc  : Call function GetEmergencyCallList with SerialID is -65535
  */
 HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallListResponse004, Function | MediumTest | Level2)
 {
@@ -38692,5 +38692,5 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetEmergencyCallListResponse004, Functio
     int32_t ret = g_rilInterface->SetEmergencyCallList(SLOTID_2, -65535, emergencyInfoList);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_NE(SUCCESS, ret);
-    EXPECT_EQ(true, g_setEmergencyCallListResponse);
+    EXPECT_EQ(false, g_setEmergencyCallListResponse);
 }

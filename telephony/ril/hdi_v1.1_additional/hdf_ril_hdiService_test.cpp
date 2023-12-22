@@ -37620,7 +37620,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule001, Functi
     const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
     const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
-                                                   50000, 100000, 200000, 500000, 1000000};
+                                                50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -37657,7 +37657,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule002, Functi
     const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
     const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
-                                                   50000, 100000, 200000, 500000, 1000000};
+                                                50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -37694,7 +37694,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule003, Functi
     const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
     const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
-                                                   50000, 100000, 200000, 500000, 1000000};
+                                                50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -37731,7 +37731,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule004, Functi
     const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
     const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
-                                                   50000, 100000, 200000, 500000, 1000000};
+                                                50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -37768,7 +37768,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule005, Functi
     const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
     const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
-                                                   50000, 100000, 200000, 500000, 1000000};
+                                                50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -37805,7 +37805,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule006, Functi
     const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
     const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
-                                                   50000, 100000, 200000, 500000, 1000000};
+                                                50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -37842,7 +37842,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule007, Functi
     const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
     const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
-                                                   50000, 100000, 200000, 500000, 1000000};
+                                                50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -37880,7 +37880,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule008, Functi
     const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
     const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
-                                                   50000, 100000, 200000, 500000, 1000000};
+                                                50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -37919,7 +37919,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule009, Functi
     const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
     const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
-                                                   50000, 100000, 200000, 500000, 1000000};
+                                                50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -37956,7 +37956,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule010, Functi
     const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
     const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
-                                                   50000, 100000, 200000, 500000, 1000000};
+                                                50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -37993,7 +37993,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule011, Functi
     const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
     const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
-                                                   50000, 100000, 200000, 500000, 1000000};
+                                                50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -38030,7 +38030,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule012, Functi
     const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
     const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
-                                                   50000, 100000, 200000, 500000, 1000000};
+                                                50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -38067,7 +38067,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule013, Functi
     const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
     const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
-                                                   50000, 100000, 200000, 500000, 1000000};
+                                                50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -38104,7 +38104,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule014, Functi
     const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
     const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
-                                                   50000, 100000, 200000, 500000, 1000000};
+                                                50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;
@@ -38141,7 +38141,7 @@ HWTEST_F(HdfRilHdiTestAdditional, testV1SetLinkBandwidthReportingRule015, Functi
     const int32_t maxUplinkLinkBandwidih[] = {100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000};
     uint32_t uplinkKbpsSize = sizeof(maxUplinkLinkBandwidih) / sizeof(int32_t);
     const int32_t maxDownlinkLinkBandwidih[] = {100,   500,    1000,   5000,   10000,  20000,
-                                                   50000, 100000, 200000, 500000, 1000000};
+                                                50000, 100000, 200000, 500000, 1000000};
     uint32_t downlinkKbpsSize = sizeof(maxDownlinkLinkBandwidih) / sizeof(int32_t);
     DataLinkBandwidthReportingRule dLinkBandwidth;
     dLinkBandwidth.serial = serialId;

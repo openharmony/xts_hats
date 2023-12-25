@@ -36,7 +36,8 @@ public:
     void ReleaseAdapterDescs(struct AudioAdapterDescriptor **descs, uint32_t descsLen);
 };
 
-void HdfAudioUtManagerTestAdditional::AudioAdapterDescriptorFree(struct AudioAdapterDescriptor *dataBlock, bool freeSelf)
+void HdfAudioUtManagerTestAdditional::AudioAdapterDescriptorFree(struct AudioAdapterDescriptor *dataBlock,
+                                                                 bool freeSelf)
 {
     if (dataBlock == nullptr) {
         return;
@@ -67,13 +68,9 @@ void HdfAudioUtManagerTestAdditional::ReleaseAdapterDescs(struct AudioAdapterDes
     }
 }
 
-void HdfAudioUtManagerTestAdditional::SetUp()
-{
-}
+void HdfAudioUtManagerTestAdditional::SetUp() {}
 
-void HdfAudioUtManagerTestAdditional::TearDown()
-{
-}
+void HdfAudioUtManagerTestAdditional::TearDown() {}
 
 void HdfAudioUtManagerTestAdditional::SetUpTestCase()
 {
@@ -81,10 +78,7 @@ void HdfAudioUtManagerTestAdditional::SetUpTestCase()
     ASSERT_NE(g_manager, nullptr);
 }
 
-void HdfAudioUtManagerTestAdditional::TearDownTestCase()
-{
-    IAudioManagerRelease(g_manager, false);
-}
+void HdfAudioUtManagerTestAdditional::TearDownTestCase() { IAudioManagerRelease(g_manager, false); }
 
 /**
  * @tc.number : SUB_Driver_Audio_GetAllAdapters_0800
@@ -94,11 +88,11 @@ void HdfAudioUtManagerTestAdditional::TearDownTestCase()
 HWTEST_F(HdfAudioUtManagerTestAdditional, testGetAllAdapters001, Function | MediumTest | Level1)
 {
     uint32_t size = g_audioAdapterNumMax;
-    struct AudioAdapterDescriptor *descs = (struct AudioAdapterDescriptor *)OsalMemCalloc(
-        sizeof(struct AudioAdapterDescriptor) * (g_audioAdapterNumMax));
+    struct AudioAdapterDescriptor *descs =
+        (struct AudioAdapterDescriptor *)OsalMemCalloc(sizeof(struct AudioAdapterDescriptor) * (g_audioAdapterNumMax));
     int i = 0;
     int32_t ret = 0;
-    for(i = 0; i < 1000;i++){
+    for (i = 0; i < 1000; i++) {
         ret |= g_manager->GetAllAdapters(g_manager, descs, &size);
     }
     EXPECT_EQ(0, ret);
@@ -114,8 +108,8 @@ HWTEST_F(HdfAudioUtManagerTestAdditional, testLoadAdapter001, Function | MediumT
     uint32_t size = g_audioAdapterNumMax;
     struct IAudioAdapter *adapter = nullptr;
 
-    struct AudioAdapterDescriptor *descs = (struct AudioAdapterDescriptor *)OsalMemCalloc(
-        sizeof(struct AudioAdapterDescriptor) * (g_audioAdapterNumMax));
+    struct AudioAdapterDescriptor *descs =
+        (struct AudioAdapterDescriptor *)OsalMemCalloc(sizeof(struct AudioAdapterDescriptor) * (g_audioAdapterNumMax));
     int i = 0;
     int32_t ret = 0;
     ASSERT_EQ(HDF_SUCCESS, g_manager->GetAllAdapters(g_manager, descs, &size));
@@ -123,11 +117,11 @@ HWTEST_F(HdfAudioUtManagerTestAdditional, testLoadAdapter001, Function | MediumT
         ReleaseAdapterDescs(&descs, g_audioAdapterNumMax);
         ASSERT_GE(g_audioAdapterNumMax, size);
     }
-    for(i = 0; i < 1000;i++){
+    for (i = 0; i < 1000; i++) {
         ret |= g_manager->LoadAdapter(g_manager, descs, &adapter);
         g_manager->UnloadAdapter(g_manager, descs[0].adapterName);
     }
-    EXPECT_EQ(HDF_SUCCESS,ret);
+    EXPECT_EQ(HDF_SUCCESS, ret);
     ReleaseAdapterDescs(&descs, g_audioAdapterNumMax);
 }
 /**
@@ -140,8 +134,8 @@ HWTEST_F(HdfAudioUtManagerTestAdditional, testUnloadAdapter001, Function | Mediu
     uint32_t size = g_audioAdapterNumMax;
     struct IAudioAdapter *adapter = nullptr;
 
-    struct AudioAdapterDescriptor *descs = (struct AudioAdapterDescriptor *)OsalMemCalloc(
-        sizeof(struct AudioAdapterDescriptor) * (g_audioAdapterNumMax));
+    struct AudioAdapterDescriptor *descs =
+        (struct AudioAdapterDescriptor *)OsalMemCalloc(sizeof(struct AudioAdapterDescriptor) * (g_audioAdapterNumMax));
     int i = 0;
     int32_t ret = 0;
     ASSERT_EQ(HDF_SUCCESS, g_manager->GetAllAdapters(g_manager, descs, &size));
@@ -149,11 +143,11 @@ HWTEST_F(HdfAudioUtManagerTestAdditional, testUnloadAdapter001, Function | Mediu
         ReleaseAdapterDescs(&descs, g_audioAdapterNumMax);
         ASSERT_GE(g_audioAdapterNumMax, size);
     }
-    for(i = 0; i < 1000;i++){
+    for (i = 0; i < 1000; i++) {
         g_manager->LoadAdapter(g_manager, descs, &adapter);
         ret |= g_manager->UnloadAdapter(g_manager, descs[0].adapterName);
     }
-    EXPECT_EQ(HDF_SUCCESS,ret);
+    EXPECT_EQ(HDF_SUCCESS, ret);
     ReleaseAdapterDescs(&descs, g_audioAdapterNumMax);
 }
 /**
@@ -165,9 +159,9 @@ HWTEST_F(HdfAudioUtManagerTestAdditional, testReleaseAudioManagerObject001, Func
 {
     int i = 0;
     int32_t ret = 0;
-    for(i = 0; i < 1000;i++){
+    for (i = 0; i < 1000; i++) {
         ret |= g_manager->ReleaseAudioManagerObject(nullptr);
     }
-    EXPECT_EQ(HDF_ERR_INVALID_OBJECT,ret);
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
 }
-}
+} // namespace

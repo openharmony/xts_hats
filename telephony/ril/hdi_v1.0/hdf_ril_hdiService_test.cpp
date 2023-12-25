@@ -580,7 +580,7 @@ bool RilCallback::GetBoolResult(HdiId hdiId)
 int32_t RilCallback::SimStateUpdated(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("SimStateUpdated notice : slotId = %{public}d", responseInfo.slotId);
-    g_rilInterface->GetSimStatus(GetSerialId(), responseInfo.slotId);
+    g_rilInterface->GetSimStatus(responseInfo.slotId, GetSerialId());
     return 0;
 }
 

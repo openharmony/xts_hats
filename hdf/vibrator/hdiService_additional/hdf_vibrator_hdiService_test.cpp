@@ -420,7 +420,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop006, Function | MediumTest
     OsalMSleep(SLEEP_TIME);
 
     int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_BUTT);
-    EXPECT_EQ(endRet, HDF_FAILURE);
+    EXPECT_EQ(endRet, HDF_ERR_INVALID_PARAM);
 }
 
 /**
@@ -439,7 +439,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop007, Function | MediumTest
     OsalMSleep(SLEEP_TIME);
 
     int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_BUTT);
-    EXPECT_EQ(endRet, HDF_FAILURE);
+    EXPECT_EQ(endRet, HDF_ERR_INVALID_PARAM);
 }
 
 /**
@@ -459,7 +459,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop008, Function | MediumTest
     OsalMSleep(SLEEP_TIME);
 
     endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_BUTT);
-    EXPECT_EQ(endRet, HDF_FAILURE);
+    EXPECT_EQ(endRet, HDF_ERR_INVALID_PARAM);
 }
 
 /**
@@ -479,7 +479,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop009, Function | MediumTest
     OsalMSleep(SLEEP_TIME);
 
     endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_BUTT);
-    EXPECT_EQ(endRet, HDF_FAILURE);
+    EXPECT_EQ(endRet, HDF_ERR_INVALID_PARAM);
 }
 
 /**
@@ -515,7 +515,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop011, Function | MediumTest
     OsalMSleep(SLEEP_TIME);
 
     int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_BUTT);
-    EXPECT_EQ(endRet, HDF_FAILURE);
+    EXPECT_EQ(endRet, HDF_ERR_INVALID_PARAM);
 }
 
 /**

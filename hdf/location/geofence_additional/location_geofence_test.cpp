@@ -35,9 +35,6 @@ using namespace testing::ext;
 
 namespace {
 sptr<IGeofenceInterface> g_igeofenceHci = nullptr;
-constexpr const char *AGNSS_SERVICE_NAME = "agnss_interface_service";
-constexpr const char *GNSS_SERVICE_NAME = "gnss_interface_service";
-constexpr const char *GEOFENCE_SERVICE_NAME = "geofence_interface_service";
 } // namespace
 
 class LocationGeofenceAdditionalTest : public testing::Test {
@@ -80,15 +77,15 @@ void LocationGeofenceAdditionalTest::SetUpTestCase()
         printf("fail to get devmgr.\n");
         return;
     }
-    if (devmgr->LoadDevice(GNSS_SERVICE_NAME) != 0) {
+    if (devmgr->LoadDevice("gnss_interface_service") != 0) {
         printf("Load gnss service failed!\n");
         return;
     }
-    if (devmgr->LoadDevice(AGNSS_SERVICE_NAME) != 0) {
+    if (devmgr->LoadDevice("agnss_interface_service") != 0) {
         printf("Load agnss service failed!\n");
         return;
     }
-    if (devmgr->LoadDevice(GEOFENCE_SERVICE_NAME) != 0) {
+    if (devmgr->LoadDevice("geofence_interface_service") != 0) {
         printf("Load geofence service failed!\n");
         return;
     }
@@ -102,15 +99,15 @@ void LocationGeofenceAdditionalTest::TearDownTestCase()
         printf("fail to get devmgr.\n");
         return;
     }
-    if (devmgr->UnloadDevice(GNSS_SERVICE_NAME) != 0) {
+    if (devmgr->UnloadDevice("gnss_interface_service") != 0) {
         printf("Load gnss service failed!\n");
         return;
     }
-    if (devmgr->UnloadDevice(AGNSS_SERVICE_NAME) != 0) {
+    if (devmgr->UnloadDevice("agnss_interface_service") != 0) {
         printf("Load agnss service failed!\n");
         return;
     }
-    if (devmgr->UnloadDevice(GEOFENCE_SERVICE_NAME) != 0) {
+    if (devmgr->UnloadDevice("geofence_interface_service") != 0) {
         printf("Load geofence service failed!\n");
         return;
     }

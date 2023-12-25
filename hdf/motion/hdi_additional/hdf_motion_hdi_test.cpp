@@ -343,9 +343,10 @@ HWTEST_F(HdfMotionTestAdditional, testHdiRegister002, Function | MediumTest | Le
     for (size_t i = 0; i < 1000; i++) {
         ret = g_motionInterface->Register(g_motionCallback);
         EXPECT_EQ(HDF_SUCCESS, ret);
-
+        OsalMSleep(300);
         ret = g_motionInterface->Unregister(g_motionCallback);
         EXPECT_EQ(HDF_SUCCESS, ret);
+        OsalMSleep(300);
     }
 }
 

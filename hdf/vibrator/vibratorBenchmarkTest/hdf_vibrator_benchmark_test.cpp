@@ -38,8 +38,6 @@ namespace {
     std::string g_timeSequence = "haptic.clock.timer";
     std::string g_builtIn = "haptic.default.effect";
     std::string g_arbitraryStr = "arbitraryString";
-    const std::string DEVICETYPE_KEY = "const.product.devicetype";
-    const std::string DEVICETYPE_TYPE = "phone";
     sptr<IVibratorInterface> g_vibratorInterface = nullptr;
 
 class vibratorBenchmarkTest : public benchmark::Fixture {

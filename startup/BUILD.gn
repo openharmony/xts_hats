@@ -20,6 +20,9 @@ group("startup") {
       #"partitionslot:HatsStartupPartitionSlotTest"
     ]
   } else {
-    deps = [ "partitionslot:HatsStartupPartitionSlotTest" ]
+    deps = [
+      "partitionslot:HatsStartupPartitionSlotTest",
+      "partitionslot_additional:HatsStartupPartitionSlotAdditionalTest",
+    ]
   }
 }

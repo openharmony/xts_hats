@@ -148,6 +148,7 @@ enum class HdiId {
     HREQ_NETWORK_GET_RRC_CONNECTION_STATE,
     HREQ_NETWORK_SET_NR_OPTION_MODE,
     HREQ_NETWORK_GET_NR_OPTION_MODE,
+    HREQ_NETWORK_GET_NR_SSBID_INFO,
 
     HREQ_COMMON_BASE = 500,
     HREQ_MODEM_SHUT_DOWN,
@@ -418,6 +419,7 @@ public:
     int32_t SetNrOptionModeResponse(const RilRadioResponseInfo &responseInfo) override;
     int32_t GetNrOptionModeResponse(const RilRadioResponseInfo &responseInfo, int32_t mode) override;
     int32_t GetRrcConnectionStateUpdated(const RilRadioResponseInfo &responseInfo, int32_t state) override;
+    int32_t GetNrSsbIdResponse(const RilRadioResponseInfo &responseInfo, const NrCellSsbIds &nrCellSsbIds) override;
 
     // Sms
     int32_t NewSmsNotify(
@@ -1321,6 +1323,32 @@ int32_t RilCallback::GetNrOptionModeResponse(const RilRadioResponseInfo &respons
 int32_t RilCallback::GetRrcConnectionStateUpdated(const RilRadioResponseInfo &responseInfo, int32_t state)
 {
     HDF_LOGI("RilCallback::GetRrcConnectionStateUpdated state:%{public}d", state);
+    return 0;
+}
+
+int32_t RilCallback::GetNrSsbIdResponse(const RilRadioResponseInfo &responseInfo, const NrCellSsbIds &nrCellSsbIds)
+{
+    int32_t ssbListNum = 0;
+    int32_t nbCellNum = 0;
+    HDF_LOGE("rsrp:%{public}d", nrCellSsbIds.rsrp);
+    HDF_LOGE("sinr:%{public}d", nrCellSsbIds.sinr);
+    for (auto info : nrCellSsbIds.sCellSsbList) {
+        ssbListNum = ssbListNum + 1;
+        HDF_LOGE("sCellSsbNum:%{public}d, rsrp:%{public}d", ssbListNum, info.rsrp);
+    }
+    HDF_LOGE("nbCellCount:%{public}d", nrCellSsbIds.nbCellCount);
+    for (auto info : nrCellSsbIds.nbCellSsbList) {
+        nbCellNum = nbCellNum + 1;
+        HDF_LOGE("nbCellNum:%{public}d, rsrp:%{public}d, sinr:%{public}d", nbCellNum, info.rsrp, info.sinr);
+        ssbListNum = 0;
+        for (auto infoNbCell : info.ssbIdList) {
+            ssbListNum = ssbListNum + 1;
+            HDF_LOGE("nbCellSsbNum:%{public}d, rsrp:%{public}d", ssbListNum, infoNbCell.rsrp);
+        }
+    }
+    hdiId_ = HdiId::HREQ_NETWORK_GET_NR_SSBID_INFO;
+    resultInfo_ = responseInfo;
+    NotifyAll();
     return 0;
 }
 

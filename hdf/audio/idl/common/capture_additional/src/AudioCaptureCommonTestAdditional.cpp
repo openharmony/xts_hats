@@ -2348,10 +2348,10 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAddAudioEffect001, Function | 
 
 /**
  * @tc.number : SUB_Driver_Audio_Capture_RemoveAudioEffect_0300
- * @tc.name   : testCaptureAudioEffect001
+ * @tc.name   : testCaptureRemoveAudioEffect001
  * @tc.desc   : RemoveAudioEffect, Loop call 1000 times
  */
-HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioEffect001, Function | MediumTest | Level1)
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureRemoveAudioEffect001, Function | MediumTest | Level1)
 {
     ASSERT_NE(capture_->RemoveAudioEffect, nullptr);
     uint64_t effectId = 0;

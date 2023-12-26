@@ -113,7 +113,7 @@ void UsbdInterfaceTest::TearDown(void) {}
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Func_0900, TestSize.Level1)
+HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Func_0900, Function | MediumTest | Level1)
 {
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t altIndex = INDEX_0;
@@ -130,7 +130,7 @@ HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Func_0900, TestSize.Level1)
  * @tc.desc: Negative test: parameters exception, busNum error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Compatibility_4700, TestSize.Level1)
+HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Compatibility_4700, Function | MediumTest | Level1)
 {
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t altIndex = INDEX_0;
@@ -149,7 +149,7 @@ HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Compatibility_4700, TestSize
  * @tc.desc: Negative test: parameters exception, devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Compatibility_4800, TestSize.Level1)
+HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Compatibility_4800, Function | MediumTest | Level1)
 {
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t altIndex = INDEX_INVALID;
@@ -167,7 +167,7 @@ HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Compatibility_4800, TestSize
  * @tc.desc: Negative test: parameters exception, interfaceId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Compatibility_4900, TestSize.Level1)
+HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Compatibility_4900, Function | MediumTest | Level1)
 {
     uint8_t interfaceId = INTERFACEID_INVALID;
     uint8_t altIndex = INDEX_INVALID;
@@ -184,7 +184,7 @@ HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Compatibility_4900, TestSize
  * @tc.desc: Negative test: parameters exception, busNum && devAddr error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Compatibility_5000, TestSize.Level1)
+HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Compatibility_5000, Function | MediumTest | Level1)
 {
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t altIndex = INDEX_0;
@@ -203,7 +203,7 @@ HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Compatibility_5000, TestSize
  * @tc.desc: Negative test: parameters exception, busNum && interfaceId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Compatibility_5100, TestSize.Level1)
+HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Compatibility_5100, Function | MediumTest | Level1)
 {
     int32_t interfaceId = INTERFACEID_INVALID;
     uint8_t altIndex = INDEX_1;
@@ -221,7 +221,7 @@ HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Compatibility_5100, TestSize
  * @tc.desc: Negative test: parameters exception, devAddr && interfaceId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Compatibility_5200, TestSize.Level1)
+HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Compatibility_5200, Function | MediumTest | Level1)
 {
     int32_t interfaceId = INTERFACEID_INVALID;
     uint8_t altIndex = INDEX_INVALID;
@@ -239,7 +239,7 @@ HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Compatibility_5200, TestSize
  * @tc.desc: Negative test: parameters exception, busNum && devAddr && interfaceId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Compatibility_5300, TestSize.Level1)
+HWTEST_F(UsbdInterfaceTest, SUB_USB_HostManager_HDI_Compatibility_5300, Function | MediumTest | Level1)
 {
     uint8_t altIndex = INDEX_INVALID;
     int32_t interfaceId = INTERFACEID_INVALID;

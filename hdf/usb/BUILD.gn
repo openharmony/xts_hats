@@ -25,6 +25,7 @@ group("HatsHdfUsbTest") {
 
       # "deviceTest:HatsHdfUsbDeviceTest",
       # "functionTest:HatsHdfUsbFunctionTest",
+      # "manageInterfaceTest:HatsHdfUsbManageInterfaceTest",
       # "mtpTest:HatsHdfUsbFnMtpTest",
       # "requestTest:HatsHdfUsbRequestTest",
       "requestTest_additional:HatsHdfUsbRequestAdditionalTest",

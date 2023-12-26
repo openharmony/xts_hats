@@ -26,19 +26,18 @@ namespace Geofence {
 namespace V1_0 {
 class GeofenceCallbackImpl : public IGeofenceCallback {
 public:
-    GeofenceCallbackImpl()
-    {}
-    virtual ~GeofenceCallbackImpl()
-    {}
+    GeofenceCallbackImpl() {}
+    virtual ~GeofenceCallbackImpl() {}
     int32_t ReportGeofenceAvailability(bool isAvailable) override;
-    int32_t ReportGeofenceEvent(int32_t fenceIndex, const LocationInfo& location, GeofenceEvent event, int64_t timestamp) override;
-    int32_t ReportGeofenceOperateResult(int32_t fenceIndex, GeofenceOperateType type, GeofenceOperateResult result) override;
+    int32_t ReportGeofenceEvent(int32_t fenceIndex, const LocationInfo &location, GeofenceEvent event,
+                                int64_t timestamp) override;
+    int32_t ReportGeofenceOperateResult(int32_t fenceIndex, GeofenceOperateType type,
+                                        GeofenceOperateResult result) override;
 };
-} // V1_0
-} // Geofence
-} // Location
-} // HDI
-} // OHOS
+} // namespace V1_0
+} // namespace Geofence
+} // namespace Location
+} // namespace HDI
+} // namespace OHOS
 
-#endif // OHOS_HDI_LOCATION_GEOFENCE_V1_0_GEOFENCECALLBACKIMPL_H
-
+#endif

@@ -40,7 +40,12 @@ public:
 
 void HdfVibratorHdiServiceTestAdditional::SetUpTestCase() { g_vibratorInterface = IVibratorInterface::Get(); }
 
-void HdfVibratorHdiServiceTestAdditional::TearDownTestCase() {}
+void HdfVibratorHdiServiceTestAdditional::TearDownTestCase()
+{
+    g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_ONCE);
+    g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_PRESET);
+    g_vibratorInterface = nullptr;
+}
 
 void HdfVibratorHdiServiceTestAdditional::SetUp() {}
 
@@ -368,7 +373,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop003, Function | MediumTest
 
     OsalMSleep(SLEEP_TIME);
     int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_BUTT);
-    EXPECT_EQ(endRet, HDF_FAILURE);
+    EXPECT_EQ(endRet, HDF_ERR_INVALID_PARAM);
     endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_PRESET);
 }
 
@@ -496,7 +501,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop010, Function | MediumTest
     int32_t endRet;
     for (i = 0; i < 10; i++) {
         endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_BUTT);
-        EXPECT_EQ(endRet, HDF_FAILURE);
+        EXPECT_EQ(endRet, HDF_ERR_INVALID_PARAM);
     }
 }
 
@@ -854,7 +859,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation013, F
         EXPECT_EQ(startRet, HDF_FAILURE);
         OsalMSleep(SLEEP_TIME);
         startRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_BUTT);
-        EXPECT_EQ(startRet, HDF_FAILURE);
+        EXPECT_EQ(startRet, HDF_ERR_INVALID_PARAM);
     }
 }
 

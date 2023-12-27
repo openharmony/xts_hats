@@ -19,14 +19,12 @@ module_output_path = "hdf/usb"
 ohos_moduletest_suite("HatsHdfUsbManageInterfaceTest") {
   module_out_path = module_output_path
   sources = [
-    "./common/usbd_manage_interface_test.cpp",
     "../UsbSubscriberTest/UsbSubscriberTest.cpp",
+    "./common/usbd_manage_interface_test.cpp",
   ]
   configs = [ ":hdf_usb" ]
 
-  deps = [
-    "//third_party/googletest:gtest_main",
-  ]
+  deps = [ "//third_party/googletest:gtest_main" ]
 
   external_deps = [
     "ability_base:want",

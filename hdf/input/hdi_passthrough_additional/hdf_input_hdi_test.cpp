@@ -2025,6 +2025,8 @@ HWTEST_F(HdfInputHdiTestAdditional, testRegisterReportCallback002, Function | Me
             EXPECT_EQ(ret, INPUT_SUCCESS);
             ret = g_inputInterfaces->RegisterReportCallback(devIndex, g_callback);
             EXPECT_EQ(ret, INPUT_SUCCESS);
+            ret = g_inputInterfaces->UnregisterReportCallback(devIndex);
+            EXPECT_EQ(ret, INPUT_SUCCESS);
             ret = g_inputInterfaces->CloseInputDevice(devIndex);
             EXPECT_EQ(ret, INPUT_SUCCESS);
         } else {
@@ -2061,8 +2063,34 @@ HWTEST_F(HdfInputHdiTestAdditional, testRegisterReportCallback004, Function | Me
         EXPECT_EQ(ret, INPUT_SUCCESS);
         ret = g_inputInterfaces->RegisterReportCallback(devIndex, g_callback);
         EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->UnregisterReportCallback(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
         ret = g_inputInterfaces->CloseInputDevice(devIndex);
         EXPECT_EQ(ret, INPUT_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Input_UnregisterReportCallback_0200
+ * @tc.name   : testUnregisterReportCallback001
+ * @tc.desc   : Verify the reliability of the UnregisterReportCallback function when devIndex is 1.
+ */
+HWTEST_F(HdfInputHdiTestAdditional, testUnregisterReportCallback001, Function | MediumTest | Level1)
+{
+    int32_t ret = INPUT_SUCCESS;
+    uint32_t devIndex = TOUCH_INDEX;
+    if (IsOnlineDev(devIndex)) {
+        ret = g_inputInterfaces->OpenInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->RegisterReportCallback(devIndex, g_callback);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->UnregisterReportCallback(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+        ret = g_inputInterfaces->CloseInputDevice(devIndex);
+        EXPECT_EQ(ret, INPUT_SUCCESS);
+    } else {
+        ret = g_inputInterfaces->UnregisterReportCallback(devIndex);
+        EXPECT_NE(ret, INPUT_SUCCESS);
     }
 }
 

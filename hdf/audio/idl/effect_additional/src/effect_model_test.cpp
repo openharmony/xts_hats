@@ -68,8 +68,9 @@ HWTEST_F(EffectModelTestAdditional, testEffectIsSupplyEffectLibs001, TestSize.Le
  */
 HWTEST_F(EffectModelTestAdditional, testEffectIsSupplyEffectLibs002, TestSize.Level2)
 {
+    int32_t ret;
     for (int i = 0; i < 50; i++) {
-        int32_t ret = model_->IsSupplyEffectLibs(nullptr, nullptr);
+        ret = model_->IsSupplyEffectLibs(nullptr, nullptr);
         EXPECT_EQ(ret, HDF_ERR_INVALID_OBJECT);
     }
 }
@@ -92,8 +93,8 @@ HWTEST_F(EffectModelTestAdditional, testEffectIsSupplyEffectLibs003, TestSize.Le
  */
 HWTEST_F(EffectModelTestAdditional, testEffectIsSupplyEffectLibs004, TestSize.Level1)
 {
+    bool isSupport = true;
     for (int i = 0; i < 50; i++) {
-        bool isSupport = true;
         EXPECT_EQ(HDF_SUCCESS, model_->IsSupplyEffectLibs(model_, &isSupport));
     }
 }
@@ -116,8 +117,8 @@ HWTEST_F(EffectModelTestAdditional, testEffectIsSupplyEffectLibs005, TestSize.Le
  */
 HWTEST_F(EffectModelTestAdditional, testEffectIsSupplyEffectLibs006, TestSize.Level2)
 {
+    bool isSupport = true;
     for (int i = 0; i < 50; i++) {
-        bool isSupport = true;
         EXPECT_EQ(HDF_ERR_INVALID_OBJECT, model_->IsSupplyEffectLibs(nullptr, &isSupport));
     }
 }
@@ -155,8 +156,8 @@ HWTEST_F(EffectModelTestAdditional, testEffectGetAllEffectDescriptors001, TestSi
  */
 HWTEST_F(EffectModelTestAdditional, testEffectGetAllEffectDescriptors002, TestSize.Level2)
 {
+    uint32_t descsLen = MAX_DESCRIPTOR_NUM;
     for (int i = 0; i < 50; i++) {
-        uint32_t descsLen = MAX_DESCRIPTOR_NUM;
         EXPECT_EQ(HDF_ERR_INVALID_OBJECT, model_->GetAllEffectDescriptors(nullptr, nullptr, &descsLen));
     }
 }
@@ -179,8 +180,8 @@ HWTEST_F(EffectModelTestAdditional, testEffectGetAllEffectDescriptors003, TestSi
  */
 HWTEST_F(EffectModelTestAdditional, testEffectGetAllEffectDescriptors004, TestSize.Level2)
 {
+    struct EffectControllerDescriptor descs[MAX_DESCRIPTOR_NUM];
     for (int i = 0; i < 50; i++) {
-        struct EffectControllerDescriptor descs[MAX_DESCRIPTOR_NUM];
         EXPECT_EQ(HDF_ERR_INVALID_OBJECT, model_->GetAllEffectDescriptors(nullptr, descs, nullptr));
     }
 }

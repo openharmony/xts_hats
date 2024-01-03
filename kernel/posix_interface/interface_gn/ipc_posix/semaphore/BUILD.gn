@@ -25,5 +25,6 @@ ohos_moduletest_suite("HatsIpcSemTest") {
     "$base_root/hats/kernel/posix_interface/interface_gn/utils/",
   ]
 
-  deps = [ "$base_root/hats/kernel/posix_interface/interface_gn/utils/:libutils" ]
+  deps =
+      [ "$base_root/hats/kernel/posix_interface/interface_gn/utils/:libutils" ]
 }

@@ -14,7 +14,6 @@
 base_root = "../../../../../"
 import("$base_root/tools/build/suite.gni")
 
-
 ohos_moduletest_suite("HatsFutexApiTest") {
   sources = [
     "$base_root/acts/kernel_lite/futex_posix/src/FutexTest.cpp",
@@ -33,10 +32,11 @@ ohos_moduletest_suite("HatsFutexApiTest") {
     "$base_root/hats/kernel/posix_interface/interface_gn/utils:libutils",
   ]
 
-  cflags_cc = [ "-Wno-sign-compare" ,
-                "-Wno-write-strings",
-                "-Wno-missing-braces",
-                "-Wno-int-to-void-pointer-cast",
-                "-Wno-format"
-              ]
+  cflags_cc = [
+    "-Wno-sign-compare",
+    "-Wno-write-strings",
+    "-Wno-missing-braces",
+    "-Wno-int-to-void-pointer-cast",
+    "-Wno-format",
+  ]
 }

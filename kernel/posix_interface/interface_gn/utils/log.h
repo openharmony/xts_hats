@@ -16,10 +16,6 @@
 #ifndef KERNEL_LITE_LOG
 #define KERNEL_LITE_LOG
 
-// #ifndef _GNU_SOURCE
-// #define _GNU_SOURCE
-// #endif
-
 #include <cstdio>
 #include <unistd.h>
 #include <ctime>

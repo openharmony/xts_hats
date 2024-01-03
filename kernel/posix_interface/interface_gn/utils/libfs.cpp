@@ -23,7 +23,7 @@
 #include "log.h"
 #include "libfs.h"
 #include "KernelConstants.h"
-
+using namespace std;
 
 int MakeDir(const char *dirname)
 {
@@ -54,12 +54,15 @@ int RemoveDir(const char *dirname)
         DIR *pDir = opendir(dirname);
         struct dirent *entry;
         while ((entry = readdir(pDir))) {
-            char *fname = entry->d_name;
+            std::string fname = entry->d_name;
             if (!strcmp(fname, ".") || !strcmp(fname, "..")) {
                 continue; // skip . and ..
             }
             // MAX_PATH_SIZE is the max length of allowed path string, so it safe to use sprintf here.
-            sprintf_s(subDir, MAX_PATH_SIZE, "%s/%s", dirname, fname);
+            size_t rt = sprintf_s(subDir, sizeof(subDir), "%s/%s", dirname, fname.c_str());
+            if (rt < 0) {
+                LOG("output failed, dirname=%s, errno=%d:%s", dirname, errno, strerror(errno));
+            }
             RemoveDir(subDir);   // remove sub dir or file
         }
         closedir(pDir);
@@ -124,10 +127,10 @@ int CopyFile(const char *srcFile, const char *dstFile)
     return rt;
 }
 
-char* GetCurrentPath()
+string GetCurrentPath()
 {
     static char path1[MAX_PATH_SIZE];
-    char *path = getcwd(path1, MAX_PATH_SIZE);
+    string path = getcwd(path1, MAX_PATH_SIZE);
     LOG("current Path = %s,path1=%s", path, path1);
     return path1;
 }

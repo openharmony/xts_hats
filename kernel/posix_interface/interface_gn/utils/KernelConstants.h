@@ -64,10 +64,6 @@ typedef unsigned long addr_t;
 #define PAGE_MASK                   (~(PAGE_SIZE - 1))
 #define PAGE_SHIFT                  12
 
-#define MEM_PAGESTART(addr)         ((addr) & ~(PAGE_SIZE - 1))
-#define MEM_PAGEOFFSET(addr)        ((addr) & (PAGE_SIZE - 1))
-#define MEM_PAGEALIGN(addr)         (((addr) + PAGE_SIZE - 1) & ~(PAGE_SIZE - 1))
-
 
 /**
  * ================ IPC ================

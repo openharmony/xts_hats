@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-base_root = "../../../../../" 
+base_root = "../../../../../"
 import("$base_root/tools/build/suite.gni")
 
 ohos_moduletest_suite("HatsUtilApiTest") {
@@ -36,6 +36,6 @@ ohos_moduletest_suite("HatsUtilApiTest") {
     "-Wno-multichar",
     "-Wno-overflow",
     "-Wno-constant-conversion",
-    "-Wno-format"
+    "-Wno-format",
   ]
 }

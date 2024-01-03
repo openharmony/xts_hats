@@ -29,10 +29,7 @@
 #include <sys/syscall.h>
 #include <sys/resource.h>
 #include <pthread.h>
-
-
-// get thread id
-#define GETTID() ((pid_t)syscall(SYS_gettid))
+#include <fcntl.h>
 
 // check if 'actual' is close to 'target', within 5% in default
 int CheckValueClose(double target, double actual, double accuracy = 0.05);
@@ -72,9 +69,6 @@ void ExpectProcKilled(pid_t pid, int signum);
 
 // wait until child statu changed
 void WaitProcKilled(pid_t pid, int signum);
-
-// for now, crash process act like killed by SIGUSR2
-#define EXPECT_PROC_CRASHED(pid) WaitProcKilled(pid, SIGUSR2)
 
 // keep current process run for a specific time, no sleep.
 // msec is millisecond (1/1000 sec).

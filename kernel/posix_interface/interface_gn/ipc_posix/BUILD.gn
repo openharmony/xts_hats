@@ -13,7 +13,5 @@
 
 group("HatsKernelIPCTest") {
   testonly = true
-  deps = [
-    "semaphore:HatsIpcSemTest",
-  ]
+  deps = [ "semaphore:HatsIpcSemTest" ]
 }

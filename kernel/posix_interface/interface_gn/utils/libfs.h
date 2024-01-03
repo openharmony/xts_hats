@@ -53,6 +53,6 @@ int CopyFile(const char *srcFile, const char *dstFile);
  * output: NULL   -- getcwd failed, detail info printed
  *         string -- the current working directory
  */
-char* GetCurrentPath();
+string GetCurrentPath();
 
 #endif // header

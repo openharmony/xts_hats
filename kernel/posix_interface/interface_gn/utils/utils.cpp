@@ -13,13 +13,10 @@
  * limitations under the License.
  */
 
-// #ifndef _GNU_SOURCE
-// #define _GNU_SOURCE
-// #endif
-
 #include "utils.h"
 #include <gtest/gtest.h>
 #include "log.h"
+
 
 // init rand seed at startup
 __attribute__((constructor)) static void Initialize(void)
@@ -116,7 +113,7 @@ void AssertProcAlive(pid_t pid)
 
 void ExpectProcAlive(pid_t pid)
 {
-    int exitCode;        
+    int exitCode;
     int procStat = CheckProcStatus(pid, &exitCode);
     EXPECT_EQ(procStat, 0) << "target process should still alive.\n";
 }
@@ -151,7 +148,7 @@ void WaitProcExitedOK(pid_t pid)
 void ExpectProcKilled(pid_t pid, int signum)
 {
     int exitCode;
-    int killedBySignal = 2;                 
+    int killedBySignal = 2;
     int procStat = CheckProcStatus(pid, &exitCode);
     EXPECT_EQ(procStat, killedBySignal);
     EXPECT_EQ(exitCode, signum) << "target process should killed by " << signum;
@@ -186,10 +183,10 @@ static int StartElf(const char *fname, char * const argv[], char * const envp[])
         int rt = execve(fname, argv, envp);
         if (rt == -1) {
             LOGE("ERROR: execve return -1, errno=%d, err=%s\n", errno, strerror(errno));
-            exit(EXECVE_RETURN_ERROR);
+            _Exit(EXECVE_RETURN_ERROR);
         }
         LOGE("ERROR: execve should never return on success. rt=%d, errno=%d, err=%s\n", rt, errno, strerror(errno));
-        exit(EXECVE_RETURN_OK);
+        _Exit(EXECVE_RETURN_OK);
     }
     return pid;
 }
@@ -220,7 +217,7 @@ int RunElf(const char *fname, char * const argv[], char * const envp[], int time
                 LOGE("ERROR: sigtimedwait FAIL: %s\n", strerror(errno));
                 return -1;
             }
-            if (kill(pid, SIGKILL) == -1) {
+            if (kill(pid, SIGTERM) == -1) {
                 LOGE("ERROR: kill child FAIL: %s\n", strerror(errno));
                 return -1;
             }
@@ -251,10 +248,10 @@ int StartExecveError(const char *fname, char * const argv[], char * const envp[]
         int rt = execve(fname, argv, envp);
         if (rt == -1) {
             LOG("ERROR: execve return -1, errno=%d, err=%s\n", errno, strerror(errno));
-            exit(errno);
+            _Exit(errno);
         }
         LOGE("ERROR: execve should never return on success. rt=%d, errno=%d, err=%s\n", rt, errno, strerror(errno));
-        exit(EXECVE_RETURN_OK);
+        _Exit(EXECVE_RETURN_OK);
     }
     // parent
     Msleep(sleeptime);
@@ -275,7 +272,7 @@ int StartExecveError(const char *fname, char * const argv[], char * const envp[]
 // Get a pid number that currently not exist
 // by creat a child process and exit.
 pid_t GetNonExistPid()
-{   
+{
     int sleeptime5 = 5;
     int sleeptime20 = 20;
     pid_t pid = fork();
@@ -295,7 +292,7 @@ pid_t GetNonExistPid()
             return -1;
         }
     } else { // child
-        exit(0);
+        _Exit(0);
     }
     return pid;
 }
@@ -303,10 +300,22 @@ pid_t GetNonExistPid()
 // return n: 0 < n <= max
 uint32_t GetRandom(uint32_t max)
 {
+    int fd;
+    int r = 0;
     if (max == 0 || max == 1) {
         return 1;
     }
-    return (rand() % max) + 1;
+    fd = open("/dev/random", O_RDONLY);
+    if (fd == -1) {
+        LOG("open /dev/random failed, errno = %d", errno);
+    }
+    if (read(fd, &r, sizeof(int)) == -1) {
+        LOG("read failed, errno = %d", errno);
+    }
+    if (close(fd) == -1) {
+        LOG("close failed, errno = %d", errno);
+    }
+    return (r % max) + 1;
 }
 
 // get cur-time plus ms

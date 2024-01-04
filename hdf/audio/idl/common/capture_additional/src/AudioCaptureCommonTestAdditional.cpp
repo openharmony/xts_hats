@@ -2342,7 +2342,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAddAudioEffect001, Function | 
     int32_t ret = HDF_SUCCESS;
     for (int64_t i = 0; i < 1000; i++) {
         ret = capture_->AddAudioEffect(capture_, effectId);
-        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
+        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
     }
 }
 
@@ -2359,7 +2359,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureRemoveAudioEffect001, Function
     int32_t ret = HDF_SUCCESS;
     for (int64_t i = 0; i < 1000; i++) {
         ret = capture_->RemoveAudioEffect(capture_, effectId);
-        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
+        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
     }
 }
 
@@ -2376,7 +2376,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetFrameBufferSize001, Functio
     int32_t ret = HDF_SUCCESS;
     for (int64_t i = 0; i < 1000; i++) {
         ret = capture_->GetFrameBufferSize(capture_, &bufferSize);
-        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
+        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
     }
 }
 
@@ -2427,7 +2427,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureIsSupportsPauseAndResume001, F
     int32_t ret = HDF_SUCCESS;
     for (int64_t i = 0; i < 1000; i++) {
         ret = capture_->IsSupportsPauseAndResume(capture_, &supportPause, &supportResume);
-        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
+        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
     }
 }
 

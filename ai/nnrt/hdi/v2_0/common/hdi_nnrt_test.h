@@ -22,7 +22,7 @@
 
 #include "gtest/gtest.h"
 
-#include "interfaces/kits/c/neural_network_runtime.h"
+#include "interfaces/kits/c/neural_network_runtime/neural_network_runtime.h"
 #include "frameworks/native/memory_manager.h"
 
 namespace V2_0 = OHOS::HDI::Nnrt::V2_0;

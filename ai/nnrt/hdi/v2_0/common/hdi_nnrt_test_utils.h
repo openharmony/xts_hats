@@ -24,7 +24,7 @@
 #include "gtest/gtest.h"
 #include "mindir_lite_graph.h"
 
-#include "interfaces/kits/c/neural_network_runtime_type.h"
+#include "interfaces/kits/c/neural_network_runtime/neural_network_runtime_type.h"
 
 namespace V2_0 = OHOS::HDI::Nnrt::V2_0;
 

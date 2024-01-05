@@ -36196,13 +36196,13 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel916, Function | MediumTest 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_0100
- * @tc.name   : testV2PrepareModelFromCache001
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_0100
+ * @tc.name   : testV2PrepareModelFromModelCache001
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = false; config.mode = V2_0::PERFORMANCE_NONE; config.priority =
  * V2_0::PRIORITY_LOW;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache001, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache001, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -36234,13 +36234,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache001, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_0200
- * @tc.name   : testV2PrepareModelFromCache002
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_0200
+ * @tc.name   : testV2PrepareModelFromModelCache002
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = false; config.mode = V2_0::PERFORMANCE_NONE; config.priority =
  * V2_0::PRIORITY_MEDIUM;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache002, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache002, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -36272,13 +36272,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache002, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_0300
- * @tc.name   : testV2PrepareModelFromCache003
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_0300
+ * @tc.name   : testV2PrepareModelFromModelCache003
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = false; config.mode = V2_0::PERFORMANCE_NONE; config.priority =
  * V2_0::PRIORITY_HIGH;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache003, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache003, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -36310,13 +36310,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache003, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_0400
- * @tc.name   : testV2PrepareModelFromCache004
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_0400
+ * @tc.name   : testV2PrepareModelFromModelCache004
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = false; config.mode = V2_0::PERFORMANCE_LOW; config.priority =
  * V2_0::PRIORITY_HIGH;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache004, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache004, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -36348,13 +36348,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache004, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_0500
- * @tc.name   : testV2PrepareModelFromCache005
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_0500
+ * @tc.name   : testV2PrepareModelFromModelCache005
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *               config.enableFloat16 = false; config.mode = V2_0::PERFORMANCE_LOW; config.priority =
  * V2_0::PRIORITY_MEDIUM;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache005, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache005, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -36386,12 +36386,12 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache005, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_0600
- * @tc.name   : testV2PrepareModelFromCache006
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_0600
+ * @tc.name   : testV2PrepareModelFromModelCache006
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = false; config.mode = V2_0::PERFORMANCE_LOW; config.priority = V2_0::PRIORITY_LOW;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache006, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache006, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -36423,13 +36423,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache006, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_0700
- * @tc.name   : testV2PrepareModelFromCache007
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_0700
+ * @tc.name   : testV2PrepareModelFromModelCache007
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = false; config.mode = V2_0::PERFORMANCE_LOW; config.priority =
  * V2_0::PRIORITY_NONE;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache007, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache007, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -36461,13 +36461,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache007, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_0800
- * @tc.name   : testV2PrepareModelFromCache008
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_0800
+ * @tc.name   : testV2PrepareModelFromModelCache008
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = false; config.mode = V2_0::PERFORMANCE_MEDIUM; config.priority =
  * V2_0::PRIORITY_NONE;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache008, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache008, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -36499,13 +36499,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache008, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_0900
- * @tc.name   : testV2PrepareModelFromCache009
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_0900
+ * @tc.name   : testV2PrepareModelFromModelCache009
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = false; config.mode = V2_0::PERFORMANCE_MEDIUM; config.priority =
  * V2_0::PRIORITY_LOW;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache009, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache009, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -36537,13 +36537,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache009, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_1000
- * @tc.name   : testV2PrepareModelFromCache010
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_1000
+ * @tc.name   : testV2PrepareModelFromModelCache010
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = false; config.mode = V2_0::PERFORMANCE_MEDIUM; config.priority =
  * V2_0::PRIORITY_MEDIUM;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache010, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache010, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -36575,13 +36575,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache010, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_1100
- * @tc.name   : testV2PrepareModelFromCache011
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_1100
+ * @tc.name   : testV2PrepareModelFromModelCache011
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = false; config.mode = V2_0::PERFORMANCE_MEDIUM; config.priority =
  * V2_0::PRIORITY_HIGH;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache011, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache011, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -36613,13 +36613,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache011, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_1200
- * @tc.name   : testV2PrepareModelFromCache012
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_1200
+ * @tc.name   : testV2PrepareModelFromModelCache012
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = false; config.mode = V2_0::PERFORMANCE_HIGH; config.priority =
  * V2_0::PRIORITY_HIGH;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache012, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache012, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -36651,13 +36651,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache012, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_1300
- * @tc.name   : testV2PrepareModelFromCache013
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_1300
+ * @tc.name   : testV2PrepareModelFromModelCache013
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = false; config.mode = V2_0::PERFORMANCE_HIGH; config.priority =
  * V2_0::PRIORITY_MEDIUM;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache013, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache013, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -36689,13 +36689,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache013, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_1400
- * @tc.name   : testV2PrepareModelFromCache014
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_1400
+ * @tc.name   : testV2PrepareModelFromModelCache014
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = false; config.mode = V2_0::PERFORMANCE_HIGH; config.priority =
  * V2_0::PRIORITY_LOW;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache014, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache014, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -36727,13 +36727,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache014, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_1500
- * @tc.name   : testV2PrepareModelFromCache015
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_1500
+ * @tc.name   : testV2PrepareModelFromModelCache015
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = false; config.mode = V2_0::PERFORMANCE_HIGH; config.priority =
  * V2_0::PRIORITY_NONE;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache015, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache015, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -36765,13 +36765,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache015, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_1600
- * @tc.name   : testV2PrepareModelFromCache016
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_1600
+ * @tc.name   : testV2PrepareModelFromModelCache016
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = false; config.mode = V2_0::PERFORMANCE_EXTREME; config.priority =
  * V2_0::PRIORITY_NONE;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache016, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache016, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -36803,13 +36803,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache016, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_1700
- * @tc.name   : testV2PrepareModelFromCache017
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_1700
+ * @tc.name   : testV2PrepareModelFromModelCache017
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = false; config.mode = V2_0::PERFORMANCE_EXTREME; config.priority =
  * V2_0::PRIORITY_LOW;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache017, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache017, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -36841,13 +36841,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache017, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_1800
- * @tc.name   : testV2PrepareModelFromCache018
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_1800
+ * @tc.name   : testV2PrepareModelFromModelCache018
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = false; config.mode = V2_0::PERFORMANCE_EXTREME; config.priority =
  * V2_0::PRIORITY_MEDIUM;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache018, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache018, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -36879,13 +36879,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache018, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_1900
- * @tc.name   : testV2PrepareModelFromCache019
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_1900
+ * @tc.name   : testV2PrepareModelFromModelCache019
  * @tc.desc   : Testing the effectiveness of the PrepareModelFromModelCache function
  *              config.enableFloat16 = false; config.mode = V2_0::PERFORMANCE_EXTREME; config.priority =
  * V2_0::PRIORITY_HIGH;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache019, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache019, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -36917,13 +36917,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache019, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_2000
- * @tc.name   : testV2PrepareModelFromCache020
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_2000
+ * @tc.name   : testV2PrepareModelFromModelCache020
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = true; config.mode = V2_0::PERFORMANCE_NONE; config.priority =
  * V2_0::PRIORITY_NONE;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache020, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache020, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -36955,12 +36955,12 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache020, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_2100
- * @tc.name   : testV2PrepareModelFromCache021
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_2100
+ * @tc.name   : testV2PrepareModelFromModelCache021
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = true; config.mode = V2_0::PERFORMANCE_NONE; config.priority = V2_0::PRIORITY_LOW;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache021, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache021, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -36992,13 +36992,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache021, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_2200
- * @tc.name   : testV2PrepareModelFromCache022
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_2200
+ * @tc.name   : testV2PrepareModelFromModelCache022
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = true; config.mode = V2_0::PERFORMANCE_NONE; config.priority =
  * V2_0::PRIORITY_MEDIUM;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache022, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache022, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -37030,13 +37030,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache022, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_2300
- * @tc.name   : testV2PrepareModelFromCache023
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_2300
+ * @tc.name   : testV2PrepareModelFromModelCache023
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = true; config.mode = V2_0::PERFORMANCE_NONE; config.priority =
  * V2_0::PRIORITY_HIGH;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache023, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache023, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -37068,12 +37068,12 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache023, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_2400
- * @tc.name   : testV2PrepareModelFromCache024
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_2400
+ * @tc.name   : testV2PrepareModelFromModelCache024
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = true; config.mode = V2_0::PERFORMANCE_LOW; config.priority = V2_0::PRIORITY_HIGH;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache024, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache024, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -37105,13 +37105,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache024, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_2500
- * @tc.name   : testV2PrepareModelFromCache025
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_2500
+ * @tc.name   : testV2PrepareModelFromModelCache025
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = true; config.mode = V2_0::PERFORMANCE_LOW; config.priority =
  * V2_0::PRIORITY_MEDIUM;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache025, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache025, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -37143,12 +37143,12 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache025, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_2600
- * @tc.name   : testV2PrepareModelFromCache026
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_2600
+ * @tc.name   : testV2PrepareModelFromModelCache026
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = true; config.mode = V2_0::PERFORMANCE_LOW; config.priority = V2_0::PRIORITY_LOW;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache026, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache026, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -37180,12 +37180,12 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache026, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_2700
- * @tc.name   : testV2PrepareModelFromCache027
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_2700
+ * @tc.name   : testV2PrepareModelFromModelCache027
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = true; config.mode = V2_0::PERFORMANCE_LOW; config.priority = V2_0::PRIORITY_NONE;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache027, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache027, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -37217,13 +37217,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache027, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_2800
- * @tc.name   : testV2PrepareModelFromCache028
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_2800
+ * @tc.name   : testV2PrepareModelFromModelCache028
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = true; config.mode = V2_0::PERFORMANCE_MEDIUM; config.priority =
  * V2_0::PRIORITY_NONE;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache028, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache028, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -37255,13 +37255,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache028, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_2900
- * @tc.name   : testV2PrepareModelFromCache029
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_2900
+ * @tc.name   : testV2PrepareModelFromModelCache029
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = true; config.mode = V2_0::PERFORMANCE_MEDIUM; config.priority =
  * V2_0::PRIORITY_LOW;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache029, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache029, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -37293,13 +37293,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache029, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_3000
- * @tc.name   : testV2PrepareModelFromCache030
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_3000
+ * @tc.name   : testV2PrepareModelFromModelCache030
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = true; config.mode = V2_0::PERFORMANCE_MEDIUM; config.priority =
  * V2_0::PRIORITY_MEDIUM;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache030, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache030, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -37331,13 +37331,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache030, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_3100
- * @tc.name   : testV2PrepareModelFromCache031
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_3100
+ * @tc.name   : testV2PrepareModelFromModelCache031
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = true; config.mode = V2_0::PERFORMANCE_MEDIUM; config.priority =
  * V2_0::PRIORITY_HIGH;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache031, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache031, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -37369,13 +37369,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache031, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_3200
- * @tc.name   : testV2PrepareModelFromCache032
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_3200
+ * @tc.name   : testV2PrepareModelFromModelCache032
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = true; config.mode = V2_0::PERFORMANCE_HIGH; config.priority =
  * V2_0::PRIORITY_HIGH;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache032, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache032, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -37407,13 +37407,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache032, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_3300
- * @tc.name   : testV2PrepareModelFromCache033
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_3300
+ * @tc.name   : testV2PrepareModelFromModelCache033
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = true; config.mode = V2_0::PERFORMANCE_HIGH; config.priority =
  * V2_0::PRIORITY_MEDIUM;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache033, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache033, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -37445,12 +37445,12 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache033, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_3400
- * @tc.name   : testV2PrepareModelFromCache034
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_3400
+ * @tc.name   : testV2PrepareModelFromModelCache034
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = true; config.mode = V2_0::PERFORMANCE_HIGH; config.priority = V2_0::PRIORITY_LOW;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache034, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache034, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -37482,13 +37482,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache034, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_3500
- * @tc.name   : testV2PrepareModelFromCache035
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_3500
+ * @tc.name   : testV2PrepareModelFromModelCache035
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = true; config.mode = V2_0::PERFORMANCE_HIGH; config.priority =
  * V2_0::PRIORITY_NONE;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache035, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache035, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -37520,13 +37520,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache035, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_3600
- * @tc.name   : testV2PrepareModelFromCache036
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_3600
+ * @tc.name   : testV2PrepareModelFromModelCache036
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = true; config.mode = V2_0::PERFORMANCE_EXTREME; config.priority =
  * V2_0::PRIORITY_NONE;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache036, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache036, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -37558,13 +37558,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache036, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_3700
- * @tc.name   : testV2PrepareModelFromCache037
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_3700
+ * @tc.name   : testV2PrepareModelFromModelCache037
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = true; config.mode = V2_0::PERFORMANCE_EXTREME; config.priority =
  * V2_0::PRIORITY_LOW;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache037, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache037, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -37596,13 +37596,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache037, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_3800
- * @tc.name   : testV2PrepareModelFromCache038
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_3800
+ * @tc.name   : testV2PrepareModelFromModelCache038
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = true; config.mode = V2_0::PERFORMANCE_EXTREME; config.priority =
  * V2_0::PRIORITY_MEDIUM;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache038, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache038, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -37634,13 +37634,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache038, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_3900
- * @tc.name   : testV2PrepareModelFromCache039
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_3900
+ * @tc.name   : testV2PrepareModelFromModelCache039
  * @tc.desc   : Testing the PrepareModelFromModelCache function
  *              config.enableFloat16 = true; config.mode = V2_0::PERFORMANCE_EXTREME; config.priority =
  * V2_0::PRIORITY_HIGH;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache039, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache039, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));
@@ -37672,13 +37672,13 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache039, Function | 
 }
 
 /**
- * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PreparedModelFromCache_4000
- * @tc.name   : testV2PrepareModelFromCache040
+ * @tc.number : SUB_AI_Nnrt_Func_HDI_Device_PrepareModelFromModelCache_4000
+ * @tc.name   : testV2PrepareModelFromModelCache040
  * @tc.desc   : Testing  the PrepareModelFromModelCache function
  *              config.enableFloat16 = false; config.mode = V2_0::PERFORMANCE_NONE; config.priority =
  * V2_0::PRIORITY_NONE;
  */
-HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache040, Function | MediumTest | Level1)
+HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromModelCache040, Function | MediumTest | Level1)
 {
     bool isSupportedCache = false;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->IsModelCacheSupported(isSupportedCache));

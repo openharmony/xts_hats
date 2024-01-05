@@ -25,8 +25,8 @@ ohos_moduletest_suite("HatsHdfNnrtFunctionV2_0AdditionalTest") {
   module_out_path = module_output_path
   sources = [
     "../common/hdi_nnrt_test_utils.cpp",
-    "src/hdi_model_prepare_test.cpp",
     "src/hdi_device_test.cpp",
+    "src/hdi_model_prepare_test.cpp",
   ]
 
   include_dirs = [

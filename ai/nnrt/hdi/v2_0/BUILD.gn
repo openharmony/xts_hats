@@ -17,7 +17,7 @@ group("hdi") {
   testonly = true
   deps = [
     "nnrtFunctionTest:HatsHdfNnrtFunctionV2_0Test",
-    "nnrtFunctionTest_Additional:HatsHdfNnrtFunctionV2_0AdditionalTest",
+    "nnrtFunctionTest_additional:HatsHdfNnrtFunctionV2_0AdditionalTest",
     "nnrtStabilityTest:HatsHdfNnrtStabilityV2_0Test",
   ]
 }

@@ -93,7 +93,7 @@ void Test::Init()
     service->SetCallback(hostCallback);
 }
 
-void Test::GetCameraMetadata()
+void Test::GetCameraMetadata(int cameraId)
 {
     rc = service->GetCameraAbility(cameraIds.front(), abilityVec);
     if (rc != HDI::Camera::V1_0::NO_ERROR) {
@@ -109,7 +109,7 @@ void Test::GetCameraMetadata()
     }
 }
 
-void Test::Open()
+void Test::Open(int cameraId)
 {
     if (cameraDevice == nullptr) {
         service->GetCameraIds(cameraIds);
@@ -117,7 +117,7 @@ void Test::Open()
             CAMERA_LOGE("camera device list empty");
         }
         ASSERT_TRUE(cameraIds.size() != 0);
-        GetCameraMetadata();
+        GetCameraMetadata(cameraId);
         deviceCallback = new OHOS::Camera::Test::DemoCameraDeviceCallback();
 
         ASSERT_TRUE(serviceV1_1 != nullptr);

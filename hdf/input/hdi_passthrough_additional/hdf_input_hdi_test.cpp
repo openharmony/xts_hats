@@ -111,7 +111,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testOpenInputDevice001, Function | MediumTes
 /**
  * @tc.number : SUB_Driver_Input_OpenInputDevice_0400
  * @tc.name   : testOpenInputDevice002
- * @tc.desc   : Test input param
+ * @tc.desc   : Test parameters(devIndex::0) with abnormal input
  */
 HWTEST_F(HdfInputHdiTestAdditional, testOpenInputDevice002, Function | MediumTest | Level2)
 {
@@ -124,7 +124,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testOpenInputDevice002, Function | MediumTes
 /**
  * @tc.number : SUB_Driver_Input_OpenInputDevice_0500
  * @tc.name   : testOpenInputDevice003
- * @tc.desc   : Test input param
+ * @tc.desc   : Test input param(devIndex::1~32)
  */
 HWTEST_F(HdfInputHdiTestAdditional, testOpenInputDevice003, Function | MediumTest | Level1)
 {
@@ -145,7 +145,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testOpenInputDevice003, Function | MediumTes
 /**
  * @tc.number : SUB_Driver_Input_OpenInputDevice_0600
  * @tc.name   : testOpenInputDevice004
- * @tc.desc   : Test parameters with abnormal input
+ * @tc.desc   : Test parameters(devIndex::33) with abnormal input
  */
 HWTEST_F(HdfInputHdiTestAdditional, testOpenInputDevice004, Function | MediumTest | Level2)
 {
@@ -164,7 +164,10 @@ HWTEST_F(HdfInputHdiTestAdditional, testCloseInputDevice001, Function | MediumTe
     int32_t ret = 0;
     int i = 0;
     for (i = 0; i < 1000; i++) {
-        g_inputInterfaces->OpenInputDevice(TOUCH_INDEX);
+        ret = g_inputInterfaces->OpenInputDevice(TOUCH_INDEX);
+        if (ret != INPUT_SUCCESS) {
+            break;
+        }
         ret |= g_inputInterfaces->CloseInputDevice(TOUCH_INDEX);
     }
     EXPECT_EQ(ret, INPUT_SUCCESS);
@@ -173,7 +176,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testCloseInputDevice001, Function | MediumTe
 /**
  * @tc.number : SUB_Driver_Input_CloseInputDevice_0400
  * @tc.name   : testCloseInputDevice002
- * @tc.desc   : Test input param
+ * @tc.desc   : Test parameters(devIndex::0) with abnormal input
  */
 HWTEST_F(HdfInputHdiTestAdditional, testCloseInputDevice002, Function | MediumTest | Level2)
 {
@@ -186,7 +189,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testCloseInputDevice002, Function | MediumTe
 /**
  * @tc.number : SUB_Driver_Input_CloseInputDevice_0500
  * @tc.name   : testCloseInputDevice003
- * @tc.desc   : Test input param
+ * @tc.desc   : Test input param(devIndex::1~32)
  */
 HWTEST_F(HdfInputHdiTestAdditional, testCloseInputDevice003, Function | MediumTest | Level1)
 {
@@ -208,7 +211,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testCloseInputDevice003, Function | MediumTe
 /**
  * @tc.number : SUB_Driver_Input_CloseInputDevice_0600
  * @tc.name   : testCloseInputDevice004
- * @tc.desc   : Test parameters with abnormal input
+ * @tc.desc   : Test parameters(devIndex::33) with abnormal input
  */
 HWTEST_F(HdfInputHdiTestAdditional, testCloseInputDevice004, Function | MediumTest | Level2)
 {
@@ -227,18 +230,19 @@ HWTEST_F(HdfInputHdiTestAdditional, testGetInputDevice001, Function | MediumTest
     struct DeviceInfo devInfo;
     int32_t ret = 0;
     int i = 0;
+    ret = g_inputInterfaces->OpenInputDevice(TOUCH_INDEX);
+    EXPECT_EQ(ret, INPUT_SUCCESS);
     for (i = 0; i < 1000; i++) {
-        g_inputInterfaces->OpenInputDevice(TOUCH_INDEX);
         ret |= g_inputInterfaces->GetInputDevice(TOUCH_INDEX, devInfo);
-        g_inputInterfaces->CloseInputDevice(TOUCH_INDEX);
     }
+    g_inputInterfaces->CloseInputDevice(TOUCH_INDEX);
     EXPECT_EQ(ret, INPUT_SUCCESS);
 }
 
 /**
  * @tc.number : SUB_Driver_Input_GetInputDevice_0400
  * @tc.name   : testGetInputDevice002
- * @tc.desc   : Test input param
+ * @tc.desc   : Test parameters(devIndex::0) with abnormal input
  */
 HWTEST_F(HdfInputHdiTestAdditional, testGetInputDevice002, Function | MediumTest | Level2)
 {
@@ -252,7 +256,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testGetInputDevice002, Function | MediumTest
 /**
  * @tc.number : SUB_Driver_Input_GetInputDevice_0500
  * @tc.name   : testGetInputDevice003
- * @tc.desc   : Test input param
+ * @tc.desc   : Test input param(devIndex::1~32)
  */
 HWTEST_F(HdfInputHdiTestAdditional, testGetInputDevice003, Function | MediumTest | Level1)
 {
@@ -261,13 +265,11 @@ HWTEST_F(HdfInputHdiTestAdditional, testGetInputDevice003, Function | MediumTest
     uint32_t devIndex = TOUCH_INDEX;
     for (devIndex = TOUCH_INDEX; devIndex < MAX_DEVICES; devIndex++) {
         if (IsOnlineDev(devIndex)) {
-            if ((ret = g_inputInterfaces->OpenInputDevice(devIndex)) == 0) {
-                ret = g_inputInterfaces->GetInputDevice(devIndex, devInfo);
-                EXPECT_EQ(ret, INPUT_SUCCESS);
-                g_inputInterfaces->CloseInputDevice(devIndex);
-            } else {
-                EXPECT_EQ(ret, INPUT_SUCCESS);
-            }
+            ret = g_inputInterfaces->OpenInputDevice(devIndex);
+            EXPECT_EQ(ret, INPUT_SUCCESS);
+            ret = g_inputInterfaces->GetInputDevice(devIndex, devInfo);
+            EXPECT_EQ(ret, INPUT_SUCCESS);
+            g_inputInterfaces->CloseInputDevice(devIndex);
         } else {
             ret = g_inputInterfaces->GetInputDevice(devIndex, devInfo);
             EXPECT_NE(ret, INPUT_SUCCESS);
@@ -278,7 +280,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testGetInputDevice003, Function | MediumTest
 /**
  * @tc.number : SUB_Driver_Input_GetInputDevice_0600
  * @tc.name   : testGetInputDevice004
- * @tc.desc   : Test input param
+ * @tc.desc   : Test parameters(devIndex::33) with abnormal input
  */
 HWTEST_F(HdfInputHdiTestAdditional, testGetInputDevice004, Function | MediumTest | Level2)
 {
@@ -298,7 +300,8 @@ HWTEST_F(HdfInputHdiTestAdditional, testGetInputDeviceList001, Function | Medium
     int i = 0;
     uint32_t num = 0;
     std::vector<DeviceInfo> dev;
-    g_inputInterfaces->OpenInputDevice(TOUCH_INDEX);
+    ret = g_inputInterfaces->OpenInputDevice(TOUCH_INDEX);
+    EXPECT_EQ(ret, INPUT_SUCCESS);
     for (i = 0; i < 1000; i++) {
         g_inputInterfaces->GetInputDeviceList(num, dev, MAX_INPUT_DEV_NUM);
     }
@@ -317,7 +320,8 @@ HWTEST_F(HdfInputHdiTestAdditional, testSetPowerStatus001, Function | MediumTest
     int32_t ret = 0;
     int i = 0;
     uint32_t setStatus = INPUT_SUSPEND;
-    g_inputInterfaces->OpenInputDevice(TOUCH_INDEX);
+    ret = g_inputInterfaces->OpenInputDevice(TOUCH_INDEX);
+    EXPECT_EQ(ret, INPUT_SUCCESS);
     for (i = 0; i < 1000; i++) {
         ret = g_inputInterfaces->SetPowerStatus(TOUCH_INDEX, setStatus);
     }
@@ -328,7 +332,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testSetPowerStatus001, Function | MediumTest
 /**
  * @tc.number : SUB_Driver_Input_SetPowerStatus_0600
  * @tc.name   : testSetPowerStatus002
- * @tc.desc   : Test input param
+ * @tc.desc   : Test parameters(devIndex::0) with abnormal input
  */
 HWTEST_F(HdfInputHdiTestAdditional, testSetPowerStatus002, Function | MediumTest | Level2)
 {
@@ -342,7 +346,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testSetPowerStatus002, Function | MediumTest
 /**
  * @tc.number : SUB_Driver_Input_SetPowerStatus_0700
  * @tc.name   : testSetPowerStatus003
- * @tc.desc   : Test input param
+ * @tc.desc   : Test input param(devIndex::1~32)
  */
 HWTEST_F(HdfInputHdiTestAdditional, testSetPowerStatus003, Function | MediumTest | Level1)
 {
@@ -366,7 +370,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testSetPowerStatus003, Function | MediumTest
 /**
  * @tc.number : SUB_Driver_Input_SetPowerStatus_0800
  * @tc.name   : testSetPowerStatus004
- * @tc.desc   : Test parameters with abnormal input
+ * @tc.desc   : Test parameters(devIndex::33) with abnormal input
  */
 HWTEST_F(HdfInputHdiTestAdditional, testSetPowerStatus004, Function | MediumTest | Level2)
 {
@@ -379,7 +383,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testSetPowerStatus004, Function | MediumTest
 /**
  * @tc.number : SUB_Driver_Input_SetPowerStatus_0900
  * @tc.name   : testSetPowerStatus005
- * @tc.desc   : Test parameters with abnormal input
+ * @tc.desc   : Test parameters(devIndex::1,setStatus::INPUT_POWER_STATUS_UNKNOWN) with abnormal input
  */
 HWTEST_F(HdfInputHdiTestAdditional, testSetPowerStatus005, Function | MediumTest | Level2)
 {
@@ -395,7 +399,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testSetPowerStatus005, Function | MediumTest
 /**
  * @tc.number : SUB_Driver_Input_SetPowerStatus_1000
  * @tc.name   : testSetPowerStatus006
- * @tc.desc   : Test parameters with abnormal input
+ * @tc.desc   : Test parameters(devIndex::33) with abnormal input
  */
 HWTEST_F(HdfInputHdiTestAdditional, testSetPowerStatus006, Function | MediumTest | Level2)
 {
@@ -408,7 +412,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testSetPowerStatus006, Function | MediumTest
 /**
  * @tc.number : SUB_Driver_Input_SetPowerStatus_1100
  * @tc.name   : testSetPowerStatus007
- * @tc.desc   : Test parameters with abnormal input
+ * @tc.desc   : Test parameters(devIndex::1,setStatus::5) with abnormal input
  */
 HWTEST_F(HdfInputHdiTestAdditional, testSetPowerStatus007, Function | MediumTest | Level2)
 {
@@ -424,7 +428,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testSetPowerStatus007, Function | MediumTest
 /**
  * @tc.number : SUB_Driver_Input_SetPowerStatus_1200
  * @tc.name   : testSetPowerStatus008
- * @tc.desc   : Test parameters with abnormal input
+ * @tc.desc   : Test parameters(devIndex::1,setStatus::0x7fffffff) with abnormal input
  */
 HWTEST_F(HdfInputHdiTestAdditional, testSetPowerStatus008, Function | MediumTest | Level2)
 {
@@ -447,7 +451,8 @@ HWTEST_F(HdfInputHdiTestAdditional, testGetPowerStatus001, Function | MediumTest
     int32_t ret = 0;
     int i = 0;
     uint32_t getStatus = 0;
-    g_inputInterfaces->OpenInputDevice(TOUCH_INDEX);
+    ret = g_inputInterfaces->OpenInputDevice(TOUCH_INDEX);
+    EXPECT_EQ(ret, INPUT_SUCCESS);
     for (i = 0; i < 1000; i++) {
         ret = g_inputInterfaces->GetPowerStatus(TOUCH_INDEX, getStatus);
     }
@@ -458,7 +463,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testGetPowerStatus001, Function | MediumTest
 /**
  * @tc.number : SUB_Driver_Input_GetPowerStatus_0400
  * @tc.name   : testGetPowerStatus002
- * @tc.desc   : Test input param
+ * @tc.desc   : Test parameters(devIndex::0) with abnormal input
  */
 HWTEST_F(HdfInputHdiTestAdditional, testGetPowerStatus002, Function | MediumTest | Level2)
 {
@@ -472,7 +477,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testGetPowerStatus002, Function | MediumTest
 /**
  * @tc.number : SUB_Driver_Input_GetPowerStatus_0600
  * @tc.name   : testGetPowerStatus004
- * @tc.desc   : Test input param
+ * @tc.desc   : Test input param(devIndex::3~32)
  */
 HWTEST_F(HdfInputHdiTestAdditional, testGetPowerStatus004, Function | MediumTest | Level1)
 {
@@ -496,7 +501,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testGetPowerStatus004, Function | MediumTest
 /**
  * @tc.number : SUB_Driver_Input_GetPowerStatus_0700
  * @tc.name   : testGetPowerStatus005
- * @tc.desc   : Test parameters with abnormal input
+ * @tc.desc   : Test parameters(devIndex::33) with abnormal input
  */
 HWTEST_F(HdfInputHdiTestAdditional, testGetPowerStatus005, Function | MediumTest | Level2)
 {
@@ -516,7 +521,8 @@ HWTEST_F(HdfInputHdiTestAdditional, testGetDeviceType001, Function | MediumTest 
     int32_t ret = 0;
     int i = 0;
     uint32_t devType = INIT_DEFAULT_VALUE;
-    g_inputInterfaces->OpenInputDevice(TOUCH_INDEX);
+    ret = g_inputInterfaces->OpenInputDevice(TOUCH_INDEX);
+    EXPECT_EQ(ret, INPUT_SUCCESS);
     for (i = 0; i < 1000; i++) {
         ret = g_inputInterfaces->GetDeviceType(TOUCH_INDEX, devType);
     }
@@ -527,7 +533,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testGetDeviceType001, Function | MediumTest 
 /**
  * @tc.number : SUB_Driver_Input_GetDeviceType_0400
  * @tc.name   : testGetDeviceType002
- * @tc.desc   : Test input param
+ * @tc.desc   : Test parameters(devIndex::0) with abnormal input
  */
 HWTEST_F(HdfInputHdiTestAdditional, testGetDeviceType002, Function | MediumTest | Level2)
 {
@@ -541,7 +547,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testGetDeviceType002, Function | MediumTest 
 /**
  * @tc.number : SUB_Driver_Input_GetDeviceType_0500
  * @tc.name   : testGetDeviceType003
- * @tc.desc   : Test input param
+ * @tc.desc   : Test input param(devIndex::1~32)
  */
 HWTEST_F(HdfInputHdiTestAdditional, testGetDeviceType003, Function | MediumTest | Level1)
 {
@@ -565,7 +571,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testGetDeviceType003, Function | MediumTest 
 /**
  * @tc.number : SUB_Driver_Input_GetDeviceType_0600
  * @tc.name   : testGetDeviceType004
- * @tc.desc   : Test parameters with abnormal input
+ * @tc.desc   : Test parameters(devIndex::33) with abnormal input
  */
 HWTEST_F(HdfInputHdiTestAdditional, testGetDeviceType004, Function | MediumTest | Level2)
 {
@@ -585,7 +591,8 @@ HWTEST_F(HdfInputHdiTestAdditional, testSetGestureMode001, Function | MediumTest
     int32_t ret = 0;
     uint32_t gestureMode = 1;
     int i = 0;
-    g_inputInterfaces->OpenInputDevice(TOUCH_INDEX);
+    ret = g_inputInterfaces->OpenInputDevice(TOUCH_INDEX);
+    EXPECT_EQ(ret, INPUT_SUCCESS);
     for (i = 0; i < 1000; i++) {
         ret = g_inputInterfaces->SetGestureMode(TOUCH_INDEX, gestureMode);
     }
@@ -596,7 +603,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testSetGestureMode001, Function | MediumTest
 /**
  * @tc.number : SUB_Driver_Input_SetGestureMode_0400
  * @tc.name   : testSetGestureMode002
- * @tc.desc   : Test input param
+ * @tc.desc   : Test parameters(devIndex::0) with abnormal input
  */
 HWTEST_F(HdfInputHdiTestAdditional, testSetGestureMode002, Function | MediumTest | Level2)
 {
@@ -610,7 +617,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testSetGestureMode002, Function | MediumTest
 /**
  * @tc.number : SUB_Driver_Input_SetGestureMode_0500
  * @tc.name   : testSetGestureMode003
- * @tc.desc   : Test input param
+ * @tc.desc   : Test input param(devIndex::1~32)
  */
 HWTEST_F(HdfInputHdiTestAdditional, testSetGestureMode003, Function | MediumTest | Level1)
 {
@@ -634,7 +641,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testSetGestureMode003, Function | MediumTest
 /**
  * @tc.number : SUB_Driver_Input_SetGestureMode_0600
  * @tc.name   : testSetGestureMode004
- * @tc.desc   : Test parameters with abnormal input
+ * @tc.desc   : Test parameters(devIndex::33) with abnormal input
  */
 HWTEST_F(HdfInputHdiTestAdditional, testSetGestureMode004, Function | MediumTest | Level2)
 {
@@ -647,7 +654,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testSetGestureMode004, Function | MediumTest
 /**
  * @tc.number : SUB_Driver_Input_SetGestureMode_0700
  * @tc.name   : testSetGestureMode005
- * @tc.desc   : Test input param
+ * @tc.desc   : Test input param(devIndex::1,gestureMode::0)
  */
 HWTEST_F(HdfInputHdiTestAdditional, testSetGestureMode005, Function | MediumTest | Level1)
 {
@@ -663,7 +670,7 @@ HWTEST_F(HdfInputHdiTestAdditional, testSetGestureMode005, Function | MediumTest
 /**
  * @tc.number : SUB_Driver_Input_SetGestureMode_0800
  * @tc.name   : testSetGestureMode006
- * @tc.desc   : Test input param
+ * @tc.desc   : Test input param(devIndex::1,gestureMode::0x7fffffff)
  */
 HWTEST_F(HdfInputHdiTestAdditional, testSetGestureMode006, Function | MediumTest | Level1)
 {

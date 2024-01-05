@@ -2903,7 +2903,6 @@ HWTEST_F(DeviceTestAdditional, testNnrtAllocateBufferV2_001, Function | MediumTe
     size_t tensorSize = -1;
     auto hdiRet = device_->AllocateBuffer(tensorSize, tensorBuffer);
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_OUT_OF_MEMORY, hdiRet);
-    //EXPECT_TRUE(hdiRet == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) << hdiRet;
     EXPECT_FALSE(tensorBuffer.fd != NNRT_INVALID_FD && tensorBuffer.bufferSize == tensorSize)
         << tensorBuffer.fd << tensorBuffer.bufferSize;
 

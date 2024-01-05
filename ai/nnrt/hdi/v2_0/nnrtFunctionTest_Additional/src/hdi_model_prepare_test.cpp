@@ -1773,25 +1773,24 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel001, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
-       }
+        }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
-
 }
 
 /**
@@ -1816,25 +1815,24 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel002, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
-
 }
 
 /**
@@ -1859,25 +1857,24 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel003, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
-
 }
 
 /**
@@ -1902,25 +1899,24 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel004, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
-
 }
 
 /**
@@ -1945,25 +1941,24 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel005, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
-
 }
 
 /**
@@ -1988,18 +1983,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel006, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2030,18 +2025,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel007, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2072,18 +2067,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel008, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2114,18 +2109,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel009, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2156,18 +2151,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel010, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2198,18 +2193,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel011, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2240,18 +2235,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel012, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2282,18 +2277,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel013, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2324,18 +2319,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel014, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2366,18 +2361,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel015, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2408,18 +2403,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel016, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2450,18 +2445,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel017, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2492,18 +2487,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel018, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2534,18 +2529,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel019, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2576,18 +2571,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel020, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2618,18 +2613,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel021, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2660,18 +2655,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel022, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2702,18 +2697,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel023, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2744,18 +2739,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel024, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2786,18 +2781,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel025, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2828,18 +2823,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel026, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2870,18 +2865,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel027, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2912,18 +2907,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel028, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2954,18 +2949,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel029, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -2996,18 +2991,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel030, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -3038,18 +3033,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel031, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -3080,18 +3075,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel032, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -3122,18 +3117,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel033, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -3164,18 +3159,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel034, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -3206,18 +3201,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel035, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -3248,18 +3243,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel036, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -3290,18 +3285,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel037, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
     }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -3332,18 +3327,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel038, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -3374,18 +3369,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel039, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -3416,18 +3411,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel040, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -3458,18 +3453,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel041, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -3500,18 +3495,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel042, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -3542,18 +3537,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel043, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -3584,18 +3579,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel044, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -3626,18 +3621,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel045, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -3668,18 +3663,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel046, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -3710,18 +3705,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel047, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -3752,18 +3747,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel048, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -3794,18 +3789,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel049, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -3923,18 +3918,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel053, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -4020,18 +4015,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel056, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -4276,7 +4271,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel065, Function | MediumTest 
     for (auto &tensor : iModel->allTensors) {
         tensor.format = static_cast<V2_0::Format>(OHOS::HDI::Nnrt::V2_0::FORMAT_NONE);
     }
-    
+
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
@@ -4335,7 +4330,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel067, Function | MediumTest 
         tensor.format = static_cast<V2_0::Format>(mindspore::lite::FORMAT_NHWC);
     }
 
-   V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
+    V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_NONE, V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
@@ -4736,21 +4731,22 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel081, Function | MediumTest 
     V2_0::Model *iModel = nullptr;
     V2_0::SharedBuffer tensorBuffer{NNRT_INVALID_FD, 0, 0, 0};
     ASSERT_EQ(OH_NN_SUCCESS, HDICommon::ConvertModel(device_, model, tensorBuffer, &iModel));
-    V2_0::ModelConfig modelConfig{true, static_cast<V2_0::PerformanceMode>(V2_0::PERFORMANCE_NONE),V2_0::PRIORITY_NONE};
+    V2_0::ModelConfig modelConfig{true, static_cast<V2_0::PerformanceMode>(V2_0::PERFORMANCE_NONE),
+                                  V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -4776,18 +4772,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel082, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, static_cast<V2_0::PerformanceMode>(V2_0::PERFORMANCE_LOW), V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -4810,21 +4806,22 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel083, Function | MediumTest 
     V2_0::Model *iModel = nullptr;
     V2_0::SharedBuffer tensorBuffer{NNRT_INVALID_FD, 0, 0, 0};
     ASSERT_EQ(OH_NN_SUCCESS, HDICommon::ConvertModel(device_, model, tensorBuffer, &iModel));
-    V2_0::ModelConfig modelConfig{true, static_cast<V2_0::PerformanceMode>(V2_0::PERFORMANCE_MEDIUM),V2_0::PRIORITY_NONE};
+    V2_0::ModelConfig modelConfig{true, static_cast<V2_0::PerformanceMode>(V2_0::PERFORMANCE_MEDIUM),
+                                  V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -4847,21 +4844,22 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel084, Function | MediumTest 
     V2_0::Model *iModel = nullptr;
     V2_0::SharedBuffer tensorBuffer{NNRT_INVALID_FD, 0, 0, 0};
     ASSERT_EQ(OH_NN_SUCCESS, HDICommon::ConvertModel(device_, model, tensorBuffer, &iModel));
-    V2_0::ModelConfig modelConfig{true, static_cast<V2_0::PerformanceMode>(V2_0::PERFORMANCE_HIGH),V2_0::PRIORITY_NONE};
+    V2_0::ModelConfig modelConfig{true, static_cast<V2_0::PerformanceMode>(V2_0::PERFORMANCE_HIGH),
+                                  V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -4884,21 +4882,22 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel085, Function | MediumTest 
     V2_0::Model *iModel = nullptr;
     V2_0::SharedBuffer tensorBuffer{NNRT_INVALID_FD, 0, 0, 0};
     ASSERT_EQ(OH_NN_SUCCESS, HDICommon::ConvertModel(device_, model, tensorBuffer, &iModel));
-    V2_0::ModelConfig modelConfig{true, static_cast<V2_0::PerformanceMode>(V2_0::PERFORMANCE_EXTREME),V2_0::PRIORITY_NONE};
+    V2_0::ModelConfig modelConfig{true, static_cast<V2_0::PerformanceMode>(V2_0::PERFORMANCE_EXTREME),
+                                  V2_0::PRIORITY_NONE};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -4924,18 +4923,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel086, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, static_cast<V2_0::PerformanceMode>(V2_0::PERFORMANCE_NONE), V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -4958,21 +4957,22 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel087, Function | MediumTest 
     V2_0::Model *iModel = nullptr;
     V2_0::SharedBuffer tensorBuffer{NNRT_INVALID_FD, 0, 0, 0};
     ASSERT_EQ(OH_NN_SUCCESS, HDICommon::ConvertModel(device_, model, tensorBuffer, &iModel));
-    V2_0::ModelConfig modelConfig{true, static_cast<V2_0::PerformanceMode>(V2_0::PERFORMANCE_NONE),V2_0::PRIORITY_MEDIUM};
+    V2_0::ModelConfig modelConfig{true, static_cast<V2_0::PerformanceMode>(V2_0::PERFORMANCE_NONE),
+                                  V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -4999,18 +4999,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel088, Function | MediumTest 
                                   V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5041,18 +5041,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel089, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5083,18 +5083,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel090, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5125,18 +5125,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel091, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5167,18 +5167,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel092, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5209,18 +5209,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel093, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5251,18 +5251,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel094, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5293,18 +5293,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel095, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5335,18 +5335,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel096, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5377,18 +5377,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel097, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5419,18 +5419,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel098, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5461,18 +5461,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel099, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5503,18 +5503,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel100, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5545,18 +5545,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel101, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5587,18 +5587,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel102, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5629,18 +5629,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel103, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5671,18 +5671,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel104, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5713,18 +5713,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel105, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5755,18 +5755,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel106, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5797,18 +5797,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel107, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5839,18 +5839,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel108, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5881,18 +5881,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel109, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5923,18 +5923,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel110, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -5965,18 +5965,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel111, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6007,18 +6007,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel112, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6049,18 +6049,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel113, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6091,18 +6091,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel114, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6133,18 +6133,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel115, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6175,18 +6175,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel116, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6217,18 +6217,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel117, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6259,18 +6259,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel118, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6301,18 +6301,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel119, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6343,18 +6343,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel120, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6385,18 +6385,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel121, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6427,18 +6427,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel122, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6469,18 +6469,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel123, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6511,18 +6511,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel124, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6553,18 +6553,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel125, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6595,18 +6595,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel126, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6637,18 +6637,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel127, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6679,18 +6679,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel128, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6721,18 +6721,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel129, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6763,18 +6763,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel130, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6805,18 +6805,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel131, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6847,18 +6847,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel132, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6889,18 +6889,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel133, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6931,18 +6931,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel134, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -6973,18 +6973,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel135, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7015,18 +7015,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel136, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7057,18 +7057,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel137, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7099,18 +7099,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel138, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7141,18 +7141,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel139, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7183,18 +7183,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel140, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7225,18 +7225,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel141, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7267,18 +7267,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel142, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7309,18 +7309,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel143, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7351,18 +7351,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel144, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7393,18 +7393,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel145, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7435,18 +7435,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel146, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7477,18 +7477,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel147, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7519,18 +7519,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel148, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7561,18 +7561,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel149, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7603,18 +7603,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel150, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7645,18 +7645,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel151, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7687,18 +7687,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel152, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7729,18 +7729,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel153, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7771,18 +7771,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel154, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7813,18 +7813,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel155, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7855,18 +7855,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel156, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7897,18 +7897,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel157, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7939,18 +7939,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel158, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -7981,18 +7981,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel159, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8023,18 +8023,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel160, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8065,18 +8065,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel161, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8107,18 +8107,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel162, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8149,18 +8149,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel163, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8191,18 +8191,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel164, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8233,18 +8233,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel165, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8275,18 +8275,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel166, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8317,18 +8317,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel167, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8359,18 +8359,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel168, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8401,18 +8401,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel169, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8443,18 +8443,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel170, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8485,18 +8485,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel171, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8527,18 +8527,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel172, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8569,18 +8569,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel173, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8611,18 +8611,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel174, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8653,18 +8653,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel175, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8695,18 +8695,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel176, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8737,18 +8737,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel177, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8779,18 +8779,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel178, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8821,18 +8821,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel179, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8863,18 +8863,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel180, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8905,18 +8905,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel181, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8947,18 +8947,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel182, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -8989,18 +8989,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel183, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9031,18 +9031,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel184, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9073,18 +9073,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel185, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9115,18 +9115,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel186, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9157,18 +9157,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel187, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9199,18 +9199,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel188, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9241,18 +9241,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel189, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9283,18 +9283,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel190, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9325,18 +9325,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel191, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9367,18 +9367,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel192, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9409,18 +9409,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel193, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9451,18 +9451,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel194, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9493,18 +9493,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel195, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9535,18 +9535,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel196, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9577,18 +9577,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel197, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9619,18 +9619,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel198, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9661,18 +9661,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel199, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9703,18 +9703,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel200, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9745,18 +9745,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel201, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9787,18 +9787,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel202, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9829,18 +9829,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel203, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9871,18 +9871,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel204, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9913,18 +9913,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel205, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9955,18 +9955,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel206, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -9997,18 +9997,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel207, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10039,18 +10039,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel208, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10081,18 +10081,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel209, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10123,18 +10123,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel210, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10165,18 +10165,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel211, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10207,18 +10207,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel212, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10249,18 +10249,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel213, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10291,18 +10291,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel214, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10333,18 +10333,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel215, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10375,18 +10375,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel216, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10417,18 +10417,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel217, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10459,18 +10459,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel218, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10501,18 +10501,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel219, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10543,18 +10543,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel220, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10585,18 +10585,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel221, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10627,18 +10627,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel222, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10669,18 +10669,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel223, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10711,18 +10711,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel224, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10753,18 +10753,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel225, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10795,18 +10795,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel226, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10837,18 +10837,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel227, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10879,18 +10879,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel228, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10921,18 +10921,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel229, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -10963,18 +10963,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel230, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11005,18 +11005,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel231, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11047,18 +11047,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel232, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11089,18 +11089,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel233, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11131,18 +11131,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel234, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11173,18 +11173,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel235, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11215,18 +11215,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel236, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11257,18 +11257,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel237, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11299,18 +11299,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel238, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11341,18 +11341,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel239, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11383,18 +11383,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel240, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11425,18 +11425,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel241, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11467,18 +11467,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel242, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11509,18 +11509,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel243, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11551,18 +11551,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel244, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11593,18 +11593,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel245, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11635,18 +11635,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel246, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11677,18 +11677,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel247, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11719,18 +11719,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel248, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11761,18 +11761,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel249, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11803,18 +11803,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel250, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11845,18 +11845,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel251, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11887,18 +11887,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel252, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11929,18 +11929,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel253, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -11971,18 +11971,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel254, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12013,18 +12013,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel255, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12055,18 +12055,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel256, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12097,18 +12097,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel257, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12139,18 +12139,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel258, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12181,18 +12181,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel259, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12223,18 +12223,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel260, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12265,18 +12265,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel261, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12307,18 +12307,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel262, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12349,18 +12349,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel263, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12391,18 +12391,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel264, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12433,18 +12433,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel265, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12475,18 +12475,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel266, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12517,18 +12517,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel267, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12559,18 +12559,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel268, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12601,18 +12601,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel269, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12643,18 +12643,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel270, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12685,18 +12685,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel271, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12727,18 +12727,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel272, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12769,18 +12769,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel273, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12811,18 +12811,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel274, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12853,18 +12853,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel275, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12895,18 +12895,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel276, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12937,18 +12937,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel277, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -12979,18 +12979,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel278, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13021,18 +13021,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel279, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13063,18 +13063,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel280, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13105,18 +13105,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel281, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13147,18 +13147,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel282, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13189,18 +13189,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel283, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13231,18 +13231,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel284, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_LOW};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13273,18 +13273,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel285, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13315,18 +13315,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel286, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13357,18 +13357,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel287, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13399,18 +13399,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel288, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13441,18 +13441,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel289, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13483,18 +13483,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel290, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13525,18 +13525,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel291, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13567,18 +13567,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel292, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13609,18 +13609,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel293, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13651,18 +13651,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel294, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13693,18 +13693,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel295, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13735,18 +13735,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel296, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13777,18 +13777,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel297, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13819,18 +13819,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel298, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13861,18 +13861,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel299, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13903,18 +13903,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel300, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13945,18 +13945,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel301, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -13987,18 +13987,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel302, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14029,18 +14029,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel303, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14071,18 +14071,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel304, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14113,18 +14113,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel305, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14155,18 +14155,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel306, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14197,18 +14197,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel307, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14239,18 +14239,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel308, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14281,18 +14281,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel309, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14323,18 +14323,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel310, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14365,18 +14365,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel311, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14407,18 +14407,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel312, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14449,18 +14449,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel313, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14491,18 +14491,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel314, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14533,18 +14533,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel315, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14575,18 +14575,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel316, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14617,18 +14617,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel317, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14659,18 +14659,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel318, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14701,18 +14701,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel319, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14743,18 +14743,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel320, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14785,18 +14785,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel321, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14827,18 +14827,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel322, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14869,18 +14869,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel323, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14911,18 +14911,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel324, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14953,18 +14953,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel325, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -14995,18 +14995,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel326, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15037,18 +15037,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel327, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15079,18 +15079,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel328, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15121,18 +15121,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel329, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15163,18 +15163,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel330, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15205,18 +15205,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel331, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15247,18 +15247,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel332, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15289,18 +15289,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel333, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15331,18 +15331,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel334, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15373,18 +15373,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel335, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15415,18 +15415,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel336, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15457,18 +15457,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel337, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15499,18 +15499,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel338, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15541,18 +15541,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel339, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15583,18 +15583,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel340, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15625,18 +15625,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel341, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15667,18 +15667,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel342, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15709,18 +15709,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel343, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15751,18 +15751,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel344, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15793,18 +15793,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel345, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15835,18 +15835,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel346, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15877,18 +15877,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel347, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15919,18 +15919,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel348, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -15961,18 +15961,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel349, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16003,18 +16003,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel350, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16045,18 +16045,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel351, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16087,18 +16087,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel352, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16129,18 +16129,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel353, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16171,18 +16171,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel354, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16213,18 +16213,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel355, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16255,18 +16255,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel356, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16297,18 +16297,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel357, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16339,18 +16339,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel358, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16381,18 +16381,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel359, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16423,18 +16423,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel360, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16465,18 +16465,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel361, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16507,18 +16507,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel362, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16549,18 +16549,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel363, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16591,18 +16591,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel364, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16633,18 +16633,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel365, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16675,18 +16675,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel366, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16717,18 +16717,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel367, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16759,18 +16759,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel368, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16801,18 +16801,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel369, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16843,18 +16843,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel370, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16885,18 +16885,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel371, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16927,18 +16927,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel372, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -16969,18 +16969,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel373, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17011,18 +17011,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel374, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17053,18 +17053,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel375, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17095,18 +17095,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel376, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17137,18 +17137,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel377, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17179,18 +17179,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel378, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17221,18 +17221,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel379, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17263,18 +17263,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel380, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17305,18 +17305,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel381, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17347,18 +17347,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel382, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17389,18 +17389,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel383, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17431,18 +17431,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel384, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17473,18 +17473,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel385, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17515,18 +17515,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel386, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17557,18 +17557,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel387, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17599,18 +17599,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel388, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17641,18 +17641,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel389, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17683,18 +17683,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel390, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17725,18 +17725,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel391, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17767,18 +17767,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel392, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17809,18 +17809,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel393, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17851,18 +17851,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel394, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17893,18 +17893,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel395, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17935,18 +17935,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel396, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -17977,18 +17977,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel397, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18019,18 +18019,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel398, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18061,18 +18061,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel399, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18103,18 +18103,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel400, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18145,18 +18145,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel401, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18187,18 +18187,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel402, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18229,18 +18229,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel403, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18271,18 +18271,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel404, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18313,18 +18313,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel405, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18355,18 +18355,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel406, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18397,18 +18397,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel407, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18439,18 +18439,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel408, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18481,18 +18481,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel409, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18523,18 +18523,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel410, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18565,18 +18565,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel411, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18607,18 +18607,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel412, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18649,18 +18649,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel413, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18691,18 +18691,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel414, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18733,18 +18733,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel415, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18775,18 +18775,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel416, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18817,18 +18817,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel417, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18859,18 +18859,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel418, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18901,18 +18901,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel419, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18943,18 +18943,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel420, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -18985,18 +18985,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel421, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19027,18 +19027,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel422, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19069,18 +19069,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel423, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19111,18 +19111,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel424, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19153,18 +19153,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel425, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19195,18 +19195,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel426, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19237,18 +19237,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel427, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19279,18 +19279,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel428, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19321,18 +19321,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel429, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19363,18 +19363,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel430, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19405,18 +19405,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel431, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19447,18 +19447,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel432, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19489,18 +19489,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel433, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19531,18 +19531,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel434, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19573,18 +19573,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel435, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19615,18 +19615,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel436, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19657,18 +19657,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel437, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19699,18 +19699,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel438, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19741,18 +19741,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel439, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19783,18 +19783,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel440, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19825,18 +19825,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel441, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19867,18 +19867,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel442, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19909,18 +19909,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel443, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19951,18 +19951,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel444, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -19993,18 +19993,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel445, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20035,18 +20035,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel446, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20077,18 +20077,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel447, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20119,18 +20119,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel448, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20161,18 +20161,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel449, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20203,18 +20203,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel450, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20245,18 +20245,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel451, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20287,18 +20287,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel452, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20329,18 +20329,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel453, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20371,18 +20371,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel454, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20413,18 +20413,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel455, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20455,18 +20455,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel456, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20497,18 +20497,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel457, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20539,18 +20539,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel458, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20581,18 +20581,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel459, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20623,18 +20623,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel460, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20665,18 +20665,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel461, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20707,18 +20707,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel462, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20749,18 +20749,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel463, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20791,18 +20791,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel464, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20833,18 +20833,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel465, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20875,18 +20875,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel466, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20917,18 +20917,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel467, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -20959,18 +20959,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel468, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21001,18 +21001,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel469, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21043,18 +21043,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel470, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21085,18 +21085,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel471, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21127,18 +21127,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel472, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21169,18 +21169,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel473, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21211,18 +21211,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel474, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21253,18 +21253,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel475, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21295,18 +21295,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel476, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21337,18 +21337,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel477, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21379,18 +21379,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel478, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21421,18 +21421,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel479, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21463,18 +21463,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel480, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_MEDIUM};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21505,18 +21505,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel481, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21547,18 +21547,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel482, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21589,18 +21589,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel483, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21631,18 +21631,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel484, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21673,18 +21673,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel485, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21715,18 +21715,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel486, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21757,18 +21757,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel487, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21799,18 +21799,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel488, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21841,18 +21841,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel489, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21883,18 +21883,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel490, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21925,18 +21925,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel491, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -21967,18 +21967,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel492, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22009,18 +22009,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel493, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22051,18 +22051,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel494, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22093,18 +22093,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel495, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22135,18 +22135,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel496, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22177,18 +22177,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel497, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22219,18 +22219,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel498, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22261,18 +22261,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel499, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22303,18 +22303,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel500, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22345,18 +22345,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel501, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22387,18 +22387,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel502, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22429,18 +22429,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel503, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22471,18 +22471,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel504, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22513,18 +22513,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel505, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22555,18 +22555,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel506, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22597,18 +22597,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel507, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22639,18 +22639,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel508, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22681,18 +22681,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel509, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22723,18 +22723,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel510, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22765,18 +22765,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel511, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22807,18 +22807,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel512, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22849,18 +22849,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel513, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22891,18 +22891,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel514, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22933,18 +22933,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel515, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -22975,18 +22975,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel516, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23017,18 +23017,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel517, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23059,18 +23059,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel518, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23101,18 +23101,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel519, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23143,18 +23143,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel520, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23185,18 +23185,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel521, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23227,18 +23227,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel522, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23269,18 +23269,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel523, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23311,18 +23311,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel524, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23353,18 +23353,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel525, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23395,18 +23395,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel526, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23437,18 +23437,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel527, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23479,18 +23479,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel528, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23521,18 +23521,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel529, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_LOW, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23563,18 +23563,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel530, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23605,18 +23605,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel531, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23647,18 +23647,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel532, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23689,18 +23689,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel533, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23731,18 +23731,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel534, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23773,18 +23773,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel535, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23815,18 +23815,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel536, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23857,18 +23857,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel537, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23899,18 +23899,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel538, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23941,18 +23941,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel539, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -23983,18 +23983,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel540, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24025,18 +24025,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel541, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24067,18 +24067,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel542, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24109,18 +24109,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel543, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24151,18 +24151,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel544, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24193,18 +24193,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel545, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24235,18 +24235,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel546, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24277,18 +24277,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel547, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24319,18 +24319,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel548, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24361,18 +24361,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel549, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24403,18 +24403,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel550, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24445,18 +24445,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel551, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24487,18 +24487,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel552, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24529,18 +24529,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel553, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24571,18 +24571,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel554, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24613,18 +24613,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel555, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24655,18 +24655,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel556, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24697,18 +24697,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel557, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24739,18 +24739,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel558, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24781,18 +24781,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel559, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24823,18 +24823,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel560, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24865,18 +24865,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel561, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24907,18 +24907,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel562, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24949,18 +24949,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel563, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -24991,18 +24991,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel564, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25033,18 +25033,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel565, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25075,18 +25075,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel566, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25117,18 +25117,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel567, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25159,18 +25159,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel568, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25201,18 +25201,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel569, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25243,18 +25243,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel570, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25285,18 +25285,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel571, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25327,18 +25327,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel572, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25369,18 +25369,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel573, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25411,18 +25411,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel574, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25453,18 +25453,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel575, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25495,18 +25495,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel576, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25537,18 +25537,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel577, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25579,18 +25579,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel578, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_MEDIUM, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25621,18 +25621,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel579, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25663,18 +25663,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel580, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25705,18 +25705,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel581, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25747,18 +25747,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel582, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25789,18 +25789,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel583, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25831,18 +25831,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel584, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25873,18 +25873,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel585, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25915,18 +25915,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel586, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25957,18 +25957,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel587, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -25999,18 +25999,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel588, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26041,18 +26041,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel589, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26083,18 +26083,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel590, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26125,18 +26125,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel591, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26167,18 +26167,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel592, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26209,18 +26209,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel593, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26251,18 +26251,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel594, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26293,18 +26293,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel595, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26335,18 +26335,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel596, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26377,18 +26377,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel597, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26419,18 +26419,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel598, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26461,18 +26461,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel599, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26503,18 +26503,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel600, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26545,18 +26545,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel601, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26587,18 +26587,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel602, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26629,18 +26629,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel603, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26671,18 +26671,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel604, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26713,18 +26713,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel605, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26755,18 +26755,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel606, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26797,18 +26797,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel607, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26839,18 +26839,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel608, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26881,18 +26881,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel609, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26923,18 +26923,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel610, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -26965,18 +26965,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel611, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27007,18 +27007,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel612, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27049,18 +27049,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel613, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27091,18 +27091,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel614, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27133,18 +27133,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel615, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27175,18 +27175,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel616, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27217,18 +27217,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel617, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27259,18 +27259,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel618, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27301,18 +27301,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel619, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27343,18 +27343,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel620, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27385,18 +27385,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel621, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27427,18 +27427,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel622, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27469,18 +27469,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel623, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27511,18 +27511,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel624, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27553,18 +27553,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel625, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27595,18 +27595,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel626, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27637,18 +27637,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel627, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_HIGH, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27679,18 +27679,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel628, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27721,18 +27721,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel629, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27763,18 +27763,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel630, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27805,18 +27805,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel631, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27847,18 +27847,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel632, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27889,18 +27889,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel633, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27931,18 +27931,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel634, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -27973,18 +27973,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel635, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28015,18 +28015,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel636, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28057,18 +28057,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel637, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28099,18 +28099,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel638, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28141,18 +28141,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel639, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28183,18 +28183,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel640, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28225,18 +28225,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel641, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28267,18 +28267,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel642, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28309,18 +28309,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel643, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28351,18 +28351,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel644, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28393,18 +28393,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel645, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28435,18 +28435,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel646, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28477,18 +28477,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel647, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28519,18 +28519,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel648, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28561,18 +28561,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel649, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28603,18 +28603,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel650, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28645,18 +28645,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel651, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28687,18 +28687,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel652, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28729,18 +28729,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel653, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28771,18 +28771,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel654, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28813,18 +28813,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel655, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28855,18 +28855,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel656, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28897,18 +28897,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel657, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28939,18 +28939,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel658, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -28981,18 +28981,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel659, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -29023,18 +29023,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel660, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -29065,18 +29065,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel661, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -29107,18 +29107,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel662, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -29149,18 +29149,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel663, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -29191,18 +29191,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel664, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -29233,18 +29233,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel665, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -29275,18 +29275,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel666, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -29317,18 +29317,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel667, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -29359,18 +29359,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel668, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -29401,18 +29401,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel669, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -29443,18 +29443,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel670, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -29485,18 +29485,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel671, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -29527,18 +29527,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel672, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -29569,18 +29569,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel673, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -29611,18 +29611,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel674, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -29653,18 +29653,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel675, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -29695,18 +29695,18 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel676, Function | MediumTest 
     V2_0::ModelConfig modelConfig{true, V2_0::PERFORMANCE_EXTREME, V2_0::PRIORITY_HIGH};
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     std::vector<bool> supportedOperations;
-    bool isAllSupported =true;
+    bool isAllSupported = true;
 
     device_->GetSupportedOperation(*iModel, supportedOperations);
-    for (uint32_t i = 0; i < supportedOperations.size(); i++){
-        if( supportedOperations[i] == false ){
+    for (uint32_t i = 0; i < supportedOperations.size(); i++) {
+        if (supportedOperations[i] == false) {
             isAllSupported = false;
         }
-   }
+    }
 
-    if(isAllSupported == true){
+    if (isAllSupported == true) {
         int32_t ret = device_->PrepareModel(*iModel, modelConfig, preparedModel);
-        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));    
+        EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
     mindspore::lite::MindIR_Model_Destroy(&iModel);
@@ -36222,7 +36222,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache001, Function | 
     config.enableFloat16 = false;
     config.mode = V2_0::PERFORMANCE_NONE;
     config.priority = V2_0::PRIORITY_LOW;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -36261,7 +36260,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache002, Function | 
     config.enableFloat16 = false;
     config.mode = V2_0::PERFORMANCE_NONE;
     config.priority = V2_0::PRIORITY_MEDIUM;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -36300,7 +36298,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache003, Function | 
     config.enableFloat16 = false;
     config.mode = V2_0::PERFORMANCE_NONE;
     config.priority = V2_0::PRIORITY_HIGH;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -36339,7 +36336,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache004, Function | 
     config.enableFloat16 = false;
     config.mode = V2_0::PERFORMANCE_LOW;
     config.priority = V2_0::PRIORITY_HIGH;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -36378,7 +36374,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache005, Function | 
     config.enableFloat16 = false;
     config.mode = V2_0::PERFORMANCE_LOW;
     config.priority = V2_0::PRIORITY_MEDIUM;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -36416,7 +36411,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache006, Function | 
     config.enableFloat16 = false;
     config.mode = V2_0::PERFORMANCE_LOW;
     config.priority = V2_0::PRIORITY_LOW;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -36455,7 +36449,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache007, Function | 
     config.enableFloat16 = false;
     config.mode = V2_0::PERFORMANCE_LOW;
     config.priority = V2_0::PRIORITY_NONE;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -36494,7 +36487,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache008, Function | 
     config.enableFloat16 = false;
     config.mode = V2_0::PERFORMANCE_MEDIUM;
     config.priority = V2_0::PRIORITY_NONE;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -36533,7 +36525,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache009, Function | 
     config.enableFloat16 = false;
     config.mode = V2_0::PERFORMANCE_MEDIUM;
     config.priority = V2_0::PRIORITY_LOW;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -36572,7 +36563,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache010, Function | 
     config.enableFloat16 = false;
     config.mode = V2_0::PERFORMANCE_MEDIUM;
     config.priority = V2_0::PRIORITY_MEDIUM;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -36611,7 +36601,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache011, Function | 
     config.enableFloat16 = false;
     config.mode = V2_0::PERFORMANCE_MEDIUM;
     config.priority = V2_0::PRIORITY_HIGH;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -36650,7 +36639,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache012, Function | 
     config.enableFloat16 = false;
     config.mode = V2_0::PERFORMANCE_HIGH;
     config.priority = V2_0::PRIORITY_HIGH;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -36689,7 +36677,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache013, Function | 
     config.enableFloat16 = false;
     config.mode = V2_0::PERFORMANCE_HIGH;
     config.priority = V2_0::PRIORITY_MEDIUM;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -36728,7 +36715,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache014, Function | 
     config.enableFloat16 = false;
     config.mode = V2_0::PERFORMANCE_HIGH;
     config.priority = V2_0::PRIORITY_LOW;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -36767,7 +36753,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache015, Function | 
     config.enableFloat16 = false;
     config.mode = V2_0::PERFORMANCE_HIGH;
     config.priority = V2_0::PRIORITY_NONE;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -36806,7 +36791,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache016, Function | 
     config.enableFloat16 = false;
     config.mode = V2_0::PERFORMANCE_EXTREME;
     config.priority = V2_0::PRIORITY_NONE;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -36845,7 +36829,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache017, Function | 
     config.enableFloat16 = false;
     config.mode = V2_0::PERFORMANCE_EXTREME;
     config.priority = V2_0::PRIORITY_LOW;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -36884,7 +36867,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache018, Function | 
     config.enableFloat16 = false;
     config.mode = V2_0::PERFORMANCE_EXTREME;
     config.priority = V2_0::PRIORITY_MEDIUM;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -36923,7 +36905,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache019, Function | 
     config.enableFloat16 = false;
     config.mode = V2_0::PERFORMANCE_EXTREME;
     config.priority = V2_0::PRIORITY_HIGH;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -36962,7 +36943,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache020, Function | 
     config.enableFloat16 = true;
     config.mode = V2_0::PERFORMANCE_NONE;
     config.priority = V2_0::PRIORITY_NONE;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -37000,7 +36980,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache021, Function | 
     config.enableFloat16 = true;
     config.mode = V2_0::PERFORMANCE_NONE;
     config.priority = V2_0::PRIORITY_LOW;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -37039,7 +37018,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache022, Function | 
     config.enableFloat16 = true;
     config.mode = V2_0::PERFORMANCE_NONE;
     config.priority = V2_0::PRIORITY_MEDIUM;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -37078,7 +37056,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache023, Function | 
     config.enableFloat16 = true;
     config.mode = V2_0::PERFORMANCE_NONE;
     config.priority = V2_0::PRIORITY_HIGH;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -37116,7 +37093,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache024, Function | 
     config.enableFloat16 = true;
     config.mode = V2_0::PERFORMANCE_LOW;
     config.priority = V2_0::PRIORITY_HIGH;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -37155,7 +37131,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache025, Function | 
     config.enableFloat16 = true;
     config.mode = V2_0::PERFORMANCE_LOW;
     config.priority = V2_0::PRIORITY_MEDIUM;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -37193,7 +37168,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache026, Function | 
     config.enableFloat16 = true;
     config.mode = V2_0::PERFORMANCE_LOW;
     config.priority = V2_0::PRIORITY_LOW;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -37231,7 +37205,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache027, Function | 
     config.enableFloat16 = true;
     config.mode = V2_0::PERFORMANCE_LOW;
     config.priority = V2_0::PRIORITY_NONE;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -37270,7 +37243,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache028, Function | 
     config.enableFloat16 = true;
     config.mode = V2_0::PERFORMANCE_MEDIUM;
     config.priority = V2_0::PRIORITY_NONE;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -37309,7 +37281,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache029, Function | 
     config.enableFloat16 = true;
     config.mode = V2_0::PERFORMANCE_MEDIUM;
     config.priority = V2_0::PRIORITY_LOW;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -37348,7 +37319,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache030, Function | 
     config.enableFloat16 = true;
     config.mode = V2_0::PERFORMANCE_MEDIUM;
     config.priority = V2_0::PRIORITY_MEDIUM;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -37387,7 +37357,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache031, Function | 
     config.enableFloat16 = true;
     config.mode = V2_0::PERFORMANCE_MEDIUM;
     config.priority = V2_0::PRIORITY_HIGH;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -37426,7 +37395,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache032, Function | 
     config.enableFloat16 = true;
     config.mode = V2_0::PERFORMANCE_HIGH;
     config.priority = V2_0::PRIORITY_HIGH;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -37465,7 +37433,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache033, Function | 
     config.enableFloat16 = true;
     config.mode = V2_0::PERFORMANCE_HIGH;
     config.priority = V2_0::PRIORITY_MEDIUM;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -37503,7 +37470,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache034, Function | 
     config.enableFloat16 = true;
     config.mode = V2_0::PERFORMANCE_HIGH;
     config.priority = V2_0::PRIORITY_LOW;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -37542,7 +37508,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache035, Function | 
     config.enableFloat16 = true;
     config.mode = V2_0::PERFORMANCE_HIGH;
     config.priority = V2_0::PRIORITY_NONE;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -37581,7 +37546,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache036, Function | 
     config.enableFloat16 = true;
     config.mode = V2_0::PERFORMANCE_EXTREME;
     config.priority = V2_0::PRIORITY_NONE;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -37620,7 +37584,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache037, Function | 
     config.enableFloat16 = true;
     config.mode = V2_0::PERFORMANCE_EXTREME;
     config.priority = V2_0::PRIORITY_LOW;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -37659,7 +37622,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache038, Function | 
     config.enableFloat16 = true;
     config.mode = V2_0::PERFORMANCE_EXTREME;
     config.priority = V2_0::PRIORITY_MEDIUM;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -37698,7 +37660,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache039, Function | 
     config.enableFloat16 = true;
     config.mode = V2_0::PERFORMANCE_EXTREME;
     config.priority = V2_0::PRIORITY_HIGH;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 
@@ -37737,7 +37698,6 @@ HWTEST_F(ModelPrepareTestAdditional, testV2PrepareModelFromCache040, Function | 
     config.enableFloat16 = false;
     config.mode = V2_0::PERFORMANCE_NONE;
     config.priority = V2_0::PRIORITY_NONE;
-    // export model cache
     OHOS::sptr<V2_0::IPreparedModel> iPreparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, config, iPreparedModel));
 

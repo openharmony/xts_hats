@@ -12,6 +12,7 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
+import("//drivers/peripheral/display/display_config.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/display"
@@ -19,7 +20,9 @@ config("module_private_config") {
   visibility = [ ":*" ]
 }
 
-ohos_moduletest_suite("HatsHdfDisplayComposerUtAdditionalTest") {
+ohos_moduletest_suite("HatsHdfDisplayComposerAdditionalUtTest") {
+  defines = []
+  defines += display_defines
   module_out_path = module_output_path
   sources = [ "hdi_composer_ut.cpp" ]
   deps = [ "../common:disp_dev_hdi_test" ]

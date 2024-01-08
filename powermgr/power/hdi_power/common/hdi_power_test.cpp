@@ -641,4 +641,20 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest037, TestSize.Level3)
     EXPECT_TRUE(OHOS::HDI::Power::V1_1::RunningLockType::RUNNINGLOCK_BUTT == 66);
     printf("HdfPowerHdiTest037: end.");
 }
+
+/**
+  * @tc.name: HdfPowerHdiTest038
+  * @tc.desc: check GetWakeupReason
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest038, TestSize.Level1)
+{
+    std::string testName = "HdfPowerHdiTest038";
+    int32_t ret = g_powerInterface->GetWakeupReason(testName);
+#ifdef HATS_DRIVER_PERIPHERAL_POWER_WAKEUP_CAUSE_PATH
+    EXPECT_EQ(0, ret);
+#else
+    EXPECT_NE(0, ret);
+#endif
+}
 }

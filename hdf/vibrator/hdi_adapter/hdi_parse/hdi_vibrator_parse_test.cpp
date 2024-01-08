@@ -25,8 +25,6 @@ using namespace OHOS::HDI::Vibrator::V1_1;
 using namespace testing::ext;
 
 namespace {
-    const std::string DEVICETYPE_KEY = "const.product.devicetype";
-    const std::string DEVICETYPE_TYPE = "phone";
     sptr<IVibratorInterface> g_vibratorInterface = nullptr;
 }
 

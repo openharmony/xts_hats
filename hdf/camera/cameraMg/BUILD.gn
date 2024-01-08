@@ -21,10 +21,14 @@ group("HatsHdfCameraMgTest") {
     testonly = true
   }
   if (is_standard_system) {
-    deps = [
-      "v1_0:HatsHdfCameraMgTestv0",
-      "v1_1:HatsHdfCameraMgTestv1",
-    ]
+    if (hats_rich == false) {
+      deps = [ "v1_0:HatsHdfCameraMgTestv0" ]
+    } else {
+      deps = [
+        "v1_0:HatsHdfCameraMgTestv0",
+        "v1_1:HatsHdfCameraMgTestv1",
+      ]
+    }
   }
 }
 ###############################################################################

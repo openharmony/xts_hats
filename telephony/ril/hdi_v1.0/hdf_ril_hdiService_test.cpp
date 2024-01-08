@@ -126,6 +126,7 @@ enum class HdiId {
     HREQ_DATA_SEND_DATA_SLEEP_MODE,
     HREQ_DATA_SET_DATA_PERMITTED,
     HREQ_DATA_GET_LINK_CAPABILITY,
+    HREQ_DATA_CLEAN_ALL_CONNECTIONS,
 
     HREQ_NETWORK_BASE = 400,
     HREQ_NETWORK_GET_SIGNAL_STRENGTH,
@@ -147,6 +148,7 @@ enum class HdiId {
     HREQ_NETWORK_GET_RRC_CONNECTION_STATE,
     HREQ_NETWORK_SET_NR_OPTION_MODE,
     HREQ_NETWORK_GET_NR_OPTION_MODE,
+    HREQ_NETWORK_GET_NR_SSBID_INFO,
 
     HREQ_COMMON_BASE = 500,
     HREQ_MODEM_SHUT_DOWN,
@@ -306,6 +308,7 @@ public:
     int32_t SetDataProfileInfoResponse(const RilRadioResponseInfo &responseInfo);
     int32_t GetLinkCapabilityResponse(
         const RilRadioResponseInfo &responseInfo, const DataLinkCapability &dataLinkCapability) override;
+    int32_t CleanAllConnectionsResponse(const RilRadioResponseInfo &responseInfo) override;
 
     // Modem
     int32_t RadioStateUpdated(const RilRadioResponseInfo &responseInfo, int32_t state) override;
@@ -416,6 +419,7 @@ public:
     int32_t SetNrOptionModeResponse(const RilRadioResponseInfo &responseInfo) override;
     int32_t GetNrOptionModeResponse(const RilRadioResponseInfo &responseInfo, int32_t mode) override;
     int32_t GetRrcConnectionStateUpdated(const RilRadioResponseInfo &responseInfo, int32_t state) override;
+    int32_t GetNrSsbIdResponse(const RilRadioResponseInfo &responseInfo, const NrCellSsbIds &nrCellSsbIds) override;
 
     // Sms
     int32_t NewSmsNotify(
@@ -576,7 +580,7 @@ bool RilCallback::GetBoolResult(HdiId hdiId)
 int32_t RilCallback::SimStateUpdated(const RilRadioResponseInfo &responseInfo)
 {
     HDF_LOGI("SimStateUpdated notice : slotId = %{public}d", responseInfo.slotId);
-    g_rilInterface->GetSimStatus(GetSerialId(), responseInfo.slotId);
+    g_rilInterface->GetSimStatus(responseInfo.slotId, GetSerialId());
     return 0;
 }
 
@@ -1322,6 +1326,32 @@ int32_t RilCallback::GetRrcConnectionStateUpdated(const RilRadioResponseInfo &re
     return 0;
 }
 
+int32_t RilCallback::GetNrSsbIdResponse(const RilRadioResponseInfo &responseInfo, const NrCellSsbIds &nrCellSsbIds)
+{
+    int32_t ssbListNum = 0;
+    int32_t nbCellNum = 0;
+    HDF_LOGE("rsrp:%{public}d", nrCellSsbIds.rsrp);
+    HDF_LOGE("sinr:%{public}d", nrCellSsbIds.sinr);
+    for (auto info : nrCellSsbIds.sCellSsbList) {
+        ssbListNum = ssbListNum + 1;
+        HDF_LOGE("sCellSsbNum:%{public}d, rsrp:%{public}d", ssbListNum, info.rsrp);
+    }
+    HDF_LOGE("nbCellCount:%{public}d", nrCellSsbIds.nbCellCount);
+    for (auto info : nrCellSsbIds.nbCellSsbList) {
+        nbCellNum = nbCellNum + 1;
+        HDF_LOGE("nbCellNum:%{public}d, rsrp:%{public}d, sinr:%{public}d", nbCellNum, info.rsrp, info.sinr);
+        ssbListNum = 0;
+        for (auto infoNbCell : info.ssbIdList) {
+            ssbListNum = ssbListNum + 1;
+            HDF_LOGE("nbCellSsbNum:%{public}d, rsrp:%{public}d", ssbListNum, infoNbCell.rsrp);
+        }
+    }
+    hdiId_ = HdiId::HREQ_NETWORK_GET_NR_SSBID_INFO;
+    resultInfo_ = responseInfo;
+    NotifyAll();
+    return 0;
+}
+
 // Call
 int32_t RilCallback::CallEmergencyNotice(
     const RilRadioResponseInfo &responseInfo, const EmergencyInfoList &emergencyInfoList)
@@ -1952,6 +1982,14 @@ int32_t RilCallback::GetLinkCapabilityResponse(
     return 0;
 }
 
+int32_t RilCallback::CleanAllConnectionsResponse(const RilRadioResponseInfo &responseInfo)
+{
+    HDF_LOGI("RilCallback::CleanAllConnectionsResponse error:%{public}d", responseInfo.error);
+    hdiId_ = HdiId::HREQ_DATA_CLEAN_ALL_CONNECTIONS;
+    resultInfo_ = responseInfo;
+    NotifyAll();
+    return 0;
+}
 // Sms
 int32_t RilCallback::NewSmsNotify(
     const HDI::Ril::V1_1::RilRadioResponseInfo &responseInfo, const SmsMessageInfo &smsMessageInfo)

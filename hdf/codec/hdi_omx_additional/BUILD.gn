@@ -17,7 +17,7 @@ import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/codec"
-ohos_moduletest_suite("HatsHdfOmxCodecTestAdditional") {
+ohos_moduletest_suite("HatsHdfOmxCodecAdditionalTest") {
   module_out_path = module_output_path
   configs = [ ":hdf_codec_omx" ]
   sources = [ "codec_hdi_manager_test.cpp" ]
@@ -32,7 +32,7 @@ ohos_moduletest_suite("HatsHdfOmxCodecTestAdditional") {
       "drivers_interface_display:libdisplay_buffer_hdi_impl",
       "drivers_interface_display:libdisplay_composer_hdi_impl",
       "drivers_peripheral_codec:libcodec_hdi_omx_client",
-      "graphic_chipsetsdk:buffer_handle",
+      "graphic_surface:buffer_handle",
       "hdf_core:libhdf_host",
       "hdf_core:libhdf_ipc_adapter",
       "hdf_core:libhdf_utils",

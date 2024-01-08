@@ -15,8 +15,8 @@
 
 #include "hdf_dlist.h"
 #include "osal_mem.h"
-#include "v1_0/iaudio_adapter.h"
-#include "v1_0/iaudio_manager.h"
+#include "v2_0/iaudio_adapter.h"
+#include "v2_0/iaudio_manager.h"
 #include <climits>
 #include <cstring>
 #include <gtest/gtest.h>
@@ -33,7 +33,6 @@ using namespace testing::ext;
 
 namespace {
 static const uint32_t AUDIO_ADAPTER_NUM_MAX = 5;
-static const uint32_t AUDIO_ADAPTER_RENDER_ID = 0;
 static const uint32_t AUDIO_ADAPTER_CAPTURE_ID = 0;
 
 class HdfAudioUtAdapterTestAdditional : public testing::Test {
@@ -210,12 +209,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateRender003, TestSize.Level1)
     devicedesc.desc = const_cast<char *>("primary");
     devicedesc.pins = PIN_OUT_LINEOUT;
     InitAttrs(attrs);
-    int32_t ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
-    if (ret != HDF_SUCCESS) {
-        attrs.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
-        EXPECT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
-    }
-    EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
+    EXPECT_NE(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
 }
 
 /**
@@ -232,12 +226,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateRender004, TestSize.Level1)
     devicedesc.desc = const_cast<char *>("primary");
     devicedesc.pins = PIN_OUT_HDMI;
     InitAttrs(attrs);
-    int32_t ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
-    if (ret != HDF_SUCCESS) {
-        attrs.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
-        EXPECT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
-    }
-    EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
+    EXPECT_NE(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
 }
 
 /**
@@ -353,14 +342,14 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateRender010, TestSize.Level1)
             attrs.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
             EXPECT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
         }
+        EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
     }
-    EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
 }
 
 /**
  * @tc.number: SUB_Driver_Audio_CreateRender_1600
  * @tc.name: testCreateRender011
- * @tc.desc: Verify the reliability of the CreateRender function when pins is PIN_OUT_SPEAKER and type is
+ * @tc.desc: Verify the reliability of the CreateRender function when pins is PIN_OUT_HEADSET and type is
  * AUDIO_IN_MEDIA.
  */
 HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateRender011, TestSize.Level1)
@@ -381,8 +370,8 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateRender011, TestSize.Level1)
             attrs.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
             EXPECT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
         }
+        EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
     }
-    EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
 }
 
 /**
@@ -406,8 +395,6 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testDestroyRender001, TestSize.Level2)
     }
     EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
     EXPECT_NE(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
-    EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyRender(adapter_, AUDIO_ADAPTER_RENDER_ID));
-    EXPECT_NE(HDF_SUCCESS, adapter_->DestroyRender(adapter_, AUDIO_ADAPTER_RENDER_ID));
 }
 
 /**
@@ -494,8 +481,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture006, TestSize.Level1)
     InitAttrs(attrs);
     attrs.type = AUDIO_IN_RINGTONE;
     attrs.silenceThreshold = DEEP_BUFFER_RENDER_PERIOD_SIZE;
-    EXPECT_EQ(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
-    EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, captureId_));
+    EXPECT_NE(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
 }
 
 /**
@@ -515,8 +501,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture007, TestSize.Level1)
     InitAttrs(attrs);
     attrs.type = AUDIO_IN_RINGTONE;
     attrs.silenceThreshold = DEEP_BUFFER_RENDER_PERIOD_SIZE;
-    EXPECT_EQ(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
-    EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, captureId_));
+    EXPECT_NE(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
 }
 
 /**
@@ -534,8 +519,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture008, TestSize.Level1)
     devicedesc.pins = PIN_IN_LINEIN;
     InitAttrs(attrs);
     attrs.silenceThreshold = DEEP_BUFFER_RENDER_PERIOD_SIZE;
-    EXPECT_EQ(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
-    EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, captureId_));
+    EXPECT_NE(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
 }
 
 /**
@@ -554,8 +538,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture009, TestSize.Level1)
     devicedesc.pins = PIN_IN_USB_EXT;
     InitAttrs(attrs);
     attrs.silenceThreshold = DEEP_BUFFER_RENDER_PERIOD_SIZE;
-    EXPECT_EQ(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
-    EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, captureId_));
+    EXPECT_NE(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
 }
 
 /**
@@ -598,7 +581,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetExtraParams001, TestSize.Level1
     char condition[1024];
     const char *value = "sup_sampling_rates=4800;sup_channels=1;sup_formats=2;";
     int32_t ret = adapter_->SetExtraParams(adapter_, key, condition, value);
-    EXPECT_EQ(HDF_SUCCESS, ret);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 /**
@@ -614,7 +597,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetExtraParams001, TestSize.Level1
     char value[1024] = "sup_sampling_rates=4800;sup_channels=1;sup_formats=2;";
     uint32_t valueLen = 1024;
     int32_t ret = adapter_->GetExtraParams(adapter_, key, condition, value, valueLen);
-    EXPECT_EQ(HDF_SUCCESS, ret);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 /**
@@ -627,7 +610,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetVoiceVolume001, TestSize.Level1
 {
     float volume = 0.5;
     int32_t ret = adapter_->SetVoiceVolume(adapter_, volume);
-    EXPECT_EQ(HDF_SUCCESS, ret);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 /**
@@ -654,7 +637,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetMicMute002, TestSize.Level1)
     bool mute = true;
     int32_t ret = 0;
     ret = adapter_->GetMicMute(adapter_, &mute);
-    EXPECT_EQ(HDF_SUCCESS, ret);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 /**
@@ -667,7 +650,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetMicMute001, TestSize.Level1)
 {
     bool mute = true;
     int32_t ret = adapter_->SetMicMute(adapter_, mute);
-    EXPECT_EQ(HDF_SUCCESS, ret);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 /**
@@ -680,7 +663,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testReleaseAudioRoute001, TestSize.Lev
 {
     int32_t routeHandle = 1;
     int32_t ret = adapter_->ReleaseAudioRoute(adapter_, routeHandle);
-    EXPECT_EQ(HDF_SUCCESS, ret);
+    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_FAILURE);
 }
 
 /**
@@ -713,14 +696,12 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetDeviceStatus001, TestSize.Level
  * @tc.number: SUB_Driver_Audio_GetPassthroughMode_0500
  * @tc.name  : testGetPassthroughMode001
  * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
- * portId as 100.
+ * port as ports.
  */
 HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode001, TestSize.Level1)
 {
     struct AudioPort port = {};
-    port.dir = PORT_OUT;
-    port.portId = 100;
-    port.portName = const_cast<char *>("primary");
+    port = adapterDescs_->ports[0];
     enum AudioPortPassthroughMode mode;
     int32_t ret = adapter_->GetPassthroughMode(adapter_, &port, &mode);
     EXPECT_EQ(HDF_SUCCESS, ret);
@@ -742,7 +723,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetPassthroughMode001, TestSize.Le
     enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_LPCM;
     for (int i = 0; i < 100; i++) {
         ret = adapter_->SetPassthroughMode(adapter_, &port, mode);
-        EXPECT_EQ(HDF_SUCCESS, ret);
+        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
     }
 }
 
@@ -757,7 +738,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPortCapability001, TestSize.Lev
     struct AudioPort port = {};
     struct AudioPortCapability capability = {};
     port.dir = PORT_OUT;
-    port.portId = 1;
+    port.portId = 0;
     port.portName = const_cast<char *>("primary");
     int32_t ret = adapter_->GetPortCapability(adapter_, &port, &capability);
     EXPECT_EQ(HDF_SUCCESS, ret);

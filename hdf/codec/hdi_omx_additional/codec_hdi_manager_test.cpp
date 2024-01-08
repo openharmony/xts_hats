@@ -316,9 +316,10 @@ HWTEST_F(CodecHdiManagerTestAdditional, testCodecDestroyComponent001, Function |
 {
     ASSERT_TRUE(manager_ != nullptr);
     uint32_t componentId = 0;
+    int32_t ret;
     int i = 0;
     while (i < 50) {
-        int32_t ret = manager_->DestroyComponent(componentId);
+        ret = manager_->DestroyComponent(componentId);
         ASSERT_EQ(ret, HDF_SUCCESS);
         i++;
     }

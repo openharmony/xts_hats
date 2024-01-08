@@ -24,6 +24,7 @@ void CameraHdiTestV1_1::TearDownTestCase(void) {}
 void CameraHdiTestV1_1::SetUp(void)
 {
     cameraTest = std::make_shared<OHOS::Camera::Test>();
+    cameraTest->Init();
 }
 
 void CameraHdiTestV1_1::TearDown(void)
@@ -39,14 +40,6 @@ void CameraHdiTestV1_1::TearDown(void)
  */
 HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_Prelaunch_0100, TestSize.Level1)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     cameraTest->prelaunchConfig->cameraId = "device/0";
     cameraTest->prelaunchConfig->streamInfos_V1_1 = {};
@@ -54,6 +47,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_Prelaunch_0100, TestSize.Level1)
 
     cameraTest->rc = cameraTest->serviceV1_1->Prelaunch(*cameraTest->prelaunchConfig);
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->Open();
 }
 
 /**
@@ -64,14 +58,6 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_Prelaunch_0100, TestSize.Level1)
  */
 HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_Prelaunch_0200, TestSize.Level1)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     cameraTest->prelaunchConfig->cameraId = {};
     cameraTest->prelaunchConfig->streamInfos_V1_1 = {};
@@ -79,6 +65,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_Prelaunch_0200, TestSize.Level1)
 
     cameraTest->rc = cameraTest->serviceV1_1->Prelaunch(*cameraTest->prelaunchConfig);
     EXPECT_EQ(true, cameraTest->rc == INVALID_ARGUMENT);
+    cameraTest->Open();
 }
 
 /**
@@ -89,14 +76,6 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_Prelaunch_0200, TestSize.Level1)
  */
 HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_Prelaunch_0300, TestSize.Level1)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     cameraTest->prelaunchConfig->cameraId = "device/10";
     cameraTest->prelaunchConfig->streamInfos_V1_1 = {};
@@ -104,6 +83,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_Prelaunch_0300, TestSize.Level1)
 
     cameraTest->rc = cameraTest->serviceV1_1->Prelaunch(*cameraTest->prelaunchConfig);
     EXPECT_EQ(true, cameraTest->rc == INVALID_ARGUMENT);
+    cameraTest->Open();
 }
 
 /**
@@ -114,14 +94,6 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_Prelaunch_0300, TestSize.Level1)
  */
 HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_Prelaunch_0400, TestSize.Level1)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     cameraTest->prelaunchConfig->cameraId = "ABC123";
     cameraTest->prelaunchConfig->streamInfos_V1_1 = {};
@@ -129,6 +101,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_Prelaunch_0400, TestSize.Level1)
 
     cameraTest->rc = cameraTest->serviceV1_1->Prelaunch(*cameraTest->prelaunchConfig);
     EXPECT_EQ(true, cameraTest->rc == INVALID_ARGUMENT);
+    cameraTest->Open();
 }
 
 /**
@@ -139,14 +112,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_Prelaunch_0400, TestSize.Level1)
  */
 HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_Prelaunch_0500, TestSize.Level1)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     EXPECT_NE(cameraTest->ability, nullptr);
     common_metadata_header_t* data = cameraTest->ability->get();
     EXPECT_NE(data, nullptr);
@@ -164,14 +130,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_Prelaunch_0500, TestSize.Level1)
  */
 HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_GetDefaultSettings_0100, TestSize.Level1)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     EXPECT_EQ(true, cameraTest->cameraDevice != nullptr);
     cameraTest->rc = cameraTest->cameraDeviceV1_1->GetDefaultSettings(cameraTest->abilityVec);
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
@@ -185,14 +144,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_GetDefaultSettings_0100, TestSize.
  */
 HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_GetDefaultSettings_0200, TestSize.Level1)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     std::shared_ptr<CameraAbility> ability;
     std::shared_ptr<CameraAbility> abilitys;
     EXPECT_EQ(true, cameraTest->cameraDevice != nullptr);
@@ -231,14 +183,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_GetDefaultSettings_0200, TestSize.
  */
 HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_DelayStream_0100, TestSize.Level1)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
     cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,
         cameraTest->streamOperator_V1_1);
@@ -290,14 +235,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_DelayStream_0100, TestSize.Level1)
  */
 HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_QuickThumbnail_0100, TestSize.Level1)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     EXPECT_NE(cameraTest->ability, nullptr);
     common_metadata_header_t* data = cameraTest->ability->get();
     EXPECT_NE(data, nullptr);
@@ -316,15 +254,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_QuickThumbnail_0200, TestSize.Leve
 {
     int64_t timeStampCapture = 0;
     int64_t timeStampThumbnail = 0;
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-
     cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
     cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(
         cameraTest->streamOperatorCallback, cameraTest->streamOperator_V1_1);
@@ -382,17 +312,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_QuickThumbnail_0200, TestSize.Leve
  */
 HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_QuickThumbnail_0300, TestSize.Level1)
 {
-
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-
     cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
-
     cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
     cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(
         cameraTest->streamOperatorCallback, cameraTest->streamOperator_V1_1);
@@ -449,15 +369,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_QuickThumbnail_0300, TestSize.Leve
  */
 HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_QuickThumbnail_0400, TestSize.Level1)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
-
     cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
     cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(
         cameraTest->streamOperatorCallback, cameraTest->streamOperator_V1_1);
@@ -512,15 +424,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_QuickThumbnail_0400, TestSize.Leve
  */
 HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_QuickThumbnail_0500, TestSize.Level3)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
-
     cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
     cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(
         cameraTest->streamOperatorCallback, cameraTest->streamOperator_V1_1);
@@ -584,15 +488,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_QuickThumbnail_0500, TestSize.Leve
  */
 HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_QuickThumbnail_0600, TestSize.Level3)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
-
     cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
     cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(
         cameraTest->streamOperatorCallback, cameraTest->streamOperator_V1_1);

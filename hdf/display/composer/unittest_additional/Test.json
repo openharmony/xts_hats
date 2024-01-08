@@ -2,7 +2,7 @@
     "kits": [
         {
             "push": [
-                "HatsHdfDisplayComposerUtTestAdditional->/data/local/tmp/HatsHdfDisplayComposerUtTestAdditional"
+                "HatsHdfDisplayComposerAdditionalUtTest->/data/local/tmp/HatsHdfDisplayComposerAdditionalUtTest"
             ],
             "type": "PushKit"
         }
@@ -10,9 +10,9 @@
     "driver": {
         "native-test-timeout": "120000",
         "type": "CppTest",
-        "module-name": "HatsHdfDisplayComposerUtTestAdditional",
+        "module-name": "HatsHdfDisplayComposerAdditionalUtTest",
         "runtime-hint": "1s",
         "native-test-device-path": "/data/local/tmp"
     },
-    "description": "Configuration for HatsHdfDisplayComposerUtTestAdditional Tests"
+    "description": "Configuration for HatsHdfDisplayComposerAdditionalUtTest Tests"
 }

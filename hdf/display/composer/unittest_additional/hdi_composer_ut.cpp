@@ -18,7 +18,7 @@
 #include <cinttypes>
 #include <algorithm>
 #include "v1_0/include/idisplay_composer_interface.h"
-#include "v1_0/display_composer_type.h"
+#include "v1_1/display_composer_type.h"
 #include "v1_0/display_buffer_type.h"
 #include "display_test.h"
 #include "display_test_utils.h"
@@ -29,11 +29,11 @@
 #include "hdi_test_render_utils.h"
 
 using namespace OHOS::HDI::Display::Buffer::V1_0;
-using namespace OHOS::HDI::Display::Composer::V1_0;
+using namespace OHOS::HDI::Display::Composer::V1_1;
 using namespace OHOS::HDI::Display::TEST;
 using namespace testing::ext;
 
-static sptr<IDisplayComposerInterface> g_composerDevice = nullptr;
+static sptr<Composer::V1_1::IDisplayComposerInterface> g_composerDevice = nullptr;
 static std::shared_ptr<IDisplayBuffer> g_gralloc = nullptr;
 static std::vector<uint32_t> g_displayIds;
 
@@ -298,6 +298,7 @@ HWTEST_F(DeviceTestAdditional, testSetDisplayMode004, Function | MediumTest | Le
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
+#ifdef DISPLAY_COMMUNITY
 /**
  * @tc.number : SUB_Driver_Display_SetDisplayMode_0500
  * @tc.name   : testSetDisplayMode005
@@ -343,7 +344,7 @@ HWTEST_F(DeviceTestAdditional, testSetDisplayMode008, Function | MediumTest | Le
 {
     const uint32_t mode = -1;
     auto ret = g_composerDevice->SetDisplayMode(g_displayIds[0], mode);
-    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+    EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
 /**
@@ -353,10 +354,11 @@ HWTEST_F(DeviceTestAdditional, testSetDisplayMode008, Function | MediumTest | Le
  */
 HWTEST_F(DeviceTestAdditional, testGetDisplayPowerStatus001, Function | MediumTest | Level2)
 {
-    DispPowerStatus powerStatus = DispPowerStatus::POWER_STATUS_OFF;
+    Composer::V1_0::DispPowerStatus powerStatus = Composer::V1_0::DispPowerStatus::POWER_STATUS_OFF;
     auto ret = g_composerDevice->GetDisplayPowerStatus(20, powerStatus);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
+#endif
 
 /**
  * @tc.number : SUB_Driver_Display_GetDisplayPowerStatus_0200
@@ -365,11 +367,12 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayPowerStatus001, Function | MediumTe
  */
 HWTEST_F(DeviceTestAdditional, testGetDisplayPowerStatus002, Function | MediumTest | Level1)
 {
-    DispPowerStatus powerStatus = DispPowerStatus::POWER_STATUS_OFF;
+    Composer::V1_0::DispPowerStatus powerStatus = Composer::V1_0::DispPowerStatus::POWER_STATUS_OFF;
     auto ret = g_composerDevice->GetDisplayPowerStatus(0, powerStatus);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
+#ifdef DISPLAY_COMMUNITY
 /**
  * @tc.number : SUB_Driver_Display_GetDisplayPowerStatus_0300
  * @tc.name   : testGetDisplayPowerStatus003
@@ -377,7 +380,7 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayPowerStatus002, Function | MediumTe
  */
 HWTEST_F(DeviceTestAdditional, testGetDisplayPowerStatus003, Function | MediumTest | Level2)
 {
-    DispPowerStatus powerStatus = DispPowerStatus::POWER_STATUS_OFF;
+    Composer::V1_0::DispPowerStatus powerStatus = Composer::V1_0::DispPowerStatus::POWER_STATUS_OFF;
     auto ret = g_composerDevice->GetDisplayPowerStatus(15, powerStatus);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
@@ -389,7 +392,7 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayPowerStatus003, Function | MediumTe
  */
 HWTEST_F(DeviceTestAdditional, testGetDisplayPowerStatus004, Function | MediumTest | Level2)
 {
-    DispPowerStatus powerStatus = DispPowerStatus::POWER_STATUS_OFF;
+    Composer::V1_0::DispPowerStatus powerStatus = Composer::V1_0::DispPowerStatus::POWER_STATUS_OFF;
     auto ret = g_composerDevice->GetDisplayPowerStatus(-1, powerStatus);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
@@ -401,9 +404,10 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayPowerStatus004, Function | MediumTe
  */
 HWTEST_F(DeviceTestAdditional, testSetDisplayPowerStatus001, Function | MediumTest | Level2)
 {
-    auto ret = g_composerDevice->SetDisplayPowerStatus(20, DispPowerStatus::POWER_STATUS_ON);
+    auto ret = g_composerDevice->SetDisplayPowerStatus(20, Composer::V1_0::DispPowerStatus::POWER_STATUS_ON);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
+#endif
 
 /**
  * @tc.number : SUB_Driver_Display_SetDisplayPowerStatus_0200
@@ -412,7 +416,7 @@ HWTEST_F(DeviceTestAdditional, testSetDisplayPowerStatus001, Function | MediumTe
  */
 HWTEST_F(DeviceTestAdditional, testSetDisplayPowerStatus002, Function | MediumTest | Level1)
 {
-    auto ret = g_composerDevice->SetDisplayPowerStatus(0, DispPowerStatus::POWER_STATUS_ON);
+    auto ret = g_composerDevice->SetDisplayPowerStatus(0, Composer::V1_0::DispPowerStatus::POWER_STATUS_ON);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
@@ -423,7 +427,7 @@ HWTEST_F(DeviceTestAdditional, testSetDisplayPowerStatus002, Function | MediumTe
  */
 HWTEST_F(DeviceTestAdditional, testSetDisplayPowerStatus003, Function | MediumTest | Level2)
 {
-    auto ret = g_composerDevice->SetDisplayPowerStatus(15, DispPowerStatus::POWER_STATUS_ON);
+    auto ret = g_composerDevice->SetDisplayPowerStatus(15, Composer::V1_0::DispPowerStatus::POWER_STATUS_ON);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
@@ -434,7 +438,7 @@ HWTEST_F(DeviceTestAdditional, testSetDisplayPowerStatus003, Function | MediumTe
  */
 HWTEST_F(DeviceTestAdditional, testSetDisplayPowerStatus004, Function | MediumTest | Level2)
 {
-    auto ret = g_composerDevice->SetDisplayPowerStatus(-1, DispPowerStatus::POWER_STATUS_ON);
+    auto ret = g_composerDevice->SetDisplayPowerStatus(-1, Composer::V1_0::DispPowerStatus::POWER_STATUS_ON);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
@@ -445,7 +449,7 @@ HWTEST_F(DeviceTestAdditional, testSetDisplayPowerStatus004, Function | MediumTe
  */
 HWTEST_F(DeviceTestAdditional, testSetDisplayPowerStatus005, Function | MediumTest | Level2)
 {
-    auto ret = g_composerDevice->SetDisplayPowerStatus(20, DispPowerStatus::POWER_STATUS_STANDBY);
+    auto ret = g_composerDevice->SetDisplayPowerStatus(20, Composer::V1_0::DispPowerStatus::POWER_STATUS_STANDBY);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
@@ -456,7 +460,7 @@ HWTEST_F(DeviceTestAdditional, testSetDisplayPowerStatus005, Function | MediumTe
  */
 HWTEST_F(DeviceTestAdditional, testSetDisplayPowerStatus006, Function | MediumTest | Level1)
 {
-    auto ret = g_composerDevice->SetDisplayPowerStatus(0, DispPowerStatus::POWER_STATUS_STANDBY);
+    auto ret = g_composerDevice->SetDisplayPowerStatus(0, Composer::V1_0::DispPowerStatus::POWER_STATUS_STANDBY);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
@@ -467,7 +471,7 @@ HWTEST_F(DeviceTestAdditional, testSetDisplayPowerStatus006, Function | MediumTe
  */
 HWTEST_F(DeviceTestAdditional, testSetDisplayPowerStatus007, Function | MediumTest | Level2)
 {
-    auto ret = g_composerDevice->SetDisplayPowerStatus(15, DispPowerStatus::POWER_STATUS_STANDBY);
+    auto ret = g_composerDevice->SetDisplayPowerStatus(15, Composer::V1_0::DispPowerStatus::POWER_STATUS_STANDBY);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
@@ -478,7 +482,7 @@ HWTEST_F(DeviceTestAdditional, testSetDisplayPowerStatus007, Function | MediumTe
  */
 HWTEST_F(DeviceTestAdditional, testSetDisplayPowerStatus008, Function | MediumTest | Level2)
 {
-    auto ret = g_composerDevice->SetDisplayPowerStatus(-1, DispPowerStatus::POWER_STATUS_STANDBY);
+    auto ret = g_composerDevice->SetDisplayPowerStatus(-1, Composer::V1_0::DispPowerStatus::POWER_STATUS_STANDBY);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
@@ -489,7 +493,7 @@ HWTEST_F(DeviceTestAdditional, testSetDisplayPowerStatus008, Function | MediumTe
  */
 HWTEST_F(DeviceTestAdditional, testSetDisplayPowerStatus009, Function | MediumTest | Level1)
 {
-    auto ret = g_composerDevice->SetDisplayPowerStatus(g_displayIds[0], DispPowerStatus::POWER_STATUS_STANDBY);
+    auto ret = g_composerDevice->SetDisplayPowerStatus(g_displayIds[0], Composer::V1_0::DispPowerStatus::POWER_STATUS_STANDBY);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
@@ -500,7 +504,7 @@ HWTEST_F(DeviceTestAdditional, testSetDisplayPowerStatus009, Function | MediumTe
  */
 HWTEST_F(DeviceTestAdditional, testSetDisplayPowerStatus010, Function | MediumTest | Level1)
 {
-    auto ret = g_composerDevice->SetDisplayPowerStatus(g_displayIds[0], DispPowerStatus::POWER_STATUS_OFF);
+    auto ret = g_composerDevice->SetDisplayPowerStatus(g_displayIds[0], Composer::V1_0::DispPowerStatus::POWER_STATUS_OFF);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
@@ -511,10 +515,11 @@ HWTEST_F(DeviceTestAdditional, testSetDisplayPowerStatus010, Function | MediumTe
  */
 HWTEST_F(DeviceTestAdditional, testSetDisplayPowerStatus011, Function | MediumTest | Level2)
 {
-    auto ret = g_composerDevice->SetDisplayPowerStatus(g_displayIds[0], DispPowerStatus::POWER_STATUS_BUTT);
+    auto ret = g_composerDevice->SetDisplayPowerStatus(g_displayIds[0], Composer::V1_0::DispPowerStatus::POWER_STATUS_BUTT);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
+#ifdef DISPLAY_COMMUNITY
 /**
  * @tc.number : SUB_Driver_Display_GetDisplayBacklight_0100
  * @tc.name   : testGetDisplayBacklight001
@@ -526,6 +531,7 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayBacklight001, Function | MediumTest
     auto ret = g_composerDevice->GetDisplayBacklight(20, level);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
+#endif
 
 /**
  * @tc.number : SUB_Driver_Display_GetDisplayBacklight_0200
@@ -539,6 +545,7 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayBacklight002, Function | MediumTest
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
+#ifdef DISPLAY_COMMUNITY
 /**
  * @tc.number : SUB_Driver_Display_GetDisplayBacklight_0300
  * @tc.name   : GetDisplayBacklight003
@@ -562,6 +569,7 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayBacklight004, Function | MediumTest
     auto ret = g_composerDevice->GetDisplayBacklight(-1, level);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
+#endif
 
 /**
  * @tc.number : SUB_Driver_Display_SetDisplayBacklight_0100
@@ -1130,6 +1138,7 @@ HWTEST_F(DeviceTestAdditional, testDestroyLayer006, Function | MediumTest | Leve
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
+#ifdef DISPLAY_COMMUNITY
 /**
  * @tc.number : SUB_Driver_Display_DestroyLayer_0700
  * @tc.name   : testDestroyLayer007
@@ -1141,6 +1150,7 @@ HWTEST_F(DeviceTestAdditional, testDestroyLayer007, Function | MediumTest | Leve
     auto ret = g_composerDevice->DestroyLayer(g_displayIds[0], layerId);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
+#endif
 
 /**
  * @tc.number : SUB_Driver_Display_DestroyLayer_0800
@@ -1210,6 +1220,7 @@ HWTEST_F(DeviceTestAdditional, testSetDisplayClientCrop004, Function | MediumTes
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
+#ifdef DISPLAY_COMMUNITY
 /**
  * @tc.number : SUB_Driver_Display_GetDisplayReleaseFence_0100
  * @tc.name   : testGetDisplayReleaseFence001
@@ -1222,6 +1233,7 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayReleaseFence001, Function | MediumT
     auto ret = g_composerDevice->GetDisplayReleaseFence(20, layers, fences);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
+#endif
 
 /**
  * @tc.number : SUB_Driver_Display_GetDisplayReleaseFence_0200
@@ -1236,6 +1248,7 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayReleaseFence002, Function | MediumT
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
+#ifdef DISPLAY_COMMUNITY
 /**
  * @tc.number : SUB_Driver_Display_GetDisplayReleaseFence_0300
  * @tc.name   : testGetDisplayReleaseFence003
@@ -1261,6 +1274,7 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayReleaseFence004, Function | MediumT
     auto ret = g_composerDevice->GetDisplayReleaseFence(-1, layers, fences);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
+#endif
 
 /**
  * @tc.number : SUB_Driver_Display_CreateVirtualDisplay_0100

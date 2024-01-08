@@ -15,7 +15,7 @@ import("//build/ohos_var.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/audio"
-ohos_moduletest_suite("HatsHdfAudioIdlRenderTestAdditional") {
+ohos_moduletest_suite("HatsHdfAudioIdlRenderAdditionalTest") {
   module_out_path = module_output_path
   sources = [
     "src/AudioRenderCommonTest.cpp",
@@ -27,7 +27,7 @@ ohos_moduletest_suite("HatsHdfAudioIdlRenderTestAdditional") {
   external_deps = [
     "c_utils:utils",
     "drivers_interface_audio:audio_idl_headers",
-    "drivers_interface_audio:libaudio_proxy_1.0",
+    "drivers_interface_audio:libaudio_proxy_2.0",
     "hdf_core:libhdf_utils",
     "hilog:libhilog",
   ]

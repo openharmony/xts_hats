@@ -21,12 +21,12 @@ group("HatsHdfCodecTest") {
     testonly = true
     deps = [
       #"benchmarktest:HatsHdfCodecBenchmarkTest",
-      "benchmarktest_additional:HatsHdfCodecBenchmarkTestAdditional",
+      "benchmarktest_additional:HatsHdfCodecBenchmarkAdditionalTest",
       "hdi_adapter:HatsHdfAdapterCodecTest",
       "hdi_image:HatsHdfImageCodecTest",
-      "hdi_image_additional:HatsHdfImageCodecTestAdditional",
+      "hdi_image_additional:HatsHdfImageCodecAdditionalTest",
       "hdi_omx:HatsHdfOmxCodecTest",
-      "hdi_omx_additional:HatsHdfOmxCodecTestAdditional",
+      "hdi_omx_additional:HatsHdfOmxCodecAdditionalTest",
       "hdi_v1.0:HatsHdfV1CodecTest",
     ]
   } else {

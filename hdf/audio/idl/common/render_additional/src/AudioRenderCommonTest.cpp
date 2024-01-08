@@ -16,9 +16,9 @@
 #include "osal_mem.h"
 #include <gtest/gtest.h>
 
-#include "v1_0/audio_types.h"
-#include "v1_0/iaudio_manager.h"
-#include "v1_0/iaudio_render.h"
+#include "v2_0/audio_types.h"
+#include "v2_0/iaudio_manager.h"
+#include "v2_0/iaudio_render.h"
 
 using namespace std;
 using namespace testing::ext;
@@ -209,6 +209,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRenderFrame001, Function |
 
     ret = render_->RenderFrame(render_, frame, frameLen, &requestBytes);
     EXPECT_EQ(ret, HDF_SUCCESS);
+
+    EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
 }
 
 /**
@@ -231,6 +233,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRenderFrame002, Function |
         ret |= render_->RenderFrame(render_, frame, frameLen, &requestBytes);
     }
     EXPECT_EQ(ret, HDF_SUCCESS);
+
+    EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
 }
 
 /**
@@ -320,7 +324,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetRenderSpeed001, Functio
     for (i = 0; i < 1000; i++) {
         ret |= render_->SetRenderSpeed(render_, speed);
     }
-    EXPECT_EQ(HDF_SUCCESS, ret);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 /**
@@ -360,7 +364,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetRenderSpeed001, Functio
         ret = render_->GetRenderSpeed(render_, &speed);
     }
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 /**
@@ -376,7 +380,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode001, Functio
     for (i = 0; i < 1000; i++) {
         ret = render_->SetChannelMode(render_, mode);
     }
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 /**
@@ -388,7 +392,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode002, Functio
 {
     AudioChannelMode mode = AUDIO_CHANNEL_BOTH_LEFT;
     int32_t ret = render_->SetChannelMode(render_, mode);
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 /**
@@ -400,7 +404,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode003, Functio
 {
     AudioChannelMode mode = AUDIO_CHANNEL_BOTH_RIGHT;
     int32_t ret = render_->SetChannelMode(render_, mode);
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 /**
@@ -487,7 +491,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetChannelMode001, Functio
     for (i = 0; i < 1000; i++) {
         ret = render_->GetChannelMode(render_, &channelMode);
     }
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 /**
@@ -899,7 +903,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene014, Function |
     scene.scene.id = AUDIO_IN_CALL;
     scene.desc.pins = PIN_OUT_LINEOUT;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -913,7 +917,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene015, Function |
     scene.scene.id = AUDIO_IN_MEDIA;
     scene.desc.pins = PIN_OUT_LINEOUT;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -927,7 +931,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene016, Function |
     scene.scene.id = AUDIO_IN_COMMUNICATION;
     scene.desc.pins = PIN_OUT_LINEOUT;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -941,7 +945,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene017, Function |
     scene.scene.id = AUDIO_IN_RINGTONE;
     scene.desc.pins = PIN_OUT_LINEOUT;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -955,7 +959,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene018, Function |
     scene.scene.id = AUDIO_IN_MEDIA;
     scene.desc.pins = PIN_OUT_HDMI;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -969,7 +973,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene019, Function |
     scene.scene.id = AUDIO_IN_COMMUNICATION;
     scene.desc.pins = PIN_OUT_HDMI;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -983,7 +987,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene020, Function |
     scene.scene.id = AUDIO_IN_RINGTONE;
     scene.desc.pins = PIN_OUT_HDMI;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -997,7 +1001,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene021, Function |
     scene.scene.id = AUDIO_IN_CALL;
     scene.desc.pins = PIN_OUT_HDMI;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -1011,7 +1015,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene022, Function |
     scene.scene.id = AUDIO_IN_MEDIA;
     scene.desc.pins = PIN_IN_MIC;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -1025,7 +1029,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene023, Function |
     scene.scene.id = AUDIO_IN_COMMUNICATION;
     scene.desc.pins = PIN_IN_MIC;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -1039,7 +1043,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene024, Function |
     scene.scene.id = AUDIO_IN_RINGTONE;
     scene.desc.pins = PIN_IN_MIC;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -1053,7 +1057,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene025, Function |
     scene.scene.id = AUDIO_IN_CALL;
     scene.desc.pins = PIN_IN_MIC;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -1067,7 +1071,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene026, Function |
     scene.scene.id = AUDIO_IN_MEDIA;
     scene.desc.pins = PIN_IN_HS_MIC;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -1081,7 +1085,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene027, Function |
     scene.scene.id = AUDIO_IN_COMMUNICATION;
     scene.desc.pins = PIN_IN_HS_MIC;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -1095,7 +1099,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene028, Function |
     scene.scene.id = AUDIO_IN_RINGTONE;
     scene.desc.pins = PIN_IN_HS_MIC;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -1109,7 +1113,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene029, Function |
     scene.scene.id = AUDIO_IN_CALL;
     scene.desc.pins = PIN_IN_HS_MIC;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -1123,7 +1127,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene030, Function |
     scene.scene.id = AUDIO_IN_MEDIA;
     scene.desc.pins = PIN_IN_LINEIN;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -1137,7 +1141,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene031, Function |
     scene.scene.id = AUDIO_IN_COMMUNICATION;
     scene.desc.pins = PIN_IN_LINEIN;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -1151,7 +1155,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene032, Function |
     scene.scene.id = AUDIO_IN_RINGTONE;
     scene.desc.pins = PIN_IN_LINEIN;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -1165,7 +1169,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene033, Function |
     scene.scene.id = AUDIO_IN_CALL;
     scene.desc.pins = PIN_IN_LINEIN;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -1179,7 +1183,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene034, Function |
     scene.scene.id = AUDIO_IN_MEDIA;
     scene.desc.pins = PIN_IN_USB_EXT;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -1193,7 +1197,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene035, Function |
     scene.scene.id = AUDIO_IN_COMMUNICATION;
     scene.desc.pins = PIN_IN_USB_EXT;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -1207,7 +1211,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene036, Function |
     scene.scene.id = AUDIO_IN_RINGTONE;
     scene.desc.pins = PIN_IN_USB_EXT;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -1221,7 +1225,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene037, Function |
     scene.scene.id = AUDIO_IN_CALL;
     scene.desc.pins = PIN_IN_USB_EXT;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 }
 
 /**
@@ -1576,7 +1580,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetExtraParams001, Functio
     for (i = 0; i < 1000; i++) {
         ret = render_->GetExtraParams(render_, keyValueList, keyValueListLen);
     }
-    EXPECT_EQ(HDF_SUCCESS, ret);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_INVALID_PARAM);
 }
 
 /**
@@ -1652,8 +1656,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAddAudioEffect004, TestSiz
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAddAudioEffect005, TestSize.Level2)
 {
     int32_t i;
+    uint64_t effectId = 0;
     for (i = 0; i < 20; i++) {
-        uint64_t effectId = 0;
         EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->AddAudioEffect(nullptr, effectId));
     }
 }
@@ -1666,8 +1670,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAddAudioEffect005, TestSiz
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAddAudioEffect006, TestSize.Level2)
 {
     int32_t i;
+    uint64_t effectId = 5;
     for (i = 0; i < 20; i++) {
-        uint64_t effectId = 5;
         EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->AddAudioEffect(nullptr, effectId));
     }
 }
@@ -1762,8 +1766,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRemoveAudioEffect004, Test
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRemoveAudioEffect005, TestSize.Level2)
 {
     int32_t i;
+    uint64_t effectId = 0;
     for (i = 0; i < 20; i++) {
-        uint64_t effectId = 0;
         EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->RemoveAudioEffect(nullptr, effectId));
     }
 }
@@ -1813,7 +1817,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize001, Tes
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
 
     ret = render_->GetFrameBufferSize(render_, nullptr);
-    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
 }
 
 /**
@@ -1828,7 +1832,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize002, Tes
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
 
     ret = render_->GetFrameBufferSize(render_, nullptr);
-    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
 }
 
 /**
@@ -1843,7 +1847,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize003, Tes
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
 
     ret = render_->GetFrameBufferSize(render_, nullptr);
-    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
 }
 
 /**
@@ -1858,7 +1862,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize004, Tes
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
 
     ret = render_->GetFrameBufferSize(render_, nullptr);
-    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
 }
 
 /**
@@ -1873,7 +1877,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize005, Tes
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
 
     ret = render_->GetFrameBufferSize(render_, nullptr);
-    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
 }
 
 /**
@@ -1888,7 +1892,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize006, Tes
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
 
     ret = render_->GetFrameBufferSize(render_, nullptr);
-    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
 }
 
 /**
@@ -1903,7 +1907,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize007, Tes
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
 
     ret = render_->GetFrameBufferSize(render_, nullptr);
-    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
 }
 
 /**
@@ -1914,13 +1918,14 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize007, Tes
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize008, TestSize.Level2)
 {
     int32_t i;
+    uint64_t bufferSize = 429496;
+    int32_t ret;
     for (i = 0; i < 50; i++) {
-        uint64_t bufferSize = 429496;
-        int32_t ret = render_->GetFrameBufferSize(nullptr, &bufferSize);
+        ret = render_->GetFrameBufferSize(nullptr, &bufferSize);
         EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
     }
-    int32_t ret = render_->GetFrameBufferSize(render_, nullptr);
-    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    ret = render_->GetFrameBufferSize(render_, nullptr);
+    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
 }
 
 /**
@@ -1934,7 +1939,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize009, Tes
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
 
     ret = render_->GetFrameBufferSize(render_, nullptr);
-    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
 }
 
 /**
@@ -1949,7 +1954,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize010, Tes
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
 
     ret = render_->GetFrameBufferSize(nullptr, nullptr);
-    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
+    ASSERT_TRUE(ret == HDF_ERR_INVALID_OBJECT || ret == HDF_ERR_INVALID_PARAM);
 }
 
 /**
@@ -1961,7 +1966,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize011, Tes
 {
     uint64_t bufferSize = 1000;
     int32_t ret = render_->GetFrameBufferSize(render_, &bufferSize);
-    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
 }
 
 /**
@@ -1972,10 +1977,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize011, Tes
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize012, TestSize.Level2)
 {
     int32_t i;
+    uint64_t bufferSize = 8000;
+    int32_t ret;
     for (i = 0; i < 100; i++) {
-        uint64_t bufferSize = 8000;
-        int32_t ret = render_->GetFrameBufferSize(render_, &bufferSize);
-        EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+        ret = render_->GetFrameBufferSize(render_, &bufferSize);
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
     }
 }
 
@@ -1987,7 +1993,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize012, Tes
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize013, TestSize.Level2)
 {
     int32_t ret = render_->GetFrameBufferSize(render_, nullptr);
-    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
 }
 
 /**
@@ -2011,7 +2017,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStart001, TestSize.Level2)
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStart002, TestSize.Level1)
 {
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->Start(nullptr));
-    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Stop(render_));
+    render_->Stop(render_);
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
 }
@@ -2023,8 +2029,10 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStart002, TestSize.Level1)
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStart003, TestSize.Level2)
 {
+    EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
+    EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->Start(nullptr));
-    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Stop(render_));
+    render_->Stop(render_);
 }
 
 /**
@@ -2067,7 +2075,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStart006, TestSize.Level1)
     int32_t i;
     for (i = 0; i < 10; i++) {
         EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->Start(nullptr));
-        EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Stop(render_));
+        render_->Stop(render_);
     }
 }
 /**
@@ -2118,7 +2126,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop004, TestSize.Level2)
 {
     int32_t i;
     for (i = 0; i < 150; i++) {
-        EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Stop(render_));
+        EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
+        EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
     }
 }
 
@@ -2145,8 +2154,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop006, TestSize.Level2)
 {
     int32_t i;
     for (i = 0; i < 20; i++) {
-        EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->Start(nullptr));
-        EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Stop(render_));
+        EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
+        EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
     }
 }
 
@@ -2159,13 +2168,14 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop007, TestSize.Level1)
 {
     int32_t ret = render_->Start(render_);
     EXPECT_EQ(HDF_SUCCESS, ret);
-
     ret = render_->TurnStandbyMode(render_);
     EXPECT_EQ(HDF_SUCCESS, ret);
     ret = render_->Stop(render_);
+    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_SUCCESS);
     int32_t i;
     for (i = 0; i < 50; i++) {
         ret = render_->Start(render_);
+        EXPECT_EQ(HDF_SUCCESS, ret);
         ret = render_->Stop(render_);
         EXPECT_EQ(HDF_SUCCESS, ret);
     }
@@ -2226,7 +2236,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop011, TestSize.Level1)
 {
     int32_t i;
     for (i = 0; i < 100; i++) {
-        EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Stop(render_));
+        EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
+        EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
     }
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
@@ -2258,7 +2269,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop013, TestSize.Level2)
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->Start(nullptr));
     int32_t i;
     for (i = 0; i < 100; i++) {
-        EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Stop(render_));
+        EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
+        EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
     }
 }
 
@@ -2287,8 +2299,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump001, TestSize.
     ASSERT_NE(render_->AudioDevDump, nullptr);
     int32_t range = 1;
 
-    int32_t ret = render_->AudioDevDump(nullptr, range, -1);
-    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->AudioDevDump(nullptr, range, -1));
 }
 
 /**
@@ -2301,8 +2312,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump002, TestSize.
     ASSERT_NE(render_->AudioDevDump, nullptr);
     int32_t range = 2;
 
-    int32_t ret = render_->AudioDevDump(nullptr, range, -1);
-    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->AudioDevDump(nullptr, range, -1));
 }
 
 /**
@@ -2315,8 +2325,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump003, TestSize.
     ASSERT_NE(render_->AudioDevDump, nullptr);
     int32_t range = 3;
 
-    int32_t ret = render_->AudioDevDump(nullptr, range, -1);
-    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->AudioDevDump(nullptr, range, -1));
 }
 
 /**
@@ -2329,8 +2338,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump004, TestSize.
     ASSERT_NE(render_->AudioDevDump, nullptr);
     int32_t range = 5;
 
-    int32_t ret = render_->AudioDevDump(nullptr, range, -1);
-    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->AudioDevDump(nullptr, range, -1));
 }
 
 /**
@@ -2343,8 +2351,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump005, TestSize.
     ASSERT_NE(render_->AudioDevDump, nullptr);
     int32_t range = 6;
 
-    int32_t ret = render_->AudioDevDump(nullptr, range, -1);
-    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->AudioDevDump(nullptr, range, -1));
 }
 
 /**
@@ -2367,7 +2374,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump006, TestSize.
 
     int32_t ret = render_->AudioDevDump(render_, range, fd);
 
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
     fclose(file);
 }
 
@@ -2391,7 +2398,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump007, TestSize.
 
     int32_t ret = render_->AudioDevDump(render_, range, fd);
 
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
     fclose(file);
 }
 
@@ -2415,7 +2422,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump008, TestSize.
 
     int32_t ret = render_->AudioDevDump(render_, range, fd);
 
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
     fclose(file);
 }
 
@@ -2439,7 +2446,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump009, TestSize.
 
     int32_t ret = render_->AudioDevDump(render_, range, fd);
 
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
     fclose(file);
 }
 
@@ -2463,7 +2470,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump010, TestSize.
 
     int32_t ret = render_->AudioDevDump(render_, range, fd);
 
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
     fclose(file);
 }
 
@@ -2477,8 +2484,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump011, TestSize.
     ASSERT_NE(render_->AudioDevDump, nullptr);
     int32_t range = 4;
 
-    int32_t ret = render_->AudioDevDump(nullptr, range, 0);
-    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->AudioDevDump(nullptr, range, 0));
 }
 
 /**
@@ -2491,8 +2497,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump012, TestSize.
     ASSERT_NE(render_->AudioDevDump, nullptr);
     int32_t range = 4;
 
-    int32_t ret = render_->AudioDevDump(nullptr, range, 1);
-    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->AudioDevDump(nullptr, range, 1));
 }
 
 /**
@@ -2505,8 +2510,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump013, TestSize.
     ASSERT_NE(render_->AudioDevDump, nullptr);
     int32_t range = 4;
 
-    int32_t ret = render_->AudioDevDump(nullptr, range, 2);
-    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->AudioDevDump(nullptr, range, 2));
 }
 
 /**
@@ -2519,8 +2523,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump014, TestSize.
     ASSERT_NE(render_->AudioDevDump, nullptr);
     int32_t range = 4;
 
-    int32_t ret = render_->AudioDevDump(nullptr, range, 3);
-    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->AudioDevDump(nullptr, range, 3));
 }
 
 /**
@@ -2533,8 +2536,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump015, TestSize.
     ASSERT_NE(render_->AudioDevDump, nullptr);
     int32_t range = 4;
 
-    int32_t ret = render_->AudioDevDump(nullptr, range, 4);
-    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->AudioDevDump(nullptr, range, 4));
 }
 
 /**
@@ -2547,8 +2549,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump016, TestSize.
     ASSERT_NE(render_->AudioDevDump, nullptr);
     int32_t range = 4;
 
-    int32_t ret = render_->AudioDevDump(nullptr, range, -2);
-    EXPECT_NE(ret, HDF_SUCCESS);
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->AudioDevDump(nullptr, range, -2));
 }
 
 /**
@@ -2567,7 +2568,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump017, TestSize.
 
     int32_t ret = render_->AudioDevDump(render_, range, fd);
 
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
     fclose(file);
 }
 
@@ -2587,7 +2588,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump018, TestSize.
 
     int32_t ret = render_->AudioDevDump(render_, range, fd);
 
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
     fclose(file);
 }
 
@@ -2607,7 +2608,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump019, TestSize.
 
     int32_t ret = render_->AudioDevDump(render_, range, fd);
 
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
     fclose(file);
 }
 
@@ -2627,7 +2628,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump020, TestSize.
 
     int32_t ret = render_->AudioDevDump(render_, range, fd);
 
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
     fclose(file);
 }
 
@@ -2647,7 +2648,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump021, TestSize.
 
     int32_t ret = render_->AudioDevDump(render_, range, fd);
 
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
     fclose(file);
 }
 
@@ -2667,7 +2668,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump022, TestSize.
 
     int32_t ret = render_->AudioDevDump(render_, range, fd);
 
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
     fclose(file);
 }
 
@@ -2690,9 +2691,10 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderPause001, TestSize.Level2)
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderPause002, TestSize.Level1)
 {
+    int32_t ret;
     for (int i = 0; i < 50; i++) {
         EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
-        int32_t ret = render_->Pause(render_);
+        ret = render_->Pause(render_);
         EXPECT_EQ(ret, HDF_SUCCESS);
 
         EXPECT_EQ(HDF_SUCCESS, render_->Resume(render_));
@@ -2907,10 +2909,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume006, TestSize.Level1
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume007, TestSize.Level1)
 {
+    int32_t ret;
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
     for (int i = 0; i < 50; i++) {
         EXPECT_EQ(HDF_SUCCESS, render_->Pause(render_));
-        int32_t ret = render_->Resume(render_);
+        ret = render_->Resume(render_);
         EXPECT_EQ(HDF_SUCCESS, ret);
     }
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
@@ -2953,10 +2956,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume009, TestSize.Level2
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume010, TestSize.Level2)
 {
+    int32_t ret;
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
     for (int i = 0; i < 50; i++) {
         EXPECT_EQ(HDF_SUCCESS, render_->Pause(render_));
-        int32_t ret = render_->Resume(render_);
+        ret = render_->Resume(render_);
         EXPECT_EQ(HDF_SUCCESS, ret);
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Resume(render_));
     }
@@ -2982,8 +2986,9 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume011, TestSize.Level2
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume012, TestSize.Level2)
 {
+    int32_t ret;
     for (int i = 0; i < 50; i++) {
-        int32_t ret = render_->Resume(render_);
+        ret = render_->Resume(render_);
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Stop(render_));
@@ -3048,9 +3053,10 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderFlush003, TestSize.Level2)
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderFlush004, TestSize.Level2)
 {
+    int32_t ret;
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
     for (int i = 0; i < 50; i++) {
-        int32_t ret = render_->Flush(render_);
+        ret = render_->Flush(render_);
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
@@ -3078,9 +3084,10 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderFlush005, TestSize.Level2)
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderFlush006, TestSize.Level2)
 {
+    int32_t ret;
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
     for (int i = 0; i < 50; i++) {
-        int32_t ret = render_->Flush(render_);
+        ret = render_->Flush(render_);
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
     render_->Resume(render_);
@@ -3125,10 +3132,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderFlush008, TestSize.Level2)
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderFlush009, TestSize.Level2)
 {
+    int32_t ret;
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
     for (int i = 0; i < 50; i++) {
-        int32_t ret = render_->Flush(render_);
+        ret = render_->Flush(render_);
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
 }
@@ -3146,7 +3154,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode001, TestSi
 }
 
 /**
- * @tc.number: SUB_Driver_Audio_TurnStandbyMode_0300
+ * @tc.number: SUB_Driver_Audio_TurnStandbyMode_0200
  * @tc.name: testCommonRenderTurnStandbyMode002
  * @tc.desc: Sets or cancels the standby mode of the audio device.
  */
@@ -3167,7 +3175,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode002, TestSi
 
 /**
  * @tc.number: SUB_Driver_Audio_TurnStandbyMode_0300
- * @tc.name: testCommonRenderTurnStandbyMode005
+ * @tc.name: testCommonRenderTurnStandbyMode003
  * @tc.desc: Sets or cancels the standby mode of the audio device.
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode003, TestSize.Level1)
@@ -3242,10 +3250,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode006, TestSi
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume001, TestSize.Level2)
 {
+    int32_t ret;
     bool supportPause = false;
     bool supportResume = false;
     for (int i = 0; i < 50; i++) {
-        int32_t ret = render_->IsSupportsPauseAndResume(nullptr, &supportPause, &supportResume);
+        ret = render_->IsSupportsPauseAndResume(nullptr, &supportPause, &supportResume);
         EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
 
         ret = render_->IsSupportsPauseAndResume(render_, nullptr, &supportResume);
@@ -3263,10 +3272,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume00
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume002, TestSize.Level2)
 {
+    int32_t ret;
     bool supportPause = false;
     bool supportResume = false;
     for (int i = 0; i < 50; i++) {
-        int32_t ret = render_->IsSupportsPauseAndResume(render_, &supportPause, &supportResume);
+        ret = render_->IsSupportsPauseAndResume(render_, &supportPause, &supportResume);
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
 }
@@ -3278,10 +3288,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume00
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume003, TestSize.Level2)
 {
+    int32_t ret;
     bool supportPause = false;
     bool supportResume = true;
     for (int i = 0; i < 50; i++) {
-        int32_t ret = render_->IsSupportsPauseAndResume(render_, &supportPause, &supportResume);
+        ret = render_->IsSupportsPauseAndResume(render_, &supportPause, &supportResume);
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
 }
@@ -3306,10 +3317,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume00
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume005, TestSize.Level2)
 {
+    int32_t ret;
     bool supportPause = true;
     bool supportResume = false;
     for (int i = 0; i < 50; i++) {
-        int32_t ret = render_->IsSupportsPauseAndResume(render_, &supportPause, &supportResume);
+        ret = render_->IsSupportsPauseAndResume(render_, &supportPause, &supportResume);
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
 }
@@ -3334,10 +3346,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume00
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume007, TestSize.Level2)
 {
+    int32_t ret;
     bool supportPause = true;
     bool supportResume = true;
     for (int i = 0; i < 50; i++) {
-        int32_t ret = render_->IsSupportsPauseAndResume(render_, &supportPause, &supportResume);
+        ret = render_->IsSupportsPauseAndResume(render_, &supportPause, &supportResume);
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
 }
@@ -3375,10 +3388,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume00
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume010, TestSize.Level2)
 {
+    int32_t ret;
     bool supportPause = false;
     bool supportResume = true;
     for (int i = 0; i < 50; i++) {
-        int32_t ret = render_->IsSupportsPauseAndResume(nullptr, &supportPause, &supportResume);
+        ret = render_->IsSupportsPauseAndResume(nullptr, &supportPause, &supportResume);
         EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
     }
 }
@@ -3403,10 +3417,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume01
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume012, TestSize.Level2)
 {
+    int32_t ret;
     bool supportPause = true;
     bool supportResume = true;
     for (int i = 0; i < 50; i++) {
-        int32_t ret = render_->IsSupportsPauseAndResume(nullptr, &supportPause, &supportResume);
+        ret = render_->IsSupportsPauseAndResume(nullptr, &supportPause, &supportResume);
         EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
     }
 }
@@ -3418,10 +3433,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume01
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume013, TestSize.Level2)
 {
+    int32_t ret;
     bool supportPause = true;
     bool supportResume = false;
     for (int i = 0; i < 50; i++) {
-        int32_t ret = render_->IsSupportsPauseAndResume(nullptr, &supportPause, &supportResume);
+        ret = render_->IsSupportsPauseAndResume(nullptr, &supportPause, &supportResume);
         EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
     }
 }

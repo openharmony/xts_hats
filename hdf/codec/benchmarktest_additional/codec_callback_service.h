@@ -13,15 +13,15 @@
  * limitations under the License.
  */
 
-#ifndef OHOS_HDI_CODEC_V1_0_CODECCALLBACKSERVICE_H
-#define OHOS_HDI_CODEC_V1_0_CODECCALLBACKSERVICE_H
+#ifndef OHOS_HDI_CODEC_V2_0_CODECCALLBACKSERVICE_H
+#define OHOS_HDI_CODEC_V2_0_CODECCALLBACKSERVICE_H
 
-#include "v1_0/icodec_callback.h"
+#include "v2_0/icodec_callback.h"
 
 namespace OHOS {
 namespace HDI {
 namespace Codec {
-namespace V1_0 {
+namespace V2_0 {
 class CodecCallbackService : public ICodecCallback {
 public:
     CodecCallbackService() = default;

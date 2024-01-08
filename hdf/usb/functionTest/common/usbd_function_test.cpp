@@ -66,313 +66,316 @@ void UsbdFunctionTest::SetUp(void) {}
 void UsbdFunctionTest::TearDown(void) {}
 
 /**
- * @tc.name: SUB_USB_HDI_1250
+ * @tc.name: SUB_USB_DeviceManager_HDI_Func_0300
  * @tc.desc: Test functions to GetCurrentFunctions
  * @tc.desc: int32_t GetCurrentFunctions(int32_t &funcs);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1250, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_DeviceManager_HDI_Func_0300, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_NONE;
     auto ret = g_usbInterface->GetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1250 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Func_0300 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1260
+ * @tc.name: SUB_USB_DeviceManager_HDI_Func_0400
  * @tc.desc: Test functions to GetCurrentFunctions
  * @tc.desc: int32_t GetCurrentFunctions(int32_t &funcs);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1260, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_DeviceManager_HDI_Func_0400, Function | MediumTest | Level1)
 {
     auto ret = g_usbInterface->SetCurrentFunctions(USB_FUNCTION_ACM);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1270 %{public}d SetCurrentFunctions=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Func_0400 %{public}d SetCurrentFunctions=%{public}d",
+        __LINE__, ret);
     ASSERT_EQ(0, ret);
     int32_t funcs = USB_FUNCTION_NONE;
     ret = g_usbInterface->GetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1260 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Func_0400 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**********************************************************************************************************/
 
 /**
- * @tc.name: SUB_USB_HDI_1270
+ * @tc.name: SUB_USB_DeviceManager_HDI_Func_0500
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1270, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_DeviceManager_HDI_Func_0500, Function | MediumTest | Level1)
 {
     auto ret = g_usbInterface->SetCurrentFunctions(USB_FUNCTION_ACM);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1270 %{public}d SetCurrentFunctions=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Func_0500 %{public}d SetCurrentFunctions=%{public}d",
+        __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1280
+ * @tc.name: SUB_USB_DeviceManager_HDI_Compatibility_1500
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
  * @tc.desc: Negative test: parameters exception, Funcs error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1280, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_DeviceManager_HDI_Compatibility_1500, Function | MediumTest | Level1)
 {
     auto ret = g_usbInterface->SetCurrentFunctions(USB_FUNCTION_INVALID);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1280 %{public}d, ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Compatibility_1500 %{public}d, ret=%{public}d",
+        __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 /**
- * @tc.name: SUB_USB_HDI_1290
+ * @tc.name: SUB_USB_DeviceManager_HDI_Func_0600
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1290, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_DeviceManager_HDI_Func_0600, Function | MediumTest | Level1)
 {
     auto ret = g_usbInterface->SetCurrentFunctions(USB_FUNCTION_ECM);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1290 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Func_0600 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1300
+ * @tc.name: SUB_USB_DeviceManager_HDI_Func_0700
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1300, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_DeviceManager_HDI_Func_0700, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_ACM | USB_FUNCTION_ECM;
     auto ret = g_usbInterface->SetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1300 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Func_0700 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1310
+ * @tc.name: SUB_USB_DeviceManager_HDI_Func_0800
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1310, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_DeviceManager_HDI_Func_0800, Function | MediumTest | Level1)
 {
     auto ret = g_usbInterface->SetCurrentFunctions(USB_FUNCTION_HDC);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1310 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Func_0800 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1320
+ * @tc.name: SUB_USB_DeviceManager_HDI_Func_0900
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1320, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_DeviceManager_HDI_Func_0900, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_ACM | USB_FUNCTION_HDC;
     auto ret = g_usbInterface->SetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1320 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Func_0900 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1330
+ * @tc.name: SUB_USB_DeviceManager_HDI_Func_1000
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1330, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_DeviceManager_HDI_Func_1000, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_ECM | USB_FUNCTION_HDC;
     auto ret = g_usbInterface->SetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1330 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Func_1000 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1340
+ * @tc.name: SUB_USB_DeviceManager_HDI_Func_1100
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1340, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_DeviceManager_HDI_Func_1100, Function | MediumTest | Level1)
 {
     auto ret = g_usbInterface->SetCurrentFunctions(USB_FUNCTION_RNDIS);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1340 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Func_1100 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2340
+ * @tc.name: SUB_USB_DeviceManager_HDI_Func_1400
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_2340, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_DeviceManager_HDI_Func_1400, Function | MediumTest | Level1)
 {
     auto ret = g_usbInterface->SetCurrentFunctions(USB_FUNCTION_STORAGE);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_2340 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Func_1400 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2350
+ * @tc.name: SUB_USB_DeviceManager_HDI_Func_1500
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_2350, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_DeviceManager_HDI_Func_1500, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_RNDIS | USB_FUNCTION_HDC;
     auto ret = g_usbInterface->SetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_2350 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Func_1500 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2360
+ * @tc.name: SUB_USB_DeviceManager_HDI_Func_1600
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_2360, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_DeviceManager_HDI_Func_1600, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_STORAGE | USB_FUNCTION_HDC;
     auto ret = g_usbInterface->SetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_2360 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Func_1600 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2700
+ * @tc.name: SUB_USB_DeviceManager_HDI_Func_1900
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_2700, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_DeviceManager_HDI_Func_1900, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_MTP;
     auto ret = g_usbInterface->SetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_2700 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Func_1900 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2710
+ * @tc.name: SUB_USB_DeviceManager_HDI_Func_2000
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_2710, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_DeviceManager_HDI_Func_2000, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_PTP;
     auto ret = g_usbInterface->SetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_2710 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Func_2000 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2720
+ * @tc.name: SUB_USB_DeviceManager_HDI_Func_2100
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_2720, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_DeviceManager_HDI_Func_2100, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_MTP | USB_FUNCTION_HDC;
     auto ret = g_usbInterface->SetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_2720 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Func_2100 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2730
+ * @tc.name: SUB_USB_DeviceManager_HDI_Func_2200
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_2730, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_DeviceManager_HDI_Func_2200, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_PTP | USB_FUNCTION_HDC;
     auto ret = g_usbInterface->SetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_2730 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Func_2200 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2740
+ * @tc.name: SUB_USB_DeviceManager_HDI_Func_2300
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_2740, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_DeviceManager_HDI_Func_2300, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_MTP | USB_FUNCTION_RNDIS;
     auto ret = g_usbInterface->SetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_2740 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Func_2300 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2750
+ * @tc.name: SUB_USB_DeviceManager_HDI_Func_2400
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_2750, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_DeviceManager_HDI_Func_2400, Function | MediumTest | Level1)
 {
     int32_t funcs = USB_FUNCTION_PTP | USB_FUNCTION_RNDIS;
     auto ret = g_usbInterface->SetCurrentFunctions(funcs);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_2750 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Func_2400 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2370
+ * @tc.name: SUB_USB_DeviceManager_HDI_Func_1700
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
  * @tc.desc: Negative test: parameters exception, funcs error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_2370, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_DeviceManager_HDI_Func_1700, Function | MediumTest | Level1)
 {
     auto ret = g_usbInterface->SetCurrentFunctions(USB_FUNCTION_UNSUPPORTED);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_2370 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Func_1700 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_2380
+ * @tc.name: SUB_USB_DeviceManager_HDI_Func_1800
  * @tc.desc: Test functions to SetCurrentFunctions
  * @tc.desc: int32_t SetCurrentFunctions(int32_t funcs)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_2380, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_DeviceManager_HDI_Func_1800, Function | MediumTest | Level1)
 {
     auto ret = g_usbInterface->SetCurrentFunctions(USB_FUNCTION_NONE);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_2380 ret=%{public}d", ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Func_1800 ret=%{public}d", ret);
     ASSERT_EQ(0, ret);
     HDF_LOGI("UsbdFunctionTest::the function was set to none successfully");
     ret = g_usbInterface->SetCurrentFunctions(USB_FUNCTION_HDC);
@@ -380,155 +383,155 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_2380, Function | MediumTest | Level1)
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1350
+ * @tc.name: SUB_USB_PortManager_HDI_Func_0100
  * @tc.desc: Test functions to SetPortRole
  * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1350, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Func_0100, Function | MediumTest | Level1)
 {
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1350 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Func_0100 %{public}d ret=%{public}d", __LINE__, ret);
     ret = SwitchErrCode(ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1360
+ * @tc.name: SUB_USB_PortManager_HDI_Compatibility_0100
  * @tc.desc: Test functions to SetPortRole
  * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
  * @tc.desc: Negative test: parameters exception, portId error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1360, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Compatibility_0100, Function | MediumTest | Level1)
 {
     auto ret = g_usbInterface->SetPortRole(USB_PORT_ID_INVALID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1360 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Compatibility_0100 %{public}d ret=%{public}d", __LINE__, ret);
     ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1370
+ * @tc.name: SUB_USB_PortManager_HDI_Compatibility_0200
  * @tc.desc: Test functions to SetPortRole
  * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
  * @tc.desc: Negative test: parameters exception, powerRole error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1370, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Compatibility_0200, Function | MediumTest | Level1)
 {
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, USB_POWER_ROLE_INVALID, DATA_ROLE_DEVICE);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1370 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Compatibility_0200 %{public}d ret=%{public}d", __LINE__, ret);
     ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1380
+ * @tc.name: SUB_USB_PortManager_HDI_Compatibility_0300
  * @tc.desc: Test functions to SetPortRole
  * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
  * @tc.desc: Negative test: parameters exception, dataRole error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1380, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Compatibility_0300, Function | MediumTest | Level1)
 {
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, USB_DATA_ROLE_INVALID);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1380 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Compatibility_0300 %{public}d ret=%{public}d", __LINE__, ret);
     ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1390
+ * @tc.name: SUB_USB_PortManager_HDI_Compatibility_0400
  * @tc.desc: Test functions to SetPortRole
  * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
  * @tc.desc: Negative test: parameters exception, powerRole error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1390, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Compatibility_0400, Function | MediumTest | Level1)
 {
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, USB_POWER_ROLE_INVALID, DATA_ROLE_HOST);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1390 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Compatibility_0400 %{public}d ret=%{public}d", __LINE__, ret);
     ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1400
+ * @tc.name: SUB_USB_PortManager_HDI_Compatibility_0500
  * @tc.desc: Test functions to SetPortRole
  * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
  * @tc.desc: Negative test: parameters exception, portId && dataRole error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1400, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Compatibility_0500, Function | MediumTest | Level1)
 {
     auto ret = g_usbInterface->SetPortRole(USB_PORT_ID_INVALID, POWER_ROLE_SOURCE, USB_DATA_ROLE_INVALID);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1400 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Compatibility_0500 %{public}d ret=%{public}d", __LINE__, ret);
     ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1410
+ * @tc.name: SUB_USB_PortManager_HDI_Compatibility_0600
  * @tc.desc: Test functions to SetPortRole
  * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
  * @tc.desc: Negative test: parameters exception, powerRole && dataRole error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1410, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Compatibility_0600, Function | MediumTest | Level1)
 {
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, USB_POWER_ROLE_INVALID, USB_DATA_ROLE_INVALID);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1410 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Compatibility_0600 %{public}d ret=%{public}d", __LINE__, ret);
     ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1420
+ * @tc.name: SUB_USB_PortManager_HDI_Compatibility_0700
  * @tc.desc: Test functions to SetPortRole
  * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
  * @tc.desc: Negative test: parameters exception, portId && powerRole && dataRole error
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1420, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Compatibility_0700, Function | MediumTest | Level1)
 {
     auto ret = g_usbInterface->SetPortRole(USB_PORT_ID_INVALID, USB_POWER_ROLE_INVALID, USB_DATA_ROLE_INVALID);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1420 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Compatibility_0700 %{public}d ret=%{public}d", __LINE__, ret);
     ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1430
+ * @tc.name: SUB_USB_PortManager_HDI_Compatibility_0800
  * @tc.desc: Test functions to SetPortRole
  * @tc.desc: int32_t SetPortRole(int32_t portId,int32_t powerRole,int32_t dataRole)
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1430, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Compatibility_0800, Function | MediumTest | Level1)
 {
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1430 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Compatibility_0800 %{public}d ret=%{public}d", __LINE__, ret);
     ret = SwitchErrCode(ret);
     ASSERT_EQ(0, ret);
 }
 
 /**
- * @tc.name: SUB_USB_HDI_1700
+ * @tc.name: SUB_USB_PortManager_HDI_Func_0200
  * @tc.desc: Test functions to QueryPort
  * @tc.desc: int32_t QueryPort(int32_t &portId, int32_t &powerRole, int32_t &dataRole, int32_t &mode);
  * @tc.desc: Positive test: parameters correctly
  * @tc.type: FUNC
  */
-HWTEST_F(UsbdFunctionTest, SUB_USB_HDI_1700, Function | MediumTest | Level1)
+HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Func_0200, Function | MediumTest | Level1)
 {
     int32_t portId = DEFAULT_PORT_ID;
     int32_t powerRole = POWER_ROLE_NONE;
     int32_t dataRole = DATA_ROLE_NONE;
     int32_t mode = PORT_MODE_NONE;
     auto ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
-    HDF_LOGI("UsbdFunctionTest::SUB_USB_HDI_1700 %{public}d ret=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Func_0200 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
 }
 } // namespace

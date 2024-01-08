@@ -19,7 +19,7 @@ import("$base_root/test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/motion"
 
-ohos_moduletest_suite("HatsHdfMotionTestAdditional") {
+ohos_moduletest_suite("HatsHatsHdfMotionAdditionalTest") {
   module_out_path = module_output_path
 
   sources = [

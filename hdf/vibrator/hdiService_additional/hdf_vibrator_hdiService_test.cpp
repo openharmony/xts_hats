@@ -26,7 +26,7 @@ using namespace testing::ext;
 namespace {
 uint32_t SLEEP_TIME = 200;
 std::string g_timeSequence = "haptic.clock.timer";
-std::string g_builtIn = "haptic.default.effect";
+std::string g_builtIn = "haptic.helloworld.effect";
 sptr<IVibratorInterface> g_vibratorInterface = nullptr;
 sptr<IVibratorInterface> g_nullvalue = nullptr;
 
@@ -40,7 +40,12 @@ public:
 
 void HdfVibratorHdiServiceTestAdditional::SetUpTestCase() { g_vibratorInterface = IVibratorInterface::Get(); }
 
-void HdfVibratorHdiServiceTestAdditional::TearDownTestCase() {}
+void HdfVibratorHdiServiceTestAdditional::TearDownTestCase()
+{
+    g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_ONCE);
+    g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_PRESET);
+    g_vibratorInterface = nullptr;
+}
 
 void HdfVibratorHdiServiceTestAdditional::SetUp() {}
 
@@ -56,7 +61,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStartOnce001, Function | Mediu
     ASSERT_NE(nullptr, g_vibratorInterface);
 
     int32_t startRet = g_vibratorInterface->StartOnce(0);
-    EXPECT_EQ(startRet, HDF_ERR_INVALID_PARAM);
+    EXPECT_EQ(startRet, HDF_SUCCESS);
 
     OsalMSleep(SLEEP_TIME);
 
@@ -85,7 +90,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStartOnce002, Function | Mediu
 /**
  * @tc.number : SUB_Driver_Sensor_HdiVibrator_1700
  * @tc.name   : testStartOnce003
- * @tc.desc   : Control this vibrator to execute it twice in 80 milliseconds and 20 milliseconds.
+ * @tc.desc   : Controls this vibrator to perform a one-shot vibrator at 80 millisecond.
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStartOnce003, Function | MediumTest | Level1)
 {
@@ -103,7 +108,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStartOnce003, Function | Mediu
 /**
  * @tc.number : SUB_Driver_Sensor_HdiVibrator_1800
  * @tc.name   : testStartOnce004
- * @tc.desc   : Control this vibrator to execute it once within -100 milliseconds.
+ * @tc.desc   : Controls this vibrator to perform a one-shot vibrator at 256 millisecond.
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStartOnce004, Function | MediumTest | Level1)
 {
@@ -145,13 +150,15 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStartOnce006, Function | Mediu
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
     int32_t i;
+    int32_t startRet;
+    int32_t endRet;
     for (i = 0; i < 50; i++) {
-        int32_t startRet = g_vibratorInterface->StartOnce(2);
+        startRet = g_vibratorInterface->StartOnce(2);
         EXPECT_EQ(startRet, HDF_SUCCESS);
 
         OsalMSleep(SLEEP_TIME);
 
-        int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_PRESET);
+        endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_PRESET);
         EXPECT_EQ(endRet, HDF_SUCCESS);
     }
 }
@@ -159,7 +166,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStartOnce006, Function | Mediu
 /**
  * @tc.number : SUB_Driver_Sensor_HdiVibrator_2100
  * @tc.name   : testStart001
- * @tc.desc   : Controls this Performing Time Series Vibrator Effects.
+ * @tc.desc   : Controls this Performing Time Series Vibrator Effects.Start = g_timeSequence.
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStart001, Function | MediumTest | Level1)
 {
@@ -177,14 +184,14 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStart001, Function | MediumTes
 /**
  * @tc.number : SUB_Driver_Sensor_HdiVibrator_2200
  * @tc.name   : testStart002
- * @tc.desc   : Controls this Performing Time Series Vibrator Effects.
+ * @tc.desc   : Controls this Performing Time Series Vibrator Effects.Start = g_builtIn.
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStart002, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
     int32_t startRet = g_vibratorInterface->Start(g_builtIn);
-    EXPECT_EQ(startRet, HDF_SUCCESS);
+    EXPECT_EQ(startRet, HDF_ERR_INVALID_PARAM);
 
     OsalMSleep(SLEEP_TIME);
 
@@ -195,7 +202,8 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStart002, Function | MediumTes
 /**
  * @tc.number : SUB_Driver_Sensor_HdiVibrator_2300
  * @tc.name   : testStart003
- * @tc.desc   : Control this execution time series vibrator effect twice.
+ * @tc.desc   : Controls this Performing Time Series Vibrator Effects.Start = g_timeSequence.Stop =
+ * HDF_VIBRATOR_MODE_ONCE.
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStart003, Function | MediumTest | Level1)
 {
@@ -212,13 +220,13 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStart003, Function | MediumTes
 /**
  * @tc.number : SUB_Driver_Sensor_HdiVibrator_2400
  * @tc.name   : testStart004
- * @tc.desc   : Control this execution time series vibrator effect twice.
+ * @tc.desc   : Controls this Performing Time Series Vibrator Effects.Start = g_builtIn.Stop = HDF_VIBRATOR_MODE_ONCE.
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStart004, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
     int32_t startRet = g_vibratorInterface->Start(g_builtIn);
-    EXPECT_EQ(startRet, HDF_SUCCESS);
+    EXPECT_EQ(startRet, HDF_ERR_INVALID_PARAM);
 
     OsalMSleep(SLEEP_TIME);
 
@@ -245,7 +253,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStart005, Function | MediumTes
     OsalMSleep(SLEEP_TIME);
 
     startRet = g_vibratorInterface->Start(g_builtIn);
-    EXPECT_EQ(startRet, HDF_SUCCESS);
+    EXPECT_EQ(startRet, HDF_ERR_INVALID_PARAM);
 
     OsalMSleep(SLEEP_TIME);
 
@@ -262,7 +270,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStart006, Function | MediumTes
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
     int32_t startRet = g_vibratorInterface->Start(g_builtIn);
-    EXPECT_EQ(startRet, HDF_SUCCESS);
+    EXPECT_EQ(startRet, HDF_ERR_INVALID_PARAM);
 
     OsalMSleep(SLEEP_TIME);
 
@@ -287,13 +295,15 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStart007, Function | MediumTes
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
     int32_t i;
+    int32_t startRet;
+    int32_t endRet;
     for (i = 0; i < 60; i++) {
-        int32_t startRet = g_vibratorInterface->Start(g_builtIn);
-        EXPECT_EQ(startRet, HDF_SUCCESS);
+        startRet = g_vibratorInterface->Start(g_builtIn);
+        EXPECT_EQ(startRet, HDF_ERR_INVALID_PARAM);
 
         OsalMSleep(SLEEP_TIME);
 
-        int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_PRESET);
+        endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_PRESET);
         EXPECT_EQ(endRet, HDF_SUCCESS);
     }
 }
@@ -307,13 +317,15 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStart008, Function | MediumTes
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
     int32_t i;
+    int32_t startRet;
+    int32_t endRet;
     for (i = 0; i < 30; i++) {
-        int32_t startRet = g_vibratorInterface->Start(g_timeSequence);
+        startRet = g_vibratorInterface->Start(g_timeSequence);
         EXPECT_EQ(startRet, HDF_SUCCESS);
 
         OsalMSleep(SLEEP_TIME);
 
-        int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_PRESET);
+        endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_PRESET);
         EXPECT_EQ(endRet, HDF_SUCCESS);
     }
 }
@@ -321,7 +333,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStart008, Function | MediumTes
 /**
  * @tc.number : SUB_Driver_Sensor_HdiVibrator_2900
  * @tc.name   : testStop001
- * @tc.desc   : Controls this vibrator to stop the vibrator.
+ * @tc.desc   : Controls this vibrator to stop the vibrator.Stop = HDF_VIBRATOR_MODE_ONCE.
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop001, Function | MediumTest | Level1)
 {
@@ -336,7 +348,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop001, Function | MediumTest
 /**
  * @tc.number : SUB_Driver_Sensor_HdiVibrator_3000
  * @tc.name   : testStop002
- * @tc.desc   : Controls this vibrator to stop the vibrator.
+ * @tc.desc   : Controls this vibrator to stop the vibrator.Stop = HDF_VIBRATOR_MODE_PRESET.
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop002, Function | MediumTest | Level1)
 {
@@ -361,19 +373,20 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop003, Function | MediumTest
 
     OsalMSleep(SLEEP_TIME);
     int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_BUTT);
-    EXPECT_EQ(endRet, HDF_FAILURE);
+    EXPECT_EQ(endRet, HDF_ERR_INVALID_PARAM);
+    endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_PRESET);
 }
 
 /**
  * @tc.number : SUB_Driver_Sensor_HdiVibrator_3200
  * @tc.name   : testStop004
- * @tc.desc   : Control this vibrator to stop it twice in a row.
+ * @tc.desc   : Controls this vibrator to stop the vibrator.Stop = HDF_VIBRATOR_MODE_ONCE.
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop004, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
     int32_t startRet = g_vibratorInterface->Start(g_timeSequence);
-    EXPECT_EQ(startRet, HDF_ERR_DEVICE_BUSY);
+    EXPECT_EQ(startRet, HDF_SUCCESS);
 
     OsalMSleep(SLEEP_TIME);
 
@@ -384,7 +397,8 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop004, Function | MediumTest
 /**
  * @tc.number : SUB_Driver_Sensor_HdiVibrator_3300
  * @tc.name   : testStop005
- * @tc.desc   : Controls this Performing Time Series Vibrator Effects.Controls this vibrator to stop the vibrator.
+ * @tc.desc   : Controls this Performing Time Series Vibrator Effects.Controls this vibrator to stop the
+ * vibrator.StartOnce = 25.
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop005, Function | MediumTest | Level1)
 {
@@ -411,13 +425,14 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop006, Function | MediumTest
     OsalMSleep(SLEEP_TIME);
 
     int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_BUTT);
-    EXPECT_EQ(endRet, HDF_FAILURE);
+    EXPECT_EQ(endRet, HDF_ERR_INVALID_PARAM);
 }
 
 /**
  * @tc.number : SUB_Driver_Sensor_HdiVibrator_3500
  * @tc.name   : testStop007
- * @tc.desc   : Controls this Performing Time Series Vibrator Effects.Controls this vibrator to stop the vibrator.
+ * @tc.desc   : Controls this Performing Time Series Vibrator Effects.Controls this vibrator to stop the
+ * vibrator.StartOnce = 256.
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop007, Function | MediumTest | Level2)
 {
@@ -429,7 +444,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop007, Function | MediumTest
     OsalMSleep(SLEEP_TIME);
 
     int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_BUTT);
-    EXPECT_EQ(endRet, HDF_FAILURE);
+    EXPECT_EQ(endRet, HDF_ERR_INVALID_PARAM);
 }
 
 /**
@@ -449,7 +464,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop008, Function | MediumTest
     OsalMSleep(SLEEP_TIME);
 
     endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_BUTT);
-    EXPECT_EQ(endRet, HDF_FAILURE);
+    EXPECT_EQ(endRet, HDF_ERR_INVALID_PARAM);
 }
 
 /**
@@ -469,13 +484,13 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop009, Function | MediumTest
     OsalMSleep(SLEEP_TIME);
 
     endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_BUTT);
-    EXPECT_EQ(endRet, HDF_FAILURE);
+    EXPECT_EQ(endRet, HDF_ERR_INVALID_PARAM);
 }
 
 /**
  * @tc.number : SUB_Driver_Sensor_HdiVibrator_3800
  * @tc.name   : testStop010
- * @tc.desc   : Controls this Performing Time Series Vibrator Effects.Controls this vibrator to stop the vibrator.
+ * @tc.desc   : Controls this Performing Time Series Vibrator Effects.Stop = HDF_VIBRATOR_MODE_BUTT.And cycle 10 times.
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop010, Function | MediumTest | Level2)
 {
@@ -483,9 +498,10 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop010, Function | MediumTest
 
     OsalMSleep(SLEEP_TIME);
     int32_t i;
+    int32_t endRet;
     for (i = 0; i < 10; i++) {
-        int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_BUTT);
-        EXPECT_EQ(endRet, HDF_FAILURE);
+        endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_BUTT);
+        EXPECT_EQ(endRet, HDF_ERR_INVALID_PARAM);
     }
 }
 
@@ -499,18 +515,18 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testStop011, Function | MediumTest
     ASSERT_NE(nullptr, g_vibratorInterface);
 
     int32_t startRet = g_vibratorInterface->Start(g_builtIn);
-    EXPECT_EQ(startRet, HDF_SUCCESS);
+    EXPECT_EQ(startRet, HDF_ERR_INVALID_PARAM);
 
     OsalMSleep(SLEEP_TIME);
 
     int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_BUTT);
-    EXPECT_EQ(endRet, HDF_FAILURE);
+    EXPECT_EQ(endRet, HDF_ERR_INVALID_PARAM);
 }
 
 /**
  * @tc.name   : SUB_Driver_Sensor_HdiVibrator_4000
  * @tc.name   : testGetVibratorInfo001
- * @tc.desc   : Testing the GetVibratorInfo function.
+ * @tc.desc   : Testing the GetVibratorInfo function.And cycle 10 times.
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testGetVibratorInfo001, Function | MediumTest | Level1)
 {
@@ -518,8 +534,9 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testGetVibratorInfo001, Function |
 
     std::vector<HdfVibratorInfo> info;
     int32_t i;
+    int32_t startRet;
     for (i = 0; i < 10; i++) {
-        int32_t startRet = g_vibratorInterface->GetVibratorInfo(info);
+        startRet = g_vibratorInterface->GetVibratorInfo(info);
         EXPECT_EQ(startRet, HDF_SUCCESS);
     }
     printf("intensity = %d, intensityMaxValue = %d, intensityMinValue = %d\n\t", info[0].isSupportIntensity,
@@ -562,7 +579,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testGetVibratorInfo002, Function |
 /**
  * @tc.name   : SUB_Driver_Sensor_HdiVibrator_4200
  * @tc.name   : testEnableVibratorModulation001
- * @tc.desc   : Testing the EnableVibratorModulation function.
+ * @tc.desc   : Testing the EnableVibratorModulation function.EnableVibratorModulation is set to (0, 0, 0).
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation001, Function | MediumTest | Level1)
 {
@@ -582,7 +599,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation001, F
 /**
  * @tc.name   : SUB_Driver_Sensor_HdiVibrator_4300
  * @tc.name   : testEnableVibratorModulation002
- * @tc.desc   : Testing the EnableVibratorModulation function.
+ * @tc.desc   : Testing the EnableVibratorModulation function.EnableVibratorModulation is set to (20, 20, 20).
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation002, Function | MediumTest | Level1)
 {
@@ -602,7 +619,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation002, F
 /**
  * @tc.name   : SUB_Driver_Sensor_HdiVibrator_4400
  * @tc.name   : testEnableVibratorModulation003
- * @tc.desc   : Testing the EnableVibratorModulation function.
+ * @tc.desc   : Testing the EnableVibratorModulation function.EnableVibratorModulation is set to (-100, 20, 20).
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation003, Function | MediumTest | Level2)
 {
@@ -622,7 +639,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation003, F
 /**
  * @tc.name   : SUB_Driver_Sensor_HdiVibrator_4500
  * @tc.name   : testEnableVibratorModulation004
- * @tc.desc   : Testing the EnableVibratorModulation function.
+ * @tc.desc   : Testing the EnableVibratorModulation function.EnableVibratorModulation is set to (20, -100, 20).
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation004, Function | MediumTest | Level2)
 {
@@ -642,7 +659,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation004, F
 /**
  * @tc.name   : SUB_Driver_Sensor_HdiVibrator_4600
  * @tc.name   : testEnableVibratorModulation005
- * @tc.desc   : Testing the EnableVibratorModulation function.
+ * @tc.desc   : Testing the EnableVibratorModulation function.EnableVibratorModulation is set to (20, 20, -100).
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation005, Function | MediumTest | Level2)
 {
@@ -662,7 +679,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation005, F
 /**
  * @tc.name   : SUB_Driver_Sensor_HdiVibrator_4700
  * @tc.name   : testEnableVibratorModulation006
- * @tc.desc   : Testing the EnableVibratorModulation function.
+ * @tc.desc   : Testing the EnableVibratorModulation function.EnableVibratorModulation is set to (-100, -100, 20).
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation006, Function | MediumTest | Level2)
 {
@@ -682,7 +699,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation006, F
 /**
  * @tc.name   : SUB_Driver_Sensor_HdiVibrator_4800
  * @tc.name   : testEnableVibratorModulation007
- * @tc.desc   : Testing the EnableVibratorModulation function.
+ * @tc.desc   : Testing the EnableVibratorModulation function.EnableVibratorModulation is set to (20, -100, -100).
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation007, Function | MediumTest | Level2)
 {
@@ -702,7 +719,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation007, F
 /**
  * @tc.name   : SUB_Driver_Sensor_HdiVibrator_4900
  * @tc.name   : testEnableVibratorModulation008
- * @tc.desc   : Testing the EnableVibratorModulation function.
+ * @tc.desc   : Testing the EnableVibratorModulation function.EnableVibratorModulation is set to (-100, 20, -100).
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation008, Function | MediumTest | Level2)
 {
@@ -722,7 +739,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation008, F
 /**
  * @tc.name   : SUB_Driver_Sensor_HdiVibrator_5000
  * @tc.name   : testEnableVibratorModulation009
- * @tc.desc   : Testing the EnableVibratorModulation function.
+ * @tc.desc   : Testing the EnableVibratorModulation function.EnableVibratorModulation is set to (-100, -100, -100).
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation009, Function | MediumTest | Level2)
 {
@@ -742,7 +759,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation009, F
 /**
  * @tc.name   : SUB_Driver_Sensor_HdiVibrator_5100
  * @tc.name   : testEnableVibratorModulation010
- * @tc.desc   : Testing the EnableVibratorModulation function.
+ * @tc.desc   : Testing the EnableVibratorModulation function.EnableVibratorModulation is set to (3000, 3000, 3000).
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation010, Function | MediumTest | Level1)
 {
@@ -762,7 +779,8 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation010, F
 /**
  * @tc.name   : SUB_Driver_Sensor_HdiVibrator_5200
  * @tc.name   : testEnableVibratorModulation011
- * @tc.desc   : Testing the EnableVibratorModulation function.
+ * @tc.desc   : Testing the EnableVibratorModulation function.EnableVibratorModulation is set to (0, 0, 0).Stop is set
+ * to HDF_VIBRATOR_MODE_PRESET.
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation011, Function | MediumTest | Level1)
 {
@@ -790,7 +808,8 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation011, F
 /**
  * @tc.name   : SUB_Driver_Sensor_HdiVibrator_5300
  * @tc.name   : testEnableVibratorModulation012
- * @tc.desc   : Testing the EnableVibratorModulation function.
+ * @tc.desc   : Testing the EnableVibratorModulation function.EnableVibratorModulation is set to (-256, -256, -256).Stop
+ * is set to HDF_VIBRATOR_MODE_ONCE.
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation012, Function | MediumTest | Level2)
 {
@@ -818,7 +837,8 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation012, F
 /**
  * @tc.name   : SUB_Driver_Sensor_HdiVibrator_5400
  * @tc.name   : testEnableVibratorModulation013
- * @tc.desc   : Testing the EnableVibratorModulation function.
+ * @tc.desc   : Testing the EnableVibratorModulation function.EnableVibratorModulation is set to (-256, -256, -256).Stop
+ * is set to HDF_VIBRATOR_MODE_BUTT.
  */
 HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation013, Function | MediumTest | Level2)
 {
@@ -839,7 +859,7 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation013, F
         EXPECT_EQ(startRet, HDF_FAILURE);
         OsalMSleep(SLEEP_TIME);
         startRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_BUTT);
-        EXPECT_EQ(startRet, HDF_FAILURE);
+        EXPECT_EQ(startRet, HDF_ERR_INVALID_PARAM);
     }
 }
 

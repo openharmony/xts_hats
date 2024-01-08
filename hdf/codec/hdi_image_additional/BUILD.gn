@@ -16,7 +16,7 @@ import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/codec"
 
-ohos_moduletest_suite("HatsHdfImageCodecTestAdditional") {
+ohos_moduletest_suite("HatsHdfImageCodecAdditionalTest") {
   module_out_path = module_output_path
 
   deps = [ "//third_party/googletest:gtest_main" ]
@@ -32,7 +32,7 @@ ohos_moduletest_suite("HatsHdfImageCodecTestAdditional") {
       "drivers_interface_display:display_composer_idl_headers",
       "drivers_interface_display:libdisplay_buffer_hdi_impl",
       "drivers_interface_display:libdisplay_composer_hdi_impl",
-      "graphic_chipsetsdk:buffer_handle",
+      "graphic_surface:buffer_handle",
       "hdf_core:libhdf_host",
       "hdf_core:libhdf_ipc_adapter",
       "hdf_core:libhdf_utils",

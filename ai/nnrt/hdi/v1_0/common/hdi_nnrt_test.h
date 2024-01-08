@@ -46,7 +46,6 @@ public:
 
     void TearDown() override
     {
-        sleep(1);
         device_.clear();
     }
 };

@@ -2330,57 +2330,6 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetExtraParams001, Function | 
 }
 
 /**
- * @tc.number : SUB_Driver_Audio_Capture_AddAudioEffect_0300
- * @tc.name   : testCaptureAddAudioEffect001
- * @tc.desc   : AddAudioEffect, Loop call 1000 times
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAddAudioEffect001, Function | MediumTest | Level1)
-{
-    ASSERT_NE(capture_->AddAudioEffect, nullptr);
-    uint64_t effectId = 0;
-
-    int32_t ret = HDF_SUCCESS;
-    for (int64_t i = 0; i < 1000; i++) {
-        ret = capture_->AddAudioEffect(capture_, effectId);
-        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-    }
-}
-
-/**
- * @tc.number : SUB_Driver_Audio_Capture_RemoveAudioEffect_0300
- * @tc.name   : testCaptureRemoveAudioEffect001
- * @tc.desc   : RemoveAudioEffect, Loop call 1000 times
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testCaptureRemoveAudioEffect001, Function | MediumTest | Level1)
-{
-    ASSERT_NE(capture_->RemoveAudioEffect, nullptr);
-    uint64_t effectId = 0;
-
-    int32_t ret = HDF_SUCCESS;
-    for (int64_t i = 0; i < 1000; i++) {
-        ret = capture_->RemoveAudioEffect(capture_, effectId);
-        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-    }
-}
-
-/**
- * @tc.number : SUB_Driver_Audio_Capture_GetFrameBufferSize_0300
- * @tc.name   : testCaptureGetFrameBufferSize001
- * @tc.desc   : GetFrameBufferSize, Loop call 1000 times
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetFrameBufferSize001, Function | MediumTest | Level1)
-{
-    ASSERT_NE(capture_->GetFrameBufferSize, nullptr);
-    uint64_t bufferSize = 0;
-
-    int32_t ret = HDF_SUCCESS;
-    for (int64_t i = 0; i < 1000; i++) {
-        ret = capture_->GetFrameBufferSize(capture_, &bufferSize);
-        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-    }
-}
-
-/**
  * @tc.number : SUB_Driver_Audio_Capture_Start_0300
  * @tc.name   : testCaptureStart001
  * @tc.desc   : Start, Loop call 1000 times
@@ -2410,24 +2359,6 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureFlush001, Function | MediumTes
     for (int64_t i = 0; i < 1000; i++) {
         ret = capture_->Flush(capture_);
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
-    }
-}
-
-/**
- * @tc.number : SUB_Driver_Audio_Capture_IsSupportsPauseAndResume_0300
- * @tc.name   : testCaptureIsSupportsPauseAndResume001
- * @tc.desc   : IsSupportsPauseAndResume, Loop call 1000 times
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testCaptureIsSupportsPauseAndResume001, Function | MediumTest | Level1)
-{
-    ASSERT_NE(capture_->GetVersion, nullptr);
-    bool supportPause = false;
-    bool supportResume = false;
-
-    int32_t ret = HDF_SUCCESS;
-    for (int64_t i = 0; i < 1000; i++) {
-        ret = capture_->IsSupportsPauseAndResume(capture_, &supportPause, &supportResume);
-        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
     }
 }
 

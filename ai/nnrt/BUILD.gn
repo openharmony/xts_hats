@@ -24,8 +24,6 @@ group("HatsHdfNnrtTest") {
           "hdi/v1_0:hdi",
           "hdi/v2_0:hdi",
         ]
-      } else {
-        deps = [ "hdi/v2_0:hdi" ]
       }
     }
   }

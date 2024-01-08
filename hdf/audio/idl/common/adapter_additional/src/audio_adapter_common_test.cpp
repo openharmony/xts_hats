@@ -778,21 +778,6 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture001, TestSize.Level1)
 }
 
 /**
- * @tc.number: SUB_Driver_Audio_RegExtraParamObserver_0300
- * @tc.name  : testRegExtraParamObserver001
- * @tc.desc  : Verify the reliability of the RegExtraParamObserver function cookie as 1.
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testRegExtraParamObserver001, TestSize.Level1)
-{
-    ASSERT_NE(adapter_, nullptr);
-    int8_t cookie = 1;
-    struct IAudioCallback *audioCallback = nullptr;
-
-    int32_t ret = adapter_->RegExtraParamObserver(adapter_, audioCallback, cookie);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_INVALID_PARAM);
-}
-
-/**
  * @tc.number: SUB_Driver_Audio_ReleaseAudioRoute_0400
  * @tc.name  : testReleaseAudioRoute002
  * @tc.desc  : Verify the reliability of the ReleaseAudioRoute function when parameter routeHandle as -1.
@@ -1269,54 +1254,6 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetPassthroughMode005, TestSize.Le
 }
 
 /**
- * @tc.number: SUB_Driver_Audio_SetPassthroughMode_1000
- * @tc.name  : testSetPassthroughMode006
- * @tc.desc  : Verify the reliability of the SetPassthroughMode function when portId as 0.
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetPassthroughMode006, TestSize.Level1)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_OUT;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_RAW;
-    int32_t ret = adapter_->SetPassthroughMode(adapter_, &port, mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_SetPassthroughMode_1100
- * @tc.name  : testSetPassthroughMode007
- * @tc.desc  : Verify the reliability of the SetPassthroughMode function when portId as 0.
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetPassthroughMode007, TestSize.Level1)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_OUT;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_HBR2LBR;
-    int32_t ret = adapter_->SetPassthroughMode(adapter_, &port, mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_SetPassthroughMode_1200
- * @tc.name  : testSetPassthroughMode008
- * @tc.desc  : Verify the reliability of the SetPassthroughMode function when portId as 0.
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetPassthroughMode008, TestSize.Level1)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_OUT;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_AUTO;
-    int32_t ret = adapter_->SetPassthroughMode(adapter_, &port, mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
-}
-
-/**
  * @tc.number: SUB_Driver_Audio_SetPassthroughMode_1300
  * @tc.name  : testSetPassthroughMode009
  * @tc.desc  : Verify the reliability of the SetPassthroughMode function when portId as -1.
@@ -1378,22 +1315,6 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetPassthroughMode012, TestSize.Le
     enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_AUTO;
     int32_t ret = adapter_->SetPassthroughMode(adapter_, &port, mode);
     EXPECT_NE(HDF_SUCCESS, ret);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_SetPassthroughMode_1700
- * @tc.name  : testSetPassthroughMode013
- * @tc.desc  : Verify the reliability of the SetPassthroughMode function when portId as 0.
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetPassthroughMode013, TestSize.Level1)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_OUT;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_LPCM;
-    int32_t ret = adapter_->SetPassthroughMode(adapter_, &port, mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
 }
 
 /**
@@ -1474,70 +1395,6 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetPassthroughMode018, TestSize.Le
     enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_AUTO;
     int32_t ret = adapter_->SetPassthroughMode(adapter_, &port, mode);
     EXPECT_NE(HDF_SUCCESS, ret);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_SetPassthroughMode_2300
- * @tc.name  : testSetPassthroughMode019
- * @tc.desc  : Verify the reliability of the SetPassthroughMode function when portId as 0.
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetPassthroughMode019, TestSize.Level1)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_IN;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_LPCM;
-    int32_t ret = adapter_->SetPassthroughMode(adapter_, &port, mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_SetPassthroughMode_2400
- * @tc.name  : testSetPassthroughMode020
- * @tc.desc  : Verify the reliability of the SetPassthroughMode function when portId as 0.
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetPassthroughMode020, TestSize.Level1)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_IN;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_RAW;
-    int32_t ret = adapter_->SetPassthroughMode(adapter_, &port, mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_SetPassthroughMode_2500
- * @tc.name  : testSetPassthroughMode021
- * @tc.desc  : Verify the reliability of the SetPassthroughMode function when portId as 0.
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetPassthroughMode021, TestSize.Level1)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_IN;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_HBR2LBR;
-    int32_t ret = adapter_->SetPassthroughMode(adapter_, &port, mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_SetPassthroughMode_2600
- * @tc.name  : testSetPassthroughMode022
- * @tc.desc  : Verify the reliability of the SetPassthroughMode function when portId as 0.
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetPassthroughMode022, TestSize.Level1)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_IN;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_AUTO;
-    int32_t ret = adapter_->SetPassthroughMode(adapter_, &port, mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
 }
 
 /**
@@ -1669,70 +1526,6 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetPassthroughMode030, TestSize.Le
 }
 
 /**
- * @tc.number: SUB_Driver_Audio_SetPassthroughMode_3500
- * @tc.name  : testSetPassthroughMode031
- * @tc.desc  : Verify the reliability of the SetPassthroughMode function when portId as 0.
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetPassthroughMode031, TestSize.Level1)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_OUT_IN;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_LPCM;
-    int32_t ret = adapter_->SetPassthroughMode(adapter_, &port, mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_SetPassthroughMode_3600
- * @tc.name  : testSetPassthroughMode032
- * @tc.desc  : Verify the reliability of the SetPassthroughMode function when portId as 0.
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetPassthroughMode032, TestSize.Level1)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_OUT_IN;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_RAW;
-    int32_t ret = adapter_->SetPassthroughMode(adapter_, &port, mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_SetPassthroughMode_3700
- * @tc.name  : testSetPassthroughMode033
- * @tc.desc  : Verify the reliability of the SetPassthroughMode function when portId as 0.
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetPassthroughMode033, TestSize.Level1)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_OUT_IN;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_HBR2LBR;
-    int32_t ret = adapter_->SetPassthroughMode(adapter_, &port, mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_SetPassthroughMode_3800
- * @tc.name  : testSetPassthroughMode034
- * @tc.desc  : Verify the reliability of the SetPassthroughMode function when portId as 0.
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetPassthroughMode034, TestSize.Level1)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_OUT_IN;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_AUTO;
-    int32_t ret = adapter_->SetPassthroughMode(adapter_, &port, mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
-}
-
-/**
  * @tc.number: SUB_Driver_Audio_SetPassthroughMode_3900
  * @tc.name  : testSetPassthroughMode035
  * @tc.desc  : Verify the reliability of the SetPassthroughMode function when portId as -1.
@@ -1794,57 +1587,6 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetPassthroughMode038, TestSize.Le
     enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_AUTO;
     int32_t ret = adapter_->SetPassthroughMode(adapter_, &port, mode);
     EXPECT_NE(HDF_SUCCESS, ret);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_GetPassthroughMode_0600
- * @tc.name  : testGetPassthroughMode002
- * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
- * when AudioPort.dir=PORT_OUT,portId = 0,mode = PORT_PASSTHROUGH_LPCM
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode002, TestSize.Level2)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_OUT;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_LPCM;
-    int32_t ret = adapter_->GetPassthroughMode(adapter_, &port, &mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_GetPassthroughMode_0700
- * @tc.name  : testGetPassthroughMode003
- * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
- * when AudioPort.dir=PORT_IN,portId = 0,mode = PORT_PASSTHROUGH_LPCM
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode003, TestSize.Level2)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_IN;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_LPCM;
-    int32_t ret = adapter_->GetPassthroughMode(adapter_, &port, &mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_GetPassthroughMode_0800
- * @tc.name  : testGetPassthroughMode004
- * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
- * when AudioPort.dir=PORT_OUT_IN,portId = 0,mode = PORT_PASSTHROUGH_LPCM
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode004, TestSize.Level2)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_OUT_IN;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_LPCM;
-    int32_t ret = adapter_->GetPassthroughMode(adapter_, &port, &mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
 }
 
 /**
@@ -1950,57 +1692,6 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode010, TestSize.Le
 }
 
 /**
- * @tc.number: SUB_Driver_Audio_GetPassthroughMode_1500
- * @tc.name  : testGetPassthroughMode011
- * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
- * when AudioPort.dir=PORT_OUT,portId = 0,mode = PORT_PASSTHROUGH_RAW
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode011, TestSize.Level2)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_OUT;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_RAW;
-    int32_t ret = adapter_->GetPassthroughMode(adapter_, &port, &mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_GetPassthroughMode_1600
- * @tc.name  : testGetPassthroughMode012
- * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
- * when AudioPort.dir=PORT_IN,portId = 0,mode = PORT_PASSTHROUGH_RAW
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode012, TestSize.Level2)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_IN;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_RAW;
-    int32_t ret = adapter_->GetPassthroughMode(adapter_, &port, &mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_GetPassthroughMode_1700
- * @tc.name  : testGetPassthroughMode013
- * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
- * when AudioPort.dir=PORT_OUT_IN,portId = 0,mode = PORT_PASSTHROUGH_RAW
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode013, TestSize.Level2)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_OUT_IN;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_RAW;
-    int32_t ret = adapter_->GetPassthroughMode(adapter_, &port, &mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
-}
-
-/**
  * @tc.number: SUB_Driver_Audio_GetPassthroughMode_1800
  * @tc.name  : testGetPassthroughMode014
  * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
@@ -2103,57 +1794,6 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode019, TestSize.Le
 }
 
 /**
- * @tc.number: SUB_Driver_Audio_GetPassthroughMode_2400
- * @tc.name  : testGetPassthroughMode020
- * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
- * when AudioPort.dir=PORT_OUT,portId = 0,mode = PORT_PASSTHROUGH_HBR2LBR
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode020, TestSize.Level2)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_OUT;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_HBR2LBR;
-    int32_t ret = adapter_->GetPassthroughMode(adapter_, &port, &mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_GetPassthroughMode_2500
- * @tc.name  : testGetPassthroughMode021
- * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
- * when AudioPort.dir=PORT_IN,portId = 0,mode = PORT_PASSTHROUGH_HBR2LBR
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode021, TestSize.Level2)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_IN;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_HBR2LBR;
-    int32_t ret = adapter_->GetPassthroughMode(adapter_, &port, &mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_GetPassthroughMode_2600
- * @tc.name  : testGetPassthroughMode022
- * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
- * when AudioPort.dir=PORT_OUT_IN,portId = 0,mode = PORT_PASSTHROUGH_HBR2LBR
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode022, TestSize.Level2)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_OUT_IN;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_HBR2LBR;
-    int32_t ret = adapter_->GetPassthroughMode(adapter_, &port, &mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
-}
-
-/**
  * @tc.number: SUB_Driver_Audio_GetPassthroughMode_2700
  * @tc.name  : testGetPassthroughMode023
  * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
@@ -2253,57 +1893,6 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode028, TestSize.Le
     enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_HBR2LBR;
     int32_t ret = adapter_->GetPassthroughMode(adapter_, &port, &mode);
     EXPECT_NE(HDF_SUCCESS, ret);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_GetPassthroughMode_3300
- * @tc.name  : testGetPassthroughMode029
- * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
- * when AudioPort.dir=PORT_OUT,portId = 0,mode = PORT_PASSTHROUGH_AUTO
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode029, TestSize.Level2)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_OUT;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_AUTO;
-    int32_t ret = adapter_->GetPassthroughMode(adapter_, &port, &mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_GetPassthroughMode_3400
- * @tc.name  : testGetPassthroughMode030
- * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
- * when AudioPort.dir=PORT_IN,portId = 0,mode = PORT_PASSTHROUGH_AUTO
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode030, TestSize.Level2)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_IN;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_AUTO;
-    int32_t ret = adapter_->GetPassthroughMode(adapter_, &port, &mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_GetPassthroughMode_3500
- * @tc.name  : testGetPassthroughMode031
- * @tc.desc  : Verify the reliability of the GetPassthroughMode function when
- * when AudioPort.dir=PORT_OUT_IN,portId = 0,mode = PORT_PASSTHROUGH_AUTO
- */
-HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode031, TestSize.Level2)
-{
-    struct AudioPort port = {};
-    port.dir = PORT_OUT_IN;
-    port.portId = 0;
-    port.portName = const_cast<char *>("primary");
-    enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_AUTO;
-    int32_t ret = adapter_->GetPassthroughMode(adapter_, &port, &mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
 }
 
 /**

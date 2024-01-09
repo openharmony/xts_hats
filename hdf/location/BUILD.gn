@@ -21,6 +21,7 @@ group("HatsHdfLocationTest") {
   testonly = true
 
   if (hats_rich == false) {
+    deps = [ "geofence_additional:HatsHdfLocationgeofenceAdditionalTest" ]
   } else {
     if (is_standard_system) {
       deps = [

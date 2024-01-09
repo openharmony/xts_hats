@@ -54,6 +54,7 @@ const std::string testParam = R"({"CodecType": ["avenc_mpeg4"],
 const int32_t TEST_WIDTH = 1920;
 const int32_t TEST_HEIGTH = 1080;
 const int32_t TEST_STREAMID = 2;
+const std::string TEST_CONTENT = "test add";
 } // namespace
 
 std::vector<DCStreamInfo> streamInfos;
@@ -92,7 +93,7 @@ void DCameraProviderTest::SetUpTestCase(void)
 
     hdiEvent.type_ = 0;
     hdiEvent.result_ = 1;
-    hdiEvent.content_ = 9;
+    hdiEvent.content_ = TEST_CONTENT;
 
     result.type_ = METADATA_RESULT;
     result.value_ = "SettingValue";

@@ -40,7 +40,7 @@ int32_t CodecCallbackService::FillBufferDone(int64_t appData, const OmxCodecBuff
     (void)buffer;
     return HDF_SUCCESS;
 }
-} // namespace V1_0
+} // namespace V2_0
 } // namespace Codec
 } // namespace HDI
 } // namespace OHOS

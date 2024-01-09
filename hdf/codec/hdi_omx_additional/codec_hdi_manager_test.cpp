@@ -337,4 +337,120 @@ HWTEST_F(CodecHdiManagerTestAdditional, testCodecDestroyComponent002, Function |
     int32_t ret = manager_->DestroyComponent(componentId);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
+
+/**
+ * @tc.number  SUB_Driver_Codec_CodecHdi_2300
+ * @tc.name  testCodecGetComponentCapabilityList007
+ * @tc.desc   Verify when GetComponentCapabilityList function into the parameter to 0,
+ * the second result returned failure
+ */
+HWTEST_F(CodecHdiManagerTestAdditional, testCodecGetComponentCapabilityList007, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(manager_ != nullptr);
+    CodecCompCapability *capList = (CodecCompCapability *)OsalMemAlloc(sizeof(CodecCompCapability) * 0);
+    auto err = manager_->GetComponentCapabilityList(capList, 0);
+    EXPECT_NE(err, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number  SUB_Driver_Codec_CodecHdi_2400
+ * @tc.name  testCodecGetComponentCapabilityList008
+ * @tc.desc   Verify when GetComponentCapabilityList function into the parameter to 100000,
+ * the second result returned failure
+ */
+HWTEST_F(CodecHdiManagerTestAdditional, testCodecGetComponentCapabilityList008, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(manager_ != nullptr);
+    CodecCompCapability *capList = (CodecCompCapability *)OsalMemAlloc(sizeof(CodecCompCapability) * 100000);
+    auto err = manager_->GetComponentCapabilityList(capList, 100000);
+    EXPECT_NE(err, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number  SUB_Driver_Codec_CodecHdi_2500
+ * @tc.name  testCodecDestroyComponent003
+ * @tc.desc   Verify that the DestroyComponent function returns success when the CreateComponent
+ * function returns success
+ */
+HWTEST_F(CodecHdiManagerTestAdditional, testCodecDestroyComponent003, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(manager_ != nullptr);
+    std::string compName("");
+    auto count = manager_->GetComponentNum();
+    ASSERT_TRUE(count > 0);
+    CodecCompCapability *capList = (CodecCompCapability *)OsalMemAlloc(sizeof(CodecCompCapability) * count);
+    ASSERT_TRUE(capList != nullptr);
+    auto err = manager_->GetComponentCapabilityList(capList, count);
+    ASSERT_TRUE(err == HDF_SUCCESS);
+    compName = capList[0].compName;
+    OsalMemFree(capList);
+    capList = nullptr;
+
+    ASSERT_FALSE(compName.empty());
+    struct CodecCallbackType *callback = CodecCallbackTypeGet(nullptr);
+    struct CodecComponentType *component = nullptr;
+    uint32_t componentId = 1;
+    ASSERT_TRUE(callback != nullptr);
+
+    int32_t ret = manager_->CreateComponent(&component, &componentId, compName.data(), (int64_t)this, callback);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    EXPECT_EQ(manager_->DestroyComponent(componentId), 0);
+
+    CodecCallbackTypeRelease(callback);
+}
+
+/**
+ * @tc.number  SUB_Driver_Codec_CodecHdi_2600
+ * @tc.name  testCodecDestroyComponent004
+ * @tc.desc   Verify that a failure is returned when the CreateComponent function returns success and the entry of the
+ * DestroyComponent function is 1000, the second entry of the CreateComponent function
+ */
+HWTEST_F(CodecHdiManagerTestAdditional, testCodecDestroyComponent004, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(manager_ != nullptr);
+    std::string compName("");
+    auto count = manager_->GetComponentNum();
+    ASSERT_TRUE(count > 0);
+    CodecCompCapability *capList = (CodecCompCapability *)OsalMemAlloc(sizeof(CodecCompCapability) * count);
+    ASSERT_TRUE(capList != nullptr);
+    auto err = manager_->GetComponentCapabilityList(capList, count);
+    ASSERT_TRUE(err == HDF_SUCCESS);
+    compName = capList[0].compName;
+    OsalMemFree(capList);
+    capList = nullptr;
+
+    ASSERT_FALSE(compName.empty());
+    struct CodecCallbackType *callback = CodecCallbackTypeGet(nullptr);
+    struct CodecComponentType *component = nullptr;
+    uint32_t componentId = 1;
+    ASSERT_TRUE(callback != nullptr);
+
+    int32_t ret = manager_->CreateComponent(&component, &componentId, compName.data(), (int64_t)this, callback);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    componentId = 1000;
+    EXPECT_EQ(manager_->DestroyComponent(componentId), 0);
+
+    CodecCallbackTypeRelease(callback);
+}
+
+/**
+ * @tc.number  SUB_Driver_Codec_CodecHdi_2700
+ * @tc.name  testCodecDestroyComponent005
+ * @tc.desc   Verify that the DestroyComponent result returns a failure when the CreateComponent
+ * function returns a failure
+ */
+HWTEST_F(CodecHdiManagerTestAdditional, testCodecDestroyComponent005, Function | MediumTest | Level1)
+{
+    struct CodecCallbackType *callback = CodecCallbackTypeGet(nullptr);
+    ASSERT_TRUE(callback != nullptr);
+    ASSERT_TRUE(manager_ != nullptr);
+    std::string compName("    ");
+    struct CodecComponentType *component = nullptr;
+    uint32_t componentId = 1000;
+    int32_t ret = manager_->CreateComponent(&component, &componentId, compName.data(), (int64_t)this, callback);
+    EXPECT_NE(ret, HDF_SUCCESS);
+
+    EXPECT_EQ(manager_->DestroyComponent(componentId), 0);
+    CodecCallbackTypeRelease(callback);
+}
 } // namespace

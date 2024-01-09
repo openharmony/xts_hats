@@ -35,7 +35,6 @@ using namespace std;
 using namespace testing::ext;
 using OHOS::sptr;
 using namespace OHOS::HDI::Codec::V2_0;
-
 namespace {
 constexpr CodecType TYPE = CodecType::VIDEO_ENCODER;
 constexpr AvCodecRole ROLE = MEDIA_ROLETYPE_VIDEO_AVC;
@@ -1514,6 +1513,49 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testSetCallbacks001, Function | Me
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
 /**
+ * @tc.number : SUB_Driver_Codec_SetCallbacks_0300
+ * @tc.name   : testSetCallbacks002
+ * @tc.desc   : Set the function entry to appData = 0
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testSetCallbacks002, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    g_callback = new CodecCallbackService();
+    ASSERT_TRUE(g_callback != nullptr);
+    auto ret = g_component->SetCallbacks(g_callback, 0);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_SetCallbacks_0400
+ * @tc.name   : testSetCallbacks003
+ * @tc.desc   : Set the function entry to appData = 1000
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testSetCallbacks003, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    g_callback = new CodecCallbackService();
+    ASSERT_TRUE(g_callback != nullptr);
+    auto ret = g_component->SetCallbacks(g_callback, 1000);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_SetCallbacks_0500
+ * @tc.name   : testSetCallbacks004
+ * @tc.desc   : Set the function entry to appData = 1 and cycle 100 times
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testSetCallbacks004, Function | MediumTest | Level1)
+{
+    int32_t i = 0;
+    int32_t ret;
+    ASSERT_TRUE(g_component != nullptr);
+    g_callback = new CodecCallbackService();
+    ASSERT_TRUE(g_callback != nullptr);
+    for (i = 0; i < 100; i++) {
+        ret = g_component->SetCallbacks(g_callback, 1);
+        ASSERT_EQ(ret, HDF_SUCCESS);
+    }
+}
+/**
  * @tc.number  SUB_Driver_Codec_GetComponentVersion_0100
  * @tc.name  testGetComponentVersion001
  * @tc.desc  The input parameter is empty.
@@ -1991,5 +2033,4 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testSendCommand038, Function | Med
     int32_t ret = g_component->SendCommand(CODEC_COMMAND_MAX, CODEC_STATE_PAUSE, cmdData);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
-
 } // namespace

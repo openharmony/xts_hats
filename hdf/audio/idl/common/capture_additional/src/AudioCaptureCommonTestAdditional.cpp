@@ -2274,4 +2274,92 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump010, Function | Me
     ret = capture_->AudioDevDump(capture_, range, 2147483647);
     EXPECT_EQ(ret, HDF_SUCCESS);
 }
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_GetCurrentChannelId_0300
+ * @tc.name   : testCaptureGetCurrentChannelId001
+ * @tc.desc   : GetCurrentChannelId, Loop call 1000 times
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetCurrentChannelId001, Function | MediumTest | Level1)
+{
+    int32_t ret = HDF_SUCCESS;
+    uint32_t channelId = 0;
+    EXPECT_NE(capture_->GetCurrentChannelId, nullptr);
+    for (int64_t i = 0; i < 1000; i++) {
+        ret = capture_->GetCurrentChannelId(capture_, &channelId);
+        EXPECT_EQ(ret, HDF_SUCCESS);
+    }
+    EXPECT_EQ(TEST_CHANNEL_COUNT, channelId);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_SetExtraParams_0300
+ * @tc.name   : testCaptureSetExtraParams001
+ * @tc.desc   : SetExtraParams, Loop call 1000 times
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetExtraParams001, Function | MediumTest | Level2)
+{
+    ASSERT_NE(capture_->SetExtraParams, nullptr);
+
+    int32_t ret = HDF_SUCCESS;
+    for (int64_t i = 0; i < 1000; i++) {
+        ret = capture_->SetExtraParams(nullptr, nullptr);
+        EXPECT_NE(ret, HDF_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_GetExtraParams_0300
+ * @tc.name   : testCaptureGetExtraParams001
+ * @tc.desc   : GetExtraParams, Loop call 1000 times
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetExtraParams001, Function | MediumTest | Level2)
+{
+    ASSERT_NE(capture_->GetExtraParams, nullptr);
+    char keyValueListReply[256] = {};
+    uint32_t listLenth = 256;
+
+    int32_t ret = HDF_SUCCESS;
+    for (int64_t i = 0; i < 1000; i++) {
+        ret = capture_->GetExtraParams(nullptr, keyValueListReply, listLenth);
+        EXPECT_NE(ret, HDF_SUCCESS);
+
+        ret = capture_->GetExtraParams(capture_, nullptr, listLenth);
+        EXPECT_NE(ret, HDF_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_Start_0300
+ * @tc.name   : testCaptureStart001
+ * @tc.desc   : Start, Loop call 1000 times
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureStart001, Function | MediumTest | Level1)
+{
+    ASSERT_NE(capture_->Start, nullptr);
+
+    int32_t ret = HDF_SUCCESS;
+    for (int64_t i = 0; i < 1000; i++) {
+        ret = capture_->Start(capture_);
+        EXPECT_EQ(ret, HDF_SUCCESS);
+    }
+    capture_->Stop(capture_);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_Flush_0300
+ * @tc.name   : testCaptureFlush001
+ * @tc.desc   : Flush, Loop call 1000 times
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureFlush001, Function | MediumTest | Level1)
+{
+    ASSERT_NE(capture_->Flush, nullptr);
+
+    int32_t ret = HDF_SUCCESS;
+    for (int64_t i = 0; i < 1000; i++) {
+        ret = capture_->Flush(capture_);
+        EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    }
+}
+
 } // namespace

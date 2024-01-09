@@ -27,6 +27,7 @@ group("hdi_base_common") {
       "common/capture:HatsHdfAudioIdlCaptureTest",
       "common/capture_additional:HatsHdfAudioIdlCaptureAdditionalTest",
       "common/manager:HatsHdfAudioIdlManagerTest",
+      "common/manager_additional:HatsHdfAudioIdlManagerAdditionalTest",
       "common/render:HatsHdfAudioIdlRenderTest",
       "common/render_additional:HatsHdfAudioIdlRenderAdditionalTest",
 

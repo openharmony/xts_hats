@@ -863,4 +863,64 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableVibratorModulation013, F
     }
 }
 
+/**
+ * @tc.name   : SUB_Driver_Sensor_HdiVibrator_5500
+ * @tc.name   : testEnableCompositeEffect001
+ * @tc.desc   : Controls the vibrator to perform a periodic vibration with the custom composite effect.effect.type =
+ * HDF_EFFECT_TYPE_BUTT.
+ */
+HWTEST_F(HdfVibratorHdiServiceTestAdditional, testEnableCompositeEffect001, Function | MediumTest | Level1)
+{
+    ASSERT_NE(nullptr, g_vibratorInterface);
+    PrimitiveEffect primitiveEffect1{0, 60007, 0};
+    PrimitiveEffect primitiveEffect2{1000, 60007, 0};
+    PrimitiveEffect primitiveEffect3{1000, 60007, 0};
+    CompositeEffect effect1 = {.primitiveEffect = primitiveEffect1};
+    CompositeEffect effect2 = {.primitiveEffect = primitiveEffect2};
+    CompositeEffect effect3 = {.primitiveEffect = primitiveEffect3};
+    std::vector<CompositeEffect> vec;
+    vec.push_back(effect1);
+    vec.push_back(effect2);
+    vec.push_back(effect3);
+    HdfCompositeEffect effect;
+    effect.type = HDF_EFFECT_TYPE_BUTT;
+    effect.compositeEffects = vec;
+    int32_t ret = g_vibratorInterface->EnableCompositeEffect(effect);
+    EXPECT_NE(HDF_SUCCESS, ret);
+}
+
+/**
+ * @tc.name   : SUB_Driver_Sensor_HdiVibrator_5600
+ * @tc.name   : testGetEffectInfo001
+ * @tc.desc   : Obtains the vibration effect information with the specified effect type.Cycle 10 times.
+ */
+HWTEST_F(HdfVibratorHdiServiceTestAdditional, testGetEffectInfo001, Function | MediumTest | Level1)
+{
+    ASSERT_NE(nullptr, g_vibratorInterface);
+    HdfEffectInfo effectInfo;
+    int32_t ret;
+    int i;
+    for (i = 0; i < 10; i++) {
+        ret = g_vibratorInterface->GetEffectInfo("invalid.effect.id", effectInfo);
+        EXPECT_EQ(HDF_SUCCESS, ret);
+        EXPECT_EQ(effectInfo.duration, 0);
+        EXPECT_EQ(effectInfo.isSupportEffect, false);
+    }
+}
+
+/**
+ * @tc.name   : SUB_Driver_Sensor_IsVibratorRunning_5700
+ * @tc.name   : testIsVibratorRunning001
+ * @tc.desc   : Obtains whether the vibrator is currently vibrating.Cycle 10 times.
+ */
+HWTEST_F(HdfVibratorHdiServiceTestAdditional, testIsVibratorRunning001, Function | MediumTest | Level1)
+{
+    ASSERT_NE(nullptr, g_vibratorInterface);
+    bool state{false};
+    int i;
+    for (i = 0; i < 10; i++) {
+        g_vibratorInterface->IsVibratorRunning(state);
+        EXPECT_EQ(state, false);
+    }
+}
 } // namespace

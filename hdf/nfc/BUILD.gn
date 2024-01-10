@@ -25,6 +25,7 @@ group("HatsHdfNfcTest") {
       deps = [
         "hdcService:HatsHdfNfcHdiTest",
         "secureElement:HatsNfcEseHdiTest",
+        "secureElement_additional:HatsNfcEseHdiAdditionalTest",
       ]
     }
   } else {

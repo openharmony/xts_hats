@@ -3642,6 +3642,26 @@ HWTEST_F(DisplayBufferMtAdditional, testDisplayBufferInvalidateCache020, Functio
     AfterCache(bHandle);
 }
 
+/**
+ * @tc.number : SUB_Driver_Display_Buffer_FreeMem_0100
+ * @tc.name   : testDisplayBufferFreeMem001
+ * @tc.desc   : Reliability of function(FreeMem)
+ */
+HWTEST_F(DisplayBufferMtAdditional, testDisplayBufferFreeMem001, Function | MediumTest | Level1)
+{
+    BufferHandle *bHandle = nullptr;
+    AllocInfo info;
+    info.width = 1024;
+    info.height = 1024;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_WRITE;
+    info.format = PIXEL_FMT_BGRA_8888;
+
+    g_dispbuf->AllocMem(info, bHandle);
+    g_dispbuf->FreeMem(*bHandle);
+    void *buffer = g_dispbuf->Mmap(*bHandle);
+    EXPECT_EQ(reinterpret_cast<void *>(0xffffffff), buffer);
+}
+
 } // namespace TEST
 } // namespace Display
 } // namespace HDI

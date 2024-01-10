@@ -388,6 +388,8 @@ public:
         const RilRadioResponseInfo &responseInfo, const CellListCurrentInfo &cellListCurrentInfo) override;
     int32_t NetworkCurrentCellUpdated_1_1(
         const RilRadioResponseInfo &responseInfo, const CellListCurrentInfo_1_1 &cellListCurrentInfo) override;
+    int32_t NetworkCurrentCellUpdated_1_2(
+        const RilRadioResponseInfo &responseInfo, const CellListCurrentInfo_1_2 &cellListCurrentInfo) override;
     int32_t ResidentNetworkUpdated(const RilRadioResponseInfo &responseInfo, const std::string &plmn) override;
     int32_t GetSignalStrengthResponse(const RilRadioResponseInfo &responseInfo, const Rssi &rssi) override;
     int32_t GetCsRegStatusResponse(
@@ -403,10 +405,14 @@ public:
     int32_t SetNetworkSelectionModeResponse(const RilRadioResponseInfo &responseInfo) override;
     int32_t GetNeighboringCellInfoListResponse(
         const RilRadioResponseInfo &responseInfo, const CellListNearbyInfo &cellInfoList) override;
-    int32_t GetCurrentCellInfoResponse_1_1(const RilRadioResponseInfo &responseInfo,
-        const CellListCurrentInfo_1_1 &cellListCurrentInfo) override;
+    int32_t GetNeighboringCellInfoListResponse_1_2(
+        const RilRadioResponseInfo &responseInfo, const CellListNearbyInfo_1_2 &cellInfoList) override;
     int32_t GetCurrentCellInfoResponse(
         const RilRadioResponseInfo &responseInfo, const CellListCurrentInfo &cellInfoList) override;
+    int32_t GetCurrentCellInfoResponse_1_1(const RilRadioResponseInfo &responseInfo,
+        const CellListCurrentInfo_1_1 &cellListCurrentInfo) override;
+    int32_t GetCurrentCellInfoResponse_1_2(
+        const RilRadioResponseInfo &responseInfo, const CellListCurrentInfo_1_2 &cellListCurrentInfo) override;
     int32_t SetPreferredNetworkResponse(const RilRadioResponseInfo &responseInfo) override;
     int32_t GetPreferredNetworkResponse(
         const RilRadioResponseInfo &responseInfo, const PreferredNetworkTypeInfo &preferredNetworkTypeInfo) override;
@@ -997,6 +1003,50 @@ int32_t RilCallback::NetworkCurrentCellUpdated_1_1(
     return 0;
 }
 
+int32_t RilCallback::NetworkCurrentCellUpdated_1_2(
+    const RilRadioResponseInfo &responseInfo, const CellListCurrentInfo_1_2 &cellListCurrentInfo)
+{
+    HDF_LOGI("itemNum:%{public}d", cellListCurrentInfo.itemNum);
+    for (auto info : cellListCurrentInfo.cellCurrentInfo) {
+        HDF_LOGI("ratType:%{public}d, mcc:%{public}d, mnc:%{public}d", info.ratType, info.mcc, info.mnc);
+        switch (static_cast<RatType>(info.ratType)) {
+            case RatType::NETWORK_TYPE_LTE:
+                HDF_LOGI("cellId:%{public}d", info.serviceCells.lte.cellId);
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.lte.arfcn);
+                HDF_LOGI("pci:%{public}d", info.serviceCells.lte.pci);
+                HDF_LOGI("rsrp:%{public}d", info.serviceCells.lte.rsrp);
+                HDF_LOGI("rsrq:%{public}d", info.serviceCells.lte.rsrq);
+                HDF_LOGI("rxlev:%{public}d", info.serviceCells.lte.rssi);
+                break;
+            case RatType::NETWORK_TYPE_GSM:
+                HDF_LOGI("band:%{public}d", info.serviceCells.gsm.band);
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.gsm.arfcn);
+                HDF_LOGI("bsic:%{public}d", info.serviceCells.gsm.bsic);
+                HDF_LOGI("cellId:%{public}d", info.serviceCells.gsm.cellId);
+                HDF_LOGI("rxlev:%{public}d", info.serviceCells.gsm.rxlev);
+                HDF_LOGI("lac:%{public}d", info.serviceCells.gsm.lac);
+                break;
+            case RatType::NETWORK_TYPE_WCDMA:
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.wcdma.arfcn);
+                HDF_LOGI("psc:%{public}d", info.serviceCells.wcdma.psc);
+                HDF_LOGI("rscp:%{public}d", info.serviceCells.wcdma.rscp);
+                HDF_LOGI("ecno:%{public}d", info.serviceCells.wcdma.ecno);
+                break;
+            case RatType::NETWORK_TYPE_NR:
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.nr.nrArfcn);
+                HDF_LOGI("psc:%{public}d", info.serviceCells.nr.pci);
+                HDF_LOGI("rscp:%{public}d", info.serviceCells.nr.tac);
+                HDF_LOGI("rsrp:%{public}d", info.serviceCells.nr.rsrp);
+                HDF_LOGI("rsrq:%{public}d", info.serviceCells.nr.rsrq);
+                break;
+            default:
+                HDF_LOGE("invalid ratType");
+                break;
+        }
+    }
+    return 0;
+}
+
 int32_t RilCallback::ResidentNetworkUpdated(const RilRadioResponseInfo &responseInfo, const std::string &plmn)
 {
     HDF_LOGI("RilCallback::ResidentNetworkUpdated plmn:%{public}s", plmn.c_str());
@@ -1131,6 +1181,52 @@ int32_t RilCallback::GetNeighboringCellInfoListResponse(
     return 0;
 }
 
+int32_t RilCallback::GetNeighboringCellInfoListResponse_1_2(
+    const RilRadioResponseInfo &responseInfo, const CellListNearbyInfo_1_2 &cellInfoList)
+{
+    HDF_LOGI("itemNum:%{public}d", cellInfoList.itemNum);
+    for (auto info : cellInfoList.cellNearbyInfo) {
+        HDF_LOGI("ratType:%{public}d", info.ratType);
+        switch (static_cast<RatType>(info.ratType)) {
+            case RatType::NETWORK_TYPE_LTE:
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.lte.arfcn);
+                HDF_LOGI("pci:%{public}d", info.serviceCells.lte.pci);
+                HDF_LOGI("rsrp:%{public}d", info.serviceCells.lte.rsrp);
+                HDF_LOGI("rsrq:%{public}d", info.serviceCells.lte.rsrq);
+                HDF_LOGI("rxlev:%{public}d", info.serviceCells.lte.rxlev);
+                break;
+            case RatType::NETWORK_TYPE_GSM:
+                HDF_LOGI("band:%{public}d", info.serviceCells.gsm.band);
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.gsm.arfcn);
+                HDF_LOGI("bsic:%{public}d", info.serviceCells.gsm.bsic);
+                HDF_LOGI("cellId:%{public}d", info.serviceCells.gsm.cellId);
+                HDF_LOGI("rxlev:%{public}d", info.serviceCells.gsm.rxlev);
+                HDF_LOGI("lac:%{public}d", info.serviceCells.gsm.lac);
+                break;
+            case RatType::NETWORK_TYPE_WCDMA:
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.wcdma.arfcn);
+                HDF_LOGI("psc:%{public}d", info.serviceCells.wcdma.psc);
+                HDF_LOGI("rscp:%{public}d", info.serviceCells.wcdma.rscp);
+                HDF_LOGI("ecno:%{public}d", info.serviceCells.wcdma.ecno);
+                break;
+            case RatType::NETWORK_TYPE_NR:
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.nr.nrArfcn);
+                HDF_LOGI("psc:%{public}d", info.serviceCells.nr.pci);
+                HDF_LOGI("rscp:%{public}d", info.serviceCells.nr.tac);
+                HDF_LOGI("rsrp:%{public}d", info.serviceCells.nr.rsrp);
+                HDF_LOGI("rsrq:%{public}d", info.serviceCells.nr.rsrq);
+                break;
+            default:
+                HDF_LOGE("invalid ratType");
+                break;
+        }
+    }
+    hdiId_ = HdiId::HREQ_NETWORK_GET_NEIGHBORING_CELLINFO_LIST;
+    resultInfo_ = responseInfo;
+    NotifyAll();
+    return 0;
+}
+
 int32_t RilCallback::GetCurrentCellInfoResponse(
     const RilRadioResponseInfo &responseInfo, const CellListCurrentInfo &cellInfoList)
 {
@@ -1217,6 +1313,53 @@ int32_t RilCallback::GetCurrentCellInfoResponse_1_1(
                 break;
             default:
                 HDF_LOGE("RilCallback::GetCurrentCellInfoResponse_1_1 invalid ratType");
+        }
+    }
+    hdiId_ = HdiId::HREQ_NETWORK_GET_CURRENT_CELL_INFO;
+    resultInfo_ = responseInfo;
+    NotifyAll();
+    return 0;
+}
+
+int32_t RilCallback::GetCurrentCellInfoResponse_1_2(
+    const RilRadioResponseInfo &responseInfo, const CellListCurrentInfo_1_2 &cellListCurrentInfo)
+{
+    HDF_LOGI("itemNum:%{public}d", cellListCurrentInfo.itemNum);
+    for (auto info : cellListCurrentInfo.cellCurrentInfo) {
+        HDF_LOGI("ratType:%{public}d, mcc:%{public}d, mnc:%{public}d", info.ratType, info.mcc, info.mnc);
+        switch (static_cast<RatType>(info.ratType)) {
+            case RatType::NETWORK_TYPE_LTE:
+                HDF_LOGI("cellId:%{public}d", info.serviceCells.lte.cellId);
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.lte.arfcn);
+                HDF_LOGI("pci:%{public}d", info.serviceCells.lte.pci);
+                HDF_LOGI("rsrp:%{public}d", info.serviceCells.lte.rsrp);
+                HDF_LOGI("rsrq:%{public}d", info.serviceCells.lte.rsrq);
+                HDF_LOGI("rxlev:%{public}d", info.serviceCells.lte.rssi);
+                break;
+            case RatType::NETWORK_TYPE_GSM:
+                HDF_LOGI("band:%{public}d", info.serviceCells.gsm.band);
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.gsm.arfcn);
+                HDF_LOGI("bsic:%{public}d", info.serviceCells.gsm.bsic);
+                HDF_LOGI("cellId:%{public}d", info.serviceCells.gsm.cellId);
+                HDF_LOGI("rxlev:%{public}d", info.serviceCells.gsm.rxlev);
+                HDF_LOGI("lac:%{public}d", info.serviceCells.gsm.lac);
+                break;
+            case RatType::NETWORK_TYPE_WCDMA:
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.wcdma.arfcn);
+                HDF_LOGI("psc:%{public}d", info.serviceCells.wcdma.psc);
+                HDF_LOGI("rscp:%{public}d", info.serviceCells.wcdma.rscp);
+                HDF_LOGI("ecno:%{public}d", info.serviceCells.wcdma.ecno);
+                break;
+            case RatType::NETWORK_TYPE_NR:
+                HDF_LOGI("arfcn:%{public}d", info.serviceCells.nr.nrArfcn);
+                HDF_LOGI("psc:%{public}d", info.serviceCells.nr.pci);
+                HDF_LOGI("rscp:%{public}d", info.serviceCells.nr.tac);
+                HDF_LOGI("rsrp:%{public}d", info.serviceCells.nr.rsrp);
+                HDF_LOGI("rsrq:%{public}d", info.serviceCells.nr.rsrq);
+                break;
+            default:
+                HDF_LOGE("invalid ratType");
+                break;
         }
     }
     hdiId_ = HdiId::HREQ_NETWORK_GET_CURRENT_CELL_INFO;

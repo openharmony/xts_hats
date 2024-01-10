@@ -897,7 +897,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestCancel004,
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_SendCommand_0200
  * @tc.name  testFingerprintAuthTestSendCommand001
- * @tc.desc  test SendCommand commandId LOCK_TEMPLATE
+ * @tc.desc  test SendCommand commandId enum
  */
 HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestSendCommand001, Function | MediumTest | Level1)
 {
@@ -910,38 +910,12 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestSendComman
     int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_SendCommand_0300
- * @tc.name  testFingerprintAuthTestSendCommand002
- * @tc.desc  test SendCommand commandId UNLOCK_TEMPLATE
- */
-HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestSendCommand002, Function | MediumTest | Level1)
-{
-    cout << "start test testFingerprintAuthTestSendCommand002" << endl;
-    int32_t commandId = UNLOCK_TEMPLATE;
-    std::vector<uint8_t> extraInfo;
-    FillTestUint8Vector(parcel, extraInfo);
-    sptr<IExecutorCallback> callbackObj;
-    FillTestIExecutorCallback(parcel, callbackObj);
-    int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
+	commandId = UNLOCK_TEMPLATE;
+	ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_SendCommand_0400
- * @tc.name  testFingerprintAuthTestSendCommand003
- * @tc.desc  test SendCommand commandId VENDOR_COMMAND_BEGIN
- */
-HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestSendCommand003, Function | MediumTest | Level1)
-{
-    cout << "start test testFingerprintAuthTestSendCommand003" << endl;
-    int32_t commandId = VENDOR_COMMAND_BEGIN;
-    std::vector<uint8_t> extraInfo;
-    FillTestUint8Vector(parcel, extraInfo);
-    sptr<IExecutorCallback> callbackObj;
-    FillTestIExecutorCallback(parcel, callbackObj);
-    int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
+	commandId = VENDOR_COMMAND_BEGIN;
+	ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
 }
@@ -1328,7 +1302,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestAuthentica
 /**
  * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_GetProperty_0200
  * @tc.name  testFingerprintAuthTestGetProperty001
- * @tc.desc  test GetProperty ptype AUTH_SUB_TYPE
+ * @tc.desc  test GetProperty ptype enum
  */
 HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestGetProperty001, Function | MediumTest | Level1)
 {
@@ -1336,84 +1310,11 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestGetPropert
     std::vector<uint64_t> templateIdList;
     FillTestUint64Vector(parcel, templateIdList);
     std::vector<GetPropertyType> propertyTypes;
-    GetPropertyType ptype = OHOS::HDI::FingerprintAuth::V1_1::AUTH_SUB_TYPE;
-    propertyTypes.push_back(ptype);
-    Property property;
-    FillTestProperty(parcel, property);
-    int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
-    cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_GetProperty_0300
- * @tc.name  testFingerprintAuthTestGetProperty002
- * @tc.desc  test GetProperty ptype LOCKOUT_DURATION
- */
-HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestGetProperty002, Function | MediumTest | Level1)
-{
-    cout << "start test testFingerprintAuthTestGetProperty002" << endl;
-    std::vector<uint64_t> templateIdList;
-    FillTestUint64Vector(parcel, templateIdList);
-    std::vector<GetPropertyType> propertyTypes;
-    GetPropertyType ptype = OHOS::HDI::FingerprintAuth::V1_1::LOCKOUT_DURATION;
-    propertyTypes.push_back(ptype);
-    Property property;
-    FillTestProperty(parcel, property);
-    int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
-    cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_GetProperty_0400
- * @tc.name  testFingerprintAuthTestGetProperty003
- * @tc.desc  test GetProperty ptype REMAIN_ATTEMPTS
- */
-HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestGetProperty003, Function | MediumTest | Level1)
-{
-    cout << "start test testFingerprintAuthTestGetProperty003" << endl;
-    std::vector<uint64_t> templateIdList;
-    FillTestUint64Vector(parcel, templateIdList);
-    std::vector<GetPropertyType> propertyTypes;
-    GetPropertyType ptype = OHOS::HDI::FingerprintAuth::V1_1::REMAIN_ATTEMPTS;
-    propertyTypes.push_back(ptype);
-    Property property;
-    FillTestProperty(parcel, property);
-    int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
-    cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_GetProperty_0500
- * @tc.name  testFingerprintAuthTestGetProperty004
- * @tc.desc  test GetProperty ptype ENROLL_PROGRESS
- */
-HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestGetProperty004, Function | MediumTest | Level1)
-{
-    cout << "start test testFingerprintAuthTestGetProperty004" << endl;
-    std::vector<uint64_t> templateIdList;
-    FillTestUint64Vector(parcel, templateIdList);
-    std::vector<GetPropertyType> propertyTypes;
-    GetPropertyType ptype = OHOS::HDI::FingerprintAuth::V1_1::ENROLL_PROGRESS;
-    propertyTypes.push_back(ptype);
-    Property property;
-    FillTestProperty(parcel, property);
-    int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
-    cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FingerprintAuth_HDI_GetProperty_0600
- * @tc.name  testFingerprintAuthTestGetProperty005
- * @tc.desc  test GetProperty ptype SENSOR_INFO
- */
-HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestGetProperty005, Function | MediumTest | Level1)
-{
-    cout << "start test testFingerprintAuthTestGetProperty005" << endl;
-    std::vector<uint64_t> templateIdList;
-    FillTestUint64Vector(parcel, templateIdList);
-    std::vector<GetPropertyType> propertyTypes;
-    GetPropertyType ptype = OHOS::HDI::FingerprintAuth::V1_1::SENSOR_INFO;
-    propertyTypes.push_back(ptype);
+    propertyTypes.push_back(OHOS::HDI::FingerprintAuth::V1_1::AUTH_SUB_TYPE);
+    propertyTypes.push_back(OHOS::HDI::FingerprintAuth::V1_1::LOCKOUT_DURATION);
+    propertyTypes.push_back(OHOS::HDI::FingerprintAuth::V1_1::REMAIN_ATTEMPTS);
+    propertyTypes.push_back(OHOS::HDI::FingerprintAuth::V1_1::ENROLL_PROGRESS);
+    propertyTypes.push_back(OHOS::HDI::FingerprintAuth::V1_1::SENSOR_INFO);
     Property property;
     FillTestProperty(parcel, property);
     int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);

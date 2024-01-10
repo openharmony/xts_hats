@@ -1087,7 +1087,7 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestSendCommand009, Function |
 /**
  * @tc.number  SUB_Security_Iam_PinAuth_HDI_GetProperty_0200
  * @tc.name  testPinAuthTestGetProperty001
- * @tc.desc  test GetProperty propertyTypes AUTH_SUB_TYPE
+ * @tc.desc  test GetProperty propertyTypes enum
  */
 HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestGetProperty001, Function | MediumTest | Level2)
 {
@@ -1096,43 +1096,7 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestGetProperty001, Function |
     FillTestUint64Vector(parcel, templateIdList);
     std::vector<GetPropertyType> propertyTypes;
     propertyTypes.push_back(OHOS::HDI::PinAuth::V1_1::AUTH_SUB_TYPE);
-    Property property;
-
-    int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
-
-    cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_PinAuth_HDI_GetProperty_0300
- * @tc.name  testPinAuthTestGetProperty002
- * @tc.desc  test GetProperty propertyTypes LOCKOUT_DURATION
- */
-HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestGetProperty002, Function | MediumTest | Level2)
-{
-    cout << "start GetProperty" << endl;
-    std::vector<uint64_t> templateIdList;
-    FillTestUint64Vector(parcel, templateIdList);
-    std::vector<GetPropertyType> propertyTypes;
     propertyTypes.push_back(OHOS::HDI::PinAuth::V1_1::LOCKOUT_DURATION);
-    Property property;
-
-    int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
-
-    cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_PinAuth_HDI_GetProperty_0400
- * @tc.name  testPinAuthTestGetProperty003
- * @tc.desc  test GetProperty propertyTypes REMAIN_ATTEMPTS
- */
-HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestGetProperty003, Function | MediumTest | Level2)
-{
-    cout << "start GetProperty" << endl;
-    std::vector<uint64_t> templateIdList;
-    FillTestUint64Vector(parcel, templateIdList);
-    std::vector<GetPropertyType> propertyTypes;
     propertyTypes.push_back(OHOS::HDI::PinAuth::V1_1::REMAIN_ATTEMPTS);
     Property property;
 

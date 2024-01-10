@@ -679,6 +679,200 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex002, Function
     ASSERT_NE(ret, HDF_SUCCESS);
 }
 /**
+ * @tc.number : SUB_Driver_Codec_GetExtensionIndex_0400
+ * @tc.name   : testGetExtensionIndex003
+ * @tc.desc   : When the paramName is "ＯＭＸ．Ｔｏｐａｚ．ｉｎｄｅｘ．ｐａｒａｍ．ｅｘｔｅｎｄｅｄ＿ｖｉｄｅｏ" and the
+ * indexType = 0
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex003, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    uint32_t indexType = 0;
+    auto ret = g_component->GetExtensionIndex(
+        "ＯＭＸ．Ｔｏｐａｚ．ｉｎｄｅｘ．ｐａｒａｍ．ｅｘｔｅｎｄｅｄ＿ｖｉｄｅｏ", indexType);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_GetExtensionIndex_0500
+ * @tc.name   : testGetExtensionIndex004
+ * @tc.desc   : When the paramName is "!@#$%^&**" and the indexType = 0
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex004, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    uint32_t indexType = 0;
+    auto ret = g_component->GetExtensionIndex("!@#$%^&**", indexType);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_GetExtensionIndex_0600
+ * @tc.name   : testGetExtensionIndex005
+ * @tc.desc   : When the paramName is "！＠＃＄％＾＆＊＊" and the indexType = 0,
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex005, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    uint32_t indexType = 0;
+    auto ret = g_component->GetExtensionIndex("！＠＃＄％＾＆＊＊", indexType);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_GetExtensionIndex_0700
+ * @tc.name   : testGetExtensionIndex006
+ * @tc.desc   : When the paramName is "12345" and the indexType = 0
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex006, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    uint32_t indexType = 0;
+    auto ret = g_component->GetExtensionIndex("12345", indexType);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_GetExtensionIndex_0800
+ * @tc.name   : testGetExtensionIndex007
+ * @tc.desc   : When the paramName is "12345MX.Topaz" and the indexType = 0
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex007, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    uint32_t indexType = 0;
+    auto ret = g_component->GetExtensionIndex("12345MX.Topaz", indexType);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_GetExtensionIndex_0900
+ * @tc.name   : testGetExtensionIndex008
+ * @tc.desc   : When the paramName is "!@#$%^&**OMX.Topaz" and the indexType = 0
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex008, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    uint32_t indexType = 0;
+    auto ret = g_component->GetExtensionIndex("!@#$%^&**OMX.Topaz", indexType);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_GetExtensionIndex_1000
+ * @tc.name   : testGetExtensionIndex009
+ * @tc.desc   : When the paramName is "１２３４５" and the indexType = 0
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex009, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    uint32_t indexType = 0;
+    auto ret = g_component->GetExtensionIndex("１２３４５", indexType);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_GetExtensionIndex_1100
+ * @tc.name   : testGetExtensionIndex010
+ * @tc.desc   : When the paramName is "１２３４５ＯＭＸ．Ｔｏｐａｚ" and the indexType = 0
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex010, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    uint32_t indexType = 0;
+    auto ret = g_component->GetExtensionIndex("１２３４５ＯＭＸ．Ｔｏｐａｚ", indexType);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_GetExtensionIndex_1200
+ * @tc.name   : testGetExtensionIndex011
+ * @tc.desc   : When the paramName is "１２３４５!@#$%" and the indexType = 0
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex011, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    uint32_t indexType = 0;
+    auto ret = g_component->GetExtensionIndex("１２３４５Ｏ!@#$%", indexType);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_GetExtensionIndex_1300
+ * @tc.name   : testGetExtensionIndex012
+ * @tc.desc   : When the paramName is "１２３４５！＠＃＄" and the indexType = 0
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex012, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    uint32_t indexType = 0;
+    auto ret = g_component->GetExtensionIndex("１２３４５！＠＃＄", indexType);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_GetExtensionIndex_1400
+ * @tc.name   : testGetExtensionIndex013
+ * @tc.desc   : When the paramName is "１２３４５OMX.Topaz" and the indexType = 0
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex013, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    uint32_t indexType = 0;
+    auto ret = g_component->GetExtensionIndex("１２３４５OMX.Topaz", indexType);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_GetExtensionIndex_1500
+ * @tc.name   : testGetExtensionIndex014
+ * @tc.desc   : When the paramName is "！＠＃＄％OMX.Topaz" and the indexType = 0
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex014, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    uint32_t indexType = 0;
+    auto ret = g_component->GetExtensionIndex("！＠＃＄％OMX.Topaz", indexType);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_GetExtensionIndex_1600
+ * @tc.name   : testGetExtensionIndex015
+ * @tc.desc   : When the paramName is "！＠＃＄％ＯＭＸ．Ｔｏｐａｚ" and the indexType = 0
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex015, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    uint32_t indexType = 0;
+    auto ret = g_component->GetExtensionIndex("！＠＃＄％ＯＭＸ．Ｔｏｐａｚ", indexType);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_GetExtensionIndex_1700
+ * @tc.name   : testGetExtensionIndex016
+ * @tc.desc   : When the paramName is "12345ＯＭＸ．Ｔｏｐａｚ" and the indexType = 0
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex016, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    uint32_t indexType = 0;
+    auto ret = g_component->GetExtensionIndex("12345ＯＭＸ．Ｔｏｐａｚ", indexType);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_GetExtensionIndex_1800
+ * @tc.name   : testGetExtensionIndex017
+ * @tc.desc   : When the paramName is "12345!@#$%" and the indexType = 0
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex017, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    uint32_t indexType = 0;
+    auto ret = g_component->GetExtensionIndex("12345!@#$%", indexType);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_GetExtensionIndex_1900
+ * @tc.name   : testGetExtensionIndex018
+ * @tc.desc   : When the paramName is "12345！＠＃＄％" and the indexType = 0
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex018, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    uint32_t indexType = 0;
+    auto ret = g_component->GetExtensionIndex("12345！＠＃＄％", indexType);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
  * @tc.number : SUB_Driver_Codec_GetState_0200
  * @tc.name   : testGetState001
  * @tc.desc   : When the initial value of CodecStateType is CODEC_STATE_INVALID, does the function modify it.
@@ -767,6 +961,272 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testComponentTunnelRequest004, Fun
     const uint32_t tunneledPort = 101;
     OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
     tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_OUTPUT;
+
+    ret = g_component->ComponentTunnelRequest(OUTPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_ComponentTunnelRequest_0600
+ * @tc.name   : testComponentTunnelRequest005
+ * @tc.desc   : When setting the component status to OMX_StateLoaded, input port=OUTPUT_INDEX,
+ *              tunneledComp=1002,tunneledPort=101, inTunnelSetup=CODEC_BUFFER_SUPPLY_OUTPUT, sending command failed.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testComponentTunnelRequest005, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateLoaded, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    const int32_t tunneledComp = 1002;
+    const uint32_t tunneledPort = 101;
+    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_OUTPUT;
+
+    ret = g_component->ComponentTunnelRequest(OUTPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_ComponentTunnelRequest_0700
+ * @tc.name   : testComponentTunnelRequest006
+ * @tc.desc   : When setting the component status to OMX_StateExecuting, input port=OUTPUT_INDEX,
+ *              tunneledComp=1002,tunneledPort=101, inTunnelSetup=CODEC_BUFFER_SUPPLY_OUTPUT, sending command failed.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testComponentTunnelRequest006, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateExecuting, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    const int32_t tunneledComp = 1002;
+    const uint32_t tunneledPort = 101;
+    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_OUTPUT;
+
+    ret = g_component->ComponentTunnelRequest(OUTPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_ComponentTunnelRequest_0800
+ * @tc.name   : testComponentTunnelRequest007
+ * @tc.desc   : When setting the component status to OMX_StateKhronosExtensions, input port=OUTPUT_INDEX,
+ *              tunneledComp=1002,tunneledPort=101, inTunnelSetup=CODEC_BUFFER_SUPPLY_OUTPUT, sending command failed.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testComponentTunnelRequest007, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateKhronosExtensions, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    const int32_t tunneledComp = 1002;
+    const uint32_t tunneledPort = 101;
+    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_OUTPUT;
+
+    ret = g_component->ComponentTunnelRequest(OUTPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_ComponentTunnelRequest_0900
+ * @tc.name   : testComponentTunnelRequest008
+ * @tc.desc   : When setting the component status to OMX_StateVendorStartUnused, input port=OUTPUT_INDEX,
+ *              tunneledComp=1002,tunneledPort=101, inTunnelSetup=CODEC_BUFFER_SUPPLY_OUTPUT, sending command failed.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testComponentTunnelRequest008, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateVendorStartUnused, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    const int32_t tunneledComp = 1002;
+    const uint32_t tunneledPort = 101;
+    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_OUTPUT;
+
+    ret = g_component->ComponentTunnelRequest(OUTPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_ComponentTunnelRequest_1000
+ * @tc.name   : testComponentTunnelRequest009
+ * @tc.desc   : When setting the component status to OMX_StateMax, input port=OUTPUT_INDEX,
+ *              tunneledComp=1002,tunneledPort=101, inTunnelSetup=CODEC_BUFFER_SUPPLY_OUTPUT, sending command failed.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testComponentTunnelRequest009, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateMax, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    const int32_t tunneledComp = 1002;
+    const uint32_t tunneledPort = 101;
+    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_OUTPUT;
+
+    ret = g_component->ComponentTunnelRequest(OUTPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_ComponentTunnelRequest_1100
+ * @tc.name   : testComponentTunnelRequest010
+ * @tc.desc   : When setting the component status to OMX_StateMax, input port=INPUT_INDEX,
+ *              tunneledComp=1002,tunneledPort=101, inTunnelSetup=CODEC_BUFFER_SUPPLY_UNSPECIFIED, sending command
+ * failed.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testComponentTunnelRequest010, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateMax, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    const int32_t tunneledComp = 1002;
+    const uint32_t tunneledPort = 101;
+    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_UNSPECIFIED;
+
+    ret = g_component->ComponentTunnelRequest(INPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_ComponentTunnelRequest_1200
+ * @tc.name   : testComponentTunnelRequest011
+ * @tc.desc   : When setting the component status to OMX_StateMax, input port=INPUT_INDEX,
+ *              tunneledComp=1002,tunneledPort=101, inTunnelSetup=CODEC_BUFFER_SUPPLY_KHRONOS_EXTENSIONS, sending
+ * command failed.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testComponentTunnelRequest011, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateMax, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    const int32_t tunneledComp = 1002;
+    const uint32_t tunneledPort = 101;
+    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_KHRONOS_EXTENSIONS;
+
+    ret = g_component->ComponentTunnelRequest(INPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_ComponentTunnelRequest_1300
+ * @tc.name   : testComponentTunnelRequest012
+ * @tc.desc   : When setting the component status to OMX_StateMax, input port=INPUT_INDEX,
+ *              tunneledComp=1002,tunneledPort=101, inTunnelSetup=CODEC_BUFFER_SUPPLY_VENDOR_START_UNUSED, sending
+ * command failed.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testComponentTunnelRequest012, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateMax, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    const int32_t tunneledComp = 1002;
+    const uint32_t tunneledPort = 101;
+    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_VENDOR_START_UNUSED;
+
+    ret = g_component->ComponentTunnelRequest(INPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_ComponentTunnelRequest_1400
+ * @tc.name   : testComponentTunnelRequest013
+ * @tc.desc   : When setting the component status to OMX_StateMax, input port=INPUT_INDEX,
+ *              tunneledComp=1002,tunneledPort=101, inTunnelSetup=CODEC_BUFFER_SUPPLY_MAX, sending command failed.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testComponentTunnelRequest013, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateMax, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    const int32_t tunneledComp = 1002;
+    const uint32_t tunneledPort = 101;
+    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_MAX;
+
+    ret = g_component->ComponentTunnelRequest(INPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_ComponentTunnelRequest_1500
+ * @tc.name   : testComponentTunnelRequest014
+ * @tc.desc   : When setting the component status to OMX_StateMax, input port=OUTPUT_INDEX,
+ *              tunneledComp=1002,tunneledPort=101, inTunnelSetup=CODEC_BUFFER_SUPPLY_UNSPECIFIED, sending command
+ * failed.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testComponentTunnelRequest014, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateMax, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    const int32_t tunneledComp = 1002;
+    const uint32_t tunneledPort = 101;
+    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_UNSPECIFIED;
+
+    ret = g_component->ComponentTunnelRequest(OUTPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_ComponentTunnelRequest_1600
+ * @tc.name   : testComponentTunnelRequest015
+ * @tc.desc   : When setting the component status to OMX_StateMax, input port=OUTPUT_INDEX,
+ *              tunneledComp=1002,tunneledPort=101, inTunnelSetup=CODEC_BUFFER_SUPPLY_KHRONOS_EXTENSIONS, sending
+ * command failed.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testComponentTunnelRequest015, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateMax, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    const int32_t tunneledComp = 1002;
+    const uint32_t tunneledPort = 101;
+    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_KHRONOS_EXTENSIONS;
+
+    ret = g_component->ComponentTunnelRequest(OUTPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_ComponentTunnelRequest_1700
+ * @tc.name   : testComponentTunnelRequest016
+ * @tc.desc   : When setting the component status to OMX_StateMax, input port=OUTPUT_INDEX,
+ *              tunneledComp=1002,tunneledPort=101, inTunnelSetup=CODEC_BUFFER_SUPPLY_VENDOR_START_UNUSED, sending
+ * command failed.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testComponentTunnelRequest016, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateMax, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    const int32_t tunneledComp = 1002;
+    const uint32_t tunneledPort = 101;
+    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_VENDOR_START_UNUSED;
+
+    ret = g_component->ComponentTunnelRequest(OUTPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_ComponentTunnelRequest_1800
+ * @tc.name   : testComponentTunnelRequest017
+ * @tc.desc   : When setting the component status to OMX_StateMax, input port=OUTPUT_INDEX,
+ *              tunneledComp=1002,tunneledPort=101, inTunnelSetup=CODEC_BUFFER_SUPPLY_MAX, sending command failed.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testComponentTunnelRequest017, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateMax, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    const int32_t tunneledComp = 1002;
+    const uint32_t tunneledPort = 101;
+    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_MAX;
 
     ret = g_component->ComponentTunnelRequest(OUTPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
     ASSERT_NE(ret, HDF_SUCCESS);
@@ -1497,6 +1957,224 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testUseEglImage003, Function | Med
     eglImageVec.assign(eglImage.get(), eglImage.get() + BUFFER_SIZE);
     struct OmxCodecBuffer outbuffer;
     int32_t ret = g_component->UseEglImage(INPUT_INDEX, omxBuffer, outbuffer, eglImageVec);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_UseEglImage_0500
+ * @tc.name   : testUseEglImage004
+ * @tc.desc   : Set component status to OMX_StateWaitForResources, portIndex=INPUT_INDEX, sending command failed.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testUseEglImage004, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    struct OmxCodecBuffer omxBuffer;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateWaitForResources, cmdData);
+    InitOmxCodecBuffer(omxBuffer, CODEC_BUFFER_TYPE_AVSHARE_MEM_FD);
+    auto eglImage = std::make_unique<int8_t[]>(BUFFER_SIZE);
+    ASSERT_TRUE(eglImage != nullptr);
+    std::vector<int8_t> eglImageVec;
+    eglImageVec.assign(eglImage.get(), eglImage.get() + BUFFER_SIZE);
+    struct OmxCodecBuffer outbuffer;
+    ret = g_component->UseEglImage(INPUT_INDEX, omxBuffer, outbuffer, eglImageVec);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_UseEglImage_0600
+ * @tc.name   : testUseEglImage005
+ * @tc.desc   : Set component status to OMX_StateExecuting, portIndex=INPUT_INDEX, sending command failed.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testUseEglImage005, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    struct OmxCodecBuffer omxBuffer;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateExecuting, cmdData);
+    InitOmxCodecBuffer(omxBuffer, CODEC_BUFFER_TYPE_AVSHARE_MEM_FD);
+    auto eglImage = std::make_unique<int8_t[]>(BUFFER_SIZE);
+    ASSERT_TRUE(eglImage != nullptr);
+    std::vector<int8_t> eglImageVec;
+    eglImageVec.assign(eglImage.get(), eglImage.get() + BUFFER_SIZE);
+    struct OmxCodecBuffer outbuffer;
+    ret = g_component->UseEglImage(INPUT_INDEX, omxBuffer, outbuffer, eglImageVec);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_UseEglImage_0700
+ * @tc.name   : testUseEglImage006
+ * @tc.desc   : Set component status to OMX_StateLoaded, with CODEC_BUFFER_TYPE_VIRTUAL_ADDR.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testUseEglImage006, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    struct OmxCodecBuffer omxBuffer;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateLoaded, cmdData);
+    InitOmxCodecBuffer(omxBuffer, CODEC_BUFFER_TYPE_VIRTUAL_ADDR);
+    auto eglImage = std::make_unique<int8_t[]>(BUFFER_SIZE);
+    ASSERT_TRUE(eglImage != nullptr);
+    std::vector<int8_t> eglImageVec;
+    eglImageVec.assign(eglImage.get(), eglImage.get() + BUFFER_SIZE);
+    struct OmxCodecBuffer outbuffer;
+    ret = g_component->UseEglImage(INPUT_INDEX, omxBuffer, outbuffer, eglImageVec);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_UseEglImage_0800
+ * @tc.name   : testUseEglImage007
+ * @tc.desc   : Set component status to OMX_StateExecuting, with CODEC_BUFFER_TYPE_VIRTUAL_ADDR
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testUseEglImage007, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    struct OmxCodecBuffer omxBuffer;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateExecuting, cmdData);
+    InitOmxCodecBuffer(omxBuffer, CODEC_BUFFER_TYPE_VIRTUAL_ADDR);
+    auto eglImage = std::make_unique<int8_t[]>(BUFFER_SIZE);
+    ASSERT_TRUE(eglImage != nullptr);
+    std::vector<int8_t> eglImageVec;
+    eglImageVec.assign(eglImage.get(), eglImage.get() + BUFFER_SIZE);
+    struct OmxCodecBuffer outbuffer;
+    ret = g_component->UseEglImage(INPUT_INDEX, omxBuffer, outbuffer, eglImageVec);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_UseEglImage_0900
+ * @tc.name   : testUseEglImage008
+ * @tc.desc   : Set component status to OMX_StateWaitForResources, with CODEC_BUFFER_TYPE_HANDLE
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testUseEglImage008, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    struct OmxCodecBuffer omxBuffer;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateWaitForResources, cmdData);
+    InitOmxCodecBuffer(omxBuffer, CODEC_BUFFER_TYPE_HANDLE);
+    auto eglImage = std::make_unique<int8_t[]>(BUFFER_SIZE);
+    ASSERT_TRUE(eglImage != nullptr);
+    std::vector<int8_t> eglImageVec;
+    eglImageVec.assign(eglImage.get(), eglImage.get() + BUFFER_SIZE);
+    struct OmxCodecBuffer outbuffer;
+    ret = g_component->UseEglImage(INPUT_INDEX, omxBuffer, outbuffer, eglImageVec);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_UseEglImage_1000
+ * @tc.name   : testUseEglImage009
+ * @tc.desc   : Set component status to OMX_StateLoaded, with CODEC_BUFFER_TYPE_DYNAMIC_HANDLE
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testUseEglImage009, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    struct OmxCodecBuffer omxBuffer;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateLoaded, cmdData);
+    InitOmxCodecBuffer(omxBuffer, CODEC_BUFFER_TYPE_DYNAMIC_HANDLE);
+    auto eglImage = std::make_unique<int8_t[]>(BUFFER_SIZE);
+    ASSERT_TRUE(eglImage != nullptr);
+    std::vector<int8_t> eglImageVec;
+    eglImageVec.assign(eglImage.get(), eglImage.get() + BUFFER_SIZE);
+    struct OmxCodecBuffer outbuffer;
+    ret = g_component->UseEglImage(INPUT_INDEX, omxBuffer, outbuffer, eglImageVec);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_UseEglImage_1100
+ * @tc.name   : testUseEglImage010
+ * @tc.desc   : Initialize the structure OmxCodecBuffer with portIndex=OUTPUT_INDEX, sending command failed.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testUseEglImage010, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    struct OmxCodecBuffer omxBuffer;
+    InitOmxCodecBuffer(omxBuffer, CODEC_BUFFER_TYPE_AVSHARE_MEM_FD);
+    auto eglImage = std::make_unique<int8_t[]>(BUFFER_SIZE);
+    ASSERT_TRUE(eglImage != nullptr);
+    std::vector<int8_t> eglImageVec;
+    eglImageVec.assign(eglImage.get(), eglImage.get() + BUFFER_SIZE);
+    struct OmxCodecBuffer outbuffer;
+    int32_t ret = g_component->UseEglImage(OUTPUT_INDEX, omxBuffer, outbuffer, eglImageVec);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_UseEglImage_1200
+ * @tc.name   : testUseEglImage011
+ * @tc.desc   : Set component status to OMX_StatePause, portIndex=OUTPUT_INDEX, sending command failed.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testUseEglImage011, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    struct OmxCodecBuffer omxBuffer;
+    OMX_STATETYPE status = OMX_StatePause;
+    std::cout << "status = " << status << std::endl;
+    InitOmxCodecBuffer(omxBuffer, CODEC_BUFFER_TYPE_AVSHARE_MEM_FD);
+    auto eglImage = std::make_unique<int8_t[]>(BUFFER_SIZE);
+    ASSERT_TRUE(eglImage != nullptr);
+    std::vector<int8_t> eglImageVec;
+    eglImageVec.assign(eglImage.get(), eglImage.get() + BUFFER_SIZE);
+    struct OmxCodecBuffer outbuffer;
+    int32_t ret = g_component->UseEglImage(OUTPUT_INDEX, omxBuffer, outbuffer, eglImageVec);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_UseEglImage_1300
+ * @tc.name   : testUseEglImage012
+ * @tc.desc   : Set component status to OMX_StateLoaded, portIndex=OUTPUT_INDEX, sending command failed.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testUseEglImage012, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    struct OmxCodecBuffer omxBuffer;
+    OMX_STATETYPE status = OMX_StateLoaded;
+    std::cout << "status = " << status << std::endl;
+    InitOmxCodecBuffer(omxBuffer, CODEC_BUFFER_TYPE_AVSHARE_MEM_FD);
+    auto eglImage = std::make_unique<int8_t[]>(BUFFER_SIZE);
+    ASSERT_TRUE(eglImage != nullptr);
+    std::vector<int8_t> eglImageVec;
+    eglImageVec.assign(eglImage.get(), eglImage.get() + BUFFER_SIZE);
+    struct OmxCodecBuffer outbuffer;
+    int32_t ret = g_component->UseEglImage(OUTPUT_INDEX, omxBuffer, outbuffer, eglImageVec);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_UseEglImage_1400
+ * @tc.name   : testUseEglImage013
+ * @tc.desc   : Set component status to OMX_StateWaitForResources, portIndex=OUTPUT_INDEX, sending command failed.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testUseEglImage013, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    struct OmxCodecBuffer omxBuffer;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateWaitForResources, cmdData);
+    InitOmxCodecBuffer(omxBuffer, CODEC_BUFFER_TYPE_AVSHARE_MEM_FD);
+    auto eglImage = std::make_unique<int8_t[]>(BUFFER_SIZE);
+    ASSERT_TRUE(eglImage != nullptr);
+    std::vector<int8_t> eglImageVec;
+    eglImageVec.assign(eglImage.get(), eglImage.get() + BUFFER_SIZE);
+    struct OmxCodecBuffer outbuffer;
+    ret = g_component->UseEglImage(OUTPUT_INDEX, omxBuffer, outbuffer, eglImageVec);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+/**
+ * @tc.number : SUB_Driver_Codec_UseEglImage_1500
+ * @tc.name   : testUseEglImage014
+ * @tc.desc   : Set component status to OMX_StateExecuting, portIndex=OUTPUT_INDEX, sending command failed.
+ */
+HWTEST_F(CodecBenchmarkManagerTestAdditional, testUseEglImage014, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    struct OmxCodecBuffer omxBuffer;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateExecuting, cmdData);
+    InitOmxCodecBuffer(omxBuffer, CODEC_BUFFER_TYPE_AVSHARE_MEM_FD);
+    auto eglImage = std::make_unique<int8_t[]>(BUFFER_SIZE);
+    ASSERT_TRUE(eglImage != nullptr);
+    std::vector<int8_t> eglImageVec;
+    eglImageVec.assign(eglImage.get(), eglImage.get() + BUFFER_SIZE);
+    struct OmxCodecBuffer outbuffer;
+    ret = g_component->UseEglImage(OUTPUT_INDEX, omxBuffer, outbuffer, eglImageVec);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
 /**

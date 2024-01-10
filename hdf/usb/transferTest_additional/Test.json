@@ -2,7 +2,7 @@
     "kits": [
         {
             "push": [
-                "HatsHdfUsbTransferAdditionalTest->/data/local/tmp/HatsHdfUsbTransferAdditionalTest"
+                "transferAdditional_test->/data/local/tmp/transferAdditional_test"
             ],
             "type": "PushKit"
         }
@@ -10,9 +10,9 @@
     "driver": {
         "native-test-timeout": "120000",
         "type": "CppTest",
-        "module-name": "HatsHdfUsbTransferAdditionalTest",
+        "module-name": "transferAdditional_test",
         "runtime-hint": "1s",
         "native-test-device-path": "/data/local/tmp"
     },
-    "description": "Configuration for HatsHdfUsbTransferAdditionalTest Tests"
+    "description": "Configuration for transferAdditional_test Tests"
 }

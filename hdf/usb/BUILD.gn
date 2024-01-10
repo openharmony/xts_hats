@@ -34,10 +34,10 @@ group("HatsHdfUsbTest") {
       # "mtpTest_additional:HatsHdfUsbFnMtpAdditionalTest",
 
       # "requestTest:HatsHdfUsbRequestTest",
-      "requestTest_additional:HatsHdfUsbRequestAdditionalTest",
+      "requestTest_additional:requestAdditional_test",
 
       # "transferTest:HatsHdfUsbTransferTest",
-      "transferTest_additional:HatsHdfUsbTransferAdditionalTest",
+      "transferTest_additional:transferAdditional_test",
 
       # "usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
       # "usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",

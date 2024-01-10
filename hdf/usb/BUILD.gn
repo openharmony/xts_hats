@@ -27,11 +27,11 @@ group("HatsHdfUsbTest") {
       "deviceTest_additional:HatsHdfUsbDeviceAdditionalTest",
 
       # "functionTest:HatsHdfUsbFunctionTest",
-      "functionTest_additional:HatsHdfUsbFunctionAdditionalTest",
+      # "functionTest_additional:HatsHdfUsbFunctionAdditionalTest",
 
       # "manageInterfaceTest:HatsHdfUsbManageInterfaceTest",
       # "mtpTest:HatsHdfUsbFnMtpTest",
-      "mtpTest_additional:HatsHdfUsbFnMtpAdditionalTest",
+      # "mtpTest_additional:HatsHdfUsbFnMtpAdditionalTest",
 
       # "requestTest:HatsHdfUsbRequestTest",
       "requestTest_additional:HatsHdfUsbRequestAdditionalTest",

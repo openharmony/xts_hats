@@ -910,12 +910,12 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestSendComman
     int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-	commandId = UNLOCK_TEMPLATE;
-	ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
+    commandId = UNLOCK_TEMPLATE;
+    ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-	commandId = VENDOR_COMMAND_BEGIN;
-	ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
+    commandId = VENDOR_COMMAND_BEGIN;
+    ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
 }

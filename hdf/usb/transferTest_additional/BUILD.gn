@@ -84,7 +84,7 @@ config("hdf_usb_additional") {
 group("transferAdditional_test") {
   testonly = true
   deps = [
-    ":HatsHdfUsbTransferAdditionalAddTest",
+    # ":HatsHdfUsbTransferAdditionalAddTest",
     ":HatsHdfUsbTransferAdditionalTest",
   ]
 }

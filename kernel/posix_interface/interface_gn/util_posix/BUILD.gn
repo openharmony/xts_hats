@@ -1,0 +1,41 @@
+# Copyright (C) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+base_root = "../../../../../"
+import("$base_root/tools/build/suite.gni")
+
+ohos_moduletest_suite("HatsUtilApiTest") {
+  sources = [
+    "$base_root/acts/kernel_lite/util_posix/src/ActsUtilCheckApiTest.cpp",
+    "$base_root/acts/kernel_lite/util_posix/src/ActsUtilConvertApiTest.cpp",
+    "$base_root/acts/kernel_lite/util_posix/src/ActsUtilDataStructApiTest.cpp",
+    "$base_root/acts/kernel_lite/util_posix/src/ActsUtilMathApiTest.cpp",
+    "$base_root/acts/kernel_lite/util_posix/src/ActsUtilMsgApiTest.cpp",
+    "$base_root/acts/kernel_lite/util_posix/src/ActsUtilStringOperApiTest.cpp",
+    "$base_root/acts/kernel_lite/util_posix/src/ActsUtilWideCheckApiTest.cpp",
+  ]
+
+  include_dirs = [
+    "$base_root/tools/hctest/include",
+    "$base_root/hats/kernel/posix_interface/interface_gn/utils/",
+  ]
+
+  cflags = [ "-Wno-error" ]
+
+  cflags_cc = [
+    "-Wno-multichar",
+    "-Wno-overflow",
+    "-Wno-constant-conversion",
+    "-Wno-format",
+  ]
+}

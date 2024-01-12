@@ -24,7 +24,7 @@
 #include "mindir.h"
 #include "mindir_lite_graph.h"
 
-#include "interfaces/kits/c/neural_network_runtime.h"
+#include "interfaces/kits/c/neural_network_runtime/neural_network_runtime.h"
 #include "frameworks/native/memory_manager.h"
 #include "common/hdi_nnrt_test_utils.h"
 #include "common/hdi_nnrt_test.h"

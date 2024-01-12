@@ -24,7 +24,9 @@ group("HatsHdfNfcTest") {
     if (is_standard_system) {
       deps = [
         "hdcService:HatsHdfNfcHdiTest",
+        "hdcService_additional:HatsHdfNfcHdiAdditionalTest",
         "secureElement:HatsNfcEseHdiTest",
+        "secureElement_additional:HatsNfcEseHdiAdditionalTest",
       ]
     }
   } else {

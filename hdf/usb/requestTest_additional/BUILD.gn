@@ -85,7 +85,7 @@ config("hdf_usb_additional") {
 group("requestAdditional_test") {
   testonly = true
   deps = [
-    # ":HatsHdfUsbRequestAdditionalAddTest",
+    ":HatsHdfUsbRequestAdditionalAddTest",
     ":HatsHdfUsbRequestAdditionalTest",
   ]
 }

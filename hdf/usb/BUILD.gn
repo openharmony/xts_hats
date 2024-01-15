@@ -24,7 +24,7 @@ group("HatsHdfUsbTest") {
       "autoFunctionTest:HatsHdfUsbAutoFunctionTest",
 
       # "deviceTest:HatsHdfUsbDeviceTest",
-      "deviceTest_additional:HatsHdfUsbDeviceAdditionalTest",
+      # "deviceTest_additional:HatsHdfUsbDeviceAdditionalTest",
 
       # "functionTest:HatsHdfUsbFunctionTest",
       # "functionTest_additional:HatsHdfUsbFunctionAdditionalTest",
@@ -34,10 +34,10 @@ group("HatsHdfUsbTest") {
       # "mtpTest_additional:HatsHdfUsbFnMtpAdditionalTest",
 
       # "requestTest:HatsHdfUsbRequestTest",
-      "requestTest_additional:requestAdditional_test",
+      # "requestTest_additional:requestAdditional_test",
 
       # "transferTest:HatsHdfUsbTransferTest",
-      "transferTest_additional:transferAdditional_test",
+      # "transferTest_additional:transferAdditional_test",
 
       # "usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
       # "usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",

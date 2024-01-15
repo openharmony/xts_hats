@@ -3659,7 +3659,7 @@ HWTEST_F(DisplayBufferMtAdditional, testDisplayBufferFreeMem001, Function | Medi
     g_dispbuf->AllocMem(info, bHandle);
     g_dispbuf->FreeMem(*bHandle);
     void *buffer = g_dispbuf->Mmap(*bHandle);
-    EXPECT_TRUE((reinterpret_cast<void *>(0xffffffff) == buffer) || (nullptr == buffer));
+    EXPECT_TRUE((buffer == reinterpret_cast<void *>(0xffffffff)) || (buffer == nullptr));
 }
 
 } // namespace TEST

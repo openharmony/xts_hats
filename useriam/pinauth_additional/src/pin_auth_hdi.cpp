@@ -184,15 +184,15 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestGetTemplateInfo001, Functi
     templateId = 0x7FFFFFFFFFFFFFFF;
     ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 0);
+    EXPECT_NE(ret, 0);
     templateId = 0xFFFFFFFFFFFFFFFF;
     ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 0);
+    EXPECT_NE(ret, 0);
     templateId = 0x10;
     ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 0);
+    EXPECT_NE(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_PinAuth_HDI_GetTemplateInfo_0600

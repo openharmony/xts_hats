@@ -164,7 +164,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetExecutorInfo002, Func
 /**
  * @tc.number  SUB_Security_Iam_FaceAuth_HDI_GetTemplateInfo_0200
  * @tc.name  testFaceAuthTestGetTemplateInfo001
- * @tc.desc  test GetTemplateInfo templateId 0
+ * @tc.desc  test GetTemplateInfo templateId
  */
 HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetTemplateInfo001, Function | MediumTest | Level1)
 {
@@ -174,46 +174,16 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetTemplateInfo001, Func
     int32_t ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_GetTemplateInfo_0300
- * @tc.name  testFaceAuthTestGetTemplateInfo002
- * @tc.desc  test GetTemplateInfo templateId 0x7FFFFFFFFFFFFFFF
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetTemplateInfo002, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestGetTemplateInfo002" << endl;
-    uint64_t templateId = 0x7FFFFFFFFFFFFFFF;
-    TemplateInfo templateInfo;
-    int32_t ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
+    templateId = 0x7FFFFFFFFFFFFFFF;
+    ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_GetTemplateInfo_0400
- * @tc.name  testFaceAuthTestGetTemplateInfo003
- * @tc.desc  test GetTemplateInfo templateId 0xFFFFFFFFFFFFFFFF
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetTemplateInfo003, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestGetTemplateInfo003" << endl;
-    uint64_t templateId = 0xFFFFFFFFFFFFFFFF;
-    TemplateInfo templateInfo;
-    int32_t ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
+    templateId = 0xFFFFFFFFFFFFFFFF;
+    ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_GetTemplateInfo_0500
- * @tc.name  testFaceAuthTestGetTemplateInfo004
- * @tc.desc  test GetTemplateInfo templateId 0x10
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetTemplateInfo004, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestGetTemplateInfo004" << endl;
-    uint64_t templateId = 0x10;
-    TemplateInfo templateInfo;
-    int32_t ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
+    templateId = 0x10;
+    ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
 }
@@ -237,114 +207,27 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetTemplateInfo005, Func
 /**
  * @tc.number  SUB_Security_Iam_FaceAuth_HDI_OnRegisterFinish_0200
  * @tc.name  testFaceAuthTestOnRegisterFinish001
- * @tc.desc  test OnRegisterFinish templateIdList empty
+ * @tc.desc  test OnRegisterFinish empty
  */
 HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestOnRegisterFinish001, Function | MediumTest | Level1)
 {
     cout << "start test testFaceAuthTestOnRegisterFinish001" << endl;
     std::vector<uint64_t> templateIdList;
     std::vector<uint8_t> frameworkPublicKey;
-    FillTestUint8Vector(parcel, frameworkPublicKey);
     std::vector<uint8_t> extraInfo;
-    FillTestUint8Vector(parcel, extraInfo);
     int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_OnRegisterFinish_0300
- * @tc.name  testFaceAuthTestOnRegisterFinish002
- * @tc.desc  test OnRegisterFinish frameworkPublicKey empty
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestOnRegisterFinish002, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestOnRegisterFinish002" << endl;
-    std::vector<uint64_t> templateIdList;
     FillTestUint64Vector(parcel, templateIdList);
-    std::vector<uint8_t> frameworkPublicKey;
-    std::vector<uint8_t> extraInfo;
-    FillTestUint8Vector(parcel, extraInfo);
-    int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
+    ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_OnRegisterFinish_0400
- * @tc.name  testFaceAuthTestOnRegisterFinish003
- * @tc.desc  test OnRegisterFinish extraInfo empty
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestOnRegisterFinish003, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestOnRegisterFinish003" << endl;
-    std::vector<uint64_t> templateIdList;
-    FillTestUint64Vector(parcel, templateIdList);
-    std::vector<uint8_t> frameworkPublicKey;
     FillTestUint8Vector(parcel, frameworkPublicKey);
-    std::vector<uint8_t> extraInfo;
-    int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
+    ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_OnRegisterFinish_0500
- * @tc.name  testFaceAuthTestOnRegisterFinish004
- * @tc.desc  test OnRegisterFinish frameworkPublicKey and extraInfo empty
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestOnRegisterFinish004, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestOnRegisterFinish004" << endl;
-    std::vector<uint64_t> templateIdList;
-    FillTestUint64Vector(parcel, templateIdList);
-    std::vector<uint8_t> frameworkPublicKey;
-    std::vector<uint8_t> extraInfo;
-    int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
-    cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_OnRegisterFinish_0600
- * @tc.name  testFaceAuthTestOnRegisterFinish005
- * @tc.desc  test OnRegisterFinish templateIdList and extraInfo empty
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestOnRegisterFinish005, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestOnRegisterFinish005" << endl;
-    std::vector<uint64_t> templateIdList;
-    std::vector<uint8_t> frameworkPublicKey;
-    FillTestUint8Vector(parcel, frameworkPublicKey);
-    std::vector<uint8_t> extraInfo;
-    int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
-    cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_OnRegisterFinish_0700
- * @tc.name  testFaceAuthTestOnRegisterFinish006
- * @tc.desc  test OnRegisterFinish templateIdList and frameworkPublicKey empty
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestOnRegisterFinish006, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestOnRegisterFinish006" << endl;
-    std::vector<uint64_t> templateIdList;
-    std::vector<uint8_t> frameworkPublicKey;
-    std::vector<uint8_t> extraInfo;
     FillTestUint8Vector(parcel, extraInfo);
-    int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
-    cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_OnRegisterFinish_0800
- * @tc.name  testFaceAuthTestOnRegisterFinish007
- * @tc.desc  test OnRegisterFinish templateIdList and frameworkPublicKey and extraInfo empty
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestOnRegisterFinish007, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestOnRegisterFinish007" << endl;
-    std::vector<uint64_t> templateIdList;
-    std::vector<uint8_t> frameworkPublicKey;
-    std::vector<uint8_t> extraInfo;
-    int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
+    ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
 }
@@ -372,7 +255,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestOnRegisterFinish008, Fun
 /**
  * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Enroll_0200
  * @tc.name  testFaceAuthTestEnroll001
- * @tc.desc test Enroll scheduleId 0
+ * @tc.desc test Enroll scheduleId
  */
 HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestEnroll001, Function | MediumTest | Level1)
 {
@@ -385,38 +268,12 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestEnroll001, Function | Me
     int32_t ret = g_executorImpl.Enroll(scheduleId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Enroll_0300
- * @tc.name  testFaceAuthTestEnroll002
- * @tc.desc  test Enroll scheduleId 0x7FFFFFFFFFFFFFFF
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestEnroll002, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestEnroll002" << endl;
-    uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
-    std::vector<uint8_t> extraInfo;
-    FillTestUint8Vector(parcel, extraInfo);
-    sptr<IExecutorCallback> callbackObj;
-    FillTestIExecutorCallback(parcel, callbackObj);
-    int32_t ret = g_executorImpl.Enroll(scheduleId, extraInfo, callbackObj);
+    scheduleId = 0x7FFFFFFFFFFFFFFF;
+    ret = g_executorImpl.Enroll(scheduleId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Enroll_0400
- * @tc.name  testFaceAuthTestEnroll003
- * @tc.desc  test Enroll scheduleId 0xFFFFFFFFFFFFFFFF
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestEnroll003, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestEnroll003" << endl;
-    uint64_t scheduleId = 0xFFFFFFFFFFFFFFFF;
-    std::vector<uint8_t> extraInfo;
-    FillTestUint8Vector(parcel, extraInfo);
-    sptr<IExecutorCallback> callbackObj;
-    FillTestIExecutorCallback(parcel, callbackObj);
-    int32_t ret = g_executorImpl.Enroll(scheduleId, extraInfo, callbackObj);
+    scheduleId = 0xFFFFFFFFFFFFFFFF;
+    ret = g_executorImpl.Enroll(scheduleId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
 }
@@ -435,33 +292,11 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestEnroll004, Function | Me
     int32_t ret = g_executorImpl.Enroll(scheduleId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Enroll_0600
- * @tc.name  testFaceAuthTestEnroll005
- * @tc.desc  test Enroll callbackObj nullptr
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestEnroll005, Function | MediumTest | Level2)
-{
-    cout << "start test testFaceAuthTestEnroll005" << endl;
-    uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
-    std::vector<uint8_t> extraInfo;
-    FillTestUint8Vector(parcel, extraInfo);
-    int32_t ret = g_executorImpl.Enroll(scheduleId, extraInfo, nullptr);
+    ret = g_executorImpl.Enroll(scheduleId, extraInfo, nullptr);
     cout << "ret is " << ret << endl;
     EXPECT_NE(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Enroll_0700
- * @tc.name  testFaceAuthTestEnroll006
- * @tc.desc  test Enroll extraInfo empty and callbackObj nullptr
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestEnroll006, Function | MediumTest | Level2)
-{
-    cout << "start test testFaceAuthTestEnroll006" << endl;
-    uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
-    std::vector<uint8_t> extraInfo;
-    int32_t ret = g_executorImpl.Enroll(scheduleId, extraInfo, nullptr);
+    FillTestUint8Vector(parcel, extraInfo);
+    ret = g_executorImpl.Enroll(scheduleId, extraInfo, nullptr);
     cout << "ret is " << ret << endl;
     EXPECT_NE(ret, 0);
 }
@@ -488,7 +323,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestEnroll007, Function | Me
 /**
  * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Authenticate_0200
  * @tc.name  testFaceAuthTestAuthenticate001
- * @tc.desc  test Authenticate scheduleId 0
+ * @tc.desc  test Authenticate scheduleId
  */
 HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestAuthenticate001, Function | MediumTest | Level1)
 {
@@ -503,49 +338,19 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestAuthenticate001, Functio
     int32_t ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Authenticate_0300
- * @tc.name  testFaceAuthTestAuthenticate002
- * @tc.desc  test Authenticate scheduleId 0xFFFFFFFFFFFFFFFF
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestAuthenticate002, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestAuthenticate002" << endl;
-    uint64_t scheduleId = 0xFFFFFFFFFFFFFFFF;
-    std::vector<uint64_t> templateIdList;
-    FillTestUint64Vector(parcel, templateIdList);
-    std::vector<uint8_t> extraInfo;
-    FillTestUint8Vector(parcel, extraInfo);
-    sptr<IExecutorCallback> callbackObj;
-    FillTestIExecutorCallback(parcel, callbackObj);
-    int32_t ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
+    scheduleId = 0xFFFFFFFFFFFFFFFF;
+    ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Authenticate_0400
- * @tc.name  testFaceAuthTestAuthenticate003
- * @tc.desc  test Authenticate scheduleId 0x7FFFFFFFFFFFFFFF
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestAuthenticate003, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestAuthenticate003" << endl;
-    uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
-    std::vector<uint64_t> templateIdList;
-    FillTestUint64Vector(parcel, templateIdList);
-    std::vector<uint8_t> extraInfo;
-    FillTestUint8Vector(parcel, extraInfo);
-    sptr<IExecutorCallback> callbackObj;
-    FillTestIExecutorCallback(parcel, callbackObj);
-    int32_t ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
+    scheduleId = 0x7FFFFFFFFFFFFFFF;
+    ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Authenticate_0500
  * @tc.name  testFaceAuthTestAuthenticate004
- * @tc.descc  test Authenticate templateIdList empty
+ * @tc.descc  test Authenticate empty
  */
 HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestAuthenticate004, Function | MediumTest | Level1)
 {
@@ -553,109 +358,26 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestAuthenticate004, Functio
     uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
     std::vector<uint64_t> templateIdList;
     std::vector<uint8_t> extraInfo;
-    FillTestUint8Vector(parcel, extraInfo);
     sptr<IExecutorCallback> callbackObj;
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Authenticate_0600
- * @tc.name  testFaceAuthTestAuthenticate005
- * @tc.desc  test Authenticate extraInfo empty
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestAuthenticate005, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestAuthenticate005" << endl;
-    uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
-    std::vector<uint64_t> templateIdList;
+    ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, nullptr);
+    cout << "ret is " << ret << endl;
+    EXPECT_NE(ret, 0);
     FillTestUint64Vector(parcel, templateIdList);
-    std::vector<uint8_t> extraInfo;
-    sptr<IExecutorCallback> callbackObj;
-    FillTestIExecutorCallback(parcel, callbackObj);
-    int32_t ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
+    ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Authenticate_0700
- * @tc.name  testFaceAuthTestAuthenticate006
- * @tc.desc  test Authenticate callbackObj nullptr
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestAuthenticate006, Function | MediumTest | Level2)
-{
-    cout << "start test testFaceAuthTestAuthenticate006" << endl;
-    uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
-    std::vector<uint64_t> templateIdList;
-    FillTestUint64Vector(parcel, templateIdList);
-    std::vector<uint8_t> extraInfo;
+    ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, nullptr);
+    cout << "ret is " << ret << endl;
+    EXPECT_NE(ret, 0);
     FillTestUint8Vector(parcel, extraInfo);
-    int32_t ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, nullptr);
-    cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Authenticate_0800
- * @tc.name  testFaceAuthTestAuthenticate007
- * @tc.desc  test Authenticate extraInfo empty and callbackObj nullptr
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestAuthenticate007, Function | MediumTest | Level2)
-{
-    cout << "start test testFaceAuthTestAuthenticate007" << endl;
-    uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
-    std::vector<uint64_t> templateIdList;
-    FillTestUint64Vector(parcel, templateIdList);
-    std::vector<uint8_t> extraInfo;
-    int32_t ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, nullptr);
-    cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Authenticate_0900
- * @tc.name  testFaceAuthTestAuthenticate008
- * @tc.desc  test Authenticate templateIdList empty and callbackObj nullptr
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestAuthenticate008, Function | MediumTest | Level2)
-{
-    cout << "start test testFaceAuthTestAuthenticate008" << endl;
-    uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
-    std::vector<uint64_t> templateIdList;
-    std::vector<uint8_t> extraInfo;
-    FillTestUint8Vector(parcel, extraInfo);
-    int32_t ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, nullptr);
-    cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Authenticate_1000
- * @tc.name  testFaceAuthTestAuthenticate009
- * @tc.desc  test Authenticate templateIdList and extraInfo empty
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestAuthenticate009, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestAuthenticate009" << endl;
-    uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
-    std::vector<uint64_t> templateIdList;
-    std::vector<uint8_t> extraInfo;
-    sptr<IExecutorCallback> callbackObj;
-    FillTestIExecutorCallback(parcel, callbackObj);
-    int32_t ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
+    ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Authenticate_1100
- * @tc.name  testFaceAuthTestAuthenticate010
- * @tc.desc  test Authenticate templateIdList and extraInfo empty and callbackObj nullptr
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestAuthenticate010, Function | MediumTest | Level2)
-{
-    cout << "start test testFaceAuthTestAuthenticate010" << endl;
-    uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
-    std::vector<uint64_t> templateIdList;
-    std::vector<uint8_t> extraInfo;
-    int32_t ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, nullptr);
+    ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, nullptr);
     cout << "ret is " << ret << endl;
     EXPECT_NE(ret, 0);
 }
@@ -684,7 +406,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestAuthenticate011, Functio
 /**
  * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Identify_0200
  * @tc.name  testFaceAuthTestIdentify001
- * @tc.desc  test Identify scheduleId 0
+ * @tc.desc  test Identify scheduleId
  */
 HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestIdentify001, Function | MediumTest | Level1)
 {
@@ -697,45 +419,19 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestIdentify001, Function | 
     int32_t ret = g_executorImpl.Identify(scheduleId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Identify_0300
- * @tc.name  testFaceAuthTestIdentify002
- * @tc.desc  test Identify scheduleId 0x7FFFFFFFFFFFFFFF
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestIdentify002, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestIdentify002" << endl;
-    uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
-    std::vector<uint8_t> extraInfo;
-    FillTestUint8Vector(parcel, extraInfo);
-    sptr<IExecutorCallback> callbackObj;
-    FillTestIExecutorCallback(parcel, callbackObj);
-    int32_t ret = g_executorImpl.Identify(scheduleId, extraInfo, callbackObj);
+    scheduleId = 0x7FFFFFFFFFFFFFFF;
+    ret = g_executorImpl.Identify(scheduleId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Identify_0400
- * @tc.name  testFaceAuthTestIdentify003
- * @tc.desc  test Identify scheduleId 0xFFFFFFFFFFFFFFFF
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestIdentify003, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestIdentify003" << endl;
-    uint64_t scheduleId = 0xFFFFFFFFFFFFFFFF;
-    std::vector<uint8_t> extraInfo;
-    FillTestUint8Vector(parcel, extraInfo);
-    sptr<IExecutorCallback> callbackObj;
-    FillTestIExecutorCallback(parcel, callbackObj);
-    int32_t ret = g_executorImpl.Identify(scheduleId, extraInfo, callbackObj);
+    scheduleId = 0xFFFFFFFFFFFFFFFF;
+    ret = g_executorImpl.Identify(scheduleId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Identify_0500
  * @tc.name  testFaceAuthTestIdentify004
- * @tc.desc  test Identify extraInfo empty
+ * @tc.desc  test Identify empty
  */
 HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestIdentify004, Function | MediumTest | Level1)
 {
@@ -747,33 +443,11 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestIdentify004, Function | 
     int32_t ret = g_executorImpl.Identify(scheduleId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Identify_0600
- * @tc.name  testFaceAuthTestIdentify005
- * @tc.desc  test Identify callbackObj null
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestIdentify005, Function | MediumTest | Level2)
-{
-    cout << "start test testFaceAuthTestIdentify005" << endl;
-    uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
-    std::vector<uint8_t> extraInfo;
-    FillTestUint8Vector(parcel, extraInfo);
-    int32_t ret = g_executorImpl.Identify(scheduleId, extraInfo, nullptr);
+    ret = g_executorImpl.Identify(scheduleId, extraInfo, nullptr);
     cout << "ret is " << ret << endl;
     EXPECT_NE(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Identify_0700
- * @tc.name  testFaceAuthTestIdentify006
- * @tc.desc  test Identify extraInfo empty and callbackObj null
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestIdentify006, Function | MediumTest | Level2)
-{
-    cout << "start test testFaceAuthTestIdentify006" << endl;
-    uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
-    std::vector<uint8_t> extraInfo;
-    int32_t ret = g_executorImpl.Identify(scheduleId, extraInfo, nullptr);
+    FillTestUint8Vector(parcel, extraInfo);
+    ret = g_executorImpl.Identify(scheduleId, extraInfo, nullptr);
     cout << "ret is " << ret << endl;
     EXPECT_NE(ret, 0);
 }
@@ -830,7 +504,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestDelete002, Function | Me
 /**
  * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Cancel_0200
  * @tc.name  testFaceAuthTestCancel001
- * @tc.desc  test Cancel scheduleId 0
+ * @tc.desc  test Cancel scheduleId
  */
 HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestCancel001, Function | MediumTest | Level1)
 {
@@ -839,30 +513,12 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestCancel001, Function | Me
     int32_t ret = g_executorImpl.Cancel(scheduleId);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Cancel_0300
- * @tc.name  testFaceAuthTestCancel002
- * @tc.desc  test Cancel scheduleId 0x7FFFFFFFFFFFFFFF
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestCancel002, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestCancel002" << endl;
-    uint64_t scheduleId = 0x7FFFFFFFFFFFFFFF;
-    int32_t ret = g_executorImpl.Cancel(scheduleId);
+    scheduleId = 0x7FFFFFFFFFFFFFFF;
+    ret = g_executorImpl.Cancel(scheduleId);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_Cancel_0400
- * @tc.name  testFaceAuthTestCancel003
- * @tc.desc  test Cancel scheduleId 0xFFFFFFFFFFFFFFFF
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestCancel003, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestCancel003" << endl;
-    uint64_t scheduleId = 0xFFFFFFFFFFFFFFFF;
-    int32_t ret = g_executorImpl.Cancel(scheduleId);
+    scheduleId = 0xFFFFFFFFFFFFFFFF;
+    ret = g_executorImpl.Cancel(scheduleId);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
 }
@@ -885,7 +541,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestCancel004, Function | Me
 /**
  * @tc.number  SUB_Security_Iam_FaceAuth_HDI_SendCommand_0200
  * @tc.name  testFaceAuthTestSendCommand001
- * @tc.desc  test SendCommand commandId enum
+ * @tc.desc  test SendCommand commandId
  */
 HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSendCommand001, Function | MediumTest | Level1)
 {
@@ -906,72 +562,20 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSendCommand001, Function
     ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_SendCommand_0500
- * @tc.name  testFaceAuthTestSendCommand004
- * @tc.desc  test SendCommand commandId 0
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSendCommand004, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestSendCommand004" << endl;
-    int32_t commandId = 0;
-    std::vector<uint8_t> extraInfo;
-    FillTestUint8Vector(parcel, extraInfo);
-    sptr<IExecutorCallback> callbackObj;
-    FillTestIExecutorCallback(parcel, callbackObj);
-    int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
+    commandId = 0;
+    ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_SendCommand_0600
- * @tc.name  testFaceAuthTestSendCommand005
- * @tc.desc  test SendCommand commandId 0x7FFFFFFF
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSendCommand005, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestSendCommand005" << endl;
-    int32_t commandId = 0x7FFFFFFF;
-    std::vector<uint8_t> extraInfo;
-    FillTestUint8Vector(parcel, extraInfo);
-    sptr<IExecutorCallback> callbackObj;
-    FillTestIExecutorCallback(parcel, callbackObj);
-    int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
+    commandId = 0x7FFFFFFF;
+    ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_SendCommand_0700
- * @tc.name  testFaceAuthTestSendCommand006
- * @tc.desc  test SendCommand commandId -0x01
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSendCommand006, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestSendCommand006" << endl;
-    int32_t commandId = -0x01;
-    std::vector<uint8_t> extraInfo;
-    FillTestUint8Vector(parcel, extraInfo);
-    sptr<IExecutorCallback> callbackObj;
-    FillTestIExecutorCallback(parcel, callbackObj);
-    int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
+    commandId = -0x01;
+    ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_SendCommand_0800
- * @tc.name  testFaceAuthTestSendCommand007
- * @tc.desc  test SendCommand commandId -0x7FFFFFFF
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSendCommand007, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestSendCommand007" << endl;
-    int32_t commandId = -0x7FFFFFFF;
-    std::vector<uint8_t> extraInfo;
-    FillTestUint8Vector(parcel, extraInfo);
-    sptr<IExecutorCallback> callbackObj;
-    FillTestIExecutorCallback(parcel, callbackObj);
-    int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
+    commandId = -0x7FFFFFFF;
+    ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
 }
@@ -990,33 +594,11 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSendCommand008, Function
     int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_SendCommand_1000
- * @tc.name  testFaceAuthTestSendCommand009
- * @tc.desc  test SendCommand callbackObj null
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSendCommand009, Function | MediumTest | Level2)
-{
-    cout << "start test testFaceAuthTestSendCommand009" << endl;
-    int32_t commandId = LOCK_TEMPLATE;
-    std::vector<uint8_t> extraInfo;
-    FillTestUint8Vector(parcel, extraInfo);
-    int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, nullptr);
+    ret = g_executorImpl.SendCommand(commandId, extraInfo, nullptr);
     cout << "ret is " << ret << endl;
     EXPECT_NE(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_SendCommand_1100
- * @tc.name  testFaceAuthTestSendCommand010
- * @tc.desc  test SendCommand extraInfo empty and callbackObj null
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSendCommand010, Function | MediumTest | Level2)
-{
-    cout << "start test testFaceAuthTestSendCommand010" << endl;
-    int32_t commandId = LOCK_TEMPLATE;
-    std::vector<uint8_t> extraInfo;
-    int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, nullptr);
+    FillTestUint8Vector(parcel, extraInfo);
+    ret = g_executorImpl.SendCommand(commandId, extraInfo, nullptr);
     cout << "ret is " << ret << endl;
     EXPECT_NE(ret, 0);
 }
@@ -1081,72 +663,31 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSetBufferProducer002, Fu
 /**
  * @tc.number  SUB_Security_Iam_FaceAuth_HDI_GetProperty_0200
  * @tc.name  testFaceAuthTestGetProperty001
- * @tc.desc  test GetProperty ptype enum
+ * @tc.desc  test GetProperty
  */
 HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetProperty001, Function | MediumTest | Level1)
 {
     cout << "start test testFaceAuthTestGetProperty001" << endl;
     std::vector<uint64_t> templateIdList;
-    FillTestUint64Vector(parcel, templateIdList);
     std::vector<GetPropertyType> propertyTypes;
+    Property property;
+    int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
+    FillTestUint64Vector(parcel, templateIdList);
+    ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
     propertyTypes.push_back(OHOS::HDI::FaceAuth::V1_1::AUTH_SUB_TYPE);
     propertyTypes.push_back(OHOS::HDI::FaceAuth::V1_1::LOCKOUT_DURATION);
     propertyTypes.push_back(OHOS::HDI::FaceAuth::V1_1::REMAIN_ATTEMPTS);
     propertyTypes.push_back(OHOS::HDI::FaceAuth::V1_1::ENROLL_PROGRESS);
     propertyTypes.push_back(OHOS::HDI::FaceAuth::V1_1::SENSOR_INFO);
-    Property property;
+    ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
     FillTestProperty(parcel, property);
-    int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
-    cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_GetProperty_0700
- * @tc.name  testFaceAuthTestGetProperty006
- * @tc.desc  test GetProperty templateIdList empty
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetProperty006, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestGetProperty006" << endl;
-    std::vector<uint64_t> templateIdList;
-    std::vector<GetPropertyType> propertyTypes;
-    FillTestGetPropertyTypeVector(parcel, propertyTypes);
-    Property property;
-    FillTestProperty(parcel, property);
-    int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
-    cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_GetProperty_0800
- * @tc.name  testFaceAuthTestGetProperty007
- * @tc.desc  test GetProperty property empty
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetProperty007, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestGetProperty007" << endl;
-    std::vector<uint64_t> templateIdList;
-    FillTestUint64Vector(parcel, templateIdList);
-    std::vector<GetPropertyType> propertyTypes;
-    FillTestGetPropertyTypeVector(parcel, propertyTypes);
-    Property property;
-    int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
-    cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_GetProperty_0900
- * @tc.name  testFaceAuthTestGetProperty008
- * @tc.desc  test GetProperty templateIdList and property empty
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetProperty008, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestGetProperty008" << endl;
-    std::vector<uint64_t> templateIdList;
-    std::vector<GetPropertyType> propertyTypes;
-    FillTestGetPropertyTypeVector(parcel, propertyTypes);
-    Property property;
-    int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
+    ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
 }

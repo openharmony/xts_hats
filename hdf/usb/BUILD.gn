@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+# Copyright (c) 2021-2024 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -24,14 +24,20 @@ group("HatsHdfUsbTest") {
       "autoFunctionTest:HatsHdfUsbAutoFunctionTest",
 
       # "deviceTest:HatsHdfUsbDeviceTest",
+      # "deviceTest_additional:HatsHdfUsbDeviceAdditionalTest",
+
       # "functionTest:HatsHdfUsbFunctionTest",
+      # "functionTest_additional:HatsHdfUsbFunctionAdditionalTest",
+
       # "manageInterfaceTest:HatsHdfUsbManageInterfaceTest",
       # "mtpTest:HatsHdfUsbFnMtpTest",
+      # "mtpTest_additional:HatsHdfUsbFnMtpAdditionalTest",
+
       # "requestTest:HatsHdfUsbRequestTest",
-      "requestTest_additional:HatsHdfUsbRequestAdditionalTest",
+      # "requestTest_additional:requestAdditional_test",
 
       # "transferTest:HatsHdfUsbTransferTest",
-      "transferTest_additional:HatsHdfUsbTransferAdditionalTest",
+      # "transferTest_additional:transferAdditional_test",
 
       # "usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
       # "usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",

@@ -108,6 +108,7 @@ public:
     int32_t DumpImageFile(int streamId, std::string suffix, const void* buffer, int32_t size);
     void StartCapture(int streamId, int captureId, bool shutterCallback, bool isStreaming);
     void StopStream(std::vector<int>& captureIds, std::vector<int>& streamIds);
+    void TakePhotoWithTags(std::shared_ptr<OHOS::Camera::CameraSetting> meta);
     OHOS::sptr<OHOS::Camera::ICameraHost> service = nullptr;
     OHOS::sptr<OHOS::HDI::Camera::V1_1::ICameraHost> serviceV1_1 = nullptr;
     OHOS::sptr<OHOS::HDI::Camera::V1_2::ICameraHost> serviceV1_2 = nullptr;

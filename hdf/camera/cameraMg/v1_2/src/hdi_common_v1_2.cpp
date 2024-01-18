@@ -16,7 +16,7 @@
 #include "hdi_common_v1_2.h"
 #include "camera.h"
 #include "video_key_info.h"
-
+int64_t OHOS::Camera::Test::StreamConsumer::g_timestamp[2] = {0};
 namespace OHOS::Camera {
 Test::ResultCallback Test::resultCallback_ = 0;
 OHOS::HDI::Camera::V1_0::FlashlightStatus Test::statusCallback =
@@ -424,6 +424,39 @@ void Test::StopStream(std::vector<int>& captureIds, std::vector<int>& streamIds)
             CAMERA_LOGE("check Capture: ReleaseStreams fail, rc = %{public}d", rc);
         }
     }
+}
+
+void Test::TakePhotoWithTags(std::shared_ptr<OHOS::Camera::CameraSetting> meta)
+{
+    streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    rc = cameraDeviceV1_1->GetStreamOperator_V1_1(streamOperatorCallback,
+        streamOperator_V1_1);
+    EXPECT_NE(streamOperator_V1_1, nullptr);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, rc);
+
+    // preview streamInfo
+    streamInfoV1_1 = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
+    DefaultInfosPreview(streamInfoV1_1);
+    streamInfosV1_1.push_back(*streamInfoV1_1);
+
+    // capture streamInfo
+    streamInfoV1_1 = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
+    DefaultInfosCapture(streamInfoV1_1);
+    streamInfosV1_1.push_back(*streamInfoV1_1);
+
+    // create and commitstreams
+    rc = streamOperator_V1_1->CreateStreams_V1_1(streamInfosV1_1);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, rc);
+    rc = streamOperator_V1_1->CommitStreams_V1_1(
+        static_cast<OHOS::HDI::Camera::V1_1::OperationMode_V1_1>(OHOS::HDI::Camera::V1_2::PORTRAIT),
+        abilityVec);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, rc);
+    std::vector<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>().swap(streamInfosV1_1);
+    StartCapture(streamIdPreview, captureIdPreview, false, true);
+    StartCapture(streamIdCapture, captureIdCapture, false, true);
+    captureIds = {captureIdPreview, captureIdCapture};
+    streamIds = {streamIdPreview, streamIdCapture};
+    StopStream(captureIds, streamIds);
 }
 
 void Test::StreamConsumer::CalculateFps(int64_t timestamp, int32_t streamId)

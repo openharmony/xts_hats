@@ -682,7 +682,7 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex002, Function
  * @tc.number : SUB_Driver_Codec_GetExtensionIndex_0400
  * @tc.name   : testGetExtensionIndex003
  * @tc.desc   : When the paramName is "ＯＭＸ．Ｔｏｐａｚ．ｉｎｄｅｘ．ｐａｒａｍ．ｅｘｔｅｎｄｅｄ＿ｖｉｄｅｏ" and the
- * indexType = 0
+ * indexType = 0 Verify full width letters and symbols
  */
 HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex003, Function | MediumTest | Level2)
 {
@@ -695,7 +695,7 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex003, Function
 /**
  * @tc.number : SUB_Driver_Codec_GetExtensionIndex_0500
  * @tc.name   : testGetExtensionIndex004
- * @tc.desc   : When the paramName is "!@#$%^&**" and the indexType = 0
+ * @tc.desc   : When the paramName is "!@#$%^&**" and the indexType = 0 Verify half width symbols
  */
 HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex004, Function | MediumTest | Level2)
 {
@@ -707,7 +707,7 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex004, Function
 /**
  * @tc.number : SUB_Driver_Codec_GetExtensionIndex_0600
  * @tc.name   : testGetExtensionIndex005
- * @tc.desc   : When the paramName is "！＠＃＄％＾＆＊＊" and the indexType = 0,
+ * @tc.desc   : When the paramName is "！＠＃＄％＾＆＊＊" and the indexType = 0 Verify full width symbols
  */
 HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex005, Function | MediumTest | Level2)
 {
@@ -719,7 +719,7 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex005, Function
 /**
  * @tc.number : SUB_Driver_Codec_GetExtensionIndex_0700
  * @tc.name   : testGetExtensionIndex006
- * @tc.desc   : When the paramName is "12345" and the indexType = 0
+ * @tc.desc   : When the paramName is "12345" and the indexType = 0 Verify Half width Numbers
  */
 HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex006, Function | MediumTest | Level2)
 {
@@ -731,7 +731,8 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex006, Function
 /**
  * @tc.number : SUB_Driver_Codec_GetExtensionIndex_0800
  * @tc.name   : testGetExtensionIndex007
- * @tc.desc   : When the paramName is "12345MX.Topaz" and the indexType = 0
+ * @tc.desc   : When the paramName is "12345MX.Topaz" and the indexType = 0 Verify half width numbers,
+ * half width letters, and half width symbols
  */
 HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex007, Function | MediumTest | Level2)
 {
@@ -743,7 +744,8 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex007, Function
 /**
  * @tc.number : SUB_Driver_Codec_GetExtensionIndex_0900
  * @tc.name   : testGetExtensionIndex008
- * @tc.desc   : When the paramName is "!@#$%^&**OMX.Topaz" and the indexType = 0
+ * @tc.desc   : When the paramName is "!@#$%^&**OMX.Topaz" and the indexType = 0 Verify half width symbols and
+ * half width letters
  */
 HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex008, Function | MediumTest | Level2)
 {
@@ -755,7 +757,7 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex008, Function
 /**
  * @tc.number : SUB_Driver_Codec_GetExtensionIndex_1000
  * @tc.name   : testGetExtensionIndex009
- * @tc.desc   : When the paramName is "１２３４５" and the indexType = 0
+ * @tc.desc   : When the paramName is "１２３４５" and the indexType = 0 Verify full angle digits
  */
 HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex009, Function | MediumTest | Level2)
 {
@@ -767,7 +769,8 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex009, Function
 /**
  * @tc.number : SUB_Driver_Codec_GetExtensionIndex_1100
  * @tc.name   : testGetExtensionIndex010
- * @tc.desc   : When the paramName is "１２３４５ＯＭＸ．Ｔｏｐａｚ" and the indexType = 0
+ * @tc.desc   : When the paramName is "１２３４５ＯＭＸ．Ｔｏｐａｚ" and the indexType = 0 Verify full width digits,
+ * full width letters, and full width symbols
  */
 HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex010, Function | MediumTest | Level2)
 {
@@ -779,7 +782,8 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex010, Function
 /**
  * @tc.number : SUB_Driver_Codec_GetExtensionIndex_1200
  * @tc.name   : testGetExtensionIndex011
- * @tc.desc   : When the paramName is "１２３４５!@#$%" and the indexType = 0
+ * @tc.desc   : When the paramName is "１２３４５!@#$%" and the indexType = 0 Verify full width digits and
+ * half width symbols
  */
 HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex011, Function | MediumTest | Level2)
 {
@@ -791,7 +795,8 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex011, Function
 /**
  * @tc.number : SUB_Driver_Codec_GetExtensionIndex_1300
  * @tc.name   : testGetExtensionIndex012
- * @tc.desc   : When the paramName is "１２３４５！＠＃＄" and the indexType = 0
+ * @tc.desc   : When the paramName is "１２３４５！＠＃＄" and the indexType = 0 Verify full width digits, full width
+ * symbols
  */
 HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex012, Function | MediumTest | Level2)
 {
@@ -803,7 +808,8 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex012, Function
 /**
  * @tc.number : SUB_Driver_Codec_GetExtensionIndex_1400
  * @tc.name   : testGetExtensionIndex013
- * @tc.desc   : When the paramName is "１２３４５OMX.Topaz" and the indexType = 0
+ * @tc.desc   : When the paramName is "１２３４５OMX.Topaz" and the indexType = 0 Verify full width numbers,
+ * half width letters, and half width symbols
  */
 HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex013, Function | MediumTest | Level2)
 {
@@ -815,7 +821,8 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex013, Function
 /**
  * @tc.number : SUB_Driver_Codec_GetExtensionIndex_1500
  * @tc.name   : testGetExtensionIndex014
- * @tc.desc   : When the paramName is "！＠＃＄％OMX.Topaz" and the indexType = 0
+ * @tc.desc   : When the paramName is "！＠＃＄％OMX.Topaz" and the indexType = 0 Verify full width symbols,
+ * half width letters, and half width symbols
  */
 HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex014, Function | MediumTest | Level2)
 {
@@ -827,7 +834,8 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex014, Function
 /**
  * @tc.number : SUB_Driver_Codec_GetExtensionIndex_1600
  * @tc.name   : testGetExtensionIndex015
- * @tc.desc   : When the paramName is "！＠＃＄％ＯＭＸ．Ｔｏｐａｚ" and the indexType = 0
+ * @tc.desc   : When the paramName is "！＠＃＄％ＯＭＸ．Ｔｏｐａｚ" and the indexType = 0 Verify full width symbols and
+ * letters
  */
 HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex015, Function | MediumTest | Level2)
 {
@@ -839,7 +847,8 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex015, Function
 /**
  * @tc.number : SUB_Driver_Codec_GetExtensionIndex_1700
  * @tc.name   : testGetExtensionIndex016
- * @tc.desc   : When the paramName is "12345ＯＭＸ．Ｔｏｐａｚ" and the indexType = 0
+ * @tc.desc   : When the paramName is "12345ＯＭＸ．Ｔｏｐａｚ" and the indexType = 0 Verify half width numbers,
+ * full width letters, and full width symbols
  */
 HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex016, Function | MediumTest | Level2)
 {
@@ -851,7 +860,8 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex016, Function
 /**
  * @tc.number : SUB_Driver_Codec_GetExtensionIndex_1800
  * @tc.name   : testGetExtensionIndex017
- * @tc.desc   : When the paramName is "12345!@#$%" and the indexType = 0
+ * @tc.desc   : When the paramName is "12345!@#$%" and the indexType = 0 Verify half width numbers
+ * and half width symbols
  */
 HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex017, Function | MediumTest | Level2)
 {
@@ -863,7 +873,8 @@ HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex017, Function
 /**
  * @tc.number : SUB_Driver_Codec_GetExtensionIndex_1900
  * @tc.name   : testGetExtensionIndex018
- * @tc.desc   : When the paramName is "12345！＠＃＄％" and the indexType = 0
+ * @tc.desc   : When the paramName is "12345！＠＃＄％" and the indexType = 0 Verify half width numbers
+ * and full width symbols
  */
 HWTEST_F(CodecBenchmarkManagerTestAdditional, testGetExtensionIndex018, Function | MediumTest | Level2)
 {

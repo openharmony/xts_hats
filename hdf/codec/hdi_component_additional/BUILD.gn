@@ -25,8 +25,8 @@ ohos_moduletest_suite("HatsHdfTestComponentCodecAdditionalTest") {
     "//third_party/openmax/api/1.1.2",
   ]
   sources = [
-    "codec_component_test.cpp",
     "codec_callback_service.cpp",
+    "codec_component_test.cpp",
   ]
 
   deps = [

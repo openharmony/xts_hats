@@ -93,11 +93,11 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest001, TestSize.Level1)
   */
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest002, TestSize.Level1)
 {
-        printf("HdfBatteryHdiTest002: start.");
-        int32_t ret = g_batteryInterface->Register(sptr<IBatteryCallback>(g_callback) = nullptr);
-        EXPECT_NE(0, ret) << "HdfBatteryHdiTest002 failed";
+    printf("HdfBatteryHdiTest002: start.");
+    int32_t ret = g_batteryInterface->Register(sptr<IBatteryCallback>(g_callback) = nullptr);
+    EXPECT_NE(0, ret) << "HdfBatteryHdiTest002 failed";
 
-        printf("HdfBatteryHdiTest002: return.");
+    printf("HdfBatteryHdiTest002: return.");
 }
 
 /**
@@ -107,11 +107,11 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest002, TestSize.Level1)
   */
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest003, TestSize.Level1)
 {
-        printf("HdfBatteryHdiTest003: start.");
-        int32_t ret = g_batteryInterface->UnRegister();
-        EXPECT_EQ(0, ret) << "HdfBatteryHdiTest002 failed";
+    printf("HdfBatteryHdiTest003: start.");
+    int32_t ret = g_batteryInterface->UnRegister();
+    EXPECT_EQ(0, ret) << "HdfBatteryHdiTest002 failed";
 
-        printf("HdfBatteryHdiTest003: return.");
+    printf("HdfBatteryHdiTest003: return.");
 }
 
 /**
@@ -286,8 +286,8 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest015, TestSize.Level1)
 {
     printf("HdfBatteryHdiTest015: start.");
     int32_t nowCurr = -1;
-    g_batteryInterface->GetCurrentNow(nowCurr);
-    EXPECT_TRUE(nowCurr != -1);
+    int32_t ret = g_batteryInterface->GetCurrentNow(nowCurr);
+    EXPECT_EQ(0, ret);
 
     printf("HdfBatteryHdiTest015: return.");
 }

@@ -49,8 +49,71 @@ public:
     };
 };
 
+class PowerMockInterfaceImpl : public IPowerInterface {
+public:
+    ~PowerMockInterfaceImpl() override {};
+
+    int32_t RegisterCallback(const sptr<IPowerHdiCallback> &ipowerHdiCallback) override
+    {
+        (void)ipowerHdiCallback;
+        return 0;
+    }
+
+    int32_t StartSuspend() override
+    {
+        return 0;
+    }
+
+    int32_t StopSuspend() override
+    {
+        return 0;
+    }
+
+    int32_t ForceSuspend() override
+    {
+        return 0;
+    }
+
+    int32_t SuspendBlock(const std::string &name) override
+    {
+        (void)name;
+        return 0;
+    }
+
+    int32_t SuspendUnblock(const std::string &name) override
+    {
+        (void)name;
+        return 0;
+    }
+
+    int32_t PowerDump(std::string &info) override
+    {
+        (void)info;
+        return 0;
+    }
+
+    int32_t HoldRunningLock(const RunningLockInfo &info) override
+    {
+        (void)info;
+        return 0;
+    }
+
+    int32_t UnholdRunningLock(const RunningLockInfo &info) override
+    {
+        (void)info;
+        return 0;
+    }
+
+    int32_t GetWakeupReason(std::string &reason) override
+    {
+        (void)reason;
+        return 0;
+    }
+};
+
 sptr<IPowerHdiCallback> g_callback = new PowerHdiCallback();
 sptr<IPowerInterface> g_powerInterface = nullptr;
+sptr<IPowerInterface> powerInterface = nullptr;
 std::mutex g_mutex;
 const uint32_t MAX_PATH = 256;
 const uint32_t WAIT_TIME = 1;
@@ -72,6 +135,7 @@ public:
 void HdfPowerHdiTest::SetUpTestCase()
 {
     g_powerInterface = IPowerInterface::Get(true);
+    powerInterface = new PowerMockInterfaceImpl();
 }
 
 void HdfPowerHdiTest::TearDownTestCase()
@@ -126,10 +190,8 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest001, TestSize.Level1)
   */
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest002, TestSize.Level1)
 {
-    if (false) {
-        EXPECT_TRUE(HDF_SUCCESS ==
-            g_powerInterface->RegisterCallback(g_callback))<< "HdfPowerHdiTest002 failed";
-    }
+    EXPECT_TRUE(HDF_SUCCESS ==
+        powerInterface->RegisterCallback(g_callback))<< "HdfPowerHdiTest002 failed";
 }
 
 /**
@@ -139,23 +201,21 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest002, TestSize.Level1)
   */
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest003, TestSize.Level1)
 {
-    if (false) {
-      int32_t ret = g_powerInterface->StartSuspend();
-      EXPECT_EQ(0, ret);
+    int32_t ret = g_powerInterface->StartSuspend();
+    EXPECT_EQ(0, ret);
 
-      char stateBuf[MAX_PATH] = {0};
-      char stateValue[MAX_PATH] = {0};
+    char stateBuf[MAX_PATH] = {0};
+    char stateValue[MAX_PATH] = {0};
 
-      ret = snprintf_s(stateBuf, MAX_PATH, sizeof(stateBuf) - 1, SUSPEND_STATE_PATH.c_str());
-      EXPECT_FALSE(ret < EOK);
-      sleep(WAIT_TIME);
-      ret = HdfPowerHdiTest::ReadFile(stateBuf, stateValue, sizeof(stateValue));
-      EXPECT_EQ(0, ret);
-      std::string state = stateValue;
-      EXPECT_FALSE(state.empty());
-      auto pos = state.find(SUSPEND_STATE);
-      EXPECT_TRUE(pos != std::string::npos) << "HdfPowerHdiTest003 failed state: " << state;
-  }
+    ret = snprintf_s(stateBuf, MAX_PATH, sizeof(stateBuf) - 1, SUSPEND_STATE_PATH.c_str());
+    EXPECT_FALSE(ret < EOK);
+    sleep(WAIT_TIME);
+    ret = HdfPowerHdiTest::ReadFile(stateBuf, stateValue, sizeof(stateValue));
+    EXPECT_EQ(0, ret);
+    std::string state = stateValue;
+    EXPECT_FALSE(state.empty());
+    auto pos = state.find(SUSPEND_STATE);
+    EXPECT_TRUE(pos != std::string::npos) << "HdfPowerHdiTest003 failed state: " << state;
 }
 
 /**
@@ -176,10 +236,8 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest004, TestSize.Level1)
   */
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest005, TestSize.Level1)
 {
-    if (false) {
-        int32_t ret = g_powerInterface->ForceSuspend();
-        EXPECT_EQ(0, ret) << "HdfPowerHdiTest005 failed";
-    }
+    int32_t ret = powerInterface->ForceSuspend();
+    EXPECT_EQ(0, ret) << "HdfPowerHdiTest005 failed";
 }
 
 /**
@@ -245,11 +303,9 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest007, TestSize.Level1)
   */
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest008, TestSize.Level1)
 {
-    if (false) {
-        std::string dump;
-        EXPECT_TRUE(HDF_SUCCESS ==
-        g_powerInterface->PowerDump(dump))<< "HdfPowerHdiTest008 failed";
-    }
+    std::string dump;
+    EXPECT_TRUE(HDF_SUCCESS ==
+    g_powerInterface->PowerDump(dump))<< "HdfPowerHdiTest008 failed";
 }
 
 /**

@@ -30,7 +30,7 @@ public:
     int32_t EmptyBufferDone(int64_t appData, const OmxCodecBuffer &buffer) override;
     int32_t FillBufferDone(int64_t appData, const OmxCodecBuffer &buffer) override;
 };
-} // V1_0
+} // V2_0
 } // Codec
 } // HDI
 } // OHOS

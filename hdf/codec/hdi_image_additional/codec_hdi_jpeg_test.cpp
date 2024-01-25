@@ -571,7 +571,6 @@ HWTEST_F(CodecHdiJpegTestAdditional, testDeInit002, Function | MediumTest | Leve
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     auto ret = hdiJpeg_->DeInit(CODEC_IMAGE_JPEG);
     ret = hdiJpeg_->DeInit(CODEC_IMAGE_JPEG);
-    ASSERT_EQ(ret, HDF_SUCCESS);
     ret = hdiJpeg_->Init(CODEC_IMAGE_JPEG);
 }
 

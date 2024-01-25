@@ -14,31 +14,28 @@
 import("//build/ohos_var.gni")
 
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
-import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hdf/bluetooth"
-root_path =
-    "../../../../../../drivers/peripheral/adapter/bluetooth/a2dp/hdi_service"
+root_path = "../../../../../../drivers/peripheral/bluetooth/hci"
 
-ohos_moduletest_suite("HatsBluetootha2dpTest") {
+ohos_moduletest_suite("HatsBluetoothHdiAdditionalTest") {
   module_out_path = module_output_path
   sources = [
-    "a2dp_services_test.cpp",
     "bluetooth_hci_callback_impl.cpp",
+    "bluetooth_hci_services_test.cpp",
   ]
 
   deps = [
-    "${root_path}/utils/session:libbluetooth_audio_session",
+    "${root_path}/hdi_service:hdi_bluetooth_hci_service",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
   ]
-  configs = [ ":hdf_bluetooth" ]
+  configs = [ ":hdf_bluetooth_additional" ]
 
   if (is_standard_system) {
     external_deps = [
       "c_utils:utils",
-      "drivers_interface_bluetooth:libbluetooth_a2dp_proxy_1.0",
       "drivers_interface_bluetooth:libbluetooth_hci_proxy_1.0",
       "hdf_core:libhdf_host",
       "hdf_core:libhdf_ipc_adapter",
@@ -55,10 +52,10 @@ ohos_moduletest_suite("HatsBluetootha2dpTest") {
   part_name = "hats"
 }
 
-config("hdf_bluetooth") {
+config("hdf_bluetooth_additional") {
   include_dirs = [
     "include",
     "${root_path}/hdi_service",
-    "${root_path}/hdi_service/utils/session",
+    "${root_path}/hdi_service/implement",
   ]
 }

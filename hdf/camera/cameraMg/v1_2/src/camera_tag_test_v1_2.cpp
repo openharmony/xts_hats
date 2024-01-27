@@ -210,3 +210,168 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_Modes_0060, TestSize.Level1)
         }
     }
 }
+
+/**
+ * @tc.name: SUB_Driver_Camera_DefferredImage_0100
+ * @tc.desc: OHOS_ABILITY_DEFERRED_IMAGE_DELIVERY
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_DefferredImage_0100, TestSize.Level1)
+{
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_DEFERRED_IMAGE_DELIVERY, &entry);
+    if (ret == HDI::Camera::V1_0::NO_ERROR && entry.data.u8 != nullptr && entry.count > 0) {
+        std::stringstream ss;
+        for (size_t i = 1; i <= entry.count; i++) {
+            ss << static_cast<int>(entry.data.u8[i-1]) << " ";
+            if (i == entry.count || i % 2 == 0) {
+                printf("OHOS_ABILITY_DEFERRED_IMAGE_DELIVERY %s\n", ss.str().c_str());
+                ss.str("");
+            }
+        }
+        CAMERA_LOGI("print tag<OHOS_ABILITY_DEFERRED_IMAGE_DELIVERY> f value end.");
+    }
+}
+
+/**
+ * @tc.name: SUB_Driver_Camera_XMAGE_0100
+ * @tc.desc: OHOS_ABILITY_AVAILABLE_COLOR_SPACES
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_XMAGE_0100, TestSize.Level1)
+{
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_AVAILABLE_COLOR_SPACES, &entry);
+    if (ret == HDI::Camera::V1_0::NO_ERROR && entry.data.i32 != nullptr && entry.count > 0) {
+        std::stringstream ss;
+        for (size_t i = 0; i < entry.count; i++) {
+            ss << entry.data.i32[i] << " ";
+            if (i == entry.count -1) {
+                printf("OHOS_ABILITY_AVAILABLE_COLOR_SPACES %s\n", ss.str().c_str());
+                ss.str("");
+            }
+        }
+        CAMERA_LOGI("print tag<OHOS_ABILITY_AVAILABLE_COLOR_SPACES> f value end.");
+    }
+}
+
+/**
+ * @tc.name: SUB_Driver_Camera_NightMode_0100
+ * @tc.desc: OHOS_ABILITY_NIGHT_MODE_SUPPORTED_EXPOSURE_TIME
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_NightMode_0100, TestSize.Level1)
+{
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_NIGHT_MODE_SUPPORTED_EXPOSURE_TIME, &entry);
+    if (ret == HDI::Camera::V1_0::NO_ERROR && entry.data.i32 != nullptr && entry.count > 0) {
+        std::stringstream ss;
+        for (size_t i = 0; i < entry.count; i++) {
+            ss << entry.data.i32[i] << " ";
+            if (i == entry.count -1) {
+                printf("OHOS_ABILITY_NIGHT_MODE_SUPPORTED_EXPOSURE_TIME %s\n", ss.str().c_str());
+                ss.str("");
+            }
+        }
+        CAMERA_LOGI("print tag<OHOS_ABILITY_NIGHT_MODE_SUPPORTED_EXPOSURE_TIME> f value end.");
+    }
+}
+
+/**
+ * @tc.name: SUB_Driver_Camera_APERTURE_0100
+ * @tc.desc: OHOS_ABILITY_CAMERA_VIRTUAL_APERTURE_RANGE
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_APERTURE_0100, TestSize.Level1)
+{
+    EXPECT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_VIRTUAL_APERTURE_RANGE, &entry);
+    
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && entry.data.f != nullptr && entry.count > 0) {
+        printf("OHOS_ABILITY_CAMERA_VIRTUAL_APERTURE_RANGE f value count %d\n", entry.count);
+        constexpr size_t step = 4; //print step
+        std::stringstream ss;
+        for (size_t i = 0; i < entry.count; i++) {
+            ss << entry.data.f[i] << " ";
+            if ((i != 0) && (i % step == 0 || i == entry.count -1)) {
+                CAMERA_LOGI("%{public}s\n", ss.str().c_str());
+                printf("OHOS_ABILITY_CAMERA_VIRTUAL_APERTURE_RANGE%s\n", ss.str().c_str());
+                ss.clear();
+                ss.str("");
+            }
+        }
+    }
+}
+
+/**
+ * @tc.name: SUB_Driver_Camera_APERTURE_0200
+ * @tc.desc: OHOS_ABILITY_CAMERA_VIRTUAL_APERTURE_RANGE
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_APERTURE_0200, TestSize.Level1)
+{
+    EXPECT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE, &entry);
+
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && entry.data.f != nullptr && entry.count > 0) {
+        printf("OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE f value count %d\n", entry.count);
+        constexpr size_t step = 4; //print step
+        std::stringstream ss;
+        for (size_t i = 0; i < entry.count; i++) {
+            ss << entry.data.f[i] << " ";
+            if ((i != 0) && (i % step == 0 || i == entry.count - 1)) {
+                CAMERA_LOGI("%{public}s\n", ss.str().c_str());
+                printf("OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE%s\n", ss.str().c_str());
+                ss.clear();
+                ss.str("");
+            }
+        }
+    }
+}
+
+/**
+ * @tc.name: SUB_Driver_Camera_SmoothZoom_0100
+ * @tc.desc: OHOS_ABILITY_CAMERA_ZOOM_PERFORMANCE
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_SmoothZoom_0100, TestSize.Level1)
+{
+    EXPECT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_ZOOM_PERFORMANCE, &entry);
+
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && entry.data.ui32 != nullptr && entry.count > 0) {
+        printf("OHOS_ABILITY_CAMERA_ZOOM_PERFORMANCE f value count %d\n", entry.count);
+        constexpr size_t step = 4; //print step
+        std::stringstream ss;
+        for (size_t i = 0; i < entry.count; i++) {
+            ss << entry.data.ui32[i] << " ";
+            if ((i != 0) && (i % step == 0 || i == entry.count - 1)) {
+                CAMERA_LOGI("%{public}s\n", ss.str().c_str());
+                printf("OHOS_ABILITY_CAMERA_ZOOM_PERFORMANCE%s\n", ss.str().c_str());
+                ss.clear();
+                ss.str("");
+            }
+        }
+    }
+}

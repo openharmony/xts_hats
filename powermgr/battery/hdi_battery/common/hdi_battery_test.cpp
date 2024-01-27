@@ -271,8 +271,8 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest014, TestSize.Level1)
 {
     printf("HdfBatteryHdiTest014: start.");
     int curAverage = -1;
-    g_batteryInterface->GetCurrentAverage(curAverage);
-    EXPECT_TRUE(curAverage != 0);
+    int32_t ret = g_batteryInterface->GetCurrentAverage(curAverage);
+    EXPECT_EQ(0, ret);
 
     printf("HdfBatteryHdiTest014: return.");
 }

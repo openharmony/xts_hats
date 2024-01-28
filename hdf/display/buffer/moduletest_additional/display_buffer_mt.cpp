@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -3659,7 +3659,11 @@ HWTEST_F(DisplayBufferMtAdditional, testDisplayBufferFreeMem001, Function | Medi
     g_dispbuf->AllocMem(info, bHandle);
     g_dispbuf->FreeMem(*bHandle);
     void *buffer = g_dispbuf->Mmap(*bHandle);
-    EXPECT_TRUE((buffer == reinterpret_cast<void *>(0xffffffff)) || (buffer == nullptr));
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_TRUE(buffer == reinterpret_cast<void *>(0xffffffff));
+#else
+    EXPECT_TRUE(buffer == nullptr);
+#endif // DISPLAY_COMMUNITY
 }
 
 } // namespace TEST

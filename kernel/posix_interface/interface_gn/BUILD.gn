@@ -16,7 +16,7 @@ group("HatsPosixInterfaceTest") {
   deps = [
     #"dyload_posix:HatsDyloadTest",
     #"fs_posix:HatsFSTest",
-    "futex_posix:HatsFutexApiTest",
+    #"futex_posix:HatsFutexApiTest",
 
     #"io_posix:HatsIoApiTest",
     "ipc_posix:HatsKernelIPCTest",

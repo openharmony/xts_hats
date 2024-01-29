@@ -27,6 +27,7 @@
 #include "osal_time.h"
 #include "v1_1/ipower_interface.h"
 #include "v1_1/ipower_hdi_callback.h"
+#include "v1_1/ipower_running_lock_callback.h"
 #include "v1_1/power_types.h"
 #include "v1_1/running_lock_types.h"
 
@@ -107,6 +108,36 @@ public:
     int32_t GetWakeupReason(std::string &reason) override
     {
         (void)reason;
+        return 0;
+    }
+
+    int32_t RegisterRunningLockCallback(const sptr<IPowerRunningLockCallback>
+        &iPowerRunningLockCallback) override
+    {
+        (void)iPowerRunningLockCallback;
+        return 0;
+    }
+
+    int32_t UnRegisterRunningLockCallback() override
+    {
+        return 0;
+    }
+
+    int32_t HoldRunningLockExt(const RunningLockInfo &info, uint64_t lockid,
+        const std::string &bundleName) override
+    {
+        (void)info;
+        (void)lockid;
+        (void)bundleName;
+        return 0;
+    }
+
+    int32_t UnholdRunningLockExt(const RunningLockInfo &info, uint64_t lockid,
+        const std::string &bundleName) override
+    {
+        (void)info;
+        (void)lockid;
+        (void)bundleName;
         return 0;
     }
 };

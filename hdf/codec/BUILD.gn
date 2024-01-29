@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+# Copyright (c) 2021-2024 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -21,8 +21,8 @@ group("HatsHdfCodecTest") {
     testonly = true
     deps = [
       #"benchmarktest:HatsHdfCodecBenchmarkTest",
-      "benchmarktest_additional:HatsHdfCodecBenchmarkAdditionalTest",
       "hdi_adapter:HatsHdfAdapterCodecTest",
+      "hdi_component_additional:HatsHdfTestComponentCodecAdditionalTest",
       "hdi_image:HatsHdfImageCodecTest",
       "hdi_image_additional:HatsHdfImageCodecAdditionalTest",
       "hdi_omx:HatsHdfOmxCodecTest",

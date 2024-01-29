@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -3640,6 +3640,30 @@ HWTEST_F(DisplayBufferMtAdditional, testDisplayBufferInvalidateCache020, Functio
     int32_t ret = g_dispbuf->InvalidateCache(*bHandle);
     EXPECT_EQ(ret, HDF_SUCCESS);
     AfterCache(bHandle);
+}
+
+/**
+ * @tc.number : SUB_Driver_Display_Buffer_FreeMem_0100
+ * @tc.name   : testDisplayBufferFreeMem001
+ * @tc.desc   : Reliability of function(FreeMem)
+ */
+HWTEST_F(DisplayBufferMtAdditional, testDisplayBufferFreeMem001, Function | MediumTest | Level1)
+{
+    BufferHandle *bHandle = nullptr;
+    AllocInfo info;
+    info.width = 1024;
+    info.height = 1024;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_WRITE;
+    info.format = PIXEL_FMT_BGRA_8888;
+
+    g_dispbuf->AllocMem(info, bHandle);
+    g_dispbuf->FreeMem(*bHandle);
+    void *buffer = g_dispbuf->Mmap(*bHandle);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_TRUE(buffer == reinterpret_cast<void *>(0xffffffff));
+#else
+    EXPECT_TRUE(buffer == nullptr);
+#endif // DISPLAY_COMMUNITY
 }
 
 } // namespace TEST

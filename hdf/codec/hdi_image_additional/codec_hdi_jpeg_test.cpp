@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -525,6 +525,31 @@ HWTEST_F(CodecHdiJpegTestAdditional, testInit001, TestSize.Level2)
 }
 
 /**
+ * @tc.number : SUB_Driver_Codec_Init_0200
+ * @tc.name   : testInit002
+ * @tc.desc   : Determines the result of the function with CODEC_IMAGE_JPEG
+ */
+HWTEST_F(CodecHdiJpegTestAdditional, testInit002, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(hdiJpeg_ != nullptr);
+    auto ret = hdiJpeg_->DeInit(CODEC_IMAGE_JPEG);
+    ret = hdiJpeg_->Init(CODEC_IMAGE_JPEG);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Codec_Init_0300
+ * @tc.name   : testInit003
+ * @tc.desc   : Determines the result of the function with CODEC_IMAGE_HEIF
+ */
+HWTEST_F(CodecHdiJpegTestAdditional, testInit003, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(hdiJpeg_ != nullptr);
+    auto ret = hdiJpeg_->Init(CODEC_IMAGE_HEIF);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
  * @tc.number : SUB_Driver_Codec_DeInit_0100
  * @tc.name   : testDeInit001
  * @tc.desc   : Determines the result of the function when the correct argument is invalid
@@ -533,6 +558,31 @@ HWTEST_F(CodecHdiJpegTestAdditional, testDeInit001, TestSize.Level2)
 {
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     auto ret = hdiJpeg_->DeInit(CODEC_IMAGE_INVALID);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Codec_DeInit_0200
+ * @tc.name   : testDeInit002
+ * @tc.desc   : Determines the result of the function with CODEC_IMAGE_JPEG
+ */
+HWTEST_F(CodecHdiJpegTestAdditional, testDeInit002, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(hdiJpeg_ != nullptr);
+    auto ret = hdiJpeg_->DeInit(CODEC_IMAGE_JPEG);
+    ret = hdiJpeg_->DeInit(CODEC_IMAGE_JPEG);
+    ret = hdiJpeg_->Init(CODEC_IMAGE_JPEG);
+}
+
+/**
+ * @tc.number : SUB_Driver_Codec_DeInit_0300
+ * @tc.name   : testDeInit003
+ * @tc.desc   : Determines the result of the function with CODEC_IMAGE_HEIF
+ */
+HWTEST_F(CodecHdiJpegTestAdditional, testDeInit003, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(hdiJpeg_ != nullptr);
+    auto ret = hdiJpeg_->DeInit(CODEC_IMAGE_HEIF);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
 
@@ -952,6 +1002,82 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecAllocateInBuffer009, TestSize.Leve
     struct CodecImageBuffer inBuffer;
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_INVALID);
     ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Codec_AllocateInBuffer_4300
+ * @tc.name   : testCodecAllocateInBuffer010
+ * @tc.desc   : Determines the result of the function with inBuffer.fenceFd = -1 and CODEC_IMAGE_HEIF
+ */
+HWTEST_F(CodecHdiJpegTestAdditional, testCodecAllocateInBuffer010, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(hdiJpeg_ != nullptr);
+    struct CodecImageBuffer inBuffer;
+    inBuffer.fenceFd = -1;
+    auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_HEIF);
+    if (ret == HDF_SUCCESS) {
+        ret = hdiJpeg_->FreeInBuffer(inBuffer);
+        ASSERT_EQ(ret, HDF_SUCCESS);
+    } else {
+        ASSERT_NE(ret, HDF_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Codec_AllocateInBuffer_4400
+ * @tc.name   : testCodecAllocateInBuffer011
+ * @tc.desc   : Determines the result of the function with inBuffer.buffer = 0 and CODEC_IMAGE_HEIF
+ */
+HWTEST_F(CodecHdiJpegTestAdditional, testCodecAllocateInBuffer011, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(hdiJpeg_ != nullptr);
+    struct CodecImageBuffer inBuffer;
+    inBuffer.buffer = 0;
+    auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_HEIF);
+    if (ret == HDF_SUCCESS) {
+        ret = hdiJpeg_->FreeInBuffer(inBuffer);
+        ASSERT_EQ(ret, HDF_SUCCESS);
+    } else {
+        ASSERT_NE(ret, HDF_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Codec_AllocateInBuffer_4500
+ * @tc.name   : testCodecAllocateInBuffer012
+ * @tc.desc   : Determines the result of the function with inBuffer.size = -1 and CODEC_IMAGE_HEIF
+ */
+HWTEST_F(CodecHdiJpegTestAdditional, testCodecAllocateInBuffer012, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(hdiJpeg_ != nullptr);
+    struct CodecImageBuffer inBuffer;
+    inBuffer.size = -1;
+    auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_HEIF);
+    if (ret == HDF_SUCCESS) {
+        ret = hdiJpeg_->FreeInBuffer(inBuffer);
+        ASSERT_EQ(ret, HDF_SUCCESS);
+    } else {
+        ASSERT_NE(ret, HDF_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Codec_AllocateInBuffer_4600
+ * @tc.name   : testCodecAllocateInBuffer013
+ * @tc.desc   : Determines the result of the function with inBuffer.id = -1 and CODEC_IMAGE_HEIF
+ */
+HWTEST_F(CodecHdiJpegTestAdditional, testCodecAllocateInBuffer013, Function | MediumTest | Level2)
+{
+    ASSERT_TRUE(hdiJpeg_ != nullptr);
+    struct CodecImageBuffer inBuffer;
+    inBuffer.id = -1;
+    auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_HEIF);
+    if (ret == HDF_SUCCESS) {
+        ret = hdiJpeg_->FreeInBuffer(inBuffer);
+        ASSERT_EQ(ret, HDF_SUCCESS);
+    } else {
+        ASSERT_NE(ret, HDF_SUCCESS);
+    }
 }
 
 /**

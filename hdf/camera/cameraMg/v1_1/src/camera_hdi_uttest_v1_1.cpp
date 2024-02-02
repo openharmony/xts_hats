@@ -456,8 +456,6 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_QuickThumbnail_0500, TestSize.Leve
     // capture streamInfo
     cameraTest->streamInfoCapture = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
     cameraTest->streamInfoCapture->extendedStreamInfos = {extendedStreamInfo};
-
-// cameraTest->DefaultInfosCapture(cameraTest->streamInfoCapture);
     cameraTest->DefaultCapture(cameraTest->streamInfoCapture);
     std::shared_ptr<OHOS::Camera::Test::StreamConsumer> consumer_capture = std::make_shared<OHOS::Camera::Test::StreamConsumer>();
     cameraTest->streamInfoCapture->v1_0.bufferQueue_ = consumer_capture->CreateProducerSeq([this](void* addr, uint32_t size) {

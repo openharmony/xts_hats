@@ -12,6 +12,7 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
+import("//drivers/peripheral/audio/audio.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/audio"
@@ -22,6 +23,10 @@ ohos_moduletest_suite("HatsHdfAudioIdlRenderTest") {
     "src/audio_render_mmap_test.cpp",
   ]
   configs = [ ":audio_idl_render" ]
+
+  if (drivers_peripheral_audio_feature_offload) {
+    sources += [ "src/audio_render_offload_test.cpp" ]
+  }
 
   deps = [ "//third_party/bounds_checking_function:libsec_shared" ]
   external_deps = [

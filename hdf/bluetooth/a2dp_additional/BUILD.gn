@@ -21,7 +21,7 @@ module_output_path = "hdf/bluetooth"
 root_path =
     "../../../../../../drivers/peripheral/adapter/bluetooth/a2dp/hdi_service"
 
-ohos_moduletest_suite("HatsBluetootha2dpTest") {
+ohos_moduletest_suite("HatsBluetootha2dpAdditionalTest") {
   module_out_path = module_output_path
   sources = [
     "a2dp_services_test.cpp",
@@ -33,7 +33,7 @@ ohos_moduletest_suite("HatsBluetootha2dpTest") {
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
   ]
-  configs = [ ":hdf_bluetooth" ]
+  configs = [ ":hdf_bluetooth_additional" ]
 
   if (is_standard_system) {
     external_deps = [
@@ -55,7 +55,7 @@ ohos_moduletest_suite("HatsBluetootha2dpTest") {
   part_name = "hats"
 }
 
-config("hdf_bluetooth") {
+config("hdf_bluetooth_additional") {
   include_dirs = [
     "include",
     "${root_path}/hdi_service",

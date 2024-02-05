@@ -19,7 +19,10 @@ module_output_path = "hdf/ril"
 ohos_moduletest_suite("HatsHdfV1RilServiceAdditionalTest") {
   module_out_path = module_output_path
 
-  sources = [ "hdf_ril_hdiService_test.cpp" ]
+  sources = [
+    "hdf_ril_callback_common.cpp",
+    "hdf_ril_hdiService_test_1st.cpp",
+  ]
   defines = [
     "LOG_TAG = \"HdfRilHdiTest\"",
     "LOG_DOMAIN = 0xD000F00",

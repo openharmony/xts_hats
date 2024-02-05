@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,6 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+#ifndef HDF_RIL_CALLBACK_COMMON_H
+#define HDF_RIL_CALLBACK_COMMON_H
 
 #include "cmath"
 #include "condition_variable"
@@ -636,3 +639,5 @@ void WaitFor(int32_t timeoutSecond);
 bool GetBoolResult(HdiId hdiId);
 int32_t GetSerialId();
 bool IsReady(int32_t slotId);
+
+#endif

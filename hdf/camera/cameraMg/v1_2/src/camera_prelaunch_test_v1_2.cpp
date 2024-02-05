@@ -570,5 +570,4 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_3100, TestSi
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::NORMAL);
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
-    cameraTest->Open(DEVICE_0);
 }

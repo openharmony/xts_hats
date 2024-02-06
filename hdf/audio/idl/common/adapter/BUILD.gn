@@ -21,7 +21,7 @@ ohos_moduletest_suite("HatsHdfAudioIdlAdapterTest") {
   sources = [ "src/audio_adapter_common_test.cpp" ]
   configs = [ ":audio_idl_adapter" ]
 
-  if (drivers_peripheral_audio_feature_multichannel) {
+  if (drivers_peripheral_audio_feature_offload) {
     sources += [ "src/audio_adapter_multchannel_test.cpp" ]
   }
 

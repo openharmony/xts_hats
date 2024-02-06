@@ -16,5 +16,8 @@ import("../../../tools/build/suite.gni")
 
 group("HatsHdfRilTest") {
   testonly = true
-  deps = [ "hdi_v1.0:HatsHdfV1RilServiceTest" ]
+  deps = [
+    "hdi_v1.0:HatsHdfV1RilServiceTest",
+    "hdi_v1.1_additional:HatsHdfV1RilServiceAdditionalTest",
+  ]
 }

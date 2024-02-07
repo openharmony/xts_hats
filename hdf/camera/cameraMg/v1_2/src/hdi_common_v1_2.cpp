@@ -426,6 +426,21 @@ void Test::StopStream(std::vector<int>& captureIds, std::vector<int>& streamIds)
     }
 }
 
+bool Test::IsTagValueExistsU8(std::shared_ptr<CameraMetadata> ability, uint32_t tag, uint8_t value)
+{
+    common_metadata_header_t* data = ability->get();
+    camera_metadata_item_t entry;
+    int ret = FindCameraMetadataItem(data, tag, &entry);
+    EXPECT_EQ(ret, 0);
+    EXPECT_NE(entry.count, 0);
+    for (int i = 0; i < entry.count; i++) {
+        if (entry.data.u8[i] == value) {
+            return true;
+        }
+    }
+    return false;
+}
+
 void Test::TakePhotoWithTags(std::shared_ptr<OHOS::Camera::CameraSetting> meta)
 {
     streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();

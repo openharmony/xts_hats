@@ -24,8 +24,11 @@ ohos_moduletest_suite("HatsHdfCameraMgTestv2") {
   module_out_path = module_output_path
   sources = [
     "./src/camera_flashlight_test_v1_2.cpp",
+    "./src/camera_hdi_test_v1_2.cpp",
     "./src/camera_prelaunch_test_v1_2.cpp",
+    "./src/camera_stream_test_v1_2.cpp",
     "./src/camera_tag_test_v1_2.cpp",
+    "./src/front_camera_hdi_test_v1_2.cpp",
     "./src/front_camera_tag_test_v1_2.cpp",
     "./src/hdi_common_v1_2.cpp",
   ]

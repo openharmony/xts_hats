@@ -21,7 +21,7 @@
 #include "system_ability_definition.h"
 #include "system_ability_load_callback_stub.h"
 #include "ext_object.h"
-#define private public
+
 #include "edm_errors.h"
 #include "hilog_wrapper.h"
 #include "pkg_db_helper.h"

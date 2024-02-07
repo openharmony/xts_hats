@@ -34,21 +34,6 @@ void CameraTagTestV1_2::TearDown(void)
     cameraTest->Close();
 }
 
-bool IsTagValueExistsU8(std::shared_ptr<CameraMetadata> ability, uint32_t tag, uint8_t value)
-{
-    common_metadata_header_t* data = ability->get();
-    camera_metadata_item_t entry;
-    int ret = FindCameraMetadataItem(data, tag, &entry);
-    EXPECT_EQ(ret, 0);
-    EXPECT_NE(entry.count, 0);
-    for (int i = 0; i < entry.count; i++) {
-        if (entry.data.u8[i] == value) {
-            return true;
-        }
-    }
-    return false;
-}
-
 void invalidParmTestU8(int tag, uint8_t value)
 {
     std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
@@ -106,7 +91,7 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_Modes_0030, TestSize.Level1)
     camera_metadata_item_t entry;
     int ret = FindCameraMetadataItem(data, OHOS_ABILITY_SCENE_PORTRAIT_EFFECT_TYPES, &entry);
     if (ret != 0) {
-        bool portraitFlag = IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_CAMERA_MODES,
+        bool portraitFlag = cameraTest->IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_CAMERA_MODES,
             OHOS::HDI::Camera::V1_1::PORTRAIT);
         EXPECT_EQ(portraitFlag, false);
         CAMERA_LOGI("OHOS::HDI::Camera::V1_1::PORTRAIT found!");
@@ -179,7 +164,7 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_Modes_0060, TestSize.Level1)
 {
     common_metadata_header_t* data = cameraTest->ability->get();
     camera_metadata_item_t entry;
-    bool beautyAutoFlag = IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_SCENE_BEAUTY_TYPES,
+    bool beautyAutoFlag = cameraTest->IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_SCENE_BEAUTY_TYPES,
         OHOS_CAMERA_BEAUTY_TYPE_AUTO);
     if (!beautyAutoFlag) {
         CAMERA_LOGE("OHOS_CAMERA_BEAUTY_TYPE_AUTO not found");
@@ -371,6 +356,57 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_SmoothZoom_0100, TestSize.Level1)
                 printf("OHOS_ABILITY_CAMERA_ZOOM_PERFORMANCE%s\n", ss.str().c_str());
                 ss.clear();
                 ss.str("");
+            }
+        }
+    }
+}
+
+/**
+ * @tc.name: SUB_Driver_Camera_Colorspace_0100
+ * @tc.desc: OHOS_ABILITY_AVAILABLE_COLOR_SPACES
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_Colorspace_0100, TestSize.Level1)
+{
+    CAMERA_LOGI("CameraHdiTestV1_2 Camera_Device_Hdi_V1_2_032 start ...");
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_AVAILABLE_COLOR_SPACES, &entry);
+    printf("OHOS_ABILITY_AVAILABLE_COLOR_SPACES value count %d\n", entry.count);
+    if (ret == HDI::Camera::V1_0::NO_ERROR && entry.data.i32 != nullptr && entry.count > 0) {
+        std::stringstream ss;
+        for (size_t i = 0; i < entry.count; i++) {
+            ss << entry.data.i32[i] << " ";
+            if (i == entry.count - 1) {
+                printf("OHOS_ABILITY_AVAILABLE_COLOR_SPACES: %s\n", ss.str().c_str());
+                ss.clear();
+            }
+        }
+    }
+}
+
+/**
+ * @tc.name:SUB_Driver_Camera_Stabilization_0100
+ * @tc.desc:OHOS_ABILITY_VIDEO_STABILIZATION_MODES
+ * @tc.size:MediumTest
+ * @tc.type:Function
+*/
+HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_Stabilization_0100, TestSize.Level1)
+{
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_VIDEO_STABILIZATION_MODES, &entry);
+    printf("OHOS_ABILITY_VIDEO_STABILIZATION_MODES value count %d\n", entry.count);
+    if (ret == HDI::Camera::V1_0::NO_ERROR && entry.data.u8 != nullptr && entry.count > 0) {
+        std::stringstream ss;
+        for (size_t i = 0; i < entry.count; i++) {
+            ss << entry.data.u8[i] << " ";
+            if (i == entry.count - 1) {
+                printf("OHOS_ABILITY_VIDEO_STABILIZATION_MODES: %s\n", ss.str().c_str());
+                ss.clear();
             }
         }
     }

@@ -24,10 +24,10 @@ using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
 using namespace OHOS::HDI::FingerprintAuth;
 using namespace OHOS::HDI::FingerprintAuth::V1_0;
-using Property = OHOS::HDI::FingerprintAuth::V1_1::Property;
-using SaCommandParamNone = OHOS::HDI::FingerprintAuth::V1_1::SaCommandParamNone;
-using SaCommandParam = OHOS::HDI::FingerprintAuth::V1_1::SaCommandParam;
-using SaCommand = OHOS::HDI::FingerprintAuth::V1_1::SaCommand;
+using Property = OHOS::HDI::FingerprintAuth::V1_2::Property;
+using SaCommandParamNone = OHOS::HDI::FingerprintAuth::V1_2::SaCommandParamNone;
+using SaCommandParam = OHOS::HDI::FingerprintAuth::V1_2::SaCommandParam;
+using SaCommand = OHOS::HDI::FingerprintAuth::V1_2::SaCommand;
 
 static ExecutorImpl g_executorImpl;
 static OHOS::Parcel parcel;
@@ -752,11 +752,11 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestGetPropert
     ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-    propertyTypes.push_back(OHOS::HDI::FingerprintAuth::V1_1::AUTH_SUB_TYPE);
-    propertyTypes.push_back(OHOS::HDI::FingerprintAuth::V1_1::LOCKOUT_DURATION);
-    propertyTypes.push_back(OHOS::HDI::FingerprintAuth::V1_1::REMAIN_ATTEMPTS);
-    propertyTypes.push_back(OHOS::HDI::FingerprintAuth::V1_1::ENROLL_PROGRESS);
-    propertyTypes.push_back(OHOS::HDI::FingerprintAuth::V1_1::SENSOR_INFO);
+    propertyTypes.push_back(OHOS::HDI::FingerprintAuth::V1_2::AUTH_SUB_TYPE);
+    propertyTypes.push_back(OHOS::HDI::FingerprintAuth::V1_2::LOCKOUT_DURATION);
+    propertyTypes.push_back(OHOS::HDI::FingerprintAuth::V1_2::REMAIN_ATTEMPTS);
+    propertyTypes.push_back(OHOS::HDI::FingerprintAuth::V1_2::ENROLL_PROGRESS);
+    propertyTypes.push_back(OHOS::HDI::FingerprintAuth::V1_2::SENSOR_INFO);
     ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
@@ -883,7 +883,7 @@ HWTEST_F(UserIamFingerprintAuthTestAdditional, testFingerprintAuthTestGetExecuto
 {
     cout << "start test GetExecutorListV1_1" << endl;
     FingerprintAuthInterfaceService fingerprint_Interface;
-    std::vector<sptr<V1_1::IExecutor>> executorList;
+    std::vector<sptr<V1_2::IExecutor>> executorList;
     int32_t ret = 0;
     for (int32_t i = 0; i < 1000; i++) {
         ret = fingerprint_Interface.GetExecutorListV1_1(executorList);

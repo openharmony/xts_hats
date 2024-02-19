@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -726,6 +726,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene001, Function |
         ret |= render_->SelectScene(render_, &scene);
     }
     EXPECT_EQ(HDF_SUCCESS, ret);
+    free(scene.desc.desc);
 }
 
 /**
@@ -750,6 +751,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene003, Function |
     scene.desc.pins = PIN_OUT_HEADSET;
     scene.desc.desc = strdup("mic");
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -764,6 +766,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene004, Function |
     scene.desc.pins = PIN_OUT_HEADSET;
     scene.desc.desc = strdup("mic");
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -778,6 +781,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene005, Function |
     scene.desc.pins = PIN_OUT_HEADSET;
     scene.desc.desc = strdup("mic");
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -792,6 +796,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene006, Function |
     scene.desc.pins = PIN_OUT_SPEAKER;
     scene.desc.desc = strdup("mic");
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -806,6 +811,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene007, Function |
     scene.desc.pins = PIN_OUT_SPEAKER;
     scene.desc.desc = strdup("mic");
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -820,6 +826,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene008, Function |
     scene.desc.pins = PIN_OUT_SPEAKER;
     scene.desc.desc = strdup("mic");
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -834,6 +841,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene009, Function |
     scene.desc.pins = PIN_OUT_SPEAKER;
     scene.desc.desc = strdup("mic");
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -848,6 +856,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene010, Function |
     scene.desc.pins = PIN_NONE;
     scene.desc.desc = strdup("mic");
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -862,6 +871,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene011, Function |
     scene.desc.pins = PIN_NONE;
     scene.desc.desc = strdup("mic");
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -876,6 +886,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene012, Function |
     scene.desc.pins = PIN_NONE;
     scene.desc.desc = strdup("mic");
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -890,6 +901,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene013, Function |
     scene.desc.pins = PIN_NONE;
     scene.desc.desc = strdup("mic");
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -904,6 +916,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene014, Function |
     scene.desc.pins = PIN_OUT_LINEOUT;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -918,6 +931,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene015, Function |
     scene.desc.pins = PIN_OUT_LINEOUT;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -932,6 +946,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene016, Function |
     scene.desc.pins = PIN_OUT_LINEOUT;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -946,6 +961,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene017, Function |
     scene.desc.pins = PIN_OUT_LINEOUT;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -960,6 +976,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene018, Function |
     scene.desc.pins = PIN_OUT_HDMI;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -974,6 +991,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene019, Function |
     scene.desc.pins = PIN_OUT_HDMI;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -988,6 +1006,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene020, Function |
     scene.desc.pins = PIN_OUT_HDMI;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -1002,6 +1021,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene021, Function |
     scene.desc.pins = PIN_OUT_HDMI;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -1016,6 +1036,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene022, Function |
     scene.desc.pins = PIN_IN_MIC;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -1030,6 +1051,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene023, Function |
     scene.desc.pins = PIN_IN_MIC;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -1044,6 +1066,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene024, Function |
     scene.desc.pins = PIN_IN_MIC;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -1058,6 +1081,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene025, Function |
     scene.desc.pins = PIN_IN_MIC;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -1072,6 +1096,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene026, Function |
     scene.desc.pins = PIN_IN_HS_MIC;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -1086,6 +1111,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene027, Function |
     scene.desc.pins = PIN_IN_HS_MIC;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -1100,6 +1126,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene028, Function |
     scene.desc.pins = PIN_IN_HS_MIC;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -1114,6 +1141,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene029, Function |
     scene.desc.pins = PIN_IN_HS_MIC;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -1128,6 +1156,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene030, Function |
     scene.desc.pins = PIN_IN_LINEIN;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -1142,6 +1171,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene031, Function |
     scene.desc.pins = PIN_IN_LINEIN;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -1156,6 +1186,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene032, Function |
     scene.desc.pins = PIN_IN_LINEIN;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -1170,6 +1201,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene033, Function |
     scene.desc.pins = PIN_IN_LINEIN;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -1184,6 +1216,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene034, Function |
     scene.desc.pins = PIN_IN_USB_EXT;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -1198,6 +1231,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene035, Function |
     scene.desc.pins = PIN_IN_USB_EXT;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -1212,6 +1246,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene036, Function |
     scene.desc.pins = PIN_IN_USB_EXT;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**
@@ -1226,6 +1261,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene037, Function |
     scene.desc.pins = PIN_IN_USB_EXT;
     scene.desc.desc = strdup("mic");
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    free(scene.desc.desc);
 }
 
 /**

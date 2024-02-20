@@ -24,8 +24,8 @@ using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
 using namespace OHOS::HDI::FingerprintAuth;
 using namespace OHOS::HDI::FingerprintAuth::V1_0;
-using CommandIdV1_1 = OHOS::HDI::FingerprintAuth::V1_1::CommandId;
-using FingerprintTipsCodeV1_1 = OHOS::HDI::FingerprintAuth::V1_1::FingerprintTipsCode;
+using CommandIdV1_2 = OHOS::HDI::FingerprintAuth::V1_2::CommandId;
+using FingerprintTipsCodeV1_2 = OHOS::HDI::FingerprintAuth::V1_2::FingerprintTipsCode;
 
 static OHOS::Parcel parcel;
 
@@ -111,10 +111,10 @@ HWTEST_F(FingerPrintTypeTest, Security_IAM_Fingerprint_HDI_FUNC_0203, Function |
 HWTEST_F(FingerPrintTypeTest, Security_IAM_Fingerprint_HDI_FUNC_0204, Function | MediumTest | Level1)
 {
     cout << "start test CommandId" << endl;
-    CommandIdV1_1 lock_template = OHOS::HDI::FingerprintAuth::V1_1::CommandId::LOCK_TEMPLATE;
-    CommandIdV1_1 unlock_template = OHOS::HDI::FingerprintAuth::V1_1::CommandId::UNLOCK_TEMPLATE;
-    CommandIdV1_1 vendor_command_begin = OHOS::HDI::FingerprintAuth::V1_1::CommandId::VENDOR_COMMAND_BEGIN;
-    CommandIdV1_1 init_algorithm = OHOS::HDI::FingerprintAuth::V1_1::CommandId::INIT_ALGORITHM;
+    CommandIdV1_2 lock_template = OHOS::HDI::FingerprintAuth::V1_2::CommandId::LOCK_TEMPLATE;
+    CommandIdV1_2 unlock_template = OHOS::HDI::FingerprintAuth::V1_2::CommandId::UNLOCK_TEMPLATE;
+    CommandIdV1_2 vendor_command_begin = OHOS::HDI::FingerprintAuth::V1_2::CommandId::VENDOR_COMMAND_BEGIN;
+    CommandIdV1_2 init_algorithm = OHOS::HDI::FingerprintAuth::V1_2::CommandId::INIT_ALGORITHM;
     EXPECT_EQ(lock_template, 1);
     EXPECT_EQ(unlock_template, 2);
     EXPECT_EQ(vendor_command_begin, 10000);
@@ -157,15 +157,24 @@ HWTEST_F(FingerPrintTypeTest, Security_IAM_Fingerprint_HDI_FUNC_0205, Function |
 HWTEST_F(FingerPrintTypeTest, Security_IAM_Fingerprint_HDI_NEW_FUNC_0201, Function | MediumTest | Level1)
 {
     cout << "start test FingerprintTipsCode" << endl;
-    FingerprintTipsCodeV1_1 f_good = OHOS::HDI::FingerprintAuth::V1_1::FingerprintTipsCode::FINGERPRINT_AUTH_TIP_GOOD;
-    FingerprintTipsCodeV1_1 f_dirty = OHOS::HDI::FingerprintAuth::V1_1::FingerprintTipsCode::FINGERPRINT_AUTH_TIP_DIRTY;
-    FingerprintTipsCodeV1_1 f_insufficient = OHOS::HDI::FingerprintAuth::V1_1::FingerprintTipsCode::FINGERPRINT_AUTH_TIP_INSUFFICIENT;
-    FingerprintTipsCodeV1_1 f_partial = OHOS::HDI::FingerprintAuth::V1_1::FingerprintTipsCode::FINGERPRINT_AUTH_TIP_PARTIAL;
-    FingerprintTipsCodeV1_1 f_fast = OHOS::HDI::FingerprintAuth::V1_1::FingerprintTipsCode::FINGERPRINT_AUTH_TIP_TOO_FAST;
-    FingerprintTipsCodeV1_1 f_slow = OHOS::HDI::FingerprintAuth::V1_1::FingerprintTipsCode::FINGERPRINT_AUTH_TIP_TOO_SLOW;
-    FingerprintTipsCodeV1_1 f_begin = OHOS::HDI::FingerprintAuth::V1_1::FingerprintTipsCode::VENDOR_FINGERPRINT_AUTH_TIP_BEGIN;
-    FingerprintTipsCodeV1_1 g_down = OHOS::HDI::FingerprintAuth::V1_1::FingerprintTipsCode::FINGERPRINT_AUTH_TIP_FINGER_DOWN;
-    FingerprintTipsCodeV1_1 g_up = OHOS::HDI::FingerprintAuth::V1_1::FingerprintTipsCode::FINGERPRINT_AUTH_TIP_FINGER_UP;
+    FingerprintTipsCodeV1_2 f_good =
+        OHOS::HDI::FingerprintAuth::V1_2::FingerprintTipsCode::FINGERPRINT_AUTH_TIP_GOOD;
+    FingerprintTipsCodeV1_2 f_dirty =
+        OHOS::HDI::FingerprintAuth::V1_2::FingerprintTipsCode::FINGERPRINT_AUTH_TIP_DIRTY;
+    FingerprintTipsCodeV1_2 f_insufficient =
+        OHOS::HDI::FingerprintAuth::V1_2::FingerprintTipsCode::FINGERPRINT_AUTH_TIP_INSUFFICIENT;
+    FingerprintTipsCodeV1_2 f_partial =
+        OHOS::HDI::FingerprintAuth::V1_2::FingerprintTipsCode::FINGERPRINT_AUTH_TIP_PARTIAL;
+    FingerprintTipsCodeV1_2 f_fast =
+        OHOS::HDI::FingerprintAuth::V1_2::FingerprintTipsCode::FINGERPRINT_AUTH_TIP_TOO_FAST;
+    FingerprintTipsCodeV1_2 f_slow =
+        OHOS::HDI::FingerprintAuth::V1_2::FingerprintTipsCode::FINGERPRINT_AUTH_TIP_TOO_SLOW;
+    FingerprintTipsCodeV1_2 f_begin =
+        OHOS::HDI::FingerprintAuth::V1_2::FingerprintTipsCode::VENDOR_FINGERPRINT_AUTH_TIP_BEGIN;
+    FingerprintTipsCodeV1_2 g_down =
+        OHOS::HDI::FingerprintAuth::V1_2::FingerprintTipsCode::FINGERPRINT_AUTH_TIP_FINGER_DOWN;
+    FingerprintTipsCodeV1_2 g_up =
+        OHOS::HDI::FingerprintAuth::V1_2::FingerprintTipsCode::FINGERPRINT_AUTH_TIP_FINGER_UP;
 
     EXPECT_EQ(f_good, 0);
     EXPECT_EQ(f_dirty, 1);
@@ -188,11 +197,11 @@ HWTEST_F(FingerPrintTypeTest, Security_IAM_Fingerprint_HDI_NEW_FUNC_0201, Functi
 HWTEST_F(FingerPrintTypeTest, Security_IAM_Fingerprint_HDI_NEW_FUNC_0202, Function | MediumTest | Level1)
 {
     cout << "start test GetPropertyType" << endl;
-    GetPropertyType auth_sub_type =  OHOS::HDI::FingerprintAuth::V1_1::AUTH_SUB_TYPE;
-    GetPropertyType lockout_duration = OHOS::HDI::FingerprintAuth::V1_1::LOCKOUT_DURATION;
-    GetPropertyType remain_attempts = OHOS::HDI::FingerprintAuth::V1_1::REMAIN_ATTEMPTS;
-    GetPropertyType enroll_progress = OHOS::HDI::FingerprintAuth::V1_1::ENROLL_PROGRESS;
-    GetPropertyType sensor_info = OHOS::HDI::FingerprintAuth::V1_1::SENSOR_INFO;
+    GetPropertyType auth_sub_type =  OHOS::HDI::FingerprintAuth::V1_2::AUTH_SUB_TYPE;
+    GetPropertyType lockout_duration = OHOS::HDI::FingerprintAuth::V1_2::LOCKOUT_DURATION;
+    GetPropertyType remain_attempts = OHOS::HDI::FingerprintAuth::V1_2::REMAIN_ATTEMPTS;
+    GetPropertyType enroll_progress = OHOS::HDI::FingerprintAuth::V1_2::ENROLL_PROGRESS;
+    GetPropertyType sensor_info = OHOS::HDI::FingerprintAuth::V1_2::SENSOR_INFO;
 
     EXPECT_EQ(auth_sub_type, 1);
     EXPECT_EQ(lockout_duration, 2);
@@ -211,10 +220,10 @@ HWTEST_F(FingerPrintTypeTest, Security_IAM_Fingerprint_HDI_NEW_FUNC_0202, Functi
 HWTEST_F(FingerPrintTypeTest, Security_IAM_Fingerprint_HDI_NEW_FUNC_0203, Function | MediumTest | Level1)
 {
     cout << "start test SaCommandId" << endl;
-    SaCommandId enable_sensor_illumination =  OHOS::HDI::FingerprintAuth::V1_1::ENABLE_SENSOR_ILLUMINATION;
-    SaCommandId disable_sensor_illumination = OHOS::HDI::FingerprintAuth::V1_1::DISABLE_SENSOR_ILLUMINATION;
-    SaCommandId turn_on_sensor_illumination = OHOS::HDI::FingerprintAuth::V1_1::TURN_ON_SENSOR_ILLUMINATION;
-    SaCommandId turn_off_sensor_illumination = OHOS::HDI::FingerprintAuth::V1_1::TURN_OFF_SENSOR_ILLUMINATION;
+    SaCommandId enable_sensor_illumination =  OHOS::HDI::FingerprintAuth::V1_2::ENABLE_SENSOR_ILLUMINATION;
+    SaCommandId disable_sensor_illumination = OHOS::HDI::FingerprintAuth::V1_2::DISABLE_SENSOR_ILLUMINATION;
+    SaCommandId turn_on_sensor_illumination = OHOS::HDI::FingerprintAuth::V1_2::TURN_ON_SENSOR_ILLUMINATION;
+    SaCommandId turn_off_sensor_illumination = OHOS::HDI::FingerprintAuth::V1_2::TURN_OFF_SENSOR_ILLUMINATION;
 
     EXPECT_EQ(enable_sensor_illumination, 1);
     EXPECT_EQ(disable_sensor_illumination, 2);

@@ -24,10 +24,10 @@ using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
 using namespace OHOS::HDI::FingerprintAuth;
 using namespace OHOS::HDI::FingerprintAuth::V1_0;
-using Property = OHOS::HDI::FingerprintAuth::V1_1::Property;
-using SaCommandParamNone = OHOS::HDI::FingerprintAuth::V1_1::SaCommandParamNone;
-using SaCommandParam = OHOS::HDI::FingerprintAuth::V1_1::SaCommandParam;
-using SaCommand = OHOS::HDI::FingerprintAuth::V1_1::SaCommand;
+using Property = OHOS::HDI::FingerprintAuth::V1_2::Property;
+using SaCommandParamNone = OHOS::HDI::FingerprintAuth::V1_2::SaCommandParamNone;
+using SaCommandParam = OHOS::HDI::FingerprintAuth::V1_2::SaCommandParam;
+using SaCommand = OHOS::HDI::FingerprintAuth::V1_2::SaCommand;
 
 static ExecutorImpl g_executorImpl;
 static OHOS::Parcel parcel;
@@ -423,7 +423,7 @@ HWTEST_F(UserIamFingerprintAuthTest, Security_IAM_Fingerprint_HDI_NEW_FUNC_0103,
 HWTEST_F(UserIamFingerprintAuthTest, Security_IAM_Fingerprint_HDI_NEW_FUNC_0104, Function | MediumTest | Level1)
 {
     cout << "start test GetExecutorListV1_1" << endl;
-    std::vector<sptr<V1_1::IExecutor>> executorList;
+    std::vector<sptr<V1_2::IExecutor>> executorList;
     FingerprintAuthInterfaceService fingerprint_Interface;
 
     int32_t ret = fingerprint_Interface.GetExecutorListV1_1(executorList);

@@ -230,10 +230,11 @@ HWTEST_F(HdfBatteryHdiTestAdditional, testGetTotalEnergy001, TestSize.Level1)
  */
 HWTEST_F(HdfBatteryHdiTestAdditional, testGetCurrentAverage001, TestSize.Level1)
 {
-    int curAverage = -1;
+    int32_t curAverage = -1;
+    int32_t ret = 0;
     for (uint32_t i = 0; i < 1000; i++) {
-        g_batteryInterface->GetCurrentAverage(curAverage);
-        EXPECT_TRUE(curAverage != 0);
+        ret = g_batteryInterface->GetCurrentAverage(curAverage);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 

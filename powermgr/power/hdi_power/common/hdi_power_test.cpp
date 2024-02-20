@@ -116,6 +116,7 @@ sptr<IPowerInterface> g_powerInterface = nullptr;
 sptr<IPowerInterface> powerInterface = nullptr;
 std::mutex g_mutex;
 const uint32_t MAX_PATH = 256;
+const uint32_t MAX_FILE = 1024;
 const uint32_t WAIT_TIME = 1;
 const std::string SUSPEND_STATE = "mem";
 const std::string SUSPEND_STATE_PATH = "/sys/power/state";
@@ -254,7 +255,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest006, TestSize.Level1)
     EXPECT_EQ(0, ret);
 
     char lockBuf[MAX_PATH] = {0};
-    char lockValue[MAX_PATH] = {0};
+    char lockValue[MAX_FILE] = {0};
 
     ret = snprintf_s(lockBuf, MAX_PATH, sizeof(lockBuf) - 1, LOCK_PATH.c_str());
     EXPECT_FALSE(ret < EOK);

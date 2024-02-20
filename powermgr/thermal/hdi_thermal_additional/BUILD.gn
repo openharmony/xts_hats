@@ -22,6 +22,8 @@ ohos_moduletest_suite("HatsPowermgrThermalAdditionalTest") {
 
   deps = [ "//third_party/googletest:gtest_main" ]
 
+  # defines += [ "PRODUCT_SUPPORT" ]
+
   external_deps = [
     "c_utils:utils",
     "drivers_interface_thermal:libthermal_proxy_1.1",

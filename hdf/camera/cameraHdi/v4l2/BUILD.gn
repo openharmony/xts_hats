@@ -1,4 +1,4 @@
-# Copyright (c) 2022 - 2023 Huawei Device Co., Ltd.
+# Copyright (c) 2022 - 2024 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -17,6 +17,7 @@ import("//test/xts/tools/build/suite.gni")
 import("//build/ohos.gni")
 import("//build/test.gni")
 import("//drivers/peripheral/camera/camera.gni")
+import("//drivers/peripheral/display/display_config.gni")
 
 if (defined(ohos_lite)) {
   import("//device/board/hisilicon/hispark_taurus/device.gni")
@@ -32,6 +33,8 @@ config("cameraTest_config") {
 
 ohos_moduletest_suite("HatsHdfCameraTest") {
   testonly = true
+  defines = []
+  defines += display_defines
   module_out_path = module_output_path
   sources = [
     "./src/camera_ability_test.cpp",
@@ -39,6 +42,7 @@ ohos_moduletest_suite("HatsHdfCameraTest") {
     "./src/camera_fps_test.cpp",
     "./src/camera_preview_test.cpp",
     "./src/camera_stabili_test.cpp",
+    "./src/camera_vendor_tag_test.cpp",
     "./src/camera_video_test.cpp",
     "./src/double_preview_test.cpp",
     "./src/hdfcamera_facedetect.cpp",
@@ -46,6 +50,7 @@ ohos_moduletest_suite("HatsHdfCameraTest") {
     "./src/stream_customer.cpp",
     "./src/test_display.cpp",
     "./src/usb_camera_test.cpp",
+    "./src/usb_camera_test_mult.cpp",
   ]
 
   include_dirs = [
@@ -77,6 +82,9 @@ ohos_moduletest_suite("HatsHdfCameraTest") {
     "$camera_path/pipeline_core/pipeline_impl/src/parser",
     "$camera_path/pipeline_core/pipeline_impl/src/strategy",
     "$camera_path/pipeline_core/ipp/include",
+
+    # metadata manager includes
+    "$camera_path/metadata_manager/include",
   ]
 
   deps = [

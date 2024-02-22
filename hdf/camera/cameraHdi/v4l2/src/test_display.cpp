@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -483,6 +483,20 @@ void TestDisplay::OpenUsbCamera()
             std::cout << "No usb camera plugged in" << std::endl;
         }
     }
+}
+
+CamRetCode TestDisplay::SelectOpenCamera(std::string cameraId)
+{
+    cameraHost->GetCameraAbility(cameraId, ability_);
+    MetadataUtils::ConvertVecToMetadata(ability_, ability);
+    const OHOS::sptr<DemoCameraDeviceCallback> callback = new DemoCameraDeviceCallback();
+    rc = (CamRetCode)cameraHost->OpenCamera(cameraId, callback, cameraDevice);
+    if (rc != HDI::Camera::V1_0::NO_ERROR || cameraDevice == nullptr) {
+        std::cout << "OpenCamera failed, rc = " << rc << std::endl;
+        return rc;
+    }
+    std::cout << "OpenCamera success." << std::endl;
+    return rc;
 }
 
 void TestDisplay::Close()

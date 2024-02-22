@@ -28,6 +28,7 @@
 #include "sensor_type.h"
 #include "../hdiService/sensor_callback_impl.h"
 
+
 using namespace OHOS::HDI::Sensor::V2_0;
 using namespace testing::ext;
 using namespace std;
@@ -37,6 +38,7 @@ namespace {
     sptr<ISensorCallback> g_traditionalCallback = new SensorCallbackImpl();
     sptr<ISensorCallback> g_medicalCallback = new SensorCallbackImpl();
     std::vector<HdfSensorInformation> g_info;
+    std::vector<HdfSensorEvents> g_events;
     struct SensorValueRange {
         float highThreshold;
         float lowThreshold;
@@ -79,6 +81,7 @@ namespace {
     constexpr int32_t SENSOR_INTERVAL2 = 2;
     constexpr int32_t SENSOR_POLL_TIME = 1;
     constexpr int32_t SENSOR_WAIT_TIME = 10;
+    constexpr int32_t RATE_LEVEL = 50;
 
 class sensorBenchmarkTest : public benchmark::Fixture {
 public:
@@ -96,7 +99,7 @@ void sensorBenchmarkTest::TearDown(const ::benchmark::State &state)
 }
 
 /**
-  * @tc.name: SUB_DriverSystem_SensorBenchmark_0010
+  * @tc.name: SUB_Driver_Sensor_SensorPerf_0100
   * @tc.desc: Benchmarktest for interface GetAllSensorInfo.
   * Obtains information about all sensors in the system.
   * @tc.type: FUNC
@@ -127,7 +130,7 @@ BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0100)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.name: SUB_DriverSystem_SensorBenchmark_0020
+  * @tc.name: SUB_Driver_Sensor_SensorPerf_0200
   * @tc.desc: Benchmarktest for interface register.
   * Returns 0 if the callback is successfully registered; returns a negative value otherwise.
   * @tc.type: FUNC
@@ -151,7 +154,7 @@ BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0200)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.name: SUB_DriverSystem_SensorBenchmark_0040
+  * @tc.name: SUB_Driver_Sensor_SensorPerf_0300
   * @tc.desc: Benchmarktest for interface Enable.
   * Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
@@ -185,7 +188,7 @@ BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0300)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.name: SUB_DriverSystem_SensorBenchmark_0050
+  * @tc.name: SUB_Driver_Sensor_SensorPerf_0400
   * @tc.desc: Benchmarktest for interface Disable.
   * Enables the sensor unavailable in the sensor list based on the specified sensor ID.
   * @tc.type: FUNC
@@ -219,7 +222,7 @@ BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0400)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.name: SUB_DriverSystem_SensorBenchmark_0060
+  * @tc.name: SUB_Driver_Sensor_SensorPerf_0500
   * @tc.desc: Benchmarktest for interface SetBatch.
   * Sets the sampling time and data report interval for sensors in batches.
   * @tc.type: FUNC
@@ -253,7 +256,7 @@ BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0500)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.name: SUB_DriverSystem_SensorBenchmark_0070
+  * @tc.name: SUB_Driver_Sensor_SensorPerf_0600
   * @tc.desc: Benchmarktest for interface SetMode.
   * Sets the data reporting mode for the specified sensor.
   * @tc.type: FUNC
@@ -286,7 +289,7 @@ BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0600)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.name: SUB_DriverSystem_SensorBenchmark_0080
+  * @tc.name: SUB_Driver_Sensor_SensorPerf_0700
   * @tc.desc: Benchmarktest for interface SetOption.
   * Sets options for the specified sensor, including its measurement range and accuracy.
   * @tc.type: FUNC
@@ -307,6 +310,89 @@ BENCHMARK_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0700)(benchmark::S
 }
 
 BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0700)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
+/**
+  * @tc.name: SUB_Driver_Sensor_SensorPerf_0800
+  * @tc.desc: Benchmarktest for interface ReadData.
+  *  data options, data reporting mode, data address, and data length.
+  * @tc.type: FUNC
+  */
+BENCHMARK_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0800)(benchmark::State &st)
+{
+   if (g_sensorInterface == nullptr) {
+        ASSERT_NE(nullptr, g_sensorInterface);
+        return;
+    }
+    int32_t ret;
+
+    for (auto _ : st) {
+    ret = g_sensorInterface->ReadData(HDF_SENSOR_TYPE_ACCELEROMETER, g_events);
+    }
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+}
+
+BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0800)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
+/**
+  * @tc.name: SUB_Driver_Sensor_SensorPerf_0900
+  * @tc.desc: Benchmarktest for interface ReadData.
+  *  data options, data reporting mode, data address, and data length.
+  * @tc.type: FUNC
+  */
+BENCHMARK_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0900)(benchmark::State &st)
+{
+    ASSERT_NE(nullptr, g_sensorInterface);
+    int32_t ret; 
+    for (auto _ : st) {
+        ret = g_sensorInterface->SetSdcSensor(iter.sensorId, true, RATE_LEVEL);
+    }
+        EXPECT_EQ(SENSOR_SUCCESS, ret);
+        OsalMSleep(SENSOR_WAIT_TIME);
+        ret = g_sensorInterface->SetSdcSensor(iter.sensorId, false, RATE_LEVEL);
+        EXPECT_EQ(SENSOR_SUCCESS, ret);
+    
+}
+
+BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0900)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
+/**
+  * @tc.name: SUB_Driver_Sensor_SensorPerf_1000
+  * @tc.desc: Benchmarktest for interface ReadData.
+  *  data options, data reporting mode, data address, and data length.
+  * @tc.type: FUNC
+  */
+BENCHMARK_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_1000)(benchmark::State &st)
+{
+    ASSERT_NE(nullptr, g_sensorInterface);
+    int32_t ret;
+    EXPECT_GT(g_info.size(), 0);
+    std::vector<OHOS::HDI::Sensor::V2_0::SdcSensorInfo> sdcSensorInfo;
+    for (auto _ : st) {
+    ret = g_sensorInterface->GetSdcSensorInfo(sdcSensorInfo);
+    }
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+    std::string infoMsg = "[";
+    for (auto it : sdcSensorInfo) {
+        if (infoMsg != "[") {
+            infoMsg += ", ";
+        }
+        infoMsg += "{";
+        infoMsg += "offset = " + std::to_string(it.offset) + ", ";
+        infoMsg += "sensorId = " + std::to_string(it.sensorId) + ", ";
+        infoMsg += "ddrSize = " + std::to_string(it.ddrSize) + ", ";
+        infoMsg += "minRateLevel = " + std::to_string(it.minRateLevel) + ", ";
+        infoMsg += "maxRateLevel = " + std::to_string(it.maxRateLevel) + ", ";
+        infoMsg += "memAddr = " + std::to_string(it.memAddr) + ", ";
+        infoMsg += "reserved = " + std::to_string(it.reserved);
+        infoMsg += "}";
+    }
+    infoMsg += "]";
+}
+
+BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_1000)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 }
 

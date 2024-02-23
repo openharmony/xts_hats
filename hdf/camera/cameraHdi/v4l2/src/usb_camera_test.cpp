@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -1163,3 +1163,71 @@ HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbAbility_1700, TestSize.Level3)
     }
 }
 
+/**
+  * @tc.name: USB Camera
+  * @tc.desc: Commit 2 streams together, width = 1280, height = 720, expected success.
+  * @tc.level: Level0
+  * @tc.size: MediumTest
+  * @tc.type: Function
+  */
+HWTEST_F(USBCameraTest, SUB_Driver_Camera_Pipeline_0100, TestSize.Level3)
+{
+    if (!usbCameraExit_) {
+        std::cout << "No usb camera plugged in" << std::endl;
+    } else if (usbCameraExit_) {
+        std::vector<std::string> usbCameraIds;
+        display_->cameraHost->GetCameraIds(usbCameraIds);
+        if (usbCameraIds.size() > 1) { // 2:usb camera quantity
+            usbCameraExit_ = true;
+        } else {
+            usbCameraExit_ = false;
+        }
+        display_->OpenUsbCamera();
+        if (!usbCameraExit_) {
+            GTEST_SKIP() << "No usb camera plugged in" << std::endl;
+        }
+        display_->AchieveStreamOperator();
+        if (display_->streamCustomerPreview_ == nullptr) {
+            display_->streamCustomerPreview_ = std::make_shared<StreamCustomer>();
+        }
+        std::vector<StreamInfo> streamInfos;
+        StreamInfo streamInfo = {};
+        streamInfo.streamId_ = display_->STREAM_ID_PREVIEW;
+        streamInfo.width_ = 1280; // 1280:picture width
+        streamInfo.height_ = 960; // 720:picture height
+        streamInfo.format_ = PIXEL_FMT_RGBA_8888;
+        streamInfo.dataspace_ = 8; // 8:picture dataspace
+        streamInfo.intent_ = PREVIEW;
+        streamInfo.tunneledMode_ = 5; // 5:tunnel mode
+        streamInfo.bufferQueue_ = new BufferProducerSequenceable(display_->streamCustomerPreview_->CreateProducer());
+        ASSERT_NE(streamInfo.bufferQueue_, nullptr);
+        streamInfo.bufferQueue_->producer_->SetQueueSize(8); // 8:set bufferQueue size
+        streamInfos.push_back(streamInfo);
+        if (display_->streamCustomerCapture_ == nullptr) {
+            display_->streamCustomerCapture_ = std::make_shared<StreamCustomer>();
+        }
+        StreamInfo streamInfoCapture = {};
+        streamInfoCapture.streamId_ = display_->STREAM_ID_CAPTURE;
+        streamInfoCapture.width_ = 640; // 1280:picture width
+        streamInfoCapture.height_ = 480; // 960:picture height
+        streamInfoCapture.format_ = PIXEL_FMT_RGBA_8888;
+        streamInfoCapture.dataspace_ = 8; // 8:picture dataspace
+        streamInfoCapture.intent_ = STILL_CAPTURE;
+        streamInfoCapture.encodeType_ = ENCODE_TYPE_JPEG;
+        streamInfoCapture.tunneledMode_ = 5; // 5:tunnel mode
+        streamInfoCapture.bufferQueue_ = new BufferProducerSequenceable(
+            display_->streamCustomerCapture_->CreateProducer());
+        ASSERT_NE(streamInfoCapture.bufferQueue_, nullptr);
+        streamInfoCapture.bufferQueue_->producer_->SetQueueSize(8); // 8:set bufferQueue size
+        streamInfos.push_back(streamInfoCapture);
+        display_->rc = (CamRetCode)display_->streamOperator->CreateStreams(streamInfos);
+        EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+        display_->rc = (CamRetCode)display_->streamOperator->CommitStreams(NORMAL, display_->ability_);
+        EXPECT_EQ(true, display_->rc == HDI::Camera::V1_0::NO_ERROR);
+        display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
+        display_->StartCapture(display_->STREAM_ID_CAPTURE, display_->CAPTURE_ID_CAPTURE, false, true);
+        display_->captureIds = {display_->CAPTURE_ID_PREVIEW, display_->CAPTURE_ID_CAPTURE};
+        display_->streamIds = {display_->STREAM_ID_PREVIEW, display_->STREAM_ID_CAPTURE};
+        display_->StopStream(display_->captureIds, display_->streamIds);
+    }
+}

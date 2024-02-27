@@ -352,7 +352,6 @@ BENCHMARK_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0900)(benchmark::S
         OsalMSleep(SENSOR_WAIT_TIME);
         ret = g_sensorInterface->SetSdcSensor(iter.sensorId, false, RATE_LEVEL);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
-    
 }
 
 BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0900)->

@@ -320,7 +320,7 @@ BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0700)->
   */
 BENCHMARK_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0800)(benchmark::State &st)
 {
-   if (g_sensorInterface == nullptr) {
+    if (g_sensorInterface == nullptr) {
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
@@ -344,7 +344,7 @@ BENCHMARK_REGISTER_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0800)->
 BENCHMARK_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0900)(benchmark::State &st)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
-    int32_t ret; 
+    int32_t ret;
     for (auto _ : st) {
         ret = g_sensorInterface->SetSdcSensor(iter.sensorId, true, RATE_LEVEL);
     }

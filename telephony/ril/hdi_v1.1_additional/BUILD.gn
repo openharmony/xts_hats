@@ -12,9 +12,9 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
+import("//drivers/peripheral/display/display_config.gni")
 import("../../../../../../drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("../../../../tools/build/suite.gni")
-import("//drivers/peripheral/display/display_config.gni")
 
 module_output_path = "hdf/ril"
 ohos_moduletest_suite("HatsHdfV1RilServiceAdditionalTest") {
@@ -36,6 +36,7 @@ ohos_moduletest_suite("HatsHdfV1RilServiceAdditionalTest") {
   ]
 
   defines += display_defines
+
   #   defines += [ "TEL_TEST_PIN_PUK" ]
   cflags = [
     "-Wall",

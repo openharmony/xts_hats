@@ -1181,7 +1181,7 @@ int32_t RilCallback::CallSsNotice(const RilRadioResponseInfo &responseInfo, cons
              responseInfo.slotId, ssNoticeInfo.result, ssNoticeInfo.serviceType, ssNoticeInfo.requestType,
              ssNoticeInfo.serviceClass);
     return 0;
-} 
+}
 
 int32_t RilCallback::CallRsrvccStatusNotify(const RilRadioResponseInfo &responseInfo)
 {

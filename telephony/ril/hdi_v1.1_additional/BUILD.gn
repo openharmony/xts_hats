@@ -14,6 +14,7 @@
 import("//build/ohos_var.gni")
 import("../../../../../../drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("../../../../tools/build/suite.gni")
+import("//drivers/peripheral/display/display_config.gni")
 
 module_output_path = "hdf/ril"
 ohos_moduletest_suite("HatsHdfV1RilServiceAdditionalTest") {
@@ -22,12 +23,19 @@ ohos_moduletest_suite("HatsHdfV1RilServiceAdditionalTest") {
   sources = [
     "hdf_ril_callback_common.cpp",
     "hdf_ril_hdiService_test_1st.cpp",
+    "hdf_ril_hdiService_test_2nd.cpp",
+    "hdf_ril_hdiService_test_3rd.cpp",
+    "hdf_ril_hdiService_test_4th.cpp",
+    "hdf_ril_hdiService_test_5th.cpp",
+    "hdf_ril_hdiService_test_6th.cpp",
+    "hdf_ril_hdiService_test_7th.cpp",
   ]
   defines = [
     "LOG_TAG = \"HdfRilHdiTest\"",
     "LOG_DOMAIN = 0xD000F00",
   ]
 
+  defines += display_defines
   #   defines += [ "TEL_TEST_PIN_PUK" ]
   cflags = [
     "-Wall",

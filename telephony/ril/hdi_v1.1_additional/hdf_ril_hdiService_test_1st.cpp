@@ -122,81 +122,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetSimStatusResponse002, Function | M
 }
 
 /**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetEmergencyCallList_0300
- * @tc.name   : testV1SetEmergencyCallList001
- * @tc.desc   : Call the function V1 SetEmergencyCallList with slotId and a value of 2
- **/
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetEmergencyCallList001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    EmergencyInfoList emergencyInfoList;
-    EmergencyCall emergencyInfo = {};
-    emergencyInfo.index = 1;
-    emergencyInfo.total = 1;
-    emergencyInfo.eccNum = "120";
-    emergencyInfo.eccType = EccType::TYPE_CATEGORY;
-    emergencyInfo.simpresent = SimpresentType::TYPE_HAS_CARD;
-    emergencyInfo.mcc = "460";
-    emergencyInfo.abnormalService = AbnormalServiceType::TYPE_ALL;
-    emergencyInfoList.calls.push_back(emergencyInfo);
-    int32_t ret = g_rilInterface->SetEmergencyCallList(2, GetSerialId(), emergencyInfoList);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetEmergencyCallList_0400
- * @tc.name   : testV1SetEmergencyCallList002
- * @tc.desc   : Call the function V1 SetEmergencyCallList with slotId and a value of 256
- **/
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetEmergencyCallList002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    EmergencyInfoList emergencyInfoList;
-    EmergencyCall emergencyInfo = {};
-    emergencyInfo.index = 1;
-    emergencyInfo.total = 1;
-    emergencyInfo.eccNum = "120";
-    emergencyInfo.eccType = EccType::TYPE_CATEGORY;
-    emergencyInfo.simpresent = SimpresentType::TYPE_HAS_CARD;
-    emergencyInfo.mcc = "460";
-    emergencyInfo.abnormalService = AbnormalServiceType::TYPE_ALL;
-    emergencyInfoList.calls.push_back(emergencyInfo);
-    int32_t ret = g_rilInterface->SetEmergencyCallList(256, GetSerialId(), emergencyInfoList);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetEmergencyCallList_0500
- * @tc.name   : testV1SetEmergencyCallList003
- * @tc.desc   : Call the function V1 SetEmergencyCallList with slotId and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetEmergencyCallList003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    EmergencyInfoList emergencyInfoList;
-    EmergencyCall emergencyInfo = {};
-    emergencyInfo.index = 1;
-    emergencyInfo.total = 1;
-    emergencyInfo.eccNum = "120";
-    emergencyInfo.eccType = EccType::TYPE_CATEGORY;
-    emergencyInfo.simpresent = SimpresentType::TYPE_HAS_CARD;
-    emergencyInfo.mcc = "460";
-    emergencyInfo.abnormalService = AbnormalServiceType::TYPE_ALL;
-    emergencyInfoList.calls.push_back(emergencyInfo);
-    int32_t ret = g_rilInterface->SetEmergencyCallList(-1, GetSerialId(), emergencyInfoList);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
  * @tc.number : SUB_Telephony_DriverSystem_V1SetEmergencyCallList_0600
  * @tc.name   : testV1SetEmergencyCallList004
  * @tc.desc   : Call the function V1 SetEmergencyCallList with serialId and a value of -11111
@@ -747,51 +672,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetEmergencyCallList025, Function | M
 }
 
 /**
- * @tc.number : SUB_Telephony_DriverSystem_V1CloseUnFinishedUssd_0300
- * @tc.name   : testV1CloseUnFinishedUssd001
- * @tc.desc   : Call the function V1 CloseUnFinishedUssd with slotId and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1CloseUnFinishedUssd001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->CloseUnFinishedUssd(2, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1CloseUnFinishedUssd_0400
- * @tc.name   : testV1CloseUnFinishedUssd002
- * @tc.desc   : Call the function V1 CloseUnFinishedUssd with slotId and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1CloseUnFinishedUssd002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->CloseUnFinishedUssd(256, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1CloseUnFinishedUssd_0500
- * @tc.name   : testV1CloseUnFinishedUssd003
- * @tc.desc   : Call the function V1 CloseUnFinishedUssd with slotId and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1CloseUnFinishedUssd003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->CloseUnFinishedUssd(-1, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
  * @tc.number : SUB_Telephony_DriverSystem_V1CloseUnFinishedUssd_0600
  * @tc.name   : testV1CloseUnFinishedUssd004
  * @tc.desc   : Call the function V1 CloseUnFinishedUssd with serialId and a value of -11111
@@ -864,63 +744,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1CloseUnFinishedUssd008, Function | Me
     int32_t ret = g_rilInterface->CloseUnFinishedUssd(SLOTID_1, -32768);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_NE(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetBarringPassword_0300
- * @tc.name   : testV1SetBarringPassword001
- * @tc.desc   : Call the function V1 SetBarringPassword with slotId and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetBarringPassword001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    SetBarringInfo setBarringInfo = {};
-    setBarringInfo.fac = "AB";
-    setBarringInfo.oldPassword = "1234";
-    setBarringInfo.newPassword = "2345";
-    int32_t ret = g_rilInterface->SetBarringPassword(2, GetSerialId(), setBarringInfo);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetBarringPassword_0400
- * @tc.name   : testV1SetBarringPassword002
- * @tc.desc   : Call the function V1 SetBarringPassword with slotId and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetBarringPassword002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    SetBarringInfo setBarringInfo = {};
-    setBarringInfo.fac = "AB";
-    setBarringInfo.oldPassword = "1234";
-    setBarringInfo.newPassword = "2345";
-    int32_t ret = g_rilInterface->SetBarringPassword(256, GetSerialId(), setBarringInfo);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetBarringPassword_0500
- * @tc.name   : testV1SetBarringPassword003
- * @tc.desc   : Call the function V1 SetBarringPassword with slotId and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetBarringPassword003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    SetBarringInfo setBarringInfo = {};
-    setBarringInfo.fac = "AB";
-    setBarringInfo.oldPassword = "1234";
-    setBarringInfo.newPassword = "2345";
-    int32_t ret = g_rilInterface->SetBarringPassword(-1, GetSerialId(), setBarringInfo);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
 }
 
 /**
@@ -1171,51 +994,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetBarringPassword016, Function | Med
 }
 
 /**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetEmergencyCallList_0300
- * @tc.name   : testV1GetEmergencyCallList001
- * @tc.desc   : Call the function V1 GetEmergencyCallList with slotId and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetEmergencyCallList001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->GetEmergencyCallList(2, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetEmergencyCallList_0400
- * @tc.name   : testV1GetEmergencyCallList002
- * @tc.desc   : Call the function V1 GetEmergencyCallList with slotId and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetEmergencyCallList002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->GetEmergencyCallList(256, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetEmergencyCallList_0500
- * @tc.name   : testV1GetEmergencyCallList003
- * @tc.desc   : Call the function V1 GetEmergencyCallList with slotId and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetEmergencyCallList003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->GetEmergencyCallList(-1, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
  * @tc.number : SUB_Telephony_DriverSystem_V1GetEmergencyCallList_0600
  * @tc.name   : testV1GetEmergencyCallList004
  * @tc.desc   : Call the function V1 GetEmergencyCallList with serialId and a value of -11111
@@ -1291,51 +1069,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetEmergencyCallList008, Function | M
 }
 
 /**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetCallList_0300
- * @tc.name   : testV1GetCallList001
- * @tc.desc   : Call the function V1 GetCallList with slotId and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetCallList001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->GetCallList(2, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetCallList_0400
- * @tc.name   : testV1GetCallList002
- * @tc.desc   : Call the function V1 GetCallList with slotId and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetCallList002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->GetCallList(256, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetCallList_0500
- * @tc.name   : testV1GetCallList003
- * @tc.desc   : Call the function V1 GetCallList with slotId and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetCallList003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->GetCallList(-1, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
  * @tc.number : SUB_Telephony_DriverSystem_V1GetCallList_0600
  * @tc.name   : testV1GetCallList004
  * @tc.desc   : Call the function V1 GetCallList with serialId and a value of -11111
@@ -1406,60 +1139,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetCallList008, Function | MediumTest
         return;
     }
     int32_t ret = g_rilInterface->GetCallList(SLOTID_1, -32768);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1Dial_0300
- * @tc.name   : testV1Dial001
- * @tc.desc   : Call the function V1 Dial with slotId and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1Dial001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    DialInfo dialInfo = {};
-    dialInfo.address = "10086";
-    dialInfo.clir = 0;
-    int32_t ret = g_rilInterface->Dial(2, GetSerialId(), dialInfo);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1Dial_0400
- * @tc.name   : testV1Dial002
- * @tc.desc   : Call the function V1 Dial with slotId and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1Dial002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    DialInfo dialInfo = {};
-    dialInfo.address = "10086";
-    dialInfo.clir = 0;
-    int32_t ret = g_rilInterface->Dial(256, GetSerialId(), dialInfo);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1Dial_0500
- * @tc.name   : testV1Dial003
- * @tc.desc   : Call the function V1 Dial with slotId and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1Dial003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    DialInfo dialInfo = {};
-    dialInfo.address = "10086";
-    dialInfo.clir = 0;
-    int32_t ret = g_rilInterface->Dial(-1, GetSerialId(), dialInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
 }
@@ -1627,51 +1306,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1Dial012, Function | MediumTest | Leve
 }
 
 /**
- * @tc.number : SUB_Telephony_DriverSystem_V1Reject_0300
- * @tc.name   : testV1Reject001
- * @tc.desc   : Call the function V1 Reject with slotId and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1Reject001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->Reject(2, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1Reject_0400
- * @tc.name   : testV1Reject002
- * @tc.desc   : Call the function V1 Reject with slotId and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1Reject002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->Reject(256, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1Reject_0500
- * @tc.name   : testV1Reject003
- * @tc.desc   : Call the function V1 Reject with slotId and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1Reject003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->Reject(-1, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
  * @tc.number : SUB_Telephony_DriverSystem_V1Reject_0600
  * @tc.name   : testV1Reject004
  * @tc.desc   : Call the function V1 Reject with serialId and a value of -11111
@@ -1742,51 +1376,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1Reject008, Function | MediumTest | Le
         return;
     }
     int32_t ret = g_rilInterface->Reject(SLOTID_1, -32768);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1Hangup_0300
- * @tc.name   : testV1Hangup001
- * @tc.desc   : Call the function V1 Hangup with slotId and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1Hangup001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->Hangup(2, GetSerialId(), 0);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1Hangup_0400
- * @tc.name   : testV1Hangup002
- * @tc.desc   : Call the function V1 Hangup with slotId and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1Hangup002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->Hangup(256, GetSerialId(), 0);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1Hangup_0500
- * @tc.name   : testV1Hangup003
- * @tc.desc   : Call the function V1 Hangup with slotId and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1Hangup003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->Hangup(-1, GetSerialId(), 0);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
 }
@@ -1927,51 +1516,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1Hangup012, Function | MediumTest | Le
 }
 
 /**
- * @tc.number : SUB_Telephony_DriverSystem_V1Answer_0300
- * @tc.name   : testV1Answer001
- * @tc.desc   : Call the function V1 Answer with slotId and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1Answer001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->Answer(2, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1Answer_0400
- * @tc.name   : testV1Answer002
- * @tc.desc   : Call the function V1 Answer with slotId and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1Answer002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->Answer(256, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1Answer_0500
- * @tc.name   : testV1Answer003
- * @tc.desc   : Call the function V1 Answer with slotId and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1Answer003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->Answer(-1, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
  * @tc.number : SUB_Telephony_DriverSystem_V1Answer_0600
  * @tc.name   : testV1Answer004
  * @tc.desc   : Call the function V1 Answer with serialId and a value of -11111
@@ -2042,51 +1586,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1Answer008, Function | MediumTest | Le
         return;
     }
     int32_t ret = g_rilInterface->Answer(SLOTID_1, -32768);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1HoldCall_0300
- * @tc.name   : testV1HoldCall001
- * @tc.desc   : Call the function V1 HoldCall with slotId and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1HoldCall001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->HoldCall(2, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1HoldCall_0400
- * @tc.name   : testV1HoldCall002
- * @tc.desc   : Call the function V1 HoldCall with slotId and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1HoldCall002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->HoldCall(256, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1HoldCall_0500
- * @tc.name   : testV1HoldCall003
- * @tc.desc   : Call the function V1 HoldCall with slotId and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1HoldCall003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->HoldCall(-1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
 }
@@ -2167,51 +1666,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1HoldCall008, Function | MediumTest | 
 }
 
 /**
- * @tc.number : SUB_Telephony_DriverSystem_V1UnHoldCall_0300
- * @tc.name   : testV1UnHoldCall001
- * @tc.desc   : Call the function V1 UnHoldCall with slotId and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1UnHoldCall001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->UnHoldCall(2, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1UnHoldCall_0400
- * @tc.name   : testV1UnHoldCall002
- * @tc.desc   : Call the function V1 UnHoldCall with slotId and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1UnHoldCall002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->UnHoldCall(256, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1UnHoldCall_0500
- * @tc.name   : testV1UnHoldCall003
- * @tc.desc   : Call the function V1 UnHoldCall with slotId and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1UnHoldCall003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->UnHoldCall(-1, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
  * @tc.number : SUB_Telephony_DriverSystem_V1UnHoldCall_0600
  * @tc.name   : testV1UnHoldCall004
  * @tc.desc   : Call the function V1 UnHoldCall with serialId and a value of -11111
@@ -2287,51 +1741,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1UnHoldCall008, Function | MediumTest 
 }
 
 /**
- * @tc.number : SUB_Telephony_DriverSystem_V1SwitchCall_0300
- * @tc.name   : testV1SwitchCall001
- * @tc.desc   : Call the function V1 SwitchCall with slotId and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SwitchCall001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->SwitchCall(2, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SwitchCall_0400
- * @tc.name   : testV1SwitchCall002
- * @tc.desc   : Call the function V1 SwitchCall with slotId and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SwitchCall002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->SwitchCall(256, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SwitchCall_0500
- * @tc.name   : testV1SwitchCall003
- * @tc.desc   : Call the function V1 SwitchCall with slotId and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SwitchCall003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->SwitchCall(-1, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
  * @tc.number : SUB_Telephony_DriverSystem_V1SwitchCall_0600
  * @tc.name   : testV1SwitchCall004
  * @tc.desc   : Call the function V1 SwitchCall with serialId and a value of -11111
@@ -2402,51 +1811,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1SwitchCall008, Function | MediumTest 
         return;
     }
     int32_t ret = g_rilInterface->SwitchCall(SLOTID_1, -32768);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1CombineConference_0300
- * @tc.name   : testV1CombineConference001
- * @tc.desc   : Call the function V1 CombineConference with slotId and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1CombineConference001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->CombineConference(2, GetSerialId(), 0);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1CombineConference_0400
- * @tc.name   : testV1CombineConference002
- * @tc.desc   : Call the function V1 CombineConference with slotId and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1CombineConference002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->CombineConference(256, GetSerialId(), 0);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1CombineConference_0500
- * @tc.name   : testV1CombineConference003
- * @tc.desc   : Call the function V1 CombineConference with slotId and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1CombineConference003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->CombineConference(-1, GetSerialId(), 0);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
 }
@@ -2537,51 +1901,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1CombineConference009, Function | Medi
         return;
     }
     int32_t ret = g_rilInterface->CombineConference(SLOTID_1, GetSerialId(), -1);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SeparateConference_0300
- * @tc.name   : testV1SeparateConference001
- * @tc.desc   : Call the function V1 SeparateConference with slotId and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SeparateConference001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->SeparateConference(2, GetSerialId(), 1, 0);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SeparateConference_0400
- * @tc.name   : testV1SeparateConference002
- * @tc.desc   : Call the function V1 SeparateConference with slotId and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SeparateConference002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->SeparateConference(256, GetSerialId(), 1, 0);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SeparateConference_0500
- * @tc.name   : testV1SeparateConference003
- * @tc.desc   : Call the function V1 SeparateConference with slotId and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SeparateConference003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->SeparateConference(-1, GetSerialId(), 1, 0);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
 }
@@ -2737,51 +2056,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1SeparateConference013, Function | Med
 }
 
 /**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetCallWaiting_0300
- * @tc.name   : testV1GetCallWaiting001
- * @tc.desc   : Call the function V1 GetCallWaiting with slotId and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetCallWaiting001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->GetCallWaiting(2, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetCallWaiting_0400
- * @tc.name   : testV1GetCallWaiting002
- * @tc.desc   : Call the function V1 GetCallWaiting with slotId and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetCallWaiting002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->GetCallWaiting(256, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetCallWaiting_0500
- * @tc.name   : testV1GetCallWaiting003
- * @tc.desc   : Call the function V1 GetCallWaiting with slotId and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetCallWaiting003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->GetCallWaiting(-1, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
  * @tc.number : SUB_Telephony_DriverSystem_V1GetCallWaiting_0600
  * @tc.name   : testV1GetCallWaiting004
  * @tc.desc   : Call the function V1 GetCallWaiting with serialId and a value of -11111
@@ -2852,51 +2126,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetCallWaiting008, Function | MediumT
         return;
     }
     int32_t ret = g_rilInterface->GetCallWaiting(SLOTID_1, -32768);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetCallWaiting_0300
- * @tc.name   : testV1SetCallWaiting001
- * @tc.desc   : Call the function V1 SetCallWaiting with slotId and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetCallWaiting001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->SetCallWaiting(2, GetSerialId(), 0);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetCallWaiting_0400
- * @tc.name   : testV1SetCallWaiting002
- * @tc.desc   : Call the function V1 SetCallWaiting with slotId and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetCallWaiting002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->SetCallWaiting(256, GetSerialId(), 0);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetCallWaiting_0500
- * @tc.name   : testV1SetCallWaiting003
- * @tc.desc   : Call the function V1 SetCallWaiting with slotId and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetCallWaiting003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->SetCallWaiting(-1, GetSerialId(), 0);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
 }
@@ -3032,51 +2261,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetCallWaiting012, Function | MediumT
         return;
     }
     int32_t ret = g_rilInterface->SetCallWaiting(SLOTID_1, GetSerialId(), -255);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetCallTransferInfo_0300
- * @tc.name   : testV1GetCallTransferInfo001
- * @tc.desc   : Call the function V1 GetCallTransferInfo with slotId  and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetCallTransferInfo001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->GetCallTransferInfo(2, GetSerialId(), 1);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetCallTransferInfo_0400
- * @tc.name   : testV1GetCallTransferInfo002
- * @tc.desc   : Call the function V1 GetCallTransferInfo with slotId  and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetCallTransferInfo002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->GetCallTransferInfo(256, GetSerialId(), 1);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetCallTransferInfo_0500
- * @tc.name   : testV1GetCallTransferInfo003
- * @tc.desc   : Call the function V1 GetCallTransferInfo with slotId  and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetCallTransferInfo003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->GetCallTransferInfo(-1, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
 }
@@ -3227,66 +2411,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetCallTransferInfo013, Function | Me
         return;
     }
     int32_t ret = g_rilInterface->GetCallTransferInfo(SLOTID_1, GetSerialId(), -1);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetCallTransferInfo_0300
- * @tc.name   : testV1SetCallTransferInfo001
- * @tc.desc   : Call the function V1 SetCallTransferInfo with slotId  and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetCallTransferInfo001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    CallForwardSetInfo callForwardSetInfo = {};
-    callForwardSetInfo.reason = 1;
-    callForwardSetInfo.mode = 1;
-    callForwardSetInfo.classx = 1;
-    callForwardSetInfo.number = "10086";
-    int32_t ret = g_rilInterface->SetCallTransferInfo(2, GetSerialId(), callForwardSetInfo);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetCallTransferInfo_0400
- * @tc.name   : testV1SetCallTransferInfo002
- * @tc.desc   : Call the function V1 SetCallTransferInfo with slotId  and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetCallTransferInfo002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    CallForwardSetInfo callForwardSetInfo = {};
-    callForwardSetInfo.reason = 1;
-    callForwardSetInfo.mode = 1;
-    callForwardSetInfo.classx = 1;
-    callForwardSetInfo.number = "10086";
-    int32_t ret = g_rilInterface->SetCallTransferInfo(256, GetSerialId(), callForwardSetInfo);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetCallTransferInfo_0500
- * @tc.name   : testV1SetCallTransferInfo003
- * @tc.desc   : Call the function V1 SetCallTransferInfo with slotId  and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetCallTransferInfo003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    CallForwardSetInfo callForwardSetInfo = {};
-    callForwardSetInfo.reason = 1;
-    callForwardSetInfo.mode = 1;
-    callForwardSetInfo.classx = 1;
-    callForwardSetInfo.number = "10086";
-    int32_t ret = g_rilInterface->SetCallTransferInfo(-1, GetSerialId(), callForwardSetInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
 }
@@ -3712,54 +2836,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetCallTransferInfo024, Function | Me
 }
 
 /**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetCallRestriction_0300
- * @tc.name   : testV1GetCallRestriction001
- * @tc.desc   : Call the function V1 GetCallRestriction with slotId  and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetCallRestriction001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    std::string fac = "AO";
-    int32_t ret = g_rilInterface->GetCallRestriction(2, GetSerialId(), fac);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetCallRestriction_0400
- * @tc.name   : testV1GetCallRestriction002
- * @tc.desc   : Call the function V1 GetCallRestriction with slotId  and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetCallRestriction002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    std::string fac = "AO";
-    int32_t ret = g_rilInterface->GetCallRestriction(256, GetSerialId(), fac);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetCallRestriction_0500
- * @tc.name   : testV1GetCallRestriction003
- * @tc.desc   : Call the function V1 GetCallRestriction with slotId  and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetCallRestriction003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    std::string fac = "AO";
-    int32_t ret = g_rilInterface->GetCallRestriction(-1, GetSerialId(), fac);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
  * @tc.number : SUB_Telephony_DriverSystem_V1GetCallRestriction_0600
  * @tc.name   : testV1GetCallRestriction004
  * @tc.desc   : Call the function V1 GetCallRestriction with serialId  and a value of -11111
@@ -3835,63 +2911,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetCallRestriction008, Function | Med
     }
     std::string fac = "AO";
     int32_t ret = g_rilInterface->GetCallRestriction(SLOTID_1, -32768, fac);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetCallRestriction_0300
- * @tc.name   : testV1SetCallRestriction001
- * @tc.desc   : Call the function V1 SetCallRestriction with slotId  and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetCallRestriction001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    CallRestrictionInfo callRestrictionInfo = {};
-    callRestrictionInfo.fac = "AO";
-    callRestrictionInfo.mode = 1;
-    callRestrictionInfo.password = "123456";
-    int32_t ret = g_rilInterface->SetCallRestriction(2, GetSerialId(), callRestrictionInfo);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetCallRestriction_0400
- * @tc.name   : testV1SetCallRestriction002
- * @tc.desc   : Call the function V1 SetCallRestriction with slotId  and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetCallRestriction002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    CallRestrictionInfo callRestrictionInfo = {};
-    callRestrictionInfo.fac = "AO";
-    callRestrictionInfo.mode = 1;
-    callRestrictionInfo.password = "123456";
-    int32_t ret = g_rilInterface->SetCallRestriction(256, GetSerialId(), callRestrictionInfo);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetCallRestriction_0500
- * @tc.name   : testV1SetCallRestriction003
- * @tc.desc   : Call the function V1 SetCallRestriction with slotId  and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetCallRestriction003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    CallRestrictionInfo callRestrictionInfo = {};
-    callRestrictionInfo.fac = "AO";
-    callRestrictionInfo.mode = 1;
-    callRestrictionInfo.password = "123456";
-    int32_t ret = g_rilInterface->SetCallRestriction(-1, GetSerialId(), callRestrictionInfo);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
 }
@@ -4125,51 +3144,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetCallRestriction015, Function | Med
 }
 
 /**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetClip_0300
- * @tc.name   : testV1GetClip001
- * @tc.desc   : Call the function V1 GetClip with slotId  and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetClip001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->GetClip(2, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetClip_0400
- * @tc.name   : testV1GetClip002
- * @tc.desc   : Call the function V1 GetClip with slotId  and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetClip002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->GetClip(256, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetClip_0500
- * @tc.name   : testV1GetClip003
- * @tc.desc   : Call the function V1 GetClip with slotId  and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetClip003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->GetClip(-1, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
  * @tc.number : SUB_Telephony_DriverSystem_V1GetClip_0600
  * @tc.name   : testV1GetClip004
  * @tc.desc   : Call the function V1 GetClip with serialId  and a value of -11111
@@ -4240,51 +3214,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetClip008, Function | MediumTest | L
         return;
     }
     int32_t ret = g_rilInterface->GetClip(SLOTID_1, -32768);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetClip_0300
- * @tc.name   : testV1SetClip001
- * @tc.desc   : Call the function V1 SetClip with slotId  and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetClip001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->SetClip(2, GetSerialId(), 1);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetClip_0400
- * @tc.name   : testV1SetClip002
- * @tc.desc   : Call the function V1 SetClip with slotId  and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetClip002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->SetClip(256, GetSerialId(), 1);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetClip_0500
- * @tc.name   : testV1SetClip003
- * @tc.desc   : Call the function V1 SetClip with slotId  and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetClip003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->SetClip(-1, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
 }
@@ -4395,51 +3324,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetClip010, Function | MediumTest | L
 }
 
 /**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetClir_0300
- * @tc.name   : testV1GetClir001
- * @tc.desc   : Call the function V1 GetClir with slotId  and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetClir001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->GetClir(2, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetClir_0400
- * @tc.name   : testV1GetClir002
- * @tc.desc   : Call the function V1 GetClir with slotId  and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetClir002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->GetClir(256, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetClir_0500
- * @tc.name   : testV1GetClir003
- * @tc.desc   : Call the function V1 GetClir with slotId  and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetClir003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->GetClir(-1, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
  * @tc.number : SUB_Telephony_DriverSystem_V1GetClir_0600
  * @tc.name   : testV1GetClir004
  * @tc.desc   : Call the function V1 GetClir with serialId  and a value of -11111
@@ -4510,51 +3394,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetClir008, Function | MediumTest | L
         return;
     }
     int32_t ret = g_rilInterface->GetClir(SLOTID_1, -32768);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetClir_0300
- * @tc.name   : testV1SetClir001
- * @tc.desc   : Call the function V1 SetClir with slotId  and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetClir001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->SetClir(2, GetSerialId(), 1);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetClir_0400
- * @tc.name   : testV1SetClir002
- * @tc.desc   : Call the function V1 SetClir with slotId  and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetClir002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->SetClir(256, GetSerialId(), 1);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetClir_0500
- * @tc.name   : testV1SetClir003
- * @tc.desc   : Call the function V1 SetClir with slotId  and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetClir003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->SetClir(-1, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
 }
@@ -4660,51 +3499,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetClir010, Function | MediumTest | L
         return;
     }
     int32_t ret = g_rilInterface->SetClir(SLOTID_1, GetSerialId(), -1);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetCallPreferenceMode_0300
- * @tc.name   : testV1SetCallPreferenceMode001
- * @tc.desc   : Call the function V1 SetCallPreferenceMode with slotId  and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetCallPreferenceMode001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->SetCallPreferenceMode(2, GetSerialId(), 1);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetCallPreferenceMode_0400
- * @tc.name   : testV1SetCallPreferenceMode002
- * @tc.desc   : Call the function V1 SetCallPreferenceMode with slotId  and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetCallPreferenceMode002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->SetCallPreferenceMode(256, GetSerialId(), 1);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1SetCallPreferenceMode_0500
- * @tc.name   : testV1SetCallPreferenceMode003
- * @tc.desc   : Call the function V1 SetCallPreferenceMode with slotId  and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetCallPreferenceMode003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->SetCallPreferenceMode(-1, GetSerialId(), 1);
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
 }
@@ -4855,51 +3649,6 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1SetCallPreferenceMode013, Function | 
         return;
     }
     int32_t ret = g_rilInterface->SetCallPreferenceMode(SLOTID_1, GetSerialId(), -1);
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetCallPreferenceMode_0300
- * @tc.name   : testV1GetCallPreferenceMode001
- * @tc.desc   : Call the function V1 GetCallPreferenceMode with slotId  and a value of 2
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetCallPreferenceMode001, Function | MediumTest | Level1)
-{
-    if (!IsReady(2)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->GetCallPreferenceMode(2, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetCallPreferenceMode_0400
- * @tc.name   : testV1GetCallPreferenceMode002
- * @tc.desc   : Call the function V1 GetCallPreferenceMode with slotId  and a value of 256
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetCallPreferenceMode002, Function | MediumTest | Level1)
-{
-    if (!IsReady(256)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->GetCallPreferenceMode(256, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-}
-
-/**
- * @tc.number : SUB_Telephony_DriverSystem_V1GetCallPreferenceMode_0500
- * @tc.name   : testV1GetCallPreferenceMode003
- * @tc.desc   : Call the function V1 GetCallPreferenceMode with slotId  and a value of -1
- */
-HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetCallPreferenceMode003, Function | MediumTest | Level1)
-{
-    if (!IsReady(-1)) {
-        return;
-    }
-    int32_t ret = g_rilInterface->GetCallPreferenceMode(-1, GetSerialId());
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
 }

@@ -204,6 +204,7 @@ HWTEST_F(CameraFlashlightTestV1_2, SUB_Driver_Camera_Flashlight_0070, TestSize.L
 HWTEST_F(CameraFlashlightTestV1_2, SUB_Driver_Camera_Flashlight_0090, TestSize.Level1)
 {
     int32_t ret;
+    sleep(1);
     // step 1: get serviceV1_2
     cameraTest->hostCallbackV1_2 = new OHOS::Camera::Test::TestCameraHostCallbackV1_2();
     ret = cameraTest->serviceV1_2->SetCallback_V1_2(cameraTest->hostCallbackV1_2);
@@ -234,6 +235,7 @@ HWTEST_F(CameraFlashlightTestV1_2, SUB_Driver_Camera_Flashlight_0090, TestSize.L
 HWTEST_F(CameraFlashlightTestV1_2, SUB_Driver_Camera_Flashlight_0100, TestSize.Level1)
 {
     int32_t ret;
+    sleep(1);
     // step 1: get serviceV1_2
     cameraTest->hostCallbackV1_2 = new OHOS::Camera::Test::TestCameraHostCallbackV1_2();
     ret = cameraTest->serviceV1_2->SetCallback_V1_2(cameraTest->hostCallbackV1_2);
@@ -260,6 +262,7 @@ HWTEST_F(CameraFlashlightTestV1_2, SUB_Driver_Camera_Flashlight_0100, TestSize.L
 HWTEST_F(CameraFlashlightTestV1_2, SUB_Driver_Camera_Flashlight_0110, TestSize.Level1)
 {
     int32_t ret;
+    sleep(1);
     // step 1: get serviceV1_2
     cameraTest->hostCallbackV1_2 = new OHOS::Camera::Test::TestCameraHostCallbackV1_2();
     ret = cameraTest->serviceV1_2->SetCallback_V1_2(cameraTest->hostCallbackV1_2);
@@ -286,6 +289,7 @@ HWTEST_F(CameraFlashlightTestV1_2, SUB_Driver_Camera_Flashlight_0110, TestSize.L
 HWTEST_F(CameraFlashlightTestV1_2, SUB_Driver_Camera_Flashlight_0120, TestSize.Level1)
 {
     int32_t ret;
+    sleep(1);
     // step 1: get serviceV1_2
     cameraTest->hostCallbackV1_2 = new OHOS::Camera::Test::TestCameraHostCallbackV1_2();
     ret = cameraTest->serviceV1_2->SetCallback_V1_2(cameraTest->hostCallbackV1_2);
@@ -302,6 +306,7 @@ HWTEST_F(CameraFlashlightTestV1_2, SUB_Driver_Camera_Flashlight_0120, TestSize.L
     cameraTest->streamIds = {cameraTest->streamIdPreview};
     cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
     cameraTest->Close();
+    sleep(1);
     EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
     cameraTest->rc = cameraTest->serviceV1_2->SetFlashlight_V1_2(cameraTest->statusV1_2);
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
@@ -318,6 +323,7 @@ HWTEST_F(CameraFlashlightTestV1_2, SUB_Driver_Camera_Flashlight_0120, TestSize.L
 HWTEST_F(CameraFlashlightTestV1_2, SUB_Driver_Camera_Flashlight_0130, TestSize.Level1)
 {
     int32_t ret;
+    sleep(1);
     // step 1: get serviceV1_2
     cameraTest->hostCallbackV1_2 = new OHOS::Camera::Test::TestCameraHostCallbackV1_2();
     ret = cameraTest->serviceV1_2->SetCallback_V1_2(cameraTest->hostCallbackV1_2);
@@ -334,6 +340,7 @@ HWTEST_F(CameraFlashlightTestV1_2, SUB_Driver_Camera_Flashlight_0130, TestSize.L
     cameraTest->streamIds = {cameraTest->streamIdPreview};
     cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
     cameraTest->Close();
+    sleep(1);
     EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
     cameraTest->rc = cameraTest->serviceV1_2->SetFlashlight_V1_2(cameraTest->statusV1_2);
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);

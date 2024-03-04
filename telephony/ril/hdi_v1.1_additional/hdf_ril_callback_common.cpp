@@ -251,15 +251,16 @@ int32_t RilCallback::GetSimIOResponse(const RilRadioResponseInfo &responseInfo, 
 
 int32_t RilCallback::GetImsiResponse(const RilRadioResponseInfo &responseInfo, const std::string &response)
 {
+    g_getImsiResponseFlag = true;
     HDF_LOGI("GetBoolResult GetImsi result : response = %{public}s", response.c_str());
     hdiId_ = HdiId::HREQ_SIM_GET_IMSI;
     resultInfo_ = responseInfo;
-    g_getImsiResponseFlag = true;
     NotifyAll();
     return 0;
 }
 int32_t RilCallback::GetSimLockStatusResponse(const RilRadioResponseInfo &responseInfo, int32_t simLockStatus)
 {
+    g_getSimLockStatusResponseFlag = true;
     HDF_LOGI("GetBoolResult GetSimLockStatus result : simLockStatus = %{public}d", simLockStatus);
     hdiId_ = HdiId::HREQ_SIM_GET_SIM_LOCK_STATUS;
     resultInfo_ = responseInfo;
@@ -330,10 +331,10 @@ int32_t RilCallback::UnlockPuk2Response(const RilRadioResponseInfo &responseInfo
 
 int32_t RilCallback::SetActiveSimResponse(const RilRadioResponseInfo &responseInfo)
 {
+    g_setActiveSimResponseFlag = true;
     HDF_LOGI("GetBoolResult SetActiveSim result");
     hdiId_ = HdiId::HREQ_SIM_SET_ACTIVE_SIM;
     resultInfo_ = responseInfo;
-    g_setActiveSimResponseFlag = true;
     NotifyAll();
     return 0;
 }
@@ -1004,10 +1005,10 @@ int32_t RilCallback::GetCurrentCellInfoResponse_1_2(const RilRadioResponseInfo &
 
 int32_t RilCallback::SetPreferredNetworkResponse(const RilRadioResponseInfo &responseInfo)
 {
+    g_setPreferredNetworkResponseFlag = true;
     HDF_LOGI("RilCallback::SetPreferredNetworkResponse error:%{public}d", responseInfo.error);
     hdiId_ = HdiId::HREQ_NETWORK_SET_PREFERRED_NETWORK;
     resultInfo_ = responseInfo;
-    g_setPreferredNetworkResponseFlag = true;
     NotifyAll();
     return 0;
 }
@@ -1015,10 +1016,10 @@ int32_t RilCallback::SetPreferredNetworkResponse(const RilRadioResponseInfo &res
 int32_t RilCallback::GetPreferredNetworkResponse(const RilRadioResponseInfo &responseInfo,
                                                  const PreferredNetworkTypeInfo &preferredNetworkTypeInfo)
 {
+    g_getPreferredNetworkResponseFlag = true;
     HDF_LOGI("RilCallback::GetPreferredNetworkResponse type:%{public}d", preferredNetworkTypeInfo.preferredNetworkType);
     hdiId_ = HdiId::HREQ_NETWORK_GET_PREFERRED_NETWORK;
     resultInfo_ = responseInfo;
-    g_getPreferredNetworkResponseFlag = true;
     NotifyAll();
     return 0;
 }
@@ -1026,6 +1027,7 @@ int32_t RilCallback::GetPreferredNetworkResponse(const RilRadioResponseInfo &res
 int32_t RilCallback::GetPhysicalChannelConfigResponse(const RilRadioResponseInfo &responseInfo,
                                                       const ChannelConfigInfoList &channelConfigInfoList)
 {
+    g_getPhysicalChannelConfigResponseFlag = true;
     HDF_LOGI("RilCallback::GetPhysicalChannelConfigResponse itemNum:%{public}d", channelConfigInfoList.itemNum);
     for (PhysicalChannelConfig phyChnlCfg : channelConfigInfoList.channelConfigInfos) {
         HDF_LOGI("RilCallback::GetPhysicalChannelConfigResponse cellConnStatus:%{public}d, "
@@ -1041,7 +1043,6 @@ int32_t RilCallback::GetPhysicalChannelConfigResponse(const RilRadioResponseInfo
     }
     hdiId_ = HdiId::HREQ_NETWORK_GET_PHYSICAL_CHANNEL_CONFIG;
     resultInfo_ = responseInfo;
-    g_getPhysicalChannelConfigResponseFlag = true;
     NotifyAll();
     return 0;
 }
@@ -1087,8 +1088,8 @@ int32_t RilCallback::GetRrcConnectionStateResponse(const RilRadioResponseInfo &r
 
 int32_t RilCallback::SetNrOptionModeResponse(const RilRadioResponseInfo &responseInfo)
 {
-    HDF_LOGI("RilCallback::SetDeviceStateResponse error:%{public}d", responseInfo.error);
     g_setNrOptionModeResponseFlag = true;
+    HDF_LOGI("RilCallback::SetDeviceStateResponse error:%{public}d", responseInfo.error);
     hdiId_ = HdiId::HREQ_NETWORK_SET_NR_OPTION_MODE;
     resultInfo_ = responseInfo;
     NotifyAll();
@@ -1097,8 +1098,8 @@ int32_t RilCallback::SetNrOptionModeResponse(const RilRadioResponseInfo &respons
 
 int32_t RilCallback::GetNrOptionModeResponse(const RilRadioResponseInfo &responseInfo, int32_t state)
 {
-    HDF_LOGI("RilCallback::GetNrOptionModeResponse state:%{public}d", state);
     g_getNrOptionModeResponseFlag = true;
+    HDF_LOGI("RilCallback::GetNrOptionModeResponse state:%{public}d", state);
     hdiId_ = HdiId::HREQ_NETWORK_GET_NR_OPTION_MODE;
     resultInfo_ = responseInfo;
     NotifyAll();
@@ -1191,6 +1192,7 @@ int32_t RilCallback::CallRsrvccStatusNotify(const RilRadioResponseInfo &response
 int32_t RilCallback::GetEmergencyCallListResponse(const RilRadioResponseInfo &responseInfo,
                                                   const EmergencyInfoList &emergencyInfoList)
 {
+    g_getEmergencyCallListResponseFlag = true;
     HDF_LOGI("GetBoolResult emergencyInfoList callSize : %{public}d", emergencyInfoList.callSize);
     hdiId_ = HdiId::HREQ_CALL_GET_EMERGENCY_LIST;
     resultInfo_ = responseInfo;
@@ -1200,6 +1202,7 @@ int32_t RilCallback::GetEmergencyCallListResponse(const RilRadioResponseInfo &re
 
 int32_t RilCallback::SetEmergencyCallListResponse(const RilRadioResponseInfo &responseInfo)
 {
+    g_setEmergencyCallListResponse = true;
     HDF_LOGI("GetBoolResult SetEmergencyCallListResponse");
     hdiId_ = HdiId::HREQ_CALL_SET_EMERGENCY_LIST;
     resultInfo_ = responseInfo;
@@ -1209,6 +1212,7 @@ int32_t RilCallback::SetEmergencyCallListResponse(const RilRadioResponseInfo &re
 
 int32_t RilCallback::GetCallListResponse(const RilRadioResponseInfo &responseInfo, const CallInfoList &callList)
 {
+    g_getCallListResponseFlag = true;
     HDF_LOGI("GetBoolResult CallInfoList callSize : %{public}d", callList.callSize);
     hdiId_ = HdiId::HREQ_CALL_GET_CALL_LIST;
     resultInfo_ = responseInfo;
@@ -1309,6 +1313,7 @@ int32_t RilCallback::SetClipResponse(const RilRadioResponseInfo &responseInfo)
 
 int32_t RilCallback::CombineConferenceResponse(const RilRadioResponseInfo &responseInfo)
 {
+    g_combineConferenceResponseFlag = true;
     HDF_LOGI("GetBoolResult CombineConferenceResponse");
     hdiId_ = HdiId::HREQ_CALL_COMBINE_CONFERENCE;
     resultInfo_ = responseInfo;
@@ -1318,20 +1323,20 @@ int32_t RilCallback::CombineConferenceResponse(const RilRadioResponseInfo &respo
 
 int32_t RilCallback::SeparateConferenceResponse(const RilRadioResponseInfo &responseInfo)
 {
+    g_separateConferenceResponseFlag = true;
     HDF_LOGI("GetBoolResult SeparateConferenceResponse");
     hdiId_ = HdiId::HREQ_CALL_SEPARATE_CONFERENCE;
     resultInfo_ = responseInfo;
-    g_separateConferenceResponseFlag = true;
     NotifyAll();
     return 0;
 }
 
 int32_t RilCallback::CallSupplementResponse(const RilRadioResponseInfo &responseInfo)
 {
+    g_callSupplementResponseFlag = true;
     HDF_LOGI("GetBoolResult CallSupplementResponse");
     hdiId_ = HdiId::HREQ_CALL_CALL_SUPPLEMENT;
     resultInfo_ = responseInfo;
-    g_callSupplementResponseFlag = true;
     NotifyAll();
     return 0;
 }
@@ -1339,21 +1344,21 @@ int32_t RilCallback::CallSupplementResponse(const RilRadioResponseInfo &response
 int32_t RilCallback::GetCallWaitingResponse(const RilRadioResponseInfo &responseInfo,
                                             const CallWaitResult &callWaitResult)
 {
+    g_getCallWaitingResponseFlag = true;
     HDF_LOGI("GetBoolResult GetCallWaitingResponse result: %{public}d, status: %{public}d, classCw: %{public}d",
              callWaitResult.result, callWaitResult.status, callWaitResult.classCw);
     hdiId_ = HdiId::HREQ_CALL_GET_CALL_WAITING;
     resultInfo_ = responseInfo;
-    g_getCallWaitingResponseFlag = true;
     NotifyAll();
     return 0;
 }
 
 int32_t RilCallback::SetCallWaitingResponse(const RilRadioResponseInfo &responseInfo)
 {
+    g_setCallWaitingResponseFlag = true;
     HDF_LOGI("GetBoolResult SetCallWaitingResponse");
     hdiId_ = HdiId::HREQ_CALL_SET_CALL_WAITING;
     resultInfo_ = responseInfo;
-    g_setCallWaitingResponseFlag = true;
     NotifyAll();
     return 0;
 }
@@ -1361,6 +1366,7 @@ int32_t RilCallback::SetCallWaitingResponse(const RilRadioResponseInfo &response
 int32_t RilCallback::GetCallTransferInfoResponse(const RilRadioResponseInfo &responseInfo,
                                                  const CallForwardQueryInfoList &cFQueryList)
 {
+    g_getCallTransferInfoResponseFlag = true;
     HDF_LOGI("GetBoolResult GetCallTransferInfoResponse cFQueryList: %{public}d", cFQueryList.callSize);
     hdiId_ = HdiId::HREQ_CALL_GET_CALL_TRANSFER_INFO;
     resultInfo_ = responseInfo;
@@ -1481,30 +1487,30 @@ int32_t RilCallback::SetUssdResponse(const RilRadioResponseInfo &responseInfo)
 
 int32_t RilCallback::GetUssdResponse(const RilRadioResponseInfo &responseInfo, int32_t cusd)
 {
+    g_getUssdResponseFlag = true;
     HDF_LOGI("GetBoolResult GetUssdResponse cusd: %{public}d", cusd);
     hdiId_ = HdiId::HREQ_CALL_GET_USSD;
     resultInfo_ = responseInfo;
-    g_getUssdResponseFlag = true;
     NotifyAll();
     return 0;
 }
 
 int32_t RilCallback::SetMuteResponse(const RilRadioResponseInfo &responseInfo)
 {
+    g_setMuteResponseFlag = true;
     HDF_LOGI("GetBoolResult SetMuteResponse");
     hdiId_ = HdiId::HREQ_CALL_SET_MUTE;
     resultInfo_ = responseInfo;
-    g_setMuteResponseFlag = true;
     NotifyAll();
     return 0;
 }
 
 int32_t RilCallback::GetMuteResponse(const RilRadioResponseInfo &responseInfo, int32_t mute)
 {
+    g_getMuteResponseFlag = true;
     HDF_LOGI("GetBoolResult GetMuteResponse mute: %{public}d", mute);
     hdiId_ = HdiId::HREQ_CALL_GET_MUTE;
     resultInfo_ = responseInfo;
-    g_getMuteResponseFlag = true;
     NotifyAll();
     return 0;
 }
@@ -1579,50 +1585,50 @@ int32_t RilCallback::DsdsModeUpdated(const RilRadioResponseInfo &responseInfo, i
 
 int32_t RilCallback::ShutDownResponse(const RilRadioResponseInfo &responseInfo)
 {
+    g_shutDownResponseFlag = true;
     HDF_LOGI("ShutDownResponse");
     hdiId_ = HdiId::HREQ_MODEM_SHUT_DOWN;
     resultInfo_ = responseInfo;
-    g_shutDownResponseFlag = true;
     NotifyAll();
     return 0;
 }
 
 int32_t RilCallback::SetRadioStateResponse(const RilRadioResponseInfo &responseInfo)
 {
+    g_setRadioStateResponseFlag = true;
     HDF_LOGI("SetRadioStateResponse");
     hdiId_ = HdiId::HREQ_MODEM_SET_RADIO_STATUS;
     resultInfo_ = responseInfo;
-    g_setRadioStateResponseFlag = true;
     NotifyAll();
     return 0;
 }
 
 int32_t RilCallback::GetRadioStateResponse(const RilRadioResponseInfo &responseInfo, int32_t state)
 {
+    g_getRadioStateResponseFlag = true;
     HDF_LOGI("GetRadioStateResponse state : %{public}d", state);
     hdiId_ = HdiId::HREQ_MODEM_GET_RADIO_STATUS;
     resultInfo_ = responseInfo;
-    g_getRadioStateResponseFlag = true;
     NotifyAll();
     return 0;
 }
 
 int32_t RilCallback::GetImeiResponse(const RilRadioResponseInfo &responseInfo, const std::string &imei)
 {
+    g_getImeiResponseFlag = true;
     HDF_LOGI("GetImeiResponse imei : %{public}s", imei.c_str());
     hdiId_ = HdiId::HREQ_MODEM_GET_IMEI;
     resultInfo_ = responseInfo;
-    g_getImeiResponseFlag = true;
     NotifyAll();
     return 0;
 }
 
 int32_t RilCallback::GetMeidResponse(const RilRadioResponseInfo &responseInfo, const std::string &meid)
 {
+    g_getMeidResponseFlag = true;
     HDF_LOGI("GetMeidResponse meid : %{public}s", meid.c_str());
     hdiId_ = HdiId::HREQ_MODEM_GET_MEID;
     resultInfo_ = responseInfo;
-    g_getMeidResponseFlag = true;
     NotifyAll();
     return 0;
 }
@@ -1647,10 +1653,10 @@ int32_t RilCallback::GetVoiceRadioTechnologyResponse(const RilRadioResponseInfo 
 int32_t RilCallback::GetBasebandVersionResponse(const RilRadioResponseInfo &responseInfo,
                                                 const std::string &basebandVersion)
 {
+    g_getBasebandVersionResponseFlag = true;
     HDF_LOGI("GetBasebandVersionResponse basebandVersion : %{public}s", basebandVersion.c_str());
     hdiId_ = HdiId::HREQ_MODEM_GET_BASEBAND_VERSION;
     resultInfo_ = responseInfo;
-    g_getBasebandVersionResponseFlag = true;
     NotifyAll();
     return 0;
 }
@@ -1779,10 +1785,10 @@ int32_t RilCallback::GetLinkBandwidthInfoResponse(const RilRadioResponseInfo &re
 
 int32_t RilCallback::SetDataPermittedResponse(const RilRadioResponseInfo &responseInfo)
 {
+    g_setDataPermittedResponseFlag = true;
     HDF_LOGI("RilCallback::SetDataPermittedResponse error:%{public}d", responseInfo.error);
     hdiId_ = HdiId::HREQ_DATA_SET_DATA_PERMITTED;
     resultInfo_ = responseInfo;
-    g_setDataPermittedResponseFlag = true;
     NotifyAll();
     return 0;
 }
@@ -1985,8 +1991,8 @@ int32_t RilCallback::GetCBConfigResponse(const RilRadioResponseInfo &responseInf
 
 int32_t RilCallback::SetCdmaCBConfigResponse(const RilRadioResponseInfo &responseInfo)
 {
-    HDF_LOGI("RilCallback::SetCdmaCBConfigResponse error : %{public}d", responseInfo.error);
     g_setCdmaCBConfigResponseFlag = true;
+    HDF_LOGI("RilCallback::SetCdmaCBConfigResponse error : %{public}d", responseInfo.error);
     hdiId_ = HdiId::HREQ_SMS_SET_CDMA_CB_CONFIG;
     resultInfo_ = responseInfo;
     NotifyAll();
@@ -1996,10 +2002,10 @@ int32_t RilCallback::SetCdmaCBConfigResponse(const RilRadioResponseInfo &respons
 int32_t RilCallback::GetCdmaCBConfigResponse(const RilRadioResponseInfo &responseInfo,
                                              const CdmaCBConfigInfo &cdmaCBConfigInfo)
 {
+    g_getCdmaCBConfigResponseFlag = true;
     HDF_LOGI("RilCallback::GetCdmaCBConfigResponse cdmaCBConfigInfo service : %{public}d, language : %{public}d, "
              "checked: %{public}d",
              cdmaCBConfigInfo.service, cdmaCBConfigInfo.language, cdmaCBConfigInfo.checked);
-    g_getCdmaCBConfigResponseFlag = true;
     hdiId_ = HdiId::HREQ_SMS_GET_CDMA_CB_CONFIG;
     resultInfo_ = responseInfo;
     NotifyAll();
@@ -2009,9 +2015,9 @@ int32_t RilCallback::GetCdmaCBConfigResponse(const RilRadioResponseInfo &respons
 int32_t RilCallback::SendSmsMoreModeResponse(const RilRadioResponseInfo &responseInfo,
                                              const SendSmsResultInfo &sendSmsResultInfo)
 {
+    g_sendSmsMoreModeResponseFlag = true;
     HDF_LOGI("RilCallback::SendSmsMoreModeResponse sendSmsResultInfo pdu : %{public}s, error : %{public}d",
              sendSmsResultInfo.pdu.c_str(), sendSmsResultInfo.errCode);
-    g_sendSmsMoreModeResponseFlag = true;
     hdiId_ = HdiId::HREQ_SMS_SEND_SMS_MORE_MODE;
     resultInfo_ = responseInfo;
     NotifyAll();
@@ -2020,8 +2026,8 @@ int32_t RilCallback::SendSmsMoreModeResponse(const RilRadioResponseInfo &respons
 
 int32_t RilCallback::SendSmsAckResponse(const RilRadioResponseInfo &responseInfo)
 {
-    HDF_LOGI("RilCallback::SendSmsAckResponse error:%{public}d", responseInfo.error);
     g_sendSmsAckResponseFlag = true;
+    HDF_LOGI("RilCallback::SendSmsAckResponse error:%{public}d", responseInfo.error);
     hdiId_ = HdiId::HREQ_SMS_SEND_SMS_ACK;
     resultInfo_ = responseInfo;
     NotifyAll();

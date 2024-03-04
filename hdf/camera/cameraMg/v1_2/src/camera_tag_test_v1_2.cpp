@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file expected in compliance with the License.
  * You may obtain a copy of the License at
@@ -403,11 +403,98 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_Stabilization_0100, TestSize.Level
     if (ret == HDI::Camera::V1_0::NO_ERROR && entry.data.u8 != nullptr && entry.count > 0) {
         std::stringstream ss;
         for (size_t i = 0; i < entry.count; i++) {
-            ss << entry.data.u8[i] << " ";
+            ss << static_cast<int>(entry.data.u8[i]) << " ";
             if (i == entry.count - 1) {
                 printf("OHOS_ABILITY_VIDEO_STABILIZATION_MODES: %s\n", ss.str().c_str());
                 ss.clear();
             }
         }
+    }
+}
+
+/**
+ * @tc.name:SUB_Driver_Camera_Macro_0100
+ * @tc.desc:Whether macro ability support
+ * @tc.size:MediumTest
+ * @tc.type:Function
+*/
+HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_Macro_0100, TestSize.Level1)
+{
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_MACRO_SUPPORTED, &entry);
+    printf("OHOS_ABILITY_CAMERA_MACRO_SUPPORTED value count %d\n", entry.count);
+    if (ret == HDI::Camera::V1_0::NO_ERROR && entry.data.u8 != nullptr && entry.count > 0) {
+        std::stringstream ss;
+        for (size_t i = 0; i < entry.count; i++) {
+            ss << static_cast<int>(entry.data.u8[i]) << " ";
+            if (i == entry.count - 1) {
+                printf("OHOS_ABILITY_CAMERA_MACRO_SUPPORTED: %s\n", ss.str().c_str());
+                ss.clear();
+            }
+        }
+    }
+}
+
+/**
+ * @tc.name: SUB_Driver_Camera_Sketch_0100
+ * @tc.desc: OHOS_ABILITY_SKETCH_ENABLE_RATIO
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_Sketch_0100, TestSize.Level1)
+{
+    EXPECT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_SKETCH_ENABLE_RATIO, &entry);
+    if (ret == HDI::Camera::V1_0::NO_ERROR && entry.data.f != nullptr && entry.count > 0) {
+        CAMERA_LOGI("print tag<OHOS_ABILITY_SKETCH_ENABLE_RATIO> f value start.");
+        printf("OHOS_ABILITY_SKETCH_ENABLE_RATIO f value count %d\n", entry.count);
+        constexpr size_t step = 4; // print step
+        std::stringstream ss;
+        for (size_t i = 0; i < entry.count; i++) {
+            ss << entry.data.f[i] << " ";
+            if ((i != 0) && (i % step == 0 || i == entry.count - 1)) {
+                CAMERA_LOGI("%{public}s\n", ss.str().c_str());
+                printf("OHOS_ABILITY_SKETCH_ENABLE_RATIO %s\n", ss.str().c_str());
+                ss.clear();
+                ss.str("");
+            }
+        }
+        CAMERA_LOGI("print tag<OHOS_ABILITY_SKETCH_ENABLE_RATIO> f value end.");
+    }
+}
+
+/**
+ * @tc.name: SUB_Driver_Camera_Sketch_0200
+ * @tc.desc: OHOS_ABILITY_SKETCH_REFERENCE_FOV_RATIO
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_Sketch_0200, TestSize.Level1)
+{
+    EXPECT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_SKETCH_REFERENCE_FOV_RATIO, &entry);
+    if (ret == HDI::Camera::V1_0::NO_ERROR && entry.data.f != nullptr && entry.count > 0) {
+        CAMERA_LOGI("print tag<OHOS_ABILITY_SKETCH_REFERENCE_FOV_RATIO> f value start.");
+        printf("OHOS_ABILITY_SKETCH_REFERENCE_FOV_RATIO f value count %d\n", entry.count);
+        constexpr size_t step = 4; // print step
+        std::stringstream ss;
+        for (size_t i = 0; i < entry.count; i++) {
+            ss << entry.data.f[i] << " ";
+            if ((i != 0) && (i % step == 0 || i == entry.count - 1)) {
+                printf("OHOS_ABILITY_SKETCH_REFERENCE_FOV_RATIO %s\n", ss.str().c_str());
+                CAMERA_LOGI("%{public}s\n", ss.str().c_str());
+                ss.clear();
+                ss.str("");
+            }
+        }
+        CAMERA_LOGI("print tag<OHOS_ABILITY_SKETCH_REFERENCE_FOV_RATIO> f value end.");
     }
 }

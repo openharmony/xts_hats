@@ -71,7 +71,7 @@ HWTEST_F(CameraStreamTestV1_2, SUB_Driver_Camera_Colorspace_0300, TestSize.Level
     cameraTest->rc = cameraTest->streamOperator_V1_2->UpdateStreams(cameraTest->streamInfosV1_1);
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
-    cameraTest->StartCapture(cameraTest->streamIdCapture, cameraTest->captureIdCapture, false, false);
+    cameraTest->StartCapture(cameraTest->streamIdCapture, 2001, false, false);
     cameraTest->captureIds = {cameraTest->captureIdPreview};
     cameraTest->streamIds = {cameraTest->streamIdPreview};
     cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);

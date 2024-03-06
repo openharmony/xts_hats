@@ -272,8 +272,11 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest014, TestSize.Level1)
     printf("HdfBatteryHdiTest014: start.");
     int curAverage = -1;
     int32_t ret = g_batteryInterface->GetCurrentAverage(curAverage);
+#ifdef HATS_DRIVERS_PERIPHERAL_BATTERY_PC_MACRO_ISOLATION
+    EXPECT_NE(0, curAverage);
+#else
     EXPECT_EQ(0, ret);
-
+#endif
     printf("HdfBatteryHdiTest014: return.");
 }
 

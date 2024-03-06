@@ -16,7 +16,8 @@
         "features": [
             "hats_rich",
             "hats_nnrt",
-            "hats_drivers_peripheral_power_wakeup_cause_path"
+            "hats_drivers_peripheral_power_wakeup_cause_path",
+            "hats_drivers_peripheral_battery_pc_macro_isolation"
         ],
         "adapted_system_type": [
             "mini",

@@ -255,6 +255,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRenderFrame003, Function |
 
     ret = render_->RenderFrame(nullptr, frame, frameLen, &requestBytes);
     EXPECT_NE(ret, HDF_SUCCESS);
+    render_->Stop(render_);
 }
 
 /**
@@ -272,6 +273,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRenderFrame004, Function |
 
     ret = render_->RenderFrame(render_, nullptr, frameLen, &requestBytes);
     EXPECT_NE(ret, HDF_SUCCESS);
+    render_->Stop(render_);
 }
 
 /**
@@ -291,6 +293,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRenderFrame005, Function |
 
     ret = render_->RenderFrame(render_, frame, frameLen, nullptr);
     EXPECT_NE(ret, HDF_SUCCESS);
+    render_->Stop(render_);
 }
 
 /**
@@ -2832,6 +2835,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderPause007, TestSize.Level1)
     render_->Resume(render_);
     ret = render_->Pause(render_);
     EXPECT_EQ(ret, HDF_SUCCESS);
+    render_->Stop(render_);
 }
 
 /**
@@ -2852,6 +2856,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderPause008, TestSize.Level1)
         EXPECT_EQ(ret, HDF_SUCCESS);
         render_->Resume(render_);
     }
+    render_->Stop(render_);
 }
 
 /**

@@ -1281,7 +1281,7 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock002, Function | MediumTest
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
-    EXPECT_TRUE(pos != std::string::npos) << "testSuspendUnblock001 failed unLock: " << unLockValue;
+    EXPECT_TRUE(pos != std::string::npos) << "testSuspendUnblock002 failed unLock: " << unLockValue;
 }
 
 /**
@@ -1308,7 +1308,7 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock003, Function | MediumTest
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
-    EXPECT_TRUE(pos != std::string::npos) << "testSuspendUnblock001 failed unLock: " << unLockValue;
+    EXPECT_TRUE(pos != std::string::npos) << "testSuspendUnblock003 failed unLock: " << unLockValue;
 }
 
 /**
@@ -1335,7 +1335,7 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock004, Function | MediumTest
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
-    EXPECT_TRUE(pos != std::string::npos) << "testSuspendUnblock001 failed unLock: " << unLockValue;
+    EXPECT_TRUE(pos != std::string::npos) << "testSuspendUnblock004 failed unLock: " << unLockValue;
 }
 
 /**
@@ -1362,7 +1362,7 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock005, Function | MediumTest
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
-    EXPECT_TRUE(pos != std::string::npos) << "testSuspendUnblock001 failed unLock: " << unLockValue;
+    EXPECT_TRUE(pos != std::string::npos) << "testSuspendUnblock005 failed unLock: " << unLockValue;
 }
 
 /**
@@ -1389,7 +1389,7 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock006, Function | MediumTest
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
-    EXPECT_TRUE(pos != std::string::npos) << "testSuspendUnblock001 failed unLock: " << unLockValue;
+    EXPECT_TRUE(pos != std::string::npos) << "testSuspendUnblock006 failed unLock: " << unLockValue;
 }
 
 /**
@@ -1419,7 +1419,7 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock007, Function | MediumTest
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
-    EXPECT_TRUE(pos != std::string::npos) << "testSuspendUnblock001 failed unLock: " << unLockValue;
+    EXPECT_TRUE(pos != std::string::npos) << "testSuspendUnblock007 failed unLock: " << unLockValue;
 }
 
 /**
@@ -1449,7 +1449,7 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock008, Function | MediumTest
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
-    EXPECT_TRUE(pos != std::string::npos) << "testSuspendUnblock001 failed unLock: " << unLockValue;
+    EXPECT_TRUE(pos != std::string::npos) << "testSuspendUnblock008 failed unLock: " << unLockValue;
 }
 
 /**
@@ -1479,7 +1479,7 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock009, Function | MediumTest
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
-    EXPECT_TRUE(pos != std::string::npos) << "testSuspendUnblock001 failed unLock: " << unLockValue;
+    EXPECT_TRUE(pos != std::string::npos) << "testSuspendUnblock009 failed unLock: " << unLockValue;
 }
 
 /**
@@ -1509,7 +1509,7 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock010, Function | MediumTest
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
-    EXPECT_TRUE(pos != std::string::npos) << "testSuspendUnblock001 failed unLock: " << unLockValue;
+    EXPECT_TRUE(pos != std::string::npos) << "testSuspendUnblock010 failed unLock: " << unLockValue;
 }
 /**
  * @tc.number : SUB_Powermgr_Power_HDI_SuspendUnblock_1300
@@ -1538,7 +1538,7 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock011, Function | MediumTest
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
-    EXPECT_TRUE(pos != std::string::npos) << "testSuspendUnblock001 failed unLock: " << unLockValue;
+    EXPECT_TRUE(pos != std::string::npos) << "testSuspendUnblock011 failed unLock: " << unLockValue;
 }
 
 /**
@@ -1568,7 +1568,7 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendUnblock012, Function | MediumTest
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(unLockValue.empty());
     auto pos = unLockValue.find(testName);
-    EXPECT_TRUE(pos != std::string::npos) << "testSuspendUnblock001 failed unLock: " << unLockValue;
+    EXPECT_TRUE(pos != std::string::npos) << "testSuspendUnblock012 failed unLock: " << unLockValue;
 }
 
 /**
@@ -1622,7 +1622,7 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock002, Function | MediumTest |
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);
-    EXPECT_TRUE(pos != std::string::npos) << "testSuspendBlock001 failed lock: " << lockValue;
+    EXPECT_TRUE(pos != std::string::npos) << "testSuspendBlock002 failed lock: " << lockValue;
 }
 
 /**
@@ -1649,7 +1649,7 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock003, Function | MediumTest |
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);
-    EXPECT_TRUE(pos != std::string::npos) << "testSuspendBlock001 failed lock: " << lockValue;
+    EXPECT_TRUE(pos != std::string::npos) << "testSuspendBlock003 failed lock: " << lockValue;
 }
 
 /**
@@ -1676,7 +1676,7 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock004, Function | MediumTest |
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);
-    EXPECT_TRUE(pos != std::string::npos) << "testSuspendBlock001 failed lock: " << lockValue;
+    EXPECT_TRUE(pos != std::string::npos) << "testSuspendBlock004 failed lock: " << lockValue;
 }
 
 /**
@@ -1703,7 +1703,7 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock005, Function | MediumTest |
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);
-    EXPECT_TRUE(pos != std::string::npos) << "testSuspendBlock001 failed lock: " << lockValue;
+    EXPECT_TRUE(pos != std::string::npos) << "testSuspendBlock005 failed lock: " << lockValue;
 }
 
 /**
@@ -1730,7 +1730,7 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock006, Function | MediumTest |
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);
-    EXPECT_TRUE(pos != std::string::npos) << "testSuspendBlock001 failed lock: " << lockValue;
+    EXPECT_TRUE(pos != std::string::npos) << "testSuspendBlock006 failed lock: " << lockValue;
 }
 
 /**
@@ -1760,7 +1760,7 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock007, Function | MediumTest |
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);
-    EXPECT_TRUE(pos != std::string::npos) << "testSuspendBlock001 failed lock: " << lockValue;
+    EXPECT_TRUE(pos != std::string::npos) << "testSuspendBlock007 failed lock: " << lockValue;
 }
 
 /**
@@ -1790,7 +1790,7 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock008, Function | MediumTest |
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);
-    EXPECT_TRUE(pos != std::string::npos) << "testSuspendBlock001 failed lock: " << lockValue;
+    EXPECT_TRUE(pos != std::string::npos) << "testSuspendBlock008 failed lock: " << lockValue;
 }
 
 /**
@@ -1820,7 +1820,7 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock009, Function | MediumTest |
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);
-    EXPECT_TRUE(pos != std::string::npos) << "testSuspendBlock001 failed lock: " << lockValue;
+    EXPECT_TRUE(pos != std::string::npos) << "testSuspendBlock009 failed lock: " << lockValue;
 }
 
 /**
@@ -1850,7 +1850,7 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock010, Function | MediumTest |
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);
-    EXPECT_TRUE(pos != std::string::npos) << "testSuspendBlock001 failed lock: " << lockValue;
+    EXPECT_TRUE(pos != std::string::npos) << "testSuspendBlock010 failed lock: " << lockValue;
 }
 
 /**
@@ -1880,7 +1880,7 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock011, Function | MediumTest |
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);
-    EXPECT_TRUE(pos != std::string::npos) << "testSuspendBlock001 failed lock: " << lockValue;
+    EXPECT_TRUE(pos != std::string::npos) << "testSuspendBlock011 failed lock: " << lockValue;
 }
 
 /**
@@ -1910,7 +1910,7 @@ HWTEST_F(HdfPowerHdiTestAdditional, testSuspendBlock012, Function | MediumTest |
     EXPECT_EQ(0, ret);
     EXPECT_FALSE(lockValue.empty());
     auto pos = lockValue.find(testName);
-    EXPECT_TRUE(pos != std::string::npos) << "testSuspendBlock001 failed lock: " << lockValue;
+    EXPECT_TRUE(pos != std::string::npos) << "testSuspendBlock012 failed lock: " << lockValue;
 }
 
 /**

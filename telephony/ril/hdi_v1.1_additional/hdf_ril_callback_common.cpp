@@ -2050,9 +2050,8 @@ bool GetBoolResult(HdiId hdiId) { return g_callback.GetBoolResult(hdiId); }
 
 int32_t GetSerialId()
 {
-    std::default_random_engine e;
-    std::uniform_int_distribution<long long> u(0,RAND_MAXVALUE);
-    e.seed(time(0));
+    std::uniform_int_distribution< long long > u(0, RAND_MAXVALUE);
+    std::default_random_engine e(time(0));
 
     return u(e);
 }

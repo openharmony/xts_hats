@@ -29,6 +29,9 @@
 #include "v1_2/iril.h"
 #include "gtest/gtest.h"
 
+#include <ctime>
+#include <random>
+
 #define RAND_MAXVALUE 10000000000
 
 using OHOS::HDI::Ril::V1_2::RilRadioResponseInfo;

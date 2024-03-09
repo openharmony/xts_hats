@@ -13,6 +13,7 @@
 
 import("//build/test.gni")
 import("//drivers/peripheral/audio/audio.gni")
+import("//drivers/peripheral/display/display_config.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/audio"
@@ -21,12 +22,15 @@ ohos_moduletest_suite("HatsHdfAudioBenchmarkTest") {
   module_out_path = module_output_path
 
   include_dirs = []
+  defines = []
+  defines += display_defines
 
   sources = [
     "adapter/audio_adapter_benchmarktest.cpp",
     "capture/audio_capture_benchmarktest.cpp",
     "manager/audio_manager_benchmarktest.cpp",
     "render/audio_render_benchmarktest.cpp",
+    "render/audio_render_mmap_benchmarktest.cpp",
   ]
 
   if (drivers_peripheral_audio_feature_offload) {

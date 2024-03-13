@@ -1,4 +1,4 @@
-# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Copyright (c) 2023-2024 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -15,7 +15,6 @@ import("//build/ohos_var.gni")
 import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
-#################################group#########################################
 group("HatsHdfCamerabenchmarkTest") {
   if (!defined(ohos_lite)) {
     testonly = true
@@ -27,8 +26,8 @@ group("HatsHdfCamerabenchmarkTest") {
       deps = [
         "v1_0:HatsHdfCamerabenchmarkTestV0",
         "v1_1:HatsHdfCamerabenchmarkTestV1",
+        "v1_2:HatsHdfCamerabenchmarkTestV2",
       ]
     }
   }
 }
-###############################################################################

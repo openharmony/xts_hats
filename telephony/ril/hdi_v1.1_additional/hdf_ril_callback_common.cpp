@@ -2050,8 +2050,10 @@ bool GetBoolResult(HdiId hdiId) { return g_callback.GetBoolResult(hdiId); }
 
 int32_t GetSerialId()
 {
-    g_currentSerialId = rand() % RAND_MAXVALUE;
-    return g_currentSerialId;
+    std::uniform_int_distribution< long long > u(0, RAND_MAXVALUE);
+    std::default_random_engine e(time(0));
+
+    return u(e);
 }
 
 bool IsReady(int32_t slotId)

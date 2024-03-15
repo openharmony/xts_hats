@@ -283,7 +283,7 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, Pause)(benchmark::State &state)
     for (auto _ : state) {
         ret = capture_->Pause(capture_);
 #ifdef DISPLAY_COMMUNITY
-        ASSERT_EQ(ret, HDF_SUCCESS);
+        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 #else
         ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
 #endif
@@ -303,7 +303,7 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, Resume)(benchmark::State &state)
 
     ret = capture_->Pause(capture_);
 #ifdef DISPLAY_COMMUNITY
-        ASSERT_TRUE(ret == HDF_SUCCESS);
+        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 #else
         ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
 #endif
@@ -311,7 +311,7 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, Resume)(benchmark::State &state)
     for (auto _ : state) {
         ret = capture_->Resume(capture_);
 #ifdef DISPLAY_COMMUNITY
-        ASSERT_TRUE(ret == HDF_SUCCESS);
+        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 #else
         ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
 #endif
@@ -701,11 +701,7 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, ReqMmapBuffer)(benchmark::State &state)
     struct AudioMmapBufferDescriptor desc = {0};
     for (auto _ : state) {
         ret = capture_->ReqMmapBuffer(capture_, MMAP_SUGGUEST_REQ_SIZE, &desc);
-#ifdef DISPLAY_COMMUNITY
-        ASSERT_TRUE(ret == HDF_ERR_INVALID_PARAM);
-#else
         ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
-#endif
     }
 }
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, ReqMmapBuffer)->

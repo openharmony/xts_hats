@@ -176,21 +176,13 @@ BENCHMARK_F(AudioRenderMmapBenchmarkTest, ReqMmapBuffer)(benchmark::State &state
 #endif
 
         ret = render_->Start(render_);
-#ifdef DISPLAY_COMMUNITY
-        ASSERT_TRUE(ret == HDF_FAILURE);
-#else
         ASSERT_TRUE(ret == HDF_SUCCESS);
-#endif
 
         ret = render_->GetMmapPosition(render_, &frames, &time);
         ASSERT_TRUE(ret == HDF_SUCCESS);
 
         ret = render_->Stop(render_);
-#ifdef DISPLAY_COMMUNITY
-        ASSERT_TRUE(ret == HDF_FAILURE);
-#else
         ASSERT_TRUE(ret == HDF_SUCCESS);
-#endif
     }
 }
 

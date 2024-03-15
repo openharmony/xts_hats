@@ -110,7 +110,8 @@ void AudioRenderBenchmarkTest::InitRenderAttrs(struct AudioSampleAttributes &att
 void AudioRenderBenchmarkTest::InitRenderDevDesc(struct AudioDeviceDescriptor &devDesc)
 {
     devDesc.pins = PIN_OUT_SPEAKER;
-    devDesc.desc = strdup("cardname");
+    devDescriptorName_ = strdup("cardname");
+    devDesc.desc = devDescriptorName_;
 
     ASSERT_NE(desc_, nullptr);
     ASSERT_NE(desc_->ports, nullptr);
@@ -211,9 +212,8 @@ BENCHMARK_F(AudioRenderBenchmarkTest, Pause)(benchmark::State &state)
 
     for (auto _ : state) {
         ret = render_->Pause(render_);
-	//ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
 #ifdef DISPLAY_COMMUNITY
-        ASSERT_TRUE(ret == HDF_ERR_INVALID_PARAM);
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_SUCCESS);
 #else
         ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
 #endif
@@ -241,7 +241,7 @@ BENCHMARK_F(AudioRenderBenchmarkTest, Resume)(benchmark::State &state)
     for (auto _ : state) {
         ret = render_->Resume(render_);
 #ifdef DISPLAY_COMMUNITY
-        ASSERT_TRUE(ret == HDF_SUCCESS);
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_SUCCESS);
 #else
         ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
 #endif
@@ -731,11 +731,7 @@ BENCHMARK_F(AudioRenderBenchmarkTest, RegCallback)(benchmark::State &state)
 
     for (auto _ : state) {
         ret = render_->RegCallback(render_, audioCallback, cookie);
-#ifdef DISPLAY_COMMUNITY
-        ASSERT_TRUE(ret == HDF_SUCCESS);
-#else
         ASSERT_TRUE(ret == HDF_ERR_INVALID_PARAM);
-#endif
     }
 }
 

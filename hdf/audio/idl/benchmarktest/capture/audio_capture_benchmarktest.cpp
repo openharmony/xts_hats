@@ -265,9 +265,9 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, StartAndStop)(benchmark::State &state)
     int32_t ret;
     for (auto _ : state) {
         ret = capture_->Start(capture_);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
         ret = capture_->Stop(capture_);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 

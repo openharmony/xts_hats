@@ -154,7 +154,7 @@ BENCHMARK_F(AudioAdapterBenchmarkTest, InitAllPorts)(benchmark::State &state)
     int32_t ret;
     for (auto _ : state) {
         ret = adapter_->InitAllPorts(adapter_);
-	    EXPECT_EQ(HDF_SUCCESS, ret);
+	    EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 

@@ -285,7 +285,7 @@ BENCHMARK_F(AudioAdapterBenchmarkTest, GetDeviceStatus)(benchmark::State &state)
 
     for (auto _ : state) {
         ret = adapter_->GetDeviceStatus(adapter_, &status);
-	    EXPECT_EQ(HDF_SUCCESS, ret);
+        EXPECT_EQ(HDF_SUCCESS, ret);
     }
 }
 

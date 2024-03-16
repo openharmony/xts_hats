@@ -176,6 +176,8 @@ void AudioRenderBenchmarkTest::TearDown(const ::benchmark::State &state)
 {
     ASSERT_NE(devDescriptorName_, nullptr);
     free(devDescriptorName_);
+    devDescriptorName_ = NULL;
+
     if (adapter_ != nullptr) {
         adapter_->DestroyRender(adapter_, renderId_);
         render_ = nullptr;
@@ -260,7 +262,7 @@ BENCHMARK_F(AudioRenderBenchmarkTest, Flush)(benchmark::State &state)
     int32_t ret;
     for (auto _ : state) {
         ret = render_->Flush(render_);
-	EXPECT_NE(ret, HDF_SUCCESS);
+	    EXPECT_NE(ret, HDF_SUCCESS);
     }
 }
 
@@ -783,7 +785,7 @@ BENCHMARK_F(AudioRenderBenchmarkTest, CheckSceneCapability)(benchmark::State &st
     scenes.desc.desc = strdup("mic");
     for (auto _ : state) {
         ret = render_->CheckSceneCapability(render_, &scenes, &supported);
-	    EXPECT_EQ(HDF_SUCCESS, ret);
+        EXPECT_EQ(HDF_SUCCESS, ret);
     }
     free(scenes.desc.desc);
 }

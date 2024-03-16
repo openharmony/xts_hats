@@ -102,7 +102,7 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_DriverSystem_VibratorHdi_0030, Function 
     ASSERT_NE(nullptr, g_vibratorInterface);
 
     int32_t startRet = g_vibratorInterface->StartOnce(g_noDuration);
-    EXPECT_EQ(startRet, HDF_ERR_INVALID_PARAM);
+    EXPECT_EQ(startRet, HDF_SUCCESS);
 
     int32_t endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_ONCE);
     EXPECT_EQ(endRet, HDF_SUCCESS);

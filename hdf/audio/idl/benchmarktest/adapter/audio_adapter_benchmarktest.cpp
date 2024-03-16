@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -154,7 +154,7 @@ BENCHMARK_F(AudioAdapterBenchmarkTest, InitAllPorts)(benchmark::State &state)
     int32_t ret;
     for (auto _ : state) {
         ret = adapter_->InitAllPorts(adapter_);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 
@@ -181,8 +181,8 @@ BENCHMARK_F(AudioAdapterBenchmarkTest, CreateRenderAndDestroyRender)(benchmark::
             attrs.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
             ASSERT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
         }
-        ret = adapter_->DestroyRender(adapter_, renderId_);
-	    EXPECT_EQ(HDF_SUCCESS, ret);
+    ret = adapter_->DestroyRender(adapter_, renderId_);
+    EXPECT_EQ(HDF_SUCCESS, ret);
     }
 }
 
@@ -208,8 +208,8 @@ BENCHMARK_F(AudioAdapterBenchmarkTest, CreateCaptureAndDestroyCapture)(benchmark
             attrs.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
             ASSERT_EQ(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
         }
-        ret = adapter_->DestroyCapture(adapter_, captureId_);
-	    EXPECT_EQ(HDF_SUCCESS, ret);
+    ret = adapter_->DestroyCapture(adapter_, captureId_);
+    EXPECT_EQ(HDF_SUCCESS, ret);
     }
 }
 

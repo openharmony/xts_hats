@@ -342,9 +342,9 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, TurnStandbyMode)(benchmark::State &state)
     int32_t ret;
     for (auto _ : state) {
         ret = capture_->Start(capture_);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
         ret = capture_->TurnStandbyMode(capture_);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
         capture_->Stop(capture_);
     }
 }

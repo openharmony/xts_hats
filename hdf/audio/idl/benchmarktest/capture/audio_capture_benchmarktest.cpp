@@ -142,8 +142,8 @@ void AudioCaptureBenchmarkTest::ReleaseAllAdapterDescs(struct AudioAdapterDescri
     if (descs == nullptr || descsLen == 0) {
         return;
     }
-        for (uint32_t i = 0; i < descsLen; i++) {
-            FreeAdapterElements(&descs[i], false);
+    for (uint32_t i = 0; i < descsLen; i++) {
+        FreeAdapterElements(&descs[i], false);
     }
 }
 
@@ -503,7 +503,7 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, GetSampleAttributes)(benchmark::State &st
 
     for (auto _ : state) {
         ret = capture_->GetSampleAttributes(capture_, &attrs);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 
@@ -518,7 +518,7 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, GetCurrentChannelId)(benchmark::State &st
 
     for (auto _ : state) {
         ret = capture_->GetCurrentChannelId(capture_, &channelId);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 
@@ -576,7 +576,7 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SelectScene)(benchmark::State &state)
 
     for (auto _ : state) {
         ret = capture_->SelectScene(capture_, &scene);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 
@@ -651,7 +651,7 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, GetFrameSize)(benchmark::State &state)
 
     for (auto _ : state) {
         ret = capture_->GetFrameSize(capture_, &frameSize);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 
@@ -666,7 +666,7 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, GetFrameCount)(benchmark::State &state)
 
     for (auto _ : state) {
         ret = capture_->GetFrameCount(capture_, &frameCount);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 

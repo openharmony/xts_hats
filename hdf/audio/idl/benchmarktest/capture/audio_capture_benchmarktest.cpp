@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -212,7 +212,7 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, CaptureFrame)(benchmark::State &state)
 
     for (auto _ : state) {
         ret = capture_->CaptureFrame(capture_, frame, &frameLen, &requestBytes);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
     
     capture_->Stop(capture_);
@@ -245,7 +245,7 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, GetCapturePosition)(benchmark::State &sta
 
     for (auto _ : state) {
         ret = capture_->GetCapturePosition(capture_, &frames, &time);
-	    ASSERT_TRUE(ret == HDF_SUCCESS);
+        ASSERT_TRUE(ret == HDF_SUCCESS);
     }
     
     capture_->Stop(capture_);
@@ -269,7 +269,6 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, StartAndStop)(benchmark::State &state)
         ret = capture_->Stop(capture_);
 	    EXPECT_EQ(ret, HDF_SUCCESS);
     }
-    
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, StartAndStop)->
@@ -330,7 +329,7 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, Flush)(benchmark::State &state)
     int32_t ret;
     for (auto _ : state) {
         ret = capture_->Flush(capture_);
-	    EXPECT_NE(ret, HDF_SUCCESS);
+        EXPECT_NE(ret, HDF_SUCCESS);
     }
 }
 
@@ -685,7 +684,7 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, CheckSceneCapability)(benchmark::State &s
     scenes.desc.desc = strdup("mic");
     for (auto _ : state) {
         ret = capture_->CheckSceneCapability(capture_, &scenes, &supported);
-	    EXPECT_EQ(HDF_SUCCESS, ret);
+        EXPECT_EQ(HDF_SUCCESS, ret);
     }
     free(scenes.desc.desc);
 }

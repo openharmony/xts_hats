@@ -186,6 +186,7 @@ void AudioCaptureBenchmarkTest::TearDown(const ::benchmark::State &state)
 {
     ASSERT_NE(devDescriptorName_, nullptr);
     free(devDescriptorName_);
+    devDescriptorName_ = NULL;
 
     ASSERT_NE(capture_, nullptr);
     EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, captureId_));
@@ -264,9 +265,9 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, StartAndStop)(benchmark::State &state)
     int32_t ret;
     for (auto _ : state) {
         ret = capture_->Start(capture_);
-	EXPECT_EQ(ret, HDF_SUCCESS);
+	    EXPECT_EQ(ret, HDF_SUCCESS);
         ret = capture_->Stop(capture_);
-	EXPECT_EQ(ret, HDF_SUCCESS);
+	    EXPECT_EQ(ret, HDF_SUCCESS);
     }
     
 }
@@ -288,8 +289,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, Pause)(benchmark::State &state)
         ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
 #endif
     }
-	ret = capture_->Stop(capture_);
-    	ASSERT_EQ(ret, HDF_SUCCESS);
+    ret = capture_->Stop(capture_);
+    ASSERT_EQ(ret, HDF_SUCCESS);
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, Pause)->
@@ -331,7 +332,6 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, Flush)(benchmark::State &state)
         ret = capture_->Flush(capture_);
 	    EXPECT_NE(ret, HDF_SUCCESS);
     }
-    
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, Flush)->
@@ -346,9 +346,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, TurnStandbyMode)(benchmark::State &state)
 	    EXPECT_EQ(ret, HDF_SUCCESS);
         ret = capture_->TurnStandbyMode(capture_);
 	    EXPECT_EQ(ret, HDF_SUCCESS);
-	    capture_->Stop(capture_);
+        capture_->Stop(capture_);
     }
-    
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, TurnStandbyMode)->
@@ -507,7 +506,6 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, GetSampleAttributes)(benchmark::State &st
         ret = capture_->GetSampleAttributes(capture_, &attrs);
 	    EXPECT_EQ(ret, HDF_SUCCESS);
     }
-    
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetSampleAttributes)->

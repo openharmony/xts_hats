@@ -351,7 +351,7 @@ BENCHMARK_F(AudioRenderBenchmarkTest, SetSampleAttributes)(benchmark::State &sta
     struct AudioSampleAttributes attrs = attrsRender_;
     for (auto _ : state) {
         ret = render_->SetSampleAttributes(render_, &attrs);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 
@@ -366,7 +366,7 @@ BENCHMARK_F(AudioRenderBenchmarkTest, GetSampleAttributes)(benchmark::State &sta
 
     for (auto _ : state) {
         ret = render_->GetSampleAttributes(render_, &attrs);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 
@@ -381,7 +381,7 @@ BENCHMARK_F(AudioRenderBenchmarkTest, GetCurrentChannelId)(benchmark::State &sta
 
     for (auto _ : state) {
         ret = render_->GetCurrentChannelId(render_, &channelId);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 
@@ -399,7 +399,7 @@ BENCHMARK_F(AudioRenderBenchmarkTest, SelectScene)(benchmark::State &state)
 
     for (auto _ : state) {
         ret = render_->SelectScene(render_, &scene);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 
@@ -414,7 +414,7 @@ BENCHMARK_F(AudioRenderBenchmarkTest, GetLatency)(benchmark::State &state)
 
     for (auto _ : state) {
         ret = render_->GetLatency(render_, &ms);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 
@@ -450,7 +450,7 @@ BENCHMARK_F(AudioRenderBenchmarkTest, SetExtraParams)(benchmark::State &state)
 
     for (auto _ : state) {
         ret = render_->SetExtraParams(render_, keyValueList);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 
@@ -644,7 +644,7 @@ BENCHMARK_F(AudioRenderBenchmarkTest, RenderFrame)(benchmark::State &state)
 
     for (auto _ : state) {
         ret = render_->RenderFrame(render_, frame, frameLen, &requestBytes);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
 

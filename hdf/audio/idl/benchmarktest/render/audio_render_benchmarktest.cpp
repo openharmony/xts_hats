@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -197,9 +197,9 @@ BENCHMARK_F(AudioRenderBenchmarkTest, StartAndStop)(benchmark::State &state)
     int32_t ret;
     for (auto _ : state) {
         ret = render_->Start(render_);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
         ret = render_->Stop(render_);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 
@@ -262,7 +262,7 @@ BENCHMARK_F(AudioRenderBenchmarkTest, Flush)(benchmark::State &state)
     int32_t ret;
     for (auto _ : state) {
         ret = render_->Flush(render_);
-	    EXPECT_NE(ret, HDF_SUCCESS);
+        EXPECT_NE(ret, HDF_SUCCESS);
     }
 }
 
@@ -275,10 +275,10 @@ BENCHMARK_F(AudioRenderBenchmarkTest, TurnStandbyMode)(benchmark::State &state)
     int32_t ret;
     for (auto _ : state) {
         ret = render_->Start(render_);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
         ret = render_->TurnStandbyMode(render_);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
-	    render_->Stop(render_);
+        EXPECT_EQ(ret, HDF_SUCCESS);
+        render_->Stop(render_);
     }
 }
 
@@ -718,7 +718,7 @@ BENCHMARK_F(AudioRenderBenchmarkTest, GetRenderSpeed)(benchmark::State &state)
 
     for (auto _ : state) {
         ret = render_->GetRenderSpeed(render_, &speed);
-	    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+        EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
 }
 BENCHMARK_REGISTER_F(AudioRenderBenchmarkTest, GetRenderSpeed)->

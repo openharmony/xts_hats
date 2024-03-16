@@ -337,7 +337,7 @@ BENCHMARK_F(AudioRenderBenchmarkTest, GetFrameCount)(benchmark::State &state)
 
     for (auto _ : state) {
         ret = render_->GetFrameCount(render_, &frameCount);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 
@@ -703,7 +703,7 @@ BENCHMARK_F(AudioRenderBenchmarkTest, SetRenderSpeed)(benchmark::State &state)
 
     for (auto _ : state) {
         ret = render_->SetRenderSpeed(render_, speed);
-	    EXPECT_NE(ret, HDF_SUCCESS);
+        EXPECT_NE(ret, HDF_SUCCESS);
     }
 }
 

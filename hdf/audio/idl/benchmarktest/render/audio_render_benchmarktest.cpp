@@ -322,7 +322,7 @@ BENCHMARK_F(AudioRenderBenchmarkTest, GetFrameSize)(benchmark::State &state)
 
     for (auto _ : state) {
         ret = render_->GetFrameSize(render_, &frameSize);
-	    EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 
@@ -466,7 +466,7 @@ BENCHMARK_F(AudioRenderBenchmarkTest, GetExtraParams)(benchmark::State &state)
 
     for (auto _ : state) {
         ret = render_->GetExtraParams(render_, keyValueList, keyValueListLen);
-	    EXPECT_NE(ret, HDF_SUCCESS);
+        EXPECT_NE(ret, HDF_SUCCESS);
     }
 }
 

@@ -50,6 +50,15 @@ public:
     };
 };
 
+class PowerRunningLockCallback : public IPowerRunningLockCallback {
+    ~PowerRunningLockCallback() override {};
+    int32_t HandleRunningLockMessage(const std::string& message) override
+    {
+        (void)message;
+        return 0;
+    }
+};
+
 class PowerMockInterfaceImpl : public IPowerInterface {
 public:
     ~PowerMockInterfaceImpl() override {};
@@ -143,6 +152,7 @@ public:
 };
 
 sptr<IPowerHdiCallback> g_callback = new PowerHdiCallback();
+sptr<IPowerRunningLockCallback> g_runningLockcallback = new PowerRunningLockCallback();
 sptr<IPowerInterface> g_powerInterface = nullptr;
 sptr<IPowerInterface> powerInterface = nullptr;
 std::mutex g_mutex;
@@ -744,5 +754,18 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest038, TestSize.Level1)
 #else
     EXPECT_NE(0, ret);
 #endif
+}
+
+/**
+  * @tc.name: HdfPowerHdiTest039
+  * @tc.desc: RegisterRunningLockCallback
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest039, TestSize.Level1)
+{
+    EXPECT_TRUE(HDF_SUCCESS ==
+        powerInterface->RegisterRunningLockCallback(g_runningLockcallback))<< "HdfPowerHdiTest039 failed";
+    EXPECT_TRUE(HDF_SUCCESS ==
+        g_runningLockcallback->HandleRunningLockMessage(""))<< "HdfPowerHdiTest039 failed";
 }
 }

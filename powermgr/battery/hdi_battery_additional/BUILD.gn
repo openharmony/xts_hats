@@ -13,6 +13,7 @@
 
 import("//build/ohos_var.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
+import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
 ohos_moduletest_suite("HatsPowermgrBatteryAdditionalTest") {
@@ -29,6 +30,11 @@ ohos_moduletest_suite("HatsPowermgrBatteryAdditionalTest") {
     "hilog:libhilog",
     "ipc:ipc_single",
   ]
+
+  if (hats_drivers_peripheral_battery_pc_macro_isolation) {
+    defines = [ "HATS_DRIVERS_PERIPHERAL_BATTERY_PC_MACRO_ISOLATION" ]
+  }
+
   subsystem_name = "xts"
   part_name = "hats"
 }

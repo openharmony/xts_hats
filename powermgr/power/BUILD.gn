@@ -17,12 +17,8 @@ import("//test/xts/tools/build/suite.gni")
 
 group("HatsPowermgrPowerTest") {
   testonly = true
-  if (hats_rich == false) {
-    deps = [
-      "hdi_power:HatsPowermgrPowerTest",
-      "hdi_power_additional:HatsPowermgrPowerAdditionalTest",
-    ]
-  } else {
-    deps = [ "hdi_power:HatsPowermgrPowerTest" ]
-  }
+  deps = [
+    "hdi_power:HatsPowermgrPowerTest",
+    "hdi_power_additional:HatsPowermgrPowerAdditionalTest",
+  ]
 }

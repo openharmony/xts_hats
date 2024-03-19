@@ -226,16 +226,10 @@ HWTEST_F(CameraCaptureTest, SUB_DriverSystem_CameraHdi_0210, TestSize.Level1)
     // Configure two streams of information
     EXPECT_EQ(true, display_->cameraDevice != nullptr);
     display_->AchieveStreamOperator();
-    // start stream
-    display_->intents = {PREVIEW};
+    // Create video stream
+    display_->intents = {PREVIEW, STILL_CAPTURE};
     display_->StartStream(display_->intents);
-    // Start capture
-    display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
-
-    // Configure capture stream information
-    display_->intents = {STILL_CAPTURE};
-    display_->StartStream(display_->intents);
-    // Start capture
+    // Start capture recording
     display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
     display_->StartCapture(display_->STREAM_ID_CAPTURE, display_->CAPTURE_ID_CAPTURE, false, true);
     sleep(2);

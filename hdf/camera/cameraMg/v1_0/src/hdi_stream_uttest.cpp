@@ -936,9 +936,9 @@ HWTEST_F(HdiStreamUtTest, SUB_Driver_Camera_Merge_6100, TestSize.Level0)
         cameraTest->streamOperator);
 
     cameraTest->streamInfo = std::make_shared<StreamInfo>();
-    cameraTest->streamInfo->streamId_ = 101;
-    cameraTest->streamInfo->width_ = 720;
-    cameraTest->streamInfo->height_ = 480;
+    cameraTest->streamInfo->streamId_ = cameraTest->streamIdPreview;
+    cameraTest->streamInfo->width_ = 1920;
+    cameraTest->streamInfo->height_ = 1080;
     cameraTest->streamInfo->format_ = PIXEL_FMT_YCRCB_420_SP;
     cameraTest->streamInfo->dataspace_ = UT_DATA_SIZE;
     cameraTest->streamInfo->intent_ = PREVIEW;
@@ -954,8 +954,8 @@ HWTEST_F(HdiStreamUtTest, SUB_Driver_Camera_Merge_6100, TestSize.Level0)
 
     cameraTest->streamInfoSnapshot = std::make_shared<StreamInfo>();
     cameraTest->streamInfoSnapshot->streamId_ = 102;
-    cameraTest->streamInfoSnapshot->width_ = 720;
-    cameraTest->streamInfoSnapshot->height_ = 480;
+    cameraTest->streamInfoSnapshot->width_ = 1920;
+    cameraTest->streamInfoSnapshot->height_ = 1080;
     cameraTest->streamInfoSnapshot->format_ = PIXEL_FMT_YCRCB_420_SP;
     cameraTest->streamInfoSnapshot->dataspace_ = UT_DATA_SIZE;
     cameraTest->streamInfoSnapshot->intent_ = STILL_CAPTURE;

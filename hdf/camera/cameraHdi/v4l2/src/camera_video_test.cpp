@@ -423,17 +423,11 @@ HWTEST_F(CameraVideoTest, camera_video_020, TestSize.Level2)
     CAMERA_LOGD("Video mode, preview, success.");
     // Create and get streamOperator information
     display_->AchieveStreamOperator();
-    // Create data stream
-    display_->intents = {PREVIEW};
-    display_->StartStream(display_->intents);
-    // capture
-    display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
     // Create video stream
-    display_->intents = {VIDEO};
+    display_->intents = {PREVIEW, VIDEO};
     display_->StartStream(display_->intents);
-    // Start capture preview
-    display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
     // Start capture recording
+    display_->StartCapture(display_->STREAM_ID_PREVIEW, display_->CAPTURE_ID_PREVIEW, false, true);
     display_->StartCapture(display_->STREAM_ID_VIDEO, display_->CAPTURE_ID_VIDEO, false, true);
 
     // post-processing

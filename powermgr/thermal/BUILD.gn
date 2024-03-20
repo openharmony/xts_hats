@@ -17,8 +17,12 @@ import("//test/xts/tools/build/suite.gni")
 
 group("HatsPowermgrThermalTest") {
   testonly = true
-  deps = [
-    "hdi_thermal:HatsPowermgrThermalTest",
-    "hdi_thermal_additional:HatsPowermgrThermalAdditionalTest",
-  ]
+  if (hats_rich == false) {
+    deps = [
+      "hdi_thermal:HatsPowermgrThermalTest",
+      "hdi_thermal_additional:HatsPowermgrThermalAdditionalTest",
+    ]
+  } else {
+    deps = [ "hdi_thermal:HatsPowermgrThermalTest" ]
+  }
 }

@@ -17,8 +17,12 @@ import("//test/xts/tools/build/suite.gni")
 
 group("HatsPowermgrBatteryTest") {
   testonly = true
-  deps = [
-    "hdi_battery:HatsPowermgrBatteryTest",
-    "hdi_battery_additional:HatsPowermgrBatteryAdditionalTest",
-  ]
+  if (hats_rich == false) {
+    deps = [
+      "hdi_battery:HatsPowermgrBatteryTest",
+      "hdi_battery_additional:HatsPowermgrBatteryAdditionalTest",
+    ]
+  } else {
+    deps = [ "hdi_battery:HatsPowermgrBatteryTest" ]
+  }
 }

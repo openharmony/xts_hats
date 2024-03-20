@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,8 +18,8 @@
 #include <gtest/gtest.h>
 #include "hdf_base.h"
 #include "osal_mem.h"
-#include "v2_0/iaudio_capture.h"
-#include "v2_0/iaudio_manager.h"
+#include "v3_0/iaudio_capture.h"
+#include "v3_0/iaudio_manager.h"
 
 using namespace std;
 using namespace testing::ext;
@@ -35,6 +35,8 @@ const int TEST_SAMPLE_RATE_MASK_48000 = 48000;
 const int TEST_CHANNEL_COUNT = 2;
 const int32_t ITERATION_FREQUENCY = 100;
 const int32_t REPETITION_FREQUENCY = 3;
+const int32_t RANGE_VALUE = 4;
+const float GAIN_VALUE = 1.0;
 const int32_t MMAP_SUGGUEST_REQ_SIZE = 1920;
 
 class AudioCaptureBenchmarkTest : public benchmark::Fixture {
@@ -51,7 +53,7 @@ public:
     void InitCaptureDevDesc(struct AudioDeviceDescriptor &devDesc);
     void InitCaptureAttrs(struct AudioSampleAttributes &attrs);
     void FreeAdapterElements(struct AudioAdapterDescriptor *dataBlock, bool freeSelf);
-    void ReleaseAllAdapterDescs(struct AudioAdapterDescriptor **descs, uint32_t descsLen);
+    void ReleaseAllAdapterDescs(struct AudioAdapterDescriptor *descs, uint32_t descsLen);
 };
 
 uint64_t AudioCaptureBenchmarkTest::GetCaptureBufferSize()
@@ -135,14 +137,13 @@ void AudioCaptureBenchmarkTest::FreeAdapterElements(struct AudioAdapterDescripto
     }
 }
 
-void AudioCaptureBenchmarkTest::ReleaseAllAdapterDescs(struct AudioAdapterDescriptor **descs, uint32_t descsLen)
+void AudioCaptureBenchmarkTest::ReleaseAllAdapterDescs(struct AudioAdapterDescriptor *descs, uint32_t descsLen)
 {
-    if ((descsLen > 0) && (descs != nullptr) && ((*descs) != nullptr)) {
-        for (uint32_t i = 0; i < descsLen; i++) {
-            FreeAdapterElements(&(*descs)[i], false);
-        }
-        OsalMemFree(*descs);
-        *descs = nullptr;
+    if (descs == nullptr || descsLen == 0) {
+        return;
+    }
+    for (uint32_t i = 0; i < descsLen; i++) {
+        FreeAdapterElements(&descs[i], false);
     }
 }
 
@@ -161,13 +162,13 @@ void AudioCaptureBenchmarkTest::SetUp(const ::benchmark::State &state)
 
     EXPECT_EQ(HDF_SUCCESS, manager_->GetAllAdapters(manager_, adapterDescs_, &size));
     if (size > MAX_AUDIO_ADAPTER_NUM) {
-        ReleaseAllAdapterDescs(&adapterDescs_, MAX_AUDIO_ADAPTER_NUM);
+        ReleaseAllAdapterDescs(adapterDescs_, MAX_AUDIO_ADAPTER_NUM);
         ASSERT_LT(size, MAX_AUDIO_ADAPTER_NUM);
     }
 
     EXPECT_EQ(HDF_SUCCESS, manager_->LoadAdapter(manager_, &adapterDescs_[0], &adapter_));
     if (adapter_ == nullptr) {
-        ReleaseAllAdapterDescs(&adapterDescs_, MAX_AUDIO_ADAPTER_NUM);
+        ReleaseAllAdapterDescs(adapterDescs_, MAX_AUDIO_ADAPTER_NUM);
         EXPECT_NE(adapter_, nullptr);
     }
 
@@ -176,7 +177,7 @@ void AudioCaptureBenchmarkTest::SetUp(const ::benchmark::State &state)
     EXPECT_EQ(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devDesc, &attrs, &capture_, &captureId_));
     if (capture_ == nullptr) {
         (void)manager_->UnloadAdapter(manager_, adapterDescs_[0].adapterName);
-        ReleaseAllAdapterDescs(&adapterDescs_, MAX_AUDIO_ADAPTER_NUM);
+        ReleaseAllAdapterDescs(adapterDescs_, MAX_AUDIO_ADAPTER_NUM);
     }
     ASSERT_NE(capture_, nullptr);
 }
@@ -185,19 +186,21 @@ void AudioCaptureBenchmarkTest::TearDown(const ::benchmark::State &state)
 {
     ASSERT_NE(devDescriptorName_, nullptr);
     free(devDescriptorName_);
+    devDescriptorName_ = NULL;
 
     ASSERT_NE(capture_, nullptr);
     EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, captureId_));
 
     ASSERT_NE(manager_, nullptr);
     EXPECT_EQ(HDF_SUCCESS, manager_->UnloadAdapter(manager_, adapterDescs_[0].adapterName));
-    ReleaseAllAdapterDescs(&adapterDescs_, MAX_AUDIO_ADAPTER_NUM);
+    ReleaseAllAdapterDescs(adapterDescs_, MAX_AUDIO_ADAPTER_NUM);
 
     IAudioManagerRelease(manager_, false);
 }
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, CaptureFrame)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     uint32_t frameLen = (uint64_t)GetCaptureBufferSize();
     uint64_t requestBytes = frameLen;
 
@@ -209,8 +212,9 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, CaptureFrame)(benchmark::State &state)
 
     for (auto _ : state) {
         ret = capture_->CaptureFrame(capture_, frame, &frameLen, &requestBytes);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    
     capture_->Stop(capture_);
 
     if (frame != nullptr) {
@@ -224,6 +228,7 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, CaptureFrame)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, GetCapturePosition)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     uint64_t frames;
     struct AudioTimeStamp time;
     uint32_t frameLen = (uint64_t)GetCaptureBufferSize();
@@ -240,8 +245,9 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, GetCapturePosition)(benchmark::State &sta
 
     for (auto _ : state) {
         ret = capture_->GetCapturePosition(capture_, &frames, &time);
+        ASSERT_TRUE(ret == HDF_SUCCESS);
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+    
     capture_->Stop(capture_);
 
     if (frame != nullptr) {
@@ -255,12 +261,14 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetCapturePosition)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, StartAndStop)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret;
     for (auto _ : state) {
         ret = capture_->Start(capture_);
+        EXPECT_EQ(ret, HDF_SUCCESS);
         ret = capture_->Stop(capture_);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
-    EXPECT_EQ(ret, HDF_SUCCESS);
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, StartAndStop)->
@@ -268,13 +276,20 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, StartAndStop)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, Pause)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret = capture_->Start(capture_);
     EXPECT_EQ(ret, HDF_SUCCESS);
 
     for (auto _ : state) {
         ret = capture_->Pause(capture_);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+#else
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#endif
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
+    ret = capture_->Stop(capture_);
+    ASSERT_EQ(ret, HDF_SUCCESS);
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, Pause)->
@@ -282,17 +297,25 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, Pause)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, Resume)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret = capture_->Start(capture_);
     EXPECT_EQ(ret, HDF_SUCCESS);
 
     ret = capture_->Pause(capture_);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+#else
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#endif
 
     for (auto _ : state) {
         ret = capture_->Resume(capture_);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+#else
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#endif
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-
     ret = capture_->Stop(capture_);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
@@ -302,11 +325,12 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, Resume)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, Flush)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret;
     for (auto _ : state) {
         ret = capture_->Flush(capture_);
+        EXPECT_NE(ret, HDF_SUCCESS);
     }
-    EXPECT_NE(ret, HDF_SUCCESS);
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, Flush)->
@@ -314,12 +338,15 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, Flush)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, TurnStandbyMode)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret;
     for (auto _ : state) {
         ret = capture_->Start(capture_);
+        EXPECT_EQ(ret, HDF_SUCCESS);
         ret = capture_->TurnStandbyMode(capture_);
+        EXPECT_EQ(ret, HDF_SUCCESS);
+        capture_->Stop(capture_);
     }
-    EXPECT_EQ(ret, HDF_SUCCESS);
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, TurnStandbyMode)->
@@ -327,8 +354,9 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, TurnStandbyMode)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, AudioDevDump)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret;
-    int32_t range = 4;
+    int32_t range = RANGE_VALUE;
     char pathBuf[] = "/data/CaptureDump.log";
 
     FILE *file = fopen(pathBuf, "wb+");
@@ -341,8 +369,12 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, AudioDevDump)(benchmark::State &state)
 
     for (auto _ : state) {
         ret = capture_->AudioDevDump(capture_, range, fd);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_SUCCESS);
+#else
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#endif
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
     fclose(file);
 }
 
@@ -351,13 +383,18 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, AudioDevDump)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, SetMute)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret;
     bool isSupport = false;
 
     for (auto _ : state) {
         ret = capture_->SetMute(capture_, isSupport);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_SUCCESS);
+#else
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#endif
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SetMute)->
@@ -365,13 +402,18 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SetMute)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, GetMute)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret;
     bool isSupport = true;
 
     for (auto _ : state) {
         ret = capture_->GetMute(capture_, &isSupport);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_SUCCESS);
+#else
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#endif
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetMute)->
@@ -379,11 +421,16 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetMute)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, SetVolume)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret;
     for (auto _ : state) {
         ret = capture_->SetVolume(capture_, HALF_OF_MAX_VOLUME);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_SUCCESS);
+#else
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#endif
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SetVolume)->
@@ -391,13 +438,18 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SetVolume)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, GetVolume)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret;
     float volume = 0.0;
 
     for (auto _ : state) {
         ret = capture_->GetVolume(capture_, &volume);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_SUCCESS);
+#else
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#endif
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetVolume)->
@@ -405,14 +457,19 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetVolume)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, GetGainThreshold)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret;
-    float bottom = 0;
-    float top = 0;
+    float bottom = 0.0;
+    float top = 0.0;
 
     for (auto _ : state) {
         ret = capture_->GetGainThreshold(capture_, &bottom, &top);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_SUCCESS);
+#else
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#endif
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetGainThreshold)->
@@ -420,14 +477,19 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetGainThreshold)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, SetSampleAttributes)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret;
     struct AudioSampleAttributes attrs;
     InitCaptureAttrs(attrs);
 
     for (auto _ : state) {
         ret = capture_->SetSampleAttributes(capture_, &attrs);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_SUCCESS);
+#else
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#endif
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SetSampleAttributes)->
@@ -435,13 +497,14 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SetSampleAttributes)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, GetSampleAttributes)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret;
     struct AudioSampleAttributes attrs = {};
 
     for (auto _ : state) {
         ret = capture_->GetSampleAttributes(capture_, &attrs);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
-    EXPECT_EQ(ret, HDF_SUCCESS);
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetSampleAttributes)->
@@ -449,13 +512,14 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetSampleAttributes)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, GetCurrentChannelId)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret;
     uint32_t channelId = 0;
 
     for (auto _ : state) {
         ret = capture_->GetCurrentChannelId(capture_, &channelId);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
-    EXPECT_EQ(ret, HDF_SUCCESS);
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetCurrentChannelId)->
@@ -463,14 +527,19 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetCurrentChannelId)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, SetExtraParams)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret;
     char keyValueList[AUDIO_CAPTURE_BUF_TEST] =
         "attr-route=1;attr-format=32;attr-channels=2;attr-frame-count=82;attr-sampling-rate=48000";
 
     for (auto _ : state) {
         ret = capture_->SetExtraParams(capture_, keyValueList);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_SUCCESS);
+#else
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#endif
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SetExtraParams)->
@@ -478,14 +547,19 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SetExtraParams)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, GetExtraParams)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret;
     char keyValueListReply[AUDIO_CAPTURE_BUF_TEST] = {};
     uint32_t listLenth = AUDIO_CAPTURE_BUF_TEST;
 
     for (auto _ : state) {
         ret = capture_->GetExtraParams(capture_, keyValueListReply, listLenth);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_SUCCESS);
+#else
+        ASSERT_TRUE(ret == HDF_ERR_INVALID_PARAM);
+#endif
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_INVALID_PARAM);
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetExtraParams)->
@@ -493,6 +567,7 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetExtraParams)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, SelectScene)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret;
     struct AudioSceneDescriptor scene;
     scene.scene.id = AUDIO_IN_MEDIA;
@@ -501,8 +576,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, SelectScene)(benchmark::State &state)
 
     for (auto _ : state) {
         ret = capture_->SelectScene(capture_, &scene);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
-    EXPECT_EQ(ret, HDF_SUCCESS);
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SelectScene)->
@@ -510,13 +585,18 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SelectScene)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, SetGain)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret;
-    float gain = 1.0;
+    float gain = GAIN_VALUE;
 
     for (auto _ : state) {
         ret = capture_->SetGain(capture_, gain);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_SUCCESS);
+#else
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#endif
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SetGain)->
@@ -524,13 +604,18 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, SetGain)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, GetGain)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret;
     float gain;
 
     for (auto _ : state) {
         ret = capture_->GetGain(capture_, &gain);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_SUCCESS);
+#else
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#endif
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetGain)->
@@ -538,6 +623,7 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetGain)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, GetMmapPosition)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret;
     uint64_t frames = 0;
     struct AudioTimeStamp time;
@@ -546,8 +632,12 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, GetMmapPosition)(benchmark::State &state)
 
     for (auto _ : state) {
         ret = capture_->GetMmapPosition(capture_, &frames, &time);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_SUCCESS);
+#else
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#endif
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetMmapPosition)->
@@ -555,13 +645,14 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetMmapPosition)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, GetFrameSize)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret;
     uint64_t frameSize = 0;
 
     for (auto _ : state) {
         ret = capture_->GetFrameSize(capture_, &frameSize);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
-    EXPECT_EQ(ret, HDF_SUCCESS);
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetFrameSize)->
@@ -569,13 +660,14 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetFrameSize)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, GetFrameCount)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret;
     uint64_t frameCount = 0;
 
     for (auto _ : state) {
         ret = capture_->GetFrameCount(capture_, &frameCount);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
-    EXPECT_EQ(ret, HDF_SUCCESS);
 }
 
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetFrameCount)->
@@ -583,6 +675,7 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, GetFrameCount)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, CheckSceneCapability)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret;
     bool supported = false;
     struct AudioSceneDescriptor scenes = {};
@@ -591,8 +684,8 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, CheckSceneCapability)(benchmark::State &s
     scenes.desc.desc = strdup("mic");
     for (auto _ : state) {
         ret = capture_->CheckSceneCapability(capture_, &scenes, &supported);
+        EXPECT_EQ(HDF_SUCCESS, ret);
     }
-    EXPECT_EQ(HDF_SUCCESS, ret);
     free(scenes.desc.desc);
 }
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, CheckSceneCapability)->
@@ -600,12 +693,13 @@ BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, CheckSceneCapability)->
 
 BENCHMARK_F(AudioCaptureBenchmarkTest, ReqMmapBuffer)(benchmark::State &state)
 {
+    ASSERT_NE(capture_, nullptr);
     int32_t ret;
     struct AudioMmapBufferDescriptor desc = {0};
     for (auto _ : state) {
         ret = capture_->ReqMmapBuffer(capture_, MMAP_SUGGUEST_REQ_SIZE, &desc);
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT ||ret == HDF_ERR_INVALID_PARAM);
 }
 BENCHMARK_REGISTER_F(AudioCaptureBenchmarkTest, ReqMmapBuffer)->
     Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
@@ -618,10 +712,18 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, AddAndRemoveAudioEffect)(benchmark::State
 
     for (auto _ : state) {
         ret = capture_->AddAudioEffect(capture_, effectId);
-        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#else
+        ASSERT_TRUE(ret == HDF_ERR_INVALID_PARAM);
+#endif
 
         ret = capture_->RemoveAudioEffect(capture_, effectId);
-        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#else
+        ASSERT_TRUE(ret == HDF_ERR_INVALID_PARAM);
+#endif
     }
 }
 
@@ -636,7 +738,11 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, GetFrameBufferSize)(benchmark::State &sta
 
     for (auto _ : state) {
         ret = capture_->GetFrameBufferSize(capture_, &bufferSize);
-        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#else
+        ASSERT_TRUE(ret == HDF_ERR_INVALID_PARAM);
+#endif
     }
 }
 
@@ -652,7 +758,11 @@ BENCHMARK_F(AudioCaptureBenchmarkTest, IsSupportsPauseAndResume)(benchmark::Stat
 
     for (auto _ : state) {
         ret = capture_->IsSupportsPauseAndResume(capture_, &supportPause, &supportResume);
-        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#else
+        ASSERT_TRUE(ret == HDF_ERR_INVALID_PARAM);
+#endif
     }
 }
 

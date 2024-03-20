@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,7 +18,7 @@
 #include <gtest/gtest.h>
 #include "hdf_base.h"
 #include "osal_mem.h"
-#include "v2_0/iaudio_manager.h"
+#include "v3_0/iaudio_manager.h"
 
 using namespace testing::ext;
 using namespace std;
@@ -48,7 +48,7 @@ public:
     void InitAttrs(struct AudioSampleAttributes &attrs);
     void InitDevDesc(struct AudioDeviceDescriptor &devDesc);
     void AudioAdapterDescriptorFree(struct AudioAdapterDescriptor *dataBlock, bool freeSelf);
-    void ReleaseAdapterDescs(struct AudioAdapterDescriptor **descs, uint32_t descsLen);
+    void ReleaseAdapterDescs(struct AudioAdapterDescriptor *descs, uint32_t descsLen);
 };
 
 void AudioAdapterBenchmarkTest::AudioAdapterDescriptorFree(struct AudioAdapterDescriptor *dataBlock, bool freeSelf)
@@ -71,17 +71,15 @@ void AudioAdapterBenchmarkTest::AudioAdapterDescriptorFree(struct AudioAdapterDe
     }
 }
 
-void AudioAdapterBenchmarkTest::ReleaseAdapterDescs(struct AudioAdapterDescriptor **descs, uint32_t descsLen)
+void AudioAdapterBenchmarkTest::ReleaseAdapterDescs(struct AudioAdapterDescriptor *descs, uint32_t descsLen)
 {
-    if ((descsLen > 0) && (descs != nullptr) && ((*descs) == nullptr)) {
+    if ((descs == nullptr) || (descsLen == 0)) {
         return;
     }
 
     for (uint32_t i = 0; i < descsLen; i++) {
-        AudioAdapterDescriptorFree(&(*descs)[i], false);
+        AudioAdapterDescriptorFree(&descs[i], false);
     }
-    OsalMemFree(*descs);
-    *descs = nullptr;
 }
 
 void AudioAdapterBenchmarkTest::InitAttrs(struct AudioSampleAttributes &attrs)
@@ -123,17 +121,17 @@ void AudioAdapterBenchmarkTest::SetUp(const ::benchmark::State &state)
 
     ASSERT_EQ(HDF_SUCCESS, manager_->GetAllAdapters(manager_, adapterDescs_, &size));
     if (size > g_audioAdapterNumMax) {
-        ReleaseAdapterDescs(&adapterDescs_, g_audioAdapterNumMax);
+        ReleaseAdapterDescs(adapterDescs_, g_audioAdapterNumMax);
         ASSERT_LT(size, g_audioAdapterNumMax);
     }
 
     if (manager_->LoadAdapter(manager_, &adapterDescs_[0], &adapter_) != HDF_SUCCESS) {
-        ReleaseAdapterDescs(&adapterDescs_, g_audioAdapterNumMax);
+        ReleaseAdapterDescs(adapterDescs_, g_audioAdapterNumMax);
         ASSERT_TRUE(false);
     }
 
     if (adapter_ == nullptr) {
-        ReleaseAdapterDescs(&adapterDescs_, g_audioAdapterNumMax);
+        ReleaseAdapterDescs(adapterDescs_, g_audioAdapterNumMax);
         ASSERT_TRUE(false);
     }
 }
@@ -144,7 +142,7 @@ void AudioAdapterBenchmarkTest::TearDown(const ::benchmark::State &state)
     ASSERT_NE(adapter_, nullptr);
 
     manager_->UnloadAdapter(manager_, adapterDescs_[0].adapterName);
-    ReleaseAdapterDescs(&adapterDescs_, g_audioAdapterNumMax);
+    ReleaseAdapterDescs(adapterDescs_, g_audioAdapterNumMax);
     adapter_ = nullptr;
     IAudioManagerRelease(manager_, false);
     manager_ = nullptr;
@@ -152,18 +150,20 @@ void AudioAdapterBenchmarkTest::TearDown(const ::benchmark::State &state)
 
 BENCHMARK_F(AudioAdapterBenchmarkTest, InitAllPorts)(benchmark::State &state)
 {
+    ASSERT_NE(adapter_, nullptr);
     int32_t ret;
     for (auto _ : state) {
         ret = adapter_->InitAllPorts(adapter_);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
-    EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
 BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, InitAllPorts)->
     Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
 
-BENCHMARK_F(AudioAdapterBenchmarkTest, CreateRender)(benchmark::State &state)
+BENCHMARK_F(AudioAdapterBenchmarkTest, CreateRenderAndDestroyRender)(benchmark::State &state)
 {
+    ASSERT_NE(adapter_, nullptr);
     int32_t ret;
     struct IAudioRender *render = nullptr;
     struct AudioDeviceDescriptor devicedesc = {};
@@ -181,16 +181,17 @@ BENCHMARK_F(AudioAdapterBenchmarkTest, CreateRender)(benchmark::State &state)
             attrs.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
             ASSERT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
         }
-        ret = adapter_->DestroyRender(adapter_, renderId_);
-    }
+    ret = adapter_->DestroyRender(adapter_, renderId_);
     EXPECT_EQ(HDF_SUCCESS, ret);
+    }
 }
 
-BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, CreateRender)->
+BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, CreateRenderAndDestroyRender)->
     Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
 
-BENCHMARK_F(AudioAdapterBenchmarkTest, CreateCapture)(benchmark::State &state)
+BENCHMARK_F(AudioAdapterBenchmarkTest, CreateCaptureAndDestroyCapture)(benchmark::State &state)
 {
+    ASSERT_NE(adapter_, nullptr);
     int32_t ret;
     struct IAudioCapture *capture = nullptr;
     struct AudioDeviceDescriptor devicedesc = {};
@@ -207,16 +208,17 @@ BENCHMARK_F(AudioAdapterBenchmarkTest, CreateCapture)(benchmark::State &state)
             attrs.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
             ASSERT_EQ(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
         }
-        ret = adapter_->DestroyCapture(adapter_, captureId_);
-    }
+    ret = adapter_->DestroyCapture(adapter_, captureId_);
     EXPECT_EQ(HDF_SUCCESS, ret);
+    }
 }
 
-BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, CreateCapture)->
+BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, CreateCaptureAndDestroyCapture)->
     Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
 
 BENCHMARK_F(AudioAdapterBenchmarkTest, GetPortCapability)(benchmark::State &state)
 {
+    ASSERT_NE(adapter_, nullptr);
     int32_t ret;
     struct AudioPort port = {};
     struct AudioPortCapability capability = {};
@@ -226,8 +228,12 @@ BENCHMARK_F(AudioAdapterBenchmarkTest, GetPortCapability)(benchmark::State &stat
 
     for (auto _ : state) {
         ret = adapter_->GetPortCapability(adapter_, &port, &capability);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_SUCCESS);
+#else
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#endif
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, GetPortCapability)->
@@ -235,6 +241,7 @@ BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, GetPortCapability)->
 
 BENCHMARK_F(AudioAdapterBenchmarkTest, SetPassthroughMode)(benchmark::State &state)
 {
+    ASSERT_NE(adapter_, nullptr);
     int32_t ret;
     struct AudioPort port = {};
     port.dir = PORT_OUT;
@@ -244,8 +251,8 @@ BENCHMARK_F(AudioAdapterBenchmarkTest, SetPassthroughMode)(benchmark::State &sta
 
     for (auto _ : state) {
         ret = adapter_->SetPassthroughMode(adapter_, &port, mode);
+        ASSERT_TRUE(ret == HDF_FAILURE);
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
 }
 
 BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, SetPassthroughMode)->
@@ -253,6 +260,7 @@ BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, SetPassthroughMode)->
 
 BENCHMARK_F(AudioAdapterBenchmarkTest, GetPassthroughMode)(benchmark::State &state)
 {
+    ASSERT_NE(adapter_, nullptr);
     int32_t ret;
     struct AudioPort port = {};
     port.dir = PORT_OUT;
@@ -262,8 +270,8 @@ BENCHMARK_F(AudioAdapterBenchmarkTest, GetPassthroughMode)(benchmark::State &sta
 
     for (auto _ : state) {
         ret = adapter_->GetPassthroughMode(adapter_, &port, &mode);
+        ASSERT_TRUE(ret == HDF_FAILURE);
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_FAILURE);
 }
 
 BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, GetPassthroughMode)->
@@ -271,13 +279,14 @@ BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, GetPassthroughMode)->
 
 BENCHMARK_F(AudioAdapterBenchmarkTest, GetDeviceStatus)(benchmark::State &state)
 {
+    ASSERT_NE(adapter_, nullptr);
     int32_t ret;
     struct AudioDeviceStatus status = {};
 
     for (auto _ : state) {
         ret = adapter_->GetDeviceStatus(adapter_, &status);
+        EXPECT_EQ(HDF_SUCCESS, ret);
     }
-    EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
 BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, GetDeviceStatus)->
@@ -285,13 +294,18 @@ BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, GetDeviceStatus)->
 
 BENCHMARK_F(AudioAdapterBenchmarkTest, SetMicMute)(benchmark::State &state)
 {
+    ASSERT_NE(adapter_, nullptr);
     int32_t ret;
     bool mute = false;
 
     for (auto _ : state) {
         ret = adapter_->SetMicMute(adapter_, mute);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#else
+        ASSERT_TRUE(ret == HDF_SUCCESS);
+#endif
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, SetMicMute)->
@@ -299,13 +313,18 @@ BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, SetMicMute)->
 
 BENCHMARK_F(AudioAdapterBenchmarkTest, GetMicMute)(benchmark::State &state)
 {
+    ASSERT_NE(adapter_, nullptr);
     int32_t ret;
     bool mute = false;
 
     for (auto _ : state) {
         ret = adapter_->GetMicMute(adapter_, &mute);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#else
+        ASSERT_TRUE(ret == HDF_SUCCESS);
+#endif
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, GetMicMute)->
@@ -313,13 +332,18 @@ BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, GetMicMute)->
 
 BENCHMARK_F(AudioAdapterBenchmarkTest, SetVoiceVolume)(benchmark::State &state)
 {
+    ASSERT_NE(adapter_, nullptr);
     int32_t ret;
     float volume = 0;
 
     for (auto _ : state) {
         ret = adapter_->SetVoiceVolume(adapter_, volume);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#else
+        ASSERT_TRUE(ret == HDF_SUCCESS);
+#endif
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, SetVoiceVolume)->
@@ -327,6 +351,7 @@ BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, SetVoiceVolume)->
 
 BENCHMARK_F(AudioAdapterBenchmarkTest, SetExtraParams)(benchmark::State &state)
 {
+    ASSERT_NE(adapter_, nullptr);
     int32_t ret;
     enum AudioExtParamKey key = AUDIO_EXT_PARAM_KEY_LOWPOWER;
     char condition[AUDIO_ADAPTER_BUF_TEST];
@@ -334,8 +359,12 @@ BENCHMARK_F(AudioAdapterBenchmarkTest, SetExtraParams)(benchmark::State &state)
 
     for (auto _ : state) {
         ret = adapter_->SetExtraParams(adapter_, key, condition, value);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#else
+        ASSERT_TRUE(ret == HDF_SUCCESS);
+#endif
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, SetExtraParams)->
@@ -343,6 +372,7 @@ BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, SetExtraParams)->
 
 BENCHMARK_F(AudioAdapterBenchmarkTest, GetExtraParams)(benchmark::State &state)
 {
+    ASSERT_NE(adapter_, nullptr);
     int32_t ret;
     enum AudioExtParamKey key = AUDIO_EXT_PARAM_KEY_NONE;
     char condition[AUDIO_ADAPTER_BUF_TEST];
@@ -350,8 +380,12 @@ BENCHMARK_F(AudioAdapterBenchmarkTest, GetExtraParams)(benchmark::State &state)
     uint32_t valueLen = AUDIO_ADAPTER_BUF_TEST;
     for (auto _ : state) {
         ret = adapter_->GetExtraParams(adapter_, key, condition, value, valueLen);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+#else
+        ASSERT_TRUE(ret == HDF_FAILURE);
+#endif
     }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, GetExtraParams)->
@@ -398,7 +432,11 @@ BENCHMARK_F(AudioAdapterBenchmarkTest, RegExtraParamObserver)(benchmark::State &
 
     for (auto _ : state) {
         ret = adapter_->RegExtraParamObserver(adapter_, audioCallback, cookie);
-        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_INVALID_PARAM);
+#ifdef DISPLAY_COMMUNITY
+        EXPECT_NE(ret, HDF_SUCCESS);
+#else
+        ASSERT_TRUE(ret == HDF_ERR_INVALID_PARAM);
+#endif
     }
 }
 

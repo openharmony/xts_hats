@@ -42,8 +42,8 @@ ohos_moduletest_suite("HatsUserIamUserAuthTest") {
 
   deps = [
     "$base_root/base/useriam/user_auth_framework/common:iam_test",
-    "$base_root/drivers/interface/user_auth/v1_3:libuser_auth_stub_1.3",
-    "$base_root/drivers/peripheral/user_auth/hdi_service:libuser_auth_interface_service_1.3",
+    "$base_root/drivers/interface/user_auth/v2_0:libuser_auth_stub_2.0",
+    "$base_root/drivers/peripheral/user_auth/hdi_service:libuser_auth_interface_service_2.0",
     "$base_root/third_party/googletest:gtest_main",
     "../common:useriam_test_common",
   ]

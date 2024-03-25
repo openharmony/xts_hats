@@ -27,16 +27,16 @@ static UserAuthInterfaceService g_service;
 int32_t Expectedvalue = 0;
 static OHOS::Parcel parcel;
 
-struct HdiBeginEnrollmentV1_1List {
+struct HdiBeginEnrollmentList {
     int32_t userId[4] = {12345, 1234, 12345, 12345};
     int32_t authType[4] = {1, 0, 2, 4};
     uint32_t executorSensorHint[4] = {0, 65535, 1, 0};
 };
-struct HdiBeginAuthenticationV1_1List {
+struct HdiBeginAuthenticationList {
     uint32_t authType[4] = {0, 1, 2, 4};
     uint32_t userId[4] = {356581, 1};
 };
-struct HdiBeginIdentificationV1_1List {
+struct HdiBeginIdentificationList {
     uint32_t addExecutor[2] = {0, 1};
     uint32_t authType[4] = {0, 1, 2, 4};
 };
@@ -53,6 +53,7 @@ static void FillEnrollParam(Parcel &parcel, EnrollParam &enrollParam)
 {
     enrollParam.authType = static_cast<AuthType>(parcel.ReadInt32());
     enrollParam.executorSensorHint = parcel.ReadUint32();
+    enrollParam.userId = parcel.ReadInt32();
 }
 
 static void FillExecutorRegisterInfo(Parcel &parcel, ExecutorRegisterInfo &executorRegisterInfo)
@@ -258,14 +259,13 @@ HWTEST_F(UserIamUserAuthTestAdditional, testCloseSession003, Function | MediumTe
 HWTEST_F(UserIamUserAuthTestAdditional, testBeginEnrollment001, Function | MediumTest | Level2)
 {
     cout << "start BeginEnrollment" << endl;
-    int32_t userId = -1;
     std::vector<uint8_t> authToken;
     FillTestUint8Vector(parcel, authToken);
     EnrollParam param;
     FillEnrollParam(parcel, param);
     ScheduleInfo info;
     FillScheduleInfo(parcel, info);
-    auto ret = g_service.BeginEnrollment(userId, authToken, param, info);
+    auto ret = g_service.BeginEnrollment(authToken, param, info);
     cout << "ret is " << ret << endl;
     EXPECT_NE(ret, 0);
 }
@@ -277,7 +277,6 @@ HWTEST_F(UserIamUserAuthTestAdditional, testBeginEnrollment001, Function | Mediu
  */
 HWTEST_F(UserIamUserAuthTestAdditional, testBeginEnrollment002, Function | MediumTest | Level1)
 {
-    int32_t userId = 12345;
     uint32_t i = 0;
     uint64_t index = 0;
     std::vector<uint8_t> challenge;
@@ -287,10 +286,11 @@ HWTEST_F(UserIamUserAuthTestAdditional, testBeginEnrollment002, Function | Mediu
     ScheduleInfo scheduleInfo = {};
     ExecutorRegisterInfo info = {};
     EnrollParam param = {};
+    param.userId = 12345;
     uint32_t authType[4] = {0, 1, 2, 4};
 
     for (i = 0; i < 4; i++) {
-        EXPECT_EQ(g_service.OpenSession(userId, challenge), 0);
+        EXPECT_EQ(g_service.OpenSession(param.userId, challenge), 0);
         info.executorRole = ExecutorRole::ALL_IN_ONE;
         info.esl = ExecutorSecureLevel::ESL0;
         info.publicKey.resize(32);
@@ -299,14 +299,14 @@ HWTEST_F(UserIamUserAuthTestAdditional, testBeginEnrollment002, Function | Mediu
         param.authType = static_cast<AuthType>(authType[i]);
 
         if (i == 1) {
-            EXPECT_EQ(g_service.BeginEnrollment(userId, authToken, param, scheduleInfo), 0);
+            EXPECT_EQ(g_service.BeginEnrollment(authToken, param, scheduleInfo), 0);
 
-            EXPECT_EQ(g_service.CancelEnrollment(userId), 0);
+            EXPECT_EQ(g_service.CancelEnrollment(param.userId), 0);
         } else {
-            EXPECT_NE(g_service.BeginEnrollment(userId, authToken, param, scheduleInfo), 0);
+            EXPECT_NE(g_service.BeginEnrollment(authToken, param, scheduleInfo), 0);
         }
         EXPECT_EQ(g_service.DeleteExecutor(index), 0);
-        EXPECT_EQ(g_service.CloseSession(userId), 0);
+        EXPECT_EQ(g_service.CloseSession(param.userId), 0);
     }
 }
 /**
@@ -351,7 +351,8 @@ HWTEST_F(UserIamUserAuthTestAdditional, testCancelEnrollment002, Function | Medi
         EXPECT_EQ(g_service.AddExecutor(info, index, publicKey, templateIds), 0);
 
         param.authType = AuthType::PIN;
-        EXPECT_EQ(g_service.BeginEnrollment(userId[i], authToken, param, scheduleInfo), 0);
+        param.userId = userId[i];
+        EXPECT_EQ(g_service.BeginEnrollment(authToken, param, scheduleInfo), 0);
 
         EXPECT_EQ(g_service.CancelEnrollment(userId[i]), 0);
         EXPECT_EQ(g_service.DeleteExecutor(index), 0);
@@ -383,9 +384,10 @@ HWTEST_F(UserIamUserAuthTestAdditional, testCancelEnrollment006, Function | Medi
 
     std::vector<uint8_t> authToken;
     EnrollParam param = {};
+    param.userId = userId;
     param.authType = AuthType::PIN;
     ScheduleInfo scheduleInfo = {};
-    EXPECT_EQ(g_service.BeginEnrollment(userId, authToken, param, scheduleInfo), 0);
+    EXPECT_EQ(g_service.BeginEnrollment(authToken, param, scheduleInfo), 0);
 
     EXPECT_EQ(g_service.CancelEnrollment(userId), 0);
     while (i < 50) {
@@ -442,7 +444,7 @@ HWTEST_F(UserIamUserAuthTestAdditional, testGetUserInfo001, Function | MediumTes
     uint32_t i = 0;
     int userId[2] = {6789, -6789};
     uint64_t secureUid = parcel.ReadUint64();
-    PinSubType pinSubType = static_cast<PinSubType>(parcel.ReadUint32());
+    int32_t pinSubType = parcel.ReadInt32();
     std::vector<EnrolledInfo> infos;
 
     for (i = 0; i < 2; i++) {
@@ -477,7 +479,8 @@ HWTEST_F(UserIamUserAuthTestAdditional, testDeleteUser001, Function | MediumTest
 
     std::vector<uint8_t> authToken;
     std::vector<CredentialInfo> deletedInfos;
-    auto ret = g_service.DeleteUser(userId, authToken, deletedInfos);
+    std::vector<uint8_t> rootSecret;
+    auto ret = g_service.DeleteUser(userId, authToken, deletedInfos, rootSecret);
     cout << "ret is " << ret << endl;
     EXPECT_NE(ret, 0);
 }
@@ -495,10 +498,11 @@ HWTEST_F(UserIamUserAuthTestAdditional, testDeleteUser002, Function | MediumTest
     int32_t userId = parcel.ReadInt32();
     std::vector<uint8_t> authToken(1);
     FillTestUint8Vector(parcel, authToken);
-
+    std::vector<uint8_t> rootSecret(1);
+    FillTestUint8Vector(parcel, rootSecret);
     for (i = 0; i < 2; i++) {
         authToken[0] = num[i];
-        EXPECT_NE(g_service.DeleteUser(userId, authToken, deletedInfos), 0);
+        EXPECT_NE(g_service.DeleteUser(userId, authToken, deletedInfos, rootSecret), 0);
     }
 }
 /**
@@ -527,7 +531,6 @@ HWTEST_F(UserIamUserAuthTestAdditional, testEnforceDeleteUser001, Function | Med
 HWTEST_F(UserIamUserAuthTestAdditional, testBeginAuthentication001, Function | MediumTest | Level2)
 {
     uint32_t i = 0;
-    int32_t userId = 365861;
     uint64_t contextId[3] = {1, 0, -1};
     AuthType authType = AuthType::PIN;
     std::vector<uint8_t> challenge;
@@ -538,11 +541,12 @@ HWTEST_F(UserIamUserAuthTestAdditional, testBeginAuthentication001, Function | M
     ScheduleInfo scheduleInfo = {};
     std::vector<uint8_t> authToken;
     EnrollParam enrollParam = {};
-    AuthSolution authParam = {};
+    enrollParam.userId = 365861;
+    AuthParam authParam = {};
     std::vector<ScheduleInfo> scheduleInfos;
 
     for (i = 0; i < 3; i++) {
-        EXPECT_EQ(g_service.OpenSession(userId, challenge), 0);
+        EXPECT_EQ(g_service.OpenSession(enrollParam.userId, challenge), 0);
 
         info.authType = authType;
         info.executorRole = ExecutorRole::ALL_IN_ONE;
@@ -551,18 +555,18 @@ HWTEST_F(UserIamUserAuthTestAdditional, testBeginAuthentication001, Function | M
         EXPECT_EQ(g_service.AddExecutor(info, index, publicKey, templateIds), 0);
 
         enrollParam.authType = authType;
-        EXPECT_EQ(g_service.BeginEnrollment(userId, authToken, enrollParam, scheduleInfo), 0);
+        EXPECT_EQ(g_service.BeginEnrollment(authToken, enrollParam, scheduleInfo), 0);
 
-        authParam.userId = userId;
-        authParam.authTrustLevel = 10000;
+        authParam.baseParam.userId = enrollParam.userId;
+        authParam.baseParam.authTrustLevel = 10000;
         authParam.authType = authType;
-        authParam.executorSensorHint = 1;
-        authParam.challenge = challenge;
+        authParam.baseParam.executorSensorHint = 1;
+        authParam.baseParam.challenge = challenge;
         EXPECT_NE(g_service.BeginAuthentication(contextId[i], authParam, scheduleInfos), 0);
 
-        EXPECT_EQ(g_service.CancelEnrollment(userId), 0);
+        EXPECT_EQ(g_service.CancelEnrollment(enrollParam.userId), 0);
         EXPECT_EQ(g_service.DeleteExecutor(index), 0);
-        EXPECT_EQ(g_service.CloseSession(userId), 0);
+        EXPECT_EQ(g_service.CloseSession(enrollParam.userId), 0);
     }
 }
 /**
@@ -578,7 +582,7 @@ HWTEST_F(UserIamUserAuthTestAdditional, testBeginAuthentication004, Function | M
     uint64_t index = 0;
     uint64_t contextId = 1;
     uint32_t authTrustLevel[3] = {-1, 0, 1000};
-    AuthSolution authParam = {};
+    AuthParam authParam = {};
     ExecutorRegisterInfo info = {};
     AuthType authType = AuthType::PIN;
     std::vector<uint8_t> challenge;
@@ -595,11 +599,11 @@ HWTEST_F(UserIamUserAuthTestAdditional, testBeginAuthentication004, Function | M
         info.publicKey.resize(32);
         EXPECT_EQ(g_service.AddExecutor(info, index, publicKey, templateIds), 0);
 
-        authParam.userId = userId;
-        authParam.authTrustLevel = authTrustLevel[i];
+        authParam.baseParam.userId = userId;
+        authParam.baseParam.authTrustLevel = authTrustLevel[i];
         authParam.authType = authType;
-        authParam.executorSensorHint = 1;
-        authParam.challenge = challenge;
+        authParam.baseParam.executorSensorHint = 1;
+        authParam.baseParam.challenge = challenge;
         EXPECT_NE(g_service.BeginAuthentication(contextId, authParam, scheduleInfos), 0);
 
         EXPECT_EQ(g_service.DeleteExecutor(index), 0);
@@ -618,9 +622,10 @@ HWTEST_F(UserIamUserAuthTestAdditional, testUpdateAuthenticationResult001, Funct
     uint64_t contextId[3] = {-1, 0, 1234567};
     std::vector<uint8_t> scheduleResult;
     AuthResultInfo authResultInfo = {};
+    EnrolledState enrollState = {};
 
     for (i = 0; i < 3; i++) {
-        EXPECT_NE(g_service.UpdateAuthenticationResult(contextId[i], scheduleResult, authResultInfo), 0);
+        EXPECT_NE(g_service.UpdateAuthenticationResult(contextId[i], scheduleResult, authResultInfo, enrollState), 0);
     }
 }
 /**
@@ -636,10 +641,11 @@ HWTEST_F(UserIamUserAuthTestAdditional, testUpdateAuthenticationResult004, Funct
     uint64_t num[2] = {1, 0};
     std::vector<uint8_t> scheduleResult(100);
     AuthResultInfo authResultInfo = {};
+    EnrolledState enrollState = {};
 
     for (i = 0; i < 2; i++) {
         scheduleResult.insert(scheduleResult.begin(), 100, num[i]);
-        EXPECT_NE(g_service.UpdateAuthenticationResult(contextId, scheduleResult, authResultInfo), 0);
+        EXPECT_NE(g_service.UpdateAuthenticationResult(contextId, scheduleResult, authResultInfo, enrollState), 0);
     }
 }
 /**
@@ -854,9 +860,10 @@ HWTEST_F(UserIamUserAuthTestAdditional, testGetAuthTrustLevel005, Function | Med
 
     std::vector<uint8_t> authToken;
     EnrollParam param = {};
+    param.userId = userId;
     param.authType = AuthType::PIN;
     ScheduleInfo scheduleInfo = {};
-    EXPECT_EQ(g_service.BeginEnrollment(userId, authToken, param, scheduleInfo), 0);
+    EXPECT_EQ(g_service.BeginEnrollment(authToken, param, scheduleInfo), 0);
 
     AuthType authType = AuthType::PIN;
     uint32_t authTrustLevel = 0;
@@ -874,7 +881,7 @@ HWTEST_F(UserIamUserAuthTestAdditional, testGetAuthTrustLevel005, Function | Med
 HWTEST_F(UserIamUserAuthTestAdditional, testBeginEnrollmentV1_1_001, Function | MediumTest | Level2)
 {
     uint32_t i = 0;
-    HdiBeginEnrollmentV1_1List g_hdiBeginEnrollmentV1_1List;
+    HdiBeginEnrollmentList g_hdiBeginEnrollmentV1_1List;
     uint32_t userId = g_hdiBeginEnrollmentV1_1List.userId[i];
     std::vector<uint8_t> challenge;
     EXPECT_EQ(g_service.OpenSession(userId, challenge), 0);
@@ -889,7 +896,7 @@ HWTEST_F(UserIamUserAuthTestAdditional, testBeginEnrollmentV1_1_001, Function | 
 
     std::vector<uint8_t> authToken;
     EnrollParam param = {};
-    ScheduleInfoV1_1 scheduleInfo = {};
+    ScheduleInfo scheduleInfo = {};
 
     for (i = 0; i < 4; i++) {
         info.authType = static_cast<AuthType>(g_hdiBeginEnrollmentV1_1List.authType[i]);
@@ -897,11 +904,11 @@ HWTEST_F(UserIamUserAuthTestAdditional, testBeginEnrollmentV1_1_001, Function | 
 
         param.authType = static_cast<AuthType>(g_hdiBeginEnrollmentV1_1List.authType[i]);
         param.executorSensorHint = g_hdiBeginEnrollmentV1_1List.executorSensorHint[i];
-        userId = g_hdiBeginEnrollmentV1_1List.userId[i];
+        param.userId = g_hdiBeginEnrollmentV1_1List.userId[i];
         if (i == 0) {
-            EXPECT_EQ(g_service.BeginEnrollmentV1_1(userId, authToken, param, scheduleInfo), 0);
+            EXPECT_EQ(g_service.BeginEnrollment(authToken, param, scheduleInfo), 0);
         } else {
-            EXPECT_NE(g_service.BeginEnrollmentV1_1(userId, authToken, param, scheduleInfo), 0);
+            EXPECT_NE(g_service.BeginEnrollment(authToken, param, scheduleInfo), 0);
         }
 
         EXPECT_EQ(g_service.CancelEnrollment(userId), 0);
@@ -919,7 +926,7 @@ HWTEST_F(UserIamUserAuthTestAdditional, testBeginAuthenticationV1_1_001, Functio
 {
     uint32_t i = 0;
     uint32_t j;
-    HdiBeginAuthenticationV1_1List g_hdiBeginAuthenticationV1_1List;
+    HdiBeginAuthenticationList g_hdiBeginAuthenticationV1_1List;
     uint32_t userId = g_hdiBeginAuthenticationV1_1List.userId[i];
     std::vector<uint8_t> challenge;
     EXPECT_EQ(g_service.OpenSession(userId, challenge), 0);
@@ -932,19 +939,19 @@ HWTEST_F(UserIamUserAuthTestAdditional, testBeginAuthenticationV1_1_001, Functio
     uint64_t index = 0;
 
     uint64_t contextId = 1;
-    AuthSolution authParam = {};
-    authParam.authTrustLevel = 0;
-    authParam.executorSensorHint = 0;
-    authParam.challenge = challenge;
-    std::vector<ScheduleInfoV1_1> scheduleInfos;
+    AuthParam authParam = {};
+    authParam.baseParam.authTrustLevel = 0;
+    authParam.baseParam.executorSensorHint = 0;
+    authParam.baseParam.challenge = challenge;
+    std::vector<ScheduleInfo> scheduleInfos;
 
     for (i = 0; i < 4; i++) {
         info.authType = static_cast<AuthType>(g_hdiBeginAuthenticationV1_1List.authType[i]);
         EXPECT_EQ(g_service.AddExecutor(info, index, publicKey, templateIds), 0);
         for (j = 4; j > 0; j--) {
-            authParam.userId = g_hdiBeginAuthenticationV1_1List.userId[0];
+            authParam.baseParam.userId = g_hdiBeginAuthenticationV1_1List.userId[0];
             authParam.authType = static_cast<AuthType>(g_hdiBeginAuthenticationV1_1List.authType[j - 1]);
-            EXPECT_NE(g_service.BeginAuthenticationV1_1(contextId, authParam, scheduleInfos), 0);
+            EXPECT_NE(g_service.BeginAuthentication(contextId, authParam, scheduleInfos), 0);
         }
         EXPECT_EQ(g_service.DeleteExecutor(index), 0);
     }
@@ -953,9 +960,9 @@ HWTEST_F(UserIamUserAuthTestAdditional, testBeginAuthenticationV1_1_001, Functio
         info.authType = static_cast<AuthType>(g_hdiBeginAuthenticationV1_1List.authType[i]);
         EXPECT_EQ(g_service.AddExecutor(info, index, publicKey, templateIds), 0);
 
-        authParam.userId = g_hdiBeginAuthenticationV1_1List.userId[i];
+        authParam.baseParam.userId = g_hdiBeginAuthenticationV1_1List.userId[i];
         authParam.authType = static_cast<AuthType>(g_hdiBeginAuthenticationV1_1List.authType[i]);
-        EXPECT_NE(g_service.BeginAuthenticationV1_1(contextId, authParam, scheduleInfos), 0);
+        EXPECT_NE(g_service.BeginAuthentication(contextId, authParam, scheduleInfos), 0);
     }
     EXPECT_EQ(g_service.CloseSession(userId), 0);
 }
@@ -969,7 +976,7 @@ HWTEST_F(UserIamUserAuthTestAdditional, testBeginIdentificationV1_1_001, Functio
 {
     uint32_t i = 0;
     uint32_t j = 0;
-    HdiBeginIdentificationV1_1List g_hdiBeginIdentificationV1_1List;
+    HdiBeginIdentificationList g_hdiBeginIdentificationV1_1List;
 
     ExecutorRegisterInfo info = {};
     info.authType = AuthType::FACE;
@@ -984,7 +991,7 @@ HWTEST_F(UserIamUserAuthTestAdditional, testBeginIdentificationV1_1_001, Functio
     AuthType authType = AuthType::FACE;
     std::vector<uint8_t> challenge;
     uint32_t executorSensorHint = 0;
-    ScheduleInfoV1_1 scheduleInfo = {};
+    ScheduleInfo scheduleInfo = {};
 
     for (i = 0; i < 2; i++) {
         for (j = 0; j < 4; j++) {
@@ -992,11 +999,11 @@ HWTEST_F(UserIamUserAuthTestAdditional, testBeginIdentificationV1_1_001, Functio
             if (i == 1 && authType == AuthType::FACE) {
                 EXPECT_EQ(g_service.AddExecutor(info, index, publicKey, templateIds), 0);
                 EXPECT_EQ(
-                    g_service.BeginIdentificationV1_1(contextId, authType, challenge, executorSensorHint, scheduleInfo),
+                    g_service.BeginIdentification(contextId, authType, challenge, executorSensorHint, scheduleInfo),
                     0);
             } else {
                 EXPECT_NE(
-                    g_service.BeginIdentificationV1_1(contextId, authType, challenge, executorSensorHint, scheduleInfo),
+                    g_service.BeginIdentification(contextId, authType, challenge, executorSensorHint, scheduleInfo),
                     0);
             }
         }
@@ -1101,9 +1108,9 @@ HWTEST_F(UserIamUserAuthTestAdditional, testBeginIdentification016, Function | M
 HWTEST_F(UserIamUserAuthTestAdditional, testGetValidSolution001, Function | MediumTest | Level2)
 {
     int32_t userId = parcel.ReadInt32();
-    std::vector<AuthType> authTypes = {AuthType::ALL, AuthType::PIN, AuthType::FACE, AuthType::FINGERPRINT};
+    std::vector<int32_t> authTypes = {AuthType::ALL, AuthType::PIN, AuthType::FACE, AuthType::FINGERPRINT};
     uint32_t authTrustLevel = 0;
-    std::vector<AuthType> validTypes;
+    std::vector<int32_t> validTypes;
     EXPECT_NE(g_service.GetValidSolution(userId, authTypes, authTrustLevel, validTypes), 0);
 }
 /**

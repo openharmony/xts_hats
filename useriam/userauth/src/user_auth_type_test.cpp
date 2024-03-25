@@ -53,10 +53,10 @@ void UserAuthTypeTest::TearDown()
 HWTEST_F(UserAuthTypeTest, Security_IAM_UserAuth_HDI_FUNC_0201, Function | MediumTest | Level1)
 {
     cout << "start test AuthType" << endl;
-    AuthType all = ALL;
-    AuthType pin = PIN;
-    AuthType face = FACE;
-    AuthType fingerprint = FINGERPRINT;
+    int32_t all = ALL;
+    int32_t pin = PIN;
+    int32_t face = FACE;
+    int32_t fingerprint = FINGERPRINT;
     EXPECT_EQ(all, 0);
     EXPECT_EQ(pin, 1);
     EXPECT_EQ(face, 2);

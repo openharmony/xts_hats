@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -22,10 +22,11 @@
 #include <securec.h>
 #include "hdf_base.h"
 #include "osal_time.h"
-#include "v1_1/ivibrator_interface.h"
+#include "v1_2/ivibrator_interface.h"
 #include "parameters.h"
 
-using namespace OHOS::HDI::Vibrator::V1_1;
+using namespace OHOS::HDI::Vibrator;
+using namespace OHOS::HDI::Vibrator::V1_2;
 using namespace testing::ext;
 using namespace std;
 
@@ -35,9 +36,13 @@ namespace {
     uint32_t g_sleepTime2 = 2;
     int32_t g_intensity1 = 3;
     int32_t g_frequency1 = 20;
+    int32_t g_intensity3 = 60;
+    V1_2::HapticPaket g_pkg = {434, 1, {{V1_2::CONTINUOUS, 0, 149, 100, 50, 0, 4,
+        {{0, 0, 0}, {1, 1, 0}, {32, 1, -39}, {149, 0, -39}}}}};
     std::string g_timeSequence = "haptic.clock.timer";
     std::string g_builtIn = "haptic.default.effect";
     std::string g_arbitraryStr = "arbitraryString";
+    std::string g_effect1 = "haptic.long_press.light";
     sptr<IVibratorInterface> g_vibratorInterface = nullptr;
 
 class vibratorBenchmarkTest : public benchmark::Fixture {
@@ -214,7 +219,7 @@ BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0500
   * @tc.desc: Start periodic vibration with custom composite effect
   * @tc.type: FUNC
   */
- BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0600)(benchmark::State &state)
+BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0600)(benchmark::State &state)
 {
   
         PrimitiveEffect primitiveEffect1 { 0, 60007, 0};
@@ -242,6 +247,7 @@ BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0500
         }
         OsalMSleep(2);
 }
+
 BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0600)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
@@ -260,6 +266,7 @@ BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0700)(benchma
     }
     EXPECT_EQ(HDF_SUCCESS, ret);
 }
+
 BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0700)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
@@ -268,16 +275,131 @@ BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0700
   * @tc.desc: Get vibration status.
   * @tc.type: FUNC
   */
- BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0800)(benchmark::State &state)
+BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0800)(benchmark::State &state)
 {
     ASSERT_NE(nullptr, g_vibratorInterface); 
-    bool stat {false};  
+    bool stat {false};
     for (auto _ : state) {
     g_vibratorInterface -> IsVibratorRunning(stat);
     }
 }
+
 BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0800)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
+/**
+  * @tc.name: SUB_DriverSystem_VibratorBenchmark_0090
+  * @tc.desc: Get vibration status.
+  * @tc.type: FUNC
+  */
+BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0900)(benchmark::State &state)
+{
+    ASSERT_NE(nullptr, g_vibratorInterface);
+    int32_t startRet;
+    for (auto _ : state) {
+    startRet = g_vibratorInterface->StartByIntensity(g_effect1, g_intensity3);
+    }
+    EXPECT_EQ(startRet, HDF_SUCCESS);
+
+    int32_t endRet = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_PRESET);
+    EXPECT_EQ(endRet, HDF_SUCCESS);
 }
 
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0900)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
+/**
+  * @tc.name: SUB_DriverSystem_VibratorBenchmark_0100
+  * @tc.desc: Get vibration status.
+  * @tc.type: FUNC
+  */
+BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_1000)(benchmark::State &state)
+{
+    ASSERT_NE(nullptr, g_vibratorInterface);
+    int32_t startRet;
+    for (auto _ : state) {
+    startRet = g_vibratorInterface->PlayHapticPattern(g_pkg);
+    }
+    EXPECT_EQ(startRet, HDF_SUCCESS);
+
+    int32_t endRet = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_ONCE);
+    EXPECT_EQ(endRet, HDF_SUCCESS);
+}
+
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_1000)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
+/**
+  * @tc.name: SUB_DriverSystem_VibratorBenchmark_0110
+  * @tc.desc: Get vibration status.
+  * @tc.type: FUNC
+  */
+BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_1100)(benchmark::State &state)
+{
+    ASSERT_NE(nullptr, g_vibratorInterface);
+    OHOS::HDI::Vibrator::V1_2::HapticCapacity hapticCapacity;
+    int32_t startRet;
+    for (auto _ : state) {
+    startRet = g_vibratorInterface->GetHapticCapacity(hapticCapacity);
+    }
+    EXPECT_EQ(startRet, HDF_SUCCESS);
+    printf("hapticCapacity.isSupportHdHaptic = %d\n", hapticCapacity.isSupportHdHaptic);
+    printf("hapticCapacity.isSupportPresetMapping = %d\n", hapticCapacity.isSupportPresetMapping);
+    printf("hapticCapacity.isSupportTimeDelay = %d\n", hapticCapacity.isSupportTimeDelay);
+
+    int32_t endRet = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_ONCE);
+    EXPECT_EQ(endRet, HDF_SUCCESS);
+}
+
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_1100)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
+/**
+  * @tc.name: SUB_DriverSystem_VibratorBenchmark_0120
+  * @tc.desc: Get vibration status.
+  * @tc.type: FUNC
+  */
+BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_1200)(benchmark::State &state)
+{
+    ASSERT_NE(nullptr, g_vibratorInterface);
+    int32_t startUpTime;
+    int32_t mode = 0;
+    int32_t startRet;
+    for (auto _ : state) {
+    startRet = g_vibratorInterface->GetHapticStartUpTime(mode, startUpTime);
+    }
+    EXPECT_EQ(startRet, HDF_SUCCESS);
+    printf("startUpTime = %d\n", startUpTime);
+
+    int32_t endRet = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_ONCE);
+    EXPECT_EQ(endRet, HDF_SUCCESS);
+}
+
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_1200)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+
+/**
+  * @tc.name: SUB_DriverSystem_VibratorBenchmark_0130
+  * @tc.desc: Get vibration status.
+  * @tc.type: FUNC
+  */
+BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_1300)(benchmark::State &state)
+{
+    ASSERT_NE(nullptr, g_vibratorInterface);
+    int32_t startRet;
+    int32_t endRet;
+    for (auto _ : st) {
+    startRet = g_vibratorInterface->StartOnce(g_duration);
+
+    OsalMSleep(g_sleepTime1);
+
+    endRet = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_ONCE);
+    }
+    EXPECT_EQ(startRet, HDF_SUCCESS);
+    EXPECT_EQ(endRet, HDF_SUCCESS);
+}
+
+BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_1300)->
+    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+}
 BENCHMARK_MAIN();

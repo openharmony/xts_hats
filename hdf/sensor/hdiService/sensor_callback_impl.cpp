@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,10 +12,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+#include <cmath>
+#include "osal_mem.h"
 #include "sensor_callback_impl.h"
 #include "sensor_type.h"
-#include "osal_mem.h"
 
 namespace OHOS {
 namespace HDI {
@@ -38,7 +38,7 @@ namespace {
 
     struct SensorValueRange g_testRange[] = {{1e5, 0.0}};
     struct SensorValueRange g_accelRange[] = {{78.0, -78.0}, {78.0, -78.0}, {78.0, -78.0}};
-    struct SensorValueRange g_alsRange[] = {{10000.0, 0.0}};
+    struct SensorValueRange g_alsRange[] = {{10000000.0, 0.0}};
     struct SensorValueRange g_pedometerRange[] = {{10000.0, 0.0}};
     struct SensorValueRange g_proximityRange[] = {{5.0, 0.0}};
     struct SensorValueRange g_hallRange[] = {{2.0, 0.0}};
@@ -46,6 +46,8 @@ namespace {
     struct SensorValueRange g_magneticRange[] = {{2000.0, -2000.0}, {2000.0, -2000.0}, {2000.0, -2000.0}};
     struct SensorValueRange g_gyroscopeRange[] = {{35.0, -35.0}, {35.0, -35.0}, {35.0, -35.0}};
     struct SensorValueRange g_gravityRange[] = {{78.0, -78.0}, {78.0, -78.0}, {78.0, -78.0}};
+    struct SensorValueRange g_humidityRange[] = {{100, 0}};
+    struct SensorValueRange g_temperatureRange[] = {{125, -40}};
 
     struct SensorDevelopmentList g_sensorList[] = {
         {SENSOR_TYPE_NONE, "sensor_test",  1, 1, g_testRange},
@@ -57,19 +59,20 @@ namespace {
         {SENSOR_TYPE_AMBIENT_LIGHT, "als", 1, 1, g_alsRange},
         {SENSOR_TYPE_MAGNETIC_FIELD, "magnetometer",  1, 3, g_magneticRange},
         {SENSOR_TYPE_GYROSCOPE, "gyroscope", 1, 3, g_gyroscopeRange},
-        {SENSOR_TYPE_GRAVITY, "gravity", 1, 3, g_gravityRange}
+        {SENSOR_TYPE_GRAVITY, "gravity", 1, 3, g_gravityRange},
+        {SENSOR_TYPE_HUMIDITY, "humidity", 1, 1, g_humidityRange},
+        {SENSOR_TYPE_TEMPERATURE, "tenperature", 1, 1, g_temperatureRange}
     };
 
-    constexpr int g_listNum = sizeof(g_sensorList) / sizeof(g_sensorList[0]);
+    constexpr int32_t g_listNum = sizeof(g_sensorList) / sizeof(g_sensorList[0]);
     constexpr float EPSINON = 1e-6;
 
     void SensorDataVerification(const float &data, const struct SensorDevelopmentList &sensorNode)
     {
         for (int32_t j = 0; j < sensorNode.dataDimension; ++j) {
-            printf("sensor id :[%d], data[%d]: %f\n\r", sensorNode.sensorTypeId, j + 1, *(&data + j));
             if (sensorNode.dataForm == 0) {
-                if (abs(*(&data + j) - sensorNode.valueRange[j].highThreshold) < EPSINON ||
-                    abs(*(&data + j) - sensorNode.valueRange[j].lowThreshold) < EPSINON) {
+                if (std::abs(*(&data + j) - sensorNode.valueRange[j].highThreshold) < EPSINON ||
+                    std::abs(*(&data + j) - sensorNode.valueRange[j].lowThreshold) < EPSINON) {
                     SensorCallbackImpl::sensorDataFlag &= 1;
                 } else {
                     SensorCallbackImpl::sensorDataFlag = 0;
@@ -81,7 +84,6 @@ namespace {
                 if (*(&data + j) >= sensorNode.valueRange[j].lowThreshold &&
                     *(&data + j) <= sensorNode.valueRange[j].highThreshold) {
                     SensorCallbackImpl::sensorDataFlag &= 1;
-                    printf("sensorDataFlag = 1;");
                 } else {
                     SensorCallbackImpl::sensorDataFlag = 0;
                     printf("%s: %s Not expected\n\r", __func__, sensorNode.sensorName);
@@ -94,15 +96,18 @@ namespace {
 int32_t SensorCallbackImpl::OnDataEvent(const HdfSensorEvents& event)
 {
     void *origin = OsalMemCalloc(sizeof(uint8_t) * (event.dataLen));
+    if (origin == nullptr) {
+        return HDF_FAILURE;
+    }
     uint8_t *tmp = static_cast<uint8_t*>(origin);
     uint8_t *eventData = tmp;
     for (auto value : event.data) {
        *tmp++ = value;
     }
 
-    for (int i = 0; i < g_listNum; ++i) {
+    for (int32_t i = 0; i < g_listNum; ++i) {
         if (event.sensorId == g_sensorList[i].sensorTypeId) {
-            float *data = (float*)eventData;
+            float *data = reinterpret_cast<float*>(eventData);
             SensorDataVerification(*data, g_sensorList[i]);
         }
     }

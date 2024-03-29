@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -23,7 +23,6 @@
 #include "v2_0/isensor_interface.h"
 #include "sensor_type.h"
 #include "sensor_callback_impl.h"
-
 using namespace OHOS::HDI::Sensor::V2_0;
 using namespace testing::ext;
 
@@ -32,6 +31,7 @@ namespace {
     sptr<ISensorCallback> g_traditionalCallback = new SensorCallbackImpl();
     sptr<ISensorCallback> g_medicalCallback = new SensorCallbackImpl();
     std::vector<HdfSensorInformation> g_info;
+    std::vector<HdfSensorEvents> g_events;
     struct SensorValueRange {
         float highThreshold;
         float lowThreshold;
@@ -47,7 +47,7 @@ namespace {
 
     struct SensorValueRange g_testRange[] = {{1e5, 0}};
     struct SensorValueRange g_accelRange[] = {{78, -78}, {78, -78}, {78, -78}};
-    struct SensorValueRange g_alsRange[] = {{10000, 0}};
+    struct SensorValueRange g_alsRange[] = {{10000000, 0}};
     struct SensorValueRange g_pedometerRange[] = {{10000, 0}};
     struct SensorValueRange g_proximityRange[] = {{5, 0}};
     struct SensorValueRange g_hallRange[] = {{2, 0}};
@@ -55,6 +55,8 @@ namespace {
     struct SensorValueRange g_magneticRange[] = {{2000, -2000}, {2000, -2000}, {2000, -2000}};
     struct SensorValueRange g_gyroscopeRange[] = {{35, -35}, {35, -35}, {35, -35}};
     struct SensorValueRange g_gravityRange[] = {{78, -78}, {78, -78}, {78, -78}};
+    struct SensorValueRange g_humidityRange[] = {{100, 0}};
+    struct SensorValueRange g_temperatureRange[] = {{125, -40}};
 
     struct SensorDevelopmentList g_sensorList[] = {
         {SENSOR_TYPE_NONE, "sensor_test",  1, 1, g_testRange},
@@ -66,7 +68,9 @@ namespace {
         {SENSOR_TYPE_AMBIENT_LIGHT, "als", 1, 1, g_alsRange},
         {SENSOR_TYPE_MAGNETIC_FIELD, "magnetometer",  1, 3, g_magneticRange},
         {SENSOR_TYPE_GYROSCOPE, "gyroscope", 1, 3, g_gyroscopeRange},
-        {SENSOR_TYPE_GRAVITY, "gravity", 1, 3, g_gravityRange}
+        {SENSOR_TYPE_GRAVITY, "gravity", 1, 3, g_gravityRange},
+        {SENSOR_TYPE_HUMIDITY, "humidity", 1, 1, g_humidityRange},
+        {SENSOR_TYPE_TEMPERATURE, "tenperature", 1, 1, g_temperatureRange}
     };
  
     int32_t IsSuppprtedSensorId(int32_t sensorTypeId)
@@ -82,11 +86,15 @@ namespace {
     }
    
     constexpr int g_listNum = sizeof(g_sensorList) / sizeof(g_sensorList[0]);
-    constexpr int32_t SENSOR_INTERVAL1 = 200000000;
-    constexpr int32_t SENSOR_INTERVAL2 = 20000000;
+    constexpr int64_t SENSOR_INTERVAL1 = 200000000;
+    constexpr int64_t SENSOR_INTERVAL2 = 20000000;
+    constexpr int64_t SENSOR_INTERVAL3 = 40000000;
+    constexpr int64_t SENSOR_INTERVAL4 = 20000000;
     constexpr int32_t SENSOR_POLL_TIME = 1;
     constexpr int32_t SENSOR_WAIT_TIME = 100;
+    constexpr int32_t SENSOR_WAIT_TIME2 = 20000;
     constexpr int32_t ABNORMAL_SENSORID = -1;
+    constexpr int32_t RATE_LEVEL = 50;
 }
 
 class HdfSensorHdiTest : public testing::Test {
@@ -162,9 +170,9 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_0300, TestSize.Level1)
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    int32_t ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_medicalCallback);
+    int32_t ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
-    ret = g_sensorInterface->Unregister(TRADITIONAL_SENSOR_TYPE, g_medicalCallback);
+    ret = g_sensorInterface->Unregister(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
 }
 
@@ -1138,4 +1146,326 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7000, TestSize.Level1)
     EXPECT_EQ(status,ret);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_MAX);
     EXPECT_EQ(status,ret);
+}
+
+/**
+  * @tc.name: GetSdcSensorInfo
+  * @tc.desc: Read event data for the specified sensor.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7200, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_sensorInterface);
+
+    EXPECT_GT(g_info.size(), 0);
+    std::vector<OHOS::HDI::Sensor::V2_0::SdcSensorInfo> sdcSensorInfo;
+    int32_t ret = g_sensorInterface->GetSdcSensorInfo(sdcSensorInfo);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+    std::string infoMsg = "[";
+    for (auto it : sdcSensorInfo) {
+        if (infoMsg != "[") {
+            infoMsg += ", ";
+        }
+        infoMsg += "{";
+        infoMsg += "offset = " + std::to_string(it.offset) + ", ";
+        infoMsg += "sensorId = " + std::to_string(it.sensorId) + ", ";
+        infoMsg += "ddrSize = " + std::to_string(it.ddrSize) + ", ";
+        infoMsg += "minRateLevel = " + std::to_string(it.minRateLevel) + ", ";
+        infoMsg += "maxRateLevel = " + std::to_string(it.maxRateLevel) + ", ";
+        infoMsg += "memAddr = " + std::to_string(it.memAddr) + ", ";
+        infoMsg += "reserved = " + std::to_string(it.reserved);
+        infoMsg += "}";
+    }
+    infoMsg += "]";
+}
+
+/**
+  * @tc.name: ReportFrequencyTest0001
+  * @tc.desc: Sets the sampling time and data report interval for sensors in batches.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7300, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_sensorInterface);
+
+    int32_t ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+
+    EXPECT_GT(g_info.size(), 0);
+    int32_t sensorId = g_info[0].sensorId;
+
+    ret = g_sensorInterface->SetBatch(sensorId, SENSOR_INTERVAL1, SENSOR_INTERVAL1);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+
+    ret = g_sensorInterface->Enable(sensorId);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+
+    OsalMSleep(SENSOR_WAIT_TIME2);
+
+    ret = g_sensorInterface->Disable(sensorId);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+
+    ret = g_sensorInterface->Unregister(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+
+    EXPECT_EQ(SensorCallbackImpl::sensorDataFlag, 1);
+    SensorCallbackImpl::sensorDataFlag = 1;
+}
+
+/**
+  * @tc.name: ReportFrequencyTest0002
+  * @tc.desc: Sets the sampling time and data report interval for sensors in batches.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7400, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_sensorInterface);
+
+    int32_t ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+
+    EXPECT_GT(g_info.size(), 0);
+    int32_t sensorId = g_info[0].sensorId;
+
+    ret = g_sensorInterface->SetBatch(sensorId, SENSOR_INTERVAL3, SENSOR_INTERVAL1);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+
+    ret = g_sensorInterface->Enable(sensorId);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+
+    OsalMSleep(SENSOR_WAIT_TIME2);
+
+    ret = g_sensorInterface->Disable(sensorId);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+
+    ret = g_sensorInterface->Unregister(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+
+    EXPECT_EQ(SensorCallbackImpl::sensorDataFlag, 1);
+    SensorCallbackImpl::sensorDataFlag = 1;
+}
+
+/**
+  * @tc.name: ReportFrequencyTest0003
+  * @tc.desc: Sets the sampling time and data report interval for sensors in batches.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7500, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_sensorInterface);
+
+    int32_t ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+
+    EXPECT_GT(g_info.size(), 0);
+    int32_t sensorId = g_info[0].sensorId;
+
+    ret = g_sensorInterface->SetBatch(sensorId, SENSOR_INTERVAL4, SENSOR_INTERVAL1);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+
+    ret = g_sensorInterface->Enable(sensorId);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+
+    OsalMSleep(SENSOR_WAIT_TIME2);
+
+    ret = g_sensorInterface->Disable(sensorId);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+
+    ret = g_sensorInterface->Unregister(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
+    EXPECT_EQ(SENSOR_SUCCESS, ret);
+
+    EXPECT_EQ(SensorCallbackImpl::sensorDataFlag, 1);
+    SensorCallbackImpl::sensorDataFlag = 1;
+}
+
+/**
+  * @tc.name: SetSdcSensor1
+  * @tc.desc: Read event data for the specified sensor.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7600, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_sensorInterface);
+    EXPECT_GT(g_info.size(), 0);
+        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_ELECTROCARDIOGRAPH, true, RATE_LEVEL);
+        EXPECT_NE(SENSOR_SUCCESS, ret);
+        OsalMSleep(SENSOR_WAIT_TIME);
+        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_ELECTROCARDIOGRAPH, false, RATE_LEVEL);
+        EXPECT_NE(SENSOR_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: SetSdcSensor2
+  * @tc.desc: Read event data for the specified sensor.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7700, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_sensorInterface);
+    EXPECT_GT(g_info.size(), 0);
+        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_ACCELEROMETER, true, RATE_LEVEL);
+        EXPECT_EQ(SENSOR_SUCCESS, ret);
+        OsalMSleep(SENSOR_WAIT_TIME);
+        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_ACCELEROMETER, false, RATE_LEVEL);
+        EXPECT_EQ(SENSOR_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: SetSdcSensor3
+  * @tc.desc: Read event data for the specified sensor.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7800, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_sensorInterface);
+    EXPECT_GT(g_info.size(), 0);
+        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_NONE, true, RATE_LEVEL);
+        EXPECT_EQ(SENSOR_SUCCESS, ret);
+        OsalMSleep(SENSOR_WAIT_TIME);
+        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_NONE, false, RATE_LEVEL);
+        EXPECT_EQ(SENSOR_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: SetSdcSensor4
+  * @tc.desc: Read event data for the specified sensor.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7900, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_sensorInterface);
+    EXPECT_GT(g_info.size(), 0);
+        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_GYROSCOPE, true, RATE_LEVEL);
+        EXPECT_NE(SENSOR_SUCCESS, ret);
+        OsalMSleep(SENSOR_WAIT_TIME);
+        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_GYROSCOPE, false, RATE_LEVEL);
+        EXPECT_NE(SENSOR_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: SetSdcSensor5
+  * @tc.desc: Read event data for the specified sensor.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8000, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_sensorInterface);
+    EXPECT_GT(g_info.size(), 0);
+        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_PHOTOPLETHYSMOGRAPH, true, RATE_LEVEL);
+        EXPECT_NE(SENSOR_SUCCESS, ret);
+        OsalMSleep(SENSOR_WAIT_TIME);
+        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_PHOTOPLETHYSMOGRAPH, false, RATE_LEVEL);
+        EXPECT_NE(SENSOR_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: SetSdcSensor6
+  * @tc.desc: Read event data for the specified sensor.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8100, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_sensorInterface);
+    EXPECT_GT(g_info.size(), 0);
+        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_AMBIENT_LIGHT, true, RATE_LEVEL);
+        EXPECT_NE(SENSOR_SUCCESS, ret);
+        OsalMSleep(SENSOR_WAIT_TIME);
+        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_AMBIENT_LIGHT, false, RATE_LEVEL);
+        EXPECT_NE(SENSOR_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: SetSdcSensor7
+  * @tc.desc: Read event data for the specified sensor.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8200, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_sensorInterface);
+    EXPECT_GT(g_info.size(), 0);
+        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_MAGNETIC_FIELD, true, RATE_LEVEL);
+        EXPECT_NE(SENSOR_SUCCESS, ret);
+        OsalMSleep(SENSOR_WAIT_TIME);
+        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_MAGNETIC_FIELD, false, RATE_LEVEL);
+        EXPECT_NE(SENSOR_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: SetSdcSensor8
+  * @tc.desc: Read event data for the specified sensor.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8300, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_sensorInterface);
+    EXPECT_GT(g_info.size(), 0);
+        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_CAPACITIVE, true, RATE_LEVEL);
+        EXPECT_NE(SENSOR_SUCCESS, ret);
+        OsalMSleep(SENSOR_WAIT_TIME);
+        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_CAPACITIVE, false, RATE_LEVEL);
+        EXPECT_NE(SENSOR_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: SetSdcSensor9
+  * @tc.desc: Read event data for the specified sensor.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8400, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_sensorInterface);
+    EXPECT_GT(g_info.size(), 0);
+        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_BAROMETER, true, RATE_LEVEL);
+        EXPECT_NE(SENSOR_SUCCESS, ret);
+        OsalMSleep(SENSOR_WAIT_TIME);
+        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_BAROMETER, false, RATE_LEVEL);
+        EXPECT_NE(SENSOR_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: SetSdcSensor10
+  * @tc.desc: Read event data for the specified sensor.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8500, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_sensorInterface);
+    EXPECT_GT(g_info.size(), 0);
+        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_TEMPERATURE, true, RATE_LEVEL);
+        EXPECT_NE(SENSOR_SUCCESS, ret);
+        OsalMSleep(SENSOR_WAIT_TIME);
+        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_TEMPERATURE, false, RATE_LEVEL);
+        EXPECT_NE(SENSOR_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: SetSdcSensor11
+  * @tc.desc: Read event data for the specified sensor.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8600, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_sensorInterface);
+    EXPECT_GT(g_info.size(), 0);
+        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_HALL, true, RATE_LEVEL);
+        EXPECT_NE(SENSOR_SUCCESS, ret);
+        OsalMSleep(SENSOR_WAIT_TIME);
+        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_HALL, false, RATE_LEVEL);
+        EXPECT_NE(SENSOR_SUCCESS, ret);
+}
+
+/**
+  * @tc.name: SetSdcSensor12
+  * @tc.desc: Read event data for the specified sensor.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8700, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_sensorInterface);
+    EXPECT_GT(g_info.size(), 0);
+        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_GESTURE, true, RATE_LEVEL);
+        EXPECT_NE(SENSOR_SUCCESS, ret);
+        OsalMSleep(SENSOR_WAIT_TIME);
+        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_GESTURE, false, RATE_LEVEL);
+        EXPECT_NE(SENSOR_SUCCESS, ret);
 }

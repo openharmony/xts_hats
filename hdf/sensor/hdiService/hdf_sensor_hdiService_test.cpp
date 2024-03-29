@@ -1469,5 +1469,3 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8700, TestSize.Level1)
         ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_GESTURE, false, RATE_LEVEL);
         EXPECT_NE(SENSOR_SUCCESS, ret);
 }
-
-

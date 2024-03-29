@@ -1387,7 +1387,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8200, TestSize.Level1)
         EXPECT_NE(SENSOR_SUCCESS, ret);
         OsalMSleep(SENSOR_WAIT_TIME);
         ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_MAGNETIC_FIELD, false, RATE_LEVEL);
-        EXPECT_NE(SENSOR_SUCCESS, ret);  
+        EXPECT_NE(SENSOR_SUCCESS, ret);
 }
 
 /**

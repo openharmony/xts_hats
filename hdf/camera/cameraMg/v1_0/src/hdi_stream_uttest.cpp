@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file expected in compliance with the License.
  * You may obtain a copy of the License at
@@ -751,7 +751,7 @@ HWTEST_F(HdiStreamUtTest, SUB_Driver_Camera_Merge_5300, TestSize.Level0)
     cameraTest->streamInfo->streamId_ = 2147483391;
     cameraTest->streamInfo->width_ = 1920;
     cameraTest->streamInfo->height_ = 1080;
-    cameraTest->streamInfo->format_ = PIXEL_FMT_YCRCB_420_SP;
+    cameraTest->streamInfo->format_ = cameraTest->previewFormat;
     cameraTest->streamInfo->dataspace_ = 8;
     cameraTest->streamInfo->intent_ = PREVIEW;
     cameraTest->streamInfo->tunneledMode_ = 5;

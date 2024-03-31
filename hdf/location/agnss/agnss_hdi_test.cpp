@@ -26,11 +26,9 @@
 #include "hdf_log.h"
 #include "osal_time.h"
 #include "v1_0/ia_gnss_interface.h"
-#include "agnss_interface_impl.h"
 #include "agnss_callback_impl.h"
 #include "cellular_data_client.h"
 #include "gnss_callback_impl.h"
-#include "gnss_interface_impl.h"
 
 using namespace OHOS::HDI::Location::Agnss::V1_0;
 using namespace OHOS::HDI::Location::Gnss::V1_0;

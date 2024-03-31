@@ -26,7 +26,6 @@
 #include "hdf_log.h"
 #include "osal_time.h"
 #include "v1_0/igeofence_interface.h"
-#include "geofence_interface_impl.h"
 #include "geofence_callback_impl.h"
 
 using namespace OHOS::HDI::Location::Geofence::V1_0;

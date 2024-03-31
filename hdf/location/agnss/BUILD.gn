@@ -14,7 +14,6 @@
 import("//build/ohos_var.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
-ROOT_PATH = "../../../../../../drivers/peripheral"
 LOCATION_PATH = "../"
 
 module_output_path = "hdf/location/agnss"
@@ -33,8 +32,6 @@ ohos_moduletest_suite("HatsHdfLocationagnssTest") {
       "c_utils:utils",
       "cellular_data:tel_cellular_data_api",
       "core_service:tel_core_service_api",
-
-      #"drivers_interface_location_agnss:location_agnss_idl_headers",
       "drivers_interface_location_agnss:liblocation_agnss_proxy_1.0",
       "drivers_interface_location_geofence:liblocation_geofence_proxy_1.0",
       "drivers_interface_location_gnss:liblocation_gnss_proxy_1.0",
@@ -59,8 +56,6 @@ config("hdf_agnss") {
   include_dirs = [
     "include",
     "$LOCATION_PATH/gnss",
-    "$ROOT_PATH/location/agnss/hdi_service",
-    "$ROOT_PATH/location/gnss/hdi_service",
   ]
   cflags = [
     "-Wall",

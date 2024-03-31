@@ -33,8 +33,6 @@ ohos_moduletest_suite("HatsHdfLocationgnssTest") {
   if (is_standard_system) {
     external_deps = [
       "c_utils:utils",
-
-      #"drivers_interface_location_gnss:location_gnss_idl_headers",
       "drivers_interface_location_agnss:liblocation_agnss_proxy_1.0",
       "drivers_interface_location_geofence:liblocation_geofence_proxy_1.0",
       "drivers_interface_location_gnss:liblocation_gnss_proxy_1.0",
@@ -56,11 +54,7 @@ ohos_moduletest_suite("HatsHdfLocationgnssTest") {
 }
 
 config("hdf_gnss") {
-  include_dirs = [
-    "include",
-    "${ROOT_PATH}/location/geofence/hdi_service",
-    "${ROOT_PATH}/location/gnss/hdi_service",
-  ]
+  include_dirs = [ "include" ]
   cflags = [
     "-Wall",
     "-Wextra",

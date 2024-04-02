@@ -322,7 +322,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetMute001, TestSize.Leve
     }
     isSupport = true;
     ret = capture_->GetMute(capture_, &isSupport);
-    if(ret == HDF_SUCCESS){
+    if (ret == HDF_SUCCESS) {
         ASSERT_EQ(isSupport, false);
     }
 }
@@ -1889,7 +1889,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetSampleAttributes001, Functi
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #endif
-    if(ret == HDF_SUCCESS){
+    if (ret == HDF_SUCCESS) {
         ret = capture_->GetSampleAttributes(capture_, &attrs);
         EXPECT_EQ(ret, HDF_SUCCESS);
         EXPECT_EQ(attrs.format, AUDIO_FORMAT_TYPE_PCM_16_BIT);

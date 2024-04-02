@@ -863,7 +863,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene016, Function |
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #endif
-	free(scene.desc.desc);
+    free(scene.desc.desc);
 }
 
 /**
@@ -882,7 +882,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene017, Function |
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #endif
-	free(scene.desc.desc);
+    free(scene.desc.desc);
 }
 
 /**
@@ -901,7 +901,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene018, Function |
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #endif
-	free(scene.desc.desc);
+    free(scene.desc.desc);
 }
 
 /**
@@ -920,7 +920,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene019, Function |
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #endif
-	free(scene.desc.desc);
+    free(scene.desc.desc);
 }
 
 /**
@@ -939,7 +939,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene020, Function |
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #endif
-	free(scene.desc.desc);
+    free(scene.desc.desc);
 }
 
 /**
@@ -958,7 +958,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene021, Function |
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #endif
-	free(scene.desc.desc);
+    free(scene.desc.desc);
 }
 
 /**
@@ -977,7 +977,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene022, Function |
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #endif
-	free(scene.desc.desc);
+    free(scene.desc.desc);
 }
 
 /**
@@ -996,7 +996,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene023, Function |
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #endif
-	free(scene.desc.desc);
+    free(scene.desc.desc);
 }
 
 /**
@@ -1015,7 +1015,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene024, Function |
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #endif
-	free(scene.desc.desc);
+    free(scene.desc.desc);
 }
 
 /**
@@ -1034,7 +1034,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene025, Function |
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #endif
-	free(scene.desc.desc);
+    free(scene.desc.desc);
 }
 
 /**
@@ -1053,7 +1053,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene026, Function |
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #endif
-	free(scene.desc.desc);
+    free(scene.desc.desc);
 }
 
 /**
@@ -1072,7 +1072,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene027, Function |
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #endif
-	free(scene.desc.desc);
+    free(scene.desc.desc);
 }
 
 /**
@@ -1091,7 +1091,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene028, Function |
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #endif
-	free(scene.desc.desc);
+    free(scene.desc.desc);
 }
 
 /**
@@ -1110,7 +1110,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene029, Function |
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #endif
-	free(scene.desc.desc);
+    free(scene.desc.desc);
 }
 
 /**
@@ -1129,7 +1129,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene030, Function |
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #endif
-	free(scene.desc.desc);
+    free(scene.desc.desc);
 }
 
 /**
@@ -1148,7 +1148,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene031, Function |
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #endif
-	free(scene.desc.desc);
+    free(scene.desc.desc);
 }
 
 /**
@@ -1167,7 +1167,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene032, Function |
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #endif
-	free(scene.desc.desc);
+    free(scene.desc.desc);
 }
 
 /**
@@ -1186,7 +1186,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene033, Function |
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #endif
-	free(scene.desc.desc);
+    free(scene.desc.desc);
 }
 
 /**
@@ -1205,7 +1205,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene034, Function |
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #endif
-	free(scene.desc.desc);
+    free(scene.desc.desc);
 }
 
 /**
@@ -1224,7 +1224,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene035, Function |
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #endif
-	free(scene.desc.desc);
+    free(scene.desc.desc);
 }
 
 /**
@@ -1243,7 +1243,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene036, Function |
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #endif
-	free(scene.desc.desc);
+    free(scene.desc.desc);
 }
 
 /**
@@ -1262,7 +1262,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene037, Function |
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #endif
-	free(scene.desc.desc);
+    free(scene.desc.desc);
 }
 
 /**
@@ -2433,7 +2433,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume007, TestSize.Level1
     int32_t ret;
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
     for (int i = 0; i < 50; i++) {
-#ifdef DISPLAY_COMMUNITY        
+#ifdef DISPLAY_COMMUNITY
         EXPECT_EQ(HDF_SUCCESS, render_->Pause(render_));
 #else
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Pause(render_));

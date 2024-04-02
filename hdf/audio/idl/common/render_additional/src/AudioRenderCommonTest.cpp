@@ -16,9 +16,9 @@
 #include "osal_mem.h"
 #include <gtest/gtest.h>
 
-#include "v2_0/audio_types.h"
-#include "v2_0/iaudio_manager.h"
-#include "v2_0/iaudio_render.h"
+#include "v3_0/audio_types.h"
+#include "v3_0/iaudio_manager.h"
+#include "v3_0/iaudio_render.h"
 
 using namespace std;
 using namespace testing::ext;
@@ -84,6 +84,7 @@ uint64_t AudioUtRenderTestAdditional::GetRenderBufferSize()
 
 void AudioUtRenderTestAdditional::InitRenderAttrs(struct AudioSampleAttributes &attrs)
 {
+    attrsRender_.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
     attrs.channelCount = AUDIO_RENDER_CHANNELCOUNT;
     attrs.sampleRate = AUDIO_SAMPLE_RATE_48K;
     attrs.interleaved = 0;
@@ -152,7 +153,6 @@ void AudioUtRenderTestAdditional::SetUp()
     InitRenderDevDesc(devDescRender_);
     InitRenderAttrs(attrsRender_);
 
-    attrsRender_.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
     int32_t ret = adapter_->CreateRender(adapter_, &devDescRender_, &attrsRender_, &render_, &renderId_);
     if (ret != HDF_SUCCESS) {
         attrsRender_.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
@@ -312,22 +312,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetRenderPosition001, Func
     for (i = 0; i < 1000; i++) {
         ret |= render_->GetRenderPosition(render_, &frames, &time);
     }
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
-}
-
-/**
- * @tc.number : SUB_Driver_Audio_SetRenderSpeed_0300
- * @tc.name   : testCommonRenderSetRenderSpeed001
- * @tc.desc   : Reliability of function(SetRenderSpeed)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetRenderSpeed001, Function | MediumTest | Level1)
-{
-    float speed = 2.0;
-    int i, ret = 0;
-    for (i = 0; i < 1000; i++) {
-        ret |= render_->SetRenderSpeed(render_, speed);
-    }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+#else
+    EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
+#endif
 }
 
 /**
@@ -353,64 +342,6 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetRenderSpeed003, Functio
 }
 
 /**
- * @tc.number : SUB_Driver_Audio_GetRenderSpeed_0300
- * @tc.name   : testCommonRenderGetRenderSpeed001
- * @tc.desc   : Reliability of function(GetRenderSpeed)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetRenderSpeed001, Function | MediumTest | Level1)
-{
-    float speed = 0.0;
-    int32_t ret = 0;
-    int i = 0;
-    ASSERT_EQ(HDF_SUCCESS, render_->Start(render_));
-    for (i = 0; i < 1000; i++) {
-        ret = render_->GetRenderSpeed(render_, &speed);
-    }
-    EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-}
-
-/**
- * @tc.number : SUB_Driver_Audio_SetChannelMode_0300
- * @tc.name   : testCommonRenderSetChannelMode001
- * @tc.desc   : Reliability of function(SetChannelMode)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode001, Function | MediumTest | Level1)
-{
-    AudioChannelMode mode = AUDIO_CHANNEL_NORMAL;
-    int i = 0;
-    int32_t ret = 0;
-    for (i = 0; i < 1000; i++) {
-        ret = render_->SetChannelMode(render_, mode);
-    }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-}
-
-/**
- * @tc.number : SUB_Driver_Audio_SetChannelMode_0400
- * @tc.name   : testCommonRenderSetChannelMode002
- * @tc.desc   : Test input param
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode002, Function | MediumTest | Level1)
-{
-    AudioChannelMode mode = AUDIO_CHANNEL_BOTH_LEFT;
-    int32_t ret = render_->SetChannelMode(render_, mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-}
-
-/**
- * @tc.number : SUB_Driver_Audio_SetChannelMode_0500
- * @tc.name   : testCommonRenderSetChannelMode003
- * @tc.desc   : Test input param
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode003, Function | MediumTest | Level1)
-{
-    AudioChannelMode mode = AUDIO_CHANNEL_BOTH_RIGHT;
-    int32_t ret = render_->SetChannelMode(render_, mode);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-}
-
-/**
  * @tc.number : SUB_Driver_Audio_SetChannelMode_0600
  * @tc.name   : testCommonRenderSetChannelMode004
  * @tc.desc   : Test input param
@@ -419,7 +350,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode004, Functio
 {
     AudioChannelMode mode = AUDIO_CHANNEL_EXCHANGE;
     int32_t ret = render_->SetChannelMode(render_, mode);
-    EXPECT_EQ(ret, -1);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(ret, HDF_FAILURE);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 
 /**
@@ -431,7 +366,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode005, Functio
 {
     AudioChannelMode mode = AUDIO_CHANNEL_MIX;
     int32_t ret = render_->SetChannelMode(render_, mode);
-    EXPECT_EQ(ret, -1);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(ret, HDF_FAILURE);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 
 /**
@@ -443,7 +382,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode006, Functio
 {
     AudioChannelMode mode = AUDIO_CHANNEL_LEFT_MUTE;
     int32_t ret = render_->SetChannelMode(render_, mode);
-    EXPECT_EQ(ret, -1);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(ret, HDF_FAILURE);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 
 /**
@@ -455,7 +398,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode007, Functio
 {
     AudioChannelMode mode = AUDIO_CHANNEL_RIGHT_MUTE;
     int32_t ret = render_->SetChannelMode(render_, mode);
-    EXPECT_EQ(ret, -1);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(ret, HDF_FAILURE);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 
 /**
@@ -467,7 +414,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode008, Functio
 {
     AudioChannelMode mode = AUDIO_CHANNEL_BOTH_MUTE;
     int32_t ret = render_->SetChannelMode(render_, mode);
-    EXPECT_EQ(ret, -1);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(ret, HDF_FAILURE);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 
 /**
@@ -479,67 +430,6 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode009, Functio
 {
     AudioChannelMode mode = AUDIO_CHANNEL_BOTH_MUTE;
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->SetChannelMode(nullptr, mode));
-}
-
-/**
- * @tc.number : SUB_Driver_Audio_GetChannelMode_0300
- * @tc.name   : testCommonRenderGetChannelMode001
- * @tc.desc   : Reliability of function(GetChannelMode)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetChannelMode001, Function | MediumTest | Level1)
-{
-    enum AudioChannelMode channelMode = AUDIO_CHANNEL_NORMAL;
-    int i = 0;
-    int32_t ret = 0;
-    for (i = 0; i < 1000; i++) {
-        ret = render_->GetChannelMode(render_, &channelMode);
-    }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-}
-
-/**
- * @tc.number : SUB_Driver_Audio_RegCallback_0300
- * @tc.name   : testCommonRenderRegCallback001
- * @tc.desc   : Reliability of function(RegCallback)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRegCallback001, Function | MediumTest | Level1)
-{
-    int i = 0;
-    int32_t ret = 0;
-    int8_t cookie = 0;
-    struct IAudioCallback audioCallback;
-    for (i = 0; i < 1000; i++) {
-        ret |= render_->RegCallback(render_, &audioCallback, cookie);
-    }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_INVALID_PARAM);
-}
-
-/**
- * @tc.number : SUB_Driver_Audio_RegCallback_0400
- * @tc.name   : testCommonRenderRegCallback002
- * @tc.desc   : Test input param
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRegCallback002, Function | MediumTest | Level1)
-{
-    int32_t ret = 0;
-    int8_t cookie = 127;
-    struct IAudioCallback audioCallback;
-    ret = render_->RegCallback(render_, &audioCallback, cookie);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_INVALID_PARAM);
-}
-
-/**
- * @tc.number : SUB_Driver_Audio_RegCallback_0500
- * @tc.name   : testCommonRenderRegCallback003
- * @tc.desc   : Test input param
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRegCallback003, Function | MediumTest | Level1)
-{
-    int32_t ret = 0;
-    int8_t cookie = -1;
-    struct IAudioCallback audioCallback;
-    ret = render_->RegCallback(render_, &audioCallback, cookie);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_INVALID_PARAM);
 }
 
 /**
@@ -593,7 +483,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsDrain001, Functi
     for (i = 0; i < 1000; i++) {
         ret |= render_->IsSupportsDrain(render_, &support);
     }
-    EXPECT_EQ(ret, -2);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#else
+    EXPECT_EQ(ret, HDF_SUCCESS);
+#endif
 }
 
 /**
@@ -695,7 +589,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderCheckSceneCapability007, F
     scene.scene.id = AUDIO_IN_RINGTONE;
     scene.desc = devDescRender_;
     bool supported = false;
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(HDF_SUCCESS, render_->CheckSceneCapability(render_, &scene, &supported));
+#else
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->CheckSceneCapability(render_, &scene, &supported));
+#endif
 }
 
 /**
@@ -709,7 +607,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderCheckSceneCapability008, F
     scene.scene.id = AUDIO_IN_CALL;
     scene.desc = devDescRender_;
     bool supported = false;
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(HDF_SUCCESS, render_->CheckSceneCapability(render_, &scene, &supported));
+#else
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->CheckSceneCapability(render_, &scene, &supported));
+#endif
 }
 
 /**
@@ -918,7 +820,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene014, Function |
     scene.scene.id = AUDIO_IN_CALL;
     scene.desc.pins = PIN_OUT_LINEOUT;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
     free(scene.desc.desc);
 }
 
@@ -933,7 +839,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene015, Function |
     scene.scene.id = AUDIO_IN_MEDIA;
     scene.desc.pins = PIN_OUT_LINEOUT;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
     free(scene.desc.desc);
 }
 
@@ -948,8 +858,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene016, Function |
     scene.scene.id = AUDIO_IN_COMMUNICATION;
     scene.desc.pins = PIN_OUT_LINEOUT;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
-    free(scene.desc.desc);
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
+	free(scene.desc.desc);
 }
 
 /**
@@ -963,8 +877,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene017, Function |
     scene.scene.id = AUDIO_IN_RINGTONE;
     scene.desc.pins = PIN_OUT_LINEOUT;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
-    free(scene.desc.desc);
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
+	free(scene.desc.desc);
 }
 
 /**
@@ -978,8 +896,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene018, Function |
     scene.scene.id = AUDIO_IN_MEDIA;
     scene.desc.pins = PIN_OUT_HDMI;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
-    free(scene.desc.desc);
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
+	free(scene.desc.desc);
 }
 
 /**
@@ -993,8 +915,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene019, Function |
     scene.scene.id = AUDIO_IN_COMMUNICATION;
     scene.desc.pins = PIN_OUT_HDMI;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
-    free(scene.desc.desc);
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
+	free(scene.desc.desc);
 }
 
 /**
@@ -1008,8 +934,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene020, Function |
     scene.scene.id = AUDIO_IN_RINGTONE;
     scene.desc.pins = PIN_OUT_HDMI;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
-    free(scene.desc.desc);
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
+	free(scene.desc.desc);
 }
 
 /**
@@ -1023,8 +953,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene021, Function |
     scene.scene.id = AUDIO_IN_CALL;
     scene.desc.pins = PIN_OUT_HDMI;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
-    free(scene.desc.desc);
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
+	free(scene.desc.desc);
 }
 
 /**
@@ -1038,8 +972,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene022, Function |
     scene.scene.id = AUDIO_IN_MEDIA;
     scene.desc.pins = PIN_IN_MIC;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
-    free(scene.desc.desc);
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
+	free(scene.desc.desc);
 }
 
 /**
@@ -1053,8 +991,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene023, Function |
     scene.scene.id = AUDIO_IN_COMMUNICATION;
     scene.desc.pins = PIN_IN_MIC;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
-    free(scene.desc.desc);
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
+	free(scene.desc.desc);
 }
 
 /**
@@ -1068,8 +1010,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene024, Function |
     scene.scene.id = AUDIO_IN_RINGTONE;
     scene.desc.pins = PIN_IN_MIC;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
-    free(scene.desc.desc);
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
+	free(scene.desc.desc);
 }
 
 /**
@@ -1083,8 +1029,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene025, Function |
     scene.scene.id = AUDIO_IN_CALL;
     scene.desc.pins = PIN_IN_MIC;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
-    free(scene.desc.desc);
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
+	free(scene.desc.desc);
 }
 
 /**
@@ -1098,8 +1048,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene026, Function |
     scene.scene.id = AUDIO_IN_MEDIA;
     scene.desc.pins = PIN_IN_HS_MIC;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
-    free(scene.desc.desc);
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
+	free(scene.desc.desc);
 }
 
 /**
@@ -1113,8 +1067,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene027, Function |
     scene.scene.id = AUDIO_IN_COMMUNICATION;
     scene.desc.pins = PIN_IN_HS_MIC;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
-    free(scene.desc.desc);
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
+	free(scene.desc.desc);
 }
 
 /**
@@ -1128,8 +1086,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene028, Function |
     scene.scene.id = AUDIO_IN_RINGTONE;
     scene.desc.pins = PIN_IN_HS_MIC;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
-    free(scene.desc.desc);
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
+	free(scene.desc.desc);
 }
 
 /**
@@ -1143,8 +1105,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene029, Function |
     scene.scene.id = AUDIO_IN_CALL;
     scene.desc.pins = PIN_IN_HS_MIC;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
-    free(scene.desc.desc);
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
+	free(scene.desc.desc);
 }
 
 /**
@@ -1158,8 +1124,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene030, Function |
     scene.scene.id = AUDIO_IN_MEDIA;
     scene.desc.pins = PIN_IN_LINEIN;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
-    free(scene.desc.desc);
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
+	free(scene.desc.desc);
 }
 
 /**
@@ -1173,8 +1143,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene031, Function |
     scene.scene.id = AUDIO_IN_COMMUNICATION;
     scene.desc.pins = PIN_IN_LINEIN;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
-    free(scene.desc.desc);
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
+	free(scene.desc.desc);
 }
 
 /**
@@ -1188,8 +1162,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene032, Function |
     scene.scene.id = AUDIO_IN_RINGTONE;
     scene.desc.pins = PIN_IN_LINEIN;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
-    free(scene.desc.desc);
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
+	free(scene.desc.desc);
 }
 
 /**
@@ -1203,8 +1181,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene033, Function |
     scene.scene.id = AUDIO_IN_CALL;
     scene.desc.pins = PIN_IN_LINEIN;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
-    free(scene.desc.desc);
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
+	free(scene.desc.desc);
 }
 
 /**
@@ -1218,8 +1200,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene034, Function |
     scene.scene.id = AUDIO_IN_MEDIA;
     scene.desc.pins = PIN_IN_USB_EXT;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
-    free(scene.desc.desc);
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
+	free(scene.desc.desc);
 }
 
 /**
@@ -1233,8 +1219,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene035, Function |
     scene.scene.id = AUDIO_IN_COMMUNICATION;
     scene.desc.pins = PIN_IN_USB_EXT;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
-    free(scene.desc.desc);
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
+	free(scene.desc.desc);
 }
 
 /**
@@ -1248,8 +1238,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene036, Function |
     scene.scene.id = AUDIO_IN_RINGTONE;
     scene.desc.pins = PIN_IN_USB_EXT;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
-    free(scene.desc.desc);
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
+	free(scene.desc.desc);
 }
 
 /**
@@ -1263,40 +1257,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene037, Function |
     scene.scene.id = AUDIO_IN_CALL;
     scene.desc.pins = PIN_IN_USB_EXT;
     scene.desc.desc = strdup("mic");
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
-    free(scene.desc.desc);
-}
-
-/**
- * @tc.number  SUB_Driver_Audio_SetMutey_0300
- * @tc.name  testCommonRenderSetMute001
- * @tc.desc  Reliability of function(SetMute)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetMute001, Function | MediumTest | Level1)
-{
-    bool mute = false;
-    int32_t ret = 0;
-    int i = 0;
-    for (i = 0; i < 1000; i++) {
-        ret = render_->SetMute(render_, mute);
-    }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-}
-
-/**
- * @tc.number  SUB_Driver_Audio_GetMute_0300
- * @tc.name  testCommonRenderGetMute001
- * @tc.desc  Reliability of function(GetMute)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetMute001, Function | MediumTest | Level1)
-{
-    bool mute = false;
-    int32_t ret = 0;
-    int i = 0;
-    for (i = 0; i < 1000; i++) {
-        ret = render_->GetMute(render_, &mute);
-    }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+#else
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#endif
+	free(scene.desc.desc);
 }
 
 /**
@@ -1307,22 +1273,6 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetMute001, Function | Med
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetMute002, Function | MediumTest | Level2)
 {
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->GetMute(nullptr, nullptr));
-}
-
-/**
- * @tc.number  SUB_Driver_Audio_SetVolume_0300
- * @tc.name  testCommonRenderSetVolume001
- * @tc.desc  Reliability of function(SetVolume)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetVolume001, Function | MediumTest | Level1)
-{
-    float volume = 0.2;
-    int32_t ret = 0;
-    int i = 0;
-    for (i = 0; i < 1000; i++) {
-        ret = render_->SetVolume(render_, volume);
-    }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 /**
@@ -1337,24 +1287,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetVolume002, Function | M
     int i = 0;
     for (i = 0; i < 1000; i++) {
         ret = render_->SetVolume(render_, volume);
+        EXPECT_NE(HDF_SUCCESS, ret);
     }
-    EXPECT_NE(HDF_SUCCESS, ret);
-}
-
-/**
- * @tc.number  SUB_Driver_Audio_GetVolume_0300
- * @tc.name  testCommonRenderGetVolume001
- * @tc.desc  Reliability of function(GetVolume)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetVolume001, Function | MediumTest | Level1)
-{
-    float volume = 0.2;
-    int32_t ret = 0;
-    int i = 0;
-    for (i = 0; i < 1000; i++) {
-        ret = render_->GetVolume(render_, &volume);
-    }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 /**
@@ -1365,23 +1299,6 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetVolume001, Function | M
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetVolume002, Function | MediumTest | Level2)
 {
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, render_->GetVolume(nullptr, nullptr));
-}
-
-/**
- * @tc.number  SUB_Driver_Audio_GetGainThreshold_0300
- * @tc.name  testCommonRenderGetGainThreshold001
- * @tc.desc  Reliability of function(GetGainThreshold)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetGainThreshold001, Function | MediumTest | Level1)
-{
-    int32_t ret = 0;
-    float min = 0.0;
-    float max = 1.0;
-    int i = 0;
-    for (i = 0; i < 1000; i++) {
-        ret = render_->GetGainThreshold(render_, &min, &max);
-    }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 /**
@@ -1427,22 +1344,6 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetGainThreshold005, Funct
 }
 
 /**
- * @tc.number  SUB_Driver_Audio_GetGain_0300
- * @tc.name  testCommonRenderGetGain001
- * @tc.desc  Reliability of function(GetGain)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetGain001, Function | MediumTest | Level1)
-{
-    int32_t ret = 0;
-    float gain = 0.1;
-    int i = 0;
-    for (i = 0; i < 1000; i++) {
-        ret = render_->GetGain(render_, &gain);
-    }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-}
-
-/**
  * @tc.number  SUB_Driver_Audio_GetGain_0400
  * @tc.name  testCommonRenderGetGain002
  * @tc.desc  Test parameters with abnormal input
@@ -1450,22 +1351,6 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetGain001, Function | Med
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetGain002, Function | MediumTest | Level2)
 {
     EXPECT_NE(HDF_SUCCESS, render_->GetGain(nullptr, nullptr));
-}
-
-/**
- * @tc.number  SUB_Driver_Audio_SetGainn_0300
- * @tc.name  testCommonRenderSetGain001
- * @tc.desc  Reliability of function(SetGain)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetGain001, Function | MediumTest | Level1)
-{
-    int32_t ret = 0;
-    float gain = 0.1;
-    int i = 0;
-    for (i = 0; i < 1000; i++) {
-        ret = render_->SetGain(render_, gain);
-    }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
 }
 
 /**
@@ -1480,8 +1365,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameSize001, Function 
     int32_t ret = 0;
     for (i = 0; i < 1000; i++) {
         ret = render_->GetFrameSize(render_, &frameSize);
+        EXPECT_EQ(HDF_SUCCESS, ret);
     }
-    EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
 /**
@@ -1496,8 +1381,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameCount001, Function
     int32_t ret = 0;
     for (i = 0; i < 1000; i++) {
         ret = render_->GetFrameCount(render_, &frameCount);
+        EXPECT_EQ(HDF_SUCCESS, ret);
     }
-    EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
 /**
@@ -1512,8 +1397,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetSampleAttributes001, Fu
     int32_t ret = 0;
     for (i = 0; i < 1000; i++) {
         ret = render_->SetSampleAttributes(render_, &attrs);
+        EXPECT_EQ(HDF_SUCCESS, ret);
     }
-    EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
 /**
@@ -1538,8 +1423,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetSampleAttributes001, Fu
     int32_t ret = 0;
     for (i = 0; i < 1000; i++) {
         ret = render_->GetSampleAttributes(render_, &attrs);
+        EXPECT_EQ(HDF_SUCCESS, ret);
     }
-    EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
 /**
@@ -1564,8 +1449,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetCurrentChannelId001, Fu
     int32_t ret = 0;
     for (i = 0; i < 1000; i++) {
         ret = render_->GetCurrentChannelId(render_, &channelId);
+        EXPECT_EQ(HDF_SUCCESS, ret);
     }
-    EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
 /**
@@ -1591,8 +1476,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetExtraParams001, Functio
     int32_t ret = 0;
     for (i = 0; i < 1000; i++) {
         ret = render_->SetExtraParams(render_, keyValueList);
+        EXPECT_EQ(HDF_SUCCESS, ret);
     }
-    EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
 /**
@@ -1603,23 +1488,6 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetExtraParams001, Functio
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetExtraParams002, Function | MediumTest | Level2)
 {
     EXPECT_NE(HDF_SUCCESS, render_->SetExtraParams(nullptr, nullptr));
-}
-
-/**
- * @tc.number  SUB_Driver_Audio_RenderGetExtraParams_0400
- * @tc.name  testCommonRenderGetExtraParams001
- * @tc.desc  Reliability of function(GetExtraParams)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetExtraParams001, Function | MediumTest | Level1)
-{
-    int i = 0;
-    int32_t ret = 0;
-    char keyValueList[AUDIO_RENDER_BUF_TEST];
-    uint32_t keyValueListLen = BUFFER_LENTH;
-    for (i = 0; i < 1000; i++) {
-        ret = render_->GetExtraParams(render_, keyValueList, keyValueListLen);
-    }
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_INVALID_PARAM);
 }
 
 /**
@@ -1845,197 +1713,6 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRemoveAudioEffect008, Test
 }
 
 /**
- * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_0100
- * @tc.name  testCommonRenderGetFrameBufferSize001
- * @tc.desc  Reliability of function(GetFrameBufferSize)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize001, TestSize.Level2)
-{
-    uint64_t bufferSize = 0;
-    int32_t ret = render_->GetFrameBufferSize(nullptr, &bufferSize);
-    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
-
-    ret = render_->GetFrameBufferSize(render_, nullptr);
-    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
-}
-
-/**
- * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_0200
- * @tc.name  testCommonRenderGetFrameBufferSize002
- * @tc.desc  Reliability of function(GetFrameBufferSize)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize002, TestSize.Level2)
-{
-    uint64_t bufferSize = 256;
-    int32_t ret = render_->GetFrameBufferSize(nullptr, &bufferSize);
-    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
-
-    ret = render_->GetFrameBufferSize(render_, nullptr);
-    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
-}
-
-/**
- * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_0300
- * @tc.name  testCommonRenderGetFrameBufferSize003
- * @tc.desc  Reliability of function(GetFrameBufferSize)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize003, TestSize.Level2)
-{
-    uint64_t bufferSize = 266;
-    int32_t ret = render_->GetFrameBufferSize(nullptr, &bufferSize);
-    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
-
-    ret = render_->GetFrameBufferSize(render_, nullptr);
-    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
-}
-
-/**
- * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_0400
- * @tc.name  testCommonRenderGetFrameBufferSize004
- * @tc.desc  Reliability of function(GetFrameBufferSize)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize004, TestSize.Level2)
-{
-    uint64_t bufferSize = 1600;
-    int32_t ret = render_->GetFrameBufferSize(nullptr, &bufferSize);
-    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
-
-    ret = render_->GetFrameBufferSize(render_, nullptr);
-    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
-}
-
-/**
- * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_0500
- * @tc.name  testCommonRenderGetFrameBufferSize005
- * @tc.desc  Reliability of function(GetFrameBufferSize)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize005, TestSize.Level2)
-{
-    uint64_t bufferSize = 300;
-    int32_t ret = render_->GetFrameBufferSize(nullptr, &bufferSize);
-    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
-
-    ret = render_->GetFrameBufferSize(render_, nullptr);
-    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
-}
-
-/**
- * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_0600
- * @tc.name  testCommonRenderGetFrameBufferSize006
- * @tc.desc  Reliability of function(GetFrameBufferSize)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize006, TestSize.Level2)
-{
-    uint64_t bufferSize = 4294967295;
-    int32_t ret = render_->GetFrameBufferSize(nullptr, &bufferSize);
-    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
-
-    ret = render_->GetFrameBufferSize(render_, nullptr);
-    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
-}
-
-/**
- * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_0700
- * @tc.name  testCommonRenderGetFrameBufferSize007
- * @tc.desc  Reliability of function(GetFrameBufferSize)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize007, TestSize.Level2)
-{
-    uint64_t bufferSize = 429496729500;
-    int32_t ret = render_->GetFrameBufferSize(nullptr, &bufferSize);
-    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
-
-    ret = render_->GetFrameBufferSize(render_, nullptr);
-    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
-}
-
-/**
- * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_0800
- * @tc.name  testCommonRenderGetFrameBufferSize008
- * @tc.desc  Reliability of function(GetFrameBufferSize)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize008, TestSize.Level2)
-{
-    int32_t i;
-    uint64_t bufferSize = 429496;
-    int32_t ret;
-    for (i = 0; i < 50; i++) {
-        ret = render_->GetFrameBufferSize(nullptr, &bufferSize);
-        EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
-    }
-    ret = render_->GetFrameBufferSize(render_, nullptr);
-    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
-}
-
-/**
- * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_0900
- * @tc.name  testCommonRenderGetFrameBufferSize009
- * @tc.desc  Reliability of function(GetFrameBufferSize)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize009, TestSize.Level2)
-{
-    int32_t ret = render_->GetFrameBufferSize(nullptr, nullptr);
-    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
-
-    ret = render_->GetFrameBufferSize(render_, nullptr);
-    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
-}
-
-/**
- * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_1000
- * @tc.name  testCommonRenderGetFrameBufferSize010
- * @tc.desc  Reliability of function(GetFrameBufferSize)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize010, TestSize.Level2)
-{
-    uint64_t bufferSize = 0;
-    int32_t ret = render_->GetFrameBufferSize(nullptr, &bufferSize);
-    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
-
-    ret = render_->GetFrameBufferSize(nullptr, nullptr);
-    ASSERT_TRUE(ret == HDF_ERR_INVALID_OBJECT || ret == HDF_ERR_INVALID_PARAM);
-}
-
-/**
- * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_1100
- * @tc.name  testCommonRenderGetFrameBufferSize011
- * @tc.desc  Reliability of function(GetFrameBufferSize)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize011, TestSize.Level2)
-{
-    uint64_t bufferSize = 1000;
-    int32_t ret = render_->GetFrameBufferSize(render_, &bufferSize);
-    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
-}
-
-/**
- * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_1200
- * @tc.name  testCommonRenderGetFrameBufferSize012
- * @tc.desc  Reliability of function(GetFrameBufferSize)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize012, TestSize.Level2)
-{
-    int32_t i;
-    uint64_t bufferSize = 8000;
-    int32_t ret;
-    for (i = 0; i < 100; i++) {
-        ret = render_->GetFrameBufferSize(render_, &bufferSize);
-        ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
-    }
-}
-
-/**
- * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_1300
- * @tc.name  testCommonRenderGetFrameBufferSize013
- * @tc.desc  Reliability of function(GetFrameBufferSize)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize013, TestSize.Level2)
-{
-    int32_t ret = render_->GetFrameBufferSize(render_, nullptr);
-    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_ERR_INVALID_PARAM);
-}
-
-/**
  * @tc.number  SUB_Driver_Audio_Start_0100
  * @tc.name  testCommonRenderStart001
  * @tc.desc  Reliability of function(Start)
@@ -2195,28 +1872,6 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop006, TestSize.Level2)
     for (i = 0; i < 20; i++) {
         EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
         EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
-    }
-}
-
-/**
- * @tc.number  SUB_Driver_Audio_Stop_0700
- * @tc.name  testCommonRenderStop007
- * @tc.desc  Reliability of function(Stop)
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop007, TestSize.Level1)
-{
-    int32_t ret = render_->Start(render_);
-    EXPECT_EQ(HDF_SUCCESS, ret);
-    ret = render_->TurnStandbyMode(render_);
-    EXPECT_EQ(HDF_SUCCESS, ret);
-    ret = render_->Stop(render_);
-    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_SUCCESS);
-    int32_t i;
-    for (i = 0; i < 50; i++) {
-        ret = render_->Start(render_);
-        EXPECT_EQ(HDF_SUCCESS, ret);
-        ret = render_->Stop(render_);
-        EXPECT_EQ(HDF_SUCCESS, ret);
     }
 }
 
@@ -2394,126 +2049,6 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump005, TestSize.
 }
 
 /**
- * @tc.number: SUB_Driver_Audio_AudioDevDump_0600
- * @tc.name: testCommonRenderAudioDevDump006
- * @tc.desc: Dumps information about the audio device.
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump006, TestSize.Level1)
-{
-    int32_t range = 1;
-    char pathBuf[] = "/data/RenderDump.log";
-
-    FILE *file = fopen(pathBuf, "wb+");
-    ASSERT_NE(nullptr, file);
-    int fd = fileno(file);
-    if (fd == -1) {
-        fclose(file);
-        ASSERT_NE(fd, -1);
-    }
-
-    int32_t ret = render_->AudioDevDump(render_, range, fd);
-
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-    fclose(file);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_AudioDevDump_0700
- * @tc.name: testCommonRenderAudioDevDump007
- * @tc.desc: Dumps information about the audio device.
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump007, TestSize.Level1)
-{
-    int32_t range = 2;
-    char pathBuf[] = "/data/RenderDump.log";
-
-    FILE *file = fopen(pathBuf, "wb+");
-    ASSERT_NE(nullptr, file);
-    int fd = fileno(file);
-    if (fd == -1) {
-        fclose(file);
-        ASSERT_NE(fd, -1);
-    }
-
-    int32_t ret = render_->AudioDevDump(render_, range, fd);
-
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-    fclose(file);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_AudioDevDump_0800
- * @tc.name: testCommonRenderAudioDevDump008
- * @tc.desc: Dumps information about the audio device.
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump008, TestSize.Level1)
-{
-    int32_t range = 3;
-    char pathBuf[] = "/data/RenderDump.log";
-
-    FILE *file = fopen(pathBuf, "wb+");
-    ASSERT_NE(nullptr, file);
-    int fd = fileno(file);
-    if (fd == -1) {
-        fclose(file);
-        ASSERT_NE(fd, -1);
-    }
-
-    int32_t ret = render_->AudioDevDump(render_, range, fd);
-
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-    fclose(file);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_AudioDevDump_0900
- * @tc.name: testCommonRenderAudioDevDump009
- * @tc.desc: Dumps information about the audio device.
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump009, TestSize.Level1)
-{
-    int32_t range = 5;
-    char pathBuf[] = "/data/RenderDump.log";
-
-    FILE *file = fopen(pathBuf, "wb+");
-    ASSERT_NE(nullptr, file);
-    int fd = fileno(file);
-    if (fd == -1) {
-        fclose(file);
-        ASSERT_NE(fd, -1);
-    }
-
-    int32_t ret = render_->AudioDevDump(render_, range, fd);
-
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-    fclose(file);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_AudioDevDump_1000
- * @tc.name: testCommonRenderAudioDevDump010
- * @tc.desc: Dumps information about the audio device.
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump010, TestSize.Level1)
-{
-    int32_t range = 6;
-    char pathBuf[] = "/data/RenderDump.log";
-
-    FILE *file = fopen(pathBuf, "wb+");
-    ASSERT_NE(nullptr, file);
-    int fd = fileno(file);
-    if (fd == -1) {
-        fclose(file);
-        ASSERT_NE(fd, -1);
-    }
-
-    int32_t ret = render_->AudioDevDump(render_, range, fd);
-
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-    fclose(file);
-}
-
-/**
  * @tc.number: SUB_Driver_Audio_AudioDevDump_1100
  * @tc.name: testCommonRenderAudioDevDump011
  * @tc.desc: Dumps information about the audio device.
@@ -2592,126 +2127,6 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump016, TestSize.
 }
 
 /**
- * @tc.number: SUB_Driver_Audio_AudioDevDump_1700
- * @tc.name: testCommonRenderAudioDevDump017
- * @tc.desc: Dumps information about the audio device.
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump017, TestSize.Level1)
-{
-    int32_t range = 4;
-    char pathBuf[] = "/data/RenderDump.log";
-
-    FILE *file = fopen(pathBuf, "wb+");
-    ASSERT_NE(nullptr, file);
-    int fd = 0;
-
-    int32_t ret = render_->AudioDevDump(render_, range, fd);
-
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-    fclose(file);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_AudioDevDump_1800
- * @tc.name: testCommonRenderAudioDevDump018
- * @tc.desc: Dumps information about the audio device.
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump018, TestSize.Level1)
-{
-    int32_t range = 4;
-    char pathBuf[] = "/data/RenderDump.log";
-
-    FILE *file = fopen(pathBuf, "wb+");
-    ASSERT_NE(nullptr, file);
-    int fd = 1;
-
-    int32_t ret = render_->AudioDevDump(render_, range, fd);
-
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-    fclose(file);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_AudioDevDump_1900
- * @tc.name: testCommonRenderAudioDevDump019
- * @tc.desc: Dumps information about the audio device.
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump019, TestSize.Level1)
-{
-    int32_t range = 4;
-    char pathBuf[] = "/data/RenderDump.log";
-
-    FILE *file = fopen(pathBuf, "wb+");
-    ASSERT_NE(nullptr, file);
-    int fd = 2;
-
-    int32_t ret = render_->AudioDevDump(render_, range, fd);
-
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-    fclose(file);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_AudioDevDump_2000
- * @tc.name: testCommonRenderAudioDevDump020
- * @tc.desc: Dumps information about the audio device.
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump020, TestSize.Level1)
-{
-    int32_t range = 4;
-    char pathBuf[] = "/data/RenderDump.log";
-
-    FILE *file = fopen(pathBuf, "wb+");
-    ASSERT_NE(nullptr, file);
-    int fd = 3;
-
-    int32_t ret = render_->AudioDevDump(render_, range, fd);
-
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-    fclose(file);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_AudioDevDump_2100
- * @tc.name: testCommonRenderAudioDevDump021
- * @tc.desc: Dumps information about the audio device.
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump021, TestSize.Level1)
-{
-    int32_t range = 4;
-    char pathBuf[] = "/data/RenderDump.log";
-
-    FILE *file = fopen(pathBuf, "wb+");
-    ASSERT_NE(nullptr, file);
-    int fd = 4;
-
-    int32_t ret = render_->AudioDevDump(render_, range, fd);
-
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-    fclose(file);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_AudioDevDump_2200
- * @tc.name: testCommonRenderAudioDevDump022
- * @tc.desc: Dumps information about the audio device.
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump022, TestSize.Level1)
-{
-    int32_t range = 4;
-    char pathBuf[] = "/data/RenderDump.log";
-
-    FILE *file = fopen(pathBuf, "wb+");
-    ASSERT_NE(nullptr, file);
-    int fd = -2;
-
-    int32_t ret = render_->AudioDevDump(render_, range, fd);
-
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-    fclose(file);
-}
-
-/**
  * @tc.number: SUB_Driver_Audio_Pause_0100
  * @tc.name: testCommonRenderPause001
  * @tc.desc: Pauses audio rendering or capturing.
@@ -2734,9 +2149,13 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderPause002, TestSize.Level1)
     for (int i = 0; i < 50; i++) {
         EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
         ret = render_->Pause(render_);
+#ifdef DISPLAY_COMMUNITY
         EXPECT_EQ(ret, HDF_SUCCESS);
-
         EXPECT_EQ(HDF_SUCCESS, render_->Resume(render_));
+#else
+        EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+        EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Resume(render_));
+#endif
         EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
     }
 }
@@ -2754,8 +2173,13 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderPause003, TestSize.Level1)
     int32_t ret = render_->Start(render_);
     EXPECT_EQ(ret, HDF_SUCCESS);
     ret = render_->Pause(render_);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_EQ(HDF_SUCCESS, render_->Resume(render_));
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Resume(render_));
+#endif
     render_->Stop(render_);
 }
 
@@ -2772,7 +2196,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderPause004, TestSize.Level2)
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
     ret = render_->Pause(render_);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_FAILURE);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 
 /**
@@ -2788,12 +2216,22 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderPause005, TestSize.Level1)
     int32_t ret = render_->Start(render_);
     EXPECT_EQ(ret, HDF_SUCCESS);
     ret = render_->Pause(render_);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_EQ(HDF_SUCCESS, render_->Resume(render_));
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Resume(render_));
+#endif
 
     ret = render_->Pause(render_);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_EQ(HDF_SUCCESS, render_->Resume(render_));
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Resume(render_));
+#endif
     render_->Stop(render_);
 }
 
@@ -2809,12 +2247,22 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderPause006, TestSize.Level1)
     int32_t ret = render_->Start(render_);
     EXPECT_EQ(ret, HDF_SUCCESS);
     ret = render_->Pause(render_);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_EQ(HDF_SUCCESS, render_->Resume(render_));
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Resume(render_));
+#endif
     for (int i = 0; i < 50; i++) {
         ret = render_->Pause(render_);
+#ifdef DISPLAY_COMMUNITY
         EXPECT_EQ(ret, HDF_SUCCESS);
         EXPECT_EQ(HDF_SUCCESS, render_->Resume(render_));
+#else
+        EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+        EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Resume(render_));
+#endif
     }
     render_->Stop(render_);
 }
@@ -2834,7 +2282,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderPause007, TestSize.Level1)
     EXPECT_EQ(ret, HDF_SUCCESS);
     render_->Resume(render_);
     ret = render_->Pause(render_);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
     render_->Stop(render_);
 }
 
@@ -2853,7 +2305,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderPause008, TestSize.Level1)
     EXPECT_EQ(ret, HDF_SUCCESS);
     for (int i = 0; i < 50; i++) {
         ret = render_->Pause(render_);
+#ifdef DISPLAY_COMMUNITY
         EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+        EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
         render_->Resume(render_);
     }
     render_->Stop(render_);
@@ -2892,9 +2348,17 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume003, TestSize.Level1
 {
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
     int32_t ret = render_->Pause(render_);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(HDF_SUCCESS, render_->Resume(render_));
+#else
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Resume(render_));
+#endif
 
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
 }
@@ -2910,7 +2374,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume004, TestSize.Level2
     int32_t ret = render_->Stop(render_);
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Resume(render_));
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Stop(render_));
+#else
+    EXPECT_EQ(HDF_FAILURE, render_->Stop(render_));
+#endif
 }
 
 /**
@@ -2926,7 +2394,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume005, TestSize.Level2
     for (int i = 0; i < 50; i++) {
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Resume(render_));
     }
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Stop(render_));
+#else
+    EXPECT_EQ(HDF_FAILURE, render_->Stop(render_));
+#endif
 }
 
 /**
@@ -2937,9 +2409,17 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume005, TestSize.Level2
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume006, TestSize.Level1)
 {
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(HDF_SUCCESS, render_->Pause(render_));
+#else
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Pause(render_));
+#endif
     int32_t ret = render_->Resume(render_);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(HDF_SUCCESS, ret);
+#else
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+#endif
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
 }
 
@@ -2953,9 +2433,17 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume007, TestSize.Level1
     int32_t ret;
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
     for (int i = 0; i < 50; i++) {
+#ifdef DISPLAY_COMMUNITY        
         EXPECT_EQ(HDF_SUCCESS, render_->Pause(render_));
+#else
+        EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Pause(render_));
+#endif
         ret = render_->Resume(render_);
+#ifdef DISPLAY_COMMUNITY
         EXPECT_EQ(HDF_SUCCESS, ret);
+#else
+        EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+#endif
     }
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
 }
@@ -2968,10 +2456,18 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume007, TestSize.Level1
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume008, TestSize.Level1)
 {
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(HDF_SUCCESS, render_->Pause(render_));
+#else
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Pause(render_));
+#endif
     render_->Flush(render_);
     int32_t ret = render_->Resume(render_);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(HDF_SUCCESS, ret);
+#else
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+#endif
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
 }
 
@@ -2983,9 +2479,17 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume008, TestSize.Level1
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume009, TestSize.Level2)
 {
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(HDF_SUCCESS, render_->Pause(render_));
+#else
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Pause(render_));
+#endif
     int32_t ret = render_->Resume(render_);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(HDF_SUCCESS, ret);
+#else
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+#endif
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Resume(render_));
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
 }
@@ -3000,9 +2504,17 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume010, TestSize.Level2
     int32_t ret;
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
     for (int i = 0; i < 50; i++) {
+#ifdef DISPLAY_COMMUNITY
         EXPECT_EQ(HDF_SUCCESS, render_->Pause(render_));
+#else
+        EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Pause(render_));
+#endif
         ret = render_->Resume(render_);
+#ifdef DISPLAY_COMMUNITY
         EXPECT_EQ(HDF_SUCCESS, ret);
+#else
+        EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+#endif
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Resume(render_));
     }
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
@@ -3017,7 +2529,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume011, TestSize.Level2
 {
     int32_t ret = render_->Resume(render_);
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Stop(render_));
+#else
+    EXPECT_EQ(HDF_FAILURE, render_->Stop(render_));
+#endif
 }
 
 /**
@@ -3032,7 +2548,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume012, TestSize.Level2
         ret = render_->Resume(render_);
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Stop(render_));
+#else
+    EXPECT_EQ(HDF_FAILURE, render_->Stop(render_));
+#endif
 }
 
 /**
@@ -3043,11 +2563,19 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume012, TestSize.Level2
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume013, TestSize.Level1)
 {
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(HDF_SUCCESS, render_->Pause(render_));
+#else
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Pause(render_));
+#endif
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
     render_->Flush(render_);
     int32_t ret = render_->Resume(render_);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(HDF_SUCCESS, ret);
+#else
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+#endif
 }
 
 /**
@@ -3195,45 +2723,6 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode001, TestSi
 }
 
 /**
- * @tc.number: SUB_Driver_Audio_TurnStandbyMode_0200
- * @tc.name: testCommonRenderTurnStandbyMode002
- * @tc.desc: Sets or cancels the standby mode of the audio device.
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode002, TestSize.Level1)
-{
-    int32_t ret = render_->Start(render_);
-    EXPECT_EQ(HDF_SUCCESS, ret);
-
-    ret = render_->Pause(render_);
-    EXPECT_EQ(HDF_SUCCESS, ret);
-
-    ret = render_->TurnStandbyMode(render_);
-    EXPECT_EQ(HDF_SUCCESS, ret);
-
-    ret = render_->Stop(render_);
-    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_SUCCESS);
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_TurnStandbyMode_0300
- * @tc.name: testCommonRenderTurnStandbyMode003
- * @tc.desc: Sets or cancels the standby mode of the audio device.
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode003, TestSize.Level1)
-{
-    int32_t ret = render_->Start(render_);
-    EXPECT_EQ(HDF_SUCCESS, ret);
-
-    render_->Flush(render_);
-
-    ret = render_->TurnStandbyMode(render_);
-    EXPECT_EQ(HDF_SUCCESS, ret);
-
-    ret = render_->Stop(render_);
-    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_SUCCESS);
-}
-
-/**
  * @tc.number: SUB_Driver_Audio_TurnStandbyMode_0400
  * @tc.name: testCommonRenderTurnStandbyMode004
  * @tc.desc: Sets or cancels the standby mode of the audio device.
@@ -3245,7 +2734,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode004, TestSi
     ret = render_->Stop(render_);
     EXPECT_EQ(HDF_SUCCESS, ret);
     ret = render_->TurnStandbyMode(render_);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(HDF_FAILURE, ret);
+#else
+    EXPECT_EQ(HDF_SUCCESS, ret);
+#endif
 }
 
 /**
@@ -3261,27 +2754,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode005, TestSi
     EXPECT_EQ(HDF_SUCCESS, ret);
     for (int i = 0; i < 50; i++) {
         ret = render_->TurnStandbyMode(render_);
+#ifdef DISPLAY_COMMUNITY
         EXPECT_EQ(HDF_FAILURE, ret);
+#else
+        EXPECT_EQ(HDF_SUCCESS, ret);
+#endif
     }
-}
-
-/**
- * @tc.number: SUB_Driver_Audio_TurnStandbyMode_0600
- * @tc.name: testCommonRenderTurnStandbyMode006
- * @tc.desc: Sets or cancels the standby mode of the audio device.
- */
-HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode006, TestSize.Level1)
-{
-    int32_t ret = render_->Start(render_);
-    EXPECT_EQ(HDF_SUCCESS, ret);
-    ret = render_->Pause(render_);
-    EXPECT_EQ(HDF_SUCCESS, ret);
-    ret = render_->Resume(render_);
-    EXPECT_EQ(HDF_SUCCESS, ret);
-    ret = render_->TurnStandbyMode(render_);
-    EXPECT_EQ(HDF_SUCCESS, ret);
-    ret = render_->Stop(render_);
-    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_SUCCESS);
 }
 
 /**
@@ -3299,10 +2777,18 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume00
         EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
 
         ret = render_->IsSupportsPauseAndResume(render_, nullptr, &supportResume);
+#ifdef DISPLAY_COMMUNITY
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+#else
+        EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
+#endif
 
         ret = render_->IsSupportsPauseAndResume(render_, &supportPause, nullptr);
+#ifdef DISPLAY_COMMUNITY
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+#else
+        EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
+#endif
     }
 }
 
@@ -3318,7 +2804,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume00
     bool supportResume = false;
     for (int i = 0; i < 50; i++) {
         ret = render_->IsSupportsPauseAndResume(render_, &supportPause, &supportResume);
+#ifdef DISPLAY_COMMUNITY
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+#else
+        EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
+#endif
     }
 }
 
@@ -3334,7 +2824,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume00
     bool supportResume = true;
     for (int i = 0; i < 50; i++) {
         ret = render_->IsSupportsPauseAndResume(render_, &supportPause, &supportResume);
+#ifdef DISPLAY_COMMUNITY
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+#else
+        EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
+#endif
     }
 }
 
@@ -3348,7 +2842,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume00
     bool supportPause = true;
     bool supportResume = false;
     int32_t ret = render_->IsSupportsPauseAndResume(render_, &supportPause, &supportResume);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+#else
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
+#endif
 }
 
 /**
@@ -3363,7 +2861,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume00
     bool supportResume = false;
     for (int i = 0; i < 50; i++) {
         ret = render_->IsSupportsPauseAndResume(render_, &supportPause, &supportResume);
+#ifdef DISPLAY_COMMUNITY
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+#else
+        EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
+#endif
     }
 }
 
@@ -3377,7 +2879,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume00
     bool supportPause = true;
     bool supportResume = true;
     int32_t ret = render_->IsSupportsPauseAndResume(render_, &supportPause, &supportResume);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+#else
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
+#endif
 }
 
 /**
@@ -3392,7 +2898,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume00
     bool supportResume = true;
     for (int i = 0; i < 50; i++) {
         ret = render_->IsSupportsPauseAndResume(render_, &supportPause, &supportResume);
+#ifdef DISPLAY_COMMUNITY
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+#else
+        EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
+#endif
     }
 }
 
@@ -3481,5 +2991,932 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume01
         ret = render_->IsSupportsPauseAndResume(nullptr, &supportPause, &supportResume);
         EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
     }
+}
+
+/**
+ * @tc.number: SUB_Driver_Audio_TurnStandbyMode_0200
+ * @tc.name: testCommonRenderTurnStandbyMode002
+ * @tc.desc: Sets or cancels the standby mode of the audio device.
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode002, TestSize.Level1)
+{
+    int32_t ret = render_->Start(render_);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+
+    ret = render_->Pause(render_);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(HDF_SUCCESS, ret);
+#else
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+#endif
+
+    ret = render_->TurnStandbyMode(render_);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+
+    ret = render_->Stop(render_);
+}
+
+/**
+ * @tc.number: SUB_Driver_Audio_TurnStandbyMode_0300
+ * @tc.name: testCommonRenderTurnStandbyMode003
+ * @tc.desc: Sets or cancels the standby mode of the audio device.
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode003, TestSize.Level1)
+{
+    int32_t ret = render_->Start(render_);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+
+    render_->Flush(render_);
+
+    ret = render_->TurnStandbyMode(render_);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+
+    ret = render_->Stop(render_);
+}
+
+/**
+ * @tc.number: SUB_Driver_Audio_TurnStandbyMode_0600
+ * @tc.name: testCommonRenderTurnStandbyMode006
+ * @tc.desc: Sets or cancels the standby mode of the audio device.
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode006, TestSize.Level1)
+{
+    int32_t ret = render_->Start(render_);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+    ret = render_->Pause(render_);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(HDF_SUCCESS, ret);
+#else
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+#endif
+    ret = render_->Resume(render_);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(HDF_SUCCESS, ret);
+#else
+    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+#endif
+    ret = render_->TurnStandbyMode(render_);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+    ret = render_->Stop(render_);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_SetRenderSpeed_0300
+ * @tc.name   : testCommonRenderSetRenderSpeed001
+ * @tc.desc   : Reliability of function(SetRenderSpeed)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetRenderSpeed001, Function | MediumTest | Level2)
+{
+    float speed = 2.0;
+    int i, ret = 0;
+    for (i = 0; i < 1000; i++) {
+        ret = render_->SetRenderSpeed(render_, speed);
+        ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_GetRenderSpeed_0300
+ * @tc.name   : testCommonRenderGetRenderSpeed001
+ * @tc.desc   : Reliability of function(GetRenderSpeed)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetRenderSpeed001, Function | MediumTest | Level1)
+{
+    float speed = 0.0;
+    int32_t ret = 0;
+    int i = 0;
+    ASSERT_EQ(HDF_SUCCESS, render_->Start(render_));
+    for (i = 0; i < 1000; i++) {
+        ret = render_->GetRenderSpeed(render_, &speed);
+        ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+    }
+    EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_SetChannelMode_0300
+ * @tc.name   : testCommonRenderSetChannelMode001
+ * @tc.desc   : Reliability of function(SetChannelMode)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode001, Function | MediumTest | Level1)
+{
+    AudioChannelMode mode = AUDIO_CHANNEL_NORMAL;
+    int i = 0;
+    int32_t ret = 0;
+    for (i = 0; i < 1000; i++) {
+        ret = render_->SetChannelMode(render_, mode);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+        ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_SetChannelMode_0400
+ * @tc.name   : testCommonRenderSetChannelMode002
+ * @tc.desc   : Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode002, Function | MediumTest | Level1)
+{
+    AudioChannelMode mode = AUDIO_CHANNEL_BOTH_LEFT;
+    int32_t ret = render_->SetChannelMode(render_, mode);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_SetChannelMode_0500
+ * @tc.name   : testCommonRenderSetChannelMode003
+ * @tc.desc   : Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode003, Function | MediumTest | Level1)
+{
+    AudioChannelMode mode = AUDIO_CHANNEL_BOTH_RIGHT;
+    int32_t ret = render_->SetChannelMode(render_, mode);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_GetChannelMode_0300
+ * @tc.name   : testCommonRenderGetChannelMode001
+ * @tc.desc   : Reliability of function(GetChannelMode)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetChannelMode001, Function | MediumTest | Level1)
+{
+    enum AudioChannelMode channelMode = AUDIO_CHANNEL_NORMAL;
+    int i = 0;
+    int32_t ret = 0;
+    for (i = 0; i < 1000; i++) {
+        ret = render_->GetChannelMode(render_, &channelMode);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+        ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_RegCallback_0300
+ * @tc.name   : testCommonRenderRegCallback001
+ * @tc.desc   : Reliability of function(RegCallback)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRegCallback001, Function | MediumTest | Level2)
+{
+    int i = 0;
+    int32_t ret = 0;
+    int8_t cookie = 0;
+    struct IAudioCallback audioCallback;
+    for (i = 0; i < 1000; i++) {
+        ret = render_->RegCallback(render_, &audioCallback, cookie);
+        EXPECT_NE(ret, HDF_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_RegCallback_0400
+ * @tc.name   : testCommonRenderRegCallback002
+ * @tc.desc   : Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRegCallback002, Function | MediumTest | Level2)
+{
+    int32_t ret = 0;
+    int8_t cookie = 127;
+    struct IAudioCallback audioCallback;
+    ret = render_->RegCallback(render_, &audioCallback, cookie);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_RegCallback_0500
+ * @tc.name   : testCommonRenderRegCallback003
+ * @tc.desc   : Test input param
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRegCallback003, Function | MediumTest | Level2)
+{
+    int32_t ret = 0;
+    int8_t cookie = -1;
+    struct IAudioCallback audioCallback;
+    ret = render_->RegCallback(render_, &audioCallback, cookie);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SetMutey_0300
+ * @tc.name  testCommonRenderSetMute001
+ * @tc.desc  Reliability of function(SetMute)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetMute001, Function | MediumTest | Level1)
+{
+    bool mute = false;
+    int32_t ret = 0;
+    int i = 0;
+    for (i = 0; i < 1000; i++) {
+        ret = render_->SetMute(render_, mute);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+        ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+    }
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_GetMute_0300
+ * @tc.name  testCommonRenderGetMute001
+ * @tc.desc  Reliability of function(GetMute)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetMute001, Function | MediumTest | Level1)
+{
+    bool mute = false;
+    int32_t ret = 0;
+    int i = 0;
+    for (i = 0; i < 1000; i++) {
+        ret = render_->GetMute(render_, &mute);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+        ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+    }
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SetVolume_0300
+ * @tc.name  testCommonRenderSetVolume001
+ * @tc.desc  Reliability of function(SetVolume)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetVolume001, Function | MediumTest | Level1)
+{
+    float volume = 0.2;
+    int32_t ret = 0;
+    int i = 0;
+    for (i = 0; i < 1000; i++) {
+        ret = render_->SetVolume(render_, volume);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+        ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+    }
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_GetVolume_0300
+ * @tc.name  testCommonRenderGetVolume001
+ * @tc.desc  Reliability of function(GetVolume)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetVolume001, Function | MediumTest | Level1)
+{
+    float volume = 0.2;
+    int32_t ret = 0;
+    int i = 0;
+    for (i = 0; i < 1000; i++) {
+        ret = render_->GetVolume(render_, &volume);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+        ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+    }
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_GetGainThreshold_0300
+ * @tc.name  testCommonRenderGetGainThreshold001
+ * @tc.desc  Reliability of function(GetGainThreshold)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetGainThreshold001, Function | MediumTest | Level1)
+{
+    int32_t ret = 0;
+    float min = 0.0;
+    float max = 1.0;
+    int i = 0;
+    for (i = 0; i < 1000; i++) {
+        ret = render_->GetGainThreshold(render_, &min, &max);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+        ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+    }
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_GetGain_0300
+ * @tc.name  testCommonRenderGetGain001
+ * @tc.desc  Reliability of function(GetGain)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetGain001, Function | MediumTest | Level1)
+{
+    int32_t ret = 0;
+    float gain = 0.1;
+    int i = 0;
+    for (i = 0; i < 1000; i++) {
+        ret = render_->GetGain(render_, &gain);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+        ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+    }
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_SetGainn_0300
+ * @tc.name  testCommonRenderSetGain001
+ * @tc.desc  Reliability of function(SetGain)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetGain001, Function | MediumTest | Level1)
+{
+    int32_t ret = 0;
+    float gain = 0.1;
+    int i = 0;
+    for (i = 0; i < 1000; i++) {
+        ret = render_->SetGain(render_, gain);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+        ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+    }
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_RenderGetExtraParams_0400
+ * @tc.name  testCommonRenderGetExtraParams001
+ * @tc.desc  Reliability of function(GetExtraParams)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetExtraParams001, Function | MediumTest | Level1)
+{
+    int i = 0;
+    int32_t ret = 0;
+    char keyValueList[AUDIO_RENDER_BUF_TEST];
+    uint32_t keyValueListLen = BUFFER_LENTH;
+    for (i = 0; i < 1000; i++) {
+        ret = render_->GetExtraParams(render_, keyValueList, keyValueListLen);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+        ASSERT_EQ(ret, HDF_ERR_INVALID_PARAM);
+#endif
+    }
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_0100
+ * @tc.name  testCommonRenderGetFrameBufferSize001
+ * @tc.desc  Reliability of function(GetFrameBufferSize)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize001, TestSize.Level2)
+{
+    uint64_t bufferSize = 0;
+    int32_t ret = render_->GetFrameBufferSize(nullptr, &bufferSize);
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
+
+    ret = render_->GetFrameBufferSize(render_, nullptr);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#else
+    EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
+#endif
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_0200
+ * @tc.name  testCommonRenderGetFrameBufferSize002
+ * @tc.desc  Reliability of function(GetFrameBufferSize)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize002, TestSize.Level2)
+{
+    uint64_t bufferSize = 256;
+    int32_t ret = render_->GetFrameBufferSize(nullptr, &bufferSize);
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
+
+    ret = render_->GetFrameBufferSize(render_, nullptr);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#else
+    EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
+#endif
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_0300
+ * @tc.name  testCommonRenderGetFrameBufferSize003
+ * @tc.desc  Reliability of function(GetFrameBufferSize)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize003, TestSize.Level2)
+{
+    uint64_t bufferSize = 266;
+    int32_t ret = render_->GetFrameBufferSize(nullptr, &bufferSize);
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
+
+    ret = render_->GetFrameBufferSize(render_, nullptr);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#else
+    EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
+#endif
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_0400
+ * @tc.name  testCommonRenderGetFrameBufferSize004
+ * @tc.desc  Reliability of function(GetFrameBufferSize)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize004, TestSize.Level2)
+{
+    uint64_t bufferSize = 1600;
+    int32_t ret = render_->GetFrameBufferSize(nullptr, &bufferSize);
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
+
+    ret = render_->GetFrameBufferSize(render_, nullptr);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#else
+    EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
+#endif
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_0500
+ * @tc.name  testCommonRenderGetFrameBufferSize005
+ * @tc.desc  Reliability of function(GetFrameBufferSize)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize005, TestSize.Level2)
+{
+    uint64_t bufferSize = 300;
+    int32_t ret = render_->GetFrameBufferSize(nullptr, &bufferSize);
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
+
+    ret = render_->GetFrameBufferSize(render_, nullptr);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#else
+    EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
+#endif
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_0600
+ * @tc.name  testCommonRenderGetFrameBufferSize006
+ * @tc.desc  Reliability of function(GetFrameBufferSize)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize006, TestSize.Level2)
+{
+    uint64_t bufferSize = 4294967295;
+    int32_t ret = render_->GetFrameBufferSize(nullptr, &bufferSize);
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
+
+    ret = render_->GetFrameBufferSize(render_, nullptr);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#else
+    EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
+#endif
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_0700
+ * @tc.name  testCommonRenderGetFrameBufferSize007
+ * @tc.desc  Reliability of function(GetFrameBufferSize)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize007, TestSize.Level2)
+{
+    uint64_t bufferSize = 429496729500;
+    int32_t ret = render_->GetFrameBufferSize(nullptr, &bufferSize);
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
+
+    ret = render_->GetFrameBufferSize(render_, nullptr);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#else
+    EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
+#endif
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_0800
+ * @tc.name  testCommonRenderGetFrameBufferSize008
+ * @tc.desc  Reliability of function(GetFrameBufferSize)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize008, TestSize.Level2)
+{
+    int32_t i;
+    uint64_t bufferSize = 429496;
+    int32_t ret;
+    for (i = 0; i < 50; i++) {
+        ret = render_->GetFrameBufferSize(nullptr, &bufferSize);
+        EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
+    }
+    ret = render_->GetFrameBufferSize(render_, nullptr);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#else
+    EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
+#endif
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_0900
+ * @tc.name  testCommonRenderGetFrameBufferSize009
+ * @tc.desc  Reliability of function(GetFrameBufferSize)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize009, TestSize.Level2)
+{
+    int32_t ret = render_->GetFrameBufferSize(nullptr, nullptr);
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
+
+    ret = render_->GetFrameBufferSize(render_, nullptr);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#else
+    EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
+#endif
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_1000
+ * @tc.name  testCommonRenderGetFrameBufferSize010
+ * @tc.desc  Reliability of function(GetFrameBufferSize)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize010, TestSize.Level2)
+{
+    uint64_t bufferSize = 0;
+    int32_t ret = render_->GetFrameBufferSize(nullptr, &bufferSize);
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
+
+    ret = render_->GetFrameBufferSize(nullptr, nullptr);
+    ASSERT_EQ(ret, HDF_ERR_INVALID_OBJECT);
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_1100
+ * @tc.name  testCommonRenderGetFrameBufferSize011
+ * @tc.desc  Reliability of function(GetFrameBufferSize)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize011, TestSize.Level2)
+{
+    uint64_t bufferSize = 1000;
+    int32_t ret = render_->GetFrameBufferSize(render_, &bufferSize);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#else
+    EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
+#endif
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_1200
+ * @tc.name  testCommonRenderGetFrameBufferSize012
+ * @tc.desc  Reliability of function(GetFrameBufferSize)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize012, TestSize.Level2)
+{
+    int32_t i;
+    uint64_t bufferSize = 8000;
+    int32_t ret;
+    for (i = 0; i < 100; i++) {
+        ret = render_->GetFrameBufferSize(render_, &bufferSize);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#else
+        ASSERT_EQ(ret, HDF_ERR_INVALID_PARAM);
+#endif
+    }
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_GetFrameBufferSize_1300
+ * @tc.name  testCommonRenderGetFrameBufferSize013
+ * @tc.desc  Reliability of function(GetFrameBufferSize)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize013, TestSize.Level2)
+{
+    int32_t ret = render_->GetFrameBufferSize(render_, nullptr);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#else
+    EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
+#endif
+}
+
+/**
+ * @tc.number  SUB_Driver_Audio_Stop_0700
+ * @tc.name  testCommonRenderStop007
+ * @tc.desc  Reliability of function(Stop)
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop007, TestSize.Level1)
+{
+    int32_t ret = render_->Start(render_);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+    ret = render_->TurnStandbyMode(render_);
+    EXPECT_EQ(HDF_SUCCESS, ret);
+    ret = render_->Stop(render_);
+#ifdef DISPLAY_COMMUNITY
+    ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#else
+    ASSERT_EQ(ret, HDF_SUCCESS);
+#endif
+    int32_t i;
+    for (i = 0; i < 50; i++) {
+        ret = render_->Start(render_);
+        EXPECT_EQ(HDF_SUCCESS, ret);
+        ret = render_->Stop(render_);
+        EXPECT_EQ(HDF_SUCCESS, ret);
+    }
+}
+
+/**
+ * @tc.number: SUB_Driver_Audio_AudioDevDump_0600
+ * @tc.name: testCommonRenderAudioDevDump006
+ * @tc.desc: Dumps information about the audio device.
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump006, TestSize.Level1)
+{
+    int32_t range = 1;
+    char pathBuf[] = "/data/RenderDump.log";
+
+    FILE *file = fopen(pathBuf, "wb+");
+    ASSERT_NE(nullptr, file);
+    int fd = fileno(file);
+    if (fd == -1) {
+        fclose(file);
+        ASSERT_NE(fd, -1);
+    }
+
+    int32_t ret = render_->AudioDevDump(render_, range, fd);
+#ifdef DISPLAY_COMMUNITY
+    ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+    ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+    fclose(file);
+}
+
+/**
+ * @tc.number: SUB_Driver_Audio_AudioDevDump_0700
+ * @tc.name: testCommonRenderAudioDevDump007
+ * @tc.desc: Dumps information about the audio device.
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump007, TestSize.Level1)
+{
+    int32_t range = 2;
+    char pathBuf[] = "/data/RenderDump.log";
+
+    FILE *file = fopen(pathBuf, "wb+");
+    ASSERT_NE(nullptr, file);
+    int fd = fileno(file);
+    if (fd == -1) {
+        fclose(file);
+        ASSERT_NE(fd, -1);
+    }
+
+    int32_t ret = render_->AudioDevDump(render_, range, fd);
+
+#ifdef DISPLAY_COMMUNITY
+    ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+    ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+    fclose(file);
+}
+
+/**
+ * @tc.number: SUB_Driver_Audio_AudioDevDump_0800
+ * @tc.name: testCommonRenderAudioDevDump008
+ * @tc.desc: Dumps information about the audio device.
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump008, TestSize.Level1)
+{
+    int32_t range = 3;
+    char pathBuf[] = "/data/RenderDump.log";
+
+    FILE *file = fopen(pathBuf, "wb+");
+    ASSERT_NE(nullptr, file);
+    int fd = fileno(file);
+    if (fd == -1) {
+        fclose(file);
+        ASSERT_NE(fd, -1);
+    }
+
+    int32_t ret = render_->AudioDevDump(render_, range, fd);
+
+#ifdef DISPLAY_COMMUNITY
+    ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+    ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+    fclose(file);
+}
+
+/**
+ * @tc.number: SUB_Driver_Audio_AudioDevDump_0900
+ * @tc.name: testCommonRenderAudioDevDump009
+ * @tc.desc: Dumps information about the audio device.
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump009, TestSize.Level1)
+{
+    int32_t range = 5;
+    char pathBuf[] = "/data/RenderDump.log";
+
+    FILE *file = fopen(pathBuf, "wb+");
+    ASSERT_NE(nullptr, file);
+    int fd = fileno(file);
+    if (fd == -1) {
+        fclose(file);
+        ASSERT_NE(fd, -1);
+    }
+
+    int32_t ret = render_->AudioDevDump(render_, range, fd);
+
+#ifdef DISPLAY_COMMUNITY
+    ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+    ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+    fclose(file);
+}
+
+/**
+ * @tc.number: SUB_Driver_Audio_AudioDevDump_1000
+ * @tc.name: testCommonRenderAudioDevDump010
+ * @tc.desc: Dumps information about the audio device.
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump010, TestSize.Level1)
+{
+    int32_t range = 6;
+    char pathBuf[] = "/data/RenderDump.log";
+
+    FILE *file = fopen(pathBuf, "wb+");
+    ASSERT_NE(nullptr, file);
+    int fd = fileno(file);
+    if (fd == -1) {
+        fclose(file);
+        ASSERT_NE(fd, -1);
+    }
+
+    int32_t ret = render_->AudioDevDump(render_, range, fd);
+
+#ifdef DISPLAY_COMMUNITY
+    ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+    ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+    fclose(file);
+}
+
+/**
+ * @tc.number: SUB_Driver_Audio_AudioDevDump_1700
+ * @tc.name: testCommonRenderAudioDevDump017
+ * @tc.desc: Dumps information about the audio device.
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump017, TestSize.Level1)
+{
+    int32_t range = 4;
+    char pathBuf[] = "/data/RenderDump.log";
+
+    FILE *file = fopen(pathBuf, "wb+");
+    ASSERT_NE(nullptr, file);
+    int fd = 0;
+
+    int32_t ret = render_->AudioDevDump(render_, range, fd);
+
+#ifdef DISPLAY_COMMUNITY
+    ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+    ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+    fclose(file);
+}
+
+/**
+ * @tc.number: SUB_Driver_Audio_AudioDevDump_1800
+ * @tc.name: testCommonRenderAudioDevDump018
+ * @tc.desc: Dumps information about the audio device.
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump018, TestSize.Level1)
+{
+    int32_t range = 4;
+    char pathBuf[] = "/data/RenderDump.log";
+
+    FILE *file = fopen(pathBuf, "wb+");
+    ASSERT_NE(nullptr, file);
+    int fd = 1;
+
+    int32_t ret = render_->AudioDevDump(render_, range, fd);
+
+#ifdef DISPLAY_COMMUNITY
+    ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+    ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+    fclose(file);
+}
+
+/**
+ * @tc.number: SUB_Driver_Audio_AudioDevDump_1900
+ * @tc.name: testCommonRenderAudioDevDump019
+ * @tc.desc: Dumps information about the audio device.
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump019, TestSize.Level1)
+{
+    int32_t range = 4;
+    char pathBuf[] = "/data/RenderDump.log";
+
+    FILE *file = fopen(pathBuf, "wb+");
+    ASSERT_NE(nullptr, file);
+    int fd = 2;
+
+    int32_t ret = render_->AudioDevDump(render_, range, fd);
+
+#ifdef DISPLAY_COMMUNITY
+    ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+    ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+    fclose(file);
+}
+
+/**
+ * @tc.number: SUB_Driver_Audio_AudioDevDump_2000
+ * @tc.name: testCommonRenderAudioDevDump020
+ * @tc.desc: Dumps information about the audio device.
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump020, TestSize.Level1)
+{
+    int32_t range = 4;
+    char pathBuf[] = "/data/RenderDump.log";
+
+    FILE *file = fopen(pathBuf, "wb+");
+    ASSERT_NE(nullptr, file);
+    int fd = 3;
+
+    int32_t ret = render_->AudioDevDump(render_, range, fd);
+
+#ifdef DISPLAY_COMMUNITY
+    ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+    ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+    fclose(file);
+}
+
+/**
+ * @tc.number: SUB_Driver_Audio_AudioDevDump_2100
+ * @tc.name: testCommonRenderAudioDevDump021
+ * @tc.desc: Dumps information about the audio device.
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump021, TestSize.Level1)
+{
+    int32_t range = 4;
+    char pathBuf[] = "/data/RenderDump.log";
+
+    FILE *file = fopen(pathBuf, "wb+");
+    ASSERT_NE(nullptr, file);
+    int fd = 4;
+
+    int32_t ret = render_->AudioDevDump(render_, range, fd);
+
+#ifdef DISPLAY_COMMUNITY
+    ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+    ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+    fclose(file);
+}
+
+/**
+ * @tc.number: SUB_Driver_Audio_AudioDevDump_2200
+ * @tc.name: testCommonRenderAudioDevDump022
+ * @tc.desc: Dumps information about the audio device.
+ */
+HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump022, TestSize.Level1)
+{
+    int32_t range = 4;
+    char pathBuf[] = "/data/RenderDump.log";
+
+    FILE *file = fopen(pathBuf, "wb+");
+    ASSERT_NE(nullptr, file);
+    int fd = -2;
+
+    int32_t ret = render_->AudioDevDump(render_, range, fd);
+
+#ifdef DISPLAY_COMMUNITY
+    ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+    ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+    fclose(file);
 }
 } // end of namespace

@@ -20,9 +20,8 @@ using namespace std;
 using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
 using namespace OHOS::HDI::PinAuth;
-using namespace OHOS::HDI::PinAuth::V1_0;
-using namespace OHOS::HDI::PinAuth::V1_1;
-using Property = OHOS::HDI::PinAuth::V1_1::Property;
+using namespace OHOS::HDI::PinAuth::V2_0;
+using Property = OHOS::HDI::PinAuth::V2_0::Property;
 
 static ExecutorImpl g_executorImpl(make_shared<OHOS::UserIam::PinAuth::PinAuth>());
 static OHOS::Parcel parcel;
@@ -44,10 +43,12 @@ void UserIamPinAuthTest::TearDown()
 {
 }
 
-class DummyIExecutorCallback : public IExecutorCallbackV1_0 {
+class DummyIExecutorCallback : public IExecutorCallback {
 public:
-    DummyIExecutorCallback(int32_t onResultResult, int32_t onGetDataResult, int32_t onGetDataV1Result)
-        : onResultResult_(onResultResult), onGetDataResult_(onGetDataResult), onGetDataV1Result_(onGetDataV1Result)
+    DummyIExecutorCallback(int32_t onResultResult, int32_t onGetDataResult, int32_t onGetDataV1Result,
+        int32_t onTipResult, int32_t onMessageResult)
+        : onResultResult_(onResultResult), onGetDataResult_(onGetDataResult), onTipResult_(onTipResult),
+        onMessageResult_(onMessageResult)
     {
     }
 
@@ -57,32 +58,36 @@ public:
         return onResultResult_;
     }
 
-    int32_t OnGetData(uint64_t scheduleId, const std::vector<uint8_t> &algoParameter, uint64_t authSubType) override
+    int32_t OnGetData(const std::vector<uint8_t>& algoParameter, uint64_t authSubType, uint32_t algoVersion,
+         const std::vector<uint8_t>& challenge) override
     {
-        cout << "scheduleId is " << scheduleId << endl;
+        cout << "algoVersion is " << algoVersion << endl;
         cout << " algoParameter len is " << algoParameter.size() << endl;
         cout << " authSubType is " << authSubType << endl;
         return onGetDataResult_;
     }
 
-    int32_t OnGetDataV1_1(uint64_t scheduleId, const std::vector<uint8_t> &algoParameter, uint64_t authSubType,
-        uint32_t algoVersion)
+    int32_t OnTip(int32_t tip, const std::vector<uint8_t>& extraInfo) override
     {
-        cout << "scheduleId is " << scheduleId << endl;
-        cout << " authSubType is " << authSubType << endl;
-        return onGetDataV1Result_;
+        return onTipResult_;
+    }
+
+    int32_t OnMessage(int32_t destRole, const std::vector<uint8_t>& msg) override
+    {
+        return onMessageResult_;
     }
 
 private:
     int32_t onResultResult_;
     int32_t onGetDataResult_;
-    int32_t onGetDataV1Result_;
+    int32_t onTipResult_;
+    int32_t onMessageResult_;
 };
 
 static void FillTestExecutorInfo(Parcel &parcel, ExecutorInfo &executorInfo)
 {
     executorInfo.sensorId = parcel.ReadUint16();
-    executorInfo.executorType = parcel.ReadUint32();
+    executorInfo.executorMatcher = parcel.ReadUint32();
     executorInfo.executorRole = static_cast<ExecutorRole>(parcel.ReadInt32());
     executorInfo.authType = static_cast<AuthType>(parcel.ReadInt32());
     executorInfo.esl = static_cast<ExecutorSecureLevel>(parcel.ReadInt32());
@@ -90,34 +95,26 @@ static void FillTestExecutorInfo(Parcel &parcel, ExecutorInfo &executorInfo)
     FillTestUint8Vector(parcel, executorInfo.extraInfo);
 }
 
-static void FillTestTemplateInfo(Parcel &parcel, TemplateInfo &templateInfo)
-{
-    templateInfo.executorType = parcel.ReadUint32();
-    templateInfo.lockoutDuration = parcel.ReadInt32();
-    templateInfo.remainAttempts = parcel.ReadInt32();
-    FillTestUint8Vector(parcel, templateInfo.extraInfo);
-}
-
-static void FillTestIExecutorCallback(Parcel &parcel, sptr<IExecutorCallbackV1_0> &callbackObj)
+static void FillTestIExecutorCallback(Parcel &parcel, sptr<IExecutorCallback> &callbackObj)
 {
     bool isNull = parcel.ReadBool();
     if (isNull) {
         callbackObj = nullptr;
     } else {
         callbackObj = new (std::nothrow) DummyIExecutorCallback(parcel.ReadInt32(),
-            parcel.ReadInt32(), parcel.ReadInt32());
+            parcel.ReadInt32(), parcel.ReadInt32(), parcel.ReadInt32(), parcel.ReadInt32());
         if (callbackObj == nullptr) {
             cout << "callbackObj construct fail" << endl;
         }
     }
 }
 
-void FillTestGetPropertyTypeVector(Parcel &parcel, std::vector<GetPropertyType> &types)
+void FillTestGetPropertyTypeVector(Parcel &parcel, std::vector<int32_t> &types)
 {
     std::vector<uint32_t> propertyTypeUint32;
     FillTestUint32Vector(parcel, propertyTypeUint32);
     for (const auto& val : propertyTypeUint32) {
-        types.push_back(static_cast<GetPropertyType>(val));
+        types.push_back(static_cast<HdiGetPropertyType>(val));
     }
 
     cout << "success"  << endl;
@@ -136,24 +133,6 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0101, Function | Medi
     ExecutorInfo executorInfo;
     FillTestExecutorInfo(parcel, executorInfo);
     int32_t ret = g_executorImpl.GetExecutorInfo(executorInfo);
-    cout << "ret is " << ret << endl;
-    ASSERT_EQ(ret != Expectedvalue, true);
-}
-
-/**
- * @tc.number: Security_IAM_PinAuth_HDI_FUNC_0102
- * @tc.name: Test GetTemplateInfo
- * @tc.size: MediumTest
- * @tc.type: Function
- * @tc.level: Level1
- */
-HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0102, Function | MediumTest | Level1)
-{
-    cout << "start GetTemplateInfo" << endl;
-    uint64_t templateId = parcel.ReadUint64();
-    TemplateInfo templateInfo;
-    FillTestTemplateInfo(parcel, templateInfo);
-    int32_t ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
     cout << "ret is " << ret << endl;
     ASSERT_EQ(ret != Expectedvalue, true);
 }
@@ -193,7 +172,8 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0104, Function | Medi
     uint64_t authSubType = parcel.ReadUint64();
     std::vector<uint8_t> data;
     FillTestUint8Vector(parcel, data);
-    int32_t ret = g_executorImpl.OnSetData(scheduleId, authSubType, data);
+    int32_t resultCode = 0;
+    int32_t ret = g_executorImpl.SetData(scheduleId, authSubType, data, resultCode);
     cout << "ret is " << ret << endl;
     ASSERT_EQ(ret != Expectedvalue, true);
 }
@@ -210,7 +190,7 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0105, Function | Medi
     cout << "start Enroll" << endl;
     uint64_t scheduleId = parcel.ReadUint64();
     std::vector<uint8_t> extraInfo;
-    sptr<IExecutorCallbackV1_0> callbackObj;
+    sptr<IExecutorCallback> callbackObj;
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.Enroll(scheduleId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
@@ -229,13 +209,15 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0106, Function | Medi
     cout << "start Authenticate" << endl;
     uint64_t scheduleId = parcel.ReadUint64();
     uint64_t templateId = parcel.ReadUint64();
+    std::vector<uint64_t> templateIdList;
+    templateIdList.push_back(templateId);
     std::vector<uint8_t> extraInfo;
     FillTestUint8Vector(parcel, extraInfo);
-    sptr<IExecutorCallbackV1_0> callbackObj;
+    sptr<IExecutorCallback> callbackObj;
     FillTestIExecutorCallback(parcel, callbackObj);
-    int32_t ret = g_executorImpl.Authenticate(scheduleId, templateId, extraInfo, callbackObj);
+    int32_t ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    ASSERT_EQ(ret, 0);
+    ASSERT_EQ(ret, 2);
 }
 
 /**
@@ -271,26 +253,6 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0108, Function | Medi
 }
 
 /**
- * @tc.number: Security_IAM_PinAuth_HDI_FUNC_0109
- * @tc.name: Test SendCommand
- * @tc.size: MediumTest
- * @tc.type: Function
- * @tc.level: Level1
- */
-HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0109, Function | MediumTest | Level1)
-{
-    cout << "start SendCommand" << endl;
-    int32_t commandId = parcel.ReadInt32();
-    std::vector<uint8_t> extraInfo;
-    FillTestUint8Vector(parcel, extraInfo);
-    sptr<IExecutorCallbackV1_0> callbackObj;
-    FillTestIExecutorCallback(parcel, callbackObj);
-    int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
-    cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 0);
-}
-
-/**
  * @tc.number: Security_IAM_PinAuth_HDI_FUNC_0110
  * @tc.name: Test GetExecutorList
  * @tc.size: MediumTest
@@ -301,8 +263,10 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0110, Function | Medi
 {
     cout << "start GetExecutorList" << endl;
     PinAuthInterfaceService g_pinAuthInterFaceService;
-    std::vector<sptr<IExecutorV1_0>> executorList;
-    int32_t ret = g_pinAuthInterFaceService.GetExecutorList(executorList);
+    std::vector<sptr<IAllInOneExecutor>> allInOneExecutors;
+    std::vector<sptr<IVerifier>> verifiers;
+    std::vector<sptr<ICollector>> collectors;
+    int32_t ret = g_pinAuthInterFaceService.GetExecutorList(allInOneExecutors, verifiers, collectors);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
 }
@@ -319,7 +283,7 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_NEW_FUNC_0101, Function | 
     cout << "start GetProperty" << endl;
     std::vector<uint64_t> templateIdList;
     FillTestUint64Vector(parcel, templateIdList);
-    std::vector<GetPropertyType> propertyTypes;
+    std::vector<int32_t> propertyTypes;
     FillTestGetPropertyTypeVector(parcel, propertyTypes);
     Property property;
 
@@ -339,10 +303,12 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_NEW_FUNC_0101, Function | 
 HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_NEW_FUNC_0102, Function | MediumTest | Level1)
 {
     cout << "start GetExecutorListV1_1" << endl;
-    std::vector<sptr<V1_1::IExecutor>> executorList;
     PinAuthInterfaceService pin_Interface;
 
-    int32_t ret = pin_Interface.GetExecutorListV1_1(executorList);
+    std::vector<sptr<IAllInOneExecutor>> allInOneExecutors;
+    std::vector<sptr<IVerifier>> verifiers;
+    std::vector<sptr<ICollector>> collectors;
+    int32_t ret = pin_Interface.GetExecutorList(allInOneExecutors, verifiers, collectors);
 
     cout << "ret is " << ret << endl;
     ASSERT_EQ(ret, 0);

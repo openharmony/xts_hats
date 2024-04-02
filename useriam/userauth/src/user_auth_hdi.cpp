@@ -20,7 +20,7 @@ using namespace std;
 using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
 using namespace OHOS::HDI::UserAuth;
-using namespace OHOS::HDI::UserAuth::V1_3;
+using namespace OHOS::HDI::UserAuth::V2_0;
 
 static const uint32_t MAX_FUZZ_STRUCT_LEN = 20;
 static UserAuthInterfaceService g_service;
@@ -43,12 +43,12 @@ void UserIamUserAuthTest::TearDown()
 {
 }
 
-static void FillAuthTypeVector(Parcel &parcel, vector<AuthType> &vector)
+static void FillAuthTypeVector(Parcel &parcel, vector<int32_t> &vector)
 {
     uint32_t len = parcel.ReadInt32() % MAX_FUZZ_STRUCT_LEN;
     vector.resize(len);
     for (uint32_t i = 0; i < len; i++) {
-        vector[i] = static_cast<AuthType>(parcel.ReadInt32());
+        vector[i] = parcel.ReadInt32();
     }
 }
 
@@ -56,6 +56,7 @@ static void FillEnrollParam(Parcel &parcel, EnrollParam &enrollParam)
 {
     enrollParam.authType = static_cast<AuthType>(parcel.ReadInt32());
     enrollParam.executorSensorHint = parcel.ReadUint32();
+    enrollParam.userId = parcel.ReadInt32();
 }
 
 static void FillExecutorRegisterInfo(Parcel &parcel, ExecutorRegisterInfo &executorRegisterInfo)
@@ -122,13 +123,13 @@ static void FillExecutorSendMsg(Parcel &parcel, ExecutorSendMsg &executorSendMsg
     FillTestUint8Vector(parcel, executorSendMsg.msg);
 }
 
-static void FillAuthSolution(Parcel &parcel, AuthSolution &authSolution)
+static void FillAuthParam(Parcel &parcel, AuthParam &authParam)
 {
-    authSolution.userId = parcel.ReadInt32();
-    authSolution.authTrustLevel = parcel.ReadUint32();
-    authSolution.authType = static_cast<AuthType>(parcel.ReadInt32());
-    authSolution.executorSensorHint = parcel.ReadUint32();
-    FillTestUint8Vector(parcel, authSolution.challenge);
+    authParam.baseParam.userId = parcel.ReadInt32();
+    authParam.baseParam.authTrustLevel = parcel.ReadUint32();
+    authParam.authType = static_cast<AuthType>(parcel.ReadInt32());
+    authParam.baseParam.executorSensorHint = parcel.ReadUint32();
+    FillTestUint8Vector(parcel, authParam.baseParam.challenge);
 }
 
 static void FillScheduleInfoVector(Parcel &parcel, vector<ScheduleInfo> &vector)
@@ -176,7 +177,7 @@ static void FillAuthResultInfo(Parcel &parcel, AuthResultInfo &authResultInfo)
     FillTestUint8Vector(parcel, authResultInfo.token);
 }
 
-void FillTestScheduleInfoV1_1(Parcel &parcel, ScheduleInfoV1_1 &scheduleInfo)
+void FillTestScheduleInfo(Parcel &parcel, ScheduleInfo &scheduleInfo)
 {
     scheduleInfo.scheduleId = parcel.ReadUint64();
     FillTestUint64Vector(parcel, scheduleInfo.templateIds);
@@ -184,16 +185,18 @@ void FillTestScheduleInfoV1_1(Parcel &parcel, ScheduleInfoV1_1 &scheduleInfo)
     scheduleInfo.executorMatcher = parcel.ReadUint32();
     scheduleInfo.scheduleMode = static_cast<ScheduleMode>(parcel.ReadInt32());
     FillExecutorInfoVector(parcel, scheduleInfo.executors);
-    FillTestUint8Vector(parcel, scheduleInfo.extraInfo);
+    std::vector<uint8_t> extraInfo;
+    FillTestUint8Vector(parcel, extraInfo);
+    scheduleInfo.executorMessages.push_back(extraInfo);
     cout << "success"  << endl;
 }
 
-void FillTestScheduleInfoV1_1Vector(Parcel &parcel, vector<ScheduleInfoV1_1> &vector)
+void FillTestScheduleInfo_Vector(Parcel &parcel, vector<ScheduleInfo> &vector)
 {
     uint32_t len = parcel.ReadInt32() % MAX_FUZZ_STRUCT_LEN;
     vector.resize(len);
     for (uint32_t i = 0; i < len; i++) {
-        FillTestScheduleInfoV1_1(parcel, vector[i]);
+        FillTestScheduleInfo(parcel, vector[i]);
     }
     cout << "success"  << endl;
 }
@@ -245,7 +248,7 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0103, Function | Me
 {
     cout << "start GetCredential" << endl;
     int32_t userId = parcel.ReadInt32();
-    AuthType authType = static_cast<AuthType>(parcel.ReadInt32());
+    int32_t authType = static_cast<int32_t>(parcel.ReadInt32());
     std::vector<CredentialInfo> infos;
     FillCredentialInfoVector(parcel, infos);
     int32_t ret = g_service.GetCredential(userId, authType, infos);
@@ -265,7 +268,7 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0104, Function | Me
     cout << "start GetUserInfo" << endl;
     int32_t userId = parcel.ReadInt32();
     uint64_t secureUid = parcel.ReadUint64();
-    PinSubType pinSubType = static_cast<PinSubType>(parcel.ReadUint32());
+    int32_t pinSubType = static_cast<int32_t>(parcel.ReadUint32());
     std::vector<EnrolledInfo> infos;
     FillEnrolledInfoVector(parcel, infos);
     int32_t ret = g_service.GetUserInfo(userId, secureUid, pinSubType, infos);
@@ -288,7 +291,9 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0105, Function | Me
     FillTestUint8Vector(parcel, authToken);
     std::vector<CredentialInfo> deletedInfos;
     FillCredentialInfoVector(parcel, deletedInfos);
-    int32_t ret = g_service.DeleteUser(userId, authToken, deletedInfos);
+    std::vector<uint8_t> rootSecret;
+    FillTestUint8Vector(parcel, rootSecret);
+    int32_t ret = g_service.DeleteUser(userId, authToken, deletedInfos, rootSecret);
     cout << "ret is " << ret << endl;
     ASSERT_EQ(ret != Expectedvalue, true);
 }
@@ -375,14 +380,13 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0109, Function | Me
 HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0110, Function | MediumTest | Level1)
 {
     cout << "start BeginEnrollment" << endl;
-    int32_t userId = parcel.ReadInt32();
     std::vector<uint8_t> authToken;
     FillTestUint8Vector(parcel, authToken);
     EnrollParam param;
     FillEnrollParam(parcel, param);
     ScheduleInfo info;
     FillScheduleInfo(parcel, info);
-    int32_t ret = g_service.BeginEnrollment(userId, authToken, param, info);
+    int32_t ret = g_service.BeginEnrollment(authToken, param, info);
     cout << "ret is " << ret << endl;
     ASSERT_EQ(ret != Expectedvalue, true);
 }
@@ -475,8 +479,8 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0115, Function | Me
 {
     cout << "start BeginAuthentication" << endl;
     uint64_t contextId = parcel.ReadUint64();
-    AuthSolution param;
-    FillAuthSolution(parcel, param);
+    AuthParam param;
+    FillAuthParam(parcel, param);
     std::vector<ScheduleInfo> scheduleInfos;
     FillScheduleInfoVector(parcel, scheduleInfos);
     int32_t ret = g_service.BeginAuthentication(contextId, param, scheduleInfos);
@@ -499,7 +503,8 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0116, Function | Me
     FillTestUint8Vector(parcel, scheduleResult);
     AuthResultInfo info;
     FillAuthResultInfo(parcel, info);
-    int32_t ret = g_service.UpdateAuthenticationResult(contextId, scheduleResult, info);
+    EnrolledState enrolledState;
+    int32_t ret = g_service.UpdateAuthenticationResult(contextId, scheduleResult, info, enrolledState);
     cout << "ret is " << ret << endl;
     ASSERT_EQ(ret != Expectedvalue, true);
 }
@@ -585,10 +590,10 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0121, Function | Me
 {
     cout << "start GetValidSolution" << endl;
     int32_t userId = parcel.ReadInt32();
-    std::vector<AuthType> authTypes;
+    std::vector<int32_t> authTypes;
     FillAuthTypeVector(parcel, authTypes);
     uint32_t authTrustLevel = parcel.ReadUint32();
-    std::vector<AuthType> validTypes;
+    std::vector<int32_t> validTypes;
     FillAuthTypeVector(parcel, validTypes);
     int32_t ret = g_service.GetValidSolution(userId, authTypes, authTrustLevel, validTypes);
     cout << "ret is " << ret << endl;
@@ -605,14 +610,13 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0121, Function | Me
 HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_NEW_FUNC_0101, Function | MediumTest | Level1)
 {
     cout << "start BeginEnrollmentV1_1" << endl;
-    int32_t userId = parcel.ReadInt32();
     std::vector<uint8_t> authToken;
     FillTestUint8Vector(parcel, authToken);
     EnrollParam param;
     FillEnrollParam(parcel, param);
-    ScheduleInfoV1_1 info;
-    FillTestScheduleInfoV1_1(parcel, info);
-    int32_t ret = g_service.BeginEnrollmentV1_1(userId, authToken, param, info);
+    ScheduleInfo info;
+    FillTestScheduleInfo(parcel, info);
+    int32_t ret = g_service.BeginEnrollment(authToken, param, info);
 
     ASSERT_EQ(ret != Expectedvalue, true);
 }
@@ -628,11 +632,11 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_NEW_FUNC_0102, Function 
 {
     cout << "start BeginAuthenticationV1_1" << endl;
     uint64_t contextId = parcel.ReadUint64();
-    AuthSolution param;
-    FillAuthSolution(parcel, param);
-    std::vector<ScheduleInfoV1_1> scheduleInfos;
-    FillTestScheduleInfoV1_1Vector(parcel, scheduleInfos);
-    int32_t ret = g_service.BeginAuthenticationV1_1(contextId, param, scheduleInfos);
+    AuthParam param;
+    FillAuthParam(parcel, param);
+    std::vector<ScheduleInfo> scheduleInfos;
+    FillTestScheduleInfo_Vector(parcel, scheduleInfos);
+    int32_t ret = g_service.BeginAuthentication(contextId, param, scheduleInfos);
 
     ASSERT_EQ(ret != Expectedvalue, true);
 }
@@ -652,9 +656,9 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_NEW_FUNC_0103, Function 
     std::vector<uint8_t> challenge;
     FillTestUint8Vector(parcel, challenge);
     uint32_t executorId = parcel.ReadUint32();
-    ScheduleInfoV1_1 scheduleInfo;
-    FillTestScheduleInfoV1_1(parcel, scheduleInfo);
-    int32_t ret = g_service.BeginIdentificationV1_1(contextId, authType, challenge, executorId, scheduleInfo);
+    ScheduleInfo scheduleInfo;
+    FillTestScheduleInfo(parcel, scheduleInfo);
+    int32_t ret = g_service.BeginIdentification(contextId, authType, challenge, executorId, scheduleInfo);
 
     ASSERT_EQ(ret != Expectedvalue, true);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,8 +18,8 @@
 #include <gtest/gtest.h>
 #include "hdf_dlist.h"
 #include "osal_mem.h"
-#include "v2_0/iaudio_adapter.h"
-#include "v2_0/iaudio_manager.h"
+#include "v3_0/iaudio_adapter.h"
+#include "v3_0/iaudio_manager.h"
 
 using namespace std;
 using namespace testing::ext;
@@ -1985,7 +1985,7 @@ HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_EnumTest1_2300, Test
 HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_EnumTest1_2400, TestSize.Level3)
 {
     printf("HdfAudioHdiEnumTest124: start.");
-    EXPECT_TRUE(AUDIO_DEVICE_UNKNOWN == (1 << 11) + 1);
+    EXPECT_TRUE(AUDIO_DP_DEVICE == 1 << 12);
     printf("HdfAudioHdiEnumTest124: end.");
 }
 

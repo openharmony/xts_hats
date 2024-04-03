@@ -14,8 +14,8 @@
  */
 
 #include "osal_mem.h"
-#include "v2_0/iaudio_capture.h"
-#include "v2_0/iaudio_manager.h"
+#include "v3_0/iaudio_capture.h"
+#include "v3_0/iaudio_manager.h"
 #include <climits>
 #include <gtest/gtest.h>
 
@@ -197,7 +197,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetVolume001, TestSize.Le
     EXPECT_NE(capture_->SetVolume, nullptr);
 
     int32_t ret = capture_->SetVolume(capture_, volume);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 /**
  * @tc.number : SUB_Driver_Audio_CaptureSetVolume_0500
@@ -210,7 +214,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetVolume002, TestSize.Le
     EXPECT_NE(capture_->SetVolume, nullptr);
 
     int32_t ret = capture_->SetVolume(capture_, volume);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 /**
  * @tc.number : SUB_Driver_Audio_CaptureSetVolume_0600
@@ -251,7 +259,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetVolume005, TestSize.Le
     EXPECT_NE(capture_->SetVolume, nullptr);
     for (i = 0; i < 1000; i++) {
         ret = capture_->SetVolume(capture_, volume);
+#ifdef DISPLAY_COMMUNITY
         EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+        EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
     }
 }
 /**
@@ -310,7 +322,9 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetMute001, TestSize.Leve
     }
     isSupport = true;
     ret = capture_->GetMute(capture_, &isSupport);
-    ASSERT_EQ(isSupport, false);
+    if (ret == HDF_SUCCESS) {
+        ASSERT_EQ(isSupport, false);
+    }
 }
 /**
  * @tc.number : SUB_Driver_Audio_CaptureSetMute_0500
@@ -336,7 +350,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetMute003, TestSize.Leve
     EXPECT_NE(capture_->SetMute, nullptr);
     for (i = 0; i < 1000; i++) {
         ret = capture_->SetMute(capture_, false);
+#ifdef DISPLAY_COMMUNITY
         EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+        EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
     }
 }
 /**
@@ -424,7 +442,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetGain001, TestSize.Leve
     EXPECT_NE(capture_->SetGain, nullptr);
 
     int32_t ret = capture_->SetGain(capture_, mute);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 /**
  * @tc.number : SUB_Driver_Audio_CaptureSetGain_0400
@@ -437,7 +459,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetGain002, TestSize.Leve
     EXPECT_NE(capture_->SetGain, nullptr);
 
     int32_t ret = capture_->SetGain(capture_, mute);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 /**
  * @tc.number : SUB_Driver_Audio_CaptureSetGain_0500
@@ -463,7 +489,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetGain004, TestSize.Leve
     EXPECT_NE(capture_->SetGain, nullptr);
 
     int32_t ret = capture_->SetGain(capture_, gain);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 /**
  * @tc.number : SUB_Driver_Audio_CaptureSetGain_0700
@@ -476,7 +506,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetGain005, TestSize.Leve
     EXPECT_NE(capture_->SetGain, nullptr);
 
     int32_t ret = capture_->SetGain(capture_, gain);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 /**
  * @tc.number : SUB_Driver_Audio_CaptureSetGain_0800
@@ -492,7 +526,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetGain006, TestSize.Leve
     EXPECT_NE(capture_->SetGain, nullptr);
     for (i = 0; i < 1000; i++) {
         ret = capture_->SetGain(capture_, mute);
+#ifdef DISPLAY_COMMUNITY
         EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+        EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
     }
 }
 /**
@@ -521,7 +559,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureGetGain001, TestSize.Leve
     EXPECT_NE(capture_->SetGain, nullptr);
     for (i = 0; i < 1000; i++) {
         ret = capture_->GetGain(capture_, &gain);
+#ifdef DISPLAY_COMMUNITY
         EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+        EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
     }
 }
 /**
@@ -590,7 +632,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureGetGainThreshold005, Test
     EXPECT_NE(capture_->GetGainThreshold, nullptr);
     for (i = 0; i < 1000; i++) {
         ret = capture_->GetGainThreshold(capture_, &bottom, &top);
+#ifdef DISPLAY_COMMUNITY
         EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+        EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
     }
 }
 /**
@@ -641,7 +687,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene003, TestSize.
     sceneDesc.scene.id = AUDIO_IN_RINGTONE;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_SUCCESS);
+#endif
     free(sceneDesc.desc.desc);
 }
 /**
@@ -692,7 +742,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene006, TestSize.
     sceneDesc.scene.id = AUDIO_IN_RINGTONE;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_SUCCESS);
+#endif
     free(sceneDesc.desc.desc);
 }
 /**
@@ -725,7 +779,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene008, TestSize.
     sceneDesc.scene.id = AUDIO_IN_MEDIA;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_SUCCESS);
+#endif
     free(sceneDesc.desc.desc);
 }
 /**
@@ -741,7 +799,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene009, TestSize.
     sceneDesc.scene.id = AUDIO_IN_COMMUNICATION;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_SUCCESS);
+#endif
     free(sceneDesc.desc.desc);
 }
 /**
@@ -757,7 +819,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene010, TestSize.
     sceneDesc.scene.id = AUDIO_IN_RINGTONE;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_SUCCESS);
+#endif
     free(sceneDesc.desc.desc);
 }
 /**
@@ -773,7 +839,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene011, TestSize.
     sceneDesc.scene.id = AUDIO_IN_CALL;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_SUCCESS);
+#endif
     free(sceneDesc.desc.desc);
 }
 /**
@@ -810,7 +880,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene013, TestSize.
     sceneDesc.scene.id = AUDIO_IN_MEDIA;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_SUCCESS);
+#endif
     free(sceneDesc.desc.desc);
 }
 /**
@@ -827,7 +901,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene014, TestSize.
     sceneDesc.scene.id = AUDIO_IN_COMMUNICATION;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_SUCCESS);
+#endif
     free(sceneDesc.desc.desc);
 }
 /**
@@ -844,7 +922,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene015, TestSize.
     sceneDesc.scene.id = AUDIO_IN_RINGTONE;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_SUCCESS);
+#endif
     free(sceneDesc.desc.desc);
 }
 /**
@@ -861,7 +943,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene016, TestSize.
     sceneDesc.scene.id = AUDIO_IN_CALL;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_NE(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_SUCCESS);
+#endif
     free(sceneDesc.desc.desc);
 }
 /**
@@ -919,7 +1005,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureCheckSceneCapability003, 
     bool isSupport = false;
 
     int32_t ret = capture_->CheckSceneCapability(capture_, &sceneDesc, &isSupport);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
     free(sceneDesc.desc.desc);
 }
 /**
@@ -1159,40 +1249,6 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureCaptureFrame012, TestSize
     }
 }
 /**
- * @tc.number : SUB_Driver_Audio_CaptureGetCapturePosition_0300
- * @tc.name   : testAudioCaptureGetCapturePosition001
- * @tc.desc   : test API GetCapturePosition 1000times
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureGetCapturePosition001, TestSize.Level1)
-{
-    uint64_t frames;
-    struct AudioTimeStamp time;
-    uint32_t frameLen = (uint64_t)GetCaptureBufferSize();
-    uint64_t requestBytes = frameLen;
-    int i = 0;
-    ASSERT_NE(capture_->CaptureFrame, nullptr);
-    ASSERT_NE(capture_->GetCapturePosition, nullptr);
-
-    int32_t ret = capture_->Start(capture_);
-    EXPECT_EQ(ret, HDF_SUCCESS);
-
-    int8_t *frame = (int8_t *)calloc(1, frameLen);
-    EXPECT_NE(nullptr, frame);
-
-    ret = capture_->CaptureFrame(capture_, frame, &frameLen, &requestBytes);
-    EXPECT_EQ(ret, HDF_SUCCESS);
-    for (i = 0; i < 1000; i++) {
-        ret = capture_->GetCapturePosition(capture_, &frames, &time);
-        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-    }
-
-    capture_->Stop(capture_);
-    if (frame != nullptr) {
-        free(frame);
-        frame = nullptr;
-    }
-}
-/**
  * @tc.number : SUB_Driver_Audio_CaptureGetCapturePosition_0400
  * @tc.name   : testAudioCaptureGetCapturePosition002
  * @tc.desc   : test API GetCapturePosition All parameters are nullptr
@@ -1399,7 +1455,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes001, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 
 /**
@@ -1426,7 +1486,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes002, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_FAILURE);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 
 /**
@@ -1480,7 +1544,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes004, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_FAILURE);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 
 /**
@@ -1507,7 +1575,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes005, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_FAILURE);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 
 /**
@@ -1534,7 +1606,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes006, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_FAILURE);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 /**
  * @tc.number : SUB_Driver_Audio_Capture_SetSampleAttributes_0800
@@ -1560,7 +1636,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes007, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 
 /**
@@ -1587,7 +1667,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes008, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 
 /**
@@ -1614,7 +1698,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes009, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 
 /**
@@ -1641,7 +1729,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes010, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 
 /**
@@ -1668,7 +1760,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes011, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 
 /**
@@ -1695,7 +1791,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes012, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 
 /**
@@ -1722,7 +1822,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes013, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 
 /**
@@ -1749,7 +1853,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes014, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_FAILURE);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 
 /**
@@ -1759,23 +1867,45 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes014, Functi
  */
 HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetSampleAttributes001, Function | MediumTest | Level1)
 {
-    struct AudioSampleAttributes attrs = {};
+    struct AudioSampleAttributes attrs = {
+        .type = AUDIO_IN_MEDIA,
+        .interleaved = 0,
+        .format = AUDIO_FORMAT_TYPE_PCM_16_BIT,
+        .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
+        .channelCount = TEST_CHANNEL_COUNT,
+        .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .isBigEndian = false,
+        .isSignedData = true,
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .stopThreshold = INT_MAX,
+        .silenceThreshold = BUFFER_LENTH,
+    };
+    int32_t ret = 0;
 
-    int32_t ret = capture_->GetSampleAttributes(capture_, &attrs);
+    ret = capture_->SetSampleAttributes(capture_, &attrs);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
-    EXPECT_EQ(attrs.format, AUDIO_FORMAT_TYPE_PCM_16_BIT);
-    EXPECT_EQ(attrs.sampleRate, TEST_SAMPLE_RATE_MASK_48000);
-    EXPECT_EQ(attrs.channelCount, TEST_CHANNEL_COUNT);
-    EXPECT_EQ(attrs.interleaved, 0);
-    EXPECT_EQ(attrs.type, AUDIO_IN_MEDIA);
-    EXPECT_EQ(attrs.period, DEEP_BUFFER_CAPTURE_PERIOD_SIZE);
-    EXPECT_EQ(attrs.frameSize, AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM);
-    EXPECT_EQ(attrs.isBigEndian, false);
-    EXPECT_EQ(attrs.isSignedData, true);
-    EXPECT_EQ(attrs.startThreshold,
-              DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM));
-    EXPECT_EQ(attrs.stopThreshold, INT_MAX);
-    EXPECT_EQ(attrs.silenceThreshold, BUFFER_LENTH);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+    if (ret == HDF_SUCCESS) {
+        ret = capture_->GetSampleAttributes(capture_, &attrs);
+        EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(attrs.format, AUDIO_FORMAT_TYPE_PCM_16_BIT);
+        EXPECT_EQ(attrs.sampleRate, TEST_SAMPLE_RATE_MASK_48000);
+        EXPECT_EQ(attrs.channelCount, TEST_CHANNEL_COUNT);
+        EXPECT_EQ(attrs.interleaved, 0);
+        EXPECT_EQ(attrs.type, AUDIO_IN_MEDIA);
+        EXPECT_EQ(attrs.period, DEEP_BUFFER_CAPTURE_PERIOD_SIZE);
+        EXPECT_EQ(attrs.frameSize, AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM);
+        EXPECT_EQ(attrs.isBigEndian, false);
+        EXPECT_EQ(attrs.isSignedData, true);
+        EXPECT_EQ(attrs.startThreshold,
+                DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM));
+        EXPECT_EQ(attrs.stopThreshold, INT_MAX);
+        EXPECT_EQ(attrs.silenceThreshold, BUFFER_LENTH);
+    }
 }
 
 /**
@@ -1803,27 +1933,19 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetSampleAttributes002, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrsSet);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 
-    ret = capture_->GetSampleAttributes(capture_, &attrsGet);
-    EXPECT_EQ(ret, HDF_SUCCESS);
-    EXPECT_EQ(attrsGet.isBigEndian, true);
-    EXPECT_EQ(attrsGet.isSignedData, false);
-    EXPECT_EQ(attrsGet.stopThreshold, 15 * 1024);
-}
-
-/**
- * @tc.number : SUB_Driver_Audio_Capture_ReqMmapBuffer_0100
- * @tc.name   : testCaptureReqMmapBuffer001
- * @tc.desc   : ret = success or ret = not_support
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testCaptureReqMmapBuffer001, Function | MediumTest | Level1)
-{
-    int32_t ret = 0;
-    struct AudioMmapBufferDescriptor desc = {};
-
-    ret = capture_->ReqMmapBuffer(capture_, MMAP_SUGGUEST_REQ_SIZE, &desc);
-    EXPECT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+    if (ret == HDF_SUCCESS) {
+        ret = capture_->GetSampleAttributes(capture_, &attrsGet);
+        EXPECT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(attrsGet.isBigEndian, true);
+        EXPECT_EQ(attrsGet.isSignedData, false);
+        EXPECT_EQ(attrsGet.stopThreshold, 15 * 1024);
+    }
 }
 
 /**
@@ -1963,7 +2085,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCapturePause002, Function | MediumTes
     ret = capture_->Start(capture_);
     EXPECT_EQ(ret, HDF_SUCCESS);
     ret = capture_->Pause(capture_);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
     ret = capture_->Stop(capture_);
     EXPECT_EQ(ret, HDF_SUCCESS);
 }
@@ -1978,7 +2104,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureStop001, Function | MediumTest
     int32_t ret = 0;
 
     ret = capture_->Stop(capture_);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 
 /**
@@ -2011,9 +2141,17 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureResume001, Function | MediumTe
     EXPECT_EQ(ret, HDF_SUCCESS);
     for (int32_t i = 0; i < 1000; i++) {
         ret = capture_->Pause(capture_);
+#ifdef DISPLAY_COMMUNITY
         EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+        EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
         ret = capture_->Resume(capture_);
+#ifdef DISPLAY_COMMUNITY
         EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+        EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
     }
     ret = capture_->Stop(capture_);
 }
@@ -2085,7 +2223,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump001, Function | Me
     }
 
     ret = capture_->AudioDevDump(capture_, range, fd);
-    EXPECT_TRUE(ret == HDF_SUCCESS);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
     fclose(file);
 }
 
@@ -2108,7 +2250,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump002, Function | Me
     }
 
     ret = capture_->AudioDevDump(capture_, range, fd);
-    EXPECT_TRUE(ret == HDF_SUCCESS);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
     fclose(file);
 }
 
@@ -2135,30 +2281,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump003, Function | Me
     }
 
     ret = capture_->AudioDevDump(capture_, range, fd);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
-    fclose(file);
-}
-
-/**
- * @tc.number : SUB_Driver_Audio_Capture_AudioDevDump_0600
- * @tc.name   : testCaptureAudioDevDump004
- * @tc.desc   : range is 5
- */
-HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump004, Function | MediumTest | Level1)
-{
-    int32_t range = 5;
-    int32_t ret = 0;
-
-    FILE *file = fopen("/data/CaptureDump.log", "wb+");
-    ASSERT_NE(nullptr, file);
-    int32_t fd = fileno(file);
-    if (fd == -1) {
-        fclose(file);
-        ASSERT_NE(fd, -1);
-    }
-
-    ret = capture_->AudioDevDump(capture_, range, fd);
-    EXPECT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
     fclose(file);
 }
 
@@ -2201,7 +2328,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump006, Function | Me
         ASSERT_NE(fd, -1);
     }
     ret = capture_->AudioDevDump(capture_, 2, fd);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
     fclose(file);
 }
 
@@ -2222,7 +2353,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump007, Function | Me
         ASSERT_NE(fd, -1);
     }
     ret = capture_->AudioDevDump(capture_, -1, fd);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
     fclose(file);
 }
 
@@ -2243,7 +2378,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump008, Function | Me
         ASSERT_NE(fd, -1);
     }
     ret = capture_->AudioDevDump(capture_, 2147483647, fd);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
     fclose(file);
 }
 
@@ -2258,7 +2397,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump009, Function | Me
     int32_t ret = 0;
 
     ret = capture_->AudioDevDump(capture_, range, -1);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 
 /**
@@ -2272,7 +2415,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump010, Function | Me
     int32_t ret = 0;
 
     ret = capture_->AudioDevDump(capture_, range, 2147483647);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
 }
 
 /**
@@ -2339,10 +2486,19 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureStart001, Function | MediumTes
     ASSERT_NE(capture_->Start, nullptr);
 
     int32_t ret = HDF_SUCCESS;
+#ifdef DISPLAY_COMMUNITY
     for (int64_t i = 0; i < 1000; i++) {
         ret = capture_->Start(capture_);
         EXPECT_EQ(ret, HDF_SUCCESS);
     }
+#else
+    ret = capture_->Start(capture_);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    for (int64_t i = 0; i < 999; i++) {
+        ret = capture_->Start(capture_);
+        EXPECT_EQ(ret, HDF_FAILURE);
+    }
+#endif
     capture_->Stop(capture_);
 }
 
@@ -2362,4 +2518,156 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureFlush001, Function | MediumTes
     }
 }
 
+/**
+ * @tc.number : SUB_Driver_Audio_CaptureGetCapturePosition_0300
+ * @tc.name   : testAudioCaptureGetCapturePosition001
+ * @tc.desc   : test API GetCapturePosition 1000times
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureGetCapturePosition001, TestSize.Level1)
+{
+    uint64_t frames;
+    struct AudioTimeStamp time;
+    uint32_t frameLen = (uint64_t)GetCaptureBufferSize();
+    uint64_t requestBytes = frameLen;
+    int i = 0;
+    ASSERT_NE(capture_->CaptureFrame, nullptr);
+    ASSERT_NE(capture_->GetCapturePosition, nullptr);
+
+    int32_t ret = capture_->Start(capture_);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+
+    int8_t *frame = (int8_t *)calloc(1, frameLen);
+    EXPECT_NE(nullptr, frame);
+
+    ret = capture_->CaptureFrame(capture_, frame, &frameLen, &requestBytes);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+    for (i = 0; i < 1000; i++) {
+        ret = capture_->GetCapturePosition(capture_, &frames, &time);
+        ASSERT_TRUE(ret == HDF_SUCCESS);
+    }
+
+    capture_->Stop(capture_);
+    if (frame != nullptr) {
+        free(frame);
+        frame = nullptr;
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_GetFrameBufferSize_0300
+ * @tc.name   : testCaptureGetFrameBufferSize001
+ * @tc.desc   : GetFrameBufferSize, Loop call 1000 times
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetFrameBufferSize001, Function | MediumTest | Level2)
+{
+    ASSERT_NE(capture_->GetFrameBufferSize, nullptr);
+    uint64_t bufferSize = 0;
+
+    int32_t ret = HDF_SUCCESS;
+    for (int64_t i = 0; i < 1000; i++) {
+        ret = capture_->GetFrameBufferSize(capture_, &bufferSize);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#else
+        ASSERT_EQ(ret, HDF_ERR_INVALID_PARAM);
+#endif
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_IsSupportsPauseAndResume_0300
+ * @tc.name   : testCaptureIsSupportsPauseAndResume001
+ * @tc.desc   : IsSupportsPauseAndResume, Loop call 1000 times
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureIsSupportsPauseAndResume001, Function | MediumTest | Level2)
+{
+    ASSERT_NE(capture_->GetVersion, nullptr);
+    bool supportPause = false;
+    bool supportResume = false;
+
+    int32_t ret = HDF_SUCCESS;
+    for (int64_t i = 0; i < 1000; i++) {
+        ret = capture_->IsSupportsPauseAndResume(capture_, &supportPause, &supportResume);
+#ifdef DISPLAY_COMMUNITY
+        ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#else
+        ASSERT_EQ(ret, HDF_ERR_INVALID_PARAM);
+#endif
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_ReqMmapBuffer_0100
+ * @tc.name   : testCaptureReqMmapBuffer001
+ * @tc.desc   : ret = success or ret = not_support
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureReqMmapBuffer001, Function | MediumTest | Level2)
+{
+    int32_t ret = 0;
+    struct AudioMmapBufferDescriptor desc = {};
+
+    ret = capture_->ReqMmapBuffer(capture_, MMAP_SUGGUEST_REQ_SIZE, &desc);
+    EXPECT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_AudioDevDump_0600
+ * @tc.name   : testCaptureAudioDevDump004
+ * @tc.desc   : range is 5
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump004, Function | MediumTest | Level1)
+{
+    int32_t range = 5;
+    int32_t ret = 0;
+
+    FILE *file = fopen("/data/CaptureDump.log", "wb+");
+    ASSERT_NE(nullptr, file);
+    int32_t fd = fileno(file);
+    if (fd == -1) {
+        fclose(file);
+        ASSERT_NE(fd, -1);
+    }
+
+    ret = capture_->AudioDevDump(capture_, range, fd);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(ret, HDF_SUCCESS);
+#else
+    EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
+#endif
+    fclose(file);
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_AddAudioEffect_0300
+ * @tc.name   : testCaptureAddAudioEffect001
+ * @tc.desc   : AddAudioEffect, Loop call 1000 times
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAddAudioEffect001, Function | MediumTest | Level2)
+{
+    ASSERT_NE(capture_->AddAudioEffect, nullptr);
+    uint64_t effectId = 0;
+
+    int32_t ret = HDF_SUCCESS;
+    for (int64_t i = 0; i < 1000; i++) {
+        ret = capture_->AddAudioEffect(capture_, effectId);
+        ASSERT_NE(ret, HDF_SUCCESS);
+    }
+}
+
+/**
+ * @tc.number : SUB_Driver_Audio_Capture_RemoveAudioEffect_0300
+ * @tc.name   : testCaptureRemoveAudioEffect001
+ * @tc.desc   : RemoveAudioEffect, Loop call 1000 times
+ */
+HWTEST_F(AudioUtCaptureTestAdditional, testCaptureRemoveAudioEffect001, Function | MediumTest | Level2)
+{
+    ASSERT_NE(capture_->RemoveAudioEffect, nullptr);
+    uint64_t effectId = 0;
+
+    int32_t ret = HDF_SUCCESS;
+    for (int64_t i = 0; i < 1000; i++) {
+        ret = capture_->RemoveAudioEffect(capture_, effectId);
+        EXPECT_NE(ret, HDF_SUCCESS);
+    }
+}
 } // namespace

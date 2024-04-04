@@ -13,9 +13,11 @@
  * limitations under the License.
  */
 
-#include <hdf_base.h>
-#include "iam_hat_test.h"
 #include "face_auth_hdi_test.h"
+
+#include <hdf_base.h>
+
+#include "iam_hat_test.h"
 
 #define LOG_LABEL OHOS::UserIam::Common::LABEL_FACE_AUTH_IMPL
 
@@ -23,8 +25,6 @@ using namespace std;
 using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
 using namespace OHOS::HDI::FaceAuth;
-using namespace OHOS::HDI::FaceAuth::V1_0;
-using CommandIdV1_1 = OHOS::HDI::FaceAuth::V1_1::CommandId;
 
 static OHOS::Parcel parcel;
 
@@ -54,9 +54,9 @@ void FaceAuthTypeTest::TearDown()
 HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_FUNC_0201, Function | MediumTest | Level1)
 {
     cout << "start test AuthType" << endl;
-    AuthType pin = PIN;
-    AuthType face = FACE;
-    AuthType fingerprint = FINGERPRINT;
+    AuthType pin = AuthType::PIN;
+    AuthType face = AuthType::FACE;
+    AuthType fingerprint = AuthType::FINGERPRINT;
     EXPECT_EQ(pin, 1);
     EXPECT_EQ(face, 2);
     EXPECT_EQ(fingerprint, 4);
@@ -72,9 +72,9 @@ HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_FUNC_0201, Function | MediumTes
 HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_FUNC_0202, Function | MediumTest | Level1)
 {
     cout << "start test ExecutorRole" << endl;
-    ExecutorRole collector = COLLECTOR;
-    ExecutorRole verifier = VERIFIER;
-    ExecutorRole all_in_one = ALL_IN_ONE;
+    ExecutorRole collector = ExecutorRole::COLLECTOR;
+    ExecutorRole verifier = ExecutorRole::VERIFIER;
+    ExecutorRole all_in_one = ExecutorRole::ALL_IN_ONE;
     EXPECT_EQ(collector, 1);
     EXPECT_EQ(verifier, 2);
     EXPECT_EQ(all_in_one, 3);
@@ -90,10 +90,10 @@ HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_FUNC_0202, Function | MediumTes
 HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_FUNC_0203, Function | MediumTest | Level1)
 {
     cout << "start test ExecutorSecureLevel" << endl;
-    ExecutorSecureLevel esl0 = ESL0;
-    ExecutorSecureLevel esl1 = ESL1;
-    ExecutorSecureLevel esl2 = ESL2;
-    ExecutorSecureLevel esl3 = ESL3;
+    ExecutorSecureLevel esl0 = ExecutorSecureLevel::ESL0;
+    ExecutorSecureLevel esl1 = ExecutorSecureLevel::ESL1;
+    ExecutorSecureLevel esl2 = ExecutorSecureLevel::ESL2;
+    ExecutorSecureLevel esl3 = ExecutorSecureLevel::ESL3;
     EXPECT_EQ(esl0, 0);
     EXPECT_EQ(esl1, 1);
     EXPECT_EQ(esl2, 2);
@@ -102,18 +102,18 @@ HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_FUNC_0203, Function | MediumTes
 
 /**
  * @tc.number: Security_IAM_Face_HDI_FUNC_0204
- * @tc.name: Test CommandId
+ * @tc.name: Test DriverCommandId
  * @tc.size: MediumTest
  * @tc.type: Function
  * @tc.level: Level1
  */
 HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_FUNC_0204, Function | MediumTest | Level1)
 {
-    cout << "start test CommandId" << endl;
-    CommandIdV1_1 lock_template = OHOS::HDI::FaceAuth::V1_1::CommandId::LOCK_TEMPLATE;
-    CommandIdV1_1 unlock_template = OHOS::HDI::FaceAuth::V1_1::CommandId::UNLOCK_TEMPLATE;
-    CommandIdV1_1 vendor_command_begin = OHOS::HDI::FaceAuth::V1_1::CommandId::VENDOR_COMMAND_BEGIN;
-    CommandIdV1_1 init_algorithm = OHOS::HDI::FaceAuth::V1_1::CommandId::INIT_ALGORITHM;
+    cout << "start test DriverCommandId" << endl;
+    DriverCommandId lock_template = DriverCommandId::LOCK_TEMPLATE;
+    DriverCommandId unlock_template = DriverCommandId::UNLOCK_TEMPLATE;
+    DriverCommandId vendor_command_begin = DriverCommandId::VENDOR_COMMAND_BEGIN;
+    DriverCommandId init_algorithm = DriverCommandId::INIT_ALGORITHM;
     EXPECT_EQ(lock_template, 1);
     EXPECT_EQ(unlock_template, 2);
     EXPECT_EQ(vendor_command_begin, 10000);
@@ -130,18 +130,18 @@ HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_FUNC_0204, Function | MediumTes
 HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_FUNC_0205, Function | MediumTest | Level1)
 {
     cout << "start test FaceTipsCode" << endl;
-    FaceTipsCode f_bright = FACE_AUTH_TIP_TOO_BRIGHT;
-    FaceTipsCode f_dark = FACE_AUTH_TIP_TOO_DARK;
-    FaceTipsCode f_close = FACE_AUTH_TIP_TOO_CLOSE;
-    FaceTipsCode f_far = FACE_AUTH_TIP_TOO_FAR;
-    FaceTipsCode f_high = FACE_AUTH_TIP_TOO_HIGH;
-    FaceTipsCode f_low = FACE_AUTH_TIP_TOO_LOW;
-    FaceTipsCode f_right = FACE_AUTH_TIP_TOO_RIGHT;
-    FaceTipsCode f_left = FACE_AUTH_TIP_TOO_LEFT;
-    FaceTipsCode f_motion = FACE_AUTH_TIP_TOO_MUCH_MOTION;
-    FaceTipsCode f_gaze = FACE_AUTH_TIP_POOR_GAZE;
-    FaceTipsCode f_detected = FACE_AUTH_TIP_NOT_DETECTED;
-    FaceTipsCode f_begin = VENDOR_FACE_AUTH_TIP_BEGIN;
+    FaceTipsCode f_bright = FaceTipsCode::FACE_AUTH_TIP_TOO_BRIGHT;
+    FaceTipsCode f_dark = FaceTipsCode::FACE_AUTH_TIP_TOO_DARK;
+    FaceTipsCode f_close = FaceTipsCode::FACE_AUTH_TIP_TOO_CLOSE;
+    FaceTipsCode f_far = FaceTipsCode::FACE_AUTH_TIP_TOO_FAR;
+    FaceTipsCode f_high = FaceTipsCode::FACE_AUTH_TIP_TOO_HIGH;
+    FaceTipsCode f_low = FaceTipsCode::FACE_AUTH_TIP_TOO_LOW;
+    FaceTipsCode f_right = FaceTipsCode::FACE_AUTH_TIP_TOO_RIGHT;
+    FaceTipsCode f_left = FaceTipsCode::FACE_AUTH_TIP_TOO_LEFT;
+    FaceTipsCode f_motion = FaceTipsCode::FACE_AUTH_TIP_TOO_MUCH_MOTION;
+    FaceTipsCode f_gaze = FaceTipsCode::FACE_AUTH_TIP_POOR_GAZE;
+    FaceTipsCode f_detected = FaceTipsCode::FACE_AUTH_TIP_NOT_DETECTED;
+    FaceTipsCode f_begin = FaceTipsCode::VENDOR_FACE_AUTH_TIP_BEGIN;
     EXPECT_EQ(f_bright, 1);
     EXPECT_EQ(f_dark, 2);
     EXPECT_EQ(f_close, 3);
@@ -166,17 +166,17 @@ HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_FUNC_0205, Function | MediumTes
 HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_NEW_FUNC_0201, Function | MediumTest | Level1)
 {
     cout << "start test GetPropertyType" << endl;
-    GetPropertyType g_type = OHOS::HDI::FaceAuth::V1_1::AUTH_SUB_TYPE;
-    GetPropertyType g_duration = OHOS::HDI::FaceAuth::V1_1::LOCKOUT_DURATION;
-    GetPropertyType g_attempts = OHOS::HDI::FaceAuth::V1_1::REMAIN_ATTEMPTS;
-    GetPropertyType g_progress = OHOS::HDI::FaceAuth::V1_1::ENROLL_PROGRESS;
-    GetPropertyType g_info = OHOS::HDI::FaceAuth::V1_1::SENSOR_INFO;
+    GetPropertyType auth_sub_type = GetPropertyType::AUTH_SUB_TYPE;
+    GetPropertyType lockout_duration = GetPropertyType::LOCKOUT_DURATION;
+    GetPropertyType remain_attempts = GetPropertyType::REMAIN_ATTEMPTS;
+    GetPropertyType enroll_progress = GetPropertyType::ENROLL_PROGRESS;
+    GetPropertyType sensor_info = GetPropertyType::SENSOR_INFO;
 
-    EXPECT_EQ(g_type, 1);
-    EXPECT_EQ(g_duration, 2);
-    EXPECT_EQ(g_attempts, 3);
-    EXPECT_EQ(g_progress, 4);
-    EXPECT_EQ(g_info, 5);
+    EXPECT_EQ(auth_sub_type, 1);
+    EXPECT_EQ(lockout_duration, 2);
+    EXPECT_EQ(remain_attempts, 3);
+    EXPECT_EQ(enroll_progress, 4);
+    EXPECT_EQ(sensor_info, 5);
 }
 
 /**
@@ -189,9 +189,9 @@ HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_NEW_FUNC_0201, Function | Mediu
 HWTEST_F(FaceAuthTypeTest, Security_IAM_Face_HDI_NEW_FUNC_0202, Function | MediumTest | Level1)
 {
     cout << "start test SaCommandId" << endl;
-    SaCommandId begin_screen_brightness_increase = OHOS::HDI::FaceAuth::V1_1::BEGIN_SCREEN_BRIGHTNESS_INCREASE;
-    SaCommandId end_screen_brightness_increase = OHOS::HDI::FaceAuth::V1_1::END_SCREEN_BRIGHTNESS_INCREASE;
-    
+    SaCommandId begin_screen_brightness_increase = SaCommandId::BEGIN_SCREEN_BRIGHTNESS_INCREASE;
+    SaCommandId end_screen_brightness_increase = SaCommandId::END_SCREEN_BRIGHTNESS_INCREASE;
+
     EXPECT_EQ(begin_screen_brightness_increase, 1);
     EXPECT_EQ(end_screen_brightness_increase, 2);
 }

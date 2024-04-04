@@ -21,6 +21,7 @@
 
 #include "parcel.h"
 #include "securec.h"
+
 using namespace std;
 
 
@@ -74,6 +75,15 @@ namespace OHOS {
             {
                 uint32_t len = parcel.ReadUint32() % MAX_DATA_LEN;
                 uint32_t memLen = len * sizeof(uint32_t);
+                data.resize(len);
+                FillTestBuffer(parcel, static_cast<void *>(&data[0]), memLen);
+                cout << "fill vector len " << len << "ok" << endl;
+            }
+
+            void FillTestInt32Vector(Parcel &parcel, std::vector<int32_t> &data)
+            {
+                uint32_t len = parcel.ReadUint32() % MAX_DATA_LEN;
+                uint32_t memLen = len * sizeof(int32_t);
                 data.resize(len);
                 FillTestBuffer(parcel, static_cast<void *>(&data[0]), memLen);
                 cout << "fill vector len " << len << "ok" << endl;

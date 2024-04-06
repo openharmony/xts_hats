@@ -28,7 +28,6 @@
 #include "hdf_log.h"
 #include "osal_time.h"
 #include "v1_0/ignss_interface.h"
-#include "gnss_interface_impl.h"
 #include "gnss_callback_impl.h"
 
 

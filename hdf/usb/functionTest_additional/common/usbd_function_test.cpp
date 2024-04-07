@@ -63,6 +63,19 @@ void UsbdFunctionTestAdditional::SetUp(void) {}
 void UsbdFunctionTestAdditional::TearDown(void) {}
 
 /**
+ * @tc.number: SUB_Driver_Usb_FunctionTest_SetCurrentFunctions_3100
+ * @tc.name: testHdiUsbFunctionTestSetCurrentFunctions012
+ * @tc.desc: Sets the list of functions (represented by bit field) supported by the current device.
+ * funcs = USB_FUNCTION_RNDIS | USB_FUNCTION_STORAGE.
+ */
+HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetCurrentFunctions012, Function | MediumTest | Level1)
+{
+    int32_t funcs = USB_FUNCTION_RNDIS | USB_FUNCTION_STORAGE;
+    auto ret = g_usbInterface->SetCurrentFunctions(funcs);
+    ASSERT_EQ(0, ret);
+}
+
+/**
  * @tc.number: SUB_Driver_Usb_FunctionTest_SetCurrentFunctions_2000
  * @tc.name: testHdiUsbFunctionTestSetCurrentFunctions001
  * @tc.desc: Sets the list of functions (represented by bit field) supported by the current device.
@@ -591,6 +604,52 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestQueryPort004, Functio
     ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
     ASSERT_EQ(0, ret);
     ASSERT_EQ(DEFAULT_PORT_ID, portId);
+}
+
+/**
+ * @tc.number: SUB_Driver_Usb_FunctionTest_QueryPort_0600
+ * @tc.name: testHdiUsbFunctionTestQueryPort005
+ * @tc.desc: Queries the current settings of a port.To see if powerRole is equal to DATA_ROLE_HOST.
+ */
+HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestQueryPort005, Function | MediumTest | Level1)
+{
+    int32_t portId = DEFAULT_PORT_ID;
+    int32_t powerRole = POWER_ROLE_NONE;
+    int32_t dataRole = DATA_ROLE_NONE;
+    int32_t mode = PORT_MODE_NONE;
+    auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
+    if (ret == HDF_SUCCESS) {
+        ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
+        ASSERT_EQ(0, ret);
+        ASSERT_EQ(POWER_ROLE_SOURCE, powerRole);
+    } else if (ret == HDF_ERR_NOT_SUPPORT) {
+        ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
+        ASSERT_EQ(0, ret);
+        ASSERT_EQ(POWER_ROLE_SINK, powerRole);
+    }
+}
+
+/**
+ * @tc.number: SUB_Driver_Usb_FunctionTest_QueryPort_0700
+ * @tc.name: testHdiUsbFunctionTestQueryPort006
+ * @tc.desc: Queries the current settings of a port.To see if dataRole is equal to DATA_ROLE_HOST.
+ */
+HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestQueryPort006, Function | MediumTest | Level1)
+{
+    int32_t portId = DEFAULT_PORT_ID;
+    int32_t powerRole = POWER_ROLE_NONE;
+    int32_t dataRole = DATA_ROLE_NONE;
+    int32_t mode = PORT_MODE_NONE;
+    auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
+    if (ret == HDF_SUCCESS) {
+        ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
+        ASSERT_EQ(0, ret);
+        ASSERT_EQ(DATA_ROLE_HOST, dataRole);
+    } else if (ret == HDF_ERR_NOT_SUPPORT) {
+        ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
+        ASSERT_EQ(0, ret);
+        ASSERT_EQ(DATA_ROLE_DEVICE, dataRole);
+    }
 }
 
 } // namespace

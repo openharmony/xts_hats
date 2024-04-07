@@ -23,11 +23,11 @@
 #include "securec.h"
 #include "cstdlib"
 #include "unistd.h"
-#include "v1_2/iril.h"
+#include "v1_3/iril.h"
 #include "gtest/gtest.h"
 #include "hdf_ril_callback_common.h"
 
-using namespace OHOS::HDI::Ril::V1_2;
+using namespace OHOS::HDI::Ril::V1_3;
 using namespace testing::ext;
 class HdfRilHdiTestAdditional3rd : public testing::Test {
 public:
@@ -41,9 +41,9 @@ public:
 **/
 void HdfRilHdiTestAdditional3rd::SetUpTestCase()
 {
-    g_rilInterface = OHOS::HDI::Ril::V1_2::IRil::Get();
+    g_rilInterface = OHOS::HDI::Ril::V1_3::IRil::Get();
     if (g_rilInterface != nullptr) {
-        g_rilInterface->SetCallback1_2(&g_callback);
+        g_rilInterface->SetCallback1_3(&g_callback);
         g_rilInterface->SendRilAck();
         g_rilInterface->GetSimStatus(SLOTID_1, GetSerialId());
         g_rilInterface->GetSimStatus(SLOTID_2, GetSerialId());

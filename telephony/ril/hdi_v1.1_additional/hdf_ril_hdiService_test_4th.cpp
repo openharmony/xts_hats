@@ -24,10 +24,10 @@
 #include "mutex"
 #include "securec.h"
 #include "unistd.h"
-#include "v1_2/iril.h"
+#include "v1_3/iril.h"
 #include "gtest/gtest.h"
 
-using namespace OHOS::HDI::Ril::V1_2;
+using namespace OHOS::HDI::Ril::V1_3;
 using namespace testing::ext;
 class HdfRilHdiTestAdditional4th : public testing::Test {
 public:
@@ -41,9 +41,9 @@ public:
 **/
 void HdfRilHdiTestAdditional4th::SetUpTestCase()
 {
-    g_rilInterface = OHOS::HDI::Ril::V1_2::IRil::Get();
+    g_rilInterface = OHOS::HDI::Ril::V1_3::IRil::Get();
     if (g_rilInterface != nullptr) {
-        g_rilInterface->SetCallback1_2(&g_callback);
+        g_rilInterface->SetCallback1_3(&g_callback);
         g_rilInterface->SendRilAck();
         g_rilInterface->GetSimStatus(SLOTID_1, GetSerialId());
         g_rilInterface->GetSimStatus(SLOTID_2, GetSerialId());
@@ -3126,6 +3126,74 @@ HWTEST_F(HdfRilHdiTestAdditional4th, testV1GetImeiResponse004, Function | Medium
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
     EXPECT_EQ(true, g_getImeiResponseFlag);
+}
+
+/**
+ * @tc.number: SUB_Telephony_DriverSystem_V1GetImeiSvResponse_0100
+ * @tc.name  : testV1GetImeiSvResponse001
+ * @tc.desc  : test slot1 GetImeiSvResponse is triggered
+ */
+HWTEST_F(HdfRilHdiTestAdditional4th, testV1GetImeiSvResponse001, Function | MediumTest | Level1)
+{
+    if (!IsReady(SLOTID_1)) {
+        return;
+    }
+    g_getImeiSvResponseFlag = false;
+    int32_t ret = g_rilInterface->GetImeiSv(SLOTID_1, GetSerialId());
+    WaitFor(WAIT_TIME_SECOND);
+    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_EQ(true, g_getImeiSvResponseFlag);
+}
+
+/**
+ * @tc.number: SUB_Telephony_DriverSystem_V1GetImeiSvResponse_0200
+ * @tc.name  : testV1GetImeiSvResponse002
+ * @tc.desc  : test slot2 GetImeiSvResponse is triggered
+ */
+HWTEST_F(HdfRilHdiTestAdditional4th, testV1GetImeiSvResponse002, Function | MediumTest | Level1)
+{
+    if (!IsReady(SLOTID_2)) {
+        return;
+    }
+    g_getImeiSvResponseFlag = false;
+    int32_t ret = g_rilInterface->GetImeiSv(SLOTID_2, GetSerialId());
+    WaitFor(WAIT_TIME_SECOND);
+    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_EQ(true, g_getImeiSvResponseFlag);
+}
+
+/**
+ * @tc.number: SUB_Telephony_DriverSystem_V1GetImeiSvResponse_0300
+ * @tc.name  : testV1GetImeiSvResponse003
+ * @tc.desc  : test slot1 GetImeiSvResponse is not triggered
+ */
+HWTEST_F(HdfRilHdiTestAdditional4th, testV1GetImeiSvResponse003, Function | MediumTest | Level1)
+{
+    if (!IsReady(SLOTID_1)) {
+        return;
+    }
+    g_getImeiSvResponseFlag = false;
+    int32_t ret = g_rilInterface->GetImeiSv(SLOTID_1, -1);
+    WaitFor(WAIT_TIME_SECOND);
+    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_EQ(true, g_getImeiSvResponseFlag);
+}
+
+/**
+ * @tc.number: SUB_Telephony_DriverSystem_V1GetImeiSvResponse_0200
+ * @tc.name  : testV1GetImeiSvResponse002
+ * @tc.desc  : test slot2 GetImeiSvResponse is triggered
+ */
+HWTEST_F(HdfRilHdiTestAdditional4th, testV1GetImeiSvResponse004, Function | MediumTest | Level1)
+{
+    if (!IsReady(SLOTID_2)) {
+        return;
+    }
+    g_getImeiSvResponseFlag = false;
+    int32_t ret = g_rilInterface->GetImeiSv(SLOTID_2, GetSerialId());
+    WaitFor(WAIT_TIME_SECOND);
+    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_EQ(true, g_getImeiSvResponseFlag);
 }
 
 /**

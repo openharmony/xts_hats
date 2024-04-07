@@ -24,9 +24,9 @@
 #include "securec.h"
 #include "stdlib.h"
 #include "unistd.h"
-#include "v1_2/iril.h"
+#include "v1_3/iril.h"
 
-using namespace OHOS::HDI::Ril::V1_2;
+using namespace OHOS::HDI::Ril::V1_3;
 using namespace testing::ext;
 
 enum class HdiId {
@@ -155,6 +155,7 @@ enum class HdiId {
     HREQ_MODEM_SET_RADIO_STATUS,
     HREQ_MODEM_GET_RADIO_STATUS,
     HREQ_MODEM_GET_IMEI,
+    HREQ_MODEM_GET_IMEISV,
     HREQ_MODEM_GET_MEID,
     HREQ_MODEM_GET_BASEBAND_VERSION,
     HREQ_MODEM_GET_VOICE_RADIO,
@@ -232,7 +233,7 @@ enum class SimMessageStatus {
     SIM_MESSAGE_STATUS_SENT = 3,
 };
 
-class RilCallback : public OHOS::HDI::Ril::V1_2::IRilCallback {
+class RilCallback : public OHOS::HDI::Ril::V1_3::IRilCallback {
 public:
     void NotifyAll();
     void WaitFor(int32_t timeoutSecond);
@@ -319,6 +320,7 @@ public:
     int32_t SetRadioStateResponse(const RilRadioResponseInfo &responseInfo) override;
     int32_t GetRadioStateResponse(const RilRadioResponseInfo &responseInfo, int32_t state) override;
     int32_t GetImeiResponse(const RilRadioResponseInfo &responseInfo, const std::string &imei) override;
+    int32_t GetImeiSvResponse(const RilRadioResponseInfo &responseInfo, const std::string &imeiSv) override;
     int32_t GetMeidResponse(const RilRadioResponseInfo &responseInfo, const std::string &meid) override;
     int32_t GetVoiceRadioTechnologyResponse(
         const RilRadioResponseInfo &responseInfo, const VoiceRadioTechnology &voiceRadioTechnology) override;
@@ -479,7 +481,7 @@ public:
 };
 
 namespace {
-sptr<OHOS::HDI::Ril::V1_2::IRil> g_rilInterface = nullptr;
+sptr<OHOS::HDI::Ril::V1_3::IRil> g_rilInterface = nullptr;
 RilCallback callback_;
 constexpr static int32_t SLOTID_1 = 0;
 constexpr static int32_t SLOTID_2 = 1;
@@ -1939,6 +1941,14 @@ int32_t RilCallback::GetImeiResponse(const RilRadioResponseInfo &responseInfo, c
     return 0;
 }
 
+int32_t RilCallback::GetImeiSvResponse(const RilRadioResponseInfo &responseInfo, const std::string &imeiSv)
+{
+    hdiId_ = HdiId::HREQ_MODEM_GET_IMEISV;
+    resultInfo_ = responseInfo;
+    NotifyAll();
+    return 0;
+}
+
 int32_t RilCallback::GetMeidResponse(const RilRadioResponseInfo &responseInfo, const std::string &meid)
 {
     HDF_LOGI("GetMeidResponse meid : %{public}s", meid.c_str());
@@ -2351,9 +2361,9 @@ void HdfRilHdiTest::TearDown() {}
 
 HWTEST_F(HdfRilHdiTest, CheckRilInstanceIsEmpty, Function | MediumTest | Level1)
 {
-    g_rilInterface = OHOS::HDI::Ril::V1_2::IRil::Get();
+    g_rilInterface = OHOS::HDI::Ril::V1_3::IRil::Get();
     if (g_rilInterface != nullptr) {
-        g_rilInterface->SetCallback1_2(&callback_);
+        g_rilInterface->SetCallback1_3(&callback_);
     }
 }
 
@@ -3769,6 +3779,28 @@ HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetImei_V1_0200, Function | Mediu
     WaitFor(WAIT_TIME_SECOND);
     EXPECT_EQ(SUCCESS, ret);
     ASSERT_TRUE(GetBoolResult(HdiId::HREQ_MODEM_GET_IMEI));
+}
+
+HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetImeiSv_V1_0100, Function | MediumTest | Level3)
+{
+    if (!IsReady(SLOTID_1)) {
+        return;
+    }
+    int32_t ret = g_rilInterface->GetImeiSv(SLOTID_1, GetSerialId());
+    WaitFor(WAIT_TIME_SECOND);
+    EXPECT_EQ(SUCCESS, ret);
+    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_MODEM_GET_IMEISV));
+}
+
+HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetImeiSv_V1_0200, Function | MediumTest | Level3)
+{
+    if (!IsReady(SLOTID_2)) {
+        return;
+    }
+    int32_t ret = g_rilInterface->GetImeiSv(SLOTID_2, GetSerialId());
+    WaitFor(WAIT_TIME_SECOND);
+    EXPECT_EQ(SUCCESS, ret);
+    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_MODEM_GET_IMEISV));
 }
 
 HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetMeid_V1_0100, Function | MediumTest | Level3)

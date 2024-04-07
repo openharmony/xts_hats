@@ -15,7 +15,7 @@
 
 #include "hdf_ril_callback_common.h"
 
-OHOS::sptr<OHOS::HDI::Ril::V1_2::IRil> g_rilInterface = nullptr;
+OHOS::sptr<OHOS::HDI::Ril::V1_3::IRil> g_rilInterface = nullptr;
 RilCallback g_callback;
 
 std::map<int32_t, int32_t> g_simState;
@@ -76,6 +76,7 @@ bool g_shutDownResponseFlag = false;
 bool g_setRadioStateResponseFlag = false;
 bool g_getRadioStateResponseFlag = false;
 bool g_getImeiResponseFlag = false;
+bool g_getImeiSvResponseFlag = false;
 bool g_getMeidResponseFlag = false;
 bool g_getBasebandVersionResponseFlag = false;
 bool g_getImsiResponseFlag = false;
@@ -1618,6 +1619,15 @@ int32_t RilCallback::GetImeiResponse(const RilRadioResponseInfo &responseInfo, c
     g_getImeiResponseFlag = true;
     HDF_LOGI("GetImeiResponse imei : %{public}s", imei.c_str());
     hdiId_ = HdiId::HREQ_MODEM_GET_IMEI;
+    resultInfo_ = responseInfo;
+    NotifyAll();
+    return 0;
+}
+
+int32_t RilCallback::GetImeiSvResponse(const RilRadioResponseInfo &responseInfo, const std::string &imeiSv)
+{
+    g_getImeiSvResponseFlag = true;
+    hdiId_ = HdiId::HREQ_MODEM_GET_IMEISV;
     resultInfo_ = responseInfo;
     NotifyAll();
     return 0;

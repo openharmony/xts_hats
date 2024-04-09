@@ -23,6 +23,7 @@ group("HatsHdfUsbTest") {
     deps = [
       "autoFunctionTest:HatsHdfUsbAutoFunctionTest",
 
+      # "deviceStatusTest:HatsHdfUsbDeviceStatusTest",
       # "deviceTest:HatsHdfUsbDeviceTest",
       # "deviceTest_additional:HatsHdfUsbDeviceAdditionalTest",
 

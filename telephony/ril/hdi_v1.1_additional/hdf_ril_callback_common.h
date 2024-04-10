@@ -26,7 +26,7 @@
 #include "securec.h"
 #include "cstdlib"
 #include "unistd.h"
-#include "v1_2/iril.h"
+#include "v1_3/iril.h"
 #include "gtest/gtest.h"
 
 #include <ctime>
@@ -204,6 +204,7 @@ enum class HdiId {
     HREQ_MODEM_SET_RADIO_STATUS,
     HREQ_MODEM_GET_RADIO_STATUS,
     HREQ_MODEM_GET_IMEI,
+    HREQ_MODEM_GET_IMEISV,
     HREQ_MODEM_GET_MEID,
     HREQ_MODEM_GET_BASEBAND_VERSION,
     HREQ_MODEM_GET_VOICE_RADIO,
@@ -281,7 +282,7 @@ enum class SimMessageStatus {
     SIM_MESSAGE_STATUS_SENT = 3,
 };
 
-class RilCallback : public OHOS::HDI::Ril::V1_2::IRilCallback {
+class RilCallback : public OHOS::HDI::Ril::V1_3::IRilCallback {
 public:
     void NotifyAll();
     void WaitFor(int32_t timeoutSecond);
@@ -365,6 +366,7 @@ public:
     int32_t SetRadioStateResponse(const RilRadioResponseInfo &responseInfo) override;
     int32_t GetRadioStateResponse(const RilRadioResponseInfo &responseInfo, int32_t state) override;
     int32_t GetImeiResponse(const RilRadioResponseInfo &responseInfo, const std::string &imei) override;
+    int32_t GetImeiSvResponse(const RilRadioResponseInfo &responseInfo, const std::string &imeiSv) override;
     int32_t GetMeidResponse(const RilRadioResponseInfo &responseInfo, const std::string &meid) override;
     int32_t GetVoiceRadioTechnologyResponse(const RilRadioResponseInfo &responseInfo,
                                             const VoiceRadioTechnology &voiceRadioTechnology) override;
@@ -508,7 +510,7 @@ private:
     RilRadioResponseInfo resultInfo_;
 };
 
-extern OHOS::sptr<OHOS::HDI::Ril::V1_2::IRil> g_rilInterface;
+extern OHOS::sptr<OHOS::HDI::Ril::V1_3::IRil> g_rilInterface;
 extern RilCallback g_callback;
 
 constexpr int32_t SLOTID_1 = 0;
@@ -581,6 +583,7 @@ extern bool g_shutDownResponseFlag;
 extern bool g_setRadioStateResponseFlag;
 extern bool g_getRadioStateResponseFlag;
 extern bool g_getImeiResponseFlag;
+extern bool g_getImeiSvResponseFlag;
 extern bool g_getMeidResponseFlag;
 extern bool g_getBasebandVersionResponseFlag;
 extern bool g_getImsiResponseFlag;

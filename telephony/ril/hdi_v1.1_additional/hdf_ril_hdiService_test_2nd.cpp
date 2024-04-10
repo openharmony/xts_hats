@@ -23,11 +23,11 @@
 #include "securec.h"
 #include "cstdlib"
 #include "unistd.h"
-#include "v1_2/iril.h"
+#include "v1_3/iril.h"
 #include "gtest/gtest.h"
 #include "hdf_ril_callback_common.h"
 
-using namespace OHOS::HDI::Ril::V1_2;
+using namespace OHOS::HDI::Ril::V1_3;
 using namespace testing::ext;
 
 class HdfRilHdiTestAdditional2nd : public testing::Test {
@@ -42,9 +42,9 @@ public:
 **/
 void HdfRilHdiTestAdditional2nd::SetUpTestCase()
 {
-    g_rilInterface = OHOS::HDI::Ril::V1_2::IRil::Get();
+    g_rilInterface = OHOS::HDI::Ril::V1_3::IRil::Get();
     if (g_rilInterface != nullptr) {
-        g_rilInterface->SetCallback1_2(&g_callback);
+        g_rilInterface->SetCallback1_3(&g_callback);
         g_rilInterface->SendRilAck();
         g_rilInterface->GetSimStatus(SLOTID_1, GetSerialId());
         g_rilInterface->GetSimStatus(SLOTID_2, GetSerialId());
@@ -2553,6 +2553,84 @@ HWTEST_F(HdfRilHdiTestAdditional2nd, testV1GetImei005, Function | MediumTest | L
     int32_t ret = 0;
     for (int i = 0; i < 100; i++) {
         ret = g_rilInterface->GetImei(SLOTID_1, GetSerialId());
+        WaitFor(WAIT_TIME_SECOND);
+        EXPECT_EQ(SUCCESS, ret);
+    }
+}
+
+/**
+ * @tc.number: SUB_Telephony_DriverSystem_V1GetImeiSv_0100
+ * @tc.name: testV1GetImeiSv001
+ * @tc.desc: GetImeiSv, slotId is 0, serialId is -1
+ */
+HWTEST_F(HdfRilHdiTestAdditional2nd, testV1GetImeiSv001, Function | MediumTest | Level1)
+{
+    if (!IsReady(SLOTID_1)) {
+        return;
+    }
+    int32_t ret = g_rilInterface->GetImeiSv(SLOTID_1, -1);
+    WaitFor(WAIT_TIME_SECOND);
+    EXPECT_EQ(SUCCESS, ret);
+}
+
+/**
+ * @tc.number: SUB_Telephony_DriverSystem_V1GetImeiSv_0200
+ * @tc.name: testV1GetImeiSv002
+ * @tc.desc: GetImeiSv, slotId is 1, serialId is -1
+ */
+HWTEST_F(HdfRilHdiTestAdditional2nd, testV1GetImeiSv002, Function | MediumTest | Level1)
+{
+    if (!IsReady(SLOTID_2)) {
+        return;
+    }
+    int32_t ret = g_rilInterface->GetImeiSv(SLOTID_2, -1);
+    WaitFor(WAIT_TIME_SECOND);
+    EXPECT_EQ(SUCCESS, ret);
+}
+
+/**
+ * @tc.number: SUB_Telephony_DriverSystem_V1GetImeiSv_0300
+ * @tc.name: testV1GetImeiSv003
+ * @tc.desc: GetImeiSv, slotId is 0, serialId is 2147483647
+ */
+HWTEST_F(HdfRilHdiTestAdditional2nd, testV1GetImeiSv003, Function | MediumTest | Level1)
+{
+    if (!IsReady(SLOTID_1)) {
+        return;
+    }
+    int32_t ret = g_rilInterface->GetImeiSv(SLOTID_1, 2147483647);
+    WaitFor(WAIT_TIME_SECOND);
+    EXPECT_EQ(SUCCESS, ret);
+}
+
+/**
+ * @tc.number: SUB_Telephony_DriverSystem_V1GetImeiSv_0400
+ * @tc.name: testV1GetImeiSv004
+ * @tc.desc: GetImeiSv, slotId is 1, serialId is 2147483647
+ */
+HWTEST_F(HdfRilHdiTestAdditional2nd, testV1GetImeiSv004, Function | MediumTest | Level1)
+{
+    if (!IsReady(SLOTID_2)) {
+        return;
+    }
+    int32_t ret = g_rilInterface->GetImeiSv(SLOTID_2, 2147483647);
+    WaitFor(WAIT_TIME_SECOND);
+    EXPECT_EQ(SUCCESS, ret);
+}
+
+/**
+ * @tc.number: SUB_Telephony_DriverSystem_V1GetImeiSv_0500
+ * @tc.name: testV1GetImeiSv005
+ * @tc.desc: GetImeiSv, stability test
+ */
+HWTEST_F(HdfRilHdiTestAdditional2nd, testV1GetImeiSv005, Function | MediumTest | Level1)
+{
+    if (!IsReady(SLOTID_1)) {
+        return;
+    }
+    int32_t ret = 0;
+    for (int i = 0; i < 100; i++) {
+        ret = g_rilInterface->GetImeiSv(SLOTID_1, GetSerialId());
         WaitFor(WAIT_TIME_SECOND);
         EXPECT_EQ(SUCCESS, ret);
     }

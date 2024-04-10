@@ -13,40 +13,49 @@
  * limitations under the License.
  */
 
-#include <hdf_base.h>
-#include "iam_hat_test.h"
-#include "iconsumer_surface.h"
 #include "face_auth_hdi.h"
+
+#include <hdf_base.h>
+
+#include "iconsumer_surface.h"
+
+#include "iam_hat_test.h"
 
 #define LOG_LABEL OHOS::UserIam::Common::LABEL_FACE_AUTH_IMPL
 
 using namespace std;
 using namespace testing::ext;
+using namespace OHOS;
 using namespace OHOS::UserIam::Common;
 using namespace OHOS::HDI::FaceAuth;
-using namespace OHOS::HDI::FaceAuth::V1_0;
-using Property = OHOS::HDI::FaceAuth::V1_1::Property;
-using SaCommandParamNone = OHOS::HDI::FaceAuth::V1_1::SaCommandParamNone;
-using SaCommandParam = OHOS::HDI::FaceAuth::V1_1::SaCommandParam;
-using SaCommand = OHOS::HDI::FaceAuth::V1_1::SaCommand;
 
-static ExecutorImpl g_executorImpl;
-static OHOS::Parcel parcel;
+static AllInOneExecutorImpl g_executorImpl;
+static Parcel parcel;
 bool g_onResultFlag = false;
 bool g_onTipFlag = false;
 bool g_onSaCommandsFlag = false;
 
-void UserIamFaceAuthTestAdditional::SetUpTestCase() {}
+void UserIamFaceAuthTestAdditional::SetUpTestCase()
+{
+}
 
-void UserIamFaceAuthTestAdditional::TearDownTestCase() {}
+void UserIamFaceAuthTestAdditional::TearDownTestCase()
+{
+}
 
-void UserIamFaceAuthTestAdditional::SetUp() {}
+void UserIamFaceAuthTestAdditional::SetUp()
+{
+}
 
-void UserIamFaceAuthTestAdditional::TearDown() {}
+void UserIamFaceAuthTestAdditional::TearDown()
+{
+}
 
 class DummyIExecutorCallback : public IExecutorCallback {
 public:
-    DummyIExecutorCallback(int32_t result, int32_t acquire) : result_(result), acquire_(acquire) {}
+    DummyIExecutorCallback(int32_t result, int32_t tip, int32_t message) : result_(result), tip_(tip), message_(message)
+    {
+    }
 
     int32_t OnResult(int32_t result, const std::vector<uint8_t> &extraInfo) override
     {
@@ -55,21 +64,30 @@ public:
         return result_;
     }
 
-    int32_t OnTip(int32_t acquire, const std::vector<uint8_t> &extraInfo) override
+    int32_t OnTip(int32_t tip, const std::vector<uint8_t> &extraInfo) override
     {
-        cout << "result is " << acquire << " extraInfo len is " << extraInfo.size() << endl;
+        cout << "tip is " << tip << " extraInfo len is " << extraInfo.size() << endl;
         g_onTipFlag = true;
-        return acquire_;
+        return tip_;
+    }
+
+    int32_t OnMessage(int32_t destRole, const std::vector<uint8_t> &msg) override
+    {
+        cout << "destRole is " << destRole << " msg len is " << msg.size() << endl;
+        return message_;
     }
 
 private:
     int32_t result_;
-    int32_t acquire_;
+    int32_t tip_;
+    int32_t message_;
 };
 
 class DummyISaCommandCallback : public ISaCommandCallback {
 public:
-    explicit DummyISaCommandCallback(int32_t result) : result_(result) {}
+    explicit DummyISaCommandCallback(int32_t result) : result_(result)
+    {
+    }
 
     int32_t OnSaCommands(const std::vector<SaCommand> &commands) override
     {
@@ -87,7 +105,8 @@ static void FillTestIExecutorCallback(Parcel &parcel, sptr<IExecutorCallback> &c
     if (isNull) {
         callbackObj = nullptr;
     } else {
-        callbackObj = new (std::nothrow) DummyIExecutorCallback(parcel.ReadInt32(), parcel.ReadInt32());
+        callbackObj =
+            new (std::nothrow) DummyIExecutorCallback(parcel.ReadInt32(), parcel.ReadInt32(), parcel.ReadInt32());
         if (callbackObj == nullptr) {
             cout << "callbackObj construct fail" << endl;
         }
@@ -128,10 +147,8 @@ void FillTestISaCommandCallback(Parcel &parcel, sptr<ISaCommandCallback> &callba
             cout << "callbackObj construct fail" << endl;
         }
     }
-
     cout << "success" << endl;
 }
-
 /**
  * @tc.number  SUB_Security_Iam_FaceAuth_HDI_GetExecutorInfo_0200
  * @tc.name  testFaceAuthTestGetExecutorInfo001
@@ -161,49 +178,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetExecutorInfo002, Func
         EXPECT_EQ(ret, 0);
     }
 }
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_GetTemplateInfo_0200
- * @tc.name  testFaceAuthTestGetTemplateInfo001
- * @tc.desc  test GetTemplateInfo templateId
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetTemplateInfo001, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestGetTemplateInfo001" << endl;
-    uint64_t templateId = 0;
-    TemplateInfo templateInfo;
-    int32_t ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
-    cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 0);
-    templateId = 0x7FFFFFFFFFFFFFFF;
-    ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
-    cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 0);
-    templateId = 0xFFFFFFFFFFFFFFFF;
-    ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
-    cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 0);
-    templateId = 0x10;
-    ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
-    cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 0);
-}
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_GetTemplateInfo_0600
- * @tc.name  testFaceAuthTestGetTemplateInfo005
- * @tc.desc  test GetTemplateInfo 1000 times
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetTemplateInfo005, Function | MediumTest | Level1)
-{
-    cout << "start test testFaceAuthTestGetTemplateInfo005" << endl;
-    uint64_t templateId = 0x01;
-    TemplateInfo templateInfo;
-    int32_t ret = 0;
-    for (int32_t i = 0; i < 1000; i++) {
-        ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
-        cout << "ret " << i << " is " << ret << endl;
-        EXPECT_EQ(ret, 0);
-    }
-}
+
 /**
  * @tc.number  SUB_Security_Iam_FaceAuth_HDI_OnRegisterFinish_0200
  * @tc.name  testFaceAuthTestOnRegisterFinish001
@@ -546,7 +521,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestCancel004, Function | Me
 HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSendCommand001, Function | MediumTest | Level1)
 {
     cout << "start test testFaceAuthTestSendCommand001" << endl;
-    int32_t commandId = LOCK_TEMPLATE;
+    int32_t commandId = DriverCommandId::LOCK_TEMPLATE;
     std::vector<uint8_t> extraInfo;
     FillTestUint8Vector(parcel, extraInfo);
     sptr<IExecutorCallback> callbackObj;
@@ -554,11 +529,11 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSendCommand001, Function
     int32_t ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-    commandId = UNLOCK_TEMPLATE;
+    commandId = DriverCommandId::UNLOCK_TEMPLATE;
     ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-    commandId = VENDOR_COMMAND_BEGIN;
+    commandId = DriverCommandId::VENDOR_COMMAND_BEGIN;
     ret = g_executorImpl.SendCommand(commandId, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
@@ -587,7 +562,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSendCommand001, Function
 HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSendCommand008, Function | MediumTest | Level1)
 {
     cout << "start test testFaceAuthTestSendCommand008" << endl;
-    int32_t commandId = LOCK_TEMPLATE;
+    int32_t commandId = DriverCommandId::LOCK_TEMPLATE;
     std::vector<uint8_t> extraInfo;
     sptr<IExecutorCallback> callbackObj;
     FillTestIExecutorCallback(parcel, callbackObj);
@@ -610,7 +585,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSendCommand008, Function
 HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSendCommand011, Function | MediumTest | Level1)
 {
     cout << "start test testFaceAuthTestSendCommand011" << endl;
-    int32_t commandId = LOCK_TEMPLATE;
+    int32_t commandId = DriverCommandId::LOCK_TEMPLATE;
     std::vector<uint8_t> extraInfo;
     FillTestUint8Vector(parcel, extraInfo);
     sptr<IExecutorCallback> callbackObj;
@@ -630,7 +605,8 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSendCommand011, Function
 HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSetBufferProducer001, Function | MediumTest | Level2)
 {
     cout << "start test testFaceAuthTestSetBufferProducer001" << endl;
-    int32_t ret = g_executorImpl.SetBufferProducer(nullptr);
+    FaceAuthInterfaceService faceauth_Interface;
+    int32_t ret = faceauth_Interface.SetBufferProducer(nullptr);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
 }
@@ -654,8 +630,9 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSetBufferProducer002, Fu
     sptr<BufferProducerSequenceable> producerSequenceable =
         new (std::nothrow) BufferProducerSequenceable(bufferProducer);
     int32_t ret = 0;
+    FaceAuthInterfaceService faceauth_Interface;
     for (int32_t i = 0; i < 1000; i++) {
-        ret = g_executorImpl.SetBufferProducer(producerSequenceable);
+        ret = faceauth_Interface.SetBufferProducer(producerSequenceable);
         cout << "ret is " << ret << endl;
         EXPECT_EQ(ret, 0);
     }
@@ -669,7 +646,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetProperty001, Function
 {
     cout << "start test testFaceAuthTestGetProperty001" << endl;
     std::vector<uint64_t> templateIdList;
-    std::vector<GetPropertyType> propertyTypes;
+    std::vector<int32_t> propertyTypes;
     Property property;
     int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
     cout << "ret is " << ret << endl;
@@ -678,11 +655,11 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetProperty001, Function
     ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
-    propertyTypes.push_back(OHOS::HDI::FaceAuth::V1_1::AUTH_SUB_TYPE);
-    propertyTypes.push_back(OHOS::HDI::FaceAuth::V1_1::LOCKOUT_DURATION);
-    propertyTypes.push_back(OHOS::HDI::FaceAuth::V1_1::REMAIN_ATTEMPTS);
-    propertyTypes.push_back(OHOS::HDI::FaceAuth::V1_1::ENROLL_PROGRESS);
-    propertyTypes.push_back(OHOS::HDI::FaceAuth::V1_1::SENSOR_INFO);
+    propertyTypes.push_back(GetPropertyType::AUTH_SUB_TYPE);
+    propertyTypes.push_back(GetPropertyType::LOCKOUT_DURATION);
+    propertyTypes.push_back(GetPropertyType::REMAIN_ATTEMPTS);
+    propertyTypes.push_back(GetPropertyType::ENROLL_PROGRESS);
+    propertyTypes.push_back(GetPropertyType::SENSOR_INFO);
     ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
@@ -701,8 +678,8 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetProperty009, Function
     cout << "start test testFaceAuthTestGetProperty009" << endl;
     std::vector<uint64_t> templateIdList;
     FillTestUint64Vector(parcel, templateIdList);
-    std::vector<GetPropertyType> propertyTypes;
-    FillTestGetPropertyTypeVector(parcel, propertyTypes);
+    std::vector<int32_t> propertyTypes;
+    FillTestInt32Vector(parcel, propertyTypes);
     Property property;
     FillTestProperty(parcel, property);
     int32_t ret = 0;
@@ -778,6 +755,26 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestRegisterSaCommandCallbac
     }
 }
 /**
+ * @tc.number  SUB_Security_Iam_FaceAuth_HDI_SendMessage_0100
+ * @tc.name  testFaceAuthTestSendMessage001
+ * @tc.desc  test SetCachedTemplates 1000 times
+ */
+HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestSendMessage001, Function | MediumTest | Level1)
+{
+    cout << "start test testFaceAuthTestSendMessage001" << endl;
+
+    uint64_t scheduleId = 0;
+    int32_t srcRole = 0;
+    std::vector<uint8_t> msg;
+    msg.resize(5);
+    int32_t ret = 0;
+    for (int32_t i = 0; i < 1000; i++) {
+        ret = g_executorImpl.SendMessage(scheduleId, srcRole, msg);
+        cout << "ret is " << ret << endl;
+        EXPECT_EQ(ret, 0);
+    }
+}
+/**
  * @tc.number  SUB_Security_Iam_FaceAuth_HDI_GetExecutorList_0200
  * @tc.name  testFaceAuthTestGetExecutorList001
  * @tc.desc  test GetExecutorList 1000 times
@@ -786,7 +783,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetExecutorList001, Func
 {
     cout << "start test GetExecutorList" << endl;
     FaceAuthInterfaceService faceauth_Interface;
-    std::vector<sptr<V1_0::IExecutor>> executorList;
+    std::vector<sptr<IAllInOneExecutor>> executorList;
     int32_t ret = 0;
     for (int32_t i = 0; i < 1000; i++) {
         ret = faceauth_Interface.GetExecutorList(executorList);
@@ -794,23 +791,7 @@ HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetExecutorList001, Func
         EXPECT_EQ(ret, 0);
     }
 }
-/**
- * @tc.number  SUB_Security_Iam_FaceAuth_HDI_GetExecutorListV1_1_0200
- * @tc.name  testFaceAuthTestGetExecutorListV1_1001
- * @tc.desc  test GetExecutorListV1_1 1000 times
- */
-HWTEST_F(UserIamFaceAuthTestAdditional, testFaceAuthTestGetExecutorListV1_1001, Function | MediumTest | Level1)
-{
-    cout << "start test GetExecutorListV1_1" << endl;
-    FaceAuthInterfaceService faceauth_Interface;
-    std::vector<sptr<V1_1::IExecutor>> executorList;
-    int32_t ret = 0;
-    for (int32_t i = 0; i < 1000; i++) {
-        ret = faceauth_Interface.GetExecutorListV1_1(executorList);
-        cout << "ret is " << ret << endl;
-        EXPECT_EQ(ret, 0);
-    }
-}
+
 /**
  * @tc.number  SUB_Security_Iam_FaceAuth_HDI_OnResult_0100
  * @tc.name  testFaceAuthTestOnResult001

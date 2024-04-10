@@ -19,6 +19,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+
 #include "parcel.h"
 
 namespace OHOS {
@@ -29,6 +30,7 @@ namespace OHOS {
             void FillTestUint32Vector(Parcel &parcel, std::vector<uint32_t> &data);
             void FillTestUint64Vector(Parcel &parcel, std::vector<uint64_t> &data);
             void FillTestString(Parcel &parcel, std::string &str);
+            void FillTestInt32Vector(Parcel &parcel, std::vector<int32_t> &data);
         } // namespace Common
     }     // namespace UserIam
 } // namespace OHOS

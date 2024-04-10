@@ -13,24 +13,22 @@
  * limitations under the License.
  */
 
+#include "face_auth_hdi_test.h"
+
 #include <hdf_base.h>
+
 #include "iam_hat_test.h"
 #include "iconsumer_surface.h"
-#include "face_auth_hdi_test.h"
 
 #define LOG_LABEL OHOS::UserIam::Common::LABEL_FACE_AUTH_IMPL
 
 using namespace std;
 using namespace testing::ext;
+using namespace OHOS;
 using namespace OHOS::UserIam::Common;
 using namespace OHOS::HDI::FaceAuth;
-using namespace OHOS::HDI::FaceAuth::V1_0;
-using Property = OHOS::HDI::FaceAuth::V1_1::Property;
-using SaCommandParamNone = OHOS::HDI::FaceAuth::V1_1::SaCommandParamNone;
-using SaCommandParam = OHOS::HDI::FaceAuth::V1_1::SaCommandParam;
-using SaCommand = OHOS::HDI::FaceAuth::V1_1::SaCommand;
 
-static ExecutorImpl g_executorImpl;
+static AllInOneExecutorImpl g_executorImpl;
 static OHOS::Parcel parcel;
 
 void UserIamFaceAuthTest::SetUpTestCase()
@@ -51,7 +49,7 @@ void UserIamFaceAuthTest::TearDown()
 
 class DummyIExecutorCallback : public IExecutorCallback {
 public:
-    DummyIExecutorCallback(int32_t result, int32_t acquire) : result_(result), acquire_(acquire)
+    DummyIExecutorCallback(int32_t result, int32_t tip, int32_t message) : result_(result), tip_(tip), message_(message)
     {
     }
 
@@ -61,15 +59,22 @@ public:
         return result_;
     }
 
-    int32_t OnTip(int32_t acquire, const std::vector<uint8_t> &extraInfo) override
+    int32_t OnTip(int32_t tip, const std::vector<uint8_t> &extraInfo) override
     {
-        cout << "result is " << acquire << " extraInfo len is " << extraInfo.size() << endl;
-        return acquire_;
+        cout << "tip is " << tip << " extraInfo len is " << extraInfo.size() << endl;
+        return tip_;
+    }
+
+    int32_t OnMessage(int32_t destRole, const std::vector<uint8_t> &msg) override
+    {
+        cout << "destRole is " << destRole << " msg len is " << msg.size() << endl;
+        return message_;
     }
 
 private:
     int32_t result_;
-    int32_t acquire_;
+    int32_t tip_;
+    int32_t message_;
 };
 
 class DummyISaCommandCallback : public ISaCommandCallback {
@@ -90,21 +95,13 @@ private:
 static void FillTestExecutorInfo(Parcel &parcel, ExecutorInfo &executorInfo)
 {
     executorInfo.sensorId = parcel.ReadUint16();
-    executorInfo.executorType = parcel.ReadUint32();
+    executorInfo.executorMatcher = parcel.ReadUint32();
     executorInfo.executorRole = static_cast<ExecutorRole>(parcel.ReadInt32());
     executorInfo.authType = static_cast<AuthType>(parcel.ReadInt32());
     executorInfo.esl = static_cast<ExecutorSecureLevel>(parcel.ReadInt32());
+    executorInfo.maxTemplateAcl = parcel.ReadInt32();
     FillTestUint8Vector(parcel, executorInfo.publicKey);
     FillTestUint8Vector(parcel, executorInfo.extraInfo);
-    cout << "success" << endl;
-}
-
-static void FillTestTemplateInfo(Parcel &parcel, TemplateInfo &templateInfo)
-{
-    templateInfo.executorType = parcel.ReadUint32();
-    templateInfo.lockoutDuration = parcel.ReadInt32();
-    templateInfo.remainAttempts = parcel.ReadInt32();
-    FillTestUint8Vector(parcel, templateInfo.extraInfo);
     cout << "success" << endl;
 }
 
@@ -114,23 +111,13 @@ static void FillTestIExecutorCallback(Parcel &parcel, sptr<IExecutorCallback> &c
     if (isNull) {
         callbackObj = nullptr;
     } else {
-        callbackObj = new (std::nothrow) DummyIExecutorCallback(parcel.ReadInt32(), parcel.ReadInt32());
+        callbackObj =
+            new (std::nothrow) DummyIExecutorCallback(parcel.ReadInt32(), parcel.ReadInt32(), parcel.ReadInt32());
         if (callbackObj == nullptr) {
             cout << "callbackObj construct fail" << endl;
         }
     }
     cout << "success" << endl;
-}
-
-void FillTestGetPropertyTypeVector(Parcel &parcel, std::vector<GetPropertyType> &types)
-{
-    std::vector<uint32_t> propertyTypeUint32;
-    FillTestUint32Vector(parcel, propertyTypeUint32);
-    for (const auto& val : propertyTypeUint32) {
-        types.push_back(static_cast<GetPropertyType>(val));
-    }
-
-    cout << "success"  << endl;
 }
 
 void FillTestProperty(Parcel &parcel, Property &property)
@@ -141,7 +128,7 @@ void FillTestProperty(Parcel &parcel, Property &property)
     FillTestString(parcel, property.enrollmentProgress);
     FillTestString(parcel, property.sensorInfo);
 
-    cout << "success"  << endl;
+    cout << "success" << endl;
 }
 
 void FillTestISaCommandCallback(Parcel &parcel, sptr<ISaCommandCallback> &callbackObj)
@@ -152,11 +139,10 @@ void FillTestISaCommandCallback(Parcel &parcel, sptr<ISaCommandCallback> &callba
     } else {
         callbackObj = new (std::nothrow) DummyISaCommandCallback(parcel.ReadInt32());
         if (callbackObj == nullptr) {
-            cout << "callbackObj construct fail"  << endl;
+            cout << "callbackObj construct fail" << endl;
         }
     }
-
-    cout << "success"  << endl;
+    cout << "success" << endl;
 }
 
 /**
@@ -170,6 +156,7 @@ HWTEST_F(UserIamFaceAuthTest, Security_IAM_Face_HDI_FUNC_0101, Function | Medium
 {
     cout << "start test SendCommand" << endl;
     uint8_t commandId = parcel.ReadUint8();
+    cout << "commandId is " << commandId << endl;
     std::vector<uint8_t> extraInfo;
     FillTestUint8Vector(parcel, extraInfo);
     sptr<IExecutorCallback> callbackObj;
@@ -225,24 +212,6 @@ HWTEST_F(UserIamFaceAuthTest, Security_IAM_Face_HDI_FUNC_0104, Function | Medium
     ExecutorInfo executorInfo;
     FillTestExecutorInfo(parcel, executorInfo);
     int32_t ret = g_executorImpl.GetExecutorInfo(executorInfo);
-    cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 0);
-}
-
-/**
- * @tc.number: Security_IAM_Face_HDI_FUNC_0105
- * @tc.name: Test GetTemplateInfo
- * @tc.size: MediumTest
- * @tc.type: Function
- * @tc.level: Level1
- */
-HWTEST_F(UserIamFaceAuthTest, Security_IAM_Face_HDI_FUNC_0105, Function | MediumTest | Level1)
-{
-    cout << "start test GetTemplateInfo" << endl;
-    uint64_t templateId = parcel.ReadUint64();
-    TemplateInfo templateInfo;
-    FillTestTemplateInfo(parcel, templateInfo);
-    int32_t ret = g_executorImpl.GetTemplateInfo(templateId, templateInfo);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
 }
@@ -341,7 +310,7 @@ HWTEST_F(UserIamFaceAuthTest, Security_IAM_Face_HDI_FUNC_0110, Function | Medium
 {
     cout << "start test GetExecutorList" << endl;
     FaceAuthInterfaceService faceauth_Interface;
-    std::vector<sptr<V1_0::IExecutor>> executorList;
+    std::vector<sptr<IAllInOneExecutor>> executorList;
     int32_t ret = faceauth_Interface.GetExecutorList(executorList);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
@@ -362,15 +331,14 @@ HWTEST_F(UserIamFaceAuthTest, Security_IAM_Face_HDI_FUNC_0111, Function | Medium
         auto surface = IConsumerSurface::Create();
         if (surface == nullptr) {
             cout << "CreateSurfaceAsConsumer fail" << endl;
-        }
-        else
-        {
+        } else {
             bufferProducer = surface->GetProducer();
         }
     }
     sptr<BufferProducerSequenceable> producerSequenceable =
         new (std::nothrow) BufferProducerSequenceable(bufferProducer);
-    int32_t ret = g_executorImpl.SetBufferProducer(producerSequenceable);
+    FaceAuthInterfaceService faceauth_Interface;
+    int32_t ret = faceauth_Interface.SetBufferProducer(producerSequenceable);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
 }
@@ -387,8 +355,8 @@ HWTEST_F(UserIamFaceAuthTest, Security_IAM_Face_HDI_NEW_FUNC_0101, Function | Me
     cout << "start test GetProperty" << endl;
     std::vector<uint64_t> templateIdList;
     FillTestUint64Vector(parcel, templateIdList);
-    std::vector<GetPropertyType> propertyTypes;
-    FillTestGetPropertyTypeVector(parcel, propertyTypes);
+    std::vector<int32_t> propertyTypes;
+    FillTestInt32Vector(parcel, propertyTypes);
     Property property;
     FillTestProperty(parcel, property);
     int32_t ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
@@ -410,6 +378,7 @@ HWTEST_F(UserIamFaceAuthTest, Security_IAM_Face_HDI_NEW_FUNC_0102, Function | Me
     FillTestUint64Vector(parcel, templateIdList);
 
     int32_t ret = g_executorImpl.SetCachedTemplates(templateIdList);
+
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
 }
@@ -435,17 +404,40 @@ HWTEST_F(UserIamFaceAuthTest, Security_IAM_Face_HDI_NEW_FUNC_0103, Function | Me
 
 /**
  * @tc.number: Security_IAM_Face_HDI_NEW_FUNC_0104
- * @tc.name: Test GetExecutorListV1_1
+ * @tc.name: Test GetExecutorList
  * @tc.size: MediumTest
  * @tc.type: Function
  * @tc.level: Level1
  */
 HWTEST_F(UserIamFaceAuthTest, Security_IAM_Face_HDI_NEW_FUNC_0104, Function | MediumTest | Level1)
 {
-    cout << "start test GetExecutorListV1_1" << endl;
+    cout << "start test GetExecutorList" << endl;
     FaceAuthInterfaceService faceauth_Interface;
-    std::vector<sptr<V1_1::IExecutor>> executorList;
-    int32_t ret = faceauth_Interface.GetExecutorListV1_1(executorList);
+    std::vector<sptr<IAllInOneExecutor>> executorList;
+    int32_t ret = faceauth_Interface.GetExecutorList(executorList);
+
+    cout << "ret is " << ret << endl;
+    EXPECT_EQ(ret, 0);
+}
+/**
+ * @tc.number: Security_IAM_Face_HDI_NEW_FUNC_0106
+ * @tc.name: Test Send Message
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ * @tc.level: Level1
+ */
+HWTEST_F(UserIamFaceAuthTest, Security_IAM_Face_HDI_NEW_FUNC_0106, Function | MediumTest | Level1)
+{
+    cout << "start test RegisterSaCommandCallback" << endl;
+    sptr<ISaCommandCallback> callbackObj = nullptr;
+    FillTestISaCommandCallback(parcel, callbackObj);
+
+    uint64_t scheduleId = parcel.ReadUint64();
+    int32_t srcRole = parcel.ReadInt32();
+    std::vector<uint8_t> msg;
+    FillTestUint8Vector(parcel, msg);
+
+    int32_t ret = g_executorImpl.SendMessage(scheduleId, srcRole, msg);
 
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);

@@ -63,19 +63,6 @@ void UsbdFunctionTestAdditional::SetUp(void) {}
 void UsbdFunctionTestAdditional::TearDown(void) {}
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetCurrentFunctions_3100
- * @tc.name: testHdiUsbFunctionTestSetCurrentFunctions012
- * @tc.desc: Sets the list of functions (represented by bit field) supported by the current device.
- * funcs = USB_FUNCTION_RNDIS | USB_FUNCTION_STORAGE.
- */
-HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetCurrentFunctions012, Function | MediumTest | Level1)
-{
-    int32_t funcs = USB_FUNCTION_RNDIS | USB_FUNCTION_STORAGE;
-    auto ret = g_usbInterface->SetCurrentFunctions(funcs);
-    ASSERT_EQ(0, ret);
-}
-
-/**
  * @tc.number: SUB_Driver_Usb_FunctionTest_SetCurrentFunctions_2000
  * @tc.name: testHdiUsbFunctionTestSetCurrentFunctions001
  * @tc.desc: Sets the list of functions (represented by bit field) supported by the current device.

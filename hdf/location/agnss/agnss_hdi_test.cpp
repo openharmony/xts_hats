@@ -25,13 +25,14 @@
 #include "hdf_base.h"
 #include "hdf_log.h"
 #include "osal_time.h"
-#include "v1_0/ia_gnss_interface.h"
+#include "v2_0/ia_gnss_interface.h"
+#include "v2_0/ignss_interface.h"
 #include "agnss_callback_impl.h"
 #include "cellular_data_client.h"
 #include "gnss_callback_impl.h"
 
-using namespace OHOS::HDI::Location::Agnss::V1_0;
-using namespace OHOS::HDI::Location::Gnss::V1_0;
+using namespace OHOS::HDI::Location::Agnss::V2_0;
+using namespace OHOS::HDI::Location::Gnss::V2_0;
 using namespace std;
 using namespace testing::ext;
 
@@ -69,7 +70,7 @@ int32_t AgnssCallbackImpl::RequestSubscriberSetId(SubscriberSetIdType type)
     std::u16string imsi;
     DelayedRefSingleton<Telephony::CoreServiceClient>::GetInstance().GetIMSI(slotId, imsi);
     SubscriberSetId setId;
-    setId.type = HDI::Location::Agnss::V1_0::SETID_TYPE_IMSI;
+    setId.type = HDI::Location::Agnss::V2_0::AGNSS_SETID_TYPE_IMSI;
     setId.id = Str16ToStr8(imsi);
     if (g_iagnssHci == nullptr) {
         printf("g_iagnssHci is null!\n");
@@ -79,7 +80,7 @@ int32_t AgnssCallbackImpl::RequestSubscriberSetId(SubscriberSetIdType type)
     return HDF_SUCCESS;
 }
 
-int32_t AgnssCallbackImpl::RequestAgnssRefInfo()
+int32_t AgnssCallbackImpl::RequestAgnssRefInfo(AGnssRefInfoType type)
 {
     if (g_iagnssHci == nullptr) {
         printf("g_iagnssHci is null!\n");
@@ -96,7 +97,7 @@ int32_t AgnssCallbackImpl::RequestAgnssRefInfo()
         }
         AGnssRefInfo refInfo;
         CellInformation::CellType cellType = infoItem->GetNetworkType();
-        refInfo.type = HDI::Location::Agnss::V1_0::ANSS_REF_INFO_TYPE_CELLID;
+        refInfo.type = type;
         switch (cellType) {
             case CellInformation::CellType::CELL_TYPE_GSM: {
                 JudgmentDataGsm(refInfo, infoItem);
@@ -129,7 +130,7 @@ void AgnssCallbackImpl::JudgmentDataGsm(AGnssRefInfo& refInfo, sptr<CellInformat
 {
     auto gsmCellInfo = static_cast<Telephony::GsmCellInformation *>(infoItem.GetRefPtr());
     if (gsmCellInfo != nullptr) {
-        refInfo.cellId.type = HDI::Location::Agnss::V1_0::CELLID_TYPE_GSM;
+        refInfo.cellId.type = HDI::Location::Agnss::V2_0::CELLID_TYPE_GSM;
         refInfo.cellId.mcc = static_cast<unsigned short>(std::stoi(gsmCellInfo->GetMcc()));
         refInfo.cellId.mnc = static_cast<unsigned short>(std::stoi(gsmCellInfo->GetMnc()));
         refInfo.cellId.lac = static_cast<unsigned short>(gsmCellInfo->GetLac());
@@ -141,7 +142,7 @@ void AgnssCallbackImpl::JudgmentDataLte(AGnssRefInfo& refInfo, sptr<CellInformat
 {
     auto lteCellInfo = static_cast<Telephony::LteCellInformation *>(infoItem.GetRefPtr());
     if (lteCellInfo != nullptr) {
-        refInfo.cellId.type = HDI::Location::Agnss::V1_0::CELLID_TYPE_LTE;
+        refInfo.cellId.type = HDI::Location::Agnss::V2_0::CELLID_TYPE_LTE;
         refInfo.cellId.mcc = static_cast<unsigned short>(std::stoi(lteCellInfo->GetMcc()));
         refInfo.cellId.mnc = static_cast<unsigned short>(std::stoi(lteCellInfo->GetMnc()));
         refInfo.cellId.tac = static_cast<unsigned short>(lteCellInfo->GetTac());
@@ -154,7 +155,7 @@ void AgnssCallbackImpl::JudgmentDataNr(AGnssRefInfo& refInfo, sptr<CellInformati
 {
     auto nrCellInfo = static_cast<Telephony::NrCellInformation *>(infoItem.GetRefPtr());
     if (nrCellInfo != nullptr) {
-        refInfo.cellId.type = HDI::Location::Agnss::V1_0::CELLID_TYPE_NR;
+        refInfo.cellId.type = HDI::Location::Agnss::V2_0::CELLID_TYPE_NR;
         refInfo.cellId.mcc = static_cast<unsigned short>(std::stoi(nrCellInfo->GetMcc()));
         refInfo.cellId.mnc = static_cast<unsigned short>(std::stoi(nrCellInfo->GetMnc()));
         refInfo.cellId.tac = static_cast<unsigned short>(nrCellInfo->GetTac());
@@ -168,7 +169,7 @@ void AgnssCallbackImpl::JudgmentDataUmts(AGnssRefInfo& refInfo, sptr<CellInforma
 {
     auto wcdmaCellInfo = static_cast<Telephony::WcdmaCellInformation *>(infoItem.GetRefPtr());
     if (wcdmaCellInfo != nullptr) {
-        refInfo.cellId.type = HDI::Location::Agnss::V1_0::CELLID_TYPE_UMTS;
+        refInfo.cellId.type = HDI::Location::Agnss::V2_0::CELLID_TYPE_UMTS;
         refInfo.cellId.mcc = static_cast<unsigned short>(std::stoi(wcdmaCellInfo->GetMcc()));
         refInfo.cellId.mnc = static_cast<unsigned short>(std::stoi(wcdmaCellInfo->GetMnc()));
         refInfo.cellId.lac = static_cast<unsigned short>(wcdmaCellInfo->GetLac());
@@ -200,27 +201,22 @@ int32_t GnssCallbackImpl::ReportLocation(const LocationInfo& location)
 
 int32_t GnssCallbackImpl::ReportGnssWorkingStatus(GnssWorkingStatus status)
 {
-    if (status == GnssWorkingStatus::GNSS_STATUS_NONE) {
-        printf("GNSS_STATUS_NONE\n");
+    if (status == GnssWorkingStatus::GNSS_WORKING_STATUS_NONE) {
+        printf("GNSS_WORKING_STATUS_NONE\n");
         return HDF_SUCCESS;
-    }
-    else if(status == GnssWorkingStatus::GNSS_STATUS_SESSION_BEGIN){
-        printf("GNSS_STATUS_SESSION_BEGIN\n");
+    } else if (status == GnssWorkingStatus::GNSS_WORKING_STATUS_SESSION_BEGIN) {
+        printf("GNSS_WORKING_STATUS_SESSION_BEGIN\n");
         return HDF_SUCCESS;
-    }
-    else if(status == GnssWorkingStatus::GNSS_STATUS_SESSION_END){
-        printf("GNSS_STATUS_SESSION_END\n");
+    } else if (status == GnssWorkingStatus::GNSS_WORKING_STATUS_SESSION_END) {
+        printf("GNSS_WORKING_STATUS_SESSION_END\n");
         return HDF_SUCCESS;
-    }
-    else if(status == GnssWorkingStatus::GNSS_STATUS_ENGINE_ON){
-        printf("GNSS_STATUS_ENGINE_ON\n");
+    } else if (status == GnssWorkingStatus::GNSS_WORKING_STATUS_ENGINE_ON) {
+        printf("GNSS_WORKING_STATUS_ENGINE_ON\n");
         return HDF_SUCCESS;
-    }
-    else if(status == GnssWorkingStatus::GNSS_STATUS_ENGINE_OFF){
-        printf("GNSS_STATUS_ENGINE_OFF\n");
+    } else if (status == GnssWorkingStatus::GNSS_WORKING_STATUS_ENGINE_OFF) {
+        printf("GNSS_WORKING_STATUS_ENGINE_OFF\n");
         return HDF_SUCCESS;
-    }
-    else{
+    } else {
         printf("Gnss status fail\n");
         return HDF_FAILURE;
     }
@@ -279,6 +275,11 @@ int32_t GnssCallbackImpl::ReportCachedLocation(const std::vector<LocationInfo>& 
     return HDF_SUCCESS;
 }
 
+int32_t GnssCallbackImpl::ReportGnssNiNotification(const GnssNiNotificationRequest& notification)
+{
+    (void)notification;
+    return HDF_SUCCESS;
+}
 
 void LocationAgnssTest::SetUpTestCase()
 {
@@ -371,7 +372,7 @@ HWTEST_F(LocationAgnssTest, SUB_DriverSystem_SetSubscriberSetId_0100, TestSize.L
         return;
     }
     SubscriberSetId id;
-    id.type = SubscriberSetIdType::SETID_TYPE_NONE;
+    id.type = SubscriberSetIdType::AGNSS_SETID_TYPE_NULL;
     id.id = "111";
     int32_t ret = g_iagnssHci->SetSubscriberSetId(id);
     EXPECT_EQ(HDF_SUCCESS, ret);

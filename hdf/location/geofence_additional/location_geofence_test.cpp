@@ -25,10 +25,10 @@
 #include "hdf_base.h"
 #include "hdf_log.h"
 #include "osal_time.h"
-#include "v1_0/igeofence_interface.h"
+#include "v2_0/igeofence_interface.h"
 #include "geofence_callback_impl.h"
 
-using namespace OHOS::HDI::Location::Geofence::V1_0;
+using namespace OHOS::HDI::Location::Geofence::V2_0;
 using namespace std;
 using namespace testing::ext;
 

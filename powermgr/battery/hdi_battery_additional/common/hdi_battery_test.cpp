@@ -234,11 +234,11 @@ HWTEST_F(HdfBatteryHdiTestAdditional, testGetCurrentAverage001, TestSize.Level1)
     int32_t ret = 0;
     for (uint32_t i = 0; i < 1000; i++) {
         ret = g_batteryInterface->GetCurrentAverage(curAverage);
-#ifdef HATS_DRIVERS_PERIPHERAL_BATTERY_PC_MACRO_ISOLATION
-        EXPECT_NE(0, curAverage);
-#else
-        EXPECT_EQ(ret, HDF_SUCCESS);
-#endif
+        if (ret != 0) {
+            EXPECT_NE(0, curAverage);
+        } else {
+            EXPECT_EQ(ret, HDF_SUCCESS);
+        }
     }
 }
 

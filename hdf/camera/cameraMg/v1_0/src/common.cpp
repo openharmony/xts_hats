@@ -80,6 +80,11 @@ void Test::Init()
     }
     hostCallback = new TestCameraHostCallback();
     service->SetCallback(hostCallback);
+    service->GetCameraIds(cameraIds);
+    if (cameraIds.size() == 0) {
+        CAMERA_LOGE("camera device list empty");
+        GTEST_SKIP() << "No Camera Available" << std::endl;
+    }
 }
 
 void Test::GetCameraMetadata()
@@ -122,7 +127,6 @@ void Test::GetCameraMetadata()
 void Test::Open()
 {
     if (cameraDevice == nullptr) {
-        service->GetCameraIds(cameraIds);
         if (cameraIds.size() == 0) {
             CAMERA_LOGE("camera device list empty");
             return;

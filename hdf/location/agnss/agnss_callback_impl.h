@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-#ifndef OHOS_HDI_LOCATION_AGNSS_V1_0_AGNSSCALLBACKIMPL_H
-#define OHOS_HDI_LOCATION_AGNSS_V1_0_AGNSSCALLBACKIMPL_H
+#ifndef OHOS_HDI_LOCATION_AGNSS_V2_0_AGNSSCALLBACKIMPL_H
+#define OHOS_HDI_LOCATION_AGNSS_V2_0_AGNSSCALLBACKIMPL_H
 
 #include <hdf_base.h>
-#include <v1_0/ia_gnss_callback.h>
+#include <v2_0/ia_gnss_callback.h>
 #include "core_service_client.h"
 #include "cell_information.h"
 
@@ -25,7 +25,7 @@ namespace OHOS {
 namespace HDI {
 namespace Location {
 namespace Agnss {
-namespace V1_0 {
+namespace V2_0 {
 class AgnssCallbackImpl : public IAGnssCallback {
 public:
     AgnssCallbackImpl()
@@ -34,7 +34,7 @@ public:
     {}
     int32_t RequestSetUpAgnssDataLink(const AGnssDataLinkRequest& request) override;
     int32_t RequestSubscriberSetId(SubscriberSetIdType type) override;
-    int32_t RequestAgnssRefInfo() override;
+    int32_t RequestAgnssRefInfo(AGnssRefInfoType type) override;
 private:
     void JudgmentDataGsm(AGnssRefInfo& refInfo, sptr<Telephony::CellInformation> infoItem);
     void JudgmentDataUmts(AGnssRefInfo& refInfo, sptr<Telephony::CellInformation> infoItem);
@@ -42,11 +42,11 @@ private:
     void JudgmentDataNr(AGnssRefInfo& refInfo, sptr<Telephony::CellInformation> infoItem);
     std::string Str16ToStr8(std::u16string str);
 };
-} // V1_0
+} // V2_0
 } // Agnss
 } // Location
 } // HDI
 } // OHOS
 
-#endif // OHOS_HDI_LOCATION_AGNSS_V1_0_AGNSSCALLBACKIMPL_H
+#endif // OHOS_HDI_LOCATION_AGNSS_V2_0_AGNSSCALLBACKIMPL_H
 

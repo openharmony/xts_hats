@@ -13,17 +13,17 @@
  * limitations under the License.
  */
 
-#ifndef OHOS_HDI_LOCATION_GEOFENCE_V1_0_GEOFENCECALLBACKIMPL_H
-#define OHOS_HDI_LOCATION_GEOFENCE_V1_0_GEOFENCECALLBACKIMPL_H
+#ifndef OHOS_HDI_LOCATION_GEOFENCE_V2_0_GEOFENCECALLBACKIMPL_H
+#define OHOS_HDI_LOCATION_GEOFENCE_V2_0_GEOFENCECALLBACKIMPL_H
 
 #include <hdf_base.h>
-#include <v1_0/igeofence_callback.h>
+#include <v2_0/igeofence_callback.h>
 
 namespace OHOS {
 namespace HDI {
 namespace Location {
 namespace Geofence {
-namespace V1_0 {
+namespace V2_0 {
 class GeofenceCallbackImpl : public IGeofenceCallback {
 public:
     GeofenceCallbackImpl() {}
@@ -34,7 +34,7 @@ public:
     int32_t ReportGeofenceOperateResult(int32_t fenceIndex, GeofenceOperateType type,
                                         GeofenceOperateResult result) override;
 };
-} // namespace V1_0
+} // namespace V2_0
 } // namespace Geofence
 } // namespace Location
 } // namespace HDI

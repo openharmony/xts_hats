@@ -13,19 +13,19 @@
  * limitations under the License.
  */
 
-#ifndef OHOS_HDI_LOCATION_GNSS_V1_0_GNSSCALLBACKIMPL_H
-#define OHOS_HDI_LOCATION_GNSS_V1_0_GNSSCALLBACKIMPL_H
+#ifndef OHOS_HDI_LOCATION_GNSS_V2_0_GNSSCALLBACKIMPL_H
+#define OHOS_HDI_LOCATION_GNSS_V2_0_GNSSCALLBACKIMPL_H
 
 #include <hdf_base.h>
 #include <string>
-#include <v1_0/ignss_callback.h>
+#include <v2_0/ignss_callback.h>
 
 
 namespace OHOS {
 namespace HDI {
 namespace Location {
 namespace Gnss {
-namespace V1_0 {
+namespace V2_0 {
 class GnssCallbackImpl : public IGnssCallback {
 public:
     GnssCallbackImpl()
@@ -40,12 +40,13 @@ public:
     int32_t RequestGnssReferenceInfo(GnssRefInfoType type) override;
     int32_t RequestPredictGnssData() override;
     int32_t ReportCachedLocation(const std::vector<LocationInfo>& gnssLocations) override;
+    int32_t ReportGnssNiNotification(const GnssNiNotificationRequest& notification) override;
 };
-} // V1_0
+} // V2_0
 } // Gnss
 } // Location
 } // HDI
 } // OHOS
 
-#endif // OHOS_HDI_LOCATION_GNSS_V1_0_GNSSCALLBACKIMPL_H
+#endif // OHOS_HDI_LOCATION_GNSS_V2_0_GNSSCALLBACKIMPL_H
 

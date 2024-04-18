@@ -25,10 +25,10 @@
 #include "hdf_base.h"
 #include "hdf_log.h"
 #include "osal_time.h"
-#include "v1_0/igeofence_interface.h"
+#include "v2_0/igeofence_interface.h"
 #include "geofence_callback_impl.h"
 
-using namespace OHOS::HDI::Location::Geofence::V1_0;
+using namespace OHOS::HDI::Location::Geofence::V2_0;
 using namespace std;
 using namespace testing::ext;
 
@@ -159,7 +159,7 @@ HWTEST_F(LocationGeofenceTest, SUB_DriverSystem_AddGnssGeofence_0100, TestSize.L
     fence.latitude = 118.90;
     fence.longitude = 15.25;
     fence.radius = 12.26;
-    GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_UNCERTAIN ;
+    GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_UNCERTAIN;
     int32_t ret = g_igeofenceHci->AddGnssGeofence(fence,geoevent);
     EXPECT_EQ(HDF_SUCCESS, ret);
 }

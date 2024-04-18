@@ -350,12 +350,12 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3200, TestSize.Level1)
     INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
     INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputReporter, INPUT_NULL_PTR);
     INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputManager, INPUT_NULL_PTR);
-    ret  = g_inputInterface->iInputReporter->RegisterReportCallback(g_touchIndex, &g_callback);
+    ret = g_inputInterface->iInputManager->OpenInputDevice(g_touchIndex);
     if (ret != 0) {
         printf("%s: Device not exist", __func__);
         GTEST_SKIP() << "No device available" << std::endl;
     }
-    ret = g_inputInterface->iInputReporter->UnregisterReportCallback(g_touchIndex,&g_callback);
+    ret  = g_inputInterface->iInputReporter->RegisterReportCallback(g_touchIndex, &g_callback);
     if (ret != INPUT_SUCCESS) {
         printf("%s: register callback failed for device %d, ret %d\n", __func__, g_touchIndex, ret);
     }
@@ -380,8 +380,7 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_5200, TestSize.Level1)
     INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
     INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputReporter, INPUT_NULL_PTR);
     INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputManager, INPUT_NULL_PTR);
-
-    ret  = g_inputInterface->iInputReporter->UnregisterReportCallback(g_touchIndex);
+    ret = g_inputInterface->iInputManager->OpenInputDevice(g_touchIndex);
     if (ret != 0) {
         printf("%s: Device not exist", __func__);
         GTEST_SKIP() << "No device available" << std::endl;

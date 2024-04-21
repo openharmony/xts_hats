@@ -117,7 +117,7 @@ void HdfSensorHdiTest::TearDownTestCase()
 void HdfSensorHdiTest::SetUp()
 {
     if (g_sensorInterface == nullptr) {
-        printf("%s: Sensor list is empty", _func_);
+        printf("Sensor list is empty");
         GTEST_SKIP() << "Device not exist" << std::endl;
         return;
     }

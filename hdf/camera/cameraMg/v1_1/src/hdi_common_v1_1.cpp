@@ -96,6 +96,7 @@ void Test::Init()
     if (cameraIds.size() == 0) {
         CAMERA_LOGE("camera device list empty");
         GTEST_SKIP() << "No Camera Available" << std::endl;
+        return;
     }
 }
 

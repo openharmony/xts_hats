@@ -241,8 +241,12 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_QuickThumbnail_0100, TestSize.Leve
     EXPECT_NE(data, nullptr);
     camera_metadata_item_t entry;
     int ret = FindCameraMetadataItem(data,OHOS_ABILITY_STREAM_QUICK_THUMBNAIL_AVAILABLE, &entry);
-    EXPECT_EQ(ret, CAM_META_SUCCESS);
-    std::cout << "OHOS_ABILITY_STREAM_QUICK_THUMBNAIL_AVAILABLE value is " << static_cast<int>(entry.data.i32[0]) << std::endl;
+    if (ret != CAM_META_SUCCESS) {
+        GTEST_SKIP() << "This function is not supported " << std::endl;
+        return;
+    }
+
+    std::cout << "OHOS_ABILITY_STREAM_QUICK_THUMBNAIL_AVAILABLE value is " << static_cast<int>(entry.data.u8[0]) << std::endl;
 }
 /**
  * @tc.name: Quick Thumbnail

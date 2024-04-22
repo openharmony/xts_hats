@@ -245,7 +245,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_QuickThumbnail_0100, TestSize.Leve
         GTEST_SKIP() << "This function is not supported " << std::endl;
         return;
     }
-    std::cout << "OHOS_ABILITY_STREAM_QUICK_THUMBNAIL_AVAILABLE value is " 
+    std::cout << "OHOS_ABILITY_STREAM_QUICK_THUMBNAIL_AVAILABLE value is" 
     << static_cast<int>(entry.data.u8[0]) << std::endl;
 }
 /**

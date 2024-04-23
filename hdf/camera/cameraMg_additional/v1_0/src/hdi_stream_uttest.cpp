@@ -97,6 +97,7 @@ HWTEST_F(HdiStreamUtTestAdditional, testCancelCapture004, Function | MediumTest 
         cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, true, true);
         cameraTest->rc = cameraTest->streamOperator->CancelCapture(cameraTest->captureIdPreview);
         EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+        sleep(1);
     }
     cameraTest->rc = cameraTest->streamOperator->ReleaseStreams({cameraTest->streamIdPreview});
 }

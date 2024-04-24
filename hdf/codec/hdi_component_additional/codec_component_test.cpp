@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 #include "codec_omx_ext.h"
-#include "v2_0/codec_callback_service.h"
+#include "v3_0/codec_callback_service.h"
 #include "v1_0/display_buffer_type.h"
 #include "v1_0/display_composer_type.h"
-#include "v2_0/icodec_callback.h"
-#include "v2_0/icodec_component.h"
-#include "v2_0/icodec_component_manager.h"
+#include "v3_0/icodec_callback.h"
+#include "v3_0/icodec_component.h"
+#include "v3_0/icodec_component_manager.h"
 #include "v1_0/include/idisplay_buffer.h"
 #include <OMX_Component.h>
 #include <OMX_Core.h>
@@ -34,7 +34,7 @@
 using namespace std;
 using namespace testing::ext;
 using OHOS::sptr;
-using namespace OHOS::HDI::Codec::V2_0;
+using namespace OHOS::HDI::Codec::V3_0;
 namespace {
 constexpr CodecType TYPE = CodecType::VIDEO_ENCODER;
 constexpr AvCodecRole ROLE = MEDIA_ROLETYPE_VIDEO_AVC;
@@ -910,8 +910,8 @@ HWTEST_F(CodecComponentTestAdditional, testComponentTunnelRequest001, Function |
     ASSERT_EQ(ret, HDF_SUCCESS);
     const int32_t tunneledComp = 1;
     const uint32_t tunneledPort = 1;
-    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
-    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_INPUT;
+    OHOS::HDI::Codec::V3_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V3_0::CODEC_BUFFER_SUPPLY_INPUT;
 
     ret = g_component->ComponentTunnelRequest(OUTPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
     ASSERT_NE(ret, HDF_SUCCESS);
@@ -930,8 +930,8 @@ HWTEST_F(CodecComponentTestAdditional, testComponentTunnelRequest002, Function |
     ASSERT_EQ(ret, HDF_SUCCESS);
     const int32_t tunneledComp = 1002;
     const uint32_t tunneledPort = 101;
-    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
-    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_INPUT;
+    OHOS::HDI::Codec::V3_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V3_0::CODEC_BUFFER_SUPPLY_INPUT;
 
     ret = g_component->ComponentTunnelRequest(INPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
     ASSERT_NE(ret, HDF_SUCCESS);
@@ -950,8 +950,8 @@ HWTEST_F(CodecComponentTestAdditional, testComponentTunnelRequest003, Function |
     ASSERT_EQ(ret, HDF_SUCCESS);
     const int32_t tunneledComp = 1002;
     const uint32_t tunneledPort = 101;
-    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
-    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_OUTPUT;
+    OHOS::HDI::Codec::V3_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V3_0::CODEC_BUFFER_SUPPLY_OUTPUT;
 
     ret = g_component->ComponentTunnelRequest(INPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
     ASSERT_NE(ret, HDF_SUCCESS);
@@ -970,8 +970,8 @@ HWTEST_F(CodecComponentTestAdditional, testComponentTunnelRequest004, Function |
     ASSERT_EQ(ret, HDF_SUCCESS);
     const int32_t tunneledComp = 1002;
     const uint32_t tunneledPort = 101;
-    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
-    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_OUTPUT;
+    OHOS::HDI::Codec::V3_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V3_0::CODEC_BUFFER_SUPPLY_OUTPUT;
 
     ret = g_component->ComponentTunnelRequest(OUTPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
     ASSERT_NE(ret, HDF_SUCCESS);
@@ -990,8 +990,8 @@ HWTEST_F(CodecComponentTestAdditional, testComponentTunnelRequest005, Function |
     ASSERT_EQ(ret, HDF_SUCCESS);
     const int32_t tunneledComp = 1002;
     const uint32_t tunneledPort = 101;
-    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
-    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_OUTPUT;
+    OHOS::HDI::Codec::V3_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V3_0::CODEC_BUFFER_SUPPLY_OUTPUT;
 
     ret = g_component->ComponentTunnelRequest(OUTPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
     ASSERT_NE(ret, HDF_SUCCESS);
@@ -1010,8 +1010,8 @@ HWTEST_F(CodecComponentTestAdditional, testComponentTunnelRequest006, Function |
     ASSERT_EQ(ret, HDF_SUCCESS);
     const int32_t tunneledComp = 1002;
     const uint32_t tunneledPort = 101;
-    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
-    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_OUTPUT;
+    OHOS::HDI::Codec::V3_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V3_0::CODEC_BUFFER_SUPPLY_OUTPUT;
 
     ret = g_component->ComponentTunnelRequest(OUTPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
     ASSERT_NE(ret, HDF_SUCCESS);
@@ -1030,8 +1030,8 @@ HWTEST_F(CodecComponentTestAdditional, testComponentTunnelRequest007, Function |
     ASSERT_EQ(ret, HDF_SUCCESS);
     const int32_t tunneledComp = 1002;
     const uint32_t tunneledPort = 101;
-    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
-    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_OUTPUT;
+    OHOS::HDI::Codec::V3_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V3_0::CODEC_BUFFER_SUPPLY_OUTPUT;
 
     ret = g_component->ComponentTunnelRequest(OUTPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
     ASSERT_NE(ret, HDF_SUCCESS);
@@ -1050,8 +1050,8 @@ HWTEST_F(CodecComponentTestAdditional, testComponentTunnelRequest008, Function |
     ASSERT_EQ(ret, HDF_SUCCESS);
     const int32_t tunneledComp = 1002;
     const uint32_t tunneledPort = 101;
-    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
-    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_OUTPUT;
+    OHOS::HDI::Codec::V3_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V3_0::CODEC_BUFFER_SUPPLY_OUTPUT;
 
     ret = g_component->ComponentTunnelRequest(OUTPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
     ASSERT_NE(ret, HDF_SUCCESS);
@@ -1070,8 +1070,8 @@ HWTEST_F(CodecComponentTestAdditional, testComponentTunnelRequest009, Function |
     ASSERT_EQ(ret, HDF_SUCCESS);
     const int32_t tunneledComp = 1002;
     const uint32_t tunneledPort = 101;
-    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
-    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_OUTPUT;
+    OHOS::HDI::Codec::V3_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V3_0::CODEC_BUFFER_SUPPLY_OUTPUT;
 
     ret = g_component->ComponentTunnelRequest(OUTPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
     ASSERT_NE(ret, HDF_SUCCESS);
@@ -1091,8 +1091,8 @@ HWTEST_F(CodecComponentTestAdditional, testComponentTunnelRequest010, Function |
     ASSERT_EQ(ret, HDF_SUCCESS);
     const int32_t tunneledComp = 1002;
     const uint32_t tunneledPort = 101;
-    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
-    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_UNSPECIFIED;
+    OHOS::HDI::Codec::V3_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V3_0::CODEC_BUFFER_SUPPLY_UNSPECIFIED;
 
     ret = g_component->ComponentTunnelRequest(INPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
     ASSERT_NE(ret, HDF_SUCCESS);
@@ -1112,8 +1112,8 @@ HWTEST_F(CodecComponentTestAdditional, testComponentTunnelRequest011, Function |
     ASSERT_EQ(ret, HDF_SUCCESS);
     const int32_t tunneledComp = 1002;
     const uint32_t tunneledPort = 101;
-    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
-    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_KHRONOS_EXTENSIONS;
+    OHOS::HDI::Codec::V3_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V3_0::CODEC_BUFFER_SUPPLY_KHRONOS_EXTENSIONS;
 
     ret = g_component->ComponentTunnelRequest(INPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
     ASSERT_NE(ret, HDF_SUCCESS);
@@ -1133,8 +1133,8 @@ HWTEST_F(CodecComponentTestAdditional, testComponentTunnelRequest012, Function |
     ASSERT_EQ(ret, HDF_SUCCESS);
     const int32_t tunneledComp = 1002;
     const uint32_t tunneledPort = 101;
-    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
-    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_VENDOR_START_UNUSED;
+    OHOS::HDI::Codec::V3_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V3_0::CODEC_BUFFER_SUPPLY_VENDOR_START_UNUSED;
 
     ret = g_component->ComponentTunnelRequest(INPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
     ASSERT_NE(ret, HDF_SUCCESS);
@@ -1153,8 +1153,8 @@ HWTEST_F(CodecComponentTestAdditional, testComponentTunnelRequest013, Function |
     ASSERT_EQ(ret, HDF_SUCCESS);
     const int32_t tunneledComp = 1002;
     const uint32_t tunneledPort = 101;
-    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
-    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_MAX;
+    OHOS::HDI::Codec::V3_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V3_0::CODEC_BUFFER_SUPPLY_MAX;
 
     ret = g_component->ComponentTunnelRequest(INPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
     ASSERT_NE(ret, HDF_SUCCESS);
@@ -1174,8 +1174,8 @@ HWTEST_F(CodecComponentTestAdditional, testComponentTunnelRequest014, Function |
     ASSERT_EQ(ret, HDF_SUCCESS);
     const int32_t tunneledComp = 1002;
     const uint32_t tunneledPort = 101;
-    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
-    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_UNSPECIFIED;
+    OHOS::HDI::Codec::V3_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V3_0::CODEC_BUFFER_SUPPLY_UNSPECIFIED;
 
     ret = g_component->ComponentTunnelRequest(OUTPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
     ASSERT_NE(ret, HDF_SUCCESS);
@@ -1195,8 +1195,8 @@ HWTEST_F(CodecComponentTestAdditional, testComponentTunnelRequest015, Function |
     ASSERT_EQ(ret, HDF_SUCCESS);
     const int32_t tunneledComp = 1002;
     const uint32_t tunneledPort = 101;
-    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
-    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_KHRONOS_EXTENSIONS;
+    OHOS::HDI::Codec::V3_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V3_0::CODEC_BUFFER_SUPPLY_KHRONOS_EXTENSIONS;
 
     ret = g_component->ComponentTunnelRequest(OUTPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
     ASSERT_NE(ret, HDF_SUCCESS);
@@ -1216,8 +1216,8 @@ HWTEST_F(CodecComponentTestAdditional, testComponentTunnelRequest016, Function |
     ASSERT_EQ(ret, HDF_SUCCESS);
     const int32_t tunneledComp = 1002;
     const uint32_t tunneledPort = 101;
-    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
-    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_VENDOR_START_UNUSED;
+    OHOS::HDI::Codec::V3_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V3_0::CODEC_BUFFER_SUPPLY_VENDOR_START_UNUSED;
 
     ret = g_component->ComponentTunnelRequest(OUTPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
     ASSERT_NE(ret, HDF_SUCCESS);
@@ -1236,8 +1236,8 @@ HWTEST_F(CodecComponentTestAdditional, testComponentTunnelRequest017, Function |
     ASSERT_EQ(ret, HDF_SUCCESS);
     const int32_t tunneledComp = 1002;
     const uint32_t tunneledPort = 101;
-    OHOS::HDI::Codec::V2_0::CodecTunnelSetupType tunnelSetup;
-    tunnelSetup.supplier = OHOS::HDI::Codec::V2_0::CODEC_BUFFER_SUPPLY_MAX;
+    OHOS::HDI::Codec::V3_0::CodecTunnelSetupType tunnelSetup;
+    tunnelSetup.supplier = OHOS::HDI::Codec::V3_0::CODEC_BUFFER_SUPPLY_MAX;
 
     ret = g_component->ComponentTunnelRequest(OUTPUT_INDEX, tunneledComp, tunneledPort, tunnelSetup, tunnelSetup);
     ASSERT_NE(ret, HDF_SUCCESS);

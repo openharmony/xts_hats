@@ -28,6 +28,7 @@ ohos_moduletest_suite("HatsHdfExternalPkgManagerTest") {
     "${ext_mgr_path}/services/native/driver_extension_manager/include/drivers_pkg_manager",
     "${usb_bus_extension_include_path}",
     "${ext_mgr_path}/interfaces/ddk/hid",
+    "${ext_mgr_path}/interfaces/ddk/usb",
     "${ext_mgr_path}/services/zidl/include",
   ]
   deps = [

@@ -49,8 +49,8 @@ ohos_moduletest_suite("HatsNfcEseHdiAdditionalTest") {
   }
   external_deps += [ "ipc:ipc_single" ]
 
-  subsystem_name = "xts"
-  part_name = "hats"
+  subsystem_name = "communication"
+  part_name = "nfc"
 }
 
 config("hdf_nfc_additional") {

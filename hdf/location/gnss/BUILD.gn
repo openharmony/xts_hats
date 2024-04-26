@@ -33,9 +33,9 @@ ohos_moduletest_suite("HatsHdfLocationgnssTest") {
   if (is_standard_system) {
     external_deps = [
       "c_utils:utils",
-      "drivers_interface_location_agnss:liblocation_agnss_proxy_1.0",
-      "drivers_interface_location_geofence:liblocation_geofence_proxy_1.0",
-      "drivers_interface_location_gnss:liblocation_gnss_proxy_1.0",
+      "drivers_interface_location_agnss:liblocation_agnss_proxy_2.0",
+      "drivers_interface_location_geofence:liblocation_geofence_proxy_2.0",
+      "drivers_interface_location_gnss:liblocation_gnss_proxy_2.0",
       "hdf_core:libhdf_host",
       "hdf_core:libhdf_ipc_adapter",
       "hdf_core:libhdi",

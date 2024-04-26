@@ -27,11 +27,11 @@
 #include "hdf_base.h"
 #include "hdf_log.h"
 #include "osal_time.h"
-#include "v1_0/ignss_interface.h"
+#include "v2_0/ignss_interface.h"
 #include "gnss_callback_impl.h"
 
 
-using namespace OHOS::HDI::Location::Gnss::V1_0;
+using namespace OHOS::HDI::Location::Gnss::V2_0;
 using namespace std;
 using namespace testing::ext;
 
@@ -66,27 +66,22 @@ int32_t GnssCallbackImpl::ReportLocation(const LocationInfo& location)
 
 int32_t GnssCallbackImpl::ReportGnssWorkingStatus(GnssWorkingStatus status)
 {
-    if (status == GnssWorkingStatus::GNSS_STATUS_NONE) {
-        printf("GNSS_STATUS_NONE\n");
+    if (status == GnssWorkingStatus::GNSS_WORKING_STATUS_NONE) {
+        printf("GNSS_WORKING_STATUS_NONE\n");
         return HDF_SUCCESS;
-    }
-    else if(status == GnssWorkingStatus::GNSS_STATUS_SESSION_BEGIN){
-        printf("GNSS_STATUS_SESSION_BEGIN\n");
+    } else if (status == GnssWorkingStatus::GNSS_WORKING_STATUS_SESSION_BEGIN) {
+        printf("GNSS_WORKING_STATUS_SESSION_BEGIN\n");
         return HDF_SUCCESS;
-    }
-    else if(status == GnssWorkingStatus::GNSS_STATUS_SESSION_END){
-        printf("GNSS_STATUS_SESSION_END\n");
+    } else if (status == GnssWorkingStatus::GNSS_WORKING_STATUS_SESSION_END) {
+        printf("GNSS_WORKING_STATUS_SESSION_END\n");
         return HDF_SUCCESS;
-    }
-    else if(status == GnssWorkingStatus::GNSS_STATUS_ENGINE_ON){
-        printf("GNSS_STATUS_ENGINE_ON\n");
+    } else if (status == GnssWorkingStatus::GNSS_WORKING_STATUS_ENGINE_ON) {
+        printf("GNSS_WORKING_STATUS_ENGINE_ON\n");
         return HDF_SUCCESS;
-    }
-    else if(status == GnssWorkingStatus::GNSS_STATUS_ENGINE_OFF){
-        printf("GNSS_STATUS_ENGINE_OFF\n");
+    } else if (status == GnssWorkingStatus::GNSS_WORKING_STATUS_ENGINE_OFF) {
+        printf("GNSS_WORKING_STATUS_ENGINE_OFF\n");
         return HDF_SUCCESS;
-    }
-    else{
+    } else {
         printf("Gnss status fail\n");
         return HDF_FAILURE;
     }
@@ -145,7 +140,11 @@ int32_t GnssCallbackImpl::ReportCachedLocation(const std::vector<LocationInfo>& 
     return HDF_SUCCESS;
 }
 
-
+int32_t GnssCallbackImpl::ReportGnssNiNotification(const GnssNiNotificationRequest& notification)
+{
+    (void)notification;
+    return HDF_SUCCESS;
+}
 
 void LocationGnssTest::SetUpTestCase()
 {
@@ -236,9 +235,6 @@ HWTEST_F(LocationGnssTest, SUB_DriverSystem_SetGnssConfigPara_0100, TestSize.Lev
     }
     GnssConfigPara para;
     para.gnssBasic.minInterval = 10;
-    para.gnssBasic.accuracy = 50;
-    para.gnssBasic.firstFixTime = 300;
-    para.gnssBasic.isPeriodicPositioning = true;
     para.gnssBasic.gnssMode = GnssWorkingMode::GNSS_WORKING_MODE_STANDALONE;
     para.gnssCaching.interval = 20;
     para.gnssCaching.fifoFullNotify = true;
@@ -260,20 +256,20 @@ HWTEST_F(LocationGnssTest, SUB_DriverSystem_SetGnssReferenceInfo_0100, TestSize.
     }
     GnssRefInfo refInfo;
     refInfo.type = GnssRefInfoType::GNSS_REF_INFO_TIME;
-    refInfo.time.timeMs = 50;
-    refInfo.time.timeReferenceMs = 100;
-    refInfo.time.uncertainty = 200;
-    refInfo.location.latitude = 39.56;
-    refInfo.location.longitude = 116.20;
-    refInfo.location.accuracy = 90;
-    refInfo.best_location.latitude = 39.58;
-    refInfo.best_location.longitude = 116.45;
-    refInfo.best_location.altitude = 110;
-    refInfo.best_location.accuracy = 60;
-    refInfo.best_location.speed = 60;
-    refInfo.best_location.direction = 60;
-    refInfo.best_location.timeStamp = 60;
-    refInfo.best_location.timeSinceBoot = 60;
+    refInfo.time.time = 50;
+    refInfo.time.elapsedRealtime = 100;
+    refInfo.time.uncertaintyOfTime = 200;
+    refInfo.gnssLocation.latitude = 39.56;
+    refInfo.gnssLocation.longitude = 116.20;
+    refInfo.gnssLocation.horizontalAccuracy = 90;
+    refInfo.bestLocation.latitude = 39.58;
+    refInfo.bestLocation.longitude = 116.45;
+    refInfo.bestLocation.altitude = 110;
+    refInfo.bestLocation.horizontalAccuracy = 60;
+    refInfo.bestLocation.speed = 60;
+    refInfo.bestLocation.bearing = 60;
+    refInfo.bestLocation.timeForFix = 60;
+    refInfo.bestLocation.timeSinceBoot = 60;
     int32_t ret = g_ignssHci->SetGnssReferenceInfo(refInfo);
     EXPECT_EQ(HDF_SUCCESS, ret);
 }
@@ -305,7 +301,7 @@ HWTEST_F(LocationGnssTest, SUB_DriverSystem_DeleteAuxiliaryData_0100, TestSize.L
         ASSERT_NE(nullptr, g_ignssHci);
         return;
     }
-    GnssAuxiliaryData auxdata = GnssAuxiliaryData::GNSS_AUXILIARY_DATA_EPHEMERIS;
+    GnssAuxiliaryDataType auxdata = GnssAuxiliaryDataType::GNSS_AUXILIARY_DATA_EPHEMERIS;
     int32_t ret = g_ignssHci->DeleteAuxiliaryData(auxdata);
     EXPECT_EQ(HDF_SUCCESS, ret);
 }

@@ -75,6 +75,18 @@ void HdfBatteryHdiTest::TearDown(void)
 {
 }
 
+std::string CreateFile(std::string path, std::string content)
+{
+    std::ofstream stream(path.c_str());
+    if (!stream.is_open()) {
+        printf("Cannot create file");
+        return nullptr;
+    }
+    stream << content.c_str() << std::endl;
+    stream.close();
+    return path;
+}
+
 namespace {
 /**
   * @tc.name: HdfBatteryHdiTest001
@@ -362,6 +374,8 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest019, TestSize.Level1)
  */
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest020, TestSize.Level1)
 {
+    std::string currentPath = "/data/service/el0/battery/current_limit";
+    CreateFile(currentPath, "");
     ChargingLimit scLimit;
     scLimit.type = TYPE_CURRENT;
     scLimit.protocol = "sc";
@@ -376,7 +390,6 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest020, TestSize.Level1)
     int32_t result = g_batteryInterface->SetChargingLimit(chargeLimitList);
     EXPECT_EQ(true, result == ERR_OK);
 
-    std::string currentPath = "/data/service/el0/battery/current_limit";
     std::string line;
     std::string chargeLimitStr;
     std::string writeChargeInfo = scLimit.protocol + " " + std::to_string(scLimit.value) + "\n" +
@@ -397,6 +410,8 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest020, TestSize.Level1)
  */
 HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest021, TestSize.Level1)
 {
+    std::string voltagePath = "/data/service/el0/battery/voltage_limit";
+    CreateFile(voltagePath, "");
     ChargingLimit scLimit;
     scLimit.type = TYPE_VOLTAGE;
     scLimit.protocol = "sc";
@@ -411,7 +426,6 @@ HWTEST_F(HdfBatteryHdiTest, HdfBatteryHdiTest021, TestSize.Level1)
     int32_t result = g_batteryInterface->SetChargingLimit(chargeLimitList);
     EXPECT_EQ(true, result == ERR_OK);
 
-    std::string voltagePath = "/data/service/el0/battery/voltage_limit";
     std::string line;
     std::string voltageLimitStr;
     std::string writeVoltageInfo = scLimit.protocol + " " + std::to_string(scLimit.value) + "\n" +

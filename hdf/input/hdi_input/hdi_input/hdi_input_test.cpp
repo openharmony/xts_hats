@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -143,6 +143,7 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_5500, TestSize.Level1)
     int32_t ret = g_inputInterface->iInputManager->OpenInputDevice(g_touchIndex);
     if (ret != INPUT_SUCCESS) {
         printf("%s: open device1 failed, ret %d\n", __func__, ret);
+        GTEST_SKIP() << "No device available" << std::endl;
     }
     EXPECT_EQ(ret, INPUT_SUCCESS);
 }
@@ -200,6 +201,7 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_5600, TestSize.Level1)
     int32_t ret = g_inputInterface->iInputManager->CloseInputDevice(g_touchIndex);
     if (ret != INPUT_SUCCESS) {
         printf("%s: close device %d failed, ret %d\n", __func__, g_touchIndex, ret);
+        GTEST_SKIP() << "No device available" << std::endl;
     }
     EXPECT_EQ(ret, INPUT_SUCCESS);
 }
@@ -348,6 +350,11 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3200, TestSize.Level1)
     INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
     INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputReporter, INPUT_NULL_PTR);
     INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputManager, INPUT_NULL_PTR);
+    ret = g_inputInterface->iInputManager->OpenInputDevice(g_touchIndex);
+    if (ret != 0) {
+        printf("%s: Device not exist", __func__);
+        GTEST_SKIP() << "No device available" << std::endl;
+    }
     ret  = g_inputInterface->iInputReporter->RegisterReportCallback(g_touchIndex, &g_callback);
     if (ret != INPUT_SUCCESS) {
         printf("%s: register callback failed for device %d, ret %d\n", __func__, g_touchIndex, ret);
@@ -373,8 +380,12 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_5200, TestSize.Level1)
     INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
     INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputReporter, INPUT_NULL_PTR);
     INPUT_CHECK_NULL_POINTER(g_inputInterface->iInputManager, INPUT_NULL_PTR);
-
-    ret  = g_inputInterface->iInputReporter->UnregisterReportCallback(g_touchIndex);
+    ret = g_inputInterface->iInputManager->OpenInputDevice(g_touchIndex);
+    if (ret != 0) {
+        printf("%s: Device not exist", __func__);
+        GTEST_SKIP() << "No device available" << std::endl;
+    }
+    ret = g_inputInterface->iInputReporter->UnregisterReportCallback(g_touchIndex);
     if (ret != INPUT_SUCCESS) {
         printf("%s: unregister callback failed for device %d, ret %d\n", __func__, g_touchIndex, ret);
     }

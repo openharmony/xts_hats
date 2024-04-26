@@ -71,7 +71,14 @@ void HatsHdfSensorServiceTestAdditional::TearDownTestCase()
     }
 }
 
-void HatsHdfSensorServiceTestAdditional::SetUp() {}
+void HatsHdfSensorServiceTestAdditional::SetUp()
+{
+    if (g_sensorInterface == nullptr) {
+        printf("Sensor list is empty");
+        GTEST_SKIP() << "Device not exist" << std::endl;
+        return;
+  }
+}
 
 void HatsHdfSensorServiceTestAdditional::TearDown() {}
 

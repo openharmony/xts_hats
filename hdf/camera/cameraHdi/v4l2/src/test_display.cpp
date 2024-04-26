@@ -660,7 +660,6 @@ void TestDisplay::StartCapture(int streamId, int captureId, bool shutterCallback
         });
     } else if (captureId == CAPTURE_ID_ANALYZE) {
         streamCustomerAnalyze_->ReceiveFrameOn([this](const unsigned char *addr, const uint32_t size) {
-            PrintFaceDetectInfo(addr, size);
         });
     }
     sleep(2); // 2:sleep two second

@@ -24,6 +24,9 @@
 #include <unistd.h>
 #include <vector>
 
+#define DATA_NUM 12
+#define DATA_VALUE 6
+
 using namespace OHOS::HDI::Motion::V1_1;
 using namespace testing::ext;
 
@@ -31,6 +34,7 @@ namespace {
 sptr<OHOS::HDI::Motion::V1_1::IMotionInterface> g_motionInterface = nullptr;
 sptr<IMotionCallback> g_motionCallback = new MotionCallbackImpl();
 sptr<IMotionCallback> g_motionCallbackUnregistered = new MotionCallbackImpl();
+std::vector<uint8_t> g_motionConfigData(DATA_NUM, DATA_VALUE);
 } // namespace
 
 class HdfMotionTestAdditional : public testing::Test {
@@ -45,7 +49,14 @@ void HdfMotionTestAdditional::SetUpTestCase() { g_motionInterface = OHOS::HDI::M
 
 void HdfMotionTestAdditional::TearDownTestCase() {}
 
-void HdfMotionTestAdditional::SetUp() {}
+void HdfMotionTestAdditional::SetUp()
+{
+    if (g_motionInterface == nullptr) {
+        printf("Motion is not supported ");
+        GTEST_SKIP() << "Device not exist" << std::endl;
+        return;
+    }
+}    
 
 void HdfMotionTestAdditional::TearDown() {}
 

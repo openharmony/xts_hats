@@ -159,7 +159,7 @@ HWTEST_F(LocationGeofenceTest, SUB_DriverSystem_AddGnssGeofence_0100, TestSize.L
     fence.latitude = 118.90;
     fence.longitude = 15.25;
     fence.radius = 12.26;
-    GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_UNCERTAIN ;
+    GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_ENTERED ;
     int32_t ret = g_igeofenceHci->AddGnssGeofence(fence,geoevent);
     EXPECT_EQ(HDF_SUCCESS, ret);
 }

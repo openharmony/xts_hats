@@ -119,7 +119,7 @@ void LocationGeofenceAdditionalTest::TearDown() {}
 /**
  * @tc.number: SUB_Location_Geofence_AddGnssGeofence_0200
  * @tc.name  : testAddGnssGeofence001
- * @tc.desc  : Call function AddGnssGeofence with GeofenceEvent as GEOFENCE_EVENT_UNCERTAIN.
+ * @tc.desc  : Call function AddGnssGeofence with GeofenceEvent as GEOFENCE_EVENT_ENTERED.
  */
 HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence001, Function | MediumTest | Level1)
 {
@@ -128,7 +128,7 @@ HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence001, Function | Medi
     fence.latitude = 1.00;
     fence.longitude = 1.00;
     fence.radius = 1.00;
-    GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_UNCERTAIN;
+    GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_ENTERED;
     int32_t ret = g_igeofenceHci->AddGnssGeofence(fence, geoevent);
     EXPECT_EQ(HDF_SUCCESS, ret);
 }
@@ -136,7 +136,7 @@ HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence001, Function | Medi
 /**
  * @tc.number: SUB_Location_Geofence_AddGnssGeofence_0300
  * @tc.name  : testAddGnssGeofence002
- * @tc.desc  : Call function AddGnssGeofence with GeofenceEvent as GEOFENCE_EVENT_UNCERTAIN 100times.
+ * @tc.desc  : Call function AddGnssGeofence with GeofenceEvent as GEOFENCE_EVENT_ENTERED 100times.
  */
 HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence002, Function | MediumTest | Level1)
 {
@@ -146,7 +146,7 @@ HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence002, Function | Medi
     fence.latitude = 1.00;
     fence.longitude = 1.00;
     fence.radius = 1.00;
-    GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_UNCERTAIN;
+    GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_ENTERED;
     for (int i = 0; i < 100; i++) {
         ret = g_igeofenceHci->AddGnssGeofence(fence, geoevent);
         EXPECT_EQ(HDF_SUCCESS, ret);
@@ -156,7 +156,7 @@ HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence002, Function | Medi
 /**
  * @tc.number: SUB_Location_Geofence_AddGnssGeofence_0400
  * @tc.name  : testAddGnssGeofence003
- * @tc.desc  : Call function AddGnssGeofence with GeofenceEvent as GEOFENCE_EVENT_UNCERTAIN.
+ * @tc.desc  : Call function AddGnssGeofence with GeofenceEvent as GEOFENCE_EVENT_ENTERED.
  */
 HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence003, Function | MediumTest | Level1)
 {
@@ -165,7 +165,7 @@ HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence003, Function | Medi
     fence.latitude = 180.00;
     fence.longitude = 1.00;
     fence.radius = 1.00;
-    GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_UNCERTAIN;
+    GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_ENTERED;
     int32_t ret = g_igeofenceHci->AddGnssGeofence(fence, geoevent);
     EXPECT_EQ(HDF_SUCCESS, ret);
 }
@@ -173,7 +173,7 @@ HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence003, Function | Medi
 /**
  * @tc.number: SUB_Location_Geofence_AddGnssGeofence_0500
  * @tc.name  : testAddGnssGeofence004
- * @tc.desc  : Call function AddGnssGeofence with GeofenceEvent as GEOFENCE_EVENT_UNCERTAIN.
+ * @tc.desc  : Call function AddGnssGeofence with GeofenceEvent as GEOFENCE_EVENT_ENTERED.
  */
 HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence004, Function | MediumTest | Level1)
 {
@@ -182,7 +182,7 @@ HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence004, Function | Medi
     fence.latitude = 180.00;
     fence.longitude = 1.00;
     fence.radius = 1.00;
-    GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_UNCERTAIN;
+    GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_ENTERED;
     int32_t ret = 0;
     for (int i = 0; i < 100; i++) {
         ret = g_igeofenceHci->AddGnssGeofence(fence, geoevent);
@@ -193,7 +193,7 @@ HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence004, Function | Medi
 /**
  * @tc.number: SUB_Location_Geofence_AddGnssGeofence_0600
  * @tc.name  : testAddGnssGeofence005
- * @tc.desc  : Call function AddGnssGeofence with GeofenceEvent as GEOFENCE_EVENT_UNCERTAIN.
+ * @tc.desc  : Call function AddGnssGeofence with GeofenceEvent as GEOFENCE_EVENT_ENTERED.
  */
 HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence005, Function | MediumTest | Level1)
 {
@@ -202,7 +202,7 @@ HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence005, Function | Medi
     fence.latitude = 1.00;
     fence.longitude = 180.00;
     fence.radius = 1.00;
-    GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_UNCERTAIN;
+    GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_ENTERED;
     int32_t ret = g_igeofenceHci->AddGnssGeofence(fence, geoevent);
     EXPECT_EQ(HDF_SUCCESS, ret);
 }
@@ -210,7 +210,7 @@ HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence005, Function | Medi
 /**
  * @tc.number: SUB_Location_Geofence_AddGnssGeofence_0700
  * @tc.name  : testAddGnssGeofence006
- * @tc.desc  : Call function AddGnssGeofence with GeofenceEvent as GEOFENCE_EVENT_UNCERTAIN.
+ * @tc.desc  : Call function AddGnssGeofence with GeofenceEvent as GEOFENCE_EVENT_ENTERED.
  */
 HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence006, Function | MediumTest | Level1)
 {
@@ -219,7 +219,7 @@ HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence006, Function | Medi
     fence.latitude = 1.00;
     fence.longitude = 180.00;
     fence.radius = 1.00;
-    GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_UNCERTAIN;
+    GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_ENTERED;
     int32_t ret = 0;
     for (int i = 0; i < 100; i++) {
         ret = g_igeofenceHci->AddGnssGeofence(fence, geoevent);
@@ -230,7 +230,7 @@ HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence006, Function | Medi
 /**
  * @tc.number: SUB_Location_Geofence_AddGnssGeofence_0800
  * @tc.name  : testAddGnssGeofence007
- * @tc.desc  : Call function AddGnssGeofence with GeofenceEvent as GEOFENCE_EVENT_UNCERTAIN.
+ * @tc.desc  : Call function AddGnssGeofence with GeofenceEvent as GEOFENCE_EVENT_ENTERED.
  */
 HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence007, Function | MediumTest | Level1)
 {
@@ -239,7 +239,7 @@ HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence007, Function | Medi
     fence.latitude = 180.00;
     fence.longitude = 180.00;
     fence.radius = 1.00;
-    GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_UNCERTAIN;
+    GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_ENTERED;
     int32_t ret = g_igeofenceHci->AddGnssGeofence(fence, geoevent);
     EXPECT_EQ(HDF_SUCCESS, ret);
 }
@@ -247,7 +247,7 @@ HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence007, Function | Medi
 /**
  * @tc.number: SUB_Location_Geofence_AddGnssGeofence_0900
  * @tc.name  : testAddGnssGeofence008
- * @tc.desc  : Call function AddGnssGeofence with GeofenceEvent as GEOFENCE_EVENT_UNCERTAIN.
+ * @tc.desc  : Call function AddGnssGeofence with GeofenceEvent as GEOFENCE_EVENT_ENTERED.
  */
 HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence008, Function | MediumTest | Level1)
 {
@@ -256,7 +256,7 @@ HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence008, Function | Medi
     fence.latitude = 180.00;
     fence.longitude = 180.00;
     fence.radius = 1.00;
-    GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_UNCERTAIN;
+    GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_ENTERED;
     int32_t ret = 0;
     for (int i = 0; i < 100; i++) {
         ret = g_igeofenceHci->AddGnssGeofence(fence, geoevent);
@@ -267,7 +267,7 @@ HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence008, Function | Medi
 /**
  * @tc.number: SUB_Location_Geofence_AddGnssGeofence_1000
  * @tc.name  : testAddGnssGeofence009
- * @tc.desc  : Call function AddGnssGeofence with GeofenceEvent as GEOFENCE_EVENT_UNCERTAIN.
+ * @tc.desc  : Call function AddGnssGeofence with GeofenceEvent as GEOFENCE_EVENT_ENTERED.
  */
 HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence009, Function | MediumTest | Level1)
 {
@@ -276,7 +276,7 @@ HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence009, Function | Medi
     fence.latitude = 180.00;
     fence.longitude = 180.00;
     fence.radius = 180.00;
-    GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_UNCERTAIN;
+    GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_ENTERED;
     int32_t ret = g_igeofenceHci->AddGnssGeofence(fence, geoevent);
     EXPECT_EQ(HDF_SUCCESS, ret);
 }

@@ -340,6 +340,8 @@ HWTEST_F(HdfBatteryHdiTestAdditional, testBatteryUnRegister001, TestSize.Level2)
  */
 HWTEST_F(HdfBatteryHdiTestAdditional, testSetChargingLimit001, TestSize.Level1)
 {
+    std::string currentPath = "/data/service/el0/battery/current_limit";
+    CreateFile(currentPath, "");
     ChargingLimit scLimit;
     scLimit.type = TYPE_CURRENT;
     scLimit.protocol = "sc";
@@ -357,6 +359,8 @@ HWTEST_F(HdfBatteryHdiTestAdditional, testSetChargingLimit001, TestSize.Level1)
  */
 HWTEST_F(HdfBatteryHdiTestAdditional, testSetChargingLimit002, TestSize.Level1)
 {
+    std::string voltagePath = "/data/service/el0/battery/voltage_limit";
+    CreateFile(voltagePath, "");
     ChargingLimit scLimit;
     scLimit.type = TYPE_VOLTAGE;
     scLimit.protocol = "sc";

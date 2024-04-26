@@ -21,12 +21,15 @@ ohos_moduletest_suite("HatsHdfExternalBusUsbTest") {
   module_out_path = module_output_path
   sources = [
     "src/usb_bus_extension_test.cpp",
+    "src/usb_ddk_service_mock.cpp",
     "src/usb_driver_info_test.cpp",
     "src/usb_impl_mock.cpp",
     "src/usb_subscriber_test.cpp",
   ]
   include_dirs = [
     "include",
+    "${ext_mgr_path}/frameworks/ddk/usb/",
+    "${ext_mgr_path}/interfaces/ddk/usb/",
     "${usb_bus_extension_include_path}",
   ]
   deps = [
@@ -39,6 +42,7 @@ ohos_moduletest_suite("HatsHdfExternalBusUsbTest") {
   external_deps = [
     "bundle_framework:appexecfwk_base",
     "c_utils:utils",
+    "drivers_interface_usb:libusb_ddk_proxy_1.0",
     "drivers_interface_usb:libusb_proxy_1.0",
     "hilog:libhilog",
     "samgr:samgr_proxy",

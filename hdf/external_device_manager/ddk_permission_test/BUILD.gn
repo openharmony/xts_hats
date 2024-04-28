@@ -26,6 +26,7 @@ ohos_moduletest_suite("HatsHdfExternalDdkPermissionTest") {
   ]
 
   include_dirs = [
+    "${ext_mgr_path}/interfaces/ddk/base",
     "${ext_mgr_path}/frameworks/ddk/usb",
     "${ext_mgr_path}/interfaces/ddk/usb",
     "${ext_mgr_path}/interfaces/innerkits/",

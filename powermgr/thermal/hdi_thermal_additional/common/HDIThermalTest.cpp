@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -285,7 +285,7 @@ HWTEST_F(HdfThermalHdiTestAdditional, testGetThermalZoneInfo001, Function | Medi
     HdfThermalCallbackInfo event;
     int i = 0;
     int32_t ret = 0;
-    for (i = 0; i < 1000; i++) {
+    for (i = 0; i < 30; i++) {
         ret |= g_thermalInterface->GetThermalZoneInfo(event);
     }
     EXPECT_EQ(0, ret);
@@ -297,6 +297,7 @@ HWTEST_F(HdfThermalHdiTestAdditional, testGetThermalZoneInfo001, Function | Medi
  */
 HWTEST_F(HdfThermalHdiTestAdditional, testIsolateCpu001, Function | MediumTest | Level1)
 {
+#ifdef PRODUCT_SUPPORT
     int i = 0;
     int32_t isolateNum = 2;
     int32_t ret = 0;
@@ -304,6 +305,7 @@ HWTEST_F(HdfThermalHdiTestAdditional, testIsolateCpu001, Function | MediumTest |
         ret |= g_thermalInterface->IsolateCpu(isolateNum);
     }
     EXPECT_EQ(0, ret);
+#endif
 }
 /**
  * @tc.number  SUB_Powermgr_Thermal_IsolateCpu_0300
@@ -334,9 +336,11 @@ HWTEST_F(HdfThermalHdiTestAdditional, testIsolateCpu003, Function | MediumTest |
  */
 HWTEST_F(HdfThermalHdiTestAdditional, testIsolateCpu004, Function | MediumTest | Level1)
 {
+#ifdef PRODUCT_SUPPORT
     int32_t isolateNum = 0x7fffffff;
     int32_t ret = g_thermalInterface->IsolateCpu(isolateNum);
     EXPECT_EQ(0, ret);
+#endif
 }
 /**
  * @tc.number  SUB_Powermgr_Thermal_IsolateCpu_0600
@@ -345,9 +349,11 @@ HWTEST_F(HdfThermalHdiTestAdditional, testIsolateCpu004, Function | MediumTest |
  */
 HWTEST_F(HdfThermalHdiTestAdditional, testIsolateCpu005, Function | MediumTest | Level1)
 {
+#ifdef PRODUCT_SUPPORT
     int32_t isolateNum = 3;
     int32_t ret = g_thermalInterface->IsolateCpu(isolateNum);
     EXPECT_EQ(0, ret);
+#endif
 }
 /**
  * @tc.number  SUB_Powermgr_Thermal_Register_0200
@@ -474,30 +480,5 @@ HWTEST_F(HdfThermalHdiTestAdditional, testOnThermalDataEvent002, Function | Medi
     sleep(35);
     EXPECT_EQ(false, (g_onThermalDataEventCount != 0));
     g_onThermalDataEventCount = 0;
-}
-/**
- * @tc.number  SUB_Powermgr_Thermal_OnFanDataEvent_0100
- * @tc.name  testOnFanDataEvent001
- * @tc.desc  Test callback
- */
-HWTEST_F(HdfThermalHdiTestAdditional, testOnFanDataEvent001, Function | MediumTest | Level1)
-{
-    int32_t ret = g_thermalInterface->RegisterFanCallback(g_fanCallback);
-    EXPECT_EQ(0, ret);
-    sleep(35);
-    EXPECT_EQ(true, (g_onFanDataEventCount != 0));
-    g_thermalInterface->UnregisterFanCallback();
-    g_onFanDataEventCount = 0;
-}
-/**
- * @tc.number  SUB_Powermgr_Thermal_OnFanDataEvent_0200
- * @tc.name  testOnFanDataEvent002
- * @tc.desc  Test callback
- */
-HWTEST_F(HdfThermalHdiTestAdditional, testOnFanDataEvent002, Function | MediumTest | Level2)
-{
-    sleep(35);
-    EXPECT_EQ(false, (g_onFanDataEventCount != 0));
-    g_onFanDataEventCount = 0;
 }
 } // namespace

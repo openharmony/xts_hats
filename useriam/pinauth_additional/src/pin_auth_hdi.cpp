@@ -23,7 +23,7 @@ using namespace OHOS::HDI::PinAuth;
 using namespace OHOS::HDI::PinAuth::V2_0;
 using Property = OHOS::HDI::PinAuth::V2_0::Property;
 
-static ExecutorImpl g_executorImpl(make_shared<OHOS::UserIam::PinAuth::PinAuth>());
+static AllInOneImpl g_executorImpl(make_shared<OHOS::UserIam::PinAuth::PinAuth>());
 static OHOS::Parcel parcel;
 int32_t Expectedvalue = 0;
 bool g_onResultFlag = false;
@@ -144,7 +144,7 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnRegisterFinish001, Funct
 {
     cout << "start test testPinAuthTestOnRegisterFinish001" << endl;
     std::vector<uint64_t> templateIdList;
-    std::vector<uint8_t> frameworkPublicKey;
+    std::vector<uint8_t> frameworkPublicKey(32);
     std::vector<uint8_t> extraInfo;
     int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
     cout << "ret is" << ret << endl;
@@ -154,10 +154,12 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnRegisterFinish001, Funct
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
     FillTestUint8Vector(parcel, frameworkPublicKey);
+    frameworkPublicKey.resize(32);
     ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
     FillTestUint8Vector(parcel, extraInfo);
+    frameworkPublicKey.resize(32);
     ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
     cout << "ret is " << ret << endl;
     EXPECT_EQ(ret, 0);
@@ -174,6 +176,7 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnRegisterFinish008, Funct
     FillTestUint64Vector(parcel, templateIdList);
     std::vector<uint8_t> frameworkPublicKey;
     FillTestUint8Vector(parcel, frameworkPublicKey);
+    frameworkPublicKey.resize(32);
     std::vector<uint8_t> extraInfo;
     FillTestUint8Vector(parcel, extraInfo);
     int32_t ret = 0;
@@ -363,15 +366,15 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestAuthenticate001, Function 
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is" << ret << endl;
-    EXPECT_EQ(ret, 2);
+    EXPECT_EQ(ret, 0);
     scheduleId = 0xFFFFFFFFFFFFFFFF;
     ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 2);
+    EXPECT_EQ(ret, 0);
     scheduleId = 0x7FFFFFFFFFFFFFFF;
     ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_EQ(ret, 2);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_PinAuth_HDI_Authenticate_0500
@@ -391,17 +394,17 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestAuthenticate004, Function 
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is" << ret << endl;
-    EXPECT_EQ(ret, 2);
+    EXPECT_EQ(ret, 0);
     templateIdList.resize(0);
     templateIdList.push_back(0xFFFFFFFFFFFFFFFF);
     ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is" << ret << endl;
-    EXPECT_EQ(ret, 2);
+    EXPECT_EQ(ret, 0);
     templateIdList.resize(0);
     templateIdList.push_back(0x7FFFFFFFFFFFFFFF);
     ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is" << ret << endl;
-    EXPECT_EQ(ret, 2);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_PinAuth_HDI_Authenticate_0800
@@ -420,14 +423,14 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestAuthenticate007, Function 
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is" << ret << endl;
-    EXPECT_EQ(ret, 2);
+    EXPECT_EQ(ret, 0);
     ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, nullptr);
     cout << "ret is" << ret << endl;
     EXPECT_NE(ret, 0);
     FillTestUint8Vector(parcel, extraInfo);
     ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is" << ret << endl;
-    EXPECT_EQ(ret, 2);
+    EXPECT_EQ(ret, 0);
     ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, nullptr);
     cout << "ret is" << ret << endl;
     EXPECT_NE(ret, 0);
@@ -452,7 +455,7 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestAuthenticate010, Function 
     for (int32_t i = 0; i < 1000; i++) {
         ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
         cout << "ret is" << ret << endl;
-        EXPECT_EQ(ret, 2);
+        EXPECT_EQ(ret, 0);
     }
 }
 /**
@@ -663,15 +666,15 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestAuthenticate_001, Function
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
     scheduleId = 0xFFFFFFFFFFFFFFFF;
     ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
     scheduleId = 0x7FFFFFFFFFFFFFFF;
     ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_PinAuth_HDI_AuthenticateV1_1_0400
@@ -692,17 +695,17 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestAuthenticate_004, Function
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
     templateIdList.resize(0);
     templateIdList.push_back(0xFFFFFFFFFFFFFFFF);
     ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
     templateIdList.resize(0);
     templateIdList.push_back(0x7FFFFFFFFFFFFFFF);
     ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
 }
 /**
  * @tc.number  SUB_Security_Iam_PinAuth_HDI_AuthenticateV1_1_0700
@@ -722,14 +725,14 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestAuthenticate_007, Function
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
     ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, nullptr);
     cout << "ret is " << ret << endl;
     EXPECT_NE(ret, 0);
     FillTestUint8Vector(parcel, extraInfo);
     ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    EXPECT_NE(ret, 0);
+    EXPECT_EQ(ret, 0);
     ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, nullptr);
     cout << "ret is " << ret << endl;
     EXPECT_NE(ret, 0);
@@ -756,7 +759,7 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestAuthenticate_010, Function
         ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
 
         cout << "ret is " << ret << endl;
-        EXPECT_NE(ret, 0);
+        EXPECT_EQ(ret, 0);
     }
 }
 /**

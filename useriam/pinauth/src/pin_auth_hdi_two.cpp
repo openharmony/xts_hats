@@ -23,7 +23,7 @@ using namespace OHOS::HDI::PinAuth;
 using namespace OHOS::HDI::PinAuth::V2_0;
 using HdiProperty = OHOS::HDI::PinAuth::V2_0::Property;
 
-static ExecutorImpl g_executorImpl(make_shared<OHOS::UserIam::PinAuth::PinAuth>());
+static AllInOneImpl g_executorImpl(make_shared<OHOS::UserIam::PinAuth::PinAuth>());
 static OHOS::Parcel parcel;
 int32_t Expectedvalue1 = 0;
 
@@ -120,5 +120,5 @@ HWTEST_F(UserIamPinAuthTwoTest, Security_IAM_PinAuth_HDI_NEW_FUNC_0104, Function
     int32_t ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
 
     cout << "ret is " << ret << endl;
-    ASSERT_EQ(ret != Expectedvalue1, true);
+    ASSERT_EQ(ret != Expectedvalue1, false);
 }

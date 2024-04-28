@@ -56,6 +56,11 @@ void HdfMotionTest::TearDownTestCase()
 
 void HdfMotionTest::SetUp()
 {
+    if (g_motionInterface == nullptr) {
+        printf("Motion is not supported ");
+        GTEST_SKIP() << "Device not exist" << std::endl;
+        return;
+    }
 }
 
 void HdfMotionTest::TearDown()

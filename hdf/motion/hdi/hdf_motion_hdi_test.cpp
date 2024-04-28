@@ -61,7 +61,7 @@ void HdfMotionTest::SetUp()
         GTEST_SKIP() << "Device not exist" << std::endl;
         return;
     }
-}    
+}
 
 void HdfMotionTest::TearDown()
 {

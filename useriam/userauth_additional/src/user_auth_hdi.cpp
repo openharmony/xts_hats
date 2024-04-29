@@ -45,7 +45,11 @@ void UserIamUserAuthTestAdditional::SetUpTestCase() {}
 
 void UserIamUserAuthTestAdditional::TearDownTestCase() {}
 
-void UserIamUserAuthTestAdditional::SetUp() { EXPECT_EQ(g_service.Init(), 0); }
+void UserIamUserAuthTestAdditional::SetUp()
+{
+    const std::string deviceUdid = "12345678910";
+    EXPECT_EQ(g_service.Init(deviceUdid), 0);
+}
 
 void UserIamUserAuthTestAdditional::TearDown() {}
 
@@ -56,28 +60,17 @@ static void FillEnrollParam(Parcel &parcel, EnrollParam &enrollParam)
     enrollParam.userId = parcel.ReadInt32();
 }
 
-static void FillExecutorRegisterInfo(Parcel &parcel, ExecutorRegisterInfo &executorRegisterInfo)
+static void FillExecutorIndexInfo(Parcel &parcel, uint64_t &executorIndex)
 {
-    executorRegisterInfo.authType = static_cast<AuthType>(parcel.ReadInt32());
-    executorRegisterInfo.executorRole = static_cast<ExecutorRole>(parcel.ReadInt32());
-    executorRegisterInfo.executorSensorHint = parcel.ReadUint32();
-    executorRegisterInfo.executorMatcher = parcel.ReadUint32();
-    executorRegisterInfo.esl = static_cast<ExecutorSecureLevel>(parcel.ReadInt32());
-    FillTestUint8Vector(parcel, executorRegisterInfo.publicKey);
+    executorIndex = parcel.ReadUint64();
 }
 
-static void FillExecutorInfo(Parcel &parcel, ExecutorInfo &executorInfo)
-{
-    executorInfo.executorIndex = parcel.ReadUint64();
-    FillExecutorRegisterInfo(parcel, executorInfo.info);
-}
-
-static void FillExecutorInfoVector(Parcel &parcel, vector<ExecutorInfo> &vector)
+static void FillExecutorIndexVector(Parcel &parcel, vector<uint64_t > &vector)
 {
     uint32_t len = parcel.ReadInt32() % MAX_FUZZ_STRUCT_LEN;
     vector.resize(len);
     for (uint32_t i = 0; i < len; i++) {
-        FillExecutorInfo(parcel, vector[i]);
+        FillExecutorIndexInfo(parcel, vector[i]);
     }
 }
 
@@ -88,7 +81,7 @@ static void FillScheduleInfo(Parcel &parcel, ScheduleInfo &scheduleInfo)
     scheduleInfo.authType = static_cast<AuthType>(parcel.ReadInt32());
     scheduleInfo.executorMatcher = parcel.ReadUint32();
     scheduleInfo.scheduleMode = static_cast<ScheduleMode>(parcel.ReadInt32());
-    FillExecutorInfoVector(parcel, scheduleInfo.executors);
+    FillExecutorIndexVector(parcel, scheduleInfo.executorIndexes);
 }
 
 static void FillCredentialInfo(Parcel &parcel, CredentialInfo &credentialInfo)
@@ -681,6 +674,7 @@ HWTEST_F(UserIamUserAuthTestAdditional, testBeginIdentification001, Function | M
     ScheduleInfo scheduleInfo = {};
     std::vector<uint8_t> publicKey;
     std::vector<uint64_t> templateIds;
+    const std::string deviceUdid = "12345678910";
 
     for (i = 0; i < 3; i++) {
         info.authType = static_cast<AuthType>(authType[i]);
@@ -693,7 +687,7 @@ HWTEST_F(UserIamUserAuthTestAdditional, testBeginIdentification001, Function | M
                                                 executorSensorHint, scheduleInfo),
                   0);
         EXPECT_EQ(g_service.DeleteExecutor(index), 0);
-        EXPECT_EQ(g_service.Init(), 0);
+        EXPECT_EQ(g_service.Init(deviceUdid), 0);
     }
 }
 /**
@@ -779,6 +773,7 @@ HWTEST_F(UserIamUserAuthTestAdditional, testUpdateIdentificationResult001, Funct
     ScheduleInfo scheduleInfo = {};
     AuthType authType = AuthType::FACE;
     IdentifyResultInfo identityResultInfo = {};
+    const std::string deviceUdid = "12345678910";
 
     for (i = 0; i < 2; i++) {
         info.authType = AuthType::FACE;
@@ -791,7 +786,7 @@ HWTEST_F(UserIamUserAuthTestAdditional, testUpdateIdentificationResult001, Funct
         scheduleResult.resize(size[i]);
         EXPECT_NE(g_service.UpdateIdentificationResult(contextId, scheduleResult, identityResultInfo), 0);
         EXPECT_EQ(g_service.DeleteExecutor(index), 0);
-        EXPECT_EQ(g_service.Init(), 0);
+        EXPECT_EQ(g_service.Init(deviceUdid), 0);
     }
 }
 /**
@@ -1027,7 +1022,8 @@ HWTEST_F(UserIamUserAuthTestAdditional, testGetAllUserInfo001, Function | Medium
 HWTEST_F(UserIamUserAuthTestAdditional, testInit001, Function | MediumTest | Level1)
 {
     cout << "start Init" << endl;
-    EXPECT_EQ(g_service.Init(), 0);
+    const std::string deviceUdid = "12345678910";
+    EXPECT_EQ(g_service.Init(deviceUdid), 0);
 }
 /**
  * @tc.number: SUB_Security_IAM_UserAuth_HDI_FUNC_0920
@@ -1086,6 +1082,7 @@ HWTEST_F(UserIamUserAuthTestAdditional, testBeginIdentification016, Function | M
     std::vector<uint8_t> challenge;
     uint32_t executorSensorHint = 0;
     ScheduleInfo scheduleInfo = {};
+    const std::string deviceUdid = "12345678910";
 
     for (i = 0; i < 4; i++) {
         info.authType = AuthType::FACE;
@@ -1097,7 +1094,7 @@ HWTEST_F(UserIamUserAuthTestAdditional, testBeginIdentification016, Function | M
         EXPECT_EQ(g_service.BeginIdentification(contextId, AuthType::FACE, challenge, executorSensorHint, scheduleInfo),
                   0);
         EXPECT_EQ(g_service.DeleteExecutor(index), 0);
-        EXPECT_EQ(g_service.Init(), 0);
+        EXPECT_EQ(g_service.Init(deviceUdid), 0);
     }
 }
 /**

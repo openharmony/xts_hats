@@ -48,8 +48,6 @@ ohos_moduletest_suite("HatsHdfWlanHdiServiceTest") {
     external_deps = [ "hilog:libhilog" ]
   }
   external_deps += [ "ipc:ipc_single" ]
-  subsystem_name = "communication"
-  part_name = "wifi"
 }
 
 config("hdf_wlan_hdiservice") {

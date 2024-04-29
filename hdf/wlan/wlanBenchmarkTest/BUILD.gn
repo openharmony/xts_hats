@@ -57,6 +57,4 @@ ohos_moduletest_suite("HatsHdfWlanbenchmarkTest") {
   } else {
     external_deps = [ "hilog:libhilog" ]
   }
-  subsystem_name = "communication"
-  part_name = "wifi"
 }

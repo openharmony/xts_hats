@@ -821,28 +821,30 @@ HWTEST_F(UserIamUserAuthTestAdditional, testCancelIdentification004, Function | 
 }
 /**
  * @tc.number: SUB_Security_IAM_UserAuth_HDI_FUNC_9000
- * @tc.name  : testGetAuthTrustLevel001
- * @tc.desc  : Directly call the GetAuthTrustLevel function, with the first input parameter
+ * @tc.name  : testGetAvailableStatus001
+ * @tc.desc  : Directly call the GetAvailableStatus  function, with the first input parameter
  *              being userId=1000 and the second input parameter being all authType
  */
-HWTEST_F(UserIamUserAuthTestAdditional, testGetAuthTrustLevel001, Function | MediumTest | Level2)
+HWTEST_F(UserIamUserAuthTestAdditional, testGetAvailableStatus001, Function | MediumTest | Level2)
 {
     uint32_t i = 0;
     int32_t userId = 1000;
     uint32_t authType[] = {0, 1, 2, 4};
     uint32_t authTrustLevel = 0;
+    int32_t checkResult = 0;
     for (i = 0; i < 4; i++) {
-        EXPECT_NE(g_service.GetAuthTrustLevel(userId, static_cast<AuthType>(authType[i]), authTrustLevel), 0);
+        EXPECT_NE(g_service.GetAvailableStatus(userId, static_cast<AuthType>(authType[i]), authTrustLevel,
+            checkResult), 0);
     }
 }
 /**
  * @tc.number: SUB_Security_IAM_UserAuth_HDI_FUNC_9400
- * @tc.name  : testGetAuthTrustLevel005
+ * @tc.name  : testGetAvailableStatus005
  * @tc.desc  : Call the BeginEnrollment function without calling the UpdateEnrollmentResult function to update and
- *              enroll the result, and then call the GetAuthTrustLevel function,
+ *              enroll the result, and then call the GetAvailableStatus  function,
  *              with the first entry being userId = 12345. The second entry is authType = PIN
  */
-HWTEST_F(UserIamUserAuthTestAdditional, testGetAuthTrustLevel005, Function | MediumTest | Level2)
+HWTEST_F(UserIamUserAuthTestAdditional, testGetAvailableStatus005, Function | MediumTest | Level2)
 {
     int32_t userId = 12345;
     std::vector<uint8_t> challenge;
@@ -867,7 +869,8 @@ HWTEST_F(UserIamUserAuthTestAdditional, testGetAuthTrustLevel005, Function | Med
 
     AuthType authType = AuthType::PIN;
     uint32_t authTrustLevel = 0;
-    EXPECT_NE(g_service.GetAuthTrustLevel(userId, authType, authTrustLevel), 0);
+    int32_t checkResult = 0;
+    EXPECT_NE(g_service.GetAvailableStatus(userId, authType, authTrustLevel, checkResult), 0);
     EXPECT_EQ(g_service.CancelEnrollment(userId), 0);
     EXPECT_EQ(g_service.DeleteExecutor(index), 0);
     EXPECT_EQ(g_service.CloseSession(userId), 0);

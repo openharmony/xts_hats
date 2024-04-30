@@ -69,18 +69,17 @@ static void FillExecutorRegisterInfo(Parcel &parcel, ExecutorRegisterInfo &execu
     FillTestUint8Vector(parcel, executorRegisterInfo.publicKey);
 }
 
-static void FillExecutorInfo(Parcel &parcel, ExecutorInfo &executorInfo)
+static void FillExecutorIndexInfo(Parcel &parcel, uint64_t &executorIndex)
 {
-    executorInfo.executorIndex = parcel.ReadUint64();
-    FillExecutorRegisterInfo(parcel, executorInfo.info);
+    executorIndex = parcel.ReadUint64();
 }
 
-static void FillExecutorInfoVector(Parcel &parcel, vector<ExecutorInfo> &vector)
+static void FillExecutorIndexVector(Parcel &parcel, vector<uint64_t > &vector)
 {
     uint32_t len = parcel.ReadInt32() % MAX_FUZZ_STRUCT_LEN;
     vector.resize(len);
     for (uint32_t i = 0; i < len; i++) {
-        FillExecutorInfo(parcel, vector[i]);
+        FillExecutorIndexInfo(parcel, vector[i]);
     }
 }
 
@@ -91,7 +90,7 @@ static void FillScheduleInfo(Parcel &parcel, ScheduleInfo &scheduleInfo)
     scheduleInfo.authType = static_cast<AuthType>(parcel.ReadInt32());
     scheduleInfo.executorMatcher = parcel.ReadUint32();
     scheduleInfo.scheduleMode = static_cast<ScheduleMode>(parcel.ReadInt32());
-    FillExecutorInfoVector(parcel, scheduleInfo.executors);
+    FillExecutorIndexVector(parcel, scheduleInfo.executorIndexes);
 }
 
 static void FillCredentialInfo(Parcel &parcel, CredentialInfo &credentialInfo)
@@ -184,7 +183,7 @@ void FillTestScheduleInfo(Parcel &parcel, ScheduleInfo &scheduleInfo)
     scheduleInfo.authType = static_cast<AuthType>(parcel.ReadInt32());
     scheduleInfo.executorMatcher = parcel.ReadUint32();
     scheduleInfo.scheduleMode = static_cast<ScheduleMode>(parcel.ReadInt32());
-    FillExecutorInfoVector(parcel, scheduleInfo.executors);
+    FillExecutorIndexVector(parcel, scheduleInfo.executorIndexes);
     std::vector<uint8_t> extraInfo;
     FillTestUint8Vector(parcel, extraInfo);
     scheduleInfo.executorMessages.push_back(extraInfo);
@@ -211,7 +210,8 @@ void FillTestScheduleInfo_Vector(Parcel &parcel, vector<ScheduleInfo> &vector)
 HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0101, Function | MediumTest | Level1)
 {
     cout << "start Init" << endl;
-    int32_t ret = g_service.Init();
+    const std::string deviceUdid = "12345678910";
+    int32_t ret = g_service.Init(deviceUdid);
     EXPECT_EQ(ret, 0);
 }
 

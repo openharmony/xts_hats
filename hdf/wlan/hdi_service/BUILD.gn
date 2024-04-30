@@ -39,15 +39,24 @@ ohos_moduletest_suite("HatsHdfWlanHdiServiceTest") {
       "c_utils:utils",
       "drivers_interface_wlan:libwlan_proxy_1.3",
       "hdf_core:libhdf_host",
+      "hdf_core:libhdf_ipc_adapter",
       "hdf_core:libhdf_utils",
+      "hdf_core:libhdi",
       "hilog:libhilog",
     ]
   } else {
     external_deps = [ "hilog:libhilog" ]
   }
   external_deps += [ "ipc:ipc_single" ]
+  subsystem_name = "communication"
+  part_name = "wifi"
 }
 
 config("hdf_wlan_hdiservice") {
-  include_dirs = [ "include" ]
+  include_dirs = [
+    "$base_root/drivers/peripheral/wlan/interfaces/include",
+    "$base_root/drivers/peripheral/wlan/hdi_service",
+    "$base_root/drivers/peripheral/wlan/client/include",
+    "$base_root/drivers/peripheral/wlan/hal/include",
+  ]
 }

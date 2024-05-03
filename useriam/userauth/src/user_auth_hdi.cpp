@@ -563,18 +563,19 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0119, Function | Me
 
 /**
  * @tc.number: Security_IAM_UserAuth_HDI_FUNC_0120
- * @tc.name: Test GetAuthTrustLevel
+ * @tc.name: Test GetAvailableStatus
  * @tc.size: MediumTest
  * @tc.type: Function
  * @tc.level: Level1
  */
 HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0120, Function | MediumTest | Level1)
 {
-    cout << "start GetAuthTrustLevel" << endl;
+    cout << "start GetAvailableStatus" << endl;
     int32_t userId = parcel.ReadInt32();
     AuthType authType = static_cast<AuthType>(parcel.ReadInt32());
     uint32_t authTrustLevel = parcel.ReadUint32();
-    int32_t ret = g_service.GetAuthTrustLevel(userId, authType, authTrustLevel);
+    int32_t checkResult = parcel.ReadInt32();
+    int32_t ret = g_service.GetAvailableStatus(userId, authType, authTrustLevel, checkResult);
     cout << "ret is " << ret << endl;
     ASSERT_EQ(ret != Expectedvalue, true);
 }

@@ -23,7 +23,7 @@ using namespace OHOS::HDI::PinAuth;
 using namespace OHOS::HDI::PinAuth::V2_0;
 using Property = OHOS::HDI::PinAuth::V2_0::Property;
 
-static ExecutorImpl g_executorImpl(make_shared<OHOS::UserIam::PinAuth::PinAuth>());
+static AllInOneImpl g_executorImpl(make_shared<OHOS::UserIam::PinAuth::PinAuth>());
 static OHOS::Parcel parcel;
 int32_t Expectedvalue = 0;
 
@@ -151,6 +151,7 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0103, Function | Medi
     FillTestUint64Vector(parcel, templateIdList);
     std::vector<uint8_t> frameworkPublicKey;
     FillTestUint8Vector(parcel, frameworkPublicKey);
+    frameworkPublicKey.resize(32);
     std::vector<uint8_t> extraInfo;
     FillTestUint8Vector(parcel, extraInfo);
     int32_t ret = g_executorImpl.OnRegisterFinish(templateIdList, frameworkPublicKey, extraInfo);
@@ -217,7 +218,7 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0106, Function | Medi
     FillTestIExecutorCallback(parcel, callbackObj);
     int32_t ret = g_executorImpl.Authenticate(scheduleId, templateIdList, extraInfo, callbackObj);
     cout << "ret is " << ret << endl;
-    ASSERT_EQ(ret, 2);
+    ASSERT_EQ(ret, 0);
 }
 
 /**

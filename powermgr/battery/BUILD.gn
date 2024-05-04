@@ -23,6 +23,9 @@ group("HatsPowermgrBatteryTest") {
       "hdi_battery_additional:HatsPowermgrBatteryAdditionalTest",
     ]
   } else {
-    deps = [ "hdi_battery:HatsPowermgrBatteryTest" ]
+    deps = [
+      "hdi_battery:HatsPowermgrBatteryTest",
+      "hdi_battery_additional:HatsPowermgrBatteryAdditionalTest",
+    ]
   }
 }

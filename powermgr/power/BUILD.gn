@@ -23,6 +23,9 @@ group("HatsPowermgrPowerTest") {
       "hdi_power_additional:HatsPowermgrPowerAdditionalTest",
     ]
   } else {
-    deps = [ "hdi_power:HatsPowermgrPowerTest" ]
+    deps = [
+      "hdi_power:HatsPowermgrPowerTest",
+      "hdi_power_additional:HatsPowermgrPowerAdditionalTest",
+    ]
   }
 }

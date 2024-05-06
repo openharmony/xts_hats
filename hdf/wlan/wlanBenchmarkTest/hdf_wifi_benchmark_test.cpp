@@ -695,8 +695,8 @@ BENCHMARK_F(wlanBenchmarkTest, WifiHalgetValidFreqsWithBand001)(
     ret = g_wifi->createFeature(PROTOCOL_80211_IFTYPE_AP, (struct IWiFiBaseFeature **)&apFeature);
     EXPECT_EQ(HDF_SUCCESS, ret);
     EXPECT_NE(nullptr, apFeature);
-    ret = apFeature->baseFeature.getValidFreqsWithBand((struct IWiFiBaseFeature *)apFeature,
-    WLAN_BAND_2G, nullptr, 0, nullptr);
+    ret = apFeature->baseFeature.getValidFreqsWithBand(static_cast<IWiFiBaseFeature *>(apFeature),
+     WLAN_BAND_2G, nullptr, 0, nullptr);
     EXPECT_NE(HDF_SUCCESS, ret);
     for (auto _ : st) {
         ret = apFeature->baseFeature.getValidFreqsWithBand((struct IWiFiBaseFeature *)apFeature,
@@ -1023,7 +1023,7 @@ BENCHMARK_F(wlanBenchmarkTest, GetChipId001)(
 
     ret = staFeature->baseFeature.getChipId(nullptr, &chipId);
     EXPECT_NE(HDF_SUCCESS, ret);
-    ret = staFeature->baseFeature.getChipId((struct IWiFiBaseFeature *)staFeature, nullptr);
+    ret = staFeature->baseFeature.getChipId( static_cast<IWiFiBaseFeature *>(staFeature), nullptr);
     EXPECT_NE(HDF_SUCCESS, ret);
     for (auto _ : st) {
         ret = staFeature->baseFeature.getChipId((struct IWiFiBaseFeature *)staFeature, &chipId);

@@ -104,7 +104,7 @@ HWTEST_F(EffectModelTest, HdfAudioGetAllEffectDescriptors001, TestSize.Level1)
 {
     uint32_t descsLen = MAX_DESCRIPTOR_NUM;
     struct EffectControllerDescriptor descs[MAX_DESCRIPTOR_NUM];
-
+    
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, model_->GetAllEffectDescriptors(nullptr, descs, &descsLen));
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->GetAllEffectDescriptors(model_, nullptr, &descsLen));
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->GetAllEffectDescriptors(model_, descs, nullptr));
@@ -166,7 +166,7 @@ HWTEST_F(EffectModelTest, HdfAudioCreateEffectController001, TestSize.Level1)
     };
 
     struct IEffectControl *controller = NULL;
-	EXPECT_EQ(HDF_ERR_INVALID_OBJECT, model_->CreateEffectController(nullptr, &info, &controller, &controllerId_));
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, model_->CreateEffectController(nullptr, &info, &controller, &controllerId_));
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->CreateEffectController(model_, nullptr, &controller, &controllerId_));
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->CreateEffectController(model_, &info, &controller, nullptr));
 }
@@ -187,10 +187,10 @@ HWTEST_F(EffectModelTest, HdfAudioDestroyEffectController001, TestSize.Level1)
     };
 
     struct IEffectControl *controller = NULL;
-	ASSERT_EQ(HDF_SUCCESS, model_->CreateEffectController(model_, &info, &controller, &controllerId_));
-	ASSERT_NE(controller, nullptr);
+    ASSERT_EQ(HDF_SUCCESS, model_->CreateEffectController(model_, &info, &controller, &controllerId_));
+    ASSERT_NE(controller, nullptr);
 	
-	EXPECT_EQ(HDF_ERR_INVALID_OBJECT, model_->DestroyEffectController(nullptr, &controllerId_));
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, model_->DestroyEffectController(nullptr, &controllerId_));
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->DestroyEffectController(model_, nullptr));
 }
 
@@ -230,7 +230,7 @@ HWTEST_F(EffectModelTest, HdfAudioCreateDestroyController001, TestSize.Level1)
 HWTEST_F(EffectModelTest, HdfAudioGetEffectDescriptor001, TestSize.Level1)
 {
     struct EffectControllerDescriptor desc;
-
+    
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, model_->GetEffectDescriptor(nullptr, effectId_, &desc));
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->GetEffectDescriptor(model_, nullptr, &desc));
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->GetEffectDescriptor(model_, effectId_, nullptr));

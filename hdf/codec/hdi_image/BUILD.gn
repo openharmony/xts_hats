@@ -12,12 +12,16 @@
 # limitations under the License.
 
 import("//build/test.gni")
+import("//drivers/peripheral/display/display_config.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/codec"
 
 ohos_moduletest_suite("HatsHdfImageCodecTest") {
   module_out_path = module_output_path
+
+  defines = []
+  defines += display_defines
 
   deps = [ "//third_party/googletest:gtest_main" ]
   sources = [ "codec_hdi_jpeg_test.cpp" ]
@@ -43,6 +47,4 @@ ohos_moduletest_suite("HatsHdfImageCodecTest") {
   } else {
     external_deps = [ "hilog:libhilog" ]
   }
-  subsystem_name = "xts"
-  part_name = "hats"
 }

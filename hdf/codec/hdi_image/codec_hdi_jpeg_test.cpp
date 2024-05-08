@@ -171,6 +171,7 @@ HWTEST_F(CodecHdiJpegTest, SUB_Driver_Codec_ImageCodecHDI_0800, TestSize.Level1)
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
 
+#ifdef DISPLAY_COMMUNITY
 HWTEST_F(CodecHdiJpegTest, SUB_Driver_Codec_ImageCodecHDI_HdiEnumTest_0100, TestSize.Level3)
 {
     printf("HdfCodecHdiEnumTest001: start.");
@@ -940,4 +941,5 @@ HWTEST_F(CodecHdiJpegTest, SUB_Driver_Codec_ImageCodecHDI_HdiJpegEnumTest_0600, 
     EXPECT_TRUE(OHOS::HDI::Codec::Image::V1_0::CODEC_IMAGE_TYPE_INVALID == 2);
     printf("HdfCodecHdiJpegEnumTest006: end.");
 }
+#endif
 }  // namespace

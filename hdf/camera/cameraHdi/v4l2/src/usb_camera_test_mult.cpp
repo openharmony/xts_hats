@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 #include "usb_camera_test_mult.h"
-
+using namespace testing::ext;
 bool g_usbCameraExit = false;
 void UtestUSBCameraTestMult::SetUpTestCase(void)
 {}
@@ -313,7 +313,7 @@ uint32_t UtestUSBCameraTestMult::ConvertPixfmtHal2V4l2(uint32_t ohosfmt)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-TEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0600)
+HWTEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0600, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -377,7 +377,7 @@ TEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0600)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-TEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0100)
+HWTEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0100, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -419,7 +419,7 @@ TEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0100)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-TEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0200)
+HWTEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0200, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -464,7 +464,7 @@ TEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0200)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-TEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0300)
+HWTEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0300, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -523,7 +523,7 @@ TEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0300)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-TEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0400)
+HWTEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0400, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -566,7 +566,7 @@ TEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0400)
   * @tc.size: MediumTest
   * @tc.type: Function
   */
-TEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0500)
+HWTEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0500, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;

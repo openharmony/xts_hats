@@ -735,7 +735,7 @@ HWTEST_F(HdiStreamUtTest, SUB_Driver_Camera_Merge_5200, TestSize.Level0)
 
 /**
  * @tc.name: capture
- * @tc.desc: preview, capture->captureInfo->streamId = 2147483391, return success
+ * @tc.desc: preview, capture->captureInfo->streamId = 1073741822, return success
  * @tc.size: MediumTest
  * @tc.type: Function
  */
@@ -748,7 +748,7 @@ HWTEST_F(HdiStreamUtTest, SUB_Driver_Camera_Merge_5300, TestSize.Level0)
     EXPECT_EQ(false, cameraTest->rc != HDI::Camera::V1_0::NO_ERROR || cameraTest->streamOperator == nullptr);
 
     cameraTest->streamInfo = std::make_shared<StreamInfo>();
-    cameraTest->streamInfo->streamId_ = 2147483391;
+    cameraTest->streamInfo->streamId_ = 1073741822;
     cameraTest->streamInfo->width_ = 1920;
     cameraTest->streamInfo->height_ = 1080;
     cameraTest->streamInfo->format_ = cameraTest->previewFormat;
@@ -772,7 +772,7 @@ HWTEST_F(HdiStreamUtTest, SUB_Driver_Camera_Merge_5300, TestSize.Level0)
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     int captureId = 2001;
     cameraTest->captureInfo = std::make_shared<CaptureInfo>();
-    cameraTest->captureInfo->streamIds_ = {2147483391};
+    cameraTest->captureInfo->streamIds_ = {1073741822};
     cameraTest->captureInfo->captureSetting_ = cameraTest->abilityVec;
     cameraTest->captureInfo->enableShutterCallback_ =true;
     bool isStreaming = true;

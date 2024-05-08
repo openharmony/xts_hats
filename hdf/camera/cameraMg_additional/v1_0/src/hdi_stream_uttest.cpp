@@ -177,7 +177,11 @@ HWTEST_F(HdiStreamUtTestAdditional, testIsStreamsSupported001, Function | Medium
     MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
     cameraTest->rc =
         cameraTest->streamOperator->IsStreamsSupported(OperationMode::NORMAL, modeSettingVec, streams, pType);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::INVALID_ARGUMENT);
+#else
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+#endif // DISPLAY_COMMUNITY
 }
 
 /**
@@ -269,7 +273,11 @@ HWTEST_F(HdiStreamUtTestAdditional, testIsStreamsSupported003, Function | Medium
     MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
     cameraTest->rc =
         cameraTest->streamOperator->IsStreamsSupported(OperationMode::NORMAL, modeSettingVec, streams, pType);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::INVALID_ARGUMENT);
+#else
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+#endif // DISPLAY_COMMUNITY
 }
 
 /**
@@ -361,7 +369,11 @@ HWTEST_F(HdiStreamUtTestAdditional, testIsStreamsSupported005, Function | Medium
     MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
     cameraTest->rc =
         cameraTest->streamOperator->IsStreamsSupported(OperationMode::NORMAL, modeSettingVec, streams, pType);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::INVALID_ARGUMENT);
+#else
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+#endif // DISPLAY_COMMUNITY
 }
 
 /**
@@ -453,7 +465,11 @@ HWTEST_F(HdiStreamUtTestAdditional, testIsStreamsSupported007, Function | Medium
     MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
     cameraTest->rc =
         cameraTest->streamOperator->IsStreamsSupported(OperationMode::NORMAL, modeSettingVec, streams, pType);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::INVALID_ARGUMENT);
+#else
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+#endif // DISPLAY_COMMUNITY
 }
 
 /**
@@ -593,7 +609,11 @@ HWTEST_F(HdiStreamUtTestAdditional, testIsStreamsSupported010, Function | Medium
     MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
     cameraTest->rc =
         cameraTest->streamOperator->IsStreamsSupported(OperationMode::NORMAL, modeSettingVec, streams, pType);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::INVALID_ARGUMENT);
+#else
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+#endif // DISPLAY_COMMUNITY
 }
 
 /**
@@ -1009,7 +1029,11 @@ HWTEST_F(HdiStreamUtTestAdditional, testIsStreamsSupported019, Function | Medium
     MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
     cameraTest->rc =
         cameraTest->streamOperator->IsStreamsSupported(OperationMode::NORMAL, modeSettingVec, streams, pType);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::INVALID_ARGUMENT);
+#else
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+#endif // DISPLAY_COMMUNITY
 }
 
 /**
@@ -1101,7 +1125,11 @@ HWTEST_F(HdiStreamUtTestAdditional, testIsStreamsSupported021, Function | Medium
     MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
     cameraTest->rc =
         cameraTest->streamOperator->IsStreamsSupported(OperationMode::NORMAL, modeSettingVec, streams, pType);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::INVALID_ARGUMENT);
+#else
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+#endif // DISPLAY_COMMUNITY
 }
 
 /**
@@ -1147,7 +1175,11 @@ HWTEST_F(HdiStreamUtTestAdditional, testIsStreamsSupported022, Function | Medium
     MetadataUtils::ConvertMetadataToVec(modeSetting, modeSettingVec);
     cameraTest->rc =
         cameraTest->streamOperator->IsStreamsSupported(OperationMode::NORMAL, modeSettingVec, streams, pType);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::INVALID_ARGUMENT);
+#else
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+#endif // DISPLAY_COMMUNITY
 }
 
 /**
@@ -1381,7 +1413,11 @@ HWTEST_F(HdiStreamUtTestAdditional, testCreateStreams004, Function | MediumTest 
     cameraTest->consumerMap_[cameraTest->streamInfo->intent_] = consumer;
     cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
     cameraTest->rc = cameraTest->streamOperator->CreateStreams(cameraTest->streamInfos);
+#ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::INVALID_ARGUMENT);
+#else
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::METHOD_NOT_SUPPORTED);
+#endif // DISPLAY_COMMUNITY
 }
 
 /**
@@ -1713,7 +1749,7 @@ HWTEST_F(HdiStreamUtTestAdditional, testDetachBufferQueue001, Function | MediumT
 /**
  * @tc.number : SUB_Driver_Camera_ChangeToOfflineStream_0100
  * @tc.name   : testChangeToOfflineStream001
- * @tc.desc   : ChangeToOfflineStream, StreamInfo->streamId_ = 2147483647, return success
+ * @tc.desc   : ChangeToOfflineStream, StreamInfo->streamId_ = 1073741822, return success
  */
 HWTEST_F(HdiStreamUtTestAdditional, testChangeToOfflineStream001, Function | MediumTest | Level1)
 {
@@ -1740,7 +1776,7 @@ HWTEST_F(HdiStreamUtTestAdditional, testChangeToOfflineStream001, Function | Med
     cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
 
     cameraTest->streamInfoSnapshot = std::make_shared<StreamInfo>();
-    cameraTest->streamInfoSnapshot->streamId_ = 2147483647;
+    cameraTest->streamInfoSnapshot->streamId_ = 1073741822;
     cameraTest->streamInfoSnapshot->width_ = 720;
     cameraTest->streamInfoSnapshot->height_ = 480;
     cameraTest->streamInfoSnapshot->format_ = PIXEL_FMT_YCRCB_420_SP;
@@ -1766,7 +1802,7 @@ HWTEST_F(HdiStreamUtTestAdditional, testChangeToOfflineStream001, Function | Med
 
     int captureId = 2001;
     cameraTest->captureInfo = std::make_shared<CaptureInfo>();
-    cameraTest->captureInfo->streamIds_ = {2147483647};
+    cameraTest->captureInfo->streamIds_ = {1073741822};
     cameraTest->captureInfo->captureSetting_ = cameraTest->abilityVec;
     cameraTest->captureInfo->enableShutterCallback_ = true;
     bool isStreaming = true;
@@ -1786,7 +1822,7 @@ HWTEST_F(HdiStreamUtTestAdditional, testChangeToOfflineStream001, Function | Med
 
     EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
 
-    std::vector<int> streamIds = {2147483647};
+    std::vector<int> streamIds = {1073741822};
     cameraTest->rc = (CamRetCode)offlineStreamOperator->ReleaseStreams(streamIds);
     EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
 

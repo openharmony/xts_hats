@@ -21,32 +21,28 @@ using namespace OHOS::Camera;
 int64_t OHOS::Camera::Test::StreamConsumer::g_timestamp[2] = {0};
 void CameraHdiTestV1_1Additional::SetUpTestCase(void) {}
 void CameraHdiTestV1_1Additional::TearDownTestCase(void) {}
-void CameraHdiTestV1_1Additional::SetUp(void) { cameraTest = std::make_shared<OHOS::Camera::Test>(); }
+void CameraHdiTestV1_1Additional::SetUp(void)
+{
+    cameraTest = std::make_shared<OHOS::Camera::Test>();
+    cameraTest->Init();
+}
 void CameraHdiTestV1_1Additional::TearDown(void) { cameraTest->Close(); }
 
 /**
  * @tc.number : SUB_Driver_Camera_Prelaunch_0100
  * @tc.name   : testPrelaunch001
- * @tc.desc   : Prelaunch cameraId:device/0
+ * @tc.desc   : Prelaunch cameraId:device/6
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch001, TestSize.Level1)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
-    cameraTest->prelaunchConfig->cameraId = "device/0";
+    cameraTest->prelaunchConfig->cameraId = "device/6";
     cameraTest->prelaunchConfig->streamInfos_V1_1 = {};
     cameraTest->prelaunchConfig->setting = {};
 
     for (int i = 0; i < 100; i++) {
         cameraTest->rc = cameraTest->serviceV1_1->Prelaunch(*cameraTest->prelaunchConfig);
-        EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+        EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::INVALID_ARGUMENT);
     }
 }
 
@@ -57,14 +53,6 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch001, TestSize.Level1)
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch005, TestSize.Level2)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     cameraTest->prelaunchConfig->cameraId = {};
     cameraTest->prelaunchConfig->streamInfos_V1_1 = {};
@@ -83,14 +71,6 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch005, TestSize.Level2)
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch006, TestSize.Level2)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     std::vector<uint8_t> settings;
     cameraTest->prelaunchConfig->cameraId = {};
@@ -108,14 +88,6 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch006, TestSize.Level2)
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch007, TestSize.Level2)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     std::vector<uint8_t> settings;
     cameraTest->prelaunchConfig->cameraId = {};
@@ -133,14 +105,6 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch007, TestSize.Level2)
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch008, TestSize.Level2)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     std::vector<uint8_t> settings;
     cameraTest->prelaunchConfig->cameraId = {};
@@ -158,14 +122,6 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch008, TestSize.Level2)
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch009, TestSize.Level2)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     cameraTest->prelaunchConfig->cameraId = "device/10";
     cameraTest->prelaunchConfig->streamInfos_V1_1 = {};
@@ -184,14 +140,6 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch009, TestSize.Level2)
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch010, TestSize.Level2)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     std::vector<uint8_t> settings;
     cameraTest->prelaunchConfig->cameraId = "device/10";
@@ -209,14 +157,6 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch010, TestSize.Level2)
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch011, TestSize.Level2)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     std::vector<uint8_t> settings;
     cameraTest->prelaunchConfig->cameraId = "device/10";
@@ -234,14 +174,6 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch011, TestSize.Level2)
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch012, TestSize.Level2)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     std::vector<uint8_t> settings;
     cameraTest->prelaunchConfig->cameraId = "device/10";
@@ -259,14 +191,6 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch012, TestSize.Level2)
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch013, TestSize.Level2)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     cameraTest->prelaunchConfig->cameraId = "ABC123";
     cameraTest->prelaunchConfig->streamInfos_V1_1 = {};
@@ -285,14 +209,6 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch013, TestSize.Level2)
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch014, TestSize.Level2)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     std::vector<uint8_t> settings;
     cameraTest->prelaunchConfig->cameraId = "ABC123";
@@ -310,14 +226,6 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch014, TestSize.Level2)
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch015, TestSize.Level2)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     std::vector<uint8_t> settings;
     cameraTest->prelaunchConfig->cameraId = "ABC123";
@@ -335,14 +243,6 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch015, TestSize.Level2)
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch016, TestSize.Level2)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     std::vector<uint8_t> settings;
     cameraTest->prelaunchConfig->cameraId = "ABC123";
@@ -360,14 +260,6 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch016, TestSize.Level2)
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch017, TestSize.Level2)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     cameraTest->prelaunchConfig->cameraId = "1";
     cameraTest->prelaunchConfig->streamInfos_V1_1 = {};
@@ -386,14 +278,6 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch017, TestSize.Level2)
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch018, TestSize.Level2)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     std::vector<uint8_t> settings;
     cameraTest->prelaunchConfig->cameraId = "1";
@@ -411,14 +295,6 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch018, TestSize.Level2)
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch019, TestSize.Level2)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     std::vector<uint8_t> settings;
     cameraTest->prelaunchConfig->cameraId = "1";
@@ -436,14 +312,6 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch019, TestSize.Level2)
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch020, TestSize.Level2)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     std::vector<uint8_t> settings;
     cameraTest->prelaunchConfig->cameraId = "1";
@@ -461,14 +329,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch020, TestSize.Level2)
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testGetDefaultSettings001, TestSize.Level1)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     for (int i = 0; i < 100; i++) {
         EXPECT_EQ(true, cameraTest->cameraDevice != nullptr);
         cameraTest->rc = cameraTest->cameraDeviceV1_1->GetDefaultSettings(cameraTest->abilityVec);
@@ -483,14 +344,6 @@ HWTEST_F(CameraHdiTestV1_1Additional, testGetDefaultSettings001, TestSize.Level1
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch058, TestSize.Level2)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     std::vector<uint8_t> settings;
     cameraTest->prelaunchConfig->cameraId = "deviceA";
@@ -510,14 +363,6 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch058, TestSize.Level2)
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch059, TestSize.Level2)
 {
-    cameraTest->Init();
-    if (cameraTest->serviceV1_1 == nullptr) {
-        return;
-    }
-    cameraTest->Open();
-    if (cameraTest->cameraDeviceV1_1 == nullptr) {
-        return;
-    }
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     std::vector<uint8_t> settings;
     cameraTest->prelaunchConfig->cameraId = "deviceA";

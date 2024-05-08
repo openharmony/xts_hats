@@ -25,13 +25,13 @@
 
 #include "hdf_base.h"
 #include "osal_time.h"
-#include "v1_1/ipower_hdi_callback.h"
-#include "v1_1/ipower_interface.h"
-#include "v1_1/power_types.h"
-#include "v1_1/running_lock_types.h"
+#include "v1_2/ipower_hdi_callback.h"
+#include "v1_2/ipower_interface.h"
+#include "v1_2/power_types.h"
+#include "v1_2/running_lock_types.h"
 
 using namespace OHOS::HDI;
-using namespace OHOS::HDI::Power::V1_1;
+using namespace OHOS::HDI::Power::V1_2;
 using namespace testing::ext;
 
 namespace {

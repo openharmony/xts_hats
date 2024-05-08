@@ -15,16 +15,16 @@ import("//build/ohos_var.gni")
 import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
-#################################group#########################################
 group("HatsHdfCameraMgAdditionalTest") {
   if (!defined(ohos_lite)) {
     testonly = true
   }
-  if (is_standard_system) {
+  if (hats_rich == false) {
+    deps = [ "v1_0:HatsHdfCameraMgv0AdditionalTest" ]
+  } else {
     deps = [
       "v1_0:HatsHdfCameraMgv0AdditionalTest",
       "v1_1:HatsHdfCameraMgv1AdditionalTest",
     ]
   }
 }
-###############################################################################

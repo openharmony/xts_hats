@@ -15,7 +15,6 @@ import("//build/ohos_var.gni")
 import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
-#################################group#########################################
 group("HatsHdfCameraTest") {
   if (!defined(ohos_lite)) {
     testonly = true
@@ -30,8 +29,10 @@ group("HatsHdfCameraTest") {
         #"cameraBenchmarkTest:HatsHdfCamerabenchmarkTest",
       ]
     } else {
-      deps = [ "cameraMg:HatsHdfCameraMgTest" ]
+      deps = [
+        "cameraMg:HatsHdfCameraMgTest",
+        "cameraMg_additional:HatsHdfCameraMgAdditionalTest",
+      ]
     }
   }
 }
-###############################################################################

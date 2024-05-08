@@ -14,9 +14,9 @@
  */
 
 #include "camera_vendor_tag_test.h"
-
 #include <dlfcn.h>
 #include "camera_example_vendor_tags.h"
+using namespace testing::ext;
 
 const char* g_exampleVendorTagLib = "libcamera_example_vendor_tag_impl.z.so";
 
@@ -39,7 +39,7 @@ void UtestCameraVendorTagTest::TearDown(void)
 }
 
 #ifdef DISPLAY_COMMUNITY
-TEST_F(UtestCameraVendorTagTest, SUB_Driver_Camera_MetaDataTag_0100)
+HWTEST_F(UtestCameraVendorTagTest, SUB_Driver_Camera_MetaDataTag_0100, TestSize.Level1)
 {
     constexpr int itemCapacitySize = 30;
     constexpr int dataCapacitySize = 2000;
@@ -59,7 +59,7 @@ TEST_F(UtestCameraVendorTagTest, SUB_Driver_Camera_MetaDataTag_0100)
     EXPECT_EQ(entry.data.u8[0], sensorMode);
 }
 
-TEST_F(UtestCameraVendorTagTest, SUB_Driver_Camera_MetaDataTag_0200)
+HWTEST_F(UtestCameraVendorTagTest, SUB_Driver_Camera_MetaDataTag_0200, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -93,7 +93,7 @@ TEST_F(UtestCameraVendorTagTest, SUB_Driver_Camera_MetaDataTag_0200)
     }
 }
 
-TEST_F(UtestCameraVendorTagTest, SUB_Driver_Camera_MetaDataTag_0300)
+HWTEST_F(UtestCameraVendorTagTest, SUB_Driver_Camera_MetaDataTag_0300, TestSize.Level1)
 {
     constexpr int itemCapacitySize = 30;
     constexpr int dataCapacitySize = 2000;
@@ -104,7 +104,7 @@ TEST_F(UtestCameraVendorTagTest, SUB_Driver_Camera_MetaDataTag_0300)
     EXPECT_EQ(ret, false);
 }
 
-TEST_F(UtestCameraVendorTagTest, camera_usb_vendor_tag_004)
+HWTEST_F(UtestCameraVendorTagTest, SUB_Driver_Camera_MetaDataTag_0400, TestSize.Level1)
 {
     constexpr int itemCapacitySize = 30;
     constexpr int dataCapacitySize = 2000;
@@ -131,7 +131,7 @@ TEST_F(UtestCameraVendorTagTest, camera_usb_vendor_tag_004)
     EXPECT_EQ(entry.data.i64[0], newSensorExposure);
 }
 
-TEST_F(UtestCameraVendorTagTest, SUB_Driver_Camera_MetaDataTag_0500)
+HWTEST_F(UtestCameraVendorTagTest, SUB_Driver_Camera_MetaDataTag_0500, TestSize.Level1)
 {
     constexpr int itemCapacitySize = 30;
     constexpr int dataCapacitySize = 2000;
@@ -151,7 +151,7 @@ TEST_F(UtestCameraVendorTagTest, SUB_Driver_Camera_MetaDataTag_0500)
     EXPECT_EQ(entry.data.i64[0], sensorExposure);
 }
 
-TEST_F(UtestCameraVendorTagTest, SUB_Driver_Camera_MetaDataTag_0600)
+HWTEST_F(UtestCameraVendorTagTest, SUB_Driver_Camera_MetaDataTag_0600, TestSize.Level1)
 {
     constexpr int itemCapacitySize = 30;
     constexpr int dataCapacitySize = 2000;
@@ -163,7 +163,7 @@ TEST_F(UtestCameraVendorTagTest, SUB_Driver_Camera_MetaDataTag_0600)
 }
 
 #else
-TEST_F(UtestCameraVendorTagTest, SUB_Driver_Camera_MetaDataTag_0700)
+HWTEST_F(UtestCameraVendorTagTest, SUB_Driver_Camera_MetaDataTag_0700, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;
@@ -216,7 +216,7 @@ TEST_F(UtestCameraVendorTagTest, SUB_Driver_Camera_MetaDataTag_0700)
     }
 }
 
-TEST_F(UtestCameraVendorTagTest, SUB_Driver_Camera_MetaDataTag_0800)
+HWTEST_F(UtestCameraVendorTagTest, SUB_Driver_Camera_MetaDataTag_0800, TestSize.Level1)
 {
     if (!usbCameraExit_) {
         std::cout << "No usb camera plugged in" << std::endl;

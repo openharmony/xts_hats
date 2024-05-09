@@ -31,6 +31,9 @@ group("HatsHdfCodecTest") {
     ]
   } else {
     testonly = true
-    deps = [ "hdi_omx:HatsHdfOmxCodecTest" ]
+    deps = [
+      "hdi_image:HatsHdfImageCodecTest",
+      "hdi_omx:HatsHdfOmxCodecTest",
+    ]
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -66,6 +66,7 @@ void EffectModelTest::TearDown()
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectModel_0100
  * @tc.name: HdfAudioIsSupplyEffectLibs001
  * @tc.desc: Verify the EffectModelIsSupplyEffectLibs function when the input parameter is invalid.
  * @tc.type: FUNC
@@ -79,6 +80,7 @@ HWTEST_F(EffectModelTest, HdfAudioIsSupplyEffectLibs001, TestSize.Level1)
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectModel_0200
  * @tc.name: HdfAudioIsSupplyEffectLibs002
  * @tc.desc: Verify the EffectModelIsSupplyEffectLibs function.
  * @tc.type: FUNC
@@ -92,6 +94,7 @@ HWTEST_F(EffectModelTest, HdfAudioIsSupplyEffectLibs002, TestSize.Level1)
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectModel_0300
  * @tc.name: HdfAudioGetAllEffectDescriptors001
  * @tc.desc: Verify the EffectModelGetAllEffectDescriptors function when the input parameter is invalid.
  * @tc.type: FUNC
@@ -101,13 +104,14 @@ HWTEST_F(EffectModelTest, HdfAudioGetAllEffectDescriptors001, TestSize.Level1)
 {
     uint32_t descsLen = MAX_DESCRIPTOR_NUM;
     struct EffectControllerDescriptor descs[MAX_DESCRIPTOR_NUM];
-
+    
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, model_->GetAllEffectDescriptors(nullptr, descs, &descsLen));
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->GetAllEffectDescriptors(model_, nullptr, &descsLen));
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->GetAllEffectDescriptors(model_, descs, nullptr));
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectModel_0400
  * @tc.name: HdfAudioGetAllEffectDescriptors002
  * @tc.desc: Verify the EffectModelGetAllEffectDescriptors function.
  * @tc.type: FUNC
@@ -124,6 +128,7 @@ HWTEST_F(EffectModelTest, HdfAudioGetAllEffectDescriptors002, TestSize.Level1)
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectModel_0500
  * @tc.name: HdfAudioGetAllEffectDescriptors003
  * @tc.desc: Verify the descs of EffectModelGetAllEffectDescriptors function.
  * @tc.type: FUNC
@@ -146,6 +151,7 @@ HWTEST_F(EffectModelTest, HdfAudioGetAllEffectDescriptors003, TestSize.Level1)
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectModel_0600
  * @tc.name: HdfAudioCreateEffectController001
  * @tc.desc: Verify the CreateEffectController function when the input parameter is invalid.
  * @tc.type: FUNC
@@ -160,12 +166,13 @@ HWTEST_F(EffectModelTest, HdfAudioCreateEffectController001, TestSize.Level1)
     };
 
     struct IEffectControl *controller = NULL;
-	EXPECT_EQ(HDF_ERR_INVALID_OBJECT, model_->CreateEffectController(nullptr, &info, &controller, &controllerId_);
-    EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->CreateEffectController(model_, nullptr, &controller, &controllerId_);
-    EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->CreateEffectController(model_, &info, &controller, nullptr);
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, model_->CreateEffectController(nullptr, &info, &controller, &controllerId_));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->CreateEffectController(model_, nullptr, &controller, &controllerId_));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->CreateEffectController(model_, &info, &controller, nullptr));
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectModel_0700
  * @tc.name: HdfAudioDestroyEffectController001
  * @tc.desc: Verify the DestroyEffectController function when the input parameter is invalid.
  * @tc.type: FUNC
@@ -180,14 +187,15 @@ HWTEST_F(EffectModelTest, HdfAudioDestroyEffectController001, TestSize.Level1)
     };
 
     struct IEffectControl *controller = NULL;
-	ASSERT_EQ(HDF_SUCCESS, model_->CreateEffectController(model_, &info, &controller, &controllerId_);
-	ASSERT_NE(controller, nullptr);
+    ASSERT_EQ(HDF_SUCCESS, model_->CreateEffectController(model_, &info, &controller, &controllerId_));
+    ASSERT_NE(controller, nullptr);
 	
-	EXPECT_EQ(HDF_ERR_INVALID_OBJECT, model_->DestroyEffectController(nullptr, &controllerId_));
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, model_->DestroyEffectController(nullptr, &controllerId_));
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->DestroyEffectController(model_, nullptr));
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectModel_0800
  * @tc.name: HdfAudioCreateDestroyController001
  * @tc.desc: Verify the EffectModelCreateEffectController and EffectModelDestroyEffectController function.
  * @tc.type: FUNC
@@ -213,6 +221,7 @@ HWTEST_F(EffectModelTest, HdfAudioCreateDestroyController001, TestSize.Level1)
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectModel_0900
  * @tc.name: HdfAudioGetEffectDescriptor001
  * @tc.desc: Verify the EffectModelGetEffectDescriptor function when the input parameter is invalid.
  * @tc.type: FUNC
@@ -221,13 +230,14 @@ HWTEST_F(EffectModelTest, HdfAudioCreateDestroyController001, TestSize.Level1)
 HWTEST_F(EffectModelTest, HdfAudioGetEffectDescriptor001, TestSize.Level1)
 {
     struct EffectControllerDescriptor desc;
-
+    
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, model_->GetEffectDescriptor(nullptr, effectId_, &desc));
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->GetEffectDescriptor(model_, nullptr, &desc));
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->GetEffectDescriptor(model_, effectId_, nullptr));
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectModel_1000
  * @tc.name: HdfAudioGetEffectDescriptor002
  * @tc.desc: Verify the EffectModelGetEffectDescriptor function.
  * @tc.type: FUNC

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -86,6 +86,7 @@ void EffectControlTest::TearDown()
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectControl_0100
  * @tc.name: HdfAudioEffectProcess001
  * @tc.desc: Verify the EffectControlEffectProcess function when the input parameter is invalid.
  * @tc.type: FUNC
@@ -102,6 +103,7 @@ HWTEST_F(EffectControlTest, HdfAudioEffectProcess001, TestSize.Level1)
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectControl_0200
  * @tc.name: HdfAudioEffectProcess002
  * @tc.desc: Verify the EffectControlEffectProcess function.
  * @tc.type: FUNC
@@ -117,6 +119,7 @@ HWTEST_F(EffectControlTest, HdfAudioEffectProcess002, TestSize.Level1)
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectControl_0300
  * @tc.name: HdfAudioEffectProcess003
  * @tc.desc: Verify the value of EffectControlEffectProcess function's datatag.
  * @tc.type: FUNC
@@ -140,6 +143,7 @@ HWTEST_F(EffectControlTest, HdfAudioEffectProcess003, TestSize.Level1)
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectControl_0400
  * @tc.name: HdfAudioSendCommand001
  * @tc.desc: Verify the EffectControlSendCommand function when the input parameter is invalid.
  * @tc.type: FUNC
@@ -173,6 +177,7 @@ HWTEST_F(EffectControlTest, HdfAudioSendCommand001, TestSize.Level1)
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectControl_0500
  * @tc.name: HdfAudioSendCommandInit001
  * @tc.desc: Verify the EffectControlSendCommand function when cmdId is AUDIO_EFFECT_COMMAND_INIT_CONTOLLER.
  * @tc.type: FUNC
@@ -190,6 +195,7 @@ HWTEST_F(EffectControlTest, HdfAudioSendCommandInit001, TestSize.Level1)
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectControl_0600
  * @tc.name: HdfAudioSendCommandSetConf001
  * @tc.desc: Verify the EffectControlSendCommand function when cmdId is AUDIO_EFFECT_COMMAND_SET_CONFIG.
  * @tc.type: FUNC
@@ -207,6 +213,7 @@ HWTEST_F(EffectControlTest, HdfAudioSendCommandSetConf001, TestSize.Level1)
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectControl_0700
  * @tc.name: HdfAudioSendCommandGetConf001
  * @tc.desc: Verify the EffectControlSendCommand function when cmdId is AUDIO_EFFECT_COMMAND_GET_CONFIG.
  * @tc.type: FUNC
@@ -224,6 +231,7 @@ HWTEST_F(EffectControlTest, HdfAudioSendCommandGetConf001, TestSize.Level1)
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectControl_0800
  * @tc.name: HdfAudioSendCommandRest001
  * @tc.desc: Verify the EffectControlSendCommand function when cmdId is AUDIO_EFFECT_COMMAND_RESET.
  * @tc.type: FUNC
@@ -241,6 +249,7 @@ HWTEST_F(EffectControlTest, HdfAudioSendCommandRest001, TestSize.Level1)
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectControl_0900
  * @tc.name: HdfAudioSendCommandEnable001
  * @tc.desc: Verify the EffectControlSendCommand function when cmdId is AUDIO_EFFECT_COMMAND_ENABLE.
  * @tc.type: FUNC
@@ -258,6 +267,7 @@ HWTEST_F(EffectControlTest, HdfAudioSendCommandEnable001, TestSize.Level1)
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectControl_1000
  * @tc.name: HdfAudioSendCommandDisable001
  * @tc.desc: Verify the EffectControlSendCommand function when cmdId is AUDIO_EFFECT_COMMAND_DISABLE.
  * @tc.type: FUNC
@@ -274,6 +284,7 @@ HWTEST_F(EffectControlTest, HdfAudioSendCommandDisable001, TestSize.Level1)
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectControl_1100
  * @tc.name: HdfAudioSendCommandSetParam001
  * @tc.desc: Verify the EffectControlSendCommand function when cmdId is AUDIO_EFFECT_COMMAND_SET_PARAM.
  * @tc.type: FUNC
@@ -291,6 +302,7 @@ HWTEST_F(EffectControlTest, HdfAudioSendCommandSetParam001, TestSize.Level1)
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectControl_1200
  * @tc.name: HdfAudioSendCommandGetParam001
  * @tc.desc: Verify the EffectControlSendCommand function when cmdId is AUDIO_EFFECT_COMMAND_GET_PARAM.
  * @tc.type: FUNC
@@ -308,6 +320,7 @@ HWTEST_F(EffectControlTest, HdfAudioSendCommandGetParam001, TestSize.Level1)
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectControl_1300
  * @tc.name: HdfAudioGetDescriptor001
  * @tc.desc: Verify the EffectGetOwnDescriptor function when the input parameter is invalid.
  * @tc.type: FUNC
@@ -322,6 +335,7 @@ HWTEST_F(EffectControlTest, HdfAudioGetDescriptor001, TestSize.Level1)
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectControl_1400
  * @tc.name: HdfAudioGetDescriptor002
  * @tc.desc: Verify the EffectGetOwnDescriptor function.
  * @tc.type: FUNC
@@ -341,6 +355,7 @@ HWTEST_F(EffectControlTest, HdfAudioGetDescriptor002, TestSize.Level1)
 
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectControl_1500
  * @tc.name: HdfAudioEffectReverse001
  * @tc.desc: Verify the EffectControlEffectReverse function when the input parameter is invalid.
  * @tc.type: FUNC
@@ -357,6 +372,7 @@ HWTEST_F(EffectControlTest, HdfAudioEffectReverse001, TestSize.Level1)
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectControl_1600
  * @tc.name: HdfAudioEffectReverse002
  * @tc.desc: Verify the EffectControlEffectReverse function.
  * @tc.type: FUNC

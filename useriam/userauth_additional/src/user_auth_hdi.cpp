@@ -47,7 +47,7 @@ void UserIamUserAuthTestAdditional::TearDownTestCase() {}
 
 void UserIamUserAuthTestAdditional::SetUp()
 {
-    const std::string deviceUdid = "12345678910";
+    const std::string deviceUdid = std::string(64, '0');
     EXPECT_EQ(g_service.Init(deviceUdid), 0);
 }
 
@@ -674,7 +674,7 @@ HWTEST_F(UserIamUserAuthTestAdditional, testBeginIdentification001, Function | M
     ScheduleInfo scheduleInfo = {};
     std::vector<uint8_t> publicKey;
     std::vector<uint64_t> templateIds;
-    const std::string deviceUdid = "12345678910";
+    const std::string deviceUdid = std::string(64, '0');
 
     for (i = 0; i < 3; i++) {
         info.authType = static_cast<AuthType>(authType[i]);
@@ -773,7 +773,7 @@ HWTEST_F(UserIamUserAuthTestAdditional, testUpdateIdentificationResult001, Funct
     ScheduleInfo scheduleInfo = {};
     AuthType authType = AuthType::FACE;
     IdentifyResultInfo identityResultInfo = {};
-    const std::string deviceUdid = "12345678910";
+    const std::string deviceUdid = std::string(64, '0');
 
     for (i = 0; i < 2; i++) {
         info.authType = AuthType::FACE;
@@ -828,8 +828,9 @@ HWTEST_F(UserIamUserAuthTestAdditional, testGetAvailableStatus001, Function | Me
     uint32_t authTrustLevel = 0;
     int32_t checkResult = 0;
     for (i = 0; i < 4; i++) {
-        EXPECT_NE(g_service.GetAvailableStatus(userId, static_cast<AuthType>(authType[i]), authTrustLevel,
-            checkResult), 0);
+        g_service.GetAvailableStatus(userId, static_cast<AuthType>(authType[i]), authTrustLevel,
+            checkResult);
+        EXPECT_NE(checkResult, 0);
     }
 }
 /**
@@ -865,7 +866,8 @@ HWTEST_F(UserIamUserAuthTestAdditional, testGetAvailableStatus005, Function | Me
     AuthType authType = AuthType::PIN;
     uint32_t authTrustLevel = 0;
     int32_t checkResult = 0;
-    EXPECT_NE(g_service.GetAvailableStatus(userId, authType, authTrustLevel, checkResult), 0);
+    g_service.GetAvailableStatus(userId, authType, authTrustLevel, checkResult);
+    EXPECT_NE(checkResult, 0);
     EXPECT_EQ(g_service.CancelEnrollment(userId), 0);
     EXPECT_EQ(g_service.DeleteExecutor(index), 0);
     EXPECT_EQ(g_service.CloseSession(userId), 0);
@@ -1025,7 +1027,7 @@ HWTEST_F(UserIamUserAuthTestAdditional, testGetAllUserInfo001, Function | Medium
 HWTEST_F(UserIamUserAuthTestAdditional, testInit001, Function | MediumTest | Level1)
 {
     cout << "start Init" << endl;
-    const std::string deviceUdid = "12345678910";
+    const std::string deviceUdid = std::string(64, '0');
     EXPECT_EQ(g_service.Init(deviceUdid), 0);
 }
 /**
@@ -1085,7 +1087,7 @@ HWTEST_F(UserIamUserAuthTestAdditional, testBeginIdentification016, Function | M
     std::vector<uint8_t> challenge;
     uint32_t executorSensorHint = 0;
     ScheduleInfo scheduleInfo = {};
-    const std::string deviceUdid = "12345678910";
+    const std::string deviceUdid = std::string(64, '0');
 
     for (i = 0; i < 4; i++) {
         info.authType = AuthType::FACE;

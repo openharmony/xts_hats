@@ -210,7 +210,7 @@ void FillTestScheduleInfo_Vector(Parcel &parcel, vector<ScheduleInfo> &vector)
 HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0101, Function | MediumTest | Level1)
 {
     cout << "start Init" << endl;
-    const std::string deviceUdid = "12345678910";
+    const std::string deviceUdid = std::string(64, '0');
     int32_t ret = g_service.Init(deviceUdid);
     EXPECT_EQ(ret, 0);
 }
@@ -577,7 +577,7 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0120, Function | Me
     int32_t checkResult = parcel.ReadInt32();
     int32_t ret = g_service.GetAvailableStatus(userId, authType, authTrustLevel, checkResult);
     cout << "ret is " << ret << endl;
-    ASSERT_EQ(ret != Expectedvalue, true);
+    ASSERT_EQ(checkResult != Expectedvalue, true);
 }
 
 /**

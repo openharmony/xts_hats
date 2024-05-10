@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -27,15 +27,22 @@
 #include <sys/mman.h>
 
 #include "sample_hdi.h"
+#include "hdi_support.h"
 
 #define HDF_LOG_TAG service_manager_test
 
+namespace OHOS {
 using namespace testing::ext;
 
 static constexpr const char *TEST_SERVICE_NAME = "sample_driver_service";
+static constexpr const char *TEST1_SERVICE_NAME = "sample1_driver_service";
 static constexpr const char *TEST_SERVICE_INTERFACE_DESC = "hdf.test.sampele_service";
+static constexpr const char *TEST_SERVICE_INTERFACE_DESC_INVALID = "____";
+static constexpr const char *TEST_SERVICE_INTERFACE_DESC_VOID = "";
+static constexpr const char *TEST_SERVICE_INTERFACE_DESC_NULL = nullptr;
 static constexpr int PAYLOAD_NUM = 1234;
 static constexpr int WAIT_LOAD_UNLOAD_TIME = 300;
+static constexpr int INVALID_DISPATCH_CODE = -1;
 class HdfServiceMangerHdiCTest : public testing::Test {
 public:
     static void SetUpTestCase()
@@ -57,12 +64,9 @@ public:
 };
 
 /**
-  * @tc.number: SUB_Driver_Manager_HdiCBasic_0100
-  * @tc.name: open input device test
-  * @tc.size: Medium
-  * @tc.level: level 1
+  * @tc.name: ServMgrTest001
   */
-HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiCBasic_0100, Function | MediumTest | Level1)
+HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0100, Function | MediumTest | Level1)
 {
     struct HDIServiceManager *servmgr = HDIServiceManagerGet();
     ASSERT_TRUE(servmgr != nullptr);
@@ -70,12 +74,9 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiCBasic_0100, Function |
 }
 
 /**
-  * @tc.number: SUB_Driver_Manager_HdiCBasic_0200
-  * @tc.name: open input device test
-  * @tc.size: Medium
-  * @tc.level: level 1
+  * @tc.name: ServMgrTest002
   */
-HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiCBasic_0200, Function | MediumTest | Level1)
+HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0200, Function | MediumTest | Level1)
 {
     struct HDIServiceManager *servmgr = HDIServiceManagerGet();
     ASSERT_TRUE(servmgr != nullptr);
@@ -119,12 +120,9 @@ static struct HdfRemoteDispatcher g_callbackDispatcher {
 };
 
 /**
-  * @tc.number: SUB_Driver_Manager_HdiCBasic_0300
-  * @tc.name: open input device test
-  * @tc.size: Medium
-  * @tc.level: level 1
+  * @tc.name: ServMgrTest003
   */
-HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiCBasic_0300, Function | MediumTest | Level1)
+HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0300, Function | MediumTest | Level1)
 {
     struct HDIServiceManager *servmgr = HDIServiceManagerGet();
     ASSERT_TRUE(servmgr != nullptr);
@@ -156,12 +154,9 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiCBasic_0300, Function |
 }
 
 /**
-  * @tc.number: SUB_Driver_Manager_HdiCBasic_0400
-  * @tc.name: open input device test
-  * @tc.size: Medium
-  * @tc.level: level 1
+  * @tc.name: ServMgrTest004
   */
-HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiCBasic_0400, Function | MediumTest | Level1)
+HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0400, Function | MediumTest | Level1)
 {
     struct HDIServiceManager *servmgr = HDIServiceManagerGet();
     ASSERT_TRUE(servmgr != nullptr);
@@ -195,12 +190,9 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiCBasic_0400, Function |
 }
 
 /**
-  * @tc.number: SUB_Driver_Manager_HdiCBasic_0500
-  * @tc.name: open input device test
-  * @tc.size: Medium
-  * @tc.level: level 1
+  * @tc.name: ServMgrTest005
   */
-HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiCBasic_0500, Function | MediumTest | Level1)
+HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0500, Function | MediumTest | Level1)
 {
     struct HDIServiceManager *servmgr = HDIServiceManagerGet();
     ASSERT_TRUE(servmgr != nullptr);
@@ -238,12 +230,10 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiCBasic_0500, Function |
 }
 
 /**
-  * @tc.number: SUB_Driver_Manager_HdiCBasic_0600
   * @tc.name: open input device test
-  * @tc.size: Medium
-  * @tc.level: level 1
+
   */
-HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiCBasic_0600, Function | MediumTest | Level1)
+HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0600, Function | MediumTest | Level1)
 {
     struct HDIServiceManager *servmgr = HDIServiceManagerGet();
     ASSERT_TRUE(servmgr != nullptr);
@@ -284,12 +274,9 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiCBasic_0600, Function |
 }
 
 /**
-  * @tc.number: SUB_Driver_Manager_HdiCBasic_0700
-  * @tc.name: open input device test
-  * @tc.size: Medium
-  * @tc.level: level 1
+  * @tc.name: ServMgrTest007
   */
-HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiCBasic_0700, Function | MediumTest | Level1)
+HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0700, Function | MediumTest | Level1)
 {
     struct HDIDeviceManager *devmgr = HDIDeviceManagerGet();
     ASSERT_TRUE(devmgr != nullptr);
@@ -381,7 +368,7 @@ struct ServiceStatusData {
 
 static void TestOnServiceStatusReceived(struct ServiceStatusListener *listener, struct ServiceStatus *servstat)
 {
-    struct ServiceStatusData *ssd = (struct ServiceStatusData *)listener->priv;
+    struct ServiceStatusData *ssd = static_cast<struct ServiceStatusData *>(listener->priv);
     if (ssd == nullptr) {
         return;
     }
@@ -396,10 +383,7 @@ static void TestOnServiceStatusReceived(struct ServiceStatusListener *listener, 
 }
 
 /**
-  * @tc.number: SUB_Driver_Manager_Pnp_0400
   * @tc.name: Test service start status listener
-  * @tc.size: Medium
-  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Pnp_0400, Function | MediumTest | Level1)
 {
@@ -417,7 +401,7 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Pnp_0400, Function | Mediu
     ssd.waitStatus = SERVIE_STATUS_START;
     struct ServiceStatusListener *listener = HdiServiceStatusListenerNewInstance();
     listener->callback = TestOnServiceStatusReceived;
-    listener->priv = (void *)&ssd;
+    listener->priv = static_cast<void *>(&ssd);
 
     int status = servmgr->RegisterServiceStatusListener(servmgr, listener, DEVICE_CLASS_DEFAULT);
     ASSERT_EQ(status, HDF_SUCCESS);
@@ -462,10 +446,7 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Pnp_0400, Function | Mediu
 }
 
 /**
-  * @tc.number: SUB_Driver_Manager_Pnp_0600
   * @tc.name: Test service status listener update service info
-  * @tc.size: Medium
-  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Pnp_0600, Function | MediumTest | Level1)
 {
@@ -490,7 +471,7 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Pnp_0600, Function | Mediu
     struct ServiceStatusData ssd;
     struct ServiceStatusListener *listener = HdiServiceStatusListenerNewInstance();
     listener->callback = TestOnServiceStatusReceived;
-    listener->priv = (void *)&ssd;
+    listener->priv = static_cast<void *>(&ssd);
 
     int status = servmgr->RegisterServiceStatusListener(servmgr, listener, DEVICE_CLASS_DEFAULT);
     ASSERT_EQ(status, HDF_SUCCESS);
@@ -533,10 +514,7 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Pnp_0600, Function | Mediu
 }
 
 /**
-  * @tc.number: SUB_Driver_Manager_Pnp_0300
   * @tc.name: Test service status listener unregister
-  * @tc.size: Medium
-  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Pnp_0300, Function | MediumTest | Level1)
 {
@@ -554,7 +532,7 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Pnp_0300, Function | Mediu
     ssd.waitStatus = SERVIE_STATUS_START;
     struct ServiceStatusListener *listener = HdiServiceStatusListenerNewInstance();
     listener->callback = TestOnServiceStatusReceived;
-    listener->priv = (void *)&ssd;
+    listener->priv = static_cast<void *>(&ssd);
 
     int status = servmgr->RegisterServiceStatusListener(servmgr, listener, DEVICE_CLASS_DEFAULT);
     ASSERT_EQ(status, HDF_SUCCESS);
@@ -578,6 +556,7 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Pnp_0300, Function | Mediu
 
     status = servmgr->UnregisterServiceStatusListener(servmgr, listener);
     ASSERT_EQ(status, HDF_SUCCESS);
+    HdiServiceStatusListenerFree(nullptr);
     HdiServiceStatusListenerFree(listener);
 
     ret = devmgr->UnloadDevice(devmgr, TEST_SERVICE_NAME);
@@ -589,10 +568,7 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Pnp_0300, Function | Mediu
 }
 
 /**
-  * @tc.number: SUB_Driver_Manager_Memory_0400
   * @tc.name: Test shared mem interfac
-  * @tc.size: Medium
-  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Memory_0400, Function | MediumTest | Level1)
 {
@@ -603,7 +579,7 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Memory_0400, Function | Me
     void *ptr = mmap(nullptr, mapSize, PROT_READ | PROT_WRITE, MAP_SHARED, memFd, 0);
     ASSERT_NE(ptr, MAP_FAILED);
 
-    uint8_t *data = reinterpret_cast<uint8_t *>(ptr);
+    uint8_t *data = static_cast<uint8_t *>(ptr);
     for (int i = 0; i < mapSize; i++) {
         data[i] = i;
     }
@@ -612,8 +588,263 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Memory_0400, Function | Me
         ASSERT_EQ(data[i], i);
     }
 
+    int memSize = SharedMemGetSize(memFd);
+    ASSERT_EQ(memSize, mapSize);
+
     auto ret = munmap(ptr, mapSize);
     ASSERT_EQ(ret, 0);
 
     close(memFd);
 }
+
+/**
+  * @tc.name: Test get service set by interfacedesc
+  */
+HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0800, Function | MediumTest | Level1)
+{
+    struct HDIDeviceManager *devmgr = HDIDeviceManagerGet();
+    ASSERT_TRUE(devmgr != nullptr);
+    devmgr->UnloadDevice(devmgr, TEST_SERVICE_NAME);
+    OsalMSleep(WAIT_LOAD_UNLOAD_TIME);
+    struct HDIServiceManager *servmgr = HDIServiceManagerGet();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    struct HdfRemoteService *sampleService = servmgr->GetService(servmgr, TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService == nullptr);
+
+    int ret = devmgr->LoadDevice(devmgr, TEST_SERVICE_NAME);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    OsalMSleep(WAIT_LOAD_UNLOAD_TIME);
+    sampleService = servmgr->GetService(servmgr, TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService != nullptr);
+
+    struct HdiServiceSet *serviceSet = servmgr->ListServiceByInterfaceDesc(servmgr, TEST_SERVICE_INTERFACE_DESC);
+    HDIServiceManagerRelease(servmgr);
+    ASSERT_TRUE(serviceSet != nullptr);
+    constexpr int  sampleServiceCount = 1;
+    ASSERT_TRUE(serviceSet->count == sampleServiceCount);
+    ASSERT_TRUE(strcmp(serviceSet->serviceNames[0], TEST_SERVICE_NAME) == 0);
+    ret = HdiServiceSetRelease(serviceSet);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+}
+
+/**
+  * @tc.name: ListServiceByInterfaceDescTest002
+  */
+HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0900, Function | MediumTest | Level1)
+{
+    struct HDIServiceManager *servmgr = HDIServiceManagerGet();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    struct HdiServiceSet *serviceSet =
+        servmgr->ListServiceByInterfaceDesc(servmgr, TEST_SERVICE_INTERFACE_DESC_INVALID);
+    HDIServiceManagerRelease(servmgr);
+    ASSERT_TRUE(serviceSet == nullptr);
+}
+
+/**
+  * @tc.name: ListServiceByInterfaceDescTest003
+  */
+HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1000, Function | MediumTest | Level1)
+{
+    struct HDIServiceManager *servmgr = HDIServiceManagerGet();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    struct HdiServiceSet *serviceSet = servmgr->ListServiceByInterfaceDesc(servmgr, TEST_SERVICE_INTERFACE_DESC_VOID);
+    HDIServiceManagerRelease(servmgr);
+    ASSERT_TRUE(serviceSet == nullptr);
+}
+
+/**
+  * @tc.name: ListServiceByInterfaceDescTest004
+  */
+HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1100, Function | MediumTest | Level1)
+{
+    struct HDIServiceManager *servmgr = HDIServiceManagerGet();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    struct HdiServiceSet *serviceSet = servmgr->ListServiceByInterfaceDesc(servmgr, TEST_SERVICE_INTERFACE_DESC_NULL);
+    HDIServiceManagerRelease(servmgr);
+    ASSERT_TRUE(serviceSet == nullptr);
+}
+
+/**
+  * @tc.name: ListServiceByInterfaceDescTest005
+  */
+HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1200, Function | MediumTest | Level1)
+{
+    struct HDIDeviceManager *devmgr = HDIDeviceManagerGet();
+    ASSERT_TRUE(devmgr != nullptr);
+    devmgr->UnloadDevice(devmgr, TEST_SERVICE_NAME);
+    OsalMSleep(WAIT_LOAD_UNLOAD_TIME);
+    devmgr->UnloadDevice(devmgr, TEST1_SERVICE_NAME);
+    OsalMSleep(WAIT_LOAD_UNLOAD_TIME);
+    struct HDIServiceManager *servmgr = HDIServiceManagerGet();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    struct HdfRemoteService *sampleService = servmgr->GetService(servmgr, TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService == nullptr);
+    struct HdfRemoteService *sample1Service = servmgr->GetService(servmgr, TEST1_SERVICE_NAME);
+    ASSERT_TRUE(sample1Service == nullptr);
+
+    int ret = devmgr->LoadDevice(devmgr, TEST_SERVICE_NAME);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    OsalMSleep(WAIT_LOAD_UNLOAD_TIME);
+    sampleService = servmgr->GetService(servmgr, TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService != nullptr);
+
+    ret = devmgr->LoadDevice(devmgr, TEST1_SERVICE_NAME);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    OsalMSleep(WAIT_LOAD_UNLOAD_TIME);
+    sample1Service = servmgr->GetService(servmgr, TEST1_SERVICE_NAME);
+    ASSERT_TRUE(sample1Service != nullptr);
+
+    struct HdiServiceSet *serviceSet = servmgr->ListServiceByInterfaceDesc(servmgr, TEST_SERVICE_INTERFACE_DESC);
+    HDIServiceManagerRelease(servmgr);
+    ASSERT_TRUE(serviceSet != nullptr);
+    constexpr int sampleServiceCount = 2;
+    ASSERT_TRUE(serviceSet->count == sampleServiceCount);
+    ASSERT_TRUE(strcmp(serviceSet->serviceNames[0], TEST_SERVICE_NAME) == 0);
+    ASSERT_TRUE(strcmp(serviceSet->serviceNames[1], TEST1_SERVICE_NAME) == 0);
+    ret = HdiServiceSetRelease(serviceSet);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+    ret = devmgr->UnloadDevice(devmgr, TEST1_SERVICE_NAME);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+    HDIDeviceManagerRelease(devmgr);
+}
+
+/**
+  * @tc.name: DevMgrQueryUsableDeviceTest
+  */
+HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1300, Function | MediumTest | Level1)
+{
+    struct HDIDeviceManager *devmgr = HDIDeviceManagerGet();
+    ASSERT_TRUE(devmgr != nullptr);
+
+    struct DeviceInfoList list;
+    int32_t ret = devmgr->QueryUsableDeviceInfo(devmgr, &list);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+
+    devmgr->FreeQueryDeviceList(devmgr, &list);
+    HDIDeviceManagerRelease(devmgr);
+}
+
+/**
+  * @tc.name: DevMgrQueryUnusableDeviceTest
+  */
+HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1400, Function | MediumTest | Level1)
+{
+    struct HDIDeviceManager *devmgr = HDIDeviceManagerGet();
+    ASSERT_TRUE(devmgr != nullptr);
+
+    struct DeviceInfoList list;
+    int32_t ret = devmgr->QueryUnusableDeviceInfo(devmgr, &list);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+
+    devmgr->FreeQueryDeviceList(devmgr, &list);
+    HDIDeviceManagerRelease(devmgr);
+}
+
+/**
+  * @tc.name: ServMgrTest018
+  */
+HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1500, Function | MediumTest | Level1)
+{
+    struct HDIServiceManager *servmgr = HDIServiceManagerGet();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    struct HdfRemoteService *sampleService = servmgr->GetService(servmgr, NULL);
+    ASSERT_TRUE(sampleService == nullptr);
+
+    int status = servmgr->RegisterServiceStatusListener(servmgr, NULL, DEVICE_CLASS_DEFAULT);
+    ASSERT_EQ(status, HDF_ERR_INVALID_PARAM);
+
+    status = servmgr->UnregisterServiceStatusListener(servmgr, NULL);
+    ASSERT_EQ(status, HDF_ERR_INVALID_PARAM);
+
+    status = HdiServiceSetRelease(NULL);
+    ASSERT_TRUE(status == HDF_SUCCESS);
+
+    HDIServiceManagerRelease(servmgr);
+    HDIServiceManagerRelease(NULL);
+}
+
+/**
+  * @tc.name: RemoteServiceTest001
+  */
+HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1600, Function | MediumTest | Level1) {
+    struct HDIServiceManager *servmgr = HDIServiceManagerGet();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    struct HdfRemoteService *sampleService = servmgr->GetService(servmgr, TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService != nullptr);
+    struct HdfDeathRecipient* recipient = nullptr;
+    HdfRemoteServiceAddDeathRecipient(sampleService, recipient);
+    HdfRemoteServiceRemoveDeathRecipient(sampleService, recipient);
+}
+
+/**
+  * @tc.name: RemoteServiceTest002
+  */
+HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1700, Function | MediumTest | Level1) {
+    struct HDIServiceManager *servmgr = HDIServiceManagerGet();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    struct HdfRemoteService *sampleService = servmgr->GetService(servmgr, TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService != nullptr);
+    int deviceServiceManagerSAID = 5100;
+    int status = HdfRemoteServiceRegister(deviceServiceManagerSAID, sampleService);
+    ASSERT_TRUE(status == HDF_SUCCESS);
+}
+
+/**
+  * @tc.name: RemoteServiceTest003
+  */
+HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1800, Function | MediumTest | Level1) {
+    struct HDIServiceManager *servmgr = HDIServiceManagerGet();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    struct HdfRemoteService *sampleService = servmgr->GetService(servmgr, TEST_SERVICE_NAME);
+    ASSERT_TRUE(sampleService != nullptr);
+
+    struct HdfSBuf *dataSbuf = HdfSbufTypedObtain(SBUF_IPC);
+    struct HdfSBuf *replySbuf = HdfSbufTypedObtain(SBUF_IPC);
+
+    int status = HdfRemoteServiceDefaultDispatch(sampleService, INVALID_DISPATCH_CODE, dataSbuf, replySbuf);
+    ASSERT_TRUE(status != HDF_SUCCESS);
+}
+
+/**
+  * @tc.name: DevMgrTest
+  */
+HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1900, Function | MediumTest | Level1)
+{
+    struct HDIDeviceManager *devmgr = HDIDeviceManagerGet();
+    ASSERT_TRUE(devmgr != nullptr);
+
+    int ret = devmgr->QueryUnusableDeviceInfo(devmgr, NULL);
+    ASSERT_TRUE(ret == HDF_ERR_INVALID_PARAM);
+
+    ret = devmgr->QueryUsableDeviceInfo(devmgr, NULL);
+    ASSERT_TRUE(ret == HDF_ERR_INVALID_PARAM);
+
+    ret = devmgr->LoadDevice(devmgr, NULL);
+    ASSERT_EQ(ret, HDF_ERR_INVALID_PARAM);
+
+    ret = devmgr->UnloadDevice(devmgr, NULL);
+    ASSERT_EQ(ret, HDF_ERR_INVALID_PARAM);
+
+    devmgr->FreeQueryDeviceList(devmgr, NULL);
+    HDIDeviceManagerRelease(devmgr);
+    HDIDeviceManagerRelease(NULL);
+}
+
+/**
+  * @tc.name: HdiSupportTest
+  */
+HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_2000, Function | MediumTest | Level1)
+{
+    ASSERT_EQ(LoadHdiImpl(NULL, NULL), nullptr);
+    UnloadHdiImpl(NULL, NULL, NULL);
+}
+} // namespace OHOS

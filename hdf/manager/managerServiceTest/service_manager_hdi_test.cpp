@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,23 +13,25 @@
  * limitations under the License.
  */
 
+#include <base/hdi_smq.h>
 #include <functional>
 #include <gtest/gtest.h>
 #include <hdf_io_service_if.h>
 #include <hdf_log.h>
-#include <base/hdi_smq.h>
+#include <hdf_service_status_inner.h>
 #include <idevmgr_hdi.h>
 #include <iostream>
 #include <ipc_object_stub.h>
+#include <iservice_registry.h>
 #include <iservmgr_hdi.h>
+#include <iservstat_listener_hdi.h>
 #include <osal_time.h>
 #include <string>
-#include <iservstat_listener_hdi.h>
 
 #include "sample_hdi.h"
 
 #define HDF_LOG_TAG service_manager_test_cpp
-
+namespace OHOS {
 using namespace testing::ext;
 using OHOS::IRemoteObject;
 using OHOS::sptr;
@@ -54,6 +56,9 @@ static constexpr int PAYLOAD_NUM = 1234;
 static constexpr int SMQ_TEST_QUEUE_SIZE = 10;
 static constexpr int SMQ_TEST_WAIT_TIME = 100;
 static constexpr int WAIT_LOAD_UNLOAD_TIME = 300;
+static constexpr int DEVICE_SERVICE_MANAGER_SA_ID = 5100;
+static constexpr int INVALID_CODE = 100;
+static constexpr int ERROR_CODE_WITH_INVALID_CODE = 305;
 
 class HdfServiceMangerHdiTest : public testing::Test {
 public:
@@ -99,24 +104,18 @@ public:
 int32_t IPCObjectStubTest::payload = 0;
 
 /**
-  * @tc.number: SUB_Driver_Manager_HdiBasic_0100
-  * @tc.name: open input device test
-  * @tc.size: Medium
-  * @tc.level: level 1
+  * @tc.name: ServMgrTest001
   */
-HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiBasic_0100, Function | MediumTest | Level1)
+HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0100, Function | MediumTest | Level1)
 {
     auto servmgr = IServiceManager::Get();
     ASSERT_TRUE(servmgr != nullptr);
 }
 
 /**
-  * @tc.number: SUB_Driver_Manager_HdiBasic_0200
-  * @tc.name: open input device test
-  * @tc.size: Medium
-  * @tc.level: level 1
+  * @tc.name: ServMgrTest002
   */
-HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiBasic_0200, Function | MediumTest | Level1)
+HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0200, Function | MediumTest | Level1)
 {
     auto servmgr = IServiceManager::Get();
     ASSERT_TRUE(servmgr != nullptr);
@@ -137,12 +136,9 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiBasic_0200, Function | M
 }
 
 /**
-  * @tc.number: SUB_Driver_Manager_HdiBasic_0300
-  * @tc.name: open input device test
-  * @tc.size: Medium
-  * @tc.level: level 1
+  * @tc.name: ServMgrTest003
   */
-HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiBasic_0300, Function | MediumTest | Level1)
+HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0300, Function | MediumTest | Level1)
 {
     auto servmgr = IServiceManager::Get();
     ASSERT_TRUE(servmgr != nullptr);
@@ -166,12 +162,9 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiBasic_0300, Function | M
 }
 
 /**
-  * @tc.number: SUB_Driver_Manager_HdiBasic_0400
-  * @tc.name: open input device test
-  * @tc.size: Medium
-  * @tc.level: level 1
+  * @tc.name: ServMgrTest004
   */
-HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiBasic_0400, Function | MediumTest | Level1)
+HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0400, Function | MediumTest | Level1)
 {
     auto servmgr = IServiceManager::Get();
     ASSERT_TRUE(servmgr != nullptr);
@@ -195,12 +188,9 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiBasic_0400, Function | M
 }
 
 /**
-  * @tc.number: SUB_Driver_Manager_HdiBasic_0500
-  * @tc.name: open input device test
-  * @tc.size: Medium
-  * @tc.level: level 1
+  * @tc.name: ServMgrTest006
   */
-HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiBasic_0500, Function | MediumTest | Level1)
+HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0500, Function | MediumTest | Level1)
 {
     auto servmgr = IServiceManager::Get();
     ASSERT_TRUE(servmgr != nullptr);
@@ -234,12 +224,10 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiBasic_0500, Function | M
 }
 
 /**
-  * @tc.number: SUB_Driver_Manager_HdiBasic_0600
+  * @tc.number: ServMgrTest007
   * @tc.name: Test device manager Load/UnLoad device and driver dynamic register device
-  * @tc.size: Medium
-  * @tc.level: level 1
   */
-HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiBasic_0600, Function | MediumTest | Level1)
+HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0600, Function | MediumTest | Level1)
 {
     auto devmgr = IDeviceManager::Get();
     ASSERT_TRUE(devmgr != nullptr);
@@ -450,10 +438,7 @@ void HdfServiceMangerHdiTest::TestSampleService(sptr<IRemoteObject>& sampleServi
 }
 
 /**
-  * @tc.number: SUB_Driver_Manager_Pnp_0500
   * @tc.name: Test service loadDevice
-  * @tc.size: Medium
-  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Pnp_0500, Function | MediumTest | Level1)
 {
@@ -476,10 +461,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Pnp_0500, Function | Medium
     TestSampleService(sampleService, devmgr, servmgr);
 }
 /**
-  * @tc.number: SUB_Driver_Manager_Pnp_0200
   * @tc.name: Test service status listener unregister
-  * @tc.size: Medium
-  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Pnp_0200, Function | MediumTest | Level1)
 {
@@ -546,10 +528,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Pnp_0200, Function | Medium
 }
 
 /**
-  * @tc.number: SUB_Driver_Manager_Memory_0100
   * @tc.name: smq test normal read/write
-  * @tc.size: Medium
-  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Memory_0100, Function | MediumTest | Level1)
 {
@@ -577,7 +556,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Memory_0100, Function | Med
 
     constexpr int SEND_TIMES = 20;
     for (size_t i = 0; i < SEND_TIMES; i++) {
-        SampleSmqElement t = { 0 };
+        SampleSmqElement t = {0};
         t.data32 = i;
         t.data64 = i + 1;
 
@@ -588,10 +567,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Memory_0100, Function | Med
 }
 
 /**
-  * @tc.number: SUB_Driver_Manager_Memory_0200
   * @tc.name: smq test with overflow wait
-  * @tc.size: Medium
-  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Memory_0200, Function | MediumTest | Level1)
 {
@@ -631,10 +607,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Memory_0200, Function | Med
 }
 
 /**
-  * @tc.number: SUB_Driver_Manager_Memory_0300
   * @tc.name: smq test UNSYNC_SMQ
-  * @tc.size: Medium
-  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Memory_0300, Function | MediumTest | Level1)
 {
@@ -676,12 +649,10 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Memory_0300, Function | Med
 }
 
 /**
-  * @tc.number: SUB_Driver_Manager_HdiBasic_0700
   * @tc.name: Test service status listener get serviec callback on register
-  * @tc.size: Medium
-  * @tc.level: level 1
+
   */
-HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiBasic_0700, Function | MediumTest | Level1)
+HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0700, Function | MediumTest | Level1)
 {
     auto servmgr = IServiceManager::Get();
     ASSERT_TRUE(servmgr != nullptr);
@@ -719,10 +690,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiBasic_0700, Function | M
 }
 
 /**
-  * @tc.number: SUB_Driver_Manager_InterfaceQuery_0100
   * @tc.name: Test get service set by interfacedesc
-  * @tc.size: Medium
-  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0100, Function | MediumTest | Level1)
 {
@@ -735,12 +703,8 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0100, Functi
     ASSERT_TRUE(serviceNames.front().compare(TEST_SERVICE_NAME) == 0);
 }
 
-
 /**
-  * @tc.number: SUB_Driver_Manager_InterfaceQuery_0200
   * @tc.name: Test get service set by interfacedesc
-  * @tc.size: Medium
-  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0200, Function | MediumTest | Level1)
 {
@@ -753,10 +717,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0200, Functi
 }
 
 /**
-  * @tc.number: SUB_Driver_Manager_InterfaceQuery_0300
   * @tc.name: Test get service set by interfacedesc
-  * @tc.size: Medium
-  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0300, Function | MediumTest | Level1)
 {
@@ -769,10 +730,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0300, Functi
 }
 
 /**
-  * @tc.number: SUB_Driver_Manager_InterfaceQuery_0400
   * @tc.name: Test get service set by interfacedesc
-  * @tc.size: Medium
-  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0400, Function | MediumTest | Level1)
 {
@@ -785,10 +743,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0400, Functi
 }
 
  /**
-  * @tc.number: SUB_Driver_Manager_InterfaceQuery_0500
   * @tc.name: Test get service set by interfacedesc
-  * @tc.size: Medium
-  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0500, Function | MediumTest | Level1)
 {
@@ -814,3 +769,333 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0500, Functi
     ret = devmgr->UnloadDevice(TEST1_SERVICE_NAME);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
+
+ /**
+  * @tc.name: ListAllServiceTest
+  */
+HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0800, Function | MediumTest | Level1)
+{
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    std::vector<HdiServiceInfo> serviceInfos;
+    int ret = servmgr->ListAllService(serviceInfos);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+    ASSERT_TRUE(serviceInfos.size() != 0);
+}
+
+ /**
+  * @tc.name: ListAllDeviceTest
+  */
+HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0900, Function | MediumTest | Level1)
+{
+    auto devmgr = IDeviceManager::Get();
+    ASSERT_TRUE(devmgr != nullptr);
+
+    std::vector<HdiDevHostInfo> deviceInfos;
+    int ret = devmgr->ListAllDevice(deviceInfos);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+    ASSERT_TRUE(deviceInfos.size() != 0);
+}
+
+ /**
+  * @tc.name: EndSampleHostTest
+  */
+HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1000, Function | MediumTest | Level1)
+{
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    auto devmgr = IDeviceManager::Get();
+    ASSERT_TRUE(devmgr != nullptr);
+
+    int ret = devmgr->LoadDevice(TEST1_SERVICE_NAME);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+    auto sample1Service = servmgr->GetService(TEST1_SERVICE_NAME);
+    constexpr int waitCount = 1000;
+    constexpr int msleepTime = 10;
+    constexpr int waitHostStart = 100;
+    uint32_t cnt = 0;
+    while (sample1Service == nullptr && cnt < waitCount) {
+        OsalMSleep(msleepTime);
+        sample1Service = servmgr->GetService(TEST1_SERVICE_NAME);
+        cnt++;
+    }
+    ASSERT_TRUE(sample1Service != nullptr);
+    ret = devmgr->LoadDevice(TEST_SERVICE_NAME);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+    cnt = 0;
+    auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+    while (sampleService == nullptr && cnt < waitCount) {
+        OsalMSleep(msleepTime);
+        sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+        cnt++;
+    }
+    ASSERT_TRUE(sampleService != nullptr);
+
+    ret = devmgr->UnloadDevice(TEST1_SERVICE_NAME);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+    sample1Service = servmgr->GetService(TEST1_SERVICE_NAME);
+    OsalMSleep(msleepTime);
+
+    OHOS::MessageParcel data;
+    OHOS::MessageParcel reply;
+    OHOS::MessageOption option;
+    ret = data.WriteInterfaceToken(TEST_SERVICE_INTERFACE_DESC);
+    ASSERT_EQ(ret, true);
+
+    ret = sampleService->SendRequest(SAMPLE_END_HOST, data, reply, option);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+    OsalMSleep(waitHostStart);
+
+    ret = devmgr->UnloadDevice(TEST1_SERVICE_NAME);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+    OsalMSleep(msleepTime);
+    ret = devmgr->UnloadDevice(TEST_SERVICE_NAME);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+}
+
+ /**
+  * @tc.name: InjectPmTest
+  */
+HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1100, Function | MediumTest | Level1)
+{
+    auto servmgr = IServiceManager::Get();
+    ASSERT_TRUE(servmgr != nullptr);
+
+    auto devmgr = IDeviceManager::Get();
+    ASSERT_TRUE(devmgr != nullptr);
+
+    int ret = devmgr->LoadDevice(TEST1_SERVICE_NAME);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+    auto sample1Service = servmgr->GetService(TEST1_SERVICE_NAME);
+    constexpr int waitCount = 1000;
+    constexpr int waitHostStart = 100;
+    constexpr int msleepTime = 10;
+    uint32_t cnt = 0;
+    while (sample1Service == nullptr && cnt < waitCount) {
+        OsalMSleep(msleepTime);
+        sample1Service = servmgr->GetService(TEST1_SERVICE_NAME);
+        cnt++;
+    }
+    ASSERT_TRUE(sample1Service != nullptr);
+    ret = devmgr->LoadDevice(TEST_SERVICE_NAME);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+    auto sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+    cnt = 0;
+    while (sampleService == nullptr && cnt < waitCount) {
+        OsalMSleep(msleepTime);
+        sampleService = servmgr->GetService(TEST_SERVICE_NAME);
+        cnt++;
+    }
+    ASSERT_TRUE(sampleService != nullptr);
+
+    OHOS::MessageParcel data;
+    OHOS::MessageParcel reply;
+    OHOS::MessageOption option;
+    ret = data.WriteInterfaceToken(TEST_SERVICE_INTERFACE_DESC);
+    ASSERT_EQ(ret, true);
+
+    ret = sampleService->SendRequest(SAMPLE_INJECT_PM, data, reply, option);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+    OsalMSleep(msleepTime);
+    ret = sampleService->SendRequest(SAMPLE_END_HOST, data, reply, option);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+    OsalMSleep(waitHostStart);
+
+    ret = devmgr->UnloadDevice(TEST1_SERVICE_NAME);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+    OsalMSleep(msleepTime);
+    ret = devmgr->UnloadDevice(TEST_SERVICE_NAME);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+}
+
+ /**
+  * @tc.name: ListenerTest001
+  */
+HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1200, Function | MediumTest | Level1)
+{
+    ::OHOS::sptr<ServStatListener> listener
+        = new ServStatListener(
+            ServStatListener::StatusCallback([&](const ServiceStatus &status) {
+                HDF_LOGI("service status callback, service is %{public}s", status.serviceName.data());
+            }));
+    
+    MessageParcel data;
+    MessageParcel reply;
+    MessageOption option;
+
+    // invalid code
+    int32_t ret = listener->OnRemoteRequest(SERVIE_STATUS_LISTENER_MAX, data, reply, option);
+    ASSERT_NE(ret, HDF_SUCCESS);
+
+    // empty data
+    ret = listener->OnRemoteRequest(SERVIE_STATUS_LISTENER_NOTIFY, data, reply, option);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+ /**
+  * @tc.name: ListenerTest002
+  */
+HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1300, Function | MediumTest | Level1)
+{
+    ::OHOS::sptr<ServStatListener> listener
+        = new ServStatListener(
+            ServStatListener::StatusCallback([&](const ServiceStatus &status) {
+                HDF_LOGI("service status callback, service is %{public}s", status.serviceName.data());
+            }));
+    
+    MessageParcel data;
+    MessageParcel reply;
+    MessageOption option;
+
+    bool ret = data.WriteInterfaceToken(IServStatListener::GetDescriptor());
+    ASSERT_TRUE(ret);
+    int32_t reqRet = listener->OnRemoteRequest(SERVIE_STATUS_LISTENER_NOTIFY, data, reply, option);
+    ASSERT_NE(reqRet, HDF_SUCCESS);
+}
+
+ /**
+  * @tc.name: ListenerTest003
+  */
+HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1400, Function | MediumTest | Level1)
+{
+    ::OHOS::sptr<ServStatListener> listener
+        = new ServStatListener(
+            ServStatListener::StatusCallback([&](const ServiceStatus &status) {
+                HDF_LOGI("service status callback, service is %{public}s", status.serviceName.data());
+            }));
+    
+    MessageParcel data;
+    MessageParcel reply;
+    MessageOption option;
+
+    bool ret = data.WriteInterfaceToken(IServStatListener::GetDescriptor());
+    ASSERT_TRUE(ret);
+    ret = data.WriteCString("");
+    ASSERT_TRUE(ret);
+
+    int32_t reqRet = listener->OnRemoteRequest(SERVIE_STATUS_LISTENER_NOTIFY, data, reply, option);
+    ASSERT_NE(reqRet, HDF_SUCCESS);
+}
+
+ /**
+  * @tc.name: ListenerTest004
+  */
+HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1500, Function | MediumTest | Level1)
+{
+    ::OHOS::sptr<ServStatListener> listener
+        = new ServStatListener(
+            ServStatListener::StatusCallback([&](const ServiceStatus &status) {
+                HDF_LOGI("service status callback, service is %{public}s", status.serviceName.data());
+            }));
+    
+    MessageParcel data;
+    MessageParcel reply;
+    MessageOption option;
+
+    bool ret = data.WriteInterfaceToken(IServStatListener::GetDescriptor());
+    ASSERT_TRUE(ret);
+    ret = data.WriteCString("test_service");
+    ASSERT_TRUE(ret);
+
+    int32_t reqRet = listener->OnRemoteRequest(SERVIE_STATUS_LISTENER_NOTIFY, data, reply, option);
+    ASSERT_NE(reqRet, HDF_SUCCESS);
+}
+
+ /**
+  * @tc.name: ListenerTest005
+  */
+HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1600, Function | MediumTest | Level1)
+{
+    ::OHOS::sptr<ServStatListener> listener
+        = new ServStatListener(
+            ServStatListener::StatusCallback([&](const ServiceStatus &status) {
+                HDF_LOGI("service status callback, service is %{public}s", status.serviceName.data());
+            }));
+    
+    MessageParcel data;
+    MessageParcel reply;
+    MessageOption option;
+
+    bool ret = data.WriteInterfaceToken(IServStatListener::GetDescriptor());
+    ASSERT_TRUE(ret);
+    ret = data.WriteCString("test_service");
+    ASSERT_TRUE(ret);
+    // write deviceClass
+    ret = data.WriteUint16(DeviceClass::DEVICE_CLASS_DEFAULT);
+    ASSERT_TRUE(ret);
+
+    int32_t reqRet = listener->OnRemoteRequest(SERVIE_STATUS_LISTENER_NOTIFY, data, reply, option);
+    ASSERT_NE(reqRet, HDF_SUCCESS);
+}
+
+ /**
+  * @tc.name: ListenerTest006
+  */
+HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1700, Function | MediumTest | Level1)
+{
+    ::OHOS::sptr<ServStatListener> listener
+        = new ServStatListener(
+            ServStatListener::StatusCallback([&](const ServiceStatus &status) {
+                HDF_LOGI("service status callback, service is %{public}s", status.serviceName.data());
+            }));
+    
+    MessageParcel data;
+    MessageParcel reply;
+    MessageOption option;
+
+    bool ret = data.WriteInterfaceToken(IServStatListener::GetDescriptor());
+    ASSERT_TRUE(ret);
+    ret = data.WriteCString("test_service");
+    ASSERT_TRUE(ret);
+    // write deviceClass
+    ret = data.WriteUint16(DeviceClass::DEVICE_CLASS_DEFAULT);
+    ASSERT_TRUE(ret);
+    // write status
+    ret = data.WriteUint16(ServiceStatusType::SERVIE_STATUS_START);
+    ASSERT_TRUE(ret);
+
+    int32_t reqRet = listener->OnRemoteRequest(SERVIE_STATUS_LISTENER_NOTIFY, data, reply, option);
+    ASSERT_EQ(reqRet, HDF_SUCCESS);
+}
+
+ /**
+  * @tc.name: InvalidCodeTest001
+  */
+HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1800, Function | MediumTest | Level1)
+{
+    auto servmgr = OHOS::HDI::ServiceManager::V1_0::IServiceManager::Get();
+    ASSERT_NE(servmgr, nullptr);
+
+    sptr<IRemoteObject> remote = servmgr->GetService("hdf_device_manager");
+    ASSERT_NE(remote, nullptr);
+
+    MessageParcel data;
+    MessageParcel reply;
+    MessageOption option;
+
+    ASSERT_TRUE(data.WriteInterfaceToken(IDeviceManager::GetDescriptor()));
+    int ret = remote->SendRequest(INVALID_CODE, data, reply, option);
+    EXPECT_EQ(ret, ERROR_CODE_WITH_INVALID_CODE);
+}
+
+ /**
+  * @tc.name: InvalidCodeTest002
+  */
+HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1900, Function | MediumTest | Level1)
+{
+    auto saManager = SystemAbilityManagerClient::GetInstance().GetSystemAbilityManager();
+    ASSERT_NE(saManager, nullptr);
+    sptr<IRemoteObject> remote = saManager->GetSystemAbility(DEVICE_SERVICE_MANAGER_SA_ID);
+    ASSERT_NE(remote, nullptr);
+
+    MessageParcel data;
+    MessageParcel reply;
+    MessageOption option;
+
+    ASSERT_TRUE(data.WriteInterfaceToken(OHOS::HDI::ServiceManager::V1_0::IServiceManager::GetDescriptor()));
+    int ret = remote->SendRequest(INVALID_CODE, data, reply, option);
+    ASSERT_EQ(ret, ERROR_CODE_WITH_INVALID_CODE);
+}
+} // namespace OHOS

@@ -42,5 +42,4 @@ config("hdf_manager_hdiservice") {
     "$hdf_framework_path/core/shared/include",
     "$hdf_uhdf_path/host/test/unittest/sample_driver",
   ]
- 
 }

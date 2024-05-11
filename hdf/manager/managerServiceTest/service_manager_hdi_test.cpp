@@ -243,7 +243,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0500, Function | Medi
   * @tc.name: Test device manager Load/UnLoad device and driver dynamic register device
   * @tc.size: Medium
   * @tc.level: level 1
-  */ 
+  */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0600, Function | MediumTest | Level1)
 {
     auto devmgr = IDeviceManager::Get();
@@ -486,7 +486,6 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Pnp_0500, Function | Medium
   * @tc.size: Medium
   * @tc.level: level 1
   */
-
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Pnp_0200, Function | MediumTest | Level1)
 {
     constexpr int SLEEP_TIME = 10;
@@ -599,7 +598,6 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Memory_0100, Function | Med
   * @tc.size: Medium
   * @tc.level: level 1
   */
-
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Memory_0200, Function | MediumTest | Level1)
 {
     auto servmgr = IServiceManager::Get();
@@ -643,7 +641,6 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Memory_0200, Function | Med
   * @tc.size: Medium
   * @tc.level: level 1
   */
-
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Memory_0300, Function | MediumTest | Level1)
 {
     auto servmgr = IServiceManager::Get();
@@ -689,7 +686,6 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Memory_0300, Function | Med
   * @tc.size: Medium
   * @tc.level: level 1
   */
-
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0700, Function | MediumTest | Level1)
 {
     auto servmgr = IServiceManager::Get();
@@ -766,7 +762,6 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0200, Functi
   * @tc.size: Medium
   * @tc.level: level 1
   */
-
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0300, Function | MediumTest | Level1)
 {
     auto servmgr = IServiceManager::Get();
@@ -830,7 +825,6 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0500, Functi
   * @tc.size: Medium
   * @tc.level: level 1
   */
-
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0800, Function | MediumTest | Level1)
 {
     auto servmgr = IServiceManager::Get();
@@ -1150,7 +1144,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1700, Function | Medi
   * @tc.name:  InvalidCodeTest001
   * @tc.size: Medium
   * @tc.level: level 1
-  */ 
+  */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1800, Function | MediumTest | Level1)
 {
     auto servmgr = OHOS::HDI::ServiceManager::V1_0::IServiceManager::Get();
@@ -1173,7 +1167,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1800, Function | Medi
   * @tc.name:  InvalidCodeTest002
   * @tc.size: Medium
   * @tc.level: level 1
-  */ 
+  */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1900, Function | MediumTest | Level1)
 {
     auto saManager = SystemAbilityManagerClient::GetInstance().GetSystemAbilityManager();

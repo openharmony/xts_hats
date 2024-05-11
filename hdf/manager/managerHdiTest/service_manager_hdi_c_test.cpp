@@ -545,7 +545,7 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Pnp_0600, Function | Mediu
   * @tc.name: Test service status listener unregister
   * @tc.size: Medium
   * @tc.level: level 1
-  */  
+  */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Pnp_0300, Function | MediumTest | Level1)
 {
     struct HDIDeviceManager *devmgr = HDIDeviceManagerGet();
@@ -602,7 +602,7 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Pnp_0300, Function | Mediu
   * @tc.name: Test shared mem interfac
   * @tc.size: Medium
   * @tc.level: level 1
-  */  
+  */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Memory_0400, Function | MediumTest | Level1)
 {
     constexpr int mapSize = 128;

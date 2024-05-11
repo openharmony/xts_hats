@@ -76,7 +76,7 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0100, Function | Medi
     HDIServiceManagerRelease(servmgr);
 }
 
-/**  
+/**
   * @tc.number: SUB_Driver_Manager_HdiC_0200
   * @tc.name: ServMgrTest002
   * @tc.size: Medium
@@ -635,7 +635,7 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Memory_0400, Function | Me
   * @tc.name: Test get service set by interfacedesc
   * @tc.size: Medium
   * @tc.level: level 1
-  */  
+  */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0800, Function | MediumTest | Level1)
 {
     struct HDIDeviceManager *devmgr = HDIDeviceManagerGet();

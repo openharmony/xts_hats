@@ -120,7 +120,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0100, Function | Medi
   * @tc.name: ServMgrTest002
   * @tc.size: Medium
   * @tc.level: level 1
-  */  
+  */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0200, Function | MediumTest | Level1)
 {
     auto servmgr = IServiceManager::Get();

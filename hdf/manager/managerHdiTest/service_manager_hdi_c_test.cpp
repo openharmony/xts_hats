@@ -64,7 +64,10 @@ public:
 };
 
 /**
+  * @tc.number: SUB_Driver_Manager_HdiC_0100
   * @tc.name: ServMgrTest001
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0100, Function | MediumTest | Level1)
 {
@@ -73,8 +76,11 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0100, Function | Medi
     HDIServiceManagerRelease(servmgr);
 }
 
-/**
+/**  
+  * @tc.number: SUB_Driver_Manager_HdiC_0200
   * @tc.name: ServMgrTest002
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0200, Function | MediumTest | Level1)
 {
@@ -120,7 +126,10 @@ static struct HdfRemoteDispatcher g_callbackDispatcher {
 };
 
 /**
+  * @tc.number: SUB_Driver_Manager_HdiC_0300
   * @tc.name: ServMgrTest003
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0300, Function | MediumTest | Level1)
 {
@@ -154,7 +163,10 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0300, Function | Medi
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_HdiC_0400
   * @tc.name: ServMgrTest004
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0400, Function | MediumTest | Level1)
 {
@@ -190,7 +202,10 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0400, Function | Medi
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_HdiC_0500
   * @tc.name: ServMgrTest005
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0500, Function | MediumTest | Level1)
 {
@@ -230,8 +245,10 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0500, Function | Medi
 }
 
 /**
-  * @tc.name: open input device test
-
+  * @tc.number: SUB_Driver_Manager_HdiC_0600
+  * @tc.name: ServMgrTest006
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0600, Function | MediumTest | Level1)
 {
@@ -274,7 +291,10 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0600, Function | Medi
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_HdiC_0700
   * @tc.name: ServMgrTest007
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0700, Function | MediumTest | Level1)
 {
@@ -383,7 +403,10 @@ static void TestOnServiceStatusReceived(struct ServiceStatusListener *listener, 
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_Pnp_0400
   * @tc.name: Test service start status listener
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Pnp_0400, Function | MediumTest | Level1)
 {
@@ -445,8 +468,12 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Pnp_0400, Function | Mediu
     HdiServiceStatusListenerFree(listener);
 }
 
+
 /**
+  * @tc.number: SUB_Driver_Manager_Pnp_0600
   * @tc.name: Test service status listener update service info
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Pnp_0600, Function | MediumTest | Level1)
 {
@@ -514,8 +541,11 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Pnp_0600, Function | Mediu
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_Pnp_0300
   * @tc.name: Test service status listener unregister
-  */
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */  
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Pnp_0300, Function | MediumTest | Level1)
 {
     struct HDIDeviceManager *devmgr = HDIDeviceManagerGet();
@@ -568,8 +598,11 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Pnp_0300, Function | Mediu
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_Memory_0400
   * @tc.name: Test shared mem interfac
-  */
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */  
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Memory_0400, Function | MediumTest | Level1)
 {
     constexpr int mapSize = 128;
@@ -598,8 +631,11 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_Memory_0400, Function | Me
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_HdiC_0800
   * @tc.name: Test get service set by interfacedesc
-  */
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */  
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0800, Function | MediumTest | Level1)
 {
     struct HDIDeviceManager *devmgr = HDIDeviceManagerGet();
@@ -629,7 +665,10 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0800, Function | Medi
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_HdiC_0900
   * @tc.name: ListServiceByInterfaceDescTest002
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0900, Function | MediumTest | Level1)
 {
@@ -643,7 +682,10 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0900, Function | Medi
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_HdiC_1000
   * @tc.name: ListServiceByInterfaceDescTest003
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1000, Function | MediumTest | Level1)
 {
@@ -656,7 +698,10 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1000, Function | Medi
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_HdiC_1100
   * @tc.name: ListServiceByInterfaceDescTest004
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1100, Function | MediumTest | Level1)
 {
@@ -669,7 +714,10 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1100, Function | Medi
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_HdiC_1200
   * @tc.name: ListServiceByInterfaceDescTest005
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1200, Function | MediumTest | Level1)
 {
@@ -714,7 +762,10 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1200, Function | Medi
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_HdiC_1300
   * @tc.name: DevMgrQueryUsableDeviceTest
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1300, Function | MediumTest | Level1)
 {
@@ -730,7 +781,10 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1300, Function | Medi
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_HdiC_1400
   * @tc.name: DevMgrQueryUnusableDeviceTest
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1400, Function | MediumTest | Level1)
 {
@@ -746,7 +800,10 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1400, Function | Medi
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_HdiC_1500
   * @tc.name: ServMgrTest018
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1500, Function | MediumTest | Level1)
 {
@@ -770,7 +827,10 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1500, Function | Medi
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_HdiC_1600
   * @tc.name: RemoteServiceTest001
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1600, Function | MediumTest | Level1) {
     struct HDIServiceManager *servmgr = HDIServiceManagerGet();
@@ -784,7 +844,10 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1600, Function | Medi
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_HdiC_1700
   * @tc.name: RemoteServiceTest002
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1700, Function | MediumTest | Level1) {
     struct HDIServiceManager *servmgr = HDIServiceManagerGet();
@@ -798,7 +861,10 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1700, Function | Medi
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_HdiC_1800
   * @tc.name: RemoteServiceTest003
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1800, Function | MediumTest | Level1) {
     struct HDIServiceManager *servmgr = HDIServiceManagerGet();
@@ -815,7 +881,10 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1800, Function | Medi
 }
 
 /**
-  * @tc.name: DevMgrTest
+  * @tc.number: SUB_Driver_Manager_HdiC_1600
+  * @tc.name: ServMgrTest
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1900, Function | MediumTest | Level1)
 {
@@ -840,7 +909,10 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1900, Function | Medi
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_HdiC_2000
   * @tc.name: HdiSupportTest
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_2000, Function | MediumTest | Level1)
 {

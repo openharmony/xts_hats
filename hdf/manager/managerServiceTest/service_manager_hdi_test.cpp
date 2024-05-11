@@ -104,7 +104,10 @@ public:
 int32_t IPCObjectStubTest::payload = 0;
 
 /**
+  * @tc.number: SUB_Driver_Manager_HdiCC_0100
   * @tc.name: ServMgrTest001
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0100, Function | MediumTest | Level1)
 {
@@ -113,8 +116,11 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0100, Function | Medi
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_HdiCC_0200
   * @tc.name: ServMgrTest002
-  */
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */  
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0200, Function | MediumTest | Level1)
 {
     auto servmgr = IServiceManager::Get();
@@ -136,7 +142,10 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0200, Function | Medi
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_HdiCC_0300
   * @tc.name: ServMgrTest003
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0300, Function | MediumTest | Level1)
 {
@@ -162,7 +171,10 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0300, Function | Medi
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_HdiCC_0400
   * @tc.name: ServMgrTest004
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0400, Function | MediumTest | Level1)
 {
@@ -188,7 +200,10 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0400, Function | Medi
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_HdiCC_0500
   * @tc.name: ServMgrTest006
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0500, Function | MediumTest | Level1)
 {
@@ -224,9 +239,11 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0500, Function | Medi
 }
 
 /**
-  * @tc.number: ServMgrTest007
+  * @tc.number: SUB_Driver_Manager_HdiCC_0600
   * @tc.name: Test device manager Load/UnLoad device and driver dynamic register device
-  */
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */ 
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0600, Function | MediumTest | Level1)
 {
     auto devmgr = IDeviceManager::Get();
@@ -438,7 +455,10 @@ void HdfServiceMangerHdiTest::TestSampleService(sptr<IRemoteObject>& sampleServi
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_Pnp_0500
   * @tc.name: Test service loadDevice
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Pnp_0500, Function | MediumTest | Level1)
 {
@@ -461,8 +481,12 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Pnp_0500, Function | Medium
     TestSampleService(sampleService, devmgr, servmgr);
 }
 /**
+  * @tc.number: SUB_Driver_Manager_Pnp_0200
   * @tc.name: Test service status listener unregister
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
+
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Pnp_0200, Function | MediumTest | Level1)
 {
     constexpr int SLEEP_TIME = 10;
@@ -528,7 +552,10 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Pnp_0200, Function | Medium
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_Memory_0100
   * @tc.name: smq test normal read/write
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Memory_0100, Function | MediumTest | Level1)
 {
@@ -567,8 +594,12 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Memory_0100, Function | Med
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_Memory_0200
   * @tc.name: smq test with overflow wait
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
+
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Memory_0200, Function | MediumTest | Level1)
 {
     auto servmgr = IServiceManager::Get();
@@ -607,8 +638,12 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Memory_0200, Function | Med
 }
 
 /**
+  * @tc.number: SUB_Driver_Manager_Memory_0300
   * @tc.name: smq test UNSYNC_SMQ
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
+
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Memory_0300, Function | MediumTest | Level1)
 {
     auto servmgr = IServiceManager::Get();
@@ -649,9 +684,12 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_Memory_0300, Function | Med
 }
 
 /**
-  * @tc.name: Test service status listener get serviec callback on register
-
+  * @tc.number: SUB_Driver_Manager_HdiCC_0700
+  * @tc.name:  Test service status listener get serviec callback on register
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
+
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0700, Function | MediumTest | Level1)
 {
     auto servmgr = IServiceManager::Get();
@@ -690,7 +728,10 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0700, Function | Medi
 }
 
 /**
-  * @tc.name: Test get service set by interfacedesc
+  * @tc.number: SUB_Driver_Manager_InterfaceQuery_0100
+  * @tc.name:  Test get service set by interfacedesc
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0100, Function | MediumTest | Level1)
 {
@@ -704,7 +745,10 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0100, Functi
 }
 
 /**
-  * @tc.name: Test get service set by interfacedesc
+  * @tc.number: SUB_Driver_Manager_InterfaceQuery_0200
+  * @tc.name:  Test get service set by interfacedesc
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0200, Function | MediumTest | Level1)
 {
@@ -717,8 +761,12 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0200, Functi
 }
 
 /**
-  * @tc.name: Test get service set by interfacedesc
+  * @tc.number: SUB_Driver_Manager_InterfaceQuery_0300
+  * @tc.name:  Test get service set by interfacedesc
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
+
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0300, Function | MediumTest | Level1)
 {
     auto servmgr = IServiceManager::Get();
@@ -730,7 +778,10 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0300, Functi
 }
 
 /**
-  * @tc.name: Test get service set by interfacedesc
+  * @tc.number: SUB_Driver_Manager_InterfaceQuery_0400
+  * @tc.name:  Test get service set by interfacedesc
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0400, Function | MediumTest | Level1)
 {
@@ -742,8 +793,11 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0400, Functi
     ASSERT_TRUE(serviceNames.empty());
 }
 
- /**
-  * @tc.name: Test get service set by interfacedesc
+/**
+  * @tc.number: SUB_Driver_Manager_InterfaceQuery_0500
+  * @tc.name:  Test get service set by interfacedesc
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0500, Function | MediumTest | Level1)
 {
@@ -770,9 +824,13 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0500, Functi
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
 
- /**
-  * @tc.name: ListAllServiceTest
+/**
+  * @tc.number: SUB_Driver_Manager_HdiCC_0800
+  * @tc.name:  ListAllServiceTest
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
+
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0800, Function | MediumTest | Level1)
 {
     auto servmgr = IServiceManager::Get();
@@ -784,8 +842,11 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0800, Function | Medi
     ASSERT_TRUE(serviceInfos.size() != 0);
 }
 
- /**
-  * @tc.name: ListAllDeviceTest
+/**
+  * @tc.number: SUB_Driver_Manager_HdiCC_0900
+  * @tc.name:  ListAllServiceTest
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0900, Function | MediumTest | Level1)
 {
@@ -798,8 +859,11 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0900, Function | Medi
     ASSERT_TRUE(deviceInfos.size() != 0);
 }
 
- /**
-  * @tc.name: EndSampleHostTest
+/**
+  * @tc.number: SUB_Driver_Manager_HdiCC_1000
+  * @tc.name:  EndSampleHostTest
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1000, Function | MediumTest | Level1)
 {
@@ -855,8 +919,11 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1000, Function | Medi
     ASSERT_TRUE(ret == HDF_SUCCESS);
 }
 
- /**
-  * @tc.name: InjectPmTest
+/**
+  * @tc.number: SUB_Driver_Manager_HdiCC_1100
+  * @tc.name:  InjectPmTest
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1100, Function | MediumTest | Level1)
 {
@@ -911,7 +978,10 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1100, Function | Medi
 }
 
  /**
-  * @tc.name: ListenerTest001
+  * @tc.number: SUB_Driver_Manager_HdiCC_1200
+  * @tc.name:  ListenerTest001
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1200, Function | MediumTest | Level1)
 {
@@ -935,7 +1005,10 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1200, Function | Medi
 }
 
  /**
-  * @tc.name: ListenerTest002
+  * @tc.number: SUB_Driver_Manager_HdiCC_1300
+  * @tc.name:  ListenerTest002
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1300, Function | MediumTest | Level1)
 {
@@ -956,7 +1029,10 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1300, Function | Medi
 }
 
  /**
-  * @tc.name: ListenerTest003
+  * @tc.number: SUB_Driver_Manager_HdiCC_1400
+  * @tc.name:  ListenerTest003
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1400, Function | MediumTest | Level1)
 {
@@ -980,7 +1056,10 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1400, Function | Medi
 }
 
  /**
-  * @tc.name: ListenerTest004
+  * @tc.number: SUB_Driver_Manager_HdiCC_1500
+  * @tc.name:  ListenerTest004
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1500, Function | MediumTest | Level1)
 {
@@ -1004,7 +1083,10 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1500, Function | Medi
 }
 
  /**
-  * @tc.name: ListenerTest005
+  * @tc.number: SUB_Driver_Manager_HdiCC_1600
+  * @tc.name:  ListenerTest005
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1600, Function | MediumTest | Level1)
 {
@@ -1031,7 +1113,10 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1600, Function | Medi
 }
 
  /**
-  * @tc.name: ListenerTest006
+  * @tc.number: SUB_Driver_Manager_HdiCC_1700
+  * @tc.name:  ListenerTest006
+  * @tc.size: Medium
+  * @tc.level: level 1
   */
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1700, Function | MediumTest | Level1)
 {
@@ -1061,8 +1146,11 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1700, Function | Medi
 }
 
  /**
-  * @tc.name: InvalidCodeTest001
-  */
+  * @tc.number: SUB_Driver_Manager_HdiCC_1800
+  * @tc.name:  InvalidCodeTest001
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */ 
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1800, Function | MediumTest | Level1)
 {
     auto servmgr = OHOS::HDI::ServiceManager::V1_0::IServiceManager::Get();
@@ -1081,8 +1169,11 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1800, Function | Medi
 }
 
  /**
-  * @tc.name: InvalidCodeTest002
-  */
+  * @tc.number: SUB_Driver_Manager_HdiCC_1900
+  * @tc.name:  InvalidCodeTest002
+  * @tc.size: Medium
+  * @tc.level: level 1
+  */ 
 HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1900, Function | MediumTest | Level1)
 {
     auto saManager = SystemAbilityManagerClient::GetInstance().GetSystemAbilityManager();

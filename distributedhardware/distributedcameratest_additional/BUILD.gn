@@ -61,7 +61,7 @@ ohos_moduletest_suite("HatsdisCameraProviderCaseAdditionalTest") {
 
   deps = [
     "$base_root/drivers/interface/camera/v1_0:libcamera_stub_1.0",
-    "$base_root/drivers/peripheral/distributed_camera/hdi_service:libdistributed_camera_hdf_service_1.0",
+    "$base_root/drivers/peripheral/distributed_camera/hdi_service:libdistributed_camera_hdf_service_1.1",
     "$base_root/foundation/distributedhardware/distributed_camera/common:distributed_camera_utils",
     "$base_root/foundation/distributedhardware/distributed_camera/services/cameraservice/sourceservice:distributed_camera_source",
     "$base_root/foundation/distributedhardware/distributed_camera/services/channel:distributed_camera_channel",
@@ -78,7 +78,7 @@ ohos_moduletest_suite("HatsdisCameraProviderCaseAdditionalTest") {
   external_deps = [
     "c_utils:utils",
     "drivers_interface_camera:libcamera_proxy_1.0",
-    "drivers_interface_distributed_camera:libdistributed_camera_provider_proxy_1.0",
+    "drivers_interface_distributed_camera:libdistributed_camera_provider_proxy_1.1",
     "dsoftbus:softbus_client",
     "eventhandler:libeventhandler",
     "hilog:libhilog",

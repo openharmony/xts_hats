@@ -550,7 +550,7 @@ void Test::StartProfessionalStream(std::vector<StreamIntent> intents, uint8_t pr
     for (auto& streamType : intents) {
         if (streamType == StreamIntent::PREVIEW) {
             DefaultInfosPreview(streamInfoPre);
-            streamInfos.push_back(*streamInfoPre);   
+            streamInfos.push_back(*streamInfoPre);
         } else if (streamType == StreamIntent::VIDEO) {
             DefaultInfosVideo(streamInfoVideo);
             streamInfos.push_back(*streamInfoVideo);
@@ -729,7 +729,6 @@ OHOS::sptr<OHOS::IBufferProducer> Test::StreamConsumer::CreateProducer(std::func
                 if (buffer != nullptr) {
                     void* addr = buffer->GetVirAddr();
                     uint32_t size = buffer->GetSize();
-
                     int32_t gotSize = 0;
                     int32_t isKey = 0;
                     int32_t streamId = 0;
@@ -746,7 +745,6 @@ OHOS::sptr<OHOS::IBufferProducer> Test::StreamConsumer::CreateProducer(std::func
                     } else {
                         callback_(addr, size);
                     }
-
                     consumer_->ReleaseBuffer(buffer, -1);
                     shotCount_--;
                     if (shotCount_ == 0) {

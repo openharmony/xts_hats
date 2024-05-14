@@ -278,7 +278,6 @@ public:
         int32_t OnCaptureReady(int32_t captureId, const std::vector<int32_t>& streamIds, uint64_t timestamp) override;
         int32_t OnFrameShutterEnd(int32_t captureId, const std::vector<int32_t>& streamIds,
             uint64_t timestamp) override;
-
     };
 
     class TestCameraHostCallback : public ICameraHostCallback {

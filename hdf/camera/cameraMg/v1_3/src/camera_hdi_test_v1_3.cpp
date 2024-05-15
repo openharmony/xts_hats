@@ -39,7 +39,7 @@ void CameraHdiTestV1_3::TearDown(void)
     cameraTest->Close();
 }
 
-bool IsTagValueExistsU8(std::shared_ptr<CameraMetadata> ability, uint32_t tag, uint8_t value)
+bool g_IsTagValueExistsU8(std::shared_ptr<CameraMetadata> ability, uint32_t tag, uint8_t value)
 {
     common_metadata_header_t* data = ability->get();
     camera_metadata_item_t entry;
@@ -122,7 +122,7 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_Moon_0200, TestSize.Level1)
  */
 HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SlowMotion_0300, TestSize.Level1)
 {
-    if (!IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_CAMERA_MODES, OHOS::HDI::Camera::V1_3::HIGH_FRAME_RATE)) {
+    if (!g_IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_CAMERA_MODES, OHOS::HDI::Camera::V1_3::HIGH_FRAME_RATE)) {
         cout << "skip this test, because HIGH_FRAME_RATE not in OHOS_ABILITY_CAMERA_MODES" << endl;
         return;
     }
@@ -156,7 +156,7 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SlowMotion_0300, TestSize.Level1)
  */
 HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SlowMotion_0400, TestSize.Level1)
 {
-    if (!IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_CAMERA_MODES, OHOS::HDI::Camera::V1_3::HIGH_FRAME_RATE)) {
+    if (!g_IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_CAMERA_MODES, OHOS::HDI::Camera::V1_3::HIGH_FRAME_RATE)) {
         cout << "skip this test, because HIGH_FRAME_RATE not in OHOS_ABILITY_CAMERA_MODES" << endl;
         return;
     }
@@ -191,7 +191,7 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SlowMotion_0400, TestSize.Level1)
  */
 HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SuperSlowMotion_0400, TestSize.Level1)
 {
-    if (!IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_CAMERA_MODES, OHOS::HDI::Camera::V1_2::SLOW_MOTION)) {
+    if (!g_IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_CAMERA_MODES, OHOS::HDI::Camera::V1_2::SLOW_MOTION)) {
         cout << "skip this test, because SLOW_MOTION not in OHOS_ABILITY_CAMERA_MODES" << endl;
         return;
     }
@@ -225,7 +225,7 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SuperSlowMotion_0400, TestSize.Lev
  */
 HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SuperSlowMotion_0200, TestSize.Level1)
 {
-    if (!IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_CAMERA_MODES, OHOS::HDI::Camera::V1_2::SLOW_MOTION)) {
+    if (!g_IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_CAMERA_MODES, OHOS::HDI::Camera::V1_2::SLOW_MOTION)) {
         cout << "skip this test, because SLOW_MOTION not in OHOS_ABILITY_CAMERA_MODES" << endl;
         return;
     }
@@ -392,7 +392,7 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_Moving_0300, TestSize.Level1)
  */
 HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_HighResolution_0200, TestSize.Level1)
 {
-    if (!IsTagValueExistsU8(cameraTest->ability,
+    if (!g_IsTagValueExistsU8(cameraTest->ability,
         OHOS_ABILITY_CAMERA_MODES, OHOS::HDI::Camera::V1_3::HIGH_RESOLUTION_PHOTO)) {
         cout << "skip this test, because HIGH_RESOLUTION_PHOTO not in OHOS_ABILITY_CAMERA_MODES" << endl;
         return;
@@ -436,7 +436,7 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_HighResolution_0200, TestSize.Leve
  */
 HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SMPhoto_0200, TestSize.Level1)
 {
-    if (!IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_CAMERA_MODES, OHOS::HDI::Camera::V1_3::CAPTURE_MACRO)) {
+    if (!g_IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_CAMERA_MODES, OHOS::HDI::Camera::V1_3::CAPTURE_MACRO)) {
         cout << "skip this test, because CAPTURE_MACRO not in OHOS_ABILITY_CAMERA_MODES" << endl;
         return;
     }
@@ -487,7 +487,7 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SMPhoto_0200, TestSize.Level1)
  */
 HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SMVideo_0200, TestSize.Level1)
 {
-    if (!IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_CAMERA_MODES, OHOS::HDI::Camera::V1_3::VIDEO_MACRO)) {
+    if (!g_IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_CAMERA_MODES, OHOS::HDI::Camera::V1_3::VIDEO_MACRO)) {
         cout << "skip this test, because VIDEO_MACRO not in OHOS_ABILITY_CAMERA_MODES" << endl;
         return;
     }

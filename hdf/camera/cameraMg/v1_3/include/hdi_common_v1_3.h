@@ -301,7 +301,6 @@ public:
         int32_t OnFlashlightStatus_V1_2(FlashlightStatus status) override;
         int32_t OnCameraEvent(const std::string& cameraId, CameraEvent event) override;
     };
-
 };
 }
 #endif

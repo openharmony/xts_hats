@@ -310,7 +310,7 @@ HWTEST_F(EffectControlTest, HdfAudioSendCommandSetParam001, TestSize.Level1)
  */
 HWTEST_F(EffectControlTest, HdfAudioSendCommandSetParam002, TestSize.Level1)
 {
-    int8_t input[SEND_COMMAND_LEN] = {7,0};
+    int8_t input[SEND_COMMAND_LEN] = {7, 0};
     int8_t output[GET_BUFFER_LEN] = {0};
     uint32_t replyLen = GET_BUFFER_LEN;
 
@@ -328,7 +328,7 @@ HWTEST_F(EffectControlTest, HdfAudioSendCommandSetParam002, TestSize.Level1)
  */
 HWTEST_F(EffectControlTest, HdfAudioSendCommandSetParam003, TestSize.Level1)
 {
-    int8_t input[SEND_COMMAND_LEN] = {8,0};
+    int8_t input[SEND_COMMAND_LEN] = {8, 0};
     int8_t output[GET_BUFFER_LEN] = {0};
     uint32_t replyLen = GET_BUFFER_LEN;
 

@@ -302,6 +302,42 @@ HWTEST_F(EffectControlTest, HdfAudioSendCommandSetParam001, TestSize.Level1)
 }
 
 /**
+ * @tc.number: SUB_Driver_Audio_EffectControl_1700
+ * @tc.name: HdfAudioSendCommandSetParam002
+ * @tc.desc: Verify the EffectControlSendCommand function when distribute volume parameters.
+ * @tc.type: FUNC
+ * @tc.require: I6I658
+ */
+HWTEST_F(EffectControlTest, HdfAudioSendCommandSetParam002, TestSize.Level1)
+{
+    int8_t input[SEND_COMMAND_LEN] = {7,0};
+    int8_t output[GET_BUFFER_LEN] = {0};
+    uint32_t replyLen = GET_BUFFER_LEN;
+
+    int32_t ret = controller_->SendCommand(controller_, AUDIO_EFFECT_COMMAND_SET_PARAM,
+                                           input, SEND_COMMAND_LEN, output, &replyLen);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+ * @tc.number: SUB_Driver_Audio_EffectControl_1800
+ * @tc.name: HdfAudioSendCommandSetParam003
+ * @tc.desc: Verify the EffectControlSendCommand function when distribute rotating screen parameters.
+ * @tc.type: FUNC
+ * @tc.require: I6I658
+ */
+HWTEST_F(EffectControlTest, HdfAudioSendCommandSetParam003, TestSize.Level1)
+{
+    int8_t input[SEND_COMMAND_LEN] = {8,0};
+    int8_t output[GET_BUFFER_LEN] = {0};
+    uint32_t replyLen = GET_BUFFER_LEN;
+
+    int32_t ret = controller_->SendCommand(controller_, AUDIO_EFFECT_COMMAND_SET_PARAM,
+                                           input, SEND_COMMAND_LEN, output, &replyLen);
+    EXPECT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
  * @tc.number: SUB_Driver_Audio_EffectControl_1200
  * @tc.name: HdfAudioSendCommandGetParam001
  * @tc.desc: Verify the EffectControlSendCommand function when cmdId is AUDIO_EFFECT_COMMAND_GET_PARAM.

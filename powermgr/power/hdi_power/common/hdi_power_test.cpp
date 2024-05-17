@@ -69,6 +69,11 @@ public:
         return 0;
     }
 
+    int32_t SetSuspendTag(const std::string& tag) override
+    {
+        return 0;
+    }
+
     int32_t StartSuspend() override
     {
         return 0;

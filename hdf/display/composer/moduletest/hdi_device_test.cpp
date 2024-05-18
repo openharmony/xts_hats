@@ -428,9 +428,10 @@ TEST_P(DeviceLayerDisplay, LayerDisplay)
 /**
  * @tc.number: SUB_Driver_Display_HDI_2200
  * @tc.name: test_SetLayerTransformMode_001
- * @tc.desc: Testing the z-order values of layers, Please note that failing 
- * to save the composite data using clientLayer during display HDI adaptation image 
- * synthesis will cause this use case to fail
+ * @tc.desc: Testing the z-order values of layers, Please note that failing to save the composite
+ * data using clientLayer during display HDI adaptation image synthesis will cause this use case to fail
+ * @tc.size:MediumTest
+ * @tc.type:Function
  */
 TEST_F(DeviceTest, zorder)
 {
@@ -523,9 +524,10 @@ TEST_P(LayerRotateTest, SplitCheck)
 /**
  * @tc.number: SUB_Driver_Display_HDI_2300
  * @tc.name: test_SetLayerTransformMode_001
- * @tc.desc: Test layer cropping, Please note that failing 
- * to save the composite data using clientLayer during display HDI adaptation image 
- * synthesis will cause this use case to fail
+ * @tc.desc: Test layer cropping, Please note that failing to save the composite data using
+ * clientLayer during display HDI adaptation image synthesis will cause this use case to fail
+ * @tc.size:MediumTest
+ * @tc.type:Function
  */
 TEST_F(DeviceTest, crop)
 {
@@ -590,9 +592,8 @@ TEST_F(DeviceTest, CtrlTest)
 
 /**
  * @tc.number: SUB_Driver_Display_HDI_2500
- * @tc.desc: Multi layer testing, Please note that failing 
- * to save the composite data using clientLayer during display HDI adaptation image 
- * synthesis will cause this use case to fail
+ * @tc.desc: Multi layer testing, Please note that failing to save the composite data using
+ * clientLayer during display HDI adaptation image synthesis will cause this use case to fail
  * @tc.size:MediumTest
  * @tc.type:Function
 */
@@ -600,9 +601,8 @@ INSTANTIATE_TEST_SUITE_P(MultiLayer, DeviceLayerDisplay, ::testing::ValuesIn(TES
 
 /**
  * @tc.number: SUB_Driver_Display_HDI_2600-2800
- * @tc.desc: Single layer testing, Please note that failing 
- * to save the composite data using clientLayer during display HDI adaptation image 
- * synthesis will cause this use case to fail
+ * @tc.desc: Single layer testing, Please note that failing to save the composite data using
+ * clientLayer during display HDI adaptation image synthesis will cause this use case to fail
  * @tc.size:MediumTest
  * @tc.type:Function
 */
@@ -610,9 +610,8 @@ INSTANTIATE_TEST_SUITE_P(SingleLayer, DeviceLayerDisplay, ::testing::ValuesIn(TE
 
 /**
  * @tc.number: SUB_Driver_Display_HDI_2900-3100
- * @tc.desc: Test for Scaling Layers, Please note that failing 
- * to save the composite data using clientLayer during display HDI adaptation image 
- * synthesis will cause this use case to fail
+ * @tc.desc: Test for Scaling Layers, Please note that failing to save the composite data using
+ * clientLayer during display HDI adaptation image synthesis will cause this use case to fail
  * @tc.size:MediumTest
  * @tc.type:Function
 */
@@ -620,9 +619,8 @@ INSTANTIATE_TEST_SUITE_P(ScaleLayer, DeviceLayerDisplay, ::testing::ValuesIn(TES
 
 /**
  * @tc.number: SUB_Driver_Display_HDI_3200-3700
- * @tc.desc: Transparency testing of layers, Please note that failing 
- * to save the composite data using clientLayer during display HDI adaptation image 
- * synthesis will cause this use case to fail
+ * @tc.desc: Transparency testing of layers, Please note that failing to save the composite data using
+ * clientLayer during display HDI adaptation image synthesis will cause this use case to fail
  * @tc.size:MediumTest
  * @tc.type:Function
 */
@@ -631,17 +629,17 @@ INSTANTIATE_TEST_SUITE_P(LayerAlpha, DeviceLayerDisplay, ::testing::ValuesIn(TES
 #ifdef DISPLAY_COMMUNITY
 /**
  * @tc.number: SUB_Driver_Display_HDI_3800-4100
- * @tc.desc: Testing of video layers, Please note that failing 
- * to save the composite data using clientLayer during display HDI adaptation image 
- * synthesis will cause this use case to fail
+ * @tc.desc: Testing of video layers, , Please note that failing to save the composite data using
+ * clientLayer during display HDI adaptation image synthesis will cause this use case to fail
+ * @tc.size:MediumTest
+ * @tc.type:Function
  */
 INSTANTIATE_TEST_SUITE_P(VideoLayer, DeviceLayerDisplay, ::testing::ValuesIn(TEST_VIDEO));
 
 /**
  * @tc.number: SUB_Driver_Display_HDI_4200-4500
- * @tc.desc: Layer Rotation Test, Please note that failing 
- * to save the composite data using clientLayer during display HDI adaptation image 
- * synthesis will cause this use case to fail
+ * @tc.desc: Layer Rotation Test, Please note that failing to save the composite data using
+ * clientLayer during display HDI adaptation image synthesis will cause this use case to fail
  * @tc.size:MediumTest
  * @tc.type:Function
 */

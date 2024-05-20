@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -425,6 +425,14 @@ TEST_P(DeviceLayerDisplay, LayerDisplay)
     }
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_2200
+ * @tc.name: test_SetLayerTransformMode_001
+ * @tc.desc: Testing the z-order values of layers, Please note that failing to save the composite
+ * data using clientLayer during display HDI adaptation image synthesis will cause this use case to fail
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 TEST_F(DeviceTest, zorder)
 {
     std::vector<LayerSettings> settings = {
@@ -513,6 +521,14 @@ TEST_P(LayerRotateTest, SplitCheck)
 }
 #endif // DISPLAY_COMMUNITY
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_2300
+ * @tc.name: test_SetLayerTransformMode_001
+ * @tc.desc: Test layer cropping, Please note that failing to save the composite data using
+ * clientLayer during display HDI adaptation image synthesis will cause this use case to fail
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 TEST_F(DeviceTest, crop)
 {
     std::vector<LayerSettings> settings = {
@@ -537,6 +553,12 @@ TEST_F(DeviceTest, crop)
     }
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_2400
+ * @tc.desc: Control testing of graphic devices
+ * @tc.size: MediumTest
+ * @tc.type: Function
+*/
 TEST_F(DeviceTest, CtrlTest)
 {
     int ret;
@@ -568,12 +590,59 @@ TEST_F(DeviceTest, CtrlTest)
     ASSERT_TRUE(ret != DISPLAY_SUCCESS) << "vblank do not disable";
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_2500
+ * @tc.desc: Multi layer testing, Please note that failing to save the composite data using
+ * clientLayer during display HDI adaptation image synthesis will cause this use case to fail
+ * @tc.size: MediumTest
+ * @tc.type: Function
+*/
 INSTANTIATE_TEST_SUITE_P(MultiLayer, DeviceLayerDisplay, ::testing::ValuesIn(TEST_MULTILAYER));
+
+/**
+ * @tc.number: SUB_Driver_Display_HDI_2600-2800
+ * @tc.desc: Single layer testing, Please note that failing to save the composite data using
+ * clientLayer during display HDI adaptation image synthesis will cause this use case to fail
+ * @tc.size: MediumTest
+ * @tc.type: Function
+*/
 INSTANTIATE_TEST_SUITE_P(SingleLayer, DeviceLayerDisplay, ::testing::ValuesIn(TEST_SINGLE_LAYER));
+
+/**
+ * @tc.number: SUB_Driver_Display_HDI_2900-3100
+ * @tc.desc: Test for Scaling Layers, Please note that failing to save the composite data using
+ * clientLayer during display HDI adaptation image synthesis will cause this use case to fail
+ * @tc.size: MediumTest
+ * @tc.type: Function
+*/
 INSTANTIATE_TEST_SUITE_P(ScaleLayer, DeviceLayerDisplay, ::testing::ValuesIn(TEST_SCALE));
+
+/**
+ * @tc.number: SUB_Driver_Display_HDI_3200-3700
+ * @tc.desc: Transparency testing of layers, Please note that failing to save the composite data using
+ * clientLayer during display HDI adaptation image synthesis will cause this use case to fail
+ * @tc.size: MediumTest
+ * @tc.type: Function
+*/
 INSTANTIATE_TEST_SUITE_P(LayerAlpha, DeviceLayerDisplay, ::testing::ValuesIn(TEST_ALPHA));
+
 #ifdef DISPLAY_COMMUNITY
+/**
+ * @tc.number: SUB_Driver_Display_HDI_3800-4100
+ * @tc.desc: Testing of video layers, , Please note that failing to save the composite data using
+ * clientLayer during display HDI adaptation image synthesis will cause this use case to fail
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 INSTANTIATE_TEST_SUITE_P(VideoLayer, DeviceLayerDisplay, ::testing::ValuesIn(TEST_VIDEO));
+
+/**
+ * @tc.number: SUB_Driver_Display_HDI_4200-4500
+ * @tc.desc: Layer Rotation Test, Please note that failing to save the composite data using
+ * clientLayer during display HDI adaptation image synthesis will cause this use case to fail
+ * @tc.size: MediumTest
+ * @tc.type: Function
+*/
 INSTANTIATE_TEST_SUITE_P(Rotation, LayerRotateTest, ::testing::ValuesIn(TEST_ROTATE));
 #endif // DISPLAY_COMMUNITY
 }

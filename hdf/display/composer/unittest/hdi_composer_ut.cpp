@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -233,6 +233,13 @@ int32_t VblankCtr::WaitVblank(uint32_t ms)
     return DISPLAY_SUCCESS;
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_4600
+ * @tc.name: test_SetClientBufferCacheCount
+ * @tc.desc: test cache count Random
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_4600, TestSize.Level1)
 {
     const uint32_t CACHE_COUNT = 5;
@@ -240,6 +247,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_4600, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_4700
+ * @tc.name: test_GetDisplayCapability
+ * @tc.desc: Obtains the display modes supported by a display device
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_4700, TestSize.Level1)
 {
     DisplayCapability info;
@@ -247,6 +261,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_4700, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_4800
+ * @tc.name: test_GetDisplaySupportedModes
+ * @tc.desc:  Obtains the current display mode of a display device
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_4800, TestSize.Level1)
 {
     std::vector<DisplayModeInfo> modes;
@@ -254,6 +275,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_4800, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_4900
+ * @tc.name: test_GetDisplayMode
+ * @tc.desc: Get the pattern with pattern ID 0
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_4900, TestSize.Level1)
 {
     uint32_t MODE = 0;
@@ -261,6 +289,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_4900, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_5000
+ * @tc.name: test_SetDisplayMode
+ * @tc.desc: Set the display mode ID to 0
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5000, TestSize.Level1)
 {
     const uint32_t MODE = 0;
@@ -268,6 +303,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5000, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_5100
+ * @tc.name: test_GetDisplayPowerStatus
+ * @tc.desc: Set the power status of the display device POWER_STATUS_OFF
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5100, TestSize.Level1)
 {
     Composer::V1_0::DispPowerStatus powerStatus = Composer::V1_0::DispPowerStatus::POWER_STATUS_OFF;
@@ -275,6 +317,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5100, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_5200
+ * @tc.name: test_SetDisplayPowerStatus_001
+ * @tc.desc: Set the power status of the display device
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5200, TestSize.Level1)
 {
     auto ret = g_composerDevice->SetDisplayPowerStatus(g_displayIds[0],
@@ -285,6 +334,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5200, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_5300
+ * @tc.name: test_GetDisplayBacklight
+ * @tc.desc: Set the backlight value of the display device to leve1
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 #ifdef DISPLAY_COMMUNITY
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5300, TestSize.Level1)
 {
@@ -294,6 +350,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5300, TestSize.Level1)
 }
 #endif
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_5400
+ * @tc.name: test_SetDisplayBacklight
+ * @tc.desc: Sets the backlight value for a display device
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5400, TestSize.Level1)
 {
     const uint32_t LEVEL = 10;
@@ -301,6 +364,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5400, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_5500
+ * @tc.name: test_GetDisplayProperty
+ * @tc.desc: Obtains the property for a display device
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5500, TestSize.Level1)
 {
     const uint32_t PROPERTY_ID = 1;
@@ -310,6 +380,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5500, TestSize.Level1)
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_5600
+ * @tc.name: test_GetDisplayCompChange
+ * @tc.desc: Obtains the layers whose composition types have changed
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5600, TestSize.Level1)
 {
     std::vector<uint32_t> layers {};
@@ -318,6 +395,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5600, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_5700
+ * @tc.name: test_SetDisplayClientCrop
+ * @tc.desc: Sets the cropped region for a display device
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5700, TestSize.Level1)
 {
     const int32_t WIDTH = 1920;
@@ -328,6 +412,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5700, TestSize.Level1)
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_5800
+ * @tc.name: test_GetDisplayReleaseFence
+ * @tc.desc: Obtains the fences of the display layers after the commit operation
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5800, TestSize.Level1)
 {
     std::vector<uint32_t> layers {};
@@ -336,6 +427,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5800, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_5900
+ * @tc.name: test_SetDisplayClientBuffer
+ * @tc.desc: Sets the display buffer for a display device
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5900, TestSize.Level1)
 {
     BufferHandle* buffer = nullptr;
@@ -359,6 +457,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5900, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_6000
+ * @tc.name: test_SetDisplayClientDamage
+ * @tc.desc: Sets the dirty region for a display device
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6000, TestSize.Level1)
 {
     const int32_t WIDTH = 1920;
@@ -371,6 +476,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6000, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_6100
+ * @tc.name: test_CreateVirtualDisplay
+ * @tc.desc: Creates a virtual display device
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6100, TestSize.Level1)
 {
     const uint32_t WIDTH = 1920;
@@ -382,6 +494,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6100, TestSize.Level1)
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_6200
+ * @tc.name: test_DestroyVirtualDisplay
+ * @tc.desc: UpdateSettings, OHOS_CONTROL_AE_MODE
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6200, TestSize.Level1)
 {
     uint32_t devId = 0;
@@ -390,6 +509,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6200, TestSize.Level1)
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_6300
+ * @tc.name: test_SetVirtualDisplayBuffer
+ * @tc.desc: Destroys a virtual display device
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6300, TestSize.Level1)
 {
     BufferHandle* buffer = nullptr;
@@ -414,6 +540,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6300, TestSize.Level1)
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_6400
+ * @tc.name: test_SetDisplayProperty
+ * @tc.desc: Sets the property for a display device
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6400, TestSize.Level1)
 {
     const uint32_t PROPERTY_ID = 1;
@@ -423,6 +556,14 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6400, TestSize.Level1)
     EXPECT_EQ(DISPLAY_FAILURE, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_6500
+ * @tc.name: test_SetLayerCrop
+ * @tc.desc: Sets the rectangular area to crop for a layer, Please note that failing to save the composite
+ * data using clientLayer during display HDI adaptation image synthesis will cause this use case to fail
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6500, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -450,6 +591,14 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6500, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_6600
+ * @tc.name: test_SetLayerZorder
+ * @tc.desc: Sets the z-order for a layer, Please note that failing to save the composite data
+ * using clientLayer during display HDI adaptation image synthesis will cause this use case to fail
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6600, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -487,6 +636,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6600, TestSize.Level1)
     HdiTestDevice::GetInstance().Clear();
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_6700
+ * @tc.name: test_SetLayerPreMulti
+ * @tc.desc: Sets layer premultiplication
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6700, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -511,6 +667,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6700, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_6800
+ * @tc.name: test_SetLayerAlpha
+ * @tc.desc: Sets the alpha value for a layer
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6800, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -542,6 +705,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6800, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_6900
+ * @tc.name: test_SetLayerRegion
+ * @tc.desc: Sets the region for a layer
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6900, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -563,6 +733,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_6900, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_7000
+ * @tc.name: test_SetLayerDirtyRegion
+ * @tc.desc: Sets the flushing area for a layer
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7000, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -592,6 +769,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7000, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_7100
+ * @tc.name: test_SetLayerTransformMode_001
+ * @tc.desc: Sets the type of graphic rotation
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7100, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -625,6 +809,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7100, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_7200
+ * @tc.name: test_SetLayerVisibleRegion
+ * @tc.desc: Set the visible region for a layer
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7200, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -652,6 +843,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7200, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_7300
+ * @tc.name: test_SetLayerBuffer
+ * @tc.desc: Set the buffer for a layer
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7300, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -680,6 +878,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7300, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_7400
+ * @tc.name: test_SetLayerCompositionType_001
+ * @tc.desc: set the composition type which the client expect
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7400, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -704,6 +909,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7400, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_7500
+ * @tc.name: test_SetLayerBlendType_001
+ * @tc.desc: Set the blend type to BLEND-NONE
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7500, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -728,6 +940,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7500, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_MaskInfo_0100
+ * @tc.name: test_SetLayerMaskInfo_001
+ * @tc.desc: Sets the current mask frame information to the vendor driver
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_MaskInfo_0100, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -752,6 +971,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_MaskInfo_0100, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_Luminance_0100
+ * @tc.name: test_SetLayerColor
+ * @tc.desc: Sets the solid color layer
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_Luminance_0100, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -786,6 +1012,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_Luminance_0100, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_7600
+ * @tc.name: test_DestroyLayer
+ * @tc.desc: Closes a layer that is no longer required on a specified display device
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7600, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -806,6 +1039,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7600, TestSize.Level1)
     std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_CONT_100));
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_7700
+ * @tc.name: test_RegDisplayVBlankCallback
+ * @tc.desc: Registers the callback to be invoked when a VBLANK event occurs
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7700, TestSize.Level1)
 {
     int ret;
@@ -847,6 +1087,13 @@ void DeviceTest::OnSeamlessChange(uint32_t devId, void* data)
     g_isOnSeamlessChangeCalled = true;
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_7800
+ * @tc.name: test_GetDisplaySupportedModesExt
+ * @tc.desc: Obtains the display modes supported by a display device
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7800, TestSize.Level1)
 {
     std::vector<DisplayModeInfoExt> modes;
@@ -858,6 +1105,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7800, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_7900
+ * @tc.name: test_SetDisplayModeAsync
+ * @tc.desc: Sets the display mode of a display device
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7900, TestSize.Level1)
 {
     g_isOnModeCalled = false;
@@ -895,6 +1149,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7900, TestSize.Level1)
     }
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_8000
+ * @tc.name: test_GetDisplayVBlankPeriod
+ * @tc.desc: Get the current vblank period
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_8000, TestSize.Level1)
 {
     uint64_t period = 0;
@@ -907,6 +1168,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_8000, TestSize.Level1)
     EXPECT_EQ(period != 0, true);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_8100
+ * @tc.name: test_RegSeamlessChangeCallback
+ * @tc.desc: UpdateSettings, OHOS_CONTROL_AE_MODE
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_8100, TestSize.Level1)
 {
     g_isOnSeamlessChangeCalled = false;
@@ -922,6 +1190,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_8100, TestSize.Level1)
     }
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_8200
+ * @tc.name: test_SetLayerPerFrameParameter
+ * @tc.desc: Sets parameter for the given layer
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_8200, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -955,6 +1230,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_8200, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_8300
+ * @tc.name: test_GetSupportedLayerPerFrameParameterKey
+ * @tc.desc: returns the list of supported parameter keys
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_8300, TestSize.Level1)
 {
     std::vector<std::string> keys;
@@ -966,6 +1248,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_8300, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_8400
+ * @tc.name: test_SetDisplayOverlayResolution
+ * @tc.desc: Sets parameter for the given layer
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_8400, TestSize.Level1)
 {
     DisplayModeInfo mode = GetFirstDisplay()->GetCurrentMode();
@@ -981,6 +1270,13 @@ static void TestRefreshCallback(uint32_t devId, void* data)
 {
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_8500
+ * @tc.name: test_RegRefreshCallback
+ * @tc.desc: Registers the callback to be invoked when a refresh event occurs
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_8500, TestSize.Level1)
 {
     auto ret = g_composerDevice->RegRefreshCallback(TestRefreshCallback, nullptr);
@@ -991,6 +1287,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_8500, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_8600
+ * @tc.name: test_GetDisplaySupportedColorGamuts
+ * @tc.desc: Obtains the color gamuts of a display device
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_8600, TestSize.Level1)
 {
     std::vector<ColorGamut> gamuts;
@@ -1002,6 +1305,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_8600, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_HDI_8700
+ * @tc.name: test_GetHDRCapabilityInfos
+ * @tc.desc: Obtains the capabilities of a display device
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_8700, TestSize.Level1)
 {
     HDRCapability info = { 0 };
@@ -1013,6 +1323,13 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_8700, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0340
+ * @tc.name: test_SetLayerTransformMode_002
+ * @tc.desc: Sets the type of graphic rotation
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0340, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1042,6 +1359,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0340, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0350
+ * @tc.name: test_SetLayerTransformMode_003
+ * @tc.desc: Sets the type of graphic rotation
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0350, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1071,6 +1395,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0350, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0360
+ * @tc.name: test_SetLayerTransformMode_004
+ * @tc.desc: Sets the type of graphic rotation
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0360, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1094,6 +1425,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0360, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0370
+ * @tc.name: test_SetDisplayPowerStatus_002
+ * @tc.desc: Set the power status of the display device
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 #ifdef DISPLAY_COMMUNITY
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0370, TestSize.Level1)
 {
@@ -1105,6 +1443,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0370, TestSize.Level1)
 }
 #endif
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0380
+ * @tc.name: test_SetLayerBlendType_002
+ * @tc.desc: Set the blend type to BLEND_CLEAR
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0380, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1128,6 +1473,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0380, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0390
+ * @tc.name: test_SetLayerBlendType_003
+ * @tc.desc: Set the blend type to BLEND_SRC
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0390, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1151,6 +1503,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0390, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0400
+ * @tc.name: test_SetLayerBlendType_004
+ * @tc.desc: Set the blend type to BLEND_SRCOVER
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0400, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1174,6 +1533,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0400, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0410
+ * @tc.name: test_SetLayerBlendType_005
+ * @tc.desc: Set the blend type to BLEND_DSTOVER
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0410, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1197,6 +1563,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0410, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0420
+ * @tc.name: test_SetLayerBlendType_006
+ * @tc.desc: Set the blend type to BLEND_SRCIN
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0420, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1220,6 +1593,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0420, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0430
+ * @tc.name: test_SetLayerBlendType_007
+ * @tc.desc: Set the blend type to BLEND_DSTIN
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0430, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1243,6 +1623,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0430, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0440
+ * @tc.name: test_SetLayerBlendType_008
+ * @tc.desc: Set the blend type to BLEND_SRCOUT
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0440, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1266,6 +1653,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0440, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0450
+ * @tc.name: test_SetLayerBlendType_009
+ * @tc.desc: Set the blend type to BLEND_DSTOUT
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0450, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1289,6 +1683,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0450, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0460
+ * @tc.name: test_SetLayerBlendType_010
+ * @tc.desc: Set the blend type to BLEND_SRCATOP
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0460, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1312,6 +1713,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0460, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0470
+ * @tc.name: test_SetLayerBlendType_011
+ * @tc.desc: Set the blend type to BLEND_DSTATOP
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0470, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1335,6 +1743,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0470, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0480
+ * @tc.name: test_SetLayerBlendType_012
+ * @tc.desc: Set the blend type to BLEND_ADD
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0480, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1358,6 +1773,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0480, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0490
+ * @tc.name: test_SetLayerBlendType_013
+ * @tc.desc: Set the blend type to BLEND_XOR
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0490, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1381,6 +1803,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0490, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0500
+ * @tc.name: test_SetLayerBlendType_014
+ * @tc.desc: Set the blend type to BLEND_DST
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0500, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1404,6 +1833,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0500, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0510
+ * @tc.name: test_SetLayerBlendType_015
+ * @tc.desc: Set the blend type to BLEND_AKS
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0510, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1427,6 +1863,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0510, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0520
+ * @tc.name: test_SetLayerBlendType_016
+ * @tc.desc: Set the blend type to BLEND_AKD
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0520, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1450,6 +1893,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0520, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0530
+ * @tc.name: test_SetLayerBlendType_017
+ * @tc.desc: Set the blend type to BLEND_BUTT
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0530, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1473,6 +1923,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0530, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0540
+ * @tc.name: test_SetLayerMaskInfo_002
+ * @tc.desc: Sets the current mask frame information to the vendor driver
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0540, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1496,6 +1953,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0540, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0550
+ * @tc.name: test_SetLayerCompositionType_002
+ * @tc.desc: set the composition type which the client expect
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0550, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1519,6 +1983,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0550, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0560
+ * @tc.name: test_SetLayerCompositionType_003
+ * @tc.desc: set the composition type which the client expect
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0560, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1542,6 +2013,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0560, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0570
+ * @tc.name: test_SetLayerCompositionType_004
+ * @tc.desc: set the composition type which the client expect
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0570, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1565,6 +2043,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0570, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0580
+ * @tc.name: test_SetLayerCompositionType_005
+ * @tc.desc: set the composition type which the client expect
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0580, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1588,6 +2073,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0580, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0590
+ * @tc.name: test_SetLayerCompositionType_006
+ * @tc.desc: set the composition type which the client expect
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0590, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1611,6 +2103,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0590, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0600
+ * @tc.name: test_SetLayerCompositionType_007
+ * @tc.desc: set the composition type which the client expect
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0600, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {
@@ -1634,6 +2133,13 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0600, TestSize.Level1)
     DestroyLayer(layer);
 }
 
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0610
+ * @tc.name: test_SetLayerCompositionType_008
+ * @tc.desc: set the composition type which the client expect
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0610, TestSize.Level1)
 {
     std::vector<LayerSettings> settings = {

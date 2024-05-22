@@ -56,7 +56,12 @@ void UsbdFunctionTestAdditional::SetUpTestCase(void)
     }
 }
 
-void UsbdFunctionTestAdditional::TearDownTestCase(void) {}
+void UsbdFunctionTestAdditional::TearDownTestCase(void)
+{
+    auto ret = g_usbInterface->SetCurrentFunctions(USB_FUNCTION_HDC);
+    HDF_LOGI("UsbdFunctionTest::SUB_USB_DeviceManager_HDI_Func_0800 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+}
 
 void UsbdFunctionTestAdditional::SetUp(void) {}
 

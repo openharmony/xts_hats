@@ -530,3 +530,38 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SMVideo_0200, TestSize.Level1)
     cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
     cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
 }
+
+/**
+ * @tc.name:SUB_Driver_Camera_ZoomBand_0100
+ * @tc.desc:OHOS_ABILITY_EQUIVALENT_FOCUS
+ * @tc.size:MediumTest
+ * @tc.type:Function
+*/
+HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_ZoomBand_0100, TestSize.Level1)
+{
+    EXPECT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_EQUIVALENT_FOCUS, &entry);
+    if (cameraTest->rc != HDI::Camera::V1_0::NO_ERROR) {
+        CAMERA_LOGI("OHOS_ABILITY_EQUIVALENT_FOCUS can not be find");
+        return;
+    }
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR) {
+        EXPECT_NE(entry.data.i32, nullptr);
+        EXPECT_EQ(entry.count > 0, true);
+        CAMERA_LOGI("print tag<OHOS_ABILITY_EQUIVALENT_FOCUS> value start.");
+        constexpr size_t step = 10; // print step
+        std::stringstream ss;
+        for (size_t i = 0; i < entry.count; i++) {
+            ss << entry.data.i32[i] << " ";
+            if ((i != 0) && (i % step == 0 || i == entry.count - 1)) {
+                CAMERA_LOGI("%{public}s\n", ss.str().c_str());
+                ss.clear();
+                ss.str("");
+            }
+        }
+        CAMERA_LOGI("print tag<OHOS_ABILITY_EQUIVALENT_FOCUS> value end.");
+    }
+}

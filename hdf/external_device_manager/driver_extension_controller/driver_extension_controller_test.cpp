@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -102,7 +102,14 @@ public:
     }
 };
 
-HWTEST_F(DrvExtCtrlTest, DrvExtCtrlWithSATest, TestSize.Level1)
+/**
+ * @tc.number: SUB_Driver_Ext_LifeCycle_0500
+ * @tc.name: DrvExtCtrlWithSATest
+ * @tc.desc: Successfully called the Start Stop interface when testing with SA permission
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(DrvExtCtrlTest, SUB_Driver_Ext_LifeCycle_0500, TestSize.Level1)
 {
     AccessTokenTest::SetTestCaseNative(&g_sysInfoInstance);
     int ret = 0;
@@ -113,7 +120,14 @@ HWTEST_F(DrvExtCtrlTest, DrvExtCtrlWithSATest, TestSize.Level1)
     ASSERT_EQ(ret, 0);
 }
 
-HWTEST_F(DrvExtCtrlTest, DrvExtCtrlWithoutSATest, TestSize.Level1)
+/**
+ * @tc.number: SUB_Driver_Ext_LifeCycle_0600
+ * @tc.name: DrvExtCtrlWithoutSATest
+ * @tc.desc: Call to Start Stop interface failed when testing without SA permission
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(DrvExtCtrlTest, SUB_Driver_Ext_LifeCycle_0600, TestSize.Level1)
 {
     AccessTokenTest::SetTestCaseNative(&g_normalInfoInstance);
     int ret = 0;
@@ -124,8 +138,14 @@ HWTEST_F(DrvExtCtrlTest, DrvExtCtrlWithoutSATest, TestSize.Level1)
     ASSERT_NE(ret, 0);
 }
 
-
-HWTEST_F(DrvExtCtrlTest, DrvExtCtrlConnectTest0, TestSize.Level1)
+/**
+ * @tc.number: SUB_Driver_Ext_LifeCycle_0700
+ * @tc.name: DrvExtCtrlConnectTest0
+ * @tc.desc: When testing with SA permissions, Connect&Disconnect successfully called
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(DrvExtCtrlTest, SUB_Driver_Ext_LifeCycle_0700, TestSize.Level1)
 {
     AccessTokenTest::SetTestCaseNative(&g_sysInfoInstance);
     int ret = 0;
@@ -158,7 +178,15 @@ HWTEST_F(DrvExtCtrlTest, DrvExtCtrlConnectTest0, TestSize.Level1)
     ASSERT_EQ(con->disconnectCount_, 1);
 }
 
-HWTEST_F(DrvExtCtrlTest, DrvExtCtrlConnectTest1, TestSize.Level1)
+/**
+ * @tc.number: SUB_Driver_Ext_LifeCycle_0800
+ * @tc.name: DrvExtCtrlConnectTest1
+ * @tc.desc: When testing for SA permissions, an error was entered and the registration for
+ * Connect&Disconnect failed to call
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(DrvExtCtrlTest, SUB_Driver_Ext_LifeCycle_0800, TestSize.Level1)
 {
     AccessTokenTest::SetTestCaseNative(&g_sysInfoInstance);
     int ret = 0;

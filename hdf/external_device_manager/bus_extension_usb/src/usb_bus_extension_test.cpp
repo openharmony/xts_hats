@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -47,13 +47,28 @@ static const vector<Metadata> g_testMetaDatas = {
     Metadata("pid", "0x1234,0x5678", ""),
     Metadata("vid", "0x1111,0x2222", "")
 };
-HWTEST_F(UsbBusExtensionTest, GetExtensionInstanceTest, TestSize.Level1)
+
+/**
+ * @tc.number: SUB_Driver_Ext_BusExtensionUSB_0200
+ * @tc.name: GetExtensionInstanceTest
+ * @tc.desc: Get UsbBusExtension instance
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(UsbBusExtensionTest, SUB_Driver_Ext_BusExtensionUSB_0200, TestSize.Level1)
 {
     auto usbBus = make_shared<UsbBusExtension>();
     ASSERT_NE(usbBus, nullptr);
 }
 
-HWTEST_F(UsbBusExtensionTest, SetDevChangeCallbackTest, TestSize.Level1)
+/**
+ * @tc.number: SUB_Driver_Ext_BusExtensionUSB_0300
+ * @tc.name: SetDevChangeCallbackTest
+ * @tc.desc: Test USB hot plug event callback
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(UsbBusExtensionTest, SUB_Driver_Ext_BusExtensionUSB_0300, TestSize.Level1)
 {
     auto usbBus = make_shared<UsbBusExtension>();
     ASSERT_NE(usbBus, nullptr);
@@ -61,7 +76,14 @@ HWTEST_F(UsbBusExtensionTest, SetDevChangeCallbackTest, TestSize.Level1)
     ASSERT_EQ(ret, 0);
 }
 
-HWTEST_F(UsbBusExtensionTest, ParseDriverInfoTest, TestSize.Level1)
+/**
+ * @tc.number: SUB_Driver_Ext_BusExtensionUSB_0400
+ * @tc.name: ParseDriverInfoTest
+ * @tc.desc: Test the extension DriverInfo in the parsing package
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(UsbBusExtensionTest, SUB_Driver_Ext_BusExtensionUSB_0400, TestSize.Level1)
 {
     EDM_LOGI(MODULE_BUS_USB, "PraseDriverInfoTest Start");
     auto usbBus = make_shared<UsbBusExtension>();
@@ -79,7 +101,14 @@ HWTEST_F(UsbBusExtensionTest, ParseDriverInfoTest, TestSize.Level1)
     ASSERT_EQ(usbDriverinfo->vids_[1], 0x2222);
 }
 
-HWTEST_F(UsbBusExtensionTest, MatchDriverTest, TestSize.Level1)
+/**
+ * @tc.number: SUB_Driver_Ext_BusExtensionUSB_0500
+ * @tc.name: MatchDriverTest
+ * @tc.desc: Test equipment and driver matching function
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(UsbBusExtensionTest, SUB_Driver_Ext_BusExtensionUSB_0500, TestSize.Level1)
 {
     auto usbDrvInfo = make_shared<UsbDriverInfo>();
     usbDrvInfo->pids_.push_back(0x1234);

@@ -2179,3 +2179,33 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0610, TestSize.Level1)
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
     DestroyLayer(layer);
 }
+
+/**
+ * @tc.number: SUB_DriverSystem_DisplayComposer_0620
+ * @tc.name: test_SetLayerTransformMode_005
+ * @tc.desc: Sets the type of graphic rotation
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0620, TestSize.Level1)
+{
+    std::vector<LayerSettings> settings = {
+        {
+            .rectRatio = { 0, 0, 1.0f, 1.0f },
+            .color = RED
+        }
+    };
+
+    std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
+    ASSERT_TRUE((layers.size() > 0));
+
+    PrepareAndCommit();
+
+    auto layer = layers[0];
+
+    TransformType type = TransformType::ROTATE_NONE;
+    auto ret = g_composerDevice->SetLayerTransformMode(g_displayIds[0], layer->GetId(), type);
+    PrepareAndCommit();
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+    DestroyLayer(layer);
+}

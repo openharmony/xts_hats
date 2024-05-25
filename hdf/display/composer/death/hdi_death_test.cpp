@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -38,9 +38,11 @@ void ComposerDiedRecipient::OnRemoteDied(const wptr<IRemoteObject>& remote)
 }
 
 /**
-  * @tc.number: test_AddDeathRecipient
-  * @tc.name: SUB_Driver_Display_Death_0300
-  * @tc.desc:
+  * @tc.number: SUB_Driver_Display_Death_0300
+  * @tc.name: test_AddDeathRecipient
+  * @tc.desc: Composer_host adds death listening
+  * @tc.size: MediumTest
+  * @tc.type: Function
   */
 HWTEST_F(DeathTest, SUB_Driver_Display_Death_0300, TestSize.Level1)
 {
@@ -55,9 +57,11 @@ HWTEST_F(DeathTest, SUB_Driver_Display_Death_0300, TestSize.Level1)
 }
 
 /**
-  * @tc.number: test_RemoveDeathRecipient
-  * @tc.name: SUB_Driver_Display_Death_0400
-  * @tc.desc:
+  * @tc.number: SUB_Driver_Display_Death_0400
+  * @tc.name: test_RemoveDeathRecipient
+  * @tc.desc: Composer_host removes death listening
+  * @tc.size: MediumTest
+  * @tc.type: Function
   */
 HWTEST_F(DeathTest, SUB_Driver_Display_Death_0400, TestSize.Level1)
 {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -37,6 +37,13 @@ void BufferDiedRecipient::OnRemoteDied(const OHOS::wptr<OHOS::IRemoteObject>& re
     EXPECT_EQ(g_isServiceDead, true);
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_Death_0100
+ * @tc.name: test_AddDeathRecipient
+ * @tc.desc: Allocator_host adds death listening
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeathTest, SUB_Driver_Display_Death_0100, TestSize.Level1)
 {
     displayBuffer_.reset(IDisplayBuffer::Get());
@@ -49,6 +56,13 @@ HWTEST_F(DeathTest, SUB_Driver_Display_Death_0100, TestSize.Level1)
     system("killall allocator_host");
 }
 
+/**
+ * @tc.number: SUB_Driver_Display_Death_0200
+ * @tc.name: test_RemoveDeathRecipient
+ * @tc.desc: Allocator_host removes death listening
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(DeathTest, SUB_Driver_Display_Death_0200, TestSize.Level1)
 {
     displayBuffer_.reset(IDisplayBuffer::Get());

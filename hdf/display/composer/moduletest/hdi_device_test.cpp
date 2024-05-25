@@ -523,7 +523,6 @@ TEST_P(LayerRotateTest, SplitCheck)
 
 /**
  * @tc.number: SUB_Driver_Display_HDI_2300
- * @tc.name: test_SetLayerTransformMode_001
  * @tc.desc: Test layer cropping, Please note that failing to save the composite data using
  * clientLayer during display HDI adaptation image synthesis will cause this use case to fail
  * @tc.size: MediumTest

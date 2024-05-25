@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -76,6 +76,13 @@ public:
 const uint32_t ACT_DEVUP = 0;
 const uint32_t ACT_DEVDOWN = 1;
 
+/**
+ * @tc.number: SUB_Driver_Ext_BusExtensionUSB_0800
+ * @tc.name: UsbDevCallbackTest
+ * @tc.desc: Pile driving test USB hot plug event
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(UsbSubscriberTest, UsbDevCallbackTest, TestSize.Level1)
 {
     auto testCb = make_shared<TestDevChangeCallback>();
@@ -128,6 +135,14 @@ HWTEST_F(UsbSubscriberTest, UsbDevCallbackTest, TestSize.Level1)
     EXPECT_EQ(ret, 0);
     EXPECT_EQ(testCb->devInfoMap.size(), (size_t)0);
 }
+
+/**
+ * @tc.number: SUB_Driver_Ext_BusExtensionUSB_0900
+ * @tc.name: UsbDevCallbackErrorTest
+ * @tc.desc: Error data return for USB hot plug event during pile driving test
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(UsbSubscriberTest, UsbDevCallbackErrorTest, TestSize.Level1)
 {
     USBDeviceInfo info = {ACT_DEVUP, BUS_NUM_OK, DEV_ADDR_OK};
@@ -152,6 +167,13 @@ HWTEST_F(UsbSubscriberTest, UsbDevCallbackErrorTest, TestSize.Level1)
     EXPECT_EQ(ret, 0);
 }
 
+/**
+ * @tc.number: SUB_Driver_Ext_BusExtensionUSB_1000
+ * @tc.name: PortChangEeventTest
+ * @tc.desc: Unsupported PortEvent for USB hot plug events during pile driving testing
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
 HWTEST_F(UsbSubscriberTest, PortChangEeventTest, TestSize.Level1)
 {
     int ret = 0;

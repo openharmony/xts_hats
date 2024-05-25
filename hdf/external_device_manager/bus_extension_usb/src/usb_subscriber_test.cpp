@@ -83,7 +83,7 @@ const uint32_t ACT_DEVDOWN = 1;
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(UsbSubscriberTest, UsbDevCallbackTest, TestSize.Level1)
+HWTEST_F(UsbSubscriberTest, SUB_Driver_Ext_BusExtensionUSB_0800, TestSize.Level1)
 {
     auto testCb = make_shared<TestDevChangeCallback>();
     usbBusExt->SetDevChangeCallback(testCb);
@@ -143,7 +143,7 @@ HWTEST_F(UsbSubscriberTest, UsbDevCallbackTest, TestSize.Level1)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(UsbSubscriberTest, UsbDevCallbackErrorTest, TestSize.Level1)
+HWTEST_F(UsbSubscriberTest, SUB_Driver_Ext_BusExtensionUSB_0900, TestSize.Level1)
 {
     USBDeviceInfo info = {ACT_DEVUP, BUS_NUM_OK, DEV_ADDR_OK};
     int ret = 0;
@@ -174,7 +174,7 @@ HWTEST_F(UsbSubscriberTest, UsbDevCallbackErrorTest, TestSize.Level1)
  * @tc.size: MediumTest
  * @tc.type: Function
  */
-HWTEST_F(UsbSubscriberTest, PortChangEeventTest, TestSize.Level1)
+HWTEST_F(UsbSubscriberTest, SUB_Driver_Ext_BusExtensionUSB_1000, TestSize.Level1)
 {
     int ret = 0;
     usbBusExt->SetDevChangeCallback(nullptr);

@@ -377,9 +377,9 @@ void Test::StreamConsumer::CalculateFps(int64_t timestamp, int32_t streamId)
     timestampCount_++;
 }
 
-void Test::StreamConsumer::ReturnTimeStamp(int64_t *g_timestamp, uint32_t lenght, int64_t timestamp, int32_t gotSize)
+void Test::StreamConsumer::ReturnTimeStamp(int64_t *g_timestamp, uint32_t lenght, int64_t timestamp, int32_t width)
 {
-    if (gotSize != UT_PREVIEW_SIZE) {
+    if (width != 0) {
         if (g_timestamp[0] == 0) {
             g_timestamp[0] = timestamp;
         } else {
@@ -419,12 +419,14 @@ OHOS::sptr<OHOS::IBufferProducer> Test::StreamConsumer::CreateProducer(std::func
                     int32_t isKey = 0;
                     int32_t streamId = 0;
                     int32_t captureId = 0;
+                    int32_t width = 0;
                     buffer->GetExtraData()->ExtraGet(OHOS::Camera::dataSize, gotSize);
                     buffer->GetExtraData()->ExtraGet(OHOS::Camera::isKeyFrame, isKey);
                     buffer->GetExtraData()->ExtraGet(OHOS::Camera::timeStamp, timestamp);
                     buffer->GetExtraData()->ExtraGet(OHOS::Camera::streamId, streamId);
                     buffer->GetExtraData()->ExtraGet(OHOS::Camera::captureId, captureId);
-                    ReturnTimeStamp(g_timestamp, sizeof(g_timestamp) / sizeof(g_timestamp[0]), timestamp, gotSize);
+                    buffer->GetExtraData()->ExtraGet(OHOS::Camera::dataWidth, width);
+                    ReturnTimeStamp(g_timestamp, sizeof(g_timestamp) / sizeof(g_timestamp[0]), timestamp, width);
                     if (gotSize) {
                         CalculateFps(timestamp, streamId);
                         callback_(addr, gotSize);

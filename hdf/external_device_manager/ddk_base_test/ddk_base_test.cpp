@@ -25,6 +25,7 @@ using namespace testing::ext;
 #define BUFF_LENTH 10
 #define PORT_READ 0x01
 #define PORT_WRITE 0x02
+#define PORT_ILLEGAL 0x08
 
 namespace OHOS {
 namespace ExternalDeviceManager {

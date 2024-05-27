@@ -150,7 +150,7 @@ public:
     class StreamConsumer {
     public:
         void CalculateFps(int64_t timestamp, int32_t streamId);
-        void ReturnTimeStamp(int64_t *g_timestamp, uint32_t lenght,int64_t timestamp, int32_t gotSize);
+        void ReturnTimeStamp(int64_t *g_timestamp, uint32_t lenght, int64_t timestamp, int32_t width);
         OHOS::sptr<OHOS::IBufferProducer> CreateProducer(std::function<void(void*, uint32_t)> callback);
         OHOS::sptr<BufferProducerSequenceable> CreateProducerSeq(std::function<void(void*, uint32_t)> callback);
         void TakeSnapshoe()

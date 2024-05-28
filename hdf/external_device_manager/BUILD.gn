@@ -22,6 +22,7 @@ group("HatsHdfExternalDeviceTest") {
   } else {
     deps = [
       "bus_extension_usb:HatsHdfExternalBusUsbTest",
+      "ddk_base_test:HatsHdfExternalDdkBaseTest",
       "ddk_permission_test:HatsHdfExternalDdkPermissionTest",
       "device_manager_test:HatsHdfExternalDeviceManagerTest",
       "driver_extension_context:HatsHdfExtensionContextTest",

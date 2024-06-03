@@ -91,7 +91,7 @@ void UsbdRequestTestAdditional::SetUp(void) {}
 void UsbdRequestTestAdditional::TearDown(void) {}
 
 /**
- * @tc.number: SUB_Driver_Usb_RequestTest_RequestWait_0600
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityRequestAddTest_0100
  * @tc.name: testHdiUsbRequestTestRequestWait001
  * @tc.desc: Waits for the operation result of the isochronous transfer request in <b>RequestQueue</b>.
  * (dev, waitData, bufferData, 1000).
@@ -114,7 +114,7 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestRequestWait001, TestSiz
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_RequestTest_RequestWait_0700
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityRequestAddTest_0200
  * @tc.name: testHdiUsbRequestTestRequestWait002
  * @tc.desc: Waits for the operation result of the isochronous transfer request in <b>RequestQueue</b>.
  * ({1, 255}, waitData, bufferData, 1000).
@@ -139,7 +139,7 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestRequestWait002, TestSiz
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_RequestTest_RequestWait_0800
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityRequestAddTest_0300
  * @tc.name: testHdiUsbRequestTestRequestWait003
  * @tc.desc: Waits for the operation result of the isochronous transfer request in <b>RequestQueue</b>.
  * ({255, 1}, waitData, bufferData, 1000).
@@ -164,7 +164,7 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestRequestWait003, TestSiz
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_RequestTest_RequestQueue_1000
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityRequestAddTest_0400
  * @tc.name: testHdiUsbRequestTestRequestQueue001
  * @tc.desc: Sends or receives requests for isochronous transfer on a specified endpoint.
  * clientData = {'q', 'u', 'e', 'u', 'e', 'r', 'e', 'a', 'd', ','}.
@@ -184,7 +184,7 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestRequestQueue001, TestSi
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_RequestTest_RequestQueue_1100
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityRequestAddTest_0500
  * @tc.name: testHdiUsbRequestTestRequestQueue002
  * @tc.desc: Sends or receives requests for isochronous transfer on a specified endpoint.
  * clientData = {'q', 'u', 'e', 'u', 'e', 'r', 'e', 'a', 'd', '!'}.
@@ -204,7 +204,7 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestRequestQueue002, TestSi
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_RequestTest_RequestQueue_1200
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityRequestAddTest_0600
  * @tc.name: testHdiUsbRequestTestRequestQueue003
  * @tc.desc: Sends or receives requests for isochronous transfer on a specified endpoint.
  * clientData = {'q', 'u', 'e', 'u', 'e', 'r', 'e', 'a', 'd', '~'}.
@@ -224,7 +224,7 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestRequestQueue003, TestSi
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_RequestTest_RequestQueue_1300
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityRequestAddTest_0700
  * @tc.name: testHdiUsbRequestTestRequestQueue004
  * @tc.desc: Sends or receives requests for isochronous transfer on a specified endpoint.
  * dev = {1, 255}.
@@ -246,7 +246,7 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestRequestQueue004, TestSi
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_RequestTest_RequestQueue_1400
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityRequestAddTest_0800
  * @tc.name: testHdiUsbRequestTestRequestQueue005
  * @tc.desc: Sends or receives requests for isochronous transfer on a specified endpoint.
  * dev = {255, 1}.
@@ -268,7 +268,7 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestRequestQueue005, TestSi
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_RequestTest_RequestCancel_0900
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityRequestAddTest_0900
  * @tc.name: testHdiUsbRequestTestRequestCancel001
  * @tc.desc: Cancels the data transfer requests to be processed.
  * pipe = {1, 255}.
@@ -295,7 +295,7 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestRequestCancel001, TestS
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_RequestTest_RequestCancel_1000
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityRequestAddTest_1000
  * @tc.name: testHdiUsbRequestTestRequestCancel002
  * @tc.desc: Cancels the data transfer requests to be processed.
  * pipe = {255, 1}.
@@ -322,7 +322,7 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestRequestCancel002, TestS
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_RequestTest_RequestCancel_1100
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityRequestAddTest_1100
  * @tc.name: testHdiUsbRequestTestRequestCancel003
  * @tc.desc: Cancels the data transfer requests to be processed.
  * dev = {255, 1}.
@@ -349,7 +349,7 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestRequestCancel003, TestS
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_RequestTest_RequestCancel_1200
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityRequestAddTest_1200
  * @tc.name: testHdiUsbRequestTestRequestCancel004
  * @tc.desc: Cancels the data transfer requests to be processed.
  * dev = {1, 255}.
@@ -376,7 +376,7 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestRequestCancel004, TestS
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_RequestTest_RequestCancel_1300
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityRequestAddTest_1300
  * @tc.name: testHdiUsbRequestTestRequestCancel005
  * @tc.desc: Cancels the data transfer requests to be processed.
  * dev = {1, 255}. pipe = {1, 255}.
@@ -406,7 +406,7 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestRequestCancel005, TestS
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_RequestTest_RequestCancel_1400
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityRequestAddTest_1400
  * @tc.name: testHdiUsbRequestTestRequestCancel006
  * @tc.desc: Cancels the data transfer requests to be processed.
  * dev = {255, 1}. pipe = {255, 1}.
@@ -436,7 +436,7 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestRequestCancel006, TestS
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_RequestTest_RequestCancel_1500
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityRequestAddTest_1500
  * @tc.name: testHdiUsbRequestTestRequestCancel007
  * @tc.desc: Cancels the data transfer requests to be processed.
  * dev = {255, 255}. pipe = {255, 255}.
@@ -466,7 +466,7 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestRequestCancel007, TestS
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_RequestTest_BulkCancel_0600
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityRequestAddTest_1600
  * @tc.name: testHdiUsbRequestTestBulkCancel001
  * @tc.desc: Cancels the isochronous bulk transfer. dev ={1, 255}.
  */
@@ -488,7 +488,7 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestBulkCancel001, TestSize
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_RequestTest_BulkCancel_0700
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityRequestAddTest_1700
  * @tc.name: testHdiUsbRequestTestBulkCancel002
  * @tc.desc: Cancels the isochronous bulk transfer. dev ={255, 1}.
  */
@@ -510,7 +510,7 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestBulkCancel002, TestSize
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_RequestTest_BulkCancel_0800
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityRequestAddTest_1800
  * @tc.name: testHdiUsbRequestTestBulkCancel003
  * @tc.desc: Cancels the isochronous bulk transfer. dev ={255, 100}.
  */
@@ -532,7 +532,7 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestBulkCancel003, TestSize
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_RequestTest_BulkCancel_0900
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityRequestAddTest_1900
  * @tc.name: testHdiUsbRequestTestBulkCancel004
  * @tc.desc: Cancels the isochronous bulk transfer. dev ={100, 255}.
  */

@@ -132,7 +132,7 @@ void UsbdTransferTestAdditional::SetUp(void) {}
 void UsbdTransferTestAdditional::TearDown(void) {}
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_BulkTransferWrite_0900
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_0100
  * @tc.name: testHdiUsbTransferTestBulkTransferWrite001
  * @tc.desc: Writes data on a specified endpoint during bulk transfer.
  * bufferData = {'B', 'u', 'l', 'k', 'w', 'r', 'i', 't', 'e', '0', ','}.
@@ -151,7 +151,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestBulkTransferWrite001,
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_BulkTransferWrite_1000
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_0200
  * @tc.name: testHdiUsbTransferTestBulkTransferWrite002
  * @tc.desc: Writes data on a specified endpoint during bulk transfer.
  * bufferData = {'B', 'u', 'l', 'k', 'w', 'r', 'i', 't', 'e', '0', '!'}.
@@ -170,7 +170,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestBulkTransferWrite002,
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_BulkTransferWrite_1100
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_0300
  * @tc.name: testHdiUsbTransferTestBulkTransferWrite003
  * @tc.desc: Writes data on a specified endpoint during bulk transfer.
  * bufferData = {'B', 'u', 'l', 'k', 'w', 'r', 'i', 't', 'e', '0', '~'}.
@@ -189,7 +189,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestBulkTransferWrite003,
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_BulkTransferRead_0600
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_0400
  * @tc.name: testHdiUsbTransferTestBulkTransferRead001
  * @tc.desc: Writes data on a specified endpoint during bulk transfer.
  * bufferData = {'B', 'u', 'l', 'k', 'w', 'r', 'i', 't', 'e', '0', '~'} Check if the read is correct.
@@ -216,7 +216,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestBulkTransferRead001, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_BulkTransferRead_0700
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_0500
  * @tc.name: testHdiUsbTransferTestBulkTransferRead002
  * @tc.desc: Writes data on a specified endpoint during bulk transfer.
  * bufferData = {'B', 'u', 'l', 'k', 'w', 'r', 'i', 't', 'e', '0', '!'} Check if the read is correct.
@@ -243,7 +243,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestBulkTransferRead002, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_BulkTransferRead_0800
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_0600
  * @tc.name: testHdiUsbTransferTestBulkTransferRead003
  * @tc.desc: Writes data on a specified endpoint during bulk transfer.
  * bufferData = {'B', 'u', 'l', 'k', 'w', 'r', 'i', 't', 'e', '0', ','} Check if the read is correct.
@@ -270,7 +270,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestBulkTransferRead003, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_InterruptTransferWrite_0900
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_0700
  * @tc.name: testHdiUsbTransferTestInterruptTransferWrite001
  * @tc.desc: Writes data on a specified endpoint during interrupt transfer.
  * bufferData = {'I', 'n', 't', 'w', 'r', 'i', 't', 'e', '0', ','}.
@@ -289,7 +289,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestInterruptTransferWrit
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_InterruptTransferWrite_1000
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_0800
  * @tc.name: testHdiUsbTransferTestInterruptTransferWrite002
  * @tc.desc: Writes data on a specified endpoint during interrupt transfer.
  * bufferData = {'I', 'n', 't', 'w', 'r', 'i', 't', 'e', '0', '!'}.
@@ -308,7 +308,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestInterruptTransferWrit
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_InterruptTransferWrite_1100
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_0900
  * @tc.name: testHdiUsbTransferTestInterruptTransferWrite003
  * @tc.desc: Writes data on a specified endpoint during interrupt transfer.
  * bufferData = {'I', 'n', 't', 'w', 'r', 'i', 't', 'e', '0', '~'}.
@@ -327,7 +327,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestInterruptTransferWrit
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_InterruptTransferRead_0600
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_1000
  * @tc.name: testHdiUsbTransferTestInterruptTransferRead001
  * @tc.desc: Reads data on a specified endpoint during interrupt transfer.
  * bufferData = {'I', 'n', 't', 'w', 'r', 'i', 't', 'e', '0', '~'} Check if the read is correct.
@@ -354,7 +354,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestInterruptTransferRead
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_InterruptTransferRead_0700
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_1100
  * @tc.name: testHdiUsbTransferTestInterruptTransferRead002
  * @tc.desc: Reads data on a specified endpoint during interrupt transfer.
  * bufferData = {'I', 'n', 't', 'w', 'r', 'i', 't', 'e', '0', '!'} Check if the read is correct.
@@ -381,7 +381,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestInterruptTransferRead
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_InterruptTransferRead_0800
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_1200
  * @tc.name: testHdiUsbTransferTestInterruptTransferRead003
  * @tc.desc: Reads data on a specified endpoint during interrupt transfer.
  * bufferData = {'I', 'n', 't', 'w', 'r', 'i', 't', 'e', '0', ','} Check if the read is correct.
@@ -408,7 +408,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestInterruptTransferRead
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_UnbindUsbdSubscriber_0800
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_1300
  * @tc.name: testHdiUsbTransferTestUnbindUsbdSubscriber001
  * @tc.desc: Unbinds a subscriber twice.
  */
@@ -426,7 +426,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestUnbindUsbdSubscriber0
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_UnbindUsbdSubscriber_0900
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_1400
  * @tc.name: testHdiUsbTransferTestUnbindUsbdSubscriber002
  * @tc.desc: Unbinds a subscriber for twice.unbind and bind, then Unbind twice.
  */
@@ -448,7 +448,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestUnbindUsbdSubscriber0
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_UnbindUsbdSubscriber_1000
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_1500
  * @tc.name: testHdiUsbTransferTestUnbindUsbdSubscriber003
  * @tc.desc: Unbinds a subscriber twice.then unbind and bind.
  */
@@ -470,7 +470,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestUnbindUsbdSubscriber0
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_bindUsbdSubscriber_0400
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_1600
  * @tc.name: testHdiUsbTransferTestbindUsbdSubscriber001
  * @tc.desc: Binds a subscriber.unbind and bind twice.
  */
@@ -498,7 +498,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestbindUsbdSubscriber001
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_ControlTransferRead_4300
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_1700
  * @tc.name: testHdiUsbTransferTestControlTransferRead001
  * @tc.desc: Performs control transfer for endpoint 0 of the device. dev = (0,0).see if bufferData is equal to
  * bufferData1.
@@ -524,7 +524,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestControlTransferRead00
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_0900
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_1800
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite001
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.timeout = 1.
  */
@@ -542,7 +542,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite001, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_1000
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_1900
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite002
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.timeout = 50.
  */
@@ -560,7 +560,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite002, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_1100
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_2000
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite003
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.timeout = 100.
  */
@@ -578,7 +578,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite003, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_1200
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_2100
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite004
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.timeout = 255.
  */
@@ -596,7 +596,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite004, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_1300
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_2200
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite005
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 255} timeout = 1.
  */
@@ -615,7 +615,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite005, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_1400
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_2300
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite006
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 255} timeout = 50.
  */
@@ -634,7 +634,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite006, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_1500
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_2400
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite007
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 255} timeout = 100.
  */
@@ -653,7 +653,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite007, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_1600
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_2500
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite008
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 255} timeout = 255.
  */
@@ -672,7 +672,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite008, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_1700
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_2600
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite009
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {0, 255} timeout = 1.
  */
@@ -691,7 +691,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite009, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_1800
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_2700
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite010
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {0, 255} timeout = 50.
  */
@@ -710,7 +710,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite010, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_1900
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_2800
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite011
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {0, 255} timeout = 100.
  */
@@ -729,7 +729,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite011, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_2000
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_2900
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite012
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {0, 255} timeout = 255.
  */
@@ -748,7 +748,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite012, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_2100
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_3000
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite013
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 0} timeout = 1.
  */
@@ -767,7 +767,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite013, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_2200
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_3100
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite014
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 0} timeout = 50.
  */
@@ -786,7 +786,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite014, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_2300
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_3200
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite015
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 0} timeout = 100.
  */
@@ -805,7 +805,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite015, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_2400
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_3300
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite016
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 0} timeout = 255.
  */
@@ -824,7 +824,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite016, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_2500
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_3400
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite017
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 255} timeout = 1 pipe = { 1,
  * 244 }.
@@ -844,7 +844,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite017, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_2600
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_3500
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite018
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 255} timeout = 50 pipe = { 1,
  * 244 }.
@@ -864,7 +864,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite018, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_2700
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_3600
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite019
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 255} timeout = 100 pipe = { 1,
  * 244 }.
@@ -884,7 +884,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite019, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_2800
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_3700
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite020
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 255} timeout = 255 pipe = { 1,
  * 244 }.
@@ -904,7 +904,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite020, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_2900
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_3800
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite021
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {0, 255} timeout = 1 pipe = { 1, 244
  * }.
@@ -924,7 +924,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite021, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_3000
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_3900
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite022
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {0, 255} timeout = 50 pipe = { 1, 244
  * }.
@@ -944,7 +944,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite022, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_3100
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_4000
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite023
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {0, 255} timeout = 100 pipe = { 1,
  * 244 }.
@@ -964,7 +964,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite023, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_3200
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_4100
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite024
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {0, 255} timeout = 255 pipe = { 1,
  * 244 }.
@@ -984,7 +984,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite024, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_3300
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_4200
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite025
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 0} timeout = 1 pipe = { 1, 244
  * }.
@@ -1004,7 +1004,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite025, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_3400
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_4300
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite026
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 0} timeout = 50 pipe = { 1, 244
  * }.
@@ -1024,7 +1024,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite026, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_3500
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_4400
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite027
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 0} timeout = 100 pipe = { 1,
  * 244 }.
@@ -1044,7 +1044,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite027, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_3600
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_4500
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite028
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 0} timeout = 255 pipe = { 1,
  * 244 }.
@@ -1064,7 +1064,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite028, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_3700
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_4600
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite029
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 255}  pointId = POINTID_BULK_IN
  * timeout = 1.
@@ -1084,7 +1084,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite029, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_3800
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_4700
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite030
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 255} pointId = POINTID_BULK_IN
  * timeout = 50.
@@ -1104,7 +1104,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite030, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_3900
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_4800
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite031
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 255} pointId = POINTID_BULK_IN
  * timeout = 100.
@@ -1124,7 +1124,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite031, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_4000
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_4900
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite032
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 255} pointId = POINTID_BULK_IN
  * timeout = 255.
@@ -1144,7 +1144,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite032, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_4100
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_5000
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite033
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {0, 255} pointId = POINTID_BULK_IN
  * timeout = 1.
@@ -1164,7 +1164,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite033, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_4200
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_5100
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite034
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {0, 255} pointId = POINTID_BULK_IN
  * timeout = 50.
@@ -1184,7 +1184,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite034, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_4300
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_5200
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite035
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {0, 255} pointId = POINTID_BULK_IN
  * timeout = 100.
@@ -1204,7 +1204,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite035, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_4400
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_5300
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite036
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {0, 255} pointId = POINTID_BULK_IN
  * timeout = 255.
@@ -1224,7 +1224,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite036, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_4500
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_5400
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite037
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 0} pointId = POINTID_BULK_IN
  * timeout = 1.
@@ -1244,7 +1244,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite037, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_4600
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_5500
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite038
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 0} pointId = POINTID_BULK_IN
  * timeout = 50.
@@ -1264,7 +1264,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite038, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_4700
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_5600
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite039
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 0} pointId = POINTID_BULK_IN
  * timeout = 100.
@@ -1284,7 +1284,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite039, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferWrite_4800
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_5700
  * @tc.name: testHdiUsbTransferTestIsoTransferWrite040
  * @tc.desc: Writes data on a specified endpoint during isochronous transfer.dev = {255, 0} pointId = POINTID_BULK_IN
  * timeout = 255.
@@ -1304,7 +1304,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferWrite040, 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_IsoTransferRead_0600
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_5800
  * @tc.name: testHdiUsbTransferTestIsoTransferRead001
  * @tc.desc: Reads data on a specified endpoint during isochronous transfer.see if bufferData1 is equal to bufferData.
  */
@@ -1331,7 +1331,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestIsoTransferRead001, F
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_BulkRead_0600
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_5900
  * @tc.name: testHdiUsbTransferTestBulkRead001
  * @tc.desc: Reads data during isochronous bulk transfer. dev = {1, 255}.
  */
@@ -1353,7 +1353,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestBulkRead001, Function
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_BulkRead_0700
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_6000
  * @tc.name: testHdiUsbTransferTestBulkRead002
  * @tc.desc: Reads data during isochronous bulk transfer. dev = {255, 1}.
  */
@@ -1375,7 +1375,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestBulkRead002, Function
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_BulkRead_0800
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_6100
  * @tc.name: testHdiUsbTransferTestBulkRead003
  * @tc.desc: Reads data during isochronous bulk transfer. dev = {255, 255}.
  */
@@ -1397,7 +1397,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestBulkRead003, Function
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_BulkRead_0900
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_6200
  * @tc.name: testHdiUsbTransferTestBulkRead004
  * @tc.desc: Reads data during isochronous bulk transfer. dev = {100, 255}.
  */
@@ -1419,7 +1419,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestBulkRead004, Function
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_BulkRead_1000
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_6300
  * @tc.name: testHdiUsbTransferTestBulkRead005
  * @tc.desc: Reads data during isochronous bulk transfer. dev = {255, 100}.
  */
@@ -1441,7 +1441,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestBulkRead005, Function
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_BulkWrite_0600
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_6400
  * @tc.name: testHdiUsbTransferTestBulkWrite001
  * @tc.desc: Writes data during isochronous bulk transfer. dev = {1, 255}.
  */
@@ -1463,7 +1463,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestBulkWrite001, Functio
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_BulkWrite_0700
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_6500
  * @tc.name: testHdiUsbTransferTestBulkWrite002
  * @tc.desc: Writes data during isochronous bulk transfer. dev = {255, 1}.
  */
@@ -1485,7 +1485,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestBulkWrite002, Functio
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_BulkWrite_0800
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_6600
  * @tc.name: testHdiUsbTransferTestBulkWrite003
  * @tc.desc: Writes data during isochronous bulk transfer. dev = {255, 255}.
  */
@@ -1507,7 +1507,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestBulkWrite003, Functio
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_BulkWrite_0900
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_6700
  * @tc.name: testHdiUsbTransferTestBulkWrite004
  * @tc.desc: Writes data during isochronous bulk transfer. dev = {100, 255}.
  */
@@ -1529,7 +1529,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestBulkWrite004, Functio
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_BulkWrite_1000
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_6800
  * @tc.name: testHdiUsbTransferTestBulkWrite005
  * @tc.desc: Writes data during isochronous bulk transfer. dev = {255, 100}.
  */
@@ -1551,7 +1551,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestBulkWrite005, Functio
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_RegBulkCallback_0600
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_6900
  * @tc.name: testHdiUsbTransferTestRegBulkCallback001
  * @tc.desc: Registers a callback for isochronous bulk transfer. dev = {1, 255}.
  */
@@ -1572,7 +1572,7 @@ HWTEST_F(UsbdTransferTestAdditional, testHdiUsbTransferTestRegBulkCallback001, F
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_TransferTest_UnRegBulkCallback_0600
+ * @tc.number: SUB_USB_HostManager_HDI_CompatibilityTransferAddTest_7000
  * @tc.name: testHdiUsbTransferTestUnRegBulkCallback001
  * @tc.desc: Unregisters the callback for isochronous bulk transfer. dev = {1, 255}.
  */

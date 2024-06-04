@@ -18,6 +18,7 @@
 #include "video_key_info.h"
 constexpr uint32_t ITEM_CAPACITY = 100;
 constexpr uint32_t DATA_CAPACITY = 2000;
+constexpr uint32_t DATA_COUNT = 1;
 constexpr uint32_t FPS_COUNT = 2;
 constexpr uint32_t CHECK_AREA_COUNT = 4;
 constexpr uint32_t STREAMINFO_WIDTH = 1920;
@@ -92,13 +93,18 @@ void Test::Init()
     hostCallback = new TestCameraHostCallback();
     ret = serviceV1_3->SetCallback(hostCallback);
     EXPECT_EQ(ret, 0);
+    serviceV1_3->GetCameraIds(cameraIds);
+    if (cameraIds.size() == 0) {
+        CAMERA_LOGE("camera device list empty");
+        GTEST_SKIP() << "No Camera Available" << std::endl;
+        return;
+    }
 }
 
 void Test::Open(int cameraId)
 {
     if (cameraDeviceV1_3 == nullptr) {
         EXPECT_NE(serviceV1_3, nullptr);
-        serviceV1_3->GetCameraIds(cameraIds);
         EXPECT_NE(cameraIds.size(), 0);
         GetCameraMetadata(cameraId);
         deviceCallback = new OHOS::Camera::Test::DemoCameraDeviceCallback();
@@ -269,7 +275,7 @@ void Test::UpdateSettingsForSlowMotionMode(std::shared_ptr<OHOS::Camera::Test> c
     cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
     int32_t slowMotionControl = OHOS_CAMERA_MOTION_DETECTION_ENABLE;
-    meta->addEntry(OHOS_CONTROL_MOTION_DETECTION, &slowMotionControl, DATA_CAPACITY);
+    meta->addEntry(OHOS_CONTROL_MOTION_DETECTION, &slowMotionControl, DATA_COUNT);
     MetadataUtils::ConvertMetadataToVec(meta, setting);
     cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);

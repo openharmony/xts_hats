@@ -225,7 +225,7 @@ void UsbfnMtpTestAdditional::SetUp(void) {}
 
 void UsbfnMtpTestAdditional::TearDown(void) {}
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_ReceiveFile_1000
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_0100
  * @tc.name: testHdiUsbMtpTestReceiveFile001
  * @tc.desc: mfs Indicates the mtp file slice info. mfs.length = 1.
  */
@@ -252,7 +252,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestReceiveFile001, Function | Med
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_ReceiveFile_1100
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_0200
  * @tc.name: testHdiUsbMtpTestReceiveFile002
  * @tc.desc: mfs Indicates the mtp file slice info. mfs.length = 100.
  */
@@ -279,7 +279,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestReceiveFile002, Function | Med
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_ReceiveFile_1200
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_0300
  * @tc.name: testHdiUsbMtpTestReceiveFile003
  * @tc.desc: mfs Indicates the mtp file slice info. mfs.length = 255.
  */
@@ -306,7 +306,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestReceiveFile003, Function | Med
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_ReceiveFile_1300
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_0400
  * @tc.name: testHdiUsbMtpTestReceiveFile004
  * @tc.desc: mfs Indicates the mtp file slice info. mfs.length = 1000.
  */
@@ -333,7 +333,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestReceiveFile004, Function | Med
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_ReceiveFile_1400
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_0500
  * @tc.name: testHdiUsbMtpTestReceiveFile005
  * @tc.desc: mfs Indicates the mtp file slice info. mfs.length = MTP_MAX_FILE_SIZE - 2.
  */
@@ -360,7 +360,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestReceiveFile005, Function | Med
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_ReceiveFile_1500
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_0600
  * @tc.name: testHdiUsbMtpTestReceiveFile006
  * @tc.desc: mfs Indicates the mtp file slice info. mfs.length = MTP_MAX_FILE_SIZE - 1024.
  */
@@ -387,7 +387,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestReceiveFile006, Function | Med
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_ReceiveFile_1600
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_0700
  * @tc.name: testHdiUsbMtpTestReceiveFile007
  * @tc.desc: mfs Indicates the mtp file slice info.mfs.length = 1 mfs.command = 1 mfs.transactionId = 1.
  */
@@ -416,7 +416,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestReceiveFile007, Function | Med
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_ReceiveFile_1700
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_0800
  * @tc.name: testHdiUsbMtpTestReceiveFile008
  * @tc.desc: mfs Indicates the mtp file slice info. mfs.length = 100 mfs.command = 100 mfs.transactionId = 100.
  */
@@ -445,7 +445,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestReceiveFile008, Function | Med
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_ReceiveFile_1800
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_0900
  * @tc.name: testHdiUsbMtpTestReceiveFile009
  * @tc.desc: mfs Indicates the mtp file slice info. mfs.length = 1000 mfs.command = 1000 mfs.transactionId = 1000.
  */
@@ -474,7 +474,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestReceiveFile009, Function | Med
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_ReceiveFile_1900
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_1000
  * @tc.name: testHdiUsbMtpTestReceiveFile010
  * @tc.desc: mfs Indicates the mtp file slice info. mfs.length = 25 mfs.command = 100 mfs.transactionId = 100.
  */
@@ -503,7 +503,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestReceiveFile010, Function | Med
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_ReceiveFile_2000
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_1100
  * @tc.name: testHdiUsbMtpTestReceiveFile011
  * @tc.desc: mfs Indicates the mtp file slice info. mfs.length = 100 mfs.command = 200 mfs.transactionId = 300.
  */
@@ -532,7 +532,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestReceiveFile011, Function | Med
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_ReceiveFile_2100
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_1200
  * @tc.name: testHdiUsbMtpTestReceiveFile012
  * @tc.desc: mfs Indicates the mtp file slice info. mfs.length = 1000 mfs.command = 2000 mfs.transactionId = 3000.
  */
@@ -561,7 +561,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestReceiveFile012, Function | Med
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_ReceiveFile_2200
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_1300
  * @tc.name: testHdiUsbMtpTestReceiveFile013
  * @tc.desc: mfs Indicates the mtp file slice info. mfs.length = 1 mfs.command = 1 mfs.transactionId = 100.
  */
@@ -590,7 +590,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestReceiveFile013, Function | Med
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendEvent_0500
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_1400
  * @tc.name: testHdiUsbMtpTestSendEvent001
  * @tc.desc: Send event data by USB MTP/PTP driver. devData.assign(MTP_EVENT_PACKET_VALID_LEN, 'S').
  */
@@ -610,28 +610,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendEvent001, Function | Mediu
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_Read_0600
- * @tc.name: testHdiUsbMtpTestRead001
- * @tc.desc: Read data by USB MTP/PTP driver.
- */
-HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestRead001, Function | MediumTest | Level1)
-{
-    ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
-    std::vector<uint8_t> devData;
-
-    std::cout << "testHdiUsbMtpTestRead001===>use libusb in PC launch bulk-out transfer(size=" << 5
-              << "), press enter to continue" << std::endl;
-    int32_t c;
-    while ((c = getchar()) != '\n' && c != EOF) {
-    }
-
-    int32_t ret = g_usbfnMtpInterface->Read(devData);
-    ASSERT_EQ(ret, 0);
-    ASSERT_EQ(devData.size(), static_cast<size_t>(5));
-}
-
-/**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendEvent_0600
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_1500
  * @tc.name: testHdiUsbMtpTestSendEvent002
  * @tc.desc: Send event data by USB MTP/PTP driver. devData.assign(MTP_EVENT_PACKET_MAX_BYTES, 'S').
  */
@@ -650,7 +629,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendEvent002, Function | Mediu
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendEvent_0700
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_1600
  * @tc.name: testHdiUsbMtpTestSendEvent003
  * @tc.desc: Send event data by USB MTP/PTP driver. devData.assign(MTP_EVENT_PACKET_INVALID_LEN, 'S').
  */
@@ -672,7 +651,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendEvent003, Function | Mediu
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendEvent_0800
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_1700
  * @tc.name: testHdiUsbMtpTestSendEvent004
  * @tc.desc: Send event data by USB MTP/PTP driver. Cycle 10 times.
  */
@@ -698,7 +677,28 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendEvent004, Function | Mediu
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_Write_0600
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_1800
+ * @tc.name: testHdiUsbMtpTestRead001
+ * @tc.desc: Read data by USB MTP/PTP driver.
+ */
+HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestRead001, Function | MediumTest | Level1)
+{
+    ASSERT_TRUE(g_usbfnMtpInterface != nullptr);
+    std::vector<uint8_t> devData;
+
+    std::cout << "testHdiUsbMtpTestRead001===>use libusb in PC launch bulk-out transfer(size=" << 5
+              << "), press enter to continue" << std::endl;
+    int32_t c;
+    while ((c = getchar()) != '\n' && c != EOF) {
+    }
+
+    int32_t ret = g_usbfnMtpInterface->Read(devData);
+    ASSERT_EQ(ret, 0);
+    ASSERT_EQ(devData.size(), static_cast<size_t>(5));
+}
+
+/**
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_1900
  * @tc.name: testHdiUsbMtpTestWrite001
  * @tc.desc: Write data by USB MTP/PTP driver.devData.assign(BULK_IN_LESS_THEN_ONCE, 'r').
  */
@@ -720,7 +720,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestWrite001, Function | MediumTes
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_Write_0700
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_2000
  * @tc.name: testHdiUsbMtpTestWrite002
  * @tc.desc: Write data by USB MTP/PTP driver.devData.assign(BULK_IN_ONCE_MAX_SIZE, 'r').
  */
@@ -741,7 +741,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestWrite002, Function | MediumTes
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_Write_0800
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_2100
  * @tc.name: testHdiUsbMtpTestWrite003
  * @tc.desc: Write data by USB MTP/PTP driver.devData.assign(BULK_IN_MORE_THEN_ONCE, 'r').
  */
@@ -762,7 +762,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestWrite003, Function | MediumTes
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_Write_0900
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_2200
  * @tc.name: testHdiUsbMtpTestWrite004
  * @tc.desc: Write data by USB MTP/PTP driver.devData.assign(BULK_IN_MORE_THEN_ONCE, 'i').
  */
@@ -782,7 +782,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestWrite004, Function | MediumTes
     ASSERT_EQ(ret, 0);
 }
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_Write_1000
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_2300
  * @tc.name: testHdiUsbMtpTestWrite005
  * @tc.desc: Write data by USB MTP/PTP driver.Cycle 10 times.
  */
@@ -808,7 +808,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestWrite005, Function | MediumTes
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendFile_0900
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_2400
  * @tc.name: testHdiUsbMtpTestSendFile001
  * @tc.desc: Send file by USB MTP/PTP driver.mfs.length = 1.
  */
@@ -835,7 +835,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendFile001, Function | Medium
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendFile_1000
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_2500
  * @tc.name: testHdiUsbMtpTestSendFile002
  * @tc.desc: Send file by USB MTP/PTP driver.mfs.length = 100.
  */
@@ -862,7 +862,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendFile002, Function | Medium
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendFile_1100
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_2600
  * @tc.name: testHdiUsbMtpTestSendFile003
  * @tc.desc: Send file by USB MTP/PTP driver.mfs.length = 1000.
  */
@@ -889,7 +889,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendFile003, Function | Medium
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendFile_1200
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_2700
  * @tc.name: testHdiUsbMtpTestSendFile004
  * @tc.desc: Send file by USB MTP/PTP driver.mfs.length = 1024.
  */
@@ -916,7 +916,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendFile004, Function | Medium
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendFile_1300
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_2800
  * @tc.name: testHdiUsbMtpTestSendFile005
  * @tc.desc: Send file by USB MTP/PTP driver.mfs.length = 255.
  */
@@ -943,7 +943,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendFile005, Function | Medium
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendFile_1400
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_2900
  * @tc.name: testHdiUsbMtpTestSendFile006
  * @tc.desc: Send file by USB MTP/PTP driver.mfs.length = 1 mfs.command = CMD_CODE_GET_DEVICE_INFO.
  */
@@ -971,7 +971,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendFile006, Function | Medium
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendFile_1500
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_3000
  * @tc.name: testHdiUsbMtpTestSendFile007
  * @tc.desc: Send file by USB MTP/PTP driver.mfs.length = 100 command = CMD_CODE_GET_DEVICE_INFO.
  */
@@ -999,7 +999,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendFile007, Function | Medium
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendFile_1600
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_3100
  * @tc.name: testHdiUsbMtpTestSendFile008
  * @tc.desc: Send file by USB MTP/PTP driver.mfs.length = 1000 command = CMD_CODE_GET_DEVICE_INFO.
  */
@@ -1027,7 +1027,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendFile008, Function | Medium
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendFile_1700
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_3200
  * @tc.name: testHdiUsbMtpTestSendFile009
  * @tc.desc: Send file by USB MTP/PTP driver.mfs.length = 1024 command = CMD_CODE_GET_DEVICE_INFO.
  */
@@ -1055,7 +1055,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendFile009, Function | Medium
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendFile_1800
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_3300
  * @tc.name: testHdiUsbMtpTestSendFile010
  * @tc.desc: Send file by USB MTP/PTP driver.mfs.length = 255 command = CMD_CODE_GET_DEVICE_INFO.
  */
@@ -1083,7 +1083,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendFile010, Function | Medium
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendFile_1900
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_3400
  * @tc.name: testHdiUsbMtpTestSendFile011
  * @tc.desc: Send file by USB MTP/PTP driver.mfs.length = MTP_MAX_FILE_SIZE - 1.
  */
@@ -1110,7 +1110,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendFile011, Function | Medium
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendFile_2000
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_3500
  * @tc.name: testHdiUsbMtpTestSendFile012
  * @tc.desc: Send file by USB MTP/PTP driver.mfs.length = MTP_MAX_FILE_SIZE - 2.
  */
@@ -1137,7 +1137,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendFile012, Function | Medium
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendFile_2100
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_3600
  * @tc.name: testHdiUsbMtpTestSendFile013
  * @tc.desc: Send file by USB MTP/PTP driver.mfs.mfs.length = BULK_IN_LESS_THEN_ONCE mfs.command =
  * CMD_CODE_GET_DEVICE_INFO Cycle 10 times.
@@ -1171,7 +1171,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendFile013, Function | Medium
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendFile_2200
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_3700
  * @tc.name: testHdiUsbMtpTestSendFile014
  * @tc.desc: Send file by USB MTP/PTP driver.mfs.length = 1 mfs.command = 1.
  */
@@ -1199,7 +1199,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendFile014, Function | Medium
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendFile_2300
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_3800
  * @tc.name: testHdiUsbMtpTestSendFile015
  * @tc.desc: Send file by USB MTP/PTP driver.mfs.length = 100 mfs.command = 100.
  */
@@ -1227,7 +1227,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendFile015, Function | Medium
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendFile_2400
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_3900
  * @tc.name: testHdiUsbMtpTestSendFile016
  * @tc.desc: Send file by USB MTP/PTP driver.mfs.length = 1000 mfs.command = 1000.
  */
@@ -1255,7 +1255,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendFile016, Function | Medium
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendFile_2500
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_4000
  * @tc.name: testHdiUsbMtpTestSendFile017
  * @tc.desc: Send file by USB MTP/PTP driver.mfs.length = 1024 mfs.command = 1024.
  */
@@ -1283,7 +1283,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendFile017, Function | Medium
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendFile_2600
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_4100
  * @tc.name: testHdiUsbMtpTestSendFile018
  * @tc.desc: Send file by USB MTP/PTP driver.mfs.length = 255 mfs.command = 255.
  */
@@ -1311,7 +1311,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendFile018, Function | Medium
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_SendFile_2700
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_4200
  * @tc.name: testHdiUsbMtpTestSendFile019
  * @tc.desc: Send file by USB MTP/PTP driver.mfs.length = 200.mfs.command = 200.
  */
@@ -1339,7 +1339,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestSendFile019, Function | Medium
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_Start_0100
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_4300
  * @tc.name: testHdiUsbMtpTestStart001
  * @tc.desc: Opens a USB MTP/PTP driver.
  */
@@ -1353,7 +1353,7 @@ HWTEST_F(UsbfnMtpTestAdditional, testHdiUsbMtpTestStart001, Function | MediumTes
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_MtpTest_Stop_0100
+ * @tc.number: SUB_USB_DeviceManager_HDI_MTPPTPTest_4400
  * @tc.name: testHdiUsbMtpTestStop001
  * @tc.desc: Closes a USB MTP/PTP driver.
  */

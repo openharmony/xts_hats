@@ -75,7 +75,7 @@ void UsbdDeviceTestAdditional::SetUp(void) {}
 void UsbdDeviceTestAdditional::TearDown(void) {}
 
 /**
- * @tc.number: SUB_Driver_Usb_DeviceTest_OpenDevice_0500
+ * @tc.number: SUB_USB_DeviceManager_HDI_CompatDeviceTest_0100
  * @tc.name: testHdiUsbDeviceTestOpenDevice001
  * @tc.desc: Opens a USB device to set up a connection. dev ={1, 255}.
  */
@@ -87,7 +87,7 @@ HWTEST_F(UsbdDeviceTestAdditional, testHdiUsbDeviceTestOpenDevice001, Function |
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_DeviceTest_OpenDevice_0600
+ * @tc.number: SUB_USB_DeviceManager_HDI_CompatDeviceTest_0200
  * @tc.name: testHdiUsbDeviceTestOpenDevice002
  * @tc.desc: Opens a USB device to set up a connection. dev ={255, 1}.
  */
@@ -99,7 +99,7 @@ HWTEST_F(UsbdDeviceTestAdditional, testHdiUsbDeviceTestOpenDevice002, Function |
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_DeviceTest_OpenDevice_0700
+ * @tc.number: SUB_USB_DeviceManager_HDI_CompatDeviceTest_0300
  * @tc.name: testHdiUsbDeviceTestOpenDevice003
  * @tc.desc: Opens a USB device to set up a connection. dev ={255, 100}.
  */
@@ -111,7 +111,7 @@ HWTEST_F(UsbdDeviceTestAdditional, testHdiUsbDeviceTestOpenDevice003, Function |
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_DeviceTest_OpenDevice_0800
+ * @tc.number: SUB_USB_DeviceManager_HDI_CompatDeviceTest_0400
  * @tc.name: testHdiUsbDeviceTestOpenDevice004
  * @tc.desc: Opens a USB device to set up a connection. dev ={100, 255}.
  */
@@ -123,7 +123,7 @@ HWTEST_F(UsbdDeviceTestAdditional, testHdiUsbDeviceTestOpenDevice004, Function |
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_DeviceTest_CloseDevice_0500
+ * @tc.number: SUB_USB_DeviceManager_HDI_CompatDeviceTest_0500
  * @tc.name: testHdiUsbDeviceTestCloseDevice001
  * @tc.desc: Closes a USB device to release all system resources related to the device. dev ={1, 255}.
  */
@@ -141,7 +141,7 @@ HWTEST_F(UsbdDeviceTestAdditional, testHdiUsbDeviceTestCloseDevice001, Function 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_DeviceTest_CloseDevice_0600
+ * @tc.number: SUB_USB_DeviceManager_HDI_CompatDeviceTest_0600
  * @tc.name: testHdiUsbDeviceTestCloseDevice002
  * @tc.desc: Closes a USB device to release all system resources related to the device. dev ={255, 1}.
  */
@@ -159,7 +159,7 @@ HWTEST_F(UsbdDeviceTestAdditional, testHdiUsbDeviceTestCloseDevice002, Function 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_DeviceTest_CloseDevice_0700
+ * @tc.number: SUB_USB_DeviceManager_HDI_CompatDeviceTest_0700
  * @tc.name: testHdiUsbDeviceTestCloseDevice003
  * @tc.desc: Closes a USB device to release all system resources related to the device. dev ={255, 100}.
  */
@@ -177,7 +177,7 @@ HWTEST_F(UsbdDeviceTestAdditional, testHdiUsbDeviceTestCloseDevice003, Function 
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_DeviceTest_CloseDevice_0800
+ * @tc.number: SUB_USB_DeviceManager_HDI_CompatDeviceTest_0800
  * @tc.name: testHdiUsbDeviceTestCloseDevice004
  * @tc.desc: Closes a USB device to release all system resources related to the device. dev ={100, 255}.
  */

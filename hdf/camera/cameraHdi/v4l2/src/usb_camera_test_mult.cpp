@@ -379,9 +379,6 @@ HWTEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0100, TestSize.Le
         std::cout << "No usb camera plugged in" << std::endl;
     } else if (usbCameraExit_) {
         for (int i = 0; i < usbCameraIds.size(); i++) {
-            if (!g_usbCameraExit) {
-                GTEST_SKIP() << "No usb camera plugged in" << std::endl;
-            }
             cameraBase_->rc = cameraBase_->SelectOpenCamera(usbCameraIds[i]);
             ASSERT_EQ(cameraBase_->rc, HDI::Camera::V1_0::NO_ERROR);
             // Get the stream manager
@@ -416,9 +413,6 @@ HWTEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0200, TestSize.Le
         std::cout << "No usb camera plugged in" << std::endl;
     } else if (usbCameraExit_) {
         for (int i = 0; i < usbCameraIds.size(); i++) {
-            if (!g_usbCameraExit) {
-                GTEST_SKIP() << "No usb camera plugged in" << std::endl;
-            }
             cameraBase_->rc = cameraBase_->SelectOpenCamera(usbCameraIds[i]);
             ASSERT_EQ(cameraBase_->rc, HDI::Camera::V1_0::NO_ERROR);
             // Get the stream manager

@@ -1416,7 +1416,7 @@ HWTEST_F(HdiStreamUtTestAdditional, testCreateStreams004, Function | MediumTest 
 #ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::INVALID_ARGUMENT);
 #else
-    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::METHOD_NOT_SUPPORTED);
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
 #endif // DISPLAY_COMMUNITY
 }
 

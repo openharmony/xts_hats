@@ -86,6 +86,12 @@ void Test::Init()
     hostCallback = new TestCameraHostCallback();
     ret = service->SetCallback(hostCallback);
     EXPECT_EQ(ret, 0);
+    service->GetCameraIds(cameraIds);
+    if (cameraIds.size() == 0) {
+        CAMERA_LOGE("camera device list empty");
+        GTEST_SKIP() << "No Camera Available" << std::endl;
+        return;
+    }
 }
 
 int32_t Test::DefferredImageTestInit()
@@ -117,7 +123,6 @@ void Test::Open(int cameraId)
 {
     if (cameraDevice == nullptr) {
         EXPECT_NE(service, nullptr);
-        service->GetCameraIds(cameraIds);
         EXPECT_NE(cameraIds.size(), 0);
         GetCameraMetadata(cameraId);
         deviceCallback = new OHOS::Camera::Test::DemoCameraDeviceCallback();

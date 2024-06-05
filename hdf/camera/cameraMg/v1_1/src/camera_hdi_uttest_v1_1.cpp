@@ -310,7 +310,7 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_QuickThumbnail_0200, TestSize.Leve
 
 /**
  * @tc.name: Quick Thumbnail
- * @tc.desc: XTENDED_STREAM_INFO_QUICK_THUMBNAIL set 0
+ * @tc.desc: EXTENDED_STREAM_INFO_QUICK_THUMBNAIL set 0
  * @tc.size: MediumTest
  * @tc.type: Function
  */

@@ -221,7 +221,6 @@ BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0500
   */
 BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0600)(benchmark::State &state)
 {
-  
         PrimitiveEffect primitiveEffect1 { 0, 60007, 0};
         PrimitiveEffect primitiveEffect2 { 1000, 60007, 0};
         PrimitiveEffect primitiveEffect3 { 1000, 60007, 0};
@@ -277,7 +276,7 @@ BENCHMARK_REGISTER_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0700
   */
 BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0800)(benchmark::State &state)
 {
-    ASSERT_NE(nullptr, g_vibratorInterface); 
+    ASSERT_NE(nullptr, g_vibratorInterface);
     bool stat {false};
     for (auto _ : state) {
     g_vibratorInterface -> IsVibratorRunning(stat);

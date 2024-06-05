@@ -317,9 +317,10 @@ HWTEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0600, TestSize.Le
 {
     std::vector<std::string> usbCameraIds;
     cameraBase_->cameraHost->GetCameraIds(usbCameraIds);
+    std::cout << "usbCameraIds.size = " << usbCameraIds.size() << std::endl;
     usbCameraExit_ = usbCameraIds.size() > 1;
     if (!usbCameraExit_) {
-        std::cout << "No usb camera plugged in" << std::endl;
+        std::cout << "Less than two USB cameras plugged in" << std::endl;
     } else if (usbCameraExit_) {
         cameraBase_->rc = cameraBase_->SelectOpenCamera(usbCameraIds[0]); // 0:first camera id
         ASSERT_EQ(cameraBase_->rc, HDI::Camera::V1_0::NO_ERROR);
@@ -374,9 +375,10 @@ HWTEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0100, TestSize.Le
 {
     std::vector<std::string> usbCameraIds;
     cameraBase_->cameraHost->GetCameraIds(usbCameraIds);
+    std::cout << "usbCameraIds.size = " << usbCameraIds.size() << std::endl;
     usbCameraExit_ = usbCameraIds.size() > 1;
     if (!usbCameraExit_) {
-        std::cout << "No usb camera plugged in" << std::endl;
+        std::cout << "Less than two USB cameras plugged in" << std::endl;
     } else if (usbCameraExit_) {
         for (int i = 0; i < usbCameraIds.size(); i++) {
             cameraBase_->rc = cameraBase_->SelectOpenCamera(usbCameraIds[i]);
@@ -408,9 +410,10 @@ HWTEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0200, TestSize.Le
 {
     std::vector<std::string> usbCameraIds;
     cameraBase_->cameraHost->GetCameraIds(usbCameraIds);
+    std::cout << "usbCameraIds.size = " << usbCameraIds.size() << std::endl;
     usbCameraExit_ = usbCameraIds.size() > 1;
     if (!usbCameraExit_) {
-        std::cout << "No usb camera plugged in" << std::endl;
+        std::cout << "Less than two USB cameras plugged in" << std::endl;
     } else if (usbCameraExit_) {
         for (int i = 0; i < usbCameraIds.size(); i++) {
             cameraBase_->rc = cameraBase_->SelectOpenCamera(usbCameraIds[i]);
@@ -445,9 +448,10 @@ HWTEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0300, TestSize.Le
 {
     std::vector<std::string> usbCameraIds;
     cameraBase_->cameraHost->GetCameraIds(usbCameraIds);
+    std::cout << "usbCameraIds.size = " << usbCameraIds.size() << std::endl;
     usbCameraExit_ = usbCameraIds.size() > 1;
     if (!usbCameraExit_) {
-        std::cout << "No usb camera plugged in" << std::endl;
+        std::cout << "Less than two USB cameras plugged in" << std::endl;
     } else if (usbCameraExit_) {
         cameraBase_->rc = cameraBase_->SelectOpenCamera(usbCameraIds[0]);
         ASSERT_EQ(cameraBase_->rc, HDI::Camera::V1_0::NO_ERROR);
@@ -495,9 +499,10 @@ HWTEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0400, TestSize.Le
 {
     std::vector<std::string> usbCameraIds;
     cameraBase_->cameraHost->GetCameraIds(usbCameraIds);
+    std::cout << "usbCameraIds.size = " << usbCameraIds.size() << std::endl;
     usbCameraExit_ = usbCameraIds.size() > 1;
     if (!usbCameraExit_) {
-        std::cout << "No usb camera plugged in" << std::endl;
+        std::cout << "Less than two USB cameras plugged in" << std::endl;
     } else if (usbCameraExit_) {
         cameraBase_->rc = cameraBase_->SelectOpenCamera(usbCameraIds[0]); // 0:first camera id
         ASSERT_EQ(cameraBase_->rc, HDI::Camera::V1_0::NO_ERROR);
@@ -531,9 +536,10 @@ HWTEST_F(UtestUSBCameraTestMult, SUB_Driver_Camera_MultipleUsb_0500, TestSize.Le
 {
     std::vector<std::string> usbCameraIds;
     cameraBase_->cameraHost->GetCameraIds(usbCameraIds);
+    std::cout << "usbCameraIds.size = " << usbCameraIds.size() << std::endl;
     usbCameraExit_ = usbCameraIds.size() > 1;
     if (!usbCameraExit_) {
-        std::cout << "No usb camera plugged in" << std::endl;
+        std::cout << "Less than two USB cameras plugged in" << std::endl;
     } else if (usbCameraExit_) {
         cameraBase_->rc = cameraBase_->SelectOpenCamera(usbCameraIds[0]); // 0:first camera id
         ASSERT_EQ(cameraBase_->rc, HDI::Camera::V1_0::NO_ERROR);

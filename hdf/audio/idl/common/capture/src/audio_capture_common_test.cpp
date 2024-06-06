@@ -732,7 +732,7 @@ HWTEST_F(AudioUtCaptureTest, SUB_Driver_Audio_CaptureHdi_3900, TestSize.Level1)
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_NE(ret, HDF_SUCCESS);
-#endif        
+#endif
     ret = capture_->SetSampleAttributes(capture_, nullptr);
     EXPECT_NE(ret, HDF_SUCCESS);
 

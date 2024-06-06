@@ -23,6 +23,7 @@ group("HatsHdfCodecTest") {
       #"benchmarktest:HatsHdfCodecBenchmarkTest",
       "hdi_adapter:HatsHdfAdapterCodecTest",
       "hdi_component_additional:HatsHdfTestComponentCodecAdditionalTest",
+      "hdi_idlomx:HatsHdfIdlOmxCodecTest",
       "hdi_image:HatsHdfImageCodecTest",
       "hdi_image_additional:HatsHdfImageCodecAdditionalTest",
       "hdi_omx:HatsHdfOmxCodecTest",
@@ -32,8 +33,11 @@ group("HatsHdfCodecTest") {
   } else {
     testonly = true
     deps = [
+      "hdi_idlomx:HatsHdfIdlOmxCodecTest",
       "hdi_image:HatsHdfImageCodecTest",
+      "hdi_image_additional:HatsHdfImageCodecAdditionalTest",
       "hdi_omx:HatsHdfOmxCodecTest",
+      "hdi_omx_additional:HatsHdfOmxCodecAdditionalTest",
     ]
   }
 }

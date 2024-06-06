@@ -36,9 +36,13 @@ group("hdi_base_common") {
   } else {
     deps = [
       "common/adapter:HatsHdfAudioIdlAdapterTest",
+      "common/adapter_additional:HatsHdfAudioIdlAdapterAdditionalTest",
       "common/capture:HatsHdfAudioIdlCaptureTest",
+      "common/capture_additional:HatsHdfAudioIdlCaptureAdditionalTest",
       "common/manager:HatsHdfAudioIdlManagerTest",
+      "common/manager_additional:HatsHdfAudioIdlManagerAdditionalTest",
       "common/render:HatsHdfAudioIdlRenderTest",
+      "common/render_additional:HatsHdfAudioIdlRenderAdditionalTest",
 
       #"benchmarktest:HatsHdfAudioBenchmarkTest"
     ]
@@ -60,5 +64,6 @@ group("hdi_effect_additional") {
   if (hats_rich == false) {
     deps = [ "effect_additional:HatsHdfAudioEffectAdditionalTest" ]
   } else {
+    deps = [ "effect_additional:HatsHdfAudioEffectAdditionalTest" ]
   }
 }

@@ -68,7 +68,7 @@ void UsbdFunctionTestAdditional::SetUp(void) {}
 void UsbdFunctionTestAdditional::TearDown(void) {}
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetCurrentFunctions_2000
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_0100
  * @tc.name: testHdiUsbFunctionTestSetCurrentFunctions001
  * @tc.desc: Sets the list of functions (represented by bit field) supported by the current device.
  * funcs = USB_FUNCTION_ACM | USB_FUNCTION_MTP.
@@ -81,7 +81,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetCurrentFunctions00
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetCurrentFunctions_2100
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_0200
  * @tc.name: testHdiUsbFunctionTestSetCurrentFunctions002
  * @tc.desc: Sets the list of functions (represented by bit field) supported by the current device.
  * funcs = USB_FUNCTION_ACM | USB_FUNCTION_PTP.
@@ -94,7 +94,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetCurrentFunctions00
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetCurrentFunctions_2200
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_0300
  * @tc.name: testHdiUsbFunctionTestSetCurrentFunctions003
  * @tc.desc: Sets the list of functions (represented by bit field) supported by the current device.
  * funcs = USB_FUNCTION_ACM | USB_FUNCTION_RNDIS.
@@ -107,7 +107,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetCurrentFunctions00
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetCurrentFunctions_2300
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_0400
  * @tc.name: testHdiUsbFunctionTestSetCurrentFunctions004
  * @tc.desc: Sets the list of functions (represented by bit field) supported by the current device.
  * funcs = USB_FUNCTION_ACM | USB_FUNCTION_STORAGE.
@@ -120,7 +120,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetCurrentFunctions00
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetCurrentFunctions_2400
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_0500
  * @tc.name: testHdiUsbFunctionTestSetCurrentFunctions005
  * @tc.desc: Sets the list of functions (represented by bit field) supported by the current device.
  * funcs = USB_FUNCTION_ECM | USB_FUNCTION_MTP.
@@ -133,7 +133,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetCurrentFunctions00
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetCurrentFunctions_2500
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_0600
  * @tc.name: testHdiUsbFunctionTestSetCurrentFunctions006
  * @tc.desc: Sets the list of functions (represented by bit field) supported by the current device.
  * funcs = USB_FUNCTION_ECM | USB_FUNCTION_PTP.
@@ -146,7 +146,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetCurrentFunctions00
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetCurrentFunctions_2600
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_0700
  * @tc.name: testHdiUsbFunctionTestSetCurrentFunctions007
  * @tc.desc: Sets the list of functions (represented by bit field) supported by the current device.
  * funcs = USB_FUNCTION_ECM | USB_FUNCTION_RNDIS.
@@ -159,7 +159,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetCurrentFunctions00
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetCurrentFunctions_2700
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_0800
  * @tc.name: testHdiUsbFunctionTestSetCurrentFunctions008
  * @tc.desc: Sets the list of functions (represented by bit field) supported by the current device.
  * funcs = USB_FUNCTION_ECM | USB_FUNCTION_STORAGE.
@@ -172,7 +172,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetCurrentFunctions00
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetCurrentFunctions_2800
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_0900
  * @tc.name: testHdiUsbFunctionTestSetCurrentFunctions009
  * @tc.desc: Sets the list of functions (represented by bit field) supported by the current device.
  * funcs = USB_FUNCTION_MTP | USB_FUNCTION_PTP.
@@ -185,7 +185,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetCurrentFunctions00
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetCurrentFunctions_2900
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_1000
  * @tc.name: testHdiUsbFunctionTestSetCurrentFunctions010
  * @tc.desc: Sets the list of functions (represented by bit field) supported by the current device.
  * funcs = USB_FUNCTION_MTP | USB_FUNCTION_STORAGE.
@@ -198,7 +198,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetCurrentFunctions01
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetCurrentFunctions_3000
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_1100
  * @tc.name: testHdiUsbFunctionTestSetCurrentFunctions011
  * @tc.desc: Sets the list of functions (represented by bit field) supported by the current device.
  * funcs = USB_FUNCTION_PTP | USB_FUNCTION_STORAGE.
@@ -211,7 +211,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetCurrentFunctions01
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetCurrentFunctions_3200
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_1200
  * @tc.name: testHdiUsbFunctionTestSetCurrentFunctions013
  * @tc.desc: Sets the list of functions (represented by bit field) supported by the current device.
  * USB_FUNCTION_NONE,USB_FUNCTION_ACM.
@@ -225,7 +225,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetCurrentFunctions01
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetCurrentFunctions_3300
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_1300
  * @tc.name: testHdiUsbFunctionTestSetCurrentFunctions014
  * @tc.desc: Sets the list of functions (represented by bit field) supported by the current device.
  * USB_FUNCTION_NONE,USB_FUNCTION_ECM.
@@ -239,7 +239,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetCurrentFunctions01
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetCurrentFunctions_3400
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_1400
  * @tc.name: testHdiUsbFunctionTestSetCurrentFunctions015
  * @tc.desc: Sets the list of functions (represented by bit field) supported by the current device.
  * USB_FUNCTION_NONE,USB_FUNCTION_MTP.
@@ -253,7 +253,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetCurrentFunctions01
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetCurrentFunctions_3500
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_1500
  * @tc.name: testHdiUsbFunctionTestSetCurrentFunctions016
  * @tc.desc: Sets the list of functions (represented by bit field) supported by the current device.
  * USB_FUNCTION_NONE,USB_FUNCTION_PTP.
@@ -267,7 +267,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetCurrentFunctions01
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetCurrentFunctions_3600
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_1600
  * @tc.name: testHdiUsbFunctionTestSetCurrentFunctions017
  * @tc.desc: Sets the list of functions (represented by bit field) supported by the current device.
  * USB_FUNCTION_NONE,USB_FUNCTION_RNDIS.
@@ -281,7 +281,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetCurrentFunctions01
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetCurrentFunctions_3700
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_1700
  * @tc.name: testHdiUsbFunctionTestSetCurrentFunctions018
  * @tc.desc: Sets the list of functions (represented by bit field) supported by the current device.
  * USB_FUNCTION_NONE,USB_FUNCTION_STORAGE.
@@ -295,7 +295,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetCurrentFunctions01
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_GetCurrentFunctions_0400
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_1800
  * @tc.name: testHdiUsbFunctionTestGetCurrentFunctions001
  * @tc.desc: Obtains the list of functions (represented by bit field) supported by the current device.
  * Set USB_FUNCTION_ACM Check if the Get is correct.
@@ -311,7 +311,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestGetCurrentFunctions00
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_GetCurrentFunctions_0500
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_1900
  * @tc.name: testHdiUsbFunctionTestGetCurrentFunctions002
  * @tc.desc: Obtains the list of functions (represented by bit field) supported by the current device.
  * Set USB_FUNCTION_ECM Check if the Get is correct.
@@ -327,7 +327,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestGetCurrentFunctions00
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_GetCurrentFunctions_0600
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_2000
  * @tc.name: testHdiUsbFunctionTestGetCurrentFunctions003
  * @tc.desc: Obtains the list of functions (represented by bit field) supported by the current device.
  * Set USB_FUNCTION_HDC Check if the Get is correct.
@@ -343,7 +343,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestGetCurrentFunctions00
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_GetCurrentFunctions_0700
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_2100
  * @tc.name: testHdiUsbFunctionTestGetCurrentFunctions004
  * @tc.desc: Obtains the list of functions (represented by bit field) supported by the current device.
  * Set USB_FUNCTION_MTP Check if the Get is correct.
@@ -359,7 +359,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestGetCurrentFunctions00
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_GetCurrentFunctions_0800
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_2200
  * @tc.name: testHdiUsbFunctionTestGetCurrentFunctions005
  * @tc.desc: Obtains the list of functions (represented by bit field) supported by the current device.
  * Set USB_FUNCTION_PTP Check if the Get is correct.
@@ -375,7 +375,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestGetCurrentFunctions00
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_GetCurrentFunctions_0900
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_2300
  * @tc.name: testHdiUsbFunctionTestGetCurrentFunctions006
  * @tc.desc: Obtains the list of functions (represented by bit field) supported by the current device.
  * Set USB_FUNCTION_RNDIS Check if the Get is correct.
@@ -391,7 +391,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestGetCurrentFunctions00
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_GetCurrentFunctions_1000
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_2400
  * @tc.name: testHdiUsbFunctionTestGetCurrentFunctions007
  * @tc.desc: Obtains the list of functions (represented by bit field) supported by the current device.
  * Set USB_FUNCTION_STORAGE Check if the Get is correct.
@@ -407,7 +407,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestGetCurrentFunctions00
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetPortRole_1000
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_2500
  * @tc.name: testHdiUsbFunctionTestSetPortRole001
  * @tc.desc: Closes a USB device to release all system resources related to the device.The entries are
  * (USB_PORT_ID_INVALID, POWER_ROLE_SINK, DATA_ROLE_DEVICE).
@@ -420,7 +420,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole001, Funct
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetPortRole_1100
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_2600
  * @tc.name: testHdiUsbFunctionTestSetPortRole002
  * @tc.desc: Closes a USB device to release all system resources related to the device.The entries are (DEFAULT_PORT_ID,
  * USB_POWER_ROLE_INVALID, DATA_ROLE_NONE).
@@ -433,7 +433,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole002, Funct
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetPortRole_1200
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_2700
  * @tc.name: testHdiUsbFunctionTestSetPortRole003
  * @tc.desc: Closes a USB device to release all system resources related to the device.The entries are (DEFAULT_PORT_ID,
  * POWER_ROLE_SINK, USB_DATA_ROLE_INVALID).
@@ -446,8 +446,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole003, Funct
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetPortRole_1300
- * @tc.name: testHdiUsbFunctionTestSetPortRole004
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_2800
  * @tc.desc: Closes a USB device to release all system resources related to the device.The entries are (DEFAULT_PORT_ID,
  * POWER_ROLE_NONE, USB_DATA_ROLE_INVALID).
  */
@@ -459,7 +458,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole004, Funct
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetPortRole_1400
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_2900
  * @tc.name: testHdiUsbFunctionTestSetPortRole005
  * @tc.desc: Closes a USB device to release all system resources related to the device.The entries are
  * (USB_PORT_ID_INVALID, POWER_ROLE_SINK, USB_DATA_ROLE_INVALID).
@@ -472,7 +471,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole005, Funct
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetPortRole_1500
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_3000
  * @tc.name: testHdiUsbFunctionTestSetPortRole006
  * @tc.desc: Closes a USB device to release all system resources related to the device.The entries are
  * (USB_PORT_ID_INVALID, POWER_ROLE_NONE, USB_DATA_ROLE_INVALID).
@@ -485,7 +484,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole006, Funct
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetPortRole_1600
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_3100
  * @tc.name: testHdiUsbFunctionTestSetPortRole007
  * @tc.desc: Closes a USB device to release all system resources related to the device.The entries are
  * (USB_PORT_ID_INVALID, USB_POWER_ROLE_INVALID, DATA_ROLE_NONE).
@@ -497,7 +496,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole007, Funct
     ASSERT_NE(ret, 0);
 }
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetPortRole_1700
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_3200
  * @tc.name: testHdiUsbFunctionTestSetPortRole008
  * @tc.desc: Closes a USB device to release all system resources related to the device.The entries are
  * (USB_PORT_ID_INVALID, USB_POWER_ROLE_INVALID, DATA_ROLE_HOST).
@@ -510,7 +509,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole008, Funct
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_SetPortRole_1800
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_3300
  * @tc.name: testHdiUsbFunctionTestSetPortRole009
  * @tc.desc: Closes a USB device to release all system resources related to the device.The entries are
  * (USB_PORT_ID_INVALID, USB_POWER_ROLE_INVALID, DATA_ROLE_DEVICE).
@@ -523,7 +522,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole009, Funct
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_QueryPort_0200
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_3400
  * @tc.name: testHdiUsbFunctionTestQueryPort001
  * @tc.desc: Queries the current settings of a port.To see if portId is equal to DEFAULT_PORT_ID.
  */
@@ -542,7 +541,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestQueryPort001, Functio
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_QueryPort_0300
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_3500
  * @tc.name: testHdiUsbFunctionTestQueryPort002
  * @tc.desc: Queries the current settings of a port.To see if powerRole is equal to POWER_ROLE_SINK.
  */
@@ -561,7 +560,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestQueryPort002, Functio
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_QueryPort_0400
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_3600
  * @tc.name: testHdiUsbFunctionTestQueryPort003
  * @tc.desc: Queries the current settings of a port.To see if dataRole is equal to DATA_ROLE_DEVICE.
  */
@@ -580,7 +579,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestQueryPort003, Functio
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_QueryPort_0500
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_3700
  * @tc.name: testHdiUsbFunctionTestQueryPort004
  * @tc.desc: Queries the current settings of a port.To see if portId is equal to DEFAULT_PORT_ID.
  */
@@ -599,7 +598,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestQueryPort004, Functio
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_QueryPort_0600
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_3800
  * @tc.name: testHdiUsbFunctionTestQueryPort005
  * @tc.desc: Queries the current settings of a port.To see if powerRole is equal to DATA_ROLE_HOST.
  */
@@ -622,7 +621,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestQueryPort005, Functio
 }
 
 /**
- * @tc.number: SUB_Driver_Usb_FunctionTest_QueryPort_0700
+ * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_3900
  * @tc.name: testHdiUsbFunctionTestQueryPort006
  * @tc.desc: Queries the current settings of a port.To see if dataRole is equal to DATA_ROLE_HOST.
  */

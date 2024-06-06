@@ -78,7 +78,8 @@ bool FunctionUtil::InitBufferHandleParameter(sptr<ICodecComponent> component, OM
 {
     InitParam(param);
     param.nPortIndex = port;
-    std::vector<int8_t> inParam, outParam;
+    std::vector<int8_t> inParam;
+    std::vector<int8_t> outParam;
     ObjectToVector(param, inParam);
     auto ret = component->GetParameter(OMX_IndexParamPortDefinition, inParam, outParam);
     if (ret != HDF_SUCCESS) {

@@ -513,6 +513,7 @@ HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_5100, TestSize.Level
     ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_SUCCESS);
 }
 
+#ifdef DISPLAY_COMMUNITY
 /**
 * @tc.name: SUB_Driver_Audio_AdapterHdi_EnumTest_0100
 * @tc.desc: Judgment enum value of the AudioTypes.idl
@@ -2250,5 +2251,6 @@ HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_EnumTest1_4600, Test
     EXPECT_TRUE(AUDIO_INPUT_VOICE_RECOGNITION_TYPE == 1 << 3);
     printf("SUB_Driver_Audio_AdapterHdi_EnumTest1_4600: end.");
 }
+#endif
 }
 

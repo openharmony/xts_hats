@@ -30,6 +30,7 @@ group("HatsHdfAudioTest") {
       deps = [
         "idl:hdi_base_common",
         "idl:hdi_effect",
+        "idl:hdi_effect_additional",
       ]
     }
   }

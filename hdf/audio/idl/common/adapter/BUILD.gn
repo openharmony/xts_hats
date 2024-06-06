@@ -13,11 +13,16 @@
 
 import("//build/ohos_var.gni")
 import("//drivers/peripheral/audio/audio.gni")
+import("//drivers/peripheral/display/display_config.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/audio"
 ohos_moduletest_suite("HatsHdfAudioIdlAdapterTest") {
   module_out_path = module_output_path
+
+  defines = []
+  defines += display_defines
+
   sources = [ "src/audio_adapter_common_test.cpp" ]
   configs = [ ":audio_idl_adapter" ]
 

@@ -387,6 +387,8 @@ public:
     }
     int32_t GetSimIOResponse(const RilRadioResponseInfo &responseInfo, const IccIoResultInfo &result) override;
     int32_t GetSimStatusResponse(const RilRadioResponseInfo &responseInfo, const CardStatusInfo &result) override;
+    int32_t GetSimCardStatusResponse(const RilRadioResponseInfo &responseInfo,
+        const SimCardStatusInfo &result) override;
     int32_t GetImsiResponse(const RilRadioResponseInfo &responseInfo, const std::string &response) override;
     int32_t GetSimLockStatusResponse(const RilRadioResponseInfo &responseInfo, int32_t simLockStatus) override;
     int32_t SetSimLockResponse(const RilRadioResponseInfo &responseInfo, const LockStatusResp &lockStatus) override;
@@ -624,6 +626,7 @@ extern bool g_getLinkCapabilityResponseFlag;
 extern bool g_getVoiceRadioTechnologyResponseFlag;
 extern bool g_getSimIOResponseFlag;
 extern bool g_getSimStatusResponseFlag;
+extern bool g_getSimCardStatusResponseFlag;
 extern bool g_setSimLockResponseFlag;
 extern bool g_changeSimPasswordResponseFlag;
 extern bool g_unlockPinResponseFlag;

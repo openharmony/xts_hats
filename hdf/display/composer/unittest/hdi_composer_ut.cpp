@@ -978,9 +978,11 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_MaskInfo_0100, TestSize.Level1)
     MaskInfo maskInfo = MaskInfo::LAYER_HBM_SYNC;
     auto ret = g_composerDevice->SetLayerMaskInfo(g_displayIds[0], layer->GetId(), maskInfo);
 
-    HdiTestDevice::GetInstance().Clear();
+    PrepareAndCommit();
 
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
+
+    DestroyLayer(layer);
 }
 
 /**
@@ -1965,9 +1967,11 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0540, TestSize.Level1)
     MaskInfo maskInfo = MaskInfo::LAYER_NORAML;
     auto ret = g_composerDevice->SetLayerMaskInfo(g_displayIds[0], layer->GetId(), maskInfo);
 
-    HdiTestDevice::GetInstance().Clear();
+    PrepareAndCommit();
 
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
+
+    DestroyLayer(layer);
 }
 
 /**

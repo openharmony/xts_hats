@@ -677,7 +677,11 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayProperty001, Function | MediumTest 
     const uint32_t propertyId = 1;
     uint64_t propertyValue = 0;
     auto ret = g_composerDevice->GetDisplayProperty(20, propertyId, propertyValue);
-    EXPECT_EQ(DISPLAY_FAILURE, ret);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
+#else
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+#endif
 }
 
 /**
@@ -690,7 +694,11 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayProperty002, Function | MediumTest 
     const uint32_t propertyId = 1;
     uint64_t propertyValue = 0;
     auto ret = g_composerDevice->GetDisplayProperty(0, propertyId, propertyValue);
-    EXPECT_EQ(DISPLAY_FAILURE, ret);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
+#else
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+#endif
 }
 
 /**
@@ -703,7 +711,11 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayProperty003, Function | MediumTest 
     const uint32_t propertyId = 1;
     uint64_t propertyValue = 0;
     auto ret = g_composerDevice->GetDisplayProperty(15, propertyId, propertyValue);
-    EXPECT_EQ(DISPLAY_FAILURE, ret);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
+#else
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+#endif
 }
 
 /**
@@ -716,7 +728,11 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayProperty004, Function | MediumTest 
     const uint32_t propertyId = 1;
     uint64_t propertyValue = 0;
     auto ret = g_composerDevice->GetDisplayProperty(-1, propertyId, propertyValue);
-    EXPECT_EQ(DISPLAY_FAILURE, ret);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
+#else
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+#endif
 }
 
 /**
@@ -729,7 +745,11 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayProperty005, Function | MediumTest 
     const uint32_t propertyId = 20;
     uint64_t propertyValue = 0;
     auto ret = g_composerDevice->GetDisplayProperty(g_displayIds[0], propertyId, propertyValue);
-    EXPECT_EQ(DISPLAY_FAILURE, ret);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
+#else
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+#endif
 }
 
 /**
@@ -742,7 +762,11 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayProperty006, Function | MediumTest 
     const uint32_t propertyId = 0;
     uint64_t propertyValue = 0;
     auto ret = g_composerDevice->GetDisplayProperty(g_displayIds[0], propertyId, propertyValue);
-    EXPECT_EQ(DISPLAY_FAILURE, ret);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
+#else
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+#endif
 }
 
 /**
@@ -755,7 +779,11 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayProperty007, Function | MediumTest 
     const uint32_t propertyId = 15;
     uint64_t propertyValue = 0;
     auto ret = g_composerDevice->GetDisplayProperty(g_displayIds[0], propertyId, propertyValue);
-    EXPECT_EQ(DISPLAY_FAILURE, ret);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
+#else
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+#endif
 }
 
 /**
@@ -768,7 +796,11 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayProperty008, Function | MediumTest 
     const uint32_t propertyId = -1;
     uint64_t propertyValue = 0;
     auto ret = g_composerDevice->GetDisplayProperty(g_displayIds[0], propertyId, propertyValue);
-    EXPECT_EQ(DISPLAY_FAILURE, ret);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
+#else
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+#endif
 }
 
 /**

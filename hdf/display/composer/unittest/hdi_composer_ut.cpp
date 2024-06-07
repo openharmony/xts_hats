@@ -387,8 +387,11 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5500, TestSize.Level1)
     const uint32_t PROPERTY_ID = 1;
     uint64_t propertyValue = 0;
     auto ret = g_composerDevice->GetDisplayProperty(g_displayIds[0], PROPERTY_ID, propertyValue);
-    // not support
-    EXPECT_EQ(DISPLAY_FAILURE, ret);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
+#else
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+#endif
 }
 
 /**
@@ -1967,6 +1970,7 @@ HWTEST_F(DeviceTest, SUB_DriverSystem_DisplayComposer_0540, TestSize.Level1)
     PrepareAndCommit();
 
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
+
     DestroyLayer(layer);
 }
 

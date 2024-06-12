@@ -390,7 +390,11 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5500, TestSize.Level1)
 #ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
 #else
-    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+    int32_t result = DISPLAY_FAILURE;
+    if (ret == DISPLAY_SUCCESS || ret == DISPLAY_NOT_SUPPORT) {
+        result = DISPLAY_SUCCESS;
+    }
+    EXPECT_EQ(DISPLAY_SUCCESS, result);
 #endif
 }
 

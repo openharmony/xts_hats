@@ -1324,11 +1324,12 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7800, TestSize.Level1)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
     EXPECT_GT(g_info.size(), 0);
+        int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_NONE);
         int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_NONE, true, RATE_LEVEL);
-        EXPECT_EQ(SENSOR_SUCCESS, ret);
+        EXPECT_EQ(status,ret);
         OsalMSleep(SENSOR_WAIT_TIME);
         ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_NONE, false, RATE_LEVEL);
-        EXPECT_EQ(SENSOR_SUCCESS, ret);
+        EXPECT_EQ(status,ret);
 }
 
 /**
@@ -1340,11 +1341,12 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7900, TestSize.Level1)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
     EXPECT_GT(g_info.size(), 0);
+        int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_GYROSCOPE);
         int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_GYROSCOPE, true, RATE_LEVEL);
-        EXPECT_NE(SENSOR_SUCCESS, ret);
+        EXPECT_EQ(status,ret);
         OsalMSleep(SENSOR_WAIT_TIME);
         ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_GYROSCOPE, false, RATE_LEVEL);
-        EXPECT_NE(SENSOR_SUCCESS, ret);
+        EXPECT_EQ(status,ret);
 }
 
 /**
@@ -1371,12 +1373,13 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8000, TestSize.Level1)
 HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8100, TestSize.Level1)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
-    EXPECT_GT(g_info.size(), 0);
+    EXPECT_GT(g_info.size(), 0);       
+        int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_AMBIENT_LIGHT);
         int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_AMBIENT_LIGHT, true, RATE_LEVEL);
-        EXPECT_NE(SENSOR_SUCCESS, ret);
+        EXPECT_EQ(status,ret);
         OsalMSleep(SENSOR_WAIT_TIME);
         ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_AMBIENT_LIGHT, false, RATE_LEVEL);
-        EXPECT_NE(SENSOR_SUCCESS, ret);
+        EXPECT_EQ(status,ret);
 }
 
 /**
@@ -1388,11 +1391,12 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8200, TestSize.Level1)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
     EXPECT_GT(g_info.size(), 0);
+        int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_MAGNETIC_FIELD);
         int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_MAGNETIC_FIELD, true, RATE_LEVEL);
-        EXPECT_NE(SENSOR_SUCCESS, ret);
+        EXPECT_EQ(status,ret);
         OsalMSleep(SENSOR_WAIT_TIME);
         ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_MAGNETIC_FIELD, false, RATE_LEVEL);
-        EXPECT_NE(SENSOR_SUCCESS, ret);
+        EXPECT_EQ(status,ret);
 }
 
 /**
@@ -1420,11 +1424,12 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8400, TestSize.Level1)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
     EXPECT_GT(g_info.size(), 0);
+        int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_BAROMETER);
         int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_BAROMETER, true, RATE_LEVEL);
-        EXPECT_NE(SENSOR_SUCCESS, ret);
+        EXPECT_EQ(status,ret);
         OsalMSleep(SENSOR_WAIT_TIME);
         ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_BAROMETER, false, RATE_LEVEL);
-        EXPECT_NE(SENSOR_SUCCESS, ret);
+        EXPECT_EQ(status,ret);
 }
 
 /**
@@ -1452,11 +1457,12 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8600, TestSize.Level1)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
     EXPECT_GT(g_info.size(), 0);
+        int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_HALL);
         int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_HALL, true, RATE_LEVEL);
-        EXPECT_NE(SENSOR_SUCCESS, ret);
+        EXPECT_EQ(status,ret);
         OsalMSleep(SENSOR_WAIT_TIME);
         ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_HALL, false, RATE_LEVEL);
-        EXPECT_NE(SENSOR_SUCCESS, ret);
+        EXPECT_EQ(status,ret);
 }
 
 /**

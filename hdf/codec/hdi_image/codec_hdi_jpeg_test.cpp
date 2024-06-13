@@ -21,7 +21,7 @@
 #include "v1_0/display_buffer_type.h"
 #include "v1_0/codec_image_type.h" 
 #include "v1_0/icodec_image.h"
-#include "v3_0/codec_types.h" 
+#include "v3_0/codec_types.h"
 #define HDF_LOG_TAG codec_jpeg_test
 
 using namespace std;

@@ -786,7 +786,6 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayProperty005, Function | MediumTest 
     uint64_t propertyValue = 0;
     auto ret = g_composerDevice->GetDisplayProperty(g_displayIds[0], propertyId, propertyValue);
     EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
-
 }
 
 /**

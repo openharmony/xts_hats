@@ -122,6 +122,48 @@ HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetSimStatusResponse002, Function | M
 }
 
 /**
+ * @tc.number: SUB_Telephony_DriverSystem_V1GetSimCardStatusResponse_0100
+ * @tc.name  : testV1GetSimCardStatusResponse001
+ * @tc.desc  : GetSimCardStatusResponse, slotId is SLOTID_1
+ */
+HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetSimCardStatusResponse001, Function | MediumTest | Level1)
+{
+    if (!IsReady(SLOTID_1)) {
+        return;
+    }
+    g_getSimCardStatusResponseFlag = false;
+    int32_t ret = g_rilInterface->GetSimStatus(SLOTID_1, GetSerialId());
+    if (ret != 2) {
+        WaitFor(WAIT_TIME_SECOND);
+        EXPECT_EQ(SUCCESS, ret);
+        EXPECT_EQ(true, g_getSimCardStatusResponseFlag);
+    } else {
+        return;
+    }
+}
+
+/**
+ * @tc.number: SUB_Telephony_DriverSystem_V1GetSimCardStatusResponse_0200
+ * @tc.name  : testV1GetSimCardStatusResponse002
+ * @tc.desc  : GetSimCardStatusResponse, slotId is SLOTID_2
+ */
+HWTEST_F(HdfRilHdiTestAdditional1st, testV1GetSimCardStatusResponse002, Function | MediumTest | Level1)
+{
+    if (!IsReady(SLOTID_2)) {
+        return;
+    }
+    g_getSimCardStatusResponseFlag = false;
+    int32_t ret = g_rilInterface->GetSimStatus(SLOTID_2, GetSerialId());
+    if (ret != 2) {
+        WaitFor(WAIT_TIME_SECOND);
+        EXPECT_EQ(SUCCESS, ret);
+        EXPECT_EQ(true, g_getSimCardStatusResponseFlag);
+    } else {
+        return;
+    }
+}
+
+/**
  * @tc.number : SUB_Telephony_DriverSystem_V1SetEmergencyCallList_0600
  * @tc.name   : testV1SetEmergencyCallList004
  * @tc.desc   : Call the function V1 SetEmergencyCallList with serialId and a value of -11111

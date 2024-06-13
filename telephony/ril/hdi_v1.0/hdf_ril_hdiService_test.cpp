@@ -343,6 +343,8 @@ public:
     // Sim response
     int32_t GetSimIOResponse(const RilRadioResponseInfo &responseInfo, const IccIoResultInfo &result) override;
     int32_t GetSimStatusResponse(const RilRadioResponseInfo &responseInfo, const CardStatusInfo &result) override;
+    int32_t GetSimCardStatusResponse(const RilRadioResponseInfo &responseInfo,
+        const SimCardStatusInfo &result) override;
     int32_t GetImsiResponse(const RilRadioResponseInfo &responseInfo, const std::string &response) override;
     int32_t GetSimLockStatusResponse(const RilRadioResponseInfo &responseInfo, int32_t simLockStatus) override;
     int32_t SetSimLockResponse(const RilRadioResponseInfo &responseInfo, const LockStatusResp &lockStatus) override;
@@ -636,6 +638,19 @@ int32_t RilCallback::GetSimStatusResponse(
 {
     HDF_LOGI("GetBoolResult GetSimStatus result : slotId = %{public}d, simType = %{public}d, simState = %{public}d",
         responseInfo.slotId, result.simType, result.simState);
+    simState_[responseInfo.slotId] = result.simState;
+    HDF_LOGI("IsReady %{public}d %{public}d", responseInfo.slotId, simState_[responseInfo.slotId]);
+    hdiId_ = HdiId::HREQ_SIM_GET_SIM_STATUS;
+    resultInfo_ = responseInfo;
+    NotifyAll();
+    return 0;
+}
+
+int32_t RilCallback::GetSimCardStatusResponse(const HDI::Ril::V1_1::RilRadioResponseInfo &responseInfo,
+    const HDI::Ril::V1_3::SimCardStatusInfo &result)
+{
+    HDF_LOGI("GetBoolResult GetSimStatus result : slotId = %{public}d, simType = %{public}d, simState = %{public}d",
+             responseInfo.slotId, result.simType, result.simState);
     simState_[responseInfo.slotId] = result.simState;
     HDF_LOGI("IsReady %{public}d %{public}d", responseInfo.slotId, simState_[responseInfo.slotId]);
     hdiId_ = HdiId::HREQ_SIM_GET_SIM_STATUS;

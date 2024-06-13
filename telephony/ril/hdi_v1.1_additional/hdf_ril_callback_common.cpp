@@ -118,6 +118,7 @@ bool g_getLinkCapabilityResponseFlag = false;
 bool g_getVoiceRadioTechnologyResponseFlag = false;
 bool g_getSimIOResponseFlag = false;
 bool g_getSimStatusResponseFlag = false;
+bool g_getSimCardStatusResponseFlag = false;
 bool g_setSimLockResponseFlag = false;
 bool g_changeSimPasswordResponseFlag = false;
 bool g_unlockPinResponseFlag = false;
@@ -225,10 +226,22 @@ int32_t RilCallback::SimRefreshNotify(const RilRadioResponseInfo &responseInfo)
     return 0;
 }
 
-int32_t RilCallback::GetSimStatusResponse(const OHOS::HDI::Ril::V1_1::RilRadioResponseInfo &responseInfo,
-                                          const OHOS::HDI::Ril::V1_1::CardStatusInfo &result)
+int32_t RilCallback::GetSimStatusResponse(const RilRadioResponseInfo &responseInfo, const CardStatusInfo &result)
 {
     g_getSimStatusResponseFlag = true;
+    HDF_LOGI("GetBoolResult GetSimStatus result : slotId = %{public}d, simType = %{public}d, g_simState = %{public}d",
+             responseInfo.slotId, result.simType, result.simState);
+    g_simState[responseInfo.slotId] = result.simState;
+    HDF_LOGI("IsReady %{public}d %{public}d", responseInfo.slotId, g_simState[responseInfo.slotId]);
+    hdiId_ = HdiId::HREQ_SIM_GET_SIM_STATUS;
+    resultInfo_ = responseInfo;
+    NotifyAll();
+    return 0;
+}
+
+int32_t RilCallback::GetSimCardStatusResponse(const RilRadioResponseInfo &responseInfo, const SimCardStatusInfo &result)
+{
+    g_getSimCardStatusResponseFlag = true;
     HDF_LOGI("GetBoolResult GetSimStatus result : slotId = %{public}d, simType = %{public}d, g_simState = %{public}d",
              responseInfo.slotId, result.simType, result.simState);
     g_simState[responseInfo.slotId] = result.simState;

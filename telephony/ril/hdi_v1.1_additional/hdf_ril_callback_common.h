@@ -77,6 +77,7 @@ using OHOS::HDI::Ril::V1_2::CdmaCBConfigInfo;
 using OHOS::HDI::Ril::V1_2::PhysicalChannelConfig;
 using OHOS::HDI::Ril::V1_2::CellListCurrentInfo_1_2;
 using OHOS::HDI::Ril::V1_2::CellListNearbyInfo_1_2;
+using OHOS::HDI::Ril::V1_3::SimCardStatusInfo;
 
 enum class HdiId {
     HREQ_NONE = -1,

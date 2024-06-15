@@ -26,7 +26,6 @@ using namespace testing::ext;
 namespace {
 const int BUFFER_LENTH = 1024 * 16;
 const int DEEP_BUFFER_RENDER_PERIOD_SIZE = 4 * 1024;
-const int MOVE_LEFT_NUM = 8;
 const int32_t AUDIO_RENDER_CHANNELCOUNT = 2;
 const int32_t AUDIO_SAMPLE_RATE_48K = 48000;
 const int32_t MAX_AUDIO_ADAPTER_DESC = 5;
@@ -84,16 +83,16 @@ uint64_t AudioUtRenderTestAdditional::GetRenderBufferSize()
 
 void AudioUtRenderTestAdditional::InitRenderAttrs(struct AudioSampleAttributes &attrs)
 {
-    attrsRender_.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
+    attrs.format = AUDIO_FORMAT_TYPE_PCM_16_BIT;
     attrs.channelCount = AUDIO_RENDER_CHANNELCOUNT;
     attrs.sampleRate = AUDIO_SAMPLE_RATE_48K;
     attrs.interleaved = 0;
     attrs.type = AUDIO_IN_MEDIA;
     attrs.period = DEEP_BUFFER_RENDER_PERIOD_SIZE;
-    attrs.frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * AUDIO_RENDER_CHANNELCOUNT / MOVE_LEFT_NUM;
+    attrs.frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * AUDIO_RENDER_CHANNELCOUNT;
     attrs.isBigEndian = false;
     attrs.isSignedData = true;
-    attrs.startThreshold = DEEP_BUFFER_RENDER_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM);
+    attrs.startThreshold = DEEP_BUFFER_RENDER_PERIOD_SIZE / (attrs.format * attrs.channelCount);
     attrs.stopThreshold = INT_MAX;
     attrs.silenceThreshold = BUFFER_LENTH;
 }
@@ -187,8 +186,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetLatency001, Function | 
     int i, ret = 0;
     for (i = 0; i < 1000; i++) {
         ret |= render_->GetLatency(render_, &ms);
+        EXPECT_EQ(HDF_SUCCESS, ret);
     }
-    EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
 /**
@@ -231,8 +230,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRenderFrame002, Function |
     EXPECT_NE(nullptr, frame);
     for (i = 0; i < 1000; i++) {
         ret |= render_->RenderFrame(render_, frame, frameLen, &requestBytes);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
-    EXPECT_EQ(ret, HDF_SUCCESS);
 
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
 }
@@ -444,8 +443,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderDrainBufferk001, Function 
     int32_t ret = 0;
     for (i = 0; i < 1000; i++) {
         ret |= render_->DrainBuffer(render_, &type);
+        EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
-    EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 }
 
 /**
@@ -516,8 +515,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderCheckSceneCapability001, F
     scene.desc = devDescRender_;
     for (i = 0; i < 1000; i++) {
         ret |= render_->CheckSceneCapability(render_, &scene, &supported);
+        EXPECT_EQ(HDF_SUCCESS, ret);
     }
-    EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
 /**
@@ -629,8 +628,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene001, Function |
     scene.desc.desc = strdup("mic");
     for (i = 0; i < 1000; i++) {
         ret |= render_->SelectScene(render_, &scene);
+        EXPECT_EQ(HDF_SUCCESS, ret);
     }
-    EXPECT_EQ(HDF_SUCCESS, ret);
     free(scene.desc.desc);
 }
 

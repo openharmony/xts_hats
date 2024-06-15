@@ -704,11 +704,11 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayProperty001, Function | MediumTest 
 #ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
 #else
-    int32_t result = DISPLAY_FAILURE;
-    if (ret == DISPLAY_SUCCESS || ret == DISPLAY_NOT_SUPPORT) {
-        result = DISPLAY_SUCCESS;
+    if (ret == DISPLAY_NOT_SUPPORT) {
+        DISPLAY_TEST_LOGE("GetDisplayProperty not support");
+        return;
     }
-    EXPECT_EQ(DISPLAY_SUCCESS, result);
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
 #endif
 }
 
@@ -725,11 +725,11 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayProperty002, Function | MediumTest 
 #ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
 #else
-    int32_t result = DISPLAY_FAILURE;
-    if (ret == DISPLAY_SUCCESS || ret == DISPLAY_NOT_SUPPORT) {
-        result = DISPLAY_SUCCESS;
+    if (ret == DISPLAY_NOT_SUPPORT) {
+        DISPLAY_TEST_LOGE("GetDisplayProperty not support");
+        return;
     }
-    EXPECT_EQ(DISPLAY_SUCCESS, result);
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
 #endif
 }
 
@@ -746,11 +746,11 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayProperty003, Function | MediumTest 
 #ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
 #else
-    int32_t result = DISPLAY_FAILURE;
-    if (ret == DISPLAY_SUCCESS || ret == DISPLAY_NOT_SUPPORT) {
-        result = DISPLAY_SUCCESS;
+    if (ret == DISPLAY_NOT_SUPPORT) {
+        DISPLAY_TEST_LOGE("GetDisplayProperty not support");
+        return;
     }
-    EXPECT_EQ(DISPLAY_SUCCESS, result);
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
 #endif
 }
 
@@ -767,11 +767,11 @@ HWTEST_F(DeviceTestAdditional, testGetDisplayProperty004, Function | MediumTest 
 #ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
 #else
-    int32_t result = DISPLAY_FAILURE;
-    if (ret == DISPLAY_SUCCESS || ret == DISPLAY_NOT_SUPPORT) {
-        result = DISPLAY_SUCCESS;
+    if (ret == DISPLAY_NOT_SUPPORT) {
+        DISPLAY_TEST_LOGE("GetDisplayProperty not support");
+        return;
     }
-    EXPECT_EQ(DISPLAY_SUCCESS, result);
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
 #endif
 }
 

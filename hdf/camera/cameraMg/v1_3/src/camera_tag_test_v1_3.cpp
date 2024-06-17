@@ -283,7 +283,7 @@ HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_SMVideo_0100, TestSize.Level1)
     if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR) {
         EXPECT_NE(entry.data.u8, nullptr);
         EXPECT_EQ(entry.count > 0, true);
-        for (size_t i = 0; i < entry.count; i++ ) {
+        for (size_t i = 0; i < entry.count; i++) {
             uint8_t value = entry.data.u8[i];
             if (value == OHOS::HDI::Camera::V1_3::VIDEO_MACRO) {
                 printf("VIDEO_MACRO mode is supported");

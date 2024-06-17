@@ -15,8 +15,7 @@
 
 set -e
 
-usage()
-{
+usage() {
     echo
     echo "USAGE"
     echo "       ./build.sh [suite=BUILD_TARGET] [target_os=TARGET_OS] [target_arch=TARGET_ARCH] [variant=BUILD_VARIANT] [target_subsystem=TARGET_SUBSYSTEM]"
@@ -30,18 +29,12 @@ usage()
     exit 1
 }
 
-
-parse_cmdline()
-{
+parse_cmdline() {
     BASE_HOME=$(dirname $(cd $(dirname $0); pwd))
     BASE_HOME=${BASE_HOME}/../..
-    BUILD_TOOLS_DIR=${BASE_HOME}/prebuilts/build-tools/linux-x86/bin
-    OUT_DIR=${BASE_HOME}/out
-    BUILD_SHELL=${BASE_HOME}/build.sh
     # build all parts for all products by default
     BUILD_TARGET=""
     TARGET_PLATFORM=all
-    GN_ARGS="is_dbt_test=true include_all=false"
     TARGET_ARCH=arm
     BUILD_VARIANT=release
     UPLOAD_API_INFO=False
@@ -50,14 +43,11 @@ parse_cmdline()
     USE_MUSL=false
     export PATH=${BASE_HOME}/prebuilts/python/linux-x86/3.8.3/bin:$PATH
 
-    while [ -n "$1" ]
-    do
+    while [ -n "$1" ]; do
         var="$1"
         OPTIONS=${var%%=*}
         PARAM=${var#*=}
-        echo "OPTIONS=$OPTIONS"
-        echo "PARAM=$PARAM"
-        echo "-------------------"
+        echo "OPTIONS=$OPTIONS, PARAM=$PARAM"
         case "$OPTIONS" in
         suite)            BUILD_TARGET="$PARAM"
                           ;;
@@ -66,7 +56,7 @@ parse_cmdline()
         variant)          BUILD_VARIANT="$PARAM"
                           ;; 
         use_musl)         USE_MUSL="$PARAM"
-                          ;;                       
+                          ;;
 	    target_platform)  TARGET_PLATFORM="$PARAM"
                           ;;
         target_subsystem) export target_subsystem=${PARAM}
@@ -75,51 +65,54 @@ parse_cmdline()
                           ;;
         product_name)     PRODUCT_NAME="$PARAM"
                           ;;
-        upload_api_info)  UPLOAD_API_INFO=$(echo $PARAM |tr [a-z] [A-Z])
+        upload_api_info)  UPLOAD_API_INFO=$(echo $PARAM | tr [a-z] [A-Z])
                           ;;
         cache_type)       CACHE_TYPE="$PARAM"
                           ;;
         *)
-             usage
-             break;;
+            usage
+            break ;;
         esac
         shift
     done
     if [ "$SYSTEM_SIZE" = "standard" ]; then
-       BUILD_TARGET=${BUILD_TARGET:-"test/xts/hats:xts_hats"}
-       PRODUCT_NAME=${PRODUCT_NAME:-"Hi3516DV300"}
+        BUILD_TARGET=${BUILD_TARGET:-"test/xts/hats:xts_hats"}
+        PRODUCT_NAME=${PRODUCT_NAME:-"Hi3516DV300"}
     else
-       BUILD_TARGET=${BUILD_TARGET:-"hats hats_ivi hats_intellitv hats_wearable"}
-       PRODUCT_NAME=${PRODUCT_NAME:-"arm64"}
+        BUILD_TARGET=${BUILD_TARGET:-"hats hats_ivi hats_intellitv hats_wearable"}
+        PRODUCT_NAME=${PRODUCT_NAME:-"arm64"}
     fi
 }
 
-
-do_make()
-{
+do_make() {
     cd $BASE_HOME
     HATS_ROOT="$BASE_HOME/test/xts/hats"
 
+    ${BASE_HOME}/prebuilts/python/linux-x86/3.10.2/bin/python3 -B ${HATS_ROOT}/check_hvigor.py
+    if [ "$?" != 0 ]; then
+        exit 1
+    fi
+
     rm -rf "$BASE_HOME/test/xts/autogen_apiobjs"
     export XTS_SUITENAME=hats
-       if [ "$SYSTEM_SIZE" = "standard" ]; then
+    if [ "$SYSTEM_SIZE" = "standard" ]; then
         MUSL_ARGS=""
         if [ "$PRODUCT_NAME" = "m40" ]; then
-		    if [ "$USE_MUSL" = "false" ]; then
-                        MUSL_ARGS="--gn-args use_musl=false --gn-args use_custom_libcxx=true --gn-args use_custom_clang=true"			
-		    fi
+            if [ "$USE_MUSL" = "false" ]; then
+                MUSL_ARGS="--gn-args use_musl=false --gn-args use_custom_libcxx=true --gn-args use_custom_clang=true"
+            fi
         fi
-	CACHE_ARG=""
-	if [ "$CACHE_TYPE" == "xcache" ];then
+        CACHE_ARG=""
+        if [ "$CACHE_TYPE" == "xcache" ]; then
             CACHE_ARG="--ccache false --xcache true"
         fi
-       ./build.sh --product-name $PRODUCT_NAME --gn-args build_xts=true --build-target $BUILD_TARGET --build-target "deploy_testtools" --gn-args is_standard_system=true $MUSL_ARGS --target-cpu $TARGET_ARCH --get-warning-list=false --stat-ccache=true --compute-overlap-rate=false --deps-guard=false --generate-ninja-trace=false $CACHE_ARG --gn-args skip_generate_module_list_file=true
+        ./build.sh --product-name $PRODUCT_NAME --gn-args build_xts=true --build-target $BUILD_TARGET --build-target "deploy_testtools" --gn-args is_standard_system=true $MUSL_ARGS --target-cpu $TARGET_ARCH --get-warning-list=false --stat-ccache=true --compute-overlap-rate=false --deps-guard=false --generate-ninja-trace=false $CACHE_ARG --gn-args skip_generate_module_list_file=true
     else
-       if [ "$BUILD_TARGET" = "hats hats_ivi hats_intellitv hats_wearable" ]; then
-         ./build.sh --product-name $PRODUCT_NAME --gn-args build_xts=true --build-target "hats" --build-target "hats_ivi" --build-target "hats_intellitv" --build-target "hats_wearable" --build-target "deploy_testtools"
-       else
-         ./build.sh --product-name $PRODUCT_NAME --gn-args build_xts=true --build-target $BUILD_TARGET --build-target "deploy_testtools"
-       fi
+        if [ "$BUILD_TARGET" = "hats hats_ivi hats_intellitv hats_wearable" ]; then
+            ./build.sh --product-name $PRODUCT_NAME --gn-args build_xts=true --build-target "hats" --build-target "hats_ivi" --build-target "hats_intellitv" --build-target "hats_wearable" --build-target "deploy_testtools"
+        else
+            ./build.sh --product-name $PRODUCT_NAME --gn-args build_xts=true --build-target $BUILD_TARGET --build-target "deploy_testtools"
+        fi
     fi
     ret=$?
 

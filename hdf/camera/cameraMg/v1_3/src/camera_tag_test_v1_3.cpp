@@ -167,7 +167,7 @@ HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_HighResolution_0100, TestSize.Leve
     if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR) {
         EXPECT_NE(entry.data.u8, nullptr);
         EXPECT_EQ(entry.count > 0, true);
-        for (size_t i = 0; i < entry.count; i++ ) {
+        for (size_t i = 0; i < entry.count; i++) {
             uint8_t value = entry.data.u8[i];
             if (value == OHOS::HDI::Camera::V1_3::HIGH_RESOLUTION_PHOTO) {
                 printf("HIGH_RESOLUTION_PHOTO mode is supported");
@@ -196,7 +196,7 @@ HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_SlowMotion_0200, TestSize.Level1)
     if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR) {
         EXPECT_NE(entry.data.u8, nullptr);
         EXPECT_EQ(entry.count > 0, true);
-        for (size_t i = 0; i < entry.count; i++ ) {
+        for (size_t i = 0; i < entry.count; i++) {
             uint8_t value = entry.data.u8[i];
             if (value == OHOS::HDI::Camera::V1_3::HIGH_FRAME_RATE) {
                 printf("HIGH_FRAME_RATE mode is supported");
@@ -225,7 +225,7 @@ HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_SuperSlowMotion_0100, TestSize.Lev
     if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR) {
         EXPECT_NE(entry.data.u8, nullptr);
         EXPECT_EQ(entry.count > 0, true);
-        for (size_t i = 0; i < entry.count; i++ ) {
+        for (size_t i = 0; i < entry.count; i++) {
             uint8_t value = entry.data.u8[i];
             if (value == OHOS::HDI::Camera::V1_3::SLOW_MOTION) {
                 printf("SLOW_MOTION mode is supported");
@@ -254,7 +254,7 @@ HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_SMPhoto_0100, TestSize.Level1)
     if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR) {
         EXPECT_NE(entry.data.u8, nullptr);
         EXPECT_EQ(entry.count > 0, true);
-        for (size_t i = 0; i < entry.count; i++ ) {
+        for (size_t i = 0; i < entry.count; i++) {
             uint8_t value = entry.data.u8[i];
             if (value == OHOS::HDI::Camera::V1_3::CAPTURE_MACRO) {
                 printf("CAPTURE_MACRO mode is supported");
@@ -312,7 +312,7 @@ HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_ProfessionalPhoto_0100, TestSize.L
     if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR) {
         EXPECT_NE(entry.data.u8, nullptr);
         EXPECT_EQ(entry.count > 0, true);
-        for (size_t i = 0; i < entry.count; i++ ) {
+        for (size_t i = 0; i < entry.count; i++) {
             uint8_t value = entry.data.u8[i];
             if (value == OHOS::HDI::Camera::V1_3::PROFESSIONAL_PHOTO) {
                 printf("PROFESSIONAL_PHOTO mode is supported");
@@ -341,7 +341,7 @@ HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_ProfessionalVideo_0100, TestSize.L
     if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR) {
         EXPECT_NE(entry.data.u8, nullptr);
         EXPECT_EQ(entry.count > 0, true);
-        for (size_t i = 0; i < entry.count; i++ ) {
+        for (size_t i = 0; i < entry.count; i++) {
             uint8_t value = entry.data.u8[i];
             if (value == OHOS::HDI::Camera::V1_3::PROFESSIONAL_VIDEO) {
                 printf("PROFESSIONAL_VIDEO mode is supported");

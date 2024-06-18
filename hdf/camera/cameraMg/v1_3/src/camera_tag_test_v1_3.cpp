@@ -98,10 +98,289 @@ HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_Moon_0100, TestSize.Level1)
     EXPECT_NE(data, nullptr);
     camera_metadata_item_t entry;
     int ret = FindCameraMetadataItem(data, OHOS_ABILITY_MOON_CAPTURE_BOOST, &entry);
+    printf("OHOS_ABILITY_MOON_CAPTURE_BOOST value count %d\n", entry.count);
     if (ret == HDI::Camera::V1_0::NO_ERROR && entry.data.u8 != nullptr && entry.count > 0) {
-        EXPECT_TRUE(entry.data.u8 != nullptr);
-        CAMERA_LOGI("OHOS_ABILITY_MOON_CAPTURE_BOOST: %{public}d", entry.data.u8[0]);
-    } else {
-        CAMERA_LOGI("MoonCaptureBoost not supported");
+        std::stringstream ss;
+        for (size_t i = 0; i < entry.count; i++) {
+            ss << static_cast<int>(entry.data.u8[i]) << " ";
+            if (i == entry.count - 1) {
+                printf("OHOS_ABILITY_MOON_CAPTURE_BOOST: %s\n", ss.str().c_str());
+                ss.clear();
+            }
+        }
+    }
+}
+
+/**
+ * @tc.name: SUB_Driver_Camera_Moving_0100
+ * @tc.desc: OHOS_ABILITY_MOVING_PHOTO
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_Moving_0100, TestSize.Level1)
+{
+    EXPECT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_MOVING_PHOTO, &entry);
+    if (cameraTest->rc != HDI::Camera::V1_0::NO_ERROR) {
+        printf("OHOS_ABILITY_MOVING_PHOTO is not support");
+        return;
+    }
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && entry.data.i32 != nullptr && entry.count > 0) {
+        CAMERA_LOGI("print tag<OHOS_ABILITY_MOVING_PHOTO> i32 value start.");
+        printf("OHOS_ABILITY_MOVING_PHOTO i32 value count %d\n", entry.count);
+        constexpr size_t step = 10;
+        std::stringstream ss;
+        for (size_t i = 0; i < entry.count; i++) {
+            ss << entry.data.i32[i] << " ";
+            if ((i != 0) && (i % step == 0 || i == entry.count - 1)) {
+                CAMERA_LOGI("%{public}s\n", ss.str().c_str());
+                printf("OHOS_ABILITY_MOVING_PHOTO %s\n", ss.str().c_str());
+                ss.clear();
+                ss.str("");
+            }
+        }
+        CAMERA_LOGI("print tag<OHOS_ABILITY_MOVING_PHOTO> i32 value end.");
+    }
+}
+
+/**
+ * @tc.name:SUB_Driver_Camera_HighResolution_0100
+ * @tc.desc:Determine whether the HIGH_RESOLUTION_PHOTO mode is supported
+ * @tc.size:MediumTest
+ * @tc.type:Function
+*/
+HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_HighResolution_0100, TestSize.Level1)
+{
+    EXPECT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_MODES, &entry);
+    if (cameraTest->rc != HDI::Camera::V1_0::NO_ERROR) {
+        CAMERA_LOGI("OHOS_ABILITY_CAMERA_MODES is can not be found");
+        return;
+    }
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR) {
+        EXPECT_NE(entry.data.u8, nullptr);
+        EXPECT_EQ(entry.count > 0, true);
+        for (size_t i = 0; i < entry.count; i++) {
+            uint8_t value = entry.data.u8[i];
+            if (value == OHOS::HDI::Camera::V1_3::HIGH_RESOLUTION_PHOTO) {
+                printf("HIGH_RESOLUTION_PHOTO mode is supported");
+            }
+        }
+    }
+}
+
+/**
+ * @tc.name: SUB_Driver_Camera_SlowMotion_0200
+ * @tc.desc: Determine whether the HIGH_FRAME_RATE mode is supported
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_SlowMotion_0200, TestSize.Level1)
+{
+    EXPECT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_MODES, &entry);
+    if (cameraTest->rc != HDI::Camera::V1_0::NO_ERROR) {
+        CAMERA_LOGI("OHOS_ABILITY_CAMERA_MODES is can not be found");
+        return;
+    }
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR) {
+        EXPECT_NE(entry.data.u8, nullptr);
+        EXPECT_EQ(entry.count > 0, true);
+        for (size_t i = 0; i < entry.count; i++) {
+            uint8_t value = entry.data.u8[i];
+            if (value == OHOS::HDI::Camera::V1_3::HIGH_FRAME_RATE) {
+                printf("HIGH_FRAME_RATE mode is supported");
+            }
+        }
+    }
+}
+
+/**
+ * @tc.name: SUB_Driver_Camera_SuperSlowMotion_0100
+ * @tc.desc: Determine whether the SLOW_MOTION mode is supported
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_SuperSlowMotion_0100, TestSize.Level1)
+{
+    EXPECT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_MODES, &entry);
+    if (cameraTest->rc != HDI::Camera::V1_0::NO_ERROR) {
+        CAMERA_LOGI("OHOS_ABILITY_CAMERA_MODES is can not be found");
+        return;
+    }
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR) {
+        EXPECT_NE(entry.data.u8, nullptr);
+        EXPECT_EQ(entry.count > 0, true);
+        for (size_t i = 0; i < entry.count; i++) {
+            uint8_t value = entry.data.u8[i];
+            if (value == OHOS::HDI::Camera::V1_3::SLOW_MOTION) {
+                printf("SLOW_MOTION mode is supported");
+            }
+        }
+    }
+}
+
+/**
+ * @tc.name: SUB_Driver_Camera_SMPhoto_0100
+ * @tc.desc: Determine whether the CAPTURE_MACRO mode is supported
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_SMPhoto_0100, TestSize.Level1)
+{
+    EXPECT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_MODES, &entry);
+    if (cameraTest->rc != HDI::Camera::V1_0::NO_ERROR) {
+        CAMERA_LOGI("OHOS_ABILITY_CAMERA_MODES is can not be found");
+        return;
+    }
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR) {
+        EXPECT_NE(entry.data.u8, nullptr);
+        EXPECT_EQ(entry.count > 0, true);
+        for (size_t i = 0; i < entry.count; i++) {
+            uint8_t value = entry.data.u8[i];
+            if (value == OHOS::HDI::Camera::V1_3::CAPTURE_MACRO) {
+                printf("CAPTURE_MACRO mode is supported");
+            }
+        }
+    }
+}
+
+/**
+ * @tc.name: SUB_Driver_Camera_SMVideo_0100
+ * @tc.desc: Determine whether the VIDEO_MACRO mode is supported
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_SMVideo_0100, TestSize.Level1)
+{
+    EXPECT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_MODES, &entry);
+    if (cameraTest->rc != HDI::Camera::V1_0::NO_ERROR) {
+        CAMERA_LOGI("OHOS_ABILITY_CAMERA_MODES is can not be found");
+        return;
+    }
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR) {
+        EXPECT_NE(entry.data.u8, nullptr);
+        EXPECT_EQ(entry.count > 0, true);
+        for (size_t i = 0; i < entry.count; i++) {
+            uint8_t value = entry.data.u8[i];
+            if (value == OHOS::HDI::Camera::V1_3::VIDEO_MACRO) {
+                printf("VIDEO_MACRO mode is supported");
+            }
+        }
+    }
+}
+
+/**
+ * @tc.name: SUB_Driver_Camera_ProfessionalPhoto_0100
+ * @tc.desc: Determine whether the PROFESSIONAL_PHOTO mode is supported
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_ProfessionalPhoto_0100, TestSize.Level1)
+{
+    EXPECT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_MODES, &entry);
+    if (cameraTest->rc != HDI::Camera::V1_0::NO_ERROR) {
+        CAMERA_LOGI("OHOS_ABILITY_CAMERA_MODES is can not be found");
+        return;
+    }
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR) {
+        EXPECT_NE(entry.data.u8, nullptr);
+        EXPECT_EQ(entry.count > 0, true);
+        for (size_t i = 0; i < entry.count; i++) {
+            uint8_t value = entry.data.u8[i];
+            if (value == OHOS::HDI::Camera::V1_3::PROFESSIONAL_PHOTO) {
+                printf("PROFESSIONAL_PHOTO mode is supported");
+            }
+        }
+    }
+}
+
+/**
+ * @tc.name: SUB_Driver_Camera_ProfessionalVideo_0100
+ * @tc.desc: Determine whether the PROFESSIONAL_VIDEO mode is supported
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_ProfessionalVideo_0100, TestSize.Level1)
+{
+    EXPECT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_MODES, &entry);
+    if (cameraTest->rc != HDI::Camera::V1_0::NO_ERROR) {
+        CAMERA_LOGI("OHOS_ABILITY_CAMERA_MODES is can not be found");
+        return;
+    }
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR) {
+        EXPECT_NE(entry.data.u8, nullptr);
+        EXPECT_EQ(entry.count > 0, true);
+        for (size_t i = 0; i < entry.count; i++) {
+            uint8_t value = entry.data.u8[i];
+            if (value == OHOS::HDI::Camera::V1_3::PROFESSIONAL_VIDEO) {
+                printf("PROFESSIONAL_VIDEO mode is supported");
+            }
+        }
+    }
+}
+
+/**
+ * @tc.name:SUB_Driver_Camera_ZoomBand_0100
+ * @tc.desc:OHOS_ABILITY_EQUIVALENT_FOCUS
+ * @tc.size:MediumTest
+ * @tc.type:Function
+*/
+HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_ZoomBand_0100, TestSize.Level1)
+{
+    EXPECT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_EQUIVALENT_FOCUS, &entry);
+    if (cameraTest->rc != HDI::Camera::V1_0::NO_ERROR) {
+        CAMERA_LOGI("OHOS_ABILITY_EQUIVALENT_FOCUS can not be find");
+        return;
+    }
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR) {
+        EXPECT_NE(entry.data.i32, nullptr);
+        EXPECT_EQ(entry.count > 0, true);
+        CAMERA_LOGI("print tag<OHOS_ABILITY_EQUIVALENT_FOCUS> value start.");
+        constexpr size_t step = 10; // print step
+        std::stringstream ss;
+        for (size_t i = 0; i < entry.count; i++) {
+            ss << entry.data.i32[i] << " ";
+            if ((i != 0) && (i % step == 0 || i == entry.count - 1)) {
+                CAMERA_LOGI("%{public}s\n", ss.str().c_str());
+                ss.clear();
+                ss.str("");
+            }
+        }
+        CAMERA_LOGI("print tag<OHOS_ABILITY_EQUIVALENT_FOCUS> value end.");
     }
 }

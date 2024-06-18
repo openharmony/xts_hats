@@ -100,6 +100,7 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_Moon_0200, TestSize.Level1)
         EXPECT_NE(data, nullptr);
         camera_metadata_item_t entry;
         int ret = FindCameraMetadataItem(data, OHOS_STATUS_MOON_CAPTURE_DETECTION, &entry);
+        EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, ret);
         if (ret == HDI::Camera::V1_0::NO_ERROR && entry.data.u8 != nullptr && entry.count > 0) {
             uint8_t value = entry.data.u8[0];
             // 查询到状态， 检测状态到 月亮模式可开启
@@ -111,6 +112,50 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_Moon_0200, TestSize.Level1)
         } else {
             printf("Moon is not exits.");
         }
+    }
+}
+
+/**
+ * @tc.name:SUB_Driver_Camera_Moon_0300
+ * @tc.desc: Update moon ability setting
+ * @tc.size:MediumTest
+ * @tc.type:Function
+*/
+HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_Moon_0300, TestSize.Level1)
+{
+    int32_t rc;
+    // step 2: set callback object
+    cameraTest->hostCallbackV1_2 = new OHOS::Camera::Test::TestCameraHostCallbackV1_2();
+    rc = cameraTest->serviceV1_3->SetCallback_V1_2(cameraTest->hostCallbackV1_2);
+    EXPECT_EQ(rc, 0);
+    // Start OHOS_ABILITY_MOON_CAPTURE_BOOST ability query
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_MOON_CAPTURE_BOOST, &entry);
+
+    if (ret == HDI::Camera::V1_0::NO_ERROR && entry.data.u8 != nullptr && entry.count > 0) {
+        std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+        constexpr float zoomRatio = 15;
+        uint8_t stabControl = OHOS_CAMERA_MOON_CAPTURE_BOOST_ENABLE;
+        meta->addEntry(OHOS_CONTROL_ZOOM_RATIO, &zoomRatio, DATA_COUNT);
+        meta->addEntry(OHOS_CONTROL_MOON_CAPTURE_BOOST, &stabControl, DATA_COUNT);
+        // ability meta data serialization for updating
+        std::vector<uint8_t> setting;
+        MetadataUtils::ConvertMetadataToVec(meta, setting);
+        cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
+        EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+        CAMERA_LOGD("MoonCaptureBoost mode is set enabled.");
+
+        cameraTest->intents = {PREVIEW, STILL_CAPTURE};
+        cameraTest->StartStream(cameraTest->intents);
+        EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+        cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+        cameraTest->StartCapture(cameraTest->streamIdCapture, cameraTest->captureIdCapture, false, true);
+        sleep(1);
+        cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdCapture};
+        cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdCapture};
+        cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
     }
 }
 
@@ -127,7 +172,6 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SlowMotion_0300, TestSize.Level1)
         return;
     }
     cameraTest->CreateAndCommitStreamsForHighFrameRate(cameraTest);
-
     // Update settings
     std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
     int32_t highFrameRate[2] = {120, 120};
@@ -512,7 +556,6 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SMVideo_0200, TestSize.Level1)
         static_cast<OHOS::HDI::Camera::V1_1::OperationMode_V1_1>(OHOS::HDI::Camera::V1_3::VIDEO_MACRO),
         cameraTest->abilityVec);
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
-
     // Update settings
     std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
     float lensFocusDistance = DATA_COUNT;
@@ -521,47 +564,225 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SMVideo_0200, TestSize.Level1)
     MetadataUtils::ConvertMetadataToVec(meta, setting);
     cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
-
     sleep(UT_SECOND_TIMES);
     cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
     cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
-
     cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
     cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
     cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
 }
 
 /**
- * @tc.name:SUB_Driver_Camera_ZoomBand_0100
- * @tc.desc:OHOS_ABILITY_EQUIVALENT_FOCUS
+ * @tc.name:SUB_Driver_Camera_DynamicFps_0100
+ * @tc.desc:Dynamic FPS configuration, range setting, streams fps constrain
  * @tc.size:MediumTest
  * @tc.type:Function
 */
-HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_ZoomBand_0100, TestSize.Level1)
+HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_DynamicFps_0100, TestSize.Level1)
 {
-    EXPECT_NE(cameraTest->ability, nullptr);
+    // PREVIEW and VIDEO stream
+    cameraTest->intents = {PREVIEW, VIDEO};
+    // This requirement only in VIDEO mode
+    cameraTest->StartStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::OperationMode::VIDEO);
+    // Bind fps range with preview stream and video stream
     common_metadata_header_t* data = cameraTest->ability->get();
     EXPECT_NE(data, nullptr);
     camera_metadata_item_t entry;
-    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_EQUIVALENT_FOCUS, &entry);
-    if (cameraTest->rc != HDI::Camera::V1_0::NO_ERROR) {
-        CAMERA_LOGI("OHOS_ABILITY_EQUIVALENT_FOCUS can not be find");
-        return;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_CONTROL_FPS_RANGES, &entry);
+    // The FPS only valid in current release, non backward compatibility
+    int32_t fpsRanges[] = {1, 30};
+    bool result;
+    if (cameraTest->rc != CAM_META_SUCCESS) {
+        std::cout << "Not found TAG[OHOS_CONTROL_FPS_RANGES], insert one" << std::endl;
+        result = cameraTest->ability->addEntry(OHOS_CONTROL_FPS_RANGES,
+            fpsRanges, sizeof(fpsRanges) / sizeof(int32_t));
+        EXPECT_EQ(true, result);
+    } else {
+        std::cout << "Found TAG[OHOS_CONTROL_FPS_RANGES], Update it" << std::endl;
+        result = cameraTest->ability->updateEntry(OHOS_CONTROL_FPS_RANGES,
+            fpsRanges, sizeof(fpsRanges) / sizeof(int32_t));
+        EXPECT_EQ(true, result);
     }
-    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR) {
-        EXPECT_NE(entry.data.i32, nullptr);
-        EXPECT_EQ(entry.count > 0, true);
-        CAMERA_LOGI("print tag<OHOS_ABILITY_EQUIVALENT_FOCUS> value start.");
-        constexpr size_t step = 10; // print step
-        std::stringstream ss;
-        for (size_t i = 0; i < entry.count; i++) {
-            ss << entry.data.i32[i] << " ";
-            if ((i != 0) && (i % step == 0 || i == entry.count - 1)) {
-                CAMERA_LOGI("%{public}s\n", ss.str().c_str());
-                ss.clear();
-                ss.str("");
-            }
-        }
-        CAMERA_LOGI("print tag<OHOS_ABILITY_EQUIVALENT_FOCUS> value end.");
+    OHOS::Camera::MetadataUtils::ConvertMetadataToVec(cameraTest->ability, cameraTest->abilityVec);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
+    // Release stream
+    cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
+    cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.name:SUB_Driver_Camera_DynamicFps_0200
+ * @tc.desc:Dynamic FPS configuration, range setting, streams fps constrain
+ * @tc.size:MediumTest
+ * @tc.type:Function
+*/
+HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_DynamicFps_0200, TestSize.Level1)
+{
+    // PREVIEW and VIDEO stream
+    cameraTest->intents = {PREVIEW, VIDEO};
+    // This requirement only in VIDEO mode
+    cameraTest->StartStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::OperationMode::VIDEO);
+    // Bind fps range with preview stream and video stream
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_CONTROL_FPS_RANGES, &entry);
+    // The FPS only valid in current release, non backward compatibility
+    int32_t fpsRanges[] = {35, 60};
+    bool result;
+    if (cameraTest->rc != CAM_META_SUCCESS) {
+        std::cout << "Not found TAG[OHOS_CONTROL_FPS_RANGES], insert one" << std::endl;
+        result = cameraTest->ability->addEntry(OHOS_CONTROL_FPS_RANGES,
+            fpsRanges, sizeof(fpsRanges) / sizeof(int32_t));
+        EXPECT_EQ(true, result);
+    } else {
+        std::cout << "Found TAG[OHOS_CONTROL_FPS_RANGES], Update it" << std::endl;
+        result = cameraTest->ability->updateEntry(OHOS_CONTROL_FPS_RANGES,
+            fpsRanges, sizeof(fpsRanges) / sizeof(int32_t));
+        EXPECT_EQ(true, result);
     }
+    OHOS::Camera::MetadataUtils::ConvertMetadataToVec(cameraTest->ability, cameraTest->abilityVec);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
+    // Release stream
+    cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
+    cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
++ * @tc.name:SUB_Driver_Camera_DynamicFps_0300
++ * @tc.desc:Dynamic FPS configuration, fixed fps setting, streams fps constrain
++ * @tc.size:MediumTest
++ * @tc.type:Function
++*/
+HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_DynamicFps_0300, TestSize.Level1)
+{
+    // PREVIEW and VIDEO stream
+    cameraTest->intents = {PREVIEW, VIDEO};
+    // This requirement only in VIDEO mode
+    cameraTest->StartStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::OperationMode::VIDEO);
+    // Bind fixed fps with preview stream and video stream, constraint
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_CONTROL_FPS_RANGES, &entry);
+    // The FPS only valid in current release, non backward compatibility
+    int32_t previewFixedFps[] = {30, 30};
+    bool result;
+    if (cameraTest->rc != CAM_META_SUCCESS) {
+        std::cout << "Not found TAG[OHOS_CONTROL_FPS_RANGES], insert one" << std::endl;
+        result = cameraTest->ability->addEntry(OHOS_CONTROL_FPS_RANGES,
+            previewFixedFps, sizeof(previewFixedFps) / sizeof(int32_t));
+        EXPECT_EQ(true, result);
+    } else {
+        std::cout << "Found TAG[OHOS_CONTROL_FPS_RANGES], Update it" << std::endl;
+        result = cameraTest->ability->updateEntry(OHOS_CONTROL_FPS_RANGES,
+            previewFixedFps, sizeof(previewFixedFps) / sizeof(int32_t));
+        EXPECT_EQ(true, result);
+    }
+    OHOS::Camera::MetadataUtils::ConvertMetadataToVec(cameraTest->ability, cameraTest->abilityVec);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    // Update video fixed fps, constraint relationship
+    int32_t videoFixedFps[] = {60, 60};
+    std::cout << "Update fixed fps for video capture" << std::endl;
+    result = cameraTest->ability->updateEntry(OHOS_CONTROL_FPS_RANGES,
+        videoFixedFps, sizeof(videoFixedFps) / sizeof(int32_t));
+    EXPECT_EQ(true, result);
+    OHOS::Camera::MetadataUtils::ConvertMetadataToVec(cameraTest->ability, cameraTest->abilityVec);
+    cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
+    // Release stream
+    cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
+    cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
++ * @tc.name:SUB_Driver_Camera_DynamicFps_0400
++ * @tc.desc:Dynamic FPS configuration, fixed fps setting, streams fps constrain
++ * @tc.size:MediumTest
++ * @tc.type:Function
++*/
+HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_DynamicFps_0400, TestSize.Level1)
+{
+    // PREVIEW and VIDEO stream
+    cameraTest->intents = {PREVIEW, VIDEO};
+    // This requirement only in VIDEO mode
+    cameraTest->StartStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::OperationMode::VIDEO);
+    // Bind fixed fps with preview stream and video stream, constraint
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_CONTROL_FPS_RANGES, &entry);
+    // The FPS only valid in current release, non backward compatibility
+    int32_t previewFixedFps[] = {45, 45};
+    bool result;
+    if (cameraTest->rc != CAM_META_SUCCESS) {
+        std::cout << "Not found TAG[OHOS_CONTROL_FPS_RANGES], insert one" << std::endl;
+        result = cameraTest->ability->addEntry(OHOS_CONTROL_FPS_RANGES,
+            previewFixedFps, sizeof(previewFixedFps) / sizeof(int32_t));
+        EXPECT_EQ(true, result);
+    } else {
+        std::cout << "Found TAG[OHOS_CONTROL_FPS_RANGES], Update it" << std::endl;
+        result = cameraTest->ability->updateEntry(OHOS_CONTROL_FPS_RANGES,
+            previewFixedFps, sizeof(previewFixedFps) / sizeof(int32_t));
+        EXPECT_EQ(true, result);
+    }
+    OHOS::Camera::MetadataUtils::ConvertMetadataToVec(cameraTest->ability, cameraTest->abilityVec);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    // Update video fixed fps, constraint relationship
+    int32_t videoFixedFps[] = {15, 15};
+    std::cout << "Update fixed fps for video capture" << std::endl;
+    result = cameraTest->ability->updateEntry(OHOS_CONTROL_FPS_RANGES,
+        videoFixedFps, sizeof(videoFixedFps) / sizeof(int32_t));
+    EXPECT_EQ(true, result);
+    OHOS::Camera::MetadataUtils::ConvertMetadataToVec(cameraTest->ability, cameraTest->abilityVec);
+    cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
+    // Release stream
+    cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
+    cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
+
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.name:SUB_Driver_Camera_DynamicFps_0500
+ * @tc.desc:Dynamic FPS configuration, range setting, streams fps constrain
+ * @tc.size:MediumTest
+ * @tc.type:Function
+*/
+HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_DynamicFps_0500, TestSize.Level1)
+{
+    // PREVIEW and VIDEO stream
+    cameraTest->intents = {PREVIEW, VIDEO};
+    // This requirement only in VIDEO mode
+    cameraTest->StartStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::OperationMode::VIDEO);
+    // Bind fps range with preview stream and video stream
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_CONTROL_FPS_RANGES, &entry);
+    // The FPS only valid in current release, non backward compatibility
+    int32_t fpsRanges[] = {30, 30};
+    bool result;
+    if (cameraTest->rc != CAM_META_SUCCESS) {
+        std::cout << "Not found TAG[OHOS_CONTROL_FPS_RANGES], insert one" << std::endl;
+        result = cameraTest->ability->addEntry(OHOS_CONTROL_FPS_RANGES,
+            fpsRanges, sizeof(fpsRanges) / sizeof(int32_t));
+        EXPECT_EQ(true, result);
+    } else {
+        std::cout << "Found TAG[OHOS_CONTROL_FPS_RANGES], Update it" << std::endl;
+        result = cameraTest->ability->updateEntry(OHOS_CONTROL_FPS_RANGES,
+            fpsRanges, sizeof(fpsRanges) / sizeof(int32_t));
+        EXPECT_EQ(true, result);
+    }
+    OHOS::Camera::MetadataUtils::ConvertMetadataToVec(cameraTest->ability, cameraTest->abilityVec);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
+    // Release stream
+    cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
+    cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
 }

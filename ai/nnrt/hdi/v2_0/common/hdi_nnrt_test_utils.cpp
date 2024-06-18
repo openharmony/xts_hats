@@ -19,6 +19,7 @@
 
 #include "securec.h"
 #include "interfaces/kits/c/neural_network_runtime/neural_network_runtime.h"
+#include "lite_graph_to_hdi_model_v1_0.h"
 #include "inner_model.h"
 #include "memory_manager.h"
 #include "hdi_nnrt_test_utils.h"
@@ -124,7 +125,7 @@ OH_NN_ReturnCode HDICommon::ConvertModel(OHOS::sptr<V2_0::INnrtDevice> device_, 
             return OH_NN_FAILED;
         }
     }
-    *iModel = mindspore::lite::MindIR_LiteGraph_To_Model(m_liteGraph.get(), tensorBuffer);
+    *iModel = OHOS::NeuralNetworkRuntime::V2::LiteGraph_To_HDIModel(m_liteGraph.get(), tensorBuffer);
     if (iModel == nullptr) {
         printf("[NNRtTest] Parse litegraph to hdi model failed.\n");
         device_->ReleaseBuffer(tensorBuffer);
@@ -263,7 +264,7 @@ void HDICommon::UnmapAllMemory(const std::vector<void* > &buffers)
     }
 }
 
-void HDICommon::MindIR_Model_Destory(OHOS::HDI::Nnrt::V1_0::Model** model)
+void HDICommon::MindIR_Model_Destroy(OHOS::HDI::Nnrt::V1_0::Model** model)
 {
     if((model != nullptr) && (*model != nullptr)) {
         delete *model;

@@ -125,7 +125,7 @@ OH_NN_ReturnCode HDICommon::ConvertModel(OHOS::sptr<V1_0::INnrtDevice> device_, 
             return OH_NN_FAILED;
         }
     }
-    *iModel = OHOS::NeuralNetworkRuntime::V1::LiteGragh_To_HDIModel(m_liteGraph.get(), tensorBuffer);
+    *iModel = OHOS::NeuralNetworkRuntime::V1::LiteGraph_To_HDIModel(m_liteGraph.get(), tensorBuffer);
     if (iModel == nullptr) {
         printf("[NNRtTest] Parse litegraph to hdi model failed.\n");
         device_->ReleaseBuffer(tensorBuffer);
@@ -264,7 +264,7 @@ void HDICommon::UnmapAllMemory(const std::vector<void* > &buffers)
     }
 }
 
-void HDICommon::MindIR_Model_Destory(OHOS::HDI::Nnrt::V1_0::Model** model)
+void HDICommon::MindIR_Model_Destroy(OHOS::HDI::Nnrt::V1_0::Model** model)
 {
     if((model != nullptr) && (*model != nullptr)) {
         delete *model;

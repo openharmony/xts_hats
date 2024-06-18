@@ -22,7 +22,7 @@
 #include "mindir.h"
 #include "mindir_lite_graph.h"
 
-#include "interfaces/kits/c/neural_network_runtime.h"
+#include "interfaces/kits/c/neural_network_runtime/neural_network_runtime.h"
 #include "common/hdi_nnrt_test_utils.h"
 #include "common/hdi_nnrt_test.h"
 
@@ -69,7 +69,7 @@ HWTEST_F(ModelPrepareTest, SUB_AI_NNRt_Func_South_Model_ExportModelCache_0100, F
     std::vector<V1_0::SharedBuffer> modelCache;
     EXPECT_EQ(HDF_SUCCESS, iPreparedModel->ExportModelCache(modelCache));
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destory(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -137,7 +137,7 @@ HWTEST_F(ModelPrepareTest, SUB_AI_NNRt_Func_South_Model_PreparedModelFromCache_0
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, device_->PrepareModelFromModelCache(modelCache, config, iPreparedModel1));
 
     // release
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destory(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -179,7 +179,7 @@ HWTEST_F(ModelPrepareTest, SUB_AI_NNRt_Func_South_Model_PreparedModelFromCache_0
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, device_->PrepareModelFromModelCache(modelCache, config, iPreparedModel1));
 
     // release
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destory(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -207,7 +207,7 @@ HWTEST_F(ModelPrepareTest, SUB_AI_NNRt_Func_South_Model_PreparedModel_0100, Func
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
     // release
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destory(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -234,7 +234,7 @@ HWTEST_F(ModelPrepareTest, SUB_AI_NNRt_Func_South_Model_PreparedModel_0200, Func
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
     // release
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destory(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -262,7 +262,7 @@ HWTEST_F(ModelPrepareTest, SUB_AI_NNRt_Func_South_Model_PreparedModel_0300, Func
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
     // release
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destory(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -289,7 +289,7 @@ HWTEST_F(ModelPrepareTest, SUB_AI_NNRt_Func_South_Model_PreparedModel_0400, Func
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
     // release
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destory(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -318,7 +318,7 @@ HWTEST_F(ModelPrepareTest, SUB_AI_NNRt_Func_South_Model_PreparedModel_0500, Func
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
     // release
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destory(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -346,7 +346,7 @@ HWTEST_F(ModelPrepareTest, SUB_AI_NNRt_Func_South_Model_PreparedModel_0600, Func
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
     // release
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destory(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -373,7 +373,7 @@ HWTEST_F(ModelPrepareTest, SUB_AI_NNRt_Func_South_Model_PreparedModel_0700, Func
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
     // release
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destory(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -401,7 +401,7 @@ HWTEST_F(ModelPrepareTest, SUB_AI_NNRt_Func_South_Model_PreparedModel_0800, Func
     EXPECT_EQ(HDF_FAILURE, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
     // release
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destory(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -427,7 +427,7 @@ HWTEST_F(ModelPrepareTest, SUB_AI_NNRt_Func_South_Model_PreparedModel_0900, Func
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
     // release
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destory(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -453,7 +453,7 @@ HWTEST_F(ModelPrepareTest, SUB_AI_NNRt_Func_South_Model_PreparedModel_1000, Func
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
     // release
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destory(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -479,7 +479,7 @@ HWTEST_F(ModelPrepareTest, SUB_AI_NNRt_Func_South_Model_PreparedModel_1100, Func
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
     // release
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destory(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -505,7 +505,7 @@ HWTEST_F(ModelPrepareTest, SUB_AI_NNRt_Func_South_Model_PreparedModel_1200, Func
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
     // release
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destory(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }

@@ -32,6 +32,8 @@ ohos_moduletest_suite("HatsHdfNnrtFunctionV2_0AdditionalTest") {
   include_dirs = [
     "../../v2_0",
     "../../../../../../../../foundation/ai/neural_network_runtime",
+    "//foundation/ai/neural_network_runtime/frameworks/native/neural_network_runtime",
+    "//foundation/ai/neural_network_runtime/frameworks/native/neural_network_core",
     "//third_party/mindspore/mindspore-src/source/mindspore/lite/mindir/include",
   ]
 

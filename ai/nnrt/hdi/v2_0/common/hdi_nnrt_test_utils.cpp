@@ -19,8 +19,8 @@
 
 #include "securec.h"
 #include "interfaces/kits/c/neural_network_runtime/neural_network_runtime.h"
-#include "frameworks/native/inner_model.h"
-#include "frameworks/native/memory_manager.h"
+#include "inner_model.h"
+#include "memory_manager.h"
 #include "hdi_nnrt_test_utils.h"
 
 namespace OHOS::NeuralNetworkRuntime::Test {
@@ -260,6 +260,14 @@ void HDICommon::UnmapAllMemory(const std::vector<void* > &buffers)
         if (ret != OH_NN_SUCCESS) {
             printf("[NNRtTest] [UnmapAllMemory] release buffer failed, ret:%d.\n", ret);
         }
+    }
+}
+
+void HDICommon::MindIR_Model_Destory(OHOS::HDI::Nnrt::V1_0::Model** model)
+{
+    if((model != nullptr) && (*model != nullptr)) {
+        delete *model;
+        *model = nullptr;
     }
 }
 

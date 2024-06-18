@@ -25,7 +25,7 @@
 #include "mindir_lite_graph.h"
 
 #include "interfaces/kits/c/neural_network_runtime/neural_network_runtime.h"
-#include "frameworks/native/memory_manager.h"
+#include "memory_manager.h"
 #include "common/hdi_nnrt_test_utils.h"
 #include "common/hdi_nnrt_test.h"
 
@@ -143,7 +143,7 @@ HWTEST_F(StabilityTest, SUB_AI_NNRt_Reliability_South_Stress_0100, Reliability |
         }
     }
     for (int i=0; i< iModels.size(); i++) {
-        mindspore::lite::MindIR_Model_Destroy(&iModels[i]);
+        HDICommon::MindIR_Model_Destory(&iModels[i]);
         if (tensorBuffers[i].fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffers[i]));
         }
@@ -182,7 +182,7 @@ HWTEST_F(StabilityTest, SUB_AI_NNR_Reliability_South_Stress_0200, Reliability | 
         }
     }
     // release
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destory(&iModel);
     if (tensorBuffer.fd != -1) {
         ASSERT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     } 

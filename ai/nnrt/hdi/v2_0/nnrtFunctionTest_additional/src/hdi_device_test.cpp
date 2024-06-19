@@ -299,7 +299,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_001, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -330,7 +330,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_002, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -361,7 +361,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_003, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -392,7 +392,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_004, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -423,7 +423,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_005, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -454,7 +454,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_006, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -485,7 +485,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_007, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -516,7 +516,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_008, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -547,7 +547,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_009, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -578,7 +578,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_010, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -609,7 +609,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_011, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -640,7 +640,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_012, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -671,7 +671,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_013, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -702,7 +702,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_014, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -733,7 +733,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_015, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -764,7 +764,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_016, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -795,7 +795,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_017, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -826,7 +826,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_018, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -857,7 +857,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_019, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -888,7 +888,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_020, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -919,7 +919,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_021, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -950,7 +950,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_022, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -981,7 +981,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_023, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1012,7 +1012,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_024, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1043,7 +1043,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_025, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1074,7 +1074,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_026, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1105,7 +1105,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_027, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1136,7 +1136,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_028, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1167,7 +1167,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_029, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1198,7 +1198,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_030, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1229,7 +1229,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_031, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1260,7 +1260,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_032, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1291,7 +1291,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_033, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1322,7 +1322,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_034, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1353,7 +1353,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_035, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1384,7 +1384,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_036, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1415,7 +1415,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_037, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1446,7 +1446,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_038, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1477,7 +1477,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_039, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1508,7 +1508,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_040, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1539,7 +1539,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_041, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1570,7 +1570,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_042, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1601,7 +1601,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_043, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1632,7 +1632,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_044, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1663,7 +1663,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_045, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1694,7 +1694,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_046, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1725,7 +1725,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_047, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1756,7 +1756,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_048, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1787,7 +1787,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_049, Function | M
         EXPECT_EQ(false, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1818,7 +1818,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_050, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1849,7 +1849,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_051, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1880,7 +1880,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_052, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1911,7 +1911,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_053, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1942,7 +1942,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_054, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1973,7 +1973,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_055, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2004,7 +2004,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_056, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2035,7 +2035,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_057, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2066,7 +2066,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_058, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2097,7 +2097,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_059, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2128,7 +2128,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_060, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2159,7 +2159,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_061, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2190,7 +2190,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_062, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2221,7 +2221,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_063, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2252,7 +2252,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_064, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2283,7 +2283,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_065, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2314,7 +2314,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_066, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2345,7 +2345,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_067, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2371,7 +2371,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_068, Function | M
     std::vector<bool> supportedOperations;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->GetSupportedOperation(*iModel, supportedOperations));
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2397,7 +2397,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_069, Function | M
     std::vector<bool> supportedOperations;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->GetSupportedOperation(*iModel, supportedOperations));
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2423,7 +2423,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_070, Function | M
     std::vector<bool> supportedOperations;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->GetSupportedOperation(*iModel, supportedOperations));
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2448,7 +2448,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_071, Function | M
     std::vector<bool> supportedOperations;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->GetSupportedOperation(*iModel, supportedOperations));
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2479,7 +2479,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_072, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2510,7 +2510,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_073, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2541,7 +2541,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_074, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2572,7 +2572,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_075, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2603,7 +2603,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_076, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2634,7 +2634,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_077, Function | M
         EXPECT_EQ(true, supportedOperations[i]);
     }
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2662,7 +2662,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_078, Function | M
     std::vector<bool> supportedOperations;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->GetSupportedOperation(*iModel, supportedOperations));
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2690,7 +2690,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_079, Function | M
     std::vector<bool> supportedOperations;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->GetSupportedOperation(*iModel, supportedOperations));
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2718,7 +2718,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_080, Function | M
     std::vector<bool> supportedOperations;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->GetSupportedOperation(*iModel, supportedOperations));
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2746,7 +2746,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_081, Function | M
     std::vector<bool> supportedOperations;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->GetSupportedOperation(*iModel, supportedOperations));
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2774,7 +2774,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_082, Function | M
     std::vector<bool> supportedOperations;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->GetSupportedOperation(*iModel, supportedOperations));
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2802,7 +2802,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_083, Function | M
     std::vector<bool> supportedOperations;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->GetSupportedOperation(*iModel, supportedOperations));
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2830,7 +2830,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_084, Function | M
     std::vector<bool> supportedOperations;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->GetSupportedOperation(*iModel, supportedOperations));
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2858,7 +2858,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_085, Function | M
     std::vector<bool> supportedOperations;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->GetSupportedOperation(*iModel, supportedOperations));
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2886,7 +2886,7 @@ HWTEST_F(DeviceTestAdditional, testNnrtGetSupportedOperationV2_086, Function | M
     std::vector<bool> supportedOperations;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->GetSupportedOperation(*iModel, supportedOperations));
 
-    mindspore::lite::MindIR_Model_Destroy(&iModel);
+    HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }

@@ -22,8 +22,8 @@
 
 #include "gtest/gtest.h"
 
-#include "interfaces/kits/c/neural_network_runtime.h"
-#include "frameworks/native/memory_manager.h"
+#include "interfaces/kits/c/neural_network_runtime/neural_network_runtime.h"
+#include "memory_manager.h"
 
 namespace V1_0 = OHOS::HDI::Nnrt::V1_0;
 

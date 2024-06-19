@@ -19,7 +19,6 @@
 
 #include "securec.h"
 #include "interfaces/kits/c/neural_network_runtime/neural_network_runtime.h"
-#include "lite_graph_to_hdi_model_v1_0.h"
 #include "inner_model.h"
 #include "memory_manager.h"
 #include "hdi_nnrt_test_utils.h"

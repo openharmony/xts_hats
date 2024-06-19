@@ -25,6 +25,7 @@
 #include "mindir_lite_graph.h"
 
 #include "interfaces/kits/c/neural_network_runtime/neural_network_runtime_type.h"
+#include "lite_graph_to_hdi_model_v1_0.h"
 
 namespace V1_0 = OHOS::HDI::Nnrt::V1_0;
 

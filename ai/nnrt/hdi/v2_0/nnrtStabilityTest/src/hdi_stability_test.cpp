@@ -185,5 +185,5 @@ HWTEST_F(StabilityTest, SUB_AI_NNR_Reliability_South_Stress_0200, Reliability | 
     HDICommon::MindIR_Model_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         ASSERT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
-    } 
+    }
 }

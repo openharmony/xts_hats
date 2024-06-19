@@ -264,14 +264,6 @@ void HDICommon::UnmapAllMemory(const std::vector<void* > &buffers)
     }
 }
 
-void HDICommon::MindIR_Model_Destroy(OHOS::HDI::Nnrt::V2_0::Model** model)
-{
-    if ((model != nullptr) && (*model != nullptr)) {
-        delete *model;
-        *model = nullptr;
-    }
-}
-
 bool CheckExpectOutput(const std::vector<float> &output, const std::vector<float> &expect)
 {
     if (output.empty() || expect.empty()) {

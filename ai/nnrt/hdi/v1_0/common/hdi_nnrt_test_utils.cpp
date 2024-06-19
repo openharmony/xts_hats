@@ -266,7 +266,7 @@ void HDICommon::UnmapAllMemory(const std::vector<void* > &buffers)
 
 void HDICommon::MindIR_Model_Destroy(OHOS::HDI::Nnrt::V1_0::Model** model)
 {
-    if((model != nullptr) && (*model != nullptr)) {
+    if ((model != nullptr) && (*model != nullptr)) {
         delete *model;
         *model = nullptr;
     }

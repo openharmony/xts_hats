@@ -1705,7 +1705,7 @@ HWTEST_F(ModelPrepareTestAdditional, testGetInputDimRanges001, Function | Medium
     }
     printf("\n");
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1745,7 +1745,7 @@ HWTEST_F(ModelPrepareTestAdditional, testExportModelCache002, Function | MediumT
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, iPreparedModel->ExportModelCache(modelCache));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1787,7 +1787,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel001, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1829,7 +1829,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel002, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1871,7 +1871,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel003, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1913,7 +1913,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel004, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1955,7 +1955,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel005, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -1997,7 +1997,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel006, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2039,7 +2039,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel007, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2081,7 +2081,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel008, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2123,7 +2123,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel009, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2165,7 +2165,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel010, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2207,7 +2207,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel011, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2249,7 +2249,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel012, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2291,7 +2291,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel013, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2333,7 +2333,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel014, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2375,7 +2375,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel015, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2417,7 +2417,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel016, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2459,7 +2459,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel017, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2501,7 +2501,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel018, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2543,7 +2543,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel019, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2585,7 +2585,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel020, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2627,7 +2627,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel021, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2669,7 +2669,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel022, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2711,7 +2711,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel023, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2753,7 +2753,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel024, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2795,7 +2795,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel025, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2837,7 +2837,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel026, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2879,7 +2879,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel027, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2921,7 +2921,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel028, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -2963,7 +2963,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel029, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3005,7 +3005,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel030, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3047,7 +3047,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel031, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3089,7 +3089,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel032, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3131,7 +3131,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel033, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3173,7 +3173,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel034, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3215,7 +3215,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel035, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3257,7 +3257,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel036, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3299,7 +3299,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel037, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3341,7 +3341,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel038, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3383,7 +3383,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel039, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3425,7 +3425,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel040, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3467,7 +3467,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel041, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3509,7 +3509,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel042, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3551,7 +3551,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel043, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3593,7 +3593,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel044, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3635,7 +3635,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel045, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3677,7 +3677,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel046, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3719,7 +3719,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel047, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3761,7 +3761,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel048, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3803,7 +3803,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel049, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3832,7 +3832,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel050, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3861,7 +3861,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel051, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3890,7 +3890,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel052, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3932,7 +3932,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel053, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3961,7 +3961,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel054, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -3988,7 +3988,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel055, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4029,7 +4029,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel056, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4056,7 +4056,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel057, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4083,7 +4083,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel058, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4110,7 +4110,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel059, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4137,7 +4137,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel060, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4164,7 +4164,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel061, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4193,7 +4193,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel062, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4222,7 +4222,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel063, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4247,7 +4247,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel064, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4276,7 +4276,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel065, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4305,7 +4305,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel066, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4334,7 +4334,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel067, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4363,7 +4363,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel068, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4392,7 +4392,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel069, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4421,7 +4421,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel070, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_DATATYPE, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4450,7 +4450,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel071, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4479,7 +4479,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel072, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4508,7 +4508,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel073, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_MEMORY_ERROR, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4537,7 +4537,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel074, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4566,7 +4566,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel075, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4595,7 +4595,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel076, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4624,7 +4624,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel077, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4653,7 +4653,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel078, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4682,7 +4682,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel079, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4711,7 +4711,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel080, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4749,7 +4749,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel081, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4786,7 +4786,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel082, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4824,7 +4824,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel083, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4862,7 +4862,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel084, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4900,7 +4900,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel085, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4937,7 +4937,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel086, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -4975,7 +4975,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel087, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5013,7 +5013,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel088, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5055,7 +5055,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel089, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5097,7 +5097,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel090, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5139,7 +5139,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel091, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5181,7 +5181,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel092, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5223,7 +5223,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel093, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5265,7 +5265,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel094, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5307,7 +5307,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel095, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5349,7 +5349,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel096, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5391,7 +5391,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel097, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5433,7 +5433,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel098, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5475,7 +5475,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel099, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5517,7 +5517,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel100, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5559,7 +5559,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel101, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5601,7 +5601,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel102, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5643,7 +5643,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel103, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5685,7 +5685,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel104, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5727,7 +5727,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel105, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5769,7 +5769,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel106, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5811,7 +5811,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel107, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5853,7 +5853,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel108, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5895,7 +5895,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel109, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5937,7 +5937,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel110, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -5979,7 +5979,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel111, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6021,7 +6021,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel112, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6063,7 +6063,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel113, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6105,7 +6105,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel114, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6147,7 +6147,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel115, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6189,7 +6189,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel116, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6231,7 +6231,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel117, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6273,7 +6273,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel118, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6315,7 +6315,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel119, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6357,7 +6357,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel120, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6399,7 +6399,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel121, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6441,7 +6441,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel122, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6483,7 +6483,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel123, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6525,7 +6525,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel124, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6567,7 +6567,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel125, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6609,7 +6609,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel126, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6651,7 +6651,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel127, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6693,7 +6693,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel128, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6735,7 +6735,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel129, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6777,7 +6777,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel130, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6819,7 +6819,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel131, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6861,7 +6861,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel132, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6903,7 +6903,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel133, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6945,7 +6945,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel134, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -6987,7 +6987,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel135, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7029,7 +7029,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel136, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7071,7 +7071,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel137, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7113,7 +7113,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel138, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7155,7 +7155,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel139, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7197,7 +7197,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel140, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7239,7 +7239,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel141, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7281,7 +7281,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel142, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7323,7 +7323,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel143, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7365,7 +7365,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel144, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7407,7 +7407,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel145, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7449,7 +7449,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel146, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7491,7 +7491,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel147, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7533,7 +7533,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel148, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7575,7 +7575,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel149, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7617,7 +7617,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel150, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7659,7 +7659,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel151, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7701,7 +7701,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel152, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7743,7 +7743,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel153, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7785,7 +7785,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel154, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7827,7 +7827,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel155, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7869,7 +7869,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel156, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7911,7 +7911,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel157, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7953,7 +7953,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel158, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -7995,7 +7995,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel159, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8037,7 +8037,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel160, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8079,7 +8079,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel161, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8121,7 +8121,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel162, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8163,7 +8163,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel163, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8205,7 +8205,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel164, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8247,7 +8247,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel165, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8289,7 +8289,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel166, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8331,7 +8331,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel167, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8373,7 +8373,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel168, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8415,7 +8415,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel169, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8457,7 +8457,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel170, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8499,7 +8499,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel171, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8541,7 +8541,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel172, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8583,7 +8583,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel173, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8625,7 +8625,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel174, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8667,7 +8667,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel175, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8709,7 +8709,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel176, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8751,7 +8751,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel177, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8793,7 +8793,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel178, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8835,7 +8835,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel179, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8877,7 +8877,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel180, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8919,7 +8919,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel181, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -8961,7 +8961,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel182, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9003,7 +9003,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel183, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9045,7 +9045,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel184, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9087,7 +9087,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel185, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9129,7 +9129,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel186, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9171,7 +9171,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel187, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9213,7 +9213,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel188, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9255,7 +9255,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel189, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9297,7 +9297,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel190, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9339,7 +9339,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel191, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9381,7 +9381,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel192, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9423,7 +9423,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel193, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9465,7 +9465,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel194, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9507,7 +9507,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel195, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9549,7 +9549,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel196, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9591,7 +9591,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel197, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9633,7 +9633,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel198, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9675,7 +9675,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel199, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9717,7 +9717,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel200, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9759,7 +9759,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel201, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9801,7 +9801,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel202, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9843,7 +9843,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel203, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9885,7 +9885,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel204, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9927,7 +9927,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel205, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -9969,7 +9969,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel206, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10011,7 +10011,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel207, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10053,7 +10053,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel208, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10095,7 +10095,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel209, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10137,7 +10137,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel210, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10179,7 +10179,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel211, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10221,7 +10221,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel212, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10263,7 +10263,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel213, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10305,7 +10305,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel214, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10347,7 +10347,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel215, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10389,7 +10389,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel216, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10431,7 +10431,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel217, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10473,7 +10473,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel218, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10515,7 +10515,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel219, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10557,7 +10557,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel220, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10599,7 +10599,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel221, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10641,7 +10641,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel222, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10683,7 +10683,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel223, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10725,7 +10725,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel224, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10767,7 +10767,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel225, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10809,7 +10809,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel226, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10851,7 +10851,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel227, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10893,7 +10893,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel228, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10935,7 +10935,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel229, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -10977,7 +10977,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel230, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11019,7 +11019,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel231, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11061,7 +11061,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel232, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11103,7 +11103,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel233, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11145,7 +11145,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel234, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11187,7 +11187,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel235, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11229,7 +11229,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel236, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11271,7 +11271,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel237, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11313,7 +11313,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel238, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11355,7 +11355,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel239, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11397,7 +11397,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel240, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11439,7 +11439,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel241, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11481,7 +11481,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel242, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11523,7 +11523,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel243, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11565,7 +11565,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel244, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11607,7 +11607,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel245, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11649,7 +11649,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel246, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11691,7 +11691,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel247, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11733,7 +11733,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel248, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11775,7 +11775,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel249, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11817,7 +11817,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel250, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11859,7 +11859,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel251, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11901,7 +11901,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel252, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11943,7 +11943,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel253, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -11985,7 +11985,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel254, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12027,7 +12027,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel255, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12069,7 +12069,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel256, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12111,7 +12111,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel257, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12153,7 +12153,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel258, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12195,7 +12195,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel259, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12237,7 +12237,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel260, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12279,7 +12279,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel261, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12321,7 +12321,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel262, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12363,7 +12363,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel263, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12405,7 +12405,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel264, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12447,7 +12447,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel265, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12489,7 +12489,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel266, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12531,7 +12531,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel267, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12573,7 +12573,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel268, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12615,7 +12615,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel269, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12657,7 +12657,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel270, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12699,7 +12699,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel271, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12741,7 +12741,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel272, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12783,7 +12783,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel273, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12825,7 +12825,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel274, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12867,7 +12867,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel275, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12909,7 +12909,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel276, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12951,7 +12951,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel277, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -12993,7 +12993,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel278, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13035,7 +13035,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel279, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13077,7 +13077,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel280, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13119,7 +13119,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel281, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13161,7 +13161,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel282, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13203,7 +13203,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel283, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13245,7 +13245,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel284, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13287,7 +13287,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel285, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13329,7 +13329,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel286, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13371,7 +13371,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel287, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13413,7 +13413,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel288, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13455,7 +13455,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel289, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13497,7 +13497,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel290, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13539,7 +13539,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel291, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13581,7 +13581,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel292, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13623,7 +13623,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel293, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13665,7 +13665,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel294, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13707,7 +13707,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel295, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13749,7 +13749,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel296, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13791,7 +13791,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel297, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13833,7 +13833,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel298, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13875,7 +13875,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel299, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13917,7 +13917,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel300, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -13959,7 +13959,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel301, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14001,7 +14001,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel302, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14043,7 +14043,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel303, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14085,7 +14085,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel304, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14127,7 +14127,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel305, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14169,7 +14169,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel306, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14211,7 +14211,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel307, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14253,7 +14253,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel308, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14295,7 +14295,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel309, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14337,7 +14337,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel310, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14379,7 +14379,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel311, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14421,7 +14421,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel312, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14463,7 +14463,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel313, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14505,7 +14505,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel314, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14547,7 +14547,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel315, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14589,7 +14589,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel316, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14631,7 +14631,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel317, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14673,7 +14673,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel318, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14715,7 +14715,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel319, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14757,7 +14757,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel320, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14799,7 +14799,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel321, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14841,7 +14841,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel322, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14883,7 +14883,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel323, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14925,7 +14925,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel324, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -14967,7 +14967,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel325, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15009,7 +15009,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel326, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15051,7 +15051,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel327, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15093,7 +15093,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel328, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15135,7 +15135,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel329, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15177,7 +15177,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel330, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15219,7 +15219,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel331, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15261,7 +15261,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel332, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15303,7 +15303,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel333, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15345,7 +15345,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel334, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15387,7 +15387,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel335, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15429,7 +15429,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel336, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15471,7 +15471,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel337, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15513,7 +15513,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel338, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15555,7 +15555,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel339, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15597,7 +15597,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel340, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15639,7 +15639,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel341, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15681,7 +15681,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel342, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15723,7 +15723,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel343, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15765,7 +15765,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel344, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15807,7 +15807,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel345, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15849,7 +15849,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel346, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15891,7 +15891,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel347, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15933,7 +15933,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel348, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -15975,7 +15975,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel349, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16017,7 +16017,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel350, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16059,7 +16059,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel351, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16101,7 +16101,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel352, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16143,7 +16143,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel353, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16185,7 +16185,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel354, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16227,7 +16227,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel355, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16269,7 +16269,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel356, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16311,7 +16311,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel357, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16353,7 +16353,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel358, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16395,7 +16395,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel359, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16437,7 +16437,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel360, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16479,7 +16479,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel361, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16521,7 +16521,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel362, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16563,7 +16563,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel363, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16605,7 +16605,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel364, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16647,7 +16647,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel365, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16689,7 +16689,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel366, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16731,7 +16731,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel367, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16773,7 +16773,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel368, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16815,7 +16815,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel369, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16857,7 +16857,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel370, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16899,7 +16899,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel371, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16941,7 +16941,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel372, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -16983,7 +16983,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel373, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17025,7 +17025,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel374, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17067,7 +17067,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel375, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17109,7 +17109,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel376, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17151,7 +17151,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel377, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17193,7 +17193,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel378, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17235,7 +17235,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel379, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17277,7 +17277,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel380, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17319,7 +17319,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel381, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17361,7 +17361,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel382, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17403,7 +17403,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel383, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17445,7 +17445,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel384, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17487,7 +17487,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel385, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17529,7 +17529,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel386, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17571,7 +17571,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel387, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17613,7 +17613,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel388, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17655,7 +17655,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel389, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17697,7 +17697,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel390, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17739,7 +17739,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel391, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17781,7 +17781,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel392, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17823,7 +17823,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel393, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17865,7 +17865,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel394, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17907,7 +17907,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel395, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17949,7 +17949,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel396, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -17991,7 +17991,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel397, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18033,7 +18033,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel398, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18075,7 +18075,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel399, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18117,7 +18117,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel400, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18159,7 +18159,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel401, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18201,7 +18201,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel402, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18243,7 +18243,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel403, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18285,7 +18285,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel404, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18327,7 +18327,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel405, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18369,7 +18369,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel406, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18411,7 +18411,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel407, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18453,7 +18453,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel408, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18495,7 +18495,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel409, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18537,7 +18537,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel410, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18579,7 +18579,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel411, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18621,7 +18621,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel412, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18663,7 +18663,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel413, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18705,7 +18705,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel414, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18747,7 +18747,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel415, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18789,7 +18789,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel416, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18831,7 +18831,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel417, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18873,7 +18873,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel418, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18915,7 +18915,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel419, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18957,7 +18957,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel420, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -18999,7 +18999,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel421, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19041,7 +19041,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel422, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19083,7 +19083,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel423, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19125,7 +19125,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel424, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19167,7 +19167,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel425, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19209,7 +19209,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel426, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19251,7 +19251,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel427, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19293,7 +19293,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel428, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19335,7 +19335,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel429, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19377,7 +19377,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel430, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19419,7 +19419,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel431, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19461,7 +19461,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel432, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19503,7 +19503,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel433, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19545,7 +19545,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel434, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19587,7 +19587,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel435, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19629,7 +19629,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel436, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19671,7 +19671,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel437, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19713,7 +19713,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel438, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19755,7 +19755,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel439, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19797,7 +19797,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel440, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19839,7 +19839,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel441, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19881,7 +19881,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel442, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19923,7 +19923,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel443, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -19965,7 +19965,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel444, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20007,7 +20007,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel445, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20049,7 +20049,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel446, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20091,7 +20091,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel447, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20133,7 +20133,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel448, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20175,7 +20175,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel449, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20217,7 +20217,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel450, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20259,7 +20259,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel451, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20301,7 +20301,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel452, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20343,7 +20343,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel453, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20385,7 +20385,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel454, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20427,7 +20427,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel455, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20469,7 +20469,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel456, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20511,7 +20511,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel457, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20553,7 +20553,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel458, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20595,7 +20595,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel459, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20637,7 +20637,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel460, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20679,7 +20679,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel461, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20721,7 +20721,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel462, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20763,7 +20763,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel463, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20805,7 +20805,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel464, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20847,7 +20847,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel465, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20889,7 +20889,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel466, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20931,7 +20931,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel467, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -20973,7 +20973,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel468, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21015,7 +21015,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel469, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21057,7 +21057,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel470, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21099,7 +21099,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel471, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21141,7 +21141,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel472, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21183,7 +21183,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel473, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21225,7 +21225,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel474, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21267,7 +21267,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel475, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21309,7 +21309,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel476, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21351,7 +21351,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel477, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21393,7 +21393,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel478, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21435,7 +21435,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel479, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21477,7 +21477,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel480, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21519,7 +21519,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel481, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21561,7 +21561,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel482, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21603,7 +21603,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel483, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21645,7 +21645,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel484, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21687,7 +21687,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel485, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21729,7 +21729,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel486, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21771,7 +21771,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel487, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21813,7 +21813,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel488, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21855,7 +21855,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel489, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21897,7 +21897,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel490, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21939,7 +21939,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel491, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -21981,7 +21981,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel492, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22023,7 +22023,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel493, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22065,7 +22065,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel494, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22107,7 +22107,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel495, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22149,7 +22149,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel496, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22191,7 +22191,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel497, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22233,7 +22233,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel498, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22275,7 +22275,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel499, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22317,7 +22317,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel500, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22359,7 +22359,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel501, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22401,7 +22401,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel502, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22443,7 +22443,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel503, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22485,7 +22485,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel504, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22527,7 +22527,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel505, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22569,7 +22569,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel506, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22611,7 +22611,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel507, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22653,7 +22653,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel508, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22695,7 +22695,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel509, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22737,7 +22737,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel510, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22779,7 +22779,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel511, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22821,7 +22821,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel512, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22863,7 +22863,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel513, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22905,7 +22905,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel514, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22947,7 +22947,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel515, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -22989,7 +22989,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel516, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23031,7 +23031,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel517, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23073,7 +23073,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel518, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23115,7 +23115,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel519, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23157,7 +23157,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel520, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23199,7 +23199,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel521, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23241,7 +23241,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel522, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23283,7 +23283,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel523, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23325,7 +23325,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel524, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23367,7 +23367,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel525, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23409,7 +23409,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel526, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23451,7 +23451,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel527, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23493,7 +23493,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel528, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23535,7 +23535,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel529, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23577,7 +23577,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel530, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23619,7 +23619,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel531, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23661,7 +23661,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel532, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23703,7 +23703,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel533, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23745,7 +23745,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel534, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23787,7 +23787,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel535, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23829,7 +23829,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel536, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23871,7 +23871,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel537, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23913,7 +23913,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel538, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23955,7 +23955,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel539, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -23997,7 +23997,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel540, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24039,7 +24039,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel541, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24081,7 +24081,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel542, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24123,7 +24123,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel543, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24165,7 +24165,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel544, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24207,7 +24207,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel545, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24249,7 +24249,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel546, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24291,7 +24291,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel547, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24333,7 +24333,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel548, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24375,7 +24375,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel549, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24417,7 +24417,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel550, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24459,7 +24459,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel551, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24501,7 +24501,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel552, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24543,7 +24543,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel553, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24585,7 +24585,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel554, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24627,7 +24627,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel555, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24669,7 +24669,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel556, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24711,7 +24711,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel557, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24753,7 +24753,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel558, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24795,7 +24795,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel559, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24837,7 +24837,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel560, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24879,7 +24879,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel561, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24921,7 +24921,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel562, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -24963,7 +24963,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel563, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25005,7 +25005,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel564, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25047,7 +25047,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel565, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25089,7 +25089,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel566, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25131,7 +25131,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel567, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25173,7 +25173,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel568, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25215,7 +25215,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel569, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25257,7 +25257,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel570, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25299,7 +25299,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel571, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25341,7 +25341,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel572, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25383,7 +25383,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel573, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25425,7 +25425,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel574, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25467,7 +25467,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel575, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25509,7 +25509,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel576, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25551,7 +25551,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel577, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25593,7 +25593,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel578, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25635,7 +25635,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel579, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25677,7 +25677,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel580, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25719,7 +25719,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel581, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25761,7 +25761,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel582, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25803,7 +25803,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel583, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25845,7 +25845,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel584, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25887,7 +25887,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel585, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25929,7 +25929,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel586, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -25971,7 +25971,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel587, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26013,7 +26013,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel588, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26055,7 +26055,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel589, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26097,7 +26097,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel590, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26139,7 +26139,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel591, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26181,7 +26181,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel592, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26223,7 +26223,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel593, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26265,7 +26265,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel594, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26307,7 +26307,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel595, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26349,7 +26349,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel596, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26391,7 +26391,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel597, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26433,7 +26433,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel598, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26475,7 +26475,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel599, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26517,7 +26517,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel600, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26559,7 +26559,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel601, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26601,7 +26601,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel602, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26643,7 +26643,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel603, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26685,7 +26685,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel604, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26727,7 +26727,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel605, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26769,7 +26769,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel606, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26811,7 +26811,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel607, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26853,7 +26853,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel608, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26895,7 +26895,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel609, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26937,7 +26937,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel610, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -26979,7 +26979,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel611, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27021,7 +27021,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel612, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27063,7 +27063,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel613, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27105,7 +27105,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel614, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27147,7 +27147,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel615, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27189,7 +27189,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel616, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27231,7 +27231,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel617, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27273,7 +27273,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel618, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27315,7 +27315,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel619, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27357,7 +27357,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel620, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27399,7 +27399,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel621, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27441,7 +27441,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel622, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27483,7 +27483,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel623, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27525,7 +27525,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel624, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27567,7 +27567,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel625, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27609,7 +27609,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel626, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27651,7 +27651,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel627, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27693,7 +27693,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel628, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27735,7 +27735,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel629, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27777,7 +27777,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel630, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27819,7 +27819,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel631, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27861,7 +27861,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel632, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27903,7 +27903,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel633, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27945,7 +27945,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel634, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -27987,7 +27987,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel635, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28029,7 +28029,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel636, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28071,7 +28071,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel637, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28113,7 +28113,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel638, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28155,7 +28155,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel639, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28197,7 +28197,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel640, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28239,7 +28239,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel641, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28281,7 +28281,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel642, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28323,7 +28323,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel643, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28365,7 +28365,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel644, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28407,7 +28407,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel645, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28449,7 +28449,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel646, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28491,7 +28491,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel647, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28533,7 +28533,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel648, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28575,7 +28575,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel649, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28617,7 +28617,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel650, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28659,7 +28659,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel651, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28701,7 +28701,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel652, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28743,7 +28743,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel653, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28785,7 +28785,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel654, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28827,7 +28827,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel655, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28869,7 +28869,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel656, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28911,7 +28911,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel657, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28953,7 +28953,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel658, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -28995,7 +28995,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel659, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29037,7 +29037,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel660, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29079,7 +29079,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel661, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29121,7 +29121,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel662, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29163,7 +29163,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel663, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29205,7 +29205,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel664, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29247,7 +29247,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel665, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29289,7 +29289,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel666, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29331,7 +29331,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel667, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29373,7 +29373,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel668, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29415,7 +29415,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel669, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29457,7 +29457,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel670, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29499,7 +29499,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel671, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29541,7 +29541,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel672, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29583,7 +29583,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel673, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29625,7 +29625,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel674, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29667,7 +29667,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel675, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29709,7 +29709,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel676, Function | MediumTest 
         EXPECT_TRUE((ret == V2_0::NNRT_ReturnCode::NNRT_SUCCESS) || (ret == V2_0::NNRT_ReturnCode::NNRT_INVALID_NODE));
     }
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29736,7 +29736,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel677, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29763,7 +29763,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel678, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29790,7 +29790,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel679, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29817,7 +29817,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel680, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29844,7 +29844,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel681, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29871,7 +29871,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel682, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29898,7 +29898,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel683, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29925,7 +29925,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel684, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29952,7 +29952,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel685, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -29979,7 +29979,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel686, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30006,7 +30006,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel687, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30033,7 +30033,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel688, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30060,7 +30060,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel689, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30087,7 +30087,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel690, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30114,7 +30114,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel691, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30141,7 +30141,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel692, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30168,7 +30168,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel693, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30195,7 +30195,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel694, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30222,7 +30222,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel695, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30249,7 +30249,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel696, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30276,7 +30276,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel697, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30303,7 +30303,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel698, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30330,7 +30330,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel699, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30357,7 +30357,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel700, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30384,7 +30384,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel701, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30411,7 +30411,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel702, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30438,7 +30438,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel703, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30465,7 +30465,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel704, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30492,7 +30492,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel705, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30519,7 +30519,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel706, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30546,7 +30546,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel707, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30573,7 +30573,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel708, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30600,7 +30600,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel709, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30627,7 +30627,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel710, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30654,7 +30654,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel711, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30681,7 +30681,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel712, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30708,7 +30708,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel713, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30735,7 +30735,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel714, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30762,7 +30762,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel715, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30789,7 +30789,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel716, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30816,7 +30816,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel717, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30843,7 +30843,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel718, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30870,7 +30870,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel719, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30897,7 +30897,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel720, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30924,7 +30924,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel721, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30951,7 +30951,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel722, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -30978,7 +30978,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel723, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31005,7 +31005,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel724, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31032,7 +31032,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel725, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31059,7 +31059,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel726, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31086,7 +31086,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel727, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31113,7 +31113,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel728, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31140,7 +31140,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel729, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31167,7 +31167,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel730, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31194,7 +31194,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel731, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31221,7 +31221,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel732, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31248,7 +31248,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel733, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31275,7 +31275,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel734, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31302,7 +31302,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel735, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31329,7 +31329,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel736, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31356,7 +31356,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel737, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31383,7 +31383,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel738, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31410,7 +31410,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel739, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31437,7 +31437,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel740, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31464,7 +31464,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel741, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31491,7 +31491,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel742, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31518,7 +31518,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel743, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31545,7 +31545,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel744, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31572,7 +31572,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel745, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31599,7 +31599,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel746, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31626,7 +31626,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel747, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31653,7 +31653,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel748, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31680,7 +31680,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel749, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31707,7 +31707,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel750, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31734,7 +31734,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel751, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31761,7 +31761,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel752, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31788,7 +31788,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel753, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31815,7 +31815,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel754, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31842,7 +31842,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel755, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31869,7 +31869,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel756, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31896,7 +31896,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel757, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31923,7 +31923,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel758, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31950,7 +31950,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel759, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -31977,7 +31977,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel760, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32004,7 +32004,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel761, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32031,7 +32031,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel762, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32058,7 +32058,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel763, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32085,7 +32085,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel764, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32112,7 +32112,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel765, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32139,7 +32139,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel766, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32166,7 +32166,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel767, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32193,7 +32193,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel768, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32220,7 +32220,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel769, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32247,7 +32247,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel770, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32274,7 +32274,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel771, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32301,7 +32301,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel772, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32328,7 +32328,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel773, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32355,7 +32355,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel774, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32382,7 +32382,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel775, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32409,7 +32409,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel776, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32436,7 +32436,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel777, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32463,7 +32463,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel778, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32490,7 +32490,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel779, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32517,7 +32517,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel780, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32544,7 +32544,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel781, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32571,7 +32571,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel782, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32598,7 +32598,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel783, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32625,7 +32625,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel784, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32652,7 +32652,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel785, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32679,7 +32679,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel786, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32706,7 +32706,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel787, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32733,7 +32733,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel788, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32760,7 +32760,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel789, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32787,7 +32787,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel790, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32814,7 +32814,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel791, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32841,7 +32841,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel792, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32868,7 +32868,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel793, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32895,7 +32895,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel794, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32922,7 +32922,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel795, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32949,7 +32949,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel796, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -32976,7 +32976,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel797, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33003,7 +33003,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel798, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33030,7 +33030,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel799, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33057,7 +33057,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel800, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33084,7 +33084,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel801, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33111,7 +33111,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel802, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33138,7 +33138,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel803, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33165,7 +33165,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel804, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33192,7 +33192,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel805, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33219,7 +33219,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel806, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33246,7 +33246,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel807, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33273,7 +33273,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel808, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33300,7 +33300,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel809, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33327,7 +33327,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel810, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33354,7 +33354,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel811, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33381,7 +33381,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel812, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33408,7 +33408,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel813, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33435,7 +33435,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel814, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33462,7 +33462,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel815, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33489,7 +33489,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel816, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_INVALID_MODEL, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33516,7 +33516,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel817, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33543,7 +33543,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel818, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33570,7 +33570,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel819, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33597,7 +33597,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel820, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33624,7 +33624,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel821, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33651,7 +33651,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel822, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33678,7 +33678,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel823, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33705,7 +33705,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel824, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33732,7 +33732,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel825, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33759,7 +33759,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel826, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33786,7 +33786,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel827, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33813,7 +33813,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel828, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33840,7 +33840,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel829, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33867,7 +33867,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel830, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33894,7 +33894,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel831, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33921,7 +33921,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel832, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33948,7 +33948,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel833, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -33975,7 +33975,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel834, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34002,7 +34002,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel835, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34029,7 +34029,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel836, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34056,7 +34056,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel837, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34083,7 +34083,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel838, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34110,7 +34110,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel839, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34137,7 +34137,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel840, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34164,7 +34164,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel841, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34191,7 +34191,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel842, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34218,7 +34218,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel843, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34245,7 +34245,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel844, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34272,7 +34272,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel845, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34299,7 +34299,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel846, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34326,7 +34326,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel847, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34353,7 +34353,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel848, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34380,7 +34380,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel849, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34407,7 +34407,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel850, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34434,7 +34434,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel851, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34461,7 +34461,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel852, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34488,7 +34488,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel853, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34515,7 +34515,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel854, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34542,7 +34542,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel855, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34569,7 +34569,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel856, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34596,7 +34596,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel857, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34623,7 +34623,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel858, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34650,7 +34650,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel859, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34677,7 +34677,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel860, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34704,7 +34704,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel861, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34731,7 +34731,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel862, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34758,7 +34758,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel863, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34785,7 +34785,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel864, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34812,7 +34812,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel865, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34839,7 +34839,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel866, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34866,7 +34866,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel867, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34893,7 +34893,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel868, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34920,7 +34920,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel869, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34947,7 +34947,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel870, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -34974,7 +34974,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel871, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35001,7 +35001,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel872, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35028,7 +35028,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel873, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35055,7 +35055,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel874, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35082,7 +35082,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel875, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35109,7 +35109,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel876, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35136,7 +35136,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel877, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35163,7 +35163,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel878, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35190,7 +35190,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel879, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35217,7 +35217,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel880, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35244,7 +35244,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel881, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35271,7 +35271,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel882, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35298,7 +35298,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel883, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35325,7 +35325,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel884, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35352,7 +35352,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel885, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35379,7 +35379,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel886, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35406,7 +35406,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel887, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35433,7 +35433,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel888, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35460,7 +35460,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel889, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35487,7 +35487,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel890, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35514,7 +35514,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel891, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35541,7 +35541,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel892, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35568,7 +35568,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel893, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35595,7 +35595,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel894, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35622,7 +35622,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel895, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35649,7 +35649,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel896, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35676,7 +35676,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel897, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35703,7 +35703,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel898, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35730,7 +35730,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel899, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35757,7 +35757,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel900, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35784,7 +35784,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel901, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35811,7 +35811,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel902, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35838,7 +35838,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel903, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35865,7 +35865,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel904, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35892,7 +35892,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel905, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35919,7 +35919,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel906, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35946,7 +35946,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel907, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -35973,7 +35973,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel908, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -36000,7 +36000,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel909, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -36027,7 +36027,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel910, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -36054,7 +36054,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel911, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -36081,7 +36081,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel912, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -36108,7 +36108,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel913, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -36135,7 +36135,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel914, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -36162,7 +36162,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel915, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -36189,7 +36189,7 @@ HWTEST_F(ModelPrepareTestAdditional, testPrepareModel916, Function | MediumTest 
     V2_0::sptr<V2_0::IPreparedModel> preparedModel;
     EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->PrepareModel(*iModel, modelConfig, preparedModel));
 
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V2::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(V2_0::NNRT_ReturnCode::NNRT_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }

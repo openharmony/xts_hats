@@ -177,7 +177,7 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_ModelSupport_0100, Function |
     EXPECT_TRUE(supportedOperations.empty());
 
     // release
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V1::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -209,7 +209,7 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_ModelSupport_0200, Function |
     }
 
     // release
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V1::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }
@@ -241,7 +241,7 @@ HWTEST_F(DeviceTest, SUB_AI_NNRt_Func_South_Device_ModelSupport_0300, Function |
     }
 
     // release
-    HDICommon::MindIR_Model_Destroy(&iModel);
+    OHOS::NeuralNetworkRuntime::V1::HDIModel_Destroy(&iModel);
     if (tensorBuffer.fd != -1) {
         EXPECT_EQ(HDF_SUCCESS, device_->ReleaseBuffer(tensorBuffer));
     }

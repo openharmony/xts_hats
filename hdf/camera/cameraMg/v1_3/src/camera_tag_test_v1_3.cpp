@@ -384,3 +384,22 @@ HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_ZoomBand_0100, TestSize.Level1)
         CAMERA_LOGI("print tag<OHOS_ABILITY_EQUIVALENT_FOCUS> value end.");
     }
 }
+/**
+ * @tc.name: SUB_Driver_Camera_HighQuality_0100
+ * @tc.desc: Whether HIGH_QUALITY_SUPPORT ability support
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_HighQuality_0100, TestSize.Level1)
+{
+    EXPECT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_HIGH_QUALITY_SUPPORT, &entry);
+    if (cameraTest->rc != HDI::Camera::V1_0::NO_ERROR) {
+        printf("OHOS_ABILITY_HIGH_QUALITY_SUPPORT is not support");
+        return;
+    }
+    cameraTest->PrintAllTagDataU8(cameraTest->ability, OHOS_ABILITY_HIGH_QUALITY_SUPPORT);
+}

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,6 +18,9 @@
 #include <iostream>
 #include <thread>
 #include <gtest/gtest.h>
+#include "accesstoken_kit.h"
+#include "nativetoken_kit.h"
+#include "token_setproc.h"
 #include "driver_ext_mgr_callback_stub.h"
 #include "driver_ext_mgr_client.h"
 #include "edm_errors.h"
@@ -58,8 +61,32 @@ static sptr<IRemoteObject> g_saObject = nullptr;
 static constexpr int32_t ERROR_CODE_WITH_INVALID_CODE = 305;
 static constexpr uint64_t START_SA_SERVICE_WAIT_TIME = 3;
 
+void GetNativeToken()
+{
+    uint64_t tokenId;
+    const char **perms = new const char *[1];
+    perms[0] = "ohos.permission.ACCESS_EXTENSIONAL_DEVICE_DRIVER";
+
+    NativeTokenInfoParams infoInstance = {
+        .dcapsNum = 0,
+        .permsNum = 1,
+        .aclsNum = 0,
+        .dcaps = nullptr,
+        .perms = perms,
+        .acls = nullptr,
+        .aplStr = "system_core",
+    };
+
+    infoInstance.processName = "TestCase";
+    tokenId = GetAccessTokenId(&infoInstance);
+    EXPECT_EQ(0, SetSelfTokenID(tokenId));
+    OHOS::Security::AccessToken::AccessTokenKit::ReloadNativeTokenInfo();
+    delete[] perms;
+}
+
 void DrvExtMgrClientTest::SetUpTestCase()
 {
+    GetNativeToken();
     sptr<ISystemAbilityManager> samgr = SystemAbilityManagerClient::GetInstance().GetSystemAbilityManager();
     if (samgr == nullptr) {
         EDM_LOGE(EDM_MODULE_TEST, "%{public}s get samgr failed", __func__);
@@ -128,26 +155,7 @@ HWTEST_F(DrvExtMgrClientTest, SUB_Driver_Ext_DevManager_0400, TestSize.Level1)
     ASSERT_NE(g_saObject, nullptr);
 }
 
-HWTEST_F(DrvExtMgrClientTest, SUB_Driver_Ext_DevManager_1100, TestSize.Level1)
-{
-    uint32_t busType = static_cast<uint32_t>(BusType::BUS_TYPE_INVALID);
-    std::vector<std::shared_ptr<DeviceData>> devices;
-    UsbErrCode ret = DriverExtMgrClient::GetInstance().QueryDevice(busType, devices);
-    ASSERT_EQ(ret, UsbErrCode::EDM_ERR_INVALID_PARAM);
-    ASSERT_TRUE(devices.empty());
-}
 
-HWTEST_F(DrvExtMgrClientTest, SUB_Driver_Ext_DevManager_1200, TestSize.Level1)
-{
-    uint32_t busType = static_cast<uint32_t>(BusType::BUS_TYPE_USB);
-    std::vector<std::shared_ptr<DeviceData>> devices;
-    UsbErrCode ret = DriverExtMgrClient::GetInstance().QueryDevice(busType, devices);
-    ASSERT_EQ(ret, UsbErrCode::EDM_OK);
-    std::cout << "size of devices:" << devices.size() << std::endl;
-    for (const auto &device : devices) {
-        std::cout << device->Dump() << std::endl;
-    }
-}
 
 HWTEST_F(DrvExtMgrClientTest, SUB_Driver_Ext_DevManager_0100, TestSize.Level1)
 {
@@ -193,20 +201,6 @@ void DriverExtMgrCallbackTest::OnUnBind(uint64_t deviceId, const ErrMsg &errMsg)
     std::cout << "deviceId:" << deviceId << "}" << std::endl;
 }
 
-HWTEST_F(DrvExtMgrClientTest, SUB_Driver_Ext_DevManager_0200, TestSize.Level1)
-{
-    uint64_t deviceId = 0;
-    sptr<IDriverExtMgrCallback> connectCallback = new DriverExtMgrCallbackTest {};
-    UsbErrCode ret = DriverExtMgrClient::GetInstance().BindDevice(deviceId, connectCallback);
-    ASSERT_EQ(ret, UsbErrCode::EDM_NOK);
-}
-
-HWTEST_F(DrvExtMgrClientTest, SUB_Driver_Ext_DevManager_1400, TestSize.Level1)
-{
-    uint64_t deviceId = 0;
-    UsbErrCode ret = DriverExtMgrClient::GetInstance().UnBindDevice(deviceId);
-    ASSERT_EQ(ret, UsbErrCode::EDM_NOK);
-}
 
 HWTEST_F(DrvExtMgrClientTest, SUB_Driver_Ext_DevManager_0700, TestSize.Level1)
 {

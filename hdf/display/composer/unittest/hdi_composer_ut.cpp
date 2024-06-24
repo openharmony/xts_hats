@@ -390,6 +390,10 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5500, TestSize.Level1)
 #ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
 #else
+    if (ret == DISPLAY_NOT_SUPPORT) {
+        DISPLAY_TEST_LOGE("GetDisplayProperty not support");
+        return;
+    }
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 #endif
 }

@@ -23,6 +23,7 @@ ohos_moduletest_suite("HatsHdfCameraMgTestv3") {
   configs = [ ":hdf_cameramgv3" ]
   module_out_path = module_output_path
   sources = [
+    "./src/camera_hdi_test_securestream_v1_3.cpp",
     "./src/camera_hdi_test_v1_3.cpp",
     "./src/camera_tag_test_v1_3.cpp",
     "./src/hdi_common_v1_3.cpp",

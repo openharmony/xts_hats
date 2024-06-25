@@ -25,6 +25,9 @@ ohos_moduletest_suite("HatsHdfExternalManagerClientTest") {
   ]
   deps = [ "${ext_mgr_path}/interfaces/innerkits:driver_ext_mgr_client" ]
   external_deps = [
+    "access_token:libaccesstoken_sdk",
+    "access_token:libnativetoken",
+    "access_token:libtoken_setproc",
     "c_utils:utils",
     "hilog:libhilog",
     "ipc:ipc_single",

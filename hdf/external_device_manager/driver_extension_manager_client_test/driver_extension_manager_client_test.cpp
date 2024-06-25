@@ -155,8 +155,6 @@ HWTEST_F(DrvExtMgrClientTest, SUB_Driver_Ext_DevManager_0400, TestSize.Level1)
     ASSERT_NE(g_saObject, nullptr);
 }
 
-
-
 HWTEST_F(DrvExtMgrClientTest, SUB_Driver_Ext_DevManager_0100, TestSize.Level1)
 {
     uint64_t deviceId = 0;

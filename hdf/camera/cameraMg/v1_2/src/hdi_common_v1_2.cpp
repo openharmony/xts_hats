@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file expected in compliance with the License.
  * You may obtain a copy of the License at
@@ -122,6 +122,11 @@ int32_t Test::DefferredImageTestInit()
 void Test::Open(int cameraId)
 {
     if (cameraDevice == nullptr) {
+        if (cameraIds.size() == 0) {
+            CAMERA_LOGE("camera device list empty");
+            GTEST_SKIP() << "No Camera Available" << std::endl;
+            return;
+        }
         EXPECT_NE(service, nullptr);
         EXPECT_NE(cameraIds.size(), 0);
         GetCameraMetadata(cameraId);
@@ -143,8 +148,13 @@ void Test::Open(int cameraId)
 void Test::OpenCameraV1_2(int cameraId)
 {
     if (cameraDevice == nullptr) {
-        EXPECT_NE(service, nullptr);
         service->GetCameraIds(cameraIds);
+        if (cameraIds.size() == 0) {
+            CAMERA_LOGE("camera device list empty");
+            GTEST_SKIP() << "No Camera Available" << std::endl;
+            return;
+        }
+        EXPECT_NE(service, nullptr);
         EXPECT_NE(cameraIds.size(), 0);
         GetCameraMetadata(cameraId);
         deviceCallback = new OHOS::Camera::Test::DemoCameraDeviceCallback();

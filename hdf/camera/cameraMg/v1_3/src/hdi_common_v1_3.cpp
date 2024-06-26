@@ -104,6 +104,11 @@ void Test::Init()
 void Test::Open(int cameraId)
 {
     if (cameraDeviceV1_3 == nullptr) {
+        if (cameraIds.size() == 0) {
+            CAMERA_LOGE("camera device list empty");
+            GTEST_SKIP() << "No Camera Available" << std::endl;
+            return;
+        }
         EXPECT_NE(serviceV1_3, nullptr);
         EXPECT_NE(cameraIds.size(), 0);
         GetCameraMetadata(cameraId);
@@ -124,8 +129,13 @@ void Test::Open(int cameraId)
 void Test::OpenSecureCamera(int cameraId)
 {
     if (cameraDeviceV1_3 == nullptr) {
-        EXPECT_NE(serviceV1_3, nullptr);
         serviceV1_3->GetCameraIds(cameraIds);
+        if (cameraIds.size() == 0) {
+            CAMERA_LOGE("camera device list empty");
+            GTEST_SKIP() << "No Camera Available" << std::endl;
+            return;
+        }
+        EXPECT_NE(serviceV1_3, nullptr);
         EXPECT_NE(cameraIds.size(), 0);
         GetCameraMetadata(cameraId);
         deviceCallback = new OHOS::Camera::Test::DemoCameraDeviceCallback();

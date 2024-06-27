@@ -57,12 +57,6 @@ config("hdf_nfc_additional") {
     "include",
     "../../../../../../drivers/peripheral/nfc/hdi_service",
     "../../../../../../drivers/peripheral/nfc/vendor_adaptor",
-    "//third_party/nfc_hdiimpl/SN100x/halimpl/inc",
-    "//third_party/libnfc-nci/SN100x/src/include/",
-    "//third_party/libnfc-nci/SN100x/utils/include/",
-    "//third_party/nfc_hdiimpl/SN100x/halimpl/src/include/",
-    "//third_party/libnfc-nci/SN100x/src/gki/ulinux/",
-    "//third_party/libnfc-nci/SN100x/src/gki/common/",
     "../utils",
   ]
 }

@@ -101,7 +101,7 @@ int32_t GnssCallbackImpl::ReportNmea(int64_t timestamp, const std::string& nmea,
     }
 }
 
-int32_t GnssCallbackImpl::ReportGnssCapabilities(GnssCapabilities capabilities)
+int32_t GnssCallbackImpl::ReportGnssCapabilities(unsigned int capabilities)
 {
     (void)capabilities;
     return HDF_SUCCESS;

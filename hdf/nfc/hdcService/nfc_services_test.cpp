@@ -23,8 +23,12 @@
 #include <hdf_sbuf_ipc.h>
 #include "v1_0/infc_interface.h"
 #include "v1_0/nfc_types.h"
-#include "NfcAdaptation.h"
 #include "nfc_chip_type_parser.h"
+
+typedef uint8_t tHAL_NFC_STATUS;
+typedef void(tHAL_NFC_STATUS_CBACK)(tHAL_NFC_STATUS status);
+typedef void(tHAL_NFC_CBACK)(uint8_t event, tHAL_NFC_STATUS status);
+typedef void(tHAL_NFC_DATA_CBACK)(uint16_t data_len, uint8_t* p_data);
 
 using namespace OHOS::HDI::Nfc::V1_0;
 using namespace testing::ext;
@@ -36,8 +40,6 @@ using OHOS::HDI::Nfc::V1_0::NfcEvent;
 using OHOS::HDI::Nfc::V1_0::INfcCallback;
 using OHOS::NFC::NfcChipTypeParser;
 
-tHAL_NFC_CBACK* NfcAdaptation::mHalCallback = nullptr;
-tHAL_NFC_DATA_CBACK* NfcAdaptation::mHalDataCallback = nullptr;
 namespace {
     OHOS::sptr<INfcV1_0> mHal = nullptr;
     OHOS::sptr<V1_0::INfcCallback> g_callbackV1_0 = nullptr;

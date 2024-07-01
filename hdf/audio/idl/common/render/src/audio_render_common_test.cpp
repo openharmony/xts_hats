@@ -496,7 +496,7 @@ HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_4600, TestSize.Level1)
 HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_4700, TestSize.Level1)
 {
     int32_t range = 4;
-    char pathBuf[] = "/data/RenderDump.log";
+    char pathBuf[] = "/data/local/tmp/RenderDump.log";
 
     FILE *file = fopen(pathBuf, "wb+");
     ASSERT_NE(nullptr, file);

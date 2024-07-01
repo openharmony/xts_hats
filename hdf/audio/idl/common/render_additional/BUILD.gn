@@ -13,6 +13,7 @@
 
 base_root = "../../../../../../../../"
 import("//build/ohos_var.gni")
+import("//drivers/peripheral/audio/audio.gni")
 import("//test/xts/tools/build/suite.gni")
 import("$base_root/drivers/peripheral/display/display_config.gni")
 
@@ -27,6 +28,10 @@ ohos_moduletest_suite("HatsHdfAudioIdlRenderAdditionalTest") {
     "src/AudioRenderMmapTest.cpp",
   ]
   configs = [ ":audio_idl_render_additional" ]
+
+  if (drivers_peripheral_audio_feature_alsa_lib) {
+    defines += [ "ALSA_LIB_MODE" ]
+  }
 
   deps = [ "//third_party/bounds_checking_function:libsec_shared" ]
   external_deps = [

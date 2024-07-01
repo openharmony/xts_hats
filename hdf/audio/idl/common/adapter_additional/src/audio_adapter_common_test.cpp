@@ -209,7 +209,11 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateRender003, TestSize.Level1)
     devicedesc.desc = const_cast<char *>("primary");
     devicedesc.pins = PIN_OUT_LINEOUT;
     InitAttrs(attrs);
-    EXPECT_NE(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
+#if defined ALSA_LIB_MODE
+        EXPECT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
+#else
+        EXPECT_NE(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
+#endif
 }
 
 /**
@@ -520,6 +524,11 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture008, TestSize.Level1)
     InitAttrs(attrs);
     attrs.silenceThreshold = DEEP_BUFFER_RENDER_PERIOD_SIZE;
     EXPECT_NE(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
+#if defined ALSA_LIB_MODE
+        EXPECT_EQ(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
+#else
+        EXPECT_NE(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
+#endif
 }
 
 /**
@@ -538,7 +547,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture009, TestSize.Level1)
     devicedesc.pins = PIN_IN_USB_EXT;
     InitAttrs(attrs);
     attrs.silenceThreshold = DEEP_BUFFER_RENDER_PERIOD_SIZE;
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
 #else
     EXPECT_EQ(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
@@ -570,7 +579,9 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture010, TestSize.Level2)
  */
 HWTEST_F(HdfAudioUtAdapterTestAdditional, testDestroyCapture001, TestSize.Level2)
 {
-#ifdef DISPLAY_COMMUNITY
+#if defined ALSA_LIB_MODE
+    EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, AUDIO_ADAPTER_CAPTURE_ID));
+#elif defined DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, AUDIO_ADAPTER_CAPTURE_ID));
 #else
     EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, AUDIO_ADAPTER_CAPTURE_ID));
@@ -587,7 +598,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetVoiceVolume001, TestSize.Level1
 {
     float volume = 0.5;
     int32_t ret = adapter_->SetVoiceVolume(adapter_, volume);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
 #else
     ASSERT_TRUE(ret == HDF_SUCCESS);
@@ -645,7 +656,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode001, TestSize.Le
     port = adapterDescs_->ports[0];
     enum AudioPortPassthroughMode mode;
     int32_t ret = adapter_->GetPassthroughMode(adapter_, &port, &mode);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, ret);
 #else
     EXPECT_EQ(HDF_FAILURE, ret);
@@ -666,7 +677,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPortCapability001, TestSize.Lev
     port.portId = 0;
     port.portName = const_cast<char *>("primary");
     int32_t ret = adapter_->GetPortCapability(adapter_, &port, &capability);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, ret);
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
@@ -716,7 +727,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testReleaseAudioRoute001, TestSize.Lev
 {
     int32_t routeHandle = 1;
     int32_t ret = adapter_->ReleaseAudioRoute(adapter_, routeHandle);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
 #else
     ASSERT_TRUE(ret == HDF_FAILURE);
@@ -764,7 +775,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPortCapability003, TestSize.Lev
     port.portId = 0;
     port.portName = const_cast<char *>("AOP");
     int32_t ret = adapter_->GetPortCapability(adapter_, &port, &capability);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, ret);
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
@@ -864,7 +875,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPortCapability009, TestSize.Lev
     port.portId = 0;
     port.portName = const_cast<char *>("primary");
     int32_t ret = adapter_->GetPortCapability(adapter_, &port, &capability);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, ret);
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
@@ -916,7 +927,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPortCapability012, TestSize.Lev
     port.portId = 0;
     port.portName = const_cast<char *>("AOP");
     int32_t ret = adapter_->GetPortCapability(adapter_, &port, &capability);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, ret);
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
@@ -1016,7 +1027,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPortCapability018, TestSize.Lev
     port.portId = 0;
     port.portName = const_cast<char *>("primary");
     int32_t ret = adapter_->GetPortCapability(adapter_, &port, &capability);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, ret);
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
@@ -1068,7 +1079,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPortCapability021, TestSize.Lev
     port.portId = 0;
     port.portName = const_cast<char *>("AOP");
     int32_t ret = adapter_->GetPortCapability(adapter_, &port, &capability);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, ret);
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
@@ -2043,7 +2054,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetExtraParams001, Function | Medi
     char condition[1024];
     const char *value = "sup_sampling_rates=4800;sup_channels=1;sup_formats=2;";
     int32_t ret = adapter_->SetExtraParams(adapter_, key, condition, value);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
 #else
     ASSERT_TRUE(ret == HDF_SUCCESS);
@@ -2063,7 +2074,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetExtraParams001, TestSize.Level1
     char value[1024] = "sup_sampling_rates=4800;sup_channels=1;sup_formats=2;";
     uint32_t valueLen = 1024;
     int32_t ret = adapter_->GetExtraParams(adapter_, key, condition, value, valueLen);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
 #else
     ASSERT_TRUE(ret == HDF_FAILURE);
@@ -2081,7 +2092,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetMicMute002, TestSize.Level1)
     bool mute = true;
     int32_t ret = 0;
     ret = adapter_->GetMicMute(adapter_, &mute);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
 #else
     ASSERT_TRUE(ret == HDF_SUCCESS);
@@ -2098,7 +2109,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetMicMute001, TestSize.Level1)
 {
     bool mute = true;
     int32_t ret = adapter_->SetMicMute(adapter_, mute);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
 #else
     ASSERT_TRUE(ret == HDF_SUCCESS);

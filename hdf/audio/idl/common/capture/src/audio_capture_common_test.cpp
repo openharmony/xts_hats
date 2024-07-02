@@ -448,7 +448,7 @@ HWTEST_F(AudioUtCaptureTest, SUB_Driver_Audio_CaptureHdi_1900, TestSize.Level1)
     ASSERT_NE(capture_->AudioDevDump, nullptr);
 
     int32_t range = 4;
-    char pathBuf[] = "/data/CaptureDump.log";
+    char pathBuf[] = "/data/local/tmp/CaptureDump.log";
 
     FILE *file = fopen(pathBuf, "wb+");
     ASSERT_NE(nullptr, file);
@@ -728,7 +728,7 @@ HWTEST_F(AudioUtCaptureTest, SUB_Driver_Audio_CaptureHdi_3900, TestSize.Level1)
     EXPECT_NE(capture_->SetSampleAttributes, nullptr);
 
     int32_t ret = capture_->SetSampleAttributes(capture_, &attrs);
-#ifdef  ALSA_SUPPORT_FEATURE
+#if defined  ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_NE(ret, HDF_SUCCESS);

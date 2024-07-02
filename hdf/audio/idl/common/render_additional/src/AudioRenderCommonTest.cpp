@@ -311,7 +311,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetRenderPosition001, Func
     for (i = 0; i < 1000; i++) {
         ret |= render_->GetRenderPosition(render_, &frames, &time);
     }
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
@@ -349,7 +349,9 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode004, Functio
 {
     AudioChannelMode mode = AUDIO_CHANNEL_EXCHANGE;
     int32_t ret = render_->SetChannelMode(render_, mode);
-#ifdef DISPLAY_COMMUNITY
+#if defined ALSA_LIB_MODE
+    EXPECT_EQ(ret, HDF_SUCCESS);
+#elif defined DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_FAILURE);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -365,7 +367,9 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode005, Functio
 {
     AudioChannelMode mode = AUDIO_CHANNEL_MIX;
     int32_t ret = render_->SetChannelMode(render_, mode);
-#ifdef DISPLAY_COMMUNITY
+#if defined ALSA_LIB_MODE
+    EXPECT_EQ(ret, HDF_SUCCESS);
+#elif defined DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_FAILURE);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -381,7 +385,9 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode006, Functio
 {
     AudioChannelMode mode = AUDIO_CHANNEL_LEFT_MUTE;
     int32_t ret = render_->SetChannelMode(render_, mode);
-#ifdef DISPLAY_COMMUNITY
+#if defined ALSA_LIB_MODE
+    EXPECT_EQ(ret, HDF_SUCCESS);
+#elif defined DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_FAILURE);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -397,7 +403,9 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode007, Functio
 {
     AudioChannelMode mode = AUDIO_CHANNEL_RIGHT_MUTE;
     int32_t ret = render_->SetChannelMode(render_, mode);
-#ifdef DISPLAY_COMMUNITY
+#if defined ALSA_LIB_MODE
+    EXPECT_EQ(ret, HDF_SUCCESS);
+#elif defined DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_FAILURE);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -413,7 +421,9 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode008, Functio
 {
     AudioChannelMode mode = AUDIO_CHANNEL_BOTH_MUTE;
     int32_t ret = render_->SetChannelMode(render_, mode);
-#ifdef DISPLAY_COMMUNITY
+#if defined ALSA_LIB_MODE
+    EXPECT_EQ(ret, HDF_SUCCESS);
+#elif defined DISPLAY_COMMUNITY
     EXPECT_EQ(ret, HDF_FAILURE);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -482,7 +492,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsDrain001, Functi
     for (i = 0; i < 1000; i++) {
         ret |= render_->IsSupportsDrain(render_, &support);
     }
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #else
     EXPECT_EQ(ret, HDF_SUCCESS);
@@ -588,7 +598,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderCheckSceneCapability007, F
     scene.scene.id = AUDIO_IN_RINGTONE;
     scene.desc = devDescRender_;
     bool supported = false;
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, render_->CheckSceneCapability(render_, &scene, &supported));
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->CheckSceneCapability(render_, &scene, &supported));
@@ -606,7 +616,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderCheckSceneCapability008, F
     scene.scene.id = AUDIO_IN_CALL;
     scene.desc = devDescRender_;
     bool supported = false;
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, render_->CheckSceneCapability(render_, &scene, &supported));
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->CheckSceneCapability(render_, &scene, &supported));
@@ -819,7 +829,9 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene014, Function |
     scene.scene.id = AUDIO_IN_CALL;
     scene.desc.pins = PIN_OUT_LINEOUT;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined ALSA_LIB_MODE
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#elif defined DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -838,7 +850,9 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene015, Function |
     scene.scene.id = AUDIO_IN_MEDIA;
     scene.desc.pins = PIN_OUT_LINEOUT;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined ALSA_LIB_MODE
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#elif defined DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -857,7 +871,9 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene016, Function |
     scene.scene.id = AUDIO_IN_COMMUNICATION;
     scene.desc.pins = PIN_OUT_LINEOUT;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined ALSA_LIB_MODE
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#elif defined DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -876,7 +892,9 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene017, Function |
     scene.scene.id = AUDIO_IN_RINGTONE;
     scene.desc.pins = PIN_OUT_LINEOUT;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined ALSA_LIB_MODE
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#elif defined DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -895,7 +913,9 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene018, Function |
     scene.scene.id = AUDIO_IN_MEDIA;
     scene.desc.pins = PIN_OUT_HDMI;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined ALSA_LIB_MODE
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#elif defined DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -914,7 +934,9 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene019, Function |
     scene.scene.id = AUDIO_IN_COMMUNICATION;
     scene.desc.pins = PIN_OUT_HDMI;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined ALSA_LIB_MODE
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#elif defined DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -933,7 +955,9 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene020, Function |
     scene.scene.id = AUDIO_IN_RINGTONE;
     scene.desc.pins = PIN_OUT_HDMI;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined ALSA_LIB_MODE
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#elif defined DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -952,7 +976,9 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene021, Function |
     scene.scene.id = AUDIO_IN_CALL;
     scene.desc.pins = PIN_OUT_HDMI;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined ALSA_LIB_MODE
+    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+#elif defined DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -971,7 +997,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene022, Function |
     scene.scene.id = AUDIO_IN_MEDIA;
     scene.desc.pins = PIN_IN_MIC;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -990,7 +1016,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene023, Function |
     scene.scene.id = AUDIO_IN_COMMUNICATION;
     scene.desc.pins = PIN_IN_MIC;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -1009,7 +1035,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene024, Function |
     scene.scene.id = AUDIO_IN_RINGTONE;
     scene.desc.pins = PIN_IN_MIC;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -1028,7 +1054,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene025, Function |
     scene.scene.id = AUDIO_IN_CALL;
     scene.desc.pins = PIN_IN_MIC;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -1047,7 +1073,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene026, Function |
     scene.scene.id = AUDIO_IN_MEDIA;
     scene.desc.pins = PIN_IN_HS_MIC;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -1066,7 +1092,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene027, Function |
     scene.scene.id = AUDIO_IN_COMMUNICATION;
     scene.desc.pins = PIN_IN_HS_MIC;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -1085,7 +1111,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene028, Function |
     scene.scene.id = AUDIO_IN_RINGTONE;
     scene.desc.pins = PIN_IN_HS_MIC;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -1104,7 +1130,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene029, Function |
     scene.scene.id = AUDIO_IN_CALL;
     scene.desc.pins = PIN_IN_HS_MIC;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -1123,7 +1149,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene030, Function |
     scene.scene.id = AUDIO_IN_MEDIA;
     scene.desc.pins = PIN_IN_LINEIN;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -1142,7 +1168,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene031, Function |
     scene.scene.id = AUDIO_IN_COMMUNICATION;
     scene.desc.pins = PIN_IN_LINEIN;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -1161,7 +1187,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene032, Function |
     scene.scene.id = AUDIO_IN_RINGTONE;
     scene.desc.pins = PIN_IN_LINEIN;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -1180,7 +1206,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene033, Function |
     scene.scene.id = AUDIO_IN_CALL;
     scene.desc.pins = PIN_IN_LINEIN;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -1199,7 +1225,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene034, Function |
     scene.scene.id = AUDIO_IN_MEDIA;
     scene.desc.pins = PIN_IN_USB_EXT;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -1218,7 +1244,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene035, Function |
     scene.scene.id = AUDIO_IN_COMMUNICATION;
     scene.desc.pins = PIN_IN_USB_EXT;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -1237,7 +1263,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene036, Function |
     scene.scene.id = AUDIO_IN_RINGTONE;
     scene.desc.pins = PIN_IN_USB_EXT;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -1256,7 +1282,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene037, Function |
     scene.scene.id = AUDIO_IN_CALL;
     scene.desc.pins = PIN_IN_USB_EXT;
     scene.desc.desc = strdup("mic");
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(HDF_SUCCESS, render_->SelectScene(render_, &scene));
 #else
     EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
@@ -2148,7 +2174,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderPause002, TestSize.Level1)
     for (int i = 0; i < 50; i++) {
         EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
         ret = render_->Pause(render_);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         EXPECT_EQ(ret, HDF_SUCCESS);
         EXPECT_EQ(HDF_SUCCESS, render_->Resume(render_));
 #else
@@ -2172,7 +2198,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderPause003, TestSize.Level1)
     int32_t ret = render_->Start(render_);
     EXPECT_EQ(ret, HDF_SUCCESS);
     ret = render_->Pause(render_);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_EQ(HDF_SUCCESS, render_->Resume(render_));
 #else
@@ -2195,7 +2221,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderPause004, TestSize.Level2)
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
     ret = render_->Pause(render_);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_FAILURE);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -2215,7 +2241,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderPause005, TestSize.Level1)
     int32_t ret = render_->Start(render_);
     EXPECT_EQ(ret, HDF_SUCCESS);
     ret = render_->Pause(render_);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_EQ(HDF_SUCCESS, render_->Resume(render_));
 #else
@@ -2224,7 +2250,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderPause005, TestSize.Level1)
 #endif
 
     ret = render_->Pause(render_);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_EQ(HDF_SUCCESS, render_->Resume(render_));
 #else
@@ -2246,7 +2272,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderPause006, TestSize.Level1)
     int32_t ret = render_->Start(render_);
     EXPECT_EQ(ret, HDF_SUCCESS);
     ret = render_->Pause(render_);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_EQ(HDF_SUCCESS, render_->Resume(render_));
 #else
@@ -2255,7 +2281,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderPause006, TestSize.Level1)
 #endif
     for (int i = 0; i < 50; i++) {
         ret = render_->Pause(render_);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         EXPECT_EQ(ret, HDF_SUCCESS);
         EXPECT_EQ(HDF_SUCCESS, render_->Resume(render_));
 #else
@@ -2281,7 +2307,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderPause007, TestSize.Level1)
     EXPECT_EQ(ret, HDF_SUCCESS);
     render_->Resume(render_);
     ret = render_->Pause(render_);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -2304,7 +2330,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderPause008, TestSize.Level1)
     EXPECT_EQ(ret, HDF_SUCCESS);
     for (int i = 0; i < 50; i++) {
         ret = render_->Pause(render_);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         EXPECT_EQ(ret, HDF_SUCCESS);
 #else
         EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -2347,13 +2373,13 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume003, TestSize.Level1
 {
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
     int32_t ret = render_->Pause(render_);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #endif
 
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, render_->Resume(render_));
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Resume(render_));
@@ -2373,7 +2399,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume004, TestSize.Level2
     int32_t ret = render_->Stop(render_);
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Resume(render_));
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Stop(render_));
 #else
     EXPECT_EQ(HDF_FAILURE, render_->Stop(render_));
@@ -2393,7 +2419,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume005, TestSize.Level2
     for (int i = 0; i < 50; i++) {
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Resume(render_));
     }
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Stop(render_));
 #else
     EXPECT_EQ(HDF_FAILURE, render_->Stop(render_));
@@ -2408,13 +2434,13 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume005, TestSize.Level2
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume006, TestSize.Level1)
 {
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, render_->Pause(render_));
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Pause(render_));
 #endif
     int32_t ret = render_->Resume(render_);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, ret);
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
@@ -2432,13 +2458,13 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume007, TestSize.Level1
     int32_t ret;
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
     for (int i = 0; i < 50; i++) {
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         EXPECT_EQ(HDF_SUCCESS, render_->Pause(render_));
 #else
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Pause(render_));
 #endif
         ret = render_->Resume(render_);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         EXPECT_EQ(HDF_SUCCESS, ret);
 #else
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
@@ -2455,14 +2481,14 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume007, TestSize.Level1
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume008, TestSize.Level1)
 {
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, render_->Pause(render_));
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Pause(render_));
 #endif
     render_->Flush(render_);
     int32_t ret = render_->Resume(render_);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, ret);
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
@@ -2478,13 +2504,13 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume008, TestSize.Level1
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume009, TestSize.Level2)
 {
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, render_->Pause(render_));
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Pause(render_));
 #endif
     int32_t ret = render_->Resume(render_);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, ret);
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
@@ -2503,13 +2529,13 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume010, TestSize.Level2
     int32_t ret;
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
     for (int i = 0; i < 50; i++) {
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         EXPECT_EQ(HDF_SUCCESS, render_->Pause(render_));
 #else
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Pause(render_));
 #endif
         ret = render_->Resume(render_);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         EXPECT_EQ(HDF_SUCCESS, ret);
 #else
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
@@ -2528,7 +2554,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume011, TestSize.Level2
 {
     int32_t ret = render_->Resume(render_);
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Stop(render_));
 #else
     EXPECT_EQ(HDF_FAILURE, render_->Stop(render_));
@@ -2547,7 +2573,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume012, TestSize.Level2
         ret = render_->Resume(render_);
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Stop(render_));
 #else
     EXPECT_EQ(HDF_FAILURE, render_->Stop(render_));
@@ -2562,7 +2588,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume012, TestSize.Level2
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume013, TestSize.Level1)
 {
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, render_->Pause(render_));
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, render_->Pause(render_));
@@ -2570,7 +2596,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume013, TestSize.Level1
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));
     render_->Flush(render_);
     int32_t ret = render_->Resume(render_);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, ret);
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
@@ -2733,7 +2759,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode004, TestSi
     ret = render_->Stop(render_);
     EXPECT_EQ(HDF_SUCCESS, ret);
     ret = render_->TurnStandbyMode(render_);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_FAILURE, ret);
 #else
     EXPECT_EQ(HDF_SUCCESS, ret);
@@ -2753,7 +2779,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode005, TestSi
     EXPECT_EQ(HDF_SUCCESS, ret);
     for (int i = 0; i < 50; i++) {
         ret = render_->TurnStandbyMode(render_);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         EXPECT_EQ(HDF_FAILURE, ret);
 #else
         EXPECT_EQ(HDF_SUCCESS, ret);
@@ -2776,14 +2802,14 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume00
         EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
 
         ret = render_->IsSupportsPauseAndResume(render_, nullptr, &supportResume);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 #else
         EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
 #endif
 
         ret = render_->IsSupportsPauseAndResume(render_, &supportPause, nullptr);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 #else
         EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
@@ -2803,7 +2829,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume00
     bool supportResume = false;
     for (int i = 0; i < 50; i++) {
         ret = render_->IsSupportsPauseAndResume(render_, &supportPause, &supportResume);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 #else
         EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
@@ -2823,7 +2849,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume00
     bool supportResume = true;
     for (int i = 0; i < 50; i++) {
         ret = render_->IsSupportsPauseAndResume(render_, &supportPause, &supportResume);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 #else
         EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
@@ -2841,7 +2867,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume00
     bool supportPause = true;
     bool supportResume = false;
     int32_t ret = render_->IsSupportsPauseAndResume(render_, &supportPause, &supportResume);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 #else
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
@@ -2860,7 +2886,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume00
     bool supportResume = false;
     for (int i = 0; i < 50; i++) {
         ret = render_->IsSupportsPauseAndResume(render_, &supportPause, &supportResume);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 #else
         EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
@@ -2878,7 +2904,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume00
     bool supportPause = true;
     bool supportResume = true;
     int32_t ret = render_->IsSupportsPauseAndResume(render_, &supportPause, &supportResume);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 #else
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
@@ -2897,7 +2923,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderIsSupportsPauseAndResume00
     bool supportResume = true;
     for (int i = 0; i < 50; i++) {
         ret = render_->IsSupportsPauseAndResume(render_, &supportPause, &supportResume);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 #else
         EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
@@ -3003,7 +3029,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode002, TestSi
     EXPECT_EQ(HDF_SUCCESS, ret);
 
     ret = render_->Pause(render_);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, ret);
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
@@ -3043,13 +3069,13 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode006, TestSi
     int32_t ret = render_->Start(render_);
     EXPECT_EQ(HDF_SUCCESS, ret);
     ret = render_->Pause(render_);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, ret);
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 #endif
     ret = render_->Resume(render_);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, ret);
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
@@ -3104,7 +3130,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode001, Functio
     int32_t ret = 0;
     for (i = 0; i < 1000; i++) {
         ret = render_->SetChannelMode(render_, mode);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         ASSERT_EQ(ret, HDF_SUCCESS);
 #else
         ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -3121,7 +3147,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode002, Functio
 {
     AudioChannelMode mode = AUDIO_CHANNEL_BOTH_LEFT;
     int32_t ret = render_->SetChannelMode(render_, mode);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -3137,7 +3163,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetChannelMode003, Functio
 {
     AudioChannelMode mode = AUDIO_CHANNEL_BOTH_RIGHT;
     int32_t ret = render_->SetChannelMode(render_, mode);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -3156,7 +3182,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetChannelMode001, Functio
     int32_t ret = 0;
     for (i = 0; i < 1000; i++) {
         ret = render_->GetChannelMode(render_, &channelMode);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         ASSERT_EQ(ret, HDF_SUCCESS);
 #else
         ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -3177,7 +3203,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRegCallback001, Function |
     struct IAudioCallback audioCallback;
     for (i = 0; i < 1000; i++) {
         ret = render_->RegCallback(render_, &audioCallback, cookie);
+#if defined ALSA_LIB_MODE
+        ASSERT_EQ(ret, HDF_SUCCESS);
+#else
         EXPECT_NE(ret, HDF_SUCCESS);
+#endif
     }
 }
 
@@ -3192,7 +3222,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRegCallback002, Function |
     int8_t cookie = 127;
     struct IAudioCallback audioCallback;
     ret = render_->RegCallback(render_, &audioCallback, cookie);
-    ASSERT_NE(ret, HDF_SUCCESS);
+#if defined ALSA_LIB_MODE
+        ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+        EXPECT_NE(ret, HDF_SUCCESS);
+#endif
 }
 
 /**
@@ -3206,7 +3240,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRegCallback003, Function |
     int8_t cookie = -1;
     struct IAudioCallback audioCallback;
     ret = render_->RegCallback(render_, &audioCallback, cookie);
-    ASSERT_NE(ret, HDF_SUCCESS);
+#if defined ALSA_LIB_MODE
+        ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+        EXPECT_NE(ret, HDF_SUCCESS);
+#endif
 }
 
 /**
@@ -3221,7 +3259,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetMute001, Function | Med
     int i = 0;
     for (i = 0; i < 1000; i++) {
         ret = render_->SetMute(render_, mute);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         ASSERT_EQ(ret, HDF_SUCCESS);
 #else
         ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -3241,7 +3279,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetMute001, Function | Med
     int i = 0;
     for (i = 0; i < 1000; i++) {
         ret = render_->GetMute(render_, &mute);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         ASSERT_EQ(ret, HDF_SUCCESS);
 #else
         ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -3261,7 +3299,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetVolume001, Function | M
     int i = 0;
     for (i = 0; i < 1000; i++) {
         ret = render_->SetVolume(render_, volume);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         ASSERT_EQ(ret, HDF_SUCCESS);
 #else
         ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -3281,7 +3319,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetVolume001, Function | M
     int i = 0;
     for (i = 0; i < 1000; i++) {
         ret = render_->GetVolume(render_, &volume);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         ASSERT_EQ(ret, HDF_SUCCESS);
 #else
         ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -3302,7 +3340,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetGainThreshold001, Funct
     int i = 0;
     for (i = 0; i < 1000; i++) {
         ret = render_->GetGainThreshold(render_, &min, &max);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         ASSERT_EQ(ret, HDF_SUCCESS);
 #else
         ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -3322,7 +3360,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetGain001, Function | Med
     int i = 0;
     for (i = 0; i < 1000; i++) {
         ret = render_->GetGain(render_, &gain);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         ASSERT_EQ(ret, HDF_SUCCESS);
 #else
         ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -3342,7 +3380,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSetGain001, Function | Med
     int i = 0;
     for (i = 0; i < 1000; i++) {
         ret = render_->SetGain(render_, gain);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         ASSERT_EQ(ret, HDF_SUCCESS);
 #else
         ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -3363,7 +3401,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetExtraParams001, Functio
     uint32_t keyValueListLen = BUFFER_LENTH;
     for (i = 0; i < 1000; i++) {
         ret = render_->GetExtraParams(render_, keyValueList, keyValueListLen);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         ASSERT_EQ(ret, HDF_SUCCESS);
 #else
         ASSERT_EQ(ret, HDF_ERR_INVALID_PARAM);
@@ -3383,7 +3421,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize001, Tes
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
 
     ret = render_->GetFrameBufferSize(render_, nullptr);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #else
     EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
@@ -3402,7 +3440,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize002, Tes
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
 
     ret = render_->GetFrameBufferSize(render_, nullptr);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #else
     EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
@@ -3421,7 +3459,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize003, Tes
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
 
     ret = render_->GetFrameBufferSize(render_, nullptr);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #else
     EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
@@ -3440,7 +3478,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize004, Tes
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
 
     ret = render_->GetFrameBufferSize(render_, nullptr);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #else
     EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
@@ -3459,7 +3497,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize005, Tes
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
 
     ret = render_->GetFrameBufferSize(render_, nullptr);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #else
     EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
@@ -3478,7 +3516,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize006, Tes
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
 
     ret = render_->GetFrameBufferSize(render_, nullptr);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #else
     EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
@@ -3497,7 +3535,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize007, Tes
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
 
     ret = render_->GetFrameBufferSize(render_, nullptr);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #else
     EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
@@ -3519,7 +3557,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize008, Tes
         EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
     }
     ret = render_->GetFrameBufferSize(render_, nullptr);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #else
     EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
@@ -3537,7 +3575,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize009, Tes
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, ret);
 
     ret = render_->GetFrameBufferSize(render_, nullptr);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #else
     EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
@@ -3568,7 +3606,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize011, Tes
 {
     uint64_t bufferSize = 1000;
     int32_t ret = render_->GetFrameBufferSize(render_, &bufferSize);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #else
     EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
@@ -3587,7 +3625,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize012, Tes
     int32_t ret;
     for (i = 0; i < 100; i++) {
         ret = render_->GetFrameBufferSize(render_, &bufferSize);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #else
         ASSERT_EQ(ret, HDF_ERR_INVALID_PARAM);
@@ -3603,7 +3641,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize012, Tes
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize013, TestSize.Level2)
 {
     int32_t ret = render_->GetFrameBufferSize(render_, nullptr);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #else
     EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
@@ -3622,7 +3660,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop007, TestSize.Level1)
     ret = render_->TurnStandbyMode(render_);
     EXPECT_EQ(HDF_SUCCESS, ret);
     ret = render_->Stop(render_);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #else
     ASSERT_EQ(ret, HDF_SUCCESS);
@@ -3644,7 +3682,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop007, TestSize.Level1)
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump006, TestSize.Level1)
 {
     int32_t range = 1;
-    char pathBuf[] = "/data/RenderDump.log";
+    char pathBuf[] = "/data/local/tmp/RenderDump.log";
 
     FILE *file = fopen(pathBuf, "wb+");
     ASSERT_NE(nullptr, file);
@@ -3655,7 +3693,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump006, TestSize.
     }
 
     int32_t ret = render_->AudioDevDump(render_, range, fd);
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_EQ(ret, HDF_SUCCESS);
 #else
     ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -3671,7 +3709,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump006, TestSize.
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump007, TestSize.Level1)
 {
     int32_t range = 2;
-    char pathBuf[] = "/data/RenderDump.log";
+    char pathBuf[] = "/data/local/tmp/RenderDump.log";
 
     FILE *file = fopen(pathBuf, "wb+");
     ASSERT_NE(nullptr, file);
@@ -3683,7 +3721,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump007, TestSize.
 
     int32_t ret = render_->AudioDevDump(render_, range, fd);
 
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_EQ(ret, HDF_SUCCESS);
 #else
     ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -3699,7 +3737,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump007, TestSize.
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump008, TestSize.Level1)
 {
     int32_t range = 3;
-    char pathBuf[] = "/data/RenderDump.log";
+    char pathBuf[] = "/data/local/tmp/RenderDump.log";
 
     FILE *file = fopen(pathBuf, "wb+");
     ASSERT_NE(nullptr, file);
@@ -3711,7 +3749,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump008, TestSize.
 
     int32_t ret = render_->AudioDevDump(render_, range, fd);
 
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_EQ(ret, HDF_SUCCESS);
 #else
     ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -3727,7 +3765,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump008, TestSize.
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump009, TestSize.Level1)
 {
     int32_t range = 5;
-    char pathBuf[] = "/data/RenderDump.log";
+    char pathBuf[] = "/data/local/tmp/RenderDump.log";
 
     FILE *file = fopen(pathBuf, "wb+");
     ASSERT_NE(nullptr, file);
@@ -3739,7 +3777,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump009, TestSize.
 
     int32_t ret = render_->AudioDevDump(render_, range, fd);
 
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_EQ(ret, HDF_SUCCESS);
 #else
     ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -3755,7 +3793,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump009, TestSize.
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump010, TestSize.Level1)
 {
     int32_t range = 6;
-    char pathBuf[] = "/data/RenderDump.log";
+    char pathBuf[] = "/data/local/tmp/RenderDump.log";
 
     FILE *file = fopen(pathBuf, "wb+");
     ASSERT_NE(nullptr, file);
@@ -3767,7 +3805,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump010, TestSize.
 
     int32_t ret = render_->AudioDevDump(render_, range, fd);
 
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_EQ(ret, HDF_SUCCESS);
 #else
     ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -3783,7 +3821,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump010, TestSize.
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump017, TestSize.Level1)
 {
     int32_t range = 4;
-    char pathBuf[] = "/data/RenderDump.log";
+    char pathBuf[] = "/data/local/tmp/RenderDump.log";
 
     FILE *file = fopen(pathBuf, "wb+");
     ASSERT_NE(nullptr, file);
@@ -3791,7 +3829,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump017, TestSize.
 
     int32_t ret = render_->AudioDevDump(render_, range, fd);
 
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_EQ(ret, HDF_SUCCESS);
 #else
     ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -3807,7 +3845,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump017, TestSize.
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump018, TestSize.Level1)
 {
     int32_t range = 4;
-    char pathBuf[] = "/data/RenderDump.log";
+    char pathBuf[] = "/data/local/tmp/RenderDump.log";
 
     FILE *file = fopen(pathBuf, "wb+");
     ASSERT_NE(nullptr, file);
@@ -3815,7 +3853,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump018, TestSize.
 
     int32_t ret = render_->AudioDevDump(render_, range, fd);
 
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_EQ(ret, HDF_SUCCESS);
 #else
     ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -3831,7 +3869,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump018, TestSize.
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump019, TestSize.Level1)
 {
     int32_t range = 4;
-    char pathBuf[] = "/data/RenderDump.log";
+    char pathBuf[] = "/data/local/tmp/RenderDump.log";
 
     FILE *file = fopen(pathBuf, "wb+");
     ASSERT_NE(nullptr, file);
@@ -3839,7 +3877,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump019, TestSize.
 
     int32_t ret = render_->AudioDevDump(render_, range, fd);
 
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_EQ(ret, HDF_SUCCESS);
 #else
     ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -3855,7 +3893,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump019, TestSize.
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump020, TestSize.Level1)
 {
     int32_t range = 4;
-    char pathBuf[] = "/data/RenderDump.log";
+    char pathBuf[] = "/data/local/tmp/RenderDump.log";
 
     FILE *file = fopen(pathBuf, "wb+");
     ASSERT_NE(nullptr, file);
@@ -3863,7 +3901,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump020, TestSize.
 
     int32_t ret = render_->AudioDevDump(render_, range, fd);
 
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_EQ(ret, HDF_SUCCESS);
 #else
     ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -3879,7 +3917,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump020, TestSize.
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump021, TestSize.Level1)
 {
     int32_t range = 4;
-    char pathBuf[] = "/data/RenderDump.log";
+    char pathBuf[] = "/data/local/tmp/RenderDump.log";
 
     FILE *file = fopen(pathBuf, "wb+");
     ASSERT_NE(nullptr, file);
@@ -3887,7 +3925,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump021, TestSize.
 
     int32_t ret = render_->AudioDevDump(render_, range, fd);
 
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_EQ(ret, HDF_SUCCESS);
 #else
     ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -3903,7 +3941,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump021, TestSize.
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump022, TestSize.Level1)
 {
     int32_t range = 4;
-    char pathBuf[] = "/data/RenderDump.log";
+    char pathBuf[] = "/data/local/tmp/RenderDump.log";
 
     FILE *file = fopen(pathBuf, "wb+");
     ASSERT_NE(nullptr, file);
@@ -3911,7 +3949,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderAudioDevDump022, TestSize.
 
     int32_t ret = render_->AudioDevDump(render_, range, fd);
 
-#ifdef DISPLAY_COMMUNITY
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_EQ(ret, HDF_SUCCESS);
 #else
     ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);

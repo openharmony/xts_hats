@@ -31,7 +31,8 @@ ohos_moduletest_suite("HatsHdfAudioIdlCaptureTest") {
   ]
 
   if (drivers_peripheral_audio_feature_alsa_lib) {
-    cflags_cc = [ "-DALSA_SUPPORT_FEATURE" ]
+    defines = []
+    defines += [ "ALSA_LIB_MODE" ]
   }
   subsystem_name = "xts"
   part_name = "hats"

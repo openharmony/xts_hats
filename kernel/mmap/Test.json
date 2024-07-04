@@ -1,0 +1,19 @@
+{
+    "description": "Configuration for HatsMmapTest Tests",
+    "kits": [
+        {
+            "push": [
+                "HatsMmapTest->/data/local/tmp/HatsMmapTest"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsMmapTest",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    }
+   
+}

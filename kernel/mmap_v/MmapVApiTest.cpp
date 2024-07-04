@@ -120,8 +120,9 @@ static int TstSmaps(void *va)
     char line[NUM];
     char *p;
     int rss = 0;
+    unsigned long ptr = reinterpret_cast<unsigned long>(va);
     int ret = snprintf_s(cmd, sizeof(cmd), sizeof(cmd) - 1,
-         "cat /proc/%d/smaps |grep -A 10 '%lx-' |grep 'Rss:'", getpid(), static_cast<unsigned long>(va));
+         "cat /proc/%d/smaps |grep -A 10 '%lx-' |grep 'Rss:'", getpid(), ptr);
     if (ret < 0) {
         std::cout << "Error snprintf_s open .\n" << std::endl;
         return ret;

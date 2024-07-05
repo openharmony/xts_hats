@@ -88,7 +88,7 @@ do_make() {
     cd $BASE_HOME
     HATS_ROOT="$BASE_HOME/test/xts/hats"
 
-    ${BASE_HOME}/prebuilts/python/linux-x86/3.10.2/bin/python3 -B ${HATS_ROOT}/check_hvigor.py
+    ${BASE_HOME}/prebuilts/python/linux-x86/current/bin/python3 -B ${HATS_ROOT}/check_hvigor.py
     if [ "$?" != 0 ]; then
         exit 1
     fi

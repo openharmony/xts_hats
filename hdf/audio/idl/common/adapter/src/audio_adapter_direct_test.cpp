@@ -158,6 +158,7 @@ HWTEST_F(HdfAudioAdapterDirectTest, HdfAudioAdapterDirectCreateRenderInvalid001,
     struct IAudioRender *render = nullptr;
     struct AudioDeviceDescriptor devicedesc = {};
     struct AudioSampleAttributes attrs = {};
+    uint32_t renderId_ = 10;
 
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, adapter_->CreateRender(nullptr, &devicedesc, &attrs, &render, &renderId_));
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, adapter_->CreateRender(adapter_, nullptr, &attrs, &render, &renderId_));

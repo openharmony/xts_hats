@@ -523,7 +523,6 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture008, TestSize.Level1)
     devicedesc.pins = PIN_IN_LINEIN;
     InitAttrs(attrs);
     attrs.silenceThreshold = DEEP_BUFFER_RENDER_PERIOD_SIZE;
-    EXPECT_NE(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
 #if defined ALSA_LIB_MODE
         EXPECT_EQ(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
 #else

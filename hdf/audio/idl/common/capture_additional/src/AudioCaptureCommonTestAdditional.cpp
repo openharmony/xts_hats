@@ -27,7 +27,6 @@ const int BUFFER_LENTH = 1024 * 16;
 const int DEEP_BUFFER_CAPTURE_PERIOD_SIZE = 4 * 1024;
 const int DEFAULT_BUFFER_SIZE = 16384;
 const float HALF_OF_MAX_VOLUME = 0.5;
-const int MOVE_LEFT_NUM = 8;
 const int TEST_SAMPLE_RATE_MASK_48000 = 48000;
 const int TEST_CHANNEL_COUNT = 2;
 const int32_t MMAP_SUGGUEST_REQ_SIZE = 1920;
@@ -101,10 +100,10 @@ void AudioUtCaptureTestAdditional::InitCaptureAttrs(struct AudioSampleAttributes
     attrs.interleaved = 0;
     attrs.type = AUDIO_IN_MEDIA;
     attrs.period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE;
-    attrs.frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM;
+    attrs.frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT;
     attrs.isBigEndian = false;
     attrs.isSignedData = true;
-    attrs.startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM);
+    attrs.startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount);
     attrs.stopThreshold = INT_MAX;
     attrs.silenceThreshold = BUFFER_LENTH;
 }
@@ -1445,10 +1444,10 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes001, Functi
         .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
         .channelCount = TEST_CHANNEL_COUNT,
         .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
-        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT,
         .isBigEndian = false,
         .isSignedData = true,
-        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount),
         .stopThreshold = INT_MAX,
         .silenceThreshold = BUFFER_LENTH,
     };
@@ -1476,10 +1475,10 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes002, Functi
         .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
         .channelCount = TEST_CHANNEL_COUNT,
         .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
-        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT,
         .isBigEndian = false,
         .isSignedData = true,
-        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount),
         .stopThreshold = INT_MAX,
         .silenceThreshold = BUFFER_LENTH,
     };
@@ -1509,10 +1508,10 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes003, Functi
         .sampleRate = 44000,
         .channelCount = TEST_CHANNEL_COUNT,
         .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
-        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT,
         .isBigEndian = false,
         .isSignedData = true,
-        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount),
         .stopThreshold = INT_MAX,
         .silenceThreshold = BUFFER_LENTH,
     };
@@ -1536,10 +1535,10 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes004, Functi
         .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
         .channelCount = 3,
         .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
-        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT,
         .isBigEndian = false,
         .isSignedData = true,
-        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount),
         .stopThreshold = INT_MAX,
         .silenceThreshold = BUFFER_LENTH,
     };
@@ -1567,10 +1566,10 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes005, Functi
         .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
         .channelCount = 1,
         .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
-        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT,
         .isBigEndian = false,
         .isSignedData = true,
-        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount),
         .stopThreshold = INT_MAX,
         .silenceThreshold = BUFFER_LENTH,
     };
@@ -1598,10 +1597,10 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes006, Functi
         .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
         .channelCount = 0,
         .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
-        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT,
         .isBigEndian = false,
         .isSignedData = true,
-        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount),
         .stopThreshold = INT_MAX,
         .silenceThreshold = BUFFER_LENTH,
     };
@@ -1628,10 +1627,10 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes007, Functi
         .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
         .channelCount = TEST_CHANNEL_COUNT,
         .period = 3 * 1024,
-        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT,
         .isBigEndian = false,
         .isSignedData = true,
-        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount),
         .stopThreshold = INT_MAX,
         .silenceThreshold = BUFFER_LENTH,
     };
@@ -1659,10 +1658,10 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes008, Functi
         .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
         .channelCount = TEST_CHANNEL_COUNT,
         .period = 5 * 1024,
-        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT,
         .isBigEndian = false,
         .isSignedData = true,
-        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount),
         .stopThreshold = INT_MAX,
         .silenceThreshold = BUFFER_LENTH,
     };
@@ -1679,7 +1678,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes008, Functi
 /**
  * @tc.number : SUB_Driver_Audio_Capture_SetSampleAttributes_1000
  * @tc.name   : testCaptureSetSampleAttributes009
- * @tc.desc   : frameSize is AUDIO_FORMAT_TYPE_PCM_16_BIT * 3 / MOVE_LEFT_NUM
+ * @tc.desc   : frameSize is AUDIO_FORMAT_TYPE_PCM_16_BIT * 3
  */
 HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes009, Function | MediumTest | Level1)
 {
@@ -1690,10 +1689,10 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes009, Functi
         .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
         .channelCount = TEST_CHANNEL_COUNT,
         .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
-        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * 3 / MOVE_LEFT_NUM,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * 3,
         .isBigEndian = false,
         .isSignedData = true,
-        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount),
         .stopThreshold = INT_MAX,
         .silenceThreshold = BUFFER_LENTH,
     };
@@ -1721,10 +1720,10 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes010, Functi
         .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
         .channelCount = TEST_CHANNEL_COUNT,
         .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
-        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT,
         .isBigEndian = true,
         .isSignedData = true,
-        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount),
         .stopThreshold = INT_MAX,
         .silenceThreshold = BUFFER_LENTH,
     };
@@ -1752,10 +1751,10 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes011, Functi
         .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
         .channelCount = TEST_CHANNEL_COUNT,
         .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
-        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT,
         .isBigEndian = false,
         .isSignedData = false,
-        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount),
         .stopThreshold = INT_MAX,
         .silenceThreshold = BUFFER_LENTH,
     };
@@ -1772,7 +1771,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes011, Functi
 /**
  * @tc.number : SUB_Driver_Audio_Capture_SetSampleAttributes_1300
  * @tc.name   : testCaptureSetSampleAttributes012
- * @tc.desc   : startThreshold is (5 * 1024) / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM)
+ * @tc.desc   : startThreshold is (5 * 1024) / (attrs.format * attrs.channelCount)
  */
 HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes012, Function | MediumTest | Level1)
 {
@@ -1783,10 +1782,10 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes012, Functi
         .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
         .channelCount = TEST_CHANNEL_COUNT,
         .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
-        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT,
         .isBigEndian = false,
         .isSignedData = true,
-        .startThreshold = (5 * 1024) / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .startThreshold = (5 * 1024) / (attrs.format * attrs.channelCount),
         .stopThreshold = INT_MAX,
         .silenceThreshold = BUFFER_LENTH,
     };
@@ -1814,10 +1813,10 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes013, Functi
         .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
         .channelCount = TEST_CHANNEL_COUNT,
         .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
-        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT,
         .isBigEndian = false,
         .isSignedData = true,
-        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount),
         .stopThreshold = INT_MAX - 1024,
         .silenceThreshold = BUFFER_LENTH,
     };
@@ -1845,10 +1844,10 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes014, Functi
         .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
         .channelCount = TEST_CHANNEL_COUNT,
         .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
-        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT,
         .isBigEndian = false,
         .isSignedData = true,
-        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount),
         .stopThreshold = INT_MAX,
         .silenceThreshold = 1024,
     };
@@ -1878,10 +1877,10 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetSampleAttributes001, Functi
         .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
         .channelCount = TEST_CHANNEL_COUNT,
         .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
-        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT,
         .isBigEndian = false,
         .isSignedData = true,
-        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM),
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount),
         .stopThreshold = INT_MAX,
         .silenceThreshold = BUFFER_LENTH,
     };
@@ -1902,11 +1901,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetSampleAttributes001, Functi
         EXPECT_EQ(attrs.interleaved, 0);
         EXPECT_EQ(attrs.type, AUDIO_IN_MEDIA);
         EXPECT_EQ(attrs.period, DEEP_BUFFER_CAPTURE_PERIOD_SIZE);
-        EXPECT_EQ(attrs.frameSize, AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM);
+        EXPECT_EQ(attrs.frameSize, AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT);
         EXPECT_EQ(attrs.isBigEndian, false);
         EXPECT_EQ(attrs.isSignedData, true);
         EXPECT_EQ(attrs.startThreshold,
-                DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount / MOVE_LEFT_NUM));
+                DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrs.format * attrs.channelCount));
         EXPECT_EQ(attrs.stopThreshold, INT_MAX);
         EXPECT_EQ(attrs.silenceThreshold, BUFFER_LENTH);
     }
@@ -1927,10 +1926,10 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetSampleAttributes002, Functi
         .sampleRate = TEST_SAMPLE_RATE_MASK_48000,
         .channelCount = TEST_CHANNEL_COUNT,
         .period = DEEP_BUFFER_CAPTURE_PERIOD_SIZE,
-        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT / MOVE_LEFT_NUM,
+        .frameSize = AUDIO_FORMAT_TYPE_PCM_16_BIT * TEST_CHANNEL_COUNT,
         .isBigEndian = true,
         .isSignedData = false,
-        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrsSet.format * attrsSet.channelCount / MOVE_LEFT_NUM),
+        .startThreshold = DEEP_BUFFER_CAPTURE_PERIOD_SIZE / (attrsSet.format * attrsSet.channelCount),
         .stopThreshold = 15 * 1024,
         .silenceThreshold = BUFFER_LENTH,
     };

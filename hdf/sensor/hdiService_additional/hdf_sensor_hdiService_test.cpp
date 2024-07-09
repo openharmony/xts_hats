@@ -105,7 +105,7 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch001, TestSize.
         return;
     }
     int32_t ret = g_sensorInterface->GetAllSensorInfo(g_info);
-    int32_t ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
+    ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_ACCELEROMETER);
     ret = g_sensorInterface->SetBatch(HDF_SENSOR_TYPE_ACCELEROMETER, SENSOR_INTERVAL2, SENSOR_POLL_TIME);

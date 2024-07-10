@@ -25,6 +25,7 @@ ohos_moduletest_suite("HatsHdfCameraMgTestv3") {
   sources = [
     "./src/camera_hdi_test_securestream_v1_3.cpp",
     "./src/camera_hdi_test_v1_3.cpp",
+    "./src/camera_professional_test_v1_3.cpp",
     "./src/camera_tag_test_v1_3.cpp",
     "./src/hdi_common_v1_3.cpp",
   ]

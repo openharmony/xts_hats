@@ -1308,11 +1308,12 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7700, TestSize.Level1)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
     EXPECT_GT(g_info.size(), 0);
+        int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_ACCELEROMETER);
         int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_ACCELEROMETER, true, RATE_LEVEL);
-        EXPECT_EQ(SENSOR_SUCCESS, ret);
+        EXPECT_EQ(status, ret);
         OsalMSleep(SENSOR_WAIT_TIME);
         ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_ACCELEROMETER, false, RATE_LEVEL);
-        EXPECT_EQ(SENSOR_SUCCESS, ret);
+        EXPECT_EQ(status, ret);
 }
 
 /**

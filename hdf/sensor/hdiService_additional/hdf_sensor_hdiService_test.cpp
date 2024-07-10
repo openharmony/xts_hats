@@ -49,6 +49,18 @@ public:
     void TearDown();
 };
 
+    int32_t IsSuppprtedSensorId(int32_t sensorTypeId)
+    {
+      EXPECT_GT(g_info.size(),0);
+      for (auto iter : g_info){
+          if (iter.sensorId == sensorTypeId)
+          {
+            return SENSOR_SUCCESS;
+          }
+      }
+      return SENSOR_NOT_SUPPORT;
+    }
+
 void HatsHdfSensorServiceTestAdditional::SetUpTestCase()
 {
     g_sensorInterface = ISensorInterface::Get();
@@ -81,7 +93,6 @@ void HatsHdfSensorServiceTestAdditional::SetUp()
 }
 
 void HatsHdfSensorServiceTestAdditional::TearDown() {}
-
 /**
  * @tc.number: SUB_Driver_Sensor_HdiSensor_7100
  * @tc.name: testHdiSensorSetBatch001
@@ -93,10 +104,12 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetBatch001, TestSize.
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    int32_t ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
+    int32_t ret = g_sensorInterface->GetAllSensorInfo(g_info);
+    ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
+    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_ACCELEROMETER);
     ret = g_sensorInterface->SetBatch(HDF_SENSOR_TYPE_ACCELEROMETER, SENSOR_INTERVAL2, SENSOR_POLL_TIME);
-    EXPECT_EQ(SENSOR_SUCCESS, ret);
+    EXPECT_EQ(status, ret);
 }
 
 /**
@@ -754,8 +767,9 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorEnable001, TestSize.Le
     }
     int32_t ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
+    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_ACCELEROMETER);
     ret = g_sensorInterface->Enable(HDF_SENSOR_TYPE_ACCELEROMETER);
-    EXPECT_EQ(SENSOR_SUCCESS, ret);
+    EXPECT_EQ(status, ret);
 }
 
 /**
@@ -807,8 +821,9 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorDisable001, TestSize.L
     }
     int32_t ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
+    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_ACCELEROMETER);
     ret = g_sensorInterface->Disable(HDF_SENSOR_TYPE_ACCELEROMETER);
-    EXPECT_EQ(SENSOR_SUCCESS, ret);
+    EXPECT_EQ(status, ret);
 }
 
 /**
@@ -824,8 +839,9 @@ HWTEST_F(HatsHdfSensorServiceTestAdditional, testHdiSensorSetMode001, TestSize.L
     }
     int32_t ret = g_sensorInterface->Register(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
+    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_ACCELEROMETER);
     ret = g_sensorInterface->SetMode(HDF_SENSOR_TYPE_ACCELEROMETER, SENSOR_MODE_ONE_SHOT);
-    EXPECT_EQ(SENSOR_SUCCESS, ret);
+    EXPECT_EQ(status, ret);
 }
 
 /**

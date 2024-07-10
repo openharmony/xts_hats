@@ -42,6 +42,7 @@ group("HatsHdfUsbTest") {
 
       # "usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
       # "usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",
+      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkManagerInterfaceTest",
       # "usbdBenchmarkTest:HatsHdfUsbBenchmarkRequestTest",
       # "usbdBenchmarkTest:HatsHdfUsbBenchmarkTransferTest",
     ]

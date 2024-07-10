@@ -66,6 +66,10 @@ public:
     {
         if (hdiJpeg_ != nullptr) {
             hdiJpeg_->Init(CODEC_IMAGE_JPEG);
+        } else {
+            printf("jpeg is not supported!");
+            GTEST_SKIP() << "Device not exist" << std::endl;
+            return;
         }
     }
     void TearDown()

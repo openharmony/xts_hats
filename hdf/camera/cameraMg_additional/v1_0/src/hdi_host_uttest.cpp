@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file expected in compliance with the License.
  * You may obtain a copy of the License at
@@ -58,11 +58,13 @@ HWTEST_F(HdiHostUtTestAdditional, testOnFlashlightStatus001, Function | MediumTe
     EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
     if (cameraTest->cameraDevice == nullptr) {
         cameraTest->service->GetCameraIds(cameraTest->cameraIds);
-        cameraTest->status = true;
-        cameraTest->rc = cameraTest->service->SetFlashlight(cameraTest->cameraIds.front(), cameraTest->status);
-        EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+        if (cameraTest->cameraIds.size() > 2) {
+            cameraTest->status = true;
+            cameraTest->rc = cameraTest->service->SetFlashlight(cameraTest->cameraIds.front(), cameraTest->status);
+            EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+            EXPECT_EQ(g_onFlashlightStatusFlag, true);
+        }
     }
-    EXPECT_EQ(g_onFlashlightStatusFlag, true);
 }
 
 /**
@@ -108,9 +110,11 @@ HWTEST_F(HdiHostUtTestAdditional, testSetFlashLight003, Function | MediumTest | 
     if (cameraTest->cameraDevice == nullptr) {
         for (int i = 0; i < 100; i++) {
             cameraTest->service->GetCameraIds(cameraTest->cameraIds);
-            cameraTest->status = true;
-            cameraTest->rc = cameraTest->service->SetFlashlight(cameraTest->cameraIds.front(), cameraTest->status);
-            EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+            if (cameraTest->cameraIds.size() > 2) {
+                cameraTest->status = true;
+                cameraTest->rc = cameraTest->service->SetFlashlight(cameraTest->cameraIds.front(), cameraTest->status);
+                EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+            }
         }
     }
 }

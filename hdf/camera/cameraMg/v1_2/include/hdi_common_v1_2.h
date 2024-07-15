@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file expected in compliance with the License.
  * You may obtain a copy of the License at
@@ -46,6 +46,7 @@ enum CameraUtConstants {
     UT_DATA_SIZE = 8,
     UT_PREVIEW_SIZE = 3112960,
     UT_MICROSECOND_TIMES = 500000,
+    CAMERA_ID_NUM = 2,
 };
 
 enum Numbers {

@@ -87,7 +87,7 @@ void Test::Init()
     ret = service->SetCallback(hostCallback);
     EXPECT_EQ(ret, 0);
     service->GetCameraIds(cameraIds);
-    if (cameraIds.size() == 0) {
+    if (cameraIds.size() <= CAMERA_ID_NUM) {
         CAMERA_LOGE("camera device list empty");
         GTEST_SKIP() << "No Camera Available" << std::endl;
         return;
@@ -122,7 +122,7 @@ int32_t Test::DefferredImageTestInit()
 void Test::Open(int cameraId)
 {
     if (cameraDevice == nullptr) {
-        if (cameraIds.size() == 0) {
+        if (cameraIds.size() <= CAMERA_ID_NUM) {
             CAMERA_LOGE("camera device list empty");
             GTEST_SKIP() << "No Camera Available" << std::endl;
             return;
@@ -149,7 +149,7 @@ void Test::OpenCameraV1_2(int cameraId)
 {
     if (cameraDevice == nullptr) {
         service->GetCameraIds(cameraIds);
-        if (cameraIds.size() == 0) {
+        if (cameraIds.size() <= CAMERA_ID_NUM) {
             CAMERA_LOGE("camera device list empty");
             GTEST_SKIP() << "No Camera Available" << std::endl;
             return;

@@ -44,6 +44,7 @@ enum CameraUtConstants {
     UT_TUNNEL_MODE = 5,
     UT_DATA_SIZE = 8,
     UT_PREVIEW_SIZE = 3112960,
+    CAMERA_ID_NUM = 2,
 };
 
 enum Numbers {

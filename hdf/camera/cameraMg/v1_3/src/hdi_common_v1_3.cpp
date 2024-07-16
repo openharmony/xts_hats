@@ -94,7 +94,7 @@ void Test::Init()
     ret = serviceV1_3->SetCallback(hostCallback);
     EXPECT_EQ(ret, 0);
     serviceV1_3->GetCameraIds(cameraIds);
-    if (cameraIds.size() == 0) {
+    if (cameraIds.size() <= CAMERA_ID_NUM) {
         CAMERA_LOGE("camera device list empty");
         GTEST_SKIP() << "No Camera Available" << std::endl;
         return;
@@ -104,7 +104,7 @@ void Test::Init()
 void Test::Open(int cameraId)
 {
     if (cameraDeviceV1_3 == nullptr) {
-        if (cameraIds.size() == 0) {
+        if (cameraIds.size() <= CAMERA_ID_NUM) {
             CAMERA_LOGE("camera device list empty");
             GTEST_SKIP() << "No Camera Available" << std::endl;
             return;
@@ -130,7 +130,7 @@ void Test::OpenSecureCamera(int cameraId)
 {
     if (cameraDeviceV1_3 == nullptr) {
         serviceV1_3->GetCameraIds(cameraIds);
-        if (cameraIds.size() == 0) {
+        if (cameraIds.size() <= CAMERA_ID_NUM) {
             CAMERA_LOGE("camera device list empty");
             GTEST_SKIP() << "No Camera Available" << std::endl;
             return;

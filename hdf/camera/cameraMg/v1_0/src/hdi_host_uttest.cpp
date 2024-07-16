@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file expected in compliance with the License.
  * You may obtain a copy of the License at
@@ -204,9 +204,11 @@ HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_Merge_2400, TestSize.Level0)
     EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
     if (cameraTest->cameraDevice == nullptr) {
         cameraTest->service->GetCameraIds(cameraTest->cameraIds);
-        cameraTest->status = true;
-        cameraTest->rc = cameraTest->service->SetFlashlight(cameraTest->cameraIds.front(), cameraTest->status);
-        EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+        if (cameraTest->cameraIds.size() > 2) {
+            cameraTest->status = true;
+            cameraTest->rc = cameraTest->service->SetFlashlight(cameraTest->cameraIds.front(), cameraTest->status);
+            EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+        }
     }
 }
 
@@ -255,9 +257,11 @@ HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_Merge_2700, TestSize.Level0)
     EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
     if (cameraTest->cameraDevice == nullptr) {
         cameraTest->service->GetCameraIds(cameraTest->cameraIds);
-        cameraTest->status = false;
-        cameraTest->rc = cameraTest->service->SetFlashlight(cameraTest->cameraIds.front(), cameraTest->status);
-        EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+        if (cameraTest->cameraIds.size() > 2) {
+            cameraTest->status = false;
+            cameraTest->rc = cameraTest->service->SetFlashlight(cameraTest->cameraIds.front(), cameraTest->status);
+            EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+        }
     }
 }
 
@@ -280,3 +284,39 @@ HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_Merge_2800, TestSize.Level0)
         }
     }
 }
+
+#ifdef DISPLAY_COMMUNITY
+/**
+ * @tc.name: SetFlashlight
+ * @tc.desc: SetFlashlight, normal cameraId
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_MergeRK_2400, TestSize.Level0)
+{
+    EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
+    if (cameraTest->cameraDevice == nullptr) {
+        cameraTest->service->GetCameraIds(cameraTest->cameraIds);
+        cameraTest->status = true;
+        cameraTest->rc = cameraTest->service->SetFlashlight(cameraTest->cameraIds.front(), cameraTest->status);
+        EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+    }
+}
+
+/**
+ * @tc.name: SetFlashlight
+ * @tc.desc: SetFlashlight, status is false
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_MergeRK_2700, TestSize.Level0)
+{
+    EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
+    if (cameraTest->cameraDevice == nullptr) {
+        cameraTest->service->GetCameraIds(cameraTest->cameraIds);
+        cameraTest->status = false;
+        cameraTest->rc = cameraTest->service->SetFlashlight(cameraTest->cameraIds.front(), cameraTest->status);
+        EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+    }
+}
+#endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file expected in compliance with the License.
  * You may obtain a copy of the License at
@@ -93,7 +93,7 @@ void Test::Init()
     hostCallback = new TestCameraHostCallback();
     service->SetCallback(hostCallback);
     service->GetCameraIds(cameraIds);
-    if (cameraIds.size() == 0) {
+    if (cameraIds.size() <= CAMERA_ID_NUM) {
         CAMERA_LOGE("camera device list empty");
         GTEST_SKIP() << "No Camera Available" << std::endl;
         return;

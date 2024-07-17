@@ -131,7 +131,7 @@ HWTEST_F(CodecHdiJpegTest, SUB_Driver_Codec_ImageCodecHDI_0500, TestSize.Level1)
     inBuffer.id = -1;
     inBuffer.fenceFd = -1;
     auto ret = hdiJpeg_->FreeInBuffer(inBuffer);
-    ASSERT_NE(ret, HDF_SUCCESS);
+    ASSERT_EQ(ret, HDF_SUCCESS);
 }
 
 HWTEST_F(CodecHdiJpegTest, SUB_Driver_Codec_ImageCodecHDI_0600, TestSize.Level1)

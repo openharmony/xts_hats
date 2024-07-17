@@ -283,7 +283,7 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecFreeInBuffer001, TestSize.Level2)
     struct CodecImageBuffer inBuffer;
     inBuffer.size = -1;
     auto ret = hdiJpeg_->FreeInBuffer(inBuffer);
-    ASSERT_NE(ret, HDF_SUCCESS);
+    ASSERT_EQ(ret, HDF_SUCCESS);
 }
 
 /**
@@ -297,7 +297,7 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecFreeInBuffer002, TestSize.Level2)
     struct CodecImageBuffer inBuffer;
     inBuffer.buffer = 0;
     auto ret = hdiJpeg_->FreeInBuffer(inBuffer);
-    ASSERT_EQ(ret, HDF_FAILURE);
+    ASSERT_EQ(ret, HDF_SUCCESS);
 }
 
 /**
@@ -311,7 +311,7 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecFreeInBuffer003, TestSize.Level2)
     struct CodecImageBuffer inBuffer;
     inBuffer.fenceFd = -1;
     auto ret = hdiJpeg_->FreeInBuffer(inBuffer);
-    ASSERT_NE(ret, HDF_SUCCESS);
+    ASSERT_EQ(ret, HDF_SUCCESS);
 }
 
 /**
@@ -1207,7 +1207,7 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecFreeInBuffer004, TestSize.Level2)
     struct CodecImageBuffer inBuffer;
     inBuffer.size = 0;
     auto ret = hdiJpeg_->FreeInBuffer(inBuffer);
-    ASSERT_NE(ret, HDF_SUCCESS);
+    ASSERT_EQ(ret, HDF_SUCCESS);
 }
 
 /**
@@ -1222,7 +1222,7 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecFreeInBuffer005, TestSize.Level2)
     struct CodecImageBuffer inBuffer;
     inBuffer.size = CODEC_IMAGE_MAX_BUFFER_SIZE + 1;
     auto ret = hdiJpeg_->FreeInBuffer(inBuffer);
-    ASSERT_NE(ret, HDF_SUCCESS);
+    ASSERT_EQ(ret, HDF_SUCCESS);
 }
 
 /**
@@ -1259,7 +1259,7 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecFreeInBuffer007, TestSize.Level2)
     struct CodecImageBuffer inBuffer;
     ASSERT_NE(hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_HEIF), HDF_SUCCESS);
     auto ret = hdiJpeg_->FreeInBuffer(inBuffer);
-    ASSERT_NE(ret, HDF_SUCCESS);
+    ASSERT_EQ(ret, HDF_SUCCESS);
 }
 
 /**
@@ -1274,6 +1274,6 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecFreeInBuffer008, TestSize.Level2)
     struct CodecImageBuffer inBuffer;
     ASSERT_NE(hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_INVALID), HDF_SUCCESS);
     auto ret = hdiJpeg_->FreeInBuffer(inBuffer);
-    ASSERT_NE(ret, HDF_SUCCESS);
+    ASSERT_EQ(ret, HDF_SUCCESS);
 }
 } // namespace

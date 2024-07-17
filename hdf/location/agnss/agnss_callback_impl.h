@@ -16,6 +16,8 @@
 #ifndef OHOS_HDI_LOCATION_AGNSS_V2_0_AGNSSCALLBACKIMPL_H
 #define OHOS_HDI_LOCATION_AGNSS_V2_0_AGNSSCALLBACKIMPL_H
 
+#ifdef FEATURE_GNSS_SUPPORT
+#ifdef HDF_DRIVERS_INTERFACE_AGNSS_ENABLE
 #include <hdf_base.h>
 #include <v2_0/ia_gnss_callback.h>
 #include "core_service_client.h"
@@ -48,5 +50,7 @@ private:
 } // HDI
 } // OHOS
 
+#endif
+#endif
 #endif // OHOS_HDI_LOCATION_AGNSS_V2_0_AGNSSCALLBACKIMPL_H
 

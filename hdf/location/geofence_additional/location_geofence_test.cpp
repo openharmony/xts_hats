@@ -25,15 +25,19 @@
 #include "hdf_base.h"
 #include "hdf_log.h"
 #include "osal_time.h"
+#ifdef HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE
 #include "v2_0/igeofence_interface.h"
 #include "geofence_callback_impl.h"
 
 using namespace OHOS::HDI::Location::Geofence::V2_0;
+#endif
 using namespace std;
 using namespace testing::ext;
 
 namespace {
+#ifdef HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE
 sptr<IGeofenceInterface> g_igeofenceHci = nullptr;
+#endif
 } // namespace
 
 class LocationGeofenceAdditionalTest : public testing::Test {
@@ -44,6 +48,7 @@ public:
     void TearDown();
 };
 
+#ifdef HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE
 int32_t GeofenceCallbackImpl::ReportGeofenceAvailability(bool isAvailable)
 {
     (void)isAvailable;
@@ -68,9 +73,11 @@ int32_t GeofenceCallbackImpl::ReportGeofenceOperateResult(int32_t fenceIndex, Ge
     (void)result;
     return HDF_SUCCESS;
 }
+#endif
 
 void LocationGeofenceAdditionalTest::SetUpTestCase()
 {
+#ifdef HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE
     auto devmgr = HDI::DeviceManager::V1_0::IDeviceManager::Get();
     if (devmgr == nullptr) {
         printf("fail to get devmgr.\n");
@@ -89,10 +96,12 @@ void LocationGeofenceAdditionalTest::SetUpTestCase()
         return;
     }
     g_igeofenceHci = IGeofenceInterface::Get();
+#endif
 }
 
 void LocationGeofenceAdditionalTest::TearDownTestCase()
 {
+#ifdef HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE
     auto devmgr = HDI::DeviceManager::V1_0::IDeviceManager::Get();
     if (devmgr == nullptr) {
         printf("fail to get devmgr.\n");
@@ -110,6 +119,7 @@ void LocationGeofenceAdditionalTest::TearDownTestCase()
         printf("Load geofence service failed!\n");
         return;
     }
+#endif
 }
 
 void LocationGeofenceAdditionalTest::SetUp() {}
@@ -121,6 +131,7 @@ void LocationGeofenceAdditionalTest::TearDown() {}
  * @tc.name  : testAddGnssGeofence001
  * @tc.desc  : Call function AddGnssGeofence with GeofenceEvent as GEOFENCE_EVENT_ENTERED.
  */
+#ifdef HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE
 HWTEST_F(LocationGeofenceAdditionalTest, testAddGnssGeofence001, Function | MediumTest | Level1)
 {
     GeofenceInfo fence;
@@ -656,3 +667,4 @@ HWTEST_F(LocationGeofenceAdditionalTest, testSetGeofenceCallback001, Function | 
         EXPECT_EQ(HDF_SUCCESS, ret);
     }
 }
+#endif

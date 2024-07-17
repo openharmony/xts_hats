@@ -13,33 +13,35 @@
  * limitations under the License.
  */
 
-
 #include "idevmgr_hdi.h"
 #include <memory>
 #include <iostream>
-#include <osal_mem.h>
-#include "hdf_sbuf.h"
 #include <cmath>
 #include <cstdio>
 #include <unistd.h>
 #include <gtest/gtest.h>
 #include <securec.h>
+#ifdef FEATURE_GNSS_SUPPORT
+#include <osal_mem.h>
 #include "hdf_base.h"
 #include "hdf_log.h"
 #include "osal_time.h"
+#include "hdf_sbuf.h"
 #include "v2_0/ignss_interface.h"
 #include "gnss_callback_impl.h"
 
-
 using namespace OHOS::HDI::Location::Gnss::V2_0;
+#endif
 using namespace std;
 using namespace testing::ext;
 
 namespace {
+    #ifdef FEATURE_GNSS_SUPPORT
     sptr<IGnssInterface> g_ignssHci = nullptr;
     constexpr const char *AGNSS_SERVICE_NAME = "agnss_interface_service";
     constexpr const char *GNSS_SERVICE_NAME = "gnss_interface_service";
     constexpr const char *GEOFENCE_SERVICE_NAME = "geofence_interface_service";
+    #endif
 }
 
 class LocationGnssTest : public testing::Test {
@@ -50,7 +52,7 @@ public:
     void TearDown();
 };
 
-
+#ifdef FEATURE_GNSS_SUPPORT
 int32_t GnssCallbackImpl::ReportLocation(const LocationInfo& location)
 {
     if (location.timeSinceBoot != 0) {
@@ -62,7 +64,6 @@ int32_t GnssCallbackImpl::ReportLocation(const LocationInfo& location)
         return HDF_FAILURE;
     }
 }
-
 
 int32_t GnssCallbackImpl::ReportGnssWorkingStatus(GnssWorkingStatus status)
 {
@@ -145,9 +146,11 @@ int32_t GnssCallbackImpl::ReportGnssNiNotification(const GnssNiNotificationReque
     (void)notification;
     return HDF_SUCCESS;
 }
+#endif
 
 void LocationGnssTest::SetUpTestCase()
 {
+#ifdef FEATURE_GNSS_SUPPORT
     auto devmgr = HDI::DeviceManager::V1_0::IDeviceManager::Get();
     if (devmgr == nullptr) {
         printf("fail to get devmgr.\n");
@@ -166,10 +169,12 @@ void LocationGnssTest::SetUpTestCase()
         return;
     }
     g_ignssHci = IGnssInterface::Get();
+#endif
 }
 
 void LocationGnssTest::TearDownTestCase()
 {
+#ifdef FEATURE_GNSS_SUPPORT
     auto devmgr = HDI::DeviceManager::V1_0::IDeviceManager::Get();
     if (devmgr == nullptr) {
         printf("fail to get devmgr.\n");
@@ -187,6 +192,7 @@ void LocationGnssTest::TearDownTestCase()
         printf("Load geofence service failed!\n");
         return;
     }
+#endif
 }
 
 void LocationGnssTest::SetUp()
@@ -205,6 +211,7 @@ void LocationGnssTest::TearDown()
   */
 HWTEST_F(LocationGnssTest, SUB_DriverSystem_EnableGnss_0100, TestSize.Level1)
 {
+#ifdef FEATURE_GNSS_SUPPORT
     if (g_ignssHci == nullptr) {
         ASSERT_NE(nullptr, g_ignssHci);
         return;
@@ -219,6 +226,7 @@ HWTEST_F(LocationGnssTest, SUB_DriverSystem_EnableGnss_0100, TestSize.Level1)
     GnssStartType starttype = GnssStartType::GNSS_START_TYPE_NORMAL;
     int32_t ret1 = g_ignssHci->StartGnss(starttype);
     EXPECT_EQ(HDF_SUCCESS, ret1);
+#endif
 }
 
 
@@ -229,6 +237,7 @@ HWTEST_F(LocationGnssTest, SUB_DriverSystem_EnableGnss_0100, TestSize.Level1)
   */
 HWTEST_F(LocationGnssTest, SUB_DriverSystem_SetGnssConfigPara_0100, TestSize.Level1)
 {
+#ifdef FEATURE_GNSS_SUPPORT
     if (g_ignssHci == nullptr) {
         ASSERT_NE(nullptr, g_ignssHci);
         return;
@@ -240,6 +249,7 @@ HWTEST_F(LocationGnssTest, SUB_DriverSystem_SetGnssConfigPara_0100, TestSize.Lev
     para.gnssCaching.fifoFullNotify = true;
     int32_t ret = g_ignssHci->SetGnssConfigPara(para);
     EXPECT_EQ(HDF_SUCCESS, ret);
+#endif
 }
 
 
@@ -250,6 +260,7 @@ HWTEST_F(LocationGnssTest, SUB_DriverSystem_SetGnssConfigPara_0100, TestSize.Lev
   */
 HWTEST_F(LocationGnssTest, SUB_DriverSystem_SetGnssReferenceInfo_0100, TestSize.Level1)
 {
+#ifdef FEATURE_GNSS_SUPPORT
     if (g_ignssHci == nullptr) {
         ASSERT_NE(nullptr, g_ignssHci);
         return;
@@ -272,6 +283,7 @@ HWTEST_F(LocationGnssTest, SUB_DriverSystem_SetGnssReferenceInfo_0100, TestSize.
     refInfo.bestLocation.timeSinceBoot = 60;
     int32_t ret = g_ignssHci->SetGnssReferenceInfo(refInfo);
     EXPECT_EQ(HDF_SUCCESS, ret);
+#endif
 }
 
 /**
@@ -281,13 +293,15 @@ HWTEST_F(LocationGnssTest, SUB_DriverSystem_SetGnssReferenceInfo_0100, TestSize.
   */
 HWTEST_F(LocationGnssTest, SUB_DriverSystem_StopGnss_0100, TestSize.Level1)
 {
+#ifdef FEATURE_GNSS_SUPPORT
     if (g_ignssHci == nullptr) {
         ASSERT_NE(nullptr, g_ignssHci);
         return;
     }
     GnssStartType stoptype = GnssStartType::GNSS_START_TYPE_NORMAL;
     int32_t ret = g_ignssHci->StopGnss(stoptype);
-    EXPECT_EQ(HDF_SUCCESS, ret);  
+    EXPECT_EQ(HDF_SUCCESS, ret);
+#endif
 }
 
 /**
@@ -297,6 +311,7 @@ HWTEST_F(LocationGnssTest, SUB_DriverSystem_StopGnss_0100, TestSize.Level1)
   */
 HWTEST_F(LocationGnssTest, SUB_DriverSystem_DeleteAuxiliaryData_0100, TestSize.Level1)
 {
+#ifdef FEATURE_GNSS_SUPPORT
     if (g_ignssHci == nullptr) {
         ASSERT_NE(nullptr, g_ignssHci);
         return;
@@ -304,6 +319,7 @@ HWTEST_F(LocationGnssTest, SUB_DriverSystem_DeleteAuxiliaryData_0100, TestSize.L
     GnssAuxiliaryDataType auxdata = GnssAuxiliaryDataType::GNSS_AUXILIARY_DATA_EPHEMERIS;
     int32_t ret = g_ignssHci->DeleteAuxiliaryData(auxdata);
     EXPECT_EQ(HDF_SUCCESS, ret);
+#endif
 }
 
 
@@ -314,6 +330,7 @@ HWTEST_F(LocationGnssTest, SUB_DriverSystem_DeleteAuxiliaryData_0100, TestSize.L
   */
 HWTEST_F(LocationGnssTest, SUB_DriverSystem_SetPredictGnssData_0100, TestSize.Level1)
 {
+#ifdef FEATURE_GNSS_SUPPORT
     if (g_ignssHci == nullptr) {
         ASSERT_NE(nullptr, g_ignssHci);
         return;
@@ -321,6 +338,7 @@ HWTEST_F(LocationGnssTest, SUB_DriverSystem_SetPredictGnssData_0100, TestSize.Le
     const std::string str1 = "testing";
     int32_t ret = g_ignssHci->SetPredictGnssData(str1);
     EXPECT_EQ(HDF_SUCCESS, ret);
+#endif
 }
 
 /**
@@ -330,6 +348,7 @@ HWTEST_F(LocationGnssTest, SUB_DriverSystem_SetPredictGnssData_0100, TestSize.Le
   */
 HWTEST_F(LocationGnssTest, SUB_DriverSystem_GetCachedGnssLocationsSize_0100, TestSize.Level1)
 {
+#ifdef FEATURE_GNSS_SUPPORT
     if (g_ignssHci == nullptr) {
         ASSERT_NE(nullptr, g_ignssHci);
         return;
@@ -337,6 +356,7 @@ HWTEST_F(LocationGnssTest, SUB_DriverSystem_GetCachedGnssLocationsSize_0100, Tes
     int cach_size = 60;
     int32_t ret = g_ignssHci->GetCachedGnssLocationsSize(cach_size);
     EXPECT_EQ(HDF_SUCCESS, ret);
+#endif
 }
 
 /**
@@ -346,12 +366,14 @@ HWTEST_F(LocationGnssTest, SUB_DriverSystem_GetCachedGnssLocationsSize_0100, Tes
   */
 HWTEST_F(LocationGnssTest, SUB_DriverSystem_GetCachedGnssLocations_0100, TestSize.Level1)
 {
+#ifdef FEATURE_GNSS_SUPPORT
     if (g_ignssHci == nullptr) {
         ASSERT_NE(nullptr, g_ignssHci);
         return;
     }
     int32_t ret = g_ignssHci->GetCachedGnssLocations();
     EXPECT_EQ(HDF_SUCCESS, ret);
+#endif
 }
 
 /**
@@ -361,10 +383,12 @@ HWTEST_F(LocationGnssTest, SUB_DriverSystem_GetCachedGnssLocations_0100, TestSiz
   */
 HWTEST_F(LocationGnssTest, SUB_DriverSystem_DisableGnss_0100, TestSize.Level1)
 {
+#ifdef FEATURE_GNSS_SUPPORT
     if (g_ignssHci == nullptr) {
         ASSERT_NE(nullptr, g_ignssHci);
         return;
     }
     int32_t ret = g_ignssHci->DisableGnss();
     EXPECT_EQ(HDF_SUCCESS, ret);
+#endif
 }

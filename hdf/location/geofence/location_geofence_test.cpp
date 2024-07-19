@@ -13,30 +13,34 @@
  * limitations under the License.
  */
 
+#include "idevmgr_hdi.h"
 #include <iostream>
-#include <osal_mem.h>
-#include "hdf_sbuf.h"
 #include <cmath>
 #include <cstdio>
 #include <unistd.h>
 #include <gtest/gtest.h>
-#include "idevmgr_hdi.h"
 #include <securec.h>
+#ifdef HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE
+#include <osal_mem.h>
+#include "osal_time.h"
+#include "hdf_sbuf.h"
 #include "hdf_base.h"
 #include "hdf_log.h"
-#include "osal_time.h"
 #include "v2_0/igeofence_interface.h"
 #include "geofence_callback_impl.h"
 
 using namespace OHOS::HDI::Location::Geofence::V2_0;
+#endif
 using namespace std;
 using namespace testing::ext;
 
 namespace {
+    #ifdef HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE
     sptr<IGeofenceInterface> g_igeofenceHci = nullptr;
     constexpr const char *AGNSS_SERVICE_NAME = "agnss_interface_service";
     constexpr const char *GNSS_SERVICE_NAME = "gnss_interface_service";
     constexpr const char *GEOFENCE_SERVICE_NAME = "geofence_interface_service";
+    #endif
 }
 
 class LocationGeofenceTest: public testing::Test {
@@ -47,6 +51,7 @@ public:
     void TearDown();
 };
 
+#ifdef HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE
 int32_t GeofenceCallbackImpl::ReportGeofenceAvailability(bool isAvailable)
 {
     (void)isAvailable;
@@ -69,9 +74,11 @@ int32_t GeofenceCallbackImpl::ReportGeofenceOperateResult(int32_t fenceIndex, Ge
     (void)result;
     return HDF_SUCCESS;
 }
+#endif
 
 void LocationGeofenceTest::SetUpTestCase()
 {
+#ifdef HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE
     auto devmgr = HDI::DeviceManager::V1_0::IDeviceManager::Get();
     if (devmgr == nullptr) {
         printf("fail to get devmgr.\n");
@@ -90,10 +97,12 @@ void LocationGeofenceTest::SetUpTestCase()
         return;
     }
     g_igeofenceHci = IGeofenceInterface::Get();
+#endif
 }
 
 void LocationGeofenceTest::TearDownTestCase()
 {
+#ifdef HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE
     auto devmgr = HDI::DeviceManager::V1_0::IDeviceManager::Get();
     if (devmgr == nullptr) {
         printf("fail to get devmgr.\n");
@@ -111,6 +120,7 @@ void LocationGeofenceTest::TearDownTestCase()
         printf("Load geofence service failed!\n");
         return;
     }
+#endif
 }
 
 void LocationGeofenceTest::SetUp()
@@ -129,6 +139,7 @@ void LocationGeofenceTest::TearDown()
   */
 HWTEST_F(LocationGeofenceTest, SUB_DriverSystem_EnableGnss_0100, TestSize.Level1)
 {
+#ifdef HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE
     if (g_igeofenceHci == nullptr) {
         ASSERT_NE(nullptr, g_igeofenceHci);
         return;
@@ -140,6 +151,7 @@ HWTEST_F(LocationGeofenceTest, SUB_DriverSystem_EnableGnss_0100, TestSize.Level1
     }
     int32_t ret = g_igeofenceHci->SetGeofenceCallback(geo_callback);
     EXPECT_EQ(HDF_SUCCESS, ret);
+#endif
 }
 
 
@@ -150,6 +162,7 @@ HWTEST_F(LocationGeofenceTest, SUB_DriverSystem_EnableGnss_0100, TestSize.Level1
   */
 HWTEST_F(LocationGeofenceTest, SUB_DriverSystem_AddGnssGeofence_0100, TestSize.Level1)
 {
+#ifdef HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE
     if (g_igeofenceHci == nullptr) {
         ASSERT_NE(nullptr, g_igeofenceHci);
         return;
@@ -162,6 +175,7 @@ HWTEST_F(LocationGeofenceTest, SUB_DriverSystem_AddGnssGeofence_0100, TestSize.L
     GeofenceEvent geoevent = GeofenceEvent::GEOFENCE_EVENT_ENTERED ;
     int32_t ret = g_igeofenceHci->AddGnssGeofence(fence,geoevent);
     EXPECT_EQ(HDF_SUCCESS, ret);
+#endif
 }
 
 
@@ -172,6 +186,7 @@ HWTEST_F(LocationGeofenceTest, SUB_DriverSystem_AddGnssGeofence_0100, TestSize.L
   */
 HWTEST_F(LocationGeofenceTest, SUB_DriverSystem_DeleteGnssGeofence_0100, TestSize.Level1)
 {
+#ifdef HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE
     if (g_igeofenceHci == nullptr) {
         ASSERT_NE(nullptr, g_igeofenceHci);
         return;
@@ -179,4 +194,5 @@ HWTEST_F(LocationGeofenceTest, SUB_DriverSystem_DeleteGnssGeofence_0100, TestSiz
     int fenceIndex = 5;
     int32_t ret = g_igeofenceHci->DeleteGnssGeofence(fenceIndex);
     EXPECT_EQ(HDF_SUCCESS, ret);
+#endif
 }

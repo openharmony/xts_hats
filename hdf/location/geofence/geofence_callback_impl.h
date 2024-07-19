@@ -16,6 +16,7 @@
 #ifndef OHOS_HDI_LOCATION_GEOFENCE_V2_0_GEOFENCECALLBACKIMPL_H
 #define OHOS_HDI_LOCATION_GEOFENCE_V2_0_GEOFENCECALLBACKIMPL_H
 
+#ifdef HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE
 #include <hdf_base.h>
 #include <v2_0/igeofence_callback.h>
 
@@ -39,6 +40,6 @@ public:
 } // Location
 } // HDI
 } // OHOS
-
+#endif
 #endif // OHOS_HDI_LOCATION_GEOFENCE_V2_0_GEOFENCECALLBACKIMPL_H
 

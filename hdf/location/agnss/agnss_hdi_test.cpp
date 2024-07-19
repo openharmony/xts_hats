@@ -15,28 +15,35 @@
 
 #include "idevmgr_hdi.h"
 #include <iostream>
-#include <osal_mem.h>
-#include "hdf_sbuf.h"
 #include <cmath>
 #include <cstdio>
 #include <unistd.h>
 #include <gtest/gtest.h>
 #include <securec.h>
+#ifdef FEATURE_GNSS_SUPPORT
+#ifdef HDF_DRIVERS_INTERFACE_AGNSS_ENABLE
+#include <osal_mem.h>
+#include "osal_time.h"
 #include "hdf_base.h"
 #include "hdf_log.h"
-#include "osal_time.h"
+#include "hdf_sbuf.h"
 #include "v2_0/ia_gnss_interface.h"
 #include "v2_0/ignss_interface.h"
 #include "agnss_callback_impl.h"
 #include "cellular_data_client.h"
 #include "gnss_callback_impl.h"
+#endif
+#endif
 
+#ifdef HDF_DRIVERS_INTERFACE_AGNSS_ENABLE
 using namespace OHOS::HDI::Location::Agnss::V2_0;
 using namespace OHOS::HDI::Location::Gnss::V2_0;
+#endif
 using namespace std;
 using namespace testing::ext;
 
 namespace {
+    #ifdef HDF_DRIVERS_INTERFACE_AGNSS_ENABLE
     using OHOS::Telephony::CellInformation;
     sptr<IAGnssInterface> g_iagnssHci = nullptr; 
     sptr<IGnssInterface> g_ignssHci = nullptr;
@@ -46,6 +53,7 @@ namespace {
     const char DEFAULT_STRING[] = "error";
     const std::wstring DEFAULT_WSTRING = L"error";
     const std::u16string DEFAULT_USTRING = u"error";
+    #endif
 }
 
 class LocationAgnssTest : public testing::Test {
@@ -56,6 +64,7 @@ public:
     void TearDown();
 };
 
+#ifdef HDF_DRIVERS_INTERFACE_AGNSS_ENABLE
 int32_t AgnssCallbackImpl::RequestSetUpAgnssDataLink(const AGnssDataLinkRequest& request)
 {
     printf("AGnssEventCallback::RequestSetUpAgnssDataLink. agnsstype:%d, setUpType:%d\n",
@@ -280,9 +289,11 @@ int32_t GnssCallbackImpl::ReportGnssNiNotification(const GnssNiNotificationReque
     (void)notification;
     return HDF_SUCCESS;
 }
+#endif
 
 void LocationAgnssTest::SetUpTestCase()
 {
+#ifdef HDF_DRIVERS_INTERFACE_AGNSS_ENABLE
     auto devmgr = HDI::DeviceManager::V1_0::IDeviceManager::Get();
     if (devmgr == nullptr) {
         printf("fail to get devmgr.\n");
@@ -308,10 +319,12 @@ void LocationAgnssTest::SetUpTestCase()
         return;
     }
     g_ignssHci->EnableGnss(gnss_callback);
+#endif
 }
 
 void LocationAgnssTest::TearDownTestCase()
 {
+#ifdef HDF_DRIVERS_INTERFACE_AGNSS_ENABLE
     auto devmgr = HDI::DeviceManager::V1_0::IDeviceManager::Get();
     if (devmgr == nullptr) {
         printf("fail to get devmgr.\n");
@@ -330,6 +343,7 @@ void LocationAgnssTest::TearDownTestCase()
         return;
     }
     g_ignssHci->DisableGnss();
+#endif
 }
 
 void LocationAgnssTest::SetUp()
@@ -348,6 +362,7 @@ void LocationAgnssTest::TearDown()
   */
 HWTEST_F(LocationAgnssTest, SUB_DriverSystem_SetAgnssServer_0100, TestSize.Level1)
 {
+#ifdef HDF_DRIVERS_INTERFACE_AGNSS_ENABLE
     if (g_iagnssHci == nullptr) {
         ASSERT_NE(nullptr, g_iagnssHci);
         return;
@@ -358,6 +373,7 @@ HWTEST_F(LocationAgnssTest, SUB_DriverSystem_SetAgnssServer_0100, TestSize.Level
     server.port = 80001;
     int32_t ret = g_iagnssHci->SetAgnssServer(server);
     EXPECT_EQ(HDF_SUCCESS, ret);
+#endif
 }
 
 /**
@@ -367,6 +383,7 @@ HWTEST_F(LocationAgnssTest, SUB_DriverSystem_SetAgnssServer_0100, TestSize.Level
   */
 HWTEST_F(LocationAgnssTest, SUB_DriverSystem_SetSubscriberSetId_0100, TestSize.Level1)
 {
+#ifdef HDF_DRIVERS_INTERFACE_AGNSS_ENABLE
     if (g_iagnssHci == nullptr) {
         ASSERT_NE(nullptr, g_iagnssHci);
         return;
@@ -376,6 +393,7 @@ HWTEST_F(LocationAgnssTest, SUB_DriverSystem_SetSubscriberSetId_0100, TestSize.L
     id.id = "111";
     int32_t ret = g_iagnssHci->SetSubscriberSetId(id);
     EXPECT_EQ(HDF_SUCCESS, ret);
+#endif
 }
 
 /**
@@ -385,6 +403,7 @@ HWTEST_F(LocationAgnssTest, SUB_DriverSystem_SetSubscriberSetId_0100, TestSize.L
   */
 HWTEST_F(LocationAgnssTest, SUB_DriverSystem_SetAgnssRefInfo_0100, TestSize.Level1)
 {
+#ifdef HDF_DRIVERS_INTERFACE_AGNSS_ENABLE
     if (g_iagnssHci == nullptr) {
         ASSERT_NE(nullptr, g_iagnssHci);
         return;
@@ -401,6 +420,7 @@ HWTEST_F(LocationAgnssTest, SUB_DriverSystem_SetAgnssRefInfo_0100, TestSize.Leve
     refInfo.cellId.nci = 90;
     int32_t ret = g_iagnssHci->SetAgnssRefInfo(refInfo);
     EXPECT_EQ(HDF_SUCCESS, ret);
+#endif
 }
 
 /**
@@ -410,6 +430,7 @@ HWTEST_F(LocationAgnssTest, SUB_DriverSystem_SetAgnssRefInfo_0100, TestSize.Leve
   */
 HWTEST_F(LocationAgnssTest, SUB_DriverSystem_SetAgnssCallback_0100, TestSize.Level1)
 {
+#ifdef HDF_DRIVERS_INTERFACE_AGNSS_ENABLE
     if (g_iagnssHci == nullptr) {
         ASSERT_NE(nullptr, g_iagnssHci);
         return;
@@ -421,4 +442,5 @@ HWTEST_F(LocationAgnssTest, SUB_DriverSystem_SetAgnssCallback_0100, TestSize.Lev
     }
     int32_t ret = g_iagnssHci->SetAgnssCallback(agnss_callback);
     EXPECT_EQ(HDF_SUCCESS, ret);
+#endif
 }

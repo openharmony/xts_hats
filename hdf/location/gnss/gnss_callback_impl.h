@@ -16,6 +16,7 @@
 #ifndef OHOS_HDI_LOCATION_GNSS_V2_0_GNSSCALLBACKIMPL_H
 #define OHOS_HDI_LOCATION_GNSS_V2_0_GNSSCALLBACKIMPL_H
 
+#ifdef FEATURE_GNSS_SUPPORT
 #include <hdf_base.h>
 #include <string>
 #include <v2_0/ignss_callback.h>
@@ -47,6 +48,6 @@ public:
 } // Location
 } // HDI
 } // OHOS
-
+#endif
 #endif // OHOS_HDI_LOCATION_GNSS_V2_0_GNSSCALLBACKIMPL_H
 

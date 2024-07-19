@@ -14,9 +14,13 @@
 import("//build/ohos_var.gni")
 import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
+import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 
 group("HatsHdfManagerTest") {
   testonly = true
+  if (with_sample){
+    defines = ["SAMPLE_SHIELD"]
+  }
   if (hats_rich == true) {
     deps = [
       #"managerBenchmarkTest:HatsHdfManagerbenchmarkTest",

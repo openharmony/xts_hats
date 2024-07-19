@@ -64,19 +64,32 @@ class HdfServiceMangerHdiTest : public testing::Test {
 public:
     static void SetUpTestCase()
     {
+	(void)TEST_SERVICE_NAME;
+    (void)TEST1_SERVICE_NAME;
+    (void)PAYLOAD_NUM;
+    (void)WAIT_LOAD_UNLOAD_TIME;
+    (void)TEST_SERVICE_INTERFACE_DESC;
+	(void)TEST_SERVICE_INTERFACE_DESC_N;
+	(void)SMQ_TEST_QUEUE_SIZE;
+	(void)SMQ_TEST_WAIT_TIME;
+	
+		#ifdef SAMPLE_SHIELD
         auto devmgr = IDeviceManager::Get();
         if (devmgr != nullptr) {
             HDF_LOGI("%{public}s:%{public}d", __func__, __LINE__);
             devmgr->LoadDevice(TEST_SERVICE_NAME);
         }
+		#endif 
     }
     static void TearDownTestCase()
     {
-        auto devmgr = IDeviceManager::Get();
+        #ifdef SAMPLE_SHIELD
+		auto devmgr = IDeviceManager::Get();
         if (devmgr != nullptr) {
             HDF_LOGI("%{public}s:%{public}d", __func__, __LINE__);
             devmgr->UnloadDevice(TEST_SERVICE_NAME);
         }
+		#endif 
     }
     void TestServiceListenerStop(const sptr<IDeviceManager>& devmgr, const sptr<IServiceManager>& servmgr);
     void TestSampleService(sptr<IRemoteObject>& sampleService, const sptr<IDeviceManager>& devmgr,
@@ -115,6 +128,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0100, Function | Medi
     ASSERT_TRUE(servmgr != nullptr);
 }
 
+#ifdef SAMPLE_SHIELD
 /**
   * @tc.number: SUB_Driver_Manager_HdiCC_0200
   * @tc.name: ServMgrTest002
@@ -310,6 +324,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0600, Function | Medi
     sampleService = servmgr->GetService(TEST_SERVICE_NAME);
     ASSERT_TRUE(sampleService == nullptr);
 }
+#endif 
 
 class ServStatListener : public OHOS::HDI::ServiceManager::V1_0::ServStatListenerStub {
 public:
@@ -325,6 +340,7 @@ private:
     StatusCallback callback_;
 };
 
+#ifdef SAMPLE_SHIELD
 /*
  * Test service start status listener
  */
@@ -739,6 +755,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0100, Functi
     ASSERT_FALSE(serviceNames.empty());
     ASSERT_TRUE(serviceNames.front().compare(TEST_SERVICE_NAME) == 0);
 }
+#endif 
 
 /**
   * @tc.number: SUB_Driver_Manager_InterfaceQuery_0200
@@ -788,6 +805,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0400, Functi
     ASSERT_TRUE(serviceNames.empty());
 }
 
+#ifdef SAMPLE_SHIELD
 /**
   * @tc.number: SUB_Driver_Manager_InterfaceQuery_0500
   * @tc.name:  Test get service set by interfacedesc
@@ -818,6 +836,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0500, Functi
     ret = devmgr->UnloadDevice(TEST1_SERVICE_NAME);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
+#endif
 
 /**
   * @tc.number: SUB_Driver_Manager_HdiCC_0800
@@ -853,6 +872,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0900, Function | Medi
     ASSERT_TRUE(deviceInfos.size() != 0);
 }
 
+#ifdef SAMPLE_SHIELD
 /**
   * @tc.number: SUB_Driver_Manager_HdiCC_1000
   * @tc.name:  EndSampleHostTest
@@ -970,6 +990,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1100, Function | Medi
     ret = devmgr->UnloadDevice(TEST_SERVICE_NAME);
     ASSERT_TRUE(ret == HDF_SUCCESS);
 }
+#endif
 
  /**
   * @tc.number: SUB_Driver_Manager_HdiCC_1200

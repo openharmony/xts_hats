@@ -47,7 +47,7 @@ class HdfServiceMangerHdiCTest : public testing::Test {
 public:
     static void SetUpTestCase()
     {
-	(void)TEST_SERVICE_NAME;
+    (void)TEST_SERVICE_NAME;
     (void)TEST1_SERVICE_NAME;
     (void)PAYLOAD_NUM;
     (void)WAIT_LOAD_UNLOAD_TIME;
@@ -745,6 +745,7 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1800, Function | Medi
     ASSERT_TRUE(status != HDF_SUCCESS);
 }
 #endif
+
 /**
   * @tc.number: SUB_Driver_Manager_Memory_0400
   * @tc.name: Test shared mem interfac

@@ -64,33 +64,34 @@ class HdfServiceMangerHdiTest : public testing::Test {
 public:
     static void SetUpTestCase()
     {
-	(void)TEST_SERVICE_NAME;
+    (void)TEST_SERVICE_NAME;
     (void)TEST1_SERVICE_NAME;
     (void)PAYLOAD_NUM;
     (void)WAIT_LOAD_UNLOAD_TIME;
     (void)TEST_SERVICE_INTERFACE_DESC;
-	(void)TEST_SERVICE_INTERFACE_DESC_N;
-	(void)SMQ_TEST_QUEUE_SIZE;
-	(void)SMQ_TEST_WAIT_TIME;
+    (void)TEST_SERVICE_INTERFACE_DESC_N;
+    (void)SMQ_TEST_QUEUE_SIZE;
+    (void)SMQ_TEST_WAIT_TIME;
 	
-		#ifdef SAMPLE_SHIELD
+	#ifdef SAMPLE_SHIELD
         auto devmgr = IDeviceManager::Get();
         if (devmgr != nullptr) {
             HDF_LOGI("%{public}s:%{public}d", __func__, __LINE__);
             devmgr->LoadDevice(TEST_SERVICE_NAME);
         }
-		#endif 
+	#endif 
     }
     static void TearDownTestCase()
     {
-        #ifdef SAMPLE_SHIELD
+    #ifdef SAMPLE_SHIELD
 		auto devmgr = IDeviceManager::Get();
         if (devmgr != nullptr) {
             HDF_LOGI("%{public}s:%{public}d", __func__, __LINE__);
             devmgr->UnloadDevice(TEST_SERVICE_NAME);
         }
-		#endif 
+    #endif 
     }
+    
     void TestServiceListenerStop(const sptr<IDeviceManager>& devmgr, const sptr<IServiceManager>& servmgr);
     void TestSampleService(sptr<IRemoteObject>& sampleService, const sptr<IDeviceManager>& devmgr,
         const sptr<IServiceManager>& servmgr);

@@ -341,7 +341,7 @@ private:
     StatusCallback callback_;
 };
 
-#ifdef SAMPLE_SHIELD 
+#ifdef SAMPLE_SHIELD
 /*
  * Test service start status listener
  */
@@ -756,7 +756,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0100, Functi
     ASSERT_FALSE(serviceNames.empty());
     ASSERT_TRUE(serviceNames.front().compare(TEST_SERVICE_NAME) == 0);
 }
-#endif 
+#endif
 
 /**
   * @tc.number: SUB_Driver_Manager_InterfaceQuery_0200
@@ -991,7 +991,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1100, Function | Medi
     ret = devmgr->UnloadDevice(TEST_SERVICE_NAME);
     ASSERT_TRUE(ret == HDF_SUCCESS);
 }
-#endif 
+#endif
 
  /**
   * @tc.number: SUB_Driver_Manager_HdiCC_1200

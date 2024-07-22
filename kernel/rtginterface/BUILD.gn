@@ -17,8 +17,6 @@ module_output_path = "hats/rtginterface"
 
 base_root = "../../../../../"
 
-frame_aware_sched_deps = [ "$base_root/foundation/resourceschedule/frame_aware_sched/interfaces/innerkits/frameintf:frame_msg_intf" ]
-
 frame_aware_sched_public_deps =
     [ "$base_root/third_party/googletest:gtest_main" ]
 
@@ -31,13 +29,14 @@ ohos_moduletest_suite("HatsRtgInterfaceTest") {
     "$base_root/foundation/resourceschedule/frame_aware_sched/common/include",
   ]
 
-  deps = frame_aware_sched_deps
-
   if (is_standard_system) {
     public_deps = frame_aware_sched_public_deps
   }
 
-  external_deps = [ "c_utils:utils" ]
+  external_deps = [
+    "c_utils:utils",
+    "frame_aware_sched:rtg_interface",
+  ]
 
   cflags = [ "-Wno-error" ]
   part_name = "hats"

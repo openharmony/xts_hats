@@ -83,7 +83,6 @@ public:
     }
     static void TearDownTestCase()
     {
-
     #ifdef SAMPLE_SHIELD
         auto devmgr = IDeviceManager::Get();
         if (devmgr != nullptr) {
@@ -838,7 +837,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_InterfaceQuery_0500, Functi
     ret = devmgr->UnloadDevice(TEST1_SERVICE_NAME);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
-#endif 
+#endif
 
 /**
   * @tc.number: SUB_Driver_Manager_HdiCC_0800
@@ -874,7 +873,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0900, Function | Medi
     ASSERT_TRUE(deviceInfos.size() != 0);
 }
 
-#ifdef SAMPLE_SHIELD 
+#ifdef SAMPLE_SHIELD
 /**
   * @tc.number: SUB_Driver_Manager_HdiCC_1000
   * @tc.name:  EndSampleHostTest

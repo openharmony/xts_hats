@@ -73,24 +73,24 @@ public:
     (void)SMQ_TEST_QUEUE_SIZE;
     (void)SMQ_TEST_WAIT_TIME;
 
-#ifdef SAMPLE_SHIELD
+    #ifdef SAMPLE_SHIELD
         auto devmgr = IDeviceManager::Get();
         if (devmgr != nullptr) {
             HDF_LOGI("%{public}s:%{public}d", __func__, __LINE__);
             devmgr->LoadDevice(TEST_SERVICE_NAME);
         }
-#endif 
+    #endif
     }
     static void TearDownTestCase()
     {
 
-#ifdef SAMPLE_SHIELD
+    #ifdef SAMPLE_SHIELD
         auto devmgr = IDeviceManager::Get();
         if (devmgr != nullptr) {
             HDF_LOGI("%{public}s:%{public}d", __func__, __LINE__);
             devmgr->UnloadDevice(TEST_SERVICE_NAME);
         }
-#endif 
+    #endif
     }
     
     void TestServiceListenerStop(const sptr<IDeviceManager>& devmgr, const sptr<IServiceManager>& servmgr);
@@ -130,7 +130,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0100, Function | Medi
     ASSERT_TRUE(servmgr != nullptr);
 }
 
-#ifdef SAMPLE_SHIELD 
+#ifdef SAMPLE_SHIELD
 /**
   * @tc.number: SUB_Driver_Manager_HdiCC_0200
   * @tc.name: ServMgrTest002
@@ -326,7 +326,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_0600, Function | Medi
     sampleService = servmgr->GetService(TEST_SERVICE_NAME);
     ASSERT_TRUE(sampleService == nullptr);
 }
-#endif 
+#endif
 
 class ServStatListener : public OHOS::HDI::ServiceManager::V1_0::ServStatListenerStub {
 public:

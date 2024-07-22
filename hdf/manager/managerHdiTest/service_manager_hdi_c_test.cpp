@@ -54,21 +54,21 @@ public:
     (void)INVALID_DISPATCH_CODE;
     (void)TEST_SERVICE_INTERFACE_DESC;
     
-        #ifdef SAMPLE_SHIELD 
+        #ifdef SAMPLE_SHIELD
         struct HDIDeviceManager *devmgr = HDIDeviceManagerGet();
         if (devmgr != nullptr) {
             devmgr->LoadDevice(devmgr, TEST_SERVICE_NAME);
         }
-        #endif 
+        #endif
     }
     static void TearDownTestCase()
     {
-        #ifdef SAMPLE_SHIELD 
+        #ifdef SAMPLE_SHIELD
         struct HDIDeviceManager *devmgr = HDIDeviceManagerGet();
         if (devmgr != nullptr) {
             devmgr->UnloadDevice(devmgr, TEST_SERVICE_NAME);
         }
-        #endif 
+        #endif
     }
     void SetUp() {};
     void TearDown() {};
@@ -87,7 +87,7 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_0100, Function | Medi
     HDIServiceManagerRelease(servmgr);
 }
 
-#ifdef SAMPLE_SHIELD 
+#ifdef SAMPLE_SHIELD
 /**
   * @tc.number: SUB_Driver_Manager_HdiC_0200
   * @tc.name: ServMgrTest002
@@ -744,7 +744,7 @@ HWTEST_F(HdfServiceMangerHdiCTest, SUB_Driver_Manager_HdiC_1800, Function | Medi
     int status = HdfRemoteServiceDefaultDispatch(sampleService, INVALID_DISPATCH_CODE, dataSbuf, replySbuf);
     ASSERT_TRUE(status != HDF_SUCCESS);
 }
-#endif 
+#endif
 
 /**
   * @tc.number: SUB_Driver_Manager_Memory_0400

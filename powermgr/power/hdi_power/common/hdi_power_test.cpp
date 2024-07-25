@@ -797,7 +797,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest040, TestSize.Level1)
   */
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest041, TestSize.Level1)
 {
-    int32_t ret = powerInterface->SetSuspendTag();
+    int32_t ret = powerInterface->SetSuspendTag("");
     EXPECT_EQ(0, ret) << "HdfPowerHdiTest041 failed";
 }
 }

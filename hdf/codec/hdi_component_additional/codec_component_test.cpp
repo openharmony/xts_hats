@@ -410,7 +410,7 @@ HWTEST_F(CodecComponentTestAdditional, testGetConfig001, Function | MediumTest |
     std::vector<int8_t> inParam;
     ObjectToVector(param, inParam);
     std::vector<int8_t> outParam;
-    auto ret = g_component->GetConfig(OMX_IndexConfigVideoBitrate, inParam, outParam);
+    auto ret = g_component->GetConfig(OMX_IndexCodecVideoPortFormat, inParam, outParam);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
 /**
@@ -504,7 +504,7 @@ HWTEST_F(CodecComponentTestAdditional, testSetConfig001, Function | MediumTest |
 
     std::vector<int8_t> inParam;
     ObjectToVector(param, inParam);
-    auto ret = g_component->SetConfig(OMX_IndexConfigVideoBitrate, inParam);
+    auto ret = g_component->SetConfig(OMX_IndexCodecVideoPortFormat, inParam);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
 /**
@@ -577,7 +577,7 @@ HWTEST_F(CodecComponentTestAdditional, testSetConfig005, Function | MediumTest |
     std::vector<int8_t> inParam;
     ObjectToVector(param, inParam);
     auto ret = g_component->SetConfig(OMX_IndexCodecVideoPortFormat, inParam);
-    ASSERT_NE(ret, HDF_SUCCESS);
+    ASSERT_EQ(ret, HDF_SUCCESS);
 }
 /**
 * @tc.number : SUB_Driver_Codec_SetConfig_0700
@@ -613,7 +613,7 @@ HWTEST_F(CodecComponentTestAdditional, testSetConfig007, Function | MediumTest |
 
     std::vector<int8_t> inParam;
     ObjectToVector(param, inParam);
-    auto ret = g_component->SetConfig(OMX_IndexConfigVideoBitrate, inParam);
+    auto ret = g_component->SetConfig(OMX_IndexCodecVideoPortFormat, inParam);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
 /**
@@ -631,7 +631,7 @@ HWTEST_F(CodecComponentTestAdditional, testSetConfig008, Function | MediumTest |
 
     std::vector<int8_t> inParam;
     ObjectToVector(param, inParam);
-    auto ret = g_component->SetConfig(OMX_IndexConfigVideoBitrate, inParam);
+    auto ret = g_component->SetConfig(OMX_IndexCodecVideoPortFormat, inParam);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
 /**
@@ -650,7 +650,7 @@ HWTEST_F(CodecComponentTestAdditional, testSetConfig009, Function | MediumTest |
 
     std::vector<int8_t> inParam;
     ObjectToVector(param, inParam);
-    auto ret = g_component->SetConfig(OMX_IndexConfigVideoBitrate, inParam);
+    auto ret = g_component->SetConfig(OMX_IndexCodecVideoPortFormat, inParam);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
 /**

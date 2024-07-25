@@ -778,4 +778,26 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest039, TestSize.Level1)
     EXPECT_TRUE(HDF_SUCCESS ==
         g_runningLockcallback->HandleRunningLockMessage(""))<< "HdfPowerHdiTest039 failed";
 }
+
+/**
+  * @tc.name: HdfPowerHdiTest040
+  * @tc.desc: Hibernate
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest040, TestSize.Level1)
+{
+    int32_t ret = powerInterface->Hibernate();
+    EXPECT_EQ(0, ret) << "HdfPowerHdiTest040 failed";
+}
+
+/**
+  * @tc.name: HdfPowerHdiTest041
+  * @tc.desc: SetSuspendTag
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest041, TestSize.Level1)
+{
+    int32_t ret = powerInterface->SetSuspendTag("");
+    EXPECT_EQ(0, ret) << "HdfPowerHdiTest041 failed";
+}
 }

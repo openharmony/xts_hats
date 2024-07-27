@@ -151,7 +151,7 @@ public:
     class StreamConsumer {
     public:
         void CalculateFps(int64_t timestamp, int32_t streamId);
-        void ReturnTimeStamp(int64_t *g_timestamp, uint32_t lenght, int64_t timestamp, int32_t width);
+        void ReturnTimeStamp(int64_t *g_timestamp, int64_t timestamp, enum StreamIntent streamIntent_);
         OHOS::sptr<OHOS::IBufferProducer> CreateProducer(std::function<void(void*, uint32_t)> callback);
         OHOS::sptr<BufferProducerSequenceable> CreateProducerSeq(std::function<void(void*, uint32_t)> callback);
         void TakeSnapshoe()
@@ -186,6 +186,7 @@ public:
         int64_t intervalTimestamp_ = 0;
         const int64_t ONESECOND_OF_MICROSECOND_UNIT = 1000000000;
         int64_t interval_ = ONESECOND_OF_MICROSECOND_UNIT;
+        enum StreamIntent streamIntent_ = StreamIntent::PREVIEW;
     };
 
     class DemoCameraDeviceCallback : public ICameraDeviceCallback {

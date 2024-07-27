@@ -109,11 +109,11 @@ public:
 // Test GetComponentVersion
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_0900
-* @tc.name   : HdfCodecHdiGetVersionTest_001
+* @tc.name   : HdfCodecHdiGetVersionTest001
 * @tc.desc   : Verify the GetComponentVersion function when the input parameter is valid.
   @tc.type: FUNC
 */
-HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetVersionTest_001, TestSize.Level1)
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetVersionTest001, TestSize.Level1)
 {
     ASSERT_TRUE(g_component != nullptr);
     struct CompVerInfo verInfo;
@@ -123,11 +123,11 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetVersionTest_001, TestSize.Level1)
 
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_1000
-* @tc.name   : HdfCodecHdiGetParameterTest_001
+* @tc.name   : HdfCodecHdiGetParameterTest001
 * @tc.desc   : Verify the GetParameter function when the input parameter pixFormat.portIndex is outputIndex.
   @tc.type: FUNC
 */
-HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetParameterTest_001, TestSize.Level1)
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetParameterTest001, TestSize.Level1)
 {
     ASSERT_TRUE(g_component != nullptr);
     CodecVideoPortFormatParam pixFormat;
@@ -145,11 +145,11 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetParameterTest_001, TestSize.Level1)
 
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_1100
-* @tc.name   : HdfCodecHdiGetParameterTest_002
+* @tc.name   : HdfCodecHdiGetParameterTest002
 * @tc.desc   : Verify the GetParameter function when the input parameter pixFormat.portIndex is inputIndex.
   @tc.type: FUNC
 */
-HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetParameterTest_002, TestSize.Level1)
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetParameterTest002, TestSize.Level1)
 {
     ASSERT_TRUE(g_component != nullptr);
     CodecVideoPortFormatParam pixFormat;
@@ -168,11 +168,11 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetParameterTest_002, TestSize.Level1)
 // Test GetParameter
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_1200
-* @tc.name   : HdfCodecHdiGetParameterTest_003
+* @tc.name   : HdfCodecHdiGetParameterTest003
 * @tc.desc   : Verify the GetParameter function when the input parameter is valid.
   @tc.type: FUNC
 */
-HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetParameterTest_003, TestSize.Level1)
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetParameterTest003, TestSize.Level1)
 {
     ASSERT_TRUE(g_component != nullptr);
     std::vector<int8_t> inParam;
@@ -183,11 +183,11 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetParameterTest_003, TestSize.Level1)
 
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_1300
-* @tc.name   : HdfCodecHdiGetParameterTest_004
+* @tc.name   : HdfCodecHdiGetParameterTest004
 * @tc.desc   : Verify the GetParameter function when the input parameter is valid.
   @tc.type: FUNC
 */
-HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetParameterTest_004, TestSize.Level1)
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetParameterTest004, TestSize.Level1)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_VIDEO_PARAM_PORTFORMATTYPE param;
@@ -204,11 +204,11 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetParameterTest_004, TestSize.Level1)
 
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_1400
-* @tc.name   : HdfCodecHdiGetParameterTest_005
+* @tc.name   : HdfCodecHdiGetParameterTest005
 * @tc.desc   : Verify the GetParameter function when the input parameter is invalid.
   @tc.type: FUNC
 */
-HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetParameterTest_005, TestSize.Level1)
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetParameterTest005, TestSize.Level1)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_VIDEO_PARAM_PORTFORMATTYPE param;
@@ -226,11 +226,11 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetParameterTest_005, TestSize.Level1)
 
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_1500
-* @tc.name   : HdfCodecHdiGetParameterTest_006
+* @tc.name   : HdfCodecHdiGetParameterTest006
 * @tc.desc   : Verify the GetParameter function when the input parameter is invalid.
   @tc.type: FUNC
 */
-HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetParameterTest_006, TestSize.Level1)
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetParameterTest006, TestSize.Level1)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_VIDEO_CONFIG_BITRATETYPE param;
@@ -246,11 +246,11 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetParameterTest_006, TestSize.Level1)
 
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_1600
-* @tc.name   : HdfCodecHdiGetParameterTest_007
+* @tc.name   : HdfCodecHdiGetParameterTest007
 * @tc.desc   : Verify the GetParameter function when the input parameter is invalid.
   @tc.type: FUNC
 */
-HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetParameterTest_007, TestSize.Level1)
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetParameterTest007, TestSize.Level1)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_VIDEO_CONFIG_BITRATETYPE param;
@@ -266,11 +266,11 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetParameterTest_007, TestSize.Level1)
 
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_1700
-* @tc.name   : HdfCodecHdiSetParameterTest_001
+* @tc.name   : HdfCodecHdiSetParameterTest001
 * @tc.desc   : Verify the SetParameter function when the input parameter is valid.
   @tc.type: FUNC
 */
-HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetParameterTest_001, TestSize.Level1)
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetParameterTest001, TestSize.Level1)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_VIDEO_PARAM_PORTFORMATTYPE param;
@@ -284,11 +284,11 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetParameterTest_001, TestSize.Level1)
 
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_1800
-* @tc.name   : HdfCodecHdiSetParameterTest_002
+* @tc.name   : HdfCodecHdiSetParameterTest002
 * @tc.desc   : Verify the SetParameter function when the input parameter is isvalid.
   @tc.type: FUNC
 */
-HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetParameterTest_002, TestSize.Level1)
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetParameterTest002, TestSize.Level1)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_VIDEO_PARAM_PORTFORMATTYPE param;
@@ -303,11 +303,11 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetParameterTest_002, TestSize.Level1)
 
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_1900
-* @tc.name   : HdfCodecHdiSetParameterTest_003
+* @tc.name   : HdfCodecHdiSetParameterTest003
 * @tc.desc   : Verify the SetParameter function when the input parameter is isvalid.
   @tc.type: FUNC
 */
-HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetParameterTest_003, TestSize.Level1)
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetParameterTest003, TestSize.Level1)
 {
     ASSERT_TRUE(g_component != nullptr);
     std::vector<int8_t> paramVec;
@@ -317,11 +317,11 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetParameterTest_003, TestSize.Level1)
 
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_2000
-* @tc.name   : HdfCodecHdiSetParameterTest_004
+* @tc.name   : HdfCodecHdiSetParameterTest004
 * @tc.desc   : Verify the SetParameter function when the input parameter param.nPortIndex = inputIndex.
   @tc.type: FUNC
 */
-HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetParameterTest_004, TestSize.Level1)
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetParameterTest004, TestSize.Level1)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_VIDEO_CONFIG_BITRATETYPE param;
@@ -335,11 +335,11 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetParameterTest_004, TestSize.Level1)
 
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_2100
-* @tc.name   : HdfCodecHdiSetParameterTest_005
+* @tc.name   : HdfCodecHdiSetParameterTest005
 * @tc.desc   : Verify the SetParameter function when the input parameter OMX_IndexVideoStartUnused.
   @tc.type: FUNC
 */
-HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetParameterTest_005, TestSize.Level1)
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetParameterTest005, TestSize.Level1)
 {
     ASSERT_TRUE(g_component != nullptr);
     OMX_VIDEO_PARAM_PORTFORMATTYPE param;
@@ -353,11 +353,11 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetParameterTest_005, TestSize.Level1)
 
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_2200
-* @tc.name   : HdfCodecHdiSetParameterTest_006
+* @tc.name   : HdfCodecHdiSetParameterTest006
 * @tc.desc   : Verify the SetParameter function when the input parameter is valid.
   @tc.type: FUNC
 */
-HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetParameterTest_006, TestSize.Level1)
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetParameterTest006, TestSize.Level1)
 {
     ASSERT_TRUE(g_component != nullptr);
     CodecVideoPortFormatParam pixFormat;
@@ -381,11 +381,11 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetParameterTest_006, TestSize.Level1)
 #ifdef SUPPORT_DMA_BUFFER
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_2300
-* @tc.name   : HdfCodecHdiDMABufferTest_001
+* @tc.name   : HdfCodecHdiDMABufferTest001
 * @tc.desc   : Verify the codec support DMA buffer process.
   @tc.type: FUNC
 */
-HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiDMABufferTest_001, TestSize.Level1)
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiDMABufferTest001, TestSize.Level1)
 {
     ASSERT_TRUE(g_component != nullptr);
     SupportBufferType bufferType;
@@ -403,11 +403,11 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiDMABufferTest_001, TestSize.Level1)
 #ifdef SUPPORT_OMX_EXTEND
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_2400
-* @tc.name   : HdfCodecHdiUseBufferAndFreeBufferTest_001
+* @tc.name   : HdfCodecHdiUseBufferAndFreeBufferTest001
 * @tc.desc   : Verify Use buffer on input index error when OMX_ErrorInsufficientResources.
   @tc.type: FUNC
 */
-HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseBufferAndFreeBufferTest_001, TestSize.Level1)
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseBufferAndFreeBufferTest001, TestSize.Level1)
 {
     ASSERT_TRUE(g_component != nullptr);
     std::vector<int8_t> cmdData;
@@ -428,11 +428,11 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseBufferAndFreeBufferTest_001, TestSize
 
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_2500
-* @tc.name   : HdfCodecHdiUseBufferAndFreeBufferTest_002
+* @tc.name   : HdfCodecHdiUseBufferAndFreeBufferTest002
 * @tc.desc   : Verify Use buffer on output index error when OMX_ErrorInsufficientResources.
   @tc.type: FUNC
 */
-HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseBufferAndFreeBufferTest_002, TestSize.Level1)
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseBufferAndFreeBufferTest002, TestSize.Level1)
 {
     ASSERT_TRUE(g_component != nullptr);
     std::vector<int8_t> cmdData;
@@ -454,11 +454,11 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseBufferAndFreeBufferTest_002, TestSize
 
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_2600
-* @tc.name   : HdfCodecHdiEmptyAndFillBufferTest_001
+* @tc.name   : HdfCodecHdiEmptyAndFillBufferTest001
 * @tc.desc   : Verify the encode EmptyAndFillBuffer process.
   @tc.type: FUNC
 */
-HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiEmptyAndFillBufferTest_001, TestSize.Level1)
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiEmptyAndFillBufferTest001, TestSize.Level1)
 {
     ASSERT_TRUE(g_component != nullptr);
     std::vector<int8_t> cmdData;
@@ -504,11 +504,11 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiEmptyAndFillBufferTest_001, TestSize.Lev
 
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_2700
-* @tc.name   : HdfCodecHdiFreeBufferTest_001
+* @tc.name   : HdfCodecHdiFreeBufferTest001
 * @tc.desc   : Verify the encode Release output buffer.
   @tc.type: FUNC
 */
-HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiFreeBufferTest_001, TestSize.Level1)
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiFreeBufferTest001, TestSize.Level1)
 {
     ASSERT_TRUE(g_component != nullptr);
     struct OmxCodecBuffer omxBuffer;
@@ -520,11 +520,11 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiFreeBufferTest_001, TestSize.Level1)
 
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_2800
-* @tc.name   : HdfCodecHdiFreeBufferTest_002
+* @tc.name   : HdfCodecHdiFreeBufferTest002
 * @tc.desc   : Verify the encode Release input buffer.
   @tc.type: FUNC
 */
-HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiFreeBufferTest_002, TestSize.Level1)
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiFreeBufferTest002, TestSize.Level1)
 {
     ASSERT_TRUE(g_component != nullptr);
     struct OmxCodecBuffer omxBuffer;
@@ -537,11 +537,11 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiFreeBufferTest_002, TestSize.Level1)
 #ifdef SUPPORT_OMX_EXTEND
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_2900
-* @tc.name   : HdfCodecHdiDeInitTest_001
+* @tc.name   : HdfCodecHdiDeInitTest001
 * @tc.desc   : Verify When ComponentDeInit, must change to Loaded State.
   @tc.type: FUNC
 */
-HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiDeInitTest_001, TestSize.Level1)
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiDeInitTest001, TestSize.Level1)
 {
     ASSERT_TRUE(g_component != nullptr);
     auto ret = g_component->ComponentDeInit();
@@ -552,11 +552,11 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiDeInitTest_001, TestSize.Level1)
 #ifdef SUPPORT_HIGH_WORK_FREQUENCY
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_3000
-* @tc.name   : HdfCodecHdiHighWorkingFrequencyTest_001
+* @tc.name   : HdfCodecHdiHighWorkingFrequencyTest001
 * @tc.desc   : Verify the encode support HIGH_WORK_FREQUENCY process.
   @tc.type: FUNC
 */
-HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiHighWorkingFrequencyTest_001, TestSize.Level1)
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiHighWorkingFrequencyTest001, TestSize.Level1)
 {
     const std::string processName = "cast_engine_service";
     std::vector<int8_t> paramVec;
@@ -588,4 +588,152 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiHighWorkingFrequencyTest_001, TestSize.L
     ASSERT_TRUE(ret == HDF_SUCCESS);
 }
 #endif
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_3100
+* @tc.name   : HdfCodecHdiGetConfigTest001
+* @tc.desc   : Verify Set parameters is outputindex  under the structure of OMX_VIDEO_CONFIG_BITRATETYPE.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetConfigTest001, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    OMX_VIDEO_CONFIG_BITRATETYPE param;
+    func_->InitParam(param);
+    param.nPortIndex = outputIndex;
+
+    std::vector<int8_t> inParam;
+    func_->ObjectToVector(param, inParam);
+    std::vector<int8_t> outParam;
+    auto ret = g_component->GetConfig(OMX_IndexConfigVideoBitrate, inParam, outParam);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_3200
+* @tc.name   : HdfCodecHdiGetConfigTest002
+* @tc.desc   : Verify Set parameters is inputIndex under the structure of OMX_VIDEO_CONFIG_BITRATETYPE.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetConfigTest002, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    OMX_VIDEO_CONFIG_BITRATETYPE param;
+    func_->InitParam(param);
+    param.nPortIndex = inputIndex;
+
+    std::vector<int8_t> inParam;
+    func_->ObjectToVector(param, inParam);
+    std::vector<int8_t> outParam;
+    auto ret = g_component->GetConfig(OMX_IndexConfigVideoBitrate, inParam, outParam);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_3300
+* @tc.name   : HdfCodecHdiGetConfigTest003
+* @tc.desc   : Verify param not initialized and not set structure.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetConfigTest003, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> inParam;
+    std::vector<int8_t> outParam;
+    auto ret = g_component->GetConfig(OMX_IndexConfigVideoBitrate, inParam, outParam);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_3400
+* @tc.name   : HdfCodecHdiGetConfigTest004
+* @tc.desc   : Verify that the structure does not match the index.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiGetConfigTest004, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    OMX_VIDEO_CONFIG_BITRATETYPE param;
+    func_->InitParam(param);
+    param.nPortIndex = outputIndex;
+
+    std::vector<int8_t> inParam;
+    func_->ObjectToVector(param, inParam);
+    std::vector<int8_t> outParam;
+    auto ret = g_component->GetConfig(OMX_IndexVideoStartUnused, inParam, outParam);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_3500
+* @tc.name   : HdfCodecHdiSetConfigTest001
+* @tc.desc   : Verify param is nPortIndex is outputIndex and nEncodeBitrate is FRAMERATE.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetConfigTest001, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    OMX_VIDEO_CONFIG_BITRATETYPE param;
+    func_->InitParam(param);
+    param.nPortIndex = outputIndex;
+    param.nEncodeBitrate = FRAMERATE;
+
+    std::vector<int8_t> inParam;
+    func_->ObjectToVector(param, inParam);
+    auto ret = g_component->SetConfig(OMX_IndexConfigVideoBitrate, inParam);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_3600
+* @tc.name   : HdfCodecHdiSetConfigTest002
+* @tc.desc   : Verify param is nPortIndex is inputIndex and nEncodeBitrate is FRAMERATE.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetConfigTest002, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    OMX_VIDEO_CONFIG_BITRATETYPE param;
+    func_->InitParam(param);
+    param.nPortIndex = inputIndex;
+    param.nEncodeBitrate = FRAMERATE;
+
+    std::vector<int8_t> inParam;
+    func_->ObjectToVector(param, inParam);
+    auto ret = g_component->SetConfig(OMX_IndexConfigVideoBitrate, inParam);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_3700
+* @tc.name   : HdfCodecHdiSetConfigTest003
+* @tc.desc   : Verify param not initialized and not set structure.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetConfigTest003, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> inParam;
+    auto ret = g_component->SetConfig(OMX_IndexConfigVideoBitrate, inParam);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_3800
+* @tc.name   : HdfCodecHdiSetConfigTest004
+* @tc.desc   : Verify that the structure does not match the index.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetConfigTest004, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    OMX_VIDEO_CONFIG_BITRATETYPE param;
+    func_->InitParam(param);
+    param.nPortIndex = outputIndex;
+
+    std::vector<int8_t> inParam;
+    func_->ObjectToVector(param, inParam);
+    auto ret = g_component->SetConfig(OMX_IndexVideoStartUnused, inParam);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
 }  // namespace

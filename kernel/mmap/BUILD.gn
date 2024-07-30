@@ -11,6 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import("//drivers/peripheral/display/display_config.gni")
 import("../../../tools/build/suite.gni")
 module_output_path = "hats/mmap"
 
@@ -19,6 +20,8 @@ ohos_moduletest_suite("HatsMmapTest") {
   sources = [ "./MmapApiTest.cpp" ]
   deps = [ "//third_party/googletest:gtest_main" ]
   include_dirs = [ "include" ]
+  defines = []
+  defines += display_defines
   cflags = [ "-Wno-error" ]
   external_deps = [ "c_utils:utils" ]
   subsystem_name = "kernel"

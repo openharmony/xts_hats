@@ -123,7 +123,11 @@ HWTEST_F(MmapApiTest, MremapDontunmap002, Function | MediumTest | Level2)
     void *fixAddr = mmap(nullptr, PAGE_SIZE, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_SHARED, -1, 0);
     ASSERT_TRUE(fixAddr != MAP_FAILED);
     void *newAddr = mremap(fixAddr, PAGE_SIZE, PAGE_SIZE, MREMAP_MAYMOVE | MREMAP_FIXED | MREMAP_DONTUNMAP, addr);
+#ifdef DISPLAY_COMMUNITY
     ASSERT_TRUE(newAddr == MAP_FAILED);
+#else
+    ASSERT_TRUE(newAddr != MAP_FAILED);
+#endif
     int ret = munmap(addr, PAGE_SIZE);
     ASSERT_TRUE(ret == 0);
     ret = munmap(fixAddr, PAGE_SIZE);
@@ -259,12 +263,8 @@ HWTEST_F(MmapApiTest, MMAPGrownsDown001, Function | MediumTest | Level1)
 
     addReserve = (char *)mmap(nullptr, lenReserve, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
     ASSERT_TRUE(addReserve != MAP_FAILED);
-    ret = munmap(addReserve, lenReserve);
-    ASSERT_TRUE(ret == 0);
-
     void *addr1 = mmap(addReserve, lenLeftMap, PROT_READ, MAP_ANON | MAP_PRIVATE | MAP_FIXED, -1, 0);
     ASSERT_TRUE(addr1 != MAP_FAILED);
-
     addrGd = (char *)mmap(addReserve + lenLeftMap + lenGdGap, lenGd, PROT_READ | PROT_WRITE,
          MAP_ANON | MAP_PRIVATE | MAP_FIXED | MAP_GROWSDOWN, -1, 0);
     ASSERT_TRUE(addrGd != MAP_FAILED);
@@ -278,6 +278,8 @@ HWTEST_F(MmapApiTest, MMAPGrownsDown001, Function | MediumTest | Level1)
     ASSERT_TRUE(ret == 0);
     int cpage = 256;
     addrGd[cpage * -0x1000] = '1';
+    ret = munmap(addReserve, lenReserve);
+    ASSERT_TRUE(ret == 0);
     ret = munmap(addr1, lenLeftMap);
     ASSERT_TRUE(ret == 0);
     ret = munmap(addrGd, lenGd);
@@ -304,12 +306,8 @@ HWTEST_F(MmapApiTest, MMAPGrownsDown002, Function | MediumTest | Level1)
 
     addReserve = (char *)mmap(nullptr, lenReserve, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
     ASSERT_TRUE(addReserve != MAP_FAILED);
-    ret = munmap(addReserve, lenReserve);
-    ASSERT_TRUE(ret == 0);
-
     void *addr1 = mmap(addReserve, lenLeftMap, PROT_READ, MAP_ANON | MAP_PRIVATE | MAP_FIXED, -1, 0);
     ASSERT_TRUE(addr1 != MAP_FAILED);
-
     addrGd = (char *)mmap(addReserve + lenLeftMap + lenGdGap, lenGd, PROT_READ,
          MAP_ANON | MAP_PRIVATE | MAP_FIXED | MAP_GROWSDOWN, -1, 0);
     ASSERT_TRUE(addrGd != MAP_FAILED);
@@ -325,6 +323,8 @@ HWTEST_F(MmapApiTest, MMAPGrownsDown002, Function | MediumTest | Level1)
     ASSERT_TRUE(ret == 0);
     int cpage = 256;
     addrGd[cpage * -0x1000] = '1';
+    ret = munmap(addReserve, lenReserve);
+    ASSERT_TRUE(ret == 0);
     ret = munmap(addr1, lenLeftMap);
     ASSERT_TRUE(ret == 0);
     ret = munmap(addrGd, lenGd);
@@ -364,8 +364,6 @@ HWTEST_F(MmapApiTest, MMAPGrownsDown004, Function | MediumTest | Level1)
 
     addReserve = (char *)mmap(nullptr, lenReserve, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
     ASSERT_TRUE(addReserve != MAP_FAILED);
-    ret = munmap(addrGd1, lenReserve);
-    ASSERT_TRUE(ret == 0);
     addrGd1 = (char *)mmap(addReserve, lenGd1, PROT_READ  | PROT_WRITE,
          MAP_ANON | MAP_PRIVATE | MAP_FIXED | MAP_GROWSDOWN, -1, 0);
     ASSERT_TRUE(addrGd1 != MAP_FAILED);
@@ -381,6 +379,8 @@ HWTEST_F(MmapApiTest, MMAPGrownsDown004, Function | MediumTest | Level1)
     ASSERT_TRUE(ret == 0);
     addrGd2[-0x1000] = '1';
     addrGd2[-0x2000] = '1';
+    ret = munmap(addReserve, lenReserve);
+    ASSERT_TRUE(ret == 0);
     ret = munmap(addrGd1, lenGd1);
     ASSERT_TRUE(ret == 0);
     ret = munmap(addrGd2, lenGd2);

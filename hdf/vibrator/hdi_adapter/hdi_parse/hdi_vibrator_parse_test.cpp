@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-#include<map>
+#include <map>
 #include <gtest/gtest.h>
 #include "hdf_base.h"
 #include "vibrator_common.h"

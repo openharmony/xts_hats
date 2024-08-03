@@ -501,7 +501,6 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiEmptyAndFillBufferTest001, TestSize.Leve
     err = func_->WaitState(g_component, CODEC_STATE_LOADED);
     ASSERT_TRUE(err);
 }
-
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_2700
 * @tc.name   : HdfCodecHdiFreeBufferTest001
@@ -734,6 +733,151 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetConfigTest004, TestSize.Level1)
     std::vector<int8_t> inParam;
     func_->ObjectToVector(param, inParam);
     auto ret = g_component->SetConfig(OMX_IndexVideoStartUnused, inParam);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_3900
+* @tc.name   : HdfCodecHdiUseEglImageTest001
+* @tc.desc   : Verify the function is UseEglImage whether or not supported.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseEglImageTest001, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    struct OmxCodecBuffer omxBuffer;
+    func_->InitOmxCodecBuffer(omxBuffer, CODEC_BUFFER_TYPE_AVSHARE_MEM_FD);
+    auto eglImage = std::make_unique<int8_t[]>(BUFFER_SIZE);
+    ASSERT_TRUE(eglImage != nullptr);
+    std::vector<int8_t> eglImageVec;
+    eglImageVec.assign(eglImage.get(), eglImage.get() + BUFFER_SIZE);
+    struct OmxCodecBuffer outbuffer;
+    int32_t ret = g_component->UseEglImage(inputIndex, omxBuffer, outbuffer, eglImageVec);
+    ASSERT_NE(ret, HDF_SUCCESS);
+    eglImage = nullptr;
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_4000
+* @tc.name   : HdfCodecHdiFillThisBufferTest001
+* @tc.desc   : Verify the function is FillThisBuffer when bufferId is BUFFER_ID_ERROR.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiFillThisBufferTest001, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    struct OmxCodecBuffer omxBuffer;
+    func_->InitOmxCodecBuffer(omxBuffer, CODEC_BUFFER_TYPE_AVSHARE_MEM_FD);
+    omxBuffer.bufferId = BUFFER_ID_ERROR;
+    auto ret = g_component->FillThisBuffer(omxBuffer);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_4100
+* @tc.name   : HdfCodecHdiEmptyThisBufferTest001
+* @tc.desc   : Verify the function is EmptyThisBuffer when bufferId is BUFFER_ID_ERROR.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiEmptyThisBufferTest001, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    struct OmxCodecBuffer omxBuffer;
+    func_->InitOmxCodecBuffer(omxBuffer, CODEC_BUFFER_TYPE_AVSHARE_MEM_FD);
+    omxBuffer.bufferId = BUFFER_ID_ERROR;
+    auto ret = g_component->EmptyThisBuffer(omxBuffer);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_4200
+* @tc.name   : HdfCodecHdiSetCallbackTest001
+* @tc.desc   : Verify the function is SetCallbacks when params is valid.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetCallbackTest001, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    g_callback = new CodecCallbackService();
+    ASSERT_TRUE(g_callback != nullptr);
+    auto ret = g_component->SetCallbacks(g_callback, APP_DATA);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_4300
+* @tc.name   : HdfCodecHdiSetCallbackTest002
+* @tc.desc   : Verify the function is SetCallbacks when params is invalid.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiSetCallbackTest002, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    auto ret = g_component->SetCallbacks(nullptr, APP_DATA);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_4400
+* @tc.name   : HdfCodecHdiUseBufferTest001
+* @tc.desc   : Verify the function is UseBuffer when portindex is inputIndex.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseBufferTest001, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    struct OmxCodecBuffer omxBuffer;
+    func_->InitOmxCodecBuffer(omxBuffer, CODEC_BUFFER_TYPE_INVALID);
+    struct OmxCodecBuffer outBuffer;
+    auto ret = g_component->UseBuffer(inputIndex, omxBuffer, outBuffer);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_4500
+* @tc.name   : HdfCodecHdiUseBufferTest002
+* @tc.desc   : Verify the function is UseBuffer when portindex is outputIndex.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseBufferTest002, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    struct OmxCodecBuffer omxBuffer;
+    func_->InitOmxCodecBuffer(omxBuffer, CODEC_BUFFER_TYPE_INVALID);
+    struct OmxCodecBuffer outBuffer;
+    auto ret = g_component->UseBuffer(outputIndex, omxBuffer, outBuffer);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_4600
+* @tc.name   : HdfCodecHdiUseBufferTest003
+* @tc.desc   : Verify the function is UseBuffer when portindex is inputIndex and omxBuffer is CODEC_BUFFER_TYPE_VIRTUAL_ADDR.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseBufferTest003, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    struct OmxCodecBuffer omxBuffer;
+    func_->InitOmxCodecBuffer(omxBuffer, CODEC_BUFFER_TYPE_VIRTUAL_ADDR);
+    struct OmxCodecBuffer outBuffer;
+    auto ret = g_component->UseBuffer(inputIndex, omxBuffer, outBuffer);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_4700
+* @tc.name   : HdfCodecHdiUseBufferTest003
+* @tc.desc   : Verify the function is UseBuffer when portindex is outputIndex and omxBuffer is CODEC_BUFFER_TYPE_VIRTUAL_ADDR.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseBufferTest004, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    struct OmxCodecBuffer omxBuffer;
+    func_->InitOmxCodecBuffer(omxBuffer, CODEC_BUFFER_TYPE_VIRTUAL_ADDR);
+    struct OmxCodecBuffer outBuffer;
+    auto ret = g_component->UseBuffer(outputIndex, omxBuffer, outBuffer);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
 }  // namespace

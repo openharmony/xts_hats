@@ -852,7 +852,8 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseBufferTest002, TestSize.Level1)
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_4600
 * @tc.name   : HdfCodecHdiUseBufferTest003
-* @tc.desc   : Verify the function is UseBuffer when portindex is inputIndex and omxBuffer is CODEC_BUFFER_TYPE_VIRTUAL_ADDR.
+* @tc.desc   : Verify the function is UseBuffer when portindex is inputIndex
+               and omxBuffer is CODEC_BUFFER_TYPE_VIRTUAL_ADDR.
   @tc.type: FUNC
 */
 HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseBufferTest003, TestSize.Level1)
@@ -868,7 +869,8 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseBufferTest003, TestSize.Level1)
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_4700
 * @tc.name   : HdfCodecHdiUseBufferTest003
-* @tc.desc   : Verify the function is UseBuffer when portindex is outputIndex and omxBuffer is CODEC_BUFFER_TYPE_VIRTUAL_ADDR.
+* @tc.desc   : Verify the function is UseBuffer when portindex is outputIndex
+               and omxBuffer is CODEC_BUFFER_TYPE_VIRTUAL_ADDR.
   @tc.type: FUNC
 */
 HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseBufferTest004, TestSize.Level1)

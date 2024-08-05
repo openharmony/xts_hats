@@ -20,7 +20,7 @@
 #include <condition_variable>
 #include <benchmark/benchmark.h>
 #include "gtest/gtest.h"
-#include "v1_1/include/idisplay_composer_interface.h"
+#include "v1_2/include/idisplay_composer_interface.h"
 #include "v1_1/display_composer_type.h"
 #include "v1_0/display_buffer_type.h"
 #include "display_test.h"
@@ -59,7 +59,7 @@ private:
     bool hasVblank_ = false;
 };
 
-static sptr<Composer::V1_1::IDisplayComposerInterface> g_composerDevice = nullptr;
+static sptr<Composer::V1_2::IDisplayComposerInterface> g_composerDevice = nullptr;
 static std::shared_ptr<IDisplayBuffer> g_gralloc = nullptr;
 static std::vector<uint32_t> g_displayIds;
 const int SLEEP_CONT_100 = 100;

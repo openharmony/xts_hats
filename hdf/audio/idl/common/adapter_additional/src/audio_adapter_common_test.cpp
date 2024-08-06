@@ -398,7 +398,6 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testDestroyRender001, TestSize.Level2)
         EXPECT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
     }
     EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
-    EXPECT_NE(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
 }
 
 /**

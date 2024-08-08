@@ -59,7 +59,7 @@ public:
     }
 
     int32_t OnGetData(const std::vector<uint8_t>& algoParameter, uint64_t authSubType, uint32_t algoVersion,
-         const std::vector<uint8_t>& challenge) override
+         const std::vector<uint8_t>& challenge, const std::string &complexityReg) override
     {
         cout << "algoVersion is " << algoVersion << endl;
         cout << " algoParameter len is " << algoParameter.size() << endl;

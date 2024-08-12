@@ -14,10 +14,10 @@
  */
 
 #include "hdf_log.h"
-#include "v1_0/codec_image_type.h"
+#include "v2_0/codec_image_type.h"
 #include "v1_0/display_buffer_type.h"
 #include "v1_0/display_composer_type.h"
-#include "v1_0/icodec_image.h"
+#include "v2_0/icodec_image.h"
 #include "v1_0/include/idisplay_buffer.h"
 #include <buffer_handle.h>
 #include <gtest/gtest.h>
@@ -27,7 +27,7 @@ using namespace std;
 using namespace testing::ext;
 using namespace OHOS::HDI::Display::Buffer::V1_0;
 using namespace OHOS::HDI::Display::Composer::V1_0;
-using namespace OHOS::HDI::Codec::Image::V1_0;
+using namespace OHOS::HDI::Codec::Image::V2_0;
 namespace {
 constexpr int32_t WIDTH = 640;
 constexpr int32_t HEIGHT = 480;

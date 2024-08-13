@@ -38,4 +38,6 @@ ohos_moduletest_suite("HatsUtilApiTest") {
     "-Wno-constant-conversion",
     "-Wno-format",
   ]
+  subsystem_name = "kernel"
+  part_name = "hats"
 }

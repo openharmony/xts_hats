@@ -1028,7 +1028,6 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_SteadyShot_0300, TestSize.Level1)
     // start preview, video and capture
     cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
     cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
-    cameraTest->StartCapture(cameraTest->streamIdCapture, cameraTest->captureIdCapture, false, false);
     // wait to stop
     uint32_t waitTime = 0;
     auto envStr = getenv("UT_SUPER_STAB_KEEP_SECOND");

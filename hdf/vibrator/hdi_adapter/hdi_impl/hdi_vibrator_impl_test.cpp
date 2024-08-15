@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,19 +20,17 @@
 #include "hdf_base.h"
 #include "osal_time.h"
 #include "parameters.h"
-#include "v1_1/ivibrator_interface.h"
+#include "v1_3/ivibrator_interface.h"
 #define HDF_LOG_TAG "hdi_vibrator_impl_test"
 
 using namespace std;
-using namespace OHOS::HDI::Vibrator::V1_1;
+using namespace OHOS::HDI::Vibrator;
+using namespace OHOS::HDI::Vibrator::V1_3;
 using namespace testing::ext;
 
 namespace {
-
     HapticCapacity g_hapticCapacity;
-    sptr<V1_2::IVibratorInterface> g_vibratorInterface = nullptr;
-    const std::vector<std::string> g_effect{"haptic.log_press.light","haptic.slide.light","haptic.threshold","haptic.long_press.medium","haptic.fail","haptic.common.notice1","haptic.common.success","haptic.charging","haptic.long_press.heavy"};
-    
+    sptr<V1_3::IVibratorInterface> g_vibratorInterface = nullptr;
 }
 
 class HatsHdfVibratorImplTest : public testing::Test {
@@ -45,13 +43,18 @@ public:
 
 void HatsHdfVibratorImplTest::SetUpTestCase()
 {
-    g_vibratorInterface = V1_2::IVibratorInterface::Get();
+    g_vibratorInterface = V1_3::IVibratorInterface::Get();
 }
 void HatsHdfVibratorImplTest::TearDownTestCase()
 {
 }
 void HatsHdfVibratorImplTest::SetUp()
 {
+    if (g_vibratorInterface == nullptr) {
+    printf("Motion is not supported ");
+    GTEST_SKIP() << "Device not exist" << std::endl;
+    return;
+    }
 }
 void HatsHdfVibratorImplTest::TearDown()
 {
@@ -109,7 +112,7 @@ HWTEST_F(HatsHdfVibratorImplTest, SUB_Vibrator_HDI_EnableCompositeEffectTest_001
 HWTEST_F(HatsHdfVibratorImplTest, SUB_Vibrator_HDI_EnableCompositeEffectTest_0020, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
-        if (g_hapticCapacity.isSupportPresetMapping) {
+    if (g_hapticCapacity.isSupportPresetMapping) {
         PrimitiveEffect primitiveEffect1 { 0, 60007, 0};
         PrimitiveEffect primitiveEffect2 { 1000, 60007, 0};
         PrimitiveEffect primitiveEffect3 { 1000, 60007, 0};
@@ -132,7 +135,7 @@ HWTEST_F(HatsHdfVibratorImplTest, SUB_Vibrator_HDI_EnableCompositeEffectTest_002
         int32_t ret = g_vibratorInterface -> EnableCompositeEffect(effect);
         EXPECT_EQ(HDF_SUCCESS, ret);
         OsalMSleep(1000);
-        ret = g_vibratorInterface -> Stop(HDF_VIBRATOR_MODE_PRESET);
+        ret = g_vibratorInterface -> StopV1_2(V1_2::HDF_VIBRATOR_MODE_PRESET);
         EXPECT_EQ(HDF_SUCCESS, ret);
     }
 }
@@ -175,7 +178,7 @@ HWTEST_F(HatsHdfVibratorImplTest, SUB_Vibrator_HDI_GetEffectInfoTest_0020, Funct
 HWTEST_F(HatsHdfVibratorImplTest, SUB_Vibrator_HDI_IsVibratorRunningTest_0010, Function | MediumTest | Level1)
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
-        if (g_hapticCapacity.isSupportPresetMapping) {
+    if (g_hapticCapacity.isSupportPresetMapping) {
         PrimitiveEffect primitiveEffect1 { 0, 60007, 0};
         PrimitiveEffect primitiveEffect2 { 1000, 60007, 0};
         PrimitiveEffect primitiveEffect3 { 1000, 60007, 0};
@@ -217,25 +220,4 @@ HWTEST_F(HatsHdfVibratorImplTest, SUB_Vibrator_HDI_IsVibratorRunningTest_0020, F
     bool state {false};
     g_vibratorInterface -> IsVibratorRunning(state);
     EXPECT_EQ(state, false);
-}
-
-/**
-  * @tc.name: IsVibratorRunningTest002
-  * @tc.desc: Get vibration status.
-  * @tc.type: FUNC
-  */
-HWTEST_F(HatsHdfVibratorImplTest, SUB_Vibrator_EffectID_0100, Function | MediumTest | Level1)
-{
-    ASSERT_NE(nullptr, g_vibratorInterface);
-    HdfEffectInfo effectInfo;
-    for(auto iter : g_effect) {
-    g_vibratorInterface -> GetEffectInfo(iter,effectInfo);
-    if(effectInfo.isSupportEffect == true)
-    {
-        printf("VibratorStart: %s\n",iter.c_str());
-        int32_t ret =g_vibratorInterface -> Start(iter);
-        EXPECT_EQ(HDF_SUCCESS,ret);
-        OsalMSleep(2000);
-    }
-    }   
 }

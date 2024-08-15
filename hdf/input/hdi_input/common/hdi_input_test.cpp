@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -70,14 +70,13 @@ void HdiInputTest::SetUpTestCase()
         g_HasDev = true;
         printf("%s: scan deviceIndex:%d,devType:%d. \n", __func__, g_allDev[0].devIndex, g_allDev[0].devType);
     }
-    for (int32_t i = 1; i < MAX_DEVICES; i++) {
+    for (int32_t i = 0; i < MAX_DEVICES; i++) {
         if (g_allDev[i].devIndex == 0) {
             break;
         }
         printf("%s: scan deviceIndex:%d,devType:%d. \n", __func__, g_allDev[i].devIndex, g_allDev[i].devType);
         g_HasDev = true;
     }
-}
 
 void HdiInputTest::TearDownTestCase()
 {
@@ -180,13 +179,13 @@ static void CloseOnlineDev()
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_4500
+  * @tc.number: SUB_Driver_Input_Hdi_0100
   * @tc.name: open input device test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4500, Function | MediumTest | Level1)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0100, Function | MediumTest | Level1)
 {
     HDF_LOGI("%s: [Input] RegisterCallbackAndReportData001 enter \n", __func__);
     int32_t ret;
@@ -199,13 +198,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4500, Function | MediumTest | Level1
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_2900
+  * @tc.number: SUB_Driver_Input_Hdi_0200
   * @tc.name: open input device test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2900, Function | MediumTest | Level3)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0200, Function | MediumTest | Level3)
 {
     HDF_LOGI("%s: [Input] HotPlugCallback Testcase enter\n", __func__);
 
@@ -235,13 +234,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2900, Function | MediumTest | Level3
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_2500
+  * @tc.number: SUB_Driver_Input_Hdi_0300
   * @tc.name: open input device test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2500, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0300, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -258,13 +257,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2500, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_2800
+  * @tc.number: SUB_Driver_Input_Hdi_0400
   * @tc.name: open input device error test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2800, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0400, Function | MediumTest | Level0)
 {
     ASSERT_EQ(g_HasDev, true);
     INPUT_CHECK_NULL_POINTER(g_inputInterface, INPUT_NULL_PTR);
@@ -278,12 +277,12 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2800, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_0400
+  * @tc.number: SUB_Driver_Input_Hdi_0500
   * @tc.name: close input device test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0400, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0500, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -297,13 +296,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0400, Function | MediumTest | Level0
     EXPECT_EQ(ret, INPUT_SUCCESS);
 }
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_0300
+  * @tc.number: SUB_Driver_Input_Hdi_0600
   * @tc.name: close input device error test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0300, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0600, Function | MediumTest | Level0)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret = 0;
@@ -314,13 +313,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0300, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_1700
+  * @tc.number: SUB_Driver_Input_Hdi_0700
   * @tc.name: get input device id info test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1700, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0700, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -345,13 +344,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1700, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_1100
+  * @tc.number: SUB_Driver_Input_Hdi_0800
   * @tc.name: get input device id error test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SSUB_Driver_Input_Hdi_1100, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0800, Function | MediumTest | Level0)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret = 0;
@@ -368,13 +367,13 @@ HWTEST_F(HdiInputTest, SSUB_Driver_Input_Hdi_1100, Function | MediumTest | Level
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_1600
+  * @tc.number: SUB_Driver_Input_Hdi_0900
   * @tc.name: get input device list info test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1600, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0900, Function | MediumTest | Level0)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -393,13 +392,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1600, Function | MediumTest | Level0
     }
 }
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_1500
+  * @tc.number: SUB_Driver_Input_Hdi_1000
   * @tc.name: get input device list info error test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1500, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1000, Function | MediumTest | Level0)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -415,13 +414,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1500, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_1000
+  * @tc.number: SUB_Driver_Input_Hdi_1100
   * @tc.name: get input device type test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1000, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1100, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -436,13 +435,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1000, Function | MediumTest | Level0
     EXPECT_EQ(ret, INPUT_SUCCESS);
 }
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_0900
+  * @tc.number: SUB_Driver_Input_Hdi_1200
   * @tc.name: get input device type error test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0900, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1200, Function | MediumTest | Level0)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -457,13 +456,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0900, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_0600
+  * @tc.number: SUB_Driver_Input_Hdi_1300
   * @tc.name: get input device chip info test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0600, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1300, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -477,14 +476,15 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0600, Function | MediumTest | Level0
     int32_t ret = INPUT_SUCCESS;
     EXPECT_EQ(ret, INPUT_SUCCESS);
 }
+
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_0500
+  * @tc.number: SUB_Driver_Input_Hdi_1400
   * @tc.name: get input device chip info error test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0500, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1400, Function | MediumTest | Level0)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -501,13 +501,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0500, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_1400
+  * @tc.number: SUB_Driver_Input_Hdi_1500
   * @tc.name: get input device info test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1400, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1500, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -524,13 +524,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1400, Function | MediumTest | Level0
     EXPECT_EQ(ret, INPUT_SUCCESS);
 }
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_4900
+  * @tc.number: SUB_Driver_Input_Hdi_1600
   * @tc.name: set device power status test-INPUT_LOW_POWER
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4900, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1600, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -548,13 +548,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4900, Function | MediumTest | Level0
     EXPECT_EQ(ret, INPUT_SUCCESS);
 }
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_5100
+  * @tc.number: SUB_Driver_Input_Hdi_1700
   * @tc.name: set device power status test-INPUT_SUSPEND
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_5100, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1700, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -573,13 +573,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_5100, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_5000
+  * @tc.number: SUB_Driver_Input_Hdi_1800
   * @tc.name: set device power status test-INPUT_RESUME
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_5000, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1800, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -597,13 +597,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_5000, Function | MediumTest | Level0
     EXPECT_EQ(ret, INPUT_SUCCESS);
 }
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_4800
+  * @tc.number: SUB_Driver_Input_Hdi_1900
   * @tc.name: set device poewr status error test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4800, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1900, Function | MediumTest | Level0)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -618,13 +618,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4800, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_4400
+  * @tc.number: SUB_Driver_Input_Hdi_2000
   * @tc.name: set device power status error test_2
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4400, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2000, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -648,13 +648,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4400, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_5300
+  * @tc.number: SUB_Driver_Input_Hdi_2100
   * @tc.name: set device power status error test_2
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_5300, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2100, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -679,13 +679,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_5300, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_2100
+  * @tc.number: SUB_Driver_Input_Hdi_2200
   * @tc.name: get device poewr status test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2100, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2200, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -704,13 +704,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2100, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_2200
+  * @tc.number: SUB_Driver_Input_Hdi_2300
   * @tc.name: get device poewr status test-INPUT_SUSPEND
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2200, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2300, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -729,13 +729,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2200, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_1900
+  * @tc.number: SUB_Driver_Input_Hdi_2400
   * @tc.name: get device poewr status test-INPUT_LOW_POWER
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1900, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2400, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -754,13 +754,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1900, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_2000
+  * @tc.number: SUB_Driver_Input_Hdi_2500
   * @tc.name: get device poewr status test-INPUT_POWER_STATUS_UNKNOWN
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2000, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2500, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -779,13 +779,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2000, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_1800
+  * @tc.number: SUB_Driver_Input_Hdi_2600
   * @tc.name: get device poewr status error test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1800, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2600, Function | MediumTest | Level0)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -800,13 +800,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_1800, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_2400
+  * @tc.number: SUB_Driver_Input_Hdi_2700
   * @tc.name: get device vendor name test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2400, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2700, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -822,13 +822,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2400, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_2300
+  * @tc.number: SUB_Driver_Input_Hdi_2800
   * @tc.name: get device vendor name error test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2300, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2800, Function | MediumTest | Level0)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -846,13 +846,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2300, Function | MediumTest | Level0
 
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_0800
+  * @tc.number: SUB_Driver_Input_Hdi_2900
   * @tc.name: get device chip name test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0800, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_2900, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -867,13 +867,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0800, Function | MediumTest | Level0
     EXPECT_EQ(ret, INPUT_SUCCESS);
 }
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_0700
+  * @tc.number: SUB_Driver_Input_Hdi_3000
   * @tc.name: get device chip name error test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0700, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3000, Function | MediumTest | Level0)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -890,13 +890,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_0700, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_4700
+  * @tc.number: SUB_Driver_Input_Hdi_3100
   * @tc.name: set device gesture mode test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4700, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3100, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -911,13 +911,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4700, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_4600
+  * @tc.number: SUB_Driver_Input_Hdi_3200
   * @tc.name: set device gesture mode error test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4600, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3200, Function | MediumTest | Level0)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -930,13 +930,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4600, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_3700
+  * @tc.number: SUB_Driver_Input_Hdi_3300
   * @tc.name: Run Capacitance test-BASE_TEST
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3700, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3300, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -952,13 +952,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3700, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_3800
+  * @tc.number: SUB_Driver_Input_Hdi_3400
   * @tc.name: Run Capacitance test-FULL_TEST
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3800, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3400, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -974,13 +974,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3800, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_3900
+  * @tc.number: SUB_Driver_Input_Hdi_3500
   * @tc.name: Run Capacitance test-MMI_TEST
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3900, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3500, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -996,13 +996,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3900, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_4000
+  * @tc.number: SUB_Driver_Input_Hdi_3600
   * @tc.name: Run Capacitance test-RUNNING_TEST
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4000, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3600, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -1018,13 +1018,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4000, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_4100
+  * @tc.number: SUB_Driver_Input_Hdi_3700
   * @tc.name: Run Capacitance test-TEST_TYPE_UNKNOWN
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4100, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3700, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -1040,13 +1040,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4100, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_3500
+  * @tc.number: SUB_Driver_Input_Hdi_3800
   * @tc.name: Run Capacitance error test-MMI_TEST
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3500, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3800, Function | MediumTest | Level0)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -1065,13 +1065,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3500, Function | MediumTest | Level0
     EXPECT_NE(ret, INPUT_SUCCESS);
 }
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_3300
+  * @tc.number: SUB_Driver_Input_Hdi_3900
   * @tc.name: Run Capacitance error test-BASE_TEST
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3300, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3900, Function | MediumTest | Level0)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -1091,13 +1091,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3300, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_3400
+  * @tc.number: SUB_Driver_Input_Hdi_4000
   * @tc.name: Run Capacitance error test-FULL_TEST
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3400, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4000, Function | MediumTest | Level0)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -1117,13 +1117,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3400, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_3600
+  * @tc.number: SUB_Driver_Input_Hdi_4100
   * @tc.name: Run Capacitance error test-RUNNING_TEST
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3600, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4100, Function | MediumTest | Level0)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -1142,13 +1142,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3600, Function | MediumTest | Level0
     EXPECT_NE(ret, INPUT_SUCCESS);
 }
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_4300
+  * @tc.number: SUB_Driver_Input_Hdi_4200
   * @tc.name: Run Extra Command test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4300, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4200, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);
@@ -1165,13 +1165,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4300, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_4200
+  * @tc.number: SUB_Driver_Input_Hdi_4300
   * @tc.name: Run Extra Command error test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4200, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4300, Function | MediumTest | Level0)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -1188,13 +1188,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4200, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_3000
+  * @tc.number: SUB_Driver_Input_Hdi_4400
   * @tc.name: Register Report Callback test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3000, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4400, Function | MediumTest | Level0)
 {
     ASSERT_EQ(g_HasDev, true);
     int32_t ret;
@@ -1208,13 +1208,13 @@ HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3000, Function | MediumTest | Level0
 }
 
 /**
-  * @tc.number: SUB_Driver_Input_Hdi_3100
+  * @tc.number: SUB_Driver_Input_Hdi_4500
   * @tc.name: Register Report Callback test
   * @tc.desc: [C- SOFTWARE -0010]
   * @tc.size: Medium
   * @tc.level: level 0
   */
-HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_3100, Function | MediumTest | Level0)
+HWTEST_F(HdiInputTest, SUB_Driver_Input_Hdi_4500, Function | MediumTest | Level0)
 {
     if (g_allDev[0].devType == INDEV_TYPE_TOUCH) {
         ASSERT_EQ(g_HasDev, true);

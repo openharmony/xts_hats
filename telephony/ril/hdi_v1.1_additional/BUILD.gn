@@ -19,6 +19,8 @@ import("../../../../tools/build/suite.gni")
 module_output_path = "hdf/ril"
 ohos_moduletest_suite("HatsHdfV1RilServiceAdditionalTest") {
   module_out_path = module_output_path
+  subsystem_name = "xts"
+  part_name = "hats"
 
   sources = [
     "hdf_ril_callback_common.cpp",

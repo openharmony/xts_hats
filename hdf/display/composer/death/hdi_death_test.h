@@ -17,7 +17,7 @@
 #define HDI_COMPOSER_UT_H
 #include "v1_0/display_composer_type.h"
 #include "v1_0/display_buffer_type.h"
-#include "v1_0/include/idisplay_composer_interface.h"
+#include "v1_2/include/idisplay_composer_interface.h"
 #include "display_test_utils.h"
 #include "gtest/gtest.h"
 #include <iremote_broker.h>

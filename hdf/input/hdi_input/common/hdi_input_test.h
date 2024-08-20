@@ -20,7 +20,7 @@ const int INIT_DEFAULT_VALUE = 255;
 const int KEEP_ALIVE_TIME_MS = 5000;
 const int TOUCH_INDEX = 1;
 const int MAX_DEVICES = 32;
-const int INVALID_INDEX = 5;
+const int INVALID_INDEX = 31;
 
 #define INPUT_CHECK_NULL_POINTER(pointer, ret) do { \
     if ((pointer) == nullptr) { \

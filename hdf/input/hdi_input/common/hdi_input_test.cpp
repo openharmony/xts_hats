@@ -70,12 +70,15 @@ void HdiInputTest::SetUpTestCase()
         g_HasDev = true;
         printf("%s: scan deviceIndex:%d,devType:%d. \n", __func__, g_allDev[0].devIndex, g_allDev[0].devType);
     }
-    for (int32_t i = 1; i < MAX_DEVICES; i++) {
+    for (int32_t i = 0; i < MAX_DEVICES; i++) {
         if (g_allDev[i].devIndex == 0) {
             break;
         }
         printf("%s: scan deviceIndex:%d,devType:%d. \n", __func__, g_allDev[i].devIndex, g_allDev[i].devType);
         g_HasDev = true;
+    }
+    if (!g_HasDev) {
+        HDF_LOGE("no input devices, please check .\n");
     }
 }
 

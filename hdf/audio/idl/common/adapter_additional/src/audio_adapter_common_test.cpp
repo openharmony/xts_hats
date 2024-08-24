@@ -750,7 +750,11 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testReleaseAudioRoute001, TestSize.Lev
         .sinksLen = 1,
     };
     int32_t ret = adapter_->UpdateAudioRoute(adapter_, &route, &routeHandle);
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+    ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+#else
     ASSERT_EQ(HDF_SUCCESS, ret);
+#endif
     ret = adapter_->ReleaseAudioRoute(adapter_, routeHandle);
 #if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);

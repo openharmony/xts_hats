@@ -176,6 +176,7 @@ void Test::DefaultInfosPreview(
     DefaultPreview(infos);
     std::shared_ptr<StreamConsumer> consumer_pre = std::make_shared<StreamConsumer>();
     consumer_pre->streamIntent_ = infos->v1_0.intent_;
+    consumer_pre->streamId = infos->v1_0.streamId_;
     infos->v1_0.bufferQueue_ = consumer_pre->CreateProducerSeq([this](void* addr, uint32_t size) {
         DumpImageFile(streamIdPreview, "yuv", addr, size);
     });
@@ -189,6 +190,7 @@ void Test::DefaultInfosCapture(
     DefaultCapture(infos);
     std::shared_ptr<StreamConsumer> consumer_capture = std::make_shared<StreamConsumer>();
     consumer_capture->streamIntent_ = infos->v1_0.intent_;
+    consumer_capture->streamId = infos->v1_0.streamId_;
     infos->v1_0.bufferQueue_ = consumer_capture->CreateProducerSeq([this](void* addr, uint32_t size) {
         DumpImageFile(streamIdCapture, "jpeg", addr, size);
     });
@@ -381,7 +383,7 @@ void Test::StreamConsumer::CalculateFps(int64_t timestamp, int32_t streamId)
 
 void Test::StreamConsumer::ReturnTimeStamp(int64_t *g_timestamp, int64_t timestamp, enum StreamIntent streamIntent_)
 {
-    if (streamIntent_ == StreamIntent::STILL_CAPTURE) {
+    if (streamIntent_ != StreamIntent::PREVIEW) {
         if (g_timestamp[0] == 0) {
             g_timestamp[0] = timestamp;
         } else {

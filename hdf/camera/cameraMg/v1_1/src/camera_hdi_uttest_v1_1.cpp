@@ -291,16 +291,17 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_QuickThumbnail_0200, TestSize.Leve
     cameraTest->streamInfoCapture = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
     cameraTest->streamInfoCapture->extendedStreamInfos = {extendedStreamInfo};
     cameraTest->DefaultInfosCapture(cameraTest->streamInfoCapture);
-    consumer2->streamIntent_ = cameraTest->streamInfoCapture->v1_0.intent_;
+    consumer2->streamIntent_ = StreamIntent::ANALYZE;
+    consumer2->streamId = cameraTest->streamInfoCapture->v1_0.streamId_;
     cameraTest->streamInfosV1_1.push_back(*cameraTest->streamInfoCapture);
 
     cameraTest->rc = cameraTest->streamOperator_V1_1->CreateStreams_V1_1(cameraTest->streamInfosV1_1);
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
     cameraTest->rc = cameraTest->streamOperator_V1_1->CommitStreams(OperationMode::NORMAL, cameraTest->abilityVec);
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
-    sleep(UT_SECOND_TIMES);
     cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
     cameraTest->StartCapture(cameraTest->streamIdCapture, cameraTest->captureIdCapture, false, false);
+    sleep(UT_SECOND_TIMES);
     timeStampThumbnail = OHOS::Camera::Test::StreamConsumer::g_timestamp[0];
     timeStampCapture = OHOS::Camera::Test::StreamConsumer::g_timestamp[1];
     EXPECT_EQ(true, timeStampThumbnail == timeStampCapture);

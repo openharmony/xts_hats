@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2022-2023. All rights reserved.
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -26,7 +26,7 @@ const int32_t DEFAULT_COMBO_SIZE = 6;
 const int32_t WLAN_MAX_NUM_STA_WITH_AP = 4;
 const int32_t WLAN_FREQ_MAX_NUM = 35;
 const int32_t WLAN_TX_POWER = 160;
-const char *g_wlanInterfaceService = "wlan_interface_service";
+const char *WLAN_SERVICE_NAME = "wlan_interface_service";
 class HdfWifiDirectTest : public testing::Test {
 public:
     static void SetUpTestCase();
@@ -39,7 +39,7 @@ static struct IWlanInterface *g_wlanObj = nullptr;
 struct IWlanCallback *g_wlanCallbackObj = nullptr;
 void HdfWifiDirectTest::SetUpTestCase()
 {
-    g_wlanObj = IWlanInterfaceGetInstance(g_wlanInterfaceService, true);
+    g_wlanObj = IWlanInterfaceGetInstance(WLAN_SERVICE_NAME, true);
     g_wlanCallbackObj = WlanCallbackServiceGet();
     ASSERT_TRUE(g_wlanObj != nullptr);
     ASSERT_TRUE(g_wlanCallbackObj != nullptr);
@@ -47,7 +47,7 @@ void HdfWifiDirectTest::SetUpTestCase()
 
 void HdfWifiDirectTest::TearDownTestCase()
 {
-    IWlanInterfaceReleaseInstance(g_wlanInterfaceService, g_wlanObj, true);
+    IWlanInterfaceReleaseInstance(WLAN_SERVICE_NAME, g_wlanObj, true);
     WlanCallbackServiceRelease(g_wlanCallbackObj);
 }
 

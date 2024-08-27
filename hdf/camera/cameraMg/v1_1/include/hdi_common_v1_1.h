@@ -187,7 +187,6 @@ public:
         const int64_t ONESECOND_OF_MICROSECOND_UNIT = 1000000000;
         int64_t interval_ = ONESECOND_OF_MICROSECOND_UNIT;
         enum StreamIntent streamIntent_ = StreamIntent::PREVIEW;
-        int32_t streamId = -1;
     };
 
     class DemoCameraDeviceCallback : public ICameraDeviceCallback {

@@ -36,7 +36,6 @@ public:
     int32_t SuspendRender() override;
 
     int32_t StopRender() override;
-
 };
 } // V1_0
 } // A2dp

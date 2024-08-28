@@ -343,5 +343,4 @@ HWTEST_F(HdfBluetoothHdiTest, SUB_DriverSystem_HdiBluetoothHciType_0100, TestSiz
     BtStatus btstatus_unknown = BtStatus::UNKNOWN;
     std::cout << "BtStatus UNKNOWN = " << btstatus_unknown << std::endl;
     EXPECT_EQ(btstatus_unknown, 2);
-
 }

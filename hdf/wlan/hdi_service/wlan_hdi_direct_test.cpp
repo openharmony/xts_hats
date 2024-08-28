@@ -16,8 +16,7 @@
 #include <servmgr_hdi.h>
 #include "v1_3/iwlan_interface.h"
 #include "wlan_callback_impl.h"
-#include "securec.h"
-#include "wlan_hdi_types.h"
+#include "wlan_impl.h"
 
 #define HDF_LOG_TAG service_manager_test
 using namespace testing::ext;
@@ -28,7 +27,6 @@ const int32_t WLAN_MAX_NUM_STA_WITH_AP = 4;
 const int32_t WLAN_FREQ_MAX_NUM = 35;
 const int32_t WLAN_TX_POWER = 160;
 const char *WLAN_SERVICE_NAME = "wlan_interface_service";
-
 class HdfWifiDirectTest : public testing::Test {
 public:
     static void SetUpTestCase();

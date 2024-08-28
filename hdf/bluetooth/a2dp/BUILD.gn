@@ -52,7 +52,7 @@ ohos_moduletest_suite("HatsBluetootha2dpTest") {
   external_deps += [ "ipc:ipc_single" ]
 
   subsystem_name = "xts"
-  part_name = "hats"
+  part_name = "xts_hats"
 }
 
 config("hdf_bluetooth") {

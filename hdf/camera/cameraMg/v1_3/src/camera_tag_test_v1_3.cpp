@@ -535,15 +535,14 @@ HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_ProfessionalVideo_0800, TestSize.L
             printf("OHOS_ABILITY_AE_COMPENSATION_STEP %s\n", ss.str().c_str());
             ss.clear();
             ss.str("");
-        } else {
-            for (size_t i = 0; i < entry.count; i++) {
-                ss << entry.data.r[i].numerator << "/" << entry.data.r[i].denominator <<" ";
-                if ((i != 0) && (i % step == 0 || i == entry.count - 1)) {
-                    CAMERA_LOGI("%{public}s\n", ss.str().c_str());
-                    printf("OHOS_ABILITY_AE_COMPENSATION_STEP %s\n", ss.str().c_str());
-                    ss.clear();
-                    ss.str("");
-                }
+        }
+        for (size_t i = 0; i < entry.count; i++) {
+            ss << entry.data.r[i].numerator << "/" << entry.data.r[i].denominator <<" ";
+            if ((i != 0) && (i % step == 0 || i == entry.count - 1)) {
+                CAMERA_LOGI("%{public}s\n", ss.str().c_str());
+                printf("OHOS_ABILITY_AE_COMPENSATION_STEP %s\n", ss.str().c_str());
+                ss.clear();
+                ss.str("");
             }
         }
     }

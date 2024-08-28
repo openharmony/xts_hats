@@ -529,7 +529,7 @@ HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_ProfessionalVideo_0800, TestSize.L
         printf("OHOS_ABILITY_AE_COMPENSATION_STEP f value count %d\n", entry.count);
         constexpr size_t step = 4; // print step
         std::stringstream ss;
-        if (entry.count ==1){
+        if (entry.count ==1) {
             ss << entry.data.r[0].numerator << "/" << entry.data.r[0].denominator <<" ";
             CAMERA_LOGI("%{public}s\n", ss.str().c_str());
             printf("OHOS_ABILITY_AE_COMPENSATION_STEP %s\n", ss.str().c_str());

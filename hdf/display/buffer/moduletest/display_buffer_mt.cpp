@@ -1104,8 +1104,8 @@ HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0750, TestSize.Level1)
 }
 
 HWTEST_F(DisplayBufferMt, SUB_DriverSystem_DisplayBuffer_0760, TestSize.Level1)
-{    
-    int ret;    
+{
+    int ret;
     ret = OHOS::HDI::Display::Composer::V1_0::DispCmd::REPLY_CMD_COMMIT;
     EXPECT_EQ(514, ret);
 }

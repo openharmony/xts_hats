@@ -2397,7 +2397,7 @@ HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetSimStatus_V1_0100, Function | 
         return;
     }
     int32_t ret = g_rilInterface->GetSimStatus(SLOTID_1, GetSerialId());
-    if (ret != 2){
+    if (ret != 2) {
         WaitFor(WAIT_TIME_SECOND);
         EXPECT_EQ(SUCCESS, ret);
         ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_STATUS));
@@ -2412,7 +2412,7 @@ HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetSimStatus_V1_0200, Function | 
         return;
     }
     int32_t ret = g_rilInterface->GetSimStatus(SLOTID_2, GetSerialId());
-    if (ret != 2){
+    if (ret != 2) {
         WaitFor(WAIT_TIME_SECOND);
         EXPECT_EQ(SUCCESS, ret);
         ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_STATUS));

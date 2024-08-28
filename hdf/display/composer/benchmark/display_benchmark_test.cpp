@@ -142,7 +142,7 @@ static void AdjustLayerSettings(std::vector<LayerSettings> &settings, uint32_t w
             setting.displayRect.y = static_cast<uint32_t>(setting.rectRatio.y * h);
             DISPLAY_TEST_LOGE("display rect adust form %f %f %f %f to %{public}d %{public}d %{public}d %{public}d ",
                 setting.rectRatio.x, setting.rectRatio.y, setting.rectRatio.w,
-                setting.rectRatio.h,setting.displayRect.x,setting.displayRect.y,
+                setting.rectRatio.h, setting.displayRect.x, setting.displayRect.y,
                 setting.displayRect.w, setting.displayRect.h);
         }
 

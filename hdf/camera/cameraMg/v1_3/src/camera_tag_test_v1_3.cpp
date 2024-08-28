@@ -524,18 +524,26 @@ HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_ProfessionalVideo_0800, TestSize.L
     EXPECT_NE(data, nullptr);
     camera_metadata_item_t entry;
     int ret = FindCameraMetadataItem(data, OHOS_ABILITY_AE_COMPENSATION_STEP, &entry);
-    if (ret == HDI::Camera::V1_0::NO_ERROR && entry.data.f != nullptr && entry.count > 0) {
+    if (ret == HDI::Camera::V1_0::NO_ERROR && entry.data.r != nullptr && entry.count > 0) {
         CAMERA_LOGI("print tag<OHOS_ABILITY_AE_COMPENSATION_STEP> f value start.");
         printf("OHOS_ABILITY_AE_COMPENSATION_STEP f value count %d\n", entry.count);
         constexpr size_t step = 4; // print step
         std::stringstream ss;
-        for (size_t i = 0; i < entry.count; i++) {
-            ss << entry.data.r[i].numerator << "/" << entry.data.r[i].denominator <<" ";
-            if ((i != 0) && (i % step == 0 || i == entry.count - 1)) {
-                CAMERA_LOGI("%{public}s\n", ss.str().c_str());
-                printf("OHOS_ABILITY_AE_COMPENSATION_STEP %s\n", ss.str().c_str());
-                ss.clear();
-                ss.str("");
+        if (entry.count ==1){
+            ss << entry.data.r[0].numerator << "/" << entry.data.r[0].denominator <<" ";
+            CAMERA_LOGI("%{public}s\n", ss.str().c_str());
+            printf("OHOS_ABILITY_AE_COMPENSATION_STEP %s\n", ss.str().c_str());
+            ss.clear();
+            ss.str("");
+        } else {
+            for (size_t i = 0; i < entry.count; i++) {
+                ss << entry.data.r[i].numerator << "/" << entry.data.r[i].denominator <<" ";
+                if ((i != 0) && (i % step == 0 || i == entry.count - 1)) {
+                    CAMERA_LOGI("%{public}s\n", ss.str().c_str());
+                    printf("OHOS_ABILITY_AE_COMPENSATION_STEP %s\n", ss.str().c_str());
+                    ss.clear();
+                    ss.str("");
+                }
             }
         }
     }

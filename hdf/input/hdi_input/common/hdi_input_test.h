@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,7 +20,7 @@ const int INIT_DEFAULT_VALUE = 255;
 const int KEEP_ALIVE_TIME_MS = 5000;
 const int TOUCH_INDEX = 1;
 const int MAX_DEVICES = 32;
-const int INVALID_INDEX = 5;
+const int INVALID_INDEX = 31;
 
 #define INPUT_CHECK_NULL_POINTER(pointer, ret) do { \
     if ((pointer) == nullptr) { \

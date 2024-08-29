@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -70,12 +70,15 @@ void HdiInputTest::SetUpTestCase()
         g_HasDev = true;
         printf("%s: scan deviceIndex:%d,devType:%d. \n", __func__, g_allDev[0].devIndex, g_allDev[0].devType);
     }
-    for (int32_t i = 1; i < MAX_DEVICES; i++) {
+    for (int32_t i = 0; i < MAX_DEVICES; i++) {
         if (g_allDev[i].devIndex == 0) {
             break;
         }
         printf("%s: scan deviceIndex:%d,devType:%d. \n", __func__, g_allDev[i].devIndex, g_allDev[i].devType);
         g_HasDev = true;
+    }
+    if (!g_HasDev) {
+        HDF_LOGE("no input devices, please check .\n");
     }
 }
 

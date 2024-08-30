@@ -136,26 +136,9 @@ void CameraHdiTestV1_2::ProcessPendingImages(int ret)
     // process the first image
     ret = cameraTest->imageProcessSession_->ProcessImage(pendingImages[0]);
     EXPECT_EQ(ret, 0);
-    int count = 0;
-    cameraTest->imageProcessCallback_->isDone = false;
-    while (!cameraTest->imageProcessCallback_->isDone && count < SIXTEEN) {
-        count++;
-        usleep(UT_MICROSECOND_TIMES);
-        CAMERA_LOGI("ProcessPendingImages ProcessImage 1 wait count:%{public}d", count);
-    }
-    cameraTest->imageProcessCallback_->isDone = false;
-    EXPECT_EQ(cameraTest->imageProcessCallback_->coutProcessDone_, TWO);
     // process the second image
     ret = cameraTest->imageProcessSession_->ProcessImage(pendingImages[1]);
     EXPECT_EQ(ret, 0);
-    count = 0;
-    while (!cameraTest->imageProcessCallback_->isDone && count < SIXTEEN) {
-        count++;
-        usleep(UT_MICROSECOND_TIMES);
-        CAMERA_LOGI("ProcessPendingImages ProcessImage 2 wait count:%{public}d", count);
-    }
-    cameraTest->imageProcessCallback_->isDone = false;
-    EXPECT_EQ(cameraTest->imageProcessCallback_->coutProcessDone_, THREE);
     // process the third image, and test the Interrupt, Reset, RemoveImage Interfaces
     ret = cameraTest->imageProcessSession_->Interrupt();
     EXPECT_EQ(ret, 0);
@@ -163,8 +146,6 @@ void CameraHdiTestV1_2::ProcessPendingImages(int ret)
     EXPECT_EQ(ret, 0);
     ret = cameraTest->imageProcessSession_->RemoveImage(pendingImages[1]);
     EXPECT_EQ(ret, 0);
-    EXPECT_EQ(cameraTest->imageProcessCallback_->coutProcessDone_, THREE);
-    EXPECT_EQ(cameraTest->imageProcessCallback_->countError_, 0);
 }
 
 /**

@@ -132,7 +132,7 @@ OH_NN_ReturnCode HDICommon::ConvertModel(OHOS::sptr<V2_0::INnrtDevice> device_, 
     }
     // release model
     OH_NNModel_Destroy(&model);
-    if(model != nullptr) {
+    if (model != nullptr) {
         printf("[NNRtTest] OH_NNModel_Destroy failed.\n");
         return OH_NN_FAILED;
     }

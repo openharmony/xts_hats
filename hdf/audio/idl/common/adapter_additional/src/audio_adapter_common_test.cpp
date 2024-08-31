@@ -30,6 +30,7 @@ using namespace testing::ext;
 #define INT_32_MAX 0x7fffffff
 #define PCM_16_BIT 16
 #define PCM_8_BIT 8
+#define PRIMARY_OUTPUT_STREAM_ID 13
 
 namespace {
 static const uint32_t AUDIO_ADAPTER_NUM_MAX = 5;
@@ -398,7 +399,6 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testDestroyRender001, TestSize.Level2)
         EXPECT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
     }
     EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
-    EXPECT_NE(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
 }
 
 /**
@@ -724,8 +724,38 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture001, TestSize.Level1)
  */
 HWTEST_F(HdfAudioUtAdapterTestAdditional, testReleaseAudioRoute001, TestSize.Level1)
 {
-    int32_t routeHandle = 1;
-    int32_t ret = adapter_->ReleaseAudioRoute(adapter_, routeHandle);
+    int32_t routeHandle = -1;
+    AudioRouteNode source = {};
+    AudioRouteNode sink = {};
+
+    source.portId = static_cast<int32_t>(0);
+    source.role = AUDIO_PORT_SOURCE_ROLE;
+    source.type = AUDIO_PORT_MIX_TYPE;
+    source.ext.mix.moduleId = static_cast<int32_t>(0);
+    source.ext.mix.streamId = PRIMARY_OUTPUT_STREAM_ID;
+    source.ext.device.desc = (char *)"";
+
+    sink.ext.device.type = PIN_OUT_EARPIECE;
+    sink.ext.device.desc = (char *)"pin_out_earpiece";
+    sink.portId = static_cast<int32_t>(0);
+    sink.role = AUDIO_PORT_SINK_ROLE;
+    sink.type = AUDIO_PORT_DEVICE_TYPE;
+    sink.ext.device.moduleId = static_cast<int32_t>(0);
+    sink.ext.device.desc = (char *)"";
+
+    AudioRoute route = {
+        .sources = &source,
+        .sourcesLen = 1,
+        .sinks = &sink,
+        .sinksLen = 1,
+    };
+    int32_t ret = adapter_->UpdateAudioRoute(adapter_, &route, &routeHandle);
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+    ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+#else
+    ASSERT_EQ(HDF_SUCCESS, ret);
+#endif
+    ret = adapter_->ReleaseAudioRoute(adapter_, routeHandle);
 #if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
 #else

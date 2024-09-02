@@ -298,9 +298,9 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_QuickThumbnail_0200, TestSize.Leve
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
     cameraTest->rc = cameraTest->streamOperator_V1_1->CommitStreams(OperationMode::NORMAL, cameraTest->abilityVec);
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
-    sleep(UT_SECOND_TIMES);
     cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
     cameraTest->StartCapture(cameraTest->streamIdCapture, cameraTest->captureIdCapture, false, false);
+    sleep(UT_SECOND_TIMES);
     timeStampThumbnail = OHOS::Camera::Test::StreamConsumer::g_timestamp[0];
     timeStampCapture = OHOS::Camera::Test::StreamConsumer::g_timestamp[1];
     EXPECT_EQ(true, timeStampThumbnail == timeStampCapture);

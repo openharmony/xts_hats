@@ -310,6 +310,8 @@ public:
     int32_t GetLinkCapabilityResponse(
         const RilRadioResponseInfo &responseInfo, const DataLinkCapability &dataLinkCapability) override;
     int32_t CleanAllConnectionsResponse(const RilRadioResponseInfo &responseInfo) override;
+    int32_t NcfgFinishedResult(const RilRadioResponseInfo &responseInfo, int32_t mode) override;
+    int32_t RestartRildNvMatch(const RilRadioResponseInfo &responseInfo, int32_t mode) override;
 
     // Modem
     int32_t RadioStateUpdated(const RilRadioResponseInfo &responseInfo, int32_t state) override;
@@ -1917,6 +1919,18 @@ int32_t RilCallback::VoiceRadioTechUpdated(
 int32_t RilCallback::DsdsModeUpdated(const RilRadioResponseInfo &responseInfo, int32_t mode)
 {
     HDF_LOGI("DsdsModeUpdated mode : %{public}d", mode);
+    return 0;
+}
+
+int32_t RilCallback::NcfgFinishedResult(const RilRadioResponseInfo &responseInfo, int32_t state)
+{
+    HDF_LOGI("DsdsModeUpdated state : %{public}d", state);
+    return 0;
+}
+
+int32_t RilCallback::RestartRildNvMatch(const RilRadioResponseInfo &responseInfo, int32_t state)
+{
+    HDF_LOGI("DsdsModeUpdated state : %{public}d", state);
     return 0;
 }
 

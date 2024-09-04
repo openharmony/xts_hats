@@ -1597,6 +1597,18 @@ int32_t RilCallback::DsdsModeUpdated(const RilRadioResponseInfo &responseInfo, i
     return 0;
 }
 
+int32_t RilCallback::NcfgFinishedResult(const RilRadioResponseInfo &responseInfo, int32_t state)
+{
+    HDF_LOGI("NcfgFinishedResult state : %{public}d", state);
+    return 0;
+}
+
+int32_t RilCallback::RestartRildNvMatch(const RilRadioResponseInfo &responseInfo, int32_t state)
+{
+    HDF_LOGI("RestartRildNvMatch state : %{public}d", state);
+    return 0;
+}
+
 int32_t RilCallback::ShutDownResponse(const RilRadioResponseInfo &responseInfo)
 {
     g_shutDownResponseFlag = true;

@@ -1,0 +1,18 @@
+{
+    "description": "Configuration for HatsAccept4Test Tests",
+    "kits": [
+        {
+            "push": [
+                "HatsAccept4Test->/data/local/tmp/HatsAccept4Test"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsAccept4Test",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    }
+}

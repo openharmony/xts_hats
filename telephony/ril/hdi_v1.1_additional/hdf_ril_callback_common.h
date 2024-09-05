@@ -363,6 +363,9 @@ public:
     int32_t VoiceRadioTechUpdated(const RilRadioResponseInfo &responseInfo,
                                   const VoiceRadioTechnology &voiceRadioTechnology) override;
     int32_t DsdsModeUpdated(const RilRadioResponseInfo &responseInfo, int32_t mode) override;
+    int32_t NcfgFinishedResult(const RilRadioResponseInfo &responseInfo, int32_t state) override;
+    int32_t RestartRildNvMatch(const RilRadioResponseInfo &responseInfo, int32_t state) override;
+
     int32_t ShutDownResponse(const RilRadioResponseInfo &responseInfo) override;
     int32_t SetRadioStateResponse(const RilRadioResponseInfo &responseInfo) override;
     int32_t GetRadioStateResponse(const RilRadioResponseInfo &responseInfo, int32_t state) override;

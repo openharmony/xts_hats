@@ -11,14 +11,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//build/ohos_var.gni")
-import("//test/xts/hats/build.gni")
+import("//test/xts/tools/build/suite.gni")
+module_output_path = "hats/syscalls"
 
-group("HatsNetTest") {
-  testonly = true
-  deps = [
-    "accept4:HatsAccept4Test",
-    "bind:HatsBindTest",
-    "connect:HatsConnectTest",
-  ]
+ohos_moduletest_suite("HatsConnectTest") {
+  module_out_path = module_output_path
+  sources = [ "./ConnectApiTest.cpp" ]
+  deps = [ "//third_party/googletest:gtest_main" ]
+  include_dirs = [ "include" ]
+  cflags = [ "-Wno-error" ]
+  external_deps = [ "c_utils:utils" ]
+  subsystem_name = "kernel"
+  part_name = "hats"
 }

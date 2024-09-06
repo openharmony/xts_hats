@@ -1749,7 +1749,7 @@ HWTEST_F(HdiStreamUtTestAdditional, testDetachBufferQueue001, Function | MediumT
 /**
  * @tc.number : SUB_Driver_Camera_ChangeToOfflineStream_0100
  * @tc.name   : testChangeToOfflineStream001
- * @tc.desc   : ChangeToOfflineStream, StreamInfo->streamId_ = 1073741822, return success
+ * @tc.desc   : ChangeToOfflineStream, StreamInfo->streamId_ = 65535, return success
  */
 HWTEST_F(HdiStreamUtTestAdditional, testChangeToOfflineStream001, Function | MediumTest | Level1)
 {
@@ -1776,7 +1776,7 @@ HWTEST_F(HdiStreamUtTestAdditional, testChangeToOfflineStream001, Function | Med
     cameraTest->streamInfos.push_back(*cameraTest->streamInfo);
 
     cameraTest->streamInfoSnapshot = std::make_shared<StreamInfo>();
-    cameraTest->streamInfoSnapshot->streamId_ = 1073741822;
+    cameraTest->streamInfoSnapshot->streamId_ = 65535;
     cameraTest->streamInfoSnapshot->width_ = 720;
     cameraTest->streamInfoSnapshot->height_ = 480;
     cameraTest->streamInfoSnapshot->format_ = PIXEL_FMT_YCRCB_420_SP;
@@ -1802,7 +1802,7 @@ HWTEST_F(HdiStreamUtTestAdditional, testChangeToOfflineStream001, Function | Med
 
     int captureId = 2001;
     cameraTest->captureInfo = std::make_shared<CaptureInfo>();
-    cameraTest->captureInfo->streamIds_ = {1073741822};
+    cameraTest->captureInfo->streamIds_ = {65535};
     cameraTest->captureInfo->captureSetting_ = cameraTest->abilityVec;
     cameraTest->captureInfo->enableShutterCallback_ = true;
     bool isStreaming = true;
@@ -1822,7 +1822,7 @@ HWTEST_F(HdiStreamUtTestAdditional, testChangeToOfflineStream001, Function | Med
 
     EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
 
-    std::vector<int> streamIds = {1073741822};
+    std::vector<int> streamIds = {65535};
     cameraTest->rc = (CamRetCode)offlineStreamOperator->ReleaseStreams(streamIds);
     EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
 

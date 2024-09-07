@@ -1257,7 +1257,11 @@ HWTEST_F(CodecComponentTestAdditional, testUseBuffer002, Function | MediumTest |
     ASSERT_TRUE(g_component != nullptr);
     std::vector<int8_t> cmdData;
     auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_MAX, cmdData);
+#ifdef DISPLAY_COMMUNITY
     ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+    ASSERT_NE(ret, HDF_SUCCESS);
+#endif
 
     std::shared_ptr<OmxCodecBuffer> omxBuffer = std::make_shared<OmxCodecBuffer>();
     InitOmxCodecBuffer(*omxBuffer.get(), CODEC_BUFFER_TYPE_HANDLE);
@@ -1353,7 +1357,11 @@ HWTEST_F(CodecComponentTestAdditional, testUseBuffer007, Function | MediumTest |
     ASSERT_TRUE(g_component != nullptr);
     std::vector<int8_t> cmdData;
     auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_VENDOR_START_UNUSED, cmdData);
+#ifdef DISPLAY_COMMUNITY
     ASSERT_EQ(ret, HDF_SUCCESS);
+#else
+    ASSERT_NE(ret, HDF_SUCCESS);
+#endif
 
     std::shared_ptr<OmxCodecBuffer> omxBuffer = std::make_shared<OmxCodecBuffer>();
     InitOmxCodecBuffer(*omxBuffer.get(), CODEC_BUFFER_TYPE_HANDLE);

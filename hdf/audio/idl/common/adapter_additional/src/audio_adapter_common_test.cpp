@@ -382,7 +382,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateRender011, TestSize.Level1)
 /**
  * @tc.number: SUB_Driver_Audio_DestroyRender_0200
  * @tc.name: testDestroyRender001
- * @tc.desc: Verify the DestroyRender function when the renderId_ is invalid.
+ * @tc.desc: Verify the DestroyRender function when the renderId_ is valid.
  */
 HWTEST_F(HdfAudioUtAdapterTestAdditional, testDestroyRender001, TestSize.Level2)
 {

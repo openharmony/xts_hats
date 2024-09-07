@@ -131,12 +131,12 @@ public:
     }
     void TearDown()
     {
-        if (g_manager != nullptr && g_component != nullptr) {
-            g_manager->DestroyComponent(g_componentId);
-        }
         std::vector<int8_t> cmdData;
         if (g_component != nullptr) {
             g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_LOADED, cmdData);
+        }
+        if (g_manager != nullptr && g_component != nullptr) {
+            g_manager->DestroyComponent(g_componentId);
         }
         g_callback = nullptr;
         g_component = nullptr;
@@ -417,13 +417,12 @@ HWTEST_F(CodecComponentTestAdditional, testGetConfig001, Function | MediumTest |
 * @tc.number : SUB_Driver_Codec_GetConfig_0300
 * @tc.name   : testGetConfig002
 * @tc.desc   : When the index = OMX_IndexParamVideoPortFormat, structure inParamStruct->portIndex = OUTPUT_INDEX,
-                send the command failed
+                send the command failed,not initialized.
 */
 HWTEST_F(CodecComponentTestAdditional, testGetConfig002, Function | MediumTest | Level2)
 {
     ASSERT_TRUE(g_component != nullptr);
     CodecVideoPortFormatParam param;
-    InitParam(param);
     param.portIndex = OUTPUT_INDEX;
 
     std::vector<int8_t> inParam;
@@ -547,7 +546,7 @@ HWTEST_F(CodecComponentTestAdditional, testSetConfig004, Function | MediumTest |
 * @tc.number : SUB_Driver_Codec_SetConfig_0600
 * @tc.name   : testSetConfig005
 * @tc.desc   : When index=OMX_IndexCodecVideoPortFormat, Structure inParamStruct->portIndex=OUTPUT_INDEX,
-                sending command failed
+               not initialized,sending command failed.
 */
 HWTEST_F(CodecComponentTestAdditional, testSetConfig005, Function | MediumTest | Level2)
 {
@@ -582,7 +581,7 @@ HWTEST_F(CodecComponentTestAdditional, testSetConfig006, Function | MediumTest |
 * @tc.number : SUB_Driver_Codec_SetConfig_0800
 * @tc.name   : testSetConfig007
 * @tc.desc   : When index=OMX_IndexConfigVideoBitrate, structure inParamStruct->codecColorIndex=0,
-                command sent successfully
+                command sent failed.
 */
 HWTEST_F(CodecComponentTestAdditional, testSetConfig007, Function | MediumTest | Level1)
 {
@@ -600,7 +599,7 @@ HWTEST_F(CodecComponentTestAdditional, testSetConfig007, Function | MediumTest |
 /**
  * @tc.number : SUB_Driver_Codec_SetConfig_0900
  * @tc.name   : testSetConfig008
- * @tc.desc   : When index=OMX_IndexConfigVideoBitrate, structure inParamStruct->size=0, command sent successfully
+ * @tc.desc   : When index=OMX_IndexConfigVideoBitrate, structure inParamStruct->size=0, command sent failed.
  */
 HWTEST_F(CodecComponentTestAdditional, testSetConfig008, Function | MediumTest | Level1)
 {
@@ -612,14 +611,14 @@ HWTEST_F(CodecComponentTestAdditional, testSetConfig008, Function | MediumTest |
 
     std::vector<int8_t> inParam;
     ObjectToVector(param, inParam);
-    auto ret = g_component->SetConfig(OMX_IndexParamVideoPortFormat, inParam);
+    auto ret = g_component->SetConfig(OMX_IndexConfigVideoBitrate, inParam);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
 /**
  * @tc.number : SUB_Driver_Codec_SetConfig_1000
  * @tc.name   : testSetConfig009
  * @tc.desc   : When index=OMX_IndexConfigVideoBitrate, structure inParamStruct->codecColorFormat=0,
- *              command sent successfully
+ *              command sent failed.
  */
 HWTEST_F(CodecComponentTestAdditional, testSetConfig009, Function | MediumTest | Level1)
 {
@@ -866,6 +865,7 @@ HWTEST_F(CodecComponentTestAdditional, testGetExtensionIndex018, Function | Medi
     auto ret = g_component->GetExtensionIndex("12345！＠＃＄％", indexType);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
+#endif
 /**
  * @tc.number : SUB_Driver_Codec_GetState_0200
  * @tc.name   : testGetState001
@@ -879,6 +879,7 @@ HWTEST_F(CodecComponentTestAdditional, testGetState001, Function | MediumTest | 
     ASSERT_EQ(state, CODEC_STATE_LOADED);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
+#ifdef SUPPORT_OMX
 /**
  * @tc.number : SUB_Driver_Codec_ComponentTunnelRequest_0200
  * @tc.name   : testComponentTunnelRequest001
@@ -1458,9 +1459,17 @@ HWTEST_F(CodecComponentTestAdditional, testAllocateBuffer003, Function | MediumT
     InitOmxCodecBuffer(allocBuffer, CODEC_BUFFER_TYPE_AVSHARE_MEM_FD);
     struct OmxCodecBuffer outBuffer;
     err = g_component->AllocateBuffer(INPUT_INDEX, allocBuffer, outBuffer);
+#ifdef DISPLAY_COMMUNITY
     ASSERT_EQ(err, HDF_SUCCESS);
+#else
+    ASSERT_NE(err, HDF_SUCCESS);
+#endif
     err = g_component->FreeBuffer(INPUT_INDEX, outBuffer);
+#ifdef DISPLAY_COMMUNITY
     ASSERT_EQ(err, HDF_SUCCESS);
+#else
+    ASSERT_NE(err, HDF_SUCCESS);
+#endif
 }
 /**
  * @tc.number : SUB_Driver_Codec_AllocateBuffer_0500
@@ -1505,7 +1514,7 @@ HWTEST_F(CodecComponentTestAdditional, testFreeBuffer002, Function | MediumTest 
 {
     ASSERT_TRUE(g_component != nullptr);
     std::vector<int8_t> cmdData;
-    auto err = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateLoaded, cmdData);
+    auto err = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_IDLE, cmdData);
     ASSERT_EQ(err, HDF_SUCCESS);
 
     struct OmxCodecBuffer allocBuffer;
@@ -1525,7 +1534,7 @@ HWTEST_F(CodecComponentTestAdditional, testFreeBuffer003, Function | MediumTest 
 {
     ASSERT_TRUE(g_component != nullptr);
     std::vector<int8_t> cmdData;
-    auto err = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateLoaded, cmdData);
+    auto err = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_IDLE, cmdData);
     ASSERT_EQ(err, HDF_SUCCESS);
 
     struct OmxCodecBuffer allocBuffer;
@@ -1546,7 +1555,7 @@ HWTEST_F(CodecComponentTestAdditional, testFreeBuffer004, Function | MediumTest 
 {
     ASSERT_TRUE(g_component != nullptr);
     std::vector<int8_t> cmdData;
-    auto err = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateLoaded, cmdData);
+    auto err = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_IDLE, cmdData);
     ASSERT_EQ(err, HDF_SUCCESS);
 
     struct OmxCodecBuffer allocBuffer;
@@ -1567,7 +1576,7 @@ HWTEST_F(CodecComponentTestAdditional, testFreeBuffer005, Function | MediumTest 
 {
     ASSERT_TRUE(g_component != nullptr);
     std::vector<int8_t> cmdData;
-    auto err = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateLoaded, cmdData);
+    auto err = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_IDLE, cmdData);
     ASSERT_EQ(err, HDF_SUCCESS);
 
     struct OmxCodecBuffer allocBuffer;
@@ -1588,7 +1597,7 @@ HWTEST_F(CodecComponentTestAdditional, testFreeBuffer006, Function | MediumTest 
 {
     ASSERT_TRUE(g_component != nullptr);
     std::vector<int8_t> cmdData;
-    auto err = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateLoaded, cmdData);
+    auto err = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_IDLE, cmdData);
     ASSERT_EQ(err, HDF_SUCCESS);
 
     struct OmxCodecBuffer allocBuffer;
@@ -1609,7 +1618,7 @@ HWTEST_F(CodecComponentTestAdditional, testFreeBuffer007, Function | MediumTest 
 {
     ASSERT_TRUE(g_component != nullptr);
     std::vector<int8_t> cmdData;
-    auto err = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateLoaded, cmdData);
+    auto err = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_IDLE, cmdData);
     ASSERT_EQ(err, HDF_SUCCESS);
 
     struct OmxCodecBuffer allocBuffer;
@@ -1630,7 +1639,7 @@ HWTEST_F(CodecComponentTestAdditional, testFreeBuffer008, Function | MediumTest 
 {
     ASSERT_TRUE(g_component != nullptr);
     std::vector<int8_t> cmdData;
-    auto err = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateLoaded, cmdData);
+    auto err = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_IDLE, cmdData);
     ASSERT_EQ(err, HDF_SUCCESS);
 
     struct OmxCodecBuffer allocBuffer;
@@ -1651,7 +1660,7 @@ HWTEST_F(CodecComponentTestAdditional, testFreeBuffer009, Function | MediumTest 
 {
     ASSERT_TRUE(g_component != nullptr);
     std::vector<int8_t> cmdData;
-    auto err = g_component->SendCommand(CODEC_COMMAND_STATE_SET, OMX_StateLoaded, cmdData);
+    auto err = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_IDLE, cmdData);
     ASSERT_EQ(err, HDF_SUCCESS);
 
     struct OmxCodecBuffer allocBuffer;
@@ -1679,9 +1688,17 @@ HWTEST_F(CodecComponentTestAdditional, testFreeBuffer010, Function | MediumTest 
     InitOmxCodecBuffer(allocBuffer, CODEC_BUFFER_TYPE_AVSHARE_MEM_FD);
     struct OmxCodecBuffer outBuffer;
     err = g_component->AllocateBuffer(INPUT_INDEX, allocBuffer, outBuffer);
+#ifdef DISPLAY_COMMUNITY
     ASSERT_EQ(err, HDF_SUCCESS);
+#else
+    ASSERT_NE(err, HDF_SUCCESS);
+#endif
     err = g_component->FreeBuffer(INPUT_INDEX, outBuffer);
+#ifdef DISPLAY_COMMUNITY
     ASSERT_EQ(err, HDF_SUCCESS);
+#else
+    ASSERT_NE(err, HDF_SUCCESS);
+#endif
 }
 /**
  * @tc.number : SUB_Driver_Codec_EmptyThisBuffer_0200
@@ -1873,6 +1890,7 @@ HWTEST_F(CodecComponentTestAdditional, testComponentDeInit002, Function | Medium
     auto ret = g_component->ComponentDeInit();
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
+#ifdef SUPPORT_OMX
 /**
  * @tc.number : SUB_Driver_Codec_ComponentRoleEnum_0200
  * @tc.name   : testComponentRoleEnum001
@@ -2173,6 +2191,7 @@ HWTEST_F(CodecComponentTestAdditional, testUseEglImage014, Function | MediumTest
     ret = g_component->UseEglImage(OUTPUT_INDEX, omxBuffer, outbuffer, eglImageVec);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
+#endif
 /**
  * @tc.number : SUB_Driver_Codec_SetCallbacks_0200
  * @tc.name   : testSetCallbacks001
@@ -2319,6 +2338,7 @@ HWTEST_F(CodecComponentTestAdditional, testSendCommand006, Function | MediumTest
     int32_t ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_WAIT_FOR_RESOURCES, cmdData);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
+#ifdef SUPPORT_OMX
 /**
  * @tc.number  SUB_Driver_Codec_SendCommand_0700
  * @tc.name  testSendCommand007
@@ -2405,6 +2425,7 @@ HWTEST_F(CodecComponentTestAdditional, testSendCommand013, Function | MediumTest
     int32_t ret = g_component->SendCommand(CODEC_COMMAND_FLUSH, 1, cmdData);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
+#endif
 /**
  * @tc.number  SUB_Driver_Codec_SendCommand_1400
  * @tc.name  testSendCommand014
@@ -2453,6 +2474,7 @@ HWTEST_F(CodecComponentTestAdditional, testSendCommand017, Function | MediumTest
     int32_t ret = g_component->SendCommand(CODEC_COMMAND_PORT_DISABLE, 1, cmdData);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
+#ifdef SUPPORT_OMX
 /**
  * @tc.number  SUB_Driver_Codec_SendCommand_1800
  * @tc.name  testSendCommand018
@@ -2707,4 +2729,5 @@ HWTEST_F(CodecComponentTestAdditional, testSendCommand038, Function | MediumTest
     int32_t ret = g_component->SendCommand(CODEC_COMMAND_MAX, CODEC_STATE_PAUSE, cmdData);
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
+#endif
 } // namespace

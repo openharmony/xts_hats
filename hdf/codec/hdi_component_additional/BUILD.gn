@@ -14,6 +14,7 @@
 import("//build/ohos.gni")
 import("//build/test.gni")
 import("//drivers/peripheral/codec/codec.gni")
+import("//drivers/peripheral/display/display_config.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/codec"
@@ -60,6 +61,7 @@ ohos_moduletest_suite("HatsHdfTestComponentCodecAdditionalTest") {
   part_name = "hats"
 
   defines = []
+  defines += display_defines
   if (drivers_peripheral_codec_feature_support_omx_extend_test) {
     defines += [ "SUPPORT_OMX" ]
   }

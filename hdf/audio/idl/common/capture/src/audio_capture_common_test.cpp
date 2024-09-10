@@ -320,6 +320,14 @@ HWTEST_F(AudioUtCaptureTest, SUB_Driver_Audio_CaptureHdi_0700, TestSize.Level1)
     EXPECT_EQ(ret, HDF_SUCCESS);
 }
 
+HWTEST_F(AudioUtCaptureTest, HdfAudioCaptureStopException001, TestSize.Level1)
+{
+    ASSERT_NE(capture_->Stop, nullptr);
+
+    int32_t ret = capture_->Stop(capture_);
+    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+}
+
 HWTEST_F(AudioUtCaptureTest, SUB_Driver_Audio_CaptureHdi_0800, TestSize.Level1)
 {
     ASSERT_NE(capture_->Stop, nullptr);

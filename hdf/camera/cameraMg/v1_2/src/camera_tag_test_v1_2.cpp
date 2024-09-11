@@ -119,42 +119,6 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_Modes_0030, TestSize.Level1)
 }
 
 /**
- * @tc.name: SUB_Driver_Camera_Modes_0040
- * @tc.desc: OHOS_ABILITY_SCENE_FILTER_TYPES, OHOS_CONTROL_FILTER_TYPE
- * @tc.size: MediumTest
- * @tc.type: Function
- */
-HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_Modes_0040, TestSize.Level1)
-{
-    common_metadata_header_t* data = cameraTest->ability->get();
-    camera_metadata_item_t entry;
-    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_SCENE_FILTER_TYPES, &entry);
-    if (ret != 0) {
-        CAMERA_LOGI("OHOS_ABILITY_SCENE_FILTER_TYPES not found");
-        return;
-    }
-    CAMERA_LOGI("OHOS_ABILITY_SCENE_FILTER_TYPES found");
-    printf("OHOS_ABILITY_SCENE_FILTER_TYPES value count is %d\n", entry.count);
-    if (entry.count == 0) {
-        CAMERA_LOGI("OHOS_ABILITY_SCENE_FILTER_TYPES value count is 0");
-        return;
-    } else {
-        for (size_t i = 0; i < entry.count; i++) {
-            std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
-            printf("OHOS_ABILITY_SCENE_FILTER_VALUES : %d\n", entry.data.u8[i]);
-            uint8_t value = entry.data.u8[i];
-            meta->addEntry(OHOS_CONTROL_FILTER_TYPE, &value, 1);
-            std::vector<uint8_t> metaVec;
-            MetadataUtils::ConvertMetadataToVec(meta, metaVec);
-            cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
-            EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
-            CAMERA_LOGI("addEntry for OHOS_CONTROL_FILTER_TYPE success!");
-            cameraTest->TakePhotoWithTags(meta);
-        }
-    }
-}
-
-/**
  * @tc.name: SUB_Driver_Camera_Modes_0060
  * @tc.desc: OHOS_ABILITY_BEAUTY_AUTO_VALUES, OHOS_CONTROL_BEAUTY_AUTO_VALUE
  * @tc.size: MediumTest

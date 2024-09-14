@@ -18,22 +18,23 @@
 #include <gtest/gtest.h>
 #include "hdf_dlist.h"
 #include "osal_mem.h"
-#include "v3_0/audio_types.h"
-#include "v3_0/iaudio_adapter.h"
-#include "v3_0/iaudio_manager.h"
+#include "v4_0/audio_types.h"
+#include "v4_0/iaudio_adapter.h"
+#include "v4_0/iaudio_manager.h"
 
 using namespace std;
 using namespace testing::ext;
 
-#define AUDIO_MULTCHANNEL_CHANNELCOUNT  6
+#define AUDIO_CHANNELCOUNT              2
+#define AUDIO_SAMPLE_RATE_192K          192000
 #define AUDIO_SAMPLE_RATE_48K           48000
+#define AUDIO_SAMPLE_RATE_44_1K         44100
 #define DEEP_BUFFER_RENDER_PERIOD_SIZE  4096
-#define AUDIO_MULTCHANNEL_CHANNELLAYOUT 1551
-#define MULTICHANNEL_OUTPUT_STREAM_ID   61
+#define AUDIO_CHANNELLAYOUT             3
 namespace {
 static const uint32_t g_audioAdapterNumMax = 5;
 
-class HdfAudioAdapterMultiTest : public testing::Test {
+class HdfAudioAdapterDirectTest : public testing::Test {
 public:
     struct IAudioManager *manager_ = nullptr;
     struct IAudioAdapter *adapter_ = nullptr;
@@ -42,13 +43,13 @@ public:
     uint32_t captureId_ = 0;
     virtual void SetUp();
     virtual void TearDown();
-    void InitMultchannelAttrs(struct AudioSampleAttributes &attrs);
+    void InitDirectAttrs(struct AudioSampleAttributes &attrs);
     void InitDevDesc(struct AudioDeviceDescriptor &devDesc);
     void AudioAdapterDescriptorFree(struct AudioAdapterDescriptor *dataBlock, bool freeSelf);
     void ReleaseAdapterDescs(struct AudioAdapterDescriptor **descs, uint32_t descsLen);
 };
 
-void HdfAudioAdapterMultiTest::AudioAdapterDescriptorFree(struct AudioAdapterDescriptor *dataBlock, bool freeSelf)
+void HdfAudioAdapterDirectTest::AudioAdapterDescriptorFree(struct AudioAdapterDescriptor *dataBlock, bool freeSelf)
 {
     if (dataBlock == nullptr) {
         return;
@@ -68,7 +69,7 @@ void HdfAudioAdapterMultiTest::AudioAdapterDescriptorFree(struct AudioAdapterDes
     }
 }
 
-void HdfAudioAdapterMultiTest::ReleaseAdapterDescs(struct AudioAdapterDescriptor **descs, uint32_t descsLen)
+void HdfAudioAdapterDirectTest::ReleaseAdapterDescs(struct AudioAdapterDescriptor **descs, uint32_t descsLen)
 {
     if ((descsLen > 0) && (descs != nullptr) && ((*descs) != nullptr)) {
         for (uint32_t i = 0; i < descsLen; i++) {
@@ -79,16 +80,16 @@ void HdfAudioAdapterMultiTest::ReleaseAdapterDescs(struct AudioAdapterDescriptor
     }
 }
 
-void HdfAudioAdapterMultiTest::InitMultchannelAttrs(struct AudioSampleAttributes &attrs)
+void HdfAudioAdapterDirectTest::InitDirectAttrs(struct AudioSampleAttributes &attrs)
 {
     attrs.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
-    attrs.channelCount = AUDIO_MULTCHANNEL_CHANNELCOUNT;
-    attrs.channelLayout = AUDIO_MULTCHANNEL_CHANNELLAYOUT;
-    attrs.sampleRate = AUDIO_SAMPLE_RATE_48K;
+    attrs.channelCount = AUDIO_CHANNELCOUNT;
+    attrs.channelLayout = AUDIO_CHANNELLAYOUT;
+    attrs.sampleRate = AUDIO_SAMPLE_RATE_192K;
     attrs.interleaved = 1;
-    attrs.type = AUDIO_MULTI_CHANNEL;
+    attrs.type = AUDIO_DIRECT;
     attrs.period = DEEP_BUFFER_RENDER_PERIOD_SIZE;
-    attrs.frameSize = AUDIO_FORMAT_TYPE_PCM_32_BIT * AUDIO_MULTCHANNEL_CHANNELCOUNT;
+    attrs.frameSize = AUDIO_FORMAT_TYPE_PCM_32_BIT * AUDIO_CHANNELCOUNT;
     attrs.isBigEndian = false;
     attrs.isSignedData = true;
     attrs.startThreshold = DEEP_BUFFER_RENDER_PERIOD_SIZE / (attrs.format * attrs.frameSize);
@@ -96,7 +97,7 @@ void HdfAudioAdapterMultiTest::InitMultchannelAttrs(struct AudioSampleAttributes
     attrs.silenceThreshold = 0;
 }
 
-void HdfAudioAdapterMultiTest::InitDevDesc(struct AudioDeviceDescriptor &devDesc)
+void HdfAudioAdapterDirectTest::InitDevDesc(struct AudioDeviceDescriptor &devDesc)
 {
     ASSERT_NE(adapterDescs_, nullptr);
     ASSERT_NE(adapterDescs_->ports, nullptr);
@@ -108,7 +109,7 @@ void HdfAudioAdapterMultiTest::InitDevDesc(struct AudioDeviceDescriptor &devDesc
     }
 }
 
-void HdfAudioAdapterMultiTest::SetUp()
+void HdfAudioAdapterDirectTest::SetUp()
 {
     uint32_t size = g_audioAdapterNumMax;
     manager_ = IAudioManagerGet(false);
@@ -134,7 +135,7 @@ void HdfAudioAdapterMultiTest::SetUp()
     }
 }
 
-void HdfAudioAdapterMultiTest::TearDown()
+void HdfAudioAdapterDirectTest::TearDown()
 {
     ASSERT_NE(manager_, nullptr);
     ASSERT_NE(adapter_, nullptr);
@@ -147,30 +148,91 @@ void HdfAudioAdapterMultiTest::TearDown()
 }
 
 /**
- * @tc.number: SUB_Driver_Audio_RenderHdi_5200
- * @tc.name: HdfAudioAdapterMultchannelCreateRenderIsvalid001
- * @tc.desc: Verify the streamId of  CreateAndDestoryRenderfunction
- */
-HWTEST_F(HdfAudioAdapterMultiTest, HdfAudioAdapterMultchannelCreateRenderIsvalid001, TestSize.Level1)
+* @tc.number : SUB_Driver_Audio_Direct_0100
+* @tc.name   : HdfAudioAdapterDirectCreateRenderInvalid001
+* @tc.desc   : Verify function when the input parameter is invalid.
+  @tc.type: FUNC
+*/
+HWTEST_F(HdfAudioAdapterDirectTest, HdfAudioAdapterDirectCreateRenderInvalid001, TestSize.Level1)
+{
+    struct IAudioRender *render = nullptr;
+    struct AudioDeviceDescriptor devicedesc = {};
+    struct AudioSampleAttributes attrs = {};
+    uint32_t renderId_ = 10;
+
+    EXPECT_EQ(HDF_ERR_INVALID_OBJECT, adapter_->CreateRender(nullptr, &devicedesc, &attrs, &render, &renderId_));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, adapter_->CreateRender(adapter_, nullptr, &attrs, &render, &renderId_));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, adapter_->CreateRender(adapter_, &devicedesc, nullptr, &render, &renderId_));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, adapter_->CreateRender(adapter_, &devicedesc, &attrs, nullptr, &renderId_));
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, nullptr));
+    EXPECT_NE(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
+}
+
+/**
+* @tc.number : SUB_Driver_Audio_Direct_0200
+* @tc.name   : HdfAudioAdapterDirectCreateRenderIsvalid001
+* @tc.desc   : Verify supported the direct when sampleRate is 192K.
+  @tc.type: FUNC
+*/
+HWTEST_F(HdfAudioAdapterDirectTest, HdfAudioAdapterDirectCreateRenderIsvalid001, TestSize.Level1)
 {
     struct IAudioRender *render = nullptr;
     struct AudioDeviceDescriptor devicedesc = {};
     struct AudioSampleAttributes attrs = {};
     InitDevDesc(devicedesc);
     devicedesc.desc = strdup("");
-    devicedesc.pins = PIN_OUT_SPEAKER;
-    InitMultchannelAttrs(attrs);
-    attrs.streamId = MULTICHANNEL_OUTPUT_STREAM_ID;
+    devicedesc.pins = PIN_OUT_HEADSET;
+    InitDirectAttrs(attrs);
+    attrs.streamId = 0;
     int32_t ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
-    if (ret != HDF_SUCCESS)
-    {
-        printf("MULTICHANNEL is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     EXPECT_TRUE(ret == HDF_SUCCESS);
     ret = adapter_->DestroyRender(adapter_, renderId_);
     EXPECT_TRUE(ret == HDF_SUCCESS);
 }
 
+/**
+* @tc.number : SUB_Driver_Audio_Direct_0300
+* @tc.name   : HdfAudioAdapterDirectCreateRenderIsvalid002
+* @tc.desc   : Verify supported the direct when sampleRate is 48K.
+  @tc.type: FUNC
+*/
+HWTEST_F(HdfAudioAdapterDirectTest, HdfAudioAdapterDirectCreateRenderIsvalid002, TestSize.Level1)
+{
+    struct IAudioRender *render = nullptr;
+    struct AudioDeviceDescriptor devicedesc = {};
+    struct AudioSampleAttributes attrs = {};
+    InitDevDesc(devicedesc);
+    devicedesc.desc = strdup("");
+    devicedesc.pins = PIN_OUT_HEADSET;
+    InitDirectAttrs(attrs);
+    attrs.streamId = 0;
+    attrs.sampleRate = AUDIO_SAMPLE_RATE_48K;
+    int32_t ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
+    EXPECT_TRUE(ret == HDF_SUCCESS);
+    ret = adapter_->DestroyRender(adapter_, renderId_);
+    EXPECT_TRUE(ret == HDF_SUCCESS);
+}
+
+/**
+* @tc.number : SUB_Driver_Audio_Direct_0400
+* @tc.name   : HdfAudioAdapterDirectCreateRenderIsvalid003
+* @tc.desc   : Verify supported the direct when sampleRate is 44.1K.
+  @tc.type: FUNC
+*/
+HWTEST_F(HdfAudioAdapterDirectTest, HdfAudioAdapterDirectCreateRenderIsvalid003, TestSize.Level1)
+{
+    struct IAudioRender *render = nullptr;
+    struct AudioDeviceDescriptor devicedesc = {};
+    struct AudioSampleAttributes attrs = {};
+    InitDevDesc(devicedesc);
+    devicedesc.desc = strdup("");
+    devicedesc.pins = PIN_OUT_HEADSET;
+    InitDirectAttrs(attrs);
+    attrs.streamId = 0;
+    attrs.sampleRate = AUDIO_SAMPLE_RATE_44_1K;
+    int32_t ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
+    EXPECT_TRUE(ret == HDF_SUCCESS);
+    ret = adapter_->DestroyRender(adapter_, renderId_);
+    EXPECT_TRUE(ret == HDF_SUCCESS);
+}
 }

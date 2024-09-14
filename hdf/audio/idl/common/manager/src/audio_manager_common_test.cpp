@@ -19,6 +19,7 @@
 #include "hdf_dlist.h"
 #include "osal_mem.h"
 #include "v4_0/iaudio_manager.h"
+#include <thread>
 
 using namespace std;
 using namespace testing::ext;
@@ -168,8 +169,18 @@ HWTEST_F(HdfAudioUtManagerTest, SUB_Driver_Audio_ManagerHdi_1200, TestSize.Level
         sizeof(struct AudioAdapterDescriptor) * (g_audioAdapterNumMax));
     ASSERT_NE(nullptr, descs);
 
-    ASSERT_EQ(HDF_SUCCESS, g_manager->GetAllAdapters(g_manager, descs, &size));
-    EXPECT_GE(g_audioAdapterNumMax, size);
+    auto lambda = [&]() {
+        ASSERT_EQ(HDF_SUCCESS, g_manager->GetAllAdapters(g_manager, descs, &size));
+        EXPECT_GE(g_audioAdapterNumMax, size);
+    };
+    
+    std::thread th1(lambda);
+    std::thread th2(lambda);
+    std::thread th3(lambda);
+
+    th1.join();
+    th2.join();
+    th3.join();
 
     for (uint32_t i = 0; i < size; i++) {
         EXPECT_NE(nullptr, descs[i].adapterName);

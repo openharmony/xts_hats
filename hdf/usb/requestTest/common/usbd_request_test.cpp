@@ -18,8 +18,8 @@
 
 #include "hdf_log.h"
 #include "usbd_request_test.h"
-#include "v1_0/iusb_interface.h"
-#include "v1_0/usb_types.h"
+#include "v1_1/iusb_interface.h"
+#include "v1_1/usb_types.h"
 
 const int SLEEP_TIME = 3;
 const uint8_t INDEX_1 = 1;
@@ -45,12 +45,13 @@ using namespace OHOS;
 using namespace OHOS::USB;
 using namespace std;
 using namespace OHOS::HDI::Usb::V1_0;
+using namespace OHOS::HDI::Usb::V1_1;
 
 UsbDev UsbdRequestTest::dev_ = {0, 0};
 sptr<UsbSubscriberTest> UsbdRequestTest::subscriber_ = nullptr;
 
 namespace {
-sptr<IUsbInterface> g_usbInterface = nullptr;
+sptr<OHOS::HDI::Usb::V1_1::IUsbInterface> g_usbInterface = nullptr;
 
 int32_t SwitchErrCode(int32_t ret)
 {
@@ -59,7 +60,7 @@ int32_t SwitchErrCode(int32_t ret)
 
 void UsbdRequestTest::SetUpTestCase(void)
 {
-    g_usbInterface = IUsbInterface::Get();
+    g_usbInterface = OHOS::HDI::Usb::V1_1::IUsbInterface::Get();
     if (g_usbInterface == nullptr) {
         HDF_LOGE("%{public}s:IUsbInterface::Get() failed.", __func__);
         exit(0);
@@ -992,6 +993,78 @@ HWTEST_F(UsbdRequestTest, SUB_USB_DeviceManager_HDI_Compatibility_2000, Function
     auto ret = g_usbInterface->GetFileDescriptor(dev, fd);
     HDF_LOGI("UsbdRequestTest::SUB_USB_DeviceManager_HDI_Compatibility_2000 %{public}d fd=%{public}d ret=%{public}d",
         __LINE__, fd, ret);
+    ASSERT_EQ(0, ret);
+}
+
+/**
+ * @tc.number   : SUB_USB_HostManager_HDI_Func_2100
+ * @tc.name     : GetDeviceFileDescriptor001
+ * @tc.desc     : int32_t GetDeviceFileDescriptor(const UsbDev &dev, int32_t &fd)
+ * @tc.desc     : Positive test: parameters correctly
+ * @tc.size     : MediumTest
+ * @tc.type     : Function
+ * @tc.level    : Level 3
+ */
+HWTEST_F(UsbdRequestTest, GetDeviceFileDescriptor001, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    int32_t fd = 0;
+    auto ret = g_usbInterface->GetDeviceFileDescriptor(dev, fd);
+    HDF_LOGI("UsbdRequestTest::GetDeviceFileDescriptor001 %{public}d fd=%{public}d ret=%{public}d", __LINE__, fd, ret);
+    ASSERT_EQ(0, ret);
+}
+
+/**
+ * @tc.number   : SUB_USB_HostManager_HDI_Compatibility_0110
+ * @tc.name     : GetDeviceFileDescriptor002
+ * @tc.desc     : int32_t GetDeviceFileDescriptor(const UsbDev &dev, int32_t &fd)
+ * @tc.desc     : Negative test: parameters exception, busNum error
+ * @tc.size     : MediumTest
+ * @tc.type     : Function
+ * @tc.level    : Level 3
+ */
+HWTEST_F(UsbdRequestTest, GetDeviceFileDescriptor002, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {BUS_NUM_INVALID, dev_.devAddr};
+    int32_t fd = 0;
+    auto ret = g_usbInterface->GetDeviceFileDescriptor(dev, fd);
+    HDF_LOGI("UsbdRequestTest::GetDeviceFileDescriptor002 %{public}d fd=%{public}d ret=%{public}d", __LINE__, fd, ret);
+    ASSERT_NE(ret, 0);
+}
+
+/**
+ * @tc.number   : SUB_USB_HostManager_HDI_Compatibility_0120
+ * @tc.name     : GetDeviceFileDescriptor003
+ * @tc.desc     : int32_t GetDeviceFileDescriptor(const UsbDev &dev, int32_t &fd)
+ * @tc.desc     : Negative test: parameters exception, devAddr error
+ * @tc.size     : MediumTest
+ * @tc.type     : Function
+ * @tc.level    : Level 3
+ */
+HWTEST_F(UsbdRequestTest, GetDeviceFileDescriptor003, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = {dev_.busNum, DEV_ADDR_INVALID};
+    int32_t fd = 0;
+    auto ret = g_usbInterface->GetDeviceFileDescriptor(dev, fd);
+    HDF_LOGI("UsbdRequestTest::GetDeviceFileDescriptor003 %{public}d fd=%{public}d ret=%{public}d", __LINE__, fd, ret);
+    ASSERT_NE(ret, 0);
+}
+
+/**
+ * @tc.number   : SUB_USB_HostManager_HDI_Compatibility_0130
+ * @tc.name     : GetDeviceFileDescriptor004
+ * @tc.desc     : int32_t GetDeviceFileDescriptor(const UsbDev &dev, int32_t &fd)
+ * @tc.desc     : Negative test: parameters exception, fd error
+ * @tc.size     : MediumTest
+ * @tc.type     : Function
+ * @tc.level    : Level 3
+ */
+HWTEST_F(UsbdRequestTest, GetDeviceFileDescriptor004, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    int32_t fd = MAX_BUFFER_LENGTH;
+    auto ret = g_usbInterface->GetDeviceFileDescriptor(dev, fd);
+    HDF_LOGI("UsbdRequestTest::GetDeviceFileDescriptor004 %{public}d fd=%{public}d ret=%{public}d", __LINE__, fd, ret);
     ASSERT_EQ(0, ret);
 }
 

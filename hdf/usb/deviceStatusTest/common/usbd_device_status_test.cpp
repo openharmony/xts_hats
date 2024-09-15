@@ -330,7 +330,7 @@ HWTEST_F(UsbdDeviceStatusTest, UsbdClearHalt001, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_DIR_IN;
     ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdRequestTest::UsbdClearHalt001 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdDeviceStatusTest::UsbdClearHalt001 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     struct UsbPipe pipe = {interfaceId, pointId};
     ret = g_usbInterface->ClearHalt(dev, pipe);
@@ -353,7 +353,7 @@ HWTEST_F(UsbdDeviceStatusTest, UsbdClearHalt002, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_DIR_IN;
     ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdRequestTest::UsbdClearHalt002 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdDeviceStatusTest::UsbdClearHalt002 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     struct UsbPipe pipe = {interfaceId, pointId};
     dev.busNum = BUS_NUM_INVALID;
@@ -378,7 +378,7 @@ HWTEST_F(UsbdDeviceStatusTest, UsbdClearHalt003, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_DIR_IN;
     ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdRequestTest::UsbdClearHalt003 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdDeviceStatusTest::UsbdClearHalt003 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     struct UsbPipe pipe = {interfaceId, pointId};
     dev.devAddr = DEV_ADDR_INVALID;
@@ -403,7 +403,7 @@ HWTEST_F(UsbdDeviceStatusTest, UsbdClearHalt004, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_INVALID;
     uint8_t pointId = POINTID_DIR_IN;
     ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdRequestTest::UsbdClearHalt004 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdDeviceStatusTest::UsbdClearHalt004 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_NE(0, ret);
     struct UsbPipe pipe = {interfaceId, pointId};
     ret = g_usbInterface->ClearHalt(dev, pipe);
@@ -427,7 +427,7 @@ HWTEST_F(UsbdDeviceStatusTest, UsbdClearHalt005, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_DIR_IN;
     ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdRequestTest::UsbdClearHalt005 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdDeviceStatusTest::UsbdClearHalt005 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_EQ(0, ret);
     struct UsbPipe pipe = {interfaceId, pointId};
     dev.busNum = BUS_NUM_INVALID;
@@ -453,7 +453,7 @@ HWTEST_F(UsbdDeviceStatusTest, UsbdClearHalt006, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_INVALID;
     uint8_t pointId = POINTID_DIR_IN;
     ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdRequestTest::UsbdClearHalt006 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdDeviceStatusTest::UsbdClearHalt006 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_NE(0, ret);
     struct UsbPipe pipe = {interfaceId, pointId};
     dev.busNum = BUS_NUM_INVALID;
@@ -478,7 +478,7 @@ HWTEST_F(UsbdDeviceStatusTest, UsbdClearHalt007, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_INVALID;
     uint8_t pointId = POINTID_DIR_IN;
     ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdRequestTest::UsbdClearHalt007 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdDeviceStatusTest::UsbdClearHalt007 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_NE(0, ret);
     struct UsbPipe pipe = {interfaceId, pointId};
     dev.devAddr = DEV_ADDR_INVALID;
@@ -503,7 +503,7 @@ HWTEST_F(UsbdDeviceStatusTest, UsbdClearHalt008, Function | MediumTest | Level1)
     uint8_t interfaceId = INTERFACEID_INVALID;
     uint8_t pointId = POINTID_DIR_IN;
     ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    HDF_LOGI("UsbdRequestTest::UsbdClearHalt008 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    HDF_LOGI("UsbdDeviceStatusTest::UsbdClearHalt008 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
     ASSERT_NE(0, ret);
     struct UsbPipe pipe = {interfaceId, pointId};
     dev.busNum = BUS_NUM_INVALID;

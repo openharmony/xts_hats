@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -1815,8 +1815,12 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HostManager_HDI_TranFunc_0700, Function | Medi
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_DIR_IN;
     struct UsbPipe pipe = {interfaceId, pointId};
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HostManager_HDI_TranFunc_0700 %{public}d ClaimInterface=%{public}d",
+        __LINE__, ret);
+    ASSERT_EQ(0, ret);
     sptr<UsbdBulkCallbackTest> usbdBulkCallback = new UsbdBulkCallbackTest();
-    auto ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
+    ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranFunc_0700 %{public}d RegBulkCallback=%{public}d",
         __LINE__, ret);
     ASSERT_EQ(ret, 0);
@@ -1843,8 +1847,12 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HostManager_HDI_TranCompatibility_8100, Functi
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_DIR_IN;
     struct UsbPipe pipe = {interfaceId, pointId};
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HostManager_HDI_TranCompatibility_8100 %{public}d ClaimInterface=%{public}d",
+        __LINE__, ret);
+    ASSERT_EQ(0, ret);
     sptr<UsbdBulkCallbackTest> usbdBulkCallback = new UsbdBulkCallbackTest();
-    auto ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
+    ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
     HDF_LOGI(
         "UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_8100 %{public}d RegBulkCallback=%{public}d",
         __LINE__, ret);
@@ -1876,8 +1884,12 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HostManager_HDI_TranCompatibility_8200, Functi
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_DIR_IN;
     struct UsbPipe pipe = {interfaceId, pointId};
+     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HostManager_HDI_TranCompatibility_8200 %{public}d ClaimInterface=%{public}d",
+        __LINE__, ret);
+    ASSERT_EQ(0, ret);
     sptr<UsbdBulkCallbackTest> usbdBulkCallback = new UsbdBulkCallbackTest();
-    auto ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
+    ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
     HDF_LOGI(
         "UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_8200 %{public}d RegBulkCallback=%{public}d",
         __LINE__, ret);
@@ -1909,8 +1921,12 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HostManager_HDI_TranCompatibility_8300, Functi
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_DIR_IN;
     struct UsbPipe pipe = {interfaceId, pointId};
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HostManager_HDI_TranCompatibility_8300 %{public}d ClaimInterface=%{public}d",
+        __LINE__, ret);
+    ASSERT_EQ(0, ret);
     sptr<UsbdBulkCallbackTest> usbdBulkCallback = new UsbdBulkCallbackTest();
-    auto ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
+    ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
     HDF_LOGI(
         "UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_8300 %{public}d RegBulkCallback=%{public}d",
         __LINE__, ret);
@@ -1945,8 +1961,12 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HostManager_HDI_TranCompatibility_8400, Functi
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_DIR_IN;
     struct UsbPipe pipe = {interfaceId, pointId};
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
+    HDF_LOGI("UsbdRequestTest::SUB_USB_HostManager_HDI_TranCompatibility_8400 %{public}d ClaimInterface=%{public}d",
+        __LINE__, ret);
+    ASSERT_EQ(0, ret);
     sptr<UsbdBulkCallbackTest> usbdBulkCallback = new UsbdBulkCallbackTest();
-    auto ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
+    ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
     HDF_LOGI(
         "UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_8400 %{public}d RegBulkCallback=%{public}d",
         __LINE__, ret);

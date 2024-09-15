@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -68,7 +68,7 @@ BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_DeviceManager_HDI_Performance_
 (benchmark::State& st)
 {
     int32_t funcs = USB_FUNCTION_NONE;
-    auto ret = 0;
+    auto ret = -1;
     for (auto _ : st) {
         ret = g_usbInterface->GetCurrentFunctions(funcs);
     }
@@ -91,7 +91,7 @@ BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_DeviceManager_HDI_Performance_
 (benchmark::State& st)
 {
     int32_t funcs = USB_FUNCTION_ACM;
-    auto ret = 0;
+    auto ret = -1;
     for (auto _ : st) {
         ret = g_usbInterface->SetCurrentFunctions(funcs);
     }
@@ -113,7 +113,7 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_DeviceManager_HDI_Per
 BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_PortManager_HDI_Performance_0100)
 (benchmark::State& st)
 {
-    auto ret = 0;
+    auto ret = -1;
     for (auto _ : st) {
         ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
     }
@@ -140,7 +140,7 @@ BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_PortManager_HDI_Performance_02
     int32_t powerRole = POWER_ROLE_NONE;
     int32_t dataRole = DATA_ROLE_NONE;
     int32_t mode = PORT_MODE_NONE;
-    auto ret = 0;
+    auto ret = -1;
     for (auto _ : st) {
         ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
     }

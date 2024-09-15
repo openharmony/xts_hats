@@ -20,6 +20,7 @@
 
 #include "UsbSubscriberTest.h"
 #include "hdf_log.h"
+// #include "usb_types.h"
 #include "v1_1/iusb_interface.h"
 
 const int SLEEP_TIME = 3;
@@ -28,6 +29,7 @@ const uint8_t DEV_ADDR_INVALID = 255;
 const uint8_t INTERFACEID_OK = 1;
 const uint8_t INTERFACEID_OK_NEW = 0;
 const uint8_t INTERFACEID_INVALID = 255;
+const uint8_t POINTID_DIR_IN = USB_ENDPOINT_DIR_IN | 2;
 
 using namespace testing::ext;
 using namespace OHOS;
@@ -310,6 +312,205 @@ HWTEST_F(UsbdDeviceStatusTest, UsbdGetInterfaceActiveStatus008, Function | Mediu
     HDF_LOGI("UsbdGetInterfaceActiveStatus008 %{public}d, ret=%{public}d, unactived=%{public}d",
         __LINE__, ret, unactived);
     ASSERT_NE(ret, 0);
+}
+
+/**
+ * @tc.number   : SUB_USB_HostManager_HDI_Func_2000
+ * @tc.name     : UsbdClearHalt001
+ * @tc.desc     : int32_t ClearHalt(const UsbDev &dev, const UsbPipe &pipe)
+ * @tc.desc     : Positive test: parameters correctly
+ * @tc.size     : MediumTest
+ * @tc.type     : Function
+ * @tc.level    : Level 3
+ */
+HWTEST_F(UsbdDeviceStatusTest, UsbdClearHalt001, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    int32_t ret = -1;
+    uint8_t interfaceId = INTERFACEID_OK;
+    uint8_t pointId = POINTID_DIR_IN;
+    ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
+    HDF_LOGI("UsbdRequestTest::UsbdClearHalt001 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+    struct UsbPipe pipe = {interfaceId, pointId};
+    ret = g_usbInterface->ClearHalt(dev, pipe);
+    HDF_LOGI("UsbdClearHalt001 %{public}d ClearHalt=%{public}d", __LINE__, ret);
+}
+
+/**
+ * @tc.number   : SUB_USB_HostManager_HDI_Compatibility_9300
+ * @tc.name     : UsbdClearHalt002
+ * @tc.desc     : int32_t ClearHalt(const UsbDev &dev, const UsbPipe &pipe)
+ * @tc.desc     : Negative test: parameters exception, busNum error
+ * @tc.size     : MediumTest
+ * @tc.type     : Function
+ * @tc.level    : Level 3
+ */
+HWTEST_F(UsbdDeviceStatusTest, UsbdClearHalt002, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    int32_t ret = -1;
+    uint8_t interfaceId = INTERFACEID_OK;
+    uint8_t pointId = POINTID_DIR_IN;
+    ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
+    HDF_LOGI("UsbdRequestTest::UsbdClearHalt002 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+    struct UsbPipe pipe = {interfaceId, pointId};
+    dev.busNum = BUS_NUM_INVALID;
+    ret = g_usbInterface->ClearHalt(dev, pipe);
+    HDF_LOGI("UsbdClearHalt002 %{public}d ClearHalt=%{public}d", __LINE__, ret);
+    ASSERT_NE(0, ret);
+}
+
+/**
+ * @tc.number   : SUB_USB_HostManager_HDI_Compatibility_9400
+ * @tc.name     : UsbdClearHalt003
+ * @tc.desc     : int32_t ClearHalt(const UsbDev &dev, const UsbPipe &pipe)
+ * @tc.desc     : Negative test: parameters exception, devAddr error
+ * @tc.size     : MediumTest
+ * @tc.type     : Function
+ * @tc.level    : Level 3
+ */
+HWTEST_F(UsbdDeviceStatusTest, UsbdClearHalt003, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    int32_t ret = -1;
+    uint8_t interfaceId = INTERFACEID_OK;
+    uint8_t pointId = POINTID_DIR_IN;
+    ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
+    HDF_LOGI("UsbdRequestTest::UsbdClearHalt003 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+    struct UsbPipe pipe = {interfaceId, pointId};
+    dev.devAddr = DEV_ADDR_INVALID;
+    ret = g_usbInterface->ClearHalt(dev, pipe);
+    HDF_LOGI("UsbdClearHalt003 %{public}d ClearHalt=%{public}d", __LINE__, ret);
+    ASSERT_NE(0, ret);
+}
+
+/**
+ * @tc.number   : SUB_USB_HostManager_HDI_Compatibility_9500
+ * @tc.name     : UsbdClearHalt004
+ * @tc.desc     : int32_t ClearHalt(const UsbDev &dev, const UsbPipe &pipe)
+ * @tc.desc     : Negative test: parameters exception, interfaceid error
+ * @tc.size     : MediumTest
+ * @tc.type     : Function
+ * @tc.level    : Level 3
+ */
+HWTEST_F(UsbdDeviceStatusTest, UsbdClearHalt004, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    int32_t ret = -1;
+    uint8_t interfaceId = INTERFACEID_INVALID;
+    uint8_t pointId = POINTID_DIR_IN;
+    ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
+    HDF_LOGI("UsbdRequestTest::UsbdClearHalt004 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_NE(0, ret);
+    struct UsbPipe pipe = {interfaceId, pointId};
+    ret = g_usbInterface->ClearHalt(dev, pipe);
+    HDF_LOGI("UsbdClearHalt004 %{public}d ClearHalt=%{public}d", __LINE__, ret);
+    ASSERT_NE(0, ret);
+}
+
+/**
+ * @tc.number   : SUB_USB_HostManager_HDI_Compatibility_9600
+ * @tc.name     : UsbdClearHalt005
+ * @tc.desc     : int32_t ClearHalt(const UsbDev &dev, const UsbPipe &pipe)
+ * @tc.desc     : Negative test: parameters exception, busNum && devAddr error
+ * @tc.size     : MediumTest
+ * @tc.type     : Function
+ * @tc.level    : Level 3
+ */
+HWTEST_F(UsbdDeviceStatusTest, UsbdClearHalt005, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    int32_t ret = -1;
+    uint8_t interfaceId = INTERFACEID_OK;
+    uint8_t pointId = POINTID_DIR_IN;
+    ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
+    HDF_LOGI("UsbdRequestTest::UsbdClearHalt005 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+    struct UsbPipe pipe = {interfaceId, pointId};
+    dev.busNum = BUS_NUM_INVALID;
+    dev.devAddr = DEV_ADDR_INVALID;
+    ret = g_usbInterface->ClearHalt(dev, pipe);
+    HDF_LOGI("UsbdClearHalt005 %{public}d ClearHalt=%{public}d", __LINE__, ret);
+    ASSERT_NE(0, ret);
+}
+
+/**
+ * @tc.number   : SUB_USB_HostManager_HDI_Compatibility_9700
+ * @tc.name     : UsbdClearHalt006
+ * @tc.desc     : int32_t ClearHalt(const UsbDev &dev, const UsbPipe &pipe)
+ * @tc.desc     : Negative test: parameters exception, busNum && interfaceid error
+ * @tc.size     : MediumTest
+ * @tc.type     : Function
+ * @tc.level    : Level 3
+ */
+HWTEST_F(UsbdDeviceStatusTest, UsbdClearHalt006, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    int32_t ret = -1;
+    uint8_t interfaceId = INTERFACEID_INVALID;
+    uint8_t pointId = POINTID_DIR_IN;
+    ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
+    HDF_LOGI("UsbdRequestTest::UsbdClearHalt006 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_NE(0, ret);
+    struct UsbPipe pipe = {interfaceId, pointId};
+    dev.busNum = BUS_NUM_INVALID;
+    ret = g_usbInterface->ClearHalt(dev, pipe);
+    HDF_LOGI("UsbdClearHalt006 %{public}d ClearHalt=%{public}d", __LINE__, ret);
+    ASSERT_NE(0, ret);
+}
+
+/**
+ * @tc.number   : SUB_USB_HostManager_HDI_Compatibility_9800
+ * @tc.name     : UsbdClearHalt007
+ * @tc.desc     : int32_t ClearHalt(const UsbDev &dev, const UsbPipe &pipe)
+ * @tc.desc     : Negative test: parameters exception, devAddr && interfaceid error
+ * @tc.size     : MediumTest
+ * @tc.type     : Function
+ * @tc.level    : Level 3
+ */
+HWTEST_F(UsbdDeviceStatusTest, UsbdClearHalt007, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    int32_t ret = -1;
+    uint8_t interfaceId = INTERFACEID_INVALID;
+    uint8_t pointId = POINTID_DIR_IN;
+    ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
+    HDF_LOGI("UsbdRequestTest::UsbdClearHalt007 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_NE(0, ret);
+    struct UsbPipe pipe = {interfaceId, pointId};
+    dev.devAddr = DEV_ADDR_INVALID;
+    ret = g_usbInterface->ClearHalt(dev, pipe);
+    HDF_LOGI("UsbdClearHalt005 %{public}d ClearHalt=%{public}d", __LINE__, ret);
+    ASSERT_NE(0, ret);
+}
+
+/**
+ * @tc.number   : SUB_USB_HostManager_HDI_Compatibility_9900
+ * @tc.name     : UsbdClearHalt008
+ * @tc.desc     : int32_t ClearHalt(const UsbDev &dev, const UsbPipe &pipe)
+ * @tc.desc     : Negative test: parameters exception, busNum && devAddr && interfaceid error
+ * @tc.size     : MediumTest
+ * @tc.type     : Function
+ * @tc.level    : Level 3
+ */
+HWTEST_F(UsbdDeviceStatusTest, UsbdClearHalt008, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    int32_t ret = -1;
+    uint8_t interfaceId = INTERFACEID_INVALID;
+    uint8_t pointId = POINTID_DIR_IN;
+    ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
+    HDF_LOGI("UsbdRequestTest::UsbdClearHalt008 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_NE(0, ret);
+    struct UsbPipe pipe = {interfaceId, pointId};
+    dev.busNum = BUS_NUM_INVALID;
+    dev.devAddr = DEV_ADDR_INVALID;
+    ret = g_usbInterface->ClearHalt(dev, pipe);
+    HDF_LOGI("UsbdClearHalt008 %{public}d ClearHalt=%{public}d", __LINE__, ret);
+    ASSERT_NE(0, ret);
 }
 } // USB
 } // OHOS

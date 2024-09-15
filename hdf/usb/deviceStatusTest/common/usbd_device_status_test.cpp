@@ -20,7 +20,6 @@
 
 #include "UsbSubscriberTest.h"
 #include "hdf_log.h"
-// #include "usb_types.h"
 #include "v1_1/iusb_interface.h"
 
 const int SLEEP_TIME = 3;

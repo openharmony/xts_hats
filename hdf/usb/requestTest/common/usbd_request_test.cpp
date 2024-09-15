@@ -1884,7 +1884,7 @@ HWTEST_F(UsbdRequestTest, SUB_USB_HostManager_HDI_TranCompatibility_8200, Functi
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_DIR_IN;
     struct UsbPipe pipe = {interfaceId, pointId};
-     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     HDF_LOGI("UsbdRequestTest::SUB_USB_HostManager_HDI_TranCompatibility_8200 %{public}d ClaimInterface=%{public}d",
         __LINE__, ret);
     ASSERT_EQ(0, ret);

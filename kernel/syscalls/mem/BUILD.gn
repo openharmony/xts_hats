@@ -14,10 +14,10 @@
 import("//build/ohos_var.gni")
 import("//test/xts/hats/build.gni")
 
-group("HatsSyscallTest") {
+group("HatsMemTest") {
   testonly = true
   deps = [
-    "mem:HatsMemTest",
-    "net:HatsNetTest",
+    "mlock2:HatsMlock2Test",
+    "mprotect:HatsMprotectTest",
   ]
 }

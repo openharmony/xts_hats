@@ -97,10 +97,10 @@ HWTEST_F(HatsMlock2Test, Mlock2Success_0002, Function | MediumTest | Level1)
 
 /*
  * @tc.number SUB_KERNEL_SYSCALL_Mlock2_0300
- * @tc.name Mlock2Success_0003
+ * @tc.name Mlock2Invalid_0003
  * @tc.desc When flag is invalid, mlock2() locks failed, errno is set to EINVAL.
 */
-HWTEST_F(HatsMlock2Test, Mlock2Success_0003, Function | MediumTest | Level2)
+HWTEST_F(HatsMlock2Test, Mlock2Invalid_0003, Function | MediumTest | Level2)
 {
     int ret;
 

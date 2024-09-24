@@ -14,11 +14,20 @@
 import("//build/ohos_var.gni")
 import("//test/xts/hats/build.gni")
 
-group("HatsSyscallTest") {
+group("HatsFileIoTest") {
   testonly = true
   deps = [
-    "fileio:HatsFileIoTest",
-    "mem:HatsMemTest",
-    "net:HatsNetTest",
+    "faccessat:HatsFaccessatTest",
+    "fallocate:HatsFallocateTest",
+    "fchmod:HatsFchmodTest",
+    "fchmodat:HatsFchmodatTest",
+    "fchown:HatsFchownTest",
+    "fchownat:HatsFchownatTest",
+    "fdatasync:HatsFdatasyncTest",
+    "fgetxattr:HatsFgetxattrTest",
+    "flistxattr:HatsFlistxattrTest",
+    "flock:HatsFlockTest",
+    "fremovexattr:HatsFremovexattrTest",
+    "fsetxattr:HatsFsetxattrTest",
   ]
 }

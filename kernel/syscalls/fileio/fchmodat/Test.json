@@ -1,0 +1,18 @@
+{
+    "description": "Configuration for HatsFchmodatTest Tests",
+    "kits": [
+        {
+            "push": [
+                "HatsFchmodatTest->/data/local/tmp/HatsFchmodatTest"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsFchmodatTest",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    }   
+}

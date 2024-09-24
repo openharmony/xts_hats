@@ -17,8 +17,10 @@ import("//test/xts/hats/build.gni")
 group("HatsFileIoTest") {
   testonly = true
   deps = [
+    "close:HatsCloseTest",
     "faccessat:HatsFaccessatTest",
     "fallocate:HatsFallocateTest",
+    "fchdir:HatsFchdirTest",
     "fchmod:HatsFchmodTest",
     "fchmodat:HatsFchmodatTest",
     "fchown:HatsFchownTest",
@@ -29,5 +31,9 @@ group("HatsFileIoTest") {
     "flock:HatsFlockTest",
     "fremovexattr:HatsFremovexattrTest",
     "fsetxattr:HatsFsetxattrTest",
+    "fstat:HatsFstatTest",
+    "fstatfs:HatsFstatfsTest",
+    "fsync:HatsFsyncTest",
+    "lgetxattr:HatsLgetxattrTest",
   ]
 }

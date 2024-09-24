@@ -1,0 +1,18 @@
+{
+    "description": "Configuration for HatsCloseTest Tests",
+    "kits": [
+        {
+            "push": [
+                "HatsCloseTest->/data/local/tmp/HatsCloseTest"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsCloseTest",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    }   
+}

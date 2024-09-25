@@ -19,9 +19,9 @@
 #include "hdf_base.h"
 #include "osal_mem.h"
 
-#include "v3_0/audio_types.h"
-#include "v3_0/iaudio_manager.h"
-#include "v3_0/iaudio_render.h"
+#include "v4_0/audio_types.h"
+#include "v4_0/iaudio_manager.h"
+#include "v4_0/iaudio_render.h"
 
 using namespace std;
 using namespace testing::ext;

@@ -60,10 +60,13 @@ void FsetxattrApiTest::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FSETXATTR_0100
- * @tc.name FsetxattrValidFdAttrSuccess_0001
- * @tc.desc fsetxattr set valid file attribute success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FSETXATTR_0100
+ * @tc.name   : FsetxattrValidFdAttrSuccess_0001
+ * @tc.desc   : fsetxattr set valid file attribute success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(FsetxattrApiTest, FsetxattrValidFdAttrSuccess_0001, Function | MediumTest | Level1)
 {
     ssize_t ret = -1;
@@ -82,11 +85,14 @@ HWTEST_F(FsetxattrApiTest, FsetxattrValidFdAttrSuccess_0001, Function | MediumTe
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FSETXATTR_0200
- * @tc.name FsetxattrInvalidFdAttrFail_0002
- * @tc.desc fsetxattr set invalid file attribute fail, errno EBADF.
-*/
-HWTEST_F(FsetxattrApiTest, FsetxattrAttrFail_0002, Function | MediumTest | Level2)
+ * @tc.number : SUB_KERNEL_SYSCALL_FSETXATTR_0200
+ * @tc.name   : FsetxattrInvalidFdAttrFail_0002
+ * @tc.desc   : fsetxattr set invalid file attribute fail, errno EBADF.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
+HWTEST_F(FsetxattrApiTest, FsetxattrInvalidFdAttrFail_0002, Function | MediumTest | Level2)
 {
     ssize_t ret = -1;
     int invalidFd = -1;
@@ -98,10 +104,13 @@ HWTEST_F(FsetxattrApiTest, FsetxattrAttrFail_0002, Function | MediumTest | Level
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FSETXATTR_0300
- * @tc.name FsetxattrSetTwiceAttrFail_0003
- * @tc.desc fsetxattr set the file attribute twice fail.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FSETXATTR_0300
+ * @tc.name   : FsetxattrSetTwiceAttrFail_0003
+ * @tc.desc   : fsetxattr set the file attribute twice fail.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FsetxattrApiTest, FsetxattrSetTwiceAttrFail_0003, Function | MediumTest | Level2)
 {
     ssize_t ret = -1;
@@ -124,10 +133,13 @@ HWTEST_F(FsetxattrApiTest, FsetxattrSetTwiceAttrFail_0003, Function | MediumTest
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FSETXATTR_0400
- * @tc.name FsetxattrSetShortAttrFail_0004
- * @tc.desc fsetxattr set file attribute return success but length is shorter than real and finally unexpected.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FSETXATTR_0400
+ * @tc.name   : FsetxattrSetShortAttrFail_0004
+ * @tc.desc   : fsetxattr set file attribute return success but length is shorter than real and finally unexpected.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FsetxattrApiTest, FsetxattrSetShortAttrFail_0004, Function | MediumTest | Level2)
 {
     ssize_t ret = -1;
@@ -147,10 +159,13 @@ HWTEST_F(FsetxattrApiTest, FsetxattrSetShortAttrFail_0004, Function | MediumTest
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FSETXATTR_0500
- * @tc.name FsetxattrReplaceNonExistAttrFail_0005
- * @tc.desc fsetxattr replace file non-exist attribute fail, errno ENODATA.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FSETXATTR_0500
+ * @tc.name   : FsetxattrReplaceNonExistAttrFail_0005
+ * @tc.desc   : fsetxattr replace file non-exist attribute fail, errno ENODATA.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FsetxattrApiTest, FsetxattrReplaceNonExistAttrFail_0005, Function | MediumTest | Level2)
 {
     ssize_t ret = -1;
@@ -167,10 +182,13 @@ HWTEST_F(FsetxattrApiTest, FsetxattrReplaceNonExistAttrFail_0005, Function | Med
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FSETXATTR_0600
- * @tc.name FsetxattrSetUnsupportAttrFail_0006
- * @tc.desc fsetxattr set file unsupported attribute fail, errno ENOTSUP.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FSETXATTR_0600
+ * @tc.name   : FsetxattrSetUnsupportAttrFail_0006
+ * @tc.desc   : fsetxattr set file unsupported attribute fail, errno ENOTSUP.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FsetxattrApiTest, FsetxattrSetUnsupportAttrFail_0006, Function | MediumTest | Level2)
 {
     ssize_t ret = -1;

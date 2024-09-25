@@ -61,10 +61,13 @@ void HatsMsyncTest::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_Msync_0100
- * @tc.name MsyncInvalidateSuccess_0001
- * @tc.desc Msync sets flag MS_INVALIDATE successfully.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MSYNC_0100
+ * @tc.name   : MsyncInvalidateSuccess_0001
+ * @tc.desc   : Msync sets flag MS_INVALIDATE successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsMsyncTest, MsyncInvalidateSuccess_0001, Function | MediumTest | Level1)
 {
     int fd = open(TEST_FILE, O_RDWR | O_CREAT, 0666);
@@ -99,10 +102,13 @@ HWTEST_F(HatsMsyncTest, MsyncInvalidateSuccess_0001, Function | MediumTest | Lev
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_Msync_0200
- * @tc.name MsyncAsyncSuccess_0002
- * @tc.desc Msync sets flag MS_ASYNC successfully.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MSYNC_0200
+ * @tc.name   : MsyncAsyncSuccess_0002
+ * @tc.desc   : Msync sets flag MS_ASYNC successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsMsyncTest, MsyncAsyncSuccess_0002, Function | MediumTest | Level1)
 {
     int fd = open(TEST_FILE, O_RDWR | O_CREAT, 0666);
@@ -134,10 +140,13 @@ HWTEST_F(HatsMsyncTest, MsyncAsyncSuccess_0002, Function | MediumTest | Level1)
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_Msync_0300
- * @tc.name MsyncSyncSuccess_0003
- * @tc.desc Msync sets flag MS_SYNC successfully.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MSYNC_0300
+ * @tc.name   : MsyncSyncSuccess_0003
+ * @tc.desc   : Msync sets flag MS_SYNC successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsMsyncTest, MsyncSyncSuccess_0003, Function | MediumTest | Level1)
 {
     int fd = open(TEST_FILE, O_RDWR | O_CREAT, 0666);
@@ -167,10 +176,13 @@ HWTEST_F(HatsMsyncTest, MsyncSyncSuccess_0003, Function | MediumTest | Level1)
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_Msync_0400
- * @tc.name MsyncInvalidAddrFailed_0004
- * @tc.desc Msync is failed for invalid addr, errno EINVAL.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MSYNC_0400
+ * @tc.name   : MsyncInvalidAddrFailed_0004
+ * @tc.desc   : Msync is failed for invalid addr, errno EINVAL.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(HatsMsyncTest, MsyncInvalidAddrFailed_0004, Function | MediumTest | Level2)
 {
     void *invalidAddr = reinterpret_cast<void *>(0x1234);
@@ -180,10 +192,13 @@ HWTEST_F(HatsMsyncTest, MsyncInvalidAddrFailed_0004, Function | MediumTest | Lev
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_Msync_0500
- * @tc.name MsyncNullAddrFailed_0005
- * @tc.desc Msync is failed for null addr, errno ENOMEM.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MSYNC_0500
+ * @tc.name   : MsyncNullAddrFailed_0005
+ * @tc.desc   : Msync is failed for null addr, errno ENOMEM.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(HatsMsyncTest, MsyncNullAddrFailed_0005, Function | MediumTest | Level2)
 {
     char *data = nullptr;

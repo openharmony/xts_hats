@@ -59,10 +59,13 @@ void HatsProcessvmTest::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_Processvm_0100
- * @tc.name ProcessvmReadSuccess_0001
- * @tc.desc process_vm_readv reads data successfully.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_PROCESSVM_0100
+ * @tc.name   : ProcessvmReadSuccess_0001
+ * @tc.desc   : process_vm_readv reads data successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsProcessvmTest, ProcessvmReadSuccess_0001, Function | MediumTest | Level1)
 {
     pid_t pid = getpid();
@@ -86,10 +89,13 @@ HWTEST_F(HatsProcessvmTest, ProcessvmReadSuccess_0001, Function | MediumTest | L
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_Processvm_0200
- * @tc.name ProcessvmWriteSuccess_0002
- * @tc.desc process_vm_writev writes data successfully.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_PROCESSVM_0200
+ * @tc.name   : ProcessvmWriteSuccess_0002
+ * @tc.desc   : process_vm_writev writes data successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsProcessvmTest, ProcessvmWriteSuccess_0002, Function | MediumTest | Level1)
 {
     pid_t pid = getpid();

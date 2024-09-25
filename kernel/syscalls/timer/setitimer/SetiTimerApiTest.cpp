@@ -57,9 +57,12 @@ void SetiTimerApiTest::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_SETITIMER_0100
- * @tc.name SetiTimerGetRealTimeSuccess_0001
- * @tc.desc Test the ITIMER_REAL timer.
+ * @tc.number : SUB_KERNEL_SYSCALL_SETITIMER_0100
+ * @tc.name   : SetiTimerGetRealTimeSuccess_0001
+ * @tc.desc   : Test the ITIMER_REAL timer.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
 HWTEST_F(SetiTimerApiTest, SetiTimerGetRealTimeSuccess_0001, Function | MediumTest | Level1)
 {

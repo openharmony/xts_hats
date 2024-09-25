@@ -58,10 +58,13 @@ void HatsMmapSyscallTest::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_MmapSyscall_0100
- * @tc.name MmapSyscallReadSuccess_0001
- * @tc.desc Mmap sets prot PROT_READ successfully.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MMAPSYSCALL_0100
+ * @tc.name   : MmapSyscallReadSuccess_0001
+ * @tc.desc   : Mmap sets prot PROT_READ successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsMmapSyscallTest, MmapSyscallReadSuccess_0001, Function | MediumTest | Level1)
 {
     size_t size = 2048;
@@ -73,10 +76,13 @@ HWTEST_F(HatsMmapSyscallTest, MmapSyscallReadSuccess_0001, Function | MediumTest
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_MmapSyscall_0200
- * @tc.name MmapSyscallWriteSuccess_0002
- * @tc.desc Mmap sets prot PROT_WRITE successfully.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MMAPSYSCALL_0200
+ * @tc.name   : MmapSyscallWriteSuccess_0002
+ * @tc.desc   : Mmap sets prot PROT_WRITE successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsMmapSyscallTest, MmapSyscallWriteSuccess_0002, Function | MediumTest | Level1)
 {
     size_t size = 1024;
@@ -88,10 +94,13 @@ HWTEST_F(HatsMmapSyscallTest, MmapSyscallWriteSuccess_0002, Function | MediumTes
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_MmapSyscall_0300
- * @tc.name MmapSyscallMlockedSuccess_0003
- * @tc.desc Mmap sets flag MAP_LOCKED、MAP_ANONYMOUS、MAP_PRIVATE successfully.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MMAPSYSCALL_0300
+ * @tc.name   : MmapSyscallMlockedSuccess_0003
+ * @tc.desc   : Mmap sets flag MAP_LOCKED、MAP_ANONYMOUS、MAP_PRIVATE successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsMmapSyscallTest, MmapSyscallMlockedSuccess_0003, Function | MediumTest | Level1)
 {
     size_t size = 1024;
@@ -103,10 +112,13 @@ HWTEST_F(HatsMmapSyscallTest, MmapSyscallMlockedSuccess_0003, Function | MediumT
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_MmapSyscall_0400
- * @tc.name MmapSyscallNoReserveSuccess_0004
- * @tc.desc Mmap sets flag MAP_NORESERVE、MAP_ANONYMOUS、MAP_PRIVATE successfully.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MMAPSYSCALL_0400
+ * @tc.name   : MmapSyscallNoReserveSuccess_0004
+ * @tc.desc   : Mmap sets flag MAP_NORESERVE、MAP_ANONYMOUS、MAP_PRIVATE successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsMmapSyscallTest, MmapSyscallNoReserveSuccess_0004, Function | MediumTest | Level1)
 {
     size_t size = 1024;
@@ -118,10 +130,13 @@ HWTEST_F(HatsMmapSyscallTest, MmapSyscallNoReserveSuccess_0004, Function | Mediu
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_MmapSyscall_0500
- * @tc.name MmapSyscallPrivateSuccess_0005
- * @tc.desc Mmap sets flag MAP_ANONYMOUS and MAP_PRIVATE successfully.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MMAPSYSCALL_0500
+ * @tc.name   : MmapSyscallPrivateSuccess_0005
+ * @tc.desc   : Mmap sets flag MAP_ANONYMOUS and MAP_PRIVATE successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsMmapSyscallTest, MmapSyscallPrivateSuccess_0005, Function | MediumTest | Level1)
 {
     size_t size = 1024;
@@ -133,10 +148,13 @@ HWTEST_F(HatsMmapSyscallTest, MmapSyscallPrivateSuccess_0005, Function | MediumT
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_MmapSyscall_0600
- * @tc.name MmapSyscallFailed_0006
- * @tc.desc Mmap map addr failed for size 0.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MMAPSYSCALL_0600
+ * @tc.name   : MmapSyscallFailed_0006
+ * @tc.desc   : Mmap map addr failed for size 0.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(HatsMmapSyscallTest, MmapSyscallFailed_0006, Function | MediumTest | Level2)
 {
     size_t size = 0;
@@ -150,10 +168,13 @@ HWTEST_F(HatsMmapSyscallTest, MmapSyscallFailed_0006, Function | MediumTest | Le
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_MmapSyscall_0700
- * @tc.name MremapSyscallToLargeSuccess_0007
- * @tc.desc Mremap maps with flag 0 from small memory to large successfully.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MMAPSYSCALL_0700
+ * @tc.name   : MremapSyscallToLargeSuccess_0007
+ * @tc.desc   : Mremap maps with flag 0 from small memory to large successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(HatsMmapSyscallTest, MremapSyscallToLargeSuccess_0007, Function | MediumTest | Level2)
 {
     size_t size = 1024;
@@ -172,10 +193,13 @@ HWTEST_F(HatsMmapSyscallTest, MremapSyscallToLargeSuccess_0007, Function | Mediu
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_MmapSyscall_0800
- * @tc.name MremapSyscallToSmallSuccess_0008
- * @tc.desc Mremap maps with flag 0 from large memory to small successfully.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MMAPSYSCALL_0800
+ * @tc.name   : MremapSyscallToSmallSuccess_0008
+ * @tc.desc   : Mremap maps with flag 0 from large memory to small successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(HatsMmapSyscallTest, MremapSyscallToSmallSuccess_0008, Function | MediumTest | Level2)
 {
     size_t size = 4096;
@@ -194,10 +218,13 @@ HWTEST_F(HatsMmapSyscallTest, MremapSyscallToSmallSuccess_0008, Function | Mediu
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_MmapSyscall_0900
- * @tc.name MremapSyscallMoveSuccess_0009
- * @tc.desc Mremap maps with flag MREMAP_MAYMOVE from small memory  to large successfully.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MMAPSYSCALL_0900
+ * @tc.name   : MremapSyscallMoveSuccess_0009
+ * @tc.desc   : Mremap maps with flag MREMAP_MAYMOVE from small memory  to large successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(HatsMmapSyscallTest, MremapSyscallMoveSuccess_0009, Function | MediumTest | Level2)
 {
     size_t size = 1024;

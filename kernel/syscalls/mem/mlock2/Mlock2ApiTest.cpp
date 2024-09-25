@@ -59,10 +59,13 @@ void HatsMlock2Test::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_Mlock2_0100
- * @tc.name Mlock2Success_0001
- * @tc.desc Mlock2 locks pages that are currently resident successfully.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MLOCK2_0100
+ * @tc.name   : Mlock2Success_0001
+ * @tc.desc   : Mlock2 locks pages that are currently resident successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsMlock2Test, Mlock2Success_0001, Function | MediumTest | Level1)
 {
     int ret;
@@ -77,10 +80,13 @@ HWTEST_F(HatsMlock2Test, Mlock2Success_0001, Function | MediumTest | Level1)
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_Mlock2_0200
- * @tc.name Mlock2Success_0002
- * @tc.desc When flags is 0, mlock2() behaves exactly the same as mlock().
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MLOCK2_0200
+ * @tc.name   : Mlock2Success_0002
+ * @tc.desc   : When flags is 0, mlock2() behaves exactly the same as mlock().
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsMlock2Test, Mlock2Success_0002, Function | MediumTest | Level1)
 {
     int ret;
@@ -96,10 +102,13 @@ HWTEST_F(HatsMlock2Test, Mlock2Success_0002, Function | MediumTest | Level1)
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_Mlock2_0300
- * @tc.name Mlock2Invalid_0003
- * @tc.desc When flag is invalid, mlock2() locks failed, errno is set to EINVAL.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MLOCK2_0300
+ * @tc.name   : Mlock2Invalid_0003
+ * @tc.desc   : When flag is invalid, mlock2() locks failed, errno is set to EINVAL.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(HatsMlock2Test, Mlock2Invalid_0003, Function | MediumTest | Level2)
 {
     int ret;

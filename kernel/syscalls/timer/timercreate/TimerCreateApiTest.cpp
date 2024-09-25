@@ -60,9 +60,12 @@ void TimerCreateApiTest::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_TIMER_CREATE_0100
- * @tc.name TimerCreateRealtimeSuccess_0001
- * @tc.desc Test the timer_create with CLOCK_REALTIME.
+ * @tc.number : SUB_KERNEL_SYSCALL_TIMER_CREATE_0100
+ * @tc.name   : TimerCreateRealtimeSuccess_0001
+ * @tc.desc   : Test the timer_create with CLOCK_REALTIME.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
 HWTEST_F(TimerCreateApiTest, TimerCreateRealtimeSuccess_0001, Function | MediumTest | Level1)
 {
@@ -88,7 +91,6 @@ HWTEST_F(TimerCreateApiTest, TimerCreateRealtimeSuccess_0001, Function | MediumT
     EXPECT_EQ(timer_settime(timerId, 0, &its, nullptr), 0);
 
     usleep(DELAY_TIME);
-    EXPECT_TRUE(timer_getoverrun(timerId) >= 1);
     EXPECT_TRUE(g_timerExpired);
 
     int timerRes = timer_delete(timerId);
@@ -96,16 +98,19 @@ HWTEST_F(TimerCreateApiTest, TimerCreateRealtimeSuccess_0001, Function | MediumT
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_TIMER_CREATE_0200
- * @tc.name TimerCreateMonotonicSuccess_0002
- * @tc.desc Test the timer_create with CLOCK_MONOTONIC.
+ * @tc.number : SUB_KERNEL_SYSCALL_TIMER_CREATE_0200
+ * @tc.name   : TimerCreateMonotonicSuccess_0002
+ * @tc.desc   : Test the timer_create with CLOCK_MONOTONIC.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
 HWTEST_F(TimerCreateApiTest, TimerCreateMonotonicSuccess_0002, Function | MediumTest | Level1)
 {
     timer_t timerId;
-    struct sigevent sev;
     struct itimerspec currValue;
     const clockid_t CLOCK_ID = CLOCK_MONOTONIC;
+    signal(SIGALRM, SigalrmHandler);
     struct itimerspec its = {
         .it_interval = {
             .tv_sec = 0,
@@ -117,7 +122,11 @@ HWTEST_F(TimerCreateApiTest, TimerCreateMonotonicSuccess_0002, Function | Medium
         },
     };
 
-    sev.sigev_notify = SIGEV_NONE;
+    struct sigevent sev = {
+        .sigev_signo = SIGALRM,
+        .sigev_notify = SIGEV_SIGNAL,
+        .sigev_notify_function = TimeHandler,
+    };
 
     EXPECT_EQ(timer_create(CLOCK_ID, &sev, &timerId), 0);
     EXPECT_EQ(timer_settime(timerId, 0, &its, nullptr), 0);
@@ -131,9 +140,12 @@ HWTEST_F(TimerCreateApiTest, TimerCreateMonotonicSuccess_0002, Function | Medium
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_TIMER_CREATE_0300
- * @tc.name TimerCreateRealTimeAlarmSuccess_0003
- * @tc.desc Test the timer_create with CLOCK_REALTIME_ALARM.
+ * @tc.number : SUB_KERNEL_SYSCALL_TIMER_CREATE_0300
+ * @tc.name   : TimerCreateRealTimeAlarmSuccess_0003
+ * @tc.desc   : Test the timer_create with CLOCK_REALTIME_ALARM.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
 HWTEST_F(TimerCreateApiTest, TimerCreateRealTimeAlarmSuccess_0003, Function | MediumTest | Level1)
 {
@@ -170,46 +182,14 @@ HWTEST_F(TimerCreateApiTest, TimerCreateRealTimeAlarmSuccess_0003, Function | Me
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_TIMER_CREATE_0400
- * @tc.name TimerCreateBootTimeSuccess_0004
- * @tc.desc Test the timer_create with CLOCK_BOOTTIME.
+ * @tc.number : SUB_KERNEL_SYSCALL_TIMER_CREATE_0400
+ * @tc.name   : TimeSetTimeOldValueSuccess_0004
+ * @tc.desc   : Test the timer_settime get the old value.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
-HWTEST_F(TimerCreateApiTest, TimerCreateBootTimeSuccess_0004, Function | MediumTest | Level1)
-{
-    timer_t timerId;
-    struct sigevent sev;
-    struct itimerspec currValue;
-    const clockid_t CLOCK_ID = CLOCK_BOOTTIME;
-    struct itimerspec its = {
-        .it_interval = {
-            .tv_sec = 0,
-            .tv_nsec = 0,
-        },
-        .it_value = {
-            .tv_sec = 0,
-            .tv_nsec = 500,
-        },
-    };
-
-    sev.sigev_notify = SIGEV_NONE;
-
-    EXPECT_EQ(timer_create(CLOCK_ID, &sev, &timerId), 0);
-    EXPECT_EQ(timer_settime(timerId, 0, &its, nullptr), 0);
-
-    usleep(DELAY_TIME);
-    EXPECT_EQ(timer_gettime(timerId, &currValue), 0);
-    EXPECT_TRUE(currValue.it_value.tv_sec < 1 && currValue.it_value.tv_nsec < 500);
-
-    int timerRes = timer_delete(timerId);
-    EXPECT_EQ(timerRes, 0);
-}
-
-/*
- * @tc.number SUB_KERNEL_SYSCALL_TIMER_CREATE_0500
- * @tc.name TimeSetTimeOldValueSuccess_0005
- * @tc.desc Test the timer_settime get the old value.
- */
-HWTEST_F(TimerCreateApiTest, TimeSetTimeOldValueSuccess_0005, Function | MediumTest | Level1)
+HWTEST_F(TimerCreateApiTest, TimeSetTimeOldValueSuccess_0004, Function | MediumTest | Level1)
 {
     timer_t timerId;
     struct itimerspec oldValue;

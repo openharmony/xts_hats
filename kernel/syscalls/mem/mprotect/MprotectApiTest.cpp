@@ -58,10 +58,13 @@ void HatsMprotectTest::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_MPROTECT_0100
- * @tc.name MprotectWriteSuccess_0001
- * @tc.desc mprotect changes the access protections to PROT_WRITE successfully.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MPROTECT_0100
+ * @tc.name   : MprotectWriteSuccess_0001
+ * @tc.desc   : mprotect changes the access protections to PROT_WRITE successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsMprotectTest, MprotectWriteSuccess_0001, Function | MediumTest | Level1)
 {
     int ret;
@@ -84,10 +87,13 @@ HWTEST_F(HatsMprotectTest, MprotectWriteSuccess_0001, Function | MediumTest | Le
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_MPROTECT_0200
- * @tc.name MprotectExeSuccess_0002
- * @tc.desc mprotect changes the access protections to PROT_EXEC successfully.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MPROTECT_0200
+ * @tc.name   : MprotectExeSuccess_0002
+ * @tc.desc   : mprotect changes the access protections to PROT_EXEC successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsMprotectTest, MprotectExeSuccess_0002, Function | MediumTest | Level1)
 {
     int ret;
@@ -110,10 +116,13 @@ HWTEST_F(HatsMprotectTest, MprotectExeSuccess_0002, Function | MediumTest | Leve
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_MPROTECT_0300
- * @tc.name MprotectAddrInvalid_0003
- * @tc.desc mprotect changes the access protections to PROT_READ failed for invalid address,error code is ENOMEM.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MPROTECT_0300
+ * @tc.name   : MprotectAddrInvalid_0003
+ * @tc.desc   : mprotect changes the access protections to PROT_READ failed for invalid address,error code is ENOMEM.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(HatsMprotectTest, MprotectAddrInvalid_0003, Function | MediumTest | Level2)
 {
     int ret;
@@ -135,10 +144,13 @@ HWTEST_F(HatsMprotectTest, MprotectAddrInvalid_0003, Function | MediumTest | Lev
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_MPROTECT_0400
- * @tc.name MprotectFlagInvalid_0004
- * @tc.desc mprotect changes the access protections to PROT_READ failed for flag invalid, error code is EINVAL.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MPROTECT_0400
+ * @tc.name   : MprotectFlagInvalid_0004
+ * @tc.desc   : mprotect changes the access protections to PROT_READ failed for flag invalid, error code is EINVAL.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(HatsMprotectTest, MprotectFlagInvalid_0004, Function | MediumTest | Level2)
 {
     int ret;
@@ -164,11 +176,13 @@ HWTEST_F(HatsMprotectTest, MprotectFlagInvalid_0004, Function | MediumTest | Lev
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_MPROTECT_0500
- * @tc.name MprotectUpDownInvalid_0005
- * @tc.desc When both PROT_GROWSUP and PROT_GROWSDOWN were specified, mprotect changes the access protections failed,
-   and errno is EINVAL.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MPROTECT_0500
+ * @tc.name   : MprotectUpDownInvalid_0005
+ * @tc.desc   : When PROT_GROWSUP and PROT_GROWSDOWN specified change access protections failed,
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(HatsMprotectTest, MprotectUpDownInvalid_0005, Function | MediumTest | Level2)
 {
     int ret;

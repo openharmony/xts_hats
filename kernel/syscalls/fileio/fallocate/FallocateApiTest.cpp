@@ -56,10 +56,13 @@ void FallocateApiTest::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FALLOCATE_0100
- * @tc.name FallocateValidFdSuccess_0001
- * @tc.desc fallocate allocate valid file space success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FALLOCATE_0100
+ * @tc.name   : FallocateValidFdSuccess_0001
+ * @tc.desc   : fallocate allocate valid file space success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(FallocateApiTest, FallocateValidFdSuccess_0001, Function | MediumTest | Level1)
 {
     int ret = -1;
@@ -74,10 +77,13 @@ HWTEST_F(FallocateApiTest, FallocateValidFdSuccess_0001, Function | MediumTest |
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FALLOCATE_0200
- * @tc.name FallocateInvalidFdFail_0002
- * @tc.desc fallocate allocate invalid fd space fail, errno EBADF.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FALLOCATE_0200
+ * @tc.name   : FallocateInvalidFdFail_0002
+ * @tc.desc   : fallocate allocate invalid fd space fail, errno EBADF.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FallocateApiTest, FallocateInvalidFdFail_0002, Function | MediumTest | Level2)
 {
     int ret;
@@ -90,10 +96,13 @@ HWTEST_F(FallocateApiTest, FallocateInvalidFdFail_0002, Function | MediumTest | 
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FALLOCATE_0300
- * @tc.name FallocateInvalidBaseOrLenFail_0003
- * @tc.desc fallocate allocate file space with invalid offset or invalid length fail.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FALLOCATE_0300
+ * @tc.name   : FallocateInvalidBaseOrLenFail_0003
+ * @tc.desc   : fallocate allocate file space with invalid offset or invalid length fail.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FallocateApiTest, FallocateInvalidBaseAndLenFail_0003, Function | MediumTest | Level2)
 {
     int ret = -1;

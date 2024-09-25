@@ -51,10 +51,13 @@ void FsyncApiTest::TearDownTestCase()
 static const char* TEST_FILE = "/data/local/tmp/test.txt";
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FSYNC_0100
- * @tc.name FsyncValidFdSuccess_0001
- * @tc.desc sync valid fd after write success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FSYNC_0100
+ * @tc.name   : FsyncValidFdSuccess_0001
+ * @tc.desc   : sync valid fd after write success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(FsyncApiTest, FsyncValidFdSuccess_0001, Function | MediumTest | Level1)
 {
     int ret;
@@ -74,10 +77,13 @@ HWTEST_F(FsyncApiTest, FsyncValidFdSuccess_0001, Function | MediumTest | Level1)
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FSYNC_0200
- * @tc.name FsyncUseInvalidFdFailed_0002
- * @tc.desc fsync use invalid fd failed, errno EBADF.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FSYNC_0200
+ * @tc.name   : FsyncUseInvalidFdFailed_0002
+ * @tc.desc   : fsync use invalid fd failed, errno EBADF.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FsyncApiTest, FsyncUseInvalidFdFailed_0002, Function | MediumTest | Level2)
 {
     int fd = -1;

@@ -62,11 +62,14 @@ mode_t MODE_0755 = S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IXGRP | S_IROTH | S
 struct stat g_statbuf;
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FCHMODAT_0100
- * @tc.name FchmodatFileModeSuccess_0001
- * @tc.desc fchmodat valid file mode bits success.
-*/
-HWTEST_F(FchmodatApiTest, FchmodatFileSuccess_0001, Function | MediumTest | Level1)
+ * @tc.number : SUB_KERNEL_SYSCALL_FCHMODAT_0100
+ * @tc.name   : FchmodatFileModeSuccess_0001
+ * @tc.desc   : fchmodat valid file mode bits success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
+HWTEST_F(FchmodatApiTest, FchmodatFileModeSuccess_0001, Function | MediumTest | Level1)
 {
     int ret = -1;
     if (access(TEST_FILE_PATH, F_OK) != 0) {
@@ -94,10 +97,13 @@ HWTEST_F(FchmodatApiTest, FchmodatFileSuccess_0001, Function | MediumTest | Leve
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FCHMODAT_0200
- * @tc.name FchmodatInvalidFdModeFail_0002
- * @tc.desc fchmodat invalid file mode bits fail, errno EBADF.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FCHMODAT_0200
+ * @tc.name   : FchmodatInvalidFdModeFail_0002
+ * @tc.desc   : fchmodat invalid file mode bits fail, errno EBADF.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FchmodatApiTest, FchmodatInvalidFdModeFail_0002, Function | MediumTest | Level2)
 {
     int ret = -1;
@@ -110,10 +116,13 @@ HWTEST_F(FchmodatApiTest, FchmodatInvalidFdModeFail_0002, Function | MediumTest 
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FCHMODAT_0300
- * @tc.name FchmodatAT_FDCWDModeSuccess_0003
- * @tc.desc fchmodat AT_FDCWD test success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FCHMODAT_0300
+ * @tc.name   : FchmodatAT_FDCWDModeSuccess_0003
+ * @tc.desc   : fchmodat AT_FDCWD test success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(FchmodatApiTest, FchmodatAT_FDCWDModeSuccess_0003, Function | MediumTest | Level1)
 {
     int ret = -1;
@@ -138,10 +147,13 @@ HWTEST_F(FchmodatApiTest, FchmodatAT_FDCWDModeSuccess_0003, Function | MediumTes
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FCHMODAT_0400
- * @tc.name FchmodatLinkFileModeFail_0004
- * @tc.desc fchmodat change link file mode bits when symbol link not follow fail, errno EOPNOTSUPP.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FCHMODAT_0400
+ * @tc.name   : FchmodatLinkFileModeFail_0004
+ * @tc.desc   : fchmodat change link file mode bits when symbol link not follow fail, errno EOPNOTSUPP.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FchmodatApiTest, FchmodatLinkFileModeFail_0004, Function | MediumTest | Level2)
 {
     int ret = -1;

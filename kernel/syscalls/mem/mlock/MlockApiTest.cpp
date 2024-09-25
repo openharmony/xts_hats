@@ -59,10 +59,13 @@ void HatsMlockTest::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_Mlock_0100
- * @tc.name MlockSuccess_0001
- * @tc.desc Mlock locks address successfully.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MLOCK_0100
+ * @tc.name   : MlockSuccess_0001
+ * @tc.desc   : Mlock locks address successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsMlockTest, MlockSuccess_0001, Function | MediumTest | Level1)
 {
     int size = 4096;
@@ -85,10 +88,13 @@ HWTEST_F(HatsMlockTest, MlockSuccess_0001, Function | MediumTest | Level1)
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_Mlock_0200
- * @tc.name MlockallSuccess_0002
- * @tc.desc mlockall sets flag MCL_CURRENT successfully.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MLOCK_0200
+ * @tc.name   : MlockallSuccess_0002
+ * @tc.desc   : mlockall sets flag MCL_CURRENT successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsMlockTest, MlockallSuccess_0002, Function | MediumTest | Level1)
 {
     int ret = mlockall(MCL_CURRENT | MCL_FUTURE);

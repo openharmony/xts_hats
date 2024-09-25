@@ -53,10 +53,13 @@ static const char* OPEN_API_TEST_FILE = "/data/local/tmp/";
 static const int MAX_LEN = 128;
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_LGETXATTR_0100
- * @tc.name LgetxattrGetValidAttrSuccess_0001
- * @tc.desc lgetxattr get valid attr success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_LGETXATTR_0100
+ * @tc.name   : LgetxattrGetValidAttrSuccess_0001
+ * @tc.desc   : lgetxattr get valid attr success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(LgetxattrApiTest, LgetxattrGetValidAttrSuccess_0001, Function | MediumTest | Level1)
 {
     const char* name = "user.example";
@@ -71,10 +74,13 @@ HWTEST_F(LgetxattrApiTest, LgetxattrGetValidAttrSuccess_0001, Function | MediumT
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_LGETXATTR_0200
- * @tc.name LgetxattrGetInvalidAttrFailed_0002
- * @tc.desc lgetxattr get invalid attr failed, errno is ENODATA.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_LGETXATTR_0200
+ * @tc.name   : LgetxattrGetInvalidAttrFailed_0002
+ * @tc.desc   : lgetxattr get invalid attr failed, errno is ENODATA.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(LgetxattrApiTest, LgetxattrGetInvalidAttrFailed_0002, Function | MediumTest | Level2)
 {
     const char* name = "user.example1";

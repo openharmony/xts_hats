@@ -58,10 +58,13 @@ void FremovexattrApiTest::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FREMOVEXATTR_0100
- * @tc.name FremovexattrValidFdAttrSuccess_0001
- * @tc.desc fremovexattr remove valid file attribute success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FREMOVEXATTR_0100
+ * @tc.name   : FremovexattrValidFdAttrSuccess_0001
+ * @tc.desc   : fremovexattr remove valid file attribute success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(FremovexattrApiTest, FremovexattrValidFdAttrSuccess_0001, Function | MediumTest | Level1)
 {
     ssize_t ret = -1;
@@ -78,10 +81,13 @@ HWTEST_F(FremovexattrApiTest, FremovexattrValidFdAttrSuccess_0001, Function | Me
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FREMOVEXATTR_0200
- * @tc.name FremovexattrInvalidFdAttrFail_0002
- * @tc.desc fremovexattr remove invalid file attribute fail, errno EBADF.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FREMOVEXATTR_0200
+ * @tc.name   : FremovexattrInvalidFdAttrFail_0002
+ * @tc.desc   : fremovexattr remove invalid file attribute fail, errno EBADF.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FremovexattrApiTest, FremovexattrInvalidFdAttrFail_0002, Function | MediumTest | Level2)
 {
     int invalidFd = -1;
@@ -92,10 +98,13 @@ HWTEST_F(FremovexattrApiTest, FremovexattrInvalidFdAttrFail_0002, Function | Med
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FREMOVEXATTR_0300
- * @tc.name FremovexattrRemoveNonExistAttrFail_0003
- * @tc.desc fremovexattr remove file non-exist attribute fail, errno ENODATA.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FREMOVEXATTR_0300
+ * @tc.name   : FremovexattrRemoveNonExistAttrFail_0003
+ * @tc.desc   : fremovexattr remove file non-exist attribute fail, errno ENODATA.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FremovexattrApiTest, FremovexattrRemoveNonExistAttrFail_0003, Function | MediumTest | Level2)
 {
     ssize_t ret = -1;

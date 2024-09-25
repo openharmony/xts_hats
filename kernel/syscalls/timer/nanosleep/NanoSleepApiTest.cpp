@@ -49,9 +49,12 @@ void SignalHandler(int sig)
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_NANOSLEEP_0100
- * @tc.name NanoSleepBlockedSuccess_0001.
- * @tc.desc Blocked by other progress.
+ * @tc.number : SUB_KERNEL_SYSCALL_NANOSLEEP_0100
+ * @tc.name   : NanoSleepBlockedSuccess_0001.
+ * @tc.desc   : Blocked by other progress.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
 HWTEST_F(ClockApiTest, NanoSleepBlockedSuccess_0001, Function | MediumTest | Level1)
 {
@@ -87,9 +90,12 @@ HWTEST_F(ClockApiTest, NanoSleepBlockedSuccess_0001, Function | MediumTest | Lev
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_NANOSLEEP_0200
- * @tc.name NanoSleepSuccess_0002
- * @tc.desc Nanosleep successfully.
+ * @tc.number : SUB_KERNEL_SYSCALL_NANOSLEEP_0200
+ * @tc.name   : NanoSleepSuccess_0002
+ * @tc.desc   : Nanosleep successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
 HWTEST_F(ClockApiTest, NanoSleepSuccess_0002, Function | MediumTest | Level1)
 {

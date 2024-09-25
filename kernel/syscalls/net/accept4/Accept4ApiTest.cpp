@@ -109,10 +109,13 @@ static void ClientConnect(void)
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_ACCEPT4_0100
- * @tc.name Accept4ValidSockfdSuccess_0001
- * @tc.desc accept4 valid sockfd success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_ACCEPT4_0100
+ * @tc.name   : Accept4ValidSockfdSuccess_0001
+ * @tc.desc   : accept4 valid sockfd success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsAccept4Test, Accept4ValidSockfdSuccess_0001, Function | MediumTest | Level1)
 {
     int pid = -1;
@@ -137,10 +140,13 @@ HWTEST_F(HatsAccept4Test, Accept4ValidSockfdSuccess_0001, Function | MediumTest 
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_ACCEPT4_0200
- * @tc.name Accept4GetClientAddrSuccess_0002
- * @tc.desc accept4 get client addr success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_ACCEPT4_0200
+ * @tc.name   : Accept4GetClientAddrSuccess_0002
+ * @tc.desc   : accept4 get client addr success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsAccept4Test, Accept4GetClientAddrSuccess_0002, Function | MediumTest | Level1)
 {
     int pid = -1;
@@ -164,10 +170,13 @@ HWTEST_F(HatsAccept4Test, Accept4GetClientAddrSuccess_0002, Function | MediumTes
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_ACCEPT4_0300
- * @tc.name Accept4GetClientAddrSuccess_0003
- * @tc.desc accept4 get client addr len success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_ACCEPT4_0300
+ * @tc.name   : Accept4GetClientAddrSuccess_0003
+ * @tc.desc   : accept4 get client addr len success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsAccept4Test, Accept4GetClientAddrSuccess_0003, Function | MediumTest | Level1)
 {
     int pid = -1;
@@ -191,10 +200,13 @@ HWTEST_F(HatsAccept4Test, Accept4GetClientAddrSuccess_0003, Function | MediumTes
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_ACCEPT4_0400
- * @tc.name Accept4InvalidFd_0004
- * @tc.desc accept4 use invalid socket fd, return -1, and set errno.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_ACCEPT4_0400
+ * @tc.name   : Accept4InvalidFd_0004
+ * @tc.desc   : accept4 use invalid socket fd, return -1, and set errno.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(HatsAccept4Test, Accept4InvalidFd_0004, Function | MediumTest | Level2)
 {
     int ret = accept4(BAD_SOCKET_FD, nullptr, nullptr, 0);

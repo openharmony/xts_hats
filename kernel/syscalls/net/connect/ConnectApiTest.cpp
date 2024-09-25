@@ -81,10 +81,13 @@ void HatsConnectTest::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_CONNECT_0100
- * @tc.name ConnectServiceSuccess_0001
- * @tc.desc connect to local service success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_CONNECT_0100
+ * @tc.name   : ConnectServiceSuccess_0001
+ * @tc.desc   : connect to local service success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsConnectTest, ConnectServiceSuccess_0001, Function | MediumTest | Level1)
 {
     int ret;
@@ -111,10 +114,13 @@ HWTEST_F(HatsConnectTest, ConnectServiceSuccess_0001, Function | MediumTest | Le
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_CONNECT_0200
- * @tc.name ConnectUseInvalidFdFailed_0002
- * @tc.desc connect to service use invalid socket fd failed.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_CONNECT_0200
+ * @tc.name   : ConnectUseInvalidFdFailed_0002
+ * @tc.desc   : connect to service use invalid socket fd failed.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsConnectTest, ConnectUseInvalidFdFailed_0002, Function | MediumTest | Level1)
 {
     int ret;
@@ -143,10 +149,13 @@ HWTEST_F(HatsConnectTest, ConnectUseInvalidFdFailed_0002, Function | MediumTest 
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_CONNECT_0300
- * @tc.name ConnectUseServiceFdFailed_0003
- * @tc.desc client connect use service socket fd, errno EISCONN.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_CONNECT_0300
+ * @tc.name   : ConnectUseServiceFdFailed_0003
+ * @tc.desc   : client connect use service socket fd, errno EISCONN.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(HatsConnectTest, ConnectUseServiceFdFailed_0003, Function | MediumTest | Level2)
 {
     int ret;
@@ -168,10 +177,13 @@ HWTEST_F(HatsConnectTest, ConnectUseServiceFdFailed_0003, Function | MediumTest 
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_CONNECT_0400
- * @tc.name ConnectNoListenFdFailed_0004
- * @tc.desc connect to socket fd which does not listen, errno ECONNREFUSED.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_CONNECT_0400
+ * @tc.name   : ConnectNoListenFdFailed_0004
+ * @tc.desc   : connect to socket fd which does not listen, errno ECONNREFUSED.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(HatsConnectTest, ConnectNoListenFdFailed_0004, Function | MediumTest | Level2)
 {
     int ret;
@@ -195,10 +207,13 @@ HWTEST_F(HatsConnectTest, ConnectNoListenFdFailed_0004, Function | MediumTest | 
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_CONNECT_0500
- * @tc.name ConnectUseNullAddrFailed_0005
- * @tc.desc connect to nullptr addr, errno EFAULT.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_CONNECT_0500
+ * @tc.name   : ConnectUseNullAddrFailed_0005
+ * @tc.desc   : connect to nullptr addr, errno EFAULT.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(HatsConnectTest, ConnectUseNullAddrFailed_0005, Function | MediumTest | Level2)
 {
     int ret;
@@ -218,10 +233,13 @@ HWTEST_F(HatsConnectTest, ConnectUseNullAddrFailed_0005, Function | MediumTest |
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_CONNECT_0600
- * @tc.name ConnectWithErrorPortFailed_0006
- * @tc.desc connect to service using error port, errno ECONNREFUSED.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_CONNECT_0600
+ * @tc.name   : ConnectWithErrorPortFailed_0006
+ * @tc.desc   : connect to service using error port, errno ECONNREFUSED.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(HatsConnectTest, ConnectWithErrorPortFailed_0006, Function | MediumTest | Level2)
 {
     int ret;
@@ -249,10 +267,13 @@ HWTEST_F(HatsConnectTest, ConnectWithErrorPortFailed_0006, Function | MediumTest
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_CONNECT_0700
- * @tc.name ConnectTestAddrLen_0007
- * @tc.desc connect user addr len >= sizeof(serAddr) success, otherwise errno EINVAL.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_CONNECT_0700
+ * @tc.name   : ConnectTestAddrLen_0007
+ * @tc.desc   : connect user addr len >= sizeof(serAddr) success, otherwise errno EINVAL.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(HatsConnectTest, ConnectTestAddrLen_0007, Function | MediumTest | Level2)
 {
     int ret;

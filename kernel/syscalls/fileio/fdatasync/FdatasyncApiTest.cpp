@@ -54,10 +54,13 @@ void FdatasyncApiTest::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FDATASYNC_0100
- * @tc.name FdatasyncValidFdSuccess_0001
- * @tc.desc fdatasync sync valid file success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FDATASYNC_0100
+ * @tc.name   : FdatasyncValidFdSuccess_0001
+ * @tc.desc   : fdatasync sync valid file success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(FdatasyncApiTest, FdatasyncValidFdSuccess_0001, Function | MediumTest | Level1)
 {
     int ret = -1;
@@ -76,10 +79,13 @@ HWTEST_F(FdatasyncApiTest, FdatasyncValidFdSuccess_0001, Function | MediumTest |
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FDATASYNC_0200
- * @tc.name FdatasyncInvalidFdFail_0002
- * @tc.desc fdatasync sync invalid file fail, errno EBADF.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FDATASYNC_0200
+ * @tc.name   : FdatasyncInvalidFdFail_0002
+ * @tc.desc   : fdatasync sync invalid file fail, errno EBADF.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FdatasyncApiTest, FdatasyncInvalidFdFail_0002, Function | MediumTest | Level2)
 {
     int invalidFd = -1;

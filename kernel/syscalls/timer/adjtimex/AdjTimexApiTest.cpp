@@ -44,9 +44,12 @@ void HatsAdjTimexApiTest::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_ADJTIMEX_0100
- * @tc.name AdjTimexGetCurrentTimeSuccess_0001
- * @tc.desc Test the adjtimex get current time success.
+ * @tc.number : SUB_KERNEL_SYSCALL_ADJTIMEX_0100
+ * @tc.name   : AdjTimexGetCurrentTimeSuccess_0001
+ * @tc.desc   : Test the adjtimex get current time success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
 HWTEST_F(HatsAdjTimexApiTest, AdjTimexGetCurrentTimeSuccess_0001, Function | MediumTest | Level1)
 {
@@ -62,9 +65,12 @@ HWTEST_F(HatsAdjTimexApiTest, AdjTimexGetCurrentTimeSuccess_0001, Function | Med
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_CLOCK_ADJTIMEX_0200
- * @tc.name ClockAdjTimexGetCurrentTimeSuccess_0002
- * @tc.desc Test the clock_adjtimex get current time success.
+ * @tc.number : SUB_KERNEL_SYSCALL_CLOCK_ADJTIMEX_0200
+ * @tc.name   : ClockAdjTimexGetCurrentTimeSuccess_0002
+ * @tc.desc   : Test the clock_adjtimex get current time success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
 HWTEST_F(HatsAdjTimexApiTest, ClockAdjTimexGetCurrentTimeSuccess_0002, Function | MediumTest | Level1)
 {

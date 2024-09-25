@@ -55,11 +55,14 @@ mode_t MODE_0755 = S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IXGRP | S_IROTH | S
 struct stat g_statbuf;
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FCHMOD_0100
- * @tc.name FchmodFileModeSuccess_0001
- * @tc.desc fchmod change file mode bits success.
-*/
-HWTEST_F(FchmodApiTest, FchmodFileSuccess_0001, Function | MediumTest | Level1)
+ * @tc.number : SUB_KERNEL_SYSCALL_FCHMOD_0100
+ * @tc.name   : FchmodFileModeSuccess_0001
+ * @tc.desc   : fchmod change file mode bits success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
+HWTEST_F(FchmodApiTest, FchmodFileModeSuccess_0001, Function | MediumTest | Level1)
 {
     int ret = -1;
 
@@ -79,10 +82,13 @@ HWTEST_F(FchmodApiTest, FchmodFileSuccess_0001, Function | MediumTest | Level1)
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FCHMOD_0200
- * @tc.name FchmodInvalidFdModeFail_0002
- * @tc.desc fchmod change invalid fd mode bits fail, errno EBADF.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FCHMOD_0200
+ * @tc.name   : FchmodInvalidFdModeFail_0002
+ * @tc.desc   : fchmod change invalid fd mode bits fail, errno EBADF.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FchmodApiTest, FchmodInvalidFdModeFail_0002, Function | MediumTest | Level2)
 {
     int ret = -1;

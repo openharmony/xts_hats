@@ -57,10 +57,13 @@ void FaccessatApiTest::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FACCESSAT_0100
- * @tc.name FaccessatCheckSuccess_0001
- * @tc.desc faccessat checks the calling process can access the file in current directory successful.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FACCESSAT_0100
+ * @tc.name   : FaccessatCheckSuccess_0001
+ * @tc.desc   : faccessat checks the calling process can access the file in current directory successful.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(FaccessatApiTest, FaccessatCheckSuccess_0001, Function | MediumTest | Level1)
 {
     int ret;
@@ -86,10 +89,13 @@ HWTEST_F(FaccessatApiTest, FaccessatCheckSuccess_0001, Function | MediumTest | L
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FACCESSAT_0200
- * @tc.name FaccessatPermissionCheckTest_0002
- * @tc.desc faccessat check user's permissions of valid fd success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FACCESSAT_0200
+ * @tc.name   : FaccessatPermissionCheckTest_0002
+ * @tc.desc   : faccessat check user's permissions of valid fd success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(FaccessatApiTest, FaccessatPermissionCheckTest_0002, Function | MediumTest | Level1)
 {
     int ret;
@@ -110,10 +116,13 @@ HWTEST_F(FaccessatApiTest, FaccessatPermissionCheckTest_0002, Function | MediumT
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FACCESSAT_0300
- * @tc.name FaccessatCheckInvalidFdFail_0003
- * @tc.desc faccessat check invalid fd permission fail, errno ENOENT.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FACCESSAT_0300
+ * @tc.name   : FaccessatCheckInvalidFdFail_0003
+ * @tc.desc   : faccessat check invalid fd permission fail, errno ENOENT.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FaccessatApiTest, FaccessatCheckInvalidFdFail_0003, Function | MediumTest | Level2)
 {
     int ret;
@@ -125,10 +134,13 @@ HWTEST_F(FaccessatApiTest, FaccessatCheckInvalidFdFail_0003, Function | MediumTe
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FACCESSAT_0400
- * @tc.name FaccessatCheckFail_0004
- * @tc.desc faccessat check non-exist file permission fail, errno ENOENT.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FACCESSAT_0400
+ * @tc.name   : FaccessatCheckFail_0004
+ * @tc.desc   : faccessat check non-exist file permission fail, errno ENOENT.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FaccessatApiTest, FaccessatCheckFail_0004, Function | MediumTest | Level2)
 {
     errno = 0;

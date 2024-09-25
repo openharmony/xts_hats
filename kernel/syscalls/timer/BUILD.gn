@@ -14,12 +14,13 @@
 import("//build/ohos_var.gni")
 import("//test/xts/hats/build.gni")
 
-group("HatsSyscallTest") {
+group("HatsTimerTest") {
   testonly = true
   deps = [
-    "fileio:HatsFileIoTest",
-    "mem:HatsMemTest",
-    "net:HatsNetTest",
-    "timer:HatsTimerTest",
+    "adjtimex:HatsAdjTimexTest",
+    "clockgettime:HatsClockGetTimeTest",
+    "nanosleep:HatsNanoSleepTest",
+    "setitimer:HatsSetiTimerTest",
+    "timercreate:HatsTimerCreateTest",
   ]
 }

@@ -1,0 +1,18 @@
+{
+    "description": "Configuration for HatsNanoSleepTest Tests",
+    "kits": [
+        {
+            "push": [
+                "HatsNanoSleepTest->/data/local/tmp/HatsNanoSleepTest"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsNanoSleepTest",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    }   
+}

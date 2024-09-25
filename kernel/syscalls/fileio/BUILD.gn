@@ -35,5 +35,11 @@ group("HatsFileIoTest") {
     "fstatfs:HatsFstatfsTest",
     "fsync:HatsFsyncTest",
     "lgetxattr:HatsLgetxattrTest",
+    "openat:HatsOpenatTest",
+    "pread64:HatsPread64Test",
+    "preadv:HatsPreadvTest",
+    "pwrite64:HatsPwrite64Test",
+    "pwritev:HatsPwritevTest",
+    "readlinkat:HatsReadlinkatTest",
   ]
 }

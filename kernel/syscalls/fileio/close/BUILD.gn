@@ -12,11 +12,11 @@
 # limitations under the License.
 
 import("//test/xts/tools/build/suite.gni")
-module_output_path = "hats/syscalls/net"
+module_output_path = "hats/syscalls/fileio"
 
-ohos_moduletest_suite("HatsConnectTest") {
+ohos_moduletest_suite("HatsCloseTest") {
   module_out_path = module_output_path
-  sources = [ "./ConnectApiTest.cpp" ]
+  sources = [ "./CloseApiTest.cpp" ]
   deps = [ "//third_party/googletest:gtest_main" ]
   include_dirs = [ "include" ]
   cflags = [ "-Wno-error" ]

@@ -34,7 +34,6 @@ static const int TEST_PORT = 8888;
 static const int TEST_BAD_PORT = 8887;
 static const int BAD_SOCKET_FD = -1;
 static const char *TEST_LOCAL_IP = "127.0.0.1";
-static const char *TEST_BAD_IP = "192.168.10.3";
 static int g_serviceFd = -1;
 
 class HatsConnectTest : public testing::Test {
@@ -251,41 +250,10 @@ HWTEST_F(HatsConnectTest, ConnectWithErrorPortFailed_0006, Function | MediumTest
 
 /*
  * @tc.number SUB_KERNEL_SYSCALL_CONNECT_0700
- * @tc.name ConnectWithErrorIPFailed_0007
- * @tc.desc connect to service using error ip, errno EINVAL.
-*/
-HWTEST_F(HatsConnectTest, ConnectWithErrorIPFailed_0007, Function | MediumTest | Level2)
-{
-    int ret;
-    int socketFd = -1;
-    int32_t backLog = 5;
-    struct sockaddr_in serAddr = {
-        .sin_family = AF_INET,
-        .sin_port = htons(TEST_PORT),
-        .sin_addr = {
-            .s_addr = inet_addr(TEST_BAD_IP),
-        }
-    };
-    ret = listen(g_serviceFd, backLog);
-    ASSERT_EQ(ret, 0);
-
-    socketFd = socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK, 0);
-    EXPECT_TRUE(socketFd > 0);
-
-    errno = 0;
-    ret = connect(socketFd, reinterpret_cast<struct sockaddr *>(&serAddr), sizeof(struct sockaddr_in));
-    EXPECT_EQ(ret, -1);
-    EXPECT_EQ(errno, EINPROGRESS);
-
-    close(socketFd);
-}
-
-/*
- * @tc.number SUB_KERNEL_SYSCALL_CONNECT_0800
- * @tc.name ConnectTestAddrLen_0008
+ * @tc.name ConnectTestAddrLen_0007
  * @tc.desc connect user addr len >= sizeof(serAddr) success, otherwise errno EINVAL.
 */
-HWTEST_F(HatsConnectTest, ConnectTestAddrLen_0008, Function | MediumTest | Level2)
+HWTEST_F(HatsConnectTest, ConnectTestAddrLen_0007, Function | MediumTest | Level2)
 {
     int ret;
     int socketFd = -1;

@@ -54,7 +54,6 @@ void HatsAccept4Test::TearDownTestCase()
 static const int BAD_SOCKET_FD = -1;
 static const int TEST_PORT = 8888;
 static const char *TEST_LOCAL_IP = "127.0.0.1";
-static const char *TEST_CLIENT_IP = "0.0.0.0";
 
 enum AcceptType {
     GET_NONE = 0,
@@ -121,7 +120,7 @@ HWTEST_F(HatsAccept4Test, Accept4ValidSockfdSuccess_0001, Function | MediumTest 
     int acceptFd = -1;
     int status = 0;
     struct sockaddr_in cliAddr;
-    socklen_t addrlen;
+    socklen_t addrlen = sizeof(struct sockaddr_in);
     SocketServiceStart(&socketFd);
     ASSERT_TRUE(socketFd > 0);
     if ((pid = fork()) == 0) {
@@ -149,7 +148,7 @@ HWTEST_F(HatsAccept4Test, Accept4GetClientAddrSuccess_0002, Function | MediumTes
     int socketFd = -1;
     int status = 0;
     struct sockaddr_in cliAddr = { 0 };
-    socklen_t addrlen = 0;
+    socklen_t addrlen = sizeof(struct sockaddr_in);
     SocketServiceStart(&socketFd);
     ASSERT_TRUE(socketFd > 0);
     if ((pid = fork()) == 0) {
@@ -157,7 +156,7 @@ HWTEST_F(HatsAccept4Test, Accept4GetClientAddrSuccess_0002, Function | MediumTes
         exit(0);
     }
     acceptFd = accept4(socketFd, reinterpret_cast<struct sockaddr *>(&cliAddr), &addrlen, 0);
-    EXPECT_STREQ(inet_ntoa(cliAddr.sin_addr), TEST_CLIENT_IP);
+    EXPECT_STREQ(inet_ntoa(cliAddr.sin_addr), TEST_LOCAL_IP);
     close(acceptFd);
     close(socketFd);
     waitpid(pid, &status, 0);
@@ -176,7 +175,7 @@ HWTEST_F(HatsAccept4Test, Accept4GetClientAddrSuccess_0003, Function | MediumTes
     int socketFd = -1;
     int status = 0;
     struct sockaddr_in cliAddr = { 0 };
-    socklen_t addrlen;
+    socklen_t addrlen = sizeof(struct sockaddr_in);
     SocketServiceStart(&socketFd);
     ASSERT_TRUE(socketFd > 0);
     if ((pid = fork()) == 0) {

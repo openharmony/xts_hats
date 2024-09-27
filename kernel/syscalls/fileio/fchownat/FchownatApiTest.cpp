@@ -59,10 +59,13 @@ void FchownatApiTest::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FCHOWNAT_0100
- * @tc.name FchownatFileSuccess_0001
- * @tc.desc fchownat change specify path file owner id and group id success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FCHOWNAT_0100
+ * @tc.name   : FchownatFileSuccess_0001
+ * @tc.desc   : fchownat change specify path file owner id and group id success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(FchownatApiTest, FchownatFileSuccess_0001, Function | MediumTest | Level1)
 {
     int ret = -1;
@@ -91,10 +94,13 @@ HWTEST_F(FchownatApiTest, FchownatFileSuccess_0001, Function | MediumTest | Leve
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FCHOWNAT_0200
- * @tc.name FchownatAT_FDCWDTestSuccess_0002
- * @tc.desc fchownat change current path file owner id and group id success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FCHOWNAT_0200
+ * @tc.name   : FchownatAT_FDCWDTestSuccess_0002
+ * @tc.desc   : fchownat change current path file owner id and group id success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(FchownatApiTest, FchownatAT_FDCWDTestSuccess_0002, Function | MediumTest | Level1)
 {
     int ret = -1;
@@ -128,10 +134,13 @@ HWTEST_F(FchownatApiTest, FchownatAT_FDCWDTestSuccess_0002, Function | MediumTes
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FCHOWNAT_0300
- * @tc.name FchownatInvalidFdFail_0003
- * @tc.desc fchownat change invalid file owner id and group id fail, errno EBADF.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FCHOWNAT_0300
+ * @tc.name   : FchownatInvalidFdFail_0003
+ * @tc.desc   : fchownat change invalid file owner id and group id fail, errno EBADF.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FchownatApiTest, FchownatInvalidFdFail_0003, Function | MediumTest | Level2)
 {
     int invalidFd = -1;
@@ -142,10 +151,13 @@ HWTEST_F(FchownatApiTest, FchownatInvalidFdFail_0003, Function | MediumTest | Le
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FCHOWNAT_0400
- * @tc.name FchownatLinkFileTestSuccess_0004
- * @tc.desc fchownat change file owner id and group id by file link success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FCHOWNAT_0400
+ * @tc.name   : FchownatLinkFileTestSuccess_0004
+ * @tc.desc   : fchownat change file owner id and group id by file link success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(FchownatApiTest, FchownatLinkFileTestSuccess_0004, Function | MediumTest | Level1)
 {
     int ret = -1;
@@ -182,10 +194,13 @@ HWTEST_F(FchownatApiTest, FchownatLinkFileTestSuccess_0004, Function | MediumTes
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FCHOWNAT_0500
- * @tc.name FchownatAT_SYMLINK_NOFOLLOWTestSuccess_0005
- * @tc.desc fchownat change owner id and group id of file link itself success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FCHOWNAT_0500
+ * @tc.name   : FchownatAT_SYMLINK_NOFOLLOWTestSuccess_0005
+ * @tc.desc   : fchownat change owner id and group id of file link itself success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(FchownatApiTest, FchownatAT_SYMLINK_NOFOLLOWTestSuccess_0005, Function | MediumTest | Level1)
 {
     int ret = -1;

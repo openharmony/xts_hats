@@ -51,9 +51,12 @@ void PwritevApiTest::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_PWRITEV_0100
- * @tc.name PwritevNormalWriteSuccess_0001
- * @tc.desc pwritev should write data to the file at the specified offset.
+ * @tc.number : SUB_KERNEL_SYSCALL_PWRITEV_0100
+ * @tc.name   : PwritevNormalWriteSuccess_0001
+ * @tc.desc   : pwritev should write data to the file at the specified offset.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
 HWTEST_F(PwritevApiTest, PwritevNormalWriteSuccess_0001, Function | MediumTest | Level1)
 {
@@ -74,9 +77,12 @@ HWTEST_F(PwritevApiTest, PwritevNormalWriteSuccess_0001, Function | MediumTest |
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_PWRITEV_0200
- * @tc.name PwritevInvalidFdFailed_0002
- * @tc.desc pwritev should return -1 and set errno to EBADF for invalid fd, errno EBADF.
+ * @tc.number : SUB_KERNEL_SYSCALL_PWRITEV_0200
+ * @tc.name   : PwritevInvalidFdFailed_0002
+ * @tc.desc   : pwritev should return -1 and set errno to EBADF for invalid fd, errno EBADF.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
  */
 HWTEST_F(PwritevApiTest, PwritevInvalidFdFailed_0002, Function | MediumTest | Level2)
 {

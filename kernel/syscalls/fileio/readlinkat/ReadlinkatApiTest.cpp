@@ -62,9 +62,12 @@ void ReadlinkatApiTest::TearDown()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_READLINKAT_0100
- * @tc.name ReadlinkatNormalReadSuccess_0001
- * @tc.desc readlinkat should read the target of a symlink in the specified directory.
+ * @tc.number : SUB_KERNEL_SYSCALL_READLINKAT_0100
+ * @tc.name   : ReadlinkatNormalReadSuccess_0001
+ * @tc.desc   : readlinkat should read the target of a symlink in the specified directory.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
 HWTEST_F(ReadlinkatApiTest, ReadlinkatNormalReadSuccess_0001, Function | MediumTest | Level1)
 {
@@ -88,9 +91,12 @@ HWTEST_F(ReadlinkatApiTest, ReadlinkatNormalReadSuccess_0001, Function | MediumT
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_READLINKAT_0200
- * @tc.name ReadlinkatInvalidFdFailed_0002
- * @tc.desc readlinkat use invalid fd, errno EBADF.
+ * @tc.number : SUB_KERNEL_SYSCALL_READLINKAT_0200
+ * @tc.name   : ReadlinkatInvalidFdFailed_0002
+ * @tc.desc   : readlinkat use invalid fd, errno EBADF.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
  */
 HWTEST_F(ReadlinkatApiTest, ReadlinkatInvalidFdFailed_0002, Function | MediumTest | Level2)
 {
@@ -109,9 +115,12 @@ HWTEST_F(ReadlinkatApiTest, ReadlinkatInvalidFdFailed_0002, Function | MediumTes
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_READLINKAT_0300
- * @tc.name ReadlinkatNonexistentLinkFailed_0003
- * @tc.desc readlinkat symlink which is not exist, errno ENOENT.
+ * @tc.number : SUB_KERNEL_SYSCALL_READLINKAT_0300
+ * @tc.name   : ReadlinkatNonexistentLinkFailed_0003
+ * @tc.desc   : readlinkat symlink which is not exist, errno ENOENT.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
  */
 HWTEST_F(ReadlinkatApiTest, ReadlinkatNonexistentLinkFailed_0003, Function | MediumTest | Level2)
 {

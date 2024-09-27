@@ -56,9 +56,12 @@ void ClockApiTest::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_CLOCKGETTIME_0100
- * @tc.name GetRealtimeClockSuccess_0001
- * @tc.desc Get the realtime clock successfully and compare with time function.
+ * @tc.number : SUB_KERNEL_SYSCALL_CLOCKGETTIME_0100
+ * @tc.name   : GetRealtimeClockSuccess_0001
+ * @tc.desc   : Get the realtime clock successfully and compare with time function.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
 HWTEST_F(ClockApiTest, GetRealtimeClockSuccess_0001, Function | MediumTest | Level1)
 {
@@ -73,9 +76,12 @@ HWTEST_F(ClockApiTest, GetRealtimeClockSuccess_0001, Function | MediumTest | Lev
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_CLOCKGETTIME_0200
- * @tc.name ClockGetTimeGetRealTimeCoarseSuccess_0002
- * @tc.desc Get the realtime coarse clock successfully.
+ * @tc.number : SUB_KERNEL_SYSCALL_CLOCKGETTIME_0200
+ * @tc.name   : ClockGetTimeGetRealTimeCoarseSuccess_0002
+ * @tc.desc   : Get the realtime coarse clock successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
 HWTEST_F(ClockApiTest, ClockGetTimeGetRealTimeCoarseSuccess_0002, Function | MediumTest | Level1)
 {
@@ -89,9 +95,12 @@ HWTEST_F(ClockApiTest, ClockGetTimeGetRealTimeCoarseSuccess_0002, Function | Med
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_CLOCKGETTIME_0300
- * @tc.name ClockGetTimeMonotonicSuccess_0003
- * @tc.desc Get the monotonic clock successfully.
+ * @tc.number : SUB_KERNEL_SYSCALL_CLOCKGETTIME_0300
+ * @tc.name   : ClockGetTimeMonotonicSuccess_0003
+ * @tc.desc   : Get the monotonic clock successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
 HWTEST_F(ClockApiTest, ClockGetTimeMonotonicSuccess_0003, Function | MediumTest | Level1)
 {
@@ -108,9 +117,12 @@ HWTEST_F(ClockApiTest, ClockGetTimeMonotonicSuccess_0003, Function | MediumTest 
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_CLOCKGETTIME_0400
- * @tc.name ClockGetTimeMonotonicCoarseSuccess_0004
- * @tc.desc Get the monotonic coarse clock successfully.
+ * @tc.number : SUB_KERNEL_SYSCALL_CLOCKGETTIME_0400
+ * @tc.name   : ClockGetTimeMonotonicCoarseSuccess_0004
+ * @tc.desc   : Get the monotonic coarse clock successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
 HWTEST_F(ClockApiTest, ClockGetTimeMonotonicCoarseSuccess_0004, Function | MediumTest | Level1)
 {
@@ -127,9 +139,12 @@ HWTEST_F(ClockApiTest, ClockGetTimeMonotonicCoarseSuccess_0004, Function | Mediu
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_CLOCKGETTIME_0500
- * @tc.name ClockGetTimeBoottimeSuccess_0005
- * @tc.desc Get the boottime clock successfully.
+ * @tc.number : SUB_KERNEL_SYSCALL_CLOCKGETTIME_0500
+ * @tc.name   : ClockGetTimeBoottimeSuccess_0005
+ * @tc.desc   : Get the boottime clock successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
 HWTEST_F(ClockApiTest, ClockGetTimeBoottimeSuccess_0005, Function | MediumTest | Level1)
 {
@@ -146,9 +161,12 @@ HWTEST_F(ClockApiTest, ClockGetTimeBoottimeSuccess_0005, Function | MediumTest |
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_CLOCKGETTIME_0600
- * @tc.name ClockGetTimeProcessCputimeSuccess_0006
- * @tc.desc Get the process cputime clock successfully.
+ * @tc.number : SUB_KERNEL_SYSCALL_CLOCKGETTIME_0600
+ * @tc.name   : ClockGetTimeProcessCputimeSuccess_0006
+ * @tc.desc   : Get the process cputime clock successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
 HWTEST_F(ClockApiTest, ClockGetTimeProcessCputimeSuccess_0006, Function | MediumTest | Level1)
 {
@@ -165,9 +183,12 @@ HWTEST_F(ClockApiTest, ClockGetTimeProcessCputimeSuccess_0006, Function | Medium
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_CLOCKGETTIME_0700
- * @tc.name ClockGetTimeThreadCputimeSuccess_0007
- * @tc.desc Get the thread cputime clock successfully.
+ * @tc.number : SUB_KERNEL_SYSCALL_CLOCKGETTIME_0700
+ * @tc.name   : ClockGetTimeThreadCputimeSuccess_0007
+ * @tc.desc   : Get the thread cputime clock successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
 HWTEST_F(ClockApiTest, ClockGetTimeThreadCputimeSuccess_0007, Function | MediumTest | Level1)
 {

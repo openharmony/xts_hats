@@ -58,9 +58,12 @@ void OpenatApiTest::TearDown()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_OPENAT_0100
- * @tc.name OpenatReadOnlySuccess_0001
- * @tc.desc openat with O_RDONLY should open a file for reading only.
+ * @tc.number : SUB_KERNEL_SYSCALL_OPENAT_0100
+ * @tc.name   : OpenatReadOnlySuccess_0001
+ * @tc.desc   : openat with O_RDONLY should open a file for reading only.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
 HWTEST_F(OpenatApiTest, OpenatReadOnlySuccess_0001, Function | MediumTest | Level1)
 {
@@ -83,9 +86,12 @@ HWTEST_F(OpenatApiTest, OpenatReadOnlySuccess_0001, Function | MediumTest | Leve
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_OPENAT_0200
- * @tc.name OpenatReadWriteSuccess_0002
- * @tc.desc openat with O_RDWR should open a file for reading and writing.
+ * @tc.number : SUB_KERNEL_SYSCALL_OPENAT_0200
+ * @tc.name   : OpenatReadWriteSuccess_0002
+ * @tc.desc   : openat with O_RDWR should open a file for reading and writing.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
 HWTEST_F(OpenatApiTest, OpenatReadWriteSuccess_0002, Function | MediumTest | Level1)
 {
@@ -108,9 +114,12 @@ HWTEST_F(OpenatApiTest, OpenatReadWriteSuccess_0002, Function | MediumTest | Lev
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_OPENAT_0300
- * @tc.name OpenatAppendSuccess_0003
- * @tc.desc openat with O_APPEND should append to the end of the file.
+ * @tc.number : SUB_KERNEL_SYSCALL_OPENAT_0300
+ * @tc.name   : OpenatAppendSuccess_0003
+ * @tc.desc   : openat with O_APPEND should append to the end of the file.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
 HWTEST_F(OpenatApiTest, OpenatAppendSuccess_0003, Function | MediumTest | Level1)
 {
@@ -152,9 +161,12 @@ HWTEST_F(OpenatApiTest, OpenatAppendSuccess_0003, Function | MediumTest | Level1
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_OPENAT_0400
- * @tc.name OpenatNoFollowFailed_0004
- * @tc.desc openat with O_NOFOLLOW should fail if the path is a symbolic link.
+ * @tc.number : SUB_KERNEL_SYSCALL_OPENAT_0400
+ * @tc.name   : OpenatNoFollowFailed_0004
+ * @tc.desc   : openat with O_NOFOLLOW should fail if the path is a symbolic link.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
  */
 HWTEST_F(OpenatApiTest, OpenatNoFollowFailed_0004, Function | MediumTest | Level2)
 {
@@ -171,9 +183,12 @@ HWTEST_F(OpenatApiTest, OpenatNoFollowFailed_0004, Function | MediumTest | Level
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_OPENAT_0500
- * @tc.name OpenatWriteOnlySuccess_0005
- * @tc.desc openat with O_WRONLY should open a file for writing only.
+ * @tc.number : SUB_KERNEL_SYSCALL_OPENAT_0500
+ * @tc.name   : OpenatWriteOnlySuccess_0005
+ * @tc.desc   : openat with O_WRONLY should open a file for writing only.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
 HWTEST_F(OpenatApiTest, OpenatWriteOnlySuccess_0005, Function | MediumTest | Level1)
 {
@@ -203,9 +218,12 @@ HWTEST_F(OpenatApiTest, OpenatWriteOnlySuccess_0005, Function | MediumTest | Lev
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_OPENAT_0600
- * @tc.name OpenatCreateTest_0006
- * @tc.desc openat with O_CREAT.
+ * @tc.number : SUB_KERNEL_SYSCALL_OPENAT_0600
+ * @tc.name   : OpenatCreateTest_0006
+ * @tc.desc   : openat with O_CREAT.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
  */
 HWTEST_F(OpenatApiTest, OpenatCreateTest_0006, Function | MediumTest | Level2)
 {
@@ -228,9 +246,12 @@ HWTEST_F(OpenatApiTest, OpenatCreateTest_0006, Function | MediumTest | Level2)
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_OPENAT_0700
- * @tc.name OpenatDirectoryTest_0007
- * @tc.desc openat with O_DIRECTORY.
+ * @tc.number : SUB_KERNEL_SYSCALL_OPENAT_0700
+ * @tc.name   : OpenatDirectoryTest_0007
+ * @tc.desc   : openat with O_DIRECTORY.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
  */
 HWTEST_F(OpenatApiTest, OpenatDirectoryTest_0007, Function | MediumTest | Level2)
 {
@@ -259,9 +280,12 @@ HWTEST_F(OpenatApiTest, OpenatDirectoryTest_0007, Function | MediumTest | Level2
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_OPENAT_0800
- * @tc.name OpenatExclTest_0008
- * @tc.desc openat with O_EXCL to prevent overwriting the content of existing files.
+ * @tc.number : SUB_KERNEL_SYSCALL_OPENAT_0800
+ * @tc.name   : OpenatExclTest_0008
+ * @tc.desc   : openat with O_EXCL to prevent overwriting the content of existing files.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
  */
 HWTEST_F(OpenatApiTest, OpenatExclTest_0008, Function | MediumTest | Level2)
 {
@@ -284,9 +308,12 @@ HWTEST_F(OpenatApiTest, OpenatExclTest_0008, Function | MediumTest | Level2)
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_OPENAT_0900
- * @tc.name OpenatNoatimeSuccess_0009
- * @tc.desc openat with O_NOATIME to prevent changing atime but still changing mtime.
+ * @tc.number : SUB_KERNEL_SYSCALL_OPENAT_0900
+ * @tc.name   : OpenatNoatimeSuccess_0009
+ * @tc.desc   : openat with O_NOATIME to prevent changing atime but still changing mtime.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
  */
 HWTEST_F(OpenatApiTest, OpenatNoatimeSuccess_0009, Function | MediumTest | Level1)
 {

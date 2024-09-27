@@ -52,10 +52,13 @@ void FstatfsApiTest::TearDownTestCase()
 static const char* OPEN_API_TEST_FILE = "/data/local/tmp";
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FSTATFS_0100
- * @tc.name FstatfsValidFdSuccess_0001
- * @tc.desc fstatfs valid fd success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FSTATFS_0100
+ * @tc.name   : FstatfsValidFdSuccess_0001
+ * @tc.desc   : fstatfs valid fd success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(FstatfsApiTest, OpenAndGetStateFileSuccess_0001, Function | MediumTest | Level1)
 {
     int ret;
@@ -73,10 +76,13 @@ HWTEST_F(FstatfsApiTest, OpenAndGetStateFileSuccess_0001, Function | MediumTest 
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FSTATFS_0200
- * @tc.name FstatfsUseInvalidFdFailed_0002
- * @tc.desc fstatfs use invalid fd failed, errno EBADF.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FSTATFS_0200
+ * @tc.name   : FstatfsUseInvalidFdFailed_0002
+ * @tc.desc   : fstatfs use invalid fd failed, errno EBADF.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FstatfsApiTest, FstatfsUseInvalidFdFailed_0002, Function | MediumTest | Level2)
 {
     int ret;

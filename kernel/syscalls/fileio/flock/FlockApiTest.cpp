@@ -56,10 +56,13 @@ void FlockApiTest::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FLOCK_0100
- * @tc.name FlockValidFdSuccess_0001
- * @tc.desc flock lock valid file with share lock and exclusive lock success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FLOCK_0100
+ * @tc.name   : FlockValidFdSuccess_0001
+ * @tc.desc   : flock lock valid file with share lock and exclusive lock success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(FlockApiTest, FlockValidFdSuccess_0001, Function | MediumTest | Level1)
 {
     int ret = -1;
@@ -81,10 +84,13 @@ HWTEST_F(FlockApiTest, FlockValidFdSuccess_0001, Function | MediumTest | Level1)
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FLOCK_0200
- * @tc.name FlockInvalidFdFail_0002
- * @tc.desc flock lock invalid file with share lock fail, errno EBADF.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FLOCK_0200
+ * @tc.name   : FlockInvalidFdFail_0002
+ * @tc.desc   : flock lock invalid file with share lock fail, errno EBADF.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FlockApiTest, FlockInvalidFdFail_0002, Function | MediumTest | Level2)
 {
     int ret = -1;
@@ -97,10 +103,13 @@ HWTEST_F(FlockApiTest, FlockInvalidFdFail_0002, Function | MediumTest | Level2)
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FLOCK_0300
- * @tc.name FlockLockTwiceFail_0003
- * @tc.desc flock try to acquire an exclusive lock on the second descriptor fail, errno EWOULDBLOCK.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FLOCK_0300
+ * @tc.name   : FlockLockTwiceFail_0003
+ * @tc.desc   : flock try to acquire an exclusive lock on the second descriptor fail, errno EWOULDBLOCK.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FlockApiTest, FlockLockTwiceFail_0003, Function | MediumTest | Level2)
 {
     int ret = -1;

@@ -55,10 +55,13 @@ static const char *TEST_DIR = "/data/local/tmp/fchdirTest";
 static const mode_t MODE_0644 = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FCHDIR_0100
- * @tc.name FchdirChangeDirectorySuccess_0001
- * @tc.desc fchdir change the current working directory and enter valid directory success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FCHDIR_0100
+ * @tc.name   : FchdirChangeDirectorySuccess_0001
+ * @tc.desc   : fchdir change the current working directory and enter valid directory success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(FchdirApiTest, FchdirChangeDirectorySuccess_0001, Function | MediumTest | Level1)
 {
     int ret;
@@ -81,10 +84,13 @@ HWTEST_F(FchdirApiTest, FchdirChangeDirectorySuccess_0001, Function | MediumTest
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FCHDIR_0200
- * @tc.name FchdirChangeDirectoryFail_0002
- * @tc.desc fchdir change the current working directory and enter invalid directory fail, errno EBADF.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FCHDIR_0200
+ * @tc.name   : FchdirChangeDirectoryFail_0002
+ * @tc.desc   : fchdir change the current working directory and enter invalid directory fail, errno EBADF.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FchdirApiTest, FchdirChangeDirectoryFail_0002, Function | MediumTest | Level2)
 {
     int ret;
@@ -96,10 +102,13 @@ HWTEST_F(FchdirApiTest, FchdirChangeDirectoryFail_0002, Function | MediumTest | 
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FCHDIR_0300
- * @tc.name FchdirChangeFileDescriptorFail_0003
- * @tc.desc fchdir change into a file fail, errno ENOTDIR.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FCHDIR_0300
+ * @tc.name   : FchdirChangeFileDescriptorFail_0003
+ * @tc.desc   : fchdir change into a file fail, errno ENOTDIR.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FchdirApiTest, FchdirChangeFileDescriptorFail_0003, Function | MediumTest | Level2)
 {
     int ret;

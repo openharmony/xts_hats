@@ -59,10 +59,13 @@ void HatsMadvisecallTest::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_Madvisecall_0100
- * @tc.name MadvisecallForkSuccess_0001
- * @tc.desc Madvise sets advise MADV_DOFORK successfully.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MADVISECALL_0100
+ * @tc.name   : MadvisecallForkSuccess_0001
+ * @tc.desc   : Madvise sets advise MADV_DOFORK successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsMadvisecallTest, MadvisecallForkSuccess_0001, Function | MediumTest | Level1)
 {
     void *ptr;
@@ -78,10 +81,13 @@ HWTEST_F(HatsMadvisecallTest, MadvisecallForkSuccess_0001, Function | MediumTest
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_Madvisecall_0200
- * @tc.name MadvisecallNormalSuccess_0002
- * @tc.desc Madvise sets advise MADV_NORMAL successfully.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MADVISECALL_0200
+ * @tc.name   : MadvisecallNormalSuccess_0002
+ * @tc.desc   : Madvise sets advise MADV_NORMAL successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsMadvisecallTest, MadvisecallNormalSuccess_0002, Function | MediumTest | Level1)
 {
     void *ptr;
@@ -97,10 +103,13 @@ HWTEST_F(HatsMadvisecallTest, MadvisecallNormalSuccess_0002, Function | MediumTe
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_Madvisecall_0300
- * @tc.name MadvisecallWillneedSuccess_0003
- * @tc.desc Madvise sets advise MADV_WILLNEED successfully.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_MADVISECALL_0300
+ * @tc.name   : MadvisecallWillneedSuccess_0003
+ * @tc.desc   : Madvise sets advise MADV_WILLNEED successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(HatsMadvisecallTest, MadvisecallWillneedSuccess_0003, Function | MediumTest | Level1)
 {
     void *ptr;

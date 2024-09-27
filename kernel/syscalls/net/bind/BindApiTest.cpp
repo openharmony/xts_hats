@@ -57,10 +57,13 @@ static const char *TEST_LOCAL_IP = "127.0.0.1";
 static const char *TEST_BAD_IP = "192.168.10.3";
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_BIND_0100
- * @tc.name BindSockfdTwice_0001
- * @tc.desc bind the same socket fd twice failed, errno EINVAL.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_BIND_0100
+ * @tc.name   : BindSockfdTwice_0001
+ * @tc.desc   : bind the same socket fd twice failed, errno EINVAL.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(HatsBindTest, BindSockfdTwice_0001, Function | MediumTest | Level2)
 {
     int ret;
@@ -92,10 +95,13 @@ HWTEST_F(HatsBindTest, BindSockfdTwice_0001, Function | MediumTest | Level2)
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_BIND_0200
- * @tc.name BindInvalidSockfdFailed_0002
- * @tc.desc bind the invalid socket fd failed.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_BIND_0200
+ * @tc.name   : BindInvalidSockfdFailed_0002
+ * @tc.desc   : bind the invalid socket fd failed.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(HatsBindTest, BindInvalidSockfdFailed_0002, Function | MediumTest | Level2)
 {
     int ret;
@@ -119,10 +125,13 @@ HWTEST_F(HatsBindTest, BindInvalidSockfdFailed_0002, Function | MediumTest | Lev
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_BIND_0300
- * @tc.name BindInvalidIPFailed_0003
- * @tc.desc bind the invalid ip addr failed.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_BIND_0300
+ * @tc.name   : BindInvalidIPFailed_0003
+ * @tc.desc   : bind the invalid ip addr failed.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(HatsBindTest, BindInvalidIPFailed_0003, Function | MediumTest | Level2)
 {
     int ret;
@@ -156,10 +165,13 @@ HWTEST_F(HatsBindTest, BindInvalidIPFailed_0003, Function | MediumTest | Level2)
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_BIND_0400
- * @tc.name BindErrorIPAddrLen_0004
- * @tc.desc bind addr len >= sizeof(serAddr) success, otherwise errno EINVAL.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_BIND_0400
+ * @tc.name   : BindErrorIPAddrLen_0004
+ * @tc.desc   : bind addr len >= sizeof(serAddr) success, otherwise errno EINVAL.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(HatsBindTest, BindErrorIPAddrLen_0004, Function | MediumTest | Level2)
 {
     int ret;
@@ -197,10 +209,13 @@ HWTEST_F(HatsBindTest, BindErrorIPAddrLen_0004, Function | MediumTest | Level2)
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_BIND_0500
- * @tc.name BindUsedPortFailed_0005
- * @tc.desc bind the used port, errno EINVAL.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_BIND_0500
+ * @tc.name   : BindUsedPortFailed_0005
+ * @tc.desc   : bind the used port, errno EINVAL.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(HatsBindTest, BindUsedPortFailed_0005, Function | MediumTest | Level2)
 {
     int ret;

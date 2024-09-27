@@ -63,10 +63,13 @@ void Pread64Test::TearDown()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_PREAD64_0100
- * @tc.name Pread64ReadSuccess_0001
- * @tc.desc Test basic read functionality of pread64.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_PREAD64_0100
+ * @tc.name   : Pread64ReadSuccess_0001
+ * @tc.desc   : Test basic read functionality of pread64.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(Pread64Test, Pread64ReadSuccess_0001, Function | MediumTest | Level1)
 {
     ssize_t size;
@@ -94,10 +97,13 @@ HWTEST_F(Pread64Test, Pread64ReadSuccess_0001, Function | MediumTest | Level1)
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_PREAD64_0200
- * @tc.name Pread64InvalidFdFailed_0002
- * @tc.desc Test using an invalid file descriptor, errno EBADF.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_PREAD64_0200
+ * @tc.name   : Pread64InvalidFdFailed_0002
+ * @tc.desc   : Test using an invalid file descriptor, errno EBADF.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(Pread64Test, Pread64InvalidFdFailed_0002, Function | MediumTest | Level2)
 {
     char buf[20] = {0};

@@ -52,10 +52,13 @@ static const char *TEST_FILE = "/data/local/tmp/close.txt";
 static const mode_t MODE_0644 = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_CLOSE_0100
- * @tc.name CloseFileSuccess_0001
- * @tc.desc close file descriptor success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_CLOSE_0100
+ * @tc.name   : CloseFileSuccess_0001
+ * @tc.desc   : close file descriptor success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(CloseApiTest, CloseFileSuccess_0001, Function | MediumTest | Level1)
 {
     int fd = open(TEST_FILE, O_RDWR | O_CREAT, MODE_0644);
@@ -68,10 +71,13 @@ HWTEST_F(CloseApiTest, CloseFileSuccess_0001, Function | MediumTest | Level1)
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_CLOSE_0200
- * @tc.name CloseFileFail_0002
- * @tc.desc close invalid file descriptor failed.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_CLOSE_0200
+ * @tc.name   : CloseFileFail_0002
+ * @tc.desc   : close invalid file descriptor failed.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(CloseApiTest, CloseFileFail_0002, Function | MediumTest | Level2)
 {
     int fd = -1;

@@ -60,10 +60,13 @@ void FgetxattrApiTest::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FGETXATTR_0100
- * @tc.name FgetxattrValidFdAttrSuccess_0001
- * @tc.desc fgetxattr get valid file attribute success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FGETXATTR_0100
+ * @tc.name   : FgetxattrValidFdAttrSuccess_0001
+ * @tc.desc   : fgetxattr get valid file attribute success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(FgetxattrApiTest, FgetxattrValidFdAttrSuccess_0001, Function | MediumTest | Level1)
 {
     ssize_t ret = -1;
@@ -81,10 +84,13 @@ HWTEST_F(FgetxattrApiTest, FgetxattrValidFdAttrSuccess_0001, Function | MediumTe
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FGETXATTR_0200
- * @tc.name FgetxattrInvalidFdAttrFail_0002
- * @tc.desc fgetxattr get invalid fd attribute fail, errno EBADF.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FGETXATTR_0200
+ * @tc.name   : FgetxattrInvalidFdAttrFail_0002
+ * @tc.desc   : fgetxattr get invalid fd attribute fail, errno EBADF.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FgetxattrApiTest, FgetxattrInvalidFdAttrFail_0002, Function | MediumTest | Level2)
 {
     ssize_t ret = -1;
@@ -97,10 +103,13 @@ HWTEST_F(FgetxattrApiTest, FgetxattrInvalidFdAttrFail_0002, Function | MediumTes
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FGETXATTR_0300
- * @tc.name FgetxattrNonExistFileAttrFail_0003
- * @tc.desc fgetxattr get non-exist file attribute fail, errno ENODATA.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FGETXATTR_0300
+ * @tc.name   : FgetxattrNonExistFileAttrFail_0003
+ * @tc.desc   : fgetxattr get non-exist file attribute fail, errno ENODATA.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FgetxattrApiTest, FgetxattrNonExistFileAttrFail_0003, Function | MediumTest | Level2)
 {
     ssize_t ret = -1;
@@ -118,10 +127,13 @@ HWTEST_F(FgetxattrApiTest, FgetxattrNonExistFileAttrFail_0003, Function | Medium
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FGETXATTR_0400
- * @tc.name FgetxattrGetShorterAttrFail_0004
- * @tc.desc fgetxattr get file specific attribute length short than actual fail, errno ERANGE.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FGETXATTR_0400
+ * @tc.name   : FgetxattrGetShorterAttrFail_0004
+ * @tc.desc   : fgetxattr get file specific attribute length short than actual fail, errno ERANGE.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FgetxattrApiTest, FgetxattrAttrFail_0004, Function | MediumTest | Level2)
 {
     ssize_t ret = -1;

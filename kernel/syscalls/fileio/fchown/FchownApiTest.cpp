@@ -54,10 +54,13 @@ void FchownApiTest::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FCHOWN_0100
- * @tc.name FchownFileSuccess_0001
- * @tc.desc fchown change valid file owner success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FCHOWN_0100
+ * @tc.name   : FchownFileSuccess_0001
+ * @tc.desc   : fchown change valid file owner success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(FchownApiTest, FchownFileSuccess_0001, Function | MediumTest | Level1)
 {
     int ret = -1;
@@ -81,10 +84,13 @@ HWTEST_F(FchownApiTest, FchownFileSuccess_0001, Function | MediumTest | Level1)
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FCHOWN_0200
- * @tc.name FchownInvalidFdFail_0002
- * @tc.desc fchown change invalid file owner fail, errno EBADF.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FCHOWN_0200
+ * @tc.name   : FchownInvalidFdFail_0002
+ * @tc.desc   : fchown change invalid file owner fail, errno EBADF.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FchownApiTest, FchownInvalidFdFail_0002, Function | MediumTest | Level2)
 {
     uid_t uid = getuid();

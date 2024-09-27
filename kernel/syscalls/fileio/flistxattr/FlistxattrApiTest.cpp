@@ -59,10 +59,13 @@ void FlistxattrApiTest::TearDownTestCase()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FLISTXATTR_0100
- * @tc.name FlistxattrValidFdAttrSuccess_0001
- * @tc.desc flistxattr list valid test file attribute success.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FLISTXATTR_0100
+ * @tc.name   : FlistxattrValidFdAttrSuccess_0001
+ * @tc.desc   : flistxattr list valid test file attribute success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(FlistxattrApiTest, FlistxattrValidFdAttrSuccess_0001, Function | MediumTest | Level1)
 {
     ssize_t ret = -1;
@@ -77,10 +80,13 @@ HWTEST_F(FlistxattrApiTest, FlistxattrValidFdAttrSuccess_0001, Function | Medium
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FLISTXATTR_0200
- * @tc.name FlistxattrInvalidFdAttrFail_0002
- * @tc.desc flistxattr list invalid fd attribute fail, errno EBADF.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FLISTXATTR_0200
+ * @tc.name   : FlistxattrInvalidFdAttrFail_0002
+ * @tc.desc   : flistxattr list invalid fd attribute fail, errno EBADF.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FlistxattrApiTest, FlistxattrInvalidFdAttrFail_0002, Function | MediumTest | Level2)
 {
     char list[LIST_LEN];
@@ -92,10 +98,13 @@ HWTEST_F(FlistxattrApiTest, FlistxattrInvalidFdAttrFail_0002, Function | MediumT
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FLISTXATTR_0300
- * @tc.name FlistxattrListAttrInNullFail_0003
- * @tc.desc flistxattr can't list file attribute in nullptr, errno EFAULT.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FLISTXATTR_0300
+ * @tc.name   : FlistxattrListAttrInNullFail_0003
+ * @tc.desc   : flistxattr can't list file attribute in nullptr, errno EFAULT.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FlistxattrApiTest, FlistxattrListAttrInNullFail_0003, Function | MediumTest | Level2)
 {
     ssize_t ret = -1;
@@ -113,10 +122,13 @@ HWTEST_F(FlistxattrApiTest, FlistxattrListAttrInNullFail_0003, Function | Medium
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FLISTXATTR_0400
- * @tc.name FlistxattrListShorterAttrFail_0004
- * @tc.desc flistxattr can't list file attribute with size 1 shorter than expected, errno ERANGE.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FLISTXATTR_0400
+ * @tc.name   : FlistxattrListShorterAttrFail_0004
+ * @tc.desc   : flistxattr can't list file attribute with size 1 shorter than expected, errno ERANGE.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FlistxattrApiTest, FlistxattrListShorterAttrFail_0004, Function | MediumTest | Level2)
 {
     ssize_t ret = -1;

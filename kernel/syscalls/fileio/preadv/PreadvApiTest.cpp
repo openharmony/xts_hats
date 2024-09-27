@@ -61,10 +61,13 @@ void PreadvApiTest::TearDown()
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_PREADV_0100
- * @tc.name PreadvReadSuccess_0001
- * @tc.desc Test basic read functionality of preadv.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_PREADV_0100
+ * @tc.name   : PreadvReadSuccess_0001
+ * @tc.desc   : Test basic read functionality of preadv.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(PreadvApiTest, PreadvReadSuccess_0001, Function | MediumTest | Level1)
 {
     ssize_t size;
@@ -102,10 +105,13 @@ HWTEST_F(PreadvApiTest, PreadvReadSuccess_0001, Function | MediumTest | Level1)
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_PREADV_0200
- * @tc.name PreadvInvalidFdFailed_0002
- * @tc.desc Test using an invalid file descriptor with preadv.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_PREADV_0200
+ * @tc.name   : PreadvInvalidFdFailed_0002
+ * @tc.desc   : Test using an invalid file descriptor with preadv.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(PreadvApiTest, PreadvInvalidFdFailed_0002, Function | MediumTest | Level2)
 {
     ssize_t size;
@@ -121,10 +127,13 @@ HWTEST_F(PreadvApiTest, PreadvInvalidFdFailed_0002, Function | MediumTest | Leve
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_PREADV_0300
- * @tc.name PreadvReadFromEmptyFileSuccess_0003
- * @tc.desc Test reading from an empty file with preadv.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_PREADV_0300
+ * @tc.name   : PreadvReadFromEmptyFileSuccess_0003
+ * @tc.desc   : Test reading from an empty file with preadv.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(PreadvApiTest, PreadvReadFromEmptyFileSuccess_0003, Function | MediumTest | Level1)
 {
     ssize_t size;
@@ -141,10 +150,13 @@ HWTEST_F(PreadvApiTest, PreadvReadFromEmptyFileSuccess_0003, Function | MediumTe
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_PREADV_0400
- * @tc.name PreadvReadContinuousSuccess_0004
- * @tc.desc Test reading from a file with preadv continuously.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_PREADV_0400
+ * @tc.name   : PreadvReadContinuousSuccess_0004
+ * @tc.desc   : Test reading from a file with preadv continuously.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
 HWTEST_F(PreadvApiTest, PreadvReadContinuousSuccess_0004, Function | MediumTest | Level1)
 {
     ssize_t size;

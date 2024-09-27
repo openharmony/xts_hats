@@ -15,8 +15,8 @@
 
 #include "hdf_dlist.h"
 #include "osal_mem.h"
-#include "v3_0/iaudio_adapter.h"
-#include "v3_0/iaudio_manager.h"
+#include "v4_0/iaudio_adapter.h"
+#include "v4_0/iaudio_manager.h"
 #include <climits>
 #include <cstring>
 #include <gtest/gtest.h>

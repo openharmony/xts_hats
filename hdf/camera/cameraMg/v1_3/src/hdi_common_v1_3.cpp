@@ -27,6 +27,7 @@ constexpr uint32_t HIGH_RESOLUTION_PHOTO_WIDTH = 8192;
 constexpr uint32_t HIGH_RESOLUTION_PHOTO_HEIGHT = 6144;
 namespace OHOS::Camera {
 Test::ResultCallback Test::resultCallback_ = 0;
+Test::StreamResultCallback Test::streamResultCallback_ = 0;
 OHOS::HDI::Camera::V1_0::FlashlightStatus Test::statusCallback =
                 static_cast<OHOS::HDI::Camera::V1_0::FlashlightStatus>(0);
 uint64_t Test::GetCurrentLocalTimeStamp()
@@ -916,6 +917,15 @@ int32_t Test::TestStreamOperatorCallbackV1_3::OnFrameShutterEnd(int32_t captureI
     (void)timestamp;
     for (auto it : streamIds) {
         CAMERA_LOGI("OnFrameShutterEnd captureId: %{public}d, streamId: %{public}d", captureId, it);
+    }
+    return HDI::Camera::V1_0::NO_ERROR;
+}
+
+int32_t Test::TestStreamOperatorCallbackV1_3::OnResult(int32_t streamId, const std::vector<uint8_t> &result)
+{
+    MetadataUtils::ConvertVecToMetadata(result, streamResultMeta);
+    if (Test::streamResultCallback_) {
+        Test::streamResultCallback_(streamId, streamResultMeta);
     }
     return HDI::Camera::V1_0::NO_ERROR;
 }

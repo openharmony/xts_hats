@@ -22,4 +22,5 @@ ohos_moduletest_suite("HatsPrctlTest") {
   cflags = [ "-Wno-error" ]
   external_deps = [ "c_utils:utils" ]
   subsystem_name = "kernel"
+  part_name = "hats"
 }

@@ -31,4 +31,5 @@ ohos_moduletest_suite("HatsMemoryTrackerTest") {
   include_dirs = [ "include" ]
   cflags = [ "-Wno-error" ]
   subsystem_name = "kernel"
+  part_name = "hats"
 }

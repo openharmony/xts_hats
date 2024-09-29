@@ -25,4 +25,6 @@ ohos_moduletest_suite("HatsDmaBufferTest") {
     "memory_utils:libdmabufheap",
   ]
   include_dirs = [ "include" ]
+  subsystem_name = "kernel"
+  part_name = "hats"
 }

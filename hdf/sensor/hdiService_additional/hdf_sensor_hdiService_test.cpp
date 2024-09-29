@@ -51,14 +51,13 @@ public:
 
     int32_t IsSuppprtedSensorId(int32_t sensorTypeId)
     {
-      EXPECT_GT(g_info.size(),0);
-      for (auto iter : g_info){
-          if (iter.sensorId == sensorTypeId)
-          {
-            return SENSOR_SUCCESS;
-          }
-      }
-      return SENSOR_NOT_SUPPORT;
+        EXPECT_GT(g_info.size(), 0);
+        for (auto iter : g_info) {
+            if (iter.sensorId == sensorTypeId) {
+                return SENSOR_SUCCESS;
+            }
+        }
+        return SENSOR_NOT_SUPPORT;
     }
 
 void HatsHdfSensorServiceTestAdditional::SetUpTestCase()

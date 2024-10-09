@@ -17,7 +17,12 @@ import("//test/xts/hats/build.gni")
 group("HatsFileIoTest") {
   testonly = true
   deps = [
+    "clockgetres:HatsClockGetresTest",
+    "clocknanosleep:HatsClockNanoSleepTest",
     "close:HatsCloseTest",
+    "copyfilerange:HatsCopyFileRangeTest",
+    "dup:HatsDupTest",
+    "dup3:HatsDup3Test",
     "faccessat:HatsFaccessatTest",
     "fallocate:HatsFallocateTest",
     "fchdir:HatsFchdirTest",
@@ -25,6 +30,7 @@ group("HatsFileIoTest") {
     "fchmodat:HatsFchmodatTest",
     "fchown:HatsFchownTest",
     "fchownat:HatsFchownatTest",
+    "fcntl:HatsFcntlTest",
     "fdatasync:HatsFdatasyncTest",
     "fgetxattr:HatsFgetxattrTest",
     "flistxattr:HatsFlistxattrTest",
@@ -34,12 +40,22 @@ group("HatsFileIoTest") {
     "fstat:HatsFstatTest",
     "fstatfs:HatsFstatfsTest",
     "fsync:HatsFsyncTest",
+    "ftruncate:HatsFtruncateTest",
+    "getcwd:HatsGetcwdTest",
+    "getdents64:HatsGetdents64Test",
+    "getegid:HatsGetegidTest",
+    "getgid:HatsGetgidTest",
+    "getxattr:HatsGetxattrTest",
     "lgetxattr:HatsLgetxattrTest",
+    "lseek:HatsLseekTest",
+    "memfdcreate:HatsMemFdCreateTest",
+    "mkdirat:HatsMkdiratTest",
     "openat:HatsOpenatTest",
     "pread64:HatsPread64Test",
     "preadv:HatsPreadvTest",
     "pwrite64:HatsPwrite64Test",
     "pwritev:HatsPwritevTest",
+    "read:HatsReadTest",
     "readlinkat:HatsReadlinkatTest",
   ]
 }

@@ -576,38 +576,6 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, ResetDeviceBenchmarkTest)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
 
-/**
- * @tc.number   : SUB_USB_HostManager_HDI_Performance_3100
- * @tc.name     : GetDeviceFileDescriptorBenchmarkTest
- * @tc.desc     : Test functions to GetDeviceFileDescriptor benchmark test
- * @tc.desc     : int32_t GetDeviceFileDescriptor(const UsbDev &dev, int32_t &fd);
- * @tc.desc     : Positive test: parameters correctly
- * @tc.size     : MediumTest
- * @tc.type     : Function
- * @tc.level    : Level 3
- */
-BENCHMARK_F(HdfUsbdBenchmarkRequestTest, GetDeviceFileDescriptorBenchmarkTest)
-(benchmark::State& st)
-{
-    ASSERT_TRUE(g_usbInterface != nullptr);
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    ASSERT_TRUE(subscriber != nullptr);
-    InitPara(subscriber);
-    struct UsbDev dev = dev_;
-    int32_t fd = 0;
-    auto ret = -1;
-    for (auto _ : st) {
-        ret = g_usbInterface->GetDeviceFileDescriptor(dev, fd);
-    }
-    EXPECT_EQ(0, ret);
-    ReleasePara(subscriber);
-}
-
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, GetDeviceFileDescriptorBenchmarkTest)
-    ->Iterations(ITERATION_FREQUENCY)
-    ->Repetitions(REPETITION_FREQUENCY)
-    ->ReportAggregatesOnly();
-
 } // namespace
 
 BENCHMARK_MAIN();

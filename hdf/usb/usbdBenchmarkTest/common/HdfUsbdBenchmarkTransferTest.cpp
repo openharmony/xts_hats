@@ -19,14 +19,13 @@
 #include "HdfUsbdBenchmarkTransferTest.h"
 #include "hdf_log.h"
 #include "securec.h"
-#include "v1_1/iusb_interface.h"
+#include "v1_0/iusb_interface.h"
 
 using namespace benchmark::internal;
 using namespace OHOS;
 using namespace OHOS::USB;
 using namespace std;
 using namespace OHOS::HDI::Usb::V1_0;
-using namespace OHOS::HDI::Usb::V1_1;
 
 const int SLEEP_TIME = 3;
 const uint32_t MAX_BUFFER_LENGTH = 255;
@@ -44,7 +43,7 @@ constexpr int32_t REPETITION_FREQUENCY = 3;
 UsbDev HdfUsbdBenchmarkTransferTest::dev_ = { 0, 0 };
 
 namespace {
-sptr<OHOS::HDI::Usb::V1_1::IUsbInterface> g_usbInterface = nullptr;
+sptr<IUsbInterface> g_usbInterface = nullptr;
 
 int32_t InitAshmemOne(sptr<Ashmem>& asmptr, int32_t asmSize, uint8_t rflg)
 {
@@ -80,7 +79,7 @@ int32_t SwitchErrCode(int32_t ret)
 
 void HdfUsbdBenchmarkTransferTest::SetUp(const ::benchmark::State& state)
 {
-    g_usbInterface = OHOS::HDI::Usb::V1_1::IUsbInterface::Get();
+    g_usbInterface = IUsbInterface::Get();
     ASSERT_NE(g_usbInterface, nullptr);
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
     sleep(SLEEP_TIME);
@@ -555,12 +554,14 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_27
     ASSERT_TRUE(g_usbInterface != nullptr);
     sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
     ASSERT_TRUE(subscriber != nullptr);
-    auto ret = -1;
+    auto ret = g_usbInterface->BindUsbdSubscriber(subscriber);
+    dev_ = {subscriber->busNum_, subscriber->devAddr_};
+    ret = g_usbInterface->OpenDevice(dev_);
     for (auto _ : st) {
-        ret = g_usbInterface->BindUsbdSubscriber(subscriber);
-        dev_ = {subscriber->busNum_, subscriber->devAddr_};
         ret = g_usbInterface->UnbindUsbdSubscriber(subscriber);
     }
+    ASSERT_EQ(0, ret);
+    ret = g_usbInterface->CloseDevice(dev_);
     ASSERT_EQ(0, ret);
 }
 
@@ -568,79 +569,6 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Perfo
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
-
-/**
- * @tc.number   : SUB_USB_HostManager_HDI_Performance_3200
- * @tc.name     : BulkTransferReadwithLengthBenchmarkTest
- * @tc.desc     : Test functions to BulkTransferReadwithLength benchmark test
- * @tc.desc     : BulkTransferReadwithLength ([in] struct UsbDev dev, [in] struct UsbPipe pipe, [in] int timeout,
- *                [in] int length, [out] unsigned char[] data)
- * @tc.desc     : Positive test: parameters correctly
- * @tc.size     : MediumTest
- * @tc.type     : Function
- * @tc.level    : Level 3
- */
-BENCHMARK_F(HdfUsbdBenchmarkTransferTest, BulkTransferReadwithLengthBenchmarkTest)
-(benchmark::State& st)
-{
-    ASSERT_TRUE(g_usbInterface != nullptr);
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    ASSERT_TRUE(subscriber != nullptr);
-    InitPara(subscriber);
-    struct UsbDev dev = dev_;
-    uint8_t interfaceId = INTERFACEID_OK;
-    uint8_t pointid = POINTID_BULK_IN;
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    ASSERT_EQ(0, ret);
-    OHOS::HDI::Usb::V1_0::UsbPipe pipe = {interfaceId, pointid};
-    std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
-    for (auto _ : st) {
-        ret = g_usbInterface->BulkTransferReadwithLength(dev, pipe, TRANSFER_TIME_OUT, bufferData.size(), bufferData);
-    }
-    EXPECT_EQ(0, ret);
-    ReleasePara(subscriber);
-}
-
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, BulkTransferReadwithLengthBenchmarkTest)
-    ->Iterations(ITERATION_FREQUENCY)
-    ->Repetitions(REPETITION_FREQUENCY)
-    ->ReportAggregatesOnly();
-
-/**
- * @tc.number   : SUB_USB_HostManager_HDI_Performance_3300
- * @tc.name     : ControlTransferReadwithLengthBenchmarkTest
- * @tc.desc     : Test functions to ControlTransferReadwithLength benchmark test
- * @tc.desc     : ControlTransferReadwithLength ([in] struct UsbDev dev, [in] struct UsbPipe pipe, [in] int timeout,
- *                [in] int length, [out] unsigned char[] data)
- * @tc.desc     : Positive test: parameters correctly
- * @tc.size     : MediumTest
- * @tc.type     : Function
- * @tc.level    : Level 3
- */
-BENCHMARK_F(HdfUsbdBenchmarkTransferTest, ControlTransferReadwithLengthBenchmarkTest)
-(benchmark::State& st)
-{
-    ASSERT_TRUE(g_usbInterface != nullptr);
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    ASSERT_TRUE(subscriber != nullptr);
-    InitPara(subscriber);
-    struct UsbDev dev = dev_;
-    std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
-    struct UsbCtrlTransferParams ctrlparmas = {
-        USB_ENDPOINT_DIR_IN, USB_DDK_REQ_GET_CONFIGURATION, 0, 0, 0, TRANSFER_TIME_OUT};
-    auto ret = -1;
-    for (auto _ : st) {
-        ret = g_usbInterface->ControlTransferReadwithLength(dev, ctrlparmas, bufferData);
-    }
-    EXPECT_EQ(0, ret);
-    ReleasePara(subscriber);
-}
-
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkTransferTest, ControlTransferReadwithLengthBenchmarkTest)
-    ->Iterations(ITERATION_FREQUENCY)
-    ->Repetitions(REPETITION_FREQUENCY)
-    ->ReportAggregatesOnly();
-
 } // namespace
 
 BENCHMARK_MAIN();

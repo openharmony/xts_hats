@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,8 +18,8 @@
 #include "hdf_log.h"
 #include "securec.h"
 #include "usbd_transfer_test.h"
-#include "v1_0/iusb_interface.h"
-#include "v1_0/usb_types.h"
+#include "v1_1/iusb_interface.h"
+#include "v1_1/usb_types.h"
 
 const int SLEEP_TIME = 3;
 const uint8_t BUS_NUM_INVALID = 255;
@@ -43,12 +43,13 @@ using namespace OHOS;
 using namespace OHOS::USB;
 using namespace std;
 using namespace OHOS::HDI::Usb::V1_0;
+using namespace OHOS::HDI::Usb::V1_1;
 
 UsbDev UsbdTransferTest::dev_ = {0, 0};
 sptr<UsbSubscriberTest> UsbdTransferTest::subscriber_ = nullptr;
 
 namespace {
-sptr<IUsbInterface> g_usbInterface = nullptr;
+sptr<OHOS::HDI::Usb::V1_1::IUsbInterface> g_usbInterface = nullptr;
 
 int32_t InitAshmemOne(sptr<Ashmem> &asmptr, int32_t asmSize, uint8_t rflg)
 {
@@ -86,7 +87,7 @@ int32_t SwitchErrCode(int32_t ret)
 
 void UsbdTransferTest::SetUpTestCase(void)
 {
-    g_usbInterface = IUsbInterface::Get();
+    g_usbInterface = OHOS::HDI::Usb::V1_1::IUsbInterface::Get();
     if (g_usbInterface == nullptr) {
         HDF_LOGE("%{public}s:IUsbInterface::Get() failed.", __func__);
         exit(0);
@@ -1109,6 +1110,139 @@ HWTEST_F(UsbdTransferTest, SUB_USB_HostManager_HDI_TranCompatibility_2400, Funct
     ret = g_usbInterface->BulkTransferRead(dev, pipe, TRANSFER_TIME_OUT, bufferData);
     HDF_LOGI("UsbdTransferTest::SUB_USB_HostManager_HDI_TranCompatibility_2400 "
         "%{public}d UsbdBulkTransferRead=%{public}d", __LINE__, ret);
+    ASSERT_NE(ret, 0);
+}
+
+/**
+ * @tc.number   : SUB_USB_HostManager_HDI_Func_2200
+ * @tc.name     : UsbdBulkTransferReadwithLength001
+ * @tc.desc     : Test functions to BulkTransferReadwithLength(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ *                std::vector<uint8_t> &data)
+ * @tc.desc     : Positive test: parameters correctly
+ * @tc.size     : MediumTest
+ * @tc.type     : Function
+ * @tc.level    : Level 3
+ */
+HWTEST_F(UsbdTransferTest, UsbdBulkTransferReadwithLength001, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_OK;
+    uint8_t pointid = POINTID_BULK_IN;
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
+    HDF_LOGI("UsbdTransferTest::UsbdBulkTransferReadwithLength001 %{public}d ClaimInterface=%{public}d",
+        __LINE__, ret);
+    ASSERT_EQ(0, ret);
+    OHOS::HDI::Usb::V1_0::UsbPipe pipe = {interfaceId, pointid};
+    std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
+    ret = g_usbInterface->BulkTransferReadwithLength(dev, pipe, TRANSFER_TIME_OUT, bufferData.size(), bufferData);
+    HDF_LOGI("UsbdTransferTest::UsbdBulkTransferReadwithLength001 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+}
+
+/**
+ * @tc.number   : SUB_USB_HostManager_HDI_Compatibility_0140
+ * @tc.name     : UsbdBulkTransferReadwithLength002
+ * @tc.desc     : Test functions to BulkTransferReadwithLength(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ *                std::vector<uint8_t> &data)
+ * @tc.desc     : Negative test: parameters exception, busNum error
+ * @tc.size     : MediumTest
+ * @tc.type     : Function
+ * @tc.level    : Level 3
+ */
+HWTEST_F(UsbdTransferTest, UsbdBulkTransferReadwithLength002, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_OK;
+    uint8_t pointid = POINTID_BULK_IN;
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
+    HDF_LOGI("UsbdTransferTest::UsbdBulkTransferReadwithLength002 %{public}d ClaimInterface=%{public}d",
+        __LINE__, ret);
+    ASSERT_EQ(0, ret);
+    dev.busNum = BUS_NUM_INVALID;
+    OHOS::HDI::Usb::V1_0::UsbPipe pipe = {interfaceId, pointid};
+    std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
+    ret = g_usbInterface->BulkTransferReadwithLength(dev, pipe, TRANSFER_TIME_OUT, bufferData.size(), bufferData);
+    HDF_LOGI("UsbdTransferTest::UsbdBulkTransferReadwithLength002 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_NE(ret, 0);
+}
+
+/**
+ * @tc.number   : SUB_USB_HostManager_HDI_Compatibility_0150
+ * @tc.name     : UsbdBulkTransferReadwithLength003
+ * @tc.desc     : Test functions to BulkTransferReadwithLength(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ *                std::vector<uint8_t> &data)
+ * @tc.desc     : Negative test: parameters exception, devAddr error
+ * @tc.size     : MediumTest
+ * @tc.type     : Function
+ * @tc.level    : Level 3
+ */
+HWTEST_F(UsbdTransferTest, UsbdBulkTransferReadwithLength003, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_OK;
+    uint8_t pointid = POINTID_BULK_IN;
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
+    HDF_LOGI("UsbdTransferTest::UsbdBulkTransferReadwithLength003 %{public}d ClaimInterface=%{public}d",
+        __LINE__, ret);
+    ASSERT_EQ(0, ret);
+    dev.devAddr = DEV_ADDR_INVALID;
+    OHOS::HDI::Usb::V1_0::UsbPipe pipe = {interfaceId, pointid};
+    std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
+    ret = g_usbInterface->BulkTransferReadwithLength(dev, pipe, TRANSFER_TIME_OUT, bufferData.size(), bufferData);
+    HDF_LOGI("UsbdTransferTest::UsbdBulkTransferReadwithLength003 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_NE(ret, 0);
+}
+
+/**
+ * @tc.number   : SUB_USB_HostManager_HDI_Compatibility_0160
+ * @tc.name     : UsbdBulkTransferReadwithLength004
+ * @tc.desc     : Test functions to BulkTransferReadwithLength(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ *                std::vector<uint8_t> &data)
+ * @tc.desc     : Negative test: parameters exception, intfId error
+ * @tc.size     : MediumTest
+ * @tc.type     : Function
+ * @tc.level    : Level 3
+ */
+HWTEST_F(UsbdTransferTest, UsbdBulkTransferReadwithLength004, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_OK;
+    uint8_t pointid = POINTID_BULK_IN;
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
+    HDF_LOGI("UsbdTransferTest::UsbdBulkTransferReadwithLength004 %{public}d ClaimInterface=%{public}d",
+        __LINE__, ret);
+    ASSERT_EQ(0, ret);
+    OHOS::HDI::Usb::V1_0::UsbPipe pipe = {interfaceId, pointid};
+    pipe.intfId = PIPE_INTERFACEID_INVALID;
+    std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
+    ret = g_usbInterface->BulkTransferReadwithLength(dev, pipe, TRANSFER_TIME_OUT, bufferData.size(), bufferData);
+    HDF_LOGI("UsbdTransferTest::UsbdBulkTransferReadwithLength004 %{public}d ret=%{public}d", __LINE__, ret);
+    ASSERT_NE(ret, 0);
+}
+
+/**
+ * @tc.number   : SUB_USB_HostManager_HDI_Compatibility_0170
+ * @tc.name     : UsbdBulkTransferReadwithLength005
+ * @tc.desc     : Test functions to BulkTransferReadwithLength(const UsbDev &dev, const UsbPipe &pipe, int32_t timeout,
+ *                std::vector<uint8_t> &data)
+ * @tc.desc     : Negative test: parameters exception, endpointId error
+ * @tc.size     : MediumTest
+ * @tc.type     : Function
+ * @tc.level    : Level 3
+ */
+HWTEST_F(UsbdTransferTest, UsbdBulkTransferReadwithLength005, Function | MediumTest | Level1)
+{
+    struct UsbDev dev = dev_;
+    uint8_t interfaceId = INTERFACEID_OK;
+    uint8_t pointid = POINTID_BULK_IN;
+    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
+    HDF_LOGI("UsbdTransferTest::UsbdBulkTransferReadwithLength005 %{public}d ClaimInterface=%{public}d", __LINE__, ret);
+    ASSERT_EQ(0, ret);
+    OHOS::HDI::Usb::V1_0::UsbPipe pipe = {interfaceId, pointid};
+    pipe.endpointId = PIPE_ENDPOINTID_INVALID;
+    std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
+    ret = g_usbInterface->BulkTransferReadwithLength(dev, pipe, TRANSFER_TIME_OUT, bufferData.size(), bufferData);
+    HDF_LOGI("UsbdTransferTest::UsbdBulkTransferReadwithLength005 %{public}d ret=%{public}d", __LINE__, ret);
     ASSERT_NE(ret, 0);
 }
 

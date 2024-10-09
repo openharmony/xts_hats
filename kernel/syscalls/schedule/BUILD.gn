@@ -14,13 +14,16 @@
 import("//build/ohos_var.gni")
 import("//test/xts/hats/build.gni")
 
-group("HatsSyscallTest") {
+group("HatsScheduleTest") {
   testonly = true
   deps = [
-    "fileio:HatsFileIoTest",
-    "mem:HatsMemTest",
-    "net:HatsNetTest",
-    "schedule:HatsScheduleTest",
-    "timer:HatsTimerTest",
+    "priority:HatsPriorityTest",
+    "schedaffinity:HatsSchedaffinityTest",
+    "schedgetprioritymax:HatsSchedgetprioritymaxTest",
+    "schedgetprioritymin:HatsSchedgetpriorityminTest",
+    "schedparam:HatsSchedparamTest",
+    "schedrrgetinterval:HatsSchedrrgetintervalTest",
+    "schedscheduler:HatsSchedschedulerTest",
+    "schedyield:HatsSchedYieldTest",
   ]
 }

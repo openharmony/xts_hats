@@ -338,3 +338,52 @@ HWTEST_F(OpenatApiTest, OpenatNoatimeSuccess_0009, Function | MediumTest | Level
     unlinkat(dirFd, TEST_FILE, 0);
     close(dirFd);
 }
+
+/*
+ * @tc.number : SUB_KERNEL_SYSCALL_OPENAT_1000
+ * @tc.name   : OpenatFlagsTestSuccess_0010
+ * @tc.desc   : openat with some flags.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
+HWTEST_F(OpenatApiTest, OpenatFlagsTestSuccess_0010, Function | MediumTest | Level1)
+{
+    int dirFd = open(TEST_DIR, O_RDONLY | O_DIRECTORY);
+
+    // O_TRUNC test
+    int fd = openat(dirFd, TEST_FILE, O_RDWR | O_CREAT, 0644);
+    const char *data = "Test data";
+    write(fd, data, strlen(data));
+    close(fd);
+    fd = openat(dirFd, TEST_FILE, O_RDWR | O_TRUNC, 0644);
+    EXPECT_TRUE(fd >= 0);
+    close(fd);
+    unlinkat(dirFd, TEST_FILE, 0);
+
+    // O_ASYNC test
+    fd = openat(dirFd, TEST_FILE, O_RDWR | O_CREAT | O_ASYNC, 0644);
+    EXPECT_TRUE(fd >= 0);
+    close(fd);
+    unlinkat(dirFd, TEST_FILE, 0);
+
+    // O_DIRECT test
+    fd = openat(dirFd, TEST_FILE, O_RDWR | O_CREAT | O_DIRECT, 0644);
+    EXPECT_TRUE(fd >= 0);
+    close(fd);
+    unlinkat(dirFd, TEST_FILE, 0);
+
+    // O_DSYNC test
+    fd = openat(dirFd, TEST_FILE, O_RDWR | O_CREAT | O_DSYNC, 0644);
+    EXPECT_TRUE(fd >= 0);
+    close(fd);
+    unlinkat(dirFd, TEST_FILE, 0);
+
+    // O_SYNC test
+    fd = openat(dirFd, TEST_FILE, O_RDWR | O_CREAT | O_SYNC, 0644);
+    EXPECT_TRUE(fd >= 0);
+    close(fd);
+    unlinkat(dirFd, TEST_FILE, 0);
+
+    close(dirFd);
+}

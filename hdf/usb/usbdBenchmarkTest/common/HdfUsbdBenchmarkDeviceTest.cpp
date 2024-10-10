@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,23 +18,20 @@
 
 #include "HdfUsbdBenchmarkDeviceTest.h"
 #include "hdf_log.h"
-#include "v1_1/iusb_interface.h"
+#include "v1_0/iusb_interface.h"
 
 using namespace benchmark::internal;
 using namespace std;
 using namespace OHOS;
 using namespace OHOS::USB;
 using namespace OHOS::HDI::Usb::V1_0;
-using namespace OHOS::HDI::Usb::V1_1;
 
 const int SLEEP_TIME = 3;
 constexpr int32_t ITERATION_FREQUENCY = 100;
 constexpr int32_t REPETITION_FREQUENCY = 3;
-const uint8_t INTERFACEID_INVALID = 255;
-const uint8_t INTERFACEID_OK_NEW = 0;
 
 namespace {
-sptr<OHOS::HDI::Usb::V1_1::IUsbInterface> g_usbInterface = nullptr;
+sptr<IUsbInterface> g_usbInterface = nullptr;
 
 struct UsbDev HdfUsbdBenchmarkDeviceTest::dev_ = { 0, 0 };
 
@@ -45,7 +42,7 @@ int32_t SwitchErrCode(int32_t ret)
 
 void HdfUsbdBenchmarkDeviceTest::SetUp(const ::benchmark::State& state)
 {
-    g_usbInterface = OHOS::HDI::Usb::V1_1::IUsbInterface::Get();
+    g_usbInterface = IUsbInterface::Get();
     ASSERT_NE(g_usbInterface, nullptr);
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
     sleep(SLEEP_TIME);
@@ -88,7 +85,7 @@ BENCHMARK_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HostManager_HDI_Performance_1100
     ASSERT_NE(subscriber, nullptr);
     InitPara(subscriber);
     struct UsbDev dev = dev_;
-    auto ret = -1;
+    auto ret = 0;
     for (auto _ : st) {
         ret = g_usbInterface->OpenDevice(dev);
     }
@@ -130,77 +127,6 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkDeviceTest, SUB_USB_HostManager_HDI_Perform
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
-
-/**
- * @tc.number   : SUB_USB_HostManager_HDI_Performance_3100
- * @tc.name     : GetDeviceSpeedBenchmarkTest
- * @tc.desc     : int32_t GetDeviceSpeed(const UsbDev &dev, uint8_t interfaceId, uint8_t speed)
- * @tc.desc     : Positive test: parameters correctly
- * @tc.size     : MediumTest
- * @tc.type     : Function
- * @tc.level    : Level 3
- */
-BENCHMARK_F(HdfUsbdBenchmarkDeviceTest, GetDeviceSpeedBenchmarkTest)
-(benchmark::State& st)
-{
-    ASSERT_NE(g_usbInterface, nullptr);
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    ASSERT_NE(subscriber, nullptr);
-    InitPara(subscriber);
-    struct UsbDev dev = dev_;
-    int32_t ret = -1;
-    uint8_t speed = 0;
-    for (auto _ : st) {
-        ret = g_usbInterface->GetDeviceSpeed(dev, speed);
-    }
-    ASSERT_EQ(0, ret);
-    ReleasePara(subscriber);
-}
-
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkDeviceTest, GetDeviceSpeedBenchmarkTest)
-    ->Iterations(ITERATION_FREQUENCY)
-    ->Repetitions(REPETITION_FREQUENCY)
-    ->ReportAggregatesOnly();
-
-/**
- * @tc.number   : SUB_USB_HostManager_HDI_Performance_3200
- * @tc.name     : GetInterfaceActiveStatusBenchmarkTest
- * @tc.desc     : int32_t GetInterfaceActiveStatus(const UsbDev &dev, uint8_t interfaceId, bool unactived)
- * @tc.desc     : Positive test: parameters correctly
- * @tc.size     : MediumTest
- * @tc.type     : Function
- * @tc.level    : Level 3
- */
-BENCHMARK_F(HdfUsbdBenchmarkDeviceTest, GetInterfaceActiveStatusBenchmarkTest)
-(benchmark::State& st)
-{
-    ASSERT_NE(g_usbInterface, nullptr);
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    ASSERT_NE(subscriber, nullptr);
-    InitPara(subscriber);
-    uint8_t interfaceId = INTERFACEID_OK_NEW;
-    struct UsbDev dev = dev_;
-    int32_t ret = -1;
-    bool unactived = 1;
-    ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    ASSERT_EQ(0, ret);
-    for (auto _ : st) {
-        for (; interfaceId < INTERFACEID_INVALID; interfaceId++) {
-            ret = g_usbInterface->GetInterfaceActiveStatus(dev, interfaceId, unactived);
-            if (ret == 0) {
-                break;
-            }
-        }
-    }
-    ASSERT_EQ(0, ret);
-    ReleasePara(subscriber);
-}
-
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkDeviceTest, GetInterfaceActiveStatusBenchmarkTest)
-    ->Iterations(ITERATION_FREQUENCY)
-    ->Repetitions(REPETITION_FREQUENCY)
-    ->ReportAggregatesOnly();
-
 } // namespace
 
 BENCHMARK_MAIN();

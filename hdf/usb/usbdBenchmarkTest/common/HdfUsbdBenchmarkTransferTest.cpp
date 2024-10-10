@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -125,7 +125,7 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_13
     struct UsbDev dev = dev_;
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_IN, USB_DDK_REQ_GET_CONFIGURATION, 0, 0, TRANSFER_TIME_OUT};
-    auto ret = -1;
+    auto ret = 0;
     for (auto _ : st) {
         ret = g_usbInterface->ControlTransferRead(dev, ctrlparmas, bufferData);
     }
@@ -160,7 +160,7 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_20
     bufferData.push_back(SAMPLE_DATA_3);
     struct UsbCtrlTransfer ctrlparmas = {USB_ENDPOINT_DIR_OUT,
         USB_DDK_REQ_GET_CONFIGURATION, 0, 0, TRANSFER_TIME_OUT};
-    auto ret = -1;
+    auto ret = 0;
     for (auto _ : st) {
         ret = g_usbInterface->ControlTransferWrite(dev, ctrlparmas, bufferData);
     }
@@ -468,7 +468,7 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_24
     uint8_t pointId = POINTID_BULK_OUT;
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = {interfaceId, pointId};
     sptr<UsbdBulkCallbackTest> usbdBulkCallback = new UsbdBulkCallbackTest();
-    auto ret = -1;
+    auto ret = 0;
     for (auto _ : st) {
         ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
     }
@@ -528,7 +528,7 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, SUB_USB_HostManager_HDI_Performance_26
     sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
     ASSERT_TRUE(subscriber != nullptr);
     InitPara(subscriber);
-    auto ret = -1;
+    auto ret = 0;
     for (auto _ : st) {
         ret = g_usbInterface->BindUsbdSubscriber(subscriber);
     }

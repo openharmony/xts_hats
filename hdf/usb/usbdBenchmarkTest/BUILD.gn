@@ -27,7 +27,6 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkDeviceTest") {
   configs = [ ":hdf_usb" ]
 
   deps = [
-    "${usb_driver_path}/hdi_service:libusb_interface_service_1.1",
     "//third_party/benchmark",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
@@ -127,7 +126,6 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkRequestTest") {
   configs = [ ":hdf_usb" ]
 
   deps = [
-    "${usb_driver_path}/hdi_service:libusb_interface_service_1.1",
     "//third_party/benchmark",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",

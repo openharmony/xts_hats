@@ -20,8 +20,6 @@
 #include "v1_0/iusbd_subscriber.h"
 #include "v1_0/usb_types.h"
 
-const int32_t USB_ENDPOINT_DIR_IN = 0x80;
-
 using OHOS::HDI::Usb::V1_0::UsbDev;
 namespace OHOS {
 namespace USB {

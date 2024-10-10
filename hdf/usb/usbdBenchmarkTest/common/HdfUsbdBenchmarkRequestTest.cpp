@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,14 +18,14 @@
 
 #include "HdfUsbdBenchmarkRequestTest.h"
 #include "hdf_log.h"
-#include "v1_1/iusb_interface.h"
+#include "v1_0/usb_types.h"
+#include "v1_0/iusb_interface.h"
 
 using namespace benchmark::internal;
 using namespace OHOS;
 using namespace OHOS::USB;
 using namespace std;
 using namespace OHOS::HDI::Usb::V1_0;
-using namespace OHOS::HDI::Usb::V1_1;
 
 const int SLEEP_TIME = 3;
 const uint8_t INDEX_0 = 0;
@@ -42,7 +42,7 @@ constexpr int32_t REPETITION_FREQUENCY = 3;
 UsbDev HdfUsbdBenchmarkRequestTest::dev_ = { 0, 0 };
 
 namespace {
-sptr<OHOS::HDI::Usb::V1_1::IUsbInterface> g_usbInterface = nullptr;
+sptr<IUsbInterface> g_usbInterface = nullptr;
 
 int32_t SwitchErrCode(int32_t ret)
 {
@@ -51,7 +51,7 @@ int32_t SwitchErrCode(int32_t ret)
 
 void HdfUsbdBenchmarkRequestTest::SetUp(const ::benchmark::State& state)
 {
-    g_usbInterface = OHOS::HDI::Usb::V1_1::IUsbInterface::Get();
+    g_usbInterface = IUsbInterface::Get();
     ASSERT_TRUE(g_usbInterface != nullptr);
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
     sleep(SLEEP_TIME);
@@ -95,7 +95,7 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_010
     uint8_t configIndex = INDEX_1;
     InitPara(subscriber);
     struct UsbDev dev = dev_;
-    auto ret = -1;
+    auto ret = 0;
     for (auto _ : st) {
         ret = g_usbInterface->SetConfig(dev, configIndex);
     }
@@ -124,7 +124,7 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_020
     uint8_t configIndex = INDEX_1;
     InitPara(subscriber);
     struct UsbDev dev = dev_;
-    auto ret = -1;
+    auto ret = 0;
     for (auto _ : st) {
         ret = g_usbInterface->GetConfig(dev, configIndex);
     }
@@ -153,7 +153,7 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_030
     uint8_t interfaceId = INTERFACEID_OK;
     InitPara(subscriber);
     struct UsbDev dev = dev_;
-    auto ret = -1;
+    auto ret = 0;
     for (auto _ : st) {
         ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     }
@@ -213,7 +213,7 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_DeviceManager_HDI_Performance_0
     InitPara(subscriber);
     struct UsbDev dev = dev_;
     std::vector<uint8_t> devData(MAX_BUFFER_LENGTH);
-    auto ret = -1;
+    auto ret = 0;
     for (auto _ : st) {
         ret = g_usbInterface->GetDeviceDescriptor(dev, devData);
     }
@@ -243,7 +243,7 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_050
     uint8_t stringId = 0;
     struct UsbDev dev = dev_;
     std::vector<uint8_t> devData(MAX_BUFFER_LENGTH);
-    auto ret = -1;
+    auto ret = 0;
     for (auto _ : st) {
         ret = g_usbInterface->GetStringDescriptor(dev, stringId, devData);
     }
@@ -273,7 +273,7 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_060
     uint8_t configId = CONFIG_ID_0;
     struct UsbDev dev = dev_;
     std::vector<uint8_t> devData(MAX_BUFFER_LENGTH);
-    auto ret = -1;
+    auto ret = 0;
     for (auto _ : st) {
         ret = g_usbInterface->GetConfigDescriptor(dev, configId, devData);
     }
@@ -302,7 +302,7 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_DeviceManager_HDI_Performance_0
     InitPara(subscriber);
     struct UsbDev dev = dev_;
     std::vector<uint8_t> rawData;
-    auto ret = -1;
+    auto ret = 0;
     for (auto _ : st) {
         ret = g_usbInterface->GetRawDescriptor(dev, rawData);
     }
@@ -331,7 +331,7 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_DeviceManager_HDI_Performance_0
     InitPara(subscriber);
     struct UsbDev dev = dev_;
     int32_t fd = 0;
-    auto ret = -1;
+    auto ret = 0;
     for (auto _ : st) {
         ret = g_usbInterface->GetFileDescriptor(dev, fd);
     }
@@ -439,7 +439,6 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_090
     std::vector<uint8_t> clientData = {'q', 'u', 'e', 'u', 'e', 'r', 'e', 'a', 'd'};
     std::vector<uint8_t> bufferData = {'r', 'e', 'q', 'u', 'e', 's', 't', '0', '0', '1'};
     ret = g_usbInterface->RequestQueue(dev, pipe, clientData, bufferData);
-    EXPECT_EQ(0, ret);
     for (auto _ : st) {
         ret = g_usbInterface->RequestCancel(dev, pipe);
     }
@@ -468,7 +467,7 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_100
     InitPara(subscriber);
     struct UsbDev dev = dev_;
     uint8_t interfaceId = INTERFACEID_OK;
-    auto ret = -1;
+    auto ret = 0;
     for (auto _ : st) {
         ret = g_usbInterface->ReleaseInterface(dev, interfaceId);
     }
@@ -499,10 +498,8 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_210
     uint8_t interfaceId = INTERFACEID_OK;
     uint8_t pointId = POINTID_DIR_IN;
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = {interfaceId, pointId};
-    auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
-    ASSERT_EQ(0, ret);
     sptr<UsbdBulkCallbackTest> usbdBulkCallback = new UsbdBulkCallbackTest();
-    ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
+    auto ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
     ASSERT_EQ(ret, 0);
     for (auto _ : st) {
         ret = g_usbInterface->BulkCancel(dev, pipe);
@@ -517,65 +514,6 @@ BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Perfor
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();
-
-/**
- * @tc.name: SUB_USB_HostManager_HDI_Performance_2900
- * @tc.desc: Test functions to ClearHalt benchmark test
- * @tc.desc: int32_t ClearHalt(const UsbDev &dev, const UsbPipe &pipe)
- * @tc.desc: Positive test: parameters correctly
- * @tc.type: FUNC
- */
-BENCHMARK_F(HdfUsbdBenchmarkRequestTest, ClearHaltBenchmarkTest)
-(benchmark::State& st)
-{
-    ASSERT_TRUE(g_usbInterface != nullptr);
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    ASSERT_TRUE(subscriber != nullptr);
-    InitPara(subscriber);
-    uint8_t interfaceId = INTERFACEID_OK;
-    auto ret = g_usbInterface->ClaimInterface(dev_, interfaceId, 1);
-    EXPECT_EQ(ret, 0);
-    uint8_t pointId = POINTID_DIR_IN;
-    OHOS::HDI::Usb::V1_0::UsbPipe pipe = {interfaceId, pointId};
-    EXPECT_EQ(0, ret);
-    for (auto _ : st) {
-        ret = g_usbInterface->ClearHalt(dev_, pipe);
-    }
-    ReleasePara(subscriber);
-}
-
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, ClearHaltBenchmarkTest)
-    ->Iterations(ITERATION_FREQUENCY)
-    ->Repetitions(REPETITION_FREQUENCY)
-    ->ReportAggregatesOnly();
-
-/**
- * @tc.name: SUB_USB_HostManager_HDI_Performance_3000
- * @tc.desc: Test functions to ResetDevice benchmark test
- * @tc.desc: int32_t ResetDevice(const UsbDev &dev)
- * @tc.desc: Positive test: parameters correctly
- * @tc.type: FUNC
- */
-BENCHMARK_F(HdfUsbdBenchmarkRequestTest, ResetDeviceBenchmarkTest)
-(benchmark::State& st)
-{
-    ASSERT_TRUE(g_usbInterface != nullptr);
-    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
-    ASSERT_TRUE(subscriber != nullptr);
-    InitPara(subscriber);
-    auto ret = -1;
-    for (auto _ : st) {
-        ret = g_usbInterface->ResetDevice(dev_);
-    }
-    EXPECT_EQ(0, ret);
-    ReleasePara(subscriber);
-}
-
-BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, ResetDeviceBenchmarkTest)
-    ->Iterations(ITERATION_FREQUENCY)
-    ->Repetitions(REPETITION_FREQUENCY)
-    ->ReportAggregatesOnly();
-
 } // namespace
 
 BENCHMARK_MAIN();

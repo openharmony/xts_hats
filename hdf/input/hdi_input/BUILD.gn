@@ -63,6 +63,8 @@ ohos_moduletest_suite("HatsHdfInputTest") {
   } else {
     external_deps = [ "hilog:libhilog" ]
   }
+  subsystem_name = "xts"
+  part_name = "hats"
 }
 config("hdf_input") {
   include_dirs = [

@@ -52,7 +52,7 @@ void HatsBindTest::TearDownTestCase()
 }
 
 static const int BAD_SOCKET_FD = -1;
-static const int TEST_PORT = 8888;
+static const int TEST_PORT = 21356;
 static const char *TEST_LOCAL_IP = "127.0.0.1";
 static const char *TEST_BAD_IP = "192.168.10.3";
 

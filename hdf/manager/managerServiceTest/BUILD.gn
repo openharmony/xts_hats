@@ -35,6 +35,8 @@ ohos_moduletest_suite("HatsHdfManagerServiceTest") {
     "ipc:ipc_core",
     "samgr:samgr_proxy",
   ]
+  subsystem_name = "xts"
+  part_name = "hats"
 }
 
 config("hdf_manager_hdiservice") {

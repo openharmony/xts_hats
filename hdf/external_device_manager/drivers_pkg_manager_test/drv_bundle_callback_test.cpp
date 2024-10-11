@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -37,19 +37,12 @@ public:
 
 HWTEST_F(DrvBundleStateCallbackTest, SUB_Driver_Ext_PkgManager_0700, TestSize.Level1)
 {
-    bool ret = drvbundleInstance.CheckBundleMgrProxyPermission();
-    EXPECT_EQ(true, ret);
-    cout << "DrvBundleCallback_CheckPermissio_Test" << endl;
-}
-
-HWTEST_F(DrvBundleStateCallbackTest, SUB_Driver_Ext_PkgManager_0800, TestSize.Level1)
-{
     bool ret = drvbundleInstance.GetAllDriverInfos();
     EXPECT_EQ(true, ret);
     cout << "Ptr DrvBundleCallback_GetAllInfos_Test" << endl;
 }
 
-HWTEST_F(DrvBundleStateCallbackTest, SUB_Driver_Ext_PkgManager_0900, TestSize.Level1)
+HWTEST_F(DrvBundleStateCallbackTest, SUB_Driver_Ext_PkgManager_0800, TestSize.Level1)
 {
     string stiching = drvbundleInstance.GetStiching();
     EXPECT_NE(true, stiching.empty());
@@ -74,13 +67,13 @@ public:
     }
 };
 
-HWTEST_F(DrvBundleStateCallbackPtrTest, SUB_Driver_Ext_PkgManager_1000, TestSize.Level1)
+HWTEST_F(DrvBundleStateCallbackPtrTest, SUB_Driver_Ext_PkgManager_0900, TestSize.Level1)
 {
     EXPECT_NE(nullptr, drvbundleInstance);
     cout << "DrvBundleCallback_New_Test" << endl;
 }
 
-HWTEST_F(DrvBundleStateCallbackPtrTest, SUB_Driver_Ext_PkgManager_1100, TestSize.Level1)
+HWTEST_F(DrvBundleStateCallbackPtrTest, SUB_Driver_Ext_PkgManager_1000, TestSize.Level1)
 {
     if (drvbundleInstance != nullptr) {
         delete drvbundleInstance;

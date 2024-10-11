@@ -30,8 +30,8 @@
 
 using namespace testing::ext;
 
-static const int TEST_PORT = 8888;
-static const int TEST_BAD_PORT = 8887;
+static const int TEST_PORT = 21355;
+static const int TEST_BAD_PORT = 21354;
 static const int BAD_SOCKET_FD = -1;
 static const char *TEST_LOCAL_IP = "127.0.0.1";
 static int g_serviceFd = -1;

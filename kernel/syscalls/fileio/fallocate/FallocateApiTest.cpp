@@ -69,7 +69,7 @@ HWTEST_F(FallocateApiTest, FallocateValidFdSuccess_0001, Function | MediumTest |
     int fd = open(TEST_FILE, O_RDWR | O_CREAT, MODE_0644);
     EXPECT_TRUE(fd > 0);
 
-    ret = fallocate(fd, FALLOC_FL_KEEP_SIZE, g_offset, g_length);
+    ret = fallocate(fd, FALLOC_FL_PUNCH_HOLE | FALLOC_FL_KEEP_SIZE, g_offset, g_length);
     EXPECT_EQ(ret, 0);
 
     close(fd);

@@ -1,0 +1,18 @@
+{
+    "description": "Configuration for HatsSchedparamTest Tests",
+    "kits": [
+        {
+            "push": [
+                "HatsSchedparamTest->/data/local/tmp/HatsSchedparamTest"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsSchedparamTest",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    }
+}

@@ -140,10 +140,13 @@ HWTEST_F(FcntlApiTest, FcntlManipulateInvalidFdFail_0004, Function | MediumTest 
 }
 
 /*
- * @tc.number SUB_KERNEL_SYSCALL_FCNTL_0500
- * @tc.name FcntlSetInvalidLockFail_0005
- * @tc.desc fcntl set invalid nullptr lock fail, errno EFAULT.
-*/
+ * @tc.number : SUB_KERNEL_SYSCALL_FCNTL_0500
+ * @tc.name   : FcntlSetInvalidLockFail_0005
+ * @tc.desc   : fcntl set invalid nullptr lock fail, errno EFAULT.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
 HWTEST_F(FcntlApiTest, FcntlSetInvalidLockFail_0005, Function | MediumTest | Level2)
 {
     int ret;

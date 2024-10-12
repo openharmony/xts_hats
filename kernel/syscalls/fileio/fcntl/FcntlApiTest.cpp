@@ -86,14 +86,14 @@ HWTEST_F(FcntlApiTest, FcntlFdFlagSuccess_0001, Function | MediumTest | Level1)
 }
 
 /*
- * @tc.number : SUB_KERNEL_SYSCALL_FCNTL_0300
- * @tc.name   : FcntlManipulateFileLockSuccess_0003
+ * @tc.number : SUB_KERNEL_SYSCALL_FCNTL_0200
+ * @tc.name   : FcntlManipulateFileLockSuccess_0002
  * @tc.desc   : fcntl set file lock success and return unlock by get lock check.
  * @tc.size   : MediumTest
  * @tc.type   : Function
  * @tc.level  : Level 1
  */
-HWTEST_F(FcntlApiTest, FcntlFileStatusSuccess_0003, Function | MediumTest | Level1)
+HWTEST_F(FcntlApiTest, FcntlManipulateFileLockSuccess_0002, Function | MediumTest | Level1)
 {
     int ret;
     int fd = open(TEST_FILE, O_RDWR | O_CREAT, MODE_0644);
@@ -122,14 +122,14 @@ HWTEST_F(FcntlApiTest, FcntlFileStatusSuccess_0003, Function | MediumTest | Leve
 }
 
 /*
- * @tc.number : SUB_KERNEL_SYSCALL_FCNTL_0400
- * @tc.name   : FcntlManipulateInvalidFdFail_0004
+ * @tc.number : SUB_KERNEL_SYSCALL_FCNTL_0300
+ * @tc.name   : FcntlManipulateInvalidFdFail_0003
  * @tc.desc   : fcntl manipulate invalid fd fail, errno EBADF.
  * @tc.size   : MediumTest
  * @tc.type   : Function
  * @tc.level  : Level 2
  */
-HWTEST_F(FcntlApiTest, FcntlManipulateInvalidFdFail_0004, Function | MediumTest | Level2)
+HWTEST_F(FcntlApiTest, FcntlManipulateInvalidFdFail_0003, Function | MediumTest | Level2)
 {
     int ret;
     int invalidFd = -1;
@@ -140,14 +140,14 @@ HWTEST_F(FcntlApiTest, FcntlManipulateInvalidFdFail_0004, Function | MediumTest 
 }
 
 /*
- * @tc.number : SUB_KERNEL_SYSCALL_FCNTL_0500
- * @tc.name   : FcntlSetInvalidLockFail_0005
+ * @tc.number : SUB_KERNEL_SYSCALL_FCNTL_0400
+ * @tc.name   : FcntlSetInvalidLockFail_0004
  * @tc.desc   : fcntl set invalid nullptr lock fail, errno EFAULT.
  * @tc.size   : MediumTest
  * @tc.type   : Function
  * @tc.level  : Level 2
  */
-HWTEST_F(FcntlApiTest, FcntlSetInvalidLockFail_0005, Function | MediumTest | Level2)
+HWTEST_F(FcntlApiTest, FcntlSetInvalidLockFail_0004, Function | MediumTest | Level2)
 {
     int ret;
     int fd = open(TEST_FILE, O_RDWR | O_CREAT, MODE_0644);
@@ -160,4 +160,108 @@ HWTEST_F(FcntlApiTest, FcntlSetInvalidLockFail_0005, Function | MediumTest | Lev
 
     close(fd);
     remove(TEST_FILE);
+}
+
+/*
+ * @tc.number : SUB_KERNEL_SYSCALL_FCNTL_0500
+ * @tc.name   : FcntlDupFdSuccess_0005
+ * @tc.desc   : fcntl duplicate fd success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
+HWTEST_F(FcntlApiTest, FcntlDupFdSuccess_0005, Function | MediumTest | Level1)
+{
+    int ret;
+    int fd = open(TEST_FILE, O_RDWR | O_CREAT, MODE_0644);
+    EXPECT_TRUE(fd > 0);
+
+    ret = fcntl(fd, F_DUPFD, 0);
+    EXPECT_TRUE(ret > 0);
+
+    ret = fcntl(fd, F_DUPFD_CLOEXEC, 0);
+    EXPECT_TRUE(ret > 0);
+
+    close(fd);
+    close(ret);
+    remove(TEST_FILE);
+}
+
+/*
+ * @tc.number : SUB_KERNEL_SYSCALL_FCNTL_0600
+ * @tc.name   : FcntlSetLockSuccess_0006
+ * @tc.desc   : fcntl set lock success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
+HWTEST_F(FcntlApiTest, FcntlSetLockSuccess_0006, Function | MediumTest | Level1)
+{
+    int ret;
+    int fd = open(TEST_FILE, O_RDWR | O_CREAT, MODE_0644);
+    EXPECT_TRUE(fd > 0);
+
+    struct flock lock = {
+        .l_type = F_WRLCK,
+        .l_whence = SEEK_SET,
+        .l_start = 0,
+        .l_len = 0,
+    };
+
+    ret = fcntl(fd, F_SETLK, &lock);
+    EXPECT_EQ(ret, 0);
+
+    close(fd);
+    remove(TEST_FILE);
+}
+
+/*
+ * @tc.number : SUB_KERNEL_SYSCALL_FCNTL_0700
+ * @tc.name   : FcntlOfdSetLockSuccess_0007
+ * @tc.desc   : fcntl ofd set lock success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
+HWTEST_F(FcntlApiTest, FcntlOfdSetLockSuccess_0007, Function | MediumTest | Level1)
+{
+    int ret;
+    int fd = open(TEST_FILE, O_RDWR | O_CREAT, MODE_0644);
+    EXPECT_TRUE(fd > 0);
+
+    struct flock lock = {
+        .l_type = F_WRLCK,
+        .l_whence = SEEK_SET,
+        .l_start = 0,
+        .l_len = 0,
+    };
+
+    ret = fcntl(fd, F_OFD_SETLK, &lock);
+    EXPECT_EQ(ret, 0);
+
+    close(fd);
+    remove(TEST_FILE);
+}
+
+/*
+ * @tc.number : SUB_KERNEL_SYSCALL_FCNTL_0800
+ * @tc.name   : FcntlSetPipeSzSuccess_0008
+ * @tc.desc   : fcntl set pipe get pipe success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
+HWTEST_F(FcntlApiTest, FcntlSetPipeSzSuccess_0008, Function | MediumTest | Level1)
+{
+    int fds[2];
+    int ret = pipe(fds);
+    EXPECT_TRUE(ret == 0);
+
+    ret = fcntl(fds[1], F_SETPIPE_SZ, 1024);
+    EXPECT_GE(ret, 0);
+    ret = fcntl(fds[1], F_GETPIPE_SZ);
+    EXPECT_GE(ret, 0);
+
+    close(fds[0]);
+    close(fds[1]);
 }

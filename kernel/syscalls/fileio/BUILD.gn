@@ -17,6 +17,8 @@ import("//test/xts/hats/build.gni")
 group("HatsFileIoTest") {
   testonly = true
   deps = [
+    "chdir:HatsChdirTest",
+    "chroot:HatsChrootTest",
     "clockgetres:HatsClockGetresTest",
     "clocknanosleep:HatsClockNanoSleepTest",
     "close:HatsCloseTest",
@@ -47,9 +49,11 @@ group("HatsFileIoTest") {
     "getgid:HatsGetgidTest",
     "getxattr:HatsGetxattrTest",
     "lgetxattr:HatsLgetxattrTest",
+    "linkat:HatsLinkatTest",
     "lseek:HatsLseekTest",
     "memfdcreate:HatsMemFdCreateTest",
     "mkdirat:HatsMkdiratTest",
+    "mknodat:HatsMknodatTest",
     "openat:HatsOpenatTest",
     "pread64:HatsPread64Test",
     "preadv:HatsPreadvTest",
@@ -57,5 +61,9 @@ group("HatsFileIoTest") {
     "pwritev:HatsPwritevTest",
     "read:HatsReadTest",
     "readlinkat:HatsReadlinkatTest",
+    "renameat:HatsRenameatTest",
+    "sendfile:HatsSendfileTest",
+    "setxattr:HatsSetxattrTest",
+    "umask:HatsUmaskTest",
   ]
 }

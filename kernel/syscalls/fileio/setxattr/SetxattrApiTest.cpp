@@ -73,7 +73,7 @@ HWTEST_F(SetxattrApiTest, SetxattrSuccess_0001, Function | MediumTest | Level1)
 }
 
 /*
- * @tc.number : SUB_KERNEL_SYSCALL_statx_0200
+ * @tc.number : SUB_KERNEL_SYSCALL_STATX_0200
  * @tc.name   : SetxattrInvalidPath_0002
  * @tc.desc   : statx invalid path.
  * @tc.size   : MediumTest

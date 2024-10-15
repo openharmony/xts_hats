@@ -14,17 +14,12 @@
 import("//build/ohos_var.gni")
 import("//test/xts/hats/build.gni")
 
-group("HatsMemTest") {
+group("HatsResourceTest") {
   testonly = true
   deps = [
-    "brk:HatsBrkTest",
-    "madvisecall:HatsMadvisecallTest",
-    "mincore:HatsMincoreTest",
-    "mlock:HatsMlockTest",
-    "mlock2:HatsMlock2Test",
-    "mmap:HatsMmapSyscallTest",
-    "mprotect:HatsMprotectTest",
-    "msync:HatsMsyncTest",
-    "processvm:HatsProcessvmTest",
+    "getrlimit:HatsGetrlimitTest",
+    "getrusage:HatsGetrusageTest",
+    "prlimit64:HatsPrlimit64Test",
+    "setrlimit:HatsSetrlimitTest",
   ]
 }

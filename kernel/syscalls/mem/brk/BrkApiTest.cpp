@@ -13,17 +13,27 @@
  * limitations under the License.
  */
 
+#include <cerrno>
 #include <cstdio>
+#include <cstdlib>
+#include <csignal>
+#include <string>
+#include <vector>
+#include <fcntl.h>
+#include <unistd.h>
+#include <malloc.h>
+#include <arpa/inet.h>
 #include <gtest/gtest.h>
+#include <netinet/in.h>
 #include <sys/stat.h>
+#include <sys/mman.h>
+#include <sys/socket.h>
+#include <sys/types.h>
 #include "securec.h"
 
 using namespace testing::ext;
-using namespace std;
 
-static const mode_t MASK = 022;
-
-class UmaskApiTest : public testing::Test {
+class HatsBrkTest : public testing::Test {
 public:
     static void SetUpTestCase();
     static void TearDownTestCase();
@@ -31,31 +41,34 @@ public:
     void TearDown();
 private:
 };
-void UmaskApiTest::SetUp()
+void HatsBrkTest::SetUp()
 {
 }
-void UmaskApiTest::TearDown()
+
+void HatsBrkTest::TearDown()
 {
 }
-void UmaskApiTest::SetUpTestCase()
+
+void HatsBrkTest::SetUpTestCase()
 {
 }
-void UmaskApiTest::TearDownTestCase()
+
+void HatsBrkTest::TearDownTestCase()
 {
 }
 
 /*
- * @tc.number : SUB_KERNEL_SYSCALL_UMASK_0100
- * @tc.name   : UmaskSuccess_0001
- * @tc.desc   : umask success.
+ * @tc.number : SUB_KERNEL_SYSCALL_BRK_0100
+ * @tc.name   : BrkDataEndFailed_0001
+ * @tc.desc   : brk data end always failed.
  * @tc.size   : MediumTest
  * @tc.type   : Function
  * @tc.level  : Level 1
  */
-HWTEST_F(UmaskApiTest, UmaskSuccess_0001, Function | MediumTest | Level1)
+HWTEST_F(HatsBrkTest, BrkDataEndFailed_0001, Function | MediumTest | Level1)
 {
-    mode_t newMask;
-    umask(MASK);
-    newMask = umask(MASK);
-    EXPECT_EQ(newMask, MASK);
+    errno = 0;
+    int ret = brk(nullptr);
+    EXPECT_EQ(ret, -1);
+    EXPECT_EQ(errno, ENOMEM);
 }

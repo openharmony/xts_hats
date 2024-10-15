@@ -20,6 +20,7 @@ group("HatsSyscallTest") {
     "fileio:HatsFileIoTest",
     "mem:HatsMemTest",
     "net:HatsNetTest",
+    "resource:HatsResourceTest",
     "schedule:HatsScheduleTest",
     "timer:HatsTimerTest",
   ]

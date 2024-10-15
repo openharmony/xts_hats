@@ -11,20 +11,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//build/ohos_var.gni")
-import("//test/xts/hats/build.gni")
+import("//test/xts/tools/build/suite.gni")
+module_output_path = "hats/syscalls/fileio"
 
-group("HatsMemTest") {
-  testonly = true
-  deps = [
-    "brk:HatsBrkTest",
-    "madvisecall:HatsMadvisecallTest",
-    "mincore:HatsMincoreTest",
-    "mlock:HatsMlockTest",
-    "mlock2:HatsMlock2Test",
-    "mmap:HatsMmapSyscallTest",
-    "mprotect:HatsMprotectTest",
-    "msync:HatsMsyncTest",
-    "processvm:HatsProcessvmTest",
-  ]
+ohos_moduletest_suite("HatsMincoreTest") {
+  module_out_path = module_output_path
+  sources = [ "./MincoreApiTest.cpp" ]
+  deps = [ "//third_party/googletest:gtest_main" ]
+  include_dirs = [ "include" ]
+  cflags = [ "-Wno-error" ]
+  external_deps = [ "c_utils:utils" ]
+  subsystem_name = "kernel"
+  part_name = "hats"
 }

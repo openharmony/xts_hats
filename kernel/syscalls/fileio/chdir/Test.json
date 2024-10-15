@@ -1,0 +1,18 @@
+{
+    "description": "Configuration for HatsChdirTest Tests",
+    "kits": [
+        {
+            "push": [
+                "HatsChdirTest->/data/local/tmp/HatsChdirTest"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsChdirTest",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    }   
+}

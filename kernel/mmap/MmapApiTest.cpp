@@ -123,14 +123,12 @@ HWTEST_F(MmapApiTest, MremapDontunmap002, Function | MediumTest | Level2)
     void *fixAddr = mmap(nullptr, PAGE_SIZE, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_SHARED, -1, 0);
     ASSERT_TRUE(fixAddr != MAP_FAILED);
     void *newAddr = mremap(fixAddr, PAGE_SIZE, PAGE_SIZE, MREMAP_MAYMOVE | MREMAP_FIXED | MREMAP_DONTUNMAP, addr);
-#ifdef DISPLAY_COMMUNITY
-    ASSERT_TRUE(newAddr == MAP_FAILED);
-#else
     ASSERT_TRUE(newAddr != MAP_FAILED);
-#endif
     int ret = munmap(addr, PAGE_SIZE);
     ASSERT_TRUE(ret == 0);
     ret = munmap(fixAddr, PAGE_SIZE);
+    ASSERT_TRUE(ret == 0);
+    ret = munmap(newAddr, PAGE_SIZE);
     ASSERT_TRUE(ret == 0);
     addr = nullptr;
     fixAddr = nullptr;

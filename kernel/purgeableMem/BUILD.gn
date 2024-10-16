@@ -15,7 +15,7 @@ import("../../../tools/build/suite.gni")
 
 module_output_path = "hats/purgeableMem"
 
-ohos_moduletest_suite("HatsPurgeable") {
+ohos_moduletest_suite("HatsPurgeableTest") {
   module_out_path = module_output_path
   sources = [ "./purgeable_cpp_test.cpp" ]
   external_deps = [

@@ -19,7 +19,7 @@ config("dcamera_hdf_demo_config") {
   visibility = [ ":*" ]
 }
 
-ohos_moduletest_suite("HatsdisCameraProviderCase") {
+ohos_moduletest_suite("HatsdisCameraProviderCaseTest") {
   module_out_path = module_output_path
   install_enable = true
   sources = [ "dcameraprovidercase.cpp" ]
@@ -87,7 +87,7 @@ ohos_moduletest_suite("HatsdisCameraProviderCase") {
 
   defines = [
     "HI_LOG_ENABLE",
-    "DH_LOG_TAG=\"DCameraHdfCase\"",
+    "DH_LOG_TAG=\"HatsdisCameraProviderCaseTest\"",
     "LOG_DOMAIN=0xD004100",
   ]
 

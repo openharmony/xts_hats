@@ -1,9 +1,9 @@
 {
-    "description": "Configuration for HatsPurgeable Tests",
+    "description": "Configuration for HatsPurgeableTest Tests",
     "kits": [
         {
             "push": [
-                "HatsPurgeable->/data/local/tmp/HatsPurgeable"
+                "HatsPurgeableTest->/data/local/tmp/HatsPurgeableTest"
             ],
             "type": "PushKit"
         }
@@ -11,7 +11,7 @@
     "driver": {
         "native-test-timeout": "120000",
         "type": "CppTest",
-        "module-name": "HatsPurgeable",
+        "module-name": "HatsPurgeableTest",
         "runtime-hint": "1s",
         "native-test-device-path": "/data/local/tmp"
     }

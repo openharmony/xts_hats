@@ -13,18 +13,17 @@
 
 import("//build/ohos_var.gni")
 import("//test/xts/hats/build.gni")
+import("//test/xts/tools/build/suite.gni")
 
-group("HatsSyscallTest") {
-  testonly = true
-  deps = [
-    "fileio:HatsFileIoTest",
-    "mem:HatsMemTest",
-    "net:HatsNetTest",
-    "resource:HatsResourceTest",
-    "schedule:HatsScheduleTest",
-    "signal:HatsSignalTest",
-    "system:HatsSystemTest",
-    "timer:HatsTimerTest",
-    "user:HatsUserTest",
-  ]
+module_output_path = "hats/syscalls"
+
+ohos_moduletest_suite("HatsUserTest") {
+  module_out_path = module_output_path
+  sources = [ "./UserApiTest.cpp" ]
+  deps = [ "//third_party/googletest:gtest_main" ]
+  include_dirs = [ "include" ]
+  cflags = [ "-Wno-error" ]
+  external_deps = [ "c_utils:utils" ]
+  subsystem_name = "kernel"
+  part_name = "hats"
 }

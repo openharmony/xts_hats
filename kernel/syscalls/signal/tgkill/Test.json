@@ -1,0 +1,18 @@
+{
+    "description": "Configuration for HatsTgkillTest Tests",
+    "kits": [
+        {
+            "push": [
+                "HatsTgkillTest->/data/local/tmp/HatsTgkillTest"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsTgkillTest",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    }
+}

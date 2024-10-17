@@ -58,13 +58,13 @@ void SetiTimerApiTest::TearDownTestCase()
 
 /*
  * @tc.number : SUB_KERNEL_SYSCALL_SETITIMER_0100
- * @tc.name   : SetiTimerGetRealTimeSuccess_0001
- * @tc.desc   : Test the ITIMER_REAL timer.
+ * @tc.name   : SetiTimerAndGetitimerGetRealTimeSuccess_0001
+ * @tc.desc   : Test setitimer and getitimer the ITIMER_REAL timer.
  * @tc.size   : MediumTest
  * @tc.type   : Function
  * @tc.level  : Level 1
  */
-HWTEST_F(SetiTimerApiTest, SetiTimerGetRealTimeSuccess_0001, Function | MediumTest | Level1)
+HWTEST_F(SetiTimerApiTest, SetiTimerAndGetitimerGetRealTimeSuccess_0001, Function | MediumTest | Level1)
 {
     struct itimerval timer_val = {
         .it_interval = {
@@ -77,8 +77,16 @@ HWTEST_F(SetiTimerApiTest, SetiTimerGetRealTimeSuccess_0001, Function | MediumTe
         },
     };
     struct itimerval remaining;
+    struct itimerval fetched;
 
     EXPECT_EQ(setitimer(ITIMER_REAL, &timer_val, &remaining), 0);
+
+    EXPECT_EQ(getitimer(ITIMER_REAL, &fetched), 0);
+
+    EXPECT_NEAR(fetched.it_value.tv_sec, timer_val.it_value.tv_sec, 1);
+    EXPECT_NEAR(fetched.it_value.tv_usec, timer_val.it_value.tv_usec, 1000);
+    EXPECT_EQ(fetched.it_interval.tv_sec, timer_val.it_interval.tv_sec);
+    EXPECT_EQ(fetched.it_interval.tv_usec, timer_val.it_interval.tv_usec);
 
     usleep(DELAY_TIME);
     EXPECT_TRUE(g_timerExpired);

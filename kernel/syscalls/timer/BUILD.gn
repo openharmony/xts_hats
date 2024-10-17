@@ -22,5 +22,7 @@ group("HatsTimerTest") {
     "nanosleep:HatsNanoSleepTest",
     "setitimer:HatsSetiTimerTest",
     "timercreate:HatsTimerCreateTest",
+    "timerfdcreate:HatsTimerFdCreateTest",
+    "times:HatsTimesTest",
   ]
 }

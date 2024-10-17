@@ -99,7 +99,7 @@ HWTEST_F(FaccessatApiTest, FaccessatCheckSuccess_0001, Function | MediumTest | L
 HWTEST_F(FaccessatApiTest, FaccessatPermissionCheckTest_0002, Function | MediumTest | Level1)
 {
     int ret;
-    int fd = open(TEST_FILE, O_RDWR | O_CREAT, 0644);
+    int fd = open(TEST_FILE, O_RDWR | O_CREAT, 0755);
     EXPECT_TRUE(fd > 0);
 
     ret = faccessat(fd, TEST_FILE, F_OK, AT_EACCESS);
@@ -109,6 +109,9 @@ HWTEST_F(FaccessatApiTest, FaccessatPermissionCheckTest_0002, Function | MediumT
     EXPECT_TRUE(ret == 0);
 
     ret = faccessat(fd, TEST_FILE, W_OK, AT_EACCESS);
+    EXPECT_TRUE(ret == 0);
+
+    ret = faccessat(fd, TEST_FILE, X_OK, AT_EACCESS);
     EXPECT_TRUE(ret == 0);
 
     close(fd);

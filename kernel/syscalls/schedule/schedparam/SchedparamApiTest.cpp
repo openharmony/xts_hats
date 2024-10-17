@@ -68,6 +68,7 @@ HWTEST_F(HatsSchedparamTest, SchedparamSetAndGetParametersSuccess_0001, Function
     };
 
     int ret = sched_setscheduler(0, SCHED_FIFO, &param);
+    EXPECT_EQ(ret, 0);
 
     // test sched_setparam set priority success
     param.sched_priority = SCHED_FIFO;

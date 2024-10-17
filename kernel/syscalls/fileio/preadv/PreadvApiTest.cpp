@@ -183,3 +183,47 @@ HWTEST_F(PreadvApiTest, PreadvReadContinuousSuccess_0004, Function | MediumTest 
 
     close(fd);
 }
+
+/*
+ * @tc.number : SUB_KERNEL_SYSCALL_PREADV2_0500
+ * @tc.name   : Preadv2ReadSuccess_0002
+ * @tc.desc   : preadv2 read file success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
+HWTEST_F(PreadvApiTest, Preadv2ReadSuccess_0002, Function | MediumTest | Level1)
+{
+    ssize_t size;
+    int midLen = TEST_LEN / 2;
+    char buffer[MAX_LEN] = { 0 };
+    struct iovec iov[2] = {
+        {
+            .iov_base = buffer,
+            .iov_len = TEST_LEN,
+        }, {
+            .iov_base = &buffer[TEST_LEN],
+            .iov_len = TEST_LEN,
+        }
+    };
+
+    int fd = open(TEST_FILE, O_RDONLY);
+
+    // preadv from file start
+    size = preadv(fd, iov, 2, 0);
+    EXPECT_EQ(size, TEST_LEN);
+    EXPECT_STREQ(static_cast<char *>(iov[0].iov_base), TEST_DATA);
+
+    // preadv from file middle
+    memset_s(buffer, sizeof(buffer), 0, sizeof(buffer));
+    size = preadv2(fd, iov, 1, midLen, 0);
+    EXPECT_EQ(size, TEST_LEN - midLen);
+    EXPECT_STREQ(static_cast<char *>(iov[0].iov_base), &TEST_DATA[midLen]);
+
+    // preadv from file end
+    memset_s(buffer, sizeof(buffer), 0, sizeof(buffer));
+    size = preadv2(fd, iov, 1, TEST_LEN, 0);
+    EXPECT_EQ(size, 0);
+
+    close(fd);
+}

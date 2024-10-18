@@ -90,7 +90,7 @@ static void SocketServiceStart(int *fd)
     *fd = socketFd;
 }
 
-static void ClientConnect(void)
+static void *ClientConnect(void *arg)
 {
     int ret;
     int socketFd = -1;
@@ -106,6 +106,7 @@ static void ClientConnect(void)
     ret = connect(socketFd, reinterpret_cast<struct sockaddr *>(&serAddr), sizeof(struct sockaddr_in));
     EXPECT_EQ(ret, 0);
     close(socketFd);
+    return nullptr;
 }
 
 /*
@@ -127,7 +128,7 @@ HWTEST_F(HatsAccept4Test, Accept4ValidSockfdSuccess_0001, Function | MediumTest 
     SocketServiceStart(&socketFd);
     ASSERT_TRUE(socketFd > 0);
     if ((pid = fork()) == 0) {
-        ClientConnect();
+        ClientConnect(nullptr);
         exit(0);
     }
     acceptFd = accept4(socketFd, reinterpret_cast<struct sockaddr *>(&cliAddr), &addrlen, 0);
@@ -158,7 +159,7 @@ HWTEST_F(HatsAccept4Test, Accept4GetClientAddrSuccess_0002, Function | MediumTes
     SocketServiceStart(&socketFd);
     ASSERT_TRUE(socketFd > 0);
     if ((pid = fork()) == 0) {
-        ClientConnect();
+        ClientConnect(nullptr);
         exit(0);
     }
     acceptFd = accept4(socketFd, reinterpret_cast<struct sockaddr *>(&cliAddr), &addrlen, 0);
@@ -188,7 +189,7 @@ HWTEST_F(HatsAccept4Test, Accept4GetClientAddrSuccess_0003, Function | MediumTes
     SocketServiceStart(&socketFd);
     ASSERT_TRUE(socketFd > 0);
     if ((pid = fork()) == 0) {
-        ClientConnect();
+        ClientConnect(nullptr);
         exit(0);
     }
     acceptFd = accept4(socketFd, reinterpret_cast<struct sockaddr *>(&cliAddr), &addrlen, 0);
@@ -215,4 +216,31 @@ HWTEST_F(HatsAccept4Test, Accept4InvalidFd_0004, Function | MediumTest | Level2)
     ret = accept4(STDIN_FILENO, nullptr, nullptr, 0);
     EXPECT_EQ(ret, -1);
     EXPECT_EQ(errno, ENOTSOCK);
+}
+
+/*
+ * @tc.number : SUB_KERNEL_SYSCALL_ACCEPT4_0500
+ * @tc.name   : Accept4FlagTestSuccess_0005
+ * @tc.desc   : accept4 flag SOCK_NONBLOCK and SOCK_CLOEXEC test success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
+HWTEST_F(HatsAccept4Test, Accept4FlagTestSuccess_0005, Function | MediumTest | Level1)
+{
+    int socketFd = -1;
+    int acceptFd = -1;
+    pthread_t thread;
+    struct sockaddr_in cliAddr;
+    socklen_t addrlen = sizeof(struct sockaddr_in);
+    SocketServiceStart(&socketFd);
+    ASSERT_TRUE(socketFd > 0);
+
+    pthread_create(&thread, nullptr, ClientConnect, nullptr);
+    acceptFd = accept4(socketFd, reinterpret_cast<struct sockaddr *>(&cliAddr), &addrlen, SOCK_NONBLOCK | SOCK_CLOEXEC);
+    EXPECT_TRUE(acceptFd > 0);
+
+    close(acceptFd);
+    close(socketFd);
+    pthread_join(thread, nullptr);
 }

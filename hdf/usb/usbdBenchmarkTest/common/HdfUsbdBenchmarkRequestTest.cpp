@@ -367,10 +367,13 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_070
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     std::vector<uint8_t> clientData = {'q', 'u', 'e', 'u', 'e', 'r', 'e', 'a', 'd'};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
+    auto req = -1;
     for (auto _ : st) {
         ret = g_usbInterface->RequestQueue(dev, pipe, clientData, bufferData);
+        req = g_usbInterface->RequestCancel(dev, pipe);
     }
     ASSERT_EQ(0, ret);
+    ASSERT_EQ(0, req);
     ReleasePara(subscriber);
 }
 
@@ -402,12 +405,15 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_080
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = { interfaceId, pointId };
     std::vector<uint8_t> clientData = {'q', 'u', 'e', 'u', 'e', 'r', 'e', 'a', 'd'};
     std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
-    ret = g_usbInterface->RequestQueue(dev, pipe, clientData, bufferData);
     std::vector<uint8_t> waitData(TAG_NUM_10);
+    auto req = -1;
     for (auto _ : st) {
+        ret = g_usbInterface->RequestQueue(dev, pipe, clientData, bufferData);
         ret = g_usbInterface->RequestWait(dev, waitData, bufferData, TIME_WAIT);
+        req = g_usbInterface->RequestCancel(dev, pipe);
     }
     ASSERT_EQ(0, ret);
+    ASSERT_EQ(0, req);
     ReleasePara(subscriber);
 }
 
@@ -470,6 +476,7 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_100
     uint8_t interfaceId = INTERFACEID_OK;
     auto ret = -1;
     for (auto _ : st) {
+        ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
         ret = g_usbInterface->ReleaseInterface(dev, interfaceId);
     }
     ASSERT_EQ(0, ret);
@@ -502,9 +509,8 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, SUB_USB_HostManager_HDI_Performance_210
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     ASSERT_EQ(0, ret);
     sptr<UsbdBulkCallbackTest> usbdBulkCallback = new UsbdBulkCallbackTest();
-    ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
-    ASSERT_EQ(ret, 0);
     for (auto _ : st) {
+        ret = g_usbInterface->RegBulkCallback(dev, pipe, usbdBulkCallback);
         ret = g_usbInterface->BulkCancel(dev, pipe);
     }
     ASSERT_EQ(0, ret);
@@ -572,6 +578,38 @@ BENCHMARK_F(HdfUsbdBenchmarkRequestTest, ResetDeviceBenchmarkTest)
 }
 
 BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, ResetDeviceBenchmarkTest)
+    ->Iterations(ITERATION_FREQUENCY)
+    ->Repetitions(REPETITION_FREQUENCY)
+    ->ReportAggregatesOnly();
+
+/**
+ * @tc.number   : SUB_USB_HostManager_HDI_Performance_3100
+ * @tc.name     : GetDeviceFileDescriptorBenchmarkTest
+ * @tc.desc     : Test functions to GetDeviceFileDescriptor benchmark test
+ * @tc.desc     : int32_t GetDeviceFileDescriptor(const UsbDev &dev, int32_t &fd);
+ * @tc.desc     : Positive test: parameters correctly
+ * @tc.size     : MediumTest
+ * @tc.type     : Function
+ * @tc.level    : Level 3
+ */
+BENCHMARK_F(HdfUsbdBenchmarkRequestTest, GetDeviceFileDescriptorBenchmarkTest)
+(benchmark::State& st)
+{
+    ASSERT_TRUE(g_usbInterface != nullptr);
+    sptr<UsbSubscriberTest> subscriber = new UsbSubscriberTest();
+    ASSERT_TRUE(subscriber != nullptr);
+    InitPara(subscriber);
+    struct UsbDev dev = dev_;
+    int32_t fd = 0;
+    auto ret = -1;
+    for (auto _ : st) {
+        ret = g_usbInterface->GetDeviceFileDescriptor(dev, fd);
+    }
+    EXPECT_EQ(0, ret);
+    ReleasePara(subscriber);
+}
+
+BENCHMARK_REGISTER_F(HdfUsbdBenchmarkRequestTest, GetDeviceFileDescriptorBenchmarkTest)
     ->Iterations(ITERATION_FREQUENCY)
     ->Repetitions(REPETITION_FREQUENCY)
     ->ReportAggregatesOnly();

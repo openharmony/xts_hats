@@ -171,7 +171,7 @@ HWTEST_F(HatsMmapSyscallTest, MmapFlagTestSuccess_0003, Function | MediumTest | 
 /*
  * @tc.number : SUB_KERNEL_SYSCALL_MMAPSYSCALL_0400
  * @tc.name   : MmapFlagTestSuccess_0004
- * @tc.desc   : Mmap sets flag MAP_FILE/MAP_HUGE_2MB/MAP_HUGE_1GB/MAP_HUGETLB successfully.
+ * @tc.desc   : Mmap sets flag MAP_FILE/MAP_HUGE_2MB/MAP_HUGE_1GB successfully.
  * @tc.size   : MediumTest
  * @tc.type   : Function
  * @tc.level  : Level 1

@@ -19,6 +19,7 @@ group("HatsMemTest") {
   deps = [
     "brk:HatsBrkTest",
     "madvisecall:HatsMadvisecallTest",
+    "membarrier:HatsMembarrierTest",
     "mincore:HatsMincoreTest",
     "mlock:HatsMlockTest",
     "mlock2:HatsMlock2Test",

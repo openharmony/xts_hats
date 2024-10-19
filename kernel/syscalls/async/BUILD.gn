@@ -14,15 +14,17 @@
 import("//build/ohos_var.gni")
 import("//test/xts/hats/build.gni")
 
-group("HatsSyscallTest") {
+group("HatsAsyncTest") {
   testonly = true
   deps = [
-    "async:HatsAsyncTest",
-    "fileio:HatsFileIoTest",
-    "mem:HatsMemTest",
-    "net:HatsNetTest",
-    "resource:HatsResourceTest",
-    "schedule:HatsScheduleTest",
-    "timer:HatsTimerTest",
+    "epoll_create:HatsEpollCreateTest",
+    "epoll_ctl:HatsEpollCtlTest",
+    "epoll_pwait:HatsEpollPwaitTest",
+    "eventfd2:HatsEventfd2Test",
+    "inotify:HatsInotifyTest",
+    "pipe2:HatsPipe2Test",
+    "ppoll:HatsPpollTest",
+    "pselect:HatsPselectTest",
+    "wait4:HatsWait4Test",
   ]
 }

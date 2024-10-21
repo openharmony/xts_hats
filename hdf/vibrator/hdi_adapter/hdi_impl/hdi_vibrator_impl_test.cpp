@@ -16,7 +16,7 @@
 #include <cstdio>
 #include <gtest/gtest.h>
 #include <securec.h>
-#include<string>
+#include <string>
 #include "hdf_base.h"
 #include "osal_time.h"
 #include "parameters.h"

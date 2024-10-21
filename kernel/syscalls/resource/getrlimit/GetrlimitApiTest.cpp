@@ -87,6 +87,8 @@ HWTEST_F(GetrlimitApiTest, GetrlimitGetResourceLimitsSuccess_0001, Function | Me
     EXPECT_EQ(ret, 0);
     ret = getrlimit(RLIMIT_STACK, &limit);
     EXPECT_EQ(ret, 0);
+    ret = getrlimit(RLIMIT_NICE, &limit);
+    EXPECT_EQ(ret, 0);
 }
 
 /*

@@ -1,0 +1,18 @@
+{
+    "description": "Configuration for HatsCapGetTest Tests",
+    "kits": [
+        {
+            "push": [
+                "HatsCapGetTest->/data/local/tmp/HatsCapGetTest"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsCapGetTest",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    }
+}

@@ -14,20 +14,10 @@
 import("//build/ohos_var.gni")
 import("//test/xts/hats/build.gni")
 
-group("HatsSyscallTest") {
+group("HatsProcessTest") {
   testonly = true
   deps = [
-    "fileio:HatsFileIoTest",
-    "mem:HatsMemTest",
-    "net:HatsNetTest",
-    "ns:HatsNsTest",
-    "process:HatsProcessTest",
-    "resource:HatsResourceTest",
-    "schedule:HatsScheduleTest",
-    "security:HatsSecurityTest",
-    "signal:HatsSignalTest",
-    "system:HatsSystemTest",
-    "timer:HatsTimerTest",
-    "user:HatsUserTest",
+    "prctl:HatsPrctlSyscallTest",
+    "processid:HatsProcessSyscallTest",
   ]
 }

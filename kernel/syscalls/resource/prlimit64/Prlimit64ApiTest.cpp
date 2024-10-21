@@ -89,6 +89,8 @@ HWTEST_F(Prlimit64ApiTest, PrlimitSetGetPIDResourceLimitsSuccess_0001, Function 
     EXPECT_EQ(ret, 0);
     ret = prlimit64(0, RLIMIT_STACK, &limit, &limit2);
     EXPECT_EQ(ret, 0);
+    ret = prlimit64(0, RLIMIT_NICE, &limit, &limit2);
+    EXPECT_EQ(ret, 0);
 }
 
 /*

@@ -80,6 +80,14 @@ HWTEST_F(HatsSchedschedulerTest, SchedschedulerSetAndGetSchedulingPolicySuccess_
 
     policy = sched_getscheduler(0);
     EXPECT_EQ(policy, SCHED_RR);
+
+    // scheduler SCHED_OTHER set and get test, success
+    param.sched_priority = sched_get_priority_max(SCHED_OTHER);
+    ret = sched_setscheduler(0, SCHED_OTHER, &param);
+    EXPECT_EQ(ret, 0);
+
+    policy = sched_getscheduler(0);
+    EXPECT_EQ(policy, SCHED_OTHER);
 }
 
 /*

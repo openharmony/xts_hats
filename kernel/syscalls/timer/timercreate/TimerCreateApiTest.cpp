@@ -61,13 +61,13 @@ void TimerCreateApiTest::TearDownTestCase()
 
 /*
  * @tc.number : SUB_KERNEL_SYSCALL_TIMER_CREATE_0100
- * @tc.name   : TimerCreateRealtimeSuccess_0001
- * @tc.desc   : Test the timer_create with CLOCK_REALTIME.
+ * @tc.name   : TimerCreateRealtimeAndGetoverrunSuccess_0001
+ * @tc.desc   : Test the timer_create and timer_getoverrun with CLOCK_REALTIME.
  * @tc.size   : MediumTest
  * @tc.type   : Function
  * @tc.level  : Level 1
  */
-HWTEST_F(TimerCreateApiTest, TimerCreateRealtimeSuccess_0001, Function | MediumTest | Level1)
+HWTEST_F(TimerCreateApiTest, TimerCreateRealtimeAndGetoverrunSuccess_0001, Function | MediumTest | Level1)
 {
     timer_t timerId;
     struct sigevent sev;
@@ -92,6 +92,9 @@ HWTEST_F(TimerCreateApiTest, TimerCreateRealtimeSuccess_0001, Function | MediumT
 
     usleep(DELAY_TIME);
     EXPECT_TRUE(g_timerExpired);
+
+    int overruns = timer_getoverrun(timerId);
+    EXPECT_TRUE(overruns >= 0);
 
     int timerRes = timer_delete(timerId);
     EXPECT_EQ(timerRes, 0);
@@ -222,4 +225,89 @@ HWTEST_F(TimerCreateApiTest, TimeSetTimeOldValueSuccess_0004, Function | MediumT
 
     int timerRes = timer_delete(timerId);
     EXPECT_EQ(timerRes, 0);
+}
+
+/*
+ * @tc.number : SUB_KERNEL_SYSCALL_TIMER_SETTIME_0500
+ * @tc.name   : TimerSetTimeAbstimeSuccess_0005
+ * @tc.desc   : Test the timer_settime with TIMER_ABSTIME.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
+HWTEST_F(TimerCreateApiTest, TimerSetTimeAbstimeSuccess_0005, Function | MediumTest | Level1)
+{
+    timer_t timerId;
+    struct itimerspec newValue;
+    struct itimerspec oldValue;
+    const clockid_t CLOCK_ID = CLOCK_REALTIME;
+
+    // Set the timer current time plus 50 nsec
+    struct timespec now;
+    clock_gettime(CLOCK_ID, &now);
+    newValue.it_value.tv_sec = now.tv_sec;
+    newValue.it_value.tv_nsec = now.tv_nsec + 50;
+    if (newValue.it_value.tv_nsec >= 1000000000) {
+        newValue.it_value.tv_nsec -= 1000000000;
+        newValue.it_value.tv_sec += 1;
+    }
+    newValue.it_interval.tv_sec = 0;
+    newValue.it_interval.tv_nsec = 0;
+
+    struct sigevent sev;
+    sev.sigev_notify = SIGEV_THREAD;
+    sev.sigev_notify_function = TimeHandler;
+    sev.sigev_value.sival_ptr = &g_timerExpired;
+
+    EXPECT_EQ(timer_create(CLOCK_ID, &sev, &timerId), 0);
+
+    EXPECT_EQ(timer_settime(timerId, TIMER_ABSTIME, &newValue, &oldValue), 0);
+
+    usleep(DELAY_TIME);
+    EXPECT_TRUE(g_timerExpired);
+
+    int timerRes = timer_delete(timerId);
+    EXPECT_EQ(timerRes, 0);
+}
+
+/*
+ * @tc.number : SUB_KERNEL_SYSCALL_TIMER_CREATE_0600
+ * @tc.name   : TimerCreateBoottimeAlarmSuccess_0006
+ * @tc.desc   : Test the timer_create with CLOCK_BOOTTIME_ALARM.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
+HWTEST_F(TimerCreateApiTest, TimerCreateBoottimeAlarmSuccess_0006, Function | MediumTest | Level1)
+{
+    timer_t timerId;
+    const clockid_t CLOCK_ID = CLOCK_BOOTTIME_ALARM;
+    sighandler_t oldHandler = signal(SIGALRM, SigalrmHandler);
+    EXPECT_NE(oldHandler, SIG_ERR);
+    struct sigevent sev = {
+        .sigev_notify = SIGEV_SIGNAL,
+        .sigev_signo = SIGALRM,
+    };
+    struct itimerspec its = {
+        .it_interval = {
+            .tv_sec = 0,
+            .tv_nsec = 0,
+        },
+        .it_value = {
+            .tv_sec = 0,
+            .tv_nsec = 50,
+        },
+    };
+
+    EXPECT_EQ(timer_create(CLOCK_ID, &sev, &timerId), 0);
+    EXPECT_EQ(timer_settime(timerId, 0, &its, nullptr), 0);
+
+    usleep(DELAY_TIME);
+
+    EXPECT_TRUE(g_sigalRm);
+
+    int timerRes = timer_delete(timerId);
+    EXPECT_EQ(timerRes, 0);
+
+    signal(SIGALRM, oldHandler);
 }

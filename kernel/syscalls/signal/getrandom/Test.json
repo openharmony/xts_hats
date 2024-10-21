@@ -1,0 +1,18 @@
+{
+    "description": "Configuration for HatsGetrandomTest Tests",
+    "kits": [
+        {
+            "push": [
+                "HatsGetrandomTest->/data/local/tmp/HatsGetrandomTest"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsGetrandomTest",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    }
+}

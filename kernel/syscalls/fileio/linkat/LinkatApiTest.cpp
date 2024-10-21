@@ -127,3 +127,28 @@ HWTEST_F(LinkatApiTest, LinkatInvalidPathFailed_0003, Function | MediumTest | Le
     unlink(NEW_FILE_NAME);
     unlink(OLD_FILE_NAME);
 }
+
+/*
+ * @tc.number : SUB_KERNEL_SYSCALL_LINKAT_0400
+ * @tc.name   : LinkatAT_SYMLINK_FOLLOWFlagSuccess_0004
+ * @tc.desc   : linkat AT_SYMLINK_FOLLOW flag test success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
+HWTEST_F(LinkatApiTest, LinkatAT_SYMLINK_FOLLOWFlagSuccess_0004, Function | MediumTest | Level1)
+{
+    int ret;
+    int dirFd;
+    dirFd = open(TEST_DIR, O_DIRECTORY);
+    EXPECT_GE(dirFd, 0);
+    int fd = open(OLD_FILE_NAME, O_CREAT | O_RDWR, 0644);
+    close(fd);
+
+    ret = linkat(dirFd, OLD_FILE_NAME, dirFd, NEW_FILE_NAME, AT_SYMLINK_FOLLOW);
+    EXPECT_GE(ret, 0);
+
+    close(dirFd);
+    unlink(NEW_FILE_NAME);
+    unlink(OLD_FILE_NAME);
+}

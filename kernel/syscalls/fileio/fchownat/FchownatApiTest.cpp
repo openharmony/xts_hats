@@ -96,7 +96,7 @@ HWTEST_F(FchownatApiTest, FchownatFileSuccess_0001, Function | MediumTest | Leve
 /*
  * @tc.number : SUB_KERNEL_SYSCALL_FCHOWNAT_0200
  * @tc.name   : FchownatAT_FDCWDTestSuccess_0002
- * @tc.desc   : fchownat change current path file owner id and group id success.
+ * @tc.desc   : fchownat change current path file owner id and group id by AT_FDCWD success.
  * @tc.size   : MediumTest
  * @tc.type   : Function
  * @tc.level  : Level 1
@@ -234,4 +234,32 @@ HWTEST_F(FchownatApiTest, FchownatAT_SYMLINK_NOFOLLOWTestSuccess_0005, Function 
     remove(TEST_FILE);
     remove(SYMBOL_LINK_NAME);
     chdir(path);
+}
+
+/*
+ * @tc.number : SUB_KERNEL_SYSCALL_FCHOWNAT_0600
+ * @tc.name   : FchownatAT_EMPTY_PATHTestSuccess_0006
+ * @tc.desc   : fchownat change current path file owner id and group id by AT_EMPTY_PATH success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
+HWTEST_F(FchownatApiTest, FchownatAT_EMPTY_PATHTestSuccess_0006, Function | MediumTest | Level1)
+{
+    int ret = -1;
+    struct stat stat1;
+
+    int fd = open(TEST_FILE, O_RDWR | O_CREAT, 0644);
+    EXPECT_TRUE(fd > 0);
+
+    ret = fstat(fd, &stat1);
+    EXPECT_EQ(ret, 0);
+    uid_t uid = stat1.st_uid + 1;
+    gid_t gid = stat1.st_gid + 1;
+
+    ret = fchownat(fd, "", uid, gid, AT_EMPTY_PATH);
+    EXPECT_EQ(ret, 0);
+
+    close(fd);
+    remove(TEST_FILE);
 }

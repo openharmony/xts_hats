@@ -1,0 +1,18 @@
+{
+    "description": "Configuration for HatsReadvTest Tests",
+    "kits": [
+        {
+            "push": [
+                "HatsReadvTest->/data/local/tmp/HatsReadvTest"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsReadvTest",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    }   
+}

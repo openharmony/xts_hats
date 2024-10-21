@@ -387,3 +387,38 @@ HWTEST_F(OpenatApiTest, OpenatFlagsTestSuccess_0010, Function | MediumTest | Lev
 
     close(dirFd);
 }
+
+/*
+ * @tc.number : SUB_KERNEL_SYSCALL_OPENAT_1100
+ * @tc.name   : OpenatFlagsTestSuccess_0011
+ * @tc.desc   : openat O_CLOEXEC/O_LARGEFILE/O_NOCTTY/O_NONBLOCK flags test success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
+HWTEST_F(OpenatApiTest, OpenatO_CLOEXECFlagSuccess_0011, Function | MediumTest | Level1)
+{
+    int dirFd = open(TEST_DIR, O_RDONLY | O_DIRECTORY);
+
+    int fd = openat(dirFd, TEST_FILE, O_RDWR | O_CLOEXEC | O_CREAT, 0755);
+    EXPECT_TRUE(fd >= 0);
+    close(fd);
+    unlinkat(dirFd, TEST_FILE, 0);
+
+    fd = openat(dirFd, TEST_FILE, O_RDWR | O_LARGEFILE | O_CREAT, 0755);
+    EXPECT_TRUE(fd >= 0);
+    close(fd);
+    unlinkat(dirFd, TEST_FILE, 0);
+
+    fd = openat(dirFd, TEST_FILE, O_RDWR | O_NOCTTY | O_CREAT, 0755);
+    EXPECT_TRUE(fd >= 0);
+    close(fd);
+    unlinkat(dirFd, TEST_FILE, 0);
+
+    fd = openat(dirFd, TEST_FILE, O_RDWR | O_NONBLOCK | O_CREAT, 0755);
+    EXPECT_TRUE(fd >= 0);
+    close(fd);
+    unlinkat(dirFd, TEST_FILE, 0);
+
+    close(dirFd);
+}

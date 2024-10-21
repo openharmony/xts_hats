@@ -265,3 +265,42 @@ HWTEST_F(FcntlApiTest, FcntlSetPipeSzSuccess_0008, Function | MediumTest | Level
     close(fds[0]);
     close(fds[1]);
 }
+
+/*
+ * @tc.number : SUB_KERNEL_SYSCALL_FCNTL_0900
+ * @tc.name   : FcntlAddAndGetSealsFlagSuccess_0009
+ * @tc.desc   : fcntl add F_SEAL_SEAL/F_SEAL_SHRINK/F_SEAL_WRITE/F_SEAL_GROW flags and get seals success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
+HWTEST_F(FcntlApiTest, FcntlAddAndGetSealsFlagSuccess_0009, Function | MediumTest | Level1)
+{
+    int flags = 0;
+    int fd = open(TEST_FILE, O_RDWR | O_CREAT | O_TRUNC, MODE_0644);
+    EXPECT_TRUE(fd > 0);
+
+    // F_ADD_SEALS F_SEAL_GROW test success
+    flags = fcntl(fd, F_ADD_SEALS, F_SEAL_GROW);
+    EXPECT_EQ(flags & F_SEAL_GROW, F_SEAL_GROW);
+
+    // F_ADD_SEALS F_SEAL_SEAL test success
+    flags = fcntl(fd, F_ADD_SEALS, F_SEAL_SEAL);
+    EXPECT_EQ(flags & F_SEAL_SEAL, F_SEAL_SEAL);
+
+    // F_ADD_SEALS F_SEAL_WRITE test success
+    flags = fcntl(fd, F_ADD_SEALS, F_SEAL_WRITE);
+    EXPECT_EQ(flags & F_SEAL_WRITE, F_SEAL_WRITE);
+
+    // F_ADD_SEALS F_SEAL_SHRINK test success
+    flags = fcntl(fd, F_ADD_SEALS, F_SEAL_SHRINK);
+    EXPECT_EQ(flags & F_SEAL_SHRINK, F_SEAL_SHRINK);
+
+    // F_GET_SEALS test success
+    int testFlags = F_SEAL_SHRINK | F_SEAL_GROW | F_SEAL_SEAL | F_SEAL_WRITE;
+    flags = fcntl(fd, F_GET_SEALS);
+    EXPECT_EQ(flags & testFlags, testFlags);
+
+    close(fd);
+    remove(TEST_FILE);
+}

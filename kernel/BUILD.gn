@@ -49,6 +49,7 @@ group("kernel") {
         "prctl:HatsPrctlTest",
         "purgeableMem:HatsPurgeableTest",
         "rtginterface:HatsRtgInterfaceTest",
+        "syscall_ipc:HatsSyscallIpcTest",
         "syscalls:HatsSyscallTest",
       ]
     }

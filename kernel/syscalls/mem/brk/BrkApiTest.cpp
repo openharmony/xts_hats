@@ -63,9 +63,9 @@ void HatsBrkTest::TearDownTestCase()
  * @tc.desc   : brk data end always failed.
  * @tc.size   : MediumTest
  * @tc.type   : Function
- * @tc.level  : Level 1
+ * @tc.level  : Level 2
  */
-HWTEST_F(HatsBrkTest, BrkDataEndFailed_0001, Function | MediumTest | Level1)
+HWTEST_F(HatsBrkTest, BrkDataEndFailed_0001, Function | MediumTest | Level2)
 {
     errno = 0;
     int ret = brk(nullptr);

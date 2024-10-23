@@ -1,0 +1,18 @@
+{
+    "description": "Configuration for HatsEpollCreateTest Tests",
+    "kits": [
+        {
+            "push": [
+                "HatsEpollCreateTest->/data/local/tmp/HatsEpollCreateTest"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsEpollCreateTest",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    }
+}

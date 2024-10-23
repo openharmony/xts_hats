@@ -1,0 +1,18 @@
+{
+    "description": "Configuration for HatsPipe2Test Tests",
+    "kits": [
+        {
+            "push": [
+                "HatsPipe2Test->/data/local/tmp/HatsPipe2Test"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsPipe2Test",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    }
+}

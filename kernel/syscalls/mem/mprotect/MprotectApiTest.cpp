@@ -206,3 +206,31 @@ HWTEST_F(HatsMprotectTest, MprotectUpDownInvalid_0005, Function | MediumTest | L
     EXPECT_EQ(ret, -1);
     EXPECT_EQ(errno, EINVAL);
 }
+
+/*
+ * @tc.number : SUB_KERNEL_SYSCALL_MPROTECT_0600
+ * @tc.name   : MprotectPROT_NONETestSuccess_0006
+ * @tc.desc   : mprotect PROT_NONE flag test successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
+HWTEST_F(HatsMprotectTest, MprotectPROT_NONETestSuccess_0006, Function | MediumTest | Level1)
+{
+    int ret;
+    int pagesize;
+    struct sigaction sa;
+
+    sa.sa_flags = SA_SIGINFO;
+    sigemptyset(&sa.sa_mask);
+    EXPECT_NE(sigaction(SIGSEGV, &sa, nullptr), -1);
+
+    pagesize = sysconf(_SC_PAGE_SIZE);
+    EXPECT_NE(pagesize, -1);
+
+    void *buffer = memalign(pagesize, 4 * pagesize);
+    EXPECT_NE(buffer, nullptr);
+
+    ret = mprotect(buffer, pagesize, PROT_NONE);
+    EXPECT_EQ(ret, 0);
+}

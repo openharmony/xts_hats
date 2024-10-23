@@ -1,0 +1,18 @@
+{
+    "description": "Configuration for HatsSetnsTest Tests",
+    "kits": [
+        {
+            "push": [
+                "HatsSetnsTest->/data/local/tmp/HatsSetnsTest"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsSetnsTest",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    }
+}

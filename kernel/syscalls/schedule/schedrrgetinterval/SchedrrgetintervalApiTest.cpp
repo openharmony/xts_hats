@@ -62,8 +62,8 @@ void HatsSchedrrgetintervalTest::TearDownTestCase()
  */
 HWTEST_F(HatsSchedrrgetintervalTest, SchedrrgetintervalGetRRTSuccess_0001, Function | MediumTest | Level1)
 {
-    struct timespec timeSpec1;
     int ret;
+    struct timespec timeSpec1;
     ret = sched_rr_get_interval(0, &timeSpec1);
     EXPECT_TRUE(ret == 0);
 }
@@ -78,9 +78,9 @@ HWTEST_F(HatsSchedrrgetintervalTest, SchedrrgetintervalGetRRTSuccess_0001, Funct
  */
 HWTEST_F(HatsSchedrrgetintervalTest, SchedSchedrrgetintervalInvalidPIDFail_0002, Function | MediumTest | Level2)
 {
-    struct timespec timeSpec1;
     int ret;
     pid_t pid = -1;
+    struct timespec timeSpec1;
 
     errno = 0;
     ret = sched_rr_get_interval(pid, &timeSpec1);

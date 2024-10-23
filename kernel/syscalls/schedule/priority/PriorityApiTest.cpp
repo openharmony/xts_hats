@@ -75,6 +75,12 @@ HWTEST_F(HatsPriorityTest, PrioritySetAndGetTestSuccess_0001, Function | MediumT
 
     prio = getpriority(PRIO_PGRP, pid);
     EXPECT_EQ(prio, TEST_PRIO);
+
+    ret = setpriority(PRIO_USER, getuid(), TEST_PRIO);
+    EXPECT_EQ(ret, 0);
+
+    prio = getpriority(PRIO_USER, getuid());
+    EXPECT_EQ(prio, TEST_PRIO);
 }
 
 /*
@@ -87,7 +93,7 @@ HWTEST_F(HatsPriorityTest, PrioritySetAndGetTestSuccess_0001, Function | MediumT
  */
 HWTEST_F(HatsPriorityTest, PrioritySetAndGetUseInvalidWhichFailed_0002, Function | MediumTest | Level2)
 {
-    int pid = 0;
+    int pid = getpid();
     errno = 0;
     int ret = setpriority(-1, pid, TEST_PRIO);
     EXPECT_EQ(ret, -1);

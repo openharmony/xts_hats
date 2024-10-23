@@ -593,8 +593,8 @@ BENCHMARK_F(HdfUsbdBenchmarkTransferTest, BulkTransferReadwithLengthBenchmarkTes
     auto ret = g_usbInterface->ClaimInterface(dev, interfaceId, 1);
     ASSERT_EQ(0, ret);
     OHOS::HDI::Usb::V1_0::UsbPipe pipe = {interfaceId, pointid};
-    std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
     for (auto _ : st) {
+        std::vector<uint8_t> bufferData(MAX_BUFFER_LENGTH);
         ret = g_usbInterface->BulkTransferReadwithLength(dev, pipe, TRANSFER_TIME_OUT, bufferData.size(), bufferData);
     }
     EXPECT_EQ(0, ret);

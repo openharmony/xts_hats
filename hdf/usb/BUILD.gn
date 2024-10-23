@@ -26,17 +26,13 @@ group("HatsHdfUsbTest") {
       # "deviceStatusTest:HatsHdfUsbDeviceStatusTest",
       # "deviceTest:HatsHdfUsbDeviceTest",
       # "deviceTest_additional:HatsHdfUsbDeviceAdditionalTest",
-
       # "functionTest:HatsHdfUsbFunctionTest",
       # "functionTest_additional:HatsHdfUsbFunctionAdditionalTest",
-
       # "manageInterfaceTest:HatsHdfUsbManageInterfaceTest",
       # "mtpTest:HatsHdfUsbFnMtpTest",
       # "mtpTest_additional:HatsHdfUsbFnMtpAdditionalTest",
-
       # "requestTest:HatsHdfUsbRequestTest",
       # "requestTest_additional:requestAdditional_test",
-
       # "transferTest:HatsHdfUsbTransferTest",
       # "transferTest_additional:transferAdditional_test",
 
@@ -47,6 +43,25 @@ group("HatsHdfUsbTest") {
       # "usbdBenchmarkTest:HatsHdfUsbBenchmarkTransferTest",
     ]
   } else {
-    deps = [ "autoFunctionTest:HatsHdfUsbAutoFunctionTest" ]
+    deps = [
+      "autoFunctionTest:HatsHdfUsbAutoFunctionTest",
+
+      # "deviceStatusTest:HatsHdfUsbDeviceStatusTest",
+      # "deviceTest:HatsHdfUsbDeviceTest",
+      # "deviceTest_additional:HatsHdfUsbDeviceAdditionalTest",
+      # "functionTest:HatsHdfUsbFunctionTest",
+      # "functionTest_additional:HatsHdfUsbFunctionAdditionalTest",
+      # "manageInterfaceTest:HatsHdfUsbManageInterfaceTest",
+      # "requestTest:HatsHdfUsbRequestTest",
+      # "requestTest_additional:requestAdditional_test",
+      # "transferTest:HatsHdfUsbTransferTest",
+      # "transferTest_additional:transferAdditional_test",
+
+      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
+      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",
+      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkManagerInterfaceTest",
+      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkRequestTest",
+      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkTransferTest",
+    ]
   }
 }

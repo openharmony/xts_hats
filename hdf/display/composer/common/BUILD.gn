@@ -48,6 +48,4 @@ ohos_static_library("disp_dev_hdi_test") {
     "hilog:libhilog",
     "ipc:ipc_core",
   ]
-  subsystem_name = "xts"
-  part_name = "hats"
 }

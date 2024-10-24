@@ -60,8 +60,8 @@ ohos_moduletest_suite("HatsHdfCameraMgTestv2") {
     "samgr:samgr_proxy",
   ]
 
-  subsystem_name = "xts"
-  part_name = "hats"
+  subsystem_name = "hdf"
+  part_name = "drivers_interface_camera"
 }
 config("hdf_cameramgv2") {
   include_dirs = [

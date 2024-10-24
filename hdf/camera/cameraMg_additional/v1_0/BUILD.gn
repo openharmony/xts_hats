@@ -63,8 +63,8 @@ ohos_moduletest_suite("HatsHdfCameraMgv0AdditionalTest") {
   ]
 
   # public_configs = [ ":cameraTest_config" ]
-  subsystem_name = "xts"
-  part_name = "hats"
+  subsystem_name = "hdf"
+  part_name = "drivers_interface_camera"
 }
 config("hdf_cameramg_additional") {
   include_dirs = [

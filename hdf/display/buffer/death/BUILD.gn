@@ -36,6 +36,6 @@ ohos_moduletest_suite("HatsHdfDisplayBufferDeathTest") {
     "hilog:libhilog",
     "ipc:ipc_core",
   ]
-  subsystem_name = "xts"
-  part_name = "hats"
+  subsystem_name = "hdf"
+  part_name = "drivers_interface_display"
 }

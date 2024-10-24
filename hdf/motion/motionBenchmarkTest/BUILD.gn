@@ -43,6 +43,8 @@ ohos_moduletest_suite("HatsHdfMotionbenchmarkTest") {
     ]
   }
   external_deps += [ "ipc:ipc_single" ]
+  subsystem_name = "hdf"
+  part_name = "drivers_interface_motion"
 }
 config("hdf_motion") {
   cflags = [

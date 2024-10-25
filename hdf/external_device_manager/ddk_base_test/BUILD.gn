@@ -40,6 +40,6 @@ ohos_moduletest_suite("HatsHdfExternalDdkBaseTest") {
 
   subsystem_name = "hdf"
   part_name = "external_device_manager"
-  
+
   configs = [ "${utils_path}:utils_config" ]
 }

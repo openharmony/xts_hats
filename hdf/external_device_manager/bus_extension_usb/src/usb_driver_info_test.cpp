@@ -121,13 +121,13 @@ HWTEST_F(UsbDriverInfoTest, SUB_Driver_Ext_BusExtensionUSB_0700, TestSize.Level1
 
     // invalid json, member type error
     drvStr = "\{ \"bus\": \"usb\", \"vendor\": \"TestVendor\", \"version\" :0, \
-\"ext_info\": \"{ \\\"vids\\\": [1111, 2222], \\\"pids\\\": [1234,4567]}\" }";
+\"ext_info\": \"{ \\\"vids\\\": [1111, 2222], \\\"pids\\\": [1234, 4567]}\" }";
     ret = driverInfo.UnSerialize(drvStr);
     ASSERT_NE(ret, 0);
 
     // invalid json, ext_info format error
     drvStr = "\{ \"bus\": \"usb\", \"vendor\": \"TestVendor\", \"version\": \"0.0.1\", \
-\"ext_info\": \"{ \\\"vids\\\"_[1111, 2222], \\\"pids\\\": [1234,4567]}\" }";
+\"ext_info\": \"{ \\\"vids\\\"_[1111, 2222], \\\"pids\\\": [1234, 4567]}\" }";
     ret = driverInfo.UnSerialize(drvStr);
     ASSERT_NE(ret, 0);
 

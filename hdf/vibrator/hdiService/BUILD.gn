@@ -46,8 +46,8 @@ ohos_moduletest_suite("HatsHdfVibratorServiceTest") {
     external_deps = [ "hilog:libhilog" ]
   }
   external_deps += [ "ipc:ipc_single" ]
-  subsystem_name = "xts"
-  part_name = "hats"
+  subsystem_name = "hdf"
+  part_name = "drivers_interface_vibrator"
 }
 
 config("hdf_vibrator_hdiservice") {

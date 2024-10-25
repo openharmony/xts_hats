@@ -57,8 +57,8 @@ ohos_moduletest_suite("HatsHdfTestComponentCodecAdditionalTest") {
     external_deps = [ "hilog:libhilog" ]
   }
 
-  subsystem_name = "xts"
-  part_name = "hats"
+  subsystem_name = "hdf"
+  part_name = "drivers_interface_codec"
 
   defines = []
   defines += display_defines

@@ -37,8 +37,8 @@ ohos_moduletest_suite("HatsHdfAudioIdlRenderTest") {
     "hilog:libhilog",
   ]
 
-  subsystem_name = "xts"
-  part_name = "hats"
+  subsystem_name = "hdf"
+  part_name = "drivers_interface_audio"
 }
 
 config("audio_idl_render") {

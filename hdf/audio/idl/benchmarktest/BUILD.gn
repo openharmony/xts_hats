@@ -65,6 +65,6 @@ ohos_moduletest_suite("HatsHdfAudioBenchmarkTest") {
   }
   external_deps += [ "ipc:ipc_single" ]
 
-  subsystem_name = "xts"
-  part_name = "hats"
+  subsystem_name = "hdf"
+  part_name = "drivers_interface_audio"
 }

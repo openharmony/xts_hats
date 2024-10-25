@@ -53,6 +53,8 @@ ohos_moduletest_suite("HatsHdfInputPassthroughBenchmarkTest") {
     external_deps = [ "hilog:libhilog" ]
   }
   external_deps += [ "ipc:ipc_single" ]
+  subsystem_name = "hdf"
+  part_name = "drivers_peripheral_input"
 }
 
 config("hdf_input_through") {

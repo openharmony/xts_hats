@@ -38,8 +38,8 @@ ohos_moduletest_suite("HatsHdfExternalDdkBaseTest") {
     "samgr:samgr_proxy",
   ]
 
-  subsystem_name = "xts"
-  part_name = "hats"
-
+  subsystem_name = "hdf"
+  part_name = "external_device_manager"
+  
   configs = [ "${utils_path}:utils_config" ]
 }

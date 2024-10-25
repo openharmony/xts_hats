@@ -33,6 +33,6 @@ ohos_moduletest_suite("HatsHdfExternalManagerClientTest") {
     "ipc:ipc_single",
     "samgr:samgr_proxy",
   ]
-  subsystem_name = "xts"
-  part_name = "hats"
+  subsystem_name = "hdf"
+  part_name = "external_device_manager"
 }

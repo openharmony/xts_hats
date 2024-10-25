@@ -37,4 +37,6 @@ ohos_moduletest_suite("HatsHdfManagerbenchmarkTest") {
     "ipc:ipc_core",
     "samgr:samgr_proxy",
   ]
+  subsystem_name = "hdf"
+  part_name = "hdf_core"
 }

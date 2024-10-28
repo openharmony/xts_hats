@@ -35,8 +35,8 @@ ohos_moduletest_suite("HatsHdfManagerHdiTest") {
     "hilog:libhilog",
     "ipc:ipc_core",
   ]
-  subsystem_name = "xts"
-  part_name = "hats"
+  subsystem_name = "hdf"
+  part_name = "hdf_core"
 }
 config("hdf_manager") {
   include_dirs = [ "$hdf_uhdf_path/host/test/unittest/sample_driver" ]

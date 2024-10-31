@@ -24,6 +24,7 @@
 #include "input_device_manager.h"
 #include "input_manager.h"
 #include "osal_time.h"
+#include "input_uhdf_log.h"
 
 using namespace testing::ext;
 using namespace OHOS::Input;

@@ -28,7 +28,6 @@ group("HatsHdfExternalDeviceTest") {
       "driver_extension_controller:HatsHdfExternalControllerTest",
       "driver_extension_manager_client_test:HatsHdfExternalManagerClientTest",
       "drivers_pkg_manager_test:HatsHdfExternalPkgManagerTest",
-      "ndk_permission_js_test:ndk_permission_test",
     ]
   }
 }

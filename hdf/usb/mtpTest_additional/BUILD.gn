@@ -40,8 +40,8 @@ ohos_moduletest_suite("HatsHdfUsbFnMtpAdditionalTest") {
     "ipc:ipc_single",
   ]
 
-  subsystem_name = "xts"
-  part_name = "hats"
+  subsystem_name = "hdf"
+  part_name = "drivers_peripheral_usb"
 }
 
 config("hdf_usb_additional") {

@@ -14,14 +14,18 @@
 import("//build/ohos.gni")
 import("//build/test.gni")
 import("//drivers/peripheral/codec/codec.gni")
+import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/codec"
 ohos_moduletest_suite("HatsHdfIdlOmxCodecTest") {
   module_out_path = module_output_path
 
-  include_dirs =
-      [ "../../../../../../drivers/peripheral/codec/interfaces/include" ]
+  if (drivers_peripheral_codec_feature_support_dma_buffer ||
+      hats_rich == false) {
+    include_dirs =
+        [ "../../../../../../drivers/peripheral/codec/interfaces/include" ]
+  }
 
   sources = [
     "codec_callback_service.cpp",

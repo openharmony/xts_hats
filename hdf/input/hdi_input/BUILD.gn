@@ -73,4 +73,5 @@ config("hdf_input") {
   ]
   include_dirs += [ "$base_root/drivers/peripheral/input/hal/include" ]
   include_dirs += [ "$base_root/drivers/peripheral/input/udriver/include" ]
+  include_dirs += [ "$base_root/drivers/peripheral/input/utils/include" ]
 }

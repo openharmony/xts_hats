@@ -388,13 +388,13 @@ HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_ProfessionalVideo_0300, TestSize.L
     EXPECT_NE(data, nullptr);
     camera_metadata_item_t entry;
     int ret = FindCameraMetadataItem(data, OHOS_ABILITY_SCENE_ZOOM_CAP, &entry);
-    if (ret == HDI::Camera::V1_0::NO_ERROR && entry.data.f != nullptr && entry.count > 0) {
-        CAMERA_LOGI("print tag<OHOS_ABILITY_SCENE_ZOOM_CAP> f value start.");
-        printf("OHOS_ABILITY_SCENE_ZOOM_CAP f value count %d\n", entry.count);
+    if (ret == HDI::Camera::V1_0::NO_ERROR && entry.data.i32 != nullptr && entry.count > 0) {
+        CAMERA_LOGI("print tag<OHOS_ABILITY_SCENE_ZOOM_CAP> i32 value start.");
+        printf("OHOS_ABILITY_SCENE_ZOOM_CAP i32 value count %d\n", entry.count);
         constexpr size_t step = 4; // print step
         std::stringstream ss;
         for (size_t i = 0; i < entry.count; i++) {
-            ss << entry.data.f[i] << " ";
+            ss << entry.data.i32[i] << " ";
             if ((i != 0) && (i % step == 0 || i == entry.count - 1)) {
                 CAMERA_LOGI("%{public}s\n", ss.str().c_str());
                 printf("OHOS_ABILITY_SCENE_ZOOM_CAP %s\n", ss.str().c_str());

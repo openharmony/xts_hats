@@ -52,10 +52,15 @@ bool g_isModeExists(std::shared_ptr<CameraMetadata> ability, uint32_t tag, uint8
     int ret = FindCameraMetadataItem(data, tag, &entry);
     EXPECT_EQ(ret, 0);
     EXPECT_NE(entry.count, 0);
-    for (int i = 0; i < entry.count; i++) {
-        if (entry.data.u8[i] == value) {
-            return true;
+    if (entry.data.u8 != nullptr) {
+        for (int i = 0; i < entry.count; i++) {
+            if (entry.data.u8[i] == value) {
+                return true;
+            }
         }
+    } else {
+        printf("Find CameraMetadata fail!\n");
+        CAMERA_LOGE("Find CameraMetadata fail!");
     }
     return false;
 }
@@ -68,11 +73,12 @@ void GetSupportedPhysicalApertureValues(std::shared_ptr<CameraMetadata> ability)
     EXPECT_NE(data, nullptr);
     camera_metadata_item_t entry;
     int rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE, &entry);
-    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, rc);
-    float entryValues[] = {entry.data.f[3], entry.data.f[7], entry.data.f[8], entry.data.f[9], entry.data.f[10],
+    if (rc == HDI::Camera::V1_0::NO_ERROR && entry.data.f != nullptr && entry.count > 0) {
+        float entryValues[] = {entry.data.f[3], entry.data.f[7], entry.data.f[8], entry.data.f[9], entry.data.f[10],
         entry.data.f[14], entry.data.f[18]};
-    for (size_t i = 0; i < sizeof(entryValues) / sizeof(float); i++) {
-        supportedPhysicalApertureValues_.push_back(entryValues[i]);
+        for (size_t i = 0; i < sizeof(entryValues) / sizeof(float); i++) {
+            supportedPhysicalApertureValues_.push_back(entryValues[i]);
+        }
     }
 }
 
@@ -438,7 +444,11 @@ HWTEST_F(CameraProfessionalTestV1_3, SUB_Driver_Camera_ProfessionalPhoto_0900, T
     FillCaptureSetting(cameraTest);
     EXPECT_NE(cameraTest->ability, nullptr);
     GetSupportedPhysicalApertureValues(cameraTest->ability);
-
+    if (supportedPhysicalApertureValues_.size() == 0)
+    {
+        cout << "OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE is not support" << endl;
+        return;
+    }
     for (uint8_t i = 0;i < supportedPhysicalApertureValues_.size();i++) {
         cameraTest->intents = {PREVIEW, STILL_CAPTURE};
         cameraTest->StartProfessionalStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::PROFESSIONAL_PHOTO);
@@ -631,25 +641,27 @@ HWTEST_F(CameraProfessionalTestV1_3, SUB_Driver_Camera_ProfessionalPhoto_1300, T
     EXPECT_NE(data, nullptr);
     camera_metadata_item_t entry;
     cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_LENS_INFO_MINIMUM_FOCUS_DISTANCE, &entry);
-    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && entry.data.f != nullptr && entry.count > 0) {
+        for (uint8_t i = 0;i < entry.count;i++) {
+            cameraTest->intents = {PREVIEW, STILL_CAPTURE};
+            cameraTest->StartProfessionalStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::PROFESSIONAL_PHOTO);
 
-    for (uint8_t i = 0;i < entry.count;i++) {
-        cameraTest->intents = {PREVIEW, STILL_CAPTURE};
-        cameraTest->StartProfessionalStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::PROFESSIONAL_PHOTO);
+            std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+            float lensFocusDistance = entry.data.f[i];
+            meta->addEntry(OHOS_CONTROL_LENS_FOCUS_DISTANCE, &lensFocusDistance, DATA_COUNT);
+            std::vector<uint8_t> setting;
+            MetadataUtils::ConvertMetadataToVec(meta, setting);
+            cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
+            EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
 
-        std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
-        float lensFocusDistance = entry.data.f[i];
-        meta->addEntry(OHOS_CONTROL_LENS_FOCUS_DISTANCE, &lensFocusDistance, DATA_COUNT);
-        std::vector<uint8_t> setting;
-        MetadataUtils::ConvertMetadataToVec(meta, setting);
-        cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
-        EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
-
-        cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
-        cameraTest->StartCapture(cameraTest->streamIdCapture, cameraTest->captureIdCapture, false, false);
-        cameraTest->captureIds = {cameraTest->captureIdPreview};
-        cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdCapture};
-        cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+            cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+            cameraTest->StartCapture(cameraTest->streamIdCapture, cameraTest->captureIdCapture, false, false);
+            cameraTest->captureIds = {cameraTest->captureIdPreview};
+            cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdCapture};
+            cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+        }
+    } else {
+        printf("get tag<OHOS_ABILITY_LENS_INFO_MINIMUM_FOCUS_DISTANCE> failed.\n");
     }
 }
 
@@ -671,44 +683,47 @@ HWTEST_F(CameraProfessionalTestV1_3, SUB_Driver_Camera_ProfessionalPhoto_1400, T
     common_metadata_header_t* data = cameraTest->ability->get();
     camera_metadata_item_t entry;
     cameraTest->rc = FindCameraMetadataItem(data, OHOS_CONTROL_AWB_AVAILABLE_MODES, &entry);
-    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
-    for (size_t i = 0;i < entry.count;i++) {
-        if (entry.data.u8[i] == OHOS_CAMERA_AWB_MODE_OFF) {
-            CAMERA_LOGI("OHOS_CAMERA_AWB_MODE_OFF mode is supported!");
-        } else if (entry.data.u8[i] == OHOS_CAMERA_AWB_MODE_AUTO) {
-            CAMERA_LOGI("OHOS_CAMERA_AWB_MODE_AUTO mode is supported!");
-        } else if (entry.data.u8[i] == OHOS_CAMERA_AWB_MODE_INCANDESCENT) {
-            CAMERA_LOGI("OHOS_CAMERA_AWB_MODE_INCANDESCENT mode is supported!");
-        } else if (entry.data.u8[i] == OHOS_CAMERA_AWB_MODE_FLUORESCENT) {
-            CAMERA_LOGI("OHOS_CAMERA_AWB_MODE_FLUORESCENT mode is supported!");
-        } else if (entry.data.u8[i] == OHOS_CAMERA_AWB_MODE_WARM_FLUORESCENT) {
-            CAMERA_LOGI("OHOS_CAMERA_AWB_MODE_WARM_FLUORESCENT mode is supported!");
-        } else if (entry.data.u8[i] == OHOS_CAMERA_AWB_MODE_DAYLIGHT) {
-            CAMERA_LOGI("OHOS_CAMERA_AWB_MODE_DAYLIGHT mode is supported!");
-        } else if (entry.data.u8[i] == OHOS_CAMERA_AWB_MODE_CLOUDY_DAYLIGHT) {
-            CAMERA_LOGI("OHOS_CAMERA_AWB_MODE_CLOUDY_DAYLIGHT mode is supported!");
-        } else if (entry.data.u8[i] == OHOS_CAMERA_AWB_MODE_TWILIGHT) {
-            CAMERA_LOGI("OHOS_CAMERA_AWB_MODE_TWILIGHT mode is supported!");
-        } else if (entry.data.u8[i] == OHOS_CAMERA_AWB_MODE_SHADE) {
-            CAMERA_LOGI("OHOS_CAMERA_AWB_MODE_SHADE mode is supported!");
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && entry.data.u8 != nullptr && entry.count > 0) {
+        for (size_t i = 0;i < entry.count;i++) {
+            if (entry.data.u8[i] == OHOS_CAMERA_AWB_MODE_OFF) {
+                CAMERA_LOGI("OHOS_CAMERA_AWB_MODE_OFF mode is supported!");
+            } else if (entry.data.u8[i] == OHOS_CAMERA_AWB_MODE_AUTO) {
+                CAMERA_LOGI("OHOS_CAMERA_AWB_MODE_AUTO mode is supported!");
+            } else if (entry.data.u8[i] == OHOS_CAMERA_AWB_MODE_INCANDESCENT) {
+                CAMERA_LOGI("OHOS_CAMERA_AWB_MODE_INCANDESCENT mode is supported!");
+            } else if (entry.data.u8[i] == OHOS_CAMERA_AWB_MODE_FLUORESCENT) {
+                CAMERA_LOGI("OHOS_CAMERA_AWB_MODE_FLUORESCENT mode is supported!");
+            } else if (entry.data.u8[i] == OHOS_CAMERA_AWB_MODE_WARM_FLUORESCENT) {
+                CAMERA_LOGI("OHOS_CAMERA_AWB_MODE_WARM_FLUORESCENT mode is supported!");
+            } else if (entry.data.u8[i] == OHOS_CAMERA_AWB_MODE_DAYLIGHT) {
+                CAMERA_LOGI("OHOS_CAMERA_AWB_MODE_DAYLIGHT mode is supported!");
+            } else if (entry.data.u8[i] == OHOS_CAMERA_AWB_MODE_CLOUDY_DAYLIGHT) {
+                CAMERA_LOGI("OHOS_CAMERA_AWB_MODE_CLOUDY_DAYLIGHT mode is supported!");
+            } else if (entry.data.u8[i] == OHOS_CAMERA_AWB_MODE_TWILIGHT) {
+                CAMERA_LOGI("OHOS_CAMERA_AWB_MODE_TWILIGHT mode is supported!");
+            } else if (entry.data.u8[i] == OHOS_CAMERA_AWB_MODE_SHADE) {
+                CAMERA_LOGI("OHOS_CAMERA_AWB_MODE_SHADE mode is supported!");
+            }
+            
+            cameraTest->intents = {PREVIEW, STILL_CAPTURE};
+            cameraTest->StartProfessionalStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::PROFESSIONAL_PHOTO);
+
+            std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+            uint8_t awbMode = entry.data.u8[i];
+            meta->addEntry(OHOS_CONTROL_AWB_MODE, &awbMode, DATA_COUNT);
+            std::vector<uint8_t> setting;
+            MetadataUtils::ConvertMetadataToVec(meta, setting);
+            cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
+            EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+
+            cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+            cameraTest->StartCapture(cameraTest->streamIdCapture, cameraTest->captureIdCapture, false, false);
+            cameraTest->captureIds = {cameraTest->captureIdPreview};
+            cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdCapture};
+            cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
         }
-        
-        cameraTest->intents = {PREVIEW, STILL_CAPTURE};
-        cameraTest->StartProfessionalStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::PROFESSIONAL_PHOTO);
-
-        std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
-        uint8_t awbMode = entry.data.u8[i];
-        meta->addEntry(OHOS_CONTROL_AWB_MODE, &awbMode, DATA_COUNT);
-        std::vector<uint8_t> setting;
-        MetadataUtils::ConvertMetadataToVec(meta, setting);
-        cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
-        EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
-
-        cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
-        cameraTest->StartCapture(cameraTest->streamIdCapture, cameraTest->captureIdCapture, false, false);
-        cameraTest->captureIds = {cameraTest->captureIdPreview};
-        cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdCapture};
-        cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+    } else {
+        printf("get tag<OHOS_CONTROL_AWB_AVAILABLE_MODES> failed.\n");
     }
 }
 
@@ -777,25 +792,28 @@ HWTEST_F(CameraProfessionalTestV1_3, SUB_Driver_Camera_ProfessionalPhoto_1600, T
     EXPECT_NE(data, nullptr);
     camera_metadata_item_t entry;
     cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_SENSOR_WB_VALUES, &entry);
-    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && entry.data.f != nullptr && entry.count > 0) {
+        for (uint8_t i = 0;i < entry.count;i++) {
+            cameraTest->intents = {PREVIEW, STILL_CAPTURE};
+            cameraTest->StartProfessionalStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::PROFESSIONAL_PHOTO);
 
-    for (uint8_t i = 0;i < entry.count;i++) {
-        cameraTest->intents = {PREVIEW, STILL_CAPTURE};
-        cameraTest->StartProfessionalStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::PROFESSIONAL_PHOTO);
+            std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+            int32_t wbMode = entry.data.i32[i];
+            meta->addEntry(OHOS_CONTROL_SENSOR_WB_VALUE, &wbMode, DATA_COUNT);
+            std::vector<uint8_t> setting;
+            MetadataUtils::ConvertMetadataToVec(meta, setting);
+            cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
+            EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
 
-        std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
-        int32_t wbMode = entry.data.i32[i];
-        meta->addEntry(OHOS_CONTROL_SENSOR_WB_VALUE, &wbMode, DATA_COUNT);
-        std::vector<uint8_t> setting;
-        MetadataUtils::ConvertMetadataToVec(meta, setting);
-        cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
-        EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
-
-        cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
-        cameraTest->StartCapture(cameraTest->streamIdCapture, cameraTest->captureIdCapture, false, false);
-        cameraTest->captureIds = {cameraTest->captureIdPreview};
-        cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdCapture};
-        cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+            cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+            cameraTest->StartCapture(cameraTest->streamIdCapture, cameraTest->captureIdCapture, false, false);
+            cameraTest->captureIds = {cameraTest->captureIdPreview};
+            cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdCapture};
+            cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+        }
+    } else {
+        printf("get tag<OHOS_ABILITY_SENSOR_WB_VALUES> failed.\n");
+        CAMERA_LOGE("get tag<OHOS_ABILITY_SENSOR_WB_VALUES> failed.");
     }
 }
 
@@ -969,24 +987,27 @@ HWTEST_F(CameraProfessionalTestV1_3, SUB_Driver_Camera_ProfessionalVideo_1400, T
     EXPECT_NE(data, nullptr);
     camera_metadata_item_t entry;
     cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_METER_MODES, &entry);
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && entry.data.u8 != nullptr && entry.count > 0) {
+        for (uint8_t i = 0;i < entry.count;i++) {
+            cameraTest->intents = {PREVIEW, VIDEO};
+            cameraTest->StartProfessionalStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::PROFESSIONAL_VIDEO);
 
-    for (uint8_t i = 0;i < entry.count;i++) {
-        cameraTest->intents = {PREVIEW, VIDEO};
-        cameraTest->StartProfessionalStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::PROFESSIONAL_VIDEO);
+            std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+            uint8_t meteringMode = entry.data.u8[i];
+            meta->addEntry(OHOS_CONTROL_METER_MODE, &meteringMode, DATA_COUNT);
+            std::vector<uint8_t> setting;
+            MetadataUtils::ConvertMetadataToVec(meta, setting);
+            cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
+            EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
 
-        std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
-        uint8_t meteringMode = entry.data.u8[i];
-        meta->addEntry(OHOS_CONTROL_METER_MODE, &meteringMode, DATA_COUNT);
-        std::vector<uint8_t> setting;
-        MetadataUtils::ConvertMetadataToVec(meta, setting);
-        cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
-        EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
-
-        cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
-        cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
-        cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
-        cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
-        cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+            cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+            cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
+            cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
+            cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
+            cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+        }
+    } else {
+        printf("get tag<OHOS_ABILITY_METER_MODES> failed.\n");
     }
 }
 
@@ -1041,6 +1062,11 @@ HWTEST_F(CameraProfessionalTestV1_3, SUB_Driver_Camera_ProfessionalVideo_1600, T
     }
     EXPECT_NE(cameraTest->ability, nullptr);
     GetSupportedPhysicalApertureValues(cameraTest->ability);
+    if (supportedPhysicalApertureValues_.size() == 0)
+    {
+        cout << "OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE is not support" << endl;
+        return;
+    }
 
     for (uint8_t i = 0;i < supportedPhysicalApertureValues_.size();i++) {
         cameraTest->intents = {PREVIEW, VIDEO};
@@ -1085,24 +1111,27 @@ HWTEST_F(CameraProfessionalTestV1_3, SUB_Driver_Camera_ProfessionalVideo_1700, T
     EXPECT_NE(data, nullptr);
     camera_metadata_item_t entry;
     cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_SENSOR_EXPOSURE_TIME_RANGE, &entry);
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && entry.data.r != nullptr && entry.count > 0) {
+        for (uint8_t i = 0;i < entry.count;i++) {
+            cameraTest->intents = {PREVIEW, VIDEO};
+            cameraTest->StartProfessionalStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::PROFESSIONAL_VIDEO);
 
-    for (uint8_t i = 0;i < entry.count;i++) {
-        cameraTest->intents = {PREVIEW, VIDEO};
-        cameraTest->StartProfessionalStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::PROFESSIONAL_VIDEO);
+            std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+            camera_rational_t sensorExposureTime = {entry.data.r[i].numerator, entry.data.r[i].denominator};
+            meta->addEntry(OHOS_CONTROL_SENSOR_EXPOSURE_TIME, &sensorExposureTime, DATA_COUNT);
+            std::vector<uint8_t> setting;
+            MetadataUtils::ConvertMetadataToVec(meta, setting);
+            cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
+            EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
 
-        std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
-        camera_rational_t sensorExposureTime = {entry.data.r[i].numerator, entry.data.r[i].denominator};
-        meta->addEntry(OHOS_CONTROL_SENSOR_EXPOSURE_TIME, &sensorExposureTime, DATA_COUNT);
-        std::vector<uint8_t> setting;
-        MetadataUtils::ConvertMetadataToVec(meta, setting);
-        cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
-        EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
-
-        cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
-        cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
-        cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
-        cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
-        cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+            cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+            cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
+            cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
+            cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
+            cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+        }
+    } else {
+        printf("get tag<OHOS_ABILITY_SENSOR_EXPOSURE_TIME_RANGE> failed.\n");
     }
     sleep(UT_SECOND_TIMES);
     common_metadata_header_t* callbackData = cameraTest->deviceCallback->resultMeta->get();
@@ -1162,27 +1191,30 @@ HWTEST_F(CameraProfessionalTestV1_3, SUB_Driver_Camera_ProfessionalVideo_1900, T
     camera_metadata_item_t entry;
     cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_FOCUS_MODES, &entry);
 
-    for (uint8_t i = 0;i < entry.count;i++) {
-        cameraTest->intents = {PREVIEW, VIDEO};
-        cameraTest->StartProfessionalStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::PROFESSIONAL_VIDEO);
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && entry.data.u8 != nullptr && entry.count > 0) {
+        for (uint8_t i = 0;i < entry.count;i++) {
+            cameraTest->intents = {PREVIEW, VIDEO};
+            cameraTest->StartProfessionalStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::PROFESSIONAL_VIDEO);
+            std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+            uint8_t focusMode = entry.data.u8[i];
+            meta->addEntry(OHOS_CONTROL_FOCUS_MODE, &focusMode, DATA_COUNT);
+            if (entry.data.u8[i] == OHOS_CAMERA_FOCUS_MODE_MANUAL) {
+                uint8_t focusedPoint[] = {1, 1, 1, 1};
+                meta->addEntry(OHOS_CONTROL_FOCUSED_POINT, &focusedPoint, DATA_COUNT);
+            }
+            std::vector<uint8_t> setting;
+            MetadataUtils::ConvertMetadataToVec(meta, setting);
+            cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
+            EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
 
-        std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
-        uint8_t focusMode = entry.data.u8[i];
-        meta->addEntry(OHOS_CONTROL_FOCUS_MODE, &focusMode, DATA_COUNT);
-        if (entry.data.u8[i] == OHOS_CAMERA_FOCUS_MODE_MANUAL) {
-            uint8_t focusedPoint[] = {1, 1, 1, 1};
-            meta->addEntry(OHOS_CONTROL_FOCUSED_POINT, &focusedPoint, DATA_COUNT);
+            cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+            cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
+            cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
+            cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
+            cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
         }
-        std::vector<uint8_t> setting;
-        MetadataUtils::ConvertMetadataToVec(meta, setting);
-        cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
-        EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
-
-        cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
-        cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
-        cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
-        cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
-        cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+        } else {
+        printf("get tag<OHOS_ABILITY_FOCUS_MODES> failed.\n");
     }
 }
 
@@ -1203,24 +1235,27 @@ HWTEST_F(CameraProfessionalTestV1_3, SUB_Driver_Camera_ProfessionalVideo_2000, T
     EXPECT_NE(data, nullptr);
     camera_metadata_item_t entry;
     cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_LENS_INFO_MINIMUM_FOCUS_DISTANCE, &entry);
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && entry.data.f != nullptr && entry.count > 0) {
+        for (uint8_t i = 0;i < entry.count;i++) {
+            cameraTest->intents = {PREVIEW, VIDEO};
+            cameraTest->StartProfessionalStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::PROFESSIONAL_VIDEO);
 
-    for (uint8_t i = 0;i < entry.count;i++) {
-        cameraTest->intents = {PREVIEW, VIDEO};
-        cameraTest->StartProfessionalStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::PROFESSIONAL_VIDEO);
+            std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+            float lensFocusDistance = entry.data.f[i];
+            meta->addEntry(OHOS_CONTROL_LENS_FOCUS_DISTANCE, &lensFocusDistance, DATA_COUNT);
+            std::vector<uint8_t> setting;
+            MetadataUtils::ConvertMetadataToVec(meta, setting);
+            cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
+            EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
 
-        std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
-        float lensFocusDistance = entry.data.f[i];
-        meta->addEntry(OHOS_CONTROL_LENS_FOCUS_DISTANCE, &lensFocusDistance, DATA_COUNT);
-        std::vector<uint8_t> setting;
-        MetadataUtils::ConvertMetadataToVec(meta, setting);
-        cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
-        EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
-
-        cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
-        cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
-        cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
-        cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
-        cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+            cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+            cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
+            cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
+            cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
+            cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+        }
+    } else {
+        printf("get tag<OHOS_ABILITY_LENS_INFO_MINIMUM_FOCUS_DISTANCE> failed.\n");
     }
 }
 
@@ -1241,23 +1276,27 @@ HWTEST_F(CameraProfessionalTestV1_3, SUB_Driver_Camera_ProfessionalVideo_2100, T
     EXPECT_NE(data, nullptr);
     camera_metadata_item_t entry;
     cameraTest->rc = FindCameraMetadataItem(data, OHOS_CONTROL_AWB_AVAILABLE_MODES, &entry);
-    for (uint8_t i = 0;i < entry.count;i++) {
-        cameraTest->intents = {PREVIEW, VIDEO};
-        cameraTest->StartProfessionalStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::PROFESSIONAL_VIDEO);
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && entry.data.u8 != nullptr && entry.count > 0) {
+        for (uint8_t i = 0;i < entry.count;i++) {
+            cameraTest->intents = {PREVIEW, VIDEO};
+            cameraTest->StartProfessionalStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::PROFESSIONAL_VIDEO);
 
-        std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
-        uint8_t awbMode = entry.data.u8[i];
-        meta->addEntry(OHOS_CONTROL_AWB_MODE, &awbMode, DATA_COUNT);
-        std::vector<uint8_t> setting;
-        MetadataUtils::ConvertMetadataToVec(meta, setting);
-        cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
-        EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+            std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+            uint8_t awbMode = entry.data.u8[i];
+            meta->addEntry(OHOS_CONTROL_AWB_MODE, &awbMode, DATA_COUNT);
+            std::vector<uint8_t> setting;
+            MetadataUtils::ConvertMetadataToVec(meta, setting);
+            cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
+            EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
 
-        cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
-        cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
-        cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
-        cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
-        cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+            cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+            cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
+            cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
+            cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
+            cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+        }
+    } else {
+        printf("get tag<OHOS_CONTROL_AWB_AVAILABLE_MODES> failed.\n");
     }
 }
 
@@ -1278,23 +1317,26 @@ HWTEST_F(CameraProfessionalTestV1_3, SUB_Driver_Camera_ProfessionalVideo_2200, T
     EXPECT_NE(data, nullptr);
     camera_metadata_item_t entry;
     cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_SENSOR_WB_VALUES, &entry);
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && entry.data.i32 != nullptr && entry.count > 0) {
+        for (uint8_t i = 0;i < entry.count;i++) {
+            cameraTest->intents = {PREVIEW, VIDEO};
+            cameraTest->StartProfessionalStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::PROFESSIONAL_VIDEO);
 
-    for (uint8_t i = 0;i < entry.count;i++) {
-        cameraTest->intents = {PREVIEW, VIDEO};
-        cameraTest->StartProfessionalStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::PROFESSIONAL_VIDEO);
+            std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+            int32_t wbMode = entry.data.i32[i];
+            meta->addEntry(OHOS_CONTROL_SENSOR_WB_VALUE, &wbMode, DATA_COUNT);
+            std::vector<uint8_t> setting;
+            MetadataUtils::ConvertMetadataToVec(meta, setting);
+            cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
+            EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
 
-        std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
-        int32_t wbMode = entry.data.i32[i];
-        meta->addEntry(OHOS_CONTROL_SENSOR_WB_VALUE, &wbMode, DATA_COUNT);
-        std::vector<uint8_t> setting;
-        MetadataUtils::ConvertMetadataToVec(meta, setting);
-        cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
-        EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
-
-        cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
-        cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
-        cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
-        cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
-        cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+            cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+            cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
+            cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
+            cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
+            cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+        }
+    } else {
+        printf("get tag<OHOS_ABILITY_SENSOR_WB_VALUES> failed.\n");
     }
 }

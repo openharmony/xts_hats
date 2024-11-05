@@ -43,5 +43,5 @@ ohos_moduletest_suite("HatsHdfImageCodecAdditionalTest") {
     external_deps = [ "hilog:libhilog" ]
   }
   subsystem_name = "hdf"
-  part_name = "drivers_interface_codec"
+  part_name = "drivers_peripheral_codec"
 }

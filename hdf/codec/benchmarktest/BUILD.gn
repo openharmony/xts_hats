@@ -55,7 +55,7 @@ ohos_moduletest_suite("HatsHdfCodecBenchmarkTest") {
   }
 
   subsystem_name = "hdf"
-  part_name = "drivers_interface_codec"
+  part_name = "drivers_peripheral_codec"
 
   defines = []
   if (drivers_peripheral_codec_feature_support_omx_extend_test) {

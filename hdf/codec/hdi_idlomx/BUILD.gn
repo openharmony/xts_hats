@@ -21,11 +21,8 @@ module_output_path = "hats/codec"
 ohos_moduletest_suite("HatsHdfIdlOmxCodecTest") {
   module_out_path = module_output_path
 
-  if (drivers_peripheral_codec_feature_support_dma_buffer ||
-      hats_rich == false) {
-    include_dirs =
-        [ "../../../../../../drivers/peripheral/codec/interfaces/include" ]
-  }
+  include_dirs =
+      [ "../../../../../../drivers/peripheral/codec/interfaces/include" ]
 
   sources = [
     "codec_callback_service.cpp",
@@ -66,5 +63,5 @@ ohos_moduletest_suite("HatsHdfIdlOmxCodecTest") {
     defines += [ "SUPPORT_HIGH_WORK_FREQUENCY" ]
   }
   subsystem_name = "hdf"
-  part_name = "drivers_interface_codec"
+  part_name = "drivers_peripheral_codec"
 }

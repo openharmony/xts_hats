@@ -52,7 +52,7 @@ ohos_moduletest_suite("HatsHdfOmxCodecTest") {
     defines += [ "SUPPORT_OMX" ]
   }
   subsystem_name = "hdf"
-  part_name = "drivers_interface_codec"
+  part_name = "drivers_peripheral_codec"
 }
 
 config("hdf_codec_omx") {

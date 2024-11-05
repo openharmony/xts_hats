@@ -31,6 +31,7 @@ group("HatsHdfCodecTest") {
   } else {
     testonly = true
     deps = [
+      "hdi_component_additional:HatsHdfTestComponentCodecAdditionalTest",
       "hdi_idlomx:HatsHdfIdlOmxCodecTest",
       "hdi_image:HatsHdfImageCodecTest",
       "hdi_image_additional:HatsHdfImageCodecAdditionalTest",

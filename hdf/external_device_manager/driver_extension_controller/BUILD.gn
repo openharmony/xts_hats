@@ -21,7 +21,7 @@ ohos_moduletest_suite("HatsHdfExternalControllerTest") {
   sources = [ "driver_extension_controller_test.cpp" ]
   include_dirs = [ "${ext_mgr_path}/services/native/driver_extension_manager/include/device_manager" ]
   deps = [
-    "${ext_mgr_path}/services/native/driver_extension_manager/src/device_manager:driver_extension_device_manager",
+    "${ext_mgr_path}/services/native/driver_extension_manager/src/device_manager:driver_extension_device_manager_test",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
   ]

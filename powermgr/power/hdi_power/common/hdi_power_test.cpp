@@ -159,6 +159,20 @@ public:
         (void)bundleName;
         return 0;
     }
+
+    int32_t SetPowerConfig(const std::string &scene, const std::string &value) override
+    {
+        (void)scene;
+        (void)value;
+        return 0;
+    }
+
+    int32_t GetPowerConfig(const std::string &scene, std::string &value) override
+    {
+        (void)scene;
+        (void)value;
+        return 0;
+    }
 };
 
 sptr<IPowerHdiCallback> g_callback = new PowerHdiCallback();
@@ -799,5 +813,32 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest041, TestSize.Level1)
 {
     int32_t ret = powerInterface->SetSuspendTag("");
     EXPECT_EQ(0, ret) << "HdfPowerHdiTest041 failed";
+}
+
+/**
+  * @tc.name: HdfPowerHdiTest042
+  * @tc.desc: check SetPowerConfig
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest042, TestSize.Level1)
+{
+    std::string sceneName = "PowerConfigTestScene";
+    std::string value = "";
+    int32_t result = g_powerInterface->SetPowerConfig(sceneName, value);
+    EXPECT_EQ(true, result != 0);
+}
+
+/**
+  * @tc.name: HdfPowerHdiTest043
+  * @tc.desc: check GetPowerConfig
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest043, TestSize.Level1)
+{
+    std::string sceneName = "PowerConfigTestScene";
+    std::string value = "";
+    int32_t result = g_powerInterface->GetPowerConfig(sceneName, value);
+    EXPECT_EQ(true, value == "");
+    EXPECT_EQ(true, result != 0);
 }
 }

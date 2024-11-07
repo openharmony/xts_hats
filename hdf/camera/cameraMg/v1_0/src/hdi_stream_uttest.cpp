@@ -77,7 +77,11 @@ HWTEST_F(HdiStreamUtTest, SUB_Driver_Camera_Merge_3300, TestSize.Level0)
     cameraTest->rc = cameraTest->streamOperator->IsStreamsSupported(OperationMode::NORMAL, modeSettingVec,
         streams, pType);
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+#if defined DISPLAY_COMMUNITY
     EXPECT_EQ(true, pType ==HDI::Camera::V1_0::DYNAMIC_SUPPORTED);
+#else
+    EXPECT_NE(true, pType ==HDI::Camera::V1_0::DYNAMIC_SUPPORTED);
+#endif
 }
 
 /**

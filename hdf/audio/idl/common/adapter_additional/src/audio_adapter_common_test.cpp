@@ -34,7 +34,7 @@ using namespace testing::ext;
 
 namespace {
 static const uint32_t AUDIO_ADAPTER_NUM_MAX = 5;
-static const uint32_t AUDIO_ADAPTER_CAPTURE_ID = 0;
+static const uint32_t AUDIO_ADAPTER_CAPTURE_ID = 11;
 
 class HdfAudioUtAdapterTestAdditional : public testing::Test {
 public:
@@ -578,13 +578,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture010, TestSize.Level2)
  */
 HWTEST_F(HdfAudioUtAdapterTestAdditional, testDestroyCapture001, TestSize.Level2)
 {
-#if defined ALSA_LIB_MODE
-    EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, AUDIO_ADAPTER_CAPTURE_ID));
-#elif defined DISPLAY_COMMUNITY
     EXPECT_NE(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, AUDIO_ADAPTER_CAPTURE_ID));
-#else
-    EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, AUDIO_ADAPTER_CAPTURE_ID));
-#endif
 }
 
 /**

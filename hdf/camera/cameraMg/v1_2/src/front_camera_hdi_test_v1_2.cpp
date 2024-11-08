@@ -101,50 +101,51 @@ HWTEST_F(FrontCameraHdiTestV1_2, SUB_Driver_Camera_APERTURE_0400, TestSize.Level
     EXPECT_NE(data, nullptr);
     camera_metadata_item_t entry;
     cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_VIRTUAL_APERTURE_RANGE, &entry);
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && entry.data.u8 != nullptr && entry.count > 0) {
+        for (size_t i = 0; i < entry.count; i++) {
+            // Get Stream Operator
+            cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+            cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,
+                cameraTest->streamOperator_V1_1);
+            EXPECT_NE(cameraTest->streamOperator_V1_1, nullptr);
+            EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
 
-    for (size_t i = 0; i < entry.count; i++) {
-        // Get Stream Operator
-        cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
-        cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,
-            cameraTest->streamOperator_V1_1);
-        EXPECT_NE(cameraTest->streamOperator_V1_1, nullptr);
-        EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+            // preview streamInfo
+            cameraTest->streamInfoV1_1 = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
+            cameraTest->DefaultInfosPreview(cameraTest->streamInfoV1_1);
+            cameraTest->streamInfosV1_1.push_back(*cameraTest->streamInfoV1_1);
 
-        // preview streamInfo
-        cameraTest->streamInfoV1_1 = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
-        cameraTest->DefaultInfosPreview(cameraTest->streamInfoV1_1);
-        cameraTest->streamInfosV1_1.push_back(*cameraTest->streamInfoV1_1);
+            // capture streamInfo
+            cameraTest->streamInfoV1_1 = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
+            cameraTest->DefaultInfosCapture(cameraTest->streamInfoV1_1);
+            cameraTest->streamInfosV1_1.push_back(*cameraTest->streamInfoV1_1);
 
-        // capture streamInfo
-        cameraTest->streamInfoV1_1 = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
-        cameraTest->DefaultInfosCapture(cameraTest->streamInfoV1_1);
-        cameraTest->streamInfosV1_1.push_back(*cameraTest->streamInfoV1_1);
+            // create and commitstreams
+            cameraTest->rc = cameraTest->streamOperator_V1_1->CreateStreams_V1_1(cameraTest->streamInfosV1_1);
+            EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+            cameraTest->rc = cameraTest->streamOperator_V1_1->CommitStreams_V1_1(
+                static_cast<OHOS::HDI::Camera::V1_1::OperationMode_V1_1>(OHOS::HDI::Camera::V1_2::PORTRAIT),
+                cameraTest->abilityVec);
+            EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
 
-        // create and commitstreams
-        cameraTest->rc = cameraTest->streamOperator_V1_1->CreateStreams_V1_1(cameraTest->streamInfosV1_1);
-        EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
-        cameraTest->rc = cameraTest->streamOperator_V1_1->CommitStreams_V1_1(
-            static_cast<OHOS::HDI::Camera::V1_1::OperationMode_V1_1>(OHOS::HDI::Camera::V1_2::PORTRAIT),
-            cameraTest->abilityVec);
-        EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+            //update settings
+            std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+            float virtualApertureValue = entry.data.f[i];
+            meta->addEntry(OHOS_CONTROL_CAMERA_VIRTUAL_APERTURE_VALUE, &virtualApertureValue, DATA_COUNT);
+            std::vector<uint8_t> setting;
+            MetadataUtils::ConvertMetadataToVec(meta, setting);
+            cameraTest->rc = (CamRetCode)cameraTest->cameraDevice->UpdateSettings(setting);
+            EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
 
-        //update settings
-        std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
-        float virtualApertureValue = entry.data.f[i];
-        meta->addEntry(OHOS_CONTROL_CAMERA_VIRTUAL_APERTURE_VALUE, &virtualApertureValue, DATA_COUNT);
-        std::vector<uint8_t> setting;
-        MetadataUtils::ConvertMetadataToVec(meta, setting);
-        cameraTest->rc = (CamRetCode)cameraTest->cameraDevice->UpdateSettings(setting);
-        EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+            // start capture
+            cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+            cameraTest->StartCapture(cameraTest->streamIdCapture, cameraTest->captureIdCapture, false, true);
 
-        // start capture
-        cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
-        cameraTest->StartCapture(cameraTest->streamIdCapture, cameraTest->captureIdCapture, false, true);
-
-        cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdCapture};
-        cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdCapture};
-        cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
-        sleep(1);
-        cameraTest->streamInfosV1_1.clear();
+            cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdCapture};
+            cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdCapture};
+            cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+            sleep(1);
+            cameraTest->streamInfosV1_1.clear();
+        }
     }
 }

@@ -466,41 +466,64 @@ void CaptureByColorSpaces(std::vector<int32_t> captureColorSpaces, std::shared_p
     }
 }
 
-void VideoByColorSpaces(std::vector<int32_t> videoColorSpaces, std::shared_ptr<OHOS::Camera::Test> cameraTest)
+void VideoByColorSpaces(std::vector<int32_t> videoColorSpaces, std::vector<int32_t> previewColorSpaces,
+    std::shared_ptr<OHOS::Camera::Test> cameraTest)
 {
-    if (!videoColorSpaces.empty()) {
-        for (int32_t colorSpaces : videoColorSpaces) {
-            printf("video colorSpaces value %d\n", colorSpaces);
-            // preview streamInfo
-            cameraTest->streamInfoV1_1 = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
-            cameraTest->DefaultInfosPreview(cameraTest->streamInfoV1_1);
-            cameraTest->streamInfoV1_1->v1_0.dataspace_ = colorSpaces;
-            if (colorSpaces == OHOS_CAMERA_BT2020_HLG_FULL) {
-                cameraTest->streamInfoV1_1->v1_0.format_ = OHOS_CAMERA_FORMAT_YCBCR_P010;
-            }
+    cameraTest->imageDataSaveSwitch = SWITCH_ON;
+
+    //updateSettings
+    std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+    uint8_t videoStabiliMode = OHOS_CAMERA_VIDEO_STABILIZATION_AUTO;
+    meta->addEntry(OHOS_CONTROL_VIDEO_STABILIZATION_MODE, &videoStabiliMode, DATA_COUNT);
+    const int32_t deviceStreamId = cameraTest->streamIdPreview;
+    meta->addEntry(OHOS_CAMERA_STREAM_ID, &deviceStreamId, DATA_COUNT);
+    std::vector<uint8_t> setting;
+    MetadataUtils::ConvertMetadataToVec(meta, setting);
+    cameraTest->rc = (CamRetCode)cameraTest->cameraDevice->UpdateSettings(setting);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+
+    if (videoColorSpaces.empty() || previewColorSpaces.empty()) {
+        printf("ColorSpaces empty is null\n");
+        return;
+    }
+    for (int32_t colorSpaces : previewColorSpaces) {
+        printf("video colorSpaces value %d\n", colorSpaces);
+        
+        // preview streamInfo
+        cameraTest->streamInfoV1_1 = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
+        cameraTest->DefaultInfosPreview(cameraTest->streamInfoV1_1);
+        cameraTest->streamInfoV1_1->v1_0.dataspace_ = colorSpaces;
+        if (colorSpaces == OHOS_CAMERA_BT2020_HLG_FULL) {
+            cameraTest->streamInfoV1_1->v1_0.format_ = OHOS_CAMERA_FORMAT_YCBCR_P010;
+        }
+        
+        // video streamInfo
+        for (int32_t colorSpaces_ : videoColorSpaces) {
+            printf("video colorSpaces_ value %d\n", colorSpaces_);
             cameraTest->streamInfosV1_1.push_back(*cameraTest->streamInfoV1_1);
-            // video streamInfo
+
             cameraTest->streamInfoVideo = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
             cameraTest->DefaultInfosVideo(cameraTest->streamInfoVideo);
-            cameraTest->streamInfoVideo->v1_0.dataspace_ = colorSpaces;
-            if (colorSpaces == OHOS_CAMERA_BT2020_HLG_FULL) {
-                cameraTest->streamInfoVideo->v1_0.format_ = OHOS_CAMERA_FORMAT_YCBCR_P010;
-            }
+            cameraTest->streamInfoVideo->v1_0.dataspace_ = colorSpaces_;
             cameraTest->streamInfosV1_1.push_back(*cameraTest->streamInfoVideo);
             cameraTest->rc = cameraTest->streamOperator_V1_1->CreateStreams_V1_1(cameraTest->streamInfosV1_1);
             EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
             cameraTest->rc = cameraTest->streamOperator_V1_1->CommitStreams(
-                OperationMode::NORMAL, cameraTest->abilityVec);
+                static_cast<OHOS::HDI::Camera::V1_0::OperationMode>(OHOS::HDI::Camera::V1_1::OperationMode_V1_1::VIDEO),
+                cameraTest->abilityVec);
             EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
             sleep(UT_SECOND_TIMES);
+
             cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
             cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
             cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
             cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
             cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
             cameraTest->streamInfosV1_1.clear();
+            sleep(1);
         }
     }
+    cameraTest->imageDataSaveSwitch = SWITCH_OFF;
 }
 
 void SuperStubByColorSpaces(std::vector<int32_t> superStubColorSpaces, std::shared_ptr<OHOS::Camera::Test> cameraTest)
@@ -562,6 +585,7 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_Colorspace_0200, TestSize.Level1)
         std::vector<int32_t> captureColorSpaces;
         std::vector<int32_t> videoColorSpaces;
         std::vector<int32_t> superStubColorSpaces;
+        std::vector<int32_t> previewColorSpaces;
         int32_t operatorMode = -2;
         for (size_t i = 0; i < entry.count - 1; i++) {
             if (operatorMode == -2 && entry.data.i32[i] == HDI::Camera::V1_2::OperationMode_V1_2::CAPTURE) {
@@ -577,7 +601,13 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_Colorspace_0200, TestSize.Level1)
             } else if (operatorMode == HDI::Camera::V1_2::OperationMode_V1_2::CAPTURE) {
                 captureColorSpaces.push_back(entry.data.i32[i]);
             } else if (operatorMode == HDI::Camera::V1_2::OperationMode_V1_2::VIDEO) {
-                videoColorSpaces.push_back(entry.data.i32[i]);
+                if (std::find(cameraTest->previewColorSpaces_.begin(),
+                    cameraTest->previewColorSpaces_.end(), entry.data.i32[i]) !=
+                    cameraTest->preview->previewColorSpaces_.end()) {
+                    previewColorSpaces.push_back(entry.data.i32[i]);
+                } else {
+                    videoColorSpaces.push_back(entry.data.i32[i]);
+                }
             } else if (operatorMode == HDI::Camera::V1_2::OperationMode_V1_2::SUPER_STAB) {
                 superStubColorSpaces.push_back(entry.data.i32[i]);
             } else if (operatorMode == -2 && entry.data.i32[i] > 0) {

@@ -601,9 +601,8 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_Colorspace_0200, TestSize.Level1)
             } else if (operatorMode == HDI::Camera::V1_2::OperationMode_V1_2::CAPTURE) {
                 captureColorSpaces.push_back(entry.data.i32[i]);
             } else if (operatorMode == HDI::Camera::V1_2::OperationMode_V1_2::VIDEO) {
-                if (std::find(cameraTest->previewColorSpaces_.begin(),
-                    cameraTest->previewColorSpaces_.end(), entry.data.i32[i]) !=
-                    cameraTest->preview->previewColorSpaces_.end()) {
+                if (std::find(cameraTest->previewColorSpaces_.begin(), cameraTest->previewColorSpaces_.end(),
+                    entry.data.i32[i]) != cameraTest->preview->previewColorSpaces_.end()) {
                     previewColorSpaces.push_back(entry.data.i32[i]);
                 } else {
                     videoColorSpaces.push_back(entry.data.i32[i]);

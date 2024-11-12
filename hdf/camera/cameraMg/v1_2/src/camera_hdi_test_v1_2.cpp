@@ -487,7 +487,7 @@ void VideoByColorSpaces(std::vector<int32_t> videoColorSpaces, std::vector<int32
         return;
     }
     for (int32_t colorSpaces : previewColorSpaces) {
-        printf("video colorSpaces value %d\n", colorSpaces);
+        printf("preview colorSpaces value %d\n", colorSpaces);
         
         // preview streamInfo
         cameraTest->streamInfoV1_1 = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
@@ -602,7 +602,7 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_Colorspace_0200, TestSize.Level1)
                 captureColorSpaces.push_back(entry.data.i32[i]);
             } else if (operatorMode == HDI::Camera::V1_2::OperationMode_V1_2::VIDEO) {
                 if (std::find(cameraTest->previewColorSpaces_.begin(), cameraTest->previewColorSpaces_.end(),
-                    entry.data.i32[i]) != cameraTest->preview->previewColorSpaces_.end()) {
+                    entry.data.i32[i]) != cameraTest->previewColorSpaces_.end()) {
                     previewColorSpaces.push_back(entry.data.i32[i]);
                 } else {
                     videoColorSpaces.push_back(entry.data.i32[i]);
@@ -614,7 +614,7 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_Colorspace_0200, TestSize.Level1)
             }
         }
         CaptureByColorSpaces(captureColorSpaces, cameraTest);
-        VideoByColorSpaces(videoColorSpaces, cameraTest);
+        VideoByColorSpaces(videoColorSpaces, previewColorSpaces, cameraTest);
         SuperStubByColorSpaces(superStubColorSpaces, cameraTest);
     }
 }

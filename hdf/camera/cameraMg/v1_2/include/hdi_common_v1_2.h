@@ -185,6 +185,7 @@ public:
     std::vector<uint8_t> abilityVec = {};
     std::shared_ptr<CameraMetadata> ability = nullptr;
     std::vector<StreamIntent> intents;
+    std::vector<int32_t> previewColorSpaces_ = {2360580, 2360324};
     class StreamConsumer;
     std::map<OHOS::Camera::StreamIntent, std::shared_ptr<StreamConsumer>> consumerMap_ = {};
     class TestBufferConsumerListener : public OHOS::IBufferConsumerListener {

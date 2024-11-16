@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file expected in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,12 +20,12 @@
 #include <gtest/gtest.h>
 #include <string>
 #include <vector>
-#include "ut_common.h"
+#include "hdi_common.h"
 
 class CameraBenchmarkTest : public benchmark::Fixture {
 public:
     void SetUp(const ::benchmark::State &state);
     void TearDown(const ::benchmark::State &state);
-    std::shared_ptr<OHOS::Camera::Test> cameraTest = nullptr;
+    std::shared_ptr<OHOS::Camera::HdiCommon> cameraTest = nullptr;
 };
 #endif

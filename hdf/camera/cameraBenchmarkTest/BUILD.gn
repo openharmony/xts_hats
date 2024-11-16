@@ -21,12 +21,12 @@ group("HatsHdfCamerabenchmarkTest") {
   }
   if (is_standard_system) {
     if (hats_rich == false) {
-      deps = [ "v1_0:HatsHdfCamerabenchmarkTestV0" ]
+      deps = [ "v1_0:HatsHdfCamerabenchmarkv0Test" ]
     } else {
       deps = [
-        "v1_0:HatsHdfCamerabenchmarkTestV0",
-        "v1_1:HatsHdfCamerabenchmarkTestV1",
-        "v1_2:HatsHdfCamerabenchmarkTestV2",
+        "v1_0:HatsHdfCamerabenchmarkv0Test",
+        "v1_1:HatsHdfCamerabenchmarkv1Test",
+        "v1_2:HatsHdfCamerabenchmarkv2Test",
       ]
     }
   }

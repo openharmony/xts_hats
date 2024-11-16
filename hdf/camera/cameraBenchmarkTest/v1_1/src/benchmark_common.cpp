@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file expected in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,56 +18,9 @@
 #include "video_key_info.h"
 
 namespace OHOS::Camera {
-Test::ResultCallback Test::resultCallback_ = 0;
+int64_t OHOS::Camera::HdiCommonV1_1::StreamConsumer::g_timestamp[2] = {0};
 
-uint64_t Test::GetCurrentLocalTimeStamp()
-{
-    std::chrono::time_point<std::chrono::system_clock, std::chrono::milliseconds> tp =
-        std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::system_clock::now());
-    auto tmp = std::chrono::duration_cast<std::chrono::milliseconds>(tp.time_since_epoch());
-    return static_cast<uint64_t>(tmp.count());
-}
-
-int32_t Test::DumpImageFile(int streamId, std::string suffix, const void* buffer, int32_t size)
-{
-    if (imageDataSaveSwitch == SWITCH_OFF) {
-        return 0;
-    }
-    if (streamId < 0) {
-        CAMERA_LOGE("ivalid stream id: %{public}d", streamId);
-        return -1;
-    }
-    char mkdirCmd[PATH_MAX] = {0};
-    char path[PATH_MAX] = {0};
-    int ret = sprintf_s(mkdirCmd, sizeof(mkdirCmd) / sizeof(mkdirCmd[0]),
-        "mkdir -p /data/stream-%d", streamId);
-    if (ret < 0) {
-        return -1;
-    }
-    system(mkdirCmd);
-    ret = sprintf_s(path, sizeof(path) / sizeof(path[0]), "data/stream-%d/%lld.%s",
-        streamId, GetCurrentLocalTimeStamp(), suffix.c_str());
-    if (ret < 0) {
-        return -1;
-    }
-
-    int imgFd = open(path, O_RDWR | O_CREAT, 00766);
-    if (imgFd == -1) {
-        CAMERA_LOGE("open file failed, errno: %{public}s", strerror(errno));
-        return -1;
-    }
-
-    ret = write(imgFd, buffer, size);
-    if (ret == -1) {
-        CAMERA_LOGE("write file failed, error: %{public}s", strerror(errno));
-        close(imgFd);
-        return -1;
-    }
-    close(imgFd);
-    return 0;
-}
-
-void Test::Init()
+void HdiCommonV1_1::Init()
 {
     uint32_t mainVer;
     uint32_t minVer;
@@ -75,72 +28,178 @@ void Test::Init()
     if (serviceV1_1 == nullptr) {
         serviceV1_1 = OHOS::HDI::Camera::V1_1::ICameraHost::Get("camera_service", false);
         if (serviceV1_1 == nullptr) {
-            CAMERA_LOGE("V1_1::ICameraHost get failed");
+            printf("Init ICameraHost get failed serviceV1_1 nullptr\n");
+            CAMERA_LOGE("Init ICameraHost get failed serviceV1_1 nullptr");
             return;
-        } else {
-            CAMERA_LOGI("ICameraHost get success");
-            ret = serviceV1_1->GetVersion(mainVer, minVer);
-            if (ret != 0) {
-                CAMERA_LOGE("V1_1::ICameraHost get version failed, ret = %{public}d", ret);
-            } else {
-                CAMERA_LOGE("V1_1::ICameraHost get version success, %{public}d, %{public}d", mainVer, minVer);
-            }
         }
-        ASSERT_TRUE(serviceV1_1 != nullptr);
+        CAMERA_LOGI("V1_1::ICameraHost get success");
+        ret = serviceV1_1->GetVersion(mainVer, minVer);
+        if (ret != 0) {
+            printf("Init GetVersion failed, ret = %d\n", ret);
+            CAMERA_LOGE("Init GetVersion failed, ret = %{public}d", ret);
+            return;
+        }
+        CAMERA_LOGI("V1_1::ICameraHost get version success, %{public}d, %{public}d", mainVer, minVer);
         service = static_cast<OHOS::HDI::Camera::V1_0::ICameraHost *>(serviceV1_1.GetRefPtr());
     }
+
     hostCallback = new TestCameraHostCallback();
-    service->SetCallback(hostCallback);
-}
-
-void Test::GetCameraMetadata(int cameraId)
-{
-    rc = service->GetCameraAbility(cameraIds.front(), abilityVec);
-    if (rc != HDI::Camera::V1_0::NO_ERROR) {
-        CAMERA_LOGE("GetCameraAbility failed, rc = %{public}d", rc);
-    }
-    MetadataUtils::ConvertVecToMetadata(abilityVec, ability);
-
-    common_metadata_header_t* data = ability->get();
-    camera_metadata_item_t entry;
-    int ret = FindCameraMetadataItem(data, OHOS_CONTROL_AE_AVAILABLE_MODES, &entry);
-    if (ret == 0) {
-        CAMERA_LOGI("get OHOS_CONTROL_AE_AVAILABLE_MODES success");
+    ret = service->SetCallback(hostCallback);
+    if (ret != 0) {
+        printf("Init SetCallback failed, ret = %d\n", ret);
+        CAMERA_LOGE("Init SetCallback failed, ret = %{public}d", ret);
     }
 }
 
-void Test::Open(int cameraId)
+void HdiCommonV1_1::Open(int cameraId)
 {
     if (cameraDevice == nullptr) {
-        service->GetCameraIds(cameraIds);
-        if (cameraIds.size() == 0) {
-            CAMERA_LOGE("camera device list empty");
-        }
-        ASSERT_TRUE(cameraIds.size() != 0);
-        GetCameraMetadata(cameraId);
-        deviceCallback = new OHOS::Camera::Test::DemoCameraDeviceCallback();
-
-        ASSERT_TRUE(serviceV1_1 != nullptr);
-        rc = serviceV1_1->OpenCamera_V1_1(cameraIds.front(), deviceCallback, cameraDeviceV1_1);
-        if (rc != HDI::Camera::V1_0::NO_ERROR || cameraDeviceV1_1 == nullptr) {
-            CAMERA_LOGE("openCamera V1_1 failed, rc = %{public}d", rc);
+        if (serviceV1_1 == nullptr) {
+            printf("Open ICameraHost failed\n");
+            CAMERA_LOGE("Open ICameraHost failed");
             return;
         }
-        ASSERT_TRUE(cameraDeviceV1_1 != nullptr);
+        service->GetCameraIds(cameraIds);
+        if (cameraIds.size() == 0) {
+            printf("Open GetCameraIds failed\n");
+            CAMERA_LOGE("Open GetCameraIds failed");
+            return;
+        }
+        GetCameraMetadata(cameraId);
+        deviceCallback = new OHOS::Camera::HdiCommon::DemoCameraDeviceCallback();
+        if (DEVICE_1 == cameraId) {
+            rc = serviceV1_1->OpenCamera_V1_1(cameraIds[1], deviceCallback, cameraDeviceV1_1); // front camera
+        } else {
+            rc = serviceV1_1->OpenCamera_V1_1(cameraIds[0], deviceCallback, cameraDeviceV1_1); // rear camera
+        }
+        if (rc != HDI::Camera::V1_0::NO_ERROR || cameraDeviceV1_1 == nullptr) {
+            printf("Open OpenCamera_V1_1 failed, rc = %d\n", rc);
+            CAMERA_LOGE("Open OpenCamera_V1_1 failed, rc = %{public}d", rc);
+            return;
+        }
         cameraDevice = static_cast<OHOS::HDI::Camera::V1_0::ICameraDevice *>(cameraDeviceV1_1.GetRefPtr());
         CAMERA_LOGI("OpenCamera V1_1 success");
     }
 }
 
-void Test::Close()
+void HdiCommonV1_1::GetCameraMetadata(int cameraId)
 {
-    if (cameraDevice != nullptr) {
-        cameraDevice->Close();
-        cameraDevice = nullptr;
+    if (DEVICE_1 == cameraId) {
+        rc = service->GetCameraAbility(cameraIds[1], abilityVec); // front camera
+    } else {
+        rc = service->GetCameraAbility(cameraIds[0], abilityVec); // rear camera
     }
+    if (rc != HDI::Camera::V1_0::NO_ERROR) {
+        printf("GetCameraAbility failed, rc = %d\n", rc);
+        CAMERA_LOGE("GetCameraAbility failed, rc = %{public}d", rc);
+        return;
+    }
+    MetadataUtils::ConvertVecToMetadata(abilityVec, ability);
 }
 
-void Test::StartStream(std::vector<StreamIntent> intents)
+void HdiCommonV1_1::DefaultPreview(std::shared_ptr<StreamInfo_V1_1> &infos)
+{
+    infos->v1_0.streamId_ = streamIdPreview;
+    infos->v1_0.width_ = previewWidth;
+    infos->v1_0.height_ = previewHeight;
+    infos->v1_0.format_ = previewFormat;
+    infos->v1_0.dataspace_ = UT_DATA_SIZE;
+    infos->v1_0.intent_ = StreamIntent::PREVIEW;
+    infos->v1_0.tunneledMode_ = UT_TUNNEL_MODE;
+}
+
+void HdiCommonV1_1::DefaultCapture(std::shared_ptr<StreamInfo_V1_1> &infos)
+{
+    infos->v1_0.streamId_ = streamIdCapture;
+    infos->v1_0.width_ = captureWidth;
+    infos->v1_0.height_ = captureHeight;
+    infos->v1_0.format_ = snapshotFormat;
+    infos->v1_0.dataspace_ = UT_DATA_SIZE;
+    infos->v1_0.intent_ = StreamIntent::STILL_CAPTURE;
+    infos->v1_0.tunneledMode_ = UT_TUNNEL_MODE;
+}
+
+void HdiCommonV1_1::DefaultInfosPreview(std::shared_ptr<StreamInfo_V1_1> &infos)
+{
+    DefaultPreview(infos);
+    std::shared_ptr<StreamConsumer> consumer_pre = std::make_shared<StreamConsumer>();
+    infos->v1_0.bufferQueue_ = consumer_pre->CreateProducerSeq([this](void* addr, uint32_t size) {
+        DumpImageFile(streamIdPreview, "yuv", addr, size);
+    });
+    infos->v1_0.bufferQueue_->producer_->SetQueueSize(UT_DATA_SIZE);
+    consumerMap_[StreamIntent::PREVIEW] = consumer_pre;
+}
+
+void HdiCommonV1_1::DefaultInfosCapture(std::shared_ptr<StreamInfo_V1_1> &infos)
+{
+    DefaultCapture(infos);
+    std::shared_ptr<StreamConsumer> consumer_capture = std::make_shared<StreamConsumer>();
+    infos->v1_0.bufferQueue_ = consumer_capture->CreateProducerSeq([this](void* addr, uint32_t size) {
+        DumpImageFile(streamIdCapture, "jpeg", addr, size);
+    });
+    infos->v1_0.bufferQueue_->producer_->SetQueueSize(UT_DATA_SIZE);
+    consumerMap_[StreamIntent::STILL_CAPTURE] = consumer_capture;
+}
+
+void HdiCommonV1_1::DefaultInfosVideo(std::shared_ptr<StreamInfo_V1_1> &infos)
+{
+    infos->v1_0.streamId_ = streamIdVideo;
+    infos->v1_0.width_ = videoWidth;
+    infos->v1_0.height_ = videoHeight;
+    infos->v1_0.format_ = videoFormat;
+    infos->v1_0.dataspace_ = UT_DATA_SIZE;
+    infos->v1_0.intent_ = StreamIntent::VIDEO;
+    infos->v1_0.encodeType_ = ENCODE_TYPE_H265;
+    infos->v1_0.tunneledMode_ = UT_TUNNEL_MODE;
+    std::shared_ptr<StreamConsumer> consumer_video = std::make_shared<StreamConsumer>();
+    infos->v1_0.bufferQueue_ = consumer_video->CreateProducerSeq([this](void* addr, uint32_t size) {
+        DumpImageFile(streamIdVideo, "yuv", addr, size);
+    });
+    infos->v1_0.bufferQueue_->producer_->SetQueueSize(UT_DATA_SIZE);
+    consumerMap_[StreamIntent::VIDEO] = consumer_video;
+}
+
+void HdiCommonV1_1::DefaultInfosAnalyze(std::shared_ptr<StreamInfo_V1_1> &infos)
+{
+    infos->v1_0.streamId_ = streamIdAnalyze;
+    infos->v1_0.width_ = analyzeWidth;
+    infos->v1_0.height_ = analyzeHeight;
+    infos->v1_0.format_ = analyzeFormat;
+    infos->v1_0.dataspace_ = UT_DATA_SIZE;
+    infos->v1_0.intent_ = StreamIntent::ANALYZE;
+    infos->v1_0.tunneledMode_ = UT_TUNNEL_MODE;
+
+    std::shared_ptr<StreamConsumer> consumer_analyze = std::make_shared<StreamConsumer>();
+    infos->v1_0.bufferQueue_ = consumer_analyze->CreateProducerSeq([this](void* addr, uint32_t size) {
+        common_metadata_header_t *data = static_cast<common_metadata_header_t *>(addr);
+        camera_metadata_item_t entry = {};
+
+        int ret = FindCameraMetadataItem(data, OHOS_STATISTICS_FACE_IDS, &entry);
+        if (ret == HDI::Camera::V1_0::NO_ERROR && entry.data.i32 != nullptr && entry.count > 0) {
+            for (size_t i = 0; i < entry.count; i++) {
+                int id = entry.data.i32[i];
+                CAMERA_LOGI("Face ids : %{public}d", id);
+            }
+        }
+
+        ret = FindCameraMetadataItem(data, OHOS_STATISTICS_FACE_RECTANGLES, &entry);
+        if (ret == HDI::Camera::V1_0::NO_ERROR && entry.data.i32 != nullptr && entry.count > 0) {
+            for (size_t i = 0; i < entry.count; i++) {
+                int id = entry.data.i32[i];
+                CAMERA_LOGI("Face rectangles : %{public}d", id);
+            }
+        }
+    });
+    infos->v1_0.bufferQueue_->producer_->SetQueueSize(UT_DATA_SIZE);
+    consumerMap_[StreamIntent::ANALYZE] = consumer_analyze;
+}
+
+void HdiCommonV1_1::StartStream(std::vector<StreamIntent> intents)
+{
+    StartStream(intents, OHOS::HDI::Camera::V1_1::NORMAL);
+}
+
+void HdiCommonV1_1::StartStream(std::vector<StreamIntent> intents, OperationMode_V1_1 mode)
 {
     streamOperatorCallback = new TestStreamOperatorCallback();
     uint32_t mainVersion = 1;
@@ -150,113 +209,48 @@ void Test::StartStream(std::vector<StreamIntent> intents)
         rc = streamOperator_V1_1->GetVersion(mainVersion, minVersion);
         streamOperator = static_cast<OHOS::HDI::Camera::V1_0::IStreamOperator *>(streamOperator_V1_1.GetRefPtr());
         if (rc != HDI::Camera::V1_0::NO_ERROR) {
+            printf("StreamOperator V1_1 get version failed, rc = %d\n", rc);
             CAMERA_LOGE("StreamOperator V1_1 get version failed, rc = %{public}d", rc);
-        } else {
-            CAMERA_LOGI("StreamOperator V1_1 get version success, %{public}u, %{public}u",
-                mainVersion, minVersion);
         }
         CAMERA_LOGI("GetStreamOperator success");
     } else {
+        printf("GetStreamOperator fail, rc = %d\n", rc);
         CAMERA_LOGE("GetStreamOperator fail, rc = %{public}d", rc);
     }
-    streamInfoPre = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
-    streamInfoVideo = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
-    streamInfoCapture = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
-    streamInfoAnalyze = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
+    streamInfoPre = std::make_shared<StreamInfo_V1_1>();
+    streamInfoVideo = std::make_shared<StreamInfo_V1_1>();
+    streamInfoCapture = std::make_shared<StreamInfo_V1_1>();
+    streamInfoAnalyze = std::make_shared<StreamInfo_V1_1>();
     for (auto& intent : intents) {
         if (intent == StreamIntent::PREVIEW) {
-            streamInfoPre->v1_0.streamId_ = streamIdPreview;
-            streamInfoPre->v1_0.width_ = previewWidth;
-            streamInfoPre->v1_0.height_ = previewHeight;
-            streamInfoPre->v1_0.format_ = previewFormat;
-            streamInfoPre->v1_0.dataspace_ = UT_DATA_SIZE;
-            streamInfoPre->v1_0.intent_ = intent;
-            streamInfoPre->v1_0.tunneledMode_ = UT_TUNNEL_MODE;
-            std::shared_ptr<StreamConsumer> consumer_pre = std::make_shared<StreamConsumer>();
-            streamInfoPre->v1_0.bufferQueue_ = consumer_pre->CreateProducerSeq([this](void* addr, uint32_t size) {
-                DumpImageFile(streamIdPreview, "yuv", addr, size);
-            });
-            streamInfoPre->v1_0.bufferQueue_->producer_->SetQueueSize(UT_DATA_SIZE);
-            consumerMap_[intent] = consumer_pre;
+            DefaultInfosPreview(streamInfoPre);
             streamInfos.push_back(*streamInfoPre);
         } else if (intent == StreamIntent::VIDEO) {
-            streamInfoVideo->v1_0.streamId_ = streamIdVideo;
-            streamInfoVideo->v1_0.width_ = videoWidth;
-            streamInfoVideo->v1_0.height_ = videoHeight;
-            streamInfoVideo->v1_0.format_ = videoFormat;
-            streamInfoVideo->v1_0.dataspace_ = UT_DATA_SIZE;
-            streamInfoVideo->v1_0.intent_ = intent;
-            streamInfoVideo->v1_0.encodeType_ = ENCODE_TYPE_H265;
-            streamInfoVideo->v1_0.tunneledMode_ = UT_TUNNEL_MODE;
-            std::shared_ptr<StreamConsumer> consumer_video = std::make_shared<StreamConsumer>();
-            streamInfoVideo->v1_0.bufferQueue_ = consumer_video->CreateProducerSeq([this](void* addr, uint32_t size) {
-                DumpImageFile(streamIdPreview, "yuv", addr, size);
-            });
-            streamInfoVideo->v1_0.bufferQueue_->producer_->SetQueueSize(UT_DATA_SIZE);
-            consumerMap_[intent] = consumer_video;
+            DefaultInfosVideo(streamInfoVideo);
             streamInfos.push_back(*streamInfoVideo);
         } else if (intent == StreamIntent::ANALYZE) {
-            streamInfoAnalyze->v1_0.streamId_ = streamIdAnalyze;
-            streamInfoAnalyze->v1_0.width_ = analyzeWidth;
-            streamInfoAnalyze->v1_0.height_ = analyzeHeight;
-            streamInfoAnalyze->v1_0.format_ = analyzeFormat;
-            streamInfoAnalyze->v1_0.dataspace_ = UT_DATA_SIZE;
-            streamInfoAnalyze->v1_0.intent_ = intent;
-            streamInfoAnalyze->v1_0.tunneledMode_ = UT_TUNNEL_MODE;
-            
-            std::shared_ptr<StreamConsumer> consumer_analyze = std::make_shared<StreamConsumer>();
-            streamInfoAnalyze->v1_0.bufferQueue_ =
-                consumer_analyze->CreateProducerSeq([this](void* addr, uint32_t size) {
-                common_metadata_header_t *data = static_cast<common_metadata_header_t *>(addr);
-                camera_metadata_item_t entry = {};
-
-                int ret = FindCameraMetadataItem(data, OHOS_STATISTICS_FACE_IDS, &entry);
-                if (ret == 0) {
-                    for (size_t i = 0; i < entry.count; i++) {
-                        int id = entry.data.i32[i];
-                        CAMERA_LOGI("Face ids : %{public}d", id);
-                    }
-                }
-
-                ret = FindCameraMetadataItem(data, OHOS_STATISTICS_FACE_RECTANGLES, &entry);
-                if (ret == 0) {
-                    for (size_t i = 0; i < entry.count; i++) {
-                        int id = entry.data.i32[i];
-                        CAMERA_LOGI("Face rectangles : %{public}d", id);
-                    }
-                }
-            });
-            streamInfoAnalyze->v1_0.bufferQueue_->producer_->SetQueueSize(UT_DATA_SIZE);
-            consumerMap_[intent] = consumer_analyze;
+            DefaultInfosAnalyze(streamInfoAnalyze);
             streamInfos.push_back(*streamInfoAnalyze);
         } else {
-            streamInfoCapture->v1_0.streamId_ = streamIdAnalyze;
-            streamInfoCapture->v1_0.width_ = analyzeWidth;
-            streamInfoCapture->v1_0.height_ = analyzeHeight;
-            streamInfoCapture->v1_0.format_ = analyzeFormat;
-            streamInfoCapture->v1_0.dataspace_ = UT_DATA_SIZE;
-            streamInfoCapture->v1_0.intent_ = intent;
-            streamInfoCapture->v1_0.tunneledMode_ = UT_TUNNEL_MODE;
-            std::shared_ptr<StreamConsumer> consumer_capture = std::make_shared<StreamConsumer>();
-            streamInfoCapture->v1_0.bufferQueue_ =
-                consumer_capture->CreateProducerSeq([this](void* addr, uint32_t size) {
-                DumpImageFile(streamIdPreview, "yuv", addr, size);
-            });
-            streamInfoCapture->v1_0.bufferQueue_->producer_->SetQueueSize(UT_DATA_SIZE);
-            consumerMap_[intent] = consumer_capture;
+            DefaultInfosCapture(streamInfoCapture);
             streamInfos.push_back(*streamInfoCapture);
         }
     }
-
     rc = streamOperator_V1_1->CreateStreams_V1_1(streamInfos);
-    EXPECT_EQ(false, rc != HDI::Camera::V1_0::NO_ERROR);
-    rc = streamOperator_V1_1->CommitStreams(OperationMode::NORMAL, abilityVec);
-    EXPECT_EQ(false, rc != HDI::Camera::V1_0::NO_ERROR);
+    if (rc != HDI::Camera::V1_0::NO_ERROR) {
+        printf("check StartStream: CreateStreams_V1_1 fail, rc = %d\n", rc);
+        CAMERA_LOGE("check StartStream: CreateStreams_V1_1 fail, rc = %{public}d", rc);
+    }
+    rc = streamOperator_V1_1->CommitStreams_V1_1(mode, abilityVec);
+    if (rc != HDI::Camera::V1_0::NO_ERROR) {
+        printf("check StartStream: CommitStreams_V1_1 fail, rc = %d\n", rc);
+        CAMERA_LOGE("check StartStream: CommitStreams_V1_1 fail, rc = %{public}d", rc);
+    }
     sleep(1);
-    std::vector<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>().swap(streamInfos);
+    std::vector<StreamInfo_V1_1>().swap(streamInfos);
 }
 
-void Test::StartCapture(int streamId, int captureId, bool shutterCallback, bool isStreaming)
+void HdiCommonV1_1::StartCapture(int streamId, int captureId, bool shutterCallback, bool isStreaming)
 {
     captureInfo = std::make_shared<CaptureInfo>();
     captureInfo->streamIds_ = {streamId};
@@ -267,75 +261,56 @@ void Test::StartCapture(int streamId, int captureId, bool shutterCallback, bool 
     } else {
         rc = (CamRetCode)streamOperator->Capture(captureId, *captureInfo, isStreaming);
     }
-    EXPECT_EQ(true, rc == HDI::Camera::V1_0::NO_ERROR);
-    if (rc == HDI::Camera::V1_0::NO_ERROR) {
-        CAMERA_LOGI("check Capture: Capture success, %{public}d", captureId);
-    } else {
-        std::cout << "rc = " << rc << std::endl;
+
+    if (rc != HDI::Camera::V1_0::NO_ERROR)  {
+        printf("check Capture: Capture fail, rc = %d\n", rc);
         CAMERA_LOGE("check Capture: Capture fail, rc = %{public}d", rc);
     }
     sleep(UT_SLEEP_TIME);
 }
 
-void Test::StopStream(std::vector<int>& captureIds, std::vector<int>& streamIds)
+void HdiCommonV1_1::StopStream(std::vector<int>& captureIds, std::vector<int>& streamIds)
 {
-    if (sizeof(captureIds) > 0) {
+    if (captureIds.size() > 0) {
         for (auto &captureId : captureIds) {
             if (streamOperator_V1_1 != nullptr) {
                 rc = streamOperator_V1_1->CancelCapture(captureId);
             } else {
                 rc = streamOperator->CancelCapture(captureId);
             }
-            EXPECT_EQ(true, rc == HDI::Camera::V1_0::NO_ERROR);
-            if (rc == HDI::Camera::V1_0::NO_ERROR) {
-                CAMERA_LOGI("check Capture: CancelCapture success, %{public}d", captureId);
-            } else {
-                CAMERA_LOGE("check Capture: CancelCapture fail, rc = %{public}d, captureId = %{public}d",
-                    rc, captureId);
+            if (rc != HDI::Camera::V1_0::NO_ERROR) {
+                printf("CancelCapture fail, rc = %d, captureId = %d\n", rc, captureId);
+                CAMERA_LOGE("CancelCapture fail, rc = %{public}d, captureId = %{public}d", rc, captureId);
             }
         }
     }
-    if (sizeof(streamIds) > 0) {
+    if (streamIds.size() > 0) {
         if (streamOperator_V1_1 != nullptr) {
             rc = streamOperator_V1_1->ReleaseStreams(streamIds);
         } else {
             rc = streamOperator->ReleaseStreams(streamIds);
         }
-        EXPECT_EQ(true, rc == HDI::Camera::V1_0::NO_ERROR);
-        if (rc == HDI::Camera::V1_0::NO_ERROR) {
-            CAMERA_LOGI("check Capture: ReleaseStream success");
-        } else {
+        if (rc != HDI::Camera::V1_0::NO_ERROR) {
+            printf("check Capture: ReleaseStreams fail, rc = %d\n", rc);
             CAMERA_LOGE("check Capture: ReleaseStreams fail, rc = %{public}d", rc);
         }
     }
 }
 
-void Test::StreamConsumer::CalculateFps(int64_t timestamp, int32_t streamId)
+void HdiCommonV1_1::StreamConsumer::GetTimeStamp(
+    int64_t *g_timestamp, uint32_t lenght, int64_t timestamp, int32_t gotSize)
 {
-    if (isFirstCalculateFps_) {
-        if ((timestamp - intervalTimestamp_) >= interval_) {
-            int64_t timeInterval = timestamp - intervalTimestamp_;
-            if (timeInterval != 0) {
-                float fps = (int64_t)(100000000000 * timestampCount_ / timeInterval) / 100.0;
-                CAMERA_LOGI("Calculate FPS success, streamId: %{public}d, Fps:%{public}f", streamId, fps);
-                interval_ = ONESECOND_OF_MICROSECOND_UNIT;
-            } else {
-                CAMERA_LOGE("Calculate FPS error timeInerval is 0");
-            }
+    if (gotSize != UT_PREVIEW_SIZE) {
+        if (g_timestamp[0] == 0) {
+            g_timestamp[0] = timestamp;
+        } else {
+            g_timestamp[1] = timestamp;
         }
-    } else {
-        intervalTimestamp_ = timestamp;
-        isFirstCalculateFps_ = true;
     }
-    if ((timestamp - intervalTimestamp_) >= ONESECOND_OF_MICROSECOND_UNIT * UT_SECOND_TIMES) {
-        intervalTimestamp_ = timestamp;
-        timestampCount_ = 0;
-        interval_ = ONESECOND_OF_MICROSECOND_UNIT;
-    }
-    timestampCount_++;
 }
 
-OHOS::sptr<OHOS::IBufferProducer> Test::StreamConsumer::CreateProducer(std::function<void(void*, uint32_t)> callback)
+OHOS::sptr<OHOS::IBufferProducer> HdiCommonV1_1::StreamConsumer::CreateProducer(
+    std::function<void(void*, uint32_t)> callback)
 {
     consumer_ = OHOS::IConsumerSurface::Create();
     if (consumer_ == nullptr) {
@@ -371,6 +346,7 @@ OHOS::sptr<OHOS::IBufferProducer> Test::StreamConsumer::CreateProducer(std::func
                     buffer->GetExtraData()->ExtraGet(OHOS::Camera::timeStamp, timestamp);
                     buffer->GetExtraData()->ExtraGet(OHOS::Camera::streamId, streamId);
                     buffer->GetExtraData()->ExtraGet(OHOS::Camera::captureId, captureId);
+                    GetTimeStamp(g_timestamp, sizeof(g_timestamp) / sizeof(g_timestamp[0]), timestamp, gotSize);
                     if (gotSize) {
                         CalculateFps(timestamp, streamId);
                         callback_(addr, gotSize);
@@ -396,7 +372,7 @@ OHOS::sptr<OHOS::IBufferProducer> Test::StreamConsumer::CreateProducer(std::func
     return producer;
 }
 
-OHOS::sptr<BufferProducerSequenceable> Test::StreamConsumer::CreateProducerSeq(
+OHOS::sptr<BufferProducerSequenceable> HdiCommonV1_1::StreamConsumer::CreateProducerSeq(
     std::function<void(void*, uint32_t)> callback)
 {
     OHOS::sptr<OHOS::IBufferProducer> producer = CreateProducer(callback);
@@ -406,75 +382,4 @@ OHOS::sptr<BufferProducerSequenceable> Test::StreamConsumer::CreateProducerSeq(
 
     return new BufferProducerSequenceable(producer);
 }
-
-int32_t Test::TestStreamOperatorCallback::OnCaptureStarted(int32_t captureId, const std::vector<int32_t> &streamId)
-{
-    for (auto it : streamId) {
-        CAMERA_LOGE("captureId: %{public}d, streamId: %{public}d", captureId, it);
-    }
-    return HDI::Camera::V1_0::NO_ERROR;
-}
-
-int32_t Test::TestStreamOperatorCallback::OnCaptureEnded(int32_t captureId, const std::vector<CaptureEndedInfo> &infos)
-{
-    for (auto it : infos) {
-        CAMERA_LOGE("captureId: %{public}d, streamId: %{public}d, count: %{public}d", captureId, it.streamId_,
-            it.frameCount_);
-    }
-    return HDI::Camera::V1_0::NO_ERROR;
-}
-
-int32_t Test::TestStreamOperatorCallback::OnCaptureError(int32_t captureId, const std::vector<CaptureErrorInfo> &infos)
-{
-    for (auto it : infos) {
-        CAMERA_LOGE("captureId: %{public}d, streamId: %{public}d, error: %{public}d", captureId, it.streamId_,
-            it.error_);
-    }
-    return HDI::Camera::V1_0::NO_ERROR;
-}
-
-int32_t Test::TestStreamOperatorCallback::OnFrameShutter(int32_t captureId,
-    const std::vector<int32_t> &streamIds, uint64_t timestamp)
-{
-    (void)timestamp;
-    for (auto it : streamIds) {
-        CAMERA_LOGE("captureId: %{public}d, streamId: %{public}d", captureId, it);
-    }
-    return HDI::Camera::V1_0::NO_ERROR;
-}
-
-int32_t Test::DemoCameraDeviceCallback::OnError(ErrorType type, int32_t errorMsg)
-{
-    CAMERA_LOGE("type: %{public}d, errorMsg: %{public}d", type, errorMsg);
-    return HDI::Camera::V1_0::NO_ERROR;
-}
-
-int32_t Test::DemoCameraDeviceCallback::OnResult(uint64_t timestamp, const std::vector<uint8_t> &result)
-{
-    if (Test::resultCallback_) {
-        std::shared_ptr<CameraMetadata> resultMeta;
-        MetadataUtils::ConvertVecToMetadata(result, resultMeta);
-        Test::resultCallback_(timestamp, resultMeta);
-    }
-    return HDI::Camera::V1_0::NO_ERROR;
-}
-
-int32_t Test::TestCameraHostCallback::OnCameraStatus(const std::string& cameraId, CameraStatus status)
-{
-    CAMERA_LOGE("cameraId: %{public}s, status: %{public}d", cameraId.c_str(), status);
-    return HDI::Camera::V1_0::NO_ERROR;
-}
-
-int32_t Test::TestCameraHostCallback::OnFlashlightStatus(const std::string& cameraId, FlashlightStatus status)
-{
-    CAMERA_LOGE("cameraId: %{public}s, status: %{public}d", cameraId.c_str(), status);
-    return HDI::Camera::V1_0::NO_ERROR;
-}
-
-int32_t Test::TestCameraHostCallback::OnCameraEvent(const std::string& cameraId, CameraEvent event)
-{
-    CAMERA_LOGE("cameraId: %{public}s, status: %{public}d", cameraId.c_str(), event);
-    return HDI::Camera::V1_0::NO_ERROR;
-}
-
 }

@@ -20,7 +20,7 @@ import("//build/test.gni")
 import("$base_root/drivers/peripheral/camera/camera.gni")
 module_output_path = "hats/camera"
 
-ohos_moduletest_suite("HatsHdfCamerabenchmarkTestV0") {
+ohos_moduletest_suite("HatsHdfCamerabenchmarkv0Test") {
   testonly = true
   module_out_path = module_output_path
   sources = [
@@ -30,6 +30,7 @@ ohos_moduletest_suite("HatsHdfCamerabenchmarkTestV0") {
   include_dirs = [
     # common includes
     "./include",
+    "$base_root/drivers/peripheral/camera/test/common/v1_0/include/",
     "$base_root/drivers/peripheral/camera/test/hdi/v1_0/include/",
     "$base_root/system/core/include/cutils",
     "//third_party/googletest/googletest/include",

@@ -73,7 +73,7 @@ HWTEST_F(SendfileApiTest, SendfileSuccess_0001, Function | MediumTest | Level1)
     if (sizeof(long) == 8) {
         EXPECT_EQ(size, -1);
     } else {
-        EXPECT_EQ(size, 0); 
+        EXPECT_EQ(size, 0);
     }
     unlink(FIRST_FILE);
     unlink(SEC_FILE);

@@ -68,9 +68,9 @@ typedef struct {
  */
 HWTEST_F(ShmatApiTest, ShmdtAttachShmSuccess_0001, Function | MediumTest | Level1)
 {
-    key_t key = ftok("shmfile", 65);
+    key_t key = 1234;
     int shmid = shmget(key, MEM_SIZE, 0644 | IPC_CREAT | IPC_EXCL);
-    EXPECT_TRUE(shmid >= 0);
+    EXPECT_TRUE(shmid != -1);
 
     void* addr = nullptr;
     addr = shmat(shmid, nullptr, 0);

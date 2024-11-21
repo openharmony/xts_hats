@@ -62,10 +62,10 @@ const int MEM_SIZE = 1024;
  */
 HWTEST_F(ShmctlApiTest, ShmctlCmdTestSuccess_0001, Function | MediumTest | Level1)
 {
-    key_t key = ftok("shmfile", 66);
+    key_t key = 1234;
 
     int shmid = shmget(key, MEM_SIZE, 0666 | IPC_CREAT);
-    EXPECT_TRUE(shmid != 0);
+    EXPECT_TRUE(shmid != -1);
 
     struct shmid_ds ds;
     int ret = shmctl(shmid, IPC_STAT, &ds);
@@ -88,10 +88,10 @@ HWTEST_F(ShmctlApiTest, ShmctlCmdTestSuccess_0001, Function | MediumTest | Level
  */
 HWTEST_F(ShmctlApiTest, ShmctlInvalidCommandFailed_0002, Function | MediumTest | Level2)
 {
-    key_t key = ftok("shmfile", 66);
+    key_t key = 1234;
 
     int shmid = shmget(key, MEM_SIZE, 0666 | IPC_CREAT);
-    EXPECT_TRUE(shmid != 0);
+    EXPECT_TRUE(shmid != -1);
 
     errno = 0;
     int ret = shmctl(shmid, 999, nullptr);
@@ -112,7 +112,7 @@ HWTEST_F(ShmctlApiTest, ShmctlInvalidCommandFailed_0002, Function | MediumTest |
  */
 HWTEST_F(ShmctlApiTest, ShmctlInvalidIdFailed_0003, Function | MediumTest | Level2)
 {
-    key_t key = ftok("shmfile", 66);
+    key_t key = 1234;
 
     int shmid = shmget(key, MEM_SIZE, 0666 | IPC_CREAT);
     EXPECT_TRUE(shmid != 0);

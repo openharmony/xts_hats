@@ -471,17 +471,6 @@ void VideoByColorSpaces(std::vector<int32_t> videoColorSpaces, std::vector<int32
 {
     cameraTest->imageDataSaveSwitch = SWITCH_ON;
 
-    //updateSettings
-    std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
-    uint8_t videoStabiliMode = OHOS_CAMERA_VIDEO_STABILIZATION_AUTO;
-    meta->addEntry(OHOS_CONTROL_VIDEO_STABILIZATION_MODE, &videoStabiliMode, DATA_COUNT);
-    const int32_t deviceStreamId = cameraTest->streamIdPreview;
-    meta->addEntry(OHOS_CAMERA_STREAM_ID, &deviceStreamId, DATA_COUNT);
-    std::vector<uint8_t> setting;
-    MetadataUtils::ConvertMetadataToVec(meta, setting);
-    cameraTest->rc = (CamRetCode)cameraTest->cameraDevice->UpdateSettings(setting);
-    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
-
     if (videoColorSpaces.empty() || previewColorSpaces.empty()) {
         printf("ColorSpaces empty is null\n");
         return;
@@ -511,6 +500,17 @@ void VideoByColorSpaces(std::vector<int32_t> videoColorSpaces, std::vector<int32
             cameraTest->rc = cameraTest->streamOperator_V1_1->CommitStreams(
                 static_cast<OHOS::HDI::Camera::V1_0::OperationMode>(OHOS::HDI::Camera::V1_1::OperationMode_V1_1::VIDEO),
                 cameraTest->abilityVec);
+            EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+
+            //updateSettings
+            std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+            uint8_t videoStabiliMode = OHOS_CAMERA_VIDEO_STABILIZATION_AUTO;
+            meta->addEntry(OHOS_CONTROL_VIDEO_STABILIZATION_MODE, &videoStabiliMode, DATA_COUNT);
+            const int32_t deviceStreamId = cameraTest->streamIdPreview;
+            meta->addEntry(OHOS_CAMERA_STREAM_ID, &deviceStreamId, DATA_COUNT);
+            std::vector<uint8_t> setting;
+            MetadataUtils::ConvertMetadataToVec(meta, setting);
+            cameraTest->rc = (CamRetCode)cameraTest->cameraDevice->UpdateSettings(setting);
             EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
             sleep(UT_SECOND_TIMES);
 

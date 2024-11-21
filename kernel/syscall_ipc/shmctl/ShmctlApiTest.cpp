@@ -115,7 +115,7 @@ HWTEST_F(ShmctlApiTest, ShmctlInvalidIdFailed_0003, Function | MediumTest | Leve
     key_t key = 1234;
 
     int shmid = shmget(key, MEM_SIZE, 0666 | IPC_CREAT);
-    EXPECT_TRUE(shmid != 0);
+    EXPECT_TRUE(shmid != -1);
 
     errno = 0;
     int ret = shmctl(-1, IPC_STAT, nullptr);

@@ -2,7 +2,7 @@
     "kits": [
         {
             "push": [
-                "HatsHdfCamerabenchmarkTestV1->/data/local/tmp/HatsHdfCamerabenchmarkTestV1"
+                "HatsHdfCamerabenchmarkv1Test->/data/local/tmp/HatsHdfCamerabenchmarkv1Test"
             ],
             "type": "PushKit"
         }
@@ -10,9 +10,9 @@
     "driver": {
         "native-test-timeout": "120000",
         "type": "CppTest",
-        "module-name": "HatsHdfCamerabenchmarkTestV1",
+        "module-name": "HatsHdfCamerabenchmarkv1Test",
         "runtime-hint": "1s",
         "native-test-device-path": "/data/local/tmp"
     },
-    "description": "Configuration for HatsHdfCamerabenchmarkTestV1 Tests"
+    "description": "Configuration for HatsHdfCamerabenchmarkv1Test Tests"
 }

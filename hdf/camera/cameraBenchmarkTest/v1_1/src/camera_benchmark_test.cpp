@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -25,7 +25,7 @@ constexpr int32_t REPETITION_FREQUENCY = 3;
 
 void CameraBenchmarkTest::SetUp(const ::benchmark::State &state)
 {
-    cameraTest = std::make_shared<OHOS::Camera::Test>();
+    cameraTest = std::make_shared<OHOS::Camera::HdiCommonV1_1>();
     cameraTest->Init();
 }
 
@@ -68,7 +68,7 @@ BENCHMARK_F(CameraBenchmarkTest, SUB_GetStreamOperator_V1_1_benchmark_002)(
     benchmark::State &st)
 {
     cameraTest->Open(DEVICE_0);
-    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::HdiCommon::TestStreamOperatorCallback();
     for (auto _ : st) {
         cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,
             cameraTest->streamOperator_V1_1);
@@ -88,7 +88,7 @@ BENCHMARK_F(CameraBenchmarkTest, SUB_GetDefaultSettings_benchmark_003)(
     benchmark::State &st)
 {
     cameraTest->Open(DEVICE_0);
-    cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
+    cameraTest->streamOperatorCallback = new OHOS::Camera::HdiCommon::TestStreamOperatorCallback();
     for (auto _ : st) {
         cameraTest->rc = cameraTest->cameraDeviceV1_1->GetDefaultSettings(cameraTest->abilityVec);
     }

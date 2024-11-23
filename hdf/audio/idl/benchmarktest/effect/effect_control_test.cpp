@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -109,7 +109,7 @@ BENCHMARK_REGISTER_F(EffectControlBenchmarkTest, HdfAudioEffectProcess)->
  * @tc.name: HdfAudioSendCommandInit
  * @tc.desc: Verify the EffectControlEffectProcess function when cmdId is AUDIO_EFFECT_COMMAND_INIT_CONTOLLER.
  */
-BENCHMARK_F(EffectControlBenchmarkTest, HdfAudioSendCommandInit)(benchmark::State &state)
+BENCHMARK_F(EffectControlBenchmarkTest, HdfAudioSendCommand)(benchmark::State &state)
 {
     int32_t ret;
     int8_t input[SEND_COMMAND_LEN] = {0};
@@ -121,13 +121,13 @@ BENCHMARK_F(EffectControlBenchmarkTest, HdfAudioSendCommandInit)(benchmark::Stat
     }
     EXPECT_EQ(ret, HDF_SUCCESS);
 }
-BENCHMARK_REGISTER_F(EffectControlBenchmarkTest, HdfAudioSendCommandInit)->
+BENCHMARK_REGISTER_F(EffectControlBenchmarkTest, HdfAudioSendCommand)->
     Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
 /**
  * @tc.name: HdfAudioGetDescriptor
  * @tc.desc: Verify the EffectGetOwnDescriptor function.
  */
-BENCHMARK_F(EffectControlBenchmarkTest, HdfAudioGetDescriptor)(benchmark::State &state)
+BENCHMARK_F(EffectControlBenchmarkTest, HdfAudioGetEffectDescriptor)(benchmark::State &state)
 {
     int32_t ret;
     struct EffectControllerDescriptor desc;
@@ -137,6 +137,25 @@ BENCHMARK_F(EffectControlBenchmarkTest, HdfAudioGetDescriptor)(benchmark::State 
     ASSERT_EQ(ret, HDF_SUCCESS);
     EffectControllerReleaseDesc(&desc);
 }
-BENCHMARK_REGISTER_F(EffectControlBenchmarkTest, HdfAudioGetDescriptor)->
+BENCHMARK_REGISTER_F(EffectControlBenchmarkTest, HdfAudioGetEffectDescriptor)->
+    Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
+
+/**
+ * @tc.name: HdfAudioEffectReverse
+ * @tc.desc: Verify the EffectReverse function.
+ */
+BENCHMARK_F(AudioEffectControlBenchmarkTest, EffectReverse)(benchmark::State &state)
+{
+    ASSERT_NE(controller_, nullptr);
+    int32_t ret;
+    struct AudioEffectBuffer input = {0};
+    struct AudioEffectBuffer output = {0};
+
+    for (auto _ : state) {
+        ret = controller_->EffectReverse(controller_, &input, &output);
+        EXPECT_EQ(HDF_SUCCESS, ret);
+    }
+}
+BENCHMARK_REGISTER_F(AudioEffectControlBenchmarkTest, EffectReverse)->
     Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
 } // end of namespace

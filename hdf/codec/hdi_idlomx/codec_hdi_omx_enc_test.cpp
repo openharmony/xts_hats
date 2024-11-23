@@ -1028,7 +1028,7 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseBufferAndFreeBufferTest003, TestSize.
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_5500
 * @tc.name   : HdfCodecHdiUseBufferAndFreeBufferTest004
-* @tc.desc   : Verify Use buffer on input index and omxbuffer type is 
+* @tc.desc   : Verify Use buffer on input index and omxbuffer type is
                CODEC_BUFFER_TYPE_HANDLE
   @tc.type: FUNC
 */
@@ -1078,7 +1078,7 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseBufferAndFreeBufferTest005, TestSize.
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_5700
 * @tc.name   : HdfCodecHdiUseBufferAndFreeBufferTest006
-* @tc.desc   : Verify Use buffer on output index and omxbuffer type is 
+* @tc.desc   : Verify Use buffer on output index and omxbuffer type is
                CODEC_BUFFER_TYPE_DYNAMIC_HANDLE
   @tc.type: FUNC
 */
@@ -1102,7 +1102,7 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseBufferAndFreeBufferTest006, TestSize.
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_5800
 * @tc.name   : HdfCodecHdiEmptyAndFillBufferTest002
-* @tc.desc   : Verify the filling and clearing process of encoder using buffer 
+* @tc.desc   : Verify the filling and clearing process of encoder using buffer
   @tc.type: FUNC
 */
 HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiEmptyAndFillBufferTest002, TestSize.Level1)
@@ -1151,7 +1151,7 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiEmptyAndFillBufferTest002, TestSize.Leve
 /**
 * @tc.number : SUB_Driver_Codec_idlomx_5900
 * @tc.name   : HdfCodecHdiEmptyAndFillBufferTest003
-* @tc.desc   : Verify the filling and clearing process of encoder allocate buffer 
+* @tc.desc   : Verify the filling and clearing process of encoder allocate buffer
   @tc.type: FUNC
 */
 HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiEmptyAndFillBufferTest003, TestSize.Level1)

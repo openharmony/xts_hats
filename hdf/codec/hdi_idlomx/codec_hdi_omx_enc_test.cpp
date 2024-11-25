@@ -882,4 +882,319 @@ HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseBufferTest004, TestSize.Level1)
     auto ret = g_component->UseBuffer(outputIndex, omxBuffer, outBuffer);
     ASSERT_NE(ret, HDF_SUCCESS);
 }
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_4800
+* @tc.name   : HdfCodecHdiAllocateBufferTest001
+* @tc.desc   : Verify the function is AllocateBuffer when portindex is inputIndex
+               and omxBuffer type is CODEC_BUFFER_TYPE_INVALID.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiAllocateBufferTest001, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    struct OmxCodecBuffer allocBuffer;
+    func_->InitOmxCodecBuffer(allocBuffer, CODEC_BUFFER_TYPE_INVALID);
+    struct OmxCodecBuffer outBuffer;
+    auto ret = g_component->AllocateBuffer(inputIndex, allocBuffer, outBuffer);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_4900
+* @tc.name   : HdfCodecHdiAllocateBufferTest002
+* @tc.desc   : Verify the function is AllocateBuffer when portindex is inputIndex
+               and omxBuffer type is CODEC_BUFFER_TYPE_VIRTUAL_ADDR.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiAllocateBufferTest002, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    struct OmxCodecBuffer allocBuffer;
+    func_->InitOmxCodecBuffer(allocBuffer, CODEC_BUFFER_TYPE_VIRTUAL_ADDR);
+    struct OmxCodecBuffer outBuffer;
+    auto ret = g_component->AllocateBuffer(inputIndex, allocBuffer, outBuffer);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_5000
+* @tc.name   : HdfCodecHdiAllocateBufferTest003
+* @tc.desc   : Verify the function is AllocateBuffer when portindex is outputIndex
+               and omxBuffer type is CODEC_BUFFER_TYPE_INVALID.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiAllocateBufferTest003, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    struct OmxCodecBuffer allocBuffer;
+    func_->InitOmxCodecBuffer(allocBuffer, CODEC_BUFFER_TYPE_INVALID);
+    struct OmxCodecBuffer outBuffer;
+    auto ret = g_component->AllocateBuffer(outputIndex, allocBuffer, outBuffer);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_5100
+* @tc.name   : HdfCodecHdiAllocateBufferTest004
+* @tc.desc   : Verify the function is AllocateBuffer when portindex is outputIndex
+               and omxBuffer type is CODEC_BUFFER_TYPE_VIRTUAL_ADDR.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiAllocateBufferTest004, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    struct OmxCodecBuffer allocBuffer;
+    func_->InitOmxCodecBuffer(allocBuffer, CODEC_BUFFER_TYPE_VIRTUAL_ADDR);
+    struct OmxCodecBuffer outBuffer;
+    auto ret = g_component->AllocateBuffer(outputIndex, allocBuffer, outBuffer);
+    ASSERT_NE(ret, HDF_SUCCESS);
+}
+
+#ifdef SUPPORT_OMX_EXTEND
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_5200
+* @tc.name   : HdfCodecHdiAllocateBufferAndFreeBufferTest001
+* @tc.desc   : Verify the function is AllocateBuffer when portindex is inputIndex
+               and omxBuffer type is CODEC_BUFFER_TYPE_AVSHARE_MEM_FD.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiAllocateBufferAndFreeBufferTest001, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    auto err = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_IDLE, cmdData);
+    ASSERT_EQ(err, HDF_SUCCESS);
+
+    struct OmxCodecBuffer allocBuffer;
+    func_->InitOmxCodecBuffer(allocBuffer, CODEC_BUFFER_TYPE_AVSHARE_MEM_FD);
+    struct OmxCodecBuffer outBuffer;
+    err = g_component->AllocateBuffer(inputIndex, allocBuffer, outBuffer);
+    ASSERT_EQ(err, HDF_SUCCESS);
+
+    err = g_component->FreeBuffer(inputIndex, outBuffer);
+    ASSERT_EQ(err, HDF_SUCCESS);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_5300
+* @tc.name   : HdfCodecHdiAllocateBufferTest006
+* @tc.desc   : Verify the function is AllocateBuffer when portindex is outputIndex
+               and allocBuffer type is READ_WRITE_TYPE.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiAllocateBufferTest006, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    auto err = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_IDLE, cmdData);
+    ASSERT_EQ(err, HDF_SUCCESS);
+
+    struct OmxCodecBuffer allocBuffer;
+    func_->InitOmxCodecBuffer(allocBuffer, CODEC_BUFFER_TYPE_AVSHARE_MEM_FD);
+    allocBuffer.type = READ_WRITE_TYPE;
+    struct OmxCodecBuffer outBuffer;
+    err = g_component->AllocateBuffer(outputIndex, allocBuffer, outBuffer);
+    ASSERT_EQ(err, HDF_SUCCESS);
+
+    err = g_component->FreeBuffer(outputIndex, outBuffer);
+    ASSERT_EQ(err, HDF_SUCCESS);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_5400
+* @tc.name   : HdfCodecHdiUseBufferAndFreeBufferTest003
+* @tc.desc   : Verify Use buffer on input index
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseBufferAndFreeBufferTest003, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_IDLE, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+
+    OMX_PARAM_PORTDEFINITIONTYPE param;
+    ret = func_->GetPortParameter(g_component, PortIndex::INDEX_INPUT, param);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+
+    auto err = func_->UseBufferOnPort(g_component, PortIndex::INDEX_INPUT, param.nBufferCountActual,
+        param.nBufferSize);
+    ASSERT_TRUE(err);
+    err = func_->FreeBufferOnPort(g_component, PortIndex::INDEX_INPUT);
+    ASSERT_TRUE(err);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_5500
+* @tc.name   : HdfCodecHdiUseBufferAndFreeBufferTest004
+* @tc.desc   : Verify Use buffer on input index and omxbuffer type is
+               CODEC_BUFFER_TYPE_HANDLE
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseBufferAndFreeBufferTest004, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_IDLE, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+
+    std::shared_ptr<OmxCodecBuffer> omxBuffer = std::make_shared<OmxCodecBuffer>();
+    func_->InitOmxCodecBuffer(*omxBuffer.get(), CODEC_BUFFER_TYPE_HANDLE);
+    auto err = func_->FillCodecBufferWithBufferHandle(omxBuffer);
+    ASSERT_TRUE(err);
+
+    OmxCodecBuffer outBuffer;
+    ret = g_component->UseBuffer(inputIndex, *omxBuffer.get(), outBuffer);
+    omxBuffer->bufferId = outBuffer.bufferId;
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    ret = g_component->FreeBuffer(inputIndex, outBuffer);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_5600
+* @tc.name   : HdfCodecHdiUseBufferAndFreeBufferTest005
+* @tc.desc   : Verify Use buffer on output index
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseBufferAndFreeBufferTest005, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_IDLE, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+
+    OMX_PARAM_PORTDEFINITIONTYPE param;
+    func_->GetPortParameter(g_component, PortIndex::INDEX_OUTPUT, param);
+
+    auto err = func_->UseBufferOnPort(g_component, PortIndex::INDEX_OUTPUT, param.nBufferCountActual,
+        param.nBufferSize);
+    ASSERT_TRUE(err);
+    err = func_->FreeBufferOnPort(g_component, PortIndex::INDEX_OUTPUT);
+    ASSERT_TRUE(err);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_5700
+* @tc.name   : HdfCodecHdiUseBufferAndFreeBufferTest006
+* @tc.desc   : Verify Use buffer on output index and omxbuffer type is
+               CODEC_BUFFER_TYPE_DYNAMIC_HANDLE
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiUseBufferAndFreeBufferTest006, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_IDLE, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    std::shared_ptr<OmxCodecBuffer> omxBuffer = std::make_shared<OmxCodecBuffer>();
+    func_->InitOmxCodecBuffer(*omxBuffer.get(), CODEC_BUFFER_TYPE_DYNAMIC_HANDLE);
+
+    OmxCodecBuffer outBuffer;
+    ret = g_component->UseBuffer(outputIndex, *omxBuffer.get(), outBuffer);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    ret = g_component->FreeBuffer(outputIndex, outBuffer);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+}
+#endif
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_5800
+* @tc.name   : HdfCodecHdiEmptyAndFillBufferTest002
+* @tc.desc   : Verify the filling and clearing process of encoder using buffer
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiEmptyAndFillBufferTest002, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_IDLE, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+
+    OMX_PARAM_PORTDEFINITIONTYPE param;
+    ret = func_->GetPortParameter(g_component, PortIndex::INDEX_INPUT, param);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    auto err = func_->UseBufferOnPort(g_component, PortIndex::INDEX_INPUT, param.nBufferCountActual,
+        param.nBufferSize);
+    ASSERT_TRUE(err);
+
+    ret = func_->GetPortParameter(g_component, PortIndex::INDEX_OUTPUT, param);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    err = func_->UseBufferOnPort(g_component, PortIndex::INDEX_OUTPUT, param.nBufferCountActual, param.nBufferSize);
+    ASSERT_TRUE(err);
+
+    ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_EXECUTING, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    err = func_->WaitState(g_component, CODEC_STATE_EXECUTING);
+    ASSERT_TRUE(err);
+    err = func_->FillAndEmptyAllBuffer(g_component, CODEC_BUFFER_TYPE_AVSHARE_MEM_FD);
+    ASSERT_TRUE(err);
+
+    ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_IDLE, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    err = func_->WaitState(g_component, CODEC_STATE_IDLE);
+    ASSERT_TRUE(err);
+    ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_LOADED, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    err = func_->WaitState(g_component, CODEC_STATE_IDLE);
+    ASSERT_TRUE(err);
+
+    err = func_->FreeBufferOnPort(g_component, PortIndex::INDEX_INPUT);
+    ASSERT_TRUE(err);
+    err = func_->FreeBufferOnPort(g_component, PortIndex::INDEX_OUTPUT);
+    ASSERT_TRUE(err);
+    err = func_->WaitState(g_component, CODEC_STATE_LOADED);
+    ASSERT_TRUE(err);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_5900
+* @tc.name   : HdfCodecHdiEmptyAndFillBufferTest003
+* @tc.desc   : Verify the filling and clearing process of encoder allocate buffer
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiOmxEncTest, HdfCodecHdiEmptyAndFillBufferTest003, TestSize.Level1)
+{
+    ASSERT_TRUE(g_component != nullptr);
+    std::vector<int8_t> cmdData;
+    auto ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_IDLE, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+
+    OMX_PARAM_PORTDEFINITIONTYPE param;
+    ret = func_->GetPortParameter(g_component, PortIndex::INDEX_INPUT, param);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    auto err = func_->AllocateBufferOnPort(g_component, PortIndex::INDEX_INPUT, param.nBufferCountActual,
+        param.nBufferSize);
+    ASSERT_TRUE(err);
+
+    ret = func_->GetPortParameter(g_component, PortIndex::INDEX_OUTPUT, param);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    err = func_->AllocateBufferOnPort(g_component, PortIndex::INDEX_OUTPUT, param.nBufferCountActual,
+        param.nBufferSize);
+    ASSERT_TRUE(err);
+
+    ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_EXECUTING, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    err = func_->WaitState(g_component, CODEC_STATE_EXECUTING);
+    ASSERT_TRUE(err);
+    err = func_->FillAndEmptyAllBuffer(g_component, CODEC_BUFFER_TYPE_AVSHARE_MEM_FD);
+    ASSERT_TRUE(err);
+
+    ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_IDLE, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    err = func_->WaitState(g_component, CODEC_STATE_IDLE);
+    ASSERT_TRUE(err);
+    ret = g_component->SendCommand(CODEC_COMMAND_STATE_SET, CODEC_STATE_LOADED, cmdData);
+    ASSERT_EQ(ret, HDF_SUCCESS);
+    err = func_->WaitState(g_component, CODEC_STATE_IDLE);
+    ASSERT_TRUE(err);
+
+    err = func_->FreeBufferOnPort(g_component, PortIndex::INDEX_INPUT);
+    ASSERT_TRUE(err);
+    err = func_->FreeBufferOnPort(g_component, PortIndex::INDEX_OUTPUT);
+    ASSERT_TRUE(err);
+    err = func_->WaitState(g_component, CODEC_STATE_LOADED);
+    ASSERT_TRUE(err);
+}
 }  // namespace

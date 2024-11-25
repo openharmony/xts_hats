@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -142,7 +142,7 @@ BENCHMARK_F(EffectModelBenchmarkTest, HdfAudioGetEffectDescriptor)(benchmark::St
     ASSERT_EQ(ret, HDF_SUCCESS);
     EffectControllerReleaseDesc(&desc);
 }
-BENCHMARK_REGISTER_F(EffectModelBenchmarkTest, HdfAudioCreateDestroyController)->
+BENCHMARK_REGISTER_F(EffectModelBenchmarkTest, HdfAudioGetEffectDescriptor)->
     Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
 } // end of namespace
 BENCHMARK_MAIN();

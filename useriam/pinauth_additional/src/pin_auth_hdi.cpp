@@ -20,8 +20,8 @@ using namespace std;
 using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
 using namespace OHOS::HDI::PinAuth;
-using namespace OHOS::HDI::PinAuth::V2_0;
-using Property = OHOS::HDI::PinAuth::V2_0::Property;
+using namespace OHOS::HDI::PinAuth::v2_1;
+using Property = OHOS::HDI::PinAuth::v2_1::Property;
 
 static AllInOneImpl g_executorImpl(make_shared<OHOS::UserIam::PinAuth::PinAuth>());
 static OHOS::Parcel parcel;
@@ -547,9 +547,9 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestGetProperty001, Function |
     ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
     cout << "ret is " << ret << endl;
     EXPECT_NE(ret, 0);
-    propertyTypes.push_back(OHOS::HDI::PinAuth::V2_0::AUTH_SUB_TYPE);
-    propertyTypes.push_back(OHOS::HDI::PinAuth::V2_0::LOCKOUT_DURATION);
-    propertyTypes.push_back(OHOS::HDI::PinAuth::V2_0::REMAIN_ATTEMPTS);
+    propertyTypes.push_back(OHOS::HDI::PinAuth::v2_1::AUTH_SUB_TYPE);
+    propertyTypes.push_back(OHOS::HDI::PinAuth::v2_1::LOCKOUT_DURATION);
+    propertyTypes.push_back(OHOS::HDI::PinAuth::v2_1::REMAIN_ATTEMPTS);
     ret = g_executorImpl.GetProperty(templateIdList, propertyTypes, property);
     cout << "ret is " << ret << endl;
     EXPECT_NE(ret, 0);
@@ -565,7 +565,7 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestGetProperty006, Function |
     std::vector<uint64_t> templateIdList;
     FillTestUint64Vector(parcel, templateIdList);
     std::vector<int32_t> propertyTypes;
-    propertyTypes.push_back(OHOS::HDI::PinAuth::V2_0::AUTH_SUB_TYPE);
+    propertyTypes.push_back(OHOS::HDI::PinAuth::v2_1::AUTH_SUB_TYPE);
     Property property;
 
     int32_t ret = 0;

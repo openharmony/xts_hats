@@ -565,7 +565,7 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestGetProperty006, Function |
     std::vector<uint64_t> templateIdList;
     FillTestUint64Vector(parcel, templateIdList);
     std::vector<int32_t> propertyTypes;
-    propertyTypes.push_back(OHOS::HDI::PinAuth::v2_1::AUTH_SUB_TYPE);
+    propertyTypes.push_back(OHOS::HDI::PinAuth::V2_1::AUTH_SUB_TYPE);
     Property property;
 
     int32_t ret = 0;

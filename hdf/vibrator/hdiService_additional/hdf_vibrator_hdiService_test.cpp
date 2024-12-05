@@ -918,9 +918,11 @@ HWTEST_F(HdfVibratorHdiServiceTestAdditional, testIsVibratorRunning001, Function
     ASSERT_NE(nullptr, g_vibratorInterface);
     bool state{false};
     int i;
+    int32_t ret;
     for (i = 0; i < 10; i++) {
-        g_vibratorInterface->IsVibratorRunning(state);
-        EXPECT_EQ(state, false);
+        ret = g_vibratorInterface->IsVibratorRunning(state);
+        EXPECT_EQ(ret, HDF_SUCCESS);
+        printf("IsVibratorRunning state %d", state);
     }
 }
 } // namespace

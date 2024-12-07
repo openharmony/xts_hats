@@ -671,3 +671,161 @@ HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_HighQuality_0100, TestSize.Level1)
     }
     cameraTest->PrintAllTagDataU8(cameraTest->ability, OHOS_ABILITY_HIGH_QUALITY_SUPPORT);
 }
+
+/**
+ * @tc.name: SUB_Driver_Camera_Tripod_0100
+ * @tc.desc: OHOS_ABILITY_TRIPOD_DETECTION
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_Tripod_0100, TestSize.Level1)
+{
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_TRIPOD_DETECTION, &entry);
+    printf("OHOS_ABILITY_TRIPOD_DETECTION value count %d\n", entry.count);
+    if (ret == HDI::Camera::V1_0::NO_ERROR && entry.data.u8 != nullptr && entry.count > 0) {
+        std::stringstream ss;
+        for (size_t i = 0; i < entry.count; i++) {
+            ss << static_cast<int>(entry.data.u8[i]) << " ";
+            if (i == entry.count - 1) {
+                printf("OHOS_ABILITY_TRIPOD_DETECTION: %s\n", ss.str().c_str());
+                ss.clear();
+            }
+        }
+    }
+}
+
+/**
+ * @tc.name:SUB_Driver_Camera_conflict_0100
+ * @tc.desc:OHOS_ABILITY_AVAILABLE_PROFILE_LEVEL
+ * @tc.size:MediumTest
+ * @tc.type:Function
+*/
+HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_conflict_0100, TestSize.Level1)
+{
+    EXPECT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_AVAILABLE_PROFILE_LEVEL, &entry);
+    if (cameraTest->rc != HDI::Camera::V1_0::NO_ERROR) {
+        CAMERA_LOGI("OHOS_ABILITY_AVAILABLE_PROFILE_LEVEL is not support");
+        return;
+    }
+    CAMERA_LOGI("print tag<OHOS_ABILITY_AVAILABLE_PROFILE_LEVEL> value start.");
+    constexpr size_t step = 20; // print step
+    std::stringstream ss;
+    if (entry.data.i32 != nullptr && entry.count > 0) {
+        for (size_t i = 0; i < entry.count; i++) {
+            ss << entry.data.i32[i] << " ";
+            if ((i != 0) && (i % step == 0 || i == entry.count - 1)) {
+                printf("OHOS_ABILITY_AVAILABLE_PROFILE_LEVEL: %s\n", ss.str().c_str());
+                ss.clear();
+                ss.str("");
+            }
+        }
+    } else {
+        printf("get tag<OHOS_ABILITY_AVAILABLE_PROFILE_LEVEL> failed.\n");
+        CAMERA_LOGE("get tag<OHOS_ABILITY_AVAILABLE_PROFILE_LEVEL> failed.");
+    }
+    CAMERA_LOGI("print tag<OHOS_ABILITY_AVAILABLE_PROFILE_LEVEL> value end.");
+}
+
+/**
+ * @tc.name:SUB_Driver_Camera_conflict_0200
+ * @tc.desc:OHOS_ABILITY_AVAILABLE_CONFIGURATIONS
+ * @tc.size:MediumTest
+ * @tc.type:Function
+*/
+HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_conflict_0200, TestSize.Level1)
+{
+    EXPECT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_AVAILABLE_CONFIGURATIONS, &entry);
+    if (cameraTest->rc != HDI::Camera::V1_0::NO_ERROR) {
+        CAMERA_LOGI("OHOS_ABILITY_AVAILABLE_CONFIGURATIONS is not support");
+        return;
+    }
+    CAMERA_LOGI("print tag<OHOS_ABILITY_AVAILABLE_CONFIGURATIONS> value start.");
+    constexpr size_t step = 20; // print step
+    std::stringstream ss;
+    if (entry.data.i32 != nullptr && entry.count > 0) {
+        for (size_t i = 0; i < entry.count; i++) {
+            ss << entry.data.i32[i] << " ";
+            if ((i != 0) && (i % step == 0 || i == entry.count - 1)) {
+                printf("OHOS_ABILITY_AVAILABLE_CONFIGURATIONS: %s\n", ss.str().c_str());
+                ss.clear();
+                ss.str("");
+            }
+        }
+    } else {
+        printf("get tag<OHOS_ABILITY_AVAILABLE_CONFIGURATIONS> failed.\n");
+        CAMERA_LOGE("get tag<OHOS_ABILITY_AVAILABLE_CONFIGURATIONS> failed.");
+    }
+    CAMERA_LOGI("print tag<OHOS_ABILITY_AVAILABLE_CONFIGURATIONS> value end.");
+}
+
+/**
+ * @tc.name:SUB_Driver_Camera_conflict_0300
+ * @tc.desc:OHOS_ABILITY_CONFLICT_CONFIGURATIONS
+ * @tc.size:MediumTest
+ * @tc.type:Function
+*/
+HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_conflict_0300, TestSize.Level1)
+{
+    EXPECT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_CONFLICT_CONFIGURATIONS, &entry);
+    if (cameraTest->rc != HDI::Camera::V1_0::NO_ERROR) {
+        CAMERA_LOGI("OHOS_ABILITY_CONFLICT_CONFIGURATIONS is not support");
+        return;
+    }
+    CAMERA_LOGI("print tag<OHOS_ABILITY_CONFLICT_CONFIGURATIONS> value start.");
+    constexpr size_t step = 20; // print step
+    std::stringstream ss;
+    if (entry.data.i32 != nullptr && entry.count > 0) {
+        for (size_t i = 0; i < entry.count; i++) {
+            ss << entry.data.i32[i] << " ";
+            if ((i != 0) && (i % step == 0 || i == entry.count - 1)) {
+                printf("OHOS_ABILITY_CONFLICT_CONFIGURATIONS: %s\n", ss.str().c_str());
+                ss.clear();
+                ss.str("");
+            }
+        }
+    } else {
+        printf("get tag<OHOS_ABILITY_CONFLICT_CONFIGURATIONS> failed.\n");
+        CAMERA_LOGE("get tag<OHOS_ABILITY_CONFLICT_CONFIGURATIONS> failed.");
+    }
+    CAMERA_LOGI("print tag<OHOS_ABILITY_CONFLICT_CONFIGURATIONS> value end.");
+}
+
+/**
+ * @tc.name: SUB_Driver_Camera_Tripod_0100
+ * @tc.desc: OHOS_ABILITY_STATISTICS_DETECT_TYPE
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_Detect_0100, TestSize.Level1)
+{
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_STATISTICS_DETECT_TYPE, &entry);
+    printf("OHOS_ABILITY_STATISTICS_DETECT_TYPE value count %d\n", entry.count);
+    if (ret == HDI::Camera::V1_0::NO_ERROR && entry.data.u8 != nullptr && entry.count > 0) {
+        std::stringstream ss;
+        for (size_t i = 0; i < entry.count; i++) {
+            ss << static_cast<int>(entry.data.u8[i]) << " ";
+            if (i == entry.count - 1) {
+                printf("OHOS_ABILITY_STATISTICS_DETECT_TYPE: %s\n", ss.str().c_str());
+                ss.clear();
+            }
+        }
+    }
+}

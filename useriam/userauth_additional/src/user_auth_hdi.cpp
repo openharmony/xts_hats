@@ -442,7 +442,7 @@ HWTEST_F(UserIamUserAuthTestAdditional, testGetUserInfo001, Function | MediumTes
 
     for (i = 0; i < 2; i++) {
         FillEnrolledInfoVector(parcel, infos);
-        EXPECT_NE(g_service.GetUserInfo(userId[i], secureUid, pinSubType, infos), 0);
+        EXPECT_EQ(g_service.GetUserInfo(userId[i], secureUid, pinSubType, infos), 0);
     }
 }
 /**

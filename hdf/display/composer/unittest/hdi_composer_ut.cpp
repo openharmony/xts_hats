@@ -18,8 +18,7 @@
 #include <cinttypes>
 #include <algorithm>
 #include "v1_2/include/idisplay_composer_interface.h"
-#include "v1_2/include/idisplay_composer_interface.h"
-#include "v1_1/display_composer_type.h"
+#include "v1_2/display_composer_type.h"
 #include "v1_0/display_buffer_type.h"
 #include "display_test.h"
 #include "display_test_utils.h"
@@ -33,7 +32,7 @@
 #include <thread>
 
 using namespace OHOS::HDI::Display::Buffer::V1_0;
-using namespace OHOS::HDI::Display::Composer::V1_1;
+using namespace OHOS::HDI::Display::Composer::V1_2;
 using namespace OHOS::HDI::Display::TEST;
 using namespace testing::ext;
 
@@ -392,6 +391,74 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5500, TestSize.Level1)
 #else
     if (ret == DISPLAY_NOT_SUPPORT) {
         DISPLAY_TEST_LOGE("GetDisplayProperty not support");
+        return;
+    }
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+#endif
+}
+
+/**
+ * @tc.number: SUB_Driver_Display_HardWare_0100
+ * @tc.name: test_SetHardwareCursorPosition
+ * @tc.desc: Set Hard Cursor Position
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(DeviceTest, SUB_Driver_Display_HardWare_0100, TestSize.Level1)
+{
+    int32_t x = 1;
+    int32_t y = 1;
+    auto ret = g_composerDevice->SetHardwareCursorPosition(g_displayIds[0], x, y);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
+#else
+    if (ret == DISPLAY_NOT_SUPPORT) {
+        DISPLAY_TEST_LOGE("SetHardwareCursorPosition not support");
+        return;
+    }
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+#endif
+}
+
+/**
+ * @tc.number: SUB_Driver_Display_HardWare_0200
+ * @tc.name: test_EnableHardwareCursorStats
+ * @tc.desc: Enable hardware cursor statistics
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(DeviceTest, SUB_Driver_Display_HardWare_0200, TestSize.Level1)
+{
+    bool enable = true;
+    auto ret = g_composerDevice->EnableHardwareCursorStats(g_displayIds[0], enable);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
+#else
+    if (ret == DISPLAY_NOT_SUPPORT) {
+        DISPLAY_TEST_LOGE("EnableHardwareCursorStats not support");
+        return;
+    }
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
+#endif
+}
+
+/**
+ * @tc.number: SUB_Driver_Display_HardWare_0300
+ * @tc.name: test_GetHardwareCursorStats
+ * @tc.desc: Obtains hardware cursor statistics.
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(DeviceTest, SUB_Driver_Display_HardWare_0300, TestSize.Level1)
+{
+    uint32_t frameCount = 0;
+    uint32_t vsyncCount = 0;
+    auto ret = g_composerDevice->GetHardwareCursorStats(g_displayIds[0], frameCount, vsyncCount);
+#ifdef DISPLAY_COMMUNITY
+    EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
+#else
+    if (ret == DISPLAY_NOT_SUPPORT) {
+        DISPLAY_TEST_LOGE("GetHardwareCursorStats not support");
         return;
     }
     EXPECT_EQ(DISPLAY_SUCCESS, ret);

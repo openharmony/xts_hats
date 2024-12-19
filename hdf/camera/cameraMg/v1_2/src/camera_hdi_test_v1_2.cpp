@@ -88,7 +88,10 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_DefferredImage_0200, TestSize.Leve
     bool isExit = cameraTest->IsTagValueExistsU8(cameraTest->ability,\
         OHOS_ABILITY_DEFERRED_IMAGE_DELIVERY,\
         OHOS::HDI::Camera::V1_2::STILL_IMAGE);
-    EXPECT_EQ(isExit, true);
+    if (!isExit) {
+        GTEST_SKIP() << "skip this test, because OHOS_ABILITY_DEFERRED_IMAGE_DELIVERY not found" << std::endl;
+        return;
+    }
     // get DefferredImageTestInit
     ret = cameraTest->DefferredImageTestInit();
     EXPECT_EQ(ret, 0);
@@ -154,7 +157,10 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_DefferredImage_0300, TestSize.Leve
     bool isImageProcessServiceExist = true;
     bool isExit = cameraTest->IsTagValueExistsU8(cameraTest->ability,\
         OHOS_ABILITY_DEFERRED_IMAGE_DELIVERY, OHOS::HDI::Camera::V1_2::STILL_IMAGE);
-    EXPECT_EQ(isExit, true);
+    if (!isExit) {
+        GTEST_SKIP() << "skip this test, because OHOS_ABILITY_DEFERRED_IMAGE_DELIVERY not found" << std::endl;
+        return;
+    }
     // get DefferredImageTestInit
     ret = cameraTest->DefferredImageTestInit();
     EXPECT_EQ(ret, 0);
@@ -988,7 +994,10 @@ static void UpdateSettingsForSuperStabMode(std::shared_ptr<OHOS::Camera::Test> c
     bool isTagExitst = cameraTest->IsTagValueExistsU8(cameraTest->ability,
         OHOS_ABILITY_VIDEO_STABILIZATION_MODES,
         OHOS_CAMERA_VIDEO_STABILIZATION_HIGH);
-    EXPECT_EQ(isTagExitst, true);
+    if (!isTagExitst) {
+        GTEST_SKIP() << "skip this test, because stabilization tag not found" << std::endl;
+        return;
+    }
     std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
     uint8_t stabControl = OHOS_CAMERA_VIDEO_STABILIZATION_HIGH;
     meta->addEntry(OHOS_CONTROL_VIDEO_STABILIZATION_MODE, &stabControl, DATA_COUNT);

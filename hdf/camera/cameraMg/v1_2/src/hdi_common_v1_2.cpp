@@ -207,7 +207,6 @@ void Test::Close()
         cameraDevice->Close();
         cameraDevice = nullptr;
     }
-    sleep(SIX);
 }
 
 void Test::DefaultPreview(

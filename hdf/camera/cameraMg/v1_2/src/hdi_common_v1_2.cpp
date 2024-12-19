@@ -21,6 +21,7 @@ namespace OHOS::Camera {
 Test::ResultCallback Test::resultCallback_ = 0;
 OHOS::HDI::Camera::V1_0::FlashlightStatus Test::statusCallback =
                 static_cast<OHOS::HDI::Camera::V1_0::FlashlightStatus>(0);
+constexpr uint32_t LOOP_COUNT = 12;
 uint64_t Test::GetCurrentLocalTimeStamp()
 {
     std::chrono::time_point<std::chrono::system_clock, std::chrono::milliseconds> tp =
@@ -75,6 +76,14 @@ void Test::Init()
     int32_t ret;
     if (serviceV1_2 == nullptr) {
         serviceV1_2 = OHOS::HDI::Camera::V1_2::ICameraHost::Get("camera_service", false);
+        if (serviceV1_2 == nullptr) {
+            int loopCount = 0;
+            do {
+                usleep(UT_MICROSECOND_TIMES);
+                serviceV1_2 = OHOS::HDI::Camera::V1_2::ICameraHost::Get("camera_service", false);
+                loopCount++;
+            } while (loopCount <= LOOP_COUNT || serviceV1_2 == nullptr);
+        }
         EXPECT_NE(serviceV1_2, nullptr);
         CAMERA_LOGI("V1_2::ICameraHost get success");
         ret = serviceV1_2->GetVersion(mainVer, minVer);
@@ -198,7 +207,6 @@ void Test::Close()
         cameraDevice->Close();
         cameraDevice = nullptr;
     }
-    sleep(SIX);
 }
 
 void Test::DefaultPreview(

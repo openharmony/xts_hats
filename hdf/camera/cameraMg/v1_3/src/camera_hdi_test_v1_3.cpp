@@ -870,3 +870,238 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_HighQuality_0300, TestSize.Level1)
     cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdCapture};
     cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
 }
+
+void UpdateMetadata(std::shared_ptr<OHOS::Camera::Test> cameraTest, std::shared_ptr<CameraSetting> meta)
+{
+    // 修改Zoom大于15x
+    float zoomRatio = 16.0f;
+    meta->addEntry(OHOS_CONTROL_ZOOM_RATIO, &zoomRatio, DATA_COUNT);
+    // 使能脚架检测
+    uint8_t tripoDetection = 1;
+    meta->addEntry(OHOS_CONTROL_TRIPOD_DETECTION, &tripoDetection, DATA_COUNT);
+    std::vector<uint8_t> setting;
+    MetadataUtils::ConvertMetadataToVec(meta, setting);
+    cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
+}
+
+/**
+ * @tc.name: SUB_Driver_Camera_Tripod_0200
+ * @tc.desc: OHOS_ABILITY_TRIPOD_DETECTION
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_Tripod_0200, TestSize.Level1)
+{
+    CAMERA_LOGI("CameraHdiTestV1_3 SUB_Driver_Camera_Tripod_0200 start.");
+    // 查询是否支持脚架检测
+    common_metadata_header_t* data = cameraTest->ability->get();
+    ASSERT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_TRIPOD_DETECTION, &entry);
+    if (cameraTest->rc != HDI::Camera::V1_0::NO_ERROR || entry.data.i32 == nullptr
+        || entry.count <= 0 || entry.data.i32[0] != 1) {
+        cout << "skip this test, because OHOS_ABILITY_TRIPOD_DETECTION not supported" << endl;
+        return;
+    }
+    cameraTest->intents = {PREVIEW, STILL_CAPTURE};
+    cameraTest->StartStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::CAPTURE);
+    std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+    UpdateMetadata(cameraTest, meta);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    sleep(UT_SECOND_TIMES);
+    if (cameraTest->deviceCallback->resultMeta == nullptr) {
+        CAMERA_LOGI("Camera_Device_Hdi_V1_3_048 onresult not be invoked.");
+        return;
+    }
+    common_metadata_header_t* resultData = cameraTest->deviceCallback->resultMeta->get();
+    if (resultData == nullptr) {
+        CAMERA_LOGI("Camera_Device_Hdi_V1_3_048 onresult be invoked but data was nullptr.");
+        return;
+    }
+    camera_metadata_item_t statusEntry;
+    cameraTest->rc = FindCameraMetadataItem(resultData, OHOS_STATUS_TRIPOD_DETECTION_STATUS, &statusEntry);
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && statusEntry.data.u8 != nullptr && statusEntry.count > 0) {
+        CAMERA_LOGI("OHOS_STATUS_TRIPOD_DETECTION_STATUS value:%{public}d", statusEntry.data.u8[0]);
+        // 使能脚架检测算法
+        meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+        uint8_t tripodStablitationAlgorithm = 1;
+        meta->addEntry(OHOS_CONTROL_TRIPOD_STABLITATION, &tripodStablitationAlgorithm, DATA_COUNT);
+        std::vector<uint8_t> pointData;
+        MetadataUtils::ConvertMetadataToVec(meta, pointData);
+        cameraTest->cameraDeviceV1_3->UpdateSettings(pointData);
+    }
+    camera_metadata_item_t pointEntry;
+    cameraTest->rc = FindCameraMetadataItem(resultData, OHOS_STATUS_SKETCH_POINT, &pointEntry);
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && pointEntry.data.f != nullptr && pointEntry.count > 0) {
+        CAMERA_LOGI("OHOS_STATUS_SKETCH_POINT x:%{public}f y:%{public}f", pointEntry.data.f[0], pointEntry.data.f[1]);
+    }
+    cameraTest->StartCapture(cameraTest->streamIdCapture, cameraTest->captureIdCapture, false, false);
+    cameraTest->captureIds = {cameraTest->captureIdPreview};
+    cameraTest->streamIds = {cameraTest->streamIdCapture, cameraTest->streamIdPreview};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+void FindHumanDetectResult(common_metadata_header_t* streamData)
+{
+    camera_metadata_item_t faceEntry;
+    int32_t rc = FindCameraMetadataItem(streamData, OHOS_STATISTICS_DETECT_HUMAN_FACE_INFOS, &faceEntry);
+    if (rc == HDI::Camera::V1_0::NO_ERROR) {
+        if (faceEntry.data.i32 != nullptr && faceEntry.count > 0) {
+            CAMERA_LOGI("FindDetectResult human face result");
+        }
+    }
+    camera_metadata_item_t bodyEntry;
+    rc = FindCameraMetadataItem(streamData, OHOS_STATISTICS_DETECT_HUMAN_BODY_INFOS, &bodyEntry);
+    if (rc == HDI::Camera::V1_0::NO_ERROR) {
+        if (bodyEntry.data.i32 != nullptr && bodyEntry.count > 0) {
+            CAMERA_LOGI("FindDetectResult human body result");
+        }
+    }
+    camera_metadata_item_t baseFaceEntry;
+    rc = FindCameraMetadataItem(streamData, OHOS_STATISTICS_DETECT_BASE_FACE_INFO, &baseFaceEntry);
+    if (rc == HDI::Camera::V1_0::NO_ERROR) {
+        if (baseFaceEntry.data.i32 != nullptr && baseFaceEntry.count > 0) {
+            CAMERA_LOGI("FindDetectResult base face result");
+        }
+    }
+}
+
+void FindOtherDetectResult(common_metadata_header_t* streamData)
+{
+    camera_metadata_item_t catFaceEntry;
+    int32_t rc = FindCameraMetadataItem(streamData, OHOS_STATISTICS_DETECT_CAT_FACE_INFOS, &catFaceEntry);
+    if (rc == HDI::Camera::V1_0::NO_ERROR) {
+        if (catFaceEntry.data.i32 != nullptr && catFaceEntry.count > 0) {
+            CAMERA_LOGI("FindDetectResult cat face result");
+        }
+    }
+    camera_metadata_item_t catBodyEntry;
+    rc = FindCameraMetadataItem(streamData, OHOS_STATISTICS_DETECT_CAT_BODY_INFOS, &catBodyEntry);
+    if (rc == HDI::Camera::V1_0::NO_ERROR) {
+        if (catBodyEntry.data.i32 != nullptr && catBodyEntry.count > 0) {
+            CAMERA_LOGI("FindDetectResult cat body result");
+        }
+    }
+    camera_metadata_item_t dogFaceEntry;
+    rc = FindCameraMetadataItem(streamData, OHOS_STATISTICS_DETECT_DOG_FACE_INFOS, &dogFaceEntry);
+    if (rc == HDI::Camera::V1_0::NO_ERROR) {
+        if (dogFaceEntry.data.i32 != nullptr && dogFaceEntry.count > 0) {
+            CAMERA_LOGI("FindDetectResult dog face result");
+        }
+    }
+    camera_metadata_item_t dogBodyEntry;
+    rc = FindCameraMetadataItem(streamData, OHOS_STATISTICS_DETECT_DOG_BODY_INFOS, &dogBodyEntry);
+    if (rc == HDI::Camera::V1_0::NO_ERROR) {
+        if (dogBodyEntry.data.i32 != nullptr && dogBodyEntry.count > 0) {
+            CAMERA_LOGI("FindDetectResult dog body result");
+        }
+    }
+    camera_metadata_item_t salientEntry;
+    rc = FindCameraMetadataItem(streamData, OHOS_STATISTICS_DETECT_SALIENT_INFOS, &salientEntry);
+    if (rc == HDI::Camera::V1_0::NO_ERROR) {
+        if (salientEntry.data.i32 != nullptr && salientEntry.count > 0) {
+            CAMERA_LOGI("FindDetectResult salient result");
+        }
+    }
+    camera_metadata_item_t barCodeEntry;
+    rc = FindCameraMetadataItem(streamData, OHOS_STATISTICS_DETECT_BAR_CODE_INFOS, &barCodeEntry);
+    if (rc == HDI::Camera::V1_0::NO_ERROR) {
+        if (barCodeEntry.data.i32 != nullptr && barCodeEntry.count > 0) {
+            CAMERA_LOGI("FindDetectResult bar code result");
+        }
+    }
+}
+
+/**
+ * @tc.name: SUB_Driver_Camera_Detect_0200
+ * @tc.desc: OHOS_ABILITY_STATISTICS_DETECT_TYPE,EnableResult
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_Detect_0200, TestSize.Level1)
+{
+    common_metadata_header_t* data = cameraTest->ability->get();
+    ASSERT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_STATISTICS_DETECT_TYPE, &entry);
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && entry.data.u8 != nullptr && entry.count > 0) {
+        cameraTest->intents = {PREVIEW, StreamIntent::VIDEO};
+        cameraTest->StartStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::VIDEO);
+        cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+        cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
+        std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+        std::vector<uint8_t> detectTypes;
+        for (int i = 0; i < entry.count; i++) {
+            detectTypes.push_back(entry.data.u8[i]);
+        }
+        uint8_t* typesToEnable = detectTypes.data();
+        meta->addEntry(OHOS_CONTROL_STATISTICS_DETECT_SETTING, typesToEnable, detectTypes.size());
+        std::vector<uint8_t> setting;
+        MetadataUtils::ConvertMetadataToVec(meta, setting);
+        cameraTest->rc = (OHOS::HDI::Camera::V1_0::CamRetCode)cameraTest->streamOperator_V1_3->EnableResult(
+                cameraTest->streamIdVideo, setting);
+        ASSERT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+        sleep(UT_SECOND_TIMES);
+        if (cameraTest->streamOperatorCallbackV1_3->streamResultMeta == nullptr) {
+            CAMERA_LOGI("Camera_Device_Hdi_V1_3_053 onresult not be invoked.");
+            return;
+        }
+        common_metadata_header_t* streamData = cameraTest->streamOperatorCallbackV1_3->streamResultMeta->get();
+        if (data == nullptr) {
+            CAMERA_LOGI("Camera_Device_Hdi_V1_3_053 onresult be invoked but data was nullptr.");
+            return;
+        }
+        FindHumanDetectResult(streamData);
+        FindOtherDetectResult(streamData);
+        cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
+        cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
+        cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+    }
+}
+
+/**
+ * @tc.name: SUB_Driver_Camera_Detect_0300
+ * @tc.desc: OHOS_ABILITY_STATISTICS_DETECT_TYPE,EnableResult
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_Detect_0300, TestSize.Level1)
+{
+    common_metadata_header_t* data = cameraTest->ability->get();
+    ASSERT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_STATISTICS_DETECT_TYPE, &entry);
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && entry.data.u8 != nullptr && entry.count > 0) {
+        cameraTest->intents = {PREVIEW, StreamIntent::VIDEO};
+        cameraTest->StartStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::VIDEO);
+        cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+        cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
+        std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+        std::vector<uint8_t> detectTypes;
+        for (int i = 0; i < entry.count; i++) {
+            detectTypes.push_back(entry.data.u8[i]);
+        }
+        uint8_t* typesToEnable = detectTypes.data();
+        meta->addEntry(OHOS_CONTROL_STATISTICS_DETECT_SETTING, typesToEnable, detectTypes.size());
+        std::vector<uint8_t> setting;
+        MetadataUtils::ConvertMetadataToVec(meta, setting);
+        cameraTest->rc = (OHOS::HDI::Camera::V1_0::CamRetCode)cameraTest->streamOperator_V1_3->DisableResult(
+                cameraTest->streamIdVideo, setting);
+        ASSERT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+        sleep(UT_SECOND_TIMES);
+        if (cameraTest->streamOperatorCallbackV1_3->streamResultMeta == nullptr) {
+            CAMERA_LOGI("Camera_Device_Hdi_V1_3_053 onresult not be invoked.");
+            return;
+        }
+        common_metadata_header_t* streamData = cameraTest->streamOperatorCallbackV1_3->streamResultMeta->get();
+        if (data == nullptr) {
+            CAMERA_LOGI("Camera_Device_Hdi_V1_3_053 onresult be invoked but data was nullptr.");
+            return;
+        }
+        FindHumanDetectResult(streamData);
+        FindOtherDetectResult(streamData);
+        cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
+        cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
+        cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+    }
+}

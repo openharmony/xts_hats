@@ -76,7 +76,7 @@ HWTEST_F(UsbDriverInfoTest, SerializeThenUnSerializeTest, TestSize.Level1)
     ASSERT_EQ(newUsbDriverInfo->vids_[1], 2222);
 }
 
-HWTEST_F(UsbDriverInfoTest, SUB_Driver_Ext_BusExtensionUSB_0700, TestSize.Level1)
+HWTEST_F(UsbDriverInfoTest, UnSerializeErrorTest, TestSize.Level1)
 {
     int ret = 0;
     DriverInfo driverInfo;

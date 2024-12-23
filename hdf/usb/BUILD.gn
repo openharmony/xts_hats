@@ -44,6 +44,7 @@ group("HatsHdfUsbTest") {
     ]
   } else {
     deps = [
+      "accessoryTest:HatsHdfUsbAccessoryTest",
       "autoFunctionTest:HatsHdfUsbAutoFunctionTest",
 
       # "deviceStatusTest:HatsHdfUsbDeviceStatusTest",

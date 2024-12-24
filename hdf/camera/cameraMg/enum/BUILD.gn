@@ -22,9 +22,7 @@ module_output_path = "hats/camera"
 ohos_moduletest_suite("HatsHdfCameraEnumTest") {
   configs = [ ":hdf_cameraenum" ]
   module_out_path = module_output_path
-  sources = [
-    "./src/camera_metadata_enum_test.cpp",
-  ]
+  sources = [ "./src/camera_metadata_enum_test.cpp" ]
   deps = [
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest",

@@ -9,16 +9,14 @@
         {
             "type": "ShellKit",
             "run-command": [
-                "mount -o rw,remount /",
-                "cd system/bin",
-                "mv render_service render_service_bk",
-                "reboot"
+		        "sleep 180",
+                "service_control stop render_service",
+                "kill -9 `pidof composer_host`"
             ],
             "teardown-command": [
-                "mount -o rw,remount /",
-                "cd system/bin",
-                "mv render_service_bk render_service",
-                "reboot"
+		        "sleep 180",			
+                "service_control start render_service",
+		        "kill -9 `pidof render_service`"
             ]
         }
     ],

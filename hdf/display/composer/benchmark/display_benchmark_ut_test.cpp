@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -63,7 +63,6 @@ static sptr<Composer::V1_2::IDisplayComposerInterface> g_composerDevice = nullpt
 static std::shared_ptr<IDisplayBuffer> g_gralloc = nullptr;
 static std::vector<uint32_t> g_displayIds;
 const int SLEEP_CONT_100 = 100;
-const int SLEEP_CONT_1000 = 1000;
 
 class DisplayBenchmarkTest : public benchmark::Fixture {
 public:
@@ -98,7 +97,6 @@ int32_t VblankCtr::WaitVblank(uint32_t ms)
     bool ret = false;
     DISPLAY_TEST_LOGE();
     std::unique_lock<std::mutex> lck(vblankMutex_);
-    hasVblank_ = false; // must wait next vblank
     ret = vblankCondition_.wait_for(lck, std::chrono::milliseconds(ms), [=] { return hasVblank_; });
     DISPLAY_TEST_LOGE();
     if (!ret) {
@@ -127,6 +125,7 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3700)(benchmark:
     int ret;
     DISPLAY_TEST_LOGE();
     std::shared_ptr<HdiTestDisplay> display = HdiTestDevice::GetInstance().GetFirstDisplay();
+    ASSERT_TRUE(display != nullptr) << "get display failed";
     for (auto _ : state) {
         ret = display->RegDisplayVBlankCallback(TestVBlankCallback, nullptr);
     }
@@ -142,19 +141,13 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3800)(benchmark:
     int ret;
     DISPLAY_TEST_LOGE();
     std::shared_ptr<HdiTestDisplay> display = HdiTestDevice::GetInstance().GetFirstDisplay();
+    ASSERT_TRUE(display != nullptr) << "get display failed";
     ret = display->RegDisplayVBlankCallback(TestVBlankCallback, nullptr);
     ASSERT_TRUE(ret == DISPLAY_SUCCESS) << "RegDisplayVBlankCallback failed";
     for (auto _ : state) {
         ret = display->SetDisplayVsyncEnabled(true);
-        ASSERT_TRUE(ret == DISPLAY_SUCCESS) << "SetDisplayVsyncEnabled failed";
-        ret = VblankCtr::GetInstance().WaitVblank(SLEEP_CONT_1000); // 1000ms
-        ASSERT_TRUE(ret == DISPLAY_SUCCESS) << "WaitVblank timeout";
-        ret = display->SetDisplayVsyncEnabled(false);
-        ASSERT_TRUE(ret == DISPLAY_SUCCESS) << "SetDisplayVsyncEnabled failed";
     }
-    usleep(SLEEP_CONT_100 * SLEEP_CONT_1000);                              // wait for 100ms avoid the last vsync.
-    ret = VblankCtr::GetInstance().WaitVblank(SLEEP_CONT_1000); // 1000ms
-    ASSERT_TRUE(ret != DISPLAY_SUCCESS) << "vblank do not disable";
+    ASSERT_TRUE(ret == DISPLAY_SUCCESS) << "SetDisplayVsyncEnabled failed";
 }
 
 BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3800)->

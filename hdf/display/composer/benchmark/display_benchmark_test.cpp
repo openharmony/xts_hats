@@ -816,29 +816,45 @@ BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2200)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.name: SetHardwareCursorPositionTest
-  * @tc.desc: Benchmarktest for interface SetHardwareCursorPositionTest.
+  * @tc.name: UpdateHardwareCursorTest
+  * @tc.desc: Benchmarktest for interface UpdateHardwareCursorTest.
   */
-BENCHMARK_F(DisplayBenchmarkTest, SetHardwareCursorPositionTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, UpdateHardwareCursorTest)(benchmark::State &state)
 {
+    BufferHandle* buffer = nullptr;
+
+    AllocInfo info;
+    info.width  = 512;
+    info.height = 512;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_MEM_DMA |
+            OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_READ |
+            OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_WRITE |
+            OHOS::HDI::Display::Composer::V1_0::HBM_USE_HW_COMPOSER;
+    info.format = Composer::V1_0::PIXEL_FMT_RGBA_8888;
+
+
+    g_gralloc->AllocMem(info, buffer);
+    ASSERT_TRUE(buffer != nullptr);
+
     int32_t ret = 0;
     int32_t x = 1;
     int32_t y = 1;
     for (auto _ : state) {
-        ret = g_composerDevice->SetHardwareCursorPosition(g_displayIds[0], x, y);
+        ret = g_composerDevice->UpdateHardwareCursor(g_displayIds[0], x, y, buffer);
     }
+    g_gralloc->FreeMem(*buffer);
 #ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
 #else
     if (ret == DISPLAY_NOT_SUPPORT) {
-        DISPLAY_TEST_LOGE("SetHardwareCursorPosition not support");
+        DISPLAY_TEST_LOGE("UpdateHardwareCursor not support");
         return;
     }
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 #endif
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetHardwareCursorPositionTest)->
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, UpdateHardwareCursorTest)->
     Iterations(30)->Repetitions(3)->ReportAggregatesOnly();
 
 /**

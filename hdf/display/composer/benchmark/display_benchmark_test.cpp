@@ -1077,11 +1077,11 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2600)(benchmark:
     std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
     ASSERT_TRUE((layers.size() > 0));
 
-    const int32_t WIDTH = 100u;
-    const int32_t HEIGHT = 100u;
+    const int32_t k_WIDTH = 100;
+    const int32_t k_HEIGHT = 100u;
     auto layer = layers[0];
     for (auto _ : state) {
-        IRect rect = {0, 0, WIDTH, HEIGHT};
+        IRect rect = {0, 0, k_WIDTH, k_HEIGHT};
         ret = g_composerDevice->SetLayerRegion(g_displayIds[0], layer->GetId(), rect);
         PrepareAndCommit();
     }
@@ -1105,9 +1105,9 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2700)(benchmark:
     std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
     ASSERT_TRUE((layers.size() > 0));
     auto layer = layers[0];
-    const int32_t KWIDTH = 100;
-    const int32_t KHEIGHT = 100;
-    IRect rect = {0, 0, WIDTH_VALUE, HEIGHT_VALUE};
+    const int32_t K_WIDTH = 100;
+    const int32_t K_HEIGHT = 100;
+    IRect rect = {0, 0, K_WIDTH, K_HEIGHT};
     std::vector<IRect> vRects;
     vRects.push_back(rect);
     for (auto _ : state) {
@@ -1162,9 +1162,9 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2900)(benchmark:
     ASSERT_TRUE((layers.size() > 0));
     PrepareAndCommit();
     auto layer = layers[0];
-    const int32_t KWIDTH = 500;
-    const int32_t KHEIGHT = 500;
-    IRect region = {0, 0, WIDTH_VALUE, HEIGHT_VALUE};
+    const int32_t K_WIDTH = 500;
+    const int32_t K_HEIGHT = 500;
+    IRect region = {0, 0, K_WIDTH, K_HEIGHT};
     std::vector<IRect> regions = {};
     regions.push_back(region);
     for (auto _ : state) {

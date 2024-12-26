@@ -48,7 +48,6 @@ static std::shared_ptr<IDisplayBuffer> g_gralloc = nullptr;
 static std::vector<uint32_t> g_displayIds;
 const int SLEEP_CONT_100 = 100;
 
-
 class DisplayBenchmarkTest : public benchmark::Fixture {
 public:
     void TearDown(const ::benchmark::State &state);
@@ -869,9 +868,6 @@ BENCHMARK_F(DisplayBenchmarkTest, UpdateHardwareCursorTest)(benchmark::State &st
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 #endif
 }
-
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, UpdateHardwareCursorTest)->
-    Iterations(30)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: EnableHardwareCursorStatsTest

@@ -25,6 +25,7 @@ group("HatsHdfCameraMgTest") {
       deps = [ "v1_0:HatsHdfCameraMgv0Test" ]
     } else {
       deps = [
+        "enum:HatsHdfCameraEnumTest",
         "v1_0:HatsHdfCameraMgv0Test",
         "v1_1:HatsHdfCameraMgTestv1",
         "v1_2:HatsHdfCameraMgTestv2",

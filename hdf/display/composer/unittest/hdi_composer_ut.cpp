@@ -399,21 +399,38 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_5500, TestSize.Level1)
 
 /**
  * @tc.number: SUB_Driver_Display_HardWare_0100
- * @tc.name: test_SetHardwareCursorPosition
+ * @tc.name: test_UpdateHardwareCursor
  * @tc.desc: Set Hard Cursor Position
  * @tc.size: MediumTest
  * @tc.type: Function
  */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HardWare_0100, TestSize.Level1)
 {
+    BufferHandle* buffer = nullptr;
+    const int32_t WIDTH = 512;
+    const int32_t HEIGHT = 512;
+
+    AllocInfo info;
+    info.width  = WIDTH;
+    info.height = HEIGHT;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_MEM_DMA |
+            OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_READ |
+            OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_WRITE |
+            OHOS::HDI::Display::Composer::V1_0::HBM_USE_HW_COMPOSER;
+    info.format = Composer::V1_0::PIXEL_FMT_RGBA_8888;
+
+    g_gralloc->AllocMem(info, buffer);
+    ASSERT_TRUE(buffer != nullptr);
+
     int32_t x = 1;
     int32_t y = 1;
-    auto ret = g_composerDevice->SetHardwareCursorPosition(g_displayIds[0], x, y);
+    auto ret = g_composerDevice->UpdateHardwareCursor(g_displayIds[0], x, y, buffer);
+    g_gralloc->FreeMem(*buffer);
 #ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
 #else
     if (ret == DISPLAY_NOT_SUPPORT) {
-        DISPLAY_TEST_LOGE("SetHardwareCursorPosition not support");
+        DISPLAY_TEST_LOGE("UpdateHardwareCursor not support");
         return;
     }
     EXPECT_EQ(DISPLAY_SUCCESS, ret);

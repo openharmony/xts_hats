@@ -1077,8 +1077,8 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2600)(benchmark:
     std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
     ASSERT_TRUE((layers.size() > 0));
 
-    const int32_t WIDTH = 100;
-    const int32_t HEIGHT = 100;
+    const int32_t WIDTH = 100u;
+    const int32_t HEIGHT = 100u;
     auto layer = layers[0];
     for (auto _ : state) {
         IRect rect = {0, 0, WIDTH, HEIGHT};
@@ -1105,8 +1105,8 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2700)(benchmark:
     std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
     ASSERT_TRUE((layers.size() > 0));
     auto layer = layers[0];
-    const int32_t WIDTH_VALUE = 100;
-    const int32_t HEIGHT_VALUE = 100;
+    const int32_t WIDTH = 100u;
+    const int32_t HEIGHT = 100u;
     IRect rect = {0, 0, WIDTH_VALUE, HEIGHT_VALUE};
     std::vector<IRect> vRects;
     vRects.push_back(rect);
@@ -1162,8 +1162,8 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2900)(benchmark:
     ASSERT_TRUE((layers.size() > 0));
     PrepareAndCommit();
     auto layer = layers[0];
-    const int32_t WIDTH_VALUE = 500;
-    const int32_t HEIGHT_VALUE = 500;
+    const int32_t WIDTH = 500u;
+    const int32_t HEIGHT = 500u;
     IRect region = {0, 0, WIDTH_VALUE, HEIGHT_VALUE};
     std::vector<IRect> regions = {};
     regions.push_back(region);
@@ -1266,15 +1266,15 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3300)(benchmark:
     std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
     ASSERT_TRUE((layers.size() > 0));
     auto layer = layers[0];
-    const uint32_t COLOR_RVALUE = 155;
-    const uint32_t COLOR_GVALUE = 224;
-    const uint32_t COLOR_BVALUE = 88;
-    const uint32_t COLOR_AVALUE = 128;
+    const uint32_t COLOR_R = 155u;
+    const uint32_t COLOR_G = 224u;
+    const uint32_t COLOR_B = 88u;
+    const uint32_t COLOR_A = 128u;
     LayerColor layerColor = {
-        .r = COLOR_RVALUE,
-        .g = COLOR_GVALUE,
-        .b = COLOR_BVALUE,
-        .a = COLOR_AVALUE
+        .r = COLOR_R,
+        .g = COLOR_G,
+        .b = COLOR_B,
+        .a = COLOR_A
     };
     for (auto _ : state) {
         ret = g_composerDevice->SetLayerColor(g_displayIds[0], layer->GetId(), layerColor);

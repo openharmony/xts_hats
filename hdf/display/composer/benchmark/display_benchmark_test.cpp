@@ -1105,8 +1105,8 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2700)(benchmark:
     std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
     ASSERT_TRUE((layers.size() > 0));
     auto layer = layers[0];
-    const int32_t WIDTH = 100u;
-    const int32_t HEIGHT = 100u;
+    const int32_t KWIDTH = 100;
+    const int32_t KHEIGHT = 100;
     IRect rect = {0, 0, WIDTH_VALUE, HEIGHT_VALUE};
     std::vector<IRect> vRects;
     vRects.push_back(rect);
@@ -1139,7 +1139,7 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2800)(benchmark:
     TransformType type = TransformType::ROTATE_90;
     for (auto _ : state) {
         ret = g_composerDevice->SetLayerTransformMode(g_displayIds[0], layer->GetId(), type);
-		PrepareAndCommit();
+        PrepareAndCommit();
     }
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 
@@ -1162,8 +1162,8 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2900)(benchmark:
     ASSERT_TRUE((layers.size() > 0));
     PrepareAndCommit();
     auto layer = layers[0];
-    const int32_t WIDTH = 500u;
-    const int32_t HEIGHT = 500u;
+    const int32_t KWIDTH = 500;
+    const int32_t KHEIGHT = 500;
     IRect region = {0, 0, WIDTH_VALUE, HEIGHT_VALUE};
     std::vector<IRect> regions = {};
     regions.push_back(region);

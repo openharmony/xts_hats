@@ -71,6 +71,7 @@ static void DestroyLayer(std::shared_ptr<HdiTestLayer> layer)
 void DisplayBenchmarkTest::TearDown(const ::benchmark::State &state)
 {
     HdiTestDevice::GetInstance().Clear();
+    HdiTestDevice::GetInstance().GetFirstDisplay()->ResetClientLayer();
 }
 
 void DisplayBenchmarkTest::OnMode(uint32_t modeId, uint64_t vBlankPeriod, void* data)
@@ -832,30 +833,45 @@ BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2200)->
     Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
-  * @tc.name: SetHardwareCursorPositionTest
-  * @tc.desc: Benchmarktest for interface SetHardwareCursorPositionTest.
+  * @tc.name: UpdateHardwareCursorTest
+  * @tc.desc: Benchmarktest for interface UpdateHardwareCursorTest.
   */
-BENCHMARK_F(DisplayBenchmarkTest, SetHardwareCursorPositionTest)(benchmark::State &state)
+BENCHMARK_F(DisplayBenchmarkTest, UpdateHardwareCursorTest)(benchmark::State &state)
 {
+    BufferHandle* buffer = nullptr;
+
+    AllocInfo info;
+    info.width  = 512;
+    info.height = 512;
+    info.usage = OHOS::HDI::Display::Composer::V1_0::HBM_USE_MEM_DMA |
+            OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_READ |
+            OHOS::HDI::Display::Composer::V1_0::HBM_USE_CPU_WRITE |
+            OHOS::HDI::Display::Composer::V1_0::HBM_USE_HW_COMPOSER;
+    info.format = Composer::V1_0::PIXEL_FMT_RGBA_8888;
+
+    g_gralloc->AllocMem(info, buffer);
+    ASSERT_TRUE(buffer != nullptr);
+
     int32_t ret = 0;
     int32_t x = 1;
     int32_t y = 1;
     for (auto _ : state) {
-        ret = g_composerDevice->SetHardwareCursorPosition(g_displayIds[0], x, y);
+        ret = g_composerDevice->UpdateHardwareCursor(g_displayIds[0], x, y, buffer);
     }
+    g_gralloc->FreeMem(*buffer);
 #ifdef DISPLAY_COMMUNITY
     EXPECT_EQ(DISPLAY_NOT_SUPPORT, ret);
 #else
     if (ret == DISPLAY_NOT_SUPPORT) {
-        DISPLAY_TEST_LOGE("SetHardwareCursorPosition not support");
+        DISPLAY_TEST_LOGE("UpdateHardwareCursor not support");
         return;
     }
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 #endif
 }
 
-BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SetHardwareCursorPositionTest)->
-    Iterations(100)->Repetitions(3)->ReportAggregatesOnly();
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, UpdateHardwareCursorTest)->
+    Iterations(30)->Repetitions(3)->ReportAggregatesOnly();
 
 /**
   * @tc.name: EnableHardwareCursorStatsTest
@@ -1090,9 +1106,9 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2700)(benchmark:
     std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
     ASSERT_TRUE((layers.size() > 0));
     auto layer = layers[0];
-    const int32_t WIDTH = 100;
-    const int32_t HEIGHT = 100;
-    IRect rect = {0, 0, WIDTH, HEIGHT};
+    const int32_t WIDTH_VALUE = 100;
+    const int32_t HEIGHT_VALUE = 100;
+    IRect rect = {0, 0, WIDTH_VALUE, HEIGHT_VALUE};
     std::vector<IRect> vRects;
     vRects.push_back(rect);
     for (auto _ : state) {
@@ -1121,10 +1137,10 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2800)(benchmark:
     ASSERT_TRUE((layers.size() > 0));
     PrepareAndCommit();
     auto layer = layers[0];
+    TransformType type = TransformType::ROTATE_90;
     for (auto _ : state) {
-        TransformType type = TransformType::ROTATE_90;
         ret = g_composerDevice->SetLayerTransformMode(g_displayIds[0], layer->GetId(), type);
-        PrepareAndCommit();
+		PrepareAndCommit();
     }
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 
@@ -1147,14 +1163,14 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2900)(benchmark:
     ASSERT_TRUE((layers.size() > 0));
     PrepareAndCommit();
     auto layer = layers[0];
-    const int32_t WIDTH = 500;
-    const int32_t HEIGHT = 500;
-    IRect region = {0, 0, WIDTH, HEIGHT};
+    const int32_t WIDTH_VALUE = 500;
+    const int32_t HEIGHT_VALUE = 500;
+    IRect region = {0, 0, WIDTH_VALUE, HEIGHT_VALUE};
     std::vector<IRect> regions = {};
     regions.push_back(region);
     for (auto _ : state) {
         ret = g_composerDevice->SetLayerVisibleRegion(g_displayIds[0], layer->GetId(), regions);
-        PrepareAndCommit();
+		PrepareAndCommit();
     }
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 
@@ -1226,7 +1242,7 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3200)(benchmark:
     std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
     ASSERT_TRUE((layers.size() > 0));
     auto layer = layers[0];
-    MaskInfo maskInfo = MaskInfo::LAYER_HBM_SYNC;    
+    MaskInfo maskInfo = MaskInfo::LAYER_HBM_SYNC;
     for (auto _ : state) {
         ret = g_composerDevice->SetLayerMaskInfo(g_displayIds[0], layer->GetId(), maskInfo);
         PrepareAndCommit();
@@ -1251,15 +1267,15 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3300)(benchmark:
     std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
     ASSERT_TRUE((layers.size() > 0));
     auto layer = layers[0];
-    const uint32_t COLOR_R = 155;
-    const uint32_t COLOR_G = 224;
-    const uint32_t COLOR_B = 88;
-    const uint32_t COLOR_A = 128;
+    const uint32_t COLOR_RVALUE = 155;
+    const uint32_t COLOR_GVALUE = 224;
+    const uint32_t COLOR_BVALUE = 88;
+    const uint32_t COLOR_AVALUE = 128;
     LayerColor layerColor = {
-        .r = COLOR_R,
-        .g = COLOR_G,
-        .b = COLOR_B,
-        .a = COLOR_A
+        .r = COLOR_RVALUE,
+        .g = COLOR_GVALUE,
+        .b = COLOR_BVALUE,
+        .a = COLOR_AVALUE
     };
     for (auto _ : state) {
         ret = g_composerDevice->SetLayerColor(g_displayIds[0], layer->GetId(), layerColor);
@@ -1288,7 +1304,6 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3400)(benchmark:
         ASSERT_TRUE((layers.size() > 0));
         auto layer = layers[0];
         PrepareAndCommit();
-        // sleep(1);
         ret = g_composerDevice->DestroyLayer(g_displayIds[0], layer->GetId());
     }
     EXPECT_EQ(DISPLAY_SUCCESS, ret);

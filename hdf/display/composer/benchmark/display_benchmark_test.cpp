@@ -869,6 +869,9 @@ BENCHMARK_F(DisplayBenchmarkTest, UpdateHardwareCursorTest)(benchmark::State &st
 #endif
 }
 
+BENCHMARK_REGISTER_F(DisplayBenchmarkTest, UpdateHardwareCursorTest)->
+    Iterations(30)->Repetitions(3)->ReportAggregatesOnly();
+
 /**
   * @tc.name: EnableHardwareCursorStatsTest
   * @tc.desc: Benchmarktest for interface EnableHardwareCursorStatsTest.

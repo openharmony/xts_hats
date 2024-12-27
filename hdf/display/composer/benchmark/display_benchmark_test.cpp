@@ -48,6 +48,7 @@ static std::shared_ptr<IDisplayBuffer> g_gralloc = nullptr;
 static std::vector<uint32_t> g_displayIds;
 const int SLEEP_CONT_100 = 100;
 
+
 class DisplayBenchmarkTest : public benchmark::Fixture {
 public:
     void TearDown(const ::benchmark::State &state);
@@ -1077,11 +1078,11 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2600)(benchmark:
     std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
     ASSERT_TRUE((layers.size() > 0));
 
-    const int32_t WIDTH = 100;
-    const int32_t HEIGHT = 100;
+    const int32_t X = 100;
+    const int32_t Y = 100;
     auto layer = layers[0];
     for (auto _ : state) {
-        IRect rect = {0, 0, WIDTH, HEIGHT};
+        IRect rect = {0, 0, X, Y};
         ret = g_composerDevice->SetLayerRegion(g_displayIds[0], layer->GetId(), rect);
         PrepareAndCommit();
     }
@@ -1105,9 +1106,9 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2700)(benchmark:
     std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
     ASSERT_TRUE((layers.size() > 0));
     auto layer = layers[0];
-    const int32_t WIDTH = 100;
-    const int32_t HEIGHT = 100;
-    IRect rect = {0, 0, WIDTH, HEIGHT};
+    const int32_t X = 100;
+    const int32_t Y = 100;
+    IRect rect = {0, 0, X, Y};
     std::vector<IRect> vRects;
     vRects.push_back(rect);
     for (auto _ : state) {
@@ -1139,7 +1140,7 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2800)(benchmark:
     TransformType type = TransformType::ROTATE_90;
     for (auto _ : state) {
         ret = g_composerDevice->SetLayerTransformMode(g_displayIds[0], layer->GetId(), type);
-        PrepareAndCommit();
+		PrepareAndCommit();
     }
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 
@@ -1162,18 +1163,18 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2900)(benchmark:
     ASSERT_TRUE((layers.size() > 0));
     PrepareAndCommit();
     auto layer = layers[0];
-    const int32_t WIDTH = 500;
-    const int32_t HEIGHT = 500;
-    IRect region = {0, 0, WIDTH, HEIGHT};
+    const int32_t X = 500;
+    const int32_t Y = 500;
+    IRect region = {0, 0, X, Y};
     std::vector<IRect> regions = {};
     regions.push_back(region);
     for (auto _ : state) {
         ret = g_composerDevice->SetLayerVisibleRegion(g_displayIds[0], layer->GetId(), regions);
-		PrepareAndCommit();
+    	PrepareAndCommit();
     }
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 
-	DestroyLayer(layer);
+    DestroyLayer(layer);
 }
 
 BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2900)->
@@ -1194,7 +1195,7 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3000)(benchmark:
     Composer::V1_0::CompositionType type = Composer::V1_0::CompositionType::COMPOSITION_CLIENT;
     for (auto _ : state) {
         ret = g_composerDevice->SetLayerCompositionType(g_displayIds[0], layer->GetId(), type);
-		PrepareAndCommit();
+        PrepareAndCommit();
     }
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 
@@ -1241,7 +1242,7 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3200)(benchmark:
     std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
     ASSERT_TRUE((layers.size() > 0));
     auto layer = layers[0];
-    MaskInfo maskInfo = MaskInfo::LAYER_HBM_SYNC;
+    MaskInfo maskInfo = MaskInfo::LAYER_HBM_SYNC;    
     for (auto _ : state) {
         ret = g_composerDevice->SetLayerMaskInfo(g_displayIds[0], layer->GetId(), maskInfo);
         PrepareAndCommit();
@@ -1266,15 +1267,15 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3300)(benchmark:
     std::vector<std::shared_ptr<HdiTestLayer>> layers = CreateLayers(settings);
     ASSERT_TRUE((layers.size() > 0));
     auto layer = layers[0];
-    const uint32_t COLOR_R = 155;
-    const uint32_t COLOR_G = 224;
-    const uint32_t COLOR_B = 88;
-    const uint32_t COLOR_A = 128;
+    const uint32_t COLOR_R_VALUE = 155;
+    const uint32_t COLOR_G_VALUE = 224;
+    const uint32_t COLOR_B_VALUE = 88;
+    const uint32_t COLOR_A_VALUE = 128;
     LayerColor layerColor = {
-        .r = COLOR_R,
-        .g = COLOR_G,
-        .b = COLOR_B,
-        .a = COLOR_A
+        .r = COLOR_R_VALUE,
+        .g = COLOR_G_VALUE,
+        .b = COLOR_B_VALUE,
+        .a = COLOR_A_VALUE
     };
     for (auto _ : state) {
         ret = g_composerDevice->SetLayerColor(g_displayIds[0], layer->GetId(), layerColor);
@@ -1303,6 +1304,7 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3400)(benchmark:
         ASSERT_TRUE((layers.size() > 0));
         auto layer = layers[0];
         PrepareAndCommit();
+
         ret = g_composerDevice->DestroyLayer(g_displayIds[0], layer->GetId());
     }
     EXPECT_EQ(DISPLAY_SUCCESS, ret);

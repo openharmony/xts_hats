@@ -1170,7 +1170,7 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2900)(benchmark:
     regions.push_back(region);
     for (auto _ : state) {
         ret = g_composerDevice->SetLayerVisibleRegion(g_displayIds[0], layer->GetId(), regions);
-    	PrepareAndCommit();
+        PrepareAndCommit();
     }
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 

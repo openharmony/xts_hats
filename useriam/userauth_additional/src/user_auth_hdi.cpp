@@ -20,7 +20,7 @@ using namespace std;
 using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
 using namespace OHOS::HDI::UserAuth;
-using namespace OHOS::HDI::UserAuth::V2_0;
+using namespace OHOS::HDI::UserAuth::V3_0;
 
 static const uint32_t MAX_FUZZ_STRUCT_LEN = 20;
 static UserAuthInterfaceService g_service;

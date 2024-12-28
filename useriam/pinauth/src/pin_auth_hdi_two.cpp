@@ -20,8 +20,8 @@ using namespace std;
 using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
 using namespace OHOS::HDI::PinAuth;
-using namespace OHOS::HDI::PinAuth::V2_0;
-using HdiProperty = OHOS::HDI::PinAuth::V2_0::Property;
+using namespace OHOS::HDI::PinAuth::V2_1;
+using HdiProperty = OHOS::HDI::PinAuth::V2_1::Property;
 
 static AllInOneImpl g_executorImpl(make_shared<OHOS::UserIam::PinAuth::PinAuth>());
 static OHOS::Parcel parcel;

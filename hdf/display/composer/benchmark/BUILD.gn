@@ -12,10 +12,13 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
+import("//drivers/peripheral/display/display_config.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/display"
 ohos_moduletest_suite("HatsHdfDisplayabenchmarkTest") {
+  defines = []
+  defines += display_defines
   module_out_path = module_output_path
   sources = [
     "display_benchmark_test.cpp",

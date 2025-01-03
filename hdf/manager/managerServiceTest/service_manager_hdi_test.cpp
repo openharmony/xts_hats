@@ -1003,7 +1003,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1200, Function | Medi
 {
     ::OHOS::sptr<ServStatListener> listener
         = new ServStatListener(
-            ServStatListener::StatusCallback([&](const ServiceStatus &status) {
+            ServStatListener::StatusCallback([&](const ::OHOS::HDI::ServiceManager::V1_0::ServiceStatus &status) {
                 HDF_LOGI("service status callback, service is %{public}s", status.serviceName.data());
             }));
     
@@ -1030,7 +1030,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1300, Function | Medi
 {
     ::OHOS::sptr<ServStatListener> listener
         = new ServStatListener(
-            ServStatListener::StatusCallback([&](const ServiceStatus &status) {
+            ServStatListener::StatusCallback([&](const ::OHOS::HDI::ServiceManager::V1_0::ServiceStatus &status) {
                 HDF_LOGI("service status callback, service is %{public}s", status.serviceName.data());
             }));
     
@@ -1054,7 +1054,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1400, Function | Medi
 {
     ::OHOS::sptr<ServStatListener> listener
         = new ServStatListener(
-            ServStatListener::StatusCallback([&](const ServiceStatus &status) {
+            ServStatListener::StatusCallback([&](const ::OHOS::HDI::ServiceManager::V1_0::ServiceStatus &status) {
                 HDF_LOGI("service status callback, service is %{public}s", status.serviceName.data());
             }));
     
@@ -1081,7 +1081,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1500, Function | Medi
 {
     ::OHOS::sptr<ServStatListener> listener
         = new ServStatListener(
-            ServStatListener::StatusCallback([&](const ServiceStatus &status) {
+            ServStatListener::StatusCallback([&](const ::OHOS::HDI::ServiceManager::V1_0::ServiceStatus &status) {
                 HDF_LOGI("service status callback, service is %{public}s", status.serviceName.data());
             }));
     
@@ -1108,7 +1108,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1600, Function | Medi
 {
     ::OHOS::sptr<ServStatListener> listener
         = new ServStatListener(
-            ServStatListener::StatusCallback([&](const ServiceStatus &status) {
+            ServStatListener::StatusCallback([&](const ::OHOS::HDI::ServiceManager::V1_0::ServiceStatus &status) {
                 HDF_LOGI("service status callback, service is %{public}s", status.serviceName.data());
             }));
     
@@ -1138,7 +1138,7 @@ HWTEST_F(HdfServiceMangerHdiTest, SUB_Driver_Manager_HdiCC_1700, Function | Medi
 {
     ::OHOS::sptr<ServStatListener> listener
         = new ServStatListener(
-            ServStatListener::StatusCallback([&](const ServiceStatus &status) {
+            ServStatListener::StatusCallback([&](const ::OHOS::HDI::ServiceManager::V1_0::ServiceStatus &status) {
                 HDF_LOGI("service status callback, service is %{public}s", status.serviceName.data());
             }));
     

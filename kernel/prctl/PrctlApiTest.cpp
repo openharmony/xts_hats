@@ -63,7 +63,7 @@ void PrctlApiTest::TearDownTestCase()
 {
 }
 
-static bool HandleError(const std::string &msg) 
+static bool HandleError(const std::string &msg)
 {
     perror(msg.c_str());
     return false;
@@ -114,8 +114,8 @@ int SetVmaAnonName(void)
     const int NUMBER_PAGE = 3;
     void *retPm = nullptr;
   
-    retPm = mmap(NULL, pageSize * NUMBER_PAGE, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-    if (static_cast< int >(*(int *)retPm) == static_cast<int>(-1)) {
+    retPm = mmap(nullptr, pageSize * NUMBER_PAGE, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+    if (static_cast<int>(*(int *)retPm) == static_cast<int>(-1)) {
         HandleError("mmap fail\n");
     }
     if (mprotect(retPm, pageSize, PROT_NONE)) {
@@ -126,8 +126,9 @@ int SetVmaAnonName(void)
     }
     // Now read the maps and verify that there are no overlapped maps.
     std::string fileData;
-    if (!ReadFdToString("/proc/self/maps", &fileData))
+    if (!ReadFdToString("/proc/self/maps", &fileData)) {
         HandleError("read string\n");
+    }
 
     uintptr_t lastEnd = 0;
     std::vector<std::string> lines = str_split(fileData, "\n");

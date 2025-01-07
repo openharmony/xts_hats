@@ -63,7 +63,7 @@ void PrctlApiTest::TearDownTestCase()
 {
 }
 
-static bool handle_error(const std::string &msg) 
+static bool HandleError(const std::string &msg) 
 {
     perror(msg.c_str());
     return false;
@@ -89,7 +89,7 @@ static std::vector<std::string> str_split(const std::string &s, const std::strin
     return result;
 }
 
-static bool read_fd_to_string(const std::string &path, std::string *content)
+static bool ReadFdToString(const std::string &path, std::string *content)
 {
     char buf[BUFSIZ];
     ssize_t n;
@@ -100,8 +100,9 @@ static bool read_fd_to_string(const std::string &path, std::string *content)
         return false;
     }
     content->clear();
-    while ((n = TEMP_FAILURE_RETRY(read(fd, &buf[0], sizeof(buf)))) > 0)
+    while ((n = TEMP_FAILURE_RETRY(read(fd, &buf[0], sizeof(buf)))) > 0) {
         content->append(buf, n);
+    }
 
     TEMP_FAILURE_RETRY(close(fd));
     return (n == 0) ? true : false;
@@ -109,27 +110,27 @@ static bool read_fd_to_string(const std::string &path, std::string *content)
 
 int SetVmaAnonName(void)
 {
-    size_t page_size = static_cast<size_t>(sysconf(_SC_PAGESIZE));
+    size_t pageSize = static_cast<size_t>(sysconf(_SC_PAGESIZE));
     const int NUMBER_PAGE = 3;
-    void *ret_pm = nullptr;
+    void *retPm = nullptr;
   
-    ret_pm = mmap(NULL, page_size * NUMBER_PAGE, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-    if (static_cast< int >(*(int *)ret_pm) == static_cast<int>(-1)) {
-        handle_error("mmap fail\n");
+    retPm = mmap(NULL, pageSize * NUMBER_PAGE, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+    if (static_cast< int >(*(int *)retPm) == static_cast<int>(-1)) {
+        HandleError("mmap fail\n");
     }
-    if (mprotect(ret_pm, page_size, PROT_NONE)) {
-        handle_error("mprotect fail\n");
+    if (mprotect(retPm, pageSize, PROT_NONE)) {
+        HandleError("mprotect fail\n");
     }
-    if (prctl(PR_SET_VMA, PR_SET_VMA_ANON_NAME, ret_pm, page_size * NUMBER_PAGE, "anonymous map space")) {
-        handle_error("prctl fail \n");
+    if (prctl(PR_SET_VMA, PR_SET_VMA_ANON_NAME, retPm, pageSize * NUMBER_PAGE, "anonymous map space")) {
+        HandleError("prctl fail \n");
     }
     // Now read the maps and verify that there are no overlapped maps.
-    std::string file_data;
-    if (!read_fd_to_string("/proc/self/maps", &file_data))
-        handle_error("read string\n");
+    std::string fileData;
+    if (!ReadFdToString("/proc/self/maps", &fileData))
+        HandleError("read string\n");
 
-    uintptr_t last_end = 0;
-    std::vector<std::string> lines = str_split(file_data, "\n");
+    uintptr_t lastEnd = 0;
+    std::vector<std::string> lines = str_split(fileData, "\n");
     for (size_t i = 0; i < lines.size(); i++) {
         if (lines[i].empty())
             continue;
@@ -139,16 +140,16 @@ int SetVmaAnonName(void)
             std::cout << "FAILED to parse line :" << lines[i];
 
         // This will never fail on the first line , so no need to do any special checking.
-        if (start < last_end)
+        if (start < lastEnd)
             std::cout << "Overlapping map detected:\n"
                       << lines[i - 1] << '\n'
                       << lines[i] << '\n';
  
-        last_end = end;
+        lastEnd = end;
     }
 
-    if (munmap(ret_pm, page_size * NUMBER_PAGE)) {
-        handle_error("munmap fail\n");
+    if (munmap(retPm, pageSize * NUMBER_PAGE)) {
+        HandleError("munmap fail\n");
     }
     return 0;
 }

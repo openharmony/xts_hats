@@ -42,28 +42,6 @@ void CameraTagTestV1_3::TearDown(void)
     cameraTest->Close();
 }
 
-void invalidParmTestU8(int tag, uint8_t value)
-{
-    std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
-    uint8_t valueTest = value;
-    meta->addEntry(tag, &valueTest, 1);
-    std::vector<uint8_t> metaVec;
-    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
-    int rc = HDI::Camera::V1_0::NO_ERROR;
-    EXPECT_EQ(rc, HDI::Camera::V1_0::NO_ERROR);
-}
-
-void invalidParmTestI32(int tag, int32_t value)
-{
-    std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
-    int32_t valueTest = value;
-    meta->addEntry(tag, &valueTest, 1);
-    std::vector<uint8_t> metaVec;
-    MetadataUtils::ConvertMetadataToVec(meta, metaVec);
-    int rc = HDI::Camera::V1_0::NO_ERROR;
-    EXPECT_EQ(rc, HDI::Camera::V1_0::NO_ERROR);
-}
-
 /**
  * @tc.name: SUB_Driver_Camera_SlowMotion_0100
  * @tc.desc: Get and Print all data in OHOS_ABILITY_CAMERA_MODES

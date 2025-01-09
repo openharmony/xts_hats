@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -153,8 +153,8 @@ HWTEST_F(DriverPkgManagerTest, SUB_Driver_Ext_PkgManager_0300, TestSize.Level1)
     DriverPkgManager &drvPkgMgrInstance = DriverPkgManager::GetInstance();
     std::shared_ptr<DeviceInfo> devInfo = std::make_shared<DeviceInfo>(1);
     devInfo->devInfo_.devBusInfo.busType = BUS_TYPE_INVALID;
-    std::shared_ptr<BundleInfoNames> bundle = drvPkgMgrInstance.QueryMatchDriver(devInfo);
-    EXPECT_EQ(nullptr, bundle);
+    std::shared_ptr<DriverInfo> driverInfo = drvPkgMgrInstance.QueryMatchDriver(devInfo);
+    EXPECT_EQ(nullptr, driverInfo);
     cout << "DrvExt_QueryMatch_Illegal_Bus_Test" << endl;
 }
 
@@ -168,8 +168,8 @@ HWTEST_F(DriverPkgManagerPtrTest, SUB_Driver_Ext_PkgManager_0400, TestSize.Level
 {
     DriverPkgManager &drvPkgMgrInstance = DriverPkgManager::GetInstance();
     std::shared_ptr<DeviceInfo> devInfo = std::make_shared<DeviceInfo>(0);
-    std::shared_ptr<BundleInfoNames> bundle = drvPkgMgrInstance.QueryMatchDriver(devInfo);
-    EXPECT_EQ(nullptr, bundle);
+    std::shared_ptr<DriverInfo> driverInfo = drvPkgMgrInstance.QueryMatchDriver(devInfo);
+    EXPECT_EQ(nullptr, driverInfo);
     cout << "DrvExt_QueryMatch_Before_Init_Test" << endl;
 }
 

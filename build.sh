@@ -97,7 +97,7 @@ do_make() {
     fi
     TARGET_APP_ARG=""
     if [ -n "$TARGET_APP_DIR" ]; then
-        TARGET_APP_ARG="--gn-args target_app_dir='$TARGET_APP_DIR'"
+        TARGET_APP_ARG="--gn-args target_app_dir=$TARGET_APP_DIR"
     fi   
 
     ${BASE_HOME}/prebuilts/python/linux-x86/current/bin/python3 -B ${HATS_ROOT}/check_hvigor.py

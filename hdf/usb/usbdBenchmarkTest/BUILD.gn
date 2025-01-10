@@ -27,7 +27,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkDeviceTest") {
   configs = [ ":hdf_usb" ]
 
   deps = [
-    "${usb_driver_path}/hdi_service:libusb_interface_service_1.1",
+    "${usb_driver_path}/hdi_service:libusb_interface_service_1.2",
     "//third_party/benchmark",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
@@ -38,7 +38,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkDeviceTest") {
     "bundle_framework:appexecfwk_base",
     "c_utils:utils",
     "common_event_service:cesfwk_innerkits",
-    "drivers_interface_usb:libusb_proxy_1.1",
+    "drivers_interface_usb:libusb_proxy_1.2",
     "eventhandler:libeventhandler",
     "hdf_core:libhdf_host",
     "hdf_core:libhdf_utils",
@@ -71,7 +71,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkFunctionTest") {
     "bundle_framework:appexecfwk_base",
     "c_utils:utils",
     "common_event_service:cesfwk_innerkits",
-    "drivers_interface_usb:libusb_proxy_1.1",
+    "drivers_interface_usb:libusb_proxy_1.2",
     "eventhandler:libeventhandler",
     "hdf_core:libhdf_host",
     "hdf_core:libhdf_utils",
@@ -104,7 +104,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkManagerInterfaceTest") {
     "bundle_framework:appexecfwk_base",
     "c_utils:utils",
     "common_event_service:cesfwk_innerkits",
-    "drivers_interface_usb:libusb_proxy_1.1",
+    "drivers_interface_usb:libusb_proxy_1.2",
     "eventhandler:libeventhandler",
     "hdf_core:libhdf_host",
     "hdf_core:libhdf_utils",
@@ -127,7 +127,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkRequestTest") {
   configs = [ ":hdf_usb" ]
 
   deps = [
-    "${usb_driver_path}/hdi_service:libusb_interface_service_1.1",
+    "${usb_driver_path}/hdi_service:libusb_interface_service_1.2",
     "//third_party/benchmark",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
@@ -138,7 +138,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkRequestTest") {
     "bundle_framework:appexecfwk_base",
     "c_utils:utils",
     "common_event_service:cesfwk_innerkits",
-    "drivers_interface_usb:libusb_proxy_1.1",
+    "drivers_interface_usb:libusb_proxy_1.2",
     "eventhandler:libeventhandler",
     "hdf_core:libhdf_host",
     "hdf_core:libhdf_utils",
@@ -170,7 +170,7 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkTransferTest") {
     "bundle_framework:appexecfwk_base",
     "c_utils:utils",
     "common_event_service:cesfwk_innerkits",
-    "drivers_interface_usb:libusb_proxy_1.1",
+    "drivers_interface_usb:libusb_proxy_1.2",
     "eventhandler:libeventhandler",
     "hdf_core:libhdf_host",
     "hdf_core:libhdf_utils",

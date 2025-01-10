@@ -41,7 +41,45 @@ namespace {
     constexpr const char *AGNSS_SERVICE_NAME = "agnss_interface_service";
     constexpr const char *GNSS_SERVICE_NAME = "gnss_interface_service";
     constexpr const char *GEOFENCE_SERVICE_NAME = "geofence_interface_service";
+    constexpr const char *LOCATION_HOST_NAME = "location_host";
     #endif
+}
+
+bool IsDeviceLoaded(const std::string &servName)
+{
+    auto devmgr = HDI::DeviceManager::V1_0::IDeviceManager::Get();
+    if (devmgr == nullptr) {
+        printf("fail to get devmgr.\n");
+        return false;
+    }
+    std::vector<OHOS::HDI::DeviceManager::V1_0::HdiDevHostInfo> deviceInfos;
+    int ret = devmgr->ListAllDevice(deviceInfos);
+    if (ret != HDF_SUCCESS) {
+        printf("get listAllDevice failed\n");
+        return false;
+    }
+    auto itDevicesInfo = deviceInfos.begin();
+    for (;itDevicesInfo != deviceInfos.end(); itDevicesInfo++) {
+        if (itDevicesInfo->hostName == LOCATION_HOST_NAME) {
+            break;
+        }
+    }
+    if (itDevicesInfo == deviceInfos.end()) {
+        printf("The host is not found:LOCATION_HOST_NAME\n");
+        return false;
+    }
+    auto itDevInfo = itDevicesInfo->devInfo.begin();
+    for (;itDevInfo != itDevicesInfo->devInfo.end(); itDevInfo++) {
+        if (itDevInfo->servName == servName) {
+            break;
+        }
+    }
+    if (itDevInfo == itDevicesInfo->devInfo.end()) {
+        printf("The devices is not found\n");
+        return false;
+    }
+    printf("already loaded...\n");
+    return true;
 }
 
 class LocationGnssTest : public testing::Test {
@@ -156,17 +194,23 @@ void LocationGnssTest::SetUpTestCase()
         printf("fail to get devmgr.\n");
         return;
     }
-    if (devmgr->LoadDevice(GNSS_SERVICE_NAME) != 0) {
-        printf("Load gnss service failed!\n");
-        return;
+    if (!IsDeviceLoaded(GNSS_SERVICE_NAME)) {
+        if (devmgr->LoadDevice(GNSS_SERVICE_NAME) != 0) {
+            printf("Load gnss service failed!\n");
+            return;
+        }
     }
-    if (devmgr->LoadDevice(AGNSS_SERVICE_NAME) != 0) {
-        printf("Load agnss service failed!\n");
-        return;
+    if (!IsDeviceLoaded(AGNSS_SERVICE_NAME)) {
+        if (devmgr->LoadDevice(AGNSS_SERVICE_NAME) != 0) {
+            printf("Load agnss service failed!\n");
+            return;
+        }
     }
-    if (devmgr->LoadDevice(GEOFENCE_SERVICE_NAME) != 0) {
-        printf("Load geofence service failed!\n");
-        return;
+    if (!IsDeviceLoaded(GEOFENCE_SERVICE_NAME)) {
+        if (devmgr->LoadDevice(GEOFENCE_SERVICE_NAME) != 0) {
+            printf("Load geofence service failed!\n");
+            return;
+        }
     }
     g_ignssHci = IGnssInterface::Get();
 #endif

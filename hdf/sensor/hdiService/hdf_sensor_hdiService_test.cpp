@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -93,6 +93,7 @@ namespace {
     constexpr int32_t SENSOR_POLL_TIME = 1;
     constexpr int32_t SENSOR_WAIT_TIME = 100;
     constexpr int32_t SENSOR_WAIT_TIME2 = 20000;
+    constexpr int32_t SENSOR_WAIT_TIME3 = 2000;
     constexpr int32_t ABNORMAL_SENSORID = -1;
     constexpr int32_t RATE_LEVEL = 50;
 }
@@ -107,11 +108,13 @@ public:
 
 void HdfSensorHdiTest::SetUpTestCase()
 {
+    OsalMSleep(SENSOR_WAIT_TIME3);
     g_sensorInterface = ISensorInterface::Get();
 }
 
 void HdfSensorHdiTest::TearDownTestCase()
 {
+    OsalMSleep(SENSOR_WAIT_TIME3);
 }
 
 void HdfSensorHdiTest::SetUp()
@@ -236,7 +239,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_0700, TestSize.Level1)
         EXPECT_EQ(SENSOR_SUCCESS, ret);
         ret = g_sensorInterface->Enable(iter.sensorId);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
-        OsalSleep(SENSOR_POLL_TIME);
+        OsalSleep(SENSOR_POLL_TIME3);
         ret = g_sensorInterface->Disable(iter.sensorId);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
     }
@@ -265,7 +268,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_0800, TestSize.Level1)
         EXPECT_EQ(SENSOR_SUCCESS, ret);
         ret = g_sensorInterface->Enable(iter.sensorId);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
-        OsalMSleep(SENSOR_WAIT_TIME);
+        OsalMSleep(SENSOR_WAIT_TIME3);
         ret = g_sensorInterface->Disable(iter.sensorId);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
     }
@@ -365,7 +368,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_1400, TestSize.Level1)
         }
         ret = g_sensorInterface->Enable(iter.sensorId);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
-        OsalMSleep(SENSOR_WAIT_TIME);
+        OsalMSleep(SENSOR_WAIT_TIME3);
         ret = g_sensorInterface->Disable(iter.sensorId);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
     }
@@ -395,7 +398,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_1500, TestSize.Level1)
         }
         ret = g_sensorInterface->Enable(iter.sensorId);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
-        OsalMSleep(SENSOR_WAIT_TIME);
+        OsalMSleep(SENSOR_WAIT_TIME3);
         ret = g_sensorInterface->Disable(iter.sensorId);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
     }
@@ -425,7 +428,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_1600, TestSize.Level1)
         }
         ret = g_sensorInterface->Enable(iter.sensorId);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
-        OsalMSleep(SENSOR_WAIT_TIME);
+        OsalMSleep(SENSOR_WAIT_TIME3);
         ret = g_sensorInterface->Disable(iter.sensorId);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
     }
@@ -468,7 +471,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_1800, TestSize.Level1)
         EXPECT_EQ(SENSOR_FAILURE, ret);
         ret = g_sensorInterface->Enable(iter.sensorId);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
-        OsalMSleep(SENSOR_WAIT_TIME);
+        OsalMSleep(SENSOR_WAIT_TIME3);
         ret = g_sensorInterface->Disable(iter.sensorId);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
     }
@@ -522,6 +525,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2400, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_NONE);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_NONE);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_NONE);
     EXPECT_EQ(status,ret);
 }
@@ -541,6 +545,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2500, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_ACCELEROMETER );
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_ACCELEROMETER );
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_ACCELEROMETER);
     EXPECT_EQ(status,ret);
 }
@@ -560,6 +565,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2600, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_GYROSCOPE);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_GYROSCOPE);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_GYROSCOPE);
     EXPECT_EQ(status,ret);
 }
@@ -579,6 +585,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2700, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_PHOTOPLETHYSMOGRAPH);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_PHOTOPLETHYSMOGRAPH);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_PHOTOPLETHYSMOGRAPH);
     EXPECT_EQ(status,ret);
 }
@@ -598,6 +605,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2800, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_ELECTROCARDIOGRAPH);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_ELECTROCARDIOGRAPH);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_ELECTROCARDIOGRAPH);
     EXPECT_EQ(status,ret);
 }
@@ -617,6 +625,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2900, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_AMBIENT_LIGHT);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_AMBIENT_LIGHT);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_AMBIENT_LIGHT);
     EXPECT_EQ(status,ret);
 }
@@ -636,6 +645,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3100, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_MAGNETIC_FIELD);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_MAGNETIC_FIELD);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_MAGNETIC_FIELD);
     EXPECT_EQ(status,ret);
 }
@@ -655,6 +665,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3200, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_CAPACITIVE);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_CAPACITIVE);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_CAPACITIVE);
     EXPECT_EQ(status,ret);
 }
@@ -674,6 +685,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3300, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_BAROMETER);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_BAROMETER);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_BAROMETER);
     EXPECT_EQ(status,ret);
 }
@@ -693,6 +705,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3400, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_TEMPERATURE);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_TEMPERATURE);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_TEMPERATURE);
     EXPECT_EQ(status,ret);
 }
@@ -712,6 +725,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3500, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_HALL);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_HALL);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_HALL);
     EXPECT_EQ(status,ret);
 }
@@ -731,6 +745,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3600, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_GESTURE);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_GESTURE);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_GESTURE);
     EXPECT_EQ(status,ret);
 }
@@ -750,6 +765,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3700, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_PROXIMITY);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_PROXIMITY);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_PROXIMITY);
     EXPECT_EQ(status,ret);
 }
@@ -769,6 +785,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3800, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_HUMIDITY);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_HUMIDITY);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_HUMIDITY);
     EXPECT_EQ(status,ret);
 }
@@ -788,6 +805,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5100, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_MEDICAL_BEGIN);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_MEDICAL_BEGIN);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_MEDICAL_BEGIN);
     EXPECT_EQ(status,ret);
 }
@@ -807,6 +825,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5200, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_MEDICAL_END);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_MEDICAL_END);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_MEDICAL_END);
     EXPECT_EQ(status,ret);
 }
@@ -826,6 +845,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5300, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_PHYSICAL_MAX);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_PHYSICAL_MAX);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_PHYSICAL_MAX);
     EXPECT_EQ(status,ret);
 }
@@ -845,6 +865,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5400, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_ORIENTATION);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_ORIENTATION);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_ORIENTATION);
     EXPECT_EQ(status,ret);
 }
@@ -864,6 +885,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5500, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_GRAVITY);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_GRAVITY);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_GRAVITY);
     EXPECT_EQ(status,ret);
 }
@@ -883,6 +905,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5600, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_LINEAR_ACCELERATION);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_LINEAR_ACCELERATION);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_LINEAR_ACCELERATION);
     EXPECT_EQ(status,ret);
 }
@@ -902,6 +925,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5700, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_ROTATION_VECTOR);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_ROTATION_VECTOR);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_ROTATION_VECTOR);
     EXPECT_EQ(status,ret);
 }
@@ -921,6 +945,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5800, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_AMBIENT_TEMPERATURE);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_AMBIENT_TEMPERATURE);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_AMBIENT_TEMPERATURE);
     EXPECT_EQ(status,ret);
 }
@@ -940,6 +965,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5900, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_MAGNETIC_FIELD_UNCALIBRATED);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_MAGNETIC_FIELD_UNCALIBRATED);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_MAGNETIC_FIELD_UNCALIBRATED);
     EXPECT_EQ(status,ret);
 }
@@ -959,6 +985,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6000, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_GAME_ROTATION_VECTOR);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_GAME_ROTATION_VECTOR);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_GAME_ROTATION_VECTOR);
     EXPECT_EQ(status,ret);
 }
@@ -978,6 +1005,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6100, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_GYROSCOPE_UNCALIBRATED);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_GYROSCOPE_UNCALIBRATED);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_GYROSCOPE_UNCALIBRATED);
     EXPECT_EQ(status,ret);
 }
@@ -997,6 +1025,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6200, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_SIGNIFICANT_MOTION);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_SIGNIFICANT_MOTION);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_SIGNIFICANT_MOTION);
     EXPECT_EQ(status,ret);
 }
@@ -1016,6 +1045,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6300, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_PEDOMETER_DETECTION);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_PEDOMETER_DETECTION);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_PEDOMETER_DETECTION);
     EXPECT_EQ(status,ret);
 }
@@ -1035,6 +1065,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6400, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_PEDOMETER);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_PEDOMETER);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_PEDOMETER);
     EXPECT_EQ(status,ret);
 }
@@ -1054,6 +1085,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6500, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_GEOMAGNETIC_ROTATION_VECTOR);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_GEOMAGNETIC_ROTATION_VECTOR);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_GEOMAGNETIC_ROTATION_VECTOR);
     EXPECT_EQ(status,ret);
 }
@@ -1073,6 +1105,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6600, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_HEART_RATE);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_HEART_RATE);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_HEART_RATE);
     EXPECT_EQ(status,ret);
 }
@@ -1092,6 +1125,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6700, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_DEVICE_ORIENTATION);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_DEVICE_ORIENTATION);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_DEVICE_ORIENTATION);
     EXPECT_EQ(status,ret);
 }
@@ -1111,6 +1145,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6800, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_WEAR_DETECTION);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_WEAR_DETECTION);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_WEAR_DETECTION);
     EXPECT_EQ(status,ret);
 }
@@ -1130,6 +1165,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6900, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_ACCELEROMETER_UNCALIBRATED);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_ACCELEROMETER_UNCALIBRATED);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_ACCELEROMETER_UNCALIBRATED);
     EXPECT_EQ(status,ret);
 }
@@ -1149,6 +1185,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7000, TestSize.Level1)
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_MAX);
     int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_MAX);
     EXPECT_EQ(status,ret);
+    OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_MAX);
     EXPECT_EQ(status,ret);
 }
@@ -1475,9 +1512,10 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8700, TestSize.Level1)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
     EXPECT_GT(g_info.size(), 0);
+        int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_GESTURE);
         int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_GESTURE, true, RATE_LEVEL);
-        EXPECT_NE(SENSOR_SUCCESS, ret);
+        EXPECT_EQ(status, ret);
         OsalMSleep(SENSOR_WAIT_TIME);
         ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_GESTURE, false, RATE_LEVEL);
-        EXPECT_NE(SENSOR_SUCCESS, ret);
+        EXPECT_EQ(status, ret);
 }

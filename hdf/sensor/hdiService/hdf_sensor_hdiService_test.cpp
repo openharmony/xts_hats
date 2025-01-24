@@ -542,10 +542,10 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2500, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_ACCELEROMETER );
+    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_ACCELEROMETER);
     int32_t ret = g_sensorInterface->SetBatch(SENSOR_TYPE_ACCELEROMETER, SENSOR_INTERVAL1, SENSOR_POLL_TIME);
     EXPECT_EQ(status,ret);
-    ret = g_sensorInterface->Enable(SENSOR_TYPE_ACCELEROMETER );
+    ret = g_sensorInterface->Enable(SENSOR_TYPE_ACCELEROMETER);
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_ACCELEROMETER);

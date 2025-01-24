@@ -114,7 +114,6 @@ void HdfSensorHdiTest::SetUpTestCase()
 
 void HdfSensorHdiTest::TearDownTestCase()
 {
-    OsalMSleep(SENSOR_WAIT_TIME3);
 }
 
 void HdfSensorHdiTest::SetUp()

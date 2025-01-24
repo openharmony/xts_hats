@@ -238,7 +238,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_0700, TestSize.Level1)
         EXPECT_EQ(SENSOR_SUCCESS, ret);
         ret = g_sensorInterface->Enable(iter.sensorId);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
-        OsalSleep(SENSOR_WAIT_TIME3);
+        OsalSleep(SENSOR_POLL_TIME);
         ret = g_sensorInterface->Disable(iter.sensorId);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
     }

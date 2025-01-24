@@ -543,7 +543,9 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2500, TestSize.Level1)
     }
 
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_ACCELEROMETER );
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_ACCELEROMETER );
+    int32_t ret = g_sensorInterface->SetBatch(SENSOR_TYPE_ACCELEROMETER, SENSOR_INTERVAL1, SENSOR_POLL_TIME);
+    EXPECT_EQ(status,ret);
+    ret = g_sensorInterface->Enable(SENSOR_TYPE_ACCELEROMETER );
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_ACCELEROMETER);
@@ -563,7 +565,9 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2600, TestSize.Level1)
     }
 
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_GYROSCOPE);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_GYROSCOPE);
+    int32_t ret = g_sensorInterface->SetBatch(SENSOR_TYPE_GYROSCOPE, SENSOR_INTERVAL1, SENSOR_POLL_TIME);
+    EXPECT_EQ(status,ret);
+    ret = g_sensorInterface->Enable(SENSOR_TYPE_GYROSCOPE);
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_GYROSCOPE);
@@ -623,7 +627,9 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2900, TestSize.Level1)
     }
 
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_AMBIENT_LIGHT);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_AMBIENT_LIGHT);
+    int32_t ret = g_sensorInterface->SetBatch(SENSOR_TYPE_AMBIENT_LIGHT, SENSOR_INTERVAL1, SENSOR_POLL_TIME);
+    EXPECT_EQ(status,ret);
+    ret = g_sensorInterface->Enable(SENSOR_TYPE_AMBIENT_LIGHT);
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_AMBIENT_LIGHT);
@@ -643,7 +649,9 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3100, TestSize.Level1)
     }
 
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_MAGNETIC_FIELD);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_MAGNETIC_FIELD);
+    int32_t ret = g_sensorInterface->SetBatch(SENSOR_TYPE_MAGNETIC_FIELD, SENSOR_INTERVAL1, SENSOR_POLL_TIME);
+    EXPECT_EQ(status,ret);
+    ret = g_sensorInterface->Enable(SENSOR_TYPE_MAGNETIC_FIELD);
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_MAGNETIC_FIELD);
@@ -683,7 +691,9 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3300, TestSize.Level1)
     }
 
     int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_BAROMETER);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_BAROMETER);
+    int32_t ret = g_sensorInterface->SetBatch(SENSOR_TYPE_BAROMETER, SENSOR_INTERVAL1, SENSOR_POLL_TIME);
+    EXPECT_EQ(status,ret);
+    ret = g_sensorInterface->Enable(SENSOR_TYPE_BAROMETER);
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable(SENSOR_TYPE_BAROMETER);

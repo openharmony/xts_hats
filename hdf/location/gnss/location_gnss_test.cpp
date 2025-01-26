@@ -36,13 +36,17 @@ using namespace std;
 using namespace testing::ext;
 
 namespace {
-    #ifdef FEATURE_GNSS_SUPPORT
+#ifdef FEATURE_GNSS_SUPPORT
     sptr<IGnssInterface> g_ignssHci = nullptr;
+#ifdef HDF_DRIVERS_INTERFACE_AGNSS_ENABLE
     constexpr const char *AGNSS_SERVICE_NAME = "agnss_interface_service";
+#endif
     constexpr const char *GNSS_SERVICE_NAME = "gnss_interface_service";
+#ifdef HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE
     constexpr const char *GEOFENCE_SERVICE_NAME = "geofence_interface_service";
+#endif
     constexpr const char *LOCATION_HOST_NAME = "location_host";
-    #endif
+#endif
 }
 
 class LocationGnssTest : public testing::Test {
@@ -200,18 +204,22 @@ void LocationGnssTest::SetUpTestCase()
             return;
         }
     }
+#ifdef HDF_DRIVERS_INTERFACE_AGNSS_ENABLE
     if (!IsDeviceLoaded(AGNSS_SERVICE_NAME)) {
         if (devmgr->LoadDevice(AGNSS_SERVICE_NAME) != 0) {
             printf("Load agnss service failed!\n");
             return;
         }
     }
+#endif
+#ifdef HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE
     if (!IsDeviceLoaded(GEOFENCE_SERVICE_NAME)) {
         if (devmgr->LoadDevice(GEOFENCE_SERVICE_NAME) != 0) {
             printf("Load geofence service failed!\n");
             return;
         }
     }
+#endif
     g_ignssHci = IGnssInterface::Get();
 #endif
 }
@@ -228,14 +236,18 @@ void LocationGnssTest::TearDownTestCase()
         printf("Load gnss service failed!\n");
         return;
     }
+#ifdef HDF_DRIVERS_INTERFACE_AGNSS_ENABLE
     if (devmgr->UnloadDevice(AGNSS_SERVICE_NAME) != 0) {
         printf("Load agnss service failed!\n");
         return;
     }
+#endif
+#ifdef HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE
     if (devmgr->UnloadDevice(GEOFENCE_SERVICE_NAME) != 0) {
         printf("Load geofence service failed!\n");
         return;
     }
+#endif
 #endif
 }
 

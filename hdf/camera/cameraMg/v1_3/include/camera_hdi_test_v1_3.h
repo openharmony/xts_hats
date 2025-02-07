@@ -25,6 +25,8 @@ public:
     void SetUp(void);
     void TearDown(void);
     void TakePhotoWithTags(std::shared_ptr<OHOS::Camera::CameraSetting> meta);
+    bool SetFocusDrivenType(common_metadata_header_t* data, camera_focus_driven_type_t type,
+        std::shared_ptr<OHOS::Camera::CameraSetting>& meta, std::vector<uint8_t>& setting);
     std::shared_ptr<OHOS::Camera::Test> cameraTest = nullptr;
 };
 #endif

@@ -18,11 +18,8 @@
 #include <gtest/gtest.h>
 #include <sys/times.h>
 #include "securec.h"
-
+#include <ctime>
 using namespace testing::ext;
-
-static const int TEST_DELAY_TIME = 100 * 1000;
-
 class HatsTimesApiTest : public testing::Test {
 public:
 static void SetUpTestCase();
@@ -55,15 +52,30 @@ void HatsTimesApiTest::TearDownTestCase()
 HWTEST_F(HatsTimesApiTest, TimesBasicSuccess_0001, Function | MediumTest | Level1)
 {
     struct tms tms1, tms2;
+    clock_t startTime = 0;
+    int counts = 30000000;
+    int syscounts = 100000;
+    double threshold = 1.0;
+    double duration = 0;
     clock_t init = 0;
     clock_t start = times(&tms1);
     EXPECT_GE(start, init);
-
-    usleep(TEST_DELAY_TIME);
-
-    clock_t end = times(&tms2);
+    clock_t end = 0;
+    volatile int j = 0;
+    startTime = clock();
+    do {
+        for (volatile int i = 0; i < counts; i++) {
+            j++;
+        }
+        for (int k = 0; k < syscounts; k++) {
+            end = times(&tms2);
+        }
+        
+        if (tms2.tms_utime > tms1.tms_utime && tms2.tms_stime > tms1.tms_stime) {
+            break;
+        }
+    } while ((duration = static_cast<double>(clock() - startTime) / CLOCKS_PER_SEC) < threshold);
     EXPECT_GT(end, start);
-
-    EXPECT_EQ(tms2.tms_utime, tms1.tms_utime);
-    EXPECT_LE(tms2.tms_stime, tms1.tms_stime);
+    EXPECT_GT(tms2.tms_utime, tms1.tms_utime);
+    EXPECT_GT(tms2.tms_stime, tms1.tms_stime);
 }

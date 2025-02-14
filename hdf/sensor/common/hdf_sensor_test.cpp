@@ -45,7 +45,7 @@ namespace {
     struct SensorValueRange g_alsRange[] = {{10000.0, 0.0}};
     struct SensorValueRange g_pedometerRange[] = {{10000.0, 0.0}};
     struct SensorValueRange g_proximityRange[] = {{5.0, 0.0}};
-    struct SensorValueRange g_hallRange[] = {{1.0, 0.0}};
+    struct SensorValueRange g_hallRange[] = {{6.0, 0.0}};
     struct SensorValueRange g_barometerRange[] = {{1100.0, -1100.0}, {1100.0, -1100.0}};
     struct SensorValueRange g_magneticRange[] = {{2000.0, -2000.0}, {2000.0, -2000.0}, {2000.0, -2000.0}};
     struct SensorValueRange g_gyroscopeRange[] = {{35.0, -35.0}, {35.0, -35.0}, {35.0, -35.0}};

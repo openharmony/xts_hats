@@ -32,6 +32,8 @@
 using namespace testing::ext;
 
 static const int MAX_SIZE = 128;
+static const int ID_ONE = 88;
+static const int ID_TWO = 98;
 
 class HatsSocketTest : public testing::Test {
 public:
@@ -141,7 +143,7 @@ struct SetOptionSupportTest {
     {85,    AF_NETLINK, SOCK_DGRAM, NETLINK_KOBJECT_UEVENT},
     {86,    AF_NETLINK, SOCK_DGRAM, NETLINK_GENERIC},
     {87,    AF_NETLINK, SOCK_DGRAM, IPPROTO_IP},
-    {88,    AF_NETLINK, SOCK_DGRAM, IPPROTO_TCP},
+    {88,    AF_NETLINK, SOCK_DGRAM, NETLINK_XFRM},
     {89,    AF_NETLINK, SOCK_RAW, NETLINK_ROUTE},
     {90,    AF_NETLINK, SOCK_RAW, NETLINK_SOCK_DIAG},
     {91,    AF_NETLINK, SOCK_RAW, NETLINK_AUDIT},
@@ -150,7 +152,7 @@ struct SetOptionSupportTest {
     {95,    AF_NETLINK, SOCK_RAW, NETLINK_KOBJECT_UEVENT},
     {96,    AF_NETLINK, SOCK_RAW, NETLINK_GENERIC},
     {97,    AF_NETLINK, SOCK_RAW, IPPROTO_IP},
-    {98,    AF_NETLINK, SOCK_RAW, IPPROTO_TCP},
+    {98,    AF_NETLINK, SOCK_RAW, NETLINK_XFRM},
     {99,    AF_PACKET, SOCK_DGRAM, NETLINK_ROUTE},
     {110,   AF_PACKET, SOCK_DGRAM, NETLINK_FIREWALL},
     {111,   AF_PACKET, SOCK_DGRAM, NETLINK_SOCK_DIAG},
@@ -228,10 +230,15 @@ HWTEST_F(HatsSocketTest, SocketCreateFdSuccess_0001, Function | MediumTest | Lev
 {
     int i;
     int socketFd = -1;
+    const string path = "/proc/sys/net/core/xfrm_acq_expires";
     for (i = 0; i < sizeof(g_socketOpt) / sizeof(g_socketOpt[0]); i++) {
+        if ((g_socketOpt[i].id == ID_ONE || g_socketOpt[i].id == ID_TWO) && access(path.c_str(), F_OK) == -1) {
+            continue;
+        }
         socketFd = socket(g_socketOpt[i].domain, g_socketOpt[i].type, g_socketOpt[i].protocol);
         if (socketFd <= 0) {
             printf("id = %d\n", g_socketOpt[i].id);
+            printf("err = %s\n", strerror(errno));
         }
         EXPECT_TRUE(socketFd > 0);
         close(socketFd);

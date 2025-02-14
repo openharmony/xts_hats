@@ -50,7 +50,7 @@ namespace {
     struct SensorValueRange g_alsRange[] = {{10000000, 0}};
     struct SensorValueRange g_pedometerRange[] = {{10000, 0}};
     struct SensorValueRange g_proximityRange[] = {{5, 0}};
-    struct SensorValueRange g_hallRange[] = {{2, 0}};
+    struct SensorValueRange g_hallRange[] = {{6, 0}};
     struct SensorValueRange g_barometerRange[] = {{1100, -1100}, {1100, -1100}};
     struct SensorValueRange g_magneticRange[] = {{2000, -2000}, {2000, -2000}, {2000, -2000}};
     struct SensorValueRange g_gyroscopeRange[] = {{35, -35}, {35, -35}, {35, -35}};
@@ -110,6 +110,9 @@ void HdfSensorHdiTest::SetUpTestCase()
 {
     OsalMSleep(SENSOR_WAIT_TIME3);
     g_sensorInterface = ISensorInterface::Get();
+    if (g_sensorInterface == nullptr) {
+        g_sensorInterface->GetAllSensorInfo(g_info);
+    }
 }
 
 void HdfSensorHdiTest::TearDownTestCase()

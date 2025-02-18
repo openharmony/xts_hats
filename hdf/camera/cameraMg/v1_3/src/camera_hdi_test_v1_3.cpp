@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2024-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file expected in compliance with the License.
  * You may obtain a copy of the License at
@@ -866,4 +866,407 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_HighQuality_0300, TestSize.Level1)
     cameraTest->captureIds = {cameraTest->captureIdPreview};
     cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdCapture};
     cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.name:SUB_MULTIMEDIA_CAMERA_OHOS_CONTROL_FOCUS_RANGE_TYPE_0100
+ * @tc.desc: test TAG OHOS_ABILITY_FOCUS_RANGE_TYPES and OHOS_CONTROL_FOCUS_RANGE_TYPE
+ * @tc.size:MediumTest
+ * @tc.type:Function
+*/
+HWTEST_F(CameraHdiTestV1_3, SUB_MULTIMEDIA_CAMERA_OHOS_CONTROL_FOCUS_RANGE_TYPE_0100, TestSize.Level1)
+{
+    cameraTest->Close();
+    cameraTest->Open(DEVICE_1); // front camera
+    ASSERT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    ASSERT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_FOCUS_RANGE_TYPES, &entry);
+    if (cameraTest->rc != CAM_META_SUCCESS || entry.count == 0) {
+        CAMERA_LOGE("OHOS_ABILITY_FOCUS_RANGE_TYPES is not supported");
+        return;
+    }
+    for (int i = 0; i < entry.count; i++) {
+        if (entry.data.u8[i] == OHOS_CAMERA_FOCUS_RANGE_NEAR) {
+            CAMERA_LOGI("focus range type OHOS_CAMERA_FOCUS_RANGE_NEAR is supported");
+        } else if (entry.data.u8[i] == OHOS_CAMERA_FOCUS_RANGE_AUTO) {
+            CAMERA_LOGI("focus range type OHOS_CAMERA_FOCUS_RANGE_AUTO is supported");
+        } else {
+            CAMERA_LOGE("focus range type is not supported");
+            return;
+        }
+    }
+    camera_metadata_item_t item;
+    bool status = false;
+    uint8_t metaFocusRangeType = static_cast<uint8_t>(OHOS_CAMERA_FOCUS_RANGE_NEAR);
+    int ret = FindCameraMetadataItem(data, OHOS_CONTROL_FOCUS_RANGE_TYPE, &item);
+    if (ret == CAM_META_ITEM_NOT_FOUND) {
+        status = cameraTest->ability->addEntry(OHOS_CONTROL_FOCUS_RANGE_TYPE, &metaFocusRangeType, DATA_COUNT);
+        CAMERA_LOGI("add OHOS_CAMERA_FOCUS_RANGE_NEAR to ability");
+    } else if (ret == CAM_META_SUCCESS) {
+        status = cameraTest->ability->updateEntry(OHOS_CONTROL_FOCUS_RANGE_TYPE, &metaFocusRangeType, DATA_COUNT);
+        CAMERA_LOGI("update OHOS_CAMERA_FOCUS_RANGE_NEAR to ability");
+    }
+    std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+    std::vector<uint8_t> setting;
+    uint8_t nearType = 1;
+    meta->addEntry(OHOS_CONTROL_FOCUS_RANGE_TYPE, &nearType, DATA_COUNT);
+    MetadataUtils::ConvertMetadataToVec(meta, setting);
+    cameraTest->rc = (OHOS::HDI::Camera::V1_0::CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+    CAMERA_LOGI("first: update settings success");
+    ret = FindCameraMetadataItem(data, OHOS_CONTROL_FOCUS_RANGE_TYPE, &item);
+    EXPECT_EQ(ret, CAM_META_SUCCESS);
+    EXPECT_TRUE(item.data.u8[0] == OHOS_CAMERA_FOCUS_RANGE_NEAR);
+}
+
+/**
+ * @tc.name:SUB_MULTIMEDIA_CAMERA_OHOS_CONTROL_FOCUS_RANGE_TYPE_0200
+ * @tc.desc: test TAG OHOS_ABILITY_FOCUS_RANGE_TYPES and OHOS_CONTROL_FOCUS_RANGE_TYPE
+ * @tc.size:MediumTest
+ * @tc.type:Function
+*/
+HWTEST_F(CameraHdiTestV1_3, SUB_MULTIMEDIA_CAMERA_OHOS_CONTROL_FOCUS_RANGE_TYPE_0200, TestSize.Level1)
+{
+    cameraTest->Close();
+    cameraTest->Open(DEVICE_1); // front camera
+    ASSERT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    ASSERT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_FOCUS_RANGE_TYPES, &entry);
+    if (cameraTest->rc != CAM_META_SUCCESS || entry.count == 0) {
+        CAMERA_LOGE("OHOS_ABILITY_FOCUS_RANGE_TYPES is not supported");
+        return;
+    }
+    for (int i = 0; i < entry.count; i++) {
+        if (entry.data.u8[i] == OHOS_CAMERA_FOCUS_RANGE_NEAR) {
+            CAMERA_LOGI("focus range type OHOS_CAMERA_FOCUS_RANGE_NEAR is supported");
+        } else if (entry.data.u8[i] == OHOS_CAMERA_FOCUS_RANGE_AUTO) {
+            CAMERA_LOGI("focus range type OHOS_CAMERA_FOCUS_RANGE_AUTO is supported");
+        } else {
+            CAMERA_LOGE("focus range type is not supported");
+            return;
+        }
+    }
+    camera_metadata_item_t item;
+    bool status = false;
+    std::vector<uint8_t> setting;
+    uint8_t metaFocusRangeType = static_cast<uint8_t>(OHOS_CAMERA_FOCUS_RANGE_AUTO);
+    int ret = FindCameraMetadataItem(data, OHOS_CONTROL_FOCUS_RANGE_TYPE, &item);
+    if (ret == CAM_META_ITEM_NOT_FOUND) {
+        status = cameraTest->ability->addEntry(OHOS_CONTROL_FOCUS_RANGE_TYPE, &metaFocusRangeType, DATA_COUNT);
+        CAMERA_LOGI("add OHOS_CAMERA_FOCUS_RANGE_AUTO to ability");
+    } else if (ret == CAM_META_SUCCESS) {
+        status = cameraTest->ability->updateEntry(OHOS_CONTROL_FOCUS_RANGE_TYPE, &metaFocusRangeType, DATA_COUNT);
+        CAMERA_LOGI("update OHOS_CAMERA_FOCUS_RANGE_AUTO to ability");
+    }
+    std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+    uint8_t autoType = 0;
+    meta->addEntry(OHOS_CONTROL_FOCUS_RANGE_TYPE, &autoType, DATA_COUNT);
+    MetadataUtils::ConvertMetadataToVec(meta, setting);
+    cameraTest->rc = (OHOS::HDI::Camera::V1_0::CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+    CAMERA_LOGI("second: update settings success");
+    ret = FindCameraMetadataItem(data, OHOS_CONTROL_FOCUS_RANGE_TYPE, &item);
+    EXPECT_EQ(ret, CAM_META_SUCCESS);
+    EXPECT_TRUE(item.data.u8[0] == OHOS_CAMERA_FOCUS_RANGE_AUTO);
+}
+
+/**
+ * @tc.name:SUB_MULTIMEDIA_CAMERA_OHOS_CONTROL_FOCUS_DRIVEN_TYPE_0100
+ * @tc.desc: test TAG OHOS_ABILITY_FOCUS_DRIVEN_TYPES and OHOS_CONTROL_FOCUS_DRIVEN_TYPE
+ * @tc.size:MediumTest
+ * @tc.type:Function
+*/
+HWTEST_F(CameraHdiTestV1_3, SUB_MULTIMEDIA_CAMERA_OHOS_CONTROL_FOCUS_DRIVEN_TYPE_0100, TestSize.Level1)
+{
+    ASSERT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    ASSERT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_FOCUS_DRIVEN_TYPES, &entry);
+    if (cameraTest->rc != CAM_META_SUCCESS || entry.count == 0) {
+        CAMERA_LOGE("OHOS_ABILITY_FOCUS_DRIVEN_TYPES is not supported");
+        return;
+    }
+    for (int i = 0; i < entry.count; i++) {
+        if (entry.data.u8[i] == OHOS_CAMERA_FOCUS_DRIVEN_FACE) {
+            CAMERA_LOGI("focus driven type OHOS_CAMERA_FOCUS_DRIVEN_FACE is supported");
+        } else if (entry.data.u8[i] == OHOS_CAMERA_FOCUS_DRIVEN_AUTO) {
+            CAMERA_LOGI("focus driven type OHOS_CAMERA_FOCUS_DRIVEN_AUTO is supported");
+        } else {
+            CAMERA_LOGE("focus driven type is not supported");
+            return;
+        }
+    }
+    camera_metadata_item_t item;
+    bool status = false;
+    uint8_t metaFocusDrivenType = static_cast<uint8_t>(OHOS_CAMERA_FOCUS_DRIVEN_FACE);
+    int ret = FindCameraMetadataItem(data, OHOS_CONTROL_FOCUS_DRIVEN_TYPE, &item);
+    if (ret == CAM_META_ITEM_NOT_FOUND) {
+        status = cameraTest->ability->addEntry(OHOS_CONTROL_FOCUS_DRIVEN_TYPE, &metaFocusDrivenType, DATA_COUNT);
+        CAMERA_LOGI("add OHOS_CAMERA_FOCUS_DRIVEN_FACE to ability");
+    } else if (ret == CAM_META_SUCCESS) {
+        status = cameraTest->ability->updateEntry(OHOS_CONTROL_FOCUS_DRIVEN_TYPE, &metaFocusDrivenType, DATA_COUNT);
+        CAMERA_LOGI("update OHOS_CAMERA_FOCUS_DRIVEN_FACE to ability");
+    }
+    std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+    std::vector<uint8_t> setting;
+    uint8_t faceType = 1;
+    meta->addEntry(OHOS_CONTROL_FOCUS_DRIVEN_TYPE, &faceType, DATA_COUNT);
+    MetadataUtils::ConvertMetadataToVec(meta, setting);
+    cameraTest->rc = (OHOS::HDI::Camera::V1_0::CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+    CAMERA_LOGI("first: update settings success");
+    ret = FindCameraMetadataItem(data, OHOS_CONTROL_FOCUS_DRIVEN_TYPE, &item);
+    EXPECT_EQ(ret, CAM_META_SUCCESS);
+    EXPECT_TRUE(item.data.u8[0] == OHOS_CAMERA_FOCUS_DRIVEN_FACE);
+}
+
+/**
+ * @tc.name:SUB_MULTIMEDIA_CAMERA_OHOS_CONTROL_FOCUS_DRIVEN_TYPE_0200
+ * @tc.desc: test TAG OHOS_ABILITY_FOCUS_DRIVEN_TYPES and OHOS_CONTROL_FOCUS_DRIVEN_TYPE
+ * @tc.size:MediumTest
+ * @tc.type:Function
+*/
+HWTEST_F(CameraHdiTestV1_3, SUB_MULTIMEDIA_CAMERA_OHOS_CONTROL_FOCUS_DRIVEN_TYPE_0200, TestSize.Level1)
+{
+    ASSERT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    ASSERT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_FOCUS_DRIVEN_TYPES, &entry);
+    if (cameraTest->rc != CAM_META_SUCCESS || entry.count == 0) {
+        CAMERA_LOGE("OHOS_ABILITY_FOCUS_DRIVEN_TYPES is not supported");
+        return;
+    }
+    for (int i = 0; i < entry.count; i++) {
+        if (entry.data.u8[i] == OHOS_CAMERA_FOCUS_DRIVEN_FACE) {
+            CAMERA_LOGI("focus driven type OHOS_CAMERA_FOCUS_DRIVEN_FACE is supported");
+        } else if (entry.data.u8[i] == OHOS_CAMERA_FOCUS_DRIVEN_AUTO) {
+            CAMERA_LOGI("focus driven type OHOS_CAMERA_FOCUS_DRIVEN_AUTO is supported");
+        } else {
+            CAMERA_LOGE("focus driven type is not supported");
+            return;
+        }
+    }
+    camera_metadata_item_t item;
+    bool status = false;
+    std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+    std::vector<uint8_t> setting;
+    uint8_t metaFocusDrivenType = static_cast<uint8_t>(OHOS_CAMERA_FOCUS_DRIVEN_AUTO);
+    int ret = FindCameraMetadataItem(data, OHOS_CONTROL_FOCUS_DRIVEN_TYPE, &item);
+    if (ret == CAM_META_ITEM_NOT_FOUND) {
+        status = cameraTest->ability->addEntry(OHOS_CONTROL_FOCUS_DRIVEN_TYPE, &metaFocusDrivenType, DATA_COUNT);
+        CAMERA_LOGI("add OHOS_CAMERA_FOCUS_DRIVEN_AUTO to ability");
+    } else if (ret == CAM_META_SUCCESS) {
+        status = cameraTest->ability->updateEntry(OHOS_CONTROL_FOCUS_DRIVEN_TYPE, &metaFocusDrivenType, DATA_COUNT);
+        CAMERA_LOGI("update OHOS_CAMERA_FOCUS_DRIVEN_AUTO to ability");
+    }
+    meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+    uint8_t autoType = 0;
+    meta->addEntry(OHOS_CONTROL_FOCUS_DRIVEN_TYPE, &autoType, DATA_COUNT);
+    MetadataUtils::ConvertMetadataToVec(meta, setting);
+    cameraTest->rc = (OHOS::HDI::Camera::V1_0::CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+    CAMERA_LOGI("second: update settings success");
+    ret = FindCameraMetadataItem(data, OHOS_CONTROL_FOCUS_DRIVEN_TYPE, &item);
+    EXPECT_EQ(ret, CAM_META_SUCCESS);
+    EXPECT_TRUE(item.data.u8[0] == OHOS_CAMERA_FOCUS_DRIVEN_AUTO);
+}
+
+bool CameraHdiTestV1_3::SetFocusDrivenType(common_metadata_header_t* data, camera_focus_driven_type_t type,
+    std::shared_ptr<OHOS::Camera::CameraSetting>& meta, std::vector<uint8_t>& setting)
+{
+    bool result = false;
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_FOCUS_DRIVEN_TYPES, &entry);
+    if (cameraTest->rc != CAM_META_SUCCESS || entry.count == 0) {
+        CAMERA_LOGE("OHOS_ABILITY_FOCUS_DRIVEN_TYPES is not supported");
+        return result;
+    }
+    for (int i = 0; i < entry.count; i++) {
+        if (entry.data.u8[i] == type) {
+            result = true;
+            break;
+        }
+    }
+    if (result == false) {
+        return result;
+    }
+    camera_metadata_item_t item;
+    bool status = false;
+    uint8_t metaFocusDrivenType = static_cast<uint8_t>(type);
+    int ret = FindCameraMetadataItem(data, OHOS_CONTROL_FOCUS_DRIVEN_TYPE, &item);
+    if (ret == CAM_META_ITEM_NOT_FOUND) {
+        status = cameraTest->ability->addEntry(OHOS_CONTROL_FOCUS_DRIVEN_TYPE, &metaFocusDrivenType, DATA_COUNT);
+    } else if (ret == CAM_META_SUCCESS) {
+        status = cameraTest->ability->updateEntry(OHOS_CONTROL_FOCUS_DRIVEN_TYPE, &metaFocusDrivenType, DATA_COUNT);
+    }
+    meta->addEntry(OHOS_CONTROL_FOCUS_DRIVEN_TYPE, &metaFocusDrivenType, DATA_COUNT);
+    MetadataUtils::ConvertMetadataToVec(meta, setting);
+    cameraTest->rc = (OHOS::HDI::Camera::V1_0::CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
+    cameraTest->rc == HDI::Camera::V1_0::NO_ERROR ? result = true : result = false;
+    return result;
+}
+
+void FindFocusTrackingResult(common_metadata_header_t* streamData)
+{
+    camera_metadata_item_t modeEntry;
+    int32_t rc = FindCameraMetadataItem(streamData, OHOS_CONTROL_FOCUS_TRACKING_MODE, &modeEntry);
+    if (rc == HDI::Camera::V1_0::NO_ERROR) {
+        if (modeEntry.data.u8 != nullptr && modeEntry.count > 0) {
+            CAMERA_LOGI("FindDetectResult human face result");
+        }
+    }
+    camera_metadata_item_t rectEntry;
+    rc = FindCameraMetadataItem(streamData, OHOS_ABILITY_FOCUS_TRACKING_REGION, &rectEntry);
+    if (rc == HDI::Camera::V1_0::NO_ERROR) {
+        if (rectEntry.data.i32 != nullptr && rectEntry.count > 0) {
+            CAMERA_LOGI("FindDetectResult human body result");
+        }
+    }
+}
+
+/**
+ * @tc.name:SUB_MULTIMEDIA_CAMERA_OHOS_FOCUS_TRACKING_0100
+ * @tc.desc: test TAG OHOS_ABILITY_FOCUS_TRACKING_REGION and OHOS_CONTROL_FOCUS_TRACKING_MODE
+ * @tc.size:MediumTest
+ * @tc.type:Function
+*/
+HWTEST_F(CameraHdiTestV1_3, SUB_MULTIMEDIA_CAMERA_OHOS_FOCUS_TRACKING_0100, TestSize.Level1)
+{
+    ASSERT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    ASSERT_NE(data, nullptr);
+    std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+    std::vector<uint8_t> setting;
+    bool result = SetFocusDrivenType(data, OHOS_CAMERA_FOCUS_DRIVEN_FACE, meta, setting);
+    if (result == false) {
+        CAMERA_LOGE("SetFocusDrivenType failed");
+        return;
+    }
+    cameraTest->intents = {PREVIEW, StreamIntent::VIDEO};
+    cameraTest->StartStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::VIDEO);
+    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+    cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
+    cameraTest->rc = (OHOS::HDI::Camera::V1_0::CamRetCode)cameraTest->streamOperator_V1_3->EnableResult(
+        cameraTest->streamIdVideo, setting);
+    if (cameraTest->rc != HDI::Camera::V1_0::NO_ERROR) {
+        return;
+    }
+    sleep(UT_SECOND_TIMES);
+    if (cameraTest->streamOperatorCallbackV1_3->streamResultMeta == nullptr) {
+        CAMERA_LOGI("onresult not be invoked.");
+        return;
+    }
+    common_metadata_header_t* streamData = cameraTest->streamOperatorCallbackV1_3->streamResultMeta->get();
+    FindFocusTrackingResult(streamData);
+    cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
+    cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
+    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+}
+
+/**
+ * @tc.name:SUB_MULTIMEDIA_CAMERA_OHOS_CONTROL_COLOR_RESERVATION_TYPE_0100
+ * @tc.desc: test TAG OHOS_ABILITY_COLOR_RESERVATION_TYPES and OHOS_CONTROL_COLOR_RESERVATION_TYPE
+ * @tc.size:MediumTest
+ * @tc.type:Function
+*/
+HWTEST_F(CameraHdiTestV1_3, SUB_MULTIMEDIA_CAMERA_OHOS_CONTROL_COLOR_RESERVATION_TYPE_0100, TestSize.Level1)
+{
+    ASSERT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    ASSERT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_COLOR_RESERVATION_TYPES, &entry);
+    if (cameraTest->rc != CAM_META_SUCCESS || entry.count == 0) {
+        CAMERA_LOGE("OHOS_ABILITY_COLOR_RESERVATION_TYPES is not supported");
+        return;
+    }
+    for (int i = 0; i < entry.count; i++) {
+        if (entry.data.u8[i] == OHOS_CAMERA_COLOR_RESERVATION_PORTRAIT) {
+            CAMERA_LOGI("color reservation type OHOS_CAMERA_COLOR_RESERVATION_PORTRAIT is supported");
+        } else if (entry.data.u8[i] == OHOS_CAMERA_COLOR_RESERVATION_NONE) {
+            CAMERA_LOGI("color reservation type OHOS_CAMERA_COLOR_RESERVATION_NONE is supported");
+        } else {
+            CAMERA_LOGE("color reservation type is not supported");
+            return;
+        }
+    }
+    camera_metadata_item_t item;
+    bool status = false;
+    uint8_t metacolorType = static_cast<uint8_t>(OHOS_CAMERA_COLOR_RESERVATION_PORTRAIT);
+    int ret = FindCameraMetadataItem(data, OHOS_CONTROL_COLOR_RESERVATION_TYPE, &item);
+    if (ret == CAM_META_ITEM_NOT_FOUND) {
+        status = cameraTest->ability->addEntry(OHOS_CONTROL_COLOR_RESERVATION_TYPE, &metacolorType, DATA_COUNT);
+        CAMERA_LOGI("add OHOS_CAMERA_COLOR_RESERVATION_PORTRAIT to ability");
+    } else if (ret == CAM_META_SUCCESS) {
+        status = cameraTest->ability->updateEntry(OHOS_CONTROL_COLOR_RESERVATION_TYPE, &metacolorType, DATA_COUNT);
+        CAMERA_LOGI("update OHOS_CAMERA_COLOR_RESERVATION_PORTRAIT to ability");
+    }
+    std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+    std::vector<uint8_t> setting;
+    uint8_t portraitType = 1;
+    meta->addEntry(OHOS_CONTROL_COLOR_RESERVATION_TYPE, &portraitType, DATA_COUNT);
+    MetadataUtils::ConvertMetadataToVec(meta, setting);
+    cameraTest->rc = (OHOS::HDI::Camera::V1_0::CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+    CAMERA_LOGI("first: update settings success");
+    ret = FindCameraMetadataItem(data, OHOS_CONTROL_COLOR_RESERVATION_TYPE, &item);
+    EXPECT_EQ(ret, CAM_META_SUCCESS);
+    EXPECT_TRUE(item.data.u8[0] == OHOS_CAMERA_COLOR_RESERVATION_PORTRAIT);
+}
+
+/**
+ * @tc.name:SUB_MULTIMEDIA_CAMERA_OHOS_CONTROL_COLOR_RESERVATION_TYPE_0200
+ * @tc.desc: test TAG OHOS_ABILITY_COLOR_RESERVATION_TYPES and OHOS_CONTROL_COLOR_RESERVATION_TYPE
+ * @tc.size:MediumTest
+ * @tc.type:Function
+*/
+HWTEST_F(CameraHdiTestV1_3, SUB_MULTIMEDIA_CAMERA_OHOS_CONTROL_COLOR_RESERVATION_TYPE_0200, TestSize.Level1)
+{
+    ASSERT_NE(cameraTest->ability, nullptr);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    ASSERT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_COLOR_RESERVATION_TYPES, &entry);
+    if (cameraTest->rc != CAM_META_SUCCESS || entry.count == 0) {
+        CAMERA_LOGE("OHOS_ABILITY_COLOR_RESERVATION_TYPES is not supported");
+        return;
+    }
+    for (int i = 0; i < entry.count; i++) {
+        if (entry.data.u8[i] == OHOS_CAMERA_COLOR_RESERVATION_PORTRAIT) {
+            CAMERA_LOGI("color reservation type OHOS_CAMERA_COLOR_RESERVATION_PORTRAIT is supported");
+        } else if (entry.data.u8[i] == OHOS_CAMERA_COLOR_RESERVATION_NONE) {
+            CAMERA_LOGI("color reservation type OHOS_CAMERA_COLOR_RESERVATION_NONE is supported");
+        } else {
+            CAMERA_LOGE("color reservation type is not supported");
+            return;
+        }
+    }
+    camera_metadata_item_t item;
+    bool status = false;
+    uint8_t metacolorType = static_cast<uint8_t>(OHOS_CAMERA_COLOR_RESERVATION_NONE);
+    int ret = FindCameraMetadataItem(data, OHOS_CONTROL_COLOR_RESERVATION_TYPE, &item);
+    if (ret == CAM_META_ITEM_NOT_FOUND) {
+        status = cameraTest->ability->addEntry(OHOS_CONTROL_COLOR_RESERVATION_TYPE, &metacolorType, DATA_COUNT);
+        CAMERA_LOGI("add OHOS_CAMERA_COLOR_RESERVATION_NONE to ability");
+    } else if (ret == CAM_META_SUCCESS) {
+        status = cameraTest->ability->updateEntry(OHOS_CONTROL_COLOR_RESERVATION_TYPE, &metacolorType, DATA_COUNT);
+        CAMERA_LOGI("update OHOS_CAMERA_COLOR_RESERVATION_NONE to ability");
+    }
+    std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+    std::vector<uint8_t> setting;
+    uint8_t noneType = 0;
+    meta->addEntry(OHOS_CONTROL_COLOR_RESERVATION_TYPE, &noneType, DATA_COUNT);
+    MetadataUtils::ConvertMetadataToVec(meta, setting);
+    cameraTest->rc = (OHOS::HDI::Camera::V1_0::CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
+    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+    CAMERA_LOGI("second: update settings success");
+    ret = FindCameraMetadataItem(data, OHOS_CONTROL_COLOR_RESERVATION_TYPE, &item);
+    EXPECT_EQ(ret, CAM_META_SUCCESS);
+    EXPECT_TRUE(item.data.u8[0] == OHOS_CAMERA_COLOR_RESERVATION_NONE);
 }

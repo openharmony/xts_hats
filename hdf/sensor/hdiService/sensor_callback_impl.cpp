@@ -41,7 +41,7 @@ namespace {
     struct SensorValueRange g_alsRange[] = {{10000000.0, 0.0}};
     struct SensorValueRange g_pedometerRange[] = {{10000.0, 0.0}};
     struct SensorValueRange g_proximityRange[] = {{5.0, 0.0}};
-    struct SensorValueRange g_hallRange[] = {{6.0, 0.0}};
+    struct SensorValueRange g_hallRange[] = {{4294967295.0, 0.0}};
     struct SensorValueRange g_barometerRange[] = {{1100.0, -1100.0}, {1100.0, -1100.0}};
     struct SensorValueRange g_magneticRange[] = {{2000.0, -2000.0}, {2000.0, -2000.0}, {2000.0, -2000.0}};
     struct SensorValueRange g_gyroscopeRange[] = {{35.0, -35.0}, {35.0, -35.0}, {35.0, -35.0}};
@@ -74,8 +74,10 @@ namespace {
                 if (std::abs(*(&data + j) - sensorNode.valueRange[j].highThreshold) < EPSINON ||
                     std::abs(*(&data + j) - sensorNode.valueRange[j].lowThreshold) < EPSINON) {
                     SensorCallbackImpl::sensorDataFlag &= 1;
+                    printf("test 1 sensorName:[%s], data : %f\n\r", sensorNode.sensorName, *(&data + j));
                 } else {
                     SensorCallbackImpl::sensorDataFlag = 0;
+                    printf("test 2 sensorName:[%s], data : %f\n\r", sensorNode.sensorName, *(&data + j));
                     printf("%s: %s Not expected\n\r", __func__, sensorNode.sensorName);
                 }
             }
@@ -84,11 +86,15 @@ namespace {
                 if (*(&data + j) >= sensorNode.valueRange[j].lowThreshold &&
                     *(&data + j) <= sensorNode.valueRange[j].highThreshold) {
                     SensorCallbackImpl::sensorDataFlag &= 1;
+                    printf("test 3 sensorName:[%s], data : %f\n\r", sensorNode.sensorName, *(&data + j));
                 } else {
                     SensorCallbackImpl::sensorDataFlag = 0;
+                    printf("test 4 sensorName:[%s], data : %f\n\r", sensorNode.sensorName, *(&data + j));
                     printf("%s: %s Not expected\n\r", __func__, sensorNode.sensorName);
                 }
             }
+            printf("test 5 sensorName:[%s], sensorDataFlag : %d\n\r", sensorNode.sensorName,
+                SensorCallbackImpl::sensorDataFlag);
         }
     }
 }

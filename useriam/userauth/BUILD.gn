@@ -50,7 +50,7 @@ ohos_moduletest_suite("HatsUserIamUserAuthTest") {
 
   external_deps = [
     "c_utils:utils",
-    "drivers_interface_user_auth:libuser_auth_proxy_3.0",
+    "drivers_interface_user_auth:user_auth_idl_headers",
     "hilog:libhilog",
     "ipc:ipc_core",
   ]

@@ -52,7 +52,6 @@ ohos_moduletest_suite("HatsdisCameraProviderCaseAdditionalTest") {
     "$base_root/foundation/distributedhardware/distributed_hardware_fwk/utils/include",
     "$base_root/foundation/distributedhardware/distributed_hardware_fwk/utils/include/eventbus",
     "$base_root/foundation/distributedhardware/distributed_hardware_fwk/common/utils/include",
-    "$base_root/commonlibrary/c_utils/base/include",
     "$base_root/utils/system/safwk/native/include",
     "$base_root/third_party/jsoncpp/include",
     "$base_root/drivers/peripheral/base/",

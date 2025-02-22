@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2024-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,7 +20,7 @@
 
 #include "UsbSubscriberTest.h"
 #include "hdf_log.h"
-#include "v1_1/iusb_interface.h"
+#include "v1_2/iusb_interface.h"
 
 const int SLEEP_TIME = 3;
 const uint8_t BUS_NUM_INVALID = 255;
@@ -34,12 +34,12 @@ using namespace testing::ext;
 using namespace OHOS;
 using namespace OHOS::USB;
 using namespace std;
-using namespace OHOS::HDI::Usb::V1_1;
+using namespace OHOS::HDI::Usb::V1_2;
 namespace OHOS {
 namespace USB {
 UsbDev UsbdDeviceStatusTest::dev_ = {0, 0};
 sptr<UsbSubscriberTest> UsbdDeviceStatusTest::subscriber_ = nullptr;
-sptr<OHOS::HDI::Usb::V1_1::IUsbInterface> g_usbInterface = nullptr;
+sptr<OHOS::HDI::Usb::V1_2::IUsbInterface> g_usbInterface = nullptr;
 
 int32_t SwitchErrCode(int32_t ret)
 {
@@ -48,7 +48,7 @@ int32_t SwitchErrCode(int32_t ret)
 
 void UsbdDeviceStatusTest::SetUpTestCase(void)
 {
-    g_usbInterface = OHOS::HDI::Usb::V1_1::IUsbInterface::Get();
+    g_usbInterface = OHOS::HDI::Usb::V1_2::IUsbInterface::Get();
     if (g_usbInterface == nullptr) {
         HDF_LOGE("%{public}s:IUsbInterface::Get() failed.", __func__);
         exit(0);

@@ -1,4 +1,4 @@
-# Copyright (c) 2024 Huawei Device Co., Ltd.
+# Copyright (c) 2024-2025 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -27,12 +27,12 @@ ohos_moduletest_suite("HatsHdfUsbAccessoryTest") {
 
   deps = [
     "${usb_driver_path}/ddk:libusb_core",
-    "${usb_driver_path}/hdi_service:libusb_interface_service_1.1",
+    "${usb_driver_path}/hdi_service:libusb_interface_service_1.2",
   ]
 
   external_deps = [
     "c_utils:utils",
-    "drivers_interface_usb:libusb_proxy_1.1",
+    "drivers_interface_usb:libusb_proxy_1.2",
     "eventhandler:libeventhandler",
     "googletest:gtest_main",
     "hdf_core:libhdf_utils",

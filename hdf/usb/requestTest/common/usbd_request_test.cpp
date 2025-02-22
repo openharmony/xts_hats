@@ -53,11 +53,6 @@ sptr<UsbSubscriberTest> UsbdRequestTest::subscriber_ = nullptr;
 namespace {
 sptr<OHOS::HDI::Usb::V1_2::IUsbInterface> g_usbInterface = nullptr;
 
-int32_t SwitchErrCode(int32_t ret)
-{
-    return ret == HDF_ERR_NOT_SUPPORT ? HDF_SUCCESS : ret;
-}
-
 void UsbdRequestTest::SetUpTestCase(void)
 {
     g_usbInterface = OHOS::HDI::Usb::V1_2::IUsbInterface::Get();
@@ -68,11 +63,10 @@ void UsbdRequestTest::SetUpTestCase(void)
     auto ret = g_usbInterface->SetPortRole(1, 1, 1);
     sleep(SLEEP_TIME);
     HDF_LOGI("UsbdRequestTest::[Device] %{public}d SetPortRole=%{public}d", __LINE__, ret);
-    ret = SwitchErrCode(ret);
-    ASSERT_EQ(0, ret);
-    if (ret != 0) {
-        exit(0);
+    if (ret == 0) {
+        ASSERT_EQ(0, ret);
     }
+    ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 
     subscriber_ = new UsbSubscriberTest();
     if (g_usbInterface->BindUsbdSubscriber(subscriber_) != HDF_SUCCESS) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2024-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -34,11 +34,6 @@ using namespace OHOS::HDI::Usb::V1_0;
 namespace {
 sptr<IUsbInterface> g_usbInterface = nullptr;
 
-int32_t SwitchErrCode(int32_t ret)
-{
-    return ret == HDF_ERR_NOT_SUPPORT ? HDF_SUCCESS : ret;
-}
-
 void UsbdFunctionTestAdditional::SetUpTestCase(void)
 {
     g_usbInterface = IUsbInterface::Get();
@@ -49,11 +44,10 @@ void UsbdFunctionTestAdditional::SetUpTestCase(void)
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
     sleep(SLEEP_TIME);
     HDF_LOGI("UsbdFunctionTestAdditional::[Device] %{public}d SetPortRole=%{public}d", __LINE__, ret);
-    ret = SwitchErrCode(ret);
-    ASSERT_EQ(0, ret);
-    if (ret != 0) {
-        exit(0);
+    if (ret == 0) {
+        ASSERT_EQ(0, ret);
     }
+    ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 }
 
 void UsbdFunctionTestAdditional::TearDownTestCase(void)
@@ -272,7 +266,6 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestGetCurrentFunctions00
 HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole001, Function | MediumTest | Level2)
 {
     auto ret = g_usbInterface->SetPortRole(USB_PORT_ID_INVALID, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
-    ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 
@@ -285,7 +278,6 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole001, Funct
 HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole002, Function | MediumTest | Level2)
 {
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, USB_POWER_ROLE_INVALID, DATA_ROLE_NONE);
-    ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 
@@ -298,7 +290,6 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole002, Funct
 HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole003, Function | MediumTest | Level2)
 {
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SINK, USB_DATA_ROLE_INVALID);
-    ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 
@@ -310,7 +301,6 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole003, Funct
 HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole004, Function | MediumTest | Level2)
 {
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_NONE, USB_DATA_ROLE_INVALID);
-    ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 
@@ -323,7 +313,6 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole004, Funct
 HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole005, Function | MediumTest | Level2)
 {
     auto ret = g_usbInterface->SetPortRole(USB_PORT_ID_INVALID, POWER_ROLE_SINK, USB_DATA_ROLE_INVALID);
-    ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 
@@ -336,7 +325,6 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole005, Funct
 HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole006, Function | MediumTest | Level2)
 {
     auto ret = g_usbInterface->SetPortRole(USB_PORT_ID_INVALID, POWER_ROLE_NONE, USB_DATA_ROLE_INVALID);
-    ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 
@@ -349,7 +337,6 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole006, Funct
 HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole007, Function | MediumTest | Level2)
 {
     auto ret = g_usbInterface->SetPortRole(USB_PORT_ID_INVALID, USB_POWER_ROLE_INVALID, DATA_ROLE_NONE);
-    ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 /**
@@ -361,7 +348,6 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole007, Funct
 HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole008, Function | MediumTest | Level2)
 {
     auto ret = g_usbInterface->SetPortRole(USB_PORT_ID_INVALID, USB_POWER_ROLE_INVALID, DATA_ROLE_HOST);
-    ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 
@@ -374,7 +360,6 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole008, Funct
 HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole009, Function | MediumTest | Level2)
 {
     auto ret = g_usbInterface->SetPortRole(USB_PORT_ID_INVALID, USB_POWER_ROLE_INVALID, DATA_ROLE_DEVICE);
-    ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 
@@ -390,8 +375,10 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestQueryPort001, Functio
     int32_t dataRole = DATA_ROLE_NONE;
     int32_t mode = PORT_MODE_NONE;
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
-    ret = SwitchErrCode(ret);
-    ASSERT_EQ(0, ret);
+    if (ret == 0) {
+        ASSERT_EQ(0, ret);
+    }
+    ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
     ASSERT_EQ(0, ret);
     ASSERT_EQ(DEFAULT_PORT_ID, portId);
@@ -409,8 +396,10 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestQueryPort002, Functio
     int32_t dataRole = DATA_ROLE_NONE;
     int32_t mode = PORT_MODE_NONE;
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
-    ret = SwitchErrCode(ret);
-    ASSERT_EQ(0, ret);
+    if (ret == 0) {
+        ASSERT_EQ(0, ret);
+    }
+    ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
     ASSERT_EQ(0, ret);
     ASSERT_EQ(POWER_ROLE_SINK, powerRole);
@@ -428,8 +417,10 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestQueryPort003, Functio
     int32_t dataRole = DATA_ROLE_NONE;
     int32_t mode = PORT_MODE_NONE;
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
-    ret = SwitchErrCode(ret);
-    ASSERT_EQ(0, ret);
+    if (ret == 0) {
+        ASSERT_EQ(0, ret);
+    }
+    ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
     ASSERT_EQ(0, ret);
     ASSERT_EQ(DATA_ROLE_DEVICE, dataRole);
@@ -447,8 +438,10 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestQueryPort004, Functio
     int32_t dataRole = DATA_ROLE_NONE;
     int32_t mode = PORT_MODE_NONE;
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
-    ret = SwitchErrCode(ret);
-    ASSERT_EQ(0, ret);
+    if (ret == 0) {
+        ASSERT_EQ(0, ret);
+    }
+    ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
     ASSERT_EQ(0, ret);
     ASSERT_EQ(DEFAULT_PORT_ID, portId);

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2024-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -159,11 +159,6 @@ bool GenerateFile(const std::string &pathName, int64_t fileSize)
     return WriteRandomDataToFile(pathName, static_cast<uint64_t>(fileSize));
 }
 
-int32_t SwitchErrCode(int32_t ret)
-{
-    return ret == HDF_ERR_NOT_SUPPORT ? HDF_SUCCESS : ret;
-}
-
 void UsbfnMtpTestAdditional::SetUpTestCase(void)
 {
     ASSERT_TRUE(GetCurrentProcPath() == WORKED_UT_PATH);
@@ -177,8 +172,10 @@ void UsbfnMtpTestAdditional::SetUpTestCase(void)
     ASSERT_TRUE(g_usbInterface != nullptr);
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
     sleep(SLEEP_TIME);
-    ret = SwitchErrCode(ret);
-    ASSERT_EQ(0, ret);
+    if (ret == 0) {
+        ASSERT_EQ(0, ret);
+    }
+    ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     ret = g_usbInterface->GetCurrentFunctions(g_currentFunc);
     ASSERT_EQ(0, ret);
     std::cout << "===>current function=" << g_currentFunc << ", set function to mtp, please wait" << std::endl;

@@ -38,19 +38,16 @@ sptr<OHOS::HDI::Usb::V1_2::IUsbInterface> g_usbInterface = nullptr;
 
 struct UsbDev HdfUsbdBenchmarkDeviceTest::dev_ = { 0, 0 };
 
-int32_t SwitchErrCode(int32_t ret)
-{
-    return ret == HDF_ERR_NOT_SUPPORT ? HDF_SUCCESS : ret;
-}
-
 void HdfUsbdBenchmarkDeviceTest::SetUp(const ::benchmark::State& state)
 {
     g_usbInterface = OHOS::HDI::Usb::V1_2::IUsbInterface::Get();
     ASSERT_NE(g_usbInterface, nullptr);
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
     sleep(SLEEP_TIME);
-    ret = SwitchErrCode(ret);
-    ASSERT_EQ(0, ret);
+    if (ret == 0) {
+        ASSERT_EQ(0, ret);
+    }
+    ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 }
 
 void HdfUsbdBenchmarkDeviceTest::TearDown(const ::benchmark::State& state){}

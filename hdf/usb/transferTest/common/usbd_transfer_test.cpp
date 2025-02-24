@@ -94,8 +94,9 @@ void UsbdTransferTest::SetUpTestCase(void)
     HDF_LOGI("UsbdTransferTest::[Device] %{public}d SetPortRole=%{public}d", __LINE__, ret);
     if (ret == 0) {
         ASSERT_EQ(0, ret);
+    } else {
+        ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
-    ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 
     subscriber_ = new UsbSubscriberTest();
     if (subscriber_ == nullptr) {

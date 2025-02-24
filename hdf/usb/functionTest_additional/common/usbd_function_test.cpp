@@ -46,8 +46,9 @@ void UsbdFunctionTestAdditional::SetUpTestCase(void)
     HDF_LOGI("UsbdFunctionTestAdditional::[Device] %{public}d SetPortRole=%{public}d", __LINE__, ret);
     if (ret == 0) {
         ASSERT_EQ(0, ret);
+    } else {
+        ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
-    ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 }
 
 void UsbdFunctionTestAdditional::TearDownTestCase(void)
@@ -377,8 +378,9 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestQueryPort001, Functio
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
     if (ret == 0) {
         ASSERT_EQ(0, ret);
+    } else {
+        ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
-    ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
     ASSERT_EQ(0, ret);
     ASSERT_EQ(DEFAULT_PORT_ID, portId);
@@ -398,8 +400,9 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestQueryPort002, Functio
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
     if (ret == 0) {
         ASSERT_EQ(0, ret);
+    } else {
+        ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
-    ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
     ASSERT_EQ(0, ret);
     ASSERT_EQ(POWER_ROLE_SINK, powerRole);
@@ -419,8 +422,9 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestQueryPort003, Functio
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
     if (ret == 0) {
         ASSERT_EQ(0, ret);
+    } else {
+        ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
-    ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
     ASSERT_EQ(0, ret);
     ASSERT_EQ(DATA_ROLE_DEVICE, dataRole);
@@ -440,8 +444,9 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestQueryPort004, Functio
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
     if (ret == 0) {
         ASSERT_EQ(0, ret);
+    } else {
+        ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
-    ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
     ASSERT_EQ(0, ret);
     ASSERT_EQ(DEFAULT_PORT_ID, portId);

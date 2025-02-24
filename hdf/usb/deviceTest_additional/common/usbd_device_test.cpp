@@ -46,8 +46,9 @@ void UsbdDeviceTestAdditional::SetUpTestCase(void)
     HDF_LOGI("UsbdDeviceTestAdditional::[Device] %{public}d SetPortRole=%{public}d", __LINE__, ret);
     if (ret == 0) {
         ASSERT_EQ(0, ret);
+    } else {
+        ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
-    ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 
     subscriber_ = new UsbSubscriberTest();
     if (g_usbInterface->BindUsbdSubscriber(subscriber_) != HDF_SUCCESS) {

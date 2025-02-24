@@ -174,8 +174,9 @@ void UsbfnMtpTestAdditional::SetUpTestCase(void)
     sleep(SLEEP_TIME);
     if (ret == 0) {
         ASSERT_EQ(0, ret);
+    } else {
+        ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
-    ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     ret = g_usbInterface->GetCurrentFunctions(g_currentFunc);
     ASSERT_EQ(0, ret);
     std::cout << "===>current function=" << g_currentFunc << ", set function to mtp, please wait" << std::endl;

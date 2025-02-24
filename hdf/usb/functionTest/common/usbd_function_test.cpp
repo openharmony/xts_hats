@@ -49,8 +49,9 @@ void UsbdFunctionTest::SetUpTestCase(void)
     HDF_LOGI("UsbdFunctionTest::[Device] %{public}d SetPortRole=%{public}d", __LINE__, ret);
     if (ret == 0) {
         ASSERT_EQ(0, ret);
+    } else {
+        ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
-    ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 }
 
 void UsbdFunctionTest::TearDownTestCase(void)
@@ -394,8 +395,9 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Func_0100, Function | MediumT
     HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Func_0100 %{public}d ret=%{public}d", __LINE__, ret);
     if (ret == 0) {
         ASSERT_EQ(0, ret);
+    } else {
+        ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
-    ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 }
 
 /**
@@ -509,8 +511,9 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Compatibility_0800, Function 
     HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Compatibility_0800 %{public}d ret=%{public}d", __LINE__, ret);
     if (ret == 0) {
         ASSERT_EQ(0, ret);
+    } else {
+        ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
     }
-    ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 }
 
 /**

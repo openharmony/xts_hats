@@ -32,7 +32,6 @@ ohos_moduletest_suite("HatsUserIamUserAuthTest") {
     "$base_root/base/useriam/user_auth_framework/common",
     "$base_root/base/useriam/user_auth_framework/common/logs",
     "$base_root/third_party/googletest/googletest/include/gtest",
-    "$base_root/commonlibrary/c_utils/base/include",
   ]
 
   sources = [

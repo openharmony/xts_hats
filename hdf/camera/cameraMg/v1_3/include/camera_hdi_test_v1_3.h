@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2024-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file expected in compliance with the License.
  * You may obtain a copy of the License at
@@ -25,6 +25,8 @@ public:
     void SetUp(void);
     void TearDown(void);
     void TakePhotoWithTags(std::shared_ptr<OHOS::Camera::CameraSetting> meta);
+    bool SetFocusDrivenType(common_metadata_header_t* data, camera_focus_driven_type_t type,
+        std::shared_ptr<OHOS::Camera::CameraSetting>& meta, std::vector<uint8_t>& setting);
     std::shared_ptr<OHOS::Camera::Test> cameraTest = nullptr;
 };
 #endif

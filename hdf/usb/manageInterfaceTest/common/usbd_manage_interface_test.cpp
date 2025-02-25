@@ -51,10 +51,10 @@ void UsbdManageInterfaceTest::SetUpTestCase(void)
     auto ret = g_usbInterface->SetPortRole(1, 1, 1);
     sleep(SLEEP_TIME);
     HDF_LOGI("UsbdManageInterfaceTest::[Device] %{public}d SetPortRole=%{public}d", __LINE__, ret);
-    if (ret == 0) {
-        ASSERT_EQ(0, ret);
-    } else {
+    if (ret != 0) {
         ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    } else {
+        ASSERT_EQ(0, ret);
     }
 
     subscriber_ = new UsbSubscriberTest();

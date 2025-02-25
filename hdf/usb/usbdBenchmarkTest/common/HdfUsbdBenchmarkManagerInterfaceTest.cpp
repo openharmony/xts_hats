@@ -48,10 +48,10 @@ void HdfUsbdBenchmarkManagerInterfaceTest::SetUp(const ::benchmark::State& state
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
     sleep(SLEEP_TIME);
     HDF_LOGI("HdfUsbdBenchmarkManagerInterfaceTest::[Device] %{public}d SetPortRole=%{public}d", __LINE__, ret);
-    if (ret == 0) {
-        ASSERT_EQ(0, ret);
-    } else {
+    if (ret != 0) {
         ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    } else {
+        ASSERT_EQ(0, ret);
     }
 
     subscriber_ = new UsbSubscriberTest();

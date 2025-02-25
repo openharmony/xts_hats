@@ -44,10 +44,10 @@ void UsbdFunctionTestAdditional::SetUpTestCase(void)
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
     sleep(SLEEP_TIME);
     HDF_LOGI("UsbdFunctionTestAdditional::[Device] %{public}d SetPortRole=%{public}d", __LINE__, ret);
-    if (ret == 0) {
-        ASSERT_EQ(0, ret);
-    } else {
+    if (ret != 0) {
         ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    } else {
+        ASSERT_EQ(0, ret);
     }
 }
 
@@ -376,10 +376,10 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestQueryPort001, Functio
     int32_t dataRole = DATA_ROLE_NONE;
     int32_t mode = PORT_MODE_NONE;
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
-    if (ret == 0) {
-        ASSERT_EQ(0, ret);
-    } else {
+    if (ret != 0) {
         ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    } else {
+        ASSERT_EQ(0, ret);
     }
     ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
     ASSERT_EQ(0, ret);
@@ -398,10 +398,10 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestQueryPort002, Functio
     int32_t dataRole = DATA_ROLE_NONE;
     int32_t mode = PORT_MODE_NONE;
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
-    if (ret == 0) {
-        ASSERT_EQ(0, ret);
-    } else {
+    if (ret != 0) {
         ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    } else {
+        ASSERT_EQ(0, ret);
     }
     ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
     ASSERT_EQ(0, ret);
@@ -420,10 +420,10 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestQueryPort003, Functio
     int32_t dataRole = DATA_ROLE_NONE;
     int32_t mode = PORT_MODE_NONE;
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
-    if (ret == 0) {
-        ASSERT_EQ(0, ret);
-    } else {
+    if (ret != 0) {
         ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    } else {
+        ASSERT_EQ(0, ret);
     }
     ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
     ASSERT_EQ(0, ret);
@@ -442,10 +442,10 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestQueryPort004, Functio
     int32_t dataRole = DATA_ROLE_NONE;
     int32_t mode = PORT_MODE_NONE;
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
-    if (ret == 0) {
-        ASSERT_EQ(0, ret);
-    } else {
+    if (ret != 0) {
         ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    } else {
+        ASSERT_EQ(0, ret);
     }
     ret = g_usbInterface->QueryPort(portId, powerRole, dataRole, mode);
     ASSERT_EQ(0, ret);

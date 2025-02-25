@@ -43,10 +43,10 @@ void HdfUsbdBenchmarkFunctionTest::SetUp(const ::benchmark::State& state)
     }
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
     sleep(SLEEP_TIME);
-    if (ret == 0) {
-        ASSERT_EQ(0, ret);
-    } else {
+    if (ret != 0) {
         ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    } else {
+        ASSERT_EQ(0, ret);
     }
 }
 
@@ -112,10 +112,10 @@ BENCHMARK_F(HdfUsbdBenchmarkFunctionTest, SUB_USB_PortManager_HDI_Performance_01
     for (auto _ : st) {
         ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
     }
-    if (ret == 0) {
-        ASSERT_EQ(0, ret);
-    } else {
+    if (ret != 0) {
         ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    } else {
+        ASSERT_EQ(0, ret);
     }
 }
 

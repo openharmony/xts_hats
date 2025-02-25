@@ -47,10 +47,10 @@ void UsbdFunctionTest::SetUpTestCase(void)
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
     sleep(SLEEP_TIME);
     HDF_LOGI("UsbdFunctionTest::[Device] %{public}d SetPortRole=%{public}d", __LINE__, ret);
-    if (ret == 0) {
-        ASSERT_EQ(0, ret);
-    } else {
+    if (ret != 0) {
         ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    } else {
+        ASSERT_EQ(0, ret);
     }
 }
 
@@ -393,10 +393,10 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Func_0100, Function | MediumT
 {
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Func_0100 %{public}d ret=%{public}d", __LINE__, ret);
-    if (ret == 0) {
-        ASSERT_EQ(0, ret);
-    } else {
+    if (ret != 0) {
         ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    } else {
+        ASSERT_EQ(0, ret);
     }
 }
 
@@ -509,10 +509,10 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Compatibility_0800, Function 
 {
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Compatibility_0800 %{public}d ret=%{public}d", __LINE__, ret);
-    if (ret == 0) {
-        ASSERT_EQ(0, ret);
-    } else {
+    if (ret != 0) {
         ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    } else {
+        ASSERT_EQ(0, ret);
     }
 }
 

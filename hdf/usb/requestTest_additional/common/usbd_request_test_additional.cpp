@@ -315,7 +315,7 @@ HWTEST_F(UsbdRequestTestAdditional, testHdiUsbRequestTestRequestCancel002, TestS
     pipe.intfId = 255;
     pipe.endpointId = 1;
     ret = g_usbInterface->RequestCancel(dev, pipe);
-    ASSERT_EQ(0, ret);
+    ASSERT_NE(0, ret);
     pipe = {interfaceId, pointId};
     ret = g_usbInterface->RequestCancel(dev, pipe);
     ASSERT_EQ(0, ret);

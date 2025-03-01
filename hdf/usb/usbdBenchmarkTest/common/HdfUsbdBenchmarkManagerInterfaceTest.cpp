@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2024-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -38,11 +38,6 @@ UsbDev HdfUsbdBenchmarkManagerInterfaceTest::dev_ = {0, 0};
 sptr<UsbSubscriberTest> HdfUsbdBenchmarkManagerInterfaceTest::subscriber_ = nullptr;
 sptr<IUsbInterface> g_usbInterface = nullptr;
 
-int32_t SwitchErrCode(int32_t ret)
-{
-    return ret == HDF_ERR_NOT_SUPPORT ? HDF_SUCCESS : ret;
-}
-
 void HdfUsbdBenchmarkManagerInterfaceTest::SetUp(const ::benchmark::State& state)
 {
     g_usbInterface = IUsbInterface::Get();
@@ -53,10 +48,10 @@ void HdfUsbdBenchmarkManagerInterfaceTest::SetUp(const ::benchmark::State& state
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
     sleep(SLEEP_TIME);
     HDF_LOGI("HdfUsbdBenchmarkManagerInterfaceTest::[Device] %{public}d SetPortRole=%{public}d", __LINE__, ret);
-    ret = SwitchErrCode(ret);
-    ASSERT_EQ(0, ret);
     if (ret != 0) {
-        exit(0);
+        ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    } else {
+        ASSERT_EQ(0, ret);
     }
 
     subscriber_ = new UsbSubscriberTest();

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -37,11 +37,6 @@ using namespace OHOS::HDI::Usb::V1_0;
 namespace {
 sptr<IUsbInterface> g_usbInterface = nullptr;
 
-int32_t SwitchErrCode(int32_t ret)
-{
-    return ret == HDF_ERR_NOT_SUPPORT ? HDF_SUCCESS : ret;
-}
-
 void UsbdFunctionTest::SetUpTestCase(void)
 {
     g_usbInterface = IUsbInterface::Get();
@@ -52,10 +47,10 @@ void UsbdFunctionTest::SetUpTestCase(void)
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
     sleep(SLEEP_TIME);
     HDF_LOGI("UsbdFunctionTest::[Device] %{public}d SetPortRole=%{public}d", __LINE__, ret);
-    ret = SwitchErrCode(ret);
-    ASSERT_EQ(0, ret);
     if (ret != 0) {
-        exit(0);
+        ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    } else {
+        ASSERT_EQ(0, ret);
     }
 }
 
@@ -398,8 +393,11 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Func_0100, Function | MediumT
 {
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Func_0100 %{public}d ret=%{public}d", __LINE__, ret);
-    ret = SwitchErrCode(ret);
-    ASSERT_EQ(0, ret);
+    if (ret != 0) {
+        ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    } else {
+        ASSERT_EQ(0, ret);
+    }
 }
 
 /**
@@ -413,7 +411,6 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Compatibility_0100, Function 
 {
     auto ret = g_usbInterface->SetPortRole(USB_PORT_ID_INVALID, POWER_ROLE_SOURCE, DATA_ROLE_HOST);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Compatibility_0100 %{public}d ret=%{public}d", __LINE__, ret);
-    ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 
@@ -428,7 +425,6 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Compatibility_0200, Function 
 {
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, USB_POWER_ROLE_INVALID, DATA_ROLE_DEVICE);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Compatibility_0200 %{public}d ret=%{public}d", __LINE__, ret);
-    ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 
@@ -443,7 +439,6 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Compatibility_0300, Function 
 {
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SOURCE, USB_DATA_ROLE_INVALID);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Compatibility_0300 %{public}d ret=%{public}d", __LINE__, ret);
-    ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 
@@ -458,7 +453,6 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Compatibility_0400, Function 
 {
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, USB_POWER_ROLE_INVALID, DATA_ROLE_HOST);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Compatibility_0400 %{public}d ret=%{public}d", __LINE__, ret);
-    ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 
@@ -473,7 +467,6 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Compatibility_0500, Function 
 {
     auto ret = g_usbInterface->SetPortRole(USB_PORT_ID_INVALID, POWER_ROLE_SOURCE, USB_DATA_ROLE_INVALID);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Compatibility_0500 %{public}d ret=%{public}d", __LINE__, ret);
-    ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 
@@ -488,7 +481,6 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Compatibility_0600, Function 
 {
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, USB_POWER_ROLE_INVALID, USB_DATA_ROLE_INVALID);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Compatibility_0600 %{public}d ret=%{public}d", __LINE__, ret);
-    ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 
@@ -503,7 +495,6 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Compatibility_0700, Function 
 {
     auto ret = g_usbInterface->SetPortRole(USB_PORT_ID_INVALID, USB_POWER_ROLE_INVALID, USB_DATA_ROLE_INVALID);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Compatibility_0700 %{public}d ret=%{public}d", __LINE__, ret);
-    ret = SwitchErrCode(ret);
     ASSERT_NE(ret, 0);
 }
 
@@ -518,8 +509,11 @@ HWTEST_F(UsbdFunctionTest, SUB_USB_PortManager_HDI_Compatibility_0800, Function 
 {
     auto ret = g_usbInterface->SetPortRole(DEFAULT_PORT_ID, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
     HDF_LOGI("UsbdFunctionTest::SUB_USB_PortManager_HDI_Compatibility_0800 %{public}d ret=%{public}d", __LINE__, ret);
-    ret = SwitchErrCode(ret);
-    ASSERT_EQ(0, ret);
+    if (ret != 0) {
+        ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    } else {
+        ASSERT_EQ(0, ret);
+    }
 }
 
 /**

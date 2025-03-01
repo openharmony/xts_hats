@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2024-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -185,6 +185,11 @@ HWTEST_F(HdfAudioAdapterDirectTest, HdfAudioAdapterDirectCreateRenderIsvalid001,
     InitDirectAttrs(attrs);
     attrs.streamId = 0;
     int32_t ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
+    if (ret == HDF_ERR_NOT_SUPPORT)
+    {
+        GTEST_SKIP() << "direct is not supported!" << std::endl;
+        return;
+    }
     EXPECT_TRUE(ret == HDF_SUCCESS);
     ret = adapter_->DestroyRender(adapter_, renderId_);
     EXPECT_TRUE(ret == HDF_SUCCESS);
@@ -208,6 +213,11 @@ HWTEST_F(HdfAudioAdapterDirectTest, HdfAudioAdapterDirectCreateRenderIsvalid002,
     attrs.streamId = 0;
     attrs.sampleRate = AUDIO_SAMPLE_RATE_48K;
     int32_t ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
+    if (ret == HDF_ERR_NOT_SUPPORT)
+    {
+        GTEST_SKIP() << "direct is not supported!" << std::endl;
+        return;
+    }
     EXPECT_TRUE(ret == HDF_SUCCESS);
     ret = adapter_->DestroyRender(adapter_, renderId_);
     EXPECT_TRUE(ret == HDF_SUCCESS);
@@ -231,6 +241,11 @@ HWTEST_F(HdfAudioAdapterDirectTest, HdfAudioAdapterDirectCreateRenderIsvalid003,
     attrs.streamId = 0;
     attrs.sampleRate = AUDIO_SAMPLE_RATE_44_1K;
     int32_t ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
+    if (ret == HDF_ERR_NOT_SUPPORT)
+    {
+        GTEST_SKIP() << "direct is not supported!" << std::endl;
+        return;
+    }
     EXPECT_TRUE(ret == HDF_SUCCESS);
     ret = adapter_->DestroyRender(adapter_, renderId_);
     EXPECT_TRUE(ret == HDF_SUCCESS);

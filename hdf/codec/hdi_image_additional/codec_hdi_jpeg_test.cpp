@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -65,10 +65,13 @@ public:
     void SetUp()
     {
         if (hdiJpeg_ != nullptr) {
-            hdiJpeg_->Init(CODEC_IMAGE_JPEG);
+            auto ret = hdiJpeg_->Init(CODEC_IMAGE_JPEG);
+            if (ret == HDF_FAILURE) {
+                GTEST_SKIP() << "heif is not supported!" << std::endl;
+                return;
+            }
         } else {
-            printf("jpeg is not supported!");
-            GTEST_SKIP() << "Device not exist" << std::endl;
+            GTEST_SKIP() << "jpeg is not supported!" << std::endl;
             return;
         }
     }

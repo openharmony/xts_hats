@@ -23,7 +23,7 @@
 using namespace testing::ext;
 static bool g_timerExpired = false;
 static bool g_sigalRm = false;
-static const int DELAY_TIME = 100;
+static const int DELAY_TIME = 100000;
 
 void TimeHandler(union sigval sv)
 {
@@ -242,11 +242,11 @@ HWTEST_F(TimerCreateApiTest, TimerSetTimeAbstimeSuccess_0005, Function | MediumT
     struct itimerspec oldValue;
     const clockid_t CLOCK_ID = CLOCK_REALTIME;
 
-    // Set the timer current time plus 50 nsec
+    // Set the timer current time plus 1 ms
     struct timespec now;
     clock_gettime(CLOCK_ID, &now);
     newValue.it_value.tv_sec = now.tv_sec;
-    newValue.it_value.tv_nsec = now.tv_nsec + 50;
+    newValue.it_value.tv_nsec = now.tv_nsec + 1000000;
     if (newValue.it_value.tv_nsec >= 1000000000) {
         newValue.it_value.tv_nsec -= 1000000000;
         newValue.it_value.tv_sec += 1;

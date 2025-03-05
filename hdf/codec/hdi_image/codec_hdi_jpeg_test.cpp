@@ -118,7 +118,8 @@ HWTEST_F(CodecHdiJpegTest, SUB_Driver_Codec_ImageCodecHDI_0400, TestSize.Level1)
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
     if (ret == -1)
     {
-        GTEST_SKIP() << "jpeg is not supported!" << std::endl;
+        printf("jpeg is not supported!");
+        GTEST_SKIP() << "Device not exist" << std::endl;
         return;
     }
     ASSERT_EQ(ret, HDF_SUCCESS);
@@ -155,7 +156,8 @@ HWTEST_F(CodecHdiJpegTest, SUB_Driver_Codec_ImageCodecHDI_0700, TestSize.Level1)
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
     if (ret == -1)
     {
-        GTEST_SKIP() << "jpeg is not supported!" << std::endl;
+        printf("jpeg is not supported!");
+        GTEST_SKIP() << "Device not exist" << std::endl;
         return;
     }
     ASSERT_EQ(ret, HDF_SUCCESS);
@@ -176,7 +178,8 @@ HWTEST_F(CodecHdiJpegTest, SUB_Driver_Codec_ImageCodecHDI_0800, TestSize.Level1)
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
     if (ret == -1)
     {
-        GTEST_SKIP() << "jpeg is not supported!" << std::endl;
+        printf("jpeg is not supported!");
+        GTEST_SKIP() << "Device not exist" << std::endl;
         return;
     }
     ASSERT_EQ(ret, HDF_SUCCESS);

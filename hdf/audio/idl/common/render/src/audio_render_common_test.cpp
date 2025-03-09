@@ -613,7 +613,7 @@ HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_6100, TestSize.Level1)
     } else if (ret == HDF_ERR_NOT_SUPPORT) {
         ASSERT_TRUE(true);
     } else {
-        ASSERT_TRUE(false);
+        EXPECT_TRUE(false);
     }
 
     EXPECT_EQ(HDF_SUCCESS, render_->Stop(render_));

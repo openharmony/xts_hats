@@ -810,7 +810,7 @@ HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_Detect_0100, TestSize.Level1)
 
 /**
  * @tc.number: SUB_Driver_Camera_LightPainting_0100
- * @tc.name: Querying the LIGHT_PAINTING Mode 
+ * @tc.name: Querying the LIGHT_PAINTING Mode
  * @tc.desc: Determine Whether the LIGHT_PAINTING mode is supported
 */
 HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_LightPainting_0100, Function | MediumTest | Level1)
@@ -827,7 +827,7 @@ HWTEST_F(CameraTagTestV1_3, SUB_Driver_Camera_LightPainting_0100, Function | Med
     if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR) {
         EXPECT_NE(entry.data.u8, nullptr);
         EXPECT_EQ(entry.count > 0, true);
-        for (size_t i = 0; i < entry.count; i++ ) {
+        for (size_t i = 0; i < entry.count; i++) {
             uint8_t value = entry.data.u8[i];
             if (value == OHOS::HDI::Camera::V1_3::LIGHT_PAINTING) {
                 CAMERA_LOGI("LIGHT_PAINTING mode is supported");

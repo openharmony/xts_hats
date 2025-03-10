@@ -71,7 +71,7 @@ public:
         if (hdiJpeg_ != nullptr) {
             auto ret = hdiJpeg_->Init(CODEC_IMAGE_JPEG);
             if (ret == HDF_FAILURE) {
-                GTEST_SKIP() << "heif is not supported!" << std::endl;
+                GTEST_SKIP() << "jpeg is null!" << std::endl;
                 return;
             }
         } else {
@@ -116,12 +116,6 @@ HWTEST_F(CodecHdiJpegTest, SUB_Driver_Codec_ImageCodecHDI_0400, TestSize.Level1)
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     struct CodecImageBuffer inBuffer;
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
     ret = hdiJpeg_->FreeInBuffer(inBuffer);
     ASSERT_EQ(ret, HDF_SUCCESS);
@@ -154,12 +148,6 @@ HWTEST_F(CodecHdiJpegTest, SUB_Driver_Codec_ImageCodecHDI_0700, TestSize.Level1)
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     struct CodecImageBuffer inBuffer;
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
 
     struct CodecImageBuffer outBuffer;
@@ -176,12 +164,6 @@ HWTEST_F(CodecHdiJpegTest, SUB_Driver_Codec_ImageCodecHDI_0800, TestSize.Level1)
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     struct CodecImageBuffer inBuffer;
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
 
     ASSERT_TRUE(hdiBuffer_ != nullptr);

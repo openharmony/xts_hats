@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -69,10 +69,13 @@ public:
     void SetUp()
     {
         if (hdiJpeg_ != nullptr) {
-            hdiJpeg_->Init(CODEC_IMAGE_JPEG);
+            auto ret = hdiJpeg_->Init(CODEC_IMAGE_JPEG);
+            if (ret != HDF_SUCCESS) {
+                GTEST_SKIP() << "jpeg is null!" << std::endl;
+                return;
+            }
         } else {
-            printf("jpeg is not supported!");
-            GTEST_SKIP() << "Device not exist" << std::endl;
+            GTEST_SKIP() << "hdiJpeg_ is null!" << std::endl;
             return;
         }
     }
@@ -113,12 +116,6 @@ HWTEST_F(CodecHdiJpegTest, SUB_Driver_Codec_ImageCodecHDI_0400, TestSize.Level1)
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     struct CodecImageBuffer inBuffer;
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
     ret = hdiJpeg_->FreeInBuffer(inBuffer);
     ASSERT_EQ(ret, HDF_SUCCESS);
@@ -151,12 +148,6 @@ HWTEST_F(CodecHdiJpegTest, SUB_Driver_Codec_ImageCodecHDI_0700, TestSize.Level1)
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     struct CodecImageBuffer inBuffer;
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
 
     struct CodecImageBuffer outBuffer;
@@ -173,12 +164,6 @@ HWTEST_F(CodecHdiJpegTest, SUB_Driver_Codec_ImageCodecHDI_0800, TestSize.Level1)
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     struct CodecImageBuffer inBuffer;
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
 
     ASSERT_TRUE(hdiBuffer_ != nullptr);

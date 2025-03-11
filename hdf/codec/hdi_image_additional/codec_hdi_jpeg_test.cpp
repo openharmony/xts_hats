@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -65,10 +65,13 @@ public:
     void SetUp()
     {
         if (hdiJpeg_ != nullptr) {
-            hdiJpeg_->Init(CODEC_IMAGE_JPEG);
+            auto ret = hdiJpeg_->Init(CODEC_IMAGE_JPEG);
+            if (ret != HDF_SUCCESS) {
+                GTEST_SKIP() << "jpeg is null!" << std::endl;
+                return;
+            }
         } else {
-            printf("jpeg is not supported!");
-            GTEST_SKIP() << "Device not exist" << std::endl;
+            GTEST_SKIP() << "hdiJpeg_ is null!" << std::endl;
             return;
         }
     }
@@ -443,12 +446,6 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecAllocateInBuffer001, TestSize.Leve
     struct CodecImageBuffer inBuffer;
     inBuffer.id = -1;
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
 
@@ -463,12 +460,6 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecAllocateInBuffer002, TestSize.Leve
     struct CodecImageBuffer inBuffer;
     inBuffer.size = -1;
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
 
@@ -483,12 +474,6 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecAllocateInBuffer003, TestSize.Leve
     struct CodecImageBuffer inBuffer;
     inBuffer.buffer = 0;
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
 
@@ -503,12 +488,6 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecAllocateInBuffer004, TestSize.Leve
     struct CodecImageBuffer inBuffer;
     inBuffer.fenceFd = -1;
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
 
@@ -535,12 +514,6 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecAllocateInBuffer006, TestSize.Leve
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     struct CodecImageBuffer inBuffer;
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, 200, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
 
@@ -566,12 +539,6 @@ HWTEST_F(CodecHdiJpegTestAdditional, testInit002, Function | MediumTest | Level1
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     auto ret = hdiJpeg_->DeInit(CODEC_IMAGE_JPEG);
     ret = hdiJpeg_->Init(CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
 }
 
@@ -634,12 +601,6 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode013, TestSize.Level2)
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     struct CodecImageBuffer inBuffer;
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
     struct CodecImageBuffer outBuffer;
     ASSERT_EQ(hdiJpeg_->AllocateInBuffer(outBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG), HDF_SUCCESS);
@@ -665,12 +626,6 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode014, TestSize.Level2)
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     struct CodecImageBuffer inBuffer;
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
     struct CodecImageBuffer outBuffer;
     struct CodecJpegDecInfo decInfo;
@@ -695,12 +650,6 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode015, TestSize.Level2)
     struct CodecImageBuffer inBuffer;
     struct CodecImageBuffer outBuffer;
     auto ret = hdiJpeg_->AllocateInBuffer(outBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
     struct CodecJpegDecInfo decInfo;
     decInfo.imageWidth = 1200;
@@ -725,12 +674,6 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode016, TestSize.Level2)
     ASSERT_NE(hdiJpeg_->AllocateInBuffer(inBuffer, 0, CODEC_IMAGE_JPEG), HDF_SUCCESS);
     struct CodecImageBuffer outBuffer;
     auto ret = hdiJpeg_->AllocateInBuffer(outBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
     struct CodecJpegDecInfo decInfo;
     decInfo.imageWidth = WIDTH;
@@ -755,12 +698,6 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode017, TestSize.Level2)
     ASSERT_NE(hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_HEIF), HDF_SUCCESS);
     struct CodecImageBuffer outBuffer;
     auto ret = hdiJpeg_->AllocateInBuffer(outBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
     struct CodecJpegDecInfo decInfo;
     decInfo.imageWidth = WIDTH;
@@ -786,12 +723,6 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode018, TestSize.Level2)
     ASSERT_NE(hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_INVALID), HDF_SUCCESS);
     struct CodecImageBuffer outBuffer;
     auto ret = hdiJpeg_->AllocateInBuffer(outBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
     struct CodecJpegDecInfo decInfo;
     decInfo.imageWidth = WIDTH;
@@ -814,12 +745,6 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode019, TestSize.Level2)
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     struct CodecImageBuffer inBuffer;
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
     struct CodecImageBuffer outBuffer;
     ASSERT_NE(hdiJpeg_->AllocateInBuffer(outBuffer, 0, CODEC_IMAGE_JPEG), HDF_SUCCESS);
@@ -845,12 +770,6 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode020, TestSize.Level2)
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     struct CodecImageBuffer inBuffer;
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
     struct CodecImageBuffer outBuffer;
     ASSERT_NE(hdiJpeg_->AllocateInBuffer(outBuffer, CODEC_IMAGE_MAX_BUFFER_SIZE + 1, CODEC_IMAGE_JPEG), HDF_SUCCESS);
@@ -876,12 +795,6 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode021, TestSize.Level2)
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     struct CodecImageBuffer inBuffer;
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
     struct CodecImageBuffer outBuffer;
     ASSERT_NE(hdiJpeg_->AllocateInBuffer(outBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_HEIF), HDF_SUCCESS);
@@ -907,12 +820,6 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode022, TestSize.Level2)
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     struct CodecImageBuffer inBuffer;
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
     struct CodecImageBuffer outBuffer;
     ASSERT_NE(hdiJpeg_->AllocateInBuffer(outBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_INVALID), HDF_SUCCESS);
@@ -940,12 +847,6 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecDoJpegDecode023, TestSize.Level2)
     ASSERT_NE(hdiJpeg_->AllocateInBuffer(inBuffer, CODEC_IMAGE_MAX_BUFFER_SIZE + 1, CODEC_IMAGE_JPEG), HDF_SUCCESS);
     struct CodecImageBuffer outBuffer;
     auto ret = hdiJpeg_->AllocateInBuffer(outBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
     struct CodecJpegDecInfo decInfo;
     decInfo.imageWidth = WIDTH;
@@ -1236,12 +1137,6 @@ HWTEST_F(CodecHdiJpegTestAdditional, testCodecFreeInBuffer006, TestSize.Level1)
     ASSERT_TRUE(hdiJpeg_ != nullptr);
     struct CodecImageBuffer inBuffer;
     auto ret = hdiJpeg_->AllocateInBuffer(inBuffer, NORMAL_BUFFER_SIZE, CODEC_IMAGE_JPEG);
-    if (ret == -1)
-    {
-        printf("jpeg is not supported!");
-        GTEST_SKIP() << "Device not exist" << std::endl;
-        return;
-    }
     ASSERT_EQ(ret, HDF_SUCCESS);
     ret = hdiJpeg_->FreeInBuffer(inBuffer);
     ASSERT_EQ(ret, HDF_SUCCESS);

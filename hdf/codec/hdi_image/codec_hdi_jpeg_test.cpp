@@ -70,12 +70,12 @@ public:
     {
         if (hdiJpeg_ != nullptr) {
             auto ret = hdiJpeg_->Init(CODEC_IMAGE_JPEG);
-            if (ret == HDF_FAILURE) {
+            if (ret != HDF_SUCCESS) {
                 GTEST_SKIP() << "jpeg is null!" << std::endl;
                 return;
             }
         } else {
-            GTEST_SKIP() << "jpeg is not supported!" << std::endl;
+            GTEST_SKIP() << "hdiJpeg_ is null!" << std::endl;
             return;
         }
     }

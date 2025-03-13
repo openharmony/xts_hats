@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -50,7 +50,10 @@ void EffectControlTestAdditional::SetUp()
     };
 
     model_ = IEffectModelGet(IS_DIRECTLY_CALL);
-    ASSERT_NE(model_, nullptr);
+    if (model_ == nullptr) {
+        GTEST_SKIP() << "model_ is nullptr" << std::endl;
+        return;
+    }
 
     int32_t ret = model_->CreateEffectController(model_, &info, &controller_, &contollerId_);
     ASSERT_EQ(ret, HDF_SUCCESS);

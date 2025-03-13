@@ -231,7 +231,11 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateRender004, TestSize.Level1)
     devicedesc.desc = const_cast<char *>("primary");
     devicedesc.pins = PIN_OUT_HDMI;
     InitAttrs(attrs);
+#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
+#elif
+    EXPECT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
+#endif
 }
 
 /**

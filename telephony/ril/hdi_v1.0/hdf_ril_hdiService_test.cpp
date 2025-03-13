@@ -2375,8 +2375,7 @@ int32_t RilCallback::CommonErrorResponse(const RilRadioResponseInfo &responseInf
     return 0;
 }
 
-int32_t RilCallback::GetCallListResponseExt(const OHOS::HDI::Ril::V1_1::RilRadioResponseInfo& responseInfo,
-         const OHOS::HDI::Ril::V1_4::CallInfoExtList& callList)
+int32_t RilCallback::GetCallListResponseExt(const OHOS::HDI::Ril::V1_1::RilRadioResponseInfo& responseInfo, const OHOS::HDI::Ril::V1_4::CallInfoExtList& callList)
 {
     return 0;
 }

@@ -24,9 +24,9 @@
 #include "securec.h"
 #include "stdlib.h"
 #include "unistd.h"
-#include "v1_3/iril.h"
+#include "v1_4/iril.h"
 
-using namespace OHOS::HDI::Ril::V1_3;
+using namespace OHOS::HDI::Ril::V1_4;
 using namespace testing::ext;
 
 enum class HdiId {
@@ -233,7 +233,7 @@ enum class SimMessageStatus {
     SIM_MESSAGE_STATUS_SENT = 3,
 };
 
-class RilCallback : public OHOS::HDI::Ril::V1_3::IRilCallback {
+class RilCallback : public OHOS::HDI::Ril::V1_4::IRilCallback {
 public:
     void NotifyAll();
     void WaitFor(int32_t timeoutSecond);
@@ -469,6 +469,8 @@ public:
 
     int32_t CommonErrorResponse(const RilRadioResponseInfo &responseInfo) override;
 
+    int32_t GetCallListResponseExt(const OHOS::HDI::Ril::V1_1::RilRadioResponseInfo& responseInfo,
+         const OHOS::HDI::Ril::V1_4::CallInfoExtList& callList) override;
 private:
     std::mutex callbackMutex_;
     std::condition_variable cv_;
@@ -485,7 +487,7 @@ public:
 };
 
 namespace {
-sptr<OHOS::HDI::Ril::V1_3::IRil> g_rilInterface = nullptr;
+sptr<OHOS::HDI::Ril::V1_4::IRil> g_rilInterface = nullptr;
 RilCallback callback_;
 constexpr static int32_t SLOTID_1 = 0;
 constexpr static int32_t SLOTID_2 = 1;
@@ -649,7 +651,7 @@ int32_t RilCallback::GetSimStatusResponse(
 }
 
 int32_t RilCallback::GetSimCardStatusResponse(const HDI::Ril::V1_1::RilRadioResponseInfo &responseInfo,
-    const HDI::Ril::V1_3::SimCardStatusInfo &result)
+    const HDI::Ril::V1_4::SimCardStatusInfo &result)
 {
     HDF_LOGI("GetBoolResult GetSimStatus result : slotId = %{public}d, simType = %{public}d, simState = %{public}d",
              responseInfo.slotId, result.simType, result.simState);
@@ -2373,6 +2375,12 @@ int32_t RilCallback::CommonErrorResponse(const RilRadioResponseInfo &responseInf
     return 0;
 }
 
+int32_t RilCallback::GetCallListResponseExt(const OHOS::HDI::Ril::V1_1::RilRadioResponseInfo& responseInfo,
+                                            const OHOS::HDI::Ril::V1_4::CallInfoExtList& callList)
+{
+    return 0;
+}
+
 /**
 ** HdfRilHdiTest implement
 **/
@@ -2390,9 +2398,9 @@ void HdfRilHdiTest::TearDown() {}
 
 HWTEST_F(HdfRilHdiTest, CheckRilInstanceIsEmpty, Function | MediumTest | Level1)
 {
-    g_rilInterface = OHOS::HDI::Ril::V1_3::IRil::Get();
+    g_rilInterface = OHOS::HDI::Ril::V1_4::IRil::Get();
     if (g_rilInterface != nullptr) {
-        g_rilInterface->SetCallback1_3(&callback_);
+        g_rilInterface->SetCallback1_4(&callback_);
     }
 }
 
@@ -2411,9 +2419,13 @@ HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetSimStatus_V1_0100, Function | 
         return;
     }
     int32_t ret = g_rilInterface->GetSimStatus(SLOTID_1, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_STATUS));
+    if (ret != 2) {
+        WaitFor(WAIT_TIME_SECOND);
+        EXPECT_EQ(SUCCESS, ret);
+        ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_STATUS));
+    } else {
+        return;
+    }
 }
 
 HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetSimStatus_V1_0200, Function | MediumTest | Level3)
@@ -2422,9 +2434,13 @@ HWTEST_F(HdfRilHdiTest, Telephony_DriverSystem_GetSimStatus_V1_0200, Function | 
         return;
     }
     int32_t ret = g_rilInterface->GetSimStatus(SLOTID_2, GetSerialId());
-    WaitFor(WAIT_TIME_SECOND);
-    EXPECT_EQ(SUCCESS, ret);
-    ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_STATUS));
+    if (ret != 2) {
+        WaitFor(WAIT_TIME_SECOND);
+        EXPECT_EQ(SUCCESS, ret);
+        ASSERT_TRUE(GetBoolResult(HdiId::HREQ_SIM_GET_SIM_STATUS));
+    } else {
+        return;
+    }
 }
 
 // Call

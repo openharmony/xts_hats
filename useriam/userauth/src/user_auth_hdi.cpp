@@ -273,7 +273,7 @@ HWTEST_F(UserIamUserAuthTest, Security_IAM_UserAuth_HDI_FUNC_0104, Function | Me
     FillEnrolledInfoVector(parcel, infos);
     int32_t ret = g_service.GetUserInfo(userId, secureUid, pinSubType, infos);
     cout << "ret is " << ret << endl;
-    ASSERT_EQ(ret != Expectedvalue, true);
+    EXPECT_EQ(ret, 0);
 }
 
 /**

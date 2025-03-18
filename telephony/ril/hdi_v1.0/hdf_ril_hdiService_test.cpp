@@ -127,6 +127,11 @@ enum class HdiId {
     HREQ_DATA_SET_DATA_PERMITTED,
     HREQ_DATA_GET_LINK_CAPABILITY,
     HREQ_DATA_CLEAN_ALL_CONNECTIONS,
+    HREQ_DATA_SEND_UEPOLICY_DECODE_RESULT,
+    HREQ_DATA_SEND_UE_SECTION_IDENTIFIER,
+    HREQ_DATA_SEND_IMS_RSD_LIST,
+    HREQ_DATA_SYNC_ALLOWED_NSSAI_WITH_MODEM,
+    HREQ_DATA_SYNC_EHPLMN_WITH_MODEM,
 
     HREQ_NETWORK_BASE = 400,
     HREQ_NETWORK_GET_SIGNAL_STRENGTH,
@@ -312,7 +317,12 @@ public:
     int32_t CleanAllConnectionsResponse(const RilRadioResponseInfo &responseInfo) override;
     int32_t NcfgFinishedResult(const RilRadioResponseInfo &responseInfo, int32_t mode) override;
     int32_t RestartRildNvMatch(const RilRadioResponseInfo &responseInfo, int32_t mode) override;
-
+    int32_t NetworkSliceUrspRpt(const RilRadioResponseInfo &responseInfo,
+        const NetworkSliceUrspInfo &networkSliceUrspInfo) override;
+    int32_t NetworkSliceAllowedNssaiRpt(const RilRadioResponseInfo &responseInfo,
+        const NetworkSliceAllowedNssaiInfo &networkSliceAllowedNssaiInfo) override;
+    int32_t NetworkSliceEhplmnRpt(const RilRadioResponseInfo &responseInfo,
+        const NetworkSliceEhplmnInfo &networkSliceEhplmnInfo) override;
     // Modem
     int32_t RadioStateUpdated(const RilRadioResponseInfo &responseInfo, int32_t state) override;
     int32_t VoiceRadioTechUpdated(
@@ -1933,6 +1943,25 @@ int32_t RilCallback::NcfgFinishedResult(const RilRadioResponseInfo &responseInfo
 int32_t RilCallback::RestartRildNvMatch(const RilRadioResponseInfo &responseInfo, int32_t state)
 {
     HDF_LOGI("DsdsModeUpdated state : %{public}d", state);
+    return 0;
+}
+
+int32_t RilCallback::NetworkSliceUrspRpt(const RilRadioResponseInfo &responseInfo,
+                                         const NetworkSliceUrspInfo &networkSliceUrspInfo)
+{
+    HDF_LOGI("NetworkSliceUrspRpt");
+    return 0;
+}
+int32_t RilCallback::NetworkSliceAllowedNssaiRpt(const RilRadioResponseInfo &responseInfo,
+                                                 const NetworkSliceAllowedNssaiInfo &networkSliceAllowedNssaiInfo)
+{
+    HDF_LOGI("NetworkSliceAllowedNssaiRpt");
+    return 0;
+}
+int32_t RilCallback::NetworkSliceEhplmnRpt(const RilRadioResponseInfo &responseInfo,
+                                           const NetworkSliceEhplmnInfo &networkSliceEhplmnInfo)
+{
+    HDF_LOGI("NetworkSliceEhplmnRpt");
     return 0;
 }
 

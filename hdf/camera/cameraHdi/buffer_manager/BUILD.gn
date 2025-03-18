@@ -84,6 +84,7 @@ ohos_moduletest_suite("HatsHdfCameraBufferTest") {
       "hdf_core:libhdf_utils",
       "hdf_core:libhdi",
       "hilog:libhilog",
+      "hisysevent:libhisysevent",
       "ipc:ipc_single",
     ]
   } else {

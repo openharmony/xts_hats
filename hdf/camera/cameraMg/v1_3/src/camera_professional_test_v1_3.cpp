@@ -108,13 +108,9 @@ HWTEST_F(CameraProfessionalTestV1_3, SUB_Driver_Camera_ProfessionalPhoto_0200, T
         return;
     }
 
-    cameraTest->Close();
-    //0:close, 1:open, 2:auto, 3:always_open
+    // 0:close, 1:open, 2:auto, 3:always_open
+    FillCaptureSetting(cameraTest);
     for (uint8_t i = 0;i < 4;i++) {
-        cameraTest->Init();
-        cameraTest->Open(DEVICE_0);
-        FillCaptureSetting(cameraTest);
-
         cameraTest->intents = {PREVIEW, STILL_CAPTURE};
         cameraTest->StartProfessionalStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::PROFESSIONAL_PHOTO);
 
@@ -131,8 +127,6 @@ HWTEST_F(CameraProfessionalTestV1_3, SUB_Driver_Camera_ProfessionalPhoto_0200, T
         cameraTest->captureIds = {cameraTest->captureIdPreview};
         cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdCapture};
         cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
-
-        cameraTest->Close();
     }
     sleep(UT_SECOND_TIMES);
     common_metadata_header_t* callbackData = cameraTest->deviceCallback->resultMeta->get();
@@ -180,11 +174,10 @@ HWTEST_F(CameraProfessionalTestV1_3, SUB_Driver_Camera_ProfessionalPhoto_0300, T
     EXPECT_NE(extendedStreamInfo.bufferQueue, nullptr);
     EXPECT_NE(extendedStreamInfo.bufferQueue->producer_, nullptr);
     extendedStreamInfo.bufferQueue->producer_->SetQueueSize(UT_DATA_SIZE);
-    extendedStreamInfo.width = 4096;
-    extendedStreamInfo.height = 3072;
+    extendedStreamInfo.width = cameraTest->captureWidth;
+    extendedStreamInfo.height = cameraTest->captureHeight;
     extendedStreamInfo.format = OHOS_CAMERA_FORMAT_DNG;
     extendedStreamInfo.dataspace = 0;
-
     // Capture streamInfo
     cameraTest->streamInfoCapture = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
     cameraTest->streamInfoCapture->extendedStreamInfos = {extendedStreamInfo};
@@ -198,6 +191,8 @@ HWTEST_F(CameraProfessionalTestV1_3, SUB_Driver_Camera_ProfessionalPhoto_0300, T
         static_cast<OHOS::HDI::Camera::V1_1::OperationMode_V1_1>(OHOS::HDI::Camera::V1_3::PROFESSIONAL_PHOTO),
         cameraTest->abilityVec);
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+    sleep(UT_SECOND_TIMES);
+    std::vector<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>().swap(cameraTest->streamInfos);
 
     // Start capture
     cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
@@ -1126,6 +1121,7 @@ HWTEST_F(CameraProfessionalTestV1_3, SUB_Driver_Camera_ProfessionalVideo_1700, T
 
             cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
             cameraTest->StartCapture(cameraTest->streamIdVideo, cameraTest->captureIdVideo, false, true);
+            sleep(UT_SECOND_TIMES);
             cameraTest->captureIds = {cameraTest->captureIdPreview, cameraTest->captureIdVideo};
             cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdVideo};
             cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);

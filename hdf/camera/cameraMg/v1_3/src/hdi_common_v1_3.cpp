@@ -25,6 +25,8 @@ constexpr uint32_t STREAMINFO_WIDTH = 1920;
 constexpr uint32_t STREAMINFO_HEIGHT = 1080;
 constexpr uint32_t HIGH_RESOLUTION_PHOTO_WIDTH = 8192;
 constexpr uint32_t HIGH_RESOLUTION_PHOTO_HEIGHT = 6144;
+constexpr uint32_t WAIT_SECS = 60; // wait for service to restart
+constexpr uint32_t ONE_SEC = 1;    // wait for service to restart
 namespace OHOS::Camera {
 Test::ResultCallback Test::resultCallback_ = 0;
 Test::StreamResultCallback Test::streamResultCallback_ = 0;
@@ -83,8 +85,16 @@ void Test::Init()
     uint32_t minVer;
     int32_t ret;
     if (serviceV1_3 == nullptr) {
-        serviceV1_3 = OHOS::HDI::Camera::V1_3::ICameraHost::Get("camera_service", false);
-        EXPECT_NE(serviceV1_3, nullptr);
+        int cnt = WAIT_SECS;
+        while (!serviceV1_3 && cnt) {
+            serviceV1_3 = OHOS::HDI::Camera::V1_3::ICameraHost::Get("camera_service", false);
+            sleep(ONE_SEC);
+            --cnt;
+            if (!serviceV1_3) {
+                CAMERA_LOGI("V1_2::ICameraHost get service left times: %{public}d", cnt);
+            }
+        }
+        ASSERT_NE(serviceV1_3, nullptr);
         CAMERA_LOGI("V1_2::ICameraHost get success");
         ret = serviceV1_3->GetVersion(mainVer, minVer);
         EXPECT_EQ(ret, 0);

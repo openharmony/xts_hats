@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2024 Huawei Device Co., Ltd.
+# Copyright (c) 2021-2025 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -11,6 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import("//base/usb/usb_manager/usbmgr.gni")
 import("//build/ohos_var.gni")
 import("//build/test.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
@@ -19,50 +20,99 @@ import("//test/xts/tools/build/suite.gni")
 
 group("HatsHdfUsbTest") {
   testonly = true
-  if (hats_rich == false) {
-    deps = [
-      "autoFunctionTest:HatsHdfUsbAutoFunctionTest",
+  if (!usb_manager_pass_through) {
+    if (hats_rich == false) {
+      deps = [
+        "autoFunctionTest:HatsHdfUsbAutoFunctionTest",
 
-      # "deviceStatusTest:HatsHdfUsbDeviceStatusTest",
-      # "deviceTest:HatsHdfUsbDeviceTest",
-      # "deviceTest_additional:HatsHdfUsbDeviceAdditionalTest",
-      # "functionTest:HatsHdfUsbFunctionTest",
-      # "functionTest_additional:HatsHdfUsbFunctionAdditionalTest",
-      # "manageInterfaceTest:HatsHdfUsbManageInterfaceTest",
-      # "mtpTest:HatsHdfUsbFnMtpTest",
-      # "mtpTest_additional:HatsHdfUsbFnMtpAdditionalTest",
-      # "requestTest:HatsHdfUsbRequestTest",
-      # "requestTest_additional:requestAdditional_test",
-      # "transferTest:HatsHdfUsbTransferTest",
-      # "transferTest_additional:transferAdditional_test",
+        # "deviceStatusTest:HatsHdfUsbDeviceStatusTest",
+        # "deviceTest:HatsHdfUsbDeviceTest",
+        # "deviceTest_additional:HatsHdfUsbDeviceAdditionalTest",
+        # "functionTest:HatsHdfUsbFunctionTest",
+        # "functionTest_additional:HatsHdfUsbFunctionAdditionalTest",
+        # "manageInterfaceTest:HatsHdfUsbManageInterfaceTest",
+        # "mtpTest:HatsHdfUsbFnMtpTest",
+        # "mtpTest_additional:HatsHdfUsbFnMtpAdditionalTest",
+        # "requestTest:HatsHdfUsbRequestTest",
+        # "requestTest_additional:requestAdditional_test",
+        # "transferTest:HatsHdfUsbTransferTest",
+        # "transferTest_additional:transferAdditional_test",
 
-      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
-      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",
-      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkManagerInterfaceTest",
-      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkRequestTest",
-      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkTransferTest",
-    ]
+        # "usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
+        # "usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",
+        # "usbdBenchmarkTest:HatsHdfUsbBenchmarkManagerInterfaceTest",
+        # "usbdBenchmarkTest:HatsHdfUsbBenchmarkRequestTest",
+        # "usbdBenchmarkTest:HatsHdfUsbBenchmarkTransferTest",
+      ]
+    } else {
+      deps = [
+        "accessoryTest:HatsHdfUsbAccessoryTest",
+        "autoFunctionTest:HatsHdfUsbAutoFunctionTest",
+
+        # "deviceStatusTest:HatsHdfUsbDeviceStatusTest",
+        # "deviceTest:HatsHdfUsbDeviceTest",
+        # "deviceTest_additional:HatsHdfUsbDeviceAdditionalTest",
+        # "functionTest:HatsHdfUsbFunctionTest",
+        # "functionTest_additional:HatsHdfUsbFunctionAdditionalTest",
+        # "manageInterfaceTest:HatsHdfUsbManageInterfaceTest",
+        # "requestTest:HatsHdfUsbRequestTest",
+        # "requestTest_additional:requestAdditional_test",
+        # "transferTest:HatsHdfUsbTransferTest",
+        # "transferTest_additional:transferAdditional_test",
+
+        # "usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
+        # "usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",
+        # "usbdBenchmarkTest:HatsHdfUsbBenchmarkManagerInterfaceTest",
+        # "usbdBenchmarkTest:HatsHdfUsbBenchmarkRequestTest",
+        # "usbdBenchmarkTest:HatsHdfUsbBenchmarkTransferTest",
+      ]
+    }
   } else {
-    deps = [
-      "accessoryTest:HatsHdfUsbAccessoryTest",
-      "autoFunctionTest:HatsHdfUsbAutoFunctionTest",
+    if (hats_rich == false) {
+      deps = [
+        "V2_0/autoFunctionTest:HatsHdfUsbAutoFunctionTest",
 
-      # "deviceStatusTest:HatsHdfUsbDeviceStatusTest",
-      # "deviceTest:HatsHdfUsbDeviceTest",
-      # "deviceTest_additional:HatsHdfUsbDeviceAdditionalTest",
-      # "functionTest:HatsHdfUsbFunctionTest",
-      # "functionTest_additional:HatsHdfUsbFunctionAdditionalTest",
-      # "manageInterfaceTest:HatsHdfUsbManageInterfaceTest",
-      # "requestTest:HatsHdfUsbRequestTest",
-      # "requestTest_additional:requestAdditional_test",
-      # "transferTest:HatsHdfUsbTransferTest",
-      # "transferTest_additional:transferAdditional_test",
+        #"V2_0/deviceStatusTest:HatsHdfUsbDeviceStatusTest",
+        #"V2_0/deviceTest:HatsHdfUsbDeviceTest",
+        #"V2_0/deviceTest_additional:HatsHdfUsbDeviceAdditionalTest",
+        #"V2_0/functionTest:HatsHdfUsbFunctionTest",
+        #"V2_0/functionTest_additional:HatsHdfUsbFunctionAdditionalTest",
+        #"V2_0/manageInterfaceTest:HatsHdfUsbManageInterfaceTest",
+        #"V2_0/mtpTest:HatsHdfUsbFnMtpTest",
+        #"V2_0/mtpTest_additional:HatsHdfUsbFnMtpAdditionalTest",
+        #"V2_0/requestTest:HatsHdfUsbRequestTest",
+        #"V2_0/requestTest_additional:requestAdditional_test",
+        #"V2_0/transferTest:HatsHdfUsbTransferTest",
+        #"V2_0/transferTest_additional:transferAdditional_test",
 
-      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
-      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",
-      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkManagerInterfaceTest",
-      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkRequestTest",
-      # "usbdBenchmarkTest:HatsHdfUsbBenchmarkTransferTest",
-    ]
+        #"V2_0/usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
+        #"V2_0/usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",
+        #"V2_0/usbdBenchmarkTest:HatsHdfUsbBenchmarkManagerInterfaceTest",
+        #"V2_0/usbdBenchmarkTest:HatsHdfUsbBenchmarkRequestTest",
+        #"V2_0/usbdBenchmarkTest:HatsHdfUsbBenchmarkTransferTest",
+      ]
+    } else {
+      deps = [
+        "V2_0/accessoryTest:HatsHdfUsbAccessoryTest",
+        "V2_0/autoFunctionTest:HatsHdfUsbAutoFunctionTest",
+
+        #"V2_0/deviceStatusTest:HatsHdfUsbDeviceStatusTest",
+        #"V2_0/deviceTest:HatsHdfUsbDeviceTest",
+        #"V2_0/deviceTest_additional:HatsHdfUsbDeviceAdditionalTest",
+        #"V2_0/functionTest:HatsHdfUsbFunctionTest",
+        #"V2_0/functionTest_additional:HatsHdfUsbFunctionAdditionalTest",
+        #"V2_0/manageInterfaceTest:HatsHdfUsbManageInterfaceTest",
+        #"V2_0/requestTest:HatsHdfUsbRequestTest",
+        #"V2_0/requestTest_additional:requestAdditional_test",
+        #"V2_0/transferTest:HatsHdfUsbTransferTest",
+        #"V2_0/transferTest_additional:transferAdditional_test",
+
+        #"V2_0/usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
+        #"V2_0/usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",
+        #"V2_0/usbdBenchmarkTest:HatsHdfUsbBenchmarkManagerInterfaceTest",
+        #"V2_0/usbdBenchmarkTest:HatsHdfUsbBenchmarkRequestTest",
+        #"V2_0/usbdBenchmarkTest:HatsHdfUsbBenchmarkTransferTest",
+      ]
+    }
   }
 }

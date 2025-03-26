@@ -50,7 +50,8 @@ void PreadvApiTest::TearDownTestCase()
 
 void PreadvApiTest::SetUp()
 {
-    int fd = open(TEST_FILE, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+    unlink(TEST_FILE);
+    int fd = open(TEST_FILE, O_CREAT | O_RDWR | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
     write(fd, TEST_DATA, TEST_LEN);
     close(fd);
 }

@@ -77,6 +77,7 @@ HWTEST_F(FtruncateApiTest, FtruncateModifyFileSizeSuccess_0001, Function | Mediu
     EXPECT_EQ(stat.st_size, len);
 
     close(fd);
+    unlink(TEST_FILE);
 }
 
 /*

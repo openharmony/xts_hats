@@ -31,6 +31,15 @@
 
 using namespace testing::ext;
 
+static const char *WRITEV_TEST_FILE = "/data/local/tmp/tryWritev.txt";
+static const int VEC_LEN = 2;
+static const char *TEST_DATA = "Hello writev";
+static const int TEST_DATA_LEN = strlen(TEST_DATA);
+static const char *TEST_DATA_BUF1 = "Hello ";
+static const int BUF1_LEN = strlen(TEST_DATA_BUF1);
+static const char *TEST_DATA_BUF2 = "writev";
+static const int BUF2_LEN = strlen(TEST_DATA_BUF2);
+
 class HatsWritevTest : public testing::Test {
 public:
 static void SetUpTestCase();
@@ -50,16 +59,8 @@ void HatsWritevTest::SetUpTestCase()
 }
 void HatsWritevTest::TearDownTestCase()
 {
+    unlink(WRITEV_TEST_FILE);
 }
-
-static const char *WRITEV_TEST_FILE = "/data/local/tmp/tryWritev.txt";
-static const int VEC_LEN = 2;
-static const char *TEST_DATA = "Hello writev";
-static const int TEST_DATA_LEN = strlen(TEST_DATA);
-static const char *TEST_DATA_BUF1 = "Hello ";
-static const int BUF1_LEN = strlen(TEST_DATA_BUF1);
-static const char *TEST_DATA_BUF2 = "writev";
-static const int BUF2_LEN = strlen(TEST_DATA_BUF2);
 
 /*
  * @tc.number : SUB_KERNEL_SYSCALL_WRITEV_0100

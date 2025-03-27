@@ -58,6 +58,7 @@ void HatsMadvisecallTest::SetUpTestCase()
 
 void HatsMadvisecallTest::TearDownTestCase()
 {
+    unlink(TEST_FILE);
 }
 
 /*

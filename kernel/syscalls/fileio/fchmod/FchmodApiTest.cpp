@@ -28,6 +28,11 @@
 using namespace testing::ext;
 using namespace std;
 
+static const char *TEST_FILE = "/data/local/tmp/test.txt";
+mode_t MODE_0644 = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+mode_t MODE_0755 = S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH;
+struct stat g_statbuf;
+
 class FchmodApiTest : public testing::Test {
 public:
     static void SetUpTestCase();
@@ -47,12 +52,8 @@ void FchmodApiTest::SetUpTestCase()
 }
 void FchmodApiTest::TearDownTestCase()
 {
+    unlink(TEST_FILE);
 }
-
-static const char *TEST_FILE = "/data/local/tmp/test.txt";
-mode_t MODE_0644 = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
-mode_t MODE_0755 = S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH;
-struct stat g_statbuf;
 
 /*
  * @tc.number : SUB_KERNEL_SYSCALL_FCHMOD_0100

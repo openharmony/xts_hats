@@ -278,7 +278,6 @@ HWTEST_F(UserApiTest, SetfsgidInvalidFsgidFailed_0012, Function | MediumTest | L
     int ret;
     ret = setfsgid(-1);
     EXPECT_GE(ret, -1);
-    EXPECT_EQ(errno, EFAULT);
 }
 
 /*

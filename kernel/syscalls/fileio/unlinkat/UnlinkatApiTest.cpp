@@ -30,6 +30,11 @@
 
 using namespace testing::ext;
 
+
+static const char *UNLINKAT_TEST_FILE = "/data/local/tmp/tryUnlinkat.txt";
+static const char *UNLINKAT_TEST_DIR = "/data/local/tmp";
+static const char *UNLINKAT_TEST_FILENAME = "tryUnlinkat.txt";
+
 class HatsUnlinkatTest : public testing::Test {
 public:
 static void SetUpTestCase();
@@ -49,11 +54,9 @@ void HatsUnlinkatTest::SetUpTestCase()
 }
 void HatsUnlinkatTest::TearDownTestCase()
 {
+    unlink(UNLINKAT_TEST_FILE);
 }
 
-static const char *UNLINKAT_TEST_FILE = "/data/local/tmp/tryUnlinkat.txt";
-static const char *UNLINKAT_TEST_DIR = "/data/local/tmp";
-static const char *UNLINKAT_TEST_FILENAME = "tryUnlinkat.txt";
 
 /*
  * @tc.number : SUB_KERNEL_SYSCALL_UNLINKAT_0100
@@ -158,7 +161,11 @@ HWTEST_F(HatsUnlinkatTest, UnlinkatUnlinkNonemptyDirectoryFail_0003, Function | 
     EXPECT_TRUE(ret == -1);
     EXPECT_EQ(errno, ENOTEMPTY);
 
-    remove(unlinkatNewFile2);
+    ret = unlinkat(AT_FDCWD, unlinkatNewFile2, 0);
+    EXPECT_TRUE(ret == 0);
+
+    ret = unlinkat(AT_FDCWD, unlinkatNewDir2, AT_REMOVEDIR);
+    EXPECT_TRUE(ret == 0);
 }
 
 /*
@@ -220,6 +227,9 @@ HWTEST_F(HatsUnlinkatTest, UnlinkatDirectoryWhenFlagIsNotRemovedirFail_0005, Fun
     ret = unlinkat(AT_FDCWD, unlinkatNewDir3, 0);
     EXPECT_TRUE(ret == -1);
     EXPECT_EQ(errno, EISDIR);
+
+    ret = unlinkat(AT_FDCWD, unlinkatNewDir3, AT_REMOVEDIR);
+    EXPECT_TRUE(ret == 0);
 }
 
 /*
@@ -247,5 +257,8 @@ HWTEST_F(HatsUnlinkatTest, UnlinkatFileWhenFlagIsNot0Fail_0006, Function | Mediu
     ret = unlinkat(dirFd, UNLINKAT_TEST_FILENAME, AT_REMOVEDIR);
     EXPECT_TRUE(ret == -1);
     EXPECT_EQ(errno, ENOTDIR);
+
+    ret = unlinkat(dirFd, UNLINKAT_TEST_FILENAME, 0);
+    EXPECT_TRUE(ret == 0);
     close(dirFd);
 }

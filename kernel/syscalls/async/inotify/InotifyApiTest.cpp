@@ -60,6 +60,8 @@ void HatsInotifyTest::SetUpTestCase()
 
 void HatsInotifyTest::TearDownTestCase()
 {
+    unlink(TEST_FILE);
+    rmdir(TEST_DIR);
 }
 
 /*

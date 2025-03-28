@@ -1,0 +1,7 @@
+[
+  "test/xts/hats/hdf/camera/cameraMg/enum:HatsHdfCameraEnumTest",
+  "test/xts/hats/hdf/camera/cameraMg/v1_0:HatsHdfCameraMgv0Test",
+  "test/xts/hats/hdf/camera/cameraMg/v1_1:HatsHdfCameraMgTestv1",
+  "test/xts/hats/hdf/camera/cameraMg/v1_2:HatsHdfCameraMgTestv2",
+  "test/xts/hats/hdf/camera/cameraMg/v1_3:HatsHdfCameraMgTestv3"
+]

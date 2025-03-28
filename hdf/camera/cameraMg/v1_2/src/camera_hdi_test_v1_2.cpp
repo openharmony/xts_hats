@@ -449,6 +449,9 @@ void CaptureByColorSpaces(std::vector<int32_t> captureColorSpaces, std::shared_p
             // preview streamInfo
             cameraTest->streamInfoV1_1 = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
             cameraTest->DefaultInfosPreview(cameraTest->streamInfoV1_1);
+            if (colorSpaces == OHOS_CAMERA_BT2020_HLG_FULL) {
+                cameraTest->streamInfoV1_1->v1_0.format_ = OHOS::GRAPHIC_PIXEL_FMT_YCBCR_P010; // 10bit
+            }
             cameraTest->streamInfoV1_1->v1_0.dataspace_ = colorSpaces;
             cameraTest->streamInfosV1_1.push_back(*cameraTest->streamInfoV1_1);
             // capture streamInfo
@@ -488,10 +491,10 @@ void VideoByColorSpaces(std::vector<int32_t> videoColorSpaces, std::vector<int32
         cameraTest->streamInfoV1_1 = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
         cameraTest->DefaultInfosPreview(cameraTest->streamInfoV1_1);
         cameraTest->streamInfoV1_1->v1_0.dataspace_ = colorSpaces;
-        if (colorSpaces == OHOS_CAMERA_BT2020_HLG_FULL) {
-            cameraTest->streamInfoV1_1->v1_0.format_ = OHOS_CAMERA_FORMAT_YCBCR_P010;
+        if (colorSpaces == CM_BT2020_HLG_LIMIT) {
+            cameraTest->streamInfoV1_1->v1_0.format_ = OHOS::GRAPHIC_PIXEL_FMT_YCBCR_P010; // 10bit
         }
-        
+
         // video streamInfo
         for (int32_t colorSpaces_ : videoColorSpaces) {
             printf("video colorSpaces_ value %d\n", colorSpaces_);
@@ -499,6 +502,7 @@ void VideoByColorSpaces(std::vector<int32_t> videoColorSpaces, std::vector<int32
 
             cameraTest->streamInfoVideo = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
             cameraTest->DefaultInfosVideo(cameraTest->streamInfoVideo);
+            cameraTest->streamInfoVideo->v1_0.format_ = cameraTest->streamInfoV1_1->v1_0.format_; // equal to preview
             cameraTest->streamInfoVideo->v1_0.dataspace_ = colorSpaces_;
             cameraTest->streamInfosV1_1.push_back(*cameraTest->streamInfoVideo);
             cameraTest->rc = cameraTest->streamOperator_V1_1->CreateStreams_V1_1(cameraTest->streamInfosV1_1);
@@ -541,17 +545,15 @@ void SuperStubByColorSpaces(std::vector<int32_t> superStubColorSpaces, std::shar
             cameraTest->streamInfoV1_1 = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
             cameraTest->DefaultInfosPreview(cameraTest->streamInfoV1_1);
             cameraTest->streamInfoV1_1->v1_0.dataspace_ = colorSpaces;
-            if (colorSpaces == OHOS_CAMERA_BT2020_HLG_FULL) {
-                cameraTest->streamInfoV1_1->v1_0.format_ = OHOS_CAMERA_FORMAT_YCBCR_P010;
+            if (colorSpaces == CM_BT2020_HLG_LIMIT) {
+                cameraTest->streamInfoV1_1->v1_0.format_ = OHOS::GRAPHIC_PIXEL_FMT_YCBCR_P010; // 10bit
             }
             cameraTest->streamInfosV1_1.push_back(*cameraTest->streamInfoV1_1);
             // video streamInfo
             cameraTest->streamInfoVideo = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
             cameraTest->DefaultInfosVideo(cameraTest->streamInfoVideo);
             cameraTest->streamInfoVideo->v1_0.dataspace_ = colorSpaces;
-            if (colorSpaces == OHOS_CAMERA_BT2020_HLG_FULL) {
-                cameraTest->streamInfoVideo->v1_0.format_ = OHOS_CAMERA_FORMAT_YCBCR_P010;
-            }
+            cameraTest->streamInfoVideo->v1_0.format_ = cameraTest->streamInfoV1_1->v1_0.format_; // equal to preview
             cameraTest->streamInfosV1_1.push_back(*cameraTest->streamInfoVideo);
             cameraTest->rc = cameraTest->streamOperator_V1_1->CreateStreams_V1_1(cameraTest->streamInfosV1_1);
             EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);

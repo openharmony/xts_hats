@@ -173,7 +173,8 @@ public:
     ErrCode OnUnBind(uint64_t deviceId, const ErrMsg &errMsg) override;
 };
 
-ErrCode DriverExtMgrCallbackTest::OnConnect(uint64_t deviceId, const sptr<IRemoteObject> &drvExtObj, const ErrMsg &errMsg)
+ErrCode DriverExtMgrCallbackTest::OnConnect(
+    uint64_t deviceId, const sptr<IRemoteObject> &drvExtObj, const ErrMsg &errMsg)
 {
     EDM_LOGE(EDM_MODULE_TEST, "ErrMsg:%{public}d:%{public}s, deviceId:%{public}016" PRIX64 "",
         static_cast<UsbErrCode>(errMsg.errCode), errMsg.msg.c_str(), deviceId);

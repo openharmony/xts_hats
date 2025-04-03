@@ -38,6 +38,8 @@
 #include "iconsumer_surface.h"
 
 namespace OHOS::Camera {
+const uint32_t CM_BT2020_HLG_LIMIT = 4 | (5 << 8) | (4 << 16) | (2 << 21);
+
 enum CameraUtConstants {
     UT_SLEEP_TIME = 2,
     UT_SECOND_TIMES = 3,

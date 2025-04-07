@@ -312,7 +312,12 @@ public:
     int32_t CleanAllConnectionsResponse(const RilRadioResponseInfo &responseInfo) override;
     int32_t NcfgFinishedResult(const RilRadioResponseInfo &responseInfo, int32_t mode) override;
     int32_t RestartRildNvMatch(const RilRadioResponseInfo &responseInfo, int32_t mode) override;
-
+    int32_t NetworkSliceUrspRpt(const RilRadioResponseInfo &responseInfo,
+        const NetworkSliceUrspInfo &networkSliceUrspInfo) override;
+    int32_t NetworkSliceAllowedNssaiRpt(const RilRadioResponseInfo &responseInfo,
+        const NetworkSliceAllowedNssaiInfo &networkSliceAllowedNssaiInfo) override;
+    int32_t NetworkSliceEhplmnRpt(const RilRadioResponseInfo &responseInfo,
+        const NetworkSliceEhplmnInfo &networkSliceEhplmnInfo) override;
     // Modem
     int32_t RadioStateUpdated(const RilRadioResponseInfo &responseInfo, int32_t state) override;
     int32_t VoiceRadioTechUpdated(
@@ -1942,6 +1947,25 @@ int32_t RilCallback::ShutDownResponse(const RilRadioResponseInfo &responseInfo)
     hdiId_ = HdiId::HREQ_MODEM_SHUT_DOWN;
     resultInfo_ = responseInfo;
     NotifyAll();
+    return 0;
+}
+
+int32_t RilCallback::NetworkSliceUrspRpt(const RilRadioResponseInfo &responseInfo,
+    const NetworkSliceUrspInfo &networkSliceUrspInfo)
+{
+    HDF_LOGI("NetworkSliceUrspRpt");
+    return 0;
+}
+int32_t RilCallback::NetworkSliceAllowedNssaiRpt(const RilRadioResponseInfo &responseInfo,
+    const NetworkSliceAllowedNssaiInfo &networkSliceAllowedNssaiInfo)
+{
+    HDF_LOGI("NetworkSliceAllowedNssaiRpt");
+    return 0;
+}
+int32_t RilCallback::NetworkSliceEhplmnRpt(const RilRadioResponseInfo &responseInfo,
+    const NetworkSliceEhplmnInfo &networkSliceEhplmnInfo)
+{
+    HDF_LOGI("NetworkSliceEhplmnRpt");
     return 0;
 }
 

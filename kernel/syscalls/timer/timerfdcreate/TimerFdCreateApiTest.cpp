@@ -198,7 +198,7 @@ HWTEST_F(TimerFdCreateApiTest, TimerfdCreateTFdNonBlockTest_0006, Function | Med
 
     struct itimerspec newValue;
     newValue.it_value.tv_sec = 0;
-    newValue.it_value.tv_nsec = 10000;
+    newValue.it_value.tv_nsec = 10000000;
     newValue.it_interval.tv_sec = 0;
 
     EXPECT_EQ(timerfd_settime(timerfd, 0, &newValue, nullptr), 0);

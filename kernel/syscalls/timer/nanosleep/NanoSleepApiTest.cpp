@@ -58,7 +58,7 @@ void SignalHandler(int sig)
  */
 HWTEST_F(ClockApiTest, NanoSleepBlockedSuccess_0001, Function | MediumTest | Level1)
 {
-    struct timespec req = {0, 100000L};
+    struct timespec req = {0, 100000000L};
     timer_t timerId;
     struct timespec rem;
     struct sigevent sev = {

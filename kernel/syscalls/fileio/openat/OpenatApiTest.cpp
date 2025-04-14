@@ -38,6 +38,7 @@ private:
 
 static const char *TEST_DIR = "/data/local/tmp/tmp";
 static const char *TEST_FILE = "/data/local/tmp/tmp/test";
+static const char *TEST_TARFILE = "/data/local/tmp/tmp/target";
 
 void OpenatApiTest::SetUpTestCase()
 {
@@ -54,6 +55,8 @@ void OpenatApiTest::SetUp()
 
 void OpenatApiTest::TearDown()
 {
+    unlink(TEST_FILE);
+    unlink(TEST_TARFILE);
     rmdir(TEST_DIR);
 }
 

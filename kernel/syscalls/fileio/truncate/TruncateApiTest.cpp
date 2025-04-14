@@ -89,6 +89,7 @@ HWTEST_F(HatsTruncateTest, TruncateFileSuccess_0001, Function | MediumTest | Lev
     close(fd);
 
     delete[] buf;
+    remove(TRUNCATE_TEST_FILE);
 }
 
 /*
@@ -102,10 +103,6 @@ HWTEST_F(HatsTruncateTest, TruncateFileSuccess_0001, Function | MediumTest | Lev
 HWTEST_F(HatsTruncateTest, TruncateNotExistFileFail_0002, Function | MediumTest | Level2)
 {
     int ret;
-
-    ret = remove(TRUNCATE_TEST_FILE);
-    EXPECT_TRUE(ret == 0);
-
     errno = 0;
     ret = truncate(TRUNCATE_TEST_FILE, TEST_DATA_LEN / 2);
     EXPECT_TRUE(ret == -1);
@@ -147,6 +144,7 @@ HWTEST_F(HatsTruncateTest, TruncateExtendFileSuccess_0003, Function | MediumTest
 
     ret = (fileSize1 * 2 == fileSize2);
     EXPECT_TRUE(ret);
+    remove(TRUNCATE_TEST_FILE);
 }
 
 /*

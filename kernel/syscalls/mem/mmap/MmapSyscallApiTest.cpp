@@ -59,6 +59,7 @@ void HatsMmapSyscallTest::SetUpTestCase()
 
 void HatsMmapSyscallTest::TearDownTestCase()
 {
+    unlink(TEST_FILE);
 }
 
 /*
@@ -179,7 +180,7 @@ HWTEST_F(HatsMmapSyscallTest, MmapFlagTestSuccess_0003, Function | MediumTest | 
 HWTEST_F(HatsMmapSyscallTest, MmapFlagTestSuccess_0004, Function | MediumTest | Level1)
 {
     size_t size = SIZE_1M;
-    int fd = open("/data/local/tmp/test_file", O_CREAT | O_RDWR, 0664);
+    int fd = open(TEST_FILE, O_CREAT | O_RDWR, 0664);
     ASSERT_TRUE(fd > 0);
 
     // flag MAP_FILE test

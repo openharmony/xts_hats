@@ -29,6 +29,17 @@
 using namespace testing::ext;
 using namespace std;
 
+
+static const int PATH_MAX_LEN = 128;
+static const char *TEST_FILE = "/data/local/tmp/test.txt";
+static const char *TEST_FILE_PATH = "/data/local/tmp";
+static const char *TEST_FILE_NAME = "test.txt";
+static const char *SYMBOL_LINK_NAME = "TestSymlink";
+mode_t MODE_0600 = S_IRUSR | S_IWUSR;
+mode_t MODE_0644 = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+mode_t MODE_0755 = S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH;
+struct stat g_statbuf;
+
 class FchmodatApiTest : public testing::Test {
 public:
     static void SetUpTestCase();
@@ -49,17 +60,9 @@ void FchmodatApiTest::SetUpTestCase()
 }
 void FchmodatApiTest::TearDownTestCase()
 {
+    unlink(TEST_FILE);
 }
 
-static const int PATH_MAX_LEN = 128;
-static const char *TEST_FILE = "/data/local/tmp/test.txt";
-static const char *TEST_FILE_PATH = "/data/local/tmp";
-static const char *TEST_FILE_NAME = "test.txt";
-static const char *SYMBOL_LINK_NAME = "TestSymlink";
-mode_t MODE_0600 = S_IRUSR | S_IWUSR;
-mode_t MODE_0644 = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
-mode_t MODE_0755 = S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH;
-struct stat g_statbuf;
 
 /*
  * @tc.number : SUB_KERNEL_SYSCALL_FCHMODAT_0100
@@ -91,7 +94,6 @@ HWTEST_F(FchmodatApiTest, FchmodatFileModeSuccess_0001, Function | MediumTest | 
     ret = fchmodat(dirfd, TEST_FILE_NAME, MODE_0755, 0);
     EXPECT_EQ(ret, 0);
 
-    remove(TEST_FILE_NAME);
     chdir(path);
     close(dirfd);
 }
@@ -142,7 +144,6 @@ HWTEST_F(FchmodatApiTest, FchmodatAT_FDCWDModeSuccess_0003, Function | MediumTes
     EXPECT_EQ((g_statbuf.st_mode & S_IXOTH), S_IXOTH);
 
     close(fd);
-    remove(TEST_FILE_NAME);
     chdir(path);
 }
 
@@ -172,8 +173,6 @@ HWTEST_F(FchmodatApiTest, FchmodatLinkFileModeFail_0004, Function | MediumTest |
     EXPECT_NE(ret, 0);
     EXPECT_EQ(errno, EOPNOTSUPP);
 
-    unlink(TEST_FILE_NAME);
     remove(SYMBOL_LINK_NAME);
-    remove(TEST_FILE_NAME);
     chdir(path);
 }

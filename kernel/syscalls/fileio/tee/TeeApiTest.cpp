@@ -135,6 +135,8 @@ HWTEST_F(HatsTeeTest, TeeTestFileFdFail_0002, Function | MediumTest | Level2)
 
     close(fd1);
     close(fd2);
+    unlink(teeFile1);
+    unlink(teeFile2);
 }
 
 /*

@@ -31,6 +31,12 @@
 
 using namespace testing::ext;
 
+static const char *UTIMENSAT_TEST_FILE = "/data/local/tmp/tryUtimensat.txt";
+static const int ACCESS_TIME_SEC = 10;
+static const int ACCESS_TIME_NSEC = 0;
+static const int MODIFICATION_TIME_SEC = 11;
+static const int MODIFICATION_TIME_NSEC = 0;
+
 class HatsUtimensatTest : public testing::Test {
 public:
 static void SetUpTestCase();
@@ -50,13 +56,9 @@ void HatsUtimensatTest::SetUpTestCase()
 }
 void HatsUtimensatTest::TearDownTestCase()
 {
+    unlink(UTIMENSAT_TEST_FILE);
 }
 
-static const char *UTIMENSAT_TEST_FILE = "/data/local/tmp/tryUtimensat.txt";
-static const int ACCESS_TIME_SEC = 10;
-static const int ACCESS_TIME_NSEC = 0;
-static const int MODIFICATION_TIME_SEC = 11;
-static const int MODIFICATION_TIME_NSEC = 0;
 
 /*
  * @tc.number : SUB_KERNEL_SYSCALL_UTIMENSAT_0100

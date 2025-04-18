@@ -16,7 +16,11 @@
 #include "gtest/gtest.h"
 #include "map"
 #include "gmock/gmock.h"
+#ifdef EXTDEVMGR_USB_PASS_THROUGH
+#include "usb_host_impl_mock.h"
+#else
 #include "usb_impl_mock.h"
+#endif // EXTDEVMGR_USB_PASS_THROUGH
 #include "usb_ddk_service_mock.h"
 #define private public
 #include "ibus_extension.h"
@@ -37,7 +41,11 @@ public:
         cout << "UsbSubscriberTest SetUp" << endl;
         busExt = make_shared<UsbBusExtension>();
         usbBusExt = static_cast<UsbBusExtension*>(busExt.get());
+#ifdef EXTDEVMGR_USB_PASS_THROUGH
+        mockUsb = sptr<UsbHostImplMock>(new UsbHostImplMock());
+#else
         mockUsb = sptr<UsbImplMock>(new UsbImplMock());
+#endif // EXTDEVMGR_USB_PASS_THROUGH
         mockUsbDdk = sptr<UsbDdkServiceMock>(new UsbDdkServiceMock());
         usbBusExt->SetUsbInferface(mockUsb);
         usbBusExt->SetUsbDdk(mockUsbDdk);
@@ -48,9 +56,12 @@ public:
         mockUsb = nullptr;
         mockUsbDdk = nullptr;
     }
-
     shared_ptr<IBusExtension> busExt;
+#ifdef EXTDEVMGR_USB_PASS_THROUGH
+    sptr<UsbHostImplMock> mockUsb;
+#else
     sptr<UsbImplMock> mockUsb;
+#endif // EXTDEVMGR_USB_PASS_THROUGH
     sptr<UsbDdkServiceMock> mockUsbDdk;
     UsbBusExtension *usbBusExt;
 };
@@ -174,6 +185,7 @@ HWTEST_F(UsbSubscriberTest, SUB_Driver_Ext_BusExtensionUSB_0900, TestSize.Level1
  * @tc.size: MediumTest
  * @tc.type: Function
  */
+#ifndef EXTDEVMGR_USB_PASS_THROUGH
 HWTEST_F(UsbSubscriberTest, SUB_Driver_Ext_BusExtensionUSB_1000, TestSize.Level1)
 {
     int ret = 0;
@@ -181,5 +193,6 @@ HWTEST_F(UsbSubscriberTest, SUB_Driver_Ext_BusExtensionUSB_1000, TestSize.Level1
     ret = mockUsb->SetPortRole(0, 0, 0);
     ASSERT_EQ(ret, 0);
 }
+#endif // EXTDEVMGR_USB_PASS_THROUGH
 }
 }

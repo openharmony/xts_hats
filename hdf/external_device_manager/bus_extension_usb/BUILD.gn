@@ -23,9 +23,13 @@ ohos_moduletest_suite("HatsHdfExternalBusUsbTest") {
     "src/usb_bus_extension_test.cpp",
     "src/usb_ddk_service_mock.cpp",
     "src/usb_driver_info_test.cpp",
-    "src/usb_impl_mock.cpp",
     "src/usb_subscriber_test.cpp",
   ]
+  if (extdevmgr_usb_pass_through) {
+    sources += [ "src/usb_host_impl_mock.cpp" ]
+  } else {
+    sources += [ "src/usb_impl_mock.cpp" ]
+  }
   include_dirs = [
     "include",
     "${ext_mgr_path}/frameworks/ddk/usb/",
@@ -39,14 +43,22 @@ ohos_moduletest_suite("HatsHdfExternalBusUsbTest") {
     "//third_party/googletest:gtest_main",
     "//third_party/jsoncpp:jsoncpp",
   ]
+  defines = []
+  if (extdevmgr_usb_pass_through) {
+    defines += [ "EXTDEVMGR_USB_PASS_THROUGH" ]
+  }
   external_deps = [
     "bundle_framework:appexecfwk_base",
     "c_utils:utils",
     "drivers_interface_usb:libusb_ddk_proxy_1.1",
-    "drivers_interface_usb:libusb_proxy_1.0",
     "hilog:libhilog",
     "samgr:samgr_proxy",
   ]
+  if (extdevmgr_usb_pass_through) {
+    external_deps += [ "drivers_interface_usb:libusb_proxy_2.0" ]
+  } else {
+    external_deps += [ "drivers_interface_usb:libusb_proxy_1.0" ]
+  }
   configs = [ "${utils_path}:utils_config" ]
   subsystem_name = "hdf"
   part_name = "external_device_manager"

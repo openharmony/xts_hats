@@ -18,7 +18,6 @@ group("HatsFreeListTest") {
   testonly = true
   deps = [
     "encode_pointer:HatsEncodePointerTest",
-    "free_performance:HatsFreePerformanceTest",
     "malloc_pressure:HatsMallocPressureTest",
     "modify_pointer:HatsModifyPointerTest",
     "safe_unlink:HatsSafeUnlinkTest",

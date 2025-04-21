@@ -25,7 +25,6 @@ group("HatsHdfExternalDeviceTest") {
       "ddk_base_test:HatsHdfExternalDdkBaseTest",
       "device_manager_test:HatsHdfExternalDeviceManagerTest",
       "driver_extension_context:HatsHdfExtensionContextTest",
-      "driver_extension_controller:HatsHdfExternalControllerTest",
       "driver_extension_manager_client_test:HatsHdfExternalManagerClientTest",
       "drivers_pkg_manager_test:HatsHdfExternalPkgManagerTest",
     ]

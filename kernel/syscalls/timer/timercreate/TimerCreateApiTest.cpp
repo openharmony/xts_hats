@@ -71,7 +71,7 @@ HWTEST_F(TimerCreateApiTest, TimerCreateRealtimeAndGetoverrunSuccess_0001, Funct
 {
     timer_t timerId;
     struct sigevent sev;
-    const clockid_t CLOCK_ID = CLOCK_REALTIME;
+    const clockid_t clockId = CLOCK_REALTIME;
     struct itimerspec its = {
         .it_interval = {
             .tv_sec = 0,
@@ -87,7 +87,7 @@ HWTEST_F(TimerCreateApiTest, TimerCreateRealtimeAndGetoverrunSuccess_0001, Funct
     sev.sigev_signo = SIGRTMIN;
     sev.sigev_notify_function = TimeHandler;
 
-    EXPECT_EQ(timer_create(CLOCK_ID, &sev, &timerId), 0);
+    EXPECT_EQ(timer_create(clockId, &sev, &timerId), 0);
     EXPECT_EQ(timer_settime(timerId, 0, &its, nullptr), 0);
 
     usleep(DELAY_TIME);
@@ -112,7 +112,7 @@ HWTEST_F(TimerCreateApiTest, TimerCreateMonotonicSuccess_0002, Function | Medium
 {
     timer_t timerId;
     struct itimerspec currValue;
-    const clockid_t CLOCK_ID = CLOCK_MONOTONIC;
+    const clockid_t clockId = CLOCK_MONOTONIC;
     signal(SIGALRM, SigalrmHandler);
     struct itimerspec its = {
         .it_interval = {
@@ -131,7 +131,7 @@ HWTEST_F(TimerCreateApiTest, TimerCreateMonotonicSuccess_0002, Function | Medium
         .sigev_notify_function = TimeHandler,
     };
 
-    EXPECT_EQ(timer_create(CLOCK_ID, &sev, &timerId), 0);
+    EXPECT_EQ(timer_create(clockId, &sev, &timerId), 0);
     EXPECT_EQ(timer_settime(timerId, 0, &its, nullptr), 0);
 
     usleep(DELAY_TIME);
@@ -153,7 +153,7 @@ HWTEST_F(TimerCreateApiTest, TimerCreateMonotonicSuccess_0002, Function | Medium
 HWTEST_F(TimerCreateApiTest, TimerCreateRealTimeAlarmSuccess_0003, Function | MediumTest | Level1)
 {
     timer_t timerId;
-    const clockid_t CLOCK_ID = CLOCK_REALTIME_ALARM;
+    const clockid_t clockId = CLOCK_REALTIME_ALARM;
     sighandler_t oldHandler = signal(SIGALRM, SigalrmHandler);
     EXPECT_NE(oldHandler, SIG_ERR);
     struct sigevent sev = {
@@ -172,7 +172,7 @@ HWTEST_F(TimerCreateApiTest, TimerCreateRealTimeAlarmSuccess_0003, Function | Me
         },
     };
 
-    EXPECT_EQ(timer_create(CLOCK_ID, &sev, &timerId), 0);
+    EXPECT_EQ(timer_create(clockId, &sev, &timerId), 0);
     EXPECT_EQ(timer_settime(timerId, 0, &its, nullptr), 0);
 
     usleep(DELAY_TIME);
@@ -240,11 +240,11 @@ HWTEST_F(TimerCreateApiTest, TimerSetTimeAbstimeSuccess_0005, Function | MediumT
     timer_t timerId;
     struct itimerspec newValue;
     struct itimerspec oldValue;
-    const clockid_t CLOCK_ID = CLOCK_REALTIME;
+    const clockid_t clockId = CLOCK_REALTIME;
 
     // Set the timer current time plus 1 ms
     struct timespec now;
-    clock_gettime(CLOCK_ID, &now);
+    clock_gettime(clockId, &now);
     newValue.it_value.tv_sec = now.tv_sec;
     newValue.it_value.tv_nsec = now.tv_nsec + 1000000;
     if (newValue.it_value.tv_nsec >= 1000000000) {
@@ -259,7 +259,7 @@ HWTEST_F(TimerCreateApiTest, TimerSetTimeAbstimeSuccess_0005, Function | MediumT
     sev.sigev_notify_function = TimeHandler;
     sev.sigev_value.sival_ptr = &g_timerExpired;
 
-    EXPECT_EQ(timer_create(CLOCK_ID, &sev, &timerId), 0);
+    EXPECT_EQ(timer_create(clockId, &sev, &timerId), 0);
 
     EXPECT_EQ(timer_settime(timerId, TIMER_ABSTIME, &newValue, &oldValue), 0);
 
@@ -281,7 +281,7 @@ HWTEST_F(TimerCreateApiTest, TimerSetTimeAbstimeSuccess_0005, Function | MediumT
 HWTEST_F(TimerCreateApiTest, TimerCreateBoottimeAlarmSuccess_0006, Function | MediumTest | Level1)
 {
     timer_t timerId;
-    const clockid_t CLOCK_ID = CLOCK_BOOTTIME_ALARM;
+    const clockid_t clockId = CLOCK_BOOTTIME_ALARM;
     sighandler_t oldHandler = signal(SIGALRM, SigalrmHandler);
     EXPECT_NE(oldHandler, SIG_ERR);
     struct sigevent sev = {
@@ -299,7 +299,7 @@ HWTEST_F(TimerCreateApiTest, TimerCreateBoottimeAlarmSuccess_0006, Function | Me
         },
     };
 
-    EXPECT_EQ(timer_create(CLOCK_ID, &sev, &timerId), 0);
+    EXPECT_EQ(timer_create(clockId, &sev, &timerId), 0);
     EXPECT_EQ(timer_settime(timerId, 0, &its, nullptr), 0);
 
     usleep(DELAY_TIME);

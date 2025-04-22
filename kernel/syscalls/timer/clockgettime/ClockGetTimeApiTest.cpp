@@ -41,7 +41,7 @@ private:
 };
 void ClockApiTest::SetUp()
 {
-    g_time = time(NULL);
+    g_time = time(nullptr);
     g_timeTs.tv_sec = g_time;
     g_timeTs.tv_nsec = 0;
 }

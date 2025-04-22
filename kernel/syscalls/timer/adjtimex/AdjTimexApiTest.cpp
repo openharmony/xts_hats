@@ -76,12 +76,12 @@ HWTEST_F(HatsAdjTimexApiTest, ClockAdjTimexGetCurrentTimeSuccess_0002, Function 
 {
     struct timex tx;
     tx.modes = 0;
-    clockid_t clock_id = CLOCK_REALTIME;
-    int result = clock_adjtime(clock_id, &tx);
+    clockid_t clockId = CLOCK_REALTIME;
+    int result = clock_adjtime(clockId, &tx);
     EXPECT_GE(result, 0);
 
     struct timespec now;
-    clock_gettime(clock_id, &now);
+    clock_gettime(clockId, &now);
 
     EXPECT_NEAR(tx.time.tv_sec, now.tv_sec, 1);
 }

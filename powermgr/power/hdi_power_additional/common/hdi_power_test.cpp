@@ -25,13 +25,13 @@
 
 #include "hdf_base.h"
 #include "osal_time.h"
-#include "v1_2/ipower_hdi_callback.h"
-#include "v1_2/ipower_interface.h"
-#include "v1_2/power_types.h"
-#include "v1_2/running_lock_types.h"
+#include "v1_3/ipower_hdi_callback.h"
+#include "v1_3/ipower_interface.h"
+#include "v1_3/power_types.h"
+#include "v1_3/running_lock_types.h"
 
 using namespace OHOS::HDI;
-using namespace OHOS::HDI::Power::V1_2;
+using namespace OHOS::HDI::Power::V1_3;
 using namespace testing::ext;
 
 namespace {
@@ -39,8 +39,8 @@ class PowerHdiCallback : public IPowerHdiCallback {
 public:
     ~PowerHdiCallback() override{};
     int32_t OnSuspend() override { return 0; };
-
     int32_t OnWakeup() override { return 0; };
+    int32_t OnWakeupWithTag(int32_t suspendTag __attribute__((unused))) override { return 0; };
 };
 
 sptr<IPowerHdiCallback> g_callback = new PowerHdiCallback();

@@ -25,14 +25,14 @@
 
 #include "hdf_base.h"
 #include "osal_time.h"
-#include "v1_3/ipower_interface.h"
-#include "v1_3/ipower_hdi_callback.h"
-#include "v1_3/ipower_running_lock_callback.h"
-#include "v1_3/power_types.h"
-#include "v1_3/running_lock_types.h"
+#include "v1_2/ipower_interface.h"
+#include "v1_2/ipower_hdi_callback.h"
+#include "v1_2/ipower_running_lock_callback.h"
+#include "v1_2/power_types.h"
+#include "v1_2/running_lock_types.h"
 
 using namespace OHOS::HDI;
-using namespace OHOS::HDI::Power::V1_3;
+using namespace OHOS::HDI::Power::V1_2;
 using namespace testing::ext;
 
 namespace {
@@ -45,11 +45,6 @@ public:
     };
 
     int32_t OnWakeup() override
-    {
-        return 0;
-    };
-
-    int32_t OnWakeupWithTag(int32_t suspendTag __attribute__((unused))) override
     {
         return 0;
     };
@@ -513,7 +508,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest015, TestSize.Level1)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest016, TestSize.Level3)
 {
     printf("HdfPowerHdiTest016: start.");
-    EXPECT_TRUE(OHOS::HDI::Power::V1_3::PowerHdfCmd::CMD_REGISTER_CALLBCK == 0);
+    EXPECT_TRUE(OHOS::HDI::Power::V1_2::PowerHdfCmd::CMD_REGISTER_CALLBCK == 0);
     printf("HdfPowerHdiTest016: end.");
 }
 
@@ -525,7 +520,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest016, TestSize.Level3)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest017, TestSize.Level3)
 {
     printf("HdfPowerHdiTest017: start.");
-    EXPECT_TRUE(OHOS::HDI::Power::V1_3::PowerHdfCmd::CMD_START_SUSPEND == 1);
+    EXPECT_TRUE(OHOS::HDI::Power::V1_2::PowerHdfCmd::CMD_START_SUSPEND == 1);
     printf("HdfPowerHdiTest017: end.");
 }
 
@@ -537,7 +532,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest017, TestSize.Level3)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest018, TestSize.Level3)
 {
     printf("HdfPowerHdiTest018: start.");
-    EXPECT_TRUE(OHOS::HDI::Power::V1_3::PowerHdfCmd::CMD_STOP_SUSPEND == 2);
+    EXPECT_TRUE(OHOS::HDI::Power::V1_2::PowerHdfCmd::CMD_STOP_SUSPEND == 2);
     printf("HdfPowerHdiTest018: end.");
 }
 
@@ -549,7 +544,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest018, TestSize.Level3)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest019, TestSize.Level3)
 {
     printf("HdfPowerHdiTest019: start.");
-    EXPECT_TRUE(OHOS::HDI::Power::V1_3::PowerHdfCmd::CMD_FORCE_SUSPEND == 3);
+    EXPECT_TRUE(OHOS::HDI::Power::V1_2::PowerHdfCmd::CMD_FORCE_SUSPEND == 3);
     printf("HdfPowerHdiTest019: end.");
 }
 
@@ -561,7 +556,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest019, TestSize.Level3)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest020, TestSize.Level3)
 {
     printf("HdfPowerHdiTest020: start.");
-    EXPECT_TRUE(OHOS::HDI::Power::V1_3::PowerHdfCmd::CMD_SUSPEND_BLOCK == 4);
+    EXPECT_TRUE(OHOS::HDI::Power::V1_2::PowerHdfCmd::CMD_SUSPEND_BLOCK == 4);
     printf("HdfPowerHdiTest020: end.");
 }
 
@@ -573,7 +568,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest020, TestSize.Level3)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest021, TestSize.Level3)
 {
     printf("HdfPowerHdiTest021: start.");
-    EXPECT_TRUE(OHOS::HDI::Power::V1_3::PowerHdfCmd::CMD_SUSPEND_UNBLOCK == 5);
+    EXPECT_TRUE(OHOS::HDI::Power::V1_2::PowerHdfCmd::CMD_SUSPEND_UNBLOCK == 5);
     printf("HdfPowerHdiTest021: end.");
 }
 
@@ -585,7 +580,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest021, TestSize.Level3)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest022, TestSize.Level3)
 {
     printf("HdfPowerHdiTest022: start.");
-    EXPECT_TRUE(OHOS::HDI::Power::V1_3::PowerHdfCmd::CMD_DUMP == 6);
+    EXPECT_TRUE(OHOS::HDI::Power::V1_2::PowerHdfCmd::CMD_DUMP == 6);
     printf("HdfPowerHdiTest022: end.");
 }
 
@@ -597,7 +592,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest022, TestSize.Level3)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest023, TestSize.Level3)
 {
     printf("HdfPowerHdiTest023: start.");
-    EXPECT_TRUE(OHOS::HDI::Power::V1_3::PowerHdfCallbackCmd::CMD_ON_SUSPEND == 0);
+    EXPECT_TRUE(OHOS::HDI::Power::V1_2::PowerHdfCallbackCmd::CMD_ON_SUSPEND == 0);
     printf("HdfPowerHdiTest023: end.");
 }
 
@@ -609,7 +604,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest023, TestSize.Level3)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest024, TestSize.Level3)
 {
     printf("HdfPowerHdiTest024: start.");
-    EXPECT_TRUE(OHOS::HDI::Power::V1_3::PowerHdfCallbackCmd::CMD_ON_WAKEUP == 1);
+    EXPECT_TRUE(OHOS::HDI::Power::V1_2::PowerHdfCallbackCmd::CMD_ON_WAKEUP == 1);
     printf("HdfPowerHdiTest024: end.");
 }
 
@@ -621,7 +616,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest024, TestSize.Level3)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest025, TestSize.Level3)
 {
     printf("HdfPowerHdiTest025: start.");
-    EXPECT_TRUE(OHOS::HDI::Power::V1_3::PowerHdfState::AWAKE == 0);
+    EXPECT_TRUE(OHOS::HDI::Power::V1_2::PowerHdfState::AWAKE == 0);
     printf("HdfPowerHdiTest025: end.");
 }
 
@@ -633,7 +628,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest025, TestSize.Level3)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest026, TestSize.Level3)
 {
     printf("HdfPowerHdiTest026: start.");
-    EXPECT_TRUE(OHOS::HDI::Power::V1_3::PowerHdfState::INACTIVE == 1);
+    EXPECT_TRUE(OHOS::HDI::Power::V1_2::PowerHdfState::INACTIVE == 1);
     printf("HdfPowerHdiTest026: end.");
 }
 
@@ -645,7 +640,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest026, TestSize.Level3)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest027, TestSize.Level3)
 {
     printf("HdfPowerHdiTest027: start.");
-    EXPECT_TRUE(OHOS::HDI::Power::V1_3::PowerHdfState::SLEEP == 2);
+    EXPECT_TRUE(OHOS::HDI::Power::V1_2::PowerHdfState::SLEEP == 2);
     printf("HdfPowerHdiTest027: end.");
 }
 
@@ -657,7 +652,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest027, TestSize.Level3)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest028, TestSize.Level3)
 {
     printf("HdfPowerHdiTest028: start.");
-    EXPECT_TRUE(OHOS::HDI::Power::V1_3::BaseRunningLockType::RUNNINGLOCK_SCREEN == 0);
+    EXPECT_TRUE(OHOS::HDI::Power::V1_2::BaseRunningLockType::RUNNINGLOCK_SCREEN == 0);
     printf("HdfPowerHdiTest028: end.");
 }
 
@@ -669,7 +664,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest028, TestSize.Level3)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest029, TestSize.Level3)
 {
     printf("HdfPowerHdiTest029: start.");
-    EXPECT_TRUE(OHOS::HDI::Power::V1_3::BaseRunningLockType::RUNNINGLOCK_BACKGROUND == 1);
+    EXPECT_TRUE(OHOS::HDI::Power::V1_2::BaseRunningLockType::RUNNINGLOCK_BACKGROUND == 1);
     printf("HdfPowerHdiTest029: end.");
 }
 
@@ -681,7 +676,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest029, TestSize.Level3)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest030, TestSize.Level3)
 {
     printf("HdfPowerHdiTest030: start.");
-    EXPECT_TRUE(OHOS::HDI::Power::V1_3::BaseRunningLockType::RUNNINGLOCK_PROXIMITY_SCREEN_CONTROL == 2);
+    EXPECT_TRUE(OHOS::HDI::Power::V1_2::BaseRunningLockType::RUNNINGLOCK_PROXIMITY_SCREEN_CONTROL == 2);
     printf("HdfPowerHdiTest030: end.");
 }
 
@@ -693,7 +688,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest030, TestSize.Level3)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest031, TestSize.Level3)
 {
     printf("HdfPowerHdiTest031: start.");
-    EXPECT_TRUE(OHOS::HDI::Power::V1_3::RunningLockType::RUNNINGLOCK_BACKGROUND_PHONE == 3);
+    EXPECT_TRUE(OHOS::HDI::Power::V1_2::RunningLockType::RUNNINGLOCK_BACKGROUND_PHONE == 3);
     printf("HdfPowerHdiTest031: end.");
 }
 
@@ -705,7 +700,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest031, TestSize.Level3)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest032, TestSize.Level3)
 {
     printf("HdfPowerHdiTest032: start.");
-    EXPECT_TRUE(OHOS::HDI::Power::V1_3::RunningLockType::RUNNINGLOCK_BACKGROUND_NOTIFICATION == 5);
+    EXPECT_TRUE(OHOS::HDI::Power::V1_2::RunningLockType::RUNNINGLOCK_BACKGROUND_NOTIFICATION == 5);
     printf("HdfPowerHdiTest032: end.");
 }
 
@@ -717,7 +712,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest032, TestSize.Level3)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest033, TestSize.Level3)
 {
     printf("HdfPowerHdiTest033: start.");
-    EXPECT_TRUE(OHOS::HDI::Power::V1_3::RunningLockType::RUNNINGLOCK_BACKGROUND_AUDIO == 9);
+    EXPECT_TRUE(OHOS::HDI::Power::V1_2::RunningLockType::RUNNINGLOCK_BACKGROUND_AUDIO == 9);
     printf("HdfPowerHdiTest033: end.");
 }
 
@@ -729,7 +724,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest033, TestSize.Level3)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest034, TestSize.Level3)
 {
     printf("HdfPowerHdiTest034: start.");
-    EXPECT_TRUE(OHOS::HDI::Power::V1_3::RunningLockType::RUNNINGLOCK_BACKGROUND_SPORT == 17);
+    EXPECT_TRUE(OHOS::HDI::Power::V1_2::RunningLockType::RUNNINGLOCK_BACKGROUND_SPORT == 17);
     printf("HdfPowerHdiTest034: end.");
 }
 
@@ -741,7 +736,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest034, TestSize.Level3)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest035, TestSize.Level3)
 {
     printf("HdfPowerHdiTest035: start.");
-    EXPECT_TRUE(OHOS::HDI::Power::V1_3::RunningLockType::RUNNINGLOCK_BACKGROUND_NAVIGATION == 33);
+    EXPECT_TRUE(OHOS::HDI::Power::V1_2::RunningLockType::RUNNINGLOCK_BACKGROUND_NAVIGATION == 33);
     printf("HdfPowerHdiTest035: end.");
 }
 
@@ -753,7 +748,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest035, TestSize.Level3)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest036, TestSize.Level3)
 {
     printf("HdfPowerHdiTest036: start.");
-    EXPECT_TRUE(OHOS::HDI::Power::V1_3::RunningLockType::RUNNINGLOCK_BACKGROUND_TASK == 65);
+    EXPECT_TRUE(OHOS::HDI::Power::V1_2::RunningLockType::RUNNINGLOCK_BACKGROUND_TASK == 65);
     printf("HdfPowerHdiTest036: end.");
 }
 
@@ -765,7 +760,7 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest036, TestSize.Level3)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest037, TestSize.Level3)
 {
     printf("HdfPowerHdiTest037: start.");
-    EXPECT_TRUE(OHOS::HDI::Power::V1_3::RunningLockType::RUNNINGLOCK_BUTT == 66);
+    EXPECT_TRUE(OHOS::HDI::Power::V1_2::RunningLockType::RUNNINGLOCK_BUTT == 66);
     printf("HdfPowerHdiTest037: end.");
 }
 

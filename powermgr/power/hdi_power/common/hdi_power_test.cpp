@@ -42,12 +42,18 @@ public:
     int32_t OnSuspend() override
     {
         return 0;
-    };
+    }
 
     int32_t OnWakeup() override
     {
         return 0;
-    };
+    }
+
+    int32_t OnWakeupWithTag(const std::string& tag) override
+    {
+        (void)tag;
+        return 0;
+    }
 };
 
 class PowerRunningLockCallback : public IPowerRunningLockCallback {

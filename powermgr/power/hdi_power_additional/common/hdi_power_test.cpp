@@ -37,10 +37,22 @@ using namespace testing::ext;
 namespace {
 class PowerHdiCallback : public IPowerHdiCallback {
 public:
-    ~PowerHdiCallback() override{};
-    int32_t OnSuspend() override { return 0; };
+    ~PowerHdiCallback() override {}
+    int32_t OnSuspend() override
+    {
+        return 0;
+    }
 
-    int32_t OnWakeup() override { return 0; };
+    int32_t OnWakeup() override
+    {
+        return 0;
+    }
+
+    int32_t OnWakeupWithTag(const std::string& tag) override
+    {
+        (void)tag;
+        return 0;
+    }
 };
 
 sptr<IPowerHdiCallback> g_callback = new PowerHdiCallback();

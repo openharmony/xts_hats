@@ -3215,7 +3215,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRegCallback001, Function |
     for (i = 0; i < 1000; i++) {
         ret = render_->RegCallback(render_, &audioCallback, cookie);
 #if defined ALSA_LIB_MODE || defined DISPLAY_COMMUNITY
-        ASSERT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
 #else
         EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #endif
@@ -3235,7 +3235,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRegCallback002, Function |
     audioCallback.RenderCallback = RenderCallbackTest;
     ret = render_->RegCallback(render_, &audioCallback, cookie);
 #if defined ALSA_LIB_MODE || defined DISPLAY_COMMUNITY
-        ASSERT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
 #else
         EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #endif
@@ -3254,9 +3254,9 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRegCallback003, Function |
     audioCallback.RenderCallback = RenderCallbackTest;
     ret = render_->RegCallback(render_, &audioCallback, cookie);
 #if defined ALSA_LIB_MODE || defined DISPLAY_COMMUNITY
-        ASSERT_EQ(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_SUCCESS);
 #else
-        EXPECT_NE(ret, HDF_ERR_NOT_SUPPORT);
+        EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #endif
 }
 

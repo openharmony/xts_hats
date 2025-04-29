@@ -59,7 +59,7 @@ int32_t RenderCallbackTest(struct IAudioCallback* self, enum AudioCallbackType t
     (void)type;
     (void)reserved;
     (void)cookie;
-    retrun HDF_SUCCESS;
+    return HDF_SUCCESS;
 }
 
 uint64_t AudioUtRenderTestAdditional::GetRenderBufferSize()

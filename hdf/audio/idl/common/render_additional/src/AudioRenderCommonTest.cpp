@@ -52,6 +52,16 @@ public:
     void ReleaseAllAdapterDescs(struct AudioAdapterDescriptor *descs, uint32_t descsLen);
 };
 
+int32_t RenderCallbackTest(struct IAudioCallback* self, enum AudioCallbackType type,
+    int8_t* reserved, int8_t* cookie)
+{
+    (void)self;
+    (void)type;
+    (void)reserved;
+    (void)cookie;
+    return HDF_SUCCESS;
+}
+
 uint64_t AudioUtRenderTestAdditional::GetRenderBufferSize()
 {
     int32_t ret = HDF_SUCCESS;
@@ -3201,12 +3211,13 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRegCallback001, Function |
     int32_t ret = 0;
     int8_t cookie = 0;
     struct IAudioCallback audioCallback;
+    audioCallback.RenderCallback = RenderCallbackTest;
     for (i = 0; i < 1000; i++) {
         ret = render_->RegCallback(render_, &audioCallback, cookie);
-#if defined ALSA_LIB_MODE
-        ASSERT_EQ(ret, HDF_SUCCESS);
+#if defined ALSA_LIB_MODE || defined DISPLAY_COMMUNITY
+        EXPECT_EQ(ret, HDF_SUCCESS);
 #else
-        EXPECT_NE(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #endif
     }
 }
@@ -3221,11 +3232,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRegCallback002, Function |
     int32_t ret = 0;
     int8_t cookie = 127;
     struct IAudioCallback audioCallback;
+    audioCallback.RenderCallback = RenderCallbackTest;
     ret = render_->RegCallback(render_, &audioCallback, cookie);
-#if defined ALSA_LIB_MODE
-        ASSERT_EQ(ret, HDF_SUCCESS);
+#if defined ALSA_LIB_MODE || defined DISPLAY_COMMUNITY
+        EXPECT_EQ(ret, HDF_SUCCESS);
 #else
-        EXPECT_NE(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #endif
 }
 
@@ -3239,11 +3251,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRegCallback003, Function |
     int32_t ret = 0;
     int8_t cookie = -1;
     struct IAudioCallback audioCallback;
+    audioCallback.RenderCallback = RenderCallbackTest;
     ret = render_->RegCallback(render_, &audioCallback, cookie);
-#if defined ALSA_LIB_MODE
-        ASSERT_EQ(ret, HDF_SUCCESS);
+#if defined ALSA_LIB_MODE || defined DISPLAY_COMMUNITY
+        EXPECT_EQ(ret, HDF_SUCCESS);
 #else
-        EXPECT_NE(ret, HDF_SUCCESS);
+        EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #endif
 }
 

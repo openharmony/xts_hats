@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2024-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file expected in compliance with the License.
  * You may obtain a copy of the License at
@@ -188,7 +188,7 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_ScanMode_0100, TestSize.Level1)
 {
     // Get Stream Operator
     cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
-    cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,
+    cameraTest->rc = cameraTest->cameraDeviceV1_2->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,
         cameraTest->streamOperator_V1_1);
     EXPECT_NE(cameraTest->streamOperator_V1_1, nullptr);
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
@@ -581,7 +581,7 @@ void SuperStubByColorSpaces(std::vector<int32_t> superStubColorSpaces, std::shar
 HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_Colorspace_0200, TestSize.Level1)
 {
     cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
-    cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(
+    cameraTest->rc = cameraTest->cameraDeviceV1_2->GetStreamOperator_V1_1(
         cameraTest->streamOperatorCallback, cameraTest->streamOperator_V1_1);
     EXPECT_NE(cameraTest->streamOperator_V1_1, nullptr);
     common_metadata_header_t* data = cameraTest->ability->get();
@@ -637,7 +637,7 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_APERTURE_0500, TestSize.Level1)
 {
     // Get Stream Operator
     cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
-    cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,
+    cameraTest->rc = cameraTest->cameraDeviceV1_2->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,
         cameraTest->streamOperator_V1_1);
     EXPECT_NE(cameraTest->streamOperator_V1_1, nullptr);
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
@@ -696,7 +696,7 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_APERTURE_0600, TestSize.Level1)
         for (size_t i = 0; i < sizeof(entryValues) / sizeof(float); i++) {
             // Get Stream Operator
             cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
-            cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,
+            cameraTest->rc = cameraTest->cameraDeviceV1_2->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,
                 cameraTest->streamOperator_V1_1);
             EXPECT_NE(cameraTest->streamOperator_V1_1, nullptr);
             EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
@@ -803,7 +803,7 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_Macro_0300, TestSize.Level1)
     CAMERA_LOGI("test SUB_Driver_Camera_Macro_0300 start ...");
     // Get Stream Operator
     cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
-    cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,
+    cameraTest->rc = cameraTest->cameraDeviceV1_2->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,
         cameraTest->streamOperator_V1_1);
     EXPECT_NE(cameraTest->streamOperator_V1_1, nullptr);
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
@@ -860,7 +860,7 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_Macro_0400, TestSize.Level1)
     CAMERA_LOGI("test SUB_Driver_Camera_Macro_0400 start ...");
     // Get Stream Operator
     cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
-    cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,
+    cameraTest->rc = cameraTest->cameraDeviceV1_2->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,
         cameraTest->streamOperator_V1_1);
     EXPECT_NE(cameraTest->streamOperator_V1_1, nullptr);
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
@@ -1015,7 +1015,7 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_SteadyShot_0300, TestSize.Level1)
 {
     // Get Stream Operator
     cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
-    cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,
+    cameraTest->rc = cameraTest->cameraDeviceV1_2->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,
         cameraTest->streamOperator_V1_1);
     EXPECT_NE(cameraTest->streamOperator_V1_1, nullptr);
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
@@ -1067,7 +1067,7 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_Sketch_0300, TestSize.Level1)
 {
     CAMERA_LOGI("test Camera_Device_Hdi_V1_2_003 start");
     cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
-    cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(
+    cameraTest->rc = cameraTest->cameraDeviceV1_2->GetStreamOperator_V1_1(
         cameraTest->streamOperatorCallback, cameraTest->streamOperator_V1_1);
     EXPECT_NE(cameraTest->streamOperator_V1_1, nullptr);
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
@@ -1098,7 +1098,7 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_Sketch_0300, TestSize.Level1)
     modeSetting->addEntry(OHOS_CONTROL_ZOOM_RATIO, &zoomRatio, 1);
     std::vector<uint8_t> metaVec;
     MetadataUtils::ConvertMetadataToVec(modeSetting, metaVec);
-    cameraTest->cameraDeviceV1_1->UpdateSettings(metaVec);
+    cameraTest->cameraDeviceV1_2->UpdateSettings(metaVec);
 
     // capture streamInfo
     cameraTest->streamInfoCapture = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
@@ -1129,7 +1129,7 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_Sketch_0400, TestSize.Level1)
 {
     CAMERA_LOGI("test Camera_Device_Hdi_V1_2_003 start");
     cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
-    cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(
+    cameraTest->rc = cameraTest->cameraDeviceV1_2->GetStreamOperator_V1_1(
         cameraTest->streamOperatorCallback, cameraTest->streamOperator_V1_1);
     EXPECT_NE(cameraTest->streamOperator_V1_1, nullptr);
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
@@ -1157,7 +1157,7 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_Sketch_0400, TestSize.Level1)
     modeSetting->addEntry(OHOS_CONTROL_ZOOM_RATIO, &zoomRatio, 1);
     std::vector<uint8_t> metaVec;
     MetadataUtils::ConvertMetadataToVec(modeSetting, metaVec);
-    cameraTest->cameraDeviceV1_1->UpdateSettings(metaVec);
+    cameraTest->cameraDeviceV1_2->UpdateSettings(metaVec);
     // capture streamInfo
     cameraTest->streamInfoCapture = std::make_shared<OHOS::HDI::Camera::V1_1::StreamInfo_V1_1>();
     cameraTest->DefaultInfosCapture(cameraTest->streamInfoCapture);

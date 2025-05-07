@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2024-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file expected in compliance with the License.
  * You may obtain a copy of the License at
@@ -689,6 +689,9 @@ void Test::StopStream(std::vector<int>& captureIds, std::vector<int>& streamIds)
         } else {
             CAMERA_LOGE("check Capture: ReleaseStreams fail, rc = %{public}d", rc);
         }
+    }
+    if (cameraDeviceV1_3) {
+        cameraDeviceV1_3->Reset();
     }
 }
 

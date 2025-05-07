@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file expected in compliance with the License.
  * You may obtain a copy of the License at
@@ -136,28 +136,7 @@ int32_t Test::DefferredImageTestInit()
 
 void Test::Open(int cameraId)
 {
-    if (cameraDevice == nullptr) {
-        if (cameraIds.size() <= CAMERA_ID_NUM) {
-            CAMERA_LOGE("camera device list empty");
-            GTEST_SKIP() << "No Camera Available" << std::endl;
-            return;
-        }
-        EXPECT_NE(service, nullptr);
-        EXPECT_NE(cameraIds.size(), 0);
-        GetCameraMetadata(cameraId);
-        deviceCallback = new OHOS::Camera::Test::DemoCameraDeviceCallback();
-
-        EXPECT_NE(serviceV1_2, nullptr);
-        if (DEVICE_1 == cameraId) {
-            rc = serviceV1_2->OpenCamera_V1_1(cameraIds[1], deviceCallback, cameraDeviceV1_1);
-        } else {
-            rc = serviceV1_2->OpenCamera_V1_1(cameraIds[0], deviceCallback, cameraDeviceV1_1);
-        }
-        EXPECT_EQ(rc, HDI::Camera::V1_0::NO_ERROR);
-        EXPECT_NE(cameraDeviceV1_1, nullptr);
-        cameraDevice = static_cast<OHOS::HDI::Camera::V1_0::ICameraDevice *>(cameraDeviceV1_1.GetRefPtr());
-        CAMERA_LOGI("OpenCamera V1_2 success");
-    }
+    OpenCameraV1_2(cameraId);
 }
 
 void Test::OpenCameraV1_2(int cameraId)
@@ -174,14 +153,14 @@ void Test::OpenCameraV1_2(int cameraId)
         GetCameraMetadata(cameraId);
         deviceCallback = new OHOS::Camera::Test::DemoCameraDeviceCallback();
 
-        EXPECT_NE(serviceV1_2, nullptr);
+        ASSERT_NE(serviceV1_2, nullptr);
         if (cameraId == DEVICE_1) {
             rc = serviceV1_2->OpenCamera_V1_2(cameraIds[1], deviceCallback, cameraDeviceV1_2);
         } else {
             rc = serviceV1_2->OpenCamera_V1_2(cameraIds[0], deviceCallback, cameraDeviceV1_2);
         }
         EXPECT_EQ(rc, HDI::Camera::V1_0::NO_ERROR);
-        EXPECT_NE(cameraDeviceV1_2, nullptr);
+        ASSERT_NE(cameraDeviceV1_2, nullptr);
         cameraDevice = static_cast<OHOS::HDI::Camera::V1_0::ICameraDevice *>(cameraDeviceV1_2.GetRefPtr());
         CAMERA_LOGI("OpenCamera V1_2 success");
     }
@@ -352,7 +331,7 @@ void Test::StartStream(std::vector<StreamIntent> intents)
     streamOperatorCallback = new TestStreamOperatorCallback();
     uint32_t mainVersion = 1;
     uint32_t minVersion = 0;
-    rc = cameraDeviceV1_1->GetStreamOperator_V1_1(streamOperatorCallback, streamOperator_V1_1);
+    rc = cameraDeviceV1_2->GetStreamOperator_V1_1(streamOperatorCallback, streamOperator_V1_1);
     if (rc == HDI::Camera::V1_0::NO_ERROR) {
         rc = streamOperator_V1_1->GetVersion(mainVersion, minVersion);
         streamOperator = static_cast<OHOS::HDI::Camera::V1_0::IStreamOperator *>(streamOperator_V1_1.GetRefPtr());
@@ -454,6 +433,9 @@ void Test::StopStream(std::vector<int>& captureIds, std::vector<int>& streamIds)
             CAMERA_LOGE("check Capture: ReleaseStreams fail, rc = %{public}d", rc);
         }
     }
+    if (cameraDeviceV1_2) {
+        cameraDeviceV1_2->Reset();
+    }
 }
 
 bool Test::IsTagValueExistsU8(std::shared_ptr<CameraMetadata> ability, uint32_t tag, uint8_t value)
@@ -474,7 +456,7 @@ bool Test::IsTagValueExistsU8(std::shared_ptr<CameraMetadata> ability, uint32_t 
 void Test::TakePhotoWithTags(std::shared_ptr<OHOS::Camera::CameraSetting> meta)
 {
     streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
-    rc = cameraDeviceV1_1->GetStreamOperator_V1_1(streamOperatorCallback,
+    rc = cameraDeviceV1_2->GetStreamOperator_V1_1(streamOperatorCallback,
         streamOperator_V1_1);
     EXPECT_NE(streamOperator_V1_1, nullptr);
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, rc);

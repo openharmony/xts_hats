@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2024-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file expected in compliance with the License.
  * You may obtain a copy of the License at
@@ -46,7 +46,7 @@ HWTEST_F(FrontCameraHdiTestV1_2, SUB_Driver_Camera_APERTURE_0300, TestSize.Level
 {
     // Get Stream Operator
     cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
-    cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,
+    cameraTest->rc = cameraTest->cameraDeviceV1_2->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,
         cameraTest->streamOperator_V1_1);
     EXPECT_NE(cameraTest->streamOperator_V1_1, nullptr);
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
@@ -105,7 +105,7 @@ HWTEST_F(FrontCameraHdiTestV1_2, SUB_Driver_Camera_APERTURE_0400, TestSize.Level
         for (size_t i = 0; i < entry.count; i++) {
             // Get Stream Operator
             cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
-            cameraTest->rc = cameraTest->cameraDeviceV1_1->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,
+            cameraTest->rc = cameraTest->cameraDeviceV1_2->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,
                 cameraTest->streamOperator_V1_1);
             EXPECT_NE(cameraTest->streamOperator_V1_1, nullptr);
             EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);

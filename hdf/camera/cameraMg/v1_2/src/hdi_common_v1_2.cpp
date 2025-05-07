@@ -136,7 +136,7 @@ int32_t Test::DefferredImageTestInit()
 
 void Test::Open(int cameraId)
 {
-    OpenCameraV1_2(cameraId)
+    OpenCameraV1_2(cameraId);
 }
 
 void Test::OpenCameraV1_2(int cameraId)

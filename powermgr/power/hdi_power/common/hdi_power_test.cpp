@@ -25,13 +25,14 @@
 
 #include "hdf_base.h"
 #include "osal_time.h"
-#include "v1_2/ipower_interface.h"
+#include "v1_3/ipower_interface.h"
 #include "v1_2/ipower_hdi_callback.h"
+#include "v1_3/ipower_hdi_callback_ext.h"
 #include "v1_2/ipower_running_lock_callback.h"
 #include "v1_2/power_types.h"
 #include "v1_2/running_lock_types.h"
 
-using namespace OHOS::HDI;
+using namespace OHOS::HDI::Power;
 using namespace OHOS::HDI::Power::V1_2;
 using namespace testing::ext;
 
@@ -50,6 +51,22 @@ public:
     };
 };
 
+class PowerHdiCallbackExt : public V1_3::IPowerHdiCallbackExt {
+public:
+    ~PowerHdiCallbackExt() override {}
+    int32_t OnSuspendWithTag(const std::string& tag) override
+    {
+        (void)tag;
+        return 0;
+    };
+
+    int32_t OnWakeupWithTag(const std::string& tag) override
+    {
+        (void)tag;
+        return 0;
+    };
+};
+
 class PowerRunningLockCallback : public IPowerRunningLockCallback {
     ~PowerRunningLockCallback() override {};
     int32_t HandleRunningLockMessage(const std::string& message) override
@@ -59,7 +76,7 @@ class PowerRunningLockCallback : public IPowerRunningLockCallback {
     }
 };
 
-class PowerMockInterfaceImpl : public IPowerInterface {
+class PowerMockInterfaceImpl : public V1_3::IPowerInterface {
 public:
     ~PowerMockInterfaceImpl() override {};
 
@@ -173,12 +190,25 @@ public:
         (void)value;
         return 0;
     }
+
+    int32_t RegisterPowerCallbackExt(const sptr<V1_3::IPowerHdiCallbackExt> &ipowerHdiCallback) override
+    {
+        (void)ipowerHdiCallback;
+        return 0;
+    }
+
+    int32_t UnRegisterPowerCallbackExt(const sptr<V1_3::IPowerHdiCallbackExt> &ipowerHdiCallback) override
+    {
+        (void)ipowerHdiCallback;
+        return 0;
+    }
 };
 
 sptr<IPowerHdiCallback> g_callback = new PowerHdiCallback();
+sptr<V1_3::IPowerHdiCallbackExt> g_callbackExt = new PowerHdiCallbackExt();
 sptr<IPowerRunningLockCallback> g_runningLockcallback = new PowerRunningLockCallback();
-sptr<IPowerInterface> g_powerInterface = nullptr;
-sptr<IPowerInterface> powerInterface = nullptr;
+sptr<V1_3::IPowerInterface> g_powerInterface = nullptr;
+sptr<V1_3::IPowerInterface> powerInterface = nullptr;
 std::mutex g_mutex;
 const uint32_t MAX_PATH = 256;
 const uint32_t MAX_FILE = 1024;
@@ -200,7 +230,7 @@ public:
 
 void HdfPowerHdiTest::SetUpTestCase()
 {
-    g_powerInterface = IPowerInterface::Get(true);
+    g_powerInterface = V1_3::IPowerInterface::Get(true);
     powerInterface = new PowerMockInterfaceImpl();
 }
 
@@ -840,5 +870,29 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest043, TestSize.Level1)
     int32_t result = g_powerInterface->GetPowerConfig(sceneName, value);
     EXPECT_EQ(true, value == "");
     EXPECT_EQ(true, result != 0);
+}
+
+/**
+  * @tc.name: HdfPowerHdiTest044
+  * @tc.desc: check RegisterPowerCallbackExt and UnRegisterPowerCallbackExt
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest044, TestSize.Level1)
+{
+    EXPECT_TRUE(HDF_SUCCESS == powerInterface->RegisterPowerCallbackExt(g_callbackExt)) << "HdfPowerHdiTest044 failed";
+    EXPECT_TRUE(HDF_SUCCESS == powerInterface->UnRegisterPowerCallbackExt(g_callbackExt))
+        << "HdfPowerHdiTest044 failed";
+}
+
+/**
+ * @tc.name: HdfPowerHdiTest045
+ * @tc.desc: check IPowerHdiCallbackExt
+ * @tc.type: FUNC
+ */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest045, TestSize.Level1)
+{
+    std::string testTag = "TEST_TAG";
+    EXPECT_TRUE(g_callbackExt->OnSuspendWithTag(testTag) == 0);
+    EXPECT_TRUE(g_callbackExt->OnWakeupWithTag(testTag) == 0);
 }
 }

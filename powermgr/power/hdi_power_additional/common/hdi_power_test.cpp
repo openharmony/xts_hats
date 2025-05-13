@@ -26,11 +26,12 @@
 #include "hdf_base.h"
 #include "osal_time.h"
 #include "v1_2/ipower_hdi_callback.h"
-#include "v1_2/ipower_interface.h"
+#include "v1_3/ipower_hdi_callback_ext.h"
+#include "v1_3/ipower_interface.h"
 #include "v1_2/power_types.h"
 #include "v1_2/running_lock_types.h"
 
-using namespace OHOS::HDI;
+using namespace OHOS::HDI::Power;
 using namespace OHOS::HDI::Power::V1_2;
 using namespace testing::ext;
 
@@ -43,8 +44,25 @@ public:
     int32_t OnWakeup() override { return 0; };
 };
 
+class PowerHdiCallbackExt : public V1_3::IPowerHdiCallbackExt {
+public:
+    ~PowerHdiCallbackExt() override {}
+    int32_t OnSuspendWithTag(const std::string& tag) override
+    {
+        (void)tag;
+        return 0;
+    };
+
+    int32_t OnWakeupWithTag(const std::string& tag) override
+    {
+        (void)tag;
+        return 0;
+    };
+};
+
 sptr<IPowerHdiCallback> g_callback = new PowerHdiCallback();
-sptr<IPowerInterface> g_powerInterface = nullptr;
+sptr<V1_3::IPowerHdiCallbackExt> g_callbackExt = new PowerHdiCallbackExt();
+sptr<V1_3::IPowerInterface> g_powerInterface = nullptr;
 std::mutex g_mutex;
 const uint32_t MAX_PATH = 256;
 const uint32_t MAX_FILE = 1024;
@@ -64,7 +82,7 @@ public:
     static int32_t ReadFile(const std::string path, std::string &buf, size_t size);
 };
 
-void HdfPowerHdiTestAdditional::SetUpTestCase() { g_powerInterface = IPowerInterface::Get(true); }
+void HdfPowerHdiTestAdditional::SetUpTestCase() { g_powerInterface = V1_3::IPowerInterface::Get(true); }
 
 void HdfPowerHdiTestAdditional::TearDownTestCase() {}
 
@@ -2543,5 +2561,28 @@ HWTEST_F(HdfPowerHdiTestAdditional, testUnholdRunningLock029, Function | MediumT
     };
     int32_t ret = g_powerInterface->UnholdRunningLock(info);
     EXPECT_FALSE(HDF_SUCCESS == ret);
+}
+
+/**
+ * @tc.number : SUB_Powermgr_Power_HDI_PowerHdiCallback_3400
+ * @tc.name   : testPowerHdiCallback030
+ * @tc.desc   : test OnSuspend and OnWakeup
+ */
+HWTEST_F(HdfPowerHdiTestAdditional, testPowerHdiCallback030, Function | MediumTest | Level2)
+{
+    EXPECT_TRUE(g_callback->OnSuspend() == 0) << "testPowerHdiCallback030 failed";
+    EXPECT_TRUE(g_callback->OnWakeup() == 0) << "testPowerHdiCallback030 failed";
+}
+
+/**
+ * @tc.number : SUB_Powermgr_Power_HDI_PowerHdiCallbackExt_3500
+ * @tc.name   : testPowerHdiCallbackExt031
+ * @tc.desc   : test OnSuspendWithTag and OnWakeupWithTag
+ */
+HWTEST_F(HdfPowerHdiTestAdditional, testPowerHdiCallbackExt031, Function | MediumTest | Level2)
+{
+    std::string testTag = "TEST_TAG";
+    EXPECT_TRUE(g_callbackExt->OnSuspendWithTag(testTag) == 0) << "testPowerHdiCallbackExt031 failed";
+    EXPECT_TRUE(g_callbackExt->OnWakeupWithTag(testTag) == 0) << "testPowerHdiCallbackExt031 failed";
 }
 } // namespace

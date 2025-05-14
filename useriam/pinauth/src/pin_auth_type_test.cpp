@@ -23,7 +23,7 @@ using namespace std;
 using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
 using namespace OHOS::HDI::PinAuth;
-using namespace OHOS::HDI::PinAuth::V2_1;
+using namespace OHOS::HDI::PinAuth::V3_0;
 
 static OHOS::Parcel parcel;
 
@@ -109,9 +109,9 @@ HWTEST_F(PinAuthTypeTest, Security_IAM_PinAuth_HDI_FUNC_0203, Function | MediumT
 HWTEST_F(PinAuthTypeTest, Security_IAM_PinAuth_HDI_NEW_FUNC_0201, Function | MediumTest | Level1)
 {
     cout << "start test GetPropertyType" << endl;
-    GetPropertyType auth_sub_type = OHOS::HDI::PinAuth::V2_1::AUTH_SUB_TYPE;
-    GetPropertyType lockout_duration = OHOS::HDI::PinAuth::V2_1::LOCKOUT_DURATION;
-    GetPropertyType remain_attempts = OHOS::HDI::PinAuth::V2_1::REMAIN_ATTEMPTS;
+    GetPropertyType auth_sub_type = OHOS::HDI::PinAuth::V3_0::AUTH_SUB_TYPE;
+    GetPropertyType lockout_duration = OHOS::HDI::PinAuth::V3_0::LOCKOUT_DURATION;
+    GetPropertyType remain_attempts = OHOS::HDI::PinAuth::V3_0::REMAIN_ATTEMPTS;
     EXPECT_EQ(auth_sub_type, 1);
     EXPECT_EQ(lockout_duration, 2);
     EXPECT_EQ(remain_attempts, 3);

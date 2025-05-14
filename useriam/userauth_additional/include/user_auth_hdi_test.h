@@ -16,7 +16,7 @@
 #define USER_AUTH_HDI_H
 
 #include "parcel.h"
-#include "v3_0/user_auth_interface_service.h"
+#include "v4_0/user_auth_interface_service.h"
 #include <cinttypes>
 #include <cstddef>
 #include <cstdint>

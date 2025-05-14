@@ -20,7 +20,7 @@ using namespace std;
 using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
 using namespace OHOS::HDI::UserAuth;
-using namespace OHOS::HDI::UserAuth::V3_0;
+using namespace OHOS::HDI::UserAuth::V4_0;
 
 static const uint32_t MAX_FUZZ_STRUCT_LEN = 20;
 static UserAuthInterfaceService g_service;
@@ -1125,7 +1125,7 @@ HWTEST_F(UserIamUserAuthTestAdditional, testDeleteCredential001, Function | Medi
     int32_t userId = parcel.ReadInt32();
     uint64_t credentialId = parcel.ReadUint64();
     std::vector<uint8_t> authToken;
-    CredentialInfo info;
+    CredentialOperateResult info;
     EXPECT_NE(g_service.DeleteCredential(userId, credentialId, authToken, info), 0);
 }
 /**

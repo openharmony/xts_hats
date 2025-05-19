@@ -43,6 +43,7 @@ ohos_moduletest_suite("HatsHdfCameraMgv0Test") {
   if (is_standard_system) {
     external_deps = [
       "c_utils:utils",
+      "drivers_interface_display:libhdifd_parcelable",
       "hdf_core:libhdf_host",
       "hdf_core:libhdf_ipc_adapter",
       "hdf_core:libhdf_utils",

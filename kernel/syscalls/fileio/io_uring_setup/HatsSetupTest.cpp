@@ -13,28 +13,27 @@
  * limitations under the License.
  */
 
-#includ <cstdio>
-#includ <cstdlib>
-#includ <fcntl.h>
-#includ <string>
-#includ <unistd.h>
-#includ <vector>
-#includ <gtest/gtest.h>
-#includ <sys/stat.h>
-#includ <sys/types.h>
-#includ <sys/xattr.h>
-#includ "securec.h"
-#includ <linux/io_uring.h>
-#includ <sys/mman.h>
-#includ <sys/syscall.h> 
+#include  <cstdio>
+#include  <cstdlib>
+#include  <fcntl.h>
+#include  <string>
+#include  <unistd.h>
+#include  <vector>
+#include  <gtest/gtest.h>
+#include  <sys/stat.h>
+#include  <sys/types.h>
+#include  <sys/xattr.h>
+#include  "securec.h"
+#include  <linux/io_uring.h>
+#include  <sys/mman.h>
+#include  <sys/syscall.h>  
 
 static int io_uring_setup(unsigned entries,struct io_uring_params *p){
-        return syscall(_NR_io_uring_setup,entries,p)
+        return syscall(__NR_io_uring_setup,entries,p);
 }
 
 
 using namespace testing::ext;
-using namespace std;
 
 static const char  *TEST_VALID_PATH = "/data/local/tmp/attr_test_dir";
 static const char  *TEST_VALID_FILE = "/data/local/tmp/attr_test_dir/attr_test.txt";

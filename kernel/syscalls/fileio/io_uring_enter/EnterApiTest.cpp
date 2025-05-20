@@ -258,7 +258,7 @@ HWTEST_F(HatsEnterTest, EnterSqeInvalidStatxFailed_0008, Function | MediumTest |
     unsigned *cq_head = (unsigned *)((char*)cq_ptr + p.cq_off.head);
     unsigned *cq_tail = (unsigned *)((char*)cq_ptr + p.cq_off.tail);
     unsigned *cq_ring_mask = (unsigned *)((char*)cq_ptr + p.cq_off.ring_mask);
-    struct io_uring_cqe *cqes = (struct io_uring_cqe *)((char *)cq_ptr + p.cq_off_cqes);
+    struct io_uring_cqe *cqes = (struct io_uring_cqe *)((char *)cq_ptr + p.cq_off.cqes);
 
     //Prepare write SQE(first operation)
     unsigned sq_index = *sq_tail & *sq_ring_mask;
@@ -347,7 +347,7 @@ HWTEST_F(HatsEnterTest, EnterSqeIlleagelFlagStatxFailed_0009, Function | MediumT
     unsigned *cq_head = (unsigned *)((char*)cq_ptr + p.cq_off.head);
     unsigned *cq_tail = (unsigned *)((char*)cq_ptr + p.cq_off.tail);
     unsigned *cq_ring_mask = (unsigned *)((char*)cq_ptr + p.cq_off.ring_mask);
-    struct io_uring_cqe *cqes = (struct io_uring_cqe *)((char *)cq_ptr + p.cq_off_cqes);
+    struct io_uring_cqe *cqes = (struct io_uring_cqe *)((char *)cq_ptr + p.cq_off.cqes);
 
     //Prepare write SQE(first operation)
     unsigned sq_index = *sq_tail & *sq_ring_mask;
@@ -437,7 +437,7 @@ HWTEST_F(HatsEnterTest, EnterSqeFlagSpliceFailed_0010, Function | MediumTest | L
     unsigned *cq_head = (unsigned *)((char*)cq_ptr + p.cq_off.head);
     unsigned *cq_tail = (unsigned *)((char*)cq_ptr + p.cq_off.tail);
     unsigned *cq_ring_mask = (unsigned *)((char*)cq_ptr + p.cq_off.ring_mask);
-    struct io_uring_cqe *cqes = (struct io_uring_cqe *)((char *)cq_ptr + p.cq_off_cqes);
+    struct io_uring_cqe *cqes = (struct io_uring_cqe *)((char *)cq_ptr + p.cq_off.cqes);
 
     //Prepare write SQE(first operation)
     unsigned sq_index = *sq_tail & *sq_ring_mask;
@@ -531,7 +531,7 @@ HWTEST_F(HatsEnterTest, EnterSqeFlagIOSQE_IO_LINK_0011, Function | MediumTest | 
     unsigned *cq_head = (unsigned *)((char*)cq_ptr + p.cq_off.head);
     unsigned *cq_tail = (unsigned *)((char*)cq_ptr + p.cq_off.tail);
     unsigned *cq_ring_mask = (unsigned *)((char*)cq_ptr + p.cq_off.ring_mask);
-    struct io_uring_cqe *cqes = (struct io_uring_cqe *)((char *)cq_ptr + p.cq_off_cqes);
+    struct io_uring_cqe *cqes = (struct io_uring_cqe *)((char *)cq_ptr + p.cq_off.cqes);
 
     //Prepare write SQE(first operation)
     unsigned sq_index = *sq_tail & *sq_ring_mask;

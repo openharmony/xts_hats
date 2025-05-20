@@ -499,7 +499,7 @@ HWTEST_F(HatsEnterTest, EnterSqeFlagIOSQE_IO_LINK_0011, Function | MediumTest | 
     int fd = open(TEST_READ_FILE, O_RDWR | O_CREAT | O_TRUNC, 0644);
     EXPECT_TRUE(fd > 0);
 
-    int uring_fd = io_uring_setup(16, &p);
+    int uring_fd = io_uring_setup(4, &p);
     EXPECT_TRUE(uring_fd > 0);
     
     //Map SQ and CQ rings
@@ -546,17 +546,18 @@ HWTEST_F(HatsEnterTest, EnterSqeFlagIOSQE_IO_LINK_0011, Function | MediumTest | 
     write_sqe->user_data = 1;
     write_sqe->flags = IOSQE_IO_LINK;
 
-    //Prepare resd SQE(second operation)
+    //Prepare read SQE(second operation)
     unsigned next_sq_index = (*sq_tail + 1) & *sq_ring_mask;
     struct io_uring_sqe *read_sqe = &sqes[sq_index];
     res = memset_s(read_sqe, sizeof(*read_sqe), 0, sizeof(*read_sqe));
     EXPECT_EQ(res, 0);
 
-    read_sqe->opcode = IORING_OP_WRITE;
+    read_sqe->opcode = IORING_OP_READ;
     read_sqe->fd = fd;
-    read_sqe->addr = (unsigned long)write_data;
+    read_sqe->addr = (unsigned long)read_buf;
     read_sqe->len = data_len;
     read_sqe->user_data = 2;
+    read_sqe->off = 0;
 
     //Add to submission queue
     sq_array[sq_index] = sq_index;
@@ -577,7 +578,7 @@ HWTEST_F(HatsEnterTest, EnterSqeFlagIOSQE_IO_LINK_0011, Function | MediumTest | 
     while(*cq_head != *cq_tail) {
         unsigned index = *cq_head &*cq_ring_mask;
         struct io_uring_cqe *cqe = &cqes[index];
-        EXPECT_EQ(cqe->res, 23);
+        EXPECT_EQ(cqe->res, 22);
         (*cq_head)++;
     }
 

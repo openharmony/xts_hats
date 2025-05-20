@@ -548,7 +548,7 @@ HWTEST_F(HatsEnterTest, EnterSqeFlagIOSQE_IO_LINK_0011, Function | MediumTest | 
 
     //Prepare read SQE(second operation)
     unsigned next_sq_index = (*sq_tail + 1) & *sq_ring_mask;
-    struct io_uring_sqe *read_sqe = &sqes[sq_index];
+    struct io_uring_sqe *read_sqe = &sqes[next_sq_index];
     res = memset_s(read_sqe, sizeof(*read_sqe), 0, sizeof(*read_sqe));
     EXPECT_EQ(res, 0);
 

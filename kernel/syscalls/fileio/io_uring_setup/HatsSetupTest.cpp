@@ -51,7 +51,7 @@ private:
 
 void HatsSetupTest::SetUp()
 {
-int fd = -1
+int fd = -1;
 if(access(TEST_VALID_PATH,F_OK) == 0)
 {
     (void)remove(TEST_VALID_PATH);
@@ -90,7 +90,7 @@ void HatsSetupTest::TearDownTestCase()
 * @tc.level  : Level 1
 */
 
-HWTEST_F(HatsSetupTest,SetupApiTestSuccess_0001,Function | MediumTest | Level)
+HWTEST_F(HatsSetupTest,SetupApiTestSuccess_0001,Function | MediumTest | Level1)
 {
 
     static io_uring_params p = {0};
@@ -123,10 +123,10 @@ HWTEST_F(HatsSetupTest,SetupApiTestSuccess_0001,Function | MediumTest | Level)
 * @tc.level  : Level 1
 */
 
-HWTEST_F(HatsSetupTest,SetupApiTest_params_null_0002,Function | MediumTest | Level)
+HWTEST_F(HatsSetupTest,SetupApiTest_params_null_0002,Function | MediumTest | Level1)
 {
 
-    int uring_fd01 = io_uring_setup(1,NULL);
+    io_uring_setup(1,NULL);
     EXPECT_EQ(errno, 14);
 
 }
@@ -141,7 +141,7 @@ HWTEST_F(HatsSetupTest,SetupApiTest_params_null_0002,Function | MediumTest | Lev
 * @tc.level  : Level 1
 */
 
-HWTEST_F(HatsSetupTest,SetupApiTestFail_0003,Function | MediumTest | Level)
+HWTEST_F(HatsSetupTest,SetupApiTestFail_0003,Function | MediumTest | Level1)
 {
 
      static io_uring_params p = {0};
@@ -169,13 +169,13 @@ HWTEST_F(HatsSetupTest,SetupApiTestFail_0003,Function | MediumTest | Level)
 * @tc.level  : Level 1
 */
 
-HWTEST_F(HatsSetupTest,SetupApiTest_params_int_0004,Function | MediumTest | Level)
+HWTEST_F(HatsSetupTest,SetupApiTest_params_int_0004,Function | MediumTest | Level1)
 {
 
      static io_uring_params params;
      memset(&params, 0, sizeof(int));
 
-    int uring_fd01 = io_uring_setup(8, &params);
+    io_uring_setup(8, &params);
     EXPECT_EQ(errno, 2);
 
 }

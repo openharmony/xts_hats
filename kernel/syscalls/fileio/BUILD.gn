@@ -85,5 +85,6 @@ group("HatsFileIoTest") {
     "utimensat:HatsUtimensatTest",
     "write:HatsWriteTest",
     "writev:HatsWritevTest",
+    "io_uring_setup:HatsSetupTest",
   ]
 }

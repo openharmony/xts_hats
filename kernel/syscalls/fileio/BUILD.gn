@@ -86,5 +86,6 @@ group("HatsFileIoTest") {
     "write:HatsWriteTest",
     "writev:HatsWritevTest",
     "io_uring_setup:HatsSetupTest",
+    "io_uring_enter:HatsEnterTest",
   ]
 }

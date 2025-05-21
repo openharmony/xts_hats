@@ -94,6 +94,7 @@ ohos_moduletest_suite("HatsHdfCameraBufferTest") {
   external_deps += [
     "drivers_interface_camera:metadata",
     "drivers_interface_display:libdisplay_composer_proxy_1.0",
+    "drivers_interface_display:libhdifd_parcelable",
     "init:libbegetutil",
     "ipc:ipc_single",
     "samgr:samgr_proxy",

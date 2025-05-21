@@ -24,9 +24,9 @@
 #include "securec.h"
 #include "stdlib.h"
 #include "unistd.h"
-#include "v1_4/iril.h"
+#include "v1_5/iril.h"
 
-using namespace OHOS::HDI::Ril::V1_4;
+using namespace OHOS::HDI::Ril::V1_5;
 using namespace testing::ext;
 
 enum class HdiId {
@@ -113,6 +113,8 @@ enum class HdiId {
     HREQ_SIM_AUTHENTICATION,
     HREQ_SIM_UNLOCK_SIM_LOCK,
     HREQ_SIM_SEND_NCFG_OPER_INFO,
+    HREQ_SIM_GET_PRIMARY_SLOT,
+    HREQ_SIM_SET_PRIMARY_SLOT,
 
     HREQ_DATA_BASE = 300,
     HREQ_DATA_SET_INIT_APN_INFO,
@@ -238,7 +240,7 @@ enum class SimMessageStatus {
     SIM_MESSAGE_STATUS_SENT = 3,
 };
 
-class RilCallback : public OHOS::HDI::Ril::V1_4::IRilCallback {
+class RilCallback : public OHOS::HDI::Ril::V1_5::IRilCallback {
 public:
     void NotifyAll();
     void WaitFor(int32_t timeoutSecond);
@@ -389,6 +391,8 @@ public:
         const RilRadioResponseInfo &responseInfo, const IccIoResultInfo &result) override;
     int32_t UnlockSimLockResponse(const RilRadioResponseInfo &responseInfo, const LockStatusResp &lockStatus) override;
     int32_t SendSimMatchedOperatorInfoResponse(const RilRadioResponseInfo &responseInfo) override;
+    int32_t GetPrimarySlotResponse(const RilRadioResponseInfo &responseInfo, int32_t slotId) override;
+    int32_t SetPrimarySlotResponse(const RilRadioResponseInfo &responseInfo) override;
 
     // Network
     int32_t NetworkCsRegStatusUpdated(const RilRadioResponseInfo &responseInfo,
@@ -497,7 +501,7 @@ public:
 };
 
 namespace {
-sptr<OHOS::HDI::Ril::V1_4::IRil> g_rilInterface = nullptr;
+sptr<OHOS::HDI::Ril::V1_5::IRil> g_rilInterface = nullptr;
 RilCallback callback_;
 constexpr static int32_t SLOTID_1 = 0;
 constexpr static int32_t SLOTID_2 = 1;
@@ -885,6 +889,24 @@ int32_t RilCallback::SendSimMatchedOperatorInfoResponse(const RilRadioResponseIn
     NotifyAll();
     return 0;
 }
+int32_t RilCallback::GetPrimarySlotResponse(const RilRadioResponseInfo &responseInfo, int32_t slotId)
+{
+    HDF_LOGI("GetBoolResult GetPrimarySlot result, slotId = %{public}d", slotId);
+    hdiId_ = HdiId::HREQ_SIM_GET_PRIMARY_SLOT;
+    resultInfo_ = responseInfo;
+    NotifyAll();
+    return 0;
+}
+
+int32_t RilCallback::SetPrimarySlotResponse(const RilRadioResponseInfo &responseInfo)
+{
+    HDF_LOGI("GetBoolResult SetPrimarySlot result");
+    hdiId_ = HdiId::HREQ_SIM_SET_PRIMARY_SLOT;
+    resultInfo_ = responseInfo;
+    NotifyAll();
+    return 0;
+}
+
 
 // Network
 int32_t RilCallback::NetworkCsRegStatusUpdated(const RilRadioResponseInfo &responseInfo,
@@ -2427,9 +2449,9 @@ void HdfRilHdiTest::TearDown() {}
 
 HWTEST_F(HdfRilHdiTest, CheckRilInstanceIsEmpty, Function | MediumTest | Level1)
 {
-    g_rilInterface = OHOS::HDI::Ril::V1_4::IRil::Get();
+    g_rilInterface = OHOS::HDI::Ril::V1_5::IRil::Get();
     if (g_rilInterface != nullptr) {
-        g_rilInterface->SetCallback1_4(&callback_);
+        g_rilInterface->SetCallback1_5(&callback_);
     }
 }
 

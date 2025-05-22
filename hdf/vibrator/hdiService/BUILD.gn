@@ -34,6 +34,7 @@ ohos_moduletest_suite("HatsHdfVibratorServiceTest") {
 
   if (is_standard_system) {
     external_deps = [
+      "drivers_interface_vibrator:libvibrator_proxy_1.1",
       "drivers_interface_vibrator:libvibrator_proxy_1.2",
       "hdf_core:libhdf_utils",
       "hilog:libhilog",

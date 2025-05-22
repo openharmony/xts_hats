@@ -12,6 +12,7 @@
   "test/xts/hats/hdf/audio/idl/effect:HatsHdfAudioEffectTest",
   "test/xts/hats/hdf/motion/hdi:HatsHdfMotionTest",
   "test/xts/hats/hdf/motion/hdi_additional:HatsHatsHdfMotionAdditionalTest",
+  "test/xts/hats/hdf/display/composer/benchmark:HatsHdfDisplayabenchmarkTest",
   "test/xts/hats/hdf/display/composer/common:disp_dev_hdi_test",
   "test/xts/hats/hdf/vibrator/hdi_adapter/hdi_impl:HatsHdfVibratorImplTest",
   "test/xts/hats/hdf/nfc/secureElement_additional:HatsNfcEseHdiAdditionalTest",

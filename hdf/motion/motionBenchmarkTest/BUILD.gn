@@ -36,6 +36,7 @@ ohos_moduletest_suite("HatsHdfMotionbenchmarkTest") {
   if (is_standard_system) {
     external_deps = [
       "c_utils:utils",
+      "drivers_interface_motion:libmotion_proxy_1.0",
       "drivers_interface_motion:libmotion_proxy_1.1",
       "hdf_core:libhdf_utils",
       "hilog:libhilog",

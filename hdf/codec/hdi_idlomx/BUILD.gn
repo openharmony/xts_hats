@@ -52,7 +52,7 @@ ohos_moduletest_suite("HatsHdfIdlOmxCodecTest") {
   }
   external_deps += [ "openmax:libopenmax_static" ]
   defines = []
-  if (hats_rich) {
+  if (hats_rich == false) {
     defines += [ "SUPPORT_OMX_EXTEND" ]
   }
   if (hats_rich == true) {

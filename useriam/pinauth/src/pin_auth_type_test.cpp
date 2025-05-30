@@ -24,6 +24,8 @@ using namespace testing::ext;
 using namespace OHOS::UserIam::Common;
 using namespace OHOS::HDI::PinAuth;
 using namespace OHOS::HDI::PinAuth::V3_0;
+using HdiAuthType = OHOS::HDI::PinAuth::V3_0::AuthType;
+using HdiExecutorRole = OHOS::HDI::PinAuth::V3_0::ExecutorRole;
 
 static OHOS::Parcel parcel;
 
@@ -53,9 +55,9 @@ void PinAuthTypeTest::TearDown()
 HWTEST_F(PinAuthTypeTest, Security_IAM_PinAuth_HDI_FUNC_0201, Function | MediumTest | Level1)
 {
     cout << "start test AuthType" << endl;
-    AuthType pin = PIN;
-    AuthType face = FACE;
-    AuthType fingerprint = FINGERPRINT;
+    HdiAuthType pin = HdiAuthType::PIN;
+    HdiAuthType face = HdiAuthType::FACE;
+    HdiAuthType fingerprint = HdiAuthType::FINGERPRINT;
     EXPECT_EQ(pin, 1);
     EXPECT_EQ(face, 2);
     EXPECT_EQ(fingerprint, 4);
@@ -71,9 +73,9 @@ HWTEST_F(PinAuthTypeTest, Security_IAM_PinAuth_HDI_FUNC_0201, Function | MediumT
 HWTEST_F(PinAuthTypeTest, Security_IAM_PinAuth_HDI_FUNC_0202, Function | MediumTest | Level1)
 {
     cout << "start test ExecutorRole" << endl;
-    ExecutorRole collector = COLLECTOR;
-    ExecutorRole verifier = VERIFIER;
-    ExecutorRole all_in_one = ALL_IN_ONE;
+    HdiExecutorRole collector = HdiExecutorRole::COLLECTOR;
+    HdiExecutorRole verifier = HdiExecutorRole::VERIFIER;
+    HdiExecutorRole all_in_one = HdiExecutorRole::ALL_IN_ONE;
     EXPECT_EQ(collector, 1);
     EXPECT_EQ(verifier, 2);
     EXPECT_EQ(all_in_one, 3);
@@ -112,7 +114,11 @@ HWTEST_F(PinAuthTypeTest, Security_IAM_PinAuth_HDI_NEW_FUNC_0201, Function | Med
     GetPropertyType auth_sub_type = OHOS::HDI::PinAuth::V3_0::AUTH_SUB_TYPE;
     GetPropertyType lockout_duration = OHOS::HDI::PinAuth::V3_0::LOCKOUT_DURATION;
     GetPropertyType remain_attempts = OHOS::HDI::PinAuth::V3_0::REMAIN_ATTEMPTS;
+    GetPropertyType next_fail_lockout_duration = OHOS::HDI::PinAuth::V3_0::NEXT_FAIL_LOCKOUT_DURATION;
+    GetPropertyType credential_length = OHOS::HDI::PinAuth::V3_0::CREDENTIAL_LENGTH ;
     EXPECT_EQ(auth_sub_type, 1);
     EXPECT_EQ(lockout_duration, 2);
     EXPECT_EQ(remain_attempts, 3);
+    EXPECT_EQ(next_fail_lockout_duration, 6);
+    EXPECT_EQ(credential_length, 7);
 }

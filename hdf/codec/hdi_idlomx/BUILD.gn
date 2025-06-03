@@ -1,4 +1,4 @@
-# Copyright (c) 2024 Huawei Device Co., Ltd.
+# Copyright (c) 2024-2025 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -13,7 +13,6 @@
 
 import("//build/ohos.gni")
 import("//build/test.gni")
-import("//drivers/peripheral/codec/codec.gni")
 import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 
@@ -53,15 +52,15 @@ ohos_moduletest_suite("HatsHdfIdlOmxCodecTest") {
   }
   external_deps += [ "openmax:libopenmax_static" ]
   defines = []
-  if (drivers_peripheral_codec_feature_support_omx_extend_test) {
+  if (hats_rich == false) {
     defines += [ "SUPPORT_OMX_EXTEND" ]
   }
-  if (drivers_peripheral_codec_feature_support_dma_buffer) {
-    defines += [ "SUPPORT_DMA_BUFFER" ]
-  }
-  if (drivers_peripheral_codec_feature_support_high_work_frequency) {
-    defines += [ "SUPPORT_HIGH_WORK_FREQUENCY" ]
+  if (hats_rich == true) {
+    defines += [
+      "SUPPORT_DMA_BUFFER",
+      "SUPPORT_HIGH_WORK_FREQUENCY",
+    ]
   }
   subsystem_name = "hdf"
-  part_name = "drivers_peripheral_codec"
+  part_name = "drivers_interface_codec"
 }

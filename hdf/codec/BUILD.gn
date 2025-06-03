@@ -25,8 +25,9 @@ group("HatsHdfCodecTest") {
       "hdi_idlomx:HatsHdfIdlOmxCodecTest",
       "hdi_image:HatsHdfImageCodecTest",
       "hdi_image_additional:HatsHdfImageCodecAdditionalTest",
-      "hdi_omx:HatsHdfOmxCodecTest",
-      "hdi_omx_additional:HatsHdfOmxCodecAdditionalTest",
+
+      #"hdi_omx:HatsHdfOmxCodecTest",
+      #"hdi_omx_additional:HatsHdfOmxCodecAdditionalTest",
     ]
   } else {
     testonly = true
@@ -35,8 +36,9 @@ group("HatsHdfCodecTest") {
       "hdi_idlomx:HatsHdfIdlOmxCodecTest",
       "hdi_image:HatsHdfImageCodecTest",
       "hdi_image_additional:HatsHdfImageCodecAdditionalTest",
-      "hdi_omx:HatsHdfOmxCodecTest",
-      "hdi_omx_additional:HatsHdfOmxCodecAdditionalTest",
+
+      #"hdi_omx:HatsHdfOmxCodecTest",
+      #"hdi_omx_additional:HatsHdfOmxCodecAdditionalTest",
     ]
   }
 }

@@ -72,7 +72,11 @@ if(access(TEST_VALID_PATH,F_OK) == 0){
 
 void HatsSetupTest::SetUpTestCase()
 {
-    
+    static io_uring_params p = {0};
+    io_uring_setup(1, &p);
+    if (errno == ENOSYS) {
+        GTEST_SKIP() << "Not support wearable, skip testCase";
+    }
 }
 
 void HatsSetupTest::TearDownTestCase()

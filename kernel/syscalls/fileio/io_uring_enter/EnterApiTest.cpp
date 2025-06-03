@@ -69,6 +69,11 @@ void HatsEnterTest::TearDown()
 }
 void HatsEnterTest::SetUpTestCase()
 {
+    static io_uring_params p = {0};
+    io_uring_setup(1, &p);
+    if (errno == ENOSYS) {
+        GTEST_SKIP() << "Not support wearable, skip testCase";
+    } 
 }
 void HatsEnterTest::TearDownTestCase()
 {

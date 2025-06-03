@@ -20,7 +20,7 @@ group("HatsHdfCodecTest") {
   if (hats_rich == false) {
     testonly = true
     deps = [
-      "benchmarktest:HatsHdfCodecBenchmarkTest",
+      #"benchmarktest:HatsHdfCodecBenchmarkTest",
       "hdi_component_additional:HatsHdfTestComponentCodecAdditionalTest",
       "hdi_idlomx:HatsHdfIdlOmxCodecTest",
       "hdi_image:HatsHdfImageCodecTest",

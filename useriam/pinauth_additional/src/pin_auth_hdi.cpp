@@ -198,17 +198,18 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnSetData001, Function | M
     uint64_t authSubType = parcel.ReadUint64();
     std::vector<uint8_t> data;
     FillTestUint8Vector(parcel, data);
+    uint32_t pinLength = parcel.ReadUint32();;
     int32_t resultCode = 0;
-    int32_t ret = g_executorImpl.SetData(scheduleId, authSubType, data, resultCode);
+    int32_t ret = g_executorImpl.SetData(scheduleId, authSubType, data, pinLength, resultCode);
     cout << "ret is" << ret << endl;
     EXPECT_NE(ret, 0);
     scheduleId = 0x7FFFFFFFFFFFFFFF;
-    ret = g_executorImpl.SetData(scheduleId, authSubType, data, resultCode);
+    ret = g_executorImpl.SetData(scheduleId, authSubType, data, pinLength, resultCode);
     cout << "ret is" << ret << endl;
     EXPECT_NE(ret, 0);
     scheduleId = 0xFFFFFFFFFFFFFFFF;
 
-    ret = g_executorImpl.SetData(scheduleId, authSubType, data, resultCode);
+    ret = g_executorImpl.SetData(scheduleId, authSubType, data, pinLength, resultCode);
     cout << "ret is" << ret << endl;
     EXPECT_NE(ret, 0);
 }
@@ -224,16 +225,17 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnSetData004, Function | M
     uint64_t authSubType = 0;
     std::vector<uint8_t> data;
     FillTestUint8Vector(parcel, data);
+    uint32_t pinLength = parcel.ReadUint32();;
     int32_t resultCode = 0;
-    int32_t ret = g_executorImpl.SetData(scheduleId, authSubType, data, resultCode);
+    int32_t ret = g_executorImpl.SetData(scheduleId, authSubType, data, pinLength, resultCode);
     cout << "ret is" << ret << endl;
     EXPECT_NE(ret, 0);
     authSubType = 0x7FFFFFFFFFFFFFFF;
-    ret = g_executorImpl.SetData(scheduleId, authSubType, data, resultCode);
+    ret = g_executorImpl.SetData(scheduleId, authSubType, data, pinLength, resultCode);
     cout << "ret is" << ret << endl;
     EXPECT_NE(ret, 0);
     authSubType = 0xFFFFFFFFFFFFFFFF;
-    ret = g_executorImpl.SetData(scheduleId, authSubType, data, resultCode);
+    ret = g_executorImpl.SetData(scheduleId, authSubType, data, pinLength, resultCode);
     cout << "ret is" << ret << endl;
     EXPECT_NE(ret, 0);
 }
@@ -248,14 +250,15 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnSetData007, Function | M
     uint64_t scheduleId = parcel.ReadUint64();
     uint64_t authSubType = parcel.ReadUint64();
     std::vector<uint8_t> data;
+    uint32_t pinLength = parcel.ReadUint32();;
     int32_t resultCode = 0;
-    int32_t ret = g_executorImpl.SetData(scheduleId, authSubType, data, resultCode);
+    int32_t ret = g_executorImpl.SetData(scheduleId, authSubType, data, pinLength, resultCode);
     cout << "ret is" << ret << endl;
     EXPECT_NE(ret, 0);
     for (int32_t i = 0; i < 1000; i++) {
         data.push_back(i);
     }
-    ret = g_executorImpl.SetData(scheduleId, authSubType, data, resultCode);
+    ret = g_executorImpl.SetData(scheduleId, authSubType, data, pinLength, resultCode);
     cout << "ret is" << ret << endl;
     EXPECT_NE(ret, 0);
 }
@@ -270,11 +273,12 @@ HWTEST_F(UserIamPinAuthTestAdditional, testPinAuthTestOnSetData009, Function | M
     uint64_t scheduleId = parcel.ReadUint64();
     uint64_t authSubType = parcel.ReadUint64();
     std::vector<uint8_t> data;
+    uint32_t pinLength = parcel.ReadUint32();
     FillTestUint8Vector(parcel, data);
     int32_t ret = 0;
     for (int32_t i = 0; i < 1000; i++) {
         int32_t resultCode = 0;
-        ret = g_executorImpl.SetData(scheduleId, authSubType, data, resultCode);
+        ret = g_executorImpl.SetData(scheduleId, authSubType, data, pinLength, resultCode);
         cout << "ret is" << ret << endl;
         EXPECT_NE(ret, 0);
     }

@@ -22,6 +22,8 @@ using namespace OHOS::UserIam::Common;
 using namespace OHOS::HDI::PinAuth;
 using namespace OHOS::HDI::PinAuth::V3_0;
 using Property = OHOS::HDI::PinAuth::V3_0::Property;
+using HdiExecutorRole = OHOS::HDI::PinAuth::V3_0::ExecutorRole;
+using HdiAuthType = OHOS::HDI::PinAuth::V3_0::AuthType;
 
 static AllInOneImpl g_executorImpl(make_shared<OHOS::UserIam::PinAuth::PinAuth>());
 static OHOS::Parcel parcel;
@@ -88,8 +90,8 @@ static void FillTestExecutorInfo(Parcel &parcel, ExecutorInfo &executorInfo)
 {
     executorInfo.sensorId = parcel.ReadUint16();
     executorInfo.executorMatcher = parcel.ReadUint32();
-    executorInfo.executorRole = static_cast<ExecutorRole>(parcel.ReadInt32());
-    executorInfo.authType = static_cast<AuthType>(parcel.ReadInt32());
+    executorInfo.executorRole = static_cast<HdiExecutorRole>(parcel.ReadInt32());
+    executorInfo.authType = static_cast<HdiAuthType>(parcel.ReadInt32());
     executorInfo.esl = static_cast<ExecutorSecureLevel>(parcel.ReadInt32());
     FillTestUint8Vector(parcel, executorInfo.publicKey);
     FillTestUint8Vector(parcel, executorInfo.extraInfo);
@@ -173,8 +175,9 @@ HWTEST_F(UserIamPinAuthTest, Security_IAM_PinAuth_HDI_FUNC_0104, Function | Medi
     uint64_t authSubType = parcel.ReadUint64();
     std::vector<uint8_t> data;
     FillTestUint8Vector(parcel, data);
+    uint32_t pinLength = 0;
     int32_t resultCode = 0;
-    int32_t ret = g_executorImpl.SetData(scheduleId, authSubType, data, resultCode);
+    int32_t ret = g_executorImpl.SetData(scheduleId, authSubType, data, pinLength, resultCode);
     cout << "ret is " << ret << endl;
     ASSERT_EQ(ret != Expectedvalue, true);
 }

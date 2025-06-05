@@ -19,8 +19,8 @@
 #include "v1_0/include/idisplay_buffer.h"
 #include "v1_0/display_composer_type.h"
 #include "v1_0/display_buffer_type.h"
-#include "v2_0/codec_image_type.h"
-#include "v2_0/icodec_image.h"
+#include "v2_1/codec_image_type.h"
+#include "v2_1/icodec_image.h"
 #include "v3_0/codec_types.h"
 #define HDF_LOG_TAG codec_jpeg_test
 
@@ -28,7 +28,7 @@ using namespace std;
 using namespace testing::ext;
 using namespace OHOS::HDI::Display::Buffer::V1_0;
 using namespace OHOS::HDI::Display::Composer::V1_0;
-using namespace OHOS::HDI::Codec::Image::V2_0;
+using namespace OHOS::HDI::Codec::Image::V2_1;
 using namespace OHOS::HDI::Codec::V3_0;
 namespace {
 constexpr int32_t WIDTH = 640;
@@ -910,42 +910,42 @@ HWTEST_F(CodecHdiJpegTest, SUB_Driver_Codec_ImageCodecHDI_HdiEnumTest1_0500, Tes
 HWTEST_F(CodecHdiJpegTest, SUB_Driver_Codec_ImageCodecHDI_HdiJpegEnumTest_0100, TestSize.Level3)
 {
     printf("HdfCodecHdiJpegEnumTest001: start.");
-    EXPECT_TRUE(OHOS::HDI::Codec::Image::V2_0::CODEC_IMAGE_JPEG == 0);
+    EXPECT_TRUE(OHOS::HDI::Codec::Image::V2_1::CODEC_IMAGE_JPEG == 0);
     printf("HdfCodecHdiJpegEnumTest001: end.");
 }
 
 HWTEST_F(CodecHdiJpegTest, SUB_Driver_Codec_ImageCodecHDI_HdiJpegEnumTest_0200, TestSize.Level3)
 {
     printf("HdfCodecHdiJpegEnumTest002: start.");
-    EXPECT_TRUE(OHOS::HDI::Codec::Image::V2_0::CODEC_IMAGE_HEIF == 1);
+    EXPECT_TRUE(OHOS::HDI::Codec::Image::V2_1::CODEC_IMAGE_HEIF == 1);
     printf("HdfCodecHdiJpegEnumTest002: end.");
 }
 
 HWTEST_F(CodecHdiJpegTest, SUB_Driver_Codec_ImageCodecHDI_HdiJpegEnumTest_0300, TestSize.Level3)
 {
     printf("HdfCodecHdiJpegEnumTest003: start.");
-    EXPECT_TRUE(OHOS::HDI::Codec::Image::V2_0::CODEC_IMAGE_INVALID == 2);
+    EXPECT_TRUE(OHOS::HDI::Codec::Image::V2_1::CODEC_IMAGE_INVALID == 2);
     printf("HdfCodecHdiJpegEnumTest003: end.");
 }
 
 HWTEST_F(CodecHdiJpegTest, SUB_Driver_Codec_ImageCodecHDI_HdiJpegEnumTest_0400, TestSize.Level3)
 {
     printf("HdfCodecHdiJpegEnumTest004: start.");
-    EXPECT_TRUE(OHOS::HDI::Codec::Image::V2_0::CODEC_IMAGE_TYPE_DECODER == 0);
+    EXPECT_TRUE(OHOS::HDI::Codec::Image::V2_1::CODEC_IMAGE_TYPE_DECODER == 0);
     printf("HdfCodecHdiJpegEnumTest004: end.");
 }
 
 HWTEST_F(CodecHdiJpegTest, SUB_Driver_Codec_ImageCodecHDI_HdiJpegEnumTest_0500, TestSize.Level3)
 {
     printf("HdfCodecHdiJpegEnumTest005: start.");
-    EXPECT_TRUE(OHOS::HDI::Codec::Image::V2_0::CODEC_IMAGE_TYPE_ENCODER == 1);
+    EXPECT_TRUE(OHOS::HDI::Codec::Image::V2_1::CODEC_IMAGE_TYPE_ENCODER == 1);
     printf("HdfCodecHdiJpegEnumTest005: end.");
 }
 
 HWTEST_F(CodecHdiJpegTest, SUB_Driver_Codec_ImageCodecHDI_HdiJpegEnumTest_0600, TestSize.Level3)
 {
     printf("HdfCodecHdiJpegEnumTest006: start.");
-    EXPECT_TRUE(OHOS::HDI::Codec::Image::V2_0::CODEC_IMAGE_TYPE_INVALID == 2);
+    EXPECT_TRUE(OHOS::HDI::Codec::Image::V2_1::CODEC_IMAGE_TYPE_INVALID == 2);
     printf("HdfCodecHdiJpegEnumTest006: end.");
 }
 #endif

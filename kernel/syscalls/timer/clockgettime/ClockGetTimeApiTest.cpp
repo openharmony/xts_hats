@@ -203,3 +203,29 @@ HWTEST_F(ClockApiTest, ClockGetTimeThreadCputimeSuccess_0007, Function | MediumT
     long diff = abs(ts.tv_sec - tsSec.tv_sec);
     EXPECT_TRUE(diff <= 1);
 }
+
+/*
+ * @tc.number : SUB_KERNEL_SYSCALL_CLOCKGETTIME_0800
+ * @tc.name   : ClockSetTimeThreadCputimeSuccess_0008
+ * @tc.desc   : Set time clock successfully.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
+HWTEST_F(ClockApiTest, ClockSetTimeThreadCputimeSuccess_0008, Function | MediumTest | Level1)
+{
+    struct timespec new_time;
+    time_t rawtime;
+
+    int ret = time(&rawtime);
+    EXPECT_NE(ret, -1);
+
+    new_time.tv_sec = rawtime;
+    new_time.tv_nsec = 0;
+
+    usleep(DELAY_TIME);
+
+    ret = clock_settime(CLOCK_REALTIME, &new_time);
+    EXPECT_EQ(ret, 0);
+}
+

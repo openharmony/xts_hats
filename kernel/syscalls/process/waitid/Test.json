@@ -1,0 +1,18 @@
+{
+    "description": "Configuration for HatsWaitidTest Tests",
+    "kits": [
+        {
+            "push": [
+                "HatsWaitidTest->/data/local/tmp/HatsWaitidTest"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsWaitidTest",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    }
+}

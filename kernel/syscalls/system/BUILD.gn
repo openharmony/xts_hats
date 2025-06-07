@@ -20,5 +20,6 @@ group("HatsSystemTest") {
     "getrobustlist:HatsGetrobustlistTest",
     "setrobustlist:HatsSetrobustlistTest",
     "sysinfo:HatsSysinfoTest",
+    "syslog:HatsSyslogTest",
   ]
 }

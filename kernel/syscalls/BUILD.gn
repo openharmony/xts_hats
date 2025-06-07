@@ -18,6 +18,7 @@ group("HatsSyscallTest") {
   testonly = true
   deps = [
     "async:HatsAsyncTest",
+    "drive:HatsDriveTest",
     "fileio:HatsFileIoTest",
     "mem:HatsMemTest",
     "net:HatsNetTest",
@@ -31,4 +32,9 @@ group("HatsSyscallTest") {
     "timer:HatsTimerTest",
     "user:HatsUserTest",
   ]
+  if (hats_rich == true) {
+    deps += [
+      "syscall_rich: HatsRichTest",
+    ]
+  }
 }

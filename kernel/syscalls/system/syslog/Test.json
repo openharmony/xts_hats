@@ -1,0 +1,18 @@
+{
+    "description": "Configuration for HatsSyslogTest Tests",
+    "kits": [
+        {
+            "push": [
+                "HatsSyslogTest->/data/local/tmp/HatsSyslogTest"
+            ],
+            "type": "PushKit"
+        }
+    ],
+    "driver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "HatsSyslogTest",
+        "runtime-hint": "1s",
+        "native-test-device-path": "/data/local/tmp"
+    }
+}

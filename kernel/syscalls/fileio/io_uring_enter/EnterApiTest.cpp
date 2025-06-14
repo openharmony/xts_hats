@@ -287,7 +287,7 @@ HWTEST_F(HatsEnterTest, EnterSqeInvalidStatxFailed_0008, Function | MediumTest |
 
     //Process CQES
     while (*cqHead != *cqTail) {
-        unsigned index = *cqHead &*cqRingMask;
+        unsigned index = *cqHead & *cqRingMask;
         struct io_uring_cqe *cqe = &cqes[index];
         EXPECT_EQ(cqe->res, 0);
         (*cqHead)++;
@@ -377,7 +377,7 @@ HWTEST_F(HatsEnterTest, EnterSqeIlleagelFlagStatxFailed_0009, Function | MediumT
 
     //Process CQES
     while (*cqHead != *cqTail) {
-        unsigned index = *cqHead &*cqRingMask;
+        unsigned index = *cqHead & *cqRingMask;
         struct io_uring_cqe *cqe = &cqes[index];
         EXPECT_EQ(cqe->res, -22);
         (*cqHead)++;
@@ -473,7 +473,7 @@ HWTEST_F(HatsEnterTest, EnterSqeFlagSpliceFailed_0010, Function | MediumTest | L
 
     //Process CQES
     while (*cqHead != *cqTail) {
-        unsigned index = *cqHead &*cqRingMask;
+        unsigned index = *cqHead & *cqRingMask;
         struct io_uring_cqe *cqe = &cqes[index];
         EXPECT_EQ(cqe->res, -22);
         (*cqHead)++;

@@ -53,7 +53,7 @@ void HatsSetupTest::SetUp()
         (void)remove(TEST_VALID_PATH);
     }
     (void)mkdir(TEST_VALID_PATH, S_IWUSR | S_IRUSR | S_IXUSR);
-    fd = open(TEST_VALID_FILE, O_WRONLY | O_CREAT,S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+    fd = open(TEST_VALID_FILE, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
     close(fd);
 }
 void HatsSetupTest::TearDown()

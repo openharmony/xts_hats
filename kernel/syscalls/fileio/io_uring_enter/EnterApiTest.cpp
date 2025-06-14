@@ -241,13 +241,13 @@ HWTEST_F(HatsEnterTest, EnterSqeInvalidStatxFailed_0008, Function | MediumTest |
 
     //Map SQES
     struct io_uring_sqe *sqes = (struct io_uring_sqe *)mmap(NULL, p.sq_entries *sizeof(struct io_uring_sqe),
-                                                                   PROT_READ | PROT_WRITE, MAP_SHARED, uringFd, IORING_OFF_SQES);
+    PROT_READ | PROT_WRITE, MAP_SHARED, uringFd, IORING_OFF_SQES);
     
     //Prepare data
     const char *writeData = "Hello,linked io_uring!";
     size_t dataLen = strlen(writeData);
-    char *readBuf = (char*) malloc(dataLen +1);
-    res = memset_s(readBuf, dataLen +1, 0, dataLen +1);
+    char *readBuf = (char*) malloc(dataLen + 1);
+    res = memset_s(readBuf, dataLen + 1, 0, dataLen + 1);
     EXPECT_EQ(res, 0);
 
     //Get SQ ring pointers
@@ -331,13 +331,13 @@ HWTEST_F(HatsEnterTest, EnterSqeIlleagelFlagStatxFailed_0009, Function | MediumT
 
     //Map SQES
     struct io_uring_sqe *sqes = (struct io_uring_sqe *)mmap(NULL, p.sq_entries *sizeof(struct io_uring_sqe),
-                                                                   PROT_READ | PROT_WRITE, MAP_SHARED, uringFd, IORING_OFF_SQES);
+    PROT_READ | PROT_WRITE, MAP_SHARED, uringFd, IORING_OFF_SQES);
     
     //Prepare data
     const char *writeData = "Hello,linked io_uring!";
     size_t dataLen = strlen(writeData);
-    char *readBuf = (char*) malloc(dataLen +1);
-    res = memset_s(readBuf, dataLen +1, 0, dataLen +1);
+    char *readBuf = (char*) malloc(dataLen + 1);
+    res = memset_s(readBuf, dataLen + 1, 0, dataLen + 1);
     EXPECT_EQ(res, 0);
 
     //Get SQ ring pointers
@@ -422,13 +422,13 @@ HWTEST_F(HatsEnterTest, EnterSqeFlagSpliceFailed_0010, Function | MediumTest | L
 
     //Map SQES
     struct io_uring_sqe *sqes = (struct io_uring_sqe *)mmap(NULL, p.sq_entries *sizeof(struct io_uring_sqe),
-                                                                   PROT_READ | PROT_WRITE, MAP_SHARED, uringFd, IORING_OFF_SQES);
+    PROT_READ | PROT_WRITE, MAP_SHARED, uringFd, IORING_OFF_SQES);
     
     //Prepare data
     const char *writeData = "Hello,linked io_uring!";
     size_t dataLen = strlen(writeData);
-    char *readBuf = (char*) malloc(dataLen +1);
-    res = memset_s(readBuf, dataLen +1, 0, dataLen +1);
+    char *readBuf = (char*) malloc(dataLen + 1);
+    res = memset_s(readBuf, dataLen + 1, 0, dataLen + 1);
     EXPECT_EQ(res, 0);
 
     //Get SQ ring pointers
@@ -517,13 +517,13 @@ HWTEST_F(HatsEnterTest, EnterSqeFlagIOSQE_IO_LINK_0011, Function | MediumTest | 
 
     //Map SQES
     struct io_uring_sqe *sqes = (struct io_uring_sqe *)mmap(NULL, p.sq_entries *sizeof(struct io_uring_sqe),
-                                                                   PROT_READ | PROT_WRITE, MAP_SHARED, uringFd, IORING_OFF_SQES);
+    PROT_READ | PROT_WRITE, MAP_SHARED, uringFd, IORING_OFF_SQES);
     
     //Prepare data
     const char *writeData = "Hello,linked io_uring!";
     size_t dataLen = strlen(writeData);
-    char *readBuf = (char*) malloc(dataLen +1);
-    res = memset_s(readBuf, dataLen +1, 0, dataLen +1);
+    char *readBuf = (char*) malloc(dataLen + 1);
+    res = memset_s(readBuf, dataLen + 1, 0, dataLen + 1);
     EXPECT_EQ(res, 0);
 
     //Get SQ ring pointers
@@ -582,7 +582,7 @@ HWTEST_F(HatsEnterTest, EnterSqeFlagIOSQE_IO_LINK_0011, Function | MediumTest | 
 
     //Process CQES
     while (*cqHead != *cqTail) {
-        unsigned index = *cqHead &*cqRingMask;
+        unsigned index = *cqHead & *cqRingMask;
         struct io_uring_cqe *cqe = &cqes[index];
         EXPECT_EQ(cqe->res, 22);
         (*cqHead)++;

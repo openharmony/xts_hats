@@ -49,7 +49,7 @@ private:
 void HatsSetupTest::SetUp()
 {
     int fd = -1;
-    if (access(TEST_VALID_PATH,F_OK) == 0) {
+    if (access(TEST_VALID_PATH, F_OK) == 0) {
         (void)remove(TEST_VALID_PATH);
     }
     (void)mkdir(TEST_VALID_PATH, S_IWUSR | S_IRUSR | S_IXUSR);
@@ -59,7 +59,7 @@ void HatsSetupTest::SetUp()
 void HatsSetupTest::TearDown()
 {
     (void)remove(TEST_READ_FILE);
-    if (access(TEST_VALID_PATH,F_OK) == 0) {
+    if (access(TEST_VALID_PATH, F_OK) == 0) {
         (void)remove(TEST_VALID_PATH);
     }
 }

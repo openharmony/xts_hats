@@ -58,7 +58,7 @@ void HatsSetupTest::SetUp()
 }
 void HatsSetupTest::TearDown()
 {
-    (void)remove(TEST_READ_FILE);
+    (void)remove(TEST_VALID_FILE);
     if (access(TEST_VALID_PATH, F_OK) == 0) {
         (void)remove(TEST_VALID_PATH);
     }

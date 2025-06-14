@@ -271,7 +271,7 @@ HWTEST_F(HatsEnterTest, EnterSqeInvalidStatxFailed_0008, Function | MediumTest |
 
     sqe->opcode = IORING_OP_STATX;
     sqe->fd = fd;
-    sqe->addr = static_cast<unsigned long>(writeData);
+    sqe->addr = reinterpret_cast<unsigned long>(writeData);
     sqe->len = dataLen;
     sqe->user_data = 1;
     sqe->flags = IOSQE_ASYNC;
@@ -361,7 +361,7 @@ HWTEST_F(HatsEnterTest, EnterSqeIlleagelFlagStatxFailed_0009, Function | MediumT
 
     sqe->opcode = IORING_OP_STATX;
     sqe->fd = fd;
-    sqe->addr = static_cast<unsigned long>(writeData);
+    sqe->addr = reinterpret_cast<unsigned long>(writeData);
     sqe->len = dataLen;
     sqe->user_data = 1;
     sqe->flags = -1;
@@ -547,7 +547,7 @@ HWTEST_F(HatsEnterTest, EnterSqeFlagIOSQE_IO_LINK_0011, Function | MediumTest | 
 
     writeSqe->opcode = IORING_OP_WRITE;
     writeSqe->fd = fd;
-    writeSqe->addr = static_cast<unsigned long>(writeData);
+    writeSqe->addr = reinterpret_cast<unsigned long>(writeData);
     writeSqe->len = dataLen;
     writeSqe->user_data = 1;
     writeSqe->flags = IOSQE_IO_LINK;
@@ -555,12 +555,12 @@ HWTEST_F(HatsEnterTest, EnterSqeFlagIOSQE_IO_LINK_0011, Function | MediumTest | 
     //Prepare read SQE(second operation)
     unsigned nextSqIndex = (*sqTail + 1) & *sqRingMask;
     struct io_uring_sqe *readSqe = &sqes[nextSqIndex];
-    res = memset_s(read_sqe, sizeof(*readSqe), 0, sizeof(*readSqe));
+    res = memset_s(readSqe, sizeof(*readSqe), 0, sizeof(*readSqe));
     EXPECT_EQ(res, 0);
 
     readSqe->opcode = IORING_OP_READ;
     readSqe->fd = fd;
-    readSqe->addr = static_cast<unsigned long>(readBuf);
+    readSqe->addr = reinterpret_cast<unsigned long>(readBuf);
     readSqe->len = dataLen;
     readSqe->user_data = 2;
     readSqe->off = 0;

@@ -90,12 +90,11 @@ void HatsEnterTest::TearDownTestCase()
 HWTEST_F(HatsEnterTest, EnterSqeSuccess_0001, Function | MediumTest | Level1)
 {
     struct io_uring_params p = {0};
-    int uring_fd = io_uring_setup(4, &p);
-    EXPECT_TRUE(uring_fd > 0);
+    int uringFd = io_uring_setup(4, &p);
+    EXPECT_TRUE(uringFd > 0);
 
-    int ret = io_uring_enter(uring_fd, 1, 1, 0);
+    int ret = io_uring_enter(uringFd, 1, 1, 0);
     EXPECT_EQ(ret, 0);
-
 }
 
 /*
@@ -109,12 +108,11 @@ HWTEST_F(HatsEnterTest, EnterSqeSuccess_0001, Function | MediumTest | Level1)
 HWTEST_F(HatsEnterTest, EnterSqeSuccess_0002, Function | MediumTest | Level1)
 {
     struct io_uring_params p = {0};
-    int uring_fd = io_uring_setup(4, &p);
-    EXPECT_TRUE(uring_fd > 0);
+    int uringFd = io_uring_setup(4, &p);
+    EXPECT_TRUE(uringFd > 0);
 
-    int ret = io_uring_enter(uring_fd, 1, 1, IORING_ENTER_GETEVENTS);
+    int ret = io_uring_enter(uringFd, 1, 1, IORING_ENTER_GETEVENTS);
     EXPECT_EQ(ret, 0);
-
 }
 
 /*
@@ -128,12 +126,11 @@ HWTEST_F(HatsEnterTest, EnterSqeSuccess_0002, Function | MediumTest | Level1)
 HWTEST_F(HatsEnterTest, EnterSqeSuccess_0003, Function | MediumTest | Level1)
 {
     struct io_uring_params p = {0};
-    int uring_fd = io_uring_setup(4, &p);
-    EXPECT_TRUE(uring_fd > 0);
+    int uringFd = io_uring_setup(4, &p);
+    EXPECT_TRUE(uringFd > 0);
 
-    int ret = io_uring_enter(uring_fd, 0, 0, IORING_ENTER_GETEVENTS);
+    int ret = io_uring_enter(uringFd, 0, 0, IORING_ENTER_GETEVENTS);
     EXPECT_EQ(ret, 0);
-
 }
 
 /*
@@ -147,8 +144,8 @@ HWTEST_F(HatsEnterTest, EnterSqeSuccess_0003, Function | MediumTest | Level1)
 HWTEST_F(HatsEnterTest, EnterSqeInvalidFdFailed_0004, Function | MediumTest | Level2)
 {
     struct io_uring_params p = {0};
-    int uring_fd = io_uring_setup(4, &p);
-    EXPECT_TRUE(uring_fd > 0);
+    int uringFd = io_uring_setup(4, &p);
+    EXPECT_TRUE(uringFd > 0);
     
     //fd is invalid fd,failed
     int ret = io_uring_enter(-1, 1, 1, 0);
@@ -167,8 +164,8 @@ HWTEST_F(HatsEnterTest, EnterSqeInvalidFdFailed_0004, Function | MediumTest | Le
 HWTEST_F(HatsEnterTest, EnterSqeNotSupportFdFailed_0005, Function | MediumTest | Level2)
 {
     struct io_uring_params p = {0};
-    int uring_fd = io_uring_setup(4, &p);
-    EXPECT_TRUE(uring_fd > 0);
+    int uringFd = io_uring_setup(4, &p);
+    EXPECT_TRUE(uringFd > 0);
     
     //fd is 0,failed
     int ret = io_uring_enter(0, 1, 1, 0);
@@ -187,11 +184,11 @@ HWTEST_F(HatsEnterTest, EnterSqeNotSupportFdFailed_0005, Function | MediumTest |
 HWTEST_F(HatsEnterTest, EnterSqeAbnormalFdFailed_0006, Function | MediumTest | Level2)
 {
     struct io_uring_params p = {0};
-    int uring_fd = io_uring_setup(4, &p);
-    EXPECT_TRUE(uring_fd > 0);
+    int uringFd = io_uring_setup(4, &p);
+    EXPECT_TRUE(uringFd > 0);
     
     //fd is not normal fd,failed
-    int ret = io_uring_enter(uring_fd + 10, 1, 1, 0);
+    int ret = io_uring_enter(uringFd + 10, 1, 1, 0);
     EXPECT_EQ(ret, -1);
 }
 
@@ -206,11 +203,11 @@ HWTEST_F(HatsEnterTest, EnterSqeAbnormalFdFailed_0006, Function | MediumTest | L
 HWTEST_F(HatsEnterTest, EnterSqeInvalidFlagFailed_0007, Function | MediumTest | Level2)
 {
     struct io_uring_params p = {0};
-    int uring_fd = io_uring_setup(4, &p);
-    EXPECT_TRUE(uring_fd > 0);
+    int uringFd = io_uring_setup(4, &p);
+    EXPECT_TRUE(uringFd > 0);
     
     //flag is invalid -1,failed
-    int ret = io_uring_enter(uring_fd, 1, 1, -1);
+    int ret = io_uring_enter(uringFd, 1, 1, -1);
     EXPECT_EQ(ret, -1);
     EXPECT_EQ(errno, EINVAL);
 }
@@ -218,7 +215,7 @@ HWTEST_F(HatsEnterTest, EnterSqeInvalidFlagFailed_0007, Function | MediumTest | 
 /*
  * @tc.number : SUB_KERNEL_SYSCALL_ENTER_0800
  * @tc.name   : EnterSqeInvalidStatxFailed_0008
- * @tc.desc   : Enter was provide invalid statx 
+ * @tc.desc   : Enter was provide invalid statx
  * @tc.size   : MediumTest
  * @tc.type   : Function
  * @tc.level  : Level 2
@@ -231,75 +228,76 @@ HWTEST_F(HatsEnterTest, EnterSqeInvalidStatxFailed_0008, Function | MediumTest |
     int fd = open(TEST_READ_FILE, O_RDWR | O_CREAT | O_TRUNC, 0644);
     EXPECT_TRUE(fd > 0);
 
-    int uring_fd = io_uring_setup(16, &p);
-    EXPECT_TRUE(uring_fd > 0);
+    int uringFd = io_uring_setup(16, &p);
+    EXPECT_TRUE(uringFd > 0);
     
     //Map SQ and CQ rings
-    size_t sq_size = p.sq_off.array + p.sq_entries * sizeof(unsigned);
-    size_t cq_size = p.cq_off.cqes + p.cq_entries * sizeof(struct io_uring_cqe);
-    EXPECT_TRUE(cq_size > 0);
+    size_t sqSize = p.sq_off.array + p.sq_entries * sizeof(unsigned);
+    size_t cqSize = p.cq_off.cqes + p.cq_entries * sizeof(struct io_uring_cqe);
+    EXPECT_TRUE(cqSize > 0);
 
-    void*sq_ptr = mmap(NULL, sq_size, PROT_READ | PROT_WRITE, MAP_SHARED, uring_fd, IORING_OFF_SQ_RING);
-    void*cq_ptr = mmap(NULL, sq_size, PROT_READ | PROT_WRITE, MAP_SHARED, uring_fd, IORING_OFF_CQ_RING);
+    void*sqPtr = mmap(NULL, sqSize, PROT_READ | PROT_WRITE, MAP_SHARED, uringFd, IORING_OFF_SQ_RING);
+    void*cqPtr = mmap(NULL, sqSize, PROT_READ | PROT_WRITE, MAP_SHARED, uringFd, IORING_OFF_CQ_RING);
 
     //Map SQES
-    struct io_uring_sqe *sqes = (struct io_uring_sqe *)mmap(NULL, p.sq_entries *sizeof(struct io_uring_sqe),  PROT_READ | PROT_WRITE, MAP_SHARED, uring_fd, IORING_OFF_SQES);
+    struct io_uring_sqe *sqes = (struct io_uring_sqe *)mmap(NULL, p.sq_entries *sizeof(struct io_uring_sqe),
+    PROT_READ | PROT_WRITE, MAP_SHARED, uringFd, IORING_OFF_SQES);
     
     //Prepare data
-    const char *write_data = "Hello,linked io_uring!";
-    size_t data_len = strlen(write_data);
-    char *read_buf = (char*) malloc(data_len +1);
-    res = memset_s(read_buf, data_len +1, 0, data_len +1);
+    const char *writeData = "Hello,linked io_uring!";
+    size_t dataLen = strlen(writeData);
+    char *readBuf = (char*) malloc(dataLen + 1);
+    res = memset_s(readBuf, dataLen + 1, 0, dataLen + 1);
     EXPECT_EQ(res, 0);
 
     //Get SQ ring pointers
-    unsigned *sq_head = (unsigned *)((char*)sq_ptr + p.sq_off.head);
-    EXPECT_TRUE(sq_head != nullptr);
-    unsigned *sq_tail = (unsigned *)((char*)sq_ptr + p.sq_off.tail);
-    unsigned *sq_ring_mask = (unsigned *)((char*)sq_ptr + p.sq_off.ring_mask);
-    unsigned *sq_array = (unsigned *)((char*)sq_ptr + p.sq_off.array);
+    unsigned *sqHead = (unsigned *)((char*)sqPtr + p.sq_off.head);
+    EXPECT_TRUE(sqHead != nullptr);
+    unsigned *sqTail = (unsigned *)((char*)sqPtr + p.sq_off.tail);
+    unsigned *sqRingMask = (unsigned *)((char*)sqPtr + p.sq_off.ring_mask);
+    unsigned *sqArray = (unsigned *)((char*)sqPtr + p.sq_off.array);
 
     //Get CQ ring pointers
-    unsigned *cq_head = (unsigned *)((char*)cq_ptr + p.cq_off.head);
-    unsigned *cq_tail = (unsigned *)((char*)cq_ptr + p.cq_off.tail);
-    unsigned *cq_ring_mask = (unsigned *)((char*)cq_ptr + p.cq_off.ring_mask);
-    struct io_uring_cqe *cqes = (struct io_uring_cqe *)((char *)cq_ptr + p.cq_off.cqes);
+    unsigned *cqHead = (unsigned *)((char*)cqPtr + p.cq_off.head);
+    unsigned *cqTail = (unsigned *)((char*)cqPtr + p.cq_off.tail);
+    unsigned *cqRingMask = (unsigned *)((char*)cqPtr + p.cq_off.ring_mask);
+    struct io_uring_cqe *cqes = (struct io_uring_cqe *)((char *)cqPtr + p.cq_off.cqes);
 
     //Prepare write SQE(first operation)
-    unsigned sq_index = *sq_tail & *sq_ring_mask;
-    struct io_uring_sqe *sqe = &sqes[sq_index];
+    unsigned sqIndex = *sqTail & *sqRingMask;
+    struct io_uring_sqe *sqe = &sqes[sqIndex];
     res = memset_s(sqe, sizeof(*sqe), 0, sizeof(*sqe));
     EXPECT_EQ(res, 0);
 
     sqe->opcode = IORING_OP_STATX;
     sqe->fd = fd;
-    sqe->addr = (unsigned long)write_data;
-    sqe->len = data_len;
+    sqe->addr = reinterpret_cast<unsigned long>(writeData);
+    sqe->len = dataLen;
     sqe->user_data = 1;
     sqe->flags = IOSQE_ASYNC;
 
     //Add to submission queue
-    sq_array[sq_index] = sq_index;
+    sqArray[sqIndex] = sqIndex;
 
     //Update tal(submit 2 entries)
-    *sq_tail += 1;
+    *sqTail += 1;
 
-    ret = io_uring_enter(uring_fd, 1, 1, 0);
+    ret = io_uring_enter(uringFd, 1, 1, 0);
     EXPECT_EQ(ret, 1);
 
     //Process CQES
-    while(*cq_head != *cq_tail) {
-        unsigned index = *cq_head &*cq_ring_mask;
+    while (*cqHead != *cqTail) {
+        unsigned index = *cqHead & *cqRingMask;
         struct io_uring_cqe *cqe = &cqes[index];
         EXPECT_EQ(cqe->res, 0);
-        (*cq_head)++;
+        (*cqHead)++;
     }
 
-    free(read_buf);
+    free(readBuf);
     munmap(sqes, p.sq_entries * sizeof(struct io_uring_sqe));
-    munmap(sq_ptr, sq_size);
-    munmap(cq_ptr, cq_size);
-    close(uring_fd);
+    munmap(sqPtr, sqSize);
+    munmap(cqPtr, cqSize);
+    close(uringFd);
     close(fd);
     unlink(TEST_READ_FILE);
 }
@@ -307,7 +305,7 @@ HWTEST_F(HatsEnterTest, EnterSqeInvalidStatxFailed_0008, Function | MediumTest |
 /*
  * @tc.number : SUB_KERNEL_SYSCALL_ENTER_0900
  * @tc.name   : EnterSqeIlleagelFlagStatxFailed_0009
- * @tc.desc   : Enter was provide illeagel statx 
+ * @tc.desc   : Enter was provide illeagel statx
  * @tc.size   : MediumTest
  * @tc.type   : Function
  * @tc.level  : Level 2
@@ -320,75 +318,76 @@ HWTEST_F(HatsEnterTest, EnterSqeIlleagelFlagStatxFailed_0009, Function | MediumT
     int fd = open(TEST_READ_FILE, O_RDWR | O_CREAT | O_TRUNC, 0644);
     EXPECT_TRUE(fd > 0);
 
-    int uring_fd = io_uring_setup(16, &p);
-    EXPECT_TRUE(uring_fd > 0);
+    int uringFd = io_uring_setup(16, &p);
+    EXPECT_TRUE(uringFd > 0);
     
     //Map SQ and CQ rings
-    size_t sq_size = p.sq_off.array + p.sq_entries * sizeof(unsigned);
-    size_t cq_size = p.cq_off.cqes + p.cq_entries * sizeof(struct io_uring_cqe);
-    EXPECT_TRUE(cq_size > 0);
+    size_t sqSize = p.sq_off.array + p.sq_entries * sizeof(unsigned);
+    size_t cqSize = p.cq_off.cqes + p.cq_entries * sizeof(struct io_uring_cqe);
+    EXPECT_TRUE(cqSize > 0);
 
-    void*sq_ptr = mmap(NULL, sq_size, PROT_READ | PROT_WRITE, MAP_SHARED, uring_fd, IORING_OFF_SQ_RING);
-    void*cq_ptr = mmap(NULL, sq_size, PROT_READ | PROT_WRITE, MAP_SHARED, uring_fd, IORING_OFF_CQ_RING);
+    void*sqPtr = mmap(NULL, sqSize, PROT_READ | PROT_WRITE, MAP_SHARED, uringFd, IORING_OFF_SQ_RING);
+    void*cqPtr = mmap(NULL, sqSize, PROT_READ | PROT_WRITE, MAP_SHARED, uringFd, IORING_OFF_CQ_RING);
 
     //Map SQES
-    struct io_uring_sqe *sqes = (struct io_uring_sqe *)mmap(NULL, p.sq_entries *sizeof(struct io_uring_sqe),  PROT_READ | PROT_WRITE, MAP_SHARED, uring_fd, IORING_OFF_SQES);
+    struct io_uring_sqe *sqes = (struct io_uring_sqe *)mmap(NULL, p.sq_entries *sizeof(struct io_uring_sqe),
+    PROT_READ | PROT_WRITE, MAP_SHARED, uringFd, IORING_OFF_SQES);
     
     //Prepare data
-    const char *write_data = "Hello,linked io_uring!";
-    size_t data_len = strlen(write_data);
-    char *read_buf = (char*) malloc(data_len +1);
-    res = memset_s(read_buf, data_len +1, 0, data_len +1);
+    const char *writeData = "Hello,linked io_uring!";
+    size_t dataLen = strlen(writeData);
+    char *readBuf = (char*) malloc(dataLen + 1);
+    res = memset_s(readBuf, dataLen + 1, 0, dataLen + 1);
     EXPECT_EQ(res, 0);
 
     //Get SQ ring pointers
-    unsigned *sq_head = (unsigned *)((char*)sq_ptr + p.sq_off.head);
-    EXPECT_TRUE(sq_head != nullptr);
-    unsigned *sq_tail = (unsigned *)((char*)sq_ptr + p.sq_off.tail);
-    unsigned *sq_ring_mask = (unsigned *)((char*)sq_ptr + p.sq_off.ring_mask);
-    unsigned *sq_array = (unsigned *)((char*)sq_ptr + p.sq_off.array);
+    unsigned *sqHead = (unsigned *)((char*)sqPtr + p.sq_off.head);
+    EXPECT_TRUE(sqHead != nullptr);
+    unsigned *sqTail = (unsigned *)((char*)sqPtr + p.sq_off.tail);
+    unsigned *sqRingMask = (unsigned *)((char*)sqPtr + p.sq_off.ring_mask);
+    unsigned *sqArray = (unsigned *)((char*)sqPtr + p.sq_off.array);
 
     //Get CQ ring pointers
-    unsigned *cq_head = (unsigned *)((char*)cq_ptr + p.cq_off.head);
-    unsigned *cq_tail = (unsigned *)((char*)cq_ptr + p.cq_off.tail);
-    unsigned *cq_ring_mask = (unsigned *)((char*)cq_ptr + p.cq_off.ring_mask);
-    struct io_uring_cqe *cqes = (struct io_uring_cqe *)((char *)cq_ptr + p.cq_off.cqes);
+    unsigned *cqHead = (unsigned *)((char*)cqPtr + p.cq_off.head);
+    unsigned *cqTail = (unsigned *)((char*)cqPtr + p.cq_off.tail);
+    unsigned *cqRingMask = (unsigned *)((char*)cqPtr + p.cq_off.ring_mask);
+    struct io_uring_cqe *cqes = (struct io_uring_cqe *)((char *)cqPtr + p.cq_off.cqes);
 
     //Prepare write SQE(first operation)
-    unsigned sq_index = *sq_tail & *sq_ring_mask;
-    struct io_uring_sqe *sqe = &sqes[sq_index];
+    unsigned sqIndex = *sqTail & *sqRingMask;
+    struct io_uring_sqe *sqe = &sqes[sqIndex];
     res = memset_s(sqe, sizeof(*sqe), 0, sizeof(*sqe));
     EXPECT_EQ(res, 0);
 
     sqe->opcode = IORING_OP_STATX;
     sqe->fd = fd;
-    sqe->addr = (unsigned long)write_data;
-    sqe->len = data_len;
+    sqe->addr = reinterpret_cast<unsigned long>(writeData);
+    sqe->len = dataLen;
     sqe->user_data = 1;
     sqe->flags = -1;
 
     //Add to submission queue
-    sq_array[sq_index] = sq_index;
+    sqArray[sqIndex] = sqIndex;
 
     //Update tal(submit 2 entries)
-    *sq_tail += 1;
+    *sqTail += 1;
 
-    ret = io_uring_enter(uring_fd, 1, 1, 0);
+    ret = io_uring_enter(uringFd, 1, 1, 0);
     EXPECT_EQ(ret, 1);
 
     //Process CQES
-    while(*cq_head != *cq_tail) {
-        unsigned index = *cq_head &*cq_ring_mask;
+    while (*cqHead != *cqTail) {
+        unsigned index = *cqHead & *cqRingMask;
         struct io_uring_cqe *cqe = &cqes[index];
         EXPECT_EQ(cqe->res, -22);
-        (*cq_head)++;
+        (*cqHead)++;
     }
 
-    free(read_buf);
+    free(readBuf);
     munmap(sqes, p.sq_entries * sizeof(struct io_uring_sqe));
-    munmap(sq_ptr, sq_size);
-    munmap(cq_ptr, cq_size);
-    close(uring_fd);
+    munmap(sqPtr, sqSize);
+    munmap(cqPtr, cqSize);
+    close(uringFd);
     close(fd);
     unlink(TEST_READ_FILE);
 }
@@ -410,43 +409,44 @@ HWTEST_F(HatsEnterTest, EnterSqeFlagSpliceFailed_0010, Function | MediumTest | L
     int fd = open(TEST_READ_FILE, O_RDWR | O_CREAT | O_TRUNC, 0644);
     EXPECT_TRUE(fd > 0);
 
-    int uring_fd = io_uring_setup(16, &p);
-    EXPECT_TRUE(uring_fd > 0);
+    int uringFd = io_uring_setup(16, &p);
+    EXPECT_TRUE(uringFd > 0);
     
     //Map SQ and CQ rings
-    size_t sq_size = p.sq_off.array + p.sq_entries * sizeof(unsigned);
-    size_t cq_size = p.cq_off.cqes + p.cq_entries * sizeof(struct io_uring_cqe);
-    EXPECT_TRUE(cq_size > 0);
+    size_t sqSize = p.sq_off.array + p.sq_entries * sizeof(unsigned);
+    size_t cqSize = p.cq_off.cqes + p.cq_entries * sizeof(struct io_uring_cqe);
+    EXPECT_TRUE(cqSize > 0);
 
-    void*sq_ptr = mmap(NULL, sq_size, PROT_READ | PROT_WRITE, MAP_SHARED, uring_fd, IORING_OFF_SQ_RING);
-    void*cq_ptr = mmap(NULL, sq_size, PROT_READ | PROT_WRITE, MAP_SHARED, uring_fd, IORING_OFF_CQ_RING);
+    void*sqPtr = mmap(NULL, sqSize, PROT_READ | PROT_WRITE, MAP_SHARED, uringFd, IORING_OFF_SQ_RING);
+    void*cqPtr = mmap(NULL, sqSize, PROT_READ | PROT_WRITE, MAP_SHARED, uringFd, IORING_OFF_CQ_RING);
 
     //Map SQES
-    struct io_uring_sqe *sqes = (struct io_uring_sqe *)mmap(NULL, p.sq_entries *sizeof(struct io_uring_sqe),  PROT_READ | PROT_WRITE, MAP_SHARED, uring_fd, IORING_OFF_SQES);
+    struct io_uring_sqe *sqes = (struct io_uring_sqe *)mmap(NULL, p.sq_entries *sizeof(struct io_uring_sqe),
+    PROT_READ | PROT_WRITE, MAP_SHARED, uringFd, IORING_OFF_SQES);
     
     //Prepare data
-    const char *write_data = "Hello,linked io_uring!";
-    size_t data_len = strlen(write_data);
-    char *read_buf = (char*) malloc(data_len +1);
-    res = memset_s(read_buf, data_len +1, 0, data_len +1);
+    const char *writeData = "Hello,linked io_uring!";
+    size_t dataLen = strlen(writeData);
+    char *readBuf = (char*) malloc(dataLen + 1);
+    res = memset_s(readBuf, dataLen + 1, 0, dataLen + 1);
     EXPECT_EQ(res, 0);
 
     //Get SQ ring pointers
-    unsigned *sq_head = (unsigned *)((char*)sq_ptr + p.sq_off.head);
-    EXPECT_TRUE(sq_head != nullptr);
-    unsigned *sq_tail = (unsigned *)((char*)sq_ptr + p.sq_off.tail);
-    unsigned *sq_ring_mask = (unsigned *)((char*)sq_ptr + p.sq_off.ring_mask);
-    unsigned *sq_array = (unsigned *)((char*)sq_ptr + p.sq_off.array);
+    unsigned *sqHead = (unsigned *)((char*)sqPtr + p.sq_off.head);
+    EXPECT_TRUE(sqHead != nullptr);
+    unsigned *sqTail = (unsigned *)((char*)sqPtr + p.sq_off.tail);
+    unsigned *sqRingMask = (unsigned *)((char*)sqPtr + p.sq_off.ring_mask);
+    unsigned *sqArray = (unsigned *)((char*)sqPtr + p.sq_off.array);
 
     //Get CQ ring pointers
-    unsigned *cq_head = (unsigned *)((char*)cq_ptr + p.cq_off.head);
-    unsigned *cq_tail = (unsigned *)((char*)cq_ptr + p.cq_off.tail);
-    unsigned *cq_ring_mask = (unsigned *)((char*)cq_ptr + p.cq_off.ring_mask);
-    struct io_uring_cqe *cqes = (struct io_uring_cqe *)((char *)cq_ptr + p.cq_off.cqes);
+    unsigned *cqHead = (unsigned *)((char*)cqPtr + p.cq_off.head);
+    unsigned *cqTail = (unsigned *)((char*)cqPtr + p.cq_off.tail);
+    unsigned *cqRingMask = (unsigned *)((char*)cqPtr + p.cq_off.ring_mask);
+    struct io_uring_cqe *cqes = (struct io_uring_cqe *)((char *)cqPtr + p.cq_off.cqes);
 
     //Prepare write SQE(first operation)
-    unsigned sq_index = *sq_tail & *sq_ring_mask;
-    struct io_uring_sqe *sqe = &sqes[sq_index];
+    unsigned sqIndex = *sqTail & *sqRingMask;
+    struct io_uring_sqe *sqe = &sqes[sqIndex];
     res = memset_s(sqe, sizeof(*sqe), 0, sizeof(*sqe));
     EXPECT_EQ(res, 0);
 
@@ -457,33 +457,33 @@ HWTEST_F(HatsEnterTest, EnterSqeFlagSpliceFailed_0010, Function | MediumTest | L
     sqe->fd = pipeFd[1];
     sqe->off = -1;
     sqe->splice_off_in = 0;
-    sqe->len = data_len;
+    sqe->len = dataLen;
     sqe->opcode = IORING_OP_SPLICE;
     sqe->flags = 0xff;
     sqe->splice_fd_in = 0;
 
     //Add to submission queue
-    sq_array[sq_index] = sq_index;
+    sqArray[sqIndex] = sqIndex;
 
     //Update tal(submit 2 entries)
-    *sq_tail += 1;
+    *sqTail += 1;
 
-    ret = io_uring_enter(uring_fd, 1, 1, 0);
+    ret = io_uring_enter(uringFd, 1, 1, 0);
     EXPECT_EQ(ret, 1);
 
     //Process CQES
-    while(*cq_head != *cq_tail) {
-        unsigned index = *cq_head &*cq_ring_mask;
+    while (*cqHead != *cqTail) {
+        unsigned index = *cqHead & *cqRingMask;
         struct io_uring_cqe *cqe = &cqes[index];
         EXPECT_EQ(cqe->res, -22);
-        (*cq_head)++;
+        (*cqHead)++;
     }
 
-    free(read_buf);
+    free(readBuf);
     munmap(sqes, p.sq_entries * sizeof(struct io_uring_sqe));
-    munmap(sq_ptr, sq_size);
-    munmap(cq_ptr, cq_size);
-    close(uring_fd);
+    munmap(sqPtr, sqSize);
+    munmap(cqPtr, cqSize);
+    close(uringFd);
     close(fd);
     unlink(TEST_READ_FILE);
 }
@@ -504,94 +504,95 @@ HWTEST_F(HatsEnterTest, EnterSqeFlagIOSQE_IO_LINK_0011, Function | MediumTest | 
     int fd = open(TEST_READ_FILE, O_RDWR | O_CREAT | O_TRUNC, 0644);
     EXPECT_TRUE(fd > 0);
 
-    int uring_fd = io_uring_setup(4, &p);
-    EXPECT_TRUE(uring_fd > 0);
+    int uringFd = io_uring_setup(4, &p);
+    EXPECT_TRUE(uringFd > 0);
     
     //Map SQ and CQ rings
-    size_t sq_size = p.sq_off.array + p.sq_entries * sizeof(unsigned);
-    size_t cq_size = p.cq_off.cqes + p.cq_entries * sizeof(struct io_uring_cqe);
-    EXPECT_TRUE(cq_size > 0);
+    size_t sqSize = p.sq_off.array + p.sq_entries * sizeof(unsigned);
+    size_t cqSize = p.cq_off.cqes + p.cq_entries * sizeof(struct io_uring_cqe);
+    EXPECT_TRUE(cqSize > 0);
 
-    void*sq_ptr = mmap(NULL, sq_size, PROT_READ | PROT_WRITE, MAP_SHARED, uring_fd, IORING_OFF_SQ_RING);
-    void*cq_ptr = mmap(NULL, sq_size, PROT_READ | PROT_WRITE, MAP_SHARED, uring_fd, IORING_OFF_CQ_RING);
+    void*sqPtr = mmap(NULL, sqSize, PROT_READ | PROT_WRITE, MAP_SHARED, uringFd, IORING_OFF_SQ_RING);
+    void*cqPtr = mmap(NULL, sqSize, PROT_READ | PROT_WRITE, MAP_SHARED, uringFd, IORING_OFF_CQ_RING);
 
     //Map SQES
-    struct io_uring_sqe *sqes = (struct io_uring_sqe *)mmap(NULL, p.sq_entries *sizeof(struct io_uring_sqe),  PROT_READ | PROT_WRITE, MAP_SHARED, uring_fd, IORING_OFF_SQES);
+    struct io_uring_sqe *sqes = (struct io_uring_sqe *)mmap(NULL, p.sq_entries *sizeof(struct io_uring_sqe),
+    PROT_READ | PROT_WRITE, MAP_SHARED, uringFd, IORING_OFF_SQES);
     
     //Prepare data
-    const char *write_data = "Hello,linked io_uring!";
-    size_t data_len = strlen(write_data);
-    char *read_buf = (char*) malloc(data_len +1);
-    res = memset_s(read_buf, data_len +1, 0, data_len +1);
+    const char *writeData = "Hello,linked io_uring!";
+    size_t dataLen = strlen(writeData);
+    char *readBuf = (char*) malloc(dataLen + 1);
+    res = memset_s(readBuf, dataLen + 1, 0, dataLen + 1);
     EXPECT_EQ(res, 0);
 
     //Get SQ ring pointers
-    unsigned *sq_head = (unsigned *)((char*)sq_ptr + p.sq_off.head);
-    EXPECT_TRUE(sq_head != nullptr);
-    unsigned *sq_tail = (unsigned *)((char*)sq_ptr + p.sq_off.tail);
-    unsigned *sq_ring_mask = (unsigned *)((char*)sq_ptr + p.sq_off.ring_mask);
-    unsigned *sq_array = (unsigned *)((char*)sq_ptr + p.sq_off.array);
+    unsigned *sqHead = (unsigned *)((char*)sqPtr + p.sq_off.head);
+    EXPECT_TRUE(sqHead != nullptr);
+    unsigned *sqTail = (unsigned *)((char*)sqPtr + p.sq_off.tail);
+    unsigned *sqRingMask = (unsigned *)((char*)sqPtr + p.sq_off.ring_mask);
+    unsigned *sqArray = (unsigned *)((char*)sqPtr + p.sq_off.array);
 
     //Get CQ ring pointers
-    unsigned *cq_head = (unsigned *)((char*)cq_ptr + p.cq_off.head);
-    unsigned *cq_tail = (unsigned *)((char*)cq_ptr + p.cq_off.tail);
-    unsigned *cq_ring_mask = (unsigned *)((char*)cq_ptr + p.cq_off.ring_mask);
-    struct io_uring_cqe *cqes = (struct io_uring_cqe *)((char *)cq_ptr + p.cq_off.cqes);
+    unsigned *cqHead = (unsigned *)((char*)cqPtr + p.cq_off.head);
+    unsigned *cqTail = (unsigned *)((char*)cqPtr + p.cq_off.tail);
+    unsigned *cqRingMask = (unsigned *)((char*)cqPtr + p.cq_off.ring_mask);
+    struct io_uring_cqe *cqes = (struct io_uring_cqe *)((char *)cqPtr + p.cq_off.cqes);
 
     //Prepare write SQE(first operation)
-    unsigned sq_index = *sq_tail & *sq_ring_mask;
-    struct io_uring_sqe *write_sqe = &sqes[sq_index];
-    res = memset_s(write_sqe, sizeof(*write_sqe), 0, sizeof(*write_sqe));
+    unsigned sqIndex = *sqTail & *sqRingMask;
+    struct io_uring_sqe *writeSqe = &sqes[sqIndex];
+    res = memset_s(writeSqe, sizeof(*writeSqe), 0, sizeof(*writeSqe));
     EXPECT_EQ(res, 0);
 
-    write_sqe->opcode = IORING_OP_WRITE;
-    write_sqe->fd = fd;
-    write_sqe->addr = (unsigned long)write_data;
-    write_sqe->len = data_len;
-    write_sqe->user_data = 1;
-    write_sqe->flags = IOSQE_IO_LINK;
+    writeSqe->opcode = IORING_OP_WRITE;
+    writeSqe->fd = fd;
+    writeSqe->addr = reinterpret_cast<unsigned long>(writeData);
+    writeSqe->len = dataLen;
+    writeSqe->user_data = 1;
+    writeSqe->flags = IOSQE_IO_LINK;
 
     //Prepare read SQE(second operation)
-    unsigned next_sq_index = (*sq_tail + 1) & *sq_ring_mask;
-    struct io_uring_sqe *read_sqe = &sqes[next_sq_index];
-    res = memset_s(read_sqe, sizeof(*read_sqe), 0, sizeof(*read_sqe));
+    unsigned nextSqIndex = (*sqTail + 1) & *sqRingMask;
+    struct io_uring_sqe *readSqe = &sqes[nextSqIndex];
+    res = memset_s(readSqe, sizeof(*readSqe), 0, sizeof(*readSqe));
     EXPECT_EQ(res, 0);
 
-    read_sqe->opcode = IORING_OP_READ;
-    read_sqe->fd = fd;
-    read_sqe->addr = (unsigned long)read_buf;
-    read_sqe->len = data_len;
-    read_sqe->user_data = 2;
-    read_sqe->off = 0;
+    readSqe->opcode = IORING_OP_READ;
+    readSqe->fd = fd;
+    readSqe->addr = reinterpret_cast<unsigned long>(readBuf);
+    readSqe->len = dataLen;
+    readSqe->user_data = 2;
+    readSqe->off = 0;
 
     //Add to submission queue
-    sq_array[sq_index] = sq_index;
-    sq_array[next_sq_index] = next_sq_index;
+    sqArray[sqIndex] = sqIndex;
+    sqArray[nextSqIndex] = nextSqIndex;
 
     //Update tal(submit 2 entries)
-    *sq_tail += 2;
+    *sqTail += 2;
 
-    ret = io_uring_enter(uring_fd, 2, 2, 0);
+    ret = io_uring_enter(uringFd, 2, 2, 0);
     EXPECT_EQ(ret, 2);
 
     int attempts = 0;
-    while (*cq_head == *cq_tail && attempts++ < 10) {
+    while (*cqHead == *cqTail && attempts++ < 10) {
         usleep(1000);
     }
 
     //Process CQES
-    while(*cq_head != *cq_tail) {
-        unsigned index = *cq_head &*cq_ring_mask;
+    while (*cqHead != *cqTail) {
+        unsigned index = *cqHead & *cqRingMask;
         struct io_uring_cqe *cqe = &cqes[index];
         EXPECT_EQ(cqe->res, 22);
-        (*cq_head)++;
+        (*cqHead)++;
     }
 
-    free(read_buf);
+    free(readBuf);
     munmap(sqes, p.sq_entries * sizeof(struct io_uring_sqe));
-    munmap(sq_ptr, sq_size);
-    munmap(cq_ptr, cq_size);
-    close(uring_fd);
+    munmap(sqPtr, sqSize);
+    munmap(cqPtr, cqSize);
+    close(uringFd);
     close(fd);
     unlink(TEST_READ_FILE);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2024-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,13 +13,13 @@
  * limitations under the License.
  */
 
-#include "v3_0/codec_callback_service.h"
+#include "v4_0/codec_callback_service.h"
 #include <hdf_base.h>
 
 namespace OHOS {
 namespace HDI {
 namespace Codec {
-namespace V3_0 {
+namespace V4_0 {
 int32_t CodecCallbackService::EventHandler(CodecEventType event, const EventInfo &info)
 {
     (void)event;
@@ -40,7 +40,7 @@ int32_t CodecCallbackService::FillBufferDone(int64_t appData, const OmxCodecBuff
     (void)buffer;
     return HDF_SUCCESS;
 }
-} // namespace V3_0
+} // namespace V4_0
 } // namespace Codec
 } // namespace HDI
 } // namespace OHOS

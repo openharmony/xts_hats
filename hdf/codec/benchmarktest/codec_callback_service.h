@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,15 +13,15 @@
  * limitations under the License.
  */
 
-#ifndef OHOS_HDI_CODEC_V3_0_CODECCALLBACKSERVICE_H
-#define OHOS_HDI_CODEC_V3_0_CODECCALLBACKSERVICE_H
+#ifndef OHOS_HDI_CODEC_V4_0_CODECCALLBACKSERVICE_H
+#define OHOS_HDI_CODEC_V4_0_CODECCALLBACKSERVICE_H
 
-#include "v3_0/icodec_callback.h"
+#include "v4_0/icodec_callback.h"
 
 namespace OHOS {
 namespace HDI {
 namespace Codec {
-namespace V3_0 {
+namespace V4_0 {
 class CodecCallbackService : public ICodecCallback {
 public:
     CodecCallbackService() = default;
@@ -30,9 +30,9 @@ public:
     int32_t EmptyBufferDone(int64_t appData, const OmxCodecBuffer &buffer) override;
     int32_t FillBufferDone(int64_t appData, const OmxCodecBuffer &buffer) override;
 };
-} // V3_0
+} // V4_0
 } // Codec
 } // HDI
 } // OHOS
 
-#endif // OHOS_HDI_CODEC_V3_0_CODECCALLBACKSERVICE_H
+#endif // OHOS_HDI_CODEC_V4_0_CODECCALLBACKSERVICE_H

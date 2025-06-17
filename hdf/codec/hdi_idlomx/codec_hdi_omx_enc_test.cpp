@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2024-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,7 +18,7 @@
 #include <servmgr_hdi.h>
 #include <vector>
 #include "codec_function_utils.h"
-#include "v3_0/codec_callback_service.h"
+#include "v4_0/codec_callback_service.h"
 
 #define ERR_COUNT (-1)
 
@@ -26,7 +26,7 @@ using namespace std;
 using namespace testing::ext;
 using OHOS::sptr;
 using OHOS::HDI::Base::NativeBuffer;
-using namespace OHOS::HDI::Codec::V3_0;
+using namespace OHOS::HDI::Codec::V4_0;
 using namespace OHOS::HDI::Display::Buffer::V1_0;
 using namespace OHOS::HDI::Display::Composer::V1_0;
 
@@ -36,7 +36,7 @@ constexpr AvCodecRole ROLE = MEDIA_ROLETYPE_VIDEO_AVC;
 static sptr<ICodecComponent> g_component = nullptr;
 static sptr<ICodecCallback> g_callback = nullptr;
 static sptr<ICodecComponentManager> g_manager = nullptr;
-static OHOS::HDI::Codec::V3_0::CodecVersionType g_version;
+static OHOS::HDI::Codec::V4_0::CodecVersionType g_version;
 static std::string g_compName = "";
 
 class CodecHdiOmxEncTest : public testing::Test {

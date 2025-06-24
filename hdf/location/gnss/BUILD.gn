@@ -16,8 +16,6 @@ import("//build/ohos_var.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
 
-ROOT_PATH = "../../../../../../drivers/peripheral"
-
 module_output_path = "hdf/location/gnss"
 ohos_moduletest_suite("HatsHdfLocationgnssTest") {
   module_out_path = module_output_path
@@ -29,10 +27,13 @@ ohos_moduletest_suite("HatsHdfLocationgnssTest") {
   defines = []
 
   deps = [
-    "${ROOT_PATH}/location/gnss/hdi_service:liblocation_gnss_hdi_driver",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
   ]
+  if (hdf_drivers_interface_location_gnss_enable) {
+    ROOT_PATH = "../../../../../../drivers/peripheral"
+    deps += [ "${ROOT_PATH}/location/gnss/hdi_service:liblocation_gnss_hdi_driver" ]
+  }
   if (is_standard_system) {
     external_deps = [
       "c_utils:utils",

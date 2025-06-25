@@ -69,10 +69,16 @@ static int  CheckStatus(unsigned char *vec)
 static int  Touch(void *addr)
 {
     char *buffer1 = static_cast<char *>(addr);
-    int ret1 = memset_s(buffer1, PAGE_SIZE, 'A', PAGE_SIZE);
+    int ret1 = memset_s(buffer1 PAGE_SIZE, 'A', PAGE_SIZE);
+    if (ret1 != EOK) {
+        return ret1;
+    }
 
     char *buffer2 = static_cast<char *>(addr) + 2 * PAGE_SIZE;
-    int ret2 = memset_s(buffer2, PAGE_SIZE, 'A', PAGE_SIZE);
+    int ret2 = memset(buffer2, PAGE_SIZE, 'A', PAGE_SIZE);
+    if (ret2 != EOK) {
+        return ret2;
+    }
 
     int ret = ret1 + ret2;
     return ret;
@@ -190,7 +196,6 @@ HWTEST_F(MincoreApiTest, MincoreCheckPageInMemorySuccess_0004, Function | Medium
 
     munmap(addr, length);
     delete [] vec;
-    
 }
 
 /*

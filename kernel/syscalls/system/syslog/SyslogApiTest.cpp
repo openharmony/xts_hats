@@ -82,8 +82,8 @@ HWTEST_F(HatsSyslogTest, SyslogSuccess_0001, Function | MediumTest | Level2)
 HWTEST_F(HatsSyslogTest, SyslogSuccess_0002, Function | MediumTest | Level1)
 {
     char buffer[100];
+    int errno = 0;
 
-    int errno =0 
     int ret = syscall(__NR_syslog, SYSLOG_ACTION_READ, buffer, sizeof(buffer));
     if (ret != -1) {
         EXPECT_EQ(ret, strlen(buffer));
@@ -176,7 +176,8 @@ HWTEST_F(HatsSyslogTest, SyslogSuccess_0006, Function | MediumTest | Level1)
  */
 HWTEST_F(HatsSyslogTest, SyslogSuccess_0007, Function | MediumTest | Level1)
 {
-    int errno =0 
+    int errno = 0;
+
     int ret = syscall(__NR_syslog, SYSLOG_ACTION_SIZE_UNREAD, nullptr, 0);
     if (ret != -1) {
         EXPECT_EQ(ret, 0);

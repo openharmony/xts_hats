@@ -162,23 +162,23 @@ HWTEST_F(MountApiTest, MountSuccess_0005, Function | MediumTest | Level1)
  */
 HWTEST_F(MountApiTest, MountSuccess_0006, Function | MediumTest | Level1)
 {
-    const char *TARGET1 = "/mnt/target60";
-    const char *TARGET2 = "/mnt/target61";
+    const char *g_target1 = "/mnt/target60";
+    const char *g_target2 = "/mnt/target61";
 
-    mkdir(TARGET1, MODE_0755);
-    mkdir(TARGET2, MODE_0755);
+    mkdir(g_target1, MODE_0755);
+    mkdir(g_target2, MODE_0755);
 
-    int ret = mount(SOURCE, TARGET1, nullptr, MS_BIND, nullptr);
+    int ret = mount(SOURCE, g_target1, nullptr, MS_BIND, nullptr);
     EXPECT_EQ(ret, 0);
-    ret = mount(TARGET1, TARGET2, nullptr, MS_MOVE, nullptr);
+    ret = mount(g_target1, g_target2, nullptr, MS_MOVE, nullptr);
     EXPECT_EQ(ret, 0);
 
     int flags = MNT_FORCE;
-    ret = umount2(TARGET2, flags);
+    ret = umount2(g_target2, flags);
     EXPECT_EQ(ret, 0);
 
-    rmdir(TARGET1);
-    rmdir(TARGET2);
+    rmdir(g_target1);
+    rmdir(g_target2);
 }
 
 /*

@@ -80,7 +80,7 @@ HWTEST_F(HatsSyslogTest, SyslogSuccess_0001, Function | MediumTest | Level2)
     int ret = syscall(__NR_syslog, SYSLOG_ACTION_OPEN, nullptr, 0);
     EXPECT_EQ(ret, 0);
 
-    int ret = syscall(__NR_syslog, SYSLOG_ACTION_CLOSE, nullptr, 0);
+    ret = syscall(__NR_syslog, SYSLOG_ACTION_CLOSE, nullptr, 0);
     EXPECT_EQ(ret, 0);
 }
 
@@ -95,7 +95,7 @@ HWTEST_F(HatsSyslogTest, SyslogSuccess_0001, Function | MediumTest | Level2)
 HWTEST_F(HatsSyslogTest, SyslogSuccess_0002, Function | MediumTest | Level1)
 {
     char buffer[100];
-    int errno = 0;
+    errno = 0;
 
     int ret = syscall(__NR_syslog, SYSLOG_ACTION_READ, buffer, sizeof(buffer));
     if (ret != -1) {
@@ -120,7 +120,7 @@ HWTEST_F(HatsSyslogTest, SyslogSuccess_0003, Function | MediumTest | Level1)
     int ret = syscall(__NR_syslog, SYSLOG_ACTION_CLEAR, nullptr, 0);
     EXPECT_EQ(ret, 0);
 
-    int ret = syscall(__NR_syslog, SYSLOG_ACTION_READ_ALL, buffer, sizeof(buffer));
+    ret = syscall(__NR_syslog, SYSLOG_ACTION_READ_ALL, buffer, sizeof(buffer));
     EXPECT_EQ(ret, strlen(buffer));
 }
 
@@ -139,7 +139,7 @@ HWTEST_F(HatsSyslogTest, SyslogSuccess_0004, Function | MediumTest | Level1)
     int ret = syscall(__NR_syslog, SYSLOG_ACTION_CLEAR, nullptr, 0);
     EXPECT_EQ(ret, 0);
 
-    int ret = syscall(__NR_syslog, SYSLOG_ACTION_READ_CLEAR, buffer, sizeof(buffer));
+    ret = syscall(__NR_syslog, SYSLOG_ACTION_READ_CLEAR, buffer, sizeof(buffer));
     EXPECT_EQ(ret, strlen(buffer));
 }
 
@@ -156,7 +156,7 @@ HWTEST_F(HatsSyslogTest, SyslogSuccess_0005, Function | MediumTest | Level2)
     int ret = syscall(__NR_syslog, SYSLOG_ACTION_CONSOLE_ON, nullptr, 0);
     EXPECT_EQ(ret, 0);
 
-    int ret = syscall(__NR_syslog, SYSLOG_ACTION_CONSOLE_OFF, nullptr, 0);
+    ret = syscall(__NR_syslog, SYSLOG_ACTION_CONSOLE_OFF, nullptr, 0);
     EXPECT_EQ(ret, 0);
 }
 
@@ -189,8 +189,7 @@ HWTEST_F(HatsSyslogTest, SyslogSuccess_0006, Function | MediumTest | Level1)
  */
 HWTEST_F(HatsSyslogTest, SyslogSuccess_0007, Function | MediumTest | Level1)
 {
-    int errno = 0;
-
+    errno = 0;
     int ret = syscall(__NR_syslog, SYSLOG_ACTION_SIZE_UNREAD, nullptr, 0);
     if (ret != -1) {
         EXPECT_EQ(ret, 0);

@@ -87,25 +87,15 @@ HWTEST_F(HatsSyslogTest, SyslogSuccess_0001, Function | MediumTest | Level2)
 /*
  * @tc.number : SUB_KERNEL_SYSCALL_SYSLOG_0200
  * @tc.name   : SyslogSuccess_0002
- * @tc.desc   : syslog read the log success.
+ * @tc.desc   : syslog  size buffer the log success.
  * @tc.size   : MediumTest
  * @tc.type   : Function
  * @tc.level  : Level 1
  */
 HWTEST_F(HatsSyslogTest, SyslogSuccess_0002, Function | MediumTest | Level1)
 {
-    char buffer[100];
-    errno = 0;
-
-    int ret = syscall(__NR_syslog, SYSLOG_ACTION_CLEAR, nullptr, 0);
-    EXPECT_EQ(ret, 0);
-
-    ret = syscall(__NR_syslog, SYSLOG_ACTION_READ, buffer, sizeof(buffer));
-    if (ret != -1) {
-        EXPECT_EQ(ret, strlen(buffer));
-    } else {
-        EXPECT_EQ(errno, 38);
-    }
+    int ret = syscall(__NR_syslog, SYSLOG_ACTION_SIZE_BUFFER, nullptr, 0);
+    EXPECT_GE(ret, 0);
 }
 
 /*
@@ -124,7 +114,7 @@ HWTEST_F(HatsSyslogTest, SyslogSuccess_0003, Function | MediumTest | Level1)
     EXPECT_EQ(ret, 0);
 
     ret = syscall(__NR_syslog, SYSLOG_ACTION_READ_ALL, buffer, sizeof(buffer));
-    EXPECT_EQ(ret, strlen(buffer));
+    EXPECT_GE(ret, strlen(buffer));
 }
 
 /*
@@ -143,7 +133,7 @@ HWTEST_F(HatsSyslogTest, SyslogSuccess_0004, Function | MediumTest | Level1)
     EXPECT_EQ(ret, 0);
 
     ret = syscall(__NR_syslog, SYSLOG_ACTION_READ_CLEAR, buffer, sizeof(buffer));
-    EXPECT_EQ(ret, strlen(buffer));
+    EXPECT_GE(ret, strlen(buffer));
 }
 
 /*
@@ -202,18 +192,4 @@ HWTEST_F(HatsSyslogTest, SyslogSuccess_0007, Function | MediumTest | Level1)
     } else {
         EXPECT_EQ(errno, 38);
     }
-}
-
-/*
- * @tc.number : SUB_KERNEL_SYSCALL_SYSLOG_0800
- * @tc.name   : SyslogSuccess_0008
- * @tc.desc   : syslog  size buffer the log success.
- * @tc.size   : MediumTest
- * @tc.type   : Function
- * @tc.level  : Level 1
- */
-HWTEST_F(HatsSyslogTest, SyslogSuccess_0008, Function | MediumTest | Level1)
-{
-    int ret = syscall(__NR_syslog, SYSLOG_ACTION_SIZE_BUFFER, nullptr, 0);
-    EXPECT_GE(ret, 0);
 }

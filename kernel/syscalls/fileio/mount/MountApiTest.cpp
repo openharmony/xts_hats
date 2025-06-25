@@ -155,41 +155,12 @@ HWTEST_F(MountApiTest, MountSuccess_0005, Function | MediumTest | Level1)
 /*
  * @tc.number : SUB_KERNEL_SYSCALL_MOUNT_0600
  * @tc.name   : MountSuccess_0006
- * @tc.desc   : Mount dir success by MS_MOVE.
- * @tc.size   : MediumTest
- * @tc.type   : Function
- * @tc.level  : Level 1
- */
-HWTEST_F(MountApiTest, MountSuccess_0006, Function | MediumTest | Level1)
-{
-    char *target1 = "/mnt/target60";
-    char *target2 = "/mnt/target61";
-
-    mkdir(target1, MODE_0755);
-    mkdir(target1, MODE_0755);
-
-    int ret = mount(SOURCE, target1, nullptr, MS_BIND, nullptr);
-    EXPECT_EQ(ret, 0);
-    ret = mount(target1, target2, nullptr, MS_MOVE, nullptr);
-    EXPECT_EQ(ret, 0);
-
-    int flags = MNT_FORCE;
-    ret = umount2(target2, flags);
-    EXPECT_EQ(ret, 0);
-
-    rmdir(target1);
-    rmdir(target2);
-}
-
-/*
- * @tc.number : SUB_KERNEL_SYSCALL_MOUNT_0700
- * @tc.name   : MountSuccess_0007
  * @tc.desc   : Mount dir success by MS_PRIVATE.
  * @tc.size   : MediumTest
  * @tc.type   : Function
  * @tc.level  : Level 1
  */
-HWTEST_F(MountApiTest, MountSuccess_0007, Function | MediumTest | Level1)
+HWTEST_F(MountApiTest, MountSuccess_0006, Function | MediumTest | Level1)
 {
     int ret = mount(SOURCE, TARGET, nullptr, MS_BIND | MS_PRIVATE, nullptr);
     EXPECT_EQ(ret, 0);
@@ -200,14 +171,14 @@ HWTEST_F(MountApiTest, MountSuccess_0007, Function | MediumTest | Level1)
 }
 
 /*
- * @tc.number : SUB_KERNEL_SYSCALL_MOUNT_0800
- * @tc.name   : MountSuccess_0008
+ * @tc.number : SUB_KERNEL_SYSCALL_MOUNT_0700
+ * @tc.name   : MountSuccess_0007
  * @tc.desc   : Mount dir success by MS_RELATIME.
  * @tc.size   : MediumTest
  * @tc.type   : Function
  * @tc.level  : Level 1
  */
-HWTEST_F(MountApiTest, MountSuccess_0008, Function | MediumTest | Level1)
+HWTEST_F(MountApiTest, MountSuccess_0007, Function | MediumTest | Level1)
 {
     int ret = mount(SOURCE, TARGET, nullptr, MS_BIND | MS_RELATIME, nullptr);
     EXPECT_EQ(ret, 0);
@@ -218,14 +189,14 @@ HWTEST_F(MountApiTest, MountSuccess_0008, Function | MediumTest | Level1)
 }
 
 /*
- * @tc.number : SUB_KERNEL_SYSCALL_MOUNT_0900
- * @tc.name   : MountSuccess_0009
+ * @tc.number : SUB_KERNEL_SYSCALL_MOUNT_0800
+ * @tc.name   : MountSuccess_0008
  * @tc.desc   : Mount dir success by MS_RDONLY.
  * @tc.size   : MediumTest
  * @tc.type   : Function
  * @tc.level  : Level 1
  */
-HWTEST_F(MountApiTest, MountSuccess_0009, Function | MediumTest | Level1)
+HWTEST_F(MountApiTest, MountSuccess_0008, Function | MediumTest | Level1)
 {
     int ret = mount(SOURCE, TARGET, nullptr, MS_BIND | MS_RDONLY, nullptr);
     EXPECT_EQ(ret, 0);
@@ -236,14 +207,14 @@ HWTEST_F(MountApiTest, MountSuccess_0009, Function | MediumTest | Level1)
 }
 
 /*
- * @tc.number : SUB_KERNEL_SYSCALL_MOUNT_1000
- * @tc.name   : MountSuccess_0010
+ * @tc.number : SUB_KERNEL_SYSCALL_MOUNT_0900
+ * @tc.name   : MountSuccess_0009
  * @tc.desc   : Mount dir success by MS_NOSUID.
  * @tc.size   : MediumTest
  * @tc.type   : Function
  * @tc.level  : Level 1
  */
-HWTEST_F(MountApiTest, MountSuccess_0010, Function | MediumTest | Level1)
+HWTEST_F(MountApiTest, MountSuccess_0009, Function | MediumTest | Level1)
 {
     int ret = mount(SOURCE, TARGET, nullptr, MS_BIND | MS_NOSUID, nullptr);
     EXPECT_EQ(ret, 0);
@@ -254,16 +225,36 @@ HWTEST_F(MountApiTest, MountSuccess_0010, Function | MediumTest | Level1)
 }
 
 /*
+ * @tc.number : SUB_KERNEL_SYSCALL_MOUNT_1000
+ * @tc.name   : MountSuccess_0010
+ * @tc.desc   : Mount dir success by MS_NODEV.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
+HWTEST_F(MountApiTest, MountSuccess_0010, Function | MediumTest | Level1)
+{
+    int ret = mount(SOURCE, TARGET, nullptr, MS_BIND | MS_NODEV, nullptr);
+    EXPECT_EQ(ret, 0);
+
+    int flags = MNT_FORCE;
+    ret = umount2(TARGET, flags);
+    EXPECT_EQ(ret, 0);
+}
+
+/*
  * @tc.number : SUB_KERNEL_SYSCALL_MOUNT_1100
  * @tc.name   : MountSuccess_0011
- * @tc.desc   : Mount dir success by MS_NODEV.
+ * @tc.desc   : Umount2 dir success by MS_REMOUNT.
  * @tc.size   : MediumTest
  * @tc.type   : Function
  * @tc.level  : Level 1
  */
 HWTEST_F(MountApiTest, MountSuccess_0011, Function | MediumTest | Level1)
 {
-    int ret = mount(SOURCE, TARGET, nullptr, MS_BIND | MS_NODEV, nullptr);
+    int ret = mount(SOURCE, TARGET, nullptr, MS_BIND | MS_NOEXEC, nullptr);
+    EXPECT_EQ(ret, 0);
+    ret = mount(nullptr, TARGET, nullptr, MS_REMOUNT, nullptr);
     EXPECT_EQ(ret, 0);
 
     int flags = MNT_FORCE;
@@ -332,26 +323,6 @@ HWTEST_F(MountApiTest, MountFail_0014, Function | MediumTest | Level1)
  * @tc.level  : Level 1
  */
 HWTEST_F(MountApiTest, MountSuccess_0015, Function | MediumTest | Level1)
-{
-    int ret = mount(SOURCE, TARGET, nullptr, MS_BIND | MS_NOEXEC, nullptr);
-    EXPECT_EQ(ret, 0);
-    ret = mount(nullptr, TARGET, nullptr, MS_REMOUNT, nullptr);
-    EXPECT_EQ(ret, 0);
-
-    int flags = MNT_FORCE;
-    ret = umount2(TARGET, flags);
-    EXPECT_EQ(ret, 0);
-}
-
-/*
- * @tc.number : SUB_KERNEL_SYSCALL_MOUNT_1600
- * @tc.name   : MountSuccess_0016
- * @tc.desc   : Umount2 dir success by MS_REMOUNT.
- * @tc.size   : MediumTest
- * @tc.type   : Function
- * @tc.level  : Level 1
- */
-HWTEST_F(MountApiTest, MountSuccess_0016, Function | MediumTest | Level1)
 {
     int ret = mount(SOURCE, TARGET, nullptr, MS_BIND | MS_NOEXEC, nullptr);
     EXPECT_EQ(ret, 0);

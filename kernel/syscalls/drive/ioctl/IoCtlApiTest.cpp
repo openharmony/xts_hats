@@ -35,7 +35,6 @@
 #include <sys/fsuid.h>
 #include <sys/stat.h>
 #include <gtest/gtest.h>
-#include <linux/loop.h>
 #include <linux/if.h>
 
 using namespace testing::ext;
@@ -102,13 +101,13 @@ HWTEST_F(IoCtlTest, IoctlSiocgifconfSuccess_0002, Function | MediumTest | Level1
 
 /*
  * @tc.number : SUB_KERNEL_SYSCALL_IOCTL_0300
- * @tc.name   : IoctlSiocgifflagsSuccess_0030
+ * @tc.name   : IoctlSiocgifflagsSuccess_0003
  * @tc.desc   : Ioctl config SIOCGIFFLAGS successfully.
  * @tc.size   : MediumTest
  * @tc.type   : Function
  * @tc.level  : Level 1
  */
-HWTEST_F(IoCtlTest, IoctlSiocgifflagsSuccess_0030 , Function | MediumTest | Level1)
+HWTEST_F(IoCtlTest, IoctlSiocgifflagsSuccess_0003, Function | MediumTest | Level1)
 {
     int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
     struct ifreq ifr;
@@ -121,14 +120,14 @@ HWTEST_F(IoCtlTest, IoctlSiocgifflagsSuccess_0030 , Function | MediumTest | Leve
 }
 
 /*
- * @tc.number : SUB_KERNEL_SYSCALL_IOCTL_1100
- * @tc.name   : IoctlSiocgifindexSuccess_00011
+ * @tc.number : SUB_KERNEL_SYSCALL_IOCTL_0400
+ * @tc.name   : IoctlSiocgifindexSuccess_0004
  * @tc.desc   : Ioctl config SIOCGIFINDEX successfully.
  * @tc.size   : MediumTest
  * @tc.type   : Function
  * @tc.level  : Level 1
  */
-HWTEST_F(IoCtlTest, IoctlSiocgifindexSuccess_0011, Function | MediumTest | Level1)
+HWTEST_F(IoCtlTest, IoctlSiocgifindexSuccess_0004, Function | MediumTest | Level1)
 {
     int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
     struct ifreq ifr;

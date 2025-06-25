@@ -214,18 +214,16 @@ HWTEST_F(ClockApiTest, ClockGetTimeThreadCputimeSuccess_0007, Function | MediumT
  */
 HWTEST_F(ClockApiTest, ClockSetTimeThreadCputimeSuccess_0008, Function | MediumTest | Level1)
 {
-    struct timespec new_time;
+    struct timespec newTime;
     time_t rawtime;
 
     int ret = time(&rawtime);
     EXPECT_NE(ret, -1);
 
-    new_time.tv_sec = rawtime;
-    new_time.tv_nsec = 0;
+    newTime.tv_sec = rawtime;
+    newTime.tv_nsec = 0;
 
-    usleep(DELAY_TIME);
-
-    ret = clock_settime(CLOCK_REALTIME, &new_time);
+    ret = clock_settime(CLOCK_REALTIME, &newTime);
     EXPECT_EQ(ret, 0);
 }
 

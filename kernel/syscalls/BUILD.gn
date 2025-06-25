@@ -34,7 +34,7 @@ group("HatsSyscallTest") {
   ]
   if (hats_rich == true) {
     deps += [
-      "syscall_rich: HatsRichTest",
+      "syscall_rich:HatsRichTest",
     ]
   }
 }

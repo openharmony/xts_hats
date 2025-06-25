@@ -68,8 +68,13 @@ static int  CheckStatus(unsigned char *vec)
 
 static int  Touch(void *addr)
 {
-    char *buffer = static_cast<char *>(addr) + 2 * PAGE_SIZE;
-    int ret = memset_s(buffer, PAGE_SIZE, 'A', PAGE_SIZE);
+    char *buffer1 = static_cast<char *>(addr);
+    int ret1 = memset_s(buffer1, PAGE_SIZE, 'A', PAGE_SIZE);
+
+    char *buffer2 = static_cast<char *>(addr) + 2 * PAGE_SIZE;
+    int ret2 = memset_s(buffer2, PAGE_SIZE, 'A', PAGE_SIZE);
+
+    int ret = ret1 + ret2;
     return ret;
 }
 
@@ -102,7 +107,7 @@ HWTEST_F(MincoreApiTest, MincoreCheckPageInMemorySuccess_0001, Function | Medium
     ret = mincore(addr, length, vec);
     EXPECT_EQ(ret, 0);
     ret = CheckStatus(vec);
-    EXPECT_EQ(ret, 1);
+    EXPECT_EQ(ret, 2);
 
     munmap(addr, length);
     delete [] vec;
@@ -181,10 +186,11 @@ HWTEST_F(MincoreApiTest, MincoreCheckPageInMemorySuccess_0004, Function | Medium
     ret = mincore(addr, length, vec);
     EXPECT_EQ(ret, 0);
     ret = CheckStatus(vec);
-    EXPECT_EQ(ret, 1);
+    EXPECT_EQ(ret, 2);
 
     munmap(addr, length);
     delete [] vec;
+    
 }
 
 /*
@@ -208,7 +214,7 @@ HWTEST_F(MincoreApiTest, MincoreCheckPageInMemorySuccess_0005, Function | Medium
     ret = ftruncate(fd, PAGE_SIZE * PAGE_NUM);
     EXPECT_NE(ret, -1);
 
-    void *addr = mmap(nullptr, length, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, fd, 0);
+    void *addr = mmap(nullptr, length, PROT_READ | PROT_WRITE, MAP_PRIVATE, fd, 0);
     EXPECT_NE(addr, MAP_FAILED);
 
     ret = mincore(addr, length, vec);
@@ -222,7 +228,7 @@ HWTEST_F(MincoreApiTest, MincoreCheckPageInMemorySuccess_0005, Function | Medium
     ret = mincore(addr, length, vec);
     EXPECT_EQ(ret, 0);
     ret = CheckStatus(vec);
-    EXPECT_GT(ret, 0);
+    EXPECT_EQ(ret, 4);
 
     munmap(addr, length);
     close(fd);
@@ -251,7 +257,7 @@ HWTEST_F(MincoreApiTest, MincoreCheckPageInMemorySuccess_0006, Function | Medium
     ret = ftruncate(fd, PAGE_SIZE * PAGE_NUM);
     EXPECT_NE(ret, -1);
 
-    void *addr = mmap(nullptr, length, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, fd, 0);
+    void *addr = mmap(nullptr, length, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
     EXPECT_NE(addr, MAP_FAILED);
 
     ret = mincore(addr, length, vec);
@@ -265,7 +271,7 @@ HWTEST_F(MincoreApiTest, MincoreCheckPageInMemorySuccess_0006, Function | Medium
     ret = mincore(addr, length, vec);
     EXPECT_EQ(ret, 0);
     ret = CheckStatus(vec);
-    EXPECT_GT(ret, 0);
+    EXPECT_EQ(ret, 4);
 
     munmap(addr, length);
     close(fd);

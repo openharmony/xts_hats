@@ -30,8 +30,9 @@
 using namespace testing::ext;
 using namespace std;
 
-const char *source = "/mnt/source01";
-const char *target = "/mnt/target01";
+const char *SOURCE = "/mnt/source01";
+const char *TARGET = "/mnt/target01";
+mode_t MODE_0755 = S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH;
 
 class MountApiTest : public testing::Test {
 public:
@@ -49,13 +50,13 @@ void MountApiTest::TearDown()
 }
 void MountApiTest::SetUpTestCase()
 {
-    mkdir(source, 0755);
-    mkdir(target, 0755);
+    mkdir(SOURCE, MODE_0755);
+    mkdir(TARGET, MODE_0755);
 }
 void MountApiTest::TearDownTestCase()
 {
-    rmdir(source);
-    rmdir(target);
+    rmdir(SOURCE);
+    rmdir(TARGET);
 }
 
 /*
@@ -71,11 +72,11 @@ HWTEST_F(MountApiTest, MountSuccess_0001, Function | MediumTest | Level1)
     const char *filesystemtype = "ext4";
     const char *data = "rw";
 
-    int ret = mount(source, target, filesystemtype, MS_BIND, data);
+    int ret = mount(SOURCE, TARGET, filesystemtype, MS_BIND, data);
     EXPECT_EQ(ret, 0);
 
     int flags = MNT_FORCE;
-    ret = umount2(target, flags);
+    ret = umount2(TARGET, flags);
     EXPECT_EQ(ret, 0);
 }
 
@@ -89,11 +90,11 @@ HWTEST_F(MountApiTest, MountSuccess_0001, Function | MediumTest | Level1)
  */
 HWTEST_F(MountApiTest, MountSuccess_0002, Function | MediumTest | Level1)
 {
-    int ret = mount(source, target, nullptr, MS_BIND, nullptr);
+    int ret = mount(SOURCE, TARGET, nullptr, MS_BIND, nullptr);
     EXPECT_EQ(ret, 0);
 
     int flags = MNT_FORCE;
-    ret = umount2(target, flags);
+    ret = umount2(TARGET, flags);
     EXPECT_EQ(ret, 0);
 }
 
@@ -107,17 +108,17 @@ HWTEST_F(MountApiTest, MountSuccess_0002, Function | MediumTest | Level1)
  */
 HWTEST_F(MountApiTest, MountSuccess_0003, Function | MediumTest | Level1)
 {
-    int ret = mount(source, target, nullptr, MS_BIND | MS_REC, nullptr);
+    int ret = mount(SOURCE, TARGET, nullptr, MS_BIND | MS_REC, nullptr);
     EXPECT_EQ(ret, 0);
 
     int flags = MNT_FORCE;
-    ret = umount2(target, flags);
+    ret = umount2(TARGET, flags);
     EXPECT_EQ(ret, 0);
 }
 
 /*
  * @tc.number : SUB_KERNEL_SYSCALL_MOUNT_0400
- * @tc.name   : MountFail_0004
+ * @tc.name   : Mountsuccess_0004
  * @tc.desc   : Mount dir success by MS_NOATIME.
  * @tc.size   : MediumTest
  * @tc.type   : Function
@@ -125,11 +126,11 @@ HWTEST_F(MountApiTest, MountSuccess_0003, Function | MediumTest | Level1)
  */
 HWTEST_F(MountApiTest, Mountsuccess_0004, Function | MediumTest | Level1)
 {
-    int ret = mount(source, target, nullptr, MS_BIND | MS_NOATIME, nullptr);
+    int ret = mount(SOURCE, TARGET, nullptr, MS_BIND | MS_NOATIME, nullptr);
     EXPECT_EQ(ret, 0);
 
     int flags = MNT_FORCE;
-    ret = umount2(target, flags);
+    ret = umount2(TARGET, flags);
     EXPECT_EQ(ret, 0);
 }
 
@@ -143,11 +144,11 @@ HWTEST_F(MountApiTest, Mountsuccess_0004, Function | MediumTest | Level1)
  */
 HWTEST_F(MountApiTest, MountSuccess_0005, Function | MediumTest | Level1)
 {
-    int ret = mount(source, target, nullptr, MS_BIND | MS_NODIRATIME, nullptr);
+    int ret = mount(SOURCE, TARGET, nullptr, MS_BIND | MS_NODIRATIME, nullptr);
     EXPECT_EQ(ret, 0);
 
     int flags = MNT_FORCE;
-    ret = umount2(target, flags);
+    ret = umount2(TARGET, flags);
     EXPECT_EQ(ret, 0);
 }
 
@@ -161,23 +162,23 @@ HWTEST_F(MountApiTest, MountSuccess_0005, Function | MediumTest | Level1)
  */
 HWTEST_F(MountApiTest, MountSuccess_0006, Function | MediumTest | Level1)
 {
-    const char *target1 = "/mnt/target60";
-    const char *target2 = "/mnt/target61";
+    const char *TARGET1 = "/mnt/target60";
+    const char *TARGET2 = "/mnt/target61";
 
-    mkdir(target1, 0755);
-    mkdir(target2, 0755);
+    mkdir(TARGET1, MODE_0755);
+    mkdir(TARGET2, MODE_0755);
 
-    int ret = mount(source, target1, nullptr, MS_BIND, nullptr);
+    int ret = mount(SOURCE, TARGET1, nullptr, MS_BIND, nullptr);
     EXPECT_EQ(ret, 0);
-    ret = mount(target1, target2, nullptr, MS_MOVE, nullptr);
+    ret = mount(TARGET1, TARGET2, nullptr, MS_MOVE, nullptr);
     EXPECT_EQ(ret, 0);
 
     int flags = MNT_FORCE;
-    ret = umount2(target2, flags);
+    ret = umount2(TARGET2, flags);
     EXPECT_EQ(ret, 0);
 
-    rmdir(target1);
-    rmdir(target2);
+    rmdir(TARGET1);
+    rmdir(TARGET2);
 }
 
 /*
@@ -190,11 +191,11 @@ HWTEST_F(MountApiTest, MountSuccess_0006, Function | MediumTest | Level1)
  */
 HWTEST_F(MountApiTest, MountSuccess_0007, Function | MediumTest | Level1)
 {
-    int ret = mount(source, target, nullptr, MS_BIND | MS_PRIVATE, nullptr);
+    int ret = mount(SOURCE, TARGET, nullptr, MS_BIND | MS_PRIVATE, nullptr);
     EXPECT_EQ(ret, 0);
 
     int flags = MNT_FORCE;
-    ret = umount2(target, flags);
+    ret = umount2(TARGET, flags);
     EXPECT_EQ(ret, 0);
 }
 
@@ -208,13 +209,12 @@ HWTEST_F(MountApiTest, MountSuccess_0007, Function | MediumTest | Level1)
  */
 HWTEST_F(MountApiTest, MountSuccess_0008, Function | MediumTest | Level1)
 {
-    int ret = mount(source, target, nullptr, MS_BIND | MS_RELATIME, nullptr);
+    int ret = mount(SOURCE, TARGET, nullptr, MS_BIND | MS_RELATIME, nullptr);
     EXPECT_EQ(ret, 0);
 
     int flags = MNT_FORCE;
-    ret = umount2(target, flags);
+    ret = umount2(TARGET, flags);
     EXPECT_EQ(ret, 0);
-
 }
 
 /*
@@ -227,11 +227,11 @@ HWTEST_F(MountApiTest, MountSuccess_0008, Function | MediumTest | Level1)
  */
 HWTEST_F(MountApiTest, MountSuccess_0009, Function | MediumTest | Level1)
 {
-    int ret = mount(source, target, nullptr, MS_BIND | MS_RDONLY, nullptr);
+    int ret = mount(SOURCE, TARGET, nullptr, MS_BIND | MS_RDONLY, nullptr);
     EXPECT_EQ(ret, 0);
 
     int flags = MNT_FORCE;
-    ret = umount2(target, flags);
+    ret = umount2(TARGET, flags);
     EXPECT_EQ(ret, 0);
 }
 
@@ -245,11 +245,11 @@ HWTEST_F(MountApiTest, MountSuccess_0009, Function | MediumTest | Level1)
  */
 HWTEST_F(MountApiTest, MountSuccess_0010, Function | MediumTest | Level1)
 {
-    int ret = mount(source, target, nullptr, MS_BIND | MS_NOSUID, nullptr);
+    int ret = mount(SOURCE, TARGET, nullptr, MS_BIND | MS_NOSUID, nullptr);
     EXPECT_EQ(ret, 0);
 
     int flags = MNT_FORCE;
-    ret = umount2(target, flags);
+    ret = umount2(TARGET, flags);
     EXPECT_EQ(ret, 0);
 }
 
@@ -263,11 +263,11 @@ HWTEST_F(MountApiTest, MountSuccess_0010, Function | MediumTest | Level1)
  */
 HWTEST_F(MountApiTest, MountSuccess_0011, Function | MediumTest | Level1)
 {
-    int ret = mount(source, target, nullptr, MS_BIND | MS_NODEV, nullptr);
+    int ret = mount(SOURCE, TARGET, nullptr, MS_BIND | MS_NODEV, nullptr);
     EXPECT_EQ(ret, 0);
 
     int flags = MNT_FORCE;
-    ret = umount2(target, flags);
+    ret = umount2(TARGET, flags);
     EXPECT_EQ(ret, 0);
 }
 
@@ -281,11 +281,11 @@ HWTEST_F(MountApiTest, MountSuccess_0011, Function | MediumTest | Level1)
  */
 HWTEST_F(MountApiTest, MountSuccess_0012, Function | MediumTest | Level1)
 {
-    int ret = mount(source, target, nullptr, MS_BIND | MS_NOEXEC, nullptr);
+    int ret = mount(SOURCE, TARGET, nullptr, MS_BIND | MS_NOEXEC, nullptr);
     EXPECT_EQ(ret, 0);
 
     int flags = MNT_FORCE;
-    ret = umount2(target, flags);
+    ret = umount2(TARGET, flags);
     EXPECT_EQ(ret, 0);
 }
 
@@ -299,11 +299,11 @@ HWTEST_F(MountApiTest, MountSuccess_0012, Function | MediumTest | Level1)
  */
 HWTEST_F(MountApiTest, MountSuccess_0013, Function | MediumTest | Level1)
 {
-    int ret = mount(source, target, nullptr, MS_BIND | MS_MANDLOCK, nullptr);
+    int ret = mount(SOURCE, TARGET, nullptr, MS_BIND | MS_MANDLOCK, nullptr);
     EXPECT_EQ(ret, 0);
 
     int flags = MNT_FORCE;
-    ret = umount2(target, flags);
+    ret = umount2(TARGET, flags);
     EXPECT_EQ(ret, 0);
 }
 
@@ -318,7 +318,7 @@ HWTEST_F(MountApiTest, MountSuccess_0013, Function | MediumTest | Level1)
 HWTEST_F(MountApiTest, MountFail_0014, Function | MediumTest | Level1)
 {
     errno = 0;
-    int ret = mount(source, target, nullptr, MS_REMOUNT | MS_RDONLY, nullptr);
+    int ret = mount(SOURCE, TARGET, nullptr, MS_REMOUNT | MS_RDONLY, nullptr);
     EXPECT_EQ(ret, -1);
     EXPECT_EQ(errno, EINVAL);
 }
@@ -333,13 +333,13 @@ HWTEST_F(MountApiTest, MountFail_0014, Function | MediumTest | Level1)
  */
 HWTEST_F(MountApiTest, MountSuccess_0015, Function | MediumTest | Level1)
 {
-    int ret = mount(source, target, nullptr, MS_BIND | MS_NOEXEC, nullptr);
+    int ret = mount(SOURCE, TARGET, nullptr, MS_BIND | MS_NOEXEC, nullptr);
     EXPECT_EQ(ret, 0);
-    ret = mount(nullptr, target, nullptr, MS_REMOUNT, nullptr);
+    ret = mount(nullptr, TARGET, nullptr, MS_REMOUNT, nullptr);
     EXPECT_EQ(ret, 0);
 
     int flags = MNT_FORCE;
-    ret = umount2(target, flags);
+    ret = umount2(TARGET, flags);
     EXPECT_EQ(ret, 0);
 }
 
@@ -353,12 +353,12 @@ HWTEST_F(MountApiTest, MountSuccess_0015, Function | MediumTest | Level1)
  */
 HWTEST_F(MountApiTest, MountSuccess_0016, Function | MediumTest | Level1)
 {
-    int ret = mount(source, target, nullptr, MS_BIND | MS_NOEXEC, nullptr);
+    int ret = mount(SOURCE, TARGET, nullptr, MS_BIND | MS_NOEXEC, nullptr);
     EXPECT_EQ(ret, 0);
-    ret = mount(nullptr, target, nullptr, MS_REMOUNT, nullptr);
+    ret = mount(nullptr, TARGET, nullptr, MS_REMOUNT, nullptr);
     EXPECT_EQ(ret, 0);
 
     int flags = MNT_FORCE;
-    ret = umount2(target, flags);
+    ret = umount2(TARGET, flags);
     EXPECT_EQ(ret, 0);
 }

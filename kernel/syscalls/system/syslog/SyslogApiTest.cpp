@@ -21,13 +21,9 @@
 #include <vector>
 #include <fcntl.h>
 #include <unistd.h>
-#include <malloc.h>
-#include <arpa/inet.h>
 #include <gtest/gtest.h>
-#include <netinet/in.h>
+#include <sys/klog.h>
 #include <sys/stat.h>
-#include <sys/mman.h>
-#include <sys/socket.h>
 #include <sys/types.h>
 #include <syscall.h>
 #include "securec.h"
@@ -60,118 +56,145 @@ void HatsSyslogTest::TearDownTestCase()
 
 /*
  * @tc.number : SUB_KERNEL_SYSCALL_SYSLOG_0100
- * @tc.name   : SyslogOpenSuccess_0001
- * @tc.desc   : syslog Open the log success.
+ * @tc.name   : SyslogSuccess_0001
+ * @tc.desc   : syslog open and close the log success.
  * @tc.size   : MediumTest
  * @tc.type   : Function
- * @tc.level  : Level 1
+ * @tc.level  : Level 2
  */
-HWTEST_F(HatsSyslogTest, SyslogOpenSuccess_0001, Function | MediumTest | Level1)
+HWTEST_F(HatsSyslogTest, SyslogSuccess_0001, Function | MediumTest | Level2)
 {
-    int ret = syscall(__NR_syslog, 1, nullptr, 0);
+    int ret = syscall(__NR_syslog, SYSLOG_ACTION_OPEN, nullptr, 0);
+    EXPECT_EQ(ret, 0);
+
+    int ret = syscall(__NR_syslog, SYSLOG_ACTION_CLOSE, nullptr, 0);
     EXPECT_EQ(ret, 0);
 }
 
 /*
  * @tc.number : SUB_KERNEL_SYSCALL_SYSLOG_0200
- * @tc.name   : SyslogCloseSuccess_0002
- * @tc.desc   : syslog Close the log success.
+ * @tc.name   : SyslogSuccess_0002
+ * @tc.desc   : syslog read the log success.
  * @tc.size   : MediumTest
  * @tc.type   : Function
- * @tc.level  : Level 2
+ * @tc.level  : Level 1
  */
-HWTEST_F(HatsSyslogTest, SyslogCloseSuccess_0002, Function | MediumTest | Level2)
+HWTEST_F(HatsSyslogTest, SyslogSuccess_0002, Function | MediumTest | Level1)
 {
-    int ret = syscall(__NR_syslog, 0, nullptr, 0);
-    EXPECT_EQ(ret, 0);
+    char buffer[100];
+
+    int errno =0 
+    int ret = syscall(__NR_syslog, SYSLOG_ACTION_READ, buffer, sizeof(buffer));
+    if (ret != -1) {
+        EXPECT_EQ(ret, strlen(buffer));
+    } else {
+        EXPECT_EQ(errno, 38);
+    }
 }
 
 /*
  * @tc.number : SUB_KERNEL_SYSCALL_SYSLOG_0300
- * @tc.name   : SyslogSetLogLevelSuccess_0003
- * @tc.desc   : syslog Close the log success.
+ * @tc.name   : SyslogSuccess_0003
+ * @tc.desc   : syslog clear and readall the log success.
  * @tc.size   : MediumTest
  * @tc.type   : Function
  * @tc.level  : Level 1
  */
-HWTEST_F(HatsSyslogTest, SyslogSetLogLevelSuccess_0003, Function | MediumTest | Level1)
+HWTEST_F(HatsSyslogTest, SyslogSuccess_0003, Function | MediumTest | Level1)
 {
-    int ret;
-    int i;
+    char buffer[100];
 
-    for (i = 1; i < 8; i++) {
-        ret = syscall(__NR_syslog, 7, nullptr, i);
-        EXPECT_EQ(ret, 0);
-    }
-
-    ret = syscall(__NR_syslog, 7, nullptr, 0);
+    int ret = syscall(__NR_syslog, SYSLOG_ACTION_CLEAR, nullptr, 0);
     EXPECT_EQ(ret, 0);
+
+    int ret = syscall(__NR_syslog, SYSLOG_ACTION_READ_ALL, buffer, sizeof(buffer));
+    EXPECT_EQ(ret, strlen(buffer));
 }
 
 /*
  * @tc.number : SUB_KERNEL_SYSCALL_SYSLOG_0400
- * @tc.name   : SyslogSetLogLevelFailed_0004
- * @tc.desc   : syslog Close the log success.
+ * @tc.name   : SyslogSuccess_0004
+ * @tc.desc   : syslog clear and readclear the log success.
  * @tc.size   : MediumTest
  * @tc.type   : Function
  * @tc.level  : Level 1
  */
-HWTEST_F(HatsSyslogTest, SyslogSetLogLevelFailed_0004, Function | MediumTest | Level1)
+HWTEST_F(HatsSyslogTest, SyslogSuccess_0004, Function | MediumTest | Level1)
 {
-    int ret = syscall(__NR_syslog, 8, nullptr, 9);
-    EXPECT_EQ(ret, -1);
-    EXPECT_EQ(errno, EINVAL);
+    char buffer[100];
+
+    int ret = syscall(__NR_syslog, SYSLOG_ACTION_CLEAR, nullptr, 0);
+    EXPECT_EQ(ret, 0);
+
+    int ret = syscall(__NR_syslog, SYSLOG_ACTION_READ_CLEAR, buffer, sizeof(buffer));
+    EXPECT_EQ(ret, strlen(buffer));
 }
 
 /*
  * @tc.number : SUB_KERNEL_SYSCALL_SYSLOG_0500
- * @tc.name   : SyslogConsoleOffSuccess_0005
- * @tc.desc   : syslog Close the log success.
+ * @tc.name   : SyslogSuccess_0005
+ * @tc.desc   : syslog console on and off the log success.
  * @tc.size   : MediumTest
  * @tc.type   : Function
- * @tc.level  : Level 1
+ * @tc.level  : Level 2
  */
-HWTEST_F(HatsSyslogTest, SyslogConsoleOffSuccess_0005, Function | MediumTest | Level1)
+HWTEST_F(HatsSyslogTest, SyslogSuccess_0005, Function | MediumTest | Level2)
 {
-    int ret = syscall(__NR_syslog, 6, nullptr, 0);
+    int ret = syscall(__NR_syslog, SYSLOG_ACTION_CONSOLE_ON, nullptr, 0);
+    EXPECT_EQ(ret, 0);
+
+    int ret = syscall(__NR_syslog, SYSLOG_ACTION_CONSOLE_OFF, nullptr, 0);
     EXPECT_EQ(ret, 0);
 }
 
 /*
  * @tc.number : SUB_KERNEL_SYSCALL_SYSLOG_0600
- * @tc.name   : SyslogConsoleOnSuccess_0006
- * @tc.desc   : syslog Close the log success.
+ * @tc.name   : SyslogSuccess_0006
+ * @tc.desc   : syslog level success.
  * @tc.size   : MediumTest
  * @tc.type   : Function
  * @tc.level  : Level 1
  */
-HWTEST_F(HatsSyslogTest, SyslogConsoleOnSuccess_0006, Function | MediumTest | Level1)
+HWTEST_F(HatsSyslogTest, SyslogSuccess_0006, Function | MediumTest | Level1)
 {
-    int ret = syscall(__NR_syslog, 7, nullptr, 0);
-    EXPECT_EQ(ret, 0);
+    int ret;
+    int i;
+
+    for (i = 0; i < 8; i++) {
+        ret = syscall(__NR_syslog, SYSLOG_ACTION_CONSOLE_LEVEL, nullptr, i);
+        EXPECT_EQ(ret, 0);
+    }
 }
 
 /*
  * @tc.number : SUB_KERNEL_SYSCALL_SYSLOG_0700
- * @tc.name   : SyslogReadSysLogSuccess_0007
- * @tc.desc   : syslog Close the log success.
+ * @tc.name   : SyslogSuccess_0007
+ * @tc.desc   : syslog  unread the log success.
  * @tc.size   : MediumTest
  * @tc.type   : Function
  * @tc.level  : Level 1
  */
-HWTEST_F(HatsSyslogTest, SyslogReadSysLogSuccess_0007, Function | MediumTest | Level1)
+HWTEST_F(HatsSyslogTest, SyslogSuccess_0007, Function | MediumTest | Level1)
 {
-    int bufferSize;
-    int readSize;
-    char* buffer;
+    int errno =0 
+    int ret = syscall(__NR_syslog, SYSLOG_ACTION_SIZE_UNREAD, nullptr, 0);
+    if (ret != -1) {
+        EXPECT_EQ(ret, 0);
+    } else {
+        EXPECT_EQ(errno, 38);
+    }
+}
 
-    bufferSize = syscall(__NR_syslog, 10, nullptr, 0);
-    EXPECT_GE(bufferSize, 0);
-
-    buffer = (char *)malloc(bufferSize + 1);
-    EXPECT_NE(buffer, nullptr);
-
-    readSize = syscall(__NR_syslog, 2, buffer, bufferSize);
-    EXPECT_GE(readSize, 0);
-    buffer = nullptr;
+/*
+ * @tc.number : SUB_KERNEL_SYSCALL_SYSLOG_0800
+ * @tc.name   : SyslogSuccess_0008
+ * @tc.desc   : syslog  size buffer the log success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 1
+ */
+HWTEST_F(HatsSyslogTest, SyslogSuccess_0008, Function | MediumTest | Level1)
+{
+    int ret = syscall(__NR_syslog, SYSLOG_ACTION_SIZE_BUFFER, nullptr, 0);
+    EXPECT_GE(ret, 0);
 }

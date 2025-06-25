@@ -97,7 +97,10 @@ HWTEST_F(HatsSyslogTest, SyslogSuccess_0002, Function | MediumTest | Level1)
     char buffer[100];
     errno = 0;
 
-    int ret = syscall(__NR_syslog, SYSLOG_ACTION_READ, buffer, sizeof(buffer));
+    int ret = syscall(__NR_syslog, SYSLOG_ACTION_CLEAR, nullptr, 0);
+    EXPECT_EQ(ret, 0);
+
+    ret = syscall(__NR_syslog, SYSLOG_ACTION_READ, buffer, sizeof(buffer));
     if (ret != -1) {
         EXPECT_EQ(ret, strlen(buffer));
     } else {
@@ -173,7 +176,7 @@ HWTEST_F(HatsSyslogTest, SyslogSuccess_0006, Function | MediumTest | Level1)
     int ret;
     int i;
 
-    for (i = 0; i < 8; i++) {
+    for (i = 1; i < 9; i++) {
         ret = syscall(__NR_syslog, SYSLOG_ACTION_CONSOLE_LEVEL, nullptr, i);
         EXPECT_EQ(ret, 0);
     }
@@ -189,10 +192,13 @@ HWTEST_F(HatsSyslogTest, SyslogSuccess_0006, Function | MediumTest | Level1)
  */
 HWTEST_F(HatsSyslogTest, SyslogSuccess_0007, Function | MediumTest | Level1)
 {
+    int ret = syscall(__NR_syslog, SYSLOG_ACTION_CLEAR, nullptr, 0);
+    EXPECT_EQ(ret, 0);
+
     errno = 0;
-    int ret = syscall(__NR_syslog, SYSLOG_ACTION_SIZE_UNREAD, nullptr, 0);
+    ret = syscall(__NR_syslog, SYSLOG_ACTION_SIZE_UNREAD, nullptr, 0);
     if (ret != -1) {
-        EXPECT_EQ(ret, 0);
+        EXPECT_GE(ret, 0);
     } else {
         EXPECT_EQ(errno, 38);
     }

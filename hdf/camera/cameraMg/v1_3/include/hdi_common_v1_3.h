@@ -45,6 +45,7 @@ enum CameraUtConstants {
     UT_DATA_SIZE = 8,
     UT_PREVIEW_SIZE = 3112960,
     CAMERA_ID_NUM = 2,
+    UT_MICROSECOND_TIMES = 500000,
 };
 
 enum Numbers {

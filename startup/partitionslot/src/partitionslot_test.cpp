@@ -13,7 +13,6 @@
  * limitations under the License.
  */
 
-
 #include <gtest/gtest.h>
 #include <osal_mem.h>
 #include <unistd.h>

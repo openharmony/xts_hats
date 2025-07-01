@@ -1,4 +1,5 @@
 /*
+ * 
  * Copyright (c) 2024-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file expected in compliance with the License.
@@ -32,6 +33,7 @@ Test::ResultCallback Test::resultCallback_ = 0;
 Test::StreamResultCallback Test::streamResultCallback_ = 0;
 OHOS::HDI::Camera::V1_0::FlashlightStatus Test::statusCallback =
                 static_cast<OHOS::HDI::Camera::V1_0::FlashlightStatus>(0);
+constexpr uint32_t LOOP_COUNT = 12;
 uint64_t Test::GetCurrentLocalTimeStamp()
 {
     std::chrono::time_point<std::chrono::system_clock, std::chrono::milliseconds> tp =
@@ -88,13 +90,16 @@ void Test::Init()
         int cnt = WAIT_SECS;
         while (!serviceV1_3 && cnt) {
             serviceV1_3 = OHOS::HDI::Camera::V1_3::ICameraHost::Get("camera_service", false);
-            sleep(ONE_SEC);
-            --cnt;
-            if (!serviceV1_3) {
-                CAMERA_LOGI("V1_2::ICameraHost get service left times: %{public}d", cnt);
-            }
+	    if(serviceV1_3 == nullptr){
+	       int loopCount = 0;
+	       do{
+	         usleep(UT_MICROSECOND_TIMES);
+		 serviceV1_3 = OHOS::HDI::Camera::V1_3::ICameraHost::Get("camera_service",false);
+		 loopCount++;
+	       }while (loopCount <= LOOP_COUNT || serviceV1_3 == nullptr);
+	    }
         }
-        ASSERT_NE(serviceV1_3, nullptr);
+        EXPECT_NE(serviceV1_3, nullptr);
         CAMERA_LOGI("V1_2::ICameraHost get success");
         ret = serviceV1_3->GetVersion(mainVer, minVer);
         EXPECT_EQ(ret, 0);

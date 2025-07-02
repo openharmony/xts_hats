@@ -93,7 +93,8 @@ void Test::Init()
             do {
                 usleep(_MICROSECOND_TIMES);
                 serviceV1_3 = OHOS::HDI::Camera::V1_3::ICameraHost::Get("camera_service", false);
-                loopCount++; } while (loopCount <= LOOP_COUNT || serviceV1_3 == nullptr);
+                loopCount++;
+            } while (loopCount <= LOOP_COUNT || serviceV1_3 == nullptr);
         }
         EXPECT_NE(serviceV1_3, nullptr);
         CAMERA_LOGI("V1_3::ICameraHost get success");

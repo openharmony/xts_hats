@@ -87,23 +87,19 @@ void Test::Init()
     uint32_t minVer;
     int32_t ret;
     if (serviceV1_3 == nullptr) {
-        int cnt = WAIT_SECS;
-        while (!serviceV1_3 && cnt) {
-		serviceV1_3 = OHOS::HDI::Camera::V1_3::ICameraHost::Get("camera_service", false);
-	  if(serviceV1_3 == nullptr){
-		int loopCount = 0;
-		do{
-		usleep(UT_MICROSECOND_TIMES);
-		serviceV1_3 = OHOS::HDI::Camera::V1_3::ICameraHost::Get("camera_service",false);
-		loopCount++;
-		}while (loopCount <= LOOP_COUNT || serviceV1_3 == nullptr);
-		}
-	}
+        serviceV1_3 = OHOS::HDI::Camera::V1_ICameraHost::Get("camera_service", false);
+        if (serviceV1_3 == nullptr) {
+            int loopCount = 0;
+            do {
+                usleep(_MICROSECOND_TIMES);
+                serviceV1_3 = OHOS::HDI::Camera::V1_3::ICameraHost::Get("camera_service", false);
+                loopCount++; } while (loopCount <= LOOP_COUNT || serviceV1_3 == nullptr);
+        }
         EXPECT_NE(serviceV1_3, nullptr);
-        CAMERA_LOGI("V1_2::ICameraHost get success");
+        CAMERA_LOGI("V1_3::ICameraHost get success");
         ret = serviceV1_3->GetVersion(mainVer, minVer);
         EXPECT_EQ(ret, 0);
-        CAMERA_LOGI("V1_2::ICameraHost get version success, %{public}d, %{public}d", mainVer, minVer);
+        CAMERA_LOGI("V1_3::ICameraHost get version success, %{public}d, %{public}d", mainVer, minVer);
     }
 
     hostCallback = new TestCameraHostCallback();

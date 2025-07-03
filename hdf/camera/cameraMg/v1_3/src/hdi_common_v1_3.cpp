@@ -1,4 +1,5 @@
 /*
+ *
  * Copyright (c) 2024-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file expected in compliance with the License.
@@ -25,13 +26,12 @@ constexpr uint32_t STREAMINFO_WIDTH = 1920;
 constexpr uint32_t STREAMINFO_HEIGHT = 1080;
 constexpr uint32_t HIGH_RESOLUTION_PHOTO_WIDTH = 8192;
 constexpr uint32_t HIGH_RESOLUTION_PHOTO_HEIGHT = 6144;
-constexpr uint32_t WAIT_SECS = 60; // wait for service to restart
-constexpr uint32_t ONE_SEC = 1;    // wait for service to restart
 namespace OHOS::Camera {
 Test::ResultCallback Test::resultCallback_ = 0;
 Test::StreamResultCallback Test::streamResultCallback_ = 0;
 OHOS::HDI::Camera::V1_0::FlashlightStatus Test::statusCallback =
                 static_cast<OHOS::HDI::Camera::V1_0::FlashlightStatus>(0);
+constexpr uint32_t LOOP_COUNT = 12;
 uint64_t Test::GetCurrentLocalTimeStamp()
 {
     std::chrono::time_point<std::chrono::system_clock, std::chrono::milliseconds> tp =
@@ -85,20 +85,20 @@ void Test::Init()
     uint32_t minVer;
     int32_t ret;
     if (serviceV1_3 == nullptr) {
-        int cnt = WAIT_SECS;
-        while (!serviceV1_3 && cnt) {
-            serviceV1_3 = OHOS::HDI::Camera::V1_3::ICameraHost::Get("camera_service", false);
-            sleep(ONE_SEC);
-            --cnt;
-            if (!serviceV1_3) {
-                CAMERA_LOGI("V1_2::ICameraHost get service left times: %{public}d", cnt);
-            }
+        serviceV1_3 = OHOS::HDI::Camera::V1_ICameraHost::Get("camera_service", false);
+        if (serviceV1_3 == nullptr) {
+            int loopCount = 0;
+            do {
+                usleep(UT_MICROSECOND_TIMES);
+                serviceV1_3 = OHOS::HDI::Camera::V1_3::ICameraHost::Get("camera_service", false);
+                loopCount++;
+            } while (loopCount <= LOOP_COUNT || serviceV1_3 == nullptr);
         }
-        ASSERT_NE(serviceV1_3, nullptr);
-        CAMERA_LOGI("V1_2::ICameraHost get success");
+        EXPECT_NE(serviceV1_3, nullptr);
+        CAMERA_LOGI("V1_3::ICameraHost get success");
         ret = serviceV1_3->GetVersion(mainVer, minVer);
         EXPECT_EQ(ret, 0);
-        CAMERA_LOGI("V1_2::ICameraHost get version success, %{public}d, %{public}d", mainVer, minVer);
+        CAMERA_LOGI("V1_3::ICameraHost get version success, %{public}d, %{public}d", mainVer, minVer);
     }
 
     hostCallback = new TestCameraHostCallback();

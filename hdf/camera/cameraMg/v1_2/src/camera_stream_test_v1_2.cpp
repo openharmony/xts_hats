@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2024-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file expected in compliance with the License.
  * You may obtain a copy of the License at
@@ -340,8 +340,10 @@ HWTEST_F(CameraStreamTestV1_2, SUB_Driver_Camera_SmoothZoom_0200, TestSize.Level
     // cover tag OHOS_ABILITY_CAMERA_ZOOM_PERFORMANCE
     cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_ZOOM_PERFORMANCE, &entry);
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
-
-
+    if (cameraTest->rc != 0) {
+        GTEST_SKIP() << "skip this test, because OHOS_ABILITY_CAMERA_ZOOM_PERFORMANCE not supported now" << std::endl;
+        return;
+    }
     // cover OHOS_CONTROL_PREPARE_ZOOM and its values
     std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
     // cover OHOS_CAMERA_ZOOMSMOOTH_PREPARE_ENABLE

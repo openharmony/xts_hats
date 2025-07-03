@@ -85,7 +85,7 @@ void Test::Init()
     uint32_t minVer;
     int32_t ret;
     if (serviceV1_3 == nullptr) {
-        serviceV1_3 = OHOS::HDI::Camera::V1_3::ICameraHost::Get("camera_service", false);
+        serviceV1_3 = OHOS::HDI::Camera::V1_ICameraHost::Get("camera_service", false);
         if (serviceV1_3 == nullptr) {
             int loopCount = 0;
             do {

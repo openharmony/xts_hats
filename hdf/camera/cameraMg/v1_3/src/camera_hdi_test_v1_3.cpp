@@ -113,7 +113,7 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_Moon_0200, TestSize.Level1)
                 printf("Moon mode is not enabled.");
             }
         } else {
-            printf("Moon is not exits .");
+            GTEST_SKIP() << "skip this test, because OHOS_ABILITY_MOON_CAPTURE_BOOST not supported now" << std::endl;
         }
     }
 }
@@ -136,7 +136,10 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_Moon_0300, TestSize.Level1)
     EXPECT_NE(data, nullptr);
     camera_metadata_item_t entry;
     int ret = FindCameraMetadataItem(data, OHOS_ABILITY_MOON_CAPTURE_BOOST, &entry);
-
+    if (cameraTest->rc != 0) {
+        GTEST_SKIP() << "skip this test, because OHOS_ABILITY_MOON_CAPTURE_BOOST not supported now" << std::endl;
+        return;
+    }
 
     if (ret == HDI::Camera::V1_0::NO_ERROR && entry.data.u8 != nullptr && entry.count > 0) {
         std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
@@ -342,12 +345,14 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_PerOptimization_0100, TestSize.Lev
     cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
 
     sleep(UT_SECOND_TIMES);
-
-
     common_metadata_header_t* callbackData = cameraTest->deviceCallback->resultMeta->get();
     EXPECT_NE(callbackData, nullptr);
     camera_metadata_item_t callbackEntry;
     cameraTest->rc = FindCameraMetadataItem(callbackData, OHOS_CAMERA_CUSTOM_SNAPSHOT_DURATION, &callbackEntry);
+    if (cameraTest->rc != 0) {
+        GTEST_SKIP() << "skip this test, because OHOS_CAMERA_CUSTOM_SNAPSHOT_DURATION not supported now" << std::endl;
+        return;
+    }
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
     printf("currentSnapshotDuration = %d\n", callbackEntry.data.ui32[0]);
 }

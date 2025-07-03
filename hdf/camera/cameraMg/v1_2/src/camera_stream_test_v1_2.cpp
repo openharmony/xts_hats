@@ -341,6 +341,7 @@ HWTEST_F(CameraStreamTestV1_2, SUB_Driver_Camera_SmoothZoom_0200, TestSize.Level
     cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_ZOOM_PERFORMANCE, &entry);
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
 
+
     // cover OHOS_CONTROL_PREPARE_ZOOM and its values
     std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
     // cover OHOS_CAMERA_ZOOMSMOOTH_PREPARE_ENABLE

@@ -343,6 +343,7 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_PerOptimization_0100, TestSize.Lev
 
     sleep(UT_SECOND_TIMES);
 
+
     common_metadata_header_t* callbackData = cameraTest->deviceCallback->resultMeta->get();
     EXPECT_NE(callbackData, nullptr);
     camera_metadata_item_t callbackEntry;

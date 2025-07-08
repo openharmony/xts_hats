@@ -512,3 +512,40 @@ HWTEST_F(UserApiTest, SetgidSetInvalidUIDFail_0023, Function | MediumTest | Leve
     EXPECT_EQ(ret, -1);
     EXPECT_EQ(errno, EINVAL);
 }
+
+/*
+ * @tc.number : SUB_KERNEL_SYSCALL_USER_2400
+ * @tc.name   : SetsidSucc_0024
+ * @tc.desc   : Setsid set sid success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
+HWTEST_F(UserApiTest, SetsidSucc_0024, Function | MediumTest | Level2)
+{
+    pid_t pid;
+    int ret;
+    pid = fork();
+
+    if (pid > 0) {
+        exit(EXIT_SUCCESS);
+    }
+
+    ret = setsid();
+    EXPECT_TRUE(ret > 0);
+}
+
+/*
+ * @tc.number : SUB_KERNEL_SYSCALL_USER_2500
+ * @tc.name   : Getresgid_0001
+ * @tc.desc   : Getresgid success.
+ * @tc.size   : MediumTest
+ * @tc.type   : Function
+ * @tc.level  : Level 2
+ */
+HWTEST_F(UserApiTest, Getresgid_0001, Function | MediumTest | Level2)
+{
+    gid_t rgid, egid, sgid;
+    int ret = getresgid(&rgid, &egid, &sgid);
+    EXPECT_EQ(ret, 0);
+}

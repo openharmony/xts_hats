@@ -59,6 +59,7 @@ group("HatsFileIoTest") {
     "memfdcreate:HatsMemFdCreateTest",
     "mkdirat:HatsMkdiratTest",
     "mknodat:HatsMknodatTest",
+    "mount:HatsMountTest",
     "openat:HatsOpenatTest",
     "pread64:HatsPread64Test",
     "preadv:HatsPreadvTest",

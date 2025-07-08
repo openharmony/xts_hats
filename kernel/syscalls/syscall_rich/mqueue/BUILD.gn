@@ -1,4 +1,4 @@
-# Copyright (C) 2024 HiHope Open Source Organization.
+# Copyright (c) 2021-2025 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -11,14 +11,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//build/ohos_var.gni")
-import("//test/xts/hats/build.gni")
+import("//test/xts/tools/build/suite.gni")
+module_output_path = "hats/syscalls/syscall_rich"
 
-group("HatsProcessTest") {
-  testonly = true
-  deps = [
-    "prctl:HatsPrctlSyscallTest",
-    "processid:HatsProcessSyscallTest",
-    "waitid:HatsWaitidTest"
-  ]
+ohos_moduletest_suite("HatsMqueueTest") {
+  module_out_path = module_output_path
+  sources = [ "./MqueueApiTest.cpp" ]
+  deps = [ "//third_party/googletest:gtest_main" ]
+  include_dirs = [ "include" ]
+  cflags = [ "-Wno-error" ]
+  external_deps = [ "c_utils:utils" ]
+  subsystem_name = "kernel"
+  part_name = "hats"
 }

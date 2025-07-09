@@ -691,8 +691,8 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_APERTURE_0600, TestSize.Level1)
     camera_metadata_item_t entry;
     cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE, &entry);
     if (cameraTest->rc != 0) {
-        GTEST_SKIP() << "skip this test, because OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE not supported now" << std::endl;
-        return;
+      GTEST_SKIP() <<"skip this test,because OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE not supported now"<< std::endl;
+      return;
     }
     if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && entry.data.f != nullptr && entry.count > 0) {
         float entryValues[] = { entry.data.f[3], entry.data.f[7], entry.data.f[8], entry.data.f[9], entry.data.f[10],

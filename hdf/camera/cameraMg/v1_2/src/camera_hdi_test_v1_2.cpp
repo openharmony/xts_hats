@@ -81,6 +81,7 @@ void CameraHdiTestV1_2::RemovePendingImages()
  * @tc.size:MediumTest
  * @tc.type:Function
 */
+
 HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_DefferredImage_0200, TestSize.Level1)
 {
     int ret = 0;

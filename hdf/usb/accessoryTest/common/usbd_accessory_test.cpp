@@ -77,6 +77,10 @@ HWTEST_F(UsbdAccessoryTest, GetAccessoryInfoTest001, Function | MediumTest | Lev
     HDF_LOGI("Case Start : GetAccessoryInfoTest001 : GetAccessoryInfo");
     vector<string> accessoryInfo;
     auto ret = g_usbInterface->GetAccessoryInfo(accessoryInfo);
+    if (ret == -2) {
+        GTEST_SKIP() << "Not Support GetAccessory, Skip GetAccessoryInfoTest001" << std::endl;
+        return;
+    }
     EXPECT_TRUE(ret == 0);
     HDF_LOGI("UsbdAccessoryTest::GetAccessoryInfoTest001 %{public}d ret=%{public}d", __LINE__, ret);
     EXPECT_TRUE(!accessoryInfo.empty()) << "accessoryInfo NULL";
@@ -98,6 +102,10 @@ HWTEST_F(UsbdAccessoryTest, OpenAccessoryTest001, Function | MediumTest | Level1
     HDF_LOGI("Case Start : OpenAccessoryTest001 : OpenAccessory");
     int32_t fd;
     auto ret = g_usbInterface->OpenAccessory(fd);
+    if (ret == -2) {
+        GTEST_SKIP() << "Not Support OpenAccessory, Skip OpenAccessoryTest001" << std::endl;
+        return;
+    }
     EXPECT_TRUE(ret == 0);
     HDF_LOGI("UsbdAccessoryTest::OpenAccessoryTest001 %{public}d ret=%{public}d", __LINE__, ret);
     g_usbInterface->CloseAccessory(fd);
@@ -117,6 +125,10 @@ HWTEST_F(UsbdAccessoryTest, OpenAccessoryTest002, Function | MediumTest | Level1
     HDF_LOGI("Case Start : OpenAccessoryTest002 : OpenAccessory");
     int32_t fd;
     auto ret = g_usbInterface->OpenAccessory(fd);
+    if (ret == -2) {
+        GTEST_SKIP() << "Not Support OpenAccessory, Skip OpenAccessoryTest002" << std::endl;
+        return;
+    }
     EXPECT_TRUE(ret == 0);
     HDF_LOGI("UsbdAccessoryTest::OpenAccessoryTest002 %{public}d ret=%{public}d", __LINE__, ret);
     ret = g_usbInterface->OpenAccessory(fd);
@@ -139,6 +151,10 @@ HWTEST_F(UsbdAccessoryTest, CloseAccessoryTest001, Function | MediumTest | Level
     HDF_LOGI("Case Start : CloseAccessoryTest001 : CloseAccessory");
     int32_t fd;
     auto ret = g_usbInterface->OpenAccessory(fd);
+    if (ret == -2) {
+        GTEST_SKIP() << "Not Support CloseAccessory, Skip CloseAccessoryTest001" << std::endl;
+        return;
+    }
     EXPECT_TRUE(ret == 0);
     HDF_LOGI("UsbdAccessoryTest::CloseAccessoryTest001 %{public}d ret=%{public}d", __LINE__, ret);
     ret = g_usbInterface->CloseAccessory(fd);

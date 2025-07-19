@@ -502,7 +502,7 @@ INSTANTIATE_TEST_SUITE_P(AllocTest, DisplayBufferUt, ::testing::ValuesIn(DISPLAY
 
 /**
  * @tc.number: SUB_Driver_Display_HDI_2200
- * @tc.name：test_ReAllocMemTest001
+ * @tc.name: test_ReAllocMemTest001
  * @tc.desc: verify different AllocInfo for the ReAllocMem interface
  * @tc.size: MediumTest
  * @tc.type: Function
@@ -544,7 +544,7 @@ HWTEST_F(DisplayBufferUt, test_ReAllocMemTest001, TestSize.Level1)
 
 /**
  * @tc.number: SUB_Driver_Display_HDI_2300
- * @tc.name：test_ReAllocMemTest002
+ * @tc.name: test_ReAllocMemTest002
  * @tc.desc: verify different AllocInfo for the ReAllocMem interface
  * @tc.size: MediumTest
  * @tc.type: Function
@@ -586,7 +586,7 @@ HWTEST_F(DisplayBufferUt, test_ReAllocMemTest002, TestSize.Level1)
 
 /**
  * @tc.number: SUB_Driver_Display_HDI_2400
- * @tc.name：test_ReAllocMemTest003
+ * @tc.name: test_ReAllocMemTest003
  * @tc.desc: verify different AllocInfo for the ReAllocMem interface
  * @tc.size: MediumTest
  * @tc.type: Function

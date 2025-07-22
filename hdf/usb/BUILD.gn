@@ -65,6 +65,7 @@ group("HatsHdfUsbTest") {
         # "usbdBenchmarkTest:HatsHdfUsbBenchmarkManagerInterfaceTest",
         # "usbdBenchmarkTest:HatsHdfUsbBenchmarkRequestTest",
         # "usbdBenchmarkTest:HatsHdfUsbBenchmarkTransferTest",
+        
       ]
     }
   } else {

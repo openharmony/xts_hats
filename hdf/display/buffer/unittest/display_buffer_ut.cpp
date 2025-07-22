@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,7 +16,7 @@
 #include <securec.h>
 
 #include "gtest/gtest.h"
-#include "v1_0/display_buffer_type.h"
+#include "v1_2/display_buffer_type.h"
 #include "v1_2/display_composer_type.h"
 #include "hdf_base.h"
 #include "hdf_log.h"
@@ -49,6 +49,7 @@ using OHOS::HDI::Display::Composer::V1_1::PIXEL_FMT_BGR_565;
 using OHOS::HDI::Display::Composer::V1_1::PIXEL_FMT_BGRA_5551;
 using OHOS::HDI::Display::Composer::V1_1::PIXEL_FMT_BGRX_5551;
 using OHOS::HDI::Display::Composer::V1_1::PIXEL_FMT_RGBA_1010102;
+#define TEST_INFO (1<<27)
 #ifndef DISPLAY_TEST_CHK_RETURN
 #define DISPLAY_TEST_CHK_RETURN(val, ret, ...) \
     do {                                       \
@@ -498,6 +499,132 @@ TEST_P(DisplayBufferUt, DisplayBufferUt)
  * @tc.type: Function
  */
 INSTANTIATE_TEST_SUITE_P(AllocTest, DisplayBufferUt, ::testing::ValuesIn(DISPLAY_BUFFER_TEST_SETS));
+
+/**
+ * @tc.number: SUB_Driver_Display_HDI_2200
+ * @tc.name: test_ReAllocMemTest001
+ * @tc.desc: verify different AllocInfo for the ReAllocMem interface
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(DisplayBufferUt, test_ReAllocMemTest001, TestSize.Level1)
+{
+    int ret;
+    AllocInfo info = {
+        .width = ALLOC_SIZE_1080,
+        .height = ALLOC_SIZE_1920,
+        .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
+        .format = PIXEL_FMT_YCBCR_420_P
+    };
+    BufferHandle* inBuffer = nullptr;
+    ret = displayBuffer_->AllocMem(info, inBuffer);
+    EXPECT_TRUE(ret == DISPLAY_SUCCESS);
+    EXPECT_NE(inBuffer, nullptr);
+
+    BufferHandle* outBuffer = nullptr;
+    AllocInfo newInfo = {
+        .width = ALLOC_SIZE_1920,
+        .height = ALLOC_SIZE_1080,
+        .usage = HBM_USE_MEM_DMA | Composer::V1_0::HBM_USE_VIDEO_DECODER | Composer::V1_0::HBM_USE_HW_COMPOSER,
+        .format = PIXEL_FMT_YCBCR_420_P
+    };
+
+    ret = displayBuffer_->ReAllocMem(newInfo, *inBuffer, outBuffer);
+    EXPECT_TRUE(ret == DISPLAY_SUCCESS);
+    EXPECT_NE(inBuffer, nullptr);
+    EXPECT_NE(outBuffer, nullptr);
+
+    AllocInfo nullInfo;
+    ret = displayBuffer_->ReAllocMem(nullInfo, *inBuffer, outBuffer);
+    EXPECT_TRUE(ret != DISPLAY_SUCCESS);
+
+    displayBuffer_->FreeMem(*inBuffer);
+    displayBuffer_->FreeMem(*outBuffer);
+}
+
+/**
+ * @tc.number: SUB_Driver_Display_HDI_2300
+ * @tc.name: test_ReAllocMemTest002
+ * @tc.desc: verify different AllocInfo for the ReAllocMem interface
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(DisplayBufferUt, test_ReAllocMemTest002, TestSize.Level1)
+{
+    int ret;
+    AllocInfo info = {
+        .width = ALLOC_SIZE_720,
+        .height = ALLOC_SIZE_1920,
+        .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
+        .format = PIXEL_FMT_YCBCR_420_P
+    };
+    BufferHandle* inBuffer = nullptr;
+    ret = displayBuffer_->AllocMem(info, inBuffer);
+    EXPECT_TRUE(ret == DISPLAY_SUCCESS);
+    EXPECT_NE(inBuffer, nullptr);
+
+    BufferHandle* outBuffer = nullptr;
+    AllocInfo newInfo = {
+        .width = ALLOC_SIZE_1920,
+        .height = ALLOC_SIZE_1080,
+        .usage = HBM_USE_MEM_DMA | Composer::V1_0::HBM_USE_VIDEO_DECODER | Composer::V1_0::HBM_USE_HW_COMPOSER,
+        .format = PIXEL_FMT_YCBCR_420_P
+    };
+
+    ret = displayBuffer_->ReAllocMem(newInfo, *inBuffer, outBuffer);
+    EXPECT_TRUE(ret == DISPLAY_SUCCESS);
+    EXPECT_NE(inBuffer, nullptr);
+    EXPECT_NE(outBuffer, nullptr);
+
+    AllocInfo nullInfo;
+    ret = displayBuffer_->ReAllocMem(nullInfo, *inBuffer, outBuffer);
+    EXPECT_TRUE(ret != DISPLAY_SUCCESS);
+
+    displayBuffer_->FreeMem(*inBuffer);
+    displayBuffer_->FreeMem(*outBuffer);
+}
+
+/**
+ * @tc.number: SUB_Driver_Display_HDI_2400
+ * @tc.name: test_ReAllocMemTest003
+ * @tc.desc: verify different AllocInfo for the ReAllocMem interface
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(DisplayBufferUt, test_ReAllocMemTest003, TestSize.Level1)
+{
+    int ret;
+    AllocInfo info = {
+        .width = ALLOC_SIZE_1280,
+        .height = ALLOC_SIZE_1920,
+        .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
+        .format = PIXEL_FMT_YCBCR_420_P
+    };
+    BufferHandle* inBuffer = nullptr;
+    ret = displayBuffer_->AllocMem(info, inBuffer);
+    EXPECT_TRUE(ret == DISPLAY_SUCCESS);
+    EXPECT_NE(inBuffer, nullptr);
+
+    BufferHandle* outBuffer = nullptr;
+    AllocInfo newInfo = {
+        .width = ALLOC_SIZE_1920,
+        .height = ALLOC_SIZE_1080,
+        .usage = HBM_USE_MEM_DMA | Composer::V1_0::HBM_USE_VIDEO_DECODER | Composer::V1_0::HBM_USE_HW_COMPOSER,
+        .format = PIXEL_FMT_YCBCR_420_P
+    };
+
+    ret = displayBuffer_->ReAllocMem(newInfo, *inBuffer, outBuffer);
+    EXPECT_TRUE(ret == DISPLAY_SUCCESS);
+    EXPECT_NE(inBuffer, nullptr);
+    EXPECT_NE(outBuffer, nullptr);
+
+    AllocInfo nullInfo;
+    ret = displayBuffer_->ReAllocMem(nullInfo, *inBuffer, outBuffer);
+    EXPECT_TRUE(ret != DISPLAY_SUCCESS);
+
+    displayBuffer_->FreeMem(*inBuffer);
+    displayBuffer_->FreeMem(*outBuffer);
+}
 } // OHOS
 } // HDI
 } // DISPLAY

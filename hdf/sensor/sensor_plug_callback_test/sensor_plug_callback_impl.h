@@ -30,7 +30,7 @@ public:
 
     int32_t OnSensorPlugEvent(const SensorPlugInfo& sensorPlugInfo) override
     {
-        SensorHandle sensorHandle = sensorPlugInfo.deviceSensorInfo;
+        DeviceSensorInfo sensorHandle = sensorPlugInfo.deviceSensorInfo;
         std::string deviceSensorInfo = ("deviceId" + std::to_string((sensorHandle).deviceId) + "sensorType" +
             std::to_string((sensorHandle).sensorType) + "sensorId" + std::to_string((sensorHandle).sensorId) +
             "location" + std::to_string((sensorHandle).location));

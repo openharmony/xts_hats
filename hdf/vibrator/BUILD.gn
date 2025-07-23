@@ -18,7 +18,10 @@ import("//test/xts/tools/build/suite.gni")
 group("HatsHdfVibratorTest") {
   testonly = true
   if (hats_rich == true) {
-    deps = [ "hdi_adapter:HatsHdfVibratorAdapterTest" ]
+    deps = [
+      "hdi_adapter:HatsHdfVibratorAdapterTest",
+      "vibrator_plug_callback_test:HatsHdfVibratorPlugCallbackTest",
+    ]
   } else {
     deps = [
       #"common:HatsHdfVibratorHdiTest",

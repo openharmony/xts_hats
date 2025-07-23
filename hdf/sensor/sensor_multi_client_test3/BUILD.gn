@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2024 Huawei Device Co., Ltd.
+# Copyright (c) 2023-2025 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -13,18 +13,18 @@
 
 base_root = "../../../../../.."
 import("//build/ohos_var.gni")
-import("//drivers/peripheral/sensor/sensor.gni")
 import("//test/xts/tools/build/suite.gni")
+import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 
 module_output_path = "hats/sensor"
 
-ohos_moduletest_suite("HatsHdfSensorServiceTest") {
+ohos_moduletest_suite("HatsHdfSensorMultiClientTest3") {
   module_out_path = module_output_path
 
-  configs = [ ":hdf_sensor_hdiservice" ]
+  deps = [ "../../../../../../drivers/peripheral/sensor/hal:hdi_sensor" ]
+
   sources = [
-    "hdf_sensor_hdiService_test.cpp",
-    "sensor_callback_impl.cpp",
+    "HdfSensorMultiClient3Test.cpp",
   ]
   cflags = [
     "-Wall",
@@ -37,22 +37,16 @@ ohos_moduletest_suite("HatsHdfSensorServiceTest") {
 
   if (is_standard_system) {
     external_deps = [
+      "c_utils:utils",
       "drivers_interface_sensor:libsensor_proxy_3.0",
       "hdf_core:libhdf_utils",
       "hilog:libhilog",
       "ipc:ipc_single",
     ]
-    if (c_utils_enable) {
-      external_deps += [ "c_utils:utils" ]
-    }
   } else {
     external_deps = [ "hilog:libhilog" ]
   }
   external_deps += [ "ipc:ipc_single" ]
   subsystem_name = "hdf"
   part_name = "drivers_interface_sensor"
-}
-
-config("hdf_sensor_hdiservice") {
-  include_dirs = [ "$base_root/drivers/peripheral/sensor/interfaces/include" ]
 }

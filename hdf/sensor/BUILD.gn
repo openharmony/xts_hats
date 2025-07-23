@@ -31,6 +31,10 @@ group("HatsHdfSensorTest") {
       #"common:HatsHdfSensorHdiTest",
       "hdiService:HatsHdfSensorServiceTest",
       "hdiService_additional:HatsHdfSensorServiceAdditionalTest",
+      "sensor_multi_client_test1:HatsHdfSensorMultiClientTest1",
+      "sensor_multi_client_test2:HatsHdfSensorMultiClientTest2",
+      "sensor_multi_client_test3:HatsHdfSensorMultiClientTest3",
+      "sensor_plug_callback_test:HatsHdfSensorPlugCallbackTest",
 
       #"sensorBenchmarkTest:HatsHdfSensorbenchmarkTest",
     ]

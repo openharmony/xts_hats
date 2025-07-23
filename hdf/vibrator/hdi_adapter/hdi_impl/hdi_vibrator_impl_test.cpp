@@ -20,17 +20,17 @@
 #include "hdf_base.h"
 #include "osal_time.h"
 #include "parameters.h"
-#include "v1_3/ivibrator_interface.h"
+#include "v2_0/ivibrator_interface.h"
 #define HDF_LOG_TAG "hdi_vibrator_impl_test"
 
 using namespace std;
 using namespace OHOS::HDI::Vibrator;
-using namespace OHOS::HDI::Vibrator::V1_3;
+using namespace OHOS::HDI::Vibrator::V2_0;
 using namespace testing::ext;
 
 namespace {
     HapticCapacity g_hapticCapacity;
-    sptr<V1_3::IVibratorInterface> g_vibratorInterface = nullptr;
+    sptr<V2_0::IVibratorInterface> g_vibratorInterface = nullptr;
 }
 
 class HatsHdfVibratorImplTest : public testing::Test {
@@ -43,7 +43,7 @@ public:
 
 void HatsHdfVibratorImplTest::SetUpTestCase()
 {
-    g_vibratorInterface = V1_3::IVibratorInterface::Get();
+    g_vibratorInterface = V2_0::IVibratorInterface::Get();
 }
 void HatsHdfVibratorImplTest::TearDownTestCase()
 {
@@ -98,7 +98,7 @@ HWTEST_F(HatsHdfVibratorImplTest, SUB_Vibrator_HDI_EnableCompositeEffectTest_001
         HdfCompositeEffect effect;
         effect.type = HDF_EFFECT_TYPE_PRIMITIVE;
         effect.compositeEffects = vec;
-        int32_t ret = g_vibratorInterface -> EnableCompositeEffect(effect);
+        int32_t ret = g_vibratorInterface -> EnableCompositeEffect({-1, 1}, effect);
         EXPECT_EQ(HDF_SUCCESS, ret);
         OsalMSleep(2000);
     }
@@ -132,10 +132,10 @@ HWTEST_F(HatsHdfVibratorImplTest, SUB_Vibrator_HDI_EnableCompositeEffectTest_002
         HdfCompositeEffect effect;
         effect.type = HDF_EFFECT_TYPE_PRIMITIVE;
         effect.compositeEffects = vec;
-        int32_t ret = g_vibratorInterface -> EnableCompositeEffect(effect);
+        int32_t ret = g_vibratorInterface -> EnableCompositeEffect({-1, 1}, effect);
         EXPECT_EQ(HDF_SUCCESS, ret);
         OsalMSleep(1000);
-        ret = g_vibratorInterface -> StopV1_2(V1_2::HDF_VIBRATOR_MODE_PRESET);
+        ret = g_vibratorInterface -> Stop({-1, 1}, V2_0::HDF_VIBRATOR_MODE_PRESET);
         EXPECT_EQ(HDF_SUCCESS, ret);
     }
 }
@@ -149,7 +149,7 @@ HWTEST_F(HatsHdfVibratorImplTest, SUB_Vibrator_HDI_GetEffectInfoTest_0010, Funct
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
     HdfEffectInfo effectInfo;
-    int32_t ret = g_vibratorInterface -> GetEffectInfo("haptic.pattern.type1", effectInfo);
+    int32_t ret = g_vibratorInterface -> GetEffectInfo({-1, 1}, "haptic.pattern.type1", effectInfo);
         printf("isSupportEffect = [%d]\n\r", effectInfo.isSupportEffect);
         printf("duration = [%d]\n\r", effectInfo.duration);
         EXPECT_EQ(ret, HDF_SUCCESS);
@@ -164,7 +164,7 @@ HWTEST_F(HatsHdfVibratorImplTest, SUB_Vibrator_HDI_GetEffectInfoTest_0020, Funct
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
     HdfEffectInfo effectInfo;
-    int32_t ret = g_vibratorInterface -> GetEffectInfo("invalid.effect.id", effectInfo);
+    int32_t ret = g_vibratorInterface -> GetEffectInfo({-1, 1}, "invalid.effect.id", effectInfo);
         EXPECT_EQ(HDF_SUCCESS, ret);
         EXPECT_EQ(effectInfo.duration, 0);
         EXPECT_EQ(effectInfo.isSupportEffect, false);
@@ -198,13 +198,13 @@ HWTEST_F(HatsHdfVibratorImplTest, SUB_Vibrator_HDI_IsVibratorRunningTest_0010, F
     HdfCompositeEffect effect;
     effect.type = HDF_EFFECT_TYPE_PRIMITIVE;
     effect.compositeEffects = vec;
-    int32_t ret = g_vibratorInterface -> EnableCompositeEffect(effect);
+    int32_t ret = g_vibratorInterface -> EnableCompositeEffect({-1, 1}, effect);
         EXPECT_EQ(HDF_SUCCESS, ret);
     bool state{false};
-    g_vibratorInterface -> IsVibratorRunning(state);
+    g_vibratorInterface -> IsVibratorRunning({-1, 1}, state);
         EXPECT_EQ(state, true);
     OsalMSleep(3000);
-    g_vibratorInterface -> IsVibratorRunning(state);
+    g_vibratorInterface -> IsVibratorRunning({-1, 1}, state);
         EXPECT_EQ(state, false);
     }
 }
@@ -218,6 +218,6 @@ HWTEST_F(HatsHdfVibratorImplTest, SUB_Vibrator_HDI_IsVibratorRunningTest_0020, F
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
     bool state {false};
-    g_vibratorInterface -> IsVibratorRunning(state);
+    g_vibratorInterface -> IsVibratorRunning({-1, 1}, state);
     EXPECT_EQ(state, false);
 }

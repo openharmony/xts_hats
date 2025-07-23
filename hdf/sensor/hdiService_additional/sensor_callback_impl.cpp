@@ -14,13 +14,14 @@
  */
 
 #include "sensor_callback_impl.h"
+#include "../sensor_plug_callback_test/sensor_plug_callback_impl.h"
 #include "sensor_type.h"
 #include "osal_mem.h"
 
 namespace OHOS {
 namespace HDI {
 namespace Sensor {
-namespace V2_0 {
+namespace V3_0 {
 uint32_t SensorCallbackImpl::sensorDataFlag = 1;
 namespace {
 struct SensorValueRange {
@@ -100,7 +101,7 @@ int32_t SensorCallbackImpl::OnDataEvent(const HdfSensorEvents &event)
     }
 
     for (int i = 0; i < LIST_NUM; ++i) {
-        if (event.sensorId == g_sensorList[i].sensorTypeId) {
+        if (event.deviceSensorInfo.sensorType == g_sensorList[i].sensorTypeId) {
             data = reinterpret_cast<float *>(eventData);
             SensorDataVerification(*data, g_sensorList[i]);
         }
@@ -108,7 +109,7 @@ int32_t SensorCallbackImpl::OnDataEvent(const HdfSensorEvents &event)
     OsalMemFree(origin);
     return HDF_SUCCESS;
 }
-} // V2_0
+} // V3_0
 } // Sensor
 } // HDI
 } // OHOS

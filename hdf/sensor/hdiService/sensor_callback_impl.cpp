@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,7 +20,7 @@
 namespace OHOS {
 namespace HDI {
 namespace Sensor {
-namespace V2_0 {
+namespace V3_0 {
 uint32_t SensorCallbackImpl::sensorDataFlag = 1;
 namespace {
     struct SensorValueRange {
@@ -112,7 +112,7 @@ int32_t SensorCallbackImpl::OnDataEvent(const HdfSensorEvents& event)
     }
 
     for (int32_t i = 0; i < g_listNum; ++i) {
-        if (event.sensorId == g_sensorList[i].sensorTypeId) {
+        if (event.deviceSensorInfo.sensorType == g_sensorList[i].sensorTypeId) {
             float *data = reinterpret_cast<float*>(eventData);
             SensorDataVerification(*data, g_sensorList[i]);
         }
@@ -120,7 +120,7 @@ int32_t SensorCallbackImpl::OnDataEvent(const HdfSensorEvents& event)
     OsalMemFree(origin);
     return HDF_SUCCESS;
 }
-} // V2_0
+} // V3_0
 } // Sensor
 } // HDI
 } // OHOS

@@ -20,10 +20,10 @@
 #include <securec.h>
 #include "hdf_base.h"
 #include "osal_time.h"
-#include "v2_0/isensor_interface.h"
+#include "v3_0/isensor_interface.h"
 #include "sensor_type.h"
 #include "sensor_callback_impl.h"
-using namespace OHOS::HDI::Sensor::V2_0;
+using namespace OHOS::HDI::Sensor::V3_0;
 using namespace testing::ext;
 
 namespace {
@@ -72,17 +72,19 @@ namespace {
         {SENSOR_TYPE_HUMIDITY, "humidity", 1, 1, g_humidityRange},
         {SENSOR_TYPE_TEMPERATURE, "tenperature", 1, 1, g_temperatureRange}
     };
- 
-    int32_t IsSuppprtedSensorId(int32_t sensorTypeId)
+
+    int32_t IsSuppprtedSensorId(DeviceSensorInfo deviceSensorInfo)
     {
-      EXPECT_GT(g_info.size(),0);
-      for (auto iter : g_info){
-          if (iter.sensorId == sensorTypeId)
-          {
-            return SENSOR_SUCCESS;
-          }
-      }
-      return SENSOR_NOT_SUPPORT;
+        EXPECT_GT(g_info.size(), 0);
+        for (auto iter : g_info) {
+            if (iter.deviceSensorInfo.deviceId == deviceSensorInfo.deviceId &&
+                iter.deviceSensorInfo.sensorType == deviceSensorInfo.sensorType &&
+                iter.deviceSensorInfo.sensorId == deviceSensorInfo.sensorId &&
+                iter.deviceSensorInfo.location == deviceSensorInfo.location) {
+                return SENSOR_SUCCESS;
+            }
+        }
+        return SENSOR_NOT_SUPPORT;
     }
    
     constexpr int g_listNum = sizeof(g_sensorList) / sizeof(g_sensorList[0]);
@@ -159,9 +161,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_0200, TestSize.Level1)
     printf("get sensor list num[%zu]\n\r", g_info.size());
 
     for (auto iter : g_info) {
-        printf("get sensoriId[%d], info name[%s], power[%f]\n\r", iter.sensorId, iter.sensorName.c_str(), iter.power);
+        printf("get deviceId[%d]sensorType[%d]sensorId[%d]location[%d], info name[%s], power[%f]\n\r",
+               iter.deviceSensorInfo.deviceId, iter.deviceSensorInfo.sensorType, iter.deviceSensorInfo.sensorId,
+               iter.deviceSensorInfo.location, iter.sensorName.c_str(), iter.power);
         for (int j =0; j < g_listNum; ++j) {
-            if (iter.sensorId == g_sensorList[j].sensorTypeId) {
+            if (iter.deviceSensorInfo.sensorType == g_sensorList[j].sensorTypeId) {
                 EXPECT_GT(iter.sensorName.size(), 0);
                 break;
             }
@@ -237,12 +241,13 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_0700, TestSize.Level1)
     EXPECT_GT(g_info.size(), 0);
 
     for (auto iter : g_info) {
-        ret = g_sensorInterface->SetBatch(iter.sensorId, SENSOR_INTERVAL1, SENSOR_POLL_TIME);
+        ret = g_sensorInterface->SetBatch({-1, iter.deviceSensorInfo.sensorType, 0, 1}, SENSOR_INTERVAL1,
+            SENSOR_POLL_TIME);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
-        ret = g_sensorInterface->Enable(iter.sensorId);
+        ret = g_sensorInterface->Enable({-1, iter.deviceSensorInfo.sensorType, 0, 1});
         EXPECT_EQ(SENSOR_SUCCESS, ret);
         OsalSleep(SENSOR_POLL_TIME);
-        ret = g_sensorInterface->Disable(iter.sensorId);
+        ret = g_sensorInterface->Disable({-1, iter.deviceSensorInfo.sensorType, 0, 1});
         EXPECT_EQ(SENSOR_SUCCESS, ret);
     }
     ret = g_sensorInterface->Unregister(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
@@ -266,12 +271,13 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_0800, TestSize.Level1)
     EXPECT_EQ(SENSOR_SUCCESS, ret);
 
     for (auto iter : g_info) {
-        ret = g_sensorInterface->SetBatch(iter.sensorId, SENSOR_INTERVAL2, SENSOR_POLL_TIME);
+        ret = g_sensorInterface->SetBatch({-1, iter.deviceSensorInfo.sensorType, 0, 1},
+            SENSOR_INTERVAL2, SENSOR_POLL_TIME);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
-        ret = g_sensorInterface->Enable(iter.sensorId);
+        ret = g_sensorInterface->Enable({-1, iter.deviceSensorInfo.sensorType, 0, 1});
         EXPECT_EQ(SENSOR_SUCCESS, ret);
         OsalMSleep(SENSOR_WAIT_TIME3);
-        ret = g_sensorInterface->Disable(iter.sensorId);
+        ret = g_sensorInterface->Disable({-1, iter.deviceSensorInfo.sensorType, 0, 1});
         EXPECT_EQ(SENSOR_SUCCESS, ret);
     }
 
@@ -291,7 +297,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_0900, TestSize.Level1)
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    int32_t ret = g_sensorInterface->SetBatch(ABNORMAL_SENSORID, 0, 0);
+    int32_t ret = g_sensorInterface->SetBatch({-1, ABNORMAL_SENSORID, 0, 1}, 0, 0);
     EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
 }
 
@@ -307,7 +313,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_1000, TestSize.Level1)
         return;
     }
     for (auto iter : g_info) {
-        int32_t ret = g_sensorInterface->SetBatch(iter.sensorId, -1, SENSOR_POLL_TIME);
+        int32_t ret = g_sensorInterface->SetBatch({-1, iter.deviceSensorInfo.sensorType, 0, 1}, -1, SENSOR_POLL_TIME);
         EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
     }
 }
@@ -324,7 +330,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_1100, TestSize.Level1)
         return;
     }
     for (auto iter : g_info) {
-        int32_t ret = g_sensorInterface->SetBatch(iter.sensorId, -1, -1);
+        int32_t ret = g_sensorInterface->SetBatch({-1, iter.deviceSensorInfo.sensorType, 0, 1}, -1, -1);
         EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
     }
 }
@@ -341,7 +347,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_1200, TestSize.Level1)
         return;
     }
     for (auto iter : g_info) {
-        int32_t ret = g_sensorInterface->SetBatch(iter.sensorId, SENSOR_INTERVAL2, -1);
+        int32_t ret = g_sensorInterface->SetBatch({-1, iter.deviceSensorInfo.sensorType, 0, 1}, SENSOR_INTERVAL2, -1);
         EXPECT_EQ(SENSOR_INVALID_PARAM, ret);
     }
 }
@@ -359,19 +365,20 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_1400, TestSize.Level1)
     }
     EXPECT_GT(g_info.size(), 0);
     for (auto iter : g_info) {
-        int32_t ret = g_sensorInterface->SetBatch(iter.sensorId, SENSOR_INTERVAL1, SENSOR_POLL_TIME);
+        int32_t ret = g_sensorInterface->SetBatch({-1, iter.deviceSensorInfo.sensorType, 0, 1}, SENSOR_INTERVAL1,
+            SENSOR_POLL_TIME);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
-        if (iter.sensorId == SENSOR_TYPE_HALL) {
-            ret = g_sensorInterface->SetMode(iter.sensorId, SENSOR_MODE_ON_CHANGE);
+        if (iter.deviceSensorInfo.sensorType == SENSOR_TYPE_HALL) {
+            ret = g_sensorInterface->SetMode({-1, iter.deviceSensorInfo.sensorType, 0, 1}, SENSOR_MODE_ON_CHANGE);
             EXPECT_EQ(SENSOR_SUCCESS, ret);
         } else {
-            ret = g_sensorInterface->SetMode(iter.sensorId, SENSOR_MODE_REALTIME);
+            ret = g_sensorInterface->SetMode({-1, iter.deviceSensorInfo.sensorType, 0, 1}, SENSOR_MODE_REALTIME);
             EXPECT_EQ(SENSOR_SUCCESS, ret);
         }
-        ret = g_sensorInterface->Enable(iter.sensorId);
+        ret = g_sensorInterface->Enable({-1, iter.deviceSensorInfo.sensorType, 0, 1});
         EXPECT_EQ(SENSOR_SUCCESS, ret);
         OsalMSleep(SENSOR_WAIT_TIME3);
-        ret = g_sensorInterface->Disable(iter.sensorId);
+        ret = g_sensorInterface->Disable({-1, iter.deviceSensorInfo.sensorType, 0, 1});
         EXPECT_EQ(SENSOR_SUCCESS, ret);
     }
 }
@@ -389,19 +396,20 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_1500, TestSize.Level1)
     }
     EXPECT_GT(g_info.size(), 0);
     for (auto iter : g_info) {
-        int32_t ret = g_sensorInterface->SetBatch(iter.sensorId, SENSOR_INTERVAL1, SENSOR_POLL_TIME);
+        int32_t ret = g_sensorInterface->SetBatch({-1, iter.deviceSensorInfo.sensorType, 0, 1}, SENSOR_INTERVAL1,
+            SENSOR_POLL_TIME);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
-        if (iter.sensorId == SENSOR_TYPE_HALL) {
-            ret = g_sensorInterface->SetMode(iter.sensorId, SENSOR_MODE_ONE_SHOT);
+        if (iter.deviceSensorInfo.sensorType == SENSOR_TYPE_HALL) {
+            ret = g_sensorInterface->SetMode({-1, iter.deviceSensorInfo.sensorType, 0, 1}, SENSOR_MODE_ONE_SHOT);
             EXPECT_EQ(SENSOR_SUCCESS, ret);
         } else {
-            ret = g_sensorInterface->SetMode(iter.sensorId, SENSOR_MODE_REALTIME);
+            ret = g_sensorInterface->SetMode({-1, iter.deviceSensorInfo.sensorType, 0, 1}, SENSOR_MODE_REALTIME);
             EXPECT_EQ(SENSOR_SUCCESS, ret);
         }
-        ret = g_sensorInterface->Enable(iter.sensorId);
+        ret = g_sensorInterface->Enable({-1, iter.deviceSensorInfo.sensorType, 0, 1});
         EXPECT_EQ(SENSOR_SUCCESS, ret);
         OsalMSleep(SENSOR_WAIT_TIME3);
-        ret = g_sensorInterface->Disable(iter.sensorId);
+        ret = g_sensorInterface->Disable({-1, iter.deviceSensorInfo.sensorType, 0, 1});
         EXPECT_EQ(SENSOR_SUCCESS, ret);
     }
 }
@@ -419,19 +427,20 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_1600, TestSize.Level1)
     }
     EXPECT_GT(g_info.size(), 0);
     for (auto iter : g_info) {
-        int32_t ret = g_sensorInterface->SetBatch(iter.sensorId, SENSOR_INTERVAL1, SENSOR_POLL_TIME);
+        int32_t ret = g_sensorInterface->SetBatch({-1, iter.deviceSensorInfo.sensorType, 0, 1}, SENSOR_INTERVAL1,
+            SENSOR_POLL_TIME);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
-        if (iter.sensorId == SENSOR_TYPE_HALL) {
-            ret = g_sensorInterface->SetMode(iter.sensorId, SENSOR_MODE_FIFO_MODE);
+        if (iter.deviceSensorInfo.sensorType == SENSOR_TYPE_HALL) {
+            ret = g_sensorInterface->SetMode({-1, iter.deviceSensorInfo.sensorType, 0, 1}, SENSOR_MODE_FIFO_MODE);
             EXPECT_EQ(SENSOR_SUCCESS, ret);
         } else {
-            ret = g_sensorInterface->SetMode(iter.sensorId, SENSOR_MODE_REALTIME);
+            ret = g_sensorInterface->SetMode({-1, iter.deviceSensorInfo.sensorType, 0, 1}, SENSOR_MODE_REALTIME);
             EXPECT_EQ(SENSOR_SUCCESS, ret);
         }
-        ret = g_sensorInterface->Enable(iter.sensorId);
+        ret = g_sensorInterface->Enable({-1, iter.deviceSensorInfo.sensorType, 0, 1});
         EXPECT_EQ(SENSOR_SUCCESS, ret);
         OsalMSleep(SENSOR_WAIT_TIME3);
-        ret = g_sensorInterface->Disable(iter.sensorId);
+        ret = g_sensorInterface->Disable({-1, iter.deviceSensorInfo.sensorType, 0, 1});
         EXPECT_EQ(SENSOR_SUCCESS, ret);
     }
 }
@@ -449,7 +458,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_1700, TestSize.Level1)
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    int32_t ret = g_sensorInterface->SetMode(ABNORMAL_SENSORID, SENSOR_MODE_REALTIME);
+    int32_t ret = g_sensorInterface->SetMode({-1, ABNORMAL_SENSORID, 0, 1}, SENSOR_MODE_REALTIME);
     EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
 }
 
@@ -467,14 +476,15 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_1800, TestSize.Level1)
     }
     EXPECT_GT(g_info.size(), 0);
     for (auto iter : g_info) {
-        int32_t ret = g_sensorInterface->SetBatch(iter.sensorId, SENSOR_INTERVAL1, SENSOR_POLL_TIME);
+        int32_t ret = g_sensorInterface->SetBatch({-1, iter.deviceSensorInfo.sensorType, 0, 1},
+            SENSOR_INTERVAL1, SENSOR_POLL_TIME);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
-        ret = g_sensorInterface->SetMode(iter.sensorId, SENSOR_MODE_DEFAULT);
+        ret = g_sensorInterface->SetMode({-1, iter.deviceSensorInfo.sensorType, 0, 1}, SENSOR_MODE_DEFAULT);
         EXPECT_EQ(SENSOR_FAILURE, ret);
-        ret = g_sensorInterface->Enable(iter.sensorId);
+        ret = g_sensorInterface->Enable({-1, iter.deviceSensorInfo.sensorType, 0, 1});
         EXPECT_EQ(SENSOR_SUCCESS, ret);
         OsalMSleep(SENSOR_WAIT_TIME3);
-        ret = g_sensorInterface->Disable(iter.sensorId);
+        ret = g_sensorInterface->Disable({-1, iter.deviceSensorInfo.sensorType, 0, 1});
         EXPECT_EQ(SENSOR_SUCCESS, ret);
     }
 }
@@ -492,7 +502,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_1900, TestSize.Level1)
     }
     EXPECT_GT(g_info.size(), 0);
     for (auto iter : g_info) {
-        int32_t ret = g_sensorInterface->SetOption(iter.sensorId, 0);
+        int32_t ret = g_sensorInterface->SetOption({-1, iter.deviceSensorInfo.sensorType, 0, 1}, 0);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
     }
 }
@@ -508,7 +518,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2300, TestSize.Level1)
         ASSERT_NE(nullptr, g_sensorInterface);
         return;
     }
-    int32_t ret = g_sensorInterface->SetOption(ABNORMAL_SENSORID, 0);
+    int32_t ret = g_sensorInterface->SetOption({-1, ABNORMAL_SENSORID, 0, 1}, 0);
     EXPECT_EQ(SENSOR_NOT_SUPPORT, ret);
 }
 
@@ -524,11 +534,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2400, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_NONE);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_NONE);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_NONE, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_NONE, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_NONE);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_NONE, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -544,13 +554,14 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2500, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_ACCELEROMETER);
-    int32_t ret = g_sensorInterface->SetBatch(SENSOR_TYPE_ACCELEROMETER, SENSOR_INTERVAL1, SENSOR_POLL_TIME);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_ACCELEROMETER, 0, 1});
+    int32_t ret = g_sensorInterface->SetBatch({-1, SENSOR_TYPE_ACCELEROMETER, 0, 1},
+        SENSOR_INTERVAL1, SENSOR_POLL_TIME);
     EXPECT_EQ(status,ret);
-    ret = g_sensorInterface->Enable(SENSOR_TYPE_ACCELEROMETER);
+    ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_ACCELEROMETER, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_ACCELEROMETER);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_ACCELEROMETER, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -566,13 +577,13 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2600, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_GYROSCOPE);
-    int32_t ret = g_sensorInterface->SetBatch(SENSOR_TYPE_GYROSCOPE, SENSOR_INTERVAL1, SENSOR_POLL_TIME);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_GYROSCOPE, 0, 1});
+    int32_t ret = g_sensorInterface->SetBatch({-1, SENSOR_TYPE_GYROSCOPE, 0, 1}, SENSOR_INTERVAL1, SENSOR_POLL_TIME);
     EXPECT_EQ(status,ret);
-    ret = g_sensorInterface->Enable(SENSOR_TYPE_GYROSCOPE);
+    ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_GYROSCOPE, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_GYROSCOPE);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_GYROSCOPE, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -588,11 +599,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2700, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_PHOTOPLETHYSMOGRAPH);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_PHOTOPLETHYSMOGRAPH);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_PHOTOPLETHYSMOGRAPH, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_PHOTOPLETHYSMOGRAPH, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_PHOTOPLETHYSMOGRAPH);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_PHOTOPLETHYSMOGRAPH, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -608,11 +619,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2800, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_ELECTROCARDIOGRAPH);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_ELECTROCARDIOGRAPH);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_ELECTROCARDIOGRAPH, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_ELECTROCARDIOGRAPH, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_ELECTROCARDIOGRAPH);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_ELECTROCARDIOGRAPH, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -628,13 +639,14 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_2900, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_AMBIENT_LIGHT);
-    int32_t ret = g_sensorInterface->SetBatch(SENSOR_TYPE_AMBIENT_LIGHT, SENSOR_INTERVAL1, SENSOR_POLL_TIME);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_AMBIENT_LIGHT, 0, 1});
+    int32_t ret = g_sensorInterface->SetBatch({-1, SENSOR_TYPE_AMBIENT_LIGHT, 0, 1}, SENSOR_INTERVAL1,
+        SENSOR_POLL_TIME);
     EXPECT_EQ(status,ret);
-    ret = g_sensorInterface->Enable(SENSOR_TYPE_AMBIENT_LIGHT);
+    ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_AMBIENT_LIGHT, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_AMBIENT_LIGHT);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_AMBIENT_LIGHT, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -650,13 +662,14 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3100, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_MAGNETIC_FIELD);
-    int32_t ret = g_sensorInterface->SetBatch(SENSOR_TYPE_MAGNETIC_FIELD, SENSOR_INTERVAL1, SENSOR_POLL_TIME);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_MAGNETIC_FIELD, 0, 1});
+    int32_t ret = g_sensorInterface->SetBatch({-1, SENSOR_TYPE_MAGNETIC_FIELD, 0, 1},
+        SENSOR_INTERVAL1, SENSOR_POLL_TIME);
     EXPECT_EQ(status,ret);
-    ret = g_sensorInterface->Enable(SENSOR_TYPE_MAGNETIC_FIELD);
+    ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_MAGNETIC_FIELD, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_MAGNETIC_FIELD);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_MAGNETIC_FIELD, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -672,11 +685,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3200, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_CAPACITIVE);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_CAPACITIVE);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_CAPACITIVE, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_CAPACITIVE, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_CAPACITIVE);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_CAPACITIVE, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -692,13 +705,13 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3300, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_BAROMETER);
-    int32_t ret = g_sensorInterface->SetBatch(SENSOR_TYPE_BAROMETER, SENSOR_INTERVAL1, SENSOR_POLL_TIME);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_BAROMETER, 0, 1});
+    int32_t ret = g_sensorInterface->SetBatch({-1, SENSOR_TYPE_BAROMETER, 0, 1}, SENSOR_INTERVAL1, SENSOR_POLL_TIME);
     EXPECT_EQ(status,ret);
-    ret = g_sensorInterface->Enable(SENSOR_TYPE_BAROMETER);
+    ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_BAROMETER, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_BAROMETER);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_BAROMETER, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -714,11 +727,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3400, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_TEMPERATURE);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_TEMPERATURE);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_TEMPERATURE, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_TEMPERATURE, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_TEMPERATURE);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_TEMPERATURE, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -734,11 +747,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3500, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_HALL);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_HALL);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_HALL, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_HALL, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_HALL);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_HALL, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -754,11 +767,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3600, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_GESTURE);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_GESTURE);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_GESTURE, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_GESTURE, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_GESTURE);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_GESTURE, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -774,11 +787,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3700, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_PROXIMITY);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_PROXIMITY);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_PROXIMITY, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_PROXIMITY, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_PROXIMITY);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_PROXIMITY, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -794,11 +807,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3800, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_HUMIDITY);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_HUMIDITY);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_HUMIDITY, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_HUMIDITY, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_HUMIDITY);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_HUMIDITY, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -814,11 +827,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5100, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_MEDICAL_BEGIN);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_MEDICAL_BEGIN);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_MEDICAL_BEGIN, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_MEDICAL_BEGIN, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_MEDICAL_BEGIN);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_MEDICAL_BEGIN, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -834,11 +847,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5200, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_MEDICAL_END);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_MEDICAL_END);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_MEDICAL_END, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_MEDICAL_END, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_MEDICAL_END);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_MEDICAL_END, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -854,11 +867,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5300, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_PHYSICAL_MAX);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_PHYSICAL_MAX);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_PHYSICAL_MAX, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_PHYSICAL_MAX, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_PHYSICAL_MAX);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_PHYSICAL_MAX, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -874,11 +887,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5400, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_ORIENTATION);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_ORIENTATION);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_ORIENTATION, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_ORIENTATION, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_ORIENTATION);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_ORIENTATION, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -894,11 +907,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5500, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_GRAVITY);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_GRAVITY);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_GRAVITY, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_GRAVITY, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_GRAVITY);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_GRAVITY, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -914,11 +927,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5600, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_LINEAR_ACCELERATION);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_LINEAR_ACCELERATION);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_LINEAR_ACCELERATION, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_LINEAR_ACCELERATION, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_LINEAR_ACCELERATION);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_LINEAR_ACCELERATION, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -934,11 +947,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5700, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_ROTATION_VECTOR);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_ROTATION_VECTOR);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_ROTATION_VECTOR, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_ROTATION_VECTOR, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_ROTATION_VECTOR);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_ROTATION_VECTOR, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -954,11 +967,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5800, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_AMBIENT_TEMPERATURE);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_AMBIENT_TEMPERATURE);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_AMBIENT_TEMPERATURE, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_AMBIENT_TEMPERATURE, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_AMBIENT_TEMPERATURE);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_AMBIENT_TEMPERATURE, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -974,11 +987,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_5900, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_MAGNETIC_FIELD_UNCALIBRATED);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_MAGNETIC_FIELD_UNCALIBRATED);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_MAGNETIC_FIELD_UNCALIBRATED, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_MAGNETIC_FIELD_UNCALIBRATED, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_MAGNETIC_FIELD_UNCALIBRATED);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_MAGNETIC_FIELD_UNCALIBRATED, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -994,11 +1007,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6000, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_GAME_ROTATION_VECTOR);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_GAME_ROTATION_VECTOR);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_GAME_ROTATION_VECTOR, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_GAME_ROTATION_VECTOR, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_GAME_ROTATION_VECTOR);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_GAME_ROTATION_VECTOR, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -1014,11 +1027,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6100, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_GYROSCOPE_UNCALIBRATED);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_GYROSCOPE_UNCALIBRATED);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_GYROSCOPE_UNCALIBRATED, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_GYROSCOPE_UNCALIBRATED, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_GYROSCOPE_UNCALIBRATED);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_GYROSCOPE_UNCALIBRATED, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -1034,11 +1047,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6200, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_SIGNIFICANT_MOTION);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_SIGNIFICANT_MOTION);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_SIGNIFICANT_MOTION, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_SIGNIFICANT_MOTION, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_SIGNIFICANT_MOTION);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_SIGNIFICANT_MOTION, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -1054,11 +1067,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6300, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_PEDOMETER_DETECTION);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_PEDOMETER_DETECTION);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_PEDOMETER_DETECTION, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_PEDOMETER_DETECTION, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_PEDOMETER_DETECTION);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_PEDOMETER_DETECTION, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -1074,11 +1087,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6400, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_PEDOMETER);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_PEDOMETER);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_PEDOMETER, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_PEDOMETER, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_PEDOMETER);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_PEDOMETER, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -1094,11 +1107,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6500, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_GEOMAGNETIC_ROTATION_VECTOR);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_GEOMAGNETIC_ROTATION_VECTOR);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_GEOMAGNETIC_ROTATION_VECTOR, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_GEOMAGNETIC_ROTATION_VECTOR, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_GEOMAGNETIC_ROTATION_VECTOR);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_GEOMAGNETIC_ROTATION_VECTOR, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -1114,11 +1127,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6600, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_HEART_RATE);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_HEART_RATE);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_HEART_RATE, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_HEART_RATE, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_HEART_RATE);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_HEART_RATE, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -1134,11 +1147,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6700, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_DEVICE_ORIENTATION);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_DEVICE_ORIENTATION);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_DEVICE_ORIENTATION, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_DEVICE_ORIENTATION, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_DEVICE_ORIENTATION);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_DEVICE_ORIENTATION, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -1154,11 +1167,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6800, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_WEAR_DETECTION);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_WEAR_DETECTION);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_WEAR_DETECTION, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_WEAR_DETECTION, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_WEAR_DETECTION);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_WEAR_DETECTION, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -1174,11 +1187,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_6900, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_ACCELEROMETER_UNCALIBRATED);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_ACCELEROMETER_UNCALIBRATED);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_ACCELEROMETER_UNCALIBRATED, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_ACCELEROMETER_UNCALIBRATED, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_ACCELEROMETER_UNCALIBRATED);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_ACCELEROMETER_UNCALIBRATED, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -1194,11 +1207,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7000, TestSize.Level1)
         return;
     }
 
-    int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_MAX);
-    int32_t ret = g_sensorInterface->Enable(SENSOR_TYPE_MAX);
+    int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_MAX, 0, 1});
+    int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_MAX, 0, 1});
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
-    ret = g_sensorInterface->Disable(SENSOR_TYPE_MAX);
+    ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_MAX, 0, 1});
     EXPECT_EQ(status,ret);
 }
 
@@ -1212,7 +1225,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7200, TestSize.Level1)
     ASSERT_NE(nullptr, g_sensorInterface);
 
     EXPECT_GT(g_info.size(), 0);
-    std::vector<OHOS::HDI::Sensor::V2_0::SdcSensorInfo> sdcSensorInfo;
+    std::vector<OHOS::HDI::Sensor::V3_0::SdcSensorInfo> sdcSensorInfo;
     int32_t ret = g_sensorInterface->GetSdcSensorInfo(sdcSensorInfo);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
     std::string infoMsg = "[";
@@ -1222,7 +1235,7 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7200, TestSize.Level1)
         }
         infoMsg += "{";
         infoMsg += "offset = " + std::to_string(it.offset) + ", ";
-        infoMsg += "sensorId = " + std::to_string(it.sensorId) + ", ";
+        infoMsg += "sensorId = " + std::to_string(it.deviceSensorInfo.sensorType) + ", ";
         infoMsg += "ddrSize = " + std::to_string(it.ddrSize) + ", ";
         infoMsg += "minRateLevel = " + std::to_string(it.minRateLevel) + ", ";
         infoMsg += "maxRateLevel = " + std::to_string(it.maxRateLevel) + ", ";
@@ -1246,17 +1259,17 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7300, TestSize.Level1)
     EXPECT_EQ(SENSOR_SUCCESS, ret);
 
     EXPECT_GT(g_info.size(), 0);
-    int32_t sensorId = g_info[0].sensorId;
+    int32_t sensorId = g_info[0].deviceSensorInfo.sensorType;
 
-    ret = g_sensorInterface->SetBatch(sensorId, SENSOR_INTERVAL1, SENSOR_INTERVAL1);
+    ret = g_sensorInterface->SetBatch({-1, sensorId, 0, 1}, SENSOR_INTERVAL1, SENSOR_INTERVAL1);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
 
-    ret = g_sensorInterface->Enable(sensorId);
+    ret = g_sensorInterface->Enable({-1, sensorId, 0, 1});
     EXPECT_EQ(SENSOR_SUCCESS, ret);
 
     OsalMSleep(SENSOR_WAIT_TIME2);
 
-    ret = g_sensorInterface->Disable(sensorId);
+    ret = g_sensorInterface->Disable({-1, sensorId, 0, 1});
     EXPECT_EQ(SENSOR_SUCCESS, ret);
 
     ret = g_sensorInterface->Unregister(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
@@ -1279,17 +1292,17 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7400, TestSize.Level1)
     EXPECT_EQ(SENSOR_SUCCESS, ret);
 
     EXPECT_GT(g_info.size(), 0);
-    int32_t sensorId = g_info[0].sensorId;
+    int32_t sensorId = g_info[0].deviceSensorInfo.sensorType;
 
-    ret = g_sensorInterface->SetBatch(sensorId, SENSOR_INTERVAL3, SENSOR_INTERVAL1);
+    ret = g_sensorInterface->SetBatch({-1, sensorId, 0, 1}, SENSOR_INTERVAL3, SENSOR_INTERVAL1);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
 
-    ret = g_sensorInterface->Enable(sensorId);
+    ret = g_sensorInterface->Enable({-1, sensorId, 0, 1});
     EXPECT_EQ(SENSOR_SUCCESS, ret);
 
     OsalMSleep(SENSOR_WAIT_TIME2);
 
-    ret = g_sensorInterface->Disable(sensorId);
+    ret = g_sensorInterface->Disable({-1, sensorId, 0, 1});
     EXPECT_EQ(SENSOR_SUCCESS, ret);
 
     ret = g_sensorInterface->Unregister(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
@@ -1312,17 +1325,17 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7500, TestSize.Level1)
     EXPECT_EQ(SENSOR_SUCCESS, ret);
 
     EXPECT_GT(g_info.size(), 0);
-    int32_t sensorId = g_info[0].sensorId;
+    int32_t sensorId = g_info[0].deviceSensorInfo.sensorType;
 
-    ret = g_sensorInterface->SetBatch(sensorId, SENSOR_INTERVAL4, SENSOR_INTERVAL1);
+    ret = g_sensorInterface->SetBatch({-1, sensorId, 0, 1}, SENSOR_INTERVAL4, SENSOR_INTERVAL1);
     EXPECT_EQ(SENSOR_SUCCESS, ret);
 
-    ret = g_sensorInterface->Enable(sensorId);
+    ret = g_sensorInterface->Enable({-1, sensorId, 0, 1});
     EXPECT_EQ(SENSOR_SUCCESS, ret);
 
     OsalMSleep(SENSOR_WAIT_TIME2);
 
-    ret = g_sensorInterface->Disable(sensorId);
+    ret = g_sensorInterface->Disable({-1, sensorId, 0, 1});
     EXPECT_EQ(SENSOR_SUCCESS, ret);
 
     ret = g_sensorInterface->Unregister(TRADITIONAL_SENSOR_TYPE, g_traditionalCallback);
@@ -1341,10 +1354,10 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7600, TestSize.Level1)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
     EXPECT_GT(g_info.size(), 0);
-        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_ELECTROCARDIOGRAPH, true, RATE_LEVEL);
+        int32_t ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_ELECTROCARDIOGRAPH, 0, 1}, true, RATE_LEVEL);
         EXPECT_NE(SENSOR_SUCCESS, ret);
         OsalMSleep(SENSOR_WAIT_TIME);
-        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_ELECTROCARDIOGRAPH, false, RATE_LEVEL);
+        ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_ELECTROCARDIOGRAPH, 0, 1}, false, RATE_LEVEL);
         EXPECT_NE(SENSOR_SUCCESS, ret);
 }
 
@@ -1357,11 +1370,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7700, TestSize.Level1)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
     EXPECT_GT(g_info.size(), 0);
-        int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_ACCELEROMETER);
-        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_ACCELEROMETER, true, RATE_LEVEL);
+        int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_ACCELEROMETER, 0, 1});
+        int32_t ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_ACCELEROMETER, 0, 1}, true, RATE_LEVEL);
         EXPECT_EQ(status, ret);
         OsalMSleep(SENSOR_WAIT_TIME);
-        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_ACCELEROMETER, false, RATE_LEVEL);
+        ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_ACCELEROMETER, 0, 1}, false, RATE_LEVEL);
         EXPECT_EQ(status, ret);
 }
 
@@ -1374,11 +1387,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7800, TestSize.Level1)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
     EXPECT_GT(g_info.size(), 0);
-        int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_NONE);
-        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_NONE, true, RATE_LEVEL);
+        int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_NONE, 0, 1});
+        int32_t ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_NONE, 0, 1}, true, RATE_LEVEL);
         EXPECT_EQ(status, ret);
         OsalMSleep(SENSOR_WAIT_TIME);
-        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_NONE, false, RATE_LEVEL);
+        ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_NONE, 0, 1}, false, RATE_LEVEL);
         EXPECT_EQ(status, ret);
 }
 
@@ -1391,11 +1404,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_7900, TestSize.Level1)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
     EXPECT_GT(g_info.size(), 0);
-        int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_GYROSCOPE);
-        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_GYROSCOPE, true, RATE_LEVEL);
+        int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_GYROSCOPE, 0, 1});
+        int32_t ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_GYROSCOPE, 0, 1}, true, RATE_LEVEL);
         EXPECT_EQ(status, ret);
         OsalMSleep(SENSOR_WAIT_TIME);
-        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_GYROSCOPE, false, RATE_LEVEL);
+        ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_GYROSCOPE, 0, 1}, false, RATE_LEVEL);
         EXPECT_EQ(status, ret);
 }
 
@@ -1408,10 +1421,10 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8000, TestSize.Level1)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
     EXPECT_GT(g_info.size(), 0);
-        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_PHOTOPLETHYSMOGRAPH, true, RATE_LEVEL);
+        int32_t ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_PHOTOPLETHYSMOGRAPH, 0, 1}, true, RATE_LEVEL);
         EXPECT_NE(SENSOR_SUCCESS, ret);
         OsalMSleep(SENSOR_WAIT_TIME);
-        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_PHOTOPLETHYSMOGRAPH, false, RATE_LEVEL);
+        ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_PHOTOPLETHYSMOGRAPH, 0, 1}, false, RATE_LEVEL);
         EXPECT_NE(SENSOR_SUCCESS, ret);
 }
 
@@ -1424,11 +1437,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8100, TestSize.Level1)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
     EXPECT_GT(g_info.size(), 0);
-        int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_AMBIENT_LIGHT);
-        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_AMBIENT_LIGHT, true, RATE_LEVEL);
+        int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_AMBIENT_LIGHT, 0, 1});
+        int32_t ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_AMBIENT_LIGHT, 0, 1}, true, RATE_LEVEL);
         EXPECT_EQ(status, ret);
         OsalMSleep(SENSOR_WAIT_TIME);
-        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_AMBIENT_LIGHT, false, RATE_LEVEL);
+        ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_AMBIENT_LIGHT, 0, 1}, false, RATE_LEVEL);
         EXPECT_EQ(status, ret);
 }
 
@@ -1441,11 +1454,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8200, TestSize.Level1)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
     EXPECT_GT(g_info.size(), 0);
-        int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_MAGNETIC_FIELD);
-        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_MAGNETIC_FIELD, true, RATE_LEVEL);
+        int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_MAGNETIC_FIELD, 0, 1});
+        int32_t ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_MAGNETIC_FIELD, 0, 1}, true, RATE_LEVEL);
         EXPECT_EQ(status, ret);
         OsalMSleep(SENSOR_WAIT_TIME);
-        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_MAGNETIC_FIELD, false, RATE_LEVEL);
+        ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_MAGNETIC_FIELD, 0, 1}, false, RATE_LEVEL);
         EXPECT_EQ(status, ret);
 }
 
@@ -1458,10 +1471,10 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8300, TestSize.Level1)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
     EXPECT_GT(g_info.size(), 0);
-        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_CAPACITIVE, true, RATE_LEVEL);
+        int32_t ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_CAPACITIVE, 0, 1}, true, RATE_LEVEL);
         EXPECT_NE(SENSOR_SUCCESS, ret);
         OsalMSleep(SENSOR_WAIT_TIME);
-        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_CAPACITIVE, false, RATE_LEVEL);
+        ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_CAPACITIVE, 0, 1}, false, RATE_LEVEL);
         EXPECT_NE(SENSOR_SUCCESS, ret);
 }
 
@@ -1474,11 +1487,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8400, TestSize.Level1)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
     EXPECT_GT(g_info.size(), 0);
-        int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_BAROMETER);
-        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_BAROMETER, true, RATE_LEVEL);
+        int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_BAROMETER, 0, 1});
+        int32_t ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_BAROMETER, 0, 1}, true, RATE_LEVEL);
         EXPECT_EQ(status, ret);
         OsalMSleep(SENSOR_WAIT_TIME);
-        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_BAROMETER, false, RATE_LEVEL);
+        ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_BAROMETER, 0, 1}, false, RATE_LEVEL);
         EXPECT_EQ(status, ret);
 }
 
@@ -1491,10 +1504,10 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8500, TestSize.Level1)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
     EXPECT_GT(g_info.size(), 0);
-        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_TEMPERATURE, true, RATE_LEVEL);
+        int32_t ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_TEMPERATURE, 0, 1}, true, RATE_LEVEL);
         EXPECT_NE(SENSOR_SUCCESS, ret);
         OsalMSleep(SENSOR_WAIT_TIME);
-        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_TEMPERATURE, false, RATE_LEVEL);
+        ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_TEMPERATURE, 0, 1}, false, RATE_LEVEL);
         EXPECT_NE(SENSOR_SUCCESS, ret);
 }
 
@@ -1507,11 +1520,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8600, TestSize.Level1)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
     EXPECT_GT(g_info.size(), 0);
-        int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_HALL);
-        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_HALL, true, RATE_LEVEL);
+        int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_HALL, 0, 1});
+        int32_t ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_HALL, 0, 1}, true, RATE_LEVEL);
         EXPECT_EQ(status, ret);
         OsalMSleep(SENSOR_WAIT_TIME);
-        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_HALL, false, RATE_LEVEL);
+        ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_HALL, 0, 1}, false, RATE_LEVEL);
         EXPECT_EQ(status, ret);
 }
 
@@ -1524,10 +1537,10 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_8700, TestSize.Level1)
 {
     ASSERT_NE(nullptr, g_sensorInterface);
     EXPECT_GT(g_info.size(), 0);
-        int32_t status = IsSuppprtedSensorId(SENSOR_TYPE_GESTURE);
-        int32_t ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_GESTURE, true, RATE_LEVEL);
+        int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_GESTURE, 0, 1});
+        int32_t ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_GESTURE, 0, 1}, true, RATE_LEVEL);
         EXPECT_EQ(status, ret);
         OsalMSleep(SENSOR_WAIT_TIME);
-        ret = g_sensorInterface->SetSdcSensor(SENSOR_TYPE_GESTURE, false, RATE_LEVEL);
+        ret = g_sensorInterface->SetSdcSensor({-1, SENSOR_TYPE_GESTURE, 0, 1}, false, RATE_LEVEL);
         EXPECT_EQ(status, ret);
 }

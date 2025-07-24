@@ -1,4 +1,4 @@
-# Copyright (c) 2023-2025 Huawei Device Co., Ltd.
+# Copyright (c) 2025 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -11,24 +11,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-base_root = "../../../../../.."
+base_root = "../../../../../../"
 import("//build/ohos_var.gni")
+import("//drivers/peripheral/vibrator/vibrator.gni")
 import("//test/xts/tools/build/suite.gni")
-import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 
-module_output_path = "hats/sensor"
-
-ohos_moduletest_suite("HatsHdfSensorServiceAdditionalTest") {
+module_output_path = "hats/misc"
+ohos_moduletest_suite("HatsHdfVibratorPlugCallbackTest") {
   module_out_path = module_output_path
 
-  configs = [ ":hdf_sensor_hdiservice_additional" ]
+  configs = [ ":hdf_vibrator_hdiservice" ]
+  sources = [ "HdfVibratorPlugCallbackTest.cpp" ]
 
-  deps = [ "../../../../../../drivers/peripheral/sensor/hal:hdi_sensor" ]
-
-  sources = [
-    "hdf_sensor_hdiService_test.cpp",
-    "sensor_callback_impl.cpp",
-  ]
   cflags = [
     "-Wall",
     "-Wextra",
@@ -40,23 +34,22 @@ ohos_moduletest_suite("HatsHdfSensorServiceAdditionalTest") {
 
   if (is_standard_system) {
     external_deps = [
-      "c_utils:utils",
-      "drivers_interface_sensor:libsensor_proxy_3.0",
+      "drivers_interface_vibrator:libvibrator_proxy_2.0",
       "hdf_core:libhdf_utils",
       "hilog:libhilog",
       "ipc:ipc_single",
     ]
+    if (c_utils_enable) {
+      external_deps += [ "c_utils:utils" ]
+    }
   } else {
     external_deps = [ "hilog:libhilog" ]
   }
   external_deps += [ "ipc:ipc_single" ]
   subsystem_name = "hdf"
-  part_name = "drivers_interface_sensor"
+  part_name = "drivers_interface_vibrator"
 }
 
-config("hdf_sensor_hdiservice_additional") {
-  include_dirs = [
-    "$base_root/drivers/peripheral/sensor/interfaces",
-    "$base_root/drivers/peripheral/sensor/interfaces/include",
-  ]
+config("hdf_vibrator_hdiservice") {
+  include_dirs = [ "$base_root/drivers/peripheral/vibrator/interfaces/include" ]
 }

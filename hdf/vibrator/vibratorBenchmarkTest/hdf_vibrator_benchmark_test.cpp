@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -73,12 +73,12 @@ BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0100)(benchma
     int32_t startRet;
     int32_t endRet;
     for (auto _ : st) {
-        startRet = g_vibratorInterface->StartOnce(g_duration);
+        startRet = g_vibratorInterface->StartOnce({-1, 1}, g_duration);
         EXPECT_EQ(startRet, HDF_SUCCESS);
 
         OsalMSleep(g_sleepTime1);
 
-        endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_ONCE);
+        endRet = g_vibratorInterface->Stop({-1, 1}, HDF_VIBRATOR_MODE_ONCE);
         EXPECT_EQ(endRet, HDF_SUCCESS);
     }
 }
@@ -99,12 +99,12 @@ BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0200)(benchma
     int32_t startRet;
     int32_t endRet;
     for (auto _ : st) {
-        startRet = g_vibratorInterface->Start(g_timeSequence);
+        startRet = g_vibratorInterface->Start({-1, 1}, g_timeSequence);
         EXPECT_EQ(startRet, HDF_SUCCESS);
 
         OsalMSleep(g_sleepTime2);
 
-        endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_PRESET);
+        endRet = g_vibratorInterface->Stop({-1, 1}, HDF_VIBRATOR_MODE_PRESET);
         EXPECT_EQ(endRet, HDF_SUCCESS);
     }
 }
@@ -125,12 +125,12 @@ BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0300)(benchma
     int32_t endRet;
 
     for (auto _ : st) {
-        startRet = g_vibratorInterface->Start(g_builtIn);
+        startRet = g_vibratorInterface->Start({-1, 1}, g_builtIn);
         EXPECT_EQ(startRet, HDF_SUCCESS);
 
         OsalMSleep(g_sleepTime1);
 
-        endRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_PRESET);
+        endRet = g_vibratorInterface->Stop({-1, 1}, HDF_VIBRATOR_MODE_PRESET);
         EXPECT_EQ(endRet, HDF_SUCCESS);
     }
 }
@@ -202,10 +202,10 @@ BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0500)(benchma
             EXPECT_GE(g_frequency1, info[0].frequencyMinValue);
             EXPECT_LE(g_frequency1, info[0].frequencyMaxValue);
             printf("vibratot benchmark test successed!\n\t");
-            startRet = g_vibratorInterface->EnableVibratorModulation(g_duration, g_intensity1, g_frequency1);
+            startRet = g_vibratorInterface->EnableVibratorModulation({-1, 1}, g_duration, g_intensity1, g_frequency1);
             EXPECT_EQ(startRet, HDF_SUCCESS);
             OsalMSleep(g_sleepTime1);
-            startRet = g_vibratorInterface->Stop(HDF_VIBRATOR_MODE_ONCE);
+            startRet = g_vibratorInterface->Stop({-1, 1}, HDF_VIBRATOR_MODE_ONCE);
             EXPECT_EQ(startRet, HDF_SUCCESS);
         }
     }
@@ -296,7 +296,7 @@ BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_0900)(benchma
     ASSERT_NE(nullptr, g_vibratorInterface);
     int32_t startRet;
     for (auto _ : state) {
-    startRet = g_vibratorInterface->StartByIntensity(g_effect1, g_intensity3);
+    startRet = g_vibratorInterface->StartByIntensity({-1, 1}, g_effect1, g_intensity3);
     }
     EXPECT_EQ(startRet, HDF_SUCCESS);
 
@@ -317,7 +317,7 @@ BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_1000)(benchma
     ASSERT_NE(nullptr, g_vibratorInterface);
     int32_t startRet;
     for (auto _ : state) {
-    startRet = g_vibratorInterface->PlayHapticPattern(g_pkg);
+    startRet = g_vibratorInterface->PlayHapticPattern({-1, 1}, g_pkg);
     }
     EXPECT_EQ(startRet, HDF_SUCCESS);
 
@@ -339,7 +339,7 @@ BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_1100)(benchma
     OHOS::HDI::Vibrator::V1_2::HapticCapacity hapticCapacity;
     int32_t startRet;
     for (auto _ : state) {
-    startRet = g_vibratorInterface->GetHapticCapacity(hapticCapacity);
+    startRet = g_vibratorInterface->GetHapticCapacity({-1, 1}, hapticCapacity);
     }
     EXPECT_EQ(startRet, HDF_SUCCESS);
     printf("hapticCapacity.isSupportHdHaptic = %d\n", hapticCapacity.isSupportHdHaptic);
@@ -365,7 +365,7 @@ BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_1200)(benchma
     int32_t mode = 0;
     int32_t startRet;
     for (auto _ : state) {
-    startRet = g_vibratorInterface->GetHapticStartUpTime(mode, startUpTime);
+    startRet = g_vibratorInterface->GetHapticStartUpTime({-1, 1}, mode, startUpTime);
     }
     EXPECT_EQ(startRet, HDF_SUCCESS);
     printf("startUpTime = %d\n", startUpTime);
@@ -388,7 +388,7 @@ BENCHMARK_F(vibratorBenchmarkTest, SUB_Driver_Sensor_VibaratorPerf_1300)(benchma
     int32_t startRet;
     int32_t endRet;
     for (auto _ : st) {
-    startRet = g_vibratorInterface->StartOnce(g_duration);
+    startRet = g_vibratorInterface->StartOnce({-1, 1}, g_duration);
 
     OsalMSleep(g_sleepTime1);
 

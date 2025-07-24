@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,11 +18,11 @@
 #include <securec.h>
 #include "hdf_base.h"
 #include "osal_time.h"
-#include "v1_2/ivibrator_interface.h"
+#include "v2_0/ivibrator_interface.h"
 #include "vibrator_type.h"
 
 using namespace OHOS::HDI::Vibrator;
-using namespace OHOS::HDI::Vibrator::V1_2;
+using namespace OHOS::HDI::Vibrator::V2_0;
 using namespace testing::ext;
 
 namespace {
@@ -34,7 +34,7 @@ namespace {
     int32_t g_intensity2 = -30;
     int32_t g_frequency1 = 200;
     int32_t g_frequency2 = -200;
-    V1_2::HapticPaket g_pkg = {434, 1, {{V1_2::CONTINUOUS, 0, 149, 100, 50, 0, 4,
+    V2_0::HapticPaket g_pkg = {434, 1, {{V2_0::CONTINUOUS, 0, 149, 100, 50, 0, 4,
         {{0, 0, 0}, {1, 1, 0}, {32, 1, -39}, {149, 0, -39}}}}};
     constexpr int32_t MIN_DURATION = 0;
     constexpr int32_t MAX_DURATION = 3600000;
@@ -44,7 +44,7 @@ namespace {
     std::string g_builtIn = "haptic.default.effect";
     std::string g_effect1 = "haptic.long_press.light";
     std::string g_arbitraryStr = "arbitraryString";
-    sptr<OHOS::HDI::Vibrator::V1_2::IVibratorInterface> g_vibratorInterface = nullptr;
+    sptr<OHOS::HDI::Vibrator::V2_0::IVibratorInterface> g_vibratorInterface = nullptr;
 }
 
 class HdfVibratorHdiServiceTest : public testing::Test {
@@ -57,7 +57,7 @@ public:
 
 void HdfVibratorHdiServiceTest::SetUpTestCase()
 {
-    g_vibratorInterface = OHOS::HDI::Vibrator::V1_2::IVibratorInterface::Get();
+    g_vibratorInterface = OHOS::HDI::Vibrator::V2_0::IVibratorInterface::Get();
 }
 
 void HdfVibratorHdiServiceTest::TearDownTestCase()
@@ -73,7 +73,7 @@ void HdfVibratorHdiServiceTest::TearDown()
 }
 
 /**
-  * @tc.name: CheckVibratorInstanceIsEmpty
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_0100
   * @tc.desc: Creat a vibrator instance. The instance is not empty.
   * @tc.type: FUNC
   */
@@ -83,7 +83,7 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_0100, Function
 }
 
 /**
-  * @tc.name: PerformOneShotVibratorDuration001
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_0200
   * @tc.desc: Controls this vibrator to perform a one-shot vibrator at a given duration.
   * Controls this vibrator to stop the vibrator
   * @tc.type: FUNC
@@ -92,17 +92,17 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_0200, Function
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
-    int32_t startRet = g_vibratorInterface->StartOnce(g_duration);
+    int32_t startRet = g_vibratorInterface->StartOnce({-1, 1}, g_duration);
     EXPECT_EQ(startRet, HDF_SUCCESS);
 
     OsalMSleep(g_sleepTime1);
 
-    int32_t endRet = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_ONCE);
+    int32_t endRet = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_ONCE);
     EXPECT_EQ(endRet, HDF_SUCCESS);
 }
 
 /**
-  * @tc.name: PerformOneShotVibratorDuration002
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_0300
   * @tc.desc: Controls this vibrator to perform a one-shot vibrator at 0 millisecond.
   * Controls this vibrator to stop the vibrator
   * @tc.type: FUNC
@@ -111,15 +111,15 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_0300, Function
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
-    int32_t startRet = g_vibratorInterface->StartOnce(g_noDuration);
+    int32_t startRet = g_vibratorInterface->StartOnce({-1, 1}, g_noDuration);
     EXPECT_EQ(startRet, HDF_SUCCESS);
 
-    int32_t endRet = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_ONCE);
+    int32_t endRet = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_ONCE);
     EXPECT_EQ(endRet, HDF_SUCCESS);
 }
 
 /**
-  * @tc.name: ExecuteVibratorEffect001
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_0400
   * @tc.desc: Controls this Performing Time Series Vibrator Effects.
   * Controls this vibrator to stop the vibrator
   * @tc.type: FUNC
@@ -131,18 +131,18 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_0400, Function
     int32_t ret;
     for (auto iter : g_effect_list) {
         printf("VibratorEffect : %s\n", iter.c_str());
-        ret = g_vibratorInterface->Start(iter);
+        ret = g_vibratorInterface->Start({-1, 1}, iter);
         EXPECT_EQ(ret, HDF_SUCCESS);
 
     OsalMSleep(g_sleepTime2);
 
-        ret = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_PRESET);
+        ret = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_PRESET);
         EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 
 /**
-  * @tc.name: ExecuteVibratorEffect002
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_0500
   * @tc.desc: Controls this Performing built-in Vibrator Effects.
   * Controls this vibrator to stop the vibrator.
   * @tc.type: FUNC
@@ -154,18 +154,18 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_0500, Function
     int32_t ret;
     for (auto iter : g_effect_list) {
         printf("VibratorEffect : %s\n", iter.c_str());
-        ret = g_vibratorInterface->Start(iter);
+        ret = g_vibratorInterface->Start({-1, 1}, iter);
         EXPECT_EQ(ret, HDF_SUCCESS);
 
     OsalMSleep(g_sleepTime1);
 
-        ret = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_PRESET);
+        ret = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_PRESET);
         EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 
 /**
-  * @tc.name: ExecuteVibratorEffect004
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_0600
   * @tc.desc: Controls this Performing Time Series Vibrator Effects.
   * Controls this vibrator to stop the vibrator.
   * @tc.type: FUNC
@@ -177,21 +177,21 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_0600, Function
     int32_t ret;
     for (auto iter : g_effect_list) {
         printf("VibratorEffect : %s\n", iter.c_str());
-        ret = g_vibratorInterface->Start(iter);
+        ret = g_vibratorInterface->Start({-1, 1}, iter);
         EXPECT_EQ(ret, HDF_SUCCESS);
 
     OsalMSleep(g_sleepTime2);
 
-        ret = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_BUTT);
+        ret = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_BUTT);
         EXPECT_EQ(ret, HDF_ERR_INVALID_PARAM);
 
-        ret = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_PRESET);
+        ret = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_PRESET);
         EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 
 /**
-  * @tc.name: ExecuteVibratorEffect005
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_0700
   * @tc.desc: Controls this vibrator to stop the vibrator.
   * Controls this Performing Time Series Vibrator Effects.
   * Controls this vibrator to stop the vibrator.
@@ -204,18 +204,18 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_0700, Function
     int32_t ret;
     for (auto iter : g_effect_list) {
         printf("VibratorEffect : %s\n", iter.c_str());
-        ret = g_vibratorInterface->Start(iter);
+        ret = g_vibratorInterface->Start({-1, 1}, iter);
         EXPECT_EQ(ret, HDF_SUCCESS);
 
     OsalMSleep(g_sleepTime2);
 
-        ret = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_PRESET);
+        ret = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_PRESET);
         EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 
 /**
-  * @tc.name: ExecuteVibratorEffect006
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_0800
   * @tc.desc: Controls this vibrator to stop the vibrator.
   * Controls this Perform built-in Vibrator Effects.
   * Controls this vibrator to stop the vibrator.
@@ -228,18 +228,18 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_0800, Function
     int32_t ret;
     for (auto iter : g_effect_list) {
         printf("VibratorEffect : %s\n", iter.c_str());
-        ret = g_vibratorInterface->Start(iter);
+        ret = g_vibratorInterface->Start({-1, 1}, iter);
         EXPECT_EQ(ret, HDF_SUCCESS);
 
     OsalMSleep(g_sleepTime2);
 
-        ret = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_PRESET);
+        ret = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_PRESET);
         EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 
 /**
-  * @tc.name: ExecuteVibratorEffect007
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_0900
   * @tc.desc: Controls this Perform a one-shot vibrator with a arbitrary string.
   * Controls this vibrator to stop the vibrator.
   * @tc.type: FUNC
@@ -248,15 +248,15 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_0900, Function
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
-    int32_t startRet = g_vibratorInterface->Start(g_arbitraryStr);
+    int32_t startRet = g_vibratorInterface->Start({-1, 1}, g_arbitraryStr);
     EXPECT_EQ(startRet, HDF_ERR_INVALID_PARAM);
 
-    int32_t endRet = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_ONCE);
+    int32_t endRet = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_ONCE);
     EXPECT_EQ(endRet, HDF_SUCCESS);
 }
 
 /**
-  * @tc.name: GetVibratorInfo_001
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_1000
   * @tc.desc: Obtain the vibrator setting strength, frequency capability and range in the system.
   * Validity check of input parameters.
   * @tc.type: FUNC
@@ -288,7 +288,7 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_1000, Function
 }
 
 /**
-  * @tc.name: EnableVibratorModulation_001
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_1100
   * @tc.desc: Start vibrator based on the setting vibration effect.
   * @tc.type: FUNC
   */
@@ -319,16 +319,16 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_1100, Function
         EXPECT_GE(g_frequency1, info[0].frequencyMinValue);
         EXPECT_LE(g_frequency1, info[0].frequencyMaxValue);
 
-        startRet = g_vibratorInterface->EnableVibratorModulation(g_duration, g_intensity1, g_frequency1);
+        startRet = g_vibratorInterface->EnableVibratorModulation({-1, 1}, g_duration, g_intensity1, g_frequency1);
         EXPECT_EQ(startRet, HDF_SUCCESS);
         OsalMSleep(g_sleepTime1);
-        startRet = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_ONCE);
+        startRet = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_ONCE);
         EXPECT_EQ(startRet, HDF_SUCCESS);
     }
 }
 
 /**
-  * @tc.name: EnableVibratorModulation_002
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_1200
   * @tc.desc: Start vibrator based on the setting vibration effect.
   * Validity check of input parameters.
   * @tc.type: FUNC
@@ -354,13 +354,13 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_1200, Function
     EXPECT_EQ(startRet, HDF_SUCCESS);
 
     if ((info[0].isSupportIntensity == 1) || (info[0].isSupportFrequency == 1)) {
-        startRet = g_vibratorInterface->EnableVibratorModulation(g_noDuration, g_intensity1, g_frequency1);
+        startRet = g_vibratorInterface->EnableVibratorModulation({-1, 1}, g_noDuration, g_intensity1, g_frequency1);
         EXPECT_EQ(startRet, VIBRATOR_NOT_PERIOD);
     }
 }
 
 /**
-  * @tc.name: EnableVibratorModulation_003
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_1300
   * @tc.desc: Start vibrator based on the setting vibration effect.
   * Validity check of input parameters.
   * @tc.type: FUNC
@@ -386,13 +386,13 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_1300, Function
     EXPECT_EQ(startRet, HDF_SUCCESS);
 
     if ((info[0].isSupportIntensity == 1) || (info[0].isSupportFrequency == 1)) {
-        startRet = g_vibratorInterface->EnableVibratorModulation(g_duration, g_intensity2, g_frequency1);
+        startRet = g_vibratorInterface->EnableVibratorModulation({-1, 1}, g_duration, g_intensity2, g_frequency1);
         EXPECT_EQ(startRet, VIBRATOR_NOT_INTENSITY);
     }
 }
 
 /**
-  * @tc.name: EnableVibratorModulation_004
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_1400
   * @tc.desc: Start vibrator based on the setting vibration effect.
   * Validity check of input parameters.
   * @tc.type: FUNC
@@ -418,13 +418,13 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_1400, Function
     EXPECT_EQ(startRet, HDF_SUCCESS);
 
     if ((info[0].isSupportIntensity == 1) || (info[0].isSupportFrequency == 1)) {
-        startRet = g_vibratorInterface->EnableVibratorModulation(g_duration, g_intensity1, g_frequency2);
+        startRet = g_vibratorInterface->EnableVibratorModulation({-1, 1}, g_duration, g_intensity1, g_frequency2);
         EXPECT_EQ(startRet, VIBRATOR_NOT_FREQUENCY);
     }
 }
 
 /**
-  * @tc.name: GetEffectInfo_001
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_1500
   * @tc.desc: Get effect information with the given effect type.
   * @tc.type: FUNC
   */
@@ -436,7 +436,7 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_1500, Function
     int32_t ret;
     for (auto iter : g_effect_list) {
         printf("VibratorEffect : %s\n", iter.c_str());
-        ret = g_vibratorInterface->GetEffectInfo(iter, effectInfo);
+        ret = g_vibratorInterface->GetEffectInfo({-1, 1}, iter, effectInfo);
         printf("isSupportEffect = [%d]\n\r", effectInfo.isSupportEffect);
         printf("duration = [%d]\n\r", effectInfo.duration);
         EXPECT_EQ(ret, HDF_SUCCESS);
@@ -448,7 +448,7 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_1500, Function
 }
 
 /**
-  * @tc.name: GetEffectInfo_002
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_1600
   * @tc.desc: Get effect information with the given effect type.
   * @tc.type: FUNC
   */
@@ -457,7 +457,7 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_1600, Function
     ASSERT_NE(nullptr, g_vibratorInterface);
 
     HdfEffectInfo effectInfo;
-    int32_t ret = g_vibratorInterface->GetEffectInfo("invaild effect id", effectInfo);
+    int32_t ret = g_vibratorInterface->GetEffectInfo({-1, 1}, "invaild effect id", effectInfo);
     printf("isSupportEffect = [%d]\n\r", effectInfo.isSupportEffect);
     printf("duration = [%d]\n\r", effectInfo.duration);
     EXPECT_EQ(ret, HDF_SUCCESS);
@@ -466,7 +466,7 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_1600, Function
 }
 
 /**
-  * @tc.name: PlayHapticPattern
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_1700
   * @tc.desc: HD vibration data packet delivery.
   * @tc.type: FUNC
   */
@@ -474,15 +474,15 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_1700, Function
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
-    int32_t startRet = g_vibratorInterface->PlayHapticPattern(g_pkg);
+    int32_t startRet = g_vibratorInterface->PlayHapticPattern({-1, 1}, g_pkg);
     EXPECT_EQ(startRet, HDF_SUCCESS);
 
-    int32_t endRet = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_ONCE);
+    int32_t endRet = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_ONCE);
     EXPECT_EQ(endRet, HDF_SUCCESS);
 }
 
 /**
-  * @tc.name: GetHapticCapacity
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_1800
   * @tc.desc: Obtains the vibration capability of the motor.
   * @tc.type: FUNC
   */
@@ -490,19 +490,19 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_1800, Function
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
-    OHOS::HDI::Vibrator::V1_2::HapticCapacity hapticCapacity;
-    int32_t startRet = g_vibratorInterface->GetHapticCapacity(hapticCapacity);
+    OHOS::HDI::Vibrator::V2_0::HapticCapacity hapticCapacity;
+    int32_t startRet = g_vibratorInterface->GetHapticCapacity({-1, 1}, hapticCapacity);
     EXPECT_EQ(startRet, HDF_SUCCESS);
     printf("hapticCapacity.isSupportHdHaptic = %d\n", hapticCapacity.isSupportHdHaptic);
     printf("hapticCapacity.isSupportPresetMapping = %d\n", hapticCapacity.isSupportPresetMapping);
     printf("hapticCapacity.isSupportTimeDelay = %d\n", hapticCapacity.isSupportTimeDelay);
 
-    int32_t endRet = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_ONCE);
+    int32_t endRet = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_ONCE);
     EXPECT_EQ(endRet, HDF_SUCCESS);
 }
 
 /**
-  * @tc.name: GetHapticStartUpTime
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_1900
   * @tc.desc: Indicates the time from command is issued to the time the motor starts.
   * @tc.type: FUNC
   */
@@ -512,16 +512,16 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_1900, Function
     
     int32_t startUpTime;
     int32_t mode = 0;
-    int32_t startRet = g_vibratorInterface->GetHapticStartUpTime(mode, startUpTime);
+    int32_t startRet = g_vibratorInterface->GetHapticStartUpTime({-1, 1}, mode, startUpTime);
     EXPECT_EQ(startRet, HDF_SUCCESS);
     printf("startUpTime = %d\n", startUpTime);
 
-    int32_t endRet = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_ONCE);
+    int32_t endRet = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_ONCE);
     EXPECT_EQ(endRet, HDF_SUCCESS);
 }
 
 /**
-  * @tc.name: StopV1_2Test_001
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_2000
   * @tc.desc: Controls this vibrator to stop the vibrator.
   * @tc.type: FUNC
   */
@@ -529,15 +529,15 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_2000, Function
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
-    int32_t startRet = g_vibratorInterface->StartOnce(g_duration);
+    int32_t startRet = g_vibratorInterface->StartOnce({-1, 1}, g_duration);
     EXPECT_EQ(startRet, HDF_SUCCESS);
 
-    int32_t endRet = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_ONCE);
+    int32_t endRet = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_ONCE);
     EXPECT_EQ(endRet, HDF_SUCCESS);
 }
 
 /**
-  * @tc.name: StopV1_2Test_002
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_2100
   * @tc.desc: Controls this vibrator to stop the vibrator.
   * @tc.type: FUNC
   */
@@ -545,15 +545,15 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_2100, Function
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
-    int32_t startRet = g_vibratorInterface->Start(g_effect1);
+    int32_t startRet = g_vibratorInterface->Start({-1, 1}, g_effect1);
     EXPECT_EQ(startRet, HDF_SUCCESS);
 
-    int32_t endRet = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_PRESET);
+    int32_t endRet = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_PRESET);
     EXPECT_EQ(endRet, HDF_SUCCESS);
 }
 
 /**
-  * @tc.name: StopV1_2Test_003
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_2200
   * @tc.desc: Controls this vibrator to stop the vibrator.
   * @tc.type: FUNC
   */
@@ -561,15 +561,15 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_2200, Function
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
-    int32_t startRet = g_vibratorInterface->PlayHapticPattern(g_pkg);
+    int32_t startRet = g_vibratorInterface->PlayHapticPattern({-1, 1}, g_pkg);
     EXPECT_EQ(startRet, HDF_SUCCESS);
 
-    int32_t endRet = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_HDHAPTIC);
+    int32_t endRet = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_HDHAPTIC);
     EXPECT_EQ(endRet, HDF_ERR_NOT_SUPPORT);
 }
 
 /**
-  * @tc.name: StopV1_2Test_004
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_2300
   * @tc.desc: Controls this vibrator to stop the vibrator.
   * @tc.type: FUNC
   */
@@ -577,15 +577,15 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_2300, Function
 {
     ASSERT_NE(nullptr, g_vibratorInterface);
 
-    int32_t startRet = g_vibratorInterface->Start(g_effect1);
+    int32_t startRet = g_vibratorInterface->Start({-1, 1}, g_effect1);
     EXPECT_EQ(startRet, HDF_SUCCESS);
 
-    int32_t endRet = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_BUTT);
+    int32_t endRet = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_BUTT);
     EXPECT_EQ(endRet, HDF_ERR_INVALID_PARAM);
 }
 
 /**
-  * @tc.name: GetHapticStartUpTime1
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_2700
   * @tc.desc: Indicates the time from command is issued to the time the motor starts.
   * @tc.type: FUNC
   */
@@ -595,16 +595,16 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_2700, Function
     
     int32_t startUpTime;
     int32_t mode = 1;
-    int32_t startRet = g_vibratorInterface->GetHapticStartUpTime(mode, startUpTime);
+    int32_t startRet = g_vibratorInterface->GetHapticStartUpTime({-1, 1}, mode, startUpTime);
     EXPECT_EQ(startRet, HDF_SUCCESS);
     printf("startUpTime = %d\n", startUpTime);
 
-    int32_t endRet = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_ONCE);
+    int32_t endRet = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_ONCE);
     EXPECT_EQ(endRet, HDF_SUCCESS);
 }
 
 /**
-  * @tc.name: GetHapticStartUpTime2
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_2800
   * @tc.desc: Indicates the time from command is issued to the time the motor starts.
   * @tc.type: FUNC
   */
@@ -614,16 +614,16 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_2800, Function
     
     int32_t startUpTime;
     int32_t mode = 2;
-    int32_t startRet = g_vibratorInterface->GetHapticStartUpTime(mode, startUpTime);
+    int32_t startRet = g_vibratorInterface->GetHapticStartUpTime({-1, 1}, mode, startUpTime);
     EXPECT_EQ(startRet, HDF_SUCCESS);
     printf("startUpTime = %d\n", startUpTime);
 
-    int32_t endRet = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_ONCE);
+    int32_t endRet = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_ONCE);
     EXPECT_EQ(endRet, HDF_SUCCESS);
 }
 
 /**
-  * @tc.name: GetHapticStartUpTime3
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_2900
   * @tc.desc: Indicates the time from command is issued to the time the motor starts.
   * @tc.type: FUNC
   */
@@ -633,16 +633,16 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_2900, Function
     
     int32_t startUpTime;
     int32_t mode = 3;
-    int32_t startRet = g_vibratorInterface->GetHapticStartUpTime(mode, startUpTime);
+    int32_t startRet = g_vibratorInterface->GetHapticStartUpTime({-1, 1}, mode, startUpTime);
     EXPECT_EQ(startRet, HDF_SUCCESS);
     printf("startUpTime = %d\n", startUpTime);
 
-    int32_t endRet = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_ONCE);
+    int32_t endRet = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_ONCE);
     EXPECT_EQ(endRet, HDF_SUCCESS);
 }
 
 /**
-  * @tc.name: GetHapticStartUpTime4
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_3000
   * @tc.desc: Indicates the time from command is issued to the time the motor starts.
   * @tc.type: FUNC
   */
@@ -652,16 +652,16 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_3000, Function
     
     int32_t startUpTime;
     int32_t mode = -1;
-    int32_t startRet = g_vibratorInterface->GetHapticStartUpTime(mode, startUpTime);
+    int32_t startRet = g_vibratorInterface->GetHapticStartUpTime({-1, 1}, mode, startUpTime);
     EXPECT_EQ(startRet, HDF_SUCCESS);
     printf("startUpTime = %d\n", startUpTime);
 
-    int32_t endRet = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_ONCE);
+    int32_t endRet = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_ONCE);
     EXPECT_EQ(endRet, HDF_SUCCESS);
 }
 
 /**
-  * @tc.name: GetHapticStartUpTime5
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_3100
   * @tc.desc: Indicates the time from command is issued to the time the motor starts.
   * @tc.type: FUNC
   */
@@ -671,16 +671,16 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_3100, Function
     
     int32_t startUpTime = 0;
     int32_t mode = 0;
-    int32_t startRet = g_vibratorInterface->GetHapticStartUpTime(mode, startUpTime);
+    int32_t startRet = g_vibratorInterface->GetHapticStartUpTime({-1, 1}, mode, startUpTime);
     EXPECT_EQ(startRet, HDF_SUCCESS);
     printf("startUpTime = %d\n", startUpTime);
 
-    int32_t endRet = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_ONCE);
+    int32_t endRet = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_ONCE);
     EXPECT_EQ(endRet, HDF_SUCCESS);
 }
 
 /**
-  * @tc.name: GetHapticStartUpTime6
+  * @tc.name: SUB_Driver_Sensor_HdiVibrator_3200
   * @tc.desc: Indicates the time from command is issued to the time the motor starts.
   * @tc.type: FUNC
   */
@@ -690,11 +690,11 @@ HWTEST_F(HdfVibratorHdiServiceTest, SUB_Driver_Sensor_HdiVibrator_3200, Function
     
     int32_t startUpTime = -1;
     int32_t mode = 0;
-    int32_t startRet = g_vibratorInterface->GetHapticStartUpTime(mode, startUpTime);
+    int32_t startRet = g_vibratorInterface->GetHapticStartUpTime({-1, 1}, mode, startUpTime);
     EXPECT_EQ(startRet, HDF_SUCCESS);
     printf("startUpTime = %d\n", startUpTime);
 
-    int32_t endRet = g_vibratorInterface->StopV1_2(HdfVibratorModeV1_2::HDF_VIBRATOR_MODE_ONCE);
+    int32_t endRet = g_vibratorInterface->Stop({-1, 1}, HdfVibratorMode::HDF_VIBRATOR_MODE_ONCE);
     EXPECT_EQ(endRet, HDF_SUCCESS);
 }
 

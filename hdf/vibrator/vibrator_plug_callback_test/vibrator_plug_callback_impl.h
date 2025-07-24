@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2025 Huawei Device Co., Ltd.
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,26 +17,27 @@
 #define OHOS_HDI_SENSOR_V2_0_SENSORCALLBACKIMPL_H
 
 #include <hdf_base.h>
-#include "v3_0/isensor_callback.h"
+#include "v2_0/ivibrator_plug_callback.h"
+#include "hdf_log.h"
 
 namespace OHOS {
 namespace HDI {
-namespace Sensor {
-namespace V3_0 {
-class SensorCallbackImpl : public ISensorCallback {
+namespace Vibrator {
+namespace V2_0 {
+class VibratorPlugCallbackImpl : public IVibratorPlugCallback {
 public:
-    virtual ~SensorCallbackImpl() {}
+    virtual ~VibratorPlugCallbackImpl() {}
 
-    int32_t OnDataEvent(const HdfSensorEvents& event) override;
-
-    int32_t OnDataEventAsync(const std::vector<HdfSensorEvents>& events) override
+    int32_t OnVibratorPlugEvent(const HdfVibratorPlugInfo& hdfVibratorPlugInfo) override
     {
+        printf("OnVibratorPlugEvent deviceId[%d]deviceName[%s]vibratorCnt[%d]status[%d]",
+               hdfVibratorPlugInfo.deviceId, hdfVibratorPlugInfo.deviceName.c_str(),
+               hdfVibratorPlugInfo.vibratorCnt, hdfVibratorPlugInfo.status);
         return HDF_SUCCESS;
     }
-    static uint32_t sensorDataFlag;
 };
-} // V3_0
-} // Sensor
+} // V2_0
+} // Vibrator
 } // HDI
 } // OHOS
 

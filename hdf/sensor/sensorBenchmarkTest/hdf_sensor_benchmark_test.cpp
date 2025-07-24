@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -24,12 +24,12 @@
 #include <securec.h>
 #include "hdf_base.h"
 #include "osal_time.h"
-#include "v2_0/isensor_interface.h"
+#include "v3_0/isensor_interface.h"
 #include "sensor_type.h"
 #include "../hdiService/sensor_callback_impl.h"
 
 
-using namespace OHOS::HDI::Sensor::V2_0;
+using namespace OHOS::HDI::Sensor::V3_0;
 using namespace testing::ext;
 using namespace std;
 
@@ -118,7 +118,7 @@ BENCHMARK_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0100)(benchmark::S
 
     for (auto iter : g_info) {
         for (int j =0; j < g_listNum; ++j) {
-            if (iter.sensorId == g_sensorList[j].sensorTypeId) {
+            if ({-1, iter.deviceSensorInfo.sensorType, 0, 1} == g_sensorList[j].sensorTypeId) {
                 EXPECT_GT(iter.sensorName.size(), 0);
                 break;
             }
@@ -327,7 +327,7 @@ BENCHMARK_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0800)(benchmark::S
     int32_t ret;
 
     for (auto _ : st) {
-    ret = g_sensorInterface->ReadData(HDF_SENSOR_TYPE_ACCELEROMETER, g_events);
+    ret = g_sensorInterface->ReadData{-1, HDF_SENSOR_TYPE_ACCELEROMETER, 0, 1}, g_events);
     }
     EXPECT_EQ(SENSOR_SUCCESS, ret);
 }
@@ -346,11 +346,11 @@ BENCHMARK_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_0900)(benchmark::S
     ASSERT_NE(nullptr, g_sensorInterface);
     int32_t ret;
     for (auto _ : st) {
-        ret = g_sensorInterface->SetSdcSensor(iter.sensorId, true, RATE_LEVEL);
+        ret = g_sensorInterface->SetSdcSensor({-1, iter.deviceSensorInfo.sensorType, 0, 1}, true, RATE_LEVEL);
     }
         EXPECT_EQ(SENSOR_SUCCESS, ret);
         OsalMSleep(SENSOR_WAIT_TIME);
-        ret = g_sensorInterface->SetSdcSensor(iter.sensorId, false, RATE_LEVEL);
+        ret = g_sensorInterface->SetSdcSensor({-1, iter.deviceSensorInfo.sensorType, 0, 1}, false, RATE_LEVEL);
         EXPECT_EQ(SENSOR_SUCCESS, ret);
 }
 
@@ -368,7 +368,7 @@ BENCHMARK_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_1000)(benchmark::S
     ASSERT_NE(nullptr, g_sensorInterface);
     int32_t ret;
     EXPECT_GT(g_info.size(), 0);
-    std::vector<OHOS::HDI::Sensor::V2_0::SdcSensorInfo> sdcSensorInfo;
+    std::vector<OHOS::HDI::Sensor::V3_0::SdcSensorInfo> sdcSensorInfo;
     for (auto _ : st) {
     ret = g_sensorInterface->GetSdcSensorInfo(sdcSensorInfo);
     }
@@ -380,7 +380,7 @@ BENCHMARK_F(sensorBenchmarkTest, SUB_Driver_Sensor_SensorPerf_1000)(benchmark::S
         }
         infoMsg += "{";
         infoMsg += "offset = " + std::to_string(it.offset) + ", ";
-        infoMsg += "sensorId = " + std::to_string(it.sensorId) + ", ";
+        infoMsg += "sensorId = " + std::to_string(it.deviceSensorInfo.sensorType) + ", ";
         infoMsg += "ddrSize = " + std::to_string(it.ddrSize) + ", ";
         infoMsg += "minRateLevel = " + std::to_string(it.minRateLevel) + ", ";
         infoMsg += "maxRateLevel = " + std::to_string(it.maxRateLevel) + ", ";

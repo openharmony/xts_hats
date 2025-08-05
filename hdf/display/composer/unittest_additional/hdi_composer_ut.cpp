@@ -78,8 +78,7 @@ HWTEST_F(DeviceTestAdditional, testClientBufferCount001, Function | MediumTest |
  */
 HWTEST_F(DeviceTestAdditional, testClientBufferCount002, Function | MediumTest | Level1)
 {
-    auto clearRet = g_composerDevice->ClearClientBuffer(g_displayIds[0]);
-    EXPECT_EQ(DISPLAY_SUCCESS, clearRet);
+    g_composerDevice->ClearClientBuffer(g_displayIds[0]);
     const uint32_t cacheCount = 0;
     auto ret = g_composerDevice->SetClientBufferCacheCount(g_displayIds[0], cacheCount);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);

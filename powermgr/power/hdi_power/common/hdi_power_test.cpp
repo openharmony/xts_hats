@@ -879,10 +879,8 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest043, TestSize.Level1)
   */
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest044, TestSize.Level1)
 {
-    EXPECT_TRUE(HDF_SUCCESS == powerInterface->RegisterPowerCallbackExt(g_callbackExt)) 
-        << "HdfHdiTest044 failed";
-    EXPECT_TRUE(HDF_SUCCESS == powerInterface->UnRegisterPowerCallbackExt(g_callbackExt)) 
-        << "HdfPowerHdiTest04 failed";
+    EXPECT_TRUE(HDF_SUCCESS == powerInterface->RegisterPowerCallbackExt(g_callbackExt)) << "test failed";
+    EXPECT_TRUE(HDF_SUCCESS == powerInterface->UnRegisterPowerCallbackExt(g_callbackExt)) << "test failed";
 }
 
 /**

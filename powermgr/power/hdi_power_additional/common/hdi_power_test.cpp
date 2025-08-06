@@ -46,7 +46,7 @@ public:
 
 class PowerHdiCallbackExt : public V1_3::IPowerHdiCallbackExt {
 public:
-    ~PowerHdiCallbackExt() override {}
+    ~PowerHdiCallbackExt() override {};
     int32_t OnSuspendWithTag(const std::string& tag) override
     {
         (void)tag;

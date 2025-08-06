@@ -53,7 +53,7 @@ public:
 
 class PowerHdiCallbackExt : public V1_3::IPowerHdiCallbackExt {
 public:
-    ~PowerHdiCallbackExt() override {}
+    ~PowerHdiCallbackExt() override {};
     int32_t OnSuspendWithTag(const std::string& tag) override
     {
         (void)tag;
@@ -880,15 +880,14 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest043, TestSize.Level1)
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest044, TestSize.Level1)
 {
     EXPECT_TRUE(HDF_SUCCESS == powerInterface->RegisterPowerCallbackExt(g_callbackExt)) << "HdfPowerHdiTest044 failed";
-    EXPECT_TRUE(HDF_SUCCESS == powerInterface->UnRegisterPowerCallbackExt(g_callbackExt))
-        << "HdfPowerHdiTest044 failed";
+    EXPECT_TRUE(HDF_SUCCESS == powerInterface->UnRegisterPowerCallbackExt(g_callbackExt)) << "HdfPowerHdiTest044 failed";
 }
 
 /**
- * @tc.name: HdfPowerHdiTest045
- * @tc.desc: check IPowerHdiCallbackExt
- * @tc.type: FUNC
- */
+  * @tc.name: HdfPowerHdiTest045
+  * @tc.desc: check IPowerHdiCallbackExt
+  * @tc.type: FUNC
+  */
 HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest045, TestSize.Level1)
 {
     std::string testTag = "TEST_TAG";

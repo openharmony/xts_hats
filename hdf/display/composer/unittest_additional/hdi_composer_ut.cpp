@@ -66,6 +66,7 @@ void DeviceTestAdditional::TearDownTestCase()
  */
 HWTEST_F(DeviceTestAdditional, testClientBufferCount001, Function | MediumTest | Level1)
 {
+    g_composerDevice->ClearClientBuffer(g_displayIds[0]);
     const uint32_t cacheCount = 20;
     auto ret = g_composerDevice->SetClientBufferCacheCount(g_displayIds[0], cacheCount);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
@@ -91,6 +92,7 @@ HWTEST_F(DeviceTestAdditional, testClientBufferCount002, Function | MediumTest |
  */
 HWTEST_F(DeviceTestAdditional, testClientBufferCount003, Function | MediumTest | Level1)
 {
+    g_composerDevice->ClearClientBuffer(g_displayIds[0]);
     const uint32_t cacheCount = 15;
     auto ret = g_composerDevice->SetClientBufferCacheCount(g_displayIds[0], cacheCount);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
@@ -103,6 +105,7 @@ HWTEST_F(DeviceTestAdditional, testClientBufferCount003, Function | MediumTest |
  */
 HWTEST_F(DeviceTestAdditional, testClientBufferCount004, Function | MediumTest | Level2)
 {
+    g_composerDevice->ClearClientBuffer(g_displayIds[0]);
     const uint32_t cacheCount = 5;
     auto ret = g_composerDevice->SetClientBufferCacheCount(20, cacheCount);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
@@ -115,6 +118,7 @@ HWTEST_F(DeviceTestAdditional, testClientBufferCount004, Function | MediumTest |
  */
 HWTEST_F(DeviceTestAdditional, testClientBufferCount005, Function | MediumTest | Level1)
 {
+    g_composerDevice->ClearClientBuffer(g_displayIds[0]);
     const uint32_t cacheCount = 5;
     auto ret = g_composerDevice->SetClientBufferCacheCount(0, cacheCount);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
@@ -127,6 +131,7 @@ HWTEST_F(DeviceTestAdditional, testClientBufferCount005, Function | MediumTest |
  */
 HWTEST_F(DeviceTestAdditional, testClientBufferCount006, Function | MediumTest | Level2)
 {
+    g_composerDevice->ClearClientBuffer(g_displayIds[0]);
     const uint32_t cacheCount = 5;
     auto ret = g_composerDevice->SetClientBufferCacheCount(15, cacheCount);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
@@ -139,6 +144,7 @@ HWTEST_F(DeviceTestAdditional, testClientBufferCount006, Function | MediumTest |
  */
 HWTEST_F(DeviceTestAdditional, testClientBufferCount007, Function | MediumTest | Level2)
 {
+    g_composerDevice->ClearClientBuffer(g_displayIds[0]);
     const uint32_t cacheCount = 5;
     auto ret = g_composerDevice->SetClientBufferCacheCount(-1, cacheCount);
     EXPECT_EQ(DISPLAY_FAILURE, ret);
@@ -151,6 +157,7 @@ HWTEST_F(DeviceTestAdditional, testClientBufferCount007, Function | MediumTest |
  */
 HWTEST_F(DeviceTestAdditional, testClientBufferCount008, Function | MediumTest | Level1)
 {
+    g_composerDevice->ClearClientBuffer(g_displayIds[0]);
     const uint32_t cacheCount = -1;
     auto ret = g_composerDevice->SetClientBufferCacheCount(g_displayIds[0], cacheCount);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);

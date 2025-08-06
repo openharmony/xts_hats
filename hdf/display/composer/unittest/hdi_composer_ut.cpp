@@ -251,6 +251,7 @@ int32_t VblankCtr::WaitVblank(uint32_t ms)
  */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_4600, TestSize.Level1)
 {
+    g_composerDevice->ClearClientBuffer(g_displayIds[0]);
     const uint32_t CACHE_COUNT = 5;
     auto ret = g_composerDevice->SetClientBufferCacheCount(g_displayIds[0], CACHE_COUNT);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);

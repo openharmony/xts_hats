@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -251,6 +251,7 @@ int32_t VblankCtr::WaitVblank(uint32_t ms)
  */
 HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_4600, TestSize.Level1)
 {
+    g_composerDevice->ClearClientBuffer(g_displayIds[0]);
     const uint32_t CACHE_COUNT = 5;
     auto ret = g_composerDevice->SetClientBufferCacheCount(g_displayIds[0], CACHE_COUNT);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);

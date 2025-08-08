@@ -69,13 +69,12 @@ static void DestroyLayer(std::shared_ptr<HdiTestLayer> layer)
 
 void DisplayBenchmarkTest::TearDown(const ::benchmark::State &state)
 {
-    #ifdef DISPLAY_COMMUNITY
+#ifdef DISPLAY_COMMUNITY
     HdiTestDevice::GetInstance().Clear();
-    #else
+#else
     HdiTestDevice::GetInstance().Clear();
     HdiTestDevice::GetInstance().GetFirstDisplay()->ResetClientLayer();
-    #endif
-
+#endif
 }
 
 void DisplayBenchmarkTest::OnMode(uint32_t modeId, uint64_t vBlankPeriod, void* data)

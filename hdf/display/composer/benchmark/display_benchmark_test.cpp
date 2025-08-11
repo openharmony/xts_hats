@@ -48,7 +48,6 @@ static std::shared_ptr<IDisplayBuffer> g_gralloc = nullptr;
 static std::vector<uint32_t> g_displayIds;
 const int SLEEP_CONT_100 = 100;
 
-
 class DisplayBenchmarkTest : public benchmark::Fixture {
 public:
     void TearDown(const ::benchmark::State &state);
@@ -70,7 +69,12 @@ static void DestroyLayer(std::shared_ptr<HdiTestLayer> layer)
 
 void DisplayBenchmarkTest::TearDown(const ::benchmark::State &state)
 {
+#ifdef DISPLAY_COMMUNITY
     HdiTestDevice::GetInstance().Clear();
+#else
+    HdiTestDevice::GetInstance().Clear();
+    HdiTestDevice::GetInstance().GetFirstDisplay()->ResetClientLayer();
+#endif
 }
 
 void DisplayBenchmarkTest::OnMode(uint32_t modeId, uint64_t vBlankPeriod, void* data)
@@ -1040,6 +1044,7 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2400)(benchmark:
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 
     DestroyLayer(layer);
+    HdiTestDevice::GetInstance().Clear();
 }
 
 BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2400)->
@@ -1097,6 +1102,7 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2600)(benchmark:
         IRect rect = {0, 0, x, y};
         ret = g_composerDevice->SetLayerRegion(g_displayIds[0], layer->GetId(), rect);
         PrepareAndCommit();
+        HdiTestDevice::GetInstance().Clear();
     }
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 
@@ -1153,6 +1159,7 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2800)(benchmark:
     for (auto _ : state) {
         ret = g_composerDevice->SetLayerTransformMode(g_displayIds[0], layer->GetId(), type);
         PrepareAndCommit();
+        HdiTestDevice::GetInstance().Clear();
     }
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 
@@ -1183,6 +1190,7 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_2900)(benchmark:
     for (auto _ : state) {
         ret = g_composerDevice->SetLayerVisibleRegion(g_displayIds[0], layer->GetId(), regions);
         PrepareAndCommit();
+        HdiTestDevice::GetInstance().Clear();
     }
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 
@@ -1208,6 +1216,7 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3000)(benchmark:
     for (auto _ : state) {
         ret = g_composerDevice->SetLayerCompositionType(g_displayIds[0], layer->GetId(), type);
         PrepareAndCommit();
+        HdiTestDevice::GetInstance().Clear();
     }
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 
@@ -1233,6 +1242,7 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3100)(benchmark:
     for (auto _ : state) {
         ret = g_composerDevice->SetLayerBlendType(g_displayIds[0], layer->GetId(), type);
         PrepareAndCommit();
+        HdiTestDevice::GetInstance().Clear();
     }
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 
@@ -1258,6 +1268,7 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3200)(benchmark:
     for (auto _ : state) {
         ret = g_composerDevice->SetLayerMaskInfo(g_displayIds[0], layer->GetId(), maskInfo);
         PrepareAndCommit();
+        HdiTestDevice::GetInstance().Clear();
     }
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 
@@ -1292,6 +1303,7 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3300)(benchmark:
     for (auto _ : state) {
         ret = g_composerDevice->SetLayerColor(g_displayIds[0], layer->GetId(), layerColor);
         PrepareAndCommit();
+        HdiTestDevice::GetInstance().Clear();
     }
 
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
@@ -1318,6 +1330,7 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3400)(benchmark:
         PrepareAndCommit();
 
         ret = g_composerDevice->DestroyLayer(g_displayIds[0], layer->GetId());
+        HdiTestDevice::GetInstance().Clear();
     }
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
     std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_CONT_100));
@@ -1339,6 +1352,7 @@ BENCHMARK_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3500)(benchmark:
         ASSERT_TRUE((layers.size() > 0));
     }
     PrepareAndCommit();
+    HdiTestDevice::GetInstance().Clear();
 }
 
 BENCHMARK_REGISTER_F(DisplayBenchmarkTest, SUB_Driver_Display_Performace_3500)->

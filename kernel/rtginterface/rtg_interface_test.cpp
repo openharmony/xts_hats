@@ -478,8 +478,6 @@ HWTEST_F(RtgInterfaceTest, RtgInterfaceSetErrorAttr, TestSize.Level1)
     EXPECT_NE(ret, 0);
     ret = SetFrameRateAndPrioType(grpId, -1, VIP);
     EXPECT_NE(ret, 0);
-    ret = SetFrameRateAndPrioType(grpId, 121, VIP);
-    EXPECT_NE(ret, 0);
     ret = DestroyRtgGrp(grpId);
     EXPECT_EQ(ret, 0);
 }

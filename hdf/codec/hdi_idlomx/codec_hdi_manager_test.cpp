@@ -157,6 +157,26 @@ HWTEST_F(CodecHdiManagerTest, HdfCodecHdiCreateComponentTest_003, TestSize.Level
 }
 
 /**
+* @tc.number : SUB_Driver_Codec_idlomx_6000
+* @tc.name   : HdfCodecHdiCreateComponentTest_004
+* @tc.desc   : Verify the CreateComponent function when the input parameter is valid.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiManagerTest, HdfCodecHdiCreateComponentTest_004, TestSize.Level2)
+{
+    ASSERT_TRUE(manager_ != nullptr);
+    std::string compName("abc/%@123  ，abc");
+    sptr<ICodecComponent> component;
+    uint32_t componentId = 0;
+    auto ret = manager_->CreateComponent(component, componentId, compName, APP_DATA, callback_);
+    ASSERT_NE(ret, HDF_SUCCESS);
+    if (componentId != 0) {
+        ret = manager_->DestroyComponent(componentId);
+        ASSERT_EQ(ret, HDF_SUCCESS);
+    }
+}
+
+/**
 * @tc.number : SUB_Driver_Codec_idlomx_0600
 * @tc.name   : HdfCodecHdiDestroyComponentTest_001
 * @tc.desc   : Verify the DestroyComponent function when the input parameter is invalid.
@@ -166,6 +186,20 @@ HWTEST_F(CodecHdiManagerTest, HdfCodecHdiDestroyComponentTest_001, TestSize.Leve
 {
     ASSERT_TRUE(manager_ != nullptr);
     auto ret = manager_->DestroyComponent(INVALID_COMPONENT_ID);
+    ASSERT_EQ(ret, HDF_ERR_INVALID_PARAM);
+}
+
+/**
+* @tc.number : SUB_Driver_Codec_idlomx_6100
+* @tc.name   : HdfCodecHdiDestroyComponentTest_002
+* @tc.desc   : Verify the DestroyComponent function when the input parameter is invalid.
+  @tc.type: FUNC
+*/
+HWTEST_F(CodecHdiManagerTest, HdfCodecHdiDestroyComponentTest_002, TestSize.Level2)
+{
+    ASSERT_TRUE(manager_ != nullptr);
+    uint32_t componentId = 0;
+    auto ret = manager_->DestroyComponent(componentId);
     ASSERT_EQ(ret, HDF_ERR_INVALID_PARAM);
 }
 }  // namespace

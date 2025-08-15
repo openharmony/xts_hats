@@ -157,7 +157,7 @@ HWTEST_F(CodecHdiManagerTest, HdfCodecHdiCreateComponentTest_003, TestSize.Level
 }
 
 /**
-* @tc.number : SUB_Driver_Codec_idlomx_0700
+* @tc.number : SUB_Driver_Codec_idlomx_6000
 * @tc.name   : HdfCodecHdiCreateComponentTest_004
 * @tc.desc   : Verify the CreateComponent function when the input parameter is valid.
   @tc.type: FUNC
@@ -190,7 +190,7 @@ HWTEST_F(CodecHdiManagerTest, HdfCodecHdiDestroyComponentTest_001, TestSize.Leve
 }
 
 /**
-* @tc.number : SUB_Driver_Codec_idlomx_0800
+* @tc.number : SUB_Driver_Codec_idlomx_6100
 * @tc.name   : HdfCodecHdiDestroyComponentTest_002
 * @tc.desc   : Verify the DestroyComponent function when the input parameter is invalid.
   @tc.type: FUNC

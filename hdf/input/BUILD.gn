@@ -18,7 +18,6 @@ import("//test/xts/tools/build/suite.gni")
 group("HatsHdfInputTest") {
   testonly = true
   if (hats_rich == true) {
-    deps = [ "hdi_input:HatsHdfInputTest" ]
   } else {
     deps = [
       "hdi_input:HatsHdfInputTest",

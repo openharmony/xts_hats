@@ -318,7 +318,7 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_PerOptimization_0100, TestSize.Lev
     camera_metadata_item_t entry;
     cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAPTURE_DURATION_SUPPORTED, &entry);
     if (cameraTest->rc != 0 || entry.data.u8[0] != 1) {
-        GTEST_SKIP() << "skip this test, because OHOS_ABILITY_CAPTURE_DURATION_SUPPORTED not supported now" << std::endl;
+        GTEST_SKIP() << "OHOS_ABILITY_CAPTURE_DURATION_SUPPORTED not supported now" << std::endl;
         return;
     }
 

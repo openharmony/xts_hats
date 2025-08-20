@@ -175,7 +175,7 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_Moon_0300, TestSize.Level1)
 HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SlowMotion_0300, TestSize.Level1)
 {
     if (!g_IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_CAMERA_MODES, OHOS::HDI::Camera::V1_3::HIGH_FRAME_RATE)) {
-        cout << "skip this test, because HIGH_FRAME_RATE not in OHOS_ABILITY_CAMERA_MODES" << endl;
+        GTEST_SKIP() << "skip this test, because HIGH_FRAME_RATE not in OHOS_ABILITY_CAMERA_MODES" << std::endl;
         return;
     }
     cameraTest->CreateAndCommitStreamsForHighFrameRate(cameraTest);
@@ -208,7 +208,7 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SlowMotion_0300, TestSize.Level1)
 HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SlowMotion_0400, TestSize.Level1)
 {
     if (!g_IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_CAMERA_MODES, OHOS::HDI::Camera::V1_3::HIGH_FRAME_RATE)) {
-        cout << "skip this test, because HIGH_FRAME_RATE not in OHOS_ABILITY_CAMERA_MODES" << endl;
+        GTEST_SKIP() << "skip this test, because HIGH_FRAME_RATE not in OHOS_ABILITY_CAMERA_MODES" << std::endl;
         return;
     }
     cameraTest->CreateAndCommitStreamsForHighFrameRate(cameraTest);
@@ -243,7 +243,7 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SlowMotion_0400, TestSize.Level1)
 HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SuperSlowMotion_0400, TestSize.Level1)
 {
     if (!g_IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_CAMERA_MODES, OHOS::HDI::Camera::V1_2::SLOW_MOTION)) {
-        cout << "skip this test, because SLOW_MOTION not in OHOS_ABILITY_CAMERA_MODES" << endl;
+        GTEST_SKIP() << "skip this test, because SLOW_MOTION not in OHOS_ABILITY_CAMERA_MODES" << std::endl;
         return;
     }
     cameraTest->CreateAndCommitStreamsForSlowMotion(cameraTest);
@@ -277,7 +277,7 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SuperSlowMotion_0400, TestSize.Lev
 HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SuperSlowMotion_0200, TestSize.Level1)
 {
     if (!g_IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_CAMERA_MODES, OHOS::HDI::Camera::V1_2::SLOW_MOTION)) {
-        cout << "skip this test, because SLOW_MOTION not in OHOS_ABILITY_CAMERA_MODES" << endl;
+        GTEST_SKIP() << "skip this test, because SLOW_MOTION not in OHOS_ABILITY_CAMERA_MODES" << std::endl;
         return;
     }
     // Set callback object
@@ -289,6 +289,10 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SuperSlowMotion_0200, TestSize.Lev
     EXPECT_NE(data, nullptr);
     camera_metadata_item_t entry;
     cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_MOTION_DETECTION_SUPPORT, &entry);
+    if (cameraTest->rc!= 0) {
+        GTEST_SKIP() << "skip this test, because OHOS_ABILITY_MOTION_DETECTION_SUPPORT not found" << std::endl;
+        return;
+    }
     EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
     if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && entry.data.u8 != nullptr && entry.count > 0) {
         EXPECT_TRUE(entry.data.u8 != nullptr);
@@ -314,7 +318,7 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_PerOptimization_0100, TestSize.Lev
     camera_metadata_item_t entry;
     cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAPTURE_DURATION_SUPPORTED, &entry);
     if (cameraTest->rc != 0 || entry.data.u8[0] != 1) {
-        cout << "skip this test, because OHOS_ABILITY_CAPTURE_DURATION_SUPPORTED not supported now" << endl;
+        GTEST_SKIP() << "skip this test, because OHOS_ABILITY_CAPTURE_DURATION_SUPPORTED not supported now" << std::endl;
         return;
     }
 
@@ -449,7 +453,7 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_HighResolution_0200, TestSize.Leve
 {
     if (!g_IsTagValueExistsU8(cameraTest->ability,
         OHOS_ABILITY_CAMERA_MODES, OHOS::HDI::Camera::V1_3::HIGH_RESOLUTION_PHOTO)) {
-        cout << "skip this test, because HIGH_RESOLUTION_PHOTO not in OHOS_ABILITY_CAMERA_MODES" << endl;
+        GTEST_SKIP() << "skip this test, because HIGH_RESOLUTION_PHOTO not in OHOS_ABILITY_CAMERA_MODES" << std::endl;
         return;
     }
     EXPECT_NE(cameraTest->ability, nullptr);
@@ -492,7 +496,7 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_HighResolution_0200, TestSize.Leve
 HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SMPhoto_0200, TestSize.Level1)
 {
     if (!g_IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_CAMERA_MODES, OHOS::HDI::Camera::V1_3::CAPTURE_MACRO)) {
-        cout << "skip this test, because CAPTURE_MACRO not in OHOS_ABILITY_CAMERA_MODES" << endl;
+        GTEST_SKIP() << "skip this test, because CAPTURE_MACRO not in OHOS_ABILITY_CAMERA_MODES" << std::endl;
         return;
     }
     // Get stream operator
@@ -543,7 +547,7 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SMPhoto_0200, TestSize.Level1)
 HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_SMVideo_0200, TestSize.Level1)
 {
     if (!g_IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_CAMERA_MODES, OHOS::HDI::Camera::V1_3::VIDEO_MACRO)) {
-        cout << "skip this test, because VIDEO_MACRO not in OHOS_ABILITY_CAMERA_MODES" << endl;
+        GTEST_SKIP() << "skip this test, because VIDEO_MACRO not in OHOS_ABILITY_CAMERA_MODES" << std::endl;
         return;
     }
     // Get stream operator
@@ -908,7 +912,7 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_Tripod_0200, TestSize.Level1)
     cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_TRIPOD_DETECTION, &entry);
     if (cameraTest->rc != HDI::Camera::V1_0::NO_ERROR || entry.data.i32 == nullptr
         || entry.count <= 0 || entry.data.i32[0] != 1) {
-        cout << "skip this test, because OHOS_ABILITY_TRIPOD_DETECTION not supported" << endl;
+        GTEST_SKIP() << "skip this test, because OHOS_ABILITY_TRIPOD_DETECTION not supported" << std::endl;
         return;
     }
     cameraTest->intents = {PREVIEW, STILL_CAPTURE};

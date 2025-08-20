@@ -1017,6 +1017,11 @@ static void UpdateSettingsForSuperStabMode(std::shared_ptr<OHOS::Camera::Test> c
 
 HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_SteadyShot_0300, TestSize.Level1)
 {
+    if (!cameraTest->IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_VIDEO_STABILIZATION_MODES,
+        OHOS_CAMERA_VIDEO_STABILIZATION_HIGH)) {
+        GTEST_SKIP() << "OHOS_ABILITY_VIDEO_STABILIZATION_MODES NOT FOUND" << std::endl;
+        return;
+    }
     // Get Stream Operator
     cameraTest->streamOperatorCallback = new OHOS::Camera::Test::TestStreamOperatorCallback();
     cameraTest->rc = cameraTest->cameraDeviceV1_2->GetStreamOperator_V1_1(cameraTest->streamOperatorCallback,

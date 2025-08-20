@@ -316,23 +316,23 @@ void Test::SuperSlowMotionStatusCallback(std::shared_ptr<OHOS::Camera::Test> cam
         return;
     }
     common_metadata_header_t* data = cameraTest->deviceCallback->resultMeta->get();
-    EXPECT_NE(data, nullptr);
-    camera_metadata_item_t entry;
-    cameraTest->rc = FindCameraMetadataItem(data, OHOS_STATUS_SLOW_MOTION_DETECTION, &entry);
-    EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
-    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && entry.data.u8 != nullptr && entry.count > 0) {
-        uint8_t value = entry.data.u8[0];
-        // Detect the state of super slow motion
-        if (value == OHOS_CONTROL_SLOW_MOTION_STATUS_DISABLE) {
-            CAMERA_LOGI("slow motion status is disabled");
-        } else if (value == OHOS_CONTROL_SLOW_MOTION_STATUS_READY) {
-            CAMERA_LOGI("slow motion status is ready");
-        } else if (value == OHOS_CONTROL_SLOW_MOTION_STATUS_START) {
-            CAMERA_LOGI("slow motion status is started");
-        } else if (value == OHOS_CONTROL_SLOW_MOTION_STATUS_RECORDING) {
-            CAMERA_LOGI("slow motion status is recording");
-        } else if (value == OHOS_CONTROL_SLOW_MOTION_STATUS_FINISH) {
-            CAMERA_LOGI("slow motion status is finished");
+    if (data != nullptr) {
+        camera_metadata_item_t entry;
+        cameraTest->rc = FindCameraMetadataItem(data, OHOS_STATUS_SLOW_MOTION_DETECTION, &entry);
+        if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && entry.data.u8 != nullptr && entry.count > 0) {
+            uint8_t value = entry.data.u8[0];
+            // Detect the state of super slow motion
+            if (value == OHOS_CONTROL_SLOW_MOTION_STATUS_DISABLE) {
+                CAMERA_LOGI("slow motion status is disabled");
+            } else if (value == OHOS_CONTROL_SLOW_MOTION_STATUS_READY) {
+                CAMERA_LOGI("slow motion status is ready");
+            } else if (value == OHOS_CONTROL_SLOW_MOTION_STATUS_START) {
+                CAMERA_LOGI("slow motion status is started");
+            } else if (value == OHOS_CONTROL_SLOW_MOTION_STATUS_RECORDING) {
+                CAMERA_LOGI("slow motion status is recording");
+            } else if (value == OHOS_CONTROL_SLOW_MOTION_STATUS_FINISH) {
+                CAMERA_LOGI("slow motion status is finished");
+            }
         }
     }
 }

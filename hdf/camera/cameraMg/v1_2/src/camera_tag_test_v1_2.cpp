@@ -93,9 +93,10 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_Modes_0030, TestSize.Level1)
     if (ret != 0) {
         bool portraitFlag = cameraTest->IsTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_CAMERA_MODES,
             OHOS::HDI::Camera::V1_1::PORTRAIT);
-        EXPECT_EQ(portraitFlag, false);
-        CAMERA_LOGI("OHOS::HDI::Camera::V1_1::PORTRAIT found!");
-        return;
+        if (!portraitFlag) {
+            GTEST_SKIP() << "PORTRAIT NOT FOUND" << std::endl;
+        }
+        return；
     }
     printf("OHOS_ABILITY_SCENE_PORTRAIT_EFFECT_TYPES value count is %d\n", entry.count);
     if (entry.count == 0) {

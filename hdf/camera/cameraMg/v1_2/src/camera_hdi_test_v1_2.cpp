@@ -337,7 +337,7 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_XMAGE_0400, TestSize.Level1)
             xmageAbilities.push_back(entry.data.u8[i]);
         }
     } else {
-        CAMERA_LOGI("XMage not supported");
+        GTEST_SKIP() << "XMage not supported" << std::endl;
     }
     CAMERA_LOGI("%{public}lu xmage abilities supported",
                           static_cast<unsigned long>(xmageAbilities.size()));
@@ -624,6 +624,8 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_Colorspace_0200, TestSize.Level1)
         CaptureByColorSpaces(captureColorSpaces, cameraTest);
         VideoByColorSpaces(videoColorSpaces, previewColorSpaces, cameraTest);
         SuperStubByColorSpaces(superStubColorSpaces, cameraTest);
+    } else {
+        GTEST_SKIP() << "OHOS_ABILITY_AVAILABLE_COLOR_SPACES NOT FOUND" << std::endl;
     }
 }
 
@@ -763,7 +765,6 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_Macro_0200, TestSize.Level1)
     EXPECT_NE(data, nullptr);
     camera_metadata_item_t entry;
     int ret = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_MACRO_SUPPORTED, &entry);
-
     if (ret == HDI::Camera::V1_0::NO_ERROR && entry.data.u8 != nullptr && entry.count > 0) {
         cameraTest->intents = {PREVIEW, STILL_CAPTURE, VIDEO};
         cameraTest->StartStream(cameraTest->intents);
@@ -791,8 +792,10 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_Macro_0200, TestSize.Level1)
                 printf("Macro mode is not enabled.");
             }
         } else {
-            printf("Macro mode is not enabled.");
+            GTEST_SKIP() << "OHOS_CAMERA_MACRO_STATUS NOT FOUND" << std::endl;
         }
+    } else {
+        GTEST_SKIP() << "OHOS_ABILITY_CAMERA_MACRO_SUPPORTED NOT FOUND" << std::endl;
     }
 }
 

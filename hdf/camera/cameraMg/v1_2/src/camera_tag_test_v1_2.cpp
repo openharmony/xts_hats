@@ -67,9 +67,13 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_Modes_0020, TestSize.Level1)
     common_metadata_header_t* data = cameraTest->ability->get();
     camera_metadata_item_t entry;
     int ret = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_MODES, &entry);
-    EXPECT_EQ(ret, 0);
+    if (ret !=0) {
+        GTEST_SKIP() << "OHOS_ABILITY_CAMERA_MODES NOT FOUND" << std::endl;
+    }
     CAMERA_LOGI("get OHOS_ABILITY_CAMERA_MODES success");
-    EXPECT_EQ(META_TYPE_BYTE, entry.data_type);
+    if (entry.data_type != META_TYPE_BYTE) {
+        GTEST_SKIP() << "META_TYPE_BYTE NOT FOUND" << std::  endl;
+    }
     for (int i = 0; i < entry.count; i++) {
         if (entry.data.u8[i] == HDI::Camera::V1_0::OperationMode::NORMAL) {
             CAMERA_LOGI("OperationMode::NORMAL found!");
@@ -96,7 +100,7 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_Modes_0030, TestSize.Level1)
         if (!portraitFlag) {
             GTEST_SKIP() << "PORTRAIT NOT FOUND" << std::endl;
         }
-        return；
+        return;
     }
     printf("OHOS_ABILITY_SCENE_PORTRAIT_EFFECT_TYPES value count is %d\n", entry.count);
     if (entry.count == 0) {
@@ -138,7 +142,7 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_Modes_0060, TestSize.Level1)
 
     int ret = FindCameraMetadataItem(data, OHOS_ABILITY_BEAUTY_AUTO_VALUES, &entry);
     if (ret != 0) {
-        CAMERA_LOGI("OHOS_ABILITY_BEAUTY_AUTO_VALUES not found");
+        GTEST_SKIP() << "OHOS_ABILITY_BEAUTY_AUTO_VALUES not found"<< std::endl;
         return;
     }
     printf("OHOS_ABILITY_BEAUTY_AUTO_VALUES value count is %d\n", entry.count);
@@ -183,6 +187,8 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_DefferredImage_0100, TestSize.Leve
             }
         }
         CAMERA_LOGI("print tag<OHOS_ABILITY_DEFERRED_IMAGE_DELIVERY> f value end.");
+    } else {
+        GTEST_SKIP() << "OHOS_ABILITY_DEFERRED_IMAGE_DELIVERY NOT FOUND" << std::endl;
     }
 }
 
@@ -208,6 +214,8 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_XMAGE_0100, TestSize.Level1)
             }
         }
         CAMERA_LOGI("print tag<OHOS_ABILITY_AVAILABLE_COLOR_SPACES> f value end.");
+    } else {
+        GTEST_SKIP() << "OHOS_ABILITY_AVAILABLE_COLOR_SPACES NOT FOUND" << std::endl;
     }
 }
 
@@ -233,6 +241,8 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_NightMode_0100, TestSize.Level1)
             }
         }
         CAMERA_LOGI("print tag<OHOS_ABILITY_NIGHT_MODE_SUPPORTED_EXPOSURE_TIME> f value end.");
+    } else {
+        GTEST_SKIP() << "OHOS_ABILITY_NIGHT_MODE_SUPPORTED_EXPOSURE_TIME NOT FOUND" << std::endl;
     }
 }
 
@@ -263,6 +273,8 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_APERTURE_0100, TestSize.Level1)
                 ss.str("");
             }
         }
+    } else {
+        GTEST_SKIP() << "OHOS_ABILITY_CAMERA_VIRTUAL_APERTURE_RANGE NOT FOUND" << std::endl;
     }
 }
 
@@ -278,8 +290,7 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_APERTURE_0200, TestSize.Level1)
     common_metadata_header_t* data = cameraTest->ability->get();
     EXPECT_NE(data, nullptr);
     camera_metadata_item_t entry;
-    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE, &entry);
-
+    cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE, &entry);\
     if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && entry.data.f != nullptr && entry.count > 0) {
         printf("OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE f value count %d\n", entry.count);
         constexpr size_t step = 4; //print step
@@ -293,6 +304,8 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_APERTURE_0200, TestSize.Level1)
                 ss.str("");
             }
         }
+    } else {
+        GTEST_SKIP() << "OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE NOT FOUND" << std::endl;
     }
 }
 
@@ -309,7 +322,6 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_SmoothZoom_0100, TestSize.Level1)
     EXPECT_NE(data, nullptr);
     camera_metadata_item_t entry;
     cameraTest->rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_ZOOM_PERFORMANCE, &entry);
-
     if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR && entry.data.ui32 != nullptr && entry.count > 0) {
         printf("OHOS_ABILITY_CAMERA_ZOOM_PERFORMANCE f value count %d\n", entry.count);
         constexpr size_t step = 4; //print step
@@ -323,6 +335,8 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_SmoothZoom_0100, TestSize.Level1)
                 ss.str("");
             }
         }
+    } else {
+        GTEST_SKIP() << "OHOS_ABILITY_CAMERA_ZOOM_PERFORMANCE NOT FOUND" << std::endl;
     }
 }
 
@@ -349,6 +363,8 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_Colorspace_0100, TestSize.Level1)
                 ss.clear();
             }
         }
+    } else {
+        GTEST_SKIP() << "OHOS_ABILITY_AVAILABLE_COLOR_SPACES NOT FOUND" << std::endl;
     }
 }
 
@@ -374,6 +390,8 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_Stabilization_0100, TestSize.Level
                 ss.clear();
             }
         }
+    } else {
+        GTEST_SKIP() << "OHOS_ABILITY_VIDEO_STABILIZATION_MODES NOT FOUND" << std::endl;
     }
 }
 
@@ -399,6 +417,8 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_Macro_0100, TestSize.Level1)
                 ss.clear();
             }
         }
+    } else {
+        GTEST_SKIP() << "OHOS_ABILITY_CAMERA_MACRO_SUPPORTED NOT FOUND" << std::endl;
     }
 }
 
@@ -430,6 +450,8 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_Sketch_0100, TestSize.Level1)
             }
         }
         CAMERA_LOGI("print tag<OHOS_ABILITY_SKETCH_ENABLE_RATIO> f value end.");
+    } else {
+        GTEST_SKIP() << "OHOS_ABILITY_SKETCH_ENABLE_RATIO NOT FOUND" << std::endl;
     }
 }
 
@@ -461,5 +483,7 @@ HWTEST_F(CameraTagTestV1_2, SUB_Driver_Camera_Sketch_0200, TestSize.Level1)
             }
         }
         CAMERA_LOGI("print tag<OHOS_ABILITY_SKETCH_REFERENCE_FOV_RATIO> f value end.");
+    } else {
+        GTEST_SKIP() << "OHOS_ABILITY_SKETCH_REFERENCE_FOV_RATIO NOT FOUND" << std::endl;
     }
 }

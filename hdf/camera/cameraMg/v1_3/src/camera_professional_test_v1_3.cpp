@@ -50,7 +50,7 @@ bool g_isModeExists(std::shared_ptr<CameraMetadata> ability, uint32_t tag, uint8
     common_metadata_header_t* data = ability->get();
     camera_metadata_item_t entry;
     int ret = FindCameraMetadataItem(data, tag, &entry);
-    if (ret = 0 && entry.count != 0 && entry.data.u8 != nullptr) {
+    if (ret == 0 && entry.count != 0 && entry.data.u8 != nullptr) {
         for (int i = 0; i < entry.count; i++) {
             if (entry.data.u8[i] == value) {
                 return true;

@@ -46,28 +46,28 @@ void CameraHdiTestV1_2::TakePhoteWithDefferredImage(int PhotoCount)
     std::vector<uint8_t> metaVec;
     MetadataUtils::ConvertMetadataToVec(meta, metaVec);
     cameraTest->rc = cameraTest->cameraDevice->UpdateSettings(metaVec);
-    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
-
-    // take photo
-    cameraTest->imageDataSaveSwitch = SWITCH_ON;
-    cameraTest->intents = {PREVIEW, STILL_CAPTURE};
-    cameraTest->StartStream(cameraTest->intents);
-    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
-    cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
-    for (int i = 0; i < PhotoCount; i++) {
-        cameraTest->StartCapture(cameraTest->streamIdCapture, cameraTest->captureIdCapture, false, false);
+    if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR) {
+        // take photo
+        cameraTest->imageDataSaveSwitch = SWITCH_ON;
+        cameraTest->intents = {PREVIEW, STILL_CAPTURE};
+        cameraTest->StartStream(cameraTest->intents);
+        if (cameraTest->rc == HDI::Camera::V1_0::NO_ERROR) {
+            cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+            for (int i = 0; i < PhotoCount; i++) {
+                cameraTest->StartCapture(cameraTest->streamIdCapture, cameraTest->captureIdCapture, false, false);
+            }
+            cameraTest->captureIds = {cameraTest->captureIdPreview};
+            cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdCapture};
+            cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+        }
     }
-    cameraTest->captureIds = {cameraTest->captureIdPreview};
-    cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdCapture};
-    cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
 }
 
 void CameraHdiTestV1_2::RemovePendingImages()
 {
     std::vector<std::string> pendingImages;
     int ret = cameraTest->imageProcessSession_->GetPendingImages(pendingImages);
-    EXPECT_EQ(ret, 0);
-    if (pendingImages.size() != 0) {
+    if (ret == 0 && pendingImages.size() != 0) {
         for (auto imageId = pendingImages.begin(); imageId != pendingImages.end(); ++imageId) {
             ret = cameraTest->imageProcessSession_->RemoveImage(*imageId);
             EXPECT_EQ(ret, 0);

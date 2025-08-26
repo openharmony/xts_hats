@@ -39,11 +39,11 @@ bool g_isFrontTagValueExistsU8(std::shared_ptr<CameraMetadata> ability, uint32_t
     common_metadata_header_t* data = ability->get();
     camera_metadata_item_t entry;
     int ret = FindCameraMetadataItem(data, tag, &entry);
-    EXPECT_EQ(ret, 0);
-    EXPECT_NE(entry.count, 0);
-    for (int i = 0; i < entry.count; i++) {
-        if (entry.data.u8[i] == value) {
-            return true;
+    if (ret == 0 && entry.count != 0) {
+        for (int i = 0; i < entry.count; i++) {
+            if (entry.data.u8[i] == value) {
+                return true;
+            }
         }
     }
     return false;

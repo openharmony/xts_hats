@@ -72,13 +72,13 @@ void GetSupportedPhysicalApertureValues(std::shared_ptr<CameraMetadata> ability)
             camera_metadata_item_t entry;
             int rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE, &entry);
             if (rc == HDI::Camera::V1_0::NO_ERROR && entry.data.f != nullptr && entry.count > 0) {
-                float entryValues[] = {entry.data.f[3], entry.data.f[7], entry.data.f[8], entry.data.f[9], entry.data.f[10],
-                    entry.data.f[14], entry.data.f[18]};
+                float entryValues[] = {entry.data.f[3], entry.data.f[7], entry.data.f[8], entry.data.f[9],
+                    entry.data.f[10], entry.data.f[14], entry.data.f[18]};
                 for (size_t i = 0; i < sizeof(entryValues) / sizeof(float); i++) {
                     supportedPhysicalApertureValues_.push_back(entryValues[i]);
                 }
             }
-        }     
+        }
     }
 }
 

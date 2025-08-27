@@ -56,7 +56,7 @@ public:
     void TearDown();
 };
 
-void HdfBatteryHdiTestAdditional::SetUpTestCase(void) 
+void HdfBatteryHdiTestAdditional::SetUpTestCase(void)
 { 
     g_batteryInterface = IBatteryInterface::Get(true);
     if (g_batteryInterface == nullptr) {

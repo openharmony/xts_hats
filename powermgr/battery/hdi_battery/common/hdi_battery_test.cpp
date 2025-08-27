@@ -58,7 +58,7 @@ public:
     static int32_t ConvertInt(const std::string &value);
 };
 
-void HdfBatteryHdiTest::SetUpTestCase(void)
+void HdfBatteryHdiTestAdditional::SetUpTestCase(void) 
 {
     g_batteryInterface = IBatteryInterface::Get(true);
     if (g_batteryInterface == nullptr) {

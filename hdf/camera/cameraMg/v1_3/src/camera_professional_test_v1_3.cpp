@@ -66,19 +66,25 @@ bool g_isModeExists(std::shared_ptr<CameraMetadata> ability, uint32_t tag, uint8
 void GetSupportedPhysicalApertureValues(std::shared_ptr<CameraMetadata> ability)
 {
     supportedPhysicalApertureValues_.clear();
-    if (ability != nullptr) {
-        common_metadata_header_t* data = ability->get();
-        if (data != nullptr) {
-            camera_metadata_item_t entry;
-            int rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE, &entry);
-            if (rc == HDI::Camera::V1_0::NO_ERROR && entry.data.f != nullptr && entry.count > 0) {
-                float entryValues[] = {entry.data.f[3], entry.data.f[7], entry.data.f[8], entry.data.f[9],
-                    entry.data.f[10], entry.data.f[14], entry.data.f[18]};
-                for (size_t i = 0; i < sizeof(entryValues) / sizeof(float); i++) {
-                    supportedPhysicalApertureValues_.push_back(entryValues[i]);
-                }
-            }
+    if (ability == nullptr) {
+        printf("ability is nullptr.\n");
+        return;
+    }
+    common_metadata_header_t* data = ability->get();
+    if (data == nullptr) {
+        printf("data is nullptr.\n");
+        return;
+    }
+    camera_metadata_item_t entry;
+    int rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE, &entry);
+    if (rc == HDI::Camera::V1_0::NO_ERROR && entry.data.f != nullptr && entry.count > 0) {
+        float entryValues[] = {entry.data.f[3], entry.data.f[7], entry.data.f[8], entry.data.f[9],
+            entry.data.f[10], entry.data.f[14], entry.data.f[18]};
+        for (size_t i = 0; i < sizeof(entryValues) / sizeof(float); i++) {
+            supportedPhysicalApertureValues_.push_back(entryValues[i]);
         }
+    } else {
+        printf("OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE NOT FOUND.\n");
     }
 }
 
@@ -446,27 +452,27 @@ HWTEST_F(CameraProfessionalTestV1_3, SUB_Driver_Camera_ProfessionalPhoto_0900, T
         GetSupportedPhysicalApertureValues(cameraTest->ability);
         CAMERA_LOGI("GetSupportedPhysicalApertureValues start");
         for (uint8_t i = 0;i < supportedPhysicalApertureValues_.size();i++) {
-        cameraTest->intents = {PREVIEW, STILL_CAPTURE};
-        cameraTest->StartProfessionalStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::PROFESSIONAL_PHOTO);
-        CAMERA_LOGI("StartProfessionalStream start");
-        std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
-        float physicalApertureValue = supportedPhysicalApertureValues_[i];
-        meta->addEntry(OHOS_CONTROL_CAMERA_PHYSICAL_APERTURE_VALUE, &physicalApertureValue, DATA_COUNT);
-        std::vector<uint8_t> setting;
-        MetadataUtils::ConvertMetadataToVec(meta, setting);
-        CAMERA_LOGI("ConvertMetadataToVec start");
-        cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
-        CAMERA_LOGI("UpdateSettings start");
-        EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
+            cameraTest->intents = {PREVIEW, STILL_CAPTURE};
+            cameraTest->StartProfessionalStream(cameraTest->intents, OHOS::HDI::Camera::V1_3::PROFESSIONAL_PHOTO);
+            CAMERA_LOGI("StartProfessionalStream start");
+            std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
+            float physicalApertureValue = supportedPhysicalApertureValues_[i];
+            meta->addEntry(OHOS_CONTROL_CAMERA_PHYSICAL_APERTURE_VALUE, &physicalApertureValue, DATA_COUNT);
+            std::vector<uint8_t> setting;
+            MetadataUtils::ConvertMetadataToVec(meta, setting);
+            CAMERA_LOGI("ConvertMetadataToVec start");
+            cameraTest->rc = (CamRetCode)cameraTest->cameraDeviceV1_3->UpdateSettings(setting);
+            CAMERA_LOGI("UpdateSettings start");
+            EXPECT_EQ(HDI::Camera::V1_0::NO_ERROR, cameraTest->rc);
 
-        cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
-        CAMERA_LOGI("StartCapture,captureIdPreview");
-        cameraTest->StartCapture(cameraTest->streamIdCapture, cameraTest->captureIdCapture, false, false);
-        CAMERA_LOGI("StartCapture,captureIdCapture");
-        cameraTest->captureIds = {cameraTest->captureIdPreview};
-        cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdCapture};
-        cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
-        CAMERA_LOGI("StopStream");
+            cameraTest->StartCapture(cameraTest->streamIdPreview, cameraTest->captureIdPreview, false, true);
+            CAMERA_LOGI("StartCapture,captureIdPreview");
+            cameraTest->StartCapture(cameraTest->streamIdCapture, cameraTest->captureIdCapture, false, false);
+            CAMERA_LOGI("StartCapture,captureIdCapture");
+            cameraTest->captureIds = {cameraTest->captureIdPreview};
+            cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdCapture};
+            cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+            CAMERA_LOGI("StopStream");
         }
 
         sleep(UT_SECOND_TIMES);

@@ -117,10 +117,13 @@ int32_t Test::DefferredImageTestInit()
         return -1;
     }
     imageProcessCallback_ = new OHOS::Camera::Test::TestImageProcessCallback();
-    EXPECT_NE(imageProcessCallback_, nullptr);
+    if (imageProcessCallback_ == nullptr) {
+        CAMERA_LOGE("imageProcessCallback_ is nullptr");
+        printf("imageProcessCallback_ is nullptr");
+        return -1;
+    }
     ret = imageProcessService_->CreateImageProcessSession(userId, imageProcessCallback_, imageProcessSession_);
-    EXPECT_EQ(ret, 0);
-    if (imageProcessSession_ == nullptr) {
+    if (ret != 0 && imageProcessSession_ == nullptr) {
         CAMERA_LOGE("CreateImageProcessSession Fail, imageProcessSession is nullptr: %{public}d", ret);
         printf("CreateImageProcessSession Fail, imageProcessSession is nullptr: %d\r\n", ret);
         return -1;

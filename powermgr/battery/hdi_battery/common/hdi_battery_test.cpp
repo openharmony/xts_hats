@@ -61,7 +61,7 @@ public:
 void HdfBatteryHdiTest::SetUpTestCase(void)
 {
     g_batteryInterface = IBatteryInterface::Get(true);
-    if(g_batteryInterface == nullptr) {
+    if (g_batteryInterface == nullptr) {
         GTEST_SKIP() << "This component is not supported on this device.";
     }
 }

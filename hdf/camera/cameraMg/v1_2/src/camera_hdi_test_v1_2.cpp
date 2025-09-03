@@ -63,7 +63,7 @@ bool CameraHdiTestV1_2::TakePhoteWithDefferredImage(int PhotoCount)
             printf("DefferredImage StartStream failed.\r\n");
             return false;
         }
-    }else {
+    } else {
         printf("DefferredImage UpdateSettings failed.\r\n");
         return false;
     }
@@ -80,7 +80,7 @@ bool CameraHdiTestV1_2::RemovePendingImages()
             if (ret != 0) {
                 printf("RemoveImage failed.\r\n");
                 return false;
-            }            
+            }
         }
     } else {
         printf("pendingImages.size failed.\r\n");

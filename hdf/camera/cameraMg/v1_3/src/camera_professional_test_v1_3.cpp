@@ -87,7 +87,7 @@ bool GetSupportedPhysicalApertureValues(std::shared_ptr<CameraMetadata> ability)
         printf("OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE NOT FOUND.\n");
         return false;
     }
-    return false;
+    return true;
 }
 
 void FillCaptureSetting(std::shared_ptr<OHOS::Camera::Test> cameraTest)

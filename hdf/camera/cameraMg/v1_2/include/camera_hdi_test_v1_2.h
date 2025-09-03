@@ -25,8 +25,8 @@ public:
     void SetUp(void);
     void TearDown(void);
     void TakePhotoWithTags(std::shared_ptr<OHOS::Camera::CameraSetting> meta);
-    void TakePhoteWithDefferredImage(int PhotoCount);
-    void RemovePendingImages(void);
+    bool TakePhoteWithDefferredImage(int PhotoCount);
+    bool RemovePendingImages(void);
     void ProcessPendingImages(int ret);
     std::shared_ptr<OHOS::Camera::Test> cameraTest = nullptr;
 };

@@ -63,17 +63,17 @@ bool g_isModeExists(std::shared_ptr<CameraMetadata> ability, uint32_t tag, uint8
     return false;
 }
 
-void GetSupportedPhysicalApertureValues(std::shared_ptr<CameraMetadata> ability)
+bool GetSupportedPhysicalApertureValues(std::shared_ptr<CameraMetadata> ability)
 {
     supportedPhysicalApertureValues_.clear();
     if (ability == nullptr) {
         printf("ability is nullptr.\n");
-        return;
+        return false;
     }
     common_metadata_header_t* data = ability->get();
     if (data == nullptr) {
         printf("data is nullptr.\n");
-        return;
+        return false;
     }
     camera_metadata_item_t entry;
     int rc = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE, &entry);
@@ -85,7 +85,9 @@ void GetSupportedPhysicalApertureValues(std::shared_ptr<CameraMetadata> ability)
         }
     } else {
         printf("OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE NOT FOUND.\n");
+        return false;
     }
+    return false;
 }
 
 void FillCaptureSetting(std::shared_ptr<OHOS::Camera::Test> cameraTest)
@@ -449,7 +451,10 @@ HWTEST_F(CameraProfessionalTestV1_3, SUB_Driver_Camera_ProfessionalPhoto_0900, T
     FillCaptureSetting(cameraTest);
     CAMERA_LOGI("FillCaptureSetting start");
     if (cameraTest->ability != nullptr) {
-        GetSupportedPhysicalApertureValues(cameraTest->ability);
+        bool flag = GetSupportedPhysicalApertureValues(cameraTest->ability);
+        if (!flag) {
+            GTEST_SKIP() << "skip this test, because GetSupportedPhysicalApertureValues not found" << std::endl;
+        }
         CAMERA_LOGI("GetSupportedPhysicalApertureValues start");
         for (uint8_t i = 0;i < supportedPhysicalApertureValues_.size();i++) {
             cameraTest->intents = {PREVIEW, STILL_CAPTURE};
@@ -1089,11 +1094,13 @@ HWTEST_F(CameraProfessionalTestV1_3, SUB_Driver_Camera_ProfessionalVideo_1600, T
         return;
     }
     EXPECT_NE(cameraTest->ability, nullptr);
-    GetSupportedPhysicalApertureValues(cameraTest->ability);
+    bool flag = GetSupportedPhysicalApertureValues(cameraTest->ability);
+    if (!flag) {
+        GTEST_SKIP() << "GetSupportedPhysicalApertureValues not found" << std::endl;
+    }
     if (supportedPhysicalApertureValues_.size() == 0)
     {
         GTEST_SKIP() << "OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE is not support" << std::endl;
-        return;
     }
 
     for (uint8_t i = 0;i < supportedPhysicalApertureValues_.size();i++) {

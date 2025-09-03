@@ -758,9 +758,9 @@ HWTEST_F(AudioUtCaptureTest, SUB_Driver_Audio_CaptureHdi_4000, TestSize.Level1)
     ret = capture_->GetCurrentChannelId(capture_, &channelId);
     EXPECT_EQ(ret, HDF_SUCCESS);
     if (channelId > 0) {
-        if(channelId == TEST_CHANNEL_COUNT){
-            printf("have two mic")
-        }else{
+        if (channelId == TEST_CHANNEL_COUNT) {
+            printf("have two mic");
+        } else {
             GTEST_SKIP() << "The number of mic is not a quantity" << std::endl;
         }
     }

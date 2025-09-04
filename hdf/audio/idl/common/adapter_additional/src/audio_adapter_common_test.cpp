@@ -722,6 +722,19 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture001, TestSize.Level1)
  */
 HWTEST_F(HdfAudioUtAdapterTestAdditional, testReleaseAudioRoute001, TestSize.Level1)
 {
+    struct IAudioRender *render = nullptr;
+    struct AudioDeviceDescriptor devicedesc = {};
+    struct AudioSampleAttributes attrs = {};
+    InitDevDesc(devicedesc);
+    devicedesc.desc = const_cast<char *>("primary");
+    devicedesc.pins = PIN_OUT_HEADSET;
+    InitAttrs(attrs);
+    int32_t ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
+    if (ret != HDF_SUCCESS) {
+        attrs.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
+        EXPECT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
+    }
+
     int32_t routeHandle = -1;
     AudioRouteNode source = {};
     AudioRouteNode sink = {};
@@ -730,8 +743,8 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testReleaseAudioRoute001, TestSize.Lev
     source.role = AUDIO_PORT_SOURCE_ROLE;
     source.type = AUDIO_PORT_MIX_TYPE;
     source.ext.mix.moduleId = static_cast<int32_t>(0);
-    source.ext.mix.streamId = PRIMARY_OUTPUT_STREAM_ID;
-    source.ext.device.desc = (char *)"";
+    source.ext.mix.streamId = PRIMARY_OUTPUT_STREAM_ID_14;
+    source.ext.device.desc = (char *)"""";
 
     sink.ext.device.type = PIN_OUT_EARPIECE;
     sink.ext.device.desc = (char *)"pin_out_earpiece";
@@ -739,7 +752,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testReleaseAudioRoute001, TestSize.Lev
     sink.role = AUDIO_PORT_SINK_ROLE;
     sink.type = AUDIO_PORT_DEVICE_TYPE;
     sink.ext.device.moduleId = static_cast<int32_t>(0);
-    sink.ext.device.desc = (char *)"";
+    sink.ext.device.desc = (char *)"""";
 
     AudioRoute route = {
         .sources = &source,
@@ -747,7 +760,18 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testReleaseAudioRoute001, TestSize.Lev
         .sinks = &sink,
         .sinksLen = 1,
     };
-    int32_t ret = adapter_->UpdateAudioRoute(adapter_, &route, &routeHandle);
+    ret = adapter_->UpdateAudioRoute(adapter_, &route, &routeHandle);
+    if (ret != HDF_SUCCESS) {
+        source.ext.mix.streamId = PRIMARY_OUTPUT_STREAM_ID_14;
+        AudioRoute route = {
+            .sources = &source,
+            .sourcesLen = 1,
+            .sinks = &sink,
+            .sinksLen = 1,
+        };
+        ret = adapter_->UpdateAudioRoute(adapter_, &route, &routeHandle);
+    }
+
 #if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 #else
@@ -759,6 +783,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testReleaseAudioRoute001, TestSize.Lev
 #else
     ASSERT_TRUE(ret == HDF_SUCCESS);
 #endif
+    EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyRender(adapter_,renderId_));
 }
 
 /**

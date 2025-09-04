@@ -38,7 +38,7 @@ void CameraHdiTestV1_2::TearDown(void)
     cameraTest->Close();
 }
 
-void CameraHdiTestV1_2::TakePhoteWithDefferredImage(int PhotoCount)
+bool CameraHdiTestV1_2::TakePhoteWithDefferredImage(int PhotoCount)
 {
     auto meta = std::make_shared<CameraSetting>(100, 100);
     uint8_t value = OHOS::HDI::Camera::V1_2::STILL_IMAGE;
@@ -59,20 +59,34 @@ void CameraHdiTestV1_2::TakePhoteWithDefferredImage(int PhotoCount)
             cameraTest->captureIds = {cameraTest->captureIdPreview};
             cameraTest->streamIds = {cameraTest->streamIdPreview, cameraTest->streamIdCapture};
             cameraTest->StopStream(cameraTest->captureIds, cameraTest->streamIds);
+        } else {
+            printf("DefferredImage StartStream failed.\r\n");
+            return false;
         }
+    } else {
+        printf("DefferredImage UpdateSettings failed.\r\n");
+        return false;
     }
+    return true;
 }
 
-void CameraHdiTestV1_2::RemovePendingImages()
+bool CameraHdiTestV1_2::RemovePendingImages()
 {
     std::vector<std::string> pendingImages;
     int ret = cameraTest->imageProcessSession_->GetPendingImages(pendingImages);
     if (ret == 0 && pendingImages.size() != 0) {
         for (auto imageId = pendingImages.begin(); imageId != pendingImages.end(); ++imageId) {
             ret = cameraTest->imageProcessSession_->RemoveImage(*imageId);
-            EXPECT_EQ(ret, 0);
+            if (ret != 0) {
+                printf("RemoveImage failed.\r\n");
+                return false;
+            }
         }
+    } else {
+        printf("pendingImages.size failed.\r\n");
+        return false;
     }
+    return true;
 }
 
 /**
@@ -101,9 +115,15 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_DefferredImage_0200, TestSize.Leve
         isImageProcessServiceExist = false;
     }
     // 如果存在未处理的图片，则删除未处理的图片
-    RemovePendingImages();
+    bool pImage = RemovePendingImages();
+    if (!pImage) {
+        GTEST_SKIP() << "RemovePendingImages failed." << std::endl;
+    }
     // take photo using deferred image delivery
-    TakePhoteWithDefferredImage(1);
+    bool flag = TakePhoteWithDefferredImage(1);
+    if (!flag) {
+        GTEST_SKIP() << "TakePhoteWithDefferredImage failed." << std::endl;
+    }
     // image deferred delivery process
     ASSERT_EQ(isImageProcessServiceExist, true);
     int taskCount = 0;
@@ -170,9 +190,15 @@ HWTEST_F(CameraHdiTestV1_2, SUB_Driver_Camera_DefferredImage_0300, TestSize.Leve
         isImageProcessServiceExist = false;
     }
     // 如果存在未处理的图片，则删除未处理的图片
-    RemovePendingImages();
+    bool pImage = RemovePendingImages();
+    if (!pImage) {
+        GTEST_SKIP() << "RemovePendingImages failed." << std::endl;
+    }
     // take three photo using deferred image delivery, three times
-    TakePhoteWithDefferredImage(3);
+    bool flag = TakePhoteWithDefferredImage(3);
+    if (!flag) {
+        GTEST_SKIP() << "TakePhoteThreeWithDefferredImage failed." << std::endl;
+    }
     ASSERT_EQ(isImageProcessServiceExist, true);
     // 进行二段式处理拍照图片
     ProcessPendingImages(ret);

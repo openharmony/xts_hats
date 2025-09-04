@@ -61,14 +61,12 @@ HWTEST_F(FrontCameraTagTestV1_2, SUB_Driver_Camera_Modes_0050, TestSize.Level1)
     camera_metadata_item_t entry;
     int ret = FindCameraMetadataItem(data, OHOS_ABILITY_SCENE_BEAUTY_TYPES, &entry);
     if (ret != 0) {
-        CAMERA_LOGI("OHOS_ABILITY_SCENE_BEAUTY_TYPES not found");
-        return;
+        GTEST_SKIP() << "OHOS_ABILITY_SCENE_BEAUTY_TYPES not found" << std::endl;
     }
     CAMERA_LOGI("OHOS_ABILITY_SCENE_BEAUTY_TYPES found");
     printf("OHOS_ABILITY_SCENE_BEAUTY_TYPES value count is %d\n", entry.count);
     if (entry.count == 0) {
-        CAMERA_LOGI("OHOS_ABILITY_SCENE_BEAUTY_TYPES value count is 0");
-        return;
+        GTEST_SKIP() << "OHOS_ABILITY_SCENE_BEAUTY_TYPES value count is 0" << std::endl;
     } else {
         for (size_t i = 0; i < entry.count; i++) {
             std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
@@ -97,19 +95,16 @@ HWTEST_F(FrontCameraTagTestV1_2, SUB_Driver_Camera_Modes_0070, TestSize.Level1)
     bool beautyFaceSlenderFlag = g_isFrontTagValueExistsU8(cameraTest->ability, OHOS_ABILITY_SCENE_BEAUTY_TYPES,
         OHOS_CAMERA_BEAUTY_TYPE_FACE_SLENDER);
     if (!beautyFaceSlenderFlag) {
-        CAMERA_LOGE("OHOS_CAMERA_BEAUTY_TYPE_FACE_SLENDER not found");
-        return;
+        GTEST_SKIP() << "OHOS_CAMERA_BEAUTY_TYPE_FACE_SLENDER not found" << std::endl;
     }
 
     int ret = FindCameraMetadataItem(data, OHOS_ABILITY_BEAUTY_FACE_SLENDER_VALUES, &entry);
     if (ret != 0) {
-        CAMERA_LOGI("OHOS_ABILITY_BEAUTY_FACE_SLENDER_VALUES not found");
-        return;
+        GTEST_SKIP() << "OHOS_ABILITY_BEAUTY_FACE_SLENDER_VALUES not found" << std::endl;
     }
     printf("OHOS_ABILITY_BEAUTY_FACE_SLENDER_VALUES value count is %d\n", entry.count);
     if (entry.count == 0) {
-        CAMERA_LOGI("OHOS_ABILITY_BEAUTY_FACE_SLENDER_VALUES value count is 0");
-        return;
+        GTEST_SKIP() << "OHOS_ABILITY_BEAUTY_FACE_SLENDER_VALUES value count is 0" << std::endl;
     } else {
         for (size_t i = 0; i < entry.count; i++) {
             std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
@@ -139,18 +134,15 @@ HWTEST_F(FrontCameraTagTestV1_2, SUB_Driver_Camera_Modes_0080, TestSize.Level1)
     bool beautyFaceSlenderFlag = g_isFrontTagValueExistsU8(cameraTest->ability,
         OHOS_ABILITY_SCENE_BEAUTY_TYPES, OHOS_CAMERA_BEAUTY_TYPE_SKIN_TONE);
     if (!beautyFaceSlenderFlag) {
-        CAMERA_LOGE("OHOS_CAMERA_BEAUTY_TYPE_SKIN_TONE not found");
-        return;
+        GTEST_SKIP() << "OHOS_CAMERA_BEAUTY_TYPE_SKIN_TONE not found" << std::endl;
     }
     int ret = FindCameraMetadataItem(data, OHOS_ABILITY_BEAUTY_SKIN_TONE_VALUES, &entry);
     if (ret != 0) {
-        CAMERA_LOGI("OHOS_ABILITY_BEAUTY_SKIN_TONE_VALUES not found");
-        return;
+        GTEST_SKIP() << "OHOS_ABILITY_BEAUTY_SKIN_TONE_VALUES not found" << std::endl;
     }
     printf("OHOS_ABILITY_BEAUTY_SKIN_TONE_VALUES value count is %d\n", entry.count);
     if (entry.count == 0) {
-        CAMERA_LOGI("OHOS_ABILITY_BEAUTY_SKIN_TONE_VALUES value count is 0");
-        return;
+        GTEST_SKIP() << "OHOS_ABILITY_BEAUTY_SKIN_TONE_VALUES value count is 0" << std::endl;
     } else {
         for (size_t i = 0; i < entry.count; i++) {
             std::shared_ptr<CameraSetting> meta = std::make_shared<CameraSetting>(ITEM_CAPACITY, DATA_CAPACITY);
@@ -180,18 +172,15 @@ HWTEST_F(FrontCameraTagTestV1_2, SUB_Driver_Camera_Modes_0090, TestSize.Level1)
     bool beautyFaceSlenderFlag = g_isFrontTagValueExistsU8(cameraTest->ability,
         OHOS_ABILITY_SCENE_BEAUTY_TYPES, OHOS_CAMERA_BEAUTY_TYPE_SKIN_SMOOTH);
     if (!beautyFaceSlenderFlag) {
-        CAMERA_LOGE("OHOS_CAMERA_BEAUTY_TYPE_SKIN_SMOOTH, not found");
-        return;
+        GTEST_SKIP() << "OHOS_CAMERA_BEAUTY_TYPE_SKIN_SMOOTH value count is 0" << std::endl;
     }
-
     int ret = FindCameraMetadataItem(data, OHOS_ABILITY_BEAUTY_SKIN_SMOOTH_VALUES, &entry);
     if (ret != 0) {
-        CAMERA_LOGI("OHOS_ABILITY_BEAUTY_SKIN_SMOOTH_VALUES not found");
-        return;
+        GTEST_SKIP() << "OHOS_ABILITY_BEAUTY_SKIN_SMOOTH_VALUES value not found" << std::endl;
     }
     printf("OHOS_ABILITY_BEAUTY_SKIN_SMOOTH_VALUES value count is %d\n", entry.count);
     if (entry.count == 0) {
-        CAMERA_LOGI("OHOS_ABILITY_BEAUTY_SKIN_SMOOTH_VALUES value count is 0");
+        GTEST_SKIP() << "OHOS_ABILITY_BEAUTY_SKIN_SMOOTH_VALUES value count is 0" << std::endl;
         return;
     } else {
         for (size_t i = 0; i < entry.count; i++) {

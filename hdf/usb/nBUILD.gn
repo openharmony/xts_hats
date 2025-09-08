@@ -71,12 +71,43 @@ group("HatsHdfUsbTest") {
   } else {
     if (hats_rich == false) {
       deps = [
-        "V2_0/autoFunctionTest:HatsHdfUsbAutoFunctionTest",
+        #"V2_1/deviceStatusTest:HatsHdfUsbDeviceStatusTest",
+        #"V2_1/deviceTest:HatsHdfUsbDeviceTest",
+        #"V2_1/deviceTest_additional:HatsHdfUsbDeviceAdditionalTest",
+        #"V2_1/functionTest:HatsHdfUsbFunctionTest",
+        #"V2_1/functionTest_additional:HatsHdfUsbFunctionAdditionalTest",
+        #"V2_1/manageInterfaceTest:HatsHdfUsbManageInterfaceTest",
+        #"V2_1/mtpTest:HatsHdfUsbFnMtpTest",
+        #"V2_1/mtpTest_additional:HatsHdfUsbFnMtpAdditionalTest",
+        #"V2_1/requestTest:HatsHdfUsbRequestTest",
+        #"V2_1/requestTest_additional:requestAdditional_test",
+        #"V2_1/transferTest:HatsHdfUsbTransferTest",
+        #"V2_1/transferTest_additional:transferAdditional_test",
+
+        #"V2_1/usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
+        #"V2_1/usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",
+        #"V2_1/usbdBenchmarkTest:HatsHdfUsbBenchmarkManagerInterfaceTest",
+        #"V2_1/usbdBenchmarkTest:HatsHdfUsbBenchmarkRequestTest",
+        #"V2_1/usbdBenchmarkTest:HatsHdfUsbBenchmarkTransferTest",
       ]
     } else {
       deps = [
-        "V2_0/accessoryTest:HatsHdfUsbAccessoryTest",
-        "V2_0/autoFunctionTest:HatsHdfUsbAutoFunctionTest",
+        #"V2_1/deviceStatusTest:HatsHdfUsbDeviceStatusTest",
+        #"V2_1/deviceTest:HatsHdfUsbDeviceTest",
+        #"V2_1/deviceTest_additional:HatsHdfUsbDeviceAdditionalTest",
+        #"V2_1/functionTest:HatsHdfUsbFunctionTest",
+        #"V2_1/functionTest_additional:HatsHdfUsbFunctionAdditionalTest",
+        #"V2_1/manageInterfaceTest:HatsHdfUsbManageInterfaceTest",
+        #"V2_1/requestTest:HatsHdfUsbRequestTest",
+        #"V2_1/requestTest_additional:requestAdditional_test",
+        #"V2_1/transferTest:HatsHdfUsbTransferTest",
+        #"V2_1/transferTest_additional:transferAdditional_test",
+
+        #"V2_1/usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
+        #"V2_1/usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",
+        #"V2_1/usbdBenchmarkTest:HatsHdfUsbBenchmarkManagerInterfaceTest",
+        #"V2_1/usbdBenchmarkTest:HatsHdfUsbBenchmarkRequestTest",
+        #"V2_1/usbdBenchmarkTest:HatsHdfUsbBenchmarkTransferTest",
       ]
     }
   }

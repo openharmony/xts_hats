@@ -775,7 +775,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional,testReleaseAudioRoute001,TestSize.Level
 #else
     ASSERT_TRUE(ret == HDF_SUCCESS);
 #endif
-    EXPECT_EQ(HDF_SUCCESS,adapter_->DestroyRender(adapter_,renderId));
+    EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId));
 }
 
 /**

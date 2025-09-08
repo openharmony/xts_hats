@@ -720,7 +720,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture001, TestSize.Level1)
  * @tc.desc  : Verify the reliability of the ReleaseAudioRoute function when
  * parameter routeHandle as 1.
  */
-HWTEST_F(HdfAudioUtAdapterTestAdditional,testReleaseAudioRoute001,TestSize.Level1)
+HWTEST_F(HdfAudioUtAdapterTestAdditional, testReleaseAudioRoute001, TestSize.Level1)
 {
     uint32_t renderId = 0;
     struct IAudioRender *render = nullptr;

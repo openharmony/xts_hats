@@ -30,7 +30,7 @@ using namespace testing::ext;
 #define INT_32_MAX 0x7fffffff
 #define PCM_16_BIT 16
 #define PCM_8_BIT 8
-#define PRIMARY_OUTPUT_STREAM_ID 14
+#define PRIMARY_OUTPUT_STREAM_ID_13 13
 
 namespace {
 static const uint32_t AUDIO_ADAPTER_NUM_MAX = 5;

@@ -299,6 +299,7 @@ HWTEST_F(UsbdFunctionTestAdditional, testHdiUsbFunctionTestSetPortRole003, Funct
 
 /**
  * @tc.number: SUB_USB_DeviceManager_HDI_FunctionTest_2800
+ * @tc.name: testHdiUsbFunctionTestSetPortRole004
  * @tc.desc: Closes a USB device to release all system resources related to the device.The entries are (DEFAULT_PORT_ID,
  * POWER_ROLE_NONE, USB_DATA_ROLE_INVALID).
  */

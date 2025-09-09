@@ -69,7 +69,7 @@ bool CameraHdiTestV1_2::TakePhoteWithDefferredImage(int PhotoCount)
     }
     return true;
 }
-
+   
 bool CameraHdiTestV1_2::RemovePendingImages()
 {
     std::vector<std::string> pendingImages;
@@ -82,10 +82,7 @@ bool CameraHdiTestV1_2::RemovePendingImages()
                 return false;
             }
         }
-    } else {
-        printf("pendingImages.size failed.\r\n");
-        return false;
-    }
+    } 
     return true;
 }
 

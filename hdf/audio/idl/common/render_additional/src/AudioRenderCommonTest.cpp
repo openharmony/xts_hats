@@ -312,13 +312,15 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderRenderFrame005, Function |
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetRenderPosition001, Function | MediumTest | Level1)
 {
+#ifndef DISPLAY_COMMUNITY
+    render_->Stop(render_);
+#endif
     uint64_t frames = 0;
     struct AudioTimeStamp time;
     time.tvSec = 0;
     time.tvNSec = 0;
     int32_t ret = 0;
-    int i = 0;
-    for (i = 0; i < 1000; i++) {
+    for (int i = 0; i < 1000; i++) {
         ret |= render_->GetRenderPosition(render_, &frames, &time);
     }
 #if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE

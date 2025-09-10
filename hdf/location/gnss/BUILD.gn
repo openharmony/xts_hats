@@ -56,7 +56,7 @@ ohos_moduletest_suite("HatsHdfLocationgnssTest") {
     }
     if (hdf_drivers_interface_location_gnss_enable && location_feature_with_gnss) {
       external_deps +=
-          [ "drivers_interface_location_gnss:liblocation_gnss_proxy_2.0 " ]
+          [ "drivers_interface_location_gnss:liblocation_gnss_proxy_2.0" ]
       defines += [ "FEATURE_GNSS_SUPPORT" ]
     }
   } else {

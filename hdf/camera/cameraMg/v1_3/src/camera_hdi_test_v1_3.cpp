@@ -822,7 +822,8 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_HighQuality_0200, TestSize.Level1)
         cameraTest->deviceCallback = new OHOS::Camera::Test::DemoCameraDeviceCallback();
 
         EXPECT_NE(cameraTest->serviceV1_3, nullptr);
-        cameraTest->rc = serviceV1_3->OpenCamera_V1_3(cameraTest->cameraIds[1], cameraTest->deviceCallback, cameraTest->cameraDeviceV1_3);
+        cameraTest->rc = serviceV1_3->OpenCamera_V1_3(cameraTest->cameraIds[1],
+            cameraTest->deviceCallback, cameraTest->cameraDeviceV1_3);
         EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
         EXPECT_NE(cameraTest->cameraDeviceV1_3, nullptr);
         CAMERA_LOGI("OpenCamera V1_3 success");

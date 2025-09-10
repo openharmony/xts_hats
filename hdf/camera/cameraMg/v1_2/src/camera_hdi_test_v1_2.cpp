@@ -82,7 +82,7 @@ bool CameraHdiTestV1_2::RemovePendingImages()
                 return false;
             }
         }
-    } 
+    }
     return true;
 }
 

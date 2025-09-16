@@ -456,6 +456,23 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_HighResolution_0200, TestSize.Leve
         GTEST_SKIP() << "skip this test, because HIGH_RESOLUTION_PHOTO not in OHOS_ABILITY_CAMERA_MODES" << std::endl;
         return;
     }
+    cameraTest->Close();
+    if (cameraTest->cameraDeviceV1_3 == nullptr) {
+        if (cameraTest->cameraIds.size() <= CAMERA_ID_NUM) {
+            CAMERA_LOGE("camera device list empty");
+            GTEST_SKIP() << "No Camera Available" << std::endl;
+            return;
+        }
+        EXPECT_NE(cameraTest->serviceV1_3, nullptr);
+        cameraTest->GetCameraMetadata(2);
+        cameraTest->deviceCallback = new OHOS::Camera::Test::DemoCameraDeviceCallback();
+
+        cameraTest->rc = cameraTest->serviceV1_3->OpenCamera_V1_3(cameraTest->cameraIds[2],
+            cameraTest->deviceCallback, cameraTest->cameraDeviceV1_3);
+        EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+        EXPECT_NE(cameraTest->cameraDeviceV1_3, nullptr);
+        CAMERA_LOGI("OpenCamera V1_3 success");
+    }
     EXPECT_NE(cameraTest->ability, nullptr);
     common_metadata_header_t* data = cameraTest->ability->get();
     EXPECT_NE(data, nullptr);
@@ -809,26 +826,6 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_DynamicFps_0500, TestSize.Level1)
  */
 HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_HighQuality_0200, TestSize.Level1)
 {
-    cameraTest->Close();
-    if (cameraTest->cameraDeviceV1_3 == nullptr) {
-        if (cameraTest->cameraIds.size() <= CAMERA_ID_NUM) {
-            CAMERA_LOGE("camera device list empty");
-            GTEST_SKIP() << "No Camera Available" << std::endl;
-            return;
-        }
-        EXPECT_NE(cameraTest->serviceV1_3, nullptr);
-        EXPECT_NE(cameraTest->cameraIds.size(), 0);
-        cameraTest->GetCameraMetadata(2);
-        cameraTest->deviceCallback = new OHOS::Camera::Test::DemoCameraDeviceCallback();
-
-        EXPECT_NE(cameraTest->serviceV1_3, nullptr);
-        cameraTest->rc = cameraTest->serviceV1_3->OpenCamera_V1_3(cameraTest->cameraIds[2],
-            cameraTest->deviceCallback, cameraTest->cameraDeviceV1_3);
-        EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
-        EXPECT_NE(cameraTest->cameraDeviceV1_3, nullptr);
-        CAMERA_LOGI("OpenCamera V1_3 success");
-    }
-
     CAMERA_LOGI("test OHOS_CONTROL_HIGH_QUALITY_MODE_OFF start.");
     cameraTest->streamOperatorCallbackV1_3 = new OHOS::Camera::Test::TestStreamOperatorCallbackV1_3();
     cameraTest->rc = cameraTest->cameraDeviceV1_3->GetStreamOperator_V1_3(
@@ -870,26 +867,6 @@ HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_HighQuality_0200, TestSize.Level1)
  */
 HWTEST_F(CameraHdiTestV1_3, SUB_Driver_Camera_HighQuality_0300, TestSize.Level1)
 {
-    cameraTest->Close();
-    if (cameraTest->cameraDeviceV1_3 == nullptr) {
-        if (cameraTest->cameraIds.size() <= CAMERA_ID_NUM) {
-            CAMERA_LOGE("camera device list empty");
-            GTEST_SKIP() << "No Camera Available" << std::endl;
-            return;
-        }
-        EXPECT_NE(cameraTest->serviceV1_3, nullptr);
-        EXPECT_NE(cameraTest->cameraIds.size(), 0);
-        cameraTest->GetCameraMetadata(2);
-        cameraTest->deviceCallback = new OHOS::Camera::Test::DemoCameraDeviceCallback();
-
-        EXPECT_NE(cameraTest->serviceV1_3, nullptr);
-        cameraTest->rc = cameraTest->serviceV1_3->OpenCamera_V1_3(cameraTest->cameraIds[2],
-            cameraTest->deviceCallback, cameraTest->cameraDeviceV1_3);
-        EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
-        EXPECT_NE(cameraTest->cameraDeviceV1_3, nullptr);
-        CAMERA_LOGI("OpenCamera V1_3 success");
-    }
-
     CAMERA_LOGI("test OHOS_CONTROL_HIGH_QUALITY_MODE_ON start.");
     cameraTest->streamOperatorCallbackV1_3 = new OHOS::Camera::Test::TestStreamOperatorCallbackV1_3();
     cameraTest->rc = cameraTest->cameraDeviceV1_3->GetStreamOperator_V1_3(

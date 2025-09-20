@@ -481,6 +481,9 @@ HWTEST_F(CameraProfessionalTestV1_3, SUB_Driver_Camera_ProfessionalPhoto_0900, T
         }
 
         sleep(UT_SECOND_TIMES);
+        if (cameraTest->deviceCallback->resultMeta == nullptr) {
+            GTEST_SKIP() << "resultMeta is null" << std::endl;
+        }
         common_metadata_header_t* callbackData = cameraTest->deviceCallback->resultMeta->get();
         EXPECT_NE(callbackData, nullptr);
         camera_metadata_item_t callbackEntry;

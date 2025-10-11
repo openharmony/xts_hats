@@ -438,6 +438,9 @@ HWTEST_F(AudioUtCaptureTest, SUB_Driver_Audio_CaptureHdi_1700, TestSize.Level1)
     EXPECT_EQ(ret, HDF_SUCCESS);
 
     ret = capture_->TurnStandbyMode(capture_);
+    if(ret == HDF_ERR_NOT_SUPPORT){
+        GETST_SKIP()<< "skip this test" << std::endl;
+    }
     EXPECT_EQ(ret, HDF_SUCCESS);
     capture_->Stop(capture_);
 }
@@ -989,6 +992,9 @@ HWTEST_F(AudioUtCaptureTest, SUB_Driver_Audio_CaptureHdi_5800, TestSize.Level1)
     bool isSupport = false;
 
     int32_t ret = capture_->CheckSceneCapability(capture_, &sceneDesc, &isSupport);
+    if(ret == HDF_ERR_NOT_SUPPORT){
+        GETST_SKIP()<< "skip this test" << std::endl;
+    }
     EXPECT_EQ(ret, HDF_SUCCESS);
     free(sceneDesc.desc.desc);
 }

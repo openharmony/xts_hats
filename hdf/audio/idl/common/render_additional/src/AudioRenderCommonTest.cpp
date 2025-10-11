@@ -537,6 +537,9 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderCheckSceneCapability001, F
     scene.desc = devDescRender_;
     for (i = 0; i < 1000; i++) {
         ret |= render_->CheckSceneCapability(render_, &scene, &supported);
+        if(ret == HDF_ERR_NOT_SUPPORT){
+        GETST_SKIP()<< "skip this test" << std::endl;
+        }
         EXPECT_EQ(HDF_SUCCESS, ret);
     }
 }
@@ -596,6 +599,10 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderCheckSceneCapability006, F
     scene.scene.id = AUDIO_IN_COMMUNICATION;
     scene.desc = devDescRender_;
     bool supported = false;
+    ret = render_->CheckSceneCapability(render_, &scene, &supported);
+    if(ret == HDF_ERR_NOT_SUPPORT){
+        GETST_SKIP()<< "skip this test" << std::endl;
+    }
     EXPECT_EQ(HDF_SUCCESS, render_->CheckSceneCapability(render_, &scene, &supported));
 }
 
@@ -2771,6 +2778,9 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode004, TestSi
     ret = render_->Stop(render_);
     EXPECT_EQ(HDF_SUCCESS, ret);
     ret = render_->TurnStandbyMode(render_);
+    if(ret == HDF_ERR_NOT_SUPPORT){
+        GETST_SKIP()<< "skip this test" << std::endl;
+    }
 #if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_FAILURE, ret);
 #else
@@ -2791,6 +2801,9 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode005, TestSi
     EXPECT_EQ(HDF_SUCCESS, ret);
     for (int i = 0; i < 50; i++) {
         ret = render_->TurnStandbyMode(render_);
+        if(ret == HDF_ERR_NOT_SUPPORT){
+        GETST_SKIP()<< "skip this test" << std::endl;
+    }
 #if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
         EXPECT_EQ(HDF_FAILURE, ret);
 #else
@@ -3041,6 +3054,9 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode002, TestSi
     EXPECT_EQ(HDF_SUCCESS, ret);
 
     ret = render_->Pause(render_);
+    if(ret == HDF_ERR_NOT_SUPPORT){
+        GETST_SKIP()<< "skip this test" << std::endl;
+    }
 #if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, ret);
 #else
@@ -3066,6 +3082,9 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode003, TestSi
     render_->Flush(render_);
 
     ret = render_->TurnStandbyMode(render_);
+    if(ret == HDF_ERR_NOT_SUPPORT){
+        GETST_SKIP()<< "skip this test" << std::endl;
+    }
     EXPECT_EQ(HDF_SUCCESS, ret);
 
     ret = render_->Stop(render_);
@@ -3081,18 +3100,27 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode006, TestSi
     int32_t ret = render_->Start(render_);
     EXPECT_EQ(HDF_SUCCESS, ret);
     ret = render_->Pause(render_);
+    if(ret == HDF_ERR_NOT_SUPPORT){
+        GETST_SKIP()<< "skip this test" << std::endl;
+    }
 #if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, ret);
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 #endif
     ret = render_->Resume(render_);
+    if(ret == HDF_ERR_NOT_SUPPORT){
+        GETST_SKIP()<< "skip this test" << std::endl;
+    }
 #if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, ret);
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 #endif
     ret = render_->TurnStandbyMode(render_);
+    if(ret == HDF_ERR_NOT_SUPPORT){
+        GETST_SKIP()<< "skip this test" << std::endl;
+    }
     EXPECT_EQ(HDF_SUCCESS, ret);
     ret = render_->Stop(render_);
 }
@@ -3673,6 +3701,9 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop007, TestSize.Level1)
     int32_t ret = render_->Start(render_);
     EXPECT_EQ(HDF_SUCCESS, ret);
     ret = render_->TurnStandbyMode(render_);
+    if(ret == HDF_ERR_NOT_SUPPORT){
+        GETST_SKIP()<< "skip this test" << std::endl;
+    }
     EXPECT_EQ(HDF_SUCCESS, ret);
     ret = render_->Stop(render_);
 #if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE

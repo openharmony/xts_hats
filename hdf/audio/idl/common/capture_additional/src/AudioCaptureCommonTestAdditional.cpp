@@ -964,6 +964,9 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureCheckSceneCapability001, 
     bool isSupport = false;
 
     int32_t ret = capture_->CheckSceneCapability(capture_, &sceneDesc, &isSupport);
+    if(ret == HDF_ERR_NOT_SUPPORT){
+        GETST_SKIP()<< "skip this test" << std::endl;
+    }
     EXPECT_EQ(ret, HDF_SUCCESS);
     free(sceneDesc.desc.desc);
 }
@@ -985,6 +988,9 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureCheckSceneCapability002, 
     bool isSupport = false;
     for (i = 0; i < 1000; i++) {
         ret = capture_->CheckSceneCapability(capture_, &sceneDesc, &isSupport);
+        if(ret == HDF_ERR_NOT_SUPPORT){
+        GETST_SKIP()<< "skip this test" << std::endl;
+        }
         EXPECT_EQ(ret, HDF_SUCCESS);
     }
     free(sceneDesc.desc.desc);
@@ -2169,11 +2175,20 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureTurnStandbyMode001, Function |
     int32_t ret = 0;
 
     ret = capture_->Start(capture_);
+    if(ret == HDF_ERR_NOT_SUPPORT){
+        GETST_SKIP()<< "skip this test" << std::endl;
+    }
     EXPECT_EQ(ret, HDF_SUCCESS);
     sleep(1);
     ret = capture_->TurnStandbyMode(capture_);
+    if(ret == HDF_ERR_NOT_SUPPORT){
+        GETST_SKIP()<< "skip this test" << std::endl;
+    }
     EXPECT_EQ(ret, HDF_SUCCESS);
     ret = capture_->Stop(capture_);
+    if(ret == HDF_ERR_NOT_SUPPORT){
+        GETST_SKIP()<< "skip this test" << std::endl;
+    }
     EXPECT_EQ(ret, HDF_SUCCESS);
 }
 
@@ -2187,10 +2202,19 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureTurnStandbyMode002, Function |
     int32_t ret = 0;
 
     ret = capture_->TurnStandbyMode(capture_);
+    if(ret == HDF_ERR_NOT_SUPPORT){
+        GETST_SKIP()<< "skip this test" << std::endl;
+    }
     EXPECT_EQ(ret, HDF_SUCCESS);
     ret = capture_->Start(capture_);
+    if(ret == HDF_ERR_NOT_SUPPORT){
+        GETST_SKIP()<< "skip this test" << std::endl;
+    }
     EXPECT_EQ(ret, HDF_SUCCESS);
     ret = capture_->Stop(capture_);
+    if(ret == HDF_ERR_NOT_SUPPORT){
+        GETST_SKIP()<< "skip this test" << std::endl;
+    }
 }
 
 /**
@@ -2203,6 +2227,9 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureTurnStandbyMode003, Function |
     int32_t ret = 0;
     for (int32_t i = 0; i < 1000; i++) {
         ret = capture_->TurnStandbyMode(capture_);
+        if(ret == HDF_ERR_NOT_SUPPORT){
+        GETST_SKIP()<< "skip this test" << std::endl;
+        }
         EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }

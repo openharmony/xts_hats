@@ -537,7 +537,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderCheckSceneCapability001, F
     scene.desc = devDescRender_;
     for (i = 0; i < 1000; i++) {
         ret |= render_->CheckSceneCapability(render_, &scene, &supported);
-        if(ret == HDF_ERR_NOT_SUPPORT){
+        if (ret == HDF_ERR_NOT_SUPPORT) {
         GETST_SKIP()<< "skip this test" << std::endl;
         }
         EXPECT_EQ(HDF_SUCCESS, ret);

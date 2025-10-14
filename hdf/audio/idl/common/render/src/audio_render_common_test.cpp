@@ -491,7 +491,7 @@ HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_4500, TestSize.Level1)
     if (ret == HDF_ERR_NOT_SUPPORT) {
         GETST_SKIP()<< "skip this test" << std::endl;
     }
-    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_SUCCESS);
+    ASSERT_TRUE(ret == HDF_SUCCESS);
 }
 
 HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_4600, TestSize.Level1)

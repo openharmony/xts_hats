@@ -3100,18 +3100,12 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode006, TestSi
     int32_t ret = render_->Start(render_);
     EXPECT_EQ(HDF_SUCCESS, ret);
     ret = render_->Pause(render_);
-    if (ret == HDF_ERR_NOT_SUPPORT) {
-        GETST_SKIP()<< "skip this test" << std::endl;
-    }
 #if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, ret);
 #else
     EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 #endif
     ret = render_->Resume(render_);
-    if (ret == HDF_ERR_NOT_SUPPORT) {
-        GETST_SKIP()<< "skip this test" << std::endl;
-    }
 #if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, ret);
 #else

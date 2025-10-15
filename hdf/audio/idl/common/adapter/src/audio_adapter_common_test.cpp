@@ -294,7 +294,7 @@ HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_2000, TestSize.Level
     struct AudioPortCapability capability = {};
     int32_t ret = adapter_->GetPortCapability(adapter_, &port, &capability);
     if (ret == HDF_ERR_NOT_SUPPORT) {
-        GETST_SKIP()<< "skip this test" << std::endl;
+        GTEST_SKIP()<< "skip this test" << std::endl;
     }
     ASSERT_TRUE(ret == HDF_SUCCESS);
 }

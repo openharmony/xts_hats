@@ -599,7 +599,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderCheckSceneCapability006, F
     scene.scene.id = AUDIO_IN_COMMUNICATION;
     scene.desc = devDescRender_;
     bool supported = false;
-    ret = render_->CheckSceneCapability(render_, &scene, &supported);
+    int32_t ret = render_->CheckSceneCapability(render_, &scene, &supported);
     if (ret == HDF_ERR_NOT_SUPPORT) {
         GTEST_SKIP()<< "skip this test" << std::endl;
     }

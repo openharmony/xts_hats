@@ -112,7 +112,7 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_0060, TestSi
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::NORMAL);
     if (cameraTest->rc == -4) {
-        GETST_SKIP()<< "Prelaunch is not supported" << std::endl;
+        GTEST_SKIP()<< "Prelaunch is not supported" << std::endl;
     }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open(DEVICE_0);

@@ -332,7 +332,7 @@ HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_2600, TestSize.Level1)
     bool supported = false;
     scene.scene.id = AUDIO_IN_MEDIA;
     scene.desc = devDescRender_;
-    ret = render_->CheckSceneCapability(render_, &scene, &supported);
+    int32_t ret = render_->CheckSceneCapability(render_, &scene, &supported);
     if (ret == HDF_ERR_NOT_SUPPORT) {
         GTEST_SKIP()<< "skip this test" << std::endl;
     }

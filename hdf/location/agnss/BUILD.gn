@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//base/location/config.gni")
+import("//base/location/location/config.gni")
 import("//build/ohos_var.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
@@ -41,9 +41,9 @@ ohos_moduletest_suite("HatsHdfLocationagnssTest") {
     ]
     if (hdf_drivers_interface_location_agnss_enable) {
       external_deps += [
-        "drivers_interface_location_agnss:liblocation_agnss_proxy_2.0",
         "cellular_data:tel_cellular_data_api",
         "core_service:tel_core_service_api",
+        "drivers_interface_location_agnss:liblocation_agnss_proxy_2.0",
       ]
       defines += [ "HDF_DRIVERS_INTERFACE_AGNSS_ENABLE" ]
     }

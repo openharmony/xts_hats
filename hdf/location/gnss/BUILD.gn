@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//base/location/config.gni")
+import("//base/location/location/config.gni")
 import("//build/ohos_var.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
@@ -32,7 +32,8 @@ ohos_moduletest_suite("HatsHdfLocationgnssTest") {
   ]
   if (hdf_drivers_interface_location_gnss_enable) {
     ROOT_PATH = "../../../../../../drivers/peripheral"
-    deps += [ "${ROOT_PATH}/location/gnss/hdi_service:liblocation_gnss_hdi_driver" ]
+    deps +=
+        [ "${ROOT_PATH}/location/gnss/hdi_service:liblocation_gnss_hdi_driver" ]
   }
   if (is_standard_system) {
     external_deps = [
@@ -54,7 +55,8 @@ ohos_moduletest_suite("HatsHdfLocationgnssTest") {
       ]
       defines += [ "HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE" ]
     }
-    if (hdf_drivers_interface_location_gnss_enable && location_feature_with_gnss) {
+    if (hdf_drivers_interface_location_gnss_enable &&
+        location_feature_with_gnss) {
       external_deps +=
           [ "drivers_interface_location_gnss:liblocation_gnss_proxy_2.0" ]
       defines += [ "FEATURE_GNSS_SUPPORT" ]

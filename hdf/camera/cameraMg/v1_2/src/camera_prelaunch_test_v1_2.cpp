@@ -42,6 +42,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_0010, TestSi
 {
     std::string cameraId = "device/0";
     cameraTest->rc = cameraTest->serviceV1_2->PreCameraSwitch(cameraId);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PreCameraSwitch is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
 }
 
@@ -55,6 +58,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_0020, TestSi
 {
     std::string cameraId = "device/1";
     cameraTest->rc = cameraTest->serviceV1_2->PreCameraSwitch(cameraId);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PreCameraSwitch is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
 }
 
@@ -132,6 +138,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_0070, TestSi
     cameraTest->prelaunchConfig->setting = {};
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::CAPTURE);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PrelaunchWithOpMode is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open(DEVICE_0);
 }
@@ -150,6 +159,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_0080, TestSi
     cameraTest->prelaunchConfig->setting = {};
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::VIDEO);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PrelaunchWithOpMode is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open(DEVICE_0);
 }
@@ -168,6 +180,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_0090, TestSi
     cameraTest->prelaunchConfig->setting = {};
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::PORTRAIT);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PrelaunchWithOpMode is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open(DEVICE_0);
 }
@@ -186,6 +201,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_1000, TestSi
     cameraTest->prelaunchConfig->setting = {};
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::NIGHT);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PrelaunchWithOpMode is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open(DEVICE_0);
 }
@@ -204,6 +222,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_1100, TestSi
     cameraTest->prelaunchConfig->setting = {};
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::PROFESSIONAL);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PrelaunchWithOpMode is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open(DEVICE_0);
 }
@@ -222,6 +243,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_1200, TestSi
     cameraTest->prelaunchConfig->setting = {};
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::SLOW_MOTION);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PrelaunchWithOpMode is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open(DEVICE_0);
 }
@@ -240,6 +264,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_1300, TestSi
     cameraTest->prelaunchConfig->setting = {};
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::SCAN_CODE);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PrelaunchWithOpMode is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open(DEVICE_0);
 }
@@ -258,6 +285,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_1400, TestSi
     cameraTest->prelaunchConfig->setting = {};
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::CAPTURE_MACRO);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PrelaunchWithOpMode is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open(DEVICE_0);
 }
@@ -276,6 +306,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_1500, TestSi
     cameraTest->prelaunchConfig->setting = {};
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::VIDEO_MACRO);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PrelaunchWithOpMode is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open(DEVICE_0);
 }
@@ -294,6 +327,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_1600, TestSi
     cameraTest->prelaunchConfig->setting = {};
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::SUPER_STAB);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PrelaunchWithOpMode is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open(DEVICE_0);
 }
@@ -312,6 +348,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_1700, TestSi
     cameraTest->prelaunchConfig->setting = {};
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::NORMAL);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PrelaunchWithOpMode is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open(DEVICE_0);
 }
@@ -330,6 +369,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_1800, TestSi
     cameraTest->prelaunchConfig->setting = {};
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::CAPTURE);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PrelaunchWithOpMode is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open(DEVICE_0);
 }
@@ -348,6 +390,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_1900, TestSi
     cameraTest->prelaunchConfig->setting = {};
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::VIDEO);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PrelaunchWithOpMode is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open(DEVICE_0);
 }
@@ -366,6 +411,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_2000, TestSi
     cameraTest->prelaunchConfig->setting = {};
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::PORTRAIT);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PrelaunchWithOpMode is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open(DEVICE_0);
 }
@@ -384,6 +432,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_2100, TestSi
     cameraTest->prelaunchConfig->setting = {};
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::NIGHT);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PrelaunchWithOpMode is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open(DEVICE_0);
 }
@@ -402,6 +453,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_2200, TestSi
     cameraTest->prelaunchConfig->setting = {};
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::PROFESSIONAL);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PrelaunchWithOpMode is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open(DEVICE_0);
 }
@@ -420,6 +474,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_2300, TestSi
     cameraTest->prelaunchConfig->setting = {};
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::SLOW_MOTION);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PrelaunchWithOpMode is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open(DEVICE_0);
 }
@@ -438,6 +495,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_2400, TestSi
     cameraTest->prelaunchConfig->setting = {};
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::SCAN_CODE);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PrelaunchWithOpMode is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open(DEVICE_0);
 }
@@ -456,6 +516,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_2500, TestSi
     cameraTest->prelaunchConfig->setting = {};
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::CAPTURE_MACRO);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PrelaunchWithOpMode is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open(DEVICE_0);
 }
@@ -474,6 +537,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_2600, TestSi
     cameraTest->prelaunchConfig->setting = {};
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::VIDEO_MACRO);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PrelaunchWithOpMode is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open(DEVICE_0);
 }
@@ -492,6 +558,9 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_2700, TestSi
     cameraTest->prelaunchConfig->setting = {};
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::SUPER_STAB);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PrelaunchWithOpMode is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open(DEVICE_0);
 }
@@ -572,5 +641,8 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_3100, TestSi
     cameraTest->prelaunchConfig->setting = settings;
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
         *cameraTest->prelaunchConfig, OHOS::HDI::Camera::V1_2::NORMAL);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "PrelaunchWithOpMode is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
 }

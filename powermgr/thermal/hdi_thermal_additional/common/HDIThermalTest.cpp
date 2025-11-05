@@ -98,6 +98,7 @@ void HdfThermalHdiTestAdditional::TearDown(void)
 {
     const auto* test_info = testing::UnitTest::GetInstance()->current_test_info();
     HDF_LOGI("%{public}s.%{public}s end", test_info->test_suite_name(), test_info->name());
+}
 } // namespace
 
 namespace {

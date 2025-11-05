@@ -70,13 +70,13 @@ void HdfBatteryHdiTestAdditional::TearDownTestCase(void) {}
 void HdfBatteryHdiTestAdditional::SetUp(void)
 {
     const auto* test_info = testing::UnitTest::GetInstance()->current_test_info();
-    HDF_LOGI(test_info->test_suite_name + "." + test_info->name + "start");
+    HDF_LOGI("%{public}s.%{public}s start", test_info->test_suite_name(), test_info->name());
 }
 
 void HdfBatteryHdiTestAdditional::TearDown(void)
 {
     const auto* test_info = testing::UnitTest::GetInstance()->current_test_info();
-    HDF_LOGI(test_info->test_suite_name + "." + test_info->name + "end");
+    HDF_LOGI("%{public}s.%{public}s end", test_info->test_suite_name(), test_info->name());
 }
 
 std::string CreateFile(std::string path, std::string content)

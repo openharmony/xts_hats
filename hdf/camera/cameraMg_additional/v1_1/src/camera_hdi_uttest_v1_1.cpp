@@ -36,11 +36,24 @@ void CameraHdiTestV1_1Additional::TearDown(void) { cameraTest->Close(); }
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch001, TestSize.Level1)
 {
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
-    cameraTest->prelaunchConfig->cameraId = "device/6";
-    cameraTest->prelaunchConfig->streamInfos_V1_1 = {};
-    cameraTest->prelaunchConfig->setting = {};
-
-    for (int i = 0; i < 100; i++) {
+    cameraTest->service->GetCameraIds(cameraTest->cameraIds);
+    bool found = false;
+    for (size_t i = 0; i < cameraTest->cameraIds.size(); i++) {
+        if (cameraTest->cameraIds[i] == "device/6") {
+            found = true;
+            break;
+        }
+    }
+    if (found) {
+        cameraTest->prelaunchConfig->cameraId = "device/6";
+        cameraTest->prelaunchConfig->streamInfos_V1_1 = {};
+        cameraTest->prelaunchConfig->setting = {};
+        cameraTest->rc = cameraTest->serviceV1_1->Prelaunch(*cameraTest->prelaunchConfig);
+        EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::METHOD_NOT_SUPPORTED);
+    } else {
+        cameraTest->prelaunchConfig->cameraId = "device/6";
+        cameraTest->prelaunchConfig->streamInfos_V1_1 = {};
+        cameraTest->prelaunchConfig->setting = {};
         cameraTest->rc = cameraTest->serviceV1_1->Prelaunch(*cameraTest->prelaunchConfig);
         EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::INVALID_ARGUMENT);
     }

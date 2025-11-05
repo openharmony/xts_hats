@@ -46,6 +46,30 @@ HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_Prelaunch_0100, TestSize.Level1)
     cameraTest->prelaunchConfig->setting = {};
 
     cameraTest->rc = cameraTest->serviceV1_1->Prelaunch(*cameraTest->prelaunchConfig);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "Prelaunch is not supported" << std::endl;
+    }
+    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->Open();
+}
+
+/**
+ * @tc.name: Prelaunch
+ * @tc.desc: Prelaunch cameraId:device/1
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(CameraHdiTestV1_1, SUB_Driver_Camera_Prelaunch_2100, TestSize.Level1)
+{
+    cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
+    cameraTest->prelaunchConfig->cameraId = "device/1";
+    cameraTest->prelaunchConfig->streamInfos_V1_1 = {};
+    cameraTest->prelaunchConfig->setting = {};
+
+    cameraTest->rc = cameraTest->serviceV1_1->Prelaunch(*cameraTest->prelaunchConfig);
+    if (cameraTest->rc == -4) {
+        GTEST_SKIP()<< "Prelaunch is not supported" << std::endl;
+    }
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Open();
 }

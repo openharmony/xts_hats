@@ -17,6 +17,7 @@
 #include <cmath>
 #include <cstdio>
 #include <gtest/gtest.h>
+#include <hdf_core_log.h>
 #include <fcntl.h>
 #include <functional>
 #include <securec.h>
@@ -66,9 +67,17 @@ void HdfBatteryHdiTestAdditional::SetUpTestCase(void)
 
 void HdfBatteryHdiTestAdditional::TearDownTestCase(void) {}
 
-void HdfBatteryHdiTestAdditional::SetUp(void) {}
+void HdfBatteryHdiTest::SetUp(void)
+{
+    const auto* test_info = testing::UnitTest::GetInstance()->current_test_info();
+    HDF_LOGI(test_info->test_suite_name + "." + test_info->name + "start");
+}
 
-void HdfBatteryHdiTestAdditional::TearDown(void) {}
+void HdfBatteryHdiTest::TearDown(void)
+{
+    const auto* test_info = testing::UnitTest::GetInstance()->current_test_info();
+    HDF_LOGI(test_info->test_suite_name + "." + test_info->name + "end");
+}
 
 std::string CreateFile(std::string path, std::string content)
 {

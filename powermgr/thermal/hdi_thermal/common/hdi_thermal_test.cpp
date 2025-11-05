@@ -16,6 +16,7 @@
 #include <cmath>
 #include <cstdio>
 #include <gtest/gtest.h>
+#include <hdf_core_log.h>
 #include <mutex>
 #include <fcntl.h>
 #include <functional>
@@ -96,12 +97,16 @@ void HdfThermalHdiTest::TearDownTestCase()
 {
 }
 
-void HdfThermalHdiTest::SetUp()
+void HdfBatteryHdiTest::SetUp(void)
 {
+    const auto* test_info = testing::UnitTest::GetInstance()->current_test_info();
+    HDF_LOGI(test_info->test_suite_name + "." + test_info->name + "start");
 }
 
-void HdfThermalHdiTest::TearDown()
+void HdfBatteryHdiTest::TearDown(void)
 {
+    const auto* test_info = testing::UnitTest::GetInstance()->current_test_info();
+    HDF_LOGI(test_info->test_suite_name + "." + test_info->name + "end");
 }
 
 int32_t HdfThermalHdiTest::ReadFile(const char *path, char *buf, size_t size)

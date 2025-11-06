@@ -19,6 +19,7 @@
 #include <fcntl.h>
 #include <functional>
 #include <gtest/gtest.h>
+#include <hdf_core_log.h>
 #include <mutex>
 #include <securec.h>
 #include <unistd.h>
@@ -86,9 +87,17 @@ void HdfPowerHdiTestAdditional::SetUpTestCase() { g_powerInterface = V1_3::IPowe
 
 void HdfPowerHdiTestAdditional::TearDownTestCase() {}
 
-void HdfPowerHdiTestAdditional::SetUp() {}
+void HdfPowerHdiTestAdditional::SetUp(void)
+{
+    const auto* test_info = testing::UnitTest::GetInstance()->current_test_info();
+    HDF_LOGI("%{public}s.%{public}s start", test_info->test_suite_name(), test_info->name());
+}
 
-void HdfPowerHdiTestAdditional::TearDown() {}
+void HdfPowerHdiTestAdditional::TearDown(void)
+{
+    const auto* test_info = testing::UnitTest::GetInstance()->current_test_info();
+    HDF_LOGI("%{public}s.%{public}s end", test_info->test_suite_name(), test_info->name());
+}
 
 int32_t HdfPowerHdiTestAdditional::ReadFile(const std::string path, std::string &buf, size_t size)
 {

@@ -18,6 +18,7 @@
 #include <fcntl.h>
 #include <functional>
 #include <gtest/gtest.h>
+#include <hdf_core_log.h>
 #include <mutex>
 #include <securec.h>
 #include <unistd.h>
@@ -87,10 +88,17 @@ void HdfThermalHdiTestAdditional::SetUpTestCase() { g_thermalInterface = ITherma
 
 void HdfThermalHdiTestAdditional::TearDownTestCase() {}
 
-void HdfThermalHdiTestAdditional::SetUp() {}
+void HdfThermalHdiTestAdditional::SetUp(void)
+{
+    const auto* test_info = testing::UnitTest::GetInstance()->current_test_info();
+    HDF_LOGI("%{public}s.%{public}s start", test_info->test_suite_name(), test_info->name());
+}
 
-void HdfThermalHdiTestAdditional::TearDown() {}
-
+void HdfThermalHdiTestAdditional::TearDown(void)
+{
+    const auto* test_info = testing::UnitTest::GetInstance()->current_test_info();
+    HDF_LOGI("%{public}s.%{public}s end", test_info->test_suite_name(), test_info->name());
+}
 } // namespace
 
 namespace {

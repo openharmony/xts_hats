@@ -2342,6 +2342,10 @@ HWTEST_F(HdfPowerHdiTestAdditional, testUnholdRunningLock017, Function | MediumT
     info.name = errorLockName;
     ret = g_powerInterface->UnholdRunningLock(info);
     EXPECT_FALSE(HDF_SUCCESS == ret);
+
+    info.name = lockName;
+    ret = g_powerInterface->UnholdRunningLock(info);
+    EXPECT_TRUE(HDF_SUCCESS == ret) << "testUnholdRunningLock017 UnholdRunningLock failed";
 }
 /**
  * @tc.number : SUB_Powermgr_Power_HDI_UnholdRunningLock_2200
@@ -2366,6 +2370,10 @@ HWTEST_F(HdfPowerHdiTestAdditional, testUnholdRunningLock018, Function | MediumT
     info.name = errorLockName;
     ret = g_powerInterface->UnholdRunningLock(info);
     EXPECT_FALSE(HDF_SUCCESS == ret);
+
+    info.name = lockName;
+    ret = g_powerInterface->UnholdRunningLock(info);
+    EXPECT_TRUE(HDF_SUCCESS == ret) << "testUnholdRunningLock018 UnholdRunningLock failed";
 }
 /**
  * @tc.number : SUB_Powermgr_Power_HDI_UnholdRunningLock_2300
@@ -2390,6 +2398,10 @@ HWTEST_F(HdfPowerHdiTestAdditional, testUnholdRunningLock019, Function | MediumT
     info.name = errorLockName;
     ret = g_powerInterface->UnholdRunningLock(info);
     EXPECT_FALSE(HDF_SUCCESS == ret);
+
+    info.name = lockName;
+    ret = g_powerInterface->UnholdRunningLock(info);
+    EXPECT_TRUE(HDF_SUCCESS == ret) << "testUnholdRunningLock019 UnholdRunningLock failed";
 }
 /**
  * @tc.number : SUB_Powermgr_Power_HDI_UnholdRunningLock_2400
@@ -2414,6 +2426,10 @@ HWTEST_F(HdfPowerHdiTestAdditional, testUnholdRunningLock020, Function | MediumT
     info.name = errorLockName;
     ret = g_powerInterface->UnholdRunningLock(info);
     EXPECT_FALSE(HDF_SUCCESS == ret);
+
+    info.name = lockName;
+    ret = g_powerInterface->UnholdRunningLock(info);
+    EXPECT_TRUE(HDF_SUCCESS == ret) << "testUnholdRunningLock020 UnholdRunningLock failed";
 }
 /**
  * @tc.number : SUB_Powermgr_Power_HDI_UnholdRunningLock_2500
@@ -2438,6 +2454,10 @@ HWTEST_F(HdfPowerHdiTestAdditional, testUnholdRunningLock021, Function | MediumT
     info.name = errorLockName;
     ret = g_powerInterface->UnholdRunningLock(info);
     EXPECT_FALSE(HDF_SUCCESS == ret);
+
+    info.name = lockName;
+    ret = g_powerInterface->UnholdRunningLock(info);
+    EXPECT_TRUE(HDF_SUCCESS == ret) << "testUnholdRunningLock021 UnholdRunningLock failed";
 }
 /**
  * @tc.number : SUB_Powermgr_Power_HDI_UnholdRunningLock_2600

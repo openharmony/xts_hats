@@ -554,6 +554,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture009, TestSize.Level1)
     EXPECT_NE(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
 #else
     EXPECT_EQ(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
+    EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, captureId_));
 #endif
 }
 

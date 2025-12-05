@@ -789,6 +789,11 @@ HWTEST_F(HdfSensorHdiTest, SUB_Driver_Sensor_HdiSensor_3700, TestSize.Level1)
 
     int32_t status = IsSuppprtedSensorId({-1, SENSOR_TYPE_PROXIMITY, 0, 1});
     int32_t ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_PROXIMITY, 0, 1});
+    if (ret != SENSOR_SUCCESS) {
+        ret = g_sensorInterface->SetBatch({-1, SENSOR_TYPE_PROXIMITY, 0, 1}, SENSOR_INTERVAL1, SENSOR_POLL_TIME);
+        EXPECT_EQ(status,ret);
+        ret = g_sensorInterface->Enable({-1, SENSOR_TYPE_PROXIMITY, 0, 1});
+    }
     EXPECT_EQ(status,ret);
     OsalMSleep(SENSOR_WAIT_TIME3);
     ret = g_sensorInterface->Disable({-1, SENSOR_TYPE_PROXIMITY, 0, 1});

@@ -41,7 +41,6 @@ using namespace OHOS;
 namespace {
 
 static constexpr char AUDIO_CONCURRENCY_CONFIG_FILE[] = "/vendor/etc/audio/audio_concurrency_config.xml";
-static int64_t  SUCCESS = 0;
 
 class MultimediaAudioTest : public testing::Test {
 public:
@@ -76,7 +75,7 @@ HWTEST_F(MultimediaAudioTest, AUDIO_CONFIG_0100, TestSize.Level2)
     std::cout << "begin AUDIO_CONFIG_0100" << std::endl;
     std::shared_ptr<OHOS::AudioStandard::AudioXmlNode> curNode_ = OHOS::AudioStandard::AudioXmlNode::Create();
     int32_t ret = curNode_->Config(AUDIO_CONCURRENCY_CONFIG_FILE, nullptr, 0);
-    EXPECT_EQ(SUCCESS, ret);
+    EXPECT_EQ(0, ret);
 }
 
 /**

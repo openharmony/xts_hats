@@ -21,12 +21,15 @@ ohos_moduletest_suite("HatsAudioPolicyTest") {
   subsystem_name = "xts"
   part_name = "hats"
 
-  sources = [ "./common/audio_policy_test.cpp" ]
+  sources = [ 
+    "./common/audio_policy_test.cpp",
+    "./../../tools/audio_xml_parser.cpp",
+   ]
+
   defines = [
     "LOG_TAG = \"AudioPolicyTest\"",
     "LOG_DOMAIN = 0xD000F00",
   ]
-
   cflags = [
     "-Wall",
     "-Wextra",
@@ -36,11 +39,12 @@ ohos_moduletest_suite("HatsAudioPolicyTest") {
     "-fno-strict-aliasing",
   ]
 
-    external_deps = [
-        "c_utils:utils",
-        "hdf_core:libhdf_utils",
-        "hilog:libhilog",
-        "ipc:ipc_single",
-        "audio_framework:audio_xml_utils",
-    ]
+  external_deps = [
+    "c_utils:utils",
+    "hdf_core:libhdf_utils",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+    "libxml2:libxml2",
+  ]
+
 }

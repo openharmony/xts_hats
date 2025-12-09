@@ -26,7 +26,6 @@
 #include <atomic>
 #include <mutex>
 #include <libxml/parser.h>
-#include <libxml/tree.h>
 
 #include "audio_errors.h"
 #include "audio_common_log.h"

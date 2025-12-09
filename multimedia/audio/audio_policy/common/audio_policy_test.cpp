@@ -67,7 +67,8 @@ public:
     }
 };
 
-bool fileExists(const std::string& filePath) {
+bool fileExists(const std::string& filePath)
+{
     std::ifstream file(filePath);
     return file.good();
 }

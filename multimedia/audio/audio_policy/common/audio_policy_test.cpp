@@ -67,7 +67,7 @@ public:
     }
 };
 
-bool fileExists(const std::string& filePath)
+bool FileExists(const std::string& filePath)
 {
     std::ifstream file(filePath);
     return file.good();
@@ -82,9 +82,9 @@ HWTEST_F(HatsAudioPolicyTest, AUDIO_CONFIG_0100, TestSize.Level2)
 {
     std::cout << "begin AUDIO_CONFIG_0100" << std::endl;
     std::shared_ptr<OHOS::AudioStandard::AudioXmlNode> curNode_ = OHOS::AudioStandard::AudioXmlNode::Create();
-    bool ret = fileExists(CHIP_PROD_CONFIG_FILE);
+    bool ret = FileExists(CHIP_PROD_CONFIG_FILE);
     if (!ret) {
-        ret = fileExists(CONFIG_FILE);
+        ret = FileExists(CONFIG_FILE);
     }
     ASSERT_TRUE(ret);
 }

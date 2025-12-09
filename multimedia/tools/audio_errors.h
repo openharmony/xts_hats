@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -198,11 +198,23 @@ const int32_t ERR_AUDIO_SUITE_UNSUPPORT_CONNECT = BASE_AUDIO_ERR_OFFSET - 45;
 /** The number of created pipelines or nodes exceeds the system specification. */
 const int32_t ERR_AUDIO_SUITE_CREATED_EXCEED_SYSTEM_LIMITS = BASE_AUDIO_ERR_OFFSET - 46;
 
+/** latency fetcher returns a default value without caching */
+const int32_t ERR_LATENCY_DEFAULT_VALUE = BASE_AUDIO_ERR_OFFSET - 47;
+
 /** Audio suite function timed out during execution. */
 const int32_t ERR_AUDIO_SUITE_TIMEOUT = BASE_AUDIO_ERR_OFFSET - 47;
 
+/** no memory to allocate */
+const int32_t ERR_NO_MEMORY = BASE_AUDIO_ERR_OFFSET - 48;
+
+/** object init failed */
+const int32_t ERR_INIT_FAILED = BASE_AUDIO_ERR_OFFSET - 49;
+
+/** Ipc related error */
+const int32_t ERR_IPC = BASE_AUDIO_ERR_OFFSET - 100;
+
 /** Unknown error */
-const int32_t  ERR_UNKNOWN = BASE_AUDIO_ERR_OFFSET - 200;
+const int32_t ERR_UNKNOWN = BASE_AUDIO_ERR_OFFSET - 200;
 
 /** success but not continue */
 const int32_t SUCCESS_BUT_NOT_CONTINUE = BASE_AUDIO_ERR_OFFSET - 300;

@@ -14,5 +14,5 @@
         "runtime-hint": "1s",
         "native-test-device-path": "/data/local/tmp"
     },
-    "description": "Configuration for HatsAudioConcurrencyTest"
+    "description": "Configuration for HatsAudioConcurrencyTest Tests"
 }

@@ -12,7 +12,7 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
-import("//drivers/peripheral/audio/audio.gni")
+import("//drivers/interface/audio/audio.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/audio"
@@ -30,7 +30,7 @@ ohos_moduletest_suite("HatsHdfAudioIdlCaptureTest") {
     "hilog:libhilog",
   ]
 
-  if (drivers_peripheral_audio_feature_alsa_lib) {
+  if (drivers_interface_audio_feature_alsa_lib) {
     defines = []
     defines += [ "ALSA_LIB_MODE" ]
   }

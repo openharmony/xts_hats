@@ -12,8 +12,7 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
-import("//drivers/peripheral/audio/audio.gni")
-import("//drivers/peripheral/display/display_config.gni")
+import("//drivers/interface/audio/audio.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/audio"
@@ -21,7 +20,7 @@ ohos_moduletest_suite("HatsHdfAudioIdlAdapterMultChannelTest") {
   module_out_path = module_output_path
 
   defines = []
-  defines += display_defines
+  defines += audio_defines
 
   sources = [
     "src/audio_adapter_direct_test.cpp",

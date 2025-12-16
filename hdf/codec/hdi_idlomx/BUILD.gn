@@ -20,9 +20,6 @@ module_output_path = "hats/codec"
 ohos_moduletest_suite("HatsHdfIdlOmxCodecTest") {
   module_out_path = module_output_path
 
-  include_dirs =
-      [ "../../../../../../drivers/peripheral/codec/interfaces/include" ]
-
   sources = [
     "codec_callback_service.cpp",
     "codec_function_utils.cpp",

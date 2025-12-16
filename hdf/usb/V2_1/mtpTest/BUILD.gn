@@ -22,7 +22,6 @@ ohos_moduletest_suite("HatsHdfUsbFnMtpTest") {
   configs = [ ":hdf_usb" ]
 
   deps = [
-    "../../../../../../../drivers/peripheral/usb/gadget/function/mtp:libusbfn_mtp_interface_service_1.0",
     "//third_party/googletest:gtest_main",
   ]
 

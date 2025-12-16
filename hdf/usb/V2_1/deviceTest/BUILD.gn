@@ -12,7 +12,6 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
-import("//drivers/peripheral/usb/usb.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hdf/usb"
@@ -24,12 +23,6 @@ ohos_moduletest_suite("HatsHdfUsbDeviceTest") {
     "./common/HatsHdfUsbDeviceTest.cpp",
   ]
   configs = [ ":hdf_usb" ]
-
-  deps = [
-    "${usb_driver_path}/ddk:libusb_core",
-    "${usb_driver_path}/hdi_service:libusb_device_interface_service_2.0",
-    "${usb_driver_path}/hdi_service:libusb_host_interface_service_2.0",
-  ]
 
   external_deps = [
     "c_utils:utils",

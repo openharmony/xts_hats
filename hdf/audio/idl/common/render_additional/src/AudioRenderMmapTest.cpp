@@ -508,7 +508,7 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderReqMmapBuffer001, Func
     int32_t reqSize = 256;
     struct AudioMmapBufferDescriptor desc;
     int32_t ret = render_->ReqMmapBuffer(render_, reqSize, &desc);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_NE(ret, HDF_SUCCESS);
 #else
     ASSERT_EQ(ret, HDF_SUCCESS);
@@ -527,7 +527,7 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderReqMmapBuffer002, Func
     int32_t i;
     for (i = 0; i < 1000; i++) {
         int32_t ret = render_->ReqMmapBuffer(render_, reqSize, &desc);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
         ASSERT_NE(ret, HDF_SUCCESS);
 #else
         ASSERT_EQ(ret, HDF_SUCCESS);

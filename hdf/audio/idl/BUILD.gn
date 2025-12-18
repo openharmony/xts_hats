@@ -12,7 +12,6 @@
 # limitations under the License.
 
 import("//build/test.gni")
-import("//drivers/peripheral/audio/audio.gni")
 import("//test/xts/hats/build.gni")
 import("//test/xts/tools/build/suite.gni")
 

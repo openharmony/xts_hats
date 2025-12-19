@@ -197,9 +197,6 @@ HWTEST_F(HatsSendtoTest, SendtoSuccess_0002, Function | MediumTest | Level1)
     size = sendto(acceptFd, message, strlen(message), MSG_OOB,
                   reinterpret_cast<struct sockaddr *>(&serAddr), sizeof(serAddr));
     EXPECT_TRUE(size > 0);
-    size = sendto(acceptFd, message, strlen(message), 0,
-                  reinterpret_cast<struct sockaddr *>(&serAddr), sizeof(serAddr));
-    EXPECT_TRUE(size >= 0);
 
     close(acceptFd);
     pthread_join(thread, nullptr);

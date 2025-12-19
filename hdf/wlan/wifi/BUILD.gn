@@ -36,8 +36,6 @@ ohos_moduletest_suite("HatsHdfWifiHdiTest") {
   if (is_standard_system) {
     external_deps = [
       "$base_root/drivers/hdf_core/adapter/build/test_common:libhdf_test_common",
-      "$base_root/drivers/peripheral/wlan/client:wifi_driver_client",
-      "$base_root/drivers/peripheral/wlan/hal:wifi_hal",
       "c_utils:utils",
       "hdf_core:libhdf_utils",
       "hilog:libhilog",
@@ -52,9 +50,6 @@ ohos_moduletest_suite("HatsHdfWifiHdiTest") {
 
 config("hdf_wlan_hdicommon") {
   include_dirs = [
-    "$base_root/drivers/peripheral/wlan/client/include",
-    "$base_root/drivers/peripheral/wlan/hal/include",
-    "$base_root/drivers/peripheral/wlan/interfaces/include",
   ]
 }
 
@@ -77,8 +72,6 @@ ohos_moduletest_suite("HatsHdfWifiHdistartandstopTest") {
   if (is_standard_system) {
     external_deps = [
       "$base_root/drivers/hdf_core/adapter/build/test_common:libhdf_test_common",
-      "$base_root/drivers/peripheral/wlan/client:wifi_driver_client",
-      "$base_root/drivers/peripheral/wlan/hal:wifi_hal",
       "c_utils:utils",
       "hdf_core:libhdf_utils",
       "hilog:libhilog",
@@ -93,9 +86,6 @@ ohos_moduletest_suite("HatsHdfWifiHdistartandstopTest") {
 
 config("hdf_wlan_hdicommonsecond") {
   include_dirs = [
-    "$base_root/drivers/peripheral/wlan/client/include",
-    "$base_root/drivers/peripheral/wlan/hal/include",
-    "$base_root/drivers/peripheral/wlan/interfaces/include",
   ]
 }
 
@@ -118,8 +108,6 @@ ohos_moduletest_suite("HatsHdfWificlientTest") {
   if (is_standard_system) {
     external_deps = [
       "$base_root/drivers/hdf_core/adapter/build/test_common:libhdf_test_common",
-      "$base_root/drivers/peripheral/wlan/client:wifi_driver_client",
-      "$base_root/drivers/peripheral/wlan/hal:wifi_hal",
       "c_utils:utils",
       "hdf_core:libhdf_utils",
       "hilog:libhilog",
@@ -134,9 +122,6 @@ ohos_moduletest_suite("HatsHdfWificlientTest") {
 
 config("hdf_wlan_hdicommonthird") {
   include_dirs = [
-    "$base_root/drivers/peripheral/wlan/client/include",
-    "$base_root/drivers/peripheral/wlan/hal/include",
-    "$base_root/drivers/peripheral/wlan/interfaces/include",
   ]
 }
 module_output_path = "hats/wlan"
@@ -164,8 +149,6 @@ ohos_moduletest_suite("HatsHdfWificommonTest") {
   if (is_standard_system) {
     external_deps = [
       "$base_root/drivers/hdf_core/adapter/build/test_common:libhdf_test_common",
-      "$base_root/drivers/peripheral/wlan/client:wifi_driver_client",
-      "$base_root/drivers/peripheral/wlan/hal:wifi_hal",
       "c_utils:utils",
       "hdf_core:libhdf_utils",
       "hilog:libhilog",
@@ -180,8 +163,5 @@ ohos_moduletest_suite("HatsHdfWificommonTest") {
 
 config("hdf_wlan_hdicommonfour") {
   include_dirs = [
-    "$base_root/drivers/peripheral/wlan/client/include",
-    "$base_root/drivers/peripheral/wlan/hal/include",
-    "$base_root/drivers/peripheral/wlan/interfaces/include",
   ]
 }

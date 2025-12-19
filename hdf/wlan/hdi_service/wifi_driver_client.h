@@ -16,8 +16,8 @@
 #ifndef WIFI_DRIVER_CLIENT_H
 #define WIFI_DRIVER_CLIENT_H
 
-#include <stdint.h>
-#include <stdbool.h>
+#include <cstdint>
+#include <cstdbool>
 
 #ifdef __cplusplus
 #if __cplusplus

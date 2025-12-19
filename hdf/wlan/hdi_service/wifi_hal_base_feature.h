@@ -39,7 +39,7 @@
 #ifndef WIFI_HAL_BASE_FEATURE_H
 #define WIFI_HAL_BASE_FEATURE_H
 
-#include <stdint.h>
+#include <cstdint>
 
 #ifdef __cplusplus
 #if __cplusplus

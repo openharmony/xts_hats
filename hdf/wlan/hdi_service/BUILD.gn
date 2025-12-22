@@ -28,7 +28,6 @@ ohos_moduletest_suite("HatsHdfWlanHdiServiceTest") {
   ]
 
   deps = [
-    "$base_root/drivers/peripheral/wlan/hdi_service:hdi_wlan_service",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
   ]
@@ -54,9 +53,5 @@ ohos_moduletest_suite("HatsHdfWlanHdiServiceTest") {
 
 config("hdf_wlan_hdiservice") {
   include_dirs = [
-    "$base_root/drivers/peripheral/wlan/interfaces/include",
-    "$base_root/drivers/peripheral/wlan/hdi_service",
-    "$base_root/drivers/peripheral/wlan/client/include",
-    "$base_root/drivers/peripheral/wlan/hal/include",
   ]
 }

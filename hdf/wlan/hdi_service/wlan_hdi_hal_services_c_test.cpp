@@ -16,7 +16,10 @@
 #include <servmgr_hdi.h>
 #include "v1_3/iwlan_interface.h"
 #include "wlan_callback_impl.h"
-#include "wlan_impl.h"
+#include "wifi_hal_base_feature.h"
+#include "wifi_driver_client.h"
+#include "securec.h"
+#include <osal_mem.h>
 
 #define HDF_LOG_TAG service_manager_test
 using namespace testing::ext;
@@ -919,8 +922,8 @@ HWTEST_F(HdfWifiServiceCTest, SendCmdIoctl_040, Function | MediumTest | Level2)
     bool flag;
 
     uint8_t deviceType = 5;
-    rc = g_wlanObj->WifiSendCmdIoctl(g_wlanObj, ifName, CMD_HID2D_MODULE_INIT, (const int8_t *)&deviceType,
-        sizeof(deviceType));
+    rc = g_wlanObj->WifiSendCmdIoctl(g_wlanObj, ifName, CMD_HID2D_MODULE_INIT,
+        reinterpret_cast<const int8_t *>(&deviceType), sizeof(deviceType));
     printf("SendCmdIoctl MODULE_INIT, rc=%d.\n", rc);
     flag = ((rc == HDF_SUCCESS) || (rc == HDF_ERR_NOT_SUPPORT));
     ASSERT_TRUE(flag);
@@ -938,8 +941,8 @@ HWTEST_F(HdfWifiServiceCTest, SendCmdIoctl_041, Function | MediumTest | Level2)
     bool flag;
 
     uint8_t batterylevel = 50;
-    rc = g_wlanObj->WifiSendCmdIoctl(g_wlanObj, ifName, CMD_SET_BATTERY_LEVEL, (const int8_t *)&batterylevel,
-        sizeof(batterylevel));
+    rc = g_wlanObj->WifiSendCmdIoctl(g_wlanObj, ifName, CMD_SET_BATTERY_LEVEL,
+        reinterpret_cast<const int8_t *>(&batterylevel), sizeof(batterylevel));
     printf("SendCmdIoctl BATTERY_LEVEL, rc=%d.\n", rc);
     flag = ((rc == HDF_SUCCESS) || (rc == HDF_ERR_NOT_SUPPORT));
     ASSERT_TRUE(flag);

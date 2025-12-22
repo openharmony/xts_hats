@@ -22,8 +22,6 @@
 #include "osal_time.h"
 #include "v1_0/ihci_interface.h"
 #include "bluetooth_hci_callback_impl.h"
-#include "hci_interface_impl.h"
-#include "vendor_interface.h"
 
 using namespace OHOS::HDI::Bluetooth::Hci::V1_0;
 using namespace testing::ext;

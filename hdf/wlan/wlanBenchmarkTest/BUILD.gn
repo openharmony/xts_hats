@@ -21,10 +21,6 @@ module_output_path = "hats/wlan"
 ohos_moduletest_suite("HatsHdfWlanbenchmarkTest") {
   module_out_path = module_output_path
   include_dirs = [
-    "$base_root/drivers/peripheral/wlan/client/include",
-    "$base_root/drivers/peripheral/wlan/hal/include",
-    "$base_root/drivers/peripheral/wlan/interfaces/include",
-    "$base_root/drivers/peripheral/wlan/hdi_service",
   ]
   sources = [ "hdf_wifi_benchmark_test.cpp" ]
   resource_config_file = "$base_root/drivers/hdf_core/adapter/uhdf2/test/resource/wlan/ohos_test.xml"
@@ -40,9 +36,6 @@ ohos_moduletest_suite("HatsHdfWlanbenchmarkTest") {
   if (is_standard_system) {
     external_deps = [
       "$base_root/drivers/hdf_core/adapter/build/test_common:libhdf_test_common",
-      "$base_root/drivers/peripheral/wlan/client:wifi_driver_client",
-      "$base_root/drivers/peripheral/wlan/hal:wifi_hal",
-      "$base_root/drivers/peripheral/wlan/hdi_service:hdi_wlan_service",
       "c_utils:utils",
       "drivers_interface_wlan:libwlan_proxy_1.3",
       "hdf_core:libhdf_host",

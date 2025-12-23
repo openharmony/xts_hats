@@ -83,7 +83,7 @@ public:
     static int32_t ReadFile(const std::string path, std::string &buf, size_t size);
 };
 
-void HdfPowerHdiTestAdditional::SetUpTestCase() { g_powerInterface = V1_3::IPowerInterface::Get(true); }
+void HdfPowerHdiTestAdditional::SetUpTestCase() { g_powerInterface = V1_3::IPowerInterface::Get(); }
 
 void HdfPowerHdiTestAdditional::TearDownTestCase() {}
 

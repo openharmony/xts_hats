@@ -59,7 +59,7 @@ public:
 
 void HdfBatteryHdiTestAdditional::SetUpTestCase(void)
 {
-    g_batteryInterface = IBatteryInterface::Get(true);
+    g_batteryInterface = IBatteryInterface::Get();
     if (g_batteryInterface == nullptr) {
         GTEST_SKIP() << "This component is not supported on this device.";
     }
@@ -88,6 +88,8 @@ std::string CreateFile(std::string path, std::string content)
     }
     stream << content.c_str() << std::endl;
     stream.close();
+    constexpr unsigned int fileMode = 0777;
+    chmod(path.c_str(), fileMode);
     return path;
 }
 
@@ -277,9 +279,10 @@ HWTEST_F(HdfBatteryHdiTestAdditional, testGetCurrentAverage001, TestSize.Level1)
 HWTEST_F(HdfBatteryHdiTestAdditional, testGetCurrentNow001, TestSize.Level1)
 {
     int32_t nowCurr = -1;
+    int32_t ret = -1;
     for (uint32_t i = 0; i < 1000; i++) {
-        g_batteryInterface->GetCurrentNow(nowCurr);
-        EXPECT_TRUE(nowCurr != -1);
+        ret = g_batteryInterface->GetCurrentNow(nowCurr);
+        EXPECT_EQ(ret, HDF_SUCCESS);
     }
 }
 

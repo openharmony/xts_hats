@@ -61,7 +61,7 @@ public:
 
 void HdfBatteryHdiTest::SetUpTestCase(void)
 {
-    g_batteryInterface = IBatteryInterface::Get(true);
+    g_batteryInterface = IBatteryInterface::Get();
     if (g_batteryInterface == nullptr) {
         GTEST_SKIP() << "This component is not supported on this device.";
     }
@@ -92,6 +92,8 @@ std::string CreateFile(std::string path, std::string content)
     }
     stream << content.c_str() << std::endl;
     stream.close();
+    constexpr unsigned int fileMode = 0777;
+    chmod(path.c_str(), fileMode);
     return path;
 }
 

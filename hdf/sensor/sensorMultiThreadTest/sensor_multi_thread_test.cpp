@@ -23,7 +23,6 @@
 #include "osal_time.h"
 #include "v3_0/isensor_interface.h"
 #include "v3_1/isensor_interface.h"
-#include "../common/sensor_type.h"
 #include "sensor_callback_impl.h"
 #include <thread>
 

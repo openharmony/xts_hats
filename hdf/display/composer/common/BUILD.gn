@@ -14,7 +14,7 @@
 base_root = "../../../../../../../"
 import("//build/ohos_var.gni")
 import("//test/xts/tools/build/suite.gni")
-import("$base_root/drivers/peripheral/display/display_config.gni")
+import("$base_root/drivers/interface/display/display_config.gni")
 
 config("module_private_config") {
   visibility = [ ":*" ]

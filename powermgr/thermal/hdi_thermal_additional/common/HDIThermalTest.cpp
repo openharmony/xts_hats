@@ -84,7 +84,7 @@ public:
     void TearDown();
 };
 
-void HdfThermalHdiTestAdditional::SetUpTestCase() { g_thermalInterface = IThermalInterface::Get(true); }
+void HdfThermalHdiTestAdditional::SetUpTestCase() { g_thermalInterface = IThermalInterface::Get(); }
 
 void HdfThermalHdiTestAdditional::TearDownTestCase() {}
 

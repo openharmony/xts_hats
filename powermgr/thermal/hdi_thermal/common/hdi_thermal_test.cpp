@@ -90,7 +90,7 @@ public:
 
 void HdfThermalHdiTest::SetUpTestCase()
 {
-    g_thermalInterface = IThermalInterface::Get(true);
+    g_thermalInterface = IThermalInterface::Get();
 }
 
 void HdfThermalHdiTest::TearDownTestCase()

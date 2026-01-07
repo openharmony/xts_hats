@@ -28,4 +28,5 @@ group("HatsPowermgrPowerTest") {
       "hdi_power_additional:HatsPowermgrPowerAdditionalTest",
     ]
   }
+  deps += [ "hdi_power_config:HatsPowermgrPowerConfigTest" ]
 }

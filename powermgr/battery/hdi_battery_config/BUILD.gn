@@ -27,6 +27,7 @@ ohos_moduletest_suite("HatsPowermgrBatteryConfigTest") {
     "cJSON:cjson",
     "hdf_core:libhdf_utils",
     "hilog:libhilog",
+    "config_policy:configpolicy_util",
   ]
 
   subsystem_name = "hdf"

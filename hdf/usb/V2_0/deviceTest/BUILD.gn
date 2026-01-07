@@ -12,29 +12,23 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
-import("//drivers/peripheral/usb/usb.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hdf/usb"
 
-ohos_moduletest_suite("HatsHdfUsbDeviceAdditionalTest") {
+ohos_moduletest_suite("HatsHdfUsbDeviceTest") {
   module_out_path = module_output_path
   sources = [
     "../UsbSubscriberTest/UsbSubscriberTest.cpp",
-    "./common/HatsHdfUsbDeviceAdditionalTest.cpp",
+    "./common/HatsHdfUsbDeviceTest.cpp",
   ]
-  configs = [ ":hdf_usb_additional" ]
-
-  deps = [ "//third_party/googletest:gtest_main" ]
+  configs = [ ":hdf_usb" ]
 
   external_deps = [
-    "ability_base:want",
-    "bundle_framework:appexecfwk_base",
     "c_utils:utils",
-    "common_event_service:cesfwk_innerkits",
     "drivers_interface_usb:libusb_proxy_2.0",
     "eventhandler:libeventhandler",
-    "hdf_core:libhdf_host",
+    "googletest:gtest_main",
     "hdf_core:libhdf_utils",
     "hilog:libhilog",
     "ipc:ipc_single",
@@ -46,7 +40,7 @@ ohos_moduletest_suite("HatsHdfUsbDeviceAdditionalTest") {
   part_name = "drivers_peripheral_usb"
 }
 
-config("hdf_usb_additional") {
+config("hdf_usb") {
   include_dirs = [
     "include",
     "../UsbSubscriberTest",

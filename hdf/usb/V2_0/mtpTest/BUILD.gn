@@ -16,13 +16,12 @@ import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hdf/usb"
 
-ohos_moduletest_suite("HatsHdfUsbFnMtpAdditionalTest") {
+ohos_moduletest_suite("HatsHdfUsbFnMtpTest") {
   module_out_path = module_output_path
-  sources = [ "./common/HatsHdfUsbFnMtpAdditionalTest.cpp" ]
-  configs = [ ":hdf_usb_additional" ]
+  sources = [ "./common/HatsHdfUsbFnMtpTest.cpp" ]
+  configs = [ ":hdf_usb" ]
 
   deps = [
-    "../../../../../../../drivers/peripheral/usb/gadget/function/mtp:libusbfn_mtp_interface_service_1.0",
     "//third_party/googletest:gtest_main",
   ]
 
@@ -44,7 +43,7 @@ ohos_moduletest_suite("HatsHdfUsbFnMtpAdditionalTest") {
   part_name = "drivers_peripheral_usb"
 }
 
-config("hdf_usb_additional") {
+config("hdf_usb") {
   include_dirs = [
     "include",
     "../UsbSubscriberTest",

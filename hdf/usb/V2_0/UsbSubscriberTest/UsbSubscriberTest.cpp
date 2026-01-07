@@ -26,6 +26,11 @@ int32_t UsbSubscriberTest::DeviceEvent(const USBDeviceInfo &info)
     busNum_ = info.busNum;
     devAddr_ = info.devNum;
     HDF_LOGI("%{public}s: busNum is %{public}d, devAddr is %{public}d", __func__, busNum_, devAddr_);
+
+    DevBusInfo busInfo;
+    busInfo.busNum = busNum_;
+    busInfo.devAddr = devAddr_;
+    busInfos.push_back(busInfo);
     return 0;
 }
 } // namespace USB

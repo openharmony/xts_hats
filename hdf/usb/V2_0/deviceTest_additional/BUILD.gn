@@ -16,15 +16,15 @@ import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hdf/usb"
 
-ohos_moduletest_suite("HatsHdfUsbFnMtpTest") {
+ohos_moduletest_suite("HatsHdfUsbDeviceAdditionalTest") {
   module_out_path = module_output_path
-  sources = [ "./common/HatsHdfUsbFnMtpTest.cpp" ]
-  configs = [ ":hdf_usb" ]
-
-  deps = [
-    "../../../../../../../drivers/peripheral/usb/gadget/function/mtp:libusbfn_mtp_interface_service_1.0",
-    "//third_party/googletest:gtest_main",
+  sources = [
+    "../UsbSubscriberTest/UsbSubscriberTest.cpp",
+    "./common/HatsHdfUsbDeviceAdditionalTest.cpp",
   ]
+  configs = [ ":hdf_usb_additional" ]
+
+  deps = [ "//third_party/googletest:gtest_main" ]
 
   external_deps = [
     "ability_base:want",
@@ -32,19 +32,20 @@ ohos_moduletest_suite("HatsHdfUsbFnMtpTest") {
     "c_utils:utils",
     "common_event_service:cesfwk_innerkits",
     "drivers_interface_usb:libusb_proxy_2.0",
-    "drivers_interface_usb:libusbfn_mtp_proxy_1.0",
     "eventhandler:libeventhandler",
     "hdf_core:libhdf_host",
     "hdf_core:libhdf_utils",
     "hilog:libhilog",
     "ipc:ipc_single",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
   ]
 
   subsystem_name = "hdf"
   part_name = "drivers_peripheral_usb"
 }
 
-config("hdf_usb") {
+config("hdf_usb_additional") {
   include_dirs = [
     "include",
     "../UsbSubscriberTest",

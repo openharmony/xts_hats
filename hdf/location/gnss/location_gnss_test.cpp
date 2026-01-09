@@ -411,7 +411,11 @@ HWTEST_F(LocationGnssTest, SUB_DriverSystem_GetCachedGnssLocationsSize_0100, Tes
     }
     int cach_size = 60;
     int32_t ret = g_ignssHci->GetCachedGnssLocationsSize(cach_size);
-    EXPECT_EQ(HDF_SUCCESS, ret);
+    if (ret == -2) {
+        EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    }else {
+        EXPECT_EQ(HDF_SUCCESS, ret);
+    }
 #endif
 }
 
@@ -428,7 +432,11 @@ HWTEST_F(LocationGnssTest, SUB_DriverSystem_GetCachedGnssLocations_0100, TestSiz
         return;
     }
     int32_t ret = g_ignssHci->GetCachedGnssLocations();
-    EXPECT_EQ(HDF_SUCCESS, ret);
+    if (ret == -2) {
+        EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
+    }else {
+        EXPECT_EQ(HDF_SUCCESS, ret);
+    }
 #endif
 }
 

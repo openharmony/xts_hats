@@ -474,9 +474,9 @@ HWTEST_F(RtgInterfaceTest, RtgInterfaceSetErrorAttr, TestSize.Level1)
     int grpId;
     grpId = CreateNewRtgGrp(VIP, 0);
     EXPECT_GT(grpId, 0);
-    ret = SetFrameRateAndPrioType(grpId, 0, VIP);
+    ret = SetFrameRateAndPrioType(grpId, 0, VIP, -1);
     EXPECT_NE(ret, 0);
-    ret = SetFrameRateAndPrioType(grpId, -1, VIP);
+    ret = SetFrameRateAndPrioType(grpId, -1, VIP, -1);
     EXPECT_NE(ret, 0);
     ret = DestroyRtgGrp(grpId);
     EXPECT_EQ(ret, 0);

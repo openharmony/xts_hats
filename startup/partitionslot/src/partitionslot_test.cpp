@@ -161,7 +161,7 @@ HWTEST_F(StartupPartitionSlotTest, StartupPartitionSlotTest_008, Function | Medi
     ASSERT_TRUE(partitionslot->GetSlotSuffix(slot, suffix) == 0);
 }
 /**
- * @tc.number: StartupPartitionSlotTest_009
+ * @tc.number: StartupPartitionSlotTest_002
  * @tc.name: testGetSlotSuffixFun004
  * @tc.desc: NA
  */

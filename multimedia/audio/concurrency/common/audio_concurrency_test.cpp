@@ -33,6 +33,7 @@
 #include <fstream>
 
 #include "./../../../tools/audio_xml_parser.h"
+#include "./../../../tools/audio_concurrency_parser.h"
 
 using namespace testing;
 using namespace testing::ext;
@@ -40,7 +41,7 @@ using namespace OHOS;
 
 namespace {
 
-static constexpr char AUDIO_CONCURRENCY_CONFIG_FILE[] = "/vendor/etc/audio/audio_concurrency_config.xml";
+static constexpr char audioConcurrencyConfigFile[] = "/vendor/etc/audio/audio_concurrency_config.xml";
 
 class MultimediaAudioTest : public testing::Test {
 public:
@@ -74,7 +75,7 @@ HWTEST_F(MultimediaAudioTest, AUDIO_CONFIG_0100, TestSize.Level2)
 {
     std::cout << "begin AUDIO_CONFIG_0100" << std::endl;
     std::shared_ptr<OHOS::AudioStandard::AudioXmlNode> curNode_ = OHOS::AudioStandard::AudioXmlNode::Create();
-    int32_t ret = curNode_->Config(AUDIO_CONCURRENCY_CONFIG_FILE, nullptr, 0);
+    int32_t ret = curNode_->Config(audioConcurrencyConfigFile, nullptr, 0);
     EXPECT_EQ(0, ret);
 }
 
@@ -107,42 +108,17 @@ HWTEST_F(MultimediaAudioTest, AUDIO_CONCURRENCY_POLICY_0100, TestSize.Level2)
 HWTEST_F(MultimediaAudioTest, AUDIO_CONFIG_EXISTING_STREAM_0100, TestSize.Level2)
 {
     std::cout << "begin AUDIO_CONFIG_EXISTING_STREAM_0100" << std::endl;
-    std::shared_ptr<OHOS::AudioStandard::AudioXmlNode> curNode_ = OHOS::AudioStandard::AudioXmlNode::Create();
-    std::unordered_set<std::string> validNodeAtion_ = {
-        "play both",
-        "concede incoming",
-        "concede existing",
-        "mix"
-    };
-    std::unordered_set<std::string> validNodeNames_ = {
-        "primary out",
-        "primary in",
-        "fast out normal",
-        "fast in normal",
-        "offload out",
-        "multichannel out",
-        "direct out normal",
-        "voip out",
-        "voip in",
-        "cellular call out",
-        "cellular call in",
-        "primary in AI",
-        "primary in unprocess",
-        "primary in ULTRASONIC"
-    };
-    if (curNode_->CompareName("existingStream")) {
-        std::string existingStreamName;
-        curNode_->GetProp("name", existingStreamName);
-        ASSERT_TRUE(validNodeNames_.count(existingStreamName));
-        ASSERT_TRUE(curNode_->GetChildrenNode() != nullptr);
-        EXPECT_EQ(curNode_->GetName(), "incomingStream");
-        std::string incoming;
-        std::string action;
-        curNode_->GetProp("name", incoming);
-        ASSERT_TRUE(validNodeNames_.count(incoming));
-        curNode_->GetProp("action", action);
-        ASSERT_TRUE(validNodeAtion_.count(action));
-        curNode_->MoveToNext();
+    std::map<std::pair<OHOS::AudioStandard::AudioPipeType, OHOS::AudioStandard::AudioPipeType>,
+        OHOS::AudioStandard::ConcurrencyAction> concurrencyMap;
+    int32_t  sucess = 0;
+    std::unique_ptr<OHOS::AudioStandard::AudioConcurrencyParser> parser =
+        std::make_unique<OHOS::AudioStandard::AudioConcurrencyParser>();
+    EXPECT_EQ(parser->LoadConfig(concurrencyMap), sucess);
+    
+    for (const auto& [key, action] : concurrencyMap) {
+        EXPECT_NE(key.first, OHOS::AudioStandard::PIPE_TYPE_UNKNOWN);
+        EXPECT_NE(key.second, OHOS::AudioStandard::PIPE_TYPE_UNKNOWN);
+        EXPECT_NE(action, OHOS::AudioStandard::CONCEDE_BOTH);
     }
 }
 

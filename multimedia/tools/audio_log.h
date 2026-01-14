@@ -87,20 +87,6 @@
         }                                              \
     } while (0)
 
-#define RETURN_RET_IF(cond, ret)                       \
-    do {                                               \
-        if ((cond)) {                                  \
-            return ret;                                \
-        }                                              \
-    } while (0)
-
-#define CHECK_AND_CONTINUE(cond)                       \
-    if (1) {                                           \
-        if (!(cond)) {                                 \
-            continue;                                  \
-        }                                              \
-    } else void (0)
-
 #define CHECK_AND_CONTINUE_LOG(cond, fmt, ...)         \
     if (1) {                                           \
         if (!(cond)) {                                 \

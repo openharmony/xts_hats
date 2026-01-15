@@ -41,7 +41,7 @@ using namespace OHOS;
 
 namespace {
 
-static constexpr char audioConcurrencyConfigFile[] = "/vendor/etc/audio/audio_concurrency_config.xml";
+static constexpr char AUDIO_CONCURRENCY_CONFIG_FILE[] = "/vendor/etc/audio/audio_concurrency_config.xml";
 
 class MultimediaAudioTest : public testing::Test {
 public:

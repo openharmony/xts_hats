@@ -27,9 +27,7 @@
         "rom": "0KB",
         "ram": "518144KB",
         "deps": {
-            "components": [
-                "audio_framework"
-            ],
+            "components": [],
             "third_party": []
         },
         "build": {

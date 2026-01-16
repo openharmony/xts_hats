@@ -27,6 +27,7 @@ ohos_moduletest_suite("HatsAudioConcurrencyTest") {
   sources = [
     "./common/audio_concurrency_test.cpp",
     "./../../tools/audio_xml_parser.cpp",
+    "./../../tools/audio_concurrency_parser.cpp",
   ]
 
   defines = [

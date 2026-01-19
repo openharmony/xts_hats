@@ -21,7 +21,7 @@
 
 using namespace testing::ext;
 
-class HatsWifiConfKeywordsTest : public testing::Test {
+class HatsFlexWifiConfKeywordsTest : public testing::Test {
 public:
     static void SetUpTestCase();
     static void TearDownTestCase();
@@ -29,12 +29,12 @@ public:
     void TearDown();
 };
 
-void HatsWifiConfKeywordsTest::SetUpTestCase() {}
-void HatsWifiConfKeywordsTest::TearDownTestCase() {}
-void HatsWifiConfKeywordsTest::SetUp() {}
-void HatsWifiConfKeywordsTest::TearDown() {}
+void HatsFlexWifiConfKeywordsTest::SetUpTestCase() {}
+void HatsFlexWifiConfKeywordsTest::TearDownTestCase() {}
+void HatsFlexWifiConfKeywordsTest::SetUp() {}
+void HatsFlexWifiConfKeywordsTest::TearDown() {}
 
-HWTEST_F(HatsWifiConfKeywordsTest, testWpaSupplicantConf, Function | MediumTest | Level1)
+HWTEST_F(HatsFlexWifiConfKeywordsTest, testWpaSupplicantConf, Function | MediumTest | Level1)
 {
     const std::string confPath = "/data/service/el1/public/wifi/wpa_supplicant/wpa_supplicant.conf";
     std::ifstream file(confPath);
@@ -66,7 +66,7 @@ HWTEST_F(HatsWifiConfKeywordsTest, testWpaSupplicantConf, Function | MediumTest 
     EXPECT_EQ(foundKeywords.size(), requiredKeywords.size());
 }
 
-HWTEST_F(HatsWifiConfKeywordsTest, testP2pSupplicantConf, Function | MediumTest | Level1)
+HWTEST_F(HatsFlexWifiConfKeywordsTest, testP2pSupplicantConf, Function | MediumTest | Level1)
 {
     const std::string confPath = "/data/service/el1/public/wifi/wpa_supplicant/p2p_supplicant.conf";
     std::ifstream file(confPath);
@@ -102,7 +102,7 @@ HWTEST_F(HatsWifiConfKeywordsTest, testP2pSupplicantConf, Function | MediumTest 
     EXPECT_EQ(foundKeywords.size(), requiredKeywords.size());
 }
 
-HWTEST_F(HatsWifiConfKeywordsTest, testChbaSupplicantConf, Function | MediumTest | Level1)
+HWTEST_F(HatsFlexWifiConfKeywordsTest, testChbaSupplicantConf, Function | MediumTest | Level1)
 {
     const std::string confPath = "/data/service/el1/public/wifi/wpa_supplicant/chba_supplicant.conf";
     std::ifstream file(confPath);

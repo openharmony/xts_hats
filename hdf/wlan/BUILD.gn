@@ -23,6 +23,7 @@ group("HatsHdfWifiTest") {
     if (is_standard_system) {
       deps = [
         "hdi_service:HatsHdfWlanHdiServiceTest",
+        "flex:HatsWifiConfKeywordsTest",
         #"wifi:HatsHdfWifiHdiTest",
         #"wifi:HatsHdfWifiHdistartandstopTest",
         #"wifi:HatsHdfWificlientTest",

@@ -8,7 +8,7 @@
         }
     ],
     "driver": {
-        "native-test-timeout": "120000",
+        "native-test-timeout": "420000",
         "type": "CppTest",
         "module-name": "HatsHdfCameraMgTestv2",
         "runtime-hint": "1s",

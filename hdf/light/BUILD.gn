@@ -21,7 +21,7 @@ group("HatsHdfLightTest") {
   } else {
     deps = [
       #"liteos:HatsHdfLightHdiTest",
-      "hdiService:HatsHdfLightCommonTest",
+      "hdiCommonTest:HatsHdfLightCommonTest",
       "hdiService:HatsHdfLightServiceTest",
       "hdiService_additional:HatsHdfLightCommonAdditionalTest",
 

@@ -11,12 +11,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-base_root = "../../../../../../../"
 import("//build/ohos.gni")
 import("//build/ohos_var.gni")
 import("//build/test.gni")
 import("//test/xts/tools/build/suite.gni")
-import("$base_root/drivers/peripheral/camera/camera.gni")
 module_output_path = "hats/camera"
 
 ohos_moduletest_suite("HatsHdfCameraMgv1AdditionalTest") {
@@ -65,9 +63,6 @@ config("hdf_cameramgv1_additional") {
     # common includes
     "./include",
     "//third_party/googletest/googletest/include",
-    "$camera_path/../../../display/interfaces/include",
-    "$camera_path/../../../display/hdi_service/gralloc/include",
-    "$camera_path/../../interfaces/include",
-    "$camera_path/include",
+    "../../common/include",
   ]
 }

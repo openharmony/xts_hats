@@ -11,12 +11,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-base_root = "../../../../../../../"
 import("//build/ohos.gni")
 import("//build/ohos_var.gni")
 import("//build/test.gni")
 import("//test/xts/tools/build/suite.gni")
-import("$base_root/drivers/peripheral/camera/camera.gni")
 module_output_path = "hats/camera"
 
 ohos_moduletest_suite("HatsHdfCameraEnumTest") {
@@ -55,7 +53,5 @@ config("hdf_cameraenum") {
   include_dirs = [
     "./include",
     "//third_party/googletest/googletest/include",
-    "$camera_path/../../interfaces/include",
-    "$camera_path/include",
   ]
 }

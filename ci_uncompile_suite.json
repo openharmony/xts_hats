@@ -40,6 +40,8 @@
   "test/xts/hats/hdf/light/lightBenchmarkTest:HatsHdfLightbenchmarkTest",
   "test/xts/hats/hdf/manager/managerBenchmarkTest:HatsHdfManagerbenchmarkTest",
   "test/xts/hats/hdf/motion/motionBenchmarkTest:HatsHdfMotionbenchmarkTest",
+  "test/xts/hats/hdf/sensor/common:HatsHdfSensorHdiTest",
+  "test/xts/hats/hdf/sensor/sensorBenchmarkTest:HatsHdfSensorbenchmarkTest",
   "test/xts/hats/hdf/usb/deviceStatusTest:HatsHdfUsbDeviceStatusTest",
   "test/xts/hats/hdf/usb/deviceTest:HatsHdfUsbDeviceTest",
   "test/xts/hats/hdf/usb/deviceTest_additional:HatsHdfUsbDeviceAdditionalTest",

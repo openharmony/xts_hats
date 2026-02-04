@@ -19,8 +19,7 @@
 #include <securec.h>
 #include "hdf_base.h"
 #include "osal_time.h"
-#include "vibrator_if.h"
-#include "vibrator_type.h"
+#include "../common/vibrator_type.h"
 
 using namespace testing::ext;
 

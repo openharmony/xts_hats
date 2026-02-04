@@ -33,7 +33,6 @@ ohos_moduletest_suite("HatsHdfLightHdiTest") {
   deps = []
   if (is_standard_system) {
     external_deps = [
-      "$base_root/drivers/peripheral/light/hal:hdi_light",
       "c_utils:utils",
       "hdf_core:libhdf_utils",
       "hilog:libhilog",

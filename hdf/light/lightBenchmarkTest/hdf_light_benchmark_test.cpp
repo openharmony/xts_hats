@@ -24,7 +24,7 @@
 #include "hdf_base.h"
 #include "osal_time.h"
 #include "v1_0/ilight_interface.h"
-#include "light_type.h"
+#include "../hdiService/light_type.h"
 
 using namespace OHOS::HDI::Light::V1_0;
 using namespace testing::ext;

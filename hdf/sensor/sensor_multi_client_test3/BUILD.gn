@@ -21,8 +21,6 @@ module_output_path = "hats/sensor"
 ohos_moduletest_suite("HatsHdfSensorMultiClientTest3") {
   module_out_path = module_output_path
 
-  deps = [ "../../../../../../drivers/peripheral/sensor/hal:hdi_sensor" ]
-
   sources = [
     "HdfSensorMultiClient3Test.cpp",
   ]

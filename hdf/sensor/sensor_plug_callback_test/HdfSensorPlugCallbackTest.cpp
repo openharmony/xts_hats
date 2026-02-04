@@ -21,7 +21,7 @@
 #include "hdf_base.h"
 #include "osal_time.h"
 #include "v3_0/isensor_interface.h"
-#include "sensor_type.h"
+#include "../common/sensor_type.h"
 #include "sensor_plug_callback_impl.h"
 using namespace OHOS::HDI::Sensor::V3_0;
 using namespace testing::ext;

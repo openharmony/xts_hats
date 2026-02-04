@@ -16,7 +16,6 @@ import("//build/ohos_var.gni")
 import("//build/test.gni")
 import("//test/xts/tools/build/suite.gni")
 import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
-import("$base_root/drivers/peripheral/vibrator/vibrator.gni")
 
 module_output_path = "hats/misc"
 ohos_moduletest_suite("HatsHdfVibratorbenchmarkTest") {

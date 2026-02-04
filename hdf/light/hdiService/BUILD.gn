@@ -19,7 +19,6 @@ import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 module_output_path = "hats/light"
 ohos_moduletest_suite("HatsHdfLightServiceTest") {
   module_out_path = module_output_path
-  configs = [ ":hdf_light_hdiservice" ]
 
   sources = [ "hdf_light_hdiService_test.cpp" ]
 
@@ -46,7 +45,4 @@ ohos_moduletest_suite("HatsHdfLightServiceTest") {
   external_deps += [ "ipc:ipc_single" ]
   subsystem_name = "hdf"
   part_name = "drivers_interface_light"
-}
-config("hdf_light_hdiservice") {
-  include_dirs = [ "$base_root/drivers/peripheral/light/interfaces/include" ]
 }

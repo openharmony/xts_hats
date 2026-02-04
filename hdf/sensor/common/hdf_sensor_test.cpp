@@ -21,8 +21,7 @@
 #include "hdf_base.h"
 #include "hdf_log.h"
 #include "osal_time.h"
-#include "sensor_if.h"
-#include "sensor_type.h"
+#include "../common/sensor_type.h"
 
 using namespace testing::ext;
 

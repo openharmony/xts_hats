@@ -20,7 +20,6 @@ import("$base_root/drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 module_output_path = "hats/light"
 ohos_moduletest_suite("HatsHdfLightbenchmarkTest") {
   module_out_path = module_output_path
-  include_dirs = [ "$base_root/drivers/peripheral/light/interfaces/include" ]
 
   sources = [ "hdf_light_benchmark_test.cpp" ]
   cflags = [

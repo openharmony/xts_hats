@@ -21,8 +21,6 @@ module_output_path = "hats/light"
 ohos_moduletest_suite("HatsHdfLightCommonTest") {
   module_out_path = module_output_path
 
-  configs = [ ":hdf_light_common" ]
-
   sources = [ "hdf_light_hdi_common_test.cpp" ]
 
   cflags = [
@@ -46,8 +44,4 @@ ohos_moduletest_suite("HatsHdfLightCommonTest") {
     external_deps = [ "hilog:libhilog" ]
   }
   external_deps += [ "ipc:ipc_single" ]
-}
-
-config("hdf_light_common") {
-  include_dirs = [ "$base_root/drivers/peripheral/light/interfaces/include" ]
 }

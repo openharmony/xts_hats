@@ -21,7 +21,7 @@
 #include "osal_time.h"
 #include "osal_mem.h"
 #include "light_if.h"
-#include "light_type.h"
+#include "../hdiService/light_type.h"
 
 using namespace testing::ext;
 

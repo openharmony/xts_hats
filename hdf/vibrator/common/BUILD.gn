@@ -33,7 +33,6 @@ ohos_moduletest_suite("HatsHdfVibratorHdiTest") {
   deps = []
   if (is_standard_system) {
     external_deps = [
-      "$base_root/drivers/peripheral/vibrator/hal:hdi_vibrator",
       "c_utils:utils",
       "hdf_core:libhdf_utils",
       "hilog:libhilog",

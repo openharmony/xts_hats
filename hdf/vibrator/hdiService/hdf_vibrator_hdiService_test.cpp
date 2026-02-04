@@ -19,7 +19,7 @@
 #include "hdf_base.h"
 #include "osal_time.h"
 #include "v2_0/ivibrator_interface.h"
-#include "vibrator_type.h"
+#include "../common/vibrator_type.h"
 
 using namespace OHOS::HDI::Vibrator;
 using namespace OHOS::HDI::Vibrator::V2_0;

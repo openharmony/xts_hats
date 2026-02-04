@@ -21,10 +21,6 @@ module_output_path = "hats/sensor"
 ohos_moduletest_suite("HatsHdfSensorServiceAdditionalTest") {
   module_out_path = module_output_path
 
-  configs = [ ":hdf_sensor_hdiservice_additional" ]
-
-  deps = [ "../../../../../../drivers/peripheral/sensor/hal:hdi_sensor" ]
-
   sources = [
     "hdf_sensor_hdiService_test.cpp",
     "sensor_callback_impl.cpp",
@@ -54,9 +50,3 @@ ohos_moduletest_suite("HatsHdfSensorServiceAdditionalTest") {
   part_name = "drivers_interface_sensor"
 }
 
-config("hdf_sensor_hdiservice_additional") {
-  include_dirs = [
-    "$base_root/drivers/peripheral/sensor/interfaces",
-    "$base_root/drivers/peripheral/sensor/interfaces/include",
-  ]
-}

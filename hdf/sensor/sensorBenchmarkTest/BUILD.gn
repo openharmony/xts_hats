@@ -20,11 +20,6 @@ module_output_path = "hats/sensor"
 ohos_moduletest_suite("HatsHdfSensorbenchmarkTest") {
   module_out_path = module_output_path
 
-  include_dirs = [
-    "$base_root/drivers/peripheral/sensor/interfaces",
-    "$base_root/drivers/peripheral/sensor/interfaces/include",
-  ]
-
   sources = [
     "../hdiService/sensor_callback_impl.cpp",
     "hdf_sensor_benchmark_test.cpp",

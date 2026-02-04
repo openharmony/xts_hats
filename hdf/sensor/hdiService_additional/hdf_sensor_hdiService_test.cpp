@@ -17,8 +17,7 @@
 #include "hdf_log.h"
 #include "osal_time.h"
 #include "sensor_callback_impl.h"
-#include "sensor_if.h"
-#include "sensor_type.h"
+#include "../common/sensor_type.h"
 #include "v3_0/isensor_interface.h"
 #include <cmath>
 #include <cstdio>
@@ -31,15 +30,12 @@ using namespace testing::ext;
 
 namespace {
     sptr<ISensorInterface> g_sensorInterface = nullptr;
-    const struct SensorInterface *g_sensorDev = nullptr;
     sptr<ISensorCallback> g_traditionalCallback = new SensorCallbackImpl();
     sptr<ISensorCallback> g_medicalCallback = new SensorCallbackImpl();
     std::vector<HdfSensorInformation> g_info;
     std::vector<HdfSensorEvents> g_events;
     constexpr int32_t SENSOR_INTERVAL2 = 20000000;
     constexpr int32_t SENSOR_POLL_TIME = 1;
-    struct SensorInformation *g_sensorInfo = nullptr;
-    int32_t g_count = 0;
 
 class HatsHdfSensorServiceTestAdditional : public testing::Test {
 public:
@@ -66,23 +62,10 @@ public:
 void HatsHdfSensorServiceTestAdditional::SetUpTestCase()
 {
     g_sensorInterface = ISensorInterface::Get();
-    g_sensorDev = NewSensorInterfaceInstance();
-    if (g_sensorDev == nullptr) {
-        printf("test sensorHdi get Module instance failed\n\r");
-        return;
-    }
-    int32_t ret = g_sensorDev->GetAllSensors(&g_sensorInfo, &g_count);
-    if (ret == -1) {
-        printf("get sensor information failed\n\r");
-    }
 }
 
 void HatsHdfSensorServiceTestAdditional::TearDownTestCase()
 {
-    if (g_sensorDev != nullptr) {
-        FreeSensorInterfaceInstance();
-        g_sensorDev = nullptr;
-    }
 }
 
 void HatsHdfSensorServiceTestAdditional::SetUp()

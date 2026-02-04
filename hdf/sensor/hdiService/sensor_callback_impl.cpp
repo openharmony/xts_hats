@@ -15,7 +15,7 @@
 #include <cmath>
 #include "osal_mem.h"
 #include "sensor_callback_impl.h"
-#include "sensor_type.h"
+#include "../common/sensor_type.h"
 
 namespace OHOS {
 namespace HDI {

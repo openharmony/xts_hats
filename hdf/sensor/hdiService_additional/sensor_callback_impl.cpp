@@ -15,7 +15,7 @@
 
 #include "sensor_callback_impl.h"
 #include "../sensor_plug_callback_test/sensor_plug_callback_impl.h"
-#include "sensor_type.h"
+#include "../common/sensor_type.h"
 #include "osal_mem.h"
 
 namespace OHOS {

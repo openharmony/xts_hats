@@ -20,8 +20,6 @@ module_output_path = "hats/light"
 ohos_moduletest_suite("HatsHdfLightCommonAdditionalTest") {
   module_out_path = module_output_path
 
-  configs = [ ":hdf_light_common_additional" ]
-
   sources = [ "HdfLightCommonTestAdditional.cpp" ]
 
   cflags = [
@@ -49,6 +47,3 @@ ohos_moduletest_suite("HatsHdfLightCommonAdditionalTest") {
   part_name = "drivers_interface_light"
 }
 
-config("hdf_light_common_additional") {
-  include_dirs = [ "$base_root/drivers/peripheral/light/interfaces/include" ]
-}

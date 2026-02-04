@@ -14,7 +14,7 @@
  */
 
 #include "hdf_base.h"
-#include "light_type.h"
+#include "../hdiService/light_type.h"
 #include "osal_time.h"
 #include "v1_0/ilight_interface.h"
 #include <cmath>

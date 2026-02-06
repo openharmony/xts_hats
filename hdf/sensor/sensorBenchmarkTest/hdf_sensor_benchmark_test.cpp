@@ -25,7 +25,7 @@
 #include "hdf_base.h"
 #include "osal_time.h"
 #include "v3_0/isensor_interface.h"
-#include "sensor_type.h"
+#include "../common/sensor_type.h"
 #include "../hdiService/sensor_callback_impl.h"
 
 

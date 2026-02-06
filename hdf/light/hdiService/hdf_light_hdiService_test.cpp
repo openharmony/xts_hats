@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,13 +20,13 @@
 #include "hdf_base.h"
 #include "osal_time.h"
 #include "v1_0/ilight_interface.h"
-#include "light_type.h"
+#include "../hdiService/light_type.h"
 
 using namespace OHOS::HDI::Light::V1_0;
 using namespace testing::ext;
 
 namespace {
-    constexpr uint32_t g_sleepTime = 3;
+    constexpr uint32_t SLEEP_TIME = 3;
     constexpr int32_t g_minLightId = HDF_LIGHT_ID_BATTERY;
     constexpr int32_t g_maxLightId = HDF_LIGHT_ID_ATTENTION;
     constexpr int32_t MAX_VALUE = 255;
@@ -126,7 +126,7 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_Driver_Sensor_HdiLight_0300, Function | Med
         effect.flashEffect.flashMode = LIGHT_FLASH_NONE;
         int32_t ret = g_lightInterface->TurnOnLight(iter.lightId, effect);
         EXPECT_EQ(HDF_SUCCESS, ret);
-        OsalSleep(g_sleepTime);
+        OsalSleep(SLEEP_TIME);
         ret = g_lightInterface->TurnOffLight(iter.lightId);
         EXPECT_EQ(HDF_SUCCESS, ret);
     }
@@ -189,7 +189,7 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_Driver_Sensor_HdiLight_0500, Function | Med
         effect.flashEffect.offTime = OFF_TIME;
         int32_t ret = g_lightInterface->TurnOnLight(iter.lightId, effect);
         EXPECT_EQ(HDF_SUCCESS, ret);
-        OsalSleep(g_sleepTime);
+        OsalSleep(SLEEP_TIME);
         ret = g_lightInterface->TurnOffLight(iter.lightId);
         EXPECT_EQ(HDF_SUCCESS, ret);
     }
@@ -221,7 +221,7 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_Driver_Sensor_HdiLight_0600, Function | Med
         effect.flashEffect.flashMode = LIGHT_FLASH_GRADIENT;
         int32_t ret = g_lightInterface->TurnOnLight(iter.lightId, effect);
         EXPECT_EQ(HDF_ERR_NOT_SUPPORT, ret);
-        OsalSleep(g_sleepTime);
+        OsalSleep(SLEEP_TIME);
         ret = g_lightInterface->TurnOffLight(iter.lightId);
         EXPECT_EQ(HDF_SUCCESS, ret);
     }
@@ -300,7 +300,7 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_Driver_Sensor_HdiLight_1000, Function | Med
     int32_t ret = g_lightInterface->TurnOnLight(LIGHT_ID_BATTERY, effect);
     EXPECT_EQ(HDF_SUCCESS, ret);
 
-    OsalSleep(g_sleepTime);
+    OsalSleep(SLEEP_TIME);
 
     ret = g_lightInterface->TurnOffLight(LIGHT_ID_BATTERY);
     EXPECT_EQ(HDF_SUCCESS, ret);
@@ -322,7 +322,7 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_Driver_Sensor_HdiLight_1100, Function | Med
     int32_t ret = g_lightInterface->TurnOnLight(LIGHT_ID_BATTERY, effect);
     EXPECT_EQ(HDF_SUCCESS, ret);
 
-    OsalSleep(g_sleepTime);
+    OsalSleep(SLEEP_TIME);
 
     ret = g_lightInterface->TurnOffLight(LIGHT_ID_BATTERY);
     EXPECT_EQ(HDF_SUCCESS, ret);
@@ -344,7 +344,7 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_Driver_Sensor_HdiLight_1200, Function | Med
     int32_t ret = g_lightInterface->TurnOnLight(LIGHT_ID_BATTERY, effect);
     EXPECT_EQ(HDF_SUCCESS, ret);
 
-    OsalSleep(g_sleepTime);
+    OsalSleep(SLEEP_TIME);
 
     ret = g_lightInterface->TurnOffLight(LIGHT_ID_BATTERY);
     EXPECT_EQ(HDF_SUCCESS, ret);
@@ -369,7 +369,7 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_Driver_Sensor_HdiLight_1300, Function | Med
     int32_t ret = g_lightInterface->TurnOnLight(LIGHT_ID_BATTERY, effect);
     EXPECT_EQ(HDF_SUCCESS, ret);
 
-    OsalSleep(g_sleepTime);
+    OsalSleep(SLEEP_TIME);
 
     ret = g_lightInterface->TurnOffLight(LIGHT_ID_BATTERY);
     EXPECT_EQ(HDF_SUCCESS, ret);
@@ -394,7 +394,7 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_Driver_Sensor_HdiLight_1400, Function | Med
     int32_t ret = g_lightInterface->TurnOnLight(LIGHT_ID_BATTERY, effect);
     EXPECT_EQ(HDF_SUCCESS, ret);
 
-    OsalSleep(g_sleepTime);
+    OsalSleep(SLEEP_TIME);
 
     ret = g_lightInterface->TurnOffLight(LIGHT_ID_BATTERY);
     EXPECT_EQ(HDF_SUCCESS, ret);
@@ -418,7 +418,7 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_Driver_Sensor_HdiLight_1500, Function | Med
     int32_t ret = g_lightInterface->TurnOnLight(LIGHT_ID_BATTERY, effect);
     EXPECT_EQ(HDF_SUCCESS, ret);
 
-    OsalSleep(g_sleepTime);
+    OsalSleep(SLEEP_TIME);
 
     ret = g_lightInterface->TurnOffLight(LIGHT_ID_BATTERY);
     EXPECT_EQ(HDF_SUCCESS, ret);
@@ -606,7 +606,7 @@ HWTEST_F(HdfLightHdiServiceTest, SUB_Driver_Sensor_HdiLight_2300, Function | Med
     int32_t ret = g_lightInterface->TurnOnMultiLights(LIGHT_ID_BATTERY, lightColor);
     EXPECT_EQ(HDF_SUCCESS, ret);
 
-    OsalSleep(g_sleepTime);
+    OsalSleep(SLEEP_TIME);
 
     ret = g_lightInterface->TurnOffLight(LIGHT_ID_BATTERY);
     EXPECT_EQ(HDF_SUCCESS, ret);

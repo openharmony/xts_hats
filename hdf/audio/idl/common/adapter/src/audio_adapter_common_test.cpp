@@ -18,8 +18,8 @@
 #include <gtest/gtest.h>
 #include "hdf_dlist.h"
 #include "osal_mem.h"
-#include "v5_0/iaudio_adapter.h"
-#include "v5_0/iaudio_manager.h"
+#include "v6_0/iaudio_adapter.h"
+#include "v6_0/iaudio_manager.h"
 
 using namespace std;
 using namespace testing::ext;
@@ -516,7 +516,7 @@ HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_5100, TestSize.Level
     ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_SUCCESS);
 }
 
-#ifdef DISPLAY_COMMUNITY
+#ifdef AUDIO_COMMUNITY
 /**
 * @tc.name: SUB_Driver_Audio_AdapterHdi_EnumTest_0100
 * @tc.desc: Judgment enum value of the AudioTypes.idl

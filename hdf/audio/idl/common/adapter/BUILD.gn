@@ -12,8 +12,7 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
-import("//drivers/peripheral/audio/audio.gni")
-import("//drivers/peripheral/display/display_config.gni")
+import("//drivers/interface/audio/audio.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hats/audio"
@@ -21,7 +20,7 @@ ohos_moduletest_suite("HatsHdfAudioIdlAdapterTest") {
   module_out_path = module_output_path
 
   defines = []
-  defines += display_defines
+  defines += audio_defines
 
   sources = [ "src/audio_adapter_common_test.cpp" ]
   configs = [ ":audio_idl_adapter" ]
@@ -30,7 +29,7 @@ ohos_moduletest_suite("HatsHdfAudioIdlAdapterTest") {
   external_deps = [
     "c_utils:utils",
     "drivers_interface_audio:audio_idl_headers",
-    "drivers_interface_audio:libaudio_proxy_5.0",
+    "drivers_interface_audio:libaudio_proxy_6.0",
     "hdf_core:libhdf_utils",
     "hilog:libhilog",
   ]

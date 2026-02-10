@@ -28,4 +28,5 @@ group("HatsPowermgrThermalTest") {
       "hdi_thermal_additional:HatsPowermgrThermalAdditionalTest",
     ]
   }
+  deps += [ "hdi_thermal_config:HatsPowermgrThermalConfigTest" ]
 }

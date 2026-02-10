@@ -231,7 +231,7 @@ public:
 
 void HdfPowerHdiTest::SetUpTestCase()
 {
-    g_powerInterface = V1_3::IPowerInterface::Get(true);
+    g_powerInterface = V1_3::IPowerInterface::Get();
     powerInterface = new PowerMockInterfaceImpl();
 }
 
@@ -424,7 +424,9 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest009, TestSize.Level1)
         .uid = 0,
     };
     int32_t ret = g_powerInterface->HoldRunningLock(info);
-    EXPECT_TRUE(HDF_SUCCESS == ret) << "HdfPowerHdiTest009 failed";
+    EXPECT_TRUE(HDF_SUCCESS == ret) << "HdfPowerHdiTest009 HoldRunningLock failed";
+    ret = g_powerInterface->UnholdRunningLock(info);
+    EXPECT_TRUE(HDF_SUCCESS == ret) << "HdfPowerHdiTest009 UnholdRunningLock failed";
 }
 
 /**

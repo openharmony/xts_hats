@@ -18,8 +18,6 @@ import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hdf/bluetooth"
-root_path =
-    "../../../../../../drivers/peripheral/adapter/bluetooth/a2dp/hdi_service"
 
 ohos_moduletest_suite("HatsBluetootha2dpTest") {
   module_out_path = module_output_path
@@ -29,7 +27,6 @@ ohos_moduletest_suite("HatsBluetootha2dpTest") {
   ]
 
   deps = [
-    "${root_path}/utils/session:libbluetooth_audio_session",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
   ]
@@ -58,7 +55,5 @@ ohos_moduletest_suite("HatsBluetootha2dpTest") {
 config("hdf_bluetooth") {
   include_dirs = [
     "include",
-    "${root_path}/hdi_service",
-    "${root_path}/hdi_service/utils/session",
   ]
 }

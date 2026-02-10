@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2025 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -624,6 +624,89 @@ HWTEST_F(DisplayBufferUt, test_ReAllocMemTest003, TestSize.Level1)
 
     displayBuffer_->FreeMem(*inBuffer);
     displayBuffer_->FreeMem(*outBuffer);
+}
+
+int32_t DisplayBufferUt::CloneDmaBufferHandleTest(AllocInfo& info)
+{
+    int ret;
+    BufferHandle *inBuffer = nullptr;
+    ret = displayBuffer_->AllocMem(info, inBuffer);
+    if (ret == DISPLAY_NOT_SUPPORT) {
+        HDF_LOGE("%{public}s: AllocMem not support, ret=%{public}d", __func__, ret);
+        return DISPLAY_NOT_SUPPORT;
+    }
+    if (ret != DISPLAY_SUCCESS || inBuffer == nullptr) {
+        HDF_LOGE("%{public}s: AllocMem failed", __func__);
+        return ret;
+    }
+    BufferHandle* outBuffer = nullptr;
+    ret = displayBuffer_->CloneDmaBufferHandle(*inBuffer, outBuffer);
+    if (ret == DISPLAY_NOT_SUPPORT) {
+        HDF_LOGE("%{public}s: CloneDmaBufferHandle not support, ret=%{public}d", __func__, ret);
+        displayBuffer_->FreeMem(*inBuffer);
+        return DISPLAY_NOT_SUPPORT;
+    }
+    if (ret != DISPLAY_SUCCESS || outBuffer == nullptr) {
+        HDF_LOGE("%{public}s: CloneDmaBufferHandle failed", __func__);
+        displayBuffer_->FreeMem(*inBuffer);
+        return ret;
+    }
+    displayBuffer_->FreeMem(*inBuffer);
+    return DISPLAY_SUCCESS;
+}
+
+/**
+ * @tc.number: test_CloneDmaBufferHandle001
+ * @tc.name: CloneDmaBufferHandle
+ * @tc.desc: verify different AllocInfo for the ReAllocMem interface
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(DisplayBufferUt, test_CloneDmaBufferHandle001, TestSize.Level1)
+{
+    AllocInfo info = {
+        .width = ALLOC_SIZE_1280,
+        .height = ALLOC_SIZE_1920,
+        .usage = HBM_USE_MEM_DMA | HBM_USE_CPU_READ | HBM_USE_CPU_WRITE,
+        .format = PIXEL_FMT_YCBCR_420_P
+    };
+    int ret = CloneDmaBufferHandleTest(info);
+    if (ret == DISPLAY_NOT_SUPPORT) {
+        GTEST_SKIP()<< "CloneDmaBufferHandle not support" << std::endl;
+    }
+#ifdef DISPLAY_COMMUNITY
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "CloneDmaBufferHandle not support" << std::endl;
+    }
+#endif // DISPLAY_COMMUNITY
+    ASSERT_TRUE(ret == DISPLAY_SUCCESS);
+}
+
+/**
+ * @tc.number: test_CloneDmaBufferHandle002
+ * @tc.name: CloneDmaBufferHandle
+ * @tc.desc: verify different AllocInfo for the ReAllocMem interface
+ * @tc.size: MediumTest
+ * @tc.type: Function
+ */
+HWTEST_F(DisplayBufferUt, test_CloneDmaBufferHandle002, TestSize.Level1)
+{
+    AllocInfo info = {
+        .width = ALLOC_SIZE_1080,
+        .height = ALLOC_SIZE_1920,
+        .usage = HBM_USE_CPU_HW_BOTH | HBM_USE_CPU_WRITE,
+        .format = PIXEL_FMT_RGBA_1010102
+    };
+    int ret = CloneDmaBufferHandleTest(info);
+    if (ret == DISPLAY_NOT_SUPPORT) {
+        GTEST_SKIP()<< "CloneDmaBufferHandle not support" << std::endl;
+    }
+#ifdef DISPLAY_COMMUNITY
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "CloneDmaBufferHandle not support" << std::endl;
+    }
+#endif // DISPLAY_COMMUNITY
+    ASSERT_TRUE(ret == DISPLAY_SUCCESS);
 }
 } // OHOS
 } // HDI

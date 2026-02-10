@@ -12,7 +12,6 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
-import("//drivers/peripheral/usb/usb.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hdf/usb"
@@ -27,7 +26,6 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkDeviceTest") {
   configs = [ ":hdf_usb" ]
 
   deps = [
-    "${usb_driver_path}/hdi_service:libusb_interface_service_1.2",
     "//third_party/benchmark",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",
@@ -127,7 +125,6 @@ ohos_moduletest_suite("HatsHdfUsbBenchmarkRequestTest") {
   configs = [ ":hdf_usb" ]
 
   deps = [
-    "${usb_driver_path}/hdi_service:libusb_interface_service_1.2",
     "//third_party/benchmark",
     "//third_party/googletest:gmock_main",
     "//third_party/googletest:gtest_main",

@@ -11,22 +11,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-base_root = "../../../../../../../../"
 import("//build/ohos_var.gni")
-import("//drivers/peripheral/audio/audio.gni")
+import("//drivers/interface/audio/audio.gni")
 import("//test/xts/tools/build/suite.gni")
-import("$base_root/drivers/peripheral/display/display_config.gni")
 
 module_output_path = "hats/audio"
 ohos_moduletest_suite("HatsHdfAudioIdlCaptureAdditionalTest") {
   defines = []
-  defines += display_defines
+  defines += audio_defines
 
   module_out_path = module_output_path
   sources = [ "src/AudioCaptureCommonTestAdditional.cpp" ]
   configs = [ ":audio_idl_capture_additional" ]
 
-  if (drivers_peripheral_audio_feature_alsa_lib) {
+  if (drivers_interface_audio_feature_alsa_lib) {
     defines += [ "ALSA_LIB_MODE" ]
   }
 
@@ -34,7 +32,7 @@ ohos_moduletest_suite("HatsHdfAudioIdlCaptureAdditionalTest") {
   external_deps = [
     "c_utils:utils",
     "drivers_interface_audio:audio_idl_headers",
-    "drivers_interface_audio:libaudio_proxy_5.0",
+    "drivers_interface_audio:libaudio_proxy_6.0",
     "hdf_core:libhdf_utils",
     "hilog:libhilog",
   ]

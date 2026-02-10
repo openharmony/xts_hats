@@ -12,42 +12,38 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
-import("//drivers/peripheral/usb/usb.gni")
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hdf/usb"
 
-ohos_moduletest_suite("HatsHdfUsbDeviceStatusTest") {
+ohos_moduletest_suite("HatsHdfUsbFnMtpAdditionalTest") {
   module_out_path = module_output_path
-  sources = [
-    "../UsbSubscriberTest/UsbSubscriberTest.cpp",
-    "./common/HatsHdfUsbDeviceStatusTest.cpp",
-  ]
-  configs = [ ":hdf_usb" ]
+  sources = [ "./common/HatsHdfUsbFnMtpAdditionalTest.cpp" ]
+  configs = [ ":hdf_usb_additional" ]
 
   deps = [
-    "${usb_driver_path}/ddk:libusb_core",
-    "${usb_driver_path}/hdi_service:libusb_device_interface_service_2.0",
-    "${usb_driver_path}/hdi_service:libusb_host_interface_service_2.0",
+    "//third_party/googletest:gtest_main",
   ]
 
   external_deps = [
+    "ability_base:want",
+    "bundle_framework:appexecfwk_base",
     "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
     "drivers_interface_usb:libusb_proxy_2.0",
+    "drivers_interface_usb:libusbfn_mtp_proxy_1.0",
     "eventhandler:libeventhandler",
-    "googletest:gtest_main",
+    "hdf_core:libhdf_host",
     "hdf_core:libhdf_utils",
     "hilog:libhilog",
     "ipc:ipc_single",
-    "safwk:system_ability_fwk",
-    "samgr:samgr_proxy",
   ]
 
   subsystem_name = "hdf"
   part_name = "drivers_peripheral_usb"
 }
 
-config("hdf_usb") {
+config("hdf_usb_additional") {
   include_dirs = [
     "include",
     "../UsbSubscriberTest",

@@ -16,9 +16,9 @@
 #include "osal_mem.h"
 #include <gtest/gtest.h>
 
-#include "v5_0/audio_types.h"
-#include "v5_0/iaudio_manager.h"
-#include "v5_0/iaudio_render.h"
+#include "v6_0/audio_types.h"
+#include "v6_0/iaudio_manager.h"
+#include "v6_0/iaudio_render.h"
 
 using namespace std;
 using namespace testing::ext;
@@ -122,6 +122,9 @@ void AudioUtRenderMmapTestAdditional::SetUp()
     InitRenderAttrs(attrsRender_);
 
     int32_t ret = adapter_->CreateRender(adapter_, &devDescRender_, &attrsRender_, &render_, &renderId_);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP() << "Mmap not support" << std::endl;
+    }
     if (ret != HDF_SUCCESS) {
         attrsRender_.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
         ASSERT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devDescRender_, &attrsRender_, &render_, &renderId_));
@@ -505,7 +508,7 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderReqMmapBuffer001, Func
     int32_t reqSize = 256;
     struct AudioMmapBufferDescriptor desc;
     int32_t ret = render_->ReqMmapBuffer(render_, reqSize, &desc);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_NE(ret, HDF_SUCCESS);
 #else
     ASSERT_EQ(ret, HDF_SUCCESS);
@@ -524,7 +527,7 @@ HWTEST_F(AudioUtRenderMmapTestAdditional, testCommonRenderReqMmapBuffer002, Func
     int32_t i;
     for (i = 0; i < 1000; i++) {
         int32_t ret = render_->ReqMmapBuffer(render_, reqSize, &desc);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
         ASSERT_NE(ret, HDF_SUCCESS);
 #else
         ASSERT_EQ(ret, HDF_SUCCESS);

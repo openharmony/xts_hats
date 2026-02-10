@@ -14,8 +14,8 @@
  */
 
 #include "osal_mem.h"
-#include "v5_0/iaudio_capture.h"
-#include "v5_0/iaudio_manager.h"
+#include "v6_0/iaudio_capture.h"
+#include "v6_0/iaudio_manager.h"
 #include <climits>
 #include <gtest/gtest.h>
 
@@ -196,7 +196,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetVolume001, TestSize.Le
     EXPECT_NE(capture_->SetVolume, nullptr);
 
     int32_t ret = capture_->SetVolume(capture_, volume);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -213,7 +213,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetVolume002, TestSize.Le
     EXPECT_NE(capture_->SetVolume, nullptr);
 
     int32_t ret = capture_->SetVolume(capture_, volume);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -258,7 +258,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetVolume005, TestSize.Le
     EXPECT_NE(capture_->SetVolume, nullptr);
     for (i = 0; i < 1000; i++) {
         ret = capture_->SetVolume(capture_, volume);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
         EXPECT_EQ(ret, HDF_SUCCESS);
 #else
         EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -349,7 +349,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetMute003, TestSize.Leve
     EXPECT_NE(capture_->SetMute, nullptr);
     for (i = 0; i < 1000; i++) {
         ret = capture_->SetMute(capture_, false);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
         EXPECT_EQ(ret, HDF_SUCCESS);
 #else
         EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -441,7 +441,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetGain001, TestSize.Leve
     EXPECT_NE(capture_->SetGain, nullptr);
 
     int32_t ret = capture_->SetGain(capture_, mute);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -458,7 +458,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetGain002, TestSize.Leve
     EXPECT_NE(capture_->SetGain, nullptr);
 
     int32_t ret = capture_->SetGain(capture_, mute);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -488,7 +488,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetGain004, TestSize.Leve
     EXPECT_NE(capture_->SetGain, nullptr);
 
     int32_t ret = capture_->SetGain(capture_, gain);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -505,7 +505,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetGain005, TestSize.Leve
     EXPECT_NE(capture_->SetGain, nullptr);
 
     int32_t ret = capture_->SetGain(capture_, gain);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -525,7 +525,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetGain006, TestSize.Leve
     EXPECT_NE(capture_->SetGain, nullptr);
     for (i = 0; i < 1000; i++) {
         ret = capture_->SetGain(capture_, mute);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
         EXPECT_EQ(ret, HDF_SUCCESS);
 #else
         EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -558,7 +558,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureGetGain001, TestSize.Leve
     EXPECT_NE(capture_->SetGain, nullptr);
     for (i = 0; i < 1000; i++) {
         ret = capture_->GetGain(capture_, &gain);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
         EXPECT_EQ(ret, HDF_SUCCESS);
 #else
         EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -631,7 +631,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureGetGainThreshold005, Test
     EXPECT_NE(capture_->GetGainThreshold, nullptr);
     for (i = 0; i < 1000; i++) {
         ret = capture_->GetGainThreshold(capture_, &bottom, &top);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
         EXPECT_EQ(ret, HDF_SUCCESS);
 #else
         EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -686,7 +686,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene003, TestSize.
     sceneDesc.scene.id = AUDIO_IN_RINGTONE;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_SUCCESS);
@@ -741,7 +741,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene006, TestSize.
     sceneDesc.scene.id = AUDIO_IN_RINGTONE;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_SUCCESS);
@@ -778,7 +778,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene008, TestSize.
     sceneDesc.scene.id = AUDIO_IN_MEDIA;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_SUCCESS);
@@ -798,7 +798,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene009, TestSize.
     sceneDesc.scene.id = AUDIO_IN_COMMUNICATION;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_SUCCESS);
@@ -818,7 +818,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene010, TestSize.
     sceneDesc.scene.id = AUDIO_IN_RINGTONE;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_SUCCESS);
@@ -838,7 +838,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene011, TestSize.
     sceneDesc.scene.id = AUDIO_IN_CALL;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_SUCCESS);
@@ -879,7 +879,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene013, TestSize.
     sceneDesc.scene.id = AUDIO_IN_MEDIA;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_SUCCESS);
@@ -900,7 +900,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene014, TestSize.
     sceneDesc.scene.id = AUDIO_IN_COMMUNICATION;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_SUCCESS);
@@ -921,7 +921,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene015, TestSize.
     sceneDesc.scene.id = AUDIO_IN_RINGTONE;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_SUCCESS);
@@ -942,7 +942,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSelectScene016, TestSize.
     sceneDesc.scene.id = AUDIO_IN_CALL;
 
     int32_t ret = capture_->SelectScene(capture_, &sceneDesc);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_NE(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_SUCCESS);
@@ -1010,7 +1010,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureCheckSceneCapability003, 
     bool isSupport = false;
 
     int32_t ret = capture_->CheckSceneCapability(capture_, &sceneDesc, &isSupport);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -1460,7 +1460,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes001, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -1493,7 +1493,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes002, Functi
     ret = capture_->SetSampleAttributes(capture_, &attrs);
 #if defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
-#elif defined DISPLAY_COMMUNITY
+#elif defined AUDIO_COMMUNITY
     EXPECT_EQ(ret, HDF_FAILURE);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -1551,7 +1551,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes004, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_FAILURE);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -1582,7 +1582,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes005, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_FAILURE);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -1613,7 +1613,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes006, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_FAILURE);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -1643,7 +1643,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes007, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -1674,7 +1674,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes008, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -1705,7 +1705,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes009, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -1736,7 +1736,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes010, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -1767,7 +1767,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes011, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -1798,7 +1798,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes012, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -1829,7 +1829,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes013, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -1862,7 +1862,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes014, Functi
     ret = capture_->SetSampleAttributes(capture_, &attrs);
 #if defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
-#elif defined DISPLAY_COMMUNITY
+#elif defined AUDIO_COMMUNITY
     EXPECT_EQ(ret, HDF_FAILURE);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -1893,7 +1893,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetSampleAttributes001, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -1942,7 +1942,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetSampleAttributes002, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrsSet);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -2094,7 +2094,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCapturePause002, Function | MediumTes
     ret = capture_->Start(capture_);
     EXPECT_EQ(ret, HDF_SUCCESS);
     ret = capture_->Pause(capture_);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -2113,7 +2113,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureStop001, Function | MediumTest
     int32_t ret = 0;
 
     ret = capture_->Stop(capture_);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -2150,13 +2150,13 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureResume001, Function | MediumTe
     EXPECT_EQ(ret, HDF_SUCCESS);
     for (int32_t i = 0; i < 1000; i++) {
         ret = capture_->Pause(capture_);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
         EXPECT_EQ(ret, HDF_SUCCESS);
 #else
         EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #endif
         ret = capture_->Resume(capture_);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
         EXPECT_EQ(ret, HDF_SUCCESS);
 #else
         EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -2253,7 +2253,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump001, Function | Me
     }
 
     ret = capture_->AudioDevDump(capture_, range, fd);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -2280,7 +2280,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump002, Function | Me
     }
 
     ret = capture_->AudioDevDump(capture_, range, fd);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -2311,7 +2311,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump003, Function | Me
     }
 
     ret = capture_->AudioDevDump(capture_, range, fd);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -2358,7 +2358,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump006, Function | Me
         ASSERT_NE(fd, -1);
     }
     ret = capture_->AudioDevDump(capture_, 2, fd);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -2383,7 +2383,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump007, Function | Me
         ASSERT_NE(fd, -1);
     }
     ret = capture_->AudioDevDump(capture_, -1, fd);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -2408,7 +2408,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump008, Function | Me
         ASSERT_NE(fd, -1);
     }
     ret = capture_->AudioDevDump(capture_, 2147483647, fd);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -2427,7 +2427,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump009, Function | Me
     int32_t ret = 0;
 
     ret = capture_->AudioDevDump(capture_, range, -1);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -2445,7 +2445,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump010, Function | Me
     int32_t ret = 0;
 
     ret = capture_->AudioDevDump(capture_, range, 2147483647);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
@@ -2522,7 +2522,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureStart001, Function | MediumTes
     ASSERT_NE(capture_->Start, nullptr);
 
     int32_t ret = HDF_SUCCESS;
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     for (int64_t i = 0; i < 1000; i++) {
         ret = capture_->Start(capture_);
         EXPECT_EQ(ret, HDF_SUCCESS);
@@ -2602,7 +2602,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureGetFrameBufferSize001, Functio
     int32_t ret = HDF_SUCCESS;
     for (int64_t i = 0; i < 1000; i++) {
         ret = capture_->GetFrameBufferSize(capture_, &bufferSize);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
         ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #else
         ASSERT_EQ(ret, HDF_ERR_INVALID_PARAM);
@@ -2624,7 +2624,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureIsSupportsPauseAndResume001, F
     int32_t ret = HDF_SUCCESS;
     for (int64_t i = 0; i < 1000; i++) {
         ret = capture_->IsSupportsPauseAndResume(capture_, &supportPause, &supportResume);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
         ASSERT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #else
         ASSERT_EQ(ret, HDF_ERR_INVALID_PARAM);
@@ -2665,7 +2665,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureAudioDevDump004, Function | Me
     }
 
     ret = capture_->AudioDevDump(capture_, range, fd);
-#if defined DISPLAY_COMMUNITY || defined ALSA_LIB_MODE
+#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);

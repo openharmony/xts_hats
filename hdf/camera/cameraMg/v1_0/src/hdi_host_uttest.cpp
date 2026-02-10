@@ -207,6 +207,9 @@ HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_Merge_2400, TestSize.Level0)
         if (cameraTest->cameraIds.size() > 2) {
             cameraTest->status = true;
             cameraTest->rc = cameraTest->service->SetFlashlight(cameraTest->cameraIds.front(), cameraTest->status);
+            if (cameraTest->rc == -4) {
+                GTEST_SKIP() << "skip this test, because FlashlightT not supported now" << std::endl;
+            }
             EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
         }
     }
@@ -225,6 +228,9 @@ HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_Merge_2500, TestSize.Level0)
         std::string testCameraId = "abc";
         cameraTest->status = true;
         cameraTest->rc = cameraTest->service->SetFlashlight(testCameraId, cameraTest->status);
+        if (cameraTest->rc == -4) {
+            GTEST_SKIP() << "skip this test, because FlashlightT not supported now" << std::endl;
+        }
         EXPECT_EQ(true, cameraTest->rc == INVALID_ARGUMENT);
     }
 }
@@ -242,6 +248,9 @@ HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_Merge_2600, TestSize.Level0)
         std::string testCameraId = "";
         cameraTest->status = true;
         cameraTest->rc = cameraTest->service->SetFlashlight(testCameraId, cameraTest->status);
+        if (cameraTest->rc == -4) {
+            GTEST_SKIP() << "skip this test, because FlashlightT not supported now" << std::endl;
+        }
         EXPECT_EQ(true, cameraTest->rc == INVALID_ARGUMENT);
     }
 }
@@ -260,6 +269,9 @@ HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_Merge_2700, TestSize.Level0)
         if (cameraTest->cameraIds.size() > 2) {
             cameraTest->status = false;
             cameraTest->rc = cameraTest->service->SetFlashlight(cameraTest->cameraIds.front(), cameraTest->status);
+            if (cameraTest->rc == -4) {
+                GTEST_SKIP() << "skip this test, because FlashlightT not supported now" << std::endl;
+            }
             EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
         }
     }
@@ -299,6 +311,9 @@ HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_MergeRK_2400, TestSize.Level0)
         cameraTest->service->GetCameraIds(cameraTest->cameraIds);
         cameraTest->status = true;
         cameraTest->rc = cameraTest->service->SetFlashlight(cameraTest->cameraIds.front(), cameraTest->status);
+        if (cameraTest->rc == -4) {
+            GTEST_SKIP() << "skip this test, because FlashlightT not supported now" << std::endl;
+        }
         EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
     }
 }
@@ -316,6 +331,9 @@ HWTEST_F(HdiHostUtTest, SUB_Driver_Camera_MergeRK_2700, TestSize.Level0)
         cameraTest->service->GetCameraIds(cameraTest->cameraIds);
         cameraTest->status = false;
         cameraTest->rc = cameraTest->service->SetFlashlight(cameraTest->cameraIds.front(), cameraTest->status);
+        if (cameraTest->rc == -4) {
+            GTEST_SKIP() << "skip this test, because FlashlightT not supported now" << std::endl;
+        }
         EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
     }
 }

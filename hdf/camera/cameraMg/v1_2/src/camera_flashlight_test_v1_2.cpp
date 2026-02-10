@@ -96,21 +96,32 @@ HWTEST_F(CameraFlashlightTestV1_2, SUB_Driver_Camera_Flashlight_0030, TestSize.L
 HWTEST_F(CameraFlashlightTestV1_2, SUB_Driver_Camera_Flashlight_0040, TestSize.Level1)
 {
     int32_t ret;
+    cameraTest->Open(DEVICE_0);
+    common_metadata_header_t* data = cameraTest->ability->get();
+    EXPECT_NE(data, nullptr);
+    camera_metadata_item_t entry;
+    ret = FindCameraMetadataItem(data, OHOS_ABILITY_FLASHLIGHT_ADJUST_SUPPORTED, &entry);
     // step 1: get serviceV1_2
     cameraTest->hostCallbackV1_2 = new OHOS::Camera::Test::TestCameraHostCallbackV1_2();
-    ret = cameraTest->serviceV1_2->SetCallback_V1_2(cameraTest->hostCallbackV1_2);
-    EXPECT_EQ(ret, HDI::Camera::V1_0::NO_ERROR);
-    cameraTest->statusV1_2 = 0.5f;
-    cameraTest->rc = cameraTest->serviceV1_2->SetFlashlight_V1_2(cameraTest->statusV1_2);
-    if (cameraTest->rc == HDI::Camera::V1_0::INVALID_ARGUMENT) {
-        printf("FlashLight not support 0.5f");
-    } else {
+    int res = cameraTest->serviceV1_2->SetCallback_V1_2(cameraTest->hostCallbackV1_2);
+    EXPECT_EQ(res, HDI::Camera::V1_0::NO_ERROR);
+    cameraTest->Close();
+    sleep(UT_SLEEP_TIME);
+    cameraTest->Init();
+    if (ret == 0) {
+        cameraTest->statusV1_2 = 0.5f;
+        cameraTest->rc = cameraTest->serviceV1_2->SetFlashlight_V1_2(cameraTest->statusV1_2);
         EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+        cameraTest->statusV1_2 = 0.0f;
+        cameraTest->rc = cameraTest->serviceV1_2->SetFlashlight_V1_2(cameraTest->statusV1_2);
+        EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
+        EXPECT_EQ(OHOS::Camera::Test::statusCallback, HDI::Camera::V1_0::FLASHLIGHT_OFF);
+    } else {
+        cameraTest->statusV1_2 = 0.5f;
+        cameraTest->rc = cameraTest->serviceV1_2->SetFlashlight_V1_2(cameraTest->statusV1_2);
+        EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::INVALID_ARGUMENT);
+        printf("Flashlight Not Support");
     }
-    cameraTest->statusV1_2 = 0.0f;
-    cameraTest->rc = cameraTest->serviceV1_2->SetFlashlight_V1_2(cameraTest->statusV1_2);
-    EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::NO_ERROR);
-    EXPECT_EQ(OHOS::Camera::Test::statusCallback, HDI::Camera::V1_0::FLASHLIGHT_OFF);
 }
 
 /**

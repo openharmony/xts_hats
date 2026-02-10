@@ -100,10 +100,10 @@ HWTEST_F(CameraFlashlightTestV1_2, SUB_Driver_Camera_Flashlight_0040, TestSize.L
     common_metadata_header_t* data = cameraTest->ability->get();
     EXPECT_NE(data, nullptr);
     camera_metadata_item_t entry;
-    int ret = FindCameraMetadataItem(data, OHOS_ABILITY_FLASHLIGHT_ADJUST_SUPPORTED, &entry);
+    ret = FindCameraMetadataItem(data, OHOS_ABILITY_FLASHLIGHT_ADJUST_SUPPORTED, &entry);
     // step 1: get serviceV1_2
     cameraTest->hostCallbackV1_2 = new OHOS::Camera::Test::TestCameraHostCallbackV1_2();
-    res = cameraTest->serviceV1_2->SetCallback_V1_2(cameraTest->hostCallbackV1_2);
+    int res = cameraTest->serviceV1_2->SetCallback_V1_2(cameraTest->hostCallbackV1_2);
     EXPECT_EQ(res, HDI::Camera::V1_0::NO_ERROR);
     cameraTest->Close();
     sleep(UT_SLEEP_TIME);

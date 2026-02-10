@@ -120,7 +120,7 @@ HWTEST_F(CameraFlashlightTestV1_2, SUB_Driver_Camera_Flashlight_0040, TestSize.L
         cameraTest->statusV1_2 = 0.5f;
         cameraTest->rc = cameraTest->serviceV1_2->SetFlashlight_V1_2(cameraTest->statusV1_2);
         EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::INVALID_ARGUMENT);
-        printf("Flashlight NOT SUPPORT");
+        printf("Flashlight Not Support");
     }
 }
 

@@ -40,8 +40,8 @@ ohos_moduletest_suite("HatsUserIamFaceAuthAdditionalTest") {
 
   deps = [
     "$base_root/base/useriam/user_auth_framework/common:iam_test",
-    "$base_root/drivers/interface/face_auth/v2_0:libface_auth_stub_2.0",
-    "$base_root/drivers/peripheral/face_auth/hdi_service:libface_auth_interface_service_2.0",
+    "$base_root/drivers/interface/face_auth/v3_0:libface_auth_stub_3.0",
+    "$base_root/drivers/peripheral/face_auth/hdi_service:libface_auth_interface_service_3.0",
     "$base_root/third_party/googletest:gtest_main",
     "../common:useriam_test_common",
   ]

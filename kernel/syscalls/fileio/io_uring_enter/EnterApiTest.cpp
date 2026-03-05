@@ -282,14 +282,14 @@ HWTEST_F(HatsEnterTest, EnterSqeInvalidStatxFailed_0008, Function | MediumTest |
     //Update tal(submit 2 entries)
     *sqTail += 1;
 
-    ret = io_uring_enter(uringFd, 1, 1, 0);
+    ret = io_uring_enter(uringFd, 1, 1, 1);
     EXPECT_EQ(ret, 1);
 
     //Process CQES
     while (*cqHead != *cqTail) {
         unsigned index = *cqHead & *cqRingMask;
         struct io_uring_cqe *cqe = &cqes[index];
-        EXPECT_EQ(cqe->res, 0);
+        EXPECT_EQ(cqe->res, -20);
         (*cqHead)++;
     }
 

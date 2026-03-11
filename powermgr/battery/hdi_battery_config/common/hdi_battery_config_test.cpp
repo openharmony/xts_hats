@@ -20,7 +20,12 @@
 #include <string>
 #include <hdf_core_log.h>
 #include <config_policy_utils.h>
+#include "v2_0/battery_interface_proxy.h"
+#include "v2_0/ibattery_callback.h"
+#include "v2_0/types.h"
 
+using namespace OHOS::HDI::Battery;
+using namespace OHOS::HDI::Battery::V2_0;
 using namespace testing::ext;
 using namespace OHOS;
 
@@ -37,8 +42,14 @@ public:
     static inline cJSON* config_;
 };
 
+sptr<IBatteryInterface> g_batteryInterface = nullptr;
+
 void HdfBatteryConfigTest::SetUpTestCase(void)
 {
+    g_batteryInterface = IBatteryInterface::Get();
+    if (g_batteryInterface == nullptr) {
+        GTEST_SKIP() << "This component is not supported on this device.";
+    }
     config_ = nullptr;
     configPath_ = "/vendor/etc/battery/battery_config.json";
 }

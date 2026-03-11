@@ -25,9 +25,12 @@ ohos_moduletest_suite("HatsPowermgrBatteryConfigTest") {
 
   external_deps = [
     "cJSON:cjson",
+    "c_utils:utils",
+    "drivers_interface_battery:libbattery_proxy_2.0",
     "hdf_core:libhdf_utils",
     "hilog:libhilog",
     "config_policy:configpolicy_util",
+    "ipc:ipc_single",
   ]
 
   subsystem_name = "hdf"

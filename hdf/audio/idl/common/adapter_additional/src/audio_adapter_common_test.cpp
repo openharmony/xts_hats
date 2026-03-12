@@ -212,9 +212,9 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateRender003, TestSize.Level1)
     InitAttrs(attrs);
     int32_t ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
 #if defined ALSA_LIB_MODE
-    EXPECT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
+    EXPECT_EQ(HDF_SUCCESS, ret);
 #else
-    EXPECT_NE(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
+    EXPECT_NE(HDF_SUCCESS, ret);
 #endif
 }
 
@@ -234,12 +234,12 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateRender004, TestSize.Level1)
     InitAttrs(attrs);
     int32_t ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
 #if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
-    EXPECT_NE(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
+    EXPECT_NE(HDF_SUCCESS, ret);
 #else
     if (ret == HDF_ERR_NOT_SUPPORT) {
         GTEST_SKIP() << "Not support primary or PIN_OUT_HDMI" << std::endl;
     } else {
-        EXPECT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
+        EXPECT_EQ(HDF_SUCCESS, ret);
 }   
 #endif
 }

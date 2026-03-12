@@ -240,7 +240,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateRender004, TestSize.Level1)
         GTEST_SKIP() << "Not support primary or PIN_OUT_HDMI" << std::endl;
     } else {
         EXPECT_EQ(HDF_SUCCESS, ret);
-}   
+}
 #endif
 }
 

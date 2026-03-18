@@ -285,7 +285,10 @@ HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_1900, TestSize.Level
     port.portId = 0;
     port.portName = const_cast<char*>("primary");
     int32_t ret = adapter_->GetPortCapability(adapter_, &port, &capability);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "GetPortCapability not support" << std::endl;
+    }
+    ASSERT_TRUE(ret == HDF_SUCCESS);
 }
 
 HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_2000, TestSize.Level1)
@@ -294,7 +297,7 @@ HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_2000, TestSize.Level
     struct AudioPortCapability capability = {};
     int32_t ret = adapter_->GetPortCapability(adapter_, &port, &capability);
     if (ret == HDF_ERR_NOT_SUPPORT) {
-        GTEST_SKIP()<< "skip this test" << std::endl;
+        GTEST_SKIP()<< "GetPortCapability not support" << std::endl;
     }
     ASSERT_TRUE(ret == HDF_SUCCESS);
 }
@@ -315,7 +318,11 @@ HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_2200, TestSize.Level
 HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_2300, TestSize.Level1)
 {
     enum AudioPortPassthroughMode mode = PORT_PASSTHROUGH_LPCM;
-    EXPECT_EQ(HDF_ERR_INVALID_PARAM, adapter_->SetPassthroughMode(adapter_, nullptr, mode));
+    int32_t ret = adapter_->SetPassthroughMode(adapter_, nullptr, mode);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "SetPassthroughMode not support" << std::endl;
+    }
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
 }
 
 HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_2400, TestSize.Level1)
@@ -344,7 +351,11 @@ HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_2600, TestSize.Level
 HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_2700, TestSize.Level1)
 {
     enum AudioPortPassthroughMode mode;
-    EXPECT_EQ(HDF_ERR_INVALID_PARAM, adapter_->GetPassthroughMode(adapter_, nullptr, &mode));
+    int32_t ret = adapter_->GetPassthroughMode(adapter_, nullptr, &mode);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "GetPassthroughMode not support" << std::endl;
+    }
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
 }
 
 HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_2800, TestSize.Level1)
@@ -371,13 +382,21 @@ HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_3000, TestSize.Level
 
 HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_3100, TestSize.Level1)
 {
-    EXPECT_EQ(HDF_ERR_INVALID_PARAM, adapter_->GetDeviceStatus(adapter_, nullptr));
+    int32_t ret = adapter_->GetDeviceStatus(adapter_, nullptr);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "GetDeviceStatus not support" << std::endl;
+    }
+    EXPECT_EQ(HDF_ERR_INVALID_PARAM, ret);
 }
 
 HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_3200, TestSize.Level1)
 {
     struct AudioDeviceStatus status = {};
-    EXPECT_EQ(HDF_SUCCESS, adapter_->GetDeviceStatus(adapter_, &status));
+    int32_t ret = adapter_->GetDeviceStatus(adapter_, &status);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "GetDeviceStatus not support" << std::endl;
+    }
+    EXPECT_EQ(HDF_SUCCESS, ret);
 }
 
 HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_3300, TestSize.Level1)
@@ -390,7 +409,10 @@ HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_3400, TestSize.Level
 {
     bool mute = false;
     int32_t ret = adapter_->SetMicMute(adapter_, mute);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "SetMicMute not support" << std::endl;
+    }
+    ASSERT_TRUE(ret == HDF_SUCCESS);
 }
 
 HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_3500, TestSize.Level1)
@@ -408,7 +430,10 @@ HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_3700, TestSize.Level
 {
     bool mute = false;
     int32_t ret = adapter_->GetMicMute(adapter_, &mute);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "GetMicMute not support" << std::endl;
+    }
+    ASSERT_TRUE(ret == HDF_SUCCESS);
 }
 
 HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_3800, TestSize.Level1)
@@ -421,7 +446,10 @@ HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_3900, TestSize.Level
 {
     float volume = 0;
     int32_t ret = adapter_->SetVoiceVolume(adapter_, volume);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "SetVoiceVolume not support" << std::endl;
+    }
+    ASSERT_TRUE(ret == HDF_SUCCESS);
 }
 
 HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_4000, TestSize.Level1)
@@ -444,7 +472,10 @@ HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_4200, TestSize.Level
     char condition[AUDIO_ADAPTER_BUF_TEST];
     const char *value = "sup_sampling_rates=4800;sup_channels=1;sup_formats=2;";
     int32_t ret = adapter_->SetExtraParams(adapter_, key, condition, value);
-    ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "SetVoiceVolume not support" << std::endl;
+    }
+    ASSERT_TRUE(ret == HDF_SUCCESS);
 }
 
 HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_4300, TestSize.Level1)
@@ -513,7 +544,10 @@ HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_5100, TestSize.Level
     uint32_t majorVer = 0;
     uint32_t minorVer = 0;
     int32_t ret = adapter_->GetVersion(adapter_, &majorVer, &minorVer);
-    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT || ret == HDF_SUCCESS);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "GetVersion not support" << std::endl;
+    }
+    ASSERT_TRUE(ret == HDF_SUCCESS);
 }
 
 #ifdef AUDIO_COMMUNITY

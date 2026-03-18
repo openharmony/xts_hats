@@ -162,10 +162,8 @@ HWTEST_F(HdfAudioAdapterMultiTest, HdfAudioAdapterMultchannelCreateRenderIsvalid
     InitMultchannelAttrs(attrs);
     attrs.streamId = MULTICHANNEL_OUTPUT_STREAM_ID;
     int32_t ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
-    if (ret == HDF_ERR_NOT_SUPPORT)
-    {
+    if (ret == HDF_ERR_NOT_SUPPORT) {
         GTEST_SKIP() << "Multchannel is not supported!" << std::endl;
-        return;
     }
     EXPECT_TRUE(ret == HDF_SUCCESS);
     ret = adapter_->DestroyRender(adapter_, renderId_);

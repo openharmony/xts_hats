@@ -2159,7 +2159,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetMicMute002, TestSize.Level1)
     if (ret == HDF_ERR_NOT_SUPPORT) {
         GTEST_SKIP() << "Not support GetMicMute" << std::endl;
     } else {
-        ASSERT_TRUE(HDF_SUCCESS, ret);
+        ASSERT_TRUE(HDF_SUCCESS == ret);
     }
 #endif
 }
@@ -2180,7 +2180,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetMicMute001, TestSize.Level1)
     if (ret == HDF_ERR_NOT_SUPPORT) {
         GTEST_SKIP() << "Not support SetMicMute" << std::endl;
     } else {
-        ASSERT_TRUE(HDF_SUCCESS, ret);
+        ASSERT_TRUE(HDF_SUCCESS == ret);
     }
 #endif
 }

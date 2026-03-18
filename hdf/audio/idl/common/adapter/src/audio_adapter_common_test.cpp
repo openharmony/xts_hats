@@ -346,7 +346,7 @@ HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_2600, TestSize.Level
     struct AudioPort port = {};
     enum AudioPortPassthroughMode mode;
     EXPECT_NE(HDF_SUCCESS, adapter_->GetPassthroughMode(nullptr, &port, &mode));
-}  
+}
 
 HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_2700, TestSize.Level1)
 {

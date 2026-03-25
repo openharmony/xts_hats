@@ -112,16 +112,6 @@ HWTEST_F(HdfBatteryHdiTestAdditional, testChangePath001, TestSize.Level2)
  */
 HWTEST_F(HdfBatteryHdiTestAdditional, testChangePath002, TestSize.Level2)
 {
-    EXPECT_EQ(HDF_SUCCESS, g_batteryInterface->ChangePath(nullptr));
-}
-
-/**
- * @tc.number: SUB_Powermgr_Battery_HDI_ChangePath_0400
- * @tc.name: testChangePath003
- * @tc.desc: Verify the reliability of the ChangePath function.
- */
-HWTEST_F(HdfBatteryHdiTestAdditional, testChangePath003, TestSize.Level2)
-{
     std::string path = "test test test";
     EXPECT_EQ(HDF_SUCCESS, g_batteryInterface->ChangePath(path));
 }

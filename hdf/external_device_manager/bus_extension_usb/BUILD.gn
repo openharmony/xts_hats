@@ -50,7 +50,9 @@ ohos_moduletest_suite("HatsHdfExternalBusUsbTest") {
   external_deps = [
     "bundle_framework:appexecfwk_base",
     "c_utils:utils",
-    "drivers_interface_usb:libusb_ddk_proxy_1.1",
+    "drivers_interface_usb:libusb_ddk_proxy_1.2",
+    "hdf_core:libhdi_base",
+    "hdf_core:libpub_utils",
     "hilog:libhilog",
     "samgr:samgr_proxy",
   ]

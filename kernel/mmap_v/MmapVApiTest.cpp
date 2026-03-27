@@ -151,7 +151,7 @@ static void ForceReclaim(void)
 {
     FILE *fp = fopen("/proc/self/reclaim", "w");
     if (fp != nullptr) {
-        fputs("5", fp);
+        fputs("3", fp);
         fclose(fp);
     } else {
         std::cout << "Error ForceReclaim open .\n" << std::endl;
@@ -249,7 +249,7 @@ HWTEST_F(MmapVApiTest, mlockall001, Function | MediumTest | Level1)
 */
 HWTEST_F(MmapVApiTest, mlockall002, Function | MediumTest | Level1)
 {
-    int rc = mlockall(MCL_CURRENT | MCL_ONFAULT);
+    int rc = mlockall(MCL_FUTURE | MCL_ONFAULT);
     ASSERT_TRUE(rc == 0);
     void *va = mmap(nullptr, PAGE_SIZE, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
     ASSERT_TRUE(va != MAP_FAILED);

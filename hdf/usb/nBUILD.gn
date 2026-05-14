@@ -37,6 +37,7 @@ group("HatsHdfUsbTest") {
         # "requestTest_additional:requestAdditional_test",
         # "transferTest:HatsHdfUsbTransferTest",
         # "transferTest_additional:transferAdditional_test",
+        # "serialsTest:HatsHdfSerialsTest",
 
         # "usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
         # "usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",
@@ -59,6 +60,7 @@ group("HatsHdfUsbTest") {
         # "requestTest_additional:requestAdditional_test",
         # "transferTest:HatsHdfUsbTransferTest",
         # "transferTest_additional:transferAdditional_test",
+        # "serialsTest:HatsHdfSerialsTest",
 
         # "usbdBenchmarkTest:HatsHdfUsbBenchmarkDeviceTest",
         # "usbdBenchmarkTest:HatsHdfUsbBenchmarkFunctionTest",

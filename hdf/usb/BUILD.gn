@@ -24,6 +24,7 @@ group("HatsHdfUsbTest") {
     if (hats_rich == false) {
       deps = [
         "autoFunctionTest:HatsHdfUsbAutoFunctionTest",
+        "serialsTest:HatsHdfSerialsTest",
 
         # "deviceStatusTest:HatsHdfUsbDeviceStatusTest",
         # "deviceTest:HatsHdfUsbDeviceTest",
@@ -48,6 +49,7 @@ group("HatsHdfUsbTest") {
       deps = [
         "accessoryTest:HatsHdfUsbAccessoryTest",
         "autoFunctionTest:HatsHdfUsbAutoFunctionTest",
+        "serialsTest:HatsHdfSerialsTest",
 
         # "deviceStatusTest:HatsHdfUsbDeviceStatusTest",
         # "deviceTest:HatsHdfUsbDeviceTest",
@@ -65,18 +67,20 @@ group("HatsHdfUsbTest") {
         # "usbdBenchmarkTest:HatsHdfUsbBenchmarkManagerInterfaceTest",
         # "usbdBenchmarkTest:HatsHdfUsbBenchmarkRequestTest",
         # "usbdBenchmarkTest:HatsHdfUsbBenchmarkTransferTest",
-        
+
       ]
     }
   } else {
     if (hats_rich == false) {
       deps = [
         "V2_0/autoFunctionTest:HatsHdfUsbAutoFunctionTest",
+        "serialsTest:HatsHdfSerialsTest",
       ]
     } else {
       deps = [
         "V2_0/accessoryTest:HatsHdfUsbAccessoryTest",
         "V2_0/autoFunctionTest:HatsHdfUsbAutoFunctionTest",
+        "serialsTest:HatsHdfSerialsTest",
       ]
     }
   }

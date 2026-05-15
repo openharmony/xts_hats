@@ -25,7 +25,10 @@ ohos_moduletest_suite("HatsPurgeableTest") {
 
   if (defined(global_parts_info) &&
       defined(global_parts_info.resourceschedule_memmgr_override)) {
-    external_deps += [ "memmgr_override:libpurgeablemem_plugin" ]
+    external_deps += [ 
+      "memmgr_override:libpurgeablemem_plugin",
+      "memory_utils:libpurgeablemem"
+    ]
   } else {
     external_deps += [ "memory_utils:libpurgeablemem" ]
   }

@@ -114,7 +114,7 @@ public:
             return;
         }
         if (g_compName.empty()) {
-            return;
+            GTEST_SKIP() << "g_compName is empty, skip test"<< std::endl;
         }
 
         auto ret = g_manager->CreateComponent(g_component, g_componentId, g_compName.data(),

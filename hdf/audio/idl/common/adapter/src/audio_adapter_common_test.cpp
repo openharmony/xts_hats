@@ -18,8 +18,8 @@
 #include <gtest/gtest.h>
 #include "hdf_dlist.h"
 #include "osal_mem.h"
-#include "v6_0/iaudio_adapter.h"
-#include "v6_0/iaudio_manager.h"
+#include "v6_1/iaudio_adapter.h"
+#include "v6_1/iaudio_manager.h"
 
 using namespace std;
 using namespace testing::ext;
@@ -546,6 +546,76 @@ HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_5100, TestSize.Level
     int32_t ret = adapter_->GetVersion(adapter_, &majorVer, &minorVer);
     if (ret == HDF_ERR_NOT_SUPPORT) {
         GTEST_SKIP()<< "GetVersion not support" << std::endl;
+    }
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+}
+
+/**
+ * @tc.number: SUB_Driver_Audio_AdapterHdi_5200
+ * @tc.name  : SUB_Driver_Audio_AdapterHdi_5200
+ * @tc.desc  : Verify IAudioAdapter CreateCallTransfer
+ */
+HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_5200, TestSize.Level1)
+{
+    int32_t ret = adapter_->CreateCallTransfer(nullptr);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "CreateCallTransfer not support" << std::endl;
+    }
+    ASSERT_TRUE(HDF_SUCCESS != ret);
+}
+
+/**
+ * @tc.number: SUB_Driver_Audio_AdapterHdi_5300
+ * @tc.name  : SUB_Driver_Audio_AdapterHdi_5300
+ * @tc.desc  : Verify IAudioAdapter CreateCallTransfer
+ */
+HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_5300, TestSize.Level0)
+{
+    int32_t ret = adapter_->CreateCallTransfer(adapter_);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "CreateCallTransfer not support" << std::endl;
+    }
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+}
+
+/**
+ * @tc.number: SUB_Driver_Audio_AdapterHdi_5400
+ * @tc.name  : SUB_Driver_Audio_AdapterHdi_5400
+ * @tc.desc  : Verify IAudioAdapter SetPhoneCallScene
+ */
+HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_5400, TestSize.Level1)
+{
+    int32_t ret = adapter_->SetPhoneCallScene(nullptr, SCENE_TYPE_TRANSFER);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "SetPhoneCallScene not support" << std::endl;
+    }
+    ASSERT_TRUE(HDF_SUCCESS != ret);
+}
+
+/**
+ * @tc.number: SUB_Driver_Audio_AdapterHdi_5500
+ * @tc.name  : SUB_Driver_Audio_AdapterHdi_5500
+ * @tc.desc  : Verify IAudioAdapter SetPhoneCallScene
+ */
+HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_5500, TestSize.Level0)
+{
+    int32_t ret = adapter_->SetPhoneCallScene(adapter_, SCENE_TYPE_TRANSFER);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "SetPhoneCallScene not support" << std::endl;
+    }
+    ASSERT_TRUE(ret == HDF_SUCCESS);
+}
+
+/**
+ * @tc.number: SUB_Driver_Audio_AdapterHdi_5600
+ * @tc.name  : SUB_Driver_Audio_AdapterHdi_5600
+ * @tc.desc  : Verify IAudioAdapter SetPhoneCallScene
+ */
+HWTEST_F(HdfAudioUtAdapterTest, SUB_Driver_Audio_AdapterHdi_5600, TestSize.Level0)
+{
+    int32_t ret = adapter_->SetPhoneCallScene(adapter_, SCENE_TYPE_MODEM);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "SetPhoneCallScene not support" << std::endl;
     }
     ASSERT_TRUE(ret == HDF_SUCCESS);
 }

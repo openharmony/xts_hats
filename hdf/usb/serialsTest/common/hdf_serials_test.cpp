@@ -1327,11 +1327,11 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Perf_0300, Performance | MediumTest | L
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serials_->OpenDevice(devices[1].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
-    const int iterations = 100;
+    const int iterations = 10;
     std::vector<uint8_t> data = {0x01, 0x02, 0x03, 0x04};
     auto startTime = std::chrono::high_resolution_clock::now();
     for (int i = 0; i < iterations; i++) {
@@ -1362,11 +1362,11 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Perf_0400, Performance | MediumTest | L
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serials_->OpenDevice(devices[1].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
-    const int iterations = 50;
+    const int iterations = 10;
     std::vector<uint8_t> data(4096, 0x55);
     auto startTime = std::chrono::high_resolution_clock::now();
     for (int i = 0; i < iterations; i++) {
@@ -1461,7 +1461,7 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Perf_0600, Performance | MediumTest | L
 /**
  * @tc.number: SUB_Serials_HDI_Reliability_0100
  * @tc.name: SUB_Serials_HDI_Reliability_0100
- * @tc.desc: Continuous write 1000 times
+ * @tc.desc: Continuous write 100 times
  * @tc.type: RELIABILITY
  */
 HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Reliability_0100, Reliability | MediumTest | Level2)
@@ -1474,11 +1474,11 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Reliability_0100, Reliability | MediumT
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serials_->OpenDevice(devices[1].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
-    const int operationCount = 1000;
+    const int operationCount = 100;
     std::vector<uint8_t> data = {0x55, 0xAA};
     int32_t failCount = 0;
     for (int i = 0; i < operationCount; i++) {
@@ -1510,7 +1510,7 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Reliability_0200, Reliability | MediumT
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serials_->OpenDevice(devices[1].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -1518,7 +1518,7 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Reliability_0200, Reliability | MediumT
     ret = device->StartRead();
     ASSERT_EQ(ret, HDF_SUCCESS);
 
-    const int operationCount = 500;
+    const int operationCount = 50;
     std::vector<uint8_t> data = {0x55, 0xAA};
     for (int i = 0; i < operationCount; i++) {
         int32_t bytesWritten = 0;

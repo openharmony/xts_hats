@@ -16,12 +16,12 @@ import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "hdf/usb"
 
-ohos_moduletest_suite("HatsHdfSerialsTest") {
+ohos_moduletest_suite("HatsHdfSerialTest") {
   module_out_path = module_output_path
   sources = [
-    "./common/hdf_serials_test.cpp",
+    "./common/hdf_serial_test.cpp",
   ]
-  configs = [ ":hdf_serials" ]
+  configs = [ ":hdf_serial" ]
 
   deps = [ "//third_party/googletest:gtest_main" ]
 
@@ -38,7 +38,7 @@ ohos_moduletest_suite("HatsHdfSerialsTest") {
   part_name = "drivers_interface_serial"
 }
 
-config("hdf_serials") {
+config("hdf_serial") {
   include_dirs = [
     "include",
   ]

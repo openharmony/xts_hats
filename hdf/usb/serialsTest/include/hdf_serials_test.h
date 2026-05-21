@@ -24,8 +24,6 @@
 #include "v1_0/iserial_device.h"
 #include "v1_0/iserial_device_callback.h"
 
-using namespace OHOS::HDI::Serials::V1_0;
-using namespace testing::ext;
 
 constexpr int32_t TEST_WAIT_DATA_TIMEOUT_MS = 1000;
 constexpr int32_t TEST_WAIT_OFFLINE_TIMEOUT_MS = 5000;
@@ -35,7 +33,7 @@ constexpr int32_t TEST_MIN_DEVICES_COUNT = 2;
 constexpr int32_t DEFAULT_BAUD_RATE = 115200;
 constexpr int32_t DATA_BIT_8 = 8;
 
-class SerialDeviceCallbackImpl : public ISerialDeviceCallback {
+class SerialDeviceCallbackImpl : public OHOS::HDI::Serials::V1_0::ISerialDeviceCallback {
 public:
     SerialDeviceCallbackImpl();
     ~SerialDeviceCallbackImpl() override = default;
@@ -66,8 +64,8 @@ public:
     void SetUp();
     void TearDown();
 
-    static sptr<ISerials> serials_;
-    static SerialConfig defaultConfig_;
+    static OHOS::sptr<OHOS::HDI::Serials::V1_0::ISerials> serials_;
+    static OHOS::HDI::Serials::V1_0::SerialConfig defaultConfig_;
 };
 
 #endif // HDF_SERIALS_TEST_H

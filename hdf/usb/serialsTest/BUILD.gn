@@ -23,6 +23,8 @@ ohos_moduletest_suite("HatsHdfSerialsTest") {
   ]
   configs = [ ":hdf_serials" ]
 
+  deps = [ "//third_party/googletest:gtest_main" ]
+
   external_deps = [
     "c_utils:utils",
     "drivers_interface_serial:libserials_proxy_1.0",

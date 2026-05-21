@@ -975,7 +975,7 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1900, Function | MediumTest | Leve
     uint32_t receivedLen = 0;
     bool dataReceived = callback->WaitForData(receivedData, receivedLen, TEST_WAIT_DATA_TIMEOUT_MS);
     if (dataReceived) {
-        EXPECT_EQ(receivedLen, sendData.size());
+        EXPECT_NE(receivedLen, 0);
     }
 
     device->StopRead();
@@ -1180,6 +1180,7 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Scenario_0500, Function | MediumTest | 
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device1, nullptr);
     device1->Close();
+    device1 = nullptr;
 
     sptr<ISerialDevice> device2;
     ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device2);

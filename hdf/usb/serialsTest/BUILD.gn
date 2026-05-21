@@ -33,7 +33,7 @@ ohos_moduletest_suite("HatsHdfSerialsTest") {
   ]
 
   subsystem_name = "hdf"
-  part_name = "drivers_peripheral_serial"
+  part_name = "drivers_interface_serial"
 }
 
 config("hdf_serials") {

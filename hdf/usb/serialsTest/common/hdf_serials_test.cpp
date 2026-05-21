@@ -16,9 +16,9 @@
 #include <chrono>
 #include <thread>
 #include "hdf_log.h"
-#include "hdf_serials_test.h"
+#include "hdf_serial_test.h"
 
-using namespace OHOS::HDI::Serials::V1_0;
+using namespace OHOS::HDI::Serial::V1_0;
 using namespace testing::ext;
 
 SerialDeviceCallbackImpl::SerialDeviceCallbackImpl()
@@ -77,14 +77,14 @@ void SerialDeviceCallbackImpl::Reset()
     receivedLen_ = 0;
 }
 
-sptr<ISerials> HdfSerialsTest::serials_ = nullptr;
-SerialConfig HdfSerialsTest::defaultConfig_ = {};
+sptr<ISerials> HdfSerialTest::serial_ = nullptr;
+SerialConfig HdfSerialTest::defaultConfig_ = {};
 
-void HdfSerialsTest::SetUpTestCase()
+void HdfSerialTest::SetUpTestCase()
 {
-    HDF_LOGI("HdfSerialsTest::SetUpTestCase begin");
-    serials_ = ISerials::Get(true);
-    ASSERT_NE(serials_, nullptr);
+    HDF_LOGI("HdfSerialTest::SetUpTestCase begin");
+    serial_ = ISerials::Get(true);
+    ASSERT_NE(serial_, nullptr);
 
     defaultConfig_.baudRate = DEFAULT_BAUD_RATE;
     defaultConfig_.dataBits = DATA_BIT_8;
@@ -94,51 +94,51 @@ void HdfSerialsTest::SetUpTestCase()
     defaultConfig_.xon = false;
     defaultConfig_.xoff = false;
     defaultConfig_.xany = false;
-    HDF_LOGI("HdfSerialsTest::SetUpTestCase end");
+    HDF_LOGI("HdfSerialTest::SetUpTestCase end");
 }
 
-void HdfSerialsTest::TearDownTestCase()
+void HdfSerialTest::TearDownTestCase()
 {
-    HDF_LOGI("HdfSerialsTest::TearDownTestCase");
-    serials_ = nullptr;
+    HDF_LOGI("HdfSerialTest::TearDownTestCase");
+    serial_ = nullptr;
 }
 
-void HdfSerialsTest::SetUp() {}
+void HdfSerialTest::SetUp() {}
 
-void HdfSerialsTest::TearDown() {}
+void HdfSerialTest::TearDown() {}
 
 // ============================================================
-// 5.1 ISerials Interface Tests (12 cases)
+// 5.1 ISerial Interface Tests (12 cases)
 // ============================================================
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_0100
- * @tc.name: SUB_Serials_HDI_Func_0100
+ * @tc.number: SUB_Serial_HDI_Func_0100
+ * @tc.name: SUB_Serial_HDI_Func_0100
  * @tc.desc: Test functions to QueryDevices
  * @tc.desc: Positive test: query available serial devices
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_0100, Function | MediumTest | Level0)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_0100, Function | MediumTest | Level0)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_GE(devices.size(), 0);
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_0200
- * @tc.name: SUB_Serials_HDI_Func_0200
+ * @tc.number: SUB_Serial_HDI_Func_0200
+ * @tc.name: SUB_Serial_HDI_Func_0200
  * @tc.desc: Test functions to QueryDevices
  * @tc.desc: Verify each device info field is valid
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_0200, Function | MediumTest | Level1)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_0200, Function | MediumTest | Level1)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     for (const auto& device : devices) {
         EXPECT_FALSE(device.portName.empty());
@@ -148,40 +148,40 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_0200, Function | MediumTest | Leve
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_0300
- * @tc.name: SUB_Serials_HDI_Func_0300
+ * @tc.number: SUB_Serial_HDI_Func_0300
+ * @tc.name: SUB_Serial_HDI_Func_0300
  * @tc.desc: Test functions to OpenDevice
  * @tc.desc: Positive test: open device with default config
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_0300, Function | MediumTest | Level0)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_0300, Function | MediumTest | Level0)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_NE(device, nullptr);
     if (device != nullptr) { device->Close(); }
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_0400
- * @tc.name: SUB_Serials_HDI_Func_0400
+ * @tc.number: SUB_Serial_HDI_Func_0400
+ * @tc.name: SUB_Serial_HDI_Func_0400
  * @tc.desc: Test functions to OpenDevice
  * @tc.desc: Open device with baud rate 9600
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_0400, Function | MediumTest | Level1)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_0400, Function | MediumTest | Level1)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
@@ -197,24 +197,24 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_0400, Function | MediumTest | Leve
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, config, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, config, callback, device);
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_NE(device, nullptr);
     if (device != nullptr) { device->Close(); }
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_0500
- * @tc.name: SUB_Serials_HDI_Func_0500
+ * @tc.number: SUB_Serial_HDI_Func_0500
+ * @tc.name: SUB_Serial_HDI_Func_0500
  * @tc.desc: Test functions to OpenDevice
  * @tc.desc: Open device with data bits 7
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_0500, Function | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_0500, Function | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
@@ -223,24 +223,24 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_0500, Function | MediumTest | Leve
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, config, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, config, callback, device);
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_NE(device, nullptr);
     if (device != nullptr) { device->Close(); }
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_0600
- * @tc.name: SUB_Serials_HDI_Func_0600
+ * @tc.number: SUB_Serial_HDI_Func_0600
+ * @tc.name: SUB_Serial_HDI_Func_0600
  * @tc.desc: Test functions to OpenDevice
  * @tc.desc: Open device with even parity
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_0600, Function | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_0600, Function | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
@@ -249,24 +249,24 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_0600, Function | MediumTest | Leve
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, config, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, config, callback, device);
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_NE(device, nullptr);
     if (device != nullptr) { device->Close(); }
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_0700
- * @tc.name: SUB_Serials_HDI_Func_0700
+ * @tc.number: SUB_Serial_HDI_Func_0700
+ * @tc.name: SUB_Serial_HDI_Func_0700
  * @tc.desc: Test functions to OpenDevice
  * @tc.desc: Open device with RTS/CTS hardware flow control enabled
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_0700, Function | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_0700, Function | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
@@ -275,24 +275,24 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_0700, Function | MediumTest | Leve
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, config, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, config, callback, device);
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_NE(device, nullptr);
     if (device != nullptr) { device->Close(); }
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_0750
- * @tc.name: SUB_Serials_HDI_Func_0750
+ * @tc.number: SUB_Serial_HDI_Func_0750
+ * @tc.name: SUB_Serial_HDI_Func_0750
  * @tc.desc: Test functions to OpenDevice
  * @tc.desc: Open device with XON/XOFF software flow control enabled
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_0750, Function | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_0750, Function | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
@@ -303,88 +303,88 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_0750, Function | MediumTest | Leve
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, config, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, config, callback, device);
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_NE(device, nullptr);
     if (device != nullptr) { device->Close(); }
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Compatibility_0100
- * @tc.name: SUB_Serials_HDI_Compatibility_0100
+ * @tc.number: SUB_Serial_HDI_Compatibility_0100
+ * @tc.name: SUB_Serial_HDI_Compatibility_0100
  * @tc.desc: Test functions to OpenDevice
  * @tc.desc: Negative test: empty port name should fail
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Compatibility_0100, Function | MediumTest | Level1)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Compatibility_0100, Function | MediumTest | Level1)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    int32_t ret = serials_->OpenDevice("", defaultConfig_, callback, device);
+    int32_t ret = serial_->OpenDevice("", defaultConfig_, callback, device);
     EXPECT_NE(ret, HDF_SUCCESS);
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Compatibility_0200
- * @tc.name: SUB_Serials_HDI_Compatibility_0200
+ * @tc.number: SUB_Serial_HDI_Compatibility_0200
+ * @tc.name: SUB_Serial_HDI_Compatibility_0200
  * @tc.desc: Test functions to OpenDevice
  * @tc.desc: Negative test: nonexistent device path should fail
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Compatibility_0200, Function | MediumTest | Level1)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Compatibility_0200, Function | MediumTest | Level1)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    int32_t ret = serials_->OpenDevice("/dev/nonexistent", defaultConfig_, callback, device);
+    int32_t ret = serial_->OpenDevice("/dev/nonexistent", defaultConfig_, callback, device);
     EXPECT_NE(ret, HDF_SUCCESS);
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Compatibility_0300
- * @tc.name: SUB_Serials_HDI_Compatibility_0300
+ * @tc.number: SUB_Serial_HDI_Compatibility_0300
+ * @tc.name: SUB_Serial_HDI_Compatibility_0300
  * @tc.desc: Test functions to OpenDevice
  * @tc.desc: Positive test: null callback is allowed
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Compatibility_0300, Function | MediumTest | Level1)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Compatibility_0300, Function | MediumTest | Level1)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, nullptr, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, nullptr, device);
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_NE(device, nullptr);
     if (device != nullptr) { device->Close(); }
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Compatibility_0400
- * @tc.name: SUB_Serials_HDI_Compatibility_0400
+ * @tc.number: SUB_Serial_HDI_Compatibility_0400
+ * @tc.name: SUB_Serial_HDI_Compatibility_0400
  * @tc.desc: Test functions to OpenDevice
  * @tc.desc: Negative test: open same port twice should return HDF_ERR_DEVICE_BUSY
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Compatibility_0400, Function | MediumTest | Level1)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Compatibility_0400, Function | MediumTest | Level1)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device1;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device1);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device1);
     ASSERT_EQ(ret, HDF_SUCCESS);
 
     sptr<ISerialDevice> device2;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device2);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device2);
     EXPECT_EQ(ret, HDF_ERR_DEVICE_BUSY);
 
     if (device1 != nullptr) { device1->Close(); }
@@ -395,16 +395,16 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Compatibility_0400, Function | MediumTe
 // ============================================================
 
 /**
- * @tc.number: SUB_Serials_HDI_Boundary_0100
- * @tc.name: SUB_Serials_HDI_Boundary_0100
+ * @tc.number: SUB_Serial_HDI_Boundary_0100
+ * @tc.name: SUB_Serial_HDI_Boundary_0100
  * @tc.desc: Test SerialConfig boundary: baudRate = 0
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Boundary_0100, Function | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Boundary_0100, Function | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
@@ -413,21 +413,21 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Boundary_0100, Function | MediumTest | 
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, config, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, config, callback, device);
     if (device != nullptr) { device->Close(); }
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Boundary_0200
- * @tc.name: SUB_Serials_HDI_Boundary_0200
+ * @tc.number: SUB_Serial_HDI_Boundary_0200
+ * @tc.name: SUB_Serial_HDI_Boundary_0200
  * @tc.desc: Test SerialConfig boundary: dataBits = 0 and 9
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Boundary_0200, Function | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Boundary_0200, Function | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
@@ -436,22 +436,22 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Boundary_0200, Function | MediumTest | 
         config.dataBits = bits;
         sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
         sptr<ISerialDevice> device;
-        ret = serials_->OpenDevice(devices[0].portName, config, callback, device);
+        ret = serial_->OpenDevice(devices[0].portName, config, callback, device);
         if (device != nullptr) { device->Close(); }
     }
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Boundary_0300
- * @tc.name: SUB_Serials_HDI_Boundary_0300
+ * @tc.number: SUB_Serial_HDI_Boundary_0300
+ * @tc.name: SUB_Serial_HDI_Boundary_0300
  * @tc.desc: Test SerialConfig boundary: stopBits = 0 and 3
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Boundary_0300, Function | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Boundary_0300, Function | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
@@ -460,22 +460,22 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Boundary_0300, Function | MediumTest | 
         config.stopBits = bits;
         sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
         sptr<ISerialDevice> device;
-        ret = serials_->OpenDevice(devices[0].portName, config, callback, device);
+        ret = serial_->OpenDevice(devices[0].portName, config, callback, device);
         if (device != nullptr) { device->Close(); }
     }
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Boundary_0400
- * @tc.name: SUB_Serials_HDI_Boundary_0400
+ * @tc.number: SUB_Serial_HDI_Boundary_0400
+ * @tc.name: SUB_Serial_HDI_Boundary_0400
  * @tc.desc: Test SerialConfig boundary: parity = 3 and -1
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Boundary_0400, Function | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Boundary_0400, Function | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
@@ -484,22 +484,22 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Boundary_0400, Function | MediumTest | 
         config.parity = p;
         sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
         sptr<ISerialDevice> device;
-        ret = serials_->OpenDevice(devices[0].portName, config, callback, device);
+        ret = serial_->OpenDevice(devices[0].portName, config, callback, device);
         if (device != nullptr) { device->Close(); }
     }
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Boundary_0500
- * @tc.name: SUB_Serials_HDI_Boundary_0500
+ * @tc.number: SUB_Serial_HDI_Boundary_0500
+ * @tc.name: SUB_Serial_HDI_Boundary_0500
  * @tc.desc: Test SerialConfig boundary: baudRate = 50 and 4000000
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Boundary_0500, Function | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Boundary_0500, Function | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
@@ -508,7 +508,7 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Boundary_0500, Function | MediumTest | 
         config.baudRate = rate;
         sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
         sptr<ISerialDevice> device;
-        ret = serials_->OpenDevice(devices[0].portName, config, callback, device);
+        ret = serial_->OpenDevice(devices[0].portName, config, callback, device);
         if (device != nullptr) { device->Close(); }
     }
 }
@@ -518,23 +518,23 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Boundary_0500, Function | MediumTest | 
 // ============================================================
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_0800
- * @tc.name: SUB_Serials_HDI_Func_0800
+ * @tc.number: SUB_Serial_HDI_Func_0800
+ * @tc.name: SUB_Serial_HDI_Func_0800
  * @tc.desc: Test functions to Write
  * @tc.desc: Positive test: write normal data
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_0800, Function | MediumTest | Level0)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_0800, Function | MediumTest | Level0)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -547,23 +547,23 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_0800, Function | MediumTest | Leve
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_0900
- * @tc.name: SUB_Serials_HDI_Func_0900
+ * @tc.number: SUB_Serial_HDI_Func_0900
+ * @tc.name: SUB_Serial_HDI_Func_0900
  * @tc.desc: Test functions to Write
  * @tc.desc: Negative test: write empty data should fail
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_0900, Function | MediumTest | Level1)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_0900, Function | MediumTest | Level1)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -575,23 +575,23 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_0900, Function | MediumTest | Leve
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_1000
- * @tc.name: SUB_Serials_HDI_Func_1000
+ * @tc.number: SUB_Serial_HDI_Func_1000
+ * @tc.name: SUB_Serial_HDI_Func_1000
  * @tc.desc: Test functions to Write
  * @tc.desc: Write max 4096 bytes data
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1000, Function | MediumTest | Level1)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_1000, Function | MediumTest | Level1)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -604,23 +604,23 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1000, Function | MediumTest | Leve
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Compatibility_0500
- * @tc.name: SUB_Serials_HDI_Compatibility_0500
+ * @tc.number: SUB_Serial_HDI_Compatibility_0500
+ * @tc.name: SUB_Serial_HDI_Compatibility_0500
  * @tc.desc: Test functions to Write
  * @tc.desc: Boundary test: timeout = 0
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Compatibility_0500, Function | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Compatibility_0500, Function | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -632,23 +632,23 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Compatibility_0500, Function | MediumTe
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Compatibility_0600
- * @tc.name: SUB_Serials_HDI_Compatibility_0600
+ * @tc.number: SUB_Serial_HDI_Compatibility_0600
+ * @tc.name: SUB_Serial_HDI_Compatibility_0600
  * @tc.desc: Test functions to Write
  * @tc.desc: Boundary test: timeout = -1
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Compatibility_0600, Function | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Compatibility_0600, Function | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -660,23 +660,23 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Compatibility_0600, Function | MediumTe
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_1100
- * @tc.name: SUB_Serials_HDI_Func_1100
+ * @tc.number: SUB_Serial_HDI_Func_1100
+ * @tc.name: SUB_Serial_HDI_Func_1100
  * @tc.desc: Test functions to StartRead
  * @tc.desc: Positive test: start reading
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1100, Function | MediumTest | Level0)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_1100, Function | MediumTest | Level0)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -689,23 +689,23 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1100, Function | MediumTest | Leve
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_1150
- * @tc.name: SUB_Serials_HDI_Func_1150
+ * @tc.number: SUB_Serial_HDI_Func_1150
+ * @tc.name: SUB_Serial_HDI_Func_1150
  * @tc.desc: Test functions to StartRead
  * @tc.desc: Call StartRead twice, should still succeed
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1150, Function | MediumTest | Level1)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_1150, Function | MediumTest | Level1)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -721,23 +721,23 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1150, Function | MediumTest | Leve
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_1200
- * @tc.name: SUB_Serials_HDI_Func_1200
+ * @tc.number: SUB_Serial_HDI_Func_1200
+ * @tc.name: SUB_Serial_HDI_Func_1200
  * @tc.desc: Test functions to StopRead
  * @tc.desc: Positive test: stop reading after start
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1200, Function | MediumTest | Level0)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_1200, Function | MediumTest | Level0)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -751,23 +751,23 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1200, Function | MediumTest | Leve
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_1250
- * @tc.name: SUB_Serials_HDI_Func_1250
+ * @tc.number: SUB_Serial_HDI_Func_1250
+ * @tc.name: SUB_Serial_HDI_Func_1250
  * @tc.desc: Test functions to Flush
  * @tc.desc: Positive test: flush buffer
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1250, Function | MediumTest | Level0)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_1250, Function | MediumTest | Level0)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -777,23 +777,23 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1250, Function | MediumTest | Leve
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_1300
- * @tc.name: SUB_Serials_HDI_Func_1300
+ * @tc.number: SUB_Serial_HDI_Func_1300
+ * @tc.name: SUB_Serial_HDI_Func_1300
  * @tc.desc: Test functions to Drain
  * @tc.desc: Positive test: wait for all write operations to complete
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1300, Function | MediumTest | Level0)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_1300, Function | MediumTest | Level0)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -807,23 +807,23 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1300, Function | MediumTest | Leve
 // ============================================================
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_1400
- * @tc.name: SUB_Serials_HDI_Func_1400
+ * @tc.number: SUB_Serial_HDI_Func_1400
+ * @tc.name: SUB_Serial_HDI_Func_1400
  * @tc.desc: Test functions to SendBrkSignal
  * @tc.desc: Positive test: send BRK signal
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1400, Function | MediumTest | Level0)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_1400, Function | MediumTest | Level0)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -833,23 +833,23 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1400, Function | MediumTest | Leve
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_1500
- * @tc.name: SUB_Serials_HDI_Func_1500
+ * @tc.number: SUB_Serial_HDI_Func_1500
+ * @tc.name: SUB_Serial_HDI_Func_1500
  * @tc.desc: Test functions to SetRtsSignal
  * @tc.desc: Set RTS signal to true
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1500, Function | MediumTest | Level0)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_1500, Function | MediumTest | Level0)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -859,23 +859,23 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1500, Function | MediumTest | Leve
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_1600
- * @tc.name: SUB_Serials_HDI_Func_1600
+ * @tc.number: SUB_Serial_HDI_Func_1600
+ * @tc.name: SUB_Serial_HDI_Func_1600
  * @tc.desc: Test functions to SetRtsSignal
  * @tc.desc: Set RTS signal to false
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1600, Function | MediumTest | Level0)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_1600, Function | MediumTest | Level0)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -885,23 +885,23 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1600, Function | MediumTest | Leve
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_1700
- * @tc.name: SUB_Serials_HDI_Func_1700
+ * @tc.number: SUB_Serial_HDI_Func_1700
+ * @tc.name: SUB_Serial_HDI_Func_1700
  * @tc.desc: Test functions to GetCtsSignal
  * @tc.desc: Get CTS signal state
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1700, Function | MediumTest | Level0)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_1700, Function | MediumTest | Level0)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -913,23 +913,23 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1700, Function | MediumTest | Leve
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_1800
- * @tc.name: SUB_Serials_HDI_Func_1800
+ * @tc.number: SUB_Serial_HDI_Func_1800
+ * @tc.name: SUB_Serial_HDI_Func_1800
  * @tc.desc: Test functions to Close
  * @tc.desc: Positive test: close an opened device
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1800, Function | MediumTest | Level0)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_1800, Function | MediumTest | Level0)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -942,23 +942,23 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1800, Function | MediumTest | Leve
 // ============================================================
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_1900
- * @tc.name: SUB_Serials_HDI_Func_1900
+ * @tc.number: SUB_Serial_HDI_Func_1900
+ * @tc.name: SUB_Serial_HDI_Func_1900
  * @tc.desc: Test callback OnReadData
  * @tc.desc: Verify callback receives data after write (loopback test)
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1900, Function | MediumTest | Level1)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_1900, Function | MediumTest | Level1)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -983,23 +983,23 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1900, Function | MediumTest | Leve
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_2000
- * @tc.name: SUB_Serials_HDI_Func_2000
+ * @tc.number: SUB_Serial_HDI_Func_2000
+ * @tc.name: SUB_Serial_HDI_Func_2000
  * @tc.desc: Test callback OnDeviceOffline
  * @tc.desc: Verify callback initial state (not offline)
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_2000, Function | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_2000, Function | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -1008,13 +1008,13 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_2000, Function | MediumTest | Leve
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Func_2050
- * @tc.name: SUB_Serials_HDI_Func_2050
+ * @tc.number: SUB_Serial_HDI_Func_2050
+ * @tc.name: SUB_Serial_HDI_Func_2050
  * @tc.desc: Test callback Reset
  * @tc.desc: Verify callback state reset works correctly
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_2050, Function | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Func_2050, Function | MediumTest | Level2)
 {
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     EXPECT_FALSE(callback->IsDeviceOffline());
@@ -1028,22 +1028,22 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_2050, Function | MediumTest | Leve
 // ============================================================
 
 /**
- * @tc.number: SUB_Serials_HDI_Scenario_0100
- * @tc.name: SUB_Serials_HDI_Scenario_0100
+ * @tc.number: SUB_Serial_HDI_Scenario_0100
+ * @tc.name: SUB_Serial_HDI_Scenario_0100
  * @tc.desc: Full read-write flow scenario
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Scenario_0100, Function | MediumTest | Level1)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Scenario_0100, Function | MediumTest | Level1)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -1068,22 +1068,22 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Scenario_0100, Function | MediumTest | 
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Scenario_0200
- * @tc.name: SUB_Serials_HDI_Scenario_0200
+ * @tc.number: SUB_Serial_HDI_Scenario_0200
+ * @tc.name: SUB_Serial_HDI_Scenario_0200
  * @tc.desc: Write-Flush-Drain flow scenario
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Scenario_0200, Function | MediumTest | Level1)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Scenario_0200, Function | MediumTest | Level1)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -1102,22 +1102,22 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Scenario_0200, Function | MediumTest | 
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Scenario_0300
- * @tc.name: SUB_Serials_HDI_Scenario_0300
+ * @tc.number: SUB_Serial_HDI_Scenario_0300
+ * @tc.name: SUB_Serial_HDI_Scenario_0300
  * @tc.desc: Close device directly after StartRead
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Scenario_0300, Function | MediumTest | Level1)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Scenario_0300, Function | MediumTest | Level1)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -1129,22 +1129,22 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Scenario_0300, Function | MediumTest | 
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Scenario_0400
- * @tc.name: SUB_Serials_HDI_Scenario_0400
+ * @tc.number: SUB_Serial_HDI_Scenario_0400
+ * @tc.name: SUB_Serial_HDI_Scenario_0400
  * @tc.desc: Operations after Close should fail
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Scenario_0400, Function | MediumTest | Level1)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Scenario_0400, Function | MediumTest | Level1)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -1160,46 +1160,46 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Scenario_0400, Function | MediumTest | 
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Scenario_0500
- * @tc.name: SUB_Serials_HDI_Scenario_0500
+ * @tc.number: SUB_Serial_HDI_Scenario_0500
+ * @tc.name: SUB_Serial_HDI_Scenario_0500
  * @tc.desc: Reopen device after close
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Scenario_0500, Function | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Scenario_0500, Function | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
 
     sptr<ISerialDevice> device1;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device1);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device1);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device1, nullptr);
     device1->Close();
     device1 = nullptr;
 
     sptr<ISerialDevice> device2;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device2);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device2);
     EXPECT_EQ(ret, HDF_SUCCESS);
     EXPECT_NE(device2, nullptr);
     if (device2 != nullptr) { device2->Close(); }
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Scenario_0600
- * @tc.name: SUB_Serials_HDI_Scenario_0600
+ * @tc.number: SUB_Serial_HDI_Scenario_0600
+ * @tc.name: SUB_Serial_HDI_Scenario_0600
  * @tc.desc: Open multiple devices concurrently (requires 2+ devices)
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Scenario_0600, Function | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Scenario_0600, Function | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.size() < TEST_MIN_DEVICES_COUNT) { return; }
 
@@ -1207,11 +1207,11 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Scenario_0600, Function | MediumTest | 
     sptr<SerialDeviceCallbackImpl> callback2 = new SerialDeviceCallbackImpl();
 
     sptr<ISerialDevice> device1;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback1, device1);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback1, device1);
     EXPECT_EQ(ret, HDF_SUCCESS);
 
     sptr<ISerialDevice> device2;
-    ret = serials_->OpenDevice(devices[1].portName, defaultConfig_, callback2, device2);
+    ret = serial_->OpenDevice(devices[1].portName, defaultConfig_, callback2, device2);
     EXPECT_EQ(ret, HDF_SUCCESS);
 
     if (device1 != nullptr) { device1->Close(); }
@@ -1219,22 +1219,22 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Scenario_0600, Function | MediumTest | 
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Scenario_0700
- * @tc.name: SUB_Serials_HDI_Scenario_0700
+ * @tc.number: SUB_Serial_HDI_Scenario_0700
+ * @tc.name: SUB_Serial_HDI_Scenario_0700
  * @tc.desc: RTS/CTS signal interaction scenario
  * @tc.type: FUNC
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Scenario_0700, Function | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Scenario_0700, Function | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -1259,21 +1259,21 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Scenario_0700, Function | MediumTest | 
 // ============================================================
 
 /**
- * @tc.number: SUB_Serials_HDI_Perf_0100
- * @tc.name: SUB_Serials_HDI_Perf_0100
+ * @tc.number: SUB_Serial_HDI_Perf_0100
+ * @tc.name: SUB_Serial_HDI_Perf_0100
  * @tc.desc: QueryDevices performance test (100 iterations)
  * @tc.type: PERF
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Perf_0100, Performance | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Perf_0100, Performance | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     const int iterations = 100;
     std::vector<SerialDeviceInfo> devices;
 
     auto startTime = std::chrono::high_resolution_clock::now();
     for (int i = 0; i < iterations; i++) {
         devices.clear();
-        int32_t ret = serials_->QueryDevices(devices);
+        int32_t ret = serial_->QueryDevices(devices);
         ASSERT_EQ(ret, HDF_SUCCESS);
     }
     auto endTime = std::chrono::high_resolution_clock::now();
@@ -1283,16 +1283,16 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Perf_0100, Performance | MediumTest | L
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Perf_0200
- * @tc.name: SUB_Serials_HDI_Perf_0200
+ * @tc.number: SUB_Serial_HDI_Perf_0200
+ * @tc.name: SUB_Serial_HDI_Perf_0200
  * @tc.desc: Open/Close device performance test (50 iterations)
  * @tc.type: PERF
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Perf_0200, Performance | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Perf_0200, Performance | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
@@ -1301,7 +1301,7 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Perf_0200, Performance | MediumTest | L
     for (int i = 0; i < iterations; i++) {
         sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
         sptr<ISerialDevice> device;
-        ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+        ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
         ASSERT_EQ(ret, HDF_SUCCESS);
         if (device != nullptr) { device->Close(); }
     }
@@ -1312,22 +1312,22 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Perf_0200, Performance | MediumTest | L
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Perf_0300
- * @tc.name: SUB_Serials_HDI_Perf_0300
+ * @tc.number: SUB_Serial_HDI_Perf_0300
+ * @tc.name: SUB_Serial_HDI_Perf_0300
  * @tc.desc: Write small data performance test (100 iterations)
  * @tc.type: PERF
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Perf_0300, Performance | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Perf_0300, Performance | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[1].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[1].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -1347,22 +1347,22 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Perf_0300, Performance | MediumTest | L
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Perf_0400
- * @tc.name: SUB_Serials_HDI_Perf_0400
+ * @tc.number: SUB_Serial_HDI_Perf_0400
+ * @tc.name: SUB_Serial_HDI_Perf_0400
  * @tc.desc: Write large data performance test (50 iterations)
  * @tc.type: PERF
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Perf_0400, Performance | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Perf_0400, Performance | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[1].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[1].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -1382,22 +1382,22 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Perf_0400, Performance | MediumTest | L
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Perf_0500
- * @tc.name: SUB_Serials_HDI_Perf_0500
+ * @tc.number: SUB_Serial_HDI_Perf_0500
+ * @tc.name: SUB_Serial_HDI_Perf_0500
  * @tc.desc: StartRead/StopRead performance test (50 iterations)
  * @tc.type: PERF
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Perf_0500, Performance | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Perf_0500, Performance | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -1417,22 +1417,22 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Perf_0500, Performance | MediumTest | L
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Perf_0600
- * @tc.name: SUB_Serials_HDI_Perf_0600
+ * @tc.number: SUB_Serial_HDI_Perf_0600
+ * @tc.name: SUB_Serial_HDI_Perf_0600
  * @tc.desc: Signal control performance test (100 iterations)
  * @tc.type: PERF
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Perf_0600, Performance | MediumTest | Level3)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Perf_0600, Performance | MediumTest | Level3)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -1459,22 +1459,22 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Perf_0600, Performance | MediumTest | L
 // ============================================================
 
 /**
- * @tc.number: SUB_Serials_HDI_Reliability_0100
- * @tc.name: SUB_Serials_HDI_Reliability_0100
+ * @tc.number: SUB_Serial_HDI_Reliability_0100
+ * @tc.name: SUB_Serial_HDI_Reliability_0100
  * @tc.desc: Continuous write 100 times
  * @tc.type: RELIABILITY
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Reliability_0100, Reliability | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Reliability_0100, Reliability | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[1].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[1].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -1495,22 +1495,22 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Reliability_0100, Reliability | MediumT
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Reliability_0200
- * @tc.name: SUB_Serials_HDI_Reliability_0200
+ * @tc.number: SUB_Serial_HDI_Reliability_0200
+ * @tc.name: SUB_Serial_HDI_Reliability_0200
  * @tc.desc: Continuous read-write loop
  * @tc.type: RELIABILITY
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Reliability_0200, Reliability | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Reliability_0200, Reliability | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
     sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
     sptr<ISerialDevice> device;
-    ret = serials_->OpenDevice(devices[1].portName, defaultConfig_, callback, device);
+    ret = serial_->OpenDevice(devices[1].portName, defaultConfig_, callback, device);
     ASSERT_EQ(ret, HDF_SUCCESS);
     ASSERT_NE(device, nullptr);
 
@@ -1536,16 +1536,16 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Reliability_0200, Reliability | MediumT
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Reliability_0300
- * @tc.name: SUB_Serials_HDI_Reliability_0300
+ * @tc.number: SUB_Serial_HDI_Reliability_0300
+ * @tc.name: SUB_Serial_HDI_Reliability_0300
  * @tc.desc: Repeated open/close 50 times
  * @tc.type: RELIABILITY
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Reliability_0300, Reliability | MediumTest | Level2)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Reliability_0300, Reliability | MediumTest | Level2)
 {
-    ASSERT_NE(serials_, nullptr);
+    ASSERT_NE(serial_, nullptr);
     std::vector<SerialDeviceInfo> devices;
-    int32_t ret = serials_->QueryDevices(devices);
+    int32_t ret = serial_->QueryDevices(devices);
     ASSERT_EQ(ret, HDF_SUCCESS);
     if (devices.empty()) { return; }
 
@@ -1554,7 +1554,7 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Reliability_0300, Reliability | MediumT
     for (int i = 0; i < iterations; i++) {
         sptr<SerialDeviceCallbackImpl> callback = new SerialDeviceCallbackImpl();
         sptr<ISerialDevice> device;
-        ret = serials_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
+        ret = serial_->OpenDevice(devices[0].portName, defaultConfig_, callback, device);
         if (ret != HDF_SUCCESS) {
             failCount++;
             continue;
@@ -1566,12 +1566,12 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Reliability_0300, Reliability | MediumT
 }
 
 /**
- * @tc.number: SUB_Serials_HDI_Reliability_0400
- * @tc.name: SUB_Serials_HDI_Reliability_0400
+ * @tc.number: SUB_Serial_HDI_Reliability_0400
+ * @tc.name: SUB_Serial_HDI_Reliability_0400
  * @tc.desc: Multiple callback instances concurrent test
  * @tc.type: RELIABILITY
  */
-HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Reliability_0400, Reliability | MediumTest | Level3)
+HWTEST_F(HdfSerialTest, SUB_Serial_HDI_Reliability_0400, Reliability | MediumTest | Level3)
 {
     sptr<SerialDeviceCallbackImpl> cb1 = new SerialDeviceCallbackImpl();
     sptr<SerialDeviceCallbackImpl> cb2 = new SerialDeviceCallbackImpl();

@@ -12,8 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef HDF_SERIALS_TEST_H
-#define HDF_SERIALS_TEST_H
+#ifndef HDF_SERIAL_TEST_H
+#define HDF_SERIAL_TEST_H
 
 #include <gtest/gtest.h>
 #include <condition_variable>
@@ -33,7 +33,7 @@ constexpr int32_t TEST_MIN_DEVICES_COUNT = 2;
 constexpr int32_t DEFAULT_BAUD_RATE = 115200;
 constexpr int32_t DATA_BIT_8 = 8;
 
-class SerialDeviceCallbackImpl : public OHOS::HDI::Serials::V1_0::ISerialDeviceCallback {
+class SerialDeviceCallbackImpl : public OHOS::HDI::Serial::V1_0::ISerialDeviceCallback {
 public:
     SerialDeviceCallbackImpl();
     ~SerialDeviceCallbackImpl() override = default;
@@ -57,15 +57,15 @@ private:
     uint32_t receivedLen_ = 0;
 };
 
-class HdfSerialsTest : public testing::Test {
+class HdfSerialTest : public testing::Test {
 public:
     static void SetUpTestCase();
     static void TearDownTestCase();
     void SetUp();
     void TearDown();
 
-    static OHOS::sptr<OHOS::HDI::Serials::V1_0::ISerials> serials_;
-    static OHOS::HDI::Serials::V1_0::SerialConfig defaultConfig_;
+    static OHOS::sptr<OHOS::HDI::Serial::V1_0::ISerials> serial_;
+    static OHOS::HDI::Serial::V1_0::SerialConfig defaultConfig_;
 };
 
-#endif // HDF_SERIALS_TEST_H
+#endif // HDF_SERIAL_TEST_H

@@ -25,7 +25,7 @@ group("HatsHdfUsbTest") {
       deps = [
         "autoFunctionTest:HatsHdfUsbAutoFunctionTest",
         
-        # "serialsTest:HatsHdfSerialsTest",
+        # "serialTest:HatsHdfSerialTest",
 
         # "deviceStatusTest:HatsHdfUsbDeviceStatusTest",
         # "deviceTest:HatsHdfUsbDeviceTest",
@@ -51,7 +51,7 @@ group("HatsHdfUsbTest") {
         "accessoryTest:HatsHdfUsbAccessoryTest",
         "autoFunctionTest:HatsHdfUsbAutoFunctionTest",
         
-        # "serialsTest:HatsHdfSerialsTest",
+        # "serialTest:HatsHdfSerialTest",
 
         # "deviceStatusTest:HatsHdfUsbDeviceStatusTest",
         # "deviceTest:HatsHdfUsbDeviceTest",
@@ -76,13 +76,13 @@ group("HatsHdfUsbTest") {
     if (hats_rich == false) {
       deps = [
         "V2_0/autoFunctionTest:HatsHdfUsbAutoFunctionTest",
-        # "serialsTest:HatsHdfSerialsTest",
+        # "serialTest:HatsHdfSerialTest",
       ]
     } else {
       deps = [
         "V2_0/accessoryTest:HatsHdfUsbAccessoryTest",
         "V2_0/autoFunctionTest:HatsHdfUsbAutoFunctionTest",
-        # "serialsTest:HatsHdfSerialsTest",
+        # "serialTest:HatsHdfSerialTest",
       ]
     }
   }

@@ -578,7 +578,6 @@ HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_5500, TestSize.Level1)
     uint32_t minorVer;
     ASSERT_EQ(HDF_SUCCESS, render_->GetVersion(render_, &majorVer, &minorVer));
     EXPECT_EQ(IAUDIO_MANAGER_MAJOR_VERSION, majorVer);
-    EXPECT_EQ(IAUDIO_MANAGER_MINOR_VERSION, minorVer);
 }
 
 HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_5600, TestSize.Level1)

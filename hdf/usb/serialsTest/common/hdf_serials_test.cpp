@@ -975,7 +975,7 @@ HWTEST_F(HdfSerialsTest, SUB_Serials_HDI_Func_1900, Function | MediumTest | Leve
     uint32_t receivedLen = 0;
     bool dataReceived = callback->WaitForData(receivedData, receivedLen, TEST_WAIT_DATA_TIMEOUT_MS);
     if (dataReceived) {
-        EXPECT_NE(receivedLen, 0);
+        EXPECT_GT(receivedLen, 0);
     }
 
     device->StopRead();

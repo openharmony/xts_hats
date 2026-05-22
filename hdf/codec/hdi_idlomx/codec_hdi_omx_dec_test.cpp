@@ -71,7 +71,10 @@ public:
 
     void SetUp()
     {
-        ASSERT_TRUE(g_manager != nullptr && !g_compName.empty());
+        if (g_compName.empty()) {
+            GTEST_SKIP() << "g_compName is empty, skip test"<< std::endl;
+        }
+        ASSERT_TRUE(g_manager != nullptr);
         g_callback = new CodecCallbackService();
         ASSERT_TRUE(g_callback != nullptr);
         auto ret = g_manager->CreateComponent(g_component, componentId_, g_compName.data(), APP_DATA, g_callback);

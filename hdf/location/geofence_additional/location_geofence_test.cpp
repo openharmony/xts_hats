@@ -26,10 +26,10 @@
 #include "hdf_log.h"
 #include "osal_time.h"
 #ifdef HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE
-#include "v2_0/igeofence_interface.h"
+#include "v3_0/igeofence_interface.h"
 #include "geofence_callback_impl.h"
 
-using namespace OHOS::HDI::Location::Geofence::V2_0;
+using namespace OHOS::HDI::Location::Geofence::V3_0;
 #endif
 using namespace std;
 using namespace testing::ext;

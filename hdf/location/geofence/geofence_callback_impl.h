@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-#ifndef OHOS_HDI_LOCATION_GEOFENCE_V2_0_GEOFENCECALLBACKIMPL_H
-#define OHOS_HDI_LOCATION_GEOFENCE_V2_0_GEOFENCECALLBACKIMPL_H
+#ifndef OHOS_HDI_LOCATION_GEOFENCE_V3_0_GEOFENCECALLBACKIMPL_H
+#define OHOS_HDI_LOCATION_GEOFENCE_V3_0_GEOFENCECALLBACKIMPL_H
 
 #ifdef HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE
 #include <hdf_base.h>
-#include <v2_0/igeofence_callback.h>
+#include <v3_0/igeofence_callback.h>
 
 namespace OHOS {
 namespace HDI {

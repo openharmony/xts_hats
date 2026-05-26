@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-#ifndef OHOS_HDI_LOCATION_GEOFENCE_V3_0_GEOFENCECALLBACKIMPL_H
-#define OHOS_HDI_LOCATION_GEOFENCE_V3_0_GEOFENCECALLBACKIMPL_H
+#ifndef OHOS_HDI_LOCATION_GEOFENCE_V2_0_GEOFENCECALLBACKIMPL_H
+#define OHOS_HDI_LOCATION_GEOFENCE_V2_0_GEOFENCECALLBACKIMPL_H
 
 #ifdef HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE
 #include <hdf_base.h>
@@ -34,7 +34,7 @@ public:
                                 int64_t timestamp) override;
     int32_t ReportGeofenceOperateResult(int32_t fenceIndex, int32_t type, int32_t result) override;
 };
-} // namespace V3_0
+} // namespace V2_0
 } // namespace Geofence
 } // namespace Location
 } // namespace HDI

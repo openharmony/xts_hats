@@ -96,7 +96,8 @@ int32_t GeofenceCallbackImpl::ReportGeofenceAvailability(bool isAvailable)
     return HDF_SUCCESS;
 }
 
-int32_t GeofenceCallbackImpl::ReportGeofenceEvent(int32_t fenceIndex, const LocationInfo& location, int32_t event, int64_t timestamp)
+int32_t GeofenceCallbackImpl::ReportGeofenceEvent(
+    int32_t fenceIndex, const LocationInfo& location, int32_t event, int64_t timestamp)
 {
     (void)fenceIndex;
     (void)location;

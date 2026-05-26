@@ -24,7 +24,7 @@ namespace OHOS {
 namespace HDI {
 namespace Location {
 namespace Geofence {
-namespace V2_0 {
+namespace V3_0 {
 class GeofenceCallbackImpl : public IGeofenceCallback {
 public:
     GeofenceCallbackImpl()
@@ -32,8 +32,8 @@ public:
     virtual ~GeofenceCallbackImpl()
     {}
     int32_t ReportGeofenceAvailability(bool isAvailable) override;
-    int32_t ReportGeofenceEvent(int32_t fenceIndex, const LocationInfo& location, GeofenceEvent event, int64_t timestamp) override;
-    int32_t ReportGeofenceOperateResult(int32_t fenceIndex, GeofenceOperateType type, GeofenceOperateResult result) override;
+    int32_t ReportGeofenceEvent(int32_t fenceIndex, const LocationInfo& location, int32_t event, int64_t timestamp) override;
+    int32_t ReportGeofenceOperateResult(int32_t fenceIndex, int32_t type, int32_t result) override;
 };
 } // V2_0
 } // Geofence

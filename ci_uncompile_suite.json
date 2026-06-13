@@ -67,5 +67,6 @@
   "test/xts/hats/hdf/wlan/wifi:HatsHdfWificommonTest",
   "test/xts/hats/hdf/wlan/wlanBenchmarkTest:HatsHdfWlanbenchmarkTest",
   "test/xts/hats/hdf/wlan/flex:HatsFlexWifiConfKeywordsTest",
-  "test/xts/hats/hdf/camera/cameraHdi:HatsHdfCameraHdiTest"
+  "test/xts/hats/hdf/camera/cameraHdi:HatsHdfCameraHdiTest",
+  "test/xts/hats/hdf/audio/idl/benchmarktest/effect:HatsHdfAudioEffectBenchmarkTest"
 ]

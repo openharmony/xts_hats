@@ -31,6 +31,7 @@ using namespace testing::ext;
 namespace {
     HapticCapacity g_hapticCapacity;
     sptr<V2_0::IVibratorInterface> g_vibratorInterface = nullptr;
+    std::vector<HdfVibratorInfo> g_info;
 }
 
 class HatsHdfVibratorImplTest : public testing::Test {
@@ -54,6 +55,12 @@ void HatsHdfVibratorImplTest::SetUp()
     printf("Motion is not supported ");
     GTEST_SKIP() << "Device not exist" << std::endl;
     return;
+    }    
+    g_vibratorInterface->GetVibratorInfo(g_info);
+    if (g_info.size() == 0) {
+        printf("Vibrator is not supported ");
+        GTEST_SKIP() << "Vibrator is not supported" << std::endl;
+        return;
     }
 }
 void HatsHdfVibratorImplTest::TearDown()

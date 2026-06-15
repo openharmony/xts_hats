@@ -55,7 +55,8 @@ void HatsHdfVibratorImplTest::SetUp()
     printf("Motion is not supported ");
     GTEST_SKIP() << "Device not exist" << std::endl;
     return;
-    }    
+    }
+    
     g_vibratorInterface->GetVibratorInfo(g_info);
     if (g_info.size() == 0) {
         printf("Vibrator is not supported ");

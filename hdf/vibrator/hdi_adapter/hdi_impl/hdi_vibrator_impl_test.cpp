@@ -19,7 +19,6 @@
 #include <string>
 #include "hdf_base.h"
 #include "osal_time.h"
-#include "parameters.h"
 #include "v2_0/ivibrator_interface.h"
 #define HDF_LOG_TAG "hdi_vibrator_impl_test"
 

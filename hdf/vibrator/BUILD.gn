@@ -25,6 +25,7 @@ group("HatsHdfVibratorTest") {
   } else {
     deps = [
       #"common:HatsHdfVibratorHdiTest",
+      "hdi_adapter:HatsHdfVibratorAdapterTest",
       "hdiService:HatsHdfVibratorServiceTest",
       "hdiService_additional:HatsHdfVibratorServiceAdditionalTest",
 

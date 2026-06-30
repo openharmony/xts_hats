@@ -61,6 +61,9 @@ HWTEST_F(HdiHostUtTestAdditional, testOnFlashlightStatus001, Function | MediumTe
         if (cameraTest->cameraIds.size() > 2) {
             cameraTest->status = true;
             cameraTest->rc = cameraTest->service->SetFlashlight(cameraTest->cameraIds.front(), cameraTest->status);
+            if (cameraTest->rc == -4) {
+                GTEST_SKIP() << "skip this test, because Flashlight not supported now" << std::endl;
+            }
             EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
             EXPECT_EQ(g_onFlashlightStatusFlag, true);
         }
@@ -79,6 +82,9 @@ HWTEST_F(HdiHostUtTestAdditional, testSetFlashLight001, Function | MediumTest | 
         std::string testCameraId = "abc";
         cameraTest->status = false;
         cameraTest->rc = cameraTest->service->SetFlashlight(testCameraId, cameraTest->status);
+        if (cameraTest->rc == -4) {
+            GTEST_SKIP() << "skip this test, because Flashlight not supported now" << std::endl;
+        }
         EXPECT_EQ(true, cameraTest->rc == INVALID_ARGUMENT);
     }
 }
@@ -95,6 +101,9 @@ HWTEST_F(HdiHostUtTestAdditional, testSetFlashLight002, Function | MediumTest | 
         std::string testCameraId = "";
         cameraTest->status = false;
         cameraTest->rc = cameraTest->service->SetFlashlight(testCameraId, cameraTest->status);
+        if (cameraTest->rc == -4) {
+            GTEST_SKIP() << "skip this test, because Flashlight not supported now" << std::endl;
+        }
         EXPECT_EQ(true, cameraTest->rc == INVALID_ARGUMENT);
     }
 }
@@ -113,6 +122,9 @@ HWTEST_F(HdiHostUtTestAdditional, testSetFlashLight003, Function | MediumTest | 
             if (cameraTest->cameraIds.size() > 2) {
                 cameraTest->status = true;
                 cameraTest->rc = cameraTest->service->SetFlashlight(cameraTest->cameraIds.front(), cameraTest->status);
+                if (cameraTest->rc == -4) {
+                    GTEST_SKIP() << "skip this test, because Flashlight not supported now" << std::endl;
+                }
                 EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
             }
         }

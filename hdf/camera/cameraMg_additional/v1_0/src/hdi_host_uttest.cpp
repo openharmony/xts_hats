@@ -116,17 +116,15 @@ HWTEST_F(HdiHostUtTestAdditional, testSetFlashLight002, Function | MediumTest | 
 HWTEST_F(HdiHostUtTestAdditional, testSetFlashLight003, Function | MediumTest | Level1)
 {
     EXPECT_EQ(true, cameraTest->cameraDevice == nullptr);
-    if (cameraTest->cameraDevice == nullptr) {
-        for (int i = 0; i < 100; i++) {
-            cameraTest->service->GetCameraIds(cameraTest->cameraIds);
-            if (cameraTest->cameraIds.size() > 2) {
-                cameraTest->status = true;
-                cameraTest->rc = cameraTest->service->SetFlashlight(cameraTest->cameraIds.front(), cameraTest->status);
-                if (cameraTest->rc == -4) {
-                    GTEST_SKIP() << "skip this test, because Flashlight not supported now" << std::endl;
-                }
-                EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
+    for (int i = 0; i < 100; i++) {
+        cameraTest->service->GetCameraIds(cameraTest->cameraIds);
+        if (cameraTest->cameraDevice == nullptr && cameraTest->cameraIds.size() > 2) {
+            cameraTest->status = true;
+            cameraTest->rc = cameraTest->service->SetFlashlight(cameraTest->cameraIds.front(), cameraTest->status);
+            if (cameraTest->rc == -4) {
+                GTEST_SKIP() << "skip this test, because Flashlight not supported now" << std::endl;
             }
+            EXPECT_EQ(true, cameraTest->rc == HDI::Camera::V1_0::NO_ERROR);
         }
     }
 }

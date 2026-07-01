@@ -634,15 +634,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testUpdateAudioRoute001, TestSize.Leve
 {
     struct AudioRoute route = {};
     int32_t ret = adapter_->UpdateAudioRoute(adapter_, &route, nullptr);
-#if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
-    if (ret == HDF_ERR_NOT_SUPPORT) {
-        GTEST_SKIP() << "Not support SetVoiceVolume" << std::endl;
-    } else {
-        ASSERT_TRUE(ret == HDF_SUCCESS);
-    }
-#else
     EXPECT_NE(HDF_SUCCESS, ret);
-#endif
 }
 
 /**

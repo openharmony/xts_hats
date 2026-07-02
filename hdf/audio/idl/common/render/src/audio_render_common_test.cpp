@@ -481,10 +481,14 @@ HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_4400, TestSize.Level1)
 
 HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_4500, TestSize.Level1)
 {
-    int32_t ret = render_->Start(render_);
+    int32_t ret = render_->Stop(render_);
+    ret = render_->Start(render_);
 	EXPECT_EQ(HDF_SUCCESS, ret);
 
     ret = render_->TurnStandbyMode(render_);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "skip this test" << std::endl;
+    }
     EXPECT_EQ(HDF_SUCCESS, ret);
 
     ret = render_->Stop(render_);
@@ -611,8 +615,9 @@ HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_6000, TestSize.Level1)
 
 HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_6100, TestSize.Level1)
 {
+    int32_t ret = render_->Stop(render_);
     EXPECT_EQ(HDF_SUCCESS, render_->Start(render_));
-    int32_t ret = render_->Pause(render_);
+    ret = render_->Pause(render_);
 
     if (ret == HDF_SUCCESS) {
         EXPECT_EQ(HDF_SUCCESS, render_->Resume(render_));

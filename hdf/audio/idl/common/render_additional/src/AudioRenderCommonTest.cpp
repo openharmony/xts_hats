@@ -2617,16 +2617,16 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume013, TestSize.Level1
     int32_t ret = render_->Resume(render_);
 #if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     if (ret == HDF_ERR_NOT_SUPPORT) {
- 	  	GTEST_SKIP() << "Resume not support" << std::endl;
- 	} else {
- 	  	EXPECT_EQ(HDF_FAILURE, ret);
- 	}
+        GTEST_SKIP() << "Resume not support" << std::endl;
+    } else {
+        EXPECT_EQ(HDF_FAILURE, ret);
+    }
 #else
     if (ret == HDF_ERR_NOT_SUPPORT) {
- 	  	GTEST_SKIP() << "Resume not support" << std::endl;
- 	} else {
- 	  	EXPECT_EQ(HDF_FAILURE, ret);
- 	}
+        GTEST_SKIP() << "Resume not support" << std::endl;
+    } else {
+        EXPECT_EQ(HDF_FAILURE, ret);
+    }
 #endif
 }
 

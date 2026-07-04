@@ -482,7 +482,7 @@ HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_4400, TestSize.Level1)
 HWTEST_F(AudioUtRenderTest, SUB_Driver_Audio_RenderHdi_4500, TestSize.Level1)
 {
     int32_t ret = render_->Start(render_);
-	EXPECT_EQ(HDF_SUCCESS, ret);
+    EXPECT_EQ(HDF_SUCCESS, ret);
 
     ret = render_->TurnStandbyMode(render_);
     EXPECT_EQ(HDF_SUCCESS, ret);

@@ -192,7 +192,7 @@ HWTEST_F(EffectModelTest, HdfAudioDestroyEffectController001, TestSize.Level1)
     struct IEffectControl *controller = NULL;
     ASSERT_EQ(HDF_SUCCESS, model_->CreateEffectController(model_, &info, &controller, &controllerId_));
     ASSERT_NE(controller, nullptr);
-	
+
     EXPECT_EQ(HDF_ERR_INVALID_OBJECT, model_->DestroyEffectController(nullptr, &controllerId_));
     EXPECT_EQ(HDF_ERR_INVALID_PARAM, model_->DestroyEffectController(model_, nullptr));
 }

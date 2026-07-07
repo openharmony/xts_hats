@@ -28,6 +28,26 @@ void USBCameraTest::SetUp(void)
     if (display_ == nullptr)
     display_ = std::make_shared<TestDisplay>();
     display_->UsbInit();
+
+    std::vector<std::string> cameraIds;
+    display_->cameraHost->GetCameraIds(cameraIds);
+    usbCameraExit_ = false;
+    for (const auto &cameraId : cameraIds) {
+        std::vector<uint8_t> ability;
+        display_->cameraHost->GetCameraAbility(cameraId, ability);
+        std::shared_ptr<CameraAbility> cameraAbility = std::make_shared<CameraAbility>();
+        MetadataUtils::ConvertVecToMetadata(ability, cameraAbility);
+        common_metadata_header_t *data = cameraAbility->get();
+        camera_metadata_item_t entry;
+        int ret = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_CONNECTION_TYPE, &entry);
+        if (ret == CAM_META_SUCCESS && entry.data.u8[0] == OHOS_CAMERA_CONNECTION_TYPE_USB_PLUGIN) {
+            usbCameraExit_ = true;
+            break;
+        }
+    }
+    if (!usbCameraExit_) {
+        GTEST_SKIP() << "No usb camera plugged in";
+    }
 }
 void USBCameraTest::TearDown(void)
 {

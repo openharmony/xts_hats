@@ -35,7 +35,7 @@ void USBCameraTest::SetUp(void)
     for (const auto &cameraId : cameraIds) {
         std::vector<uint8_t> ability;
         display_->cameraHost->GetCameraAbility(cameraId, ability);
-        std::shared_ptr<CameraAbility> cameraAbility = std::make_shared<CameraAbility>();
+        std::shared_ptr<CameraAbility> cameraAbility = std::make_shared<CameraAbility>(0, 0);
         MetadataUtils::ConvertVecToMetadata(ability, cameraAbility);
         common_metadata_header_t *data = cameraAbility->get();
         camera_metadata_item_t entry;

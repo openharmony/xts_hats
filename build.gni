@@ -16,4 +16,5 @@ declare_args() {
   hats_nnrt = false
   hats_drivers_peripheral_power_wakeup_cause_path = false
   hats_drivers_peripheral_battery_pc_macro_isolation = false
+  hats_display_dpu_composer = false
 }

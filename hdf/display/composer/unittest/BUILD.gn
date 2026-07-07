@@ -14,6 +14,7 @@
 import("//build/ohos_var.gni")
 import("//drivers/interface/display/display_config.gni")
 import("//test/xts/tools/build/suite.gni")
+import("//test/xts/hats/build.gni")
 
 module_output_path = "hats/display"
 config("module_private_config") {
@@ -23,6 +24,9 @@ config("module_private_config") {
 ohos_moduletest_suite("HatszHdfDisplayComposerUtTest") {
   defines = []
   defines += display_defines
+  if (hats_display_dpu_composer) {
+      defines += [ "DISPLAY_DPU_COMPOSER" ]
+  }
   module_out_path = module_output_path
   sources = [ "hdi_composer_ut.cpp" ]
   include_dirs = [ "../common" ]

@@ -197,7 +197,7 @@ HWTEST_F(AudioUtCaptureTestAdditional, testAudioCaptureSetVolume001, TestSize.Le
 
     int32_t ret = capture_->SetVolume(capture_, volume);
 #if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
-    EXPECT_EQ(ret, HDF_SUCCESS); 
+    EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #endif

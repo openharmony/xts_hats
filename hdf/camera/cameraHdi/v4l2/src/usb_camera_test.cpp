@@ -28,6 +28,26 @@ void USBCameraTest::SetUp(void)
     if (display_ == nullptr)
     display_ = std::make_shared<TestDisplay>();
     display_->UsbInit();
+
+    std::vector<std::string> cameraIds;
+    display_->cameraHost->GetCameraIds(cameraIds);
+    usbCameraExit_ = false;
+    for (const auto &cameraId : cameraIds) {
+        std::vector<uint8_t> ability;
+        display_->cameraHost->GetCameraAbility(cameraId, ability);
+        std::shared_ptr<CameraAbility> cameraAbility = std::make_shared<CameraAbility>(0, 0);
+        MetadataUtils::ConvertVecToMetadata(ability, cameraAbility);
+        common_metadata_header_t *data = cameraAbility->get();
+        camera_metadata_item_t entry;
+        int ret = FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_CONNECTION_TYPE, &entry);
+        if (ret == CAM_META_SUCCESS && entry.data.u8[0] == OHOS_CAMERA_CONNECTION_TYPE_USB_PLUGIN) {
+            usbCameraExit_ = true;
+            break;
+        }
+    }
+    if (!usbCameraExit_) {
+        GTEST_SKIP() << "No usb camera plugged in";
+    }
 }
 void USBCameraTest::TearDown(void)
 {
@@ -59,16 +79,11 @@ HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbHotSwap_0100, TestSize.Level1)
     sleep(5); // judging r u ready, wait for 5s.
     std::cout << "==========[test log] 3. check the cameraID again... wait for 5s..."<< std::endl;
     sleep(5); // checking the cameraID again, wait for 5s.
-    if (cameraIds.size() == 1) {
-        cameraIds.clear();
-    }
+    cameraIds.clear();
     rc = display_->cameraHost->GetCameraIds(cameraIds);
     EXPECT_EQ(rc, HDI::Camera::V1_0::NO_ERROR);
     for (const auto &cameraId : cameraIds) {
         std::cout << "cameraId = " << cameraId << std::endl;
-    }
-    if (cameraIds.size() > 1) {
-        usbCameraExit_ = true;
     }
     std::cout << "==========[test log] Second cameraId.size = " << cameraIds.size() << std::endl;
 }
@@ -98,18 +113,23 @@ HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbHotSwap_0200, TestSize.Level1)
     sleep(5); // judging r u ready, wait for 5s.
     std::cout << "==========[test log] 3. check the cameraID again... wait for 5s..."<< std::endl;
     sleep(5); // checking the cameraID again, wait for 5s.
-    if (cameraIds.size() == 1) {
-        cameraIds.clear();
-    }
+    std::cout << "==========[test log] First cameraId.size = " << cameraIds.size() << std::endl;
+    cameraIds.clear();
+    display_->cameraHost->GetCameraIds(cameraIds);
+    std::cout << "==========[test log] Second cameraId.size = " << cameraIds.size() << std::endl;
+    std::cout << "==========[test log] 2. please add the usb camera, wait for 5s..."<< std::endl;
+    sleep(5); // judging add or delete the usb camera, wait for 5s.
+    std::cout << "==========[test log] r u ready? wait for 5s..."<< std::endl;
+    sleep(5); // judging r u ready, wait for 5s.
+    std::cout << "==========[test log] 3. check the cameraID again... wait for 5s..."<< std::endl;
+    sleep(5); // checking the cameraID again, wait for 5s.
+    cameraIds.clear();
     rc = display_->cameraHost->GetCameraIds(cameraIds);
     EXPECT_EQ(rc, HDI::Camera::V1_0::NO_ERROR);
     for (const auto &cameraId : cameraIds) {
         std::cout << "cameraId = " << cameraId << std::endl;
     }
-    if (cameraIds.size() > 1) {
-        usbCameraExit_ = true;
-    }
-    std::cout << "==========[test log] Second cameraId.size = " << cameraIds.size() << std::endl;
+    std::cout << "==========[test log] fainally cameraId.size = " << cameraIds.size() << std::endl;
 }
 
 /**
@@ -134,7 +154,7 @@ HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbHotSwap_0300, TestSize.Level1)
         sleep(5); // judging r u ready, wait for 5s.
         std::cout << "==========[test log] 3. check the cameraID again... wait for 5s..."<< std::endl;
         sleep(5); // checking the cameraID again, wait for 5s.
-        std::cout << "==========[test log] Second cameraId.size = " << cameraIds.size() << std::endl;
+        std::cout << "==========[test log] First cameraId.size = " << cameraIds.size() << std::endl;
         cameraIds.clear();
         display_->cameraHost->GetCameraIds(cameraIds);
         std::cout << "==========[test log] Second cameraId.size = " << cameraIds.size() << std::endl;
@@ -145,17 +165,13 @@ HWTEST_F(USBCameraTest, SUB_Driver_Camera_UsbHotSwap_0300, TestSize.Level1)
     sleep(5); // judging r u ready, wait for 5s.
     std::cout << "==========[test log] 3. check the cameraID again... wait for 5s..."<< std::endl;
     sleep(5); // checking the cameraID again, wait for 5s.
-    if (cameraIds.size() == 1) {
-        cameraIds.clear();
-    }
+    cameraIds.clear();
     rc = display_->cameraHost->GetCameraIds(cameraIds);
     EXPECT_EQ(rc, HDI::Camera::V1_0::NO_ERROR);
     for (const auto &cameraId : cameraIds) {
         std::cout << "cameraId = " << cameraId << std::endl;
     }
-    if (cameraIds.size() > 1) {
-        usbCameraExit_ = true;
-    }
+    std::cout << "==========[test log] fainally cameraId.size = " << cameraIds.size() << std::endl;
 }
 
 

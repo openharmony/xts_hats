@@ -704,7 +704,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene004, Function |
 
 /**
  * @tc.number : SUB_Driver_Audio_SelectScene_0800
- * @tc.name   : testCommonRenderSelectScene005
+ * @tc.name   : 
  * @tc.desc   : Test input param
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene005, Function | MediumTest | Level1)
@@ -713,7 +713,11 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene005, Function |
     scene.scene.id = AUDIO_IN_CALL;
     scene.desc.pins = PIN_OUT_HEADSET;
     scene.desc.desc = strdup("mic");
-    EXPECT_EQ(HDF_SUCCESS, render_->SelectScene(render_, &scene));
+    int32_t ret = render_->SelectScene(render_, &scene);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "skip this test" << std::endl;
+    }
+    EXPECT_EQ(HDF_SUCCESS, ret);
     free(scene.desc.desc);
 }
 

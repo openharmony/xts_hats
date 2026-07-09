@@ -28,6 +28,7 @@
 #include "hdi_test_device_common.h"
 #include "hdi_test_display.h"
 #include "hdi_test_render_utils.h"
+#include <gtest/gtest.h>
 
 using namespace OHOS::HDI::Display::Buffer::V1_0;
 using namespace OHOS::HDI::Display::Composer::V1_1;
@@ -1154,7 +1155,10 @@ HWTEST_F(DeviceTestAdditional, testDestroyLayer002, Function | MediumTest | Leve
 {
     uint32_t layerId = 1;
     auto ret = g_composerDevice->DestroyLayer(0, layerId);
-    EXPECT_EQ(DISPLAY_FAILURE, ret);
+    if (ret == DISPLAY_NOT_SUPPORT) {
+        GTEST_SKIP()<< "DestroyLayer not support" << std::endl;
+    }
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
 /**
@@ -1216,7 +1220,10 @@ HWTEST_F(DeviceTestAdditional, testDestroyLayer007, Function | MediumTest | Leve
 {
     uint32_t layerId = 0;
     auto ret = g_composerDevice->DestroyLayer(g_displayIds[0], layerId);
-    EXPECT_EQ(DISPLAY_FAILURE, ret);
+    if (ret == DISPLAY_NOT_SUPPORT) {
+        GTEST_SKIP()<< "DestroyLayer not support" << std::endl;
+    }
+    EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
 

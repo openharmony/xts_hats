@@ -704,7 +704,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene004, Function |
 
 /**
  * @tc.number : SUB_Driver_Audio_SelectScene_0800
- * @tc.name   : 
+ * @tc.name   : testCommonRenderSelectScene005
  * @tc.desc   : Test input param
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderSelectScene005, Function | MediumTest | Level1)

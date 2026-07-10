@@ -1153,7 +1153,7 @@ HWTEST_F(DeviceTestAdditional, testDestroyLayer001, Function | MediumTest | Leve
  */
 HWTEST_F(DeviceTestAdditional, testDestroyLayer002, Function | MediumTest | Level2)
 {
-    auto ret = g_composerDevice->DestroyLayer(0, layerId002);
+    auto ret = g_composerDevice->DestroyLayer(0, g_layerId002);
     if (layerId002 < 0) {
         EXPECT_EQ(DISPLAY_FAILURE, ret);
     } else {
@@ -1218,7 +1218,7 @@ HWTEST_F(DeviceTestAdditional, testDestroyLayer006, Function | MediumTest | Leve
  */
 HWTEST_F(DeviceTestAdditional, testDestroyLayer007, Function | MediumTest | Level2)
 {
-    auto ret = g_composerDevice->DestroyLayer(g_displayIds[0], layerId007);
+    auto ret = g_composerDevice->DestroyLayer(g_displayIds[0], g_layerId007);
     if (layerId007 < 0) {
         EXPECT_EQ(DISPLAY_FAILURE, ret);
     } else {

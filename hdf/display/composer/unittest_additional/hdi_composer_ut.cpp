@@ -38,8 +38,8 @@ using namespace testing::ext;
 static sptr<Composer::V1_2::IDisplayComposerInterface> g_composerDevice = nullptr;
 static std::shared_ptr<IDisplayBuffer> g_gralloc = nullptr;
 static std::vector<uint32_t> g_displayIds;
-static uint32_t layerId002 = -1;
-static uint32_t layerId007 = -1;
+static uint32_t g_layerId002 = -1;
+static uint32_t g_layerId007 = -1;
 
 void DeviceTestAdditional::SetUpTestCase()
 {
@@ -1047,7 +1047,7 @@ HWTEST_F(DeviceTestAdditional, testCreateLayer002, Function | MediumTest | Level
 {
     LayerInfo layerInfo;
     uint32_t count = 3;
-    auto ret = g_composerDevice->CreateLayer(0, layerInfo, count, layerId002);
+    auto ret = g_composerDevice->CreateLayer(0, layerInfo, count, g_layerId002);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
@@ -1116,7 +1116,7 @@ HWTEST_F(DeviceTestAdditional, testCreateLayer007, Function | MediumTest | Level
 {
     LayerInfo layerInfo;
     uint32_t count = 15;
-    auto ret = g_composerDevice->CreateLayer(g_displayIds[0], layerInfo, count, layerId007);
+    auto ret = g_composerDevice->CreateLayer(g_displayIds[0], layerInfo, count, g_layerId007);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 

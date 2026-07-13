@@ -38,6 +38,8 @@ using namespace testing::ext;
 static sptr<Composer::V1_2::IDisplayComposerInterface> g_composerDevice = nullptr;
 static std::shared_ptr<IDisplayBuffer> g_gralloc = nullptr;
 static std::vector<uint32_t> g_displayIds;
+static uint32_t g_layerId002 = -1;
+static uint32_t g_layerId007 = -1;
 
 void DeviceTestAdditional::SetUpTestCase()
 {
@@ -1045,8 +1047,7 @@ HWTEST_F(DeviceTestAdditional, testCreateLayer002, Function | MediumTest | Level
 {
     LayerInfo layerInfo;
     uint32_t count = 3;
-    uint32_t layerId;
-    auto ret = g_composerDevice->CreateLayer(0, layerInfo, count, layerId);
+    auto ret = g_composerDevice->CreateLayer(0, layerInfo, count, g_layerId002);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
@@ -1115,8 +1116,7 @@ HWTEST_F(DeviceTestAdditional, testCreateLayer007, Function | MediumTest | Level
 {
     LayerInfo layerInfo;
     uint32_t count = 15;
-    uint32_t layerId;
-    auto ret = g_composerDevice->CreateLayer(g_displayIds[0], layerInfo, count, layerId);
+    auto ret = g_composerDevice->CreateLayer(g_displayIds[0], layerInfo, count, g_layerId007);
     EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
@@ -1153,12 +1153,12 @@ HWTEST_F(DeviceTestAdditional, testDestroyLayer001, Function | MediumTest | Leve
  */
 HWTEST_F(DeviceTestAdditional, testDestroyLayer002, Function | MediumTest | Level2)
 {
-    uint32_t layerId = 1;
-    auto ret = g_composerDevice->DestroyLayer(0, layerId);
-    if (ret == DISPLAY_NOT_SUPPORT) {
-        GTEST_SKIP()<< "DestroyLayer not support" << std::endl;
+    auto ret = g_composerDevice->DestroyLayer(0, g_layerId002);
+    if (g_layerId002 < 0) {
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    } else {
+        EXPECT_EQ(DISPLAY_SUCCESS, ret);
     }
-    EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
 /**
@@ -1218,12 +1218,12 @@ HWTEST_F(DeviceTestAdditional, testDestroyLayer006, Function | MediumTest | Leve
  */
 HWTEST_F(DeviceTestAdditional, testDestroyLayer007, Function | MediumTest | Level2)
 {
-    uint32_t layerId = 0;
-    auto ret = g_composerDevice->DestroyLayer(g_displayIds[0], layerId);
-    if (ret == DISPLAY_NOT_SUPPORT) {
-        GTEST_SKIP()<< "DestroyLayer not support" << std::endl;
+    auto ret = g_composerDevice->DestroyLayer(g_displayIds[0], g_layerId007);
+    if (g_layerId007 < 0) {
+        EXPECT_EQ(DISPLAY_FAILURE, ret);
+    } else {
+        EXPECT_EQ(DISPLAY_SUCCESS, ret);
     }
-    EXPECT_EQ(DISPLAY_SUCCESS, ret);
 }
 
 

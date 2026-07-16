@@ -116,13 +116,15 @@ void AudioAdapterBenchmarkTest_6_1::TearDown(const ::benchmark::State &state)
     manager_->UnloadAdapter(manager_, adapterDescs_[0].adapterName);
     ReleaseAdapterDescs(adapterDescs_, g_audioAdapterNumMax);
     adapter_ = nullptr;
-    IAudioManagerRelease(manager_, false);
+    IAudioManagerReleaseV6_1(manager_, false);
     manager_ = nullptr;
 }
 
 BENCHMARK_F(AudioAdapterBenchmarkTest_6_1, CreateCallTransfer)(benchmark::State &state)
 {
-    ASSERT_NE(adapter_, nullptr);
+    if (adapter_ == nullptr) {
+        state.SkipWithMessage("Current HDI not support CreateCallTransfer");
+    }
     int32_t ret;
 
     for (auto _ : state) {
@@ -136,7 +138,9 @@ BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest_6_1, CreateCallTransfer)->
 
 BENCHMARK_F(AudioAdapterBenchmarkTest_6_1, SetPhoneCallScene)(benchmark::State &state)
 {
-    ASSERT_NE(adapter_, nullptr);
+    if (adapter_ == nullptr) {
+        state.SkipWithMessage("Current HDI not support CreateCallTransfer");
+    }
     int32_t ret;
 
     for (auto _ : state) {

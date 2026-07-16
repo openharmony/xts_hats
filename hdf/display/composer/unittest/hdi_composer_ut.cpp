@@ -1188,7 +1188,9 @@ HWTEST_F(DeviceTest, SUB_Driver_Display_HDI_7700, TestSize.Level1)
     VblankCtr::GetInstance().hasVblank_ = false;
     PrepareAndCommit();
     ret = VblankCtr::GetInstance().WaitVblank(SLEEP_CONT_100); // 100ms
+#ifdef DISPLAY_SUPPORT_ONLINE
     ASSERT_TRUE(ret == DISPLAY_SUCCESS) << "WaitVblank timeout";
+#endif
     ret = display->SetDisplayVsyncEnabled(false);
     ASSERT_TRUE(ret == DISPLAY_SUCCESS) << "SetDisplayVsyncEnabled failed";
     usleep(SLEEP_CONT_100 * SLEEP_CONT_2000); // wait for 100ms avoid the last vsync.

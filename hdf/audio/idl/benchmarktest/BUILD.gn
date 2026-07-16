@@ -26,6 +26,7 @@ ohos_moduletest_suite("HatsHdfAudioBenchmarkTest") {
 
   sources = [
     "adapter/audio_adapter_benchmarktest.cpp",
+    "adapter/audio_adapter_benchmarktest_6_1.cpp",
     "capture/audio_capture_benchmarktest.cpp",
     "manager/audio_manager_benchmarktest.cpp",
     "render/audio_render_benchmarktest.cpp",
@@ -55,6 +56,8 @@ ohos_moduletest_suite("HatsHdfAudioBenchmarkTest") {
     external_deps = [
       "c_utils:utils",
       "drivers_interface_audio:audio_idl_headers",
+      "drivers_interface_audio:audio_idl_headers_6.1",
+      "drivers_interface_audio:libaudio_proxy_6.0",
       "drivers_interface_audio:libaudio_proxy_6.1",
       "hdf_core:libhdf_utils",
       "hilog:libhilog",

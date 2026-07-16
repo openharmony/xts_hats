@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2025 Huawei Device Co., Ltd.
+ * Copyright (c) 2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -105,7 +105,7 @@ void HdfAudioUtAdapterTest_6_1::TearDown()
     manager_->UnloadAdapter(manager_, adapterDescs_[0].adapterName);
     ReleaseAdapterDescs(&adapterDescs_, g_audioAdapterNumMax);
     adapter_ = nullptr;
-    IAudioManagerRelease(manager_, false);
+    IAudioManagerReleaseV6_1(manager_, false);
     manager_ = nullptr;
 }
 
@@ -123,7 +123,7 @@ HWTEST_F(HdfAudioUtAdapterTest_6_1, SUB_Driver_Audio_AdapterHdi_0100, TestSize.L
     if (ret == HDF_ERR_NOT_SUPPORT) {
         GTEST_SKIP()<< "CreateCallTransfer not support" << std::endl;
     }
-    ASSERT_TRUE(HDF_SUCCESS != ret);
+    ASSERT_TRUE(ret == HDF_ERR_INVALID_OBJECT);
 }
 
 /**
@@ -157,7 +157,7 @@ HWTEST_F(HdfAudioUtAdapterTest_6_1, SUB_Driver_Audio_AdapterHdi_0300, TestSize.L
     if (ret == HDF_ERR_NOT_SUPPORT) {
         GTEST_SKIP()<< "SetPhoneCallScene not support" << std::endl;
     }
-    ASSERT_TRUE(HDF_SUCCESS != ret);
+    ASSERT_TRUE(ret == HDF_ERR_INVALID_OBJECT);
 }
 
 /**

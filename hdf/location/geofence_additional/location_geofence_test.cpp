@@ -26,10 +26,10 @@
 #include "hdf_log.h"
 #include "osal_time.h"
 #ifdef HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE
-#include "v2_0/igeofence_interface.h"
+#include "v3_0/igeofence_interface.h"
 #include "geofence_callback_impl.h"
 
-using namespace OHOS::HDI::Location::Geofence::V2_0;
+using namespace OHOS::HDI::Location::Geofence::V3_0;
 #endif
 using namespace std;
 using namespace testing::ext;
@@ -93,8 +93,8 @@ int32_t GeofenceCallbackImpl::ReportGeofenceAvailability(bool isAvailable)
     return HDF_SUCCESS;
 }
 
-int32_t GeofenceCallbackImpl::ReportGeofenceEvent(int32_t fenceIndex, const LocationInfo &location, GeofenceEvent event,
-                                                  int64_t timestamp)
+int32_t GeofenceCallbackImpl::ReportGeofenceEvent(
+    int32_t fenceIndex, const LocationInfo &location, int32_t event, int64_t timestamp)
 {
     (void)fenceIndex;
     (void)location;
@@ -103,8 +103,7 @@ int32_t GeofenceCallbackImpl::ReportGeofenceEvent(int32_t fenceIndex, const Loca
     return HDF_SUCCESS;
 }
 
-int32_t GeofenceCallbackImpl::ReportGeofenceOperateResult(int32_t fenceIndex, GeofenceOperateType type,
-                                                          GeofenceOperateResult result)
+int32_t GeofenceCallbackImpl::ReportGeofenceOperateResult(int32_t fenceIndex, int32_t type, int32_t result)
 {
     (void)fenceIndex;
     (void)type;

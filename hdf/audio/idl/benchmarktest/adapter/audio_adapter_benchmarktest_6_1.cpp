@@ -36,7 +36,7 @@ constexpr uint32_t g_audioAdapterNumMax = 5;
 const int32_t ITERATION_FREQUENCY = 100;
 const int32_t REPETITION_FREQUENCY = 3;
 
-class AudioAdapterBenchmarkTest61 : public benchmark::Fixture {
+class AudioAdapterBenchmarkTest_6_1 : public benchmark::Fixture {
 public:
     struct IAudioManager *manager_ = nullptr;
     struct IAudioAdapter *adapter_ = nullptr;
@@ -47,7 +47,7 @@ public:
     void ReleaseAdapterDescs(struct AudioAdapterDescriptor *descs, uint32_t descsLen);
 };
 
-void AudioAdapterBenchmarkTest61::AudioAdapterDescriptorFree(struct AudioAdapterDescriptor *dataBlock, bool freeSelf)
+void AudioAdapterBenchmarkTest_6_1::AudioAdapterDescriptorFree(struct AudioAdapterDescriptor *dataBlock, bool freeSelf)
 {
     if (dataBlock == nullptr) {
         return;
@@ -67,7 +67,7 @@ void AudioAdapterBenchmarkTest61::AudioAdapterDescriptorFree(struct AudioAdapter
     }
 }
 
-void AudioAdapterBenchmarkTest61::ReleaseAdapterDescs(struct AudioAdapterDescriptor *descs, uint32_t descsLen)
+void AudioAdapterBenchmarkTest_6_1::ReleaseAdapterDescs(struct AudioAdapterDescriptor *descs, uint32_t descsLen)
 {
     if ((descs == nullptr) || (descsLen == 0)) {
         return;
@@ -78,7 +78,7 @@ void AudioAdapterBenchmarkTest61::ReleaseAdapterDescs(struct AudioAdapterDescrip
     }
 }
 
-void AudioAdapterBenchmarkTest61::SetUp(const ::benchmark::State &state)
+void AudioAdapterBenchmarkTest_6_1::SetUp(const ::benchmark::State &state)
 {
     uint32_t size = g_audioAdapterNumMax;
     manager_ = IAudioManagerGetV6_1(false);
@@ -107,7 +107,7 @@ void AudioAdapterBenchmarkTest61::SetUp(const ::benchmark::State &state)
     }
 }
 
-void AudioAdapterBenchmarkTest61::TearDown(const ::benchmark::State &state)
+void AudioAdapterBenchmarkTest_6_1::TearDown(const ::benchmark::State &state)
 {
     if (manager_ == nullptr) {
         GTEST_SKIP()<< "Audio HDI 6.1 not support" << std::endl;
@@ -120,7 +120,7 @@ void AudioAdapterBenchmarkTest61::TearDown(const ::benchmark::State &state)
     manager_ = nullptr;
 }
 
-BENCHMARK_F(AudioAdapterBenchmarkTest61, CreateCallTransfer)(benchmark::State &state)
+BENCHMARK_F(AudioAdapterBenchmarkTest_6_1, CreateCallTransfer)(benchmark::State &state)
 {
     if (adapter_ == nullptr) {
         state.SkipWithMessage("Current HDI not support CreateCallTransfer");
@@ -133,10 +133,10 @@ BENCHMARK_F(AudioAdapterBenchmarkTest61, CreateCallTransfer)(benchmark::State &s
     }
 }
 
-BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest61, CreateCallTransfer)->
+BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest_6_1, CreateCallTransfer)->
     Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
 
-BENCHMARK_F(AudioAdapterBenchmarkTest61, SetPhoneCallScene)(benchmark::State &state)
+BENCHMARK_F(AudioAdapterBenchmarkTest_6_1, SetPhoneCallScene)(benchmark::State &state)
 {
     if (adapter_ == nullptr) {
         state.SkipWithMessage("Current HDI not support CreateCallTransfer");
@@ -149,6 +149,6 @@ BENCHMARK_F(AudioAdapterBenchmarkTest61, SetPhoneCallScene)(benchmark::State &st
     }
 }
 
-BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest61, SetPhoneCallScene)->
+BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest_6_1, SetPhoneCallScene)->
     Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
 }

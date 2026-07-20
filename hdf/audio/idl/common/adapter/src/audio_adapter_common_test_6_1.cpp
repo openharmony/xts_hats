@@ -26,7 +26,7 @@ namespace {
 constexpr uint32_t g_audioAdapterNumMax = 5;
 [[maybe_unused]]constexpr int32_t AUDIO_ADAPTER_BUF_TEST = 1024;
 
-class HdfAudioUtAdapterTest61 : public testing::Test {
+class HdfAudioUtAdapterTest_6_1 : public testing::Test {
 public:
     struct IAudioManager *manager_ = nullptr;
     struct IAudioAdapter *adapter_ = nullptr;
@@ -37,7 +37,7 @@ public:
     void ReleaseAdapterDescs(struct AudioAdapterDescriptor **descs, uint32_t descsLen);
 };
 
-void HdfAudioUtAdapterTest61::AudioAdapterDescriptorFree(struct AudioAdapterDescriptor *dataBlock, bool freeSelf)
+void HdfAudioUtAdapterTest_6_1::AudioAdapterDescriptorFree(struct AudioAdapterDescriptor *dataBlock, bool freeSelf)
 {
     if (dataBlock == nullptr) {
         return;
@@ -57,7 +57,7 @@ void HdfAudioUtAdapterTest61::AudioAdapterDescriptorFree(struct AudioAdapterDesc
     }
 }
 
-void HdfAudioUtAdapterTest61::ReleaseAdapterDescs(struct AudioAdapterDescriptor **descs, uint32_t descsLen)
+void HdfAudioUtAdapterTest_6_1::ReleaseAdapterDescs(struct AudioAdapterDescriptor **descs, uint32_t descsLen)
 {
     if ((descsLen > 0) && (descs != nullptr) && ((*descs) != nullptr)) {
         for (uint32_t i = 0; i < descsLen; i++) {
@@ -68,7 +68,7 @@ void HdfAudioUtAdapterTest61::ReleaseAdapterDescs(struct AudioAdapterDescriptor 
     }
 }
 
-void HdfAudioUtAdapterTest61::SetUp()
+void HdfAudioUtAdapterTest_6_1::SetUp()
 {
     uint32_t size = g_audioAdapterNumMax;
     manager_ = IAudioManagerGetV6_1(false);
@@ -96,7 +96,7 @@ void HdfAudioUtAdapterTest61::SetUp()
     }
 }
 
-void HdfAudioUtAdapterTest61::TearDown()
+void HdfAudioUtAdapterTest_6_1::TearDown()
 {
     if (manager_ == nullptr) {
         GTEST_SKIP()<< "Audio HDI 6.1 not support" << std::endl;
@@ -114,7 +114,7 @@ void HdfAudioUtAdapterTest61::TearDown()
  * @tc.name  : SUB_Driver_Audio_AdapterHdi_0100
  * @tc.desc  : Verify IAudioAdapter CreateCallTransfer
  */
-HWTEST_F(HdfAudioUtAdapterTest61, SUB_Driver_Audio_AdapterHdi_0100, TestSize.Level1)
+HWTEST_F(HdfAudioUtAdapterTest_6_1, SUB_Driver_Audio_AdapterHdi_0100, TestSize.Level1)
 {
     if (adapter_ == nullptr) {
         GTEST_SKIP()<< "Audio HDI 6.1 not support" << std::endl;
@@ -131,7 +131,7 @@ HWTEST_F(HdfAudioUtAdapterTest61, SUB_Driver_Audio_AdapterHdi_0100, TestSize.Lev
  * @tc.name  : SUB_Driver_Audio_AdapterHdi_0200
  * @tc.desc  : Verify IAudioAdapter CreateCallTransfer
  */
-HWTEST_F(HdfAudioUtAdapterTest61, SUB_Driver_Audio_AdapterHdi_0200, TestSize.Level0)
+HWTEST_F(HdfAudioUtAdapterTest_6_1, SUB_Driver_Audio_AdapterHdi_0200, TestSize.Level0)
 {
     if (adapter_ == nullptr) {
         GTEST_SKIP()<< "Audio HDI 6.1 not support" << std::endl;
@@ -148,7 +148,7 @@ HWTEST_F(HdfAudioUtAdapterTest61, SUB_Driver_Audio_AdapterHdi_0200, TestSize.Lev
  * @tc.name  : SUB_Driver_Audio_AdapterHdi_0300
  * @tc.desc  : Verify IAudioAdapter SetPhoneCallScene
  */
-HWTEST_F(HdfAudioUtAdapterTest61, SUB_Driver_Audio_AdapterHdi_0300, TestSize.Level1)
+HWTEST_F(HdfAudioUtAdapterTest_6_1, SUB_Driver_Audio_AdapterHdi_0300, TestSize.Level1)
 {
     if (adapter_ == nullptr) {
         GTEST_SKIP()<< "Audio HDI 6.1 not support" << std::endl;
@@ -165,7 +165,7 @@ HWTEST_F(HdfAudioUtAdapterTest61, SUB_Driver_Audio_AdapterHdi_0300, TestSize.Lev
  * @tc.name  : SUB_Driver_Audio_AdapterHdi_0400
  * @tc.desc  : Verify IAudioAdapter SetPhoneCallScene
  */
-HWTEST_F(HdfAudioUtAdapterTest61, SUB_Driver_Audio_AdapterHdi_0400, TestSize.Level0)
+HWTEST_F(HdfAudioUtAdapterTest_6_1, SUB_Driver_Audio_AdapterHdi_0400, TestSize.Level0)
 {
     if (adapter_ == nullptr) {
         GTEST_SKIP()<< "Audio HDI 6.1 not support" << std::endl;
@@ -182,7 +182,7 @@ HWTEST_F(HdfAudioUtAdapterTest61, SUB_Driver_Audio_AdapterHdi_0400, TestSize.Lev
  * @tc.name  : SUB_Driver_Audio_AdapterHdi_0500
  * @tc.desc  : Verify IAudioAdapter SetPhoneCallScene
  */
-HWTEST_F(HdfAudioUtAdapterTest61, SUB_Driver_Audio_AdapterHdi_0500, TestSize.Level0)
+HWTEST_F(HdfAudioUtAdapterTest_6_1, SUB_Driver_Audio_AdapterHdi_0500, TestSize.Level0)
 {
     if (adapter_ == nullptr) {
         GTEST_SKIP()<< "Audio HDI 6.1 not support" << std::endl;

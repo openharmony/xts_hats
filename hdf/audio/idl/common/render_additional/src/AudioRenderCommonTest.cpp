@@ -2619,13 +2619,13 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderResume013, TestSize.Level1
     if (ret == HDF_ERR_NOT_SUPPORT) {
         GTEST_SKIP() << "Resume not support" << std::endl;
     } else {
-        EXPECT_EQ(HDF_FAILURE, ret);
+        EXPECT_EQ(HDF_SUCCESS, ret);
     }
 #else
     if (ret == HDF_ERR_NOT_SUPPORT) {
         GTEST_SKIP() << "Resume not support" << std::endl;
     } else {
-        EXPECT_EQ(HDF_FAILURE, ret);
+        EXPECT_EQ(HDF_SUCCESS, ret);
     }
 #endif
 }

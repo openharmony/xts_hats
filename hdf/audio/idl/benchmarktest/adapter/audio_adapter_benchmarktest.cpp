@@ -18,7 +18,7 @@
 #include <gtest/gtest.h>
 #include "hdf_base.h"
 #include "osal_mem.h"
-#include "v6_1/iaudio_manager.h"
+#include "v6_0/iaudio_manager.h"
 
 using namespace testing::ext;
 using namespace std;
@@ -442,32 +442,4 @@ BENCHMARK_F(AudioAdapterBenchmarkTest, RegExtraParamObserver)(benchmark::State &
 
 BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, RegExtraParamObserver)->
     Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
-
-BENCHMARK_F(AudioAdapterBenchmarkTest, CreateCallTransfer)(benchmark::State &state)
-{
-    ASSERT_NE(adapter_, nullptr);
-    int32_t ret;
-
-    for (auto _ : state) {
-        ret = adapter_->CreateCallTransfer(adapter_);
-        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-    }
 }
-
-BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, CreateCallTransfer)->
-    Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
-
-BENCHMARK_F(AudioAdapterBenchmarkTest, SetPhoneCallScene)(benchmark::State &state)
-{
-    ASSERT_NE(adapter_, nullptr);
-    int32_t ret;
-
-    for (auto _ : state) {
-        ret = adapter_->SetPhoneCallScene(adapter_, SCENE_TYPE_TRANSFER);
-        ASSERT_TRUE(ret == HDF_SUCCESS || ret == HDF_ERR_NOT_SUPPORT);
-    }
-}
-
-BENCHMARK_REGISTER_F(AudioAdapterBenchmarkTest, SetPhoneCallScene)->
-    Iterations(ITERATION_FREQUENCY)->Repetitions(REPETITION_FREQUENCY)->ReportAggregatesOnly();
-}

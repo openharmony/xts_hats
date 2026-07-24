@@ -21,14 +21,18 @@ ohos_moduletest_suite("HatsHdfAudioIdlAdapterTest") {
 
   defines = []
   defines += audio_defines
-
-  sources = [ "src/audio_adapter_common_test.cpp" ]
+  sources = [ 
+    "src/audio_adapter_common_test.cpp",
+    "src/audio_adapter_common_test_6_1.cpp",
+  ]
   configs = [ ":audio_idl_adapter" ]
 
-  deps = [ "//third_party/bounds_checking_function:libsec_shared" ]
   external_deps = [
     "c_utils:utils",
+    "bounds_checking_function:libsec_shared",
     "drivers_interface_audio:audio_idl_headers",
+    "drivers_interface_audio:audio_idl_headers_6.1",
+    "drivers_interface_audio:libaudio_proxy_6.0",
     "drivers_interface_audio:libaudio_proxy_6.1",
     "hdf_core:libhdf_utils",
     "hilog:libhilog",

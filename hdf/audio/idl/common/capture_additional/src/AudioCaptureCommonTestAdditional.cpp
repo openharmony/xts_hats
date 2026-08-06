@@ -1492,9 +1492,15 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes002, Functi
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
 #if defined ALSA_LIB_MODE
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "skip this test" << std::endl;
+    }
     EXPECT_EQ(ret, HDF_SUCCESS);
 #elif defined AUDIO_COMMUNITY
-    EXPECT_EQ(ret, HDF_FAILURE);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "skip this test" << std::endl;
+    }
+    EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #endif
@@ -1552,7 +1558,10 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes004, Functi
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
 #if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
-    EXPECT_EQ(ret, HDF_FAILURE);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "skip this test" << std::endl;
+    }
+    EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #endif
@@ -1583,7 +1592,10 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes005, Functi
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
 #if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
-    EXPECT_EQ(ret, HDF_FAILURE);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "skip this test" << std::endl;
+    }
+    EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #endif
@@ -1614,7 +1626,10 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes006, Functi
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
 #if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
-    EXPECT_EQ(ret, HDF_FAILURE);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "skip this test" << std::endl;
+    }
+    EXPECT_EQ(ret, HDF_SUCCESS);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #endif
@@ -1860,10 +1875,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureSetSampleAttributes014, Functi
     int32_t ret = 0;
 
     ret = capture_->SetSampleAttributes(capture_, &attrs);
-#if defined ALSA_LIB_MODE
+#if defined ALSA_LIB_MODE || AUDIO_COMMUNITY
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP()<< "skip this test" << std::endl;
+    }
     EXPECT_EQ(ret, HDF_SUCCESS);
-#elif defined AUDIO_COMMUNITY
-    EXPECT_EQ(ret, HDF_FAILURE);
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #endif

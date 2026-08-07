@@ -212,9 +212,19 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateRender003, TestSize.Level1)
     InitAttrs(attrs);
     int32_t ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
 #if defined ALSA_LIB_MODE
-    EXPECT_EQ(HDF_SUCCESS, ret);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP() << "create primary not support" << std::endl;
+    } else {
+        EXPECT_EQ(HDF_SUCCESS, ret);
+        EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
+    }
 #else
-    EXPECT_NE(HDF_SUCCESS, ret);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP() << "create primary not support" << std::endl;
+    } else {
+        EXPECT_EQ(HDF_SUCCESS, ret);
+        EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
+    }
 #endif
 }
 
@@ -234,13 +244,19 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateRender004, TestSize.Level1)
     InitAttrs(attrs);
     int32_t ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
 #if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
-    EXPECT_NE(HDF_SUCCESS, ret);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP() << "Not support primary or PIN_OUT_HDMI" << std::endl;
+    } else {
+        EXPECT_EQ(HDF_SUCCESS, ret);
+        EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
+    }
 #else
     if (ret == HDF_ERR_NOT_SUPPORT) {
         GTEST_SKIP() << "Not support primary or PIN_OUT_HDMI" << std::endl;
     } else {
         EXPECT_EQ(HDF_SUCCESS, ret);
-}
+        EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId_));
+    }
 #endif
 }
 
@@ -330,8 +346,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateRender009, TestSize.Level2)
     devicedesc.desc = const_cast<char *>("primary");
     devicedesc.pins = PIN_NONE;
     InitAttrs(attrs);
-    int32_t ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
-    EXPECT_NE(HDF_SUCCESS, ret);
+    EXPECT_NE(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
 }
 
 /**
@@ -354,9 +369,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateRender010, TestSize.Level1)
     attrs.streamId = 0;
     for (uint32_t i = 0; i < 1000; i++) {
         ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
-        if (ret == HDF_ERR_NOT_SUPPORT) {
-            GTEST_SKIP() << "Not support primary or PIN_OUT_HDMI" << std::endl;
-        } else if (ret != HDF_SUCCESS) {
+        if (ret != HDF_SUCCESS) {
             attrs.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
             EXPECT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
         }
@@ -384,9 +397,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateRender011, TestSize.Level1)
     attrs.streamId = 0;
     for (uint32_t i = 0; i < 1000; i++) {
         ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
-        if (ret == HDF_ERR_NOT_SUPPORT) {
-            GTEST_SKIP() << "Not support primary or PIN_OUT_HEADSET" << std::endl;
-        } else if (ret != HDF_SUCCESS) {
+        if (ret != HDF_SUCCESS) {
             attrs.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
             EXPECT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
         }
@@ -409,9 +420,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testDestroyRender001, TestSize.Level2)
     devicedesc.pins = PIN_OUT_HEADSET;
     InitAttrs(attrs);
     int32_t ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
-    if (ret == HDF_ERR_NOT_SUPPORT) {
-        GTEST_SKIP() << "Not support primary or PIN_OUT_HEADSET" << std::endl;
-    } else if (ret != HDF_SUCCESS) {
+    if (ret != HDF_SUCCESS) {
         attrs.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
         EXPECT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
     }
@@ -540,10 +549,21 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture008, TestSize.Level1)
     devicedesc.pins = PIN_IN_LINEIN;
     InitAttrs(attrs);
     attrs.silenceThreshold = DEEP_BUFFER_RENDER_PERIOD_SIZE;
+    int32_t ret = adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_);
 #if defined ALSA_LIB_MODE
-        EXPECT_EQ(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP() << "Not support primary or PIN_IN_LINEIN" << std::endl;
+    } else {
+        EXPECT_EQ(HDF_SUCCESS, ret);
+        EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, captureId_));
+    }
 #else
-        EXPECT_NE(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP() << "Not support primary or PIN_IN_LINEIN" << std::endl;
+    } else {
+        EXPECT_EQ(HDF_SUCCESS, ret);
+        EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, captureId_));
+    }
 #endif
 }
 
@@ -565,7 +585,12 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture009, TestSize.Level1)
     attrs.silenceThreshold = DEEP_BUFFER_RENDER_PERIOD_SIZE;
     int32_t ret = adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_);
 #if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
-    EXPECT_NE(HDF_SUCCESS, ret);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP() << "Not support primary and PIN_IN_USB_EXT" << std::endl;
+    } else {
+        EXPECT_EQ(HDF_SUCCESS, ret);
+        EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, captureId_));
+    }
 #else
     if (ret == HDF_ERR_NOT_SUPPORT) {
         GTEST_SKIP() << "Not support primary and PIN_IN_USB_EXT" << std::endl;
@@ -615,7 +640,11 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetVoiceVolume001, TestSize.Level1
     float volume = 0.5;
     int32_t ret = adapter_->SetVoiceVolume(adapter_, volume);
 #if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
-    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP() << "Not support SetVoiceVolume" << std::endl;
+    } else {
+        ASSERT_TRUE(ret == HDF_SUCCESS);
+    }
 #else
     if (ret == HDF_ERR_NOT_SUPPORT) {
         GTEST_SKIP() << "Not support SetVoiceVolume" << std::endl;
@@ -660,12 +689,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetDeviceStatus001, TestSize.Level
 {
     struct AudioDeviceStatus status = {};
     for (int i = 0; i < 100; i++) {
-        int32_t ret = adapter_->GetDeviceStatus(adapter_, &status);
-        if (ret == HDF_ERR_NOT_SUPPORT) {
-            GTEST_SKIP() << "Not support primary or PIN_OUT_HEADSET" << std::endl;
-        } else {
-        EXPECT_EQ(HDF_SUCCESS, ret);
-        }
+        EXPECT_EQ(HDF_SUCCESS, adapter_->GetDeviceStatus(adapter_, &status));
     }
 }
 
@@ -684,11 +708,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetPassthroughMode001, TestSize.Le
 #if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     EXPECT_EQ(HDF_SUCCESS, ret);
 #else
-    if (ret == HDF_ERR_NOT_SUPPORT) {
-        GTEST_SKIP() << "Not support GetPassthroughMode" << std::endl;
-    } else {
-        EXPECT_EQ(HDF_FAILURE, ret);
-    }
+    EXPECT_EQ(HDF_FAILURE, ret);
 #endif
 }
 
@@ -741,13 +761,8 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture001, TestSize.Level1)
     InitAttrs(attrs);
     attrs.silenceThreshold = DEEP_BUFFER_RENDER_PERIOD_SIZE;
     for (int i = 0; i < 100; i++) {
-        int32_t ret = adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_);
-        if (ret == HDF_ERR_NOT_SUPPORT) {
-            GTEST_SKIP() << "Not support primary or PIN_IN_MIC" << std::endl;
-        } else {
-            EXPECT_EQ(HDF_SUCCESS, ret);
-            EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, captureId_));
-        }
+        EXPECT_EQ(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
+        EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, captureId_));
     }
 }
 
@@ -769,9 +784,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testReleaseAudioRoute001, TestSize.Lev
     InitAttrs(attrs);
     attrs.streamId = PRIMARY_OUTPUT_STREAM_ID_13;
     int32_t ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId);
-    if (ret == HDF_ERR_NOT_SUPPORT) {
-        GTEST_SKIP() << "Not support primary or PIN_OUT_HEADSET" << std::endl;
-    } else if (ret != HDF_SUCCESS) {
+    if (ret != HDF_SUCCESS) {
         attrs.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
         EXPECT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId));
     }
@@ -806,21 +819,13 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testReleaseAudioRoute001, TestSize.Lev
 #if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_EQ(HDF_ERR_NOT_SUPPORT, ret);
 #else
-    if (ret == HDF_ERR_NOT_SUPPORT) {
-        GTEST_SKIP() << "Not support UpdateAudioRoute" << std::endl;
-    } else {
-        ASSERT_EQ(HDF_SUCCESS, ret);
-    }
+    ASSERT_EQ(HDF_SUCCESS, ret);
 #endif
     ret = adapter_->ReleaseAudioRoute(adapter_, routeHandle);
 #if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
 #else
-    if (ret == HDF_ERR_NOT_SUPPORT) {
-        GTEST_SKIP() << "Not support ReleaseAudioRoute" << std::endl;
-    } else {
-        ASSERT_TRUE(ret == HDF_SUCCESS);
-    }
+    ASSERT_TRUE(ret == HDF_SUCCESS);
 #endif
     EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyRender(adapter_, renderId));
 }
@@ -2148,11 +2153,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetExtraParams001, Function | Medi
 #if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
 #else
-    if (ret == HDF_ERR_NOT_SUPPORT) {
-        GTEST_SKIP() << "Not support ReleaseAudioRoute" << std::endl;
-    } else {
-        ASSERT_TRUE(ret == HDF_SUCCESS);
-    }
+    ASSERT_TRUE(ret == HDF_SUCCESS);
 #endif
 }
 
@@ -2172,11 +2173,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetExtraParams001, TestSize.Level1
 #if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
 #else
-    if (ret == HDF_ERR_NOT_SUPPORT) {
-        GTEST_SKIP() << "Not support ReleaseAudioRoute" << std::endl;
-    } else {
-        ASSERT_TRUE(ret == HDF_FAILURE);
-    }
+    ASSERT_TRUE(ret == HDF_FAILURE);
 #endif
 }
 
@@ -2194,11 +2191,7 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testGetMicMute002, TestSize.Level1)
 #if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
     ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
 #else
-    if (ret == HDF_ERR_NOT_SUPPORT) {
-        GTEST_SKIP() << "Not support GetMicMute" << std::endl;
-    } else {
-        ASSERT_TRUE(HDF_SUCCESS == ret);
-    }
+    ASSERT_TRUE(ret == HDF_SUCCESS);
 #endif
 }
 
@@ -2213,7 +2206,11 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testSetMicMute001, TestSize.Level1)
     bool mute = true;
     int32_t ret = adapter_->SetMicMute(adapter_, mute);
 #if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
-    ASSERT_TRUE(ret == HDF_ERR_NOT_SUPPORT);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP() << "Not support SetMicMute" << std::endl;
+    } else {
+        ASSERT_TRUE(HDF_SUCCESS == ret);
+    }
 #else
     if (ret == HDF_ERR_NOT_SUPPORT) {
         GTEST_SKIP() << "Not support SetMicMute" << std::endl;

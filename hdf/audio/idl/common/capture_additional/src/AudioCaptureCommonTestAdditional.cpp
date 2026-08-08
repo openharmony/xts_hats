@@ -2141,7 +2141,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCapturePause002, Function | MediumTes
     EXPECT_EQ(ret, HDF_SUCCESS);
     ret = capture_->Pause(capture_);
 #if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
-    EXPECT_EQ(ret, HDF_SUCCESS);
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP() << "not support pause" << std::endl;
+    } else {
+        EXPECT_EQ(ret, HDF_SUCCESS);
+    }
 #else
     EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #endif
@@ -2197,7 +2201,11 @@ HWTEST_F(AudioUtCaptureTestAdditional, testCaptureResume001, Function | MediumTe
     for (int32_t i = 0; i < 1000; i++) {
         ret = capture_->Pause(capture_);
 #if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP() << "not support pause" << std::endl;
+    } else {
         EXPECT_EQ(ret, HDF_SUCCESS);
+    }
 #else
         EXPECT_EQ(ret, HDF_ERR_NOT_SUPPORT);
 #endif

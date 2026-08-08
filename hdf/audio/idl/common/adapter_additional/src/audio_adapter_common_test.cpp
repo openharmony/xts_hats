@@ -369,7 +369,9 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateRender010, TestSize.Level1)
     attrs.streamId = 0;
     for (uint32_t i = 0; i < 1000; i++) {
         ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
-        if (ret != HDF_SUCCESS) {
+        if (ret == HDF_ERR_NOT_SUPPORT) {
+            GTEST_SKIP() << "Not support primary or PIN_OUT_HDMI" << std::endl;
+        } else if (ret != HDF_SUCCESS) {
             attrs.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
             EXPECT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
         }
@@ -397,7 +399,9 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateRender011, TestSize.Level1)
     attrs.streamId = 0;
     for (uint32_t i = 0; i < 1000; i++) {
         ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
-        if (ret != HDF_SUCCESS) {
+        if (ret == HDF_ERR_NOT_SUPPORT) {
+            GTEST_SKIP() << "Not support primary or PIN_OUT_HEADSET" << std::endl;
+        } else if (ret != HDF_SUCCESS) {
             attrs.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
             EXPECT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
         }
@@ -420,7 +424,9 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testDestroyRender001, TestSize.Level2)
     devicedesc.pins = PIN_OUT_HEADSET;
     InitAttrs(attrs);
     int32_t ret = adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_);
-    if (ret != HDF_SUCCESS) {
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP() << "Not support primary or PIN_OUT_HEADSET" << std::endl;
+    } else if (ret != HDF_SUCCESS) {
         attrs.format = AUDIO_FORMAT_TYPE_PCM_32_BIT;
         EXPECT_EQ(HDF_SUCCESS, adapter_->CreateRender(adapter_, &devicedesc, &attrs, &render, &renderId_));
     }

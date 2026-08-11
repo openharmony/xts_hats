@@ -166,17 +166,17 @@ void AudioUtCaptureTestAdditional::SetUp()
 
     InitCaptureDevDesc(devDesc);
     InitCaptureAttrs(attrs);
-    EXPECT_NE(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devDesc, &attrs, &capture_, &captureId_));
+    EXPECT_EQ(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devDesc, &attrs, &capture_, &captureId_));
     if (capture_ == nullptr) {
         (void)manager_->UnloadAdapter(manager_, adapterDescs_[0].adapterName);
         ReleaseAllAdapterDescs(&adapterDescs_, MAX_AUDIO_ADAPTER_NUM);
     }
-    ASSERT_EQ(capture_, nullptr);
+    ASSERT_NE(capture_, nullptr);
 }
 
 void AudioUtCaptureTestAdditional::TearDown()
 {
-    ASSERT_EQ(capture_, nullptr);
+    ASSERT_NE(capture_, nullptr);
     EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, captureId_));
 
     ASSERT_NE(manager_, nullptr);

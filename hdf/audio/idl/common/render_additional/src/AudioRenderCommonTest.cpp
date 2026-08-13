@@ -3158,6 +3158,7 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetRenderSpeed001, Functio
     float speed = 0.0;
     int32_t ret = 0;
     int i = 0;
+    ret = render_->Stop(render_);
     ASSERT_EQ(HDF_SUCCESS, render_->Start(render_));
     for (i = 0; i < 1000; i++) {
         ret = render_->GetRenderSpeed(render_, &speed);
@@ -3706,7 +3707,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderGetFrameBufferSize013, Tes
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderStop007, TestSize.Level1)
 {
-    int32_t ret = render_->Start(render_);
+    int32_t ret = render_->Stop(render_);
+    ret = render_->Start(render_);
     EXPECT_EQ(HDF_SUCCESS, ret);
     ret = render_->TurnStandbyMode(render_);
     if (ret == HDF_ERR_NOT_SUPPORT) {

@@ -3088,7 +3088,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode002, TestSi
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode003, TestSize.Level1)
 {
-    int32_t ret = render_->Start(render_);
+    int32_t ret = render_->Stop(render_);
+    ret = render_->Start(render_);
     EXPECT_EQ(HDF_SUCCESS, ret);
 
     render_->Flush(render_);
@@ -3109,7 +3110,8 @@ HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode003, TestSi
  */
 HWTEST_F(AudioUtRenderTestAdditional, testCommonRenderTurnStandbyMode006, TestSize.Level1)
 {
-    int32_t ret = render_->Start(render_);
+    int32_t ret = render_->Stop(render_);
+    ret = render_->Start(render_);
     EXPECT_EQ(HDF_SUCCESS, ret);
     ret = render_->Pause(render_);
 #if defined AUDIO_COMMUNITY || defined ALSA_LIB_MODE

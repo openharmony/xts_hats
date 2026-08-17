@@ -540,10 +540,16 @@ HWTEST_F(HdfAudioUtAdapterTestAdditional, testCreateCapture008, TestSize.Level1)
     devicedesc.pins = PIN_IN_LINEIN;
     InitAttrs(attrs);
     attrs.silenceThreshold = DEEP_BUFFER_RENDER_PERIOD_SIZE;
+    int32_t ret = adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_);
 #if defined ALSA_LIB_MODE
-        EXPECT_EQ(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
+        EXPECT_EQ(HDF_SUCCESS, ret);
 #else
-        EXPECT_NE(HDF_SUCCESS, adapter_->CreateCapture(adapter_, &devicedesc, &attrs, &capture, &captureId_));
+    if (ret == HDF_ERR_NOT_SUPPORT) {
+        GTEST_SKIP() << "Not support primary and PIN_IN_LINEIN" << std::endl;
+    } else {
+        EXPECT_EQ(HDF_SUCCESS, ret);
+        EXPECT_EQ(HDF_SUCCESS, adapter_->DestroyCapture(adapter_, captureId_));
+    }
 #endif
 }
 

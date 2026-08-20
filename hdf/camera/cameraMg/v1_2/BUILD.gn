@@ -52,10 +52,14 @@ ohos_moduletest_suite("HatsHdfCameraMgTestv2") {
 
   external_deps += [
     "drivers_interface_camera:libbuffer_producer_sequenceable_1.0",
+    "drivers_interface_camera:libcamera_proxy_1.0",
+    "drivers_interface_camera:libcamera_proxy_1.1",
     "drivers_interface_camera:libcamera_proxy_1.2",
     "drivers_interface_camera:metadata",
     "graphic_surface:surface",
     "samgr:samgr_proxy",
+    "drivers_interface_camera:libbuffer_handle_sequenceable_1.0",
+    "drivers_interface_camera:libmap_data_sequenceable_1.0",
   ]
 
   subsystem_name = "hdf"

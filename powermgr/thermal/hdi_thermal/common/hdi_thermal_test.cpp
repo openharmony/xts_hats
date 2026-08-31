@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -25,6 +25,7 @@
 
 #include "hdf_base.h"
 #include "osal_time.h"
+#include "parse_thermal_hdi_int.h"
 #include "v1_1/ifan_callback.h"
 #include "v1_1/ithermal_interface.h"
 #include "v1_1/ithermal_callback.h"
@@ -134,7 +135,11 @@ int32_t HdfThermalHdiTest::ReadFile(const char *path, char *buf, size_t size)
 
 int32_t HdfThermalHdiTest::ConvertInt(const std::string &value)
 {
-    return std::stoi(value);
+    int32_t parsed = 0;
+    if (!OHOS::ThermalHdiTest::ParseThermalHdiInt32(value, parsed)) {
+        return 0;
+    }
+    return parsed;
 }
 }
 

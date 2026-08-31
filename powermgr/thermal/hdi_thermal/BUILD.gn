@@ -20,6 +20,8 @@ ohos_moduletest_suite("HatsPowermgrThermalTest") {
 
   sources = [ "./common/hdi_thermal_test.cpp" ]
 
+  include_dirs = [ "./common" ]
+
   deps = [ "//third_party/googletest:gtest_main" ]
 
   external_deps = [

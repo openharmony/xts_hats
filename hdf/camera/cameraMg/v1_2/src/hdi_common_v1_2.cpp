@@ -82,9 +82,13 @@ void Test::Init()
                 usleep(UT_MICROSECOND_TIMES);
                 serviceV1_2 = OHOS::HDI::Camera::V1_2::ICameraHost::Get("camera_service", false);
                 loopCount++;
-            } while (loopCount <= LOOP_COUNT || serviceV1_2 == nullptr);
+            } while (loopCount <= LOOP_COUNT && serviceV1_2 == nullptr);
         }
-        EXPECT_NE(serviceV1_2, nullptr);
+        if (serviceV1_2 == nullptr) {
+            CAMERA_LOGE("V1_2::ICameraHost get failed");
+            GTEST_SKIP() << "Device not exist" << std::endl;
+            return;
+        }
         CAMERA_LOGI("V1_2::ICameraHost get success");
         ret = serviceV1_2->GetVersion(mainVer, minVer);
         EXPECT_EQ(ret, 0);
@@ -144,6 +148,11 @@ void Test::Open(int cameraId)
 
 void Test::OpenCameraV1_2(int cameraId)
 {
+    if (serviceV1_2 == nullptr) {
+        CAMERA_LOGE("V1_2::ICameraHost get failed");
+        GTEST_SKIP() << "Device not exist" << std::endl;
+        return;
+    }
     if (cameraDevice == nullptr) {
         service->GetCameraIds(cameraIds);
         if (cameraIds.size() <= CAMERA_ID_NUM) {

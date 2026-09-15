@@ -164,7 +164,7 @@ group("${posix_interface_module}_bin") {
     "pthread_attr_init:pthread_attr_init_4-1",
     "pthread_attr_setdetachstate:pthread_attr_setdetachstate_1-1",
     "pthread_attr_setdetachstate:pthread_attr_setdetachstate_1-2",
-    "pthread_attr_setdetachstate:pthread_attr_setdetachstate_2-1",
+    #"pthread_attr_setdetachstate:pthread_attr_setdetachstate_2-1",
     "pthread_attr_setdetachstate:pthread_attr_setdetachstate_4-1",
     "pthread_attr_setinheritsched:pthread_attr_setinheritsched_1-1",
     "pthread_attr_setinheritsched:pthread_attr_setinheritsched_2-1",

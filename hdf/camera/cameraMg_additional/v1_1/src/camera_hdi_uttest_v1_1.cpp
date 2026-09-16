@@ -131,7 +131,7 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch008, TestSize.Level2)
 /**
  * @tc.number : SUB_Driver_Camera_Prelaunch_0900
  * @tc.name   : testPrelaunch009
- * @tc.desc   : Prelaunch cameraId:device/10
+ * @tc.desc   : Prelaunch cameraId:device/50
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch009, TestSize.Level2)
 {
@@ -149,13 +149,13 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch009, TestSize.Level2)
 /**
  * @tc.number : SUB_Driver_Camera_Prelaunch_1000
  * @tc.name   : testPrelaunch010
- * @tc.desc   : Prelaunch cameraId:device/10
+ * @tc.desc   : Prelaunch cameraId:device/50
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch010, TestSize.Level2)
 {
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     std::vector<uint8_t> settings;
-    cameraTest->prelaunchConfig->cameraId = "device/10";
+    cameraTest->prelaunchConfig->cameraId = "device/50";
     cameraTest->prelaunchConfig->streamInfos_V1_1 = {};
     cameraTest->prelaunchConfig->setting.push_back(0);
 
@@ -166,13 +166,13 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch010, TestSize.Level2)
 /**
  * @tc.number : SUB_Driver_Camera_Prelaunch_1100
  * @tc.name   : testPrelaunch011
- * @tc.desc   : Prelaunch cameraId:device/10
+ * @tc.desc   : Prelaunch cameraId:device/50
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch011, TestSize.Level2)
 {
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     std::vector<uint8_t> settings;
-    cameraTest->prelaunchConfig->cameraId = "device/10";
+    cameraTest->prelaunchConfig->cameraId = "device/50";
     cameraTest->prelaunchConfig->streamInfos_V1_1 = {};
     cameraTest->prelaunchConfig->setting.push_back(1);
 
@@ -183,13 +183,13 @@ HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch011, TestSize.Level2)
 /**
  * @tc.number : SUB_Driver_Camera_Prelaunch_1200
  * @tc.name   : testPrelaunch012
- * @tc.desc   : Prelaunch cameraId:device/10
+ * @tc.desc   : Prelaunch cameraId:device/50
  */
 HWTEST_F(CameraHdiTestV1_1Additional, testPrelaunch012, TestSize.Level2)
 {
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
     std::vector<uint8_t> settings;
-    cameraTest->prelaunchConfig->cameraId = "device/10";
+    cameraTest->prelaunchConfig->cameraId = "device/50";
     cameraTest->prelaunchConfig->streamInfos_V1_1 = {};
     cameraTest->prelaunchConfig->setting.push_back(255);
 

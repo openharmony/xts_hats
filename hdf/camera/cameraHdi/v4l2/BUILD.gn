@@ -123,6 +123,7 @@ ohos_moduletest_suite("HatsHdfCameraTest") {
     "init:libbegetutil",
     "ipc:ipc_single",
     "samgr:samgr_proxy",
+    "drivers_interface_camera:libbuffer_producer_sequenceable_1.0",
   ]
 
   public_configs = [ ":cameraTest_config" ]

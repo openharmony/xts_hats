@@ -91,6 +91,9 @@ public:
 void HdfThermalHdiTest::SetUpTestCase()
 {
     g_thermalInterface = IThermalInterface::Get();
+    if (g_thermalInterface == nullptr) {
+        GTEST_SKIP() << "This component is not supported on this device.";
+    }
 }
 
 void HdfThermalHdiTest::TearDownTestCase()

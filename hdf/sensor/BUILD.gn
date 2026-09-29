@@ -35,6 +35,7 @@ group("HatsHdfSensorTest") {
       "sensor_multi_client_test2:HatsHdfSensorMultiClientTest2",
       "sensor_multi_client_test3:HatsHdfSensorMultiClientTest3",
       "sensor_plug_callback_test:HatsHdfSensorPlugCallbackTest",
+      "sensorConvertTest:HatsHdfSensorConvertTest",
       "sensorMultiThreadTest:HatsHdfSensorMultiThreadTest",
       #"sensorBenchmarkTest:HatsHdfSensorbenchmarkTest",
     ]

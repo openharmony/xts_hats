@@ -26,7 +26,7 @@
 #define DEFAULT_DEVICE_ID (-1)
 #define DEFAULT_SENSOR_ID 0
 #define DEFAULT_LOCATION 1
-#define ONE_MILLION 100000
+#define ONE_MILLION 1000000
 
 #define DATA_LEN 256
 #define SENSOR_HANDLE_TO_STRING(sensorHandle) ("{" + std::to_string((sensorHandle).deviceId) + "," + \

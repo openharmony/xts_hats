@@ -18,6 +18,7 @@
 #include "video_key_info.h"
 
 namespace OHOS::Camera {
+constexpr uint32_t LOOP_COUNT = 12;
 Test::ResultCallback Test::resultCallback_ = 0;
 bool g_onFlashlightStatusFlag = false;
 
@@ -73,11 +74,20 @@ void Test::Init()
     if (service == nullptr) {
         service = ICameraHost::Get("camera_service", false);
         if (service == nullptr) {
-            CAMERA_LOGI("ICameraHost get failed");
-        } else {
-            CAMERA_LOGE("ICameraHost get success");
+            int loopCount = 0;
+            do {
+                usleep(UT_MICROSECOND_TIMES);
+                service = ICameraHost::Get("camera_service", false);
+                loopCount++;
+            } while (loopCount <= LOOP_COUNT && service == nullptr);
         }
-        ASSERT_TRUE(service != nullptr);
+        if (service == nullptr) {
+            CAMERA_LOGI("ICameraHost get failed");
+            GTEST_SKIP() << "Device not exist" << std::endl;
+            return;
+        } else {
+            CAMERA_LOGI("ICameraHost get success");
+        }
     }
     hostCallback = new TestCameraHostCallback();
     service->SetCallback(hostCallback);

@@ -38,6 +38,7 @@ enum CameraUtConstants {
     UT_SECOND_TIMES,
     UT_TUNNEL_MODE = 5,
     UT_DATA_SIZE = 8,
+    UT_MICROSECOND_TIMES = 500000,
 };
 
 enum ImageDataSaveSwitch {

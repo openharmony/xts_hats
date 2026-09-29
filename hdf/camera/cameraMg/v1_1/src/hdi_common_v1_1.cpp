@@ -18,6 +18,7 @@
 #include "video_key_info.h"
 
 namespace OHOS::Camera {
+constexpr uint32_t LOOP_COUNT = 12;
 Test::ResultCallback Test::resultCallback_ = 0;
 
 uint64_t Test::GetCurrentLocalTimeStamp()
@@ -75,7 +76,16 @@ void Test::Init()
     if (serviceV1_1 == nullptr) {
         serviceV1_1 = OHOS::HDI::Camera::V1_1::ICameraHost::Get("camera_service", false);
         if (serviceV1_1 == nullptr) {
+            int loopCount = 0;
+            do {
+                usleep(UT_MICROSECOND_TIMES);
+                serviceV1_1 = OHOS::HDI::Camera::V1_1::ICameraHost::Get("camera_service", false);
+                loopCount++;
+            } while (loopCount <= LOOP_COUNT && serviceV1_1 == nullptr);
+        }
+        if (serviceV1_1 == nullptr) {
             CAMERA_LOGE("V1_1::IcameraHost get failed");
+            GTEST_SKIP() << "Device not exist" << std::endl;
             return;
         } else {
             CAMERA_LOGI("ICameraHost get success");
@@ -86,7 +96,6 @@ void Test::Init()
                 CAMERA_LOGE("V1_1::ICameraHost get version success, %{public}d, %{public}d", mainVer, minVer);
             }
         }
-        ASSERT_TRUE(serviceV1_1 != nullptr);
         service = static_cast<OHOS::HDI::Camera::V1_0::ICameraHost *>(serviceV1_1.GetRefPtr());
     }
 

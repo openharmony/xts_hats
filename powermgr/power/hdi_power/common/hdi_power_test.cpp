@@ -27,6 +27,7 @@
 #include "hdf_base.h"
 #include "osal_time.h"
 #include "v1_3/ipower_interface.h"
+#include "v1_4/ipower_interface.h"
 #include "v1_2/ipower_hdi_callback.h"
 #include "v1_3/ipower_hdi_callback_ext.h"
 #include "v1_2/ipower_running_lock_callback.h"
@@ -77,7 +78,7 @@ class PowerRunningLockCallback : public IPowerRunningLockCallback {
     }
 };
 
-class PowerMockInterfaceImpl : public V1_3::IPowerInterface {
+class PowerMockInterfaceImpl : public V1_4::IPowerInterface {
 public:
     ~PowerMockInterfaceImpl() override {};
 
@@ -203,6 +204,13 @@ public:
         (void)ipowerHdiCallback;
         return 0;
     }
+
+    int32_t ForceSuspendEx(const std::string &mode, const std::string &tag) override
+    {
+        (void)mode;
+        (void)tag;
+        return 0;
+    }
 };
 
 sptr<IPowerHdiCallback> g_callback = new PowerHdiCallback();
@@ -210,6 +218,8 @@ sptr<V1_3::IPowerHdiCallbackExt> g_callbackExt = new PowerHdiCallbackExt();
 sptr<IPowerRunningLockCallback> g_runningLockcallback = new PowerRunningLockCallback();
 sptr<V1_3::IPowerInterface> g_powerInterface = nullptr;
 sptr<V1_3::IPowerInterface> powerInterface = nullptr;
+sptr<V1_4::IPowerInterface> g_powerInterfaceV1_4 = nullptr;
+sptr<V1_4::IPowerInterface> powerInterfaceV1_4 = nullptr;
 std::mutex g_mutex;
 const uint32_t MAX_PATH = 256;
 const uint32_t MAX_FILE = 1024;
@@ -232,7 +242,9 @@ public:
 void HdfPowerHdiTest::SetUpTestCase()
 {
     g_powerInterface = V1_3::IPowerInterface::Get();
+    g_powerInterfaceV1_4 = V1_4::IPowerInterface::Get();
     powerInterface = new PowerMockInterfaceImpl();
+    powerInterfaceV1_4 = new PowerMockInterfaceImpl();
 }
 
 void HdfPowerHdiTest::TearDownTestCase()
@@ -900,5 +912,106 @@ HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest045, TestSize.Level1)
     std::string testTag = "TEST_TAG";
     EXPECT_TRUE(g_callbackExt->OnSuspendWithTag(testTag) == 0);
     EXPECT_TRUE(g_callbackExt->OnWakeupWithTag(testTag) == 0);
+}
+
+/**
+  * @tc.name: HdfPowerHdiTest046
+  * @tc.desc: Get a v1_4 client and check whether the client is empty.
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest046, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_powerInterfaceV1_4);
+}
+
+/**
+  * @tc.name: HdfPowerHdiTest047
+  * @tc.desc: ForceSuspendEx with mode auto and tag mem
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest047, TestSize.Level1)
+{
+    int32_t ret = powerInterfaceV1_4->ForceSuspendEx("auto", "mem");
+    EXPECT_EQ(0, ret) << "HdfPowerHdiTest047 failed";
+}
+
+/**
+  * @tc.name: HdfPowerHdiTest048
+  * @tc.desc: ForceSuspendEx with mode auto and tag ulsr
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest048, TestSize.Level1)
+{
+    int32_t ret = powerInterfaceV1_4->ForceSuspendEx("auto", "ulsr");
+    EXPECT_EQ(0, ret) << "HdfPowerHdiTest048 failed";
+}
+
+/**
+  * @tc.name: HdfPowerHdiTest049
+  * @tc.desc: ForceSuspendEx with mode auto and empty tag
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest049, TestSize.Level1)
+{
+    int32_t ret = powerInterfaceV1_4->ForceSuspendEx("auto", "");
+    EXPECT_EQ(0, ret) << "HdfPowerHdiTest049 failed";
+}
+
+/**
+  * @tc.name: HdfPowerHdiTest050
+  * @tc.desc: ForceSuspendEx with mode ignore_wakelock and tag mem
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest050, TestSize.Level1)
+{
+    int32_t ret = powerInterfaceV1_4->ForceSuspendEx("ignore_wakelock", "mem");
+    EXPECT_EQ(0, ret) << "HdfPowerHdiTest050 failed";
+}
+
+/**
+  * @tc.name: HdfPowerHdiTest051
+  * @tc.desc: ForceSuspendEx with mode ignore_wakelock and tag ulsr
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest051, TestSize.Level1)
+{
+    int32_t ret = powerInterfaceV1_4->ForceSuspendEx("ignore_wakelock", "ulsr");
+    EXPECT_EQ(0, ret) << "HdfPowerHdiTest051 failed";
+}
+
+/**
+  * @tc.name: HdfPowerHdiTest052
+  * @tc.desc: ForceSuspendEx with empty mode and invalid tag
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest052, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_powerInterfaceV1_4);
+    int32_t ret = g_powerInterfaceV1_4->ForceSuspendEx("", "invalid_tag");
+    EXPECT_NE(HDF_SUCCESS, ret) << "HdfPowerHdiTest052 failed";
+}
+
+/**
+  * @tc.name: HdfPowerHdiTest053
+  * @tc.desc: ForceSuspendEx with invalid mode and invalid tag
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest053, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_powerInterfaceV1_4);
+    int32_t ret = g_powerInterfaceV1_4->ForceSuspendEx("invalid_mode", "invalid_tag");
+    EXPECT_NE(HDF_SUCCESS, ret) << "HdfPowerHdiTest053 failed";
+}
+
+/**
+  * @tc.name: HdfPowerHdiTest054
+  * @tc.desc: ForceSuspendEx with mode ignore_wakelock and invalid tag
+  * @tc.type: FUNC
+  */
+HWTEST_F(HdfPowerHdiTest, HdfPowerHdiTest054, TestSize.Level1)
+{
+    ASSERT_NE(nullptr, g_powerInterfaceV1_4);
+    int32_t ret = g_powerInterfaceV1_4->ForceSuspendEx("ignore_wakelock", "invalid_tag");
+    EXPECT_NE(HDF_SUCCESS, ret) << "HdfPowerHdiTest054 failed";
 }
 }

@@ -79,13 +79,13 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_0030, TestSi
 
 /**
  * @tc.name: PreCameraSwitch
- * @tc.desc: PreCameraSwitch cameraId:device/10
+ * @tc.desc: PreCameraSwitch cameraId:device/50
  * @tc.size: MediumTest
  * @tc.type: Function
  */
 HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_0040, TestSize.Level1)
 {
-    std::string cameraId = "device/10";
+    std::string cameraId = "device/50";
     cameraTest->rc = cameraTest->serviceV1_2->PreCameraSwitch(cameraId);
     EXPECT_EQ(cameraTest->rc, HDI::Camera::V1_0::INVALID_ARGUMENT);
 }
@@ -567,14 +567,14 @@ HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_2700, TestSi
 
 /**
  * @tc.name: PrelaunchWithOpMode
- * @tc.desc: PrelaunchWithOpMode cameraId:device/10,NORMAL
+ * @tc.desc: PrelaunchWithOpMode cameraId:device/50,NORMAL
  * @tc.size: MediumTest
  * @tc.type: Function
  */
 HWTEST_F(CameraPrelaunchTestV1_2, SUB_Driver_Camera_PreCameraSwitch_2800, TestSize.Level1)
 {
     cameraTest->prelaunchConfig = std::make_shared<OHOS::HDI::Camera::V1_1::PrelaunchConfig>();
-    cameraTest->prelaunchConfig->cameraId = "device/10";
+    cameraTest->prelaunchConfig->cameraId = "device/50";
     cameraTest->prelaunchConfig->streamInfos_V1_1 = {};
     cameraTest->prelaunchConfig->setting = {};
     cameraTest->rc = cameraTest->serviceV1_2->PrelaunchWithOpMode(
